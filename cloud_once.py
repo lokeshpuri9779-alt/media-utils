@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import json, math, os, random, struct, subprocess, tempfile, wave
+from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import httpx
 from imageio_ffmpeg import get_ffmpeg_exe
@@ -9,6 +11,10 @@ from PIL import Image, ImageDraw, ImageFont
 
 TOKEN_URL = "https://oauth2.googleapis.com/token"
 UPLOAD_URL = "https://www.googleapis.com/upload/youtube/v3/videos"
+STATE_PATH = Path("quota_state.json")
+IST = ZoneInfo("Asia/Kolkata")
+INITIAL_TARGET = int(os.environ.get("ASTRA_INITIAL_DAILY_TARGET", "9"))
+MAX_TARGET = int(os.environ.get("ASTRA_MAX_DAILY_TARGET", "24"))
 
 def need(name: str) -> str:
     value = (os.environ.get(name) or "").strip()
@@ -24,6 +30,69 @@ def font(size: int):
         if Path(p).exists():
             return ImageFont.truetype(p, size=size)
     return ImageFont.load_default()
+
+def fresh_state(today: str, target: int | None = None) -> dict:
+    return {
+        "date": today,
+        "target": max(1, min(MAX_TARGET, target or INITIAL_TARGET)),
+        "attempts": 0,
+        "successes": 0,
+        "limit_hit": False,
+        "other_failures": 0,
+        "previous_day": None,
+    }
+
+def load_state(now: datetime) -> dict:
+    today = now.date().isoformat()
+    if not STATE_PATH.exists():
+        return fresh_state(today)
+    try:
+        state = json.loads(STATE_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return fresh_state(today)
+
+    if state.get("date") == today:
+        return state
+
+    previous = dict(state)
+    old_target = int(previous.get("target", INITIAL_TARGET))
+    successes = int(previous.get("successes", 0))
+    attempts = int(previous.get("attempts", 0))
+    limit_hit = bool(previous.get("limit_hit", False))
+    other_failures = int(previous.get("other_failures", 0))
+
+    # Learn yesterday's practical ceiling, then probe exactly one step higher.
+    # If the first API attempt was already blocked, no useful ceiling was learned,
+    # so keep the prior target rather than collapsing to 1/day.
+    if limit_hit and successes > 0:
+        next_target = successes + 1
+    elif not limit_hit and other_failures == 0 and attempts >= old_target and successes >= old_target:
+        next_target = old_target + 1
+    else:
+        next_target = old_target
+
+    new_state = fresh_state(today, next_target)
+    new_state["previous_day"] = {
+        "date": previous.get("date"),
+        "target": old_target,
+        "attempts": attempts,
+        "successes": successes,
+        "limit_hit": limit_hit,
+    }
+    return new_state
+
+def save_state(state: dict) -> None:
+    STATE_PATH.write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8")
+
+def scheduled_attempt_due(now: datetime, state: dict) -> bool:
+    if state.get("limit_hit"):
+        return False
+    target = max(1, min(MAX_TARGET, int(state.get("target", INITIAL_TARGET))))
+    attempts = int(state.get("attempts", 0))
+    minutes = now.hour * 60 + now.minute
+    # Runs are hourly. This spreads the target across the full India-local day.
+    should_have_attempted = min(target, ((minutes + 60) * target) // 1440)
+    return attempts < should_have_attempted
 
 def make_short(out: Path) -> tuple[str, str]:
     ideas = [
@@ -85,7 +154,7 @@ def access_token() -> str:
         raise RuntimeError("OAuth refresh failed: " + r.text[:400])
     return r.json()["access_token"]
 
-def upload(video: Path, title: str, description: str) -> str:
+def upload(video: Path, title: str, description: str) -> tuple[str, str]:
     token = access_token()
     privacy = (os.environ.get("YOUTUBE_PRIVACY") or "public").lower()
     if privacy not in {"private","unlisted","public"}:
@@ -106,8 +175,7 @@ def upload(video: Path, title: str, description: str) -> str:
     if r.status_code >= 400:
         txt = r.text
         if "uploadLimitExceeded" in txt:
-            print("YouTube API upload limit reported; ending this run cleanly.")
-            return ""
+            return "limit", ""
         raise RuntimeError("YouTube session failed: " + txt[:500])
     location = r.headers.get("location")
     if not location:
@@ -117,21 +185,49 @@ def upload(video: Path, title: str, description: str) -> str:
     if r.status_code not in (200,201):
         txt = r.text
         if "uploadLimitExceeded" in txt:
-            print("YouTube API upload limit reported; ending this run cleanly.")
-            return ""
+            return "limit", ""
         raise RuntimeError("YouTube upload failed: " + txt[:500])
     vid = r.json().get("id","")
-    return f"https://www.youtube.com/watch?v={vid}" if vid else ""
+    return "success", (f"https://www.youtube.com/watch?v={vid}" if vid else "")
 
 def main() -> None:
     need("YOUTUBE_CLIENT_ID"); need("YOUTUBE_CLIENT_SECRET"); need("YOUTUBE_REFRESH_TOKEN")
+    now = datetime.now(IST)
+    state = load_state(now)
+    save_state(state)
+
+    force = (os.environ.get("ASTRA_FORCE_RUN") or "").strip() == "1"
+    print(f"Adaptive daily target: {state['target']} | attempts: {state['attempts']} | successes: {state['successes']} | limit_hit: {state['limit_hit']}")
+
+    if not force and not scheduled_attempt_due(now, state):
+        print("No upload attempt due in this hourly slot.")
+        return
+
+    if state.get("limit_hit") and not force:
+        print("Today's YouTube limit was already detected; next probe will be on the next India-local day.")
+        return
+
     work = Path(tempfile.mkdtemp(prefix="media_utils_run_"))
     video = work / "clip.mp4"
     title, desc = make_short(video)
     print("Generated:", title)
-    url = upload(video, title, desc)
-    if url:
-        print("Published:", url)
+
+    try:
+        status, url = upload(video, title, desc)
+        state["attempts"] = int(state.get("attempts", 0)) + 1
+        if status == "success":
+            state["successes"] = int(state.get("successes", 0)) + 1
+            print("Published:", url)
+        elif status == "limit":
+            state["limit_hit"] = True
+            print("YouTube API upload limit reported. Recorded today's ceiling and stopped further scheduled probes for today.")
+    except Exception:
+        state["attempts"] = int(state.get("attempts", 0)) + 1
+        state["other_failures"] = int(state.get("other_failures", 0)) + 1
+        save_state(state)
+        raise
+
+    save_state(state)
 
 if __name__ == "__main__":
     main()
