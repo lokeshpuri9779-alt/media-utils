@@ -1,0 +1,17 @@
+ONE-TIME SETUP
+
+1. On your Windows PC, run:
+   python export_local_secrets.py
+
+2. In GitHub open:
+   Settings -> Secrets and variables -> Actions
+
+3. Add these three repository secrets:
+   YOUTUBE_CLIENT_ID
+   YOUTUBE_CLIENT_SECRET
+   YOUTUBE_REFRESH_TOKEN
+
+4. Open Actions -> media check -> Run workflow.
+
+The scheduled job runs at 06:30 and 18:30 India time.
+Do not commit or share the printed secret values.
