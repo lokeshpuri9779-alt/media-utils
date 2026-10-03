@@ -11,6 +11,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 TOKEN_URL = "https://oauth2.googleapis.com/token"
 UPLOAD_URL = "https://www.googleapis.com/upload/youtube/v3/videos"
+VIDEOS_URL = "https://www.googleapis.com/youtube/v3/videos"
+PERFORMANCE_PATH = Path("performance.json")
 STATE_PATH = Path("quota_state.json")
 IST = ZoneInfo("Asia/Kolkata")
 INITIAL_TARGET = int(os.environ.get("ASTRA_INITIAL_DAILY_TARGET", "9"))
@@ -190,11 +192,88 @@ def upload(video: Path, title: str, description: str) -> tuple[str, str]:
     vid = r.json().get("id","")
     return "success", (f"https://www.youtube.com/watch?v={vid}" if vid else "")
 
+
+def load_performance() -> dict:
+    if not PERFORMANCE_PATH.exists():
+        return {"videos": {}}
+    try:
+        data = json.loads(PERFORMANCE_PATH.read_text(encoding="utf-8"))
+        if not isinstance(data, dict) or "videos" not in data:
+            return {"videos": {}}
+        return data
+    except Exception:
+        return {"videos": {}}
+
+def save_performance(data: dict) -> None:
+    PERFORMANCE_PATH.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+def record_video(video_id: str, title: str) -> None:
+    if not video_id:
+        return
+    data = load_performance()
+    videos = data.setdefault("videos", {})
+    item = videos.setdefault(video_id, {})
+    item.setdefault("title", title)
+    item.setdefault("published_at", datetime.now(IST).isoformat())
+    item.setdefault("history", [])
+    save_performance(data)
+
+def refresh_performance() -> None:
+    data = load_performance()
+    videos = data.get("videos", {})
+    ids = list(videos.keys())
+    if not ids:
+        return
+
+    token = access_token()
+    for i in range(0, len(ids), 50):
+        batch = ids[i:i+50]
+        with httpx.Client(timeout=30) as client:
+            r = client.get(
+                VIDEOS_URL,
+                params={"part":"snippet,statistics","id":",".join(batch)},
+                headers={"Authorization": f"Bearer {token}"},
+            )
+        if r.status_code >= 400:
+            print("Performance refresh skipped:", r.text[:300])
+            return
+
+        now_iso = datetime.now(IST).isoformat()
+        for item in r.json().get("items", []):
+            vid = item.get("id", "")
+            stats = item.get("statistics", {})
+            snippet = item.get("snippet", {})
+            if vid not in videos:
+                continue
+            entry = videos[vid]
+            entry["title"] = snippet.get("title", entry.get("title", ""))
+            snapshot = {
+                "at": now_iso,
+                "views": int(stats.get("viewCount", 0)),
+                "likes": int(stats.get("likeCount", 0)) if "likeCount" in stats else None,
+                "comments": int(stats.get("commentCount", 0)) if "commentCount" in stats else None,
+            }
+            history = entry.setdefault("history", [])
+            if not history or history[-1] != snapshot:
+                history.append(snapshot)
+                entry["latest"] = snapshot
+
+    save_performance(data)
+    ranked = []
+    for vid, entry in videos.items():
+        latest = entry.get("latest") or {}
+        ranked.append((int(latest.get("views") or 0), vid, entry.get("title","")))
+    ranked.sort(reverse=True)
+    if ranked:
+        top = ranked[0]
+        print(f"Top tracked Short: {top[2]} | {top[0]} views | https://www.youtube.com/watch?v={top[1]}")
+
 def main() -> None:
     need("YOUTUBE_CLIENT_ID"); need("YOUTUBE_CLIENT_SECRET"); need("YOUTUBE_REFRESH_TOKEN")
     now = datetime.now(IST)
     state = load_state(now)
     save_state(state)
+    refresh_performance()
 
     force = (os.environ.get("ASTRA_FORCE_RUN") or "").strip() == "1"
     print(f"Adaptive daily target: {state['target']} | attempts: {state['attempts']} | successes: {state['successes']} | limit_hit: {state['limit_hit']}")
@@ -218,6 +297,8 @@ def main() -> None:
         if status == "success":
             state["successes"] = int(state.get("successes", 0)) + 1
             print("Published:", url)
+            video_id = url.rsplit("=", 1)[-1] if "=" in url else ""
+            record_video(video_id, title)
         elif status == "limit":
             state["limit_hit"] = True
             print("YouTube API upload limit reported. Recorded today's ceiling and stopped further scheduled probes for today.")
