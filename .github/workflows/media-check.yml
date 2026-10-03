@@ -41,11 +41,11 @@ jobs:
       - name: save adaptive state
         shell: bash
         run: |
-          if [ -z "$(git status --porcelain -- quota_state.json)" ]; then
+          if [ -z "$(git status --porcelain -- quota_state.json performance.json)" ]; then
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add quota_state.json
-          git commit -m "Update adaptive upload state [skip ci]"
+          git add quota_state.json performance.json
+          git commit -m "Update Astra state and performance [skip ci]"
           git push
