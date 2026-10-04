@@ -7,6 +7,8 @@ on:
       - 'studio_renderer.py'
       - 'audience_research.py'
       - 'longform.py'
+      - 'longform_challenges.py'
+      - 'autonomy.py'
       - 'tests/test_growth.py'
       - 'tests/test_studio.py'
       - 'requirements.txt'
@@ -31,6 +33,8 @@ jobs:
       YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
       YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
       YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+      YOUTUBE_ANALYTICS_REFRESH_TOKEN: ${{ secrets.YOUTUBE_ANALYTICS_REFRESH_TOKEN }}
+      YOUTUBE_COMMUNITY_REFRESH_TOKEN: ${{ secrets.YOUTUBE_COMMUNITY_REFRESH_TOKEN }}
       YOUTUBE_PRIVACY: public
       ORT_DISABLE_TELEMETRY: '1'
       ASTRA_LONG_ENABLED: '1'
