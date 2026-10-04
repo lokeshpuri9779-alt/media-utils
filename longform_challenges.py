@@ -15,6 +15,7 @@ import studio_renderer as studio
 
 
 def _challenge_bank(seed: str, count: int = 20) -> list[dict]:
+    """Create a deterministic weekly set with no duplicate question/answer pairs."""
     rng = random.Random(int(hashlib.sha256(seed.encode()).hexdigest()[:16], 16))
     riddles = [
         ("What has hands but cannot clap?", "A CLOCK"),
@@ -27,29 +28,46 @@ def _challenge_bank(seed: str, count: int = 20) -> list[dict]:
         ("What has words but never speaks?", "A BOOK"),
     ]
     out = []
-    for i in range(count):
-        mode = i % 4
+    seen = set()
+    attempts = 0
+    while len(out) < count and attempts < count * 100:
+        mode = attempts % 4
+        attempts += 1
         if mode == 0:
-            a, b, c = rng.randint(3, 15), rng.randint(2, 9), rng.randint(2, 8)
+            a, b, c = rng.randint(3, 30), rng.randint(2, 12), rng.randint(2, 12)
             question = f"{a} + {b} × {c} = ?"
             answer = str(a + b * c)
             hint = "Multiplication first."
         elif mode == 1:
-            start, step = rng.randint(1, 9), rng.randint(2, 8)
+            start, step = rng.randint(1, 20), rng.randint(2, 12)
             vals = [start + step * k for k in range(4)]
             question = "  →  ".join(map(str, vals)) + "  →  ?"
             answer = str(vals[-1] + step)
             hint = "Find the repeating jump."
         elif mode == 2:
-            start = rng.randint(2, 5)
-            vals = [start * (2 ** k) for k in range(4)]
+            start = rng.randint(2, 9)
+            factor = rng.choice([2, 3])
+            vals = [start * (factor ** k) for k in range(4)]
             question = "  →  ".join(map(str, vals)) + "  →  ?"
-            answer = str(vals[-1] * 2)
+            answer = str(vals[-1] * factor)
             hint = "Each term changes the same way."
         else:
             question, answer = riddles[rng.randrange(len(riddles))]
             hint = "Think literally."
-        out.append({"number": i + 1, "question": question, "answer": answer, "hint": hint})
+
+        key = (question, answer)
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append({
+            "number": len(out) + 1,
+            "question": question,
+            "answer": answer,
+            "hint": hint,
+        })
+
+    if len(out) != count:
+        raise RuntimeError("Could not generate a full unique challenge set.")
     return out
 
 
