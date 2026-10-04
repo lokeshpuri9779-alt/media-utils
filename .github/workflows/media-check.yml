@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - 'cloud_once.py'
+      - 'studio_renderer.py'
+      - 'tests/test_studio.py'
+      - 'requirements.txt'
   workflow_dispatch:
   schedule:
     # Hourly controller. The Python worker decides whether an upload attempt is due,
@@ -26,6 +29,7 @@ jobs:
       YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
       YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
       YOUTUBE_PRIVACY: public
+      ORT_DISABLE_TELEMETRY: '1'
       ASTRA_INITIAL_DAILY_TARGET: '9'
       ASTRA_MAX_DAILY_TARGET: '24'
       ASTRA_FORCE_RUN: ${{ (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[upload-probe]'))) && '1' || '0' }}
@@ -40,6 +44,17 @@ jobs:
           cache: pip
       - name: dependencies
         run: pip install -r requirements.txt
+      - name: Verify Studio layouts and audio
+        if: github.event_name == 'push'
+        run: python -m unittest discover -s tests -p 'test_studio.py' -v
+      - name: Cache neural voice
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/astra-voice
+          key: astra-kokoro-v1-beb0d184
+      - name: Render Studio startup preview
+        if: github.event_name == 'push' && env.ASTRA_FORCE_RUN != '1'
+        run: python studio_renderer.py --preview /tmp/astra-studio-preview.mp4
       - name: run
         run: |
           if [ "${{ github.event_name }}" = "push" ] && [ "$ASTRA_FORCE_RUN" != "1" ]; then
