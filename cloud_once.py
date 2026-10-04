@@ -216,7 +216,7 @@ def _challenge() -> dict:
             "question": "  →  ".join(map(str, vals)) + "  →  ?",
             "prompt": "Don't overthink it",
             "answer": str(answer),
-            "title": "Most People Overthink This Number Pattern 😈 #Shorts",
+            "title": "Can You Decode This Number Pattern? #Shorts",
         }
 
     def duplicate():
@@ -259,7 +259,7 @@ def _challenge() -> dict:
             "question": "Which is heavier?\n1 kg IRON\nor\n1 kg COTTON",
             "prompt": "Lock your answer",
             "answer": "THEY'RE THE SAME",
-            "title": "Most People Answer This Too Fast 😈 #Shorts",
+            "title": "Iron or Cotton: Which Weighs More? #Shorts",
         }
 
     def riddle():
@@ -439,179 +439,19 @@ def _draw_centered(draw, xy, text, fnt, fill, max_width=920, spacing=18, shadow=
                         align="center", spacing=spacing)
 
 def make_short(out: Path) -> tuple[str, str]:
+    from studio_renderer import render_short
     ch = select_content()
-    explainer = ch["genre"] != "challenge"
-    title = ch["title"]
-    desc = (
-        "Answer before the reveal — then comment if you got it right. "
-        "#Shorts #BrainTeaser #Quiz #Challenge"
-    )
-
-    if explainer:
-        desc = ch["question"].replace("\n", " ") + " " + ch["answer"].replace("\n", " ")
-        desc += "\nOriginal fiction." if ch["genre"] == "fiction" else "\nSource: " + ch["source"]
-        desc += "\n#Shorts #" + ch["genre"].title()
-    work = Path(tempfile.mkdtemp(prefix="media_utils_"))
-    frames = work / "frames"
-    frames.mkdir()
-
-    width, height = 1080, 1920
-    fps = 24
-    total_seconds = 18 if explainer else 10
-    total_frames = total_seconds * fps
-    reveal_at = 8.5 if explainer else 7.4
-
-    # Build a reusable high-resolution gradient once.
-    base = Image.new("RGB", (width, height))
-    bp = base.load()
-    top = random.choice([(19,22,38), (15,25,42), (28,18,42), (17,31,36)])
-    bottom = random.choice([(52,34,78), (26,64,88), (73,30,58), (28,80,69)])
-    for y in range(height):
-        t = y / max(1, height-1)
-        c = tuple(int(top[i]*(1-t) + bottom[i]*t) for i in range(3))
-        for x in range(width):
-            bp[x, y] = c
-
-    f_brand = font(46)
-    f_hook = font(76)
-    f_question = font(76 if explainer else (112 if ch["kind"] not in {"visual","riddle","trick"} else 78))
-    f_prompt = font(58)
-    f_answer = font(76 if explainer else 112)
-    f_small = font(42)
-
-    for i in range(total_frames):
-        t = i / fps
-        im = base.copy()
-        overlay = Image.new("RGBA", (width, height), (0,0,0,0))
-        d = ImageDraw.Draw(overlay)
-
-        # Moving ambient shapes add motion without external assets.
-        for k in range(7):
-            phase = (t * (0.16 + 0.025*k) + k*0.17) % 1.0
-            cx = int((0.08 + 0.84*phase) * width)
-            cy = int((0.18 + ((k*0.19 + t*0.035) % 0.68)) * height)
-            r = 70 + 22*(k % 3)
-            d.ellipse((cx-r, cy-r, cx+r, cy+r), fill=(255,255,255,12))
-
-        # Main card.
-        card_y = 355
-        card_h = 1160
-        d.rounded_rectangle(
-            (70, card_y, width-70, card_y+card_h),
-            radius=72,
-            fill=(10,12,20,188),
-            outline=(255,255,255,28),
-            width=3,
-        )
-
-        # Brand chip.
-        d.rounded_rectangle((365, 92, 715, 172), radius=36, fill=(255,255,255,30))
-        d.text((540, 132), ("LOKI · " + ch["genre"].upper()), font=font(36), fill=(244,246,255,235), anchor="mm")
-
-        # Hook pulse.
-        hook_progress = min(1.0, t / 0.45)
-        hook_y = 260 + int((1-_ease_out_back(hook_progress))*55)
-        d.text((540+4, hook_y+6), ch["hook"], font=f_hook, fill=(0,0,0,150), anchor="mm")
-        d.text((540, hook_y), ch["hook"], font=f_hook, fill=(255,229,92,255), anchor="mm")
-
-        if t < reveal_at:
-            # Question enters quickly and remains readable.
-            q_in = min(1.0, max(0.0, (t-0.35)/0.45))
-            q_y = 835 + int((1-_ease_out_back(q_in))*120)
-            _draw_centered(d, (540, q_y), ch["question"], f_question, (250,250,253,255),
-                           max_width=860, spacing=22)
-
-            # Prompt.
-            prompt_alpha = int(255 * min(1.0, max(0.0, (t-1.0)/0.5)))
-            d.text((540, 1265), ch["prompt"], font=f_prompt,
-                   fill=(190,205,235,prompt_alpha), anchor="mm")
-
-            # Countdown in final 3 seconds before reveal.
-            remaining = max(0.0, reveal_at - t)
-            if remaining <= 3.2 and not explainer:
-                n = max(1, int(math.ceil(remaining)))
-                pulse = 1.0 + 0.10*math.sin((1-(remaining % 1))*math.pi)
-                f_count = font(int(120*pulse))
-                d.text((540, 1435), str(n), font=f_count, fill=(255,255,255,245), anchor="mm")
-        else:
-            # Reveal hit: flash + answer pop.
-            reveal_t = t - reveal_at
-            flash = max(0, int(135 * (1 - min(1.0, reveal_t/0.28))))
-            if flash:
-                d.rectangle((0,0,width,height), fill=(255,255,255,flash))
-            pop = _ease_out_back(min(1.0, reveal_t/0.55))
-            ay = 850 + int((1-pop)*110)
-            d.text((540, 650), ("THE TWIST" if ch["genre"] == "fiction" else "EXPLAINED") if explainer else "ANSWER", font=f_prompt, fill=(255,229,92,255), anchor="mm")
-            _draw_centered(d, (540, ay), ch["answer"], f_answer, (255,255,255,255),
-                           max_width=850, spacing=18)
-            d.text((540, 1160), ("What should we cover next?" if explainer else "Did you get it?"), font=font(42),
-                   fill=(192,224,255,255), anchor="mm")
-            d.text((540, 1285), ("LOKI THE GAME CHANGER" if explainer else "COMMENT YOUR SCORE"), font=f_small,
-                   fill=(255,255,255,190), anchor="mm")
-
-        # Progress bar creates urgency and gives constant motion.
-        p = min(1.0, t / reveal_at) if t < reveal_at else 1.0
-        x0, x1, yb = 140, 940, 1585
-        d.rounded_rectangle((x0, yb, x1, yb+24), radius=12, fill=(255,255,255,35))
-        d.rounded_rectangle((x0, yb, int(x0+(x1-x0)*p), yb+24), radius=12,
-                            fill=(255,229,92,235))
-
-        # Footer / replay cue.
-        footer = ("ORIGINAL FICTION" if ch["genre"] == "fiction" else "SOURCE IN DESCRIPTION") if explainer else ("WAIT FOR THE REVEAL" if t < reveal_at else "NEXT ONE →")
-        d.text((540, 1740), footer, font=f_small, fill=(240,242,250,175), anchor="mm")
-
-        im = Image.alpha_composite(im.convert("RGBA"), overlay).convert("RGB")
-        im.save(frames / f"{i:05d}.jpg", "JPEG", quality=90, subsampling=0)
-
-    # Procedurally generated music + timing SFX: zero licensing cost.
-    wav = work / "audio.wav"
-    rate = 44100
-    duration_samples = total_seconds * rate
-    with wave.open(str(wav), "w") as wf:
-        wf.setnchannels(1)
-        wf.setsampwidth(2)
-        wf.setframerate(rate)
-        for n in range(duration_samples):
-            t = n / rate
-            beat_phase = (t * 2.0) % 1.0
-            kick_env = math.exp(-beat_phase * 18)
-            kick = math.sin(2*math.pi*(68 - 20*beat_phase)*t) * kick_env
-
-            arp_note = [220.0, 277.18, 329.63, 415.30][int(t*4) % 4]
-            arp = math.sin(2*math.pi*arp_note*t) * 0.035
-            bass = math.sin(2*math.pi*110*t) * 0.025
-
-            tick = 0.0
-            if 4.2 <= t < reveal_at:
-                frac = abs((t*2) - round(t*2))
-                if frac < 0.018:
-                    tick = math.sin(2*math.pi*880*t) * math.exp(-frac*150) * 0.13
-
-            reveal = 0.0
-            rt = t - reveal_at
-            if 0 <= rt < 0.65:
-                reveal = (
-                    math.sin(2*math.pi*(520 + 700*rt)*t) * math.exp(-rt*4.5) * 0.15
-                    + math.sin(2*math.pi*1040*t) * math.exp(-rt*7) * 0.08
-                )
-
-            sample = 0.13*kick + arp + bass + tick + reveal
-            sample = max(-0.92, min(0.92, sample))
-            wf.writeframes(struct.pack("<h", int(sample * 32767)))
-
-    ffmpeg = get_ffmpeg_exe()
-    subprocess.run([
-        ffmpeg, "-y",
-        "-framerate", str(fps), "-i", str(frames / "%05d.jpg"),
-        "-i", str(wav),
-        "-c:v", "libx264", "-preset", "medium", "-crf", "19",
-        "-pix_fmt", "yuv420p",
-        "-c:a", "aac", "-b:a", "160k",
-        "-shortest", "-movflags", "+faststart",
-        str(out)
-    ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
-    return title, desc
+    report = render_short(ch, out)
+    CONTENT_META.update(renderer=report["renderer"], duration=report["duration"],
+                        voice=report["audio"]["voice"], scene_count=len(report["scenes"]))
+    desc = " ".join(ch["question"].split()) + "\n" + " ".join(ch["answer"].split())
+    if ch["genre"] == "fiction":
+        desc += "\nAn original fictional short story."
+    elif ch.get("source"):
+        desc += "\nSource: " + ch["source"]
+    desc += "\nOriginal motion graphics and music. AI-assisted script and synthetic narration."
+    desc += "\n#Shorts #" + ch["genre"].title()
+    return ch["title"], desc
 
 def access_token() -> str:
     with httpx.Client(timeout=30) as client:
@@ -818,4 +658,5 @@ if __name__ == "__main__":
 # Owner-requested single upload retry: 2026-10-04 17:11 IST.
 
 # Owner-requested single upload retry: 2026-10-04 22:51 IST.
+
 
