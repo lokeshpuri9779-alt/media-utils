@@ -30,6 +30,34 @@ def _access_token(refresh_token: str) -> str:
     return r.json()["access_token"]
 
 
+def _token_scopes(access_token: str) -> set[str]:
+    """Return granted OAuth scopes without logging token or account identity."""
+    with httpx.Client(timeout=30) as client:
+        r = client.get("https://oauth2.googleapis.com/tokeninfo",
+                       params={"access_token": access_token})
+    r.raise_for_status()
+    value = r.json().get("scope") or ""
+    return {s for s in str(value).split() if s}
+
+
+def _credential(required_any: set[str], candidates: list[tuple[str, str]]) -> tuple[str, str, set[str]] | None:
+    """Use the first stored refresh token whose access token has a required scope."""
+    seen = set()
+    for source, refresh_token in candidates:
+        refresh_token = (refresh_token or "").strip()
+        if not refresh_token or refresh_token in seen:
+            continue
+        seen.add(refresh_token)
+        try:
+            token = _access_token(refresh_token)
+            scopes = _token_scopes(token)
+        except httpx.HTTPError:
+            continue
+        if scopes.intersection(required_any):
+            return token, source, scopes
+    return None
+
+
 def _query_analytics(token: str, *, start_date: str, end_date: str,
                      metrics: str, filters: str | None = None,
                      dimensions: str | None = None) -> dict:
@@ -138,15 +166,6 @@ def refresh_analytics(data: dict, now: datetime, force: bool = False) -> bool:
     Missing permission is non-fatal: production/uploading continues.
     """
     state = data.setdefault("analytics_state", {})
-    refresh_token = ((os.environ.get("YOUTUBE_FULL_REFRESH_TOKEN") or "").strip()
-                     or (os.environ.get("YOUTUBE_ANALYTICS_REFRESH_TOKEN") or "").strip())
-    if not refresh_token:
-        state.update({
-            "status": "awaiting_secret",
-            "checked_at": now.isoformat(),
-            "message": "Add YOUTUBE_ANALYTICS_REFRESH_TOKEN to enable retention/watch-time learning.",
-        })
-        return True
 
     try:
         last = datetime.fromisoformat(state.get("checked_at", ""))
@@ -155,12 +174,25 @@ def refresh_analytics(data: dict, now: datetime, force: bool = False) -> bool:
     except (ValueError, TypeError):
         pass
 
-    try:
-        token = _access_token(refresh_token)
-    except Exception as exc:
-        state.update({"status": "oauth_error", "checked_at": now.isoformat(),
-                      "message": type(exc).__name__})
+    credential = _credential(
+        {
+            "https://www.googleapis.com/auth/youtube.readonly",
+            "https://www.googleapis.com/auth/yt-analytics.readonly",
+        },
+        [
+            ("full", os.environ.get("YOUTUBE_FULL_REFRESH_TOKEN") or ""),
+            ("analytics", os.environ.get("YOUTUBE_ANALYTICS_REFRESH_TOKEN") or ""),
+            ("existing-cloud-token", os.environ.get("YOUTUBE_REFRESH_TOKEN") or ""),
+        ],
+    )
+    if not credential:
+        state.update({
+            "status": "awaiting_scope",
+            "checked_at": now.isoformat(),
+            "message": "Stored GitHub OAuth tokens do not currently grant YouTube Analytics read access.",
+        })
         return True
+    token, credential_source, granted_scopes = credential
 
     eligible = []
     for vid, entry in data.get("videos", {}).items():
@@ -219,6 +251,14 @@ def refresh_analytics(data: dict, now: datetime, force: bool = False) -> bool:
         "status": "active" if not failures else "partial",
         "checked_at": now.isoformat(),
         "videos_updated": updated,
+        "credential_source": credential_source,
+        "granted_scope_classes": sorted(
+            "analytics" if "analytics" in s else
+            "youtube-read" if s.endswith("/youtube.readonly") else
+            "youtube-write" if s.endswith("/youtube.force-ssl") else
+            "other"
+            for s in granted_scopes
+        ),
         "failures": failures[-10:],
     })
     print("Private analytics:", state["status"], "| videos updated:", updated,
@@ -255,17 +295,6 @@ def manage_community(data: dict, now: datetime) -> bool:
     This intentionally avoids automatic moderation, arguments, advice, or sensitive topics.
     """
     state = data.setdefault("community", {})
-    refresh_token = ((os.environ.get("YOUTUBE_FULL_REFRESH_TOKEN") or "").strip()
-                     or (os.environ.get("YOUTUBE_COMMUNITY_REFRESH_TOKEN") or "").strip())
-    if not refresh_token:
-        if state.get("status") != "awaiting_scope":
-            state.update({
-                "status": "awaiting_scope",
-                "checked_at": now.isoformat(),
-                "message": "A youtube.force-ssl refresh token is required for autonomous replies.",
-            })
-            return True
-        return False
 
     try:
         last = datetime.fromisoformat(state.get("checked_at", ""))
@@ -274,6 +303,23 @@ def manage_community(data: dict, now: datetime) -> bool:
     except (ValueError, TypeError):
         pass
 
+    credential = _credential(
+        {"https://www.googleapis.com/auth/youtube.force-ssl"},
+        [
+            ("full", os.environ.get("YOUTUBE_FULL_REFRESH_TOKEN") or ""),
+            ("community", os.environ.get("YOUTUBE_COMMUNITY_REFRESH_TOKEN") or ""),
+            ("existing-cloud-token", os.environ.get("YOUTUBE_REFRESH_TOKEN") or ""),
+        ],
+    )
+    if not credential:
+        state.update({
+            "status": "awaiting_scope",
+            "checked_at": now.isoformat(),
+            "message": "Stored GitHub OAuth tokens do not grant youtube.force-ssl; automatic replies remain disabled.",
+        })
+        return True
+    token, credential_source, granted_scopes = credential
+
     day = now.date().isoformat()
     if state.get("reply_day") != day:
         state["reply_day"] = day
@@ -281,13 +327,6 @@ def manage_community(data: dict, now: datetime) -> bool:
     remaining = max(0, 3 - int(state.get("replies_today", 0)))
     if remaining <= 0:
         state["checked_at"] = now.isoformat()
-        return True
-
-    try:
-        token = _access_token(refresh_token)
-    except Exception as exc:
-        state.update({"status": "oauth_error", "checked_at": now.isoformat(),
-                      "message": type(exc).__name__})
         return True
 
     processed = list(state.get("processed_comment_ids", []))
@@ -347,6 +386,7 @@ def manage_community(data: dict, now: datetime) -> bool:
     state.update({
         "status": "active" if not failures else "partial",
         "checked_at": now.isoformat(),
+        "credential_source": credential_source,
         "processed_comment_ids": processed[-1000:],
         "replies_today": int(state.get("replies_today", 0)) + replies,
         "failures": failures[-10:],
