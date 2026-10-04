@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import json, math, os, random, struct, subprocess, tempfile, wave
+import json, math, os, random, struct, subprocess, tempfile, wave, sys, re
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -17,6 +17,50 @@ STATE_PATH = Path("quota_state.json")
 IST = ZoneInfo("Asia/Kolkata")
 INITIAL_TARGET = int(os.environ.get("ASTRA_INITIAL_DAILY_TARGET", "9"))
 MAX_TARGET = int(os.environ.get("ASTRA_MAX_DAILY_TARGET", "24"))
+EXPECTED_CHANNEL_ID = "UCc9fHSuRnqq_C2C0DpLyRRg"
+LAST_API_ERROR: dict | None = None
+
+
+def api_error(response, stage: str) -> dict:
+    """Capture API error details without credentials, headers or upload URLs."""
+    global LAST_API_ERROR
+    try:
+        body = response.json().get("error", {})
+    except (ValueError, AttributeError):
+        body = {"message": "Non-JSON error response; body omitted."}
+    if not isinstance(body, dict):
+        body = {"message": str(body)}
+    payload = {"stage": stage, "http_status": response.status_code,
+               "code": body.get("code"), "status": body.get("status"),
+               "message": body.get("message", ""),
+               "errors": [{k: entry[k] for k in ("reason", "domain", "message", "locationType", "location") if k in entry}
+                          for entry in body.get("errors", []) if isinstance(entry, dict)]}
+    encoded = json.dumps(payload, ensure_ascii=False)
+    for name in ("YOUTUBE_CLIENT_ID", "YOUTUBE_CLIENT_SECRET", "YOUTUBE_REFRESH_TOKEN"):
+        value = os.environ.get(name)
+        if value: encoded = encoded.replace(value, "[REDACTED]")
+    encoded = re.sub(r"Bearer\s+[^\s\"\\]+", "Bearer [REDACTED]", encoded, flags=re.IGNORECASE)
+    LAST_API_ERROR = json.loads(encoded)
+    print("YouTube API diagnostic:", json.dumps(LAST_API_ERROR, ensure_ascii=False))
+    return LAST_API_ERROR
+
+
+def verify_channel(token: str) -> dict:
+    with httpx.Client(timeout=60) as client:
+        response = client.get("https://www.googleapis.com/youtube/v3/channels",
+                              params={"part": "id,snippet", "mine": "true"},
+                              headers={"Authorization": f"Bearer {token}"})
+    if response.status_code >= 400:
+        api_error(response, "channel_check")
+        raise RuntimeError("Cannot verify the authorized channel; no upload attempted. See API diagnostic.")
+    channels = response.json().get("items", [])
+    ids = [c.get("id") for c in channels]
+    print("Authorized channel IDs:", json.dumps(ids))
+    print("Expected channel ID:", EXPECTED_CHANNEL_ID)
+    if ids != [EXPECTED_CHANNEL_ID]:
+        raise RuntimeError("Authorized channel mismatch; no upload attempted. Reauthorize the intended YouTube channel.")
+    print("Channel verified:", channels[0].get("snippet", {}).get("title", ""))
+    return channels[0]
 
 def need(name: str) -> str:
     value = (os.environ.get(name) or "").strip()
@@ -450,8 +494,10 @@ def access_token() -> str:
         raise RuntimeError("OAuth refresh failed: " + r.text[:400])
     return r.json()["access_token"]
 
-def upload(video: Path, title: str, description: str) -> tuple[str, str]:
-    token = access_token()
+def upload(video: Path, title: str, description: str, token: str | None = None) -> tuple[str, str]:
+    if token is None:
+        token = access_token()
+        verify_channel(token)
     privacy = (os.environ.get("YOUTUBE_PRIVACY") or "public").lower()
     if privacy not in {"private","unlisted","public"}:
         privacy = "public"
@@ -469,20 +515,20 @@ def upload(video: Path, title: str, description: str) -> tuple[str, str]:
     with httpx.Client(timeout=60) as client:
         r = client.post(UPLOAD_URL, params={"uploadType":"resumable","part":"snippet,status"}, headers=headers, json=metadata)
     if r.status_code >= 400:
-        txt = r.text
-        if "uploadLimitExceeded" in txt:
+        error = api_error(r, "upload_session")
+        if any(e.get("reason") == "uploadLimitExceeded" for e in error["errors"]):
             return "limit", ""
-        raise RuntimeError("YouTube session failed: " + txt[:500])
+        raise RuntimeError("YouTube session failed; see structured API diagnostic.")
     location = r.headers.get("location")
     if not location:
         raise RuntimeError("YouTube did not return an upload URL")
     with video.open("rb") as fh, httpx.Client(timeout=None) as client:
         r = client.put(location, headers={"Authorization":f"Bearer {token}","Content-Type":"video/mp4","Content-Length":str(size)}, content=fh)
     if r.status_code not in (200,201):
-        txt = r.text
-        if "uploadLimitExceeded" in txt:
+        error = api_error(r, "upload_transfer")
+        if any(e.get("reason") == "uploadLimitExceeded" for e in error["errors"]):
             return "limit", ""
-        raise RuntimeError("YouTube upload failed: " + txt[:500])
+        raise RuntimeError("YouTube upload failed; see structured API diagnostic.")
     vid = r.json().get("id","")
     return "success", (f"https://www.youtube.com/watch?v={vid}" if vid else "")
 
@@ -580,18 +626,25 @@ def main() -> None:
     need("YOUTUBE_CLIENT_ID"); need("YOUTUBE_CLIENT_SECRET"); need("YOUTUBE_REFRESH_TOKEN")
     now = datetime.now(IST)
     state = load_state(now)
+    token = access_token()
+    verify_channel(token)
+    if "--diagnose" in sys.argv:
+        print("READ-ONLY DIAGNOSTIC COMPLETE: no video generated, no upload attempted, no state modified.")
+        print("Saved upload state:", json.dumps(state))
+        return
     save_state(state)
     refresh_performance()
 
     force = (os.environ.get("ASTRA_FORCE_RUN") or "").strip() == "1"
     print(f"Adaptive daily target: {state['target']} | attempts: {state['attempts']} | successes: {state['successes']} | limit_hit: {state['limit_hit']}")
 
-    if not force and not scheduled_attempt_due(now, state):
-        print("No upload attempt due in this hourly slot.")
+    if state.get("limit_hit") and not force:
+        print("Paused after an earlier API uploadLimitExceeded response. No fresh upload test occurred in this run.")
+        print("The India-local day reset is Astra scheduling behavior, not a confirmed YouTube reset time.")
         return
 
-    if state.get("limit_hit") and not force:
-        print("Today's YouTube limit was already detected; next probe will be on the next India-local day.")
+    if not force and not scheduled_attempt_due(now, state):
+        print("No upload attempt due in this hourly slot.")
         return
 
     work = Path(tempfile.mkdtemp(prefix="media_utils_run_"))
@@ -600,7 +653,7 @@ def main() -> None:
     print("Generated:", title)
 
     try:
-        status, url = upload(video, title, desc)
+        status, url = upload(video, title, desc, token=token)
         state["attempts"] = int(state.get("attempts", 0)) + 1
         if status == "success":
             state["successes"] = int(state.get("successes", 0)) + 1
@@ -609,10 +662,12 @@ def main() -> None:
             record_video(video_id, title)
         elif status == "limit":
             state["limit_hit"] = True
+            state["last_api_error"] = LAST_API_ERROR
             print("YouTube API upload limit reported. Recorded today's ceiling and stopped further scheduled probes for today.")
     except Exception:
         state["attempts"] = int(state.get("attempts", 0)) + 1
         state["other_failures"] = int(state.get("other_failures", 0)) + 1
+        if LAST_API_ERROR is not None: state["last_api_error"] = LAST_API_ERROR
         save_state(state)
         raise
 
