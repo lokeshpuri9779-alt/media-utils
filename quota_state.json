@@ -1,24 +1,15 @@
 {
-  "date": "2026-10-04",
+  "date": "2026-10-05",
   "target": 9,
-  "attempts": 4,
+  "attempts": 1,
   "successes": 1,
   "limit_hit": false,
   "other_failures": 0,
-  "previous_day": null,
-  "last_probe_id": "567d00b3c02b07620d336f8a37f542e40a7c1995",
-  "last_api_error": {
-    "stage": "upload_session",
-    "http_status": 400,
-    "code": 400,
-    "status": null,
-    "message": "The user has exceeded the number of videos they may upload.",
-    "errors": [
-      {
-        "reason": "uploadLimitExceeded",
-        "domain": "youtube.video",
-        "message": "The user has exceeded the number of videos they may upload."
-      }
-    ]
+  "previous_day": {
+    "date": "2026-10-04",
+    "target": 9,
+    "attempts": 4,
+    "successes": 1,
+    "limit_hit": false
   }
 }
