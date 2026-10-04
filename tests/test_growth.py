@@ -53,6 +53,7 @@ class GrowthTests(unittest.TestCase):
             'YOUTUBE_FULL_REFRESH_TOKEN':'',
             'YOUTUBE_ANALYTICS_REFRESH_TOKEN':'',
             'YOUTUBE_COMMUNITY_REFRESH_TOKEN':'',
+            'YOUTUBE_REFRESH_TOKEN':'',
         }, clear=False):
             self.assertTrue(autonomy.refresh_analytics(data,self.now,force=True))
             self.assertEqual(data['analytics_state']['status'],'awaiting_scope')
