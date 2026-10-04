@@ -1,17 +1,44 @@
-ONE-TIME SETUP
+ASTRA YOUTUBE CLOUD SETUP
 
-1. On your Windows PC, run:
-   python export_local_secrets.py
+CORE UPLOAD AUTOMATION (already used by the worker)
 
-2. In GitHub open:
-   Settings -> Secrets and variables -> Actions
-
-3. Add these three repository secrets:
+1. Required GitHub Actions secrets:
    YOUTUBE_CLIENT_ID
    YOUTUBE_CLIENT_SECRET
    YOUTUBE_REFRESH_TOKEN
 
-4. Open Actions -> media check -> Run workflow.
+2. The workflow runs every hour. Astra itself decides whether an upload attempt is due.
+   Initial adaptive target: 9 uploads/day.
+   Configured ceiling: 24 attempts/day.
+   YouTube's own limits always take priority.
 
-The scheduled job runs at 06:30 and 18:30 India time.
-Do not commit or share the printed secret values.
+OPTIONAL OWNER ANALYTICS (recommended)
+
+If your existing analytics_token.json is on the PC:
+   python youtube_autonomy_setup.py --install-existing-analytics
+
+This installs YOUTUBE_ANALYTICS_REFRESH_TOKEN automatically when the GitHub CLI
+is already authenticated. It enables watch-time, average-view-percentage and
+audience-retention learning.
+
+FULL AUTONOMY PERMISSION
+
+To also allow Astra to reply conservatively to clearly positive comments:
+   python youtube_autonomy_setup.py --authorize-full
+
+Google will open one owner-consent page. The resulting refresh token is installed
+as YOUTUBE_FULL_REFRESH_TOKEN when possible. This one-time consent cannot be
+legitimately bypassed because YouTube requires youtube.force-ssl for comment writes.
+
+DO NOT:
+- paste OAuth refresh tokens into chat
+- commit client_secret.json, token.json or analytics_token.json
+- use fake engagement, bought views or disposable-account tricks
+
+SAFE TESTS
+
+python -m py_compile cloud_once.py autonomy.py longform.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py
+python -m unittest discover -s tests -p "test_*.py" -v
+python cloud_once.py --study
+
+A normal code push performs diagnostics and does not force a video upload.
