@@ -1,6 +1,9 @@
 name: media check
 
 on:
+  push:
+    paths:
+      - 'cloud_once.py'
   workflow_dispatch:
   schedule:
     # Hourly controller. The Python worker decides whether an upload attempt is due,
@@ -37,8 +40,14 @@ jobs:
       - name: dependencies
         run: pip install -r requirements.txt
       - name: run
-        run: python cloud_once.py
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            python cloud_once.py --diagnose
+          else
+            python cloud_once.py
+          fi
       - name: save adaptive state
+        if: github.event_name != 'push'
         shell: bash
         run: |
           if [ -z "$(git status --porcelain -- quota_state.json performance.json SHORTS.md)" ]; then
