@@ -404,9 +404,17 @@ def choose_content(data, trends, now=None):
     roll = random.random()
     trending = [c for c in candidates if c['trend_matches']]
     proven = [c for c in candidates if c['genre'] in scores]
-    if roll < .25 and trending:
+    try:
+        from autonomy import strategy_genre
+        analytics_pick = strategy_genre(data, {c['genre'] for c in candidates})
+    except Exception:
+        analytics_pick = None
+    if roll < .35 and analytics_pick:
+        pool = [c for c in candidates if c['genre'] == analytics_pick]
+        reason = 'private retention/engagement analytics'
+    elif roll < .55 and trending:
         pool, reason = trending, 'fresh search-interest match'
-    elif roll < .75 and proven:
+    elif roll < .85 and proven:
         best = max(scores[c['genre']] for c in proven)
         pool, reason = [c for c in proven if scores[c['genre']]==best], '24-48h views/hour evidence'
     else:
@@ -611,15 +619,22 @@ def refresh_performance() -> None:
 
 def refresh_research(token, force=False):
     from audience_research import collect
+    from autonomy import manage_community, refresh_analytics
     data=load_performance()
-    if collect(token,data,datetime.now(IST),force=force):
+    now=datetime.now(IST)
+    changed=collect(token,data,now,force=force)
+    if refresh_analytics(data,now,force=force):
+        changed=True
+    if manage_community(data,now):
+        changed=True
+    if changed:
         save_performance(data)
 
 
-def make_long(out):
+def make_long(out, episode_id):
     global CONTENT_META
     from longform import render
-    title,description,report=render(out)
+    title,description,report=render(out, episode_id=episode_id)
     CONTENT_META={k:report[k] for k in ('renderer','format','genre','content_id','duration','scene_count')}
     CONTENT_META['voice']=report['audio']['voice']
     CONTENT_META['selection_reason']='weekly long-form slot; new sourced episode'
@@ -688,7 +703,7 @@ def main() -> None:
 
     work = Path(tempfile.mkdtemp(prefix="media_utils_run_"))
     video = work / "clip.mp4"
-    title, desc = make_long(video) if long_episode else make_short(video)
+    title, desc = make_long(video, long_episode) if long_episode else make_short(video)
     print("Generated:", title)
 
     try:
