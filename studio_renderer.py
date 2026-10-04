@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-1.0"
+VERSION = "studio-1.1"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -84,7 +84,7 @@ def scene(headline, speech, visual, label='', sub='', duration=0, **extra):
                 sub=sub, min_duration=duration, **extra)
 
 
-def make_plan(ch):
+def _story_plan(ch):
     genre, cid = ch.get('genre', 'challenge'), ch.get('content_id', '')
     q, a = ch['question'].replace('\n', ' '), ch['answer'].replace('\n', ' ')
     if cid == 'venus-spin':
@@ -183,7 +183,26 @@ def voice_engine():
     return Kokoro.from_session(session,str(root/'voices-v1.0.bin'))
 
 
-def voice_plan(plan, genre):
+def make_plan(ch):
+    plan=_story_plan(ch)
+    # One relevant invitation per video, after the viewer has received the payoff.
+    options={
+        'space':[('WHAT SURPRISED YOU?','Which planet should we explain next?'),('MORE SPACE STORIES','Subscribe for more short space explainers.')],
+        'tech':[('SAVE SOMEONE TIME','Share this shortcut with someone who needs it.'),('WAS THIS USEFUL?','If this helped, give it a like.')],
+        'football':[('YOUR NEXT QUESTION?','Which football rule should we explain next?'),('SEND IT TO A FAN','Share this with a football fan.')],
+        'fiction':[('YOUR ENDING?','How would you end this story?'),('MORE SMALL STORIES','Subscribe for another original story.')],
+        'challenge':[('YOUR ANSWER?','Tell us your answer in the comments.'),('CHALLENGE A FRIEND','Share this challenge with a friend.')],
+    }
+    genre=ch.get('genre','challenge')
+    idx=int(hashlib.sha256(ch.get('content_id',ch['question']).encode()).hexdigest()[:8],16)%2
+    headline,speech=options[genre][idx]
+    last=dict(plan[-1]);last.update(headline=headline,speech=speech,min_duration=2.0)
+    last.pop('countdown',None);last.pop('answer',None)
+    plan.append(last)
+    return plan
+
+
+def voice_plan(plan, genre, max_duration=58):
     engine=voice_engine()
     cursor=0.0
     for s in plan:
@@ -198,7 +217,7 @@ def voice_plan(plan, genre):
                  duration=max(float(s['min_duration']),len(samples)/RATE+.55))
         s['end']=s['start']+s['duration']
         cursor=s['end']
-    if not 6<=cursor<=58:
+    if not 6<=cursor<=max_duration:
         raise RuntimeError(f'Video duration {cursor:.1f}s is outside the Studio short format.')
     return cursor
 
