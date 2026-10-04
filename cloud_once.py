@@ -173,7 +173,7 @@ def _challenge() -> dict:
         ans = a + b * c
         return {
             "kind": "math",
-            "hook": random.choice(["ONLY 10% GET THIS", "DON'T USE A CALCULATOR", "BEAT THIS IN 5 SEC"]),
+            "hook": random.choice(["CAN YOU SOLVE THIS?", "DON'T USE A CALCULATOR", "BEAT THIS IN 5 SEC"]),
             "question": f"{a} + {b} × {c} = ?",
             "prompt": "Order matters 👀",
             "answer": str(ans),
@@ -298,6 +298,132 @@ def _challenge() -> dict:
     makers.extend([arithmetic, memory, sequence, doubling, duplicate, odd_grid, trick_weight, riddle, missing])
     return random.choice(makers)()
 
+CONTENT_META = {}
+MS_SOURCE = 'https://support.microsoft.com/en-us/accessibility/windows/keyboard-shortcuts-in-windows'
+NASA_SOURCE = 'https://science.nasa.gov/venus/venus-facts/'
+FOOT_SOURCE = 'https://www.theifab.com/laws/latest/offside/'
+
+def content_catalog():
+    # Original scripts; sources support facts, not copied article text.
+    rows = [
+        ('tech', 'clipboard', 'YOUR LAST COPY?', 'Copied something else?\nWindows can keep\na clipboard history.', 'Press Win + V.\nEnable history first.\nAvoid storing secrets.', 'Windows clipboard history in seconds', MS_SOURCE, ['windows', 'microsoft', 'computer']),
+        ('tech', 'screenshot', 'CAPTURE JUST A BIT', 'Need one part\nof your screen?', 'Win + Shift + S\nopens screen snipping.\nSelect the area.', 'Capture part of your Windows screen', MS_SOURCE, ['windows', 'microsoft', 'computer']),
+        ('tech', 'taskmanager', 'FIND THE BUSY APP', 'Which app is using\nyour computer resources?', 'Ctrl + Shift + Esc\nopens Task Manager.\nCheck the Processes tab.', 'Open Task Manager with one shortcut', MS_SOURCE, ['windows', 'microsoft', 'computer']),
+        ('space', 'venus-spin', 'A VERY SLOW SPIN', 'Venus takes about\n243 Earth days\nto rotate once.', 'Its orbit takes\nabout 225 Earth days.\nOne spin outlasts a year.', 'Venus rotates slower than it orbits', NASA_SOURCE, ['venus', 'nasa', 'space', 'planet']),
+        ('space', 'venus-heat', 'HOTTER THAN MERCURY', 'Venus is the hottest\nplanet in our\nsolar system.', 'Its thick atmosphere\ntraps heat through\nthe greenhouse effect.', 'Why Venus is the hottest planet', NASA_SOURCE, ['venus', 'nasa', 'space', 'planet']),
+        ('football', 'offside-position', 'OFFSIDE? NOT YET', 'Standing in an\noffside position\nis not itself an offence.', 'The player must become\ninvolved in active play,\nas defined by Law 11.', 'Offside position is not an offence by itself', FOOT_SOURCE, ['football', 'barcelona', 'real madrid', 'arsenal', 'man city']),
+        ('football', 'throw-offside', 'THE THROW-IN RULE', 'Can receiving a\nthrow-in directly\nmake you offside?', 'No offside offence\nfrom receiving a\nthrow-in directly.', 'The throw-in offside exception', FOOT_SOURCE, ['football', 'barcelona', 'real madrid', 'arsenal', 'man city']),
+        ('football', 'added-time', 'WHY THE EXTRA TIME?', 'The board shows\na minimum amount\nof added time.', 'The referee can\nincrease it,\nbut cannot reduce it.', 'Added time is a minimum', 'https://www.theifab.com/laws/latest/the-duration-of-the-match/', ['football', 'barcelona', 'real madrid', 'arsenal', 'man city']),
+        ('fiction', 'last-signal', 'THE LAST SIGNAL', 'The empty spaceship\nreceived a message:\n"Stop looking for us."', 'It came from Earth.\nEarth had vanished\na hundred years ago.', 'The last signal | Original microfiction', '', []),
+        ('fiction', 'door', 'THE EXTRA DOOR', 'Every night, a new\ndoor appeared\nin her tiny flat.', 'Tonight she opened one.\nOn the other side,\nshe was knocking.', 'The extra door | Original microfiction', '', []),
+        ('fiction', 'robot', 'ONE LAST ORDER', 'The old robot was\ntold to guard\na single seed.', 'A thousand years later,\nit finally rested\nin a forest.', 'One last order | Original microfiction', '', []),
+    ]
+    return [dict(genre=g, content_id=i, hook=h, question=q, answer=a,
+                 title=t+' #Shorts', source=s, keywords=k, kind='explainer',
+                 prompt='ORIGINAL FICTION' if g=='fiction' else 'THE SHORT EXPLANATION')
+            for g,i,h,q,a,t,s,k in rows]
+
+def fetch_trends(now=None):
+    from email.utils import parsedate_to_datetime
+    import xml.etree.ElementTree as ET
+    now = now or datetime.now(IST)
+    results = []
+    # Search interest is a topic signal, never evidence for a factual claim.
+    for region in ('IN', 'US'):
+        try:
+            with httpx.Client(timeout=15, follow_redirects=True) as client:
+                response = client.get('https://trends.google.com/trending/rss', params={'geo': region})
+            response.raise_for_status()
+            if len(response.content) > 2_000_000:
+                raise ValueError('Oversized trend feed')
+            root = ET.fromstring(response.content)
+            for item in root.findall('./channel/item')[:30]:
+                try:
+                    date = parsedate_to_datetime(item.findtext('pubDate', ''))
+                    age = (now-date).total_seconds()
+                    title = item.findtext('title', '').strip()[:160]
+                    if title and 0 <= age <= 48*3600:
+                        results.append({'title': title, 'region': region, 'at': date.isoformat()})
+                except (ValueError, TypeError, OverflowError):
+                    continue
+        except (httpx.HTTPError, ValueError, ET.ParseError):
+            print('Trend feed unavailable:', region, '- using verified evergreen topics.')
+    print('Fresh search-interest signals:', len(results))
+    return results
+
+def genre_scores(videos):
+    # Compare each video's earliest observation in the same 24-48h age band.
+    # No retention metric is inferred from views. Require 3 examples per genre.
+    import statistics
+    grouped = {}
+    for entry in videos.values():
+        try:
+            published = datetime.fromisoformat(entry['published_at'])
+            samples = sorted(entry.get('history', []), key=lambda x: x['at'])
+            eligible = [s for s in samples if 24 <= (datetime.fromisoformat(s['at'])-published).total_seconds()/3600 <= 48]
+            if not eligible:
+                continue
+            sample = eligible[0]
+            age = (datetime.fromisoformat(sample['at'])-published).total_seconds()/3600
+            grouped.setdefault(entry.get('genre', 'challenge'), []).append(max(0, int(sample.get('views', 0)))/age)
+        except (KeyError, ValueError, TypeError):
+            continue
+    return {g: statistics.median(v) for g,v in grouped.items() if len(v)>=3}
+
+def choose_content(data, trends, now=None):
+    import hashlib
+    now = now or datetime.now(IST)
+    videos = data.get('videos', {})
+    recent = []
+    for entry in videos.values():
+        try:
+            if (now-datetime.fromisoformat(entry['published_at'])).total_seconds() < 30*86400:
+                recent.append(entry)
+        except (KeyError, ValueError, TypeError):
+            continue
+    used = {v.get('content_id') for v in recent}
+    candidates = [c for c in content_catalog() if c['content_id'] not in used]
+    for _ in range(20):
+        ch = _challenge()
+        ch.update(genre='challenge', source='', keywords=[])
+        ch['content_id'] = 'quiz-' + hashlib.sha256((ch['question']+ch['answer']).encode()).hexdigest()[:16]
+        if ch['content_id'] not in used:
+            candidates.append(ch)
+            break
+    if not candidates:
+        raise RuntimeError('No fresh content available; skipping rather than repeating.')
+    last = sorted(recent, key=lambda x: x.get('published_at', ''), reverse=True)[:2]
+    if len(last)==2 and last[0].get('genre')==last[1].get('genre'):
+        diverse = [c for c in candidates if c['genre'] != last[0].get('genre')]
+        if diverse: candidates = diverse
+    for c in candidates:
+        c['trend_matches'] = [t for t in trends if any(re.search(r'\b'+re.escape(k)+r'\b', t['title'], re.I) for k in c['keywords'])][:3]
+    scores = genre_scores(videos)
+    roll = random.random()
+    trending = [c for c in candidates if c['trend_matches']]
+    proven = [c for c in candidates if c['genre'] in scores]
+    if roll < .25 and trending:
+        pool, reason = trending, 'fresh search-interest match'
+    elif roll < .75 and proven:
+        best = max(scores[c['genre']] for c in proven)
+        pool, reason = [c for c in proven if scores[c['genre']]==best], '24-48h views/hour evidence'
+    else:
+        counts = {g: sum(v.get('genre', 'challenge')==g for v in videos.values()) for g in {c['genre'] for c in candidates}}
+        minimum = min(counts.values())
+        pool, reason = [c for c in candidates if counts[c['genre']]==minimum], 'explore under-tested genre'
+    selected = dict(random.choice(pool))
+    selected['selection_reason'] = reason
+    return selected
+
+def select_content():
+    global CONTENT_META
+    trends = fetch_trends()
+    ch = choose_content(load_performance(), trends)
+    CONTENT_META = {k:ch.get(k) for k in ('genre','content_id','source','trend_matches','selection_reason')}
+    print('Content decision:', json.dumps(CONTENT_META, ensure_ascii=False))
+    return ch
+
+
 def _draw_centered(draw, xy, text, fnt, fill, max_width=920, spacing=18, shadow=True):
     text = _wrap(text, 23)
     while True:
@@ -313,22 +439,27 @@ def _draw_centered(draw, xy, text, fnt, fill, max_width=920, spacing=18, shadow=
                         align="center", spacing=spacing)
 
 def make_short(out: Path) -> tuple[str, str]:
-    ch = _challenge()
+    ch = select_content()
+    explainer = ch["genre"] != "challenge"
     title = ch["title"]
     desc = (
         "Answer before the reveal — then comment if you got it right. "
         "#Shorts #BrainTeaser #Quiz #Challenge"
     )
 
+    if explainer:
+        desc = ch["question"].replace("\n", " ") + " " + ch["answer"].replace("\n", " ")
+        desc += "\nOriginal fiction." if ch["genre"] == "fiction" else "\nSource: " + ch["source"]
+        desc += "\n#Shorts #" + ch["genre"].title()
     work = Path(tempfile.mkdtemp(prefix="media_utils_"))
     frames = work / "frames"
     frames.mkdir()
 
     width, height = 1080, 1920
     fps = 24
-    total_seconds = 10
+    total_seconds = 18 if explainer else 10
     total_frames = total_seconds * fps
-    reveal_at = 7.4
+    reveal_at = 8.5 if explainer else 7.4
 
     # Build a reusable high-resolution gradient once.
     base = Image.new("RGB", (width, height))
@@ -343,9 +474,9 @@ def make_short(out: Path) -> tuple[str, str]:
 
     f_brand = font(46)
     f_hook = font(76)
-    f_question = font(112 if ch["kind"] not in {"visual","riddle","trick"} else 78)
+    f_question = font(76 if explainer else (112 if ch["kind"] not in {"visual","riddle","trick"} else 78))
     f_prompt = font(58)
-    f_answer = font(112)
+    f_answer = font(76 if explainer else 112)
     f_small = font(42)
 
     for i in range(total_frames):
@@ -375,7 +506,7 @@ def make_short(out: Path) -> tuple[str, str]:
 
         # Brand chip.
         d.rounded_rectangle((365, 92, 715, 172), radius=36, fill=(255,255,255,30))
-        d.text((540, 132), "LOKI · QUICK TEST", font=f_brand, fill=(244,246,255,235), anchor="mm")
+        d.text((540, 132), ("LOKI · " + ch["genre"].upper()), font=font(36), fill=(244,246,255,235), anchor="mm")
 
         # Hook pulse.
         hook_progress = min(1.0, t / 0.45)
@@ -397,7 +528,7 @@ def make_short(out: Path) -> tuple[str, str]:
 
             # Countdown in final 3 seconds before reveal.
             remaining = max(0.0, reveal_at - t)
-            if remaining <= 3.2:
+            if remaining <= 3.2 and not explainer:
                 n = max(1, int(math.ceil(remaining)))
                 pulse = 1.0 + 0.10*math.sin((1-(remaining % 1))*math.pi)
                 f_count = font(int(120*pulse))
@@ -410,12 +541,12 @@ def make_short(out: Path) -> tuple[str, str]:
                 d.rectangle((0,0,width,height), fill=(255,255,255,flash))
             pop = _ease_out_back(min(1.0, reveal_t/0.55))
             ay = 850 + int((1-pop)*110)
-            d.text((540, 650), "ANSWER", font=f_prompt, fill=(255,229,92,255), anchor="mm")
+            d.text((540, 650), ("THE TWIST" if ch["genre"] == "fiction" else "EXPLAINED") if explainer else "ANSWER", font=f_prompt, fill=(255,229,92,255), anchor="mm")
             _draw_centered(d, (540, ay), ch["answer"], f_answer, (255,255,255,255),
                            max_width=850, spacing=18)
-            d.text((540, 1160), "Did you get it? 👀", font=f_prompt,
+            d.text((540, 1160), ("What should we cover next?" if explainer else "Did you get it?"), font=font(42),
                    fill=(192,224,255,255), anchor="mm")
-            d.text((540, 1285), "COMMENT YOUR SCORE", font=f_small,
+            d.text((540, 1285), ("LOKI THE GAME CHANGER" if explainer else "COMMENT YOUR SCORE"), font=f_small,
                    fill=(255,255,255,190), anchor="mm")
 
         # Progress bar creates urgency and gives constant motion.
@@ -426,7 +557,7 @@ def make_short(out: Path) -> tuple[str, str]:
                             fill=(255,229,92,235))
 
         # Footer / replay cue.
-        footer = "WAIT FOR THE REVEAL" if t < reveal_at else "NEXT ONE →"
+        footer = ("ORIGINAL FICTION" if ch["genre"] == "fiction" else "SOURCE IN DESCRIPTION") if explainer else ("WAIT FOR THE REVEAL" if t < reveal_at else "NEXT ONE →")
         d.text((540, 1740), footer, font=f_small, fill=(240,242,250,175), anchor="mm")
 
         im = Image.alpha_composite(im.convert("RGBA"), overlay).convert("RGB")
@@ -556,6 +687,7 @@ def record_video(video_id: str, title: str) -> None:
     item.setdefault("title", title)
     item.setdefault("published_at", datetime.now(IST).isoformat())
     item.setdefault("history", [])
+    item.update(CONTENT_META)
     save_performance(data)
 
     # Maintain a public, zero-cost backlink feed inside the GitHub repo.
@@ -569,7 +701,7 @@ def record_video(video_id: str, title: str) -> None:
         safe_title = str(info.get("title") or "YouTube Short").replace("\n", " ").strip()
         published = str(info.get("published_at") or "")[:10]
         rows.append(f"- [{safe_title}](https://www.youtube.com/watch?v={vid}) · {published}")
-    body = "# LOKI Quick Challenge Feed\n\nFresh YouTube Shorts generated by Astra.\n\n" + "\n".join(rows) + "\n"
+    body = "# LOKI Shorts Feed\n\nFresh YouTube Shorts generated by Astra.\n\n" + "\n".join(rows) + "\n"
     Path("SHORTS.md").write_text(body, encoding="utf-8")
 
 def refresh_performance() -> None:
@@ -686,3 +818,4 @@ if __name__ == "__main__":
 # Owner-requested single upload retry: 2026-10-04 17:11 IST.
 
 # Owner-requested single upload retry: 2026-10-04 22:51 IST.
+
