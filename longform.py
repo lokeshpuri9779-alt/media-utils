@@ -53,15 +53,28 @@ def long_plan():
 
 
 def choose_episode(data,now):
-    """One new long episode at most per rolling seven days, after 19:00 IST."""
+    """One new long episode at most per rolling seven days, after 19:00 IST.
+
+    Publish the sourced Planet Clocks episode first. After that, generate a fresh
+    procedural Brain Arena episode every eligible ISO week so long-form never
+    runs out of original material.
+    """
     if now.hour<19:return None
+    planet_published=False
+    seen_ids=set()
     for entry in data.get('videos',{}).values():
-        if entry.get('content_id')==EPISODE_ID:return None
+        cid=entry.get('content_id')
+        if cid:seen_ids.add(cid)
+        if cid==EPISODE_ID:planet_published=True
         if entry.get('format')=='long':
             try:
                 if now-datetime.fromisoformat(entry['published_at'])<timedelta(days=7):return None
             except (KeyError,ValueError,TypeError):continue
-    return EPISODE_ID
+    if not planet_published:
+        return EPISODE_ID
+    iso=now.isocalendar()
+    weekly_id=f"brain-arena-{iso.year}-W{iso.week:02d}"
+    return None if weekly_id in seen_ids else weekly_id
 
 
 @studio.lru_cache(maxsize=1)
@@ -165,7 +178,10 @@ def thumbnail(out):
     im.resize((1280,720),Image.Resampling.LANCZOS).save(out,'JPEG',quality=92)
 
 
-def render(out,still_dir=None):
+def render(out,still_dir=None,episode_id=EPISODE_ID):
+    if episode_id != EPISODE_ID:
+        from longform_challenges import render as render_challenges
+        return render_challenges(out, episode_id)
     plan=long_plan();total=studio.voice_plan(plan,'space',max_duration=480)
     if total<150:raise RuntimeError('Long episode is too short; add substance rather than padding.')
     out=Path(out);out.parent.mkdir(parents=True,exist_ok=True)
