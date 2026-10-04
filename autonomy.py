@@ -169,7 +169,8 @@ def refresh_analytics(data: dict, now: datetime, force: bool = False) -> bool:
 
     try:
         last = datetime.fromisoformat(state.get("checked_at", ""))
-        if not force and now - last < timedelta(hours=12):
+        if (state.get("status") in {"active", "partial"} and not force
+                and now - last < timedelta(hours=12)):
             return False
     except (ValueError, TypeError):
         pass
@@ -298,7 +299,7 @@ def manage_community(data: dict, now: datetime) -> bool:
 
     try:
         last = datetime.fromisoformat(state.get("checked_at", ""))
-        if now - last < timedelta(hours=4):
+        if state.get("status") in {"active", "partial"} and now - last < timedelta(hours=4):
             return False
     except (ValueError, TypeError):
         pass
