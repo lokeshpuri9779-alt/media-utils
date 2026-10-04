@@ -138,7 +138,8 @@ def refresh_analytics(data: dict, now: datetime, force: bool = False) -> bool:
     Missing permission is non-fatal: production/uploading continues.
     """
     state = data.setdefault("analytics_state", {})
-    refresh_token = (os.environ.get("YOUTUBE_ANALYTICS_REFRESH_TOKEN") or "").strip()
+    refresh_token = ((os.environ.get("YOUTUBE_FULL_REFRESH_TOKEN") or "").strip()
+                     or (os.environ.get("YOUTUBE_ANALYTICS_REFRESH_TOKEN") or "").strip())
     if not refresh_token:
         state.update({
             "status": "awaiting_secret",
@@ -254,7 +255,8 @@ def manage_community(data: dict, now: datetime) -> bool:
     This intentionally avoids automatic moderation, arguments, advice, or sensitive topics.
     """
     state = data.setdefault("community", {})
-    refresh_token = (os.environ.get("YOUTUBE_COMMUNITY_REFRESH_TOKEN") or "").strip()
+    refresh_token = ((os.environ.get("YOUTUBE_FULL_REFRESH_TOKEN") or "").strip()
+                     or (os.environ.get("YOUTUBE_COMMUNITY_REFRESH_TOKEN") or "").strip())
     if not refresh_token:
         if state.get("status") != "awaiting_scope":
             state.update({
