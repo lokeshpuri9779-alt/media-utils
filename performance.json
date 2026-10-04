@@ -33,10 +33,28 @@
           "views": 7,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-05T04:12:44.384606+05:30",
+          "views": 7,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "at": "2026-10-05T04:14:28.223611+05:30",
+          "views": 6,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "at": "2026-10-05T04:16:38.172107+05:30",
+          "views": 7,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "latest": {
-        "at": "2026-10-05T04:00:06.760397+05:30",
+        "at": "2026-10-05T04:16:38.172107+05:30",
         "views": 7,
         "likes": 0,
         "comments": 0
@@ -69,6 +87,24 @@
           "views": 11,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-05T04:12:44.384606+05:30",
+          "views": 11,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "at": "2026-10-05T04:14:28.223611+05:30",
+          "views": 11,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "at": "2026-10-05T04:16:38.172107+05:30",
+          "views": 11,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "football",
@@ -81,7 +117,7 @@
       "voice": "Kokoro af_heart",
       "scene_count": 3,
       "latest": {
-        "at": "2026-10-05T04:00:06.760397+05:30",
+        "at": "2026-10-05T04:16:38.172107+05:30",
         "views": 11,
         "likes": 0,
         "comments": 0
@@ -650,13 +686,27 @@
     "note": "Observational signals, not proof a title or format causes views. Source footage/transcripts are not downloaded."
   },
   "analytics_state": {
-    "status": "awaiting_secret",
-    "checked_at": "2026-10-05T04:00:06.769088+05:30",
-    "message": "Add YOUTUBE_ANALYTICS_REFRESH_TOKEN to enable retention/watch-time learning."
+    "status": "active",
+    "checked_at": "2026-10-05T04:14:28.232399+05:30",
+    "message": "Add YOUTUBE_ANALYTICS_REFRESH_TOKEN to enable retention/watch-time learning.",
+    "videos_updated": 0,
+    "credential_source": "existing-cloud-token",
+    "granted_scope_classes": [
+      "other",
+      "youtube-read"
+    ],
+    "failures": []
   },
   "community": {
     "status": "awaiting_scope",
-    "checked_at": "2026-10-05T03:58:13.771253+05:30",
-    "message": "A youtube.force-ssl refresh token is required for autonomous replies."
+    "checked_at": "2026-10-05T04:16:38.180479+05:30",
+    "message": "Stored GitHub OAuth tokens do not grant youtube.force-ssl; automatic replies remain disabled."
+  },
+  "strategy": {
+    "updated_at": "2026-10-05T04:14:28.232399+05:30",
+    "mode": "explore",
+    "genre_scores": {},
+    "genre_weights": {},
+    "reason": "Waiting for enough YouTube Analytics evidence."
   }
 }

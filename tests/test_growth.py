@@ -53,11 +53,37 @@ class GrowthTests(unittest.TestCase):
             'YOUTUBE_FULL_REFRESH_TOKEN':'',
             'YOUTUBE_ANALYTICS_REFRESH_TOKEN':'',
             'YOUTUBE_COMMUNITY_REFRESH_TOKEN':'',
+            'YOUTUBE_REFRESH_TOKEN':'',
         }, clear=False):
             self.assertTrue(autonomy.refresh_analytics(data,self.now,force=True))
-            self.assertEqual(data['analytics_state']['status'],'awaiting_secret')
+            self.assertEqual(data['analytics_state']['status'],'awaiting_scope')
             self.assertTrue(autonomy.manage_community(data,self.now))
             self.assertEqual(data['community']['status'],'awaiting_scope')
+
+    def test_existing_cloud_token_can_supply_analytics_scope(self):
+        with patch.object(autonomy, '_access_token', return_value='access'), \
+             patch.object(autonomy, '_token_scopes', return_value={'https://www.googleapis.com/auth/youtube.readonly'}), \
+             patch.dict(os.environ, {
+                 'YOUTUBE_FULL_REFRESH_TOKEN':'',
+                 'YOUTUBE_ANALYTICS_REFRESH_TOKEN':'',
+                 'YOUTUBE_REFRESH_TOKEN':'existing-refresh',
+             }, clear=False):
+            credential=autonomy._credential(
+                {'https://www.googleapis.com/auth/youtube.readonly'},
+                [('existing-cloud-token',os.environ['YOUTUBE_REFRESH_TOKEN'])],
+            )
+        self.assertIsNotNone(credential)
+        self.assertEqual(credential[1],'existing-cloud-token')
+
+    def test_comment_reply_requires_force_ssl_scope(self):
+        with patch.object(autonomy, '_access_token', return_value='access'), \
+             patch.object(autonomy, '_token_scopes', return_value={'https://www.googleapis.com/auth/youtube.upload'}):
+            credential=autonomy._credential(
+                {'https://www.googleapis.com/auth/youtube.force-ssl'},
+                [('existing-cloud-token','refresh')],
+            )
+        self.assertIsNone(credential)
+
 
     def test_research_runs_at_most_daily(self):
         data={'research':{'checked_at':(self.now-timedelta(hours=23)).isoformat()}}
