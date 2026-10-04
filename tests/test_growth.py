@@ -75,6 +75,17 @@ class GrowthTests(unittest.TestCase):
         self.assertIsNotNone(credential)
         self.assertEqual(credential[1],'existing-cloud-token')
 
+    def test_separate_web_client_can_supply_force_ssl(self):
+        with patch.object(autonomy, '_access_token', return_value='access') as access, \
+             patch.object(autonomy, '_token_scopes', return_value={'https://www.googleapis.com/auth/youtube.force-ssl'}):
+            credential=autonomy._credential(
+                {'https://www.googleapis.com/auth/youtube.force-ssl'},
+                [('community-web-client','refresh','web-client-id','web-client-secret')],
+            )
+        self.assertIsNotNone(credential)
+        self.assertEqual(credential[1],'community-web-client')
+        access.assert_called_once_with('refresh','web-client-id','web-client-secret')
+
     def test_comment_reply_requires_force_ssl_scope(self):
         with patch.object(autonomy, '_access_token', return_value='access'), \
              patch.object(autonomy, '_token_scopes', return_value={'https://www.googleapis.com/auth/youtube.upload'}):
