@@ -682,3 +682,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+# Owner-requested single upload retry: 2026-10-04 17:11 IST.
