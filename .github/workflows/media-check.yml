@@ -92,4 +92,14 @@ jobs:
             exit 0
           fi
           git commit -m "Update Astra state and performance [skip ci]"
-          git push
+          # A code/doc push can land while this job is running. Rebase the
+          # state-only commit instead of failing with a non-fast-forward push.
+          for attempt in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "State push raced with a newer commit; rebasing (attempt $attempt/3)."
+            git pull --rebase origin "$GITHUB_REF_NAME"
+          done
+          echo "Could not persist Astra state after three attempts."
+          exit 1
