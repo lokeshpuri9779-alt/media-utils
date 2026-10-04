@@ -632,6 +632,12 @@ def main() -> None:
         print("READ-ONLY DIAGNOSTIC COMPLETE: no video generated, no upload attempted, no state modified.")
         print("Saved upload state:", json.dumps(state))
         return
+    probe_id = (os.environ.get("ASTRA_PROBE_ID") or "").strip()
+    if probe_id:
+        if state.get("last_probe_id") == probe_id:
+            print("This controlled upload probe was already reserved; refusing a duplicate attempt.")
+            return
+        state["last_probe_id"] = probe_id
     save_state(state)
     refresh_performance()
 
@@ -656,6 +662,7 @@ def main() -> None:
         status, url = upload(video, title, desc, token=token)
         state["attempts"] = int(state.get("attempts", 0)) + 1
         if status == "success":
+            state["limit_hit"] = False
             state["successes"] = int(state.get("successes", 0)) + 1
             print("Published:", url)
             video_id = url.rsplit("=", 1)[-1] if "=" in url else ""
