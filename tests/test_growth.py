@@ -1,4 +1,5 @@
 import copy
+import os
 from datetime import datetime,timedelta
 from zoneinfo import ZoneInfo
 from unittest.mock import patch,MagicMock
@@ -8,6 +9,8 @@ import audience_research as research
 import longform
 import studio_renderer as studio
 import cloud_once as cloud
+import autonomy
+import longform_challenges
 
 
 class GrowthTests(unittest.TestCase):
@@ -16,11 +19,45 @@ class GrowthTests(unittest.TestCase):
     def test_long_schedule_and_duplicate_guard(self):
         self.assertIsNone(longform.choose_episode({'videos':{}},self.now.replace(hour=18)))
         self.assertEqual(longform.choose_episode({'videos':{}},self.now),longform.EPISODE_ID)
-        self.assertIsNone(longform.choose_episode({'videos':{'a':{'content_id':longform.EPISODE_ID}}},self.now))
+        old_planet={'content_id':longform.EPISODE_ID,'format':'long',
+                    'published_at':(self.now-timedelta(days=8)).isoformat()}
+        weekly=longform.choose_episode({'videos':{'a':old_planet}},self.now)
+        self.assertTrue(weekly.startswith('brain-arena-'))
+        duplicate={'content_id':weekly,'format':'long',
+                   'published_at':(self.now-timedelta(days=8)).isoformat()}
+        self.assertIsNone(longform.choose_episode({'videos':{'a':old_planet,'b':duplicate}},self.now))
         recent={'format':'long','published_at':(self.now-timedelta(days=6)).isoformat()}
         self.assertIsNone(longform.choose_episode({'videos':{'a':recent}},self.now))
-        recent['published_at']=(self.now-timedelta(days=8)).isoformat()
-        self.assertIsNotNone(longform.choose_episode({'videos':{'a':recent}},self.now))
+
+    def test_analytics_strategy_prefers_retention_evidence(self):
+        data={'videos':{
+            'a':{'genre':'space','format':'short','analytics':{'views':1000,'averageViewPercentage':92,'likes':70,'shares':25,'subscribersGained':12}},
+            'b':{'genre':'tech','format':'short','analytics':{'views':1000,'averageViewPercentage':48,'likes':20,'shares':2,'subscribersGained':1}},
+        }}
+        strategy=autonomy._strategy(data,self.now)
+        self.assertEqual(strategy['winner'],'space')
+        data['strategy']=strategy
+        with patch.object(autonomy.random,'random',return_value=0.0):
+            self.assertEqual(autonomy.strategy_genre(data,{'space','tech'}),'space')
+
+    def test_weekly_long_challenges_are_fresh_and_unique(self):
+        a=longform_challenges._challenge_bank('brain-arena-2026-W41')
+        b=longform_challenges._challenge_bank('brain-arena-2026-W42')
+        self.assertEqual(len(a),20)
+        self.assertEqual(len({x['question']+'|'+x['answer'] for x in a}),len(a))
+        self.assertNotEqual(a,b)
+
+    def test_optional_owner_permissions_never_block_production(self):
+        data={}
+        with patch.dict(os.environ, {
+            'YOUTUBE_FULL_REFRESH_TOKEN':'',
+            'YOUTUBE_ANALYTICS_REFRESH_TOKEN':'',
+            'YOUTUBE_COMMUNITY_REFRESH_TOKEN':'',
+        }, clear=False):
+            self.assertTrue(autonomy.refresh_analytics(data,self.now,force=True))
+            self.assertEqual(data['analytics_state']['status'],'awaiting_secret')
+            self.assertTrue(autonomy.manage_community(data,self.now))
+            self.assertEqual(data['community']['status'],'awaiting_scope')
 
     def test_research_runs_at_most_daily(self):
         data={'research':{'checked_at':(self.now-timedelta(hours=23)).isoformat()}}
