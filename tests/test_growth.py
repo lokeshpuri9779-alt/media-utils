@@ -1,4 +1,5 @@
 import copy
+import os
 from datetime import datetime,timedelta
 from zoneinfo import ZoneInfo
 from unittest.mock import patch,MagicMock
@@ -45,6 +46,18 @@ class GrowthTests(unittest.TestCase):
         self.assertEqual(len(a),20)
         self.assertEqual(len({x['question']+'|'+x['answer'] for x in a}),len(a))
         self.assertNotEqual(a,b)
+
+    def test_optional_owner_permissions_never_block_production(self):
+        data={}
+        with patch.dict(os.environ, {
+            'YOUTUBE_FULL_REFRESH_TOKEN':'',
+            'YOUTUBE_ANALYTICS_REFRESH_TOKEN':'',
+            'YOUTUBE_COMMUNITY_REFRESH_TOKEN':'',
+        }, clear=False):
+            self.assertTrue(autonomy.refresh_analytics(data,self.now,force=True))
+            self.assertEqual(data['analytics_state']['status'],'awaiting_secret')
+            self.assertTrue(autonomy.manage_community(data,self.now))
+            self.assertEqual(data['community']['status'],'awaiting_scope')
 
     def test_research_runs_at_most_daily(self):
         data={'research':{'checked_at':(self.now-timedelta(hours=23)).isoformat()}}
