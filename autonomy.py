@@ -14,9 +14,10 @@ YOUTUBE_API = "https://www.googleapis.com/youtube/v3/"
 IST_NAME = "Asia/Kolkata"
 
 
-def _access_token(refresh_token: str) -> str:
-    client_id = (os.environ.get("YOUTUBE_CLIENT_ID") or "").strip()
-    client_secret = (os.environ.get("YOUTUBE_CLIENT_SECRET") or "").strip()
+def _access_token(refresh_token: str, client_id: str | None = None,
+                  client_secret: str | None = None) -> str:
+    client_id = (client_id or os.environ.get("YOUTUBE_CLIENT_ID") or "").strip()
+    client_secret = (client_secret or os.environ.get("YOUTUBE_CLIENT_SECRET") or "").strip()
     if not client_id or not client_secret or not refresh_token:
         raise RuntimeError("Missing OAuth credentials")
     with httpx.Client(timeout=30) as client:
@@ -40,18 +41,28 @@ def _token_scopes(access_token: str) -> set[str]:
     return {s for s in str(value).split() if s}
 
 
-def _credential(required_any: set[str], candidates: list[tuple[str, str]]) -> tuple[str, str, set[str]] | None:
-    """Use the first stored refresh token whose access token has a required scope."""
+def _credential(required_any: set[str], candidates) -> tuple[str, str, set[str]] | None:
+    """Use the first stored OAuth credential whose access token has a required scope.
+
+    Candidate items may be (source, refresh_token) or
+    (source, refresh_token, client_id, client_secret). This lets Astra keep a
+    separate browser-created Web OAuth client for community replies without
+    touching the working upload client.
+    """
     seen = set()
-    for source, refresh_token in candidates:
+    for candidate in candidates:
+        source, refresh_token = candidate[:2]
+        client_id = candidate[2] if len(candidate) > 2 else None
+        client_secret = candidate[3] if len(candidate) > 3 else None
         refresh_token = (refresh_token or "").strip()
-        if not refresh_token or refresh_token in seen:
+        fingerprint = (refresh_token, client_id or "", client_secret or "")
+        if not refresh_token or fingerprint in seen:
             continue
-        seen.add(refresh_token)
+        seen.add(fingerprint)
         try:
-            token = _access_token(refresh_token)
+            token = _access_token(refresh_token, client_id, client_secret)
             scopes = _token_scopes(token)
-        except httpx.HTTPError:
+        except (httpx.HTTPError, RuntimeError):
             continue
         if scopes.intersection(required_any):
             return token, source, scopes
@@ -308,6 +319,12 @@ def manage_community(data: dict, now: datetime) -> bool:
     credential = _credential(
         {"https://www.googleapis.com/auth/youtube.force-ssl"},
         [
+            (
+                "community-web-client",
+                os.environ.get("YOUTUBE_COMMUNITY_REFRESH_TOKEN") or "",
+                os.environ.get("YOUTUBE_COMMUNITY_CLIENT_ID") or "",
+                os.environ.get("YOUTUBE_COMMUNITY_CLIENT_SECRET") or "",
+            ),
             ("full", os.environ.get("YOUTUBE_FULL_REFRESH_TOKEN") or ""),
             ("community", os.environ.get("YOUTUBE_COMMUNITY_REFRESH_TOKEN") or ""),
             ("existing-cloud-token", os.environ.get("YOUTUBE_REFRESH_TOKEN") or ""),
