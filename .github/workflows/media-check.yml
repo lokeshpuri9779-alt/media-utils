@@ -28,7 +28,8 @@ jobs:
       YOUTUBE_PRIVACY: public
       ASTRA_INITIAL_DAILY_TARGET: '9'
       ASTRA_MAX_DAILY_TARGET: '24'
-      ASTRA_FORCE_RUN: ${{ github.event_name == 'workflow_dispatch' && '1' || '0' }}
+      ASTRA_FORCE_RUN: ${{ (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[upload-probe]'))) && '1' || '0' }}
+      ASTRA_PROBE_ID: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[upload-probe]') && github.sha || '' }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -41,13 +42,13 @@ jobs:
         run: pip install -r requirements.txt
       - name: run
         run: |
-          if [ "${{ github.event_name }}" = "push" ]; then
+          if [ "${{ github.event_name }}" = "push" ] && [ "$ASTRA_FORCE_RUN" != "1" ]; then
             python cloud_once.py --diagnose
           else
             python cloud_once.py
           fi
       - name: save adaptive state
-        if: github.event_name != 'push'
+        if: always() && (github.event_name != 'push' || env.ASTRA_FORCE_RUN == '1')
         shell: bash
         run: |
           if [ -z "$(git status --porcelain -- quota_state.json performance.json SHORTS.md)" ]; then
