@@ -194,6 +194,7 @@ def refresh_analytics(data: dict, now: datetime, force: bool = False) -> bool:
         })
         return True
     token, credential_source, granted_scopes = credential
+    state.pop("message", None)
 
     eligible = []
     for vid, entry in data.get("videos", {}).items():
@@ -320,6 +321,7 @@ def manage_community(data: dict, now: datetime) -> bool:
         })
         return True
     token, credential_source, granted_scopes = credential
+    state.pop("message", None)
 
     day = now.date().isoformat()
     if state.get("reply_day") != day:
