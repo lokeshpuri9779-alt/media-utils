@@ -69,10 +69,16 @@
           "views": 7,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-05T04:59:51.490849+05:30",
+          "views": 7,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "latest": {
-        "at": "2026-10-05T04:27:22.648287+05:30",
+        "at": "2026-10-05T04:59:51.490849+05:30",
         "views": 7,
         "likes": 0,
         "comments": 0
@@ -141,6 +147,12 @@
           "views": 11,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-05T04:59:51.490849+05:30",
+          "views": 11,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "football",
@@ -153,11 +165,27 @@
       "voice": "Kokoro af_heart",
       "scene_count": 3,
       "latest": {
-        "at": "2026-10-05T04:27:22.648287+05:30",
+        "at": "2026-10-05T04:59:51.490849+05:30",
         "views": 11,
         "likes": 0,
         "comments": 0
       }
+    },
+    "isSfh7Sz7sI": {
+      "title": "Capture part of your Windows screen #Shorts",
+      "published_at": "2026-10-05T05:00:09.352218+05:30",
+      "history": [],
+      "genre": "tech",
+      "content_id": "screenshot",
+      "source": "https://support.microsoft.com/en-us/accessibility/windows/keyboard-shortcuts-in-windows",
+      "trend_matches": [],
+      "selection_reason": "explore under-tested genre",
+      "format": "short",
+      "renderer": "studio-1.1",
+      "duration": 12.067,
+      "voice": "Kokoro af_heart",
+      "scene_count": 4,
+      "visibility": "public"
     }
   },
   "research": {
@@ -733,9 +761,13 @@
     "failures": []
   },
   "community": {
-    "status": "awaiting_scope",
-    "checked_at": "2026-10-05T04:27:22.654703+05:30",
-    "message": "Stored GitHub OAuth tokens do not grant youtube.force-ssl; automatic replies remain disabled."
+    "status": "active",
+    "checked_at": "2026-10-05T04:59:51.526446+05:30",
+    "reply_day": "2026-10-05",
+    "replies_today": 0,
+    "credential_source": "community-web-client",
+    "processed_comment_ids": [],
+    "failures": []
   },
   "strategy": {
     "updated_at": "2026-10-05T04:14:28.232399+05:30",
