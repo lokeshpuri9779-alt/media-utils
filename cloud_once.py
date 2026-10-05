@@ -17,7 +17,20 @@ STATE_PATH = Path("quota_state.json")
 IST = ZoneInfo("Asia/Kolkata")
 INITIAL_TARGET = int(os.environ.get("ASTRA_INITIAL_DAILY_TARGET", "9"))
 MAX_TARGET = int(os.environ.get("ASTRA_MAX_DAILY_TARGET", "24"))
-EXPECTED_CHANNEL_ID = "UCc9fHSuRnqq_C2C0DpLyRRg"
+CHANNELS_PATH = Path("channels.json")
+
+def channel_profile() -> dict:
+    key = (os.environ.get("ASTRA_CHANNEL") or "rayvan").strip().lower()
+    data = json.loads(CHANNELS_PATH.read_text(encoding="utf-8"))
+    profile = (data.get("channels") or {}).get(key)
+    if not profile:
+        raise RuntimeError(f"Unknown ASTRA_CHANNEL profile: {key}")
+    if not profile.get("publish_enabled", False):
+        raise RuntimeError(f"Publishing disabled for channel profile: {key}")
+    return profile
+
+def expected_channel_id() -> str:
+    return str(channel_profile()["expected_channel_id"])
 LAST_API_ERROR: dict | None = None
 
 
