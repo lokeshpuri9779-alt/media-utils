@@ -50,8 +50,17 @@ def score_candidate(c: dict, *, trend_matches=None, channel_score=None) -> dict:
         "weights":{"structural":.50,"live_demand":.30,"channel_or_exploration":.20},
     }
 
-def rank_candidates(candidates: list[dict], genre_scores: dict|None=None) -> list[dict]:
+def calibration_weight(data: dict) -> float:
+    """Increase reliance on channel evidence only after enough clean samples exist."""
+    strategy=(data or {}).get("strategy") or {}
+    evidence=strategy.get("evidence") or {}
+    clean=sum(max(0,int(v)) for v in evidence.values())
+    # 0 samples => 0; 30+ qualifying videos => full channel calibration.
+    return min(1.0, clean/30.0)
+
+def rank_candidates(candidates: list[dict], genre_scores: dict|None=None, data: dict|None=None) -> list[dict]:
     genre_scores=genre_scores or {}
+    calibration=calibration_weight(data or {})
     ranked=[]
     for c in candidates:
         x=dict(c)
@@ -59,5 +68,10 @@ def rank_candidates(candidates: list[dict], genre_scores: dict|None=None) -> lis
         # Analytics scores are not naturally 0-100; gently normalize when present.
         channel=None if raw is None else _clip(50 + 12*math.log1p(max(0,float(raw))))
         x["prior_score"]=score_candidate(x, channel_score=channel)
+        # Do not let tiny samples dominate. Channel adjustment ramps in gradually.
+        if channel is not None:
+            base=x["prior_score"]["total"]
+            x["prior_score"]["total"]=round(_clip(base + calibration*(channel-50)*.20),2)
+        x["prior_score"]["calibration_weight"]=round(calibration,3)
         ranked.append(x)
     return sorted(ranked, key=lambda x:x["prior_score"]["total"], reverse=True)
