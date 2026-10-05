@@ -722,14 +722,23 @@ def main() -> None:
             record_video(video_id, title)
             if CONTENT_META.get("format") == "long":
                 set_thumbnail(video_id, video.with_suffix(".jpg"), token)
+            from ops_guardian import healthy
+            healthy()
         elif status == "limit":
             state["limit_hit"] = True
             state["last_api_error"] = LAST_API_ERROR
-            print("YouTube API upload limit reported. Recorded today's ceiling and stopped further scheduled probes for today.")
-    except Exception:
+            from ops_guardian import record_event
+            record_event("quota_pause", {"stage": "upload", "reason": "uploadLimitExceeded"})
+            print("YouTube API upload limit reported. Guardian paused further scheduled probes for today.")
+    except Exception as exc:
         state["attempts"] = int(state.get("attempts", 0)) + 1
         state["other_failures"] = int(state.get("other_failures", 0)) + 1
         if LAST_API_ERROR is not None: state["last_api_error"] = LAST_API_ERROR
+        from ops_guardian import classify, record_event
+        kind = classify(LAST_API_ERROR, type(exc).__name__)
+        ops = record_event(kind, {"exception_type": type(exc).__name__, "api_stage": (LAST_API_ERROR or {}).get("stage")})
+        state["ops_status"] = ops.get("status")
+        state["human_action_required"] = ops.get("human_action_required")
         save_state(state)
         raise
 
