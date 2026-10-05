@@ -1,5 +1,5 @@
 import unittest
-from viral_prior import score_candidate, rank_candidates
+from viral_prior import score_candidate, rank_candidates, calibration_weight
 
 class ViralPriorTests(unittest.TestCase):
     def test_scores_are_bounded(self):
@@ -11,6 +11,11 @@ class ViralPriorTests(unittest.TestCase):
         a=score_candidate(c,trend_matches=[])["total"]
         b=score_candidate(c,trend_matches=[{"title":"x"},{"title":"y"}])["total"]
         self.assertGreater(b,a)
+
+    def test_calibration_requires_evidence(self):
+        self.assertEqual(calibration_weight({}),0)
+        self.assertAlmostEqual(calibration_weight({"strategy":{"evidence":{"tech":3,"space":2}}}),5/30)
+        self.assertEqual(calibration_weight({"strategy":{"evidence":{"tech":40}}}),1)
 
     def test_rank(self):
         rows=[
