@@ -108,3 +108,55 @@ def distribution_state(data: dict) -> dict:
 def best_internal_sources(data: dict, limit: int = 3) -> list[str]:
     state = distribution_state(data)
     return [x["source"] for x in state["ranked_sources"] if x["youtube_internal"]][:limit]
+
+
+def packaging_plan(data: dict, genre: str, fmt: str) -> dict:
+    """Choose conservative packaging/routing hints from measured distribution."""
+    state = distribution_state(data)
+    top = best_internal_sources(data, limit=3)
+    upper = " ".join(top).upper()
+    hints = []
+    if "YT_SEARCH" in upper:
+        hints.append("search_clear_title")
+    if "RELATED_VIDEO" in upper or "BROWSE" in upper:
+        hints.append("curiosity_title")
+    if "SHORTS" in upper:
+        hints.append("first_second_hook")
+    if not hints:
+        hints = ["clear_title", "strong_hook"]
+    return {
+        "mode": state["mode"],
+        "genre": genre,
+        "format": fmt,
+        "top_internal_sources": top,
+        "packaging_hints": hints,
+        "brand": "RAYVAN",
+        "tagline": "Stories Beyond the Ordinary.",
+    }
+
+
+def related_video(data: dict, *, genre: str, target_format: str) -> str | None:
+    """Return the newest public, non-excluded same-genre video in target format."""
+    candidates = []
+    for vid, entry in data.get("videos", {}).items():
+        if entry.get("learning_excluded") or entry.get("visibility") != "public":
+            continue
+        if entry.get("genre") != genre or entry.get("format") != target_format:
+            continue
+        candidates.append((str(entry.get("published_at") or ""), vid))
+    return max(candidates)[1] if candidates else None
+
+
+def branded_description(description: str, data: dict, *, genre: str, fmt: str) -> tuple[str, dict]:
+    """Add RAYVAN identity and measured internal routing to a fresh upload."""
+    plan = packaging_plan(data, genre, fmt)
+    target = "long" if fmt == "short" else "short"
+    related = related_video(data, genre=genre, target_format=target)
+    text = description.rstrip()
+    if related and ("youtube.com/watch?v=" + related) not in text:
+        label = "Watch the full RAYVAN story" if fmt == "short" else "Watch the related RAYVAN Short"
+        text += "\n" + label + ": https://www.youtube.com/watch?v=" + related
+    if "RAYVAN" not in text:
+        text += "\n\nRAYVAN — Stories Beyond the Ordinary."
+    plan["related_video_id"] = related
+    return text, plan
