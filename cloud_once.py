@@ -383,24 +383,27 @@ def choose_content(data, trends, now=None):
         if diverse: candidates = diverse
     for c in candidates:
         c['trend_matches'] = [t for t in trends if any(re.search(r'\b'+re.escape(k)+r'\b', t['title'], re.I) for k in c['keywords'])][:3]
-    roll = random.random()
-    trending = [c for c in candidates if c['trend_matches']]
-    try:
-        from autonomy import strategy_genre
-        analytics_pick = strategy_genre(data, {c['genre'] for c in candidates}, now=now)
-    except Exception:
-        analytics_pick = None
-    if roll < .35 and analytics_pick:
-        pool = [c for c in candidates if c['genre'] == analytics_pick]
-        reason = 'private retention/engagement analytics'
-    elif roll < .55 and trending:
-        pool, reason = trending, 'fresh search-interest match'
-    else:
-        counts = {g: sum(v.get('genre', 'challenge')==g for v in videos.values()) for g in {c['genre'] for c in candidates}}
+    # Stage 0: rank concepts before rendering. With little clean channel evidence,
+    # use structural priors + live demand; as analytics mature, genre evidence joins scoring.
+    from viral_prior import rank_candidates
+    strategy = data.get('strategy') or {}
+    ranked = rank_candidates(candidates, strategy.get('genre_scores') or {})
+    if not ranked:
+        raise RuntimeError('Stage-0 scorer produced no candidates.')
+    # Mostly exploit the best concepts, while preserving a small exploration lane.
+    explore = random.random() < .20 and len(ranked) > 3
+    if explore:
+        counts = {g: sum(v.get('genre', 'challenge')==g for v in videos.values()) for g in {c['genre'] for c in ranked}}
         minimum = min(counts.values())
-        pool, reason = [c for c in candidates if counts[c['genre']]==minimum], 'explore under-tested genre'
-    selected = dict(random.choice(pool))
+        pool = [c for c in ranked if counts[c['genre']] == minimum][:3] or ranked[:3]
+        selected = dict(random.choice(pool))
+        reason = 'stage0 exploration'
+    else:
+        selected = dict(random.choice(ranked[:min(3, len(ranked))]))
+        reason = 'stage0 viral-prior ranking'
     selected['selection_reason'] = reason
+    selected['stage0_rank'] = next((i+1 for i,c in enumerate(ranked) if c['content_id']==selected['content_id']), None)
+    selected['stage0_score'] = selected.get('prior_score', {})
     return selected
 
 def select_content():
@@ -409,7 +412,7 @@ def select_content():
     data = load_performance()
     trends = fetch_trends() + research_signals(data, datetime.now(IST))
     ch = choose_content(data, trends)
-    CONTENT_META = {k:ch.get(k) for k in ('genre','content_id','source','trend_matches','selection_reason')}
+    CONTENT_META = {k:ch.get(k) for k in ('genre','content_id','source','trend_matches','selection_reason','stage0_rank','stage0_score')}
     print('Content decision:', json.dumps(CONTENT_META, ensure_ascii=False))
     return ch
 
