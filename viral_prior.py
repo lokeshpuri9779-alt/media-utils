@@ -75,3 +75,28 @@ def rank_candidates(candidates: list[dict], genre_scores: dict|None=None, data: 
         x["prior_score"]["calibration_weight"]=round(calibration,3)
         ranked.append(x)
     return sorted(ranked, key=lambda x:x["prior_score"]["total"], reverse=True)
+
+
+def adaptive_exploration(data: dict) -> float:
+    """Bounded exploration schedule: learn broadly early, exploit more as evidence grows."""
+    c=calibration_weight(data or {})
+    # 25% at cold start -> 10% with mature clean evidence.
+    return round(max(.10, min(.25, .25 - .15*c)), 3)
+
+def policy_snapshot(data: dict) -> dict:
+    c=calibration_weight(data or {})
+    strategy=(data or {}).get("strategy") or {}
+    return {
+        "version": 1,
+        "calibration_weight": round(c,3),
+        "exploration_rate": adaptive_exploration(data or {}),
+        "winner": strategy.get("winner"),
+        "genre_scores": strategy.get("genre_scores") or {},
+        "evidence": strategy.get("evidence") or {},
+        "guardrails": {
+            "min_exploration": .10,
+            "max_exploration": .25,
+            "arbitrary_code_rewrite": False,
+            "platform_rule_bypass": False,
+        },
+    }
