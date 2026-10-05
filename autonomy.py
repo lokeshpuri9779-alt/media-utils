@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 import math
+import json
+from pathlib import Path
+from zoneinfo import ZoneInfo
 import os
 import random
 import re
@@ -12,6 +15,33 @@ TOKEN_URL = "https://oauth2.googleapis.com/token"
 ANALYTICS_URL = "https://youtubeanalytics.googleapis.com/v2/reports"
 YOUTUBE_API = "https://www.googleapis.com/youtube/v3/"
 IST_NAME = "Asia/Kolkata"
+
+
+POLICY_PATH = Path(__file__).with_name("learning_policy.json")
+ANALYTICS_SCHEMA = 2
+EXPECTED_CHANNEL_ID = "UCc9fHSuRnqq_C2C0DpLyRRg"
+REPORT_TZ = ZoneInfo("America/Los_Angeles")
+
+
+def learning_exclusions() -> set[str]:
+    # Fail closed: missing/malformed policy must not reactivate contaminated data.
+    policy = json.loads(POLICY_PATH.read_text(encoding="utf-8"))
+    return set(policy["excluded_video_ids"])
+
+
+def _report_rows(report: dict) -> list[dict]:
+    headers = [h.get("name") for h in report.get("columnHeaders", [])]
+    return [dict(zip(headers, row)) for row in report.get("rows") or []]
+
+
+def _report_error(exc: Exception) -> dict:
+    # Never persist exception strings, request URLs, headers or tokens.
+    result = {"status": "error", "error_type": type(exc).__name__}
+    if isinstance(exc, httpx.HTTPStatusError):
+        code = exc.response.status_code
+        result["http_status"] = code
+        result["status"] = "permission_error" if code in (401, 403) else "error"
+    return result
 
 
 def _access_token(refresh_token: str, client_id: str | None = None,
@@ -73,7 +103,7 @@ def _query_analytics(token: str, *, start_date: str, end_date: str,
                      metrics: str, filters: str | None = None,
                      dimensions: str | None = None) -> dict:
     params = {
-        "ids": "channel==MINE",
+        "ids": "channel==" + EXPECTED_CHANNEL_ID,
         "startDate": start_date,
         "endDate": end_date,
         "metrics": metrics,
@@ -119,10 +149,25 @@ def _retention_summary(report: dict) -> dict:
 def _strategy(data: dict, now: datetime) -> dict:
     grouped: dict[str, list[float]] = {}
     evidence: dict[str, int] = {}
-    for entry in data.get("videos", {}).values():
-        if entry.get("format") == "long":
+    excluded = learning_exclusions()
+    for vid, entry in data.get("videos", {}).items():
+        if vid in excluded or entry.get("format") == "long":
             continue
         a = entry.get("analytics") or {}
+        reports = entry.get("analytics_reports") or {}
+        traffic = reports.get("traffic_sources") or {}
+        if (reports.get("basic", {}).get("status") != "available"
+                or traffic.get("status") != "available"):
+            continue
+        try:
+            if now - datetime.fromisoformat(a["refreshed_at"]) > timedelta(days=2):
+                continue
+        except (KeyError, ValueError, TypeError):
+            continue
+        # Attribution is not viewer identity; it does not identify owner views.
+        attributed = sum(float(r.get("views") or 0) for r in traffic.get("rows", []))
+        if attributed < 25:
+            continue
         views = float(a.get("views") or 0)
         avg = float(a.get("averageViewPercentage") or 0)
         if views < 25 or avg <= 0:
@@ -141,6 +186,8 @@ def _strategy(data: dict, now: datetime) -> dict:
 
     scores = {}
     for genre, values in grouped.items():
+        if len(values) < 3:
+            continue
         values = sorted(values)
         mid = len(values) // 2
         median = values[mid] if len(values) % 2 else (values[mid - 1] + values[mid]) / 2
@@ -153,7 +200,8 @@ def _strategy(data: dict, now: datetime) -> dict:
             "mode": "explore",
             "genre_scores": {},
             "genre_weights": {},
-            "reason": "Waiting for enough YouTube Analytics evidence.",
+            "excluded_video_count": len(excluded),
+            "reason": "Waiting for fresh retention and traffic-source data on three non-excluded videos per genre.",
         }
 
     floor = max(1.0, min(scores.values()) * .35)
@@ -167,30 +215,71 @@ def _strategy(data: dict, now: datetime) -> dict:
         "genre_weights": weights,
         "evidence": evidence,
         "winner": max(scores, key=scores.get),
-        "reason": "Retention-first score with bounded like/share/subscriber signals.",
+        "excluded_video_count": len(excluded),
+        "reason": "Retention and traffic-source evidence; owner-reported test videos excluded. Viewer identity is unknown.",
     }
 
 
 def refresh_analytics(data: dict, now: datetime, force: bool = False) -> bool:
-    """Refresh private owner analytics when the separate analytics refresh token is installed.
-
-    Missing permission is non-fatal: production/uploading continues.
-    """
+    """Collect measured reports; never equate token presence or empty rows with data."""
     state = data.setdefault("analytics_state", {})
-
     try:
         last = datetime.fromisoformat(state.get("checked_at", ""))
-        if (state.get("status") in {"active", "partial"} and not force
-                and now - last < timedelta(hours=12)):
+        interval = 12 if state.get("status") == "active" else 4
+        if (state.get("schema_version") == ANALYTICS_SCHEMA and not force
+                and now - last < timedelta(hours=interval)):
             return False
     except (ValueError, TypeError):
         pass
 
-    credential = _credential(
-        {
-            "https://www.googleapis.com/auth/youtube.readonly",
-            "https://www.googleapis.com/auth/yt-analytics.readonly",
+    # A new evaluation invalidates any cached winner before attempting network I/O.
+    data["strategy"] = _strategy(data, now)
+    excluded = learning_exclusions()
+    state.clear()
+    state.update({
+        "schema_version": ANALYTICS_SCHEMA,
+        "status": "awaiting_data",
+        "checked_at": now.isoformat(),
+        "videos_updated": 0,
+        "eligible_videos": 0,
+        "queries_attempted": 0,
+        "queries_succeeded": 0,
+        "failures": [],
+        "excluded_video_count": len(excluded),
+        "owner_views_identifiable": False,
+        "impressions": {
+            "status": "separate_collector",
+            "state_key": "reach_state",
+            "value": None, "ctr": None,
+            "reason": "Collected separately by reach_reports.py using channel_reach_basic_a1. See reach_state; never substitute ad/card impressions.",
         },
+    })
+
+    # YouTube report dates use Pacific time; exclude its still-incomplete current day.
+    end = now.astimezone(REPORT_TZ).date() - timedelta(days=1)
+    eligible = []
+    for vid, entry in data.get("videos", {}).items():
+        try:
+            published = datetime.fromisoformat(entry["published_at"]).astimezone(REPORT_TZ)
+        except (KeyError, TypeError, ValueError):
+            continue
+        if published.date() <= end:
+            eligible.append((published, vid, entry))
+    # Rotate older videos too; a high daily upload rate must not starve their reports.
+    eligible.sort(key=lambda row: row[2].get("analytics_reports", {}).get("checked_at", ""))
+    eligible = eligible[:12]
+    state["eligible_videos"] = len(eligible)
+    state["report_timezone"] = "America/Los_Angeles"
+    state["window_end"] = end.isoformat()
+    if not eligible:
+        state["status"] = "awaiting_eligible_videos"
+        state["message"] = "No tracked video belongs to a completed YouTube reporting day."
+        print("Private analytics:", state["status"], "| no report requested")
+        return True
+
+    credential = _credential(
+        {"https://www.googleapis.com/auth/youtube.readonly",
+         "https://www.googleapis.com/auth/yt-analytics.readonly"},
         [
             ("full", os.environ.get("YOUTUBE_FULL_REFRESH_TOKEN") or ""),
             ("analytics", os.environ.get("YOUTUBE_ANALYTICS_REFRESH_TOKEN") or ""),
@@ -198,90 +287,85 @@ def refresh_analytics(data: dict, now: datetime, force: bool = False) -> bool:
         ],
     )
     if not credential:
-        state.update({
-            "status": "awaiting_scope",
-            "checked_at": now.isoformat(),
-            "message": "Stored GitHub OAuth tokens do not currently grant YouTube Analytics read access.",
-        })
+        state["status"] = "awaiting_scope"
+        state["message"] = "No stored credential with a candidate read scope; no Analytics report was validated."
         return True
-    token, credential_source, granted_scopes = credential
-    state.pop("message", None)
-
-    eligible = []
-    for vid, entry in data.get("videos", {}).items():
-        try:
-            published = datetime.fromisoformat(entry["published_at"])
-        except (KeyError, TypeError, ValueError):
-            continue
-        if now - published >= timedelta(days=1):
-            eligible.append((published, vid, entry))
-    eligible.sort(reverse=True)
-    eligible = eligible[:12]
-
-    end = (now - timedelta(days=1)).date()
+    token, source, scopes = credential
+    state["credential_source"] = source
+    state["granted_scope_classes"] = sorted({
+        "analytics" if "analytics" in x else
+        "youtube-read" if x.endswith("/youtube.readonly") else "other"
+        for x in scopes
+    })
+    metrics = "views,estimatedMinutesWatched,averageViewDuration,averageViewPercentage,subscribersGained,subscribersLost,likes,comments,shares"
     updated = 0
     failures = []
-    metrics = "views,estimatedMinutesWatched,averageViewDuration,averageViewPercentage,subscribersGained,subscribersLost,likes,comments,shares"
-    for published, vid, entry in eligible:
+    for index, (published, vid, entry) in enumerate(eligible):
         start = max(published.date(), end - timedelta(days=28))
-        if start > end:
-            continue
-        try:
-            report = _query_analytics(
-                token, start_date=start.isoformat(), end_date=end.isoformat(),
-                metrics=metrics, filters="video==" + vid,
-            )
-            row = _row_dict(report)
-            if row:
-                entry["analytics"] = {
-                    **row,
-                    "window_start": start.isoformat(),
-                    "window_end": end.isoformat(),
-                    "refreshed_at": now.isoformat(),
-                }
-                updated += 1
-        except (httpx.HTTPError, ValueError, TypeError) as exc:
-            failures.append(f"{vid}:{type(exc).__name__}")
+        window = {"window_start": start.isoformat(), "window_end": end.isoformat(),
+                  "checked_at": now.isoformat()}
+        reports = dict(window)
+        entry["analytics_reports"] = reports
+        entry["learning_excluded"] = vid in excluded
+        requests = [
+            ("basic", metrics, None),
+            ("traffic_sources", "views,estimatedMinutesWatched", "insightTrafficSourceType"),
+        ]
+        if index < 3:
+            requests.append(("retention", "audienceWatchRatio,relativeRetentionPerformance", "elapsedVideoTimeRatio"))
+        else:
+            reports["retention"] = {"status": "not_sampled"}
+        for name, query_metrics, dimension in requests:
+            state["queries_attempted"] += 1
+            try:
+                report = _query_analytics(
+                    token, start_date=start.isoformat(), end_date=end.isoformat(),
+                    metrics=query_metrics, dimensions=dimension, filters="video==" + vid,
+                )
+                rows = _report_rows(report)
+                state["queries_succeeded"] += 1
+                reports[name] = {**window, "status": "available" if rows else "awaiting_data"}
+                if name == "basic":
+                    if rows:
+                        entry["analytics"] = {**rows[0], **window, "refreshed_at": now.isoformat()}
+                        updated += 1
+                    else:
+                        entry.pop("analytics", None)
+                elif name == "traffic_sources":
+                    reports[name]["rows"] = rows
+                    reports[name]["owner_views_identifiable"] = False
+                else:
+                    reports[name]["summary"] = _retention_summary(report)
+            except (httpx.HTTPError, ValueError, TypeError) as exc:
+                error = _report_error(exc)
+                reports[name] = {**window, **error}
+                failures.append({"video_id": vid, "report": name, **error})
+                if name == "basic":
+                    entry.pop("analytics", None)
 
-    # Retention curves are more expensive/noisy, so sample only the three newest eligible videos.
-    for _, vid, entry in eligible[:3]:
-        try:
-            published = datetime.fromisoformat(entry["published_at"]).date()
-            start = max(published, end - timedelta(days=28))
-            report = _query_analytics(
-                token, start_date=start.isoformat(), end_date=end.isoformat(),
-                metrics="audienceWatchRatio,relativeRetentionPerformance",
-                dimensions="elapsedVideoTimeRatio", filters="video==" + vid,
-            )
-            summary = _retention_summary(report)
-            if summary:
-                entry.setdefault("analytics", {})["retention"] = summary
-        except (httpx.HTTPError, ValueError, TypeError) as exc:
-            failures.append(f"retention:{vid}:{type(exc).__name__}")
-
+    state["videos_updated"] = updated
+    state["failures"] = failures
+    all_reports = [r for _, _, entry in eligible
+                   for name, r in entry["analytics_reports"].items()
+                   if name in {"basic", "traffic_sources", "retention"} and r["status"] != "not_sampled"]
+    if failures:
+        state["status"] = "partial" if state["queries_succeeded"] else "error"
+    elif all_reports and all(r["status"] == "available" for r in all_reports):
+        state["status"] = "active"
+    else:
+        state["status"] = "awaiting_data"
+    state["message"] = "Report data may lag; empty reports are unknown, not zero audience."
     data["strategy"] = _strategy(data, now)
-    state.update({
-        "status": "active" if not failures else "partial",
-        "checked_at": now.isoformat(),
-        "videos_updated": updated,
-        "credential_source": credential_source,
-        "granted_scope_classes": sorted(
-            "analytics" if "analytics" in s else
-            "youtube-read" if s.endswith("/youtube.readonly") else
-            "youtube-write" if s.endswith("/youtube.force-ssl") else
-            "other"
-            for s in granted_scopes
-        ),
-        "failures": failures[-10:],
-    })
     print("Private analytics:", state["status"], "| videos updated:", updated,
-          "| strategy:", data["strategy"].get("winner", data["strategy"].get("mode")))
+          "| report requests:", state["queries_attempted"], "| failures:", len(failures))
+    print("Learning exclusions:", len(excluded), "| impressions/CTR: see separate reach_state")
     return True
 
 
-def strategy_genre(data: dict, available: set[str]) -> str | None:
+def strategy_genre(data: dict, available: set[str], now: datetime | None = None) -> str | None:
     """Weighted autonomous exploitation while still allowing exploration elsewhere."""
-    weights = (data.get("strategy") or {}).get("genre_weights") or {}
+    from datetime import timezone
+    weights = _strategy(data, now or datetime.now(timezone.utc)).get("genre_weights") or {}
     choices = [(g, float(w)) for g, w in weights.items() if g in available and float(w) > 0]
     if not choices:
         return None

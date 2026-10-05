@@ -9,8 +9,11 @@ on:
       - 'longform.py'
       - 'longform_challenges.py'
       - 'autonomy.py'
+      - 'reach_reports.py'
+      - 'learning_policy.json'
       - 'youtube_autonomy_setup.py'
       - 'tests/test_growth.py'
+      - 'tests/test_audience.py'
       - 'tests/test_studio.py'
       - 'requirements.txt'
   workflow_dispatch:
@@ -58,7 +61,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Verify Python modules
         if: github.event_name == 'push'
-        run: python -m py_compile cloud_once.py autonomy.py longform.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py
+        run: python -m py_compile cloud_once.py autonomy.py reach_reports.py longform.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py
       - name: Verify Studio layouts and audio
         if: github.event_name == 'push'
         run: python -m unittest discover -s tests -p 'test_*.py' -v

@@ -34,11 +34,18 @@ class GrowthTests(unittest.TestCase):
             'a':{'genre':'space','format':'short','analytics':{'views':1000,'averageViewPercentage':92,'likes':70,'shares':25,'subscribersGained':12}},
             'b':{'genre':'tech','format':'short','analytics':{'views':1000,'averageViewPercentage':48,'likes':20,'shares':2,'subscribersGained':1}},
         }}
+        original=list(data['videos'].items())
+        for vid,entry in original:
+            entry['analytics']['refreshed_at']=self.now.isoformat()
+            entry['analytics_reports']={'basic':{'status':'available'},
+                'traffic_sources':{'status':'available','rows':[{'views':1000}]}}
+            for i in range(2):
+                data['videos'][vid+str(i)]=copy.deepcopy(entry)
         strategy=autonomy._strategy(data,self.now)
         self.assertEqual(strategy['winner'],'space')
         data['strategy']=strategy
         with patch.object(autonomy.random,'random',return_value=0.0):
-            self.assertEqual(autonomy.strategy_genre(data,{'space','tech'}),'space')
+            self.assertEqual(autonomy.strategy_genre(data,{'space','tech'},now=self.now),'space')
 
     def test_weekly_long_challenges_are_fresh_and_unique(self):
         a=longform_challenges._challenge_bank('brain-arena-2026-W41')
@@ -48,7 +55,7 @@ class GrowthTests(unittest.TestCase):
         self.assertNotEqual(a,b)
 
     def test_optional_owner_permissions_never_block_production(self):
-        data={}
+        data={'videos':{'eligible':{'published_at':(self.now-timedelta(days=3)).isoformat()}}}
         with patch.dict(os.environ, {
             'YOUTUBE_FULL_REFRESH_TOKEN':'',
             'YOUTUBE_ANALYTICS_REFRESH_TOKEN':'',

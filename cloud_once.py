@@ -352,25 +352,8 @@ def fetch_trends(now=None):
     return results
 
 def genre_scores(videos):
-    # Compare each video's earliest observation in the same 24-48h age band.
-    # No retention metric is inferred from views. Require 3 examples per genre.
-    import statistics
-    grouped = {}
-    for entry in videos.values():
-        if entry.get("format") == "long":
-            continue
-        try:
-            published = datetime.fromisoformat(entry['published_at'])
-            samples = sorted(entry.get('history', []), key=lambda x: x['at'])
-            eligible = [s for s in samples if 24 <= (datetime.fromisoformat(s['at'])-published).total_seconds()/3600 <= 48]
-            if not eligible:
-                continue
-            sample = eligible[0]
-            age = (datetime.fromisoformat(sample['at'])-published).total_seconds()/3600
-            grouped.setdefault(entry.get('genre', 'challenge'), []).append(max(0, int(sample.get('views', 0)))/age)
-        except (KeyError, ValueError, TypeError):
-            continue
-    return {g: statistics.median(v) for g,v in grouped.items() if len(v)>=3}
+    """Raw public views cannot establish audience interest or exclude owner tests."""
+    return {}
 
 def choose_content(data, trends, now=None):
     import hashlib
@@ -400,13 +383,11 @@ def choose_content(data, trends, now=None):
         if diverse: candidates = diverse
     for c in candidates:
         c['trend_matches'] = [t for t in trends if any(re.search(r'\b'+re.escape(k)+r'\b', t['title'], re.I) for k in c['keywords'])][:3]
-    scores = genre_scores(videos)
     roll = random.random()
     trending = [c for c in candidates if c['trend_matches']]
-    proven = [c for c in candidates if c['genre'] in scores]
     try:
         from autonomy import strategy_genre
-        analytics_pick = strategy_genre(data, {c['genre'] for c in candidates})
+        analytics_pick = strategy_genre(data, {c['genre'] for c in candidates}, now=now)
     except Exception:
         analytics_pick = None
     if roll < .35 and analytics_pick:
@@ -414,9 +395,6 @@ def choose_content(data, trends, now=None):
         reason = 'private retention/engagement analytics'
     elif roll < .55 and trending:
         pool, reason = trending, 'fresh search-interest match'
-    elif roll < .85 and proven:
-        best = max(scores[c['genre']] for c in proven)
-        pool, reason = [c for c in proven if scores[c['genre']]==best], '24-48h views/hour evidence'
     else:
         counts = {g: sum(v.get('genre', 'challenge')==g for v in videos.values()) for g in {c['genre'] for c in candidates}}
         minimum = min(counts.values())
@@ -615,15 +593,18 @@ def refresh_performance() -> None:
     ranked.sort(reverse=True)
     if ranked:
         top = ranked[0]
-        print(f"Top tracked Short: {top[2]} | {top[0]} views | https://www.youtube.com/watch?v={top[1]}")
+        print(f"Highest raw view count (owner views may be included): {top[2]} | {top[0]} views | https://www.youtube.com/watch?v={top[1]}")
 
 def refresh_research(token, force=False):
     from audience_research import collect
     from autonomy import manage_community, refresh_analytics
+    from reach_reports import refresh_reach
     data=load_performance()
     now=datetime.now(IST)
     changed=collect(token,data,now,force=force)
     if refresh_analytics(data,now,force=force):
+        changed=True
+    if refresh_reach(data,now,force=force):
         changed=True
     if manage_community(data,now):
         changed=True
@@ -736,5 +717,3 @@ if __name__ == "__main__":
 # Owner-requested single upload retry: 2026-10-04 17:11 IST.
 
 # Owner-requested single upload retry: 2026-10-04 22:51 IST.
-
-

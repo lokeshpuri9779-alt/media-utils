@@ -8,7 +8,7 @@
 - Read a small sample of comments on recent owned videos and keep only aggregate topic-request counts for content planning.
 - Generate original Shorts with narration, captions, procedural music, motion graphics, titles, descriptions, calls to action and source links where relevant.
 - Upload publicly, record returned visibility, adapt to YouTube upload-limit responses, stop probing after a confirmed limit response, and resume on the next Astra scheduling day.
-- Refresh owned-video views, likes and comments and compare Shorts at similar ages rather than mixing Shorts with long-form evidence.
+- Refresh raw owned-video counts for diagnostics only. Raw views never select a winning topic; they may include owner testing.
 - When `YOUTUBE_ANALYTICS_REFRESH_TOKEN` or `YOUTUBE_FULL_REFRESH_TOKEN` is installed, refresh private watch-time and retention analytics. Astra scores genres retention-first, with bounded like/share/subscriber signals, and uses that evidence in future topic selection.
 - When `YOUTUBE_COMMUNITY_REFRESH_TOKEN` or `YOUTUBE_FULL_REFRESH_TOKEN` has `youtube.force-ssl`, inspect recent comments every few hours and reply to at most three clearly positive comments per day. Sensitive topics, arguments and already-replied threads are skipped.
 - Generate 1920×1080 narrated long videos with a custom 1280×720 thumbnail. The sourced **Planet Clocks** episode is first; after it publishes, Astra creates a fresh deterministic 20-challenge **Brain Arena** episode for each eligible week so long-form does not run dry.
@@ -21,12 +21,23 @@ Astra uses several signals rather than assuming one metric proves causation:
 
 1. Fresh public topic interest from YouTube chart samples and Google Trends.
 2. Aggregate topic requests from the channel's own comments.
-3. Comparable-age public view velocity for Astra's own Shorts.
+3. Raw public counts are descriptive only and are excluded from topic scoring.
 4. Private average view percentage, watch time, shares and subscriber gains when Analytics authorization is present.
 5. Audience-retention samples around 10%, 50% and 90% of recent videos when the API has data.
 6. Exploration of under-tested genres so the system does not lock itself permanently into an early winner.
 
 The system changes **selection probability** from evidence. It does not claim to retrain a foundation model.
+
+### Audience measurement correction (5 October 2026)
+
+- `learning_policy.json` excludes nine owner-reported test videos (63 raw views) from all learning. Their raw counts are preserved, not subtracted from YouTube's data.
+- Raw view velocity no longer selects topics. Learning needs three non-excluded Shorts per genre, each with at least 25 analytics views, positive average view percentage, and traffic-source rows covering at least 25 views. Metrics older than two days cannot select a winner.
+- Traffic-source reports store source categories and measured views/watch time. These reports do not identify individual viewers, so they cannot prove that every new view is external.
+- Analytics uses completed Pacific reporting days. Separate basic, traffic and retention states distinguish available data, empty reports, permission failures and unsampled retention. No queries means no “active” label.
+- `reach_reports.py` reuses or creates one `channel_reach_basic_a1` Reporting API job and imports daily thumbnail impressions/CTR. Duplicate downloads replace daily records rather than inflating totals. Empty/missing reports stay unknown. CTR is stored in the API's original units.
+- Reach requires a stored token granting `yt-analytics.readonly` and the YouTube Reporting API enabled. `reach_state` reports missing scope, API errors or waiting-for-report status explicitly. The upload token is not modified.
+- Reference: https://developers.google.com/youtube/analytics/channel_reports
+- Reach reference: https://developers.google.com/youtube/reporting/v1/reports/channel_reports
 
 ## Safety and platform rules
 
@@ -50,7 +61,7 @@ If the GitHub CLI is already authenticated, the helper installs the secret direc
 
 ## Not claimed
 
-Astra does not claim guaranteed views, guaranteed monetization, or guaranteed income. Public competitor data cannot reveal competitors' private retention. Thumbnail impression CTR is not currently used by this controller; the learning loop relies on the available owner metrics above.
+Astra does not claim guaranteed views, guaranteed monetization, or guaranteed income. Public competitor data cannot reveal competitors' private retention. Thumbnail impressions/CTR are collected separately when authorized and available; they are not fabricated from view counts and do not currently change topic scores.
 
 ## Verification
 
