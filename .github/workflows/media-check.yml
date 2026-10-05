@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'cloud_once.py'
+      - 'viral_prior.py'
       - 'studio_renderer.py'
       - 'audience_research.py'
       - 'longform.py'
@@ -13,6 +14,7 @@ on:
       - 'learning_policy.json'
       - 'youtube_autonomy_setup.py'
       - 'tests/test_growth.py'
+      - 'tests/test_viral_prior.py'
       - 'tests/test_audience.py'
       - 'tests/test_studio.py'
       - 'requirements.txt'
@@ -61,7 +63,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Verify Python modules
         if: github.event_name == 'push'
-        run: python -m py_compile cloud_once.py autonomy.py reach_reports.py longform.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py
+        run: python -m py_compile cloud_once.py viral_prior.py autonomy.py reach_reports.py longform.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py
       - name: Verify Studio layouts and audio
         if: github.event_name == 'push'
         run: python -m unittest discover -s tests -p 'test_*.py' -v
