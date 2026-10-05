@@ -101,12 +101,34 @@ jobs:
           retention-days: 30
           if-no-files-found: error
       - name: run
+        id: controller
         run: |
           if [ "${{ github.event_name }}" = "push" ] && [ "$ASTRA_FORCE_RUN" != "1" ]; then
             python cloud_once.py --diagnose
           else
             python cloud_once.py
           fi
+      - name: Record runtime health
+        if: github.event_name != 'push' && always()
+        shell: bash
+        run: |
+          mkdir -p runtime-health
+          printf '%s\n' "run_id=${{ github.run_id }}" > runtime-health/status.txt
+          printf '%s\n' "production_sha=$(git rev-parse HEAD)" >> runtime-health/status.txt
+          printf '%s\n' "controller_outcome=${{ steps.controller.outcome || 'unknown' }}" >> runtime-health/status.txt
+          if [ "${{ steps.controller.outcome }}" != "success" ]; then
+            printf '%s\n' "recovery=production_ref_unchanged; use pre-run state snapshot" >> runtime-health/status.txt
+          else
+            printf '%s\n' "recovery=none" >> runtime-health/status.txt
+          fi
+      - name: Upload runtime health record
+        if: github.event_name != 'push' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-health-${{ github.run_id }}
+          path: runtime-health/
+          retention-days: 30
+          if-no-files-found: error
       - name: save adaptive state
         if: always()
         shell: bash
