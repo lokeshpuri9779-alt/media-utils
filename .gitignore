@@ -6,3 +6,6 @@ storage/
 .astra_key
 *.enc
 *.mp4
+
+# Local Astra recovery snapshots; never commit runtime state archives
+backups/
