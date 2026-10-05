@@ -3,7 +3,7 @@ import json, shutil
 from datetime import datetime, timezone
 from pathlib import Path
 
-STATE_FILES=("performance.json","quota_state.json","learning_policy.json","SHORTS.md")
+STATE_FILES=("performance.json","quota_state.json","ops_state.json","learning_policy.json","SHORTS.md")
 ROOT=Path(__file__).resolve().parent
 BACKUPS=ROOT/"backups"
 
