@@ -8,6 +8,7 @@ on:
       - 'evolution.py'
       - 'backup_state.py'
       - 'distribution.py'
+      - 'ops_guardian.py'
       - 'studio_renderer.py'
       - 'audience_research.py'
       - 'longform.py'
@@ -21,6 +22,7 @@ on:
       - 'tests/test_evolution.py'
       - 'tests/test_backup.py'
       - 'tests/test_distribution.py'
+      - 'tests/test_ops_guardian.py'
       - 'tests/test_audience.py'
       - 'tests/test_studio.py'
       - 'requirements.txt'
@@ -69,7 +71,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Verify Python modules
         if: github.event_name == 'push'
-        run: python -m py_compile cloud_once.py viral_prior.py evolution.py backup_state.py distribution.py autonomy.py reach_reports.py longform.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py
+        run: python -m py_compile cloud_once.py viral_prior.py evolution.py backup_state.py distribution.py ops_guardian.py autonomy.py reach_reports.py longform.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py
       - name: Verify Studio layouts and audio
         if: github.event_name == 'push'
         run: python -m unittest discover -s tests -p 'test_*.py' -v
@@ -106,12 +108,12 @@ jobs:
         if: always()
         shell: bash
         run: |
-          if [ -z "$(git status --porcelain -- quota_state.json performance.json SHORTS.md)" ]; then
+          if [ -z "$(git status --porcelain -- quota_state.json performance.json ops_state.json SHORTS.md)" ]; then
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for f in quota_state.json performance.json SHORTS.md; do
+          for f in quota_state.json performance.json ops_state.json SHORTS.md; do
             if [ -e "$f" ] || git ls-files --error-unmatch "$f" >/dev/null 2>&1; then
               git add -A -- "$f"
             fi
