@@ -388,6 +388,15 @@ def choose_content(data, trends, now=None):
     from viral_prior import rank_candidates
     strategy = data.get('strategy') or {}
     ranked = rank_candidates(candidates, strategy.get('genre_scores') or {}, data=data)
+    # Winner evolution: boost fresh concepts that share only the abstract genre DNA
+    # of measured healthy winners. Content IDs/scripts/assets are never cloned.
+    blueprints = (data.get('evolution') or {}).get('winner_blueprints') or []
+    winning_genres = {b.get('genre') for b in blueprints if b.get('genre')}
+    for item in ranked:
+        if item.get('genre') in winning_genres:
+            item['prior_score']['total'] = round(min(100, item['prior_score']['total'] + 5), 2)
+            item['winner_descendant'] = True
+    ranked.sort(key=lambda x: x['prior_score']['total'], reverse=True)
     if not ranked:
         raise RuntimeError('Stage-0 scorer produced no candidates.')
     # Mostly exploit the best concepts, while preserving a small exploration lane.
@@ -415,7 +424,7 @@ def select_content():
     data = load_performance()
     trends = fetch_trends() + research_signals(data, datetime.now(IST))
     ch = choose_content(data, trends)
-    CONTENT_META = {k:ch.get(k) for k in ('genre','content_id','source','trend_matches','selection_reason','stage0_rank','stage0_score')}
+    CONTENT_META = {k:ch.get(k) for k in ('genre','content_id','source','trend_matches','selection_reason','stage0_rank','stage0_score','winner_descendant','exploration_rate')}
     print('Content decision:', json.dumps(CONTENT_META, ensure_ascii=False))
     return ch
 
