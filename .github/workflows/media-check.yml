@@ -15,6 +15,8 @@ on:
       - 'youtube_autonomy_setup.py'
       - 'tests/test_growth.py'
       - 'tests/test_viral_prior.py'
+      - 'tests/test_evolution.py'
+      - 'tests/test_viral_prior.py'
       - 'tests/test_audience.py'
       - 'tests/test_studio.py'
       - 'requirements.txt'
