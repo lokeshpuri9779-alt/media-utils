@@ -356,6 +356,9 @@ def refresh_analytics(data: dict, now: datetime, force: bool = False) -> bool:
         state["status"] = "awaiting_data"
     state["message"] = "Report data may lag; empty reports are unknown, not zero audience."
     data["strategy"] = _strategy(data, now)
+    from evolution import evolution_state
+    data["evolution"] = evolution_state(data)
+    print("Evolution:", json.dumps(data["evolution"].get("diagnosis_counts", {}), ensure_ascii=False))
     print("Private analytics:", state["status"], "| videos updated:", updated,
           "| report requests:", state["queries_attempted"], "| failures:", len(failures))
     print("Learning exclusions:", len(excluded), "| impressions/CTR: see separate reach_state")
