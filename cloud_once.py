@@ -391,7 +391,9 @@ def choose_content(data, trends, now=None):
     if not ranked:
         raise RuntimeError('Stage-0 scorer produced no candidates.')
     # Mostly exploit the best concepts, while preserving a small exploration lane.
-    explore = random.random() < .20 and len(ranked) > 3
+    from viral_prior import adaptive_exploration
+    explore_rate = adaptive_exploration(data)
+    explore = random.random() < explore_rate and len(ranked) > 3
     if explore:
         counts = {g: sum(v.get('genre', 'challenge')==g for v in videos.values()) for g in {c['genre'] for c in ranked}}
         minimum = min(counts.values())
@@ -404,6 +406,7 @@ def choose_content(data, trends, now=None):
     selected['selection_reason'] = reason
     selected['stage0_rank'] = next((i+1 for i,c in enumerate(ranked) if c['content_id']==selected['content_id']), None)
     selected['stage0_score'] = selected.get('prior_score', {})
+    selected['exploration_rate'] = explore_rate
     return selected
 
 def select_content():
