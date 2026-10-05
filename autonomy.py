@@ -358,7 +358,14 @@ def refresh_analytics(data: dict, now: datetime, force: bool = False) -> bool:
     data["strategy"] = _strategy(data, now)
     from evolution import evolution_state
     data["evolution"] = evolution_state(data)
+    from distribution import distribution_state
+    data["distribution"] = distribution_state(data)
     print("Evolution:", json.dumps(data["evolution"].get("diagnosis_counts", {}), ensure_ascii=False))
+    print("Distribution:", json.dumps({
+        "mode": data["distribution"].get("mode"),
+        "eligible_videos": data["distribution"].get("eligible_videos"),
+        "top_sources": [x.get("source") for x in data["distribution"].get("ranked_sources", [])[:3]],
+    }, ensure_ascii=False))
     print("Private analytics:", state["status"], "| videos updated:", updated,
           "| report requests:", state["queries_attempted"], "| failures:", len(failures))
     print("Learning exclusions:", len(excluded), "| impressions/CTR: see separate reach_state")
