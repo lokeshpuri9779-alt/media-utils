@@ -387,7 +387,7 @@ def choose_content(data, trends, now=None):
     # use structural priors + live demand; as analytics mature, genre evidence joins scoring.
     from viral_prior import rank_candidates
     strategy = data.get('strategy') or {}
-    ranked = rank_candidates(candidates, strategy.get('genre_scores') or {})
+    ranked = rank_candidates(candidates, strategy.get('genre_scores') or {}, data=data)
     if not ranked:
         raise RuntimeError('Stage-0 scorer produced no candidates.')
     # Mostly exploit the best concepts, while preserving a small exploration lane.
