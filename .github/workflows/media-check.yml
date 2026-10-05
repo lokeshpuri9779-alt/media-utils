@@ -8,7 +8,9 @@ on:
       - 'evolution.py'
       - 'backup_state.py'
       - 'distribution.py'
-      - 'ops_guardian.py'\n      - 'ypp_safety.py'\n      - 'channels.json'
+      - 'ops_guardian.py'
+      - 'ypp_safety.py'
+      - 'channels.json'
       - 'studio_renderer.py'
       - 'audience_research.py'
       - 'longform.py'
@@ -22,7 +24,8 @@ on:
       - 'tests/test_evolution.py'
       - 'tests/test_backup.py'
       - 'tests/test_distribution.py'
-      - 'tests/test_ops_guardian.py'\n      - 'tests/test_ypp_safety.py'
+      - 'tests/test_ops_guardian.py'
+      - 'tests/test_ypp_safety.py'
       - 'tests/test_audience.py'
       - 'tests/test_studio.py'
       - 'requirements.txt'
@@ -54,7 +57,8 @@ jobs:
       YOUTUBE_COMMUNITY_CLIENT_SECRET: ${{ secrets.YOUTUBE_COMMUNITY_CLIENT_SECRET }}
       YOUTUBE_PRIVACY: public
       ORT_DISABLE_TELEMETRY: '1'
-      ASTRA_LONG_ENABLED: '1'\n      ASTRA_CHANNEL: 'rayvan'
+      ASTRA_LONG_ENABLED: '1'
+      ASTRA_CHANNEL: 'rayvan'
       ASTRA_INITIAL_DAILY_TARGET: '9'
       ASTRA_MAX_DAILY_TARGET: '24'
       ASTRA_FORCE_RUN: ${{ (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[upload-probe]'))) && '1' || '0' }}
@@ -113,13 +117,18 @@ jobs:
         shell: bash
         run: |
           mkdir -p runtime-health
-          printf '%s\n' "run_id=${{ github.run_id }}" > runtime-health/status.txt
-          printf '%s\n' "production_sha=$(git rev-parse HEAD)" >> runtime-health/status.txt
-          printf '%s\n' "controller_outcome=${{ steps.controller.outcome || 'unknown' }}" >> runtime-health/status.txt
+          printf '%s
+' "run_id=${{ github.run_id }}" > runtime-health/status.txt
+          printf '%s
+' "production_sha=$(git rev-parse HEAD)" >> runtime-health/status.txt
+          printf '%s
+' "controller_outcome=${{ steps.controller.outcome || 'unknown' }}" >> runtime-health/status.txt
           if [ "${{ steps.controller.outcome }}" != "success" ]; then
-            printf '%s\n' "recovery=production_ref_unchanged; use pre-run state snapshot" >> runtime-health/status.txt
+            printf '%s
+' "recovery=production_ref_unchanged; use pre-run state snapshot" >> runtime-health/status.txt
           else
-            printf '%s\n' "recovery=none" >> runtime-health/status.txt
+            printf '%s
+' "recovery=none" >> runtime-health/status.txt
           fi
       - name: Upload runtime health record
         if: github.event_name != 'push' && always()
