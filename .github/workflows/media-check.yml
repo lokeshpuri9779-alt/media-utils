@@ -68,6 +68,7 @@ on:
       - 'tests/test_gpu_worker_health.py'
       - 'gpu_worker_health.py'
       - 'tests/test_remote_gpu_routing.py'
+      - 'tests/test_remote_gpu_job_protocol.py'
       - 'gpu_worker_server.py'
       - 'remote_gpu_client.py'
       - 'character_animation.py'
