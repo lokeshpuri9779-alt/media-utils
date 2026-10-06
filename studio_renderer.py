@@ -119,10 +119,10 @@ def _story_plan(ch):
         headline=' '.join(str(ch.get('news_title') or '').split())
         hook_line=headline[:92].rstrip(' .,:;-') if headline else ch['hook']
         return [
-            scene(hook_line, a, 'signal', 'JUST CHANGED', source, duration=1.8),
-            scene('WHY NOW?', q, 'screen', 'LIVE INTEREST', region, duration=2.0),
-            scene('THE SOURCE', a, 'signal', source, 'SOURCE-LINKED CONTEXT'),
-            scene('CONTEXT > HYPE', 'Search interest is a signal, not proof. Follow the source as the story develops.', 'screen', 'VERIFY THE UPDATE', 'RAYVAN / STORIES BEYOND THE ORDINARY'),
+            scene(hook_line, a, 'story_hook', 'JUST CHANGED', source, duration=1.8, topic=ch.get('topic','')),
+            scene('WHY DOES IT MATTER?', q, 'story_context', 'THE CONTEXT', region, duration=2.0, topic=ch.get('topic','')),
+            scene('WHAT WE KNOW', a, 'story_evidence', source, 'SOURCE-LINKED EVIDENCE', topic=ch.get('topic','')),
+            scene('WHAT COMES NEXT?', 'Search interest is a signal, not proof. Follow the source as the story develops.', 'story_outlook', 'KEEP WATCHING', 'RAYVAN / STORIES BEYOND THE ORDINARY', topic=ch.get('topic','')),
         ]
     if genre == 'football':
         heads={'offside-position':('POSITION ≠ OFFENCE','INVOLVEMENT MATTERS'),
