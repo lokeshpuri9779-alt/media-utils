@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-4.1"
+VERSION = "studio-4.2"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -308,7 +308,7 @@ def make_plan(ch):
         'current':[('FOLLOW THE STORY','Subscribe to RAYVAN for the next verified update.'),('GO DEEPER','Watch the related RAYVAN story when it is linked below.')],
     }
     genre=ch.get('genre','challenge')
-    idx=int(hashlib.sha256(ch.get('content_id',ch['question']).encode()).hexdigest()[:8],16)%2
+    idx=max(-120,min(120,int(hashlib.sha256(ch.get('content_id',ch['question']).encode()).hexdigest()[:8],16)))%2
     headline,speech=options[genre][idx]
     last=dict(base[-1]);last.update(headline=headline,speech=speech,min_duration=2.0,story_beat='cta')
     last.pop('countdown',None);last.pop('answer',None)
@@ -1028,7 +1028,9 @@ def provider_adapter(item):
             asset_url=info.get('thumburl') or info.get('url')
             # Deliberately narrow: public domain/CC0 only. This avoids attribution/
             # share-alike edge cases and keeps commercial modification unambiguous.
-            pd=('public domain' in license_short or license_short in {'cc0','cc zero'} or
+            # Accept only explicit machine-readable PD/CC0 identifiers; prose usage
+            # terms are not sufficient evidence of reusable rights.
+            pd=(license_short in {'public domain','public domain mark','pdm','cc0','cc zero'} or
                 'public domain' in usage or 'cc0' in usage)
             if not pd or restrictions or not all((asset_url,source_page,artist)): continue
             if not license_url:
@@ -1080,6 +1082,11 @@ def creative_quality_gate(ch, plan):
     if generic_ratio>.60: score-=18
     styles=[p.get('director_style','') for p in plan]
     layouts=[p.get('director_layout','center') for p in plan]
+    beats=[p.get('story_beat','') for p in plan if p.get('story_beat')!='cta']
+    if ch.get('genre')=='current':
+        if len(set(beats))>=4: score+=7
+        if len(beats)>=4 and len(set(beats))<3: score-=18
+        if int(ch.get('source_count') or 0)>0 and 'evidence' not in beats: score-=15
     adjacent_repeats=sum(1 for a,b in zip(styles,styles[1:]) if a and a==b)
     layout_repeats=sum(1 for a,b in zip(layouts,layouts[1:]) if a==b)
     if len(set(styles))>=3: score+=8
