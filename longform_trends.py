@@ -135,13 +135,30 @@ def build_plan(items):
        f'{topic} earned attention, but attention was only the starting signal. RAYVAN follows the evidence, builds the context, and leaves uncertainty visible.',
        'screen','STORIES BEYOND THE ORDINARY','RAYVAN'),
     ]
+    beat_names=['promise','catalyst','context','evidence','complication','implication','outlook','takeaway']
+    visual_modes=['signal','evidence','map','evidence','contrast','impact','timeline','payoff']
     plan=[]
     for i,(h,speech,visual,label,sub) in enumerate(beats,1):
-        # Minimum scene durations keep a deep story from collapsing into a
-        # Shorts-length brief; voice_plan can extend them naturally.
-        plan.append(studio.scene(h,speech,visual,label,sub,duration=12.0,
-                                 section=i,source=t['source'],topic=topic))
+        # Long-form uses explicit narrative beats so visuals, pacing and later
+        # retention learning can reason about structure instead of scene number.
+        plan.append(studio.scene(h,speech,visual_modes[i-1],label,sub,duration=12.0,
+                                 section=i,source=t['source'],topic=topic,
+                                 story_beat=beat_names[i-1]))
     return plan,[t]
+
+def long_quality_gate(plan,topics):
+    if not plan or not topics: raise RuntimeError('Long-form creative gate: empty story.')
+    beats=[x.get('story_beat') for x in plan]
+    sources=topics[0].get('sources') or []
+    score=45
+    score+=min(20,len(set(beats))*3)
+    score+=15 if len(sources)>=2 else -30
+    score+=10 if {'promise','evidence','complication','implication','takeaway'}.issubset(set(beats)) else -20
+    score+=10 if len(set(x.get('visual') for x in plan))>=5 else -15
+    report={'score':score,'beats':beats,'visual_modes':[x.get('visual') for x in plan],
+            'source_count':len(sources)}
+    if score<75: raise RuntimeError('Long-form creative gate rejected weak story: '+json.dumps(report))
+    return report
 
 
 def _background():
@@ -173,7 +190,7 @@ def frame(plan,t,total):
     studio.fit_text(d,s.get('label',''),(1280,260,1805,475),size=64,fill=accent,max_lines=4)
     studio.fit_text(d,s.get('sub',''),(1280,520,1805,640),size=28,fill=(178,202,221),max_lines=3)
 
-    if s['visual']=='signal':
+    if s['visual'] in {'signal','timeline'}:
         points=[]
         for xx in range(100,1110,10):
             yy=720+math.sin(xx*.018+t*4)*38+math.sin(xx*.006-t*1.3)*56
@@ -182,10 +199,26 @@ def frame(plan,t,total):
         for k in range(3):
             r=60+((t*50+k*90)%280)
             d.ellipse((605-r,725-r*.45,605+r,725+r*.45),outline=(39+20*k,77+20*k,105+25*k),width=2)
+    elif s['visual'] in {'evidence','contrast'}:
+        d.rounded_rectangle((110,650,1120,845),radius=26,fill=(18,36,58),outline=(48,91,124),width=3)
+        widths=(650,850) if s['visual']=='contrast' else (675,865)
+        for j,w in enumerate(widths):
+            d.rounded_rectangle((145,700+j*72,145+w,742+j*72),radius=12,fill=(41+j*15,80+j*8,112+j*12))
+        d.text((160,665),'SOURCE CHECK' if s['visual']=='evidence' else 'COMPARE THE CLAIMS',font=studio.font(25),fill=accent)
+    elif s['visual']=='map':
+        d.ellipse((250,600,940,900),outline=accent,width=6)
+        for k in range(7):
+            ang=k*.9+t*.15; x=595+math.cos(ang)*250; y=750+math.sin(ang)*110
+            d.ellipse((x-12,y-12,x+12,y+12),fill=accent)
+        d.line((595,750,845,680),fill=(178,202,221),width=4)
+    elif s['visual']=='impact':
+        for k,val in enumerate((.32,.58,.82)):
+            x=180+k*300; h=int(260*val*(.75+.25*math.sin(t*1.4+k)))
+            d.rounded_rectangle((x,860-h,x+170,860),radius=18,fill=(45+25*k,100+15*k,145+20*k))
     else:
-        d.rounded_rectangle((110,670,1120,835),radius=26,fill=(18,36,58),outline=(48,91,124),width=3)
-        d.rounded_rectangle((145,705,820,745),radius=12,fill=(41,80,112))
-        d.rounded_rectangle((145,768,1010,808),radius=12,fill=(31,61,88))
+        # Payoff scene deliberately simplifies composition after denser evidence.
+        d.ellipse((360,620,870,900),fill=(20,52,78),outline=accent,width=5)
+        d.text((615,760),'WHY IT MATTERS',font=studio.font(48),fill='white',anchor='mm')
 
     words=s['speech'].split()
     dur=max(.1,len(s['audio'])/studio.RATE)
@@ -206,15 +239,18 @@ def frame(plan,t,total):
 def thumbnail(path, topics):
     im=_background(); d=ImageDraw.Draw(im)
     d.text((90,90),'RAYVAN',font=studio.font(44),fill=(224,235,247))
-    studio.fit_text(d,'WHAT\nCHANGED?',(90,220,1080,850),size=170,fill=(114,209,255),align='left',max_lines=2)
-    top=topics[0]['topic'].upper() if topics else 'LIVE TREND BRIEF'
-    studio.fit_text(d,top,(1180,300,1820,760),size=72,fill='white',max_lines=4)
+    top=topics[0]['topic'].upper() if topics else 'CURRENT STORY'
+    # Thumbnail promise is topic-first; avoid the same generic WHAT CHANGED card.
+    promise=('WHY NOW?' if len(top)<34 else 'THE STORY\nBEHIND IT')
+    studio.fit_text(d,promise,(90,220,1080,850),size=170,fill=(114,209,255),align='left',max_lines=2)
+    studio.fit_text(d,top,(1120,260,1820,790),size=68,fill='white',max_lines=5)
     d.text((95,965),'ONE STORY / MULTIPLE SOURCES / CONTEXT > HYPE',font=studio.font(30),fill=(175,199,219))
     im.resize((1280,720),Image.Resampling.LANCZOS).save(path,'JPEG',quality=92)
 
 
 def render(out, episode_id, trend_items):
     plan,topics=build_plan(trend_items)
+    quality=long_quality_gate(plan,topics)
     total=studio.voice_plan(plan,'current',max_duration=600)
     if total < 90:
         raise RuntimeError('Trend brief is too short to qualify as long-form.')
@@ -261,8 +297,11 @@ def render(out, episode_id, trend_items):
         'duration':round(total,3),'resolution':[1920,1080],'fps':studio.FPS,
         'scene_count':len(plan),'topic_count':1,'story_mode':'single-topic-deep-dive','audio':audio_info,
         'thumbnail':str(thumb),'sources':[s['url'] for x in topics for s in x.get('sources',[])],
+        'creative_quality':quality,'story_beats':[x.get('story_beat') for x in plan],
     }
     out.with_suffix('.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
     print('Trend long-form complete:',json.dumps(report),flush=True)
     topic=topics[0]['topic'] if topics else 'Current Story'
-    return f'{topic}: What Changed and Why It Matters | RAYVAN',description,report
+    # Natural, topic-led packaging; distribution.py may refine this later from
+    # measured search/browse evidence without adding unsupported claims.
+    return f'Why {topic} Is Getting Attention Now | RAYVAN',description,report
