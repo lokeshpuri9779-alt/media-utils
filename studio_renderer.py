@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-4.2"
+VERSION = "studio-4.3"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -1106,10 +1106,41 @@ def creative_quality_gate(ch, plan):
         raise RuntimeError('Creative gate rejected generic/weak visual plan: '+json.dumps(report))
     return report
 
+def _repair_plan(ch,plan,attempt):
+    """Deterministically rebuild weak visual direction without weakening the gate."""
+    repaired=[]
+    assets=['editorial-illustration','map-explainer','mechanism-diagram','comparison-graphic','source-document']
+    styles=['stylized-cgi','vector-motion','mixed-media','cel-shaded','stop-motion']
+    layouts=['focus-left','focus-right','center','split']
+    for i,raw in enumerate(plan):
+        x=dict(raw)
+        if x.get('story_beat')=='cta':
+            repaired.append(x); continue
+        beat=x.get('story_beat','')
+        preferred={'map':'map-explainer','mechanism':'mechanism-diagram','contrast':'comparison-graphic',
+                   'evidence':'source-document','uncertainty':'source-document',
+                   'reveal':'editorial-illustration','consequence':'editorial-illustration',
+                   'payoff':'editorial-illustration'}.get(beat,assets[(i+attempt)%len(assets)])
+        x['director_asset']=preferred
+        x['director_style']=styles[(i+attempt)%len(styles)]
+        x['director_layout']=layouts[(i+attempt)%len(layouts)]
+        x['director_motion']=['arc','scan','pulse','parallax'][(i+attempt)%4]
+        repaired.append(x)
+    return repaired
+
 def render_short(ch,out,still_dir=None):
     genre=ch.get('genre','challenge')
     if genre not in THEMES: raise ValueError('Unsupported genre')
     plan=make_plan(ch)
+    # Repair/re-score weak plans before abandoning a publish slot.
+    repair_attempts=0
+    while True:
+        try:
+            creative_quality_gate(ch,plan); break
+        except RuntimeError:
+            if repair_attempts>=2: raise
+            repair_attempts+=1
+            plan=_repair_plan(ch,plan,repair_attempts)
     assets=asset_manifest(ch,plan)
     resolved_assets=prepare_media_cache(resolve_assets(assets))
     resolved_assets=acquire_story_media(resolved_assets)
@@ -1117,6 +1148,7 @@ def render_short(ch,out,still_dir=None):
     # Bind resolved asset metadata to the corresponding directed shot.
     for shot,item in zip(plan,resolved_assets): shot['resolved_asset']=item
     creative_report=creative_quality_gate(ch,plan)
+    creative_report['repair_attempts']=repair_attempts
     creative_report['asset_manifest']=resolved_assets
     creative_report['asset_resolution']=asset_report
     duration=voice_plan(plan,genre)
