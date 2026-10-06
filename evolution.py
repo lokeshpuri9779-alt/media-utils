@@ -80,6 +80,30 @@ def retention_patterns(data:dict)->dict:
     return {"status":"learn","samples":len(samples),"average":{"10pct":round(a10,3),"50pct":round(a50,3),"90pct":round(a90,3)},
             "lessons":lessons or ["hold_structure"],"rule":"abstract timing lessons only; never copy scripts/assets"}
 
+
+def long_retention_patterns(data:dict)->dict:
+    """Learn long-form pacing only from qualified long videos."""
+    samples=[]
+    for vid,entry in (data.get("videos") or {}).items():
+        if entry.get("learning_excluded") or entry.get("format")!="long": continue
+        d=diagnose_video(entry)
+        if d.get("status")!="diagnosed": continue
+        summary=((entry.get("analytics_reports") or {}).get("retention") or {}).get("summary") or {}
+        try:
+            vals=[_f(summary[k]["audience_watch_ratio"],-1) for k in ("10pct","50pct","90pct")]
+        except (KeyError,TypeError): continue
+        if min(vals)<0: continue
+        samples.append(vals)
+    if len(samples)<3:
+        return {"status":"explore","samples":len(samples),"lessons":[],"reason":"Need three qualified long-form retention curves."}
+    avg=[sum(x[i] for x in samples)/len(samples) for i in range(3)]
+    lessons=[]
+    if avg[0]<.72: lessons.append("stronger_open")
+    if avg[0]-avg[1]>.22: lessons.append("shorter_context")
+    if avg[1]-avg[2]>.22: lessons.append("earlier_implication")
+    if avg[2]>=.55: lessons.append("preserve_takeaway")
+    return {"status":"learn","samples":len(samples),"average":{"10pct":round(avg[0],3),"50pct":round(avg[1],3),"90pct":round(avg[2],3)},"lessons":lessons or ["hold_structure"]}
+
 def evolution_state(data:dict)->dict:
     diagnoses={}
     counts={}
@@ -88,7 +112,7 @@ def evolution_state(data:dict)->dict:
         d=diagnose_video(e); diagnoses[vid]=d
         key=d.get("failure",d.get("status","unknown")); counts[key]=counts.get(key,0)+1
     return {"version":2,"diagnosis_counts":counts,"winner_blueprints":winner_blueprints(data),
-            "retention_patterns":retention_patterns(data),
+            "retention_patterns":retention_patterns(data),"long_retention_patterns":long_retention_patterns(data),
             "rule":"reuse abstract winning structure/timing only; never copy finished scripts/assets"}
 
 
