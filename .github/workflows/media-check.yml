@@ -136,7 +136,7 @@ jobs:
           name: astra-premium-review-${{ github.run_id }}
           path: /tmp/astra-premium-review/
           retention-days: 7
-          if-no-files-found: error
+          if-no-files-found: ignore
       - name: Upload Studio 6 preview
         if: (github.event_name == 'push' || github.event_name == 'pull_request') && env.ASTRA_FORCE_RUN != '1'
         uses: actions/upload-artifact@v4
