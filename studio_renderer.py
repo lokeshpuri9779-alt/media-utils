@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-3.1"
+VERSION = "studio-3.2"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -672,6 +672,34 @@ def director_motion_layer(im,s,t,u,accent):
     return im
 
 
+
+def composition_layer(im,s,t,u,accent):
+    """Director-controlled staging with foreground/midground/background depth."""
+    d=ImageDraw.Draw(im,'RGBA')
+    layout=s.get('director_layout','center')
+    enter=ease(min(1,u/.18))
+    # Background depth plane: slowest movement.
+    bgx=int(math.sin(t*.18)*18)
+    d.ellipse((70+bgx,500,1010+bgx,1440),fill=accent+(16,))
+    # Midground subject card follows actual director layout.
+    centers={'focus-left':300,'focus-right':780,'center':540,'split':350}
+    cx=centers.get(layout,540)
+    direction=-1 if cx<540 else 1
+    cx+=int(direction*(1-enter)*230)
+    cy=870+int(math.sin(t*.45)*12)
+    d.rounded_rectangle((cx-185,cy-145,cx+185,cy+145),36,
+                        fill=(12,18,30,78),outline=accent+(72,),width=5)
+    if layout=='split':
+        cx2=730-int((1-enter)*190)
+        d.rounded_rectangle((cx2-150,cy-115,cx2+150,cy+115),30,
+                            fill=(255,255,255,24),outline=(255,255,255,52),width=4)
+        d.line((540,650,540,1120),fill=accent+(55,),width=4)
+    # Foreground accents move fastest, creating parallax/depth.
+    fg=int(math.sin(t*.7)*42)
+    d.polygon([(0,1460+fg),(250,1370+fg),(390,1920),(0,1920)],fill=accent+(28,))
+    d.polygon([(1080,1390-fg),(860,1340-fg),(720,1920),(1080,1920)],fill=(255,255,255,18))
+    return im
+
 def transition_layer(im,s,t,u,accent):
     """Narrative-energy transition treatment concentrated at scene entry/exit."""
     d=ImageDraw.Draw(im,'RGBA'); energy=float(s.get('director_energy',.5))
@@ -700,6 +728,7 @@ def render_frame(plan,t,genre,total):
         im=moved.crop((dx,dy,dx+W,dy+H))
     draw_visual(im,s,t,u,accent)
     visual_style_layer(im,s,t,u,accent)
+    composition_layer(im,s,t,u,accent)
     transition_layer(im,s,t,u,accent)
     attention_layer(im,s,t,u,accent)
     im=composite_cached_asset(im,s.get('resolved_asset',{}))
@@ -984,16 +1013,22 @@ def creative_quality_gate(ch, plan):
     generic_ratio=(sum(a=='kinetic-type' for a in assets)/max(1,len(assets)))
     if generic_ratio>.60: score-=18
     styles=[p.get('director_style','') for p in plan]
+    layouts=[p.get('director_layout','center') for p in plan]
     adjacent_repeats=sum(1 for a,b in zip(styles,styles[1:]) if a and a==b)
+    layout_repeats=sum(1 for a,b in zip(layouts,layouts[1:]) if a==b)
     if len(set(styles))>=3: score+=8
     elif len(set(styles))<2 and len(styles)>=3: score-=18
     if adjacent_repeats>1: score-=min(18,adjacent_repeats*6)
+    if len(set(layouts))>=3: score+=6
+    elif len(set(layouts))<2 and len(layouts)>=3: score-=14
+    if layout_repeats>1: score-=min(12,layout_repeats*4)
     # Cold open must have a deliberate visual language, not an empty/default frame.
     if styles and styles[0] in {'cel-shaded','stylized-cgi','mixed-media'}: score+=5
     score=max(0,min(100,score))
     report={'score':score,'assets':assets,'roles':roles,'motions':motions,
             'semantics':sorted(semantics),'generic_ratio':round(generic_ratio,2),
-            'styles':styles,'adjacent_style_repeats':adjacent_repeats}
+            'styles':styles,'adjacent_style_repeats':adjacent_repeats,
+            'layouts':layouts,'adjacent_layout_repeats':layout_repeats}
     if score<65:
         raise RuntimeError('Creative gate rejected generic/weak visual plan: '+json.dumps(report))
     return report
