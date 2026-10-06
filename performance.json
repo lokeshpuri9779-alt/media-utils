@@ -309,10 +309,16 @@
           "views": 8,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
+          "views": 8,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
+        "at": "2026-10-06T18:51:18.359594+05:30",
         "views": 8,
         "likes": 0,
         "comments": 0
@@ -320,14 +326,11 @@
       "analytics_reports": {
         "window_start": "2026-10-04",
         "window_end": "2026-10-05",
-        "checked_at": "2026-10-06T14:19:48.900396+05:30",
-        "retention": {
-          "status": "not_sampled"
-        },
+        "checked_at": "2026-10-06T18:51:18.410026+05:30",
         "basic": {
           "window_start": "2026-10-04",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -335,7 +338,7 @@
         "traffic_sources": {
           "window_start": "2026-10-04",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -343,7 +346,15 @@
         "geography": {
           "window_start": "2026-10-04",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
+          "status": "permission_error",
+          "error_type": "HTTPStatusError",
+          "http_status": 403
+        },
+        "retention": {
+          "window_start": "2026-10-04",
+          "window_end": "2026-10-05",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -654,6 +665,12 @@
           "views": 42,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
+          "views": 42,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "football",
@@ -666,7 +683,7 @@
       "voice": "Kokoro af_heart",
       "scene_count": 3,
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
+        "at": "2026-10-06T18:51:18.359594+05:30",
         "views": 42,
         "likes": 0,
         "comments": 0
@@ -674,14 +691,11 @@
       "analytics_reports": {
         "window_start": "2026-10-04",
         "window_end": "2026-10-05",
-        "checked_at": "2026-10-06T14:19:48.900396+05:30",
-        "retention": {
-          "status": "not_sampled"
-        },
+        "checked_at": "2026-10-06T18:51:18.410026+05:30",
         "basic": {
           "window_start": "2026-10-04",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -689,7 +703,7 @@
         "traffic_sources": {
           "window_start": "2026-10-04",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -697,7 +711,15 @@
         "geography": {
           "window_start": "2026-10-04",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
+          "status": "permission_error",
+          "error_type": "HTTPStatusError",
+          "http_status": 403
+        },
+        "retention": {
+          "window_start": "2026-10-04",
+          "window_end": "2026-10-05",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -942,6 +964,12 @@
           "views": 11,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
+          "views": 11,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "tech",
@@ -956,7 +984,7 @@
       "scene_count": 4,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
+        "at": "2026-10-06T18:51:18.359594+05:30",
         "views": 11,
         "likes": 0,
         "comments": 0
@@ -964,14 +992,11 @@
       "analytics_reports": {
         "window_start": "2026-10-04",
         "window_end": "2026-10-05",
-        "checked_at": "2026-10-06T14:19:48.900396+05:30",
-        "retention": {
-          "status": "not_sampled"
-        },
+        "checked_at": "2026-10-06T18:51:18.410026+05:30",
         "basic": {
           "window_start": "2026-10-04",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -979,7 +1004,7 @@
         "traffic_sources": {
           "window_start": "2026-10-04",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -987,7 +1012,15 @@
         "geography": {
           "window_start": "2026-10-04",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
+          "status": "permission_error",
+          "error_type": "HTTPStatusError",
+          "http_status": 403
+        },
+        "retention": {
+          "window_start": "2026-10-04",
+          "window_end": "2026-10-05",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -1220,6 +1253,12 @@
           "views": 4,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
+          "views": 4,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "fiction",
@@ -1234,7 +1273,7 @@
       "scene_count": 5,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
+        "at": "2026-10-06T18:51:18.359594+05:30",
         "views": 4,
         "likes": 0,
         "comments": 0
@@ -1242,14 +1281,14 @@
       "analytics_reports": {
         "window_start": "2026-10-04",
         "window_end": "2026-10-05",
-        "checked_at": "2026-10-06T14:19:48.900396+05:30",
+        "checked_at": "2026-10-06T18:51:18.410026+05:30",
         "retention": {
           "status": "not_sampled"
         },
         "basic": {
           "window_start": "2026-10-04",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -1257,7 +1296,7 @@
         "traffic_sources": {
           "window_start": "2026-10-04",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -1265,9 +1304,10 @@
         "geography": {
           "window_start": "2026-10-04",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
-          "status": "error",
-          "error_type": "ConnectError"
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
+          "status": "permission_error",
+          "error_type": "HTTPStatusError",
+          "http_status": 403
         }
       },
       "learning_excluded": true
@@ -1479,6 +1519,12 @@
           "views": 4,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
+          "views": 4,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "space",
@@ -1493,7 +1539,7 @@
       "scene_count": 4,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
+        "at": "2026-10-06T18:51:18.359594+05:30",
         "views": 4,
         "likes": 0,
         "comments": 0
@@ -1501,14 +1547,14 @@
       "analytics_reports": {
         "window_start": "2026-10-04",
         "window_end": "2026-10-05",
-        "checked_at": "2026-10-06T14:19:48.900396+05:30",
+        "checked_at": "2026-10-06T18:51:18.410026+05:30",
         "retention": {
           "status": "not_sampled"
         },
         "basic": {
           "window_start": "2026-10-04",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -1516,7 +1562,7 @@
         "traffic_sources": {
           "window_start": "2026-10-04",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -1524,7 +1570,7 @@
         "geography": {
           "window_start": "2026-10-04",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -1721,6 +1767,12 @@
           "views": 4,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
+          "views": 4,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "fiction",
@@ -1735,7 +1787,7 @@
       "scene_count": 5,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
+        "at": "2026-10-06T18:51:18.359594+05:30",
         "views": 4,
         "likes": 0,
         "comments": 0
@@ -1743,11 +1795,14 @@
       "analytics_reports": {
         "window_start": "2026-10-05",
         "window_end": "2026-10-05",
-        "checked_at": "2026-10-06T14:19:48.900396+05:30",
+        "checked_at": "2026-10-06T18:51:18.410026+05:30",
+        "retention": {
+          "status": "not_sampled"
+        },
         "basic": {
           "window_start": "2026-10-05",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -1755,7 +1810,7 @@
         "traffic_sources": {
           "window_start": "2026-10-05",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -1763,15 +1818,7 @@
         "geography": {
           "window_start": "2026-10-05",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
-          "status": "permission_error",
-          "error_type": "HTTPStatusError",
-          "http_status": 403
-        },
-        "retention": {
-          "window_start": "2026-10-05",
-          "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -1956,6 +2003,12 @@
           "views": 3,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
+          "views": 3,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "challenge",
@@ -1970,7 +2023,7 @@
       "scene_count": 4,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
+        "at": "2026-10-06T18:51:18.359594+05:30",
         "views": 3,
         "likes": 0,
         "comments": 0
@@ -1978,11 +2031,14 @@
       "analytics_reports": {
         "window_start": "2026-10-05",
         "window_end": "2026-10-05",
-        "checked_at": "2026-10-06T14:19:48.900396+05:30",
+        "checked_at": "2026-10-06T18:51:18.410026+05:30",
+        "retention": {
+          "status": "not_sampled"
+        },
         "basic": {
           "window_start": "2026-10-05",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -1990,22 +2046,15 @@
         "traffic_sources": {
           "window_start": "2026-10-05",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
-          "status": "error",
-          "error_type": "ConnectError"
-        },
-        "geography": {
-          "window_start": "2026-10-05",
-          "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
-        "retention": {
+        "geography": {
           "window_start": "2026-10-05",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -2172,6 +2221,12 @@
           "views": 2,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
+          "views": 2,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "football",
@@ -2186,7 +2241,7 @@
       "scene_count": 4,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
+        "at": "2026-10-06T18:51:18.359594+05:30",
         "views": 2,
         "likes": 0,
         "comments": 0
@@ -2194,11 +2249,14 @@
       "analytics_reports": {
         "window_start": "2026-10-05",
         "window_end": "2026-10-05",
-        "checked_at": "2026-10-06T14:19:48.900396+05:30",
+        "checked_at": "2026-10-06T18:51:18.410026+05:30",
+        "retention": {
+          "status": "not_sampled"
+        },
         "basic": {
           "window_start": "2026-10-05",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -2206,7 +2264,7 @@
         "traffic_sources": {
           "window_start": "2026-10-05",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -2214,15 +2272,7 @@
         "geography": {
           "window_start": "2026-10-05",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
-          "status": "permission_error",
-          "error_type": "HTTPStatusError",
-          "http_status": 403
-        },
-        "retention": {
-          "window_start": "2026-10-05",
-          "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -2383,6 +2433,12 @@
           "views": 3,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
+          "views": 3,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "renderer": "studio-1.1",
@@ -2395,7 +2451,7 @@
       "selection_reason": "weekly long-form slot; new sourced episode",
       "visibility": "public",
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
+        "at": "2026-10-06T18:51:18.359594+05:30",
         "views": 3,
         "likes": 0,
         "comments": 0
@@ -2403,14 +2459,14 @@
       "analytics_reports": {
         "window_start": "2026-10-05",
         "window_end": "2026-10-05",
-        "checked_at": "2026-10-06T14:19:48.900396+05:30",
+        "checked_at": "2026-10-06T18:51:18.410026+05:30",
         "retention": {
           "status": "not_sampled"
         },
         "basic": {
           "window_start": "2026-10-05",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -2418,7 +2474,7 @@
         "traffic_sources": {
           "window_start": "2026-10-05",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -2426,7 +2482,7 @@
         "geography": {
           "window_start": "2026-10-05",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -2557,6 +2613,12 @@
           "views": 1,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
+          "views": 1,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "space",
@@ -2577,7 +2639,7 @@
       "scene_count": 5,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
+        "at": "2026-10-06T18:51:18.359594+05:30",
         "views": 1,
         "likes": 0,
         "comments": 0
@@ -2585,14 +2647,14 @@
       "analytics_reports": {
         "window_start": "2026-10-05",
         "window_end": "2026-10-05",
-        "checked_at": "2026-10-06T14:19:48.900396+05:30",
+        "checked_at": "2026-10-06T18:51:18.410026+05:30",
         "retention": {
           "status": "not_sampled"
         },
         "basic": {
           "window_start": "2026-10-05",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -2600,7 +2662,7 @@
         "traffic_sources": {
           "window_start": "2026-10-05",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -2608,7 +2670,7 @@
         "geography": {
           "window_start": "2026-10-05",
           "window_end": "2026-10-05",
-          "checked_at": "2026-10-06T14:19:48.900396+05:30",
+          "checked_at": "2026-10-06T18:51:18.410026+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -2677,6 +2739,12 @@
         {
           "at": "2026-10-06T18:15:08.073247+05:30",
           "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
+          "views": 1,
           "likes": 0,
           "comments": 0
         }
@@ -2773,8 +2841,8 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
-        "views": 0,
+        "at": "2026-10-06T18:51:18.359594+05:30",
+        "views": 1,
         "likes": 0,
         "comments": 0
       }
@@ -2833,6 +2901,12 @@
         },
         {
           "at": "2026-10-06T18:15:08.073247+05:30",
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
           "views": 0,
           "likes": 0,
           "comments": 0
@@ -2930,7 +3004,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
+        "at": "2026-10-06T18:51:18.359594+05:30",
         "views": 0,
         "likes": 0,
         "comments": 0
@@ -2984,6 +3058,12 @@
         },
         {
           "at": "2026-10-06T18:15:08.073247+05:30",
+          "views": 1,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
           "views": 1,
           "likes": 0,
           "comments": 0
@@ -3081,7 +3161,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
+        "at": "2026-10-06T18:51:18.359594+05:30",
         "views": 1,
         "likes": 0,
         "comments": 0
@@ -3129,6 +3209,12 @@
         },
         {
           "at": "2026-10-06T18:15:08.073247+05:30",
+          "views": 1,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
           "views": 1,
           "likes": 0,
           "comments": 0
@@ -3226,7 +3312,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
+        "at": "2026-10-06T18:51:18.359594+05:30",
         "views": 1,
         "likes": 0,
         "comments": 0
@@ -3268,6 +3354,12 @@
         },
         {
           "at": "2026-10-06T18:15:08.073247+05:30",
+          "views": 2,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
           "views": 2,
           "likes": 0,
           "comments": 0
@@ -3365,7 +3457,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
+        "at": "2026-10-06T18:51:18.359594+05:30",
         "views": 2,
         "likes": 0,
         "comments": 0
@@ -3401,6 +3493,12 @@
         },
         {
           "at": "2026-10-06T18:15:08.073247+05:30",
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
           "views": 0,
           "likes": 0,
           "comments": 0
@@ -3468,7 +3566,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
+        "at": "2026-10-06T18:51:18.359594+05:30",
         "views": 0,
         "likes": 0,
         "comments": 0
@@ -3498,6 +3596,12 @@
         },
         {
           "at": "2026-10-06T18:15:08.073247+05:30",
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
           "views": 0,
           "likes": 0,
           "comments": 0
@@ -3623,7 +3727,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
+        "at": "2026-10-06T18:51:18.359594+05:30",
         "views": 0,
         "likes": 0,
         "comments": 0
@@ -3647,6 +3751,12 @@
         },
         {
           "at": "2026-10-06T18:15:08.073247+05:30",
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
           "views": 0,
           "likes": 0,
           "comments": 0
@@ -3714,7 +3824,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
+        "at": "2026-10-06T18:51:18.359594+05:30",
         "views": 0,
         "likes": 0,
         "comments": 0
@@ -3733,6 +3843,12 @@
         {
           "at": "2026-10-06T18:15:08.073247+05:30",
           "views": 2,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
+          "views": 0,
           "likes": 0,
           "comments": 0
         }
@@ -3861,8 +3977,8 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
-        "views": 2,
+        "at": "2026-10-06T18:51:18.359594+05:30",
+        "views": 0,
         "likes": 0,
         "comments": 0
       }
@@ -3873,6 +3989,12 @@
       "history": [
         {
           "at": "2026-10-06T18:15:08.073247+05:30",
+          "views": 1,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
           "views": 1,
           "likes": 0,
           "comments": 0
@@ -4039,7 +4161,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-06T18:15:08.073247+05:30",
+        "at": "2026-10-06T18:51:18.359594+05:30",
         "views": 1,
         "likes": 0,
         "comments": 0
@@ -4048,7 +4170,14 @@
     "zgKo72KTQkc": {
       "title": "China Open: What Changed? #Shorts",
       "published_at": "2026-10-06T18:15:52.761210+05:30",
-      "history": [],
+      "history": [
+        {
+          "at": "2026-10-06T18:51:18.359594+05:30",
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        }
+      ],
       "genre": "current",
       "content_id": "trend-9803b72ffeac114d",
       "source": "https://www.today.com/news/sports/coco-gauff-calls-out-racist-abuse-china-open-rcna601819",
@@ -4206,6 +4335,177 @@
           "copyright_safe": true
         },
         "fingerprint": "17759011ce9c8476"
+      },
+      "ai_disclosure_required": false,
+      "visibility": "public",
+      "latest": {
+        "at": "2026-10-06T18:51:18.359594+05:30",
+        "views": 0,
+        "likes": 0,
+        "comments": 0
+      }
+    },
+    "O5F85LCx1Aw": {
+      "title": "Gma Deals And Steals: What Changed? #Shorts",
+      "published_at": "2026-10-06T18:52:15.971079+05:30",
+      "history": [],
+      "genre": "current",
+      "content_id": "trend-89461b7d3b742dd1",
+      "source": "https://www.goodmorningamerica.com/shop/story/celebrate-15-years-gma-deals-steals-special-savings-137002676",
+      "trend_matches": [
+        {
+          "title": "gma deals and steals",
+          "region": "US",
+          "at": "2026-10-06T05:30:00-07:00",
+          "traffic": "1000+",
+          "news": [
+            {
+              "title": "Celebrate 15 years of 'GMA' Deals & Steals with special savings",
+              "url": "https://www.goodmorningamerica.com/shop/story/celebrate-15-years-gma-deals-steals-special-savings-137002676",
+              "source": "Good Morning America"
+            },
+            {
+              "title": "Celebrate 15 years of ‘GMA’ Deals & Steals with special savings",
+              "url": "https://www.yahoo.com/news/videos/celebrate-15-years-gma-deals-083603863.html",
+              "source": "Yahoo"
+            },
+            {
+              "title": "'GMA' Deals & Steals to support Breast Cancer Awareness",
+              "url": "https://abcnews.com/GMA/Shop/gma-deals-steals-support-breast-cancer-awareness/story?id=136887154",
+              "source": "ABC News - Breaking News, Latest News and Videos"
+            }
+          ]
+        }
+      ],
+      "selection_reason": "stage0 viral-prior ranking",
+      "stage0_rank": 1,
+      "stage0_score": {
+        "total": 75.9,
+        "hook": 61.0,
+        "payoff": 84.0,
+        "clarity": 82.0,
+        "originality": 88.0,
+        "demand": 70.0,
+        "trend": 78.0,
+        "channel": 50,
+        "packaging": 93.0,
+        "story": 100.0,
+        "weights": {
+          "structural": 0.4,
+          "live_demand": 0.25,
+          "channel_or_exploration": 0.15,
+          "packaging": 0.1,
+          "story": 0.1
+        },
+        "calibration_weight": 0.0
+      },
+      "winner_descendant": null,
+      "exploration_rate": 0.25,
+      "hook": "WHAT CHANGED?",
+      "question": "gma deals and steals is drawing a fresh wave of search interest. What changed?",
+      "prompt": "WHY IT MATTERS",
+      "answer": "One current catalyst is coverage from Good Morning America: Celebrate 15 years of 'GMA' Deals & Steals with special savings. The trend is a signal, not proof; follow the source as the story develops.",
+      "script": null,
+      "news_source": "Good Morning America",
+      "news_title": "Celebrate 15 years of 'GMA' Deals & Steals with special savings",
+      "secondary_source": "",
+      "secondary_news_source": "",
+      "source_count": 3,
+      "sensitive_topic": false,
+      "trend_region": "US",
+      "trend_traffic": "1000+",
+      "realistic_synthetic": null,
+      "altered_real_event": null,
+      "synthetic_real_person": null,
+      "reused_third_party_media": null,
+      "transformative_commentary": null,
+      "copyright_unlicensed": null,
+      "packaging_winner_score": 95.1,
+      "packaging_candidates": [
+        {
+          "title": "Gma Deals And Steals: What Changed? #Shorts",
+          "hook": "WHAT CHANGED?",
+          "score": 95.1
+        },
+        {
+          "title": "What Changed With Gma Deals And Steals? #Shorts",
+          "hook": "WHAT CHANGED?",
+          "score": 95.1
+        },
+        {
+          "title": "Gma Deals And Steals: What Changed? #Shorts",
+          "hook": "WHY NOW?",
+          "score": 92.3
+        },
+        {
+          "title": "Why Is Gma Deals And Steals Getting Attention? #Shorts",
+          "hook": "WHAT CHANGED?",
+          "score": 92.3
+        },
+        {
+          "title": "What Changed With Gma Deals And Steals? #Shorts",
+          "hook": "WHY NOW?",
+          "score": 92.3
+        },
+        {
+          "title": "Celebrate 15 years of 'GMA' Deals & Steals with special savings #Shorts",
+          "hook": "WHAT CHANGED?",
+          "score": 89.5
+        }
+      ],
+      "format": "short",
+      "renderer": "studio-1.1",
+      "duration": 43.3,
+      "voice": "Kokoro expressive profile",
+      "scene_count": 5,
+      "distribution_plan": {
+        "mode": "explore",
+        "genre": "current",
+        "format": "short",
+        "top_internal_sources": [],
+        "packaging_hints": [
+          "clear_title",
+          "strong_hook"
+        ],
+        "brand": "RAYVAN",
+        "tagline": "Stories Beyond the Ordinary.",
+        "related_video_id": "qAo9WKIpiPQ"
+      },
+      "revenue_geography": {
+        "mode": "cold_start",
+        "ranked_countries": [],
+        "cold_start_priors": {
+          "US": 1.0,
+          "GB": 0.86,
+          "CA": 0.84,
+          "AU": 0.88,
+          "DE": 0.78,
+          "IE": 0.78,
+          "NL": 0.74,
+          "SG": 0.82,
+          "IN": 0.3
+        },
+        "guardrails": {
+          "fake_location": false,
+          "vpn_manipulation": false,
+          "bot_traffic": false
+        },
+        "note": "Priors are directional indices, not promised RPM. Actual channel revenue overrides priors."
+      },
+      "ypp_safety": {
+        "policy_version": "2026-10-ypp-v1",
+        "decision": "allow",
+        "reasons": [],
+        "max_similarity": 0.309,
+        "matched_video_id": "zgKo72KTQkc",
+        "ai_disclosure_required": false,
+        "checks": {
+          "originality": true,
+          "mass_production_similarity": true,
+          "reused_content_safe": true,
+          "copyright_safe": true
+        },
+        "fingerprint": "a36466438e219d76"
       },
       "ai_disclosure_required": false,
       "visibility": "public"
@@ -4783,13 +5083,139 @@
   "analytics_state": {
     "schema_version": 2,
     "status": "error",
-    "checked_at": "2026-10-06T14:19:48.900396+05:30",
+    "checked_at": "2026-10-06T18:51:18.410026+05:30",
     "videos_updated": 0,
     "eligible_videos": 10,
     "queries_attempted": 33,
     "queries_succeeded": 0,
     "failures": [
       {
+        "video_id": "AylgPKVhyOc",
+        "report": "basic",
+        "status": "permission_error",
+        "error_type": "HTTPStatusError",
+        "http_status": 403
+      },
+      {
+        "video_id": "AylgPKVhyOc",
+        "report": "traffic_sources",
+        "status": "permission_error",
+        "error_type": "HTTPStatusError",
+        "http_status": 403
+      },
+      {
+        "video_id": "AylgPKVhyOc",
+        "report": "geography",
+        "status": "permission_error",
+        "error_type": "HTTPStatusError",
+        "http_status": 403
+      },
+      {
+        "video_id": "AylgPKVhyOc",
+        "report": "retention",
+        "status": "permission_error",
+        "error_type": "HTTPStatusError",
+        "http_status": 403
+      },
+      {
+        "video_id": "iIAOAnkpr28",
+        "report": "basic",
+        "status": "permission_error",
+        "error_type": "HTTPStatusError",
+        "http_status": 403
+      },
+      {
+        "video_id": "iIAOAnkpr28",
+        "report": "traffic_sources",
+        "status": "permission_error",
+        "error_type": "HTTPStatusError",
+        "http_status": 403
+      },
+      {
+        "video_id": "iIAOAnkpr28",
+        "report": "geography",
+        "status": "permission_error",
+        "error_type": "HTTPStatusError",
+        "http_status": 403
+      },
+      {
+        "video_id": "iIAOAnkpr28",
+        "report": "retention",
+        "status": "permission_error",
+        "error_type": "HTTPStatusError",
+        "http_status": 403
+      },
+      {
+        "video_id": "isSfh7Sz7sI",
+        "report": "basic",
+        "status": "permission_error",
+        "error_type": "HTTPStatusError",
+        "http_status": 403
+      },
+      {
+        "video_id": "isSfh7Sz7sI",
+        "report": "traffic_sources",
+        "status": "permission_error",
+        "error_type": "HTTPStatusError",
+        "http_status": 403
+      },
+      {
+        "video_id": "isSfh7Sz7sI",
+        "report": "geography",
+        "status": "permission_error",
+        "error_type": "HTTPStatusError",
+        "http_status": 403
+      },
+      {
+        "video_id": "isSfh7Sz7sI",
+        "report": "retention",
+        "status": "permission_error",
+        "error_type": "HTTPStatusError",
+        "http_status": 403
+      },
+      {
+        "video_id": "_CbMI-u_mys",
+        "report": "basic",
+        "status": "permission_error",
+        "error_type": "HTTPStatusError",
+        "http_status": 403
+      },
+      {
+        "video_id": "_CbMI-u_mys",
+        "report": "traffic_sources",
+        "status": "permission_error",
+        "error_type": "HTTPStatusError",
+        "http_status": 403
+      },
+      {
+        "video_id": "_CbMI-u_mys",
+        "report": "geography",
+        "status": "permission_error",
+        "error_type": "HTTPStatusError",
+        "http_status": 403
+      },
+      {
+        "video_id": "1j4NFOfy3jY",
+        "report": "basic",
+        "status": "permission_error",
+        "error_type": "HTTPStatusError",
+        "http_status": 403
+      },
+      {
+        "video_id": "1j4NFOfy3jY",
+        "report": "traffic_sources",
+        "status": "permission_error",
+        "error_type": "HTTPStatusError",
+        "http_status": 403
+      },
+      {
+        "video_id": "1j4NFOfy3jY",
+        "report": "geography",
+        "status": "permission_error",
+        "error_type": "HTTPStatusError",
+        "http_status": 403
+      },
+      {
         "video_id": "mwMXB2lNcW0",
         "report": "basic",
         "status": "permission_error",
@@ -4811,13 +5237,6 @@
         "http_status": 403
       },
       {
-        "video_id": "mwMXB2lNcW0",
-        "report": "retention",
-        "status": "permission_error",
-        "error_type": "HTTPStatusError",
-        "http_status": 403
-      },
-      {
         "video_id": "5LqmASFeVic",
         "report": "basic",
         "status": "permission_error",
@@ -4827,19 +5246,13 @@
       {
         "video_id": "5LqmASFeVic",
         "report": "traffic_sources",
-        "status": "error",
-        "error_type": "ConnectError"
-      },
-      {
-        "video_id": "5LqmASFeVic",
-        "report": "geography",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
         "video_id": "5LqmASFeVic",
-        "report": "retention",
+        "report": "geography",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
@@ -4861,13 +5274,6 @@
       {
         "video_id": "cg49LJMcUbI",
         "report": "geography",
-        "status": "permission_error",
-        "error_type": "HTTPStatusError",
-        "http_status": 403
-      },
-      {
-        "video_id": "cg49LJMcUbI",
-        "report": "retention",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
@@ -4909,110 +5315,6 @@
       },
       {
         "video_id": "uoVDfchykCM",
-        "report": "geography",
-        "status": "permission_error",
-        "error_type": "HTTPStatusError",
-        "http_status": 403
-      },
-      {
-        "video_id": "AylgPKVhyOc",
-        "report": "basic",
-        "status": "permission_error",
-        "error_type": "HTTPStatusError",
-        "http_status": 403
-      },
-      {
-        "video_id": "AylgPKVhyOc",
-        "report": "traffic_sources",
-        "status": "permission_error",
-        "error_type": "HTTPStatusError",
-        "http_status": 403
-      },
-      {
-        "video_id": "AylgPKVhyOc",
-        "report": "geography",
-        "status": "permission_error",
-        "error_type": "HTTPStatusError",
-        "http_status": 403
-      },
-      {
-        "video_id": "iIAOAnkpr28",
-        "report": "basic",
-        "status": "permission_error",
-        "error_type": "HTTPStatusError",
-        "http_status": 403
-      },
-      {
-        "video_id": "iIAOAnkpr28",
-        "report": "traffic_sources",
-        "status": "permission_error",
-        "error_type": "HTTPStatusError",
-        "http_status": 403
-      },
-      {
-        "video_id": "iIAOAnkpr28",
-        "report": "geography",
-        "status": "permission_error",
-        "error_type": "HTTPStatusError",
-        "http_status": 403
-      },
-      {
-        "video_id": "isSfh7Sz7sI",
-        "report": "basic",
-        "status": "permission_error",
-        "error_type": "HTTPStatusError",
-        "http_status": 403
-      },
-      {
-        "video_id": "isSfh7Sz7sI",
-        "report": "traffic_sources",
-        "status": "permission_error",
-        "error_type": "HTTPStatusError",
-        "http_status": 403
-      },
-      {
-        "video_id": "isSfh7Sz7sI",
-        "report": "geography",
-        "status": "permission_error",
-        "error_type": "HTTPStatusError",
-        "http_status": 403
-      },
-      {
-        "video_id": "_CbMI-u_mys",
-        "report": "basic",
-        "status": "permission_error",
-        "error_type": "HTTPStatusError",
-        "http_status": 403
-      },
-      {
-        "video_id": "_CbMI-u_mys",
-        "report": "traffic_sources",
-        "status": "permission_error",
-        "error_type": "HTTPStatusError",
-        "http_status": 403
-      },
-      {
-        "video_id": "_CbMI-u_mys",
-        "report": "geography",
-        "status": "error",
-        "error_type": "ConnectError"
-      },
-      {
-        "video_id": "1j4NFOfy3jY",
-        "report": "basic",
-        "status": "permission_error",
-        "error_type": "HTTPStatusError",
-        "http_status": 403
-      },
-      {
-        "video_id": "1j4NFOfy3jY",
-        "report": "traffic_sources",
-        "status": "permission_error",
-        "error_type": "HTTPStatusError",
-        "http_status": 403
-      },
-      {
-        "video_id": "1j4NFOfy3jY",
         "report": "geography",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
@@ -5039,7 +5341,7 @@
   },
   "community": {
     "status": "active",
-    "checked_at": "2026-10-06T14:19:48.900396+05:30",
+    "checked_at": "2026-10-06T18:51:18.410026+05:30",
     "reply_day": "2026-10-06",
     "replies_today": 0,
     "credential_source": "community-web-client",
@@ -5047,7 +5349,7 @@
     "failures": []
   },
   "strategy": {
-    "updated_at": "2026-10-06T14:19:48.900396+05:30",
+    "updated_at": "2026-10-06T18:51:18.410026+05:30",
     "mode": "explore",
     "genre_scores": {},
     "genre_weights": {},
@@ -5061,12 +5363,18 @@
     "message": "Thumbnail impressions/CTR require yt-analytics.readonly on a stored refresh token."
   },
   "evolution": {
-    "version": 1,
+    "version": 2,
     "diagnosis_counts": {
-      "insufficient_evidence": 1
+      "insufficient_evidence": 12
     },
     "winner_blueprints": [],
-    "rule": "reuse abstract winning structure only; never copy finished scripts/assets"
+    "retention_patterns": {
+      "status": "explore",
+      "samples": 0,
+      "lessons": [],
+      "reason": "Need at least three qualified retention curves."
+    },
+    "rule": "reuse abstract winning structure/timing only; never copy finished scripts/assets"
   },
   "distribution": {
     "mode": "explore",
@@ -5109,465 +5417,465 @@
     "note": "Priors are directional indices, not promised RPM. Actual channel revenue overrides priors."
   },
   "trend_snapshot": {
-    "checked_at": "2026-10-06T17:36:47.266496+05:30",
+    "checked_at": "2026-10-06T18:51:18.410026+05:30",
     "items": [
       {
-        "title": "national taco day",
+        "title": "world space week 2026",
         "region": "US",
-        "at": "2026-10-06T04:50:00-07:00",
-        "traffic": "500+",
+        "at": "2026-10-06T06:00:00-07:00",
+        "traffic": "2000+",
         "news": [
           {
-            "title": "It's National Taco Day 2026. Here's where to get deals, free tacos",
-            "url": "https://www.usatoday.com/story/money/food/2026/10/06/national-taco-day-2026-deals-free-tacos/91936204007/",
-            "source": "USA Today"
+            "title": "Pick Up Out-of-This-World Products from the Pokémon Center × ESA Collaboration",
+            "url": "https://www.pokemon.com/us/news/pick-up-out-of-this-world-products-from-the-pokemon-center-esa-collaboration",
+            "source": "Pokemon.com"
           },
           {
-            "title": "17 chains with National Taco Day deals: Taco John’s, Fuzzy’s and more",
-            "url": "https://www.ksn.com/news/17-chains-with-national-taco-day-deals-taco-johns-fuzzys-and-more/",
-            "source": "KSN-TV"
+            "title": "Pokémon GO and ESA team up to offer time-limited Astronaut Pikachu: here's how to get it",
+            "url": "https://www.space.com/entertainment/pokemon-go-and-esa-team-up-to-offer-time-limited-astronaut-pikachu-heres-how-to-get-it",
+            "source": "Space"
           },
           {
-            "title": "National Taco Day in Boston: Where to Find Free Tacos, New Menu Items and Taco Tuesday Specials",
-            "url": "https://rock929rocks.com/2026/10/05/national-taco-day-in-boston-where-to-find-free-tacos-new-menu-items-and-taco-tuesday-specials/",
-            "source": "Boston's ROCK 92.9"
+            "title": "Pikachu Takes A Trip To The International Space Station",
+            "url": "https://www.dogonews.com/2026/10/2/pikachu-takes-a-trip-to-the-international-space-station",
+            "source": "DOGO News"
           }
         ]
       },
       {
-        "title": "pennsylvania measles outbreak",
+        "title": "scott caan",
         "region": "US",
-        "at": "2026-10-06T04:50:00-07:00",
+        "at": "2026-10-06T05:50:00-07:00",
         "traffic": "200+",
         "news": [
           {
-            "title": "Pennsylvania’s measles outbreak is the largest in decades in the US",
-            "url": "https://apnews.com/article/measles-outbreak-pennsylvania-4cae9e5cd28a164a07ac69147505b763",
-            "source": "AP News"
+            "title": "LL Cool J Makes His Way Back Home With ‘NCIS: New York’",
+            "url": "https://www.nytimes.com/2026/10/05/arts/television/ll-cool-j-ncis-new-york-premiere.html",
+            "source": "The New York Times"
           },
           {
-            "title": "Opinion | Pennsylvania’s measles outbreak is worse than the numbers suggest",
-            "url": "https://www.washingtonpost.com/opinions/2026/10/06/pennsylvanias-measles-outbreak-is-worse-than-numbers-suggest/",
+            "title": "LL Cool J on His ‘NCIS’ Return: ‘Dreams Don’t Have Deadlines’ (Exclusive)",
+            "url": "https://people.com/ll-cool-j-dreams-dont-have-deadlines-ncis-new-york-exclusive-12147615",
+            "source": "People.com"
+          },
+          {
+            "title": "LL Cool J Says He’s ‘Still Finding New Things and Exploring New Things’ 17 Years into Playing His “NCIS” Character (Exclusive)",
+            "url": "https://www.yahoo.com/entertainment/tv/articles/ll-cool-j-says-still-132900118.html",
+            "source": "Yahoo"
+          }
+        ]
+      },
+      {
+        "title": "mexico-united states border",
+        "region": "US",
+        "at": "2026-10-06T05:40:00-07:00",
+        "traffic": "2000+",
+        "news": [
+          {
+            "title": "U.S. says Coast Guard came under fire near the border. Mexico wants evidence.",
+            "url": "https://www.washingtonpost.com/world/2026/10/05/us-says-coast-guard-came-under-fire-near-border-mexico-wants-evidence/",
             "source": "The Washington Post"
           },
           {
-            "title": "Lancaster County midwife advocates to protect Amish mothers against measles",
-            "url": "https://6abc.com/post/lancaster-county-midwife-advocates-protect-amish-mothers-measles/19911967/",
-            "source": "6abc Philadelphia"
+            "title": "Mexico seeks evidence of border shooting that prompted US troop deployment",
+            "url": "https://www.aljazeera.com/news/2026/10/5/mexico-seeks-evidence-of-border-shooting-that-prompted-us-troop-deployment",
+            "source": "Al Jazeera"
+          },
+          {
+            "title": "Coast Guard personnel exchange gunfire with shooters across US-Mexico border",
+            "url": "https://www.foxnews.com/world/coast-guard-personnel-exchange-gunfire-shooters-us-mexico-border",
+            "source": "Fox News"
           }
         ]
       },
       {
-        "title": "hurricane tracker",
+        "title": "india national cricket team vs west indies cricket team players",
         "region": "US",
-        "at": "2026-10-06T04:40:00-07:00",
-        "traffic": "10000+",
-        "news": [
-          {
-            "title": "Tropical Storm Isaias could form in the Gulf later this week",
-            "url": "https://weather.com/2026/10/06/storms/hurricane/tropical-storm-isaias-could-form-in-gulf",
-            "source": "The Weather Channel"
-          },
-          {
-            "title": "Tropical depression could form in Gulf this week, NHC says",
-            "url": "https://www.wesh.com/article/invest-92l-spaghetti-models-florida-gulf/74046217",
-            "source": "WESH"
-          },
-          {
-            "title": "Gulf system developing: Quiet weather now, tropical impacts later this week",
-            "url": "https://www.fox10tv.com/2026/10/06/gulf-system-developing-quiet-weather-now-tropical-impacts-later-this-week/",
-            "source": "Fox 10 News"
-          }
-        ]
-      },
-      {
-        "title": "novak djokovic",
-        "region": "US",
-        "at": "2026-10-06T04:20:00-07:00",
-        "traffic": "10000+",
-        "news": [
-          {
-            "title": "China Open: Daniil Medvedev finally runs out of chances with disqualification against Novak Djokovic",
-            "url": "https://www.bbc.com/sport/tennis/articles/cxyvr7q207gpo",
-            "source": "BBC"
-          },
-          {
-            "title": "Daniil Medvedev defaulted from China Open after striking spectator with ball - The Athletic",
-            "url": "https://www.nytimes.com/athletic/7662923/2026/10/05/daniil-medvedev-default-china-open-tennis-hit-fan/",
-            "source": "The New York Times"
-          },
-          {
-            "title": "Medvedev: 'I feel terribly sorry'",
-            "url": "https://www.atptour.com/en/news/medvedev-beijing-2026-sf-reaction-monday",
-            "source": "ATP Tour"
-          }
-        ]
-      },
-      {
-        "title": "china open",
-        "region": "US",
-        "at": "2026-10-06T04:20:00-07:00",
-        "traffic": "20000+",
-        "news": [
-          {
-            "title": "Coco Gauff Hits Out at Racist Abuse After Replayed Point in Beijing Draws Backlash",
-            "url": "https://www.today.com/news/sports/coco-gauff-calls-out-racist-abuse-china-open-rcna601819",
-            "source": "TODAY.com"
-          },
-          {
-            "title": "Coco Gauff responds to receiving racist abuse for following tennis rules during China Open win",
-            "url": "https://www.nytimes.com/athletic/7663876/2026/10/05/coco-gauff-sun-xinran-tennis-hindrance-china-open/",
-            "source": "The New York Times"
-          },
-          {
-            "title": "China Open: Coco Gauff condemns racist abuse on social media after incident during Sun Xinran match",
-            "url": "https://www.bbc.com/sport/tennis/articles/cqd09z0x9xd8o",
-            "source": "BBC"
-          }
-        ]
-      },
-      {
-        "title": "warren buffett",
-        "region": "US",
-        "at": "2026-10-06T04:20:00-07:00",
+        "at": "2026-10-06T05:40:00-07:00",
         "traffic": "500+",
         "news": [
           {
-            "title": "Warren Buffett Says Buy This Vanguard Index Fund -- It Could Turn $400 Per Month Into $820,000",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/warren-buffett-says-buy-vanguard-093201381.html",
-            "source": "Yahoo Finance"
+            "title": "No guarantees for Sooryavanshi as India look to build on Asian Games success",
+            "url": "https://www.cricinfo.com/series/west-indies-in-india-2026-27-1529215/india-vs-west-indies-1st-t20i-1529230/match-preview",
+            "source": "Cricinfo"
           },
           {
-            "title": "Is VOO Still the Best S&P 500 ETF You Can Own? Here's How It Stacks Up Against the Alternatives.",
-            "url": "https://www.fool.com/investing/2026/10/06/is-voo-still-the-best-sp-500-etf-you-can-own-heres/",
-            "source": "The Motley Fool"
+            "title": "India, West Indies renew search for T20 consistency",
+            "url": "https://www.cricbuzz.com/cricket-news/140401/india-west-indies-renew-search-for-t20-consistency-cricbuzzcom",
+            "source": "Cricbuzz"
           },
           {
-            "title": "My top 3 Vanguard ETFs for October",
-            "url": "https://www.fool.com.au/2026/10/01/my-top-3-vanguard-etfs-for-october/",
-            "source": "The Motley Fool Australia"
+            "title": "'You can't suddenly make a change': Pujara backs Samson",
+            "url": "https://www.rediff.com/cricket/report/you-cant-suddenly-make-a-change-pujara-backs-samson-to-open/20261006.htm",
+            "source": "Rediff"
           }
         ]
       },
       {
-        "title": "djokovic",
+        "title": "mikey madison",
         "region": "US",
-        "at": "2026-10-06T04:10:00-07:00",
+        "at": "2026-10-06T05:30:00-07:00",
         "traffic": "1000+",
         "news": [
           {
-            "title": "What time is the Djokovic vs. De Minaur Beijing final?",
-            "url": "https://www.atptour.com/en/news/beijing-2026-final-schedule",
-            "source": "ATP Tour"
+            "title": "Star Wars: Mikey Madison Reveals If She’d Return to Franchise After Exiting Starfighter",
+            "url": "https://www.yahoo.com/entertainment/movies/articles/star-wars-mikey-madison-reveals-175501598.html",
+            "source": "Yahoo"
           },
           {
-            "title": "De Minaur through to China Open final as Hurkacz retires with injury",
-            "url": "https://www.sportsnet.ca/atp/article/de-minaur-through-to-china-open-final-as-hurkacz-retires-with-injury/",
-            "source": "Sportsnet.ca"
+            "title": "‘The Social Reckoning’ New York City Premiere: Mikey Madison, Wunmi Mosaku and More Celebrity Style, Photos",
+            "url": "https://wwd.com/pop-culture/celebrity-news/gallery/the-social-reckoning-premiere-photos-1239312394/",
+            "source": "WWD"
           },
           {
-            "title": "How to watch the men’s China Open: Streaming options for the Final",
-            "url": "https://www.nytimes.com/athletic/7664729/2026/10/05/mens-china-open-stream-how-to-watch-october-6/",
+            "title": "Mikey Madison Jokes She’s ‘Being Humbled’ by Her Brothers a Year After Her Oscar Win (Exclusive)",
+            "url": "https://people.com/mikey-madison-jokes-shes-being-humbled-by-her-brothers-a-year-after-her-oscar-win-exclusive-12160204",
+            "source": "People.com"
+          }
+        ]
+      },
+      {
+        "title": "chicago fire",
+        "region": "US",
+        "at": "2026-10-06T05:30:00-07:00",
+        "traffic": "1000+",
+        "news": [
+          {
+            "title": "‘Chicago Fire’ cast changes: See who’s not returning for season 15",
+            "url": "https://www.nj.com/entertainment/2026/10/chicago-fire-cast-changes-see-whos-not-returning-for-season-15.html",
+            "source": "NJ.com"
+          },
+          {
+            "title": "'Chicago Fire' Season 15 cast – Who's back, exiting amid premiere",
+            "url": "https://www.usatoday.com/story/entertainment/tv-streaming/2026/10/05/chicago-fire-cast-exits-returns-dermot-mulroney-taylor-kinney/92100502007/",
+            "source": "USA Today"
+          },
+          {
+            "title": "'Chicago Fire': Brandon Larracuente Teases Joe Miñoso & Dermot Mulroney's Exits (Exclusive)",
+            "url": "https://www.tvinsider.com/1294045/chicago-fire-exits-joe-minoso-dermot-mulroney-pascal-cruz-details/",
+            "source": "TV Insider"
+          }
+        ]
+      },
+      {
+        "title": "gma deals and steals",
+        "region": "US",
+        "at": "2026-10-06T05:30:00-07:00",
+        "traffic": "1000+",
+        "news": [
+          {
+            "title": "Celebrate 15 years of 'GMA' Deals & Steals with special savings",
+            "url": "https://www.goodmorningamerica.com/shop/story/celebrate-15-years-gma-deals-steals-special-savings-137002676",
+            "source": "Good Morning America"
+          },
+          {
+            "title": "Celebrate 15 years of ‘GMA’ Deals & Steals with special savings",
+            "url": "https://www.yahoo.com/news/videos/celebrate-15-years-gma-deals-083603863.html",
+            "source": "Yahoo"
+          },
+          {
+            "title": "'GMA' Deals & Steals to support Breast Cancer Awareness",
+            "url": "https://abcnews.com/GMA/Shop/gma-deals-steals-support-breast-cancer-awareness/story?id=136887154",
+            "source": "ABC News - Breaking News, Latest News and Videos"
+          }
+        ]
+      },
+      {
+        "title": "tom cotton daylight saving time opposition",
+        "region": "US",
+        "at": "2026-10-06T05:20:00-07:00",
+        "traffic": "10000+",
+        "news": [
+          {
+            "title": "Battle over Daylight Saving Time erupts as push to stop changing clocks hits Senate wall",
+            "url": "https://www.foxnews.com/politics/battle-over-daylight-saving-time-erupts-push-stop-changing-clocks-hits-senate-wall",
+            "source": "Fox News"
+          },
+          {
+            "title": "Here’s Senator Cotton’s Cell Number, Trump Says, in Dispute Over Daylight Saving Bill",
+            "url": "https://www.nytimes.com/2026/10/03/us/trump-tom-cotton-cellphone-number.html",
             "source": "The New York Times"
+          },
+          {
+            "title": "Senate Republican on Trump posting Cotton’s number: ‘From 0 to a‑‑hole in about 3 seconds’",
+            "url": "https://thehill.com/homenews/senate/6128990-john-kennedy-donald-trump-tom-cotton-phone-number-share-criticism/",
+            "source": "The Hill"
           }
         ]
       },
       {
-        "title": "houston rockets",
+        "title": "cameron douglas",
         "region": "US",
-        "at": "2026-10-06T04:10:00-07:00",
-        "traffic": "200+",
+        "at": "2026-10-06T05:10:00-07:00",
+        "traffic": "2000+",
         "news": [
           {
-            "title": "Rockets 2026-2027 player previews: Reed Sheppard",
-            "url": "https://sports.yahoo.com/articles/rockets-2026-2027-player-previews-092921319.html",
-            "source": "Yahoo Sports"
+            "title": "Michael Douglas Gets Candid About Affairs, Drugs, Surviving Cancer (Exclusive)",
+            "url": "https://people.com/michael-douglas-gets-candid-affairs-drugs-surviving-cancer-exclusive-12159388",
+            "source": "People.com"
           },
           {
-            "title": "1 Rockets player in danger of losing starting job in 2026-27 training camp",
-            "url": "https://clutchpoints.com/nba/houston-rockets/1-rockets-player-in-danger-of-losing-starting-job-in-2026-27-training-camp",
-            "source": "ClutchPoints"
-          },
-          {
-            "title": "Why Reed Sheppard Could Win Sixth Man of the Year",
-            "url": "https://roundtable.io/sports/nba/rockets/players/why-reed-sheppard-could-win-sixth-man-of-the-year",
-            "source": "roundtable.io"
-          }
-        ]
-      },
-      {
-        "title": "한국 대 우즈베키스탄",
-        "region": "US",
-        "at": "2026-10-06T04:00:00-07:00",
-        "traffic": "500+",
-        "news": [
-          {
-            "title": "손흥민, 전설 차범근 넘었다... A매치 최다 59골 ‘새 역사’",
-            "url": "https://www.chosun.com/sports/football/2026/10/06/LMKQA52N4BBBVHJBJTS2CJXDEI/",
-            "source": "조선일보"
-          },
-          {
-            "title": "'작심발언' 김민재 이틀 연속 훈련 불참‥선수들 \"시간 필요해\"",
-            "url": "https://v.daum.net/v/0iWyqxHllb",
-            "source": "Daum"
-          },
-          {
-            "title": "‘예상대로 교통지옥’ 헬게이트 열린 용인미르스타디움, 경기 시작 40분도 안 남았는데 관중 절반은 입장 못해 [오!쎈 용인]",
-            "url": "https://www.koreadaily.com/article/20261006032605689",
-            "source": "미주중앙일보"
-          }
-        ]
-      },
-      {
-        "title": "sydney sweeney",
-        "region": "US",
-        "at": "2026-10-06T04:00:00-07:00",
-        "traffic": "1000+",
-        "news": [
-          {
-            "title": "Sydney Sweeney reportedly meets with rabbis as she considers converting to Judaism",
-            "url": "https://www.ynetnews.com/culture/article/bkdxsmmszx",
-            "source": "Ynetnews"
-          },
-          {
-            "title": "Exclusive | Sydney Sweeney meets with rabbis as she and Scooter Braun think about a future with kids",
-            "url": "https://pagesix.com/2026/10/05/celebrity-news/sydney-sweeney-meets-with-rabbis-as-her-and-scooter-braun-think-about-a-future-with-kids/",
+            "title": "Michael Douglas reveals all in wild new memoir: Sexiling Danny DeVito, heavy drug use and more",
+            "url": "https://pagesix.com/2026/10/06/celebrity-news/michael-douglas-reveals-all-in-wild-new-memoir-sexiling-danny-devito-heavy-drug-use-and-more/",
             "source": "Page Six"
           },
           {
-            "title": "RICHARD JOHNSON: Sydney Sweeney meeting with rabbis as Scooter Braun romance gets serious",
-            "url": "https://www.nydailynews.com/2026/10/04/sydney-sweeney-rabbi-scooter-braun-marriage/",
-            "source": "New York Daily News"
+            "title": "Ignore the Profanity. Could Michael Douglas Actually Be Mellowing?",
+            "url": "https://www.nytimes.com/2026/10/03/books/review/michael-douglas-memoir-one-helluva-ride-interview.html",
+            "source": "The New York Times"
           }
         ]
       },
       {
-        "title": "novak djokovic",
-        "region": "IN",
-        "at": "2026-10-06T04:40:00-07:00",
-        "traffic": "2000+",
+        "title": "michael douglas son",
+        "region": "US",
+        "at": "2026-10-06T05:10:00-07:00",
+        "traffic": "200+",
         "news": [
           {
-            "title": "China Open: Daniil Medvedev finally runs out of chances with disqualification against Novak Djokovic",
-            "url": "https://www.bbc.com/sport/tennis/articles/cxyvr7q207gpo",
+            "title": "'Marriage is a lot of work,' says Michael Douglas on 2013 split with Catherine Zeta-Jones",
+            "url": "https://www.bbc.com/news/articles/c6jrw4ndzjpeo",
             "source": "BBC"
           },
           {
-            "title": "Medvedev: 'I feel terribly sorry'",
-            "url": "https://www.atptour.com/en/news/medvedev-beijing-2026-sf-reaction-monday",
-            "source": "ATP Tour"
+            "title": "Michael Douglas dumped staggering amount of partners before Catherine Zeta-Jones romance",
+            "url": "https://pagesix.com/2026/10/06/celebrity-news/michael-douglas-dumped-staggering-amount-of-partners-before-catherine-zeta-jones-romance/",
+            "source": "Page Six"
           },
           {
-            "title": "China Open 2026: Novak Djokovic reaches Beijing final after Daniil Medvedev default – \"I feel sorry for Daniil\"",
-            "url": "https://www.olympics.com/en/news/china-open-2026-novak-djokovic-reaches-beijing-final",
-            "source": "Olympics"
+            "title": "Michael Douglas reveals several bombshell affairs with past costars in One Helluva Ride memoir",
+            "url": "https://ew.com/michael-douglas-bombshell-affairs-with-past-costars-in-book-12159739",
+            "source": "Entertainment Weekly"
           }
         ]
       },
       {
-        "title": "india vs uruguay",
+        "title": "world space week 2026",
         "region": "IN",
-        "at": "2026-10-06T04:40:00-07:00",
+        "at": "2026-10-06T06:00:00-07:00",
         "traffic": "500+",
         "news": [
           {
-            "title": "India looks to bounce back as it faces Uruguay",
-            "url": "https://www.thehindu.com/sport/football/india-looks-to-bounce-back-against-uruguay/article71548157.ece",
-            "source": "The Hindu"
+            "title": "World Space Week: Which countries have sent people to space?",
+            "url": "https://www.aljazeera.com/news/2026/10/5/world-space-week-which-countries-have-sent-people-to-space",
+            "source": "Al Jazeera"
           },
           {
-            "title": "‘Unfriendly’ posers for AIFF to answer: Ticket prices slashed for Uruguay match to fill up stands",
-            "url": "https://www.telegraphindia.com/sports/football/unfriendly-posers-for-aiff-to-answer-ticket-prices-slashed-for-uruguay-match-as-officials-hope-to-fill-up-stands-prnt/cid/2183335",
-            "source": "Telegraph India"
+            "title": "Celebrate humanity's 'Rocket Revolution' with World Space Week 2026",
+            "url": "https://www.space.com/space-exploration/celebrate-humanitys-rocket-revolution-with-world-space-week-2026",
+            "source": "Space"
           },
           {
-            "title": "India vs Uruguay: India have good potential, but Uruguay are focused on their game, says Lucas Torreira - India Today",
-            "url": "https://www.indiatoday.in/sports/football/video/india-vs-uruguay-lucas-torreira-match-press-conference-3010347-2026-10-05",
-            "source": "India Today"
+            "title": "Beyond the Moon: Space Week around the world",
+            "url": "https://news.un.org/en/story/2026/10/1168517",
+            "source": "UN News"
           }
         ]
       },
       {
-        "title": "ಬಸನಗೌಡ ಪಾಟೀಲ್ ಯತ್ನಾಳ್",
+        "title": "daily horoscope today",
         "region": "IN",
-        "at": "2026-10-06T04:40:00-07:00",
+        "at": "2026-10-06T06:00:00-07:00",
         "traffic": "200+",
         "news": [
           {
-            "title": "SIR ವಿವಾದ: 'ಶಾಸಕ ಯತ್ನಾಳ್ ಬಣ್ಣ ಬಯಲು'; ವಿಜಯಪುರದಲ್ಲಿ ಬದುಕಿರುವ 8 ಮುಸ್ಲಿಂ ಮತದಾರರು 'ಸತ್ತಿದ್ದಾರೆ' ಎಂದು ಅರ್ಜಿ!",
-            "url": "https://www.kannadaprabha.com/karnataka/2026/Oct/06/eight-living-voters-shown-as-dead-in-sir-applications-row-erupts-in-vijayapura",
-            "source": "Kannada Prabha Online"
+            "title": "Taurus Horoscope Today: October 6, 2026",
+            "url": "https://www.vogue.in/content/taurus-horoscope-today-october-6-2026",
+            "source": "Vogue India"
           },
           {
-            "title": "Yatnal On Rahul Gandhi : ರಾಹುಲ್ ಗಾಂಧಿ ತಾಯಿ ಸೋನಿಯಾ ಅಪ್ಪನ ಮೇಲೆ ಕೇಸ್ ಇತ್ತು",
-            "url": "https://kannada.news18.com/videos/davanagere/yatnal-on-rahul-gandhi-svc-2502074.html",
-            "source": "News18 Kannada"
+            "title": "Horoscope Tomorrow, October 07, 2026: Your zodiac insights await",
+            "url": "https://timesofindia.indiatimes.com/astrology/horoscope/horoscope-tomorrow-october-07-2026-your-zodiac-insights-await/articleshow/134689481.cms",
+            "source": "The Times of India"
           },
           {
-            "title": "Vijayapura | ಜೀವಂತ ಮತದಾರರನ್ನು ಮೃತರೆಂದು ಆರೋಪ: ತನಿಖೆಗೆ ಕಾಂಗ್ರೆಸ್ ಆಗ್ರಹ",
-            "url": "https://www.varthabharati.in/vijayapura/vijayapura-2280131",
-            "source": "Vartha Bharati"
+            "title": "Gemini Horoscope Today, October 6, 2026: Students can benefit from a realistic schedule rather than pressure to cover everything | Astrology",
+            "url": "https://www.hindustantimes.com/astrology/horoscope/gemini-horoscope-today-october-6-2026-students-can-benefit-from-a-realistic-schedule-rather-than-pressure-to-cover-everything-101791049730757.html",
+            "source": "Hindustan Times"
           }
         ]
       },
       {
-        "title": "सुप्रीम कोर्ट ऑफ इंडिया",
+        "title": "హౌసింగ్",
         "region": "IN",
-        "at": "2026-10-06T04:40:00-07:00",
+        "at": "2026-10-06T06:00:00-07:00",
         "traffic": "200+",
         "news": [
           {
-            "title": "फॉर्म 6 पर सुप्रीम कोर्ट की टिप्पणी के मायने क्या हैं, और क्या चुनाव आयोग फंस गया है?",
-            "url": "https://www.aajtak.in/opinion-analysis-/story/form-6-controversy-eci-supreme-court-declaration-explained-ntcpdr-dskc-2662821-2026-10-06",
-            "source": "Aaj Tak"
+            "title": "Indiramma House: ఇంకో 4 రోజులే.. లేదంటే మీ ఇందిరమ్మ ఇల్లు రద్దు, ప్రభుత్వం హెచ్చరిక!",
+            "url": "https://telugu.news18.com/photogallery/telangana/pay-rs-1-lakh-by-oct-9-or-lose-flat-housing-board-warns-indiramma-beneficiaries-local18-kmv-ws-k-3240204.html",
+            "source": "News18 Telugu"
           },
           {
-            "title": "'जो तुमने आंख मूंदी है, अंधेरा हो गया गहरा', शशि थरूर ने फॉर्म-6 पर लिखी कविता, पूछा-किसने बदला, कौन बना मोहरा?",
-            "url": "https://navbharattimes.indiatimes.com/india/shashi-tharoor-questions-who-changed-form-6-of-sir-amid-protest-over-gyanesh-kumar/articleshow/134731542.cms",
-            "source": "Navbharat Times"
+            "title": "Indiramma Houses: ఇందిరమ్మ ఇళ్ల లబ్ధిదారులకు కీలక",
+            "url": "https://telugu.latestly.com/state/telangana/indiramma-houses-pay-rs-1-lakh-by-october-9-or-face-cancellation-of-allotment-325678.html",
+            "source": "LatestLY"
           },
           {
-            "title": "चुनाव आयोग ने किया राहुल गांधी के दावे का Fact Check, किस बयान को बताया गुमराह करने वाला?",
-            "url": "https://www.indiatv.in/india/politics/election-commission-fact-checks-rahul-gandhi-claim-that-says-cec-gyanesh-kumar-changed-form-6-illegally-and-unilaterally-2026-10-05-1247110",
-            "source": "India TV Hindi"
+            "title": "ఏడాదిలోపే ఇండ్ల తాళాలు : పొంగులేటి",
+            "url": "https://www.ntnews.com/telangana/minister-ponguleti-srinivasa-reddy-stated-that-the-construction-of-the-individual-apartments-being-built-under-the-q-r-qur-scheme-2523507",
+            "source": "Namasthe Telangana"
           }
         ]
       },
       {
-        "title": "triumph",
+        "title": "ind बनाम wi",
         "region": "IN",
-        "at": "2026-10-06T04:30:00-07:00",
-        "traffic": "1000+",
-        "news": [
-          {
-            "title": "Triumph Bonneville T40 Launched at Rs 2.80 Lakh",
-            "url": "https://www.bikewale.com/news/triumph-bonneville-t40-launched-at-rs-280-lakh/",
-            "source": "BikeWale"
-          },
-          {
-            "title": "Triumph Bonneville T40 vs Royal Enfield Classic 350: Can The New Bonne Beat The Classic?",
-            "url": "https://www.zigwheels.com/news-features/spec-comparo/triumph-bonneville-t40-vs-royal-enfield-classic-350-can-the-new-bonne-beat-the-classic/58328/",
-            "source": "ZigWheels.com"
-          },
-          {
-            "title": "Triumph Bonneville 400 to be revealed on October 6",
-            "url": "https://www.autocarindia.com/bike-news/triumph-bonneville-400-to-be-revealed-on-october-6-440911",
-            "source": "Autocar India"
-          }
-        ]
-      },
-      {
-        "title": "पाऊस",
-        "region": "IN",
-        "at": "2026-10-06T04:10:00-07:00",
-        "traffic": "1000+",
-        "news": [
-          {
-            "title": "Video | Rain| राज्यातील 20 जिल्ह्यांत पावसाचा तुटवडा कायम,70 टक्क्यांहून अधिक तालुके दुष्काळग्रस्त घोषित",
-            "url": "https://marathi.ndtv.com/videos/rain-deficit-persists-in-20-districts-of-maharashtra-over-70-talukas-declared-drought-affected-1169159",
-            "source": "NDTV Marathi"
-          },
-          {
-            "title": "Video | Maharashtra Rains | कोकणात पुढील चार दिवस पावसाचा अंदाज, कुठे पाऊस पडेल कुठे मारणार दडी? पाहा?",
-            "url": "https://marathi.ndtv.com/videos/maharashtra-rains-rain-forecast-for-next-four-days-in-konkan-region-areas-to-receive-rain-detailed-1167747",
-            "source": "NDTV Marathi"
-          },
-          {
-            "title": "Video | Maharashtra Rain Update | मराठवाड्याला दिलासा मिळणार? काही भागात विजांच्या गडगडाटासह पावसाची शक्यता",
-            "url": "https://marathi.ndtv.com/videos/maharashtra-rain-update-possibility-of-thunderstorms-and-rain-in-some-marathwada-areas-1166229",
-            "source": "NDTV Marathi"
-          }
-        ]
-      },
-      {
-        "title": "ss540",
-        "region": "IN",
-        "at": "2026-10-06T04:10:00-07:00",
-        "traffic": "500+",
-        "news": [
-          {
-            "title": "Kerala Lottery Bhagyathara BT-74 Result Today (October 05) : ₹1 crore first prize draw begins at 3 PM;...",
-            "url": "https://www.moneycontrol.com/city/kerala-lottery-bhagyathara-bt-74-result-today-october-05-1-crore-first-prize-draw-begins-at-3-pm-here-s-how-to-check-winners-article-14044554.html",
-            "source": "Moneycontrol.com"
-          },
-          {
-            "title": "Kerala lottery Sthree Sakthi SS-540 result today 06/10/2026: ₹1 cr first prize for SL 723487 | Check complete list",
-            "url": "https://www.onmanorama.com/news/kerala/2026/10/06/sthree-sakthi-ss-540-lottery-results-kerala-1-crore-first-prize-list-winners-live.html",
-            "source": "Onmanorama"
-          },
-          {
-            "title": "Kerala Lottery Result Today Live: Samrudhi SM-75 Winning Numbers For October 4, 2026; First Prize Rs 1 Cror",
-            "url": "https://www.news18.com/india/kerala-lottery-result-today-samrudhi-sm-75-october-4-live-10364176.html",
-            "source": "News18"
-          }
-        ]
-      },
-      {
-        "title": "south korea vs uzbekistan",
-        "region": "IN",
-        "at": "2026-10-06T04:00:00-07:00",
+        "at": "2026-10-06T05:50:00-07:00",
         "traffic": "2000+",
         "news": [
           {
-            "title": "Preview: South Korea vs Uzbekistan - prediction, team news, lineups",
-            "url": "https://www.sportsmole.co.uk/football/south-korea/preview/south-korea-vs-uzbekistan-prediction-team-news-lineups_606257.html",
-            "source": "Sports Mole"
-          },
-          {
-            "title": "[Photo] Lee Kang-in, side breakthrough at an insane speed",
-            "url": "https://www.starnewskorea.com/en/sports/2026/10/06/2026100620433637870",
-            "source": "스타뉴스"
-          },
-          {
-            "title": "[Photo] Son Heung-min overtakes Cha Boom for most goals in South Korea A-match - CHOSUNBIZ",
-            "url": "https://biz.chosun.com/en/en-photo-spo/2026/10/06/62SZX43BDBBZPPQRIZGQ2EFBPU/",
-            "source": "Chosunbiz"
-          }
-        ]
-      },
-      {
-        "title": "दूध",
-        "region": "IN",
-        "at": "2026-10-06T04:00:00-07:00",
-        "traffic": "500+",
-        "news": [
-          {
-            "title": "इस राज्य में 8 से 10 रुपये तक बढ़ जाएंगे दूध के दाम",
-            "url": "https://www.aajtak.in/india/news/story/karnataka-govt-to-hike-milk-prices-by-8-to-10-rs-ntc-pvp-rpti-2662611-2026-10-06",
+            "title": "IND vs WI, 1st T20 Live Score: थोड़ी देर में होगा टॉस, नमन धीर डेब्यू को तैयार, क्या वैभव को मिलेगी प्लेइंग 11 में एंट्री?",
+            "url": "https://www.aajtak.in/sports/cricket/story/ind-vs-wi-1st-t20i-live-updates-india-west-indies-match-lucknow-aksp-dskc-2662914-2026-10-06",
             "source": "Aaj Tak"
           },
           {
-            "title": "Milk Price Hike: 8 से 12 रुपये तक बढ़ने वाले हैं दूध के दाम, कैबिनेट मीटिंग में फैसला संभव, इस राज्‍य में असर",
-            "url": "https://ndtv.in/business-news/milk-price-hike-by-rs-8-to-12-in-karnataka-likely-after-cabinet-decision-today-12144887",
-            "source": "NDTV India"
+            "title": "भारत-वेस्टइंडीज T-20 मैच को लेकर लखनऊ में बदलेगी ट्रैफिक व्यवस्था, यातायात के लिए इन रूटों का होगा इस्तेमाल",
+            "url": "https://www.jagran.com/uttar-pradesh/lucknow-city-lucknow-traffic-changes-for-india-vs-west-indies-t20-match-40395533.html",
+            "source": "Jagran"
           },
           {
-            "title": "10 रुपये तक बढ़ेंगे दूध के दाम? इस राज्य सरकार की कैबिनेट मीटिंग में फैसला संभव",
-            "url": "https://www.livehindustan.com/business/milk-fare-hike-upto-10-rs-karnataka-cabinet-to-discuss-detail-is-here-201791272746879.html",
+            "title": "रोहित शर्मा नंबर-1, हेटमायर बने कोहली के लिए खतरा; IND vs WI टी20 में सबसे ज्यादा रन",
+            "url": "https://www.livehindustan.com/cricket/rohit-sharma-is-no-1-shimron-hetmyer-poses-a-threat-to-virat-kohli-top-5-most-runs-in-ind-vs-wi-t20is-201791261674025.html",
             "source": "Hindustan"
           }
         ]
       },
       {
-        "title": "கூட்டுறவு வங்கி",
+        "title": "china open",
         "region": "IN",
-        "at": "2026-10-06T03:50:00-07:00",
-        "traffic": "10000+",
+        "at": "2026-10-06T05:50:00-07:00",
+        "traffic": "1000+",
         "news": [
           {
-            "title": "கூட்டுறவு வங்கிகளில் நகைக்கடன் கிராமுக்கு ரூ.10,000 ஆக உயர்த்தியது தமிழக அரசு",
-            "url": "https://www.dinamalar.com/news/tamil-nadu-news/government-of-tamil-nadu-increases-jewellery-loan-in-co-operative-banks-to-rs-10000-per-gram/4340667",
-            "source": "Dinamalar"
+            "title": "‘I'm not a cheater or a thief’: Coco Gauff hits back at racist abuse after China Open controversy",
+            "url": "https://timesofindia.indiatimes.com/sports/tennis/top-stories/you-can-dislike-me-without-being-racist-coco-gauff-hits-back-at-abuse-after-china-open-controversy/articleshow/134740393.cms",
+            "source": "The Times of India"
           },
           {
-            "title": "கூட்டுறவு வங்கிகளில் நகைக் கடன் உச்சவரம்பு உயர்வு: கிராமுக்கு ரூ.10,000 வரை கடன் வழங்க தமிழக அரசு அறிவிப்பு",
-            "url": "https://tamil.indianexpress.com/business/tamil-nadu-cooperative-bank-jewel-loan-rs-10000-per-gram-12626525",
-            "source": "Indian Express - Tamil"
+            "title": "China Open: Coco Gauff condemns racist abuse on social media after incident during Sun Xinran match",
+            "url": "https://www.bbc.com/sport/tennis/articles/cqd09z0x9xd8o",
+            "source": "BBC"
           },
           {
-            "title": "Gold Loan | கூட்டுறவு நிறுவனங்களில் நகைக்கடனுக்கு புதிய உச்சவரம்பு... கிராமுக்கு ரூ.10,000!",
-            "url": "https://tamil.news18.com/videos/tamil-nadu/gold-loan-10-000-2223885.html",
-            "source": "News18 Tamil"
+            "title": "Coco Gauff responds to receiving racist abuse for following tennis rules during China Open win - The Athletic",
+            "url": "https://www.nytimes.com/athletic/7663876/2026/10/05/coco-gauff-sun-xinran-tennis-hindrance-china-open/",
+            "source": "The New York Times"
+          }
+        ]
+      },
+      {
+        "title": "ബിഗ് ബോസ് മലയാളം",
+        "region": "IN",
+        "at": "2026-10-06T05:50:00-07:00",
+        "traffic": "200+",
+        "news": [
+          {
+            "title": "'എനിക്കിവിടെ പറ്റുന്നില്ല'; വീട്ടില്‍ പോകണമെന്ന് ബി​ഗ് ബോസിനോട് സുവർണ",
+            "url": "https://www.asianetnews.com/entertainment-biggboss/suvarna-gets-emotional-and-says-she-wants-to-leave-the-bigg-boss-malayalam-season-8-house-and-go-home-articleshow-4kysfiu",
+            "source": "Asianet News Malayalam"
+          },
+          {
+            "title": "Bigg Boss Malayalam Season 8: തനിക്ക് പറ്റുന്നില്ല, പൊക്കോട്ടെ... ബി​ഗ് ബോസിനോട് ജസീല | Bigg Boss Malayalam Season 8: Jaseela Expresses Desire to Quit The Show",
+            "url": "https://www.malayalamtv9.com/entertainment/bigg-boss-malayalam-season-8-jaseela-expresses-desire-to-quit-the-show-2236195.html",
+            "source": "Malayalam TV9"
+          },
+          {
+            "title": "Bigg Boss: 'എനിക്കിവിടെ പറ്റുന്നില്ല, വീട്ടിൽ പോകണം'; ഹൗസിൽ കാലുകുത്തി 24 മണിക്കൂർ തികയും മുൻപേ കരച്ചിലുമായി സുവർണ",
+            "url": "https://malayalam.indianexpress.com/television/bigg-boss-malayalam-season-8-wildcard-suvarna-wants-to-quit-show-12629634",
+            "source": "Indian Express - Malayalam"
+          }
+        ]
+      },
+      {
+        "title": "ind vs wi",
+        "region": "IN",
+        "at": "2026-10-06T05:40:00-07:00",
+        "traffic": "100000+",
+        "news": [
+          {
+            "title": "No guarantees for Sooryavanshi as India look to build on Asian Games success",
+            "url": "https://www.cricinfo.com/series/west-indies-in-india-2026-27-1529215/india-vs-west-indies-1st-t20i-1529230/match-preview",
+            "source": "Cricinfo"
+          },
+          {
+            "title": "IND vs WI 2026, 1st T20I: Nitish Kumar Reddy Interview",
+            "url": "https://www.bcci.tv/videos/s-ind-vs-wi-2026-1st-t20i-nitish-kumar-reddy-interview-xxpp6a",
+            "source": "BCCI"
+          },
+          {
+            "title": "India vs WI 1st T20I Updates: India elect to bowl vs West Indies",
+            "url": "https://www.rediff.com/cricket/commentary/2026/oct/06/liveupdates.htm",
+            "source": "Rediff"
+          }
+        ]
+      },
+      {
+        "title": "न्यूनतम मजदूरी",
+        "region": "IN",
+        "at": "2026-10-06T05:30:00-07:00",
+        "traffic": "200+",
+        "news": [
+          {
+            "title": "8th Pay Commission Updates: ₹68000 महीने मिलेगी पेंशन, अगर 8वें वेतन आयोग ने मान ली ये बात!",
+            "url": "https://www.aajtak.in/business/utility/photo/8th-pay-commission-central-govt-employees-and-pensioners-await-pension-hike-details-tuta-2662699-2026-10-06",
+            "source": "Aaj Tak"
+          },
+          {
+            "title": "3% बढ़ सकता है केंद्रीय कर्मचारियों का DA, जानें सैलरी पर कितना होगा असर",
+            "url": "https://www.livehindustan.com/business/da-hike-update-may-hike-3-percent-da-central-govt-employees-need-to-know-salary-impact-201791278650015.html",
+            "source": "Hindustan"
+          },
+          {
+            "title": "मजदूरों के लिए खुशखबरी: 1 अक्टूबर से बढ़ गई न्यूनतम मजदूरी, सरकार ने वेरिएबल महंगाई भत्ते में किया संशोधन",
+            "url": "https://www.indiatv.in/paisa/business/minimum-wages-hiked-from-october-1-government-revises-vda-for-workers-across-key-sectors-2026-10-06-1247222",
+            "source": "India TV Hindi"
+          }
+        ]
+      },
+      {
+        "title": "फराह खान",
+        "region": "IN",
+        "at": "2026-10-06T05:30:00-07:00",
+        "traffic": "200+",
+        "news": [
+          {
+            "title": "पहाड़ों में बसे सौरव जोशी के आलीशान बंगले का फराह खान ने दिखाया नजारा, करोड़ों का कार कलेक्शन, घर के कोने-क",
+            "url": "https://www.indiatv.in/entertainment/bollywood/farah-khan-gives-glimpse-of-sourav-joshi-lavish-bungalow-nestled-in-mountains-home-showcases-luxury-in-every-corner-alongside-multi-crore-cars-2026-10-06-1247176",
+            "source": "India TV Hindi"
+          },
+          {
+            "title": "प्राइवेट जिम, लिफ्ट और लग्जरी कारें, फराह खान ने दिखाया यूट्यूबर सौरव जोशी का",
+            "url": "https://www.abplive.com/photo-gallery/entertainment/television-youtuber-sourav-joshi-haldwani-lavish-house-gym-cars-collection-farah-khan-shocked-3198423",
+            "source": "ABP News"
+          },
+          {
+            "title": "Sourav Joshi Home Tour: पहाड़ों में करोड़ों का आशियाना, 'मन्नत' को देता है टक्कर! ऐसा है 26 साल के यूट्यूबर का घर",
+            "url": "https://www.aajtak.in/entertainment/ott/photo/youtuber-sourav-joshi-lavish-8-cr-haldwani-home-photos-net-worth-subscribers-tmovj-2653891-2026-09-27",
+            "source": "Aaj Tak"
+          }
+        ]
+      },
+      {
+        "title": "কলকাতা হাইকোর্ট",
+        "region": "IN",
+        "at": "2026-10-06T05:30:00-07:00",
+        "traffic": "200+",
+        "news": [
+          {
+            "title": "আইন মেনেই গ্যালিফ স্ট্রিটে ব্যবসা করতে হবে, স্পষ্ট জানিয়ে দিল হাইকোর্ট",
+            "url": "https://eisamay.com/west-bengal-news/kolkata-news/calcutta-high-court-galiff-street-pet-market-wildlife-protection-act/200551810.cms",
+            "source": "Ei Samay"
+          },
+          {
+            "title": "ফুটপাথ দখল করে ব্যবসা চলবে না! গ্যালিফ স্ট্রিট নিয়ে কড়া বার্তা কলকাতা হাইকোর্টের",
+            "url": "https://www.thewall.in/west-bengal/kolkata-high-court-gallif-street-pet-market-footpath-encroachment/tid/206433",
+            "source": "TheWall"
+          },
+          {
+            "title": "বেআইনি পশুপাখি বিক্রি নয়, গ্যালিফ স্ট্রিটের ব্যবসায়ীদের কড়া নির্দেশ আদালতের",
+            "url": "https://biswabanglasangbad.com/state/calcutta-high-court-issues-strict-directive-to-galiff-street-traders-against-the-sale-of-illegal-animals-and-birds",
+            "source": "BiswaBangla Sangbad"
           }
         ]
       }
