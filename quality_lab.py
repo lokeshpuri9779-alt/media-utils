@@ -5,6 +5,8 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
+from creative_director import evaluate as evaluate_director, production_feedback
+
 
 def assess_render(report: dict) -> dict:
     failures = []
@@ -84,3 +86,23 @@ def scene_change_report(video_path: Path) -> dict:
             "scene_count": 0,
             "error": str(exc)[:240],
         }
+
+
+def unified_quality_report(report: dict) -> dict:
+    """Combine renderer QA with Astra's creative director.
+
+    This function is intentionally side-effect free. It returns the release
+    decision plus a targeted repair plan for the orchestrator.
+    """
+    base = assess_render(report)
+    merged = dict(report)
+    hard = list(merged.get("hard_failures") or [])
+    hard.extend(base.get("failures") or [])
+    merged["hard_failures"] = hard
+    decision = evaluate_director(merged)
+    return {
+        "render_assessment": base,
+        "director": decision,
+        "feedback": production_feedback(decision),
+        "pass": bool(base.get("pass")) and bool(decision.get("publish_allowed")),
+    }
