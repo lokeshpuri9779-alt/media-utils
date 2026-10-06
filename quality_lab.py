@@ -55,3 +55,32 @@ def contact_sheet(stills_dir: Path, output: Path, title: str = "RAYVAN review") 
 
 def write_report(path: Path, payload: dict) -> None:
     path.write_text(json.dumps(payload, indent=2, default=str), encoding="utf-8")
+
+
+def scene_change_report(video_path: Path) -> dict:
+    """Analyze rendered pacing using the installed PySceneDetect repository."""
+    try:
+        from scenedetect import ContentDetector, SceneManager, open_video
+        video = open_video(str(video_path))
+        manager = SceneManager()
+        manager.add_detector(ContentDetector(threshold=20.0, min_scene_len=8))
+        manager.detect_scenes(video)
+        scenes = manager.get_scene_list(start_in_scene=True)
+        cuts = []
+        for start, end in scenes:
+            cuts.append({
+                "start": round(start.get_seconds(), 3),
+                "end": round(end.get_seconds(), 3),
+                "duration": round((end - start).get_seconds(), 3),
+            })
+        return {
+            "available": True,
+            "scene_count": len(cuts),
+            "detected_scenes": cuts,
+        }
+    except Exception as exc:
+        return {
+            "available": False,
+            "scene_count": 0,
+            "error": str(exc)[:240],
+        }
