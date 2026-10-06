@@ -29,6 +29,11 @@ from remote_gpu_client import (
     generate_remote_clip,
     remote_status,
 )
+from hf_zerogpu_adapter import (
+    ZeroGPUUnavailable,
+    generate_zerogpu_clip,
+    zerogpu_status,
+)
 
 MODEL = "wan-video/wan-2.6-t2v"
 CREATE_URL = "https://api.replicate.com/v1/models/wan-video/wan-2.6-t2v/predictions"
@@ -48,14 +53,16 @@ def paid_generation_enabled() -> bool:
 def provider_status() -> dict:
     oss=open_source_provider_status()
     remote=remote_status()
+    zero=zerogpu_status()
     paid_ready=bool((os.environ.get("REPLICATE_API_TOKEN") or "").strip()) and paid_generation_enabled()
-    selected=oss.get("selected") or ("remote-open-source-gpu" if remote.get("ready") else ("replicate" if paid_ready else None))
+    selected=oss.get("selected") or ("remote-open-source-gpu" if remote.get("ready") else ("hf-zerogpu" if zero.get("ready") else ("replicate" if paid_ready else None)))
     return {
         "mode": "open-source-first",
         "selected": selected,
         "ready": bool(oss.get("ready")) or bool(remote.get("ready")) or paid_ready,
         "open_source": oss,
         "remote_open_source": remote,
+        "hf_zerogpu": zero,
         "selected_capability": capability(selected),
         "paid_fallback": {
             "provider": "replicate",
@@ -189,6 +196,10 @@ def generate_character_clip(shot: dict, output_path: str | Path, timeout_seconds
     try:
         return generate_remote_clip(shot, output_path, timeout_seconds=max(timeout_seconds, 1800))
     except RemoteGPUUnavailable:
+        pass
+    try:
+        return generate_zerogpu_clip(shot, output_path)
+    except ZeroGPUUnavailable:
         pass
     # Paid inference is never an autonomous choice, even when credentials exist.
     if not autonomous_provider_allowed("replicate") and not paid_generation_enabled():
