@@ -492,13 +492,8 @@ def draw_visual(im,s,t,u,accent):
         fit_text(d,s['label'],(80,1090,935,1240),size=104,fill=accent,max_lines=2)
         fit_text(d,s['sub'],(85,1245,930,1310),size=27,fill=(184,192,214),max_lines=2)
     elif visual=='media':
-        # Premium media-first canvas. The verified subject asset is composited
-        # after this layer; no generic diagram or fake infographic competes with it.
-        d.rounded_rectangle((84,500,996,1280),radius=34,fill=(10,16,28),outline=(42,55,78),width=2)
-        d.rounded_rectangle((106,522,974,1258),radius=26,outline=accent,width=2)
-        if s.get('label'):
-            d.rounded_rectangle((116,1168,520,1236),radius=20,fill=(8,12,23))
-            fit_text(d,s['label'],(132,1176,504,1228),size=31,fill=accent,max_lines=1)
+        # Media is the scene, not a card inside a template.
+        pass
     elif visual=='tidal_lock':
         # Purpose-built synchronous-rotation demonstration: a marked point on
         # the Moon always faces Earth while the Moon completes an orbit.
