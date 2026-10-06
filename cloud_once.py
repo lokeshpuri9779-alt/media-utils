@@ -17,6 +17,7 @@ STATE_PATH = Path("quota_state.json")
 IST = ZoneInfo("Asia/Kolkata")
 INITIAL_TARGET = int(os.environ.get("ASTRA_INITIAL_DAILY_TARGET", "9"))
 MAX_TARGET = int(os.environ.get("ASTRA_MAX_DAILY_TARGET", "24"))
+SCHEDULE_SLOT_MINUTES = max(1, int(os.environ.get("ASTRA_SCHEDULE_SLOT_MINUTES", "30")))
 CHANNELS_PATH = Path("channels.json")
 
 def channel_profile() -> dict:
@@ -149,8 +150,8 @@ def scheduled_attempt_due(now: datetime, state: dict) -> bool:
     target = max(1, min(MAX_TARGET, int(state.get("target", INITIAL_TARGET))))
     attempts = int(state.get("attempts", 0))
     minutes = now.hour * 60 + now.minute
-    # Runs are hourly. This spreads the target across the full India-local day.
-    should_have_attempted = min(target, ((minutes + 60) * target) // 1440)
+    # Spread attempts across the India-local day using the actual controller cadence.
+    should_have_attempted = min(target, ((minutes + SCHEDULE_SLOT_MINUTES) * target) // 1440)
     return attempts < should_have_attempted
 
 def _ease_out_back(x: float) -> float:
@@ -773,7 +774,7 @@ def main() -> None:
         print("Daily upload attempt target reached.")
         return
     if not force and not long_episode and not scheduled_attempt_due(now, state):
-        print("No upload attempt due in this hourly slot.")
+        print("No upload attempt due in this scheduled slot.")
         return
 
     work = Path(tempfile.mkdtemp(prefix="media_utils_run_"))
