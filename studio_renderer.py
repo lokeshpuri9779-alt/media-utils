@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-2.5"
+VERSION = "studio-2.6"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -726,8 +726,43 @@ def resolve_assets(manifest):
                      license='original-abstraction-no-source-media-copied')
         else:
             r.update(provider='none',status='blocked',cost=0,license='unknown')
+        # Store the exact contract an external provider must satisfy. This keeps
+        # the renderer provider-ready while preserving the zero-cost local fallback.
+        r['external_request']=external_media_request(item)
         resolved.append(r)
     return resolved
+
+
+def external_media_request(item):
+    """Describe a rights-safe external-media request without scraping or trusting search-result licenses."""
+    q=item.get('query','')
+    # Provider contract: adapters may only return media when they can also return
+    # a machine-verifiable license/provenance record. Otherwise Astra must ignore it.
+    return {
+        'query':q,'media_types':['image','video'],
+        'allowed_licenses':['cc0','public-domain','authorized-reuse'],
+        'require_creator':True,'require_source_url':True,'require_license_url':True,
+        'commercial_use_required':True,'modification_required':True,
+        'disallow_editorial_only':True,'disallow_unknown_license':True,
+    }
+
+def external_media_candidate(item, candidate=None):
+    """Validate a future provider result. No candidate means safe local fallback."""
+    if not candidate: return None
+    license_id=str(candidate.get('license','')).lower()
+    required=('asset_url','source_url','license_url','creator')
+    if any(not candidate.get(k) for k in required): return None
+    if license_id not in {'cc0','public-domain','authorized-reuse'}: return None
+    if not candidate.get('commercial_use',False): return None
+    if not candidate.get('modification_allowed',False): return None
+    out=dict(item)
+    out.update(provider=candidate.get('provider','external-authorized'),
+               status='ready',cost=float(candidate.get('cost',0)),
+               license=license_id,asset_url=candidate['asset_url'],
+               provenance={'source_url':candidate['source_url'],
+                           'license_url':candidate['license_url'],
+                           'creator':candidate['creator']})
+    return out
 
 def asset_resolution_gate(resolved):
     blocked=[x for x in resolved if x.get('status')!='ready']
