@@ -250,6 +250,24 @@ def thumbnail(path, topics):
 
 def render(out, episode_id, trend_items):
     plan,topics=build_plan(trend_items)
+    # Apply only evidence-backed pacing lessons; absent evidence leaves the
+    # authored structure untouched.
+    try:
+        import json as _json
+        perf_path=Path(__file__).with_name('performance.json')
+        perf=_json.loads(perf_path.read_text(encoding='utf-8')) if perf_path.exists() else {}
+        lessons=(((perf.get('evolution') or {}).get('long_retention_patterns') or {}).get('lessons') or [])
+    except Exception:
+        lessons=[]
+    if 'stronger_open' in lessons and plan:
+        plan[0]['min_duration']=max(8.0,float(plan[0].get('min_duration') or 12.0)-2.0)
+    if 'shorter_context' in lessons:
+        for x in plan:
+            if x.get('story_beat') in {'context','complication'}: x['min_duration']=9.0
+    if 'earlier_implication' in lessons:
+        ii=next((i for i,x in enumerate(plan) if x.get('story_beat')=='implication'),None)
+        if ii is not None and ii>4:
+            item=plan.pop(ii); plan.insert(4,item)
     quality=long_quality_gate(plan,topics)
     total=studio.voice_plan(plan,'current',max_duration=600)
     if total < 90:
