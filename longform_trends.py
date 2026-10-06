@@ -69,7 +69,9 @@ def sourced_topics(items, limit=5):
             continue
         seen.add(key)
         first=news[0]
-        chosen=news[:2] if sensitive else news[:1]
+        # Keep two independent sources when available so non-sensitive
+        # topics can qualify for evidence-backed deep dives too.
+        chosen=news[:2]
         ranked.append({
             'topic':topic[:120],
             'region':str(item.get('region') or 'global')[:24],
