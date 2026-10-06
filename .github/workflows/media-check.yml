@@ -241,7 +241,6 @@ jobs:
         with:
           ref: ${{ github.sha }}
           submodules: recursive
-          submodules: recursive
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
