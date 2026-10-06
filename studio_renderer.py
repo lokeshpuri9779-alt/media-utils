@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-2.2"
+VERSION = "studio-2.3"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -673,10 +673,40 @@ def render_frame(plan,t,genre,total):
     return im
 
 
+
+def creative_quality_gate(ch, plan):
+    """Fail closed when a rendered story would still behave like a generic template."""
+    if not plan: raise RuntimeError('Creative gate: empty shot plan.')
+    assets=[p.get('director_asset','') for p in plan]
+    roles=[p.get('director_role','') for p in plan]
+    motions=[p.get('director_motion','') for p in plan]
+    semantics={x for p in plan for x in p.get('director_semantics',[])}
+    score=35
+    score+=min(20,len(set(assets))*6)
+    score+=min(12,len(set(motions))*4)
+    score+=min(12,len(set(roles))*3)
+    score+=min(10,len(semantics)*3)
+    if assets and assets[0] != 'kinetic-type': score+=5
+    if any(a in {'source-document','map-explainer','mechanism-diagram','comparison-graphic','time-visualization'} for a in assets): score+=8
+    if ch.get('genre')=='current':
+        if int(ch.get('source_count') or 0)>0 and 'source-document' not in assets: score-=12
+        if len(set(assets))<2: score-=20
+        if not semantics: score-=18
+    generic_ratio=(sum(a=='kinetic-type' for a in assets)/max(1,len(assets)))
+    if generic_ratio>.60: score-=18
+    score=max(0,min(100,score))
+    report={'score':score,'assets':assets,'roles':roles,'motions':motions,
+            'semantics':sorted(semantics),'generic_ratio':round(generic_ratio,2)}
+    if score<65:
+        raise RuntimeError('Creative gate rejected generic/weak visual plan: '+json.dumps(report))
+    return report
+
 def render_short(ch,out,still_dir=None):
     genre=ch.get('genre','challenge')
     if genre not in THEMES: raise ValueError('Unsupported genre')
-    plan=make_plan(ch);duration=voice_plan(plan,genre)
+    plan=make_plan(ch)
+    creative_report=creative_quality_gate(ch,plan)
+    duration=voice_plan(plan,genre)
     out=Path(out);out.parent.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='astra_studio_') as tmp:
         tmp=Path(tmp);audio=tmp/'mix.wav'
@@ -700,7 +730,7 @@ def render_short(ch,out,still_dir=None):
             folder=Path(still_dir);folder.mkdir(parents=True,exist_ok=True)
             for i,s in enumerate(plan): render_frame(plan,s['start']+min(1,s['duration']/2),genre,duration).save(folder/f'scene_{i+1}.jpg',quality=94)
     report={'renderer':VERSION,'genre':genre,'frames':count,'duration':round(actual_duration,3),
-            'resolution':[W,H],'fps':FPS,'audio':audio_info,
+            'resolution':[W,H],'fps':FPS,'audio':audio_info,'creative_quality':creative_report,
             'scenes':[{k:v for k,v in s.items() if k!='audio'} for s in plan]}
     print('Studio render:',json.dumps({k:v for k,v in report.items() if k!='scenes'}))
     return report
