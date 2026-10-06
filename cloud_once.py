@@ -548,6 +548,14 @@ def load_performance() -> dict:
 def save_performance(data: dict) -> None:
     PERFORMANCE_PATH.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
+def content_already_published(content_id: str) -> bool:
+    """Fail closed when a generated concept is already in persistent channel history."""
+    cid = str(content_id or "").strip()
+    if not cid:
+        return False
+    return any(str(info.get("content_id") or "").strip() == cid
+               for info in load_performance().get("videos", {}).values())
+
 def record_video(video_id: str, title: str) -> None:
     if not video_id:
         return
@@ -737,6 +745,15 @@ def main() -> None:
     print("Revenue geography:", json.dumps(CONTENT_META["revenue_geography"], ensure_ascii=False))
     print("YPP safety:", json.dumps(ypp_report, ensure_ascii=False))
     print("Generated:", title)
+
+    # Final transactional dedupe gate. Selection already avoids recent content,
+    # but persistent state can change between selection/render and upload.
+    content_id = str(CONTENT_META.get("content_id") or "").strip()
+    if content_id and content_already_published(content_id):
+        print("Duplicate content blocked before upload:", content_id)
+        state["duplicate_blocks"] = int(state.get("duplicate_blocks", 0)) + 1
+        save_state(state)
+        return
 
     try:
         status, url = upload(video, title, desc, token=token)
