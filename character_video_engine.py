@@ -17,6 +17,8 @@ from pathlib import Path
 
 import httpx
 
+from video_provider_policy import capability, autonomous_provider_allowed
+
 from open_source_video_engine import (
     OpenSourceVideoUnavailable,
     generate_open_source_clip,
@@ -54,6 +56,7 @@ def provider_status() -> dict:
         "ready": bool(oss.get("ready")) or bool(remote.get("ready")) or paid_ready,
         "open_source": oss,
         "remote_open_source": remote,
+        "selected_capability": capability(selected),
         "paid_fallback": {
             "provider": "replicate",
             "model": MODEL,
@@ -186,8 +189,13 @@ def generate_character_clip(shot: dict, output_path: str | Path, timeout_seconds
     try:
         return generate_remote_clip(shot, output_path, timeout_seconds=max(timeout_seconds, 1800))
     except RemoteGPUUnavailable:
-        # Paid remote generation is the final fallback only and remains double-gated.
-        return _generate_paid_character_clip(shot, output_path, timeout_seconds=timeout_seconds)
+        pass
+    # Paid inference is never an autonomous choice, even when credentials exist.
+    if not autonomous_provider_allowed("replicate") and not paid_generation_enabled():
+        raise CharacterVideoUnavailable(
+            "No free/self-hosted character-video backend is ready; paid fallback remains disabled."
+        )
+    return _generate_paid_character_clip(shot, output_path, timeout_seconds=timeout_seconds)
 
 
 def generate_storyboard(storyboard: list[dict], root: str | Path) -> tuple[list[Path], list[dict]]:
