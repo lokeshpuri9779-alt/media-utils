@@ -11659,6 +11659,234 @@
         "likes": 0,
         "comments": 0
       }
+    },
+    "iNxyqo084GE": {
+      "title": "Why Sunsets on Mars Can Look Blue #Shorts",
+      "published_at": "2026-10-07T03:49:28.549192+05:30",
+      "history": [],
+      "genre": "space",
+      "content_id": "mars-blue-sunset-v7-private",
+      "source": "https://science.nasa.gov/solar-system/planets/mars/what-does-a-sunrise-sunset-look-like-on-mars/",
+      "hook": "MARS HAS BLUE SUNSETS",
+      "question": "Why can sunset near the Sun look blue on the Red Planet?",
+      "answer": "Fine Martian dust keeps blue light concentrated close to the Sun while warmer colors spread more broadly through the sky.",
+      "creative_format": "cinematic_mini_doc",
+      "selection_reason": "experimental-v7-private-pilot",
+      "creative_director": {
+        "score": 82.29,
+        "tier": "strong",
+        "action": "publish",
+        "weak_components": [
+          "pacing"
+        ],
+        "repair_plan": [
+          "shorten_long_scenes_and_add_cuts"
+        ],
+        "component_scores": {
+          "hook": 94.0,
+          "retention": 80.43733333333333,
+          "visual": 100.0,
+          "pacing": 15.0,
+          "audio": 97.39,
+          "captions": 98.33,
+          "novelty": 100.0,
+          "coherence": 92.0,
+          "technical": 100.0
+        },
+        "weights": {
+          "hook": 0.2,
+          "retention": 0.15,
+          "visual": 0.15,
+          "pacing": 0.15,
+          "audio": 0.1,
+          "captions": 0.1,
+          "novelty": 0.05,
+          "coherence": 0.05,
+          "technical": 0.05
+        },
+        "hard_failures": [],
+        "publish_allowed": true
+      },
+      "repair_feedback": {
+        "action": "publish",
+        "keep": {
+          "script": true,
+          "voice": true,
+          "captions": true,
+          "visuals": true,
+          "render": true
+        },
+        "rebuild": [
+          "shorten_long_scenes_and_add_cuts"
+        ],
+        "score": 82.29
+      },
+      "media_qa": {
+        "available": true,
+        "pass": true,
+        "expected_words": 51,
+        "recognized_words": 51,
+        "coverage": 0.9804,
+        "order_similarity": 0.9804,
+        "avg_word_probability": 0.9431,
+        "max_silence_gap": 0.62,
+        "timing_monotonic": true,
+        "caption_chunks": [
+          "Near sunset on Mars, the sky around",
+          "the sun can glow blue.",
+          "Find dust in the Martian atmosphere",
+          "scatters light differently from Earth's",
+          "air.",
+          "Blue light stays concentrated closer to",
+          "the sun, while warmer colors spread",
+          "farther across the sky.",
+          "Red landscape, blue sunset, the same dusty",
+          "atmosphere makes both possible."
+        ],
+        "audio_score": 97.39,
+        "caption_score": 98.33,
+        "hard_failures": [],
+        "engine": "faster-whisper + VideoLingo segmentation bridge"
+      },
+      "scene_detection": {
+        "available": true,
+        "scene_count": 3,
+        "detected_scenes": [
+          {
+            "start": 0.0,
+            "end": 4.0,
+            "duration": 4.0
+          },
+          {
+            "start": 4.0,
+            "end": 8.8,
+            "duration": 4.8
+          },
+          {
+            "start": 8.8,
+            "end": 20.167,
+            "duration": 11.367
+          }
+        ]
+      },
+      "creative_fingerprint": {
+        "scene_count": 4,
+        "creative_format": [
+          "cinematic_mini_doc",
+          "cinematic_mini_doc",
+          "cinematic_mini_doc",
+          "cinematic_mini_doc"
+        ],
+        "director_style": [
+          "cel-shaded",
+          "vector-motion",
+          "mixed-media",
+          "mixed-media"
+        ],
+        "director_layout": [
+          "center",
+          "focus-left",
+          "focus-right",
+          "center"
+        ],
+        "director_camera": [
+          "push",
+          "drift",
+          "push",
+          "track"
+        ],
+        "format_transition": [
+          "cinematic",
+          "cinematic",
+          "cinematic",
+          "cinematic"
+        ],
+        "director_caption_mode": [
+          "phrase",
+          "phrase",
+          "phrase",
+          "phrase"
+        ],
+        "director_asset": [
+          "editorial-illustration",
+          "mechanism-diagram",
+          "kinetic-type",
+          "editorial-illustration"
+        ],
+        "story_beat": [
+          "reveal",
+          "mechanism",
+          "evidence",
+          "payoff"
+        ],
+        "creative_format_name": "cinematic_mini_doc"
+      },
+      "creative_identity": {
+        "pass": true,
+        "highest_similarity": 0.0,
+        "novelty_score": 100.0,
+        "hard_limit": 0.82,
+        "comparisons": [],
+        "reason": "creative identity sufficiently distinct"
+      },
+      "format": "short",
+      "renderer": "studio-7.0.0",
+      "duration": 20.167,
+      "voice": "Kokoro expressive profile",
+      "scene_count": 4,
+      "distribution_plan": {
+        "mode": "explore",
+        "genre": "space",
+        "format": "short",
+        "top_internal_sources": [],
+        "packaging_hints": [
+          "clear_title",
+          "strong_hook"
+        ],
+        "brand": "RAYVAN",
+        "tagline": "Stories Beyond the Ordinary.",
+        "related_video_id": null,
+        "external_distribution": "disabled-unless-explicitly-authorized",
+        "engagement_manipulation": false
+      },
+      "revenue_geography": {
+        "mode": "cold_start",
+        "ranked_countries": [],
+        "cold_start_priors": {
+          "US": 1.0,
+          "GB": 0.86,
+          "CA": 0.84,
+          "AU": 0.88,
+          "DE": 0.78,
+          "IE": 0.78,
+          "NL": 0.74,
+          "SG": 0.82,
+          "IN": 0.3
+        },
+        "guardrails": {
+          "fake_location": false,
+          "vpn_manipulation": false,
+          "bot_traffic": false
+        },
+        "note": "Priors are directional indices, not promised RPM. Actual channel revenue overrides priors."
+      },
+      "ypp_safety": {
+        "policy_version": "2026-10-ypp-v1",
+        "decision": "allow",
+        "reasons": [],
+        "max_similarity": 0.09,
+        "matched_video_id": "SH3Z65UuXuo",
+        "ai_disclosure_required": false,
+        "checks": {
+          "originality": true,
+          "mass_production_similarity": true,
+          "reused_content_safe": true,
+          "copyright_safe": true
+        },
+        "fingerprint": "12788b98a1871694"
+      },
+      "visibility": "private",
+      "channel_key": "rayvan"
     }
   },
   "research": {
@@ -13029,9 +13257,9 @@
     ]
   },
   "creative_health": {
-    "consecutive_exhausted_slots": 1,
+    "consecutive_exhausted_slots": 0,
     "renderer_diagnostic_required": false,
-    "last_success_at": "2026-10-07T03:29:37.721034+05:30",
+    "last_success_at": "2026-10-07T03:49:26.121356+05:30",
     "rejected_before_success": 0,
     "last_quality_skip_at": "2026-10-07T03:44:17.628847+05:30",
     "last_quality_skip_reason": "Creative Engine rejected all candidates; skipping rather than publishing weak/template content.",
