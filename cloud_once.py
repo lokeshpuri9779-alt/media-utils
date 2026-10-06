@@ -768,11 +768,22 @@ def make_short(out: Path, excluded_ids=None, excluded_titles=None) -> tuple[str,
             print("Creative Director:", json.dumps(director["director"], ensure_ascii=False))
             if not director["pass"]:
                 action = str(director["director"].get("action") or "")
-                repairs = director["director"].get("repair_plan") or []
-                raise CreativeReject(
-                    "Autonomous quality gate rejected rendered Short: "
-                    + json.dumps({"action": action, "repairs": repairs, "score": director["director"].get("score")})
-                )
+                repairs = set(director["director"].get("repair_plan") or [])
+                visual_repairs = {"replace_weak_visuals_and_broll", "change_visual_grammar_or_concept_angle", "shorten_long_scenes_and_add_cuts"}
+                blocking_repairs = {"rewrite_hook_only", "compress_or_reorder_story_beats", "remix_or_regenerate_audio", "realign_and_resplit_captions", "repair_scene_to_narration_alignment", "repair_render_technical_failures"}
+                if action == "targeted_regeneration" and (repairs & visual_repairs) and not (repairs & blocking_repairs):
+                    print("Creative Director: rerendering same story with repaired visual direction.")
+                    report = render_short(ch, out, director_repair_pass=3)
+                    director = evaluate_studio_render(ch, report)
+                    CONTENT_META["creative_director"] = director["director"]
+                    CONTENT_META["repair_feedback"] = director["feedback"]
+                    CONTENT_META["director_rerendered"] = True
+                    print("Creative Director rerender:", json.dumps(director["director"], ensure_ascii=False))
+                if not director["pass"]:
+                    raise CreativeReject(
+                        "Autonomous quality gate rejected rendered Short: "
+                        + json.dumps({"action": director["director"].get("action"), "repairs": director["director"].get("repair_plan"), "score": director["director"].get("score")})
+                    )
             break
         except CreativeReject as exc:
             msg=str(exc)
