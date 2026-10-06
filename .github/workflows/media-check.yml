@@ -122,6 +122,14 @@ jobs:
       - name: Render Studio startup preview
         if: (github.event_name == 'push' || github.event_name == 'pull_request') && env.ASTRA_FORCE_RUN != '1'
         run: python studio_renderer.py --preview /tmp/astra-studio-preview.mp4
+      - name: Upload Studio 6 preview
+        if: (github.event_name == 'push' || github.event_name == 'pull_request') && env.ASTRA_FORCE_RUN != '1'
+        uses: actions/upload-artifact@v4
+        with:
+          name: studio6-preview-${{ github.run_id }}
+          path: /tmp/astra-studio-preview.mp4
+          retention-days: 7
+          if-no-files-found: error
       - name: Refresh daily research on code pushes
         if: (github.event_name == 'push' || github.event_name == 'pull_request') && env.ASTRA_FORCE_RUN != '1'
         run: python cloud_once.py --study
