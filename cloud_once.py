@@ -776,24 +776,39 @@ def main() -> None:
     force = (os.environ.get("ASTRA_FORCE_RUN") or "").strip() == "1"
     print(f"Adaptive daily target: {state['target']} | attempts: {state['attempts']} | successes: {state['successes']} | limit_hit: {state['limit_hit']}")
 
-    # Cheap gates first: no analytics/research API work when publishing is already
-    # paused, the daily attempt budget is exhausted, or this slot is not due.
+    # Long-form has its own weekly cadence and must not be accidentally blocked
+    # by the Shorts pacing gate. Use local performance for a cheap preflight,
+    # then refresh evidence only when either format can actually publish.
+    from longform import choose_episode
+    long_enabled = os.environ.get("ASTRA_LONG_ENABLED", "1") == "1"
+    preflight_long_episode = choose_episode(load_performance(), now) if long_enabled else None
+    short_due = (
+        force
+        or (
+            not state.get("limit_hit")
+            and int(state.get("attempts", 0)) < int(state["target"])
+            and scheduled_attempt_due(now, state)
+        )
+    )
+
     if state.get("limit_hit") and not force:
         print("Paused after an earlier API uploadLimitExceeded response. No fresh upload test occurred in this run.")
         print("The India-local day reset is Astra scheduling behavior, not a confirmed YouTube reset time.")
         return
-    if int(state.get("attempts", 0)) >= int(state["target"]) and not force:
-        print("Daily upload attempt target reached.")
-        return
-    if not force and not scheduled_attempt_due(now, state):
-        print("No upload attempt due in this scheduled slot.")
+    if not force and not short_due and not preflight_long_episode:
+        if int(state.get("attempts", 0)) >= int(state["target"]):
+            print("Daily Shorts upload attempt target reached; no long-form episode is due.")
+        else:
+            print("No Shorts upload attempt due in this scheduled slot and no long-form episode is due.")
         return
 
     # Refresh evidence only when this run can actually produce content.
     refresh_performance()
     refresh_research(token)
-    from longform import choose_episode
-    long_episode = choose_episode(load_performance(), now) if os.environ.get("ASTRA_LONG_ENABLED", "1") == "1" else None
+    long_episode = choose_episode(load_performance(), now) if long_enabled else None
+    if not force and preflight_long_episode and not long_episode and not short_due:
+        print("Long-form eligibility changed after refresh; no Shorts slot is due.")
+        return
 
     # Reconcile recent live channel identities before rendering so duplicate
     # concepts do not consume renderer/voice/FFmpeg time.
