@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/media-check.yml'
       - '.github/workflows/promote-production.yml'
+      - '.github/workflows/character-gpu-worker.yml'
       - 'cloud_once.py'
       - 'creative_engine.py'
       - 'premium_stories.py'
