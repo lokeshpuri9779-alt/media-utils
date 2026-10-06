@@ -49,6 +49,37 @@ def winner_blueprints(data:dict,limit=3)->list[dict]:
                                  "stage0_score":e.get("stage0_score")}})
     return out
 
+def retention_patterns(data:dict)->dict:
+    """Learn coarse scene-position lessons only from qualified retention samples."""
+    samples=[]
+    for vid,e in (data.get("videos") or {}).items():
+        if e.get("learning_excluded") or e.get("format")=="long": continue
+        d=diagnose_video(e)
+        if d.get("status")!="diagnosed": continue
+        summary=((e.get("analytics_reports") or {}).get("retention") or {}).get("summary") or {}
+        try:
+            r10=_f(summary["10pct"]["audience_watch_ratio"],-1)
+            r50=_f(summary["50pct"]["audience_watch_ratio"],-1)
+            r90=_f(summary["90pct"]["audience_watch_ratio"],-1)
+        except (KeyError,TypeError):
+            continue
+        if min(r10,r50,r90)<0: continue
+        samples.append({"video_id":vid,"genre":e.get("genre"),"r10":r10,"r50":r50,"r90":r90,
+                        "hook":e.get("hook"),"packaging_score":e.get("packaging_winner_score")})
+    if len(samples)<3:
+        return {"status":"explore","samples":len(samples),"lessons":[],
+                "reason":"Need at least three qualified retention curves."}
+    avg=lambda k:sum(x[k] for x in samples)/len(samples)
+    a10,a50,a90=avg("r10"),avg("r50"),avg("r90")
+    lessons=[]
+    # Audience watch ratio is relative to starts; learn directionally, not as viewer identity.
+    if a10<.75: lessons.append("front_load_payoff")
+    if a10-a50>.25: lessons.append("compress_middle")
+    if a50-a90>.25: lessons.append("move_payoff_earlier")
+    if a90>=.60: lessons.append("preserve_ending_structure")
+    return {"status":"learn","samples":len(samples),"average":{"10pct":round(a10,3),"50pct":round(a50,3),"90pct":round(a90,3)},
+            "lessons":lessons or ["hold_structure"],"rule":"abstract timing lessons only; never copy scripts/assets"}
+
 def evolution_state(data:dict)->dict:
     diagnoses={}
     counts={}
@@ -56,8 +87,9 @@ def evolution_state(data:dict)->dict:
         if e.get("learning_excluded"): continue
         d=diagnose_video(e); diagnoses[vid]=d
         key=d.get("failure",d.get("status","unknown")); counts[key]=counts.get(key,0)+1
-    return {"version":1,"diagnosis_counts":counts,"winner_blueprints":winner_blueprints(data),
-            "rule":"reuse abstract winning structure only; never copy finished scripts/assets"}
+    return {"version":2,"diagnosis_counts":counts,"winner_blueprints":winner_blueprints(data),
+            "retention_patterns":retention_patterns(data),
+            "rule":"reuse abstract winning structure/timing only; never copy finished scripts/assets"}
 
 
 OPTIMIZATION_DEFAULTS={"min_publish_score":58.0,"packaging_weight":0.10,"story_weight":0.10,"winner_genre_bonus":5.0}
