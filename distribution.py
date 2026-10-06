@@ -156,9 +156,14 @@ def branded_description(description: str, data: dict, *, genre: str, fmt: str) -
     if related and ("youtube.com/watch?v=" + related) not in text:
         label = "Watch the full RAYVAN story" if fmt == "short" else "Watch the related RAYVAN Short"
         text += "\n" + label + ": https://www.youtube.com/watch?v=" + related
+        # Internal pathways are deliberate: every eligible Short can feed a
+        # relevant long story and vice versa without external spam.
+        plan["pathway"]={"from":fmt,"to":target,"video_id":related,"mode":"youtube-internal"}
     if "RAYVAN" not in text:
         text += "\n\nRAYVAN — Stories Beyond the Ordinary."
     plan["related_video_id"] = related
+    plan["external_distribution"]="disabled-unless-explicitly-authorized"
+    plan["engagement_manipulation"]=False
     return text, plan
 
 
