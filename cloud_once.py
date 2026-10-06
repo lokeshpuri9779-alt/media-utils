@@ -1070,7 +1070,14 @@ def make_long(out, episode_id):
     from longform import render
     trend_items=((load_performance().get('trend_snapshot') or {}).get('items') or [])
     title,description,report=render(out, episode_id=episode_id, trend_items=trend_items)
+    from quality_lab import evaluate_long_render
+    long_qa=evaluate_long_render(report,out)
+    if not long_qa.get("pass"):
+        raise RuntimeError("Long-form quality gate rejected render: "+json.dumps({
+            "score":long_qa.get("score"),"failures":long_qa.get("failures")
+        },ensure_ascii=False))
     CONTENT_META={k:report[k] for k in ('renderer','format','genre','content_id','duration','scene_count')}
+    CONTENT_META['long_quality_gate']=long_qa
     CONTENT_META['creative_quality']=report.get('creative_quality')
     CONTENT_META['story_beats']=report.get('story_beats',[])
     # Trend deep-dives carry their own verified source manifest; the evergreen
@@ -1192,6 +1199,7 @@ def main() -> None:
             'Autonomous quality gate rejected this slot',
             'No fresh content available',
             'Novelty gate rejected repetitive concepts',
+            'Long-form quality gate rejected render',
         )):
             print('Quality skip:', msg)
             health=load_performance().setdefault('creative_health',{})
