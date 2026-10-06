@@ -646,6 +646,9 @@ def make_long(out, episode_id):
     from longform import render
     title,description,report=render(out, episode_id=episode_id)
     CONTENT_META={k:report[k] for k in ('renderer','format','genre','content_id','duration','scene_count')}
+    from longform import SOURCES
+    CONTENT_META['source']='; '.join(SOURCES)
+    CONTENT_META['script']='original sourced long-form narration'
     CONTENT_META['voice']=report['audio']['voice']
     CONTENT_META['selection_reason']='weekly long-form slot; new sourced episode'
     return title,description
