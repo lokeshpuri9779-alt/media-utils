@@ -811,13 +811,13 @@ def render_frame(plan,t,genre,total):
         dy=max(0,(nh-H)//2)
         im=moved.crop((dx,dy,dx+W,dy+H))
     draw_visual(im,s,t,u,accent)
-    if s.get('visual')!='media':
+    if s.get('visual') not in {'media','tidal_lock'}:
         visual_style_layer(im,s,t,u,accent)
         composition_layer(im,s,t,u,accent)
         attention_layer(im,s,t,u,accent)
     transition_layer(im,s,t,u,accent)
     im=composite_cached_asset(im,s.get('resolved_asset',{}),t=t,u=u,shot=s)
-    if s.get('visual')!='media':
+    if s.get('visual') not in {'media','tidal_lock'}:
         asset_layer(im,s,t,u,accent)
         director_motion_layer(im,s,t,u,accent)
     d=ImageDraw.Draw(im)
