@@ -60,7 +60,7 @@ def catalog():
         },
         {
             "genre":"space","kind":"explainer","content_id":"mars-blue-sunset-v1",
-            "premium_story":True,"production_ready":True,
+            "premium_story":True,"production_ready":False,
             "hook":"MARS HAS BLUE SUNSETS",
             "question":"Why can sunset near the Sun look blue on the Red Planet?",
             "answer":"Fine Martian dust lets blue light stay concentrated closer to the Sun while other colors spread more broadly through the sky.",

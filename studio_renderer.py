@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-6.1"
+VERSION = "studio-6.2"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -518,6 +518,21 @@ def draw_visual(im,s,t,u,accent):
         d.polygon([(902,1074),(928,1037),(883,1041)],fill=accent)
         d.rounded_rectangle((250,1210,830,1305),radius=26,fill=(8,12,23))
         fit_text(d,'1 ORBIT  =  1 SPIN',(278,1228,802,1287),size=39,fill='white',max_lines=1)
+    elif visual=='iss_orbit':
+        d=ImageDraw.Draw(im)
+        ex,ey=540,875
+        d.ellipse((145,590,935,1160),outline=(70,82,112),width=4)
+        d.ellipse((ex-105,ey-105,ex+105,ey+105),fill=(54,113,171),outline=(173,215,246),width=4)
+        d.text((ex,ey),'EARTH',font=font(26),anchor='mm',fill='white')
+        phase=min(1.0,max(0.0,u/max(.2,s.get('duration',3.5))))
+        ang=-math.pi/2 + phase*2*math.pi
+        sx,sy=ex+395*math.cos(ang),ey+285*math.sin(ang)
+        d.rounded_rectangle((sx-60,sy-18,sx+60,sy+18),radius=8,fill=(221,226,234),outline='white',width=2)
+        d.rectangle((sx-125,sy-12,sx-66,sy+12),fill=(73,118,190))
+        d.rectangle((sx+66,sy-12,sx+125,sy+12),fill=(73,118,190))
+        d.arc((125,570,955,1180),205,330,fill=accent,width=7)
+        d.rounded_rectangle((250,1210,830,1305),radius=26,fill=(8,12,23))
+        fit_text(d,'~90 MINUTES / ORBIT',(278,1228,802,1287),size=39,fill='white',max_lines=1)
     elif visual=='pitch':
         for i in range(7):
             d.polygon([(115+i*118,650),(233+i*118,650),(258+i*108,1090),(145+i*108,1090)],fill=(9,53+(i%2)*8,48))
@@ -806,7 +821,7 @@ def render_frame(plan,t,genre,total):
         dy=max(0,(nh-H)//2)
         im=moved.crop((dx,dy,dx+W,dy+H))
     draw_visual(im,s,t,u,accent)
-    if s.get('visual') not in {'media','tidal_lock'}:
+    if s.get('visual') not in {'media','tidal_lock','iss_orbit'}:
         visual_style_layer(im,s,t,u,accent)
         composition_layer(im,s,t,u,accent)
         attention_layer(im,s,t,u,accent)
