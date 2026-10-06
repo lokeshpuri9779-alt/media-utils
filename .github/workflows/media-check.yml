@@ -82,10 +82,19 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          # Development pushes test their own SHA. Scheduled/manual runtime
-          # executes only the separately promoted production branch.
+          # Development pushes test their own SHA. Runtime executes only the
+          # separately promoted production branch.
           ref: ${{ (github.event_name == 'push' || github.event_name == 'pull_request') && github.sha || 'astra-production' }}
           fetch-depth: 0
+      - name: Restore adaptive runtime state
+        if: github.event_name != 'push' && github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin astra-state
+          for f in performance.json quota_state.json SHORTS.md; do
+            git checkout origin/astra-state -- "$f" 2>/dev/null || true
+          done
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
@@ -142,35 +151,30 @@ jobs:
           retention-days: 30
           if-no-files-found: error
       - name: save adaptive state
-        if: always() && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_run')
+        if: always() && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch')
         shell: bash
         run: |
-          if [ -z "$(git status --porcelain -- performance.json quota_state.json SHORTS.md)" ]; then
+          set -euo pipefail
+          git fetch origin astra-state
+          if git diff --quiet origin/astra-state -- performance.json quota_state.json SHORTS.md; then
             exit 0
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          STATE_DIR="$(mktemp -d)"
+          git worktree add --detach "$STATE_DIR" origin/astra-state
           for f in performance.json quota_state.json SHORTS.md; do
-            if [ -e "$f" ] || git ls-files --error-unmatch "$f" >/dev/null 2>&1; then
-              git add -A -- "$f"
+            if [ -e "$f" ]; then
+              cp "$f" "$STATE_DIR/$f"
+            else
+              rm -f "$STATE_DIR/$f"
             fi
           done
+          cd "$STATE_DIR"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- performance.json quota_state.json SHORTS.md
           if git diff --cached --quiet; then
             exit 0
           fi
           git commit -m "Update Astra state and performance [skip ci]"
-          TARGET_BRANCH="astra-production"
-          # All production runs persist mutable publishing memory.
-          # Push/PR CI validates code without writing runtime state back to Git.
-          for attempt in 1 2 3; do
-            if git push origin "HEAD:$TARGET_BRANCH"; then
-              exit 0
-            fi
-            echo "State push raced with a newer commit; rebasing (attempt $attempt/3)."
-            # The controller can also modify generated/runtime files that are
-            # intentionally not part of the state commit. Preserve those
-            # changes while rebasing the committed state update.
-            git pull --rebase --autostash origin "$TARGET_BRANCH"
-          done
-          echo "Could not persist Astra state after three attempts."
-          exit 1
+          git push origin "HEAD:refs/heads/astra-state"
