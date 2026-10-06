@@ -571,10 +571,8 @@ def save_performance(data: dict) -> None:
 def normalize_content_text(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", str(value or "").lower()).strip()
 
-def live_channel_duplicate(token: str, title: str, content_id: str) -> bool:
-    """Use the authenticated channel as a second source of truth before publishing."""
-    cid = str(content_id or "").strip()
-    target = normalize_content_text(title)
+def live_channel_history(token: str) -> tuple[set[str], set[str]]:
+    """Fetch recent authenticated upload identities once for pre-render dedupe."""
     with httpx.Client(timeout=60) as client:
         ch = client.get("https://www.googleapis.com/youtube/v3/channels",
             params={"part":"contentDetails","mine":"true"},
@@ -593,15 +591,22 @@ def live_channel_duplicate(token: str, title: str, content_id: str) -> bool:
         if pl.status_code >= 400:
             api_error(pl, "dedupe_playlist")
             raise RuntimeError("Cannot read live upload history; refusing upload.")
+    titles, ids = set(), set()
     for item in pl.json().get("items", []):
         snippet = item.get("snippet") or {}
-        existing = normalize_content_text(snippet.get("title"))
+        title = normalize_content_text(snippet.get("title"))
+        if title:
+            titles.add(title)
         description = str(snippet.get("description") or "")
-        if target and existing == target:
-            return True
-        if cid and f"ASTRA-ID:{cid}" in description:
-            return True
-    return False
+        ids.update(re.findall(r"ASTRA-ID:([^\\s]+)", description))
+    return titles, ids
+
+
+def live_channel_duplicate(token: str, title: str, content_id: str) -> bool:
+    """Use the authenticated channel as a second source of truth before publishing."""
+    titles, ids = live_channel_history(token)
+    cid = str(content_id or "").strip()
+    return normalize_content_text(title) in titles or bool(cid and cid in ids)
 
 def content_already_published(content_id: str) -> bool:
     """Fail closed when a generated concept is already in persistent channel history."""
@@ -780,9 +785,19 @@ def main() -> None:
     from longform import choose_episode
     long_episode = choose_episode(load_performance(), now) if os.environ.get("ASTRA_LONG_ENABLED", "1") == "1" else None
 
+    # Reconcile recent live channel identities before rendering so duplicate
+    # concepts do not consume renderer/voice/FFmpeg time.
+    live_titles, live_ids = live_channel_history(token)
+    persisted_ids = {
+        str(info.get("content_id") or "").strip()
+        for info in load_performance().get("videos", {}).values()
+        if str(info.get("content_id") or "").strip()
+    }
+    pre_render_excluded = persisted_ids | live_ids
+
     work = Path(tempfile.mkdtemp(prefix="media_utils_run_"))
     video = work / "clip.mp4"
-    title, desc = make_long(video, long_episode) if long_episode else make_short(video)
+    title, desc = make_long(video, long_episode) if long_episode else make_short(video, excluded_ids=pre_render_excluded)
     from distribution import branded_description
     perf = load_performance()
     desc, distribution_plan = branded_description(
