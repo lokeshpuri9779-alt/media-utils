@@ -17,6 +17,24 @@ from pathlib import Path
 
 import httpx
 
+from video_provider_policy import capability, autonomous_provider_allowed
+
+from open_source_video_engine import (
+    OpenSourceVideoUnavailable,
+    generate_open_source_clip,
+    provider_status as open_source_provider_status,
+)
+from remote_gpu_client import (
+    RemoteGPUUnavailable,
+    generate_remote_clip,
+    remote_status,
+)
+from hf_zerogpu_adapter import (
+    ZeroGPUUnavailable,
+    generate_zerogpu_clip,
+    zerogpu_status,
+)
+
 MODEL = "wan-video/wan-2.6-t2v"
 CREATE_URL = "https://api.replicate.com/v1/models/wan-video/wan-2.6-t2v/predictions"
 MAX_VIDEO_BYTES = 80_000_000
@@ -33,12 +51,26 @@ def paid_generation_enabled() -> bool:
 
 
 def provider_status() -> dict:
+    oss=open_source_provider_status()
+    remote=remote_status()
+    zero=zerogpu_status()
+    paid_ready=bool((os.environ.get("REPLICATE_API_TOKEN") or "").strip()) and paid_generation_enabled()
+    selected=oss.get("selected") or ("remote-open-source-gpu" if remote.get("ready") else ("hf-zerogpu" if zero.get("ready") else ("replicate" if paid_ready else None)))
     return {
-        "provider": "replicate",
-        "model": MODEL,
-        "token_configured": bool((os.environ.get("REPLICATE_API_TOKEN") or "").strip()),
-        "paid_generation_enabled": paid_generation_enabled(),
-        "ready": bool((os.environ.get("REPLICATE_API_TOKEN") or "").strip()) and paid_generation_enabled(),
+        "mode": "open-source-first",
+        "selected": selected,
+        "ready": bool(oss.get("ready")) or bool(remote.get("ready")) or paid_ready,
+        "open_source": oss,
+        "remote_open_source": remote,
+        "hf_zerogpu": zero,
+        "selected_capability": capability(selected),
+        "paid_fallback": {
+            "provider": "replicate",
+            "model": MODEL,
+            "token_configured": bool((os.environ.get("REPLICATE_API_TOKEN") or "").strip()),
+            "paid_generation_enabled": paid_generation_enabled(),
+            "ready": paid_ready,
+        },
     }
 
 
@@ -65,7 +97,7 @@ def _prediction_output_url(payload: dict) -> str:
     return ""
 
 
-def generate_character_clip(shot: dict, output_path: str | Path, timeout_seconds: int = 720) -> dict:
+def _generate_paid_character_clip(shot: dict, output_path: str | Path, timeout_seconds: int = 720) -> dict:
     token = _token()
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -154,6 +186,27 @@ def generate_character_clip(shot: dict, output_path: str | Path, timeout_seconds
         "requested_target_seconds": requested,
         "paid_generation": True,
     }
+
+
+def generate_character_clip(shot: dict, output_path: str | Path, timeout_seconds: int = 720) -> dict:
+    try:
+        return generate_open_source_clip(shot, output_path)
+    except OpenSourceVideoUnavailable:
+        pass
+    try:
+        return generate_remote_clip(shot, output_path, timeout_seconds=max(timeout_seconds, 1800))
+    except RemoteGPUUnavailable:
+        pass
+    try:
+        return generate_zerogpu_clip(shot, output_path)
+    except ZeroGPUUnavailable:
+        pass
+    # Paid inference is never an autonomous choice, even when credentials exist.
+    if not autonomous_provider_allowed("replicate") and not paid_generation_enabled():
+        raise CharacterVideoUnavailable(
+            "No free/self-hosted character-video backend is ready; paid fallback remains disabled."
+        )
+    return _generate_paid_character_clip(shot, output_path, timeout_seconds=timeout_seconds)
 
 
 def generate_storyboard(storyboard: list[dict], root: str | Path) -> tuple[list[Path], list[dict]]:

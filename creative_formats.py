@@ -85,16 +85,18 @@ def choose_format(story: dict, recent_formats: list[str] | None = None) -> dict:
     beats = story.get("story_beats") or []
     visuals = [str(x.get("visual") or "") for x in beats]
 
-    if genre == "fiction":
+    if story.get("animal_character_story"):
+        name = "family_3d_animal_comedy"
+        return {"name": name, **FORMATS[name]}
+    elif story.get("character_story"):
+        name = "ai_character_cinematic"
+        return {"name": name, **FORMATS[name]}
+    elif genre == "fiction":
         preferred = ["ai_character_cinematic", "microfiction_cinematic", "mixed_media_story"]
     elif genre == "tech":
         preferred = ["screen_explainer", "animated_infographic"]
     elif genre in {"football", "current"}:
         preferred = ["documentary_montage", "mixed_media_story", "animated_infographic"]
-    elif story.get("animal_character_story"):
-        preferred = ["family_3d_animal_comedy", "ai_character_cinematic", "mixed_media_story"]
-    elif story.get("character_story"):
-        preferred = ["ai_character_cinematic", "cinematic_mini_doc", "mixed_media_story"]
     elif visuals.count("media") >= 2:
         preferred = ["cinematic_mini_doc", "documentary_montage", "mixed_media_story"]
     else:
