@@ -757,25 +757,28 @@ def main() -> None:
             return
         state["last_probe_id"] = probe_id
     save_state(state)
-    refresh_performance()
-    refresh_research(token)
 
     force = (os.environ.get("ASTRA_FORCE_RUN") or "").strip() == "1"
     print(f"Adaptive daily target: {state['target']} | attempts: {state['attempts']} | successes: {state['successes']} | limit_hit: {state['limit_hit']}")
 
+    # Cheap gates first: no analytics/research API work when publishing is already
+    # paused, the daily attempt budget is exhausted, or this slot is not due.
     if state.get("limit_hit") and not force:
         print("Paused after an earlier API uploadLimitExceeded response. No fresh upload test occurred in this run.")
         print("The India-local day reset is Astra scheduling behavior, not a confirmed YouTube reset time.")
         return
-
-    from longform import choose_episode
-    long_episode = choose_episode(load_performance(), now) if os.environ.get("ASTRA_LONG_ENABLED", "1") == "1" else None
     if int(state.get("attempts", 0)) >= int(state["target"]) and not force:
         print("Daily upload attempt target reached.")
         return
-    if not force and not long_episode and not scheduled_attempt_due(now, state):
+    if not force and not scheduled_attempt_due(now, state):
         print("No upload attempt due in this scheduled slot.")
         return
+
+    # Refresh evidence only when this run can actually produce content.
+    refresh_performance()
+    refresh_research(token)
+    from longform import choose_episode
+    long_episode = choose_episode(load_performance(), now) if os.environ.get("ASTRA_LONG_ENABLED", "1") == "1" else None
 
     work = Path(tempfile.mkdtemp(prefix="media_utils_run_"))
     video = work / "clip.mp4"
