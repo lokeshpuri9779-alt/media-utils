@@ -1,4 +1,5 @@
 name: media check
+# CI validation marker: PR runs are non-publishing and cannot persist runtime state.
 
 on:
   push:
