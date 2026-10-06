@@ -611,15 +611,26 @@ def choose_content(data, trends, now=None, excluded_ids=None, excluded_titles=No
     ranked = rank_candidates(candidates, strategy.get('genre_scores') or {}, data=data)
     # Winner evolution: boost fresh concepts that share only the abstract genre DNA
     # of measured healthy winners. Content IDs/scripts/assets are never cloned.
+    from evolution import optimization_policy
+    policy = optimization_policy(data)
+    data['optimization_policy'] = policy
     blueprints = (data.get('evolution') or {}).get('winner_blueprints') or []
     winning_genres = {b.get('genre') for b in blueprints if b.get('genre')}
+    winner_bonus = float(policy.get('winner_genre_bonus', 5.0))
     for item in ranked:
         if item.get('genre') in winning_genres:
-            item['prior_score']['total'] = round(min(100, item['prior_score']['total'] + 5), 2)
+            item['prior_score']['total'] = round(min(100, item['prior_score']['total'] + winner_bonus), 2)
             item['winner_descendant'] = True
     ranked.sort(key=lambda x: x['prior_score']['total'], reverse=True)
     if not ranked:
         raise RuntimeError('Stage-0 scorer produced no candidates.')
+    # Autonomous quality gate: 48/day is capacity, never an obligation. The
+    # threshold evolves only inside the bounded policy and weak slots are skipped.
+    min_score = float(policy.get('min_publish_score', 58.0))
+    qualified = [x for x in ranked if float(x.get('prior_score', {}).get('total', 0)) >= min_score]
+    if not qualified:
+        raise RuntimeError(f'Autonomous quality gate rejected this slot: best={ranked[0]["prior_score"]["total"]:.2f}, threshold={min_score:.2f}.')
+    ranked = qualified
     # Mostly exploit the best concepts, while preserving a small exploration lane.
     from viral_prior import adaptive_exploration
     explore_rate = adaptive_exploration(data)
@@ -637,6 +648,12 @@ def choose_content(data, trends, now=None, excluded_ids=None, excluded_titles=No
     selected['stage0_rank'] = next((i+1 for i,c in enumerate(ranked) if c['content_id']==selected['content_id']), None)
     selected['stage0_score'] = selected.get('prior_score', {})
     selected['exploration_rate'] = explore_rate
+    selected['optimization_policy'] = {
+        'min_publish_score': min_score,
+        'winner_genre_bonus': winner_bonus,
+        'evidence_count': policy.get('evidence_count', 0),
+        'reason': policy.get('reason'),
+    }
     return selected
 
 def select_content(excluded_ids=None, excluded_titles=None):
