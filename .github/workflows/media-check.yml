@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '.github/workflows/media-check.yml'
+      - '.github/workflows/promote-production.yml'
       - 'cloud_once.py'
       - 'channel_state.py'
       - 'revenue_geo.py'
