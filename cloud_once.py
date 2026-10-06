@@ -368,7 +368,7 @@ def genre_scores(videos):
     """Raw public views cannot establish audience interest or exclude owner tests."""
     return {}
 
-def choose_content(data, trends, now=None):
+def choose_content(data, trends, now=None, excluded_ids=None):
     import hashlib
     now = now or datetime.now(IST)
     videos = data.get('videos', {})
@@ -380,6 +380,7 @@ def choose_content(data, trends, now=None):
         except (KeyError, ValueError, TypeError):
             continue
     used = {v.get('content_id') for v in recent}
+    used.update(str(x) for x in (excluded_ids or set()) if x)
     candidates = [c for c in content_catalog() if c['content_id'] not in used]
     for _ in range(20):
         ch = _challenge()
@@ -449,12 +450,12 @@ def choose_content(data, trends, now=None):
     selected['exploration_rate'] = explore_rate
     return selected
 
-def select_content():
+def select_content(excluded_ids=None):
     global CONTENT_META
     from audience_research import research_signals
     data = load_performance()
     trends = fetch_trends() + research_signals(data, datetime.now(IST))
-    ch = choose_content(data, trends)
+    ch = choose_content(data, trends, excluded_ids=excluded_ids)
     CONTENT_META = {k:ch.get(k) for k in ('genre','content_id','source','trend_matches','selection_reason','stage0_rank','stage0_score','winner_descendant','exploration_rate','hook','question','prompt','answer','script','realistic_synthetic','altered_real_event','synthetic_real_person','reused_third_party_media','transformative_commentary','copyright_unlicensed')}
     print('Content decision:', json.dumps(CONTENT_META, ensure_ascii=False))
     return ch
@@ -811,11 +812,38 @@ def main() -> None:
     # against YouTube itself. If the live history cannot be read, fail closed.
     if content_id:
         desc += "\nASTRA-ID:" + content_id
-    if live_channel_duplicate(token, title, content_id):
+    excluded_live = set()
+    for retry in range(4):
+        if not live_channel_duplicate(token, title, content_id):
+            break
         print("Duplicate content blocked by live YouTube history:", content_id or title)
         state["duplicate_blocks"] = int(state.get("duplicate_blocks", 0)) + 1
-        save_state(state)
-        return
+        excluded_live.add(content_id)
+        if long_episode:
+            save_state(state)
+            return
+        if retry == 3:
+            print("No fresh live-safe concept found after four selections; skipping this slot.")
+            save_state(state)
+            return
+        print("Reselecting a fresh concept in the same scheduled run.")
+        title, desc = make_short(video, excluded_ids=excluded_live)
+        perf = load_performance()
+        desc, distribution_plan = branded_description(
+            desc, perf, genre=str(CONTENT_META.get("genre") or "unknown"), fmt="short"
+        )
+        title = optimize_title(title, distribution_plan, CONTENT_META)
+        CONTENT_META["distribution_plan"] = distribution_plan
+        CONTENT_META["revenue_geography"] = geography_state(perf)
+        ypp_report = enforce(title, desc, CONTENT_META, perf)
+        CONTENT_META["ypp_safety"] = ypp_report
+        CONTENT_META["ai_disclosure_required"] = bool(ypp_report.get("ai_disclosure_required"))
+        content_id = str(CONTENT_META.get("content_id") or "").strip()
+        if content_id and content_already_published(content_id):
+            excluded_live.add(content_id)
+            continue
+        if content_id:
+            desc += "\nASTRA-ID:" + content_id
 
     try:
         status, url = upload(video, title, desc, token=token)
