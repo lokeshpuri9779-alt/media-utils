@@ -44,6 +44,7 @@ on:
       - 'premium_batch_review.py'
       - 'tests/test_open_source_stack.py'
       - 'tests/test_edit_spec.py'
+      - 'motion_engine/**'
       - 'requirements.txt'
   pull_request:
     branches:
@@ -113,6 +114,18 @@ jobs:
         with:
           python-version: '3.12'
           cache: pip
+      - uses: actions/setup-node@v6
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
+        with:
+          node-version: '24'
+      - name: Install Motion Canvas engine
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
+        working-directory: motion_engine
+        run: npm install --no-audit --no-fund
+      - name: Build Motion Canvas engine
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
+        working-directory: motion_engine
+        run: npm run build
       - name: dependencies
         run: pip install -r requirements.txt
       - name: Verify Python modules
