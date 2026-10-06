@@ -30,12 +30,16 @@ def score_candidate(c: dict, *, trend_matches=None, channel_score=None) -> dict:
     if len(title)>75: clarity-=10
     if len(hook)>45: clarity-=10
 
-    originality=78 if c.get("genre") in {"fiction","tech","space","football"} else 66
-    if c.get("content_id","").startswith("quiz-"): originality=62
+    # RAYVAN should feel like a premium discovery/storytelling brand, not a
+    # generic engagement-farm. Reward sourced discovery and original narrative;
+    # strongly penalize game/challenge mechanics if they ever re-enter a pool.
+    originality=82 if c.get("genre") in {"fiction","space","football"} else 70
+    if c.get("source"): originality += 6
+    if c.get("genre") == "challenge" or c.get("content_id","").startswith("quiz-"): originality=25
 
     demand=62
     if c.get("source"): demand+=8
-    trend=min(100, 45 + 18*len(trend_matches)) if trend_matches else 45
+    trend=min(100, 58 + 20*len(trend_matches)) if trend_matches else 25
 
     # Before sufficient clean channel evidence: 50% proven structural priors,
     # 30% live demand/trend, 20% exploration/channel learning.
