@@ -170,7 +170,10 @@ jobs:
               exit 0
             fi
             echo "State push raced with a newer commit; rebasing (attempt $attempt/3)."
-            git pull --rebase origin "$TARGET_BRANCH"
+            # The controller can also modify generated/runtime files that are
+            # intentionally not part of the state commit. Preserve those
+            # changes while rebasing the committed state update.
+            git pull --rebase --autostash origin "$TARGET_BRANCH"
           done
           echo "Could not persist Astra state after three attempts."
           exit 1
