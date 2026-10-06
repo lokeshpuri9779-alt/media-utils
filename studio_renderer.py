@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-4.0"
+VERSION = "studio-4.0.1"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -331,8 +331,22 @@ def voice_plan(plan, genre, max_duration=58):
                  duration=max(float(s['min_duration']),len(samples)/RATE+.55))
         s['end']=s['start']+s['duration']
         cursor=s['end']
+    if cursor>max_duration:
+        # Dynamic stories can create more useful beats than the Shorts budget allows.
+        # Compress pauses/minimum holds first; never speed narration beyond the
+        # requested voice rate or silently truncate evidence.
+        voice_total=sum(len(x['audio'])/RATE for x in plan)
+        overhead=max(0.0,cursor-voice_total)
+        target_overhead=max(0.0,max_duration-voice_total-.35)
+        ratio=min(1.0,target_overhead/max(.001,overhead))
+        cursor=0.0
+        for x in plan:
+            voice_len=len(x['audio'])/RATE
+            hold=max(voice_len+.22, voice_len + max(0.0,x['duration']-voice_len)*ratio)
+            x.update(start=cursor,voice_start=cursor+.12,duration=hold,end=cursor+hold)
+            cursor+=hold
     if not 6<=cursor<=max_duration:
-        raise RuntimeError(f'Video duration {cursor:.1f}s is outside the Studio short format.')
+        raise RuntimeError(f'Video duration {cursor:.1f}s is outside the Studio short format after pacing compression.')
     return cursor
 
 
