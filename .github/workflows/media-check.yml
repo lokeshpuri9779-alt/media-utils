@@ -26,6 +26,7 @@ on:
       - 'learning_policy.json'
       - 'youtube_autonomy_setup.py'
       - 'tests/test_growth.py'
+      - 'tests/test_creative_engine.py'
       - 'tests/test_publish_selection.py'
       - 'tests/test_viral_prior.py'
       - 'tests/test_evolution.py'
