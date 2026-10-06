@@ -342,7 +342,7 @@ def fetch_trends(now=None):
     now = now or datetime.now(IST)
     results = []
     # Search interest is a topic signal, never evidence for a factual claim.
-    for region in ('IN', 'US'):
+    for region in __import__("revenue_geo").trend_regions(load_performance()):
         try:
             with httpx.Client(timeout=15, follow_redirects=True) as client:
                 response = client.get('https://trends.google.com/trending/rss', params={'geo': region})
@@ -437,7 +437,7 @@ def select_content():
     data = load_performance()
     trends = fetch_trends() + research_signals(data, datetime.now(IST))
     ch = choose_content(data, trends)
-    CONTENT_META = {k:ch.get(k) for k in ('genre','content_id','source','trend_matches','selection_reason','stage0_rank','stage0_score','winner_descendant','exploration_rate')}
+    CONTENT_META = {k:ch.get(k) for k in ('genre','content_id','source','trend_matches','selection_reason','stage0_rank','stage0_score','winner_descendant','exploration_rate','hook','question','prompt','answer','script','realistic_synthetic','altered_real_event','synthetic_real_person','reused_third_party_media','transformative_commentary','copyright_unlicensed')}
     print('Content decision:', json.dumps(CONTENT_META, ensure_ascii=False))
     return ch
 
@@ -500,7 +500,8 @@ def upload(video: Path, title: str, description: str, token: str | None = None) 
     size = video.stat().st_size
     metadata = {
         "snippet": {"title": title[:100], "description": description[:5000], "categoryId": "24"},
-        "status": {"privacyStatus": privacy, "selfDeclaredMadeForKids": False},
+        "status": {"privacyStatus": privacy, "selfDeclaredMadeForKids": False,
+                   "containsSyntheticMedia": bool(CONTENT_META.get("ai_disclosure_required", False))},
     }
     headers = {
         "Authorization": f"Bearer {token}",
@@ -720,8 +721,18 @@ def main() -> None:
         genre=str(CONTENT_META.get("genre") or "unknown"),
         fmt=str(CONTENT_META.get("format") or ("long" if long_episode else "short")),
     )
+    from distribution import optimize_title
+    title = optimize_title(title, distribution_plan, CONTENT_META)
     CONTENT_META["distribution_plan"] = distribution_plan
+    from revenue_geo import geography_state
+    CONTENT_META["revenue_geography"] = geography_state(perf)
+    from ypp_safety import enforce
+    ypp_report = enforce(title, desc, CONTENT_META, perf)
+    CONTENT_META["ypp_safety"] = ypp_report
+    CONTENT_META["ai_disclosure_required"] = bool(ypp_report.get("ai_disclosure_required"))
     print("Distribution plan:", json.dumps(distribution_plan, ensure_ascii=False))
+    print("Revenue geography:", json.dumps(CONTENT_META["revenue_geography"], ensure_ascii=False))
+    print("YPP safety:", json.dumps(ypp_report, ensure_ascii=False))
     print("Generated:", title)
 
     try:
