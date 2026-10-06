@@ -223,10 +223,12 @@ def voice_plan(plan, genre, max_duration=58):
     cursor=0.0
     for s in plan:
         spoken=str(s['speech']).strip()
-        # Expressive punctuation gives Kokoro phrase-level rises, falls and emphasis
-        # without artificial DSP pitch-shifting. Keep the user's preferred brisk pace.
-        if genre=='current':
-            if s.get('label') in {'JUST CHANGED','WHY NOW?'}:
+        # Expressive phrasing is shared by Shorts and long-form because both
+        # renderers use this voice plan. Long-form scenes also carry chapter /
+        # section metadata, so they receive the same energetic delivery.
+        expressive = genre=='current' or bool(s.get('chapter')) or bool(s.get('section'))
+        if expressive:
+            if s.get('label') in {'JUST CHANGED','WHY NOW?'} or s.get('section') in {1,2}:
                 spoken=spoken.rstrip('.')
                 spoken += '!' if '?' not in spoken else ''
             spoken=spoken.replace(': ', ' — ').replace('; ', '. ')
