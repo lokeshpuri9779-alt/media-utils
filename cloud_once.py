@@ -977,11 +977,21 @@ def make_long(out, episode_id):
     trend_items=((load_performance().get('trend_snapshot') or {}).get('items') or [])
     title,description,report=render(out, episode_id=episode_id, trend_items=trend_items)
     CONTENT_META={k:report[k] for k in ('renderer','format','genre','content_id','duration','scene_count')}
-    from longform import SOURCES
-    CONTENT_META['source']='; '.join(SOURCES)
+    CONTENT_META['creative_quality']=report.get('creative_quality')
+    CONTENT_META['story_beats']=report.get('story_beats',[])
+    # Trend deep-dives carry their own verified source manifest; the evergreen
+    # episode retains the curated SOURCES list.
+    report_sources=report.get('sources') or []
+    if report_sources:
+        CONTENT_META['source']='; '.join(report_sources)
+        CONTENT_META['source_count']=len(set(report_sources))
+    else:
+        from longform import SOURCES
+        CONTENT_META['source']='; '.join(SOURCES)
+        CONTENT_META['source_count']=len(SOURCES)
     CONTENT_META['script']='original sourced long-form narration'
     CONTENT_META['voice']=report['audio']['voice']
-    CONTENT_META['selection_reason']='weekly long-form slot; new sourced episode'
+    CONTENT_META['selection_reason']='quality-gated sourced long-form story'
     return title,description
 
 
