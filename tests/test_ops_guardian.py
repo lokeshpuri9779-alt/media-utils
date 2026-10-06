@@ -61,6 +61,13 @@ class GuardianTests(unittest.TestCase):
     def test_controller_schedule_slot_matches_workflow(self):
         self.assertEqual(cloud_once.SCHEDULE_SLOT_MINUTES, 30)
 
+    def test_longform_preflight_is_independent_of_shorts_slot_gate(self):
+        source = inspect.getsource(cloud_once.main)
+        self.assertLess(
+            source.index("preflight_long_episode ="),
+            source.index("if not force and not short_due and not preflight_long_episode"),
+        )
+
     def test_controller_has_pre_render_live_history(self):
         source = inspect.getsource(cloud_once.main)
         self.assertLess(source.index("live_channel_history(token)"), source.index("make_short(video"))
