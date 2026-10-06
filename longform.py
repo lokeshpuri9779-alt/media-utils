@@ -42,7 +42,7 @@ def long_plan():
       ('THE SIMPLE COMPARISON','On Venus, a rotation outlasts a year. On Mercury, a solar day outlasts a year. Similar sounding headlines can describe different physical relationships. The definition changes the answer.','SAME WORD. DIFFERENT CLOCK.','timeline','05 / THE TAKEAWAY'),
       ('TRY THE TWO-CLOCK TEST','The next time you see a surprising planetary time fact, look for two labels. What motion is being timed? And are the units Earth hours, Earth days, or that planet\'s own days?','MOTION + UNITS','clocks','05 / THE TAKEAWAY'),
       ('YOUR TURN','Which surprised you more: Venus finishing a year before one spin, or Mercury taking two years for a solar day? Tell us in the comments. The source links are below.','VENUS OR MERCURY?','planet','05 / THE TAKEAWAY'),
-      ('KEEP EXPLORING','If this helped, like the video or share it with someone who enjoys space. Subscribe to Loki the Game Changer for more clear visual explainers. There is always another clock to question.','SUBSCRIBE FOR MORE','orbit','05 / THE TAKEAWAY'),
+      ('KEEP EXPLORING','If this helped, like the video or share it with someone who enjoys space. Subscribe to RAYVAN for more clear visual explainers. There is always another clock to question.','SUBSCRIBE FOR MORE','orbit','05 / THE TAKEAWAY'),
     ]
     plan=[]
     for h,s,label,visual,chapter in rows:
@@ -53,12 +53,12 @@ def long_plan():
 
 
 def choose_episode(data,now):
-    """Return at most two fresh long-form episodes per India-local day.
+    """Return at most two quality long-form episodes per India-local day.
 
-    Slots open at 07:00 and 19:00 IST. Publication is quality-gated elsewhere;
-    if a fresh episode is unavailable Astra skips rather than repeating.
-    The sourced Planet Clocks episode is used once, then procedural Brain Arena
-    IDs are unique per date/slot and protected by persisted/live dedupe.
+    The one-time sourced Planet Clocks episode remains valid. After that, Astra
+    only schedules a source-linked live trend brief when a fresh trend snapshot
+    contains enough independent sourced topics. Procedural Brain Arena filler is
+    no longer a production fallback.
     """
     slot = 0 if now.hour >= 7 else -1
     if now.hour >= 19:
@@ -66,36 +66,40 @@ def choose_episode(data,now):
     if slot < 0:
         return None
 
-    today = now.date().isoformat()
-    seen_ids = set()
-    today_long = []
-    planet_published = False
-    for entry in data.get('videos', {}).values():
-        cid = str(entry.get('content_id') or '')
+    today=now.date().isoformat()
+    seen_ids=set(); today_long=[]; planet_published=False
+    for entry in data.get('videos',{}).values():
+        cid=str(entry.get('content_id') or '')
         if cid:
             seen_ids.add(cid)
-        if cid == EPISODE_ID:
-            planet_published = True
-        if entry.get('format') == 'long':
+        if cid==EPISODE_ID:
+            planet_published=True
+        if entry.get('format')=='long':
             try:
-                published = datetime.fromisoformat(entry['published_at'])
-                if published.date().isoformat() == today:
+                published=datetime.fromisoformat(entry['published_at'])
+                if published.date().isoformat()==today:
                     today_long.append(entry)
-            except (KeyError, ValueError, TypeError):
+            except (KeyError,ValueError,TypeError):
                 continue
 
-    # Never exceed two long-form publications in one local day.
-    if len(today_long) >= 2:
+    if len(today_long)>=2:
         return None
-    # Evening slot is only eligible after the morning/first slot has actually
-    # published, preventing scheduler retries from producing a burst.
-    if slot == 1 and len(today_long) < 1:
-        slot = 0
-
     if not planet_published:
         return EPISODE_ID
 
-    episode_id = f"brain-arena-{today}-{'am' if slot == 0 else 'pm'}"
+    snap=data.get('trend_snapshot') or {}
+    try:
+        checked=datetime.fromisoformat(snap.get('checked_at',''))
+        fresh=0 <= (now-checked).total_seconds() <= 3*3600
+    except (ValueError,TypeError):
+        fresh=False
+    from longform_trends import available
+    if not fresh or not available(snap.get('items') or []):
+        return None
+
+    if slot==1 and len(today_long)<1:
+        slot=0
+    episode_id=f"trend-brief-{today}-{'am' if slot==0 else 'pm'}"
     return None if episode_id in seen_ids else episode_id
 
 
@@ -128,7 +132,7 @@ def frame(plan,t,total):
     im=wide_background().copy();d=ImageDraw.Draw(im)
     d.rounded_rectangle((60,48,112,100),radius=15,fill=accent)
     d.text((86,73),'L',font=studio.font(35),fill=(10,15,27),anchor='mm')
-    d.text((135,62),'LOKI / EXPLAINED',font=studio.font(26),fill=(211,219,239))
+    d.text((135,62),'RAYVAN / EXPLAINED',font=studio.font(26),fill=(211,219,239))
     d.text((1860,77),s['chapter'],font=studio.font(24),fill=accent,anchor='rm')
     # Narrative text and captions occupy the right column; illustration is left.
     studio.fit_text(d,s['headline'],(1020,190,1830,458),size=77,max_lines=3)
@@ -200,10 +204,12 @@ def thumbnail(out):
     im.resize((1280,720),Image.Resampling.LANCZOS).save(out,'JPEG',quality=92)
 
 
-def render(out,still_dir=None,episode_id=EPISODE_ID):
+def render(out,still_dir=None,episode_id=EPISODE_ID,trend_items=None):
     if episode_id != EPISODE_ID:
-        from longform_challenges import render as render_challenges
-        return render_challenges(out, episode_id)
+        if not str(episode_id).startswith('trend-brief-'):
+            raise RuntimeError('Unsupported long-form episode; procedural challenge fallback is disabled.')
+        from longform_trends import render as render_trends
+        return render_trends(out, episode_id, trend_items or [])
     plan=long_plan();total=studio.voice_plan(plan,'space',max_duration=480)
     if total<150:raise RuntimeError('Long episode is too short; add substance rather than padding.')
     out=Path(out);out.parent.mkdir(parents=True,exist_ok=True)
