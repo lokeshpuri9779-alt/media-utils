@@ -1,0 +1,48 @@
+name: OSS engine install check
+
+on:
+  push:
+    paths:
+      - 'third_party/moneyprinterturbo.lock.json'
+      - 'oss_bootstrap.py'
+      - 'mpt_adapter.py'
+      - 'tests/test_mpt_adapter.py'
+      - '.github/workflows/oss-engine-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  moneyprinterturbo:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install pinned MoneyPrinterTurbo repository
+        run: python oss_bootstrap.py
+      - name: Create isolated engine environment
+        shell: bash
+        run: |
+          python -m venv .astra_oss/MoneyPrinterTurbo/.venv
+          .astra_oss/MoneyPrinterTurbo/.venv/bin/python -m pip install --upgrade pip
+          .astra_oss/MoneyPrinterTurbo/.venv/bin/pip install -r .astra_oss/MoneyPrinterTurbo/requirements.txt
+      - name: Verify upstream CLI is runnable
+        run: .astra_oss/MoneyPrinterTurbo/.venv/bin/python .astra_oss/MoneyPrinterTurbo/cli.py --help >/tmp/mpt-help.txt
+      - name: Verify Astra adapter boundary
+        run: |
+          .astra_oss/MoneyPrinterTurbo/.venv/bin/python mpt_adapter.py > /tmp/mpt-adapter.json
+          cat /tmp/mpt-adapter.json
+      - name: Preserve install report
+        uses: actions/upload-artifact@v4
+        with:
+          name: moneyprinterturbo-install-${{ github.run_id }}
+          path: |
+            .astra_oss/install-report.json
+            /tmp/mpt-adapter.json
+            /tmp/mpt-help.txt
+          retention-days: 7
