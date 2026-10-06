@@ -83,6 +83,71 @@ def score_candidate(c: dict, *, trend_matches=None, channel_score=None) -> dict:
         "weights":{"structural":.40,"live_demand":.25,"channel_or_exploration":.15,"packaging":.10,"story":.10},
     }
 
+
+def packaging_competition(c: dict) -> dict:
+    """Choose the strongest truthful title/hook package before rendering.
+
+    Variants may reframe a verified topic, but never add facts that are not
+    already present in the candidate/source metadata.
+    """
+    x=dict(c)
+    original_title=" ".join(str(x.get("title") or "").replace("#Shorts","").split()).strip()
+    original_hook=" ".join(str(x.get("hook") or "").split()).strip()
+    topic=" ".join(str(x.get("topic") or "").split()).strip()
+    headline=" ".join(str(x.get("news_title") or "").split()).strip()
+    if not topic:
+        keys=x.get("keywords") or []
+        topic=" ".join(str(keys[0] if keys else "").split()).strip()
+    pretty=" ".join(w if w.isupper() else w.capitalize() for w in topic.split())
+
+    titles=[]
+    def add_title(value):
+        value=" ".join(str(value or "").split()).strip(" -:|")
+        value=re.sub(r"(?i)\s*#shorts\s*"," ",value).strip()
+        if 10 <= len(value) <= 91 and value.lower() not in {t.lower() for t in titles}:
+            titles.append(value)
+
+    add_title(original_title)
+    if 18 <= len(headline) <= 82:
+        add_title(headline)
+    if pretty:
+        add_title(f"{pretty}: What Changed?")
+        add_title(f"Why Is {pretty} Getting Attention?")
+        add_title(f"What Changed With {pretty}?")
+
+    hooks=[]
+    def add_hook(value):
+        value=" ".join(str(value or "").split()).strip()
+        if 3 <= len(value) <= 52 and value.lower() not in {h.lower() for h in hooks}:
+            hooks.append(value)
+    add_hook(original_hook)
+    if topic:
+        add_hook("WHAT CHANGED?")
+        add_hook("WHY NOW?")
+        add_hook(pretty.upper()[:52])
+
+    if not titles:
+        titles=[original_title or "RAYVAN Story"]
+    if not hooks:
+        hooks=[original_hook or "WHAT CHANGED?"]
+
+    options=[]
+    for title in titles[:5]:
+        for hook in hooks[:4]:
+            candidate=dict(x,title=title+" #Shorts",hook=hook)
+            p=packaging_score(candidate)
+            s=story_score(candidate)
+            # Packaging leads, but the winner must still promise a real payoff.
+            score=.70*p + .30*s
+            options.append({"title":candidate["title"][:100],"hook":hook,"score":round(score,2)})
+    options.sort(key=lambda row: row["score"], reverse=True)
+    winner=options[0]
+    x["title"]=winner["title"]
+    x["hook"]=winner["hook"]
+    x["packaging_winner_score"]=winner["score"]
+    x["packaging_candidates"]=options[:6]
+    return x
+
 def calibration_weight(data: dict) -> float:
     """Increase reliance on channel evidence only after enough clean samples exist."""
     strategy=(data or {}).get("strategy") or {}

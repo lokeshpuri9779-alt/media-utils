@@ -514,6 +514,7 @@ def trend_candidates(trends):
             'source_count':len(news),'sensitive_topic':sensitive,
             'trend_matches':[t],'news_source':source,'news_title':headline,
             'trend_region':str(t.get('region') or ''),'trend_traffic':str(t.get('traffic') or ''),
+            'topic':topic,
         })
     return out
 
@@ -604,7 +605,8 @@ def choose_content(data, trends, now=None, excluded_ids=None, excluded_titles=No
             candidates = premium
     # Stage 0: rank concepts before rendering. With little clean channel evidence,
     # use structural priors + live demand; as analytics mature, genre evidence joins scoring.
-    from viral_prior import rank_candidates
+    from viral_prior import rank_candidates, packaging_competition
+    candidates = [packaging_competition(c) for c in candidates]
     strategy = data.get('strategy') or {}
     ranked = rank_candidates(candidates, strategy.get('genre_scores') or {}, data=data)
     # Winner evolution: boost fresh concepts that share only the abstract genre DNA
@@ -647,7 +649,7 @@ def select_content(excluded_ids=None, excluded_titles=None):
     if not trends:
         trends = fetch_trends(now) + research_signals(data, now)
     ch = choose_content(data, trends, excluded_ids=excluded_ids, excluded_titles=excluded_titles)
-    CONTENT_META = {k:ch.get(k) for k in ('genre','content_id','source','trend_matches','selection_reason','stage0_rank','stage0_score','winner_descendant','exploration_rate','hook','question','prompt','answer','script','news_source','news_title','secondary_source','secondary_news_source','source_count','sensitive_topic','trend_region','trend_traffic','realistic_synthetic','altered_real_event','synthetic_real_person','reused_third_party_media','transformative_commentary','copyright_unlicensed')}
+    CONTENT_META = {k:ch.get(k) for k in ('genre','content_id','source','trend_matches','selection_reason','stage0_rank','stage0_score','winner_descendant','exploration_rate','hook','question','prompt','answer','script','news_source','news_title','secondary_source','secondary_news_source','source_count','sensitive_topic','trend_region','trend_traffic','realistic_synthetic','altered_real_event','synthetic_real_person','reused_third_party_media','transformative_commentary','copyright_unlicensed','packaging_winner_score','packaging_candidates')}
     print('Content decision:', json.dumps(CONTENT_META, ensure_ascii=False))
     return ch
 
