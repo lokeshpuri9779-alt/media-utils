@@ -762,7 +762,7 @@ def make_short(out: Path, excluded_ids=None, excluded_titles=None) -> tuple[str,
         try:
             report = render_short(ch, out)
             from quality_lab import evaluate_studio_render
-            director = evaluate_studio_render(ch, report)
+            director = evaluate_studio_render(ch, report, video_path=out)
             CONTENT_META["creative_director"] = director["director"]
             CONTENT_META["repair_feedback"] = director["feedback"]
             print("Creative Director:", json.dumps(director["director"], ensure_ascii=False))
@@ -777,7 +777,7 @@ def make_short(out: Path, excluded_ids=None, excluded_titles=None) -> tuple[str,
                     CONTENT_META["retention_surgery"] = surgery
                     print("Creative Director: rerendering same story with repaired visual direction and scene surgery.")
                     report = render_short(ch, out, director_repair_pass=3, scene_surgery=surgery)
-                    director = evaluate_studio_render(ch, report)
+                    director = evaluate_studio_render(ch, report, video_path=out)
                     CONTENT_META["creative_director"] = director["director"]
                     CONTENT_META["repair_feedback"] = director["feedback"]
                     CONTENT_META["director_rerendered"] = True
