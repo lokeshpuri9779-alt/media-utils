@@ -183,7 +183,10 @@ def _strategy(data: dict, now: datetime) -> dict:
         quality = avg
         quality += min(12.0, (likes / max(views, 1)) * 240.0)
         quality += min(10.0, (shares / max(views, 1)) * 500.0)
-        quality += min(8.0, (subs / max(views, 1)) * 800.0)
+        # Monetization objective: reward videos that turn qualified viewers into
+        # subscribers, while keeping retention dominant and sample-size bounded.
+        sub_rate = subs / max(views, 1)
+        quality += min(18.0, sub_rate * 1200.0)
         quality *= min(1.0, math.log10(views + 10) / 3.0 + .25)
         genre = entry.get("genre", "challenge")
         grouped.setdefault(genre, []).append(quality)
@@ -220,7 +223,7 @@ def _strategy(data: dict, now: datetime) -> dict:
         "evidence": evidence,
         "winner": max(scores, key=scores.get),
         "excluded_video_count": len(excluded),
-        "reason": "Retention and traffic-source evidence; owner-reported test videos excluded. Viewer identity is unknown.",
+        "reason": "Retention, subscriber conversion and traffic-source evidence; owner-reported test videos excluded. Viewer identity is unknown.",
     }
 
 
