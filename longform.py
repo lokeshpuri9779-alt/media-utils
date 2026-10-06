@@ -97,9 +97,11 @@ def choose_episode(data,now):
     if not fresh or not available(snap.get('items') or []):
         return None
 
-    if slot==1 and len(today_long)<1:
-        slot=0
-    episode_id=f"trend-brief-{today}-{'am' if slot==0 else 'pm'}"
+    # Strict daily slots: never backfill a missed AM episode during the PM
+    # window. This prevents two long-form uploads from bunching together at
+    # night and protects audience quality/notification cadence.
+    slot_name='am' if slot==0 else 'pm'
+    episode_id=f"trend-brief-{today}-{slot_name}"
     return None if episode_id in seen_ids else episode_id
 
 
@@ -199,7 +201,7 @@ def thumbnail(out):
     im=wide_background().copy();tex=studio.planet_texture().resize((780,780),Image.Resampling.LANCZOS)
     im.paste(tex,(1070,160),tex);d=ImageDraw.Draw(im)
     studio.fit_text(d,'A DAY\nLONGER THAN\nA YEAR?',(90,200,1040,800),size=143,fill=(255,195,116),max_lines=3)
-    d.text((100,100),'LOKI / EXPLAINED',font=studio.font(38),fill=(206,223,244))
+    d.text((100,100),'RAYVAN / EXPLAINED',font=studio.font(38),fill=(206,223,244))
     d.text((105,925),'THE CLOCK YOU CHOOSE CHANGES THE ANSWER',font=studio.font(29),fill=(182,202,227))
     im.resize((1280,720),Image.Resampling.LANCZOS).save(out,'JPEG',quality=92)
 
