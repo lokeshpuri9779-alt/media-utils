@@ -445,6 +445,24 @@ def _sensitive_trend(topic: str, news) -> bool:
     text=' '.join([str(topic or '')]+[str(x.get('title') or '') for x in news or []])
     return bool(SENSITIVE_TREND_RE.search(text))
 
+def _trend_title(topic: str, headline: str) -> str:
+    """Turn a raw search query into a natural, curiosity-led Shorts title."""
+    topic=' '.join(str(topic or '').split()).strip()
+    headline=' '.join(str(headline or '').split()).strip()
+    # Prefer the publisher's human-written angle when it is concise enough.
+    clean=re.sub(r'[\u2018\u2019\u201c\u201d"]','',headline)
+    clean=re.sub(r'\s+',' ',clean).strip(' -:|')
+    if 18 <= len(clean) <= 82:
+        base=clean
+    else:
+        words=topic.split()
+        pretty=' '.join(w if w.isupper() else w.capitalize() for w in words)
+        base=f"What Changed With {pretty}?"
+    # Avoid repetitive generic trend-language; #Shorts remains discoverable.
+    base=re.sub(r'(?i)\s*#shorts\s*',' ',base).strip()
+    return (base[:91].rstrip(' .,:;-')+' #Shorts')[:100]
+
+
 def trend_candidates(trends):
     """Create source-linked current-affairs candidates from live trend metadata.
 
@@ -489,7 +507,7 @@ def trend_candidates(trends):
         out.append({
             'genre':'current','kind':'explainer','content_id':cid,'hook':hook,
             'question':question,'prompt':'WHY IT MATTERS','answer':answer,
-            'title':f"Why {topic} Is Trending Right Now #Shorts"[:100],
+            'title':_trend_title(topic, headline),
             'source':str(n['url']),'keywords':[topic.lower()],
             'secondary_source':str((secondary or {}).get('url') or ''),
             'secondary_news_source':second_name,
