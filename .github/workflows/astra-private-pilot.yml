@@ -1,0 +1,91 @@
+name: Astra one-shot private pilot
+
+on:
+  push:
+    paths:
+      - '.github/workflows/astra-private-pilot.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astra-private-pilot
+  cancel-in-progress: false
+
+jobs:
+  pilot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+      YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+      YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+      YOUTUBE_FULL_REFRESH_TOKEN: ${{ secrets.YOUTUBE_FULL_REFRESH_TOKEN }}
+      YOUTUBE_ANALYTICS_REFRESH_TOKEN: ${{ secrets.YOUTUBE_ANALYTICS_REFRESH_TOKEN }}
+      YOUTUBE_COMMUNITY_REFRESH_TOKEN: ${{ secrets.YOUTUBE_COMMUNITY_REFRESH_TOKEN }}
+      YOUTUBE_COMMUNITY_CLIENT_ID: ${{ secrets.YOUTUBE_COMMUNITY_CLIENT_ID }}
+      YOUTUBE_COMMUNITY_CLIENT_SECRET: ${{ secrets.YOUTUBE_COMMUNITY_CLIENT_SECRET }}
+      YOUTUBE_PRIVACY: private
+      ORT_DISABLE_TELEMETRY: '1'
+      ASTRA_LONG_ENABLED: '0'
+      ASTRA_CHANNEL: 'rayvan'
+      ASTRA_INITIAL_DAILY_TARGET: '1'
+      ASTRA_MAX_DAILY_TARGET: '1'
+      ASTRA_MIN_UPLOAD_INTERVAL_MINUTES: '1'
+      ASTRA_FORCE_RUN: '1'
+      ASTRA_PROBE_ID: 'private-pilot-2026-10-07-v1'
+    steps:
+      - name: Checkout validated production
+        uses: actions/checkout@v7
+        with:
+          ref: astra-production
+          fetch-depth: 0
+          submodules: recursive
+      - name: Restore adaptive runtime state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin astra-state
+          for f in performance.json quota_state.json SHORTS.md; do
+            git checkout origin/astra-state -- "$f" 2>/dev/null || true
+          done
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Dependencies
+        run: pip install -r requirements.txt
+      - name: Cache neural voice
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/astra-voice
+          key: astra-kokoro-v1-beb0d184
+      - name: Cache faster-whisper model
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: astra-faster-whisper-tiny-en-v1
+      - name: Run one private production pilot
+        id: controller
+        run: python cloud_once.py
+      - name: Save adaptive state
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin astra-state
+          if git diff --quiet origin/astra-state -- performance.json quota_state.json SHORTS.md; then
+            exit 0
+          fi
+          STATE_DIR="$(mktemp -d)"
+          git worktree add --detach "$STATE_DIR" origin/astra-state
+          for f in performance.json quota_state.json SHORTS.md; do
+            if [ -e "$f" ]; then cp "$f" "$STATE_DIR/$f"; else rm -f "$STATE_DIR/$f"; fi
+          done
+          cd "$STATE_DIR"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- performance.json quota_state.json SHORTS.md
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Record one-shot private Astra pilot [skip ci]"
+          git push origin "HEAD:refs/heads/astra-state"
