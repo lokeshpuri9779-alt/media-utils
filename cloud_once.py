@@ -662,6 +662,11 @@ def choose_content(data, trends, now=None, excluded_ids=None, excluded_titles=No
     if not candidates:
         print('Creative Engine rejections:', json.dumps(creative_rejections[:8], ensure_ascii=False))
         raise RuntimeError('Creative Engine rejected all candidates; skipping rather than publishing weak/template content.')
+    # While premium editorial stories are available, do not let a weaker legacy
+    # template win merely because its prior score is numerically convenient.
+    premium=[c for c in candidates if c.get('premium_story')]
+    if premium:
+        candidates=premium
     candidates = [packaging_competition(c) for c in candidates]
     # Compute the bounded learning policy before ranking so current-run scoring
     # cannot accidentally use yesterday's stale weights.
