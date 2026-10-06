@@ -1,0 +1,86 @@
+name: Astra character GPU worker
+
+on:
+  workflow_dispatch:
+    inputs:
+      render_pilot:
+        description: Render the private character pilot on an attached GPU worker
+        required: false
+        default: false
+        type: boolean
+      provider:
+        description: Preferred open-source provider
+        required: false
+        default: auto
+        type: choice
+        options:
+          - auto
+          - ltx
+          - wan2.2
+
+concurrency:
+  group: astra-character-gpu
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  gpu-character:
+    # This job will remain queued until a self-hosted NVIDIA worker with the
+    # matching labels is attached to this repository.
+    runs-on: [self-hosted, linux, x64, astra-gpu]
+    timeout-minutes: 90
+    env:
+      ASTRA_ALLOW_PAID_CHARACTER_VIDEO: '0'
+      ASTRA_OSS_VIDEO_PROVIDER: ${{ inputs.provider || 'auto' }}
+      ASTRA_LTX_ROOT: ${{ vars.ASTRA_LTX_ROOT }}
+      ASTRA_LTX_CONFIG: ${{ vars.ASTRA_LTX_CONFIG }}
+      ASTRA_WAN22_ROOT: ${{ vars.ASTRA_WAN22_ROOT }}
+      ASTRA_WAN22_CKPT: ${{ vars.ASTRA_WAN22_CKPT }}
+      ORT_DISABLE_TELEMETRY: '1'
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: astra-production
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install Astra Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Verify NVIDIA worker
+        run: |
+          nvidia-smi
+          python gpu_worker_health.py | tee /tmp/astra-gpu-health.json
+          python - <<'PY'
+          from gpu_worker_health import assert_ready
+          assert_ready()
+          print("ASTRA_GPU_READY")
+          PY
+
+      - name: Build spend-free character pilot plan
+        run: python character_pilot.py --dry-run | tee /tmp/astra-character-plan.json
+
+      - name: Render private character pilot locally
+        if: ${{ inputs.render_pilot == true }}
+        run: |
+          mkdir -p /tmp/astra-character-output
+          python character_pilot.py --render /tmp/astra-character-output/pilot.mp4
+          ffprobe -v error -select_streams v:0             -show_entries stream=width,height,r_frame_rate             -show_entries format=duration,size             -of json /tmp/astra-character-output/pilot.mp4             > /tmp/astra-character-output/delivery.json
+
+      - name: Upload GPU health and plan
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-gpu-worker-${{ github.run_id }}
+          path: |
+            /tmp/astra-gpu-health.json
+            /tmp/astra-character-plan.json
+            /tmp/astra-character-output/
+          retention-days: 7
+          if-no-files-found: warn
