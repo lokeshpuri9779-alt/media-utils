@@ -1,13 +1,9 @@
 from __future__ import annotations
 
-"""Remote Astra GPU worker client.
-
-Allows the GitHub-hosted controller to delegate an individual open-source video
-shot to a separately attached GPU machine. The worker remains self-hosted and
-paid-provider fallback stays disabled unless explicitly authorized elsewhere.
-"""
+"""Remote Astra GPU worker queued-job client."""
 
 import os
+import time
 from pathlib import Path
 
 import httpx
@@ -25,25 +21,21 @@ def _token() -> str:
     return (os.environ.get("ASTRA_GPU_WORKER_TOKEN") or "").strip()
 
 
+def _headers() -> dict:
+    return {"Authorization":f"Bearer {_token()}"}
+
+
 def remote_status(timeout: float = 8.0) -> dict:
     url=_base_url()
     token=_token()
     if not url or not token:
         return {"configured":False,"ready":False}
     try:
-        r=httpx.get(
-            url+"/health",
-            headers={"Authorization":f"Bearer {token}"},
-            timeout=timeout,
-        )
+        r=httpx.get(url+"/health",headers=_headers(),timeout=timeout)
         if r.status_code!=200:
             return {"configured":True,"ready":False,"status_code":r.status_code}
         payload=r.json()
-        return {
-            "configured":True,
-            "ready":bool(payload.get("ready")),
-            "worker":payload,
-        }
+        return {"configured":True,"ready":bool(payload.get("ready")),"worker":payload}
     except Exception as exc:
         return {"configured":True,"ready":False,"error":str(exc)}
 
@@ -62,27 +54,54 @@ def generate_remote_clip(shot: dict, output_path: str | Path, timeout_seconds: i
         "target_seconds":shot.get("target_seconds") or [1.8,3.2],
         "variant":str(shot.get("variant") or ""),
     }
-    with httpx.Client(timeout=timeout_seconds,follow_redirects=True) as client:
-        r=client.post(
-            url+"/render",
-            headers={"Authorization":f"Bearer {token}"},
-            json=payload,
-        )
-        if r.status_code!=200:
-            raise RemoteGPUUnavailable(
-                f"Remote GPU render failed: HTTP {r.status_code} {r.text[:300]}"
-            )
-        ctype=str(r.headers.get("content-type") or "").lower()
-        if "video/" not in ctype and "octet-stream" not in ctype:
-            raise RemoteGPUUnavailable("Remote GPU worker returned non-video content.")
-        output_path.write_bytes(r.content)
+    deadline=time.monotonic()+timeout_seconds
+    try:
+        with httpx.Client(timeout=30,follow_redirects=True) as client:
+            submit=client.post(url+"/jobs",headers=_headers(),json=payload)
+            if submit.status_code!=202:
+                raise RemoteGPUUnavailable(
+                    f"Remote GPU submit failed: HTTP {submit.status_code} {submit.text[:300]}"
+                )
+            job_id=str(submit.json().get("id") or "")
+            if not job_id:
+                raise RemoteGPUUnavailable("Remote GPU worker returned no job id.")
 
-    if not output_path.is_file() or output_path.stat().st_size<=0:
-        raise RemoteGPUUnavailable("Remote GPU worker returned an empty video.")
+            while time.monotonic()<deadline:
+                poll=client.get(url+f"/jobs/{job_id}",headers=_headers())
+                if poll.status_code!=200:
+                    raise RemoteGPUUnavailable(
+                        f"Remote GPU poll failed: HTTP {poll.status_code} {poll.text[:300]}"
+                    )
+                status=poll.json()
+                state=status.get("status")
+                if state=="failed":
+                    raise RemoteGPUUnavailable(
+                        "Remote GPU render failed: "+str(status.get("error") or "unknown")
+                    )
+                if state=="succeeded":
+                    video=client.get(url+f"/jobs/{job_id}/video",headers=_headers(),timeout=120)
+                    if video.status_code!=200:
+                        raise RemoteGPUUnavailable(
+                            f"Remote GPU download failed: HTTP {video.status_code}"
+                        )
+                    ctype=str(video.headers.get("content-type") or "").lower()
+                    if "video/" not in ctype and "octet-stream" not in ctype:
+                        raise RemoteGPUUnavailable("Remote GPU worker returned non-video content.")
+                    output_path.write_bytes(video.content)
+                    if output_path.stat().st_size<=0:
+                        raise RemoteGPUUnavailable("Remote GPU worker returned an empty video.")
+                    return {
+                        "provider":"remote-open-source-gpu",
+                        "worker_provider":status.get("provider"),
+                        "job_id":job_id,
+                        "output_path":str(output_path),
+                        "bytes":output_path.stat().st_size,
+                        "paid_generation":False,
+                    }
+                time.sleep(5)
+    except RemoteGPUUnavailable:
+        raise
+    except Exception as exc:
+        raise RemoteGPUUnavailable(str(exc)) from exc
 
-    return {
-        "provider":"remote-open-source-gpu",
-        "output_path":str(output_path),
-        "bytes":output_path.stat().st_size,
-        "paid_generation":False,
-    }
+    raise RemoteGPUUnavailable("Remote GPU render timed out.")
