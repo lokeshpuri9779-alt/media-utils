@@ -160,3 +160,20 @@ def branded_description(description: str, data: dict, *, genre: str, fmt: str) -
         text += "\n\nRAYVAN — Stories Beyond the Ordinary."
     plan["related_video_id"] = related
     return text, plan
+
+
+def optimize_title(title: str, plan: dict, meta: dict) -> str:
+    """Apply measured packaging hints without clickbait or unsupported claims."""
+    text=" ".join(str(title or "").split()).strip()
+    hints=set(plan.get("packaging_hints") or [])
+    hook=" ".join(str(meta.get("hook") or "").split()).strip(" ?!.-")
+    if "curiosity_title" in hints and hook and hook.lower() not in text.lower():
+        base=text.replace("#Shorts","").strip()
+        candidate=f"{hook}: {base}"
+        text=candidate if len(candidate)<=92 else text
+    if "search_clear_title" in hints:
+        # Preserve the descriptive title; search packaging values clarity over mutation.
+        text=text
+    if str(meta.get("format") or plan.get("format"))=="short" and "#Shorts" not in text:
+        text=(text+" #Shorts").strip()
+    return text[:100]
