@@ -222,7 +222,7 @@ def voice_plan(plan, genre, max_duration=58):
     engine=voice_engine()
     cursor=0.0
     for s in plan:
-        samples, rate=engine.create(s['speech'],voice='af_heart',speed=1.04 if genre!='fiction' else .98,lang='en-us')
+        samples, rate=engine.create(s['speech'],voice='af_heart',speed=.96 if genre=='current' else (.98 if genre=='fiction' else 1.0),lang='en-us')
         samples=np.asarray(samples,dtype=np.float32)
         if rate!=RATE or len(samples)==0 or not np.isfinite(samples).all():
             raise RuntimeError('Invalid narration audio; refusing to publish an incomplete video.')
