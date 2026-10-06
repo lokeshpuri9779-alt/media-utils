@@ -260,6 +260,7 @@ jobs:
       - name: Validate Code2MP4
         working-directory: third_party/code2mp4
         run: |
+          pnpm build
           pnpm typecheck
           pnpm test
 
