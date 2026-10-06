@@ -53,28 +53,50 @@ def long_plan():
 
 
 def choose_episode(data,now):
-    """One new long episode at most per rolling seven days, after 19:00 IST.
+    """Return at most two fresh long-form episodes per India-local day.
 
-    Publish the sourced Planet Clocks episode first. After that, generate a fresh
-    procedural Brain Arena episode every eligible ISO week so long-form never
-    runs out of original material.
+    Slots open at 07:00 and 19:00 IST. Publication is quality-gated elsewhere;
+    if a fresh episode is unavailable Astra skips rather than repeating.
+    The sourced Planet Clocks episode is used once, then procedural Brain Arena
+    IDs are unique per date/slot and protected by persisted/live dedupe.
     """
-    if now.hour<19:return None
-    planet_published=False
-    seen_ids=set()
-    for entry in data.get('videos',{}).values():
-        cid=entry.get('content_id')
-        if cid:seen_ids.add(cid)
-        if cid==EPISODE_ID:planet_published=True
-        if entry.get('format')=='long':
+    slot = 0 if now.hour >= 7 else -1
+    if now.hour >= 19:
+        slot = 1
+    if slot < 0:
+        return None
+
+    today = now.date().isoformat()
+    seen_ids = set()
+    today_long = []
+    planet_published = False
+    for entry in data.get('videos', {}).values():
+        cid = str(entry.get('content_id') or '')
+        if cid:
+            seen_ids.add(cid)
+        if cid == EPISODE_ID:
+            planet_published = True
+        if entry.get('format') == 'long':
             try:
-                if now-datetime.fromisoformat(entry['published_at'])<timedelta(days=7):return None
-            except (KeyError,ValueError,TypeError):continue
+                published = datetime.fromisoformat(entry['published_at'])
+                if published.date().isoformat() == today:
+                    today_long.append(entry)
+            except (KeyError, ValueError, TypeError):
+                continue
+
+    # Never exceed two long-form publications in one local day.
+    if len(today_long) >= 2:
+        return None
+    # Evening slot is only eligible after the morning/first slot has actually
+    # published, preventing scheduler retries from producing a burst.
+    if slot == 1 and len(today_long) < 1:
+        slot = 0
+
     if not planet_published:
         return EPISODE_ID
-    iso=now.isocalendar()
-    weekly_id=f"brain-arena-{iso.year}-W{iso.week:02d}"
-    return None if weekly_id in seen_ids else weekly_id
+
+    episode_id = f"brain-arena-{today}-{'am' if slot == 0 else 'pm'}"
+    return None if episode_id in seen_ids else episode_id
 
 
 @studio.lru_cache(maxsize=1)
