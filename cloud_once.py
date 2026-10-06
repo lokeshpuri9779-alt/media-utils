@@ -69,8 +69,8 @@ def verify_channel(token: str) -> dict:
     channels = response.json().get("items", [])
     ids = [c.get("id") for c in channels]
     print("Authorized channel IDs:", json.dumps(ids))
-    print("Expected channel ID:", EXPECTED_CHANNEL_ID)
-    if ids != [EXPECTED_CHANNEL_ID]:
+    print("Expected channel ID:", expected_channel_id())
+    if ids != [expected_channel_id()]:
         raise RuntimeError("Authorized channel mismatch; no upload attempted. Reauthorize the intended YouTube channel.")
     print("Channel verified:", channels[0].get("snippet", {}).get("title", ""))
     return channels[0]
@@ -475,7 +475,7 @@ def make_short(out: Path) -> tuple[str, str]:
     if related:
         vid, _ = max(related, key=lambda pair: pair[1].get("published_at", ""))
         desc += "\nFull explainer on our channel: https://www.youtube.com/watch?v=" + vid
-    desc += "\nSubscribe: https://www.youtube.com/channel/" + EXPECTED_CHANNEL_ID + "?sub_confirmation=1"
+    desc += "\nSubscribe: https://www.youtube.com/channel/" + expected_channel_id() + "?sub_confirmation=1"
     return ch["title"], desc
 
 def access_token() -> str:
