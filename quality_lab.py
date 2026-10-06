@@ -5,6 +5,8 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
+from creative_director import evaluate as evaluate_director, production_feedback
+
 
 def assess_render(report: dict) -> dict:
     failures = []
@@ -84,3 +86,91 @@ def scene_change_report(video_path: Path) -> dict:
             "scene_count": 0,
             "error": str(exc)[:240],
         }
+
+
+def unified_quality_report(report: dict) -> dict:
+    """Combine renderer QA with Astra's creative director.
+
+    This function is intentionally side-effect free. It returns the release
+    decision plus a targeted repair plan for the orchestrator.
+    """
+    base = assess_render(report)
+    merged = dict(report)
+    hard = list(merged.get("hard_failures") or [])
+    hard.extend(base.get("failures") or [])
+    merged["hard_failures"] = hard
+    decision = evaluate_director(merged)
+    return {
+        "render_assessment": base,
+        "director": decision,
+        "feedback": production_feedback(decision),
+        "pass": bool(base.get("pass")) and bool(decision.get("publish_allowed")),
+    }
+
+
+def director_input_from_render(story: dict, render_report: dict) -> dict:
+    """Translate Studio's real render telemetry into Creative Director inputs."""
+    scenes = render_report.get("scenes") or []
+    durations = [float(s.get("duration") or 0) for s in scenes if float(s.get("duration") or 0) > 0]
+    duration = float(render_report.get("duration") or 0)
+    cq = render_report.get("creative_quality") or {}
+    audio = render_report.get("audio") or {}
+    hook_words = len(str(story.get("hook") or "").split())
+    first_start = float((scenes[0] if scenes else {}).get("start") or 0)
+
+    hook_score = 94.0
+    if hook_words > 10:
+        hook_score -= min(30.0, (hook_words - 10) * 4.0)
+    if first_start > 0.15:
+        hook_score -= 20.0
+
+    retention_score = 92.0
+    if not 8.0 <= duration <= 28.0:
+        retention_score -= 35.0
+    if len(scenes) < 3:
+        retention_score -= 25.0
+    if durations and max(durations) > 4.5:
+        retention_score -= min(25.0, (max(durations) - 4.5) * 8.0)
+
+    peak = float(audio.get("peak_dbfs") or -99)
+    audio_score = 94.0 if -12.0 <= peak <= -0.3 else 72.0
+
+    visual_score = float(cq.get("score") or 0)
+    novelty_score = min(100.0, visual_score + 4.0)
+    coherence_score = 92.0 if all(str(s.get("speech") or s.get("narration") or "").strip() for s in scenes) else 70.0
+
+    hard = list(cq.get("hard_failures") or [])
+    return {
+        "duration": duration,
+        "scenes": scenes,
+        "creative_quality": cq,
+        "creative": {
+            "hook_score": hook_score,
+            "retention_score": retention_score,
+            "visual_score": visual_score,
+            "novelty_score": novelty_score,
+            "coherence_score": coherence_score,
+        },
+        "scene_analysis": {
+            "scene_count": len(scenes),
+            "avg_scene_duration": (sum(durations) / len(durations)) if durations else 0.0,
+            "max_scene_duration": max(durations) if durations else 0.0,
+        },
+        "audio": {"score": audio_score, **audio},
+        # Studio captions are generated from the same timed narration plan.
+        # A later faster-whisper/VideoLingo pass can replace this provisional score.
+        "captions": {"score": 86.0, "stage": "studio-timing-provisional"},
+        "technical": {"pass": duration > 0 and bool(scenes), "score": 100.0 if duration > 0 and scenes else 0.0},
+        "hard_failures": hard,
+    }
+
+
+def evaluate_studio_render(story: dict, render_report: dict) -> dict:
+    director_input = director_input_from_render(story, render_report)
+    decision = evaluate_director(director_input)
+    return {
+        "director_input": director_input,
+        "director": decision,
+        "feedback": production_feedback(decision),
+        "pass": bool(decision.get("publish_allowed")),
+    }

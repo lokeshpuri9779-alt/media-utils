@@ -1,0 +1,150 @@
+name: OSS engine install check
+
+on:
+  push:
+    paths:
+      - 'third_party/moneyprinterturbo.lock.json'
+      - 'tests/test_faster_whisper_adapter.py'
+      - 'faster_whisper_adapter.py'
+      - 'third_party/faster-whisper.lock.json'
+      - 'oss_bootstrap.py'
+      - 'mpt_adapter.py'
+      - 'tests/test_mpt_adapter.py'
+      - 'third_party/pyscenedetect.lock.json'
+      - 'pyscenedetect_adapter.py'
+      - 'tests/test_pyscenedetect_adapter.py'
+      - 'third_party/videolingo.lock.json'
+      - 'videolingo_adapter.py'
+      - 'tests/test_videolingo_adapter.py'
+      - '.github/workflows/oss-engine-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  moneyprinterturbo:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install pinned MoneyPrinterTurbo repository
+        run: python oss_bootstrap.py
+      - name: Create isolated engine environment
+        shell: bash
+        run: |
+          python -m venv .astra_oss/MoneyPrinterTurbo/.venv
+          .astra_oss/MoneyPrinterTurbo/.venv/bin/python -m pip install --upgrade pip
+          .astra_oss/MoneyPrinterTurbo/.venv/bin/pip install -r .astra_oss/MoneyPrinterTurbo/requirements.txt
+      - name: Verify upstream CLI is runnable
+        run: .astra_oss/MoneyPrinterTurbo/.venv/bin/python .astra_oss/MoneyPrinterTurbo/cli.py --help >/tmp/mpt-help.txt
+      - name: Verify Astra adapter boundary
+        run: |
+          .astra_oss/MoneyPrinterTurbo/.venv/bin/python mpt_adapter.py > /tmp/mpt-adapter.json
+          cat /tmp/mpt-adapter.json
+      - name: Preserve install report
+        uses: actions/upload-artifact@v4
+        with:
+          name: moneyprinterturbo-install-${{ github.run_id }}
+          path: |
+            .astra_oss/install-report.json
+            /tmp/mpt-adapter.json
+            /tmp/mpt-help.txt
+          retention-days: 7
+
+  faster-whisper:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install pinned faster-whisper repository
+        run: python oss_bootstrap.py --engine faster-whisper
+      - name: Create isolated faster-whisper environment
+        shell: bash
+        run: |
+          python -m venv .astra_oss/faster-whisper/.venv
+          .astra_oss/faster-whisper/.venv/bin/python -m pip install --upgrade pip
+          .astra_oss/faster-whisper/.venv/bin/pip install -e .astra_oss/faster-whisper
+      - name: Verify faster-whisper import
+        run: .astra_oss/faster-whisper/.venv/bin/python -c "import faster_whisper; print(faster_whisper.__file__)"
+      - name: Verify Astra caption adapter
+        run: .astra_oss/faster-whisper/.venv/bin/python faster_whisper_adapter.py > /tmp/faster-whisper-adapter.json
+      - name: Preserve faster-whisper install report
+        uses: actions/upload-artifact@v4
+        with:
+          name: faster-whisper-install-${{ github.run_id }}
+          path: |
+            .astra_oss/faster-whisper-install-report.json
+            /tmp/faster-whisper-adapter.json
+          retention-days: 7
+
+
+  pyscenedetect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install pinned PySceneDetect repository
+        run: python oss_bootstrap.py --engine pyscenedetect
+      - name: Create isolated PySceneDetect environment
+        shell: bash
+        run: |
+          python -m venv .astra_oss/PySceneDetect/.venv
+          .astra_oss/PySceneDetect/.venv/bin/python -m pip install --upgrade pip
+          .astra_oss/PySceneDetect/.venv/bin/pip install -e '.astra_oss/PySceneDetect[opencv-headless]'
+      - name: Verify PySceneDetect import
+        run: .astra_oss/PySceneDetect/.venv/bin/python -c "import scenedetect; print(scenedetect.__file__)"
+      - name: Verify Astra pacing adapter
+        run: .astra_oss/PySceneDetect/.venv/bin/python pyscenedetect_adapter.py > /tmp/pyscenedetect-adapter.json
+      - name: Preserve PySceneDetect install report
+        uses: actions/upload-artifact@v4
+        with:
+          name: pyscenedetect-install-${{ github.run_id }}
+          path: |
+            .astra_oss/pyscenedetect-install-report.json
+            /tmp/pyscenedetect-adapter.json
+          retention-days: 7
+
+
+  videolingo:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install pinned VideoLingo repository
+        run: python oss_bootstrap.py --engine videolingo
+      - name: Verify Astra VideoLingo source boundary
+        run: python videolingo_adapter.py --engine-root .astra_oss/VideoLingo > /tmp/videolingo-adapter.json
+      - name: Verify adapter contract
+        run: |
+          python - <<'PY'
+          from videolingo_adapter import backend_info
+          info = backend_info()
+          assert info["production_enabled"] is False
+          assert info["imports_upstream_runtime"] is False
+          assert "subtitle-segmentation" in info["purpose"]
+          PY
+      - name: Preserve VideoLingo install report
+        uses: actions/upload-artifact@v4
+        with:
+          name: videolingo-install-${{ github.run_id }}
+          path: |
+            .astra_oss/videolingo-install-report.json
+            /tmp/videolingo-adapter.json
+          retention-days: 7

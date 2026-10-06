@@ -1279,10 +1279,12 @@ def _repair_plan(ch,plan,attempt):
         repaired.append(x)
     return repaired
 
-def render_short(ch,out,still_dir=None):
+def render_short(ch,out,still_dir=None,director_repair_pass=0):
     genre=ch.get('genre','challenge')
     if genre not in THEMES: raise ValueError('Unsupported genre')
     plan=make_plan(ch)
+    if int(director_repair_pass or 0) > 0:
+        plan=_repair_plan(ch,plan,int(director_repair_pass))
     # Repair/re-score weak plans before abandoning a publish slot.
     repair_attempts=0
     while True:
