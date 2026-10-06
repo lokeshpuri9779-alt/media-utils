@@ -54,8 +54,9 @@ def diagnose_scenes(render_report: dict) -> dict:
     }
 
 
-def propose_surgery(render_report: dict) -> dict:
+def propose_surgery(render_report: dict, learned_lessons: list[str] | None = None) -> dict:
     diag = diagnose_scenes(render_report)
+    lessons = set(learned_lessons or [])
     ops = []
 
     # First: shorten the longest non-protected scenes.
@@ -73,7 +74,7 @@ def propose_surgery(render_report: dict) -> dict:
         })
 
     # If pacing remains structurally heavy, drop at most one optional beat.
-    if diag["scene_count"] >= 6 and (diag["avg_scene_duration"] > 2.5 or diag["max_scene_duration"] > 4.2):
+    if diag["scene_count"] >= 6 and (diag["avg_scene_duration"] > 2.5 or diag["max_scene_duration"] > 4.2 or "compress_middle" in lessons):
         droppable = [
             x for x in diag["scenes"]
             if not x["protected"] and x["beat"] in OPTIONAL_DROP_PRIORITY
@@ -88,7 +89,7 @@ def propose_surgery(render_report: dict) -> dict:
 
     # If the payoff is last in a long sequence, move it one slot earlier, but
     # never ahead of source evidence.
-    if diag["payoff_late"] and diag["scene_count"] >= 6:
+    if (diag["payoff_late"] or "move_payoff_earlier" in lessons or "front_load_payoff" in lessons) and diag["scene_count"] >= 5:
         payoff = diag["payoff_index"]
         evidence_indices = [x["index"] for x in diag["scenes"] if x["beat"] == "evidence"]
         target = max(evidence_indices + [0]) + 1
@@ -104,6 +105,7 @@ def propose_surgery(render_report: dict) -> dict:
         "diagnosis": diag,
         "operations": ops[:4],
         "bounded": True,
+        "learned_lessons": sorted(lessons),
         "protected_beats": sorted(PROTECTED_BEATS),
     }
 
