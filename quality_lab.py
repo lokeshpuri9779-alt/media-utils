@@ -201,3 +201,51 @@ def evaluate_studio_render(story: dict, render_report: dict, video_path: str | P
         "feedback": production_feedback(decision),
         "pass": bool(decision.get("publish_allowed")),
     }
+
+
+def evaluate_long_render(render_report: dict, video_path: str | Path) -> dict:
+    """Measured QA for long-form renders without Shorts-specific duration rules."""
+    path = Path(video_path)
+    detected = scene_change_report(path)
+    try:
+        from caption_audio_qa import validate_rendered_media
+        media_qa = validate_rendered_media(path, render_report)
+    except Exception as exc:
+        media_qa = {
+            "available": False,
+            "pass": False,
+            "audio_score": 0.0,
+            "caption_score": 0.0,
+            "hard_failures": ["post-render media QA unavailable: " + str(exc)[:180]],
+        }
+
+    duration = float(render_report.get("duration") or 0)
+    scene_count = int(render_report.get("scene_count") or len(render_report.get("scenes") or []))
+    failures = list(media_qa.get("hard_failures") or [])
+    if duration < 60:
+        failures.append("long-form render is under 60 seconds")
+    if scene_count < 6:
+        failures.append("long-form render has too few scenes")
+    if not path.is_file() or path.stat().st_size <= 0:
+        failures.append("long-form output file missing or empty")
+
+    structural_score = 100.0
+    if duration < 120:
+        structural_score -= 15.0
+    if scene_count < 10:
+        structural_score -= 10.0
+    score = round(
+        0.4 * float(media_qa.get("audio_score") or 0)
+        + 0.4 * float(media_qa.get("caption_score") or 0)
+        + 0.2 * structural_score,
+        2,
+    )
+    return {
+        "pass": not failures and score >= 82.0,
+        "score": score,
+        "media_qa": media_qa,
+        "scene_detection": detected,
+        "duration": duration,
+        "scene_count": scene_count,
+        "failures": failures,
+    }
