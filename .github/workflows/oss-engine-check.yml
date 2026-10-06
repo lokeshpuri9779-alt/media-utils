@@ -100,7 +100,7 @@ jobs:
         run: |
           python -m venv .astra_oss/PySceneDetect/.venv
           .astra_oss/PySceneDetect/.venv/bin/python -m pip install --upgrade pip
-          .astra_oss/PySceneDetect/.venv/bin/pip install -e .astra_oss/PySceneDetect
+          .astra_oss/PySceneDetect/.venv/bin/pip install -e '.astra_oss/PySceneDetect[opencv-headless]'
       - name: Verify PySceneDetect import
         run: .astra_oss/PySceneDetect/.venv/bin/python -c "import scenedetect; print(scenedetect.__file__)"
       - name: Verify Astra pacing adapter
