@@ -60,7 +60,7 @@ def story_score(c: dict) -> float:
 def _clip(x, lo=0.0, hi=100.0):
     return max(lo, min(hi, float(x)))
 
-def score_candidate(c: dict, *, trend_matches=None, channel_score=None) -> dict:
+def score_candidate(c: dict, *, trend_matches=None, channel_score=None, packaging_weight=.10, story_weight=.10) -> dict:
     hook=(c.get("hook") or "").strip()
     question=(c.get("question") or "").strip()
     answer=(c.get("answer") or "").strip()
@@ -100,7 +100,9 @@ def score_candidate(c: dict, *, trend_matches=None, channel_score=None) -> dict:
     story=story_score(c)
     # Case-study architecture: idea quality is necessary, but packaging and
     # narrative payoff are explicit gates rather than post-render decoration.
-    total=.40*structural + .25*((demand+trend)/2) + .15*channel + .10*package + .10*story
+    pw=max(.08,min(.18,float(packaging_weight))); sw=max(.08,min(.18,float(story_weight)))
+    remaining=max(.54,1.0-pw-sw)
+    total=(remaining*.50)*structural + (remaining*.3125)*((demand+trend)/2) + (remaining*.1875)*channel + pw*package + sw*story
     return {
         "total": round(_clip(total),2), "hook":round(_clip(hook_score),1),
         "payoff":round(_clip(payoff),1), "clarity":round(_clip(clarity),1),
@@ -126,12 +128,20 @@ def packaging_competition(c: dict) -> dict:
         keys=x.get("keywords") or []
         topic=" ".join(str(keys[0] if keys else "").split()).strip()
     pretty=" ".join(w if w.isupper() else w.capitalize() for w in topic.split())
+    def natural(value):
+        value=" ".join(str(value or "").split())
+        words=value.replace("?","").replace(":"," ").split()
+        if len(words)>14: return False
+        # Reject query-like noun piles and duplicated interrogative packaging.
+        if re.search(r"(?i)\bwhat changed with\b.*\b(what changed|opposition|update)\b",value): return False
+        if sum(1 for w in words if len(w)>14)>=3: return False
+        return True
 
     titles=[]
     def add_title(value):
         value=" ".join(str(value or "").split()).strip(" -:|")
         value=re.sub(r"(?i)\s*#shorts\s*"," ",value).strip()
-        if 10 <= len(value) <= 91 and value.lower() not in {t.lower() for t in titles}:
+        if 10 <= len(value) <= 82 and natural(value) and value.lower() not in {t.lower() for t in titles}:
             titles.append(value)
 
     add_title(original_title)
@@ -186,13 +196,15 @@ def calibration_weight(data: dict) -> float:
 def rank_candidates(candidates: list[dict], genre_scores: dict|None=None, data: dict|None=None) -> list[dict]:
     genre_scores=genre_scores or {}
     calibration=calibration_weight(data or {})
+    policy=(data or {}).get("optimization_policy") or {}
+    pw=policy.get("packaging_weight",.10); sw=policy.get("story_weight",.10)
     ranked=[]
     for c in candidates:
         x=dict(c)
         raw=genre_scores.get(c.get("genre"))
         # Analytics scores are not naturally 0-100; gently normalize when present.
         channel=None if raw is None else _clip(50 + 12*math.log1p(max(0,float(raw))))
-        x["prior_score"]=score_candidate(x, channel_score=channel)
+        x["prior_score"]=score_candidate(x, channel_score=channel, packaging_weight=pw, story_weight=sw)
         # Do not let tiny samples dominate. Channel adjustment ramps in gradually.
         if channel is not None:
             base=x["prior_score"]["total"]
