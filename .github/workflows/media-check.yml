@@ -47,11 +47,12 @@ on:
     - cron: '*/30 * * * *'
 
 
-# Serialize controller/state access so scheduled/manual runs cannot race.
-# A single group also keeps state persistence deterministic during deployments.
+# Runtime executions share one serialized group because they mutate publishing
+# state. Development CI uses a separate branch-scoped group and newer commits
+# cancel stale validation work.
 concurrency:
-  group: media-check-adaptive
-  cancel-in-progress: false
+  group: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch') && 'media-check-runtime' || format('media-check-ci-{0}', github.ref) }}
+  cancel-in-progress: ${{ github.event_name == 'push' || github.event_name == 'pull_request' }}
 
 permissions:
   contents: write
