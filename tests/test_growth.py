@@ -28,7 +28,10 @@ class GrowthTests(unittest.TestCase):
 
         items=[{
             'title':f'Topic {i}','region':'US','traffic':'100K+',
-            'news':[{'title':f'Headline {i}','url':f'https://example{i}.com/{i}','source':'Example'}]
+            'news':[
+                {'title':f'Headline {i}','url':f'https://example{i}.com/{i}','source':'Example'},
+                {'title':f'Independent headline {i}','url':f'https://independent{i}.org/{i}','source':'Independent'}
+            ]
         } for i in range(5)]
         base={'videos':{'a':old_planet},
               'trend_snapshot':{'checked_at':self.now.replace(hour=7).isoformat(),'items':items}}
