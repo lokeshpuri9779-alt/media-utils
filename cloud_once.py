@@ -548,6 +548,41 @@ def load_performance() -> dict:
 def save_performance(data: dict) -> None:
     PERFORMANCE_PATH.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
+def normalize_content_text(value: str) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", str(value or "").lower()).strip()
+
+def live_channel_duplicate(token: str, title: str, content_id: str) -> bool:
+    """Use the authenticated channel as a second source of truth before publishing."""
+    cid = str(content_id or "").strip()
+    target = normalize_content_text(title)
+    with httpx.Client(timeout=60) as client:
+        ch = client.get("https://www.googleapis.com/youtube/v3/channels",
+            params={"part":"contentDetails","mine":"true"},
+            headers={"Authorization":f"Bearer {token}"})
+        if ch.status_code >= 400:
+            api_error(ch, "dedupe_channel")
+            raise RuntimeError("Cannot verify live upload history; refusing upload.")
+        items = ch.json().get("items", [])
+        uploads = (((items[0] if items else {}).get("contentDetails") or {})
+                   .get("relatedPlaylists") or {}).get("uploads")
+        if not uploads:
+            raise RuntimeError("Cannot resolve live uploads playlist; refusing upload.")
+        pl = client.get("https://www.googleapis.com/youtube/v3/playlistItems",
+            params={"part":"snippet","playlistId":uploads,"maxResults":50},
+            headers={"Authorization":f"Bearer {token}"})
+        if pl.status_code >= 400:
+            api_error(pl, "dedupe_playlist")
+            raise RuntimeError("Cannot read live upload history; refusing upload.")
+    for item in pl.json().get("items", []):
+        snippet = item.get("snippet") or {}
+        existing = normalize_content_text(snippet.get("title"))
+        description = str(snippet.get("description") or "")
+        if target and existing == target:
+            return True
+        if cid and f"ASTRA-ID:{cid}" in description:
+            return True
+    return False
+
 def content_already_published(content_id: str) -> bool:
     """Fail closed when a generated concept is already in persistent channel history."""
     cid = str(content_id or "").strip()
@@ -751,6 +786,15 @@ def main() -> None:
     content_id = str(CONTENT_META.get("content_id") or "").strip()
     if content_id and content_already_published(content_id):
         print("Duplicate content blocked before upload:", content_id)
+        state["duplicate_blocks"] = int(state.get("duplicate_blocks", 0)) + 1
+        save_state(state)
+        return
+    # Embed a machine-readable identity in every new description and reconcile
+    # against YouTube itself. If the live history cannot be read, fail closed.
+    if content_id:
+        desc += "\nASTRA-ID:" + content_id
+    if live_channel_duplicate(token, title, content_id):
+        print("Duplicate content blocked by live YouTube history:", content_id or title)
         state["duplicate_blocks"] = int(state.get("duplicate_blocks", 0)) + 1
         save_state(state)
         return
