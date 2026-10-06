@@ -32,6 +32,10 @@ CAPABILITIES = {
         "remote-open-source-gpu","remote","self-hosted",True,True,
         "Authenticated Astra GPU worker; compute ownership/cost is external to Astra."
     ),
+    "hf-zerogpu": ProviderCapability(
+        "hf-zerogpu","remote","free-quota",True,True,
+        "Hugging Face ZeroGPU shared compute; must fail closed when free quota is unavailable."
+    ),
     "replicate": ProviderCapability(
         "replicate","remote","paid",True,False,
         "Paid inference fallback; explicit spend approval required."
