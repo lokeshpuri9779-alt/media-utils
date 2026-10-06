@@ -13,6 +13,9 @@ on:
       - 'third_party/pyscenedetect.lock.json'
       - 'pyscenedetect_adapter.py'
       - 'tests/test_pyscenedetect_adapter.py'
+      - 'third_party/videolingo.lock.json'
+      - 'videolingo_adapter.py'
+      - 'tests/test_videolingo_adapter.py'
       - '.github/workflows/oss-engine-check.yml'
   workflow_dispatch:
 
@@ -112,4 +115,36 @@ jobs:
           path: |
             .astra_oss/pyscenedetect-install-report.json
             /tmp/pyscenedetect-adapter.json
+          retention-days: 7
+
+
+  videolingo:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install pinned VideoLingo repository
+        run: python oss_bootstrap.py --engine videolingo
+      - name: Verify Astra VideoLingo source boundary
+        run: python videolingo_adapter.py --engine-root .astra_oss/VideoLingo > /tmp/videolingo-adapter.json
+      - name: Verify adapter contract
+        run: |
+          python - <<'PY'
+          from videolingo_adapter import backend_info
+          info = backend_info()
+          assert info["production_enabled"] is False
+          assert info["imports_upstream_runtime"] is False
+          assert "subtitle-segmentation" in info["purpose"]
+          PY
+      - name: Preserve VideoLingo install report
+        uses: actions/upload-artifact@v4
+        with:
+          name: videolingo-install-${{ github.run_id }}
+          path: |
+            .astra_oss/videolingo-install-report.json
+            /tmp/videolingo-adapter.json
           retention-days: 7
