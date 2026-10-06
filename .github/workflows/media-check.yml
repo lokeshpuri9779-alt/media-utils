@@ -30,6 +30,9 @@ on:
       - 'tests/test_audience.py'
       - 'tests/test_studio.py'
       - 'requirements.txt'
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
   schedule:
     # Hourly controller. The Python worker decides whether an upload attempt is due,
@@ -69,7 +72,7 @@ jobs:
         with:
           # Development pushes test their own SHA. Scheduled/manual runtime
           # executes only the separately promoted production branch.
-          ref: ${{ github.event_name == 'push' && github.sha || 'astra-production' }}
+          ref: ${{ (github.event_name == 'push' || github.event_name == 'pull_request') && github.sha || 'astra-production' }}
           fetch-depth: 0
       - uses: actions/setup-python@v7
         with:
@@ -78,10 +81,10 @@ jobs:
       - name: dependencies
         run: pip install -r requirements.txt
       - name: Verify Python modules
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
         run: python -m py_compile cloud_once.py viral_prior.py evolution.py backup_state.py distribution.py ops_guardian.py ypp_safety.py autonomy.py reach_reports.py longform.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py
       - name: Verify Studio layouts and audio
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
         run: python -m unittest discover -s tests -p 'test_*.py' -v
       - name: Cache neural voice
         uses: actions/cache@v4
@@ -89,13 +92,13 @@ jobs:
           path: ~/.cache/astra-voice
           key: astra-kokoro-v1-beb0d184
       - name: Render Studio startup preview
-        if: github.event_name == 'push' && env.ASTRA_FORCE_RUN != '1'
+        if: github.event_name == 'push' || github.event_name == 'pull_request' && env.ASTRA_FORCE_RUN != '1'
         run: python studio_renderer.py --preview /tmp/astra-studio-preview.mp4
       - name: Refresh daily research on code pushes
-        if: github.event_name == 'push' && env.ASTRA_FORCE_RUN != '1'
+        if: github.event_name == 'push' || github.event_name == 'pull_request' && env.ASTRA_FORCE_RUN != '1'
         run: python cloud_once.py --study
       - name: Snapshot adaptive state before controller
-        if: github.event_name != 'push'
+        if: github.event_name != 'push' && github.event_name != 'pull_request'
         run: python backup_state.py pre-run
       - name: Upload recovery snapshot
         if: github.event_name != 'push'
@@ -108,13 +111,13 @@ jobs:
       - name: run
         id: controller
         run: |
-          if [ "${{ github.event_name }}" = "push" ] && [ "$ASTRA_FORCE_RUN" != "1" ]; then
+          if { [ "${{ github.event_name }}" = "push" ] || [ "${{ github.event_name }}" = "pull_request" ]; } && [ "$ASTRA_FORCE_RUN" != "1" ]; then
             python cloud_once.py --diagnose
           else
             python cloud_once.py
           fi
       - name: Record runtime health
-        if: github.event_name != 'push' && always()
+        if: github.event_name != 'push' && github.event_name != 'pull_request' && always()
         shell: bash
         run: |
           mkdir -p runtime-health
@@ -132,7 +135,7 @@ jobs:
 ' "recovery=none" >> runtime-health/status.txt
           fi
       - name: Upload runtime health record
-        if: github.event_name != 'push' && always()
+        if: github.event_name != 'push' && github.event_name != 'pull_request' && always()
         uses: actions/upload-artifact@v4
         with:
           name: astra-health-${{ github.run_id }}
@@ -140,7 +143,7 @@ jobs:
           retention-days: 30
           if-no-files-found: error
       - name: save adaptive state
-        if: always()
+        if: always() && github.event_name != 'pull_request'
         shell: bash
         run: |
           if [ -z "$(git status --porcelain -- quota_state.json performance.json ops_state.json SHORTS.md)" ]; then
