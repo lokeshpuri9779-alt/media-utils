@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-2.8"
+VERSION = "studio-2.9"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -836,9 +836,47 @@ def ingest_authorized_media(item, candidate, cache_dir='asset_cache'):
         return None
 
 def provider_adapter(item):
-    """Zero-config adapter hook. Disabled unless a provider returns verifiable rights metadata."""
-    # Intentionally no arbitrary web/image search here. Provider integrations must
-    # return the candidate schema validated by external_media_candidate().
+    """Zero-cost Wikimedia Commons adapter with conservative machine-readable rights checks."""
+    try:
+        import urllib.parse, urllib.request, re, html
+        q=' '.join(str(item.get('query','')).split())[:180]
+        if not q: return None
+        api='https://commons.wikimedia.org/w/api.php'
+        params={'action':'query','generator':'search','gsrsearch':q,'gsrnamespace':'6',
+                'gsrlimit':'6','prop':'imageinfo','iiprop':'url|extmetadata',
+                'iiurlwidth':'1400','format':'json','origin':'*'}
+        url=api+'?'+urllib.parse.urlencode(params)
+        req=urllib.request.Request(url,headers={'User-Agent':'RAYVAN-Astra/1.0 (automated media research)'})
+        with urllib.request.urlopen(req,timeout=12) as resp:
+            data=json.loads(resp.read(2_000_000).decode('utf-8'))
+        pages=(data.get('query') or {}).get('pages') or {}
+        for page in pages.values():
+            infos=page.get('imageinfo') or []
+            if not infos: continue
+            info=infos[0]; meta=info.get('extmetadata') or {}
+            def mv(k):
+                v=(meta.get(k) or {}).get('value','')
+                return html.unescape(re.sub('<[^>]+>',' ',str(v))).strip()
+            license_short=mv('LicenseShortName').lower()
+            usage=mv('UsageTerms').lower()
+            restrictions=mv('Restrictions').lower()
+            artist=mv('Artist') or info.get('user') or 'Wikimedia Commons contributor'
+            license_url=mv('LicenseUrl')
+            source_page=info.get('descriptionurl') or info.get('descriptionshorturl')
+            asset_url=info.get('thumburl') or info.get('url')
+            # Deliberately narrow: public domain/CC0 only. This avoids attribution/
+            # share-alike edge cases and keeps commercial modification unambiguous.
+            pd=('public domain' in license_short or license_short in {'cc0','cc zero'} or
+                'public domain' in usage or 'cc0' in usage)
+            if not pd or restrictions or not all((asset_url,source_page,artist)): continue
+            if not license_url:
+                license_url='https://creativecommons.org/publicdomain/mark/1.0/'
+            return {'provider':'wikimedia-commons','asset_url':asset_url,
+                    'source_url':source_page,'license_url':license_url,'creator':artist,
+                    'license':'public-domain','commercial_use':True,
+                    'modification_allowed':True,'cost':0}
+    except Exception:
+        return None
     return None
 
 def acquire_story_media(resolved):
