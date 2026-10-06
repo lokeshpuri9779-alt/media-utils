@@ -11302,6 +11302,194 @@
         "likes": 0,
         "comments": 0
       }
+    },
+    "SJi_9S3Mf2I": {
+      "title": "Why Astronauts See About 16 Sunrises a Day #Shorts",
+      "published_at": "2026-10-07T03:29:40.425650+05:30",
+      "history": [],
+      "genre": "space",
+      "content_id": "iss-sixteen-sunrises-v1",
+      "source": "https://www.nasa.gov/international-space-station/space-station-facts-and-figures/",
+      "trend_matches": null,
+      "selection_reason": "controlled-private-premium-pilot",
+      "stage0_rank": null,
+      "stage0_score": null,
+      "winner_descendant": null,
+      "exploration_rate": null,
+      "hook": "16 SUNRISES A DAY",
+      "question": "How can astronauts see sixteen sunrises in one day?",
+      "prompt": null,
+      "answer": "The International Space Station circles Earth about every 90 minutes, making about 16 orbits in 24 hours.",
+      "script": null,
+      "news_source": null,
+      "news_title": null,
+      "secondary_source": null,
+      "secondary_news_source": null,
+      "source_count": null,
+      "sensitive_topic": null,
+      "trend_region": null,
+      "trend_traffic": null,
+      "realistic_synthetic": null,
+      "altered_real_event": null,
+      "synthetic_real_person": null,
+      "reused_third_party_media": null,
+      "transformative_commentary": null,
+      "copyright_unlicensed": null,
+      "packaging_winner_score": null,
+      "packaging_candidates": null,
+      "creative_director": {
+        "score": 92.6,
+        "tier": "exceptional",
+        "action": "publish",
+        "weak_components": [],
+        "repair_plan": [],
+        "component_scores": {
+          "hook": 94.0,
+          "retention": 90.93866666666666,
+          "visual": 100.0,
+          "pacing": 82.4065,
+          "audio": 90.93,
+          "captions": 91.05,
+          "novelty": 100.0,
+          "coherence": 92.0,
+          "technical": 100.0
+        },
+        "weights": {
+          "hook": 0.2,
+          "retention": 0.15,
+          "visual": 0.15,
+          "pacing": 0.15,
+          "audio": 0.1,
+          "captions": 0.1,
+          "novelty": 0.05,
+          "coherence": 0.05,
+          "technical": 0.05
+        },
+        "hard_failures": [],
+        "publish_allowed": true
+      },
+      "repair_feedback": {
+        "action": "publish",
+        "keep": {
+          "script": true,
+          "voice": true,
+          "captions": true,
+          "visuals": true,
+          "render": true
+        },
+        "rebuild": [],
+        "score": 92.6
+      },
+      "media_qa": {
+        "available": true,
+        "pass": true,
+        "expected_words": 38,
+        "recognized_words": 38,
+        "coverage": 0.8947,
+        "order_similarity": 0.8947,
+        "avg_word_probability": 0.9412,
+        "max_silence_gap": 0.62,
+        "timing_monotonic": true,
+        "caption_chunks": [
+          "Astronauts can see about 16 sunrises in",
+          "one Earth day.",
+          "The station circles Earth roughly every 90",
+          "minutes.",
+          "That means day and night keep repeating",
+          "around the crew.",
+          "16 trips around Earth means roughly 16",
+          "sunrises and sunsets."
+        ],
+        "audio_score": 90.93,
+        "caption_score": 91.05,
+        "hard_failures": [],
+        "engine": "faster-whisper + VideoLingo segmentation bridge"
+      },
+      "scene_detection": {
+        "available": true,
+        "scene_count": 4,
+        "detected_scenes": [
+          {
+            "start": 0.0,
+            "end": 3.933,
+            "duration": 3.933
+          },
+          {
+            "start": 3.933,
+            "end": 7.333,
+            "duration": 3.4
+          },
+          {
+            "start": 7.333,
+            "end": 10.567,
+            "duration": 3.233
+          },
+          {
+            "start": 10.567,
+            "end": 15.2,
+            "duration": 4.633
+          }
+        ]
+      },
+      "format": "short",
+      "renderer": "studio-6.2.1",
+      "duration": 15.2,
+      "voice": "Kokoro expressive profile",
+      "scene_count": 4,
+      "distribution_plan": {
+        "mode": "explore",
+        "genre": "space",
+        "format": "short",
+        "top_internal_sources": [],
+        "packaging_hints": [
+          "clear_title",
+          "strong_hook"
+        ],
+        "brand": "RAYVAN",
+        "tagline": "Stories Beyond the Ordinary.",
+        "related_video_id": null,
+        "external_distribution": "disabled-unless-explicitly-authorized",
+        "engagement_manipulation": false
+      },
+      "revenue_geography": {
+        "mode": "cold_start",
+        "ranked_countries": [],
+        "cold_start_priors": {
+          "US": 1.0,
+          "GB": 0.86,
+          "CA": 0.84,
+          "AU": 0.88,
+          "DE": 0.78,
+          "IE": 0.78,
+          "NL": 0.74,
+          "SG": 0.82,
+          "IN": 0.3
+        },
+        "guardrails": {
+          "fake_location": false,
+          "vpn_manipulation": false,
+          "bot_traffic": false
+        },
+        "note": "Priors are directional indices, not promised RPM. Actual channel revenue overrides priors."
+      },
+      "ypp_safety": {
+        "policy_version": "2026-10-ypp-v1",
+        "decision": "allow",
+        "reasons": [],
+        "max_similarity": 0.152,
+        "matched_video_id": "eU8AwRVPG14",
+        "ai_disclosure_required": false,
+        "checks": {
+          "originality": true,
+          "mass_production_similarity": true,
+          "reused_content_safe": true,
+          "copyright_safe": true
+        },
+        "fingerprint": "6eb0b6f161e9f2c7"
+      },
+      "ai_disclosure_required": false,
+      "visibility": "private",
+      "channel_key": "rayvan"
     }
   },
   "research": {
@@ -12674,7 +12862,7 @@
   "creative_health": {
     "consecutive_exhausted_slots": 0,
     "renderer_diagnostic_required": false,
-    "last_success_at": "2026-10-07T00:07:15.654259+05:30",
+    "last_success_at": "2026-10-07T03:29:37.721034+05:30",
     "rejected_before_success": 0,
     "last_quality_skip_at": "2026-10-07T03:26:28.065942+05:30",
     "last_quality_skip_reason": "Creative Engine rejected all candidates; skipping rather than publishing weak/template content."
