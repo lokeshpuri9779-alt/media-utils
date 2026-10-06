@@ -88,6 +88,18 @@ def scene(headline, speech, visual, label='', sub='', duration=0, **extra):
 def _story_plan(ch):
     genre, cid = ch.get('genre', 'challenge'), ch.get('content_id', '')
     q, a = ch['question'].replace('\n', ' '), ch['answer'].replace('\n', ' ')
+    # Premium stories carry their own editorial beat sheet. The renderer follows
+    # the story rather than forcing the story into a reusable genre template.
+    if ch.get('story_beats'):
+        out=[]
+        for raw in ch['story_beats']:
+            item=dict(raw)
+            out.append(scene(
+                item.pop('headline'), item.pop('speech'), item.pop('visual'),
+                item.pop('label',''), item.pop('sub',''), duration=item.pop('duration',0),
+                **item
+            ))
+        return out
     if cid == 'venus-spin':
         return [
             scene('ONE SPIN\nLONGER THAN A YEAR', 'On Venus, one spin takes longer than a year.', 'planet', 'VENUS', 'THE CLOCK RUNS DIFFERENTLY'),
@@ -817,18 +829,19 @@ def asset_manifest(ch, plan):
         semantics=p.get('director_semantics',[])
         # This manifest deliberately does not download arbitrary web media.
         # It tells a future provider exactly what is needed and preserves provenance.
+        explicit_query=' '.join(str(p.get('media_query') or '').split())
         if kind=='source-document' and source:
             strategy='source-derived'
-            query='Evidence from the cited source for: '+topic
+            query=explicit_query or ('Evidence from the cited source for: '+topic)
         elif kind in {'map-explainer','mechanism-diagram','comparison-graphic','time-visualization'}:
             strategy='original-procedural'
-            query=f'{kind} explaining {topic}'
+            query=explicit_query or f'{kind} explaining {topic}'
         elif kind=='editorial-illustration':
             strategy='original-illustration'
-            query='Non-likeness editorial concept illustrating: '+topic
+            query=explicit_query or ('Non-likeness editorial concept illustrating: '+topic)
         else:
             strategy='original-motion'
-            query='Abstract visual metaphor for: '+topic
+            query=explicit_query or ('Abstract visual metaphor for: '+topic)
         manifest.append({
             'shot':i+1,'kind':kind,'strategy':strategy,'query':query[:240],
             'source_url':source if strategy=='source-derived' else '',
@@ -1156,6 +1169,11 @@ def render_short(ch,out,still_dir=None):
     resolved_assets=prepare_media_cache(resolve_assets(assets))
     resolved_assets=acquire_story_media(resolved_assets)
     asset_report=asset_resolution_gate(resolved_assets)
+    if ch.get('premium_story'):
+        verified=sum(1 for x in resolved_assets if x.get('provider')=='wikimedia-commons')
+        if verified < 2:
+            raise RuntimeError('Creative gate rejected premium story: fewer than two verified subject-specific media assets resolved.')
+        asset_report['verified_subject_media']=verified
     # Bind resolved asset metadata to the corresponding directed shot.
     for shot,item in zip(plan,resolved_assets): shot['resolved_asset']=item
     creative_report=creative_quality_gate(ch,plan)
