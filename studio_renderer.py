@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-4.0.1"
+VERSION = "studio-4.0.2"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -333,20 +333,37 @@ def voice_plan(plan, genre, max_duration=58):
         cursor=s['end']
     if cursor>max_duration:
         # Dynamic stories can create more useful beats than the Shorts budget allows.
-        # Compress pauses/minimum holds first; never speed narration beyond the
-        # requested voice rate or silently truncate evidence.
-        voice_total=sum(len(x['audio'])/RATE for x in plan)
-        overhead=max(0.0,cursor-voice_total)
-        target_overhead=max(0.0,max_duration-voice_total-.35)
-        ratio=min(1.0,target_overhead/max(.001,overhead))
-        cursor=0.0
-        for x in plan:
-            voice_len=len(x['audio'])/RATE
-            hold=max(voice_len+.22, voice_len + max(0.0,x['duration']-voice_len)*ratio)
-            x.update(start=cursor,voice_start=cursor+.12,duration=hold,end=cursor+hold)
-            cursor+=hold
+        # First compress dead air; if narration alone still cannot fit, remove the
+        # lowest-priority optional beat and regenerate timing without touching
+        # reveal/evidence/payoff. This is editorial compression, not truncation.
+        protected={'reveal','evidence','payoff'}
+        while cursor>max_duration:
+            voice_total=sum(len(x['audio'])/RATE for x in plan)
+            min_total=sum(len(x['audio'])/RATE+.10 for x in plan)
+            if min_total<=max_duration:
+                overhead=max(0.0,cursor-voice_total)
+                target_overhead=max(0.0,max_duration-voice_total-.05)
+                ratio=min(1.0,target_overhead/max(.001,overhead))
+                cursor=0.0
+                for x in plan:
+                    voice_len=len(x['audio'])/RATE
+                    hold=max(voice_len+.10,voice_len+max(0.0,x['duration']-voice_len)*ratio)
+                    x.update(start=cursor,voice_start=cursor+.06,duration=hold,end=cursor+hold)
+                    cursor+=hold
+                break
+            optional=[(i,x) for i,x in enumerate(plan)
+                      if x.get('story_beat') not in protected and x.get('story_beat')!='cta']
+            if not optional: break
+            priority={'contrast':0,'map':1,'mechanism':2,'consequence':3,'uncertainty':4}
+            drop_i,_=min(optional,key=lambda z:priority.get(z[1].get('story_beat'),5))
+            plan.pop(drop_i)
+            cursor=0.0
+            for x in plan:
+                voice_len=len(x['audio'])/RATE
+                x.update(start=cursor,voice_start=cursor+.10,duration=voice_len+.18,end=cursor+voice_len+.18)
+                cursor=x['end']
     if not 6<=cursor<=max_duration:
-        raise RuntimeError(f'Video duration {cursor:.1f}s is outside the Studio short format after pacing compression.')
+        raise RuntimeError(f'Video duration {cursor:.1f}s is outside the Studio short format after editorial compression.')
     return cursor
 
 
