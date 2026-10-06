@@ -44,6 +44,12 @@ on:
       - 'premium_batch_review.py'
       - 'tests/test_open_source_stack.py'
       - 'tests/test_edit_spec.py'
+      - 'motion_engine/**'
+      - 'astra_errors.py'
+      - 'hyperframes_adapter.py'
+      - 'tests/test_hyperframes_adapter.py'
+      - '.gitmodules'
+      - 'third_party/**'
       - 'requirements.txt'
   pull_request:
     branches:
@@ -100,6 +106,7 @@ jobs:
           # separately promoted production branch.
           ref: ${{ (github.event_name == 'push' || github.event_name == 'pull_request') && github.sha || 'astra-production' }}
           fetch-depth: 0
+          submodules: recursive
       - name: Restore adaptive runtime state
         if: github.event_name != 'push' && github.event_name != 'pull_request'
         shell: bash
@@ -113,11 +120,23 @@ jobs:
         with:
           python-version: '3.12'
           cache: pip
+      - uses: actions/setup-node@v6
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
+        with:
+          node-version: '24'
+      - name: Install Motion Canvas engine
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
+        working-directory: motion_engine
+        run: npm install --no-audit --no-fund
+      - name: Build Motion Canvas engine
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
+        working-directory: motion_engine
+        run: npm run build
       - name: dependencies
         run: pip install -r requirements.txt
       - name: Verify Python modules
         if: github.event_name == 'push' || github.event_name == 'pull_request'
-        run: python -m py_compile cloud_once.py creative_engine.py premium_stories.py channel_state.py revenue_geo.py viral_prior.py evolution.py backup_state.py distribution.py ops_guardian.py ypp_safety.py autonomy.py reach_reports.py longform.py longform_trends.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py oss_stack.py edit_spec.py quality_lab.py premium_batch_review.py
+        run: python -m py_compile cloud_once.py creative_engine.py premium_stories.py channel_state.py revenue_geo.py viral_prior.py evolution.py backup_state.py distribution.py ops_guardian.py ypp_safety.py autonomy.py reach_reports.py longform.py longform_trends.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py oss_stack.py edit_spec.py quality_lab.py premium_batch_review.py astra_errors.py hyperframes_adapter.py
       - name: Verify Studio layouts and audio
         if: github.event_name == 'push' || github.event_name == 'pull_request'
         run: python -m unittest discover -s tests -p 'test_*.py' -v
@@ -211,3 +230,96 @@ jobs:
           fi
           git commit -m "Update Astra state and performance [skip ci]"
           git push origin "HEAD:refs/heads/astra-state"
+
+
+  code2mp4-install:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          submodules: recursive
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Verify pinned Code2MP4 repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f third_party/code2mp4/package.json
+          test "$(git -C third_party/code2mp4 rev-parse HEAD)" = "91d7ba4501d8c6e48b4889a647b21af847f8185c"
+          grep -q '"license": "Apache-2.0"' third_party/code2mp4/package.json
+      - name: Install Code2MP4 dependencies
+        working-directory: third_party/code2mp4
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.33.2 --activate
+          pnpm install --frozen-lockfile
+      - name: Validate Code2MP4
+        working-directory: third_party/code2mp4
+        run: |
+          pnpm build
+          pnpm typecheck
+          pnpm test
+
+  hyperframes-pilot:
+    if: (github.event_name == 'push' || github.event_name == 'pull_request') && !contains(github.event.head_commit.message || '', '[upload-probe]')
+    continue-on-error: true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Python dependencies
+        run: pip install -r requirements.txt
+      - name: Cache neural voice
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/astra-voice
+          key: astra-kokoro-v1-beb0d184
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install permissive next-gen renderer
+        run: npm install --prefix /tmp/astra-hf-deps hyperframes@0.8.138 gsap@3.14.2
+      - name: Cache HyperFrames browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/puppeteer
+          key: hyperframes-browser-v0.8.138-${{ runner.os }}-${{ runner.arch }}
+      - name: Install FFmpeg for HyperFrames
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+      - name: Build and validate HyperFrames pilots
+        shell: bash
+        run: |
+          set -euo pipefail
+          HF=/tmp/astra-hf-deps/node_modules/.bin/hyperframes
+          "$HF" browser ensure
+          python hyperframes_adapter.py --batch-root /tmp/astra-hyperframes --gsap /tmp/astra-hf-deps/node_modules/gsap/dist/gsap.min.js
+          for project in /tmp/astra-hyperframes/*; do
+            [ -d "$project" ] || continue
+            (
+              cd "$project"
+              "$HF" lint
+              "$HF" check
+              "$HF" render --quality draft --workers 1 --no-browser-gpu --output preview.mp4
+              ffprobe -v error -select_streams v:0 -show_entries stream=width,height,r_frame_rate -show_entries format=duration -of json preview.mp4 > delivery.json
+            )
+          done
+      - name: Upload HyperFrames review batch
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-hyperframes-review-${{ github.run_id }}
+          path: /tmp/astra-hyperframes/
+          retention-days: 7
+          if-no-files-found: ignore

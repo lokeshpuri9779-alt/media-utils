@@ -6,7 +6,7 @@ from pathlib import Path
 
 from edit_spec import build_edit_spec, preflight
 from premium_stories import catalog
-from quality_lab import assess_render, contact_sheet, write_report
+from quality_lab import assess_render, contact_sheet, scene_change_report, write_report
 from studio_renderer import render_short
 
 
@@ -35,6 +35,7 @@ def main(root: Path) -> int:
         video = folder / "preview.mp4"
         report = render_short(story, video, still_dir=stills)
         post = assess_render(report)
+        post["pacing"] = scene_change_report(video)
         write_report(folder / "render.json", report)
         write_report(folder / "quality.json", post)
         contact_sheet(stills, folder / "contact-sheet.jpg", story.get("title") or cid)

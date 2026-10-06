@@ -16,6 +16,12 @@ COMPONENTS = {
         "capabilities": ["tts", "local-inference"],
         "mode": "adopted",
     },
+    "hyperframes": {
+        "repo": "heygen-com/hyperframes",
+        "license": "Apache-2.0",
+        "capabilities": ["html-video", "deterministic-rendering", "layout-qa", "motion-qa"],
+        "mode": "candidate",
+    },
     "motion-canvas": {
         "repo": "motion-canvas/motion-canvas",
         "license": "MIT",

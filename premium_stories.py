@@ -21,7 +21,7 @@ def catalog():
             "story_beats":[
                 {"headline":"THE MOON ROTATES","speech":"The Moon rotates. You just cannot see the spin from Earth.","visual":"media","label":"","sub":"","story_beat":"reveal","media_query":"Moon nearside LRO","media_file":"File:Moon nearside LRO 5000.jpg","media_fit":"contain","media_motion":"push"},
                 {"headline":"WATCH THE MARKER","speech":"Watch the marker. One spin takes the same time as one orbit.","visual":"tidal_lock","label":"","sub":"","story_beat":"mechanism"},
-                {"headline":"NEAR SIDE / FAR SIDE","speech":"That is why nearly the same side always faces us.","visual":"media","label":"","sub":"","story_beat":"evidence","media_query":"Near and far side Moon","media_file":"File:Near and far side of the Moon.jpg","media_fit":"wide","media_motion":"still"},
+                {"headline":"NEAR SIDE / FAR SIDE","speech":"That is why nearly the same side always faces us.","visual":"media","label":"","sub":"","story_beat":"evidence","media_query":"Near and far side Moon","media_file":"File:Near and far side of the Moon.jpg","media_fit":"wide","media_motion":"still","comparison_labels":["NEAR","FAR"]},
                 {"headline":"THE SIDE EARTH CAN'T SEE","speech":"This is the far side. Spacecraft can see it. Earth cannot directly.","visual":"media","label":"","sub":"","story_beat":"payoff","media_query":"Moon farside LRO","media_file":"File:Moon farside LRO 5000.jpg","media_fit":"contain","media_motion":"push"},
             ],
         },

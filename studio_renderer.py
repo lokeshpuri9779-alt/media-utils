@@ -12,6 +12,7 @@ import os
 # Disable ONNX telemetry before any import can initialize its native runtime.
 os.environ['ORT_DISABLE_TELEMETRY'] = '1'
 from pathlib import Path
+from astra_errors import CreativeReject
 import re
 import subprocess
 import tempfile
@@ -23,7 +24,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-6.2"
+VERSION = "studio-6.2.1"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -827,13 +828,14 @@ def render_frame(plan,t,genre,total):
         attention_layer(im,s,t,u,accent)
     transition_layer(im,s,t,u,accent)
     im=composite_cached_asset(im,s.get('resolved_asset',{}),t=t,u=u,shot=s)
-    if s.get('visual') not in {'media','tidal_lock'}:
+    if s.get('visual') not in {'media','tidal_lock','iss_orbit'}:
         asset_layer(im,s,t,u,accent)
         director_motion_layer(im,s,t,u,accent)
     d=ImageDraw.Draw(im)
-    if str(s.get('media_fit') or '')=='wide':
-        d.text((250,1220),'NEAR',font=font(24),anchor='mm',fill=(210,218,233))
-        d.text((830,1220),'FAR',font=font(24),anchor='mm',fill=(210,218,233))
+    comparison_labels=s.get('comparison_labels') or []
+    if len(comparison_labels)==2:
+        d.text((250,1220),str(comparison_labels[0]),font=font(24),anchor='mm',fill=(210,218,233))
+        d.text((830,1220),str(comparison_labels[1]),font=font(24),anchor='mm',fill=(210,218,233))
     # Director-controlled pattern interrupts are sparse and narrative, not constant.
     if s.get('director_pattern_interrupt') and u<.16:
         a=int(150*(1-u/.16))
@@ -841,7 +843,7 @@ def render_frame(plan,t,genre,total):
     # Minimal identity: no permanent template bar, scene counter or logo intro.
     d.text((72,108),'RAYVAN',font=font(23),fill=(205,213,228))
     headline_offset=int((1-ease(u/.24))*18)
-    premium_visual=s.get('visual') in {'media','tidal_lock'}
+    premium_visual=s.get('visual') in {'media','tidal_lock','iss_orbit'}
     if not premium_visual or u < .80:
         if index==0:
             fit_text(d,s['headline'],(72,165+headline_offset,940,318+headline_offset),size=66,fill='white',max_lines=2)
@@ -1170,13 +1172,13 @@ def asset_resolution_gate(resolved):
     blocked=[x for x in resolved if x.get('status')!='ready']
     unsafe=[x for x in resolved if not str(x.get('license','')).startswith(('original-','cc0','public-domain','authorized-'))]
     if blocked or unsafe:
-        raise RuntimeError('Asset gate rejected unresolved/unsafe media: '+json.dumps({'blocked':blocked,'unsafe':unsafe}))
+        raise CreativeReject('Asset gate rejected unresolved/unsafe media: '+json.dumps({'blocked':blocked,'unsafe':unsafe}))
     return {'ready':len(resolved),'providers':sorted({x['provider'] for x in resolved}),
             'zero_cost':all(float(x.get('cost',0))==0 for x in resolved)}
 
 def creative_quality_gate(ch, plan):
     """Fail closed when a rendered story would still behave like a generic template."""
-    if not plan: raise RuntimeError('Creative gate: empty shot plan.')
+    if not plan: raise CreativeReject('Creative gate: empty shot plan.')
     assets=[p.get('director_asset','') for p in plan]
     roles=[p.get('director_role','') for p in plan]
     motions=[p.get('director_motion','') for p in plan]
@@ -1248,7 +1250,7 @@ def creative_quality_gate(ch, plan):
             'layouts':layouts,'adjacent_layout_repeats':layout_repeats,
             'hard_failures':hard_failures}
     if score<78:
-        raise RuntimeError('Creative gate rejected generic/weak visual plan: '+json.dumps(report))
+        raise CreativeReject('Creative gate rejected generic/weak visual plan: '+json.dumps(report))
     return report
 
 def _repair_plan(ch,plan,attempt):
@@ -1298,7 +1300,7 @@ def render_short(ch,out,still_dir=None):
         verified=sum(1 for x in resolved_assets if x.get('provider')=='wikimedia-commons')
         required=sum(1 for x in resolved_assets if x.get('strategy')=='external-verified')
         if not required or verified != required:
-            raise RuntimeError(
+            raise CreativeReject(
                 f'Creative gate rejected premium story: verified subject media {verified}/{required}; all editorial shots must resolve.'
             )
         asset_report['verified_subject_media']=verified
