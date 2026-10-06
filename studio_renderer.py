@@ -23,6 +23,7 @@ import httpx
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
+from semantic_broll import infer_visual_intent
 
 VERSION = "studio-6.2.1"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
@@ -304,6 +305,20 @@ def direct_story(ch, plan):
                         'editorial-illustration' if 'person' in semantics else
                         'kinetic-type'
                     ))
+        semantic_broll=infer_visual_intent(shot,i)
+        shot["semantic_broll"]=semantic_broll
+        # For generic beats, meaning-first B-roll intent can strengthen the
+        # director without overriding explicit evidence/map/mechanism grammar.
+        if shot.get("director_asset")=="kinetic-type":
+            vt=semantic_broll.get("visual_type")
+            if vt=="compare":
+                shot["director_asset"]="comparison-graphic"
+            elif vt=="map":
+                shot["director_asset"]="map-explainer"
+            elif vt=="mechanism":
+                shot["director_asset"]="mechanism-diagram"
+            elif vt=="data":
+                shot["director_asset"]="time-visualization"
         directed.append(shot)
     return directed
 
