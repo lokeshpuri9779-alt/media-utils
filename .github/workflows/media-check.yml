@@ -38,9 +38,9 @@ on:
       - main
   workflow_dispatch:
   schedule:
-    # Hourly controller. The Python worker decides whether an upload attempt is due,
-    # spreading the adaptive daily target across the India-local day.
-    - cron: '20 * * * *'
+    # Run the Shorts controller every 30 minutes: 48 scheduled opportunities/day.
+    # Publishing/dedupe/quota gates still decide whether an upload is allowed.
+    - cron: '*/30 * * * *'
 
 permissions:
   contents: write
