@@ -1172,7 +1172,7 @@ def asset_resolution_gate(resolved):
     blocked=[x for x in resolved if x.get('status')!='ready']
     unsafe=[x for x in resolved if not str(x.get('license','')).startswith(('original-','cc0','public-domain','authorized-'))]
     if blocked or unsafe:
-        raise CreativeReject('Asset gate rejected unresolved/unsafe media: +json.dumps({'blocked':blocked,'unsafe':unsafe}))
+        raise CreativeReject('Asset gate rejected unresolved/unsafe media: '+json.dumps({'blocked':blocked,'unsafe':unsafe}))
     return {'ready':len(resolved),'providers':sorted({x['provider'] for x in resolved}),
             'zero_cost':all(float(x.get('cost',0))==0 for x in resolved)}
 
