@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-6.0"
+VERSION = "studio-6.1"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -312,14 +312,14 @@ def make_plan(ch):
     return direct_story(ch, _story_plan(ch))
 
 
-def voice_plan(plan, genre, max_duration=36, voice_name='af_heart'):
+def voice_plan(plan, genre, max_duration=36, voice_name='af_heart', voice_speed=1.09):
     engine=voice_engine()
     cursor=0.0
     for s in plan:
         spoken=str(s['speech']).strip()
         # Natural cadence wins over synthetic "news voice" punctuation tricks.
         spoken=spoken.replace('; ', '. ').replace('  ',' ')
-        samples, rate=engine.create(spoken,voice=voice_name,speed=1.09,lang='en-us')
+        samples, rate=engine.create(spoken,voice=voice_name,speed=voice_speed,lang='en-us')
         samples=np.asarray(samples,dtype=np.float32)
         if rate!=RATE or len(samples)==0 or not np.isfinite(samples).all():
             raise RuntimeError('Invalid narration audio; refusing to publish an incomplete video.')
@@ -499,6 +499,30 @@ def draw_visual(im,s,t,u,accent):
         if s.get('label'):
             d.rounded_rectangle((116,1168,520,1236),radius=20,fill=(8,12,23))
             fit_text(d,s['label'],(132,1176,504,1228),size=31,fill=accent,max_lines=1)
+    elif visual=='tidal_lock':
+        # Purpose-built synchronous-rotation demonstration: a marked point on
+        # the Moon always faces Earth while the Moon completes an orbit.
+        d.ellipse((150,590,930,1160),outline=(70,82,112),width=4)
+        ex,ey=540,875
+        d.ellipse((ex-105,ey-105,ex+105,ey+105),fill=(54,113,171),outline=(173,215,246),width=4)
+        d.text((ex,ey),'EARTH',font=font(26),anchor='mm',fill='white')
+        phase=min(1.0,max(0.0,u/max(.2,s.get('duration',3.5))))
+        ang=-math.pi/2 + phase*2*math.pi
+        rx,ry=390,285
+        mx,my=ex+rx*math.cos(ang),ey+ry*math.sin(ang)
+        r=78
+        d.ellipse((mx-r,my-r,mx+r,my+r),fill=(184,190,199),outline=(245,247,250),width=4)
+        # Marker is placed on the hemisphere pointing toward Earth.
+        vx,vy=ex-mx,ey-my
+        mag=max(1.0,math.hypot(vx,vy)); vx,vy=vx/mag,vy/mag
+        markx,marky=mx+vx*48,my+vy*48
+        d.ellipse((markx-15,marky-15,markx+15,marky+15),fill=accent,outline='white',width=3)
+        d.line((mx,my,markx,marky),fill=accent,width=5)
+        # Orbit direction and the one-to-one relationship are the only labels.
+        d.arc((130,570,950,1180),205,330,fill=accent,width=7)
+        d.polygon([(902,1074),(928,1037),(883,1041)],fill=accent)
+        d.rounded_rectangle((250,1210,830,1305),radius=26,fill=(8,12,23))
+        fit_text(d,'1 ORBIT  =  1 SPIN',(278,1228,802,1287),size=39,fill='white',max_lines=1)
     elif visual=='pitch':
         for i in range(7):
             d.polygon([(115+i*118,650),(233+i*118,650),(258+i*108,1090),(145+i*108,1090)],fill=(9,53+(i%2)*8,48))
@@ -792,7 +816,7 @@ def render_frame(plan,t,genre,total):
         composition_layer(im,s,t,u,accent)
         attention_layer(im,s,t,u,accent)
     transition_layer(im,s,t,u,accent)
-    im=composite_cached_asset(im,s.get('resolved_asset',{}))
+    im=composite_cached_asset(im,s.get('resolved_asset',{}),t=t,u=u,shot=s)
     if s.get('visual')!='media':
         asset_layer(im,s,t,u,accent)
         director_motion_layer(im,s,t,u,accent)
@@ -804,10 +828,12 @@ def render_frame(plan,t,genre,total):
     # Minimal identity: no permanent template bar, scene counter or logo intro.
     d.text((72,108),'RAYVAN',font=font(23),fill=(205,213,228))
     headline_offset=int((1-ease(u/.24))*18)
-    if index==0:
-        fit_text(d,s['headline'],(72,165+headline_offset,940,330+headline_offset),size=70,fill='white',max_lines=2)
-    else:
-        fit_text(d,s['headline'],(72,175+headline_offset,940,315+headline_offset),size=50,fill='white',max_lines=2)
+    premium_visual=s.get('visual') in {'media','tidal_lock'}
+    if not premium_visual or u < 1.20:
+        if index==0:
+            fit_text(d,s['headline'],(72,165+headline_offset,940,318+headline_offset),size=66,fill='white',max_lines=2)
+        else:
+            fit_text(d,s['headline'],(72,178+headline_offset,940,302+headline_offset),size=46,fill='white',max_lines=2)
     # Phrase captions use actual utterance windows; active word timing is approximate.
     words=s['speech'].split()
     dur=len(s['audio'])/RATE
@@ -821,8 +847,8 @@ def render_frame(plan,t,genre,total):
         text=text.rstrip(' .!?')+'?'
     if s.get('countdown') and t>s['voice_start']+dur+.1: text='YOUR TURN'
     # Captions support the footage instead of becoming the footage.
-    d.rounded_rectangle((88,1438,918,1588),radius=24,fill=(8,12,23))
-    fit_text(d,text,(116,1450,890,1575),size=52,fill=(242,245,250),max_lines=2)
+    d.rounded_rectangle((112,1460,894,1582),radius=22,fill=(8,12,23))
+    fit_text(d,text,(136,1470,870,1572),size=46,fill=(242,245,250),max_lines=2)
     # Brief ink-dark cut transition rather than full-screen flashing.
     if index>0 and u<.13:
         shade=Image.new('RGB',im.size,(8,12,23)); im=Image.blend(shade,im,.55+.45*u/.13)
@@ -873,6 +899,7 @@ def asset_manifest(ch, plan):
             'required_subject_terms':aliases if strategy=='external-verified' else [],
             'exact_commons_title':str(p.get('media_file') or '').strip() if strategy=='external-verified' else '',
             'media_fit':str(p.get('media_fit') or 'cover') if strategy=='external-verified' else 'cover',
+            'media_motion':str(p.get('media_motion') or 'still') if strategy=='external-verified' else 'still',
             'rights_rule':'original-or-explicitly-authorized-only',
             'no_fake_screenshot':True,
             'no_unverified_real_person_likeness':True,
@@ -960,7 +987,7 @@ def prepare_media_cache(resolved, cache_dir='asset_cache'):
         out.append(r)
     return out
 
-def composite_cached_asset(im,item):
+def composite_cached_asset(im,item,t=0.0,u=0.0,shot=None):
     """Composite only a previously validated cached image; malformed assets fail safely."""
     path=item.get('cache_image','')
     if not path or not os.path.isfile(path): return im
@@ -968,9 +995,10 @@ def composite_cached_asset(im,item):
         media=Image.open(path).convert('RGB')
         # Premium media occupies most of the vertical canvas. Diagrams and full
         # celestial discs use contain-fit so important information is never cropped.
-        box=(40,350,1040,1370); bw,bh=box[2]-box[0],box[3]-box[1]
         mode=str(item.get('media_fit') or 'cover')
-        if mode=='contain':
+        box=(24,430,1056,1320) if mode=='wide' else (40,350,1040,1370)
+        bw,bh=box[2]-box[0],box[3]-box[1]
+        if mode in {'contain','wide'}:
             scale=min(bw/media.width,bh/media.height)
             nw,nh=max(1,int(media.width*scale)),max(1,int(media.height*scale))
             media=media.resize((nw,nh),Image.Resampling.LANCZOS)
@@ -983,6 +1011,14 @@ def composite_cached_asset(im,item):
             media=media.resize((nw,nh),Image.Resampling.LANCZOS)
             x=max(0,(nw-bw)//2); y=max(0,(nh-bh)//2)
             media=media.crop((x,y,x+bw,y+bh))
+        motion=str(item.get('media_motion') or ((shot or {}).get('media_motion') if shot else '') or 'still')
+        if motion=='push':
+            progress=min(1.0,max(0.0,u/max(.2,float((shot or {}).get('duration') or 3.0))))
+            zoom=1.0+.035*progress
+            zw,zh=int(bw*zoom),int(bh*zoom)
+            moved=media.resize((zw,zh),Image.Resampling.BICUBIC)
+            x=max(0,(zw-bw)//2); y=max(0,(zh-bh)//2)
+            media=moved.crop((x,y,x+bw,y+bh))
         im.paste(media,(box[0],box[1]))
     except Exception:
         return im
@@ -1260,7 +1296,9 @@ def render_short(ch,out,still_dir=None):
     creative_report['repair_attempts']=repair_attempts
     creative_report['asset_manifest']=resolved_assets
     creative_report['asset_resolution']=asset_report
-    duration=voice_plan(plan,genre,max_duration=float(ch.get('target_duration_max',36)),voice_name=str(ch.get('voice_profile') or 'af_heart'))
+    duration=voice_plan(plan,genre,max_duration=float(ch.get('target_duration_max',36)),
+                        voice_name=str(ch.get('voice_profile') or 'af_heart'),
+                        voice_speed=float(ch.get('voice_speed') or 1.09))
     out=Path(out);out.parent.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='astra_studio_') as tmp:
         tmp=Path(tmp);audio=tmp/'mix.wav'
