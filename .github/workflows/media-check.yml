@@ -38,6 +38,12 @@ on:
       - 'tests/test_revenue_geo.py'
       - 'tests/test_audience.py'
       - 'tests/test_studio.py'
+      - 'oss_stack.py'
+      - 'edit_spec.py'
+      - 'quality_lab.py'
+      - 'premium_batch_review.py'
+      - 'tests/test_open_source_stack.py'
+      - 'tests/test_edit_spec.py'
       - 'requirements.txt'
   pull_request:
     branches:
@@ -111,7 +117,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Verify Python modules
         if: github.event_name == 'push' || github.event_name == 'pull_request'
-        run: python -m py_compile cloud_once.py creative_engine.py premium_stories.py channel_state.py revenue_geo.py viral_prior.py evolution.py backup_state.py distribution.py ops_guardian.py ypp_safety.py autonomy.py reach_reports.py longform.py longform_trends.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py
+        run: python -m py_compile cloud_once.py creative_engine.py premium_stories.py channel_state.py revenue_geo.py viral_prior.py evolution.py backup_state.py distribution.py ops_guardian.py ypp_safety.py autonomy.py reach_reports.py longform.py longform_trends.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py oss_stack.py edit_spec.py quality_lab.py premium_batch_review.py
       - name: Verify Studio layouts and audio
         if: github.event_name == 'push' || github.event_name == 'pull_request'
         run: python -m unittest discover -s tests -p 'test_*.py' -v
@@ -123,12 +129,9 @@ jobs:
       - name: Render Studio startup preview
         if: (github.event_name == 'push' || github.event_name == 'pull_request') && env.ASTRA_FORCE_RUN != '1'
         run: python studio_renderer.py --preview /tmp/astra-studio-preview.mp4
-      - name: Render inspectable premium preview
+      - name: Render and inspect curated premium batch
         if: (github.event_name == 'push' || github.event_name == 'pull_request') && env.ASTRA_FORCE_RUN != '1'
-        continue-on-error: true
-        run: |
-          mkdir -p /tmp/astra-premium-review/stills
-          python studio_renderer.py --premium-preview /tmp/astra-premium-review/moon-preview.mp4 --stills-dir /tmp/astra-premium-review/stills
+        run: python premium_batch_review.py /tmp/astra-premium-review
       - name: Upload premium creative review
         if: (github.event_name == 'push' || github.event_name == 'pull_request') && env.ASTRA_FORCE_RUN != '1'
         uses: actions/upload-artifact@v4
