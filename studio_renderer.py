@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-2.3"
+VERSION = "studio-2.4"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -674,6 +674,41 @@ def render_frame(plan,t,genre,total):
 
 
 
+
+def asset_manifest(ch, plan):
+    """Create a provenance-aware acquisition/generation brief for every shot."""
+    topic=' '.join(str(ch.get('topic') or ch.get('title') or '').split())
+    source=str(ch.get('source') or ch.get('news_url') or '').strip()
+    secondary=str(ch.get('secondary_source') or '').strip()
+    manifest=[]
+    for i,p in enumerate(plan):
+        kind=p.get('director_asset','kinetic-type')
+        semantics=p.get('director_semantics',[])
+        # This manifest deliberately does not download arbitrary web media.
+        # It tells a future provider exactly what is needed and preserves provenance.
+        if kind=='source-document' and source:
+            strategy='source-derived'
+            query='Evidence from the cited source for: '+topic
+        elif kind in {'map-explainer','mechanism-diagram','comparison-graphic','time-visualization'}:
+            strategy='original-procedural'
+            query=f'{kind} explaining {topic}'
+        elif kind=='editorial-illustration':
+            strategy='original-illustration'
+            query='Non-likeness editorial concept illustrating: '+topic
+        else:
+            strategy='original-motion'
+            query='Abstract visual metaphor for: '+topic
+        manifest.append({
+            'shot':i+1,'kind':kind,'strategy':strategy,'query':query[:240],
+            'source_url':source if strategy=='source-derived' else '',
+            'secondary_source_url':secondary if strategy=='source-derived' else '',
+            'semantics':semantics,
+            'rights_rule':'original-or-explicitly-authorized-only',
+            'no_fake_screenshot':True,
+            'no_unverified_real_person_likeness':True,
+        })
+    return manifest
+
 def creative_quality_gate(ch, plan):
     """Fail closed when a rendered story would still behave like a generic template."""
     if not plan: raise RuntimeError('Creative gate: empty shot plan.')
@@ -705,7 +740,9 @@ def render_short(ch,out,still_dir=None):
     genre=ch.get('genre','challenge')
     if genre not in THEMES: raise ValueError('Unsupported genre')
     plan=make_plan(ch)
+    assets=asset_manifest(ch,plan)
     creative_report=creative_quality_gate(ch,plan)
+    creative_report['asset_manifest']=assets
     duration=voice_plan(plan,genre)
     out=Path(out);out.parent.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='astra_studio_') as tmp:
