@@ -463,6 +463,26 @@ def _trend_title(topic: str, headline: str) -> str:
     return (base[:91].rstrip(' .,:;-')+' #Shorts')[:100]
 
 
+def _traffic_number(value: str) -> int:
+    """Parse Google Trends approximate traffic such as '20K+' without inventing precision."""
+    raw=str(value or '').upper().replace(',','').replace('+','').strip()
+    m=re.search(r'(\d+(?:\.\d+)?)\s*([KMB]?)',raw)
+    if not m: return 0
+    n=float(m.group(1)); mult={'':1,'K':1000,'M':1000000,'B':1000000000}[m.group(2)]
+    return int(n*mult)
+
+def _cold_start_score(topic: str, traffic: str, news) -> float:
+    """Demand-first prior used while RAYVAN lacks enough viewer evidence."""
+    demand=_traffic_number(traffic)
+    # Log scale prevents a single giant trend from completely dominating.
+    demand_score=min(55.0, max(0.0, math.log10(max(demand,1))*11.0))
+    source_score=min(24.0, len(_distinct_news(news))*8.0)
+    # Favor explainable discovery topics over bare navigational/name searches.
+    words=len(str(topic or '').split())
+    angle_score=12.0 if 2 <= words <= 8 else 5.0
+    freshness_score=9.0
+    return round(min(100.0,demand_score+source_score+angle_score+freshness_score),2)
+
 def trend_candidates(trends):
     """Create source-linked current-affairs candidates from live trend metadata.
 
@@ -504,6 +524,7 @@ def trend_candidates(trends):
                 f"One current catalyst is coverage from {source}: {headline}. "
                 "The trend is a signal, not proof; follow the source as the story develops."
             )
+        cold_start_score=_cold_start_score(topic,str(t.get('traffic') or ''),news)
         out.append({
             'genre':'current','kind':'explainer','content_id':cid,'hook':hook,
             'question':question,'prompt':'WHY IT MATTERS','answer':answer,
@@ -514,7 +535,7 @@ def trend_candidates(trends):
             'source_count':len(news),'sensitive_topic':sensitive,
             'trend_matches':[t],'news_source':source,'news_title':headline,
             'trend_region':str(t.get('region') or ''),'trend_traffic':str(t.get('traffic') or ''),
-            'topic':topic,
+            'topic':topic,'cold_start_score':cold_start_score,
         })
     return out
 
@@ -539,6 +560,14 @@ def choose_content(data, trends, now=None, excluded_ids=None, excluded_titles=No
     used_titles.update(normalize_content_text(v.get('title')) for v in videos.values() if v.get('title'))
     dynamic = [c for c in trend_candidates(trends) if c['content_id'] not in used
                and normalize_content_text(c['title']) not in used_titles]
+    # Cold-start mode: before enough qualified viewer evidence exists, spend
+    # upload slots on the strongest measured demand/source signals rather than
+    # pretending retention learning is available.
+    clean_evidence=sum(max(0,int(v)) for v in ((data.get('strategy') or {}).get('evidence') or {}).values())
+    if clean_evidence < 6 and dynamic:
+        dynamic.sort(key=lambda c: float(c.get('cold_start_score',0)), reverse=True)
+        strongest=float(dynamic[0].get('cold_start_score',0))
+        dynamic=[c for c in dynamic if float(c.get('cold_start_score',0)) >= max(45.0,strongest-12.0)]
     candidates = dynamic + [c for c in content_catalog() if c['content_id'] not in used
                             and normalize_content_text(c['title']) not in used_titles]
     # Premium RAYVAN policy: procedural quizzes/riddles are deliberately not
