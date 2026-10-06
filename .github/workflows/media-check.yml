@@ -51,6 +51,10 @@ on:
       - 'tests/test_creative_director.py'
       - 'semantic_broll.py'
       - 'creative_director.py'
+      - 'tests/test_astra_pipeline.py'
+      - 'tests/test_creative_identity.py'
+      - 'astra_pipeline.py'
+      - 'creative_identity.py'
       - 'tests/test_creative_formats.py'
       - 'creative_formats.py'
       - 'premium_batch_review.py'
@@ -153,7 +157,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Verify Python modules
         if: github.event_name == 'push' || github.event_name == 'pull_request'
-        run: python -m py_compile cloud_once.py creative_engine.py premium_stories.py channel_state.py revenue_geo.py viral_prior.py evolution.py backup_state.py distribution.py ops_guardian.py ypp_safety.py autonomy.py reach_reports.py longform.py longform_trends.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py oss_stack.py edit_spec.py quality_lab.py creative_director.py creative_formats.py semantic_broll.py retention_surgery.py caption_audio_qa.py channel_memory.py premium_batch_review.py motion_renderer/bridge.py astra_errors.py hyperframes_adapter.py
+        run: python -m py_compile cloud_once.py creative_engine.py premium_stories.py channel_state.py revenue_geo.py viral_prior.py evolution.py backup_state.py distribution.py ops_guardian.py ypp_safety.py autonomy.py reach_reports.py longform.py longform_trends.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py oss_stack.py edit_spec.py quality_lab.py creative_director.py creative_formats.py creative_identity.py astra_pipeline.py semantic_broll.py retention_surgery.py caption_audio_qa.py channel_memory.py premium_batch_review.py motion_renderer/bridge.py astra_errors.py hyperframes_adapter.py
       - name: Verify Studio layouts and audio
         if: github.event_name == 'push' || github.event_name == 'pull_request'
         run: python -m unittest discover -s tests -p 'test_*.py' -v
