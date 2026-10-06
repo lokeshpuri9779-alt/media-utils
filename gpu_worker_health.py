@@ -41,12 +41,24 @@ def gpu_info() -> dict:
 def worker_health() -> dict:
     gpu=gpu_info()
     providers=provider_status()
-    min_vram=min((g.get("memory_mb",0) for g in gpu.get("gpus",[])),default=0)
+    max_vram=max((g.get("memory_mb",0) for g in gpu.get("gpus",[])),default=0)
+    ltx_ok=bool(gpu.get("available") and max_vram>=8000)
+    wan_ok=bool(gpu.get("available") and max_vram>=24000)
+    reasons=[]
+    if not gpu.get("available"):
+        reasons.append("NVIDIA GPU not detected")
+    elif max_vram < 8000:
+        reasons.append(f"largest GPU has only {max_vram} MB VRAM; Astra LTX floor is 8000 MB")
+    elif max_vram < 24000:
+        reasons.append(f"Wan2.2 TI2V-5B disabled below 24000 MB VRAM; detected {max_vram} MB")
     return {
         "gpu":gpu,
         "providers":providers,
-        "ltx_candidate":bool(gpu.get("available") and min_vram>=8000),
-        "wan22_ti2v5b_candidate":bool(gpu.get("available") and min_vram>=24000),
+        "max_vram_mb":max_vram,
+        "ltx_candidate":ltx_ok,
+        "wan22_ti2v5b_candidate":wan_ok,
+        "hardware_eligible":ltx_ok or wan_ok,
+        "hardware_reasons":reasons,
         "paid_fallback_required":not providers.get("ready"),
     }
 
@@ -55,6 +67,8 @@ def assert_ready() -> dict:
     health=worker_health()
     if not health["gpu"].get("available"):
         raise SystemExit("GPU worker not ready: NVIDIA GPU not detected.")
+    if not health.get("hardware_eligible"):
+        raise SystemExit("GPU worker not ready: " + "; ".join(health.get("hardware_reasons") or ["insufficient VRAM"]))
     if not health["providers"].get("ready"):
         raise SystemExit(
             "GPU detected, but no open-source backend is configured. "
