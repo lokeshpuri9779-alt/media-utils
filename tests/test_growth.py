@@ -30,11 +30,12 @@ class GrowthTests(unittest.TestCase):
             'news':[{'title':f'Headline {i}','url':f'https://example.com/{i}','source':'Example'}]
         } for i in range(5)]
         base={'videos':{'a':old_planet},
-              'trend_snapshot':{'checked_at':self.now.isoformat(),'items':items}}
+              'trend_snapshot':{'checked_at':self.now.replace(hour=7).isoformat(),'items':items}}
         morning=longform.choose_episode(base,self.now.replace(hour=7))
         self.assertTrue(morning.endswith('-am'))
         today_morning={'content_id':morning,'format':'long','published_at':self.now.replace(hour=7).isoformat()}
         base['videos']['b']=today_morning
+        base['trend_snapshot']['checked_at']=self.now.isoformat()
         evening=longform.choose_episode(base,self.now)
         self.assertTrue(evening.endswith('-pm'))
         base['videos']['c']={'content_id':evening,'format':'long','published_at':self.now.isoformat()}
