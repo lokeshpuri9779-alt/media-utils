@@ -24,11 +24,11 @@ def transcribe_words(
     model_size: str = "tiny.en",
     compute_type: str = "int8",
 ) -> list[WordTiming]:
-    from faster_whisper import WhisperModel
-
     path = Path(audio_path)
     if not path.exists():
         raise FileNotFoundError(path)
+
+    from faster_whisper import WhisperModel
 
     model = WhisperModel(model_size, device="cpu", compute_type=compute_type)
     segments, _ = model.transcribe(
