@@ -112,6 +112,13 @@ def load_state(now: datetime) -> dict:
         return fresh_state(today)
 
     if state.get("date") == today:
+        # Deployment configuration is the operator's requested capacity floor.
+        # Do not let stale persisted state from an older/lower target throttle
+        # a newly deployed controller for the rest of the day.
+        state["target"] = max(
+            int(state.get("target", INITIAL_TARGET)),
+            min(MAX_TARGET, INITIAL_TARGET),
+        )
         return state
 
     previous = dict(state)
