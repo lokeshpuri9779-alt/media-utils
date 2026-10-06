@@ -46,5 +46,13 @@ class DistributionTests(unittest.TestCase):
         self.assertEqual(state["ranked_sources"], [])
 
 
+    def test_title_packaging_is_bounded(self):
+        plan={"packaging_hints":["curiosity_title"],"format":"short"}
+        title=optimize_title("Venus rotates slowly #Shorts",plan,{"hook":"A VERY SLOW SPIN","format":"short"})
+        self.assertIn("A VERY SLOW SPIN",title)
+        self.assertIn("#Shorts",title)
+        self.assertLessEqual(len(title),100)
+
+
 if __name__ == "__main__":
     unittest.main()
