@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 
-ENGINE_VERSION = "creative-engine-6.0"
+ENGINE_VERSION = "creative-engine-7.0"
 
 _STOP = {
     "the","a","an","and","or","of","to","in","on","for","with","from","at","by",
