@@ -66,8 +66,8 @@ jobs:
       ORT_DISABLE_TELEMETRY: '1'
       ASTRA_LONG_ENABLED: '1'
       ASTRA_CHANNEL: 'rayvan'
-      ASTRA_INITIAL_DAILY_TARGET: '9'
-      ASTRA_MAX_DAILY_TARGET: '24'
+      ASTRA_INITIAL_DAILY_TARGET: '48'
+      ASTRA_MAX_DAILY_TARGET: '48'
       ASTRA_FORCE_RUN: ${{ (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[upload-probe]'))) && '1' || '0' }}
       ASTRA_PROBE_ID: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[upload-probe]') && github.sha || '' }}
     steps:
@@ -133,7 +133,7 @@ jobs:
           retention-days: 30
           if-no-files-found: error
       - name: save adaptive state
-        if: always() && github.event_name != 'pull_request'
+        if: always() && github.event_name == 'schedule'
         shell: bash
         run: |
           if [ -z "$(git status --porcelain -- performance.json quota_state.json SHORTS.md)" ]; then
@@ -150,13 +150,9 @@ jobs:
             exit 0
           fi
           git commit -m "Update Astra state and performance [skip ci]"
-          if [ "${{ github.event_name }}" = "push" ]; then
-            TARGET_BRANCH="${{ github.ref_name }}"
-          else
-            TARGET_BRANCH="astra-production"
-          fi
-          # Runtime publishing memory belongs to astra-production; push-CI changes
-          # remain on the event branch. Code rollback refs must not erase memory.
+          TARGET_BRANCH="astra-production"
+          # Only scheduled production runs persist mutable publishing memory.
+          # Push/PR CI validates code without writing runtime state back to Git.
           for attempt in 1 2 3; do
             if git push origin "HEAD:$TARGET_BRANCH"; then
               exit 0

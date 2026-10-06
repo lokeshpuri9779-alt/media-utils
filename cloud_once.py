@@ -17,6 +17,7 @@ STATE_PATH = Path("quota_state.json")
 IST = ZoneInfo("Asia/Kolkata")
 INITIAL_TARGET = int(os.environ.get("ASTRA_INITIAL_DAILY_TARGET", "9"))
 MAX_TARGET = int(os.environ.get("ASTRA_MAX_DAILY_TARGET", "24"))
+SCHEDULE_SLOT_MINUTES = max(1, int(os.environ.get("ASTRA_SCHEDULE_SLOT_MINUTES", "30")))
 CHANNELS_PATH = Path("channels.json")
 
 def channel_profile() -> dict:
@@ -149,8 +150,8 @@ def scheduled_attempt_due(now: datetime, state: dict) -> bool:
     target = max(1, min(MAX_TARGET, int(state.get("target", INITIAL_TARGET))))
     attempts = int(state.get("attempts", 0))
     minutes = now.hour * 60 + now.minute
-    # Runs are hourly. This spreads the target across the full India-local day.
-    should_have_attempted = min(target, ((minutes + 60) * target) // 1440)
+    # Spread attempts across the India-local day using the actual controller cadence.
+    should_have_attempted = min(target, ((minutes + SCHEDULE_SLOT_MINUTES) * target) // 1440)
     return attempts < should_have_attempted
 
 def _ease_out_back(x: float) -> float:
@@ -368,7 +369,7 @@ def genre_scores(videos):
     """Raw public views cannot establish audience interest or exclude owner tests."""
     return {}
 
-def choose_content(data, trends, now=None):
+def choose_content(data, trends, now=None, excluded_ids=None):
     import hashlib
     now = now or datetime.now(IST)
     videos = data.get('videos', {})
@@ -380,6 +381,7 @@ def choose_content(data, trends, now=None):
         except (KeyError, ValueError, TypeError):
             continue
     used = {v.get('content_id') for v in recent}
+    used.update(str(x) for x in (excluded_ids or set()) if x)
     candidates = [c for c in content_catalog() if c['content_id'] not in used]
     for _ in range(20):
         ch = _challenge()
@@ -449,12 +451,12 @@ def choose_content(data, trends, now=None):
     selected['exploration_rate'] = explore_rate
     return selected
 
-def select_content():
+def select_content(excluded_ids=None):
     global CONTENT_META
     from audience_research import research_signals
     data = load_performance()
     trends = fetch_trends() + research_signals(data, datetime.now(IST))
-    ch = choose_content(data, trends)
+    ch = choose_content(data, trends, excluded_ids=excluded_ids)
     CONTENT_META = {k:ch.get(k) for k in ('genre','content_id','source','trend_matches','selection_reason','stage0_rank','stage0_score','winner_descendant','exploration_rate','hook','question','prompt','answer','script','realistic_synthetic','altered_real_event','synthetic_real_person','reused_third_party_media','transformative_commentary','copyright_unlicensed')}
     print('Content decision:', json.dumps(CONTENT_META, ensure_ascii=False))
     return ch
@@ -474,9 +476,9 @@ def _draw_centered(draw, xy, text, fnt, fill, max_width=920, spacing=18, shadow=
     draw.multiline_text((x, y), text, font=fnt, fill=fill, anchor="mm",
                         align="center", spacing=spacing)
 
-def make_short(out: Path) -> tuple[str, str]:
+def make_short(out: Path, excluded_ids=None) -> tuple[str, str]:
     from studio_renderer import render_short
-    ch = select_content()
+    ch = select_content(excluded_ids=excluded_ids)
     report = render_short(ch, out)
     CONTENT_META.update(format="short", renderer=report["renderer"], duration=report["duration"],
                         voice=report["audio"]["voice"], scene_count=len(report["scenes"]))
@@ -755,25 +757,28 @@ def main() -> None:
             return
         state["last_probe_id"] = probe_id
     save_state(state)
-    refresh_performance()
-    refresh_research(token)
 
     force = (os.environ.get("ASTRA_FORCE_RUN") or "").strip() == "1"
     print(f"Adaptive daily target: {state['target']} | attempts: {state['attempts']} | successes: {state['successes']} | limit_hit: {state['limit_hit']}")
 
+    # Cheap gates first: no analytics/research API work when publishing is already
+    # paused, the daily attempt budget is exhausted, or this slot is not due.
     if state.get("limit_hit") and not force:
         print("Paused after an earlier API uploadLimitExceeded response. No fresh upload test occurred in this run.")
         print("The India-local day reset is Astra scheduling behavior, not a confirmed YouTube reset time.")
         return
-
-    from longform import choose_episode
-    long_episode = choose_episode(load_performance(), now) if os.environ.get("ASTRA_LONG_ENABLED", "1") == "1" else None
     if int(state.get("attempts", 0)) >= int(state["target"]) and not force:
         print("Daily upload attempt target reached.")
         return
-    if not force and not long_episode and not scheduled_attempt_due(now, state):
-        print("No upload attempt due in this hourly slot.")
+    if not force and not scheduled_attempt_due(now, state):
+        print("No upload attempt due in this scheduled slot.")
         return
+
+    # Refresh evidence only when this run can actually produce content.
+    refresh_performance()
+    refresh_research(token)
+    from longform import choose_episode
+    long_episode = choose_episode(load_performance(), now) if os.environ.get("ASTRA_LONG_ENABLED", "1") == "1" else None
 
     work = Path(tempfile.mkdtemp(prefix="media_utils_run_"))
     video = work / "clip.mp4"
@@ -811,11 +816,38 @@ def main() -> None:
     # against YouTube itself. If the live history cannot be read, fail closed.
     if content_id:
         desc += "\nASTRA-ID:" + content_id
-    if live_channel_duplicate(token, title, content_id):
+    excluded_live = set()
+    for retry in range(4):
+        if not live_channel_duplicate(token, title, content_id):
+            break
         print("Duplicate content blocked by live YouTube history:", content_id or title)
         state["duplicate_blocks"] = int(state.get("duplicate_blocks", 0)) + 1
-        save_state(state)
-        return
+        excluded_live.add(content_id)
+        if long_episode:
+            save_state(state)
+            return
+        if retry == 3:
+            print("No fresh live-safe concept found after four selections; skipping this slot.")
+            save_state(state)
+            return
+        print("Reselecting a fresh concept in the same scheduled run.")
+        title, desc = make_short(video, excluded_ids=excluded_live)
+        perf = load_performance()
+        desc, distribution_plan = branded_description(
+            desc, perf, genre=str(CONTENT_META.get("genre") or "unknown"), fmt="short"
+        )
+        title = optimize_title(title, distribution_plan, CONTENT_META)
+        CONTENT_META["distribution_plan"] = distribution_plan
+        CONTENT_META["revenue_geography"] = geography_state(perf)
+        ypp_report = enforce(title, desc, CONTENT_META, perf)
+        CONTENT_META["ypp_safety"] = ypp_report
+        CONTENT_META["ai_disclosure_required"] = bool(ypp_report.get("ai_disclosure_required"))
+        content_id = str(CONTENT_META.get("content_id") or "").strip()
+        if content_id and content_already_published(content_id):
+            excluded_live.add(content_id)
+            continue
+        if content_id:
+            desc += "\nASTRA-ID:" + content_id
 
     try:
         status, url = upload(video, title, desc, token=token)
