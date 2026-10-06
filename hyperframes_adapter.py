@@ -246,7 +246,7 @@ def _project_html(story: dict, plan: list[dict], duration: float, media_names: d
   <title>{_esc(story.get("title") or "RAYVAN")}</title>
   <script src="./gsap.min.js"></script>
   <style>
-    html,body{{margin:0;width:100%;height:100%;overflow:hidden;background:{top};color:white;font-family:Arial,Helvetica,sans-serif}}
+    html,body{{margin:0;width:100%;height:100%;overflow:hidden;background:{top};color:white;font-family:sans-serif}}
     #root{{position:relative;width:100%;height:100%;overflow:hidden;background:
       radial-gradient(circle at 70% 34%,color-mix(in srgb,{accent} 13%,transparent),transparent 42%),
       linear-gradient(180deg,{top} 0%,{bottom} 100%)}}
