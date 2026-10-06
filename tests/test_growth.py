@@ -17,17 +17,19 @@ class GrowthTests(unittest.TestCase):
     def setUp(self):self.now=datetime(2026,10,5,19,30,tzinfo=ZoneInfo('Asia/Kolkata'))
 
     def test_long_schedule_and_duplicate_guard(self):
-        self.assertIsNone(longform.choose_episode({'videos':{}},self.now.replace(hour=18)))
+        # Two independent daily slots: 07:00+ and 19:00+ IST, never >2/day.
+        self.assertIsNone(longform.choose_episode({'videos':{}},self.now.replace(hour=6)))
+        self.assertEqual(longform.choose_episode({'videos':{}},self.now.replace(hour=7)),longform.EPISODE_ID)
         self.assertEqual(longform.choose_episode({'videos':{}},self.now),longform.EPISODE_ID)
         old_planet={'content_id':longform.EPISODE_ID,'format':'long',
                     'published_at':(self.now-timedelta(days=8)).isoformat()}
-        weekly=longform.choose_episode({'videos':{'a':old_planet}},self.now)
-        self.assertTrue(weekly.startswith('brain-arena-'))
-        duplicate={'content_id':weekly,'format':'long',
-                   'published_at':(self.now-timedelta(days=8)).isoformat()}
-        self.assertIsNone(longform.choose_episode({'videos':{'a':old_planet,'b':duplicate}},self.now))
-        recent={'format':'long','published_at':(self.now-timedelta(days=6)).isoformat()}
-        self.assertIsNone(longform.choose_episode({'videos':{'a':recent}},self.now))
+        morning=longform.choose_episode({'videos':{'a':old_planet}},self.now.replace(hour=7))
+        self.assertTrue(morning.endswith('-am'))
+        today_morning={'content_id':morning,'format':'long','published_at':self.now.replace(hour=7).isoformat()}
+        evening=longform.choose_episode({'videos':{'a':old_planet,'b':today_morning}},self.now)
+        self.assertTrue(evening.endswith('-pm'))
+        today_evening={'content_id':evening,'format':'long','published_at':self.now.isoformat()}
+        self.assertIsNone(longform.choose_episode({'videos':{'a':old_planet,'b':today_morning,'c':today_evening}},self.now))
 
     def test_analytics_strategy_prefers_retention_evidence(self):
         data={'videos':{
