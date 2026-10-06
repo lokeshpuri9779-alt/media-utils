@@ -66,8 +66,8 @@ jobs:
       ORT_DISABLE_TELEMETRY: '1'
       ASTRA_LONG_ENABLED: '1'
       ASTRA_CHANNEL: 'rayvan'
-      ASTRA_INITIAL_DAILY_TARGET: '9'
-      ASTRA_MAX_DAILY_TARGET: '24'
+      ASTRA_INITIAL_DAILY_TARGET: '48'
+      ASTRA_MAX_DAILY_TARGET: '48'
       ASTRA_FORCE_RUN: ${{ (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[upload-probe]'))) && '1' || '0' }}
       ASTRA_PROBE_ID: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[upload-probe]') && github.sha || '' }}
     steps:
