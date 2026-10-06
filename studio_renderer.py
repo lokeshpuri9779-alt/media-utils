@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-2.0"
+VERSION = "studio-2.1"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -237,7 +237,10 @@ def direct_story(ch, plan):
                     director_camera=['push','drift','reveal','track'][seed%4],
                     director_layout=['focus-left','focus-right','center','split'][seed%4],
                     director_pattern_interrupt=(i>0 and role in {'proof','payoff','outlook'}),
-                    director_source_depth=source_count)
+                    director_source_depth=source_count,
+                    director_motion=['arc','scan','pulse','parallax'][seed%4],
+                    director_cut_rate=round(.55 + energy*.75,2),
+                    director_caption_mode=['phrase','keyword','question'][seed%3])
         directed.append(shot)
     return directed
 
@@ -548,6 +551,26 @@ def attention_layer(im,s,t,u,accent):
         alpha=int(200*(1-u/.18));d.rectangle((0,310,W,322),fill=accent+(alpha,))
     return im
 
+
+def director_motion_layer(im,s,t,u,accent):
+    """Micro-animation selected by the director; adds depth without a reusable scene template."""
+    d=ImageDraw.Draw(im,'RGBA')
+    mode=s.get('director_motion','pulse'); energy=float(s.get('director_energy',.5))
+    if mode=='scan':
+        y=int(560+(u*260*max(.5,energy))%500)
+        d.rectangle((90,y,930,y+3),fill=accent+(95,))
+    elif mode=='arc':
+        r=220+int(35*math.sin(t*2.1))
+        d.arc((540-r,760-r,540+r,760+r),int(t*45)%360,int(t*45)%360+105,fill=accent+(110,),width=5)
+    elif mode=='pulse':
+        r=90+int((u*120)%190)
+        d.ellipse((540-r,780-r,540+r,780+r),outline=accent+(max(25,120-r//3),),width=5)
+    elif mode=='parallax':
+        for j in range(5):
+            x=int((120+j*220+t*(10+5*j)*energy)%1180)-50
+            d.ellipse((x,650+j*70,x+16,666+j*70),fill=accent+(55+j*18,))
+    return im
+
 def render_frame(plan,t,genre,total):
     index=next((i for i,s in enumerate(plan) if t<s['end']),len(plan)-1)
     s=plan[index];u=t-s['start']; accent=THEMES[genre][2]
@@ -564,6 +587,7 @@ def render_frame(plan,t,genre,total):
         im=moved.crop((dx,dy,dx+W,dy+H))
     draw_visual(im,s,t,u,accent)
     attention_layer(im,s,t,u,accent)
+    director_motion_layer(im,s,t,u,accent)
     d=ImageDraw.Draw(im)
     # Director-controlled pattern interrupts are sparse and narrative, not constant.
     if s.get('director_pattern_interrupt') and u<.16:
@@ -581,7 +605,13 @@ def render_frame(plan,t,genre,total):
     words=s['speech'].split()
     dur=len(s['audio'])/RATE
     pos=max(0,min(len(words)-1,int((t-s['voice_start'])/max(.1,dur)*len(words))))
-    chunk=pos//5; text=' '.join(words[chunk*5:(chunk+1)*5])
+    mode=s.get('director_caption_mode','phrase')
+    width=3 if mode=='keyword' else (4 if mode=='question' else 5)
+    chunk=pos//width; text=' '.join(words[chunk*width:(chunk+1)*width])
+    if mode=='keyword' and text:
+        text=max(text.split(),key=len).upper()
+    elif mode=='question' and text and ('?' in s.get('speech','') or s.get('director_role')=='cold_open'):
+        text=text.rstrip(' .!?')+'?'
     if s.get('countdown') and t>s['voice_start']+dur+.1: text='YOUR TURN'
     d.rounded_rectangle((75,1370,950,1570),radius=28,fill=(8,12,23))
     fit_text(d,text,(104,1384,921,1555),size=59,fill=accent,max_lines=2)
