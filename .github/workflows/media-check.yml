@@ -48,6 +48,8 @@ on:
       - 'astra_errors.py'
       - 'hyperframes_adapter.py'
       - 'tests/test_hyperframes_adapter.py'
+      - '.gitmodules'
+      - 'third_party/**'
       - 'requirements.txt'
   pull_request:
     branches:
@@ -104,6 +106,7 @@ jobs:
           # separately promoted production branch.
           ref: ${{ (github.event_name == 'push' || github.event_name == 'pull_request') && github.sha || 'astra-production' }}
           fetch-depth: 0
+          submodules: recursive
       - name: Restore adaptive runtime state
         if: github.event_name != 'push' && github.event_name != 'pull_request'
         shell: bash
@@ -227,6 +230,39 @@ jobs:
           fi
           git commit -m "Update Astra state and performance [skip ci]"
           git push origin "HEAD:refs/heads/astra-state"
+
+
+  code2mp4-install:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          submodules: recursive
+          submodules: recursive
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Verify pinned Code2MP4 repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f third_party/code2mp4/package.json
+          test "$(git -C third_party/code2mp4 rev-parse HEAD)" = "91d7ba4501d8c6e48b4889a647b21af847f8185c"
+          grep -q '"license": "Apache-2.0"' third_party/code2mp4/package.json
+      - name: Install Code2MP4 dependencies
+        working-directory: third_party/code2mp4
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.33.2 --activate
+          pnpm install --frozen-lockfile
+      - name: Validate Code2MP4
+        working-directory: third_party/code2mp4
+        run: |
+          pnpm typecheck
+          pnpm test
 
   hyperframes-pilot:
     if: (github.event_name == 'push' || github.event_name == 'pull_request') && !contains(github.event.head_commit.message || '', '[upload-probe]')
