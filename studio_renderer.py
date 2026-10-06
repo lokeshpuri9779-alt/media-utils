@@ -36,6 +36,7 @@ THEMES = {
     "tech": ((8, 16, 32), (17, 41, 69), (85, 220, 255)),
     "fiction": ((8, 11, 28), (32, 18, 48), (188, 163, 255)),
     "challenge": ((15, 10, 28), (37, 18, 64), (227, 252, 107)),
+    "current": ((8, 13, 24), (18, 34, 54), (114, 209, 255)),
 }
 
 
@@ -109,6 +110,15 @@ def _story_plan(ch):
         return [scene(ch['hook'],q,'screen','WINDOWS','A SHORTCUT WORTH KNOWING',tool=cid),
                 scene('THE SHORTCUT',spoken,'keys',' + '.join(keys),'TRY IT ON YOUR KEYBOARD',keys=keys),
                 scene(payoff[0],payoff[1],'screen','DONE','SAVE THE SHORTCUT',tool=cid,reveal=True)]
+    if genre == 'current':
+        source=(ch.get('news_source') or 'SOURCE').upper()[:28]
+        region=(ch.get('trend_region') or 'GLOBAL').upper()[:18]
+        return [
+            scene(ch['hook'], f"{ch['hook'].title()} is drawing a fresh wave of search interest.", 'signal', 'LIVE SEARCH', region),
+            scene('WHAT CHANGED?', q, 'screen', 'TRENDING NOW', 'SEARCH INTEREST IS A SIGNAL'),
+            scene('THE CURRENT CATALYST', a, 'signal', source, 'SOURCE-LINKED CONTEXT'),
+            scene('CONTEXT > HYPE', 'The useful part is the underlying event, not the trend label. Follow the source as the story develops.', 'screen', 'VERIFY THE UPDATE', 'RAYVAN / STORIES BEYOND THE ORDINARY'),
+        ]
     if genre == 'football':
         heads={'offside-position':('POSITION ≠ OFFENCE','INVOLVEMENT MATTERS'),
                'throw-offside':('DIRECT FROM A THROW-IN?','NO OFFSIDE OFFENCE'),
@@ -192,6 +202,7 @@ def make_plan(ch):
         'football':[('YOUR NEXT QUESTION?','Which football rule should we explain next?'),('SEND IT TO A FAN','Share this with a football fan.')],
         'fiction':[('YOUR ENDING?','How would you end this story?'),('MORE SMALL STORIES','Subscribe for another original story.')],
         'challenge':[('YOUR ANSWER?','Tell us your answer in the comments.'),('CHALLENGE A FRIEND','Share this challenge with a friend.')],
+        'current':[('FOLLOW THE STORY','RAYVAN tracks the signal and explains what matters.'),('WHAT SHOULD WE FOLLOW NEXT?','Tell us which story deserves a deeper explainer.')],
     }
     genre=ch.get('genre','challenge')
     idx=int(hashlib.sha256(ch.get('content_id',ch['question']).encode()).hexdigest()[:8],16)%2
@@ -227,7 +238,7 @@ def score_audio(plan, duration, genre, path):
     n=int(math.ceil(duration*RATE)); t=np.arange(n,dtype=np.float32)/RATE
     rng=np.random.default_rng(2104)
     # Rounded synthesizer tones; different harmonic palette for each series.
-    root={'space':146.832,'fiction':130.813,'tech':164.814,'football':146.832,'challenge':164.814}[genre]
+    root={'space':146.832,'fiction':130.813,'tech':164.814,'football':146.832,'challenge':164.814,'current':155.563}[genre]
     beat=60/(96 if genre in {'fiction','space'} else 112)
     phase=np.mod(t,beat)
     kick=np.sin(2*np.pi*(48*phase+20*(1-np.exp(-18*phase))/18))*np.exp(-phase*18)*.065
@@ -442,7 +453,7 @@ def render_frame(plan,t,genre,total):
     # Consistent top bar and compact scene index.
     d.rounded_rectangle((70,130,126,186),radius=16,fill=accent)
     d.text((98,158),'L',font=font(37),anchor='mm',fill=(12,17,28))
-    d.text((148,143),'LOKI',font=font(33),fill=(237,240,250))
+    d.text((148,143),'RAYVAN',font=font(33),fill=(237,240,250))
     d.text((148,182),('ORIGINAL FICTION' if genre=='fiction' else genre.upper()+' / SHORT CUTS'),font=font(20),fill=(141,159,183))
     d.text((935,162),f'{index+1:02d} / {len(plan):02d}',font=font(25),anchor='rm',fill=accent)
     headline_offset=int((1-ease(u/.30))*24)
@@ -457,7 +468,7 @@ def render_frame(plan,t,genre,total):
     fit_text(d,text,(104,1384,921,1555),size=59,fill=accent,max_lines=2)
     d.line((75,1620,950,1620),fill=(53,59,80),width=4)
     d.line((75,1620,75+875*min(1,t/total),1620),fill=accent,width=4)
-    d.text((75,1660),'LOKI THE GAME CHANGER',font=font(22),fill=(144,158,180))
+    d.text((75,1660),'RAYVAN — STORIES BEYOND THE ORDINARY',font=font(22),fill=(144,158,180))
     # Brief ink-dark cut transition rather than full-screen flashing.
     if index>0 and u<.13:
         shade=Image.new('RGB',im.size,(8,12,23)); im=Image.blend(shade,im,.55+.45*u/.13)
