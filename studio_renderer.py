@@ -1058,15 +1058,21 @@ def provider_adapter(item):
             object_name=mv('ObjectName')
             subject_text=(title+' '+object_name).lower()
             subject_tokens=set(re.findall(r'[a-z0-9]+',subject_text))
-            def term_match(term):
-                # Exact token matching prevents Earth's "Moon" from matching
-                # unrelated titles that merely contain "moons".
-                words=[w for w in re.findall(r'[a-z0-9]+',term) if w]
-                return bool(words) and all(w in subject_tokens for w in words)
-            if not any(term_match(term) for term in required):
-                continue
-            if any(bad in subject_tokens for bad in {'fictional','extrasolar','exoplanet'}):
-                continue
+            if exact:
+                # Exact files are editorially pinned and fetched by exact Commons
+                # page title; their identity is stronger than fuzzy search tokens.
+                if title.strip().lower() != exact.strip().lower():
+                    continue
+            else:
+                def term_match(term):
+                    # Exact token matching prevents Earth's "Moon" from matching
+                    # unrelated titles that merely contain "moons".
+                    words=[w for w in re.findall(r'[a-z0-9]+',term) if w]
+                    return bool(words) and all(w in subject_tokens for w in words)
+                if not any(term_match(term) for term in required):
+                    continue
+                if any(bad in subject_tokens for bad in {'fictional','extrasolar','exoplanet'}):
+                    continue
             license_short=mv('LicenseShortName').lower()
             usage=mv('UsageTerms').lower()
             restrictions=mv('Restrictions').lower()
