@@ -831,6 +831,11 @@ def asset_manifest(ch, plan):
     topic=' '.join(str(ch.get('topic') or ch.get('title') or '').split())
     source=str(ch.get('source') or ch.get('news_url') or '').strip()
     secondary=str(ch.get('secondary_source') or '').strip()
+    keywords=[str(x).strip().lower() for x in (ch.get('keywords') or []) if str(x).strip()]
+    primary=(keywords[0] if keywords else '')
+    aliases=[primary] if primary else []
+    if primary=='iss':
+        aliases.append('international space station')
     manifest=[]
     for i,p in enumerate(plan):
         kind=p.get('director_asset','kinetic-type')
@@ -860,6 +865,7 @@ def asset_manifest(ch, plan):
             'source_url':source if strategy=='source-derived' else '',
             'secondary_source_url':secondary if strategy=='source-derived' else '',
             'semantics':semantics,
+            'required_subject_terms':aliases if strategy=='external-verified' else [],
             'rights_rule':'original-or-explicitly-authorized-only',
             'no_fake_screenshot':True,
             'no_unverified_real_person_likeness':True,
@@ -997,14 +1003,19 @@ def ingest_authorized_media(item, candidate, cache_dir='asset_cache'):
         return None
 
 def provider_adapter(item):
-    """Zero-cost Wikimedia Commons adapter with conservative machine-readable rights checks."""
+    """Zero-cost Wikimedia Commons adapter with strict subject and rights checks."""
     try:
         import urllib.parse, urllib.request, re, html
-        q=' '.join(str(item.get('query','')).split())[:180]
-        if not q: return None
+        raw_q=' '.join(str(item.get('query','')).split())[:180]
+        required=[str(x).strip().lower() for x in item.get('required_subject_terms',[]) if str(x).strip()]
+        if not raw_q or not required: return None
+        # Rights boilerplate made Commons search drift toward unrelated NASA PDFs.
+        # Search the editorial subject, then verify the returned file title itself.
+        q=re.sub(r'(?i)\b(public domain|nasa|diagram|full disk|full planet|image|photo)\b',' ',raw_q)
+        q=' '.join(q.split())[:160] or raw_q
         api='https://commons.wikimedia.org/w/api.php'
         params={'action':'query','generator':'search','gsrsearch':q,'gsrnamespace':'6',
-                'gsrlimit':'6','prop':'imageinfo','iiprop':'url|extmetadata',
+                'gsrlimit':'20','prop':'imageinfo','iiprop':'url|extmetadata',
                 'iiurlwidth':'1400','format':'json','origin':'*'}
         url=api+'?'+urllib.parse.urlencode(params)
         req=urllib.request.Request(url,headers={'User-Agent':'RAYVAN-Astra/1.0 (automated media research)'})
@@ -1014,10 +1025,26 @@ def provider_adapter(item):
         for page in pages.values():
             infos=page.get('imageinfo') or []
             if not infos: continue
+            title=str(page.get('title') or '').strip()
+            low_title=title.lower()
+            # Document cover thumbnails are not story footage.
+            if low_title.endswith(('.pdf','.djvu','.tif','.tiff')): continue
             info=infos[0]; meta=info.get('extmetadata') or {}
             def mv(k):
                 v=(meta.get(k) or {}).get('value','')
                 return html.unescape(re.sub('<[^>]+>',' ',str(v))).strip()
+            object_name=mv('ObjectName')
+            subject_text=(title+' '+object_name).lower()
+            subject_tokens=set(re.findall(r'[a-z0-9]+',subject_text))
+            def term_match(term):
+                # Exact token matching prevents Earth's "Moon" from matching
+                # unrelated titles that merely contain "moons".
+                words=[w for w in re.findall(r'[a-z0-9]+',term) if w]
+                return bool(words) and all(w in subject_tokens for w in words)
+            if not any(term_match(term) for term in required):
+                continue
+            if any(bad in subject_tokens for bad in {'fictional','extrasolar','exoplanet'}):
+                continue
             license_short=mv('LicenseShortName').lower()
             usage=mv('UsageTerms').lower()
             restrictions=mv('Restrictions').lower()
@@ -1025,10 +1052,6 @@ def provider_adapter(item):
             license_url=mv('LicenseUrl')
             source_page=info.get('descriptionurl') or info.get('descriptionshorturl')
             asset_url=info.get('thumburl') or info.get('url')
-            # Deliberately narrow: public domain/CC0 only. This avoids attribution/
-            # share-alike edge cases and keeps commercial modification unambiguous.
-            # Accept only explicit machine-readable PD/CC0 identifiers; prose usage
-            # terms are not sufficient evidence of reusable rights.
             pd=(license_short in {'public domain','public domain mark','pdm','cc0','cc zero'} or
                 'public domain' in usage or 'cc0' in usage)
             if not pd or restrictions or not all((asset_url,source_page,artist)): continue
@@ -1037,7 +1060,8 @@ def provider_adapter(item):
             return {'provider':'wikimedia-commons','asset_url':asset_url,
                     'source_url':source_page,'license_url':license_url,'creator':artist,
                     'license':'public-domain','commercial_use':True,
-                    'modification_allowed':True,'cost':0}
+                    'modification_allowed':True,'cost':0,
+                    'verified_subject':required[0],'commons_title':title}
     except Exception:
         return None
     return None
@@ -1055,6 +1079,12 @@ def acquire_story_media(resolved):
             out.append(item)
             continue
         candidate=provider_adapter(item)
+        print('Premium media resolve:', json.dumps({
+            'query': item.get('query',''),
+            'required_subject_terms': item.get('required_subject_terms',[]),
+            'candidate_title': (candidate or {}).get('commons_title'),
+            'resolved': bool(candidate),
+        }, ensure_ascii=False))
         acquired=ingest_authorized_media(item,candidate) if candidate else None
         out.append(acquired or item)
     return out
@@ -1189,9 +1219,13 @@ def render_short(ch,out,still_dir=None):
     asset_report=asset_resolution_gate(resolved_assets)
     if ch.get('premium_story'):
         verified=sum(1 for x in resolved_assets if x.get('provider')=='wikimedia-commons')
-        if verified < 2:
-            raise RuntimeError('Creative gate rejected premium story: fewer than two verified subject-specific media assets resolved.')
+        required=sum(1 for x in resolved_assets if x.get('strategy')=='external-verified')
+        if not required or verified != required:
+            raise RuntimeError(
+                f'Creative gate rejected premium story: verified subject media {verified}/{required}; all editorial shots must resolve.'
+            )
         asset_report['verified_subject_media']=verified
+        asset_report['required_subject_media']=required
     # Bind resolved asset metadata to the corresponding directed shot.
     for shot,item in zip(plan,resolved_assets): shot['resolved_asset']=item
     creative_report=creative_quality_gate(ch,plan)
@@ -1231,8 +1265,19 @@ def render_short(ch,out,still_dir=None):
 if __name__ == '__main__':
     import argparse
     parser=argparse.ArgumentParser(description='Render a Studio preview without authentication or uploads.')
-    parser.add_argument('--preview',required=True,type=Path)
+    parser.add_argument('--preview',type=Path)
+    parser.add_argument('--premium-preview',type=Path)
+    parser.add_argument('--stills-dir',type=Path)
     args=parser.parse_args()
-    demo=dict(genre='space',content_id='venus-spin',hook='ONE SPIN',
-              question='Venus rotates slowly.',answer='243 Earth days per rotation.')
-    render_short(demo,args.preview)
+    if args.premium_preview:
+        from premium_stories import catalog as premium_catalog
+        demo=premium_catalog()[0]
+        report=render_short(demo,args.premium_preview,still_dir=args.stills_dir)
+        report_path=args.premium_preview.with_suffix('.json')
+        report_path.write_text(json.dumps(report,indent=2,default=str),encoding='utf-8')
+    elif args.preview:
+        demo=dict(genre='space',content_id='venus-spin',hook='ONE SPIN',
+                  question='Venus rotates slowly.',answer='243 Earth days per rotation.')
+        render_short(demo,args.preview)
+    else:
+        parser.error('one of --preview or --premium-preview is required')
