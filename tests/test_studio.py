@@ -86,5 +86,15 @@ class StudioTests(unittest.TestCase):
         provider.assert_not_called()
         self.assertEqual(out,items)
 
+    def test_premium_story_uses_explicit_verified_media_requests(self):
+        premium=next(x for x in cloud.content_catalog() if x.get('premium_story'))
+        plan=studio.make_plan(premium)
+        self.assertEqual(len(plan),len(premium['story_beats']))
+        self.assertFalse(any(x.get('story_beat')=='cta' for x in plan))
+        manifest=studio.asset_manifest(premium,plan)
+        self.assertTrue(all(x.get('strategy')=='external-verified' for x in manifest))
+        self.assertTrue(all(x.get('query') for x in manifest))
+
+
 if __name__=='__main__':
     unittest.main()
