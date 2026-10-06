@@ -29,6 +29,15 @@ class StudioTests(unittest.TestCase):
                     frame=studio.render_frame(plan,s['start']+1,ch['genre'],duration)
                     self.assertEqual(frame.size,(1080,1920))
 
+    def test_current_trend_format_renders(self):
+        trend={'title':'Major Topic','region':'US','traffic':'200K+',
+               'news':[{'title':'A sourced angle','url':'https://example.com/story','source':'Example News'}]}
+        ch=cloud.trend_candidates([trend])[0]
+        plan,duration=self.prepared(ch)
+        for s in plan:
+            frame=studio.render_frame(plan,s['start']+1,'current',duration)
+            self.assertEqual(frame.size,(1080,1920))
+
     def test_memory_numbers_hidden_during_countdown(self):
         ch=dict(genre='challenge',kind='memory',content_id='memory-test',hook='MEMORIZE THIS',question='1  7  3  9  2',prompt='What was number #2?',answer='7')
         p=studio.make_plan(ch)
