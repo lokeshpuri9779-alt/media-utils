@@ -407,13 +407,9 @@ def choose_content(data, trends, now=None, excluded_ids=None, excluded_titles=No
     used_titles.update(normalize_content_text(v.get('title')) for v in videos.values() if v.get('title'))
     candidates = [c for c in content_catalog() if c['content_id'] not in used
                   and normalize_content_text(c['title']) not in used_titles]
-    for _ in range(20):
-        ch = _challenge()
-        ch.update(genre='challenge', source='', keywords=[])
-        ch['content_id'] = 'quiz-' + hashlib.sha256((ch['question']+ch['answer']).encode()).hexdigest()[:16]
-        if ch['content_id'] not in used and normalize_content_text(ch['title']) not in used_titles:
-            candidates.append(ch)
-            break
+    # Premium RAYVAN policy: procedural quizzes/riddles are deliberately not
+    # injected into production. Capacity is allowed to go unused rather than
+    # filling the channel with game-like or juvenile challenge cards.
     if not candidates:
         raise RuntimeError('No fresh content available; skipping rather than repeating.')
     # Diversity gate: RAYVAN is a broad discovery brand, not a repetitive
@@ -438,8 +434,40 @@ def choose_content(data, trends, now=None, excluded_ids=None, excluded_titles=No
         nontech = [x for x in candidates if x.get('genre') != 'tech']
         if nontech:
             candidates = nontech
+
+    # Viral-first novelty gate. Capacity is not a publication obligation:
+    # do not keep emitting near-identical quiz cards simply to fill a slot.
+    # A challenge may appear at most once in the latest six uploads, and its
+    # exact challenge kind may not repeat inside the latest twelve.
+    recent_six = ordered_recent[:6]
+    recent_twelve = ordered_recent[:12]
+    challenge_recent = any(x.get('genre') == 'challenge' for x in recent_six)
+    recent_challenge_kinds = {
+        str(x.get('kind') or '') for x in recent_twelve
+        if x.get('genre') == 'challenge' and x.get('kind')
+    }
+    if challenge_recent:
+        candidates = [x for x in candidates if x.get('genre') != 'challenge']
+    else:
+        candidates = [
+            x for x in candidates
+            if not (x.get('genre') == 'challenge' and str(x.get('kind') or '') in recent_challenge_kinds)
+        ]
+    if not candidates:
+        raise RuntimeError('Novelty gate rejected repetitive concepts; skipping this slot rather than publishing filler.')
     for c in candidates:
         c['trend_matches'] = [t for t in trends if any(re.search(r'\b'+re.escape(k)+r'\b', t['title'], re.I) for k in c['keywords'])][:3]
+
+    # Trend-led lane: when a verified live signal maps to a sourced RAYVAN
+    # subject, prefer it decisively. Do not pretend an unrelated canned topic
+    # is trending. Fiction remains an intentional evergreen discovery lane.
+    trend_led = [x for x in candidates if x.get('trend_matches') and x.get('source')]
+    if trend_led:
+        candidates = trend_led
+    else:
+        premium = [x for x in candidates if x.get('genre') in {'space','fiction','football'}]
+        if premium:
+            candidates = premium
     # Stage 0: rank concepts before rendering. With little clean channel evidence,
     # use structural priors + live demand; as analytics mature, genre evidence joins scoring.
     from viral_prior import rank_candidates
@@ -917,10 +945,13 @@ def main() -> None:
         state["last_attempt_at"] = datetime.now(IST).isoformat()
         save_state(state)
         status, url = upload(video, title, desc, token=token)
-        state["attempts"] = int(state.get("attempts", 0)) + 1
+        is_long = CONTENT_META.get("format") == "long"
+        counter = "long_attempts" if is_long else "attempts"
+        success_counter = "long_successes" if is_long else "successes"
+        state[counter] = int(state.get(counter, 0)) + 1
         if status == "success":
             state["limit_hit"] = False
-            state["successes"] = int(state.get("successes", 0)) + 1
+            state[success_counter] = int(state.get(success_counter, 0)) + 1
             print("Uploaded:", url, "| returned visibility:", CONTENT_META.get("visibility", "unknown"))
             video_id = url.rsplit("=", 1)[-1] if "=" in url else ""
             record_video(video_id, title)
@@ -936,7 +967,9 @@ def main() -> None:
             print("YouTube API upload limit reported. Guardian paused further scheduled probes for today.")
     except Exception as exc:
         state["last_attempt_at"] = state.get("last_attempt_at") or datetime.now(IST).isoformat()
-        state["attempts"] = int(state.get("attempts", 0)) + 1
+        is_long = CONTENT_META.get("format") == "long"
+        counter = "long_attempts" if is_long else "attempts"
+        state[counter] = int(state.get(counter, 0)) + 1
         state["other_failures"] = int(state.get("other_failures", 0)) + 1
         if LAST_API_ERROR is not None: state["last_api_error"] = LAST_API_ERROR
         from ops_guardian import classify, record_event
