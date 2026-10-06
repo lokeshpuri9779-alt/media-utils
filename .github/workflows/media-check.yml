@@ -23,6 +23,7 @@ on:
       - 'learning_policy.json'
       - 'youtube_autonomy_setup.py'
       - 'tests/test_growth.py'
+      - 'tests/test_publish_selection.py'
       - 'tests/test_viral_prior.py'
       - 'tests/test_evolution.py'
       - 'tests/test_backup.py'
@@ -37,6 +38,9 @@ on:
     branches:
       - main
   workflow_dispatch:
+  workflow_run:
+    workflows: ["promote Astra production"]
+    types: [completed]
   schedule:
     # Run the Shorts controller every 30 minutes: 48 scheduled opportunities/day.
     # Publishing/dedupe/quota gates still decide whether an upload is allowed.
@@ -54,6 +58,9 @@ permissions:
 
 jobs:
   process:
+    # Verify publishing after a successful deployment as well as on the clock.
+    # The promotion workflow only accepts push CI, so this cannot recurse.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
@@ -136,7 +143,7 @@ jobs:
           retention-days: 30
           if-no-files-found: error
       - name: save adaptive state
-        if: always() && github.event_name == 'schedule'
+        if: always() && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_run')
         shell: bash
         run: |
           if [ -z "$(git status --porcelain -- performance.json quota_state.json SHORTS.md)" ]; then
@@ -154,7 +161,7 @@ jobs:
           fi
           git commit -m "Update Astra state and performance [skip ci]"
           TARGET_BRANCH="astra-production"
-          # Only scheduled production runs persist mutable publishing memory.
+          # All production runs persist mutable publishing memory.
           # Push/PR CI validates code without writing runtime state back to Git.
           for attempt in 1 2 3; do
             if git push origin "HEAD:$TARGET_BRANCH"; then

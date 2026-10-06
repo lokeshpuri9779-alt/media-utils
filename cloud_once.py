@@ -369,7 +369,7 @@ def genre_scores(videos):
     """Raw public views cannot establish audience interest or exclude owner tests."""
     return {}
 
-def choose_content(data, trends, now=None, excluded_ids=None):
+def choose_content(data, trends, now=None, excluded_ids=None, excluded_titles=None):
     import hashlib
     now = now or datetime.now(IST)
     videos = data.get('videos', {})
@@ -380,14 +380,17 @@ def choose_content(data, trends, now=None, excluded_ids=None):
                 recent.append(entry)
         except (KeyError, ValueError, TypeError):
             continue
-    used = {v.get('content_id') for v in recent}
+    used = {v.get('content_id') for v in videos.values()}
     used.update(str(x) for x in (excluded_ids or set()) if x)
-    candidates = [c for c in content_catalog() if c['content_id'] not in used]
+    used_titles = {normalize_content_text(t) for t in (excluded_titles or set()) if t}
+    used_titles.update(normalize_content_text(v.get('title')) for v in videos.values() if v.get('title'))
+    candidates = [c for c in content_catalog() if c['content_id'] not in used
+                  and normalize_content_text(c['title']) not in used_titles]
     for _ in range(20):
         ch = _challenge()
         ch.update(genre='challenge', source='', keywords=[])
         ch['content_id'] = 'quiz-' + hashlib.sha256((ch['question']+ch['answer']).encode()).hexdigest()[:16]
-        if ch['content_id'] not in used:
+        if ch['content_id'] not in used and normalize_content_text(ch['title']) not in used_titles:
             candidates.append(ch)
             break
     if not candidates:
@@ -451,12 +454,12 @@ def choose_content(data, trends, now=None, excluded_ids=None):
     selected['exploration_rate'] = explore_rate
     return selected
 
-def select_content(excluded_ids=None):
+def select_content(excluded_ids=None, excluded_titles=None):
     global CONTENT_META
     from audience_research import research_signals
     data = load_performance()
     trends = fetch_trends() + research_signals(data, datetime.now(IST))
-    ch = choose_content(data, trends, excluded_ids=excluded_ids)
+    ch = choose_content(data, trends, excluded_ids=excluded_ids, excluded_titles=excluded_titles)
     CONTENT_META = {k:ch.get(k) for k in ('genre','content_id','source','trend_matches','selection_reason','stage0_rank','stage0_score','winner_descendant','exploration_rate','hook','question','prompt','answer','script','realistic_synthetic','altered_real_event','synthetic_real_person','reused_third_party_media','transformative_commentary','copyright_unlicensed')}
     print('Content decision:', json.dumps(CONTENT_META, ensure_ascii=False))
     return ch
@@ -476,9 +479,9 @@ def _draw_centered(draw, xy, text, fnt, fill, max_width=920, spacing=18, shadow=
     draw.multiline_text((x, y), text, font=fnt, fill=fill, anchor="mm",
                         align="center", spacing=spacing)
 
-def make_short(out: Path, excluded_ids=None) -> tuple[str, str]:
+def make_short(out: Path, excluded_ids=None, excluded_titles=None) -> tuple[str, str]:
     from studio_renderer import render_short
-    ch = select_content(excluded_ids=excluded_ids)
+    ch = select_content(excluded_ids=excluded_ids, excluded_titles=excluded_titles)
     report = render_short(ch, out)
     CONTENT_META.update(format="short", renderer=report["renderer"], duration=report["duration"],
                         voice=report["audio"]["voice"], scene_count=len(report["scenes"]))
@@ -598,7 +601,7 @@ def live_channel_history(token: str) -> tuple[set[str], set[str]]:
         if title:
             titles.add(title)
         description = str(snippet.get("description") or "")
-        ids.update(re.findall(r"ASTRA-ID:([^\\s]+)", description))
+        ids.update(re.findall(r"ASTRA-ID:([^\s]+)", description))
     return titles, ids
 
 
@@ -797,7 +800,7 @@ def main() -> None:
 
     work = Path(tempfile.mkdtemp(prefix="media_utils_run_"))
     video = work / "clip.mp4"
-    title, desc = make_long(video, long_episode) if long_episode else make_short(video, excluded_ids=pre_render_excluded)
+    title, desc = make_long(video, long_episode) if long_episode else make_short(video, excluded_ids=pre_render_excluded, excluded_titles=live_titles)
     from distribution import branded_description
     perf = load_performance()
     desc, distribution_plan = branded_description(
@@ -831,7 +834,7 @@ def main() -> None:
     # against YouTube itself. If the live history cannot be read, fail closed.
     if content_id:
         desc += "\nASTRA-ID:" + content_id
-    excluded_live = set()
+    excluded_live = set(pre_render_excluded)
     for retry in range(4):
         if not live_channel_duplicate(token, title, content_id):
             break
@@ -846,7 +849,8 @@ def main() -> None:
             save_state(state)
             return
         print("Reselecting a fresh concept in the same scheduled run.")
-        title, desc = make_short(video, excluded_ids=excluded_live)
+        live_titles.add(normalize_content_text(title))
+        title, desc = make_short(video, excluded_ids=excluded_live, excluded_titles=live_titles)
         perf = load_performance()
         desc, distribution_plan = branded_description(
             desc, perf, genre=str(CONTENT_META.get("genre") or "unknown"), fmt="short"
@@ -863,6 +867,13 @@ def main() -> None:
             continue
         if content_id:
             desc += "\nASTRA-ID:" + content_id
+
+    # Every exit from the retry loop must pass both sources of truth. In
+    # particular, a final persisted-history collision cannot fall through.
+    if content_already_published(content_id) or live_channel_duplicate(token, title, content_id):
+        state["duplicate_blocks"] = int(state.get("duplicate_blocks", 0)) + 1
+        save_state(state)
+        raise RuntimeError("Fresh content selection exhausted; no upload attempted.")
 
     try:
         status, url = upload(video, title, desc, token=token)
