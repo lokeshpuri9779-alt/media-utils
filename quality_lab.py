@@ -108,10 +108,14 @@ def unified_quality_report(report: dict) -> dict:
     }
 
 
-def director_input_from_render(story: dict, render_report: dict) -> dict:
+def director_input_from_render(story: dict, render_report: dict, media_qa: dict | None = None, detected: dict | None = None) -> dict:
     """Translate Studio's real render telemetry into Creative Director inputs."""
     scenes = render_report.get("scenes") or []
     durations = [float(s.get("duration") or 0) for s in scenes if float(s.get("duration") or 0) > 0]
+    if detected and detected.get("available") and detected.get("detected_scenes"):
+        detected_durations = [float(s.get("duration") or 0) for s in detected["detected_scenes"] if float(s.get("duration") or 0) > 0]
+    else:
+        detected_durations = []
     duration = float(render_report.get("duration") or 0)
     cq = render_report.get("creative_quality") or {}
     audio = render_report.get("audio") or {}
@@ -134,12 +138,20 @@ def director_input_from_render(story: dict, render_report: dict) -> dict:
 
     peak = float(audio.get("peak_dbfs") or -99)
     audio_score = 94.0 if -12.0 <= peak <= -0.3 else 72.0
+    caption_score = 86.0
+    caption_stage = "studio-timing-provisional"
+    if media_qa and media_qa.get("available"):
+        audio_score = float(media_qa.get("audio_score") or 0)
+        caption_score = float(media_qa.get("caption_score") or 0)
+        caption_stage = "measured-post-render"
 
     visual_score = float(cq.get("score") or 0)
     novelty_score = min(100.0, visual_score + 4.0)
     coherence_score = 92.0 if all(str(s.get("speech") or s.get("narration") or "").strip() for s in scenes) else 70.0
 
     hard = list(cq.get("hard_failures") or [])
+    if media_qa:
+        hard.extend(media_qa.get("hard_failures") or [])
     return {
         "duration": duration,
         "scenes": scenes,
@@ -152,25 +164,88 @@ def director_input_from_render(story: dict, render_report: dict) -> dict:
             "coherence_score": coherence_score,
         },
         "scene_analysis": {
-            "scene_count": len(scenes),
-            "avg_scene_duration": (sum(durations) / len(durations)) if durations else 0.0,
-            "max_scene_duration": max(durations) if durations else 0.0,
+            "scene_count": len(detected_durations) if detected_durations else len(scenes),
+            "avg_scene_duration": (sum(detected_durations) / len(detected_durations)) if detected_durations else ((sum(durations) / len(durations)) if durations else 0.0),
+            "max_scene_duration": max(detected_durations) if detected_durations else (max(durations) if durations else 0.0),
+            "source": "pyscenedetect" if detected_durations else "studio-plan",
         },
-        "audio": {"score": audio_score, **audio},
-        # Studio captions are generated from the same timed narration plan.
-        # A later faster-whisper/VideoLingo pass can replace this provisional score.
-        "captions": {"score": 86.0, "stage": "studio-timing-provisional"},
+        "audio": {"score": audio_score, **audio, "media_qa": media_qa or {}},
+        "captions": {"score": caption_score, "stage": caption_stage, "media_qa": media_qa or {}},
         "technical": {"pass": duration > 0 and bool(scenes), "score": 100.0 if duration > 0 and scenes else 0.0},
         "hard_failures": hard,
     }
 
 
-def evaluate_studio_render(story: dict, render_report: dict) -> dict:
-    director_input = director_input_from_render(story, render_report)
+def evaluate_studio_render(story: dict, render_report: dict, video_path: str | Path | None = None) -> dict:
+    detected = scene_change_report(Path(video_path)) if video_path else None
+    media_qa = None
+    if video_path:
+        try:
+            from caption_audio_qa import validate_rendered_media
+            media_qa = validate_rendered_media(video_path, render_report)
+        except Exception as exc:
+            media_qa = {
+                "available": False,
+                "pass": False,
+                "audio_score": 0.0,
+                "caption_score": 0.0,
+                "hard_failures": ["post-render media QA unavailable: " + str(exc)[:180]],
+            }
+    director_input = director_input_from_render(story, render_report, media_qa=media_qa, detected=detected)
     decision = evaluate_director(director_input)
     return {
         "director_input": director_input,
+        "scene_detection": detected,
+        "media_qa": media_qa,
         "director": decision,
         "feedback": production_feedback(decision),
         "pass": bool(decision.get("publish_allowed")),
+    }
+
+
+def evaluate_long_render(render_report: dict, video_path: str | Path) -> dict:
+    """Measured QA for long-form renders without Shorts-specific duration rules."""
+    path = Path(video_path)
+    detected = scene_change_report(path)
+    try:
+        from caption_audio_qa import validate_rendered_media
+        media_qa = validate_rendered_media(path, render_report)
+    except Exception as exc:
+        media_qa = {
+            "available": False,
+            "pass": False,
+            "audio_score": 0.0,
+            "caption_score": 0.0,
+            "hard_failures": ["post-render media QA unavailable: " + str(exc)[:180]],
+        }
+
+    duration = float(render_report.get("duration") or 0)
+    scene_count = int(render_report.get("scene_count") or len(render_report.get("scenes") or []))
+    failures = list(media_qa.get("hard_failures") or [])
+    if duration < 60:
+        failures.append("long-form render is under 60 seconds")
+    if scene_count < 6:
+        failures.append("long-form render has too few scenes")
+    if not path.is_file() or path.stat().st_size <= 0:
+        failures.append("long-form output file missing or empty")
+
+    structural_score = 100.0
+    if duration < 120:
+        structural_score -= 15.0
+    if scene_count < 10:
+        structural_score -= 10.0
+    score = round(
+        0.4 * float(media_qa.get("audio_score") or 0)
+        + 0.4 * float(media_qa.get("caption_score") or 0)
+        + 0.2 * structural_score,
+        2,
+    )
+    return {
+        "pass": not failures and score >= 82.0,
+        "score": score,
+        "media_qa": media_qa,
+        "scene_detection": detected,
+        "duration": duration,
+        "scene_count": scene_count,
+        "failures": failures,
     }

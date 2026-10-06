@@ -762,9 +762,11 @@ def make_short(out: Path, excluded_ids=None, excluded_titles=None) -> tuple[str,
         try:
             report = render_short(ch, out)
             from quality_lab import evaluate_studio_render
-            director = evaluate_studio_render(ch, report)
+            director = evaluate_studio_render(ch, report, video_path=out)
             CONTENT_META["creative_director"] = director["director"]
             CONTENT_META["repair_feedback"] = director["feedback"]
+            CONTENT_META["media_qa"] = director.get("media_qa")
+            CONTENT_META["scene_detection"] = director.get("scene_detection")
             print("Creative Director:", json.dumps(director["director"], ensure_ascii=False))
             if not director["pass"]:
                 action = str(director["director"].get("action") or "")
@@ -772,11 +774,18 @@ def make_short(out: Path, excluded_ids=None, excluded_titles=None) -> tuple[str,
                 visual_repairs = {"replace_weak_visuals_and_broll", "change_visual_grammar_or_concept_angle", "shorten_long_scenes_and_add_cuts"}
                 blocking_repairs = {"rewrite_hook_only", "compress_or_reorder_story_beats", "remix_or_regenerate_audio", "realign_and_resplit_captions", "repair_scene_to_narration_alignment", "repair_render_technical_failures"}
                 if action == "targeted_regeneration" and (repairs & visual_repairs) and not (repairs & blocking_repairs):
-                    print("Creative Director: rerendering same story with repaired visual direction.")
-                    report = render_short(ch, out, director_repair_pass=3)
-                    director = evaluate_studio_render(ch, report)
+                    from retention_surgery import propose_surgery
+                    from channel_memory import active_memory
+                    retention_lessons = (((active_memory(load_performance()).get("evolution") or {}).get("retention_patterns") or {}).get("lessons") or [])
+                    surgery = propose_surgery(report, learned_lessons=retention_lessons)
+                    CONTENT_META["retention_surgery"] = surgery
+                    print("Creative Director: rerendering same story with repaired visual direction and scene surgery.")
+                    report = render_short(ch, out, director_repair_pass=3, scene_surgery=surgery)
+                    director = evaluate_studio_render(ch, report, video_path=out)
                     CONTENT_META["creative_director"] = director["director"]
                     CONTENT_META["repair_feedback"] = director["feedback"]
+                    CONTENT_META["media_qa"] = director.get("media_qa")
+                    CONTENT_META["scene_detection"] = director.get("scene_detection")
                     CONTENT_META["director_rerendered"] = True
                     print("Creative Director rerender:", json.dumps(director["director"], ensure_ascii=False))
                 if not director["pass"]:
@@ -956,6 +965,8 @@ def record_video(video_id: str, title: str) -> None:
     item.setdefault("published_at", datetime.now(IST).isoformat())
     item.setdefault("history", [])
     item.update(CONTENT_META)
+    from channel_state import channel_key
+    item["channel_key"] = channel_key()
     save_performance(data)
 
     # Maintain a public, zero-cost backlink feed inside the GitHub repo.
@@ -1046,6 +1057,16 @@ def refresh_research(token, force=False):
         changed=True
     if manage_community(data,now):
         changed=True
+    from channel_memory import refresh_channel_memory
+    memory = refresh_channel_memory(data)
+    data["active_channel_learning"] = {
+        "channel_key": memory["channel_key"],
+        "video_count": memory["video_count"],
+        "optimization_policy": memory["optimization_policy"],
+        "retention_patterns": memory["evolution"].get("retention_patterns"),
+        "winner_blueprints": memory["evolution"].get("winner_blueprints"),
+    }
+    changed=True
     if changed:
         save_performance(data)
 
@@ -1055,7 +1076,14 @@ def make_long(out, episode_id):
     from longform import render
     trend_items=((load_performance().get('trend_snapshot') or {}).get('items') or [])
     title,description,report=render(out, episode_id=episode_id, trend_items=trend_items)
+    from quality_lab import evaluate_long_render
+    long_qa=evaluate_long_render(report,out)
+    if not long_qa.get("pass"):
+        raise RuntimeError("Long-form quality gate rejected render: "+json.dumps({
+            "score":long_qa.get("score"),"failures":long_qa.get("failures")
+        },ensure_ascii=False))
     CONTENT_META={k:report[k] for k in ('renderer','format','genre','content_id','duration','scene_count')}
+    CONTENT_META['long_quality_gate']=long_qa
     CONTENT_META['creative_quality']=report.get('creative_quality')
     CONTENT_META['story_beats']=report.get('story_beats',[])
     # Trend deep-dives carry their own verified source manifest; the evergreen
@@ -1177,6 +1205,7 @@ def main() -> None:
             'Autonomous quality gate rejected this slot',
             'No fresh content available',
             'Novelty gate rejected repetitive concepts',
+            'Long-form quality gate rejected render',
         )):
             print('Quality skip:', msg)
             health=load_performance().setdefault('creative_health',{})
