@@ -207,7 +207,7 @@ def make_plan(ch):
         'football':[('YOUR NEXT QUESTION?','Which football rule should we explain next?'),('SEND IT TO A FAN','Share this with a football fan.')],
         'fiction':[('YOUR ENDING?','How would you end this story?'),('MORE SMALL STORIES','Subscribe for another original story.')],
         'challenge':[('YOUR ANSWER?','Tell us your answer in the comments.'),('CHALLENGE A FRIEND','Share this challenge with a friend.')],
-        'current':[('FOLLOW THE STORY','RAYVAN tracks the signal and explains what matters.'),('WHAT SHOULD WE FOLLOW NEXT?','Tell us which story deserves a deeper explainer.')],
+        'current':[('FOLLOW THE STORY','Subscribe to RAYVAN for the next verified update.'),('GO DEEPER','Watch the related RAYVAN story when it is linked below.')],
     }
     genre=ch.get('genre','challenge')
     idx=int(hashlib.sha256(ch.get('content_id',ch['question']).encode()).hexdigest()[:8],16)%2
