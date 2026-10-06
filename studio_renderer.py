@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-2.7"
+VERSION = "studio-2.8"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -804,6 +804,52 @@ def composite_cached_asset(im,item):
         return im
     return im
 
+
+def ingest_authorized_media(item, candidate, cache_dir='asset_cache'):
+    """Validate, download and cache an explicitly reusable image from a provider adapter."""
+    checked=external_media_candidate(item,candidate)
+    if not checked: return None
+    if float(checked.get('cost',0))!=0: return None
+    url=checked.get('asset_url','')
+    if not url.startswith('https://'): return None
+    key=media_cache_key(item); os.makedirs(cache_dir,exist_ok=True)
+    image_path=os.path.join(cache_dir,key+'.png')
+    meta_path=os.path.join(cache_dir,key+'.json')
+    try:
+        import urllib.request, io
+        req=urllib.request.Request(url,headers={'User-Agent':'RAYVAN-Astra/1.0'})
+        with urllib.request.urlopen(req,timeout=12) as resp:
+            ctype=str(resp.headers.get('Content-Type','')).lower()
+            length=int(resp.headers.get('Content-Length') or 0)
+            if 'image/' not in ctype or length>12_000_000: return None
+            raw=resp.read(12_000_001)
+        if len(raw)>12_000_000: return None
+        img=Image.open(io.BytesIO(raw)); img.verify()
+        img=Image.open(io.BytesIO(raw)).convert('RGB')
+        if img.width<480 or img.height<480: return None
+        img.save(image_path,'PNG',optimize=True)
+        checked.update(cache_key=key,cache_image=image_path,cache_meta=meta_path)
+        with open(meta_path,'w',encoding='utf-8') as h:
+            json.dump({k:v for k,v in checked.items() if k!='external_request'},h,indent=2)
+        return checked
+    except Exception:
+        return None
+
+def provider_adapter(item):
+    """Zero-config adapter hook. Disabled unless a provider returns verifiable rights metadata."""
+    # Intentionally no arbitrary web/image search here. Provider integrations must
+    # return the candidate schema validated by external_media_candidate().
+    return None
+
+def acquire_story_media(resolved):
+    """Attempt provider acquisition, preserving original Astra fallback on every failure."""
+    out=[]
+    for item in resolved:
+        candidate=provider_adapter(item)
+        acquired=ingest_authorized_media(item,candidate) if candidate else None
+        out.append(acquired or item)
+    return out
+
 def asset_resolution_gate(resolved):
     blocked=[x for x in resolved if x.get('status')!='ready']
     unsafe=[x for x in resolved if not str(x.get('license','')).startswith(('original-','cc0','public-domain','authorized-'))]
@@ -845,6 +891,7 @@ def render_short(ch,out,still_dir=None):
     plan=make_plan(ch)
     assets=asset_manifest(ch,plan)
     resolved_assets=prepare_media_cache(resolve_assets(assets))
+    resolved_assets=acquire_story_media(resolved_assets)
     asset_report=asset_resolution_gate(resolved_assets)
     # Bind resolved asset metadata to the corresponding directed shot.
     for shot,item in zip(plan,resolved_assets): shot['resolved_asset']=item
