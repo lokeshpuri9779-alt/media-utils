@@ -24,16 +24,52 @@ def _traffic_number(value: str) -> int:
     return int(n*mult)
 
 
+SENSITIVE_TREND_RE = re.compile(
+    r'\b(election|vote|president|prime minister|minister|government|war|missile|attack|shooting|'
+    r'killed|dead|death|earthquake|flood|cyclone|hurricane|outbreak|vaccine|disease|health|hospital|'
+    r'stock|crypto|bitcoin|market crash|bank|inflation|interest rate|lawsuit|court|arrest)\b', re.I
+)
+
+def _host(url):
+    from urllib.parse import urlparse
+    try:
+        parsed=urlparse(str(url or '').strip())
+    except ValueError:
+        return ''
+    if parsed.scheme not in {'http','https'} or not parsed.hostname:
+        return ''
+    host=parsed.hostname.lower()
+    return host[4:] if host.startswith('www.') else host
+
+def _distinct_news(items):
+    out=[]; seen=set()
+    for x in items or []:
+        if not isinstance(x,dict) or not x.get('title') or not x.get('url') or not x.get('source'):
+            continue
+        host=_host(x.get('url'))
+        if not host or host in seen:
+            continue
+        seen.add(host); out.append(x)
+    return out
+
+def _sensitive(topic, news):
+    text=' '.join([str(topic or '')]+[str(x.get('title') or '') for x in news or []])
+    return bool(SENSITIVE_TREND_RE.search(text))
+
 def sourced_topics(items, limit=5):
     ranked=[]; seen=set()
     for item in items or []:
         topic=' '.join(str(item.get('title') or '').split()).strip()
-        news=[x for x in (item.get('news') or []) if x.get('title') and x.get('url') and x.get('source')]
+        news=_distinct_news(item.get('news') or [])
         key=re.sub(r'[^a-z0-9]+',' ',topic.lower()).strip()
         if not topic or not news or not key or key in seen:
             continue
+        sensitive=_sensitive(topic,news)
+        if sensitive and len(news) < 2:
+            continue
         seen.add(key)
         first=news[0]
+        chosen=news[:2] if sensitive else news[:1]
         ranked.append({
             'topic':topic[:120],
             'region':str(item.get('region') or 'global')[:24],
@@ -41,20 +77,26 @@ def sourced_topics(items, limit=5):
             'headline':' '.join(str(first['title']).split())[:220],
             'source':' '.join(str(first['source']).split())[:100],
             'url':str(first['url'])[:1000],
+            'source_names':' / '.join(' '.join(str(x['source']).split())[:100] for x in chosen),
+            'sources':[{'source':' '.join(str(x['source']).split())[:100],
+                        'url':str(x['url'])[:1000]} for x in chosen],
+            'sensitive':sensitive,
             'score':_traffic_number(item.get('traffic')),
         })
     ranked.sort(key=lambda x:(x['score'],x['topic']),reverse=True)
     return ranked[:limit]
 
-
 def available(items, minimum=4):
-    return len(sourced_topics(items,limit=5)) >= minimum
-
+    topics=sourced_topics(items,limit=5)
+    if len(topics) < minimum:
+        return False
+    domains={_host(s['url']) for t in topics for s in t.get('sources',[]) if _host(s['url'])}
+    return len(domains) >= 3
 
 def build_plan(items):
     topics=sourced_topics(items,limit=5)
-    if len(topics) < 4:
-        raise RuntimeError('Not enough source-linked live trends for a quality long-form brief.')
+    if not available(items):
+        raise RuntimeError('Not enough independently sourced live trends for a quality long-form brief.')
     plan=[
         studio.scene(
             'WHAT IS SURGING RIGHT NOW?',
@@ -72,7 +114,7 @@ def build_plan(items):
             ),
             studio.scene(
                 'THE CURRENT CATALYST',
-                f"One current catalyst is coverage from {t['source']}. Its headline focuses on this angle: {t['headline']}",
+                f"Current coverage from {t['source_names']} focuses on this angle: {t['headline']}",
                 'screen',t['source'].upper()[:38],'CURRENT REPORTING',duration=4.0,section=i,source=t['source']
             ),
             studio.scene(
@@ -192,7 +234,14 @@ def render(out, episode_id, trend_items):
                 proc.kill(); proc.wait(); raise
 
     thumb=out.with_suffix('.jpg'); thumbnail(thumb,topics)
-    sources='\n'.join(f"- {x['source']}: {x['url']}" for x in topics)
+    source_rows=[]; seen_urls=set()
+    for x in topics:
+        for s in x.get('sources',[]):
+            if s['url'] in seen_urls:
+                continue
+            seen_urls.add(s['url'])
+            source_rows.append(f"- {s['source']}: {s['url']}")
+    sources='\n'.join(source_rows)
     description=(
         'A source-linked RAYVAN brief built from live search-interest signals. '
         'Trend status is treated as a signal, not proof of importance.\n\nSources:\n'+sources+
@@ -203,7 +252,7 @@ def render(out, episode_id, trend_items):
         'renderer':studio.VERSION,'format':'long','genre':'current','content_id':episode_id,
         'duration':round(total,3),'resolution':[1920,1080],'fps':studio.FPS,
         'scene_count':len(plan),'topic_count':len(topics),'audio':audio_info,
-        'thumbnail':str(thumb),'sources':[x['url'] for x in topics],
+        'thumbnail':str(thumb),'sources':[s['url'] for x in topics for s in x.get('sources',[])],
     }
     out.with_suffix('.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
     print('Trend long-form complete:',json.dumps(report),flush=True)
