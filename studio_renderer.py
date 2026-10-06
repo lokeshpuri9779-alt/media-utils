@@ -1074,6 +1074,12 @@ def acquire_story_media(resolved):
             out.append(item)
             continue
         candidate=provider_adapter(item)
+        print('Premium media resolve:', json.dumps({
+            'query': item.get('query',''),
+            'required_subject_terms': item.get('required_subject_terms',[]),
+            'candidate_title': (candidate or {}).get('commons_title'),
+            'resolved': bool(candidate),
+        }, ensure_ascii=False))
         acquired=ingest_authorized_media(item,candidate) if candidate else None
         out.append(acquired or item)
     return out
