@@ -222,7 +222,15 @@ def voice_plan(plan, genre, max_duration=58):
     engine=voice_engine()
     cursor=0.0
     for s in plan:
-        samples, rate=engine.create(s['speech'],voice='af_heart',speed=.96 if genre=='current' else (.98 if genre=='fiction' else 1.0),lang='en-us')
+        spoken=str(s['speech']).strip()
+        # Expressive punctuation gives Kokoro phrase-level rises, falls and emphasis
+        # without artificial DSP pitch-shifting. Keep the user's preferred brisk pace.
+        if genre=='current':
+            if s.get('label') in {'JUST CHANGED','WHY NOW?'}:
+                spoken=spoken.rstrip('.')
+                spoken += '!' if '?' not in spoken else ''
+            spoken=spoken.replace(': ', ' — ').replace('; ', '. ')
+        samples, rate=engine.create(spoken,voice='af_heart',speed=1.09,lang='en-us')
         samples=np.asarray(samples,dtype=np.float32)
         if rate!=RATE or len(samples)==0 or not np.isfinite(samples).all():
             raise RuntimeError('Invalid narration audio; refusing to publish an incomplete video.')
