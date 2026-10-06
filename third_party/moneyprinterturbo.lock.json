@@ -1,0 +1,16 @@
+{
+  "name": "MoneyPrinterTurbo",
+  "repository": "https://github.com/harry0703/MoneyPrinterTurbo.git",
+  "github": "harry0703/MoneyPrinterTurbo",
+  "commit": "68eb5a68b93cfe338198b3dfb151f6d5ec2fe4e5",
+  "license": "MIT",
+  "install_mode": "isolated-clone",
+  "purpose": [
+    "video-composition",
+    "captions",
+    "material-pipeline",
+    "tts",
+    "workflow-reference"
+  ],
+  "policy": "Installed in an isolated environment. Astra remains the controller and publishing gate."
+}
