@@ -15,7 +15,7 @@ def snapshot(label="auto"):
     dest.mkdir(parents=True,exist_ok=False)
     ns=namespace()
     manifest={"created_at":stamp,"label":label,"namespace":ns,"files":[],"shared_files":[],"secrets_included":False}
-    sd=state_dir()
+    sd=ROOT/"state"/namespace()\n    sd.mkdir(parents=True,exist_ok=True)
     for name in CHANNEL_STATE_FILES:
         src=sd/name
         if src.exists():
@@ -35,7 +35,7 @@ def restore(path):
         raise RuntimeError("Snapshot belongs to a different Astra channel namespace")
     for name in manifest.get("files",[]):
         if name not in CHANNEL_STATE_FILES: raise RuntimeError("Unexpected snapshot state file")
-        shutil.copy2(src/name,state_dir()/name)
+        sd=ROOT/"state"/namespace(); sd.mkdir(parents=True,exist_ok=True)\n        shutil.copy2(src/name,sd/name)
     for name in manifest.get("shared_files",[]):
         if name not in SHARED_FILES: raise RuntimeError("Unexpected shared snapshot file")
         shutil.copy2(src/name,ROOT/name)
