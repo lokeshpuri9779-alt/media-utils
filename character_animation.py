@@ -55,7 +55,7 @@ REFERENCE_PROFILES = {
 def choose_character_variant(story: dict) -> str:
     genre=str(story.get("genre") or "").lower()
     tone=" ".join(str(story.get(k) or "") for k in ("tone","hook","question","answer","title")).lower()
-    if any(x in tone for x in ("lion","rabbit","cub","jungle","animal family","cartoon animal")):
+    if story.get("animal_character_story") or any(x in tone for x in ("lion","rabbit","cub","jungle","animal family","cartoon animal")):
         return "family_3d_animal_comedy"
     if any(x in tone for x in ("funny","comedy","monkey","reaction","prank","chaos")):
         return "semi_real_character_comedy"
