@@ -258,6 +258,10 @@ jobs:
         with:
           path: ~/.cache/puppeteer
           key: hyperframes-browser-v0.8.138-${{ runner.os }}-${{ runner.arch }}
+      - name: Install FFmpeg for HyperFrames
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
       - name: Build and validate HyperFrames pilots
         shell: bash
         run: |
