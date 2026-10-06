@@ -390,10 +390,28 @@ def choose_content(data, trends, now=None):
             break
     if not candidates:
         raise RuntimeError('No fresh content available; skipping rather than repeating.')
-    last = sorted(recent, key=lambda x: x.get('published_at', ''), reverse=True)[:2]
-    if len(last)==2 and last[0].get('genre')==last[1].get('genre'):
-        diverse = [c for c in candidates if c['genre'] != last[0].get('genre')]
-        if diverse: candidates = diverse
+    # Diversity gate: RAYVAN is a broad discovery brand, not a repetitive
+    # shortcut/quiz feed. Avoid recently used genres and content families.
+    ordered_recent = sorted(recent, key=lambda x: x.get('published_at', ''), reverse=True)
+    last_genres = [x.get('genre') for x in ordered_recent[:3] if x.get('genre')]
+    if last_genres:
+        # Never allow three consecutive uploads from one genre.
+        if len(last_genres) >= 2 and last_genres[0] == last_genres[1]:
+            diverse = [x for x in candidates if x.get('genre') != last_genres[0]]
+            if diverse:
+                candidates = diverse
+        # Prefer a genre not used in the previous two uploads whenever possible.
+        recent_genres = set(last_genres[:2])
+        rotated = [x for x in candidates if x.get('genre') not in recent_genres]
+        if rotated:
+            candidates = rotated
+    # Explicitly suppress Windows-shortcut fatigue: only one tech explainer
+    # may appear inside the latest five tracked uploads.
+    recent_five = ordered_recent[:5]
+    if sum(x.get('genre') == 'tech' for x in recent_five) >= 1:
+        nontech = [x for x in candidates if x.get('genre') != 'tech']
+        if nontech:
+            candidates = nontech
     for c in candidates:
         c['trend_matches'] = [t for t in trends if any(re.search(r'\b'+re.escape(k)+r'\b', t['title'], re.I) for k in c['keywords'])][:3]
     # Stage 0: rank concepts before rendering. With little clean channel evidence,
