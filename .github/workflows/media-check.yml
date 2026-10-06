@@ -43,18 +43,14 @@ on:
     - cron: '*/30 * * * *'
 
 
-# Never let two scheduled/manual production controllers race the same runtime
-# memory or upload slot. Push/PR validation remains independently cancellable.
-concurrency:
-  group: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && 'astra-production-controller' || format('astra-ci-{0}', github.ref) }}
-  cancel-in-progress: ${{ github.event_name == 'push' || github.event_name == 'pull_request' }}
-
-permissions:
-  contents: write
-
+# Serialize controller/state access so scheduled/manual runs cannot race.
+# A single group also keeps state persistence deterministic during deployments.
 concurrency:
   group: media-check-adaptive
   cancel-in-progress: false
+
+permissions:
+  contents: write
 
 jobs:
   process:
