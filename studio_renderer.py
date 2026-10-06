@@ -811,13 +811,13 @@ def render_frame(plan,t,genre,total):
         dy=max(0,(nh-H)//2)
         im=moved.crop((dx,dy,dx+W,dy+H))
     draw_visual(im,s,t,u,accent)
-    if s.get('visual')!='media':
+    if s.get('visual') not in {'media','tidal_lock'}:
         visual_style_layer(im,s,t,u,accent)
         composition_layer(im,s,t,u,accent)
         attention_layer(im,s,t,u,accent)
     transition_layer(im,s,t,u,accent)
     im=composite_cached_asset(im,s.get('resolved_asset',{}),t=t,u=u,shot=s)
-    if s.get('visual')!='media':
+    if s.get('visual') not in {'media','tidal_lock'}:
         asset_layer(im,s,t,u,accent)
         director_motion_layer(im,s,t,u,accent)
     d=ImageDraw.Draw(im)
@@ -829,7 +829,7 @@ def render_frame(plan,t,genre,total):
     d.text((72,108),'RAYVAN',font=font(23),fill=(205,213,228))
     headline_offset=int((1-ease(u/.24))*18)
     premium_visual=s.get('visual') in {'media','tidal_lock'}
-    if not premium_visual or u < 1.20:
+    if not premium_visual or u < .80:
         if index==0:
             fit_text(d,s['headline'],(72,165+headline_offset,940,318+headline_offset),size=66,fill='white',max_lines=2)
         else:
@@ -847,8 +847,8 @@ def render_frame(plan,t,genre,total):
         text=text.rstrip(' .!?')+'?'
     if s.get('countdown') and t>s['voice_start']+dur+.1: text='YOUR TURN'
     # Captions support the footage instead of becoming the footage.
-    d.rounded_rectangle((112,1460,894,1582),radius=22,fill=(8,12,23))
-    fit_text(d,text,(136,1470,870,1572),size=46,fill=(242,245,250),max_lines=2)
+    d.rounded_rectangle((126,1470,880,1578),radius=20,fill=(8,12,23))
+    fit_text(d,text,(150,1478,856,1568),size=42,fill=(242,245,250),max_lines=2)
     # Brief ink-dark cut transition rather than full-screen flashing.
     if index>0 and u<.13:
         shade=Image.new('RGB',im.size,(8,12,23)); im=Image.blend(shade,im,.55+.45*u/.13)
@@ -996,7 +996,7 @@ def composite_cached_asset(im,item,t=0.0,u=0.0,shot=None):
         # Premium media occupies most of the vertical canvas. Diagrams and full
         # celestial discs use contain-fit so important information is never cropped.
         mode=str(item.get('media_fit') or 'cover')
-        box=(24,430,1056,1320) if mode=='wide' else (40,350,1040,1370)
+        box=(24,540,1056,1180) if mode=='wide' else (40,350,1040,1370)
         bw,bh=box[2]-box[0],box[3]-box[1]
         if mode in {'contain','wide'}:
             scale=min(bw/media.width,bh/media.height)
