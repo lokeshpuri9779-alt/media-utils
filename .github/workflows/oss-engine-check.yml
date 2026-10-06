@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - 'third_party/moneyprinterturbo.lock.json'
+      - 'tests/test_faster_whisper_adapter.py'
+      - 'faster_whisper_adapter.py'
+      - 'third_party/faster-whisper.lock.json'
       - 'oss_bootstrap.py'
       - 'mpt_adapter.py'
       - 'tests/test_mpt_adapter.py'
@@ -45,4 +48,34 @@ jobs:
             .astra_oss/install-report.json
             /tmp/mpt-adapter.json
             /tmp/mpt-help.txt
+          retention-days: 7
+
+  faster-whisper:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install pinned faster-whisper repository
+        run: python oss_bootstrap.py --engine faster-whisper
+      - name: Create isolated faster-whisper environment
+        shell: bash
+        run: |
+          python -m venv .astra_oss/faster-whisper/.venv
+          .astra_oss/faster-whisper/.venv/bin/python -m pip install --upgrade pip
+          .astra_oss/faster-whisper/.venv/bin/pip install -e .astra_oss/faster-whisper
+      - name: Verify faster-whisper import
+        run: .astra_oss/faster-whisper/.venv/bin/python -c "import faster_whisper; print(faster_whisper.__file__)"
+      - name: Verify Astra caption adapter
+        run: .astra_oss/faster-whisper/.venv/bin/python faster_whisper_adapter.py > /tmp/faster-whisper-adapter.json
+      - name: Preserve faster-whisper install report
+        uses: actions/upload-artifact@v4
+        with:
+          name: faster-whisper-install-${{ github.run_id }}
+          path: |
+            .astra_oss/faster-whisper-install-report.json
+            /tmp/faster-whisper-adapter.json
           retention-days: 7
