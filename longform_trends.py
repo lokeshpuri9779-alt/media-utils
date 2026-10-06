@@ -86,54 +86,60 @@ def sourced_topics(items, limit=5):
     ranked.sort(key=lambda x:(x['score'],x['topic']),reverse=True)
     return ranked[:limit]
 
-def available(items, minimum=4):
-    topics=sourced_topics(items,limit=5)
-    if len(topics) < minimum:
-        return False
-    domains={_host(s['url']) for t in topics for s in t.get('sources',[]) if _host(s['url'])}
-    return len(domains) >= 3
+def story_candidate(items):
+    """Pick one source-deep topic for a coherent long-form story."""
+    topics=sourced_topics(items,limit=8)
+    deep=[]
+    for t in topics:
+        # Long-form needs independent reporting even when the topic is not
+        # sensitive; one headline is not enough substance for a deep story.
+        if len(t.get('sources') or []) >= 2:
+            deep.append(t)
+    return deep[0] if deep else None
+
+def available(items, minimum=1):
+    return story_candidate(items) is not None
 
 def build_plan(items):
-    topics=sourced_topics(items,limit=5)
-    if not available(items):
-        raise RuntimeError('Not enough independently sourced live trends for a quality long-form brief.')
-    plan=[
-        studio.scene(
-            'WHAT IS SURGING RIGHT NOW?',
-            'Instead of chasing random viral clips, this RAYVAN brief starts with live search-interest signals and source-linked reporting.',
-            'signal','LIVE SEARCH','SOURCE-LINKED TREND BRIEF',duration=4.5
-        )
+    t=story_candidate(items)
+    if not t:
+        raise RuntimeError('No trend has enough independent source depth for a quality long-form story.')
+    topic=t['topic']; headline=t['headline']; sources=t['source_names']
+    # One subject, multiple narrative functions. Repetition is deliberate only
+    # where it reinforces the central promise; scenes otherwise advance it.
+    beats=[
+      ('THE STORY BEHIND THE SURGE',
+       f'{topic} is drawing fresh search interest. The useful question is what actually changed, and why people are paying attention now.',
+       'signal',topic[:54].upper(),'THE PROMISE'),
+      ('WHAT CHANGED?',
+       f'Current source-linked reporting centers on this development: {headline}',
+       'screen','THE CATALYST','WHAT WE KNOW'),
+      ('WHY NOW?',
+       f'The attention spike matters only if it connects to a real development. Reporting from {sources} gives us independent context rather than treating search volume as proof.',
+       'signal','ATTENTION + EVENT','THE CONTEXT'),
+      ('THE EVIDENCE',
+       f'Two independent source domains are attached to this story. The primary reported angle is: {headline}',
+       'screen','SOURCE CHECK','VERIFY, DON’T GUESS'),
+      ('WHAT PEOPLE MAY MISS',
+       f'The headline and the search spike are not the same thing. For {topic}, separate what the sources actually report from assumptions created by the trend itself.',
+       'signal','SIGNAL ≠ CONCLUSION','THE COMPLICATION'),
+      ('WHY IT MATTERS',
+       f'This story is worth following because a measurable attention shift is now attached to source-linked reporting. The consequence is not popularity itself; it is what the underlying event may change next.',
+       'screen','CONSEQUENCE > HYPE','THE IMPLICATION'),
+      ('WHAT TO WATCH NEXT',
+       f'Watch for new verified reporting around {topic}. If later facts change the picture, the sources should lead the update—not the trend chart.',
+       'signal','NEXT DEVELOPMENT','THE OUTLOOK'),
+      ('THE TAKEAWAY',
+       f'{topic} earned attention, but attention was only the starting signal. RAYVAN follows the evidence, builds the context, and leaves uncertainty visible.',
+       'screen','STORIES BEYOND THE ORDINARY','RAYVAN'),
     ]
-    for i,t in enumerate(topics,1):
-        traffic=(f" / {t['traffic']}" if t['traffic'] else '')
-        plan.extend([
-            studio.scene(
-                f'{i:02d} / {t["topic"]}',
-                f"{t['topic']} is drawing a fresh wave of search interest in {t['region']}. Search interest tells us where attention is moving; it does not prove why.",
-                'signal',t['topic'][:54].upper(),f"{t['region'].upper()}{traffic}",duration=4.0,section=i,source=t['source']
-            ),
-            studio.scene(
-                'THE CURRENT CATALYST',
-                f"Current coverage from {t['source_names']} focuses on this angle: {t['headline']}",
-                'screen',t['source'].upper()[:38],'CURRENT REPORTING',duration=4.0,section=i,source=t['source']
-            ),
-            studio.scene(
-                'WHY THIS DESERVES ATTENTION',
-                'The useful question is not whether a topic is viral. It is whether the underlying event changes what people should understand, watch, or verify next.',
-                'signal','CONTEXT > HYPE','RAYVAN FILTER',duration=4.0,section=i,source=t['source']
-            ),
-            studio.scene(
-                'WHAT TO WATCH NEXT',
-                f"Watch the underlying story around {t['topic']} and verify new details at the linked source. RAYVAN treats the trend as a signal, not a conclusion.",
-                'screen','FOLLOW THE SOURCE',t['source'].upper()[:38],duration=4.0,section=i,source=t['source']
-            ),
-        ])
-    plan.append(studio.scene(
-        'THE SIGNAL IS ONLY THE START',
-        'Trends show where attention is moving. Good storytelling adds context, verification, and perspective. That is the standard RAYVAN will keep using.',
-        'signal','STORIES BEYOND THE ORDINARY','RAYVAN',duration=4.5,section=6,source='RAYVAN'
-    ))
-    return plan,topics
+    plan=[]
+    for i,(h,speech,visual,label,sub) in enumerate(beats,1):
+        # Minimum scene durations keep a deep story from collapsing into a
+        # Shorts-length brief; voice_plan can extend them naturally.
+        plan.append(studio.scene(h,speech,visual,label,sub,duration=12.0,
+                                 section=i,source=t['source'],topic=topic))
+    return plan,[t]
 
 
 def _background():
@@ -153,12 +159,12 @@ def frame(plan,t,total):
 
     d.rounded_rectangle((62,48,116,102),radius=15,fill=accent)
     d.text((89,75),'R',font=studio.font(34),fill=(7,13,24),anchor='mm')
-    d.text((140,62),'RAYVAN / TREND BRIEF',font=studio.font(27),fill=(224,235,247))
+    d.text((140,62),'RAYVAN / EXPLAINED',font=studio.font(27),fill=(224,235,247))
     d.text((1845,67),f'{index+1:02d} / {len(plan):02d}',font=studio.font(24),fill=accent,anchor='rm')
 
     section=int(s.get('section') or 0)
     if section:
-        d.text((86,210),f'STORY {section:02d}',font=studio.font(28),fill=accent)
+        d.text((86,210),f'CHAPTER {section:02d}',font=studio.font(28),fill=accent)
     studio.fit_text(d,s['headline'],(80,250,1180,535),size=92,fill='white',align='left',max_lines=3)
 
     d.rounded_rectangle((1240,210,1845,690),radius=34,fill=(13,27,45),outline=(48,91,124),width=3)
@@ -198,10 +204,10 @@ def frame(plan,t,total):
 def thumbnail(path, topics):
     im=_background(); d=ImageDraw.Draw(im)
     d.text((90,90),'RAYVAN',font=studio.font(44),fill=(224,235,247))
-    studio.fit_text(d,'WHAT IS\nSURGING\nRIGHT NOW?',(90,220,1080,850),size=150,fill=(114,209,255),align='left',max_lines=3)
+    studio.fit_text(d,'WHAT\nCHANGED?',(90,220,1080,850),size=170,fill=(114,209,255),align='left',max_lines=2)
     top=topics[0]['topic'].upper() if topics else 'LIVE TREND BRIEF'
     studio.fit_text(d,top,(1180,300,1820,760),size=72,fill='white',max_lines=4)
-    d.text((95,965),'SOURCE-LINKED / CONTEXT > HYPE',font=studio.font(30),fill=(175,199,219))
+    d.text((95,965),'ONE STORY / MULTIPLE SOURCES / CONTEXT > HYPE',font=studio.font(30),fill=(175,199,219))
     im.resize((1280,720),Image.Resampling.LANCZOS).save(path,'JPEG',quality=92)
 
 
@@ -243,7 +249,7 @@ def render(out, episode_id, trend_items):
             source_rows.append(f"- {s['source']}: {s['url']}")
     sources='\n'.join(source_rows)
     description=(
-        'A source-linked RAYVAN brief built from live search-interest signals. '
+        'A source-linked RAYVAN explainer built around one live story with independent reporting. '
         'Trend status is treated as a signal, not proof of importance.\n\nSources:\n'+sources+
         '\n\nRAYVAN — Stories Beyond the Ordinary.\n'
         'Original motion graphics and music; AI-assisted production and synthetic narration.'
@@ -251,9 +257,10 @@ def render(out, episode_id, trend_items):
     report={
         'renderer':studio.VERSION,'format':'long','genre':'current','content_id':episode_id,
         'duration':round(total,3),'resolution':[1920,1080],'fps':studio.FPS,
-        'scene_count':len(plan),'topic_count':len(topics),'audio':audio_info,
+        'scene_count':len(plan),'topic_count':1,'story_mode':'single-topic-deep-dive','audio':audio_info,
         'thumbnail':str(thumb),'sources':[s['url'] for x in topics for s in x.get('sources',[])],
     }
     out.with_suffix('.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
     print('Trend long-form complete:',json.dumps(report),flush=True)
-    return '5 Stories Surging Right Now | RAYVAN Trend Brief',description,report
+    topic=topics[0]['topic'] if topics else 'Current Story'
+    return f'{topic}: What Changed and Why It Matters | RAYVAN',description,report
