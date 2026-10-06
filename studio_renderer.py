@@ -1231,8 +1231,19 @@ def render_short(ch,out,still_dir=None):
 if __name__ == '__main__':
     import argparse
     parser=argparse.ArgumentParser(description='Render a Studio preview without authentication or uploads.')
-    parser.add_argument('--preview',required=True,type=Path)
+    parser.add_argument('--preview',type=Path)
+    parser.add_argument('--premium-preview',type=Path)
+    parser.add_argument('--stills-dir',type=Path)
     args=parser.parse_args()
-    demo=dict(genre='space',content_id='venus-spin',hook='ONE SPIN',
-              question='Venus rotates slowly.',answer='243 Earth days per rotation.')
-    render_short(demo,args.preview)
+    if args.premium_preview:
+        from premium_stories import catalog as premium_catalog
+        demo=premium_catalog()[0]
+        report=render_short(demo,args.premium_preview,still_dir=args.stills_dir)
+        report_path=args.premium_preview.with_suffix('.json')
+        report_path.write_text(json.dumps(report,indent=2,default=str),encoding='utf-8')
+    elif args.preview:
+        demo=dict(genre='space',content_id='venus-spin',hook='ONE SPIN',
+                  question='Venus rotates slowly.',answer='243 Earth days per rotation.')
+        render_short(demo,args.preview)
+    else:
+        parser.error('one of --preview or --premium-preview is required')
