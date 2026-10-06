@@ -1012,9 +1012,17 @@ def provider_adapter(item):
     return None
 
 def acquire_story_media(resolved):
-    """Attempt provider acquisition, preserving original Astra fallback on every failure."""
+    """Acquire external media only when a shot explicitly requests it.
+
+    Studio 5 accidentally searched Wikimedia even for procedural/illustration
+    shots, so a keyword-near but semantically unrelated public-domain image
+    could cover a purpose-built visual. Studio 6 keeps local art local.
+    """
     out=[]
     for item in resolved:
+        if item.get('strategy') != 'external-verified':
+            out.append(item)
+            continue
         candidate=provider_adapter(item)
         acquired=ingest_authorized_media(item,candidate) if candidate else None
         out.append(acquired or item)
