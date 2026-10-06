@@ -4,7 +4,8 @@ import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from channel_state import migrate_legacy\nOPS_PATH = migrate_legacy("ops_state.json")
+from channel_state import migrate_legacy
+OPS_PATH = migrate_legacy("ops_state.json")
 
 TRANSIENT_REASONS = {"backendError", "internalError", "rateLimitExceeded"}
 QUOTA_REASONS = {"uploadLimitExceeded", "quotaExceeded", "dailyLimitExceeded"}
