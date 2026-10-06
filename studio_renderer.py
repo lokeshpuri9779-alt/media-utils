@@ -113,11 +113,16 @@ def _story_plan(ch):
     if genre == 'current':
         source=(ch.get('news_source') or 'SOURCE').upper()[:28]
         region=(ch.get('trend_region') or 'GLOBAL').upper()[:18]
+        # Lead with the change/payoff immediately. Search metadata belongs after
+        # the hook; viewers should understand why the story matters before they
+        # have time to swipe away.
+        headline=' '.join(str(ch.get('news_title') or '').split())
+        hook_line=headline[:92].rstrip(' .,:;-') if headline else ch['hook']
         return [
-            scene(ch['hook'], f"{ch['hook'].title()} is drawing a fresh wave of search interest.", 'signal', 'LIVE SEARCH', region),
-            scene('WHAT CHANGED?', q, 'screen', 'TRENDING NOW', 'SEARCH INTEREST IS A SIGNAL'),
-            scene('THE CURRENT CATALYST', a, 'signal', source, 'SOURCE-LINKED CONTEXT'),
-            scene('CONTEXT > HYPE', 'The useful part is the underlying event, not the trend label. Follow the source as the story develops.', 'screen', 'VERIFY THE UPDATE', 'RAYVAN / STORIES BEYOND THE ORDINARY'),
+            scene(hook_line, a, 'signal', 'JUST CHANGED', source, duration=1.8),
+            scene('WHY NOW?', q, 'screen', 'LIVE INTEREST', region, duration=2.0),
+            scene('THE SOURCE', a, 'signal', source, 'SOURCE-LINKED CONTEXT'),
+            scene('CONTEXT > HYPE', 'Search interest is a signal, not proof. Follow the source as the story develops.', 'screen', 'VERIFY THE UPDATE', 'RAYVAN / STORIES BEYOND THE ORDINARY'),
         ]
     if genre == 'football':
         heads={'offside-position':('POSITION ≠ OFFENCE','INVOLVEMENT MATTERS'),
