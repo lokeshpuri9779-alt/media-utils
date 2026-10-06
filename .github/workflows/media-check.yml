@@ -42,9 +42,11 @@ on:
   repository_dispatch:
     types: [astra-production-promoted]
   schedule:
-    # Run the Shorts controller every 30 minutes: 48 scheduled opportunities/day.
-    # Publishing/dedupe/quota gates still decide whether an upload is allowed.
+    # Primary 30-minute cadence plus a seven-minute delayed backup. If the
+    # primary GitHub scheduler slot is dropped, the backup can recover it;
+    # Astra's pacing/state gate prevents a second upload when the primary ran.
     - cron: '*/30 * * * *'
+    - cron: '7,37 * * * *'
 
 
 # Runtime executions share one serialized group because they mutate publishing
@@ -78,6 +80,7 @@ jobs:
       ASTRA_CHANNEL: 'rayvan'
       ASTRA_INITIAL_DAILY_TARGET: '48'
       ASTRA_MAX_DAILY_TARGET: '48'
+      ASTRA_MIN_UPLOAD_INTERVAL_MINUTES: '25'
       ASTRA_FORCE_RUN: ${{ (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[upload-probe]'))) && '1' || '0' }}
       ASTRA_PROBE_ID: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[upload-probe]') && github.sha || '' }}
     steps:
