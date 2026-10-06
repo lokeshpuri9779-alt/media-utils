@@ -155,9 +155,13 @@ jobs:
             exit 0
           fi
           git commit -m "Update Astra state and performance [skip ci]"
-          TARGET_BRANCH="$(git branch --show-current)"
-          # Runtime state belongs to the checked-out production branch; push-CI
-          # state belongs to its development branch. Never rewrite main here.
+          if [ "${{ github.event_name }}" = "push" ]; then
+            TARGET_BRANCH="${{ github.ref_name }}"
+          else
+            TARGET_BRANCH="astra-production"
+          fi
+          # Runtime state belongs to astra-production; push-CI state belongs to
+          # the event branch even though checkout is detached at the tested SHA.
           for attempt in 1 2 3; do
             if git push origin "HEAD:$TARGET_BRANCH"; then
               exit 0
