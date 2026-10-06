@@ -12,6 +12,7 @@ import os
 # Disable ONNX telemetry before any import can initialize its native runtime.
 os.environ['ORT_DISABLE_TELEMETRY'] = '1'
 from pathlib import Path
+from astra_errors import CreativeReject
 import re
 import subprocess
 import tempfile
@@ -1171,13 +1172,13 @@ def asset_resolution_gate(resolved):
     blocked=[x for x in resolved if x.get('status')!='ready']
     unsafe=[x for x in resolved if not str(x.get('license','')).startswith(('original-','cc0','public-domain','authorized-'))]
     if blocked or unsafe:
-        raise RuntimeError('Asset gate rejected unresolved/unsafe media: '+json.dumps({'blocked':blocked,'unsafe':unsafe}))
+        raise CreativeReject('Asset gate rejected unresolved/unsafe media: +json.dumps({'blocked':blocked,'unsafe':unsafe}))
     return {'ready':len(resolved),'providers':sorted({x['provider'] for x in resolved}),
             'zero_cost':all(float(x.get('cost',0))==0 for x in resolved)}
 
 def creative_quality_gate(ch, plan):
     """Fail closed when a rendered story would still behave like a generic template."""
-    if not plan: raise RuntimeError('Creative gate: empty shot plan.')
+    if not plan: raise CreativeReject('Creative gate: empty shot plan.')
     assets=[p.get('director_asset','') for p in plan]
     roles=[p.get('director_role','') for p in plan]
     motions=[p.get('director_motion','') for p in plan]
@@ -1249,7 +1250,7 @@ def creative_quality_gate(ch, plan):
             'layouts':layouts,'adjacent_layout_repeats':layout_repeats,
             'hard_failures':hard_failures}
     if score<78:
-        raise RuntimeError('Creative gate rejected generic/weak visual plan: '+json.dumps(report))
+        raise CreativeReject('Creative gate rejected generic/weak visual plan: '+json.dumps(report))
     return report
 
 def _repair_plan(ch,plan,attempt):
@@ -1299,7 +1300,7 @@ def render_short(ch,out,still_dir=None):
         verified=sum(1 for x in resolved_assets if x.get('provider')=='wikimedia-commons')
         required=sum(1 for x in resolved_assets if x.get('strategy')=='external-verified')
         if not required or verified != required:
-            raise RuntimeError(
+            raise CreativeReject(
                 f'Creative gate rejected premium story: verified subject media {verified}/{required}; all editorial shots must resolve.'
             )
         asset_report['verified_subject_media']=verified
