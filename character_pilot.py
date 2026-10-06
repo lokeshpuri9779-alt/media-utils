@@ -11,6 +11,7 @@ from character_stories import pilot_story
 from character_video_engine import provider_status, generate_storyboard
 from studio_renderer import make_plan, voice_plan, score_audio
 from character_video_compositor import compose_character_short
+from generation_admission import assert_generation_admitted
 
 
 def dry_run() -> dict:
@@ -38,8 +39,18 @@ def render(output: Path) -> dict:
         voice_name=str(story.get("voice_profile") or "af_heart"),
         voice_speed=float(story.get("voice_speed") or 1.03),
     )
+    scene_seconds=[]
     for shot_spec,scene_spec in zip(storyboard,plan):
-        shot_spec["target_seconds"]=max(1.0,float(scene_spec.get("duration") or 0))
+        sec=max(1.0,float(scene_spec.get("duration") or 0))
+        shot_spec["target_seconds"]=sec
+        scene_seconds.append(sec)
+
+    admission=assert_generation_admitted(
+        provider_status(),
+        publish_mode="private",
+        scene_count=len(plan),
+        requested_scene_seconds=scene_seconds,
+    )
 
     with tempfile.TemporaryDirectory(prefix="astra_character_pilot_") as td:
         root=Path(td)
@@ -53,6 +64,7 @@ def render(output: Path) -> dict:
         "content_id":story["content_id"],
         "title":story["title"],
         "provider":provider_status(),
+        "admission":admission,
         "audio":audio_info,
         "generation":generation,
         "composition":composition,
