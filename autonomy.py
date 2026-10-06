@@ -19,7 +19,11 @@ IST_NAME = "Asia/Kolkata"
 
 POLICY_PATH = Path(__file__).with_name("learning_policy.json")
 ANALYTICS_SCHEMA = 2
-EXPECTED_CHANNEL_ID = "UCc9fHSuRnqq_C2C0DpLyRRg"
+def expected_channel_id() -> str:
+    from channel_state import profile
+    return str(profile()["expected_channel_id"])
+# Backward-compatible module attribute for existing collectors; refreshed per process.
+EXPECTED_CHANNEL_ID = expected_channel_id()
 REPORT_TZ = ZoneInfo("America/Los_Angeles")
 
 
@@ -103,7 +107,7 @@ def _query_analytics(token: str, *, start_date: str, end_date: str,
                      metrics: str, filters: str | None = None,
                      dimensions: str | None = None) -> dict:
     params = {
-        "ids": "channel==" + EXPECTED_CHANNEL_ID,
+        "ids": "channel==" + expected_channel_id(),
         "startDate": start_date,
         "endDate": end_date,
         "metrics": metrics,
@@ -307,9 +311,13 @@ def refresh_analytics(data: dict, now: datetime, force: bool = False) -> bool:
         reports = dict(window)
         entry["analytics_reports"] = reports
         entry["learning_excluded"] = vid in excluded
+        geo_metrics = "views,estimatedMinutesWatched"
+        if "https://www.googleapis.com/auth/yt-analytics-monetary.readonly" in scopes:
+            geo_metrics += ",estimatedRevenue"
         requests = [
             ("basic", metrics, None),
             ("traffic_sources", "views,estimatedMinutesWatched", "insightTrafficSourceType"),
+            ("geography", geo_metrics, "country"),
         ]
         if index < 3:
             requests.append(("retention", "audienceWatchRatio,relativeRetentionPerformance", "elapsedVideoTimeRatio"))
@@ -331,7 +339,7 @@ def refresh_analytics(data: dict, now: datetime, force: bool = False) -> bool:
                         updated += 1
                     else:
                         entry.pop("analytics", None)
-                elif name == "traffic_sources":
+                elif name in {"traffic_sources", "geography"}:
                     reports[name]["rows"] = rows
                     reports[name]["owner_views_identifiable"] = False
                 else:
@@ -347,7 +355,7 @@ def refresh_analytics(data: dict, now: datetime, force: bool = False) -> bool:
     state["failures"] = failures
     all_reports = [r for _, _, entry in eligible
                    for name, r in entry["analytics_reports"].items()
-                   if name in {"basic", "traffic_sources", "retention"} and r["status"] != "not_sampled"]
+                   if name in {"basic", "traffic_sources", "geography", "retention"} and r["status"] != "not_sampled"]
     if failures:
         state["status"] = "partial" if state["queries_succeeded"] else "error"
     elif all_reports and all(r["status"] == "available" for r in all_reports):
@@ -360,6 +368,8 @@ def refresh_analytics(data: dict, now: datetime, force: bool = False) -> bool:
     data["evolution"] = evolution_state(data)
     from distribution import distribution_state
     data["distribution"] = distribution_state(data)
+    from revenue_geo import geography_state
+    data["revenue_geography"] = geography_state(data)
     print("Evolution:", json.dumps(data["evolution"].get("diagnosis_counts", {}), ensure_ascii=False))
     print("Distribution:", json.dumps({
         "mode": data["distribution"].get("mode"),
