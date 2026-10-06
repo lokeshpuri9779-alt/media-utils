@@ -731,6 +731,10 @@ def select_content(excluded_ids=None, excluded_titles=None):
     ch = choose_content(data, trends, excluded_ids=excluded_ids, excluded_titles=excluded_titles)
     recent_entries=sorted((data.get("videos") or {}).values(),key=lambda x:x.get("published_at",""),reverse=True)
     ch["recent_formats"]=[str(x.get("creative_format") or "") for x in recent_entries if x.get("creative_format")][:3]
+    ch["recent_creative_fingerprints"]=[
+        x.get("creative_fingerprint") for x in recent_entries
+        if isinstance(x.get("creative_fingerprint"),dict)
+    ][:5]
     CONTENT_META = {k:ch.get(k) for k in ('genre','content_id','source','trend_matches','selection_reason','stage0_rank','stage0_score','winner_descendant','exploration_rate','hook','question','prompt','answer','script','news_source','news_title','secondary_source','secondary_news_source','source_count','sensitive_topic','trend_region','trend_traffic','realistic_synthetic','altered_real_event','synthetic_real_person','reused_third_party_media','transformative_commentary','copyright_unlicensed','packaging_winner_score','packaging_candidates','creative_format')}
     print('Content decision:', json.dumps(CONTENT_META, ensure_ascii=False))
     return ch
@@ -769,6 +773,8 @@ def make_short(out: Path, excluded_ids=None, excluded_titles=None) -> tuple[str,
             CONTENT_META["repair_feedback"] = director["feedback"]
             CONTENT_META["media_qa"] = director.get("media_qa")
             CONTENT_META["scene_detection"] = director.get("scene_detection")
+            CONTENT_META["creative_fingerprint"] = director.get("creative_fingerprint")
+            CONTENT_META["creative_identity"] = director.get("creative_identity")
             print("Creative Director:", json.dumps(director["director"], ensure_ascii=False))
             if not director["pass"]:
                 action = str(director["director"].get("action") or "")
@@ -788,6 +794,8 @@ def make_short(out: Path, excluded_ids=None, excluded_titles=None) -> tuple[str,
                     CONTENT_META["repair_feedback"] = director["feedback"]
                     CONTENT_META["media_qa"] = director.get("media_qa")
                     CONTENT_META["scene_detection"] = director.get("scene_detection")
+                    CONTENT_META["creative_fingerprint"] = director.get("creative_fingerprint")
+                    CONTENT_META["creative_identity"] = director.get("creative_identity")
                     CONTENT_META["director_rerendered"] = True
                     print("Creative Director rerender:", json.dumps(director["director"], ensure_ascii=False))
                 if not director["pass"]:
