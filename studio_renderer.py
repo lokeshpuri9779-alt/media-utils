@@ -198,8 +198,51 @@ def voice_engine():
     return Kokoro.from_session(session,str(root/'voices-v1.0.bin'))
 
 
+
+def direct_story(ch, plan):
+    """Automated director: derive a shot grammar from meaning, not a fixed template."""
+    topic=str(ch.get('topic') or ch.get('title') or '')
+    source_count=int(ch.get('source_count') or 0)
+    directed=[]
+    for i,raw in enumerate(plan):
+        shot=dict(raw)
+        text=' '.join(str(shot.get(k,'')) for k in ('headline','speech','label','sub'))+' '+topic
+        low=text.lower()
+        semantics=[]
+        tests=[
+          ('person',r'president|senator|minister|actor|singer|player|ceo|people|election|politic'),
+          ('map',r'country|city|state|island|border|travel|india|america|europe|asia|africa'),
+          ('clock',r'time|daylight|clock|date|year|month|week|hour|schedule'),
+          ('network',r'\bai\b|technology|software|chip|computer|phone|internet|science'),
+          ('compare',r'market|stock|price|money|company|business|sales|economy|versus|more than|less than'),
+          ('evidence',r'source|report|evidence|according|what we know|verified'),
+          ('future',r'next|watch|develop|future|comes next'),
+        ]
+        for name,pat in tests:
+            if re.search(pat,low): semantics.append(name)
+        # Narrative role controls editing rhythm. The same semantic subject can
+        # therefore be photographed/animated differently at different beats.
+        if i==0: role='cold_open'
+        elif i==len(plan)-1: role='resolution'
+        elif 'evidence' in semantics: role='proof'
+        elif 'future' in semantics: role='outlook'
+        elif i<=len(plan)//2: role='build'
+        else: role='payoff'
+        energy={'cold_open':1.0,'build':.68,'proof':.52,'payoff':.88,'outlook':.62,'resolution':.45}[role]
+        # Deterministic shot variation prevents every story from inheriting the
+        # same composition while keeping renders reproducible for CI.
+        seed=int(hashlib.sha256((topic+text+str(i)).encode()).hexdigest()[:8],16)
+        shot.update(director_role=role,director_energy=energy,
+                    director_semantics=semantics,
+                    director_camera=['push','drift','reveal','track'][seed%4],
+                    director_layout=['focus-left','focus-right','center','split'][seed%4],
+                    director_pattern_interrupt=(i>0 and role in {'proof','payoff','outlook'}),
+                    director_source_depth=source_count)
+        directed.append(shot)
+    return directed
+
 def make_plan(ch):
-    plan=_story_plan(ch)
+    plan=direct_story(ch,_story_plan(ch))
     # One relevant invitation per video, after the viewer has received the payoff.
     options={
         'space':[('WHAT SURPRISED YOU?','Which planet should we explain next?'),('MORE SPACE STORIES','Subscribe for more short space explainers.')],
@@ -509,9 +552,23 @@ def render_frame(plan,t,genre,total):
     index=next((i for i,s in enumerate(plan) if t<s['end']),len(plan)-1)
     s=plan[index];u=t-s['start']; accent=THEMES[genre][2]
     im=background(genre).copy()
+    # Camera treatment is chosen by the director per narrative beat.
+    cam=s.get('director_camera','push'); energy=float(s.get('director_energy',.5))
+    if cam in {'push','drift','track'}:
+        scale=1.0 + (0.012+0.018*energy)*ease(min(1,u/max(.4,s['duration'])))
+        if cam=='drift': scale=1.0 + .010*math.sin(t*.7)
+        nw,nh=int(W*scale),int(H*scale)
+        moved=im.resize((nw,nh),Image.Resampling.BICUBIC)
+        dx=max(0,(nw-W)//2 + (int(math.sin(t*.55)*10*energy) if cam=='track' else 0))
+        dy=max(0,(nh-H)//2)
+        im=moved.crop((dx,dy,dx+W,dy+H))
     draw_visual(im,s,t,u,accent)
     attention_layer(im,s,t,u,accent)
     d=ImageDraw.Draw(im)
+    # Director-controlled pattern interrupts are sparse and narrative, not constant.
+    if s.get('director_pattern_interrupt') and u<.16:
+        a=int(150*(1-u/.16))
+        d.line((70,600,940,600),fill=accent+(a,) if im.mode=='RGBA' else accent,width=9)
     # Consistent top bar and compact scene index.
     d.rounded_rectangle((70,130,126,186),radius=16,fill=accent)
     d.text((98,158),'L',font=font(37),anchor='mm',fill=(12,17,28))
