@@ -13029,12 +13029,35 @@
     ]
   },
   "creative_health": {
-    "consecutive_exhausted_slots": 0,
+    "consecutive_exhausted_slots": 1,
     "renderer_diagnostic_required": false,
     "last_success_at": "2026-10-07T03:29:37.721034+05:30",
     "rejected_before_success": 0,
     "last_quality_skip_at": "2026-10-07T03:44:17.628847+05:30",
-    "last_quality_skip_reason": "Creative Engine rejected all candidates; skipping rather than publishing weak/template content."
+    "last_quality_skip_reason": "Creative Engine rejected all candidates; skipping rather than publishing weak/template content.",
+    "last_failures": [
+      {
+        "content_id": "mars-blue-sunset-v7-private",
+        "title": "Why Sunsets on Mars Can Look Blue",
+        "reason": "Creative gate rejected premium story: verified subject media 2/3; all editorial shots must resolve."
+      },
+      {
+        "content_id": "mars-blue-sunset-v7-private",
+        "title": "Why Sunsets on Mars Can Look Blue",
+        "reason": "Creative gate rejected premium story: verified subject media 2/3; all editorial shots must resolve."
+      },
+      {
+        "content_id": "mars-blue-sunset-v7-private",
+        "title": "Why Sunsets on Mars Can Look Blue",
+        "reason": "Creative gate rejected premium story: verified subject media 2/3; all editorial shots must resolve."
+      },
+      {
+        "content_id": "mars-blue-sunset-v7-private",
+        "title": "Why Sunsets on Mars Can Look Blue",
+        "reason": "Creative gate rejected premium story: verified subject media 2/3; all editorial shots must resolve."
+      }
+    ],
+    "last_failure_at": "2026-10-07T03:47:05.539690+05:30"
   },
   "channel_memories": {
     "rayvan": {
