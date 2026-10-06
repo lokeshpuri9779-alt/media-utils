@@ -232,7 +232,10 @@ def voice_plan(plan, genre, max_duration=58):
                 spoken=spoken.rstrip('.')
                 spoken += '!' if '?' not in spoken else ''
             spoken=spoken.replace(': ', ' — ').replace('; ', '. ')
-        samples, rate=engine.create(spoken,voice='af_heart',speed=1.09,lang='en-us')
+        # Use Kokoro's more animated American voice for discovery/news narration.
+        # Fiction keeps the warmer voice; pacing remains the requested 1.09x.
+        voice='af_bella' if genre=='current' else 'af_heart'
+        samples, rate=engine.create(spoken,voice=voice,speed=1.09,lang='en-us')
         samples=np.asarray(samples,dtype=np.float32)
         if rate!=RATE or len(samples)==0 or not np.isfinite(samples).all():
             raise RuntimeError('Invalid narration audio; refusing to publish an incomplete video.')
@@ -298,7 +301,7 @@ def score_audio(plan, duration, genre, path):
     with wave.open(str(path),'wb') as f:
         f.setnchannels(2);f.setsampwidth(2);f.setframerate(RATE)
         f.writeframes((mixed*32767).astype('<i2').tobytes())
-    return {'peak_dbfs':round(20*math.log10(max(float(np.max(np.abs(mixed))),1e-9)),2),'voice':'Kokoro af_heart','music':'original procedural score'}
+    return {'peak_dbfs':round(20*math.log10(max(float(np.max(np.abs(mixed))),1e-9)),2),'voice':'Kokoro expressive profile','music':'original procedural score'}
 
 
 @lru_cache(maxsize=5)
