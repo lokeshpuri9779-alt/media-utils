@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-2.1"
+VERSION = "studio-2.2"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -240,7 +240,16 @@ def direct_story(ch, plan):
                     director_source_depth=source_count,
                     director_motion=['arc','scan','pulse','parallax'][seed%4],
                     director_cut_rate=round(.55 + energy*.75,2),
-                    director_caption_mode=['phrase','keyword','question'][seed%3])
+                    director_caption_mode=['phrase','keyword','question'][seed%3],
+                    director_asset=(
+                        'source-document' if role=='proof' and source_count>0 else
+                        'map-explainer' if 'map' in semantics else
+                        'mechanism-diagram' if 'network' in semantics else
+                        'comparison-graphic' if 'compare' in semantics else
+                        'time-visualization' if 'clock' in semantics else
+                        'editorial-illustration' if 'person' in semantics else
+                        'kinetic-type'
+                    ))
         directed.append(shot)
     return directed
 
@@ -552,6 +561,45 @@ def attention_layer(im,s,t,u,accent):
     return im
 
 
+
+def asset_layer(im,s,t,u,accent):
+    """Render the director's story-specific asset choice with provenance-safe fallbacks."""
+    d=ImageDraw.Draw(im,'RGBA'); kind=s.get('director_asset','kinetic-type')
+    if kind=='source-document':
+        x0,y0,x1,y1=150,610,900,1070
+        d.rounded_rectangle((x0,y0,x1,y1),30,fill=(245,247,250,235),outline=accent+(190,),width=5)
+        d.rectangle((x0+55,y0+60,x0+320,y0+84),fill=accent+(180,))
+        for j,w in enumerate((610,540,590,430,515)):
+            yy=y0+135+j*54; d.rounded_rectangle((x0+55,yy,x0+55+w,yy+16),8,fill=(40,50,65,95))
+        # Explicitly label this as a source abstraction; never fake a screenshot.
+        d.text((x0+55,y1-78),'SOURCE / EVIDENCE',font=font(28),fill=(28,38,52,220))
+    elif kind=='map-explainer':
+        pts=[(160,900),(300,710),(475,790),(620,640),(860,770)]
+        d.line(pts,fill=accent+(170,),width=9)
+        for j,(x,y) in enumerate(pts):
+            rr=18 if j not in {0,len(pts)-1} else 28
+            d.ellipse((x-rr,y-rr,x+rr,y+rr),fill=accent+(220,))
+    elif kind=='mechanism-diagram':
+        nodes=[(200,760),(440,650),(440,900),(760,760)]
+        for a,b in ((0,1),(0,2),(1,3),(2,3)):
+            d.line((*nodes[a],*nodes[b]),fill=accent+(135,),width=8)
+        for j,(x,y) in enumerate(nodes):
+            r=48 if j in {0,3} else 36
+            d.ellipse((x-r,y-r,x+r,y+r),fill=(12,22,38,220),outline=accent+(220,),width=6)
+    elif kind=='comparison-graphic':
+        for j,(name,v) in enumerate((('A',.58),('B',.88))):
+            y=720+j*190; d.text((150,y),name,font=font(45),fill=(255,255,255,225))
+            d.rounded_rectangle((240,y,900,y+70),35,fill=(30,42,60,190))
+            d.rounded_rectangle((240,y,240+int(660*v*ease(min(1,u/.7))),y+70),35,fill=accent+(190,))
+    elif kind=='time-visualization':
+        # Clock semantics are already animated by attention_layer; add a timeline cue.
+        d.line((145,1030,900,1030),fill=accent+(145,),width=7)
+        for x in (180,420,660,860): d.ellipse((x-13,1017,x+13,1043),fill=(255,255,255,220))
+    elif kind=='editorial-illustration':
+        # Abstract only: never imply a generated likeness is the real person.
+        d.text((145,1040),'EDITORIAL CONTEXT',font=font(25),fill=accent+(180,))
+    return im
+
 def director_motion_layer(im,s,t,u,accent):
     """Micro-animation selected by the director; adds depth without a reusable scene template."""
     d=ImageDraw.Draw(im,'RGBA')
@@ -587,6 +635,7 @@ def render_frame(plan,t,genre,total):
         im=moved.crop((dx,dy,dx+W,dy+H))
     draw_visual(im,s,t,u,accent)
     attention_layer(im,s,t,u,accent)
+    asset_layer(im,s,t,u,accent)
     director_motion_layer(im,s,t,u,accent)
     d=ImageDraw.Draw(im)
     # Director-controlled pattern interrupts are sparse and narrative, not constant.
