@@ -74,7 +74,7 @@ export default makeScene2D(function* (view) {
         [0, 500],
         [-330, 80],
         [0, -340],
-      ][i],
+      ][i] as [number, number],
       0.75,
       easeInOutCubic,
     );
