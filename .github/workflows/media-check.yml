@@ -42,12 +42,15 @@ on:
     # Publishing/dedupe/quota gates still decide whether an upload is allowed.
     - cron: '*/30 * * * *'
 
-permissions:
-  contents: write
 
+# Serialize controller/state access so scheduled/manual runs cannot race.
+# A single group also keeps state persistence deterministic during deployments.
 concurrency:
   group: media-check-adaptive
   cancel-in-progress: false
+
+permissions:
+  contents: write
 
 jobs:
   process:
