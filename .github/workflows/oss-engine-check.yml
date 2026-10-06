@@ -10,6 +10,9 @@ on:
       - 'oss_bootstrap.py'
       - 'mpt_adapter.py'
       - 'tests/test_mpt_adapter.py'
+      - 'third_party/pyscenedetect.lock.json'
+      - 'pyscenedetect_adapter.py'
+      - 'tests/test_pyscenedetect_adapter.py'
       - '.github/workflows/oss-engine-check.yml'
   workflow_dispatch:
 
@@ -78,4 +81,35 @@ jobs:
           path: |
             .astra_oss/faster-whisper-install-report.json
             /tmp/faster-whisper-adapter.json
+          retention-days: 7
+
+
+  pyscenedetect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install pinned PySceneDetect repository
+        run: python oss_bootstrap.py --engine pyscenedetect
+      - name: Create isolated PySceneDetect environment
+        shell: bash
+        run: |
+          python -m venv .astra_oss/PySceneDetect/.venv
+          .astra_oss/PySceneDetect/.venv/bin/python -m pip install --upgrade pip
+          .astra_oss/PySceneDetect/.venv/bin/pip install -e .astra_oss/PySceneDetect
+      - name: Verify PySceneDetect import
+        run: .astra_oss/PySceneDetect/.venv/bin/python -c "import scenedetect; print(scenedetect.__file__)"
+      - name: Verify Astra pacing adapter
+        run: .astra_oss/PySceneDetect/.venv/bin/python pyscenedetect_adapter.py > /tmp/pyscenedetect-adapter.json
+      - name: Preserve PySceneDetect install report
+        uses: actions/upload-artifact@v4
+        with:
+          name: pyscenedetect-install-${{ github.run_id }}
+          path: |
+            .astra_oss/pyscenedetect-install-report.json
+            /tmp/pyscenedetect-adapter.json
           retention-days: 7
