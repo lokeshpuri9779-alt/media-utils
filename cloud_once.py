@@ -18,6 +18,7 @@ IST = ZoneInfo("Asia/Kolkata")
 INITIAL_TARGET = int(os.environ.get("ASTRA_INITIAL_DAILY_TARGET", "9"))
 MAX_TARGET = int(os.environ.get("ASTRA_MAX_DAILY_TARGET", "24"))
 SCHEDULE_SLOT_MINUTES = max(1, int(os.environ.get("ASTRA_SCHEDULE_SLOT_MINUTES", "30")))
+MIN_UPLOAD_INTERVAL_MINUTES = max(1, int(os.environ.get("ASTRA_MIN_UPLOAD_INTERVAL_MINUTES", "25")))
 CHANNELS_PATH = Path("channels.json")
 
 def channel_profile() -> dict:
@@ -139,6 +140,8 @@ def load_state(now: datetime) -> dict:
         next_target = old_target
 
     new_state = fresh_state(today, next_target)
+    if previous.get("last_attempt_at"):
+        new_state["last_attempt_at"] = previous["last_attempt_at"]
     new_state["previous_day"] = {
         "date": previous.get("date"),
         "target": old_target,
@@ -154,6 +157,17 @@ def save_state(state: dict) -> None:
 def scheduled_attempt_due(now: datetime, state: dict) -> bool:
     if state.get("limit_hit"):
         return False
+    last_attempt = str(state.get("last_attempt_at") or "").strip()
+    if last_attempt:
+        try:
+            last_dt = datetime.fromisoformat(last_attempt)
+            if last_dt.tzinfo is None:
+                last_dt = last_dt.replace(tzinfo=IST)
+            elapsed_minutes = (now - last_dt).total_seconds() / 60
+            if elapsed_minutes < MIN_UPLOAD_INTERVAL_MINUTES:
+                return False
+        except (TypeError, ValueError):
+            pass
     target = max(1, min(MAX_TARGET, int(state.get("target", INITIAL_TARGET))))
     attempts = int(state.get("attempts", 0))
     minutes = now.hour * 60 + now.minute
@@ -898,6 +912,10 @@ def main() -> None:
         raise RuntimeError("Fresh content selection exhausted; no upload attempted.")
 
     try:
+        # Reserve the upload interval before touching YouTube so a failed or
+        # interrupted attempt cannot immediately trigger a burst retry.
+        state["last_attempt_at"] = datetime.now(IST).isoformat()
+        save_state(state)
         status, url = upload(video, title, desc, token=token)
         state["attempts"] = int(state.get("attempts", 0)) + 1
         if status == "success":
@@ -917,6 +935,7 @@ def main() -> None:
             record_event("quota_pause", {"stage": "upload", "reason": "uploadLimitExceeded"})
             print("YouTube API upload limit reported. Guardian paused further scheduled probes for today.")
     except Exception as exc:
+        state["last_attempt_at"] = state.get("last_attempt_at") or datetime.now(IST).isoformat()
         state["attempts"] = int(state.get("attempts", 0)) + 1
         state["other_failures"] = int(state.get("other_failures", 0)) + 1
         if LAST_API_ERROR is not None: state["last_api_error"] = LAST_API_ERROR
