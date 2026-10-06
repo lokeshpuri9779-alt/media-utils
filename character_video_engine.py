@@ -18,6 +18,11 @@ from pathlib import Path
 import httpx
 
 from video_provider_policy import capability, autonomous_provider_allowed
+from agnes_free_video import (
+    AgnesFreeVideoUnavailable,
+    agnes_status,
+    generate_agnes_clip,
+)
 
 from open_source_video_engine import (
     OpenSourceVideoUnavailable,
@@ -51,18 +56,13 @@ def paid_generation_enabled() -> bool:
 
 
 def provider_status() -> dict:
-    oss=open_source_provider_status()
-    remote=remote_status()
-    zero=zerogpu_status()
-    paid_ready=bool((os.environ.get("REPLICATE_API_TOKEN") or "").strip()) and paid_generation_enabled()
-    selected=oss.get("selected") or ("remote-open-source-gpu" if remote.get("ready") else ("hf-zerogpu" if zero.get("ready") else ("replicate" if paid_ready else None)))
+    agnes=agnes_status()
+    selected="agnes-free-video" if agnes.get("ready") else None
     return {
-        "mode": "open-source-first",
+        "mode": "agnes-free-only",
         "selected": selected,
-        "ready": bool(oss.get("ready")) or bool(remote.get("ready")) or paid_ready,
-        "open_source": oss,
-        "remote_open_source": remote,
-        "hf_zerogpu": zero,
+        "ready": bool(agnes.get("ready")),
+        "agnes_free_video": agnes,
         "selected_capability": capability(selected),
         "paid_fallback": {
             "provider": "replicate",
@@ -189,24 +189,21 @@ def _generate_paid_character_clip(shot: dict, output_path: str | Path, timeout_s
 
 
 def generate_character_clip(shot: dict, output_path: str | Path, timeout_seconds: int = 720) -> dict:
+    """Generate through Agnes only.
+
+    Legacy GPU/ZeroGPU/paid providers remain in source for rollback/history, but
+    this active path intentionally does not call them.
+    """
     try:
-        return generate_open_source_clip(shot, output_path)
-    except OpenSourceVideoUnavailable:
-        pass
-    try:
-        return generate_remote_clip(shot, output_path, timeout_seconds=max(timeout_seconds, 1800))
-    except RemoteGPUUnavailable:
-        pass
-    try:
-        return generate_zerogpu_clip(shot, output_path)
-    except ZeroGPUUnavailable:
-        pass
-    # Paid inference is never an autonomous choice, even when credentials exist.
-    if not autonomous_provider_allowed("replicate") and not paid_generation_enabled():
-        raise CharacterVideoUnavailable(
-            "No free/self-hosted character-video backend is ready; paid fallback remains disabled."
+        return generate_agnes_clip(
+            shot,
+            output_path,
+            timeout_seconds=max(timeout_seconds, 1800),
         )
-    return _generate_paid_character_clip(shot, output_path, timeout_seconds=timeout_seconds)
+    except AgnesFreeVideoUnavailable as exc:
+        raise CharacterVideoUnavailable(
+            "Agnes free video backend is unavailable: " + str(exc)
+        ) from exc
 
 
 def generate_storyboard(storyboard: list[dict], root: str | Path) -> tuple[list[Path], list[dict]]:
