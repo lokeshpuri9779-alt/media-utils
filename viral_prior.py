@@ -144,10 +144,15 @@ def packaging_competition(c: dict) -> dict:
         if 10 <= len(value) <= 82 and natural(value) and value.lower() not in {t.lower() for t in titles}:
             titles.append(value)
 
-    add_title(original_title)
+    # For live/current stories, prefer the publisher's actual human-written angle.
+    # Generic "What Changed?" packaging is a fallback, not the default.
+    if x.get("genre")!="current":
+        add_title(original_title)
     if 18 <= len(headline) <= 82:
         add_title(headline)
-    if pretty:
+    elif x.get("genre")=="current":
+        add_title(original_title)
+    if pretty and x.get("genre")!="current":
         add_title(f"{pretty}: What Changed?")
         add_title(f"Why Is {pretty} Getting Attention?")
         add_title(f"What Changed With {pretty}?")
@@ -158,9 +163,12 @@ def packaging_competition(c: dict) -> dict:
         if 3 <= len(value) <= 52 and value.lower() not in {h.lower() for h in hooks}:
             hooks.append(value)
     add_hook(original_hook)
-    if topic:
+    if topic and x.get("genre")!="current":
         add_hook("WHAT CHANGED?")
         add_hook("WHY NOW?")
+        add_hook(pretty.upper()[:52])
+    elif topic:
+        # Current stories should lead with the subject, not a reusable template phrase.
         add_hook(pretty.upper()[:52])
 
     if not titles:
@@ -176,6 +184,10 @@ def packaging_competition(c: dict) -> dict:
             s=story_score(candidate)
             # Packaging leads, but the winner must still promise a real payoff.
             score=.70*p + .30*s
+            # Penalize the exact generic packaging pattern that produced lame,
+            # interchangeable trend Shorts.
+            if x.get("genre")=="current" and re.search(r"(?i)what changed|getting attention|why now",title+" "+hook):
+                score-=24
             options.append({"title":candidate["title"][:100],"hook":hook,"score":round(score,2)})
     options.sort(key=lambda row: row["score"], reverse=True)
     winner=options[0]

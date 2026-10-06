@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-4.3"
+VERSION = "studio-5.0"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -119,22 +119,22 @@ def _story_plan(ch):
         low=(topic+' '+headline+' '+q+' '+a).lower()
         beats=[]
         # Dynamic story architecture: choose only beats the story can visually support.
-        beats.append(scene(hook_line,a,'story_hook','THE REVEAL',source,duration=1.8,topic=topic,story_beat='reveal'))
+        beats.append(scene(hook_line, q if q else a, 'story_hook','THE REVEAL',source,duration=1.8,topic=topic,story_beat='reveal'))
         if re.search(r'country|city|state|island|border|travel|india|america|europe|asia|africa|moon|planet|space|jupiter|venus',low):
             beats.append(scene('WHERE IS THIS HAPPENING?',q,'story_context','LOCATION / SCALE',region,duration=1.9,topic=topic,story_beat='map'))
         if re.search(r'why|because|how|technology|science|system|process|works|effect|cause|orbit|eclipse|behind',low):
-            beats.append(scene('HOW DOES IT HAPPEN?',q,'story_context','THE MECHANISM',topic[:28].upper(),duration=2.0,topic=topic,story_beat='mechanism'))
+            beats.append(scene('WHAT IS DRIVING IT?', q, 'story_context','THE MECHANISM',topic[:28].upper(),duration=2.0,topic=topic,story_beat='mechanism'))
         if re.search(r'more|less|versus|price|market|stock|record|largest|smallest|higher|lower|than',low):
             beats.append(scene('THE COMPARISON',a,'story_context','PUT IT IN PERSPECTIVE',region,duration=1.9,topic=topic,story_beat='contrast'))
         # Evidence is mandatory for current stories with source depth.
         if int(ch.get('source_count') or 0)>0:
-            beats.append(scene('WHAT WE KNOW',a,'story_evidence',source,'SOURCE-LINKED EVIDENCE',topic=topic,story_beat='evidence'))
+            beats.append(scene('WHAT THE REPORT SAYS', a, 'story_evidence',source,'SOURCE-LINKED EVIDENCE',topic=topic,story_beat='evidence'))
         if re.search(r'could|may|might|risk|impact|matter|means|people|watch|visible|change',low):
-            beats.append(scene('WHY IT MATTERS',a,'story_context','THE CONSEQUENCE',region,duration=2.0,topic=topic,story_beat='consequence'))
+            beats.append(scene('WHY IT MATTERS', a, 'story_context','THE CONSEQUENCE',region,duration=2.0,topic=topic,story_beat='consequence'))
         # Explicit uncertainty prevents trend metadata being narrated as certainty.
         beats.append(scene('WHAT IS STILL UNCLEAR?','Search interest is a signal, not proof. The verified sources define what we know so far.',
                            'story_evidence','VERIFY, THEN UPDATE',source,topic=topic,story_beat='uncertainty'))
-        beats.append(scene('THE TAKEAWAY',a,'story_outlook','WHAT TO REMEMBER','RAYVAN / STORIES BEYOND THE ORDINARY',
+        beats.append(scene('THE TAKEAWAY', 'Here is the useful part: '+a, 'story_outlook','WHAT TO REMEMBER','RAYVAN / STORIES BEYOND THE ORDINARY',
                            topic=topic,story_beat='payoff'))
         # Shorts stay tight: preserve reveal, evidence, uncertainty/payoff and choose
         # the most semantically useful middle beats instead of a fixed four-card template.
@@ -305,7 +305,7 @@ def make_plan(ch):
         'football':[('YOUR NEXT QUESTION?','Which football rule should we explain next?'),('SEND IT TO A FAN','Share this with a football fan.')],
         'fiction':[('YOUR ENDING?','How would you end this story?'),('MORE SMALL STORIES','Subscribe for another original story.')],
         'challenge':[('YOUR ANSWER?','Tell us your answer in the comments.'),('CHALLENGE A FRIEND','Share this challenge with a friend.')],
-        'current':[('FOLLOW THE STORY','Subscribe to RAYVAN for the next verified update.'),('GO DEEPER','Watch the related RAYVAN story when it is linked below.')],
+        'current':[('WHAT NEXT?','The next verified development is the part worth watching.'),('THE BOTTOM LINE','Keep the source, not the hype, in mind.')],
     }
     genre=ch.get('genre','challenge')
     idx=max(-120,min(120,int(hashlib.sha256(ch.get('content_id',ch['question']).encode()).hexdigest()[:8],16)))%2
@@ -1095,6 +1095,18 @@ def creative_quality_gate(ch, plan):
     if len(set(layouts))>=3: score+=6
     elif len(set(layouts))<2 and len(layouts)>=3: score-=14
     if layout_repeats>1: score-=min(12,layout_repeats*4)
+    # A high numeric diversity score must not pass a semantically absurd plan.
+    topic_low=' '.join(str(ch.get(k) or '') for k in ('topic','question','answer','news_title')).lower()
+    sports=bool(re.search(r'cricket|football|soccer|tennis|batter|bowler|innings|match|player|samson',topic_low))
+    space=bool(re.search(r'planet|moon|orbit|eclipse|space|jupiter|venus|mars|nasa',topic_low))
+    if sports and any(a in {'map-explainer','mechanism-diagram'} for a in assets):
+        score-=22
+    if sports and 'source-document' not in assets:
+        score-=18
+    if space and 'map-explainer' in assets:
+        score-=12
+    # Repetition that looks like a template is a hard creative smell.
+    if adjacent_repeats>=3: score-=24
     # Cold open must have a deliberate visual language, not an empty/default frame.
     if styles and styles[0] in {'cel-shaded','stylized-cgi','mixed-media'}: score+=5
     score=max(0,min(100,score))
@@ -1102,7 +1114,7 @@ def creative_quality_gate(ch, plan):
             'semantics':sorted(semantics),'generic_ratio':round(generic_ratio,2),
             'styles':styles,'adjacent_style_repeats':adjacent_repeats,
             'layouts':layouts,'adjacent_layout_repeats':layout_repeats}
-    if score<65:
+    if score<78:
         raise RuntimeError('Creative gate rejected generic/weak visual plan: '+json.dumps(report))
     return report
 
@@ -1117,10 +1129,14 @@ def _repair_plan(ch,plan,attempt):
         if x.get('story_beat')=='cta':
             repaired.append(x); continue
         beat=x.get('story_beat','')
+        topic_low=' '.join(str(ch.get(k) or '') for k in ('topic','question','answer','news_title')).lower()
+        sports=bool(re.search(r'cricket|football|soccer|tennis|batter|bowler|innings|match|player|samson',topic_low))
         preferred={'map':'map-explainer','mechanism':'mechanism-diagram','contrast':'comparison-graphic',
                    'evidence':'source-document','uncertainty':'source-document',
                    'reveal':'editorial-illustration','consequence':'editorial-illustration',
                    'payoff':'editorial-illustration'}.get(beat,assets[(i+attempt)%len(assets)])
+        if sports and preferred in {'map-explainer','mechanism-diagram'}:
+            preferred='editorial-illustration' if beat!='evidence' else 'source-document'
         x['director_asset']=preferred
         x['director_style']=styles[(i+attempt)%len(styles)]
         x['director_layout']=layouts[(i+attempt)%len(layouts)]
