@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-3.2"
+VERSION = "studio-4.0"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -113,17 +113,37 @@ def _story_plan(ch):
     if genre == 'current':
         source=(ch.get('news_source') or 'SOURCE').upper()[:28]
         region=(ch.get('trend_region') or 'GLOBAL').upper()[:18]
-        # Lead with the change/payoff immediately. Search metadata belongs after
-        # the hook; viewers should understand why the story matters before they
-        # have time to swipe away.
         headline=' '.join(str(ch.get('news_title') or '').split())
         hook_line=headline[:92].rstrip(' .,:;-') if headline else ch['hook']
-        return [
-            scene(hook_line, a, 'story_hook', 'JUST CHANGED', source, duration=1.8, topic=ch.get('topic','')),
-            scene('WHY DOES IT MATTER?', q, 'story_context', 'THE CONTEXT', region, duration=2.0, topic=ch.get('topic','')),
-            scene('WHAT WE KNOW', a, 'story_evidence', source, 'SOURCE-LINKED EVIDENCE', topic=ch.get('topic','')),
-            scene('WHAT COMES NEXT?', 'Search interest is a signal, not proof. Follow the source as the story develops.', 'story_outlook', 'KEEP WATCHING', 'RAYVAN / STORIES BEYOND THE ORDINARY', topic=ch.get('topic','')),
-        ]
+        topic=' '.join(str(ch.get('topic') or headline or '').split())
+        low=(topic+' '+headline+' '+q+' '+a).lower()
+        beats=[]
+        # Dynamic story architecture: choose only beats the story can visually support.
+        beats.append(scene(hook_line,a,'story_hook','THE REVEAL',source,duration=1.8,topic=topic,story_beat='reveal'))
+        if re.search(r'country|city|state|island|border|travel|india|america|europe|asia|africa|moon|planet|space|jupiter|venus',low):
+            beats.append(scene('WHERE IS THIS HAPPENING?',q,'story_context','LOCATION / SCALE',region,duration=1.9,topic=topic,story_beat='map'))
+        if re.search(r'why|because|how|technology|science|system|process|works|effect|cause|orbit|eclipse|behind',low):
+            beats.append(scene('HOW DOES IT HAPPEN?',q,'story_context','THE MECHANISM',topic[:28].upper(),duration=2.0,topic=topic,story_beat='mechanism'))
+        if re.search(r'more|less|versus|price|market|stock|record|largest|smallest|higher|lower|than',low):
+            beats.append(scene('THE COMPARISON',a,'story_context','PUT IT IN PERSPECTIVE',region,duration=1.9,topic=topic,story_beat='contrast'))
+        # Evidence is mandatory for current stories with source depth.
+        if int(ch.get('source_count') or 0)>0:
+            beats.append(scene('WHAT WE KNOW',a,'story_evidence',source,'SOURCE-LINKED EVIDENCE',topic=topic,story_beat='evidence'))
+        if re.search(r'could|may|might|risk|impact|matter|means|people|watch|visible|change',low):
+            beats.append(scene('WHY IT MATTERS',a,'story_context','THE CONSEQUENCE',region,duration=2.0,topic=topic,story_beat='consequence'))
+        # Explicit uncertainty prevents trend metadata being narrated as certainty.
+        beats.append(scene('WHAT IS STILL UNCLEAR?','Search interest is a signal, not proof. The verified sources define what we know so far.',
+                           'story_evidence','VERIFY, THEN UPDATE',source,topic=topic,story_beat='uncertainty'))
+        beats.append(scene('THE TAKEAWAY',a,'story_outlook','WHAT TO REMEMBER','RAYVAN / STORIES BEYOND THE ORDINARY',
+                           topic=topic,story_beat='payoff'))
+        # Shorts stay tight: preserve reveal, evidence, uncertainty/payoff and choose
+        # the most semantically useful middle beats instead of a fixed four-card template.
+        if len(beats)>6:
+            essential={0,len(beats)-3,len(beats)-2,len(beats)-1}
+            middle=[i for i in range(1,len(beats)-3)]
+            chosen=sorted(essential | set(middle[:max(0,6-len(essential))]))
+            beats=[beats[i] for i in chosen]
+        return beats
     if genre == 'football':
         heads={'offside-position':('POSITION ≠ OFFENCE','INVOLVEMENT MATTERS'),
                'throw-offside':('DIRECT FROM A THROW-IN?','NO OFFSIDE OFFENCE'),
@@ -262,7 +282,9 @@ def direct_story(ch, plan):
     return directed
 
 def make_plan(ch):
-    plan=direct_story(ch,_story_plan(ch))
+    base=_story_plan(ch)
+    # Append CTA before direction so it receives its own role/style/layout rather
+    # than inheriting metadata from the previous shot.
     # One relevant invitation per video, after the viewer has received the payoff.
     options={
         'space':[('WHAT SURPRISED YOU?','Which planet should we explain next?'),('MORE SPACE STORIES','Subscribe for more short space explainers.')],
@@ -275,10 +297,10 @@ def make_plan(ch):
     genre=ch.get('genre','challenge')
     idx=int(hashlib.sha256(ch.get('content_id',ch['question']).encode()).hexdigest()[:8],16)%2
     headline,speech=options[genre][idx]
-    last=dict(plan[-1]);last.update(headline=headline,speech=speech,min_duration=2.0)
+    last=dict(base[-1]);last.update(headline=headline,speech=speech,min_duration=2.0,story_beat='cta')
     last.pop('countdown',None);last.pop('answer',None)
-    plan.append(last)
-    return plan
+    base.append(last)
+    return direct_story(ch,base)
 
 
 def voice_plan(plan, genre, max_duration=58):
