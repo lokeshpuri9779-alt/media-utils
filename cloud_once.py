@@ -959,6 +959,8 @@ def record_video(video_id: str, title: str) -> None:
     item.setdefault("published_at", datetime.now(IST).isoformat())
     item.setdefault("history", [])
     item.update(CONTENT_META)
+    from channel_state import channel_key
+    item["channel_key"] = channel_key()
     save_performance(data)
 
     # Maintain a public, zero-cost backlink feed inside the GitHub repo.
@@ -1049,6 +1051,16 @@ def refresh_research(token, force=False):
         changed=True
     if manage_community(data,now):
         changed=True
+    from channel_memory import refresh_channel_memory
+    memory = refresh_channel_memory(data)
+    data["active_channel_learning"] = {
+        "channel_key": memory["channel_key"],
+        "video_count": memory["video_count"],
+        "optimization_policy": memory["optimization_policy"],
+        "retention_patterns": memory["evolution"].get("retention_patterns"),
+        "winner_blueprints": memory["evolution"].get("winner_blueprints"),
+    }
+    changed=True
     if changed:
         save_performance(data)
 
