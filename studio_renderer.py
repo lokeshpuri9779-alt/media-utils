@@ -1015,7 +1015,7 @@ def provider_adapter(item):
         q=' '.join(q.split())[:160] or raw_q
         api='https://commons.wikimedia.org/w/api.php'
         params={'action':'query','generator':'search','gsrsearch':q,'gsrnamespace':'6',
-                'gsrlimit':'12','prop':'imageinfo','iiprop':'url|extmetadata',
+                'gsrlimit':'20','prop':'imageinfo','iiprop':'url|extmetadata',
                 'iiurlwidth':'1400','format':'json','origin':'*'}
         url=api+'?'+urllib.parse.urlencode(params)
         req=urllib.request.Request(url,headers={'User-Agent':'RAYVAN-Astra/1.0 (automated media research)'})
@@ -1035,10 +1035,15 @@ def provider_adapter(item):
                 return html.unescape(re.sub('<[^>]+>',' ',str(v))).strip()
             object_name=mv('ObjectName')
             subject_text=(title+' '+object_name).lower()
+            subject_tokens=set(re.findall(r'[a-z0-9]+',subject_text))
             def term_match(term):
+                # Exact token matching prevents Earth's "Moon" from matching
+                # unrelated titles that merely contain "moons".
                 words=[w for w in re.findall(r'[a-z0-9]+',term) if w]
-                return bool(words) and all(w in subject_text for w in words)
+                return bool(words) and all(w in subject_tokens for w in words)
             if not any(term_match(term) for term in required):
+                continue
+            if any(bad in subject_tokens for bad in {'fictional','extrasolar','exoplanet'}):
                 continue
             license_short=mv('LicenseShortName').lower()
             usage=mv('UsageTerms').lower()
