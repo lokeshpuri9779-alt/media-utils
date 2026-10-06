@@ -67,7 +67,81 @@ jobs:
           key: astra-faster-whisper-tiny-en-v1
       - name: Run one private production pilot
         id: controller
-        run: python cloud_once.py
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import cloud_once as c
+          from premium_stories import catalog
+          from distribution import branded_description, optimize_title
+          from revenue_geo import geography_state
+          from ypp_safety import enforce
+
+          story = next(x for x in catalog() if x.get("content_id") == "iss-sixteen-sunrises-v1")
+          if c.content_already_published(story["content_id"]):
+              raise RuntimeError("Pilot story is already present in persistent history; refusing duplicate.")
+
+          fields = (
+              "genre","content_id","source","trend_matches","selection_reason","stage0_rank",
+              "stage0_score","winner_descendant","exploration_rate","hook","question","prompt",
+              "answer","script","news_source","news_title","secondary_source",
+              "secondary_news_source","source_count","sensitive_topic","trend_region",
+              "trend_traffic","realistic_synthetic","altered_real_event",
+              "synthetic_real_person","reused_third_party_media","transformative_commentary",
+              "copyright_unlicensed","packaging_winner_score","packaging_candidates"
+          )
+          c.CONTENT_META = {k: story.get(k) for k in fields}
+          c.CONTENT_META["selection_reason"] = "controlled-private-premium-pilot"
+
+          work = Path("/tmp/astra-private-pilot")
+          work.mkdir(parents=True, exist_ok=True)
+          video = work / "clip.mp4"
+
+          # Keep Astra's normal render, Creative Director, measured media QA,
+          # retention repair, and rejection behavior; only candidate selection
+          # is pinned for this one controlled private pilot.
+          original_select = c.select_content
+          def pilot_select(excluded_ids=None, excluded_titles=None):
+              return dict(story)
+          c.select_content = pilot_select
+          try:
+              title, desc = c.make_short(video)
+          finally:
+              c.select_content = original_select
+
+          perf = c.load_performance()
+          desc, distribution_plan = branded_description(
+              desc, perf, genre=str(c.CONTENT_META.get("genre") or "unknown"), fmt="short"
+          )
+          title = optimize_title(title, distribution_plan, c.CONTENT_META)
+          c.CONTENT_META["distribution_plan"] = distribution_plan
+          c.CONTENT_META["revenue_geography"] = geography_state(perf)
+          ypp = enforce(title, desc, c.CONTENT_META, perf)
+          c.CONTENT_META["ypp_safety"] = ypp
+          c.CONTENT_META["ai_disclosure_required"] = bool(ypp.get("ai_disclosure_required"))
+
+          token = c.access_token()
+          c.verify_channel(token)
+          if c.live_channel_duplicate(token, title, story["content_id"]):
+              raise RuntimeError("Pilot blocked by live YouTube duplicate guard.")
+
+          desc += "\nASTRA-ID:" + story["content_id"]
+          status, url = c.upload(video, title, desc, token=token)
+          if status != "success":
+              raise RuntimeError("Pilot upload did not succeed: " + status)
+
+          video_id = url.rsplit("=", 1)[-1]
+          c.record_video(video_id, title)
+          print("PRIVATE_PILOT_SUCCESS", json.dumps({
+              "url": url,
+              "title": title,
+              "content_id": story["content_id"],
+              "visibility": c.CONTENT_META.get("visibility"),
+              "director": c.CONTENT_META.get("creative_director"),
+              "media_qa": c.CONTENT_META.get("media_qa"),
+          }, ensure_ascii=False))
+          PY
       - name: Save adaptive state
         if: always()
         shell: bash
