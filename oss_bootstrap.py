@@ -1,24 +1,44 @@
 from __future__ import annotations
 
+import argparse
 import json
 import os
 from pathlib import Path
 import shutil
 import subprocess
-import sys
 
 ROOT = Path(__file__).resolve().parent
-LOCK = ROOT / "third_party" / "moneyprinterturbo.lock.json"
+LOCK_DIR = ROOT / "third_party"
 
 
 def run(*args: str, cwd: Path | None = None) -> None:
     subprocess.run(args, cwd=cwd, check=True)
 
 
-def install_moneyprinterturbo(destination: Path) -> dict:
-    lock = json.loads(LOCK.read_text(encoding="utf-8"))
-    repo = lock["repository"]
-    commit = lock["commit"]
+def _load_lock(name: str) -> dict:
+    path = LOCK_DIR / f"{name}.lock.json"
+    if not path.exists():
+        raise FileNotFoundError(path)
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _license_ok(text: str, expected: str) -> bool:
+    low = text.lower()
+    if expected == "MIT":
+        return "mit license" in low or "permission is hereby granted" in low
+    if expected == "Apache-2.0":
+        return "apache license" in low and "version 2.0" in low
+    if expected.startswith("BSD"):
+        return "redistribution and use" in low
+    return False
+
+
+def install_pinned_engine(lock_name: str, destination: Path) -> dict:
+    lock = _load_lock(lock_name)
+    repo = str(lock["repository"])
+    commit = str(lock["commit"])
+    expected_license = str(lock["license"])
+
     if destination.exists():
         shutil.rmtree(destination)
     destination.parent.mkdir(parents=True, exist_ok=True)
@@ -32,23 +52,41 @@ def install_moneyprinterturbo(destination: Path) -> dict:
     if actual != commit:
         raise RuntimeError(f"upstream commit mismatch: {actual} != {commit}")
 
-    license_text = (destination / "LICENSE").read_text(encoding="utf-8", errors="ignore")
-    if "MIT License" not in license_text:
-        raise RuntimeError("MoneyPrinterTurbo license check failed.")
+    license_path = destination / "LICENSE"
+    if not license_path.exists():
+        raise RuntimeError(f"{lock['name']} has no LICENSE file at pinned commit")
+    license_text = license_path.read_text(encoding="utf-8", errors="ignore")
+    if not _license_ok(license_text, expected_license):
+        raise RuntimeError(f"{lock['name']} license check failed for {expected_license}")
 
     return {
         "name": lock["name"],
         "path": str(destination),
+        "repository": repo,
         "commit": actual,
-        "license": lock["license"],
+        "license": expected_license,
         "isolated": True,
     }
 
 
 def main() -> int:
-    target = Path(os.environ.get("ASTRA_OSS_DIR", ROOT / ".astra_oss")) / "MoneyPrinterTurbo"
-    report = install_moneyprinterturbo(target)
-    report_path = target.parent / "install-report.json"
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--engine",
+        default="moneyprinterturbo",
+        choices=("moneyprinterturbo", "faster-whisper"),
+    )
+    args = parser.parse_args()
+
+    base = Path(os.environ.get("ASTRA_OSS_DIR", ROOT / ".astra_oss"))
+    folder = {
+        "moneyprinterturbo": "MoneyPrinterTurbo",
+        "faster-whisper": "faster-whisper",
+    }[args.engine]
+    target = base / folder
+    report = install_pinned_engine(args.engine, target)
+
+    report_path = base / f"{args.engine}-install-report.json"
     report_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
     print(json.dumps(report, indent=2))
     return 0
