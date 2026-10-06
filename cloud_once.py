@@ -358,12 +358,23 @@ def content_catalog():
                  prompt='ORIGINAL FICTION' if g=='fiction' else 'THE SHORT EXPLANATION')
             for g,i,h,q,a,t,s,k in rows]
 
+def _xml_local(tag: str) -> str:
+    return str(tag or '').rsplit('}', 1)[-1]
+
+def _xml_text(node, local: str) -> str:
+    for child in node.iter():
+        if _xml_local(child.tag) == local:
+            return (child.text or '').strip()
+    return ''
+
 def fetch_trends(now=None):
     from email.utils import parsedate_to_datetime
     import xml.etree.ElementTree as ET
     now = now or datetime.now(IST)
     results = []
     # Search interest is a topic signal, never evidence for a factual claim.
+    # Google Trends RSS also carries source-linked news metadata; Astra uses
+    # those links only as context and never treats trend rank as proof.
     for region in __import__("revenue_geo").trend_regions(load_performance()):
         try:
             with httpx.Client(timeout=15, follow_redirects=True) as client:
@@ -377,14 +388,67 @@ def fetch_trends(now=None):
                     date = parsedate_to_datetime(item.findtext('pubDate', ''))
                     age = (now-date).total_seconds()
                     title = item.findtext('title', '').strip()[:160]
-                    if title and 0 <= age <= 48*3600:
-                        results.append({'title': title, 'region': region, 'at': date.isoformat()})
+                    if not title or not 0 <= age <= 48*3600:
+                        continue
+                    news=[]
+                    for node in item.iter():
+                        if _xml_local(node.tag) != 'news_item':
+                            continue
+                        headline=_xml_text(node,'news_item_title')[:240]
+                        url=_xml_text(node,'news_item_url')[:1000]
+                        source=_xml_text(node,'news_item_source')[:120]
+                        if headline and url and source:
+                            news.append({'title':headline,'url':url,'source':source})
+                    results.append({
+                        'title': title,
+                        'region': region,
+                        'at': date.isoformat(),
+                        'traffic': _xml_text(item,'approx_traffic')[:40],
+                        'news': news[:3],
+                    })
                 except (ValueError, TypeError, OverflowError):
                     continue
         except (httpx.HTTPError, ValueError, ET.ParseError):
             print('Trend feed unavailable:', region, '- using verified evergreen topics.')
     print('Fresh search-interest signals:', len(results))
     return results
+
+def trend_candidates(trends):
+    """Create source-linked current-affairs candidates from live trend metadata.
+
+    These are deliberately conservative: no article body is copied, no trend is
+    presented as fact, and unsourced trend rows are ignored.
+    """
+    import hashlib
+    blocked = re.compile(r'\b(porn|xxx|casino|betting|gambling)\b', re.I)
+    out=[]; seen=set()
+    for t in trends or []:
+        topic=' '.join(str(t.get('title') or '').split()).strip()
+        if len(topic) < 3 or blocked.search(topic):
+            continue
+        news=[x for x in (t.get('news') or []) if x.get('title') and x.get('url') and x.get('source')]
+        if not news:
+            continue
+        key=normalize_content_text(topic)
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        n=news[0]
+        headline=' '.join(str(n['title']).split())[:180]
+        source=' '.join(str(n['source']).split())[:80]
+        cid='trend-'+hashlib.sha256((topic+'|'+headline).encode()).hexdigest()[:16]
+        hook=topic.upper()[:52]
+        question=f"{topic} is drawing a fresh wave of search interest. What changed?"
+        answer=f"One current catalyst is coverage from {source}: {headline}. The trend is a signal, not proof; follow the source as the story develops."
+        out.append({
+            'genre':'current','kind':'explainer','content_id':cid,'hook':hook,
+            'question':question,'prompt':'WHY IT MATTERS','answer':answer,
+            'title':f"Why {topic} Is Trending Right Now #Shorts"[:100],
+            'source':str(n['url']),'keywords':[topic.lower()],
+            'trend_matches':[t],'news_source':source,'news_title':headline,
+            'trend_region':str(t.get('region') or ''),'trend_traffic':str(t.get('traffic') or ''),
+        })
+    return out
 
 def genre_scores(videos):
     """Raw public views cannot establish audience interest or exclude owner tests."""
@@ -405,8 +469,10 @@ def choose_content(data, trends, now=None, excluded_ids=None, excluded_titles=No
     used.update(str(x) for x in (excluded_ids or set()) if x)
     used_titles = {normalize_content_text(t) for t in (excluded_titles or set()) if t}
     used_titles.update(normalize_content_text(v.get('title')) for v in videos.values() if v.get('title'))
-    candidates = [c for c in content_catalog() if c['content_id'] not in used
-                  and normalize_content_text(c['title']) not in used_titles]
+    dynamic = [c for c in trend_candidates(trends) if c['content_id'] not in used
+               and normalize_content_text(c['title']) not in used_titles]
+    candidates = dynamic + [c for c in content_catalog() if c['content_id'] not in used
+                            and normalize_content_text(c['title']) not in used_titles]
     # Premium RAYVAN policy: procedural quizzes/riddles are deliberately not
     # injected into production. Capacity is allowed to go unused rather than
     # filling the channel with game-like or juvenile challenge cards.
@@ -456,7 +522,8 @@ def choose_content(data, trends, now=None, excluded_ids=None, excluded_titles=No
     if not candidates:
         raise RuntimeError('Novelty gate rejected repetitive concepts; skipping this slot rather than publishing filler.')
     for c in candidates:
-        c['trend_matches'] = [t for t in trends if any(re.search(r'\b'+re.escape(k)+r'\b', t['title'], re.I) for k in c['keywords'])][:3]
+        if not c.get('trend_matches'):
+            c['trend_matches'] = [t for t in trends if any(re.search(r'\b'+re.escape(k)+r'\b', t['title'], re.I) for k in c['keywords'])][:3]
 
     # Trend-led lane: when a verified live signal maps to a sourced RAYVAN
     # subject, prefer it decisively. Do not pretend an unrelated canned topic
@@ -507,9 +574,13 @@ def select_content(excluded_ids=None, excluded_titles=None):
     global CONTENT_META
     from audience_research import research_signals
     data = load_performance()
-    trends = fetch_trends() + research_signals(data, datetime.now(IST))
+    now = datetime.now(IST)
+    snap = data.get('trend_snapshot') or {}
+    trends = list(snap.get('items') or []) + research_signals(data, now)
+    if not trends:
+        trends = fetch_trends(now) + research_signals(data, now)
     ch = choose_content(data, trends, excluded_ids=excluded_ids, excluded_titles=excluded_titles)
-    CONTENT_META = {k:ch.get(k) for k in ('genre','content_id','source','trend_matches','selection_reason','stage0_rank','stage0_score','winner_descendant','exploration_rate','hook','question','prompt','answer','script','realistic_synthetic','altered_real_event','synthetic_real_person','reused_third_party_media','transformative_commentary','copyright_unlicensed')}
+    CONTENT_META = {k:ch.get(k) for k in ('genre','content_id','source','trend_matches','selection_reason','stage0_rank','stage0_score','winner_descendant','exploration_rate','hook','question','prompt','answer','script','news_source','news_title','trend_region','trend_traffic','realistic_synthetic','altered_real_event','synthetic_real_person','reused_third_party_media','transformative_commentary','copyright_unlicensed')}
     print('Content decision:', json.dumps(CONTENT_META, ensure_ascii=False))
     return ch
 
@@ -751,6 +822,17 @@ def refresh_research(token, force=False):
     data=load_performance()
     now=datetime.now(IST)
     changed=collect(token,data,now,force=force)
+    snap=data.get('trend_snapshot') or {}
+    stale=True
+    try:
+        stale=(now-datetime.fromisoformat(snap.get('checked_at',''))).total_seconds() > 45*60
+    except (ValueError,TypeError):
+        stale=True
+    if force or stale:
+        items=fetch_trends(now)
+        if items:
+            data['trend_snapshot']={'checked_at':now.isoformat(),'items':items[:120]}
+            changed=True
     if refresh_analytics(data,now,force=force):
         changed=True
     if refresh_reach(data,now,force=force):
@@ -764,7 +846,8 @@ def refresh_research(token, force=False):
 def make_long(out, episode_id):
     global CONTENT_META
     from longform import render
-    title,description,report=render(out, episode_id=episode_id)
+    trend_items=((load_performance().get('trend_snapshot') or {}).get('items') or [])
+    title,description,report=render(out, episode_id=episode_id, trend_items=trend_items)
     CONTENT_META={k:report[k] for k in ('renderer','format','genre','content_id','duration','scene_count')}
     from longform import SOURCES
     CONTENT_META['source']='; '.join(SOURCES)

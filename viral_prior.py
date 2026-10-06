@@ -33,7 +33,7 @@ def score_candidate(c: dict, *, trend_matches=None, channel_score=None) -> dict:
     # RAYVAN should feel like a premium discovery/storytelling brand, not a
     # generic engagement-farm. Reward sourced discovery and original narrative;
     # strongly penalize game/challenge mechanics if they ever re-enter a pool.
-    originality=82 if c.get("genre") in {"fiction","space","football"} else 70
+    originality=82 if c.get("genre") in {"fiction","space","football","current"} else 70
     if c.get("source"): originality += 6
     if c.get("genre") == "challenge" or c.get("content_id","").startswith("quiz-"): originality=25
 

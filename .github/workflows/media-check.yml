@@ -18,6 +18,7 @@ on:
       - 'studio_renderer.py'
       - 'audience_research.py'
       - 'longform.py'
+      - 'longform_trends.py'
       - 'longform_challenges.py'
       - 'autonomy.py'
       - 'reach_reports.py'
@@ -107,7 +108,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Verify Python modules
         if: github.event_name == 'push' || github.event_name == 'pull_request'
-        run: python -m py_compile cloud_once.py channel_state.py revenue_geo.py viral_prior.py evolution.py backup_state.py distribution.py ops_guardian.py ypp_safety.py autonomy.py reach_reports.py longform.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py
+        run: python -m py_compile cloud_once.py channel_state.py revenue_geo.py viral_prior.py evolution.py backup_state.py distribution.py ops_guardian.py ypp_safety.py autonomy.py reach_reports.py longform.py longform_trends.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py
       - name: Verify Studio layouts and audio
         if: github.event_name == 'push' || github.event_name == 'pull_request'
         run: python -m unittest discover -s tests -p 'test_*.py' -v
