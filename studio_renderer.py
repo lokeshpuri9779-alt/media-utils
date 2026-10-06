@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-3.0"
+VERSION = "studio-3.1"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -671,6 +671,19 @@ def director_motion_layer(im,s,t,u,accent):
             d.ellipse((x,650+j*70,x+16,666+j*70),fill=accent+(55+j*18,))
     return im
 
+
+def transition_layer(im,s,t,u,accent):
+    """Narrative-energy transition treatment concentrated at scene entry/exit."""
+    d=ImageDraw.Draw(im,'RGBA'); energy=float(s.get('director_energy',.5))
+    if u<.16:
+        p=ease(u/.16); w=int((1-p)*W*.42*energy)
+        if w>0:
+            d.polygon([(0,0),(w,0),(max(0,w-120),H),(0,H)],fill=accent+(max(0,int(95*(1-p))),))
+    elif u>.88 and s.get('director_role') in {'proof','payoff','outlook'}:
+        p=ease((u-.88)/.12); y=int(H-(p*120))
+        d.rectangle((0,y,W,H),fill=(255,255,255,max(0,int(22*(1-p)))))
+    return im
+
 def render_frame(plan,t,genre,total):
     index=next((i for i,s in enumerate(plan) if t<s['end']),len(plan)-1)
     s=plan[index];u=t-s['start']; accent=THEMES[genre][2]
@@ -687,6 +700,7 @@ def render_frame(plan,t,genre,total):
         im=moved.crop((dx,dy,dx+W,dy+H))
     draw_visual(im,s,t,u,accent)
     visual_style_layer(im,s,t,u,accent)
+    transition_layer(im,s,t,u,accent)
     attention_layer(im,s,t,u,accent)
     im=composite_cached_asset(im,s.get('resolved_asset',{}))
     asset_layer(im,s,t,u,accent)
@@ -969,9 +983,17 @@ def creative_quality_gate(ch, plan):
         if not semantics: score-=18
     generic_ratio=(sum(a=='kinetic-type' for a in assets)/max(1,len(assets)))
     if generic_ratio>.60: score-=18
+    styles=[p.get('director_style','') for p in plan]
+    adjacent_repeats=sum(1 for a,b in zip(styles,styles[1:]) if a and a==b)
+    if len(set(styles))>=3: score+=8
+    elif len(set(styles))<2 and len(styles)>=3: score-=18
+    if adjacent_repeats>1: score-=min(18,adjacent_repeats*6)
+    # Cold open must have a deliberate visual language, not an empty/default frame.
+    if styles and styles[0] in {'cel-shaded','stylized-cgi','mixed-media'}: score+=5
     score=max(0,min(100,score))
     report={'score':score,'assets':assets,'roles':roles,'motions':motions,
-            'semantics':sorted(semantics),'generic_ratio':round(generic_ratio,2)}
+            'semantics':sorted(semantics),'generic_ratio':round(generic_ratio,2),
+            'styles':styles,'adjacent_style_repeats':adjacent_repeats}
     if score<65:
         raise RuntimeError('Creative gate rejected generic/weak visual plan: '+json.dumps(report))
     return report
