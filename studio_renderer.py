@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-2.9"
+VERSION = "studio-3.0"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -241,6 +241,14 @@ def direct_story(ch, plan):
                     director_motion=['arc','scan','pulse','parallax'][seed%4],
                     director_cut_rate=round(.55 + energy*.75,2),
                     director_caption_mode=['phrase','keyword','question'][seed%3],
+                    director_style=(
+                        'mixed-media' if role=='proof' else
+                        'vector-motion' if any(x in semantics for x in ('map','compare','network')) else
+                        'cel-shaded' if role in {'cold_open','payoff'} and energy>=.85 else
+                        'stylized-cgi' if role in {'cold_open','outlook'} else
+                        'stop-motion' if role=='build' and seed%3==0 else
+                        'mixed-media'
+                    ),
                     director_asset=(
                         'source-document' if role=='proof' and source_count>0 else
                         'map-explainer' if 'map' in semantics else
@@ -562,6 +570,50 @@ def attention_layer(im,s,t,u,accent):
 
 
 
+
+def visual_style_layer(im,s,t,u,accent):
+    """Original RAYVAN visual languages: CGI-like depth, toon, vector, mixed media, tactile stop-motion."""
+    d=ImageDraw.Draw(im,'RGBA'); style=s.get('director_style','mixed-media')
+    if style=='stylized-cgi':
+        # Layered pseudo-3D geometry with moving highlights/depth.
+        for j in range(5):
+            z=1+j*.18; x=int(130+j*165+math.sin(t*.7+j)*28); y=int(690+j*78)
+            r=int((72+18*j)*z)
+            d.rounded_rectangle((x-r,y-r,x+r,y+r),int(24*z),
+                                fill=(18+8*j,28+9*j,48+12*j,185),outline=accent+(125,),width=5)
+            d.ellipse((x-r//2,y-r//2,x+r//3,y+r//3),fill=(255,255,255,28))
+    elif style=='cel-shaded':
+        # Flat graphic planes + bold contour language, not an imitation of any studio.
+        pts=[(95,1040),(250,650),(470,780),(690,570),(985,900),(985,1190),(95,1190)]
+        d.polygon(pts,fill=accent+(65,))
+        d.line(pts+[pts[0]],fill=(8,10,18,230),width=18,joint='curve')
+        for off in (0,55,110):
+            d.line((120+off,1130,450+off,760),fill=(255,255,255,70),width=9)
+    elif style=='vector-motion':
+        # Crisp vector shapes with meaningful motion rhythm.
+        for j in range(7):
+            a=t*.45+j*.9; x=540+int(math.cos(a)*260); y=860+int(math.sin(a)*210)
+            rr=22+(j%3)*9
+            d.ellipse((x-rr,y-rr,x+rr,y+rr),fill=accent+(110+j*12,),outline=(255,255,255,100),width=3)
+            if j: d.line((540,860,x,y),fill=accent+(65,),width=5)
+    elif style=='mixed-media':
+        # Paper/card collage layers around live/real media or evidence graphics.
+        for j,(x,y,w,h) in enumerate(((105,620,320,170),(650,690,300,190),(155,1010,390,150))):
+            ang=math.sin(t*.35+j)*6
+            d.rounded_rectangle((x,y,x+w,y+h),20,fill=(245,238,220,35+j*12),
+                                outline=(255,255,255,45),width=4)
+        d.line((100,970,960,970),fill=accent+(95,),width=4)
+    elif style=='stop-motion':
+        # Tactile cut-paper/puppet-like forms with stepped motion.
+        step=int(t*8); jitter=((step%3)-1)*5
+        for j in range(4):
+            x=180+j*205+jitter*(1 if j%2 else -1); y=790+(j%2)*125
+            d.rounded_rectangle((x-72,y-72,x+72,y+72),34,fill=(210,190-15*j,155+15*j,185),
+                                outline=(25,25,28,180),width=7)
+            d.ellipse((x-24,y-18,x-10,y-4),fill=(20,20,22,180))
+            d.ellipse((x+10,y-18,x+24,y-4),fill=(20,20,22,180))
+    return im
+
 def asset_layer(im,s,t,u,accent):
     """Render the director's story-specific asset choice with provenance-safe fallbacks."""
     d=ImageDraw.Draw(im,'RGBA'); kind=s.get('director_asset','kinetic-type')
@@ -634,6 +686,7 @@ def render_frame(plan,t,genre,total):
         dy=max(0,(nh-H)//2)
         im=moved.crop((dx,dy,dx+W,dy+H))
     draw_visual(im,s,t,u,accent)
+    visual_style_layer(im,s,t,u,accent)
     attention_layer(im,s,t,u,accent)
     im=composite_cached_asset(im,s.get('resolved_asset',{}))
     asset_layer(im,s,t,u,accent)
