@@ -35,12 +35,28 @@ REFERENCE_PROFILES = {
         "transition": "hard cuts on reaction/action",
         "continuity": "preserve character identity, clothing, location and prop continuity",
     },
+    "family_3d_animal_comedy": {
+        "render_style": "polished family-friendly stylized 3D animation",
+        "character_design": "anthropomorphic animals with rounded proportions, large expressive eyes, readable paws and exaggerated facial acting",
+        "lighting": "bright warm sunlight with volumetric rays, soft bounce light and saturated natural color",
+        "lens": "normal portrait lens with shallow depth of field for reactions",
+        "camera": ["wide establishing", "medium action shot", "reaction close-up", "group payoff"],
+        "framing": "full-frame character staging with clear foreground action and layered environment depth",
+        "environment": "lush colorful environment with soft background detail and strong depth separation",
+        "motion": "clear pose-to-pose acting, squash-and-stretch facial reactions, paw/hand gestures, fast comedic anticipation and payoff",
+        "shot_seconds": [1.2, 2.6],
+        "text_policy": "no explainer cards; optional tiny captions only",
+        "transition": "hard cuts on action or reaction",
+        "continuity": "preserve species, fur markings, wardrobe, scale, props and environment across every shot",
+    },
 }
 
 
 def choose_character_variant(story: dict) -> str:
     genre=str(story.get("genre") or "").lower()
     tone=" ".join(str(story.get(k) or "") for k in ("tone","hook","question","answer","title")).lower()
+    if any(x in tone for x in ("lion","rabbit","cub","jungle","animal family","cartoon animal")):
+        return "family_3d_animal_comedy"
     if any(x in tone for x in ("funny","comedy","monkey","reaction","prank","chaos")):
         return "semi_real_character_comedy"
     if genre == "fiction" or any(x in tone for x in ("story","grandfather","village","emotional","moral")):
