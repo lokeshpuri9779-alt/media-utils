@@ -36,11 +36,8 @@ jobs:
             echo "Stale validated SHA ${SHA}; current main is ${MAIN_SHA}. No promotion dispatched."
             exit 0
           fi
-          # Production may contain scheduled runtime-memory commits. Permit only
-          # changes to the mutable state files; refuse any unexplained code drift.
-          # Compare production code with the last validated clean source, not
-          # with the merge-base. Promotion commits intentionally contain newer
-          # code than their merge-base plus preserved runtime memory.
+          # Production is code-only. Refuse any unexplained code drift from the
+          # last validated source. State lives independently on astra-state.
           DRIFT="$(git diff --name-only origin/astra-known-good..origin/astra-production -- . ':!performance.json' ':!quota_state.json' ':!SHORTS.md')"
           if [ -n "${DRIFT}" ]; then
             echo "Refusing promotion: production code differs from astra-known-good:"
@@ -48,14 +45,10 @@ jobs:
             exit 1
           fi
 
-          # Rebuild a promotion commit from passing main code while carrying
-          # forward the latest production runtime memory. This is a normal
-          # descendant of production, so no force update is required.
+          # Rebuild a normal descendant of production from the validated code.
+          # Mutable runtime state is restored separately from astra-state.
           git checkout -B promote origin/astra-production
           git read-tree --reset -u "${SHA}"
-          for state_file in performance.json quota_state.json SHORTS.md; do
-            git checkout origin/astra-production -- "${state_file}" 2>/dev/null || true
-          done
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
@@ -68,7 +61,7 @@ jobs:
           git push origin "HEAD:refs/heads/astra-production"
           # known-good tracks validated source code and never receives runtime state.
           git push origin "${SHA}:refs/heads/astra-known-good"
-          echo "Promoted ${SHA} as production commit ${PROMOTE_SHA}; runtime state preserved."
+          echo "Promoted ${SHA} as production commit ${PROMOTE_SHA}; runtime state remains on astra-state."
 
           # Trigger exactly one production verification run only after a real,
           # latest-head promotion. repository_dispatch is allowed to start a
