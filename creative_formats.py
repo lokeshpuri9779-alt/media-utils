@@ -52,6 +52,18 @@ FORMATS = {
         "motion": "slow",
         "brand": "none",
     },
+    "ai_character_cinematic": {
+        "headline": "none",
+        "caption": "minimal",
+        "transition": "hard-cut",
+        "motion": "character-driven",
+        "brand": "none",
+        "full_frame": True,
+        "target_shot_seconds": [1.8, 3.2],
+        "look": "stylized-3d-cinematic",
+        "depth_of_field": "shallow",
+        "lighting": "warm-cinematic",
+    },
 }
 
 
@@ -62,11 +74,13 @@ def choose_format(story: dict, recent_formats: list[str] | None = None) -> dict:
     visuals = [str(x.get("visual") or "") for x in beats]
 
     if genre == "fiction":
-        preferred = ["microfiction_cinematic", "mixed_media_story"]
+        preferred = ["ai_character_cinematic", "microfiction_cinematic", "mixed_media_story"]
     elif genre == "tech":
         preferred = ["screen_explainer", "animated_infographic"]
     elif genre in {"football", "current"}:
         preferred = ["documentary_montage", "mixed_media_story", "animated_infographic"]
+    elif story.get("character_story"):
+        preferred = ["ai_character_cinematic", "cinematic_mini_doc", "mixed_media_story"]
     elif visuals.count("media") >= 2:
         preferred = ["cinematic_mini_doc", "documentary_montage", "mixed_media_story"]
     else:
@@ -114,4 +128,16 @@ def apply_format(plan: list[dict], fmt: dict) -> list[dict]:
             shot["director_camera"] = ["drift","push","drift","push"][i % 4]
             shot["director_energy"] = 0.72 if i == 0 else 0.42
             shot["director_layout"] = "center"
+        elif name == "ai_character_cinematic":
+            shot["director_camera"] = ["push","track","drift","push"][i % 4]
+            shot["director_energy"] = 0.90 if i == 0 else 0.76
+            shot["director_layout"] = "center"
+            shot["director_style"] = "stylized-3d-cinematic"
+            shot["director_asset"] = "character-scene"
+            shot["director_caption_mode"] = "minimal"
+            shot["character_animation"] = True
+            shot["full_frame_visual"] = True
+            shot["depth_of_field"] = "shallow"
+            shot["lighting"] = "warm-cinematic"
+            shot["target_shot_seconds"] = 2.4
     return plan
