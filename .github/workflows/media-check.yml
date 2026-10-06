@@ -121,18 +121,13 @@ jobs:
         shell: bash
         run: |
           mkdir -p runtime-health
-          printf '%s
-' "run_id=${{ github.run_id }}" > runtime-health/status.txt
-          printf '%s
-' "production_sha=$(git rev-parse HEAD)" >> runtime-health/status.txt
-          printf '%s
-' "controller_outcome=${{ steps.controller.outcome || 'unknown' }}" >> runtime-health/status.txt
+          printf '%s\\n' "run_id=${{ github.run_id }}" > runtime-health/status.txt
+          printf '%s\\n' "production_sha=$(git rev-parse HEAD)" >> runtime-health/status.txt
+          printf '%s\\n' "controller_outcome=${{ steps.controller.outcome || 'unknown' }}" >> runtime-health/status.txt
           if [ "${{ steps.controller.outcome }}" != "success" ]; then
-            printf '%s
-' "recovery=production_ref_unchanged; use pre-run state snapshot" >> runtime-health/status.txt
+            printf '%s\\n' "recovery=production_ref_unchanged; use pre-run state snapshot" >> runtime-health/status.txt
           else
-            printf '%s
-' "recovery=none" >> runtime-health/status.txt
+            printf '%s\\n' "recovery=none" >> runtime-health/status.txt
           fi
       - name: Upload runtime health record
         if: github.event_name != 'push' && github.event_name != 'pull_request' && always()
