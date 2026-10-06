@@ -1,9 +1,11 @@
+import inspect
 import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
 
 import ops_guardian
+import cloud_once
 
 
 class GuardianTests(unittest.TestCase):
@@ -32,6 +34,19 @@ class GuardianTests(unittest.TestCase):
                 self.assertIn("reauthorize_youtube", text)
                 self.assertNotIn("refresh_token", text)
                 self.assertEqual(state["status"], "waiting_for_human")
+
+    def test_controller_half_hour_pacing(self):
+        state = {"target": 48, "attempts": 0, "limit_hit": False}
+        now = cloud_once.datetime(2026, 10, 6, 0, 0, tzinfo=cloud_once.IST)
+        self.assertTrue(cloud_once.scheduled_attempt_due(now, state))
+        state["attempts"] = 1
+        self.assertFalse(cloud_once.scheduled_attempt_due(now, state))
+
+    def test_controller_duplicate_retry_interface(self):
+        self.assertIn("excluded_ids", inspect.signature(cloud_once.make_short).parameters)
+
+    def test_controller_schedule_slot_matches_workflow(self):
+        self.assertEqual(cloud_once.SCHEDULE_SLOT_MINUTES, 30)
 
 
 if __name__ == "__main__":
