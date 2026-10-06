@@ -24,6 +24,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 from semantic_broll import infer_visual_intent
+from character_animation import character_storyboard
 
 VERSION = "studio-7.0.0"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
@@ -949,6 +950,9 @@ def asset_manifest(ch, plan):
         elif kind=='editorial-illustration':
             strategy='original-illustration'
             query=explicit_query or ('Non-likeness editorial concept illustrating: '+topic)
+        elif kind=='character-scene':
+            strategy='character-video-required'
+            query=explicit_query or ('Character-driven cinematic scene for: '+topic)
         else:
             strategy='original-motion'
             query=explicit_query or ('Abstract visual metaphor for: '+topic)
@@ -981,6 +985,9 @@ def resolve_assets(manifest):
             # attempted. Premium stories later require verified subject media.
             r.update(provider='astra-studio',status='ready',cost=0,
                      license='original-generated-by-astra')
+        elif strategy=='character-video-required':
+            r.update(provider='character-video-engine',status='blocked',cost=0,
+                     license='generation-provider-required')
         elif strategy=='source-derived':
             # Source URLs are evidence/provenance, not automatic media licenses.
             # Until an explicitly authorized media provider is configured, render
@@ -1343,6 +1350,8 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
             if repair_attempts>=2: raise
             repair_attempts+=1
             plan=_repair_plan(ch,plan,repair_attempts)
+    if any(s.get("creative_format")=="ai_character_cinematic" for s in plan):
+        ch["character_storyboard_plan"]=character_storyboard(ch,plan)
     assets=asset_manifest(ch,plan)
     resolved_assets=prepare_media_cache(resolve_assets(assets))
     resolved_assets=acquire_story_media(resolved_assets)
