@@ -64,6 +64,18 @@ FORMATS = {
         "depth_of_field": "shallow",
         "lighting": "warm-cinematic",
     },
+    "family_3d_animal_comedy": {
+        "headline": "none",
+        "caption": "minimal",
+        "transition": "hard-cut",
+        "motion": "pose-to-pose-comedy",
+        "brand": "none",
+        "full_frame": True,
+        "target_shot_seconds": [1.2, 2.6],
+        "look": "polished-family-3d",
+        "depth_of_field": "shallow",
+        "lighting": "bright-warm-volumetric",
+    },
 }
 
 
@@ -79,6 +91,8 @@ def choose_format(story: dict, recent_formats: list[str] | None = None) -> dict:
         preferred = ["screen_explainer", "animated_infographic"]
     elif genre in {"football", "current"}:
         preferred = ["documentary_montage", "mixed_media_story", "animated_infographic"]
+    elif story.get("animal_character_story"):
+        preferred = ["family_3d_animal_comedy", "ai_character_cinematic", "mixed_media_story"]
     elif story.get("character_story"):
         preferred = ["ai_character_cinematic", "cinematic_mini_doc", "mixed_media_story"]
     elif visuals.count("media") >= 2:
@@ -140,4 +154,16 @@ def apply_format(plan: list[dict], fmt: dict) -> list[dict]:
             shot["depth_of_field"] = "shallow"
             shot["lighting"] = "warm-cinematic"
             shot["target_shot_seconds"] = 2.4
+        elif name == "family_3d_animal_comedy":
+            shot["director_camera"] = ["reveal","track","push","reveal"][i % 4]
+            shot["director_energy"] = 1.0 if i in {0,2} else 0.82
+            shot["director_layout"] = "center"
+            shot["director_style"] = "polished-family-3d"
+            shot["director_asset"] = "character-scene"
+            shot["director_caption_mode"] = "minimal"
+            shot["character_animation"] = True
+            shot["full_frame_visual"] = True
+            shot["depth_of_field"] = "shallow"
+            shot["lighting"] = "bright-warm-volumetric"
+            shot["target_shot_seconds"] = 1.9
     return plan
