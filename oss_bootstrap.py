@@ -74,7 +74,7 @@ def main() -> int:
     parser.add_argument(
         "--engine",
         default="moneyprinterturbo",
-        choices=("moneyprinterturbo", "faster-whisper"),
+        choices=("moneyprinterturbo", "faster-whisper", "pyscenedetect"),
     )
     args = parser.parse_args()
 
@@ -82,6 +82,7 @@ def main() -> int:
     folder = {
         "moneyprinterturbo": "MoneyPrinterTurbo",
         "faster-whisper": "faster-whisper",
+        "pyscenedetect": "PySceneDetect",
     }[args.engine]
     target = base / folder
     report = install_pinned_engine(args.engine, target)
