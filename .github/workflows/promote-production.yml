@@ -33,10 +33,12 @@ jobs:
           git merge-base --is-ancestor "${SHA}" origin/main
           # Production may contain scheduled runtime-memory commits. Permit only
           # changes to the mutable state files; refuse any unexplained code drift.
-          BASE="$(git merge-base origin/astra-production "${SHA}")"
-          DRIFT="$(git diff --name-only "${BASE}"..origin/astra-production -- . ':!performance.json' ':!quota_state.json' ':!SHORTS.md')"
+          # Compare production code with the last validated clean source, not
+          # with the merge-base. Promotion commits intentionally contain newer
+          # code than their merge-base plus preserved runtime memory.
+          DRIFT="$(git diff --name-only origin/astra-known-good..origin/astra-production -- . ':!performance.json' ':!quota_state.json' ':!SHORTS.md')"
           if [ -n "${DRIFT}" ]; then
-            echo "Refusing promotion: production contains code drift:"
+            echo "Refusing promotion: production code differs from astra-known-good:"
             echo "${DRIFT}"
             exit 1
           fi
