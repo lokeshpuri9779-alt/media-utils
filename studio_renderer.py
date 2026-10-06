@@ -816,6 +816,9 @@ def render_frame(plan,t,genre,total):
         asset_layer(im,s,t,u,accent)
         director_motion_layer(im,s,t,u,accent)
     d=ImageDraw.Draw(im)
+    if str(s.get('media_fit') or '')=='wide':
+        d.text((250,1220),'NEAR',font=font(24),anchor='mm',fill=(210,218,233))
+        d.text((830,1220),'FAR',font=font(24),anchor='mm',fill=(210,218,233))
     # Director-controlled pattern interrupts are sparse and narrative, not constant.
     if s.get('director_pattern_interrupt') and u<.16:
         a=int(150*(1-u/.16))
