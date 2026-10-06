@@ -775,7 +775,9 @@ def make_short(out: Path, excluded_ids=None, excluded_titles=None) -> tuple[str,
                 blocking_repairs = {"rewrite_hook_only", "compress_or_reorder_story_beats", "remix_or_regenerate_audio", "realign_and_resplit_captions", "repair_scene_to_narration_alignment", "repair_render_technical_failures"}
                 if action == "targeted_regeneration" and (repairs & visual_repairs) and not (repairs & blocking_repairs):
                     from retention_surgery import propose_surgery
-                    surgery = propose_surgery(report)
+                    from channel_memory import active_memory
+                    retention_lessons = (((active_memory(load_performance()).get("evolution") or {}).get("retention_patterns") or {}).get("lessons") or [])
+                    surgery = propose_surgery(report, learned_lessons=retention_lessons)
                     CONTENT_META["retention_surgery"] = surgery
                     print("Creative Director: rerendering same story with repaired visual direction and scene surgery.")
                     report = render_short(ch, out, director_repair_pass=3, scene_surgery=surgery)
