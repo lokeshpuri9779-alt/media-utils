@@ -25,7 +25,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 from semantic_broll import infer_visual_intent
 
-VERSION = "studio-6.2.1"
+VERSION = "studio-7.0.0"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -323,9 +323,13 @@ def direct_story(ch, plan):
     return directed
 
 def make_plan(ch):
-    # Studio 6 ends on the story payoff. Generic CTA cards were a major source
-    # of template feel and are deliberately removed from normal Shorts.
-    return direct_story(ch, _story_plan(ch))
+    # Studio 7 routes each story into a distinct visual grammar instead of
+    # forcing every Short through one recurring composition.
+    plan = direct_story(ch, _story_plan(ch))
+    from creative_formats import choose_format, apply_format
+    fmt = choose_format(ch, recent_formats=ch.get("recent_formats") or [])
+    ch["creative_format"] = fmt["name"]
+    return apply_format(plan, fmt)
 
 
 def voice_plan(plan, genre, max_duration=36, voice_name='af_heart', voice_speed=1.09):
@@ -855,15 +859,27 @@ def render_frame(plan,t,genre,total):
     if s.get('director_pattern_interrupt') and u<.16:
         a=int(150*(1-u/.16))
         d.line((70,600,940,600),fill=accent+(a,) if im.mode=='RGBA' else accent,width=9)
-    # Minimal identity: no permanent template bar, scene counter or logo intro.
-    d.text((72,108),'RAYVAN',font=font(23),fill=(205,213,228))
+    # Format-specific identity/headline treatment. Studio 7 deliberately avoids
+    # one permanent template surface across every Short.
+    fmt=s.get('creative_format','mixed_media_story')
+    brand=s.get('format_brand','minimal')
+    if brand=='corner':
+        d.text((72,108),'RAYVAN',font=font(23),fill=(205,213,228))
+    elif brand=='minimal' and index==0 and u<1.1:
+        d.text((72,108),'RAYVAN',font=font(21),fill=(205,213,228))
     headline_offset=int((1-ease(u/.24))*18)
     premium_visual=s.get('visual') in {'media','tidal_lock','iss_orbit'}
-    if not premium_visual or u < .80:
-        if index==0:
-            fit_text(d,s['headline'],(72,165+headline_offset,940,318+headline_offset),size=66,fill='white',max_lines=2)
+    show_headline = not premium_visual or u < (.52 if fmt in {'cinematic_mini_doc','microfiction_cinematic'} else .80)
+    if show_headline:
+        if fmt in {'cinematic_mini_doc','microfiction_cinematic'}:
+            box=(72,205+headline_offset,940,330+headline_offset); size=48 if index==0 else 38
+        elif fmt=='documentary_montage':
+            box=(64,145+headline_offset,955,350+headline_offset); size=74 if index==0 else 50
+        elif fmt=='animated_infographic':
+            box=(80,150+headline_offset,925,295+headline_offset); size=60 if index==0 else 44
         else:
-            fit_text(d,s['headline'],(72,178+headline_offset,940,302+headline_offset),size=46,fill='white',max_lines=2)
+            box=(72,165+headline_offset,940,318+headline_offset); size=66 if index==0 else 46
+        fit_text(d,s['headline'],box,size=size,fill='white',max_lines=2)
     # Phrase captions use actual utterance windows; active word timing is approximate.
     words=s['speech'].split()
     dur=len(s['audio'])/RATE
@@ -876,12 +892,27 @@ def render_frame(plan,t,genre,total):
     elif mode=='question' and text and ('?' in s.get('speech','') or s.get('director_role')=='cold_open'):
         text=text.rstrip(' .!?')+'?'
     if s.get('countdown') and t>s['voice_start']+dur+.1: text='YOUR TURN'
-    # Captions support the footage instead of becoming the footage.
-    d.rounded_rectangle((126,1470,880,1578),radius=20,fill=(8,12,23))
-    fit_text(d,text,(150,1478,856,1568),size=42,fill=(242,245,250),max_lines=2)
+    # Caption surface also changes with the selected creative format.
+    if fmt in {'cinematic_mini_doc','microfiction_cinematic'}:
+        d.rounded_rectangle((118,1530,900,1636),radius=18,fill=(5,8,14))
+        fit_text(d,text,(145,1538,874,1628),size=37,fill=(242,245,250),max_lines=2)
+    elif fmt=='documentary_montage':
+        fit_text(d,text.upper(),(86,1435,965,1565),size=52,fill='white',max_lines=2)
+    elif fmt=='animated_infographic':
+        d.rounded_rectangle((170,1450,910,1560),radius=28,fill=(8,12,23))
+        fit_text(d,text,(195,1458,885,1552),size=44,fill=accent,max_lines=2)
+    else:
+        d.rounded_rectangle((126,1470,880,1578),radius=20,fill=(8,12,23))
+        fit_text(d,text,(150,1478,856,1568),size=42,fill=(242,245,250),max_lines=2)
     # Brief ink-dark cut transition rather than full-screen flashing.
     if index>0 and u<.13:
-        shade=Image.new('RGB',im.size,(8,12,23)); im=Image.blend(shade,im,.55+.45*u/.13)
+        transition=s.get('format_transition','cinematic')
+        if transition=='hard-cut':
+            pass
+        elif transition in {'wipe','snap'}:
+            shade=Image.new('RGB',im.size,(8,12,23)); im=Image.blend(shade,im,.30+.70*u/.13)
+        else:
+            shade=Image.new('RGB',im.size,(8,12,23)); im=Image.blend(shade,im,.55+.45*u/.13)
     return im
 
 
