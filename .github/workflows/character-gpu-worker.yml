@@ -1,6 +1,9 @@
 name: Astra character GPU worker
 
 on:
+  push:
+    paths:
+      - '.astra/trigger-character-pilot'
   workflow_dispatch:
     inputs:
       render_pilot:
