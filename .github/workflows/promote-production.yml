@@ -31,9 +31,34 @@ jobs:
           git fetch --depth=200 origin main astra-production astra-known-good
           # Refuse promotion if the passing SHA is no longer on main.
           git merge-base --is-ancestor "${SHA}" origin/main
-          # Production must advance by ancestry only. A divergence requires
-          # human inspection rather than a destructive force-reset.
-          git merge-base --is-ancestor origin/astra-production "${SHA}"
-          git push origin "${SHA}:refs/heads/astra-production"
+          # Production may contain scheduled runtime-memory commits. Permit only
+          # changes to the mutable state files; refuse any unexplained code drift.
+          BASE="$(git merge-base origin/astra-production "${SHA}")"
+          DRIFT="$(git diff --name-only "${BASE}"..origin/astra-production -- . ':!performance.json' ':!quota_state.json' ':!SHORTS.md')"
+          if [ -n "${DRIFT}" ]; then
+            echo "Refusing promotion: production contains code drift:"
+            echo "${DRIFT}"
+            exit 1
+          fi
+
+          # Rebuild a promotion commit from passing main code while carrying
+          # forward the latest production runtime memory. This is a normal
+          # descendant of production, so no force update is required.
+          git checkout -B promote origin/astra-production
+          git read-tree --reset -u "${SHA}"
+          for state_file in performance.json quota_state.json SHORTS.md; do
+            git checkout origin/astra-production -- "${state_file}" 2>/dev/null || true
+          done
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            PROMOTE_SHA="$(git rev-parse HEAD)"
+          else
+            git commit -m "Promote validated Astra code ${SHA:0:12} [skip ci]"
+            PROMOTE_SHA="$(git rev-parse HEAD)"
+          fi
+          git push origin "HEAD:refs/heads/astra-production"
+          # known-good tracks validated source code and never receives runtime state.
           git push origin "${SHA}:refs/heads/astra-known-good"
-          echo "Promoted ${SHA} to astra-production and astra-known-good."
+          echo "Promoted ${SHA} as production commit ${PROMOTE_SHA}; runtime state preserved."
