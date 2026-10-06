@@ -31,7 +31,7 @@ class AudienceTests(unittest.TestCase):
         self.data["analytics_state"] = {"status":"active", "checked_at": self.now.isoformat()}
         with patch.object(autonomy, "_query_analytics", return_value={}) as query:
             autonomy.refresh_analytics(self.data, self.now)
-        self.assertEqual(query.call_count, 3)
+        self.assertEqual(query.call_count, 4)
         self.assertEqual(self.data["analytics_state"]["status"], "awaiting_data")
         self.assertNotIn("analytics", self.data["videos"]["test"])
         self.assertEqual(query.call_args.kwargs["end_date"], "2026-10-04")
@@ -42,6 +42,8 @@ class AudienceTests(unittest.TestCase):
             self.report(["views", "averageViewPercentage"], [[40, 70]]),
             self.report(["insightTrafficSourceType", "views", "estimatedMinutesWatched"],
                         [["YT_SEARCH", 30, 8], ["SHORTS", 10, 2]]),
+            self.report(["country", "views", "estimatedMinutesWatched"],
+                        [["IN", 25, 7], ["US", 15, 3]]),
             self.report(["elapsedVideoTimeRatio", "audienceWatchRatio", "relativeRetentionPerformance"],
                         [[.1,.9,.5],[.5,.6,.4],[.9,.3,.2]]),
         ]
@@ -52,6 +54,8 @@ class AudienceTests(unittest.TestCase):
         self.assertEqual(len(entry["analytics_reports"]["traffic_sources"]["rows"]), 2)
         self.assertEqual(query.call_args_list[1].kwargs["dimensions"], "insightTrafficSourceType")
         self.assertFalse(entry["analytics_reports"]["traffic_sources"]["owner_views_identifiable"])
+        self.assertEqual(len(entry["analytics_reports"]["geography"]["rows"]), 2)
+        self.assertEqual(query.call_args_list[2].kwargs["dimensions"], "country")
 
     def test_forbidden_reports_are_errors_and_do_not_leak_tokens(self):
         response=httpx.Response(403, request=httpx.Request("GET","https://example.invalid/?token=secret"))
