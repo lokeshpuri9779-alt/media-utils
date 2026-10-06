@@ -750,6 +750,7 @@ def _draw_centered(draw, xy, text, fnt, fill, max_width=920, spacing=18, shadow=
 
 def make_short(out: Path, excluded_ids=None, excluded_titles=None) -> tuple[str, str]:
     from studio_renderer import render_short
+    from astra_errors import CreativeReject
     # A renderer rejection should retire the weak concept, not the upload slot.
     # Try fresh stories with bounded work; never lower the creative threshold.
     rejected_ids=set(excluded_ids or set())
@@ -761,10 +762,8 @@ def make_short(out: Path, excluded_ids=None, excluded_titles=None) -> tuple[str,
         try:
             report = render_short(ch, out)
             break
-        except RuntimeError as exc:
+        except CreativeReject as exc:
             msg=str(exc)
-            if 'Creative gate rejected' not in msg:
-                raise
             rejected_ids.add(str(ch.get('content_id') or ''))
             rejected_titles.add(str(ch.get('title') or ''))
             failures.append({'content_id':ch.get('content_id'),'title':ch.get('title'),'reason':msg[:500]})
