@@ -5,6 +5,30 @@ import math, re
 # These score structures, not copied videos or copyrighted wording.
 POWER = re.compile(r"\b(why|how|what|can you|find|spot|before|never|last|first|secret|missing|odd|fast|seconds?|hottest|slower|extra|same)\b", re.I)
 PAYOFF = re.compile(r"\b(answer|reveal|because|opens?|shows?|no |yes |same|finally|on the other side|years?|days?|row|col)\b", re.I)
+CURIOSITY = re.compile(r"\b(why|how|what|inside|behind|changed|really|surprising|strange|unexpected|secret|mystery)\b", re.I)
+
+def packaging_score(c: dict) -> float:
+    """Score the click promise without rewarding deception or empty clickbait."""
+    title=(c.get("title") or "").strip()
+    hook=(c.get("hook") or "").strip()
+    payoff=(c.get("answer") or "").strip()
+    score=52.0
+    score += min(18, 4*len(CURIOSITY.findall(title+" "+hook)))
+    if 28 <= len(title) <= 72: score += 10
+    if hook and payoff: score += 8
+    if c.get("source"): score += 7
+    if re.search(r"\b(shocking|insane|you won't believe|must see)\b", title, re.I): score -= 18
+    return _clip(score)
+
+def story_score(c: dict) -> float:
+    """Reward promise -> question -> sourced payoff structure."""
+    hook=(c.get("hook") or "").strip()
+    question=(c.get("question") or "").strip()
+    answer=(c.get("answer") or "").strip()
+    score=45.0 + (12 if hook else 0) + (12 if question else 0) + (18 if answer else 0)
+    if c.get("source"): score += 8
+    if question and answer and question.lower()!=answer.lower(): score += 5
+    return _clip(score)
 
 def _clip(x, lo=0.0, hi=100.0):
     return max(lo, min(hi, float(x)))
@@ -45,13 +69,18 @@ def score_candidate(c: dict, *, trend_matches=None, channel_score=None) -> dict:
     # 30% live demand/trend, 20% exploration/channel learning.
     structural=(hook_score*.34 + payoff*.28 + clarity*.20 + originality*.18)
     channel=50 if channel_score is None else _clip(channel_score)
-    total=.50*structural + .30*((demand+trend)/2) + .20*channel
+    package=packaging_score(c)
+    story=story_score(c)
+    # Case-study architecture: idea quality is necessary, but packaging and
+    # narrative payoff are explicit gates rather than post-render decoration.
+    total=.40*structural + .25*((demand+trend)/2) + .15*channel + .10*package + .10*story
     return {
         "total": round(_clip(total),2), "hook":round(_clip(hook_score),1),
         "payoff":round(_clip(payoff),1), "clarity":round(_clip(clarity),1),
         "originality":round(_clip(originality),1), "demand":round(_clip(demand),1),
         "trend":round(_clip(trend),1), "channel":round(channel,1),
-        "weights":{"structural":.50,"live_demand":.30,"channel_or_exploration":.20},
+        "packaging":round(package,1), "story":round(story,1),
+        "weights":{"structural":.40,"live_demand":.25,"channel_or_exploration":.15,"packaging":.10,"story":.10},
     }
 
 def calibration_weight(data: dict) -> float:
