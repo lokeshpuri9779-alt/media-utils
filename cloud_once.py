@@ -761,6 +761,18 @@ def make_short(out: Path, excluded_ids=None, excluded_titles=None) -> tuple[str,
         ch = select_content(excluded_ids=rejected_ids, excluded_titles=rejected_titles)
         try:
             report = render_short(ch, out)
+            from quality_lab import evaluate_studio_render
+            director = evaluate_studio_render(ch, report)
+            CONTENT_META["creative_director"] = director["director"]
+            CONTENT_META["repair_feedback"] = director["feedback"]
+            print("Creative Director:", json.dumps(director["director"], ensure_ascii=False))
+            if not director["pass"]:
+                action = str(director["director"].get("action") or "")
+                repairs = director["director"].get("repair_plan") or []
+                raise CreativeReject(
+                    "Autonomous quality gate rejected rendered Short: "
+                    + json.dumps({"action": action, "repairs": repairs, "score": director["director"].get("score")})
+                )
             break
         except CreativeReject as exc:
             msg=str(exc)
