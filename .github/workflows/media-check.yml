@@ -100,17 +100,9 @@ jobs:
       - name: Refresh daily research on code pushes
         if: (github.event_name == 'push' || github.event_name == 'pull_request') && env.ASTRA_FORCE_RUN != '1'
         run: python cloud_once.py --study
-      - name: Snapshot adaptive state before controller
-        if: github.event_name != 'push' && github.event_name != 'pull_request'
-        run: python backup_state.py pre-run
-      - name: Upload recovery snapshot
-        if: github.event_name != 'push' && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v4
-        with:
-          name: astra-state-${{ github.run_id }}
-          path: backups/
-          retention-days: 30
-          if-no-files-found: error
+      # Runtime memory is persisted explicitly after the controller. Git history
+      # already provides code rollback; per-run backup artifacts are not part of
+      # the publishing critical path.
       - name: run
         id: controller
         run: |
@@ -144,12 +136,12 @@ jobs:
         if: always() && github.event_name != 'pull_request'
         shell: bash
         run: |
-          if [ -z "$(git status --porcelain -- state/ SHORTS.md)" ]; then
+          if [ -z "$(git status --porcelain -- performance.json quota_state.json SHORTS.md)" ]; then
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for f in state SHORTS.md; do
+          for f in performance.json quota_state.json SHORTS.md; do
             if [ -e "$f" ] || git ls-files --error-unmatch "$f" >/dev/null 2>&1; then
               git add -A -- "$f"
             fi
@@ -163,8 +155,8 @@ jobs:
           else
             TARGET_BRANCH="astra-production"
           fi
-          # Runtime state belongs to astra-production; push-CI state belongs to
-          # the event branch even though checkout is detached at the tested SHA.
+          # Runtime publishing memory belongs to astra-production; push-CI changes
+          # remain on the event branch. Code rollback refs must not erase memory.
           for attempt in 1 2 3; do
             if git push origin "HEAD:$TARGET_BRANCH"; then
               exit 0
