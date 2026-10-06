@@ -65,6 +65,8 @@ on:
       - 'tests/test_character_video_engine.py'
       - 'character_video_compositor.py'
       - 'character_video_engine.py'
+      - 'tests/test_video_provider_policy.py'
+      - 'video_provider_policy.py'
       - 'tests/test_open_source_video_engine.py'
       - 'open_source_video_engine.py'
       - 'tests/test_gpu_worker_health.py'
@@ -192,7 +194,7 @@ jobs:
 
       - name: Verify Python modules
         if: github.event_name == 'push' || github.event_name == 'pull_request'
-        run: python -m py_compile cloud_once.py creative_engine.py premium_stories.py channel_state.py revenue_geo.py viral_prior.py evolution.py backup_state.py distribution.py ops_guardian.py ypp_safety.py autonomy.py reach_reports.py longform.py longform_trends.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py oss_stack.py edit_spec.py quality_lab.py creative_director.py creative_formats.py creative_identity.py astra_pipeline.py character_animation.py character_stories.py character_pilot.py open_source_video_engine.py gpu_worker_health.py remote_gpu_client.py gpu_worker_server.py character_video_engine.py character_video_compositor.py semantic_broll.py retention_surgery.py caption_audio_qa.py channel_memory.py premium_batch_review.py motion_renderer/bridge.py astra_errors.py hyperframes_adapter.py
+        run: python -m py_compile cloud_once.py creative_engine.py premium_stories.py channel_state.py revenue_geo.py viral_prior.py evolution.py backup_state.py distribution.py ops_guardian.py ypp_safety.py autonomy.py reach_reports.py longform.py longform_trends.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py oss_stack.py edit_spec.py quality_lab.py creative_director.py creative_formats.py creative_identity.py astra_pipeline.py character_animation.py character_stories.py character_pilot.py open_source_video_engine.py gpu_worker_health.py remote_gpu_client.py gpu_worker_server.py video_provider_policy.py character_video_engine.py character_video_compositor.py semantic_broll.py retention_surgery.py caption_audio_qa.py channel_memory.py premium_batch_review.py motion_renderer/bridge.py astra_errors.py hyperframes_adapter.py
       - name: Verify Studio layouts and audio
         if: github.event_name == 'push' || github.event_name == 'pull_request'
         run: python -m unittest discover -s tests -p 'test_*.py' -v
