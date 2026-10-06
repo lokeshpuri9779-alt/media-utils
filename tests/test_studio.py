@@ -86,15 +86,20 @@ class StudioTests(unittest.TestCase):
         provider.assert_not_called()
         self.assertEqual(out,items)
 
-    def test_premium_story_uses_explicit_verified_media_requests(self):
-        premium=next(x for x in cloud.content_catalog() if x.get('premium_story'))
+    def test_premium_story_uses_verified_media_plus_explanatory_animation(self):
+        premium=next(x for x in cloud.content_catalog()
+                     if x.get('premium_story') and x.get('production_ready'))
         plan=studio.make_plan(premium)
         self.assertEqual(len(plan),len(premium['story_beats']))
         self.assertFalse(any(x.get('story_beat')=='cta' for x in plan))
-        self.assertTrue(all(x.get('visual')=='media' for x in plan))
+        self.assertEqual(sum(x.get('visual')=='media' for x in plan),3)
+        self.assertEqual(sum(x.get('visual')=='tidal_lock' for x in plan),1)
         manifest=studio.asset_manifest(premium,plan)
-        self.assertTrue(all(x.get('strategy')=='external-verified' for x in manifest))
-        self.assertTrue(all(x.get('query') for x in manifest))
+        external=[x for x in manifest if x.get('strategy')=='external-verified']
+        procedural=[x for x in manifest if x.get('strategy')=='original-procedural']
+        self.assertEqual(len(external),3)
+        self.assertEqual(len(procedural),1)
+        self.assertTrue(all(x.get('exact_commons_title') for x in external))
 
 
 if __name__=='__main__':
