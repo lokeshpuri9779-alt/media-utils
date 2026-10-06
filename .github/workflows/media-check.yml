@@ -123,6 +123,19 @@ jobs:
       - name: Render Studio startup preview
         if: (github.event_name == 'push' || github.event_name == 'pull_request') && env.ASTRA_FORCE_RUN != '1'
         run: python studio_renderer.py --preview /tmp/astra-studio-preview.mp4
+      - name: Render inspectable premium preview
+        if: (github.event_name == 'push' || github.event_name == 'pull_request') && env.ASTRA_FORCE_RUN != '1'
+        run: |
+          mkdir -p /tmp/astra-premium-review/stills
+          python studio_renderer.py --premium-preview /tmp/astra-premium-review/moon-preview.mp4 --stills-dir /tmp/astra-premium-review/stills
+      - name: Upload premium creative review
+        if: (github.event_name == 'push' || github.event_name == 'pull_request') && env.ASTRA_FORCE_RUN != '1'
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-premium-review-${{ github.run_id }}
+          path: /tmp/astra-premium-review/
+          retention-days: 7
+          if-no-files-found: error
       - name: Upload Studio 6 preview
         if: (github.event_name == 'push' || github.event_name == 'pull_request') && env.ASTRA_FORCE_RUN != '1'
         uses: actions/upload-artifact@v4
