@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-2.6"
+VERSION = "studio-2.7"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -635,6 +635,7 @@ def render_frame(plan,t,genre,total):
         im=moved.crop((dx,dy,dx+W,dy+H))
     draw_visual(im,s,t,u,accent)
     attention_layer(im,s,t,u,accent)
+    im=composite_cached_asset(im,s.get('resolved_asset',{}))
     asset_layer(im,s,t,u,accent)
     director_motion_layer(im,s,t,u,accent)
     d=ImageDraw.Draw(im)
@@ -764,6 +765,45 @@ def external_media_candidate(item, candidate=None):
                            'creator':candidate['creator']})
     return out
 
+
+def media_cache_key(item):
+    raw=json.dumps({'q':item.get('query',''),'kind':item.get('kind','')},sort_keys=True)
+    return hashlib.sha256(raw.encode()).hexdigest()[:20]
+
+def prepare_media_cache(resolved, cache_dir='asset_cache'):
+    """Prepare deterministic cache slots; external bytes enter only after provider validation."""
+    os.makedirs(cache_dir,exist_ok=True)
+    out=[]
+    for item in resolved:
+        r=dict(item); key=media_cache_key(item)
+        r['cache_key']=key
+        # Existing local/generated provider remains immediately renderable.
+        # A verified external adapter can later place an image at this exact path.
+        r['cache_image']=os.path.join(cache_dir,key+'.png')
+        r['cache_meta']=os.path.join(cache_dir,key+'.json')
+        out.append(r)
+    return out
+
+def composite_cached_asset(im,item):
+    """Composite only a previously validated cached image; malformed assets fail safely."""
+    path=item.get('cache_image','')
+    if not path or not os.path.isfile(path): return im
+    try:
+        media=Image.open(path).convert('RGB')
+        # Cover crop into a cinematic mid-frame window, preserving caption safe zones.
+        box=(90,520,990,1260); bw,bh=box[2]-box[0],box[3]-box[1]
+        scale=max(bw/media.width,bh/media.height)
+        nw,nh=max(1,int(media.width*scale)),max(1,int(media.height*scale))
+        media=media.resize((nw,nh),Image.Resampling.LANCZOS)
+        x=max(0,(nw-bw)//2); y=max(0,(nh-bh)//2)
+        media=media.crop((x,y,x+bw,y+bh))
+        veil=Image.new('RGB',(bw,bh),(8,12,20))
+        media=Image.blend(media,veil,.12)
+        im.paste(media,(box[0],box[1]))
+    except Exception:
+        return im
+    return im
+
 def asset_resolution_gate(resolved):
     blocked=[x for x in resolved if x.get('status')!='ready']
     unsafe=[x for x in resolved if not str(x.get('license','')).startswith(('original-','cc0','public-domain','authorized-'))]
@@ -804,8 +844,10 @@ def render_short(ch,out,still_dir=None):
     if genre not in THEMES: raise ValueError('Unsupported genre')
     plan=make_plan(ch)
     assets=asset_manifest(ch,plan)
-    resolved_assets=resolve_assets(assets)
+    resolved_assets=prepare_media_cache(resolve_assets(assets))
     asset_report=asset_resolution_gate(resolved_assets)
+    # Bind resolved asset metadata to the corresponding directed shot.
+    for shot,item in zip(plan,resolved_assets): shot['resolved_asset']=item
     creative_report=creative_quality_gate(ch,plan)
     creative_report['asset_manifest']=resolved_assets
     creative_report['asset_resolution']=asset_report
