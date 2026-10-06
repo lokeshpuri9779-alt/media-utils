@@ -88,10 +88,10 @@ jobs:
               "source":"https://science.nasa.gov/solar-system/planets/mars/what-does-a-sunrise-sunset-look-like-on-mars/",
               "keywords":["mars","sunset","space"],
               "story_beats":[
-                  {"headline":"THE RED PLANET TURNS BLUE","speech":"Near sunset on Mars, the sky around the Sun can glow blue.","visual":"media","story_beat":"reveal","media_query":"Mars blue sunset Curiosity","media_fit":"wide","media_motion":"push"},
-                  {"headline":"IT'S THE DUST","speech":"Fine dust in the Martian atmosphere scatters light differently from Earth's air.","visual":"media","story_beat":"mechanism","media_query":"Mars atmosphere dust Curiosity","media_fit":"wide","media_motion":"drift"},
-                  {"headline":"BLUE STAYS NEAR THE SUN","speech":"Blue light stays concentrated closer to the Sun while warmer colors spread farther across the sky.","visual":"media","story_beat":"evidence","media_query":"Mars sunset Curiosity Gale Crater","media_fit":"wide","media_motion":"track"},
-                  {"headline":"MARS FLIPS THE SCRIPT","speech":"Red landscape. Blue sunset. The same dusty atmosphere makes both possible.","visual":"media","story_beat":"payoff","media_query":"Mars sunset Perseverance","media_fit":"wide","media_motion":"push"},
+                  {"headline":"THE RED PLANET TURNS BLUE","speech":"Near sunset on Mars, the sky around the Sun can glow blue.","visual":"media","story_beat":"reveal","media_query":"Mars sunset","media_file":"File:MarsSunset.jpg","media_fit":"wide","media_motion":"push"},
+                  {"headline":"IT'S THE DUST","speech":"Fine dust in the Martian atmosphere scatters light differently from Earth's air.","visual":"planet","story_beat":"mechanism","label":"DUST","sub":"CHANGES THE LIGHT","hot":true},
+                  {"headline":"BLUE STAYS NEAR THE SUN","speech":"Blue light stays concentrated closer to the Sun while warmer colors spread farther across the sky.","visual":"media","story_beat":"evidence","media_query":"Mars sunset","media_file":"File:Mars sunset PIA01547.jpg","media_fit":"wide","media_motion":"track"},
+                  {"headline":"MARS FLIPS THE SCRIPT","speech":"Red landscape. Blue sunset. The same dusty atmosphere makes both possible.","visual":"media","story_beat":"payoff","media_query":"Mars sunset","media_file":"File:MarsSunsetCut.jpg","media_fit":"wide","media_motion":"push"},
               ],
           }
 
