@@ -91,6 +91,7 @@ class StudioTests(unittest.TestCase):
         plan=studio.make_plan(premium)
         self.assertEqual(len(plan),len(premium['story_beats']))
         self.assertFalse(any(x.get('story_beat')=='cta' for x in plan))
+        self.assertTrue(all(x.get('visual')=='media' for x in plan))
         manifest=studio.asset_manifest(premium,plan)
         self.assertTrue(all(x.get('strategy')=='external-verified' for x in manifest))
         self.assertTrue(all(x.get('query') for x in manifest))
