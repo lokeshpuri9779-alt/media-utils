@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-4.0.2"
+VERSION = "studio-4.1"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -240,6 +240,14 @@ def direct_story(ch, plan):
         ]
         for name,pat in tests:
             if re.search(pat,low): semantics.append(name)
+        # Story architecture is authoritative: visual meaning follows the beat,
+        # rather than depending on lucky keywords in narration.
+        beat=shot.get('story_beat','')
+        beat_semantic={'map':'map','mechanism':'network','contrast':'compare',
+                       'evidence':'evidence','uncertainty':'evidence',
+                       'consequence':'future'}.get(beat)
+        if beat_semantic and beat_semantic not in semantics:
+            semantics.insert(0,beat_semantic)
         # Narrative role controls editing rhythm. The same semantic subject can
         # therefore be photographed/animated differently at different beats.
         if i==0: role='cold_open'
@@ -270,6 +278,11 @@ def direct_story(ch, plan):
                         'mixed-media'
                     ),
                     director_asset=(
+                        'map-explainer' if beat=='map' else
+                        'mechanism-diagram' if beat=='mechanism' else
+                        'comparison-graphic' if beat=='contrast' else
+                        'source-document' if beat in ('evidence','uncertainty') and source_count>0 else
+                        'editorial-illustration' if beat in ('reveal','consequence','payoff') else
                         'source-document' if role=='proof' and source_count>0 else
                         'map-explainer' if 'map' in semantics else
                         'mechanism-diagram' if 'network' in semantics else
