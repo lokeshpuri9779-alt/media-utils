@@ -69,7 +69,7 @@ def ingest_csv(data, content, report, now):
 
 
 def refresh_reach(data, now, force=False):
-    from autonomy import _credential, _report_error, expected_channel_id()
+    from autonomy import _credential, _report_error, expected_channel_id
     state = data.setdefault("reach_state", {})
     try:
         if not force and now - datetime.fromisoformat(state.get("checked_at", "")) < timedelta(hours=6):
