@@ -38,9 +38,8 @@ on:
     branches:
       - main
   workflow_dispatch:
-  workflow_run:
-    workflows: ["promote Astra production"]
-    types: [completed]
+  repository_dispatch:
+    types: [astra-production-promoted]
   schedule:
     # Run the Shorts controller every 30 minutes: 48 scheduled opportunities/day.
     # Publishing/dedupe/quota gates still decide whether an upload is allowed.
@@ -58,9 +57,8 @@ permissions:
 
 jobs:
   process:
-    # Verify publishing after a successful deployment as well as on the clock.
-    # The promotion workflow only accepts push CI, so this cannot recurse.
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    # Verify publishing after an actual production promotion as well as on the clock.
+    # Promotion emits this dedicated event only after the newest validated main SHA lands.
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
