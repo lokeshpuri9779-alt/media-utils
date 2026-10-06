@@ -235,7 +235,8 @@ def render(out,still_dir=None,episode_id=EPISODE_ID,trend_items=None):
     if still_dir:
         folder=Path(still_dir);folder.mkdir(parents=True,exist_ok=True)
         for i in (0,5,8,11,13,16):frame(plan,plan[i]['start']+1,total).save(folder/f'chapter_{i}.jpg',quality=93)
-    report={'renderer':studio.VERSION,'format':'long','genre':'space','content_id':EPISODE_ID,'duration':round(total,3),'resolution':[1920,1080],'fps':studio.FPS,'scene_count':len(plan),'audio':audio_info,'chapters':chapters,'thumbnail':str(thumb)}
+    report={'renderer':studio.VERSION,'format':'long','genre':'space','content_id':EPISODE_ID,'duration':round(total,3),'resolution':[1920,1080],'fps':studio.FPS,'scene_count':len(plan),'audio':audio_info,'chapters':chapters,'thumbnail':str(thumb),
+            'scenes':[{k:v for k,v in s.items() if k!='audio'} for s in plan]}
     out.with_suffix('.json').write_text(json.dumps(report,indent=2))
     print('Long-form complete:',json.dumps(report),flush=True)
     return TITLE,description,report
