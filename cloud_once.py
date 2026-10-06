@@ -727,8 +727,42 @@ def _draw_centered(draw, xy, text, fnt, fill, max_width=920, spacing=18, shadow=
 
 def make_short(out: Path, excluded_ids=None, excluded_titles=None) -> tuple[str, str]:
     from studio_renderer import render_short
-    ch = select_content(excluded_ids=excluded_ids, excluded_titles=excluded_titles)
-    report = render_short(ch, out)
+    # A renderer rejection should retire the weak concept, not the upload slot.
+    # Try fresh stories with bounded work; never lower the creative threshold.
+    rejected_ids=set(excluded_ids or set())
+    rejected_titles=set(excluded_titles or set())
+    failures=[]
+    ch=None; report=None
+    for attempt in range(4):
+        ch = select_content(excluded_ids=rejected_ids, excluded_titles=rejected_titles)
+        try:
+            report = render_short(ch, out)
+            break
+        except RuntimeError as exc:
+            msg=str(exc)
+            if 'Creative gate rejected' not in msg:
+                raise
+            rejected_ids.add(str(ch.get('content_id') or ''))
+            rejected_titles.add(str(ch.get('title') or ''))
+            failures.append({'content_id':ch.get('content_id'),'title':ch.get('title'),'reason':msg[:500]})
+            print('Creative rejection: selecting a fresh story instead of lowering quality:', json.dumps(failures[-1], ensure_ascii=False))
+    if report is None:
+        data=load_performance()
+        health=data.setdefault('creative_health',{})
+        health['consecutive_exhausted_slots']=int(health.get('consecutive_exhausted_slots',0))+1
+        health['last_failures']=failures[-4:]
+        health['last_failure_at']=datetime.now(IST).isoformat()
+        health['renderer_diagnostic_required']=health['consecutive_exhausted_slots']>=3
+        save_performance(data)
+        raise RuntimeError('Creative health: four fresh concepts failed Studio quality; slot skipped without lowering the gate.')
+    # Successful recovery clears the exhausted-slot streak while retaining history.
+    data=load_performance()
+    health=data.setdefault('creative_health',{})
+    health['consecutive_exhausted_slots']=0
+    health['renderer_diagnostic_required']=False
+    health['last_success_at']=datetime.now(IST).isoformat()
+    health['rejected_before_success']=len(failures)
+    save_performance(data)
     CONTENT_META.update(format="short", renderer=report["renderer"], duration=report["duration"],
                         voice=report["audio"]["voice"], scene_count=len(report["scenes"]))
     desc = " ".join(ch["question"].split()) + "\n" + " ".join(ch["answer"].split())
