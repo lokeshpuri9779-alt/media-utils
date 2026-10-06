@@ -268,7 +268,7 @@ def direct_story(ch, plan):
                     director_source_depth=source_count,
                     director_motion=['arc','scan','pulse','parallax'][seed%4],
                     director_cut_rate=round(.55 + energy*.75,2),
-                    director_caption_mode=['phrase','keyword','question'][seed%3],
+                    director_caption_mode=('question' if role=='cold_open' and '?' in str(shot.get('speech','')) else 'phrase'),
                     director_style=(
                         'mixed-media' if role=='proof' else
                         'vector-motion' if any(x in semantics for x in ('map','compare','network')) else
@@ -371,7 +371,7 @@ def score_audio(plan, duration, genre, path):
         note=root*2**([0,7,12,10,0,7,15,12][i%8]/12)
         melody[start:start+length]+=(np.sin(2*np.pi*note*u)+.23*np.sin(4*np.pi*note*u))*np.exp(-u*13)*.027
     pad=(np.sin(2*np.pi*root*.5*t)+np.sin(2*np.pi*root*.5*1.5*t))*.015
-    music=(kick+melody+pad)*.32
+    music=(kick+melody+pad)*.18
     duck=np.ones(n,dtype=np.float32)
     speech=np.zeros(n,dtype=np.float32); fx=np.zeros(n,dtype=np.float32)
     for s in plan:
