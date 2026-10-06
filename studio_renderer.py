@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-5.0"
+VERSION = "studio-6.0"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -295,53 +295,27 @@ def direct_story(ch, plan):
     return directed
 
 def make_plan(ch):
-    base=_story_plan(ch)
-    # Append CTA before direction so it receives its own role/style/layout rather
-    # than inheriting metadata from the previous shot.
-    # One relevant invitation per video, after the viewer has received the payoff.
-    options={
-        'space':[('WHAT SURPRISED YOU?','Which planet should we explain next?'),('MORE SPACE STORIES','Subscribe for more short space explainers.')],
-        'tech':[('SAVE SOMEONE TIME','Share this shortcut with someone who needs it.'),('WAS THIS USEFUL?','If this helped, give it a like.')],
-        'football':[('YOUR NEXT QUESTION?','Which football rule should we explain next?'),('SEND IT TO A FAN','Share this with a football fan.')],
-        'fiction':[('YOUR ENDING?','How would you end this story?'),('MORE SMALL STORIES','Subscribe for another original story.')],
-        'challenge':[('YOUR ANSWER?','Tell us your answer in the comments.'),('CHALLENGE A FRIEND','Share this challenge with a friend.')],
-        'current':[('WHAT NEXT?','The next verified development is the part worth watching.'),('THE BOTTOM LINE','Keep the source, not the hype, in mind.')],
-    }
-    genre=ch.get('genre','challenge')
-    idx=max(-120,min(120,int(hashlib.sha256(ch.get('content_id',ch['question']).encode()).hexdigest()[:8],16)))%2
-    headline,speech=options[genre][idx]
-    last=dict(base[-1]);last.update(headline=headline,speech=speech,min_duration=2.0,story_beat='cta')
-    last.pop('countdown',None);last.pop('answer',None)
-    base.append(last)
-    return direct_story(ch,base)
+    # Studio 6 ends on the story payoff. Generic CTA cards were a major source
+    # of template feel and are deliberately removed from normal Shorts.
+    return direct_story(ch, _story_plan(ch))
 
 
-def voice_plan(plan, genre, max_duration=58):
+def voice_plan(plan, genre, max_duration=36, voice_name='af_heart'):
     engine=voice_engine()
     cursor=0.0
     for s in plan:
         spoken=str(s['speech']).strip()
-        # Expressive phrasing is shared by Shorts and long-form because both
-        # renderers use this voice plan. Long-form scenes also carry chapter /
-        # section metadata, so they receive the same energetic delivery.
-        expressive = genre=='current' or bool(s.get('chapter')) or bool(s.get('section'))
-        if expressive:
-            if s.get('label') in {'JUST CHANGED','WHY NOW?'} or s.get('section') in {1,2}:
-                spoken=spoken.rstrip('.')
-                spoken += '!' if '?' not in spoken else ''
-            spoken=spoken.replace(': ', ' — ').replace('; ', '. ')
-        # Use Kokoro's more animated American voice for discovery/news narration.
-        # Fiction keeps the warmer voice; pacing remains the requested 1.09x.
-        voice='af_bella' if genre=='current' else 'af_heart'
-        samples, rate=engine.create(spoken,voice=voice,speed=1.09,lang='en-us')
+        # Natural cadence wins over synthetic "news voice" punctuation tricks.
+        spoken=spoken.replace('; ', '. ').replace('  ',' ')
+        samples, rate=engine.create(spoken,voice=voice_name,speed=1.09,lang='en-us')
         samples=np.asarray(samples,dtype=np.float32)
         if rate!=RATE or len(samples)==0 or not np.isfinite(samples).all():
             raise RuntimeError('Invalid narration audio; refusing to publish an incomplete video.')
         # Normalize each line gently, then mix with a substantially quieter score.
         peak=float(np.max(np.abs(samples)))
         if peak>0: samples=samples*(.65/peak)
-        s.update(audio=samples,start=cursor,voice_start=cursor+.18,
-                 duration=max(float(s['min_duration']),len(samples)/RATE+.55))
+        s.update(audio=samples,start=cursor,voice_start=cursor+.08,
+                 duration=max(float(s['min_duration']),len(samples)/RATE+.24))
         s['end']=s['start']+s['duration']
         cursor=s['end']
     if cursor>max_duration:
@@ -397,12 +371,12 @@ def score_audio(plan, duration, genre, path):
         note=root*2**([0,7,12,10,0,7,15,12][i%8]/12)
         melody[start:start+length]+=(np.sin(2*np.pi*note*u)+.23*np.sin(4*np.pi*note*u))*np.exp(-u*13)*.027
     pad=(np.sin(2*np.pi*root*.5*t)+np.sin(2*np.pi*root*.5*1.5*t))*.015
-    music=kick+melody+pad
+    music=(kick+melody+pad)*.32
     duck=np.ones(n,dtype=np.float32)
     speech=np.zeros(n,dtype=np.float32); fx=np.zeros(n,dtype=np.float32)
     for s in plan:
         j=int(s['voice_start']*RATE); b=s['audio']; end=min(n,j+len(b))
-        speech[j:end]+=b[:end-j]*1.16
+        speech[j:end]+=b[:end-j]*1.08
         # Smooth 80 ms attack/release on music ducking; no pumping on every word.
         idx=np.arange(n,dtype=np.float32)/RATE
         env=np.minimum(np.clip((idx-s['voice_start']+.08)/.08,0,1),np.clip((s['voice_start']+len(b)/RATE+.12-idx)/.12,0,1))
@@ -411,12 +385,12 @@ def score_audio(plan, duration, genre, path):
         u=np.arange(size,dtype=np.float32)/RATE
         noise=rng.normal(0,1,size).astype(np.float32)
         noise=np.convolve(noise,np.ones(12)/12,mode='same')
-        fx[k:k+size]+=noise*np.sin(np.pi*np.arange(size)/max(1,size))*.070
+        fx[k:k+size]+=noise*np.sin(np.pi*np.arange(size)/max(1,size))*.025
         # Attention transient: strongest on the opening beat, lighter thereafter.
-        hit=.15 if s.get('start',0)<.1 else .09
+        hit=.055 if s.get('start',0)<.1 else .032
         fx[k:k+size]+=np.sin(2*np.pi*(110+420*u)*u)*np.exp(-u*18)*hit
         if s.get('answer'):
-            fx[k:k+size]+=np.sin(2*np.pi*880*u)*np.exp(-u*14)*.08
+            fx[k:k+size]+=np.sin(2*np.pi*880*u)*np.exp(-u*14)*.035
         if s.get('countdown'):
             for second in range(1,6):
                 pos=int((s['end']-second)*RATE); size=min(int(.055*RATE),n-pos)
@@ -433,7 +407,7 @@ def score_audio(plan, duration, genre, path):
     with wave.open(str(path),'wb') as f:
         f.setnchannels(2);f.setsampwidth(2);f.setframerate(RATE)
         f.writeframes((mixed*32767).astype('<i2').tobytes())
-    return {'peak_dbfs':round(20*math.log10(max(float(np.max(np.abs(mixed))),1e-9)),2),'voice':'Kokoro expressive profile','music':'original procedural score'}
+    return {'peak_dbfs':round(20*math.log10(max(float(np.max(np.abs(mixed))),1e-9)),2),'voice':'Kokoro expressive profile','music':'subtle procedural bed'}
 
 
 @lru_cache(maxsize=5)
@@ -805,14 +779,10 @@ def render_frame(plan,t,genre,total):
     if s.get('director_pattern_interrupt') and u<.16:
         a=int(150*(1-u/.16))
         d.line((70,600,940,600),fill=accent+(a,) if im.mode=='RGBA' else accent,width=9)
-    # Consistent top bar and compact scene index.
-    d.rounded_rectangle((70,130,126,186),radius=16,fill=accent)
-    d.text((98,158),'L',font=font(37),anchor='mm',fill=(12,17,28))
-    d.text((148,143),'RAYVAN',font=font(33),fill=(237,240,250))
-    d.text((148,182),('ORIGINAL FICTION' if genre=='fiction' else genre.upper()+' / SHORT CUTS'),font=font(20),fill=(141,159,183))
-    d.text((935,162),f'{index+1:02d} / {len(plan):02d}',font=font(25),anchor='rm',fill=accent)
-    headline_offset=int((1-ease(u/.30))*24)
-    fit_text(d,s['headline'],(70,266+headline_offset,940,515+headline_offset),size=84,fill='white',max_lines=3)
+    # Minimal identity: no permanent template bar, scene counter or logo intro.
+    d.text((72,108),'RAYVAN',font=font(23),fill=(205,213,228))
+    headline_offset=int((1-ease(u/.24))*18)
+    fit_text(d,s['headline'],(72,185+headline_offset,940,430+headline_offset),size=76,fill='white',max_lines=3)
     # Phrase captions use actual utterance windows; active word timing is approximate.
     words=s['speech'].split()
     dur=len(s['audio'])/RATE
@@ -825,11 +795,9 @@ def render_frame(plan,t,genre,total):
     elif mode=='question' and text and ('?' in s.get('speech','') or s.get('director_role')=='cold_open'):
         text=text.rstrip(' .!?')+'?'
     if s.get('countdown') and t>s['voice_start']+dur+.1: text='YOUR TURN'
-    d.rounded_rectangle((75,1370,950,1570),radius=28,fill=(8,12,23))
-    fit_text(d,text,(104,1384,921,1555),size=59,fill=accent,max_lines=2)
-    d.line((75,1620,950,1620),fill=(53,59,80),width=4)
-    d.line((75,1620,75+875*min(1,t/total),1620),fill=accent,width=4)
-    d.text((75,1660),'RAYVAN — STORIES BEYOND THE ORDINARY',font=font(22),fill=(144,158,180))
+    # Captions support the footage instead of becoming the footage.
+    d.rounded_rectangle((88,1438,918,1588),radius=24,fill=(8,12,23))
+    fit_text(d,text,(116,1450,890,1575),size=52,fill=(242,245,250),max_lines=2)
     # Brief ink-dark cut transition rather than full-screen flashing.
     if index>0 and u<.13:
         shade=Image.new('RGB',im.size,(8,12,23)); im=Image.blend(shade,im,.55+.45*u/.13)
@@ -1186,7 +1154,7 @@ def render_short(ch,out,still_dir=None):
     creative_report['repair_attempts']=repair_attempts
     creative_report['asset_manifest']=resolved_assets
     creative_report['asset_resolution']=asset_report
-    duration=voice_plan(plan,genre)
+    duration=voice_plan(plan,genre,max_duration=float(ch.get('target_duration_max',36)),voice_name=str(ch.get('voice_profile') or 'af_heart'))
     out=Path(out);out.parent.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='astra_studio_') as tmp:
         tmp=Path(tmp);audio=tmp/'mix.wav'
