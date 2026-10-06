@@ -407,13 +407,9 @@ def choose_content(data, trends, now=None, excluded_ids=None, excluded_titles=No
     used_titles.update(normalize_content_text(v.get('title')) for v in videos.values() if v.get('title'))
     candidates = [c for c in content_catalog() if c['content_id'] not in used
                   and normalize_content_text(c['title']) not in used_titles]
-    for _ in range(20):
-        ch = _challenge()
-        ch.update(genre='challenge', source='', keywords=[])
-        ch['content_id'] = 'quiz-' + hashlib.sha256((ch['question']+ch['answer']).encode()).hexdigest()[:16]
-        if ch['content_id'] not in used and normalize_content_text(ch['title']) not in used_titles:
-            candidates.append(ch)
-            break
+    # Premium RAYVAN policy: procedural quizzes/riddles are deliberately not
+    # injected into production. Capacity is allowed to go unused rather than
+    # filling the channel with game-like or juvenile challenge cards.
     if not candidates:
         raise RuntimeError('No fresh content available; skipping rather than repeating.')
     # Diversity gate: RAYVAN is a broad discovery brand, not a repetitive
@@ -461,6 +457,17 @@ def choose_content(data, trends, now=None, excluded_ids=None, excluded_titles=No
         raise RuntimeError('Novelty gate rejected repetitive concepts; skipping this slot rather than publishing filler.')
     for c in candidates:
         c['trend_matches'] = [t for t in trends if any(re.search(r'\b'+re.escape(k)+r'\b', t['title'], re.I) for k in c['keywords'])][:3]
+
+    # Trend-led lane: when a verified live signal maps to a sourced RAYVAN
+    # subject, prefer it decisively. Do not pretend an unrelated canned topic
+    # is trending. Fiction remains an intentional evergreen discovery lane.
+    trend_led = [x for x in candidates if x.get('trend_matches') and x.get('source')]
+    if trend_led:
+        candidates = trend_led
+    else:
+        premium = [x for x in candidates if x.get('genre') in {'space','fiction','football'}]
+        if premium:
+            candidates = premium
     # Stage 0: rank concepts before rendering. With little clean channel evidence,
     # use structural priors + live demand; as analytics mature, genre evidence joins scoring.
     from viral_prior import rank_candidates
