@@ -49,7 +49,7 @@ def infer_visual_intent(beat: dict, index: int) -> dict:
         duration = 2.2
 
     motion = "fast_push" if index == 0 else "slow_push"
-    if visual_type in {"compare", "data", "map", "mechanism"}:
+    if index > 0 and visual_type in {"compare", "data", "map", "mechanism"}:
         motion = "guided_motion"
 
     return {
