@@ -121,6 +121,13 @@ def packaging_competition(c: dict) -> dict:
     """
     x=dict(c)
     original_title=" ".join(str(x.get("title") or "").replace("#Shorts","").split()).strip()
+    if x.get("premium_story"):
+        # Curated package is part of the editorial product. Do not mutate it into
+        # generic curiosity-template wording after the creative decision.
+        x["title"]=original_title
+        x["packaging_winner_score"]=round(.70*packaging_score(x)+.30*story_score(x),2)
+        x["packaging_candidates"]=[{"title":original_title,"hook":x.get("hook",""),"score":x["packaging_winner_score"]}]
+        return x
     original_hook=" ".join(str(x.get("hook") or "").split()).strip()
     topic=" ".join(str(x.get("topic") or "").split()).strip()
     headline=" ".join(str(x.get("news_title") or "").split()).strip()

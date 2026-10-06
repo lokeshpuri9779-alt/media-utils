@@ -88,6 +88,18 @@ def scene(headline, speech, visual, label='', sub='', duration=0, **extra):
 def _story_plan(ch):
     genre, cid = ch.get('genre', 'challenge'), ch.get('content_id', '')
     q, a = ch['question'].replace('\n', ' '), ch['answer'].replace('\n', ' ')
+    # Premium stories carry their own editorial beat sheet. The renderer follows
+    # the story rather than forcing the story into a reusable genre template.
+    if ch.get('story_beats'):
+        out=[]
+        for raw in ch['story_beats']:
+            item=dict(raw)
+            out.append(scene(
+                item.pop('headline'), item.pop('speech'), item.pop('visual'),
+                item.pop('label',''), item.pop('sub',''), duration=item.pop('duration',0),
+                **item
+            ))
+        return out
     if cid == 'venus-spin':
         return [
             scene('ONE SPIN\nLONGER THAN A YEAR', 'On Venus, one spin takes longer than a year.', 'planet', 'VENUS', 'THE CLOCK RUNS DIFFERENTLY'),
@@ -479,6 +491,14 @@ def draw_visual(im,s,t,u,accent):
         d=ImageDraw.Draw(im)
         fit_text(d,s['label'],(80,1090,935,1240),size=104,fill=accent,max_lines=2)
         fit_text(d,s['sub'],(85,1245,930,1310),size=27,fill=(184,192,214),max_lines=2)
+    elif visual=='media':
+        # Premium media-first canvas. The verified subject asset is composited
+        # after this layer; no generic diagram or fake infographic competes with it.
+        d.rounded_rectangle((84,500,996,1280),radius=34,fill=(10,16,28),outline=(42,55,78),width=2)
+        d.rounded_rectangle((106,522,974,1258),radius=26,outline=accent,width=2)
+        if s.get('label'):
+            d.rounded_rectangle((116,1168,520,1236),radius=20,fill=(8,12,23))
+            fit_text(d,s['label'],(132,1176,504,1228),size=31,fill=accent,max_lines=1)
     elif visual=='pitch':
         for i in range(7):
             d.polygon([(115+i*118,650),(233+i*118,650),(258+i*108,1090),(145+i*108,1090)],fill=(9,53+(i%2)*8,48))
@@ -817,18 +837,24 @@ def asset_manifest(ch, plan):
         semantics=p.get('director_semantics',[])
         # This manifest deliberately does not download arbitrary web media.
         # It tells a future provider exactly what is needed and preserves provenance.
-        if kind=='source-document' and source:
+        explicit_query=' '.join(str(p.get('media_query') or '').split())
+        if explicit_query:
+            # Only an editorial beat that deliberately names the needed subject
+            # may search an external provider. This preserves semantic isolation.
+            strategy='external-verified'
+            query=explicit_query
+        elif kind=='source-document' and source:
             strategy='source-derived'
             query='Evidence from the cited source for: '+topic
         elif kind in {'map-explainer','mechanism-diagram','comparison-graphic','time-visualization'}:
             strategy='original-procedural'
-            query=f'{kind} explaining {topic}'
+            query=explicit_query or f'{kind} explaining {topic}'
         elif kind=='editorial-illustration':
             strategy='original-illustration'
-            query='Non-likeness editorial concept illustrating: '+topic
+            query=explicit_query or ('Non-likeness editorial concept illustrating: '+topic)
         else:
             strategy='original-motion'
-            query='Abstract visual metaphor for: '+topic
+            query=explicit_query or ('Abstract visual metaphor for: '+topic)
         manifest.append({
             'shot':i+1,'kind':kind,'strategy':strategy,'query':query[:240],
             'source_url':source if strategy=='source-derived' else '',
@@ -847,6 +873,11 @@ def resolve_assets(manifest):
     for item in manifest:
         r=dict(item); strategy=item['strategy']
         if strategy in {'original-procedural','original-motion','original-illustration'}:
+            r.update(provider='astra-studio',status='ready',cost=0,
+                     license='original-generated-by-astra')
+        elif strategy=='external-verified':
+            # Keep a safe local fallback while the explicit provider request is
+            # attempted. Premium stories later require verified subject media.
             r.update(provider='astra-studio',status='ready',cost=0,
                      license='original-generated-by-astra')
         elif strategy=='source-derived':
@@ -1156,6 +1187,11 @@ def render_short(ch,out,still_dir=None):
     resolved_assets=prepare_media_cache(resolve_assets(assets))
     resolved_assets=acquire_story_media(resolved_assets)
     asset_report=asset_resolution_gate(resolved_assets)
+    if ch.get('premium_story'):
+        verified=sum(1 for x in resolved_assets if x.get('provider')=='wikimedia-commons')
+        if verified < 2:
+            raise RuntimeError('Creative gate rejected premium story: fewer than two verified subject-specific media assets resolved.')
+        asset_report['verified_subject_media']=verified
     # Bind resolved asset metadata to the corresponding directed shot.
     for shot,item in zip(plan,resolved_assets): shot['resolved_asset']=item
     creative_report=creative_quality_gate(ch,plan)

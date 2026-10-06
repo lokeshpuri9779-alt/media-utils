@@ -339,7 +339,10 @@ NASA_SOURCE = 'https://science.nasa.gov/venus/venus-facts/'
 FOOT_SOURCE = 'https://www.theifab.com/laws/latest/offside/'
 
 def content_catalog():
-    # Original scripts; sources support facts, not copied article text.
+    # Premium viewer-first stories are curated around a visual payoff and a
+    # primary source. Legacy evergreen rows remain as a lower-priority fallback.
+    from premium_stories import catalog as premium_catalog
+    premium = premium_catalog()
     rows = [
         ('tech', 'clipboard', 'YOUR LAST COPY?', 'Copied something else?\nWindows can keep\na clipboard history.', 'Press Win + V.\nEnable history first.\nAvoid storing secrets.', 'Windows clipboard history in seconds', MS_SOURCE, ['windows', 'microsoft', 'computer']),
         ('tech', 'screenshot', 'CAPTURE JUST A BIT', 'Need one part\nof your screen?', 'Win + Shift + S\nopens screen snipping.\nSelect the area.', 'Capture part of your Windows screen', MS_SOURCE, ['windows', 'microsoft', 'computer']),
@@ -353,10 +356,11 @@ def content_catalog():
         ('fiction', 'door', 'THE EXTRA DOOR', 'Every night, a new\ndoor appeared\nin her tiny flat.', 'Tonight she opened one.\nOn the other side,\nshe was knocking.', 'The extra door | Original microfiction', '', []),
         ('fiction', 'robot', 'ONE LAST ORDER', 'The old robot was\ntold to guard\na single seed.', 'A thousand years later,\nit finally rested\nin a forest.', 'One last order | Original microfiction', '', []),
     ]
-    return [dict(genre=g, content_id=i, hook=h, question=q, answer=a,
-                 title=t+' #Shorts', source=s, keywords=k, kind='explainer',
-                 prompt='ORIGINAL FICTION' if g=='fiction' else 'THE SHORT EXPLANATION')
-            for g,i,h,q,a,t,s,k in rows]
+    legacy = [dict(genre=g, content_id=i, hook=h, question=q, answer=a,
+                   title=t+' #Shorts', source=s, keywords=k, kind='explainer',
+                   prompt='ORIGINAL FICTION' if g=='fiction' else 'THE SHORT EXPLANATION')
+              for g,i,h,q,a,t,s,k in rows]
+    return premium + legacy
 
 def _xml_local(tag: str) -> str:
     return str(tag or '').rsplit('}', 1)[-1]
@@ -658,6 +662,11 @@ def choose_content(data, trends, now=None, excluded_ids=None, excluded_titles=No
     if not candidates:
         print('Creative Engine rejections:', json.dumps(creative_rejections[:8], ensure_ascii=False))
         raise RuntimeError('Creative Engine rejected all candidates; skipping rather than publishing weak/template content.')
+    # While premium editorial stories are available, do not let a weaker legacy
+    # template win merely because its prior score is numerically convenient.
+    premium=[c for c in candidates if c.get('premium_story')]
+    if premium:
+        candidates=premium
     candidates = [packaging_competition(c) for c in candidates]
     # Compute the bounded learning policy before ranking so current-run scoring
     # cannot accidentally use yesterday's stale weights.
