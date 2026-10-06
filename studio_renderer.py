@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-2.4"
+VERSION = "studio-2.5"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -709,6 +709,34 @@ def asset_manifest(ch, plan):
         })
     return manifest
 
+
+def resolve_assets(manifest):
+    """Resolve only safe zero-cost local/original providers; fail to procedural art, never scrape."""
+    resolved=[]
+    for item in manifest:
+        r=dict(item); strategy=item['strategy']
+        if strategy in {'original-procedural','original-motion','original-illustration'}:
+            r.update(provider='astra-studio',status='ready',cost=0,
+                     license='original-generated-by-astra')
+        elif strategy=='source-derived':
+            # Source URLs are evidence/provenance, not automatic media licenses.
+            # Until an explicitly authorized media provider is configured, render
+            # a truthful evidence abstraction rather than copying the webpage.
+            r.update(provider='astra-evidence-abstraction',status='ready',cost=0,
+                     license='original-abstraction-no-source-media-copied')
+        else:
+            r.update(provider='none',status='blocked',cost=0,license='unknown')
+        resolved.append(r)
+    return resolved
+
+def asset_resolution_gate(resolved):
+    blocked=[x for x in resolved if x.get('status')!='ready']
+    unsafe=[x for x in resolved if not str(x.get('license','')).startswith(('original-','cc0','public-domain','authorized-'))]
+    if blocked or unsafe:
+        raise RuntimeError('Asset gate rejected unresolved/unsafe media: '+json.dumps({'blocked':blocked,'unsafe':unsafe}))
+    return {'ready':len(resolved),'providers':sorted({x['provider'] for x in resolved}),
+            'zero_cost':all(float(x.get('cost',0))==0 for x in resolved)}
+
 def creative_quality_gate(ch, plan):
     """Fail closed when a rendered story would still behave like a generic template."""
     if not plan: raise RuntimeError('Creative gate: empty shot plan.')
@@ -741,8 +769,11 @@ def render_short(ch,out,still_dir=None):
     if genre not in THEMES: raise ValueError('Unsupported genre')
     plan=make_plan(ch)
     assets=asset_manifest(ch,plan)
+    resolved_assets=resolve_assets(assets)
+    asset_report=asset_resolution_gate(resolved_assets)
     creative_report=creative_quality_gate(ch,plan)
-    creative_report['asset_manifest']=assets
+    creative_report['asset_manifest']=resolved_assets
+    creative_report['asset_resolution']=asset_report
     duration=voice_plan(plan,genre)
     out=Path(out);out.parent.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='astra_studio_') as tmp:
