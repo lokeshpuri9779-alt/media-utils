@@ -634,7 +634,18 @@ def choose_content(data, trends, now=None, excluded_ids=None, excluded_titles=No
             candidates = premium
     # Stage 0: rank concepts before rendering. With little clean channel evidence,
     # use structural priors + live demand; as analytics mature, genre evidence joins scoring.
-    from viral_prior import rank_candidates, packaging_competition
+    from viral_prior import rank_candidates, packaging_competition, creative_worthiness
+    # A trend is not publishable merely because people search for it. Require a
+    # standalone story with a real question/payoff before spending a render slot.
+    worthy=[]
+    for c in candidates:
+        gate=creative_worthiness(c)
+        c=dict(c); c['creative_worthiness']=gate
+        if c.get('genre')!='current' or gate.get('pass'):
+            worthy.append(c)
+    candidates=worthy
+    if not candidates:
+        raise RuntimeError('Creative-worthiness gate rejected all candidates; skipping rather than publishing a generic trend Short.')
     candidates = [packaging_competition(c) for c in candidates]
     strategy = data.get('strategy') or {}
     ranked = rank_candidates(candidates, strategy.get('genre_scores') or {}, data=data)

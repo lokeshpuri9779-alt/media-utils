@@ -7,6 +7,33 @@ POWER = re.compile(r"\b(why|how|what|can you|find|spot|before|never|last|first|s
 PAYOFF = re.compile(r"\b(answer|reveal|because|opens?|shows?|no |yes |same|finally|on the other side|years?|days?|row|col)\b", re.I)
 CURIOSITY = re.compile(r"\b(why|how|what|inside|behind|changed|really|surprising|strange|unexpected|secret|mystery)\b", re.I)
 
+def creative_worthiness(c: dict) -> dict:
+    """Fail closed when demand cannot support an interesting standalone story."""
+    title=(c.get("title") or "").strip()
+    hook=(c.get("hook") or "").strip()
+    question=(c.get("question") or "").strip()
+    answer=(c.get("answer") or "").strip()
+    headline=(c.get("news_title") or "").strip()
+    score=35.0
+    reasons=[]
+    if c.get("source"): score+=12
+    if int(c.get("source_count") or 0)>=2: score+=8
+    if question and answer and question.lower()!=answer.lower(): score+=12
+    if CURIOSITY.search(title+" "+question): score+=10
+    if headline and len(headline.split())>=5: score+=8
+    if hook and len(hook.split())<=8: score+=5
+    # Generic trend narration is not itself a story.
+    generic=("drawing a fresh wave of search interest" in question.lower()
+             and not re.search(r"\b(why|how|because|after|before|reveals?|changes?|first|last|new)\b",
+                               headline+" "+answer,re.I))
+    if generic:
+        score-=25; reasons.append("trend signal lacks a standalone story angle")
+    if len(answer.split())<10:
+        score-=15; reasons.append("payoff too thin")
+    score=_clip(score)
+    return {"score":round(score,1),"pass":score>=65.0,
+            "reasons":reasons or ["clear sourced question/payoff structure"]}
+
 def packaging_score(c: dict) -> float:
     """Score the click promise without rewarding deception or empty clickbait."""
     title=(c.get("title") or "").strip()
