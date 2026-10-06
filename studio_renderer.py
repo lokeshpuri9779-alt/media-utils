@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-1.1"
+VERSION = "studio-2.0"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -465,11 +465,52 @@ def draw_visual(im,s,t,u,accent):
             fit_text(d,str(min(5,remain)),(450,1200,564,1300),size=65,fill=(17,15,28))
 
 
+
+def _semantic_tokens(s):
+    text=' '.join(str(s.get(k,'')) for k in ('topic','headline','speech','label','sub')).lower()
+    groups={
+      'people':r'president|senator|minister|actor|singer|player|ceo|person|people|opposition|election|politic',
+      'place':r'country|city|state|island|border|travel|location|india|america|europe|asia|africa',
+      'time':r'time|daylight|clock|date|year|month|week|hour|schedule',
+      'tech':r'ai|technology|software|chip|computer|phone|robot|science|internet|app',
+      'money':r'market|stock|price|money|company|business|sales|economy|deal',
+    }
+    return [k for k,p in groups.items() if re.search(p,text)]
+
+def attention_layer(im,s,t,u,accent):
+    """Meaning-driven animated overlays. These compose per story rather than pick a template."""
+    d=ImageDraw.Draw(im,'RGBA'); tokens=_semantic_tokens(s)
+    if 'time' in tokens:
+        cx,cy=790,720;r=145;d.ellipse((cx-r,cy-r,cx+r,cy+r),outline=accent+(165,),width=8)
+        a=-math.pi/2+t*1.8;d.line((cx,cy,cx+math.cos(a)*r*.72,cy+math.sin(a)*r*.72),fill=(255,255,255,225),width=12)
+        d.ellipse((cx-13,cy-13,cx+13,cy+13),fill=accent+(255,))
+    if 'people' in tokens:
+        x=205+int(24*math.sin(t*.8));y=840
+        d.ellipse((x-55,y-205,x+55,y-95),fill=accent+(125,))
+        d.rounded_rectangle((x-105,y-82,x+105,y+165),34,fill=accent+(72,))
+    if 'place' in tokens:
+        for j in range(3):
+            rr=80+j*55+int(8*math.sin(t*2+j))
+            d.arc((530-rr,790-rr,530+rr,790+rr),200,345,fill=accent+(150-j*30,),width=7)
+        d.ellipse((516,776,544,804),fill=(255,255,255,235))
+    if 'tech' in tokens:
+        pts=[(170,700),(345,590),(550,735),(750,575),(875,805)]
+        for a,b in zip(pts,pts[1:]):d.line((*a,*b),fill=accent+(110,),width=6)
+        for x,y in pts:d.ellipse((x-17,y-17,x+17,y+17),fill=accent+(225,))
+    if 'money' in tokens:
+        for j,v in enumerate((.35,.62,.48,.82,.70)):
+            x=165+j*150;h=int(300*v*(.82+.18*ease(u)))
+            d.rounded_rectangle((x,970-h,x+80,970),15,fill=accent+(100+j*20,))
+    if u<.18:
+        alpha=int(200*(1-u/.18));d.rectangle((0,310,W,322),fill=accent+(alpha,))
+    return im
+
 def render_frame(plan,t,genre,total):
     index=next((i for i,s in enumerate(plan) if t<s['end']),len(plan)-1)
     s=plan[index];u=t-s['start']; accent=THEMES[genre][2]
     im=background(genre).copy()
     draw_visual(im,s,t,u,accent)
+    attention_layer(im,s,t,u,accent)
     d=ImageDraw.Draw(im)
     # Consistent top bar and compact scene index.
     d.rounded_rectangle((70,130,126,186),radius=16,fill=accent)
