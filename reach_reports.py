@@ -28,7 +28,7 @@ def _list(client, path, key):
 
 
 def ingest_csv(data, content, report, now):
-    from autonomy import EXPECTED_CHANNEL_ID
+    from autonomy import expected_channel_id
     reader = csv.DictReader(io.StringIO(content))
     required = {"date", "channel_id", "video_id",
                 "video_thumbnail_impressions", "video_thumbnail_impressions_ctr"}
@@ -36,7 +36,7 @@ def ingest_csv(data, content, report, now):
         raise ValueError("Reach CSV schema mismatch")
     staged = []
     for row in reader:
-        if row["channel_id"] != EXPECTED_CHANNEL_ID:
+        if row["channel_id"] != expected_channel_id():
             raise ValueError("Reach report channel mismatch")
         if row["video_id"] not in data.get("videos", {}):
             continue
@@ -69,7 +69,7 @@ def ingest_csv(data, content, report, now):
 
 
 def refresh_reach(data, now, force=False):
-    from autonomy import _credential, _report_error, EXPECTED_CHANNEL_ID
+    from autonomy import _credential, _report_error, expected_channel_id()
     state = data.setdefault("reach_state", {})
     try:
         if not force and now - datetime.fromisoformat(state.get("checked_at", "")) < timedelta(hours=6):
@@ -101,7 +101,7 @@ def refresh_reach(data, now, force=False):
             r = client.get("https://www.googleapis.com/youtube/v3/channels",
                            params={"part": "id", "mine": "true"})
             r.raise_for_status()
-            if [v.get("id") for v in r.json().get("items", [])] != [EXPECTED_CHANNEL_ID]:
+            if [v.get("id") for v in r.json().get("items", [])] != [expected_channel_id()]:
                 raise ValueError("Wrong authorized reporting channel")
             stage = "list_jobs"
             jobs = _list(client, "jobs", "jobs")
