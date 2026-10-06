@@ -17,6 +17,12 @@ from pathlib import Path
 
 import httpx
 
+from open_source_video_engine import (
+    OpenSourceVideoUnavailable,
+    generate_open_source_clip,
+    provider_status as open_source_provider_status,
+)
+
 MODEL = "wan-video/wan-2.6-t2v"
 CREATE_URL = "https://api.replicate.com/v1/models/wan-video/wan-2.6-t2v/predictions"
 MAX_VIDEO_BYTES = 80_000_000
@@ -33,12 +39,20 @@ def paid_generation_enabled() -> bool:
 
 
 def provider_status() -> dict:
+    oss=open_source_provider_status()
+    paid_ready=bool((os.environ.get("REPLICATE_API_TOKEN") or "").strip()) and paid_generation_enabled()
     return {
-        "provider": "replicate",
-        "model": MODEL,
-        "token_configured": bool((os.environ.get("REPLICATE_API_TOKEN") or "").strip()),
-        "paid_generation_enabled": paid_generation_enabled(),
-        "ready": bool((os.environ.get("REPLICATE_API_TOKEN") or "").strip()) and paid_generation_enabled(),
+        "mode": "open-source-first",
+        "selected": oss.get("selected") or ("replicate" if paid_ready else None),
+        "ready": bool(oss.get("ready")) or paid_ready,
+        "open_source": oss,
+        "paid_fallback": {
+            "provider": "replicate",
+            "model": MODEL,
+            "token_configured": bool((os.environ.get("REPLICATE_API_TOKEN") or "").strip()),
+            "paid_generation_enabled": paid_generation_enabled(),
+            "ready": paid_ready,
+        },
     }
 
 
@@ -65,7 +79,7 @@ def _prediction_output_url(payload: dict) -> str:
     return ""
 
 
-def generate_character_clip(shot: dict, output_path: str | Path, timeout_seconds: int = 720) -> dict:
+def _generate_paid_character_clip(shot: dict, output_path: str | Path, timeout_seconds: int = 720) -> dict:
     token = _token()
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -154,6 +168,14 @@ def generate_character_clip(shot: dict, output_path: str | Path, timeout_seconds
         "requested_target_seconds": requested,
         "paid_generation": True,
     }
+
+
+def generate_character_clip(shot: dict, output_path: str | Path, timeout_seconds: int = 720) -> dict:
+    try:
+        return generate_open_source_clip(shot, output_path)
+    except OpenSourceVideoUnavailable:
+        # Paid remote generation is a fallback only and remains double-gated.
+        return _generate_paid_character_clip(shot, output_path, timeout_seconds=timeout_seconds)
 
 
 def generate_storyboard(storyboard: list[dict], root: str | Path) -> tuple[list[Path], list[dict]]:
