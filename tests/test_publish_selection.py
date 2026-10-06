@@ -23,11 +23,9 @@ class PublishSelectionTests(unittest.TestCase):
         now = datetime.now(cloud.IST)
         data = {'videos': {'old': {'content_id': catalog[0]['content_id'],
             'published_at': (now - timedelta(days=100)).isoformat()}}}
-        with patch.object(cloud, 'content_catalog', return_value=[catalog[0]]), \
-             patch.object(cloud, '_challenge', return_value={
-                 'question': '2 + 4', 'answer': '6', 'title': 'Fresh question'}):
-            selected = cloud.choose_content(data, [], now)
-        self.assertNotEqual(selected['content_id'], catalog[0]['content_id'])
+        with patch.object(cloud, 'content_catalog', return_value=[catalog[0]]):
+            with self.assertRaisesRegex(RuntimeError, 'No fresh content available'):
+                cloud.choose_content(data, [], now)
 
     def test_live_identity_parser_handles_s_and_newlines(self):
         channel = MagicMock(status_code=200)
