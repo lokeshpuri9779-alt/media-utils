@@ -1,6 +1,6 @@
 import unittest
 
-from distribution import branded_description, distribution_state, packaging_plan, related_video, source_quality
+from distribution import branded_description, distribution_state, packaging_plan, related_video, source_quality, optimize_title
 
 
 class DistributionTests(unittest.TestCase):
