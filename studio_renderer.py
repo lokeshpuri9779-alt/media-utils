@@ -273,7 +273,7 @@ def score_audio(plan, duration, genre, path):
     speech=np.zeros(n,dtype=np.float32); fx=np.zeros(n,dtype=np.float32)
     for s in plan:
         j=int(s['voice_start']*RATE); b=s['audio']; end=min(n,j+len(b))
-        speech[j:end]+=b[:end-j]
+        speech[j:end]+=b[:end-j]*1.16
         # Smooth 80 ms attack/release on music ducking; no pumping on every word.
         idx=np.arange(n,dtype=np.float32)/RATE
         env=np.minimum(np.clip((idx-s['voice_start']+.08)/.08,0,1),np.clip((s['voice_start']+len(b)/RATE+.12-idx)/.12,0,1))
@@ -282,7 +282,10 @@ def score_audio(plan, duration, genre, path):
         u=np.arange(size,dtype=np.float32)/RATE
         noise=rng.normal(0,1,size).astype(np.float32)
         noise=np.convolve(noise,np.ones(12)/12,mode='same')
-        fx[k:k+size]+=noise*np.sin(np.pi*np.arange(size)/max(1,size))*.048
+        fx[k:k+size]+=noise*np.sin(np.pi*np.arange(size)/max(1,size))*.070
+        # Attention transient: strongest on the opening beat, lighter thereafter.
+        hit=.15 if s.get('start',0)<.1 else .09
+        fx[k:k+size]+=np.sin(2*np.pi*(110+420*u)*u)*np.exp(-u*18)*hit
         if s.get('answer'):
             fx[k:k+size]+=np.sin(2*np.pi*880*u)*np.exp(-u*14)*.08
         if s.get('countdown'):
@@ -297,7 +300,7 @@ def score_audio(plan, duration, genre, path):
     right=(speech+backing*(1-.09*np.sin(t*.8))+fx)*fade
     mixed=np.stack([left,right],axis=1)
     peak=float(np.max(np.abs(mixed)))
-    if peak>.88: mixed*=.88/peak
+    if peak>.94: mixed*=.94/peak
     with wave.open(str(path),'wb') as f:
         f.setnchannels(2);f.setsampwidth(2);f.setframerate(RATE)
         f.writeframes((mixed*32767).astype('<i2').tobytes())
@@ -506,7 +509,7 @@ def render_short(ch,out,still_dir=None):
              '-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r',str(FPS),'-i','pipe:0',
              '-i',str(audio),'-map','0:v','-map','1:a','-c:v','libx264','-preset','fast','-crf','18',
              '-threads','2','-pix_fmt','yuv420p','-c:a','aac','-b:a','192k',
-             '-af','loudnorm=I=-16:TP=-1.5:LRA=9','-movflags','+faststart','-shortest',str(out)]
+             '-af','loudnorm=I=-14:TP=-1.0:LRA=7','-movflags','+faststart','-shortest',str(out)]
         with (tmp/'ffmpeg.log').open('wb') as log:
             proc=subprocess.Popen(cmd,stdin=subprocess.PIPE,stdout=subprocess.DEVNULL,stderr=log)
             try:
