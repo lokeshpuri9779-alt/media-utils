@@ -55,6 +55,19 @@ class GuardianTests(unittest.TestCase):
                  patch.object(cloud_once, "MAX_TARGET", 48):
                 self.assertEqual(cloud_once.load_state(now)["target"], 48)
 
+    def test_controller_enforces_minimum_upload_interval(self):
+        state = {
+            "target": 48,
+            "attempts": 4,
+            "limit_hit": False,
+            "last_attempt_at": "2026-10-06T15:36:21+05:30",
+        }
+        too_soon = cloud_once.datetime(2026, 10, 6, 15, 43, tzinfo=cloud_once.IST)
+        later = cloud_once.datetime(2026, 10, 6, 16, 6, tzinfo=cloud_once.IST)
+        with patch.object(cloud_once, "MIN_UPLOAD_INTERVAL_MINUTES", 25):
+            self.assertFalse(cloud_once.scheduled_attempt_due(too_soon, state))
+            self.assertTrue(cloud_once.scheduled_attempt_due(later, state))
+
     def test_controller_duplicate_retry_interface(self):
         self.assertIn("excluded_ids", inspect.signature(cloud_once.make_short).parameters)
 
