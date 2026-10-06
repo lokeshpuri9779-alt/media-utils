@@ -38,7 +38,7 @@ class CreativeEngineTests(unittest.TestCase):
         c={"genre":"space","title":"Why Venus Is So Hot","hook":"VENUS IS HOTTER",
            "question":"Why is Venus hotter than Mercury?",
            "answer":"Its thick atmosphere traps heat through a powerful greenhouse effect.",
-           "source":"https://science.nasa.gov/"}
+           "source":"https://science.nasa.gov/","premium_story":True,"production_ready":True}
         out, report=creative_rebuild(c)
         self.assertTrue(report["pass"])
         self.assertLessEqual(out["target_duration_max"],27)
