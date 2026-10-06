@@ -316,6 +316,7 @@ def render(out, episode_id, trend_items):
         'scene_count':len(plan),'topic_count':1,'story_mode':'single-topic-deep-dive','audio':audio_info,
         'thumbnail':str(thumb),'sources':[s['url'] for x in topics for s in x.get('sources',[])],
         'creative_quality':quality,'story_beats':[x.get('story_beat') for x in plan],
+        'scenes':[{k:v for k,v in x.items() if k!='audio'} for x in plan],
     }
     out.with_suffix('.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
     print('Trend long-form complete:',json.dumps(report),flush=True)
