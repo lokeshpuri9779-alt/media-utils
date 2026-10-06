@@ -765,6 +765,8 @@ def make_short(out: Path, excluded_ids=None, excluded_titles=None) -> tuple[str,
             director = evaluate_studio_render(ch, report, video_path=out)
             CONTENT_META["creative_director"] = director["director"]
             CONTENT_META["repair_feedback"] = director["feedback"]
+            CONTENT_META["media_qa"] = director.get("media_qa")
+            CONTENT_META["scene_detection"] = director.get("scene_detection")
             print("Creative Director:", json.dumps(director["director"], ensure_ascii=False))
             if not director["pass"]:
                 action = str(director["director"].get("action") or "")
@@ -780,6 +782,8 @@ def make_short(out: Path, excluded_ids=None, excluded_titles=None) -> tuple[str,
                     director = evaluate_studio_render(ch, report, video_path=out)
                     CONTENT_META["creative_director"] = director["director"]
                     CONTENT_META["repair_feedback"] = director["feedback"]
+                    CONTENT_META["media_qa"] = director.get("media_qa")
+                    CONTENT_META["scene_detection"] = director.get("scene_detection")
                     CONTENT_META["director_rerendered"] = True
                     print("Creative Director rerender:", json.dumps(director["director"], ensure_ascii=False))
                 if not director["pass"]:
