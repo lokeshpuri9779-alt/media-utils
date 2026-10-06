@@ -729,7 +729,9 @@ def select_content(excluded_ids=None, excluded_titles=None):
     if not trends:
         trends = fetch_trends(now) + research_signals(data, now)
     ch = choose_content(data, trends, excluded_ids=excluded_ids, excluded_titles=excluded_titles)
-    CONTENT_META = {k:ch.get(k) for k in ('genre','content_id','source','trend_matches','selection_reason','stage0_rank','stage0_score','winner_descendant','exploration_rate','hook','question','prompt','answer','script','news_source','news_title','secondary_source','secondary_news_source','source_count','sensitive_topic','trend_region','trend_traffic','realistic_synthetic','altered_real_event','synthetic_real_person','reused_third_party_media','transformative_commentary','copyright_unlicensed','packaging_winner_score','packaging_candidates')}
+    recent_entries=sorted((data.get("videos") or {}).values(),key=lambda x:x.get("published_at",""),reverse=True)
+    ch["recent_formats"]=[str(x.get("creative_format") or "") for x in recent_entries if x.get("creative_format")][:3]
+    CONTENT_META = {k:ch.get(k) for k in ('genre','content_id','source','trend_matches','selection_reason','stage0_rank','stage0_score','winner_descendant','exploration_rate','hook','question','prompt','answer','script','news_source','news_title','secondary_source','secondary_news_source','source_count','sensitive_topic','trend_region','trend_traffic','realistic_synthetic','altered_real_event','synthetic_real_person','reused_third_party_media','transformative_commentary','copyright_unlicensed','packaging_winner_score','packaging_candidates','creative_format')}
     print('Content decision:', json.dumps(CONTENT_META, ensure_ascii=False))
     return ch
 
@@ -818,7 +820,8 @@ def make_short(out: Path, excluded_ids=None, excluded_titles=None) -> tuple[str,
     health['rejected_before_success']=len(failures)
     save_performance(data)
     CONTENT_META.update(format="short", renderer=report["renderer"], duration=report["duration"],
-                        voice=report["audio"]["voice"], scene_count=len(report["scenes"]))
+                        voice=report["audio"]["voice"], scene_count=len(report["scenes"]),
+                        creative_format=str(ch.get("creative_format") or ((report.get("scenes") or [{}])[0].get("creative_format") or "unknown")))
     desc = " ".join(ch["question"].split()) + "\n" + " ".join(ch["answer"].split())
     if ch["genre"] == "fiction":
         desc += "\nAn original fictional short story."
