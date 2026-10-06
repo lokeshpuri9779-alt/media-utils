@@ -23,7 +23,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 
-VERSION = "studio-6.2"
+VERSION = "studio-6.2.1"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
@@ -827,13 +827,14 @@ def render_frame(plan,t,genre,total):
         attention_layer(im,s,t,u,accent)
     transition_layer(im,s,t,u,accent)
     im=composite_cached_asset(im,s.get('resolved_asset',{}),t=t,u=u,shot=s)
-    if s.get('visual') not in {'media','tidal_lock'}:
+    if s.get('visual') not in {'media','tidal_lock','iss_orbit'}:
         asset_layer(im,s,t,u,accent)
         director_motion_layer(im,s,t,u,accent)
     d=ImageDraw.Draw(im)
-    if str(s.get('media_fit') or '')=='wide':
-        d.text((250,1220),'NEAR',font=font(24),anchor='mm',fill=(210,218,233))
-        d.text((830,1220),'FAR',font=font(24),anchor='mm',fill=(210,218,233))
+    comparison_labels=s.get('comparison_labels') or []
+    if len(comparison_labels)==2:
+        d.text((250,1220),str(comparison_labels[0]),font=font(24),anchor='mm',fill=(210,218,233))
+        d.text((830,1220),str(comparison_labels[1]),font=font(24),anchor='mm',fill=(210,218,233))
     # Director-controlled pattern interrupts are sparse and narrative, not constant.
     if s.get('director_pattern_interrupt') and u<.16:
         a=int(150*(1-u/.16))
@@ -841,7 +842,7 @@ def render_frame(plan,t,genre,total):
     # Minimal identity: no permanent template bar, scene counter or logo intro.
     d.text((72,108),'RAYVAN',font=font(23),fill=(205,213,228))
     headline_offset=int((1-ease(u/.24))*18)
-    premium_visual=s.get('visual') in {'media','tidal_lock'}
+    premium_visual=s.get('visual') in {'media','tidal_lock','iss_orbit'}
     if not premium_visual or u < .80:
         if index==0:
             fit_text(d,s['headline'],(72,165+headline_offset,940,318+headline_offset),size=66,fill='white',max_lines=2)
