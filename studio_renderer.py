@@ -1109,11 +1109,30 @@ def creative_quality_gate(ch, plan):
     if adjacent_repeats>=3: score-=24
     # Cold open must have a deliberate visual language, not an empty/default frame.
     if styles and styles[0] in {'cel-shaded','stylized-cgi','mixed-media'}: score+=5
+    # Hard semantic/editorial failures cannot be hidden by a high diversity score.
+    hard_failures=[]
+    if ch.get('genre')=='current':
+        subject=(str(ch.get('topic') or '') or str(ch.get('hook') or '')).strip().lower()
+        headline=str(ch.get('news_title') or '').strip().lower()
+        # The selected trend subject must actually be represented in the cited story angle.
+        subject_tokens=[t for t in re.findall(r'[a-z0-9]+',subject) if len(t)>2]
+        if subject_tokens and headline and not any(t in headline for t in subject_tokens):
+            hard_failures.append('trend subject is not supported by the selected headline')
+        if int(ch.get('source_count') or 0)>0 and 'source-document' not in assets:
+            hard_failures.append('current story has no source-evidence shot')
+        # A repaired plan made only from abstractions is not automatically premium footage.
+        original_illustrations=sum(a=='editorial-illustration' for a in assets)
+        source_docs=sum(a=='source-document' for a in assets)
+        if len(assets)>=5 and original_illustrations+source_docs >= len(assets)-1:
+            hard_failures.append('visual plan is dominated by repeated illustration/document abstractions')
     score=max(0,min(100,score))
+    if hard_failures:
+        score=min(score,55)
     report={'score':score,'assets':assets,'roles':roles,'motions':motions,
             'semantics':sorted(semantics),'generic_ratio':round(generic_ratio,2),
             'styles':styles,'adjacent_style_repeats':adjacent_repeats,
-            'layouts':layouts,'adjacent_layout_repeats':layout_repeats}
+            'layouts':layouts,'adjacent_layout_repeats':layout_repeats,
+            'hard_failures':hard_failures}
     if score<78:
         raise RuntimeError('Creative gate rejected generic/weak visual plan: '+json.dumps(report))
     return report
