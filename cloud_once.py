@@ -413,11 +413,61 @@ def fetch_trends(now=None):
     print('Fresh search-interest signals:', len(results))
     return results
 
+SENSITIVE_TREND_RE = re.compile(
+    r'\b(election|vote|president|prime minister|minister|government|war|missile|attack|shooting|'
+    r'killed|dead|death|earthquake|flood|cyclone|hurricane|outbreak|vaccine|disease|health|hospital|'
+    r'stock|crypto|bitcoin|market crash|bank|inflation|interest rate|lawsuit|court|arrest)\b', re.I
+)
+
+def _news_host(url: str) -> str:
+    from urllib.parse import urlparse
+    try:
+        parsed=urlparse(str(url or '').strip())
+    except ValueError:
+        return ''
+    if parsed.scheme not in {'http','https'} or not parsed.hostname:
+        return ''
+    host=parsed.hostname.lower()
+    return host[4:] if host.startswith('www.') else host
+
+def _distinct_news(items):
+    out=[]; seen=set()
+    for x in items or []:
+        if not isinstance(x,dict) or not x.get('title') or not x.get('url') or not x.get('source'):
+            continue
+        host=_news_host(x.get('url'))
+        if not host or host in seen:
+            continue
+        seen.add(host); out.append(x)
+    return out
+
+def _sensitive_trend(topic: str, news) -> bool:
+    text=' '.join([str(topic or '')]+[str(x.get('title') or '') for x in news or []])
+    return bool(SENSITIVE_TREND_RE.search(text))
+
+def _trend_title(topic: str, headline: str) -> str:
+    """Turn a raw search query into a natural, curiosity-led Shorts title."""
+    topic=' '.join(str(topic or '').split()).strip()
+    headline=' '.join(str(headline or '').split()).strip()
+    # Prefer the publisher's human-written angle when it is concise enough.
+    clean=re.sub(r'[\u2018\u2019\u201c\u201d"]','',headline)
+    clean=re.sub(r'\s+',' ',clean).strip(' -:|')
+    if 18 <= len(clean) <= 82:
+        base=clean
+    else:
+        words=topic.split()
+        pretty=' '.join(w if w.isupper() else w.capitalize() for w in words)
+        base=f"What Changed With {pretty}?"
+    # Avoid repetitive generic trend-language; #Shorts remains discoverable.
+    base=re.sub(r'(?i)\s*#shorts\s*',' ',base).strip()
+    return (base[:91].rstrip(' .,:;-')+' #Shorts')[:100]
+
+
 def trend_candidates(trends):
     """Create source-linked current-affairs candidates from live trend metadata.
 
-    These are deliberately conservative: no article body is copied, no trend is
-    presented as fact, and unsourced trend rows are ignored.
+    Sensitive breaking-news topics require two distinct publisher domains.
+    Astra never treats search rank as evidence and never copies article bodies.
     """
     import hashlib
     blocked = re.compile(r'\b(porn|xxx|casino|betting|gambling)\b', re.I)
@@ -426,8 +476,11 @@ def trend_candidates(trends):
         topic=' '.join(str(t.get('title') or '').split()).strip()
         if len(topic) < 3 or blocked.search(topic):
             continue
-        news=[x for x in (t.get('news') or []) if x.get('title') and x.get('url') and x.get('source')]
+        news=_distinct_news(t.get('news') or [])
         if not news:
+            continue
+        sensitive=_sensitive_trend(topic,news)
+        if sensitive and len(news) < 2:
             continue
         key=normalize_content_text(topic)
         if not key or key in seen:
@@ -436,15 +489,29 @@ def trend_candidates(trends):
         n=news[0]
         headline=' '.join(str(n['title']).split())[:180]
         source=' '.join(str(n['source']).split())[:80]
+        secondary=news[1] if sensitive else None
+        second_name=' '.join(str((secondary or {}).get('source') or '').split())[:80]
         cid='trend-'+hashlib.sha256((topic+'|'+headline).encode()).hexdigest()[:16]
         hook=topic.upper()[:52]
         question=f"{topic} is drawing a fresh wave of search interest. What changed?"
-        answer=f"One current catalyst is coverage from {source}: {headline}. The trend is a signal, not proof; follow the source as the story develops."
+        if secondary:
+            answer=(
+                f"Current coverage from {source} and {second_name} points to the story around: "
+                f"{headline}. Details can change; the trend is a signal, not proof."
+            )
+        else:
+            answer=(
+                f"One current catalyst is coverage from {source}: {headline}. "
+                "The trend is a signal, not proof; follow the source as the story develops."
+            )
         out.append({
             'genre':'current','kind':'explainer','content_id':cid,'hook':hook,
             'question':question,'prompt':'WHY IT MATTERS','answer':answer,
-            'title':f"Why {topic} Is Trending Right Now #Shorts"[:100],
+            'title':_trend_title(topic, headline),
             'source':str(n['url']),'keywords':[topic.lower()],
+            'secondary_source':str((secondary or {}).get('url') or ''),
+            'secondary_news_source':second_name,
+            'source_count':len(news),'sensitive_topic':sensitive,
             'trend_matches':[t],'news_source':source,'news_title':headline,
             'trend_region':str(t.get('region') or ''),'trend_traffic':str(t.get('traffic') or ''),
         })
@@ -580,7 +647,7 @@ def select_content(excluded_ids=None, excluded_titles=None):
     if not trends:
         trends = fetch_trends(now) + research_signals(data, now)
     ch = choose_content(data, trends, excluded_ids=excluded_ids, excluded_titles=excluded_titles)
-    CONTENT_META = {k:ch.get(k) for k in ('genre','content_id','source','trend_matches','selection_reason','stage0_rank','stage0_score','winner_descendant','exploration_rate','hook','question','prompt','answer','script','news_source','news_title','trend_region','trend_traffic','realistic_synthetic','altered_real_event','synthetic_real_person','reused_third_party_media','transformative_commentary','copyright_unlicensed')}
+    CONTENT_META = {k:ch.get(k) for k in ('genre','content_id','source','trend_matches','selection_reason','stage0_rank','stage0_score','winner_descendant','exploration_rate','hook','question','prompt','answer','script','news_source','news_title','secondary_source','secondary_news_source','source_count','sensitive_topic','trend_region','trend_traffic','realistic_synthetic','altered_real_event','synthetic_real_person','reused_third_party_media','transformative_commentary','copyright_unlicensed')}
     print('Content decision:', json.dumps(CONTENT_META, ensure_ascii=False))
     return ch
 
@@ -610,6 +677,8 @@ def make_short(out: Path, excluded_ids=None, excluded_titles=None) -> tuple[str,
         desc += "\nAn original fictional short story."
     elif ch.get("source"):
         desc += "\nSource: " + ch["source"]
+        if ch.get("secondary_source"):
+            desc += "\nCross-check: " + ch["secondary_source"]
     desc += "\nOriginal motion graphics and music. AI-assisted script and synthetic narration."
     desc += "\n#Shorts #" + ch["genre"].title()
     related = [(vid, info) for vid, info in load_performance().get("videos", {}).items()

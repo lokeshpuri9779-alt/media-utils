@@ -7,6 +7,7 @@ import unittest
 import numpy as np
 import audience_research as research
 import longform
+import longform_trends
 import studio_renderer as studio
 import cloud_once as cloud
 import autonomy
@@ -27,12 +28,15 @@ class GrowthTests(unittest.TestCase):
 
         items=[{
             'title':f'Topic {i}','region':'US','traffic':'100K+',
-            'news':[{'title':f'Headline {i}','url':f'https://example.com/{i}','source':'Example'}]
+            'news':[{'title':f'Headline {i}','url':f'https://example{i}.com/{i}','source':'Example'}]
         } for i in range(5)]
         base={'videos':{'a':old_planet},
               'trend_snapshot':{'checked_at':self.now.replace(hour=7).isoformat(),'items':items}}
         morning=longform.choose_episode(base,self.now.replace(hour=7))
         self.assertTrue(morning.endswith('-am'))
+        pm_without_am=copy.deepcopy(base)
+        pm_without_am['trend_snapshot']['checked_at']=self.now.isoformat()
+        self.assertTrue(longform.choose_episode(pm_without_am,self.now).endswith('-pm'))
         today_morning={'content_id':morning,'format':'long','published_at':self.now.replace(hour=7).isoformat()}
         base['videos']['b']=today_morning
         base['trend_snapshot']['checked_at']=self.now.isoformat()
@@ -50,6 +54,17 @@ class GrowthTests(unittest.TestCase):
         self.assertEqual(candidates[0]['source'],'https://example.com/story')
         self.assertTrue(candidates[0]['trend_matches'])
         self.assertEqual(cloud.trend_candidates([{'title':'Unsourced','region':'US','news':[]}]),[])
+
+        sensitive=[{'title':'President election update','region':'US','traffic':'500K+','at':self.now.isoformat(),
+                    'news':[{'title':'Election result develops','url':'https://one.example/story','source':'One'}]}]
+        self.assertEqual(cloud.trend_candidates(sensitive),[])
+        sensitive[0]['news'].append({'title':'Second outlet confirms the development',
+                                     'url':'https://two.example/story','source':'Two'})
+        checked=cloud.trend_candidates(sensitive)
+        self.assertEqual(len(checked),1)
+        self.assertTrue(checked[0]['sensitive_topic'])
+        self.assertEqual(checked[0]['source_count'],2)
+        self.assertTrue(checked[0]['secondary_source'])
 
     def test_analytics_strategy_prefers_retention_evidence(self):
         data={'videos':{
