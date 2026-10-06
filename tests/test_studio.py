@@ -74,5 +74,17 @@ class StudioTests(unittest.TestCase):
     def test_telemetry_disabled_before_runtime_initialization(self):
         self.assertEqual(os.environ.get('ORT_DISABLE_TELEMETRY'),'1')
 
+
+    def test_procedural_assets_never_get_unrelated_external_overlays(self):
+        items=[
+            {'strategy':'original-procedural','status':'ready','license':'original-generated-by-astra'},
+            {'strategy':'original-illustration','status':'ready','license':'original-generated-by-astra'},
+            {'strategy':'source-derived','status':'ready','license':'original-abstraction-no-source-media-copied'},
+        ]
+        with patch.object(studio,'provider_adapter') as provider:
+            out=studio.acquire_story_media(items)
+        provider.assert_not_called()
+        self.assertEqual(out,items)
+
 if __name__=='__main__':
     unittest.main()
