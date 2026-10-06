@@ -627,7 +627,10 @@ def choose_content(data, trends, now=None, excluded_ids=None, excluded_titles=No
     # is trending. Fiction remains an intentional evergreen discovery lane.
     trend_led = [x for x in candidates if x.get('trend_matches') and x.get('source')]
     if trend_led:
-        candidates = trend_led
+        # Trends get first consideration, but may not erase stronger evergreen
+        # stories. Creative Engine can reject weak live topics and fall through.
+        rest=[x for x in candidates if x not in trend_led]
+        candidates = trend_led + rest
     else:
         premium = [x for x in candidates if x.get('genre') in {'space','fiction','football'}]
         if premium:
@@ -1130,7 +1133,29 @@ def main() -> None:
 
     work = Path(tempfile.mkdtemp(prefix="media_utils_run_"))
     video = work / "clip.mp4"
-    title, desc = make_long(video, long_episode) if long_episode else make_short(video, excluded_ids=pre_render_excluded, excluded_titles=live_titles)
+    try:
+        title, desc = make_long(video, long_episode) if long_episode else make_short(video, excluded_ids=pre_render_excluded, excluded_titles=live_titles)
+    except RuntimeError as exc:
+        msg=str(exc)
+        # A deliberate quality rejection is a healthy skip, not an operational
+        # failure. Do not burn an upload attempt and do not make the scheduler red.
+        if any(key in msg for key in (
+            'Creative Engine rejected all candidates',
+            'Creative health: four fresh concepts failed Studio quality',
+            'Creative-worthiness gate rejected all candidates',
+            'Autonomous quality gate rejected this slot',
+            'No fresh content available',
+            'Novelty gate rejected repetitive concepts',
+        )):
+            print('Quality skip:', msg)
+            health=load_performance().setdefault('creative_health',{})
+            health['last_quality_skip_at']=now.isoformat()
+            health['last_quality_skip_reason']=msg[:500]
+            data=load_performance()
+            data.setdefault('creative_health',{}).update(health)
+            save_performance(data)
+            return
+        raise
     from distribution import branded_description
     perf = load_performance()
     desc, distribution_plan = branded_description(
