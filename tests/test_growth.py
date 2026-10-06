@@ -180,11 +180,11 @@ class GrowthTests(unittest.TestCase):
         self.assertTrue(chapters[0].startswith('0:00'))
         self.assertGreater(sum(len(s['speech'].split()) for s in plan),500)
 
-    def test_one_end_invitation_per_short(self):
+    def test_short_ends_on_story_not_template_cta(self):
         for ch in cloud.content_catalog():
             base=studio._story_plan(ch);plan=studio.make_plan(ch)
-            self.assertEqual(len(plan),len(base)+1)
-            self.assertNotIn('countdown',plan[-1])
+            self.assertEqual(len(plan),len(base))
+            self.assertFalse(any(x.get('story_beat')=='cta' for x in plan))
 
     def test_thumbnail_failure_does_not_reupload(self):
         from pathlib import Path
