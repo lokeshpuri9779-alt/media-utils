@@ -10,7 +10,7 @@ def catalog():
     return [
         {
             "genre":"space","kind":"explainer","content_id":"moon-tidal-lock-v1",
-            "premium_story":True,
+            "premium_story":True,"production_ready":True,
             "hook":"THE MOON DOES ROTATE",
             "question":"Why do we always see almost the same face of the Moon?",
             "answer":"The Moon spins once in the same time it takes to orbit Earth. That synchronous rotation keeps the same side facing us.",
@@ -18,15 +18,15 @@ def catalog():
             "source":"https://science.nasa.gov/moon/tidal-locking/",
             "keywords":["moon","tidal locking","space"],
             "story_beats":[
-                {"headline":"THE MOON DOES ROTATE","speech":"The Moon is rotating. It just hides the motion extremely well.","visual":"media","label":"ROTATING","sub":"NOT FROZEN","story_beat":"reveal","media_query":"Moon near side NASA LRO public domain"},
-                {"headline":"ONE SPIN. ONE ORBIT.","speech":"It turns once in the same time it takes to orbit Earth.","visual":"media","label":"1 = 1","sub":"SPIN / ORBIT","story_beat":"mechanism","media_query":"Moon Earth orbit tidal locking NASA diagram public domain"},
-                {"headline":"THAT LOCKS THE VIEW","speech":"So the same lunar hemisphere keeps facing Earth as the Moon travels around us.","visual":"media","label":"SAME FACE","sub":"SYNCHRONOUS ROTATION","story_beat":"evidence","media_query":"Moon near side far side NASA public domain"},
-                {"headline":"THE FAR SIDE IS REAL","speech":"Spacecraft can see it. From Earth, tidal locking keeps it turned away.","visual":"media","label":"FAR SIDE","sub":"SEEN FROM SPACE","story_beat":"payoff","media_query":"Moon far side NASA LRO public domain"},
+                {"headline":"THE MOON ACTUALLY ROTATES","speech":"The Moon actually rotates. You just cannot easily see it.","visual":"media","label":"","sub":"","story_beat":"reveal","media_query":"Moon nearside LRO","media_file":"File:Moon nearside LRO 5000.jpg","media_fit":"contain"},
+                {"headline":"ONE SPIN = ONE ORBIT","speech":"It spins once in the same time it takes to orbit Earth.","visual":"media","label":"","sub":"","story_beat":"mechanism","media_query":"Tidal locking Moon Earth","media_file":"File:TidalLocking.svg","media_fit":"contain"},
+                {"headline":"SO THE SAME SIDE FACES US","speech":"That keeps the same lunar hemisphere facing Earth through the whole orbit.","visual":"media","label":"","sub":"","story_beat":"evidence","media_query":"Near and far side Moon","media_file":"File:Near and far side of the Moon.jpg","media_fit":"contain"},
+                {"headline":"THE FAR SIDE IS REAL","speech":"The far side is real. Spacecraft can photograph what Earth cannot see directly.","visual":"media","label":"","sub":"","story_beat":"payoff","media_query":"Moon farside LRO","media_file":"File:Moon farside LRO 5000.jpg","media_fit":"contain"},
             ],
         },
         {
             "genre":"space","kind":"explainer","content_id":"mercury-solar-day-v1",
-            "premium_story":True,
+            "premium_story":True,"production_ready":False,
             "hook":"A DAY LASTS TWO YEARS",
             "question":"How can one day on Mercury outlast two Mercury years?",
             "answer":"Mercury orbits the Sun every 88 Earth days, but one full sunrise-to-sunrise solar day lasts 176 Earth days.",
@@ -42,7 +42,7 @@ def catalog():
         },
         {
             "genre":"space","kind":"explainer","content_id":"iss-sixteen-sunrises-v1",
-            "premium_story":True,
+            "premium_story":True,"production_ready":False,
             "hook":"16 SUNRISES A DAY",
             "question":"How can astronauts see sixteen sunrises in one day?",
             "answer":"The International Space Station circles Earth about every 90 minutes, making about 16 orbits in 24 hours.",
@@ -58,7 +58,7 @@ def catalog():
         },
         {
             "genre":"space","kind":"explainer","content_id":"mars-blue-sunset-v1",
-            "premium_story":True,
+            "premium_story":True,"production_ready":False,
             "hook":"MARS HAS BLUE SUNSETS",
             "question":"Why can sunset near the Sun look blue on the Red Planet?",
             "answer":"Fine Martian dust lets blue light stay concentrated closer to the Sun while other colors spread more broadly through the sky.",
@@ -74,7 +74,7 @@ def catalog():
         },
         {
             "genre":"space","kind":"explainer","content_id":"saturn-density-v1",
-            "premium_story":True,
+            "premium_story":True,"production_ready":False,
             "hook":"SATURN COULD FLOAT",
             "question":"Could Saturn really float in water?",
             "answer":"Saturn is the only planet with an average density lower than water. In an impossibly large enough ocean, that means it would float.",

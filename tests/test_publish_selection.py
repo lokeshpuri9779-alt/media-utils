@@ -9,13 +9,17 @@ import cloud_once as cloud
 
 
 class PublishSelectionTests(unittest.TestCase):
-    def test_legacy_live_titles_exclude_catalog_before_render(self):
-        catalog = cloud.content_catalog()
-        wanted = catalog[-1]
-        titles = {cloud.normalize_content_text(c['title']) for c in catalog[:-1]}
-        with patch.object(cloud, '_challenge', return_value={
-            'question': 'old', 'answer': 'old', 'title': catalog[0]['title']}):
-            selected = cloud.choose_content({'videos': {}}, [], excluded_titles=titles)
+    def test_live_titles_exclude_curated_candidate_before_render(self):
+        ready = next(c for c in cloud.content_catalog()
+                     if c.get('premium_story') and c.get('production_ready'))
+        wanted = dict(ready, content_id='curated-backup',
+                      title='A Different Curated Story',
+                      hook='A DIFFERENT STORY')
+        with patch.object(cloud, 'content_catalog', return_value=[ready, wanted]):
+            selected = cloud.choose_content(
+                {'videos': {}}, [],
+                excluded_titles={cloud.normalize_content_text(ready['title'])},
+            )
         self.assertEqual(selected['content_id'], wanted['content_id'])
 
     def test_old_persisted_identity_never_reenters_catalog(self):

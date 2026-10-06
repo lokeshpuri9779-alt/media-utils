@@ -787,13 +787,15 @@ def render_frame(plan,t,genre,total):
         dy=max(0,(nh-H)//2)
         im=moved.crop((dx,dy,dx+W,dy+H))
     draw_visual(im,s,t,u,accent)
-    visual_style_layer(im,s,t,u,accent)
-    composition_layer(im,s,t,u,accent)
+    if s.get('visual')!='media':
+        visual_style_layer(im,s,t,u,accent)
+        composition_layer(im,s,t,u,accent)
+        attention_layer(im,s,t,u,accent)
     transition_layer(im,s,t,u,accent)
-    attention_layer(im,s,t,u,accent)
     im=composite_cached_asset(im,s.get('resolved_asset',{}))
-    asset_layer(im,s,t,u,accent)
-    director_motion_layer(im,s,t,u,accent)
+    if s.get('visual')!='media':
+        asset_layer(im,s,t,u,accent)
+        director_motion_layer(im,s,t,u,accent)
     d=ImageDraw.Draw(im)
     # Director-controlled pattern interrupts are sparse and narrative, not constant.
     if s.get('director_pattern_interrupt') and u<.16:
@@ -802,7 +804,10 @@ def render_frame(plan,t,genre,total):
     # Minimal identity: no permanent template bar, scene counter or logo intro.
     d.text((72,108),'RAYVAN',font=font(23),fill=(205,213,228))
     headline_offset=int((1-ease(u/.24))*18)
-    fit_text(d,s['headline'],(72,185+headline_offset,940,430+headline_offset),size=76,fill='white',max_lines=3)
+    if index==0:
+        fit_text(d,s['headline'],(72,165+headline_offset,940,330+headline_offset),size=70,fill='white',max_lines=2)
+    else:
+        fit_text(d,s['headline'],(72,175+headline_offset,940,315+headline_offset),size=50,fill='white',max_lines=2)
     # Phrase captions use actual utterance windows; active word timing is approximate.
     words=s['speech'].split()
     dur=len(s['audio'])/RATE
@@ -866,6 +871,8 @@ def asset_manifest(ch, plan):
             'secondary_source_url':secondary if strategy=='source-derived' else '',
             'semantics':semantics,
             'required_subject_terms':aliases if strategy=='external-verified' else [],
+            'exact_commons_title':str(p.get('media_file') or '').strip() if strategy=='external-verified' else '',
+            'media_fit':str(p.get('media_fit') or 'cover') if strategy=='external-verified' else 'cover',
             'rights_rule':'original-or-explicitly-authorized-only',
             'no_fake_screenshot':True,
             'no_unverified_real_person_likeness':True,
@@ -927,6 +934,8 @@ def external_media_candidate(item, candidate=None):
     out.update(provider=candidate.get('provider','external-authorized'),
                status='ready',cost=float(candidate.get('cost',0)),
                license=license_id,asset_url=candidate['asset_url'],
+               commons_title=candidate.get('commons_title',''),
+               verified_subject=candidate.get('verified_subject',''),
                provenance={'source_url':candidate['source_url'],
                            'license_url':candidate['license_url'],
                            'creator':candidate['creator']})
@@ -957,15 +966,23 @@ def composite_cached_asset(im,item):
     if not path or not os.path.isfile(path): return im
     try:
         media=Image.open(path).convert('RGB')
-        # Cover crop into a cinematic mid-frame window, preserving caption safe zones.
-        box=(90,520,990,1260); bw,bh=box[2]-box[0],box[3]-box[1]
-        scale=max(bw/media.width,bh/media.height)
-        nw,nh=max(1,int(media.width*scale)),max(1,int(media.height*scale))
-        media=media.resize((nw,nh),Image.Resampling.LANCZOS)
-        x=max(0,(nw-bw)//2); y=max(0,(nh-bh)//2)
-        media=media.crop((x,y,x+bw,y+bh))
-        veil=Image.new('RGB',(bw,bh),(8,12,20))
-        media=Image.blend(media,veil,.12)
+        # Premium media occupies most of the vertical canvas. Diagrams and full
+        # celestial discs use contain-fit so important information is never cropped.
+        box=(40,350,1040,1370); bw,bh=box[2]-box[0],box[3]-box[1]
+        mode=str(item.get('media_fit') or 'cover')
+        if mode=='contain':
+            scale=min(bw/media.width,bh/media.height)
+            nw,nh=max(1,int(media.width*scale)),max(1,int(media.height*scale))
+            media=media.resize((nw,nh),Image.Resampling.LANCZOS)
+            stage=Image.new('RGB',(bw,bh),(5,8,14))
+            stage.paste(media,((bw-nw)//2,(bh-nh)//2))
+            media=stage
+        else:
+            scale=max(bw/media.width,bh/media.height)
+            nw,nh=max(1,int(media.width*scale)),max(1,int(media.height*scale))
+            media=media.resize((nw,nh),Image.Resampling.LANCZOS)
+            x=max(0,(nw-bw)//2); y=max(0,(nh-bh)//2)
+            media=media.crop((x,y,x+bw,y+bh))
         im.paste(media,(box[0],box[1]))
     except Exception:
         return im
@@ -1014,9 +1031,14 @@ def provider_adapter(item):
         q=re.sub(r'(?i)\b(public domain|nasa|diagram|full disk|full planet|image|photo)\b',' ',raw_q)
         q=' '.join(q.split())[:160] or raw_q
         api='https://commons.wikimedia.org/w/api.php'
-        params={'action':'query','generator':'search','gsrsearch':q,'gsrnamespace':'6',
-                'gsrlimit':'20','prop':'imageinfo','iiprop':'url|extmetadata',
-                'iiurlwidth':'1400','format':'json','origin':'*'}
+        exact=str(item.get('exact_commons_title') or '').strip()
+        if exact:
+            params={'action':'query','titles':exact,'prop':'imageinfo','iiprop':'url|extmetadata',
+                    'iiurlwidth':'1800','format':'json','origin':'*'}
+        else:
+            params={'action':'query','generator':'search','gsrsearch':q,'gsrnamespace':'6',
+                    'gsrlimit':'20','prop':'imageinfo','iiprop':'url|extmetadata',
+                    'iiurlwidth':'1400','format':'json','origin':'*'}
         url=api+'?'+urllib.parse.urlencode(params)
         req=urllib.request.Request(url,headers={'User-Agent':'RAYVAN-Astra/1.0 (automated media research)'})
         with urllib.request.urlopen(req,timeout=12) as resp:
