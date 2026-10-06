@@ -476,9 +476,9 @@ def _draw_centered(draw, xy, text, fnt, fill, max_width=920, spacing=18, shadow=
     draw.multiline_text((x, y), text, font=fnt, fill=fill, anchor="mm",
                         align="center", spacing=spacing)
 
-def make_short(out: Path) -> tuple[str, str]:
+def make_short(out: Path, excluded_ids=None) -> tuple[str, str]:
     from studio_renderer import render_short
-    ch = select_content()
+    ch = select_content(excluded_ids=excluded_ids)
     report = render_short(ch, out)
     CONTENT_META.update(format="short", renderer=report["renderer"], duration=report["duration"],
                         voice=report["audio"]["voice"], scene_count=len(report["scenes"]))
