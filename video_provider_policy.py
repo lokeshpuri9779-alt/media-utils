@@ -36,6 +36,10 @@ CAPABILITIES = {
         "hf-zerogpu","remote","free-quota",True,True,
         "Hugging Face ZeroGPU shared compute; must fail closed when free quota is unavailable."
     ),
+    "agnes-free-video": ProviderCapability(
+        "agnes-free-video","remote","free-api",False,True,
+        "Agnes AI cloud video backend used by the MIT-licensed free-video-generator project."
+    ),
     "replicate": ProviderCapability(
         "replicate","remote","paid",True,False,
         "Paid inference fallback; explicit spend approval required."
