@@ -3,6 +3,7 @@ name: media check
 on:
   push:
     paths:
+      - '.github/workflows/media-check.yml'
       - 'cloud_once.py'
       - 'viral_prior.py'
       - 'evolution.py'
