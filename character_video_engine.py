@@ -22,6 +22,11 @@ from open_source_video_engine import (
     generate_open_source_clip,
     provider_status as open_source_provider_status,
 )
+from remote_gpu_client import (
+    RemoteGPUUnavailable,
+    generate_remote_clip,
+    remote_status,
+)
 
 MODEL = "wan-video/wan-2.6-t2v"
 CREATE_URL = "https://api.replicate.com/v1/models/wan-video/wan-2.6-t2v/predictions"
@@ -40,12 +45,15 @@ def paid_generation_enabled() -> bool:
 
 def provider_status() -> dict:
     oss=open_source_provider_status()
+    remote=remote_status()
     paid_ready=bool((os.environ.get("REPLICATE_API_TOKEN") or "").strip()) and paid_generation_enabled()
+    selected=oss.get("selected") or ("remote-open-source-gpu" if remote.get("ready") else ("replicate" if paid_ready else None))
     return {
         "mode": "open-source-first",
-        "selected": oss.get("selected") or ("replicate" if paid_ready else None),
-        "ready": bool(oss.get("ready")) or paid_ready,
+        "selected": selected,
+        "ready": bool(oss.get("ready")) or bool(remote.get("ready")) or paid_ready,
         "open_source": oss,
+        "remote_open_source": remote,
         "paid_fallback": {
             "provider": "replicate",
             "model": MODEL,
@@ -174,7 +182,11 @@ def generate_character_clip(shot: dict, output_path: str | Path, timeout_seconds
     try:
         return generate_open_source_clip(shot, output_path)
     except OpenSourceVideoUnavailable:
-        # Paid remote generation is a fallback only and remains double-gated.
+        pass
+    try:
+        return generate_remote_clip(shot, output_path, timeout_seconds=max(timeout_seconds, 1800))
+    except RemoteGPUUnavailable:
+        # Paid remote generation is the final fallback only and remains double-gated.
         return _generate_paid_character_clip(shot, output_path, timeout_seconds=timeout_seconds)
 
 
