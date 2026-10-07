@@ -1838,10 +1838,10 @@ jobs:
           	var models: Array = sets[chapter]
           	for i in range(12):
           		var path: String = str(models[i % models.size()])
-          		var packed = load(path)
+          		var packed: PackedScene = load(path) as PackedScene
           		if packed == null:
           			continue
-          		var prop := packed.instantiate()
+          		var prop: Node3D = packed.instantiate() as Node3D
           		var angle := float(i) / 12.0 * TAU
           		var radius := 5.0 + float((i * 3) % 5) * 1.8
           		prop.position = checkpoint + Vector3(cos(angle) * radius, 0.15, sin(angle) * radius)
