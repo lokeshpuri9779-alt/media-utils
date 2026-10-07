@@ -1414,7 +1414,7 @@ jobs:
 
           	var available := robot_spawn_points.get_child_count()
           	for i in range(cache_goal):
-          		var marker_index := (wave * 2 + i * 3) % max(available, 1)
+          		var marker_index: int = (wave * 2 + i * 3) % maxi(available, 1)
           		var marker: Marker3D = robot_spawn_points.get_child(marker_index)
           		var cache: PulseCache = PulseCacheScript.new()
           		cache.global_position = marker.global_position + Vector3(0.0, 0.8, 0.0)
