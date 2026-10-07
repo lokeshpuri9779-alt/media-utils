@@ -27,8 +27,8 @@ Status legend: [ ] queued  [~] in progress  [x] completed  [!] blocked
 
 ## P2 — Creative quality system
 [x] Integrate fast renderer into premium_batch_review.py
-[~] Compare FFmpeg-native vs Studio vs HyperFrames automatically
-[ ] Choose best renderer per story/scene rather than globally
+[x] Compare FFmpeg-native vs Studio vs HyperFrames automatically
+[x] Choose best renderer per story/scene rather than globally
 [ ] Add visual diversity penalty for slideshow-like repetition
 [ ] Add empty-space penalty
 [ ] Add text-density penalty
