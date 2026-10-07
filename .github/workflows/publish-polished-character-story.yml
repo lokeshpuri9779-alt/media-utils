@@ -20,7 +20,7 @@ jobs:
       YOUTUBE_PRIVACY: private
       ASTRA_CHANNEL: rayvan
       ASTRA_ALLOW_PAID_CHARACTER_VIDEO: "0"
-      ASTRA_CHARACTER_STORY_ID: tiny-dragon-bubbles-v1
+      ASTRA_CHARACTER_STORY_ID: bear-cub-bakery-v1
       ASTRA_UPLOAD_REVISION: Audio Sync V2
     steps:
       - uses: actions/checkout@v7
