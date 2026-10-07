@@ -796,25 +796,25 @@ jobs:
               'health = max_health\n\tlast_safe_transform = global_transform\n\tfall_start_y = global_position.y\n\tcall_deferred("_emit_health")'
           )
           old='''\t# If we're below -40, respawn (teleport to the initial position).
-\tif transform.origin.y < -40.0:
-\t\ttransform.origin = initial_position
-'''
+          \tif transform.origin.y < -40.0:
+          \t\ttransform.origin = initial_position
+          '''
           new='''\trescue_cooldown = maxf(rescue_cooldown - delta, 0.0)
-\tvar grounded_now := is_on_floor()
-\tif was_on_floor and not grounded_now:
-\t\tfall_start_y = global_position.y
-\tif grounded_now and not was_on_floor:
-\t\tvar fall_distance := fall_start_y - global_position.y
-\t\tif fall_distance > 7.0 and rescue_cooldown <= 0.0:
-\t\t\trecover_to_checkpoint()
-\t\telse:
-\t\t\tlast_safe_transform = global_transform
-\telif grounded_now and global_position.y >= last_safe_transform.origin.y - 2.0:
-\t\tlast_safe_transform = global_transform
-\tif global_position.y < -18.0 and rescue_cooldown <= 0.0:
-\t\trecover_to_checkpoint()
-\twas_on_floor = grounded_now
-'''
+          \tvar grounded_now := is_on_floor()
+          \tif was_on_floor and not grounded_now:
+          \t\tfall_start_y = global_position.y
+          \tif grounded_now and not was_on_floor:
+          \t\tvar fall_distance := fall_start_y - global_position.y
+          \t\tif fall_distance > 7.0 and rescue_cooldown <= 0.0:
+          \t\t\trecover_to_checkpoint()
+          \t\telse:
+          \t\t\tlast_safe_transform = global_transform
+          \telif grounded_now and global_position.y >= last_safe_transform.origin.y - 2.0:
+          \t\tlast_safe_transform = global_transform
+          \tif global_position.y < -18.0 and rescue_cooldown <= 0.0:
+          \t\trecover_to_checkpoint()
+          \twas_on_floor = grounded_now
+          '''
           if old not in s:
               raise SystemExit("old pit recovery block not found")
           s=s.replace(old,new)
@@ -841,28 +841,28 @@ jobs:
           p=Path("game/player/player_input.gd")
           s=p.read_text()
           needle='''\t\tif col.is_empty():
-\t\t\tshoot_target = ray_from + ray_dir * 1000.0
-\t\telse:
-\t\t\tshoot_target = col.position
-'''
+          \t\t\tshoot_target = ray_from + ray_dir * 1000.0
+          \t\telse:
+          \t\t\tshoot_target = col.position
+          '''
           repl=needle+'''\n\t\tif OS.has_feature("mobile"):
-\t\t\tvar best_target: Node3D = null
-\t\t\tvar best_screen_distance := 150.0
-\t\t\tvar screen_center := camera_camera.get_viewport().get_visible_rect().size * 0.5
-\t\t\tfor candidate in get_tree().get_nodes_in_group("hostile"):
-\t\t\t\tif not candidate is Node3D or not is_instance_valid(candidate):
-\t\t\t\t\tcontinue
-\t\t\t\tvar target_pos: Vector3 = candidate.global_position + Vector3.UP * 1.2
-\t\t\t\tif camera_camera.is_position_behind(target_pos):
-\t\t\t\t\tcontinue
-\t\t\t\tvar screen_pos := camera_camera.unproject_position(target_pos)
-\t\t\t\tvar screen_distance := screen_pos.distance_to(screen_center)
-\t\t\t\tif screen_distance < best_screen_distance:
-\t\t\t\t\tbest_screen_distance = screen_distance
-\t\t\t\t\tbest_target = candidate
-\t\t\tif best_target != null:
-\t\t\t\tshoot_target = best_target.global_position + Vector3.UP * 1.2
-'''
+          \t\t\tvar best_target: Node3D = null
+          \t\t\tvar best_screen_distance := 150.0
+          \t\t\tvar screen_center := camera_camera.get_viewport().get_visible_rect().size * 0.5
+          \t\t\tfor candidate in get_tree().get_nodes_in_group("hostile"):
+          \t\t\t\tif not candidate is Node3D or not is_instance_valid(candidate):
+          \t\t\t\t\tcontinue
+          \t\t\t\tvar target_pos: Vector3 = candidate.global_position + Vector3.UP * 1.2
+          \t\t\t\tif camera_camera.is_position_behind(target_pos):
+          \t\t\t\t\tcontinue
+          \t\t\t\tvar screen_pos := camera_camera.unproject_position(target_pos)
+          \t\t\t\tvar screen_distance := screen_pos.distance_to(screen_center)
+          \t\t\t\tif screen_distance < best_screen_distance:
+          \t\t\t\t\tbest_screen_distance = screen_distance
+          \t\t\t\t\tbest_target = candidate
+          \t\t\tif best_target != null:
+          \t\t\t\tshoot_target = best_target.global_position + Vector3.UP * 1.2
+          '''
           if needle not in s:
               raise SystemExit("aim ray block not found")
           s=s.replace(needle,repl)
