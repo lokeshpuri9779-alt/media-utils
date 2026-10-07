@@ -89,6 +89,27 @@ def generate_agnes_clip(
     if negative:
         payload["negative_prompt"]=negative
 
+    # Agnes supports image-to-video and multi-keyframe generation. Astra uses
+    # the previous scene's extracted end frame as the next scene's visual anchor.
+    refs=[str(x) for x in (shot.get("reference_image_paths") or []) if str(x).strip()]
+    if refs:
+        import base64, mimetypes
+        resolved=[]
+        for ref in refs:
+            if ref.startswith(("http://","https://","data:")):
+                resolved.append(ref)
+                continue
+            p=Path(ref)
+            if not p.is_file():
+                raise AgnesFreeVideoUnavailable(f"Agnes reference image is missing: {ref}")
+            mime=mimetypes.guess_type(str(p))[0] or "image/png"
+            resolved.append(f"data:{mime};base64,"+base64.b64encode(p.read_bytes()).decode("ascii"))
+        if len(resolved)==1:
+            payload["image"]=resolved[0]
+            payload["mode"]="ti2vid"
+        else:
+            payload["extra_body"]={"image":resolved,"mode":"keyframes"}
+
     refs=[]
     for ref in (shot.get("reference_image_paths") or []):
         p=Path(ref)
@@ -182,6 +203,7 @@ def generate_agnes_clip(
         "height":1152,
         "num_frames":frames,
         "frame_rate":fps,
+        "mode":"text2video",
     }
 
 # Probe marker: Agnes free backend active.
