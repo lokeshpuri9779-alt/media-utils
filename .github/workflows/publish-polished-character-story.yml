@@ -26,26 +26,80 @@ jobs:
       ASTRA_ALLOW_PAID_CHARACTER_VIDEO: "0"
       ASTRA_CHARACTER_STORY_ID: bear-cub-bakery-v1
       ASTRA_UPLOAD_REVISION: Audio Sync V3
+      ASTRA_CHARACTER_CACHE: ${{ github.workspace }}/.astra-character-cache
     steps:
       - uses: actions/checkout@v7
 
       - uses: actions/setup-python@v7
+        id: python
         with:
           python-version: "3.12"
           cache: pip
 
+      - name: Restore installed Python environment
+        id: python-env
+        uses: actions/cache/restore@v4
+        with:
+          path: .venv
+          key: ${{ runner.os }}-${{ runner.arch }}-astra-character-${{ steps.python.outputs.python-version }}-${{ hashFiles('requirements.txt') }}
+
       - name: Install Astra dependencies
-        run: pip install -r requirements.txt
+        if: steps.python-env.outputs.cache-hit != 'true'
+        run: |
+          python -m venv .venv
+          .venv/bin/python -m pip install -r requirements.txt
+
+      - name: Save installed Python environment
+        if: steps.python-env.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .venv
+          key: ${{ steps.python-env.outputs.cache-primary-key }}
+
+      - name: Use cached Python environment
+        run: echo "$GITHUB_WORKSPACE/.venv/bin" >> "$GITHUB_PATH"
+
+      - name: Restore neural voice model
+        id: voice
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.cache/astra-voice
+          key: astra-kokoro-v1-beb0d184
+
+      - name: Restore completed scenes and pending jobs
+        id: scenes
+        uses: actions/cache/restore@v4
+        with:
+          path: .astra-character-cache
+          key: ${{ runner.os }}-astra-scenes-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: ${{ runner.os }}-astra-scenes-v1-
+
 
       - name: Verify dialogue timing and real media composition
         env:
           PYTHONPATH: ${{ github.workspace }}
-        run: python -m unittest discover -s tests -p test_character_sync.py -v
+        run: |
+          python -m unittest discover -s tests -p test_character_sync.py -v
+          python -m unittest discover -s tests -p test_character_optimization.py -v
 
       - name: Render, validate, and upload polished story privately
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: python scripts/render_publish_character_story.py
+
+      - name: Save completed scenes and pending jobs even after failure
+        if: always() && steps.scenes.outputs.cache-primary-key != ''
+        uses: actions/cache/save@v4
+        with:
+          path: .astra-character-cache
+          key: ${{ steps.scenes.outputs.cache-primary-key }}
+
+      - name: Save neural voice model
+        if: always() && steps.voice.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.cache/astra-voice
+          key: astra-kokoro-v1-beb0d184
 
       - name: Upload rendered review artifact
         if: always()

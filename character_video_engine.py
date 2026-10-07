@@ -234,7 +234,10 @@ def generate_storyboard(storyboard: list[dict], root: str | Path) -> tuple[list[
                 "Continue the action naturally rather than resetting the pose."
             )
         path = root / f"character_scene_{i+1:02d}.mp4"
+        started=time.monotonic()
+        print(f"SCENE {i+1}/{len(storyboard)}: resolving cached or new Agnes clip", flush=True)
         report = generate_character_clip(shot, path)
+        print(f"SCENE {i+1}/{len(storyboard)}: {'reused' if report.get('cache_hit') else 'ready'} in {time.monotonic()-started:.1f}s", flush=True)
         clips.append(path)
         reports.append(report)
         previous_end=_extract_last_frame(path,root/f"character_scene_{i+1:02d}_end.png")
