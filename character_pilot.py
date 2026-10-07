@@ -43,6 +43,16 @@ def render(output: Path) -> dict:
     for shot_spec,scene_spec in zip(storyboard,plan):
         sec=max(1.0,float(scene_spec.get("duration") or 0))
         shot_spec["target_seconds"]=sec
+        spoken=str(scene_spec.get("speech") or "").strip()
+        action=str(scene_spec.get("character_action") or "").strip()
+        shot_spec["prompt"] += (
+            f" Exact scene duration: {sec:.2f} seconds. "
+            f"Audio direction: natural spoken English only. The audible dialogue for this scene is exactly: {spoken!r}. "
+            f"Do not translate it, paraphrase it, add narration, or invent extra words. "
+            f"Synchronize character speaking/reaction beats to that line within the {sec:.2f}-second scene. "
+            f"Add only action-matched environmental sound effects suggested by this action: {action}. "
+            "Keep dialogue clearly louder than ambience; avoid unrelated music, crowd speech, or vocal gibberish."
+        )
         scene_seconds.append(sec)
 
     admission=assert_generation_admitted(
