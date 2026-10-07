@@ -40,7 +40,7 @@ jobs:
       - name: Render watermark-free Studio pilot
         run: |
           set -euo pipefail
-          python studio_renderer.py --preview /tmp/astra-watermark-free-pilot.mp4
+          python studio_renderer.py --premium-preview /tmp/astra-watermark-free-pilot.mp4
 
       - name: Validate MP4
         run: |
