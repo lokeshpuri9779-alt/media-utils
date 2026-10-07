@@ -30,10 +30,10 @@ Status legend: [ ] queued  [~] in progress  [x] completed  [!] blocked
 [x] Compare FFmpeg-native vs Studio vs HyperFrames automatically
 [x] Choose best renderer per story/scene rather than globally
 [x] Add visual diversity penalty for slideshow-like repetition
-[ ] Add empty-space penalty
+[x] Add empty-space penalty
 [x] Add text-density penalty
 [x] Add static-shot penalty
-[~] Add hook-legibility / safe-area checks
+[x] Add hook-legibility / safe-area checks
 [x] Add audio balance and clipping checks
 [x] Add story pacing score using actual rendered scene durations
 [x] Keep fail-closed quality threshold before publish eligibility
@@ -45,7 +45,7 @@ Status legend: [ ] queued  [~] in progress  [x] completed  [!] blocked
 [ ] Promote Saturn story after media + quality pass
 [ ] Add science / technology / history / geography factual templates
 [ ] Add topic freshness/source verification layer for current-event stories
-[ ] Add duplicate-topic and near-duplicate hook prevention
+[x] Add duplicate-topic and near-duplicate hook prevention
 
 ## P4 — Shorts production automation
 [ ] Route approved stories through fast renderer by default
