@@ -1,0 +1,23 @@
+name: OmniRoute Gateway Check
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".astra/omniroute"
+      - ".github/workflows/omniroute.yml"
+
+jobs:
+  omniroute:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Install OmniRoute
+        run: npm install -g omniroute
+      - name: Verify OmniRoute CLI
+        run: |
+          omniroute --version || omniroute --help
