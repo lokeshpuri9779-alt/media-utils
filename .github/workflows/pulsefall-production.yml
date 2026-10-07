@@ -95,6 +95,17 @@ jobs:
           p=Path("game/player/player.tscn")
           s=p.read_text().replace('wait_time = 0.4\none_shot = true', 'wait_time = 0.24\none_shot = true')
           p.write_text(s)
+
+          # This project is single-player. The upstream demo auto-starts a dedicated
+          # server when running headless, which makes menu smoke tests load the level
+          # through a threaded path that is irrelevant to the Windows client.
+          p=Path("game/menu/menu.gd")
+          s=p.read_text()
+          s=s.replace(
+              'if DisplayServer.get_name() == "headless":\n\t\t_on_host_pressed.call_deferred()',
+              'if DisplayServer.get_name() == "headless":\n\t\treturn'
+          )
+          p.write_text(s)
           PY
 
       - name: Add production diagnostics, playtest telemetry and automated tests
