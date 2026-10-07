@@ -26,8 +26,10 @@ from imageio_ffmpeg import get_ffmpeg_exe
 from semantic_broll import infer_visual_intent
 from character_animation import character_storyboard
 
-VERSION = "studio-7.0.0"
+VERSION = "studio-7.1.0"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
+NEWS_MICRO_SCENE_SECONDS = 0.67
+NEWS_MICRO_TRANSITION_SECONDS = 0.10
 ASSET_BASE = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
 MODEL_FILES = {
     "kokoro-v1.0.onnx": "beb0d1848dee9a49da392cc3df26958d46cfa35d321edf434f52949153f0df3a",
@@ -948,9 +950,54 @@ def transition_layer(im,s,t,u,accent):
         d.rectangle((0,y,W,H),fill=(255,255,255,max(0,int(22*(1-p)))))
     return im
 
+def _micro_scene_direction(shot, t, genre):
+    """Create fast visual cuts without fragmenting narration.
+
+    Current/news Shorts keep their logical narration beats, while camera,
+    layout, motion and visual treatment change roughly every 0.67 seconds.
+    This yields about 1.5 visual scenes/second with a short eased transition.
+    """
+    if genre != 'current':
+        return shot, None
+    micro_index=max(0,int(t / NEWS_MICRO_SCENE_SECONDS))
+    phase=(t % NEWS_MICRO_SCENE_SECONDS) / NEWS_MICRO_SCENE_SECONDS
+    x=dict(shot)
+    cameras=['push','track','drift','push','track','drift']
+    layouts=['center','focus-left','focus-right','split','center','focus-right']
+    motions=['glide','scan','parallax','arc','glide','parallax']
+    styles=['mixed-media','vector-motion','cel-shaded','mixed-media','stop-motion','vector-motion']
+    x['director_camera']=cameras[micro_index % len(cameras)]
+    x['director_layout']=layouts[micro_index % len(layouts)]
+    x['director_motion']=motions[micro_index % len(motions)]
+    # Evidence cards stay editorial; only their treatment changes.
+    if x.get('director_asset') != 'source-document':
+        x['director_style']=styles[micro_index % len(styles)]
+    x['micro_scene_index']=micro_index
+    x['micro_scene_phase']=phase
+    return x, {'index':micro_index,'phase':phase}
+
+
+def _micro_scene_transition(im, micro, accent):
+    if not micro:
+        return im
+    phase=float(micro.get('phase') or 0.0)
+    if phase >= NEWS_MICRO_TRANSITION_SECONDS / NEWS_MICRO_SCENE_SECONDS:
+        return im
+    p=ease(phase / (NEWS_MICRO_TRANSITION_SECONDS / NEWS_MICRO_SCENE_SECONDS))
+    d=ImageDraw.Draw(im,'RGBA')
+    alpha=max(0,int(52*(1-p)))
+    idx=int(micro.get('index') or 0)
+    if idx % 2:
+        d.polygon([(0,0),(int(W*.22*(1-p)),0),(0,H)],fill=accent+(alpha,))
+    else:
+        d.polygon([(W,0),(W-int(W*.22*(1-p)),H),(W,H)],fill=accent+(alpha,))
+    return im
+
+
 def render_frame(plan,t,genre,total):
     index=next((i for i,s in enumerate(plan) if t<s['end']),len(plan)-1)
     s=plan[index];u=t-s['start']; accent=THEMES[genre][2]
+    s,micro=_micro_scene_direction(s,t,genre)
     im=background(genre).copy()
     # Camera treatment is chosen by the director per narrative beat.
     cam=s.get('director_camera','push'); energy=float(s.get('director_energy',.5))
@@ -978,6 +1025,7 @@ def render_frame(plan,t,genre,total):
         composition_layer(im,s,t,u,accent)
         attention_layer(im,s,t,u,accent)
     transition_layer(im,s,t,u,accent)
+    _micro_scene_transition(im,micro,accent)
     im=composite_cached_asset(im,s.get('resolved_asset',{}),t=t,u=u,shot=s)
     if s.get('visual') not in {'media','tidal_lock','iss_orbit'}:
         asset_layer(im,s,t,u,accent)
@@ -1539,8 +1587,18 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
         if still_dir:
             folder=Path(still_dir);folder.mkdir(parents=True,exist_ok=True)
             for i,s in enumerate(plan): render_frame(plan,s['start']+min(1,s['duration']/2),genre,duration).save(folder/f'scene_{i+1}.jpg',quality=94)
+    micro_count=(math.ceil(actual_duration / NEWS_MICRO_SCENE_SECONDS) if genre=='current' else len(plan))
+    visual_rate=(micro_count / actual_duration) if actual_duration > 0 else 0.0
     report={'renderer':VERSION,'genre':genre,'frames':count,'duration':round(actual_duration,3),
             'resolution':[W,H],'fps':FPS,'audio':audio_info,'creative_quality':creative_report,
+            'visual_edit':{
+                'narration_beat_count':len(plan),
+                'visual_scene_count':micro_count,
+                'visual_scene_rate_per_second':round(visual_rate,3),
+                'target_scene_rate_range':[1.0,2.0] if genre=='current' else None,
+                'micro_scene_seconds':NEWS_MICRO_SCENE_SECONDS if genre=='current' else None,
+                'transition_seconds':NEWS_MICRO_TRANSITION_SECONDS if genre=='current' else None,
+            },
             'scenes':[{k:v for k,v in s.items() if k!='audio'} for s in plan]}
     print('Studio render:',json.dumps({k:v for k,v in report.items() if k!='scenes'}))
     return report
