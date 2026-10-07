@@ -67,6 +67,7 @@ on:
       - 'character_video_engine.py'
       - 'tests/test_agnes_free_video.py'
       - 'agnes_free_video.py'
+      - 'scripts/agnes_render_probe.py'
       - 'tests/test_video_provider_policy.py'
       - 'video_provider_policy.py'
       - 'tests/test_generation_admission.py'
@@ -227,6 +228,19 @@ jobs:
         with:
           name: astra-character-pilot-${{ github.run_id }}
           path: /tmp/astra-character-pilot.json
+          retention-days: 7
+          if-no-files-found: error
+
+      - name: Direct Agnes render probe
+        if: env.ASTRA_FORCE_RUN == '1'
+        run: python scripts/agnes_render_probe.py
+
+      - name: Upload Agnes render probe
+        if: env.ASTRA_FORCE_RUN == '1'
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-agnes-probe-${{ github.run_id }}
+          path: /tmp/astra-agnes-probe.mp4
           retention-days: 7
           if-no-files-found: error
 
