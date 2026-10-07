@@ -56,7 +56,7 @@ Status legend: [ ] queued  [~] in progress  [x] completed  [!] blocked
 [x] Add daily production budget/rate limiter
 [ ] Add multi-channel routing only after channel credentials validate
 [x] Add post-upload verification
-[ ] Add analytics ingestion and feedback into story selection
+[x] Add analytics ingestion and feedback into story selection
 
 ## P5 — Long-form
 [ ] Build scene-oriented long-form plan from same factual engine
