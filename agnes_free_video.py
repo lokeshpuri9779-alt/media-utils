@@ -15,6 +15,8 @@ It requires AGNES_API_KEY and never falls through to a paid provider.
 
 import os
 import time
+import base64
+import mimetypes
 from pathlib import Path
 
 import httpx
@@ -80,10 +82,25 @@ def generate_agnes_clip(
         "height":1152,
         "num_frames":frames,
         "frame_rate":fps,
+        "reference_images":len(refs),
+        "generation_mode":"keyframes" if len(refs)>1 else ("image-to-video" if len(refs)==1 else "text-to-video"),
     }
     negative=str(shot.get("negative") or "").strip()
     if negative:
         payload["negative_prompt"]=negative
+
+    refs=[]
+    for ref in (shot.get("reference_image_paths") or []):
+        p=Path(ref)
+        if not p.is_file():
+            continue
+        mime=mimetypes.guess_type(str(p))[0] or "image/png"
+        refs.append(f"data:{mime};base64,"+base64.b64encode(p.read_bytes()).decode("ascii"))
+    if len(refs)==1:
+        payload["image"]=refs[0]
+        payload["mode"]="ti2vid"
+    elif len(refs)>1:
+        payload["extra_body"]={"image":refs[:2],"mode":"keyframes"}
 
     headers={"Authorization":f"Bearer {key}","Content-Type":"application/json"}
     deadline=time.monotonic()+timeout_seconds
