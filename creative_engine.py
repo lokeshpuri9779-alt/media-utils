@@ -122,13 +122,14 @@ def creative_rebuild(c: dict) -> tuple[dict, dict]:
             hard.append("metadata-only current story: no researched fact set")
         x["aligned_reports"]=aligned[:3]
 
-    duration_max={"tech":20,"football":22,"space":27,"fiction":32,"current":28}.get(genre,26)
+    duration_max={"tech":20,"football":22,"space":27,"fiction":32,"current":24}.get(genre,26)
     x.update(
         creative_engine_version=ENGINE_VERSION,
         language="en",
         target_duration_max=duration_max,
         target_duration_min=8,
         voice_profile="af_heart",
+        voice_speed=(1.14 if genre=="current" else 1.09),
         cta_mode="none",
         creative_brief={
             "first_second":"show the subject or payoff immediately; no logo intro",
