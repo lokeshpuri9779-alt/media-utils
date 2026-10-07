@@ -1,6 +1,7 @@
-story=tiny-dragon-bubbles-v1
-target_duration=28-40
+story=tiny-dragon-bubbles-v2-sync
+mode=audio-first
+speaker_labels_spoken=false
+dialogue_timing=measured
+continuity=previous-frame
+sound=scene-timed
 privacy=private
-quality_gates=duration,resolution,scene_count,av_sync,dialogue_labels,continuity
-pipeline=audio-first-agnes-ti2vid
-revision=2
