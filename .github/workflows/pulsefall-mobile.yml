@@ -908,6 +908,281 @@ jobs:
           	controls.bind_level(self)
           GDSCRIPT
 
+      - name: Optimize mobile performance and add run upgrades
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          cat > game/mobile/mobile_performance.gd <<'GDSCRIPT'
+          extends Node
+
+          const SAMPLE_SECONDS := 3.0
+          const MIN_SCALE := 0.62
+          const MAX_SCALE := 0.90
+          const SCALE_STEP := 0.05
+
+          var sample_time := 0.0
+          var frame_count := 0
+          var current_scale := 0.78
+          var low_samples := 0
+          var high_samples := 0
+
+
+          func _ready() -> void:
+          	if not OS.has_feature("mobile"):
+          		set_process(false)
+          		return
+          	Engine.max_fps = 60
+          	get_viewport().scaling_3d_scale = current_scale
+
+
+          func _process(delta: float) -> void:
+          	sample_time += delta
+          	frame_count += 1
+          	if sample_time < SAMPLE_SECONDS:
+          		return
+
+          	var fps := float(frame_count) / maxf(sample_time, 0.001)
+          	if fps < 43.0:
+          		low_samples += 1
+          		high_samples = 0
+          	elif fps > 57.0:
+          		high_samples += 1
+          		low_samples = 0
+          	else:
+          		low_samples = 0
+          		high_samples = 0
+
+          	if low_samples >= 2 and current_scale > MIN_SCALE:
+          		current_scale = maxf(MIN_SCALE, current_scale - SCALE_STEP)
+          		get_viewport().scaling_3d_scale = current_scale
+          		low_samples = 0
+          	elif high_samples >= 3 and current_scale < MAX_SCALE:
+          		current_scale = minf(MAX_SCALE, current_scale + SCALE_STEP)
+          		get_viewport().scaling_3d_scale = current_scale
+          		high_samples = 0
+
+          	sample_time = 0.0
+          	frame_count = 0
+          GDSCRIPT
+
+          cat > game/mobile/mobile_metrics.gd <<'GDSCRIPT'
+          extends Node
+
+          const PATH := "user://pulsefall_mobile_metrics.jsonl"
+          var session_start_ms := 0
+
+
+          func _ready() -> void:
+          	session_start_ms = Time.get_ticks_msec()
+          	record("session_start", {})
+
+
+          func record(event_name: String, data: Dictionary) -> void:
+          	var payload := data.duplicate(true)
+          	payload["event"] = event_name
+          	payload["session_ms"] = Time.get_ticks_msec() - session_start_ms
+          	payload["unix"] = Time.get_unix_time_from_system()
+          	var file := FileAccess.open(PATH, FileAccess.READ_WRITE)
+          	if file == null:
+          		file = FileAccess.open(PATH, FileAccess.WRITE)
+          	if file == null:
+          		return
+          	file.seek_end()
+          	file.store_line(JSON.stringify(payload))
+          GDSCRIPT
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          # Add movement/combat upgrade hooks to the player.
+          p=Path("game/player/player.gd")
+          s=p.read_text()
+          s=s.replace(
+              'var rescue_cooldown: float = 0.0\n',
+              'var rescue_cooldown: float = 0.0\nvar move_speed_multiplier: float = 1.0\nvar damage_reduction: float = 0.0\n'
+          )
+          s=s.replace(
+              'health = maxi(health - amount, 0)',
+              'var reduced_amount := maxi(1, int(round(float(amount) * (1.0 - damage_reduction))))\n\thealth = maxi(health - reduced_amount, 0)'
+          )
+          s=s.replace(
+              'velocity.x = h_velocity.x\n\tvelocity.z = h_velocity.z',
+              'velocity.x = h_velocity.x * move_speed_multiplier\n\tvelocity.z = h_velocity.z * move_speed_multiplier'
+          )
+          p.write_text(s)
+
+          # Upgrade selector and metrics in level.
+          p=Path("game/level/level.gd")
+          s=p.read_text()
+          s=s.replace(
+              'var hud_font: Font = null\n',
+              'var hud_font: Font = null\nvar upgrade_panel: Control = null\nvar first_combat_recorded := false\nvar first_upgrade_recorded := false\n'
+          )
+          s=s.replace(
+              '\tmission_active = true\n\t_start_wave()',
+              '\tmission_active = true\n\tMobileMetrics.record("mission_start", {"wave": 1})\n\t_start_wave()',
+              1
+          )
+          s=s.replace(
+              '\trobot.exploded.connect(_on_robot_exploded.bind(robot))',
+              '\trobot.exploded.connect(_on_robot_exploded.bind(robot))\n\tif not first_combat_recorded:\n\t\tfirst_combat_recorded = true\n\t\tMobileMetrics.record("first_combat", {"wave": wave, "time_seconds": mission_time})'
+          )
+
+          old='''\t\telse:
+\t\t\tif active_player != null:
+\t\t\t\tactive_player.heal(25)
+\t\t\t_show_banner("WAVE CLEARED", "+25 CORE INTEGRITY", 1.8)
+\t\t\tawait get_tree().create_timer(2.4).timeout
+\t\t\tmission_active = true
+\t\t\t_start_wave()
+'''
+          new='''\t\telse:
+\t\t\tif active_player != null:
+\t\t\t\tactive_player.heal(12)
+\t\t\t_show_banner("WAVE CLEARED", "CHOOSE A PULSE UPGRADE", 1.2)
+\t\t\tawait get_tree().create_timer(1.3).timeout
+\t\t\t_show_upgrade_choice()
+'''
+          if old not in s:
+              raise SystemExit("wave clear block not found")
+          s=s.replace(old,new)
+
+          s=s.replace(
+              '\t_show_banner("BLACKSITE SECURED", "FINAL SCORE %06d  //  PRESS ESC TO EXTRACT" % score, 8.0)',
+              '\tMobileMetrics.record("run_complete", {"score": score, "time_seconds": mission_time, "wave": wave})\n\t_show_banner("BLACKSITE SECURED", "FINAL SCORE %06d  //  RUN COMPLETE" % score, 8.0)'
+          )
+          s=s.replace(
+              '\t_show_banner("AEGIS SIGNAL LOST", "EMERGENCY RECONSTRUCTION", 2.6)',
+              '\tMobileMetrics.record("player_death", {"score": score, "time_seconds": mission_time, "wave": wave})\n\t_show_banner("AEGIS SIGNAL LOST", "EMERGENCY RECONSTRUCTION", 2.6)'
+          )
+          p.write_text(s)
+
+          # Autoload local-only metrics and performance scaler.
+          p=Path("game/project.godot")
+          s=p.read_text()
+          needle='Settings="*res://menu/settings.gd"'
+          if 'MobileMetrics=' not in s:
+              s=s.replace(needle, needle+'\nMobileMetrics="*res://mobile/mobile_metrics.gd"\nMobilePerformance="*res://mobile/mobile_performance.gd"')
+          p.write_text(s)
+          PY
+
+          cat >> game/player/player.gd <<'GDSCRIPT'
+
+
+          func apply_run_upgrade(upgrade_id: String) -> void:
+          	match upgrade_id:
+          		"rapid":
+          			fire_cooldown.wait_time = maxf(0.13, fire_cooldown.wait_time * 0.84)
+          		"core":
+          			max_health += 18
+          			health = mini(max_health, health + 24)
+          			health_changed.emit(health, max_health)
+          		"mobility":
+          			move_speed_multiplier = minf(1.55, move_speed_multiplier * 1.12)
+          		"armor":
+          			damage_reduction = minf(0.42, damage_reduction + 0.10)
+          GDSCRIPT
+
+          cat >> game/level/level.gd <<'GDSCRIPT'
+
+
+          func _show_upgrade_choice() -> void:
+          	if upgrade_panel != null or active_player == null:
+          		return
+          	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+          	upgrade_panel = Control.new()
+          	upgrade_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+
+          	var shade := ColorRect.new()
+          	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+          	shade.color = Color(0.0, 0.01, 0.025, 0.82)
+          	upgrade_panel.add_child(shade)
+
+          	var card := ColorRect.new()
+          	card.color = Color(0.025, 0.045, 0.085, 0.97)
+          	card.anchor_left = 0.5
+          	card.anchor_right = 0.5
+          	card.anchor_top = 0.5
+          	card.anchor_bottom = 0.5
+          	card.offset_left = -430
+          	card.offset_right = 430
+          	card.offset_top = -175
+          	card.offset_bottom = 175
+          	upgrade_panel.add_child(card)
+
+          	var title := _make_label("PULSE ADAPTATION", 31, Color(0.36, 0.9, 1.0))
+          	title.anchor_right = 1.0
+          	title.offset_top = 24
+          	title.offset_bottom = 70
+          	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	card.add_child(title)
+
+          	var choices := [
+          		["RAPID FIRE", "Faster weapon cycle", "rapid"],
+          		["CORE+", "+18 max integrity", "core"],
+          		["MOBILITY", "Faster traversal", "mobility"],
+          		["ARMOR", "Reduce incoming damage", "armor"],
+          	]
+          	var picks := choices.duplicate()
+          	picks.shuffle()
+          	picks = picks.slice(0, 3)
+
+          	for i in range(3):
+          		var pick: Array = picks[i]
+          		var button := Button.new()
+          		button.text = str(pick[0]) + "\n" + str(pick[1])
+          		button.position = Vector2(55 + i * 265, 105)
+          		button.size = Vector2(220, 112)
+          		button.add_theme_font_size_override("font_size", 17)
+          		button.pressed.connect(_choose_run_upgrade.bind(str(pick[2]), str(pick[0])))
+          		card.add_child(button)
+
+          	var note := _make_label("Choose one. Your run changes immediately.", 15, Color(0.72, 0.80, 0.90))
+          	note.anchor_right = 1.0
+          	note.offset_top = 264
+          	note.offset_bottom = 302
+          	note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	card.add_child(note)
+
+          	get_node("PulsefallHUD").add_child(upgrade_panel)
+
+
+          func _choose_run_upgrade(upgrade_id: String, upgrade_name: String) -> void:
+          	if active_player == null:
+          		return
+          	active_player.apply_run_upgrade(upgrade_id)
+          	MobileMetrics.record("upgrade_selected", {"upgrade": upgrade_id, "wave": wave, "time_seconds": mission_time})
+          	if not first_upgrade_recorded:
+          		first_upgrade_recorded = true
+          		MobileMetrics.record("first_upgrade", {"upgrade": upgrade_id, "time_seconds": mission_time})
+          	if OS.has_feature("mobile"):
+          		Input.vibrate_handheld(35)
+          	if upgrade_panel != null:
+          		upgrade_panel.queue_free()
+          		upgrade_panel = null
+          	_show_banner(upgrade_name, "ADAPTATION INSTALLED", 1.0)
+          	await get_tree().create_timer(1.05).timeout
+          	mission_active = true
+          	_start_wave()
+          GDSCRIPT
+
+          # Add lightweight haptic feedback to mobile touch actions.
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("game/mobile/mobile_controls.gd")
+          s=p.read_text()
+          s=s.replace(
+              'func _fire_down() -> void:\n\tInput.action_press("aim")',
+              'func _fire_down() -> void:\n\tInput.vibrate_handheld(18)\n\tInput.action_press("aim")'
+          )
+          s=s.replace(
+              'jump_button.button_down.connect(func(): Input.action_press("jump"))',
+              'jump_button.button_down.connect(func(): Input.vibrate_handheld(16); Input.action_press("jump"))'
+          )
+          p.write_text(s)
+          PY
+
       - name: Add license and build notes
         shell: bash
         run: |
