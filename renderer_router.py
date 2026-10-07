@@ -80,3 +80,80 @@ def select(requirements: dict, available_vram_gb: float = 0, allow_paid: bool = 
         "policy": "fail_closed_no_paid_and_no_unvalidated_renderer",
         "execution": free_execution_policy(),
     }
+
+
+# Validated zero-cost renderers available on the current GitHub CPU workflow.
+# These are not generative-video models; they are deterministic render backends
+# fed by Astra's own story plan, media provenance, narration, and safety gates.
+VALIDATED_LOCAL_RENDERERS = {
+    "ffmpeg_native": {
+        "enabled": True,
+        "cost": 0,
+        "watermark_free": True,
+        "strengths": {"speed": 10, "factual_media": 10, "motion_graphics": 6, "long_form": 8},
+        "weaknesses": {"complex_character_animation": 8},
+    },
+    "studio": {
+        "enabled": True,
+        "cost": 0,
+        "watermark_free": True,
+        "strengths": {"speed": 4, "factual_media": 8, "motion_graphics": 9, "long_form": 6},
+        "weaknesses": {"cpu_cost": 8},
+    },
+    "hyperframes": {
+        "enabled": True,
+        "cost": 0,
+        "watermark_free": True,
+        "strengths": {"speed": 5, "factual_media": 8, "motion_graphics": 10, "long_form": 7},
+        "weaknesses": {"browser_runtime": 5},
+    },
+}
+
+def rank_validated_local(requirements: dict) -> list[dict]:
+    """Rank only renderers already validated in Astra CI.
+
+    This selector is deliberately conservative: factual/media-led Shorts prefer
+    FFmpeg-native for speed, while animation-heavy scenes can prefer Studio or
+    HyperFrames. Paid/unvalidated engines remain outside this ready set.
+    """
+    factual = bool(requirements.get("factual_media", True))
+    motion = int(requirements.get("motion_complexity", 0) or 0)
+    long_form = bool(requirements.get("long_form"))
+    procedural = bool(requirements.get("procedural_heavy"))
+    ranked = []
+    for key, meta in VALIDATED_LOCAL_RENDERERS.items():
+        if not meta.get("enabled"):
+            continue
+        strengths = meta["strengths"]
+        score = 0
+        score += strengths["factual_media"] * (5 if factual else 1)
+        score += strengths["speed"] * (4 if not long_form else 2)
+        score += strengths["long_form"] * (4 if long_form else 1)
+        score += strengths["motion_graphics"] * max(1, motion)
+        if procedural:
+            score += strengths["motion_graphics"] * 4
+        # Factual-media Shorts should default to the proven fast path unless
+        # richer scene animation materially justifies another backend.
+        if key == "ffmpeg_native" and factual and motion <= 2 and not procedural:
+            score += 35
+        if key == "studio" and procedural:
+            score += 24
+        if key == "hyperframes" and motion >= 4:
+            score += 28
+        ranked.append({
+            "key": key,
+            "score": score,
+            "ready": True,
+            "cost": meta["cost"],
+            "watermark_free": meta["watermark_free"],
+        })
+    return sorted(ranked, key=lambda x: x["score"], reverse=True)
+
+def select_validated_local(requirements: dict) -> dict:
+    ranked = rank_validated_local(requirements)
+    return {
+        "selected": ranked[0]["key"] if ranked else None,
+        "status": "ready" if ranked else "blocked",
+        "ranked": ranked,
+        "policy": "validated_zero_cost_watermark_free_only",
+    }
