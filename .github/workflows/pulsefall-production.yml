@@ -1036,6 +1036,25 @@ jobs:
           upload-report: true
           report-name: pulsefall-gdunit-report.xml
 
+      - name: Strip test framework from release payload
+        shell: bash
+        run: |
+          set -euxo pipefail
+          rm -rf game/addons/gdUnit4 game/tests game/reports game/.gdunit4
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("game/project.godot")
+          s=p.read_text()
+          if "[editor_plugins]" in s:
+              start=s.index("[editor_plugins]")
+              next_section=s.find("\n[", start+1)
+              if next_section == -1:
+                  s=s[:start].rstrip()+"\n"
+              else:
+                  s=s[:start]+s[next_section+1:]
+          p.write_text(s)
+          PY
+
       - name: Runtime and script validation
         shell: bash
         run: |
