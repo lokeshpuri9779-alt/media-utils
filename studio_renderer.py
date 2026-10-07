@@ -898,7 +898,9 @@ def render_frame(plan,t,genre,total):
         d.rounded_rectangle((118,1530,900,1636),radius=18,fill=(5,8,14))
         fit_text(d,text,(145,1538,874,1628),size=37,fill=(242,245,250),max_lines=2)
     elif fmt=='documentary_montage':
-        fit_text(d,text.upper(),(86,1435,965,1565),size=52,fill='white',max_lines=2)
+        # Compact, high-contrast caption band; avoid turning the lower third into a text card.
+        d.rounded_rectangle((70,1485,1010,1588),radius=18,fill=(5,8,14,185) if im.mode=='RGBA' else (5,8,14))
+        fit_text(d,text.upper(),(96,1491,984,1580),size=45,fill='white',max_lines=2)
     elif fmt=='animated_infographic':
         d.rounded_rectangle((170,1450,910,1560),radius=28,fill=(8,12,23))
         fit_text(d,text,(195,1458,885,1552),size=44,fill=accent,max_lines=2)
@@ -1067,8 +1069,8 @@ def composite_cached_asset(im,item,t=0.0,u=0.0,shot=None):
         fmt=str((shot or {}).get('creative_format') or '')
         if fmt=='documentary_montage':
             # Premium documentary shots should feel footage-first, not card-first.
-            # Leave only the safe caption/control zones while maximizing subject scale.
-            box=(0,300,1080,1395) if mode=='wide' else (16,235,1064,1410)
+            # Push media nearly edge-to-edge while preserving a compact lower caption band.
+            box=(0,165,1080,1505) if mode=='wide' else (0,125,1080,1515)
         else:
             box=(24,540,1056,1180) if mode=='wide' else (40,350,1040,1370)
         bw,bh=box[2]-box[0],box[3]-box[1]
