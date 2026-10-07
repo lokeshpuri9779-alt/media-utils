@@ -9,7 +9,7 @@ target a complete 25-40 second mini-story rather than a short visual demo.
 import os
 
 
-def _beat(speech: str, action: str, beat: str, voice: str, speed: float = 1.03) -> dict:
+def _beat(speech: str, action: str, beat: str, voice: str, speed: float = 1.03, speaker: str = "") -> dict:
     return {
         "headline": "",
         "speech": speech,
@@ -18,6 +18,7 @@ def _beat(speech: str, action: str, beat: str, voice: str, speed: float = 1.03) 
         "character_action": action,
         "voice_name": voice,
         "voice_speed": speed,
+        "speaker": speaker,
         "duration": 4.2,
     }
 
@@ -53,12 +54,12 @@ def catalog() -> list[dict]:
                     "reveal", "af_heart", 1.04,
                 ),
                 _beat(
-                    "Pip: Pffft! ...Oh, come on.",
+                    "Pffft! ...Oh, come on.",
                     "Instead of fire, one enormous shimmering bubble floats from Pip's mouth and pops on his nose. He stares cross-eyed at the soap foam.",
                     "build", "af_heart", 1.05,
                 ),
                 _beat(
-                    "Ember: Impressive. You defeated the air.",
+                    "Impressive. You defeated the air.",
                     "Ember folds her arms with a teasing grin while Pip gives her a deeply offended side-eye. Keep the teasing affectionate, not mean.",
                     "contrast", "am_adam", 1.02,
                 ),
@@ -68,7 +69,7 @@ def catalog() -> list[dict]:
                     "build", "af_heart", 1.05,
                 ),
                 _beat(
-                    "Grandma: Pip! The lantern flame went out!",
+                    "Pip! The lantern flame went out!",
                     "A gust sweeps through the festival and every paper lantern goes dark. Grandma points toward the highest lantern hanging over a narrow ledge.",
                     "escalation", "af_heart", 1.00,
                 ),
@@ -78,7 +79,7 @@ def catalog() -> list[dict]:
                     "payoff", "af_heart", 1.00,
                 ),
                 _beat(
-                    "Ember: Okay. That was actually impressive. Pip: I know. Try not to cry.",
+                    "Okay. That was actually impressive.",
                     "The lanterns relight across the village. Ember hugs Pip while he pretends to look smug, then accidentally blows one last bubble around both their heads.",
                     "button", "af_heart", 1.02,
                 ),
