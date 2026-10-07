@@ -1030,20 +1030,20 @@ jobs:
           )
 
           old='''\t\telse:
-\t\t\tif active_player != null:
-\t\t\t\tactive_player.heal(25)
-\t\t\t_show_banner("WAVE CLEARED", "+25 CORE INTEGRITY", 1.8)
-\t\t\tawait get_tree().create_timer(2.4).timeout
-\t\t\tmission_active = true
-\t\t\t_start_wave()
-'''
+          \t\t\tif active_player != null:
+          \t\t\t\tactive_player.heal(25)
+          \t\t\t_show_banner("WAVE CLEARED", "+25 CORE INTEGRITY", 1.8)
+          \t\t\tawait get_tree().create_timer(2.4).timeout
+          \t\t\tmission_active = true
+          \t\t\t_start_wave()
+          '''
           new='''\t\telse:
-\t\t\tif active_player != null:
-\t\t\t\tactive_player.heal(12)
-\t\t\t_show_banner("WAVE CLEARED", "CHOOSE A PULSE UPGRADE", 1.2)
-\t\t\tawait get_tree().create_timer(1.3).timeout
-\t\t\t_show_upgrade_choice()
-'''
+          \t\t\tif active_player != null:
+          \t\t\t\tactive_player.heal(12)
+          \t\t\t_show_banner("WAVE CLEARED", "CHOOSE A PULSE UPGRADE", 1.2)
+          \t\t\tawait get_tree().create_timer(1.3).timeout
+          \t\t\t_show_upgrade_choice()
+          '''
           if old not in s:
               raise SystemExit("wave clear block not found")
           s=s.replace(old,new)
