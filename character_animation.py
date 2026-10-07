@@ -71,16 +71,27 @@ def build_character_shot_prompt(story: dict, shot: dict, index: int, total: int)
     speaker=str(shot.get("speaker") or "").strip()
     action=str(shot.get("character_action") or subject)
     continuity=str(story.get("character_bible") or "Maintain the same established characters and wardrobe.")
+    beat=str(shot.get("story_beat") or "").lower()
+    camera={
+        "reveal":"tight reaction close-up opening on the character, then a quick reveal of the problem",
+        "build":"medium character-action shot with a gentle push-in",
+        "contrast":"clean two-shot emphasizing facial reactions and timing",
+        "escalation":"dynamic tracking shot with stronger foreground motion",
+        "payoff":"clear wide-to-medium payoff shot that makes the solution instantly readable",
+        "button":"warm reaction close-up ending on the final visual joke",
+    }.get(beat,profile["camera"][index % len(profile["camera"])])
     prompt=(
         f"{profile['render_style']}. Vertical 9:16. {profile['character_design']}. "
         f"Scene {index+1} of {total}: {action}. "
         f"Dialogue beat: {speaker + ': ' if speaker else ''}{subject}. "
-        f"Stage the speaking character with clear mouth, eye, ear and body reactions while the listener reacts naturally. "
+        f"One primary action only; make the first frame instantly readable and the final pose visually decisive. "
+        f"Stage clear eye direction, mouth shape, ears/wings/paws and full-body reaction while supporting characters react naturally. "
         f"Do not render dialogue as visible text. "
         f"{profile['lighting']}. {profile['framing']}. "
-        f"Camera: {profile['camera'][index % len(profile['camera'])]}. "
+        f"Camera: {camera}. "
         f"Motion: {profile['motion']}. {profile['environment']}. "
-        f"Continuity: {continuity} No card UI, no infographic layout, no copied logos or watermarks."
+        f"Continuity: {continuity} Preserve prop state and spatial direction from the previous scene. "
+        f"No card UI, no infographic layout, no copied logos or watermarks."
     )
     return {
         "engine_role": "character-video-generation",
