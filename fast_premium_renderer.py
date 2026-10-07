@@ -92,12 +92,12 @@ def _visual_input(item: dict) -> str:
     return p if p and Path(p).is_file() else ''
 
 
-def render_fast_premium(out: Path) -> dict:
+def render_fast_premium(out: Path, story: dict | None = None) -> dict:
     wall_start=time.perf_counter()
-    story=next(x for x in catalog() if x.get('production_ready'))
+    story=story or next(x for x in catalog() if x.get('production_ready'))
     genre=story.get('genre','space')
     plan=make_plan(story)
-    creative_quality_gate(story,plan)
+    creative_quality=creative_quality_gate(story,plan)
     assets=asset_manifest(story,plan)
     resolved=prepare_media_cache(resolve_assets(assets))
     resolved=acquire_story_media(resolved)
@@ -106,6 +106,10 @@ def render_fast_premium(out: Path) -> dict:
     required=sum(1 for x in resolved if x.get('strategy')=='external-verified')
     if not required or verified != required:
         raise RuntimeError(f'Fast premium gate rejected media {verified}/{required}')
+    asset_report['verified_subject_media']=verified
+    asset_report['required_subject_media']=required
+    creative_quality=dict(creative_quality)
+    creative_quality['asset_resolution']=asset_report
     for shot,item in zip(plan,resolved):
         shot['resolved_asset']=item
 
@@ -188,6 +192,16 @@ def render_fast_premium(out: Path) -> dict:
         'required_subject_media':required,
         'zero_cost':asset_report.get('zero_cost',False),
         'audio':audio_info,
+        'creative_quality':creative_quality,
+        'scenes':[{
+            'index':i,
+            'headline':str(s.get('headline') or ''),
+            'story_beat':str(s.get('story_beat') or ''),
+            'start':round(float(s.get('start') or 0),3),
+            'end':round(float(s.get('end') or 0),3),
+            'duration':round(float(s.get('duration') or 0),3),
+            'visual':str(s.get('visual') or ''),
+        } for i,s in enumerate(plan)],
         'output_bytes':out.stat().st_size,
     }
 
