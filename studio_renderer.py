@@ -340,7 +340,9 @@ def voice_plan(plan, genre, max_duration=36, voice_name='af_heart', voice_speed=
         spoken=str(s['speech']).strip()
         # Natural cadence wins over synthetic "news voice" punctuation tricks.
         spoken=spoken.replace('; ', '. ').replace('  ',' ')
-        samples, rate=engine.create(spoken,voice=voice_name,speed=voice_speed,lang='en-us')
+        scene_voice=str(s.get('voice_name') or voice_name)
+        scene_speed=float(s.get('voice_speed') or voice_speed)
+        samples, rate=engine.create(spoken,voice=scene_voice,speed=scene_speed,lang='en-us')
         samples=np.asarray(samples,dtype=np.float32)
         if rate!=RATE or len(samples)==0 or not np.isfinite(samples).all():
             raise RuntimeError('Invalid narration audio; refusing to publish an incomplete video.')
