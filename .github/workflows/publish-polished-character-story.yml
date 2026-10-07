@@ -5,6 +5,10 @@ on:
     paths:
       - ".astra/publish-polished-character-story"
 
+concurrency:
+  group: astra-private-character-render
+  cancel-in-progress: false
+
 permissions:
   contents: read
 

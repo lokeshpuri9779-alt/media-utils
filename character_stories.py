@@ -9,7 +9,7 @@ target a complete 25-40 second mini-story rather than a short visual demo.
 import os
 
 
-def _beat(speech: str, action: str, beat: str, voice: str, speed: float = 1.03, speaker: str = "") -> dict:
+def _beat(speech: str, action: str, beat: str, voice: str, speed: float = 1.03, speaker: str = "", *, visible_characters: tuple[str, ...] = ()) -> dict:
     return {
         "headline": "",
         "speech": speech,
@@ -19,6 +19,7 @@ def _beat(speech: str, action: str, beat: str, voice: str, speed: float = 1.03, 
         "voice_name": voice,
         "voice_speed": speed,
         "speaker": speaker,
+        "visible_characters": list(visible_characters),
         "duration": 4.2,
     }
 
@@ -113,43 +114,43 @@ def catalog() -> list[dict]:
                 "Milo: small honey-brown bear cub with round ears, cream muzzle, green apron slightly too large. "
                 "Papa Bear: broad dark-brown bear wearing a white baker apron and flour-dusted chef cap. "
                 "Preserve fur colors, apron colors, body scale and facial proportions. Environment: warm woodland bakery "
-                "with wooden counters, copper pans, baskets of bread and morning sunlight."
+                "with wooden counters, copper pans, baskets of bread and morning sunlight. There is exactly one Milo cub and exactly one Papa adult in this story; they never duplicate or exchange body size. Show only the cast specified for each shot, with everyone else off-screen."
             ),
             "story_beats": [
                 _beat(
                     "Papa: Milo, don't touch the dough. Milo: I wasn't even looking at it.",
                     "Papa Bear points at a huge bowl of rising dough. Milo deliberately looks everywhere except at the bowl.",
-                    "reveal", "am_adam", 1.02,
+                    "reveal", "am_adam", 1.02, visible_characters=("Papa", "Milo"),
                 ),
                 _beat(
                     "Milo: I'm just... checking if it's lonely.",
-                    "The instant Papa leaves, Milo tiptoes back and pats the dough. It sticks to one paw, then the other.",
-                    "build", "af_heart", 1.06,
+                    "Papa is already outside the frame. In a solo shot, Milo pats the dough; it sticks to his paws.",
+                    "build", "af_heart", 1.06, visible_characters=("Milo",),
                 ),
                 _beat(
                     "Milo: Why are you climbing me?!",
                     "The elastic dough stretches up Milo's arms and over his head like a giant sticky hat while he waddles backward in panic.",
-                    "escalation", "af_heart", 1.08,
+                    "escalation", "af_heart", 1.08, visible_characters=("Milo",),
                 ),
                 _beat(
                     "Papa: Milo? Milo: Everything is completely under control.",
                     "Papa returns. Milo freezes behind the counter with a huge dough blob slowly rising above his head.",
-                    "contrast", "am_adam", 1.00,
+                    "contrast", "am_adam", 1.00, visible_characters=("Papa", "Milo"),
                 ),
                 _beat(
                     "The dough suddenly pops free and lands perfectly in six muffin cups.",
                     "The dough launches across the counter in slow-motion blobs and lands neatly in six baking cups. Milo and Papa stare at the impossible result.",
-                    "payoff", "af_heart", 1.03,
+                    "payoff", "af_heart", 1.03, visible_characters=("Papa", "Milo"),
                 ),
                 _beat(
                     "Papa: You invented something. Milo: I meant to do that.",
-                    "Fresh round buns emerge from the oven. Papa tastes one, surprised. Milo straightens his oversized apron proudly.",
-                    "payoff", "am_adam", 1.01,
+                    "A locked medium two-shot: exactly one adult Papa on screen-left and exactly one small Milo on screen-right, behind a tray of already-baked buns. Papa holds a tasted bun and reacts with surprise; Milo smiles proudly. Both remain in their original positions for the whole shot. No oven reveal or additional entrance.",
+                    "payoff", "am_adam", 1.01, visible_characters=("Papa", "Milo"),
                 ),
                 _beat(
                     "Papa: Then clean the ceiling. Milo: I have retired from baking.",
                     "Camera tilts up to reveal dough stuck all over the ceiling. Milo slowly backs toward the door while Papa raises one eyebrow.",
-                    "button", "af_heart", 1.04,
+                    "button", "af_heart", 1.04, visible_characters=("Papa", "Milo"),
                 ),
             ],
         },

@@ -55,7 +55,9 @@ def render(output: Path) -> dict:
             timing=scene_spec.get("dialogue_segments") or []
             shot_spec["dialogue_timing"]=timing
             timing_text="; ".join(
-                f"{float(x['start']):.3f}-{float(x['end']):.3f}s: {x.get('speaker','character')} says {x.get('text','')}"
+                f"{float(x['start']):.3f}-{float(x['end']):.3f}s: "
+                + ("off-screen narrator (all visible mouths remain closed)" if x.get('speaker') == 'narrator' else str(x.get('speaker','character')))
+                + f" says {x.get('text','')}"
                 for x in timing
             )
             shot_spec["prompt"] += (
