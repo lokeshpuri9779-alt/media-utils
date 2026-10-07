@@ -60,6 +60,16 @@ def rank(requirements: dict, available_vram_gb: float = 0, allow_paid: bool = Fa
         ranked.append({"key":key,"score":score,"blockers":blockers,"ready":not blockers,**asdict(r)})
     return sorted(ranked,key=lambda x:x["score"],reverse=True)
 
+def free_execution_policy() -> dict:
+    return {
+        "mode": "opportunistic_free_gpu",
+        "preferred_surfaces": ["kaggle_notebook", "colab_notebook"],
+        "minimum_vram_gb": 14.0,
+        "unlimited_free_hosted_gpu_verified": False,
+        "on_capacity_unavailable": "queue_and_checkpoint",
+        "forbidden_fallbacks": ["paid_inference_without_approval", "low_quality_renderer_substitution"],
+    }
+
 def select(requirements: dict, available_vram_gb: float = 0, allow_paid: bool = False) -> dict:
     ranked=rank(requirements,available_vram_gb,allow_paid)
     ready=[x for x in ranked if x["ready"]]
@@ -68,4 +78,5 @@ def select(requirements: dict, available_vram_gb: float = 0, allow_paid: bool = 
         "status": "ready" if ready else "blocked",
         "ranked": ranked,
         "policy": "fail_closed_no_paid_and_no_unvalidated_renderer",
+        "execution": free_execution_policy(),
     }
