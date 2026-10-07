@@ -277,7 +277,8 @@ def direct_story(ch, plan):
         # rather than depending on lucky keywords in narration.
         beat=shot.get('story_beat','')
         beat_semantic={'map':'map','mechanism':'network','contrast':'compare',
-                       'evidence':'evidence','uncertainty':'evidence',
+                       'evidence':'evidence','evidence_primary':'evidence',
+                       'evidence_secondary':'evidence','uncertainty':'evidence',
                        'consequence':'future'}.get(beat)
         if beat_semantic and beat_semantic not in semantics:
             semantics.insert(0,beat_semantic)
@@ -324,6 +325,40 @@ def direct_story(ch, plan):
                         'editorial-illustration' if 'person' in semantics else
                         'kinetic-type'
                     ))
+        if ch.get('genre')=='current':
+            story_text=' '.join(str(ch.get(k) or '') for k in ('topic','news_title','question','answer')).lower()
+            sports_news=bool(re.search(r'wnba|nba|nhl|nfl|mlb|cricket|football|soccer|tennis|match|playoff|score|player|team|\bvs\b|game preview',story_text))
+            beat=str(shot.get('story_beat') or '')
+            if sports_news:
+                asset_map={
+                    'reveal':'sports-matchup-card',
+                    'evidence_primary':'source-document',
+                    'evidence_secondary':'source-document',
+                    'contrast':'sports-score-context',
+                    'context':'sports-context-card',
+                    'map':'sports-context-card',
+                    'mechanism':'sports-play-diagram',
+                    'consequence':'timeline-graphic',
+                    'uncertainty':'source-document',
+                    'payoff':'sports-takeaway-card',
+                }
+            else:
+                asset_map={
+                    'reveal':'news-headline-card',
+                    'evidence_primary':'source-document',
+                    'evidence_secondary':'source-document',
+                    'contrast':'comparison-graphic',
+                    'context':'news-context-card',
+                    'map':'map-explainer',
+                    'mechanism':'mechanism-diagram',
+                    'consequence':'timeline-graphic',
+                    'uncertainty':'source-document',
+                    'payoff':'news-takeaway-card',
+                }
+            shot['director_asset']=asset_map.get(beat,shot.get('director_asset'))
+            shot['director_motion']=['glide','scan','parallax','glide','arc','scan','glide','parallax'][i % 8]
+            shot['director_camera']=['push','drift','track','reveal','push','drift','track','push'][i % 8]
+            shot['director_layout']=['center','focus-left','focus-right','split','center','focus-left','focus-right','center'][i % 8]
         semantic_broll=infer_visual_intent(shot,i)
         shot["semantic_broll"]=semantic_broll
         # For generic beats, meaning-first B-roll intent can strengthen the
@@ -780,6 +815,68 @@ def asset_layer(im,s,t,u,accent):
         # Clock semantics are already animated by attention_layer; add a timeline cue.
         d.line((145,1030,900,1030),fill=accent+(145,),width=7)
         for x in (180,420,660,860): d.ellipse((x-13,1017,x+13,1043),fill=(255,255,255,220))
+    elif kind=='sports-matchup-card':
+        d.rounded_rectangle((115,650,965,1050),38,fill=(10,18,32,225),outline=accent+(190,),width=6)
+        d.text((150,700),'MATCHUP',font=font(34),fill=accent+(230,))
+        d.line((540,760,540,980),fill=(255,255,255,70),width=4)
+        d.text((245,860),'SIDE A',font=font(48),fill=(255,255,255,230),anchor='mm')
+        d.text((835,860),'SIDE B',font=font(48),fill=(255,255,255,230),anchor='mm')
+        d.text((540,860),'VS',font=font(44),fill=accent+(235,),anchor='mm')
+    elif kind=='sports-score-context':
+        d.rounded_rectangle((130,680,950,1040),34,fill=(14,22,38,225),outline=accent+(180,),width=5)
+        d.text((175,730),'GAME CONTEXT',font=font(32),fill=accent+(230,))
+        for j,(label,val) in enumerate((('FORM',.68),('MOMENTUM',.82),('PRESSURE',.74))):
+            y=810+j*72
+            d.text((175,y),label,font=font(25),fill=(235,240,248,215))
+            d.rounded_rectangle((405,y+5,870,y+35),15,fill=(40,52,70,190))
+            d.rounded_rectangle((405,y+5,405+int(465*val*ease(min(1,u/.65))),y+35),15,fill=accent+(185,))
+    elif kind=='sports-context-card':
+        d.rounded_rectangle((140,690,940,1050),34,fill=(16,24,40,220),outline=accent+(165,),width=5)
+        d.text((190,750),'STORY CONTEXT',font=font(30),fill=accent+(220,))
+        d.line((190,850,880,850),fill=(255,255,255,60),width=4)
+        for j,x in enumerate((250,470,690,850)):
+            rr=16+int(5*math.sin(t*2+j))
+            d.ellipse((x-rr,850-rr,x+rr,850+rr),fill=accent+(210,))
+    elif kind=='sports-play-diagram':
+        d.rounded_rectangle((120,620,960,1100),40,fill=(18,48,36,220),outline=(255,255,255,70),width=4)
+        d.line((540,650,540,1070),fill=(255,255,255,70),width=4)
+        for x,y in ((260,760),(390,900),(700,760),(820,930)):
+            d.ellipse((x-26,y-26,x+26,y+26),outline=accent+(230,),width=6)
+        x2=int(285+(375*ease(min(1,u/.8))))
+        d.line((285,780,x2,790),fill=accent+(180,),width=6)
+        d.polygon([(x2,790),(x2-34,770),(x2-31,815)],fill=accent+(220,))
+    elif kind=='timeline-graphic':
+        d.text((145,690),'WHAT HAPPENED',font=font(32),fill=accent+(220,))
+        d.line((180,820,900,820),fill=accent+(160,),width=8)
+        p=ease(min(1,u/.75))
+        for j,x in enumerate((220,460,700,860)):
+            if p >= j/4:
+                r=19 if j<3 else 27
+                d.ellipse((x-r,820-r,x+r,820+r),fill=accent+(220,))
+                d.text((x,900),str(j+1),font=font(24),fill=(255,255,255,210),anchor='mm')
+    elif kind=='sports-takeaway-card':
+        d.rounded_rectangle((125,700,955,1060),38,fill=(12,20,34,230),outline=accent+(190,),width=6)
+        d.text((170,765),'THE TAKEAWAY',font=font(34),fill=accent+(230,))
+        d.line((170,835,890,835),fill=(255,255,255,65),width=4)
+        d.text((540,930),'WHAT MATTERS NEXT',font=font(46),fill=(255,255,255,230),anchor='mm')
+    elif kind=='news-headline-card':
+        d.rounded_rectangle((120,650,960,1050),40,fill=(12,18,30,235),outline=accent+(180,),width=6)
+        d.text((165,710),'DEVELOPING',font=font(32),fill=accent+(225,))
+        d.line((165,790,900,790),fill=(255,255,255,65),width=4)
+        w=int(700*ease(min(1,u/.7)))
+        d.rounded_rectangle((165,860,165+w,900),18,fill=accent+(150,))
+        d.rounded_rectangle((165,930,165+int(w*.78),966),18,fill=(255,255,255,65))
+    elif kind=='news-context-card':
+        d.rounded_rectangle((130,690,950,1050),36,fill=(14,22,38,225),outline=accent+(170,),width=5)
+        d.text((175,745),'CONTEXT',font=font(32),fill=accent+(225,))
+        for j,w in enumerate((610,520,680)):
+            yy=835+j*65
+            d.rounded_rectangle((175,yy,175+int(w*ease(min(1,u/.7))),yy+22),11,fill=(235,240,248,75+j*20))
+    elif kind=='news-takeaway-card':
+        d.rounded_rectangle((125,700,955,1060),38,fill=(12,20,34,230),outline=accent+(190,),width=6)
+        d.text((170,765),'THE TAKEAWAY',font=font(34),fill=accent+(230,))
+        d.line((170,835,890,835),fill=(255,255,255,65),width=4)
+        d.text((540,930),'VERIFIED • COMPACT • CURRENT',font=font(34),fill=(255,255,255,220),anchor='mm')
     elif kind=='editorial-illustration':
         # Abstract only: never imply a generated likeness is the real person.
         d.text((145,1040),'EDITORIAL CONTEXT',font=font(25),fill=accent+(180,))
@@ -802,6 +899,12 @@ def director_motion_layer(im,s,t,u,accent):
         for j in range(5):
             x=int((120+j*220+t*(10+5*j)*energy)%1180)-50
             d.ellipse((x,650+j*70,x+16,666+j*70),fill=accent+(55+j*18,))
+    elif mode=='glide':
+        phase=t*.9
+        xoff=int(math.sin(phase)*45*energy)
+        yoff=int(math.cos(phase*.72)*18*energy)
+        d.rounded_rectangle((100+xoff,620+yoff,980+xoff,1120+yoff),44,
+                            outline=accent+(48,),width=5)
     return im
 
 
