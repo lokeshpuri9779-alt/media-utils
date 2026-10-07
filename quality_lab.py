@@ -60,6 +60,22 @@ def structural_quality_penalties(report: dict) -> dict:
         p=min(12.0,(hook_words-9)*2.0)
         score-=p; penalties.append({"type":"hook-legibility","points":p,"detail":f"hook has {hook_words} words"})
 
+    layout=report.get("layout_qa") or {}
+    if layout and not layout.get("safe_area_pass",False):
+        score-=20.0; penalties.append({"type":"safe-area","points":20.0,"detail":"caption/headline safe-area validation failed"})
+
+    # Contain-framed extreme aspect ratios can leave too much unused canvas.
+    preflight_scenes=(report.get("scene_preflight") or {}).get("scenes") or []
+    empty_risk=0
+    for row in preflight_scenes:
+        ratio=float(row.get("aspect_ratio") or 0)
+        fit=str(row.get("media_fit") or "")
+        if fit in {"contain","wide"} and ratio and (ratio>1.95 or ratio<0.62):
+            empty_risk += 1
+    if empty_risk:
+        p=min(15.0,empty_risk*5.0)
+        score-=p; penalties.append({"type":"empty-space","points":p,"detail":f"{empty_risk} scene(s) risk excessive letterbox/pillarbox space"})
+
     return {"score":round(max(0.0,score),2),"penalties":penalties,"pass":score>=78.0}
 
 
