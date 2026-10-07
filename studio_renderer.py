@@ -1064,7 +1064,13 @@ def composite_cached_asset(im,item,t=0.0,u=0.0,shot=None):
         # Premium media occupies most of the vertical canvas. Diagrams and full
         # celestial discs use contain-fit so important information is never cropped.
         mode=str(item.get('media_fit') or 'cover')
-        box=(24,540,1056,1180) if mode=='wide' else (40,350,1040,1370)
+        fmt=str((shot or {}).get('creative_format') or '')
+        if fmt=='documentary_montage':
+            # Premium documentary shots should feel footage-first, not card-first.
+            # Leave only the safe caption/control zones while maximizing subject scale.
+            box=(0,300,1080,1395) if mode=='wide' else (16,235,1064,1410)
+        else:
+            box=(24,540,1056,1180) if mode=='wide' else (40,350,1040,1370)
         bw,bh=box[2]-box[0],box[3]-box[1]
         if mode in {'contain','wide'}:
             scale=min(bw/media.width,bh/media.height)
@@ -1082,7 +1088,8 @@ def composite_cached_asset(im,item,t=0.0,u=0.0,shot=None):
         motion=str(item.get('media_motion') or ((shot or {}).get('media_motion') if shot else '') or 'still')
         if motion=='push':
             progress=min(1.0,max(0.0,u/max(.2,float((shot or {}).get('duration') or 3.0))))
-            zoom=1.0+.035*progress
+            zoom_strength=.060 if str((shot or {}).get('creative_format') or '')=='documentary_montage' else .035
+            zoom=1.0+zoom_strength*progress
             zw,zh=int(bw*zoom),int(bh*zoom)
             moved=media.resize((zw,zh),Image.Resampling.BICUBIC)
             x=max(0,(zw-bw)//2); y=max(0,(zh-bh)//2)
