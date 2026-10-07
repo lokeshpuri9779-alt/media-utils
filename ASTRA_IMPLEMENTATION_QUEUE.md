@@ -9,10 +9,10 @@ Status legend: [ ] queued  [~] in progress  [x] completed  [!] blocked
 [x] Support procedural/mechanism scenes with one-frame fallback
 [x] Validate 1080x1920 / 30fps MP4 output
 [x] Keep premium pilot at ₹0 and watermark-free
-[~] Inspect fast-render artifact visually and score actual output quality
-[ ] Fix any remaining visual defects found in inspection
-[ ] Add automated contact-sheet + representative-frame artifact for every pilot
-[ ] Add render-time metrics and fail if fast path regresses badly
+[x] Inspect fast-render artifact visually and score actual output quality
+[~] Fix any remaining visual defects found in inspection
+[x] Add automated contact-sheet + representative-frame artifact for every pilot
+[~] Add render-time metrics and fail if fast path regresses badly
 
 ## P1 — Fast production renderer
 [ ] Add shot transitions (cut / crossfade / dip / whip where appropriate)
@@ -81,7 +81,7 @@ Status legend: [ ] queued  [~] in progress  [x] completed  [!] blocked
 [ ] No disposable-account/free-credit bypasses
 [ ] Provider health/fallback registry
 [ ] Cache media + voice assets between runs where GitHub supports it
-[ ] Avoid reinstalling heavy packages when reusable cache/runtime path exists
+[x] Avoid reinstalling heavy packages when reusable cache/runtime path exists
 [ ] Add failure diagnosis summary to each run artifact
 
 ## Approval boundaries
