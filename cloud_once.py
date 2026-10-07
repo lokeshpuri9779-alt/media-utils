@@ -113,13 +113,16 @@ def load_state(now: datetime) -> dict:
         return fresh_state(today)
 
     if state.get("date") == today:
-        # Deployment configuration is the operator's requested capacity floor.
-        # Do not let stale persisted state from an older/lower target throttle
-        # a newly deployed controller for the rest of the day.
-        state["target"] = max(
-            int(state.get("target", INITIAL_TARGET)),
-            min(MAX_TARGET, INITIAL_TARGET),
-        )
+        # In monetization-first mode the deployment cap is authoritative.
+        # This prevents stale state from an older high-volume experiment
+        # (for example 48/day) from overriding the current quality cadence.
+        if (os.environ.get("ASTRA_MONETIZATION_FIRST") or "").strip() == "1":
+            state["target"] = max(1, min(MAX_TARGET, INITIAL_TARGET))
+        else:
+            state["target"] = max(
+                int(state.get("target", INITIAL_TARGET)),
+                min(MAX_TARGET, INITIAL_TARGET),
+            )
         return state
 
     previous = dict(state)
