@@ -1,0 +1,126 @@
+name: Build PULSEFALL REBORN Windows
+
+on:
+  push:
+    branches:
+      - pulsefall-apk-build
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: pulsefall-apk-build
+
+      - name: Reconstruct project
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p pulsefall_reborn
+          cat pulsefall-build-src/pfpart-* > /tmp/pulsefall_reborn.tar.gz.b64
+          base64 -d /tmp/pulsefall_reborn.tar.gz.b64 > /tmp/pulsefall_reborn.tar.gz
+          echo "94682f8b025f59d6aa61dfd61f88bd73db35b67b7b1cbda87208a6d780685ee6  /tmp/pulsefall_reborn.tar.gz" | sha256sum -c -
+          tar -xzf /tmp/pulsefall_reborn.tar.gz -C pulsefall_reborn
+          test -f pulsefall_reborn/project.godot
+
+      - name: Patch validated syntax
+        shell: bash
+        run: |
+          set -euxo pipefail
+          sed -i 's/for ring_index in 1:5:/for ring_index in range(1, 5):/' pulsefall_reborn/scripts/main.gd
+
+      - name: Create Windows export preset
+        shell: bash
+        run: |
+          cat > pulsefall_reborn/export_presets.cfg <<'EOF'
+          [preset.0]
+
+          name="Windows Desktop"
+          platform="Windows Desktop"
+          runnable=true
+          dedicated_server=false
+          custom_features=""
+          export_filter="all_resources"
+          include_filter=""
+          exclude_filter=""
+          export_path="build/PULSEFALL_REBORN.exe"
+          patches=PackedStringArray()
+          encryption_include_filters=""
+          encryption_exclude_filters=""
+          seed=0
+          encrypt_pck=false
+          encrypt_directory=false
+          script_export_mode=2
+
+          [preset.0.options]
+
+          custom_template/debug=""
+          custom_template/release=""
+          debug/export_console_wrapper=0
+          binary_format/embed_pck=true
+          texture_format/s3tc_bptc=true
+          texture_format/etc2_astc=false
+          shader_baker/enabled=false
+          binary_format/architecture="x86_64"
+          codesign/enable=false
+          application/modify_resources=true
+          application/icon="res://icon.svg"
+          application/icon_interpolation=4
+          application/file_version="1.0.0.0"
+          application/product_version="1.0.0.0"
+          application/company_name="PULSEFALL"
+          application/product_name="PULSEFALL REBORN"
+          application/file_description="PULSEFALL REBORN"
+          application/copyright=""
+          application/trademarks=""
+          texture_format/bptc=false
+          texture_format/s3tc=true
+          texture_format/etc=false
+          texture_format/etc2=false
+          binary_format/64_bits=true
+          texture_format/no_bptc_fallbacks=true
+          EOF
+
+      - name: Export Windows 64-bit
+        id: export
+        uses: firebelley/godot-export@v8.0.0
+        with:
+          godot_executable_download_url: https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_export_templates.tpz
+          relative_project_path: ./pulsefall_reborn
+          export_debug: false
+          use_preset_export_path: true
+          presets_to_export: Windows Desktop
+          verbose: true
+          cache: false
+
+      - name: Collect Windows build
+        shell: bash
+        run: |
+          set -euxo pipefail
+          EXE="$(find pulsefall_reborn -type f -name 'PULSEFALL_REBORN.exe' | head -n1)"
+          if [ -z "$EXE" ]; then
+            EXE="$(find "$HOME/.local/share/godot/builds" -type f -name '*.exe' | head -n1)"
+          fi
+          test -n "$EXE"
+          mkdir -p artifact/PULSEFALL_REBORN_WINDOWS
+          cp "$EXE" artifact/PULSEFALL_REBORN_WINDOWS/PULSEFALL_REBORN.exe
+          cp pulsefall_reborn/README.md artifact/PULSEFALL_REBORN_WINDOWS/README.md || true
+          sha256sum artifact/PULSEFALL_REBORN_WINDOWS/PULSEFALL_REBORN.exe > artifact/PULSEFALL_REBORN_WINDOWS/SHA256.txt
+          (cd artifact && zip -r PULSEFALL_REBORN_WINDOWS_64BIT.zip PULSEFALL_REBORN_WINDOWS)
+          ls -lh artifact/PULSEFALL_REBORN_WINDOWS_64BIT.zip artifact/PULSEFALL_REBORN_WINDOWS/PULSEFALL_REBORN.exe
+
+      - name: Upload Windows build
+        uses: actions/upload-artifact@v4
+        with:
+          name: PULSEFALL_REBORN_WINDOWS_64BIT
+          path: artifact/PULSEFALL_REBORN_WINDOWS_64BIT.zip
+          if-no-files-found: error
+          retention-days: 7
