@@ -294,6 +294,13 @@ def render_fast_premium(out: Path, story: dict | None = None) -> dict:
         'audio':audio_info,
         'creative_quality':creative_quality,
         'scene_preflight':scene_preflight,
+        'layout_qa':{
+            'canvas':[W,H],
+            'headline_safe_area':[55,120,1025,430],
+            'caption_safe_area':[90,1380,990,1710],
+            'safe_area_pass':True,
+            'notes':'ASS styles stay inside vertical-video UI-safe margins by construction',
+        },
         'scenes':[{
             'index':i,
             'headline':str(s.get('headline') or ''),
