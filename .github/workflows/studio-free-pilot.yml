@@ -1,10 +1,14 @@
 name: Astra Fast Premium Pilot
-# fast renderer v2 procedural fallback
+# fast renderer v3: no apt FFmpeg install + automatic visual review
 
 on:
   push:
     paths:
       - '.github/workflows/studio-free-pilot.yml'
+      - 'fast_premium_renderer.py'
+      - 'studio_renderer.py'
+      - 'premium_stories.py'
+      - 'creative_formats.py'
   workflow_dispatch:
 
 permissions:
@@ -32,33 +36,78 @@ jobs:
         with:
           path: ~/.cache/astra-voice
           key: astra-kokoro-v1-beb0d184
-
-      - name: Install FFmpeg tools
+ 
+      - name: Verify bundled FFmpeg
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y ffmpeg
+          python - <<'PY'
+          from imageio_ffmpeg import get_ffmpeg_exe
+          import subprocess
+          ff=get_ffmpeg_exe()
+          print("FFmpeg:", ff)
+          subprocess.run([ff, "-version"], check=True)
+          PY
 
       - name: Render one premium pilot only
         run: |
           set -euo pipefail
           python fast_premium_renderer.py --out /tmp/astra-fast-premium-pilot.mp4
 
-      - name: Validate MP4
+      - name: Validate MP4 and build visual review
         run: |
           set -euo pipefail
           python - <<'PY'
           from pathlib import Path
-          p=Path('/tmp/astra-fast-premium-pilot.mp4')
-          if not p.exists() or p.stat().st_size < 10000:
-              raise SystemExit('Studio pilot MP4 missing or unexpectedly small')
-          print('MP4 bytes:',p.stat().st_size)
+          from imageio_ffmpeg import read_frames, get_ffmpeg_exe
+          from PIL import Image, ImageDraw
+          import subprocess, json
+
+          video=Path('/tmp/astra-fast-premium-pilot.mp4')
+          report=Path('/tmp/astra-fast-premium-pilot.json')
+          if not video.exists() or video.stat().st_size < 10000:
+              raise SystemExit('Fast premium MP4 missing or unexpectedly small')
+
+          g=read_frames(str(video), pix_fmt='rgb24', bits_per_pixel=24)
+          meta=next(g)
+          try: g.close()
+          except Exception: pass
+          size=tuple(meta.get('size') or ())
+          fps=float(meta.get('fps') or 0)
+          duration=float(meta.get('duration') or 0)
+          if size != (1080,1920) or fps < 29 or not (6 <= duration <= 36):
+              raise SystemExit(f'Invalid MP4 metadata: size={size} fps={fps} duration={duration}')
+          print(json.dumps({'bytes':video.stat().st_size,'size':size,'fps':fps,'duration':duration}))
+
+          review=Path('/tmp/astra-fast-review'); review.mkdir(parents=True,exist_ok=True)
+          ff=get_ffmpeg_exe()
+          stamps=[0.5, duration*.24, duration*.48, duration*.72, max(.1,duration-.7)]
+          frames=[]
+          for i,t in enumerate(stamps,1):
+              p=review/f'frame-{i:02d}.png'
+              subprocess.run([ff,'-hide_banner','-loglevel','error','-y','-ss',f'{t:.3f}','-i',str(video),'-frames:v','1',str(p)],check=True)
+              frames.append(p)
+
+          cards=[]
+          for p in frames:
+              im=Image.open(p).convert('RGB')
+              im.thumbnail((270,480))
+              card=Image.new('RGB',(290,515),'white')
+              card.paste(im,((290-im.width)//2,8))
+              ImageDraw.Draw(card).text((10,492),p.stem,fill='black')
+              cards.append(card)
+          sheet=Image.new('RGB',(290*len(cards),515),'white')
+          for i,card in enumerate(cards): sheet.paste(card,(290*i,0))
+          sheet.save(review/'contact-sheet.png')
+          if report.exists():
+              (review/'render-report.json').write_bytes(report.read_bytes())
           PY
-          ffprobe -v error -select_streams v:0             -show_entries stream=width,height,r_frame_rate             -show_entries format=duration             -of json /tmp/astra-fast-premium-pilot.mp4
 
       - name: Upload pilot video
         uses: actions/upload-artifact@v4
         with:
           name: astra-fast-premium-pilot
-          path: /tmp/astra-fast-premium-pilot.mp4
+          path: |
+            /tmp/astra-fast-premium-pilot.mp4
+            /tmp/astra-fast-premium-pilot.json
+            /tmp/astra-fast-review/
           retention-days: 7
           if-no-files-found: error
