@@ -9,8 +9,10 @@ from premium_stories import catalog
 from quality_lab import assess_render, contact_sheet, scene_change_report, write_report
 from studio_renderer import render_short
 from fast_premium_renderer import render_fast_premium
+from shorts_package import build_shorts_package, as_dict
 from renderer_router import select_validated_local
 from story_catalog_gate import validate_catalog
+from shorts_package import build_shorts_package, as_dict
 
 
 def main(root: Path) -> int:
@@ -72,10 +74,12 @@ def main(root: Path) -> int:
         post["pacing"] = scene_change_report(video)
         write_report(folder / "render.json", report)
         write_report(folder / "quality.json", post)
+        package=as_dict(build_shorts_package(story,report))
+        write_report(folder / "shorts-package.json", package)
         contact_sheet(stills, folder / "contact-sheet.jpg", story.get("title") or cid)
         entry.update(status="passed" if post["pass"] else "rejected-after-render",
                      quality=post, video=str(video.name), renderer=renderer,
-                     renderer_selection=selection)
+                     renderer_selection=selection, shorts_package=package)
         failed = failed or not post["pass"]
         batch.append(entry)
     (root / "batch.json").write_text(json.dumps(batch, indent=2), encoding="utf-8")
