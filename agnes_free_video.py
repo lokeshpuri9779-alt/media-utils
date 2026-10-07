@@ -154,3 +154,5 @@ def generate_agnes_clip(
         "num_frames":frames,
         "frame_rate":fps,
     }
+
+# Probe marker: Agnes free backend active.
