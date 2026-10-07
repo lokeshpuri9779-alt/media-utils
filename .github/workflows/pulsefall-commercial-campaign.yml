@@ -1530,53 +1530,53 @@ jobs:
           s=s.replace(
               'var rescue_cooldown: float = 0.0\n',
               '''var rescue_cooldown: float = 0.0
-var weapon_index: int = 0
-var unlocked_weapon_max: int = 0
-const WEAPONS = [
+          var weapon_index: int = 0
+          var unlocked_weapon_max: int = 0
+          const WEAPONS = [
           	{"name": "ARC RIFLE", "damage": 2, "pellets": 1, "cooldown": 0.20, "speed": 31.0, "spread": 0.006},
           	{"name": "SCATTER CANNON", "damage": 1, "pellets": 7, "cooldown": 0.78, "speed": 25.0, "spread": 0.055},
           	{"name": "RAIL LANCE", "damage": 8, "pellets": 1, "cooldown": 1.12, "speed": 58.0, "spread": 0.001},
-]
-'''
+          ]
+          '''
           )
           old='''\t\tif player_input.shooting and fire_cooldown.time_left == 0:
-\t\t\tvar shoot_origin: Vector3 = shoot_from.global_transform.origin
-\t\t\tvar shoot_dir: Vector3 = (player_input.shoot_target - shoot_origin).normalized()
+          \t\t\tvar shoot_origin: Vector3 = shoot_from.global_transform.origin
+          \t\t\tvar shoot_dir: Vector3 = (player_input.shoot_target - shoot_origin).normalized()
 
-\t\t\tvar bullet: CharacterBody3D = preload("res://player/bullet/bullet.tscn").instantiate()
-\t\t\tget_parent().add_child(bullet, true)
-\t\t\tbullet.global_transform.origin = shoot_origin
-\t\t\t# If we don't rotate the bullets there is no useful way to control the particles ..
-\t\t\tbullet.look_at(shoot_origin + shoot_dir)
-\t\t\tbullet.add_collision_exception_with(self)
-\t\t\tshoot.rpc()
-'''
+          \t\t\tvar bullet: CharacterBody3D = preload("res://player/bullet/bullet.tscn").instantiate()
+          \t\t\tget_parent().add_child(bullet, true)
+          \t\t\tbullet.global_transform.origin = shoot_origin
+          \t\t\t# If we don't rotate the bullets there is no useful way to control the particles ..
+          \t\t\tbullet.look_at(shoot_origin + shoot_dir)
+          \t\t\tbullet.add_collision_exception_with(self)
+          \t\t\tshoot.rpc()
+          '''
           new='''\t\tif player_input.shooting and fire_cooldown.time_left == 0:
-\t\t\tvar shoot_origin: Vector3 = shoot_from.global_transform.origin
-\t\t\tvar shoot_dir: Vector3 = (player_input.shoot_target - shoot_origin).normalized()
-\t\t\t_fire_current_weapon(shoot_origin, shoot_dir)
-\t\t\tshoot.rpc()
-'''
+          \t\t\tvar shoot_origin: Vector3 = shoot_from.global_transform.origin
+          \t\t\tvar shoot_dir: Vector3 = (player_input.shoot_target - shoot_origin).normalized()
+          \t\t\t_fire_current_weapon(shoot_origin, shoot_dir)
+          \t\t\tshoot.rpc()
+          '''
           if old not in s:
               raise SystemExit("weapon firing block not found")
           s=s.replace(old,new)
 
           old_input='''func _unhandled_input(event: InputEvent) -> void:
-\tif event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_R:
-\t\trecover_to_checkpoint()
-'''
+          \tif event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_R:
+          \t\trecover_to_checkpoint()
+          '''
           new_input='''func _unhandled_input(event: InputEvent) -> void:
-\tif not event is InputEventKey or not event.pressed or event.echo:
-\t\treturn
-\tif event.keycode == KEY_R:
-\t\trecover_to_checkpoint()
-\telif event.keycode == KEY_1:
-\t\tselect_weapon(0)
-\telif event.keycode == KEY_2:
-\t\tselect_weapon(1)
-\telif event.keycode == KEY_3:
-\t\tselect_weapon(2)
-'''
+          \tif not event is InputEventKey or not event.pressed or event.echo:
+          \t\treturn
+          \tif event.keycode == KEY_R:
+          \t\trecover_to_checkpoint()
+          \telif event.keycode == KEY_1:
+          \t\tselect_weapon(0)
+          \telif event.keycode == KEY_2:
+          \t\tselect_weapon(1)
+          \telif event.keycode == KEY_3:
+          \t\tselect_weapon(2)
+          '''
           if old_input not in s:
               raise SystemExit("player input block not found")
           s=s.replace(old_input,new_input)
@@ -1723,15 +1723,15 @@ const WEAPONS = [
           start=s.index('\tvar subtitles := [')
           end=s.index('\n\t]\n\treturn subtitles[chapter]', start)
           s=s[:start]+'''\tvar subtitles := [
-\t\t"CONTAINMENT HOSTILES DETECTED",
-\t\t"INDUSTRIAL DEFENSE GRID ACTIVE",
-\t\t"HABITATION SECURITY CORRUPTED",
-\t\t"PULSE-CORRUPTED UNITS INBOUND",
-\t\t"TRANSIT SPINE LOCKDOWN",
-\t\t"COMMAND SECURITY HAS LOCKED ON",
-\t\t"NULL CHAMBER REPLICATION ACTIVE",
-\t\t"CORE RESISTANCE ESCALATING",
-\t]'''+s[end+len('\n\t]'):]
+          \t\t"CONTAINMENT HOSTILES DETECTED",
+          \t\t"INDUSTRIAL DEFENSE GRID ACTIVE",
+          \t\t"HABITATION SECURITY CORRUPTED",
+          \t\t"PULSE-CORRUPTED UNITS INBOUND",
+          \t\t"TRANSIT SPINE LOCKDOWN",
+          \t\t"COMMAND SECURITY HAS LOCKED ON",
+          \t\t"NULL CHAMBER REPLICATION ACTIVE",
+          \t\t"CORE RESISTANCE ESCALATING",
+          \t]'''+s[end+len('\n\t]'):]
 
           p.write_text(s)
           PY
