@@ -1,5 +1,5 @@
 name: Astra Monetization Autopublish
-# revision: trend-research-v3-120day
+# revision: trend-research-v4-cap-seeking
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ on:
     paths:
       - '.github/workflows/astra-autopublish.yml'
   schedule:
-    - cron: '*/12 * * * *'
+    - cron: '*/5 * * * *'
 
 concurrency:
   group: astra-monetization-autopublish
@@ -29,9 +29,9 @@ jobs:
       YOUTUBE_PRIVACY: public
       ASTRA_CHANNEL: rayvan
       ASTRA_LONG_ENABLED: '1'
-      ASTRA_INITIAL_DAILY_TARGET: '120'
-      ASTRA_MAX_DAILY_TARGET: '120'
-      ASTRA_MIN_UPLOAD_INTERVAL_MINUTES: '12'
+      ASTRA_INITIAL_DAILY_TARGET: '999'
+      ASTRA_MAX_DAILY_TARGET: '999'
+      ASTRA_MIN_UPLOAD_INTERVAL_MINUTES: '5'
       ASTRA_FORCE_RUN: ${{ github.event_name == 'workflow_dispatch' && '1' || '0' }}
       ASTRA_MONETIZATION_FIRST: '1'
       ASTRA_TREND_FIRST: '1'
