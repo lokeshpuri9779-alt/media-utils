@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json, math, subprocess, tempfile, time, re
 from pathlib import Path
+from PIL import Image
 
 from imageio_ffmpeg import get_ffmpeg_exe
 from premium_stories import catalog
@@ -100,6 +101,66 @@ def _visual_input(item: dict) -> str:
     return p if p and Path(p).is_file() else ''
 
 
+def _scene_preflight(plan: list[dict], resolved: list[dict]) -> dict:
+    """Fail closed on unusable scene inputs and normalize awkward media framing."""
+    scenes=[]
+    failures=[]
+    last_signature=None
+    repeat_run=0
+    for i,(shot,item) in enumerate(zip(plan,resolved)):
+        visual=str(shot.get('visual') or '')
+        src=_visual_input(item)
+        row={
+            'index':i,
+            'visual':visual,
+            'provider':str(item.get('provider') or ''),
+            'media_fit':str(shot.get('media_fit') or item.get('media_fit') or 'cover'),
+            'source_width':0,
+            'source_height':0,
+            'aspect_ratio':0.0,
+            'fallback_applied':False,
+            'failures':[],
+        }
+        if src:
+            try:
+                with Image.open(src) as im:
+                    w,h=im.size
+                row['source_width']=int(w); row['source_height']=int(h)
+                ratio=w/max(1,h); row['aspect_ratio']=round(ratio,3)
+                if min(w,h) < 480:
+                    row['failures'].append(f'low_resolution:{w}x{h}')
+                # Extremely wide/tall media is safer contained than aggressively cropped.
+                if ratio > 2.15 or ratio < 0.52:
+                    shot['media_fit']='contain'
+                    row['media_fit']='contain'
+                    row['fallback_applied']=True
+            except Exception as exc:
+                row['failures'].append('unreadable_media:'+str(exc)[:100])
+        elif visual=='media':
+            row['failures'].append('missing_media')
+
+        signature=(visual, str(item.get('commons_title') or item.get('cache_key') or ''), row['media_fit'])
+        if signature == last_signature:
+            repeat_run += 1
+        else:
+            repeat_run = 1
+            last_signature = signature
+        if repeat_run >= 3:
+            row['failures'].append('repetitive_scene_signature')
+
+        if row['failures']:
+            failures.extend(f"scene {i}: {x}" for x in row['failures'])
+        scenes.append(row)
+
+    hard=[x for x in failures if 'missing_media' in x or 'unreadable_media' in x]
+    return {
+        'pass': not hard,
+        'hard_failures':hard,
+        'warnings':[x for x in failures if x not in hard],
+        'scenes':scenes,
+    }
+
+
 def render_fast_premium(out: Path, story: dict | None = None) -> dict:
     wall_start=time.perf_counter()
     story=story or next(x for x in catalog() if x.get('production_ready'))
@@ -120,6 +181,9 @@ def render_fast_premium(out: Path, story: dict | None = None) -> dict:
     creative_quality['asset_resolution']=asset_report
     for shot,item in zip(plan,resolved):
         shot['resolved_asset']=item
+    scene_preflight=_scene_preflight(plan,resolved)
+    if not scene_preflight['pass']:
+        raise RuntimeError('Fast premium scene preflight failed: ' + '; '.join(scene_preflight['hard_failures']))
 
     duration=voice_plan(plan,genre,max_duration=float(story.get('target_duration_max',36)),
                         voice_name=str(story.get('voice_profile') or 'af_heart'),
@@ -229,6 +293,7 @@ def render_fast_premium(out: Path, story: dict | None = None) -> dict:
         'zero_cost':asset_report.get('zero_cost',False),
         'audio':audio_info,
         'creative_quality':creative_quality,
+        'scene_preflight':scene_preflight,
         'scenes':[{
             'index':i,
             'headline':str(s.get('headline') or ''),
