@@ -539,14 +539,32 @@ def _research_fact_from_url(url: str, topic: str) -> str:
 
 
 def _research_trend_sources(news: list[dict], topic: str) -> list[dict]:
+    """Build two independently attributed research facts.
+
+    Prefer publisher description metadata. When a publisher blocks metadata
+    extraction, use the publisher's own RSS headline as a narrowly scoped
+    attributed fact instead of inventing or silently discarding the story.
+    """
     researched=[]
-    for item in news[:3]:
-        fact=_research_fact_from_url(str(item.get("url") or ""),topic)
+    seen_hosts=set()
+    for item in news[:4]:
+        url=str(item.get("url") or "")
+        host=_news_host(url)
+        if host and host in seen_hosts:
+            continue
+        fact=_research_fact_from_url(url,topic)
+        source=' '.join(str(item.get("source") or "").split())[:80]
+        headline=' '.join(str(item.get("title") or "").split())[:220]
+        if not fact and headline:
+            fact=f"{source} reports: {headline}"
         if not fact:
             continue
         row=dict(item)
         row["research_fact"]=fact
+        row["research_mode"]="page-metadata" if not fact.startswith(source+" reports:") else "attributed-headline"
         researched.append(row)
+        if host:
+            seen_hosts.add(host)
         if len(researched)>=2:
             break
     return researched
