@@ -52,12 +52,20 @@ def render(output: Path) -> dict:
                     "Split the dialogue beat instead of looping a short Agnes clip."
                 )
             shot_spec["target_seconds"]=sec
-            shot_spec["dialogue_timing"]=scene_spec.get("dialogue_segments") or []
+            timing=scene_spec.get("dialogue_segments") or []
+            shot_spec["dialogue_timing"]=timing
+            timing_text="; ".join(
+                f"{x.get('speaker','character')} speaks for {float(x.get('seconds') or 0):.2f}s: {x.get('text','')}"
+                for x in timing
+            )
             shot_spec["prompt"] += (
                 f" Exact scene length: {sec:.2f} seconds. "
+                f"Dialogue timing plan: {timing_text}. "
                 "Use the supplied visual action as the timing spine. "
-                "Characters may move their mouths naturally when speaking, but do not generate visible text. "
-                "Do not invent extra dialogue or unrelated vocalizations."
+                "Only the named speaking character should move their mouth during that line; "
+                "listeners react silently with eyes, ears, head and body language. "
+                "Finish the spoken mouth action before the final reaction hold. "
+                "Do not generate visible text, extra dialogue, or unrelated vocalizations."
             )
             scene_seconds.append(sec)
 
