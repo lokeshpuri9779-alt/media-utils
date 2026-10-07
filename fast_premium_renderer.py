@@ -8,7 +8,7 @@ from premium_stories import catalog
 from studio_renderer import (
     make_plan, creative_quality_gate, asset_manifest, resolve_assets,
     prepare_media_cache, acquire_story_media, asset_resolution_gate,
-    voice_plan, score_audio, W, H, FPS
+    voice_plan, score_audio, render_frame, W, H, FPS
 )
 
 
@@ -59,9 +59,7 @@ def _write_ass(plan, path: Path):
 
 def _visual_input(item: dict) -> str:
     p=str(item.get('cache_image') or '')
-    if not p or not Path(p).is_file():
-        raise RuntimeError('Fast renderer requires resolved cached media for every premium shot.')
-    return p
+    return p if p and Path(p).is_file() else ''
 
 
 def render_fast_premium(out: Path) -> dict:
@@ -95,6 +93,13 @@ def render_fast_premium(out: Path) -> dict:
         for i,(shot,item) in enumerate(zip(plan,resolved)):
             src=_visual_input(item)
             dur=max(.25,float(shot['duration']))
+            if not src:
+                # Procedural/mechanism beats need no external media. Render exactly
+                # one representative Studio frame, then animate it natively in FFmpeg.
+                still=td/f'scene-{i:02d}-procedural.png'
+                t=float(shot['start']) + min(dur*.45, max(.1,dur-.1))
+                render_frame(plan,t,genre,duration).save(still,'PNG')
+                src=str(still)
             frames=max(1,int(math.ceil(dur*FPS)))
             clip=td/f'scene-{i:02d}.mp4'
             # FFmpeg-native scale/crop + Ken Burns motion. No Python frame loop.
