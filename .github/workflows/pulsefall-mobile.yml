@@ -1183,6 +1183,264 @@ jobs:
           p.write_text(s)
           PY
 
+      - name: Add exploration objectives, enemy roles and persistent progression
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          cat > game/mobile/meta_progression.gd <<'GDSCRIPT'
+          extends Node
+
+          const SAVE_PATH := "user://pulsefall_meta.json"
+
+          var credits: int = 0
+          var runs: int = 0
+          var best_score: int = 0
+          var meta_level: int = 1
+
+
+          func _ready() -> void:
+          	load_state()
+
+
+          func complete_run(score: int, time_seconds: float) -> int:
+          	var reward := 100 + int(score / 120)
+          	if time_seconds > 0.0 and time_seconds < 600.0:
+          		reward += 50
+          	credits += reward
+          	runs += 1
+          	best_score = maxi(best_score, score)
+          	meta_level = maxi(1, 1 + int(sqrt(float(credits) / 450.0)))
+          	save_state()
+          	return reward
+
+
+          func apply_to_player(player: Player) -> void:
+          	var bonus_health := mini((meta_level - 1) * 3, 30)
+          	player.max_health += bonus_health
+          	player.health = player.max_health
+          	player.health_changed.emit(player.health, player.max_health)
+
+
+          func save_state() -> void:
+          	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+          	if file == null:
+          		return
+          	file.store_string(JSON.stringify({
+          		"credits": credits,
+          		"runs": runs,
+          		"best_score": best_score,
+          		"meta_level": meta_level,
+          	}))
+
+
+          func load_state() -> void:
+          	if not FileAccess.file_exists(SAVE_PATH):
+          		return
+          	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
+          	if file == null:
+          		return
+          	var parsed = JSON.parse_string(file.get_as_text())
+          	if not parsed is Dictionary:
+          		return
+          	credits = maxi(int(parsed.get("credits", 0)), 0)
+          	runs = maxi(int(parsed.get("runs", 0)), 0)
+          	best_score = maxi(int(parsed.get("best_score", 0)), 0)
+          	meta_level = maxi(int(parsed.get("meta_level", 1)), 1)
+          GDSCRIPT
+
+          cat > game/mobile/pulse_cache.gd <<'GDSCRIPT'
+          class_name PulseCache
+          extends Area3D
+
+          signal collected(cache: PulseCache)
+
+          var base_y := 0.0
+          var age := 0.0
+          var consumed := false
+
+
+          func _ready() -> void:
+          	collision_layer = 0
+          	collision_mask = 2
+          	monitoring = true
+          	base_y = position.y
+
+          	var mesh_instance := MeshInstance3D.new()
+          	var mesh := SphereMesh.new()
+          	mesh.radius = 0.42
+          	mesh.height = 0.84
+          	mesh_instance.mesh = mesh
+          	var mat := StandardMaterial3D.new()
+          	mat.albedo_color = Color(0.18, 0.85, 1.0, 1.0)
+          	mat.emission_enabled = true
+          	mat.emission = Color(0.12, 0.72, 1.0, 1.0)
+          	mat.emission_energy_multiplier = 2.2
+          	mesh_instance.material_override = mat
+          	add_child(mesh_instance)
+
+          	var collision := CollisionShape3D.new()
+          	var shape := SphereShape3D.new()
+          	shape.radius = 0.7
+          	collision.shape = shape
+          	add_child(collision)
+
+          	body_entered.connect(_on_body_entered)
+
+
+          func _process(delta: float) -> void:
+          	age += delta
+          	rotate_y(delta * 1.8)
+          	position.y = base_y + sin(age * 2.4) * 0.18
+
+
+          func _on_body_entered(body: Node3D) -> void:
+          	if consumed or not body is Player:
+          		return
+          	consumed = true
+          	collected.emit(self)
+          	queue_free()
+          GDSCRIPT
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          # Register persistent meta progression.
+          p=Path("game/project.godot")
+          s=p.read_text()
+          needle='MobilePerformance="*res://mobile/mobile_performance.gd"'
+          if 'MetaProgression=' not in s:
+              s=s.replace(needle, needle+'\nMetaProgression="*res://mobile/meta_progression.gd"')
+          p.write_text(s)
+
+          # Turn the single robot into role-configurable enemies.
+          p=Path("game/enemies/red_robot/red_robot.gd")
+          s=p.read_text()
+          s=s.replace(
+              '@export var health: int = 5\n',
+              '@export var health: int = 5\n@export var shot_damage: int = 18\n@export var attack_delay: float = 6.0\n@export var animation_speed: float = 1.0\n'
+          )
+          s=s.replace(
+              '$AnimationTree.active = true\n',
+              '$AnimationTree.active = true\n\tanimation_tree.speed_scale = animation_speed\n'
+          )
+          s=s.replace('shoot_countdown = SHOOT_WAIT', 'shoot_countdown = attack_delay')
+          s=s.replace('player.take_damage(18)', 'player.take_damage(shot_damage)')
+          p.write_text(s)
+
+          p=Path("game/level/level.gd")
+          s=p.read_text()
+          s=s.replace(
+              'const PlayerScene: PackedScene = preload("res://player/player.tscn")\n',
+              'const PlayerScene: PackedScene = preload("res://player/player.tscn")\nconst PulseCacheScript: Script = preload("res://mobile/pulse_cache.gd")\n'
+          )
+          s=s.replace(
+              'var first_upgrade_recorded := false\n',
+              'var first_upgrade_recorded := false\nvar cache_goal := 0\nvar cache_collected := 0\nvar objective_label: Label\n'
+          )
+
+          # Role configuration immediately after robot health assignment.
+          old='\trobot.health = (26 + wave * 3) if elite else (4 + wave * 2)\n'
+          new='''\trobot.health = (26 + wave * 3) if elite else (4 + wave * 2)
+\tvar role := "standard"
+\tif not elite:
+\t\tmatch (spawn_index + wave) % 3:
+\t\t\t0:
+\t\t\t\trole = "scout"
+\t\t\t\trobot.health = 3 + wave
+\t\t\t\trobot.shot_damage = 10 + wave
+\t\t\t\trobot.attack_delay = 3.8
+\t\t\t\trobot.animation_speed = 1.22
+\t\t\t\trobot.scale = Vector3.ONE * 0.88
+\t\t\t1:
+\t\t\t\trole = "assault"
+\t\t\t\trobot.health = 5 + wave * 2
+\t\t\t\trobot.shot_damage = 15 + wave
+\t\t\t\trobot.attack_delay = 4.8
+\t\t\t_:
+\t\t\t\trole = "heavy"
+\t\t\t\trobot.health = 9 + wave * 2
+\t\t\t\trobot.shot_damage = 22 + wave
+\t\t\t\trobot.attack_delay = 6.3
+\t\t\t\trobot.animation_speed = 0.88
+\t\t\t\trobot.scale = Vector3.ONE * 1.18
+\trobot.set_meta("role", role)
+'''
+          if old not in s:
+              raise SystemExit("robot health line missing")
+          s=s.replace(old,new)
+
+          # Boss tuning.
+          s=s.replace(
+              '\t\trobot.scale = Vector3.ONE * 1.55\n\t\trobot.set_meta("elite", true)',
+              '\t\trobot.scale = Vector3.ONE * 1.60\n\t\trobot.shot_damage = 28\n\t\trobot.attack_delay = 2.8\n\t\trobot.animation_speed = 1.10\n\t\trobot.set_meta("elite", true)'
+          )
+
+          # Replace direct post-wave upgrade call with exploration objective.
+          s=s.replace(
+              '\t\t\t_show_banner("WAVE CLEARED", "CHOOSE A PULSE UPGRADE", 1.2)\n\t\t\tawait get_tree().create_timer(1.3).timeout\n\t\t\t_show_upgrade_choice()',
+              '\t\t\t_show_banner("AREA CLEARED", "RECOVER PULSE FRAGMENTS", 1.1)\n\t\t\tawait get_tree().create_timer(1.15).timeout\n\t\t\t_begin_cache_objective()'
+          )
+
+          # Apply meta progression when player is created.
+          s=s.replace(
+              '\t\tactive_player.died.connect(_on_player_died)\n\t\t_on_health_changed(active_player.health, active_player.max_health)',
+              '\t\tactive_player.died.connect(_on_player_died)\n\t\tMetaProgression.apply_to_player(active_player)\n\t\t_on_health_changed(active_player.health, active_player.max_health)'
+          )
+
+          # Add objective HUD under title.
+          s=s.replace(
+              '\twave_label = _make_label("WAVE 00/05", 18, Color.WHITE)',
+              '\tobjective_label = _make_label("OBJECTIVE  //  CONTAIN THE BREACH", 14, Color(0.62, 0.88, 1.0))\n\tobjective_label.position = Vector2(400, 42)\n\ttop.add_child(objective_label)\n\n\twave_label = _make_label("WAVE 00/05", 18, Color.WHITE)'
+          )
+
+          # Meta reward on extraction.
+          s=s.replace(
+              '\tMobileMetrics.record("run_complete", {"score": score, "time_seconds": mission_time, "wave": wave})\n\t_show_banner("BLACKSITE SECURED", "FINAL SCORE %06d  //  RUN COMPLETE" % score, 8.0)',
+              '\tvar reward := MetaProgression.complete_run(score, mission_time)\n\tMobileMetrics.record("run_complete", {"score": score, "time_seconds": mission_time, "wave": wave, "credits": reward})\n\t_show_banner("EXTRACTION COMPLETE", "SCORE %06d  //  +%d CREDITS  //  META LV %d" % [score, reward, MetaProgression.meta_level], 8.0)'
+          )
+          p.write_text(s)
+          PY
+
+          cat >> game/level/level.gd <<'GDSCRIPT'
+
+
+          func _begin_cache_objective() -> void:
+          	cache_goal = 2
+          	cache_collected = 0
+          	if objective_label != null:
+          		objective_label.text = "OBJECTIVE  //  PULSE FRAGMENTS  0/%d" % cache_goal
+          	MobileMetrics.record("objective_started", {"type": "pulse_fragments", "wave": wave, "count": cache_goal})
+
+          	var available := robot_spawn_points.get_child_count()
+          	for i in range(cache_goal):
+          		var marker_index := (wave * 2 + i * 3) % max(available, 1)
+          		var marker: Marker3D = robot_spawn_points.get_child(marker_index)
+          		var cache: PulseCache = PulseCacheScript.new()
+          		cache.global_position = marker.global_position + Vector3(0.0, 0.8, 0.0)
+          		cache.collected.connect(_on_pulse_cache_collected)
+          		add_child(cache)
+
+
+          func _on_pulse_cache_collected(_cache: PulseCache) -> void:
+          	cache_collected += 1
+          	score += 250 * maxi(wave, 1)
+          	if OS.has_feature("mobile"):
+          		Input.vibrate_handheld(28)
+          	if objective_label != null:
+          		objective_label.text = "OBJECTIVE  //  PULSE FRAGMENTS  %d/%d" % [cache_collected, cache_goal]
+          	MobileMetrics.record("objective_progress", {"type": "pulse_fragments", "wave": wave, "collected": cache_collected, "goal": cache_goal})
+          	_update_hud()
+          	if cache_collected < cache_goal:
+          		return
+          	MobileMetrics.record("objective_complete", {"type": "pulse_fragments", "wave": wave})
+          	if objective_label != null:
+          		objective_label.text = "OBJECTIVE  //  ADAPT AEGIS"
+          	_show_banner("PULSE CACHE RECOVERED", "SELECT AN ADAPTATION", 1.0)
+          	await get_tree().create_timer(1.0).timeout
+          	_show_upgrade_choice()
+          GDSCRIPT
+
       - name: Add license and build notes
         shell: bash
         run: |
