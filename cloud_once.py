@@ -487,6 +487,68 @@ def _cold_start_score(topic: str, traffic: str, news) -> float:
     freshness_score=9.0
     return round(min(100.0,demand_score+source_score+angle_score+freshness_score),2)
 
+def _research_fact_from_url(url: str, topic: str) -> str:
+    """Extract one compact factual sentence from publisher metadata.
+
+    This is a research input, not narration. It intentionally avoids copying
+    article bodies and fails closed when a source page exposes no useful
+    description metadata.
+    """
+    import html as _html
+    try:
+        with httpx.Client(timeout=10, follow_redirects=True, headers={
+            "User-Agent":"Mozilla/5.0 (compatible; AstraResearch/1.0)"
+        }) as client:
+            r=client.get(str(url))
+        if r.status_code >= 400:
+            return ""
+        text=r.text[:350000]
+    except Exception:
+        return ""
+
+    patterns=[
+        r'<meta[^>]+property=["\']og:description["\'][^>]+content=["\']([^"\']+)["\']',
+        r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:description["\']',
+        r'<meta[^>]+name=["\']description["\'][^>]+content=["\']([^"\']+)["\']',
+        r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+name=["\']description["\']',
+    ]
+    value=""
+    for pat in patterns:
+        m=re.search(pat,text,re.I|re.S)
+        if m:
+            value=m.group(1); break
+    value=_html.unescape(re.sub(r'<[^>]+>',' ',value))
+    value=' '.join(value.split()).strip()
+    if len(value) < 35:
+        return ""
+
+    sentences=[s.strip() for s in re.split(r'(?<=[.!?])\s+',value) if len(s.strip())>=25]
+    if not sentences:
+        sentences=[value]
+    topic_tokens={x for x in re.findall(r'[a-z0-9]+',str(topic).lower()) if len(x)>2}
+    ranked=sorted(
+        sentences,
+        key=lambda s: len(topic_tokens & set(re.findall(r'[a-z0-9]+',s.lower()))),
+        reverse=True,
+    )
+    fact=ranked[0][:260].rstrip(' ,;:-')
+    return fact
+
+
+def _research_trend_sources(news: list[dict], topic: str) -> list[dict]:
+    researched=[]
+    for item in news[:3]:
+        fact=_research_fact_from_url(str(item.get("url") or ""),topic)
+        if not fact:
+            continue
+        row=dict(item)
+        row["research_fact"]=fact
+        researched.append(row)
+        if len(researched)>=2:
+            break
+    return researched
+
+
 def trend_candidates(trends):
     """Create source-linked current-affairs candidates from live trend metadata.
 
@@ -510,24 +572,24 @@ def trend_candidates(trends):
         if not key or key in seen:
             continue
         seen.add(key)
-        n=news[0]
+        researched=_research_trend_sources(news,topic)
+        if len(researched) < 2:
+            continue
+        n=researched[0]
         headline=' '.join(str(n['title']).split())[:180]
         source=' '.join(str(n['source']).split())[:80]
-        secondary=news[1] if sensitive else None
-        second_name=' '.join(str((secondary or {}).get('source') or '').split())[:80]
+        secondary=researched[1]
+        second_name=' '.join(str(secondary.get('source') or '').split())[:80]
         cid='trend-'+hashlib.sha256((topic+'|'+headline).encode()).hexdigest()[:16]
         hook=topic.upper()[:52]
-        question=f"{topic} is drawing a fresh wave of search interest. What changed?"
-        if secondary:
-            answer=(
-                f"Current coverage from {source} and {second_name} points to the story around: "
-                f"{headline}. Details can change; the trend is a signal, not proof."
-            )
-        else:
-            answer=(
-                f"One current catalyst is coverage from {source}: {headline}. "
-                "The trend is a signal, not proof; follow the source as the story develops."
-            )
+        question=f"What happened with {topic}, and what is confirmed so far?"
+        facts=[str(x.get('research_fact') or '').strip() for x in researched[:2]]
+        # Keep narration original and compact: source facts are research evidence;
+        # the spoken summary identifies the independently reported development.
+        answer=(
+            f"Reporting from {source} and {second_name} independently describes the current development around {topic}. "
+            f"The primary reported angle is {headline}. Details can change as the story develops."
+        )
         cold_start_score=_cold_start_score(topic,str(t.get('traffic') or ''),news)
         out.append({
             'genre':'current','kind':'explainer','content_id':cid,'hook':hook,
@@ -540,6 +602,9 @@ def trend_candidates(trends):
             'trend_matches':[t],'news_source':source,'news_title':headline,
             'trend_region':str(t.get('region') or ''),'trend_traffic':str(t.get('traffic') or ''),
             'topic':topic,'cold_start_score':cold_start_score,
+            'research_facts':facts,
+            'research_sources':[str(x.get('url') or '') for x in researched[:2]],
+            'is_news':True,
         })
     return out
 
