@@ -10,7 +10,7 @@ Status legend: [ ] queued  [~] in progress  [x] completed  [!] blocked
 [x] Validate 1080x1920 / 30fps MP4 output
 [x] Keep premium pilot at ₹0 and watermark-free
 [x] Inspect fast-render artifact visually and score actual output quality
-[~] Fix any remaining visual defects found in inspection
+[x] Fix any remaining visual defects found in inspection
 [x] Add automated contact-sheet + representative-frame artifact for every pilot
 [~] Add render-time metrics and fail if fast path regresses badly
 
@@ -21,13 +21,13 @@ Status legend: [ ] queued  [~] in progress  [x] completed  [!] blocked
 [ ] Add hook-specific opening treatment for first 1.5 seconds
 [ ] Add pattern interrupt around 35–55% retention point
 [ ] Add stronger payoff/end-frame visual treatment
-[ ] Add per-story motion profile instead of identical zoom behavior
+[x] Add per-story motion profile instead of identical zoom behavior
 [ ] Add fallback when external media is portrait/low-resolution/awkwardly framed
 [ ] Add scene-level quality checks before final mux
 
 ## P2 — Creative quality system
-[ ] Integrate fast renderer into premium_batch_review.py
-[ ] Compare FFmpeg-native vs Studio vs HyperFrames automatically
+[x] Integrate fast renderer into premium_batch_review.py
+[~] Compare FFmpeg-native vs Studio vs HyperFrames automatically
 [ ] Choose best renderer per story/scene rather than globally
 [ ] Add visual diversity penalty for slideshow-like repetition
 [ ] Add empty-space penalty
