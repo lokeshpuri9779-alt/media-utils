@@ -34,6 +34,21 @@ jobs:
           test -f pulsefall_reborn/project.godot
           test -f pulsefall_reborn/export_presets.cfg
 
+      - name: Patch project for Android export
+        shell: bash
+        run: |
+          set -euxo pipefail
+          sed -i 's/for ring_index in 1:5:/for ring_index in range(1, 5):/' pulsefall_reborn/scripts/main.gd
+          sed -i 's/gradle_build\/min_sdk="24"/gradle_build\/min_sdk=""/' pulsefall_reborn/export_presets.cfg
+          sed -i 's/gradle_build\/target_sdk="35"/gradle_build\/target_sdk=""/' pulsefall_reborn/export_presets.cfg
+          if ! grep -q '^textures/default_filters/use_nearest_mipmap_filter=' pulsefall_reborn/project.godot; then
+            true
+          fi
+          if ! grep -q '^textures/vram_compression/import_etc2_astc=' pulsefall_reborn/project.godot; then
+            sed -i '/^\[rendering\]/a textures/vram_compression/import_etc2_astc=true' pulsefall_reborn/project.godot
+          fi
+          grep -n 'ring_index\|min_sdk\|target_sdk\|import_etc2_astc' pulsefall_reborn/scripts/main.gd pulsefall_reborn/export_presets.cfg pulsefall_reborn/project.godot
+
       - name: Java 17
         uses: actions/setup-java@v4
         with:
@@ -68,6 +83,9 @@ jobs:
           set -euxo pipefail
           find . -type f -name "*.apk" -print
           APK="$(find pulsefall_reborn -type f -name "*.apk" | head -n1)"
+          if [ -z "$APK" ]; then
+            APK="$(find "$HOME/.local/share/godot/builds" -type f -name "*.apk" | head -n1)"
+          fi
           test -n "$APK"
           mkdir -p artifact
           cp "$APK" artifact/PULSEFALL_REBORN_FINAL.apk
