@@ -98,3 +98,15 @@ def write_run_diagnosis(path: str | Path, *, quota_state: dict | None = None,
         },
     }
     p.write_text(json.dumps(payload,indent=2,ensure_ascii=False),encoding="utf-8")
+
+
+def policy_manifest() -> dict:
+    return {
+        "paid_provider_without_approval": False,
+        "watermark_required_to_be_absent": True,
+        "disposable_account_bypass": False,
+        "free_credit_abuse": False,
+        "platform_quota_bypass": False,
+        "credential_rotation_bypass": False,
+        "max_unapproved_render_cost_usd": 0.0,
+    }
