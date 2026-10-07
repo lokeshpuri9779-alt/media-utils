@@ -1,0 +1,19 @@
+name: Lint commercial workflow
+
+on:
+  push:
+    branches:
+      - pulsefall-commercial-campaign-v1
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pulsefall-commercial-campaign-v1
+      - name: Parse YAML
+        shell: bash
+        run: |
+          ruby -e 'require "yaml"; YAML.load_file(".github/workflows/pulsefall-commercial-campaign.yml", aliases: true); puts "YAML syntax OK"'
