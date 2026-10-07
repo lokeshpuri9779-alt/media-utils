@@ -85,10 +85,14 @@ def creative_rebuild(c: dict) -> tuple[dict, dict]:
     genre=str(x.get("genre") or "")
     reasons=[]
     hard=[]
-    if not x.get("premium_story"):
-        hard.append("legacy template disabled during creative-engine rebuild")
-    elif not x.get("production_ready"):
-        hard.append("premium story is awaiting visual curation")
+    if genre == "current":
+        if not x.get("source"):
+            hard.append("current story missing primary source")
+    else:
+        if not x.get("premium_story"):
+            hard.append("legacy template disabled during creative-engine rebuild")
+        elif not x.get("production_ready"):
+            hard.append("premium story is awaiting visual curation")
 
     text=" ".join(str(x.get(k) or "") for k in ("title","hook","question","answer"))
     if genre != "fiction" and english_script_ratio(text) < .90:
