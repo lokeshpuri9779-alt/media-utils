@@ -6,6 +6,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 from creative_director import evaluate as evaluate_director, production_feedback
+from output_contract import validate_output_contract
 
 
 def structural_quality_penalties(report: dict) -> dict:
@@ -99,6 +100,10 @@ def assess_render(report: dict) -> dict:
     structural = structural_quality_penalties(report)
     if not structural["pass"]:
         failures.append(f"structural visual quality below gate: {structural['score']:.1f}")
+
+    output_contract = validate_output_contract(report)
+    if not output_contract["pass"]:
+        failures.extend("output-contract:" + x for x in output_contract["failures"])
     peak=float((report.get("audio") or {}).get("peak_dbfs") or -99)
     if peak > -0.2 or peak < -15.0:
         failures.append(f"audio peak outside target window: {peak:.2f} dBFS")
@@ -108,6 +113,7 @@ def assess_render(report: dict) -> dict:
         "failures": failures,
         "duration": duration,
         "structural_quality": structural,
+        "output_contract": output_contract,
     }
 
 
