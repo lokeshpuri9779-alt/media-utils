@@ -1,8 +1,9 @@
 name: Astra Runtime Health
+
+# Automatic CI disabled by user request. Run manually only.
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "17 */6 * * *"
+
 permissions:
   contents: read
 jobs:
