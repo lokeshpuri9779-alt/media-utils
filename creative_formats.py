@@ -76,6 +76,18 @@ FORMATS = {
         "depth_of_field": "shallow",
         "lighting": "bright-warm-volumetric",
     },
+    "stylized_3d_explainer": {
+        "headline": "minimal",
+        "caption": "minimal",
+        "transition": "cinematic",
+        "motion": "3d-orbit-push",
+        "brand": "minimal",
+        "full_frame": True,
+        "target_shot_seconds": [1.6, 3.0],
+        "look": "stylized-3d-cinematic",
+        "depth_of_field": "shallow",
+        "lighting": "cinematic-volumetric",
+    },
 }
 
 
@@ -85,18 +97,22 @@ def choose_format(story: dict, recent_formats: list[str] | None = None) -> dict:
     beats = story.get("story_beats") or []
     visuals = [str(x.get("visual") or "") for x in beats]
 
-    if genre == "fiction":
-        preferred = ["ai_character_cinematic", "microfiction_cinematic", "mixed_media_story"]
+    kind = str(story.get("kind") or "")
+    is_news = bool(story.get("is_news")) or genre in {"current","news"} or kind in {"news","current_event","breaking_news"}
+    if is_news:
+        preferred = ["documentary_montage", "mixed_media_story"]
+    elif genre == "fiction":
+        preferred = ["ai_character_cinematic", "stylized_3d_explainer"]
     elif genre == "tech":
-        preferred = ["screen_explainer", "animated_infographic"]
-    elif genre in {"football", "current"}:
-        preferred = ["documentary_montage", "mixed_media_story", "animated_infographic"]
+        preferred = ["stylized_3d_explainer", "animated_infographic"]
+    elif genre == "football":
+        preferred = ["stylized_3d_explainer", "animated_infographic"]
     elif story.get("animal_character_story"):
         preferred = ["family_3d_animal_comedy", "ai_character_cinematic", "mixed_media_story"]
     elif story.get("character_story"):
         preferred = ["ai_character_cinematic", "cinematic_mini_doc", "mixed_media_story"]
     elif story.get("premium_story") and visuals.count("media") >= 2:
-        preferred = ["documentary_montage"]
+        preferred = ["stylized_3d_explainer"]
     elif visuals.count("media") >= 2:
         preferred = ["cinematic_mini_doc", "documentary_montage", "mixed_media_story"]
     else:
@@ -156,6 +172,18 @@ def apply_format(plan: list[dict], fmt: dict) -> list[dict]:
             shot["depth_of_field"] = "shallow"
             shot["lighting"] = "warm-cinematic"
             shot["target_shot_seconds"] = 2.4
+        elif name == "stylized_3d_explainer":
+            shot["director_camera"] = ["orbit","push","track","orbit"][i % 4]
+            shot["director_energy"] = 0.96 if i == 0 else (0.82 if i == len(plan)-1 else 0.76)
+            shot["director_layout"] = "center"
+            shot["director_style"] = "stylized-3d-cinematic"
+            shot["director_asset"] = "3d-explainer-scene"
+            shot["director_caption_mode"] = "minimal"
+            shot["full_frame_visual"] = True
+            shot["depth_of_field"] = "shallow"
+            shot["lighting"] = "cinematic-volumetric"
+            shot["target_shot_seconds"] = 2.2
+            shot["require_3d_style"] = True
         elif name == "family_3d_animal_comedy":
             shot["director_camera"] = ["reveal","track","push","reveal"][i % 4]
             shot["director_energy"] = 1.0 if i in {0,2} else 0.82
