@@ -640,6 +640,11 @@ def choose_content(data, trends, now=None, excluded_ids=None, excluded_titles=No
     recent = []
     for entry in videos.values():
         try:
+            # Diversity/rotation must reflect public production output. Private
+            # review uploads are QA artifacts and must not suppress live trend
+            # candidates for the monetized channel feed.
+            if str(entry.get("visibility") or "") != "public":
+                continue
             if (now-datetime.fromisoformat(entry['published_at'])).total_seconds() < 30*86400:
                 recent.append(entry)
         except (KeyError, ValueError, TypeError):
