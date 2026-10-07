@@ -218,6 +218,9 @@ def director_input_from_render(story: dict, render_report: dict, media_qa: dict 
         detected_reliable = False
         detected_durations = []
     duration = float(render_report.get("duration") or 0)
+    visual_edit = render_report.get("visual_edit") or {}
+    visual_scene_count = int(visual_edit.get("visual_scene_count") or 0)
+    visual_scene_rate = float(visual_edit.get("visual_scene_rate_per_second") or 0)
     cq = render_report.get("creative_quality") or {}
     audio = render_report.get("audio") or {}
     hook_words = len(str(story.get("hook") or "").split())
@@ -255,6 +258,17 @@ def director_input_from_render(story: dict, render_report: dict, media_qa: dict 
         hard.extend(media_qa.get("hard_failures") or [])
     if identity and not identity.get("pass", True):
         hard.append("creative identity too similar to a recent upload")
+    if visual_scene_count > 0 and 1.0 <= visual_scene_rate <= 2.0:
+        effective_scene_count = visual_scene_count
+        effective_avg = duration / visual_scene_count if duration else 0.0
+        effective_max = float(visual_edit.get("micro_scene_seconds") or effective_avg)
+        pacing_source = "studio-micro-edit"
+    else:
+        effective_scene_count = len(detected_durations) if detected_durations else len(scenes)
+        effective_avg = (sum(detected_durations) / len(detected_durations)) if detected_durations else ((sum(durations) / len(durations)) if durations else 0.0)
+        effective_max = max(detected_durations) if detected_durations else (max(durations) if durations else 0.0)
+        pacing_source = "pyscenedetect" if detected_durations else "studio-plan"
+
     return {
         "duration": duration,
         "scenes": scenes,
@@ -267,10 +281,12 @@ def director_input_from_render(story: dict, render_report: dict, media_qa: dict 
             "coherence_score": coherence_score,
         },
         "scene_analysis": {
-            "scene_count": len(detected_durations) if detected_durations else len(scenes),
-            "avg_scene_duration": (sum(detected_durations) / len(detected_durations)) if detected_durations else ((sum(durations) / len(durations)) if durations else 0.0),
-            "max_scene_duration": max(detected_durations) if detected_durations else (max(durations) if durations else 0.0),
-            "source": "pyscenedetect" if detected_durations else "studio-plan",
+            "scene_count": effective_scene_count,
+            "avg_scene_duration": effective_avg,
+            "max_scene_duration": effective_max,
+            "source": pacing_source,
+            "visual_scene_rate_per_second": visual_scene_rate,
+            "target_scene_rate_range": visual_edit.get("target_scene_rate_range"),
             "detector_reliable": detected_reliable,
             "detected_scene_count_raw": len(raw_detected),
             "planned_scene_count": len(scenes),
