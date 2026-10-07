@@ -25,6 +25,9 @@ REPAIR_THRESHOLD = 72.0
 PUBLISH_THRESHOLD = 82.0
 EXCEPTIONAL_THRESHOLD = 90.0
 
+# Aggregate scores may never hide a catastrophically weak viewing component.
+PUBLISH_FLOORS = {"hook": 75, "retention": 75, "visual": 75, "pacing": 70, "audio": 75, "coherence": 75, "technical": 85}
+
 
 @dataclass(frozen=True)
 class DirectorDecision:
@@ -104,10 +107,13 @@ def evaluate(report: dict) -> dict:
     weak = [k for k, v in scores.items() if v < 75]
 
     hard_failures = list(report.get("hard_failures") or [])
+    floor_failures = [f"{k}_below_publish_floor" for k, floor in PUBLISH_FLOORS.items() if scores[k] < floor]
     repairs = targeted_repairs(scores)
 
     if hard_failures:
         tier, action = "reject", "rebuild_or_block"
+    elif floor_failures and total >= PUBLISH_THRESHOLD:
+        tier, action = "repair", "targeted_regeneration"
     elif total >= EXCEPTIONAL_THRESHOLD:
         tier, action = "exceptional", "publish"
     elif total >= PUBLISH_THRESHOLD:
@@ -128,6 +134,8 @@ def evaluate(report: dict) -> dict:
     payload = asdict(decision)
     payload["weights"] = dict(WEIGHTS)
     payload["hard_failures"] = hard_failures
+    payload["floor_failures"] = floor_failures
+    payload["publish_floors"] = dict(PUBLISH_FLOORS)
     payload["publish_allowed"] = action == "publish"
     return payload
 

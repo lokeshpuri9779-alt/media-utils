@@ -5,11 +5,6 @@ on:
     paths:
       - '.github/workflows/media-check.yml'
       - '.github/workflows/promote-production.yml'
-      - '.github/workflows/character-gpu-worker.yml'
-      - 'docs/astra-gpu-worker.md'
-      - 'gpu_worker/docker-compose.yml'
-      - 'gpu_worker/Dockerfile'
-      - 'scripts/bootstrap_astra_gpu.sh'
       - 'cloud_once.py'
       - 'creative_engine.py'
       - 'premium_stories.py'
@@ -62,32 +57,6 @@ on:
       - 'creative_identity.py'
       - 'tests/test_creative_formats.py'
       - 'creative_formats.py'
-      - 'tests/test_character_video_engine.py'
-      - 'character_video_compositor.py'
-      - 'character_video_engine.py'
-      - 'tests/test_agnes_free_video.py'
-      - 'agnes_free_video.py'
-      - 'scripts/agnes_render_probe.py'
-      - 'tests/test_video_provider_policy.py'
-      - 'video_provider_policy.py'
-      - 'tests/test_generation_admission.py'
-      - 'generation_admission.py'
-      - 'tests/test_rented_gpu_budget.py'
-      - 'rented_gpu_budget.py'
-      - 'tests/test_hf_zerogpu_backend.py'
-      - 'hf_zerogpu_adapter.py'
-      - 'tests/test_open_source_video_engine.py'
-      - 'open_source_video_engine.py'
-      - 'tests/test_gpu_worker_health.py'
-      - 'gpu_worker_health.py'
-      - 'tests/test_remote_gpu_routing.py'
-      - 'tests/test_remote_gpu_job_protocol.py'
-      - 'gpu_worker_server.py'
-      - 'remote_gpu_client.py'
-      - 'character_animation.py'
-      - 'tests/test_character_pilot.py'
-      - 'character_pilot.py'
-      - 'character_stories.py'
       - 'premium_batch_review.py'
       - 'tests/test_open_source_stack.py'
       - 'tests/test_edit_spec.py'
@@ -142,12 +111,6 @@ jobs:
       YOUTUBE_COMMUNITY_REFRESH_TOKEN: ${{ secrets.YOUTUBE_COMMUNITY_REFRESH_TOKEN }}
       YOUTUBE_COMMUNITY_CLIENT_ID: ${{ secrets.YOUTUBE_COMMUNITY_CLIENT_ID }}
       YOUTUBE_COMMUNITY_CLIENT_SECRET: ${{ secrets.YOUTUBE_COMMUNITY_CLIENT_SECRET }}
-      AGNES_API_KEY: ${{ secrets.AGNES_API_KEY }}
-      REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
-      ASTRA_ALLOW_PAID_CHARACTER_VIDEO: '0'
-      ASTRA_OSS_VIDEO_PROVIDER: 'auto'
-      ASTRA_GPU_WORKER_URL: ''
-      ASTRA_GPU_WORKER_TOKEN: ''
       YOUTUBE_PRIVACY: private # temporary creative-review hold; restore after Moon pilot inspection
       ORT_DISABLE_TELEMETRY: '1'
       ASTRA_LONG_ENABLED: '1'
@@ -192,19 +155,9 @@ jobs:
         run: npm run build
       - name: dependencies
         run: pip install -r requirements.txt
-      - name: Validate GPU worker container
-        if: (github.event_name == 'push' || github.event_name == 'pull_request') && env.ASTRA_FORCE_RUN != '1'
-        run: |
-          docker build -f gpu_worker/Dockerfile --no-cache --progress=plain -t astra-gpu-worker:test .
-          ASTRA_GPU_WORKER_TOKEN=test ASTRA_LTX_HOST_ROOT=/tmp/ltx ASTRA_WAN_HOST_ROOT=/tmp/wan ASTRA_WAN_CKPT_HOST_ROOT=/tmp/wanckpt docker compose -f gpu_worker/docker-compose.yml config >/tmp/astra-gpu-compose.yml
-
-      - name: Validate GPU bootstrap shell
-        if: (github.event_name == 'push' || github.event_name == 'pull_request') && env.ASTRA_FORCE_RUN != '1'
-        run: bash -n scripts/bootstrap_astra_gpu.sh
-
       - name: Verify Python modules
         if: github.event_name == 'push' || github.event_name == 'pull_request'
-        run: python -m py_compile cloud_once.py creative_engine.py premium_stories.py channel_state.py revenue_geo.py viral_prior.py evolution.py backup_state.py distribution.py ops_guardian.py ypp_safety.py autonomy.py reach_reports.py longform.py longform_trends.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py oss_stack.py edit_spec.py quality_lab.py creative_director.py creative_formats.py creative_identity.py astra_pipeline.py character_animation.py character_stories.py character_pilot.py open_source_video_engine.py gpu_worker_health.py remote_gpu_client.py gpu_worker_server.py video_provider_policy.py generation_admission.py rented_gpu_budget.py hf_zerogpu_adapter.py agnes_free_video.py character_video_engine.py character_video_compositor.py semantic_broll.py retention_surgery.py caption_audio_qa.py channel_memory.py premium_batch_review.py motion_renderer/bridge.py astra_errors.py hyperframes_adapter.py
+        run: python -m py_compile cloud_once.py creative_engine.py premium_stories.py channel_state.py revenue_geo.py viral_prior.py evolution.py backup_state.py distribution.py ops_guardian.py ypp_safety.py autonomy.py reach_reports.py longform.py longform_trends.py longform_challenges.py studio_renderer.py youtube_autonomy_setup.py oss_stack.py edit_spec.py quality_lab.py creative_director.py creative_formats.py creative_identity.py astra_pipeline.py semantic_broll.py retention_surgery.py caption_audio_qa.py channel_memory.py premium_batch_review.py motion_renderer/bridge.py astra_errors.py hyperframes_adapter.py
       - name: Verify Studio layouts and audio
         if: github.event_name == 'push' || github.event_name == 'pull_request'
         run: python -m unittest discover -s tests -p 'test_*.py' -v
@@ -218,51 +171,6 @@ jobs:
         with:
           path: ~/.cache/huggingface
           key: astra-faster-whisper-tiny-en-v1
-      - name: Validate character pilot dry run
-        if: github.event_name == 'push' || github.event_name == 'pull_request'
-        run: python character_pilot.py --dry-run > /tmp/astra-character-pilot.json
-
-      - name: Upload character pilot plan
-        if: github.event_name == 'push' || github.event_name == 'pull_request'
-        uses: actions/upload-artifact@v4
-        with:
-          name: astra-character-pilot-${{ github.run_id }}
-          path: /tmp/astra-character-pilot.json
-          retention-days: 7
-          if-no-files-found: error
-
-      - name: Direct Agnes render probe
-        if: env.ASTRA_FORCE_RUN == '1'
-        env:
-          PYTHONPATH: ${{ github.workspace }}
-        run: python scripts/agnes_render_probe.py
-
-      - name: Upload Agnes render probe
-        if: env.ASTRA_FORCE_RUN == '1'
-        uses: actions/upload-artifact@v4
-        with:
-          name: astra-agnes-probe-${{ github.run_id }}
-          path: /tmp/astra-agnes-probe.mp4
-          retention-days: 7
-          if-no-files-found: error
-
-      - name: Render full Agnes character pilot
-        if: env.ASTRA_FORCE_RUN == '1'
-        env:
-          PYTHONPATH: ${{ github.workspace }}
-        run: python character_pilot.py --render /tmp/astra-agnes-character-pilot.mp4 > /tmp/astra-agnes-character-pilot.json
-
-      - name: Upload full Agnes character pilot
-        if: env.ASTRA_FORCE_RUN == '1'
-        uses: actions/upload-artifact@v4
-        with:
-          name: astra-agnes-character-pilot-${{ github.run_id }}
-          path: |
-            /tmp/astra-agnes-character-pilot.mp4
-            /tmp/astra-agnes-character-pilot.json
-          retention-days: 7
-          if-no-files-found: error
-
       - name: Render Studio startup preview
         if: (github.event_name == 'push' || github.event_name == 'pull_request') && env.ASTRA_FORCE_RUN != '1'
         run: python studio_renderer.py --preview /tmp/astra-studio-preview.mp4

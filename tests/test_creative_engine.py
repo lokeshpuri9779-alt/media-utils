@@ -51,3 +51,16 @@ class CreativeEngineTests(unittest.TestCase):
 
 if __name__=="__main__":
     unittest.main()
+
+
+def test_omniroute_failure_falls_back_without_lowering_gate(monkeypatch):
+    import creative_engine
+    monkeypatch.setattr(creative_engine, "omniroute_enrich",
+                        lambda c: (dict(c), {"used": False, "pass": False, "reason": "offline"}))
+    candidate={"genre":"fiction","premium_story":True,"production_ready":True,
+               "title":"A tiny dragon learns courage","hook":"His fire came out as bubbles.",
+               "question":"Can he save the day?","answer":"He uses the bubbles to stop the danger and finally earns the village's trust."}
+    rebuilt, report=creative_engine.creative_rebuild(candidate)
+    assert report["omniroute"]["reason"]=="offline"
+    assert report["pass"] is True
+    assert rebuilt["creative_engine_version"].startswith("creative-engine-7.1")

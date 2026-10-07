@@ -333,32 +333,22 @@ def make_plan(ch):
     return apply_format(plan, fmt)
 
 
-def _dialogue_text(value: str) -> str:
-    """Strip screenplay speaker labels before TTS while preserving spoken words."""
-    text=str(value or '').strip()
-    text=re.sub(r'(?:(?<=^)|(?<=[.!?])\\s+)([A-Z][A-Za-z0-9 _-]{0,24}):\\s*', '', text)
-    text=re.sub(r'^([A-Z][A-Za-z0-9 _-]{0,24}):\\s*', '', text)
-    return text.strip()
-
 def voice_plan(plan, genre, max_duration=36, voice_name='af_heart', voice_speed=1.09):
     engine=voice_engine()
     cursor=0.0
     for s in plan:
-        spoken=_dialogue_text(str(s['speech']))
+        spoken=str(s['speech']).strip()
         # Natural cadence wins over synthetic "news voice" punctuation tricks.
         spoken=spoken.replace('; ', '. ').replace('  ',' ')
-        scene_voice=str(s.get('voice_name') or voice_name)
-        scene_speed=float(s.get('voice_speed') or voice_speed)
-        samples, rate=engine.create(spoken,voice=scene_voice,speed=scene_speed,lang='en-us')
+        samples, rate=engine.create(spoken,voice=voice_name,speed=voice_speed,lang='en-us')
         samples=np.asarray(samples,dtype=np.float32)
         if rate!=RATE or len(samples)==0 or not np.isfinite(samples).all():
             raise RuntimeError('Invalid narration audio; refusing to publish an incomplete video.')
         # Normalize each line gently, then mix with a substantially quieter score.
         peak=float(np.max(np.abs(samples)))
         if peak>0: samples=samples*(.65/peak)
-        s.update(audio=samples,start=cursor,voice_start=cursor+.16,
-                 duration=max(float(s['min_duration']),len(samples)/RATE+.42),
-                 spoken_text=spoken, audio_seconds=len(samples)/RATE)
+        s.update(audio=samples,start=cursor,voice_start=cursor+.08,
+                 duration=max(float(s['min_duration']),len(samples)/RATE+.24))
         s['end']=s['start']+s['duration']
         cursor=s['end']
     if cursor>max_duration:
@@ -420,22 +410,18 @@ def score_audio(plan, duration, genre, path):
     for s in plan:
         j=int(s['voice_start']*RATE); b=s['audio']; end=min(n,j+len(b))
         speech[j:end]+=b[:end-j]*1.08
-        # Wider ducking around dialogue keeps every word intelligible.
+        # Smooth 80 ms attack/release on music ducking; no pumping on every word.
         idx=np.arange(n,dtype=np.float32)/RATE
-        env=np.minimum(np.clip((idx-s['voice_start']+.12)/.12,0,1),np.clip((s['voice_start']+len(b)/RATE+.20-idx)/.20,0,1))
-        duck=np.minimum(duck,1-.82*env)
-
-        # Semantic transition SFX: short and placed BEFORE speech, never under the first words.
-        k=int(s['start']*RATE); size=min(int(.16*RATE),n-k)
+        env=np.minimum(np.clip((idx-s['voice_start']+.08)/.08,0,1),np.clip((s['voice_start']+len(b)/RATE+.12-idx)/.12,0,1))
+        duck=np.minimum(duck,1-.70*env)
+        k=int(s['start']*RATE); size=min(int(.24*RATE),n-k)
         u=np.arange(size,dtype=np.float32)/RATE
-        beat_name=str(s.get('story_beat') or '')
-        if size>0:
-            if beat_name in {'reveal','payoff'}:
-                fx[k:k+size]+=np.sin(2*np.pi*(180+520*u)*u)*np.exp(-u*22)*.032
-            elif beat_name=='escalation':
-                fx[k:k+size]+=np.sin(2*np.pi*(90+260*u)*u)*np.exp(-u*20)*.024
-            elif beat_name=='button':
-                fx[k:k+size]+=np.sin(2*np.pi*520*u)*np.exp(-u*24)*.018
+        noise=rng.normal(0,1,size).astype(np.float32)
+        noise=np.convolve(noise,np.ones(12)/12,mode='same')
+        fx[k:k+size]+=noise*np.sin(np.pi*np.arange(size)/max(1,size))*.025
+        # Attention transient: strongest on the opening beat, lighter thereafter.
+        hit=.055 if s.get('start',0)<.1 else .032
+        fx[k:k+size]+=np.sin(2*np.pi*(110+420*u)*u)*np.exp(-u*18)*hit
         if s.get('answer'):
             fx[k:k+size]+=np.sin(2*np.pi*880*u)*np.exp(-u*14)*.035
         if s.get('countdown'):
@@ -1350,111 +1336,12 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
     genre=ch.get('genre','challenge')
     if genre not in THEMES: raise ValueError('Unsupported genre')
     plan=make_plan(ch)
-    character_mode=any(
-        s.get("creative_format") in {"ai_character_cinematic","family_3d_animal_comedy"}
-        for s in plan
-    )
-
-    if int(director_repair_pass or 0) > 0 and not character_mode:
+    if int(director_repair_pass or 0) > 0:
         plan=_repair_plan(ch,plan,int(director_repair_pass))
     if scene_surgery:
         from retention_surgery import apply_surgery
         plan=apply_surgery(plan, scene_surgery)
-
-    if character_mode:
-        # Character-cinematic formats are a separate renderer class. Do not run
-        # them through the motion-graphics repair loop, which would turn them
-        # back into cards/diagrams and recreate the old Astra look.
-        from character_video_engine import generate_storyboard, provider_status, CharacterVideoUnavailable
-        from character_video_compositor import compose_character_short
-
-        fmt=next((s.get("creative_format") for s in plan if s.get("creative_format")), "ai_character_cinematic")
-        if fmt=="family_3d_animal_comedy":
-            ch["animal_character_story"]=True
-        ch["character_story"]=True
-
-        duration=voice_plan(
-            plan,genre,max_duration=float(ch.get('target_duration_max',36)),
-            voice_name=str(ch.get('voice_profile') or 'af_heart'),
-            voice_speed=float(ch.get('voice_speed') or 1.09)
-        )
-        storyboard=character_storyboard(ch,plan)
-        for shot_spec,scene_spec in zip(storyboard,plan):
-            shot_spec["target_seconds"]=max(1.0,float(scene_spec.get("duration") or 0))
-
-        out=Path(out); out.parent.mkdir(parents=True,exist_ok=True)
-        with tempfile.TemporaryDirectory(prefix='astra_character_') as tmp:
-            tmp=Path(tmp)
-            audio=tmp/'mix.wav'
-            audio_info=score_audio(plan,duration,genre,audio)
-            try:
-                clips,generation_reports=generate_storyboard(storyboard,tmp/'generated')
-            except CharacterVideoUnavailable as exc:
-                raise CreativeReject('Character video backend unavailable: '+str(exc))
-            compose_report=compose_character_short(
-                clips,
-                [float(s.get("duration") or 0) for s in plan],
-                audio,
-                out,
-                width=W,height=H,fps=FPS,
-            )
-            if still_dir:
-                folder=Path(still_dir); folder.mkdir(parents=True,exist_ok=True)
-                ffmpeg=get_ffmpeg_exe()
-                cursor=0.0
-                for i,s in enumerate(plan):
-                    at=cursor+min(1.0,max(.1,float(s.get("duration") or 1)/2))
-                    subprocess.run([
-                        ffmpeg,'-hide_banner','-loglevel','error','-y',
-                        '-ss',f'{at:.3f}','-i',str(out),'-frames:v','1',
-                        str(folder/f'scene_{i+1}.jpg')
-                    ],check=False)
-                    cursor+=float(s.get("duration") or 0)
-
-        provider=provider_status()
-        creative_report={
-            'score':94,
-            'assets':['character-scene']*len(plan),
-            'roles':[p.get('director_role','') for p in plan],
-            'motions':[p.get('director_motion','') for p in plan],
-            'semantics':sorted({x for p in plan for x in p.get('director_semantics',[])}),
-            'generic_ratio':0.0,
-            'styles':[p.get('director_style','') for p in plan],
-            'adjacent_style_repeats':0,
-            'layouts':[p.get('director_layout','center') for p in plan],
-            'adjacent_layout_repeats':0,
-            'hard_failures':[],
-            'repair_attempts':0,
-            'character_video':{
-                'provider':provider,
-                'generation_reports':generation_reports,
-                'storyboard':storyboard,
-                'composition':compose_report,
-            },
-            'asset_resolution':{
-                'ready':len(clips),
-                'providers':['replicate'],
-                'zero_cost':False,
-                'character_video_required':True,
-            },
-        }
-        count=math.ceil(duration*FPS)
-        report={
-            'renderer':'character-cinematic-1',
-            'genre':genre,
-            'frames':count,
-            'duration':round(duration,3),
-            'resolution':[W,H],
-            'fps':FPS,
-            'audio':audio_info,
-            'creative_quality':creative_report,
-            'scenes':[{k:v for k,v in s.items() if k!='audio'} for s in plan],
-        }
-        print('Studio render:',json.dumps({k:v for k,v in report.items() if k!='scenes'}))
-        return report
-
-    # Normal non-character formats continue through the Studio motion-graphics
-    # path and its existing visual quality/asset safety gates.
+    # Repair/re-score weak plans before abandoning a publish slot.
     repair_attempts=0
     while True:
         try:
@@ -1463,7 +1350,8 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
             if repair_attempts>=2: raise
             repair_attempts+=1
             plan=_repair_plan(ch,plan,repair_attempts)
-
+    if any(s.get("creative_format")=="ai_character_cinematic" for s in plan):
+        ch["character_storyboard_plan"]=character_storyboard(ch,plan)
     assets=asset_manifest(ch,plan)
     resolved_assets=prepare_media_cache(resolve_assets(assets))
     resolved_assets=acquire_story_media(resolved_assets)
@@ -1477,6 +1365,7 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
             )
         asset_report['verified_subject_media']=verified
         asset_report['required_subject_media']=required
+    # Bind resolved asset metadata to the corresponding directed shot.
     for shot,item in zip(plan,resolved_assets): shot['resolved_asset']=item
     creative_report=creative_quality_gate(ch,plan)
     creative_report['repair_attempts']=repair_attempts
