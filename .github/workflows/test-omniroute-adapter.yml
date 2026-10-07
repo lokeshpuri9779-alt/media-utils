@@ -1,11 +1,9 @@
 name: Astra OmniRoute Adapter Test
+
+# Automatic CI disabled by user request. Run manually only.
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - "omniroute_adapter.py"
-      - "tests/test_omniroute_adapter.py"
-      - ".github/workflows/test-omniroute-adapter.yml"
+
 jobs:
   test:
     runs-on: ubuntu-latest
