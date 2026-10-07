@@ -28,7 +28,7 @@ def catalog() -> list[dict]:
         {
             "genre": "fiction",
             "kind": "character_comedy",
-            "content_id": "tiny-dragon-bubbles-v1",
+            "content_id": "tiny-dragon-bubbles-v2-sync",
             "production_ready": True,
             "character_story": True,
             "animal_character_story": True,
@@ -36,7 +36,7 @@ def catalog() -> list[dict]:
             "hook": "EVERY DRAGON COULD BREATHE FIRE... EXCEPT HIM",
             "question": "What happens when the smallest dragon can only blow bubbles?",
             "answer": "His strange little mistake becomes exactly what saves the village celebration.",
-            "title": "The Dragon Who Could Only Blow Bubbles",
+            "title": "The Dragon Who Could Only Blow Bubbles — Synced Cut",
             "voice_speed": 1.02,
             "voice_cast": {
                 "Pip": {"voice": "af_heart", "speed": 1.04},
@@ -54,39 +54,39 @@ def catalog() -> list[dict]:
             ),
             "story_beats": [
                 _beat(
-                    "Pip: Okay... one tiny flame. That's all I need.",
+                    "Okay... one tiny flame. That's all I need.",
                     "Pip plants his feet, squeezes his eyes shut and tries very hard to breathe fire while festival lanterns glow behind him.",
-                    "reveal", "af_heart", 1.04,
+                    "reveal", "af_heart", 1.04, "Pip",
                 ),
                 _beat(
                     "Pffft! ...Oh, come on.",
                     "Instead of fire, one enormous shimmering bubble floats from Pip's mouth and pops on his nose. He stares cross-eyed at the soap foam.",
-                    "build", "af_heart", 1.05,
+                    "build", "af_heart", 1.05, "Pip",
                 ),
                 _beat(
                     "Impressive. You defeated the air.",
                     "Ember folds her arms with a teasing grin while Pip gives her a deeply offended side-eye. Keep the teasing affectionate, not mean.",
-                    "contrast", "am_adam", 1.02,
+                    "contrast", "am_adam", 1.02, "Ember",
                 ),
                 _beat(
-                    "Pip: Laugh now. I'm saving my good fire for later.",
+                    "Laugh now. I'm saving my good fire for later.",
                     "Pip turns away proudly, takes two steps, then quietly checks whether Ember believed him. She clearly did not.",
                     "build", "af_heart", 1.05,
                 ),
                 _beat(
                     "Pip! The lantern flame went out!",
                     "A gust sweeps through the festival and every paper lantern goes dark. Grandma points toward the highest lantern hanging over a narrow ledge.",
-                    "escalation", "af_heart", 1.00,
+                    "escalation", "af_heart", 1.00, "Grandma",
                 ),
                 _beat(
-                    "Pip: I can't make fire... but I can reach it.",
+                    "I can't make fire... but I can reach it.",
                     "Pip blows a chain of glowing bubbles that gently lift a tiny ember upward toward the high lantern. Everyone watches in stunned silence.",
-                    "payoff", "af_heart", 1.00,
+                    "payoff", "af_heart", 1.00, "Pip",
                 ),
                 _beat(
                     "Okay. That was actually impressive.",
                     "The lanterns relight across the village. Ember hugs Pip while he pretends to look smug, then accidentally blows one last bubble around both their heads.",
-                    "button", "af_heart", 1.02,
+                    "button", "am_adam", 1.02, "Ember",
                 ),
             ],
         },
