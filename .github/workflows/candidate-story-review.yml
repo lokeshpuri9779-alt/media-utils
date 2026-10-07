@@ -1,0 +1,50 @@
+name: Astra Candidate Story Review
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      ORT_DISABLE_TELEMETRY: '1'
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Cache voice and media assets
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/astra-voice
+            ~/.cache/huggingface
+            asset_cache
+          key: astra-candidate-assets-v1-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            astra-candidate-assets-v1-${{ runner.os }}-
+
+      - name: Install runtime
+        run: pip install -r requirements.txt
+
+      - name: Render and validate candidates
+        run: python candidate_batch_review.py candidate-review
+
+      - name: Upload candidate review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-candidate-review-${{ github.run_id }}
+          path: candidate-review/
+          retention-days: 14
+          if-no-files-found: error
