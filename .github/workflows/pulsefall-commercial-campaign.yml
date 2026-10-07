@@ -1533,9 +1533,9 @@ jobs:
 var weapon_index: int = 0
 var unlocked_weapon_max: int = 0
 const WEAPONS = [
-	{"name": "ARC RIFLE", "damage": 2, "pellets": 1, "cooldown": 0.20, "speed": 31.0, "spread": 0.006},
-	{"name": "SCATTER CANNON", "damage": 1, "pellets": 7, "cooldown": 0.78, "speed": 25.0, "spread": 0.055},
-	{"name": "RAIL LANCE", "damage": 8, "pellets": 1, "cooldown": 1.12, "speed": 58.0, "spread": 0.001},
+          	{"name": "ARC RIFLE", "damage": 2, "pellets": 1, "cooldown": 0.20, "speed": 31.0, "spread": 0.006},
+          	{"name": "SCATTER CANNON", "damage": 1, "pellets": 7, "cooldown": 0.78, "speed": 25.0, "spread": 0.055},
+          	{"name": "RAIL LANCE", "damage": 8, "pellets": 1, "cooldown": 1.12, "speed": 58.0, "spread": 0.001},
 ]
 '''
           )
