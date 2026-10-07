@@ -22,21 +22,21 @@ Status legend: [ ] queued  [~] in progress  [x] completed  [!] blocked
 [x] Add pattern interrupt around 35–55% retention point
 [x] Add stronger payoff/end-frame visual treatment
 [x] Add per-story motion profile instead of identical zoom behavior
-[ ] Add fallback when external media is portrait/low-resolution/awkwardly framed
-[ ] Add scene-level quality checks before final mux
+[x] Add fallback when external media is portrait/low-resolution/awkwardly framed
+[x] Add scene-level quality checks before final mux
 
 ## P2 — Creative quality system
 [x] Integrate fast renderer into premium_batch_review.py
 [x] Compare FFmpeg-native vs Studio vs HyperFrames automatically
 [x] Choose best renderer per story/scene rather than globally
-[ ] Add visual diversity penalty for slideshow-like repetition
+[x] Add visual diversity penalty for slideshow-like repetition
 [ ] Add empty-space penalty
-[ ] Add text-density penalty
-[ ] Add static-shot penalty
-[ ] Add hook-legibility / safe-area checks
-[ ] Add audio balance and clipping checks
-[ ] Add story pacing score using actual rendered scene durations
-[ ] Keep fail-closed quality threshold before publish eligibility
+[x] Add text-density penalty
+[x] Add static-shot penalty
+[~] Add hook-legibility / safe-area checks
+[x] Add audio balance and clipping checks
+[x] Add story pacing score using actual rendered scene durations
+[x] Keep fail-closed quality threshold before publish eligibility
 
 ## P3 — Content catalog
 [ ] Expand production-ready factual stories beyond Moon + ISS
