@@ -1,0 +1,80 @@
+name: Build PULSEFALL REBORN APK
+
+on:
+  push:
+    branches:
+      - pulsefall-apk-build
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: pulsefall-apk-build
+
+      - name: Reconstruct project
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p pulsefall_reborn
+          cat pulsefall-build-src/pfpart-* > /tmp/pulsefall_reborn.tar.gz.b64
+          base64 -d /tmp/pulsefall_reborn.tar.gz.b64 > /tmp/pulsefall_reborn.tar.gz
+          echo "94682f8b025f59d6aa61dfd61f88bd73db35b67b7b1cbda87208a6d780685ee6  /tmp/pulsefall_reborn.tar.gz" | sha256sum -c -
+          tar -xzf /tmp/pulsefall_reborn.tar.gz -C pulsefall_reborn
+          test -f pulsefall_reborn/project.godot
+          test -f pulsefall_reborn/export_presets.cfg
+
+      - name: Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android packages
+        shell: bash
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+
+      - name: Export Android debug APK
+        id: export
+        uses: firebelley/godot-export@v8.0.0
+        with:
+          godot_executable_download_url: https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_export_templates.tpz
+          relative_project_path: ./pulsefall_reborn
+          export_debug: true
+          use_preset_export_path: true
+          presets_to_export: Android
+          verbose: true
+          cache: false
+
+      - name: Collect APK
+        shell: bash
+        run: |
+          set -euxo pipefail
+          find . -type f -name "*.apk" -print
+          APK="$(find pulsefall_reborn -type f -name "*.apk" | head -n1)"
+          test -n "$APK"
+          mkdir -p artifact
+          cp "$APK" artifact/PULSEFALL_REBORN_FINAL.apk
+          sha256sum artifact/PULSEFALL_REBORN_FINAL.apk | tee artifact/SHA256.txt
+          ls -lh artifact/PULSEFALL_REBORN_FINAL.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: PULSEFALL_REBORN_FINAL_APK
+          path: artifact/*
+          if-no-files-found: error
+          retention-days: 7
