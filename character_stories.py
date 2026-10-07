@@ -38,6 +38,11 @@ def catalog() -> list[dict]:
             "answer": "His strange little mistake becomes exactly what saves the village celebration.",
             "title": "The Dragon Who Could Only Blow Bubbles",
             "voice_speed": 1.02,
+            "voice_cast": {
+                "Pip": {"voice": "af_heart", "speed": 1.04},
+                "Ember": {"voice": "am_adam", "speed": 1.02},
+                "Grandma": {"voice": "af_heart", "speed": 0.96},
+            },
             "target_duration_min": 28,
             "target_duration_max": 40,
             "character_bible": (
