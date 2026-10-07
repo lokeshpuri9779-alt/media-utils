@@ -10,11 +10,17 @@ from quality_lab import assess_render, contact_sheet, scene_change_report, write
 from studio_renderer import render_short
 from fast_premium_renderer import render_fast_premium
 from renderer_router import select_validated_local
+from story_catalog_gate import validate_catalog
 
 
 def main(root: Path) -> int:
     root.mkdir(parents=True, exist_ok=True)
-    ready = [story for story in catalog() if story.get("production_ready")]
+    all_stories = catalog()
+    catalog_gate = validate_catalog(all_stories)
+    write_report(root / "catalog-gate.json", catalog_gate)
+    if not catalog_gate["pass"]:
+        raise RuntimeError("Premium story catalog rejected: " + "; ".join(catalog_gate["failures"]))
+    ready = [story for story in all_stories if story.get("production_ready")]
     if not ready:
         raise RuntimeError("No production-ready premium stories.")
     batch = []
