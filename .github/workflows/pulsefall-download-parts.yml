@@ -1,0 +1,125 @@
+name: Prepare PULSEFALL RC download parts
+
+on:
+  push:
+    branches:
+      - pulsefall-download-parts
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  split:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Download validated production RC artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: PULSEFALL_BLACKSITE_PRODUCTION_RC
+          path: staging
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: 37684691320
+
+      - name: Prepare installer chunks
+        shell: bash
+        run: |
+          set -euxo pipefail
+          find staging -maxdepth 3 -type f -printf '%p %s bytes\n'
+          SETUP="$(find staging -type f -name 'PULSEFALL_BLACKSITE_PRODUCTION_RC_SETUP.exe' | head -n1)"
+          test -n "$SETUP"
+          mkdir -p chunks
+          cp "$SETUP" chunks/PULSEFALL_BLACKSITE_PRODUCTION_RC_SETUP.exe
+          sha256sum chunks/PULSEFALL_BLACKSITE_PRODUCTION_RC_SETUP.exe > chunks/SETUP_SHA256.txt
+          split -b 55M -d -a 2 chunks/PULSEFALL_BLACKSITE_PRODUCTION_RC_SETUP.exe chunks/PULSEFALL_SETUP.part
+          rm chunks/PULSEFALL_BLACKSITE_PRODUCTION_RC_SETUP.exe
+          python3 - <<'PY'
+          from pathlib import Path
+          parts=sorted(Path("chunks").glob("PULSEFALL_SETUP.part*"))
+          expr="+".join(p.name for p in parts)
+          bat = (
+              "@echo off\r\n"
+              "setlocal\r\n"
+              "cd /d %~dp0\r\n"
+              "echo Reassembling PULSEFALL BLACKSITE Production RC installer...\r\n"
+              f"copy /b {expr} PULSEFALL_BLACKSITE_PRODUCTION_RC_SETUP.exe >nul\r\n"
+              "if errorlevel 1 (\r\n"
+              "  echo Reassembly failed. Make sure every part is in this folder.\r\n"
+              "  pause\r\n"
+              "  exit /b 1\r\n"
+              ")\r\n"
+              "echo Installer created: PULSEFALL_BLACKSITE_PRODUCTION_RC_SETUP.exe\r\n"
+              "echo You can now run the installer.\r\n"
+              "pause\r\n"
+          )
+          Path("chunks/PULSEFALL_REASSEMBLE_SETUP.bat").write_bytes(bat.encode("ascii"))
+          print("parts", [p.name for p in parts])
+          PY
+          ls -lh chunks
+
+      - name: Upload part 00
+        uses: actions/upload-artifact@v4
+        with:
+          name: PULSEFALL_SETUP_PART00
+          path: chunks/PULSEFALL_SETUP.part00
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload part 01
+        uses: actions/upload-artifact@v4
+        with:
+          name: PULSEFALL_SETUP_PART01
+          path: chunks/PULSEFALL_SETUP.part01
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload part 02
+        uses: actions/upload-artifact@v4
+        with:
+          name: PULSEFALL_SETUP_PART02
+          path: chunks/PULSEFALL_SETUP.part02
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload part 03
+        uses: actions/upload-artifact@v4
+        with:
+          name: PULSEFALL_SETUP_PART03
+          path: chunks/PULSEFALL_SETUP.part03
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload part 04
+        uses: actions/upload-artifact@v4
+        with:
+          name: PULSEFALL_SETUP_PART04
+          path: chunks/PULSEFALL_SETUP.part04
+          compression-level: 0
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Upload part 05
+        uses: actions/upload-artifact@v4
+        with:
+          name: PULSEFALL_SETUP_PART05
+          path: chunks/PULSEFALL_SETUP.part05
+          compression-level: 0
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Upload reassembler and checksum
+        uses: actions/upload-artifact@v4
+        with:
+          name: PULSEFALL_SETUP_REASSEMBLER
+          path: |
+            chunks/PULSEFALL_REASSEMBLE_SETUP.bat
+            chunks/SETUP_SHA256.txt
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 7
