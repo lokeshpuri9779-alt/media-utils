@@ -48,10 +48,10 @@ Status legend: [ ] queued  [~] in progress  [x] completed  [!] blocked
 [x] Add duplicate-topic and near-duplicate hook prevention
 
 ## P4 — Shorts production automation
-[ ] Route approved stories through fast renderer by default
-[ ] Keep uploads PRIVATE during review phase
-[ ] Add metadata generation: title / description / tags / attribution
-[ ] Add thumbnail/frame selection
+[x] Route approved stories through fast renderer by default
+[x] Keep uploads PRIVATE during review phase
+[x] Add metadata generation: title / description / tags / attribution
+[x] Add thumbnail/frame selection
 [ ] Add upload retry logic that respects YouTube quota/errors
 [ ] Add daily production budget/rate limiter
 [ ] Add multi-channel routing only after channel credentials validate
