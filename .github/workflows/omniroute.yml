@@ -16,7 +16,6 @@ jobs:
     timeout-minutes: 15
     env:
       CI: 'true'
-      DATA_DIR: ${{ runner.temp }}/astra-omniroute
       HOSTNAME: '127.0.0.1'
       OMNIROUTE_SKIP_SYSTEM_TRUST: '1'
       DISABLE_SQLITE_AUTO_BACKUP: 'true'
@@ -31,6 +30,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          export DATA_DIR="$RUNNER_TEMP/astra-omniroute"
           export INITIAL_PASSWORD="$(openssl rand -hex 24)"
           export JWT_SECRET="$(openssl rand -hex 32)"
           export API_KEY_SECRET="$(openssl rand -hex 32)"
