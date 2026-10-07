@@ -939,12 +939,12 @@ def composition_layer(im,s,t,u,accent):
 def transition_layer(im,s,t,u,accent):
     """Narrative-energy transition treatment concentrated at scene entry/exit."""
     d=ImageDraw.Draw(im,'RGBA'); energy=float(s.get('director_energy',.5))
-    if u<.16:
-        p=ease(u/.16); w=int((1-p)*W*.42*energy)
+    if u<.20:
+        p=ease(u/.20); w=int((1-p)*W*.34*energy)
         if w>0:
             d.polygon([(0,0),(w,0),(max(0,w-120),H),(0,H)],fill=accent+(max(0,int(95*(1-p))),))
-    elif u>.88 and s.get('director_role') in {'proof','payoff','outlook'}:
-        p=ease((u-.88)/.12); y=int(H-(p*120))
+    elif u>.84 and s.get('director_role') in {'proof','payoff','outlook','resolution'}:
+        p=ease((u-.84)/.16); y=int(H-(p*110))
         d.rectangle((0,y,W,H),fill=(255,255,255,max(0,int(22*(1-p)))))
     return im
 
@@ -1398,7 +1398,7 @@ def creative_quality_gate(ch, plan):
     if ch.get('genre')=='current':
         if len(set(beats))>=4: score+=7
         if len(beats)>=4 and len(set(beats))<3: score-=18
-        if int(ch.get('source_count') or 0)>0 and 'evidence' not in beats: score-=15
+        if int(ch.get('source_count') or 0)>0 and not any(str(b).startswith('evidence') for b in beats): score-=15
     adjacent_repeats=sum(1 for a,b in zip(styles,styles[1:]) if a and a==b)
     layout_repeats=sum(1 for a,b in zip(layouts,layouts[1:]) if a==b)
     if len(set(styles))>=3: score+=8
