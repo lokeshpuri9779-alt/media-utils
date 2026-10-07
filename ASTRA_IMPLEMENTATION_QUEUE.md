@@ -15,12 +15,12 @@ Status legend: [ ] queued  [~] in progress  [x] completed  [!] blocked
 [x] Add render-time metrics and fail if fast path regresses badly
 
 ## P1 — Fast production renderer
-[ ] Add shot transitions (cut / crossfade / dip / whip where appropriate)
-[ ] Add dynamic crop/position rules based on subject framing
-[ ] Add caption emphasis/highlight timing without permanent caption cards
-[ ] Add hook-specific opening treatment for first 1.5 seconds
-[ ] Add pattern interrupt around 35–55% retention point
-[ ] Add stronger payoff/end-frame visual treatment
+[x] Add shot transitions (cut / crossfade / dip / whip where appropriate)
+[x] Add dynamic crop/position rules based on subject framing
+[x] Add caption emphasis/highlight timing without permanent caption cards
+[x] Add hook-specific opening treatment for first 1.5 seconds
+[x] Add pattern interrupt around 35–55% retention point
+[x] Add stronger payoff/end-frame visual treatment
 [x] Add per-story motion profile instead of identical zoom behavior
 [ ] Add fallback when external media is portrait/low-resolution/awkwardly framed
 [ ] Add scene-level quality checks before final mux
