@@ -834,14 +834,24 @@ def render_frame(plan,t,genre,total):
     # Camera treatment is chosen by the director per narrative beat.
     cam=s.get('director_camera','push'); energy=float(s.get('director_energy',.5))
     if cam in {'push','drift','track'}:
-        scale=1.0 + (0.012+0.018*energy)*ease(min(1,u/max(.4,s['duration'])))
-        if cam=='drift': scale=1.0 + .010*math.sin(t*.7)
+        fmt=str(s.get('creative_format') or '')
+        motion_boost=1.55 if fmt=='documentary_montage' else 1.0
+        scale=1.0 + motion_boost*(0.012+0.018*energy)*ease(min(1,u/max(.4,s['duration'])))
+        if cam=='drift':
+            scale=1.0 + motion_boost*.010*math.sin(t*.9)
         nw,nh=int(W*scale),int(H*scale)
         moved=im.resize((nw,nh),Image.Resampling.BICUBIC)
         dx=max(0,(nw-W)//2 + (int(math.sin(t*.55)*10*energy) if cam=='track' else 0))
         dy=max(0,(nh-H)//2)
         im=moved.crop((dx,dy,dx+W,dy+H))
     draw_visual(im,s,t,u,accent)
+    if str(s.get('creative_format') or '')=='documentary_montage' and .36 < (u/max(.2,s['duration'])) < .62:
+        p=(u/max(.2,s['duration'])-.36)/.26
+        pulse=1.0+0.018*math.sin(min(1,p)*math.pi)
+        nw,nh=int(W*pulse),int(H*pulse)
+        moved=im.resize((nw,nh),Image.Resampling.BICUBIC)
+        dx=max(0,(nw-W)//2); dy=max(0,(nh-H)//2)
+        im=moved.crop((dx,dy,dx+W,dy+H))
     if s.get('visual') not in {'media','tidal_lock','iss_orbit'}:
         visual_style_layer(im,s,t,u,accent)
         composition_layer(im,s,t,u,accent)
@@ -898,9 +908,12 @@ def render_frame(plan,t,genre,total):
         d.rounded_rectangle((118,1530,900,1636),radius=18,fill=(5,8,14))
         fit_text(d,text,(145,1538,874,1628),size=37,fill=(242,245,250),max_lines=2)
     elif fmt=='documentary_montage':
-        # Compact, high-contrast caption band; avoid turning the lower third into a text card.
-        d.rounded_rectangle((70,1485,1010,1588),radius=18,fill=(5,8,14,185) if im.mode=='RGBA' else (5,8,14))
-        fit_text(d,text.upper(),(96,1491,984,1580),size=45,fill='white',max_lines=2)
+        # Native Shorts-style floating captions: no permanent card/strip.
+        # Draw a soft shadow for legibility, then clean white text above it.
+        shadow_box=(94,1468,986,1570)
+        fit_text(d,text.upper(),(shadow_box[0]+4,shadow_box[1]+5,shadow_box[2]+4,shadow_box[3]+5),
+                 size=46,fill=(0,0,0),max_lines=2)
+        fit_text(d,text.upper(),shadow_box,size=46,fill='white',max_lines=2)
     elif fmt=='animated_infographic':
         d.rounded_rectangle((170,1450,910,1560),radius=28,fill=(8,12,23))
         fit_text(d,text,(195,1458,885,1552),size=44,fill=accent,max_lines=2)
