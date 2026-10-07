@@ -17,6 +17,7 @@ import subprocess
 from pathlib import Path
 
 import httpx
+from imageio_ffmpeg import get_ffmpeg_exe
 
 from video_provider_policy import capability, autonomous_provider_allowed
 from agnes_free_video import (
@@ -209,7 +210,7 @@ def generate_character_clip(shot: dict, output_path: str | Path, timeout_seconds
 
 def _extract_last_frame(video: Path, output: Path) -> Path:
     subprocess.run([
-        "ffmpeg","-hide_banner","-loglevel","error","-y",
+        get_ffmpeg_exe(),"-hide_banner","-loglevel","error","-y",
         "-sseof","-0.08","-i",str(video),"-frames:v","1",str(output)
     ],check=True)
     if not output.is_file() or output.stat().st_size<=0:
