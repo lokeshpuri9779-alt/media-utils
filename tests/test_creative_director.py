@@ -58,3 +58,19 @@ class CreativeDirectorTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def test_high_aggregate_cannot_hide_catastrophic_pacing():
+    from creative_director import evaluate
+    report={
+        "creative":{"hook_score":100,"retention_score":100,"visual_score":100,
+                    "novelty_score":100,"coherence_score":100},
+        "scene_analysis":{"pacing_score":15,"scene_count":10},
+        "audio":{"score":100},"captions":{"score":100},
+        "technical":{"score":100,"pass":True},
+    }
+    decision=evaluate(report)
+    assert decision["score"] >= 82
+    assert decision["publish_allowed"] is False
+    assert "pacing_below_publish_floor" in decision["floor_failures"]
+    assert decision["action"]=="targeted_regeneration"
