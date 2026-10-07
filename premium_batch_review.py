@@ -9,6 +9,7 @@ from premium_stories import catalog
 from quality_lab import assess_render, contact_sheet, scene_change_report, write_report
 from studio_renderer import render_short
 from fast_premium_renderer import render_fast_premium
+from renderer_router import select_validated_local
 
 
 def main(root: Path) -> int:
@@ -34,12 +35,27 @@ def main(root: Path) -> int:
             batch.append(entry)
             continue
         video = folder / "preview.mp4"
-        renderer = "ffmpeg-native" if story.get("premium_story") else "studio"
+        requirements = {
+            "factual_media": bool(story.get("premium_story")),
+            "motion_complexity": sum(1 for beat in (story.get("story_beats") or [])
+                                     if str(beat.get("visual") or "") in {"tidal_lock","iss_orbit"}),
+            "procedural_heavy": sum(1 for beat in (story.get("story_beats") or [])
+                                    if str(beat.get("visual") or "") not in {"media"}) >= 2,
+            "long_form": False,
+        }
+        selection = select_validated_local(requirements)
+        renderer = str(selection.get("selected") or "studio")
         try:
-            if renderer == "ffmpeg-native":
+            if renderer == "ffmpeg_native":
                 report = render_fast_premium(video, story=story)
             else:
+                # HyperFrames remains comparison-capable but Studio is the
+                # deterministic in-process fallback until per-story execution
+                # is wired into this batch runner.
                 report = render_short(story, video, still_dir=stills)
+                if renderer == "hyperframes":
+                    report["selected_renderer"] = "hyperframes"
+                    report["execution_renderer"] = "studio"
         except Exception as exc:
             # Preserve the proven Studio path as a zero-cost fallback while the
             # fast renderer matures. The batch report records the fallback.
@@ -52,7 +68,8 @@ def main(root: Path) -> int:
         write_report(folder / "quality.json", post)
         contact_sheet(stills, folder / "contact-sheet.jpg", story.get("title") or cid)
         entry.update(status="passed" if post["pass"] else "rejected-after-render",
-                     quality=post, video=str(video.name), renderer=renderer)
+                     quality=post, video=str(video.name), renderer=renderer,
+                     renderer_selection=selection)
         failed = failed or not post["pass"]
         batch.append(entry)
     (root / "batch.json").write_text(json.dumps(batch, indent=2), encoding="utf-8")
