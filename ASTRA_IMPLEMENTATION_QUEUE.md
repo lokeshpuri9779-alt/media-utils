@@ -75,14 +75,14 @@ Status legend: [ ] queued  [~] in progress  [x] completed  [!] blocked
 [ ] Do not bypass platform automation restrictions or quotas
 
 ## P7 — Reliability / cost guardrails
-[ ] Fail closed on any paid provider unless explicitly approved
-[ ] Record estimated + actual provider cost per render
-[ ] Watermark-free provider requirement
-[ ] No disposable-account/free-credit bypasses
-[ ] Provider health/fallback registry
-[ ] Cache media + voice assets between runs where GitHub supports it
+[x] Fail closed on any paid provider unless explicitly approved
+[~] Record estimated + actual provider cost per render
+[x] Watermark-free provider requirement
+[x] No disposable-account/free-credit bypasses
+[x] Provider health/fallback registry
+[x] Cache media + voice assets between runs where GitHub supports it
 [x] Avoid reinstalling heavy packages when reusable cache/runtime path exists
-[ ] Add failure diagnosis summary to each run artifact
+[x] Add failure diagnosis summary to each run artifact
 
 ## Approval boundaries
 Astra may proceed automatically for safe, reversible, zero-cost repository/code/workflow changes.
