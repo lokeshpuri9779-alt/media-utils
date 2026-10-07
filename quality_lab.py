@@ -8,6 +8,61 @@ from PIL import Image, ImageDraw, ImageFont
 from creative_director import evaluate as evaluate_director, production_feedback
 
 
+def structural_quality_penalties(report: dict) -> dict:
+    """Cheap deterministic QA from the render plan before heavier media analysis."""
+    scenes=report.get("scenes") or []
+    penalties=[]
+    score=100.0
+
+    durations=[float(s.get("duration") or 0) for s in scenes if float(s.get("duration") or 0)>0]
+    if durations:
+        longest=max(durations)
+        if longest>4.8:
+            p=min(18.0,(longest-4.8)*6.0)
+            score-=p; penalties.append({"type":"static-shot","points":round(p,2),"detail":f"longest scene {longest:.2f}s"})
+        spread=max(durations)-min(durations)
+        if len(durations)>=4 and spread<0.35:
+            score-=8.0; penalties.append({"type":"uniform-pacing","points":8.0,"detail":"scene durations are too uniform"})
+
+    signatures=[]
+    for s in scenes:
+        signatures.append((
+            str(s.get("visual") or ""),
+            str(s.get("media_fit") or ""),
+            str(s.get("treatment") or ""),
+        ))
+    if signatures and len(set(signatures)) <= max(1,len(signatures)//2):
+        score-=12.0; penalties.append({"type":"visual-diversity","points":12.0,"detail":"too few distinct scene treatments"})
+
+    text_over=0
+    for s in scenes:
+        words=len(str(s.get("headline") or "").split())
+        if words>8:
+            text_over += words-8
+    if text_over:
+        p=min(12.0,text_over*1.5)
+        score-=p; penalties.append({"type":"text-density","points":round(p,2),"detail":f"{text_over} headline words above limit"})
+
+    preflight=report.get("scene_preflight") or {}
+    warnings=preflight.get("warnings") or []
+    low_res=sum("low_resolution" in str(x) for x in warnings)
+    repetitive=sum("repetitive_scene_signature" in str(x) for x in warnings)
+    if low_res:
+        p=min(15.0,low_res*7.5)
+        score-=p; penalties.append({"type":"source-quality","points":p,"detail":f"{low_res} low-resolution scene(s)"})
+    if repetitive:
+        p=min(15.0,repetitive*7.5)
+        score-=p; penalties.append({"type":"repetition","points":p,"detail":f"{repetitive} repetitive scene signature(s)"})
+
+    hook=str((scenes[0] if scenes else {}).get("headline") or "")
+    hook_words=len(hook.split())
+    if hook_words>9:
+        p=min(12.0,(hook_words-9)*2.0)
+        score-=p; penalties.append({"type":"hook-legibility","points":p,"detail":f"hook has {hook_words} words"})
+
+    return {"score":round(max(0.0,score),2),"penalties":penalties,"pass":score>=78.0}
+
+
 def assess_render(report: dict) -> dict:
     failures = []
     duration = float(report.get("duration") or 0)
@@ -24,7 +79,20 @@ def assess_render(report: dict) -> dict:
     verified = int(assets.get("verified_subject_media") or 0)
     if required and verified != required:
         failures.append(f"verified editorial media {verified}/{required}")
-    return {"pass": not failures, "failures": failures, "duration": duration}
+
+    structural = structural_quality_penalties(report)
+    if not structural["pass"]:
+        failures.append(f"structural visual quality below gate: {structural['score']:.1f}")
+    peak=float((report.get("audio") or {}).get("peak_dbfs") or -99)
+    if peak > -0.2 or peak < -15.0:
+        failures.append(f"audio peak outside target window: {peak:.2f} dBFS")
+
+    return {
+        "pass": not failures,
+        "failures": failures,
+        "duration": duration,
+        "structural_quality": structural,
+    }
 
 
 def contact_sheet(stills_dir: Path, output: Path, title: str = "RAYVAN review") -> None:
