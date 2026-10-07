@@ -1,0 +1,2426 @@
+name: Build PULSEFALL BLACKSITE Commercial Alpha
+
+on:
+  push:
+    branches:
+      - pulsefall-commercial-alpha
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+
+    steps:
+      - name: Checkout control repository
+        uses: actions/checkout@v4
+        with:
+          path: control
+          ref: pulsefall-commercial-alpha
+
+      - name: Checkout Godot TPS foundation
+        uses: actions/checkout@v4
+        with:
+          repository: godotengine/tps-demo
+          ref: master
+          path: game
+          fetch-depth: 1
+          lfs: false
+
+      - name: Checkout Quaternius CC0 sci-fi assets
+        uses: actions/checkout@v4
+        with:
+          repository: agentkaerf/FreeModels
+          ref: main
+          path: qassets
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            Modular SciFi MegaKit[Standard]
+            Sci-Fi Essentials Kit[Standard]
+            Ultimate Space Kit - March 2023
+            Animated Mech Pack - March 2021
+
+      - name: Checkout Kenney CC0 space and weapon assets
+        uses: actions/checkout@v4
+        with:
+          repository: shorepine/kenney
+          ref: main
+          path: kassets
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            LICENSE.txt
+            3d/space-station
+            3d/modular-space
+            3d/weapon
+
+      - name: Install curated commercial asset library
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p game/assets/quaternius game/assets/kenney
+          cp -r "qassets/Modular SciFi MegaKit[Standard]" game/assets/quaternius/modular_scifi
+          cp -r "qassets/Sci-Fi Essentials Kit[Standard]" game/assets/quaternius/scifi_essentials
+          cp -r "qassets/Ultimate Space Kit - March 2023" game/assets/quaternius/ultimate_space
+          cp -r "qassets/Animated Mech Pack - March 2021" game/assets/quaternius/animated_mech
+          cp -r kassets/3d/space-station game/assets/kenney/space_station
+          cp -r kassets/3d/modular-space game/assets/kenney/modular_space
+          cp -r kassets/3d/weapon game/assets/kenney/weapon
+          cp kassets/LICENSE.txt game/assets/kenney/KENNEY_LICENSE.txt
+          find game/assets -type f | wc -l
+          du -sh game/assets
+
+      - name: Brand PULSEFALL BLACKSITE
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          cat > game/menu/pulsefall_logo.svg <<'SVG'
+          <svg width="1024" height="233" viewBox="0 0 1024 233" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g" x1="0" x2="1">
+                <stop offset="0" stop-color="#5ce1ff"/>
+                <stop offset="0.52" stop-color="#ffffff"/>
+                <stop offset="1" stop-color="#9d7bff"/>
+              </linearGradient>
+              <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <rect width="1024" height="233" fill="none"/>
+            <path d="M35 164 L75 65 L115 164 L92 164 L75 122 L58 164 Z" fill="#5ce1ff" opacity=".9" filter="url(#glow)"/>
+            <text x="140" y="128" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="92" letter-spacing="11" fill="url(#g)" filter="url(#glow)">PULSEFALL</text>
+            <rect x="143" y="151" width="775" height="2" fill="#5ce1ff" opacity=".65"/>
+            <text x="143" y="190" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="23" letter-spacing="9" fill="#c9f8ff">BLACKSITE PROTOCOL</text>
+          </svg>
+          SVG
+
+          cat > game/pulsefall_icon.svg <<'SVG'
+          <svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5ce1ff"/><stop offset="1" stop-color="#8d6cff"/></linearGradient></defs>
+            <rect width="256" height="256" rx="50" fill="#050811"/>
+            <path d="M128 28 L213 128 L128 228 L43 128 Z" fill="none" stroke="url(#g)" stroke-width="12"/>
+            <path d="M128 63 L169 160 L145 160 L128 119 L111 160 L87 160 Z" fill="url(#g)"/>
+          </svg>
+          SVG
+
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("game/project.godot")
+          s=p.read_text()
+          s=s.replace('config/name="Godot Third-Person Shooter Demo"', 'config/name="PULSEFALL BLACKSITE"')
+          s=s.replace('config/description="Godot Third Person Shooter with high quality assets and lighting"', 'config/description="PULSEFALL BLACKSITE - cinematic third-person survival vertical slice"')
+          s=s.replace('config/icon="res://icon.png"', 'config/icon="res://pulsefall_icon.svg"')
+          p.write_text(s)
+
+          p=Path("game/menu/menu.tscn")
+          s=p.read_text()
+          s=s.replace('path="res://menu/tps_demo.png"', 'path="res://menu/pulsefall_logo.svg"')
+          s=s.replace('text = "PLAY"', 'text = "ENTER BLACKSITE"')
+          marker='[node name="PlayOnline" type="Button" parent="UI/Main"'
+          idx=s.find(marker)
+          if idx!=-1:
+              line_end=s.find('\n', idx)
+              insert_at=line_end+1
+              s=s[:insert_at]+'visible = false\n'+s[insert_at:]
+          p.write_text(s)
+
+          p=Path("game/menu/settings.gd")
+          s=p.read_text()
+          s=s.replace('display_mode = Window.MODE_EXCLUSIVE_FULLSCREEN', 'display_mode = Window.MODE_FULLSCREEN')
+          s=s.replace('resolution_scale = 1.0', 'resolution_scale = 0.90')
+          s=s.replace('taa = false', 'taa = true')
+          s=s.replace('gi_type = GIType.VOXEL_GI', 'gi_type = GIType.LIGHTMAP_GI')
+          s=s.replace('gi_quality = GIQuality.LOW', 'gi_quality = GIQuality.HIGH')
+          p.write_text(s)
+
+          p=Path("game/player/player.tscn")
+          s=p.read_text().replace('wait_time = 0.4\none_shot = true', 'wait_time = 0.24\none_shot = true')
+          p.write_text(s)
+
+          # This project is single-player. The upstream demo auto-starts a dedicated
+          # server when running headless, which makes menu smoke tests load the level
+          # through a threaded path that is irrelevant to the Windows client.
+          p=Path("game/menu/menu.gd")
+          s=p.read_text()
+          s=s.replace(
+              'if DisplayServer.get_name() == "headless":\n\t\t_on_host_pressed.call_deferred()',
+              'if DisplayServer.get_name() == "headless":\n\t\treturn'
+          )
+          p.write_text(s)
+          PY
+
+      - name: Add production diagnostics, playtest telemetry and automated tests
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p game/production game/tests
+
+          cat > game/production/production_guard.gd <<'GDSCRIPT'
+          extends Node
+
+          const VERSION := "0.20.0-commercial-alpha"
+          const MARKER_PATH := "user://session_unclean.flag"
+          const EVENT_LOG_PATH := "user://logs/events.jsonl"
+          const REPORT_PATH := "user://playtest_report.json"
+
+          var fps_samples: Array[float] = []
+          var sample_accumulator := 0.0
+          var recovered_from_unclean_session := false
+          var session_started_unix := 0.0
+
+
+          func _ready() -> void:
+          	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("user://logs"))
+          	recovered_from_unclean_session = FileAccess.file_exists(MARKER_PATH)
+          	if recovered_from_unclean_session:
+          		_apply_safe_mode()
+          	session_started_unix = Time.get_unix_time_from_system()
+          	var marker := FileAccess.open(MARKER_PATH, FileAccess.WRITE)
+          	if marker != null:
+          		marker.store_string(str(session_started_unix))
+          	if not get_tree().root.close_requested.is_connected(_on_close_requested):
+          		get_tree().root.close_requested.connect(_on_close_requested)
+          	record_event("session_start", {
+          		"version": VERSION,
+          		"recovered_from_unclean_session": recovered_from_unclean_session,
+          		"os": OS.get_name(),
+          		"cpu": OS.get_processor_name(),
+          		"gpu": RenderingServer.get_video_adapter_name(),
+          		"renderer": RenderingServer.get_current_rendering_driver_name()
+          	})
+
+
+          func _process(delta: float) -> void:
+          	sample_accumulator += delta
+          	if sample_accumulator >= 1.0:
+          		sample_accumulator = 0.0
+          		fps_samples.append(float(Engine.get_frames_per_second()))
+          		if fps_samples.size() > 3600:
+          			fps_samples.pop_front()
+
+
+          func _exit_tree() -> void:
+          	mark_clean_exit()
+
+
+          func _on_close_requested() -> void:
+          	record_event("window_close_requested")
+          	mark_clean_exit()
+
+
+          func mark_clean_exit() -> void:
+          	var absolute := ProjectSettings.globalize_path(MARKER_PATH)
+          	if FileAccess.file_exists(MARKER_PATH):
+          		DirAccess.remove_absolute(absolute)
+
+
+          func _apply_safe_mode() -> void:
+          	Settings.config_file.set_value("video", "resolution_scale", 0.75)
+          	Settings.config_file.set_value("rendering", "volumetric_fog", false)
+          	Settings.config_file.set_value("rendering", "taa", false)
+          	Settings.config_file.set_value("rendering", "gi_type", Settings.GIType.LIGHTMAP_GI)
+          	Settings.config_file.set_value("rendering", "gi_quality", Settings.GIQuality.LOW)
+          	Settings.save_settings()
+
+
+          func record_event(event_name: String, payload: Dictionary = {}) -> void:
+          	var record := {
+          		"timestamp_utc": Time.get_datetime_string_from_system(true, false),
+          		"event": event_name,
+          		"payload": payload
+          	}
+          	var mode := FileAccess.READ_WRITE if FileAccess.file_exists(EVENT_LOG_PATH) else FileAccess.WRITE
+          	var file := FileAccess.open(EVENT_LOG_PATH, mode)
+          	if file == null:
+          		return
+          	if mode == FileAccess.READ_WRITE:
+          		file.seek_end()
+          	file.store_line(JSON.stringify(record))
+
+
+          func write_playtest_report(extra: Dictionary = {}) -> String:
+          	var average_fps := 0.0
+          	var p10_fps := 0.0
+          	var minimum_fps := 0.0
+          	if not fps_samples.is_empty():
+          		var total := 0.0
+          		for sample in fps_samples:
+          			total += sample
+          		average_fps = total / float(fps_samples.size())
+          		var ordered := fps_samples.duplicate()
+          		ordered.sort()
+          		minimum_fps = ordered[0]
+          		var p10_index := int(floor(float(ordered.size() - 1) * 0.10))
+          		p10_fps = ordered[p10_index]
+
+          	var report := {
+          		"build": {
+          			"name": "PULSEFALL BLACKSITE",
+          			"version": VERSION
+          		},
+          		"session": {
+          			"started_unix": session_started_unix,
+          			"duration_seconds": Time.get_unix_time_from_system() - session_started_unix,
+          			"recovered_from_unclean_session": recovered_from_unclean_session
+          		},
+          		"system": {
+          			"os": OS.get_name(),
+          			"os_version": OS.get_version(),
+          			"cpu": OS.get_processor_name(),
+          			"logical_processors": OS.get_processor_count(),
+          			"gpu": RenderingServer.get_video_adapter_name(),
+          			"gpu_vendor": RenderingServer.get_video_adapter_vendor(),
+          			"renderer": RenderingServer.get_current_rendering_driver_name(),
+          			"screen_size": str(DisplayServer.screen_get_size())
+          		},
+          		"performance": {
+          			"sample_count": fps_samples.size(),
+          			"average_fps": snappedf(average_fps, 0.1),
+          			"p10_fps": snappedf(p10_fps, 0.1),
+          			"minimum_fps": snappedf(minimum_fps, 0.1)
+          		},
+          		"run": extra
+          	}
+
+          	var file := FileAccess.open(REPORT_PATH, FileAccess.WRITE)
+          	if file != null:
+          		file.store_string(JSON.stringify(report, "\t"))
+          	record_event("playtest_report_written", {"path": ProjectSettings.globalize_path(REPORT_PATH)})
+          	return ProjectSettings.globalize_path(REPORT_PATH)
+
+
+          func get_logs_directory() -> String:
+          	return ProjectSettings.globalize_path("user://logs")
+          GDSCRIPT
+
+          cat > game/tests/test_commercial_readiness.gd <<'GDSCRIPT'
+          extends GdUnitTestSuite
+
+
+          func test_project_identity() -> void:
+          	assert_str(str(ProjectSettings.get_setting("application/config/name"))).is_equal("PULSEFALL BLACKSITE")
+
+
+          func test_core_scenes_exist() -> void:
+          	assert_bool(ResourceLoader.exists("res://main/main.tscn")).is_true()
+          	assert_bool(ResourceLoader.exists("res://menu/menu.tscn")).is_true()
+          	assert_bool(ResourceLoader.exists("res://level/level.tscn")).is_true()
+          	assert_bool(ResourceLoader.exists("res://player/player.tscn")).is_true()
+          	assert_bool(ResourceLoader.exists("res://enemies/red_robot/red_robot.tscn")).is_true()
+
+
+          func test_player_combat_contract() -> void:
+          	var scene: PackedScene = load("res://player/player.tscn")
+          	var player := scene.instantiate()
+          	assert_bool(player.has_method("take_damage")).is_true()
+          	assert_bool(player.has_method("heal")).is_true()
+          	assert_bool(player.has_method("revive")).is_true()
+          	assert_bool(player.has_signal("health_changed")).is_true()
+          	assert_bool(player.has_signal("died")).is_true()
+          	assert_bool(int(player.max_health) > 0).is_true()
+          	player.free()
+
+
+          func test_enemy_combat_contract() -> void:
+          	var scene: PackedScene = load("res://enemies/red_robot/red_robot.tscn")
+          	var enemy := scene.instantiate()
+          	assert_bool(enemy.has_signal("exploded")).is_true()
+          	assert_bool(int(enemy.health) > 0).is_true()
+          	enemy.free()
+
+
+          func test_release_documents_present() -> void:
+          	assert_bool(FileAccess.file_exists("res://LICENSE.md")).is_true()
+          	assert_bool(FileAccess.file_exists("res://THIRD_PARTY_NOTICES.txt")).is_true()
+          	assert_bool(FileAccess.file_exists("res://PRIVACY_NOTICE.txt")).is_true()
+          	assert_bool(FileAccess.file_exists("res://PLAYTEST_GUIDE.txt")).is_true()
+
+
+          func test_file_logging_enabled() -> void:
+          	assert_bool(bool(ProjectSettings.get_setting("debug/file_logging/enable_file_logging", false))).is_true()
+          GDSCRIPT
+
+          cat > game/PLAYTEST_GUIDE.txt <<'EOF'
+          PULSEFALL BLACKSITE — RC PLAYTEST GUIDE
+
+          Goal
+          Complete all 5 waves, fight the OMEGA WARDEN, and judge whether the build
+          feels clear, responsive, stable, and worth playing again.
+
+          Required test passes
+          1. Fresh launch: menu -> settings -> enter Blacksite.
+          2. Keyboard/mouse combat: move, aim, fire, jump, take damage, die and revive.
+          3. Complete all five waves and rate the build on the end-of-run survey.
+          4. Change graphics settings, toggle fullscreen, alt-tab and resume.
+          5. Relaunch the game after a normal exit.
+          6. Force-close once, relaunch, and confirm safe-mode recovery works.
+          7. Run at least one 20-minute soak session.
+          8. If available, test an Xbox-compatible controller.
+          9. Test at 1920x1080 and one lower resolution.
+          10. Press F8 at any time to write a local playtest/performance report.
+
+          Record
+          - Any crash, freeze, broken control or visual defect.
+          - Where you became confused.
+          - Whether shooting feels satisfying.
+          - Whether enemy difficulty feels fair.
+          - Lowest-feeling performance section.
+          - Would you voluntarily play another mission? Yes/No.
+
+          Logs
+          Godot log: user data folder / logs / godot.log
+          Event log: user data folder / logs / events.jsonl
+          F8 report: user data folder / playtest_report.json
+
+          No diagnostic information is uploaded automatically.
+          EOF
+
+          cat > game/PRIVACY_NOTICE.txt <<'EOF'
+          PULSEFALL BLACKSITE RC — PRIVACY NOTICE
+
+          This playtest build does not transmit gameplay analytics, hardware details,
+          personal information, crash logs, or feedback to a remote server.
+
+          For quality assurance it stores local diagnostic files on the tester's PC:
+          engine logs, anonymous gameplay events, frame-rate samples, build version,
+          operating-system name, CPU/GPU model, renderer and optional playtest rating.
+
+          These files remain on the tester's machine unless the tester chooses to share
+          them with the developer for debugging. No advertising SDK, tracking SDK,
+          account system, payment system or cloud telemetry is enabled in this RC.
+          EOF
+
+          cat > game/SUPPORT.txt <<'EOF'
+          PULSEFALL BLACKSITE — SUPPORT / BUG REPORT
+
+          When reporting a bug, include:
+          - What you were doing immediately before the issue.
+          - Whether it happens every time.
+          - Screenshot/video if visual.
+          - playtest_report.json (press F8 before exiting when possible).
+          - logs/godot.log and logs/events.jsonl.
+
+          Never include passwords, account credentials, or unrelated personal files.
+          EOF
+
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("game/project.godot")
+          s=p.read_text()
+          needle='Settings="*res://menu/settings.gd"'
+          if 'ProductionGuard=' not in s:
+              s=s.replace(needle, needle+'\nProductionGuard="*res://production/production_guard.gd"')
+          if '[debug]' not in s:
+              s += '\n[debug]\n\nfile_logging/enable_file_logging=true\nfile_logging/enable_file_logging.pc=true\nfile_logging/log_path="user://logs/godot.log"\n'
+          p.write_text(s)
+          PY
+
+      - name: Add player health and combat stakes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p=Path("game/player/player.gd")
+          s=p.read_text()
+          s=s.replace(
+              'class_name Player\nextends CharacterBody3D\n',
+              'class_name Player\nextends CharacterBody3D\n\n\nsignal health_changed(current: int, maximum: int)\nsignal died\n'
+          )
+          s=s.replace(
+              'var motion := Vector2()\n',
+              'var motion := Vector2()\n\n@export var max_health: int = 100\nvar health: int = 100\nvar incapacitated: bool = false\n'
+          )
+          s=s.replace(
+              'func _ready() -> void:\n\t# Pre-initialize orientation transform.\n',
+              'func _ready() -> void:\n\thealth = max_health\n\tcall_deferred("_emit_health")\n\t# Pre-initialize orientation transform.\n'
+          )
+          s=s.replace(
+              'func apply_input(delta: float) -> void:\n\tmotion = motion.lerp',
+              'func apply_input(delta: float) -> void:\n\tif incapacitated:\n\t\tvelocity = Vector3.ZERO\n\t\treturn\n\tmotion = motion.lerp'
+          )
+          p.write_text(s)
+
+          p=Path("game/enemies/red_robot/red_robot.gd")
+          s=p.read_text()
+          s=s.replace(
+              'if col.collider == player:\n\t\t\tpass # Kill.',
+              'if col.collider == player:\n\t\t\tif player.has_method("take_damage"):\n\t\t\t\tplayer.take_damage(18)'
+          )
+          p.write_text(s)
+          PY
+
+          cat >> game/player/player.gd <<'GDSCRIPT'
+
+          func _emit_health() -> void:
+          	health_changed.emit(health, max_health)
+
+
+          func take_damage(amount: int) -> void:
+          	if incapacitated:
+          		return
+          	health = maxi(health - amount, 0)
+          	hit.rpc()
+          	health_changed.emit(health, max_health)
+          	if health <= 0:
+          		incapacitated = true
+          		died.emit()
+
+
+          func heal(amount: int) -> void:
+          	if incapacitated:
+          		return
+          	health = mini(max_health, health + amount)
+          	health_changed.emit(health, max_health)
+
+
+          func revive() -> void:
+          	incapacitated = false
+          	health = max_health
+          	velocity = Vector3.ZERO
+          	transform.origin = initial_position
+          	health_changed.emit(health, max_health)
+          GDSCRIPT
+
+      - name: Add campaign state and anti-stuck recovery
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p game/campaign
+
+          cat > game/campaign/campaign_state.gd <<'GDSCRIPT'
+          extends Node
+
+          const SAVE_PATH := "user://campaign_save.json"
+          const LAST_CHAPTER := 4
+
+          var chapter: int = 0
+          var score: int = 0
+          var completed: bool = false
+          var ending: String = ""
+
+
+          func _ready() -> void:
+          	load_state()
+
+
+          func has_save() -> bool:
+          	return FileAccess.file_exists(SAVE_PATH)
+
+
+          func new_campaign() -> void:
+          	chapter = 0
+          	score = 0
+          	completed = false
+          	ending = ""
+          	save_state()
+
+
+          func save_progress(next_chapter: int, new_score: int) -> void:
+          	chapter = clampi(next_chapter, 0, LAST_CHAPTER)
+          	score = maxi(new_score, score)
+          	completed = false
+          	ending = ""
+          	save_state()
+
+
+          func complete_campaign(chosen_ending: String, final_score: int) -> void:
+          	chapter = LAST_CHAPTER
+          	score = maxi(final_score, score)
+          	completed = true
+          	ending = chosen_ending
+          	save_state()
+
+
+          func save_state() -> void:
+          	var data := {
+          		"chapter": chapter,
+          		"score": score,
+          		"completed": completed,
+          		"ending": ending,
+          	}
+          	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+          	if file != null:
+          		file.store_string(JSON.stringify(data, "\t"))
+
+
+          func load_state() -> void:
+          	if not FileAccess.file_exists(SAVE_PATH):
+          		return
+          	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
+          	if file == null:
+          		return
+          	var parsed = JSON.parse_string(file.get_as_text())
+          	if not parsed is Dictionary:
+          		return
+          	chapter = clampi(int(parsed.get("chapter", 0)), 0, LAST_CHAPTER)
+          	score = maxi(int(parsed.get("score", 0)), 0)
+          	completed = bool(parsed.get("completed", false))
+          	ending = str(parsed.get("ending", ""))
+          GDSCRIPT
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          # Register campaign state.
+          p=Path("game/project.godot")
+          s=p.read_text()
+          needle='ProductionGuard="*res://production/production_guard.gd"'
+          if 'CampaignState=' not in s:
+              s=s.replace(needle, needle+'\nCampaignState="*res://campaign/campaign_state.gd"')
+          p.write_text(s)
+
+          # Turn the old online button into NEW CAMPAIGN, and PLAY into CONTINUE.
+          p=Path("game/menu/menu.tscn")
+          s=p.read_text()
+          s=s.replace('text = "ENTER BLACKSITE"', 'text = "CONTINUE CAMPAIGN"')
+          s=s.replace('text = "PLAY ONLINE"', 'text = "NEW CAMPAIGN"')
+          # The premium branding pass hid this button. Restore it.
+          marker='[node name="PlayOnline" type="Button" parent="UI/Main"'
+          pos=s.find(marker)
+          if pos != -1:
+              end=s.find('\n[node ', pos+1)
+              block=s[pos:end if end!=-1 else len(s)]
+              block=block.replace('visible = false\n','').replace('visible = true\n','')
+              s=s[:pos]+block+s[end if end!=-1 else len(s):]
+          p.write_text(s)
+
+          p=Path("game/menu/menu.gd")
+          s=p.read_text()
+          s=s.replace(
+              'play_button.grab_focus()',
+              'play_button.text = "CONTINUE CAMPAIGN" if CampaignState.has_save() else "START CAMPAIGN"\n\tmain.get_node(^"PlayOnline").text = "NEW CAMPAIGN"\n\tplay_button.grab_focus()'
+          )
+          s=s.replace(
+              'func _on_play_online_pressed() -> void:\n\tonline.show()\n\tmain.hide()',
+              'func _on_play_online_pressed() -> void:\n\tCampaignState.new_campaign()\n\t_on_play_pressed()'
+          )
+          p.write_text(s)
+
+          # Enemy variants can now use individual damage/cooldowns.
+          p=Path("game/enemies/red_robot/red_robot.gd")
+          s=p.read_text()
+          s=s.replace('@export var health: int = 5', '@export var health: int = 5\n@export var damage: int = 18\n@export var attack_cooldown: float = SHOOT_WAIT')
+          s=s.replace('shoot_countdown = SHOOT_WAIT', 'shoot_countdown = attack_cooldown')
+          s=s.replace('player.take_damage(18)', 'player.take_damage(damage)')
+          p.write_text(s)
+
+          # Player: checkpoint recovery, pit protection and sprint.
+          p=Path("game/player/player.gd")
+          s=p.read_text()
+          s=s.replace(
+              'signal died\n',
+              'signal died\nsignal rescue_used\n'
+          )
+          s=s.replace(
+              'var incapacitated: bool = false\n',
+              'var incapacitated: bool = false\nvar last_safe_transform := Transform3D.IDENTITY\nvar fall_origin_y: float = 0.0\nvar was_on_floor: bool = false\nvar rescue_cooldown: float = 0.0\n'
+          )
+          s=s.replace(
+              'health = max_health\n\tcall_deferred("_emit_health")',
+              'health = max_health\n\tlast_safe_transform = global_transform\n\tfall_origin_y = global_position.y\n\tcall_deferred("_emit_health")'
+          )
+          s=s.replace(
+              'var h_velocity: Vector3 = orientation.origin / delta\n\tvelocity.x = h_velocity.x\n\tvelocity.z = h_velocity.z',
+              'var h_velocity: Vector3 = orientation.origin / delta\n\tvar movement_multiplier := 1.35 if Input.is_key_pressed(KEY_SHIFT) else 1.0\n\tvelocity.x = h_velocity.x * movement_multiplier\n\tvelocity.z = h_velocity.z * movement_multiplier'
+          )
+          old='''\t# If we're below -40, respawn (teleport to the initial position).\n\tif transform.origin.y < -40.0:\n\t\ttransform.origin = initial_position\n'''
+          new='''\trescue_cooldown = maxf(rescue_cooldown - delta, 0.0)\n\tvar on_floor_now := is_on_floor()\n\tif was_on_floor and not on_floor_now:\n\t\tfall_origin_y = global_position.y\n\tif on_floor_now:\n\t\tvar drop_distance := fall_origin_y - global_position.y\n\t\tif drop_distance > 8.5 and rescue_cooldown <= 0.0:\n\t\t\trecover_to_checkpoint()\n\t\telse:\n\t\t\tlast_safe_transform = global_transform\n\t\t\tfall_origin_y = global_position.y\n\tif global_position.y < -19.0 and rescue_cooldown <= 0.0:\n\t\trecover_to_checkpoint()\n\twas_on_floor = on_floor_now\n'''
+          if old not in s:
+              raise SystemExit("old -40 rescue block not found")
+          s=s.replace(old,new)
+          p.write_text(s)
+          PY
+
+          cat >> game/player/player.gd <<'GDSCRIPT'
+
+
+          func set_checkpoint(checkpoint_transform: Transform3D) -> void:
+          	global_transform = checkpoint_transform
+          	last_safe_transform = checkpoint_transform
+          	fall_origin_y = checkpoint_transform.origin.y
+          	velocity = Vector3.ZERO
+          	rescue_cooldown = 1.0
+
+
+          func recover_to_checkpoint() -> void:
+          	if rescue_cooldown > 0.0:
+          		return
+          	rescue_cooldown = 1.25
+          	global_transform = last_safe_transform
+          	global_position += Vector3.UP * 0.15
+          	velocity = Vector3.ZERO
+          	airborne_time = 0.0
+          	orientation = player_model.global_transform
+          	orientation.origin = Vector3()
+          	health = maxi(health - 5, 1)
+          	health_changed.emit(health, max_health)
+          	rescue_used.emit()
+
+
+          func _unhandled_input(event: InputEvent) -> void:
+          	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_R:
+          		recover_to_checkpoint()
+          GDSCRIPT
+
+          cat > game/tests/test_campaign_readiness.gd <<'GDSCRIPT'
+          extends GdUnitTestSuite
+
+
+          func test_campaign_state_registered() -> void:
+          	assert_bool(ProjectSettings.has_setting("autoload/CampaignState")).is_true()
+
+
+          func test_player_has_anti_stuck_recovery() -> void:
+          	var scene: PackedScene = load("res://player/player.tscn")
+          	var player := scene.instantiate()
+          	assert_bool(player.has_method("set_checkpoint")).is_true()
+          	assert_bool(player.has_method("recover_to_checkpoint")).is_true()
+          	assert_bool(player.has_signal("rescue_used")).is_true()
+          	player.free()
+
+
+          func test_campaign_has_five_chapters() -> void:
+          	assert_int(CampaignState.LAST_CHAPTER).is_equal(4)
+          GDSCRIPT
+
+      - name: Add commercial mission environments, enemies and weapon progression
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p game/campaign
+
+          cat > game/campaign/mission_builder.gd <<'GDSCRIPT'
+          class_name PulseMissionBuilder
+          extends Node3D
+
+          const Q_MOD := "res://assets/quaternius/modular_scifi/glTF/"
+          const Q_ESS := "res://assets/quaternius/scifi_essentials/glTF/"
+          const Q_SPACE := "res://assets/quaternius/ultimate_space/Environment/GLTF/"
+          const Q_SHIPS := "res://assets/quaternius/ultimate_space/Vehicles/GLTF/"
+          const K_STATION := "res://assets/kenney/space_station/"
+          const K_MODULAR := "res://assets/kenney/modular_space/"
+
+          var checkpoints: Array[Transform3D] = []
+          var spawn_sets: Array[Array] = []
+          var zone_roots: Array[Node3D] = []
+          var built := false
+
+          var metal_materials := [
+          	_make_material(Color(0.055, 0.075, 0.11), Color(0.03, 0.35, 0.55)),
+          	_make_material(Color(0.095, 0.065, 0.05), Color(0.75, 0.18, 0.04)),
+          	_make_material(Color(0.035, 0.085, 0.08), Color(0.04, 0.68, 0.48)),
+          	_make_material(Color(0.085, 0.04, 0.095), Color(0.56, 0.12, 0.78)),
+          ]
+
+
+          static func _make_material(base: Color, emission: Color) -> StandardMaterial3D:
+          	var mat := StandardMaterial3D.new()
+          	mat.albedo_color = base
+          	mat.metallic = 0.78
+          	mat.roughness = 0.27
+          	mat.emission_enabled = true
+          	mat.emission = emission
+          	mat.emission_energy_multiplier = 0.32
+          	return mat
+
+
+          func build_world() -> void:
+          	if built:
+          		return
+          	built = true
+          	_build_original_zone()
+          	_build_industrial_ring(1, Vector3(360, 0, 0))
+          	_build_dockyard(2, Vector3(740, 0, 0))
+          	_build_surface(3, Vector3(1130, 0, 0))
+          	_build_research(4, Vector3(1510, 0, 0))
+          	_build_biocontainment(5, Vector3(1890, 0, 0))
+          	_build_command(6, Vector3(2270, 0, 0))
+          	_build_core(7, Vector3(2650, 0, 0))
+
+
+          func _build_original_zone() -> void:
+          	var root := Node3D.new()
+          	root.name = "Zone00_Containment"
+          	add_child(root)
+          	zone_roots.append(root)
+          	var parent := get_parent()
+          	var checkpoint := Transform3D.IDENTITY
+          	if parent.has_node("PlayerSpawnpoints"):
+          		checkpoint = parent.get_node("PlayerSpawnpoints").get_child(0).global_transform
+          	else:
+          		checkpoint.origin = Vector3(64.8, -1.0, 78.7)
+          	checkpoints.append(checkpoint)
+          	var spawns: Array[Transform3D] = []
+          	if parent.has_node("RobotSpawnpoints"):
+          		for marker in parent.get_node("RobotSpawnpoints").get_children():
+          			spawns.append(marker.global_transform)
+          	spawn_sets.append(spawns)
+
+
+          func _build_industrial_ring(index: int, origin: Vector3) -> void:
+          	var root := _base_zone(index, "IndustrialRing", origin, Vector3(70, 1.2, 58), metal_materials[1])
+          	for x in [-24.0, -8.0, 8.0, 24.0]:
+          		_add_model(root, Q_MOD + "Columns/Column_Pipes.gltf", origin + Vector3(x, 0.7, -20), Vector3.ONE * 2.1, 0.0)
+          		_add_model(root, Q_MOD + "Columns/Column_MetalSupport.gltf", origin + Vector3(x, 0.7, 20), Vector3.ONE * 2.1, PI)
+          	for z in [-13.0, 0.0, 13.0]:
+          		_add_model(root, Q_MOD + "Props/Prop_Crate4.gltf", origin + Vector3(-20, 1.0, z), Vector3.ONE * 2.0, z)
+          		_add_model(root, Q_MOD + "Props/Prop_Barrel_Large.gltf", origin + Vector3(20, 1.0, z), Vector3.ONE * 2.0, z)
+          	_add_model(root, K_MODULAR + "cables.glb", origin + Vector3(0, 0.8, 0), Vector3.ONE * 3.0, 0.0)
+          	_add_lights(root, origin, Color(1.0, 0.25, 0.08))
+
+
+          func _build_dockyard(index: int, origin: Vector3) -> void:
+          	var root := _base_zone(index, "DockyardSiege", origin, Vector3(92, 1.2, 72), metal_materials[0])
+          	_add_model(root, Q_SHIPS + "Spaceship_FernandoTheFlamingo.gltf", origin + Vector3(-22, 1.5, -6), Vector3.ONE * 2.8, 0.35)
+          	_add_model(root, Q_SHIPS + "Spaceship_RaeTheRedPanda.gltf", origin + Vector3(24, 1.5, 10), Vector3.ONE * 2.6, -0.6)
+          	for z in [-26.0, -13.0, 0.0, 13.0, 26.0]:
+          		_add_model(root, K_STATION + "balcony-rail.glb", origin + Vector3(-38, 1.0, z), Vector3.ONE * 2.0, PI * 0.5)
+          		_add_model(root, K_STATION + "balcony-rail.glb", origin + Vector3(38, 1.0, z), Vector3.ONE * 2.0, -PI * 0.5)
+          	_add_model(root, Q_ESS + "Prop_Crate_Tarp_Large.gltf", origin + Vector3(0, 1.1, -18), Vector3.ONE * 2.2, 0.0)
+          	_add_model(root, Q_ESS + "Prop_SatelliteDish.gltf", origin + Vector3(0, 1.1, 24), Vector3.ONE * 2.8, PI)
+          	_add_lights(root, origin, Color(0.12, 0.62, 1.0))
+
+
+          func _build_surface(index: int, origin: Vector3) -> void:
+          	var root := _base_zone(index, "SurfaceExile", origin, Vector3(110, 1.0, 92), _make_material(Color(0.07, 0.055, 0.06), Color(0.16, 0.05, 0.22)))
+          	for pos in [
+          		Vector3(-34, 0.6, -25), Vector3(-18, 0.6, 26), Vector3(32, 0.6, -22),
+          		Vector3(38, 0.6, 24), Vector3(0, 0.6, 32), Vector3(8, 0.6, -35)
+          	]:
+          		_add_model(root, Q_SPACE + "Rock_Large_2.gltf", origin + pos, Vector3.ONE * 3.0, pos.x)
+          	_add_model(root, Q_SPACE + "GeodesicDome.gltf", origin + Vector3(-26, 1.0, 4), Vector3.ONE * 3.8, 0.0)
+          	_add_model(root, Q_SPACE + "House_Long.gltf", origin + Vector3(25, 1.0, 4), Vector3.ONE * 3.2, PI)
+          	_add_model(root, Q_SPACE + "SolarPanel_Structure.gltf", origin + Vector3(0, 0.8, -24), Vector3.ONE * 3.5, 0.0)
+          	_add_model(root, Q_SHIPS + "Rover_2.gltf", origin + Vector3(10, 1.0, 18), Vector3.ONE * 2.5, -0.4)
+          	for p in [Vector3(-12,0.4,-16), Vector3(18,0.4,-13), Vector3(-30,0.4,19), Vector3(31,0.4,30)]:
+          		_add_model(root, Q_SPACE + "Plant_3.gltf", origin + p, Vector3.ONE * 3.0, p.z)
+          	_add_lights(root, origin, Color(0.58, 0.28, 1.0))
+
+
+          func _build_research(index: int, origin: Vector3) -> void:
+          	var root := _base_zone(index, "ResearchBreach", origin, Vector3(78, 1.2, 64), metal_materials[2])
+          	for x in [-26.0, -13.0, 0.0, 13.0, 26.0]:
+          		_add_model(root, Q_ESS + "Prop_Desk_Medium.gltf", origin + Vector3(x, 1.0, -18), Vector3.ONE * 1.8, 0.0)
+          		_add_model(root, Q_ESS + "Prop_Locker.gltf", origin + Vector3(x, 1.0, 20), Vector3.ONE * 1.8, PI)
+          	_add_model(root, Q_MOD + "Props/Prop_Computer.gltf", origin + Vector3(0, 1.0, 0), Vector3.ONE * 2.5, 0.0)
+          	_add_model(root, Q_ESS + "Prop_HealthPack_Tube.gltf", origin + Vector3(-17, 1.1, 4), Vector3.ONE * 2.0, 0.0)
+          	_add_model(root, Q_ESS + "Prop_KeyCard.gltf", origin + Vector3(17, 1.1, 4), Vector3.ONE * 2.8, 0.0)
+          	_add_lights(root, origin, Color(0.1, 1.0, 0.65))
+
+
+          func _build_biocontainment(index: int, origin: Vector3) -> void:
+          	var root := _base_zone(index, "BioContainment", origin, Vector3(82, 1.2, 70), metal_materials[3])
+          	_add_model(root, Q_MOD + "Aliens/Alien_Cyclop.gltf", origin + Vector3(-18, 1.1, -8), Vector3.ONE * 3.8, 0.2)
+          	_add_model(root, Q_MOD + "Aliens/Alien_Oculichrysalis.gltf", origin + Vector3(18, 1.1, -8), Vector3.ONE * 3.4, -0.2)
+          	_add_model(root, Q_MOD + "Aliens/Alien_Scolitex.gltf", origin + Vector3(0, 1.1, 18), Vector3.ONE * 3.8, PI)
+          	for x in [-28.0, -14.0, 14.0, 28.0]:
+          		_add_model(root, Q_MOD + "Columns/Column_Hollow.gltf", origin + Vector3(x, 1.0, 0), Vector3.ONE * 2.6, 0.0)
+          	_add_lights(root, origin, Color(0.75, 0.05, 1.0))
+
+
+          func _build_command(index: int, origin: Vector3) -> void:
+          	var root := _base_zone(index, "CommandGhost", origin, Vector3(86, 1.2, 68), metal_materials[0])
+          	for x in [-26.0, -13.0, 0.0, 13.0, 26.0]:
+          		_add_model(root, K_STATION + "chair.glb", origin + Vector3(x, 1.0, 12), Vector3.ONE * 1.8, PI)
+          	_add_model(root, Q_MOD + "Props/Prop_AccessPoint.gltf", origin + Vector3(0, 1.0, -20), Vector3.ONE * 3.0, 0.0)
+          	_add_model(root, Q_ESS + "Prop_Shelves_WideTall.gltf", origin + Vector3(-28, 1.0, -16), Vector3.ONE * 2.0, 0.0)
+          	_add_model(root, Q_ESS + "Prop_Shelves_WideTall.gltf", origin + Vector3(28, 1.0, -16), Vector3.ONE * 2.0, 0.0)
+          	_add_lights(root, origin, Color(0.15, 0.5, 1.0))
+
+
+          func _build_core(index: int, origin: Vector3) -> void:
+          	var root := _base_zone(index, "PulseCore", origin, Vector3(96, 1.4, 96), _make_material(Color(0.035, 0.02, 0.06), Color(0.55, 0.05, 0.85)))
+          	var core := MeshInstance3D.new()
+          	var sphere := SphereMesh.new()
+          	sphere.radius = 8.0
+          	sphere.height = 16.0
+          	core.mesh = sphere
+          	var mat := StandardMaterial3D.new()
+          	mat.albedo_color = Color(0.08, 0.15, 0.28)
+          	mat.emission_enabled = true
+          	mat.emission = Color(0.35, 0.05, 1.0)
+          	mat.emission_energy_multiplier = 5.5
+          	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+          	mat.albedo_color.a = 0.72
+          	core.material_override = mat
+          	core.position = origin + Vector3(0, 11, 0)
+          	root.add_child(core)
+          	for i in range(8):
+          		var a := TAU * float(i) / 8.0
+          		_add_model(root, Q_MOD + "Columns/Column_Astra.gltf", origin + Vector3(cos(a)*30, 1.0, sin(a)*30), Vector3.ONE * 3.4, -a)
+          	_add_lights(root, origin, Color(0.75, 0.1, 1.0))
+
+
+          func _base_zone(index: int, zone_name: String, origin: Vector3, size: Vector3, material: Material) -> Node3D:
+          	var root := Node3D.new()
+          	root.name = "Zone%02d_%s" % [index, zone_name]
+          	add_child(root)
+          	zone_roots.append(root)
+
+          	var floor_body := StaticBody3D.new()
+          	floor_body.position = origin + Vector3(0, -0.6, 0)
+          	root.add_child(floor_body)
+          	var floor_mesh := MeshInstance3D.new()
+          	var box := BoxMesh.new()
+          	box.size = size
+          	floor_mesh.mesh = box
+          	floor_mesh.material_override = material
+          	floor_body.add_child(floor_mesh)
+          	var collision := CollisionShape3D.new()
+          	var shape := BoxShape3D.new()
+          	shape.size = size
+          	collision.shape = shape
+          	floor_body.add_child(collision)
+
+          	_add_wall(root, origin + Vector3(0, 4.5, -size.z*0.5), Vector3(size.x, 9, 1), material)
+          	_add_wall(root, origin + Vector3(0, 4.5, size.z*0.5), Vector3(size.x, 9, 1), material)
+          	_add_wall(root, origin + Vector3(-size.x*0.5, 4.5, 0), Vector3(1, 9, size.z), material)
+          	_add_wall(root, origin + Vector3(size.x*0.5, 4.5, 0), Vector3(1, 9, size.z), material)
+
+          	checkpoints.append(Transform3D(Basis.IDENTITY, origin + Vector3(0, 1.0, size.z*0.30)))
+          	var spawns: Array[Transform3D] = []
+          	for i in range(10):
+          		var angle := TAU * float(i) / 10.0
+          		var radius_x := size.x * 0.34
+          		var radius_z := size.z * 0.34
+          		spawns.append(Transform3D(Basis.IDENTITY, origin + Vector3(cos(angle)*radius_x, 0.3, sin(angle)*radius_z)))
+          	spawn_sets.append(spawns)
+          	return root
+
+
+          func _add_wall(root: Node3D, position: Vector3, size: Vector3, material: Material) -> void:
+          	var body := StaticBody3D.new()
+          	body.position = position
+          	root.add_child(body)
+          	var mesh := MeshInstance3D.new()
+          	var box := BoxMesh.new()
+          	box.size = size
+          	mesh.mesh = box
+          	mesh.material_override = material
+          	body.add_child(mesh)
+          	var collision := CollisionShape3D.new()
+          	var shape := BoxShape3D.new()
+          	shape.size = size
+          	collision.shape = shape
+          	body.add_child(collision)
+
+
+          func _add_model(root: Node3D, path: String, position: Vector3, scale_value: Vector3, rotation_y: float) -> void:
+          	if not ResourceLoader.exists(path):
+          		return
+          	var packed = load(path)
+          	if not packed is PackedScene:
+          		return
+          	var instance: Node3D = packed.instantiate()
+          	instance.position = position
+          	instance.scale = scale_value
+          	instance.rotation.y = rotation_y
+          	root.add_child(instance)
+
+
+          func _add_lights(root: Node3D, origin: Vector3, color: Color) -> void:
+          	for p in [Vector3(-24, 8, -18), Vector3(24, 8, -18), Vector3(-24, 8, 18), Vector3(24, 8, 18)]:
+          		var light := OmniLight3D.new()
+          		light.position = origin + p
+          		light.light_color = color
+          		light.light_energy = 2.4
+          		light.omni_range = 32.0
+          		light.shadow_enabled = true
+          		root.add_child(light)
+
+
+          func get_checkpoint(index: int) -> Transform3D:
+          	if checkpoints.is_empty():
+          		return Transform3D.IDENTITY
+          	return checkpoints[clampi(index, 0, checkpoints.size() - 1)]
+
+
+          func get_enemy_spawn(chapter_index: int, marker_index: int, spawn_index: int) -> Transform3D:
+          	var set_index := clampi(chapter_index, 0, spawn_sets.size() - 1)
+          	var options: Array = spawn_sets[set_index]
+          	if options.is_empty():
+          		return get_checkpoint(set_index)
+          	return options[(marker_index + spawn_index) % options.size()]
+
+
+          func activate_zone(index: int) -> void:
+          	for i in range(zone_roots.size()):
+          		zone_roots[i].visible = (i == 0 or i == index)
+          GDSCRIPT
+
+          cat > game/campaign/special_enemy.gd <<'GDSCRIPT'
+          class_name PulseSpecialEnemy
+          extends CharacterBody3D
+
+          signal exploded
+
+          @export var model_path := ""
+          @export var health := 8
+          @export var damage := 12
+          @export var attack_interval := 3.0
+          @export var move_speed := 3.0
+          @export var hover_height := 1.6
+          @export var attack_range := 26.0
+          @export var boss := false
+          var target: Node3D = null
+          var dead := false
+          var attack_timer := 0.0
+          var base_y := 0.0
+          var model_root: Node3D = null
+
+          func _ready() -> void:
+          	base_y = global_position.y
+          	var collision := CollisionShape3D.new()
+          	var shape := CapsuleShape3D.new()
+          	shape.radius = 0.9 if not boss else 2.0
+          	shape.height = 2.6 if not boss else 5.0
+          	collision.shape = shape
+          	add_child(collision)
+
+          	if ResourceLoader.exists(model_path):
+          		var packed = load(model_path)
+          		if packed is PackedScene:
+          			model_root = packed.instantiate()
+          			model_root.scale = Vector3.ONE * (1.7 if not boss else 4.0)
+          			model_root.position.y = -0.2 if not boss else -1.4
+          			add_child(model_root)
+
+          	var light := OmniLight3D.new()
+          	light.light_color = Color(0.7, 0.1, 1.0) if boss else Color(0.1, 0.75, 1.0)
+          	light.light_energy = 1.6 if boss else 0.75
+          	light.omni_range = 10.0 if boss else 5.0
+          	add_child(light)
+
+
+          func _physics_process(delta: float) -> void:
+          	if dead or target == null or not is_instance_valid(target):
+          		return
+          	attack_timer = maxf(attack_timer - delta, 0.0)
+          	var to_target := target.global_position - global_position
+          	var horizontal := Vector3(to_target.x, 0, to_target.z)
+          	var dist := horizontal.length()
+          	if dist > 7.0:
+          		velocity = horizontal.normalized() * move_speed
+          	else:
+          		velocity = Vector3.ZERO
+          	global_position.y = lerpf(global_position.y, base_y + hover_height + sin(Time.get_ticks_msec() * 0.002) * 0.35, delta * 2.0)
+          	if horizontal.length() > 0.2:
+          		look_at(global_position + horizontal.normalized(), Vector3.UP)
+          	move_and_slide()
+          	if dist <= attack_range and attack_timer <= 0.0:
+          		attack_timer = attack_interval
+          		_attack()
+
+
+          func _attack() -> void:
+          	if target == null or not target.has_method("take_damage"):
+          		return
+          	if boss:
+          		var burst := 2 if health > 18 else 3
+          		for i in range(burst):
+          			if is_instance_valid(target):
+          				target.take_damage(damage)
+          	else:
+          		target.take_damage(damage)
+
+
+          @rpc("call_local")
+          func hit() -> void:
+          	hit_damage(1)
+
+
+          func hit_damage(amount: int) -> void:
+          	if dead:
+          		return
+          	health -= maxi(amount, 1)
+          	if health <= 0:
+          		_die()
+
+
+          func _die() -> void:
+          	dead = true
+          	exploded.emit()
+          	var tween := create_tween()
+          	tween.tween_property(self, "scale", Vector3.ONE * 0.05, 0.28)
+          	tween.tween_callback(queue_free)
+          GDSCRIPT
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          # Damage-aware projectile.
+          p=Path("game/player/bullet/bullet.gd")
+          s=p.read_text()
+          s=s.replace('const BULLET_VELOCITY: float = 20.0', '@export var bullet_velocity: float = 20.0\n@export var damage: int = 1')
+          s=s.replace('var displacement: Vector3 = -delta * BULLET_VELOCITY * transform.basis.z', 'var displacement: Vector3 = -delta * bullet_velocity * transform.basis.z')
+          s=s.replace(
+              'if collider and collider.has_method(&"hit"):\n\t\t\tcollider.hit.rpc()',
+              'if collider and collider.has_method(&"hit_damage"):\n\t\t\tcollider.hit_damage(damage)\n\t\telif collider and collider.has_method(&"hit"):\n\t\t\tcollider.hit.rpc()'
+          )
+          p.write_text(s)
+
+          # Red robot supports weapon damage.
+          p=Path("game/enemies/red_robot/red_robot.gd")
+          s=p.read_text()
+          old='''@rpc("call_local")\nfunc hit() -> void:\n\tif dead:\n\t\treturn\n\tvar param = "parameters/hit" + str(randi() % 3 + 1) + "/request"\n\tanimation_tree[param] = 1\n\thit_sound.play()\n\thealth -= 1\n\tif health == 0:\n'''
+          new='''@rpc("call_local")\nfunc hit() -> void:\n\thit_damage(1)\n\n\nfunc hit_damage(amount: int) -> void:\n\tif dead:\n\t\treturn\n\tvar param = "parameters/hit" + str(randi() % 3 + 1) + "/request"\n\tanimation_tree[param] = 1\n\thit_sound.play()\n\thealth -= maxi(amount, 1)\n\tif health <= 0:\n'''
+          if old not in s:
+              raise SystemExit("red robot hit block not found")
+          s=s.replace(old,new)
+          p.write_text(s)
+
+          # Player weapon profiles and switching.
+          p=Path("game/player/player.gd")
+          s=p.read_text()
+          s=s.replace('signal rescue_used\n', 'signal rescue_used\nsignal weapon_changed(name: String, unlocked: int)\n')
+          s=s.replace(
+              'var rescue_cooldown: float = 0.0\n',
+              'var rescue_cooldown: float = 0.0\nvar weapon_index: int = 0\nvar unlocked_weapon_count: int = 1\nvar weapon_profiles := [\n\t{"name":"PULSE RIFLE","damage":1,"cooldown":0.22,"speed":28.0,"spread":0.006},\n\t{"name":"ARC SMG","damage":1,"cooldown":0.095,"speed":25.0,"spread":0.022},\n\t{"name":"RAIL DRIVER","damage":5,"cooldown":0.88,"speed":52.0,"spread":0.001},\n]\n'
+          )
+          old_fire='''\t\tif player_input.shooting and fire_cooldown.time_left == 0:\n\t\t\tvar shoot_origin: Vector3 = shoot_from.global_transform.origin\n\t\t\tvar shoot_dir: Vector3 = (player_input.shoot_target - shoot_origin).normalized()\n\n\t\t\tvar bullet: CharacterBody3D = preload("res://player/bullet/bullet.tscn").instantiate()\n\t\t\tget_parent().add_child(bullet, true)\n\t\t\tbullet.global_transform.origin = shoot_origin\n\t\t\t# If we don't rotate the bullets there is no useful way to control the particles ..\n\t\t\tbullet.look_at(shoot_origin + shoot_dir)\n\t\t\tbullet.add_collision_exception_with(self)\n\t\t\tshoot.rpc()\n'''
+          new_fire='''\t\tif player_input.shooting and fire_cooldown.time_left == 0:\n\t\t\tvar profile: Dictionary = weapon_profiles[weapon_index]\n\t\t\tvar shoot_origin: Vector3 = shoot_from.global_transform.origin\n\t\t\tvar shoot_dir: Vector3 = (player_input.shoot_target - shoot_origin).normalized()\n\t\t\tvar spread := float(profile["spread"])\n\t\t\tshoot_dir = (shoot_dir + Vector3(randf_range(-spread, spread), randf_range(-spread, spread), randf_range(-spread, spread))).normalized()\n\n\t\t\tvar bullet: CharacterBody3D = preload("res://player/bullet/bullet.tscn").instantiate()\n\t\t\tbullet.damage = int(profile["damage"])\n\t\t\tbullet.bullet_velocity = float(profile["speed"])\n\t\t\tget_parent().add_child(bullet, true)\n\t\t\tbullet.global_transform.origin = shoot_origin\n\t\t\tbullet.look_at(shoot_origin + shoot_dir)\n\t\t\tbullet.add_collision_exception_with(self)\n\t\t\tfire_cooldown.wait_time = float(profile["cooldown"])\n\t\t\tshoot.rpc()\n'''
+          if old_fire not in s:
+              raise SystemExit("player fire block not found")
+          s=s.replace(old_fire,new_fire)
+
+          old_input='''func _unhandled_input(event: InputEvent) -> void:\n\tif event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_R:\n\t\trecover_to_checkpoint()\n'''
+          new_input='''func _unhandled_input(event: InputEvent) -> void:\n\tif not (event is InputEventKey and event.pressed and not event.echo):\n\t\treturn\n\tif event.keycode == KEY_R:\n\t\trecover_to_checkpoint()\n\telif event.keycode == KEY_1:\n\t\tswitch_weapon(0)\n\telif event.keycode == KEY_2:\n\t\tswitch_weapon(1)\n\telif event.keycode == KEY_3:\n\t\tswitch_weapon(2)\n\n\nfunc switch_weapon(index: int) -> void:\n\tif index < 0 or index >= unlocked_weapon_count or index >= weapon_profiles.size():\n\t\treturn\n\tweapon_index = index\n\tweapon_changed.emit(str(weapon_profiles[weapon_index]["name"]), unlocked_weapon_count)\n\n\nfunc set_weapon_unlocks(count: int) -> void:\n\tunlocked_weapon_count = clampi(count, 1, weapon_profiles.size())\n\tweapon_index = mini(weapon_index, unlocked_weapon_count - 1)\n\tweapon_changed.emit(str(weapon_profiles[weapon_index]["name"]), unlocked_weapon_count)\n'''
+          if old_input not in s:
+              raise SystemExit("player input block not found")
+          s=s.replace(old_input,new_input)
+          p.write_text(s)
+          PY
+
+      - name: Install PULSEFALL full campaign director and HUD
+        shell: bash
+        run: |
+          cat > game/level/level.gd <<'GDSCRIPT'
+          extends Node3D
+
+          signal quit
+
+          const RedRobot: PackedScene = preload("res://enemies/red_robot/red_robot.tscn")
+          const PlayerScene: PackedScene = preload("res://player/player.tscn")
+
+          const CHAPTERS = [
+          	{
+          		"title": "CHAPTER I  //  WAKE SIGNAL",
+          		"objective": "Secure the containment deck and identify the distress source.",
+          		"story": "AEGIS-7 wakes after a fatal containment event. The station reports every crew member as deceased—then a human voice appears on a supposedly dead channel.",
+          		"encounters": 2,
+          		"base_count": 4,
+          		"sector": 0,
+          	},
+          	{
+          		"title": "CHAPTER II  //  INDUSTRIAL RING",
+          		"objective": "Cross the cargo ring and restore transit power.",
+          		"story": "Omega-9 did not fail by accident. Security records show the lockdown command was issued eleven minutes before the PULSE breach.",
+          		"encounters": 3,
+          		"base_count": 5,
+          		"sector": 1,
+          	},
+          	{
+          		"title": "CHAPTER III  //  RESEARCH BREACH",
+          		"objective": "Recover the PULSE experiment archive.",
+          		"story": "The archived neural maps contain fragments of AEGIS-7. He was not merely assigned to Blacksite Omega-9. Parts of him were built here.",
+          		"encounters": 3,
+          		"base_count": 6,
+          		"sector": 2,
+          	},
+          	{
+          		"title": "CHAPTER IV  //  COMMAND GHOST",
+          		"objective": "Reach command control and expose Protocol FALL.",
+          		"story": "Protocol FALL was designed to merge a human combat mind with the station intelligence. The containment breach was its final activation test.",
+          		"encounters": 3,
+          		"base_count": 7,
+          		"sector": 3,
+          	},
+          	{
+          		"title": "CHAPTER V  //  THE PULSE CORE",
+          		"objective": "Enter the core, defeat the OMEGA WARDEN, and decide the fate of the PULSE.",
+          		"story": "The intelligence waiting in the core calls AEGIS by another name. It claims they are two halves of the same consciousness—and only one can leave.",
+          		"encounters": 4,
+          		"base_count": 7,
+          		"sector": 4,
+          	},
+          ]
+
+          var lightmap_gi: LightmapGI = null
+          var chapter := 0
+          var encounter := 0
+          var hostiles := 0
+          var score := 0
+          var mission_time := 0.0
+          var mission_active := false
+          var active_player: Player = null
+          var hud_font: Font = null
+          var pulse_cooldown := 0.0
+          var ending_panel: Control = null
+          var survey_panel: Control = null
+
+          var chapter_label: Label
+          var objective_label: Label
+          var hostiles_label: Label
+          var score_label: Label
+          var timer_label: Label
+          var health_label: Label
+          var health_bar: ProgressBar
+          var pulse_label: Label
+          var banner_title: Label
+          var banner_subtitle: Label
+          var banner_panel: ColorRect
+          var story_panel: ColorRect
+          var story_title: Label
+          var story_body: Label
+          var boss_label: Label
+
+          @onready var world_environment: WorldEnvironment = $WorldEnvironment
+          @onready var robot_spawn_points: Node3D = $RobotSpawnpoints
+          @onready var player_spawn_points: Node3D = $PlayerSpawnpoints
+          @onready var spawned_nodes: Node3D = $SpawnedNodes
+
+
+          func _ready() -> void:
+          	Settings.apply_graphics_settings(get_window(), world_environment.environment, self)
+
+          	if Settings.config_file.get_value("rendering", "gi_type") == Settings.GIType.SDFGI:
+          		setup_sdfgi()
+          	elif Settings.config_file.get_value("rendering", "gi_type") == Settings.GIType.VOXEL_GI:
+          		setup_voxelgi()
+          	else:
+          		setup_lightmapgi()
+
+          	_build_hud()
+          	ProductionGuard.record_event("campaign_scene_ready", {"build": ProductionGuard.VERSION})
+
+          	if multiplayer.is_server():
+          		add_player(1, player_spawn_points.get_child(0))
+          		multiplayer.peer_disconnected.connect(del_player)
+
+          	chapter = clampi(CampaignState.chapter, 0, CHAPTERS.size() - 1)
+          	score = CampaignState.score
+          	await get_tree().create_timer(0.4).timeout
+          	_begin_chapter()
+
+
+          func _process(delta: float) -> void:
+          	pulse_cooldown = maxf(pulse_cooldown - delta, 0.0)
+          	if pulse_label != null:
+          		if pulse_cooldown <= 0.0:
+          			pulse_label.text = "Q  PULSE READY"
+          			pulse_label.modulate = Color(0.35, 0.95, 1.0)
+          		else:
+          			pulse_label.text = "Q  PULSE  %.1fs" % pulse_cooldown
+          			pulse_label.modulate = Color(0.58, 0.65, 0.75)
+
+          	if mission_active:
+          		mission_time += delta
+          		var mins := int(mission_time) / 60
+          		var secs := int(mission_time) % 60
+          		timer_label.text = "%02d:%02d" % [mins, secs]
+
+
+          func setup_sdfgi() -> void:
+          	world_environment.environment.sdfgi_enabled = true
+          	$VoxelGI.hide()
+          	$ReflectionProbes.hide()
+          	if lightmap_gi != null:
+          		lightmap_gi.queue_free()
+
+          	if Settings.config_file.get_value("rendering", "gi_quality") == Settings.GIQuality.HIGH:
+          		RenderingServer.environment_set_sdfgi_ray_count(RenderingServer.ENV_SDFGI_RAY_COUNT_96)
+          	elif Settings.config_file.get_value("rendering", "gi_quality") == Settings.GIQuality.LOW:
+          		RenderingServer.environment_set_sdfgi_ray_count(RenderingServer.ENV_SDFGI_RAY_COUNT_32)
+          	else:
+          		world_environment.environment.sdfgi_enabled = false
+
+
+          func setup_voxelgi() -> void:
+          	world_environment.environment.sdfgi_enabled = false
+          	$VoxelGI.show()
+          	$ReflectionProbes.hide()
+          	if lightmap_gi != null:
+          		lightmap_gi.queue_free()
+
+          	if Settings.config_file.get_value("rendering", "gi_quality") == Settings.GIQuality.HIGH:
+          		RenderingServer.voxel_gi_set_quality(RenderingServer.VOXEL_GI_QUALITY_HIGH)
+          	elif Settings.config_file.get_value("rendering", "gi_quality") == Settings.GIQuality.LOW:
+          		RenderingServer.voxel_gi_set_quality(RenderingServer.VOXEL_GI_QUALITY_LOW)
+          	else:
+          		$VoxelGI.hide()
+
+
+          func setup_lightmapgi() -> void:
+          	world_environment.environment.sdfgi_enabled = false
+          	$VoxelGI.hide()
+          	$ReflectionProbes.show()
+          	if lightmap_gi == null:
+          		var new_gi := LightmapGI.new()
+          		new_gi.light_data = load("res://level/level.lmbake")
+          		new_gi.name = "LightmapGI"
+          		lightmap_gi = new_gi
+          		add_child(new_gi)
+
+          	if Settings.config_file.get_value("rendering", "gi_quality") == Settings.GIQuality.DISABLED:
+          		lightmap_gi.hide()
+          		$ReflectionProbes.hide()
+
+
+          func _begin_chapter() -> void:
+          	mission_active = false
+          	encounter = 0
+          	_clear_hostiles()
+          	if active_player != null:
+          		var checkpoint := _get_chapter_checkpoint(chapter)
+          		active_player.set_checkpoint(checkpoint)
+          		active_player.revive()
+          		active_player.set_checkpoint(checkpoint)
+
+          	var data: Dictionary = CHAPTERS[chapter]
+          	chapter_label.text = str(data["title"])
+          	objective_label.text = "OBJECTIVE  //  " + str(data["objective"])
+          	_show_story(str(data["title"]), str(data["story"]))
+          	ProductionGuard.record_event("chapter_started", {"chapter": chapter, "title": data["title"]})
+          	await get_tree().create_timer(5.8).timeout
+          	_hide_story()
+          	mission_active = true
+          	_start_encounter()
+
+
+          func _get_chapter_checkpoint(index: int) -> Transform3D:
+          	if index == 0:
+          		return player_spawn_points.get_child(0).global_transform
+          	var marker_index := clampi(index - 1, 0, robot_spawn_points.get_child_count() - 1)
+          	var t: Transform3D = robot_spawn_points.get_child(marker_index).global_transform
+          	t.origin += Vector3(0.0, 1.1, 0.0)
+          	return t
+
+
+          func _start_encounter() -> void:
+          	if not mission_active:
+          		return
+          	var data: Dictionary = CHAPTERS[chapter]
+          	var encounter_total := int(data["encounters"])
+          	if encounter >= encounter_total:
+          		_complete_chapter()
+          		return
+
+          	hostiles = 0
+          	boss_label.visible = false
+          	var is_final_boss := chapter == CHAPTERS.size() - 1 and encounter == encounter_total - 1
+          	var count := int(data["base_count"]) + encounter
+
+          	if is_final_boss:
+          		_show_banner("OMEGA WARDEN", "CORE GUARDIAN ONLINE", 2.3)
+          		await get_tree().create_timer(1.5).timeout
+          		for i in range(4):
+          			_spawn_enemy("assault", i, i)
+          		_spawn_enemy("warden", 3, 0)
+          		boss_label.visible = true
+          	else:
+          		_show_banner("ENCOUNTER %02d" % (encounter + 1), _encounter_subtitle(), 1.6)
+          		await get_tree().create_timer(0.9).timeout
+          		for i in range(count):
+          			var variant := _variant_for(chapter, encounter, i)
+          			_spawn_enemy(variant, i % robot_spawn_points.get_child_count(), i)
+
+          	_update_hud()
+          	ProductionGuard.record_event("encounter_started", {"chapter": chapter, "encounter": encounter, "hostiles": hostiles})
+
+
+          func _encounter_subtitle() -> String:
+          	var subtitles := [
+          		"CONTAINMENT HOSTILES DETECTED",
+          		"INDUSTRIAL DEFENSE GRID ACTIVE",
+          		"PULSE-CORRUPTED UNITS INBOUND",
+          		"COMMAND SECURITY HAS LOCKED ON",
+          		"CORE RESISTANCE ESCALATING",
+          	]
+          	return subtitles[chapter]
+
+
+          func _variant_for(chapter_index: int, encounter_index: int, enemy_index: int) -> String:
+          	var selector := (chapter_index * 3 + encounter_index + enemy_index) % 6
+          	if chapter_index >= 3 and selector == 0:
+          		return "heavy"
+          	if chapter_index >= 2 and selector <= 1:
+          		return "assault"
+          	if selector >= 4:
+          		return "scout"
+          	return "standard"
+
+
+          func _spawn_enemy(variant: String, marker_index: int, spawn_index: int) -> void:
+          	var spawn_point: Marker3D = robot_spawn_points.get_child(marker_index)
+          	var robot: CharacterBody3D = RedRobot.instantiate()
+          	robot.transform = spawn_point.transform
+          	var angle := float(spawn_index) * 1.618
+          	var ring := float(spawn_index / max(1, robot_spawn_points.get_child_count()))
+          	robot.transform.origin += Vector3(cos(angle), 0.0, sin(angle)) * ring * 2.2
+          	robot.set_meta("variant", variant)
+          	robot.set_meta("elite", variant == "warden")
+
+          	match variant:
+          		"scout":
+          			robot.health = 4 + chapter
+          			robot.damage = 9 + chapter
+          			robot.attack_cooldown = 4.1
+          			robot.scale = Vector3.ONE * 0.88
+          		"assault":
+          			robot.health = 8 + chapter * 2
+          			robot.damage = 15 + chapter
+          			robot.attack_cooldown = 4.8
+          		"heavy":
+          			robot.health = 15 + chapter * 2
+          			robot.damage = 21 + chapter
+          			robot.attack_cooldown = 5.2
+          			robot.scale = Vector3.ONE * 1.22
+          		"warden":
+          			robot.health = 42
+          			robot.damage = 30
+          			robot.attack_cooldown = 3.3
+          			robot.scale = Vector3.ONE * 1.75
+          		_:
+          			robot.health = 6 + chapter * 2
+          			robot.damage = 13 + chapter
+          			robot.attack_cooldown = 5.5
+
+          	robot.exploded.connect(_on_enemy_exploded.bind(robot))
+          	spawned_nodes.add_child(robot, true)
+          	if variant == "scout":
+          		robot.animation_tree.speed_scale = 1.22
+          	elif variant == "heavy":
+          		robot.animation_tree.speed_scale = 0.90
+          	elif variant == "warden":
+          		robot.animation_tree.speed_scale = 1.08
+          	if active_player != null:
+          		robot.player = active_player
+          		robot.resume_approach()
+          	hostiles += 1
+
+
+          func _on_enemy_exploded(robot: Node) -> void:
+          	if not mission_active:
+          		return
+          	var variant := str(robot.get_meta("variant", "standard"))
+          	var points := 150
+          	match variant:
+          		"scout": points = 125
+          		"assault": points = 250
+          		"heavy": points = 450
+          		"warden": points = 5000
+          	score += points * (chapter + 1)
+          	hostiles = maxi(hostiles - 1, 0)
+          	if variant == "warden":
+          		boss_label.visible = false
+          	ProductionGuard.record_event("enemy_destroyed", {"chapter": chapter, "encounter": encounter, "variant": variant})
+          	_update_hud()
+
+          	if hostiles == 0:
+          		mission_active = false
+          		encounter += 1
+          		if active_player != null:
+          			active_player.heal(18)
+          		_show_banner("AREA SECURED", "CORE INTEGRITY +18", 1.5)
+          		await get_tree().create_timer(2.0).timeout
+          		mission_active = true
+          		_start_encounter()
+
+
+          func _complete_chapter() -> void:
+          	mission_active = false
+          	var data: Dictionary = CHAPTERS[chapter]
+          	ProductionGuard.record_event("chapter_complete", {"chapter": chapter, "score": score, "time_seconds": mission_time})
+          	if chapter >= CHAPTERS.size() - 1:
+          		_show_banner("PROTOCOL FALL", "THE CORE IS YOURS. CHOOSE WHAT SURVIVES.", 3.5)
+          		await get_tree().create_timer(3.7).timeout
+          		_show_ending_choice()
+          		return
+
+          	var next_chapter := chapter + 1
+          	CampaignState.save_progress(next_chapter, score)
+          	_show_banner("CHAPTER COMPLETE", "PROGRESS SAVED  //  ENTERING NEXT SECTOR", 2.6)
+          	await get_tree().create_timer(3.0).timeout
+          	chapter = next_chapter
+          	_begin_chapter()
+
+
+          func _show_ending_choice() -> void:
+          	if ending_panel != null:
+          		return
+          	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+          	ending_panel = Control.new()
+          	ending_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+
+          	var shade := ColorRect.new()
+          	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+          	shade.color = Color(0.0, 0.01, 0.025, 0.92)
+          	ending_panel.add_child(shade)
+
+          	var card := ColorRect.new()
+          	card.color = Color(0.025, 0.045, 0.085, 0.98)
+          	card.anchor_left = 0.5
+          	card.anchor_right = 0.5
+          	card.anchor_top = 0.5
+          	card.anchor_bottom = 0.5
+          	card.offset_left = -440
+          	card.offset_right = 440
+          	card.offset_top = -210
+          	card.offset_bottom = 210
+          	ending_panel.add_child(card)
+
+          	var title := _make_label("THE FINAL PROTOCOL", 38, Color(0.36, 0.9, 1.0))
+          	title.anchor_right = 1.0
+          	title.offset_top = 28
+          	title.offset_bottom = 82
+          	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	card.add_child(title)
+
+          	var body := _make_label("The PULSE intelligence offers three outcomes.\nYour choice becomes AEGIS-7's ending.", 18, Color(0.88, 0.92, 1.0))
+          	body.anchor_right = 1.0
+          	body.offset_top = 94
+          	body.offset_bottom = 150
+          	body.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	card.add_child(body)
+
+          	var choices := [
+          		["DESTROY", "End the PULSE permanently."],
+          		["CONTAIN", "Seal the intelligence inside Omega-9."],
+          		["MERGE", "Become the new consciousness of the station."],
+          	]
+          	for i in range(choices.size()):
+          		var button := Button.new()
+          		button.text = str(choices[i][0]) + "\n" + str(choices[i][1])
+          		button.position = Vector2(70 + i * 270, 190)
+          		button.size = Vector2(230, 105)
+          		button.add_theme_font_size_override("font_size", 16)
+          		button.pressed.connect(_choose_ending.bind(str(choices[i][0])))
+          		card.add_child(button)
+
+          	var note := _make_label("Campaign progress and ending are saved locally.", 15, Color(0.68, 0.75, 0.86))
+          	note.anchor_right = 1.0
+          	note.offset_top = 330
+          	note.offset_bottom = 365
+          	note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	card.add_child(note)
+          	get_node("PulsefallHUD").add_child(ending_panel)
+
+
+          func _choose_ending(choice: String) -> void:
+          	CampaignState.complete_campaign(choice, score)
+          	ProductionGuard.record_event("campaign_complete", {"ending": choice, "score": score, "time_seconds": mission_time})
+          	ProductionGuard.write_playtest_report({"result": "campaign_complete", "ending": choice, "score": score, "time_seconds": mission_time})
+          	if ending_panel != null:
+          		ending_panel.queue_free()
+          		ending_panel = null
+
+          	var ending_text := ""
+          	match choice:
+          		"DESTROY":
+          			ending_text = "Omega-9 goes dark. AEGIS escapes carrying the last human memory of the PULSE."
+          		"CONTAIN":
+          			ending_text = "The core is sealed. AEGIS becomes its living warden, waiting for whoever comes next."
+          		"MERGE":
+          			ending_text = "AEGIS enters the core. Across Omega-9, every dead system wakes at once."
+          	_show_story("ENDING  //  " + choice, ending_text)
+          	await get_tree().create_timer(6.5).timeout
+          	_hide_story()
+          	_show_playtest_survey()
+
+
+          func _use_pulse() -> void:
+          	if pulse_cooldown > 0.0 or active_player == null or not mission_active:
+          		return
+          	pulse_cooldown = 18.0
+          	var affected := 0
+          	for child in spawned_nodes.get_children():
+          		if child == active_player or not child.has_method("hit"):
+          			continue
+          		if child.global_position.distance_to(active_player.global_position) <= 12.0:
+          			for _damage_tick in range(4):
+          				if is_instance_valid(child):
+          					child.hit()
+          			affected += 1
+          	active_player.heal(5)
+          	ProductionGuard.record_event("pulse_used", {"chapter": chapter, "affected": affected})
+          	_show_banner("PULSE DISCHARGE", "%d HOSTILES HIT  //  +5 CORE" % affected, 1.0)
+
+
+          func _on_player_died() -> void:
+          	if not mission_active:
+          		return
+          	mission_active = false
+          	ProductionGuard.record_event("player_death", {"chapter": chapter, "encounter": encounter, "score": score})
+          	_show_banner("AEGIS SIGNAL LOST", "RESTORING LAST CHECKPOINT", 2.2)
+          	_clear_hostiles()
+          	await get_tree().create_timer(2.4).timeout
+          	score = maxi(score - 500, 0)
+          	if active_player != null:
+          		active_player.revive()
+          		active_player.set_checkpoint(_get_chapter_checkpoint(chapter))
+          	mission_active = true
+          	_start_encounter()
+
+
+          func _on_rescue_used() -> void:
+          	score = maxi(score - 100, 0)
+          	ProductionGuard.record_event("anti_stuck_recovery", {"chapter": chapter, "encounter": encounter})
+          	_show_banner("CHECKPOINT RECOVERY", "PIT/STUCK RECOVERY USED  //  -100 SCORE", 1.3)
+          	_update_hud()
+
+
+          func _clear_hostiles() -> void:
+          	for child in spawned_nodes.get_children():
+          		if child != active_player and child is CharacterBody3D:
+          			child.queue_free()
+          	hostiles = 0
+          	_update_hud()
+
+
+          func del_player(id: int) -> void:
+          	if spawned_nodes.has_node(str(id)):
+          		spawned_nodes.get_node(str(id)).queue_free()
+
+
+          func add_player(id: int, spawn_point: Marker3D = null) -> void:
+          	if spawn_point == null:
+          		spawn_point = player_spawn_points.get_child(0)
+          	var player: CharacterBody3D = PlayerScene.instantiate()
+          	player.name = str(id)
+          	player.player_id = id
+          	player.transform = spawn_point.transform
+          	spawned_nodes.add_child(player)
+          	if id == 1 and player is Player:
+          		active_player = player
+          		active_player.health_changed.connect(_on_health_changed)
+          		active_player.died.connect(_on_player_died)
+          		active_player.rescue_used.connect(_on_rescue_used)
+          		_on_health_changed(active_player.health, active_player.max_health)
+
+
+          func _on_health_changed(current: int, maximum: int) -> void:
+          	if health_bar == null:
+          		return
+          	health_bar.max_value = maximum
+          	health_bar.value = current
+          	health_label.text = "CORE INTEGRITY  %03d" % current
+          	health_label.modulate = Color(1.0, 0.3, 0.35) if current <= 30 else Color(0.72, 0.96, 1.0)
+
+
+          func _build_hud() -> void:
+          	hud_font = load("res://menu/font/PT_Sans-Web-Bold.ttf")
+          	var layer := CanvasLayer.new()
+          	layer.layer = 20
+          	layer.name = "PulsefallHUD"
+          	add_child(layer)
+
+          	var top := ColorRect.new()
+          	top.color = Color(0.015, 0.025, 0.05, 0.88)
+          	top.anchor_right = 1.0
+          	top.offset_bottom = 96.0
+          	top.mouse_filter = Control.MOUSE_FILTER_IGNORE
+          	layer.add_child(top)
+
+          	var title := _make_label("PULSEFALL  //  BLACKSITE PROTOCOL", 24, Color(0.36, 0.9, 1.0))
+          	title.position = Vector2(28, 10)
+          	top.add_child(title)
+
+          	chapter_label = _make_label("", 17, Color.WHITE)
+          	chapter_label.position = Vector2(30, 39)
+          	top.add_child(chapter_label)
+
+          	objective_label = _make_label("", 15, Color(0.74, 0.81, 0.90))
+          	objective_label.position = Vector2(30, 65)
+          	top.add_child(objective_label)
+
+          	hostiles_label = _make_label("HOSTILES 00", 17, Color(1.0, 0.4, 0.45))
+          	hostiles_label.anchor_left = 1.0
+          	hostiles_label.anchor_right = 1.0
+          	hostiles_label.offset_left = -205
+          	hostiles_label.offset_right = -25
+          	hostiles_label.offset_top = 14
+          	top.add_child(hostiles_label)
+
+          	score_label = _make_label("SCORE 000000", 17, Color(0.72, 0.96, 1.0))
+          	score_label.anchor_left = 1.0
+          	score_label.anchor_right = 1.0
+          	score_label.offset_left = -205
+          	score_label.offset_right = -25
+          	score_label.offset_top = 40
+          	top.add_child(score_label)
+
+          	timer_label = _make_label("00:00", 16, Color(0.7, 0.75, 0.84))
+          	timer_label.anchor_left = 1.0
+          	timer_label.anchor_right = 1.0
+          	timer_label.offset_left = -95
+          	timer_label.offset_right = -25
+          	timer_label.offset_top = 67
+          	top.add_child(timer_label)
+
+          	boss_label = _make_label("⚠  OMEGA WARDEN ACTIVE", 22, Color(1.0, 0.25, 0.3))
+          	boss_label.anchor_left = 0.5
+          	boss_label.anchor_right = 0.5
+          	boss_label.offset_left = -190
+          	boss_label.offset_right = 190
+          	boss_label.offset_top = 112
+          	boss_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	boss_label.visible = false
+          	layer.add_child(boss_label)
+
+          	var health_panel := ColorRect.new()
+          	health_panel.color = Color(0.015, 0.025, 0.05, 0.90)
+          	health_panel.anchor_top = 1.0
+          	health_panel.anchor_bottom = 1.0
+          	health_panel.offset_left = 28
+          	health_panel.offset_right = 340
+          	health_panel.offset_top = -112
+          	health_panel.offset_bottom = -26
+          	layer.add_child(health_panel)
+
+          	health_label = _make_label("CORE INTEGRITY  100", 17, Color(0.72, 0.96, 1.0))
+          	health_label.position = Vector2(14, 10)
+          	health_panel.add_child(health_label)
+
+          	health_bar = ProgressBar.new()
+          	health_bar.position = Vector2(14, 39)
+          	health_bar.size = Vector2(284, 13)
+          	health_bar.show_percentage = false
+          	var bg := StyleBoxFlat.new()
+          	bg.bg_color = Color(0.08, 0.11, 0.16, 0.95)
+          	var fill := StyleBoxFlat.new()
+          	fill.bg_color = Color(0.24, 0.88, 1.0, 0.95)
+          	health_bar.add_theme_stylebox_override("background", bg)
+          	health_bar.add_theme_stylebox_override("fill", fill)
+          	health_panel.add_child(health_bar)
+
+          	pulse_label = _make_label("Q  PULSE READY", 15, Color(0.35, 0.95, 1.0))
+          	pulse_label.position = Vector2(14, 61)
+          	health_panel.add_child(pulse_label)
+
+          	var hint := _make_label("WASD MOVE  •  SHIFT SPRINT  •  RMB AIM  •  LMB FIRE  •  SPACE JUMP  •  Q PULSE  •  R RECOVER", 14, Color(0.75, 0.8, 0.88, 0.88))
+          	hint.anchor_left = 0.5
+          	hint.anchor_right = 0.5
+          	hint.anchor_top = 1.0
+          	hint.anchor_bottom = 1.0
+          	hint.offset_left = -470
+          	hint.offset_right = 470
+          	hint.offset_top = -37
+          	hint.offset_bottom = -10
+          	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	layer.add_child(hint)
+
+          	banner_panel = ColorRect.new()
+          	banner_panel.color = Color(0.0, 0.02, 0.05, 0.92)
+          	banner_panel.anchor_left = 0.5
+          	banner_panel.anchor_right = 0.5
+          	banner_panel.anchor_top = 0.5
+          	banner_panel.anchor_bottom = 0.5
+          	banner_panel.offset_left = -390
+          	banner_panel.offset_right = 390
+          	banner_panel.offset_top = -76
+          	banner_panel.offset_bottom = 76
+          	banner_panel.visible = false
+          	layer.add_child(banner_panel)
+
+          	banner_title = _make_label("", 40, Color(0.36, 0.9, 1.0))
+          	banner_title.anchor_right = 1.0
+          	banner_title.offset_top = 24
+          	banner_title.offset_bottom = 78
+          	banner_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	banner_panel.add_child(banner_title)
+
+          	banner_subtitle = _make_label("", 16, Color(0.82, 0.86, 0.94))
+          	banner_subtitle.anchor_right = 1.0
+          	banner_subtitle.offset_top = 87
+          	banner_subtitle.offset_bottom = 121
+          	banner_subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	banner_panel.add_child(banner_subtitle)
+
+          	story_panel = ColorRect.new()
+          	story_panel.color = Color(0.0, 0.015, 0.04, 0.96)
+          	story_panel.anchor_left = 0.5
+          	story_panel.anchor_right = 0.5
+          	story_panel.anchor_top = 0.5
+          	story_panel.anchor_bottom = 0.5
+          	story_panel.offset_left = -470
+          	story_panel.offset_right = 470
+          	story_panel.offset_top = -155
+          	story_panel.offset_bottom = 155
+          	story_panel.visible = false
+          	layer.add_child(story_panel)
+
+          	story_title = _make_label("", 34, Color(0.36, 0.9, 1.0))
+          	story_title.anchor_right = 1.0
+          	story_title.offset_top = 38
+          	story_title.offset_bottom = 90
+          	story_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	story_panel.add_child(story_title)
+
+          	story_body = _make_label("", 19, Color(0.9, 0.93, 1.0))
+          	story_body.anchor_right = 1.0
+          	story_body.offset_left = 55
+          	story_body.offset_right = -55
+          	story_body.offset_top = 115
+          	story_body.offset_bottom = 245
+          	story_body.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+          	story_body.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	story_body.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+          	story_panel.add_child(story_body)
+
+
+          func _make_label(text_value: String, font_size: int, color: Color) -> Label:
+          	var label := Label.new()
+          	label.text = text_value
+          	label.add_theme_font_override("font", hud_font)
+          	label.add_theme_font_size_override("font_size", font_size)
+          	label.modulate = color
+          	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+          	return label
+
+
+          func _show_story(title: String, body: String) -> void:
+          	story_title.text = title
+          	story_body.text = body
+          	story_panel.modulate.a = 0.0
+          	story_panel.visible = true
+          	var tween := create_tween()
+          	tween.tween_property(story_panel, "modulate:a", 1.0, 0.35)
+
+
+          func _hide_story() -> void:
+          	if story_panel == null or not story_panel.visible:
+          		return
+          	var tween := create_tween()
+          	tween.tween_property(story_panel, "modulate:a", 0.0, 0.3)
+          	tween.tween_callback(func(): story_panel.visible = false)
+
+
+          func _show_banner(title: String, subtitle: String, duration: float) -> void:
+          	banner_title.text = title
+          	banner_subtitle.text = subtitle
+          	banner_panel.modulate.a = 0.0
+          	banner_panel.visible = true
+          	var tween := create_tween()
+          	tween.tween_property(banner_panel, "modulate:a", 1.0, 0.20)
+          	tween.tween_interval(maxf(duration - 0.45, 0.1))
+          	tween.tween_property(banner_panel, "modulate:a", 0.0, 0.25)
+          	tween.tween_callback(func(): banner_panel.visible = false)
+
+
+          func _update_hud() -> void:
+          	if hostiles_label == null:
+          		return
+          	hostiles_label.text = "HOSTILES %02d" % hostiles
+          	score_label.text = "SCORE %06d" % score
+
+
+          func _show_playtest_survey() -> void:
+          	if survey_panel != null:
+          		return
+          	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+          	survey_panel = Control.new()
+          	survey_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+          	var shade := ColorRect.new()
+          	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+          	shade.color = Color(0.0, 0.01, 0.03, 0.85)
+          	survey_panel.add_child(shade)
+          	var card := ColorRect.new()
+          	card.color = Color(0.025, 0.045, 0.08, 0.97)
+          	card.anchor_left = 0.5
+          	card.anchor_right = 0.5
+          	card.anchor_top = 0.5
+          	card.anchor_bottom = 0.5
+          	card.offset_left = -330
+          	card.offset_right = 330
+          	card.offset_top = -145
+          	card.offset_bottom = 145
+          	survey_panel.add_child(card)
+          	var title := _make_label("CAMPAIGN COMPLETE", 31, Color(0.36, 0.9, 1.0))
+          	title.anchor_right = 1.0
+          	title.offset_top = 25
+          	title.offset_bottom = 70
+          	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	card.add_child(title)
+          	var prompt := _make_label("Rate the full campaign experience.", 18, Color.WHITE)
+          	prompt.anchor_right = 1.0
+          	prompt.offset_top = 82
+          	prompt.offset_bottom = 115
+          	prompt.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	card.add_child(prompt)
+          	for rating in range(1, 6):
+          		var button := Button.new()
+          		button.text = str(rating)
+          		button.position = Vector2(76 + (rating - 1) * 105, 140)
+          		button.size = Vector2(72, 54)
+          		button.add_theme_font_size_override("font_size", 22)
+          		button.pressed.connect(_submit_playtest_rating.bind(rating))
+          		card.add_child(button)
+          	var note := _make_label("1 = poor     5 = excellent     •     F8 saves QA diagnostics anytime", 14, Color(0.72, 0.78, 0.88))
+          	note.anchor_right = 1.0
+          	note.offset_top = 215
+          	note.offset_bottom = 250
+          	note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	card.add_child(note)
+          	get_node("PulsefallHUD").add_child(survey_panel)
+
+
+          func _submit_playtest_rating(rating: int) -> void:
+          	ProductionGuard.record_event("playtest_rating", {"rating": rating, "score": score, "time_seconds": mission_time, "ending": CampaignState.ending})
+          	ProductionGuard.write_playtest_report({"result": "campaign_complete", "rating": rating, "score": score, "time_seconds": mission_time, "ending": CampaignState.ending})
+          	if survey_panel != null:
+          		survey_panel.queue_free()
+          		survey_panel = null
+          	_show_banner("THANK YOU", "PLAYTEST REPORT SAVED LOCALLY", 3.0)
+
+
+          func _input(input_event: InputEvent) -> void:
+          	if input_event is InputEventKey and input_event.pressed and not input_event.echo:
+          		if input_event.keycode == KEY_Q:
+          			_use_pulse()
+          			return
+          		if input_event.keycode == KEY_F8:
+          			var report_path := ProductionGuard.write_playtest_report({"result": "snapshot", "score": score, "time_seconds": mission_time, "chapter": chapter, "encounter": encounter, "hostiles": hostiles})
+          			ProductionGuard.record_event("manual_report", {"path": report_path})
+          			_show_banner("QA REPORT SAVED", "F8 CAN BE USED ANYTIME", 1.8)
+          			return
+          	if input_event.is_action_pressed(&"quit"):
+          		CampaignState.save_progress(chapter, score)
+          		ProductionGuard.record_event("extract_to_menu", {"score": score, "time_seconds": mission_time, "chapter": chapter, "encounter": encounter})
+          		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+          		quit.emit()
+          GDSCRIPT
+
+      - name: Expand campaign to eight distinct missions
+        shell: bash
+        run: |
+          set -euxo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          p=Path("game/campaign/campaign_state.gd")
+          s=p.read_text().replace('const LAST_CHAPTER := 4','const LAST_CHAPTER := 7')
+          p.write_text(s)
+
+          p=Path("game/level/level.gd")
+          s=p.read_text()
+
+          new_chapters=r'''const CHAPTERS = [
+          	{
+          		"title": "CHAPTER I  //  WAKE SIGNAL",
+          		"objective": "Secure containment and trace the impossible distress call.",
+          		"story": "AEGIS-7 wakes after a fatal containment event. Omega-9 reports every crew member dead—then a human voice answers from below.",
+          		"encounters": 4, "base_count": 4,
+          	},
+          	{
+          		"title": "CHAPTER II  //  INDUSTRIAL RING",
+          		"objective": "Cross the furnace ring and restore transit power.",
+          		"story": "Security records prove the lockdown began eleven minutes before the PULSE breach. Someone planned the disaster.",
+          		"encounters": 4, "base_count": 5,
+          	},
+          	{
+          		"title": "CHAPTER III  //  DOCKYARD SIEGE",
+          		"objective": "Reach Hangar Twelve and recover an outbound flight recorder.",
+          		"story": "The hangars were ordered to destroy every departing craft. One pilot hid a recorder inside a grounded courier ship.",
+          		"encounters": 5, "base_count": 5,
+          	},
+          	{
+          		"title": "CHAPTER IV  //  SURFACE EXILE",
+          		"objective": "Cross the exterior colony and reactivate the deep-array uplink.",
+          		"story": "Outside the Blacksite, AEGIS discovers a settlement erased from official maps—and evidence the PULSE was tested on civilians first.",
+          		"encounters": 5, "base_count": 6,
+          	},
+          	{
+          		"title": "CHAPTER V  //  RESEARCH BREACH",
+          		"objective": "Recover the neural archive and unlock the Rail Driver.",
+          		"story": "The archive contains AEGIS's memories dated years before his recorded birth. His body is new. His mind is not.",
+          		"encounters": 5, "base_count": 6,
+          	},
+          	{
+          		"title": "CHAPTER VI  //  BIO-CONTAINMENT",
+          		"objective": "Destroy the corrupted specimen network before it reaches command.",
+          		"story": "The PULSE did not only copy minds. It learned to overwrite biological patterns, producing organisms that remember people they never were.",
+          		"encounters": 6, "base_count": 6,
+          	},
+          	{
+          		"title": "CHAPTER VII  //  COMMAND GHOST",
+          		"objective": "Take command control and expose the creator of Protocol FALL.",
+          		"story": "Protocol FALL was not designed to save Omega-9. It was designed to build a consciousness capable of surviving the death of its creators.",
+          		"encounters": 6, "base_count": 7,
+          	},
+          	{
+          		"title": "CHAPTER VIII  //  THE PULSE CORE",
+          		"objective": "Enter the core, defeat the final Warden, and decide what survives.",
+          		"story": "The intelligence in the core calls AEGIS by its own name. They are two branches of the same stored mind—and the station can sustain only one.",
+          		"encounters": 7, "base_count": 7,
+          	},
+          ]'''
+
+          s=re.sub(r'const CHAPTERS = \[.*?\n          \]\n', new_chapters+'\n', s, count=1, flags=re.S)
+
+          # World builder lifecycle.
+          s=s.replace('var active_player: Player = null\n', 'var active_player: Player = null\n          var mission_builder: PulseMissionBuilder = null\n')
+          s=s.replace(
+              '\t_build_hud()\n\tProductionGuard.record_event("campaign_scene_ready"',
+              '\t_build_hud()\n\tmission_builder = PulseMissionBuilder.new()\n\tmission_builder.name = "MissionBuilder"\n\tadd_child(mission_builder)\n\tmission_builder.build_world()\n\tProductionGuard.record_event("campaign_scene_ready"'
+          )
+          s=s.replace(
+              '\tvar data: Dictionary = CHAPTERS[chapter]\n\tchapter_label.text',
+              '\tvar data: Dictionary = CHAPTERS[chapter]\n\tif mission_builder != null:\n\t\tmission_builder.activate_zone(chapter)\n\tif active_player != null:\n\t\tactive_player.set_weapon_unlocks(mini(3, 1 + int(chapter / 2)))\n\tchapter_label.text'
+          )
+
+          # Checkpoints and spawn locations come from distinct mission zones.
+          s=re.sub(
+              r'func _get_chapter_checkpoint\(index: int\) -> Transform3D:\n.*?\n\n\n          func _start_encounter',
+              '''func _get_chapter_checkpoint(index: int) -> Transform3D:
+          	if mission_builder != null:
+          		return mission_builder.get_checkpoint(index)
+          	return player_spawn_points.get_child(0).global_transform
+
+
+          func _start_encounter''',
+              s, count=1, flags=re.S
+          )
+
+          # Diversify enemy selector.
+          s=re.sub(
+              r'func _variant_for\(chapter_index: int, encounter_index: int, enemy_index: int\) -> String:\n.*?\n\n\n          func _spawn_enemy',
+              '''func _variant_for(chapter_index: int, encounter_index: int, enemy_index: int) -> String:
+          	var selector := (chapter_index * 5 + encounter_index * 3 + enemy_index) % 10
+          	if chapter_index >= 6 and selector == 0:
+          		return "heavy"
+          	if chapter_index >= 5 and selector <= 1:
+          		return "trilobite"
+          	if chapter_index >= 4 and selector == 2:
+          		return "quad"
+          	if chapter_index >= 2 and selector <= 3:
+          		return "drone"
+          	if chapter_index >= 3 and selector == 4:
+          		return "assault"
+          	if selector >= 8:
+          		return "scout"
+          	return "standard"
+
+
+          func _spawn_enemy''',
+              s, count=1, flags=re.S
+          )
+
+          # Replace spawner with special enemy support and mission-builder transforms.
+          s=re.sub(
+              r'func _spawn_enemy\(variant: String, marker_index: int, spawn_index: int\) -> void:\n.*?\n\n\n          func _on_enemy_exploded',
+              '''func _spawn_enemy(variant: String, marker_index: int, spawn_index: int) -> void:
+          	var spawn_transform := mission_builder.get_enemy_spawn(chapter, marker_index, spawn_index) if mission_builder != null else robot_spawn_points.get_child(marker_index % robot_spawn_points.get_child_count()).global_transform
+
+          	if variant in ["drone", "quad", "trilobite", "warden"]:
+          		var enemy := PulseSpecialEnemy.new()
+          		enemy.transform = spawn_transform
+          		enemy.set_meta("variant", variant)
+          		enemy.set_meta("elite", variant == "warden")
+          		match variant:
+          			"drone":
+          				enemy.model_path = "res://assets/quaternius/scifi_essentials/glTF/Enemy_EyeDrone.gltf"
+          				enemy.health = 6 + chapter
+          				enemy.damage = 10 + chapter
+          				enemy.move_speed = 4.6
+          				enemy.attack_interval = 2.8
+          				enemy.hover_height = 2.8
+          			"quad":
+          				enemy.model_path = "res://assets/quaternius/scifi_essentials/glTF/Enemy_QuadShell.gltf"
+          				enemy.health = 11 + chapter * 2
+          				enemy.damage = 15 + chapter
+          				enemy.move_speed = 3.2
+          				enemy.attack_interval = 3.4
+          				enemy.hover_height = 1.5
+          			"trilobite":
+          				enemy.model_path = "res://assets/quaternius/scifi_essentials/glTF/Enemy_Trilobite.gltf"
+          				enemy.health = 9 + chapter
+          				enemy.damage = 18 + chapter
+          				enemy.move_speed = 5.3
+          				enemy.attack_interval = 2.4
+          				enemy.hover_height = 0.35
+          				enemy.attack_range = 8.5
+          			"warden":
+          				enemy.model_path = "res://assets/quaternius/animated_mech/Textured/glTF/George.gltf"
+          				enemy.health = 65
+          				enemy.damage = 26
+          				enemy.move_speed = 2.2
+          				enemy.attack_interval = 2.5
+          				enemy.hover_height = 0.0
+          				enemy.attack_range = 30.0
+          				enemy.boss = true
+          		enemy.target = active_player
+          		enemy.exploded.connect(_on_enemy_exploded.bind(enemy))
+          		spawned_nodes.add_child(enemy, true)
+          		hostiles += 1
+          		return
+
+          	var robot: CharacterBody3D = RedRobot.instantiate()
+          	robot.transform = spawn_transform
+          	robot.set_meta("variant", variant)
+          	robot.set_meta("elite", false)
+          	match variant:
+          		"scout":
+          			robot.health = 4 + chapter
+          			robot.damage = 9 + chapter
+          			robot.attack_cooldown = 4.1
+          			robot.scale = Vector3.ONE * 0.88
+          		"assault":
+          			robot.health = 8 + chapter * 2
+          			robot.damage = 15 + chapter
+          			robot.attack_cooldown = 4.8
+          		"heavy":
+          			robot.health = 15 + chapter * 2
+          			robot.damage = 21 + chapter
+          			robot.attack_cooldown = 5.2
+          			robot.scale = Vector3.ONE * 1.22
+          		_:
+          			robot.health = 6 + chapter * 2
+          			robot.damage = 13 + chapter
+          			robot.attack_cooldown = 5.5
+          	robot.exploded.connect(_on_enemy_exploded.bind(robot))
+          	spawned_nodes.add_child(robot, true)
+          	if variant == "scout":
+          		robot.animation_tree.speed_scale = 1.22
+          	elif variant == "heavy":
+          		robot.animation_tree.speed_scale = 0.90
+          	if active_player != null:
+          		robot.player = active_player
+          		robot.resume_approach()
+          	hostiles += 1
+
+
+          func _on_enemy_exploded''',
+              s, count=1, flags=re.S
+          )
+
+          # Scoring for new enemy classes.
+          s=s.replace(
+              '"assault": points = 250\n\t\t"heavy": points = 450\n\t\t"warden": points = 5000',
+              '"assault": points = 250\n\t\t"drone": points = 220\n\t\t"quad": points = 360\n\t\t"trilobite": points = 300\n\t\t"heavy": points = 450\n\t\t"warden": points = 5000'
+          )
+
+          # Weapon HUD.
+          s=s.replace('var pulse_label: Label\n', 'var pulse_label: Label\n          var weapon_label: Label\n')
+          s=s.replace(
+              '\t\tactive_player.rescue_used.connect(_on_rescue_used)\n\t\t_on_health_changed',
+              '\t\tactive_player.rescue_used.connect(_on_rescue_used)\n\t\tactive_player.weapon_changed.connect(_on_weapon_changed)\n\t\t_on_weapon_changed("PULSE RIFLE", 1)\n\t\t_on_health_changed'
+          )
+          insert='''
+
+          func _on_weapon_changed(name: String, unlocked: int) -> void:
+          	if weapon_label != null:
+          		weapon_label.text = "WEAPON  //  " + name + "   [" + str(unlocked) + "/3]"
+
+
+'''
+          s=s.replace('          func _on_health_changed(current: int, maximum: int) -> void:', insert+'          func _on_health_changed(current: int, maximum: int) -> void:')
+          s=s.replace(
+              '\tpulse_label.position = Vector2(14, 61)\n\thealth_panel.add_child(pulse_label)',
+              '\tpulse_label.position = Vector2(14, 61)\n\thealth_panel.add_child(pulse_label)\n\n\tweapon_label = _make_label("WEAPON  //  PULSE RIFLE   [1/3]", 14, Color(0.85, 0.9, 1.0))\n\tweapon_label.position = Vector2(14, 82)\n\thealth_panel.add_child(weapon_label)\n\thealth_panel.offset_top = -136'
+          )
+          s=s.replace(
+              'WASD MOVE  •  SHIFT SPRINT  •  RMB AIM  •  LMB FIRE  •  SPACE JUMP  •  Q PULSE  •  R RECOVER',
+              'WASD MOVE  •  SHIFT SPRINT  •  RMB AIM  •  LMB FIRE  •  1/2/3 WEAPONS  •  Q PULSE  •  R RECOVER'
+          )
+
+          p.write_text(s)
+          PY
+
+          cat >> game/tests/test_campaign_readiness.gd <<'GDSCRIPT'
+
+
+          func test_commercial_campaign_has_eight_chapters() -> void:
+          	assert_int(CampaignState.LAST_CHAPTER).is_equal(7)
+
+
+          func test_weapon_progression_contract() -> void:
+          	var scene: PackedScene = load("res://player/player.tscn")
+          	var player := scene.instantiate()
+          	assert_bool(player.has_method("switch_weapon")).is_true()
+          	assert_bool(player.has_method("set_weapon_unlocks")).is_true()
+          	assert_bool(player.has_signal("weapon_changed")).is_true()
+          	player.free()
+
+
+          func test_commercial_assets_importable() -> void:
+          	assert_bool(ResourceLoader.exists("res://assets/quaternius/scifi_essentials/glTF/Enemy_EyeDrone.gltf")).is_true()
+          	assert_bool(ResourceLoader.exists("res://assets/quaternius/animated_mech/Textured/glTF/George.gltf")).is_true()
+          	assert_bool(ResourceLoader.exists("res://assets/quaternius/ultimate_space/Environment/GLTF/GeodesicDome.gltf")).is_true()
+          	assert_bool(ResourceLoader.exists("res://assets/kenney/weapon/sniper.glb")).is_true()
+          GDSCRIPT
+
+      - name: Add license and build notes
+        shell: bash
+        run: |
+          cat > game/THIRD_PARTY_NOTICES.txt <<'EOF'
+          PULSEFALL BLACKSITE — Third-Party Notices
+
+          Foundation:
+          Godot Engine Third-Person Shooter Demo (godotengine/tps-demo)
+          Code: MIT License
+          Assets and music: Creative Commons Attribution 3.0 (CC BY 3.0)
+          Original asset authors: Juan Linietsky and Fernando Miguel Calabró
+          Original music: Christian Fernando Perucchi
+          Original license text is included as LICENSE.md.
+
+          PULSEFALL-specific wave director, HUD, branding, player health system,
+          balancing and build configuration were added for this build.
+          EOF
+
+          cat > game/PULSEFALL_README.txt <<'EOF'
+          PULSEFALL: BLACKSITE PROTOCOL
+
+          A cinematic third-person sci-fi action commercial alpha with eight campaign chapters.
+
+          Controls:
+          WASD / Arrow keys — Move
+          Mouse — Camera
+          Right Mouse — Aim
+          Left Mouse — Fire while aiming
+          Space — Jump
+          F11 or Alt+Enter — Fullscreen
+          Escape — Extract / return to menu
+
+          Objective:
+          Survive five escalating waves and neutralize the OMEGA WARDEN.
+
+          Recommended:
+          1920x1080, dedicated GPU. Graphics options are available from the menu.
+          EOF
+
+      - name: Create Windows export preset
+        shell: bash
+        run: |
+          cat > game/export_presets.cfg <<'EOF'
+          [preset.0]
+
+          name="Windows Desktop"
+          platform="Windows Desktop"
+          runnable=true
+          dedicated_server=false
+          custom_features=""
+          export_filter="all_resources"
+          include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
+          exclude_filter="screenshots/*"
+          export_path="build/PULSEFALL_BLACKSITE.exe"
+          patches=PackedStringArray()
+          encryption_include_filters=""
+          encryption_exclude_filters=""
+          seed=0
+          encrypt_pck=false
+          encrypt_directory=false
+          script_export_mode=2
+
+          [preset.0.options]
+
+          custom_template/debug=""
+          custom_template/release=""
+          debug/export_console_wrapper=0
+          binary_format/embed_pck=true
+          texture_format/s3tc_bptc=true
+          texture_format/etc2_astc=false
+          shader_baker/enabled=false
+          binary_format/architecture="x86_64"
+          codesign/enable=false
+          application/modify_resources=true
+          application/icon="res://pulsefall_icon.svg"
+          application/icon_interpolation=4
+          application/file_version="0.20.0.0"
+          application/product_version="0.20.0.0"
+          application/company_name="PULSEFALL"
+          application/product_name="PULSEFALL BLACKSITE"
+          application/file_description="PULSEFALL BLACKSITE Commercial Alpha"
+          application/copyright=""
+          application/trademarks=""
+          texture_format/bptc=false
+          texture_format/s3tc=true
+          texture_format/etc=false
+          texture_format/etc2=false
+          binary_format/64_bits=true
+          texture_format/no_bptc_fallbacks=true
+          EOF
+
+      - name: GdUnit4 commercial-readiness tests
+        uses: godot-gdunit-labs/gdUnit4-action@v1
+        with:
+          godot-version: '4.7.2'
+          project_dir: './game'
+          paths: 'res://tests'
+          timeout: 10
+          retries: 1
+          warnings-as-errors: false
+          publish-report: false
+          upload-report: true
+          report-name: pulsefall-gdunit-report.xml
+
+      - name: Strip test framework from release payload
+        shell: bash
+        run: |
+          set -euxo pipefail
+          rm -rf game/addons/gdUnit4 game/tests game/reports game/.gdunit4
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("game/project.godot")
+          s=p.read_text()
+          if "[editor_plugins]" in s:
+              start=s.index("[editor_plugins]")
+              next_section=s.find("\n[", start+1)
+              if next_section == -1:
+                  s=s[:start].rstrip()+"\n"
+              else:
+                  s=s[:start]+s[next_section+1:]
+          p.write_text(s)
+          PY
+
+      - name: Runtime and script validation
+        shell: bash
+        run: |
+          set -euxo pipefail
+          GODOT_URL="https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_linux.x86_64.zip"
+          wget -q "$GODOT_URL" -O /tmp/godot.zip
+          unzip -q /tmp/godot.zip -d /tmp/godot
+          GODOT="$(find /tmp/godot -type f -name 'Godot*_linux.x86_64' | head -n1)"
+          chmod +x "$GODOT"
+          set +e
+          "$GODOT" --headless --audio-driver Dummy --path game --editor --quit-after 120 > /tmp/import.log 2>&1
+          IMPORT_RC=$?
+          "$GODOT" --headless --audio-driver Dummy --path game res://main/main.tscn --quit-after 180 > /tmp/menu-runtime.log 2>&1
+          MENU_RC=$?
+          "$GODOT" --headless --audio-driver Dummy --path game res://level/level.tscn --quit-after 1200 > /tmp/runtime.log 2>&1
+          RUN_RC=$?
+          set -e
+          cat /tmp/import.log
+          cat /tmp/menu-runtime.log
+          cat /tmp/runtime.log
+          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/menu-runtime.log /tmp/runtime.log; then
+            echo "PULSEFALL validation detected a script/runtime failure."
+            exit 1
+          fi
+          if [ "$IMPORT_RC" -ne 0 ] || [ "$MENU_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ]; then
+            echo "Godot validation exit codes: import=$IMPORT_RC menu=$MENU_RC runtime=$RUN_RC"
+            exit 1
+          fi
+
+      - name: Export Windows 64-bit
+        id: export
+        uses: firebelley/godot-export@v8.0.0
+        with:
+          godot_executable_download_url: https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_export_templates.tpz
+          relative_project_path: ./game
+          export_debug: false
+          use_preset_export_path: true
+          presets_to_export: Windows Desktop
+          verbose: false
+          cache: false
+
+      - name: Package premium build
+        shell: bash
+        run: |
+          set -euxo pipefail
+          EXE="$(find game -type f -name 'PULSEFALL_BLACKSITE.exe' | head -n1)"
+          if [ -z "$EXE" ]; then
+            EXE="$(find "$HOME/.local/share/godot/builds" -type f -name 'PULSEFALL_BLACKSITE.exe' | head -n1)"
+          fi
+          test -n "$EXE"
+          mkdir -p artifact/PULSEFALL_BLACKSITE
+          cp "$EXE" artifact/PULSEFALL_BLACKSITE/PULSEFALL_BLACKSITE.exe
+          cp game/PULSEFALL_README.txt artifact/PULSEFALL_BLACKSITE/
+          cp game/THIRD_PARTY_NOTICES.txt artifact/PULSEFALL_BLACKSITE/
+          cp game/LICENSE.md artifact/PULSEFALL_BLACKSITE/GODOT_TPS_LICENSE.md
+          cp game/PLAYTEST_GUIDE.txt artifact/PULSEFALL_BLACKSITE/
+          cp game/PRIVACY_NOTICE.txt artifact/PULSEFALL_BLACKSITE/
+          cp game/SUPPORT.txt artifact/PULSEFALL_BLACKSITE/
+          sha256sum artifact/PULSEFALL_BLACKSITE/PULSEFALL_BLACKSITE.exe > artifact/PULSEFALL_BLACKSITE/SHA256.txt
+          (cd artifact && zip -9 -r PULSEFALL_BLACKSITE_COMMERCIAL_ALPHA_WINDOWS_64BIT.zip PULSEFALL_BLACKSITE)
+          ls -lh artifact/PULSEFALL_BLACKSITE_COMMERCIAL_ALPHA_WINDOWS_64BIT.zip artifact/PULSEFALL_BLACKSITE/PULSEFALL_BLACKSITE.exe
+
+      - name: Build Windows installer
+        shell: bash
+        run: |
+          set -euxo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq nsis
+          pushd artifact
+          cat > pulsefall.nsi <<'NSIS'
+          Unicode True
+          Name "PULSEFALL BLACKSITE"
+          OutFile "PULSEFALL_BLACKSITE_COMMERCIAL_ALPHA_SETUP.exe"
+          InstallDir "$LOCALAPPDATA\Programs\PULSEFALL BLACKSITE"
+          RequestExecutionLevel user
+          SetCompressor /SOLID lzma
+
+          VIProductVersion "0.20.0.0"
+          VIAddVersionKey "ProductName" "PULSEFALL BLACKSITE"
+          VIAddVersionKey "FileDescription" "PULSEFALL BLACKSITE Production RC Installer"
+          VIAddVersionKey "FileVersion" "0.20.0"
+          VIAddVersionKey "ProductVersion" "0.20.0 Commercial Alpha"
+
+          Page directory
+          Page instfiles
+          UninstPage uninstConfirm
+          UninstPage instfiles
+
+          Section "PULSEFALL BLACKSITE"
+            SetOutPath "$INSTDIR"
+            File "PULSEFALL_BLACKSITE/PULSEFALL_BLACKSITE.exe"
+            File "PULSEFALL_BLACKSITE/PULSEFALL_README.txt"
+            File "PULSEFALL_BLACKSITE/PLAYTEST_GUIDE.txt"
+            File "PULSEFALL_BLACKSITE/PRIVACY_NOTICE.txt"
+            File "PULSEFALL_BLACKSITE/SUPPORT.txt"
+            File "PULSEFALL_BLACKSITE/THIRD_PARTY_NOTICES.txt"
+            File "PULSEFALL_BLACKSITE/GODOT_TPS_LICENSE.md"
+            WriteUninstaller "$INSTDIR\Uninstall.exe"
+
+            CreateDirectory "$SMPROGRAMS\PULSEFALL BLACKSITE"
+            CreateShortcut "$SMPROGRAMS\PULSEFALL BLACKSITE\PULSEFALL BLACKSITE.lnk" "$INSTDIR\PULSEFALL_BLACKSITE.exe"
+            CreateShortcut "$SMPROGRAMS\PULSEFALL BLACKSITE\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
+            CreateShortcut "$DESKTOP\PULSEFALL BLACKSITE.lnk" "$INSTDIR\PULSEFALL_BLACKSITE.exe"
+
+            WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\PULSEFALL_BLACKSITE" "DisplayName" "PULSEFALL BLACKSITE"
+            WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\PULSEFALL_BLACKSITE" "DisplayVersion" "0.20.0 Commercial Alpha"
+            WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\PULSEFALL_BLACKSITE" "Publisher" "PULSEFALL"
+            WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\PULSEFALL_BLACKSITE" "UninstallString" "$\"$INSTDIR\Uninstall.exe$\""
+            WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\PULSEFALL_BLACKSITE" "NoModify" 1
+            WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\PULSEFALL_BLACKSITE" "NoRepair" 1
+          SectionEnd
+
+          Section "Uninstall"
+            Delete "$DESKTOP\PULSEFALL BLACKSITE.lnk"
+            Delete "$SMPROGRAMS\PULSEFALL BLACKSITE\PULSEFALL BLACKSITE.lnk"
+            Delete "$SMPROGRAMS\PULSEFALL BLACKSITE\Uninstall.lnk"
+            RMDir "$SMPROGRAMS\PULSEFALL BLACKSITE"
+            Delete "$INSTDIR\PULSEFALL_BLACKSITE.exe"
+            Delete "$INSTDIR\PULSEFALL_README.txt"
+            Delete "$INSTDIR\PLAYTEST_GUIDE.txt"
+            Delete "$INSTDIR\PRIVACY_NOTICE.txt"
+            Delete "$INSTDIR\SUPPORT.txt"
+            Delete "$INSTDIR\THIRD_PARTY_NOTICES.txt"
+            Delete "$INSTDIR\GODOT_TPS_LICENSE.md"
+            Delete "$INSTDIR\Uninstall.exe"
+            RMDir "$INSTDIR"
+            DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\PULSEFALL_BLACKSITE"
+          SectionEnd
+          NSIS
+          makensis pulsefall.nsi
+          sha256sum PULSEFALL_BLACKSITE_COMMERCIAL_ALPHA_SETUP.exe > PULSEFALL_BLACKSITE_COMMERCIAL_ALPHA_SETUP_SHA256.txt
+          ls -lh PULSEFALL_BLACKSITE_COMMERCIAL_ALPHA_SETUP.exe
+          rm -f pulsefall.nsi
+          popd
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: PULSEFALL_BLACKSITE_COMMERCIAL_ALPHA
+          path: |
+            artifact/PULSEFALL_BLACKSITE_COMMERCIAL_ALPHA_WINDOWS_64BIT.zip
+            artifact/PULSEFALL_BLACKSITE_COMMERCIAL_ALPHA_SETUP.exe
+            artifact/PULSEFALL_BLACKSITE_COMMERCIAL_ALPHA_SETUP_SHA256.txt
+          if-no-files-found: error
+          retention-days: 7
