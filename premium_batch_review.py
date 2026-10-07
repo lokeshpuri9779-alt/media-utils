@@ -8,6 +8,7 @@ from edit_spec import build_edit_spec, preflight
 from premium_stories import catalog
 from quality_lab import assess_render, contact_sheet, scene_change_report, write_report
 from studio_renderer import render_short
+from fast_premium_renderer import render_fast_premium
 
 
 def main(root: Path) -> int:
@@ -33,14 +34,25 @@ def main(root: Path) -> int:
             batch.append(entry)
             continue
         video = folder / "preview.mp4"
-        report = render_short(story, video, still_dir=stills)
+        renderer = "ffmpeg-native" if story.get("premium_story") else "studio"
+        try:
+            if renderer == "ffmpeg-native":
+                report = render_fast_premium(video, story=story)
+            else:
+                report = render_short(story, video, still_dir=stills)
+        except Exception as exc:
+            # Preserve the proven Studio path as a zero-cost fallback while the
+            # fast renderer matures. The batch report records the fallback.
+            renderer = "studio-fallback"
+            report = render_short(story, video, still_dir=stills)
+            report["fast_renderer_error"] = str(exc)[:300]
         post = assess_render(report)
         post["pacing"] = scene_change_report(video)
         write_report(folder / "render.json", report)
         write_report(folder / "quality.json", post)
         contact_sheet(stills, folder / "contact-sheet.jpg", story.get("title") or cid)
         entry.update(status="passed" if post["pass"] else "rejected-after-render",
-                     quality=post, video=str(video.name))
+                     quality=post, video=str(video.name), renderer=renderer)
         failed = failed or not post["pass"]
         batch.append(entry)
     (root / "batch.json").write_text(json.dumps(batch, indent=2), encoding="utf-8")
