@@ -1,32 +1,35 @@
-name: OmniRoute Gateway Check
+name: OmniRoute Free Video Pilot
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - '.astra/omniroute'
       - '.github/workflows/omniroute.yml'
 
 permissions:
   contents: read
 
 jobs:
-  omniroute:
+  free-video-pilot:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     env:
       CI: 'true'
       HOSTNAME: '127.0.0.1'
       OMNIROUTE_SKIP_SYSTEM_TRUST: '1'
       DISABLE_SQLITE_AUTO_BACKUP: 'true'
+      REQUIRE_API_KEY: 'false'
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+
       - name: Install pinned OmniRoute
         run: npm install -g omniroute@3.8.51 --no-audit --no-fund
-      - name: Start gateway and check HTTP health
+
+      - name: Start local gateway
         shell: bash
         run: |
           set -euo pipefail
@@ -34,29 +37,106 @@ jobs:
           export INITIAL_PASSWORD="$(openssl rand -hex 24)"
           export JWT_SECRET="$(openssl rand -hex 32)"
           export API_KEY_SECRET="$(openssl rand -hex 32)"
-          omniroute serve --port 20128 --log --no-open > "$RUNNER_TEMP/omniroute-boot.log" 2>&1 &
-          gateway_pid=$!
-          trap 'kill "$gateway_pid" 2>/dev/null || true' EXIT
+          nohup omniroute serve --port 20128 --log --no-open > "$RUNNER_TEMP/omniroute-boot.log" 2>&1 &
+          echo $! > "$RUNNER_TEMP/omniroute.pid"
           python - <<'PY'
-          import json, os, time, urllib.request
-          base = 'http://127.0.0.1:20128'
-          healthy = False
-          for attempt in range(60):
+          import json, time, urllib.request
+          base='http://127.0.0.1:20128'
+          for _ in range(75):
               try:
                   with urllib.request.urlopen(base + '/api/monitoring/health', timeout=2) as r:
-                      body = json.load(r)
-                      healthy = r.status == 200 and isinstance(body, dict)
-              except (OSError, ValueError):
+                      if r.status == 200 and isinstance(json.load(r), dict):
+                          print('OmniRoute healthy')
+                          raise SystemExit(0)
+              except Exception:
                   pass
-              if healthy:
-                  break
               time.sleep(2)
-          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
-              summary.write('## OmniRoute startup check\n\n')
-              summary.write('HTTP health: ' + ('passed' if healthy else 'failed') + '\n\n')
-              summary.write('Generation requests: **0**. No upstream credentials loaded.\n\n')
-              summary.write('This checks gateway startup only; video generation and free quota remain unverified.\n')
-          if not healthy:
-              raise SystemExit('Gateway did not become healthy within the startup deadline')
-          print('Gateway HTTP health passed. No generation requested.')
+          raise SystemExit('OmniRoute did not become healthy')
           PY
+
+      - name: Generate one zero-cost watermark-free candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64, json, pathlib, urllib.request, urllib.error
+
+          endpoint='http://127.0.0.1:20128/v1/videos/generations'
+          payload={
+              'model':'veoaifree-web/veo',
+              'prompt':(
+                  'Vertical cinematic short, 9:16. A futuristic glass city at blue hour, '
+                  'a single sleek electric hypercar glides through reflective streets, '
+                  'subtle rain, volumetric light, physically coherent motion, premium film look, '
+                  'no text, no logos, no captions, no watermark.'
+              ),
+              'aspect_ratio':'9:16'
+          }
+          req=urllib.request.Request(
+              endpoint,
+              data=json.dumps(payload).encode(),
+              headers={
+                  'Content-Type':'application/json',
+                  'Authorization':'Bearer sk_omniroute',
+                  'X-OmniRoute-No-Cache':'true'
+              },
+              method='POST'
+          )
+          try:
+              with urllib.request.urlopen(req, timeout=900) as r:
+                  body=r.read()
+                  headers={k.lower():v for k,v in r.headers.items()}
+                  cost=headers.get('x-omniroute-response-cost','')
+          except urllib.error.HTTPError as e:
+              detail=e.read().decode('utf-8','replace')
+              raise SystemExit(f'Pilot generation failed HTTP {e.code}: {detail[:1200]}')
+
+          if cost and cost not in ('0','0.0','0.0000000000'):
+              raise SystemExit(f'Paid inference guard tripped: reported cost={cost}')
+
+          data=json.loads(body)
+          item=(data.get('data') or [{}])[0]
+          b64=item.get('b64_json')
+          if not b64 or item.get('format') != 'mp4':
+              raise SystemExit('No valid MP4 payload returned by free provider')
+
+          out=pathlib.Path('astra-omniroute-pilot.mp4')
+          out.write_bytes(base64.b64decode(b64))
+          if out.stat().st_size < 10000:
+              raise SystemExit('Returned MP4 is unexpectedly small')
+
+          meta={
+              'provider': headers.get('x-omniroute-provider','veoaifree-web'),
+              'model': headers.get('x-omniroute-model','veoaifree-web/veo'),
+              'reported_cost_usd': cost or 'unpriced/free route',
+              'bytes': out.stat().st_size,
+              'watermark_policy': 'provider states generated videos are watermark-free; prompt also forbids text/logos/watermarks',
+              'paid_fallback': False
+          }
+          pathlib.Path('astra-omniroute-pilot.json').write_text(json.dumps(meta,indent=2))
+          print(json.dumps(meta,indent=2))
+          PY
+
+      - name: Upload pilot result
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-omniroute-free-pilot
+          path: |
+            astra-omniroute-pilot.mp4
+            astra-omniroute-pilot.json
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Write summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## Astra OmniRoute free-video pilot"
+            echo
+            echo "- Route: `veoaifree-web/veo` only"
+            echo "- Paid fallback: **disabled**"
+            echo "- Requests this run: **1 maximum**"
+            echo "- Target: vertical 9:16, no logos/text/watermark"
+            echo "- Result artifact: `astra-omniroute-free-pilot` when generation succeeds"
+          } >> "$GITHUB_STEP_SUMMARY"
