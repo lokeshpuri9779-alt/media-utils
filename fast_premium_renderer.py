@@ -144,14 +144,15 @@ def render_fast_premium(out: Path, story: dict | None = None) -> dict:
             clip=td/f'scene-{i:02d}.mp4'
             # FFmpeg-native scale/crop + Ken Burns motion. No Python frame loop.
             motion=i % 4
+            denom=max(1,frames-1)
             if motion==0:
                 xexpr="'iw/2-(iw/zoom/2)'"; yexpr="'ih/2-(ih/zoom/2)'"
             elif motion==1:
-                xexpr="'max(0,(iw-iw/zoom)*on/max(1,d-1))'"; yexpr="'ih/2-(ih/zoom/2)'"
+                xexpr=f"'max(0,(iw-iw/zoom)*on/{denom})'"; yexpr="'ih/2-(ih/zoom/2)'"
             elif motion==2:
-                xexpr="'max(0,(iw-iw/zoom)*(1-on/max(1,d-1)))'"; yexpr="'ih/2-(ih/zoom/2)'"
+                xexpr=f"'max(0,(iw-iw/zoom)*(1-on/{denom}))'"; yexpr="'ih/2-(ih/zoom/2)'"
             else:
-                xexpr="'iw/2-(iw/zoom/2)'"; yexpr="'max(0,(ih-ih/zoom)*on/max(1,d-1))'"
+                xexpr="'iw/2-(iw/zoom/2)'"; yexpr=f"'max(0,(ih-ih/zoom)*on/{denom})'"
             vf=(
                 f"scale=1080:1920:force_original_aspect_ratio=increase,"
                 f"crop=1080:1920,"
