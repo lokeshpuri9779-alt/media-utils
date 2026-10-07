@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import json, math, subprocess, tempfile, time
+import json, math, subprocess, tempfile, time, re
 from pathlib import Path
 
 from imageio_ffmpeg import get_ffmpeg_exe
@@ -14,6 +14,34 @@ from studio_renderer import (
 
 def _ass_escape(s: str) -> str:
     return str(s).replace('\\', r'\\').replace('{', r'\{').replace('}', r'\}').replace('\n', r'\N')
+
+
+def _caption_chunks(text: str):
+    """Split narration into readable phrase units without dangling sentence fragments."""
+    sentences=[x.strip() for x in re.split(r'(?<=[.!?])\\s+', str(text).strip()) if x.strip()]
+    out=[]
+    for sentence in sentences:
+        words=sentence.split()
+        if len(words)<=5:
+            out.append(' '.join(words))
+            continue
+        pos=0
+        while pos < len(words):
+            remaining=len(words)-pos
+            take=5 if remaining>=5 else remaining
+            if remaining==6:
+                take=3
+            elif remaining==7:
+                take=4
+            elif remaining==8:
+                take=4
+            chunk=words[pos:pos+take]
+            pos+=take
+            if len(chunk)==1 and out:
+                out[-1] += ' ' + chunk[0]
+            else:
+                out.append(' '.join(chunk))
+    return out
 
 
 def _write_ass(plan, path: Path):
@@ -44,16 +72,18 @@ def _write_ass(plan, path: Path):
         headline=str(s.get('headline') or '').strip()
         if headline:
             lines.append(f"Dialogue: 0,{ts(start)},{ts(min(end,start+0.9))},Headline,,0,0,0,,{_ass_escape(headline.upper())}")
-        words=str(s.get('speech') or '').split()
-        if not words:
+        chunks=_caption_chunks(str(s.get('speech') or ''))
+        if not chunks:
             continue
         dur=max(.2,end-start)
-        chunk_size=4
-        chunks=[words[j:j+chunk_size] for j in range(0,len(words),chunk_size)]
-        for j,ch in enumerate(chunks):
-            a=start + dur*j/len(chunks)
-            b=start + dur*(j+1)/len(chunks)
-            lines.append(f"Dialogue: 0,{ts(a)},{ts(b)},Caption,,0,0,0,,{_ass_escape(' '.join(ch).upper())}")
+        weights=[max(1,len(x.split())) for x in chunks]
+        total=max(1,sum(weights))
+        cursor=start
+        for j,(chunk,w) in enumerate(zip(chunks,weights)):
+            a=cursor
+            b=end if j==len(chunks)-1 else min(end, cursor + dur*w/total)
+            cursor=b
+            lines.append(f"Dialogue: 0,{ts(a)},{ts(b)},Caption,,0,0,0,,{_ass_escape(chunk.upper())}")
     path.write_text('\n'.join(lines),encoding='utf-8')
 
 
@@ -109,11 +139,20 @@ def render_fast_premium(out: Path) -> dict:
             frames=max(1,int(math.ceil(dur*FPS)))
             clip=td/f'scene-{i:02d}.mp4'
             # FFmpeg-native scale/crop + Ken Burns motion. No Python frame loop.
+            motion=i % 4
+            if motion==0:
+                xexpr="'iw/2-(iw/zoom/2)'"; yexpr="'ih/2-(ih/zoom/2)'"
+            elif motion==1:
+                xexpr="'max(0,(iw-iw/zoom)*on/max(1,d-1))'"; yexpr="'ih/2-(ih/zoom/2)'"
+            elif motion==2:
+                xexpr="'max(0,(iw-iw/zoom)*(1-on/max(1,d-1)))'"; yexpr="'ih/2-(ih/zoom/2)'"
+            else:
+                xexpr="'iw/2-(iw/zoom/2)'"; yexpr="'max(0,(ih-ih/zoom)*on/max(1,d-1))'"
             vf=(
                 f"scale=1080:1920:force_original_aspect_ratio=increase,"
                 f"crop=1080:1920,"
                 f"zoompan=z='min(zoom+0.0016,1.075)':"
-                f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':"
+                f"x={xexpr}:y={yexpr}:"
                 f"d={frames}:s=1080x1920:fps={FPS},"
                 f"format=yuv420p"
             )
