@@ -1,0 +1,58 @@
+name: Astra Studio Watermark-Free Pilot
+
+on:
+  push:
+    paths:
+      - '.github/workflows/studio-free-pilot.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      ORT_DISABLE_TELEMETRY: '1'
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install renderer dependencies
+        run: pip install -r requirements.txt
+
+      - name: Cache neural voice
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/astra-voice
+          key: astra-kokoro-v1-beb0d184
+
+      - name: Render watermark-free Studio pilot
+        run: |
+          set -euo pipefail
+          python studio_renderer.py --preview /tmp/astra-watermark-free-pilot.mp4
+
+      - name: Validate MP4
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('/tmp/astra-watermark-free-pilot.mp4')
+          if not p.exists() or p.stat().st_size < 10000:
+              raise SystemExit('Studio pilot MP4 missing or unexpectedly small')
+          print('MP4 bytes:',p.stat().st_size)
+          PY
+          ffprobe -v error -select_streams v:0             -show_entries stream=width,height,r_frame_rate             -show_entries format=duration             -of json /tmp/astra-watermark-free-pilot.mp4
+
+      - name: Upload pilot video
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-watermark-free-studio-pilot
+          path: /tmp/astra-watermark-free-pilot.mp4
+          retention-days: 7
+          if-no-files-found: error
