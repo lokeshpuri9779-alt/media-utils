@@ -233,6 +233,8 @@ jobs:
 
       - name: Direct Agnes render probe
         if: env.ASTRA_FORCE_RUN == '1'
+        env:
+          PYTHONPATH: ${{ github.workspace }}
         run: python scripts/agnes_render_probe.py
 
       - name: Upload Agnes render probe
