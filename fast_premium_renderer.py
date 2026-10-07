@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import json, math, subprocess, tempfile
+import json, math, subprocess, tempfile, time
 from pathlib import Path
 
 from imageio_ffmpeg import get_ffmpeg_exe
@@ -8,7 +8,7 @@ from premium_stories import catalog
 from studio_renderer import (
     make_plan, creative_quality_gate, asset_manifest, resolve_assets,
     prepare_media_cache, acquire_story_media, asset_resolution_gate,
-    voice_plan, score_audio, render_frame, W, H, FPS
+    voice_plan, score_audio, background, draw_visual, THEMES, W, H, FPS
 )
 
 
@@ -63,6 +63,7 @@ def _visual_input(item: dict) -> str:
 
 
 def render_fast_premium(out: Path) -> dict:
+    wall_start=time.perf_counter()
     story=next(x for x in catalog() if x.get('production_ready'))
     genre=story.get('genre','space')
     plan=make_plan(story)
@@ -97,8 +98,13 @@ def render_fast_premium(out: Path) -> dict:
                 # Procedural/mechanism beats need no external media. Render exactly
                 # one representative Studio frame, then animate it natively in FFmpeg.
                 still=td/f'scene-{i:02d}-procedural.png'
-                t=float(shot['start']) + min(dur*.45, max(.1,dur-.1))
-                render_frame(plan,t,genre,duration).save(still,'PNG')
+                # Build a clean visual-only still. Do not call render_frame here:
+                # that would bake Studio headlines/captions into the still and then
+                # duplicate them when ASS captions are added later.
+                u=min(dur*.45, max(.1,dur-.1))
+                im=background(genre).copy()
+                draw_visual(im,shot,float(shot['start'])+u,u,THEMES[genre][2])
+                im.save(still,'PNG')
                 src=str(still)
             frames=max(1,int(math.ceil(dur*FPS)))
             clip=td/f'scene-{i:02d}.mp4'
@@ -131,9 +137,12 @@ def render_fast_premium(out: Path) -> dict:
              '-af','loudnorm=I=-14:TP=-1.0:LRA=7','-movflags','+faststart','-shortest',str(out)]
         subprocess.run(cmd,check=True)
 
+    wall_seconds=round(time.perf_counter()-wall_start,3)
     return {
-        'renderer':'ffmpeg-native-premium-v1',
+        'renderer':'ffmpeg-native-premium-v2',
         'duration':round(duration,3),
+        'render_wall_seconds':wall_seconds,
+        'realtime_factor':round(wall_seconds/max(duration,.001),3),
         'resolution':[W,H],
         'fps':FPS,
         'verified_subject_media':verified,
