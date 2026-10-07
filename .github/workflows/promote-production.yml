@@ -1,9 +1,8 @@
 name: promote Astra production
 
+# Automatic CI disabled by user request. Run manually only.
 on:
-  workflow_run:
-    workflows: ["media check"]
-    types: [completed]
+  workflow_dispatch:
 
 permissions:
   contents: write
