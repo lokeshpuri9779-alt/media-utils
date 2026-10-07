@@ -8,6 +8,7 @@ from edit_spec import build_edit_spec, preflight
 from premium_stories import catalog
 from quality_lab import assess_render, scene_change_report, write_report
 from fast_premium_renderer import render_fast_premium
+from shorts_package import build_shorts_package, as_dict
 
 
 def validate_candidate(story: dict, root: Path) -> dict:
@@ -36,8 +37,10 @@ def validate_candidate(story: dict, root: Path) -> dict:
     quality["pacing"]=scene_change_report(video)
     write_report(folder/"render.json",report)
     write_report(folder/"quality.json",quality)
+    package=as_dict(build_shorts_package(story,report))
+    write_report(folder/"shorts-package.json",package)
     result.update(status="passed" if quality["pass"] else "rejected-after-render",
-                  quality=quality,video=video.name)
+                  quality=quality,video=video.name,shorts_package=package)
     return result
 
 
