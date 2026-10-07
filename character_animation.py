@@ -67,12 +67,16 @@ def choose_character_variant(story: dict) -> str:
 def build_character_shot_prompt(story: dict, shot: dict, index: int, total: int) -> dict:
     variant=choose_character_variant(story)
     profile=REFERENCE_PROFILES[variant]
-    subject=str(shot.get("speech") or shot.get("headline") or "").strip()
+    subject=str(shot.get("dialogue") or shot.get("speech") or shot.get("headline") or "").strip()
+    speaker=str(shot.get("speaker") or "").strip()
     action=str(shot.get("character_action") or subject)
     continuity=str(story.get("character_bible") or "Maintain the same established characters and wardrobe.")
     prompt=(
         f"{profile['render_style']}. Vertical 9:16. {profile['character_design']}. "
         f"Scene {index+1} of {total}: {action}. "
+        f"Dialogue beat: {speaker + ': ' if speaker else ''}{subject}. "
+        f"Stage the speaking character with clear mouth, eye, ear and body reactions while the listener reacts naturally. "
+        f"Do not render dialogue as visible text. "
         f"{profile['lighting']}. {profile['framing']}. "
         f"Camera: {profile['camera'][index % len(profile['camera'])]}. "
         f"Motion: {profile['motion']}. {profile['environment']}. "
@@ -82,7 +86,7 @@ def build_character_shot_prompt(story: dict, shot: dict, index: int, total: int)
         "engine_role": "character-video-generation",
         "variant": variant,
         "prompt": prompt,
-        "negative": "static slideshow, presentation card, infographic panel, deformed hands, identity drift, text-heavy frame, watermark",
+        "negative": "static slideshow, presentation card, infographic panel, visible dialogue text, subtitles burned into image, deformed hands or paws, frozen faces, identity drift, text-heavy frame, watermark",
         "target_seconds": profile["shot_seconds"],
         "continuity_required": True,
         "full_frame": True,
