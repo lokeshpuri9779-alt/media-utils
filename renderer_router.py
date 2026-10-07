@@ -5,6 +5,7 @@ OmniRoute as a video renderer and never enables paid inference implicitly.
 """
 from __future__ import annotations
 from dataclasses import dataclass, asdict
+from provider_guard import validate_provider, render_cost_record, provider_health_registry
 
 @dataclass(frozen=True)
 class Renderer:
@@ -123,8 +124,10 @@ def rank_validated_local(requirements: dict) -> list[dict]:
     is_news = bool(requirements.get("is_news"))
     prefer_3d = bool(requirements.get("prefer_3d")) and not is_news
     ranked = []
+    health = provider_health_registry(VALIDATED_LOCAL_RENDERERS)
     for key, meta in VALIDATED_LOCAL_RENDERERS.items():
-        if not meta.get("enabled"):
+        gate = validate_provider(key, meta)
+        if not gate["pass"]:
             continue
         strengths = meta["strengths"]
         score = 0
@@ -160,6 +163,8 @@ def rank_validated_local(requirements: dict) -> list[dict]:
             "ready": True,
             "cost": meta["cost"],
             "watermark_free": meta["watermark_free"],
+            "cost_record": render_cost_record(key, meta),
+            "health": (health.get("providers") or {}).get(key, {}),
         })
     return sorted(ranked, key=lambda x: x["score"], reverse=True)
 
@@ -170,4 +175,5 @@ def select_validated_local(requirements: dict) -> dict:
         "status": "ready" if ranked else "blocked",
         "ranked": ranked,
         "policy": "validated_zero_cost_watermark_free_only",
+        "provider_health": provider_health_registry(VALIDATED_LOCAL_RENDERERS),
     }
