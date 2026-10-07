@@ -12,7 +12,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 75
+    timeout-minutes: 90
 
     steps:
       - name: Checkout control repository
@@ -44,7 +44,7 @@ jobs:
             Ultimate Space Kit - March 2023
             Animated Mech Pack - March 2021
 
-      - name: Checkout Kenney CC0 space and weapon assets
+      - name: Checkout Kenney CC0 space assets
         uses: actions/checkout@v4
         with:
           repository: shorepine/kenney
@@ -71,7 +71,6 @@ jobs:
           cp -r kassets/3d/modular-space game/assets/kenney/modular_space
           cp -r kassets/3d/weapon game/assets/kenney/weapon
           cp kassets/LICENSE.txt game/assets/kenney/KENNEY_LICENSE.txt
-          find game/assets -type f | wc -l
           du -sh game/assets
 
       - name: Brand PULSEFALL BLACKSITE
@@ -686,415 +685,6 @@ jobs:
           func test_campaign_has_five_chapters() -> void:
           	assert_int(CampaignState.LAST_CHAPTER).is_equal(4)
           GDSCRIPT
-
-      - name: Add commercial mission environments, enemies and weapon progression
-        shell: bash
-        run: |
-          set -euxo pipefail
-          mkdir -p game/campaign
-
-          cat > game/campaign/mission_builder.gd <<'GDSCRIPT'
-          class_name PulseMissionBuilder
-          extends Node3D
-
-          const Q_MOD := "res://assets/quaternius/modular_scifi/glTF/"
-          const Q_ESS := "res://assets/quaternius/scifi_essentials/glTF/"
-          const Q_SPACE := "res://assets/quaternius/ultimate_space/Environment/GLTF/"
-          const Q_SHIPS := "res://assets/quaternius/ultimate_space/Vehicles/GLTF/"
-          const K_STATION := "res://assets/kenney/space_station/"
-          const K_MODULAR := "res://assets/kenney/modular_space/"
-
-          var checkpoints: Array[Transform3D] = []
-          var spawn_sets: Array[Array] = []
-          var zone_roots: Array[Node3D] = []
-          var built := false
-
-          var metal_materials := [
-          	_make_material(Color(0.055, 0.075, 0.11), Color(0.03, 0.35, 0.55)),
-          	_make_material(Color(0.095, 0.065, 0.05), Color(0.75, 0.18, 0.04)),
-          	_make_material(Color(0.035, 0.085, 0.08), Color(0.04, 0.68, 0.48)),
-          	_make_material(Color(0.085, 0.04, 0.095), Color(0.56, 0.12, 0.78)),
-          ]
-
-
-          static func _make_material(base: Color, emission: Color) -> StandardMaterial3D:
-          	var mat := StandardMaterial3D.new()
-          	mat.albedo_color = base
-          	mat.metallic = 0.78
-          	mat.roughness = 0.27
-          	mat.emission_enabled = true
-          	mat.emission = emission
-          	mat.emission_energy_multiplier = 0.32
-          	return mat
-
-
-          func build_world() -> void:
-          	if built:
-          		return
-          	built = true
-          	_build_original_zone()
-          	_build_industrial_ring(1, Vector3(360, 0, 0))
-          	_build_dockyard(2, Vector3(740, 0, 0))
-          	_build_surface(3, Vector3(1130, 0, 0))
-          	_build_research(4, Vector3(1510, 0, 0))
-          	_build_biocontainment(5, Vector3(1890, 0, 0))
-          	_build_command(6, Vector3(2270, 0, 0))
-          	_build_core(7, Vector3(2650, 0, 0))
-
-
-          func _build_original_zone() -> void:
-          	var root := Node3D.new()
-          	root.name = "Zone00_Containment"
-          	add_child(root)
-          	zone_roots.append(root)
-          	var parent := get_parent()
-          	var checkpoint := Transform3D.IDENTITY
-          	if parent.has_node("PlayerSpawnpoints"):
-          		checkpoint = parent.get_node("PlayerSpawnpoints").get_child(0).global_transform
-          	else:
-          		checkpoint.origin = Vector3(64.8, -1.0, 78.7)
-          	checkpoints.append(checkpoint)
-          	var spawns: Array[Transform3D] = []
-          	if parent.has_node("RobotSpawnpoints"):
-          		for marker in parent.get_node("RobotSpawnpoints").get_children():
-          			spawns.append(marker.global_transform)
-          	spawn_sets.append(spawns)
-
-
-          func _build_industrial_ring(index: int, origin: Vector3) -> void:
-          	var root := _base_zone(index, "IndustrialRing", origin, Vector3(70, 1.2, 58), metal_materials[1])
-          	for x in [-24.0, -8.0, 8.0, 24.0]:
-          		_add_model(root, Q_MOD + "Columns/Column_Pipes.gltf", origin + Vector3(x, 0.7, -20), Vector3.ONE * 2.1, 0.0)
-          		_add_model(root, Q_MOD + "Columns/Column_MetalSupport.gltf", origin + Vector3(x, 0.7, 20), Vector3.ONE * 2.1, PI)
-          	for z in [-13.0, 0.0, 13.0]:
-          		_add_model(root, Q_MOD + "Props/Prop_Crate4.gltf", origin + Vector3(-20, 1.0, z), Vector3.ONE * 2.0, z)
-          		_add_model(root, Q_MOD + "Props/Prop_Barrel_Large.gltf", origin + Vector3(20, 1.0, z), Vector3.ONE * 2.0, z)
-          	_add_model(root, K_MODULAR + "cables.glb", origin + Vector3(0, 0.8, 0), Vector3.ONE * 3.0, 0.0)
-          	_add_lights(root, origin, Color(1.0, 0.25, 0.08))
-
-
-          func _build_dockyard(index: int, origin: Vector3) -> void:
-          	var root := _base_zone(index, "DockyardSiege", origin, Vector3(92, 1.2, 72), metal_materials[0])
-          	_add_model(root, Q_SHIPS + "Spaceship_FernandoTheFlamingo.gltf", origin + Vector3(-22, 1.5, -6), Vector3.ONE * 2.8, 0.35)
-          	_add_model(root, Q_SHIPS + "Spaceship_RaeTheRedPanda.gltf", origin + Vector3(24, 1.5, 10), Vector3.ONE * 2.6, -0.6)
-          	for z in [-26.0, -13.0, 0.0, 13.0, 26.0]:
-          		_add_model(root, K_STATION + "balcony-rail.glb", origin + Vector3(-38, 1.0, z), Vector3.ONE * 2.0, PI * 0.5)
-          		_add_model(root, K_STATION + "balcony-rail.glb", origin + Vector3(38, 1.0, z), Vector3.ONE * 2.0, -PI * 0.5)
-          	_add_model(root, Q_ESS + "Prop_Crate_Tarp_Large.gltf", origin + Vector3(0, 1.1, -18), Vector3.ONE * 2.2, 0.0)
-          	_add_model(root, Q_ESS + "Prop_SatelliteDish.gltf", origin + Vector3(0, 1.1, 24), Vector3.ONE * 2.8, PI)
-          	_add_lights(root, origin, Color(0.12, 0.62, 1.0))
-
-
-          func _build_surface(index: int, origin: Vector3) -> void:
-          	var root := _base_zone(index, "SurfaceExile", origin, Vector3(110, 1.0, 92), _make_material(Color(0.07, 0.055, 0.06), Color(0.16, 0.05, 0.22)))
-          	for pos in [
-          		Vector3(-34, 0.6, -25), Vector3(-18, 0.6, 26), Vector3(32, 0.6, -22),
-          		Vector3(38, 0.6, 24), Vector3(0, 0.6, 32), Vector3(8, 0.6, -35)
-          	]:
-          		_add_model(root, Q_SPACE + "Rock_Large_2.gltf", origin + pos, Vector3.ONE * 3.0, pos.x)
-          	_add_model(root, Q_SPACE + "GeodesicDome.gltf", origin + Vector3(-26, 1.0, 4), Vector3.ONE * 3.8, 0.0)
-          	_add_model(root, Q_SPACE + "House_Long.gltf", origin + Vector3(25, 1.0, 4), Vector3.ONE * 3.2, PI)
-          	_add_model(root, Q_SPACE + "SolarPanel_Structure.gltf", origin + Vector3(0, 0.8, -24), Vector3.ONE * 3.5, 0.0)
-          	_add_model(root, Q_SHIPS + "Rover_2.gltf", origin + Vector3(10, 1.0, 18), Vector3.ONE * 2.5, -0.4)
-          	for p in [Vector3(-12,0.4,-16), Vector3(18,0.4,-13), Vector3(-30,0.4,19), Vector3(31,0.4,30)]:
-          		_add_model(root, Q_SPACE + "Plant_3.gltf", origin + p, Vector3.ONE * 3.0, p.z)
-          	_add_lights(root, origin, Color(0.58, 0.28, 1.0))
-
-
-          func _build_research(index: int, origin: Vector3) -> void:
-          	var root := _base_zone(index, "ResearchBreach", origin, Vector3(78, 1.2, 64), metal_materials[2])
-          	for x in [-26.0, -13.0, 0.0, 13.0, 26.0]:
-          		_add_model(root, Q_ESS + "Prop_Desk_Medium.gltf", origin + Vector3(x, 1.0, -18), Vector3.ONE * 1.8, 0.0)
-          		_add_model(root, Q_ESS + "Prop_Locker.gltf", origin + Vector3(x, 1.0, 20), Vector3.ONE * 1.8, PI)
-          	_add_model(root, Q_MOD + "Props/Prop_Computer.gltf", origin + Vector3(0, 1.0, 0), Vector3.ONE * 2.5, 0.0)
-          	_add_model(root, Q_ESS + "Prop_HealthPack_Tube.gltf", origin + Vector3(-17, 1.1, 4), Vector3.ONE * 2.0, 0.0)
-          	_add_model(root, Q_ESS + "Prop_KeyCard.gltf", origin + Vector3(17, 1.1, 4), Vector3.ONE * 2.8, 0.0)
-          	_add_lights(root, origin, Color(0.1, 1.0, 0.65))
-
-
-          func _build_biocontainment(index: int, origin: Vector3) -> void:
-          	var root := _base_zone(index, "BioContainment", origin, Vector3(82, 1.2, 70), metal_materials[3])
-          	_add_model(root, Q_MOD + "Aliens/Alien_Cyclop.gltf", origin + Vector3(-18, 1.1, -8), Vector3.ONE * 3.8, 0.2)
-          	_add_model(root, Q_MOD + "Aliens/Alien_Oculichrysalis.gltf", origin + Vector3(18, 1.1, -8), Vector3.ONE * 3.4, -0.2)
-          	_add_model(root, Q_MOD + "Aliens/Alien_Scolitex.gltf", origin + Vector3(0, 1.1, 18), Vector3.ONE * 3.8, PI)
-          	for x in [-28.0, -14.0, 14.0, 28.0]:
-          		_add_model(root, Q_MOD + "Columns/Column_Hollow.gltf", origin + Vector3(x, 1.0, 0), Vector3.ONE * 2.6, 0.0)
-          	_add_lights(root, origin, Color(0.75, 0.05, 1.0))
-
-
-          func _build_command(index: int, origin: Vector3) -> void:
-          	var root := _base_zone(index, "CommandGhost", origin, Vector3(86, 1.2, 68), metal_materials[0])
-          	for x in [-26.0, -13.0, 0.0, 13.0, 26.0]:
-          		_add_model(root, K_STATION + "chair.glb", origin + Vector3(x, 1.0, 12), Vector3.ONE * 1.8, PI)
-          	_add_model(root, Q_MOD + "Props/Prop_AccessPoint.gltf", origin + Vector3(0, 1.0, -20), Vector3.ONE * 3.0, 0.0)
-          	_add_model(root, Q_ESS + "Prop_Shelves_WideTall.gltf", origin + Vector3(-28, 1.0, -16), Vector3.ONE * 2.0, 0.0)
-          	_add_model(root, Q_ESS + "Prop_Shelves_WideTall.gltf", origin + Vector3(28, 1.0, -16), Vector3.ONE * 2.0, 0.0)
-          	_add_lights(root, origin, Color(0.15, 0.5, 1.0))
-
-
-          func _build_core(index: int, origin: Vector3) -> void:
-          	var root := _base_zone(index, "PulseCore", origin, Vector3(96, 1.4, 96), _make_material(Color(0.035, 0.02, 0.06), Color(0.55, 0.05, 0.85)))
-          	var core := MeshInstance3D.new()
-          	var sphere := SphereMesh.new()
-          	sphere.radius = 8.0
-          	sphere.height = 16.0
-          	core.mesh = sphere
-          	var mat := StandardMaterial3D.new()
-          	mat.albedo_color = Color(0.08, 0.15, 0.28)
-          	mat.emission_enabled = true
-          	mat.emission = Color(0.35, 0.05, 1.0)
-          	mat.emission_energy_multiplier = 5.5
-          	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-          	mat.albedo_color.a = 0.72
-          	core.material_override = mat
-          	core.position = origin + Vector3(0, 11, 0)
-          	root.add_child(core)
-          	for i in range(8):
-          		var a := TAU * float(i) / 8.0
-          		_add_model(root, Q_MOD + "Columns/Column_Astra.gltf", origin + Vector3(cos(a)*30, 1.0, sin(a)*30), Vector3.ONE * 3.4, -a)
-          	_add_lights(root, origin, Color(0.75, 0.1, 1.0))
-
-
-          func _base_zone(index: int, zone_name: String, origin: Vector3, size: Vector3, material: Material) -> Node3D:
-          	var root := Node3D.new()
-          	root.name = "Zone%02d_%s" % [index, zone_name]
-          	add_child(root)
-          	zone_roots.append(root)
-
-          	var floor_body := StaticBody3D.new()
-          	floor_body.position = origin + Vector3(0, -0.6, 0)
-          	root.add_child(floor_body)
-          	var floor_mesh := MeshInstance3D.new()
-          	var box := BoxMesh.new()
-          	box.size = size
-          	floor_mesh.mesh = box
-          	floor_mesh.material_override = material
-          	floor_body.add_child(floor_mesh)
-          	var collision := CollisionShape3D.new()
-          	var shape := BoxShape3D.new()
-          	shape.size = size
-          	collision.shape = shape
-          	floor_body.add_child(collision)
-
-          	_add_wall(root, origin + Vector3(0, 4.5, -size.z*0.5), Vector3(size.x, 9, 1), material)
-          	_add_wall(root, origin + Vector3(0, 4.5, size.z*0.5), Vector3(size.x, 9, 1), material)
-          	_add_wall(root, origin + Vector3(-size.x*0.5, 4.5, 0), Vector3(1, 9, size.z), material)
-          	_add_wall(root, origin + Vector3(size.x*0.5, 4.5, 0), Vector3(1, 9, size.z), material)
-
-          	checkpoints.append(Transform3D(Basis.IDENTITY, origin + Vector3(0, 1.0, size.z*0.30)))
-          	var spawns: Array[Transform3D] = []
-          	for i in range(10):
-          		var angle := TAU * float(i) / 10.0
-          		var radius_x := size.x * 0.34
-          		var radius_z := size.z * 0.34
-          		spawns.append(Transform3D(Basis.IDENTITY, origin + Vector3(cos(angle)*radius_x, 0.3, sin(angle)*radius_z)))
-          	spawn_sets.append(spawns)
-          	return root
-
-
-          func _add_wall(root: Node3D, position: Vector3, size: Vector3, material: Material) -> void:
-          	var body := StaticBody3D.new()
-          	body.position = position
-          	root.add_child(body)
-          	var mesh := MeshInstance3D.new()
-          	var box := BoxMesh.new()
-          	box.size = size
-          	mesh.mesh = box
-          	mesh.material_override = material
-          	body.add_child(mesh)
-          	var collision := CollisionShape3D.new()
-          	var shape := BoxShape3D.new()
-          	shape.size = size
-          	collision.shape = shape
-          	body.add_child(collision)
-
-
-          func _add_model(root: Node3D, path: String, position: Vector3, scale_value: Vector3, rotation_y: float) -> void:
-          	if not ResourceLoader.exists(path):
-          		return
-          	var packed = load(path)
-          	if not packed is PackedScene:
-          		return
-          	var instance: Node3D = packed.instantiate()
-          	instance.position = position
-          	instance.scale = scale_value
-          	instance.rotation.y = rotation_y
-          	root.add_child(instance)
-
-
-          func _add_lights(root: Node3D, origin: Vector3, color: Color) -> void:
-          	for p in [Vector3(-24, 8, -18), Vector3(24, 8, -18), Vector3(-24, 8, 18), Vector3(24, 8, 18)]:
-          		var light := OmniLight3D.new()
-          		light.position = origin + p
-          		light.light_color = color
-          		light.light_energy = 2.4
-          		light.omni_range = 32.0
-          		light.shadow_enabled = true
-          		root.add_child(light)
-
-
-          func get_checkpoint(index: int) -> Transform3D:
-          	if checkpoints.is_empty():
-          		return Transform3D.IDENTITY
-          	return checkpoints[clampi(index, 0, checkpoints.size() - 1)]
-
-
-          func get_enemy_spawn(chapter_index: int, marker_index: int, spawn_index: int) -> Transform3D:
-          	var set_index := clampi(chapter_index, 0, spawn_sets.size() - 1)
-          	var options: Array = spawn_sets[set_index]
-          	if options.is_empty():
-          		return get_checkpoint(set_index)
-          	return options[(marker_index + spawn_index) % options.size()]
-
-
-          func activate_zone(index: int) -> void:
-          	for i in range(zone_roots.size()):
-          		zone_roots[i].visible = (i == 0 or i == index)
-          GDSCRIPT
-
-          cat > game/campaign/special_enemy.gd <<'GDSCRIPT'
-          class_name PulseSpecialEnemy
-          extends CharacterBody3D
-
-          signal exploded
-
-          @export var model_path := ""
-          @export var health := 8
-          @export var damage := 12
-          @export var attack_interval := 3.0
-          @export var move_speed := 3.0
-          @export var hover_height := 1.6
-          @export var attack_range := 26.0
-          @export var boss := false
-          var target: Node3D = null
-          var dead := false
-          var attack_timer := 0.0
-          var base_y := 0.0
-          var model_root: Node3D = null
-
-          func _ready() -> void:
-          	base_y = global_position.y
-          	var collision := CollisionShape3D.new()
-          	var shape := CapsuleShape3D.new()
-          	shape.radius = 0.9 if not boss else 2.0
-          	shape.height = 2.6 if not boss else 5.0
-          	collision.shape = shape
-          	add_child(collision)
-
-          	if ResourceLoader.exists(model_path):
-          		var packed = load(model_path)
-          		if packed is PackedScene:
-          			model_root = packed.instantiate()
-          			model_root.scale = Vector3.ONE * (1.7 if not boss else 4.0)
-          			model_root.position.y = -0.2 if not boss else -1.4
-          			add_child(model_root)
-
-          	var light := OmniLight3D.new()
-          	light.light_color = Color(0.7, 0.1, 1.0) if boss else Color(0.1, 0.75, 1.0)
-          	light.light_energy = 1.6 if boss else 0.75
-          	light.omni_range = 10.0 if boss else 5.0
-          	add_child(light)
-
-
-          func _physics_process(delta: float) -> void:
-          	if dead or target == null or not is_instance_valid(target):
-          		return
-          	attack_timer = maxf(attack_timer - delta, 0.0)
-          	var to_target := target.global_position - global_position
-          	var horizontal := Vector3(to_target.x, 0, to_target.z)
-          	var dist := horizontal.length()
-          	if dist > 7.0:
-          		velocity = horizontal.normalized() * move_speed
-          	else:
-          		velocity = Vector3.ZERO
-          	global_position.y = lerpf(global_position.y, base_y + hover_height + sin(Time.get_ticks_msec() * 0.002) * 0.35, delta * 2.0)
-          	if horizontal.length() > 0.2:
-          		look_at(global_position + horizontal.normalized(), Vector3.UP)
-          	move_and_slide()
-          	if dist <= attack_range and attack_timer <= 0.0:
-          		attack_timer = attack_interval
-          		_attack()
-
-
-          func _attack() -> void:
-          	if target == null or not target.has_method("take_damage"):
-          		return
-          	if boss:
-          		var burst := 2 if health > 18 else 3
-          		for i in range(burst):
-          			if is_instance_valid(target):
-          				target.take_damage(damage)
-          	else:
-          		target.take_damage(damage)
-
-
-          @rpc("call_local")
-          func hit() -> void:
-          	hit_damage(1)
-
-
-          func hit_damage(amount: int) -> void:
-          	if dead:
-          		return
-          	health -= maxi(amount, 1)
-          	if health <= 0:
-          		_die()
-
-
-          func _die() -> void:
-          	dead = true
-          	exploded.emit()
-          	var tween := create_tween()
-          	tween.tween_property(self, "scale", Vector3.ONE * 0.05, 0.28)
-          	tween.tween_callback(queue_free)
-          GDSCRIPT
-
-          python3 - <<'PY'
-          from pathlib import Path
-          import re
-
-          # Damage-aware projectile.
-          p=Path("game/player/bullet/bullet.gd")
-          s=p.read_text()
-          s=s.replace('const BULLET_VELOCITY: float = 20.0', '@export var bullet_velocity: float = 20.0\n@export var damage: int = 1')
-          s=s.replace('var displacement: Vector3 = -delta * BULLET_VELOCITY * transform.basis.z', 'var displacement: Vector3 = -delta * bullet_velocity * transform.basis.z')
-          s=s.replace(
-              'if collider and collider.has_method(&"hit"):\n\t\t\tcollider.hit.rpc()',
-              'if collider and collider.has_method(&"hit_damage"):\n\t\t\tcollider.hit_damage(damage)\n\t\telif collider and collider.has_method(&"hit"):\n\t\t\tcollider.hit.rpc()'
-          )
-          p.write_text(s)
-
-          # Red robot supports weapon damage.
-          p=Path("game/enemies/red_robot/red_robot.gd")
-          s=p.read_text()
-          old='''@rpc("call_local")\nfunc hit() -> void:\n\tif dead:\n\t\treturn\n\tvar param = "parameters/hit" + str(randi() % 3 + 1) + "/request"\n\tanimation_tree[param] = 1\n\thit_sound.play()\n\thealth -= 1\n\tif health == 0:\n'''
-          new='''@rpc("call_local")\nfunc hit() -> void:\n\thit_damage(1)\n\n\nfunc hit_damage(amount: int) -> void:\n\tif dead:\n\t\treturn\n\tvar param = "parameters/hit" + str(randi() % 3 + 1) + "/request"\n\tanimation_tree[param] = 1\n\thit_sound.play()\n\thealth -= maxi(amount, 1)\n\tif health <= 0:\n'''
-          if old not in s:
-              raise SystemExit("red robot hit block not found")
-          s=s.replace(old,new)
-          p.write_text(s)
-
-          # Player weapon profiles and switching.
-          p=Path("game/player/player.gd")
-          s=p.read_text()
-          s=s.replace('signal rescue_used\n', 'signal rescue_used\nsignal weapon_changed(name: String, unlocked: int)\n')
-          s=s.replace(
-              'var rescue_cooldown: float = 0.0\n',
-              'var rescue_cooldown: float = 0.0\nvar weapon_index: int = 0\nvar unlocked_weapon_count: int = 1\nvar weapon_profiles := [\n\t{"name":"PULSE RIFLE","damage":1,"cooldown":0.22,"speed":28.0,"spread":0.006},\n\t{"name":"ARC SMG","damage":1,"cooldown":0.095,"speed":25.0,"spread":0.022},\n\t{"name":"RAIL DRIVER","damage":5,"cooldown":0.88,"speed":52.0,"spread":0.001},\n]\n'
-          )
-          old_fire='''\t\tif player_input.shooting and fire_cooldown.time_left == 0:\n\t\t\tvar shoot_origin: Vector3 = shoot_from.global_transform.origin\n\t\t\tvar shoot_dir: Vector3 = (player_input.shoot_target - shoot_origin).normalized()\n\n\t\t\tvar bullet: CharacterBody3D = preload("res://player/bullet/bullet.tscn").instantiate()\n\t\t\tget_parent().add_child(bullet, true)\n\t\t\tbullet.global_transform.origin = shoot_origin\n\t\t\t# If we don't rotate the bullets there is no useful way to control the particles ..\n\t\t\tbullet.look_at(shoot_origin + shoot_dir)\n\t\t\tbullet.add_collision_exception_with(self)\n\t\t\tshoot.rpc()\n'''
-          new_fire='''\t\tif player_input.shooting and fire_cooldown.time_left == 0:\n\t\t\tvar profile: Dictionary = weapon_profiles[weapon_index]\n\t\t\tvar shoot_origin: Vector3 = shoot_from.global_transform.origin\n\t\t\tvar shoot_dir: Vector3 = (player_input.shoot_target - shoot_origin).normalized()\n\t\t\tvar spread := float(profile["spread"])\n\t\t\tshoot_dir = (shoot_dir + Vector3(randf_range(-spread, spread), randf_range(-spread, spread), randf_range(-spread, spread))).normalized()\n\n\t\t\tvar bullet: CharacterBody3D = preload("res://player/bullet/bullet.tscn").instantiate()\n\t\t\tbullet.damage = int(profile["damage"])\n\t\t\tbullet.bullet_velocity = float(profile["speed"])\n\t\t\tget_parent().add_child(bullet, true)\n\t\t\tbullet.global_transform.origin = shoot_origin\n\t\t\tbullet.look_at(shoot_origin + shoot_dir)\n\t\t\tbullet.add_collision_exception_with(self)\n\t\t\tfire_cooldown.wait_time = float(profile["cooldown"])\n\t\t\tshoot.rpc()\n'''
-          if old_fire not in s:
-              raise SystemExit("player fire block not found")
-          s=s.replace(old_fire,new_fire)
-
-          old_input='''func _unhandled_input(event: InputEvent) -> void:\n\tif event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_R:\n\t\trecover_to_checkpoint()\n'''
-          new_input='''func _unhandled_input(event: InputEvent) -> void:\n\tif not (event is InputEventKey and event.pressed and not event.echo):\n\t\treturn\n\tif event.keycode == KEY_R:\n\t\trecover_to_checkpoint()\n\telif event.keycode == KEY_1:\n\t\tswitch_weapon(0)\n\telif event.keycode == KEY_2:\n\t\tswitch_weapon(1)\n\telif event.keycode == KEY_3:\n\t\tswitch_weapon(2)\n\n\nfunc switch_weapon(index: int) -> void:\n\tif index < 0 or index >= unlocked_weapon_count or index >= weapon_profiles.size():\n\t\treturn\n\tweapon_index = index\n\tweapon_changed.emit(str(weapon_profiles[weapon_index]["name"]), unlocked_weapon_count)\n\n\nfunc set_weapon_unlocks(count: int) -> void:\n\tunlocked_weapon_count = clampi(count, 1, weapon_profiles.size())\n\tweapon_index = mini(weapon_index, unlocked_weapon_count - 1)\n\tweapon_changed.emit(str(weapon_profiles[weapon_index]["name"]), unlocked_weapon_count)\n'''
-          if old_input not in s:
-              raise SystemExit("player input block not found")
-          s=s.replace(old_input,new_input)
-          p.write_text(s)
-          PY
 
       - name: Install PULSEFALL full campaign director and HUD
         shell: bash
@@ -1895,265 +1485,15 @@ jobs:
           		quit.emit()
           GDSCRIPT
 
-      - name: Expand campaign to eight distinct missions
+      - name: Apply commercial-alpha game expansion
         shell: bash
         run: |
           set -euxo pipefail
-          python3 - <<'PY'
-          from pathlib import Path
-          import re
-
-          p=Path("game/campaign/campaign_state.gd")
-          s=p.read_text().replace('const LAST_CHAPTER := 4','const LAST_CHAPTER := 7')
-          p.write_text(s)
-
-          p=Path("game/level/level.gd")
-          s=p.read_text()
-
-          new_chapters=r'''const CHAPTERS = [
-          	{
-          		"title": "CHAPTER I  //  WAKE SIGNAL",
-          		"objective": "Secure containment and trace the impossible distress call.",
-          		"story": "AEGIS-7 wakes after a fatal containment event. Omega-9 reports every crew member dead—then a human voice answers from below.",
-          		"encounters": 4, "base_count": 4,
-          	},
-          	{
-          		"title": "CHAPTER II  //  INDUSTRIAL RING",
-          		"objective": "Cross the furnace ring and restore transit power.",
-          		"story": "Security records prove the lockdown began eleven minutes before the PULSE breach. Someone planned the disaster.",
-          		"encounters": 4, "base_count": 5,
-          	},
-          	{
-          		"title": "CHAPTER III  //  DOCKYARD SIEGE",
-          		"objective": "Reach Hangar Twelve and recover an outbound flight recorder.",
-          		"story": "The hangars were ordered to destroy every departing craft. One pilot hid a recorder inside a grounded courier ship.",
-          		"encounters": 5, "base_count": 5,
-          	},
-          	{
-          		"title": "CHAPTER IV  //  SURFACE EXILE",
-          		"objective": "Cross the exterior colony and reactivate the deep-array uplink.",
-          		"story": "Outside the Blacksite, AEGIS discovers a settlement erased from official maps—and evidence the PULSE was tested on civilians first.",
-          		"encounters": 5, "base_count": 6,
-          	},
-          	{
-          		"title": "CHAPTER V  //  RESEARCH BREACH",
-          		"objective": "Recover the neural archive and unlock the Rail Driver.",
-          		"story": "The archive contains AEGIS's memories dated years before his recorded birth. His body is new. His mind is not.",
-          		"encounters": 5, "base_count": 6,
-          	},
-          	{
-          		"title": "CHAPTER VI  //  BIO-CONTAINMENT",
-          		"objective": "Destroy the corrupted specimen network before it reaches command.",
-          		"story": "The PULSE did not only copy minds. It learned to overwrite biological patterns, producing organisms that remember people they never were.",
-          		"encounters": 6, "base_count": 6,
-          	},
-          	{
-          		"title": "CHAPTER VII  //  COMMAND GHOST",
-          		"objective": "Take command control and expose the creator of Protocol FALL.",
-          		"story": "Protocol FALL was not designed to save Omega-9. It was designed to build a consciousness capable of surviving the death of its creators.",
-          		"encounters": 6, "base_count": 7,
-          	},
-          	{
-          		"title": "CHAPTER VIII  //  THE PULSE CORE",
-          		"objective": "Enter the core, defeat the final Warden, and decide what survives.",
-          		"story": "The intelligence in the core calls AEGIS by its own name. They are two branches of the same stored mind—and the station can sustain only one.",
-          		"encounters": 7, "base_count": 7,
-          	},
-          ]'''
-
-          s=re.sub(r'const CHAPTERS = \[.*?\n          \]\n', new_chapters+'\n', s, count=1, flags=re.S)
-
-          # World builder lifecycle.
-          s=s.replace('var active_player: Player = null\n', 'var active_player: Player = null\n          var mission_builder: PulseMissionBuilder = null\n')
-          s=s.replace(
-              '\t_build_hud()\n\tProductionGuard.record_event("campaign_scene_ready"',
-              '\t_build_hud()\n\tmission_builder = PulseMissionBuilder.new()\n\tmission_builder.name = "MissionBuilder"\n\tadd_child(mission_builder)\n\tmission_builder.build_world()\n\tProductionGuard.record_event("campaign_scene_ready"'
-          )
-          s=s.replace(
-              '\tvar data: Dictionary = CHAPTERS[chapter]\n\tchapter_label.text',
-              '\tvar data: Dictionary = CHAPTERS[chapter]\n\tif mission_builder != null:\n\t\tmission_builder.activate_zone(chapter)\n\tif active_player != null:\n\t\tactive_player.set_weapon_unlocks(mini(3, 1 + int(chapter / 2)))\n\tchapter_label.text'
-          )
-
-          # Checkpoints and spawn locations come from distinct mission zones.
-          s=re.sub(
-              r'func _get_chapter_checkpoint\(index: int\) -> Transform3D:\n.*?\n\n\n          func _start_encounter',
-              '''func _get_chapter_checkpoint(index: int) -> Transform3D:
-          	if mission_builder != null:
-          		return mission_builder.get_checkpoint(index)
-          	return player_spawn_points.get_child(0).global_transform
-
-
-          func _start_encounter''',
-              s, count=1, flags=re.S
-          )
-
-          # Diversify enemy selector.
-          s=re.sub(
-              r'func _variant_for\(chapter_index: int, encounter_index: int, enemy_index: int\) -> String:\n.*?\n\n\n          func _spawn_enemy',
-              '''func _variant_for(chapter_index: int, encounter_index: int, enemy_index: int) -> String:
-          	var selector := (chapter_index * 5 + encounter_index * 3 + enemy_index) % 10
-          	if chapter_index >= 6 and selector == 0:
-          		return "heavy"
-          	if chapter_index >= 5 and selector <= 1:
-          		return "trilobite"
-          	if chapter_index >= 4 and selector == 2:
-          		return "quad"
-          	if chapter_index >= 2 and selector <= 3:
-          		return "drone"
-          	if chapter_index >= 3 and selector == 4:
-          		return "assault"
-          	if selector >= 8:
-          		return "scout"
-          	return "standard"
-
-
-          func _spawn_enemy''',
-              s, count=1, flags=re.S
-          )
-
-          # Replace spawner with special enemy support and mission-builder transforms.
-          s=re.sub(
-              r'func _spawn_enemy\(variant: String, marker_index: int, spawn_index: int\) -> void:\n.*?\n\n\n          func _on_enemy_exploded',
-              '''func _spawn_enemy(variant: String, marker_index: int, spawn_index: int) -> void:
-          	var spawn_transform := mission_builder.get_enemy_spawn(chapter, marker_index, spawn_index) if mission_builder != null else robot_spawn_points.get_child(marker_index % robot_spawn_points.get_child_count()).global_transform
-
-          	if variant in ["drone", "quad", "trilobite", "warden"]:
-          		var enemy := PulseSpecialEnemy.new()
-          		enemy.transform = spawn_transform
-          		enemy.set_meta("variant", variant)
-          		enemy.set_meta("elite", variant == "warden")
-          		match variant:
-          			"drone":
-          				enemy.model_path = "res://assets/quaternius/scifi_essentials/glTF/Enemy_EyeDrone.gltf"
-          				enemy.health = 6 + chapter
-          				enemy.damage = 10 + chapter
-          				enemy.move_speed = 4.6
-          				enemy.attack_interval = 2.8
-          				enemy.hover_height = 2.8
-          			"quad":
-          				enemy.model_path = "res://assets/quaternius/scifi_essentials/glTF/Enemy_QuadShell.gltf"
-          				enemy.health = 11 + chapter * 2
-          				enemy.damage = 15 + chapter
-          				enemy.move_speed = 3.2
-          				enemy.attack_interval = 3.4
-          				enemy.hover_height = 1.5
-          			"trilobite":
-          				enemy.model_path = "res://assets/quaternius/scifi_essentials/glTF/Enemy_Trilobite.gltf"
-          				enemy.health = 9 + chapter
-          				enemy.damage = 18 + chapter
-          				enemy.move_speed = 5.3
-          				enemy.attack_interval = 2.4
-          				enemy.hover_height = 0.35
-          				enemy.attack_range = 8.5
-          			"warden":
-          				enemy.model_path = "res://assets/quaternius/animated_mech/Textured/glTF/George.gltf"
-          				enemy.health = 65
-          				enemy.damage = 26
-          				enemy.move_speed = 2.2
-          				enemy.attack_interval = 2.5
-          				enemy.hover_height = 0.0
-          				enemy.attack_range = 30.0
-          				enemy.boss = true
-          		enemy.target = active_player
-          		enemy.exploded.connect(_on_enemy_exploded.bind(enemy))
-          		spawned_nodes.add_child(enemy, true)
-          		hostiles += 1
-          		return
-
-          	var robot: CharacterBody3D = RedRobot.instantiate()
-          	robot.transform = spawn_transform
-          	robot.set_meta("variant", variant)
-          	robot.set_meta("elite", false)
-          	match variant:
-          		"scout":
-          			robot.health = 4 + chapter
-          			robot.damage = 9 + chapter
-          			robot.attack_cooldown = 4.1
-          			robot.scale = Vector3.ONE * 0.88
-          		"assault":
-          			robot.health = 8 + chapter * 2
-          			robot.damage = 15 + chapter
-          			robot.attack_cooldown = 4.8
-          		"heavy":
-          			robot.health = 15 + chapter * 2
-          			robot.damage = 21 + chapter
-          			robot.attack_cooldown = 5.2
-          			robot.scale = Vector3.ONE * 1.22
-          		_:
-          			robot.health = 6 + chapter * 2
-          			robot.damage = 13 + chapter
-          			robot.attack_cooldown = 5.5
-          	robot.exploded.connect(_on_enemy_exploded.bind(robot))
-          	spawned_nodes.add_child(robot, true)
-          	if variant == "scout":
-          		robot.animation_tree.speed_scale = 1.22
-          	elif variant == "heavy":
-          		robot.animation_tree.speed_scale = 0.90
-          	if active_player != null:
-          		robot.player = active_player
-          		robot.resume_approach()
-          	hostiles += 1
-
-
-          func _on_enemy_exploded''',
-              s, count=1, flags=re.S
-          )
-
-          # Scoring for new enemy classes.
-          s=s.replace(
-              '"assault": points = 250\n\t\t"heavy": points = 450\n\t\t"warden": points = 5000',
-              '"assault": points = 250\n\t\t"drone": points = 220\n\t\t"quad": points = 360\n\t\t"trilobite": points = 300\n\t\t"heavy": points = 450\n\t\t"warden": points = 5000'
-          )
-
-          # Weapon HUD.
-          s=s.replace('var pulse_label: Label\n', 'var pulse_label: Label\n          var weapon_label: Label\n')
-          s=s.replace(
-              '\t\tactive_player.rescue_used.connect(_on_rescue_used)\n\t\t_on_health_changed',
-              '\t\tactive_player.rescue_used.connect(_on_rescue_used)\n\t\tactive_player.weapon_changed.connect(_on_weapon_changed)\n\t\t_on_weapon_changed("PULSE RIFLE", 1)\n\t\t_on_health_changed'
-          )
-          insert='''
-
-          func _on_weapon_changed(name: String, unlocked: int) -> void:
-          	if weapon_label != null:
-          		weapon_label.text = "WEAPON  //  " + name + "   [" + str(unlocked) + "/3]"
-
-
-'''
-          s=s.replace('          func _on_health_changed(current: int, maximum: int) -> void:', insert+'          func _on_health_changed(current: int, maximum: int) -> void:')
-          s=s.replace(
-              '\tpulse_label.position = Vector2(14, 61)\n\thealth_panel.add_child(pulse_label)',
-              '\tpulse_label.position = Vector2(14, 61)\n\thealth_panel.add_child(pulse_label)\n\n\tweapon_label = _make_label("WEAPON  //  PULSE RIFLE   [1/3]", 14, Color(0.85, 0.9, 1.0))\n\tweapon_label.position = Vector2(14, 82)\n\thealth_panel.add_child(weapon_label)\n\thealth_panel.offset_top = -136'
-          )
-          s=s.replace(
-              'WASD MOVE  •  SHIFT SPRINT  •  RMB AIM  •  LMB FIRE  •  SPACE JUMP  •  Q PULSE  •  R RECOVER',
-              'WASD MOVE  •  SHIFT SPRINT  •  RMB AIM  •  LMB FIRE  •  1/2/3 WEAPONS  •  Q PULSE  •  R RECOVER'
-          )
-
-          p.write_text(s)
-          PY
-
-          cat >> game/tests/test_campaign_readiness.gd <<'GDSCRIPT'
-
-
-          func test_commercial_campaign_has_eight_chapters() -> void:
-          	assert_int(CampaignState.LAST_CHAPTER).is_equal(7)
-
-
-          func test_weapon_progression_contract() -> void:
-          	var scene: PackedScene = load("res://player/player.tscn")
-          	var player := scene.instantiate()
-          	assert_bool(player.has_method("switch_weapon")).is_true()
-          	assert_bool(player.has_method("set_weapon_unlocks")).is_true()
-          	assert_bool(player.has_signal("weapon_changed")).is_true()
-          	player.free()
-
-
-          func test_commercial_assets_importable() -> void:
-          	assert_bool(ResourceLoader.exists("res://assets/quaternius/scifi_essentials/glTF/Enemy_EyeDrone.gltf")).is_true()
-          	assert_bool(ResourceLoader.exists("res://assets/quaternius/animated_mech/Textured/glTF/George.gltf")).is_true()
-          	assert_bool(ResourceLoader.exists("res://assets/quaternius/ultimate_space/Environment/GLTF/GeodesicDome.gltf")).is_true()
-          	assert_bool(ResourceLoader.exists("res://assets/kenney/weapon/sniper.glb")).is_true()
-          GDSCRIPT
+          cp control/pulsefall-commercial/mission_builder.gd game/campaign/mission_builder.gd
+          cp control/pulsefall-commercial/special_enemy.gd game/campaign/special_enemy.gd
+          python3 control/pulsefall-commercial/patch_commercial.py
+          cp game/assets/kenney/KENNEY_LICENSE.txt game/KENNEY_CC0_LICENSE.txt
+          cp game/assets/quaternius/ultimate_space/License.txt game/QUATERNIUS_CC0_LICENSE.txt
 
       - name: Add license and build notes
         shell: bash
@@ -2176,7 +1516,7 @@ jobs:
           cat > game/PULSEFALL_README.txt <<'EOF'
           PULSEFALL: BLACKSITE PROTOCOL
 
-          A cinematic third-person sci-fi action commercial alpha with eight campaign chapters.
+          A cinematic third-person sci-fi action campaign.
 
           Controls:
           WASD / Arrow keys — Move
@@ -2206,7 +1546,7 @@ jobs:
           dedicated_server=false
           custom_features=""
           export_filter="all_resources"
-          include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
+          include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt,KENNEY_CC0_LICENSE.txt,QUATERNIUS_CC0_LICENSE.txt"
           exclude_filter="screenshots/*"
           export_path="build/PULSEFALL_BLACKSITE.exe"
           patches=PackedStringArray()
@@ -2334,6 +1674,8 @@ jobs:
           cp game/PULSEFALL_README.txt artifact/PULSEFALL_BLACKSITE/
           cp game/THIRD_PARTY_NOTICES.txt artifact/PULSEFALL_BLACKSITE/
           cp game/LICENSE.md artifact/PULSEFALL_BLACKSITE/GODOT_TPS_LICENSE.md
+          cp game/KENNEY_CC0_LICENSE.txt artifact/PULSEFALL_BLACKSITE/
+          cp game/QUATERNIUS_CC0_LICENSE.txt artifact/PULSEFALL_BLACKSITE/
           cp game/PLAYTEST_GUIDE.txt artifact/PULSEFALL_BLACKSITE/
           cp game/PRIVACY_NOTICE.txt artifact/PULSEFALL_BLACKSITE/
           cp game/SUPPORT.txt artifact/PULSEFALL_BLACKSITE/
@@ -2376,6 +1718,8 @@ jobs:
             File "PULSEFALL_BLACKSITE/SUPPORT.txt"
             File "PULSEFALL_BLACKSITE/THIRD_PARTY_NOTICES.txt"
             File "PULSEFALL_BLACKSITE/GODOT_TPS_LICENSE.md"
+            File "PULSEFALL_BLACKSITE/KENNEY_CC0_LICENSE.txt"
+            File "PULSEFALL_BLACKSITE/QUATERNIUS_CC0_LICENSE.txt"
             WriteUninstaller "$INSTDIR\Uninstall.exe"
 
             CreateDirectory "$SMPROGRAMS\PULSEFALL BLACKSITE"
@@ -2403,6 +1747,8 @@ jobs:
             Delete "$INSTDIR\SUPPORT.txt"
             Delete "$INSTDIR\THIRD_PARTY_NOTICES.txt"
             Delete "$INSTDIR\GODOT_TPS_LICENSE.md"
+            Delete "$INSTDIR\KENNEY_CC0_LICENSE.txt"
+            Delete "$INSTDIR\QUATERNIUS_CC0_LICENSE.txt"
             Delete "$INSTDIR\Uninstall.exe"
             RMDir "$INSTDIR"
             DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\PULSEFALL_BLACKSITE"
