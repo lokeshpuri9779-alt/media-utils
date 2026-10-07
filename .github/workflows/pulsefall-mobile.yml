@@ -1342,30 +1342,30 @@ jobs:
           # Role configuration immediately after robot health assignment.
           old='\trobot.health = (26 + wave * 3) if elite else (4 + wave * 2)\n'
           new='''\trobot.health = (26 + wave * 3) if elite else (4 + wave * 2)
-\tvar role := "standard"
-\tif not elite:
-\t\tmatch (spawn_index + wave) % 3:
-\t\t\t0:
-\t\t\t\trole = "scout"
-\t\t\t\trobot.health = 3 + wave
-\t\t\t\trobot.shot_damage = 10 + wave
-\t\t\t\trobot.attack_delay = 3.8
-\t\t\t\trobot.animation_speed = 1.22
-\t\t\t\trobot.scale = Vector3.ONE * 0.88
-\t\t\t1:
-\t\t\t\trole = "assault"
-\t\t\t\trobot.health = 5 + wave * 2
-\t\t\t\trobot.shot_damage = 15 + wave
-\t\t\t\trobot.attack_delay = 4.8
-\t\t\t_:
-\t\t\t\trole = "heavy"
-\t\t\t\trobot.health = 9 + wave * 2
-\t\t\t\trobot.shot_damage = 22 + wave
-\t\t\t\trobot.attack_delay = 6.3
-\t\t\t\trobot.animation_speed = 0.88
-\t\t\t\trobot.scale = Vector3.ONE * 1.18
-\trobot.set_meta("role", role)
-'''
+          \tvar role := "standard"
+          \tif not elite:
+          \t\tmatch (spawn_index + wave) % 3:
+          \t\t\t0:
+          \t\t\t\trole = "scout"
+          \t\t\t\trobot.health = 3 + wave
+          \t\t\t\trobot.shot_damage = 10 + wave
+          \t\t\t\trobot.attack_delay = 3.8
+          \t\t\t\trobot.animation_speed = 1.22
+          \t\t\t\trobot.scale = Vector3.ONE * 0.88
+          \t\t\t1:
+          \t\t\t\trole = "assault"
+          \t\t\t\trobot.health = 5 + wave * 2
+          \t\t\t\trobot.shot_damage = 15 + wave
+          \t\t\t\trobot.attack_delay = 4.8
+          \t\t\t_:
+          \t\t\t\trole = "heavy"
+          \t\t\t\trobot.health = 9 + wave * 2
+          \t\t\t\trobot.shot_damage = 22 + wave
+          \t\t\t\trobot.attack_delay = 6.3
+          \t\t\t\trobot.animation_speed = 0.88
+          \t\t\t\trobot.scale = Vector3.ONE * 1.18
+          \trobot.set_meta("role", role)
+          '''
           if old not in s:
               raise SystemExit("robot health line missing")
           s=s.replace(old,new)
