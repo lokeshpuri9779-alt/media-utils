@@ -57,6 +57,9 @@ def _write_ass(plan, path: Path):
         'Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding',
         'Style: Caption,DejaVu Sans,58,&H00FFFFFF,&H00FFFFFF,&H00101010,&H00000000,-1,0,0,0,100,100,0,0,1,5,2,2,90,90,250,1',
         'Style: Headline,DejaVu Sans,70,&H00FFFFFF,&H00FFFFFF,&H00101010,&H00000000,-1,0,0,0,100,100,0,0,1,5,2,8,70,70,150,1',
+        'Style: Hook,DejaVu Sans,86,&H00FFFFFF,&H00FFFFFF,&H00101010,&H00000000,-1,0,0,0,100,100,0,0,1,6,2,8,55,55,140,1',
+        'Style: Payoff,DejaVu Sans,76,&H00FFFFFF,&H00FFFFFF,&H00101010,&H00000000,-1,0,0,0,100,100,0,0,1,6,2,8,60,60,150,1',
+        'Style: Emphasis,DejaVu Sans,62,&H00FFFFFF,&H00FFFFFF,&H00101010,&H00000000,-1,0,0,0,100,100,0,0,1,5,2,2,90,90,250,1',
         '',
         '[Events]',
         'Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text'
@@ -71,7 +74,9 @@ def _write_ass(plan, path: Path):
         start=float(s['start']); end=float(s['end'])
         headline=str(s.get('headline') or '').strip()
         if headline:
-            lines.append(f"Dialogue: 0,{ts(start)},{ts(min(end,start+0.9))},Headline,,0,0,0,,{_ass_escape(headline.upper())}")
+            headline_style = 'Hook' if i == 0 else ('Payoff' if i == len(plan)-1 else 'Headline')
+            headline_hold = 1.45 if i == 0 else (1.15 if i == len(plan)-1 else 0.9)
+            lines.append(f"Dialogue: 0,{ts(start)},{ts(min(end,start+headline_hold))},{headline_style},,0,0,0,,{_ass_escape(headline.upper())}")
         chunks=_caption_chunks(str(s.get('speech') or ''))
         if not chunks:
             continue
@@ -83,7 +88,10 @@ def _write_ass(plan, path: Path):
             a=cursor
             b=end if j==len(chunks)-1 else min(end, cursor + dur*w/total)
             cursor=b
-            lines.append(f"Dialogue: 0,{ts(a)},{ts(b)},Caption,,0,0,0,,{_ass_escape(chunk.upper())}")
+            style = 'Caption'
+            if (i == 0 and j == 0) or (i == len(plan)//2 and j == 0) or (i == len(plan)-1 and j == len(chunks)-1):
+                style = 'Emphasis'
+            lines.append(f"Dialogue: 0,{ts(a)},{ts(b)},{style},,0,0,0,,{_ass_escape(chunk.upper())}")
     path.write_text('\n'.join(lines),encoding='utf-8')
 
 
@@ -153,12 +161,39 @@ def render_fast_premium(out: Path, story: dict | None = None) -> dict:
                 xexpr=f"'max(0,(iw-iw/zoom)*(1-on/{denom}))'"; yexpr="'ih/2-(ih/zoom/2)'"
             else:
                 xexpr="'iw/2-(iw/zoom/2)'"; yexpr=f"'max(0,(ih-ih/zoom)*on/{denom})'"
+            fit=str(shot.get('media_fit') or item.get('media_fit') or 'cover')
+            if fit in {'contain','wide'}:
+                framing=(
+                    "scale=1080:1920:force_original_aspect_ratio=decrease,"
+                    "pad=1080:1920:(ow-iw)/2:(oh-ih)/2:color=0x05080e"
+                )
+            else:
+                framing=(
+                    "scale=1080:1920:force_original_aspect_ratio=increase,"
+                    "crop=1080:1920"
+                )
+
+            # Narrative treatment:
+            # - first scene enters faster for the hook;
+            # - middle scene receives a stronger zoom as a pattern interrupt;
+            # - final scene eases into a calmer payoff.
+            zoom_step=0.0016
+            zoom_cap=1.075
+            if i == 0:
+                zoom_step=0.0024; zoom_cap=1.095
+            elif i == len(plan)//2:
+                zoom_step=0.0029; zoom_cap=1.105
+            elif i == len(plan)-1:
+                zoom_step=0.0011; zoom_cap=1.055
+
+            fade_out=max(0.0,dur-0.12)
             vf=(
-                f"scale=1080:1920:force_original_aspect_ratio=increase,"
-                f"crop=1080:1920,"
-                f"zoompan=z='min(zoom+0.0016,1.075)':"
+                f"{framing},"
+                f"zoompan=z='min(zoom+{zoom_step:.4f},{zoom_cap:.3f})':"
                 f"x={xexpr}:y={yexpr}:"
                 f"d={frames}:s=1080x1920:fps={FPS},"
+                f"fade=t=in:st=0:d=0.10,"
+                f"fade=t=out:st={fade_out:.3f}:d=0.12,"
                 f"format=yuv420p"
             )
             cmd=[ff,'-hide_banner','-loglevel','error','-y','-loop','1','-i',src,
@@ -202,6 +237,9 @@ def render_fast_premium(out: Path, story: dict | None = None) -> dict:
             'end':round(float(s.get('end') or 0),3),
             'duration':round(float(s.get('duration') or 0),3),
             'visual':str(s.get('visual') or ''),
+            'transition':'fade' if i>0 else 'hook-in',
+            'treatment':('hook' if i==0 else ('pattern-interrupt' if i==len(plan)//2 else ('payoff' if i==len(plan)-1 else 'standard'))),
+            'media_fit':str(s.get('media_fit') or ''),
         } for i,s in enumerate(plan)],
         'output_bytes':out.stat().st_size,
     }
