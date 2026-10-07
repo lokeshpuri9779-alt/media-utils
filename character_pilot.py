@@ -60,6 +60,18 @@ def render(output: Path) -> dict:
         composition=compose_character_short(
             clips,[float(x.get("duration") or 0) for x in plan],audio,output
         )
+        target_min=float(story.get("target_duration_min",20))
+        target_max=float(story.get("target_duration_max",40))
+        actual=float(composition.get("duration") or 0)
+        if not (target_min <= actual <= target_max):
+            raise RuntimeError(
+                f"Character pilot duration {actual:.2f}s outside target range "
+                f"{target_min:.2f}-{target_max:.2f}s."
+            )
+        if composition.get("resolution") != [1080,1920]:
+            raise RuntimeError("Character pilot did not normalize to 1080x1920.")
+        if int(composition.get("scene_count") or 0) < 6:
+            raise RuntimeError("Character pilot needs at least 6 scenes for a complete story arc.")
     return {
         "content_id":story["content_id"],
         "title":story["title"],
