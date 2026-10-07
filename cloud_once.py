@@ -854,7 +854,8 @@ def make_short(out: Path, excluded_ids=None, excluded_titles=None) -> tuple[str,
     rejected_titles=set(excluded_titles or set())
     failures=[]
     ch=None; report=None
-    for attempt in range(4):
+    max_creative_attempts=max(4,min(12,int(os.environ.get("ASTRA_MAX_CREATIVE_ATTEMPTS","10"))))
+    for attempt in range(max_creative_attempts):
         ch = select_content(excluded_ids=rejected_ids, excluded_titles=rejected_titles)
         try:
             report = render_short(ch, out)
@@ -905,11 +906,11 @@ def make_short(out: Path, excluded_ids=None, excluded_titles=None) -> tuple[str,
         data=load_performance()
         health=data.setdefault('creative_health',{})
         health['consecutive_exhausted_slots']=int(health.get('consecutive_exhausted_slots',0))+1
-        health['last_failures']=failures[-4:]
+        health['last_failures']=failures[-max_creative_attempts:]
         health['last_failure_at']=datetime.now(IST).isoformat()
         health['renderer_diagnostic_required']=health['consecutive_exhausted_slots']>=3
         save_performance(data)
-        raise RuntimeError('Creative health: four fresh concepts failed Studio quality; slot skipped without lowering the gate.')
+        raise RuntimeError(f'Creative health: {max_creative_attempts} fresh concepts failed Studio quality; slot skipped without lowering the gate.')
     # Successful recovery clears the exhausted-slot streak while retaining history.
     data=load_performance()
     health=data.setdefault('creative_health',{})
