@@ -35,10 +35,10 @@ def catalog():
             "source":"https://science.nasa.gov/mercury/facts/",
             "keywords":["mercury","planet","space"],
             "story_beats":[
-                {"headline":"ONE DAY = TWO YEARS","speech":"On Mercury, sunrise to sunrise takes one hundred seventy-six Earth days.","visual":"media","label":"176 DAYS","sub":"ONE SOLAR DAY","story_beat":"reveal","media_query":"Mercury MESSENGER NASA planet public domain"},
-                {"headline":"BUT A YEAR IS ONLY 88","speech":"Mercury races around the Sun in just eighty-eight Earth days.","visual":"media","label":"88 DAYS","sub":"ONE ORBIT","story_beat":"contrast","media_query":"Mercury orbit Sun NASA diagram public domain"},
-                {"headline":"THE WEIRD PART","speech":"Its slow spin and fast, stretched orbit make the Sun behave strangely in Mercury's sky.","visual":"media","label":"SLOW SPIN","sub":"FAST ORBIT","story_beat":"mechanism","media_query":"Mercury rotation orbit MESSENGER NASA public domain"},
-                {"headline":"SO YES","speech":"One full Mercury day lasts a little more than two Mercury years.","visual":"media","label":"176 > 88 × 2","sub":"DAY / YEAR","story_beat":"payoff","media_query":"Mercury NASA MESSENGER full disk public domain"},
+                {"headline":"ONE DAY = TWO YEARS","speech":"On Mercury, sunrise to sunrise takes one hundred seventy-six Earth days.","visual":"media","label":"176 DAYS","sub":"ONE SOLAR DAY","story_beat":"reveal","media_query":"Mercury MESSENGER NASA planet public domain","media_file":"File:PIA19449-PlanetMercury-MESSENGER-Images-First-20110329-Last-20150430.jpg","media_fit":"wide","media_motion":"push"},
+                {"headline":"BUT A YEAR IS ONLY 88","speech":"Mercury races around the Sun in just eighty-eight Earth days.","visual":"media","label":"88 DAYS","sub":"ONE ORBIT","story_beat":"contrast","media_query":"Mercury orbit Sun NASA diagram public domain","media_file":"File:Messenger.jpg","media_fit":"contain","media_motion":"push"},
+                {"headline":"THE WEIRD PART","speech":"Its slow spin and fast, stretched orbit make the Sun behave strangely in Mercury's sky.","visual":"media","label":"SLOW SPIN","sub":"FAST ORBIT","story_beat":"mechanism","media_query":"Mercury rotation orbit MESSENGER NASA public domain","media_file":"File:Mercury global map 2013-05-14 bright.png","media_fit":"wide","media_motion":"track"},
+                {"headline":"SO YES","speech":"One full Mercury day lasts a little more than two Mercury years.","visual":"media","label":"176 > 88 × 2","sub":"DAY / YEAR","story_beat":"payoff","media_query":"Mercury NASA MESSENGER full disk public domain","media_file":"File:Mercury map by MESSENGER global mosaic enhancedcolor over completebasemap.png","media_fit":"wide","media_motion":"push"},
             ],
         },
         {
@@ -68,10 +68,10 @@ def catalog():
             "source":"https://science.nasa.gov/solar-system/planets/mars/what-does-a-sunrise-sunset-look-like-on-mars/",
             "keywords":["mars","sunset","space"],
             "story_beats":[
-                {"headline":"THE RED PLANET TURNS BLUE","speech":"Near sunset on Mars, the sky around the Sun can glow blue.","visual":"media","label":"BLUE","sub":"AT SUNSET","story_beat":"reveal","media_query":"Mars blue sunset Curiosity NASA public domain"},
-                {"headline":"IT'S THE DUST","speech":"Fine dust in the Martian atmosphere scatters light differently from Earth's air.","visual":"media","label":"FINE DUST","sub":"CHANGES THE LIGHT","story_beat":"mechanism","media_query":"Mars atmosphere dust NASA rover public domain"},
-                {"headline":"BLUE STAYS NEAR THE SUN","speech":"Blue light remains concentrated closer to the Sun while red and yellow spread across more of the sky.","visual":"media","label":"BLUE / RED","sub":"DIFFERENT SCATTERING","story_beat":"evidence","media_query":"Mars sunset Curiosity Gale Crater NASA public domain"},
-                {"headline":"MARS FLIPS THE SCRIPT","speech":"Red landscape. Blue sunset. The atmosphere makes both possible.","visual":"media","label":"RED → BLUE","sub":"ONE PLANET","story_beat":"payoff","media_query":"Mars sunset Perseverance NASA public domain"},
+                {"headline":"THE RED PLANET TURNS BLUE","speech":"Near sunset on Mars, the sky around the Sun can glow blue.","visual":"media","label":"BLUE","sub":"AT SUNSET","story_beat":"reveal","media_query":"Mars blue sunset Curiosity NASA public domain","media_file":"File:PIA19400-MarsCuriosityRover-GaleCrater-Sunset-20150415.jpg","media_fit":"wide","media_motion":"push"},
+                {"headline":"IT'S THE DUST","speech":"Fine dust in the Martian atmosphere scatters light differently from Earth's air.","visual":"media","label":"FINE DUST","sub":"CHANGES THE LIGHT","story_beat":"mechanism","media_query":"Mars atmosphere dust NASA rover public domain","media_file":"File:Pia24622-curiosity 1-1041.jpg","media_fit":"wide","media_motion":"track"},
+                {"headline":"BLUE STAYS NEAR THE SUN","speech":"Blue light remains concentrated closer to the Sun while red and yellow spread across more of the sky.","visual":"media","label":"BLUE / RED","sub":"DIFFERENT SCATTERING","story_beat":"evidence","media_query":"Mars sunset Curiosity Gale Crater NASA public domain","media_file":"File:Curiosity Views First Martian 'Sun Rays' (PIA25739).jpg","media_fit":"wide","media_motion":"push"},
+                {"headline":"MARS FLIPS THE SCRIPT","speech":"Red landscape. Blue sunset. The atmosphere makes both possible.","visual":"media","label":"RED → BLUE","sub":"ONE PLANET","story_beat":"payoff","media_query":"Mars sunset Perseverance NASA public domain","media_file":"File:Mars Pathfinder sunset.jpg","media_fit":"wide","media_motion":"push"},
             ],
         },
         {
@@ -84,10 +84,10 @@ def catalog():
             "source":"https://science.nasa.gov/saturn/facts/",
             "keywords":["saturn","density","space"],
             "story_beats":[
-                {"headline":"SATURN COULD FLOAT","speech":"Saturn's average density is lower than water.","visual":"media","label":"LESS DENSE","sub":"THAN WATER","story_beat":"reveal","media_query":"Saturn Cassini NASA full planet public domain"},
-                {"headline":"THAT'S UNIQUE","speech":"NASA says Saturn is the only planet in our solar system with an average density below water.","visual":"media","label":"SATURN < WATER","sub":"AVERAGE DENSITY","story_beat":"evidence","media_query":"Saturn rings Cassini NASA public domain"},
-                {"headline":"BUT THERE'S A CATCH","speech":"You would need an absurdly enormous body of water. There is no planetary bathtub.","visual":"media","label":"HYPOTHETICAL","sub":"VERY, VERY LARGE","story_beat":"contrast","media_query":"Saturn Earth size comparison NASA public domain"},
-                {"headline":"THE POINT IS DENSITY","speech":"The floating idea is a scale model for remembering how unusually low Saturn's average density is.","visual":"media","label":"MEMORABLE","sub":"BECAUSE IT'S TRUE","story_beat":"payoff","media_query":"Saturn Cassini rings NASA public domain"},
+                {"headline":"SATURN COULD FLOAT","speech":"Saturn's average density is lower than water.","visual":"media","label":"LESS DENSE","sub":"THAN WATER","story_beat":"reveal","media_query":"Saturn Cassini NASA full planet public domain","media_file":"File:Full Disk of Saturn.jpg","media_fit":"contain","media_motion":"push"},
+                {"headline":"THAT'S UNIQUE","speech":"NASA says Saturn is the only planet in our solar system with an average density below water.","visual":"media","label":"SATURN < WATER","sub":"AVERAGE DENSITY","story_beat":"evidence","media_query":"Saturn rings Cassini NASA public domain","media_file":"File:PIA21047.jpg","media_fit":"contain","media_motion":"push"},
+                {"headline":"BUT THERE'S A CATCH","speech":"You would need an absurdly enormous body of water. There is no planetary bathtub.","visual":"media","label":"HYPOTHETICAL","sub":"VERY, VERY LARGE","story_beat":"contrast","media_query":"Saturn Earth size comparison NASA public domain","media_file":"File:Saturn clouds Cassini.jpg","media_fit":"contain","media_motion":"track"},
+                {"headline":"THE POINT IS DENSITY","speech":"The floating idea is a scale model for remembering how unusually low Saturn's average density is.","visual":"media","label":"MEMORABLE","sub":"BECAUSE IT'S TRUE","story_beat":"payoff","media_query":"Saturn Cassini rings NASA public domain","media_file":"File:Full Disk of Saturn.jpg","media_fit":"contain","media_motion":"push"},
             ],
         },
     ]
