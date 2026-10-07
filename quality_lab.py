@@ -203,8 +203,19 @@ def director_input_from_render(story: dict, render_report: dict, media_qa: dict 
     scenes = render_report.get("scenes") or []
     durations = [float(s.get("duration") or 0) for s in scenes if float(s.get("duration") or 0) > 0]
     if detected and detected.get("available") and detected.get("detected_scenes"):
-        detected_durations = [float(s.get("duration") or 0) for s in detected["detected_scenes"] if float(s.get("duration") or 0) > 0]
+        raw_detected = [float(s.get("duration") or 0) for s in detected["detected_scenes"] if float(s.get("duration") or 0) > 0]
+        planned_count = len(durations)
+        detected_count = len(raw_detected)
+        # Smooth editorial animation often has no hard pixel discontinuity, so
+        # PySceneDetect can collapse a real 7–8 beat edit into one long scene.
+        # Treat detector output as authoritative only when it captures enough of
+        # the renderer's explicit timeline to be a credible pacing measurement.
+        min_credible = max(2, int(math.ceil(planned_count * 0.50))) if planned_count else 2
+        detected_reliable = detected_count >= min_credible
+        detected_durations = raw_detected if detected_reliable else []
     else:
+        raw_detected = []
+        detected_reliable = False
         detected_durations = []
     duration = float(render_report.get("duration") or 0)
     cq = render_report.get("creative_quality") or {}
@@ -260,6 +271,9 @@ def director_input_from_render(story: dict, render_report: dict, media_qa: dict 
             "avg_scene_duration": (sum(detected_durations) / len(detected_durations)) if detected_durations else ((sum(durations) / len(durations)) if durations else 0.0),
             "max_scene_duration": max(detected_durations) if detected_durations else (max(durations) if durations else 0.0),
             "source": "pyscenedetect" if detected_durations else "studio-plan",
+            "detector_reliable": detected_reliable,
+            "detected_scene_count_raw": len(raw_detected),
+            "planned_scene_count": len(scenes),
         },
         "audio": {"score": audio_score, **audio, "media_qa": media_qa or {}},
         "captions": {"score": caption_score, "stage": caption_stage, "media_qa": media_qa or {}},
