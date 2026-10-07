@@ -1,0 +1,49 @@
+name: publish Agnes pilot
+
+on:
+  push:
+    paths:
+      - ".astra/publish-agnes-pilot"
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+      YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+      YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+      YOUTUBE_PRIVACY: private
+      ASTRA_CHANNEL: rayvan
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install upload dependencies
+        run: pip install httpx pillow imageio-ffmpeg
+
+      - name: Download finished Agnes character pilot
+        uses: actions/download-artifact@v4
+        with:
+          name: astra-agnes-character-pilot-37592152534
+          path: /tmp/agnes-pilot
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: lokeshpuri9779-alt/media-utils
+          run-id: 37592152534
+
+      - name: Verify artifact
+        run: |
+          test -s /tmp/agnes-pilot/astra-agnes-character-pilot.mp4
+          ls -lh /tmp/agnes-pilot/astra-agnes-character-pilot.mp4
+
+      - name: Upload exact finished Short to RAYVAN privately
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: python scripts/publish_agnes_pilot.py
