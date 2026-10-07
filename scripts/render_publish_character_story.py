@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 import cloud_once
 from character_pilot import render
@@ -15,8 +16,9 @@ target_max=float(story.get("target_duration_max",40))
 if not (target_min <= actual <= target_max):
     raise SystemExit(f"Duration gate failed: {actual}s not in {target_min}-{target_max}s")
 
-title=str(story["title"]).strip()+" #Shorts"
-content_id=str(story["content_id"])
+revision=(os.environ.get("ASTRA_UPLOAD_REVISION") or "").strip()
+title=str(story["title"]).strip()+(f" — {revision}" if revision else "")+" #Shorts"
+content_id=str(story["content_id"])+(f"-{revision.lower().replace(' ','-')}" if revision else "")
 description=(
     str(story.get("question") or "").strip()+"\n\n"
     "An original RAYVAN animated micro-story.\n"
