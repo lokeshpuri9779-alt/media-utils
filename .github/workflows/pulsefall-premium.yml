@@ -121,37 +121,6 @@ jobs:
               'func apply_input(delta: float) -> void:\n\tmotion = motion.lerp',
               'func apply_input(delta: float) -> void:\n\tif incapacitated:\n\t\tvelocity = Vector3.ZERO\n\t\treturn\n\tmotion = motion.lerp'
           )
-          s += r'''
-
-func _emit_health() -> void:
-	health_changed.emit(health, max_health)
-
-
-func take_damage(amount: int) -> void:
-	if incapacitated:
-		return
-	health = maxi(health - amount, 0)
-	hit.rpc()
-	health_changed.emit(health, max_health)
-	if health <= 0:
-		incapacitated = true
-		died.emit()
-
-
-func heal(amount: int) -> void:
-	if incapacitated:
-		return
-	health = mini(max_health, health + amount)
-	health_changed.emit(health, max_health)
-
-
-func revive() -> void:
-	incapacitated = false
-	health = max_health
-	velocity = Vector3.ZERO
-	transform.origin = initial_position
-	health_changed.emit(health, max_health)
-'''
           p.write_text(s)
 
           p=Path("game/enemies/red_robot/red_robot.gd")
@@ -162,6 +131,38 @@ func revive() -> void:
           )
           p.write_text(s)
           PY
+
+          cat >> game/player/player.gd <<'GDSCRIPT'
+
+          func _emit_health() -> void:
+          	health_changed.emit(health, max_health)
+
+
+          func take_damage(amount: int) -> void:
+          	if incapacitated:
+          		return
+          	health = maxi(health - amount, 0)
+          	hit.rpc()
+          	health_changed.emit(health, max_health)
+          	if health <= 0:
+          		incapacitated = true
+          		died.emit()
+
+
+          func heal(amount: int) -> void:
+          	if incapacitated:
+          		return
+          	health = mini(max_health, health + amount)
+          	health_changed.emit(health, max_health)
+
+
+          func revive() -> void:
+          	incapacitated = false
+          	health = max_health
+          	velocity = Vector3.ZERO
+          	transform.origin = initial_position
+          	health_changed.emit(health, max_health)
+          GDSCRIPT
 
       - name: Install PULSEFALL wave director and HUD
         shell: bash
