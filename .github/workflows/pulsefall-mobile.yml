@@ -1441,6 +1441,127 @@ jobs:
           	_show_upgrade_choice()
           GDSCRIPT
 
+      - name: Add PULSE ability and multi-phase boss behavior
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          # Boss phases on elite enemies.
+          p=Path("game/enemies/red_robot/red_robot.gd")
+          s=p.read_text()
+          s=s.replace('signal exploded()\n', 'signal exploded()\nsignal phase_changed(phase: int)\n')
+          s=s.replace('var orientation := Transform3D()\n', 'var orientation := Transform3D()\nvar boss_phase: int = 1\nvar max_spawn_health: int = 1\n')
+          s=s.replace(
+              'orientation = global_transform\n\torientation.origin = Vector3()',
+              'orientation = global_transform\n\torientation.origin = Vector3()\n\tmax_spawn_health = maxi(health, 1)'
+          )
+          s=s.replace('health -= 1\n\tif health == 0:', 'health -= 1\n\t_update_boss_phase()\n\tif health == 0:')
+          p.write_text(s)
+
+          # Add active PULSE ability and boss phase hooks to level.
+          p=Path("game/level/level.gd")
+          s=p.read_text()
+          s=s.replace(
+              'var objective_label: Label\n',
+              'var objective_label: Label\nvar pulse_cooldown := 0.0\nvar pulse_status_label: Label\n'
+          )
+          s=s.replace(
+              'func _process(delta: float) -> void:\n\tif mission_active:',
+              'func _process(delta: float) -> void:\n\tpulse_cooldown = maxf(pulse_cooldown - delta, 0.0)\n\tif pulse_status_label != null:\n\t\tpulse_status_label.text = "PULSE READY" if pulse_cooldown <= 0.0 else "PULSE %.1fs" % pulse_cooldown\n\tif mission_active:'
+          )
+          s=s.replace(
+              '\trobot.exploded.connect(_on_robot_exploded.bind(robot))\n',
+              '\trobot.exploded.connect(_on_robot_exploded.bind(robot))\n\tif elite:\n\t\trobot.phase_changed.connect(_on_boss_phase_changed)\n'
+          )
+          s=s.replace(
+              '\tvar elite := bool(robot.get_meta("elite", false))\n\tscore += (1500 if elite else 150) * maxi(wave, 1)',
+              '\tvar elite := bool(robot.get_meta("elite", false))\n\tvar role := str(robot.get_meta("role", "standard"))\n\tvar base_points := 1500 if elite else (100 if role == "scout" else (190 if role == "assault" else 280))\n\tscore += base_points * maxi(wave, 1)'
+          )
+          s=s.replace(
+              '\thealth_panel.add_child(health_bar)\n',
+              '\thealth_panel.add_child(health_bar)\n\n\tpulse_status_label = _make_label("PULSE READY", 14, Color(0.42, 0.92, 1.0))\n\tpulse_status_label.position = Vector2(14, 57)\n\thealth_panel.add_child(pulse_status_label)\n'
+          )
+          s=s.replace('health_panel.offset_top = -94', 'health_panel.offset_top = -112')
+          p.write_text(s)
+
+          # Add PULSE button to mobile controls.
+          p=Path("game/mobile/mobile_controls.gd")
+          s=p.read_text()
+          s=s.replace('var recover_button: Button\n', 'var recover_button: Button\nvar pulse_button: Button\n')
+          s=s.replace(
+              'root.add_child(recover_button)\n',
+              'root.add_child(recover_button)\n\n\tpulse_button = _make_button("PULSE", Vector2(-310, -275), Vector2(112, 82), Color(0.28, 0.76, 1.0, 0.52))\n\tpulse_button.pressed.connect(_pulse)\n\troot.add_child(pulse_button)\n'
+          )
+          s=s.replace(
+              'func _recover() -> void:\n\tif level != null',
+              'func _pulse() -> void:\n\tif level != null and level.has_method("trigger_pulse"):\n\t\tlevel.trigger_pulse()\n\n\nfunc _recover() -> void:\n\tif level != null'
+          )
+          p.write_text(s)
+          PY
+
+          cat >> game/enemies/red_robot/red_robot.gd <<'GDSCRIPT'
+
+
+          func _update_boss_phase() -> void:
+          	if not bool(get_meta("elite", false)) or dead:
+          		return
+          	var ratio := float(health) / float(max_spawn_health)
+          	var next_phase := 1
+          	if ratio <= 0.34:
+          		next_phase = 3
+          	elif ratio <= 0.67:
+          		next_phase = 2
+          	if next_phase <= boss_phase:
+          		return
+          	boss_phase = next_phase
+          	if boss_phase == 2:
+          		attack_delay = maxf(1.9, attack_delay * 0.72)
+          		animation_tree.speed_scale = maxf(animation_tree.speed_scale, 1.18)
+          	elif boss_phase == 3:
+          		attack_delay = maxf(1.25, attack_delay * 0.68)
+          		shot_damage += 6
+          		animation_tree.speed_scale = maxf(animation_tree.speed_scale, 1.34)
+          	phase_changed.emit(boss_phase)
+          GDSCRIPT
+
+          cat >> game/level/level.gd <<'GDSCRIPT'
+
+
+          func trigger_pulse() -> void:
+          	if pulse_cooldown > 0.0 or active_player == null:
+          		return
+          	pulse_cooldown = 16.0
+          	var affected := 0
+          	for child in spawned_nodes.get_children():
+          		if child == active_player or not child.is_in_group("hostile"):
+          			continue
+          		if child.global_position.distance_to(active_player.global_position) > 11.5:
+          			continue
+          		if child.has_method("hit"):
+          			for _tick in range(3):
+          				if is_instance_valid(child):
+          					child.hit()
+          			affected += 1
+          	active_player.heal(4)
+          	MobileMetrics.record("pulse_ability", {"affected": affected, "wave": wave, "time_seconds": mission_time})
+          	if OS.has_feature("mobile"):
+          		Input.vibrate_handheld(55)
+          	_show_banner("PULSE DISCHARGE", "%d TARGETS HIT  //  +4 CORE" % affected, 0.9)
+
+
+          func _on_boss_phase_changed(phase: int) -> void:
+          	MobileMetrics.record("boss_phase", {"phase": phase, "time_seconds": mission_time})
+          	if OS.has_feature("mobile"):
+          		Input.vibrate_handheld(70)
+          	if phase == 2:
+          		_show_banner("WARDEN PHASE II", "ATTACK CYCLE ACCELERATING", 1.1)
+          	elif phase == 3:
+          		_show_banner("WARDEN PHASE III", "CORE OVERDRIVE  //  MAXIMUM THREAT", 1.2)
+          GDSCRIPT
+
       - name: Add license and build notes
         shell: bash
         run: |
