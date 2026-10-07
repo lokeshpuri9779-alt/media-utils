@@ -4,20 +4,59 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - ".astra/omniroute"
-      - ".github/workflows/omniroute.yml"
+      - '.astra/omniroute'
+      - '.github/workflows/omniroute.yml'
+
+permissions:
+  contents: read
 
 jobs:
   omniroute:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      CI: 'true'
+      DATA_DIR: ${{ runner.temp }}/astra-omniroute
+      HOSTNAME: '127.0.0.1'
+      OMNIROUTE_SKIP_SYSTEM_TRUST: '1'
+      DISABLE_SQLITE_AUTO_BACKUP: 'true'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "24"
-      - name: Install OmniRoute
-        run: npm install -g omniroute
-      - name: Verify OmniRoute CLI
+          node-version: '24'
+      - name: Install pinned OmniRoute
+        run: npm install -g omniroute@3.8.51 --no-audit --no-fund
+      - name: Start gateway and check HTTP health
+        shell: bash
         run: |
-          omniroute --version || omniroute --help
+          set -euo pipefail
+          export INITIAL_PASSWORD="$(openssl rand -hex 24)"
+          export JWT_SECRET="$(openssl rand -hex 32)"
+          export API_KEY_SECRET="$(openssl rand -hex 32)"
+          omniroute serve --port 20128 --log --no-open > "$RUNNER_TEMP/omniroute-boot.log" 2>&1 &
+          gateway_pid=$!
+          trap 'kill "$gateway_pid" 2>/dev/null || true' EXIT
+          python - <<'PY'
+          import json, os, time, urllib.request
+          base = 'http://127.0.0.1:20128'
+          healthy = False
+          for attempt in range(60):
+              try:
+                  with urllib.request.urlopen(base + '/api/monitoring/health', timeout=2) as r:
+                      body = json.load(r)
+                      healthy = r.status == 200 and isinstance(body, dict)
+              except (OSError, ValueError):
+                  pass
+              if healthy:
+                  break
+              time.sleep(2)
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              summary.write('## OmniRoute startup check\n\n')
+              summary.write('HTTP health: ' + ('passed' if healthy else 'failed') + '\n\n')
+              summary.write('Generation requests: **0**. No upstream credentials loaded.\n\n')
+              summary.write('This checks gateway startup only; video generation and free quota remain unverified.\n')
+          if not healthy:
+              raise SystemExit('Gateway did not become healthy within the startup deadline')
+          print('Gateway HTTP health passed. No generation requested.')
+          PY
