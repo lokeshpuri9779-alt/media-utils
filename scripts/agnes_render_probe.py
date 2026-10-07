@@ -26,3 +26,4 @@ print({
     "output_path": report.get("output_path"),
     "paid_generation": report.get("paid_generation"),
 })
+
