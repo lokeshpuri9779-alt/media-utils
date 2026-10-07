@@ -12,7 +12,7 @@ Status legend: [ ] queued  [~] in progress  [x] completed  [!] blocked
 [x] Inspect fast-render artifact visually and score actual output quality
 [x] Fix any remaining visual defects found in inspection
 [x] Add automated contact-sheet + representative-frame artifact for every pilot
-[~] Add render-time metrics and fail if fast path regresses badly
+[x] Add render-time metrics and fail if fast path regresses badly
 
 ## P1 — Fast production renderer
 [ ] Add shot transitions (cut / crossfade / dip / whip where appropriate)
