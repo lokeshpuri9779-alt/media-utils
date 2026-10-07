@@ -1,8 +1,11 @@
 from __future__ import annotations
 
 import re
+import json
+import os
 
-ENGINE_VERSION = "creative-engine-7.0"
+
+ENGINE_VERSION = "creative-engine-7.1-omniroute"
 
 _STOP = {
     "the","a","an","and","or","of","to","in","on","for","with","from","at","by",
@@ -43,13 +46,42 @@ def _aligned_english_reports(c: dict) -> list[dict]:
             reports.append(item)
     return reports
 
+
+def omniroute_enrich(c: dict) -> tuple[dict, dict]:
+    """Optional quality-first intelligence pass.
+
+    Fail-open to the existing deterministic Creative Engine: an unavailable
+    gateway must never destroy a candidate or silently lower the release bar.
+    """
+    if str(os.getenv("ASTRA_OMNIROUTE_ENABLED", "1")).lower() in {"0","false","no"}:
+        return dict(c), {"used": False, "reason": "disabled"}
+    try:
+        from omniroute_adapter import creative
+        prompt = """Improve this Astra production candidate as a senior short-form creative director.
+Return ONLY a JSON object. Preserve factual claims unless evidence is supplied.
+Strengthen hook, coherent story causality, payoff, audiovisual continuity and originality.
+Do not optimize for scene count. Do not add a generic CTA.
+Allowed keys: title, hook, question, answer, creative_notes.
+Candidate:
+""" + json.dumps(c, ensure_ascii=False, default=str)
+        raw=creative(prompt)
+        data=json.loads(raw)
+        x=dict(c)
+        for key in ("title","hook","question","answer","creative_notes"):
+            if key in data and data[key]:
+                x[key]=data[key]
+        x["omniroute_enriched"]=True
+        return x, {"used": True, "pass": True}
+    except Exception as exc:
+        return dict(c), {"used": False, "pass": False, "reason": type(exc).__name__}
+
 def creative_rebuild(c: dict) -> tuple[dict, dict]:
     """Convert a candidate into a viewer-first production brief.
 
     The engine deliberately rejects ideas that the current zero-cost pipeline cannot
     turn into a credible Short. Capacity is not a publication obligation.
     """
-    x=dict(c)
+    x, omni_report=omniroute_enrich(c)
     genre=str(x.get("genre") or "")
     reasons=[]
     hard=[]
@@ -107,6 +139,6 @@ def creative_rebuild(c: dict) -> tuple[dict, dict]:
     score-=25*len(hard)
     score-=8*len(reasons)
     report={"version":ENGINE_VERSION,"score":max(0,score),"pass":not hard and score>=76,
-            "hard_failures":hard,"notes":reasons}
+            "hard_failures":hard,"notes":reasons,"omniroute":omni_report}
     x["creative_engine_report"]=report
     return x, report
