@@ -1124,10 +1124,11 @@ jobs:
           set -euxo pipefail
           sudo apt-get update -qq
           sudo apt-get install -y -qq nsis
-          cat > /tmp/pulsefall.nsi <<'NSIS'
+          pushd artifact
+          cat > pulsefall.nsi <<'NSIS'
           Unicode True
           Name "PULSEFALL BLACKSITE"
-          OutFile "artifact/PULSEFALL_BLACKSITE_PRODUCTION_RC_SETUP.exe"
+          OutFile "PULSEFALL_BLACKSITE_PRODUCTION_RC_SETUP.exe"
           InstallDir "$LOCALAPPDATA\Programs\PULSEFALL BLACKSITE"
           RequestExecutionLevel user
           SetCompressor /SOLID lzma
@@ -1145,13 +1146,13 @@ jobs:
 
           Section "PULSEFALL BLACKSITE"
             SetOutPath "$INSTDIR"
-            File "artifact/PULSEFALL_BLACKSITE/PULSEFALL_BLACKSITE.exe"
-            File "artifact/PULSEFALL_BLACKSITE/PULSEFALL_README.txt"
-            File "artifact/PULSEFALL_BLACKSITE/PLAYTEST_GUIDE.txt"
-            File "artifact/PULSEFALL_BLACKSITE/PRIVACY_NOTICE.txt"
-            File "artifact/PULSEFALL_BLACKSITE/SUPPORT.txt"
-            File "artifact/PULSEFALL_BLACKSITE/THIRD_PARTY_NOTICES.txt"
-            File "artifact/PULSEFALL_BLACKSITE/GODOT_TPS_LICENSE.md"
+            File "PULSEFALL_BLACKSITE/PULSEFALL_BLACKSITE.exe"
+            File "PULSEFALL_BLACKSITE/PULSEFALL_README.txt"
+            File "PULSEFALL_BLACKSITE/PLAYTEST_GUIDE.txt"
+            File "PULSEFALL_BLACKSITE/PRIVACY_NOTICE.txt"
+            File "PULSEFALL_BLACKSITE/SUPPORT.txt"
+            File "PULSEFALL_BLACKSITE/THIRD_PARTY_NOTICES.txt"
+            File "PULSEFALL_BLACKSITE/GODOT_TPS_LICENSE.md"
             WriteUninstaller "$INSTDIR\Uninstall.exe"
 
             CreateDirectory "$SMPROGRAMS\PULSEFALL BLACKSITE"
@@ -1184,9 +1185,11 @@ jobs:
             DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\PULSEFALL_BLACKSITE"
           SectionEnd
           NSIS
-          makensis /tmp/pulsefall.nsi
-          sha256sum artifact/PULSEFALL_BLACKSITE_PRODUCTION_RC_SETUP.exe > artifact/PULSEFALL_BLACKSITE_PRODUCTION_RC_SETUP_SHA256.txt
-          ls -lh artifact/PULSEFALL_BLACKSITE_PRODUCTION_RC_SETUP.exe
+          makensis pulsefall.nsi
+          sha256sum PULSEFALL_BLACKSITE_PRODUCTION_RC_SETUP.exe > PULSEFALL_BLACKSITE_PRODUCTION_RC_SETUP_SHA256.txt
+          ls -lh PULSEFALL_BLACKSITE_PRODUCTION_RC_SETUP.exe
+          rm -f pulsefall.nsi
+          popd
 
       - name: Upload build
         uses: actions/upload-artifact@v4
