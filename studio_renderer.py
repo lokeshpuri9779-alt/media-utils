@@ -333,11 +333,18 @@ def make_plan(ch):
     return apply_format(plan, fmt)
 
 
+def _dialogue_text(value: str) -> str:
+    """Strip screenplay speaker labels before TTS while preserving spoken words."""
+    text=str(value or '').strip()
+    text=re.sub(r'(?:(?<=^)|(?<=[.!?])\\s+)([A-Z][A-Za-z0-9 _-]{0,24}):\\s*', '', text)
+    text=re.sub(r'^([A-Z][A-Za-z0-9 _-]{0,24}):\\s*', '', text)
+    return text.strip()
+
 def voice_plan(plan, genre, max_duration=36, voice_name='af_heart', voice_speed=1.09):
     engine=voice_engine()
     cursor=0.0
     for s in plan:
-        spoken=str(s['speech']).strip()
+        spoken=_dialogue_text(str(s['speech']))
         # Natural cadence wins over synthetic "news voice" punctuation tricks.
         spoken=spoken.replace('; ', '. ').replace('  ',' ')
         scene_voice=str(s.get('voice_name') or voice_name)
@@ -349,8 +356,9 @@ def voice_plan(plan, genre, max_duration=36, voice_name='af_heart', voice_speed=
         # Normalize each line gently, then mix with a substantially quieter score.
         peak=float(np.max(np.abs(samples)))
         if peak>0: samples=samples*(.65/peak)
-        s.update(audio=samples,start=cursor,voice_start=cursor+.08,
-                 duration=max(float(s['min_duration']),len(samples)/RATE+.24))
+        s.update(audio=samples,start=cursor,voice_start=cursor+.16,
+                 duration=max(float(s['min_duration']),len(samples)/RATE+.42),
+                 spoken_text=spoken, audio_seconds=len(samples)/RATE)
         s['end']=s['start']+s['duration']
         cursor=s['end']
     if cursor>max_duration:
@@ -412,18 +420,22 @@ def score_audio(plan, duration, genre, path):
     for s in plan:
         j=int(s['voice_start']*RATE); b=s['audio']; end=min(n,j+len(b))
         speech[j:end]+=b[:end-j]*1.08
-        # Smooth 80 ms attack/release on music ducking; no pumping on every word.
+        # Wider ducking around dialogue keeps every word intelligible.
         idx=np.arange(n,dtype=np.float32)/RATE
-        env=np.minimum(np.clip((idx-s['voice_start']+.08)/.08,0,1),np.clip((s['voice_start']+len(b)/RATE+.12-idx)/.12,0,1))
-        duck=np.minimum(duck,1-.70*env)
-        k=int(s['start']*RATE); size=min(int(.24*RATE),n-k)
+        env=np.minimum(np.clip((idx-s['voice_start']+.12)/.12,0,1),np.clip((s['voice_start']+len(b)/RATE+.20-idx)/.20,0,1))
+        duck=np.minimum(duck,1-.82*env)
+
+        # Semantic transition SFX: short and placed BEFORE speech, never under the first words.
+        k=int(s['start']*RATE); size=min(int(.16*RATE),n-k)
         u=np.arange(size,dtype=np.float32)/RATE
-        noise=rng.normal(0,1,size).astype(np.float32)
-        noise=np.convolve(noise,np.ones(12)/12,mode='same')
-        fx[k:k+size]+=noise*np.sin(np.pi*np.arange(size)/max(1,size))*.025
-        # Attention transient: strongest on the opening beat, lighter thereafter.
-        hit=.055 if s.get('start',0)<.1 else .032
-        fx[k:k+size]+=np.sin(2*np.pi*(110+420*u)*u)*np.exp(-u*18)*hit
+        beat_name=str(s.get('story_beat') or '')
+        if size>0:
+            if beat_name in {'reveal','payoff'}:
+                fx[k:k+size]+=np.sin(2*np.pi*(180+520*u)*u)*np.exp(-u*22)*.032
+            elif beat_name=='escalation':
+                fx[k:k+size]+=np.sin(2*np.pi*(90+260*u)*u)*np.exp(-u*20)*.024
+            elif beat_name=='button':
+                fx[k:k+size]+=np.sin(2*np.pi*520*u)*np.exp(-u*24)*.018
         if s.get('answer'):
             fx[k:k+size]+=np.sin(2*np.pi*880*u)*np.exp(-u*14)*.035
         if s.get('countdown'):

@@ -9,7 +9,7 @@ target a complete 25-40 second mini-story rather than a short visual demo.
 import os
 
 
-def _beat(speech: str, action: str, beat: str, voice: str, speed: float = 1.03) -> dict:
+def _beat(speech: str, action: str, beat: str, voice: str, speed: float = 1.03, speaker: str = "", *, visible_characters: tuple[str, ...] = ()) -> dict:
     return {
         "headline": "",
         "speech": speech,
@@ -18,6 +18,8 @@ def _beat(speech: str, action: str, beat: str, voice: str, speed: float = 1.03) 
         "character_action": action,
         "voice_name": voice,
         "voice_speed": speed,
+        "speaker": speaker,
+        "visible_characters": list(visible_characters),
         "duration": 4.2,
     }
 
@@ -27,7 +29,7 @@ def catalog() -> list[dict]:
         {
             "genre": "fiction",
             "kind": "character_comedy",
-            "content_id": "tiny-dragon-bubbles-v1",
+            "content_id": "tiny-dragon-bubbles-v2-sync",
             "production_ready": True,
             "character_story": True,
             "animal_character_story": True,
@@ -35,8 +37,13 @@ def catalog() -> list[dict]:
             "hook": "EVERY DRAGON COULD BREATHE FIRE... EXCEPT HIM",
             "question": "What happens when the smallest dragon can only blow bubbles?",
             "answer": "His strange little mistake becomes exactly what saves the village celebration.",
-            "title": "The Dragon Who Could Only Blow Bubbles",
+            "title": "The Dragon Who Could Only Blow Bubbles — Synced Cut",
             "voice_speed": 1.02,
+            "voice_cast": {
+                "Pip": {"voice": "af_heart", "speed": 1.04},
+                "Ember": {"voice": "am_adam", "speed": 1.02},
+                "Grandma": {"voice": "af_heart", "speed": 0.96},
+            },
             "target_duration_min": 28,
             "target_duration_max": 40,
             "character_bible": (
@@ -48,39 +55,39 @@ def catalog() -> list[dict]:
             ),
             "story_beats": [
                 _beat(
-                    "Pip: Okay... one tiny flame. That's all I need.",
+                    "Okay... one tiny flame. That's all I need.",
                     "Pip plants his feet, squeezes his eyes shut and tries very hard to breathe fire while festival lanterns glow behind him.",
-                    "reveal", "af_heart", 1.04,
+                    "reveal", "af_heart", 1.04, "Pip",
                 ),
                 _beat(
-                    "Pip: Pffft! ...Oh, come on.",
+                    "Pffft! ...Oh, come on.",
                     "Instead of fire, one enormous shimmering bubble floats from Pip's mouth and pops on his nose. He stares cross-eyed at the soap foam.",
-                    "build", "af_heart", 1.05,
+                    "build", "af_heart", 1.05, "Pip",
                 ),
                 _beat(
-                    "Ember: Impressive. You defeated the air.",
+                    "Impressive. You defeated the air.",
                     "Ember folds her arms with a teasing grin while Pip gives her a deeply offended side-eye. Keep the teasing affectionate, not mean.",
-                    "contrast", "am_adam", 1.02,
+                    "contrast", "am_adam", 1.02, "Ember",
                 ),
                 _beat(
-                    "Pip: Laugh now. I'm saving my good fire for later.",
+                    "Laugh now. I'm saving my good fire for later.",
                     "Pip turns away proudly, takes two steps, then quietly checks whether Ember believed him. She clearly did not.",
-                    "build", "af_heart", 1.05,
+                    "build", "af_heart", 1.05, "Pip",
                 ),
                 _beat(
-                    "Grandma: Pip! The lantern flame went out!",
+                    "Pip! The lantern flame went out!",
                     "A gust sweeps through the festival and every paper lantern goes dark. Grandma points toward the highest lantern hanging over a narrow ledge.",
-                    "escalation", "af_heart", 1.00,
+                    "escalation", "af_heart", 1.00, "Grandma",
                 ),
                 _beat(
-                    "Pip: I can't make fire... but I can reach it.",
+                    "I can't make fire... but I can reach it.",
                     "Pip blows a chain of glowing bubbles that gently lift a tiny ember upward toward the high lantern. Everyone watches in stunned silence.",
-                    "payoff", "af_heart", 1.00,
+                    "payoff", "af_heart", 1.00, "Pip",
                 ),
                 _beat(
-                    "Ember: Okay. That was actually impressive. Pip: I know. Try not to cry.",
+                    "Okay. That was actually impressive.",
                     "The lanterns relight across the village. Ember hugs Pip while he pretends to look smug, then accidentally blows one last bubble around both their heads.",
-                    "button", "af_heart", 1.02,
+                    "button", "am_adam", 1.02, "Ember",
                 ),
             ],
         },
@@ -96,6 +103,10 @@ def catalog() -> list[dict]:
             "question": "Can a bear cub secretly bake one tiny bun without destroying breakfast?",
             "answer": "No. But the disaster turns into the bakery's funniest new recipe.",
             "title": "The Bear Cub Who Tried to Bake",
+            "voice_cast": {
+                "Papa": {"voice": "am_adam", "speed": 1.03},
+                "Milo": {"voice": "af_heart", "speed": 1.06},
+            },
             "voice_speed": 1.03,
             "target_duration_min": 28,
             "target_duration_max": 40,
@@ -103,43 +114,43 @@ def catalog() -> list[dict]:
                 "Milo: small honey-brown bear cub with round ears, cream muzzle, green apron slightly too large. "
                 "Papa Bear: broad dark-brown bear wearing a white baker apron and flour-dusted chef cap. "
                 "Preserve fur colors, apron colors, body scale and facial proportions. Environment: warm woodland bakery "
-                "with wooden counters, copper pans, baskets of bread and morning sunlight."
+                "with wooden counters, copper pans, baskets of bread and morning sunlight. There is exactly one Milo cub and exactly one Papa adult in this story; they never duplicate or exchange body size. Show only the cast specified for each shot, with everyone else off-screen."
             ),
             "story_beats": [
                 _beat(
                     "Papa: Milo, don't touch the dough. Milo: I wasn't even looking at it.",
                     "Papa Bear points at a huge bowl of rising dough. Milo deliberately looks everywhere except at the bowl.",
-                    "reveal", "am_adam", 1.02,
+                    "reveal", "am_adam", 1.02, visible_characters=("Papa", "Milo"),
                 ),
                 _beat(
                     "Milo: I'm just... checking if it's lonely.",
-                    "The instant Papa leaves, Milo tiptoes back and pats the dough. It sticks to one paw, then the other.",
-                    "build", "af_heart", 1.06,
+                    "Papa is already outside the frame. In a solo shot, Milo pats the dough; it sticks to his paws.",
+                    "build", "af_heart", 1.06, visible_characters=("Milo",),
                 ),
                 _beat(
                     "Milo: Why are you climbing me?!",
                     "The elastic dough stretches up Milo's arms and over his head like a giant sticky hat while he waddles backward in panic.",
-                    "escalation", "af_heart", 1.08,
+                    "escalation", "af_heart", 1.08, visible_characters=("Milo",),
                 ),
                 _beat(
                     "Papa: Milo? Milo: Everything is completely under control.",
                     "Papa returns. Milo freezes behind the counter with a huge dough blob slowly rising above his head.",
-                    "contrast", "am_adam", 1.00,
+                    "contrast", "am_adam", 1.00, visible_characters=("Papa", "Milo"),
                 ),
                 _beat(
                     "The dough suddenly pops free and lands perfectly in six muffin cups.",
                     "The dough launches across the counter in slow-motion blobs and lands neatly in six baking cups. Milo and Papa stare at the impossible result.",
-                    "payoff", "af_heart", 1.03,
+                    "payoff", "af_heart", 1.03, visible_characters=("Papa", "Milo"),
                 ),
                 _beat(
                     "Papa: You invented something. Milo: I meant to do that.",
-                    "Fresh round buns emerge from the oven. Papa tastes one, surprised. Milo straightens his oversized apron proudly.",
-                    "payoff", "am_adam", 1.01,
+                    "A locked medium two-shot: exactly one adult Papa on screen-left and exactly one small Milo on screen-right, behind a tray of already-baked buns. Papa holds a tasted bun and reacts with surprise; Milo smiles proudly. Both remain in their original positions for the whole shot. No oven reveal or additional entrance.",
+                    "payoff", "am_adam", 1.01, visible_characters=("Papa", "Milo"),
                 ),
                 _beat(
                     "Papa: Then clean the ceiling. Milo: I have retired from baking.",
                     "Camera tilts up to reveal dough stuck all over the ceiling. Milo slowly backs toward the door while Papa raises one eyebrow.",
-                    "button", "af_heart", 1.04,
+                    "button", "af_heart", 1.04, visible_characters=("Papa", "Milo"),
                 ),
             ],
         },

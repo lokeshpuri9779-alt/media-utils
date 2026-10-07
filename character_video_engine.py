@@ -13,9 +13,11 @@ Astra must never spend merely because a token exists.
 import json
 import os
 import time
+import subprocess
 from pathlib import Path
 
 import httpx
+from imageio_ffmpeg import get_ffmpeg_exe
 
 from video_provider_policy import capability, autonomous_provider_allowed
 from agnes_free_video import (
@@ -206,13 +208,34 @@ def generate_character_clip(shot: dict, output_path: str | Path, timeout_seconds
         ) from exc
 
 
+def _extract_last_frame(video: Path, output: Path) -> Path:
+    subprocess.run([
+        get_ffmpeg_exe(),"-hide_banner","-loglevel","error","-y",
+        "-sseof","-0.08","-i",str(video),"-frames:v","1",str(output)
+    ],check=True)
+    if not output.is_file() or output.stat().st_size<=0:
+        raise CharacterVideoUnavailable("Could not extract Agnes continuity frame.")
+    return output
+
+
 def generate_storyboard(storyboard: list[dict], root: str | Path) -> tuple[list[Path], list[dict]]:
     root = Path(root)
     root.mkdir(parents=True, exist_ok=True)
     clips, reports = [], []
-    for i, shot in enumerate(storyboard):
+    previous_end = None
+    for i, raw in enumerate(storyboard):
+        shot=dict(raw)
+        if previous_end is not None:
+            shot["reference_image_paths"]=[str(previous_end)]
+            shot["prompt"]=(
+                str(shot.get("prompt") or "")+
+                " Start from the supplied previous-scene end frame. Preserve the exact character identity, "
+                "fur/skin markings, proportions, wardrobe, lighting direction and spatial continuity. "
+                "Continue the action naturally rather than resetting the pose."
+            )
         path = root / f"character_scene_{i+1:02d}.mp4"
         report = generate_character_clip(shot, path)
         clips.append(path)
         reports.append(report)
+        previous_end=_extract_last_frame(path,root/f"character_scene_{i+1:02d}_end.png")
     return clips, reports

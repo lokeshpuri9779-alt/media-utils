@@ -10,3 +10,5 @@ scenedetect-core @ git+https://github.com/Breakthrough/PySceneDetect.git@81c414c
 faster-whisper @ git+https://github.com/SYSTRAN/faster-whisper.git@9fa78645d7913ff9d94d0907a2156526b19b4556
 
 gradio_client==2.7.2
+
+edge-tts==7.2.3

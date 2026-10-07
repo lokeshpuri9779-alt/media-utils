@@ -1,18 +1,13 @@
 from __future__ import annotations
 
-"""Agnes free video backend for Astra.
+"""Free Agnes video backend for Astra.
 
-Protocol derived from uglylee/free-video-generator (MIT):
-https://github.com/uglylee/free-video-generator
-
-This adapter intentionally implements only Astra's needs:
-- text-to-video
-- 9:16 output
-- polling
-- MP4 download
-It requires AGNES_API_KEY and never falls through to a paid provider.
+Supports text-to-video plus Agnes image-to-video/keyframe continuity.
+No paid fallback is used here.
 """
 
+import base64
+import mimetypes
 import os
 import time
 from pathlib import Path
@@ -35,22 +30,37 @@ def _key() -> str:
 
 def agnes_status() -> dict:
     return {
-        "configured": bool(_key()),
-        "ready": bool(_key()),
-        "provider": "agnes-free-video",
-        "cost_class": "free-api",
-        "autonomous_allowed": True,
+        "configured":bool(_key()),
+        "ready":bool(_key()),
+        "provider":"agnes-free-video",
+        "cost_class":"free-api",
+        "autonomous_allowed":True,
     }
 
 
 def _frame_config(duration: float) -> tuple[int,int]:
-    # Keep the free job compact and inside Agnes's 720p frame limit.
     seconds=max(2.0,min(float(duration),5.0))
     fps=24
     frames=int(seconds*fps)+1
-    # Agnes expects frame counts on an 8n+1 cadence.
     frames=max(49,min(121,((frames-1)//8)*8+1))
     return frames,fps
+
+
+def _resolve_refs(shot: dict) -> list[str]:
+    out=[]
+    for raw in (shot.get("reference_image_paths") or []):
+        ref=str(raw).strip()
+        if not ref:
+            continue
+        if ref.startswith(("http://","https://","data:")):
+            out.append(ref)
+            continue
+        p=Path(ref)
+        if not p.is_file():
+            raise AgnesFreeVideoUnavailable(f"Agnes reference image is missing: {ref}")
+        mime=mimetypes.guess_type(str(p))[0] or "image/png"
+        out.append(f"data:{mime};base64,"+base64.b64encode(p.read_bytes()).decode("ascii"))
+    return out
 
 
 def generate_agnes_clip(
@@ -85,8 +95,19 @@ def generate_agnes_clip(
     if negative:
         payload["negative_prompt"]=negative
 
+    refs=_resolve_refs(shot)
+    mode="text-to-video"
+    if len(refs)==1:
+        payload["image"]=refs[0]
+        payload["mode"]="ti2vid"
+        mode="image-to-video"
+    elif len(refs)>1:
+        payload["extra_body"]={"image":refs[:2],"mode":"keyframes"}
+        mode="keyframes"
+
     headers={"Authorization":f"Bearer {key}","Content-Type":"application/json"}
     deadline=time.monotonic()+timeout_seconds
+
     try:
         with httpx.Client(timeout=90,follow_redirects=True) as client:
             submit=client.post(f"{BASE_URL}/videos",headers=headers,json=payload)
@@ -100,24 +121,24 @@ def generate_agnes_clip(
                 raise AgnesFreeVideoUnavailable("Agnes returned no video id.")
 
             final=None
-            rate_limit_backoff=max(30,int(poll_interval))
+            backoff=max(30,int(poll_interval))
             while time.monotonic()<deadline:
                 poll=client.get(POLL_URL,params={"video_id":video_id},headers=headers,timeout=30)
                 if poll.status_code==429:
                     retry_after=poll.headers.get("Retry-After")
                     try:
-                        delay=max(rate_limit_backoff,int(float(retry_after))) if retry_after else rate_limit_backoff
+                        delay=max(backoff,int(float(retry_after))) if retry_after else backoff
                     except (TypeError,ValueError):
-                        delay=rate_limit_backoff
-                    delay=min(delay,180)
-                    time.sleep(delay)
-                    rate_limit_backoff=min(rate_limit_backoff*2,180)
+                        delay=backoff
+                    time.sleep(min(delay,180))
+                    backoff=min(backoff*2,180)
                     continue
                 if poll.status_code!=200:
                     raise AgnesFreeVideoUnavailable(
                         f"Agnes poll failed: HTTP {poll.status_code} {poll.text[:300]}"
                     )
-                rate_limit_backoff=max(30,int(poll_interval))
+
+                backoff=max(30,int(poll_interval))
                 state=poll.json()
                 status=str(state.get("status") or "").lower()
                 if status=="failed":
@@ -165,6 +186,9 @@ def generate_agnes_clip(
         "height":1152,
         "num_frames":frames,
         "frame_rate":fps,
+        "generation_mode":mode,
+        "reference_images":len(refs),
     }
+
 
 # Probe marker: Agnes free backend active.

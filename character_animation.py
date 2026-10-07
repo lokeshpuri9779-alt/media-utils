@@ -71,23 +71,48 @@ def build_character_shot_prompt(story: dict, shot: dict, index: int, total: int)
     speaker=str(shot.get("speaker") or "").strip()
     action=str(shot.get("character_action") or subject)
     continuity=str(story.get("character_bible") or "Maintain the same established characters and wardrobe.")
+    beat=str(shot.get("story_beat") or "").lower()
+    camera={
+        "reveal":"tight reaction close-up opening on the character, then a quick reveal of the problem",
+        "build":"medium character-action shot with a gentle push-in",
+        "contrast":"clean two-shot emphasizing facial reactions and timing",
+        "escalation":"dynamic tracking shot with stronger foreground motion",
+        "payoff":"clear wide-to-medium payoff shot that makes the solution instantly readable",
+        "button":"warm reaction close-up ending on the final visual joke",
+    }.get(beat,profile["camera"][index % len(profile["camera"])])
+    visible = shot.get("visible_characters") or []
+    cast_direction = ""
+    if visible:
+        if len(set(visible)) != len(visible):
+            raise ValueError("Scene cast must contain unique character names.")
+        cast_direction = (
+            f"Visible cast: exactly {len(visible)} distinct character(s): {', '.join(visible)}. "
+            "Show each listed character exactly once throughout this shot. "
+            "Everyone else stays off-screen. No background extras, twins, duplicates, "
+            "reflected copies, additional heads, or split-screen panels. "
+            "Each character keeps one continuous body and a stable place in the scene. "
+        )
     prompt=(
         f"{profile['render_style']}. Vertical 9:16. {profile['character_design']}. "
         f"Scene {index+1} of {total}: {action}. "
+        f"{cast_direction}"
         f"Dialogue beat: {speaker + ': ' if speaker else ''}{subject}. "
-        f"Stage the speaking character with clear mouth, eye, ear and body reactions while the listener reacts naturally. "
+        f"One primary action only; make the first frame instantly readable and the final pose visually decisive. "
+        f"Stage clear eye direction, mouth shape, ears/wings/paws and full-body reaction while supporting characters react naturally. "
         f"Do not render dialogue as visible text. "
         f"{profile['lighting']}. {profile['framing']}. "
-        f"Camera: {profile['camera'][index % len(profile['camera'])]}. "
+        f"Camera: {camera}. "
         f"Motion: {profile['motion']}. {profile['environment']}. "
-        f"Continuity: {continuity} No card UI, no infographic layout, no copied logos or watermarks."
+        f"Continuity: {continuity} Preserve prop state and spatial direction from the previous scene. "
+        f"No card UI, no infographic layout, no copied logos or watermarks."
     )
     return {
         "engine_role": "character-video-generation",
         "variant": variant,
         "prompt": prompt,
-        "negative": "static slideshow, presentation card, infographic panel, visible dialogue text, subtitles burned into image, deformed hands or paws, frozen faces, identity drift, text-heavy frame, watermark",
+        "negative": "static slideshow, presentation card, infographic panel, visible dialogue text, subtitles burned into image, deformed hands or paws, frozen faces, identity drift, duplicate characters, extra cub, twins, cloned faces, extra bodies, reflected characters, split screen, text-heavy frame, watermark",
         "target_seconds": profile["shot_seconds"],
+        "visible_characters": list(visible),
         "continuity_required": True,
         "full_frame": True,
     }
