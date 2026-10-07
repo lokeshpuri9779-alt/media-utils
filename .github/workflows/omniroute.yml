@@ -63,7 +63,7 @@ jobs:
 
           endpoint='http://127.0.0.1:20128/v1/videos/generations'
           payload={
-              'model':'veoaifree-web/veo',
+              'model':'veoaifree-web/seedance',
               'prompt':(
                   'Vertical cinematic short, 9:16. A futuristic glass city at blue hour, '
                   'a single sleek electric hypercar glides through reflective streets, '
@@ -107,7 +107,7 @@ jobs:
 
           meta={
               'provider': headers.get('x-omniroute-provider','veoaifree-web'),
-              'model': headers.get('x-omniroute-model','veoaifree-web/veo'),
+              'model': headers.get('x-omniroute-model','veoaifree-web/seedance'),
               'reported_cost_usd': cost or 'unpriced/free route',
               'bytes': out.stat().st_size,
               'watermark_policy': 'provider states generated videos are watermark-free; prompt also forbids text/logos/watermarks',
