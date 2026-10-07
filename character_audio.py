@@ -56,7 +56,9 @@ def prepare_character_audio(story: dict, plan: list[dict], output: Path) -> tupl
     for idx,scene in enumerate(plan):
         pieces=[]
         segment_report=[]
+        segment_cursor = .14
         for speaker,spoken in _segments(scene.get("speech","")):
+            speaker = speaker or scene.get("speaker") or None
             voice,speed=_voice_for(story,scene,speaker)
             samples,rate=engine.create(spoken,voice=voice,speed=speed,lang="en-us")
             samples=np.asarray(samples,dtype=np.float32)
@@ -72,8 +74,11 @@ def prepare_character_audio(story: dict, plan: list[dict], output: Path) -> tupl
                 "voice":voice,
                 "speed":speed,
                 "seconds":round(len(samples)/RATE,3),
+                "start":round(segment_cursor, 6),
+                "end":round(segment_cursor + len(samples)/RATE, 6),
             })
             pieces.append(np.zeros(int(0.14*RATE),dtype=np.float32))
+            segment_cursor += len(samples)/RATE + .14
 
         spoken_audio=np.concatenate(pieces) if pieces else np.zeros(int(.25*RATE),dtype=np.float32)
         # Dialogue starts shortly after the visual cut and gets a reaction hold.
@@ -126,8 +131,8 @@ def prepare_character_audio(story: dict, plan: list[dict], output: Path) -> tupl
     for i,scene in enumerate(plan):
         a=int(scene["start"]*RATE); b=min(n,int(scene["end"]*RATE))
         va=int(scene["voice_start"]*RATE)
-        voice_secs=sum(float(x["seconds"]) for x in scene.get("dialogue_segments",[]))
-        vb=min(n,int((scene["voice_start"]+voice_secs+.2)*RATE))
+        voice_end=max((float(x["end"]) for x in scene.get("dialogue_segments",[])), default=.14)
+        vb=min(n,int((scene["start"]+voice_end+.2)*RATE))
         if vb>va:
             attack=max(1,int(.07*RATE)); release=max(1,int(.14*RATE))
             duck[va:vb]=np.minimum(duck[va:vb],.20)

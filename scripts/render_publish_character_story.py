@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import json
 
 import cloud_once
 from character_pilot import render
@@ -9,6 +10,8 @@ OUT=Path("/tmp/astra-next-character-short.mp4")
 story=pilot_story()
 
 result=render(OUT)
+REPORT=OUT.with_suffix(".json")
+REPORT.write_text(json.dumps(result, indent=2), encoding="utf-8")
 composition=result["composition"]
 actual=float(composition["duration"])
 target_min=float(story.get("target_duration_min",20))
@@ -44,6 +47,8 @@ cloud_once.CONTENT_META.update({
 })
 
 status,url=cloud_once.upload(OUT,title,description,token=token)
+result["upload"]={"status": status, "url": url, "content_id": content_id}
+REPORT.write_text(json.dumps(result, indent=2), encoding="utf-8")
 print("STORY_ID="+content_id)
 print("DURATION="+str(actual))
 print("SCENES="+str(composition.get("scene_count")))

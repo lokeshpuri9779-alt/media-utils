@@ -71,7 +71,7 @@ def catalog() -> list[dict]:
                 _beat(
                     "Laugh now. I'm saving my good fire for later.",
                     "Pip turns away proudly, takes two steps, then quietly checks whether Ember believed him. She clearly did not.",
-                    "build", "af_heart", 1.05,
+                    "build", "af_heart", 1.05, "Pip",
                 ),
                 _beat(
                     "Pip! The lantern flame went out!",
@@ -102,6 +102,10 @@ def catalog() -> list[dict]:
             "question": "Can a bear cub secretly bake one tiny bun without destroying breakfast?",
             "answer": "No. But the disaster turns into the bakery's funniest new recipe.",
             "title": "The Bear Cub Who Tried to Bake",
+            "voice_cast": {
+                "Papa": {"voice": "am_adam", "speed": 1.03},
+                "Milo": {"voice": "af_heart", "speed": 1.06},
+            },
             "voice_speed": 1.03,
             "target_duration_min": 28,
             "target_duration_max": 40,

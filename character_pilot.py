@@ -55,7 +55,7 @@ def render(output: Path) -> dict:
             timing=scene_spec.get("dialogue_segments") or []
             shot_spec["dialogue_timing"]=timing
             timing_text="; ".join(
-                f"{x.get('speaker','character')} speaks for {float(x.get('seconds') or 0):.2f}s: {x.get('text','')}"
+                f"{float(x['start']):.3f}-{float(x['end']):.3f}s: {x.get('speaker','character')} says {x.get('text','')}"
                 for x in timing
             )
             shot_spec["prompt"] += (
