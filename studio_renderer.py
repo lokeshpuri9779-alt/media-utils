@@ -127,38 +127,56 @@ def _story_plan(ch):
                 scene(payoff[0],payoff[1],'screen','DONE','SAVE THE SHORTCUT',tool=cid,reveal=True)]
     if genre == 'current':
         source=(ch.get('news_source') or 'SOURCE').upper()[:28]
+        source2=(ch.get('secondary_news_source') or 'SECOND SOURCE').upper()[:28]
         region=(ch.get('trend_region') or 'GLOBAL').upper()[:18]
         headline=' '.join(str(ch.get('news_title') or '').split())
-        hook_line=headline[:92].rstrip(' .,:;-') if headline else ch['hook']
         topic=' '.join(str(ch.get('topic') or headline or '').split())
         low=(topic+' '+headline+' '+q+' '+a).lower()
-        beats=[]
-        # Dynamic story architecture: choose only beats the story can visually support.
-        beats.append(scene(hook_line, q if q else a, 'story_hook','THE REVEAL',source,duration=1.8,topic=topic,story_beat='reveal'))
-        if re.search(r'country|city|state|island|border|travel|india|america|europe|asia|africa|moon|planet|space|jupiter|venus',low):
-            beats.append(scene('WHERE IS THIS HAPPENING?',q,'story_context','LOCATION / SCALE',region,duration=1.9,topic=topic,story_beat='map'))
-        if re.search(r'why|because|how|technology|science|system|process|works|effect|cause|orbit|eclipse|behind',low):
-            beats.append(scene('WHAT IS DRIVING IT?', q, 'story_context','THE MECHANISM',topic[:28].upper(),duration=2.0,topic=topic,story_beat='mechanism'))
-        if re.search(r'more|less|versus|price|market|stock|record|largest|smallest|higher|lower|than',low):
-            beats.append(scene('THE COMPARISON',a,'story_context','PUT IT IN PERSPECTIVE',region,duration=1.9,topic=topic,story_beat='contrast'))
-        # Evidence is mandatory for current stories with source depth.
-        if int(ch.get('source_count') or 0)>0:
-            beats.append(scene('WHAT THE REPORT SAYS', a, 'story_evidence',source,'SOURCE-LINKED EVIDENCE',topic=topic,story_beat='evidence'))
-        if re.search(r'could|may|might|risk|impact|matter|means|people|watch|visible|change',low):
-            beats.append(scene('WHY IT MATTERS', a, 'story_context','THE CONSEQUENCE',region,duration=2.0,topic=topic,story_beat='consequence'))
-        # Explicit uncertainty prevents trend metadata being narrated as certainty.
-        beats.append(scene('WHAT IS STILL UNCLEAR?','Search interest is a signal, not proof. The verified sources define what we know so far.',
-                           'story_evidence','VERIFY, THEN UPDATE',source,topic=topic,story_beat='uncertainty'))
-        beats.append(scene('THE TAKEAWAY', 'Here is the useful part: '+a, 'story_outlook','WHAT TO REMEMBER','RAYVAN / STORIES BEYOND THE ORDINARY',
-                           topic=topic,story_beat='payoff'))
-        # Shorts stay tight: preserve reveal, evidence, uncertainty/payoff and choose
-        # the most semantically useful middle beats instead of a fixed four-card template.
-        if len(beats)>6:
-            essential={0,len(beats)-3,len(beats)-2,len(beats)-1}
-            middle=[i for i in range(1,len(beats)-3)]
-            chosen=sorted(essential | set(middle[:max(0,6-len(essential))]))
-            beats=[beats[i] for i in chosen]
-        return beats
+
+        def compact(text, words=16):
+            parts=' '.join(str(text or '').split()).split()
+            if len(parts)<=words:
+                return ' '.join(parts).rstrip(' .,:;-')
+            return (' '.join(parts[:words]).rstrip(' .,:;-')+'…')
+
+        hook_line=compact(headline or ch.get('hook') or topic,12)
+        research=[compact(x,18) for x in (ch.get('research_facts') or []) if str(x).strip()]
+        while len(research)<2:
+            research.append(compact(a,16))
+        fact1,fact2=research[:2]
+
+        beats=[
+            scene(hook_line, compact(f"{topic}: {headline}",14), 'story_hook',
+                  'NOW',source,duration=1.35,topic=topic,story_beat='reveal'),
+            scene('FIRST VERIFIED DETAIL', fact1, 'story_evidence',
+                  source,'SOURCE 1',duration=1.55,topic=topic,story_beat='evidence_primary'),
+            scene('SECOND VERIFIED DETAIL', fact2, 'story_evidence',
+                  source2,'SOURCE 2',duration=1.55,topic=topic,story_beat='evidence_secondary'),
+        ]
+
+        if re.search(r'vs\b|versus|match|game|playoff|score|player|team|cricket|wnba|nba|nhl|nfl|mlb|football|soccer|tennis',low):
+            beats.append(scene('THE MATCHUP', compact(headline,14), 'story_context',
+                               'MATCH CONTEXT',region,duration=1.45,topic=topic,story_beat='contrast'))
+        elif re.search(r'country|city|state|island|border|travel|india|america|europe|asia|africa',low):
+            beats.append(scene('WHERE IT FITS', compact(q,14), 'story_context',
+                               'LOCATION / SCALE',region,duration=1.45,topic=topic,story_beat='map'))
+        elif re.search(r'why|because|how|technology|science|system|process|works|effect|cause|behind',low):
+            beats.append(scene('WHY IT IS HAPPENING', compact(q,14), 'story_context',
+                               'THE MECHANISM',topic[:28].upper(),duration=1.45,topic=topic,story_beat='mechanism'))
+        else:
+            beats.append(scene('THE CONTEXT', compact(q,14), 'story_context',
+                               'WHAT CHANGED',region,duration=1.45,topic=topic,story_beat='context'))
+
+        beats.extend([
+            scene('WHY IT MATTERS', compact(a,16), 'story_context',
+                  'THE CONSEQUENCE',region,duration=1.55,topic=topic,story_beat='consequence'),
+            scene('WHAT TO WATCH', 'Details can still change. Follow the verified sources for the next confirmed update.',
+                  'story_evidence','VERIFY NEXT',source,duration=1.35,topic=topic,story_beat='uncertainty'),
+            scene('THE TAKEAWAY', compact(a,13), 'story_outlook',
+                  'WHAT TO REMEMBER','RAYVAN / STORIES BEYOND THE ORDINARY',
+                  duration=1.35,topic=topic,story_beat='payoff'),
+        ])
+        return beats[:8]
     if genre == 'football':
         heads={'offside-position':('POSITION ≠ OFFENCE','INVOLVEMENT MATTERS'),
                'throw-offside':('DIRECT FROM A THROW-IN?','NO OFFSIDE OFFENCE'),
