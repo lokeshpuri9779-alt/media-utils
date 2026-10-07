@@ -1,0 +1,125 @@
+name: Prepare PULSEFALL Campaign RC download parts
+
+on:
+  push:
+    branches:
+      - pulsefall-campaign-download-parts
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  split:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Download validated campaign artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: PULSEFALL_BLACKSITE_CAMPAIGN_RC
+          path: staging
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: 37690304664
+
+      - name: Prepare installer chunks
+        shell: bash
+        run: |
+          set -euxo pipefail
+          find staging -maxdepth 3 -type f -printf '%p %s bytes\n'
+          SETUP="$(find staging -type f -name 'PULSEFALL_BLACKSITE_CAMPAIGN_RC_SETUP.exe' | head -n1)"
+          test -n "$SETUP"
+          mkdir -p chunks
+          cp "$SETUP" chunks/PULSEFALL_BLACKSITE_CAMPAIGN_RC_SETUP.exe
+          sha256sum chunks/PULSEFALL_BLACKSITE_CAMPAIGN_RC_SETUP.exe > chunks/SETUP_SHA256.txt
+          split -b 55M -d -a 2 chunks/PULSEFALL_BLACKSITE_CAMPAIGN_RC_SETUP.exe chunks/PULSEFALL_CAMPAIGN_SETUP.part
+          rm chunks/PULSEFALL_BLACKSITE_CAMPAIGN_RC_SETUP.exe
+          python3 - <<'PY'
+          from pathlib import Path
+          parts=sorted(Path("chunks").glob("PULSEFALL_CAMPAIGN_SETUP.part*"))
+          expr="+".join(p.name for p in parts)
+          bat = (
+              "@echo off\r\n"
+              "setlocal\r\n"
+              "cd /d %~dp0\r\n"
+              "echo Reassembling PULSEFALL BLACKSITE Full Campaign installer...\r\n"
+              f"copy /b {expr} PULSEFALL_BLACKSITE_CAMPAIGN_RC_SETUP.exe >nul\r\n"
+              "if errorlevel 1 (\r\n"
+              "  echo Reassembly failed. Make sure every part is in this folder.\r\n"
+              "  pause\r\n"
+              "  exit /b 1\r\n"
+              ")\r\n"
+              "echo Installer created: PULSEFALL_BLACKSITE_CAMPAIGN_RC_SETUP.exe\r\n"
+              "echo Run it to install the game.\r\n"
+              "pause\r\n"
+          )
+          Path("chunks/PULSEFALL_CAMPAIGN_REASSEMBLE.bat").write_bytes(bat.encode("ascii"))
+          print("parts", [p.name for p in parts])
+          PY
+          ls -lh chunks
+
+      - name: Upload part 00
+        uses: actions/upload-artifact@v4
+        with:
+          name: PULSEFALL_CAMPAIGN_PART00
+          path: chunks/PULSEFALL_CAMPAIGN_SETUP.part00
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload part 01
+        uses: actions/upload-artifact@v4
+        with:
+          name: PULSEFALL_CAMPAIGN_PART01
+          path: chunks/PULSEFALL_CAMPAIGN_SETUP.part01
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload part 02
+        uses: actions/upload-artifact@v4
+        with:
+          name: PULSEFALL_CAMPAIGN_PART02
+          path: chunks/PULSEFALL_CAMPAIGN_SETUP.part02
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload part 03
+        uses: actions/upload-artifact@v4
+        with:
+          name: PULSEFALL_CAMPAIGN_PART03
+          path: chunks/PULSEFALL_CAMPAIGN_SETUP.part03
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload part 04
+        uses: actions/upload-artifact@v4
+        with:
+          name: PULSEFALL_CAMPAIGN_PART04
+          path: chunks/PULSEFALL_CAMPAIGN_SETUP.part04
+          compression-level: 0
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Upload part 05
+        uses: actions/upload-artifact@v4
+        with:
+          name: PULSEFALL_CAMPAIGN_PART05
+          path: chunks/PULSEFALL_CAMPAIGN_SETUP.part05
+          compression-level: 0
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Upload reassembler
+        uses: actions/upload-artifact@v4
+        with:
+          name: PULSEFALL_CAMPAIGN_REASSEMBLER
+          path: |
+            chunks/PULSEFALL_CAMPAIGN_REASSEMBLE.bat
+            chunks/SETUP_SHA256.txt
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 7
