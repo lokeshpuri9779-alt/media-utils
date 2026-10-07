@@ -14,6 +14,17 @@ def _run(cmd: list[str]) -> None:
     subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
 
 
+def _has_audio(path: Path) -> bool:
+    try:
+        probe=subprocess.run([
+            "ffprobe","-v","error","-select_streams","a:0",
+            "-show_entries","stream=codec_type","-of","csv=p=0",str(path)
+        ],check=True,capture_output=True,text=True,timeout=20)
+        return probe.stdout.strip()=="audio"
+    except Exception:
+        return False
+
+
 def compose_character_short(
     clips: list[Path],
     scene_durations: list[float],
@@ -29,6 +40,8 @@ def compose_character_short(
     ffmpeg = get_ffmpeg_exe()
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
+    native_audio=all(_has_audio(Path(p)) for p in clips)
+
     with tempfile.TemporaryDirectory(prefix="astra_character_compose_") as td:
         td = Path(td)
         normalized = []
@@ -40,14 +53,20 @@ def compose_character_short(
                 f"scale={width}:{height}:force_original_aspect_ratio=increase,"
                 f"crop={width}:{height},fps={fps},format=yuv420p"
             )
-            _run([
+            cmd=[
                 ffmpeg, "-hide_banner", "-loglevel", "error", "-y",
                 "-stream_loop", "-1", "-i", str(clip),
                 "-t", f"{max(.1, float(duration)):.3f}",
-                "-an", "-vf", vf,
+                "-vf", vf,
                 "-c:v", "libx264", "-preset", "fast", "-crf", "18",
-                "-pix_fmt", "yuv420p", str(dst),
-            ])
+                "-pix_fmt", "yuv420p",
+            ]
+            if native_audio:
+                cmd += ["-map","0:v:0","-map","0:a:0","-c:a","aac","-b:a","192k"]
+            else:
+                cmd += ["-an"]
+            cmd.append(str(dst))
+            _run(cmd)
             normalized.append(dst)
 
         manifest = td / "concat.txt"
@@ -62,14 +81,24 @@ def compose_character_short(
             "-c", "copy", str(silent),
         ])
 
-        _run([
-            ffmpeg, "-hide_banner", "-loglevel", "error", "-y",
-            "-i", str(silent), "-i", str(audio_path),
-            "-map", "0:v:0", "-map", "1:a:0",
-            "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
-            "-af", "loudnorm=I=-14:TP=-1.0:LRA=7",
-            "-movflags", "+faststart", "-shortest", str(output_path),
-        ])
+        if native_audio:
+            _run([
+                ffmpeg, "-hide_banner", "-loglevel", "error", "-y",
+                "-i", str(silent),
+                "-map","0:v:0","-map","0:a:0",
+                "-c:v","copy","-c:a","aac","-b:a","192k",
+                "-af","loudnorm=I=-14:TP=-1.0:LRA=7",
+                "-movflags","+faststart",str(output_path),
+            ])
+        else:
+            _run([
+                ffmpeg, "-hide_banner", "-loglevel", "error", "-y",
+                "-i", str(silent), "-i", str(audio_path),
+                "-map", "0:v:0", "-map", "1:a:0",
+                "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
+                "-af", "loudnorm=I=-14:TP=-1.0:LRA=7",
+                "-movflags", "+faststart", "-shortest", str(output_path),
+            ])
 
     if not output_path.is_file() or output_path.stat().st_size <= 0:
         raise RuntimeError("Character compositor produced no final video.")
@@ -81,4 +110,5 @@ def compose_character_short(
         "fps": fps,
         "duration": round(sum(float(x) for x in scene_durations), 3),
         "output_bytes": output_path.stat().st_size,
+        "audio_mode": "agnes-native" if native_audio else "astra-fallback",
     }
