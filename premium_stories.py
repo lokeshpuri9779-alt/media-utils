@@ -27,7 +27,7 @@ def catalog():
         },
         {
             "genre":"space","kind":"explainer","content_id":"mercury-solar-day-v1",
-            "premium_story":True,"production_ready":False,
+            "premium_story":True,"production_ready":False,"validation_candidate":True,
             "hook":"A DAY LASTS TWO YEARS",
             "question":"How can one day on Mercury outlast two Mercury years?",
             "answer":"Mercury orbits the Sun every 88 Earth days, but one full sunrise-to-sunrise solar day lasts 176 Earth days.",
@@ -60,7 +60,7 @@ def catalog():
         },
         {
             "genre":"space","kind":"explainer","content_id":"mars-blue-sunset-v1",
-            "premium_story":True,"production_ready":False,
+            "premium_story":True,"production_ready":False,"validation_candidate":True,
             "hook":"MARS HAS BLUE SUNSETS",
             "question":"Why can sunset near the Sun look blue on the Red Planet?",
             "answer":"Fine Martian dust lets blue light stay concentrated closer to the Sun while other colors spread more broadly through the sky.",
@@ -76,7 +76,7 @@ def catalog():
         },
         {
             "genre":"space","kind":"explainer","content_id":"saturn-density-v1",
-            "premium_story":True,"production_ready":False,
+            "premium_story":True,"production_ready":False,"validation_candidate":True,
             "hook":"SATURN COULD FLOAT",
             "question":"Could Saturn really float in water?",
             "answer":"Saturn is the only planet with an average density lower than water. In an impossibly large enough ocean, that means it would float.",
