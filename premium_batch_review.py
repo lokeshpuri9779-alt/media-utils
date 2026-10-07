@@ -43,6 +43,9 @@ def main(root: Path) -> int:
             batch.append(entry)
             continue
         video = folder / "preview.mp4"
+        genre=str(story.get("genre") or "")
+        kind=str(story.get("kind") or "")
+        is_news=bool(story.get("is_news")) or genre in {"current","news"} or kind in {"news","current_event","breaking_news"}
         requirements = {
             "factual_media": bool(story.get("premium_story")),
             "motion_complexity": sum(1 for beat in (story.get("story_beats") or [])
@@ -50,6 +53,8 @@ def main(root: Path) -> int:
             "procedural_heavy": sum(1 for beat in (story.get("story_beats") or [])
                                     if str(beat.get("visual") or "") not in {"media"}) >= 2,
             "long_form": False,
+            "is_news": is_news,
+            "prefer_3d": not is_news,
         }
         selection = select_validated_local(requirements)
         renderer = str(selection.get("selected") or "studio")
