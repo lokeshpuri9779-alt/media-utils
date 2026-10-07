@@ -105,3 +105,14 @@ def migration_policy() -> dict:
         "provider_lock_in":False,
         "preserve":["creative_identity","continuity_state","quality_metrics","render_manifest"],
     }
+
+
+def state_after_render_probe(current_state: str, render_feasible: bool, failure_kind: str | None = None) -> str:
+    """Quarantine impossible configurations; never loop an observed hard OOM."""
+    if current_state == "retired":
+        return "retired"
+    if render_feasible:
+        return current_state
+    if failure_kind in {"oom","incompatible_runtime","impossible_allocation"}:
+        return "quarantined"
+    return "degraded" if current_state == "active" else "quarantined"
