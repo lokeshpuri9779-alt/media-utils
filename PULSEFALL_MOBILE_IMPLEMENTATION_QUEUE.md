@@ -2,6 +2,42 @@
 
 Goal: take PULSEFALL from prototype to a mobile-first commercial candidate. This queue is executed in order without asking for "next" between batches. A queue item only leaves the list after its build/test gate passes.
 
+## Benchmark-exceedance policy
+
+PULSEFALL does not ship merely because it reaches parity. Benchmark parity is the minimum checkpoint. A commercial candidate must exceed the selected benchmark set in the dimensions we can actually control and measure before launch.
+
+### Internal exceedance gates
+- First meaningful combat: <=30 seconds.
+- First meaningful upgrade choice: <=90 seconds.
+- Tutorial completion: >=90%.
+- First mission completion: >=70%.
+- Second-run start rate in playtests: >=55%.
+- Average playtest rating: >=4.5/5.
+- Combat-feel rating: >=4.5/5.
+- Control-feel rating: >=4.5/5.
+- Boss-fight rating: >=4.5/5.
+- Replay-intent rating: >=4.5/5.
+- D1 retention target after soft launch: >=40%.
+- D7 retention target after soft launch: >=12%.
+- D30 retention target after soft launch: >=4%.
+- Average session target: 7–10 minutes.
+- Sessions per active player/day target after soft launch: >=8.
+- Crash-free users: >=99.8%.
+- User-perceived ANR: <0.10%.
+- Mid/high-tier Android: 60 FPS target with stable frame pacing.
+- Low-tier Android: locked/stable 30 FPS fallback.
+- P90 frame time: <=16.7 ms on 60 FPS tier; <=33.3 ms on 30 FPS tier.
+- Cold start internal target: <3.5 seconds on mid-tier reference device.
+- No known soft-lock, pit trap, save blocker, progression blocker or unrecoverable run state.
+- Package/download-size target: <=200 MB initial delivery where feasible; use AAB/PAD before sacrificing quality.
+- Mobile UI must pass one-handed reachability/readability review and landscape thumb-zone review.
+- No monetization feature may reduce measured retention, completion, control satisfaction or combat satisfaction.
+
+### Iteration rule
+If any controllable product gate is below target, that area returns to the implementation queue automatically. Content expansion, monetization, store release and marketing stay blocked until the failing gate is improved and re-tested.
+
+Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be guaranteed before launch; after soft launch they become live optimization KPIs and the same improve/re-test rule applies.
+
 ## Release gates
 - Android build succeeds and installs.
 - No known player-trap or progression blocker.
