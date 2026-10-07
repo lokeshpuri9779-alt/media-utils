@@ -69,7 +69,7 @@ def provider_status() -> dict:
             "model": MODEL,
             "token_configured": bool((os.environ.get("REPLICATE_API_TOKEN") or "").strip()),
             "paid_generation_enabled": paid_generation_enabled(),
-            "ready": paid_ready,
+            "ready": False,
         },
     }
 
