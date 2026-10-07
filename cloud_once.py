@@ -951,7 +951,8 @@ def upload(video: Path, title: str, description: str, token: str | None = None) 
         r = client.post(UPLOAD_URL, params={"uploadType":"resumable","part":"snippet,status"}, headers=headers, json=metadata)
     if r.status_code >= 400:
         error = api_error(r, "upload_session")
-        if any(e.get("reason") == "uploadLimitExceeded" for e in error["errors"]):
+        if any(e.get("reason") in {"uploadLimitExceeded","quotaExceeded"} for e in error["errors"]):
+            CONTENT_META["limit_reason"] = next((e.get("reason") for e in error["errors"] if e.get("reason") in {"uploadLimitExceeded","quotaExceeded"}), "limit")
             return "limit", ""
         raise RuntimeError("YouTube session failed; see structured API diagnostic.")
     location = r.headers.get("location")
@@ -961,7 +962,8 @@ def upload(video: Path, title: str, description: str, token: str | None = None) 
         r = client.put(location, headers={"Authorization":f"Bearer {token}","Content-Type":"video/mp4","Content-Length":str(size)}, content=fh)
     if r.status_code not in (200,201):
         error = api_error(r, "upload_transfer")
-        if any(e.get("reason") == "uploadLimitExceeded" for e in error["errors"]):
+        if any(e.get("reason") in {"uploadLimitExceeded","quotaExceeded"} for e in error["errors"]):
+            CONTENT_META["limit_reason"] = next((e.get("reason") for e in error["errors"] if e.get("reason") in {"uploadLimitExceeded","quotaExceeded"}), "limit")
             return "limit", ""
         raise RuntimeError("YouTube upload failed; see structured API diagnostic.")
     result = r.json()
@@ -1241,8 +1243,8 @@ def main() -> None:
     )
 
     if state.get("limit_hit") and not force:
-        print("Paused after an earlier API uploadLimitExceeded response. No fresh upload test occurred in this run.")
-        print("The India-local day reset is Astra scheduling behavior, not a confirmed YouTube reset time.")
+        print("Paused after an earlier YouTube daily/API limit response. No fresh upload test occurred in this run.")
+        print("Limit reason:", state.get("limit_reason") or "unknown")
         return
     if not force and not short_due and not preflight_long_episode:
         if int(state.get("attempts", 0)) >= int(state["target"]):
@@ -1392,9 +1394,11 @@ def main() -> None:
         elif status == "limit":
             state["limit_hit"] = True
             state["last_api_error"] = LAST_API_ERROR
+            state["limit_reason"] = str(CONTENT_META.get("limit_reason") or "limit")
+            state["limit_hit_at"] = datetime.now(IST).isoformat()
             from ops_guardian import record_event
-            record_event("quota_pause", {"stage": "upload", "reason": "uploadLimitExceeded"})
-            print("YouTube API upload limit reported. Guardian paused further scheduled probes for today.")
+            record_event("quota_pause", {"stage": "upload", "reason": state["limit_reason"]})
+            print("YouTube upload/API daily limit reported:", state["limit_reason"], "| further scheduled uploads paused.")
     except Exception as exc:
         state["last_attempt_at"] = state.get("last_attempt_at") or datetime.now(IST).isoformat()
         is_long = CONTENT_META.get("format") == "long"
