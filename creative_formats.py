@@ -95,6 +95,8 @@ def choose_format(story: dict, recent_formats: list[str] | None = None) -> dict:
         preferred = ["family_3d_animal_comedy", "ai_character_cinematic", "mixed_media_story"]
     elif story.get("character_story"):
         preferred = ["ai_character_cinematic", "cinematic_mini_doc", "mixed_media_story"]
+    elif story.get("premium_story") and visuals.count("media") >= 2:
+        preferred = ["documentary_montage"]
     elif visuals.count("media") >= 2:
         preferred = ["cinematic_mini_doc", "documentary_montage", "mixed_media_story"]
     else:
