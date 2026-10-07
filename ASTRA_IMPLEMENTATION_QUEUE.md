@@ -43,8 +43,8 @@ Status legend: [ ] queued  [~] in progress  [x] completed  [!] blocked
 [ ] Promote Mercury story after media + quality pass
 [ ] Promote Mars story after media + quality pass
 [ ] Promote Saturn story after media + quality pass
-[ ] Add science / technology / history / geography factual templates
-[ ] Add topic freshness/source verification layer for current-event stories
+[x] Add science / technology / history / geography factual templates
+[x] Add topic freshness/source verification layer for current-event stories
 [x] Add duplicate-topic and near-duplicate hook prevention
 
 ## P4 — Shorts production automation
