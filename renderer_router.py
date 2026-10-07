@@ -120,6 +120,8 @@ def rank_validated_local(requirements: dict) -> list[dict]:
     motion = int(requirements.get("motion_complexity", 0) or 0)
     long_form = bool(requirements.get("long_form"))
     procedural = bool(requirements.get("procedural_heavy"))
+    is_news = bool(requirements.get("is_news"))
+    prefer_3d = bool(requirements.get("prefer_3d")) and not is_news
     ranked = []
     for key, meta in VALIDATED_LOCAL_RENDERERS.items():
         if not meta.get("enabled"):
@@ -134,12 +136,24 @@ def rank_validated_local(requirements: dict) -> list[dict]:
             score += strengths["motion_graphics"] * 4
         # Factual-media Shorts should default to the proven fast path unless
         # richer scene animation materially justifies another backend.
-        if key == "ffmpeg_native" and factual and motion <= 2 and not procedural:
+        if key == "ffmpeg_native" and factual and motion <= 2 and not procedural and not prefer_3d:
             score += 35
         if key == "studio" and procedural:
             score += 24
         if key == "hyperframes" and motion >= 4:
             score += 28
+        if prefer_3d:
+            if key == "hyperframes":
+                score += 55
+            elif key == "studio":
+                score += 35
+            elif key == "ffmpeg_native":
+                score -= 40
+        if is_news:
+            if key == "ffmpeg_native":
+                score += 45
+            elif key in {"studio","hyperframes"}:
+                score -= 15
         ranked.append({
             "key": key,
             "score": score,
