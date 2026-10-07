@@ -2,9 +2,13 @@ from __future__ import annotations
 
 import asyncio
 import json
+import math
 import re
 import subprocess
 import tempfile
+import wave
+
+import numpy as np
 from pathlib import Path
 
 import edge_tts
@@ -141,3 +145,64 @@ def build_synced_dialogue(plan: list[dict], root: Path, default_speed: float=1.0
     full=root/"dialogue.wav"
     _concat_audio(scene_audio,full,gap=0.0)
     return {"audio_path":str(full),"duration":cursor,"timeline":timeline}
+
+
+def build_character_mix(dialogue_path: str | Path, timeline: list[dict], plan: list[dict], output: str | Path) -> dict:
+    """Mix dialogue with restrained music and action-timed SFX on the same scene clock."""
+    dialogue_path=Path(dialogue_path)
+    output=Path(output)
+    with wave.open(str(dialogue_path),"rb") as wf:
+        rate=wf.getframerate()
+        channels=wf.getnchannels()
+        raw=wf.readframes(wf.getnframes())
+    audio=np.frombuffer(raw,dtype="<i2").astype(np.float32)/32768.0
+    if channels==1:
+        audio=np.repeat(audio[:,None],2,axis=1)
+    else:
+        audio=audio.reshape(-1,channels)[:,:2]
+    n=len(audio)
+    t=np.arange(n,dtype=np.float32)/rate
+    # Gentle cinematic bed; dialogue remains dominant.
+    root=146.83
+    music=(np.sin(2*np.pi*root*.5*t)+.35*np.sin(2*np.pi*root*.75*t))*.012
+    fx=np.zeros(n,dtype=np.float32)
+    duck=np.ones(n,dtype=np.float32)
+    for row,scene in zip(timeline,plan):
+        start=float(row["start"])
+        spoken=float(row["spoken_seconds"])
+        a=max(0,int((start+.02)*rate)); b=min(n,int((start+spoken+.18)*rate))
+        if b>a:
+            duck[a:b]=np.minimum(duck[a:b],.28)
+        beat=str(scene.get("story_beat") or "").lower()
+        pos=min(n-1,max(0,int(start*rate)))
+        dur=min(n-pos,int(.30*rate))
+        if dur<=0:
+            continue
+        u=np.arange(dur,dtype=np.float32)/rate
+        if beat in {"reveal","build","contrast"}:
+            tone=np.sin(2*np.pi*(260+180*u)*u)*np.exp(-u*14)*.030
+        elif beat=="escalation":
+            tone=(np.sin(2*np.pi*(90+420*u)*u)+.25*np.sin(2*np.pi*620*u))*np.exp(-u*9)*.050
+        elif beat=="payoff":
+            tone=(np.sin(2*np.pi*523*u)+.5*np.sin(2*np.pi*659*u))*np.exp(-u*7)*.040
+        else:
+            tone=np.sin(2*np.pi*392*u)*np.exp(-u*11)*.026
+        fx[pos:pos+dur]+=tone
+    bed=music*duck
+    out=audio.copy()
+    out[:,0]+=bed+fx
+    out[:,1]+=bed+fx
+    peak=float(np.max(np.abs(out))) if len(out) else 0.0
+    if peak>.95:
+        out*=.95/peak
+    output.parent.mkdir(parents=True,exist_ok=True)
+    with wave.open(str(output),"wb") as wf:
+        wf.setnchannels(2); wf.setsampwidth(2); wf.setframerate(rate)
+        wf.writeframes((np.clip(out,-1,1)*32767).astype("<i2").tobytes())
+    return {
+        "path":str(output),
+        "rate":rate,
+        "peak":peak,
+        "music":"ducked cinematic bed",
+        "sfx":"story-beat aligned",
+    }
