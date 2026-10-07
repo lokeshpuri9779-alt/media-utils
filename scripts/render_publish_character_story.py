@@ -9,16 +9,6 @@ from character_stories import pilot_story
 OUT=Path("/tmp/astra-next-character-short.mp4")
 story=pilot_story()
 
-result=render(OUT)
-REPORT=OUT.with_suffix(".json")
-REPORT.write_text(json.dumps(result, indent=2), encoding="utf-8")
-composition=result["composition"]
-actual=float(composition["duration"])
-target_min=float(story.get("target_duration_min",20))
-target_max=float(story.get("target_duration_max",40))
-if not (target_min <= actual <= target_max):
-    raise SystemExit(f"Duration gate failed: {actual}s not in {target_min}-{target_max}s")
-
 revision=(os.environ.get("ASTRA_UPLOAD_REVISION") or "").strip()
 title=str(story["title"]).strip()+(f" — {revision}" if revision else "")+" #Shorts"
 content_id=str(story["content_id"])+(f"-{revision.lower().replace(' ','-')}" if revision else "")
@@ -34,6 +24,22 @@ token=cloud_once.access_token()
 cloud_once.verify_channel(token)
 if cloud_once.live_channel_duplicate(token,title,content_id):
     raise SystemExit("This story already exists on the authorized channel; refusing duplicate upload.")
+
+result=render(OUT)
+REPORT=OUT.with_suffix(".json")
+REPORT.write_text(json.dumps(result, indent=2), encoding="utf-8")
+composition=result["composition"]
+actual=float(composition["duration"])
+target_min=float(story.get("target_duration_min",20))
+target_max=float(story.get("target_duration_max",40))
+if not (target_min <= actual <= target_max):
+    raise SystemExit(f"Duration gate failed: {actual}s not in {target_min}-{target_max}s")
+
+
+# Refresh the access token after a long render; retain the final duplicate guard.
+token=cloud_once.access_token()
+if cloud_once.live_channel_duplicate(token,title,content_id):
+    raise SystemExit("This story was uploaded while rendering; refusing duplicate upload.")
 
 cloud_once.CONTENT_META.update({
     "content_id":content_id,

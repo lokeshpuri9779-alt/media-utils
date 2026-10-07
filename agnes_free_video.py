@@ -14,6 +14,8 @@ from pathlib import Path
 
 import httpx
 
+from character_render_cache import RenderCache
+
 
 BASE_URL="https://apihub.agnes-ai.com/v1"
 POLL_URL="https://apihub.agnes-ai.com/agnesapi"
@@ -105,20 +107,32 @@ def generate_agnes_clip(
         payload["extra_body"]={"image":refs[:2],"mode":"keyframes"}
         mode="keyframes"
 
+    output_path=Path(output_path)
+    cache=RenderCache({"endpoint":BASE_URL, "payload":payload}, key)
+    cached=cache.completed(output_path)
+    if cached is not None:
+        return cached
+    video_id=cache.pending_job()
+    resumed=video_id is not None
     headers={"Authorization":f"Bearer {key}","Content-Type":"application/json"}
-    deadline=time.monotonic()+timeout_seconds
+    started=time.monotonic()
+    deadline=started+timeout_seconds
 
     try:
         with httpx.Client(timeout=90,follow_redirects=True) as client:
-            submit=client.post(f"{BASE_URL}/videos",headers=headers,json=payload)
-            if submit.status_code!=200:
-                raise AgnesFreeVideoUnavailable(
-                    f"Agnes submit failed: HTTP {submit.status_code} {submit.text[:300]}"
-                )
-            body=submit.json()
-            video_id=body.get("video_id") or body.get("task_id") or body.get("id")
-            if not video_id:
-                raise AgnesFreeVideoUnavailable("Agnes returned no video id.")
+            if video_id is None:
+                submit=client.post(f"{BASE_URL}/videos",headers=headers,json=payload)
+                if submit.status_code!=200:
+                    raise AgnesFreeVideoUnavailable(
+                        f"Agnes submit failed: HTTP {submit.status_code} {submit.text[:300]}"
+                    )
+                body=submit.json()
+                video_id=body.get("video_id") or body.get("task_id") or body.get("id")
+                if not video_id:
+                    raise AgnesFreeVideoUnavailable("Agnes returned no video id.")
+                # Checkpoint immediately; a retry resumes this job instead of buying
+                # another place in the free queue for an identical request.
+                cache.submitted(str(video_id))
 
             final=None
             backoff=max(30,int(poll_interval))
@@ -130,7 +144,12 @@ def generate_agnes_clip(
                         delay=max(backoff,int(float(retry_after))) if retry_after else backoff
                     except (TypeError,ValueError):
                         delay=backoff
-                    time.sleep(min(delay,180))
+                    remaining=deadline-time.monotonic()
+                    if delay>=remaining:
+                        raise AgnesFreeVideoUnavailable(
+                            f"Agnes requests a {delay}s cooldown; job checkpoint saved for a later run."
+                        )
+                    time.sleep(delay)
                     backoff=min(backoff*2,180)
                     continue
                 if poll.status_code!=200:
@@ -142,6 +161,7 @@ def generate_agnes_clip(
                 state=poll.json()
                 status=str(state.get("status") or "").lower()
                 if status=="failed":
+                    cache.failed()
                     raise AgnesFreeVideoUnavailable(
                         "Agnes render failed: "+str(state.get("error") or "unknown")
                     )
@@ -176,7 +196,7 @@ def generate_agnes_clip(
     if output_path.stat().st_size<=0:
         raise AgnesFreeVideoUnavailable("Agnes returned an empty video.")
 
-    return {
+    report = {
         "provider":"agnes-free-video",
         "video_id":str(video_id),
         "output_path":str(output_path),
@@ -188,7 +208,12 @@ def generate_agnes_clip(
         "frame_rate":fps,
         "generation_mode":mode,
         "reference_images":len(refs),
+        "cache_hit":False,
+        "resumed_job":resumed,
+        "elapsed_seconds":round(time.monotonic()-started, 3),
     }
+    cache.finish(output_path, report)
+    return report
 
 
 # Probe marker: Agnes free backend active.
