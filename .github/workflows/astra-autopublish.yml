@@ -1,0 +1,90 @@
+name: Astra Monetization Autopublish
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/astra-autopublish.yml'
+  schedule:
+    - cron: '17 */4 * * *'
+
+concurrency:
+  group: astra-monetization-autopublish
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+      YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+      YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+      YOUTUBE_FULL_REFRESH_TOKEN: ${{ secrets.YOUTUBE_FULL_REFRESH_TOKEN }}
+      YOUTUBE_ANALYTICS_REFRESH_TOKEN: ${{ secrets.YOUTUBE_ANALYTICS_REFRESH_TOKEN }}
+      YOUTUBE_PRIVACY: public
+      ASTRA_CHANNEL: rayvan
+      ASTRA_LONG_ENABLED: '1'
+      ASTRA_INITIAL_DAILY_TARGET: '4'
+      ASTRA_MAX_DAILY_TARGET: '4'
+      ASTRA_MIN_UPLOAD_INTERVAL_MINUTES: '180'
+      ASTRA_FORCE_RUN: '1'
+      ASTRA_MONETIZATION_FIRST: '1'
+      ASTRA_TREND_FIRST: '1'
+      ORT_DISABLE_TELEMETRY: '1'
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Restore adaptive state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin astra-state || true
+          for f in performance.json quota_state.json SHORTS.md; do
+            git checkout origin/astra-state -- "$f" 2>/dev/null || true
+          done
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install runtime
+        run: pip install -r requirements.txt
+
+      - name: Run trend-first monetization controller
+        id: controller
+        run: python cloud_once.py
+
+      - name: Save adaptive state
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin astra-state || true
+          if git show-ref --verify --quiet refs/remotes/origin/astra-state; then
+            STATE_DIR="$(mktemp -d)"
+            git worktree add --detach "$STATE_DIR" origin/astra-state
+          else
+            STATE_DIR="$(mktemp -d)"
+            git worktree add --detach "$STATE_DIR" main
+          fi
+          for f in performance.json quota_state.json SHORTS.md; do
+            if [ -e "$f" ]; then cp "$f" "$STATE_DIR/$f"; fi
+          done
+          cd "$STATE_DIR"
+          git config user.name "github-actions[bot]"
+          git config user.email "4189826+github-actions[bot]@users.noreply.github.com"
+          git checkout -B astra-state
+          git add -A -- performance.json quota_state.json SHORTS.md || true
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Astra monetization state [skip ci]"
+            git push --force-with-lease origin HEAD:astra-state
+          fi
