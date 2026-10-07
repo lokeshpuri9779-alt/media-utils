@@ -58,12 +58,36 @@ jobs:
           python-version: '3.12'
           cache: pip
 
+      - name: Cache voice and media assets
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/astra-voice
+            ~/.cache/huggingface
+            asset_cache
+          key: astra-runtime-assets-v2-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            astra-runtime-assets-v2-${{ runner.os }}-
+
       - name: Install runtime
         run: pip install -r requirements.txt
 
       - name: Run trend-first monetization controller
         id: controller
         run: python cloud_once.py
+
+      - name: Write run diagnosis
+        if: always()
+        run: python run_diagnosis.py
+
+      - name: Upload run diagnosis
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-diagnosis-${{ github.run_id }}
+          path: runtime-health/
+          retention-days: 14
+          if-no-files-found: error
 
       - name: Save adaptive state
         if: always()
