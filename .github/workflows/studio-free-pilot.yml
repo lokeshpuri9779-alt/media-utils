@@ -32,6 +32,11 @@ jobs:
           path: ~/.cache/astra-voice
           key: astra-kokoro-v1-beb0d184
 
+      - name: Install FFmpeg tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+
       - name: Render watermark-free Studio pilot
         run: |
           set -euo pipefail
