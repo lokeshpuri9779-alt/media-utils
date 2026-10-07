@@ -1,14 +1,7 @@
 name: Astra Fast Premium Pilot
-# fast renderer v3: no apt FFmpeg install + automatic visual review
 
+# Automatic CI disabled by user request. Run manually only.
 on:
-  push:
-    paths:
-      - '.github/workflows/studio-free-pilot.yml'
-      - 'fast_premium_renderer.py'
-      - 'studio_renderer.py'
-      - 'premium_stories.py'
-      - 'creative_formats.py'
   workflow_dispatch:
 
 permissions:
