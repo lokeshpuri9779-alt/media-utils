@@ -40,7 +40,7 @@ jobs:
       - name: Render one premium pilot only
         run: |
           set -euo pipefail
-          python studio_renderer.py --premium-preview /tmp/astra-fast-premium-pilot.mp4
+          python fast_premium_renderer.py --out /tmp/astra-fast-premium-pilot.mp4
 
       - name: Validate MP4
         run: |
