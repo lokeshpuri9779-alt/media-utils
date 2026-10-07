@@ -58,7 +58,7 @@ def generate_agnes_clip(
     output_path: str | Path,
     *,
     timeout_seconds: int = 1800,
-    poll_interval: int = 20,
+    poll_interval: int = 30,
 ) -> dict:
     key=_key()
     if not key:
@@ -100,12 +100,24 @@ def generate_agnes_clip(
                 raise AgnesFreeVideoUnavailable("Agnes returned no video id.")
 
             final=None
+            rate_limit_backoff=max(30,int(poll_interval))
             while time.monotonic()<deadline:
                 poll=client.get(POLL_URL,params={"video_id":video_id},headers=headers,timeout=30)
+                if poll.status_code==429:
+                    retry_after=poll.headers.get("Retry-After")
+                    try:
+                        delay=max(rate_limit_backoff,int(float(retry_after))) if retry_after else rate_limit_backoff
+                    except (TypeError,ValueError):
+                        delay=rate_limit_backoff
+                    delay=min(delay,180)
+                    time.sleep(delay)
+                    rate_limit_backoff=min(rate_limit_backoff*2,180)
+                    continue
                 if poll.status_code!=200:
                     raise AgnesFreeVideoUnavailable(
                         f"Agnes poll failed: HTTP {poll.status_code} {poll.text[:300]}"
                     )
+                rate_limit_backoff=max(30,int(poll_interval))
                 state=poll.json()
                 status=str(state.get("status") or "").lower()
                 if status=="failed":
