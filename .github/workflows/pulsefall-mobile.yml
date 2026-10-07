@@ -98,7 +98,8 @@ jobs:
           s=s.replace('window/size/viewport_height=1080', 'window/size/viewport_height=720')
           s=s.replace('window/hdr/request_hdr_output=true', 'window/hdr/request_hdr_output=false')
           if '[rendering]' in s and 'renderer/rendering_method.mobile=' not in s:
-              s=s.replace('[rendering]\n', '[rendering]\n\nrenderer/rendering_method.mobile="mobile"\nrenderer/rendering_method="mobile"\n')
+              s=s.replace('[rendering]\n', '[rendering]\n\nrenderer/rendering_method.mobile="mobile"\nrenderer/rendering_method="mobile"\ntextures/vram_compression/import_etc2_astc=true\n')
+          s=s.replace('scaling_3d/mode=2', 'scaling_3d/mode=0')
           if '[display]' in s and 'window/handheld/orientation=' not in s:
               s=s.replace('[display]\n', '[display]\n\nwindow/handheld/orientation=0\n')
           p.write_text(s)
