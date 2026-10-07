@@ -52,10 +52,10 @@ Status legend: [ ] queued  [~] in progress  [x] completed  [!] blocked
 [x] Keep uploads PRIVATE during review phase
 [x] Add metadata generation: title / description / tags / attribution
 [x] Add thumbnail/frame selection
-[ ] Add upload retry logic that respects YouTube quota/errors
-[ ] Add daily production budget/rate limiter
+[x] Add upload retry logic that respects YouTube quota/errors
+[x] Add daily production budget/rate limiter
 [ ] Add multi-channel routing only after channel credentials validate
-[ ] Add post-upload verification
+[x] Add post-upload verification
 [ ] Add analytics ingestion and feedback into story selection
 
 ## P5 — Long-form
