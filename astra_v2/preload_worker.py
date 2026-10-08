@@ -17,11 +17,12 @@ def main():
     queue = artifacts()
     queue_checked = time.monotonic()
     target = max(1, min(24, int(os.getenv("ASTRA_PRELOAD_BUFFER", "6"))))
-    if len(queue) >= target:
-        print("ASTRA_PRELOAD="+json.dumps({"outcome":"buffer_full","count":len(queue)}))
-        return
     excluded = set(state.get("published", {})) | set(state.get("reserved", {}))
     excluded.update(x.get("content_id", "") for x in state.get("pending", {}).values())
+    usable = [a for a in queue if str(a["name"])[len("astra-preloaded-"):] not in excluded]
+    if len(usable) >= target:
+        print("ASTRA_PRELOAD="+json.dumps({"outcome":"buffer_full","usable_count":len(usable),"total_artifacts":len(queue)}))
+        return
     # Reuse the already-fetched artifact listing: avoid a second GitHub API call.
     excluded.update(str(a['name'])[len('astra-preloaded-'):] for a in queue)
     # The renderer's own creative director and independent media QA must pass.
