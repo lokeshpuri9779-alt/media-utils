@@ -264,6 +264,8 @@ def director_input_from_render(story: dict, render_report: dict, media_qa: dict 
     hard = list(cq.get("hard_failures") or [])
     if media_qa:
         hard.extend(media_qa.get("hard_failures") or [])
+        if media_qa.get("pass") is False:
+            hard.append("post_render_media_validation_failed")
     if identity and not identity.get("pass", True):
         hard.append("creative identity too similar to a recent upload")
     if visual_scene_count > 0 and 1.0 <= visual_scene_rate <= 2.0:
