@@ -951,39 +951,46 @@ def transition_layer(im,s,t,u,accent):
     return im
 
 def _micro_scene_direction(shot, t, genre):
-    """Create fast visual cuts without fragmenting narration.
+    """Change visual direction during narration without cutting its audio.
 
-    Current/news Shorts keep their logical narration beats, while camera,
-    layout, motion and visual treatment change roughly every 0.67 seconds.
-    This yields about 1.5 visual scenes/second with a short eased transition.
+    Fiction gets a stable story-specific sequence of one-second shot treatments,
+    rather than holding one camera composition for an entire spoken beat.
+    This is procedural cinematography, NOT AI-generated animation.
     """
-    if genre != 'current':
+    if genre not in {'current', 'fiction'}:
         return shot, None
-    micro_index=max(0,int(t / NEWS_MICRO_SCENE_SECONDS))
-    phase=(t % NEWS_MICRO_SCENE_SECONDS) / NEWS_MICRO_SCENE_SECONDS
-    x=dict(shot)
-    cameras=['push','track','drift','push','track','drift']
-    layouts=['center','focus-left','focus-right','split','center','focus-right']
-    motions=['glide','scan','parallax','arc','glide','parallax']
-    styles=['mixed-media','vector-motion','cel-shaded','mixed-media','stop-motion','vector-motion']
-    x['director_camera']=cameras[micro_index % len(cameras)]
-    x['director_layout']=layouts[micro_index % len(layouts)]
-    x['director_motion']=motions[micro_index % len(motions)]
-    # Evidence cards stay editorial; only their treatment changes.
+    interval = NEWS_MICRO_SCENE_SECONDS if genre == 'current' else 1.0
+    micro_index = max(0, int(t / interval))
+    phase = (t % interval) / interval
+    x = dict(shot)
+    cameras = ('push', 'track', 'drift')
+    layouts = ('center', 'focus-left', 'focus-right', 'split')
+    motions = ('glide', 'scan', 'parallax', 'arc', 'pulse')
+    styles = ('mixed-media', 'vector-motion', 'cel-shaded', 'stop-motion')
+    if genre == 'fiction':
+        identity = '|'.join(str(shot.get(key) or '') for key in
+                            ('headline', 'visual', 'story_beat', 'speech'))
+        offset = int(hashlib.sha256(identity.encode('utf-8')).hexdigest()[:8], 16)
+    else:
+        offset = 0
+    x['director_camera'] = cameras[(micro_index + offset) % len(cameras)]
+    x['director_layout'] = layouts[(micro_index + offset // 3) % len(layouts)]
+    x['director_motion'] = motions[(micro_index + offset // 7) % len(motions)]
     if x.get('director_asset') != 'source-document':
-        x['director_style']=styles[micro_index % len(styles)]
-    x['micro_scene_index']=micro_index
-    x['micro_scene_phase']=phase
-    return x, {'index':micro_index,'phase':phase}
+        x['director_style'] = styles[(micro_index + offset // 11) % len(styles)]
+    x['micro_scene_index'] = micro_index
+    x['micro_scene_phase'] = phase
+    return x, {'index': micro_index, 'phase': phase, 'interval': interval}
 
 
 def _micro_scene_transition(im, micro, accent):
     if not micro:
         return im
     phase=float(micro.get('phase') or 0.0)
-    if phase >= NEWS_MICRO_TRANSITION_SECONDS / NEWS_MICRO_SCENE_SECONDS:
+    interval = max(.1, float(micro.get('interval') or NEWS_MICRO_SCENE_SECONDS))
+    if phase >= NEWS_MICRO_TRANSITION_SECONDS / interval:
         return im
-    p=ease(phase / (NEWS_MICRO_TRANSITION_SECONDS / NEWS_MICRO_SCENE_SECONDS))
+    p=ease(phase / (NEWS_MICRO_TRANSITION_SECONDS / interval))
     d=ImageDraw.Draw(im,'RGBA')
     alpha=max(0,int(52*(1-p)))
     idx=int(micro.get('index') or 0)
