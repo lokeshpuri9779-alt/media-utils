@@ -1,5 +1,7 @@
 """Reusable Creative Director adapter and independent video integrity gate."""
 import json
+import hashlib
+import os
 import subprocess
 
 
@@ -54,6 +56,14 @@ def make_candidate(path, excluded_ids, excluded_titles):
             print("OpenAI story skipped:", type(exc).__name__)
     print("Premium pool:", len(premium_stories), "seen IDs:", len(excluded_ids),
           "seen titles:", len(excluded_titles))
+    # Parallel preload lanes deterministically own disjoint story IDs.
+    lane_count = max(1, int(os.getenv("ASTRA_PRELOAD_LANES", "1")))
+    lane_index = int(os.getenv("ASTRA_PRELOAD_LANE", "0"))
+    if not 0 <= lane_index < lane_count:
+        raise ValueError("Invalid preload lane index")
+    if lane_count > 1:
+        premium_stories = [story for story in premium_stories
+                           if int.from_bytes(hashlib.sha256(str(story.get("content_id", "")).encode()).digest()[:8], "big") % lane_count == lane_index]
     for story in premium_stories:
         if not (story.get("production_ready") or story.get("validation_candidate")):
             continue
@@ -84,6 +94,8 @@ def make_candidate(path, excluded_ids, excluded_titles):
         except Exception as exc:
             print("Premium candidate rejected:", story.get("content_id"), type(exc).__name__)
     else:
+        if lane_count > 1:
+            raise CreativeSkip('no_approved_candidate_in_preload_lane')
         try:
             title, description = legacy.make_short(
                 path, excluded_ids=excluded_ids, excluded_titles=excluded_titles)
