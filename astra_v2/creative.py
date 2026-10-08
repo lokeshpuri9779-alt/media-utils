@@ -7,7 +7,7 @@ class CreativeSkip(Exception):
     """No sufficiently good original candidate is available in this slot."""
 
 
-def inspect_video(path):
+def inspect_video(path, fmt="short"):
     if not path.is_file() or path.stat().st_size < 30_000:
         raise CreativeSkip("missing_or_tiny_video")
     proc = subprocess.run(
@@ -21,8 +21,9 @@ def inspect_video(path):
     audio = next((x for x in data.get("streams", []) if x.get("codec_type") == "audio"), {})
     width, height = int(video.get("width") or 0), int(video.get("height") or 0)
     seconds = float((data.get("format") or {}).get("duration") or 0)
-    if not (8 <= seconds <= 180 and width >= 360 and height >= 640 and height > width and audio):
-        raise CreativeSkip("short_must_have_portrait_video_audio_and_8_to_180_seconds")
+    good = (60 <= seconds <= 3600 and width >= 640 and height >= 360 and width > height and bool(audio)) if fmt == "long" else (8 <= seconds <= 180 and width >= 360 and height >= 640 and height > width and bool(audio))
+    if not good:
+        raise CreativeSkip("video_audio_orientation_or_duration_failed")
     return {"seconds": round(seconds, 2), "size": path.stat().st_size,
             "width": width, "height": height}
 
@@ -94,4 +95,38 @@ def make_candidate(path, excluded_ids, excluded_titles):
     synthetic = bool(verdict.get("ai_disclosure_required"))
     return {"title": title, "description": description, "content_id": content_id,
             "media": media, "synthetic": synthetic,
-            "genre": str(meta.get("genre") or "")}
+            "genre": str(meta.get("genre") or ""), "format": "short"}
+
+
+def make_long_candidate(path, excluded_ids, excluded_titles):
+    """Use existing source-backed long episodes, only when eligible and QA-passing."""
+    import os
+    if os.getenv("ASTRA_LONG_ENABLED", "1") != "1":
+        return None
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    import cloud_once as legacy
+    from longform import choose_episode
+    from ypp_safety import enforce
+    episode = choose_episode(legacy.load_performance(), datetime.now(ZoneInfo("Asia/Kolkata")))
+    if not episode or episode in excluded_ids:
+        return None
+    try:
+        title, desc = legacy.make_long(path, episode)
+    except RuntimeError as exc:
+        if "quality" in str(exc).lower() or "creative" in str(exc).lower():
+            return None
+        raise
+    meta = dict(legacy.CONTENT_META)
+    cid = str(meta.get("content_id") or episode)
+    if cid in excluded_ids or title.casefold().strip() in excluded_titles:
+        return None
+    if not meta.get("source") or meta.get("copyright_unlicensed"):
+        raise CreativeSkip("longform_requires_sourced_and_licensed_media")
+    verdict = enforce(title, desc, meta, legacy.load_performance())
+    if verdict.get("pass") is False:
+        raise CreativeSkip("longform_safety_rejected")
+    return {"title": title, "description": desc, "content_id": cid,
+            "media": inspect_video(path, fmt="long"),
+            "synthetic": bool(verdict.get("ai_disclosure_required")),
+            "genre": str(meta.get("genre") or "educational"), "format": "long"}

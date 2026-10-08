@@ -20,6 +20,7 @@ jobs:
     timeout-minutes: 28
     env:
       ASTRA_CHANNEL: rayvan
+      ASTRA_LONG_ENABLED: '1'
       ASTRA_MAX_DAILY_UPLOADS: '48'
       ASTRA_MIN_UPLOAD_INTERVAL_MINUTES: '25'
       ORT_DISABLE_TELEMETRY: '1'

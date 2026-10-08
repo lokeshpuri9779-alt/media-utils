@@ -8,7 +8,7 @@ from astra_v2.control import (
     QUOTA_REASONS, REPORT_FILE, STATE_FILE, due, quota_resume,
     read_json, state_for_day, utcnow, write_json,
 )
-from astra_v2.creative import CreativeSkip, make_candidate
+from astra_v2.creative import CreativeSkip, make_candidate, make_long_candidate
 from astra_v2.youtube import Youtube, YoutubeError
 
 
@@ -36,7 +36,7 @@ def reconcile(youtube, state):
             # Do not record a success until the API confirms public processing.
             import cloud_once as legacy
             legacy.CONTENT_META = {
-                "content_id": cid, "format": "short", "visibility": "public",
+                "content_id": cid, "format": item.get("format", "short"), "visibility": "public",
                 "genre": item.get("genre", ""), "renderer": "astra-v2",
             }
             legacy.record_video(video_id, item.get("title", "RAYVAN Short"))
@@ -76,7 +76,8 @@ def run():
             with tempfile.TemporaryDirectory(prefix="astra-v2-") as temp:
                 video = Path(temp) / "short.mp4"
                 try:
-                    candidate = make_candidate(video, previous_ids | live_ids, live_titles)
+                    candidate = (make_long_candidate(video, previous_ids | live_ids, live_titles)
+                                 or make_candidate(video, previous_ids | live_ids, live_titles))
                 except CreativeSkip as exc:
                     report.update(outcome="quality_skip", reason=str(exc)[:250])
                     return report
@@ -100,7 +101,7 @@ def run():
                 state["pending"][video_id] = {
                     "content_id": cid, "title": title, "day": state["day"],
                     "uploaded_at": utcnow().isoformat(),
-                    "genre": candidate["genre"],
+                    "genre": candidate["genre"], "format": candidate["format"],
                 }
                 write_json(STATE_FILE, state)
                 result = youtube.status(video_id)
