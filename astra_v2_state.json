@@ -3,7 +3,7 @@
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 2,
-  "confirmed_today": 1,
+  "confirmed_today": 2,
   "last_attempt_at": "2026-10-08T19:12:56.008360+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -37,19 +37,15 @@
       "video_id": "JHMIm9uypBo",
       "confirmed_at": "2026-10-08T18:52:39.518832+00:00",
       "title": "Why We Always See the Same Side of the Moon"
+    },
+    "trend-8f22f6943e2488f5": {
+      "video_id": "aR8F1STzZ0Q",
+      "confirmed_at": "2026-10-08T19:13:24.253202+00:00",
+      "title": "Meet the Nobel Peace Prize Contenders Who Could Beat Trump This Year #Shorts"
     }
   },
-  "pending": {
-    "aR8F1STzZ0Q": {
-      "content_id": "trend-8f22f6943e2488f5",
-      "title": "Meet the Nobel Peace Prize Contenders Who Could Beat Trump This Year #Shorts",
-      "day": "2026-10-09",
-      "uploaded_at": "2026-10-08T19:12:58.087112+00:00",
-      "genre": "current",
-      "format": "short"
-    }
-  },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
