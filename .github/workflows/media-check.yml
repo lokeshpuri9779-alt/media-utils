@@ -1,8 +1,10 @@
 name: media check
 
-# Automatic CI disabled by user request. Run manually only.
+# Scheduled publishing enabled by owner request; push/PR CI remains disabled.
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *'
 
 permissions:
   contents: write
@@ -22,7 +24,7 @@ jobs:
       YOUTUBE_COMMUNITY_REFRESH_TOKEN: ${{ secrets.YOUTUBE_COMMUNITY_REFRESH_TOKEN }}
       YOUTUBE_COMMUNITY_CLIENT_ID: ${{ secrets.YOUTUBE_COMMUNITY_CLIENT_ID }}
       YOUTUBE_COMMUNITY_CLIENT_SECRET: ${{ secrets.YOUTUBE_COMMUNITY_CLIENT_SECRET }}
-      YOUTUBE_PRIVACY: private # temporary creative-review hold; restore after Moon pilot inspection
+      YOUTUBE_PRIVACY: public # owner requested automatic publication
       ORT_DISABLE_TELEMETRY: '1'
       ASTRA_LONG_ENABLED: '1'
       ASTRA_CHANNEL: 'rayvan'
