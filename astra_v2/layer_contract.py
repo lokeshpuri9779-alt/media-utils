@@ -6,6 +6,7 @@ same middle third of a frame. The contract is pure Python so it can be
 validated before audio synthesis and FFmpeg rendering.
 """
 from __future__ import annotations
+from pathlib import Path
 
 ILLUSTRATED_VISUALS = frozenset({
     "planet", "orbit", "compare", "tidal_lock", "iss_orbit",
@@ -42,7 +43,8 @@ def scene_layers(shot):
     resolved = shot.get("resolved_asset") or {}
     has_media = (
         resolved.get("status") == "ready" and
-        bool(resolved.get("cache_image"))
+        bool(resolved.get("cache_image")) and
+        Path(str(resolved.get("cache_image"))).is_file()
     )
     if visual in ILLUSTRATED_VISUALS:
         foreground = "illustration"
