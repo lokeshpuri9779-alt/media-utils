@@ -1,0 +1,40 @@
+name: Publish PULSEFALL Direct APK
+
+on:
+  push:
+    branches:
+      - pulsefall-mobile-rebuild
+    paths:
+      - ".github/workflows/pulsefall-direct-apk.yml"
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download latest validated APK artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euxo pipefail
+          mkdir -p dist
+          gh run download 37772199634             --repo "${{ github.repository }}"             --name PULSEFALL_MOBILE_ALPHA             --dir dist
+          APK="$(find dist -type f -name '*.apk' | head -n1)"
+          test -n "$APK"
+          cp "$APK" PULSEFALL_MOBILE_LATEST.apk
+          sha256sum PULSEFALL_MOBILE_LATEST.apk > PULSEFALL_MOBILE_LATEST.apk.sha256
+          ls -lh PULSEFALL_MOBILE_LATEST.apk
+
+      - name: Publish direct APK as prerelease asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euxo pipefail
+          if gh release view pulsefall-mobile-latest --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            gh release upload pulsefall-mobile-latest               PULSEFALL_MOBILE_LATEST.apk               PULSEFALL_MOBILE_LATEST.apk.sha256               --repo "${{ github.repository }}"               --clobber
+          else
+            gh release create pulsefall-mobile-latest               PULSEFALL_MOBILE_LATEST.apk               PULSEFALL_MOBILE_LATEST.apk.sha256               --repo "${{ github.repository }}"               --target 37772199634               --title "PULSEFALL Mobile Latest Validated APK"               --notes "Validated Android APK from successful CI run 37772199634. Development build; not a store release."               --prerelease
+          fi
