@@ -78,7 +78,7 @@ def run():
                 except Exception as feedback_error:
                     report["feedback"] = "unavailable_" + type(feedback_error).__name__
             limit = min(100, max(1, int(os.getenv("ASTRA_MAX_DAILY_UPLOADS", "100"))))
-            interval = max(14, int(os.getenv("ASTRA_MIN_UPLOAD_INTERVAL_MINUTES", "14")))
+            interval = max(5, int(os.getenv("ASTRA_MIN_UPLOAD_INTERVAL_MINUTES", "5")))
             allowed, reason = due(state, utcnow(), limit=limit, spacing_minutes=interval)
             if not allowed:
                 report.update(outcome="skipped", reason=reason)
