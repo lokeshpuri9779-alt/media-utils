@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-08",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 2,
+  "attempts": 3,
   "confirmed_today": 2,
-  "last_attempt_at": "2026-10-08T16:08:04.787656+00:00",
+  "last_attempt_at": "2026-10-08T16:44:27.736088+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -19,8 +19,17 @@
       "title": "The Door That Opened Tomorrow | Original Microfiction"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "j1yctQ5QpxA": {
+      "content_id": "rayvan-original-robotgarden-v1",
+      "title": "The Robot Who Grew a Forest | Original Microfiction",
+      "day": "2026-10-08",
+      "uploaded_at": "2026-10-08T16:44:29.128528+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -31,6 +40,11 @@
     "rayvan-original-doorclock-v1": {
       "at": "2026-10-08T16:08:04.787642+00:00",
       "title": "The Door That Opened Tomorrow | Original Microfiction",
+      "result": "accepted"
+    },
+    "rayvan-original-robotgarden-v1": {
+      "at": "2026-10-08T16:44:27.736073+00:00",
+      "title": "The Robot Who Grew a Forest | Original Microfiction",
       "result": "accepted"
     }
   },
