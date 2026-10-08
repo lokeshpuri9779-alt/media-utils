@@ -25,8 +25,8 @@
     }
   },
   "pending": {},
-  "last_outcome": "skipped",
-  "last_error": "",
+  "last_outcome": "failure",
+  "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
       "at": "2026-10-08T15:38:52.505809+00:00",
