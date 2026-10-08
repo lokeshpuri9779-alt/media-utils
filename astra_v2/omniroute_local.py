@@ -68,9 +68,8 @@ def catalog(excluded_ids=(), max_candidates=12, excluded_titles=()):
         community, payoff = ENDING[d]
         episode = d + 1
         cid = f"rayvan-season-01-episode-{episode:02d}"
-        if any(f"rayvan-season-01-episode-{previous:02d}" not in blocked
-               for previous in range(1, episode)):
-            continue
+        # Pre-render episodes independently in parallel. Publication order
+        # is enforced separately by the publisher, never by this catalog.
         if cid in blocked:
             continue
         # Include the actual discovery and protagonist, rather than reusing
