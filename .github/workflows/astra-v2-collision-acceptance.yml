@@ -38,6 +38,8 @@ jobs:
           key: astra-v2-layout-smoke-cache
       - name: Install existing free video stack
         run: timeout 420s python -m pip install -r requirements.txt
+      - name: Install FFprobe for video/audio validation
+        run: command -v ffprobe >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y ffmpeg)
       - name: Render and inspect actual Short, no YouTube authorization
         run: python -m astra_v2.layout_smoke
       - name: Keep video and storyboard evidence
