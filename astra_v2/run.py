@@ -89,8 +89,20 @@ def run():
             with tempfile.TemporaryDirectory(prefix="astra-v2-") as temp:
                 video = Path(temp) / "short.mp4"
                 try:
-                    candidate = (make_long_candidate(video, previous_ids | live_ids, live_titles)
-                                 or make_candidate(video, previous_ids | live_ids, live_titles))
+                    # Prefer previously rendered, approved MP4s from the durable
+                    # queue; never skip duplicate/format/channel safety checks.
+                    candidate = None
+                    if os.getenv("ASTRA_PRELOAD_ENABLED", "1") == "1":
+                        try:
+                            from astra_v2.preload_queue import take
+                            candidate = take(previous_ids | live_ids, live_titles, video)
+                        except Exception as queue_error:
+                            print("ASTRA_PRELOAD_FALLBACK=" + type(queue_error).__name__)
+                    if candidate is None:
+                        candidate = (make_long_candidate(video, previous_ids | live_ids, live_titles)
+                                     or make_candidate(video, previous_ids | live_ids, live_titles))
+                    else:
+                        print("ASTRA_PRELOAD_CONSUMED=" + candidate["content_id"])
                 except CreativeSkip as exc:
                     report.update(outcome="quality_skip", reason=str(exc)[:250])
                     return report

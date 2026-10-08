@@ -13,6 +13,7 @@ concurrency:
 
 permissions:
   contents: write
+  actions: read
 
 jobs:
   publish:
@@ -21,6 +22,8 @@ jobs:
     env:
       ASTRA_CHANNEL: rayvan
       ASTRA_LONG_ENABLED: '1'
+      ASTRA_PRELOAD_ENABLED: '1'
+      GH_TOKEN: ${{ github.token }}
       ASTRA_MAX_DAILY_UPLOADS: '100'
       ASTRA_MIN_UPLOAD_INTERVAL_MINUTES: '14'
       ORT_DISABLE_TELEMETRY: '1'
