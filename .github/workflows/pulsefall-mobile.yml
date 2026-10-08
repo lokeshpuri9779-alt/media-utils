@@ -2857,6 +2857,53 @@ jobs:
           p.write_text(s)
           PY
 
+      - name: Add graceful runtime lifecycle soak
+        shell: bash
+        run: |
+          cat > game/mobile/runtime_soak_test.gd <<'PULSEFALL_SOAK'
+          extends Node
+
+          const LEVEL_SCENE = preload("res://level/level.tscn")
+          const CYCLES := 5
+          const PHYSICS_FRAMES_PER_CYCLE := 120
+          var failures := 0
+          var checks := 0
+
+          func check(value: bool, message: String) -> void:
+          	checks += 1
+          	if value:
+          		print("PASS: ", message)
+          	else:
+          		failures += 1
+          		push_error(message)
+
+          func _ready() -> void:
+          	call_deferred("_run")
+
+          func _run() -> void:
+          	for cycle in range(CYCLES):
+          		var level := LEVEL_SCENE.instantiate()
+          		level.name = "SoakLevel"
+          		add_child(level)
+          		for frame in range(PHYSICS_FRAMES_PER_CYCLE):
+          			await get_tree().physics_frame
+          		check(is_instance_valid(level) and level.is_inside_tree(), "level remains live through soak cycle %d" % (cycle + 1))
+          		level.queue_free()
+          		await get_tree().process_frame
+          		await get_tree().process_frame
+          		await get_tree().physics_frame
+          		check(get_node_or_null("SoakLevel") == null, "level unloads cleanly after soak cycle %d" % (cycle + 1))
+          	print("RUNTIME SOAK CHECKS: ", checks, " CYCLES: ", CYCLES, " FAILURES: ", failures)
+          	get_tree().quit(0 if failures == 0 else 1)
+          PULSEFALL_SOAK
+
+          cat > game/mobile/runtime_soak_test.tscn <<'PULSEFALL_SOAK'
+          [gd_scene load_steps=2 format=3]
+          [ext_resource type="Script" path="res://mobile/runtime_soak_test.gd" id="1"]
+          [node name="RuntimeSoakTests" type="Node"]
+          script = ExtResource("1")
+          PULSEFALL_SOAK
+
       - name: Repair upstream mobile asset imports
         shell: bash
         run: |
@@ -3066,7 +3113,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.apk"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -3094,8 +3141,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=25
-          version/name="0.2.5-mobile-alpha"
+          version/code=26
+          version/name="0.2.6-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -3112,7 +3159,7 @@ jobs:
           set +e
           "$GODOT" --headless --audio-driver Dummy --path game --editor --quit-after 180 > /tmp/import.log 2>&1
           IMPORT_RC=$?
-          "$GODOT" --headless --audio-driver Dummy --path game res://level/level.tscn --quit-after 600 > /tmp/runtime.log 2>&1
+          timeout 90 "$GODOT" --headless --verbose --audio-driver Dummy --path game res://mobile/runtime_soak_test.tscn > /tmp/runtime.log 2>&1
           RUN_RC=$?
           timeout 120 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/extraction_test.tscn > /tmp/extraction-test.log 2>&1
           TEST_RC=$?
@@ -3132,6 +3179,10 @@ jobs:
           fi
           if grep -Eiq 'ERROR: Animation name .* already exists|ERROR: Failed loading resource|ERROR: Condition "surfaces\.is_empty\(\)"' /tmp/import.log; then
             echo "PULSEFALL mobile validation detected an asset import failure."
+            exit 1
+          fi
+          if grep -Eiq '[0-9]+ ObjectDB instances were leaked at exit|[0-9]+ resources still in use at exit|RID allocations of type .* were leaked at exit' /tmp/runtime.log; then
+            echo "PULSEFALL runtime lifecycle soak detected a shutdown leak."
             exit 1
           fi
           if grep -Eiq 'FSR2 3D scaling is only available|Screen-space ambient occlusion .* only available|Volumetric fog is only available' /tmp/runtime.log; then
