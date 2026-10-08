@@ -83,14 +83,20 @@ def catalog(excluded_ids=(), max_candidates=12, excluded_titles=()):
         if normalized_title in used_titles:
             continue
         used_titles.add(normalized_title)
+        # Four complete acts, with a narration budget calibrated for a
+        # 55-59 second Short. TTS timing is checked by the renderer.
         beats = [
-            (f"THE {place.upper()}", f"{name}, {role}, discovered {discovery} inside the {place}. Nobody else had entered that place in years. Yet fresh marks on the floor led straight to the discovery, as if someone had arrived only moments earlier.",
+            (f"THE {place.upper()}",
+             f"{name}, {role}, found {discovery} inside the {place}. The building had been sealed for years. But fresh footprints crossed the dust, and one set stopped right beside the strange object.",
              visual, "THE DISCOVERY", "reveal"),
-            ("THE CLUE", f"Every night, {surface} changed, and the {objects} seemed to point toward something nobody could explain. {name} stayed awake to watch. At first nothing happened. Then the pattern repeated, precisely when the old clock stopped, and one detail moved against the others.",
+            ("THE CLUE",
+             f"Each night, {surface} changed while the {objects} shifted into a new pattern. {name} watched until midnight. The clock stopped. Then one mark moved backward, pointing to a place no map showed.",
              clue_visual, "FOLLOW THE SIGNAL", "build"),
-            ("THE HIDDEN MESSAGE", f"The clue revealed {revelation}, but it would only work if someone believed the impossible. {name} checked the pattern twice, searching for a mistake. There was none. The message described something that had not happened yet, and the warning left almost no time to act.",
+            ("THE HIDDEN MESSAGE",
+             f"The pattern contained {revelation}. {name} checked it twice. Every detail matched, except the final line: the disaster would begin before sunrise. There was no time to ask who had sent it.",
              clue_visual, "THE TWIST", "twist"),
-            ("ONE SMALL CHOICE", f"{name} shared the discovery with {community}. Some laughed. Others were frightened. But one person listened, then another, until everyone understood what was at stake. Together they followed the warning, and {payoff}. {name} looked back at the place where it began, wondering who had sent the message.",
+            ("ONE SMALL CHOICE",
+             f"{name} warned {community}. Nobody believed the story at first. Then the lights flickered, exactly as predicted. Neighbors followed the instructions together, and {payoff}. But the mysterious sender never revealed their name.",
              visual, "THE PAYOFF", "payoff"),
         ]
         proposals.append({
