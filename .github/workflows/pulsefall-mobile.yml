@@ -2860,6 +2860,27 @@ jobs:
       - name: Add graceful runtime lifecycle soak
         shell: bash
         run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path("game/level/level.gd")
+          source = path.read_text()
+          if "func _exit_tree() -> void:" in source:
+              raise SystemExit("Level already defines an exit hook")
+          source += """
+          
+          
+          func _exit_tree() -> void:
+          	# Explicitly release streamed audio when a run ends or the app exits.
+          	# This prevents OGG playback/resource retention across repeated runs.
+          	for node in find_children("*", "", true, false):
+          		if node is AudioStreamPlayer or node is AudioStreamPlayer2D or node is AudioStreamPlayer3D:
+          			node.stop()
+          			node.stream = null
+          """
+          path.write_text(source)
+          PY
+
           cat > game/mobile/runtime_soak_test.gd <<'PULSEFALL_SOAK'
           extends Node
 
@@ -3181,8 +3202,8 @@ jobs:
             echo "PULSEFALL mobile validation detected an asset import failure."
             exit 1
           fi
-          if grep -Eiq '[0-9]+ ObjectDB instances were leaked at exit|[0-9]+ resources still in use at exit|RID allocations of type .* were leaked at exit' /tmp/runtime.log; then
-            echo "PULSEFALL runtime lifecycle soak detected a shutdown leak."
+          if grep -Eiq '[0-9]+ ObjectDB instances were leaked at exit|[0-9]+ resources still in use at exit|RID allocations of type .* were leaked at exit' /tmp/runtime.log /tmp/extraction-test.log; then
+            echo "PULSEFALL runtime lifecycle validation detected a shutdown leak."
             exit 1
           fi
           if grep -Eiq 'FSR2 3D scaling is only available|Screen-space ambient occlusion .* only available|Volumetric fog is only available' /tmp/runtime.log; then
