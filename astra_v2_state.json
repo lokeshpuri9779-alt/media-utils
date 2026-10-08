@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 6,
-  "confirmed_today": 5,
-  "last_attempt_at": "2026-10-08T23:39:37.894188+00:00",
+  "attempts": 7,
+  "confirmed_today": 6,
+  "last_attempt_at": "2026-10-08T23:54:06.584606+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -57,14 +57,19 @@
       "video_id": "EsuZTzIFYf0",
       "confirmed_at": "2026-10-08T21:25:23.223614+00:00",
       "title": "Fever's Clark denounces online hate directed at 'good soul' Mitchell #Shorts"
+    },
+    "rayvan-omniroute-local-341282bd7d0ce0e77e": {
+      "video_id": "CW1Km6X0_hs",
+      "confirmed_at": "2026-10-08T23:53:32.793138+00:00",
+      "title": "Mara and A Small Ship With No Passengers at the Abandoned Observatory"
     }
   },
   "pending": {
-    "CW1Km6X0_hs": {
-      "content_id": "rayvan-omniroute-local-341282bd7d0ce0e77e",
-      "title": "Mara and A Small Ship With No Passengers at the Abandoned Observatory",
+    "L3TFNbRZILg": {
+      "content_id": "rayvan-omniroute-local-0bc942d384c8ddc300",
+      "title": "Ivo and A Door That Appears At Midnight at the Abandoned Observatory",
       "day": "2026-10-09",
-      "uploaded_at": "2026-10-08T23:39:39.324462+00:00",
+      "uploaded_at": "2026-10-08T23:54:07.992856+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -125,6 +130,11 @@
     "rayvan-omniroute-local-341282bd7d0ce0e77e": {
       "at": "2026-10-08T23:39:37.894171+00:00",
       "title": "Mara and A Small Ship With No Passengers at the Abandoned Observatory",
+      "result": "accepted"
+    },
+    "rayvan-omniroute-local-0bc942d384c8ddc300": {
+      "at": "2026-10-08T23:54:06.584591+00:00",
+      "title": "Ivo and A Door That Appears At Midnight at the Abandoned Observatory",
       "result": "accepted"
     }
   },
