@@ -110,6 +110,21 @@ class QualityTests(unittest.TestCase):
                 with self.assertRaises(CreativeSkip):
                     inspect_video(video)
 
+    def test_longform_landscape_audio_is_valid(self):
+        with tempfile.TemporaryDirectory() as directory:
+            video = Path(directory) / "long.mp4"
+            video.write_bytes(b"0" * 35000)
+            result = Mock(returncode=0, stdout=json.dumps({
+                "streams": [{"codec_type": "video", "width": 1920, "height": 1080},
+                            {"codec_type": "audio"}],
+                "format": {"duration": "240"},
+            }))
+            with patch("astra_v2.creative.subprocess.run", return_value=result):
+                self.assertEqual(inspect_video(video, fmt="long")["seconds"], 240.0)
+            with patch("astra_v2.creative.subprocess.run", return_value=result):
+                with self.assertRaises(CreativeSkip):
+                    inspect_video(video, fmt="short")
+
 
 if __name__ == "__main__":
     unittest.main()
