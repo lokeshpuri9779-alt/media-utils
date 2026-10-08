@@ -23,8 +23,10 @@ WEIGHTS = {
 
 # Genre-specific editorial weights. Technical failures remain hard blockers.
 GENRE_WEIGHTS = {
-    "fiction": {"hook": .20, "retention": .05, "visual": .20, "pacing": .15, "audio": .15,
-                "captions": .05, "novelty": .05, "coherence": .15, "technical": .00},
+    "fiction": {"hook": .20, "retention": .10, "visual": .15, "pacing": .15, "audio": .10,
+                "captions": .10, "novelty": .05, "coherence": .15, "technical": .00},
+    "suspense": {"hook": .20, "retention": .10, "visual": .15, "pacing": .15, "audio": .10,
+                 "captions": .10, "novelty": .05, "coherence": .15, "technical": .00},
     "comedy": {"hook": .20, "retention": .15, "visual": .15, "pacing": .20, "audio": .15,
                "captions": .05, "novelty": .05, "coherence": .05, "technical": .00},
     "education": {"hook": .15, "retention": .10, "visual": .15, "pacing": .10, "audio": .15,
@@ -32,6 +34,7 @@ GENRE_WEIGHTS = {
 }
 GENRE_FLOORS = {
     "fiction": {"hook": 75, "visual": 75, "audio": 75, "coherence": 75, "technical": 85},
+    "suspense": {"hook": 75, "visual": 75, "audio": 75, "coherence": 75, "technical": 85},
     "comedy": {"hook": 75, "visual": 75, "audio": 75, "pacing": 70, "technical": 85},
     "education": {"hook": 75, "visual": 75, "audio": 75, "captions": 75, "coherence": 75, "technical": 85},
 }
@@ -72,12 +75,14 @@ def _component_scores(report: dict) -> dict[str, float]:
     avg_scene = float(scene.get("avg_scene_duration") or 0)
     scene_count = int(scene.get("scene_count") or 0)
 
+    genre = str(report.get("genre") or "").lower()
+    narrative = genre in {"fiction", "suspense"}
     pacing = 100.0
-    if max_scene > 4.0:
+    if not narrative and max_scene > 4.0:
         pacing -= min(45.0, (max_scene - 4.0) * 12.0)
-    if avg_scene > 2.8:
+    if not narrative and avg_scene > 2.8:
         pacing -= min(25.0, (avg_scene - 2.8) * 10.0)
-    if scene_count and scene_count < 4:
+    if not narrative and scene_count and scene_count < 4:
         pacing -= 15.0
 
     return {
@@ -102,7 +107,7 @@ def targeted_repairs(scores: dict[str, float]) -> list[str]:
     if scores["visual"] < 75:
         repairs.append("replace_weak_visuals_and_broll")
     if scores["pacing"] < 75:
-        repairs.append("shorten_long_scenes_and_add_cuts")
+        repairs.append("review_story_rhythm_and_tension")
     if scores["audio"] < 75:
         repairs.append("remix_or_regenerate_audio")
     if scores["captions"] < 75:
@@ -130,7 +135,7 @@ def evaluate(report: dict) -> dict:
 
     if hard_failures:
         tier, action = "reject", "rebuild_or_block"
-    elif floor_failures and total >= PUBLISH_THRESHOLD:
+    elif floor_failures:
         tier, action = "repair", "targeted_regeneration"
     elif total >= EXCEPTIONAL_THRESHOLD:
         tier, action = "exceptional", "publish"
