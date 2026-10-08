@@ -2891,12 +2891,15 @@ jobs:
               name = animation.get("name")
               if not name:
                   continue
-              # Godot canonicalizes separators while importing animation libraries,
-              # so source names that differ only by spaces/punctuation can collide.
-              canonical = re.sub(r"[^0-9A-Za-z_]+", "_", name).strip("_").casefold()
+              # Godot removes import suffixes such as "-cycle", then canonicalizes
+              # separators. Preserve the suffix while making the imported name unique.
+              suffix_match = re.search(r"-(cycle|loop|noexp)$", name, re.IGNORECASE)
+              suffix = suffix_match.group(0) if suffix_match else ""
+              stem = name[:-len(suffix)] if suffix else name
+              canonical = re.sub(r"[^0-9A-Za-z_]+", "_", stem).strip("_").casefold()
               seen[canonical] = seen.get(canonical, 0) + 1
               if seen[canonical] > 1:
-                  unique_name = f"{name}__source_{seen[canonical]}"
+                  unique_name = f"{stem}_Alt_{seen[canonical]}{suffix}"
                   animation["name"] = unique_name
                   renamed.append((name, unique_name))
           print("Source GLB animations:", animation_names)
@@ -2911,6 +2914,33 @@ jobs:
           )
           path.write_bytes(output)
           print("Renamed duplicate GLB animations:", renamed)
+
+          # Remove the upstream Collada controller whose mesh and skin both contain
+          # zero vertices. It is an empty Plane.007 placeholder, not visible geometry.
+          dae_path = Path("game/door/model/door.dae")
+          dae = dae_path.read_text()
+          patterns = (
+              r'\s*<geometry id="id-mesh-10"[\s\S]*?</geometry>',
+              r'\s*<controller id="id-controller-11"[\s\S]*?</controller>',
+              r'\s*<node id="Plane\.007"[\s\S]*?</node>',
+          )
+          for pattern in patterns:
+              dae, count = re.subn(pattern, "", dae, count=1)
+              if count != 1:
+                  raise SystemExit(f"Expected one empty Collada element for {pattern}")
+          dae_path.write_text(dae)
+
+          door_scene_path = Path("game/door/door.tscn")
+          door_scene = door_scene_path.read_text()
+          door_scene, count = re.subn(
+              r'\n\[node name="Plane_007"[\s\S]*?\nskeleton = NodePath\("\.\."\)\n',
+              "\n",
+              door_scene,
+              count=1,
+          )
+          if count != 1:
+              raise SystemExit("Expected one Plane.007 override in door scene")
+          door_scene_path.write_text(door_scene)
           PY
 
       - name: Enforce mobile renderer compatibility
