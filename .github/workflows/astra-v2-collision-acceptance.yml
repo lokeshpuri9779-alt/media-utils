@@ -1,0 +1,50 @@
+name: ASTRA collision-free animation acceptance
+
+on:
+  push:
+    branches:
+      - astra-v2-scene-collision-guard-20261008
+
+permissions:
+  contents: read
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m compileall -q astra_v2/layer_contract.py astra_v2/layout_smoke.py studio_renderer.py quality_lab.py
+      - run: python -m unittest discover -s tests -p 'test_scene_layer_contract.py' -v
+
+  visual-smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/astra-voice
+            ~/.cache/huggingface
+            asset_cache
+          key: astra-v2-layout-smoke-cache
+      - name: Install existing free video stack
+        run: timeout 420s python -m pip install -r requirements.txt
+      - name: Render and inspect actual Short, no YouTube authorization
+        run: python -m astra_v2.layout_smoke
+      - name: Keep video and storyboard evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-scene-collision-review
+          path: layout-review/
+          retention-days: 7
+          if-no-files-found: warn
