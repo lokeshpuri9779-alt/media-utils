@@ -32,6 +32,14 @@ def reconcile(youtube, state):
         processing = status.get("uploadStatus")
         if visibility == "public" and processing == "processed":
             cid = item["content_id"]
+            # Preserve the established learning database and public video feed.
+            # Do not record a success until the API confirms public processing.
+            import cloud_once as legacy
+            legacy.CONTENT_META = {
+                "content_id": cid, "format": "short", "visibility": "public",
+                "genre": item.get("genre", ""), "renderer": "astra-v2",
+            }
+            legacy.record_video(video_id, item.get("title", "RAYVAN Short"))
             state["published"][cid] = {"video_id": video_id, "confirmed_at": utcnow().isoformat(),
                                         "title": item.get("title", "")}
             if item.get("day") == state["day"]:
