@@ -33,13 +33,23 @@ ENDING = [
 ]
 
 
-def catalog(excluded_ids=(), max_candidates=12):
+def catalog(excluded_ids=(), max_candidates=12, excluded_titles=()):
     """Produce a rotating inventory of distinct structured narrative proposals.
 
     Deterministic combinations allow stable IDs, replay safety and zero spend.
     The Creative Director can reject any candidate. This is NOT an LLM.
     """
     blocked = set(excluded_ids)
+    prior_titles = [str(title).casefold() for title in excluded_titles]
+    used_settings = set()
+    used_discoveries = set()
+    for previous in prior_titles:
+        for idx, (place, *_rest) in enumerate(SETTINGS):
+            if place in previous:
+                used_settings.add(idx)
+        for idx, (discovery, *_rest) in enumerate(DISCOVERIES):
+            if discovery in previous:
+                used_discoveries.add(idx)
     proposals = []
     used_titles = set()
     combinations = itertools.product(range(len(SETTINGS)), range(len(PROTAGONISTS)),
@@ -51,6 +61,9 @@ def catalog(excluded_ids=(), max_candidates=12):
         # Ensure discovery and payoff relate to the setting; a purely random
         # mix can produce visually polished but narratively incoherent stories.
         if (a == 3 and c == 2) or (a == 2 and c == 2):
+            continue
+        # Avoid recycling the same location or central story mechanism across uploads.
+        if a in used_settings or c in used_discoveries:
             continue
         place, visual, surface, objects = SETTINGS[a]
         name, role = PROTAGONISTS[b]
