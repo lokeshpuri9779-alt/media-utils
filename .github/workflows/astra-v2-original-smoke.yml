@@ -1,0 +1,26 @@
+name: ASTRA V2 Original Stories - Render Acceptance
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/astra-v2-original-smoke.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate-video:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      ORT_DISABLE_TELEMETRY: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install renderer
+        run: |
+          python -m pip install -r requirements.txt
+          command -v ffprobe || (sudo apt-get update -qq && sudo apt-get install -y ffmpeg)
+      - name: Render one complete original V2 Short and apply full QA
+        run: python -m astra_v2.smoke
