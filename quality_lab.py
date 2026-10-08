@@ -274,7 +274,7 @@ def director_input_from_render(story: dict, render_report: dict, media_qa: dict 
         pacing_source = "pyscenedetect" if detected_durations else "studio-plan"
 
     return {
-        "genre": "fiction" if str(story.get("genre") or "").lower() in ("fiction", "suspense", "thriller", "microfiction") else str(story.get("genre") or "default").lower(),
+        "genre": ("suspense" if str(story.get("genre") or "").lower() in ("suspense", "thriller") else "fiction" if str(story.get("genre") or "").lower() in ("fiction", "microfiction") else str(story.get("genre") or "default").lower()),
         "duration": duration,
         "scenes": scenes,
         "creative_quality": cq,
