@@ -111,5 +111,19 @@ class QualityTests(unittest.TestCase):
                     inspect_video(video)
 
 
+
+class OriginalStoryTests(unittest.TestCase):
+    def test_new_stories_are_independent_and_complete(self):
+        from astra_v2.original_stories import catalog
+        stories = catalog()
+        self.assertGreaterEqual(len(stories), 6)
+        self.assertEqual(len({s["content_id"] for s in stories}), len(stories))
+        self.assertEqual(len({s["title"] for s in stories}), len(stories))
+        for s in stories:
+            self.assertEqual(s["genre"], "fiction")
+            self.assertTrue(s["production_ready"])
+            self.assertGreaterEqual(len(s["story_beats"]), 4)
+            self.assertTrue(all(b.get("speech") and b.get("visual") for b in s["story_beats"]))
+
 if __name__ == "__main__":
     unittest.main()
