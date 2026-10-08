@@ -27,6 +27,8 @@ def main():
                 if not record["quality_pass"]:
                     failures.append({"id":identity,"error":"creative_gate", "score":record["director"].get("score")})
                     continue
+                if failures:
+                    print("V2_SMOKE_PRIOR_REJECTIONS="+json.dumps(failures,default=str))
                 print("V2_SMOKE_PASS="+json.dumps(record,default=str))
                 return
             except Exception as exc:
