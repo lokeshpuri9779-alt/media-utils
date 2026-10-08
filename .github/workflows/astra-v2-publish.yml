@@ -4,8 +4,7 @@ name: ASTRA V2 - Verified YouTube Publisher
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/7 * * * *'
-    - cron: '3,17,31,45,59 * * * *'
+    - cron: '*/5 * * * *'
 
 concurrency:
   group: astra-v2-publishing
@@ -28,7 +27,7 @@ jobs:
       ASTRA_OPENAI_ALLOW_PAID_API: '0'
       GH_TOKEN: ${{ github.token }}
       ASTRA_MAX_DAILY_UPLOADS: '100'
-      ASTRA_MIN_UPLOAD_INTERVAL_MINUTES: '14'
+      ASTRA_MIN_UPLOAD_INTERVAL_MINUTES: '5'
       ORT_DISABLE_TELEMETRY: '1'
       YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_COMMUNITY_CLIENT_ID }}
       YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_COMMUNITY_CLIENT_SECRET }}
