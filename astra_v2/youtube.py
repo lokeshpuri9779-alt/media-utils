@@ -15,10 +15,16 @@ class YoutubeError(RuntimeError):
 def reason_for(response):
     try:
         body = response.json().get("error") or {}
+        # OAuth failures return {"error":"invalid_grant"} rather than the
+        # structured YouTube Data API {"error":{"errors":[...]}} response.
+        if isinstance(body, str):
+            return body[:80]
+        if not isinstance(body, dict):
+            return "api_error"
         nested = body.get("errors") or []
-        if nested:
-            return str(nested[0].get("reason") or "api_error")
-        return str(body.get("status") or "api_error")
+        if nested and isinstance(nested[0], dict):
+            return str(nested[0].get("reason") or "api_error")[:80]
+        return str(body.get("status") or "api_error")[:80]
     except (ValueError, TypeError, AttributeError):
         return "http_error"
 
@@ -47,25 +53,60 @@ class Youtube:
         return self.check(response, resource).json()
 
     def authorize(self):
-        names = ("YOUTUBE_CLIENT_ID", "YOUTUBE_CLIENT_SECRET", "YOUTUBE_REFRESH_TOKEN")
-        missing = [name for name in names if not os.environ.get(name)]
-        if missing:
-            raise RuntimeError("Required GitHub Actions OAuth secrets missing: " + ", ".join(missing))
-        response = self.client.post("https://oauth2.googleapis.com/token", data={
-            "client_id": os.environ["YOUTUBE_CLIENT_ID"],
-            "client_secret": os.environ["YOUTUBE_CLIENT_SECRET"],
-            "refresh_token": os.environ["YOUTUBE_REFRESH_TOKEN"],
-            "grant_type": "refresh_token",
-        })
-        self.check(response, "oauth_refresh")
-        self.token = response.json().get("access_token")
-        if not self.token:
-            raise RuntimeError("OAuth response missing access token.")
-        data = self.get("channels", {"part": "id,contentDetails", "mine": "true"})
-        records = data.get("items") or []
-        if len(records) != 1 or records[0].get("id") != self.expected_id:
-            raise RuntimeError("OAuth authorizes a different channel: refused to upload.")
-        return records[0]
+        """Select only an upload-capable OAuth identity matching this channel.
+
+        The original primary refresh token may be revoked (invalid_grant);
+        re-use the independently authorized community/backup OAuth credentials
+        already stored as GitHub Actions secrets. Never log secret values.
+        """
+        candidates = [
+            ("primary", "YOUTUBE_CLIENT_ID", "YOUTUBE_CLIENT_SECRET", "YOUTUBE_REFRESH_TOKEN"),
+            ("community", "YOUTUBE_COMMUNITY_CLIENT_ID", "YOUTUBE_COMMUNITY_CLIENT_SECRET",
+             "YOUTUBE_COMMUNITY_REFRESH_TOKEN"),
+        ]
+        if os.environ.get("ASTRA_OAUTH_PRIORITY") == "community":
+            candidates.reverse()
+        reasons = []
+        for alias, client, secret, refresh in candidates:
+            if not all(os.environ.get(k) for k in (client, secret, refresh)):
+                reasons.append(alias + ":not_configured")
+                continue
+            try:
+                response = self.client.post("https://oauth2.googleapis.com/token", data={
+                    "client_id": os.environ[client],
+                    "client_secret": os.environ[secret],
+                    "refresh_token": os.environ[refresh],
+                    "grant_type": "refresh_token",
+                })
+            except httpx.RequestError:
+                reasons.append(alias + ":oauth_network_error")
+                continue
+            if response.status_code >= 400:
+                reasons.append(alias + ":" + reason_for(response))
+                continue
+            token = response.json().get("access_token")
+            if not token:
+                reasons.append(alias + ":missing_access_token")
+                continue
+            self.token = token
+            try:
+                data = self.get("channels", {"part": "id,contentDetails", "mine": "true"})
+            except YoutubeError as exc:
+                reasons.append(alias + ":channels_" + exc.reason)
+                self.token = None
+                continue
+            records = data.get("items") or []
+            if len(records) != 1 or records[0].get("id") != self.expected_id:
+                reasons.append(alias + ":channel_mismatch")
+                self.token = None
+                continue
+            # Channel lock happens before any write API call.
+            self.credential_alias = alias
+            print("ASTRA_YOUTUBE_AUTH=authorized_channel_via_" + alias)
+            return records[0]
+        self.token = None
+        raise RuntimeError("No authorized upload identity for RAYVAN (" +
+                           ", ".join(reasons) + ")")
 
     def recent(self, channel):
         playlist = (channel.get("contentDetails", {}).get("relatedPlaylists") or {}).get("uploads")
