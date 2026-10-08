@@ -7,6 +7,7 @@ class LocalOmniRouteTests(unittest.TestCase):
         stories = catalog(max_candidates=30)
         self.assertGreaterEqual(len(stories), 20)
         self.assertEqual(len({x["content_id"] for x in stories}), len(stories))
+        self.assertEqual(len({x["title"].casefold().strip() for x in stories}), len(stories))
         for s in stories:
             self.assertEqual(len(s["story_beats"]), 4)
             self.assertTrue(all(x["duration"] == 1.0 for x in s["story_beats"]))
