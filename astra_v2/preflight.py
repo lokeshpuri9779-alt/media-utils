@@ -106,7 +106,7 @@ def main():
                 needs_review=review,
             )
         limit = min(100, max(1, int(os.getenv("ASTRA_MAX_DAILY_UPLOADS", "100"))))
-        interval = max(14, int(os.getenv("ASTRA_MIN_UPLOAD_INTERVAL_MINUTES", "14")))
+        interval = max(5, int(os.getenv("ASTRA_MIN_UPLOAD_INTERVAL_MINUTES", "5")))
         allowed, reason = due(state, utcnow(), limit=limit, spacing_minutes=interval)
         report["render_due"] = allowed
         report["reason"] = reason
