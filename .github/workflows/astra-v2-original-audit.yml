@@ -1,0 +1,25 @@
+name: ASTRA V2 - Original Story Quality Audit
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      ORT_DISABLE_TELEMETRY: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install free render dependencies
+        run: |
+          python -m pip install -r requirements.txt
+          command -v ffprobe || (sudo apt-get update -qq && sudo apt-get install -y ffmpeg)
+      - name: Validate the real original story with audio and QA
+        run: python -m astra_v2.smoke
