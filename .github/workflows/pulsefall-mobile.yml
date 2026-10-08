@@ -1902,6 +1902,76 @@ jobs:
           		Input.vibrate_handheld(26)
           GDSCRIPT
 
+      - name: Improve first-session onboarding and objective wayfinding
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p=Path("game/level/level.gd")
+          s=p.read_text()
+
+          s=s.replace(
+              'var pulse_status_label: Label\n',
+              'var pulse_status_label: Label\nvar objective_distance_label: Label\nvar objective_world_position := Vector3.ZERO\nvar objective_has_position := false\nvar tutorial_active := false\n'
+          )
+
+          s=s.replace(
+              '\tpulse_cooldown = maxf(pulse_cooldown - delta, 0.0)\n',
+              '\tpulse_cooldown = maxf(pulse_cooldown - delta, 0.0)\n\tif objective_distance_label != null:\n\t\tif objective_has_position and active_player != null:\n\t\t\tvar meters := int(round(active_player.global_position.distance_to(objective_world_position)))\n\t\t\tobjective_distance_label.text = "%dm" % meters\n\t\telse:\n\t\t\tobjective_distance_label.text = ""\n'
+          )
+
+          ready_old='\tawait get_tree().create_timer(0.5).timeout\n\t_show_banner("PULSEFALL", "BLACKSITE OMEGA-9 // CONTAINMENT FAILURE", 3.2)\n\tawait get_tree().create_timer(3.0).timeout\n\tmission_active = true\n'
+          ready_new='\tawait get_tree().create_timer(0.5).timeout\n\tif MetaProgression.runs == 0:\n\t\ttutorial_active = true\n\t\tMobileMetrics.record("tutorial_start", {})\n\t\t_show_banner("AEGIS ONLINE", "LEFT: MOVE   •   RIGHT: LOOK   •   FIRE   •   PULSE   •   DASH", 2.2)\n\t\tawait get_tree().create_timer(2.3).timeout\n\t_show_banner("PULSEFALL", "BLACKSITE OMEGA-9 // CONTAINMENT FAILURE", 2.0)\n\tawait get_tree().create_timer(1.8).timeout\n\tmission_active = true\n'
+          if ready_old not in s:
+              raise SystemExit("ready intro block not found")
+          s=s.replace(ready_old,ready_new)
+
+          s=s.replace(
+              '\tobjective_label.position = Vector2(400, 42)\n\ttop.add_child(objective_label)\n',
+              '\tobjective_label.position = Vector2(400, 42)\n\ttop.add_child(objective_label)\n\n\tobjective_distance_label = _make_label("", 14, Color(0.42, 1.0, 0.72))\n\tobjective_distance_label.anchor_left = 0.5\n\tobjective_distance_label.anchor_right = 0.5\n\tobjective_distance_label.offset_left = 230\n\tobjective_distance_label.offset_right = 310\n\tobjective_distance_label.offset_top = 42\n\ttop.add_child(objective_distance_label)\n'
+          )
+
+          s=s.replace(
+              '\t\tvar cache: PulseCache = PulseCacheScript.new()\n\t\tcache.global_position = marker.global_position + Vector3(0.0, 0.8, 0.0)',
+              '\t\tvar cache: PulseCache = PulseCacheScript.new()\n\t\tcache.global_position = marker.global_position + Vector3(0.0, 0.8, 0.0)\n\t\tif i == 0:\n\t\t\tobjective_world_position = cache.global_position\n\t\t\tobjective_has_position = true'
+          )
+
+          s=s.replace(
+              '\tcache_collected += 1\n\tscore += 250 * maxi(wave, 1)',
+              '\tcache_collected += 1\n\tscore += 250 * maxi(wave, 1)\n\tobjective_has_position = false'
+          )
+
+          s=s.replace(
+              '\trelay.global_position = spawn_marker.global_position + Vector3(0.0, 0.12, 0.0)',
+              '\trelay.global_position = spawn_marker.global_position + Vector3(0.0, 0.12, 0.0)\n\tobjective_world_position = relay.global_position\n\tobjective_has_position = true'
+          )
+
+          s=s.replace(
+              '\tscore += 500 * maxi(wave, 1)\n\tMobileMetrics.record("objective_complete"',
+              '\tscore += 500 * maxi(wave, 1)\n\tobjective_has_position = false\n\tMobileMetrics.record("objective_complete"'
+          )
+
+          s=s.replace(
+              '\tbeacon.global_position = spawn_marker.global_position + Vector3(0.0, 0.12, 0.0)',
+              '\tbeacon.global_position = spawn_marker.global_position + Vector3(0.0, 0.12, 0.0)\n\tobjective_world_position = beacon.global_position\n\tobjective_has_position = true'
+          )
+
+          s=s.replace(
+              '\tMobileMetrics.record("extraction_reached", {"score": score, "time_seconds": mission_time})',
+              '\tobjective_has_position = false\n\tMobileMetrics.record("extraction_reached", {"score": score, "time_seconds": mission_time})'
+          )
+
+          s=s.replace(
+              '\tactive_player.apply_run_upgrade(upgrade_id)\n\tMobileMetrics.record("upgrade_selected"',
+              '\tactive_player.apply_run_upgrade(upgrade_id)\n\tobjective_has_position = false\n\tif tutorial_active:\n\t\ttutorial_active = false\n\t\tMobileMetrics.record("tutorial_complete", {"time_seconds": mission_time})\n\tMobileMetrics.record("upgrade_selected"'
+          )
+
+          p.write_text(s)
+          PY
+
       - name: Add license and build notes
         shell: bash
         run: |
