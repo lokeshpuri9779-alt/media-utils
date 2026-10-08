@@ -40,6 +40,23 @@ jobs:
           for f in performance.json astra_v2_state.json SHORTS.md; do
             git checkout origin/astra-state -- "$f" 2>/dev/null || true
           done
+          # The legacy state branch previously contained a zero-byte performance
+          # file. Restore the last valid main-branch snapshot instead of erasing
+          # the learning history on every scheduler invocation.
+          if ! python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('performance.json')
+          try:
+              d=json.loads(p.read_text(encoding='utf-8'))
+              assert isinstance(d,dict) and isinstance(d.get('videos'),dict) and d['videos']
+          except Exception:
+              raise SystemExit(1)
+          PY
+          then
+            echo 'State branch had missing/invalid learning history; recovering main snapshot.'
+            git show HEAD:performance.json > performance.json
+          fi
 
       - uses: actions/setup-python@v5
         with:
