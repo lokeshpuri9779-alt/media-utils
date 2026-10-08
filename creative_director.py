@@ -130,8 +130,8 @@ def evaluate(report: dict) -> dict:
     weak = [k for k, v in scores.items() if v < 75]
 
     hard_failures = list(report.get("hard_failures") or [])
-    if (report.get("technical") or {}).get("pass") is False:
-        hard_failures.append("technical_validation_failed")
+    if (report.get("technical") or {}).get("pass") is not True:
+        hard_failures.append("technical_validation_missing_or_failed")
     floor_failures = [f"{k}_below_publish_floor" for k, floor in floors.items() if scores[k] < floor]
     repairs = targeted_repairs(scores)
 
