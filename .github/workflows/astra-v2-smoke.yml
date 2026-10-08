@@ -1,0 +1,32 @@
+name: ASTRA V2 - Real Render Smoke
+
+on:
+  push:
+    branches:
+      - astra-v2-clean-rebuild-20261008
+    paths:
+      - 'astra_v2/smoke.py'
+      - '.github/workflows/astra-v2-smoke.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      ORT_DISABLE_TELEMETRY: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install production renderer
+        run: |
+          pip install -r requirements.txt
+          command -v ffprobe
+      - name: Render and verify a complete original video
+        run: python -m astra_v2.smoke
