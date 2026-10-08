@@ -46,13 +46,24 @@ jobs:
               req=urllib.request.Request('https://oauth2.googleapis.com/token',data=data,method='POST')
               with urllib.request.urlopen(req,timeout=25) as response: payload=json.load(response)
               access=payload['access_token']
+              try:
+                token_info_url='https://oauth2.googleapis.com/tokeninfo?'+urllib.parse.urlencode({'access_token':access})
+                with urllib.request.urlopen(token_info_url,timeout=15) as ti: token_info=json.load(ti)
+                scopes=set(str(token_info.get('scope') or '').split())
+                upload_allowed=bool(scopes.intersection({
+                  'https://www.googleapis.com/auth/youtube.upload',
+                  'https://www.googleapis.com/auth/youtube',
+                  'https://www.googleapis.com/auth/youtube.force-ssl',
+                  'https://www.googleapis.com/auth/youtubepartner'}))
+              except Exception:
+                upload_allowed=None
               req=urllib.request.Request(
                 'https://www.googleapis.com/youtube/v3/channels?part=id&mine=true',
                 headers={'Authorization':'Bearer '+access})
               with urllib.request.urlopen(req,timeout=25) as response: channels=json.load(response)
               ids=[r.get('id') for r in channels.get('items') or []]
               state='authorized_rayvan' if ids==[expected] else 'other_channel_or_none'
-              print('ASTRA_OAUTH_DIAGNOSTIC='+json.dumps({'alias':label,'status':state}))
+              print('ASTRA_OAUTH_DIAGNOSTIC='+json.dumps({'alias':label,'status':state,'upload_scope':upload_allowed}))
             except urllib.error.HTTPError as exc:
               try:
                 detail=json.loads(exc.read().decode('utf-8',errors='ignore'))
