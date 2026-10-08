@@ -1776,6 +1776,132 @@ jobs:
           	_finish_mission()
           GDSCRIPT
 
+      - name: Add distinct weapon modes and mobile dash
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p=Path("game/player/player.gd")
+          s=p.read_text()
+
+          s=s.replace(
+              'var damage_reduction: float = 0.0\n',
+              'var damage_reduction: float = 0.0\nvar weapon_mode: int = 0\nvar weapon_fire_rate_multiplier: float = 1.0\nvar dash_time: float = 0.0\nvar dash_cooldown: float = 0.0\nvar dash_direction := Vector3.ZERO\n'
+          )
+
+          old = '\t\tif player_input.shooting and fire_cooldown.time_left == 0:\n\t\t\tvar shoot_origin: Vector3 = shoot_from.global_transform.origin\n\t\t\tvar shoot_dir: Vector3 = (player_input.shoot_target - shoot_origin).normalized()\n\n\t\t\tvar bullet: CharacterBody3D = preload("res://player/bullet/bullet.tscn").instantiate()\n\t\t\tget_parent().add_child(bullet, true)\n\t\t\tbullet.global_transform.origin = shoot_origin\n\t\t\t# If we don\'t rotate the bullets there is no useful way to control the particles ..\n\t\t\tbullet.look_at(shoot_origin + shoot_dir)\n\t\t\tbullet.add_collision_exception_with(self)\n\t\t\tshoot.rpc()\n'
+          new = '\t\tif player_input.shooting and fire_cooldown.time_left == 0:\n\t\t\tvar shoot_origin: Vector3 = shoot_from.global_transform.origin\n\t\t\tvar shoot_dir: Vector3 = (player_input.shoot_target - shoot_origin).normalized()\n\t\t\t_fire_weapon(shoot_origin, shoot_dir)\n\t\t\tshoot.rpc()\n'
+          if old not in s:
+              raise SystemExit("shooting block not found")
+          s=s.replace(old,new)
+
+          s=s.replace(
+              'func apply_input(delta: float) -> void:\n\tif incapacitated:',
+              'func apply_input(delta: float) -> void:\n\tdash_cooldown = maxf(dash_cooldown - delta, 0.0)\n\tif dash_time > 0.0:\n\t\tdash_time = maxf(dash_time - delta, 0.0)\n\tif incapacitated:'
+          )
+
+          s=s.replace(
+              '\tvelocity.x = h_velocity.x * move_speed_multiplier\n\tvelocity.z = h_velocity.z * move_speed_multiplier\n',
+              '\tvelocity.x = h_velocity.x * move_speed_multiplier\n\tvelocity.z = h_velocity.z * move_speed_multiplier\n\tif dash_time > 0.0:\n\t\tvelocity.x = dash_direction.x * 15.5\n\t\tvelocity.z = dash_direction.z * 15.5\n'
+          )
+
+          s=s.replace(
+              '\t\t"rapid":\n\t\t\tfire_cooldown.wait_time = maxf(0.13, fire_cooldown.wait_time * 0.84)',
+              '\t\t"rapid":\n\t\t\tweapon_fire_rate_multiplier = maxf(0.62, weapon_fire_rate_multiplier * 0.84)\n\t\t\t_refresh_weapon_cooldown()'
+          )
+
+          p.write_text(s)
+
+          p=Path("game/mobile/mobile_controls.gd")
+          s=p.read_text()
+          s=s.replace(
+              'var pulse_button: Button\n',
+              'var pulse_button: Button\nvar weapon_button: Button\nvar dash_button: Button\n'
+          )
+          s=s.replace(
+              '\tpulse_button.pressed.connect(_pulse)\n\troot.add_child(pulse_button)\n',
+              '\tpulse_button.pressed.connect(_pulse)\n\troot.add_child(pulse_button)\n\n\tweapon_button = _make_button("CARBINE", Vector2(-455, -92), Vector2(128, 62), Color(0.35, 0.58, 0.95, 0.50))\n\tweapon_button.pressed.connect(_cycle_weapon)\n\troot.add_child(weapon_button)\n\n\tdash_button = _make_button("DASH", Vector2(-440, -178), Vector2(110, 72), Color(0.62, 0.38, 1.0, 0.50))\n\tdash_button.pressed.connect(_dash)\n\troot.add_child(dash_button)\n'
+          )
+          s=s.replace(
+              'func _pulse() -> void:\n\tif level != null and level.has_method("trigger_pulse"):\n\t\tlevel.trigger_pulse()\n',
+              'func _pulse() -> void:\n\tif level != null and level.has_method("trigger_pulse"):\n\t\tlevel.trigger_pulse()\n\n\nfunc _cycle_weapon() -> void:\n\tif level == null or level.active_player == null:\n\t\treturn\n\tweapon_button.text = level.active_player.cycle_weapon()\n\tInput.vibrate_handheld(22)\n\n\nfunc _dash() -> void:\n\tif level != null and level.active_player != null:\n\t\tlevel.active_player.trigger_dash()\n'
+          )
+          p.write_text(s)
+          PY
+
+          cat >> game/player/player.gd <<'GDSCRIPT'
+
+
+          func _spawn_projectile(shoot_origin: Vector3, shoot_dir: Vector3) -> void:
+          	var bullet: CharacterBody3D = preload("res://player/bullet/bullet.tscn").instantiate()
+          	get_parent().add_child(bullet, true)
+          	bullet.global_transform.origin = shoot_origin
+          	bullet.look_at(shoot_origin + shoot_dir.normalized())
+          	bullet.add_collision_exception_with(self)
+
+
+          func _fire_weapon(shoot_origin: Vector3, shoot_dir: Vector3) -> void:
+          	match weapon_mode:
+          		0:
+          			_spawn_projectile(shoot_origin, shoot_dir)
+          		1:
+          			for i in range(6):
+          				var spread := Vector3(
+          					randf_range(-0.075, 0.075),
+          					randf_range(-0.055, 0.055),
+          					randf_range(-0.035, 0.035)
+          				)
+          				_spawn_projectile(shoot_origin, (shoot_dir + spread).normalized())
+          		2:
+          			_spawn_projectile(shoot_origin, shoot_dir)
+          			_spawn_projectile(shoot_origin, (shoot_dir + Vector3(0.012, 0.0, 0.0)).normalized())
+          			_spawn_projectile(shoot_origin, (shoot_dir + Vector3(-0.012, 0.0, 0.0)).normalized())
+
+
+          func get_weapon_name() -> String:
+          	match weapon_mode:
+          		1: return "SCATTER"
+          		2: return "LANCE"
+          		_: return "CARBINE"
+
+
+          func _refresh_weapon_cooldown() -> void:
+          	var base := 0.24
+          	match weapon_mode:
+          		1: base = 0.72
+          		2: base = 0.48
+          	fire_cooldown.wait_time = maxf(0.11, base * weapon_fire_rate_multiplier)
+
+
+          func cycle_weapon() -> String:
+          	weapon_mode = (weapon_mode + 1) % 3
+          	_refresh_weapon_cooldown()
+          	return get_weapon_name()
+
+
+          func trigger_dash() -> void:
+          	if dash_cooldown > 0.0 or incapacitated:
+          		return
+          	var camera_basis: Basis = player_input.get_camera_rotation_basis()
+          	var camera_z := camera_basis.z
+          	var camera_x := camera_basis.x
+          	camera_z.y = 0.0
+          	camera_x.y = 0.0
+          	camera_z = camera_z.normalized()
+          	camera_x = camera_x.normalized()
+          	var target := camera_x * player_input.motion.x + camera_z * player_input.motion.y
+          	if target.length() < 0.15:
+          		target = -camera_z
+          	dash_direction = target.normalized()
+          	dash_time = 0.20
+          	dash_cooldown = 1.15
+          	if OS.has_feature("mobile"):
+          		Input.vibrate_handheld(26)
+          GDSCRIPT
+
       - name: Add license and build notes
         shell: bash
         run: |
