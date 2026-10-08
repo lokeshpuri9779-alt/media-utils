@@ -99,6 +99,9 @@ def run():
                         except Exception as queue_error:
                             print("ASTRA_PRELOAD_FALLBACK=" + type(queue_error).__name__)
                     if candidate is None:
+                        if os.getenv("ASTRA_PRELOAD_ONLY", "0") == "1":
+                            report.update(outcome="skipped", reason="preload_queue_empty")
+                            return report
                         candidate = (make_long_candidate(video, previous_ids | live_ids, live_titles)
                                      or make_candidate(video, previous_ids | live_ids, live_titles))
                     else:
