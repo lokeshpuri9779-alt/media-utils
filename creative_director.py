@@ -21,6 +21,21 @@ WEIGHTS = {
     "technical": 0.05,
 }
 
+# Genre-specific editorial weights. Technical failures remain hard blockers.
+GENRE_WEIGHTS = {
+    "fiction": {"hook": .20, "retention": .05, "visual": .20, "pacing": .15, "audio": .15,
+                "captions": .05, "novelty": .05, "coherence": .15, "technical": .00},
+    "comedy": {"hook": .20, "retention": .15, "visual": .15, "pacing": .20, "audio": .15,
+               "captions": .05, "novelty": .05, "coherence": .05, "technical": .00},
+    "education": {"hook": .15, "retention": .10, "visual": .15, "pacing": .10, "audio": .15,
+                  "captions": .15, "novelty": .05, "coherence": .15, "technical": .00},
+}
+GENRE_FLOORS = {
+    "fiction": {"hook": 75, "visual": 75, "audio": 75, "coherence": 75, "technical": 85},
+    "comedy": {"hook": 75, "visual": 75, "audio": 75, "pacing": 70, "technical": 85},
+    "education": {"hook": 75, "visual": 75, "audio": 75, "captions": 75, "coherence": 75, "technical": 85},
+}
+
 REPAIR_THRESHOLD = 72.0
 PUBLISH_THRESHOLD = 82.0
 EXCEPTIONAL_THRESHOLD = 90.0
@@ -103,11 +118,14 @@ def targeted_repairs(scores: dict[str, float]) -> list[str]:
 
 def evaluate(report: dict) -> dict:
     scores = _component_scores(report)
-    total = round(sum(scores[k] * WEIGHTS[k] for k in WEIGHTS), 2)
+    genre = str(report.get("genre") or "default").lower()
+    weights = GENRE_WEIGHTS.get(genre, WEIGHTS)
+    floors = GENRE_FLOORS.get(genre, PUBLISH_FLOORS)
+    total = round(sum(scores[k] * weights[k] for k in weights), 2)
     weak = [k for k, v in scores.items() if v < 75]
 
     hard_failures = list(report.get("hard_failures") or [])
-    floor_failures = [f"{k}_below_publish_floor" for k, floor in PUBLISH_FLOORS.items() if scores[k] < floor]
+    floor_failures = [f"{k}_below_publish_floor" for k, floor in floors.items() if scores[k] < floor]
     repairs = targeted_repairs(scores)
 
     if hard_failures:
@@ -132,10 +150,11 @@ def evaluate(report: dict) -> dict:
         component_scores=scores,
     )
     payload = asdict(decision)
-    payload["weights"] = dict(WEIGHTS)
+    payload["weights"] = dict(weights)
+    payload["genre_profile"] = genre if genre in GENRE_WEIGHTS else "default"
     payload["hard_failures"] = hard_failures
     payload["floor_failures"] = floor_failures
-    payload["publish_floors"] = dict(PUBLISH_FLOORS)
+    payload["publish_floors"] = dict(floors)
     payload["publish_allowed"] = action == "publish"
     return payload
 
