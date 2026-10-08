@@ -37,7 +37,7 @@ jobs:
         run: |
           set -euo pipefail
           git fetch origin astra-state
-          for f in performance.json astra_v2_state.json; do
+          for f in performance.json astra_v2_state.json SHORTS.md; do
             git checkout origin/astra-state -- "$f" 2>/dev/null || true
           done
 
@@ -74,14 +74,14 @@ jobs:
           git fetch origin astra-state
           WORKTREE="$(mktemp -d)"
           git worktree add --detach "$WORKTREE" origin/astra-state
-          for f in performance.json astra_v2_state.json; do
+          for f in performance.json astra_v2_state.json SHORTS.md; do
             if [ -f "$f" ]; then cp "$f" "$WORKTREE/$f"; fi
           done
           (
             cd "$WORKTREE"
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            git add -A -- performance.json astra_v2_state.json
+            git add -A -- performance.json astra_v2_state.json SHORTS.md
             if ! git diff --cached --quiet; then
               git commit -m 'Update verified ASTRA V2 runtime journal [skip ci]'
               git push origin HEAD:refs/heads/astra-state
