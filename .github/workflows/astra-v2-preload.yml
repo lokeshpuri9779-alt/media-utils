@@ -24,6 +24,8 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       ASTRA_PRELOAD_BUFFER: '6'
       ASTRA_LONG_ENABLED: '0'
+      ASTRA_OPENAI_ENABLED: '0'
+      ASTRA_OPENAI_ALLOW_PAID_API: '0'
       ORT_DISABLE_TELEMETRY: '1'
     steps:
       - uses: actions/checkout@v4
@@ -54,6 +56,10 @@ jobs:
           command -v ffprobe >/dev/null || (timeout 180s sudo apt-get update -qq && timeout 180s sudo apt-get install -y ffmpeg)
       - name: Enforce animation and caption collision guard
         run: python -m unittest discover -s tests -p 'test_scene_layer_contract.py' -v
+      - name: Test zero-cost policy and free story generation
+        run: |
+          python -m unittest discover -s tests -p 'test_openai_creative.py' -v
+          python -m unittest discover -s tests -p 'test_free_story_engine.py' -v
       - name: Render and approve next original Short
         id: render
         run: python -m astra_v2.preload_worker
