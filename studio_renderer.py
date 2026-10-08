@@ -529,7 +529,7 @@ def planet_texture(earth=False, hot=False):
 
 def starfield(d,t,accent):
     rng=np.random.default_rng(17)
-    for x,y,r,phase in zip(rng.integers(45,1035,65),rng.integers(180,1550,65),rng.integers(1,4,65),rng.random(65)):
+    for x,y,r,phase in zip(rng.integers(45,1035,65),rng.integers(475,1330,65),rng.integers(1,4,65),rng.random(65)):
         v=int(70+90*(.5+.5*math.sin(t*.7+phase*6)))
         yy=int(y+math.sin(t*.23+phase)*9)
         d.ellipse((int(x-r),yy-int(r),int(x+r),yy+int(r)),fill=(v,v,min(255,v+25)))
@@ -1012,7 +1012,18 @@ def render_frame(plan,t,genre,total):
         dx=max(0,(nw-W)//2 + (int(math.sin(t*.55)*10*energy) if cam=='track' else 0))
         dy=max(0,(nh-H)//2)
         im=moved.crop((dx,dy,dx+W,dy+H))
-    draw_visual(im,s,t,u,accent)
+    # Exclusively select one primary visual source. Earlier Studio releases
+    # drew a handcrafted robot/ship/planet, a director card, collage shapes,
+    # an attention widget AND another motion graphic over the same position.
+    # That passed numerical creative QA but produced visibly overlapping art.
+    from astra_v2.layer_contract import scene_layers
+    layers=scene_layers(s)
+    if layers['foreground']=='missing_media' and 'resolved_asset' in s:
+        # A raw storyboard may be inspected before assets are bound. Actual
+        # production scenes must never render blank after failed acquisition.
+        raise CreativeReject('Scene media missing from cache: refusing overlapping/filler fallback.')
+    if layers['draw_visual']:
+        draw_visual(im,s,t,u,accent)
     if str(s.get('creative_format') or '')=='documentary_montage' and .36 < (u/max(.2,s['duration'])) < .62:
         p=(u/max(.2,s['duration'])-.36)/.26
         pulse=1.0+0.018*math.sin(min(1,p)*math.pi)
@@ -1020,16 +1031,14 @@ def render_frame(plan,t,genre,total):
         moved=im.resize((nw,nh),Image.Resampling.BICUBIC)
         dx=max(0,(nw-W)//2); dy=max(0,(nh-H)//2)
         im=moved.crop((dx,dy,dx+W,dy+H))
-    if s.get('visual') not in {'media','tidal_lock','iss_orbit'}:
-        visual_style_layer(im,s,t,u,accent)
-        composition_layer(im,s,t,u,accent)
-        attention_layer(im,s,t,u,accent)
+    # Transition accents occur under the hero, never on top of the narration
+    # captions or newly selected subject illustration.
     transition_layer(im,s,t,u,accent)
     _micro_scene_transition(im,micro,accent)
-    im=composite_cached_asset(im,s.get('resolved_asset',{}),t=t,u=u,shot=s)
-    if s.get('visual') not in {'media','tidal_lock','iss_orbit'}:
+    if layers['draw_cached_media']:
+        im=composite_cached_asset(im,s.get('resolved_asset',{}),t=t,u=u,shot=s)
+    elif layers['draw_director_asset']:
         asset_layer(im,s,t,u,accent)
-        director_motion_layer(im,s,t,u,accent)
     d=ImageDraw.Draw(im)
     comparison_labels=s.get('comparison_labels') or []
     if len(comparison_labels)==2:
@@ -1562,6 +1571,10 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
     creative_report['repair_attempts']=repair_attempts
     creative_report['asset_manifest']=resolved_assets
     creative_report['asset_resolution']=asset_report
+    from astra_v2.layer_contract import verify_scene_layout
+    layer_report=verify_scene_layout(plan)
+    if not layer_report['pass']:
+        raise CreativeReject('Scene collision QA failed: '+json.dumps(layer_report['failures']))
     duration=voice_plan(plan,genre,max_duration=float(ch.get('target_duration_max',36)),
                         voice_name=str(ch.get('voice_profile') or 'af_heart'),
                         voice_speed=float(ch.get('voice_speed') or 1.09))
@@ -1590,7 +1603,7 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
     micro_count=(math.ceil(actual_duration / NEWS_MICRO_SCENE_SECONDS) if genre=='current' else len(plan))
     visual_rate=(micro_count / actual_duration) if actual_duration > 0 else 0.0
     report={'renderer':VERSION,'genre':genre,'frames':count,'duration':round(actual_duration,3),
-            'resolution':[W,H],'fps':FPS,'audio':audio_info,'creative_quality':creative_report,
+            'resolution':[W,H],'fps':FPS,'audio':audio_info,'creative_quality':creative_report,'layer_qa':layer_report,
             'visual_edit':{
                 'narration_beat_count':len(plan),
                 'visual_scene_count':micro_count,
