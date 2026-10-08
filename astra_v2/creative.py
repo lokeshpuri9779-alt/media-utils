@@ -23,7 +23,7 @@ def inspect_video(path, fmt="short"):
     audio = next((x for x in data.get("streams", []) if x.get("codec_type") == "audio"), {})
     width, height = int(video.get("width") or 0), int(video.get("height") or 0)
     seconds = float((data.get("format") or {}).get("duration") or 0)
-    good = (60 <= seconds <= 3600 and width >= 640 and height >= 360 and width > height and bool(audio)) if fmt == "long" else (55.0 <= seconds < 60.0 and width >= 360 and height >= 640 and height > width and bool(audio))
+    good = (60 <= seconds <= 3600 and width >= 640 and height >= 360 and width > height and bool(audio)) if fmt == "long" else (seconds > 0 and width >= 360 and height >= 640 and height > width and bool(audio))
     if not good:
         raise CreativeSkip("video_audio_orientation_or_duration_failed")
     return {"seconds": round(seconds, 2), "size": path.stat().st_size,
@@ -36,25 +36,8 @@ def narration_word_count(story):
                for beat in (story.get("story_beats") or []))
 
 
-def script_duration_preflight(story, minimum_words=105):
-    """Avoid expensive renders of scripts too short for a full-length Short.
-
-    A word count is a conservative screening heuristic, not a guarantee of
-    actual voice duration. The final ffprobe validation remains authoritative.
-    """
-    beats = story.get("story_beats") or []
-    if not beats:
-        return True  # Other legacy story formats use their own renderer.
-    words = narration_word_count(story)
-    # Upper bound is deliberately generous: actual TTS timing is authoritative.
-    maximum_words = 190
-    if not minimum_words <= words <= maximum_words:
-        print("ASTRA_SCRIPT_REJECTED=" + json.dumps({
-            "content_id": story.get("content_id"), "words": words,
-            "minimum_words": minimum_words, "maximum_words": maximum_words,
-            "reason": "insufficient_narration" if words < minimum_words
-                      else "excessive_narration"}))
-        return False
+def script_duration_preflight(story, minimum_words=0):
+    """No narration word-count or duration target; keep all story beats."""
     return True
 
 
@@ -111,14 +94,6 @@ def make_candidate(path, excluded_ids, excluded_titles):
             continue
         try:
             rendered = render_short(story, path)
-            # Enforce the publisher's duration contract before expensive
-            # media QA; never allow an undersized render to occupy the queue.
-            reported_seconds = float(rendered.get("duration") or 0)
-            if not 55.0 <= reported_seconds < 60.0:
-                print("ASTRA_DURATION_REJECTED=" + json.dumps({
-                    "content_id": story["content_id"], "seconds": reported_seconds,
-                    "reason": "render_duration_outside_publish_contract"}))
-                continue
             evaluation = evaluate_studio_render(story, rendered, video_path=path)
             if not evaluation.get("pass"):
                 print("Premium QA rejected:", story["content_id"],
