@@ -584,7 +584,13 @@ def trend_candidates(trends):
         if len(topic) < 3 or blocked.search(topic):
             continue
         news=_distinct_news(t.get('news') or [])
-        if not news:
+        # A search trend can bundle unrelated headlines. Require two
+        # independently sourced, English, topic-aligned reports before
+        # spending time on research, rendering, or upload.
+        from creative_engine import topic_headline_alignment, english_script_ratio
+        news=[n for n in news if english_script_ratio(str(n.get('title') or '')) >= .92
+              and topic_headline_alignment(topic,str(n.get('title') or '')) >= .50]
+        if len(news)<2:
             continue
         sensitive=_sensitive_trend(topic,news)
         if sensitive and len(news) < 2:
