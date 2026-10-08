@@ -74,7 +74,13 @@ def make_candidate(path, excluded_ids, excluded_titles):
             evaluation = evaluate_studio_render(story, rendered, video_path=path)
             if not evaluation.get("pass"):
                 print("Premium QA rejected:", story["content_id"],
-                      (evaluation.get("director") or {}).get("action"))
+                      json.dumps({"action": (evaluation.get("director") or {}).get("action"),
+                                  "scores": (evaluation.get("director") or {}).get("component_scores"),
+                                  "reasons": (evaluation.get("director") or {}).get("reasons"),
+                                  "repairs": (evaluation.get("director") or {}).get("repairs"),
+                                  "media_failures": (evaluation.get("media_qa") or {}).get("hard_failures"),
+                                  "layer_failures": (evaluation.get("layer_qa") or {}).get("failures"),
+                                  "duration": rendered.get("duration")}, default=str))
                 continue
             legacy.CONTENT_META = {
                 "genre": story["genre"], "content_id": story["content_id"],
