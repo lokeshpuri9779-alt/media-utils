@@ -25,7 +25,7 @@ def story(key, title, question, answer, shots):
     return {
         "genre": "fiction",
         "kind": "microfiction",
-        "premium_story": True,
+        "premium_story": False,  # procedural fiction; no external-source-media requirement
         "production_ready": True,
         "content_id": "rayvan-original-" + key + "-v1",
         "title": title,
