@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 2,
+  "attempts": 3,
   "confirmed_today": 2,
-  "last_attempt_at": "2026-10-08T19:12:56.008360+00:00",
+  "last_attempt_at": "2026-10-08T19:52:04.107305+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -44,8 +44,17 @@
       "title": "Meet the Nobel Peace Prize Contenders Who Could Beat Trump This Year #Shorts"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "i3HzkzOTHx4": {
+      "content_id": "trend-3ec9f796c532d45a",
+      "title": "Boots sold in £7bn deal to Canadian billionaire family #Shorts",
+      "day": "2026-10-09",
+      "uploaded_at": "2026-10-08T19:52:05.595413+00:00",
+      "genre": "current",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -81,6 +90,11 @@
     "trend-8f22f6943e2488f5": {
       "at": "2026-10-08T19:12:56.008344+00:00",
       "title": "Meet the Nobel Peace Prize Contenders Who Could Beat Trump This Year #Shorts",
+      "result": "accepted"
+    },
+    "trend-3ec9f796c532d45a": {
+      "at": "2026-10-08T19:52:04.107288+00:00",
+      "title": "Boots sold in £7bn deal to Canadian billionaire family #Shorts",
       "result": "accepted"
     }
   },
