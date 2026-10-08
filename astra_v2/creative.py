@@ -71,11 +71,17 @@ def make_candidate(path, excluded_ids, excluded_titles):
     from quality_lab import evaluate_studio_render
     # Original fiction has a unique storyboard, consistent RAYVAN identity and
     # no copied video. It still MUST pass the real full-render Creative Director.
-    premium_stories = routed_catalog(excluded_ids, excluded_titles=excluded_titles) + free_catalog() + original_catalog() + catalog()
+    # A serialized preload must not substitute an unrelated standalone story.
+    # Each lane gets its designated episode; if it cannot pass QA, report that
+    # episode's failure rather than silently publishing a different storyline.
+    series_stories = routed_catalog(excluded_ids, excluded_titles=excluded_titles)
+    serialized_preload = os.getenv("ASTRA_SERIALIZED_PRELOAD", "0") == "1"
+    premium_stories = (series_stories if serialized_preload else
+                       series_stories + free_catalog() + original_catalog() + catalog())
     # Explicitly opted-in paid model may propose a new story; the generated
     # storyboard still goes through the same renderer and QA as curated work.
     from astra_v2.openai_creative import enabled as openai_enabled, generate as openai_generate
-    if openai_enabled():
+    if openai_enabled() and not serialized_preload:
         try:
             generated = openai_generate(excluded_ids, excluded_titles)
             if generated:
