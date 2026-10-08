@@ -1018,7 +1018,9 @@ def render_frame(plan,t,genre,total):
     # That passed numerical creative QA but produced visibly overlapping art.
     from astra_v2.layer_contract import scene_layers
     layers=scene_layers(s)
-    if layers['foreground']=='missing_media':
+    if layers['foreground']=='missing_media' and 'resolved_asset' in s:
+        # A raw storyboard may be inspected before assets are bound. Actual
+        # production scenes must never render blank after failed acquisition.
         raise CreativeReject('Scene media missing from cache: refusing overlapping/filler fallback.')
     if layers['draw_visual']:
         draw_visual(im,s,t,u,accent)
