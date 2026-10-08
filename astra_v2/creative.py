@@ -36,11 +36,12 @@ def make_candidate(path, excluded_ids, excluded_titles):
     from premium_stories import catalog
     from astra_v2.original_stories import catalog as original_catalog
     from astra_v2.free_story_engine import catalog as free_catalog
+    from astra_v2.omniroute_local import catalog as routed_catalog
     from studio_renderer import render_short
     from quality_lab import evaluate_studio_render
     # Original fiction has a unique storyboard, consistent RAYVAN identity and
     # no copied video. It still MUST pass the real full-render Creative Director.
-    premium_stories = free_catalog() + original_catalog() + catalog()
+    premium_stories = routed_catalog(excluded_ids) + free_catalog() + original_catalog() + catalog()
     # Explicitly opted-in paid model may propose a new story; the generated
     # storyboard still goes through the same renderer and QA as curated work.
     from astra_v2.openai_creative import enabled as openai_enabled, generate as openai_generate
