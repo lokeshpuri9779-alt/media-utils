@@ -40,6 +40,11 @@ jobs:
         run: timeout 420s python -m pip install -r requirements.txt
       - name: Install FFprobe for video/audio validation
         run: command -v ffprobe >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y ffmpeg)
+      - name: Existing Studio and Creative Director regression tests
+        run: |
+          python -m unittest discover -s tests -p 'test_studio.py' -v
+          python -m unittest discover -s tests -p 'test_creative_director.py' -v
+          python -m unittest discover -s tests -p 'test_creative_formats.py' -v
       - name: Render and inspect actual Short, no YouTube authorization
         run: python -m astra_v2.layout_smoke
       - name: Keep video and storyboard evidence
