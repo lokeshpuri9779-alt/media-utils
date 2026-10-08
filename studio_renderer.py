@@ -437,8 +437,14 @@ def voice_plan(plan, genre, max_duration=59, voice_name='af_heart', voice_speed=
                 voice_len=len(x['audio'])/RATE
                 x.update(start=cursor,voice_start=cursor+.10,duration=voice_len+.18,end=cursor+voice_len+.18)
                 cursor=x['end']
-    if not 6<=cursor<=max_duration:
-        raise RuntimeError(f'Video duration {cursor:.1f}s is outside the Studio short format after editorial compression.')
+    # Fail before frame encoding: the publishing contract requires a full
+    # 55-59 second Short. Do not stretch sparse narration into dead air.
+    minimum_duration = 55.0
+    if not minimum_duration <= cursor <= max_duration:
+        raise RuntimeError(
+            f'Video narration duration {cursor:.1f}s outside publishable '
+            f'{minimum_duration:.0f}-{max_duration:.0f}s; '
+            'revise the script and render again.')
     return cursor
 
 
