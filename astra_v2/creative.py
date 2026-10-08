@@ -76,8 +76,9 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 print("Premium QA rejected:", story["content_id"],
                       json.dumps({"action": (evaluation.get("director") or {}).get("action"),
                                   "scores": (evaluation.get("director") or {}).get("component_scores"),
-                                  "reasons": (evaluation.get("director") or {}).get("reasons"),
-                                  "repairs": (evaluation.get("director") or {}).get("repairs"),
+                                  "reasons": (evaluation.get("director") or {}).get("floor_failures"),
+                                  "repairs": (evaluation.get("director") or {}).get("repair_plan"),
+                                  "hard_failures": (evaluation.get("director") or {}).get("hard_failures"),
                                   "media_failures": (evaluation.get("media_qa") or {}).get("hard_failures"),
                                   "layer_failures": (evaluation.get("layer_qa") or {}).get("failures"),
                                   "duration": rendered.get("duration")}, default=str))
