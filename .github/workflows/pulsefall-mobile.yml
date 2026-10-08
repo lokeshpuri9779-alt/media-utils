@@ -3153,32 +3153,32 @@ jobs:
           source = path.read_text()
           source = replace_once(
               source,
-              "\t\tawait get_tree().process_frame\n\t\tvar fire: Vector2",
-              """		await get_tree().process_frame
-          		var tuning_module = load("res://mobile/mobile_tuning.gd")
-          		var test_path := "user://pulsefall_mobile_tuning_test.cfg"
-          		check(is_equal_approx(tuning_module.clamp_look(0.1), 0.5) and is_equal_approx(tuning_module.clamp_look(9.0), 2.0), "look sensitivity is clamped to safe bounds")
-          		check(is_equal_approx(tuning_module.clamp_aim(-1.0), 0.0) and is_equal_approx(tuning_module.clamp_aim(9.0), 1.5), "aim assist strength supports off and safe boost")
-          		check(tuning_module.save_values(1.7, 0.4, test_path) == OK, "mobile tuning persists without error")
-          		var restored: Dictionary = tuning_module.load_values(test_path)
-          		check(is_equal_approx(restored.look_sensitivity, 1.7) and is_equal_approx(restored.aim_assist_strength, 0.4), "mobile tuning survives a config round trip")
-          		DirAccess.remove_absolute(ProjectSettings.globalize_path(test_path))
-          		var tune: Vector2 = controls.tuning_button.get_global_rect().get_center()
-          		touch(controls, 90, tune, true)
-          		touch(controls, 90, Vector2.ZERO, false)
-          		check(controls.tuning_panel.visible, "TUNE opens the runtime control panel")
-          		var old_look: float = controls.look_sensitivity_scale
-          		var look_plus: Vector2 = controls.look_plus_button.get_global_rect().get_center()
-          		touch(controls, 91, look_plus, true)
-          		touch(controls, 91, Vector2.ZERO, false)
-          		check(controls.look_sensitivity_scale > old_look, "look sensitivity changes from the touch panel")
-          		var old_aim: float = controls.aim_assist_strength
-          		var aim_minus: Vector2 = controls.aim_minus_button.get_global_rect().get_center()
-          		touch(controls, 92, aim_minus, true)
-          		touch(controls, 92, Vector2.ZERO, false)
-          		check(controls.aim_assist_strength < old_aim, "aim-assist strength changes from the touch panel")
-          		controls._toggle_tuning(false)
-          		var fire: Vector2""",
+              "\tawait get_tree().process_frame\n\tvar fire: Vector2",
+              """	await get_tree().process_frame
+          	var tuning_module = load("res://mobile/mobile_tuning.gd")
+          	var test_path := "user://pulsefall_mobile_tuning_test.cfg"
+          	check(is_equal_approx(tuning_module.clamp_look(0.1), 0.5) and is_equal_approx(tuning_module.clamp_look(9.0), 2.0), "look sensitivity is clamped to safe bounds")
+          	check(is_equal_approx(tuning_module.clamp_aim(-1.0), 0.0) and is_equal_approx(tuning_module.clamp_aim(9.0), 1.5), "aim assist strength supports off and safe boost")
+          	check(tuning_module.save_values(1.7, 0.4, test_path) == OK, "mobile tuning persists without error")
+          	var restored: Dictionary = tuning_module.load_values(test_path)
+          	check(is_equal_approx(restored.look_sensitivity, 1.7) and is_equal_approx(restored.aim_assist_strength, 0.4), "mobile tuning survives a config round trip")
+          	DirAccess.remove_absolute(ProjectSettings.globalize_path(test_path))
+          	var tune: Vector2 = controls.tuning_button.get_global_rect().get_center()
+          	touch(controls, 90, tune, true)
+          	touch(controls, 90, Vector2.ZERO, false)
+          	check(controls.tuning_panel.visible, "TUNE opens the runtime control panel")
+          	var old_look: float = controls.look_sensitivity_scale
+          	var look_plus: Vector2 = controls.look_plus_button.get_global_rect().get_center()
+          	touch(controls, 91, look_plus, true)
+          	touch(controls, 91, Vector2.ZERO, false)
+          	check(controls.look_sensitivity_scale > old_look, "look sensitivity changes from the touch panel")
+          	var old_aim: float = controls.aim_assist_strength
+          	var aim_minus: Vector2 = controls.aim_minus_button.get_global_rect().get_center()
+          	touch(controls, 92, aim_minus, true)
+          	touch(controls, 92, Vector2.ZERO, false)
+          	check(controls.aim_assist_strength < old_aim, "aim-assist strength changes from the touch panel")
+          	controls._toggle_tuning(false)
+          	var fire: Vector2""",
               "control tuning tests",
           )
           path.write_text(source)
