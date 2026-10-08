@@ -31,6 +31,14 @@ def main():
         return
     # Reuse the already-fetched artifact listing: avoid a second GitHub API call.
     excluded.update(str(a['name'])[len('astra-preloaded-'):] for a in queue)
+    if serialized:
+        for number in range(1, 5):
+            cid = f"rayvan-season-01-episode-{number:02d}"
+            queued = any(str(a["name"]) == "astra-preloaded-" + cid for a in queue)
+            print("ASTRA_SERIES_ELIGIBILITY=" + json.dumps({
+                "episode": number, "published": cid in state.get("published", {}),
+                "queued_artifact": queued, "excluded": cid in excluded,
+            }))
     # The renderer's own creative director and independent media QA must pass.
     with tempfile.TemporaryDirectory(prefix="astra-preload-") as tmp:
         video = Path(tmp) / "render.mp4"
