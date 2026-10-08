@@ -388,7 +388,7 @@ def make_plan(ch):
     return apply_format(plan, fmt)
 
 
-def voice_plan(plan, genre, max_duration=36, voice_name='af_heart', voice_speed=1.09):
+def voice_plan(plan, genre, max_duration=59, voice_name='af_heart', voice_speed=1.09):
     engine=voice_engine()
     cursor=0.0
     for s in plan:
@@ -1582,7 +1582,7 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
     layer_report=verify_scene_layout(plan)
     if not layer_report['pass']:
         raise CreativeReject('Scene collision QA failed: '+json.dumps(layer_report['failures']))
-    duration=voice_plan(plan,genre,max_duration=float(ch.get('target_duration_max',36)),
+    duration=voice_plan(plan,genre,max_duration=min(59.0,float(ch.get('target_duration_max',59))),
                         voice_name=str(ch.get('voice_profile') or 'af_heart'),
                         voice_speed=float(ch.get('voice_speed') or 1.09))
     out=Path(out);out.parent.mkdir(parents=True,exist_ok=True)
