@@ -73,15 +73,25 @@ jobs:
           key: astra-v2-media-cache-v1
           restore-keys: astra-v2-media-cache-
 
+      - name: Install lightweight YouTube status client
+        run: python -m pip install --disable-pip-version-check 'httpx==0.28.1'
+
+      - name: Reconcile pending uploads and check schedule
+        id: preflight
+        run: python -m astra_v2.preflight
+
       - name: Install free rendering dependencies
+        if: steps.preflight.outputs.render_due == 'true'
         run: |
           python -m pip install -r requirements.txt
           command -v ffprobe >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y ffmpeg)
 
       - name: Run V2 policy and API regression tests
+        if: steps.preflight.outputs.render_due == 'true'
         run: python -m unittest discover -s tests -p 'test_astra_v2.py' -v
 
       - name: Generate, validate, publish, and verify
+        if: steps.preflight.outputs.render_due == 'true'
         run: python -m astra_v2.run
 
       - name: Persist state even after failures
