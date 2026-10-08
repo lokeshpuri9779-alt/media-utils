@@ -2,13 +2,7 @@ name: ASTRA V2 - Rebuild Checks
 
 # Temporary isolated validation of the replacement; no OAuth or publishing.
 on:
-  push:
-    branches:
-      - astra-v2-clean-rebuild-20261008
-    paths:
-      - 'astra_v2/**'
-      - 'tests/test_astra_v2.py'
-      - '.github/workflows/astra-v2-check.yml'
+  workflow_dispatch:
 
 permissions:
   contents: read
