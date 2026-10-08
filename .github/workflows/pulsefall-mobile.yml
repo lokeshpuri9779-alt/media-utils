@@ -2954,98 +2954,98 @@ jobs:
           )
           ui_anchor = "\tdash_button.pressed.connect(_dash)\n\troot.add_child(dash_button)\n"
           ui_block = r'''
-	_build_tuning_ui(root)
+          	_build_tuning_ui(root)
 
 
-func _build_tuning_ui(root: Control) -> void:
-	tuning_button = Button.new()
-	tuning_button.text = "TUNE"
-	tuning_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	tuning_button.anchor_left = 1.0
-	tuning_button.anchor_top = 0.0
-	tuning_button.anchor_right = 1.0
-	tuning_button.anchor_bottom = 0.0
-	tuning_button.offset_left = -134
-	tuning_button.offset_top = 24
-	tuning_button.offset_right = -24
-	tuning_button.offset_bottom = 78
-	tuning_button.add_theme_font_size_override("font_size", 17)
-	root.add_child(tuning_button)
+          func _build_tuning_ui(root: Control) -> void:
+          	tuning_button = Button.new()
+          	tuning_button.text = "TUNE"
+          	tuning_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
+          	tuning_button.anchor_left = 1.0
+          	tuning_button.anchor_top = 0.0
+          	tuning_button.anchor_right = 1.0
+          	tuning_button.anchor_bottom = 0.0
+          	tuning_button.offset_left = -134
+          	tuning_button.offset_top = 24
+          	tuning_button.offset_right = -24
+          	tuning_button.offset_bottom = 78
+          	tuning_button.add_theme_font_size_override("font_size", 17)
+          	root.add_child(tuning_button)
 
-	tuning_panel = Panel.new()
-	tuning_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	tuning_panel.anchor_left = 1.0
-	tuning_panel.anchor_top = 0.0
-	tuning_panel.anchor_right = 1.0
-	tuning_panel.anchor_bottom = 0.0
-	tuning_panel.offset_left = -382
-	tuning_panel.offset_top = 86
-	tuning_panel.offset_right = -24
-	tuning_panel.offset_bottom = 306
-	var panel_style := StyleBoxFlat.new()
-	panel_style.bg_color = Color(0.04, 0.07, 0.12, 0.92)
-	panel_style.border_width_left = 2
-	panel_style.border_width_top = 2
-	panel_style.border_width_right = 2
-	panel_style.border_width_bottom = 2
-	panel_style.border_color = Color(0.35, 0.88, 1.0, 0.72)
-	panel_style.corner_radius_top_left = 18
-	panel_style.corner_radius_top_right = 18
-	panel_style.corner_radius_bottom_left = 18
-	panel_style.corner_radius_bottom_right = 18
-	tuning_panel.add_theme_stylebox_override("panel", panel_style)
-	root.add_child(tuning_panel)
+          	tuning_panel = Panel.new()
+          	tuning_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+          	tuning_panel.anchor_left = 1.0
+          	tuning_panel.anchor_top = 0.0
+          	tuning_panel.anchor_right = 1.0
+          	tuning_panel.anchor_bottom = 0.0
+          	tuning_panel.offset_left = -382
+          	tuning_panel.offset_top = 86
+          	tuning_panel.offset_right = -24
+          	tuning_panel.offset_bottom = 306
+          	var panel_style := StyleBoxFlat.new()
+          	panel_style.bg_color = Color(0.04, 0.07, 0.12, 0.92)
+          	panel_style.border_width_left = 2
+          	panel_style.border_width_top = 2
+          	panel_style.border_width_right = 2
+          	panel_style.border_width_bottom = 2
+          	panel_style.border_color = Color(0.35, 0.88, 1.0, 0.72)
+          	panel_style.corner_radius_top_left = 18
+          	panel_style.corner_radius_top_right = 18
+          	panel_style.corner_radius_bottom_left = 18
+          	panel_style.corner_radius_bottom_right = 18
+          	tuning_panel.add_theme_stylebox_override("panel", panel_style)
+          	root.add_child(tuning_panel)
 
-	var title := Label.new()
-	title.text = "MOBILE CONTROL TUNING"
-	title.position = Vector2(22, 14)
-	title.add_theme_font_size_override("font_size", 18)
-	tuning_panel.add_child(title)
-	var look_label := Label.new()
-	look_label.text = "LOOK"
-	look_label.position = Vector2(22, 68)
-	tuning_panel.add_child(look_label)
-	var aim_label := Label.new()
-	aim_label.text = "AIM ASSIST"
-	aim_label.position = Vector2(22, 130)
-	tuning_panel.add_child(aim_label)
-	look_value_label = _make_value_label(Vector2(160, 62))
-	aim_value_label = _make_value_label(Vector2(160, 124))
-	tuning_panel.add_child(look_value_label)
-	tuning_panel.add_child(aim_value_label)
-	look_minus_button = _make_tuning_button("-", Vector2(112, 56))
-	look_plus_button = _make_tuning_button("+", Vector2(242, 56))
-	aim_minus_button = _make_tuning_button("-", Vector2(112, 118))
-	aim_plus_button = _make_tuning_button("+", Vector2(242, 118))
-	tuning_close_button = _make_tuning_button("DONE", Vector2(244, 166), Vector2(92, 42))
-	for button in [look_minus_button, look_plus_button, aim_minus_button, aim_plus_button, tuning_close_button]:
-		tuning_panel.add_child(button)
-	tuning_panel.visible = false
-	_refresh_tuning_labels()
-'''
+          	var title := Label.new()
+          	title.text = "MOBILE CONTROL TUNING"
+          	title.position = Vector2(22, 14)
+          	title.add_theme_font_size_override("font_size", 18)
+          	tuning_panel.add_child(title)
+          	var look_label := Label.new()
+          	look_label.text = "LOOK"
+          	look_label.position = Vector2(22, 68)
+          	tuning_panel.add_child(look_label)
+          	var aim_label := Label.new()
+          	aim_label.text = "AIM ASSIST"
+          	aim_label.position = Vector2(22, 130)
+          	tuning_panel.add_child(aim_label)
+          	look_value_label = _make_value_label(Vector2(160, 62))
+          	aim_value_label = _make_value_label(Vector2(160, 124))
+          	tuning_panel.add_child(look_value_label)
+          	tuning_panel.add_child(aim_value_label)
+          	look_minus_button = _make_tuning_button("-", Vector2(112, 56))
+          	look_plus_button = _make_tuning_button("+", Vector2(242, 56))
+          	aim_minus_button = _make_tuning_button("-", Vector2(112, 118))
+          	aim_plus_button = _make_tuning_button("+", Vector2(242, 118))
+          	tuning_close_button = _make_tuning_button("DONE", Vector2(244, 166), Vector2(92, 42))
+          	for button in [look_minus_button, look_plus_button, aim_minus_button, aim_plus_button, tuning_close_button]:
+          		tuning_panel.add_child(button)
+          	tuning_panel.visible = false
+          	_refresh_tuning_labels()
+          '''
           source = replace_once(source, ui_anchor, ui_anchor + ui_block, "tuning UI insertion")
           helper_anchor = "\n\nfunc _make_button(label: String, offset: Vector2, button_size: Vector2, tint: Color) -> Button:\n"
           helpers = r'''
 
-func _make_value_label(at: Vector2) -> Label:
-	var label := Label.new()
-	label.position = at
-	label.size = Vector2(78, 44)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.add_theme_font_size_override("font_size", 18)
-	return label
+          func _make_value_label(at: Vector2) -> Label:
+          	var label := Label.new()
+          	label.position = at
+          	label.size = Vector2(78, 44)
+          	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+          	label.add_theme_font_size_override("font_size", 18)
+          	return label
 
 
-func _make_tuning_button(label: String, at: Vector2, button_size := Vector2(48, 44)) -> Button:
-	var button := Button.new()
-	button.text = label
-	button.position = at
-	button.size = button_size
-	button.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	button.add_theme_font_size_override("font_size", 18)
-	return button
-'''
+          func _make_tuning_button(label: String, at: Vector2, button_size := Vector2(48, 44)) -> Button:
+          	var button := Button.new()
+          	button.text = label
+          	button.position = at
+          	button.size = button_size
+          	button.mouse_filter = Control.MOUSE_FILTER_IGNORE
+          	button.add_theme_font_size_override("font_size", 18)
+          	return button
+          '''
           source = replace_once(source, helper_anchor, helpers + helper_anchor, "tuning helpers")
           input_anchor = "\t\t\tif event.position.x < viewport_size.x * 0.45"
           source = replace_once(
@@ -3068,58 +3068,58 @@ func _make_tuning_button(label: String, at: Vector2, button_size := Vector2(48, 
           )
           press_anchor = "func _press_touch_button(button: Button) -> void:\n\tif button == fire_button:"
           press_replacement = """func _press_touch_button(button: Button) -> void:
-	if button == tuning_button:
-		_toggle_tuning()
-	elif button == look_minus_button:
-		_adjust_look(-0.1)
-	elif button == look_plus_button:
-		_adjust_look(0.1)
-	elif button == aim_minus_button:
-		_adjust_aim(-0.1)
-	elif button == aim_plus_button:
-		_adjust_aim(0.1)
-	elif button == tuning_close_button:
-		_toggle_tuning(false)
-	elif button == fire_button:"""
+          	if button == tuning_button:
+          		_toggle_tuning()
+          	elif button == look_minus_button:
+          		_adjust_look(-0.1)
+          	elif button == look_plus_button:
+          		_adjust_look(0.1)
+          	elif button == aim_minus_button:
+          		_adjust_aim(-0.1)
+          	elif button == aim_plus_button:
+          		_adjust_aim(0.1)
+          	elif button == tuning_close_button:
+          		_toggle_tuning(false)
+          	elif button == fire_button:"""
           source = replace_once(source, press_anchor, press_replacement, "tuning button routing")
           exit_anchor = "\n\nfunc _exit_tree() -> void:\n"
           tuning_functions = r'''
 
-func _load_tuning() -> void:
-	var values := MobileTuning.load_values()
-	look_sensitivity_scale = values.look_sensitivity
-	aim_assist_strength = values.aim_assist_strength
+          func _load_tuning() -> void:
+          	var values := MobileTuning.load_values()
+          	look_sensitivity_scale = values.look_sensitivity
+          	aim_assist_strength = values.aim_assist_strength
 
 
-func _toggle_tuning(force_visible = null) -> void:
-	_release_all_inputs()
-	if force_visible == null:
-		tuning_panel.visible = not tuning_panel.visible
-	else:
-		tuning_panel.visible = bool(force_visible)
+          func _toggle_tuning(force_visible = null) -> void:
+          	_release_all_inputs()
+          	if force_visible == null:
+          		tuning_panel.visible = not tuning_panel.visible
+          	else:
+          		tuning_panel.visible = bool(force_visible)
 
 
-func _adjust_look(delta: float) -> void:
-	look_sensitivity_scale = MobileTuning.clamp_look(look_sensitivity_scale + delta)
-	_store_tuning()
+          func _adjust_look(delta: float) -> void:
+          	look_sensitivity_scale = MobileTuning.clamp_look(look_sensitivity_scale + delta)
+          	_store_tuning()
 
 
-func _adjust_aim(delta: float) -> void:
-	aim_assist_strength = MobileTuning.clamp_aim(aim_assist_strength + delta)
-	_store_tuning()
+          func _adjust_aim(delta: float) -> void:
+          	aim_assist_strength = MobileTuning.clamp_aim(aim_assist_strength + delta)
+          	_store_tuning()
 
 
-func _store_tuning() -> void:
-	MobileTuning.save_values(look_sensitivity_scale, aim_assist_strength)
-	_refresh_tuning_labels()
+          func _store_tuning() -> void:
+          	MobileTuning.save_values(look_sensitivity_scale, aim_assist_strength)
+          	_refresh_tuning_labels()
 
 
-func _refresh_tuning_labels() -> void:
-	if is_instance_valid(look_value_label):
-		look_value_label.text = "%d%%" % int(round(look_sensitivity_scale * 100.0))
-	if is_instance_valid(aim_value_label):
-		aim_value_label.text = "%d%%" % int(round(aim_assist_strength * 100.0))
-'''
+          func _refresh_tuning_labels() -> void:
+          	if is_instance_valid(look_value_label):
+          		look_value_label.text = "%d%%" % int(round(look_sensitivity_scale * 100.0))
+          	if is_instance_valid(aim_value_label):
+          		aim_value_label.text = "%d%%" % int(round(aim_assist_strength * 100.0))
+          '''
           source = replace_once(source, exit_anchor, tuning_functions + exit_anchor, "tuning functions")
           path.write_text(source)
 
@@ -3155,30 +3155,30 @@ func _refresh_tuning_labels() -> void:
               source,
               "\t\tawait get_tree().process_frame\n\t\tvar fire: Vector2",
               """		await get_tree().process_frame
-		var tuning_module = load("res://mobile/mobile_tuning.gd")
-		var test_path := "user://pulsefall_mobile_tuning_test.cfg"
-		check(is_equal_approx(tuning_module.clamp_look(0.1), 0.5) and is_equal_approx(tuning_module.clamp_look(9.0), 2.0), "look sensitivity is clamped to safe bounds")
-		check(is_equal_approx(tuning_module.clamp_aim(-1.0), 0.0) and is_equal_approx(tuning_module.clamp_aim(9.0), 1.5), "aim assist strength supports off and safe boost")
-		check(tuning_module.save_values(1.7, 0.4, test_path) == OK, "mobile tuning persists without error")
-		var restored: Dictionary = tuning_module.load_values(test_path)
-		check(is_equal_approx(restored.look_sensitivity, 1.7) and is_equal_approx(restored.aim_assist_strength, 0.4), "mobile tuning survives a config round trip")
-		DirAccess.remove_absolute(ProjectSettings.globalize_path(test_path))
-		var tune: Vector2 = controls.tuning_button.get_global_rect().get_center()
-		touch(controls, 90, tune, true)
-		touch(controls, 90, Vector2.ZERO, false)
-		check(controls.tuning_panel.visible, "TUNE opens the runtime control panel")
-		var old_look: float = controls.look_sensitivity_scale
-		var look_plus: Vector2 = controls.look_plus_button.get_global_rect().get_center()
-		touch(controls, 91, look_plus, true)
-		touch(controls, 91, Vector2.ZERO, false)
-		check(controls.look_sensitivity_scale > old_look, "look sensitivity changes from the touch panel")
-		var old_aim: float = controls.aim_assist_strength
-		var aim_minus: Vector2 = controls.aim_minus_button.get_global_rect().get_center()
-		touch(controls, 92, aim_minus, true)
-		touch(controls, 92, Vector2.ZERO, false)
-		check(controls.aim_assist_strength < old_aim, "aim-assist strength changes from the touch panel")
-		controls._toggle_tuning(false)
-		var fire: Vector2""",
+          		var tuning_module = load("res://mobile/mobile_tuning.gd")
+          		var test_path := "user://pulsefall_mobile_tuning_test.cfg"
+          		check(is_equal_approx(tuning_module.clamp_look(0.1), 0.5) and is_equal_approx(tuning_module.clamp_look(9.0), 2.0), "look sensitivity is clamped to safe bounds")
+          		check(is_equal_approx(tuning_module.clamp_aim(-1.0), 0.0) and is_equal_approx(tuning_module.clamp_aim(9.0), 1.5), "aim assist strength supports off and safe boost")
+          		check(tuning_module.save_values(1.7, 0.4, test_path) == OK, "mobile tuning persists without error")
+          		var restored: Dictionary = tuning_module.load_values(test_path)
+          		check(is_equal_approx(restored.look_sensitivity, 1.7) and is_equal_approx(restored.aim_assist_strength, 0.4), "mobile tuning survives a config round trip")
+          		DirAccess.remove_absolute(ProjectSettings.globalize_path(test_path))
+          		var tune: Vector2 = controls.tuning_button.get_global_rect().get_center()
+          		touch(controls, 90, tune, true)
+          		touch(controls, 90, Vector2.ZERO, false)
+          		check(controls.tuning_panel.visible, "TUNE opens the runtime control panel")
+          		var old_look: float = controls.look_sensitivity_scale
+          		var look_plus: Vector2 = controls.look_plus_button.get_global_rect().get_center()
+          		touch(controls, 91, look_plus, true)
+          		touch(controls, 91, Vector2.ZERO, false)
+          		check(controls.look_sensitivity_scale > old_look, "look sensitivity changes from the touch panel")
+          		var old_aim: float = controls.aim_assist_strength
+          		var aim_minus: Vector2 = controls.aim_minus_button.get_global_rect().get_center()
+          		touch(controls, 92, aim_minus, true)
+          		touch(controls, 92, Vector2.ZERO, false)
+          		check(controls.aim_assist_strength < old_aim, "aim-assist strength changes from the touch panel")
+          		controls._toggle_tuning(false)
+          		var fire: Vector2""",
               "control tuning tests",
           )
           path.write_text(source)
