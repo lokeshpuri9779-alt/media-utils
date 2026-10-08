@@ -59,6 +59,23 @@ def catalog():
             ],
         },
         {
+            "genre":"space","kind":"explainer","content_id":"iss-orbital-speed-v1",
+            "premium_story":True,"production_ready":True,
+            "hook":"THE ISS IS FASTER THAN A BULLET",
+            "question":"How fast does the International Space Station move?",
+            "answer":"The International Space Station travels around Earth at roughly twenty-eight thousand kilometers per hour. It completes an orbit about every ninety minutes.",
+            "title":"How Fast the Space Station Really Travels",
+            "voice_speed":1.10,
+            "source":"https://www.nasa.gov/international-space-station/space-station-facts-and-figures/",
+            "keywords":["iss","space station","orbit","speed"],
+            "story_beats":[
+                {"headline":"28,000 KM/H","speech":"The space station races around Earth at roughly twenty-eight thousand kilometers an hour.","visual":"media","story_beat":"reveal","media_query":"ISS sunrise from orbit","media_file":"File:ISS-43 Sunrise from orbit.jpg","media_fit":"wide","media_motion":"push"},
+                {"headline":"IT NEVER STOPS","speech":"That sideways speed keeps it falling around Earth instead of straight down.","visual":"iss_orbit","story_beat":"mechanism"},
+                {"headline":"90 MINUTES PER LAP","speech":"It completes one entire orbit in about ninety minutes.","visual":"media","story_beat":"evidence","media_query":"ISS sunrise solar arrays","media_file":"File:ISS. Sunrise Through the Solar Arrays.jpg","media_fit":"wide","media_motion":"track"},
+                {"headline":"16 ORBITS PER DAY","speech":"That's about sixteen trips around our planet every day.","visual":"media","story_beat":"payoff","media_query":"ISS sunrise Earth horizon","media_file":"File:ISS-64 Sunrise through Earth's horizon.jpg","media_fit":"wide","media_motion":"push"}
+            ]
+        },
+        {
             "genre":"space","kind":"explainer","content_id":"mars-blue-sunset-v1",
             "premium_story":True,"production_ready":False,"validation_candidate":True,
             "hook":"MARS HAS BLUE SUNSETS",
