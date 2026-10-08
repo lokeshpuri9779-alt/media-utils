@@ -2,6 +2,9 @@ name: ASTRA V2 - Preload Approved Videos
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/astra-v2-preload.yml']
   schedule:
     - cron: '*/10 * * * *'
 
