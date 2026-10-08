@@ -69,6 +69,8 @@ def take(excluded_ids, excluded_titles, output):
     published = set(state_for_day(read_json(STATE_FILE)).get("published", {}))
     for entry in sorted(artifacts(), key=lambda a: a.get("created_at", "")):
         cid = str(entry["name"])[len(PREFIX):]
+        if os.getenv("ASTRA_SERIES_PUBLICATION", "0") == "1" and not cid.startswith("rayvan-season-01-episode-"):
+            continue
         if cid in excluded_ids or "/" in cid or ".." in cid:
             continue
         if cid.startswith("rayvan-season-01-episode-"):
