@@ -1,13 +1,29 @@
 {
   "version": 2,
   "day": "2026-10-08",
-  "attempts": 0,
+  "attempts": 1,
   "confirmed_today": 0,
-  "last_attempt_at": "",
+  "last_attempt_at": "2026-10-08T15:38:52.505824+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {},
-  "pending": {},
-  "last_outcome": "quality_skip",
-  "last_error": ""
+  "pending": {
+    "MV_-drhUjIQ": {
+      "content_id": "rayvan-original-lightkeeper-v1",
+      "title": "The Last Lightkeeper | Original Microfiction",
+      "day": "2026-10-08",
+      "uploaded_at": "2026-10-08T15:38:53.710684+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "reserved": {
+    "rayvan-original-lightkeeper-v1": {
+      "at": "2026-10-08T15:38:52.505809+00:00",
+      "title": "The Last Lightkeeper | Original Microfiction",
+      "result": "accepted"
+    }
+  }
 }
