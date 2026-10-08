@@ -319,7 +319,17 @@ def evaluate_studio_render(story: dict, render_report: dict, video_path: str | P
             }
     director_input = director_input_from_render(story, render_report, media_qa=media_qa, detected=detected, identity=identity)
     decision = evaluate_director(director_input)
+    # A high creative score cannot override physically competing subject
+    # animations or missing safe-zone evidence. Require the compositor's
+    # independent contract on every Studio production render.
+    layer_qa=render_report.get("layer_qa") or {}
+    if str(render_report.get("renderer") or "").startswith("studio") and layer_qa.get("pass") is not True:
+        decision=dict(decision)
+        decision["publish_allowed"]=False
+        decision["action"]="rebuild_or_block"
+        decision["layer_collision_reasons"]=layer_qa.get("failures") or ["layer_contract_missing"]
     return {
+        "layer_qa": layer_qa,
         "director_input": director_input,
         "scene_detection": detected,
         "media_qa": media_qa,
