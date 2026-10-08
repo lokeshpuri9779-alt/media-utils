@@ -141,5 +141,64 @@ class WatchdogTests(unittest.TestCase):
         state = state_for_day(None, now)
         self.assertEqual(assess(state, now)[0], "healthy")
 
+
+class PreflightTests(unittest.TestCase):
+    def test_public_processed_video_is_confirmed_once_and_fed_back(self):
+        import os
+        from astra_v2.preflight import reconcile_pending
+        with tempfile.TemporaryDirectory() as directory:
+            prior = Path.cwd()
+            os.chdir(directory)
+            try:
+                write_json("performance.json", {"videos": {}, "strategy": {"retain": True}})
+                state = state_for_day()
+                state["pending"]["video123"] = {
+                    "content_id": "original-story-one", "title": "The Last Lightkeeper",
+                    "format": "short", "genre": "fiction", "day": state["day"],
+                }
+                youtube = Mock()
+                youtube.status.return_value = {
+                    "privacyStatus": "public", "uploadStatus": "processed",
+                }
+                confirmed, pending, review = reconcile_pending(youtube, state, "rayvan")
+                self.assertEqual((confirmed, pending, review), (["video123"], [], []))
+                self.assertEqual(state["confirmed_today"], 1)
+                self.assertIn("original-story-one", state["published"])
+                saved = read_json("performance.json")
+                self.assertTrue(saved["strategy"]["retain"])
+                self.assertEqual(saved["videos"]["video123"]["visibility"], "public")
+                self.assertIn("video123", Path("SHORTS.md").read_text())
+                self.assertEqual(reconcile_pending(youtube, state, "rayvan")[0], [])
+                self.assertEqual(state["confirmed_today"], 1)
+            finally:
+                os.chdir(prior)
+
+    def test_unfinished_video_stays_pending_and_is_not_reported_as_success(self):
+        from astra_v2.preflight import reconcile_pending
+        state = state_for_day()
+        state["pending"]["video123"] = {"content_id": "story123", "day": state["day"]}
+        youtube = Mock()
+        youtube.status.return_value = {
+            "privacyStatus": "public", "uploadStatus": "uploaded",
+        }
+        confirmed, pending, review = reconcile_pending(youtube, state, "rayvan")
+        self.assertEqual((confirmed, pending, review), ([], ["video123"], []))
+        self.assertEqual(state["confirmed_today"], 0)
+        self.assertIn("video123", state["pending"])
+
+    def test_private_video_is_never_claimed_public(self):
+        from astra_v2.preflight import reconcile_pending
+        state = state_for_day()
+        state["pending"]["video123"] = {"content_id": "story123", "day": state["day"]}
+        youtube = Mock()
+        youtube.status.return_value = {
+            "privacyStatus": "private", "uploadStatus": "processed",
+        }
+        confirmed, pending, review = reconcile_pending(youtube, state, "rayvan")
+        self.assertEqual((confirmed, pending, review), ([], [], ["video123"]))
+        self.assertFalse(state["published"])
+        self.assertEqual(state["confirmed_today"], 0)
+        self.assertIn("video123", state["needs_review"])
+
 if __name__ == "__main__":
     unittest.main()
