@@ -167,10 +167,10 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 
 ## P0 returned to queue after log review (2026-10-08)
 
-- [ ] Fix the foundation door import's missing `res://door/model/doorsimple_d.png` texture and empty-surface import error. Trace the asset reference before modifying geometry.
-- [ ] Fix the player model's duplicate `Cannon_Charge` animation-name import error without breaking animation references.
-- [ ] Investigate the volumetric-fog warning during Android export despite mobile runtime clamping.
-- [ ] Make import validation reject missing resources and asset-import failures. Current CI rejects script failures and runtime renderer warnings but misses these import errors.
+- [x] Fix foundation door import: supply the referenced albedo, remove the confirmed zero-vertex `Plane.007` mesh/controller, and enforce regression failure on recurrence.
+- [x] Fix the player model's `Cannon_Charge` collision by preserving Godot's `-cycle` semantics while assigning a unique imported animation name.
+- [x] Disable embedded volumetric fog in both gameplay and menu environments; export log no longer reports the mobile-renderer warning.
+- [x] Make CI reject missing resources, duplicate animation imports, and empty-surface asset failures.
 - [ ] Investigate the headless level/extraction test shutdown leaks (four ObjectDB instances and two resources); distinguish fixture cleanup from player-session leakage with a measured soak test.
 
-The v0.2.4 APK is an alpha checkpoint with successful export and automated checks, not a clean-import or release-ready candidate. Address these issues before the next feature batch.
+Validated v0.2.5 checkpoint: commit `dbc959cb35204bf16ef72c9b411d4ba0abeae953`, workflow run `37812357327`, clean targeted import gate, 45 automated checks passed, Android export/upload succeeded, arm64 APK SHA256 `f5406bd4988e00801d0f583eb669321a8d25a5346fa5214707ffc78e26feb910`. v0.2.4 remains the rollback build. This is still an alpha checkpoint: headless shutdown leaks, real-device installation/performance, a complete player-controlled run, and benchmark superiority remain unverified.
