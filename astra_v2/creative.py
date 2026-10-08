@@ -23,7 +23,7 @@ def inspect_video(path, fmt="short"):
     audio = next((x for x in data.get("streams", []) if x.get("codec_type") == "audio"), {})
     width, height = int(video.get("width") or 0), int(video.get("height") or 0)
     seconds = float((data.get("format") or {}).get("duration") or 0)
-    good = (60 <= seconds <= 3600 and width >= 640 and height >= 360 and width > height and bool(audio)) if fmt == "long" else (8 <= seconds < 60.0 and width >= 360 and height >= 640 and height > width and bool(audio))
+    good = (60 <= seconds <= 3600 and width >= 640 and height >= 360 and width > height and bool(audio)) if fmt == "long" else (55.0 <= seconds < 60.0 and width >= 360 and height >= 640 and height > width and bool(audio))
     if not good:
         raise CreativeSkip("video_audio_orientation_or_duration_failed")
     return {"seconds": round(seconds, 2), "size": path.stat().st_size,
