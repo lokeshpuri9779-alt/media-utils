@@ -106,12 +106,17 @@ class Youtube:
         if not location or not location.startswith("https://"):
             raise RuntimeError("Upload session URL absent.")
         # Do not retry a network-uncertain transfer: it might already be uploaded.
-        with video.open("rb") as stream, httpx.Client(timeout=None) as transfer:
-            result = transfer.put(location, content=stream, headers={
-                "Authorization": "Bearer " + self.token,
-                "Content-Type": "video/mp4",
-                "Content-Length": str(video.stat().st_size),
-            })
+        try:
+            with video.open("rb") as stream, httpx.Client(timeout=None) as transfer:
+                result = transfer.put(location, content=stream, headers={
+                    "Authorization": "Bearer " + self.token,
+                    "Content-Type": "video/mp4",
+                    "Content-Length": str(video.stat().st_size),
+                })
+        except httpx.RequestError as exc:
+            # Never log the resumable URL, bearer token or credential-bearing
+            # request object from a transfer exception.
+            raise RuntimeError("Upload transfer indeterminate; check Studio before retry.") from None
         self.check(result, "upload_transfer")
         video_id = result.json().get("id")
         if not video_id:
