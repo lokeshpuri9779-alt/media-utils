@@ -147,32 +147,31 @@ class PreflightTests(unittest.TestCase):
         import os
         from astra_v2.preflight import reconcile_pending
         with tempfile.TemporaryDirectory() as directory:
-            with patch("os.getcwd", return_value=directory):
-                prior = Path.cwd()
-                os.chdir(directory)
-                try:
-                    write_json("performance.json", {"videos": {}, "strategy": {"retain": True}})
-                    state = state_for_day()
-                    state["pending"]["video123"] = {
-                        "content_id": "original-story-one", "title": "The Last Lightkeeper",
-                        "format": "short", "genre": "fiction", "day": state["day"],
-                    }
-                    youtube = Mock()
-                    youtube.status.return_value = {
-                        "privacyStatus": "public", "uploadStatus": "processed",
-                    }
-                    confirmed, pending, review = reconcile_pending(youtube, state, "rayvan")
-                    self.assertEqual((confirmed, pending, review), (["video123"], [], []))
-                    self.assertEqual(state["confirmed_today"], 1)
-                    self.assertIn("original-story-one", state["published"])
-                    saved = read_json("performance.json")
-                    self.assertTrue(saved["strategy"]["retain"])
-                    self.assertEqual(saved["videos"]["video123"]["visibility"], "public")
-                    self.assertIn("video123", Path("SHORTS.md").read_text())
-                    self.assertEqual(reconcile_pending(youtube, state, "rayvan")[0], [])
-                    self.assertEqual(state["confirmed_today"], 1)
-                finally:
-                    os.chdir(prior)
+            prior = Path.cwd()
+            os.chdir(directory)
+            try:
+                write_json("performance.json", {"videos": {}, "strategy": {"retain": True}})
+                state = state_for_day()
+                state["pending"]["video123"] = {
+                    "content_id": "original-story-one", "title": "The Last Lightkeeper",
+                    "format": "short", "genre": "fiction", "day": state["day"],
+                }
+                youtube = Mock()
+                youtube.status.return_value = {
+                    "privacyStatus": "public", "uploadStatus": "processed",
+                }
+                confirmed, pending, review = reconcile_pending(youtube, state, "rayvan")
+                self.assertEqual((confirmed, pending, review), (["video123"], [], []))
+                self.assertEqual(state["confirmed_today"], 1)
+                self.assertIn("original-story-one", state["published"])
+                saved = read_json("performance.json")
+                self.assertTrue(saved["strategy"]["retain"])
+                self.assertEqual(saved["videos"]["video123"]["visibility"], "public")
+                self.assertIn("video123", Path("SHORTS.md").read_text())
+                self.assertEqual(reconcile_pending(youtube, state, "rayvan")[0], [])
+                self.assertEqual(state["confirmed_today"], 1)
+            finally:
+                os.chdir(prior)
 
     def test_unfinished_video_stays_pending_and_is_not_reported_as_success(self):
         from astra_v2.preflight import reconcile_pending
