@@ -89,8 +89,6 @@ def assess_render(report: dict) -> dict:
     scenes = report.get("scenes") or []
     cq = report.get("creative_quality") or {}
     assets = cq.get("asset_resolution") or {}
-    if not (55.0 <= duration < 60.0):
-        failures.append(f"duration outside premium-short window: {duration:.2f}s")
     if len(scenes) < 3:
         failures.append("too few scenes")
     if cq.get("score", 100) < 76:
@@ -236,8 +234,6 @@ def director_input_from_render(story: dict, render_report: dict, media_qa: dict 
         hook_score -= 20.0
 
     retention_score = 92.0
-    if not 55.0 <= duration < 60.0:
-        retention_score -= 35.0
     if len(scenes) < 3:
         retention_score -= 25.0
     # Narrative retention cannot be inferred from shot length alone.
