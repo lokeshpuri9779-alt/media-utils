@@ -2710,7 +2710,6 @@ jobs:
               'scale_filter = Viewport.SCALING_3D_MODE_BILINEAR,'
           )
           replace_once('ssao_quality = RenderingServer.ENV_SSAO_QUALITY_MEDIUM,', 'ssao_quality = -1,  # Unsupported by the mobile renderer')
-          replace_once('volumetric_fog = true,', 'volumetric_fog = false,')
 
           # Clamp previously saved desktop settings too, so upgrades do not retain
           # unsupported FSR2/SSAO/SSIL/fog options from older builds.
