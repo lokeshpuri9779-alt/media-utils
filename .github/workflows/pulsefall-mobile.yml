@@ -1562,6 +1562,220 @@ jobs:
           		_show_banner("WARDEN PHASE III", "CORE OVERDRIVE  //  MAXIMUM THREAT", 1.2)
           GDSCRIPT
 
+      - name: Add relay objectives and physical extraction
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          cat > game/mobile/objective_relay.gd <<'GDSCRIPT'
+          class_name ObjectiveRelay
+          extends Area3D
+
+          signal activated(relay: ObjectiveRelay)
+
+          @export var hold_seconds := 2.5
+          var player_inside := false
+          var progress := 0.0
+          var completed := false
+          var ring: MeshInstance3D
+
+
+          func _ready() -> void:
+          	collision_layer = 0
+          	collision_mask = 2
+          	monitoring = true
+
+          	ring = MeshInstance3D.new()
+          	var mesh := CylinderMesh.new()
+          	mesh.top_radius = 0.85
+          	mesh.bottom_radius = 0.85
+          	mesh.height = 0.18
+          	ring.mesh = mesh
+          	var mat := StandardMaterial3D.new()
+          	mat.albedo_color = Color(0.28, 0.82, 1.0, 0.78)
+          	mat.emission_enabled = true
+          	mat.emission = Color(0.12, 0.62, 1.0, 1.0)
+          	mat.emission_energy_multiplier = 1.8
+          	ring.material_override = mat
+          	add_child(ring)
+
+          	var collision := CollisionShape3D.new()
+          	var shape := CylinderShape3D.new()
+          	shape.radius = 1.65
+          	shape.height = 2.5
+          	collision.shape = shape
+          	collision.position.y = 1.1
+          	add_child(collision)
+
+          	body_entered.connect(_on_enter)
+          	body_exited.connect(_on_exit)
+
+
+          func _process(delta: float) -> void:
+          	if completed:
+          		return
+          	rotate_y(delta * 0.7)
+          	if player_inside:
+          		progress = minf(hold_seconds, progress + delta)
+          	else:
+          		progress = maxf(0.0, progress - delta * 0.75)
+
+          	var ratio := progress / maxf(hold_seconds, 0.01)
+          	ring.scale = Vector3.ONE * (1.0 + ratio * 0.28)
+          	if progress >= hold_seconds:
+          		completed = true
+          		activated.emit(self)
+          		queue_free()
+
+
+          func _on_enter(body: Node3D) -> void:
+          	if body is Player:
+          		player_inside = true
+
+
+          func _on_exit(body: Node3D) -> void:
+          	if body is Player:
+          		player_inside = false
+          GDSCRIPT
+
+          cat > game/mobile/extraction_beacon.gd <<'GDSCRIPT'
+          class_name ExtractionBeacon
+          extends Area3D
+
+          signal extracted(beacon: ExtractionBeacon)
+
+          var triggered := false
+          var age := 0.0
+          var marker: MeshInstance3D
+
+
+          func _ready() -> void:
+          	collision_layer = 0
+          	collision_mask = 2
+          	monitoring = true
+
+          	marker = MeshInstance3D.new()
+          	var mesh := CylinderMesh.new()
+          	mesh.top_radius = 1.25
+          	mesh.bottom_radius = 1.25
+          	mesh.height = 0.20
+          	marker.mesh = mesh
+          	var mat := StandardMaterial3D.new()
+          	mat.albedo_color = Color(0.38, 1.0, 0.66, 0.80)
+          	mat.emission_enabled = true
+          	mat.emission = Color(0.18, 1.0, 0.55, 1.0)
+          	mat.emission_energy_multiplier = 2.5
+          	marker.material_override = mat
+          	add_child(marker)
+
+          	var collision := CollisionShape3D.new()
+          	var shape := CylinderShape3D.new()
+          	shape.radius = 2.1
+          	shape.height = 3.0
+          	collision.shape = shape
+          	collision.position.y = 1.4
+          	add_child(collision)
+
+          	body_entered.connect(_on_enter)
+
+
+          func _process(delta: float) -> void:
+          	age += delta
+          	rotate_y(delta * 0.95)
+          	var pulse := 1.0 + sin(age * 3.2) * 0.09
+          	marker.scale = Vector3(pulse, 1.0, pulse)
+
+
+          func _on_enter(body: Node3D) -> void:
+          	if triggered or not body is Player:
+          		return
+          	triggered = true
+          	extracted.emit(self)
+          	queue_free()
+          GDSCRIPT
+
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("game/level/level.gd")
+          s=p.read_text()
+
+          s=s.replace(
+              'const PulseCacheScript: Script = preload("res://mobile/pulse_cache.gd")\n',
+              'const PulseCacheScript: Script = preload("res://mobile/pulse_cache.gd")\nconst ObjectiveRelayScript: Script = preload("res://mobile/objective_relay.gd")\nconst ExtractionBeaconScript: Script = preload("res://mobile/extraction_beacon.gd")\n'
+          )
+
+          s=s.replace(
+              '\t\t\t_begin_cache_objective()',
+              '\t\t\t_begin_intermission_objective()'
+          )
+
+          s=s.replace(
+              '\t\t\tawait get_tree().create_timer(1.5).timeout\n\t\t\t_finish_mission()',
+              '\t\t\tawait get_tree().create_timer(1.0).timeout\n\t\t\t_begin_extraction()'
+          )
+
+          p.write_text(s)
+          PY
+
+          cat >> game/level/level.gd <<'GDSCRIPT'
+
+
+          func _begin_intermission_objective() -> void:
+          	if wave % 2 == 0:
+          		_begin_relay_objective()
+          	else:
+          		_begin_cache_objective()
+
+
+          func _begin_relay_objective() -> void:
+          	var available: int = robot_spawn_points.get_child_count()
+          	var marker_index: int = (wave * 3 + 1) % maxi(available, 1)
+          	var spawn_marker: Marker3D = robot_spawn_points.get_child(marker_index)
+          	var relay: ObjectiveRelay = ObjectiveRelayScript.new()
+          	relay.global_position = spawn_marker.global_position + Vector3(0.0, 0.12, 0.0)
+          	relay.activated.connect(_on_relay_activated)
+          	add_child(relay)
+          	if objective_label != null:
+          		objective_label.text = "OBJECTIVE  //  STABILIZE PULSE RELAY"
+          	_show_banner("PULSE RELAY LOCATED", "HOLD THE RELAY ZONE", 1.0)
+          	MobileMetrics.record("objective_started", {"type": "relay", "wave": wave})
+
+
+          func _on_relay_activated(_relay: ObjectiveRelay) -> void:
+          	score += 500 * maxi(wave, 1)
+          	MobileMetrics.record("objective_complete", {"type": "relay", "wave": wave, "time_seconds": mission_time})
+          	if OS.has_feature("mobile"):
+          		Input.vibrate_handheld(42)
+          	if objective_label != null:
+          		objective_label.text = "OBJECTIVE  //  ADAPT AEGIS"
+          	_show_banner("RELAY STABILIZED", "SELECT AN ADAPTATION", 1.0)
+          	await get_tree().create_timer(0.9).timeout
+          	_show_upgrade_choice()
+
+
+          func _begin_extraction() -> void:
+          	mission_active = false
+          	boss_label.visible = false
+          	var available: int = robot_spawn_points.get_child_count()
+          	var marker_index: int = (wave * 5 + 2) % maxi(available, 1)
+          	var spawn_marker: Marker3D = robot_spawn_points.get_child(marker_index)
+          	var beacon: ExtractionBeacon = ExtractionBeaconScript.new()
+          	beacon.global_position = spawn_marker.global_position + Vector3(0.0, 0.12, 0.0)
+          	beacon.extracted.connect(_on_extracted)
+          	add_child(beacon)
+          	if objective_label != null:
+          		objective_label.text = "OBJECTIVE  //  REACH EXTRACTION"
+          	_show_banner("OMEGA WARDEN DOWN", "EXTRACTION BEACON ONLINE", 1.4)
+          	MobileMetrics.record("extraction_available", {"score": score, "time_seconds": mission_time})
+
+
+          func _on_extracted(_beacon: ExtractionBeacon) -> void:
+          	MobileMetrics.record("extraction_reached", {"score": score, "time_seconds": mission_time})
+          	if OS.has_feature("mobile"):
+          		Input.vibrate_handheld(90)
+          	_finish_mission()
+          GDSCRIPT
+
       - name: Add license and build notes
         shell: bash
         run: |
