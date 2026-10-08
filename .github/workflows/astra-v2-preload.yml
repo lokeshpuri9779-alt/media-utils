@@ -8,10 +8,6 @@ on:
   schedule:
     - cron: '*/10 * * * *'
 
-concurrency:
-  group: astra-v2-preload-${{ matrix.lane }}
-  cancel-in-progress: false
-
 permissions:
   contents: read
   actions: read
@@ -22,6 +18,9 @@ jobs:
       fail-fast: false
       matrix:
         lane: [0, 1]
+    concurrency:
+      group: astra-v2-preload-${{ matrix.lane }}
+      cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 26
     env:
