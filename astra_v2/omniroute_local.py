@@ -56,15 +56,12 @@ def catalog(excluded_ids=(), max_candidates=12, excluded_titles=()):
         if (a, b, c) != (0, 0, 0):
             continue
         # Spread candidates across combinations rather than changing only names.
-        if (a + b + c + d) % 3:
-            continue
+        # Do not skip episode numbers in a serialized season.
         # Ensure discovery and payoff relate to the setting; a purely random
         # mix can produce visually polished but narratively incoherent stories.
         if (a == 3 and c == 2) or (a == 2 and c == 2):
             continue
-        # Avoid recycling the same location or central story mechanism across uploads.
-        if a in used_settings or c in used_discoveries:
-            continue
+        # Recurring locations and characters are intentional in a series.
         place, visual, surface, objects = SETTINGS[a]
         name, role = PROTAGONISTS[b]
         discovery, clue_visual, revelation = DISCOVERIES[c]
