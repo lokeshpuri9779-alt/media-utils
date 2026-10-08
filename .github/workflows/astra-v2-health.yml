@@ -1,0 +1,27 @@
+name: ASTRA V2 - Publishing Health Watch
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '11 */3 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  verify-publishing:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore confirmed YouTube state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin astra-state
+          git show origin/astra-state:astra_v2_state.json > astra_v2_state.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Flag authentication or stalled public uploads
+        run: python -m astra_v2.health
