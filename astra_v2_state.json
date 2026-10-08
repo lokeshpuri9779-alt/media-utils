@@ -3,7 +3,7 @@
   "day": "2026-10-08",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 2,
-  "confirmed_today": 1,
+  "confirmed_today": 2,
   "last_attempt_at": "2026-10-08T16:08:04.787656+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -12,19 +12,15 @@
       "video_id": "MV_-drhUjIQ",
       "confirmed_at": "2026-10-08T16:01:41.823844+00:00",
       "title": "The Last Lightkeeper | Original Microfiction"
+    },
+    "rayvan-original-doorclock-v1": {
+      "video_id": "5zMpY06tkK8",
+      "confirmed_at": "2026-10-08T16:20:54.197229+00:00",
+      "title": "The Door That Opened Tomorrow | Original Microfiction"
     }
   },
-  "pending": {
-    "5zMpY06tkK8": {
-      "content_id": "rayvan-original-doorclock-v1",
-      "title": "The Door That Opened Tomorrow | Original Microfiction",
-      "day": "2026-10-08",
-      "uploaded_at": "2026-10-08T16:08:06.698470+00:00",
-      "genre": "fiction",
-      "format": "short"
-    }
-  },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
