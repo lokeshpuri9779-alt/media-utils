@@ -26,6 +26,7 @@ jobs:
       ASTRA_LONG_ENABLED: '1'
       ASTRA_PRELOAD_ENABLED: '1'
       ASTRA_PRELOAD_ONLY: '1'
+      ASTRA_SERIES_PUBLICATION: '1'
       ASTRA_OPENAI_ENABLED: '0'
       ASTRA_OPENAI_ALLOW_PAID_API: '0'
       GH_TOKEN: ${{ github.token }}
