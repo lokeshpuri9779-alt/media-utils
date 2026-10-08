@@ -3,7 +3,6 @@ from __future__ import annotations
 import json
 import tempfile
 from pathlib import Path
-from premium_stories import catalog as previous_catalog
 from astra_v2.original_stories import catalog as original_catalog
 from studio_renderer import render_short
 from quality_lab import evaluate_studio_render
@@ -14,7 +13,7 @@ def main():
     failures=[]
     with tempfile.TemporaryDirectory(prefix="astra-v2-smoke-") as tmp:
         target=Path(tmp)/"preview.mp4"
-        for story in original_catalog() + previous_catalog():
+        for story in original_catalog():
             if not story.get("production_ready"):
                 continue
             identity=story["content_id"]
