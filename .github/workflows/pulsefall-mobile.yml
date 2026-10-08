@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: godotengine/tps-demo
-          ref: master
+          ref: a82f15448e9b015440d3bbdf5e10801b260c4e9f
           path: game
           fetch-depth: 1
           lfs: false
@@ -1972,6 +1972,170 @@ jobs:
           p.write_text(s)
           PY
 
+      - name: Add timed extraction and safe escape retries
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          
+          p = Path('game/level/level.gd')
+          s = p.read_text()
+          def replace_once(old, new):
+              global s
+              if s.count(old) != 1:
+                  raise SystemExit('Expected exactly one patch anchor: ' + repr(old))
+              s = s.replace(old, new, 1)
+          
+          replace_once('const TOTAL_WAVES := 5\n', 'const TOTAL_WAVES := 5\nconst EXTRACTION_SECONDS := 60.0\n')
+          replace_once('var mission_active := false\n', 'var mission_active := false\nvar extraction_active := false\nvar extraction_remaining := 0.0\nvar extraction_retrying := false\nvar run_completed := false\nvar extraction_confirmed := false\nvar extraction_beacon: ExtractionBeacon = null\n')
+          replace_once('func _process(delta: float) -> void:\n', 'func _process(delta: float) -> void:\n\t_tick_extraction(delta)\n')
+          replace_once('\tif mission_active:\n\t\tmission_time += delta', '\tif mission_active or extraction_active:\n\t\tmission_time += delta')
+          replace_once('func _finish_mission() -> void:\n\tmission_active = false', 'func _finish_mission() -> void:\n\tif run_completed or not extraction_active or not extraction_confirmed:\n\t\treturn\n\trun_completed = true\n\textraction_active = false\n\tobjective_has_position = false\n\tmission_active = false')
+          replace_once('func _on_player_died() -> void:\n\tif not mission_active:', 'func _on_player_died() -> void:\n\tif extraction_active:\n\t\t_retry_extraction("player_death")\n\t\treturn\n\tif not mission_active:')
+          replace_once('func _begin_extraction() -> void:\n\tmission_active = false', 'func _begin_extraction() -> void:\n\tif run_completed or extraction_active or extraction_retrying:\n\t\treturn\n\tif active_player == null:\n\t\treturn\n\tif active_player.incapacitated:\n\t\tactive_player.revive()\n\textraction_active = true\n\textraction_remaining = EXTRACTION_SECONDS\n\tmission_active = false')
+          replace_once('\tvar beacon: ExtractionBeacon = ExtractionBeaconScript.new()\n', '\tvar beacon: ExtractionBeacon = ExtractionBeaconScript.new()\n\textraction_beacon = beacon\n')
+          replace_once('func _on_extracted(_beacon: ExtractionBeacon) -> void:\n\tobjective_has_position = false', 'func _on_extracted(_beacon: ExtractionBeacon) -> void:\n\tif not extraction_active or run_completed or _beacon != extraction_beacon:\n\t\treturn\n\tif active_player == null or active_player.incapacitated:\n\t\treturn\n\textraction_confirmed = true\n\tobjective_has_position = false')
+          replace_once('"EXTRACTION BEACON ONLINE", 1.4', '"REACH THE BEACON  //  60 SECONDS", 1.4')
+          s += '''
+          
+          func _tick_extraction(delta: float) -> void:
+          \tif not extraction_active:
+          \t\treturn
+          \textraction_remaining = maxf(0.0, extraction_remaining - delta)
+          \tif objective_label != null:
+          \t\tobjective_label.text = "EXTRACT  //  %02ds REMAINING" % int(ceil(extraction_remaining))
+          \tif extraction_remaining <= 0.0:
+          \t\t_retry_extraction("timeout")
+          
+          
+          func _retry_extraction(reason: String) -> void:
+          \tif not extraction_active or extraction_retrying or run_completed:
+          \t\treturn
+          \textraction_active = false
+          \textraction_retrying = true
+          \tobjective_has_position = false
+          \tif is_instance_valid(extraction_beacon):
+          \t\textraction_beacon.queue_free()
+          \textraction_beacon = null
+          \tMobileMetrics.record("extraction_retry", {"reason": reason, "score": score, "time_seconds": mission_time})
+          \tif objective_label != null:
+          \t\tobjective_label.text = "EXTRACTION RETRY  //  RECONSTRUCTING AEGIS"
+          \t_show_banner("EXTRACTION MISSED", "RETRYING FROM THE ESCAPE CHECKPOINT", 2.4)
+          \tawait get_tree().create_timer(2.5).timeout
+          \tif active_player != null:
+          \t\tactive_player.revive()
+          \textraction_retrying = false
+          \t_begin_extraction()
+          '''
+          # Position objectives in the level's local space before they enter the tree.
+          for name, marker in [('beacon', 'spawn_marker'), ('relay', 'spawn_marker'), ('cache', 'marker')]:
+              s = s.replace(f'{name}.global_position = {marker}.global_position +', f'{name}.position = to_local({marker}.global_position) +')
+              s = s.replace(f'objective_world_position = {name}.global_position', f'objective_world_position = to_global({name}.position)')
+          p.write_text(s)
+          
+          # AnimationTree has no speed_scale property. Drive its manual evaluation with
+          # the role/phase speed while retaining its existing blend tree and root motion.
+          p = Path('game/enemies/red_robot/red_robot.gd')
+          s = p.read_text()
+          s = s.replace('animation_tree.speed_scale = animation_speed', 'animation_tree.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL')
+          s = s.replace('animation_tree.speed_scale = maxf(animation_tree.speed_scale,', 'animation_speed = maxf(animation_speed,')
+          anchor = 'func _physics_process(delta: float) -> void:\n'
+          if s.count(anchor) != 1:
+              raise SystemExit('Enemy physics patch anchor missing')
+          s = s.replace(anchor, anchor + '\tanimation_tree.advance(delta * animation_speed)\n', 1)
+          p.write_text(s)
+          PY
+
+          cat > game/mobile/extraction_test.gd <<'GDSCRIPT'
+          extends Node
+          
+          var failures := 0
+          
+          func _ready() -> void:
+          	call_deferred("_run")
+          
+          func check(condition: bool, message: String) -> void:
+          	if not condition:
+          		failures += 1
+          		push_error(message)
+          	else:
+          		print("PASS: ", message)
+          
+          func _run() -> void:
+          	var scene: PackedScene = load("res://level/level.tscn")
+          	var level = scene.instantiate()
+          	var progression = get_tree().root.get_node("MetaProgression")
+          	get_tree().root.add_child(level)
+          	await get_tree().create_timer(7.0).timeout
+          	level.set_process(false)
+          	level.active_player.set_physics_process(false)
+          	# Scripted enemy-defeat events test the complete director/objective path.
+          	# This does not measure player-controlled combat or navigation difficulty.
+          	for expected_wave in range(1, level.TOTAL_WAVES + 1):
+          		check(level.wave == expected_wave and level.hostiles > 0, "wave %d starts with enemies" % expected_wave)
+          		for robot in level.spawned_nodes.get_children():
+          			if robot != level.active_player and robot is CharacterBody3D:
+          				level._on_robot_exploded(robot)
+          				robot.queue_free()
+          		await get_tree().create_timer(1.3).timeout
+          		if expected_wave == level.TOTAL_WAVES:
+          			break
+          		for objective in level.get_children():
+          			if objective is PulseCache:
+          				level.active_player.global_position = objective.global_position
+          				await get_tree().create_timer(0.25).timeout
+          			elif objective is ObjectiveRelay:
+          				objective.hold_seconds = 0.05
+          				level.active_player.global_position = objective.global_position
+          				await get_tree().create_timer(0.25).timeout
+          		await get_tree().create_timer(1.1).timeout
+          		check(level.upgrade_panel != null, "wave %d objective unlocks adaptation" % expected_wave)
+          		level._choose_run_upgrade("core", "CORE+")
+          		await get_tree().create_timer(3.2).timeout
+          	check(level.extraction_active, "final boss clear starts physical extraction")
+          	level.active_player.revive()
+          	var runs_before: int = progression.runs
+          	var credits_before: int = progression.credits
+          	level._begin_extraction()
+          	var beacon = level.extraction_beacon
+          	check(level.extraction_active and level.extraction_remaining == 60.0, "escape starts with 60 seconds")
+          	level._finish_mission()
+          	check(not level.run_completed, "direct completion cannot bypass extraction")
+          	level._tick_extraction(60.0)
+          	check(level.extraction_retrying and not level.extraction_active, "timeout begins one checkpoint retry")
+          	level._on_extracted(beacon)
+          	check(progression.runs == runs_before and progression.credits == credits_before, "expired beacon cannot award credits")
+          	await get_tree().create_timer(2.7).timeout
+          	check(level.extraction_active and not level.extraction_retrying and level.extraction_remaining == 60.0, "timeout resets escape without replaying the boss")
+          	level.active_player.take_damage(9999)
+          	check(level.extraction_retrying, "death during escape starts recovery")
+          	await get_tree().create_timer(2.7).timeout
+          	check(level.extraction_active and not level.active_player.incapacitated, "death recovery restores a playable escape")
+          	beacon = level.extraction_beacon
+          	level.active_player.global_position = beacon.global_position + Vector3(0, 0.8, 0)
+          	await get_tree().create_timer(0.25).timeout
+          	check(level.run_completed and not level.extraction_active, "physical beacon collision completes escape")
+          	check(progression.runs == runs_before + 1 and progression.credits > credits_before, "successful escape awards one run reward")
+          	var reward_credits: int = progression.credits
+          	level._finish_mission()
+          	level._begin_extraction()
+          	check(progression.runs == runs_before + 1 and progression.credits == reward_credits and not level.extraction_active, "repeated completion cannot duplicate rewards or restart escape")
+          	level.queue_free()
+          	await get_tree().process_frame
+          	await get_tree().process_frame
+          	print("EXTRACTION TEST FAILURES: ", failures)
+          	get_tree().quit(0 if failures == 0 else 1)
+          GDSCRIPT
+
+          cat > game/mobile/extraction_test.tscn <<'SCENE'
+          [gd_scene load_steps=2 format=3]
+          
+          [ext_resource type="Script" path="res://mobile/extraction_test.gd" id="1"]
+          
+          [node name="ExtractionTests" type="Node"]
+          script = ExtResource("1")
+          SCENE
+
       - name: Add license and build notes
         shell: bash
         run: |
@@ -2006,6 +2170,8 @@ jobs:
 
           Objective:
           Survive five escalating waves and neutralize the OMEGA WARDEN.
+          Then reach the extraction beacon within 60 seconds.
+          Missing extraction or dying during escape retries from the escape checkpoint.
 
           Target:
           Android landscape. Mobile controls are built in. Graphics defaults are reduced for phone GPUs.
@@ -2024,7 +2190,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.apk"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -2052,8 +2218,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=20
-          version/name="0.2.0-mobile-alpha"
+          version/code=21
+          version/name="0.2.1-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -2072,15 +2238,18 @@ jobs:
           IMPORT_RC=$?
           "$GODOT" --headless --audio-driver Dummy --path game res://level/level.tscn --quit-after 600 > /tmp/runtime.log 2>&1
           RUN_RC=$?
+          timeout 120 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/extraction_test.tscn > /tmp/extraction-test.log 2>&1
+          TEST_RC=$?
           set -e
           cat /tmp/import.log
           cat /tmp/runtime.log
-          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log; then
+          cat /tmp/extraction-test.log
+          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log; then
             echo "PULSEFALL mobile validation detected a script/runtime failure."
             exit 1
           fi
-          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ]; then
-            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC"
+          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ]; then
+            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC"
             exit 1
           fi
 
@@ -2129,3 +2298,4 @@ jobs:
             artifact/THIRD_PARTY_NOTICES.txt
           if-no-files-found: error
           retention-days: 7
+
