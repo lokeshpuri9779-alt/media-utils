@@ -27,6 +27,6 @@ jobs:
       - name: Install production renderer
         run: |
           pip install -r requirements.txt
-          command -v ffprobe
+          command -v ffprobe || (sudo apt-get update -qq && sudo apt-get install -y ffmpeg)
       - name: Render and verify a complete original video
         run: python -m astra_v2.smoke
