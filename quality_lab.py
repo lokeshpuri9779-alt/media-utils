@@ -240,9 +240,13 @@ def director_input_from_render(story: dict, render_report: dict, media_qa: dict 
         retention_score -= 35.0
     if len(scenes) < 3:
         retention_score -= 25.0
-    if durations and max(durations) > (9.0 if story.get("genre") == "fiction" else 4.5):
-        limit = 9.0 if story.get("genre") == "fiction" else 4.5
-        retention_score -= min(25.0, (max(durations) - limit) * 8.0)
+    # Narrative retention cannot be inferred from shot length alone.
+    # Keep duration and missing-story-beat checks; use measured audience
+    # analytics separately rather than inventing retention from cut frequency.
+    narrative_genre = str(story.get("genre") or "").lower() in {
+        "fiction", "microfiction", "suspense", "thriller"}
+    if durations and not narrative_genre and max(durations) > 4.5:
+        retention_score -= min(25.0, (max(durations) - 4.5) * 8.0)
 
     peak = float(audio.get("peak_dbfs") or -99)
     audio_score = 94.0 if -12.0 <= peak <= -0.3 else 72.0
