@@ -84,13 +84,13 @@ def catalog(excluded_ids=(), max_candidates=12, excluded_titles=()):
             continue
         used_titles.add(normalized_title)
         beats = [
-            (f"THE {place.upper()}", f"{name}, {role}, discovered {discovery} inside the {place}.",
+            (f"THE {place.upper()}", f"{name}, {role}, discovered {discovery} inside the {place}. Nobody else had entered that place in years. Yet fresh marks on the floor led straight to the discovery, as if someone had arrived only moments earlier.",
              visual, "THE DISCOVERY", "reveal"),
-            ("THE CLUE", f"Every night, {surface} changed, and the {objects} seemed to point toward something nobody could explain.",
+            ("THE CLUE", f"Every night, {surface} changed, and the {objects} seemed to point toward something nobody could explain. {name} stayed awake to watch. At first nothing happened. Then the pattern repeated, precisely when the old clock stopped, and one detail moved against the others.",
              clue_visual, "FOLLOW THE SIGNAL", "build"),
-            ("THE HIDDEN MESSAGE", f"The clue revealed {revelation}, but it would only work if someone believed the impossible.",
+            ("THE HIDDEN MESSAGE", f"The clue revealed {revelation}, but it would only work if someone believed the impossible. {name} checked the pattern twice, searching for a mistake. There was none. The message described something that had not happened yet, and the warning left almost no time to act.",
              clue_visual, "THE TWIST", "twist"),
-            ("ONE SMALL CHOICE", f"{name} shared the discovery with {community}, and {payoff}.",
+            ("ONE SMALL CHOICE", f"{name} shared the discovery with {community}. Some laughed. Others were frightened. But one person listened, then another, until everyone understood what was at stake. Together they followed the warning, and {payoff}. {name} looked back at the place where it began, wondering who had sent the message.",
              visual, "THE PAYOFF", "payoff"),
         ]
         proposals.append({
