@@ -41,11 +41,16 @@ def catalog(excluded_ids=(), max_candidates=12):
     """
     blocked = set(excluded_ids)
     proposals = []
+    used_titles = set()
     combinations = itertools.product(range(len(SETTINGS)), range(len(PROTAGONISTS)),
                                       range(len(DISCOVERIES)), range(len(ENDING)))
     for a, b, c, d in combinations:
         # Spread candidates across combinations rather than changing only names.
         if (a + b + c + d) % 3:
+            continue
+        # Ensure discovery and payoff relate to the setting; a purely random
+        # mix can produce visually polished but narratively incoherent stories.
+        if (a == 3 and c == 2) or (a == 2 and c == 2):
             continue
         place, visual, surface, objects = SETTINGS[a]
         name, role = PROTAGONISTS[b]
@@ -55,11 +60,16 @@ def catalog(excluded_ids=(), max_candidates=12):
             f"{a}:{b}:{c}:{d}".encode()).hexdigest()[:18]
         if cid in blocked:
             continue
-        title = f"The Secret Beneath the {place.title()}"
-        if a == 0:
-            title = f"The Last Signal at the Observatory — {name}"
-        else:
-            title += f" — {name}"
+        # Include the actual discovery and protagonist, rather than reusing
+        # one headline for every different plot at a location.
+        title = f"{name} and {discovery.title()} at the {place.title()}"
+        if len(title) > 85:
+            title = f"{name}: {discovery.title()}"
+        # Repeated titles look like mass-produced uploads; reject duplicates.
+        normalized_title = title.casefold().strip()
+        if normalized_title in used_titles:
+            continue
+        used_titles.add(normalized_title)
         beats = [
             (f"THE {place.upper()}", f"{name}, {role}, discovered {discovery} inside the {place}.",
              visual, "THE DISCOVERY", "reveal"),
