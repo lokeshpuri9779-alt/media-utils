@@ -60,8 +60,12 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 "renderer": rendered.get("renderer"), "format": "short",
             }
             title = story["title"]
+            if story["genre"] == "fiction":
+                attribution = "\nAn original fictional microstory; all characters and events are fictional."
+            else:
+                attribution = "\nSource: " + story.get("source", "")
             description = (story["question"] + "\n" + story["answer"]
-                + "\nSource: " + story.get("source", "")
+                + attribution
                 + "\nOriginal visuals; AI-assisted synthetic narration. #Shorts"
                 + "\nSubscribe: https://www.youtube.com/channel/" + legacy.expected_channel_id())
             break
