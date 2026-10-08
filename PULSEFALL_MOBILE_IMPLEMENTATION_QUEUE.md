@@ -161,6 +161,16 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 
 - Known-good rollback: commit b7f921eb (v0.2.3), Android workflow run 37772199634, successful export with 20 extraction/progression and 15 touch-control checks. Keep this artifact available.
 - Multitouch ownership, input release on focus/modal changes and touch aim hold are implemented and covered by automated checks.
-- Current batch: add line-of-sight targeting from the muzzle, correct shooter RID exclusion, range/off-screen filtering and viewport-relative aim radius. Ten physics checks are added to CI; their result must be inspected before treating this batch as validated.
+- Current batch: add line-of-sight targeting from the muzzle, correct shooter RID exclusion, range/off-screen filtering and viewport-relative aim radius. Ten physics checks passed in workflow run 37804926939 on 2026-10-08; total 45 checks passed and Android export succeeded. APK SHA256: 36031552e79e3b0f9ee64c3d0b9f680979380d5f5a2fd4c77d39c44865c57d19.
 - Automated enemy defeats do not demonstrate player-controlled combat, human navigation, a complete player-controlled run, phone frame pacing or benchmark superiority. These gates remain open.
 - Highest unfinished evidence: full player-controlled objective-to-extraction run; controls/combat/navigation usability; low/mid/high-tier device installation, performance and thermal tests; measured comparisons against the benchmark set.
+
+## P0 returned to queue after log review (2026-10-08)
+
+- [ ] Fix the foundation door import's missing `res://door/model/doorsimple_d.png` texture and empty-surface import error. Trace the asset reference before modifying geometry.
+- [ ] Fix the player model's duplicate `Cannon_Charge` animation-name import error without breaking animation references.
+- [ ] Investigate the volumetric-fog warning during Android export despite mobile runtime clamping.
+- [ ] Make import validation reject missing resources and asset-import failures. Current CI rejects script failures and runtime renderer warnings but misses these import errors.
+- [ ] Investigate the headless level/extraction test shutdown leaks (four ObjectDB instances and two resources); distinguish fixture cleanup from player-session leakage with a measured soak test.
+
+The v0.2.4 APK is an alpha checkpoint with successful export and automated checks, not a clean-import or release-ready candidate. Address these issues before the next feature batch.
