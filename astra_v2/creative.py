@@ -30,16 +30,45 @@ def inspect_video(path):
 def make_candidate(path, excluded_ids, excluded_titles):
     import cloud_once as legacy
     from ypp_safety import enforce
-    try:
-        title, description = legacy.make_short(
-            path, excluded_ids=excluded_ids, excluded_titles=excluded_titles)
-    except RuntimeError as exc:
-        message = str(exc).lower()
-        if any(word in message for word in (
-            "quality", "creative", "novelty", "fresh", "no candidates", "weak",
-        )):
-            raise CreativeSkip(str(exc)[:250]) from exc
-        raise
+    # First use original curated premium stories; only fall back to the
+    # broader learned idea engine if none passes every existing quality gate.
+    from premium_stories import catalog
+    from studio_renderer import render_short
+    from quality_lab import evaluate_studio_render
+    for story in catalog():
+        if not story.get("production_ready"):
+            continue
+        if story["content_id"] in excluded_ids or story["title"].casefold().strip() in excluded_titles:
+            continue
+        try:
+            rendered = render_short(story, path)
+            evaluation = evaluate_studio_render(story, rendered, video_path=path)
+            if not evaluation.get("pass"):
+                continue
+            legacy.CONTENT_META = {
+                "genre": story["genre"], "content_id": story["content_id"],
+                "source": story.get("source"), "creative_director": evaluation["director"],
+                "renderer": rendered.get("renderer"), "format": "short",
+            }
+            title = story["title"]
+            description = (story["question"] + "\n" + story["answer"]
+                + "\nSource: " + story.get("source", "")
+                + "\nOriginal visuals; AI-assisted synthetic narration. #Shorts"
+                + "\nSubscribe: https://www.youtube.com/channel/" + legacy.expected_channel_id())
+            break
+        except Exception as exc:
+            print("Premium candidate rejected:", story.get("content_id"), type(exc).__name__)
+    else:
+        try:
+            title, description = legacy.make_short(
+                path, excluded_ids=excluded_ids, excluded_titles=excluded_titles)
+        except RuntimeError as exc:
+            message = str(exc).lower()
+            if any(word in message for word in (
+                "quality", "creative", "novelty", "fresh", "no candidates", "weak",
+            )):
+                raise CreativeSkip(str(exc)[:250]) from exc
+            raise
     meta = dict(legacy.CONTENT_META)
     content_id = str(meta.get("content_id") or "").strip()
     if not (title and description and content_id):
