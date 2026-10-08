@@ -2857,6 +2857,58 @@ jobs:
           p.write_text(s)
           PY
 
+      - name: Repair upstream mobile asset imports
+        shell: bash
+        run: |
+          set -euxo pipefail
+          # The pinned TPS source references this legacy texture name from door.dae,
+          # but ships the actual albedo under door/textures.
+          cp game/door/textures/door_albedo.png game/door/model/doorsimple_d.png
+
+          python3 - <<'PY'
+          import json
+          import struct
+          from pathlib import Path
+
+          # Godot 4.7 reports duplicate GLB animation names as import errors.
+          # Preserve the first public name and uniquely label later duplicates.
+          path = Path("game/player/model/player.glb")
+          data = path.read_bytes()
+          magic, version, total_length = struct.unpack_from("<4sII", data, 0)
+          if magic != b"glTF" or version != 2 or total_length != len(data):
+              raise SystemExit("Unexpected player GLB header")
+          json_length, json_type = struct.unpack_from("<II", data, 12)
+          if json_type != 0x4E4F534A:
+              raise SystemExit("Player GLB does not start with a JSON chunk")
+          json_start = 20
+          json_end = json_start + json_length
+          document = json.loads(data[json_start:json_end].rstrip(b" \x00"))
+          seen = {}
+          renamed = []
+          for animation in document.get("animations", []):
+              name = animation.get("name")
+              if not name:
+                  continue
+              seen[name] = seen.get(name, 0) + 1
+              if seen[name] > 1:
+                  unique_name = f"{name}__duplicate_{seen[name]}"
+                  animation["name"] = unique_name
+                  renamed.append((name, unique_name))
+          if not renamed:
+              raise SystemExit("Expected duplicate player animation metadata was not found")
+          payload = json.dumps(document, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+          payload += b" " * ((4 - len(payload) % 4) % 4)
+          remainder = data[json_end:]
+          output = (
+              struct.pack("<4sII", magic, version, 12 + 8 + len(payload) + len(remainder))
+              + struct.pack("<II", len(payload), json_type)
+              + payload
+              + remainder
+          )
+          path.write_bytes(output)
+          print("Renamed duplicate GLB animations:", renamed)
+          PY
+
       - name: Enforce mobile renderer compatibility
         shell: bash
         run: |
@@ -2916,11 +2968,14 @@ jobs:
           )
           p.write_text(s)
 
-          environment_path = Path("game/level/geometry/environment.tres")
-          environment_text = environment_path.read_text()
-          if environment_text.count("volumetric_fog_enabled = true") != 1:
-              raise SystemExit("Expected one embedded volumetric fog setting")
-          environment_path.write_text(environment_text.replace("volumetric_fog_enabled = true", "volumetric_fog_enabled = false", 1))
+          for environment_path in (
+              Path("game/level/geometry/environment.tres"),
+              Path("game/menu/menu.tscn"),
+          ):
+              environment_text = environment_path.read_text()
+              if environment_text.count("volumetric_fog_enabled = true") != 1:
+                  raise SystemExit(f"Expected one embedded volumetric fog setting in {environment_path}")
+              environment_path.write_text(environment_text.replace("volumetric_fog_enabled = true", "volumetric_fog_enabled = false", 1))
           PY
 
       - name: Add license and build notes
@@ -3005,8 +3060,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=24
-          version/name="0.2.4-mobile-alpha"
+          version/code=25
+          version/name="0.2.5-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -3039,6 +3094,10 @@ jobs:
           cat /tmp/aim-assist-test.log
           if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log; then
             echo "PULSEFALL mobile validation detected a script/runtime failure."
+            exit 1
+          fi
+          if grep -Eiq 'ERROR: Animation name .* already exists|ERROR: Failed loading resource|ERROR: Condition "surfaces\.is_empty\(\)"' /tmp/import.log; then
+            echo "PULSEFALL mobile validation detected an asset import failure."
             exit 1
           fi
           if grep -Eiq 'FSR2 3D scaling is only available|Screen-space ambient occlusion .* only available|Volumetric fog is only available' /tmp/runtime.log; then
