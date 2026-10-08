@@ -15,6 +15,12 @@ on:
   schedule:
     - cron: '*/5 * * * *'
 
+# Keep one coherent four-lane render batch active at a time.
+# Scheduled triggers that arrive during a batch must not cancel its jobs.
+concurrency:
+  group: astra-v2-preload-batch
+  cancel-in-progress: false
+
 permissions:
   contents: read
   actions: read
@@ -25,9 +31,6 @@ jobs:
       fail-fast: false
       matrix:
         lane: [0, 1, 2, 3]
-    concurrency:
-      group: astra-v2-preload-${{ matrix.lane }}
-      cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 26
     env:
