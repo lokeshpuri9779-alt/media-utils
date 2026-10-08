@@ -3,7 +3,7 @@
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 5,
-  "confirmed_today": 4,
+  "confirmed_today": 5,
   "last_attempt_at": "2026-10-08T21:03:49.444097+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -52,19 +52,15 @@
       "video_id": "fNYTGVbINn8",
       "confirmed_at": "2026-10-08T20:40:26.397605+00:00",
       "title": "Commanders waive 2026 sixth-rounder Kaytron Allen #Shorts"
+    },
+    "trend-1cf1cb2629422903": {
+      "video_id": "EsuZTzIFYf0",
+      "confirmed_at": "2026-10-08T21:25:23.223614+00:00",
+      "title": "Fever's Clark denounces online hate directed at 'good soul' Mitchell #Shorts"
     }
   },
-  "pending": {
-    "EsuZTzIFYf0": {
-      "content_id": "trend-1cf1cb2629422903",
-      "title": "Fever's Clark denounces online hate directed at 'good soul' Mitchell #Shorts",
-      "day": "2026-10-09",
-      "uploaded_at": "2026-10-08T21:03:51.803198+00:00",
-      "genre": "current",
-      "format": "short"
-    }
-  },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "skipped",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
