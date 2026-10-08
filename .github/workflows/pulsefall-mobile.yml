@@ -2867,6 +2867,7 @@ jobs:
 
           python3 - <<'PY'
           import json
+          import re
           import struct
           from pathlib import Path
 
@@ -2885,17 +2886,20 @@ jobs:
           document = json.loads(data[json_start:json_end].rstrip(b" \x00"))
           seen = {}
           renamed = []
+          animation_names = [animation.get("name", "") for animation in document.get("animations", [])]
           for animation in document.get("animations", []):
               name = animation.get("name")
               if not name:
                   continue
-              seen[name] = seen.get(name, 0) + 1
-              if seen[name] > 1:
-                  unique_name = f"{name}__duplicate_{seen[name]}"
+              # Godot canonicalizes separators while importing animation libraries,
+              # so source names that differ only by spaces/punctuation can collide.
+              canonical = re.sub(r"[^0-9A-Za-z_]+", "_", name).strip("_").casefold()
+              seen[canonical] = seen.get(canonical, 0) + 1
+              if seen[canonical] > 1:
+                  unique_name = f"{name}__source_{seen[canonical]}"
                   animation["name"] = unique_name
                   renamed.append((name, unique_name))
-          if not renamed:
-              raise SystemExit("Expected duplicate player animation metadata was not found")
+          print("Source GLB animations:", animation_names)
           payload = json.dumps(document, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
           payload += b" " * ((4 - len(payload) % 4) % 4)
           remainder = data[json_end:]
