@@ -1,0 +1,64 @@
+name: ASTRA V2 - Preload Approved Videos
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '11,41 * * * *'
+
+concurrency:
+  group: astra-v2-preload
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  preload:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 26
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ASTRA_PRELOAD_BUFFER: '6'
+      ASTRA_LONG_ENABLED: '0'
+      ORT_DISABLE_TELEMETRY: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+      - name: Restore published and reserved IDs
+        run: |
+          git fetch origin astra-state
+          for f in performance.json astra_v2_state.json; do
+            git checkout origin/astra-state -- "$f" 2>/dev/null || true
+          done
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/astra-voice
+            ~/.cache/huggingface
+            asset_cache
+          key: astra-v2-media-cache-v1
+          restore-keys: astra-v2-media-cache-
+      - name: Install rendering stack
+        run: |
+          timeout 360s python -m pip install --disable-pip-version-check -r requirements.txt
+          command -v ffprobe >/dev/null || (timeout 180s sudo apt-get update -qq && timeout 180s sudo apt-get install -y ffmpeg)
+      - name: Enforce animation and caption collision guard
+        run: python -m unittest discover -s tests -p 'test_scene_layer_contract.py' -v
+      - name: Render and approve next original Short
+        id: render
+        run: python -m astra_v2.preload_worker
+      - name: Persist approved video in Actions artifact storage
+        if: steps.render.outputs.content_id != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-preloaded-${{ steps.render.outputs.content_id }}
+          path: preload-package/
+          if-no-files-found: error
+          retention-days: 7
