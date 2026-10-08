@@ -25,7 +25,7 @@ jobs:
     timeout-minutes: 26
     env:
       GH_TOKEN: ${{ github.token }}
-      ASTRA_PRELOAD_BUFFER: '6'
+      ASTRA_PRELOAD_BUFFER: '24'
       ASTRA_PRELOAD_LANES: '4'
       ASTRA_PRELOAD_LANE: '${{ matrix.lane }}'
       ASTRA_LONG_ENABLED: '0'
@@ -76,4 +76,4 @@ jobs:
           name: astra-preloaded-${{ steps.render.outputs.content_id }}
           path: preload-package/
           if-no-files-found: error
-          retention-days: 7
+          retention-days: 14
