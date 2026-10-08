@@ -40,21 +40,21 @@ def catalog(excluded_ids=(), max_candidates=12, excluded_titles=()):
     The Creative Director can reject any candidate. This is NOT an LLM.
     """
     blocked = set(excluded_ids)
+    # A serialized season advances only after the previous episode has been
+    # confirmed in the published/reserved identity set. No random resets.
+    # One canonical arc is deliberately stable across runs and workers.
     prior_titles = [str(title).casefold() for title in excluded_titles]
     used_settings = set()
     used_discoveries = set()
-    for previous in prior_titles:
-        for idx, (place, *_rest) in enumerate(SETTINGS):
-            if place in previous:
-                used_settings.add(idx)
-        for idx, (discovery, *_rest) in enumerate(DISCOVERIES):
-            if discovery in previous:
-                used_discoveries.add(idx)
     proposals = []
     used_titles = set()
     combinations = itertools.product(range(len(SETTINGS)), range(len(PROTAGONISTS)),
                                       range(len(DISCOVERIES)), range(len(ENDING)))
+    # Lock the first season to one protagonist, location and mystery.
+    # Episodes are numbered by a stable season-specific identifier.
     for a, b, c, d in combinations:
+        if (a, b, c) != (0, 0, 0):
+            continue
         # Spread candidates across combinations rather than changing only names.
         if (a + b + c + d) % 3:
             continue
@@ -69,13 +69,16 @@ def catalog(excluded_ids=(), max_candidates=12, excluded_titles=()):
         name, role = PROTAGONISTS[b]
         discovery, clue_visual, revelation = DISCOVERIES[c]
         community, payoff = ENDING[d]
-        cid = "rayvan-omniroute-local-" + hashlib.sha256(
-            f"{a}:{b}:{c}:{d}".encode()).hexdigest()[:18]
+        episode = d + 1
+        cid = f"rayvan-season-01-episode-{episode:02d}"
+        if any(f"rayvan-season-01-episode-{previous:02d}" not in blocked
+               for previous in range(1, episode)):
+            continue
         if cid in blocked:
             continue
         # Include the actual discovery and protagonist, rather than reusing
         # one headline for every different plot at a location.
-        title = f"{name} and {discovery.title()} at the {place.title()}"
+        title = f"The Tomorrow Signal | S1 E{episode:02d} | {name}"
         if len(title) > 85:
             title = f"{name}: {discovery.title()}"
         # Repeated titles look like mass-produced uploads; reject duplicates.
@@ -101,6 +104,9 @@ def catalog(excluded_ids=(), max_candidates=12, excluded_titles=()):
         ]
         proposals.append({
             "genre": "fiction", "kind": "microfiction",
+            "series_id": "the-tomorrow-signal-s1", "season": 1,
+            "episode": episode, "previous_episode_id": (
+                f"rayvan-season-01-episode-{episode-1:02d}" if episode > 1 else None),
             "production_ready": True, "content_id": cid, "title": title,
             "hook": beats[0][0],
             "question": f"What secret is hiding inside the {place}?",
@@ -108,7 +114,7 @@ def catalog(excluded_ids=(), max_candidates=12, excluded_titles=()):
             "source": "", "keywords": ["original science fiction", "microfiction"],
             "story_beats": [
                 {"headline": h, "speech": s, "visual": v, "label": label,
-                 "story_beat": role, "sub": "AN ORIGINAL RAYVAN STORY",
+                 "story_beat": role, "sub": f"THE TOMORROW SIGNAL · EP {episode}",
                  "duration": 1.0}
                 for h, s, v, label, role in beats
             ],
