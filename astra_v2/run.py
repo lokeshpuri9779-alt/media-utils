@@ -3,9 +3,10 @@ import json
 import os
 import tempfile
 from pathlib import Path
+from datetime import timedelta
 
 from astra_v2.control import (
-    QUOTA_REASONS, REPORT_FILE, STATE_FILE, due, quota_resume,
+    QUOTA_REASONS, REPORT_FILE, STATE_FILE, due, quota_resume, parse_time,
     read_json, state_for_day, utcnow, write_json,
 )
 from astra_v2.creative import CreativeSkip, make_candidate, make_long_candidate
@@ -64,6 +65,18 @@ def run():
         with Youtube(expected_id) as youtube:
             youtube_channel = youtube.authorize()
             report["confirmed_prior"] = reconcile(youtube, state)
+            # Learn from real YouTube views/likes/comments on a bounded cadence,
+            # even if this scheduled slot is not due to publish. This is
+            # observation, never purchased traffic or artificial engagement.
+            last_feedback = parse_time(state.get("last_feedback_attempt_at"))
+            if not last_feedback or utcnow() - last_feedback >= timedelta(hours=12):
+                state["last_feedback_attempt_at"] = utcnow().isoformat()
+                try:
+                    import cloud_once as legacy
+                    legacy.refresh_performance()
+                    report["feedback"] = "requested_public_statistics"
+                except Exception as feedback_error:
+                    report["feedback"] = "unavailable_" + type(feedback_error).__name__
             limit = min(48, max(1, int(os.getenv("ASTRA_MAX_DAILY_UPLOADS", "48"))))
             interval = max(25, int(os.getenv("ASTRA_MIN_UPLOAD_INTERVAL_MINUTES", "25")))
             allowed, reason = due(state, utcnow(), limit=limit, spacing_minutes=interval)
