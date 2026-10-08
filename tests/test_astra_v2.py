@@ -126,5 +126,20 @@ class QualityTests(unittest.TestCase):
                     inspect_video(video, fmt="short")
 
 
+
+class WatchdogTests(unittest.TestCase):
+    def test_watchdog_detects_stale_confirmed_video(self):
+        from astra_v2.health import assess
+        now = datetime(2026, 10, 9, 12, 0, tzinfo=timezone.utc)
+        state = state_for_day(None, now)
+        state["published"]["old"] = {"confirmed_at": (now - timedelta(hours=26)).isoformat()}
+        self.assertEqual(assess(state, now)[0], "unhealthy")
+
+    def test_watchdog_respects_initial_grace(self):
+        from astra_v2.health import assess
+        now = datetime(2026, 10, 9, 12, 0, tzinfo=timezone.utc)
+        state = state_for_day(None, now)
+        self.assertEqual(assess(state, now)[0], "healthy")
+
 if __name__ == "__main__":
     unittest.main()
