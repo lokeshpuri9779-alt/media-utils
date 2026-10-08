@@ -3,11 +3,6 @@ name: Astra Monetization Autopublish
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - '.github/workflows/astra-autopublish.yml'
-  schedule:
-    - cron: '*/5 * * * *'
 
 concurrency:
   group: astra-monetization-autopublish
