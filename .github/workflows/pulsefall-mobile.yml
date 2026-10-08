@@ -2747,6 +2747,12 @@ jobs:
               '\tif not mobile_renderer:\n\t\tenvironment.volumetric_fog_enabled = Settings.config_file.get_value("rendering", "volumetric_fog")'
           )
           p.write_text(s)
+
+          environment_path = Path("game/level/geometry/environment.tres")
+          environment_text = environment_path.read_text()
+          if environment_text.count("volumetric_fog_enabled = true") != 1:
+              raise SystemExit("Expected one embedded volumetric fog setting")
+          environment_path.write_text(environment_text.replace("volumetric_fog_enabled = true", "volumetric_fog_enabled = false", 1))
           PY
 
       - name: Add license and build notes
