@@ -2689,6 +2689,174 @@ jobs:
           script = ExtResource("1")
           PULSEFALL_SOURCE
 
+      - name: Make mobile aim assist respect cover
+        shell: bash
+        run: |
+          cat > game/mobile/aim_assist.gd <<'PULSEFALL_AIM'
+          extends RefCounted
+          
+          const MAX_RANGE := 60.0
+          const RADIUS_FRACTION := 150.0 / 720.0
+          
+          # Return the nearest visible enemy to the crosshair. Physics cover wins over
+          # screen proximity; a blocked candidate must not hide a visible alternative.
+          static func select_target(camera: Camera3D, screen_aim: Vector2, candidates: Array[Node], ray_origin: Vector3, exclude: Array[RID]) -> Node3D:
+          	var best: Node3D = null
+          	var viewport_size := camera.get_viewport().get_visible_rect().size
+          	var best_distance := minf(viewport_size.x, viewport_size.y) * RADIUS_FRACTION
+          	var space := camera.get_world_3d().direct_space_state
+          	for candidate in candidates:
+          		if not is_instance_valid(candidate) or not candidate is Node3D or candidate.is_queued_for_deletion():
+          			continue
+          		var target: Node3D = candidate
+          		var position := target.global_position + Vector3.UP * 1.2
+          		if ray_origin.distance_squared_to(position) > MAX_RANGE * MAX_RANGE or camera.is_position_behind(position):
+          			continue
+          		var screen_position := camera.unproject_position(position)
+          		if not Rect2(Vector2.ZERO, viewport_size).has_point(screen_position):
+          			continue
+          		var screen_distance := screen_position.distance_to(screen_aim)
+          		if screen_distance >= best_distance:
+          			continue
+          		var query := PhysicsRayQueryParameters3D.create(ray_origin, position, 0b11, exclude)
+          		var hit := space.intersect_ray(query)
+          		if not hit.is_empty():
+          			var collider: Node = hit.collider as Node
+          			if collider != target and (collider == null or not target.is_ancestor_of(collider)):
+          				continue
+          		best_distance = screen_distance
+          		best = target
+          	return best
+          
+          PULSEFALL_AIM
+
+          cat > game/mobile/aim_assist_test.gd <<'PULSEFALL_AIM'
+          extends Node3D
+          
+          const AimAssist = preload("res://mobile/aim_assist.gd")
+          var camera: Camera3D
+          var failures := 0
+          var checks := 0
+          
+          func check(value: bool, message: String) -> void:
+          	checks += 1
+          	if value:
+          		print("PASS: ", message)
+          	else:
+          		failures += 1
+          		push_error(message)
+          
+          func target_at(position: Vector3) -> Node3D:
+          	var target := Node3D.new()
+          	target.position = position
+          	add_child(target)
+          	var body := StaticBody3D.new()
+          	body.position.y = 1.2
+          	target.add_child(body)
+          	var shape := CollisionShape3D.new()
+          	var box := BoxShape3D.new()
+          	box.size = Vector3(0.8, 2.4, 0.8)
+          	shape.shape = box
+          	body.add_child(shape)
+          	return target
+          
+          func wall_at(position: Vector3) -> StaticBody3D:
+          	var wall := StaticBody3D.new()
+          	wall.position = position
+          	add_child(wall)
+          	var shape := CollisionShape3D.new()
+          	var box := BoxShape3D.new()
+          	box.size = Vector3(0.7, 4.0, 0.5)
+          	shape.shape = box
+          	wall.add_child(shape)
+          	return wall
+          
+          func synced() -> void:
+          	await get_tree().physics_frame
+          	await get_tree().physics_frame
+          
+          func select(candidates: Array[Node], excluded: Array[RID] = []) -> Node3D:
+          	return AimAssist.select_target(camera, camera.get_viewport().get_visible_rect().size * 0.5, candidates, camera.global_position, excluded)
+          
+          func _ready() -> void:
+          	call_deferred("_run")
+          
+          func _run() -> void:
+          	camera = Camera3D.new()
+          	camera.position = Vector3(0, 1.2, 0)
+          	add_child(camera)
+          	camera.make_current()
+          	await synced()
+          	check(select([]) == null, "empty enemy group leaves manual aim unchanged")
+          	var center := target_at(Vector3(0, 0, -10))
+          	await synced()
+          	check(select([center]) == center, "visible enemy collider child is accepted")
+          	var wall := wall_at(Vector3(0, 1.2, -5))
+          	await synced()
+          	check(select([center]) == null, "wall blocks crosshair target")
+          	var alternative := target_at(Vector3(1.8, 0, -10))
+          	await synced()
+          	check(select([center, alternative]) == alternative, "blocked nearest target does not hide visible alternative")
+          	wall.queue_free()
+          	await synced()
+          	check(select([alternative, center]) == center, "closest visible enemy wins independent of group order")
+          	var behind := target_at(Vector3(0, 0, 10))
+          	var distant := target_at(Vector3(0, 0, -80))
+          	var side := target_at(Vector3(100, 0, -10))
+          	await synced()
+          	check(select([behind]) == null, "enemy behind camera is rejected")
+          	check(select([distant]) == null, "enemy beyond assistance range is rejected")
+          	check(select([side]) == null, "off-screen enemy is rejected")
+          	var shooter := wall_at(Vector3(0, 1.2, -1))
+          	await synced()
+          	check(select([center], [shooter.get_rid()]) == center, "shooter's collision RID is excluded from visibility ray")
+          	shooter.queue_free()
+          	await synced()
+          	var dying := target_at(Vector3(0, 0, -8))
+          	await synced()
+          	dying.queue_free()
+          	check(select([dying]) == null, "enemy queued for removal is not targeted")
+          	print("AIM ASSIST CHECKS: ", checks, " FAILURES: ", failures)
+          	get_tree().quit(0 if failures == 0 else 1)
+          
+          PULSEFALL_AIM
+
+          cat > game/mobile/aim_assist_test.tscn <<'PULSEFALL_AIM'
+          [gd_scene load_steps=2 format=3]
+          [ext_resource type="Script" path="res://mobile/aim_assist_test.gd" id="1"]
+          [node name="AimAssistTests" type="Node3D"]
+          script = ExtResource("1")
+          
+          PULSEFALL_AIM
+
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("game/player/player_input.gd")
+          s = p.read_text()
+          anchor = 'class_name PlayerInputSynchronizer\nextends MultiplayerSynchronizer\n'
+          if s.count(anchor) != 1:
+              raise SystemExit("Player input class anchor missing")
+          s = s.replace(anchor, anchor + '\nconst AimAssist = preload("res://mobile/aim_assist.gd")\n', 1)
+          old = 'Array([self], TYPE_RID, "", null)'
+          if s.count(old) != 1:
+              raise SystemExit("Shooter collision exclusion anchor missing")
+          s = s.replace(old, '[get_parent().get_rid()]', 1)
+          start_marker = '\t\tif OS.has_feature("mobile"):\n\t\t\tvar best_target: Node3D = null'
+          end_marker = '\n\t# Fade out to black'
+          start = s.find(start_marker)
+          end = s.find(end_marker, start)
+          if start == -1 or end == -1:
+              raise SystemExit("Aim assist block anchors missing")
+          s = s[:start] + (
+              '\t\tif OS.has_feature("mobile"):\n'
+              '\t\t\tvar assist_origin: Vector3 = get_parent().shoot_from.global_position\n'
+              '\t\t\tvar best_target := AimAssist.select_target(camera_camera, ch_pos, get_tree().get_nodes_in_group("hostile"), assist_origin, [get_parent().get_rid()])\n'
+              '\t\t\tif best_target != null:\n'
+              '\t\t\t\tshoot_target = best_target.global_position + Vector3.UP * 1.2\n'
+          ) + s[end:]
+          p.write_text(s)
+          PY
+
       - name: Enforce mobile renderer compatibility
         shell: bash
         run: |
@@ -2809,7 +2977,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.apk"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -2837,8 +3005,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=23
-          version/name="0.2.3-mobile-alpha"
+          version/code=24
+          version/name="0.2.4-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -2861,12 +3029,15 @@ jobs:
           TEST_RC=$?
           timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/controls_test.tscn > /tmp/controls-test.log 2>&1
           CONTROLS_RC=$?
+          timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/aim_assist_test.tscn > /tmp/aim-assist-test.log 2>&1
+          AIM_RC=$?
           set -e
           cat /tmp/import.log
           cat /tmp/runtime.log
           cat /tmp/extraction-test.log
           cat /tmp/controls-test.log
-          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log; then
+          cat /tmp/aim-assist-test.log
+          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log; then
             echo "PULSEFALL mobile validation detected a script/runtime failure."
             exit 1
           fi
@@ -2874,8 +3045,8 @@ jobs:
             echo "PULSEFALL mobile validation detected unsupported renderer features."
             exit 1
           fi
-          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ]; then
-            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC"
+          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ]; then
+            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC"
             exit 1
           fi
 

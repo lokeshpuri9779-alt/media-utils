@@ -29,7 +29,7 @@ PULSEFALL does not ship merely because it reaches parity. Benchmark parity is th
 - P90 frame time: <=16.7 ms on 60 FPS tier; <=33.3 ms on 30 FPS tier.
 - Cold start internal target: <3.5 seconds on mid-tier reference device.
 - No known soft-lock, pit trap, save blocker, progression blocker or unrecoverable run state.
-- Package/download-size target: <=200 MB initial delivery where feasible; use AAB/PAD before sacrificing quality.
+- No arbitrary APK size gate. Optimize size only for demonstrated installation, distribution or performance problems.
 - Mobile UI must pass one-handed reachability/readability review and landscape thumb-zone review.
 - No monetization feature may reduce measured retention, completion, control satisfaction or combat satisfaction.
 
@@ -62,14 +62,14 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [x] Runtime/script smoke validation.
 - [x] Android SDK setup updated to current action.
 - [x] ETC2/ASTC texture import enabled for Android.
-- [ ] Produce first validated APK.
+- [x] Produce APK validated by Android export and automated runtime checks; real-device installation remains pending.
 - [ ] Verify package metadata, architecture and checksum.
 - [ ] Add AAB export path for Play Store release candidates.
 
 ### P1 — Core mobile game loop
 - [ ] Replace wave-only structure with 5–10 minute run.
 - [ ] Entry -> objective -> combat -> upgrade choice -> miniboss/boss -> extraction.
-- [ ] Extraction success/failure state.
+- [x] Extraction success/failure state, 60-second physical escape, retry checkpoints and duplicate reward protection (20 scripted checks).
 - [ ] Run rewards and risk/reward decisions.
 - [ ] Persistent meta-progression between runs.
 - [ ] Continue/resume after app backgrounding.
@@ -122,7 +122,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [ ] 4–8 GB RAM mid-range test profile.
 - [ ] Flagship test profile.
 - [ ] Cold-start and loading-time measurement.
-- [ ] Package/download-size optimization.
+- [ ] Investigate package size only if an installation, distribution or performance problem is demonstrated.
 
 ### P7 — QA / analytics
 - [ ] Automated regression tests for controls, combat, save, extraction and progression.
@@ -156,3 +156,11 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - Archero 2: roguelite choice frequency and run transformation.
 
 "100%" in this queue means all defined release gates are passed. It does not mean zero defects are mathematically possible; production games require continuous QA after launch.
+
+## Validated checkpoints and remaining evidence
+
+- Known-good rollback: commit b7f921eb (v0.2.3), Android workflow run 37772199634, successful export with 20 extraction/progression and 15 touch-control checks. Keep this artifact available.
+- Multitouch ownership, input release on focus/modal changes and touch aim hold are implemented and covered by automated checks.
+- Current batch: add line-of-sight targeting from the muzzle, correct shooter RID exclusion, range/off-screen filtering and viewport-relative aim radius. Ten physics checks are added to CI; their result must be inspected before treating this batch as validated.
+- Automated enemy defeats do not demonstrate player-controlled combat, human navigation, a complete player-controlled run, phone frame pacing or benchmark superiority. These gates remain open.
+- Highest unfinished evidence: full player-controlled objective-to-extraction run; controls/combat/navigation usability; low/mid/high-tier device installation, performance and thermal tests; measured comparisons against the benchmark set.
