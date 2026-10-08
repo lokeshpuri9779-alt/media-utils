@@ -406,37 +406,28 @@ def voice_plan(plan, genre, max_duration=59, voice_name='af_heart', voice_speed=
                  duration=max(float(s['min_duration']),len(samples)/RATE+.24))
         s['end']=s['start']+s['duration']
         cursor=s['end']
-    if cursor>max_duration:
-        # Dynamic stories can create more useful beats than the Shorts budget allows.
-        # First compress dead air; if narration alone still cannot fit, remove the
-        # lowest-priority optional beat and regenerate timing without touching
-        # reveal/evidence/payoff. This is editorial compression, not truncation.
-        protected={'reveal','evidence','payoff'}
-        while cursor>max_duration:
-            voice_total=sum(len(x['audio'])/RATE for x in plan)
-            min_total=sum(len(x['audio'])/RATE+.10 for x in plan)
-            if min_total<=max_duration:
-                overhead=max(0.0,cursor-voice_total)
-                target_overhead=max(0.0,max_duration-voice_total-.05)
-                ratio=min(1.0,target_overhead/max(.001,overhead))
-                cursor=0.0
-                for x in plan:
-                    voice_len=len(x['audio'])/RATE
-                    hold=max(voice_len+.10,voice_len+max(0.0,x['duration']-voice_len)*ratio)
-                    x.update(start=cursor,voice_start=cursor+.06,duration=hold,end=cursor+hold)
-                    cursor+=hold
-                break
-            optional=[(i,x) for i,x in enumerate(plan)
-                      if x.get('story_beat') not in protected and x.get('story_beat')!='cta']
-            if not optional: break
-            priority={'contrast':0,'map':1,'mechanism':2,'consequence':3,'uncertainty':4}
-            drop_i,_=min(optional,key=lambda z:priority.get(z[1].get('story_beat'),5))
-            plan.pop(drop_i)
-            cursor=0.0
-            for x in plan:
-                voice_len=len(x['audio'])/RATE
-                x.update(start=cursor,voice_start=cursor+.10,duration=voice_len+.18,end=cursor+voice_len+.18)
-                cursor=x['end']
+    if cursor > max_duration:
+        # Preserve every narrative beat. Dropping a setup or clue may produce
+        # a technically short video with an incoherent story.
+        voice_total = sum(len(x['audio']) / RATE for x in plan)
+        minimum_holds = sum(max(float(x['min_duration']), len(x['audio']) / RATE + .10)
+                            for x in plan)
+        if minimum_holds <= max_duration:
+            excess = cursor - minimum_holds
+            ratio = min(1.0, max(0.0, max_duration - minimum_holds - .05)
+                        / max(.001, excess))
+            cursor = 0.0
+            for item in plan:
+                floor = max(float(item['min_duration']), len(item['audio']) / RATE + .10)
+                hold = floor + max(0.0, item['duration'] - floor) * ratio
+                item.update(start=cursor, voice_start=cursor + .06,
+                            duration=hold, end=cursor + hold)
+                cursor += hold
+        else:
+            raise RuntimeError(
+                f'Narration too long without deleting story beats: '
+                f'{voice_total:.1f}s spoken, {minimum_holds:.1f}s required, '
+                f'{max_duration:.1f}s allowed. Revise narration before rendering.')
     # Use a bounded, natural cadence adjustment when the synthesized
     # narration is slightly short. Re-synthesize each spoken beat instead
     # of padding silence or slowing down encoded audio.
