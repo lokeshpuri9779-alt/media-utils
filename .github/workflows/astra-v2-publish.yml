@@ -148,6 +148,12 @@ jobs:
           data=json.loads(path.read_text()) if path.exists() else {'outcome':'failed_before_controller'}
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as summary:
               summary.write('## ASTRA V2 publishing status\n\n')
+              outcome=data.get('outcome')
+              url=data.get('video_url')
+              verified=bool(outcome=='published' and isinstance(url,str) and url.startswith('https://www.youtube.com/watch?v='))
+              summary.write('**Verified public video: ' + ('YES' if verified else 'NO') + '**\n\n')
+              if not verified:
+                  summary.write('A green GitHub Actions check is NOT proof of a new upload.\n\n')
               for key in ('outcome','video_url','reason','attempts_today','confirmed_today','pending','blocked_until'):
                   summary.write(f'- {key}: {data.get(key)}\n')
           PY
