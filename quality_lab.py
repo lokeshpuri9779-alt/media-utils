@@ -16,14 +16,16 @@ def structural_quality_penalties(report: dict) -> dict:
     penalties=[]
     score=100.0
 
+    genre = str(report.get("genre") or "").lower()
+    narrative = genre in {"fiction", "suspense", "thriller", "microfiction"}
     durations=[float(s.get("duration") or 0) for s in scenes if float(s.get("duration") or 0)>0]
     if durations:
         longest=max(durations)
-        if longest>4.8:
+        if not narrative and longest>4.8:
             p=min(18.0,(longest-4.8)*6.0)
             score-=p; penalties.append({"type":"static-shot","points":round(p,2),"detail":f"longest scene {longest:.2f}s"})
         spread=max(durations)-min(durations)
-        if len(durations)>=4 and spread<0.35:
+        if not narrative and len(durations)>=4 and spread<0.35:
             score-=8.0; penalties.append({"type":"uniform-pacing","points":8.0,"detail":"scene durations are too uniform"})
 
     signatures=[]
