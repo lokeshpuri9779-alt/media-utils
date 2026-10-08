@@ -44,6 +44,11 @@ def make_candidate(path, excluded_ids, excluded_titles):
     content_id = str(meta.get("content_id") or "").strip()
     if not (title and description and content_id):
         raise CreativeSkip("missing_story_identity_or_script")
+    # A previous legacy-loop edge case could return its final rejected render.
+    # V2 independently checks the final Creative Director decision.
+    director = meta.get("creative_director") or {}
+    if not director or not director.get("publish_allowed", False):
+        raise CreativeSkip("creative_director_did_not_approve")
     if meta.get("genre") in {"space", "tech", "football", "current"} and not meta.get("source"):
         raise CreativeSkip("unsourced_factual_claim")
     if meta.get("copyright_unlicensed") or meta.get("reused_third_party_media"):
