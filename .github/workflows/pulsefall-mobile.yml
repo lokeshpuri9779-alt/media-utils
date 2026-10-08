@@ -2936,14 +2936,14 @@ jobs:
           )
           source = replace_once(
               source,
-              "\tvar look_sensitivity := 0.0032\n",
-              "\tvar look_sensitivity_scale := 1.0\n\tvar aim_assist_strength := 1.0\n",
+              "var look_sensitivity := 0.0032\n",
+              "var look_sensitivity_scale := 1.0\nvar aim_assist_strength := 1.0\n",
               "look sensitivity variable",
           )
           source = replace_once(
               source,
-              "\tvar dash_button: Button\n\tvar button_touches: Dictionary = {}\n",
-              "\tvar dash_button: Button\n\tvar tuning_button: Button\n\tvar tuning_panel: Panel\n\tvar look_value_label: Label\n\tvar aim_value_label: Label\n\tvar look_minus_button: Button\n\tvar look_plus_button: Button\n\tvar aim_minus_button: Button\n\tvar aim_plus_button: Button\n\tvar tuning_close_button: Button\n\tvar button_touches: Dictionary = {}\n",
+              "var dash_button: Button\nvar button_touches: Dictionary = {}\n",
+              "var dash_button: Button\nvar tuning_button: Button\nvar tuning_panel: Panel\nvar look_value_label: Label\nvar aim_value_label: Label\nvar look_minus_button: Button\nvar look_plus_button: Button\nvar aim_minus_button: Button\nvar aim_plus_button: Button\nvar tuning_close_button: Button\nvar button_touches: Dictionary = {}\n",
               "mobile tuning variables",
           )
           source = replace_once(
