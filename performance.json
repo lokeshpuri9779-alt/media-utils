@@ -1515,41 +1515,52 @@
           "views": 8,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 8,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 8,
         "likes": 0,
         "comments": 0
       },
       "analytics_reports": {
         "window_start": "2026-10-04",
-        "window_end": "2026-10-06",
-        "checked_at": "2026-10-08T08:05:43.131673+05:30",
-        "retention": {
-          "status": "not_sampled"
-        },
+        "window_end": "2026-10-07",
+        "checked_at": "2026-10-08T20:37:51.194198+05:30",
         "basic": {
           "window_start": "2026-10-04",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "traffic_sources": {
           "window_start": "2026-10-04",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "geography": {
           "window_start": "2026-10-04",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
+          "status": "permission_error",
+          "error_type": "HTTPStatusError",
+          "http_status": 403
+        },
+        "retention": {
+          "window_start": "2026-10-04",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -3066,6 +3077,12 @@
           "views": 55,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 55,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "football",
@@ -3078,38 +3095,38 @@
       "voice": "Kokoro af_heart",
       "scene_count": 3,
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 55,
         "likes": 0,
         "comments": 0
       },
       "analytics_reports": {
         "window_start": "2026-10-04",
-        "window_end": "2026-10-06",
-        "checked_at": "2026-10-08T08:05:43.131673+05:30",
+        "window_end": "2026-10-07",
+        "checked_at": "2026-10-08T20:37:51.194198+05:30",
         "retention": {
           "status": "not_sampled"
         },
         "basic": {
           "window_start": "2026-10-04",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "traffic_sources": {
           "window_start": "2026-10-04",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "geography": {
           "window_start": "2026-10-04",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -4560,6 +4577,12 @@
           "views": 17,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 17,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "tech",
@@ -4574,7 +4597,7 @@
       "scene_count": 4,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 17,
         "likes": 0,
         "comments": 0
@@ -6049,6 +6072,12 @@
           "views": 4,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 4,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "fiction",
@@ -6063,7 +6092,7 @@
       "scene_count": 5,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 4,
         "likes": 0,
         "comments": 0
@@ -7520,6 +7549,12 @@
           "views": 109,
           "likes": 3,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 109,
+          "likes": 3,
+          "comments": 0
         }
       ],
       "genre": "space",
@@ -7534,7 +7569,7 @@
       "scene_count": 4,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 109,
         "likes": 3,
         "comments": 0
@@ -8973,6 +9008,12 @@
           "views": 8,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 8,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "fiction",
@@ -8987,7 +9028,7 @@
       "scene_count": 5,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 8,
         "likes": 0,
         "comments": 0
@@ -10409,6 +10450,12 @@
           "views": 3,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 3,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "challenge",
@@ -10423,7 +10470,7 @@
       "scene_count": 4,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 3,
         "likes": 0,
         "comments": 0
@@ -11827,6 +11874,12 @@
           "views": 3,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 3,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "football",
@@ -11841,7 +11894,7 @@
       "scene_count": 4,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 3,
         "likes": 0,
         "comments": 0
@@ -13239,6 +13292,12 @@
           "views": 3,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 3,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "renderer": "studio-1.1",
@@ -13251,7 +13310,7 @@
       "selection_reason": "weekly long-form slot; new sourced episode",
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 3,
         "likes": 0,
         "comments": 0
@@ -14619,6 +14678,12 @@
           "views": 2,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 2,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "space",
@@ -14639,7 +14704,7 @@
       "scene_count": 5,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 2,
         "likes": 0,
         "comments": 0
@@ -15947,6 +16012,12 @@
           "views": 7,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 7,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "football",
@@ -16041,7 +16112,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 7,
         "likes": 0,
         "comments": 0
@@ -17343,6 +17414,12 @@
           "views": 8,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 8,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "challenge",
@@ -17437,7 +17514,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 8,
         "likes": 0,
         "comments": 0
@@ -18733,6 +18810,12 @@
           "views": 1,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 1,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "challenge",
@@ -18827,7 +18910,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 1,
         "likes": 0,
         "comments": 0
@@ -20117,6 +20200,12 @@
           "views": 1,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 1,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "challenge",
@@ -20211,7 +20300,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 1,
         "likes": 0,
         "comments": 0
@@ -21495,6 +21584,12 @@
           "views": 3,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 3,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "challenge",
@@ -21589,7 +21684,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 3,
         "likes": 0,
         "comments": 0
@@ -22867,6 +22962,12 @@
           "views": 0,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 0,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "renderer": "studio-1.1",
@@ -22931,7 +23032,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 0,
         "likes": 0,
         "comments": 0
@@ -24203,6 +24304,12 @@
           "views": 20,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 20,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "current",
@@ -24325,7 +24432,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 20,
         "likes": 0,
         "comments": 0
@@ -25591,6 +25698,12 @@
           "views": 1,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 1,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "renderer": "studio-1.1",
@@ -25655,7 +25768,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 1,
         "likes": 0,
         "comments": 0
@@ -26915,6 +27028,12 @@
           "views": 3,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 3,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "current",
@@ -27041,7 +27160,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 3,
         "likes": 0,
         "comments": 0
@@ -28295,6 +28414,12 @@
           "views": 1,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 1,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "current",
@@ -28458,7 +28583,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 1,
         "likes": 0,
         "comments": 0
@@ -29706,6 +29831,12 @@
           "views": 10,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 10,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "current",
@@ -29869,7 +30000,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 10,
         "likes": 0,
         "comments": 0
@@ -31111,6 +31242,12 @@
           "views": 0,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 0,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "current",
@@ -31274,7 +31411,7 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 0,
         "likes": 0,
         "comments": 0
@@ -32510,6 +32647,12 @@
           "views": 1,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 1,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "current",
@@ -32673,38 +32816,43 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 1,
         "likes": 0,
         "comments": 0
       },
       "analytics_reports": {
         "window_start": "2026-10-06",
-        "window_end": "2026-10-06",
-        "checked_at": "2026-10-08T03:52:26.309255+05:30",
-        "retention": {
-          "status": "not_sampled"
-        },
+        "window_end": "2026-10-07",
+        "checked_at": "2026-10-08T20:37:51.194198+05:30",
         "basic": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T03:52:26.309255+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "traffic_sources": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T03:52:26.309255+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "geography": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T03:52:26.309255+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
+          "status": "permission_error",
+          "error_type": "HTTPStatusError",
+          "http_status": 403
+        },
+        "retention": {
+          "window_start": "2026-10-06",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -33903,6 +34051,12 @@
           "views": 1,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 1,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "current",
@@ -34066,38 +34220,43 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 1,
         "likes": 0,
         "comments": 0
       },
       "analytics_reports": {
         "window_start": "2026-10-06",
-        "window_end": "2026-10-06",
-        "checked_at": "2026-10-08T03:52:26.309255+05:30",
-        "retention": {
-          "status": "not_sampled"
-        },
+        "window_end": "2026-10-07",
+        "checked_at": "2026-10-08T20:37:51.194198+05:30",
         "basic": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T03:52:26.309255+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "traffic_sources": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T03:52:26.309255+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "geography": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T03:52:26.309255+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
+          "status": "permission_error",
+          "error_type": "HTTPStatusError",
+          "http_status": 403
+        },
+        "retention": {
+          "window_start": "2026-10-06",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -35290,6 +35449,12 @@
           "views": 2,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 2,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "current",
@@ -35453,43 +35618,38 @@
       "ai_disclosure_required": false,
       "visibility": "public",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 2,
         "likes": 0,
         "comments": 0
       },
       "analytics_reports": {
         "window_start": "2026-10-06",
-        "window_end": "2026-10-06",
-        "checked_at": "2026-10-08T08:05:43.131673+05:30",
+        "window_end": "2026-10-07",
+        "checked_at": "2026-10-08T20:37:51.194198+05:30",
+        "retention": {
+          "status": "not_sampled"
+        },
         "basic": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "traffic_sources": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "geography": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
-          "status": "permission_error",
-          "error_type": "HTTPStatusError",
-          "http_status": 403
-        },
-        "retention": {
-          "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -35724,36 +35884,31 @@
       },
       "analytics_reports": {
         "window_start": "2026-10-06",
-        "window_end": "2026-10-06",
-        "checked_at": "2026-10-08T08:05:43.131673+05:30",
+        "window_end": "2026-10-07",
+        "checked_at": "2026-10-08T20:37:51.194198+05:30",
+        "retention": {
+          "status": "not_sampled"
+        },
         "basic": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "traffic_sources": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "geography": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
-          "status": "permission_error",
-          "error_type": "HTTPStatusError",
-          "http_status": 403
-        },
-        "retention": {
-          "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -35984,36 +36139,31 @@
       },
       "analytics_reports": {
         "window_start": "2026-10-06",
-        "window_end": "2026-10-06",
-        "checked_at": "2026-10-08T08:05:43.131673+05:30",
+        "window_end": "2026-10-07",
+        "checked_at": "2026-10-08T20:37:51.194198+05:30",
+        "retention": {
+          "status": "not_sampled"
+        },
         "basic": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "traffic_sources": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "geography": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
-          "status": "permission_error",
-          "error_type": "HTTPStatusError",
-          "http_status": 403
-        },
-        "retention": {
-          "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -36213,31 +36363,31 @@
       },
       "analytics_reports": {
         "window_start": "2026-10-06",
-        "window_end": "2026-10-06",
-        "checked_at": "2026-10-08T08:05:43.131673+05:30",
+        "window_end": "2026-10-07",
+        "checked_at": "2026-10-08T20:37:51.194198+05:30",
         "retention": {
           "status": "not_sampled"
         },
         "basic": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "traffic_sources": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "geography": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -36431,31 +36581,31 @@
       },
       "analytics_reports": {
         "window_start": "2026-10-06",
-        "window_end": "2026-10-06",
-        "checked_at": "2026-10-08T08:05:43.131673+05:30",
+        "window_end": "2026-10-07",
+        "checked_at": "2026-10-08T20:37:51.194198+05:30",
         "retention": {
           "status": "not_sampled"
         },
         "basic": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "traffic_sources": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "geography": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -36607,31 +36757,31 @@
       },
       "analytics_reports": {
         "window_start": "2026-10-06",
-        "window_end": "2026-10-06",
-        "checked_at": "2026-10-08T08:05:43.131673+05:30",
+        "window_end": "2026-10-07",
+        "checked_at": "2026-10-08T20:37:51.194198+05:30",
         "retention": {
           "status": "not_sampled"
         },
         "basic": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "traffic_sources": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "geography": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -37752,6 +37902,12 @@
           "views": 7,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 7,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "space",
@@ -37868,38 +38024,38 @@
       "ai_disclosure_required": false,
       "visibility": "private",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 7,
         "likes": 0,
         "comments": 0
       },
       "analytics_reports": {
         "window_start": "2026-10-06",
-        "window_end": "2026-10-06",
-        "checked_at": "2026-10-08T08:05:43.131673+05:30",
+        "window_end": "2026-10-07",
+        "checked_at": "2026-10-08T20:37:51.194198+05:30",
         "retention": {
           "status": "not_sampled"
         },
         "basic": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "traffic_sources": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "geography": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -38906,6 +39062,12 @@
           "views": 7,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 7,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "space",
@@ -39092,38 +39254,38 @@
       "visibility": "private",
       "channel_key": "rayvan",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 7,
         "likes": 0,
         "comments": 0
       },
       "analytics_reports": {
         "window_start": "2026-10-06",
-        "window_end": "2026-10-06",
-        "checked_at": "2026-10-08T08:05:43.131673+05:30",
+        "window_end": "2026-10-07",
+        "checked_at": "2026-10-08T20:37:51.194198+05:30",
         "retention": {
           "status": "not_sampled"
         },
         "basic": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "traffic_sources": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
         },
         "geography": {
           "window_start": "2026-10-06",
-          "window_end": "2026-10-06",
-          "checked_at": "2026-10-08T08:05:43.131673+05:30",
+          "window_end": "2026-10-07",
+          "checked_at": "2026-10-08T20:37:51.194198+05:30",
           "status": "permission_error",
           "error_type": "HTTPStatusError",
           "http_status": 403
@@ -40124,6 +40286,12 @@
           "views": 2,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 2,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "space",
@@ -40350,7 +40518,7 @@
       "visibility": "private",
       "channel_key": "rayvan",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 2,
         "likes": 0,
         "comments": 0
@@ -41262,6 +41430,12 @@
           "views": 0,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 0,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "renderer": "studio-7.0.0",
@@ -41447,7 +41621,7 @@
       "visibility": "private",
       "channel_key": "rayvan",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 0,
         "likes": 0,
         "comments": 0
@@ -42071,6 +42245,12 @@
           "views": 0,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 0,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "renderer": "studio-7.0.0",
@@ -42252,7 +42432,7 @@
       "visibility": "private",
       "channel_key": "rayvan",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 0,
         "likes": 0,
         "comments": 0
@@ -42605,6 +42785,12 @@
           "views": 10,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 10,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "current",
@@ -42921,7 +43107,7 @@
       "visibility": "public",
       "channel_key": "rayvan",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 10,
         "likes": 0,
         "comments": 0
@@ -43268,6 +43454,12 @@
           "views": 7,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 7,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "genre": "current",
@@ -43589,7 +43781,7 @@
       "visibility": "public",
       "channel_key": "rayvan",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 7,
         "likes": 0,
         "comments": 0
@@ -43912,6 +44104,12 @@
           "views": 0,
           "likes": 0,
           "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 0,
+          "likes": 0,
+          "comments": 0
         }
       ],
       "renderer": "studio-7.1.0",
@@ -44095,7 +44293,7 @@
       "visibility": "public",
       "channel_key": "rayvan",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 0,
         "likes": 0,
         "comments": 0
@@ -44183,6 +44381,12 @@
         {
           "at": "2026-10-08T20:24:32.959787+05:30",
           "views": 121,
+          "likes": 5,
+          "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 132,
           "likes": 5,
           "comments": 0
         }
@@ -44492,8 +44696,8 @@
       "visibility": "public",
       "channel_key": "rayvan",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
-        "views": 121,
+        "at": "2026-10-08T20:37:50.939050+05:30",
+        "views": 132,
         "likes": 5,
         "comments": 0
       }
@@ -44522,6 +44726,12 @@
         },
         {
           "at": "2026-10-08T20:24:32.959787+05:30",
+          "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
           "views": 0,
           "likes": 0,
           "comments": 0
@@ -44707,7 +44917,7 @@
       "visibility": "public",
       "channel_key": "rayvan",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
+        "at": "2026-10-08T20:37:50.939050+05:30",
         "views": 0,
         "likes": 0,
         "comments": 0
@@ -44732,6 +44942,12 @@
         {
           "at": "2026-10-08T20:24:32.959787+05:30",
           "views": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "at": "2026-10-08T20:37:50.939050+05:30",
+          "views": 1,
           "likes": 0,
           "comments": 0
         }
@@ -45074,8 +45290,8 @@
       "visibility": "public",
       "channel_key": "rayvan",
       "latest": {
-        "at": "2026-10-08T20:24:32.959787+05:30",
-        "views": 0,
+        "at": "2026-10-08T20:37:50.939050+05:30",
+        "views": 1,
         "likes": 0,
         "comments": 0
       }
@@ -45638,280 +45854,280 @@
   "analytics_state": {
     "schema_version": 2,
     "status": "error",
-    "checked_at": "2026-10-08T16:31:18.286367+05:30",
+    "checked_at": "2026-10-08T20:37:51.194198+05:30",
     "videos_updated": 0,
     "eligible_videos": 12,
     "queries_attempted": 39,
     "queries_succeeded": 0,
     "failures": [
       {
-        "video_id": "VxZ11C6YlHw",
+        "video_id": "Pi-uWk-iQTM",
         "report": "basic",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "VxZ11C6YlHw",
+        "video_id": "Pi-uWk-iQTM",
         "report": "traffic_sources",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "VxZ11C6YlHw",
+        "video_id": "Pi-uWk-iQTM",
         "report": "geography",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "VxZ11C6YlHw",
+        "video_id": "Pi-uWk-iQTM",
         "report": "retention",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "fS3um0qjkpw",
+        "video_id": "hVQX6qTnhxs",
         "report": "basic",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "fS3um0qjkpw",
+        "video_id": "hVQX6qTnhxs",
         "report": "traffic_sources",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "fS3um0qjkpw",
+        "video_id": "hVQX6qTnhxs",
         "report": "geography",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "fS3um0qjkpw",
+        "video_id": "hVQX6qTnhxs",
         "report": "retention",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "a6EoxouGeAA",
+        "video_id": "AylgPKVhyOc",
         "report": "basic",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "a6EoxouGeAA",
+        "video_id": "AylgPKVhyOc",
         "report": "traffic_sources",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "a6EoxouGeAA",
+        "video_id": "AylgPKVhyOc",
         "report": "geography",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "a6EoxouGeAA",
+        "video_id": "AylgPKVhyOc",
         "report": "retention",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "JH06Ww48QSY",
+        "video_id": "iIAOAnkpr28",
         "report": "basic",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "JH06Ww48QSY",
+        "video_id": "iIAOAnkpr28",
         "report": "traffic_sources",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "JH06Ww48QSY",
+        "video_id": "iIAOAnkpr28",
         "report": "geography",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "NqTER7AD_pA",
+        "video_id": "8vn5Gc5b9Vc",
         "report": "basic",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "NqTER7AD_pA",
+        "video_id": "8vn5Gc5b9Vc",
         "report": "traffic_sources",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "NqTER7AD_pA",
+        "video_id": "8vn5Gc5b9Vc",
         "report": "geography",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "GtpKT6InlFg",
+        "video_id": "d-rcTs8ghhM",
         "report": "basic",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "GtpKT6InlFg",
+        "video_id": "d-rcTs8ghhM",
         "report": "traffic_sources",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "GtpKT6InlFg",
+        "video_id": "d-rcTs8ghhM",
         "report": "geography",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "qPsBi9WASSo",
+        "video_id": "_Ae-qA_6s5A",
         "report": "basic",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "qPsBi9WASSo",
+        "video_id": "_Ae-qA_6s5A",
         "report": "traffic_sources",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "qPsBi9WASSo",
+        "video_id": "_Ae-qA_6s5A",
         "report": "geography",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "qAo9WKIpiPQ",
+        "video_id": "ir5U7JvpXOI",
         "report": "basic",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "qAo9WKIpiPQ",
+        "video_id": "ir5U7JvpXOI",
         "report": "traffic_sources",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "qAo9WKIpiPQ",
+        "video_id": "ir5U7JvpXOI",
         "report": "geography",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "r-bSQjcY0JI",
+        "video_id": "SH3Z65UuXuo",
         "report": "basic",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "r-bSQjcY0JI",
+        "video_id": "SH3Z65UuXuo",
         "report": "traffic_sources",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "r-bSQjcY0JI",
+        "video_id": "SH3Z65UuXuo",
         "report": "geography",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "fr9zFOWXrtA",
+        "video_id": "eU8AwRVPG14",
         "report": "basic",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "fr9zFOWXrtA",
+        "video_id": "eU8AwRVPG14",
         "report": "traffic_sources",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "fr9zFOWXrtA",
+        "video_id": "eU8AwRVPG14",
         "report": "geography",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "zgKo72KTQkc",
+        "video_id": "4m5UiWfj94k",
         "report": "basic",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "zgKo72KTQkc",
+        "video_id": "4m5UiWfj94k",
         "report": "traffic_sources",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "zgKo72KTQkc",
+        "video_id": "4m5UiWfj94k",
         "report": "geography",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "O5F85LCx1Aw",
+        "video_id": "SJi_9S3Mf2I",
         "report": "basic",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "O5F85LCx1Aw",
+        "video_id": "SJi_9S3Mf2I",
         "report": "traffic_sources",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
         "http_status": 403
       },
       {
-        "video_id": "O5F85LCx1Aw",
+        "video_id": "SJi_9S3Mf2I",
         "report": "geography",
         "status": "permission_error",
         "error_type": "HTTPStatusError",
@@ -45938,7 +46154,7 @@
   },
   "community": {
     "status": "awaiting_scope",
-    "checked_at": "2026-10-08T20:24:33.218272+05:30",
+    "checked_at": "2026-10-08T20:37:51.194198+05:30",
     "reply_day": "2026-10-08",
     "replies_today": 0,
     "credential_source": "community-web-client",
@@ -45953,7 +46169,7 @@
     "message": "Stored GitHub OAuth tokens do not grant youtube.force-ssl; automatic replies remain disabled."
   },
   "strategy": {
-    "updated_at": "2026-10-08T16:31:18.286367+05:30",
+    "updated_at": "2026-10-08T20:37:51.194198+05:30",
     "mode": "explore",
     "genre_scores": {},
     "genre_weights": {},
@@ -46496,7 +46712,7 @@
     "renderer_diagnostic_required": false,
     "last_success_at": "2026-10-08T19:28:02.348256+05:30",
     "rejected_before_success": 0,
-    "last_quality_skip_at": "2026-10-08T20:24:32.277585+05:30",
+    "last_quality_skip_at": "2026-10-08T20:37:50.144206+05:30",
     "last_quality_skip_reason": "Creative Engine rejected all candidates; skipping rather than publishing weak/template content.",
     "last_failures": [
       {
@@ -46525,7 +46741,7 @@
   "channel_memories": {
     "rayvan": {
       "channel_key": "rayvan",
-      "updated_at": "2026-10-08T14:54:34.309733+00:00",
+      "updated_at": "2026-10-08T15:07:58.885676+00:00",
       "video_count": 41,
       "genre_counts": {
         "unknown": 1,
