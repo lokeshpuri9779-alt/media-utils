@@ -9,6 +9,7 @@ from quality_lab import evaluate_studio_render
 from astra_v2.creative import inspect_video
 
 def main():
+    print("ASTRA V2 offline smoke: real render, no YouTube credentials or upload")
     failures=[]
     with tempfile.TemporaryDirectory(prefix="astra-v2-smoke-") as tmp:
         target=Path(tmp)/"preview.mp4"
