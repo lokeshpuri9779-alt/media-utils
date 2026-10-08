@@ -8,13 +8,15 @@ import os
 import re
 import urllib.error
 import urllib.request
+from astra_v2.spending_policy import paid_openai_allowed, assert_no_paid_api
 
 VISUALS = {"planet", "robot", "signal", "ship", "forest", "door"}
 ROLES = {"reveal", "build", "mechanism", "twist", "payoff"}
 
 
 def enabled():
-    return (os.getenv("ASTRA_OPENAI_ENABLED") == "1"
+    return (paid_openai_allowed()
+            and os.getenv("ASTRA_OPENAI_ENABLED") == "1"
             and os.getenv("ASTRA_OPENAI_ALLOW_PAID_API") == "1"
             and bool(os.getenv("OPENAI_API_KEY")))
 
@@ -23,6 +25,7 @@ def generate(excluded_ids, excluded_titles):
     """Return a validated original microfiction story, or None when disabled."""
     if not enabled():
         return None
+    assert_no_paid_api()
     model = os.getenv("ASTRA_OPENAI_TEXT_MODEL", "gpt-4.1-mini")
     if not re.fullmatch(r"[A-Za-z0-9._-]{1,80}", model):
         raise ValueError("Invalid configured OpenAI model")
