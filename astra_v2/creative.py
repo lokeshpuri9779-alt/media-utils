@@ -125,7 +125,8 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 + "\nSubscribe: https://www.youtube.com/channel/" + legacy.expected_channel_id())
             break
         except Exception as exc:
-            print("Premium candidate rejected:", story.get("content_id"), type(exc).__name__)
+            print("Premium candidate rejected:", story.get("content_id"),
+                  type(exc).__name__, str(exc)[:250])
     else:
         if lane_count > 1:
             raise CreativeSkip('no_approved_candidate_in_preload_lane')
