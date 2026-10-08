@@ -34,6 +34,7 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       ASTRA_PRELOAD_BUFFER: '24'
       ASTRA_PRELOAD_LANES: '4'
+      ASTRA_SERIALIZED_PRELOAD: '1'
       ASTRA_PRELOAD_LANE: '${{ matrix.lane }}'
       ASTRA_LONG_ENABLED: '0'
       ASTRA_OPENAI_ENABLED: '0'
