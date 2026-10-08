@@ -3,7 +3,7 @@
   "day": "2026-10-08",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 5,
-  "confirmed_today": 4,
+  "confirmed_today": 5,
   "last_attempt_at": "2026-10-08T18:12:44.932684+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -27,19 +27,15 @@
       "video_id": "kcTJNI1uFwA",
       "confirmed_at": "2026-10-08T17:58:21.520029+00:00",
       "title": "The Song From the Empty Ship | Original Microfiction"
+    },
+    "rayvan-original-lasttree-v1": {
+      "video_id": "c4pdkFdJ1Ao",
+      "confirmed_at": "2026-10-08T18:24:29.918461+00:00",
+      "title": "The Library Beneath the Last Tree | Original Microfiction"
     }
   },
-  "pending": {
-    "c4pdkFdJ1Ao": {
-      "content_id": "rayvan-original-lasttree-v1",
-      "title": "The Library Beneath the Last Tree | Original Microfiction",
-      "day": "2026-10-08",
-      "uploaded_at": "2026-10-08T18:12:46.288259+00:00",
-      "genre": "fiction",
-      "format": "short"
-    }
-  },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
