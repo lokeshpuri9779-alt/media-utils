@@ -67,8 +67,59 @@ class YoutubeTests(unittest.TestCase):
                 token_response.json.return_value = {"access_token": "temporary"}
                 youtube.client.post = Mock(return_value=token_response)
                 youtube.get = Mock(return_value={"items": [{"id": "UC_other_123456789"}]})
-                with self.assertRaisesRegex(RuntimeError, "different channel"):
+                with self.assertRaisesRegex(RuntimeError, "channel_mismatch"):
                     youtube.authorize()
+        finally:
+            youtube.client.close()
+
+    def test_invalid_grant_reason_is_reported_safely(self):
+        response = Mock()
+        response.json.return_value = {"error": "invalid_grant",
+                                      "error_description": "Sensitive server message"}
+        self.assertEqual(reason_for(response), "invalid_grant")
+
+    def test_fallback_oauth_preserves_exact_channel_lock(self):
+        expected = "UCc9fHSuRnqq_C2C0DpLyRRg"
+        youtube = Youtube(expected)
+        failed = Mock(status_code=400)
+        failed.json.return_value = {"error": "invalid_grant"}
+        worked = Mock(status_code=200)
+        worked.json.return_value = {"access_token": "temporary-access-token"}
+        try:
+            with patch.dict("os.environ", {
+                "YOUTUBE_CLIENT_ID": "id-primary",
+                "YOUTUBE_CLIENT_SECRET": "secret-primary",
+                "YOUTUBE_REFRESH_TOKEN": "invalid-refresh",
+                "YOUTUBE_COMMUNITY_CLIENT_ID": "id-community",
+                "YOUTUBE_COMMUNITY_CLIENT_SECRET": "secret-community",
+                "YOUTUBE_COMMUNITY_REFRESH_TOKEN": "valid-refresh",
+                "ASTRA_OAUTH_PRIORITY": "primary",
+            }, clear=True):
+                youtube.client.post = Mock(side_effect=[failed, worked])
+                youtube.get = Mock(return_value={
+                    "items": [{"id": expected, "contentDetails": {}}]})
+                self.assertEqual(youtube.authorize()["id"], expected)
+                self.assertEqual(youtube.credential_alias, "community")
+                self.assertEqual(youtube.client.post.call_count, 2)
+        finally:
+            youtube.client.close()
+
+    def test_channel_mismatched_backup_is_refused(self):
+        youtube = Youtube("UCc9fHSuRnqq_C2C0DpLyRRg")
+        good_refresh = Mock(status_code=200)
+        good_refresh.json.return_value = {"access_token": "temporary"}
+        try:
+            with patch.dict("os.environ", {
+                "YOUTUBE_COMMUNITY_CLIENT_ID": "cid",
+                "YOUTUBE_COMMUNITY_CLIENT_SECRET": "csecret",
+                "YOUTUBE_COMMUNITY_REFRESH_TOKEN": "refresh",
+            }, clear=True):
+                youtube.client.post = Mock(return_value=good_refresh)
+                youtube.get = Mock(return_value={
+                    "items": [{"id": "UCwrongchannel123456789"}]})
+                with self.assertRaisesRegex(RuntimeError, "channel_mismatch"):
+                    youtube.authorize()
+                self.assertIsNone(youtube.token)
         finally:
             youtube.client.close()
 
