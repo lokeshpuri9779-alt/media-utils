@@ -36,5 +36,5 @@ jobs:
           if gh release view pulsefall-mobile-latest --repo "${{ github.repository }}" >/dev/null 2>&1; then
             gh release upload pulsefall-mobile-latest               PULSEFALL_MOBILE_LATEST.apk               PULSEFALL_MOBILE_LATEST.apk.sha256               --repo "${{ github.repository }}"               --clobber
           else
-            gh release create pulsefall-mobile-latest               PULSEFALL_MOBILE_LATEST.apk               PULSEFALL_MOBILE_LATEST.apk.sha256               --repo "${{ github.repository }}"               --target 37772199634               --title "PULSEFALL Mobile Latest Validated APK"               --notes "Validated Android APK from successful CI run 37772199634. Development build; not a store release."               --prerelease
+            gh release create pulsefall-mobile-latest               PULSEFALL_MOBILE_LATEST.apk               PULSEFALL_MOBILE_LATEST.apk.sha256               --repo "${{ github.repository }}"               --target b7f921eb9985aab2ab9179eb91f7d7c41c42bcaa               --title "PULSEFALL Mobile Latest Validated APK"               --notes "Validated Android APK from successful CI run 37772199634. Development build; not a store release."               --prerelease
           fi
