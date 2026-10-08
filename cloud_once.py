@@ -678,12 +678,16 @@ def choose_content(data, trends, now=None, excluded_ids=None, excluded_titles=No
         # Never allow three consecutive uploads from one genre.
         if len(last_genres) >= 2 and last_genres[0] == last_genres[1]:
             diverse = [x for x in candidates if x.get('genre') != last_genres[0]]
-            if diverse:
+            if any(x.get('genre') == 'current' or (x.get('premium_story') and x.get('production_ready')) for x in diverse):
                 candidates = diverse
         # Prefer a genre not used in the previous two uploads whenever possible.
         recent_genres = set(last_genres[:2])
         rotated = [x for x in candidates if x.get('genre') not in recent_genres]
-        if rotated:
+        # Never let a soft genre preference eliminate every fresh sourced
+        # current story in favor of unapproved fallback candidates.
+        viable_rotated = [x for x in rotated if x.get('genre') == 'current'
+                          or (x.get('premium_story') and x.get('production_ready'))]
+        if viable_rotated:
             candidates = rotated
     # Explicitly suppress Windows-shortcut fatigue: only one tech explainer
     # may appear inside the latest five tracked uploads.
