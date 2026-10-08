@@ -4,8 +4,8 @@ name: ASTRA V2 - Verified YouTube Publisher
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/30 * * * *'
-    - cron: '7,37 * * * *'
+    - cron: '*/7 * * * *'
+    - cron: '3,17,31,45,59 * * * *'
 
 concurrency:
   group: astra-v2-publishing
