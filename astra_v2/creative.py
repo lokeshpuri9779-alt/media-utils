@@ -34,9 +34,12 @@ def make_candidate(path, excluded_ids, excluded_titles):
     # First use original curated premium stories; only fall back to the
     # broader learned idea engine if none passes every existing quality gate.
     from premium_stories import catalog
+    from astra_v2.original_stories import catalog as original_catalog
     from studio_renderer import render_short
     from quality_lab import evaluate_studio_render
-    premium_stories = catalog()
+    # Original fiction has a unique storyboard, consistent RAYVAN identity and
+    # no copied video. It still MUST pass the real full-render Creative Director.
+    premium_stories = original_catalog() + catalog()
     print("Premium pool:", len(premium_stories), "seen IDs:", len(excluded_ids),
           "seen titles:", len(excluded_titles))
     for story in premium_stories:
