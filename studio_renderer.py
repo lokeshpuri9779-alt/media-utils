@@ -406,67 +406,9 @@ def voice_plan(plan, genre, max_duration=59, voice_name='af_heart', voice_speed=
                  duration=max(float(s['min_duration']),len(samples)/RATE+.24))
         s['end']=s['start']+s['duration']
         cursor=s['end']
-    if cursor > max_duration:
-        # Preserve every narrative beat. Dropping a setup or clue may produce
-        # a technically short video with an incoherent story.
-        voice_total = sum(len(x['audio']) / RATE for x in plan)
-        minimum_holds = sum(max(float(x['min_duration']), len(x['audio']) / RATE + .10)
-                            for x in plan)
-        if minimum_holds <= max_duration:
-            excess = cursor - minimum_holds
-            ratio = min(1.0, max(0.0, max_duration - minimum_holds - .05)
-                        / max(.001, excess))
-            cursor = 0.0
-            for item in plan:
-                floor = max(float(item['min_duration']), len(item['audio']) / RATE + .10)
-                hold = floor + max(0.0, item['duration'] - floor) * ratio
-                item.update(start=cursor, voice_start=cursor + .06,
-                            duration=hold, end=cursor + hold)
-                cursor += hold
-        else:
-            raise RuntimeError(
-                f'Narration too long without deleting story beats: '
-                f'{voice_total:.1f}s spoken, {minimum_holds:.1f}s required, '
-                f'{max_duration:.1f}s allowed. Revise narration before rendering.')
-    # Use a bounded, natural cadence adjustment when the synthesized
-    # narration is slightly short. Re-synthesize each spoken beat instead
-    # of padding silence or slowing down encoded audio.
-    if genre in {'fiction', 'suspense'} and 48.0 <= cursor < 55.0:
-        original_speed = voice_speed
-        for factor in (0.96, 0.92, 0.88):
-            trial = []
-            trial_cursor = 0.0
-            valid = True
-            for item in plan:
-                spoken = str(item['speech']).strip().replace('; ', '. ').replace('  ', ' ')
-                samples, rate = engine.create(
-                    spoken, voice=voice_name, speed=original_speed * factor, lang='en-us')
-                samples = np.asarray(samples, dtype=np.float32)
-                if rate != RATE or len(samples) == 0 or not np.isfinite(samples).all():
-                    valid = False
-                    break
-                peak = float(np.max(np.abs(samples)))
-                if peak > 0:
-                    samples = samples * (.65 / peak)
-                duration = max(float(item['min_duration']), len(samples) / RATE + .24)
-                trial.append((samples, trial_cursor, duration))
-                trial_cursor += duration
-            if valid and 55.0 <= trial_cursor <= max_duration:
-                for item, (samples, start, duration) in zip(plan, trial):
-                    item.update(audio=samples, start=start, voice_start=start + .08,
-                                duration=duration, end=start + duration)
-                cursor = trial_cursor
-                print(f'ASTRA_VOICE_CADENCE_REPAIR: {original_speed:.3f} -> '
-                      f'{original_speed * factor:.3f}, duration={cursor:.2f}s')
-                break
-    # Fail before frame encoding: the publishing contract requires a full
-    # 55-59 second Short. Do not stretch sparse narration into dead air.
-    minimum_duration = 55.0
-    if not minimum_duration <= cursor <= max_duration:
-        raise RuntimeError(
-            f'Video narration duration {cursor:.1f}s outside publishable '
-            f'{minimum_duration:.0f}-{max_duration:.0f}s; '
-            'revise the script and render again.')
+    # Narration is allowed to run for its natural complete duration.
+    # Preserve all spoken beats; never reject or re-synthesize solely to
+    # satisfy an arbitrary narration-length target.
     return cursor
 
 
