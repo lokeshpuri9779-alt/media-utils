@@ -4,6 +4,7 @@ import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
 from astra_v2.control import due, quota_resume, state_for_day, write_json, read_json
@@ -79,7 +80,10 @@ class YoutubeTests(unittest.TestCase):
         self.assertEqual(reconcile(youtube, state), [])
         self.assertEqual(state["confirmed_today"], 0)
         youtube.status.return_value = {"privacyStatus": "public", "uploadStatus": "processed"}
-        self.assertEqual(reconcile(youtube, state), ["vid123"])
+        # Reconciliation can be tested without importing the heavy Studio runtime.
+        with patch.dict("sys.modules", {"cloud_once": SimpleNamespace(CONTENT_META={},
+                             record_video=lambda video_id, title: None)}):
+            self.assertEqual(reconcile(youtube, state), ["vid123"])
         self.assertEqual(state["confirmed_today"], 1)
         self.assertIn("story-123", state["published"])
 
