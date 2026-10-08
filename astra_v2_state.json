@@ -3,7 +3,7 @@
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 7,
-  "confirmed_today": 6,
+  "confirmed_today": 7,
   "last_attempt_at": "2026-10-08T23:54:06.584606+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -62,19 +62,15 @@
       "video_id": "CW1Km6X0_hs",
       "confirmed_at": "2026-10-08T23:53:32.793138+00:00",
       "title": "Mara and A Small Ship With No Passengers at the Abandoned Observatory"
+    },
+    "rayvan-omniroute-local-0bc942d384c8ddc300": {
+      "video_id": "L3TFNbRZILg",
+      "confirmed_at": "2026-10-08T23:55:37.438670+00:00",
+      "title": "Ivo and A Door That Appears At Midnight at the Abandoned Observatory"
     }
   },
-  "pending": {
-    "L3TFNbRZILg": {
-      "content_id": "rayvan-omniroute-local-0bc942d384c8ddc300",
-      "title": "Ivo and A Door That Appears At Midnight at the Abandoned Observatory",
-      "day": "2026-10-09",
-      "uploaded_at": "2026-10-08T23:54:07.992856+00:00",
-      "genre": "fiction",
-      "format": "short"
-    }
-  },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
