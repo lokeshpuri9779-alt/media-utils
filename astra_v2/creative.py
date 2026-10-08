@@ -35,8 +35,11 @@ def make_candidate(path, excluded_ids, excluded_titles):
     from premium_stories import catalog
     from studio_renderer import render_short
     from quality_lab import evaluate_studio_render
-    for story in catalog():
-        if not story.get("production_ready"):
+    premium_stories = catalog()
+    print("Premium pool:", len(premium_stories), "seen IDs:", len(excluded_ids),
+          "seen titles:", len(excluded_titles))
+    for story in premium_stories:
+        if not (story.get("production_ready") or story.get("validation_candidate")):
             continue
         if story["content_id"] in excluded_ids or story["title"].casefold().strip() in excluded_titles:
             continue
@@ -44,6 +47,8 @@ def make_candidate(path, excluded_ids, excluded_titles):
             rendered = render_short(story, path)
             evaluation = evaluate_studio_render(story, rendered, video_path=path)
             if not evaluation.get("pass"):
+                print("Premium QA rejected:", story["content_id"],
+                      (evaluation.get("director") or {}).get("action"))
                 continue
             legacy.CONTENT_META = {
                 "genre": story["genre"], "content_id": story["content_id"],
