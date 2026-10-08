@@ -32,10 +32,11 @@ def make_candidate(path, excluded_ids, excluded_titles):
     from ypp_safety import enforce
     # First use original curated premium stories; only fall back to the
     # broader learned idea engine if none passes every existing quality gate.
-    from premium_stories import catalog
+    from premium_stories import catalog as prior_catalog
+    from astra_v2.original_stories import catalog as original_catalog
     from studio_renderer import render_short
     from quality_lab import evaluate_studio_render
-    premium_stories = catalog()
+    premium_stories = original_catalog() + prior_catalog()
     print("Premium pool:", len(premium_stories), "seen IDs:", len(excluded_ids),
           "seen titles:", len(excluded_titles))
     for story in premium_stories:
@@ -56,8 +57,12 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 "renderer": rendered.get("renderer"), "format": "short",
             }
             title = story["title"]
+            if story["genre"] == "fiction":
+                attribution = "\nOriginal fictional story. No real person or event is depicted."
+            else:
+                attribution = "\nSource: " + story.get("source", "")
             description = (story["question"] + "\n" + story["answer"]
-                + "\nSource: " + story.get("source", "")
+                + attribution
                 + "\nOriginal visuals; AI-assisted synthetic narration. #Shorts"
                 + "\nSubscribe: https://www.youtube.com/channel/" + legacy.expected_channel_id())
             break
