@@ -91,8 +91,8 @@ def make_candidate(path, excluded_ids, excluded_titles):
         raise ValueError("Invalid preload lane index")
     if lane_count > 1:
         premium_stories = [story for story in premium_stories
-                           if (int(story["episode"]) - 1) % lane_count == lane_index
-                           if story.get("series_id")] + [
+                           if story.get("series_id")
+                           and (int(story["episode"]) - 1) % lane_count == lane_index] + [
                                story for story in premium_stories
                                if not story.get("series_id")
                                and int.from_bytes(hashlib.sha256(str(story.get("content_id", "")).encode()).digest()[:8], "big") % lane_count == lane_index]
