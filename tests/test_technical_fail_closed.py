@@ -13,7 +13,11 @@ class TechnicalFailClosedTests(unittest.TestCase):
         }
         result = evaluate(report)
         self.assertFalse(result["publish_allowed"])
-        self.assertIn("technical_validation_failed", result["hard_failures"])
+        self.assertIn("technical_validation_missing_or_failed", result["hard_failures"])
+
+    def test_missing_technical_evidence_blocks(self):
+        report = {"genre": "fiction", "creative": {k + "_score": 100 for k in ("hook", "retention", "visual", "novelty", "coherence")}, "scene_analysis": {"pacing_score": 100}, "audio": {"score": 100}, "captions": {"score": 100}}
+        self.assertFalse(evaluate(report)["publish_allowed"])
 
 if __name__ == "__main__":
     unittest.main()
