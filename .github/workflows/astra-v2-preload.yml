@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        lane: [0, 1]
+        lane: [0, 1, 2, 3]
     concurrency:
       group: astra-v2-preload-${{ matrix.lane }}
       cancel-in-progress: false
@@ -26,7 +26,7 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       ASTRA_PRELOAD_BUFFER: '6'
-      ASTRA_PRELOAD_LANES: '2'
+      ASTRA_PRELOAD_LANES: '4'
       ASTRA_PRELOAD_LANE: '${{ matrix.lane }}'
       ASTRA_LONG_ENABLED: '0'
       ASTRA_OPENAI_ENABLED: '0'
