@@ -2689,6 +2689,67 @@ jobs:
           script = ExtResource("1")
           PULSEFALL_SOURCE
 
+      - name: Enforce mobile renderer compatibility
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path("game/menu/settings.gd")
+          s = p.read_text()
+
+          def replace_once(old, new):
+              global s
+              if s.count(old) != 1:
+                  raise SystemExit("Expected one mobile graphics anchor: " + repr(old))
+              s = s.replace(old, new, 1)
+
+          # Use settings the mobile renderer actually supports on a fresh install.
+          replace_once(
+              'scale_filter = Viewport.SCALING_3D_MODE_METALFX_TEMPORAL if metalfx_supported else Viewport.SCALING_3D_MODE_FSR2,',
+              'scale_filter = Viewport.SCALING_3D_MODE_BILINEAR,'
+          )
+          replace_once('ssao_quality = RenderingServer.ENV_SSAO_QUALITY_MEDIUM,', 'ssao_quality = -1,  # Unsupported by the mobile renderer')
+          replace_once('volumetric_fog = true,', 'volumetric_fog = false,')
+
+          # Clamp previously saved desktop settings too, so upgrades do not retain
+          # unsupported FSR2/SSAO/SSIL/fog options from older builds.
+          signature = 'func apply_graphics_settings(window: Window, environment: Environment, scene_root: Node) -> void:\n'
+          replace_once(
+              signature,
+              signature + '\tvar mobile_renderer := str(ProjectSettings.get_setting("rendering/renderer/rendering_method", "")) == "mobile" or OS.has_feature("mobile")\n'
+          )
+          replace_once(
+              '\twindow.scaling_3d_mode = Settings.config_file.get_value("video", "scale_filter")',
+              '\twindow.scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR if mobile_renderer else Settings.config_file.get_value("video", "scale_filter")'
+          )
+          replace_once(
+              '\twindow.use_taa = Settings.config_file.get_value("rendering", "taa")',
+              '\twindow.use_taa = false if mobile_renderer else Settings.config_file.get_value("rendering", "taa")'
+          )
+
+          start_marker = '\tif Settings.config_file.get_value("rendering", "ssao_quality") == -1:\n'
+          end_marker = '\n\tenvironment.glow_enabled = Settings.config_file.get_value("rendering", "bloom")'
+          start = s.find(start_marker)
+          end = s.find(end_marker, start)
+          if start == -1 or end == -1:
+              raise SystemExit("Mobile post-processing block anchors missing")
+          desktop_block = s[start:end]
+          desktop_block = ''.join('\t' + line for line in desktop_block.splitlines(keepends=True))
+          safe_block = (
+              '\tif mobile_renderer:\n'
+              '\t\tenvironment.ssao_enabled = false\n'
+              '\t\tenvironment.ssil_enabled = false\n'
+              '\telse:\n' + desktop_block
+          )
+          s = s[:start] + safe_block + s[end:]
+          replace_once(
+              '\tenvironment.volumetric_fog_enabled = Settings.config_file.get_value("rendering", "volumetric_fog")',
+              '\tif not mobile_renderer:\n\t\tenvironment.volumetric_fog_enabled = Settings.config_file.get_value("rendering", "volumetric_fog")'
+          )
+          p.write_text(s)
+          PY
+
       - name: Add license and build notes
         shell: bash
         run: |
@@ -2771,8 +2832,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=22
-          version/name="0.2.2-mobile-alpha"
+          version/code=23
+          version/name="0.2.3-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -2802,6 +2863,10 @@ jobs:
           cat /tmp/controls-test.log
           if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log; then
             echo "PULSEFALL mobile validation detected a script/runtime failure."
+            exit 1
+          fi
+          if grep -Eiq 'FSR2 3D scaling is only available|Screen-space ambient occlusion .* only available|Volumetric fog is only available' /tmp/runtime.log; then
+            echo "PULSEFALL mobile validation detected unsupported renderer features."
             exit 1
           fi
           if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ]; then
