@@ -99,6 +99,38 @@ def catalog(excluded_ids=(), max_candidates=12, excluded_titles=()):
              f"{name} warned {community}. Nobody believed the story at first. Then the lights flickered, exactly as predicted. Neighbors followed the instructions together, and {payoff}. But the mysterious sender never revealed their name.",
              visual, "THE PAYOFF", "payoff"),
         ]
+        # Each installment advances the same mystery instead of replaying
+        # the discovery with a different closing sentence.
+        episode_arcs = {
+            1: (
+                "Mara found a radio blinking inside the abandoned observatory. It spoke tomorrow's date, then warned that every light in the city would go out before dawn. The radio had no batteries. Someone had scratched Mara's name into its metal case.",
+                "She traced a cable beneath the floorboards and discovered a room that did not appear on the building plans. A second radio waited inside, broadcasting her own voice. It was counting down from sixty, although she had never recorded the message.",
+                "When Mara unplugged the cable, the countdown continued. Outside, the first streetlights went dark. Her recorded voice whispered that the blackout was not an accident. Someone was using the city's power to open a door beneath the observatory.",
+                "Mara grabbed the radio and ran for the stairs. A heavy door slammed shut behind her. The final message arrived in a voice she recognized: her missing brother's. He said, 'Do not let them turn the lights back on.'"
+            ),
+            2: (
+                "Mara's missing brother had just spoken through a radio that predicted tomorrow. She followed his warning and left the city dark. Beneath the observatory, the locked door began to glow, and something knocked from the other side.",
+                "She found an emergency generator, but its switch was marked with the same symbol carved into her brother's old notebook. His last entry said the door opened only when the city was fully powered. Someone had lied about the blackout.",
+                "A stranger arrived carrying a photograph of Mara standing beside the door. The picture was dated next week. In it, her brother stood behind her, older than he should have been, holding a key made of blue glass.",
+                "Mara refused to start the generator. The stranger smiled and pressed a hidden switch. Lights returned across the city, one block at a time. From beneath the floor, the knocking stopped. Then a voice said, 'Thank you for opening it.'"
+            ),
+            3: (
+                "The city's lights came back, and the observatory door opened by itself. Mara expected to find her brother. Instead she saw the same city, abandoned and silent, under a sky without stars. Footprints led from the doorway toward her.",
+                "A small clock lay on the floor, ticking backward. Its face displayed tomorrow's date. Mara stepped across the threshold and heard the radio announce a new warning: only one version of the city could survive sunrise.",
+                "She found her brother's jacket hanging on a chair, but the name stitched inside belonged to the stranger. On the wall were hundreds of photographs showing Mara making different choices. Every picture ended with the same empty streets.",
+                "Mara turned back toward the door. On the other side stood another Mara, holding the blue glass key. The double whispered, 'You are the one who came through last time.' Then both radios began counting down together."
+            ),
+            4: (
+                "Two versions of Mara faced each other across the observatory doorway. One held the blue glass key. Both radios counted down to sunrise, and neither city had enough time left to understand what the key would unlock.",
+                "The other Mara explained that the warning came from a future where the door had never closed. Every attempt to save one city erased another. The missing brother had stayed behind to keep the passage from spreading.",
+                "Mara realized the radios were not predicting disasters. They were sending memories backward from failed timelines. She broke the glass key in half and handed one piece to her double. The countdown froze for the first time.",
+                "The door sealed, and stars returned to both skies. But when Mara reached home, her brother's notebook contained a new page. It showed a drawing of a second door beneath the sea, with tomorrow's date written underneath."
+            ),
+        }
+        if episode in episode_arcs:
+            speeches = episode_arcs[episode]
+            beats = [(headline, speeches[i], visual_id, label, role)
+                     for i, (headline, _speech, visual_id, label, role) in enumerate(beats)]
         proposals.append({
             "genre": "fiction", "kind": "microfiction",
             "series_id": "the-tomorrow-signal-s1", "season": 1,
