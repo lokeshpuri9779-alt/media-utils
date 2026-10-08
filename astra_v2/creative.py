@@ -40,6 +40,16 @@ def make_candidate(path, excluded_ids, excluded_titles):
     # Original fiction has a unique storyboard, consistent RAYVAN identity and
     # no copied video. It still MUST pass the real full-render Creative Director.
     premium_stories = original_catalog() + catalog()
+    # Explicitly opted-in paid model may propose a new story; the generated
+    # storyboard still goes through the same renderer and QA as curated work.
+    from astra_v2.openai_creative import enabled as openai_enabled, generate as openai_generate
+    if openai_enabled():
+        try:
+            generated = openai_generate(excluded_ids, excluded_titles)
+            if generated:
+                premium_stories.insert(0, generated)
+        except (RuntimeError, ValueError, KeyError, json.JSONDecodeError) as exc:
+            print("OpenAI story skipped:", type(exc).__name__)
     print("Premium pool:", len(premium_stories), "seen IDs:", len(excluded_ids),
           "seen titles:", len(excluded_titles))
     for story in premium_stories:
