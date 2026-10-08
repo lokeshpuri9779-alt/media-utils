@@ -63,10 +63,25 @@ def take(excluded_ids, excluded_titles, output):
     """
     from astra_v2.creative import inspect_video
     repo = os.environ.get("GITHUB_REPOSITORY", "")
+    # Rendering can run in parallel; publication cannot skip story episodes.
+    # Only confirmed published IDs unlock the following installment.
+    from astra_v2.control import STATE_FILE, read_json, state_for_day
+    published = set(state_for_day(read_json(STATE_FILE)).get("published", {}))
     for entry in sorted(artifacts(), key=lambda a: a.get("created_at", "")):
         cid = str(entry["name"])[len(PREFIX):]
         if cid in excluded_ids or "/" in cid or ".." in cid:
             continue
+        if cid.startswith("rayvan-season-01-episode-"):
+            try:
+                number = int(cid.rsplit("-", 1)[-1])
+            except ValueError:
+                continue
+            if not 1 <= number <= 4:
+                continue
+            if any(f"rayvan-season-01-episode-{n:02d}" not in published
+                   for n in range(1, number)):
+                print("ASTRA_SERIES_WAITING_FOR_PUBLICATION=" + cid)
+                continue
         run_id = (entry.get("workflow_run") or {}).get("id")
         if not run_id:
             continue
