@@ -30,6 +30,30 @@ def inspect_video(path, fmt="short"):
             "width": width, "height": height}
 
 
+def narration_word_count(story):
+    """Count spoken words, not headings or on-screen labels."""
+    return sum(len(str(beat.get("speech") or "").split())
+               for beat in (story.get("story_beats") or []))
+
+
+def script_duration_preflight(story, minimum_words=105):
+    """Avoid expensive renders of scripts too short for a full-length Short.
+
+    A word count is a conservative screening heuristic, not a guarantee of
+    actual voice duration. The final ffprobe validation remains authoritative.
+    """
+    beats = story.get("story_beats") or []
+    if not beats:
+        return True  # Other legacy story formats use their own renderer.
+    words = narration_word_count(story)
+    if words < minimum_words:
+        print("ASTRA_SCRIPT_REJECTED=" + json.dumps({
+            "content_id": story.get("content_id"), "words": words,
+            "minimum_words": minimum_words, "reason": "insufficient_narration"}))
+        return False
+    return True
+
+
 def make_candidate(path, excluded_ids, excluded_titles):
     import cloud_once as legacy
     from ypp_safety import enforce
@@ -68,6 +92,8 @@ def make_candidate(path, excluded_ids, excluded_titles):
         if not (story.get("production_ready") or story.get("validation_candidate")):
             continue
         if story["content_id"] in excluded_ids or story["title"].casefold().strip() in excluded_titles:
+            continue
+        if not script_duration_preflight(story):
             continue
         try:
             rendered = render_short(story, path)
