@@ -42,8 +42,8 @@ def state_for_day(data=None, now=None):
     now = now or utcnow()
     day = now.astimezone(IST).date().isoformat()
     baseline = {
-        "version": 2, "day": day, "attempts": 0,
-        "confirmed_today": 0, "last_attempt_at": "", "blocked_until": "",
+        "version": 2, "day": day, "created_at": now.isoformat(),
+        "attempts": 0, "confirmed_today": 0, "last_attempt_at": "", "blocked_until": "",
         "quota_reason": "", "published": {}, "pending": {},
         "last_outcome": "new", "last_error": "",
     }
