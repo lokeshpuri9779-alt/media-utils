@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 1,
-  "confirmed_today": 0,
-  "last_attempt_at": "2026-10-08T18:37:32.565792+00:00",
+  "attempts": 2,
+  "confirmed_today": 1,
+  "last_attempt_at": "2026-10-08T19:12:56.008360+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -32,15 +32,20 @@
       "video_id": "c4pdkFdJ1Ao",
       "confirmed_at": "2026-10-08T18:24:29.918461+00:00",
       "title": "The Library Beneath the Last Tree | Original Microfiction"
+    },
+    "moon-tidal-lock-v1": {
+      "video_id": "JHMIm9uypBo",
+      "confirmed_at": "2026-10-08T18:52:39.518832+00:00",
+      "title": "Why We Always See the Same Side of the Moon"
     }
   },
   "pending": {
-    "JHMIm9uypBo": {
-      "content_id": "moon-tidal-lock-v1",
-      "title": "Why We Always See the Same Side of the Moon",
+    "aR8F1STzZ0Q": {
+      "content_id": "trend-8f22f6943e2488f5",
+      "title": "Meet the Nobel Peace Prize Contenders Who Could Beat Trump This Year #Shorts",
       "day": "2026-10-09",
-      "uploaded_at": "2026-10-08T18:37:35.326927+00:00",
-      "genre": "space",
+      "uploaded_at": "2026-10-08T19:12:58.087112+00:00",
+      "genre": "current",
       "format": "short"
     }
   },
@@ -75,6 +80,11 @@
     "moon-tidal-lock-v1": {
       "at": "2026-10-08T18:37:32.565777+00:00",
       "title": "Why We Always See the Same Side of the Moon",
+      "result": "accepted"
+    },
+    "trend-8f22f6943e2488f5": {
+      "at": "2026-10-08T19:12:56.008344+00:00",
+      "title": "Meet the Nobel Peace Prize Contenders Who Could Beat Trump This Year #Shorts",
       "result": "accepted"
     }
   },
