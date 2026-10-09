@@ -90,6 +90,7 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_openai_creative.py' -v
           python -m unittest discover -s tests -p 'test_free_story_engine.py' -v
+          python -m unittest discover -s tests -p 'test_procedural_stories.py' -v
           python -m unittest discover -s tests -p 'test_omniroute_local.py' -v
       - name: Render and approve next original Short
         id: render
