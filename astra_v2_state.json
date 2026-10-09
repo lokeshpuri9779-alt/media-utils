@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 32,
-  "confirmed_today": 31,
-  "last_attempt_at": "2026-10-09T17:10:03.213340+00:00",
+  "attempts": 33,
+  "confirmed_today": 32,
+  "last_attempt_at": "2026-10-09T17:30:23.996645+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -187,14 +187,19 @@
       "video_id": "ehd-0MwC0AU",
       "confirmed_at": "2026-10-09T17:09:25.723671+00:00",
       "title": "Mara and the A Sealed Letter Addressed To Tomorrow at A Floating Market"
+    },
+    "rayvan-procedural-78fdd19954d1d9fb": {
+      "video_id": "-IQvqfvhhLo",
+      "confirmed_at": "2026-10-09T17:29:42.193431+00:00",
+      "title": "Mara and the A Map at A Floating Market"
     }
   },
   "pending": {
-    "-IQvqfvhhLo": {
-      "content_id": "rayvan-procedural-78fdd19954d1d9fb",
-      "title": "Mara and the A Map at A Floating Market",
+    "w2tkWpYdE90": {
+      "content_id": "rayvan-procedural-43696d2cef8007bf",
+      "title": "Mara and the A Tiny Machine at A Floating Market",
       "day": "2026-10-09",
-      "uploaded_at": "2026-10-09T17:10:04.966536+00:00",
+      "uploaded_at": "2026-10-09T17:30:25.658819+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -385,6 +390,11 @@
     "rayvan-procedural-78fdd19954d1d9fb": {
       "at": "2026-10-09T17:10:03.213321+00:00",
       "title": "Mara and the A Map at A Floating Market",
+      "result": "accepted"
+    },
+    "rayvan-procedural-43696d2cef8007bf": {
+      "at": "2026-10-09T17:30:23.996629+00:00",
+      "title": "Mara and the A Tiny Machine at A Floating Market",
       "result": "accepted"
     }
   },
