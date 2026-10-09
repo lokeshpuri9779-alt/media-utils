@@ -51,6 +51,8 @@ def catalog(excluded_ids=None, limit=32):
     """Return deterministic unseen candidates, bounded to protect CPU render lanes."""
     excluded = set(excluded_ids or ())
     limit = max(0, min(int(limit), 128))
+    if limit == 0:
+        return []
     result = []
     seen_plot_keys = set()
     seen_mysteries = Counter()
