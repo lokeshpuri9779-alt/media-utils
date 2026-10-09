@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 12,
+  "attempts": 13,
   "confirmed_today": 12,
-  "last_attempt_at": "2026-10-09T09:58:07.255973+00:00",
+  "last_attempt_at": "2026-10-09T10:05:34.952651+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -94,8 +94,17 @@
       "title": "Mara and A Door That Appears At Midnight at the Abandoned Observatory"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "DArHteNrgSA": {
+      "content_id": "rayvan-free-original-1e5869965be72db7",
+      "title": "The Ship That Delivered Yesterday",
+      "day": "2026-10-09",
+      "uploaded_at": "2026-10-09T10:05:36.583465+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -181,6 +190,11 @@
     "rayvan-omniroute-local-9362e6ba90983565e4": {
       "at": "2026-10-09T09:58:07.255959+00:00",
       "title": "Mara and A Door That Appears At Midnight at the Abandoned Observatory",
+      "result": "accepted"
+    },
+    "rayvan-free-original-1e5869965be72db7": {
+      "at": "2026-10-09T10:05:34.952635+00:00",
+      "title": "The Ship That Delivered Yesterday",
       "result": "accepted"
     }
   },
