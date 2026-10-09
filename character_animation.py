@@ -63,6 +63,76 @@ REFERENCE_PROFILES = {
         "transition": "action-led cuts and occasional light-match transitions",
         "continuity": "maintain faces, costumes, props and spatial relationships across shots",
     },
+    "stop_motion": {
+        "render_style": "handcrafted stop-motion animation",
+        "character_design": "tactile clay and miniature puppet characters",
+        "lighting": "warm studio lighting",
+        "lens": "macro cinematic lens",
+        "camera": ["slow tracking", "parallax reveal", "close-up", "wide establishing"],
+        "framing": "vertical cinematic composition with clear focal subject",
+        "environment": "tabletop miniature set",
+        "motion": "pose-to-pose puppet motion",
+        "shot_seconds": [1.8, 3.5],
+        "text_policy": "minimal text, no explainer cards",
+        "transition": "action-motivated cuts",
+        "continuity": "preserve characters, materials, wardrobe and environment",
+    },
+    "anime_action": {
+        "render_style": "dynamic hand-drawn anime action",
+        "character_design": "expressive inked characters with bold silhouettes",
+        "lighting": "dramatic cel-shaded lighting",
+        "lens": "energetic tracking camera",
+        "camera": ["slow tracking", "parallax reveal", "close-up", "wide establishing"],
+        "framing": "vertical cinematic composition with clear focal subject",
+        "environment": "layered painted scenery",
+        "motion": "impact frames and expressive gestures",
+        "shot_seconds": [1.8, 3.5],
+        "text_policy": "minimal text, no explainer cards",
+        "transition": "action-motivated cuts",
+        "continuity": "preserve characters, materials, wardrobe and environment",
+    },
+    "storybook_watercolor": {
+        "render_style": "animated watercolor storybook",
+        "character_design": "soft illustrated characters with painterly outlines",
+        "lighting": "diffused golden light",
+        "lens": "gentle parallax camera",
+        "camera": ["slow tracking", "parallax reveal", "close-up", "wide establishing"],
+        "framing": "vertical cinematic composition with clear focal subject",
+        "environment": "watercolor paper landscapes",
+        "motion": "subtle breathing motion and flowing paint",
+        "shot_seconds": [1.8, 3.5],
+        "text_policy": "minimal text, no explainer cards",
+        "transition": "action-motivated cuts",
+        "continuity": "preserve characters, materials, wardrobe and environment",
+    },
+    "neon_noir": {
+        "render_style": "neon noir animated thriller",
+        "character_design": "graphic silhouettes and cinematic character acting",
+        "lighting": "wet neon reflections and strong rim light",
+        "lens": "low angle cinematic camera",
+        "camera": ["slow tracking", "parallax reveal", "close-up", "wide establishing"],
+        "framing": "vertical cinematic composition with clear focal subject",
+        "environment": "rainy city streets with deep perspective",
+        "motion": "slow suspenseful motion and drifting rain",
+        "shot_seconds": [1.8, 3.5],
+        "text_policy": "minimal text, no explainer cards",
+        "transition": "action-motivated cuts",
+        "continuity": "preserve characters, materials, wardrobe and environment",
+    },
+    "underwater_fantasy": {
+        "render_style": "immersive underwater animation",
+        "character_design": "expressive marine characters and floating costumes",
+        "lighting": "caustic sunlight and bioluminescence",
+        "lens": "floating tracking camera",
+        "camera": ["slow tracking", "parallax reveal", "close-up", "wide establishing"],
+        "framing": "vertical cinematic composition with clear focal subject",
+        "environment": "layered coral and deep blue water",
+        "motion": "buoyant motion and flowing particles",
+        "shot_seconds": [1.8, 3.5],
+        "text_policy": "minimal text, no explainer cards",
+        "transition": "action-motivated cuts",
+        "continuity": "preserve characters, materials, wardrobe and environment",
+    },
     "family_3d_animal_comedy": {
         "render_style": "polished family-friendly stylized 3D animation",
         "character_design": "anthropomorphic animals with rounded proportions, large expressive eyes, readable paws and exaggerated facial acting",
@@ -87,6 +157,16 @@ def choose_character_variant(story: dict) -> str:
         return "family_3d_animal_comedy"
     if any(x in tone for x in ("funny","comedy","monkey","reaction","prank","chaos")):
         return "semi_real_character_comedy"
+    if any(x in tone for x in ("clay", "puppet", "miniature", "stop motion")):
+        return "stop_motion"
+    if any(x in tone for x in ("anime", "samurai", "ninja", "battle", "sword")):
+        return "anime_action"
+    if any(x in tone for x in ("watercolor", "storybook", "fairytale", "picture book")):
+        return "storybook_watercolor"
+    if any(x in tone for x in ("detective", "cyberpunk", "neon", "noir", "rainy city")):
+        return "neon_noir"
+    if any(x in tone for x in ("underwater", "ocean", "mermaid", "coral", "submarine")):
+        return "underwater_fantasy"
     if any(x in tone for x in ("spaceship", "comet", "mars", "rover", "orbital", "constellation", "starship")):
         return "cinematic_sci_fi"
     if any(x in tone for x in ("magic", "enchanted", "forest", "living tree", "fairy", "mystical")):
