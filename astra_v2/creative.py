@@ -48,6 +48,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
     # broader learned idea engine if none passes every existing quality gate.
     from premium_stories import catalog
     from astra_v2.original_stories import catalog as original_catalog
+    from astra_v2.procedural_stories import catalog as procedural_catalog
     from astra_v2.anthology_stories import catalog as anthology_catalog
     from astra_v2.free_story_engine import catalog as free_catalog
     from astra_v2.omniroute_local import catalog as routed_catalog
@@ -61,7 +62,8 @@ def make_candidate(path, excluded_ids, excluded_titles):
     series_stories = routed_catalog(excluded_ids, excluded_titles=excluded_titles)
     serialized_preload = os.getenv("ASTRA_SERIALIZED_PRELOAD", "0") == "1"
     premium_stories = (series_stories if serialized_preload else
-                       series_stories + anthology_catalog() + free_catalog() + original_catalog() + catalog())
+                       series_stories + anthology_catalog() + free_catalog() + original_catalog() + catalog()
+                       + procedural_catalog(excluded_ids, limit=128))
     # Fail loudly in diagnostics when every prewritten story is already consumed.
     # This does not silently recycle scripts or promise infinite original plots.
     available_count = sum(
