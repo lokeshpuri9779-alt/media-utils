@@ -35,6 +35,34 @@ REFERENCE_PROFILES = {
         "transition": "hard cuts on reaction/action",
         "continuity": "preserve character identity, clothing, location and prop continuity",
     },
+    "cinematic_sci_fi": {
+        "render_style": "cinematic science fiction animation with volumetric depth",
+        "character_design": "distinct silhouettes, consistent suits and expressive faces",
+        "lighting": "atmospheric colored practical lights and motivated rim lighting",
+        "lens": "wide establishing lenses alternating with intimate close-ups",
+        "camera": ["orbital tracking shot", "low-angle dolly in", "parallax reveal", "slow crane rise"],
+        "framing": "immersive full-frame vertical action with foreground and background layers",
+        "environment": "detailed spaceships, stations, alien landscapes and drifting particles",
+        "motion": "purposeful character acting, moving environment layers and physical camera travel",
+        "shot_seconds": [2.0, 4.0],
+        "text_policy": "no presentation cards; only necessary story captions",
+        "transition": "motivated match cuts and cinematic hard cuts",
+        "continuity": "keep identical characters, suits, vehicles and location geometry",
+    },
+    "magical_fantasy": {
+        "render_style": "stylized animated fantasy film with painterly materials",
+        "character_design": "appealing expressive characters with clear readable gestures",
+        "lighting": "soft enchanted glow, warm bounce and luminous particles",
+        "lens": "cinematic medium shots with occasional sweeping wide shots",
+        "camera": ["floating camera drift", "spiral reveal", "foreground parallax", "gentle push-in"],
+        "framing": "character-centered vertical compositions with layered magical environments",
+        "environment": "enchanted forests, mysterious doors, floating lights and living landscapes",
+        "motion": "expressive body acting, fabric follow-through and environmental magical motion",
+        "shot_seconds": [1.8, 3.6],
+        "text_policy": "minimal captions; visuals carry the story",
+        "transition": "action-led cuts and occasional light-match transitions",
+        "continuity": "maintain faces, costumes, props and spatial relationships across shots",
+    },
     "family_3d_animal_comedy": {
         "render_style": "polished family-friendly stylized 3D animation",
         "character_design": "anthropomorphic animals with rounded proportions, large expressive eyes, readable paws and exaggerated facial acting",
@@ -59,6 +87,10 @@ def choose_character_variant(story: dict) -> str:
         return "family_3d_animal_comedy"
     if any(x in tone for x in ("funny","comedy","monkey","reaction","prank","chaos")):
         return "semi_real_character_comedy"
+    if any(x in tone for x in ("spaceship", "comet", "mars", "rover", "orbital", "constellation", "starship")):
+        return "cinematic_sci_fi"
+    if any(x in tone for x in ("magic", "enchanted", "forest", "living tree", "fairy", "mystical")):
+        return "magical_fantasy"
     if genre == "fiction" or any(x in tone for x in ("story","grandfather","village","emotional","moral")):
         return "stylized_3d_story"
     return "stylized_3d_story"
