@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 15,
-  "confirmed_today": 14,
-  "last_attempt_at": "2026-10-09T10:51:21.959633+00:00",
+  "attempts": 16,
+  "confirmed_today": 15,
+  "last_attempt_at": "2026-10-09T11:05:35.817497+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -102,14 +102,19 @@
       "video_id": "wB3bHHaDyeA",
       "confirmed_at": "2026-10-09T10:50:30.336934+00:00",
       "title": "The Door That Remembered the Moon"
+    },
+    "rayvan-free-original-1ecf425b029c3427": {
+      "video_id": "csEseopPaUU",
+      "confirmed_at": "2026-10-09T11:05:04.063045+00:00",
+      "title": "The Signal Hidden Inside a Seed"
     }
   },
   "pending": {
-    "csEseopPaUU": {
-      "content_id": "rayvan-free-original-1ecf425b029c3427",
-      "title": "The Signal Hidden Inside a Seed",
+    "MLx1RGZdjdA": {
+      "content_id": "rayvan-original-marsfootprints-v1",
+      "title": "The Footprints That Were Not There | Original Microfiction",
       "day": "2026-10-09",
-      "uploaded_at": "2026-10-09T10:51:23.953176+00:00",
+      "uploaded_at": "2026-10-09T11:05:37.897821+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -215,6 +220,11 @@
     "rayvan-free-original-1ecf425b029c3427": {
       "at": "2026-10-09T10:51:21.959617+00:00",
       "title": "The Signal Hidden Inside a Seed",
+      "result": "accepted"
+    },
+    "rayvan-original-marsfootprints-v1": {
+      "at": "2026-10-09T11:05:35.817482+00:00",
+      "title": "The Footprints That Were Not There | Original Microfiction",
       "result": "accepted"
     }
   },
