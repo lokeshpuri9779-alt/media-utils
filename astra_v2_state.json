@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 34,
-  "confirmed_today": 33,
-  "last_attempt_at": "2026-10-09T17:50:19.602964+00:00",
+  "attempts": 35,
+  "confirmed_today": 34,
+  "last_attempt_at": "2026-10-09T18:02:47.508291+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -197,14 +197,19 @@
       "video_id": "w2tkWpYdE90",
       "confirmed_at": "2026-10-09T17:49:29.262177+00:00",
       "title": "Mara and the A Tiny Machine at A Floating Market"
+    },
+    "rayvan-procedural-d0d7d31380643772": {
+      "video_id": "b2784s-u7WY",
+      "confirmed_at": "2026-10-09T18:01:40.747924+00:00",
+      "title": "Mara and the A Door at A Floating Market"
     }
   },
   "pending": {
-    "b2784s-u7WY": {
-      "content_id": "rayvan-procedural-d0d7d31380643772",
-      "title": "Mara and the A Door at A Floating Market",
+    "Wa2MfgzQe6Q": {
+      "content_id": "rayvan-procedural-88b864ee8eced600",
+      "title": "Mara and the A Musical Note Nobody Else Can Hear at A Floating Market",
       "day": "2026-10-09",
-      "uploaded_at": "2026-10-09T17:50:20.973031+00:00",
+      "uploaded_at": "2026-10-09T18:02:50.018860+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -405,6 +410,11 @@
     "rayvan-procedural-d0d7d31380643772": {
       "at": "2026-10-09T17:50:19.602949+00:00",
       "title": "Mara and the A Door at A Floating Market",
+      "result": "accepted"
+    },
+    "rayvan-procedural-88b864ee8eced600": {
+      "at": "2026-10-09T18:02:47.508274+00:00",
+      "title": "Mara and the A Musical Note Nobody Else Can Hear at A Floating Market",
       "result": "accepted"
     }
   },
