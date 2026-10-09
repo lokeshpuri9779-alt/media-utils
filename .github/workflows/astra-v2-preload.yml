@@ -7,6 +7,7 @@ on:
     paths:
       - '.github/workflows/astra-v2-preload.yml'
       - 'studio_renderer.py'
+      - 'astra_v2/story_visuals.py'
       - 'astra_v2/creative.py'
       - 'astra_v2/preload_worker.py'
       - 'astra_v2/free_story_engine.py'
@@ -85,7 +86,9 @@ jobs:
           command -v ffmpeg
           command -v ffprobe
       - name: Enforce animation and caption collision guard
-        run: python -m unittest discover -s tests -p 'test_scene_layer_contract.py' -v
+        run: |
+          python -m unittest discover -s tests -p 'test_scene_layer_contract.py' -v
+          python -m unittest discover -s tests -p 'test_story_visuals.py' -v
       - name: Test zero-cost policy and free story generation
         run: |
           python -m unittest discover -s tests -p 'test_openai_creative.py' -v
