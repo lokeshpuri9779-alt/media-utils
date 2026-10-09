@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 23,
-  "confirmed_today": 22,
-  "last_attempt_at": "2026-10-09T14:01:48.675882+00:00",
+  "attempts": 24,
+  "confirmed_today": 23,
+  "last_attempt_at": "2026-10-09T14:26:50.071360+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -142,14 +142,19 @@
       "video_id": "guydByEI9pU",
       "confirmed_at": "2026-10-09T14:01:05.604745+00:00",
       "title": "The Cat in the Clocktower"
+    },
+    "rayvan-anthology-2906bc6378365d3e": {
+      "video_id": "iBFPMb91cFw",
+      "confirmed_at": "2026-10-09T14:26:17.634090+00:00",
+      "title": "The Museum of Tomorrows"
     }
   },
   "pending": {
-    "iBFPMb91cFw": {
-      "content_id": "rayvan-anthology-2906bc6378365d3e",
-      "title": "The Museum of Tomorrows",
+    "L3HthoPvGT8": {
+      "content_id": "rayvan-anthology-0566139be012f920",
+      "title": "The Shadow That Was Late",
       "day": "2026-10-09",
-      "uploaded_at": "2026-10-09T14:01:50.282206+00:00",
+      "uploaded_at": "2026-10-09T14:26:51.703175+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -295,6 +300,11 @@
     "rayvan-anthology-2906bc6378365d3e": {
       "at": "2026-10-09T14:01:48.675868+00:00",
       "title": "The Museum of Tomorrows",
+      "result": "accepted"
+    },
+    "rayvan-anthology-0566139be012f920": {
+      "at": "2026-10-09T14:26:50.071345+00:00",
+      "title": "The Shadow That Was Late",
       "result": "accepted"
     }
   },
