@@ -8,6 +8,9 @@ on:
     paths: ['.github/workflows/astra-v2-publish.yml']
   schedule:
     - cron: '*/5 * * * *'
+  workflow_run:
+    workflows: ['ASTRA V2 - Preload Approved Videos']
+    types: [completed]
 
 concurrency:
   group: astra-v2-publishing
