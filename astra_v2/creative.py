@@ -48,6 +48,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
     # broader learned idea engine if none passes every existing quality gate.
     from premium_stories import catalog
     from astra_v2.original_stories import catalog as original_catalog
+    from astra_v2.anthology_stories import catalog as anthology_catalog
     from astra_v2.free_story_engine import catalog as free_catalog
     from astra_v2.omniroute_local import catalog as routed_catalog
     from studio_renderer import render_short
@@ -60,7 +61,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
     series_stories = routed_catalog(excluded_ids, excluded_titles=excluded_titles)
     serialized_preload = os.getenv("ASTRA_SERIALIZED_PRELOAD", "0") == "1"
     premium_stories = (series_stories if serialized_preload else
-                       series_stories + free_catalog() + original_catalog() + catalog())
+                       series_stories + anthology_catalog() + free_catalog() + original_catalog() + catalog())
     # Explicitly opted-in paid model may propose a new story; the generated
     # storyboard still goes through the same renderer and QA as curated work.
     from astra_v2.openai_creative import enabled as openai_enabled, generate as openai_generate
