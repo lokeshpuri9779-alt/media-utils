@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 21,
+  "attempts": 22,
   "confirmed_today": 21,
-  "last_attempt_at": "2026-10-09T12:56:03.542423+00:00",
+  "last_attempt_at": "2026-10-09T13:40:58.608984+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -139,8 +139,17 @@
       "title": "The Robot Who Collected Laughter"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "guydByEI9pU": {
+      "content_id": "rayvan-anthology-a69514f6ca78e1f8",
+      "title": "The Cat in the Clocktower",
+      "day": "2026-10-09",
+      "uploaded_at": "2026-10-09T13:41:00.994599+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -271,6 +280,11 @@
     "rayvan-anthology-672972bb35f02622": {
       "at": "2026-10-09T12:56:03.542409+00:00",
       "title": "The Robot Who Collected Laughter",
+      "result": "accepted"
+    },
+    "rayvan-anthology-a69514f6ca78e1f8": {
+      "at": "2026-10-09T13:40:58.608968+00:00",
+      "title": "The Cat in the Clocktower",
       "result": "accepted"
     }
   },
