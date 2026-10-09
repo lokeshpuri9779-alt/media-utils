@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 7,
+  "attempts": 8,
   "confirmed_today": 7,
-  "last_attempt_at": "2026-10-08T23:54:06.584606+00:00",
+  "last_attempt_at": "2026-10-09T00:25:27.067404+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -69,8 +69,17 @@
       "title": "Ivo and A Door That Appears At Midnight at the Abandoned Observatory"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "_egIIE4fezU": {
+      "content_id": "rayvan-season-01-episode-01",
+      "title": "The Tomorrow Signal | S1 E01 | Mara",
+      "day": "2026-10-09",
+      "uploaded_at": "2026-10-09T00:25:29.204546+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -131,6 +140,11 @@
     "rayvan-omniroute-local-0bc942d384c8ddc300": {
       "at": "2026-10-08T23:54:06.584591+00:00",
       "title": "Ivo and A Door That Appears At Midnight at the Abandoned Observatory",
+      "result": "accepted"
+    },
+    "rayvan-season-01-episode-01": {
+      "at": "2026-10-09T00:25:27.067390+00:00",
+      "title": "The Tomorrow Signal | S1 E01 | Mara",
       "result": "accepted"
     }
   },
