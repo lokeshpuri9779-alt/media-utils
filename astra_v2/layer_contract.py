@@ -46,7 +46,10 @@ def scene_layers(shot):
         bool(resolved.get("cache_image")) and
         Path(str(resolved.get("cache_image"))).is_file()
     )
-    if visual in ILLUSTRATED_VISUALS:
+    if shot.get("story_subject") and visual != "media":
+        # Fiction subject takes precedence over generic director cards.
+        foreground = "illustration"
+    elif visual in ILLUSTRATED_VISUALS:
         foreground = "illustration"
     elif visual == "media":
         foreground = "cached_media" if has_media else "missing_media"
