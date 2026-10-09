@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 8,
-  "confirmed_today": 7,
-  "last_attempt_at": "2026-10-09T00:25:27.067404+00:00",
+  "attempts": 9,
+  "confirmed_today": 8,
+  "last_attempt_at": "2026-10-09T00:57:01.476393+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -67,14 +67,19 @@
       "video_id": "L3TFNbRZILg",
       "confirmed_at": "2026-10-08T23:55:37.438670+00:00",
       "title": "Ivo and A Door That Appears At Midnight at the Abandoned Observatory"
+    },
+    "rayvan-season-01-episode-01": {
+      "video_id": "_egIIE4fezU",
+      "confirmed_at": "2026-10-09T00:56:08.995651+00:00",
+      "title": "The Tomorrow Signal | S1 E01 | Mara"
     }
   },
   "pending": {
-    "_egIIE4fezU": {
-      "content_id": "rayvan-season-01-episode-01",
-      "title": "The Tomorrow Signal | S1 E01 | Mara",
+    "KrXCwxQuCOU": {
+      "content_id": "rayvan-season-01-episode-02",
+      "title": "The Tomorrow Signal | S1 E02 | Mara",
       "day": "2026-10-09",
-      "uploaded_at": "2026-10-09T00:25:29.204546+00:00",
+      "uploaded_at": "2026-10-09T00:57:03.791022+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -145,6 +150,11 @@
     "rayvan-season-01-episode-01": {
       "at": "2026-10-09T00:25:27.067390+00:00",
       "title": "The Tomorrow Signal | S1 E01 | Mara",
+      "result": "accepted"
+    },
+    "rayvan-season-01-episode-02": {
+      "at": "2026-10-09T00:57:01.476380+00:00",
+      "title": "The Tomorrow Signal | S1 E02 | Mara",
       "result": "accepted"
     }
   },
