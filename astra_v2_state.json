@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 25,
-  "confirmed_today": 24,
-  "last_attempt_at": "2026-10-09T14:51:24.006883+00:00",
+  "attempts": 26,
+  "confirmed_today": 25,
+  "last_attempt_at": "2026-10-09T15:07:24.231699+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -152,14 +152,19 @@
       "video_id": "L3HthoPvGT8",
       "confirmed_at": "2026-10-09T14:50:40.036292+00:00",
       "title": "The Shadow That Was Late"
+    },
+    "rayvan-anthology-2d0e491203919c7a": {
+      "video_id": "_cG0WsTMh10",
+      "confirmed_at": "2026-10-09T15:06:45.075243+00:00",
+      "title": "The Garden on the Moon"
     }
   },
   "pending": {
-    "_cG0WsTMh10": {
-      "content_id": "rayvan-anthology-2d0e491203919c7a",
-      "title": "The Garden on the Moon",
+    "3puQ2EkFMpk": {
+      "content_id": "rayvan-anthology-20dc79fbdc44c430",
+      "title": "The Train to Nowhere",
       "day": "2026-10-09",
-      "uploaded_at": "2026-10-09T14:51:26.314606+00:00",
+      "uploaded_at": "2026-10-09T15:07:25.491682+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -315,6 +320,11 @@
     "rayvan-anthology-2d0e491203919c7a": {
       "at": "2026-10-09T14:51:24.006869+00:00",
       "title": "The Garden on the Moon",
+      "result": "accepted"
+    },
+    "rayvan-anthology-20dc79fbdc44c430": {
+      "at": "2026-10-09T15:07:24.231683+00:00",
+      "title": "The Train to Nowhere",
       "result": "accepted"
     }
   },
