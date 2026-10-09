@@ -3,7 +3,7 @@
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 21,
-  "confirmed_today": 20,
+  "confirmed_today": 21,
   "last_attempt_at": "2026-10-09T12:56:03.542423+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -132,19 +132,15 @@
       "video_id": "HLYFSPhh4rM",
       "confirmed_at": "2026-10-09T12:55:10.793622+00:00",
       "title": "The Library of Unwritten Books"
+    },
+    "rayvan-anthology-672972bb35f02622": {
+      "video_id": "eEdUiTgb5m4",
+      "confirmed_at": "2026-10-09T13:17:35.121966+00:00",
+      "title": "The Robot Who Collected Laughter"
     }
   },
-  "pending": {
-    "eEdUiTgb5m4": {
-      "content_id": "rayvan-anthology-672972bb35f02622",
-      "title": "The Robot Who Collected Laughter",
-      "day": "2026-10-09",
-      "uploaded_at": "2026-10-09T12:56:05.484636+00:00",
-      "genre": "fiction",
-      "format": "short"
-    }
-  },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
