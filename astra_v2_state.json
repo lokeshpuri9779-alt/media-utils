@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 22,
-  "confirmed_today": 21,
-  "last_attempt_at": "2026-10-09T13:40:58.608984+00:00",
+  "attempts": 23,
+  "confirmed_today": 22,
+  "last_attempt_at": "2026-10-09T14:01:48.675882+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -137,14 +137,19 @@
       "video_id": "eEdUiTgb5m4",
       "confirmed_at": "2026-10-09T13:17:35.121966+00:00",
       "title": "The Robot Who Collected Laughter"
+    },
+    "rayvan-anthology-a69514f6ca78e1f8": {
+      "video_id": "guydByEI9pU",
+      "confirmed_at": "2026-10-09T14:01:05.604745+00:00",
+      "title": "The Cat in the Clocktower"
     }
   },
   "pending": {
-    "guydByEI9pU": {
-      "content_id": "rayvan-anthology-a69514f6ca78e1f8",
-      "title": "The Cat in the Clocktower",
+    "iBFPMb91cFw": {
+      "content_id": "rayvan-anthology-2906bc6378365d3e",
+      "title": "The Museum of Tomorrows",
       "day": "2026-10-09",
-      "uploaded_at": "2026-10-09T13:41:00.994599+00:00",
+      "uploaded_at": "2026-10-09T14:01:50.282206+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -285,6 +290,11 @@
     "rayvan-anthology-a69514f6ca78e1f8": {
       "at": "2026-10-09T13:40:58.608968+00:00",
       "title": "The Cat in the Clocktower",
+      "result": "accepted"
+    },
+    "rayvan-anthology-2906bc6378365d3e": {
+      "at": "2026-10-09T14:01:48.675868+00:00",
+      "title": "The Museum of Tomorrows",
       "result": "accepted"
     }
   },
