@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 13,
-  "confirmed_today": 12,
-  "last_attempt_at": "2026-10-09T10:05:34.952651+00:00",
+  "attempts": 14,
+  "confirmed_today": 13,
+  "last_attempt_at": "2026-10-09T10:29:16.157162+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -92,14 +92,19 @@
       "video_id": "w3cGbJFAOXc",
       "confirmed_at": "2026-10-09T09:59:45.838376+00:00",
       "title": "Mara and A Door That Appears At Midnight at the Abandoned Observatory"
+    },
+    "rayvan-free-original-1e5869965be72db7": {
+      "video_id": "DArHteNrgSA",
+      "confirmed_at": "2026-10-09T10:28:37.956092+00:00",
+      "title": "The Ship That Delivered Yesterday"
     }
   },
   "pending": {
-    "DArHteNrgSA": {
-      "content_id": "rayvan-free-original-1e5869965be72db7",
-      "title": "The Ship That Delivered Yesterday",
+    "wB3bHHaDyeA": {
+      "content_id": "rayvan-free-original-91bb2e14b884a96b",
+      "title": "The Door That Remembered the Moon",
       "day": "2026-10-09",
-      "uploaded_at": "2026-10-09T10:05:36.583465+00:00",
+      "uploaded_at": "2026-10-09T10:29:18.540748+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -195,6 +200,11 @@
     "rayvan-free-original-1e5869965be72db7": {
       "at": "2026-10-09T10:05:34.952635+00:00",
       "title": "The Ship That Delivered Yesterday",
+      "result": "accepted"
+    },
+    "rayvan-free-original-91bb2e14b884a96b": {
+      "at": "2026-10-09T10:29:16.157145+00:00",
+      "title": "The Door That Remembered the Moon",
       "result": "accepted"
     }
   },
