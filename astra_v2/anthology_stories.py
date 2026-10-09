@@ -42,6 +42,16 @@ PLOTS = [
  ("A HIDDEN PATH","The insect led a child through trees that had stopped blooming.","forest","FOLLOW THE GLOW","build"),
  ("THE SILENT SPRING","A blocked stream had dried the roots of the oldest tree.","planet","THE CAUSE","twist"),
  ("LIGHTS RETURNED","The child cleared the stream and thousands of fireflies lit the night.","forest","THE FOREST GLOWS","payoff")]),
+ ("the-baker-and-the-sunrise","The Baker Who Borrowed Sunrise","whimsical comedy","A baker finds a way to bring morning to a sleepy town.",[
+ ("THE SUN DID NOT RISE","A baker opened his shop and discovered the town was still dark.","planet","NO MORNING","reveal"),
+ ("AN ODD DELIVERY","A small robot delivered a glowing jar labeled sunrise.","robot","SPECIAL DELIVERY","build"),
+ ("THE JAR OPENED","Golden light spilled into the streets and every clock began ringing.","signal","LIGHT RETURNS","twist"),
+ ("BREAKFAST FOR EVERYONE","The baker shared warm bread as the town welcomed its first bright morning.","forest","GOOD MORNING","payoff")]),
+ ("the-cat-and-the-clocktower","The Cat in the Clocktower","animal adventure","A curious cat discovers why the town's clock has stopped.",[
+ ("MIDNIGHT FOREVER","A cat noticed that every clock in town showed midnight.","door","TIME FROZEN","reveal"),
+ ("UP THE TOWER","It climbed a staircase filled with gears and old feathers.","robot","THE CLIMB","build"),
+ ("A BIRD WAS TRAPPED","A little bird had become stuck between the clock's giant gears.","robot","THE SECRET","twist"),
+ ("TIME MOVED AGAIN","The cat freed the bird and the bells rang across the waking town.","signal","DING DONG","payoff")]),
 ]
 
 def catalog():
