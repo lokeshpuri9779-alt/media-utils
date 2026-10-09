@@ -62,6 +62,20 @@ def make_candidate(path, excluded_ids, excluded_titles):
     serialized_preload = os.getenv("ASTRA_SERIALIZED_PRELOAD", "0") == "1"
     premium_stories = (series_stories if serialized_preload else
                        series_stories + anthology_catalog() + free_catalog() + original_catalog() + catalog())
+    # Fail loudly in diagnostics when every prewritten story is already consumed.
+    # This does not silently recycle scripts or promise infinite original plots.
+    available_count = sum(
+        1 for story in premium_stories
+        if story.get("content_id") not in excluded_ids
+        and str(story.get("title", "")).casefold().strip() not in excluded_titles
+    )
+    if not serialized_preload and available_count <= 4:
+        print("ASTRA_STORY_SUPPLY_WARNING=" + json.dumps({
+            "remaining": available_count,
+            "total": len(premium_stories),
+            "reason": "finite_original_story_inventory",
+            "action": "replenish_with_new_reviewed_plots",
+        }))
     # Explicitly opted-in paid model may propose a new story; the generated
     # storyboard still goes through the same renderer and QA as curated work.
     from astra_v2.openai_creative import enabled as openai_enabled, generate as openai_generate
