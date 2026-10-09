@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 27,
-  "confirmed_today": 26,
-  "last_attempt_at": "2026-10-09T15:29:26.620225+00:00",
+  "attempts": 28,
+  "confirmed_today": 27,
+  "last_attempt_at": "2026-10-09T15:52:18.728110+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -162,14 +162,19 @@
       "video_id": "3puQ2EkFMpk",
       "confirmed_at": "2026-10-09T15:28:52.349900+00:00",
       "title": "The Train to Nowhere"
+    },
+    "rayvan-procedural-95300fa995a315e1": {
+      "video_id": "WjgDtVHZsJA",
+      "confirmed_at": "2026-10-09T15:51:44.517536+00:00",
+      "title": "Mara and the A Lantern at A Floating Market"
     }
   },
   "pending": {
-    "WjgDtVHZsJA": {
-      "content_id": "rayvan-procedural-95300fa995a315e1",
-      "title": "Mara and the A Lantern at A Floating Market",
+    "tP9cTpM0eCA": {
+      "content_id": "rayvan-anthology-cd5ab05aa5231438",
+      "title": "The Last Firefly",
       "day": "2026-10-09",
-      "uploaded_at": "2026-10-09T15:29:28.405516+00:00",
+      "uploaded_at": "2026-10-09T15:52:20.345408+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -335,6 +340,11 @@
     "rayvan-procedural-95300fa995a315e1": {
       "at": "2026-10-09T15:29:26.620206+00:00",
       "title": "Mara and the A Lantern at A Floating Market",
+      "result": "accepted"
+    },
+    "rayvan-anthology-cd5ab05aa5231438": {
+      "at": "2026-10-09T15:52:18.728093+00:00",
+      "title": "The Last Firefly",
       "result": "accepted"
     }
   },
