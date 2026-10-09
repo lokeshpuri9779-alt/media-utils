@@ -13,7 +13,7 @@ class ProceduralStoriesTest(unittest.TestCase):
         for story in stories:
             self.assertEqual(len(story["story_beats"]), 4)
             self.assertTrue(all(beat["speech"].strip() for beat in story["story_beats"]))
-            fingerprints.append((story["story_beats"][0]["visual"],
+            fingerprints.append((story["question"],
                                  story["story_beats"][2]["speech"],
                                  story["story_beats"][3]["speech"]))
         self.assertEqual(len(fingerprints), len(set(fingerprints)))
