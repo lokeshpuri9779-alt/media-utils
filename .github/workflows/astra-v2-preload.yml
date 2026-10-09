@@ -12,6 +12,7 @@ on:
       - 'astra_v2/free_story_engine.py'
       - 'astra_v2/omniroute_local.py'
       - 'astra_v2/original_stories.py'
+      - 'astra_v2/anthology_stories.py'
   schedule:
     - cron: '*/5 * * * *'
 
