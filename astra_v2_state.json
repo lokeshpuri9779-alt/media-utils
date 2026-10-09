@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 14,
-  "confirmed_today": 13,
-  "last_attempt_at": "2026-10-09T10:29:16.157162+00:00",
+  "attempts": 15,
+  "confirmed_today": 14,
+  "last_attempt_at": "2026-10-09T10:51:21.959633+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -97,14 +97,19 @@
       "video_id": "DArHteNrgSA",
       "confirmed_at": "2026-10-09T10:28:37.956092+00:00",
       "title": "The Ship That Delivered Yesterday"
+    },
+    "rayvan-free-original-91bb2e14b884a96b": {
+      "video_id": "wB3bHHaDyeA",
+      "confirmed_at": "2026-10-09T10:50:30.336934+00:00",
+      "title": "The Door That Remembered the Moon"
     }
   },
   "pending": {
-    "wB3bHHaDyeA": {
-      "content_id": "rayvan-free-original-91bb2e14b884a96b",
-      "title": "The Door That Remembered the Moon",
+    "csEseopPaUU": {
+      "content_id": "rayvan-free-original-1ecf425b029c3427",
+      "title": "The Signal Hidden Inside a Seed",
       "day": "2026-10-09",
-      "uploaded_at": "2026-10-09T10:29:18.540748+00:00",
+      "uploaded_at": "2026-10-09T10:51:23.953176+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -205,6 +210,11 @@
     "rayvan-free-original-91bb2e14b884a96b": {
       "at": "2026-10-09T10:29:16.157145+00:00",
       "title": "The Door That Remembered the Moon",
+      "result": "accepted"
+    },
+    "rayvan-free-original-1ecf425b029c3427": {
+      "at": "2026-10-09T10:51:21.959617+00:00",
+      "title": "The Signal Hidden Inside a Seed",
       "result": "accepted"
     }
   },
