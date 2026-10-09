@@ -40,6 +40,7 @@ def story(key, title, question, answer, shots):
 
 def catalog():
     return [
+        story("skywhale", "The Whale Above the Clouds", "What sings above the clouds?", "A pilot follows a strange song and finds a creature living in the sky.", [("THE SKY SANG", "A pilot heard a song above the clouds.", "planet", "UNKNOWN SOUND", "reveal"), ("FOLLOW THE MUSIC", "She climbed toward the signal and saw a giant shadow.", "ship", "CLIMBING", "build"), ("THE SKY WHALE", "A luminous whale swam through the clouds carrying tiny stars.", "planet", "FIRST CONTACT", "twist"), ("A NEW CONSTELLATION", "The whale released its stars and the night sky began to shine.", "signal", "NEW STARS", "payoff")]),
         story("silentcomet", "The Comet That Stopped", "Why did a comet stop above Earth?", "A young astronomer discovers a beacon inside a motionless comet.", [("THE COMET STOPPED", "The comet stopped moving above the city.", "planet", "NO MOTION", "reveal"), ("A SIGNAL APPEARED", "An astronomer noticed a repeating pulse inside its ice.", "signal", "INCOMING", "build"), ("A MESSAGE ARRIVED", "The pulse was a map of a distant home.", "ship", "THE MAP", "twist"), ("THE JOURNEY BEGAN", "She transmitted a reply and watched the comet turn toward the stars.", "planet", "NEW HORIZON", "payoff")]),
         story("lightkeeper", "The Last Lightkeeper | Original Microfiction",
               "Who keeps the last lighthouse burning?",
