@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 20,
-  "confirmed_today": 19,
-  "last_attempt_at": "2026-10-09T12:29:02.742664+00:00",
+  "attempts": 21,
+  "confirmed_today": 20,
+  "last_attempt_at": "2026-10-09T12:56:03.542423+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -127,14 +127,19 @@
       "video_id": "4dJvRJgcBOY",
       "confirmed_at": "2026-10-09T12:28:21.951352+00:00",
       "title": "The Ocean Above the City"
+    },
+    "rayvan-anthology-542cd01a50f64edb": {
+      "video_id": "HLYFSPhh4rM",
+      "confirmed_at": "2026-10-09T12:55:10.793622+00:00",
+      "title": "The Library of Unwritten Books"
     }
   },
   "pending": {
-    "HLYFSPhh4rM": {
-      "content_id": "rayvan-anthology-542cd01a50f64edb",
-      "title": "The Library of Unwritten Books",
+    "eEdUiTgb5m4": {
+      "content_id": "rayvan-anthology-672972bb35f02622",
+      "title": "The Robot Who Collected Laughter",
       "day": "2026-10-09",
-      "uploaded_at": "2026-10-09T12:29:04.013702+00:00",
+      "uploaded_at": "2026-10-09T12:56:05.484636+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -265,6 +270,11 @@
     "rayvan-anthology-542cd01a50f64edb": {
       "at": "2026-10-09T12:29:02.742647+00:00",
       "title": "The Library of Unwritten Books",
+      "result": "accepted"
+    },
+    "rayvan-anthology-672972bb35f02622": {
+      "at": "2026-10-09T12:56:03.542409+00:00",
+      "title": "The Robot Who Collected Laughter",
       "result": "accepted"
     }
   },
