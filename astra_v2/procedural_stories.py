@@ -6,6 +6,7 @@ Variation is finite and combinations do not guarantee literary originality.
 """
 import hashlib
 import itertools
+from collections import Counter
 
 CHARACTERS = [
     ("a retired astronaut", "Mara"), ("a young clockmaker", "Ivo"),
@@ -51,6 +52,8 @@ def catalog(excluded_ids=None, limit=32):
     excluded = set(excluded_ids or ())
     limit = max(0, min(int(limit), 128))
     result = []
+    seen_plot_keys = set()
+    seen_mysteries = Counter()
     # Stable index ordering avoids random story IDs across independent CI jobs.
     for c, p, m, r, e in itertools.product(
         range(len(CHARACTERS)), range(len(PLACES)), range(len(MYSTERIES)),
@@ -62,6 +65,12 @@ def catalog(excluded_ids=None, limit=32):
         key = f"v1-{c}-{p}-{m}-{r}-{e}"
         cid = "rayvan-procedural-" + hashlib.sha256(key.encode()).hexdigest()[:16]
         if cid in excluded:
+            continue
+        # Reject cast/location swaps with identical mystery, twist and ending.
+        plot_key = (m, r, e)
+        if plot_key in seen_plot_keys:
+            continue
+        if seen_mysteries[m] >= max(1, (limit + len(MYSTERIES) - 1) // len(MYSTERIES)):
             continue
         character, name = CHARACTERS[c]
         place, place_visual = PLACES[p]
@@ -75,6 +84,8 @@ def catalog(excluded_ids=None, limit=32):
             ("THE HIDDEN TRUTH", reveal, "signal", "THE TRUTH", "twist"),
             ("A DIFFERENT ENDING", resolution, "forest", "THE CHOICE", "payoff"),
         ]
+        seen_plot_keys.add(plot_key)
+        seen_mysteries[m] += 1
         result.append({
             "genre": "fiction", "kind": "procedural_fiction",
             "production_ready": True, "content_id": cid,
