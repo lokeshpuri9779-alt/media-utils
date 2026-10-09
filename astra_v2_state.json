@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 16,
-  "confirmed_today": 15,
-  "last_attempt_at": "2026-10-09T11:05:35.817497+00:00",
+  "attempts": 17,
+  "confirmed_today": 16,
+  "last_attempt_at": "2026-10-09T11:26:39.610596+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -107,14 +107,19 @@
       "video_id": "csEseopPaUU",
       "confirmed_at": "2026-10-09T11:05:04.063045+00:00",
       "title": "The Signal Hidden Inside a Seed"
+    },
+    "rayvan-original-marsfootprints-v1": {
+      "video_id": "MLx1RGZdjdA",
+      "confirmed_at": "2026-10-09T11:26:07.894890+00:00",
+      "title": "The Footprints That Were Not There | Original Microfiction"
     }
   },
   "pending": {
-    "MLx1RGZdjdA": {
-      "content_id": "rayvan-original-marsfootprints-v1",
-      "title": "The Footprints That Were Not There | Original Microfiction",
+    "1UbH_NA87b8": {
+      "content_id": "rayvan-original-silentcomet-v1",
+      "title": "The Comet That Stopped",
       "day": "2026-10-09",
-      "uploaded_at": "2026-10-09T11:05:37.897821+00:00",
+      "uploaded_at": "2026-10-09T11:26:40.906864+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -225,6 +230,11 @@
     "rayvan-original-marsfootprints-v1": {
       "at": "2026-10-09T11:05:35.817482+00:00",
       "title": "The Footprints That Were Not There | Original Microfiction",
+      "result": "accepted"
+    },
+    "rayvan-original-silentcomet-v1": {
+      "at": "2026-10-09T11:26:39.610577+00:00",
+      "title": "The Comet That Stopped",
       "result": "accepted"
     }
   },
