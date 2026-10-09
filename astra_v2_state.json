@@ -3,7 +3,7 @@
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 11,
-  "confirmed_today": 10,
+  "confirmed_today": 11,
   "last_attempt_at": "2026-10-09T01:40:03.573418+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -82,19 +82,15 @@
       "video_id": "k27CWC50l6c",
       "confirmed_at": "2026-10-09T01:39:26.407443+00:00",
       "title": "The Tomorrow Signal | S1 E03 | Mara"
+    },
+    "rayvan-season-01-episode-04": {
+      "video_id": "4P82UV9RWC8",
+      "confirmed_at": "2026-10-09T01:57:54.707353+00:00",
+      "title": "The Tomorrow Signal | S1 E04 | Mara"
     }
   },
-  "pending": {
-    "4P82UV9RWC8": {
-      "content_id": "rayvan-season-01-episode-04",
-      "title": "The Tomorrow Signal | S1 E04 | Mara",
-      "day": "2026-10-09",
-      "uploaded_at": "2026-10-09T01:40:05.360249+00:00",
-      "genre": "fiction",
-      "format": "short"
-    }
-  },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "skipped",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
