@@ -25,6 +25,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from imageio_ffmpeg import get_ffmpeg_exe
 from semantic_broll import infer_visual_intent
 from character_animation import character_storyboard
+from astra_v2.story_visuals import select_subject, draw_subject
 
 VERSION = "studio-7.1.0"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
@@ -385,7 +386,11 @@ def make_plan(ch):
     from creative_formats import choose_format, apply_format
     fmt = choose_format(ch, recent_formats=ch.get("recent_formats") or [])
     ch["creative_format"] = fmt["name"]
-    return apply_format(plan, fmt)
+    formatted = apply_format(plan, fmt)
+    if ch.get('genre') == 'fiction':
+        for shot in formatted:
+            shot['story_subject'] = select_subject(ch, shot)
+    return formatted
 
 
 def voice_plan(plan, genre, max_duration=None, voice_name='af_heart', voice_speed=1.09):
@@ -507,6 +512,8 @@ def starfield(d,t,accent):
 
 def draw_visual(im,s,t,u,accent):
     d=ImageDraw.Draw(im); visual=s['visual']; p=ease(u/.55)
+    if s.get('story_subject') and draw_subject(im, s['story_subject'], t, accent):
+        return
     # All graphics live above the caption zone, away from Shorts controls.
     cx,cy=505,865
     if visual in {'planet','orbit','compare'}:
