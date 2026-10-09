@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 28,
-  "confirmed_today": 27,
-  "last_attempt_at": "2026-10-09T15:52:18.728110+00:00",
+  "attempts": 29,
+  "confirmed_today": 28,
+  "last_attempt_at": "2026-10-09T16:09:19.855351+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -167,14 +167,19 @@
       "video_id": "WjgDtVHZsJA",
       "confirmed_at": "2026-10-09T15:51:44.517536+00:00",
       "title": "Mara and the A Lantern at A Floating Market"
+    },
+    "rayvan-anthology-cd5ab05aa5231438": {
+      "video_id": "tP9cTpM0eCA",
+      "confirmed_at": "2026-10-09T16:08:48.247640+00:00",
+      "title": "The Last Firefly"
     }
   },
   "pending": {
-    "tP9cTpM0eCA": {
-      "content_id": "rayvan-anthology-cd5ab05aa5231438",
-      "title": "The Last Firefly",
+    "8E_vr_pbxyk": {
+      "content_id": "rayvan-procedural-9fa9bfc8dbe9eadd",
+      "title": "Mara and the A Clock at A Floating Market",
       "day": "2026-10-09",
-      "uploaded_at": "2026-10-09T15:52:20.345408+00:00",
+      "uploaded_at": "2026-10-09T16:09:21.454935+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -345,6 +350,11 @@
     "rayvan-anthology-cd5ab05aa5231438": {
       "at": "2026-10-09T15:52:18.728093+00:00",
       "title": "The Last Firefly",
+      "result": "accepted"
+    },
+    "rayvan-procedural-9fa9bfc8dbe9eadd": {
+      "at": "2026-10-09T16:09:19.855335+00:00",
+      "title": "Mara and the A Clock at A Floating Market",
       "result": "accepted"
     }
   },
