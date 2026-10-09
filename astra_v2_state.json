@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-09",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 11,
+  "attempts": 12,
   "confirmed_today": 11,
-  "last_attempt_at": "2026-10-09T01:40:03.573418+00:00",
+  "last_attempt_at": "2026-10-09T09:58:07.255973+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -89,8 +89,17 @@
       "title": "The Tomorrow Signal | S1 E04 | Mara"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "w3cGbJFAOXc": {
+      "content_id": "rayvan-omniroute-local-9362e6ba90983565e4",
+      "title": "Mara and A Door That Appears At Midnight at the Abandoned Observatory",
+      "day": "2026-10-09",
+      "uploaded_at": "2026-10-09T09:58:08.776814+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -171,6 +180,11 @@
     "rayvan-season-01-episode-04": {
       "at": "2026-10-09T01:40:03.573401+00:00",
       "title": "The Tomorrow Signal | S1 E04 | Mara",
+      "result": "accepted"
+    },
+    "rayvan-omniroute-local-9362e6ba90983565e4": {
+      "at": "2026-10-09T09:58:07.255959+00:00",
+      "title": "Mara and A Door That Appears At Midnight at the Abandoned Observatory",
       "result": "accepted"
     }
   },
