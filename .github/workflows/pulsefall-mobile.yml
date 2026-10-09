@@ -2120,9 +2120,10 @@ jobs:
           	level._finish_mission()
           	level._begin_extraction()
           	check(progression.runs == runs_before + 1 and progression.credits == reward_credits and not level.extraction_active, "repeated completion cannot duplicate rewards or restart escape")
+          	level.release_streamed_audio()
           	level.queue_free()
-          	await get_tree().process_frame
-          	await get_tree().process_frame
+          	for flush_frame in range(8):
+          		await get_tree().process_frame
           	await get_tree().physics_frame
           	print("EXTRACTION TEST FAILURES: ", failures)
           	get_tree().quit(0 if failures == 0 else 1)
@@ -3213,13 +3214,17 @@ jobs:
           source += """
           
           
-          func _exit_tree() -> void:
-          	# Explicitly release streamed audio when a run ends or the app exits.
-          	# This prevents OGG playback/resource retention across repeated runs.
+          func release_streamed_audio() -> void:
+          	# Stop playback while audio nodes are still inside the scene tree.
+          	# Waiting until parent exit is too late on some headless/audio-driver paths.
           	for node in find_children("*", "", true, false):
           		if node is AudioStreamPlayer or node is AudioStreamPlayer2D or node is AudioStreamPlayer3D:
           			node.stop()
           			node.stream = null
+
+
+          func _exit_tree() -> void:
+          	release_streamed_audio()
           """
           path.write_text(source)
           PY
@@ -3252,9 +3257,10 @@ jobs:
           		for frame in range(PHYSICS_FRAMES_PER_CYCLE):
           			await get_tree().physics_frame
           		check(is_instance_valid(level) and level.is_inside_tree(), "level remains live through soak cycle %d" % (cycle + 1))
+          		level.release_streamed_audio()
           		level.queue_free()
-          		await get_tree().process_frame
-          		await get_tree().process_frame
+          		for flush_frame in range(8):
+          			await get_tree().process_frame
           		await get_tree().physics_frame
           		check(get_node_or_null("SoakLevel") == null, "level unloads cleanly after soak cycle %d" % (cycle + 1))
           	print("RUNTIME SOAK CHECKS: ", checks, " CYCLES: ", CYCLES, " FAILURES: ", failures)
