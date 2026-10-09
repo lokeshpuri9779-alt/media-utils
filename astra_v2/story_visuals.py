@@ -36,6 +36,31 @@ def draw_subject(image, subject, t, accent):
         return False
     d = ImageDraw.Draw(image)
     cx, cy = 520, 850
+    # Subject-specific moving scenery behind the central character.
+    if subject in ("cat", "clock"):
+        for i in range(5):
+            x = 130 + i*200 + int(15*math.sin(t*.8+i))
+            d.ellipse((x-52, 520, x+52, 625), outline=(139,115,88), width=9)
+            d.line((x,620,x,1170), fill=(76,62,76), width=12)
+    elif subject in ("book", "museum"):
+        for i in range(5):
+            x = 95+i*205
+            d.rectangle((x,560,x+125,1210), outline=(108,76,103), width=12)
+            for j in range(4):
+                y = 650+j*120+int(6*math.sin(t+i+j))
+                d.line((x+12,y,x+112,y), fill=(164,126,111), width=9)
+    elif subject in ("ocean", "whale"):
+        for i in range(18):
+            x = 110+(i*71)%850
+            y = 580+(i*83)%580-int((t*24+i*3)%140)
+            r = 5+(i%4)*3
+            d.ellipse((x-r,y-r,x+r,y+r), outline=(107,189,222), width=3)
+    else:
+        for i in range(15):
+            x = 120+(i*79)%830+int(12*math.sin(t*.4+i))
+            y = 520+(i*61)%650
+            r = 2+(i%3)*2
+            d.ellipse((x-r,y-r,x+r,y+r), fill=(109,138,168))
     sway = int(math.sin(t * 1.7) * 14)
     if subject == "cat":
         x = cx + sway
