@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 22,
-  "confirmed_today": 21,
-  "last_attempt_at": "2026-10-10T23:36:31.186880+00:00",
+  "attempts": 23,
+  "confirmed_today": 22,
+  "last_attempt_at": "2026-10-10T23:45:31.455346+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -741,14 +741,21 @@
       "title": "Tara and the Musical Note Nobody Else Can Hear at the Forgotten Moon Colony",
       "format": "short",
       "uploaded_at": "2026-10-10T23:27:32.204339+00:00"
+    },
+    "rayvan-procedural-c6fb70dffe2c13c6": {
+      "video_id": "Gg2dOxPV1qk",
+      "confirmed_at": "2026-10-10T23:44:12.790064+00:00",
+      "title": "Noor and the Lantern at the Abandoned Observatory",
+      "format": "short",
+      "uploaded_at": "2026-10-10T23:36:33.120715+00:00"
     }
   },
   "pending": {
-    "Gg2dOxPV1qk": {
-      "content_id": "rayvan-procedural-c6fb70dffe2c13c6",
-      "title": "Noor and the Lantern at the Abandoned Observatory",
+    "abq-xmozKM0": {
+      "content_id": "rayvan-procedural-634e1ea7fc386bc0",
+      "title": "Arun and the Lantern at the Glass Desert",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-10T23:36:33.120715+00:00",
+      "uploaded_at": "2026-10-10T23:45:32.689032+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1420,6 +1427,12 @@
     "rayvan-procedural-c6fb70dffe2c13c6": {
       "at": "2026-10-10T23:36:31.186864+00:00",
       "title": "Noor and the Lantern at the Abandoned Observatory",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-634e1ea7fc386bc0": {
+      "at": "2026-10-10T23:45:31.455330+00:00",
+      "title": "Arun and the Lantern at the Glass Desert",
       "format": "short",
       "result": "accepted"
     }
