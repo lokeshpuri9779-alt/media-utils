@@ -102,3 +102,5 @@ Explicit user approval is required before:
 - [ ] Validate 1920x1080 long render time, resource usage, audio, licensing, and original narrative quality before enabling unattended long-form publishing.
 - [ ] Verify the first publicly processed long video ID and track actual long-form publication cadence separately from Shorts.
 - [ ] Gather real YouTube audience and monetization metrics only when connected analytics permit; do not infer them from uploads.
+
+- [ ] Optimize full preload-buffer runs: skip dependency installation when 24 approved artifacts are already queued (observed 2026-10-10).
