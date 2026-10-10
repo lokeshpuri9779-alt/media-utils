@@ -32,6 +32,13 @@ class CyclesBudgetTests(unittest.TestCase):
         result=select_renderer(report,120,600,2,1280,720,32)
         self.assertEqual(result["engine"],"CYCLES")
 
+    def test_invalid_budget_fails_closed(self):
+        report={"engine":"CYCLES","median_warm_seconds":1}
+        for frames, budget, factor in ((0,600,2),(-1,600,2),(120,0,2),(120,-1,2),(120,600,0.5)):
+            with self.subTest(frames=frames,budget=budget,factor=factor):
+                result=select_renderer(report,frames,budget,factor)
+                self.assertEqual(result["reason"],"invalid_render_budget")
+
     def test_invalid_measurements(self):
         for value in (0, -1, None, "slow"):
             with self.subTest(value=value):
