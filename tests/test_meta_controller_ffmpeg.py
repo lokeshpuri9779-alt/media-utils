@@ -28,7 +28,7 @@ class MetaControllerFFmpegTest(unittest.TestCase):
             subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y', '-f', 'lavfi',
                 '-i', 'sine=frequency=440:duration=12', str(soundtrack)], check=True, timeout=30)
             captions = root / 'captions.srt'
-            captions.write_text('1\\n00:00:00,000 --> 00:00:04,000\\nSynthetic test\\n')
+            captions.write_text('1' + chr(10) + '00:00:00,000 --> 00:00:04,000' + chr(10) + 'Synthetic test' + chr(10))
             result = run(manifest, clips, root / 'output', soundtrack, captions)
             self.assertTrue(result['ready'], result.get('errors'))
             self.assertFalse(result['published'])
