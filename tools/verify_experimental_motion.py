@@ -35,7 +35,7 @@ def main():
     except Exception as e:report={'path':str(a.video),'pass':False,'error':f'{type(e).__name__}: {e}'}
     if a.report:
         a.report.parent.mkdir(parents=True,exist_ok=True)
-        a.report.write_text(json.dumps(report,indent=2)+'\\n')
+        a.report.write_text(json.dumps(report,indent=2)+chr(10))
     print(json.dumps(report,indent=2))
     if not report['pass']:raise SystemExit(1)
 
