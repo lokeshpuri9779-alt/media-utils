@@ -16,7 +16,7 @@ else:
     scene.render.engine="BLENDER_WORKBENCH"
 scene.render.resolution_x=480
 scene.render.resolution_y=270
-scene.render.resolution_percentage=100
+scene.render.resolution_percentage=75 if RENDER_MODE=="cycles" else 100
 scene.render.fps=12
 scene.frame_start=1
 scene.frame_end=36
@@ -117,9 +117,17 @@ if RENDER_MODE=="cycles":
     bpy.context.object.data.energy=650
     bpy.context.object.data.size=4
 if RENDER_MODE=="cycles":
-    scene.frame_set(18)
     scene.render.image_settings.file_format="PNG"
-    scene.render.filepath="render_lab/output/robots_cycles_preview.png"
-    bpy.ops.render.render(write_still=True)
+    import time, json
+    from pathlib import Path
+    frames=[12,18,24]
+    timings=[]
+    for frame in frames:
+        scene.frame_set(frame)
+        scene.render.filepath=f"render_lab/output/robots_cycles_{frame:03d}.png"
+        start=time.monotonic()
+        bpy.ops.render.render(write_still=True)
+        timings.append({"frame":frame,"seconds":round(time.monotonic()-start,3),"bytes":Path(scene.render.filepath).stat().st_size})
+    Path("render_lab/output/robots_cycles_benchmark.json").write_text(json.dumps({"engine":"cycles","device":"CPU","samples":scene.cycles.samples,"resolution":[int(scene.render.resolution_x*scene.render.resolution_percentage/100),int(scene.render.resolution_y*scene.render.resolution_percentage/100)],"frames":timings},indent=2)+"\\n")
 else:
     bpy.ops.render.render(animation=True)
