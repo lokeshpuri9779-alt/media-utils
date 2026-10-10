@@ -18,8 +18,13 @@ def caption(video: Path, subtitles: Path, output: Path) -> dict:
         raise FileNotFoundError("Video and SRT captions must exist")
     if subtitles.suffix.lower() != ".srt":
         raise ValueError("Captions must be an SRT file")
-    validate_srt(subtitles)
-    if not shutil.which("ffmpeg"):
+    probe = subprocess.run(
+        ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+         "-of", "default=noprint_wrappers=1:nokey=1", str(video)],
+        check=True, capture_output=True, text=True, timeout=30,
+    )
+    validate_srt(subtitles, duration=float(probe.stdout.strip()))
+    if not shutil.which("ffmpeg") or not shutil.which("ffprobe"):
         raise RuntimeError("FFmpeg is required")
     if video.resolve() == output.resolve():
         raise ValueError("Output must differ from source video")
