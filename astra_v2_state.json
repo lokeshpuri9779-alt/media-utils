@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 44,
+  "attempts": 45,
   "confirmed_today": 44,
-  "last_attempt_at": "2026-10-10T15:09:17.937880+00:00",
+  "last_attempt_at": "2026-10-10T15:25:29.353334+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -505,8 +505,17 @@
       "uploaded_at": "2026-10-10T15:09:19.565834+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "HBPFaDSPWL4": {
+      "content_id": "rayvan-procedural-07b85508f1fdd1e5",
+      "title": "Mara and the A Clock at A Floating Market",
+      "day": "2026-10-10",
+      "uploaded_at": "2026-10-10T15:25:30.885152+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -963,6 +972,12 @@
     "rayvan-procedural-5120df842c464147": {
       "at": "2026-10-10T15:09:17.937865+00:00",
       "title": "Arun and the Tiny Machine at the Forgotten Moon Colony",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-07b85508f1fdd1e5": {
+      "at": "2026-10-10T15:25:29.353318+00:00",
+      "title": "Mara and the A Clock at A Floating Market",
       "format": "short",
       "result": "accepted"
     }
