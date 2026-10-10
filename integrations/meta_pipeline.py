@@ -5,6 +5,7 @@ No publishing or remote API calls. Only emits ready=True after all stages pass.
 from __future__ import annotations
 import argparse
 import json
+import hashlib
 from pathlib import Path
 try:
     from integrations.meta_assemble import assemble
@@ -47,6 +48,15 @@ def run(manifest: Path, clips: Path, output_dir: Path, soundtrack: Path | None =
         if not result["ready"]:
             final.unlink(missing_ok=True)
         result["output"] = str(final)
+        if result["ready"]:
+            # A technical pass is NOT publishing authorization. Bind this artifact
+            # to its exact bytes for a later separately authorized handoff.
+            digest = hashlib.sha256()
+            with final.open("rb") as stream:
+                for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+                    digest.update(chunk)
+            result["sha256"] = digest.hexdigest()
+            result["publish_authorized"] = False
         result["published"] = False
         return result
     except Exception:
