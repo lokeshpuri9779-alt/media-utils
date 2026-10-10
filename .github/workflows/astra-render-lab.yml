@@ -1,0 +1,23 @@
+name: ASTRA Render Lab - Manual CPU Benchmark
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  cpu-baseline:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run CPU-only baseline
+        run: python render_lab/benchmark.py
+      - name: Upload benchmark report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-render-lab-baseline
+          path: render_lab/output/baseline.json
+          if-no-files-found: warn
