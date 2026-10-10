@@ -1,7 +1,7 @@
 """Independent production-lane coordinator. No uploads or external API calls.
 
 Maintains distinct queues for current ASTRA and Meta ASTRA. This module does NOT
-alter existing workflows. Atomic state writes and a lock prevent local races.
+alter existing workflows. Atomic replacement prevents partial files; cross-run locking is not yet provided.
 """
 import argparse
 import json
@@ -50,6 +50,8 @@ def eligible(state, job, now=None):
     if job['status'] != 'queued':
         return False
     if job['format'] == 'long':
+        if any(other is not job and other['format'] == 'long' and other['status'] in ('reserved', 'uploading', 'awaiting_confirmation') for other in state['jobs']):
+            return False
         last = max((p['confirmed_at'] for p in state['published'] if p['format'] == 'long'), default=0)
         if last and now - last < 86400:
             return False
