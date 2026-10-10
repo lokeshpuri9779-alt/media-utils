@@ -1,0 +1,26 @@
+name: Cycles CPU benchmark
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Blender
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y blender
+          blender --version
+      - name: Measure CPU Cycles
+        run: |
+          blender -b -t 2 --python tools/cycles_benchmark.py -- --output cycles_benchmark.json --samples 16 --frames 3 --resolution 360
+      - name: Upload measured report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cycles-cpu-benchmark
+          path: cycles_benchmark.json
+          if-no-files-found: warn
