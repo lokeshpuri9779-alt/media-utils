@@ -7,7 +7,7 @@ from __future__ import annotations
 ENGINES = {
     'openvino_sd15': {'kind': 'keyframe', 'entrypoint': 'tools/experimental_openvino_benchmark.py', 'workflow': 'experimental-openvino.yml', 'verified': False},
     'blender_cpu': {'kind': '3d_animation', 'entrypoint': 'tools/experimental_animation_benchmark.py', 'workflow': 'experimental-animation.yml', 'verified': False},
-    'godot': {'kind': '2d_animation', 'entrypoint': None, 'workflow': None, 'verified': False},
+    'godot': {'kind': '2d_animation', 'entrypoint': 'tools/experimental_godot_benchmark.py', 'workflow': 'experimental-godot.yml', 'verified': False},
 }
 
 
