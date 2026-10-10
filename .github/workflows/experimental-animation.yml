@@ -1,0 +1,29 @@
+name: Experimental AI Images and Animation (manual)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test-animation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install free render tools
+        run: |
+          python -m pip install Pillow
+          sudo apt-get update -qq
+          sudo apt-get install -y blender ffmpeg
+      - name: Create test animation and metrics
+        run: python tools/experimental_animation_benchmark.py
+      - name: Save test video and performance
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: experimental-animation-${{ github.run_id }}
+          path: artifacts/experimental-animation/
+          retention-days: 7
+          if-no-files-found: warn
