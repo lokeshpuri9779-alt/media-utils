@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 12,
+  "attempts": 13,
   "confirmed_today": 12,
-  "last_attempt_at": "2026-10-10T21:55:26.665167+00:00",
+  "last_attempt_at": "2026-10-10T22:10:37.453442+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -680,8 +680,17 @@
       "uploaded_at": "2026-10-10T21:55:28.992008+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "e-BpPCFHTvo": {
+      "content_id": "rayvan-procedural-00a77bb274e34261",
+      "title": "Arun and the Tiny Machine at the City Beneath The Ocean",
+      "day": "2026-10-11",
+      "uploaded_at": "2026-10-10T22:10:39.164331+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -1288,6 +1297,12 @@
     "rayvan-procedural-ec78696bcda23416": {
       "at": "2026-10-10T21:55:26.665154+00:00",
       "title": "Ivo and the Lantern at the City Beneath The Ocean",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-00a77bb274e34261": {
+      "at": "2026-10-10T22:10:37.453426+00:00",
+      "title": "Arun and the Tiny Machine at the City Beneath The Ocean",
       "format": "short",
       "result": "accepted"
     }
