@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 27,
-  "confirmed_today": 26,
-  "last_attempt_at": "2026-10-10T10:43:11.018676+00:00",
+  "attempts": 28,
+  "confirmed_today": 27,
+  "last_attempt_at": "2026-10-10T10:51:20.339643+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -377,14 +377,21 @@
       "title": "Lina and the Tiny Machine at the Silent Mountain Village",
       "format": "short",
       "uploaded_at": "2026-10-10T10:34:06.678526+00:00"
+    },
+    "rayvan-procedural-c90098aa295a9290": {
+      "video_id": "jv6TmqnMSNc",
+      "confirmed_at": "2026-10-10T10:49:04.938469+00:00",
+      "title": "Tara and the Musical Note Nobody Else Can Hear at the Forgotten Moon Colony",
+      "format": "short",
+      "uploaded_at": "2026-10-10T10:43:13.037832+00:00"
     }
   },
   "pending": {
-    "jv6TmqnMSNc": {
-      "content_id": "rayvan-procedural-c90098aa295a9290",
-      "title": "Tara and the Musical Note Nobody Else Can Hear at the Forgotten Moon Colony",
+    "9aOKjZ4e0dA": {
+      "content_id": "rayvan-procedural-5b04198336c60f26",
+      "title": "Noor and the Clock at the City Beneath The Ocean",
       "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T10:43:13.037832+00:00",
+      "uploaded_at": "2026-10-10T10:51:22.324068+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -744,6 +751,12 @@
     "rayvan-procedural-c90098aa295a9290": {
       "at": "2026-10-10T10:43:11.018661+00:00",
       "title": "Tara and the Musical Note Nobody Else Can Hear at the Forgotten Moon Colony",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-5b04198336c60f26": {
+      "at": "2026-10-10T10:51:20.339628+00:00",
+      "title": "Noor and the Clock at the City Beneath The Ocean",
       "format": "short",
       "result": "accepted"
     }
