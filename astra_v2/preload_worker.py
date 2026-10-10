@@ -7,7 +7,7 @@ import time
 from pathlib import Path
 
 from astra_v2.control import STATE_FILE, read_json, state_for_day
-from astra_v2.creative import CreativeSkip, make_candidate
+from astra_v2.creative import CreativeSkip, make_candidate, make_long_candidate
 from astra_v2.preload_queue import artifacts, prepare
 
 
@@ -45,7 +45,18 @@ def main():
     with tempfile.TemporaryDirectory(prefix="astra-preload-") as tmp:
         video = Path(tmp) / "render.mp4"
         try:
-            candidate = make_candidate(video, excluded, set())
+            # Keep Shorts lanes intact. Only a deliberately enabled lane zero
+            # may attempt the licensed, QA-gated long-form renderer. An absent
+            # or rejected long candidate must never starve the Shorts backlog.
+            candidate = None
+            if (os.getenv("ASTRA_LONG_ENABLED", "0") == "1"
+                    and int(os.getenv("ASTRA_PRELOAD_LANE", "0")) == 0):
+                try:
+                    candidate = make_long_candidate(video, excluded, set())
+                except CreativeSkip as exc:
+                    print("ASTRA_LONG_PRELOAD_SKIP=" + str(exc)[:150])
+            if candidate is None:
+                candidate = make_candidate(video, excluded, set())
         except CreativeSkip as exc:
             print("ASTRA_PRELOAD="+json.dumps({"outcome":"no_approved_candidate","reason":str(exc)[:100]}))
             return
