@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 31,
+  "attempts": 32,
   "confirmed_today": 31,
-  "last_attempt_at": "2026-10-10T11:35:21.973802+00:00",
+  "last_attempt_at": "2026-10-10T11:53:59.338476+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -414,8 +414,17 @@
       "uploaded_at": "2026-10-10T11:35:23.588530+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "AfDQ8ecTwzM": {
+      "content_id": "rayvan-procedural-5ebc126f7fe2ae5e",
+      "title": "Ivo and the Sealed Letter Addressed To Tomorrow at the Abandoned Observatory",
+      "day": "2026-10-10",
+      "uploaded_at": "2026-10-10T11:54:00.907341+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -794,6 +803,12 @@
     "rayvan-procedural-582e9ad0618884be": {
       "at": "2026-10-10T11:35:21.973788+00:00",
       "title": "Pip and the Map at the Library Inside A Giant Tree",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-5ebc126f7fe2ae5e": {
+      "at": "2026-10-10T11:53:59.338459+00:00",
+      "title": "Ivo and the Sealed Letter Addressed To Tomorrow at the Abandoned Observatory",
       "format": "short",
       "result": "accepted"
     }
