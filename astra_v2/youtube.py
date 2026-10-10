@@ -21,6 +21,8 @@ def reason_for(response):
             return body[:80]
         if not isinstance(body, dict):
             return "api_error"
+        if isinstance(body.get("error"), str):
+            return body["error"][:80]
         nested = body.get("errors") or []
         if nested and isinstance(nested[0], dict):
             return str(nested[0].get("reason") or "api_error")[:80]
