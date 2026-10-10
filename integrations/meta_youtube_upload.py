@@ -29,16 +29,25 @@ def upload(handoff: Path, token: Path | None = None, execute: bool = False, priv
     from googleapiclient.discovery import build
     from googleapiclient.http import MediaFileUpload
     credentials = Credentials.from_authorized_user_file(str(token), ["https://www.googleapis.com/auth/youtube.upload"])
+    if not credentials.refresh_token and not credentials.valid:
+        raise ValueError("OAuth token has no usable access or refresh credentials")
     if not credentials.valid:
         if credentials.expired and credentials.refresh_token:
             credentials.refresh(Request())
         else:
             raise ValueError("OAuth token invalid; reauthorization required")
+    # Do not upload to an unexpected channel, even with a valid OAuth token.
+    expected_channel = __import__("os").environ.get("ASTRA_YOUTUBE_CHANNEL_ID")
+    if not expected_channel:
+        raise ValueError("Set ASTRA_YOUTUBE_CHANNEL_ID before --execute")
     # Recheck the file immediately before starting the upload.
     checked = verify(handoff)
     if not checked["verified"]:
         raise ValueError("Handoff changed before upload")
     service = build("youtube", "v3", credentials=credentials, cache_discovery=False)
+    channels = service.channels().list(part="id", mine=True).execute().get("items", [])
+    if not any(item.get("id") == expected_channel for item in channels):
+        raise ValueError("OAuth account does not match ASTRA_YOUTUBE_CHANNEL_ID")
     request = service.videos().insert(
         part="snippet,status",
         body={"snippet": {"title": payload["title"], "description": payload.get("description", "")},
