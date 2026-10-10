@@ -27,7 +27,7 @@ def main():
         report['error']=f'{type(exc).__name__}: {exc}'
     finally:
         report['elapsed_seconds']=round(time.monotonic()-start,2)
-        a.output.with_suffix('.json').write_text(json.dumps(report,indent=2)+'\\n')
+        a.output.with_suffix('.json').write_text(json.dumps(report,indent=2) + chr(10))
         print(json.dumps(report,indent=2))
     if not report['success']: raise SystemExit(1)
 
