@@ -16,7 +16,7 @@ func _process(_delta):
         return
     queue_redraw()
     await RenderingServer.frame_post_draw
-    get_viewport().get_texture().get_image().save_png("res://../frames/%04d.png" % (tick + 1))
+    get_viewport().get_texture().get_image().save_png(ProjectSettings.globalize_path("res://../frames/%04d.png" % (tick + 1)))
     tick += 1
 func _draw():
     var x := 120.0 + tick * 4.5
