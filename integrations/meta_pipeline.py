@@ -19,6 +19,10 @@ except ModuleNotFoundError:
 
 def run(manifest: Path, clips: Path, output_dir: Path, soundtrack: Path | None = None, srt: Path | None = None) -> dict:
     output_dir.mkdir(parents=True, exist_ok=True)
+    # Never leave a stale final.mp4 that a downstream publisher might pick up.
+    final = output_dir / "final.mp4"
+    if final.exists():
+        final.unlink()
     assembled = output_dir / "assembled.mp4"
     assemble(manifest, clips, assembled)
     current = assembled
@@ -30,11 +34,12 @@ def run(manifest: Path, clips: Path, output_dir: Path, soundtrack: Path | None =
         captioned = output_dir / "captioned.mp4"
         caption(current, srt, captioned)
         current = captioned
-    final = output_dir / "final.mp4"
     if current != final:
         import shutil
         shutil.copy2(current, final)
     result = validate(final, require_audio=True, min_duration=10)
+    if not result["ready"]:
+        final.unlink(missing_ok=True)
     result["output"] = str(final)
     result["published"] = False
     return result
