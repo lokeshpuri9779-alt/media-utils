@@ -19,6 +19,8 @@ jobs:
           godot --version
       - name: Run headless animation benchmark
         run: python3 tools/experimental_godot_benchmark.py
+      - name: Verify encoded animation contains visual motion
+        run: python3 tools/verify_experimental_motion.py artifacts/experimental-godot/godot_motion.mp4 --report artifacts/experimental-godot/motion-check.json
       - name: Save video and timing report
         if: always()
         uses: actions/upload-artifact@v4
