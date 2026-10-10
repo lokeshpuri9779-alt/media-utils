@@ -17,13 +17,14 @@ jobs:
         timeout-minutes: 10
         run: |
           sudo apt-get update -qq
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends blender ffmpeg
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends blender ffmpeg libegl1 libgl1 libgles2 libopengl0 libgl1-mesa-dri
           blender --version | head -n 2
+          ldconfig -p | grep 'libEGL.so.1'
       - name: Render real 3D object keyframes
         timeout-minutes: 8
         run: |
           mkdir -p render_lab/output
-          blender -b -t 2 --python render_lab/robots_3d_scene.py
+          LIBGL_ALWAYS_SOFTWARE=1 blender -b -t 2 --python render_lab/robots_3d_scene.py
           ffprobe -v error -show_entries format=duration,size -of json render_lab/output/robots_3d.mp4
       - name: Upload genuine 3D animation
         if: always()
