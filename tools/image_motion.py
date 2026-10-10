@@ -20,7 +20,7 @@ def render(image: Path, output: Path, seconds: int, width: int, height: int, fps
     frames = seconds * fps
     vf = (f'scale={width*2}:{height*2}:force_original_aspect_ratio=increase,'
           f'crop={width*2}:{height*2},'
-          f'zoompan=z=min(zoom+0.0007\\,1.15):x=iw/2-(iw/zoom/2):y=ih/2-(ih/zoom/2):'
+          f'zoompan=z=min(zoom+0.0007'+chr(92)+',1.15):x=iw/2-(iw/zoom/2):y=ih/2-(ih/zoom/2):'
           f'd={frames}:s={width}x{height}:fps={fps},format=yuv420p')
     cmd = ['ffmpeg', '-hide_banner', '-loglevel', 'error', '-y', '-loop', '1', '-i', str(image),
            '-vf', vf, '-frames:v', str(frames), '-an', '-c:v', 'libx264', '-preset', 'veryfast',
