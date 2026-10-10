@@ -3,7 +3,7 @@
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 16,
-  "confirmed_today": 15,
+  "confirmed_today": 16,
   "last_attempt_at": "2026-10-10T08:20:51.919537+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -300,19 +300,17 @@
       "title": "Tara and the Seed at the Glass Desert",
       "format": "short",
       "uploaded_at": "2026-10-10T07:59:27.089810+00:00"
-    }
-  },
-  "pending": {
-    "Q-562zhq8WA": {
-      "content_id": "rayvan-procedural-89f56d55c7d77fde",
+    },
+    "rayvan-procedural-89f56d55c7d77fde": {
+      "video_id": "Q-562zhq8WA",
+      "confirmed_at": "2026-10-10T08:21:22.292770+00:00",
       "title": "Emi and the Map at the Silent Mountain Village",
-      "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T08:20:54.025023+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-10T08:20:54.025023+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
