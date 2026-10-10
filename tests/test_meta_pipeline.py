@@ -51,5 +51,21 @@ class MetaPipelineControllerTests(unittest.TestCase):
             self.assertFalse(result["ready"])
             self.assertFalse((output / "final.mp4").exists())
 
+    def test_processing_exception_clears_stale_output_and_receipt(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            output = root / "output"
+            output.mkdir()
+            (output / "final.mp4").write_bytes(b"stale")
+            (output / "handoff.json").write_text('{"ready":true}')
+            def fail(_manifest, _clips, destination):
+                destination.write_bytes(b"incomplete")
+                raise RuntimeError("encoder crashed")
+            with patch("integrations.meta_pipeline.assemble", side_effect=fail):
+                with self.assertRaisesRegex(RuntimeError, "encoder crashed"):
+                    run(root / "story.json", root / "clips", output)
+            self.assertFalse((output / "final.mp4").exists())
+            self.assertFalse((output / "handoff.json").exists())
+
 if __name__ == "__main__":
     unittest.main()
