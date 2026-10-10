@@ -67,5 +67,20 @@ class MetaPipelineControllerTests(unittest.TestCase):
             self.assertFalse((output / "final.mp4").exists())
             self.assertFalse((output / "handoff.json").exists())
 
+    def test_retry_removes_all_stale_intermediates(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            output = root / "output"
+            output.mkdir()
+            for name in ("assembled.mp4", "mixed.mp4", "captioned.mp4", "final.mp4"):
+                (output / name).write_bytes(b"old")
+            def fail_before_render(_manifest, _clips, _destination):
+                raise RuntimeError("render unavailable")
+            with patch("integrations.meta_pipeline.assemble", side_effect=fail_before_render):
+                with self.assertRaisesRegex(RuntimeError, "render unavailable"):
+                    run(root / "story.json", root / "clips", output)
+            for name in ("assembled.mp4", "mixed.mp4", "captioned.mp4", "final.mp4"):
+                self.assertFalse((output / name).exists(), name)
+
 if __name__ == "__main__":
     unittest.main()
