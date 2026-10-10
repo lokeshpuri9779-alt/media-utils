@@ -3,7 +3,7 @@
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 30,
-  "confirmed_today": 29,
+  "confirmed_today": 30,
   "last_attempt_at": "2026-10-10T11:17:34.870321+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -398,19 +398,17 @@
       "title": "Emi and the Sealed Letter Addressed To Tomorrow at the Train Station At The Edge Of Time",
       "format": "short",
       "uploaded_at": "2026-10-10T11:05:59.038153+00:00"
-    }
-  },
-  "pending": {
-    "YAvat54j6Ck": {
-      "content_id": "rayvan-procedural-30aa55b757327e6a",
+    },
+    "rayvan-procedural-30aa55b757327e6a": {
+      "video_id": "YAvat54j6Ck",
+      "confirmed_at": "2026-10-10T11:21:26.683247+00:00",
       "title": "Arun and the Door at the Glass Desert",
-      "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T11:17:36.607544+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-10T11:17:36.607544+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
