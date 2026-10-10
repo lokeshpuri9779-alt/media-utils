@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -25,7 +26,7 @@ def enqueue(root: Path, *, prompt: str, profile: str = 'quality', seed: int = 12
     key = hashlib.sha256(json.dumps(request, sort_keys=True).encode()).hexdigest()[:24]
     for folder in ('pending', 'working', 'done', 'failed', 'images'):
         (root / folder).mkdir(parents=True, exist_ok=True)
-    if any((root / folder / (key + '.json')).exists() for folder in ('pending','working','done')):
+    if any((root / folder / (key + '.json')).exists() for folder in ('pending','working','done','failed')):
         return key
     target = root / 'pending' / (key + '.json')
     with target.open('x') as f:
@@ -37,6 +38,18 @@ def work_one(root: Path, *, enable_generation: bool = False) -> dict:
     if not enable_generation:
         return {'status': 'disabled', 'reason': 'Generation requires explicit opt-in'}
     pending = root / 'pending'
+    lock = root / '.worker_lock'
+    try:
+        lock.mkdir()
+    except FileExistsError:
+        return {'status': 'busy', 'reason': 'Another worker holds the queue lock'}
+    try:
+        return _work_claimed(root, pending)
+    finally:
+        lock.rmdir()
+
+
+def _work_claimed(root: Path, pending: Path) -> dict:
     for job in sorted(pending.glob('*.json')) if pending.exists() else []:
         working = root / 'working' / job.name
         working.parent.mkdir(parents=True, exist_ok=True)
