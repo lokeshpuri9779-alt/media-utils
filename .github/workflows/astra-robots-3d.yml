@@ -26,6 +26,7 @@ jobs:
           mkdir -p render_lab/output
           LIBGL_ALWAYS_SOFTWARE=1 blender -b -t 2 --python render_lab/robots_3d_scene.py
           ffprobe -v error -show_entries format=duration,size -of json render_lab/output/robots_3d.mp4
+          python3 -c "import json,subprocess; p=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_entries','format=duration,size','-of','json','render_lab/output/robots_3d.mp4'])); assert float(p['format']['duration']) >= 2.9; assert int(p['format']['size']) > 1000; print('Verified 3D MP4:',p['format'])"
       - name: Upload genuine 3D animation
         if: always()
         uses: actions/upload-artifact@v4
