@@ -9,9 +9,11 @@ from __future__ import annotations
 import argparse
 import json
 import resource
+import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from integrations.meta_cpu_diffusion import MODELS, generate
 
 DEFAULT_PROMPT = ('cinematic stylized 3D animation film still, expressive small copper robot '
