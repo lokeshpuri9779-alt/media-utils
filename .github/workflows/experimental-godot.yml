@@ -1,6 +1,9 @@
 name: Experimental Godot Motion (manual)
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/experimental-godot.yml'
 permissions:
   contents: read
 jobs:
