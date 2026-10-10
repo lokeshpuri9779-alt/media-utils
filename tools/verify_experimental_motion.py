@@ -1,26 +1,32 @@
-"""Verify real experimental output artifacts; reject blank/still animation.
-No YouTube access and no production integration.
-"""
+"""Validate experimental MP4 structure and actual changing frames (no publishing)."""
 import argparse,json,subprocess
 from pathlib import Path
 
 def probe_video(path):
     path=Path(path)
-    cmd=['ffprobe','-v','error','-select_streams','v:0','-show_entries','stream=width,height,nb_frames,avg_frame_rate','-show_entries','format=duration','-of','json',str(path)]
+    if not path.is_file() or path.stat().st_size<1000:
+        raise ValueError('missing or empty video')
+    cmd=['ffprobe','-v','error','-select_streams','v:0','-show_entries','stream=width,height','-show_entries','format=duration','-of','json',str(path)]
     data=json.loads(subprocess.run(cmd,check=True,capture_output=True,text=True,timeout=30).stdout)
     stream=(data.get('streams') or [{}])[0]
     duration=float(data.get('format',{}).get('duration') or 0)
-    if not path.is_file() or path.stat().st_size<1000 or duration<2 or int(stream.get('width') or 0)<320:
-        raise ValueError('missing, short, or invalid video')
-    # FFmpeg scene detector is deliberately conservative: no visual changes means
-    # the animation should not pass merely because the MP4 was encoded.
-    cmd=['ffmpeg','-hide_banner','-loglevel','info','-i',str(path),'-vf','select=gt(scene\\,0.015),showinfo','-an','-f','null','-']
-    result=subprocess.run(cmd,capture_output=True,text=True,timeout=60)
-    if result.returncode:raise RuntimeError(result.stderr[-1200:])
-    changed=result.stderr.count('showinfo')
-    return {'path':str(path),'duration_seconds':duration,'width':int(stream['width']),
-            'height':int(stream['height']),'scene_change_log_lines':changed,
-            'visual_change_detected':changed>0,'pass':changed>0}
+    width=int(stream.get('width') or 0);height=int(stream.get('height') or 0)
+    if duration<2 or width<320 or height<320:
+        raise ValueError('video duration or resolution too small')
+    # Sample frames at 2 fps and hash their decoded grayscale pixels.
+    # Unlike scene-cut detection, this also detects smooth character movement.
+    cmd=['ffmpeg','-hide_banner','-loglevel','error','-i',str(path),
+         '-vf','fps=2,scale=64:64,format=gray','-an','-f','framemd5','-']
+    result=subprocess.run(cmd,check=True,capture_output=True,text=True,timeout=60)
+    frame_lines=[line for line in result.stdout.splitlines() if line.strip() and not line.startswith('#')]
+    hashes=[line.rsplit(',',1)[-1].strip() for line in frame_lines]
+    unique=len(set(hashes))
+    # Minimum 3 distinct sampled frames avoids accepting static encoded videos.
+    passed=len(hashes)>=4 and unique>=3
+    return {'path':str(path),'duration_seconds':duration,'width':width,'height':height,
+            'sampled_frames':len(hashes),'unique_frame_hashes':unique,
+            'visual_change_detected':unique>=3,'pass':passed,
+            'quality_verified':False,'published':False}
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('video',type=Path);p.add_argument('--report',type=Path)
