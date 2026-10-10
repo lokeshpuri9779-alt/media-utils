@@ -3,7 +3,7 @@
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 36,
-  "confirmed_today": 35,
+  "confirmed_today": 36,
   "last_attempt_at": "2026-10-10T12:47:49.423900+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -440,19 +440,17 @@
       "title": "Emi and the Map at the City Beneath The Ocean",
       "format": "short",
       "uploaded_at": "2026-10-10T12:30:36.635827+00:00"
-    }
-  },
-  "pending": {
-    "lgfL2NlutX4": {
-      "content_id": "rayvan-procedural-ef207075c1b6b510",
+    },
+    "rayvan-procedural-ef207075c1b6b510": {
+      "video_id": "lgfL2NlutX4",
+      "confirmed_at": "2026-10-10T12:52:35.181365+00:00",
       "title": "Arun and the Musical Note Nobody Else Can Hear at the Glass Desert",
-      "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T12:47:51.176923+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-10T12:47:51.176923+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
