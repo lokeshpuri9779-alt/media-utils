@@ -23,26 +23,32 @@ def run(manifest: Path, clips: Path, output_dir: Path, soundtrack: Path | None =
     final = output_dir / "final.mp4"
     if final.exists():
         final.unlink()
+    # A previous success receipt must never survive a failed rerun.
+    (output_dir / "handoff.json").unlink(missing_ok=True)
     assembled = output_dir / "assembled.mp4"
-    assemble(manifest, clips, assembled)
-    current = assembled
-    if soundtrack is not None:
-        mixed = output_dir / "mixed.mp4"
-        add_soundtrack(current, soundtrack, mixed)
-        current = mixed
-    if srt is not None:
-        captioned = output_dir / "captioned.mp4"
-        caption(current, srt, captioned)
-        current = captioned
-    if current != final:
-        import shutil
-        shutil.copy2(current, final)
-    result = validate(final, require_audio=True, min_duration=10)
-    if not result["ready"]:
+    try:
+        assemble(manifest, clips, assembled)
+        current = assembled
+        if soundtrack is not None:
+            mixed = output_dir / "mixed.mp4"
+            add_soundtrack(current, soundtrack, mixed)
+            current = mixed
+        if srt is not None:
+            captioned = output_dir / "captioned.mp4"
+            caption(current, srt, captioned)
+            current = captioned
+        if current != final:
+            import shutil
+            shutil.copy2(current, final)
+        result = validate(final, require_audio=True, min_duration=10)
+        if not result["ready"]:
+            final.unlink(missing_ok=True)
+        result["output"] = str(final)
+        result["published"] = False
+        return result
+    except Exception:
         final.unlink(missing_ok=True)
-    result["output"] = str(final)
-    result["published"] = False
-    return result
+        raise
 
 def main() -> None:
     p = argparse.ArgumentParser()
