@@ -32,7 +32,7 @@ def artifacts():
     return [x for x in data.get("artifacts", [])
             if x.get("name", "").startswith(PREFIX)
             and not x.get("expired", True)
-            and x.get("workflow_run", {}).get("head_branch") == "main"]
+            and (x.get("workflow_run") or {}).get("head_branch") == "main"]
 
 
 def candidate_ids():
