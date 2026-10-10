@@ -1,0 +1,42 @@
+name: ASTRA Render Lab - SD15 Story Video
+on:
+  workflow_dispatch:
+  push:
+    branches: [astra-render-lab-isolated]
+    paths:
+      - '.github/workflows/astra-sd15-story-lab.yml'
+permissions:
+  contents: read
+concurrency:
+  group: astra-sd15-story-lab
+  cancel-in-progress: false
+jobs:
+  story-video:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install free FFmpeg encoder
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ffmpeg
+      - name: Install CPU-only diffusion dependencies
+        run: |
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install 'diffusers>=0.30,<0.38' 'transformers>=4.44,<5' 'accelerate>=0.30,<2' 'Pillow>=10,<13'
+      - name: Render original SD 1.5 story stills and animate
+        run: |
+          python render_lab/sd15_story_experiment.py --enable-generation --profile quality --steps 15 --scenes 2
+      - name: Upload genuine video and evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-sd15-story-video
+          path: |
+            render_lab/output/story_experiment/*.png
+            render_lab/output/story_experiment/*.mp4
+            render_lab/output/story_experiment/*.json
+          if-no-files-found: warn
