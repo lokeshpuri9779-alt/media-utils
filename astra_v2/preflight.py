@@ -66,6 +66,8 @@ def reconcile_pending(youtube: Youtube, state: dict, channel_name: str):
                 "video_id": video_id,
                 "confirmed_at": utcnow().isoformat(),
                 "title": entry.get("title") or "",
+                "format": entry.get("format", "short"),
+                "uploaded_at": entry.get("uploaded_at"),
             }
             if entry.get("day") == state.get("day"):
                 state["confirmed_today"] = int(state.get("confirmed_today", 0)) + 1
