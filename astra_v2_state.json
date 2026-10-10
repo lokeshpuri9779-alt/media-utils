@@ -3,7 +3,7 @@
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 22,
-  "confirmed_today": 21,
+  "confirmed_today": 22,
   "last_attempt_at": "2026-10-10T09:51:42.606342+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -342,19 +342,17 @@
       "title": "Tara and the Door at the Forgotten Moon Colony",
       "format": "short",
       "uploaded_at": "2026-10-10T09:33:24.973163+00:00"
-    }
-  },
-  "pending": {
-    "lyHqoAID79k": {
-      "content_id": "rayvan-procedural-b20f47f5332967bc",
+    },
+    "rayvan-procedural-b20f47f5332967bc": {
+      "video_id": "lyHqoAID79k",
+      "confirmed_at": "2026-10-10T09:55:12.815677+00:00",
       "title": "Noor and the Lantern at the City Beneath The Ocean",
-      "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T09:51:44.249672+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-10T09:51:44.249672+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
