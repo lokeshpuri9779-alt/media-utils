@@ -3,7 +3,7 @@
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 18,
-  "confirmed_today": 17,
+  "confirmed_today": 18,
   "last_attempt_at": "2026-10-10T22:54:51.771452+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -713,19 +713,17 @@
       "title": "Arun and the Tiny Machine at the Abandoned Observatory",
       "format": "short",
       "uploaded_at": "2026-10-10T22:47:14.508876+00:00"
-    }
-  },
-  "pending": {
-    "2rUA5PQiFlY": {
-      "content_id": "rayvan-procedural-bd2a7d693aba9864",
+    },
+    "rayvan-procedural-bd2a7d693aba9864": {
+      "video_id": "2rUA5PQiFlY",
+      "confirmed_at": "2026-10-10T22:59:40.124915+00:00",
       "title": "Emi and the Lantern at the Train Station At The Edge Of Time",
-      "day": "2026-10-11",
-      "uploaded_at": "2026-10-10T22:54:53.227146+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-10T22:54:53.227146+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
