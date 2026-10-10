@@ -15,6 +15,8 @@ def select_renderer(report, frames, max_seconds, complexity_factor=1.0, target_w
     t = report.get("median_warm_seconds")
     if not isinstance(t, (int, float)) or t <= 0:
         return {"engine": "BLENDER_EEVEE", "reason": "invalid_cycles_measurement"}
+    if frames <= 0 or max_seconds <= 0 or complexity_factor < 1:
+        return {"engine": "BLENDER_EEVEE", "reason": "invalid_render_budget"}
     estimate = round(t * frames * complexity_factor, 2)
     if estimate > max_seconds:
         return {"engine": "BLENDER_EEVEE", "reason": "cycles_over_budget", "estimated_seconds": estimate}
