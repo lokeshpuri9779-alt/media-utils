@@ -1,6 +1,9 @@
 name: Experimental AI Images and Animation (manual)
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/experimental-animation.yml'
 permissions:
   contents: read
 jobs:
