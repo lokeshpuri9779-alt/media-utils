@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 5,
+  "attempts": 6,
   "confirmed_today": 5,
-  "last_attempt_at": "2026-10-10T05:02:05.514989+00:00",
+  "last_attempt_at": "2026-10-10T05:12:05.690306+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -234,8 +234,17 @@
       "title": "Ivo and the Clock at the Abandoned Observatory"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "BYK4a1lL0b8": {
+      "content_id": "rayvan-procedural-47b657c53f39af8e",
+      "title": "Lina and the Door at the City Beneath The Ocean",
+      "day": "2026-10-10",
+      "uploaded_at": "2026-10-10T05:12:07.123271+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -461,6 +470,11 @@
     "rayvan-procedural-71673127deae94ef": {
       "at": "2026-10-10T05:02:05.514974+00:00",
       "title": "Ivo and the Clock at the Abandoned Observatory",
+      "result": "accepted"
+    },
+    "rayvan-procedural-47b657c53f39af8e": {
+      "at": "2026-10-10T05:12:05.690288+00:00",
+      "title": "Lina and the Door at the City Beneath The Ocean",
       "result": "accepted"
     }
   },
