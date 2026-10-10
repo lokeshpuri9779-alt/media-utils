@@ -42,7 +42,7 @@ def assemble(manifest, output):
                 check=True,timeout=300)
             normalized.append(target)
         concat = Path(tmp) / 'concat.txt'
-        concat.write_text(''.join("file '" + str(p) + "'\\n" for p in normalized))
+        concat.write_text(''.join("file '" + str(p) + "'" + chr(10) for p in normalized))
         subprocess.run(['ffmpeg','-nostdin','-hide_banner','-loglevel','error','-y',
             '-f','concat','-safe','0','-i',str(concat),'-c','copy','-movflags',
             '+faststart',str(output)],check=True,timeout=300)
