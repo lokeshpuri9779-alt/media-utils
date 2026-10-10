@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 23,
-  "confirmed_today": 22,
-  "last_attempt_at": "2026-10-10T23:45:31.455346+00:00",
+  "attempts": 24,
+  "confirmed_today": 23,
+  "last_attempt_at": "2026-10-10T23:52:39.434403+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -748,14 +748,21 @@
       "title": "Noor and the Lantern at the Abandoned Observatory",
       "format": "short",
       "uploaded_at": "2026-10-10T23:36:33.120715+00:00"
+    },
+    "rayvan-procedural-634e1ea7fc386bc0": {
+      "video_id": "abq-xmozKM0",
+      "confirmed_at": "2026-10-10T23:51:34.667957+00:00",
+      "title": "Arun and the Lantern at the Glass Desert",
+      "format": "short",
+      "uploaded_at": "2026-10-10T23:45:32.689032+00:00"
     }
   },
   "pending": {
-    "abq-xmozKM0": {
-      "content_id": "rayvan-procedural-634e1ea7fc386bc0",
-      "title": "Arun and the Lantern at the Glass Desert",
+    "rOMOlkiAPr4": {
+      "content_id": "rayvan-procedural-43456abfb1954df9",
+      "title": "Arun and the Door at the Glass Desert",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-10T23:45:32.689032+00:00",
+      "uploaded_at": "2026-10-10T23:52:40.833164+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1433,6 +1440,12 @@
     "rayvan-procedural-634e1ea7fc386bc0": {
       "at": "2026-10-10T23:45:31.455330+00:00",
       "title": "Arun and the Lantern at the Glass Desert",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-43456abfb1954df9": {
+      "at": "2026-10-10T23:52:39.434387+00:00",
+      "title": "Arun and the Door at the Glass Desert",
       "format": "short",
       "result": "accepted"
     }
