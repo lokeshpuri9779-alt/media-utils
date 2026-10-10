@@ -16,6 +16,8 @@ jobs:
         run: python render_lab/capabilities.py
       - name: Run CPU-only baseline
         run: python render_lab/benchmark.py
+      - name: Benchmark Blender if available
+        run: python render_lab/blender_benchmark.py
       - name: Verify rendered MP4 and metadata
         run: python render_lab/verify.py
       - name: Upload benchmark report
@@ -24,6 +26,8 @@ jobs:
         with:
           name: astra-render-lab-baseline
           path: |
+            render_lab/output/blender.json
+            render_lab/output/blender.mp4
             render_lab/output/verification.json
             render_lab/output/capabilities.json
             render_lab/output/baseline.json
