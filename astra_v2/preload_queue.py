@@ -28,11 +28,18 @@ def artifacts():
     repo = os.environ.get("GITHUB_REPOSITORY", "").strip()
     if not repo or "/" not in repo:
         return []
-    data = _api(f"repos/{repo}/actions/artifacts?per_page=100")
-    return [x for x in data.get("artifacts", [])
-            if x.get("name", "").startswith(PREFIX)
-            and not x.get("expired", True)
-            and (x.get("workflow_run") or {}).get("head_branch") == "main"]
+    matched = []
+    for page in range(1, 11):
+        data = _api(f"repos/{repo}/actions/artifacts?per_page=100&page={page}")
+        batch = data.get("artifacts") or []
+        matched.extend(x for x in batch
+                       if isinstance(x, dict)
+                       and str(x.get("name") or "").startswith(PREFIX)
+                       and not x.get("expired", True)
+                       and (x.get("workflow_run") or {}).get("head_branch") == "main")
+        if len(batch) < 100:
+            break
+    return matched
 
 
 def candidate_ids():
