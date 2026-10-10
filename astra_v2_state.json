@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 49,
+  "attempts": 50,
   "confirmed_today": 49,
-  "last_attempt_at": "2026-10-10T16:40:05.940607+00:00",
+  "last_attempt_at": "2026-10-10T16:47:52.012126+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -540,8 +540,17 @@
       "uploaded_at": "2026-10-10T16:40:07.651701+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "0-MmfB2RB4c": {
+      "content_id": "rayvan-procedural-e02ebc140b4d55bb",
+      "title": "Mara and the A Door at A Floating Market",
+      "day": "2026-10-10",
+      "uploaded_at": "2026-10-10T16:47:53.309204+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -1030,7 +1039,13 @@
       "title": "Mara and the A Tiny Machine at A Floating Market",
       "format": "short",
       "result": "accepted"
+    },
+    "rayvan-procedural-e02ebc140b4d55bb": {
+      "at": "2026-10-10T16:47:52.012111+00:00",
+      "title": "Mara and the A Door at A Floating Market",
+      "format": "short",
+      "result": "accepted"
     }
   },
-  "last_feedback_attempt_at": "2026-10-10T04:41:14.389669+00:00"
+  "last_feedback_attempt_at": "2026-10-10T16:47:30.480778+00:00"
 }
