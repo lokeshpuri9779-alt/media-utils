@@ -194,6 +194,7 @@ def make_long_candidate(path, excluded_ids, excluded_titles):
         title, desc = legacy.make_long(path, episode)
     except RuntimeError as exc:
         if "quality" in str(exc).lower() or "creative" in str(exc).lower():
+            print("ASTRA_LONG_QA_REJECTED=" + str(exc)[:1800])
             return None
         raise
     meta = dict(legacy.CONTENT_META)
