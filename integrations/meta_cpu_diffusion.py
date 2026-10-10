@@ -10,21 +10,24 @@ import json
 import os
 from pathlib import Path
 
-MODEL = 'segmind/tiny-sd'
+MODELS = {'quality': 'stable-diffusion-v1-5/stable-diffusion-v1-5', 'low_memory': 'segmind/tiny-sd'}
 
 
 def generate(prompt: str, output: Path, *, enabled: bool = False,
-             steps: int = 25, seed: int = 1234) -> dict:
+             steps: int = 25, seed: int = 1234, profile: str = 'quality') -> dict:
     if not enabled:
         raise RuntimeError('CPU diffusion disabled until explicitly opted in')
     if not prompt.strip():
         raise ValueError('Prompt is required')
     if not 1 <= steps <= 100:
         raise ValueError('steps must be 1-100')
+    if profile not in MODELS:
+        raise ValueError('Unknown model profile')
+    model = MODELS[profile]
     # Import only after opt-in, so basic CLI use requires no ML packages.
     import torch
     from diffusers import StableDiffusionPipeline
-    pipe = StableDiffusionPipeline.from_pretrained(MODEL, torch_dtype=torch.float32,
+    pipe = StableDiffusionPipeline.from_pretrained(model, torch_dtype=torch.float32,
                                                    safety_checker=None)
     pipe = pipe.to('cpu')
     pipe.enable_attention_slicing()
@@ -33,7 +36,7 @@ def generate(prompt: str, output: Path, *, enabled: bool = False,
                  generator=generator).images[0]
     output.parent.mkdir(parents=True, exist_ok=True)
     image.save(output)
-    return {'output': str(output), 'model': MODEL, 'source': 'cpu_diffusion',
+    return {'output': str(output), 'model': model, 'profile': profile, 'source': 'cpu_diffusion',
             'still_image_only': True, 'published': False}
 
 
@@ -44,9 +47,10 @@ def main() -> None:
     parser.add_argument('--steps', type=int, default=25)
     parser.add_argument('--seed', type=int, default=1234)
     parser.add_argument('--enable', action='store_true')
+    parser.add_argument('--profile', choices=sorted(MODELS), default='quality')
     args = parser.parse_args()
     print(json.dumps(generate(args.prompt, args.output, enabled=args.enable,
-                              steps=args.steps, seed=args.seed), indent=2))
+                              steps=args.steps, seed=args.seed, profile=args.profile), indent=2))
 
 if __name__ == '__main__':
     main()
