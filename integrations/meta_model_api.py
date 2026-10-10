@@ -38,7 +38,7 @@ def generate(prompt: str, output: Path, *, region: str, enabled: bool = False) -
     if 'b64_json' not in image:
         raise RuntimeError('API response did not include base64 image; signed-URL output not yet supported')
     raw = base64.b64decode(image['b64_json'], validate=True)
-    if not raw.startswith(b'\\x89PNG') and not raw.startswith(b'\\xff\\xd8'):
+    if not raw.startswith(bytes.fromhex('89504e47')) and not raw.startswith(bytes.fromhex('ffd8')):
         raise ValueError('Unrecognized image format')
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_bytes(raw)
