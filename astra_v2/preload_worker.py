@@ -32,7 +32,7 @@ def main():
         print("ASTRA_PRELOAD="+json.dumps({"outcome":"buffer_full","usable_count":len(usable),"total_artifacts":len(queue)}))
         return
     # Reuse the already-fetched artifact listing: avoid a second GitHub API call.
-    excluded.update(str(a['name'])[len('astra-preloaded-'):] for a in queue)
+    excluded.update(str(item["name"])[len("astra-preloaded-"):] for item in usable)
     if serialized:
         for number in range(1, 5):
             cid = f"rayvan-season-01-episode-{number:02d}"
