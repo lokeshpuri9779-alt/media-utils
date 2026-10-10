@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 19,
-  "confirmed_today": 18,
-  "last_attempt_at": "2026-10-10T23:09:25.736231+00:00",
+  "attempts": 20,
+  "confirmed_today": 19,
+  "last_attempt_at": "2026-10-10T23:20:33.819020+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -720,14 +720,21 @@
       "title": "Emi and the Lantern at the Train Station At The Edge Of Time",
       "format": "short",
       "uploaded_at": "2026-10-10T22:54:53.227146+00:00"
+    },
+    "rayvan-procedural-678019435ce4f22c": {
+      "video_id": "lAgNaOo5pXU",
+      "confirmed_at": "2026-10-10T23:18:43.664762+00:00",
+      "title": "Ivo and the Clock at the Abandoned Observatory",
+      "format": "short",
+      "uploaded_at": "2026-10-10T23:09:27.448478+00:00"
     }
   },
   "pending": {
-    "lAgNaOo5pXU": {
-      "content_id": "rayvan-procedural-678019435ce4f22c",
-      "title": "Ivo and the Clock at the Abandoned Observatory",
+    "V7aTqrQfbzc": {
+      "content_id": "rayvan-procedural-4f06f8477ad8f7f8",
+      "title": "Pip and the Tiny Machine at the Abandoned Observatory",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-10T23:09:27.448478+00:00",
+      "uploaded_at": "2026-10-10T23:20:35.843317+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1381,6 +1388,12 @@
     "rayvan-procedural-678019435ce4f22c": {
       "at": "2026-10-10T23:09:25.736211+00:00",
       "title": "Ivo and the Clock at the Abandoned Observatory",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-4f06f8477ad8f7f8": {
+      "at": "2026-10-10T23:20:33.819006+00:00",
+      "title": "Pip and the Tiny Machine at the Abandoned Observatory",
       "format": "short",
       "result": "accepted"
     }
