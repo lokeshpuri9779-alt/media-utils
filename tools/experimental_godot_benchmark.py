@@ -28,7 +28,7 @@ func _draw():
 ''')
 report={'engine':'Godot 4 headless','published':False,'success':False};start=time.monotonic()
 try:
-    subprocess.run(['godot','--headless','--path',str(proj),'--quit-after','65'],check=True,timeout=150)
+    subprocess.run(['xvfb-run','-a','godot','--path',str(proj),'--quit-after','65'],check=True,timeout=150)
     frames=len(list((root/'frames').glob('*.png')));report['frames']=frames
     if frames<40:raise RuntimeError('insufficient animation frames')
     subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-framerate','12','-i',str(root/'frames/%04d.png'),'-c:v','libx264','-pix_fmt','yuv420p',str(root/'godot_motion.mp4')],check=True,timeout=120)
