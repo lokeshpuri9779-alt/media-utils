@@ -92,3 +92,13 @@ Explicit user approval is required before:
 - creating/using new external accounts or credentials;
 - making irreversible destructive changes;
 - making legal/financial commitments on the user's behalf.
+
+## 2026-10-10 verified runtime priorities
+- [x] Adjust procedural catalog tests: 16 is an upper bound; diversity-constrained histories can produce 15 safe stories. Commit 9edd155d29e438a7096a1f6324ff360316b25168.
+- [ ] Confirm a fresh preload workflow passes the procedural test and produces an approved MP4; previous four lanes failed on two exact-count assertions (run 38028251380).
+- [ ] Run the long-form 24-hour cooldown regression suite on the updated main branch.
+- [ ] Keep Shorts publication moving even if a queued long-form artifact is cooling down; test per-format queue selection.
+- [ ] Build and test dedicated long-form preloading; existing preload_worker calls make_candidate (Shorts) only, despite publisher ASTRA_LONG_ENABLED=1.
+- [ ] Validate 1920x1080 long render time, resource usage, audio, licensing, and original narrative quality before enabling unattended long-form publishing.
+- [ ] Verify the first publicly processed long video ID and track actual long-form publication cadence separately from Shorts.
+- [ ] Gather real YouTube audience and monetization metrics only when connected analytics permit; do not infer them from uploads.
