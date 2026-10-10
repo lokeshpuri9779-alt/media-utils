@@ -3,7 +3,7 @@
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 55,
-  "confirmed_today": 54,
+  "confirmed_today": 55,
   "last_attempt_at": "2026-10-10T17:48:53.241723+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -573,19 +573,17 @@
       "title": "Noor and the Musical Note Nobody Else Can Hear at the Silent Mountain Village",
       "format": "short",
       "uploaded_at": "2026-10-10T17:32:11.826064+00:00"
-    }
-  },
-  "pending": {
-    "ODcwCKCtjwA": {
-      "content_id": "rayvan-procedural-2b32c43b9142d8fb",
+    },
+    "rayvan-procedural-2b32c43b9142d8fb": {
+      "video_id": "ODcwCKCtjwA",
+      "confirmed_at": "2026-10-10T17:50:02.210197+00:00",
       "title": "Ivo and the Clock at the Silent Mountain Village",
-      "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T17:48:54.687839+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-10T17:48:54.687839+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
