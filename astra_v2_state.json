@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 34,
-  "confirmed_today": 33,
-  "last_attempt_at": "2026-10-10T12:20:56.968140+00:00",
+  "attempts": 35,
+  "confirmed_today": 34,
+  "last_attempt_at": "2026-10-10T12:30:34.877528+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -426,14 +426,21 @@
       "title": "Lina and the Door at the Silent Mountain Village",
       "format": "short",
       "uploaded_at": "2026-10-10T12:05:38.629329+00:00"
+    },
+    "rayvan-procedural-6d90aab9ebf9860f": {
+      "video_id": "pb4XRvH9Co0",
+      "confirmed_at": "2026-10-10T12:27:24.777702+00:00",
+      "title": "Tara and the Seed at the Forgotten Moon Colony",
+      "format": "short",
+      "uploaded_at": "2026-10-10T12:20:58.403363+00:00"
     }
   },
   "pending": {
-    "pb4XRvH9Co0": {
-      "content_id": "rayvan-procedural-6d90aab9ebf9860f",
-      "title": "Tara and the Seed at the Forgotten Moon Colony",
+    "QN-MiC3d-9E": {
+      "content_id": "rayvan-procedural-4abdf5f673ce336f",
+      "title": "Emi and the Map at the City Beneath The Ocean",
       "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T12:20:58.403363+00:00",
+      "uploaded_at": "2026-10-10T12:30:36.635827+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -835,6 +842,12 @@
     "rayvan-procedural-6d90aab9ebf9860f": {
       "at": "2026-10-10T12:20:56.968124+00:00",
       "title": "Tara and the Seed at the Forgotten Moon Colony",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-4abdf5f673ce336f": {
+      "at": "2026-10-10T12:30:34.877514+00:00",
+      "title": "Emi and the Map at the City Beneath The Ocean",
       "format": "short",
       "result": "accepted"
     }
