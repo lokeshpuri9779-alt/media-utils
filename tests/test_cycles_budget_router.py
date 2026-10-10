@@ -22,6 +22,16 @@ class CyclesBudgetTests(unittest.TestCase):
         result = select_renderer({"engine":"CYCLES","median_warm_seconds":5},120,600,2)
         self.assertEqual(result["reason"], "cycles_over_budget")
 
+    def test_low_resolution_cannot_approve_hd_render(self):
+        report={"engine":"CYCLES","median_warm_seconds":1,"resolution_x":360,"resolution_y":202,"samples":16}
+        result=select_renderer(report,120,600,2,1280,720,32)
+        self.assertEqual(result["reason"],"benchmark_not_representative")
+
+    def test_matching_hd_benchmark_can_approve(self):
+        report={"engine":"CYCLES","median_warm_seconds":1,"resolution_x":1280,"resolution_y":720,"samples":32}
+        result=select_renderer(report,120,600,2,1280,720,32)
+        self.assertEqual(result["engine"],"CYCLES")
+
     def test_invalid_measurements(self):
         for value in (0, -1, None, "slow"):
             with self.subTest(value=value):
