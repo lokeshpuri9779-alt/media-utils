@@ -5,7 +5,15 @@ from mathutils import Vector
 bpy.ops.object.select_all(action="SELECT")
 bpy.ops.object.delete(use_global=False)
 scene=bpy.context.scene
-scene.render.engine="BLENDER_WORKBENCH"
+import os
+RENDER_MODE=os.environ.get("ASTRA_ROBOT_RENDER_MODE","workbench").lower()
+if RENDER_MODE=="cycles":
+    scene.render.engine="CYCLES"
+    scene.cycles.device="CPU"
+    scene.cycles.samples=8
+    scene.render.resolution_percentage=75
+else:
+    scene.render.engine="BLENDER_WORKBENCH"
 scene.render.resolution_x=480
 scene.render.resolution_y=270
 scene.render.resolution_percentage=100
@@ -21,6 +29,12 @@ scene.world.color=(0.15,0.15,0.15)
 def material(name, color):
     m=bpy.data.materials.new(name)
     m.diffuse_color=(*color,1)
+    m.use_nodes=True
+    bsdf=m.node_tree.nodes.get("Principled BSDF")
+    if bsdf:
+        bsdf.inputs["Base Color"].default_value=(*color,1)
+        bsdf.inputs["Metallic"].default_value=0.8 if "copper" in name.lower() or "trim" in name.lower() else 0.0
+        bsdf.inputs["Roughness"].default_value=0.28 if "copper" in name.lower() else 0.7
     return m
 copper=material("Rose copper",(0.62,0.28,0.16))
 eyes=material("Glowing white eyes",(0.95,0.96,1))
@@ -94,4 +108,12 @@ scene.display.shading.cavity_type="BOTH"
 scene.display.shading.curvature_ridge_factor=1.3
 scene.display.shading.curvature_valley_factor=1.0
 scene.render.film_transparent=False
+if RENDER_MODE=="cycles":
+    bpy.ops.object.light_add(type="AREA",location=(-3,-4,7))
+    bpy.context.object.data.energy=950
+    bpy.context.object.data.shape="DISK"
+    bpy.context.object.data.size=5
+    bpy.ops.object.light_add(type="AREA",location=(3,2,5))
+    bpy.context.object.data.energy=650
+    bpy.context.object.data.size=4
 bpy.ops.render.render(animation=True)
