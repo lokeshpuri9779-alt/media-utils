@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 2,
+  "attempts": 3,
   "confirmed_today": 2,
-  "last_attempt_at": "2026-10-10T19:02:56.539583+00:00",
+  "last_attempt_at": "2026-10-10T19:22:12.340557+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -610,8 +610,17 @@
       "uploaded_at": "2026-10-10T19:02:58.373432+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "rzIlBJGgCQA": {
+      "content_id": "rayvan-procedural-76254146682863b8",
+      "title": "Lina and the Tiny Machine at the Train Station At The Edge Of Time",
+      "day": "2026-10-11",
+      "uploaded_at": "2026-10-10T19:22:15.378652+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -1158,6 +1167,12 @@
     "rayvan-procedural-8fca94ccc19bc1ce": {
       "at": "2026-10-10T19:02:56.539568+00:00",
       "title": "Arun and the Door at the Forgotten Moon Colony",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-76254146682863b8": {
+      "at": "2026-10-10T19:22:12.340542+00:00",
+      "title": "Lina and the Tiny Machine at the Train Station At The Edge Of Time",
       "format": "short",
       "result": "accepted"
     }
