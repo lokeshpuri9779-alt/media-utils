@@ -9,6 +9,8 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+      - name: Verify experimental credential isolation
+        run: python3 tools/experimental_guard.py
       - name: Test renderer budget logic
         run: python3 -m unittest discover -s tests -p 'test_cycles_budget_router.py' -v
       - name: Install Blender
