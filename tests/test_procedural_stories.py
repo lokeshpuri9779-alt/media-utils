@@ -26,6 +26,18 @@ class ProceduralStoriesTest(unittest.TestCase):
         self.assertEqual(len(later), 16)
         self.assertTrue(all(s["content_id"] not in skipped for s in later))
 
+    def test_publication_history_changes_character_priority(self):
+        from unittest.mock import patch
+        with patch("astra_v2.control.read_json", return_value={"published": {}}):
+            baseline = catalog(limit=16)
+        history = {"published": {str(i): {"title": "Mara and the Lantern at the Floating Market"} for i in range(20)}}
+        with patch("astra_v2.control.read_json", return_value=history):
+            adapted = catalog(limit=16)
+        self.assertEqual(len(adapted), 16)
+        self.assertNotEqual([x["content_id"] for x in baseline],
+                            [x["content_id"] for x in adapted])
+        self.assertFalse(any(x["title"].startswith("Mara ") for x in adapted))
+
     def test_zero_limit(self):
         self.assertEqual(catalog(limit=0), [])
 
