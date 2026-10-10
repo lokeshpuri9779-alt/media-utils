@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 50,
+  "attempts": 51,
   "confirmed_today": 50,
-  "last_attempt_at": "2026-10-10T16:47:52.012126+00:00",
+  "last_attempt_at": "2026-10-10T16:57:52.583165+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -547,8 +547,17 @@
       "uploaded_at": "2026-10-10T16:47:53.309204+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "CS2JiM2FzEk": {
+      "content_id": "rayvan-procedural-2ef98777325febdc",
+      "title": "Ivo and the Lantern at the Silent Mountain Village",
+      "day": "2026-10-10",
+      "uploaded_at": "2026-10-10T16:57:54.111024+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -1041,6 +1050,12 @@
     "rayvan-procedural-e02ebc140b4d55bb": {
       "at": "2026-10-10T16:47:52.012111+00:00",
       "title": "Mara and the A Door at A Floating Market",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-2ef98777325febdc": {
+      "at": "2026-10-10T16:57:52.583150+00:00",
+      "title": "Ivo and the Lantern at the Silent Mountain Village",
       "format": "short",
       "result": "accepted"
     }
