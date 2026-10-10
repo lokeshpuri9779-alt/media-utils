@@ -2,7 +2,7 @@
 Isolated experiment; never connects to YouTube or the production queue.
 """
 from pathlib import Path
-import json, shutil, subprocess, time
+import json, subprocess, time
 
 OUT=Path('artifacts/experimental-animation')
 OUT.mkdir(parents=True,exist_ok=True)
@@ -12,12 +12,12 @@ from mathutils import Vector
 bpy.ops.object.select_all(action="SELECT")
 bpy.ops.object.delete(use_global=False)
 scene=bpy.context.scene
-scene.render.engine="BLENDER_EEVEE"
+scene.render.engine="BLENDER_EEVEE_NEXT" if bpy.app.version >= (4, 2, 0) else "BLENDER_EEVEE"
 scene.render.resolution_x=480
 scene.render.resolution_y=854
 scene.render.resolution_percentage=100
 scene.render.image_settings.file_format="PNG"
-scene.render.filepath="artifacts/experimental-animation/frames/"
+scene.render.filepath="//frames/"
 scene.render.film_transparent=False
 scene.frame_start=1
 scene.frame_end=48
