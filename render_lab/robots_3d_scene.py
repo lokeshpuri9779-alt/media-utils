@@ -25,6 +25,9 @@ def material(name, color):
 copper=material("Rose copper",(0.62,0.28,0.16))
 eyes=material("Glowing white eyes",(0.95,0.96,1))
 green=material("Greenhouse floor",(0.15,0.3,0.16))
+leaf=material("Deep foliage",(0.08,0.24,0.12))
+metal=material("Greenhouse frames",(0.28,0.32,0.3))
+gold=material("Copper trim",(0.86,0.57,0.24))
 def ball(name,location,scale,mat,parent=None):
     bpy.ops.mesh.primitive_uv_sphere_add(segments=16,ring_count=8,location=location)
     o=bpy.context.object
@@ -41,12 +44,18 @@ def robot(name,x,size):
     root.location=(x,0,0)
     ball(name+" body",(x,0,size*1.2),(size*.52,size*.36,size*.67),copper,root)
     head=ball(name+" head",(x,0,size*2.15),(size*.62,size*.47,size*.53),copper,root)
+    ball(name+" forehead ornament",(x,-size*.475,size*2.53),
+         (size*.11,size*.055,size*.085),gold,root)
     for dx in (-.24,.24):
         ball(name+" eye",(x+dx*size,-size*.425,size*2.2),
              (size*.14,size*.075,size*.19),eyes,root)
     for dx in (-.62,.62):
-        ball(name+" arm",(x+dx*size,0,size*1.28),
+        arm=ball(name+" arm",(x+dx*size,0,size*1.28),
              (size*.18,size*.21,size*.46),copper,root)
+        if dx > 0:
+            for frame,angle in [(1,-.1),(12,-.65),(24,-.95),(36,-.1)]:
+                arm.rotation_euler[1]=angle
+                arm.keyframe_insert(data_path="rotation_euler",frame=frame)
     for dx in (-.25,.25):
         ball(name+" foot",(x+dx*size,-size*.08,size*.35),
              (size*.22,size*.3,size*.34),copper,root)
@@ -58,6 +67,15 @@ def robot(name,x,size):
     return root
 robot("Large copper robot",-1.15,1)
 robot("Small copper robot",1.2,.67)
+# Lightweight greenhouse dressing: geometry, not a photographic background.
+for x in (-3.4,3.4):
+    for y in (-.6,1.6):
+        ball("Leaf canopy",(x,y,2.1),(.65,.55,.9),leaf)
+        bpy.ops.mesh.primitive_cube_add(size=1,location=(x,y,1.4))
+        post=bpy.context.object
+        post.name="Greenhouse frame"
+        post.scale=(.07,.07,2.8)
+        post.data.materials.append(metal)
 bpy.ops.mesh.primitive_cube_add(size=2,location=(0,0,-.25))
 floor=bpy.context.object
 floor.name="Greenhouse ground"
