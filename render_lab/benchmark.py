@@ -5,7 +5,6 @@ import os
 import platform
 import shutil
 import subprocess
-import tempfile
 import time
 from pathlib import Path
 
@@ -24,14 +23,15 @@ def main():
     if not report["tools"]["ffmpeg"] or not report["tools"]["ffprobe"]:
         report["result"]="skipped_missing_ffmpeg"
     else:
-        with tempfile.TemporaryDirectory() as temp:
-            video=Path(temp)/"baseline.mp4"
+        if True:
+            video=out/"baseline.mp4"
             cmd=["ffmpeg","-hide_banner","-loglevel","error","-y","-f","lavfi","-i","testsrc2=size=640x360:rate=24","-t","5","-an","-c:v","libx264","-preset","veryfast","-pix_fmt","yuv420p",str(video)]
             report["render"]=run(cmd)
             if report["render"]["ok"]:
                 probe=subprocess.run(["ffprobe","-v","error","-show_entries","format=duration,size:stream=width,height,r_frame_rate","-of","json",str(video)],capture_output=True,text=True,timeout=20)
                 report["probe"]=json.loads(probe.stdout) if probe.returncode==0 else {"error":probe.stderr[-300:]}
                 report["result"]="rendered" if probe.returncode==0 else "probe_failed"
+                report["video_file"]=str(video)
             else:
                 report["result"]="render_failed"
     target=out/"baseline.json"
