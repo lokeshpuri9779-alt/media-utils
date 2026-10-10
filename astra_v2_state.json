@@ -3,7 +3,7 @@
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 11,
-  "confirmed_today": 10,
+  "confirmed_today": 11,
   "last_attempt_at": "2026-10-10T21:38:43.160150+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -664,19 +664,17 @@
       "title": "Emi and the Lantern at the Library Inside A Giant Tree",
       "format": "short",
       "uploaded_at": "2026-10-10T21:20:40.544214+00:00"
-    }
-  },
-  "pending": {
-    "GUDTbkWKlpM": {
-      "content_id": "rayvan-procedural-7288e52a8d9d27a6",
+    },
+    "rayvan-procedural-7288e52a8d9d27a6": {
+      "video_id": "GUDTbkWKlpM",
+      "confirmed_at": "2026-10-10T21:42:05.407193+00:00",
       "title": "Pip and the Tiny Machine at the City Beneath The Ocean",
-      "day": "2026-10-11",
-      "uploaded_at": "2026-10-10T21:38:44.709063+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-10T21:38:44.709063+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
