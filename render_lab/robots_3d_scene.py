@@ -116,4 +116,10 @@ if RENDER_MODE=="cycles":
     bpy.ops.object.light_add(type="AREA",location=(3,2,5))
     bpy.context.object.data.energy=650
     bpy.context.object.data.size=4
-bpy.ops.render.render(animation=True)
+if RENDER_MODE=="cycles":
+    scene.frame_set(18)
+    scene.render.image_settings.file_format="PNG"
+    scene.render.filepath="render_lab/output/robots_cycles_preview.png"
+    bpy.ops.render.render(write_still=True)
+else:
+    bpy.ops.render.render(animation=True)
