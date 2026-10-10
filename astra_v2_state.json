@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 47,
+  "attempts": 48,
   "confirmed_today": 47,
-  "last_attempt_at": "2026-10-10T15:59:48.663574+00:00",
+  "last_attempt_at": "2026-10-10T16:21:09.211826+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -526,8 +526,17 @@
       "uploaded_at": "2026-10-10T15:59:50.937332+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "iy13cL35WfU": {
+      "content_id": "rayvan-procedural-7777927846044912",
+      "title": "Mara and the A Map at A Floating Market",
+      "day": "2026-10-10",
+      "uploaded_at": "2026-10-10T16:21:10.880906+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -1002,6 +1011,12 @@
     "rayvan-procedural-b3586bfada82c6f7": {
       "at": "2026-10-10T15:59:48.663560+00:00",
       "title": "Mara and the A Sealed Letter Addressed To Tomorrow at A Floating Market",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-7777927846044912": {
+      "at": "2026-10-10T16:21:09.211810+00:00",
+      "title": "Mara and the A Map at A Floating Market",
       "format": "short",
       "result": "accepted"
     }
