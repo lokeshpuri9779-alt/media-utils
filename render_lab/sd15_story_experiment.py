@@ -13,6 +13,8 @@ def main():
     p.add_argument("--profile",choices=("quality","low_memory"),default="quality")
     p.add_argument("--steps",type=int,default=15)
     p.add_argument("--scenes",type=int,default=2)
+    p.add_argument("--reference-conditioned",action="store_true",help="Use first generated frame as img2img anchor for later scenes")
+    p.add_argument("--reference-strength",type=float,default=0.35)
     p.add_argument("--output-dir",type=Path,default=Path("render_lab/output/story_experiment"))
     args=p.parse_args()
     if not args.enable_generation:
@@ -21,6 +23,8 @@ def main():
         p.error("scenes must be 1..4 and steps 1..50")
     args.output_dir.mkdir(parents=True,exist_ok=True)
     from integrations.meta_cpu_diffusion import generate,MODELS
+    if args.reference_conditioned:
+        from render_lab.reference_conditioning import generate_from_reference
     character = ("two friendly rounded copper robots, one tall adult and one small child, "
                  "matching spherical heads with glowing oval white eyes, intricate engraved "
                  "botanical motifs on warm rose-copper armor, black articulated joints")
@@ -42,7 +46,13 @@ def main():
         dest=args.output_dir/f"scene_{i:03d}.png"
         record={"scene":i,"prompt":prompts[i],"image":str(dest),"seed":1234+i}
         try:
-            generate(prompts[i],dest,enabled=True,steps=args.steps,seed=1234+i,profile=args.profile)
+            if args.reference_conditioned and i > 0:
+                record["conditioning"] = generate_from_reference(
+                    prompts[i], args.output_dir/"scene_000.png", dest,
+                    steps=max(args.steps, 20), seed=1234+i,
+                    strength=args.reference_strength)
+            else:
+                generate(prompts[i],dest,enabled=True,steps=args.steps,seed=1234+i,profile=args.profile)
             record["ok"]=dest.is_file() and dest.stat().st_size>0
         except Exception as exc:
             record["ok"]=False
@@ -52,7 +62,9 @@ def main():
             break
     report={"engine":"sd15-cpu-to-ffmpeg","model":MODELS[args.profile],"steps":args.steps,
             "scenes_requested":args.scenes,"scenes":records,"published":False,
-            "model_download_permitted":True,"video_rendered":False}
+            "model_download_permitted":True,"video_rendered":False,
+            "reference_conditioned":args.reference_conditioned,
+            "reference_strength":args.reference_strength if args.reference_conditioned else None}
     if len(records)==args.scenes and all(x["ok"] for x in records):
         video=args.output_dir/"story_motion.mp4"
         cmd=[sys.executable,"render_lab/animate_stills.py","--input-dir",str(args.output_dir),
