@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 12,
-  "confirmed_today": 11,
-  "last_attempt_at": "2026-10-10T07:06:10.944451+00:00",
+  "attempts": 13,
+  "confirmed_today": 12,
+  "last_attempt_at": "2026-10-10T07:26:30.545622+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -272,14 +272,21 @@
       "title": "Pip and the Door at the Forgotten Moon Colony",
       "format": "short",
       "uploaded_at": "2026-10-10T06:44:08.446124+00:00"
+    },
+    "rayvan-procedural-cd229018ffa6f0de": {
+      "video_id": "n0KBc8SlfnI",
+      "confirmed_at": "2026-10-10T07:22:21.348271+00:00",
+      "title": "Noor and the Seed at the Library Inside A Giant Tree",
+      "format": "short",
+      "uploaded_at": "2026-10-10T07:06:18.109289+00:00"
     }
   },
   "pending": {
-    "n0KBc8SlfnI": {
-      "content_id": "rayvan-procedural-cd229018ffa6f0de",
-      "title": "Noor and the Seed at the Library Inside A Giant Tree",
+    "PXHmLVUY1Fg": {
+      "content_id": "rayvan-procedural-3b63c7820b509c44",
+      "title": "Lina and the Musical Note Nobody Else Can Hear at the City Beneath The Ocean",
       "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T07:06:18.109289+00:00",
+      "uploaded_at": "2026-10-10T07:26:32.952030+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -549,6 +556,12 @@
     "rayvan-procedural-cd229018ffa6f0de": {
       "at": "2026-10-10T07:06:10.944435+00:00",
       "title": "Noor and the Seed at the Library Inside A Giant Tree",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-3b63c7820b509c44": {
+      "at": "2026-10-10T07:26:30.545607+00:00",
+      "title": "Lina and the Musical Note Nobody Else Can Hear at the City Beneath The Ocean",
       "format": "short",
       "result": "accepted"
     }
