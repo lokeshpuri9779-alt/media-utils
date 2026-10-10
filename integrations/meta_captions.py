@@ -8,14 +8,17 @@ import json
 import shutil
 import subprocess
 from pathlib import Path
+try:
+    from integrations.meta_srt_validation import validate_srt
+except ModuleNotFoundError:
+    from meta_srt_validation import validate_srt
 
 def caption(video: Path, subtitles: Path, output: Path) -> dict:
     if not video.is_file() or not subtitles.is_file():
         raise FileNotFoundError("Video and SRT captions must exist")
     if subtitles.suffix.lower() != ".srt":
         raise ValueError("Captions must be an SRT file")
-    if not subtitles.read_text(encoding="utf-8-sig").strip():
-        raise ValueError("SRT file is empty")
+    validate_srt(subtitles)
     if not shutil.which("ffmpeg"):
         raise RuntimeError("FFmpeg is required")
     if video.resolve() == output.resolve():
