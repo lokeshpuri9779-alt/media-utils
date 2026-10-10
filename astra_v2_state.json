@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 1,
+  "attempts": 2,
   "confirmed_today": 1,
-  "last_attempt_at": "2026-10-10T03:57:32.177445+00:00",
+  "last_attempt_at": "2026-10-10T04:19:48.453748+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -214,8 +214,17 @@
       "title": "Mara and the A Seed at A Floating Market"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "FfzzYu4lWv4": {
+      "content_id": "rayvan-procedural-68e222d7e7c7b7d6",
+      "title": "Mara and the Lantern at A Floating Market",
+      "day": "2026-10-10",
+      "uploaded_at": "2026-10-10T04:19:49.835435+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -421,6 +430,11 @@
     "rayvan-procedural-4ca955813a92bcbc": {
       "at": "2026-10-10T03:57:32.177430+00:00",
       "title": "Mara and the A Seed at A Floating Market",
+      "result": "accepted"
+    },
+    "rayvan-procedural-68e222d7e7c7b7d6": {
+      "at": "2026-10-10T04:19:48.453727+00:00",
+      "title": "Mara and the Lantern at A Floating Market",
       "result": "accepted"
     }
   },
