@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 39,
+  "attempts": 40,
   "confirmed_today": 39,
-  "last_attempt_at": "2026-10-10T13:46:01.965554+00:00",
+  "last_attempt_at": "2026-10-10T14:01:36.976411+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -470,8 +470,17 @@
       "uploaded_at": "2026-10-10T13:46:04.148116+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "DJx6_zIGykU": {
+      "content_id": "rayvan-procedural-c88d40c5f347e59d",
+      "title": "Lina and the Map at the Train Station At The Edge Of Time",
+      "day": "2026-10-10",
+      "uploaded_at": "2026-10-10T14:01:38.725512+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -898,6 +907,12 @@
     "rayvan-procedural-b1555bb274d68951": {
       "at": "2026-10-10T13:46:01.965540+00:00",
       "title": "Ivo and the Map at the Abandoned Observatory",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-c88d40c5f347e59d": {
+      "at": "2026-10-10T14:01:36.976393+00:00",
+      "title": "Lina and the Map at the Train Station At The Edge Of Time",
       "format": "short",
       "result": "accepted"
     }
