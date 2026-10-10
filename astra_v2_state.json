@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 15,
-  "confirmed_today": 14,
-  "last_attempt_at": "2026-10-10T22:29:29.803215+00:00",
+  "attempts": 16,
+  "confirmed_today": 15,
+  "last_attempt_at": "2026-10-10T22:38:31.845729+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -692,14 +692,21 @@
       "title": "Lina and the Lantern at the City Beneath The Ocean",
       "format": "short",
       "uploaded_at": "2026-10-10T22:19:41.731742+00:00"
+    },
+    "rayvan-procedural-2c19a593ba7f5b35": {
+      "video_id": "-FLIvj4w0us",
+      "confirmed_at": "2026-10-10T22:37:38.595526+00:00",
+      "title": "Tara and the Door at the Forgotten Moon Colony",
+      "format": "short",
+      "uploaded_at": "2026-10-10T22:29:31.284525+00:00"
     }
   },
   "pending": {
-    "-FLIvj4w0us": {
-      "content_id": "rayvan-procedural-2c19a593ba7f5b35",
-      "title": "Tara and the Door at the Forgotten Moon Colony",
+    "y3IrlwEwNNw": {
+      "content_id": "rayvan-procedural-c784c0290037c3b6",
+      "title": "Noor and the Lantern at the City Beneath The Ocean",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-10T22:29:31.284525+00:00",
+      "uploaded_at": "2026-10-10T22:38:33.659426+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1329,6 +1336,12 @@
     "rayvan-procedural-2c19a593ba7f5b35": {
       "at": "2026-10-10T22:29:29.803198+00:00",
       "title": "Tara and the Door at the Forgotten Moon Colony",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-c784c0290037c3b6": {
+      "at": "2026-10-10T22:38:31.845714+00:00",
+      "title": "Noor and the Lantern at the City Beneath The Ocean",
       "format": "short",
       "result": "accepted"
     }
