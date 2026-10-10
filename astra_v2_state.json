@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 16,
-  "confirmed_today": 15,
-  "last_attempt_at": "2026-10-10T22:38:31.845729+00:00",
+  "attempts": 17,
+  "confirmed_today": 16,
+  "last_attempt_at": "2026-10-10T22:47:12.455696+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -699,14 +699,21 @@
       "title": "Tara and the Door at the Forgotten Moon Colony",
       "format": "short",
       "uploaded_at": "2026-10-10T22:29:31.284525+00:00"
+    },
+    "rayvan-procedural-c784c0290037c3b6": {
+      "video_id": "y3IrlwEwNNw",
+      "confirmed_at": "2026-10-10T22:46:25.509477+00:00",
+      "title": "Noor and the Lantern at the City Beneath The Ocean",
+      "format": "short",
+      "uploaded_at": "2026-10-10T22:38:33.659426+00:00"
     }
   },
   "pending": {
-    "y3IrlwEwNNw": {
-      "content_id": "rayvan-procedural-c784c0290037c3b6",
-      "title": "Noor and the Lantern at the City Beneath The Ocean",
+    "FKZiR-AsfIY": {
+      "content_id": "rayvan-procedural-d9930d7f949282a8",
+      "title": "Arun and the Tiny Machine at the Abandoned Observatory",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-10T22:38:33.659426+00:00",
+      "uploaded_at": "2026-10-10T22:47:14.508876+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1342,6 +1349,12 @@
     "rayvan-procedural-c784c0290037c3b6": {
       "at": "2026-10-10T22:38:31.845714+00:00",
       "title": "Noor and the Lantern at the City Beneath The Ocean",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-d9930d7f949282a8": {
+      "at": "2026-10-10T22:47:12.455682+00:00",
+      "title": "Arun and the Tiny Machine at the Abandoned Observatory",
       "format": "short",
       "result": "accepted"
     }
