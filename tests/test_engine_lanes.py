@@ -20,6 +20,12 @@ class EngineLaneTests(unittest.TestCase):
         self.assertFalse(eligible(self.state, self.state['jobs'][0], now=1000+86399))
         self.assertTrue(eligible(self.state, self.state['jobs'][0], now=1000+86400))
 
+    def test_long_blocked_by_inflight_other_lane(self):
+        enqueue(self.state, 'meta', 'long', 'meta-long', 'a.mp4')
+        enqueue(self.state, 'current', 'long', 'current-long', 'b.mp4')
+        self.state['jobs'][0]['status'] = 'awaiting_confirmation'
+        self.assertFalse(eligible(self.state, self.state['jobs'][1], now=90000))
+
     def test_shorts_not_blocked_by_long(self):
         enqueue(self.state, 'current', 'short', 'short-1', 'a.mp4')
         self.state['published'].append({'key': 'old', 'format': 'long', 'confirmed_at': 1000})
