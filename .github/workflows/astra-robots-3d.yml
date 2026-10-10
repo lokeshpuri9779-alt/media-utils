@@ -27,14 +27,17 @@ jobs:
           LIBGL_ALWAYS_SOFTWARE=1 blender -b -t 2 --python render_lab/robots_3d_scene.py
           ffprobe -v error -show_entries format=duration,size -of json render_lab/output/robots_3d.mp4
           python3 -c "import json,subprocess; p=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_entries','format=duration,size','-of','json','render_lab/output/robots_3d.mp4'])); assert float(p['format']['duration']) >= 2.9; assert int(p['format']['size']) > 1000; print('Verified 3D MP4:',p['format'])"
-      - name: Render single metallic Cycles CPU preview
+      - name: Benchmark three metallic Cycles CPU frames
         timeout-minutes: 6
         continue-on-error: true
         env:
           ASTRA_ROBOT_RENDER_MODE: cycles
         run: |
           LIBGL_ALWAYS_SOFTWARE=1 blender -b -t 2 --python render_lab/robots_3d_scene.py
-          test -s render_lab/output/robots_cycles_preview.png
+          test -s render_lab/output/robots_cycles_012.png
+          test -s render_lab/output/robots_cycles_018.png
+          test -s render_lab/output/robots_cycles_024.png
+          cat render_lab/output/robots_cycles_benchmark.json
       - name: Upload genuine 3D animation
         if: always()
         uses: actions/upload-artifact@v4
@@ -42,5 +45,6 @@ jobs:
           name: astra-procedural-robots-3d
           path: |
             render_lab/output/robots_3d.mp4
-            render_lab/output/robots_cycles_preview.png
+            render_lab/output/robots_cycles_*.png
+            render_lab/output/robots_cycles_benchmark.json
           if-no-files-found: warn
