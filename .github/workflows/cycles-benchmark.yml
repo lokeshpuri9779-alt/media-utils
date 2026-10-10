@@ -17,10 +17,16 @@ jobs:
       - name: Measure CPU Cycles
         run: |
           blender -b -t 2 --python tools/cycles_benchmark.py -- --output cycles_benchmark.json --samples 16 --frames 3 --resolution 360
-      - name: Upload measured report
+      - name: Decide renderer from measurements
+        run: |
+          python3 tools/renderer_router.py --report cycles_benchmark.json --frames 120 --max-seconds 600 --complexity-factor 2 --output renderer_decision.json
+          cat renderer_decision.json
+      - name: Upload measured report and decision
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: cycles-cpu-benchmark
-          path: cycles_benchmark.json
+          path: |
+            cycles_benchmark.json
+            renderer_decision.json
           if-no-files-found: warn
