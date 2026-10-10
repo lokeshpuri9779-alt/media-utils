@@ -1,6 +1,6 @@
 """Isolated Godot 4 animation benchmark. Never publishes or modifies ASTRA."""
 from pathlib import Path
-import json,subprocess,time
+import json,subprocess,time,os
 root=Path('artifacts/experimental-godot').resolve();root.mkdir(parents=True,exist_ok=True)
 proj=root/'project';proj.mkdir(exist_ok=True);(root/'frames').mkdir(exist_ok=True)
 (proj/'project.godot').write_text('config_version=5\n[application]\nconfig/name="ASTRA Experimental Godot"\nrun/main_scene="res://main.tscn"\n[rendering]\nrenderer/rendering_method="gl_compatibility"\nrenderer/rendering_method.mobile="gl_compatibility"\n')
@@ -16,7 +16,7 @@ func _process(_delta):
         return
     queue_redraw()
     await RenderingServer.frame_post_draw
-    get_viewport().get_texture().get_image().save_png(ProjectSettings.globalize_path("res://../frames/%04d.png" % (tick + 1)))
+    get_viewport().get_texture().get_image().save_png(OS.get_environment("ASTRA_GODOT_FRAMES") + "/%04d.png" % (tick + 1))
     tick += 1
 func _draw():
     var x := 120.0 + tick * 4.5
@@ -28,7 +28,7 @@ func _draw():
 ''')
 report={'engine':'Godot 4 headless','published':False,'success':False};start=time.monotonic()
 try:
-    subprocess.run(['xvfb-run','-a','godot','--path',str(proj),'--quit-after','65'],check=True,timeout=150)
+    subprocess.run(['xvfb-run','-a','godot','--path',str(proj),'--quit-after','65'],check=True,timeout=150,env={**os.environ,'ASTRA_GODOT_FRAMES':str(root/'frames')})
     frames=len(list((root/'frames').glob('*.png')));report['frames']=frames
     if frames<40:raise RuntimeError('insufficient animation frames')
     subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-framerate','12','-i',str(root/'frames/%04d.png'),'-c:v','libx264','-pix_fmt','yuv420p',str(root/'godot_motion.mp4')],check=True,timeout=120)
