@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 55,
+  "attempts": 56,
   "confirmed_today": 55,
-  "last_attempt_at": "2026-10-10T17:48:53.241723+00:00",
+  "last_attempt_at": "2026-10-10T18:00:45.546651+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -582,8 +582,17 @@
       "uploaded_at": "2026-10-10T17:48:54.687839+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "b0-PTNniog0": {
+      "content_id": "rayvan-procedural-94fc4f1de2da4a8d",
+      "title": "Lina and the Sealed Letter Addressed To Tomorrow at the Glass Desert",
+      "day": "2026-10-10",
+      "uploaded_at": "2026-10-10T18:00:46.821739+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -1106,6 +1115,12 @@
     "rayvan-procedural-2b32c43b9142d8fb": {
       "at": "2026-10-10T17:48:53.241708+00:00",
       "title": "Ivo and the Clock at the Silent Mountain Village",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-94fc4f1de2da4a8d": {
+      "at": "2026-10-10T18:00:45.546636+00:00",
+      "title": "Lina and the Sealed Letter Addressed To Tomorrow at the Glass Desert",
       "format": "short",
       "result": "accepted"
     }
