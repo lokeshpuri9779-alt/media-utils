@@ -17,7 +17,23 @@ def add_soundtrack(video: Path, audio: Path, output: Path, volume: float = 0.3) 
     if not shutil.which("ffmpeg") or not shutil.which("ffprobe"):
         raise RuntimeError("ffmpeg and ffprobe required")
     output.parent.mkdir(parents=True, exist_ok=True)
-    subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-nostdin", "-y", "-i", str(video), "-stream_loop", "-1", "-i", str(audio), "-map", "0:v:0", "-map", "1:a:0", "-filter:a", f"volume={volume}", "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", str(output)], check=True, timeout=600)
+    # Keep scene dialogue/effects, duck the licensed music under speech.
+    # Both inputs are audio-bearing: meta_assemble adds silence when necessary.
+    filter_graph = (
+        "[0:a:0]aresample=48000,asetpts=PTS-STARTPTS[voice];"
+        f"[1:a:0]aresample=48000,volume={volume},asetpts=PTS-STARTPTS[music];"
+        "[music][voice]sidechaincompress=threshold=0.04:ratio=8:attack=20:release=400[ducked];"
+        "[voice][ducked]amix=inputs=2:duration=first:dropout_transition=0,"
+        "alimiter=limit=0.95[mix]"
+    )
+    subprocess.run(
+        ["ffmpeg", "-hide_banner", "-loglevel", "error", "-nostdin", "-y",
+         "-i", str(video), "-stream_loop", "-1", "-i", str(audio),
+         "-filter_complex", filter_graph, "-map", "0:v:0", "-map", "[mix]",
+         "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-shortest",
+         "-movflags", "+faststart", str(output)],
+        check=True, timeout=600,
+    )
     if not output.is_file() or output.stat().st_size == 0:
         raise RuntimeError("Audio mix failed")
     return {"output": str(output), "audio_source": str(audio), "warning": "Confirm soundtrack licensing and listen to final mix before publishing"}
