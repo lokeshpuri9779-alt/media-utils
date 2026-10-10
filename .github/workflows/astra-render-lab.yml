@@ -19,5 +19,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: astra-render-lab-baseline
-          path: render_lab/output/baseline.json
+          path: |
+            render_lab/output/baseline.json
+            render_lab/output/baseline.mp4
           if-no-files-found: warn
