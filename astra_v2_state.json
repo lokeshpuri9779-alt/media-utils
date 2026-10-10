@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 24,
-  "confirmed_today": 23,
-  "last_attempt_at": "2026-10-10T10:14:29.071476+00:00",
+  "attempts": 25,
+  "confirmed_today": 24,
+  "last_attempt_at": "2026-10-10T10:24:51.699428+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -356,14 +356,21 @@
       "title": "Emi and the Clock at the Train Station At The Edge Of Time",
       "format": "short",
       "uploaded_at": "2026-10-10T10:05:52.201179+00:00"
+    },
+    "rayvan-procedural-65bd3be3da343d29": {
+      "video_id": "3FBwS4k4g7o",
+      "confirmed_at": "2026-10-10T10:21:38.286864+00:00",
+      "title": "Arun and the Tiny Machine at the Glass Desert",
+      "format": "short",
+      "uploaded_at": "2026-10-10T10:14:31.432206+00:00"
     }
   },
   "pending": {
-    "3FBwS4k4g7o": {
-      "content_id": "rayvan-procedural-65bd3be3da343d29",
-      "title": "Arun and the Tiny Machine at the Glass Desert",
+    "dP5p6wGStUw": {
+      "content_id": "rayvan-procedural-bc9a02bb953a0b37",
+      "title": "Pip and the Tiny Machine at the Library Inside A Giant Tree",
       "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T10:14:31.432206+00:00",
+      "uploaded_at": "2026-10-10T10:24:54.488131+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -705,6 +712,12 @@
     "rayvan-procedural-65bd3be3da343d29": {
       "at": "2026-10-10T10:14:29.071460+00:00",
       "title": "Arun and the Tiny Machine at the Glass Desert",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-bc9a02bb953a0b37": {
+      "at": "2026-10-10T10:24:51.699413+00:00",
+      "title": "Pip and the Tiny Machine at the Library Inside A Giant Tree",
       "format": "short",
       "result": "accepted"
     }
