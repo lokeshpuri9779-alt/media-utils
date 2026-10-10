@@ -39,6 +39,7 @@ def artifacts():
                        and (x.get("workflow_run") or {}).get("head_branch") == "main")
         if len(batch) < 100:
             break
+    print("ASTRA_ARTIFACT_DISCOVERY=" + json.dumps({"approved_artifacts": len(matched), "pages_scanned": page}))
     return matched
 
 
