@@ -21,12 +21,21 @@ def main():
         p.error("scenes must be 1..4 and steps 1..50")
     args.output_dir.mkdir(parents=True,exist_ok=True)
     from integrations.meta_cpu_diffusion import generate,MODELS
-    prompts=[
-        "cinematic stylized 3D animation still, tiny copper robot finds a luminous blue seed inside an ancient overgrown greenhouse, expressive character, dramatic lighting, consistent copper robot design, no text",
-        "cinematic stylized 3D animation still, same tiny copper robot carefully holds a luminous blue seed as giant flowers awaken in an ancient overgrown greenhouse, expressive character, dramatic lighting, no text",
-        "cinematic stylized 3D animation still, same tiny copper robot sees luminous blue flowers spreading across the greenhouse at sunrise, dramatic lighting, no text",
-        "cinematic stylized 3D animation still, same tiny copper robot stands beneath glowing greenhouse canopy, uplifting conclusion, dramatic lighting, no text"
+    character = ("two friendly rounded copper robots, one tall adult and one small child, "
+                 "matching spherical heads with glowing oval white eyes, intricate engraved "
+                 "botanical motifs on warm rose-copper armor, black articulated joints")
+    environment = ("sunlit Victorian glass greenhouse packed with hanging terracotta planters, "
+                   "lush layered tropical foliage, flowering plants, realistic glass reflections, "
+                   "cinematic soft daylight, rich depth and meticulous environmental detail")
+    actions = [
+        "standing side by side at the center of the greenhouse, wide establishing composition",
+        "the small robot discovers a luminous blue seed while the tall robot looks on, medium composition",
+        "the two robots examine the seed as flowers begin to glow, close cinematic composition",
+        "the tall robot and small robot admire a newly blossomed luminous flower, wide composition",
     ]
+    prompts = [f"high-detail stylized CGI animation film still, {character}, {environment}, "
+               f"{action}, consistent shared character designs, beautiful material rendering, "
+               "no lettering, no captions, no watermark" for action in actions]
     started=time.monotonic()
     records=[]
     for i in range(args.scenes):
