@@ -35,6 +35,9 @@ class MetaControllerFFmpegTest(unittest.TestCase):
             self.assertTrue((root / 'output' / 'final.mp4').is_file())
             self.assertGreaterEqual(result['duration_seconds'], 10)
             self.assertTrue(result['audio_present'])
+            # A valid technical output is not evidence of real animation or story quality.
+            # Synthetic fixtures must never become publishable creative assets.
+            self.assertFalse(result['published'])
 
 if __name__ == '__main__':
     unittest.main()
