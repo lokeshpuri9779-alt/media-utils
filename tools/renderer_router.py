@@ -4,10 +4,10 @@ import argparse
 import json
 from pathlib import Path
 
-def select_renderer(report, frames, max_seconds, complexity_factor=1.0):
+def select_renderer(report, frames, max_seconds, complexity_factor=1.0, target_width=None, target_height=None, target_samples=None):
     if not report or report.get("engine") != "CYCLES":
         return {"engine": "BLENDER_EEVEE", "reason": "missing_cycles_measurement"}
-    t = report.get("median_warm_seconds")
+    # A low-resolution benchmark must never authorize higher-quality production renders.\n    requirements = (("resolution_x", target_width), ("resolution_y", target_height), ("samples", target_samples))\n    for field, required in requirements:\n        if required is not None and (not isinstance(report.get(field), (int, float)) or report[field] < required):\n            return {"engine": "BLENDER_EEVEE", "reason": "benchmark_not_representative", "field": field}\n    t = report.get("median_warm_seconds")
     if not isinstance(t, (int, float)) or t <= 0:
         return {"engine": "BLENDER_EEVEE", "reason": "invalid_cycles_measurement"}
     estimate = round(t * frames * complexity_factor, 2)
@@ -22,10 +22,10 @@ def main():
     p.add_argument("--max-seconds", type=float, default=600)
     p.add_argument("--complexity-factor", type=float, default=2.0,
                    help="Conservative allowance for production scene complexity")
-    p.add_argument("--output", default="renderer_decision.json")
+    p.add_argument("--output", default="renderer_decision.json")\n    p.add_argument("--target-width", type=int, default=1280)\n    p.add_argument("--target-height", type=int, default=720)\n    p.add_argument("--target-samples", type=int, default=32)
     a = p.parse_args()
     report = json.loads(Path(a.report).read_text()) if Path(a.report).exists() else None
-    result = select_renderer(report, a.frames, a.max_seconds, a.complexity_factor)
+    result = select_renderer(report, a.frames, a.max_seconds, a.complexity_factor, a.target_width, a.target_height, a.target_samples)
     Path(a.output).write_text(json.dumps(result, indent=2) + "\n")
     print(json.dumps(result, indent=2))
 
