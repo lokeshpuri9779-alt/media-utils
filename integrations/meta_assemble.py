@@ -40,7 +40,7 @@ def assemble(manifest: Path, clips: Path, output: Path) -> dict:
             subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-nostdin", "-y", "-i", str(path), "-vf", "scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2,setsar=1,fps=30,format=yuv420p", "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", str(target)], check=True, timeout=600)
             normalized.append(target)
         concat = Path(temp) / "clips.txt"
-        concat.write_text("".join(f"file '{p.as_posix()}'\\n" for p in normalized), encoding="utf-8")
+        concat.write_text("".join(f"file '{p.as_posix()}'\n" for p in normalized), encoding="utf-8")
         # Normalized clips have identical encoding and can be concatenated without re-encoding.
         subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-nostdin", "-y", "-f", "concat", "-safe", "0", "-i", str(concat), "-c", "copy", str(output)], check=True, timeout=600)
     if not output.is_file() or output.stat().st_size == 0:
