@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 29,
-  "confirmed_today": 28,
-  "last_attempt_at": "2026-10-10T11:05:57.505398+00:00",
+  "attempts": 30,
+  "confirmed_today": 29,
+  "last_attempt_at": "2026-10-10T11:17:34.870321+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -391,14 +391,21 @@
       "title": "Noor and the Clock at the City Beneath The Ocean",
       "format": "short",
       "uploaded_at": "2026-10-10T10:51:22.324068+00:00"
+    },
+    "rayvan-procedural-c8c4d87ba8d43922": {
+      "video_id": "DXhyn9Zx7FA",
+      "confirmed_at": "2026-10-10T11:13:29.987599+00:00",
+      "title": "Emi and the Sealed Letter Addressed To Tomorrow at the Train Station At The Edge Of Time",
+      "format": "short",
+      "uploaded_at": "2026-10-10T11:05:59.038153+00:00"
     }
   },
   "pending": {
-    "DXhyn9Zx7FA": {
-      "content_id": "rayvan-procedural-c8c4d87ba8d43922",
-      "title": "Emi and the Sealed Letter Addressed To Tomorrow at the Train Station At The Edge Of Time",
+    "YAvat54j6Ck": {
+      "content_id": "rayvan-procedural-30aa55b757327e6a",
+      "title": "Arun and the Door at the Glass Desert",
       "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T11:05:59.038153+00:00",
+      "uploaded_at": "2026-10-10T11:17:36.607544+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -770,6 +777,12 @@
     "rayvan-procedural-c8c4d87ba8d43922": {
       "at": "2026-10-10T11:05:57.505382+00:00",
       "title": "Emi and the Sealed Letter Addressed To Tomorrow at the Train Station At The Edge Of Time",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-30aa55b757327e6a": {
+      "at": "2026-10-10T11:17:34.870307+00:00",
+      "title": "Arun and the Door at the Glass Desert",
       "format": "short",
       "result": "accepted"
     }
