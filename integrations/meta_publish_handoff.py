@@ -8,7 +8,10 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
-from integrations.meta_publish_gate import validate
+try:
+    from integrations.meta_publish_gate import validate
+except ModuleNotFoundError:
+    from meta_publish_gate import validate
 
 def prepare_handoff(video: Path, handoff: Path, title: str, description: str = "") -> dict:
     video = video.resolve()
