@@ -11,6 +11,7 @@ from pathlib import Path
 from tools.image_motion import render
 from tools.assemble_scenes import assemble
 from tools.meta_media_qa import probe
+from integrations.meta_publish_gate import validate
 
 @unittest.skipUnless(shutil.which('ffmpeg') and shutil.which('ffprobe'), 'FFmpeg required')
 class MetaFFmpegSmokeTest(unittest.TestCase):
@@ -34,6 +35,11 @@ class MetaFFmpegSmokeTest(unittest.TestCase):
             self.assertTrue(report['passed'])
             self.assertAlmostEqual(report['duration_seconds'], 2.0, delta=0.2)
             self.assertEqual((report['width'], report['height']), (720, 1280))
+            # Processing QA is not permission to publish: stricter gate rejects
+            # this intentionally short, silent, 720p synthetic fixture.
+            gate = validate(output, require_audio=True, min_duration=10)
+            self.assertFalse(gate['ready'])
+            self.assertTrue(gate['errors'])
 
 if __name__ == '__main__':
     unittest.main()
