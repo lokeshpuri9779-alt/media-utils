@@ -18,7 +18,11 @@ def main():
     p.add_argument("--samples", type=int, default=16)
     p.add_argument("--frames", type=int, default=3)
     p.add_argument("--resolution", type=int, default=360)
+    p.add_argument("--width", type=int, default=None)
+    p.add_argument("--height", type=int, default=None)
     args = p.parse_args(argv)
+    if args.frames < 2 or args.samples < 1 or (args.width is not None and args.width < 1) or (args.height is not None and args.height < 1):
+        p.error("frames must be >= 2; samples and dimensions must be positive")
     bpy.ops.object.select_all(action="SELECT")
     bpy.ops.object.delete(use_global=False)
     bpy.ops.mesh.primitive_cube_add(location=(0, 0, 0))
@@ -35,8 +39,8 @@ def main():
     scene.render.engine = "CYCLES"
     scene.cycles.device = "CPU"
     scene.cycles.samples = args.samples
-    scene.render.resolution_x = args.resolution
-    scene.render.resolution_y = int(args.resolution * 16 / 9)
+    scene.render.resolution_x = args.width or args.resolution
+    scene.render.resolution_y = args.height or int(args.resolution * 16 / 9)
     scene.render.resolution_percentage = 100
     scene.render.image_settings.file_format = "PNG"
     scene.render.filepath = os.devnull
