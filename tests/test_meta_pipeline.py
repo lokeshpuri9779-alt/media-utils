@@ -28,6 +28,8 @@ class MetaPipelineControllerTests(unittest.TestCase):
                 result = run(manifest, root / "clips", root / "output", soundtrack, srt)
             self.assertTrue(result["ready"])
             self.assertFalse(result["published"])
+            self.assertFalse(result["publish_authorized"])
+            self.assertEqual(len(result["sha256"]), 64)
             self.assertEqual((root / "output/final.mp4").read_bytes(), b"captioned")
 
     def test_rejected_gate_remains_unpublished(self):
