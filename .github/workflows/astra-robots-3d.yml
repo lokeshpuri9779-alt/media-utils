@@ -1,0 +1,34 @@
+name: ASTRA Render Lab - Genuine 3D Robots
+on:
+  workflow_dispatch:
+  push:
+    branches: [astra-render-lab-isolated]
+    paths:
+      - '.github/workflows/astra-robots-3d.yml'
+permissions:
+  contents: read
+jobs:
+  procedural-robots:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install free Blender and FFmpeg
+        timeout-minutes: 10
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends blender ffmpeg
+          blender --version | head -n 2
+      - name: Render real 3D object keyframes
+        timeout-minutes: 8
+        run: |
+          mkdir -p render_lab/output
+          blender -b -t 2 --python render_lab/robots_3d_scene.py
+          ffprobe -v error -show_entries format=duration,size -of json render_lab/output/robots_3d.mp4
+      - name: Upload genuine 3D animation
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-procedural-robots-3d
+          path: render_lab/output/robots_3d.mp4
+          if-no-files-found: warn
