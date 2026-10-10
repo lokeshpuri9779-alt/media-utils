@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 35,
-  "confirmed_today": 34,
-  "last_attempt_at": "2026-10-10T12:30:34.877528+00:00",
+  "attempts": 36,
+  "confirmed_today": 35,
+  "last_attempt_at": "2026-10-10T12:47:49.423900+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -433,14 +433,21 @@
       "title": "Tara and the Seed at the Forgotten Moon Colony",
       "format": "short",
       "uploaded_at": "2026-10-10T12:20:58.403363+00:00"
+    },
+    "rayvan-procedural-4abdf5f673ce336f": {
+      "video_id": "QN-MiC3d-9E",
+      "confirmed_at": "2026-10-10T12:43:40.287026+00:00",
+      "title": "Emi and the Map at the City Beneath The Ocean",
+      "format": "short",
+      "uploaded_at": "2026-10-10T12:30:36.635827+00:00"
     }
   },
   "pending": {
-    "QN-MiC3d-9E": {
-      "content_id": "rayvan-procedural-4abdf5f673ce336f",
-      "title": "Emi and the Map at the City Beneath The Ocean",
+    "lgfL2NlutX4": {
+      "content_id": "rayvan-procedural-ef207075c1b6b510",
+      "title": "Arun and the Musical Note Nobody Else Can Hear at the Glass Desert",
       "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T12:30:36.635827+00:00",
+      "uploaded_at": "2026-10-10T12:47:51.176923+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -848,6 +855,12 @@
     "rayvan-procedural-4abdf5f673ce336f": {
       "at": "2026-10-10T12:30:34.877514+00:00",
       "title": "Emi and the Map at the City Beneath The Ocean",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-ef207075c1b6b510": {
+      "at": "2026-10-10T12:47:49.423886+00:00",
+      "title": "Arun and the Musical Note Nobody Else Can Hear at the Glass Desert",
       "format": "short",
       "result": "accepted"
     }
