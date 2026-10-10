@@ -57,10 +57,14 @@ def catalog(excluded_ids=None, limit=32):
     seen_plot_keys = set()
     seen_mysteries = Counter()
     # Stable index ordering avoids random story IDs across independent CI jobs.
-    for c, p, m, r, e in itertools.product(
+    combinations = itertools.product(
         range(len(CHARACTERS)), range(len(PLACES)), range(len(MYSTERIES)),
         range(len(REVEALS)), range(len(RESOLUTIONS))
-    ):
+    )
+    # Spread characters and settings across the candidate pool rather than
+    # repeatedly starting with the first character and first location.
+    combinations = sorted(combinations, key=lambda v: ((v[0] * 31 + v[1] * 17 + v[2] * 13 + v[3] * 7 + v[4] * 3) % 101, v))
+    for c, p, m, r, e in combinations:
         # Scramble sequential choices to avoid repeating the same cast/setting.
         if (c * 7 + p * 11 + m * 13 + r * 17 + e * 19) % 7 != 0:
             continue
