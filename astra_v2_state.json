@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 19,
-  "confirmed_today": 18,
-  "last_attempt_at": "2026-10-10T09:12:46.394964+00:00",
+  "attempts": 20,
+  "confirmed_today": 19,
+  "last_attempt_at": "2026-10-10T09:21:26.130126+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -321,14 +321,21 @@
       "title": "Pip and the Musical Note Nobody Else Can Hear at the Forgotten Moon Colony",
       "format": "short",
       "uploaded_at": "2026-10-10T08:56:42.102396+00:00"
+    },
+    "rayvan-procedural-623ec4782261e447": {
+      "video_id": "ewAuh_9BFbU",
+      "confirmed_at": "2026-10-10T09:17:50.132763+00:00",
+      "title": "Noor and the Sealed Letter Addressed To Tomorrow at the Library Inside A Giant Tree",
+      "format": "short",
+      "uploaded_at": "2026-10-10T09:12:47.825932+00:00"
     }
   },
   "pending": {
-    "ewAuh_9BFbU": {
-      "content_id": "rayvan-procedural-623ec4782261e447",
-      "title": "Noor and the Sealed Letter Addressed To Tomorrow at the Library Inside A Giant Tree",
+    "4yl5DdPz0YE": {
+      "content_id": "rayvan-procedural-230ba05b145e536a",
+      "title": "Lina and the Map at the Silent Mountain Village",
       "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T09:12:47.825932+00:00",
+      "uploaded_at": "2026-10-10T09:21:27.588207+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -640,6 +647,12 @@
     "rayvan-procedural-623ec4782261e447": {
       "at": "2026-10-10T09:12:46.394950+00:00",
       "title": "Noor and the Sealed Letter Addressed To Tomorrow at the Library Inside A Giant Tree",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-230ba05b145e536a": {
+      "at": "2026-10-10T09:21:26.130111+00:00",
+      "title": "Lina and the Map at the Silent Mountain Village",
       "format": "short",
       "result": "accepted"
     }
