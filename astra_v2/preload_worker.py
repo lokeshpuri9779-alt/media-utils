@@ -57,8 +57,31 @@ def main():
             # or rejected long candidate must never starve the Shorts backlog.
             candidate = None
             if long_lane and not long_queued:
+                # The analytics refresh does not populate trend_snapshot.
+                # Fetch source-linked trends for this render only; fail closed
+                # when upstream data is missing or insufficiently sourced.
+                try:
+                    from datetime import datetime
+                    from zoneinfo import ZoneInfo
+                    import cloud_once as legacy
+                    from longform_trends import available
+                    now = datetime.now(ZoneInfo("Asia/Kolkata"))
+                    trends = legacy.fetch_trends(now)
+                    if trends and available(trends):
+                        perf = legacy.load_performance()
+                        perf["trend_snapshot"] = {
+                            "checked_at": now.isoformat(), "items": trends[:120]}
+                        legacy.save_performance(perf)
+                        print("ASTRA_LONG_RESEARCH=eligible_sourced_topics")
+                    else:
+                        print("ASTRA_LONG_RESEARCH=no_eligible_sourced_topics")
+                except Exception as research_error:
+                    print("ASTRA_LONG_RESEARCH_ERROR=" + type(research_error).__name__
+                          + ": " + str(research_error)[:150])
                 try:
                     candidate = make_long_candidate(video, excluded, set())
+                    if candidate is None:
+                        print("ASTRA_LONG_PRELOAD_SKIP=no_eligible_long_episode")
                 except CreativeSkip as exc:
                     print("ASTRA_LONG_PRELOAD_SKIP=" + str(exc)[:150])
             if candidate is None:
