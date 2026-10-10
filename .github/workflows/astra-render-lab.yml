@@ -12,6 +12,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Inventory CPU renderer capabilities
+        run: python render_lab/capabilities.py
       - name: Run CPU-only baseline
         run: python render_lab/benchmark.py
       - name: Upload benchmark report
@@ -20,6 +22,7 @@ jobs:
         with:
           name: astra-render-lab-baseline
           path: |
+            render_lab/output/capabilities.json
             render_lab/output/baseline.json
             render_lab/output/baseline.mp4
           if-no-files-found: warn
