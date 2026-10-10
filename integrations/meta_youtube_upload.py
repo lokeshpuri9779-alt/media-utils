@@ -6,6 +6,7 @@ Google API Python dependencies for --execute. Never starts uploads implicitly.
 from __future__ import annotations
 import argparse
 import json
+import os
 from pathlib import Path
 try:
     from integrations.meta_verify_handoff import verify
@@ -37,7 +38,7 @@ def upload(handoff: Path, token: Path | None = None, execute: bool = False, priv
         else:
             raise ValueError("OAuth token invalid; reauthorization required")
     # Do not upload to an unexpected channel, even with a valid OAuth token.
-    expected_channel = __import__("os").environ.get("ASTRA_YOUTUBE_CHANNEL_ID")
+    expected_channel = os.environ.get("ASTRA_YOUTUBE_CHANNEL_ID")
     if not expected_channel:
         raise ValueError("Set ASTRA_YOUTUBE_CHANNEL_ID before --execute")
     # Recheck the file immediately before starting the upload.
@@ -45,7 +46,10 @@ def upload(handoff: Path, token: Path | None = None, execute: bool = False, priv
     if not checked["verified"]:
         raise ValueError("Handoff changed before upload")
     service = build("youtube", "v3", credentials=credentials, cache_discovery=False)
-    channels = service.channels().list(part="id", mine=True).execute().get("items", [])
+    try:
+        channels = service.channels().list(part="id", mine=True).execute().get("items", [])
+    except Exception as exc:
+        raise RuntimeError("Unable to verify OAuth channel identity; upload blocked") from exc
     if not any(item.get("id") == expected_channel for item in channels):
         raise ValueError("OAuth account does not match ASTRA_YOUTUBE_CHANNEL_ID")
     request = service.videos().insert(
