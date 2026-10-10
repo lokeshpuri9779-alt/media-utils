@@ -29,7 +29,7 @@ jobs:
           python -m pip install 'diffusers>=0.30,<0.38' 'transformers>=4.44,<5' 'accelerate>=0.30,<2' 'Pillow>=10,<13'
       - name: Render original SD 1.5 story stills and animate
         run: |
-          PYTHONPATH=. python render_lab/sd15_story_experiment.py --enable-generation --profile quality --steps 15 --scenes 2
+          PYTHONPATH=. python render_lab/sd15_story_experiment.py --enable-generation --profile quality --steps 15 --scenes 2 --reference-conditioned --reference-strength 0.35
       - name: Upload genuine video and evidence
         if: always()
         uses: actions/upload-artifact@v4
