@@ -20,23 +20,32 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install free FFmpeg encoder
+        timeout-minutes: 6
         run: |
+          echo "STAGE_START ffmpeg $(date -u +%FT%TZ)"
           sudo apt-get update -qq
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ffmpeg
       - name: Install CPU-only diffusion dependencies
+        timeout-minutes: 12
         run: |
+          echo "STAGE_START dependencies $(date -u +%FT%TZ)"
           python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
           python -m pip install 'diffusers>=0.30,<0.38' 'transformers>=4.44,<5' 'accelerate>=0.30,<2' 'Pillow>=10,<13'
       - name: Render original SD 1.5 story stills and animate
+        timeout-minutes: 16
         run: |
+          echo "STAGE_START render $(date -u +%FT%TZ)"
           PYTHONPATH=. python render_lab/sd15_story_experiment.py --enable-generation --profile quality --steps 15 --scenes 2 --omniroute --reference-conditioned --reference-strength 0.35
       - name: Compare generated frames
+        timeout-minutes: 2
         run: |
           python -c "from render_lab.frame_metrics import difference,regional_differences; from pathlib import Path; import json; p=Path('render_lab/output/story_experiment'); v=difference(p/'scene_000.png',p/'scene_001.png'); report={'mean_pixel_difference':v,'regional_pixel_differences':regional_differences(p/'scene_000.png',p/'scene_001.png'),'identity_verified':False,'quality_verified':False}; (p/'frame_metrics.json').write_text(json.dumps(report,indent=2)); print(report)"
       - name: Create side-by-side visual review sheet
+        timeout-minutes: 2
         run: |
           python render_lab/contact_sheet.py render_lab/output/story_experiment render_lab/output/story_experiment/review_sheet.png
       - name: Measure temporal video changes
+        timeout-minutes: 3
         run: |
           python render_lab/temporal_metrics.py render_lab/output/story_experiment/story_motion.mp4 > render_lab/output/story_experiment/temporal_metrics.json
       - name: Upload genuine video and evidence
