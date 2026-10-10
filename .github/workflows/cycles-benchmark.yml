@@ -22,10 +22,10 @@ jobs:
           blender --version
       - name: Measure CPU Cycles
         run: |
-          blender -b -t 2 --python tools/cycles_benchmark.py -- --output cycles_benchmark.json --samples 16 --frames 3 --resolution 360
+          blender -b -t 2 --python tools/cycles_benchmark.py -- --output cycles_benchmark.json --samples 32 --frames 3 --width 720 --height 1280
       - name: Decide renderer from measurements
         run: |
-          python3 tools/renderer_router.py --report cycles_benchmark.json --frames 120 --max-seconds 600 --complexity-factor 2 --output renderer_decision.json
+          python3 tools/renderer_router.py --report cycles_benchmark.json --frames 120 --max-seconds 600 --complexity-factor 2 --target-width 720 --target-height 1280 --target-samples 32 --output renderer_decision.json
           cat renderer_decision.json
       - name: Upload measured report and decision
         if: always()
