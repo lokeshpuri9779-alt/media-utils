@@ -35,9 +35,20 @@ def assemble(manifest: Path, clips: Path, output: Path) -> dict:
     output.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="astra_meta_") as temp:
         normalized = []
+        # Normalize audio on every clip so concat preserves dialogue and effects.
         for i, path in enumerate(inputs, 1):
             target = Path(temp) / f"scene_{i:03d}.mp4"
-            subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-nostdin", "-y", "-i", str(path), "-vf", "scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2,setsar=1,fps=30,format=yuv420p", "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", str(target)], check=True, timeout=600)
+            metadata = probe(path)
+            has_audio = any(stream.get("codec_type") == "audio" for stream in metadata.get("streams", []))
+            command = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-nostdin", "-y", "-i", str(path)]
+            if not has_audio:
+                command += ["-f", "lavfi", "-i", "anullsrc=channel_layout=stereo:sample_rate=48000"]
+            command += ["-map", "0:v:0", "-map", "0:a:0" if has_audio else "1:a:0",
+                        "-vf", "scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2,setsar=1,fps=30,format=yuv420p",
+                        "-c:v", "libx264", "-preset", "veryfast", "-crf", "23",
+                        "-c:a", "aac", "-ar", "48000", "-ac", "2", "-b:a", "160k",
+                        "-af", "aresample=async=1:first_pts=0", "-shortest", str(target)]
+            subprocess.run(command, check=True, timeout=600)
             normalized.append(target)
         concat = Path(temp) / "clips.txt"
         concat.write_text("".join(f"file '{p.as_posix()}'\n" for p in normalized), encoding="utf-8")
@@ -45,7 +56,7 @@ def assemble(manifest: Path, clips: Path, output: Path) -> dict:
         subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-nostdin", "-y", "-f", "concat", "-safe", "0", "-i", str(concat), "-c", "copy", str(output)], check=True, timeout=600)
     if not output.is_file() or output.stat().st_size == 0:
         raise RuntimeError("Assembly produced no video")
-    return {"output": str(output), "scenes": len(inputs), "note": "Silent video; mix licensed audio and validate quality before publishing"}
+    return {"output": str(output), "scenes": len(inputs), "note": "Scene audio retained where available; silent scenes receive a silent audio track. Validate quality before publishing"}
 
 def main() -> None:
     p = argparse.ArgumentParser()
