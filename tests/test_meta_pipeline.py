@@ -39,5 +39,17 @@ class MetaPipelineControllerTests(unittest.TestCase):
             self.assertFalse(result["ready"])
             self.assertFalse(result["published"])
 
+    def test_rejected_gate_deletes_final_file(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            output = root / "output"
+            output.mkdir()
+            (output / "final.mp4").write_bytes(b"old-publishable-video")
+            with patch("integrations.meta_pipeline.assemble", side_effect=lambda _a, _b, dest: dest.write_bytes(b"new-bad-video")), \
+                 patch("integrations.meta_pipeline.validate", return_value={"ready": False, "errors": ["Bad media"]}):
+                result = run(root / "story.json", root / "clips", output)
+            self.assertFalse(result["ready"])
+            self.assertFalse((output / "final.mp4").exists())
+
 if __name__ == "__main__":
     unittest.main()
