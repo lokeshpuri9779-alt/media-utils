@@ -4,12 +4,20 @@ Run locally or on a standard GitHub runner. No network, secrets, or publisher.
 from __future__ import annotations
 import argparse
 import json
-import os
 import shutil
 from pathlib import Path
 
 
 def available_memory_gib() -> float | None:
+    # Prefer cgroup limits: hosted runners and containers may report host RAM
+    # through /proc/meminfo even when the job has a much smaller limit.
+    cgroup_limit = Path('/sys/fs/cgroup/memory.max')
+    cgroup_used = Path('/sys/fs/cgroup/memory.current')
+    if cgroup_limit.is_file() and cgroup_used.is_file():
+        limit = cgroup_limit.read_text().strip()
+        if limit.isdigit():
+            remaining = max(0, int(limit) - int(cgroup_used.read_text().strip()))
+            return round(remaining / (1024 ** 3), 2)
     path = Path('/proc/meminfo')
     if not path.is_file():
         return None
