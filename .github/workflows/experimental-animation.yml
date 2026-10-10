@@ -19,6 +19,8 @@ jobs:
           sudo apt-get install -y blender ffmpeg
       - name: Create test animation and metrics
         run: python tools/experimental_animation_benchmark.py
+      - name: Verify encoded animation contains visual motion
+        run: python3 tools/verify_experimental_motion.py artifacts/experimental-animation/blender_motion.mp4 --report artifacts/experimental-animation/motion-check.json
       - name: Save test video and performance
         if: always()
         uses: actions/upload-artifact@v4
