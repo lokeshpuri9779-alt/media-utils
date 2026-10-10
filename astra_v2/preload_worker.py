@@ -28,7 +28,14 @@ def main():
     usable = [a for a in queue if str(a["name"])[len("astra-preloaded-"):] not in excluded
               and (a.get("workflow_run") or {}).get("id")]
     print("ASTRA_QUEUE_COUNTS=" + json.dumps({"target": target, "usable": len(usable), "artifacts": len(queue)}))
-    if len(usable) >= target:
+    # Long-form has a separate daily lane: a full Shorts buffer must not
+    # prevent its first approved episode from ever being prepared.
+    long_lane = (os.getenv("ASTRA_LONG_ENABLED", "0") == "1"
+                 and int(os.getenv("ASTRA_PRELOAD_LANE", "0")) == 0)
+    long_queued = any(str(a.get("name", "")).startswith("astra-preloaded-")
+                      and str(a.get("name", ""))[len("astra-preloaded-"):].startswith(("planet-clocks-", "trend-brief-"))
+                      for a in usable)
+    if len(usable) >= target and (not long_lane or long_queued):
         print("ASTRA_PRELOAD="+json.dumps({"outcome":"buffer_full","usable_count":len(usable),"total_artifacts":len(queue)}))
         return
     # Reuse the already-fetched artifact listing: avoid a second GitHub API call.
@@ -49,8 +56,7 @@ def main():
             # may attempt the licensed, QA-gated long-form renderer. An absent
             # or rejected long candidate must never starve the Shorts backlog.
             candidate = None
-            if (os.getenv("ASTRA_LONG_ENABLED", "0") == "1"
-                    and int(os.getenv("ASTRA_PRELOAD_LANE", "0")) == 0):
+            if long_lane and not long_queued:
                 try:
                     candidate = make_long_candidate(video, excluded, set())
                 except CreativeSkip as exc:
