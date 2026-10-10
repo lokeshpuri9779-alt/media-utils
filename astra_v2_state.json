@@ -3,7 +3,7 @@
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 17,
-  "confirmed_today": 16,
+  "confirmed_today": 17,
   "last_attempt_at": "2026-10-10T08:39:00.903223+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -307,19 +307,17 @@
       "title": "Emi and the Map at the Silent Mountain Village",
       "format": "short",
       "uploaded_at": "2026-10-10T08:20:54.025023+00:00"
-    }
-  },
-  "pending": {
-    "-Bpb9UnH5vI": {
-      "content_id": "rayvan-procedural-c8385a4e241e6d6b",
+    },
+    "rayvan-procedural-c8385a4e241e6d6b": {
+      "video_id": "-Bpb9UnH5vI",
+      "confirmed_at": "2026-10-10T08:41:05.574660+00:00",
       "title": "Arun and the Seed at the Train Station At The Edge Of Time",
-      "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T08:39:02.251465+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-10T08:39:02.251465+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
