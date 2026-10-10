@@ -88,7 +88,7 @@ def catalog(excluded_ids=None, limit=32):
         title = f"{name} and the {object_name.title()} at the {setting_name.title()}"
         beats = [
             ("THE UNEXPECTED FIND", f"In {place}, {name}, {character}, discovered {mystery}.", mystery_visual, "DISCOVERY", "reveal"),
-            ("THE FIRST CLUE", f"{name} followed the clues through {place}, but nothing behaved the way it should.", place_visual, "THE CLUE", "build"),
+            ("THE FIRST CLUE", f"{name} traced the strange discovery to a hidden clue in {place}, and realized the mystery was only beginning.", place_visual, "THE CLUE", "build"),
             ("THE HIDDEN TRUTH", reveal, "signal", "THE TRUTH", "twist"),
             ("A DIFFERENT ENDING", resolution, "forest", "THE CHOICE", "payoff"),
         ]
