@@ -42,6 +42,8 @@ def reconcile(youtube, state):
             }
             legacy.record_video(video_id, item.get("title", "RAYVAN Short"))
             state["published"][cid] = {"video_id": video_id, "confirmed_at": utcnow().isoformat(),
+                                        "uploaded_at": item.get("uploaded_at"),
+                                        "format": item.get("format", "short"),
                                         "title": item.get("title", "")}
             if item.get("day") == state["day"]:
                 state["confirmed_today"] += 1
@@ -53,6 +55,27 @@ def reconcile(youtube, state):
             }
             del state["pending"][video_id]
     return verified
+
+
+def long_upload_due(state, now, spacing_hours=24):
+    """Conservative per-format cooldown, including uploads still processing."""
+    latest = []
+    for entry in (state.get("published") or {}).values():
+        if isinstance(entry, dict) and entry.get("format") == "long":
+            instant = parse_time(entry.get("uploaded_at") or entry.get("confirmed_at"))
+            if instant:
+                latest.append(instant)
+    for entry in (state.get("pending") or {}).values():
+        if isinstance(entry, dict) and entry.get("format") == "long":
+            instant = parse_time(entry.get("uploaded_at"))
+            if instant:
+                latest.append(instant)
+    for entry in (state.get("reserved") or {}).values():
+        if isinstance(entry, dict) and entry.get("format") == "long":
+            instant = parse_time(entry.get("at"))
+            if instant:
+                latest.append(instant)
+    return not latest or now - max(latest) >= timedelta(hours=spacing_hours)
 
 
 def run():
@@ -110,6 +133,9 @@ def run():
                 except CreativeSkip as exc:
                     report.update(outcome="quality_skip", reason=str(exc)[:250])
                     return report
+                if candidate.get("format") == "long" and not long_upload_due(state, utcnow()):
+                    report.update(outcome="skipped", reason="longform_24h_cooldown")
+                    return report
                 cid = candidate["content_id"]
                 title = candidate["title"]
                 if cid in live_ids | previous_ids or title.casefold().strip() in live_titles:
@@ -119,7 +145,8 @@ def run():
                 # Reserve identity and interval BEFORE upload; never auto-retry an
                 # indeterminate transfer as this risks a duplicate public video.
                 state.setdefault("reserved", {})[cid] = {
-                    "at": utcnow().isoformat(), "title": title, "result": "transfer_pending",
+                    "at": utcnow().isoformat(), "title": title, "format": candidate["format"],
+                    "result": "transfer_pending",
                 }
                 state["last_attempt_at"] = utcnow().isoformat()
                 state["attempts"] += 1
