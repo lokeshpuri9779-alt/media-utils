@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 25,
-  "confirmed_today": 24,
-  "last_attempt_at": "2026-10-10T10:24:51.699428+00:00",
+  "attempts": 26,
+  "confirmed_today": 25,
+  "last_attempt_at": "2026-10-10T10:34:04.446226+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -363,14 +363,21 @@
       "title": "Arun and the Tiny Machine at the Glass Desert",
       "format": "short",
       "uploaded_at": "2026-10-10T10:14:31.432206+00:00"
+    },
+    "rayvan-procedural-bc9a02bb953a0b37": {
+      "video_id": "dP5p6wGStUw",
+      "confirmed_at": "2026-10-10T10:30:42.766779+00:00",
+      "title": "Pip and the Tiny Machine at the Library Inside A Giant Tree",
+      "format": "short",
+      "uploaded_at": "2026-10-10T10:24:54.488131+00:00"
     }
   },
   "pending": {
-    "dP5p6wGStUw": {
-      "content_id": "rayvan-procedural-bc9a02bb953a0b37",
-      "title": "Pip and the Tiny Machine at the Library Inside A Giant Tree",
+    "8ocx3PyRoh0": {
+      "content_id": "rayvan-procedural-1788338126c9b85a",
+      "title": "Lina and the Tiny Machine at the Silent Mountain Village",
       "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T10:24:54.488131+00:00",
+      "uploaded_at": "2026-10-10T10:34:06.678526+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -718,6 +725,12 @@
     "rayvan-procedural-bc9a02bb953a0b37": {
       "at": "2026-10-10T10:24:51.699413+00:00",
       "title": "Pip and the Tiny Machine at the Library Inside A Giant Tree",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-1788338126c9b85a": {
+      "at": "2026-10-10T10:34:04.446203+00:00",
+      "title": "Lina and the Tiny Machine at the Silent Mountain Village",
       "format": "short",
       "result": "accepted"
     }
