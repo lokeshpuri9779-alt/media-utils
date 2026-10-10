@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 18,
+  "attempts": 19,
   "confirmed_today": 18,
-  "last_attempt_at": "2026-10-10T08:56:40.357765+00:00",
+  "last_attempt_at": "2026-10-10T09:12:46.394964+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -323,8 +323,17 @@
       "uploaded_at": "2026-10-10T08:56:42.102396+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "ewAuh_9BFbU": {
+      "content_id": "rayvan-procedural-623ec4782261e447",
+      "title": "Noor and the Sealed Letter Addressed To Tomorrow at the Library Inside A Giant Tree",
+      "day": "2026-10-10",
+      "uploaded_at": "2026-10-10T09:12:47.825932+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -625,6 +634,12 @@
     "rayvan-procedural-196053bff7a36f55": {
       "at": "2026-10-10T08:56:40.357749+00:00",
       "title": "Pip and the Musical Note Nobody Else Can Hear at the Forgotten Moon Colony",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-623ec4782261e447": {
+      "at": "2026-10-10T09:12:46.394950+00:00",
+      "title": "Noor and the Sealed Letter Addressed To Tomorrow at the Library Inside A Giant Tree",
       "format": "short",
       "result": "accepted"
     }
