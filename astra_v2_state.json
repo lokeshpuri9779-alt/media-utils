@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 9,
-  "confirmed_today": 8,
-  "last_attempt_at": "2026-10-10T05:56:57.829651+00:00",
+  "attempts": 10,
+  "confirmed_today": 9,
+  "last_attempt_at": "2026-10-10T06:18:03.420612+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -251,14 +251,21 @@
       "title": "How Fast the Space Station Really Travels",
       "format": "short",
       "uploaded_at": "2026-10-10T05:38:08.383152+00:00"
+    },
+    "rayvan-procedural-a2bd7f6c864cd880": {
+      "video_id": "fhPBUebM8_o",
+      "confirmed_at": "2026-10-10T06:14:32.808189+00:00",
+      "title": "Emi and the Sealed Letter Addressed To Tomorrow at the Silent Mountain Village",
+      "format": "short",
+      "uploaded_at": "2026-10-10T05:56:59.179114+00:00"
     }
   },
   "pending": {
-    "fhPBUebM8_o": {
-      "content_id": "rayvan-procedural-a2bd7f6c864cd880",
-      "title": "Emi and the Sealed Letter Addressed To Tomorrow at the Silent Mountain Village",
+    "lZ6p5NCXPBc": {
+      "content_id": "rayvan-procedural-812cd86792a94da3",
+      "title": "Arun and the Musical Note Nobody Else Can Hear at the Train Station At The Edge Of Time",
       "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T05:56:59.179114+00:00",
+      "uploaded_at": "2026-10-10T06:18:05.143905+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -510,6 +517,12 @@
     "rayvan-procedural-a2bd7f6c864cd880": {
       "at": "2026-10-10T05:56:57.829635+00:00",
       "title": "Emi and the Sealed Letter Addressed To Tomorrow at the Silent Mountain Village",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-812cd86792a94da3": {
+      "at": "2026-10-10T06:18:03.420597+00:00",
+      "title": "Arun and the Musical Note Nobody Else Can Hear at the Train Station At The Edge Of Time",
       "format": "short",
       "result": "accepted"
     }
