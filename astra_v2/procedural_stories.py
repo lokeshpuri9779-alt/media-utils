@@ -98,7 +98,7 @@ def catalog(excluded_ids=None, limit=32):
         beats = [
             ("THE UNEXPECTED FIND", f"In {place}, {name}, {character}, discovered {mystery}.", mystery_visual, "DISCOVERY", "reveal"),
             ("THE FIRST CLUE", f"{name} traced the strange discovery to a hidden clue in {place}, and realized the mystery was only beginning.", place_visual, "THE CLUE", "build"),
-            ("THE HIDDEN TRUTH", reveal, "signal", "THE TRUTH", "twist"),
+            ("THE HIDDEN TRUTH", reveal, mystery_visual, "THE TRUTH", "twist"),
             ("A DIFFERENT ENDING", resolution, "forest", "THE CHOICE", "payoff"),
         ]
         seen_plot_keys.add(plot_key)
