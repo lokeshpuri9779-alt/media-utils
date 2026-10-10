@@ -64,9 +64,19 @@ def catalog(excluded_ids=None, limit=32):
         range(len(CHARACTERS)), range(len(PLACES)), range(len(MYSTERIES)),
         range(len(REVEALS)), range(len(RESOLUTIONS))
     )
-    # Spread characters and settings across the candidate pool rather than
-    # repeatedly starting with the first character and first location.
-    combinations = sorted(combinations, key=lambda v: ((v[0] * 31 + v[1] * 17 + v[2] * 13 + v[3] * 7 + v[4] * 3) % 101, v))
+    # Prefer underused characters and locations based on confirmed publications.
+    # The state branch is restored by the existing preload workflow.
+    from astra_v2.control import STATE_FILE, read_json
+    published_titles = [str(item.get("title", "")).casefold()
+                        for item in read_json(STATE_FILE).get("published", {}).values()
+                        if isinstance(item, dict)]
+    character_usage = [sum(title.startswith(name.casefold() + " ") for title in published_titles)
+                       for _, name in CHARACTERS]
+    place_usage = [sum(place.removeprefix("a ").removeprefix("an ").casefold() in title
+                       for title in published_titles) for place, _ in PLACES]
+    combinations = sorted(combinations, key=lambda v: (
+        character_usage[v[0]] + place_usage[v[1]],
+        (v[0] * 31 + v[1] * 17 + v[2] * 13 + v[3] * 7 + v[4] * 3) % 101, v))
     for c, p, m, r, e in combinations:
         # Scramble sequential choices to avoid repeating the same cast/setting.
         if (c * 7 + p * 11 + m * 13 + r * 17 + e * 19) % 7 != 0:
