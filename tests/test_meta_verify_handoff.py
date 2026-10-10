@@ -6,6 +6,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 from integrations.meta_verify_handoff import verify
+from integrations.meta_publish_handoff import prepare_handoff
 
 class HandoffVerificationTests(unittest.TestCase):
     def test_reject_changed_file(self):
@@ -38,6 +39,18 @@ class HandoffVerificationTests(unittest.TestCase):
                 self.assertFalse(verify(handoff)["verified"])
             with patch("integrations.meta_verify_handoff.validate", return_value={"ready": True, "errors": []}):
                 self.assertTrue(verify(handoff)["verified"])
+
+    def test_failed_replacement_revokes_old_handoff(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            video = root / "bad.mp4"
+            video.write_bytes(b"invalid")
+            handoff = root / "handoff.json"
+            handoff.write_text('{"ready_for_publisher_review":true}')
+            with patch("integrations.meta_publish_handoff.validate", return_value={"ready": False, "errors": ["Invalid media"]}):
+                with self.assertRaisesRegex(ValueError, "Video rejected"):
+                    prepare_handoff(video, handoff, "Replacement")
+            self.assertFalse(handoff.exists())
 
 if __name__ == "__main__":
     unittest.main()
