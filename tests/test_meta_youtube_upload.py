@@ -38,5 +38,21 @@ class YouTubeUploaderTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "OAuth token"):
                     upload(receipt, execute=True)
 
+    def test_invalid_privacy_rejected(self):
+        with self.assertRaisesRegex(ValueError, "privacy"):
+            upload(Path("missing.json"), privacy="everyone")
+
+    def test_dry_run_needs_no_channel_configuration(self):
+        with tempfile.TemporaryDirectory() as d:
+            receipt = Path(d) / "handoff.json"
+            receipt.write_text('{"title":"Demo"}')
+            with patch("integrations.meta_youtube_upload.verify", return_value={
+                "verified": True, "video": "/tmp/test.mp4", "title": "Demo"
+            }):
+                with patch.dict("os.environ", {}, clear=True):
+                    result = upload(receipt)
+            self.assertEqual(result["mode"], "dry-run")
+            self.assertFalse(result["uploaded"])
+
 if __name__ == "__main__":
     unittest.main()
