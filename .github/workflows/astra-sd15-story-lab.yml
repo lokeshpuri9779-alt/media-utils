@@ -32,7 +32,7 @@ jobs:
           PYTHONPATH=. python render_lab/sd15_story_experiment.py --enable-generation --profile quality --steps 15 --scenes 2 --omniroute --reference-conditioned --reference-strength 0.35
       - name: Compare generated frames
         run: |
-          python -c "from render_lab.frame_metrics import difference; from pathlib import Path; import json; p=Path('render_lab/output/story_experiment'); v=difference(p/'scene_000.png',p/'scene_001.png'); report={'mean_pixel_difference':v,'identity_verified':False,'quality_verified':False}; (p/'frame_metrics.json').write_text(json.dumps(report,indent=2)); print(report)"
+          python -c "from render_lab.frame_metrics import difference,regional_differences; from pathlib import Path; import json; p=Path('render_lab/output/story_experiment'); v=difference(p/'scene_000.png',p/'scene_001.png'); report={'mean_pixel_difference':v,'regional_pixel_differences':regional_differences(p/'scene_000.png',p/'scene_001.png'),'identity_verified':False,'quality_verified':False}; (p/'frame_metrics.json').write_text(json.dumps(report,indent=2)); print(report)"
       - name: Upload genuine video and evidence
         if: always()
         uses: actions/upload-artifact@v4
