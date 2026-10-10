@@ -26,6 +26,7 @@ def main():
         excluded.update(state.get("reserved", {}))
         excluded.update(x.get("content_id", "") for x in state.get("pending", {}).values())
     usable = [a for a in queue if str(a["name"])[len("astra-preloaded-"):] not in excluded]
+    print("ASTRA_QUEUE_COUNTS=" + json.dumps({"target": target, "usable": len(usable), "artifacts": len(queue)}))
     if len(usable) >= target:
         print("ASTRA_PRELOAD="+json.dumps({"outcome":"buffer_full","usable_count":len(usable),"total_artifacts":len(queue)}))
         return
