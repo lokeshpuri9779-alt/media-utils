@@ -84,7 +84,8 @@ def catalog(excluded_ids=None, limit=32):
         reveal = REVEALS[r]
         resolution = RESOLUTIONS[e]
         object_name = mystery.split(" that ")[0].removeprefix("an ").removeprefix("a ")
-        title = f"{name} and the {object_name.title()} at {place.title()}"
+        setting_name = place.removeprefix("an ").removeprefix("a ")
+        title = f"{name} and the {object_name.title()} at the {setting_name.title()}"
         beats = [
             ("THE UNEXPECTED FIND", f"In {place}, {name}, {character}, discovered {mystery}.", mystery_visual, "DISCOVERY", "reveal"),
             ("THE FIRST CLUE", f"{name} followed the clues through {place}, but nothing behaved the way it should.", place_visual, "THE CLUE", "build"),
