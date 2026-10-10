@@ -11,6 +11,7 @@ from pathlib import Path
 BACKENDS = {
     'ltx_video': {'kind': 'open_source_video', 'requires_gpu': True, 'connected': False},
     'wan': {'kind': 'open_source_video', 'requires_gpu': True, 'connected': False},
+    'github_cpu_animation': {'kind': 'cpu_character_animation', 'requires_gpu': False, 'connected': False},
     'local_scene_import': {'kind': 'existing_licensed_video', 'requires_gpu': False, 'connected': True},
 }
 
@@ -21,6 +22,8 @@ def choose(*, gpu_available: bool = False, prefer: str = 'ltx_video') -> dict:
     backend = BACKENDS[prefer]
     if backend['requires_gpu'] and not gpu_available:
         return {'ready': False, 'backend': prefer, 'reason': 'GPU runtime unavailable; no synthetic output substituted'}
+    if prefer == 'github_cpu_animation':
+        return {'ready': False, 'backend': prefer, 'reason': 'CPU animation implementation and render benchmark not yet verified on GitHub runner'}
     if not backend['connected']:
         return {'ready': False, 'backend': prefer, 'reason': 'Model runtime not yet installed or verified'}
     return {'ready': True, 'backend': prefer, 'reason': 'Existing licensed clips can enter the Meta assembly pipeline'}
