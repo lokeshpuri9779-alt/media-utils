@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 33,
-  "confirmed_today": 32,
-  "last_attempt_at": "2026-10-10T12:05:37.089001+00:00",
+  "attempts": 34,
+  "confirmed_today": 33,
+  "last_attempt_at": "2026-10-10T12:20:56.968140+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -419,14 +419,21 @@
       "title": "Ivo and the Sealed Letter Addressed To Tomorrow at the Abandoned Observatory",
       "format": "short",
       "uploaded_at": "2026-10-10T11:54:00.907341+00:00"
+    },
+    "rayvan-procedural-e0c5982867b7a8eb": {
+      "video_id": "W_LiZ2BO7H8",
+      "confirmed_at": "2026-10-10T12:17:37.364704+00:00",
+      "title": "Lina and the Door at the Silent Mountain Village",
+      "format": "short",
+      "uploaded_at": "2026-10-10T12:05:38.629329+00:00"
     }
   },
   "pending": {
-    "W_LiZ2BO7H8": {
-      "content_id": "rayvan-procedural-e0c5982867b7a8eb",
-      "title": "Lina and the Door at the Silent Mountain Village",
+    "pb4XRvH9Co0": {
+      "content_id": "rayvan-procedural-6d90aab9ebf9860f",
+      "title": "Tara and the Seed at the Forgotten Moon Colony",
       "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T12:05:38.629329+00:00",
+      "uploaded_at": "2026-10-10T12:20:58.403363+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -822,6 +829,12 @@
     "rayvan-procedural-e0c5982867b7a8eb": {
       "at": "2026-10-10T12:05:37.088986+00:00",
       "title": "Lina and the Door at the Silent Mountain Village",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-6d90aab9ebf9860f": {
+      "at": "2026-10-10T12:20:56.968124+00:00",
+      "title": "Tara and the Seed at the Forgotten Moon Colony",
       "format": "short",
       "result": "accepted"
     }
