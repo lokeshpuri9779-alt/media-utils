@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 56,
+  "attempts": 57,
   "confirmed_today": 56,
-  "last_attempt_at": "2026-10-10T18:00:45.546651+00:00",
+  "last_attempt_at": "2026-10-10T18:23:40.173640+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -589,8 +589,17 @@
       "uploaded_at": "2026-10-10T18:00:46.821739+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "eAp_chXg1rA": {
+      "content_id": "trend-brief-2026-10-10-pm",
+      "title": "Why husker score Is Getting Attention Now | RAYVAN",
+      "day": "2026-10-10",
+      "uploaded_at": "2026-10-10T18:23:42.110085+00:00",
+      "genre": "current",
+      "format": "long"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -1120,6 +1129,12 @@
       "at": "2026-10-10T18:00:45.546636+00:00",
       "title": "Lina and the Sealed Letter Addressed To Tomorrow at the Glass Desert",
       "format": "short",
+      "result": "accepted"
+    },
+    "trend-brief-2026-10-10-pm": {
+      "at": "2026-10-10T18:23:40.173629+00:00",
+      "title": "Why husker score Is Getting Attention Now | RAYVAN",
+      "format": "long",
       "result": "accepted"
     }
   },
