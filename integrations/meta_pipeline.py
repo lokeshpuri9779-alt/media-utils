@@ -26,6 +26,9 @@ def run(manifest: Path, clips: Path, output_dir: Path, soundtrack: Path | None =
     # A previous success receipt must never survive a failed rerun.
     (output_dir / "handoff.json").unlink(missing_ok=True)
     assembled = output_dir / "assembled.mp4"
+    # Discard stale intermediate renders too; retries must start clean.
+    for name in ("assembled.mp4", "mixed.mp4", "captioned.mp4"):
+        (output_dir / name).unlink(missing_ok=True)
     try:
         assemble(manifest, clips, assembled)
         current = assembled
