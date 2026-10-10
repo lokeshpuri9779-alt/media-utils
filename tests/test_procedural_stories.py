@@ -38,6 +38,17 @@ class ProceduralStoriesTest(unittest.TestCase):
                             [x["content_id"] for x in adapted])
         self.assertLess(sum(x["title"].startswith("Mara ") for x in adapted), sum(x["title"].startswith("Mara ") for x in baseline))
 
+    def test_pending_uploads_affect_diversity(self):
+        from unittest.mock import patch
+        state = {"published": {}, "pending": {"video": {"title": "Mara and the Lantern at the Floating Market"}}}
+        with patch("astra_v2.control.read_json", return_value={"published": {}}):
+            baseline = catalog(limit=16)
+        with patch("astra_v2.control.read_json", return_value=state):
+            pending_aware = catalog(limit=16)
+        self.assertEqual(len(pending_aware), 16)
+        self.assertNotEqual([x["content_id"] for x in baseline],
+                            [x["content_id"] for x in pending_aware])
+
     def test_zero_limit(self):
         self.assertEqual(catalog(limit=0), [])
 
