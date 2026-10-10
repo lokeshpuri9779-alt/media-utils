@@ -30,10 +30,14 @@ def assemble(manifest, output):
     output.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory() as tmp:
         normalized = []
+        target_width = int(data.get('width', 720))
+        target_height = int(data.get('height', 1280))
+        if (target_width, target_height) not in {(720,1280),(1280,720),(1080,1920),(1920,1080)}:
+            raise ValueError('Unsupported canvas')
         for index, path in enumerate(paths):
             target = Path(tmp) / f'{index:04d}.mp4'
             subprocess.run(['ffmpeg','-nostdin','-hide_banner','-loglevel','error','-y',
-                '-i',str(path),'-map','0:v:0','-an','-vf','fps=24,format=yuv420p',
+                '-i',str(path),'-map','0:v:0','-an','-vf',f'scale={target_width}:{target_height}:force_original_aspect_ratio=increase,crop={target_width}:{target_height},fps=24,format=yuv420p',
                 '-c:v','libx264','-preset','veryfast','-crf','21',str(target)],
                 check=True,timeout=300)
             normalized.append(target)
