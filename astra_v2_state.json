@@ -3,7 +3,7 @@
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 14,
-  "confirmed_today": 13,
+  "confirmed_today": 14,
   "last_attempt_at": "2026-10-10T07:42:09.373944+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -286,19 +286,17 @@
       "title": "Lina and the Musical Note Nobody Else Can Hear at the City Beneath The Ocean",
       "format": "short",
       "uploaded_at": "2026-10-10T07:26:32.952030+00:00"
-    }
-  },
-  "pending": {
-    "J4DvquvVzJE": {
-      "content_id": "iss-sixteen-sunrises-v1",
+    },
+    "iss-sixteen-sunrises-v1": {
+      "video_id": "J4DvquvVzJE",
+      "confirmed_at": "2026-10-10T07:44:54.854202+00:00",
       "title": "Why Astronauts See About 16 Sunrises a Day",
-      "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T07:42:11.233722+00:00",
-      "genre": "space",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-10T07:42:11.233722+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
