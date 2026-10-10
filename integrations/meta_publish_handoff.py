@@ -15,6 +15,8 @@ except ModuleNotFoundError:
 
 def prepare_handoff(video: Path, handoff: Path, title: str, description: str = "") -> dict:
     video = video.resolve()
+    # Revoke any previous approval before attempting a new handoff.
+    handoff.unlink(missing_ok=True)
     if not title.strip():
         raise ValueError("Video title is required")
     result = validate(video, require_audio=True, min_duration=10)
