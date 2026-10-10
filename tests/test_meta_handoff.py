@@ -51,5 +51,21 @@ class MetaPipelineTests(unittest.TestCase):
             self.assertEqual(result["scenes"], 1)
             self.assertGreater((root / "output.mp4").stat().st_size, 0)
 
+    def test_scene_audio_is_preserved_if_ffmpeg_installed(self):
+        import shutil
+        if not shutil.which("ffmpeg") or not shutil.which("ffprobe"):
+            self.skipTest("ffmpeg not installed")
+        from integrations.meta_assemble import probe
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            clips = root / "clips"
+            clips.mkdir()
+            manifest = root / "story.json"
+            manifest.write_text('{"scenes":[{"prompt":"test"}]}')
+            subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "color=c=black:s=360x640:r=10:d=1", "-f", "lavfi", "-i", "sine=frequency=440:duration=1", "-c:v", "libx264", "-c:a", "aac", "-shortest", str(clips / "scene_001.mp4")], check=True, timeout=30)
+            output = root / "output.mp4"
+            assemble(manifest, clips, output)
+            self.assertTrue(any(stream.get("codec_type") == "audio" for stream in probe(output)["streams"]))
+
 if __name__ == "__main__":
     unittest.main()
