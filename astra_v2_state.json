@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 14,
-  "confirmed_today": 13,
-  "last_attempt_at": "2026-10-10T22:19:40.090628+00:00",
+  "attempts": 15,
+  "confirmed_today": 14,
+  "last_attempt_at": "2026-10-10T22:29:29.803215+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -685,14 +685,21 @@
       "title": "Arun and the Tiny Machine at the City Beneath The Ocean",
       "format": "short",
       "uploaded_at": "2026-10-10T22:10:39.164331+00:00"
+    },
+    "rayvan-procedural-904a01219a50256e": {
+      "video_id": "b4k0a0gxajE",
+      "confirmed_at": "2026-10-10T22:28:40.965801+00:00",
+      "title": "Lina and the Lantern at the City Beneath The Ocean",
+      "format": "short",
+      "uploaded_at": "2026-10-10T22:19:41.731742+00:00"
     }
   },
   "pending": {
-    "b4k0a0gxajE": {
-      "content_id": "rayvan-procedural-904a01219a50256e",
-      "title": "Lina and the Lantern at the City Beneath The Ocean",
+    "-FLIvj4w0us": {
+      "content_id": "rayvan-procedural-2c19a593ba7f5b35",
+      "title": "Tara and the Door at the Forgotten Moon Colony",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-10T22:19:41.731742+00:00",
+      "uploaded_at": "2026-10-10T22:29:31.284525+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1316,6 +1323,12 @@
     "rayvan-procedural-904a01219a50256e": {
       "at": "2026-10-10T22:19:40.090612+00:00",
       "title": "Lina and the Lantern at the City Beneath The Ocean",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-2c19a593ba7f5b35": {
+      "at": "2026-10-10T22:29:29.803198+00:00",
+      "title": "Tara and the Door at the Forgotten Moon Colony",
       "format": "short",
       "result": "accepted"
     }
