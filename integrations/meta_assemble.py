@@ -58,6 +58,13 @@ def assemble(manifest: Path, clips: Path, output: Path) -> dict:
         subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-nostdin", "-y", "-f", "concat", "-safe", "0", "-i", str(concat), "-c", "copy", str(output)], check=True, timeout=600)
     if not output.is_file() or output.stat().st_size == 0:
         raise RuntimeError("Assembly produced no video")
+    # Validate the encoded artifact before exposing it to later stages.
+    verified = probe(output)
+    video_streams = [stream for stream in verified.get("streams", []) if stream.get("codec_type") == "video"]
+    audio_streams = [stream for stream in verified.get("streams", []) if stream.get("codec_type") == "audio"]
+    if len(video_streams) != 1 or not audio_streams or video_streams[0].get("width") != 1080 or video_streams[0].get("height") != 1920:
+        output.unlink(missing_ok=True)
+        raise RuntimeError("Assembled video failed stream validation")
     return {"output": str(output), "scenes": len(inputs), "note": "Scene audio retained where available; silent scenes receive a silent audio track. Validate quality before publishing"}
 
 def main() -> None:
