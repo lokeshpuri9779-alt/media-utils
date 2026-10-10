@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 17,
+  "attempts": 18,
   "confirmed_today": 17,
-  "last_attempt_at": "2026-10-10T08:39:00.903223+00:00",
+  "last_attempt_at": "2026-10-10T08:56:40.357765+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -316,8 +316,17 @@
       "uploaded_at": "2026-10-10T08:39:02.251465+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "7ZFwy1lsW64": {
+      "content_id": "rayvan-procedural-196053bff7a36f55",
+      "title": "Pip and the Musical Note Nobody Else Can Hear at the Forgotten Moon Colony",
+      "day": "2026-10-10",
+      "uploaded_at": "2026-10-10T08:56:42.102396+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -612,6 +621,12 @@
     "rayvan-procedural-c8385a4e241e6d6b": {
       "at": "2026-10-10T08:39:00.903205+00:00",
       "title": "Arun and the Seed at the Train Station At The Edge Of Time",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-196053bff7a36f55": {
+      "at": "2026-10-10T08:56:40.357749+00:00",
+      "title": "Pip and the Musical Note Nobody Else Can Hear at the Forgotten Moon Colony",
       "format": "short",
       "result": "accepted"
     }
