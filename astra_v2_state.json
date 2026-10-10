@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 14,
+  "attempts": 15,
   "confirmed_today": 14,
-  "last_attempt_at": "2026-10-10T07:42:09.373944+00:00",
+  "last_attempt_at": "2026-10-10T07:59:25.845475+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -295,8 +295,17 @@
       "uploaded_at": "2026-10-10T07:42:11.233722+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "V_yF0WHg3bE": {
+      "content_id": "rayvan-procedural-e3f4dbe946916967",
+      "title": "Tara and the Seed at the Glass Desert",
+      "day": "2026-10-10",
+      "uploaded_at": "2026-10-10T07:59:27.089810+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -573,6 +582,12 @@
     "iss-sixteen-sunrises-v1": {
       "at": "2026-10-10T07:42:09.373929+00:00",
       "title": "Why Astronauts See About 16 Sunrises a Day",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-e3f4dbe946916967": {
+      "at": "2026-10-10T07:59:25.845459+00:00",
+      "title": "Tara and the Seed at the Glass Desert",
       "format": "short",
       "result": "accepted"
     }
