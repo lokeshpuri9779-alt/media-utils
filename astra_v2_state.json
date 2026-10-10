@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 53,
-  "confirmed_today": 52,
-  "last_attempt_at": "2026-10-10T17:21:35.710231+00:00",
+  "attempts": 54,
+  "confirmed_today": 53,
+  "last_attempt_at": "2026-10-10T17:32:10.022568+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -559,14 +559,21 @@
       "title": "Emi and the Door at the Abandoned Observatory",
       "format": "short",
       "uploaded_at": "2026-10-10T17:15:06.406460+00:00"
+    },
+    "rayvan-procedural-c3f6e8b3d8227393": {
+      "video_id": "jV3yLq0KoAw",
+      "confirmed_at": "2026-10-10T17:31:11.987716+00:00",
+      "title": "Noor and the Seed at the Silent Mountain Village",
+      "format": "short",
+      "uploaded_at": "2026-10-10T17:21:37.855571+00:00"
     }
   },
   "pending": {
-    "jV3yLq0KoAw": {
-      "content_id": "rayvan-procedural-c3f6e8b3d8227393",
-      "title": "Noor and the Seed at the Silent Mountain Village",
+    "hrozqtwxGMw": {
+      "content_id": "rayvan-procedural-93100d53c73eb321",
+      "title": "Noor and the Musical Note Nobody Else Can Hear at the Silent Mountain Village",
       "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T17:21:37.855571+00:00",
+      "uploaded_at": "2026-10-10T17:32:11.826064+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1082,6 +1089,12 @@
     "rayvan-procedural-c3f6e8b3d8227393": {
       "at": "2026-10-10T17:21:35.710216+00:00",
       "title": "Noor and the Seed at the Silent Mountain Village",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-93100d53c73eb321": {
+      "at": "2026-10-10T17:32:10.022552+00:00",
+      "title": "Noor and the Musical Note Nobody Else Can Hear at the Silent Mountain Village",
       "format": "short",
       "result": "accepted"
     }
