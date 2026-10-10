@@ -3,7 +3,7 @@
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 43,
-  "confirmed_today": 42,
+  "confirmed_today": 43,
   "last_attempt_at": "2026-10-10T14:52:23.446398+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -489,19 +489,17 @@
       "title": "Emi and the Tiny Machine at the City Beneath The Ocean",
       "format": "short",
       "uploaded_at": "2026-10-10T14:38:03.268484+00:00"
-    }
-  },
-  "pending": {
-    "EzD2OaGwfxw": {
-      "content_id": "rayvan-procedural-577aec8a4c9d0029",
+    },
+    "rayvan-procedural-577aec8a4c9d0029": {
+      "video_id": "EzD2OaGwfxw",
+      "confirmed_at": "2026-10-10T14:54:32.850410+00:00",
       "title": "Mara and the A Lantern at A Floating Market",
-      "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T14:52:25.334847+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-10T14:52:25.334847+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
