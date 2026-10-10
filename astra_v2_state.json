@@ -3,7 +3,7 @@
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 31,
-  "confirmed_today": 30,
+  "confirmed_today": 31,
   "last_attempt_at": "2026-10-10T11:35:21.973802+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -405,19 +405,17 @@
       "title": "Arun and the Door at the Glass Desert",
       "format": "short",
       "uploaded_at": "2026-10-10T11:17:36.607544+00:00"
-    }
-  },
-  "pending": {
-    "Gm3EDu3rR6U": {
-      "content_id": "rayvan-procedural-582e9ad0618884be",
+    },
+    "rayvan-procedural-582e9ad0618884be": {
+      "video_id": "Gm3EDu3rR6U",
+      "confirmed_at": "2026-10-10T11:39:28.579534+00:00",
       "title": "Pip and the Map at the Library Inside A Giant Tree",
-      "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T11:35:23.588530+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-10T11:35:23.588530+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
