@@ -67,8 +67,10 @@ def catalog(excluded_ids=None, limit=32):
     # Prefer underused characters and locations based on confirmed publications.
     # The state branch is restored by the existing preload workflow.
     from astra_v2.control import STATE_FILE, read_json
+    state = read_json(STATE_FILE)
     published_titles = [str(item.get("title", "")).casefold()
-                        for item in read_json(STATE_FILE).get("published", {}).values()
+                        for group in ("published", "pending")
+                        for item in (state.get(group) or {}).values()
                         if isinstance(item, dict)]
     character_usage = [sum(title.startswith(name.casefold() + " ") for title in published_titles)
                        for _, name in CHARACTERS]
