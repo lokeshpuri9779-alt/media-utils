@@ -36,6 +36,9 @@ jobs:
       - name: Create side-by-side visual review sheet
         run: |
           python render_lab/contact_sheet.py render_lab/output/story_experiment render_lab/output/story_experiment/review_sheet.png
+      - name: Measure temporal video changes
+        run: |
+          python render_lab/temporal_metrics.py render_lab/output/story_experiment/story_motion.mp4 > render_lab/output/story_experiment/temporal_metrics.json
       - name: Upload genuine video and evidence
         if: always()
         uses: actions/upload-artifact@v4
