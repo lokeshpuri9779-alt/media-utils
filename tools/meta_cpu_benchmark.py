@@ -44,7 +44,7 @@ def benchmark(*, profile: str, output: Path, prompt: str, steps: int = 30,
         # ru_maxrss is KiB on Linux; runner uses Ubuntu.
         result['peak_process_rss_mib_linux'] = round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024, 1)
         report.parent.mkdir(parents=True, exist_ok=True)
-        report.write_text(json.dumps(result, indent=2) + '\\n')
+        report.write_text(json.dumps(result, indent=2) + '\n')
     return result
 
 
