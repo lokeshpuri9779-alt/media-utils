@@ -181,6 +181,6 @@ jobs:
               summary.write('**Verified public video: ' + ('YES' if verified else 'NO') + '**\n\n')
               if not verified:
                   summary.write('A green GitHub Actions check is NOT proof of a new upload.\n\n')
-              for key in ('outcome','video_url','reason','attempts_today','confirmed_today','pending','blocked_until'):
+              for key in ('outcome','video_url','reason','queue_error_type','attempts_today','confirmed_today','pending','blocked_until'):
                   summary.write(f'- {key}: {data.get(key)}\n')
           PY
