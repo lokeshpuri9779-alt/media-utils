@@ -33,6 +33,8 @@ def assemble(manifest: Path, clips: Path, output: Path) -> dict:
         if not 0.25 <= duration <= 120:
             raise ValueError(f"Unreasonable scene duration: {path}")
     output.parent.mkdir(parents=True, exist_ok=True)
+    # Never preserve an old success artifact after a failed direct assembly.
+    output.unlink(missing_ok=True)
     with tempfile.TemporaryDirectory(prefix="astra_meta_") as temp:
         normalized = []
         # Normalize audio on every clip so concat preserves dialogue and effects.
