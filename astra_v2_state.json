@@ -3,7 +3,7 @@
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 5,
-  "confirmed_today": 4,
+  "confirmed_today": 5,
   "last_attempt_at": "2026-10-10T19:53:57.979732+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -622,19 +622,17 @@
       "title": "Lina and the Map at the Glass Desert",
       "format": "short",
       "uploaded_at": "2026-10-10T19:39:19.754360+00:00"
-    }
-  },
-  "pending": {
-    "KTRa3Khf4GQ": {
-      "content_id": "rayvan-procedural-b6d44eb56179acb7",
+    },
+    "rayvan-procedural-b6d44eb56179acb7": {
+      "video_id": "KTRa3Khf4GQ",
+      "confirmed_at": "2026-10-10T19:57:31.399928+00:00",
       "title": "Pip and the Door at the Forgotten Moon Colony",
-      "day": "2026-10-11",
-      "uploaded_at": "2026-10-10T19:53:59.337442+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-10T19:53:59.337442+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
