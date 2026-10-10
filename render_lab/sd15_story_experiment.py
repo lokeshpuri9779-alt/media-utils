@@ -15,6 +15,7 @@ def main():
     p.add_argument("--scenes",type=int,default=2)
     p.add_argument("--reference-conditioned",action="store_true",help="Use first generated frame as img2img anchor for later scenes")
     p.add_argument("--reference-strength",type=float,default=0.35)
+    p.add_argument("--omniroute",action="store_true")
     p.add_argument("--output-dir",type=Path,default=Path("render_lab/output/story_experiment"))
     args=p.parse_args()
     if not args.enable_generation:
@@ -23,6 +24,13 @@ def main():
         p.error("scenes must be 1..4 and steps 1..50")
     args.output_dir.mkdir(parents=True,exist_ok=True)
     from integrations.meta_cpu_diffusion import generate,MODELS
+    selection = None
+    if args.omniroute:
+        from render_lab.omniroute import select_route
+        selection = select_route(reference_image=args.reference_conditioned)
+        if not selection["selected"]:
+            raise RuntimeError("No available zero-cost route")
+        args.reference_conditioned = selection["selected"] == "sd15_img2img"
     if args.reference_conditioned:
         from render_lab.reference_conditioning import generate_from_reference
     character = ("two friendly rounded copper robots, one tall adult and one small child, "
@@ -63,7 +71,7 @@ def main():
     report={"engine":"sd15-cpu-to-ffmpeg","model":MODELS[args.profile],"steps":args.steps,
             "scenes_requested":args.scenes,"scenes":records,"published":False,
             "model_download_permitted":True,"video_rendered":False,
-            "reference_conditioned":args.reference_conditioned,
+            "reference_conditioned":args.reference_conditioned,"omniroute":selection,
             "reference_strength":args.reference_strength if args.reference_conditioned else None}
     if len(records)==args.scenes and all(x["ok"] for x in records):
         video=args.output_dir/"story_motion.mp4"
