@@ -20,6 +20,8 @@ jobs:
         run: python render_lab/blender_benchmark.py
       - name: Benchmark Godot if available
         run: python render_lab/godot_benchmark.py
+      - name: Check offline OpenVINO and SD 1.5 feasibility
+        run: python render_lab/openvino_preflight.py
       - name: Verify rendered MP4 and metadata
         run: python render_lab/verify.py
       - name: Upload benchmark report
@@ -28,6 +30,7 @@ jobs:
         with:
           name: astra-render-lab-baseline
           path: |
+            render_lab/output/openvino_preflight.json
             render_lab/output/godot.json
             render_lab/output/godot.mp4
             render_lab/output/blender.json
