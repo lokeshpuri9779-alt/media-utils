@@ -56,6 +56,8 @@ def catalog(excluded_ids=None, limit=32):
     result = []
     seen_plot_keys = set()
     seen_mysteries = Counter()
+    seen_characters = Counter()
+    seen_places = Counter()
     # Stable index ordering avoids random story IDs across independent CI jobs.
     combinations = itertools.product(
         range(len(CHARACTERS)), range(len(PLACES)), range(len(MYSTERIES)),
@@ -78,6 +80,10 @@ def catalog(excluded_ids=None, limit=32):
             continue
         if seen_mysteries[m] >= max(1, (limit + len(MYSTERIES) - 1) // len(MYSTERIES)):
             continue
+        if seen_characters[c] >= max(1, (limit + len(CHARACTERS) - 1) // len(CHARACTERS)):
+            continue
+        if seen_places[p] >= max(1, (limit + len(PLACES) - 1) // len(PLACES)):
+            continue
         character, name = CHARACTERS[c]
         place, place_visual = PLACES[p]
         mystery, mystery_visual = MYSTERIES[m]
@@ -94,6 +100,8 @@ def catalog(excluded_ids=None, limit=32):
         ]
         seen_plot_keys.add(plot_key)
         seen_mysteries[m] += 1
+        seen_characters[c] += 1
+        seen_places[p] += 1
         result.append({
             "genre": "fiction", "kind": "procedural_fiction",
             "production_ready": True, "content_id": cid,
