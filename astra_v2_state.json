@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 5,
+  "attempts": 6,
   "confirmed_today": 5,
-  "last_attempt_at": "2026-10-10T19:53:57.979732+00:00",
+  "last_attempt_at": "2026-10-10T20:09:34.785417+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -631,8 +631,17 @@
       "uploaded_at": "2026-10-10T19:53:59.337442+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "KkOOlkkBFR8": {
+      "content_id": "rayvan-procedural-e1b6ad0bc625df43",
+      "title": "Tara and the Musical Note Nobody Else Can Hear at the Library Inside A Giant Tree",
+      "day": "2026-10-11",
+      "uploaded_at": "2026-10-10T20:09:36.639707+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -1197,6 +1206,12 @@
     "rayvan-procedural-b6d44eb56179acb7": {
       "at": "2026-10-10T19:53:57.979717+00:00",
       "title": "Pip and the Door at the Forgotten Moon Colony",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-e1b6ad0bc625df43": {
+      "at": "2026-10-10T20:09:34.785401+00:00",
+      "title": "Tara and the Musical Note Nobody Else Can Hear at the Library Inside A Giant Tree",
       "format": "short",
       "result": "accepted"
     }
