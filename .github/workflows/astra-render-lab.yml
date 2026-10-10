@@ -1,6 +1,12 @@
-name: ASTRA Render Lab - Manual CPU Benchmark
+name: ASTRA Render Lab - Isolated CPU Benchmark
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - astra-render-lab-isolated
+    paths:
+      - 'render_lab/**'
+      - '.github/workflows/astra-render-lab.yml'
 permissions:
   contents: read
 jobs:
