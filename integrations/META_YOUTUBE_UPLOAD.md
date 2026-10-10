@@ -19,10 +19,11 @@ an existing authorized OAuth user-token JSON containing the YouTube upload scope
 
 ```bash
 python -m pip install -r integrations/requirements-youtube.txt
+export ASTRA_YOUTUBE_CHANNEL_ID="YOUR_EXPECTED_CHANNEL_ID"
 python -m integrations.meta_youtube_upload --handoff out/handoff.json --token /secure/path/token.json --execute --privacy private
 ```
 
-The uploader defaults to **private**. It does not discover OAuth credentials,
+On Windows PowerShell, use `$env:ASTRA_YOUTUBE_CHANNEL_ID="YOUR_EXPECTED_CHANNEL_ID"` instead of `export`. The OAuth token must support reading the authenticated channel identity as well as uploading; otherwise execution fails closed.\n\nThe uploader defaults to **private**. It does not discover OAuth credentials,
 exchange authorization codes, create a scheduler, or upload without `--execute`.
 Never commit OAuth credentials or tokens to GitHub. YouTube quota limits and
 authorization failures are not bypassed. A successful dry-run is not evidence
