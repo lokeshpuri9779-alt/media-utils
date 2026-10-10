@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-10",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 51,
-  "confirmed_today": 50,
-  "last_attempt_at": "2026-10-10T16:57:52.583165+00:00",
+  "attempts": 52,
+  "confirmed_today": 51,
+  "last_attempt_at": "2026-10-10T17:15:04.110637+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -545,14 +545,21 @@
       "title": "Mara and the A Door at A Floating Market",
       "format": "short",
       "uploaded_at": "2026-10-10T16:47:53.309204+00:00"
+    },
+    "rayvan-procedural-2ef98777325febdc": {
+      "video_id": "CS2JiM2FzEk",
+      "confirmed_at": "2026-10-10T17:13:42.872009+00:00",
+      "title": "Ivo and the Lantern at the Silent Mountain Village",
+      "format": "short",
+      "uploaded_at": "2026-10-10T16:57:54.111024+00:00"
     }
   },
   "pending": {
-    "CS2JiM2FzEk": {
-      "content_id": "rayvan-procedural-2ef98777325febdc",
-      "title": "Ivo and the Lantern at the Silent Mountain Village",
+    "3fhlGEaVTkU": {
+      "content_id": "rayvan-procedural-c217ec2fb1dca478",
+      "title": "Emi and the Door at the Abandoned Observatory",
       "day": "2026-10-10",
-      "uploaded_at": "2026-10-10T16:57:54.111024+00:00",
+      "uploaded_at": "2026-10-10T17:15:06.406460+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1056,6 +1063,12 @@
     "rayvan-procedural-2ef98777325febdc": {
       "at": "2026-10-10T16:57:52.583150+00:00",
       "title": "Ivo and the Lantern at the Silent Mountain Village",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-c217ec2fb1dca478": {
+      "at": "2026-10-10T17:15:04.110620+00:00",
+      "title": "Emi and the Door at the Abandoned Observatory",
       "format": "short",
       "result": "accepted"
     }
