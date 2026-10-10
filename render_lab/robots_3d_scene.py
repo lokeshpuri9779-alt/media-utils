@@ -1,0 +1,73 @@
+"""Blender background scene: two procedural copper robots with genuine 3D keyframes."""
+import bpy
+import math
+from mathutils import Vector
+bpy.ops.object.select_all(action="SELECT")
+bpy.ops.object.delete(use_global=False)
+scene=bpy.context.scene
+scene.render.engine="BLENDER_WORKBENCH"
+scene.render.resolution_x=480
+scene.render.resolution_y=270
+scene.render.resolution_percentage=100
+scene.render.fps=12
+scene.frame_start=1
+scene.frame_end=36
+scene.render.image_settings.file_format="FFMPEG"
+scene.render.ffmpeg.format="MPEG4"
+scene.render.ffmpeg.codec="H264"
+scene.render.filepath="render_lab/output/robots_3d.mp4"
+scene.world.color=(0.15,0.15,0.15)
+
+def material(name, color):
+    m=bpy.data.materials.new(name)
+    m.diffuse_color=(*color,1)
+    return m
+copper=material("Rose copper",(0.62,0.28,0.16))
+eyes=material("Glowing white eyes",(0.95,0.96,1))
+green=material("Greenhouse floor",(0.15,0.3,0.16))
+def ball(name,location,scale,mat,parent=None):
+    bpy.ops.mesh.primitive_uv_sphere_add(segments=16,ring_count=8,location=location)
+    o=bpy.context.object
+    o.name=name
+    o.scale=scale
+    o.data.materials.append(mat)
+    if parent:
+        o.parent=parent
+        o.matrix_parent_inverse=parent.matrix_world.inverted()
+    return o
+def robot(name,x,size):
+    root=bpy.data.objects.new(name,None)
+    bpy.context.collection.objects.link(root)
+    root.location=(x,0,0)
+    ball(name+" body",(x,0,size*1.2),(size*.52,size*.36,size*.67),copper,root)
+    head=ball(name+" head",(x,0,size*2.15),(size*.62,size*.47,size*.53),copper,root)
+    for dx in (-.24,.24):
+        ball(name+" eye",(x+dx*size,-size*.425,size*2.2),
+             (size*.14,size*.075,size*.19),eyes,root)
+    for dx in (-.62,.62):
+        ball(name+" arm",(x+dx*size,0,size*1.28),
+             (size*.18,size*.21,size*.46),copper,root)
+    for dx in (-.25,.25):
+        ball(name+" foot",(x+dx*size,-size*.08,size*.35),
+             (size*.22,size*.3,size*.34),copper,root)
+    for frame,y,angle in [(1,0,-.12),(12,-.12,.12),(24,.1,-.08),(36,0,.1)]:
+        root.location=(x,y,0)
+        root.rotation_euler[2]=angle
+        root.keyframe_insert(data_path="location",frame=frame)
+        root.keyframe_insert(data_path="rotation_euler",frame=frame)
+    return root
+robot("Large copper robot",-1.15,1)
+robot("Small copper robot",1.2,.67)
+bpy.ops.mesh.primitive_cube_add(size=2,location=(0,0,-.25))
+floor=bpy.context.object
+floor.name="Greenhouse ground"
+floor.scale=(6,4,.2)
+floor.data.materials.append(green)
+bpy.ops.object.camera_add(location=(0,-9,4.3))
+camera=bpy.context.object
+direction=Vector((0,0,1.3))-camera.location
+camera.rotation_euler=direction.to_track_quat("-Z","Y").to_euler()
+scene.camera=camera
+scene.display.shading.light="STUDIO"
+scene.display.shading.color_type="MATERIAL"
+bpy.ops.render.render(animation=True)
