@@ -9,7 +9,7 @@ from unittest.mock import Mock, patch
 
 from astra_v2.control import due, quota_resume, state_for_day, write_json, read_json
 from astra_v2.creative import CreativeSkip, inspect_video
-from astra_v2.run import reconcile
+from astra_v2.run import reconcile, long_upload_due
 from astra_v2.youtube import Youtube, YoutubeError, reason_for
 
 
@@ -48,6 +48,56 @@ class PolicyTests(unittest.TestCase):
             target = Path(directory) / "state.json"
             write_json(target, {"version": 2})
             self.assertEqual(read_json(target)["version"], 2)
+
+
+
+class LongFormCooldownTests(unittest.TestCase):
+    def setUp(self):
+        self.now = datetime(2026, 10, 10, 12, 0, tzinfo=timezone.utc)
+        self.state = state_for_day(None, self.now)
+
+    def test_first_long_upload_is_due(self):
+        self.assertTrue(long_upload_due(self.state, self.now))
+
+    def test_recent_short_upload_does_not_delay_long_form(self):
+        self.state["published"]["short-1"] = {
+            "format": "short", "confirmed_at": self.now.isoformat()}
+        self.assertTrue(long_upload_due(self.state, self.now))
+
+    def test_published_long_has_24_hour_interval(self):
+        earlier = self.now - timedelta(hours=23, minutes=59)
+        self.state["published"]["long-1"] = {
+            "format": "long", "uploaded_at": earlier.isoformat()}
+        self.assertFalse(long_upload_due(self.state, self.now))
+        self.assertTrue(long_upload_due(self.state, self.now + timedelta(minutes=1)))
+
+    def test_processing_long_still_blocks_second_long(self):
+        self.state["pending"]["video-1"] = {
+            "content_id": "long-1", "format": "long",
+            "uploaded_at": (self.now - timedelta(hours=1)).isoformat()}
+        self.assertFalse(long_upload_due(self.state, self.now))
+
+    def test_reserved_long_still_blocks_second_long(self):
+        self.state["reserved"] = {"long-1": {
+            "format": "long", "at": (self.now - timedelta(hours=1)).isoformat(),
+            "result": "transfer_pending"}}
+        self.assertFalse(long_upload_due(self.state, self.now))
+
+    def test_long_metadata_survives_reconciliation(self):
+        self.state["pending"]["video-1"] = {
+            "content_id": "long-1", "format": "long",
+            "uploaded_at": (self.now - timedelta(minutes=2)).isoformat(),
+            "day": self.state["day"]}
+        youtube = Mock()
+        youtube.status.return_value = {
+            "privacyStatus": "public", "uploadStatus": "processed"}
+        with patch.dict("sys.modules", {"cloud_once": SimpleNamespace(
+                CONTENT_META={}, record_video=lambda video_id, title: None)}):
+            self.assertEqual(reconcile(youtube, self.state), ["video-1"])
+        self.assertEqual(self.state["published"]["long-1"]["format"], "long")
+        self.assertFalse(long_upload_due(self.state, self.now))
+
+
 
 
 class YoutubeTests(unittest.TestCase):
