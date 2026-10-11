@@ -167,10 +167,20 @@ def draw_subject(image, subject, t, accent):
             y = 675+i*105
             pts = [(x, y+int(18*math.sin(x*.018+t+i))) for x in range(130, 920, 16)]
             d.line(pts, fill=(40+i*8, 140+i*10, 210+i*6), width=9)
-        x=cx+int(math.sin(t)*60)
-        d.ellipse((x-225, 800, x+180, 990), fill=(79, 155, 185))
-        d.polygon([(x+155, 890), (x+300, 810), (x+300, 990)], fill=(79, 155, 185))
-        d.ellipse((x-145, 855, x-125, 875), fill=(8, 24, 40))
+        if subject == "whale":
+            x = cx + int(math.sin(t) * 60)
+            d.ellipse((x-225, 800, x+180, 990), fill=(79, 155, 185))
+            d.polygon([(x+155, 890), (x+300, 810), (x+300, 990)], fill=(79, 155, 185))
+            d.ellipse((x-145, 855, x-125, 875), fill=(8, 24, 40))
+        else:
+            # Ocean-only stories should not silently acquire a whale character.
+            for i in range(4):
+                x = 240 + i * 170 + int(24 * math.sin(t * 0.7 + i))
+                y = 850 + (i % 2) * 110 + int(12 * math.sin(t + i))
+                d.polygon([(x-35, y), (x+35, y-25), (x+35, y+25)],
+                          fill=(88, 205, 201))
+                d.polygon([(x+35, y), (x+70, y-30), (x+70, y+30)],
+                          fill=(66, 162, 179))
     elif subject == "clock":
         d.ellipse((cx-245, 625, cx+245, 1115), fill=(95, 66, 54), outline=(240, 195, 115), width=18)
         d.ellipse((cx-195, 675, cx+195, 1065), fill=(32, 38, 58), outline=accent, width=5)
