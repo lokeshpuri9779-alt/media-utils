@@ -3,7 +3,7 @@
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 55,
-  "confirmed_today": 54,
+  "confirmed_today": 55,
   "last_attempt_at": "2026-10-11T14:54:53.100488+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -972,19 +972,17 @@
       "title": "Lina and the Musical Note Nobody Else Can Hear at the Silent Mountain Village",
       "format": "short",
       "uploaded_at": "2026-10-11T14:45:14.185269+00:00"
-    }
-  },
-  "pending": {
-    "hF_gtTJJrgo": {
-      "content_id": "rayvan-procedural-fe4c5f9468831b58",
+    },
+    "rayvan-procedural-fe4c5f9468831b58": {
+      "video_id": "hF_gtTJJrgo",
+      "confirmed_at": "2026-10-11T14:59:00.486125+00:00",
       "title": "Pip and the Seed at the Silent Mountain Village",
-      "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T14:54:54.908785+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-11T14:54:54.908785+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
