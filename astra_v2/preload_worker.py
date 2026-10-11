@@ -95,8 +95,9 @@ def main():
         package = prepare(video, candidate)
         destination = Path("preload-package")
         destination.mkdir(exist_ok=True)
-        for name in ("candidate.json", "video.mp4"):
-            (destination / name).write_bytes((package / name).read_bytes())
+        for name in ("candidate.json", "video.mp4", "cover.jpg", "cover_wide.jpg"):
+            if (package / name).is_file():
+                (destination / name).write_bytes((package / name).read_bytes())
         packaged = time.monotonic()
         with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
             out.write("content_id="+candidate["content_id"]+"\n")
