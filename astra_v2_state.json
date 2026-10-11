@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 35,
-  "confirmed_today": 34,
-  "last_attempt_at": "2026-10-11T01:52:30.070288+00:00",
+  "attempts": 36,
+  "confirmed_today": 35,
+  "last_attempt_at": "2026-10-11T02:00:16.064809+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -832,14 +832,21 @@
       "title": "Ivo and the Lantern at the Train Station At The Edge Of Time",
       "format": "short",
       "uploaded_at": "2026-10-11T01:44:01.997866+00:00"
+    },
+    "rayvan-procedural-a0013c1e379891ee": {
+      "video_id": "jH3-vukAZxY",
+      "confirmed_at": "2026-10-11T01:59:08.811493+00:00",
+      "title": "Lina and the Sealed Letter Addressed To Tomorrow at the Floating Market",
+      "format": "short",
+      "uploaded_at": "2026-10-11T01:52:31.409747+00:00"
     }
   },
   "pending": {
-    "jH3-vukAZxY": {
-      "content_id": "rayvan-procedural-a0013c1e379891ee",
-      "title": "Lina and the Sealed Letter Addressed To Tomorrow at the Floating Market",
+    "KHF7SJlhsgE": {
+      "content_id": "rayvan-procedural-46101f405ea11867",
+      "title": "Ivo and the Seed at the Train Station At The Edge Of Time",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T01:52:31.409747+00:00",
+      "uploaded_at": "2026-10-11T02:00:17.568759+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1589,6 +1596,12 @@
     "rayvan-procedural-a0013c1e379891ee": {
       "at": "2026-10-11T01:52:30.070273+00:00",
       "title": "Lina and the Sealed Letter Addressed To Tomorrow at the Floating Market",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-46101f405ea11867": {
+      "at": "2026-10-11T02:00:16.064789+00:00",
+      "title": "Ivo and the Seed at the Train Station At The Edge Of Time",
       "format": "short",
       "result": "accepted"
     }
