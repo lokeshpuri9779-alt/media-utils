@@ -25,7 +25,7 @@ SUBJECTS = (
 )
 
 def select_subject(story, shot):
-    local = " ".join(str(shot.get(k) or "") for k in ("speech", "headline", "label")).lower()
+    local = " ".join(str(shot.get(k) or "") for k in ("speech", "visual_prompt", "visual", "action", "headline", "label")).lower()
     global_text = " ".join(str(story.get(k) or "") for k in ("title", "question", "answer")).lower()
     # A shot should depict the subject mentioned in that shot, not the first
     # matching word from the entire episode or the fixed subject catalog.
