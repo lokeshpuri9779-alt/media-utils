@@ -11,6 +11,7 @@ from astra_v2.control import (
 )
 from astra_v2.creative import CreativeSkip, make_candidate, make_long_candidate
 from astra_v2.youtube import Youtube, YoutubeError
+from astra_v2.long_cadence import long_upload_due as historical_long_upload_due
 
 
 def channel_config():
@@ -106,6 +107,7 @@ def run():
             if not allowed:
                 report.update(outcome="skipped", reason=reason)
                 return report
+            long_due = historical_long_upload_due(state, utcnow(), performance=read_json("performance.json"))
             live_ids, live_titles = youtube.recent(youtube_channel)
             previous_ids = set(state["published"]) | set(state.get("reserved", {}))
             previous_ids.update(item.get("content_id", "") for item in state["pending"].values())
@@ -118,7 +120,7 @@ def run():
                     if os.getenv("ASTRA_PRELOAD_ENABLED", "1") == "1":
                         try:
                             from astra_v2.preload_queue import take
-                            candidate = take(previous_ids | live_ids, live_titles, video)
+                            candidate = take(previous_ids | live_ids, live_titles, video, allow_long=long_due)
                         except Exception as queue_error:
                             report["queue_error_type"] = type(queue_error).__name__
                             print("ASTRA_PRELOAD_FALLBACK=" + type(queue_error).__name__)
@@ -126,14 +128,15 @@ def run():
                         if os.getenv("ASTRA_PRELOAD_ONLY", "0") == "1":
                             report.update(outcome="skipped", reason=("preload_queue_error" if report.get("queue_error_type") else "preload_queue_empty"))
                             return report
-                        candidate = (make_long_candidate(video, previous_ids | live_ids, live_titles)
+                        candidate = ((make_long_candidate(video, previous_ids | live_ids, live_titles) if long_due else None)
                                      or make_candidate(video, previous_ids | live_ids, live_titles))
                     else:
                         print("ASTRA_PRELOAD_CONSUMED=" + candidate["content_id"])
                 except CreativeSkip as exc:
                     report.update(outcome="quality_skip", reason=str(exc)[:250])
                     return report
-                if candidate.get("format") == "long" and not long_upload_due(state, utcnow()):
+                if candidate.get("format") == "long" and not historical_long_upload_due(
+                    state, utcnow(), performance=read_json("performance.json")):
                     report.update(outcome="skipped", reason="longform_24h_cooldown")
                     return report
                 cid = candidate["content_id"]
