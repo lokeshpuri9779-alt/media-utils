@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 58,
-  "confirmed_today": 57,
-  "last_attempt_at": "2026-10-11T15:38:34.128420+00:00",
+  "attempts": 59,
+  "confirmed_today": 58,
+  "last_attempt_at": "2026-10-11T15:49:45.107056+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -993,14 +993,21 @@
       "title": "Tara and the Door at the Library Inside A Giant Tree",
       "format": "short",
       "uploaded_at": "2026-10-11T15:20:32.592756+00:00"
+    },
+    "rayvan-procedural-ec21c216d3140296": {
+      "video_id": "G8r5L_YLFBw",
+      "confirmed_at": "2026-10-11T15:48:54.226922+00:00",
+      "title": "Emi and the Sealed Letter Addressed To Tomorrow at the Silent Mountain Village",
+      "format": "short",
+      "uploaded_at": "2026-10-11T15:38:36.052846+00:00"
     }
   },
   "pending": {
-    "G8r5L_YLFBw": {
-      "content_id": "rayvan-procedural-ec21c216d3140296",
-      "title": "Emi and the Sealed Letter Addressed To Tomorrow at the Silent Mountain Village",
+    "X-3iI-0xASM": {
+      "content_id": "rayvan-procedural-4666c82eedeaa15c",
+      "title": "Emi and the Clock at the Glass Desert",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T15:38:36.052846+00:00",
+      "uploaded_at": "2026-10-11T15:49:46.879889+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1888,6 +1895,12 @@
     "rayvan-procedural-ec21c216d3140296": {
       "at": "2026-10-11T15:38:34.128406+00:00",
       "title": "Emi and the Sealed Letter Addressed To Tomorrow at the Silent Mountain Village",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-4666c82eedeaa15c": {
+      "at": "2026-10-11T15:49:45.107041+00:00",
+      "title": "Emi and the Clock at the Glass Desert",
       "format": "short",
       "result": "accepted"
     }
