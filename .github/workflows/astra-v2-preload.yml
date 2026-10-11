@@ -105,6 +105,18 @@ jobs:
           python -m unittest discover -s tests -p 'test_free_story_engine.py' -v
           python -m unittest discover -s tests -p 'test_procedural_stories.py' -v
           python -m unittest discover -s tests -p 'test_omniroute_local.py' -v
+      - name: Render independent character-motion preview
+        if: matrix.lane == 0
+        continue-on-error: true
+        run: python -m astra_v2.character_preview
+      - name: Save inspectable animation MP4
+        if: matrix.lane == 0
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-character-preview-${{ github.run_id }}
+          path: runtime-health/astra-character-preview.mp4
+          if-no-files-found: warn
+          retention-days: 7
       - name: Render and approve next original video
         id: render
         run: python -m astra_v2.preload_worker
