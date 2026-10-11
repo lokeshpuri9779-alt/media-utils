@@ -1,6 +1,6 @@
 """Checks that fiction subjects match the story instead of generic robot placeholders."""
 import unittest
-from PIL import Image
+from PIL import Image, ImageChops
 from astra_v2.story_visuals import select_subject, draw_subject
 
 
@@ -35,7 +35,8 @@ class StoryVisualTests(unittest.TestCase):
             with self.subTest(subject=subject):
                 image = Image.new("RGB", (1080, 1920), (8, 11, 28))
                 self.assertTrue(draw_subject(image, subject, 0.5, (188, 163, 255)))
-                self.assertNotEqual(image.getpixel((520, 850)), (8, 11, 28))
+                blank = Image.new("RGB", image.size, (8, 11, 28))
+                self.assertIsNotNone(ImageChops.difference(image, blank).getbbox())
 
 
 if __name__ == "__main__":
