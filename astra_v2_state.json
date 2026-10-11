@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 63,
-  "confirmed_today": 62,
-  "last_attempt_at": "2026-10-11T16:33:22.077592+00:00",
+  "attempts": 64,
+  "confirmed_today": 63,
+  "last_attempt_at": "2026-10-11T16:42:25.009044+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1028,14 +1028,21 @@
       "title": "Emi and the Sealed Letter Addressed To Tomorrow at the Glass Desert",
       "format": "short",
       "uploaded_at": "2026-10-11T16:24:41.167928+00:00"
+    },
+    "rayvan-procedural-4ae58b43d8d24936": {
+      "video_id": "Kv1fvb24p-Y",
+      "confirmed_at": "2026-10-11T16:41:01.774058+00:00",
+      "title": "Noor and the Door at the Glass Desert",
+      "format": "short",
+      "uploaded_at": "2026-10-11T16:33:24.093917+00:00"
     }
   },
   "pending": {
-    "Kv1fvb24p-Y": {
-      "content_id": "rayvan-procedural-4ae58b43d8d24936",
-      "title": "Noor and the Door at the Glass Desert",
+    "LqPzYWIJaeU": {
+      "content_id": "rayvan-procedural-4e75759fa0c7d577",
+      "title": "Pip and the Clock at the Silent Mountain Village",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T16:33:24.093917+00:00",
+      "uploaded_at": "2026-10-11T16:42:26.579158+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1953,6 +1960,12 @@
     "rayvan-procedural-4ae58b43d8d24936": {
       "at": "2026-10-11T16:33:22.077576+00:00",
       "title": "Noor and the Door at the Glass Desert",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-4e75759fa0c7d577": {
+      "at": "2026-10-11T16:42:25.009028+00:00",
+      "title": "Pip and the Clock at the Silent Mountain Village",
       "format": "short",
       "result": "accepted"
     }
