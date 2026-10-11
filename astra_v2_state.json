@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 64,
-  "confirmed_today": 63,
-  "last_attempt_at": "2026-10-11T16:42:25.009044+00:00",
+  "attempts": 65,
+  "confirmed_today": 64,
+  "last_attempt_at": "2026-10-11T16:52:21.478681+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1035,14 +1035,21 @@
       "title": "Noor and the Door at the Glass Desert",
       "format": "short",
       "uploaded_at": "2026-10-11T16:33:24.093917+00:00"
+    },
+    "rayvan-procedural-4e75759fa0c7d577": {
+      "video_id": "LqPzYWIJaeU",
+      "confirmed_at": "2026-10-11T16:51:22.482251+00:00",
+      "title": "Pip and the Clock at the Silent Mountain Village",
+      "format": "short",
+      "uploaded_at": "2026-10-11T16:42:26.579158+00:00"
     }
   },
   "pending": {
-    "LqPzYWIJaeU": {
-      "content_id": "rayvan-procedural-4e75759fa0c7d577",
-      "title": "Pip and the Clock at the Silent Mountain Village",
+    "0Jo0V8SWr3E": {
+      "content_id": "rayvan-procedural-15fc571a6a2c2692",
+      "title": "Noor and the Tiny Machine at the Glass Desert",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T16:42:26.579158+00:00",
+      "uploaded_at": "2026-10-11T16:52:24.428846+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1966,6 +1973,12 @@
     "rayvan-procedural-4e75759fa0c7d577": {
       "at": "2026-10-11T16:42:25.009028+00:00",
       "title": "Pip and the Clock at the Silent Mountain Village",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-15fc571a6a2c2692": {
+      "at": "2026-10-11T16:52:21.478666+00:00",
+      "title": "Noor and the Tiny Machine at the Glass Desert",
       "format": "short",
       "result": "accepted"
     }
