@@ -100,6 +100,50 @@ class LongFormCooldownTests(unittest.TestCase):
 
 
 
+
+class DurableLongFormCadenceTests(unittest.TestCase):
+    """A journal rollover must not erase the 24-hour public upload guard."""
+
+    def setUp(self):
+        from astra_v2.long_cadence import long_upload_due
+        self.check = long_upload_due
+        self.now = datetime(2026, 10, 11, 12, 0, tzinfo=timezone.utc)
+        self.state = state_for_day(None, self.now)
+
+    def test_missing_performance_history_blocks_long_only(self):
+        self.assertFalse(self.check(self.state, self.now, performance={}))
+        self.assertFalse(self.check(self.state, self.now, performance={"videos": None}))
+
+    def test_historical_public_long_survives_empty_journal(self):
+        history = {"videos": {"public-long": {
+            "format": "long", "visibility": "public",
+            "published_at": (self.now - timedelta(hours=23)).isoformat(),
+        }}}
+        self.assertFalse(self.check(self.state, self.now, performance=history))
+        self.assertTrue(self.check(self.state, self.now + timedelta(hours=1), performance=history))
+
+    def test_unresolved_long_transfer_blocks_even_after_24_hours(self):
+        self.state["reserved"] = {"indeterminate": {
+            "format": "long", "result": "transfer_pending",
+            "at": (self.now - timedelta(days=7)).isoformat(),
+        }}
+        self.assertFalse(self.check(self.state, self.now, performance={"videos": {}}))
+
+    def test_pending_long_blocks_and_short_reservation_does_not(self):
+        self.state["pending"]["long-video"] = {
+            "format": "long", "content_id": "long-one",
+        }
+        self.assertFalse(self.check(self.state, self.now, performance={"videos": {}}))
+        self.state["pending"].clear()
+        self.state["reserved"] = {"short-one": {"format": "short"}}
+        self.assertTrue(self.check(self.state, self.now, performance={"videos": {}}))
+
+    def test_invalid_public_long_date_fails_closed(self):
+        history = {"videos": {"public-long": {
+            "format": "long", "visibility": "public", "published_at": "invalid",
+        }}}
+        self.assertFalse(self.check(self.state, self.now, performance=history))
+
 class YoutubeTests(unittest.TestCase):
     def test_quota_reason(self):
         response = Mock()
