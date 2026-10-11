@@ -3,7 +3,7 @@
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 66,
-  "confirmed_today": 65,
+  "confirmed_today": 66,
   "last_attempt_at": "2026-10-11T17:00:53.211997+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -1049,19 +1049,17 @@
       "title": "Noor and the Tiny Machine at the Glass Desert",
       "format": "short",
       "uploaded_at": "2026-10-11T16:52:24.428846+00:00"
-    }
-  },
-  "pending": {
-    "ZvdbfF8nKhs": {
-      "content_id": "rayvan-procedural-a9af24893193d0fc",
+    },
+    "rayvan-procedural-a9af24893193d0fc": {
+      "video_id": "ZvdbfF8nKhs",
+      "confirmed_at": "2026-10-11T17:05:48.186023+00:00",
       "title": "Arun and the Musical Note Nobody Else Can Hear at the Forgotten Moon Colony",
-      "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T17:00:54.523271+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-11T17:00:54.523271+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
