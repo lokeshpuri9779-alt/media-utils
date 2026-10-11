@@ -3,7 +3,7 @@
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 37,
-  "confirmed_today": 36,
+  "confirmed_today": 37,
   "last_attempt_at": "2026-10-11T02:19:46.917376+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -846,19 +846,17 @@
       "title": "Ivo and the Seed at the Train Station At The Edge Of Time",
       "format": "short",
       "uploaded_at": "2026-10-11T02:00:17.568759+00:00"
-    }
-  },
-  "pending": {
-    "zXZzyL6F_4k": {
-      "content_id": "rayvan-procedural-5df00ff9887360c2",
+    },
+    "rayvan-procedural-5df00ff9887360c2": {
+      "video_id": "zXZzyL6F_4k",
+      "confirmed_at": "2026-10-11T02:24:13.118301+00:00",
       "title": "Mara and the A Lantern at A Floating Market",
-      "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T02:19:48.506513+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-11T02:19:48.506513+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
