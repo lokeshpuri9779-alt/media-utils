@@ -4035,6 +4035,196 @@ jobs:
           script = ExtResource("1")
           PULSEFALL_COMBAT_TEST
 
+      - name: Add bounded recoil and enemy hit-stop
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          cat > game/mobile/combat_feel.gd <<'PULSEFALL_FEEL'
+          class_name CombatFeel
+          extends RefCounted
+
+          const HIT_STOP_TIME := 0.035
+          const RECOIL_RECOVERY_SPEED := 0.095
+          const MAX_RECOIL_PITCH := 0.022
+          const MAX_RECOIL_YAW := 0.006
+
+
+          static func recoil_for_weapon(weapon_mode: int, shot_index: int) -> Vector2:
+          	var pitch := 0.010
+          	var yaw := 0.0025
+          	match weapon_mode:
+          		1:
+          			pitch = 0.020
+          			yaw = 0.0055
+          		2:
+          			pitch = 0.014
+          			yaw = 0.0035
+          	var side := -1.0 if shot_index % 2 == 0 else 1.0
+          	return Vector2(clampf(yaw * side, -MAX_RECOIL_YAW, MAX_RECOIL_YAW), clampf(pitch, 0.0, MAX_RECOIL_PITCH))
+          PULSEFALL_FEEL
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(source, old, new, label):
+              if source.count(old) != 1:
+                  raise SystemExit(f"Expected one {label} anchor, found {source.count(old)}")
+              return source.replace(old, new, 1)
+
+          path = Path("game/player/player_input.gd")
+          source = path.read_text()
+          source = replace_once(
+              source,
+              "extends MultiplayerSynchronizer\n",
+              'extends MultiplayerSynchronizer\nconst CombatFeelScript = preload("res://mobile/combat_feel.gd")\n',
+              "player input combat feel preload",
+          )
+          source = replace_once(
+              source,
+              "var aiming_timer: float = 0.0\n",
+              "var aiming_timer: float = 0.0\nvar recoil_return := Vector2.ZERO\n",
+              "recoil return state",
+          )
+          source = replace_once(
+              source,
+              "func _process(delta: float) -> void:\n",
+              "func _process(delta: float) -> void:\n\t_recover_recoil(delta)\n",
+              "recoil recovery process",
+          )
+          source += '''
+
+
+          func apply_weapon_recoil(recoil: Vector2) -> void:
+          	camera_base.rotate_y(recoil.x)
+          	camera_base.orthonormalize()
+          	camera_rot.rotation.x = clampf(camera_rot.rotation.x - recoil.y, CAMERA_X_ROT_MIN, CAMERA_X_ROT_MAX)
+          	recoil_return += recoil
+
+
+          func _recover_recoil(delta: float) -> void:
+          	if recoil_return.length_squared() < 0.0000001:
+          		recoil_return = Vector2.ZERO
+          		return
+          	var recovery := recoil_return.limit_length(CombatFeelScript.RECOIL_RECOVERY_SPEED * delta)
+          	camera_base.rotate_y(-recovery.x)
+          	camera_base.orthonormalize()
+          	camera_rot.rotation.x = clampf(camera_rot.rotation.x + recovery.y, CAMERA_X_ROT_MIN, CAMERA_X_ROT_MAX)
+          	recoil_return -= recovery
+          '''
+          path.write_text(source)
+
+          path = Path("game/player/player.gd")
+          source = path.read_text()
+          source = replace_once(
+              source,
+              'const CombatFeedbackScript: Script = preload("res://mobile/combat_feedback.gd")\n',
+              'const CombatFeedbackScript: Script = preload("res://mobile/combat_feedback.gd")\nconst CombatFeelScript: Script = preload("res://mobile/combat_feel.gd")\n',
+              "player combat feel preload",
+          )
+          source = replace_once(
+              source,
+              "var dash_direction := Vector3.ZERO\n",
+              "var dash_direction := Vector3.ZERO\nvar recoil_shot_index := 0\n",
+              "recoil shot index",
+          )
+          source = replace_once(
+              source,
+              "\t\t\t_fire_weapon(shoot_origin, shoot_dir)\n\t\t\tshoot.rpc()\n",
+              "\t\t\t_fire_weapon(shoot_origin, shoot_dir)\n\t\t\t_apply_weapon_recoil()\n\t\t\tshoot.rpc()\n",
+              "weapon recoil trigger",
+          )
+          source += '''
+
+
+          func _apply_weapon_recoil() -> void:
+          	recoil_shot_index += 1
+          	var recoil := CombatFeelScript.recoil_for_weapon(weapon_mode, recoil_shot_index)
+          	player_input.apply_weapon_recoil(recoil)
+          '''
+          path.write_text(source)
+
+          path = Path("game/player/bullet/bullet.gd")
+          source = path.read_text()
+          source = replace_once(
+              source,
+              "extends CharacterBody3D\n",
+              'extends CharacterBody3D\nconst CombatFeelScript = preload("res://mobile/combat_feel.gd")\n',
+              "bullet combat feel preload",
+          )
+          source = replace_once(
+              source,
+              '\t\t\tcollider.hit.rpc()\n\t\t\tif shooter != null and shooter.has_method("register_hit_confirm"):\n',
+              '\t\t\tcollider.hit.rpc()\n\t\t\tif collider.has_method("apply_hit_stop"):\n\t\t\t\tcollider.apply_hit_stop(CombatFeelScript.HIT_STOP_TIME)\n\t\t\tif shooter != null and shooter.has_method("register_hit_confirm"):\n',
+              "enemy hit-stop trigger",
+          )
+          path.write_text(source)
+
+          path = Path("game/enemies/red_robot/red_robot.gd")
+          source = path.read_text()
+          source = replace_once(
+              source,
+              "var orientation := Transform3D()\n",
+              "var orientation := Transform3D()\nvar hit_stop_generation := 0\n",
+              "enemy hit-stop generation",
+          )
+          source += '''
+
+
+          func apply_hit_stop(duration: float) -> void:
+          	if dead or animation_tree == null:
+          		return
+          	hit_stop_generation += 1
+          	var generation := hit_stop_generation
+          	animation_tree.active = false
+          	await get_tree().create_timer(clampf(duration, 0.0, 0.05)).timeout
+          	if generation == hit_stop_generation and not dead:
+          		animation_tree.active = true
+          '''
+          path.write_text(source)
+          PY
+
+          cat > game/mobile/combat_feel_test.gd <<'PULSEFALL_FEEL_TEST'
+          extends Node
+
+          var failures := 0
+          var checks := 0
+
+
+          func check(value: bool, message: String) -> void:
+          	checks += 1
+          	if value:
+          		print("PASS: ", message)
+          	else:
+          		failures += 1
+          		push_error("FAIL: " + message)
+
+
+          func _ready() -> void:
+          	var carbine_a := CombatFeel.recoil_for_weapon(0, 1)
+          	var carbine_b := CombatFeel.recoil_for_weapon(0, 2)
+          	var scatter := CombatFeel.recoil_for_weapon(1, 1)
+          	var lance := CombatFeel.recoil_for_weapon(2, 1)
+          	check(carbine_a.y > 0.0, "carbine adds upward recoil")
+          	check(signf(carbine_a.x) == -signf(carbine_b.x), "horizontal recoil alternates to avoid drift")
+          	check(scatter.y > lance.y and lance.y > carbine_a.y, "weapon classes have distinct recoil weight")
+          	check(absf(scatter.x) <= CombatFeel.MAX_RECOIL_YAW, "scatter yaw remains bounded")
+          	check(scatter.y <= CombatFeel.MAX_RECOIL_PITCH, "scatter pitch remains bounded")
+          	check(CombatFeel.HIT_STOP_TIME >= 0.025, "hit-stop is perceptible")
+          	check(CombatFeel.HIT_STOP_TIME <= 0.05, "hit-stop stays below mobile responsiveness ceiling")
+          	check(CombatFeel.RECOIL_RECOVERY_SPEED > CombatFeel.MAX_RECOIL_PITCH, "recoil recovery outruns one-shot pitch")
+          	check(CombatFeel.recoil_for_weapon(99, 3) == CombatFeel.recoil_for_weapon(0, 3), "unknown weapon falls back to carbine recoil")
+          	print("COMBAT FEEL CHECKS: ", checks, " FAILURES: ", failures)
+          	get_tree().quit(0 if failures == 0 else 1)
+          PULSEFALL_FEEL_TEST
+
+          cat > game/mobile/combat_feel_test.tscn <<'PULSEFALL_FEEL_TEST'
+          [gd_scene load_steps=2 format=3]
+          [ext_resource type="Script" path="res://mobile/combat_feel_test.gd" id="1"]
+          [node name="CombatFeelTests" type="Node"]
+          script = ExtResource("1")
+          PULSEFALL_FEEL_TEST
+
       - name: Add graceful runtime lifecycle soak
         shell: bash
         run: |
@@ -4317,7 +4507,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.apk"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -4345,8 +4535,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=32
-          version/name="0.2.12-mobile-alpha"
+          version/code=33
+          version/name="0.2.13-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -4375,6 +4565,8 @@ jobs:
           CAMERA_RC=$?
           timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/combat_feedback_test.tscn > /tmp/combat-feedback-test.log 2>&1
           COMBAT_RC=$?
+          timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/combat_feel_test.tscn > /tmp/combat-feel-test.log 2>&1
+          FEEL_RC=$?
           set -e
           cat /tmp/import.log
           cat /tmp/runtime.log
@@ -4383,7 +4575,8 @@ jobs:
           cat /tmp/aim-assist-test.log
           cat /tmp/camera-collision-test.log
           cat /tmp/combat-feedback-test.log
-          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log; then
+          cat /tmp/combat-feel-test.log
+          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log; then
             echo "PULSEFALL mobile validation detected a script/runtime failure."
             exit 1
           fi
@@ -4399,8 +4592,8 @@ jobs:
             echo "PULSEFALL mobile validation detected unsupported renderer features."
             exit 1
           fi
-          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ]; then
-            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC"
+          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ]; then
+            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC"
             exit 1
           fi
 
