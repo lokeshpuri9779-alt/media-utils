@@ -13,8 +13,12 @@ class AnimalScenesTests(unittest.TestCase):
         self.assertEqual(select_subject({"title": "The Mystery"},
                                         {"speech": "A monkey stole the banana"}), "monkey")
 
+    def test_story_specific_bird(self):
+        self.assertEqual(select_subject({"title": "The Forest"},
+                                        {"speech": "A parrot flew overhead"}), "bird")
+
     def test_animation_changes_frames(self):
-        for subject in ("dog", "monkey"):
+        for subject in ("dog", "monkey", "bird"):
             with self.subTest(subject=subject):
                 a = Image.new("RGB", (1080, 1920))
                 b = Image.new("RGB", (1080, 1920))
