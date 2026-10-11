@@ -17,6 +17,10 @@ class AnimalScenesTests(unittest.TestCase):
         self.assertEqual(select_subject({"title": "The Forest"},
                                         {"speech": "A parrot flew overhead"}), "bird")
 
+    def test_story_specific_rabbit(self):
+        self.assertEqual(select_subject({"title": "The Garden"},
+                                        {"speech": "A bunny jumped over a fence"}), "rabbit")
+
     def test_subject_follows_narration_order(self):
         story = {"title": "The monkey and the dog"}
         self.assertEqual(select_subject(story, {"speech": "The dog chased a monkey"}), "dog")
@@ -28,7 +32,7 @@ class AnimalScenesTests(unittest.TestCase):
                                         {"speech": "A monkey escaped"}), "monkey")
 
     def test_animation_changes_frames(self):
-        for subject in ("dog", "monkey", "bird"):
+        for subject in ("dog", "monkey", "bird", "rabbit"):
             with self.subTest(subject=subject):
                 a = Image.new("RGB", (1080, 1920))
                 b = Image.new("RGB", (1080, 1920))
