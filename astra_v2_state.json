@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 43,
-  "confirmed_today": 42,
-  "last_attempt_at": "2026-10-11T12:09:11.285552+00:00",
+  "attempts": 44,
+  "confirmed_today": 43,
+  "last_attempt_at": "2026-10-11T12:28:28.373447+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -888,14 +888,21 @@
       "title": "Mara and the A Map at A Floating Market",
       "format": "short",
       "uploaded_at": "2026-10-11T12:02:03.417922+00:00"
+    },
+    "rayvan-procedural-f68ceb7c1757f0ba": {
+      "video_id": "d6a6-5BEcIc",
+      "confirmed_at": "2026-10-11T12:27:42.087537+00:00",
+      "title": "Mara and the A Tiny Machine at A Floating Market",
+      "format": "short",
+      "uploaded_at": "2026-10-11T12:09:12.907479+00:00"
     }
   },
   "pending": {
-    "d6a6-5BEcIc": {
-      "content_id": "rayvan-procedural-f68ceb7c1757f0ba",
-      "title": "Mara and the A Tiny Machine at A Floating Market",
+    "kfKu-U5T9rE": {
+      "content_id": "rayvan-procedural-b52d1f1192c8aed9",
+      "title": "Mara and the A Door at A Floating Market",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T12:09:12.907479+00:00",
+      "uploaded_at": "2026-10-11T12:28:30.345004+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1693,6 +1700,12 @@
     "rayvan-procedural-f68ceb7c1757f0ba": {
       "at": "2026-10-11T12:09:11.285537+00:00",
       "title": "Mara and the A Tiny Machine at A Floating Market",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-b52d1f1192c8aed9": {
+      "at": "2026-10-11T12:28:28.373429+00:00",
+      "title": "Mara and the A Door at A Floating Market",
       "format": "short",
       "result": "accepted"
     }
