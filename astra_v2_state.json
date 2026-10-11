@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 59,
-  "confirmed_today": 58,
-  "last_attempt_at": "2026-10-11T15:49:45.107056+00:00",
+  "attempts": 60,
+  "confirmed_today": 59,
+  "last_attempt_at": "2026-10-11T15:55:47.471798+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1000,14 +1000,21 @@
       "title": "Emi and the Sealed Letter Addressed To Tomorrow at the Silent Mountain Village",
       "format": "short",
       "uploaded_at": "2026-10-11T15:38:36.052846+00:00"
+    },
+    "rayvan-procedural-4666c82eedeaa15c": {
+      "video_id": "X-3iI-0xASM",
+      "confirmed_at": "2026-10-11T15:54:49.831410+00:00",
+      "title": "Emi and the Clock at the Glass Desert",
+      "format": "short",
+      "uploaded_at": "2026-10-11T15:49:46.879889+00:00"
     }
   },
   "pending": {
-    "X-3iI-0xASM": {
-      "content_id": "rayvan-procedural-4666c82eedeaa15c",
-      "title": "Emi and the Clock at the Glass Desert",
+    "qEJLFPf7Aew": {
+      "content_id": "rayvan-procedural-40cde6c2c03f3870",
+      "title": "Pip and the Map at the Forgotten Moon Colony",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T15:49:46.879889+00:00",
+      "uploaded_at": "2026-10-11T15:55:49.141639+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1901,6 +1908,12 @@
     "rayvan-procedural-4666c82eedeaa15c": {
       "at": "2026-10-11T15:49:45.107041+00:00",
       "title": "Emi and the Clock at the Glass Desert",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-40cde6c2c03f3870": {
+      "at": "2026-10-11T15:55:47.471780+00:00",
+      "title": "Pip and the Map at the Forgotten Moon Colony",
       "format": "short",
       "result": "accepted"
     }
