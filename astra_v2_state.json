@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 39,
+  "attempts": 40,
   "confirmed_today": 39,
-  "last_attempt_at": "2026-10-11T11:10:23.257162+00:00",
+  "last_attempt_at": "2026-10-11T11:30:00.812886+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -869,8 +869,17 @@
       "uploaded_at": "2026-10-11T11:10:25.209056+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "zYqdC3IRV8k": {
+      "content_id": "rayvan-procedural-2243885c0dd3548b",
+      "title": "Lina and the Lantern at the Library Inside A Giant Tree",
+      "day": "2026-10-11",
+      "uploaded_at": "2026-10-11T11:30:02.621728+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -1639,6 +1648,12 @@
     "rayvan-procedural-155395d7ac77809b": {
       "at": "2026-10-11T11:10:23.257148+00:00",
       "title": "Mara and the A Clock at A Floating Market",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-2243885c0dd3548b": {
+      "at": "2026-10-11T11:30:00.812869+00:00",
+      "title": "Lina and the Lantern at the Library Inside A Giant Tree",
       "format": "short",
       "result": "accepted"
     }
