@@ -146,6 +146,17 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
             except Exception:
                 out.unlink(missing_ok=True)
                 continue
+            # Recover optional covers for the publisher from trusted artifacts.
+            for cover_name in ("cover.jpg", "cover_wide.jpg"):
+                if cover_name in names:
+                    try:
+                        with zipfile.ZipFile(archive) as cover_zip:
+                            entry = cover_zip.getinfo(cover_name)
+                            if 0 < entry.file_size <= 5 * 1024 * 1024:
+                                cover_path = out.with_name(out.stem + "_" + cover_name)
+                                cover_path.write_bytes(cover_zip.read(cover_name))
+                    except (OSError, ValueError, KeyError, zipfile.BadZipFile):
+                        pass
             candidate["media"] = media
             candidate["queue_artifact_id"] = entry["id"]
             return candidate
