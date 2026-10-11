@@ -3722,6 +3722,103 @@ jobs:
           path.write_text(source)
           PY
 
+      - name: Improve third-person camera collision
+        shell: bash
+        run: |
+          cat > game/mobile/camera_collision.gd <<'PULSEFALL_CAMERA'
+          extends RefCounted
+
+          const ARM_LENGTH := 2.4
+          const PROBE_RADIUS := 0.22
+          const WALL_MARGIN := 0.08
+          const CAMERA_NEAR := 0.08
+          const ENVIRONMENT_MASK := 1
+
+          static func configure(arm: SpringArm3D, camera: Camera3D, player_rid: RID) -> void:
+          	var probe := SphereShape3D.new()
+          	probe.radius = PROBE_RADIUS
+          	arm.shape = probe
+          	arm.spring_length = ARM_LENGTH
+          	arm.margin = WALL_MARGIN
+          	arm.collision_mask = ENVIRONMENT_MASK
+          	if player_rid.is_valid():
+          		arm.add_excluded_object(player_rid)
+          		arm.set_meta("pulsefall_player_excluded", true)
+          	camera.near = CAMERA_NEAR
+          PULSEFALL_CAMERA
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(source, old, new, label):
+              if source.count(old) != 1:
+                  raise SystemExit(f"Expected one {label} anchor, found {source.count(old)}")
+              return source.replace(old, new, 1)
+
+          path = Path("game/player/player.gd")
+          source = path.read_text()
+          source = replace_once(
+              source,
+              "const JUMP_SPEED: float = 5.0\n",
+              'const JUMP_SPEED: float = 5.0\nconst MobileCameraCollision = preload("res://mobile/camera_collision.gd")\n',
+              "camera collision preload",
+          )
+          source = replace_once(
+              source,
+              "@onready var fire_cooldown: Timer = $FireCooldown\n",
+              "@onready var fire_cooldown: Timer = $FireCooldown\n@onready var camera_spring_arm: SpringArm3D = $CameraBase/CameraRot/SpringArm3D\n@onready var gameplay_camera: Camera3D = $CameraBase/CameraRot/SpringArm3D/Camera3D\n",
+              "camera collision nodes",
+          )
+          source = replace_once(
+              source,
+              "\torientation.origin = Vector3()\n",
+              "\torientation.origin = Vector3()\n\tMobileCameraCollision.configure(camera_spring_arm, gameplay_camera, get_rid())\n",
+              "camera collision setup",
+          )
+          path.write_text(source)
+          PY
+
+          cat > game/mobile/camera_collision_test.gd <<'PULSEFALL_CAMERA'
+          extends Node3D
+
+          const CameraCollision = preload("res://mobile/camera_collision.gd")
+          var failures := 0
+          var checks := 0
+
+          func check(value: bool, message: String) -> void:
+          	checks += 1
+          	if value:
+          		print("PASS: ", message)
+          	else:
+          		failures += 1
+          		push_error(message)
+
+          func _ready() -> void:
+          	var player := StaticBody3D.new()
+          	add_child(player)
+          	var arm := SpringArm3D.new()
+          	player.add_child(arm)
+          	var camera := Camera3D.new()
+          	arm.add_child(camera)
+          	CameraCollision.configure(arm, camera, player.get_rid())
+          	check(is_equal_approx(arm.spring_length, CameraCollision.ARM_LENGTH), "camera keeps authored third-person distance")
+          	check(is_equal_approx(arm.margin, CameraCollision.WALL_MARGIN), "camera maintains a wall-safe collision margin")
+          	check(arm.shape is SphereShape3D, "camera uses a swept sphere instead of a thin probe")
+          	check(is_equal_approx((arm.shape as SphereShape3D).radius, CameraCollision.PROBE_RADIUS), "camera probe protects the near-plane footprint")
+          	check(arm.collision_mask == CameraCollision.ENVIRONMENT_MASK, "camera collision is limited to world geometry")
+          	check(bool(arm.get_meta("pulsefall_player_excluded", false)), "camera explicitly excludes the player body")
+          	check(is_equal_approx(camera.near, CameraCollision.CAMERA_NEAR), "camera near plane reduces wall clipping")
+          	print("CAMERA COLLISION CHECKS: ", checks, " FAILURES: ", failures)
+          	get_tree().quit(0 if failures == 0 else 1)
+          PULSEFALL_CAMERA
+
+          cat > game/mobile/camera_collision_test.tscn <<'PULSEFALL_CAMERA'
+          [gd_scene load_steps=2 format=3]
+          [ext_resource type="Script" path="res://mobile/camera_collision_test.gd" id="1"]
+          [node name="CameraCollisionTests" type="Node3D"]
+          script = ExtResource("1")
+          PULSEFALL_CAMERA
+
       - name: Add graceful runtime lifecycle soak
         shell: bash
         run: |
@@ -4004,7 +4101,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.apk"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -4032,8 +4129,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=30
-          version/name="0.2.10-mobile-alpha"
+          version/code=31
+          version/name="0.2.11-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -4058,13 +4155,16 @@ jobs:
           CONTROLS_RC=$?
           timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/aim_assist_test.tscn > /tmp/aim-assist-test.log 2>&1
           AIM_RC=$?
+          timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/camera_collision_test.tscn > /tmp/camera-collision-test.log 2>&1
+          CAMERA_RC=$?
           set -e
           cat /tmp/import.log
           cat /tmp/runtime.log
           cat /tmp/extraction-test.log
           cat /tmp/controls-test.log
           cat /tmp/aim-assist-test.log
-          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log; then
+          cat /tmp/camera-collision-test.log
+          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log; then
             echo "PULSEFALL mobile validation detected a script/runtime failure."
             exit 1
           fi
@@ -4080,8 +4180,8 @@ jobs:
             echo "PULSEFALL mobile validation detected unsupported renderer features."
             exit 1
           fi
-          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ]; then
-            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC"
+          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ]; then
+            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC"
             exit 1
           fi
 
