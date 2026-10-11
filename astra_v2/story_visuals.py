@@ -9,6 +9,8 @@ from PIL import ImageDraw
 
 SUBJECTS = (
     ("cat", r"\bcat\b|\bfeline\b|\bkitten\b"),
+    ("dog", r"\bdog\b|\bpuppy\b|\bhound\b"),
+    ("monkey", r"\bmonkey\b|\bape\b|\bbaboon\b"),
     ("book", r"\bbook\b|\blibrar\w*|\bpages\b|\bnewspaper\b"),
     ("ocean", r"\bocean\b|\bunderwater\b|\bfish\b|\bjellyfish\b|\bcoral\b"),
     ("clock", r"\bclock\b|\btimepiece\b|\bclocktower\b"),
