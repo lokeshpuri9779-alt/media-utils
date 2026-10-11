@@ -3819,6 +3819,225 @@ jobs:
           script = ExtResource("1")
           PULSEFALL_CAMERA
 
+      - name: Add hit confirmation and directional damage feedback
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          cat > game/mobile/combat_feedback.gd <<'PULSEFALL_COMBAT'
+          class_name CombatFeedback
+          extends RefCounted
+
+          const HIT_MARKER_TIME := 0.14
+          const DAMAGE_INDICATOR_TIME := 0.65
+
+
+          static func classify_damage_direction(player_basis: Basis, attacker_position: Vector3, player_position: Vector3) -> String:
+          	var offset := attacker_position - player_position
+          	offset.y = 0.0
+          	if offset.length_squared() < 0.0001:
+          		return "FRONT"
+          	var local_direction := player_basis.inverse() * offset.normalized()
+          	if absf(local_direction.x) > absf(local_direction.z):
+          		return "RIGHT" if local_direction.x > 0.0 else "LEFT"
+          	return "BACK" if local_direction.z > 0.0 else "FRONT"
+
+
+          static func direction_glyph(direction: String) -> String:
+          	match direction:
+          		"RIGHT": return ">"
+          		"BACK": return "v"
+          		"LEFT": return "<"
+          		_: return "^"
+          PULSEFALL_COMBAT
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          player = Path("game/player/player.gd")
+          source = player.read_text()
+          source = source.replace(
+              'extends CharacterBody3D\n',
+              'extends CharacterBody3D\n\nconst CombatFeedbackScript: Script = preload("res://mobile/combat_feedback.gd")\n',
+              1
+          )
+          source = source.replace(
+              'signal died\n',
+              'signal died\nsignal hit_confirmed\nsignal damage_received(direction: String)\n',
+              1
+          )
+          old = '''func take_damage(amount: int) -> void:
+          	if incapacitated:
+          		return
+          	health = maxi(health - amount, 0)
+          	hit.rpc()
+          	health_changed.emit(health, max_health)
+          '''
+          new = '''func take_damage(amount: int, attacker_position: Vector3 = Vector3.INF) -> void:
+          	if incapacitated:
+          		return
+          	health = maxi(health - amount, 0)
+          	hit.rpc()
+          	health_changed.emit(health, max_health)
+          	if attacker_position != Vector3.INF:
+          		damage_received.emit(CombatFeedbackScript.classify_damage_direction(global_transform.basis, attacker_position, global_position))
+          '''
+          if old not in source:
+              raise SystemExit("player damage function anchor missing")
+          source = source.replace(old, new, 1)
+          source = source.replace(
+              '\tbullet.add_collision_exception_with(self)\n',
+              '\tbullet.add_collision_exception_with(self)\n\tbullet.shooter = self\n',
+              1
+          )
+          source += '''
+
+
+          func register_hit_confirm() -> void:
+          	hit_confirmed.emit()
+          '''
+          player.write_text(source)
+
+          bullet = Path("game/player/bullet/bullet.gd")
+          source = bullet.read_text()
+          source = source.replace(
+              'var hit: bool = false\n',
+              'var hit: bool = false\nvar shooter: Node = null\n',
+              1
+          )
+          source = source.replace(
+              '\t\t\tcollider.hit.rpc()\n',
+              '\t\t\tcollider.hit.rpc()\n\t\t\tif shooter != null and shooter.has_method("register_hit_confirm"):\n\t\t\t\tshooter.register_hit_confirm()\n',
+              1
+          )
+          bullet.write_text(source)
+
+          enemy = Path("game/enemies/red_robot/red_robot.gd")
+          source = enemy.read_text()
+          if 'player.take_damage(shot_damage)' not in source:
+              raise SystemExit("enemy damage anchor missing")
+          source = source.replace('player.take_damage(shot_damage)', 'player.take_damage(shot_damage, ray_origin)', 1)
+          enemy.write_text(source)
+
+          level = Path("game/level/level.gd")
+          source = level.read_text()
+          source = source.replace(
+              'var boss_label: Label\n',
+              'var boss_label: Label\nvar hit_marker: Label\nvar damage_indicator: Label\nvar hit_marker_time := 0.0\nvar damage_indicator_time := 0.0\n',
+              1
+          )
+          source = source.replace(
+              '\t\tactive_player.died.connect(_on_player_died)\n',
+              '\t\tactive_player.died.connect(_on_player_died)\n\t\tactive_player.hit_confirmed.connect(_on_hit_confirmed)\n\t\tactive_player.damage_received.connect(_on_damage_received)\n',
+              1
+          )
+          source = source.replace(
+              '\t\ttimer_label.text = "%02d:%02d" % [mins, secs]\n',
+              '\t\ttimer_label.text = "%02d:%02d" % [mins, secs]\n\t_process_combat_feedback(delta)\n',
+              1
+          )
+          hud_anchor = '''\tvar health_panel := ColorRect.new()
+          '''
+          hud_nodes = '''\thit_marker = _make_label("+", 34, Color(0.42, 0.96, 1.0))
+          	hit_marker.anchor_left = 0.5
+          	hit_marker.anchor_right = 0.5
+          	hit_marker.anchor_top = 0.5
+          	hit_marker.anchor_bottom = 0.5
+          	hit_marker.offset_left = -24
+          	hit_marker.offset_right = 24
+          	hit_marker.offset_top = -28
+          	hit_marker.offset_bottom = 28
+          	hit_marker.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	hit_marker.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+          	hit_marker.visible = false
+          	layer.add_child(hit_marker)
+
+          	damage_indicator = _make_label("", 24, Color(1.0, 0.30, 0.34))
+          	damage_indicator.anchor_left = 0.5
+          	damage_indicator.anchor_right = 0.5
+          	damage_indicator.anchor_top = 0.28
+          	damage_indicator.anchor_bottom = 0.28
+          	damage_indicator.offset_left = -120
+          	damage_indicator.offset_right = 120
+          	damage_indicator.offset_top = -20
+          	damage_indicator.offset_bottom = 20
+          	damage_indicator.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	damage_indicator.visible = false
+          	layer.add_child(damage_indicator)
+
+          	var health_panel := ColorRect.new()
+          '''
+          if hud_anchor not in source:
+              raise SystemExit("HUD anchor missing")
+          source = source.replace(hud_anchor, hud_nodes, 1)
+          source += '''
+
+
+          func _on_hit_confirmed() -> void:
+          	hit_marker_time = CombatFeedback.HIT_MARKER_TIME
+          	hit_marker.modulate = Color(0.42, 0.96, 1.0, 1.0)
+          	hit_marker.visible = true
+
+
+          func _on_damage_received(direction: String) -> void:
+          	damage_indicator_time = CombatFeedback.DAMAGE_INDICATOR_TIME
+          	damage_indicator.text = "%s  HIT FROM %s  %s" % [CombatFeedback.direction_glyph(direction), direction, CombatFeedback.direction_glyph(direction)]
+          	damage_indicator.modulate = Color(1.0, 0.30, 0.34, 1.0)
+          	damage_indicator.visible = true
+
+
+          func _process_combat_feedback(delta: float) -> void:
+          	if hit_marker_time > 0.0:
+          		hit_marker_time = maxf(hit_marker_time - delta, 0.0)
+          		hit_marker.modulate.a = hit_marker_time / CombatFeedback.HIT_MARKER_TIME
+          		hit_marker.visible = hit_marker_time > 0.0
+          	if damage_indicator_time > 0.0:
+          		damage_indicator_time = maxf(damage_indicator_time - delta, 0.0)
+          		damage_indicator.modulate.a = damage_indicator_time / CombatFeedback.DAMAGE_INDICATOR_TIME
+          		damage_indicator.visible = damage_indicator_time > 0.0
+          '''
+          level.write_text(source)
+          PY
+
+          cat > game/mobile/combat_feedback_test.gd <<'PULSEFALL_COMBAT_TEST'
+          extends Node
+
+          var failures := 0
+          var checks := 0
+
+
+          func check(value: bool, message: String) -> void:
+          	checks += 1
+          	if value:
+          		print("PASS: ", message)
+          	else:
+          		failures += 1
+          		push_error("FAIL: " + message)
+
+
+          func _ready() -> void:
+          	var basis := Basis.IDENTITY
+          	var origin := Vector3.ZERO
+          	check(CombatFeedback.classify_damage_direction(basis, Vector3(0, 0, -5), origin) == "FRONT", "front damage classification")
+          	check(CombatFeedback.classify_damage_direction(basis, Vector3(5, 0, 0), origin) == "RIGHT", "right damage classification")
+          	check(CombatFeedback.classify_damage_direction(basis, Vector3(0, 0, 5), origin) == "BACK", "back damage classification")
+          	check(CombatFeedback.classify_damage_direction(basis, Vector3(-5, 0, 0), origin) == "LEFT", "left damage classification")
+          	check(CombatFeedback.classify_damage_direction(basis, origin, origin) == "FRONT", "overlap damage classification is deterministic")
+          	check(CombatFeedback.direction_glyph("FRONT") == "^", "front glyph")
+          	check(CombatFeedback.direction_glyph("RIGHT") == ">", "right glyph")
+          	check(is_equal_approx(CombatFeedback.HIT_MARKER_TIME, 0.14), "hit marker duration")
+          	check(is_equal_approx(CombatFeedback.DAMAGE_INDICATOR_TIME, 0.65), "damage indicator duration")
+          	print("COMBAT FEEDBACK CHECKS: ", checks, " FAILURES: ", failures)
+          	get_tree().quit(0 if failures == 0 else 1)
+          PULSEFALL_COMBAT_TEST
+
+          cat > game/mobile/combat_feedback_test.tscn <<'PULSEFALL_COMBAT_TEST'
+          [gd_scene load_steps=2 format=3]
+          [ext_resource type="Script" path="res://mobile/combat_feedback_test.gd" id="1"]
+          [node name="CombatFeedbackTests" type="Node"]
+          script = ExtResource("1")
+          PULSEFALL_COMBAT_TEST
+
       - name: Add graceful runtime lifecycle soak
         shell: bash
         run: |
@@ -4101,7 +4320,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.apk"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -4129,8 +4348,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=31
-          version/name="0.2.11-mobile-alpha"
+          version/code=32
+          version/name="0.2.12-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -4157,6 +4376,8 @@ jobs:
           AIM_RC=$?
           timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/camera_collision_test.tscn > /tmp/camera-collision-test.log 2>&1
           CAMERA_RC=$?
+          timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/combat_feedback_test.tscn > /tmp/combat-feedback-test.log 2>&1
+          COMBAT_RC=$?
           set -e
           cat /tmp/import.log
           cat /tmp/runtime.log
@@ -4164,7 +4385,8 @@ jobs:
           cat /tmp/controls-test.log
           cat /tmp/aim-assist-test.log
           cat /tmp/camera-collision-test.log
-          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log; then
+          cat /tmp/combat-feedback-test.log
+          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log; then
             echo "PULSEFALL mobile validation detected a script/runtime failure."
             exit 1
           fi
@@ -4180,8 +4402,8 @@ jobs:
             echo "PULSEFALL mobile validation detected unsupported renderer features."
             exit 1
           fi
-          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ]; then
-            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC"
+          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ]; then
+            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC"
             exit 1
           fi
 
