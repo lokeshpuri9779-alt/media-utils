@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 29,
-  "confirmed_today": 28,
-  "last_attempt_at": "2026-10-11T00:55:01.029344+00:00",
+  "attempts": 30,
+  "confirmed_today": 29,
+  "last_attempt_at": "2026-10-11T01:03:46.866318+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -790,14 +790,21 @@
       "title": "Pip and the Tiny Machine at the Library Inside A Giant Tree",
       "format": "short",
       "uploaded_at": "2026-10-11T00:40:38.036393+00:00"
+    },
+    "rayvan-procedural-81f835d576920b0c": {
+      "video_id": "tIfL_plkWkU",
+      "confirmed_at": "2026-10-11T01:02:54.683224+00:00",
+      "title": "Ivo and the Musical Note Nobody Else Can Hear at the Glass Desert",
+      "format": "short",
+      "uploaded_at": "2026-10-11T00:55:02.421282+00:00"
     }
   },
   "pending": {
-    "tIfL_plkWkU": {
-      "content_id": "rayvan-procedural-81f835d576920b0c",
-      "title": "Ivo and the Musical Note Nobody Else Can Hear at the Glass Desert",
+    "r0J_q3UOEuE": {
+      "content_id": "rayvan-procedural-c932f2b111dd6b3c",
+      "title": "Pip and the Door at the Abandoned Observatory",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T00:55:02.421282+00:00",
+      "uploaded_at": "2026-10-11T01:03:48.159917+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1511,6 +1518,12 @@
     "rayvan-procedural-81f835d576920b0c": {
       "at": "2026-10-11T00:55:01.029328+00:00",
       "title": "Ivo and the Musical Note Nobody Else Can Hear at the Glass Desert",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-c932f2b111dd6b3c": {
+      "at": "2026-10-11T01:03:46.866302+00:00",
+      "title": "Pip and the Door at the Abandoned Observatory",
       "format": "short",
       "result": "accepted"
     }
