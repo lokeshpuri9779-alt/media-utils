@@ -3,7 +3,7 @@
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 41,
-  "confirmed_today": 40,
+  "confirmed_today": 41,
   "last_attempt_at": "2026-10-11T11:48:52.363182+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -874,19 +874,17 @@
       "title": "Lina and the Lantern at the Library Inside A Giant Tree",
       "format": "short",
       "uploaded_at": "2026-10-11T11:30:02.621728+00:00"
-    }
-  },
-  "pending": {
-    "eavV9eIJ2to": {
-      "content_id": "rayvan-procedural-e6ca998b716a6674",
+    },
+    "rayvan-procedural-e6ca998b716a6674": {
+      "video_id": "eavV9eIJ2to",
+      "confirmed_at": "2026-10-11T11:52:02.139087+00:00",
       "title": "Mara and the A Sealed Letter Addressed To Tomorrow at A Floating Market",
-      "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T11:48:54.272625+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-11T11:48:54.272625+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
