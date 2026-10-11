@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 68,
+  "attempts": 69,
   "confirmed_today": 68,
-  "last_attempt_at": "2026-10-11T17:38:44.452781+00:00",
+  "last_attempt_at": "2026-10-11T17:56:15.406632+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1072,8 +1072,17 @@
       "uploaded_at": "2026-10-11T17:38:45.771556+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "6Tn44mG3a48": {
+      "content_id": "rayvan-procedural-9016bbf0c63e4030",
+      "title": "Arun and the Seed at the Glass Desert",
+      "day": "2026-10-11",
+      "uploaded_at": "2026-10-11T17:56:17.704617+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -2016,6 +2025,12 @@
     "rayvan-procedural-fbd44e2d01c6eb58": {
       "at": "2026-10-11T17:38:44.452766+00:00",
       "title": "Noor and the Musical Note Nobody Else Can Hear at the Train Station At The Edge Of Time",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-9016bbf0c63e4030": {
+      "at": "2026-10-11T17:56:15.406616+00:00",
+      "title": "Arun and the Seed at the Glass Desert",
       "format": "short",
       "result": "accepted"
     }
