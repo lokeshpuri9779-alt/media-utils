@@ -130,10 +130,41 @@ class Youtube:
         items = data.get("items") or []
         return items[0].get("status") or {} if items else {}
 
+    @staticmethod
+    def discover_tags(title, description):
+        """Use relevant evergreen discovery terms; do not invent live trends."""
+        import re
+        text = (title + " " + description).casefold()
+        themes = {
+            "comedy": (("funny", "comedy", "joke", "laugh", "humor", "humour"), ("comedy", "funny cartoon", "animated comedy")),
+            "mystery": (("mystery", "detective", "clue", "secret"), ("mystery story", "animated mystery")),
+            "suspense": (("suspense", "thriller", "twist", "scary", "horror"), ("suspense story", "animated thriller")),
+            "adventure": (("adventure", "quest", "journey"), ("animated adventure", "adventure story")),
+            "animals": (("monkey", "dog", "cat", "puppy", "animal"), ("animal cartoon", "funny animals")),
+        }
+        tags = ["animated stories", "original animation", "3D cartoon"]
+        matched = []
+        for _, (keywords, additions) in themes.items():
+            if any(re.search(r"\\b" + re.escape(k) + r"\\b", text) for k in keywords):
+                tags.extend(additions)
+                matched.append(additions[0])
+        if not matched:
+            tags.append("animated storytelling")
+        tags = list(dict.fromkeys(tags))[:15]
+        hashtags = ["#Shorts"] if "#shorts" in description.casefold() or "short" in title.casefold() else []
+        for tag in matched[:2]:
+            hashtags.append("#" + "".join(w.capitalize() for w in tag.split()))
+        return tags, hashtags
+
     def upload(self, video, title, description, synthetic=False):
+        tags, hashtags = self.discover_tags(title, description)
+        existing = {token.casefold() for token in description.split() if token.startswith("#")}
+        extra = [tag for tag in hashtags if tag.casefold() not in existing]
+        if extra:
+            description = description[:max(0, 5000 - len(" ".join(extra)) - 2)] + "\\n" + " ".join(extra)
         metadata = {
             "snippet": {"title": title[:100], "description": description[:5000],
-                        "categoryId": "24", "defaultLanguage": "en"},
+                        "tags": tags, "categoryId": "24", "defaultLanguage": "en"},
             "status": {"privacyStatus": "public", "selfDeclaredMadeForKids": True,
                        "containsSyntheticMedia": bool(synthetic)},
         }
