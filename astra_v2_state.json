@@ -3,7 +3,7 @@
   "day": "2026-10-12",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 3,
-  "confirmed_today": 2,
+  "confirmed_today": 3,
   "last_attempt_at": "2026-10-11T18:59:33.814468+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -1105,19 +1105,17 @@
       "title": "Noor and the Lantern at the Abandoned Observatory",
       "format": "short",
       "uploaded_at": "2026-10-11T18:45:15.642126+00:00"
-    }
-  },
-  "pending": {
-    "hVJnP-j02zE": {
-      "content_id": "rayvan-procedural-2419b9142a9c3de0",
+    },
+    "rayvan-procedural-2419b9142a9c3de0": {
+      "video_id": "hVJnP-j02zE",
+      "confirmed_at": "2026-10-11T19:01:32.072429+00:00",
       "title": "Arun and the Lantern at the Glass Desert",
-      "day": "2026-10-12",
-      "uploaded_at": "2026-10-11T18:59:35.537128+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-11T18:59:35.537128+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
