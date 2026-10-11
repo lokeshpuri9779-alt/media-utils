@@ -73,8 +73,35 @@ def draw_subject(image, subject, t, accent):
             d.ellipse((x+dx-22, 850, x+dx+22, 900), fill=(30, 42, 45))
         d.polygon([(x-18, 938), (x+18, 938), (x, 960)], fill=(255, 185, 190))
         d.arc((x-55, 955, x+55, 990), 0, 180, fill=(35, 38, 44), width=5)
-    elif subject in ("book", "museum"):
-        x = cx+sway
+    elif subject in ("dog", "monkey"):
+        x = cx + sway
+        bob = int(15 * abs(math.sin(t * 2.5)))
+        y = 840 - bob
+        fur = (196, 135, 79) if subject == "dog" else (148, 101, 70)
+        d.arc((x+100, y+20, x+260+int(30*math.sin(t*3)), y+240),
+              190, 350, fill=fur, width=22)
+        d.ellipse((x-130, y+60, x+130, y+300), fill=fur)
+        for dx in (-75, 75):
+            d.rounded_rectangle((x+dx-30, y+260, x+dx+30, y+365),
+                                radius=20, fill=fur)
+        d.ellipse((x-155, y-180, x+155, y+115), fill=fur)
+        for dx in (-135, 135):
+            d.ellipse((x+dx-42, y-120, x+dx+42, y+25),
+                      fill=(117, 76, 55))
+        if subject == "monkey":
+            d.ellipse((x-105, y-95, x+105, y+100), fill=(218, 172, 126))
+        blink = abs(math.sin(t * 1.4)) > 0.985
+        for dx in (-65, 65):
+            if blink:
+                d.line((x+dx-18, y-35, x+dx+18, y-35),
+                       fill=(35, 30, 32), width=7)
+            else:
+                d.ellipse((x+dx-15, y-55, x+dx+15, y-15),
+                          fill=(35, 30, 32))
+        d.ellipse((x-22, y+12, x+22, y+42), fill=(48, 35, 36))
+        d.arc((x-48, y+18, x+48, y+85), 5, 175,
+              fill=(60, 40, 42), width=6)
+
         d.rounded_rectangle((x-260, 650, x+260, 1080), radius=20, fill=(103, 59, 78), outline=accent, width=9)
         d.polygon([(x, 690), (x-220, 720), (x-220, 1020), (x, 990)], fill=(244, 223, 181))
         d.polygon([(x, 690), (x+220, 720), (x+220, 1020), (x, 990)], fill=(228, 208, 171))
