@@ -134,11 +134,12 @@ jobs:
           PY
       - name: Save inspectable animation MP4
         if: matrix.lane == 0 && github.event_name != 'schedule'
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: astra-character-preview-${{ github.run_id }}
           path: runtime-health/astra-character-preview.mp4
-          if-no-files-found: warn
+          if-no-files-found: error
           retention-days: 7
       - name: Render and approve next original video
         id: render
