@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-12",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 2,
-  "confirmed_today": 1,
-  "last_attempt_at": "2026-10-11T18:45:14.235717+00:00",
+  "attempts": 3,
+  "confirmed_today": 2,
+  "last_attempt_at": "2026-10-11T18:59:33.814468+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1098,14 +1098,21 @@
       "title": "Ivo and the Musical Note Nobody Else Can Hear at the Train Station At The Edge Of Time",
       "format": "short",
       "uploaded_at": "2026-10-11T18:37:53.380344+00:00"
+    },
+    "rayvan-procedural-ccaf8b95db582e76": {
+      "video_id": "ufXeYt72c04",
+      "confirmed_at": "2026-10-11T18:58:47.673586+00:00",
+      "title": "Noor and the Lantern at the Abandoned Observatory",
+      "format": "short",
+      "uploaded_at": "2026-10-11T18:45:15.642126+00:00"
     }
   },
   "pending": {
-    "ufXeYt72c04": {
-      "content_id": "rayvan-procedural-ccaf8b95db582e76",
-      "title": "Noor and the Lantern at the Abandoned Observatory",
+    "hVJnP-j02zE": {
+      "content_id": "rayvan-procedural-2419b9142a9c3de0",
+      "title": "Arun and the Lantern at the Glass Desert",
       "day": "2026-10-12",
-      "uploaded_at": "2026-10-11T18:45:15.642126+00:00",
+      "uploaded_at": "2026-10-11T18:59:35.537128+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -2083,6 +2090,12 @@
     "rayvan-procedural-ccaf8b95db582e76": {
       "at": "2026-10-11T18:45:14.235702+00:00",
       "title": "Noor and the Lantern at the Abandoned Observatory",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-2419b9142a9c3de0": {
+      "at": "2026-10-11T18:59:33.814450+00:00",
+      "title": "Arun and the Lantern at the Glass Desert",
       "format": "short",
       "result": "accepted"
     }
