@@ -4225,6 +4225,246 @@ jobs:
           script = ExtResource("1")
           PULSEFALL_FEEL_TEST
 
+      - name: Add optional gyroscope aiming
+        shell: bash
+        run: |
+          cat > game/mobile/gyro_aim.gd <<'PULSEFALL_GYRO'
+          extends RefCounted
+          class_name GyroAim
+
+          const DEAD_ZONE := 0.04
+          const MAX_ANGULAR_RATE := 3.0
+          const MAX_CAMERA_STEP := 0.05
+
+          static func sensitivity_for_mode(mode: int) -> float:
+          	match clampi(mode, 0, 3):
+          		1:
+          			return 0.32
+          		2:
+          			return 0.55
+          		3:
+          			return 0.85
+          		_:
+          			return 0.0
+
+
+          static func filter_angular_velocity(angular_velocity: Vector3, mode: int, delta: float) -> Vector2:
+          	var sensitivity: float = sensitivity_for_mode(mode)
+          	if sensitivity <= 0.0 or delta <= 0.0:
+          		return Vector2.ZERO
+          	var yaw_rate: float = _filtered_axis(angular_velocity.y)
+          	var pitch_rate: float = _filtered_axis(angular_velocity.x)
+          	var rate := Vector2(yaw_rate, pitch_rate)
+          	if rate.length_squared() <= 0.0:
+          		return Vector2.ZERO
+          	rate = rate.limit_length(MAX_ANGULAR_RATE)
+          	return (rate * sensitivity * delta).limit_length(MAX_CAMERA_STEP)
+
+
+          static func _filtered_axis(value: float) -> float:
+          	var magnitude: float = absf(value)
+          	if magnitude <= DEAD_ZONE:
+          		return 0.0
+          	return signf(value) * (magnitude - DEAD_ZONE)
+          PULSEFALL_GYRO
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(source, old, new, label):
+              if source.count(old) != 1:
+                  raise SystemExit(f"Expected one {label} anchor, found {source.count(old)}")
+              return source.replace(old, new, 1)
+
+          path = Path("game/mobile/mobile_tuning.gd")
+          source = path.read_text()
+          source = replace_once(
+              source,
+              "static var current_haptics_enabled := true\n",
+              "static var current_haptics_enabled := true\nstatic var current_gyro_mode := 0\n",
+              "gyro state",
+          )
+          source = replace_once(
+              source,
+              "\tvar haptics_enabled := true\n",
+              "\tvar haptics_enabled := true\n\tvar gyro_mode := 0\n",
+              "gyro load default",
+          )
+          source = replace_once(
+              source,
+              '\t\thaptics_enabled = bool(config.get_value(SECTION, "haptics_enabled", haptics_enabled))\n',
+              '\t\thaptics_enabled = bool(config.get_value(SECTION, "haptics_enabled", haptics_enabled))\n\t\tgyro_mode = clampi(int(config.get_value(SECTION, "gyro_mode", gyro_mode)), 0, 3)\n',
+              "gyro config load",
+          )
+          source = replace_once(
+              source,
+              '\t\t"haptics_enabled": haptics_enabled,\n',
+              '\t\t"haptics_enabled": haptics_enabled,\n\t\t"gyro_mode": gyro_mode,\n',
+              "gyro load result",
+          )
+          source = replace_once(
+              source,
+              "\t\tcurrent_haptics_enabled = result.haptics_enabled\n",
+              "\t\tcurrent_haptics_enabled = result.haptics_enabled\n\t\tcurrent_gyro_mode = result.gyro_mode\n",
+              "gyro current state",
+          )
+          source = replace_once(
+              source,
+              "\n\nstatic func get_haptics_enabled() -> bool:\n",
+              '\n\nstatic func save_gyro_mode(mode: int, path: String = CONFIG_PATH) -> int:\n\tvar safe_mode := clampi(mode, 0, 3)\n\tvar config := ConfigFile.new()\n\tif FileAccess.file_exists(path):\n\t\tconfig.load(path)\n\tconfig.set_value(SECTION, "gyro_mode", safe_mode)\n\tvar result := config.save(path)\n\tif path == CONFIG_PATH and result == OK:\n\t\tcurrent_gyro_mode = safe_mode\n\t\tloaded = true\n\treturn result\n\n\nstatic func get_gyro_mode() -> int:\n\tif not loaded:\n\t\tload_values()\n\treturn current_gyro_mode\n\n\nstatic func get_haptics_enabled() -> bool:\n',
+              "gyro persistence",
+          )
+          path.write_text(source)
+
+          path = Path("game/mobile/mobile_controls.gd")
+          source = path.read_text()
+          source = replace_once(
+              source,
+              "var haptics_enabled := true\n",
+              "var haptics_enabled := true\nvar gyro_mode := 0\n",
+              "gyro control state",
+          )
+          source = replace_once(
+              source,
+              "var haptics_button: Button\nvar tuning_close_button: Button\n",
+              "var haptics_button: Button\nvar gyro_button: Button\nvar tuning_close_button: Button\n",
+              "gyro widget",
+          )
+          source = replace_once(
+              source,
+              "\ttuning_panel.offset_bottom = 554\n",
+              "\ttuning_panel.offset_bottom = 616\n",
+              "gyro panel size",
+          )
+          source = replace_once(
+              source,
+              '\ttuning_panel.add_child(haptics_label)\n',
+              '\ttuning_panel.add_child(haptics_label)\n\tvar gyro_label := Label.new()\n\tgyro_label.text = "GYRO AIM"\n\tgyro_label.position = Vector2(22, 440)\n\ttuning_panel.add_child(gyro_label)\n',
+              "gyro label",
+          )
+          source = replace_once(
+              source,
+              '\thaptics_button = _make_tuning_button("ON", Vector2(184, 366), Vector2(152, 44))\n\ttuning_close_button = _make_tuning_button("DONE", Vector2(244, 428), Vector2(92, 42))\n\tfor button in [look_minus_button, look_plus_button, aim_minus_button, aim_plus_button, touch_minus_button, touch_plus_button, reach_minus_button, reach_plus_button, auto_fire_button, haptics_button, tuning_close_button]:\n',
+              '\thaptics_button = _make_tuning_button("ON", Vector2(184, 366), Vector2(152, 44))\n\tgyro_button = _make_tuning_button("OFF", Vector2(184, 428), Vector2(152, 44))\n\ttuning_close_button = _make_tuning_button("DONE", Vector2(244, 490), Vector2(92, 42))\n\tfor button in [look_minus_button, look_plus_button, aim_minus_button, aim_plus_button, touch_minus_button, touch_plus_button, reach_minus_button, reach_plus_button, auto_fire_button, haptics_button, gyro_button, tuning_close_button]:\n',
+              "gyro panel button",
+          )
+          source = replace_once(
+              source,
+              "reach_minus_button, reach_plus_button, auto_fire_button, haptics_button, tuning_close_button]",
+              "reach_minus_button, reach_plus_button, auto_fire_button, haptics_button, gyro_button, tuning_close_button]",
+              "gyro touch registry",
+          )
+          source = replace_once(
+              source,
+              "\telif button == haptics_button:\n\t\t_toggle_haptics()\n\telif button == tuning_close_button:",
+              "\telif button == haptics_button:\n\t\t_toggle_haptics()\n\telif button == gyro_button:\n\t\t_cycle_gyro_mode()\n\telif button == tuning_close_button:",
+              "gyro button routing",
+          )
+          source = replace_once(
+              source,
+              "\thaptics_enabled = values.haptics_enabled\n",
+              "\thaptics_enabled = values.haptics_enabled\n\tgyro_mode = values.gyro_mode\n",
+              "gyro load",
+          )
+          source = replace_once(
+              source,
+              "\n\nfunc _store_tuning() -> void:\n",
+              '\n\nfunc _cycle_gyro_mode() -> void:\n\tgyro_mode = (gyro_mode + 1) % 4\n\t_store_tuning()\n\n\nfunc _store_tuning() -> void:\n',
+              "gyro cycle",
+          )
+          source = replace_once(
+              source,
+              "\tMobileTuning.save_haptics_enabled(haptics_enabled)\n",
+              "\tMobileTuning.save_haptics_enabled(haptics_enabled)\n\tMobileTuning.save_gyro_mode(gyro_mode)\n",
+              "gyro store",
+          )
+          source = replace_once(
+              source,
+              '\tif is_instance_valid(haptics_button):\n\t\thaptics_button.text = "ON" if haptics_enabled else "OFF"\n',
+              '\tif is_instance_valid(haptics_button):\n\t\thaptics_button.text = "ON" if haptics_enabled else "OFF"\n\tif is_instance_valid(gyro_button):\n\t\tgyro_button.text = ["OFF", "LOW", "MED", "HIGH"][clampi(gyro_mode, 0, 3)]\n',
+              "gyro label refresh",
+          )
+          path.write_text(source)
+
+          path = Path("game/player/player_input.gd")
+          source = path.read_text()
+          source = replace_once(
+              source,
+              'const MobileTuning = preload("res://mobile/mobile_tuning.gd")\n',
+              'const MobileTuning = preload("res://mobile/mobile_tuning.gd")\nconst GyroAimScript = preload("res://mobile/gyro_aim.gd")\n',
+              "gyro player preload",
+          )
+          source = replace_once(
+              source,
+              "func _process(delta: float) -> void:\n\t_recover_recoil(delta)\n",
+              "func _process(delta: float) -> void:\n\t_recover_recoil(delta)\n\t_apply_gyro_aim(delta)\n",
+              "gyro process hook",
+          )
+          source += '''
+
+
+          func _apply_gyro_aim(delta: float) -> void:
+          	if not OS.has_feature("mobile"):
+          		return
+          	var gyro_mode: int = MobileTuning.get_gyro_mode()
+          	var gyro_move: Vector2 = GyroAimScript.filter_angular_velocity(Input.get_gyroscope(), gyro_mode, delta)
+          	if gyro_move.length_squared() > 0.0:
+          		rotate_camera(gyro_move)
+          '''
+          path.write_text(source)
+          PY
+
+          cat > game/mobile/gyro_aim_test.gd <<'PULSEFALL_GYRO_TEST'
+          extends Node
+
+          const Gyro = preload("res://mobile/gyro_aim.gd")
+          const Tuning = preload("res://mobile/mobile_tuning.gd")
+          var failures := 0
+          var checks := 0
+
+          func check(value: bool, message: String) -> void:
+          	checks += 1
+          	if value:
+          		print("PASS: ", message)
+          	else:
+          		failures += 1
+          		push_error("FAIL: " + message)
+
+
+          func _ready() -> void:
+          	check(Gyro.sensitivity_for_mode(0) == 0.0, "gyro defaults to disabled")
+          	check(Gyro.sensitivity_for_mode(1) < Gyro.sensitivity_for_mode(2) and Gyro.sensitivity_for_mode(2) < Gyro.sensitivity_for_mode(3), "gyro modes increase predictably")
+          	check(Gyro.filter_angular_velocity(Vector3.ZERO, 2, 0.016) == Vector2.ZERO, "stationary sensor produces no camera motion")
+          	check(Gyro.filter_angular_velocity(Vector3(0.02, 0.02, 0.0), 2, 0.016) == Vector2.ZERO, "sensor noise inside dead zone is filtered")
+          	var yaw: Vector2 = Gyro.filter_angular_velocity(Vector3(0.0, 1.0, 0.0), 2, 0.016)
+          	check(yaw.x > 0.0 and is_zero_approx(yaw.y), "device yaw maps to camera yaw")
+          	var pitch: Vector2 = Gyro.filter_angular_velocity(Vector3(-1.0, 0.0, 0.0), 2, 0.016)
+          	check(pitch.y < 0.0 and is_zero_approx(pitch.x), "device pitch maps to camera pitch")
+          	var low: Vector2 = Gyro.filter_angular_velocity(Vector3(0.0, 1.0, 0.0), 1, 0.016)
+          	var high: Vector2 = Gyro.filter_angular_velocity(Vector3(0.0, 1.0, 0.0), 3, 0.016)
+          	check(high.length() > low.length(), "higher mode increases response")
+          	check(Gyro.filter_angular_velocity(Vector3(50.0, 50.0, 0.0), 3, 1.0).length() <= Gyro.MAX_CAMERA_STEP, "sensor spikes are capped")
+          	check(Gyro.filter_angular_velocity(Vector3(1.0, 1.0, 0.0), 3, 0.0) == Vector2.ZERO, "zero frame delta cannot move camera")
+          	var test_path := "user://gyro_aim_test.cfg"
+          	var directory := DirAccess.open("user://")
+          	if directory and directory.file_exists("gyro_aim_test.cfg"):
+          		directory.remove("gyro_aim_test.cfg")
+          	check(Tuning.save_gyro_mode(7, test_path) == OK, "gyro preference persists without error")
+          	var restored: Dictionary = Tuning.load_values(test_path)
+          	check(restored.gyro_mode == 3, "persisted gyro mode is clamped and restored")
+          	if directory and directory.file_exists("gyro_aim_test.cfg"):
+          		directory.remove("gyro_aim_test.cfg")
+          	print("GYRO AIM CHECKS: ", checks, " FAILURES: ", failures)
+          	get_tree().quit(0 if failures == 0 else 1)
+          PULSEFALL_GYRO_TEST
+
+          cat > game/mobile/gyro_aim_test.tscn <<'PULSEFALL_GYRO_TEST'
+          [gd_scene load_steps=2 format=3]
+          [ext_resource type="Script" path="res://mobile/gyro_aim_test.gd" id="1"]
+          [node name="GyroAimTests" type="Node"]
+          script = ExtResource("1")
+          PULSEFALL_GYRO_TEST
+
       - name: Add graceful runtime lifecycle soak
         shell: bash
         run: |
@@ -4507,7 +4747,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.apk"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -4535,8 +4775,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=33
-          version/name="0.2.13-mobile-alpha"
+          version/code=34
+          version/name="0.2.14-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -4567,6 +4807,8 @@ jobs:
           COMBAT_RC=$?
           timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/combat_feel_test.tscn > /tmp/combat-feel-test.log 2>&1
           FEEL_RC=$?
+          timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/gyro_aim_test.tscn > /tmp/gyro-aim-test.log 2>&1
+          GYRO_RC=$?
           set -e
           cat /tmp/import.log
           cat /tmp/runtime.log
@@ -4576,7 +4818,8 @@ jobs:
           cat /tmp/camera-collision-test.log
           cat /tmp/combat-feedback-test.log
           cat /tmp/combat-feel-test.log
-          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log; then
+          cat /tmp/gyro-aim-test.log
+          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log; then
             echo "PULSEFALL mobile validation detected a script/runtime failure."
             exit 1
           fi
@@ -4592,8 +4835,8 @@ jobs:
             echo "PULSEFALL mobile validation detected unsupported renderer features."
             exit 1
           fi
-          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ]; then
-            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC"
+          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ]; then
+            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC"
             exit 1
           fi
 
