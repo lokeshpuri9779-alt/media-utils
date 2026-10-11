@@ -64,7 +64,7 @@ def prepare(path, candidate):
     return package
 
 
-def take(excluded_ids, excluded_titles, output):
+def take(excluded_ids, excluded_titles, output, allow_long=True):
     """Get the oldest valid queued render. Return None for an empty queue.
 
     Corrupt/untrusted artifacts fail closed and are never published.
@@ -116,6 +116,10 @@ def take(excluded_ids, excluded_titles, output):
                         continue
                     candidate = json.loads(z.read("candidate.json"))
                     if candidate.get("content_id") != cid:
+                        continue
+                    if candidate.get("format") not in ("short", "long"):
+                        continue
+                    if candidate["format"] == "long" and not allow_long:
                         continue
                     if candidate.get("title", "").casefold().strip() in excluded_titles:
                         continue
