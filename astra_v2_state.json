@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 33,
-  "confirmed_today": 32,
-  "last_attempt_at": "2026-10-11T01:36:08.294402+00:00",
+  "attempts": 34,
+  "confirmed_today": 33,
+  "last_attempt_at": "2026-10-11T01:44:00.282313+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -818,14 +818,21 @@
       "title": "Emi and the Clock at the Train Station At The Edge Of Time",
       "format": "short",
       "uploaded_at": "2026-10-11T01:24:45.963040+00:00"
+    },
+    "rayvan-procedural-2574192c4a233b08": {
+      "video_id": "Dkuezvbg5hg",
+      "confirmed_at": "2026-10-11T01:43:09.903471+00:00",
+      "title": "Emi and the Tiny Machine at the Silent Mountain Village",
+      "format": "short",
+      "uploaded_at": "2026-10-11T01:36:10.279475+00:00"
     }
   },
   "pending": {
-    "Dkuezvbg5hg": {
-      "content_id": "rayvan-procedural-2574192c4a233b08",
-      "title": "Emi and the Tiny Machine at the Silent Mountain Village",
+    "CXsajdvpF9M": {
+      "content_id": "rayvan-procedural-3478d9a273f395d3",
+      "title": "Ivo and the Lantern at the Train Station At The Edge Of Time",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T01:36:10.279475+00:00",
+      "uploaded_at": "2026-10-11T01:44:01.997866+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1563,6 +1570,12 @@
     "rayvan-procedural-2574192c4a233b08": {
       "at": "2026-10-11T01:36:08.294387+00:00",
       "title": "Emi and the Tiny Machine at the Silent Mountain Village",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-3478d9a273f395d3": {
+      "at": "2026-10-11T01:44:00.282299+00:00",
+      "title": "Ivo and the Lantern at the Train Station At The Edge Of Time",
       "format": "short",
       "result": "accepted"
     }
