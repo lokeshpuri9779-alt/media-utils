@@ -156,6 +156,27 @@ class Youtube:
             hashtags.append("#" + "".join(w.capitalize() for w in tag.split()))
         return tags, hashtags
 
+    def set_thumbnail(self, video_id, image_path):
+        """Best-effort custom thumbnail for eligible long-form uploads.
+
+        Shorts cover frames remain local; do not claim the API can select a
+        Shorts thumbnail. This operation is never retried automatically.
+        """
+        from pathlib import Path
+        image = Path(image_path)
+        if not image.is_file() or not 0 < image.stat().st_size <= 2 * 1024 * 1024:
+            raise ValueError("Thumbnail must be a nonempty JPEG under 2 MB")
+        with image.open("rb") as stream:
+            response = self.client.post(
+                "https://www.googleapis.com/upload/youtube/v3/thumbnails/set",
+                params={"videoId": str(video_id), "uploadType": "media"},
+                headers={"Authorization": "Bearer " + self.token,
+                         "Content-Type": "image/jpeg"},
+                content=stream.read(),
+            )
+        self.check(response, "thumbnail_set")
+        return True
+
     def upload(self, video, title, description, synthetic=False):
         tags, hashtags = self.discover_tags(title, description)
         existing = {token.casefold() for token in description.split() if token.startswith("#")}
