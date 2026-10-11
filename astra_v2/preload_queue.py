@@ -53,6 +53,11 @@ def prepare(path, candidate):
     video = Path(path)
     fmt = candidate.get("format", "short")
     media = inspect_video(video, fmt)
+    # Reject unreviewed template content before consuming artifact storage.
+    from astra_v2.publication_quality import publication_rejection
+    rejection = publication_rejection(candidate)
+    if rejection:
+        raise ValueError("Publication quality rejected: " + rejection)
     payload = {k: candidate[k] for k in (
         "content_id", "title", "description", "synthetic", "genre", "format")}
     payload["sha256"] = hashlib.sha256(video.read_bytes()).hexdigest()
