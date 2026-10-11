@@ -145,7 +145,7 @@ class Youtube:
         tags = ["animated stories", "original animation", "3D cartoon"]
         matched = []
         for _, (keywords, additions) in themes.items():
-            if any(re.search(r"\\b" + re.escape(k) + r"\\b", text) for k in keywords):
+            if any(re.search(r"\b" + re.escape(k) + r"\b", text) for k in keywords):
                 tags.extend(additions)
                 matched.append(additions[0])
         if not matched:
@@ -161,7 +161,7 @@ class Youtube:
         existing = {token.casefold() for token in description.split() if token.startswith("#")}
         extra = [tag for tag in hashtags if tag.casefold() not in existing]
         if extra:
-            description = description[:max(0, 5000 - len(" ".join(extra)) - 2)] + "\\n" + " ".join(extra)
+            description = description[:max(0, 5000 - len(" ".join(extra)) - 2)] + "\n" + " ".join(extra)
         metadata = {
             "snippet": {"title": title[:100], "description": description[:5000],
                         "tags": tags, "categoryId": "24", "defaultLanguage": "en"},
