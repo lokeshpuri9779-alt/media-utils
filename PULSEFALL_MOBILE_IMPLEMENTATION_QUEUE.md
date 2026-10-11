@@ -75,7 +75,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [ ] Continue/resume after app backgrounding.
 
 ### P2 — Controls / feel
-- [ ] Configurable HUD positions and touch sizes.
+- [x] Configurable HUD positions and touch sizes.
 - [x] Adjustable camera sensitivity.
 - [x] Adjustable aim-assist strength.
 - [ ] Gyroscope option.
@@ -184,3 +184,12 @@ Validated v0.2.6 checkpoint: commit `1f32bbe98604123a4fecae3683615fc73a8ce737`, 
 - [x] Workflow run `37881198895` passed import, five-cycle lifecycle soak, extraction, controls and aim-assist gates: 65 checks total, zero detected shutdown leaks, and successful arm64 Android export/upload.
 
 Validated build: commit `1f2ae1b510a5d8d81cc5034936172431bb608a54`; APK SHA256 `9af4993caf3aeb4adfcf6deb2e0d148b9d2eb6112300964a7b8df3bee1e3650d`; 521,136,431 bytes. v0.2.6 remains the known-good rollback. This is still not evidence of real-device performance, human navigation, player-controlled combat/run completion, a 20–30 minute real-time soak, or benchmark superiority.
+
+
+## Validated v0.2.8 HUD-layout checkpoint (2026-10-11)
+
+- [x] Added persisted 80–130% action-control sizing and 0–120 px inward thumb-reach positioning to the in-game TUNE panel.
+- [x] Added configuration round-trip and live touch-coordinate regression coverage; controls expanded to 26 checks.
+- [x] Workflow run `38115923474` passed import, five-cycle lifecycle soak, extraction, controls and aim-assist gates: 69 checks total, zero detected shutdown leaks, and successful arm64 Android export/upload.
+
+Validated build: commit `8358f0f0fdfea9435a066cefd9aa87ae753c5182`; APK SHA256 `1fc22a1fbc5c6e63c1df0f4ad37384ec9ae650e2053cb88f928a935987754198`; 521,140,527 bytes. v0.2.7 remains the known-good rollback. Human one-handed reachability, real-device performance, player-controlled combat/navigation, a full run and benchmark superiority remain unverified.
