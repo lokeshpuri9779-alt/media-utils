@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 60,
+  "attempts": 61,
   "confirmed_today": 60,
-  "last_attempt_at": "2026-10-11T15:55:47.471798+00:00",
+  "last_attempt_at": "2026-10-11T16:12:53.883896+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1016,8 +1016,17 @@
       "uploaded_at": "2026-10-11T15:55:49.141639+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "0nj5ekpU_1k": {
+      "content_id": "rayvan-procedural-49048d15540dca5c",
+      "title": "Emi and the Lantern at the Forgotten Moon Colony",
+      "day": "2026-10-11",
+      "uploaded_at": "2026-10-11T16:12:56.051036+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -1912,6 +1921,12 @@
     "rayvan-procedural-40cde6c2c03f3870": {
       "at": "2026-10-11T15:55:47.471780+00:00",
       "title": "Pip and the Map at the Forgotten Moon Colony",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-49048d15540dca5c": {
+      "at": "2026-10-11T16:12:53.883877+00:00",
+      "title": "Emi and the Lantern at the Forgotten Moon Colony",
       "format": "short",
       "result": "accepted"
     }
