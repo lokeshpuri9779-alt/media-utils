@@ -3363,6 +3363,191 @@ jobs:
           path.write_text(source)
           PY
 
+      - name: Add accessible tap-toggle auto-fire
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(source, old, new, label):
+              if source.count(old) != 1:
+                  raise SystemExit(f"Expected one {label} anchor, found {source.count(old)}")
+              return source.replace(old, new, 1)
+
+          path = Path("game/mobile/mobile_tuning.gd")
+          source = path.read_text()
+          source = replace_once(
+              source,
+              "static var current_reach_offset := 0.0\n",
+              "static var current_reach_offset := 0.0\nstatic var current_auto_fire := false\n",
+              "auto-fire state",
+          )
+          source = replace_once(
+              source,
+              "\tvar reach := 0.0\n",
+              "\tvar reach := 0.0\n\tvar auto_fire := false\n",
+              "auto-fire load default",
+          )
+          source = replace_once(
+              source,
+              '\t\treach = float(config.get_value(SECTION, "reach_offset", reach))\n',
+              '\t\treach = float(config.get_value(SECTION, "reach_offset", reach))\n\t\tauto_fire = bool(config.get_value(SECTION, "auto_fire", auto_fire))\n',
+              "auto-fire config load",
+          )
+          source = replace_once(
+              source,
+              '\t\t"reach_offset": clamp_reach(reach),\n',
+              '\t\t"reach_offset": clamp_reach(reach),\n\t\t"auto_fire": auto_fire,\n',
+              "auto-fire load result",
+          )
+          source = replace_once(
+              source,
+              "\t\tcurrent_reach_offset = result.reach_offset\n",
+              "\t\tcurrent_reach_offset = result.reach_offset\n\t\tcurrent_auto_fire = result.auto_fire\n",
+              "auto-fire current state",
+          )
+          source = replace_once(
+              source,
+              "\n\nstatic func get_aim_strength() -> float:\n",
+              '\n\nstatic func save_accessibility(auto_fire: bool, path: String = CONFIG_PATH) -> int:\n\tvar config := ConfigFile.new()\n\tif FileAccess.file_exists(path):\n\t\tconfig.load(path)\n\tconfig.set_value(SECTION, "auto_fire", auto_fire)\n\tvar result := config.save(path)\n\tif path == CONFIG_PATH and result == OK:\n\t\tcurrent_auto_fire = auto_fire\n\t\tloaded = true\n\treturn result\n\n\nstatic func get_auto_fire() -> bool:\n\tif not loaded:\n\t\tload_values()\n\treturn current_auto_fire\n\n\nstatic func get_aim_strength() -> float:\n',
+              "auto-fire persistence",
+          )
+          path.write_text(source)
+
+          path = Path("game/mobile/mobile_controls.gd")
+          source = path.read_text()
+          source = replace_once(
+              source,
+              "var layout_baselines: Dictionary = {}\n",
+              "var layout_baselines: Dictionary = {}\nvar auto_fire_enabled := false\nvar auto_fire_latched := false\n",
+              "auto-fire control state",
+          )
+          source = replace_once(
+              source,
+              "var reach_plus_button: Button\nvar tuning_close_button: Button\n",
+              "var reach_plus_button: Button\nvar auto_fire_button: Button\nvar tuning_close_button: Button\n",
+              "auto-fire widget",
+          )
+          source = replace_once(
+              source,
+              "\ttuning_panel.offset_bottom = 430\n",
+              "\ttuning_panel.offset_bottom = 492\n",
+              "auto-fire panel size",
+          )
+          source = replace_once(
+              source,
+              '\treach_label.position = Vector2(22, 254)\n\ttuning_panel.add_child(reach_label)\n',
+              '\treach_label.position = Vector2(22, 254)\n\ttuning_panel.add_child(reach_label)\n\tvar auto_label := Label.new()\n\tauto_label.text = "AUTO FIRE"\n\tauto_label.position = Vector2(22, 316)\n\ttuning_panel.add_child(auto_label)\n',
+              "auto-fire label",
+          )
+          source = replace_once(
+              source,
+              '\treach_plus_button = _make_tuning_button("+", Vector2(242, 242))\n\ttuning_close_button = _make_tuning_button("DONE", Vector2(244, 304), Vector2(92, 42))\n\tfor button in [look_minus_button, look_plus_button, aim_minus_button, aim_plus_button, touch_minus_button, touch_plus_button, reach_minus_button, reach_plus_button, tuning_close_button]:\n',
+              '\treach_plus_button = _make_tuning_button("+", Vector2(242, 242))\n\tauto_fire_button = _make_tuning_button("OFF", Vector2(184, 304), Vector2(152, 44))\n\ttuning_close_button = _make_tuning_button("DONE", Vector2(244, 366), Vector2(92, 42))\n\tfor button in [look_minus_button, look_plus_button, aim_minus_button, aim_plus_button, touch_minus_button, touch_plus_button, reach_minus_button, reach_plus_button, auto_fire_button, tuning_close_button]:\n',
+              "auto-fire panel button",
+          )
+          source = replace_once(
+              source,
+              "reach_minus_button, reach_plus_button, tuning_close_button]",
+              "reach_minus_button, reach_plus_button, auto_fire_button, tuning_close_button]",
+              "auto-fire touch registry",
+          )
+          source = replace_once(
+              source,
+              "\telif button == reach_plus_button:\n\t\t_adjust_reach(20.0)\n\telif button == tuning_close_button:",
+              "\telif button == reach_plus_button:\n\t\t_adjust_reach(20.0)\n\telif button == auto_fire_button:\n\t\t_toggle_auto_fire()\n\telif button == tuning_close_button:",
+              "auto-fire button routing",
+          )
+          source = replace_once(
+              source,
+              "\treach_offset = values.reach_offset\n",
+              "\treach_offset = values.reach_offset\n\tauto_fire_enabled = values.auto_fire\n",
+              "auto-fire load",
+          )
+          old_fire = '''func _fire_down() -> void:
+          	if level != null and level.active_player != null:
+          		level.active_player.player_input.touch_aim_mode = true
+          	Input.vibrate_handheld(18)
+          	Input.action_press("aim")
+          	Input.action_press("shoot")
+          
+          
+          func _fire_up() -> void:
+          	Input.action_release("shoot")
+          	Input.action_release("aim")
+          '''
+          new_fire = '''func _fire_down() -> void:
+          	if auto_fire_enabled and auto_fire_latched:
+          		auto_fire_latched = false
+          		_force_fire_release()
+          		return
+          	if level != null and level.active_player != null:
+          		level.active_player.player_input.touch_aim_mode = true
+          	Input.vibrate_handheld(18)
+          	Input.action_press("aim")
+          	Input.action_press("shoot")
+          	auto_fire_latched = auto_fire_enabled
+          
+          
+          func _fire_up() -> void:
+          	if not auto_fire_enabled:
+          		_force_fire_release()
+          
+          
+          func _force_fire_release() -> void:
+          	Input.action_release("shoot")
+          	Input.action_release("aim")
+          '''
+          source = replace_once(source, old_fire, new_fire, "auto-fire behavior")
+          source = replace_once(
+              source,
+              "\t_fire_up()\n\tInput.action_release(\"jump\")\n",
+              "\tauto_fire_latched = false\n\t_force_fire_release()\n\tInput.action_release(\"jump\")\n",
+              "forced fire release",
+          )
+          source = replace_once(
+              source,
+              "\n\nfunc _store_tuning() -> void:\n",
+              '\n\nfunc _toggle_auto_fire() -> void:\n\tauto_fire_enabled = not auto_fire_enabled\n\tif not auto_fire_enabled:\n\t\tauto_fire_latched = false\n\t\t_force_fire_release()\n\t_store_tuning()\n\n\nfunc _store_tuning() -> void:\n',
+              "auto-fire toggle",
+          )
+          source = replace_once(
+              source,
+              "\tMobileTuning.save_layout(touch_scale, reach_offset)\n",
+              "\tMobileTuning.save_layout(touch_scale, reach_offset)\n\tMobileTuning.save_accessibility(auto_fire_enabled)\n",
+              "auto-fire store",
+          )
+          source = replace_once(
+              source,
+              '\tif is_instance_valid(reach_value_label):\n\t\treach_value_label.text = "%d px" % int(reach_offset)\n',
+              '\tif is_instance_valid(reach_value_label):\n\t\treach_value_label.text = "%d px" % int(reach_offset)\n\tif is_instance_valid(auto_fire_button):\n\t\tauto_fire_button.text = "ON — TAP TOGGLE" if auto_fire_enabled else "OFF"\n',
+              "auto-fire label refresh",
+          )
+          path.write_text(source)
+
+          path = Path("game/mobile/controls_test.gd")
+          source = path.read_text()
+          source = replace_once(
+              source,
+              '\tcheck(tuning_module.save_layout(1.2, 80.0, test_path) == OK, "HUD layout tuning persists without error")\n\tvar restored: Dictionary = tuning_module.load_values(test_path)\n',
+              '\tcheck(tuning_module.save_layout(1.2, 80.0, test_path) == OK, "HUD layout tuning persists without error")\n\tcheck(tuning_module.save_accessibility(true, test_path) == OK, "auto-fire preference persists without error")\n\tvar restored: Dictionary = tuning_module.load_values(test_path)\n',
+              "auto-fire persistence test",
+          )
+          source = replace_once(
+              source,
+              '\tcheck(is_equal_approx(restored.touch_scale, 1.2) and is_equal_approx(restored.reach_offset, 80.0), "HUD size and reach survive a config round trip")\n',
+              '\tcheck(is_equal_approx(restored.touch_scale, 1.2) and is_equal_approx(restored.reach_offset, 80.0), "HUD size and reach survive a config round trip")\n\tcheck(restored.auto_fire, "auto-fire preference survives a config round trip")\n',
+              "auto-fire round-trip test",
+          )
+          source = replace_once(
+              source,
+              '\tcheck(controls.fire_button.get_global_rect().get_center().x < center_before, "thumb-reach tuning moves action controls inward")\n\tcontrols._toggle_tuning(false)\n\tvar fire: Vector2',
+              '\tcheck(controls.fire_button.get_global_rect().get_center().x < center_before, "thumb-reach tuning moves action controls inward")\n\tvar auto_toggle: Vector2 = controls.auto_fire_button.get_global_rect().get_center()\n\ttouch(controls, 95, auto_toggle, true)\n\ttouch(controls, 95, Vector2.ZERO, false)\n\tcheck(controls.auto_fire_enabled, "TUNE enables accessible tap-toggle auto-fire")\n\tcontrols._toggle_tuning(false)\n\tvar auto_fire_point: Vector2 = controls.fire_button.get_global_rect().get_center()\n\ttouch(controls, 96, auto_fire_point, true)\n\ttouch(controls, 96, Vector2.ZERO, false)\n\tcheck(Input.is_action_pressed("shoot") and Input.is_action_pressed("aim"), "auto-fire remains latched after touch release")\n\ttouch(controls, 97, auto_fire_point, true)\n\ttouch(controls, 97, Vector2.ZERO, false)\n\tcheck(not Input.is_action_pressed("shoot") and not Input.is_action_pressed("aim"), "second auto-fire tap releases shooting")\n\tcontrols._toggle_auto_fire()\n\tvar fire: Vector2',
+              "auto-fire interaction tests",
+          )
+          path.write_text(source)
+          PY
+
       - name: Add graceful runtime lifecycle soak
         shell: bash
         run: |
@@ -3618,7 +3803,7 @@ jobs:
           Left virtual stick — Move
           Right-side swipe — Camera (TUNE adjusts sensitivity, touch size and thumb reach)
           FIRE button — Aim + fire
-          Soft aim assist — active near crosshair (TUNE adjusts strength or turns it off)
+          Soft aim assist — active near crosshair (TUNE adjusts strength or turns it off)\n          Optional tap-toggle AUTO FIRE — enable in TUNE for accessibility
           JUMP button — Jump
           F11 or Alt+Enter — Fullscreen
           RECOVER button — return from pits/stuck geometry
@@ -3673,8 +3858,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=28
-          version/name="0.2.8-mobile-alpha"
+          version/code=29
+          version/name="0.2.9-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
