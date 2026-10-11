@@ -26,9 +26,15 @@ class StoryVisualTests(unittest.TestCase):
         whale = Image.new("RGB", (1080, 1920), (8, 11, 28))
         self.assertTrue(draw_subject(ocean, "ocean", 0.0, (188, 163, 255)))
         self.assertTrue(draw_subject(whale, "whale", 0.0, (188, 163, 255)))
-        # Center of the whale's body is deliberately empty in ocean-only scenes.
-        self.assertEqual(ocean.getpixel((520, 900)), (8, 11, 28))
-        self.assertEqual(whale.getpixel((520, 900)), (79, 155, 185))
+        # The whale body has a distinctive fill; ocean-only scenes use waves
+        # and fish instead. Avoid relying on a pixel that may overlap a wave.
+        whale_fill = (79, 155, 185)
+        ocean_pixels = ocean.crop((295, 800, 700, 990)).getcolors(405 * 190)
+        whale_pixels = whale.crop((295, 800, 700, 990)).getcolors(405 * 190)
+        self.assertIsNotNone(ocean_pixels)
+        self.assertIsNotNone(whale_pixels)
+        self.assertNotIn(whale_fill, [color for _, color in ocean_pixels])
+        self.assertIn(whale_fill, [color for _, color in whale_pixels])
 
     def test_subject_draws_actual_pixels(self):
         for subject in ("cat", "book", "ocean", "clock", "tree", "train", "moon", "robot"):
