@@ -12,6 +12,7 @@ SUBJECTS = (
     ("dog", r"\bdog\b|\bpuppy\b|\bhound\b"),
     ("monkey", r"\bmonkey\b|\bape\b|\bbaboon\b"),
     ("bird", r"\bbird\b|\bparrot\b|\bsparrow\b|\bcrow\b|\bpigeon\b"),
+    ("rabbit", r"\brabbit\b|\bbunny\b|\bhare\b"),
     ("book", r"\bbook\b|\blibrar\w*|\bpages\b|\bnewspaper\b"),
     ("ocean", r"\bocean\b|\bunderwater\b|\bfish\b|\bjellyfish\b|\bcoral\b"),
     ("clock", r"\bclock\b|\btimepiece\b|\bclocktower\b"),
@@ -79,6 +80,24 @@ def draw_subject(image, subject, t, accent):
             d.ellipse((x+dx-22, 850, x+dx+22, 900), fill=(30, 42, 45))
         d.polygon([(x-18, 938), (x+18, 938), (x, 960)], fill=(255, 185, 190))
         d.arc((x-55, 955, x+55, 990), 0, 180, fill=(35, 38, 44), width=5)
+    elif subject == "rabbit":
+        x = cx + int(36 * math.sin(t * 1.8))
+        y = 860 - int(34 * abs(math.sin(t * 2.8)))
+        fur = (228, 207, 186)
+        d.ellipse((x-135, y+40, x+135, y+285), fill=fur)
+        d.ellipse((x-130, y-150, x+130, y+100), fill=fur)
+        for dx in (-75, 75):
+            tilt = int(15 * math.sin(t * 2.0 + dx))
+            d.ellipse((x+dx-35+tilt, y-390, x+dx+35+tilt, y-95),
+                      fill=fur, outline=(180, 150, 140), width=5)
+            d.ellipse((x+dx-17+tilt, y-365, x+dx+17+tilt, y-115),
+                      fill=(229, 153, 164))
+        for dx in (-55, 55):
+            d.ellipse((x+dx-14, y-65, x+dx+14, y-35),
+                      fill=(40, 42, 47))
+        d.ellipse((x-18, y+5, x+18, y+30), fill=(217, 124, 140))
+        d.arc((x-45, y+10, x+45, y+75), 10, 170,
+              fill=(112, 83, 80), width=5)
     elif subject == "bird":
         x = cx + int(75 * math.sin(t * 1.3))
         y = 820 + int(55 * math.sin(t * 2.1))
