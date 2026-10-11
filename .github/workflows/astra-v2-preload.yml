@@ -87,6 +87,8 @@ jobs:
           command -v ffprobe
       - name: Test automated long-form cover generation
         run: python -m unittest discover -s tests -p 'test_astra_cover_frames.py' -v
+      - name: Enforce real frame-to-frame motion
+        run: python -m unittest discover -s tests -p 'test_astra_motion_gate.py' -v
       - name: Verify animated animal scenes
         run: python -m unittest discover -s tests -p 'test_astra_animal_scenes.py' -v
       - name: Test trusted video and cover packages
