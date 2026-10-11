@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 56,
-  "confirmed_today": 55,
-  "last_attempt_at": "2026-10-11T15:06:21.451164+00:00",
+  "attempts": 57,
+  "confirmed_today": 56,
+  "last_attempt_at": "2026-10-11T15:20:30.091316+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -979,14 +979,21 @@
       "title": "Pip and the Seed at the Silent Mountain Village",
       "format": "short",
       "uploaded_at": "2026-10-11T14:54:54.908785+00:00"
+    },
+    "rayvan-procedural-2983e2974b4faf03": {
+      "video_id": "nlcinkOfOng",
+      "confirmed_at": "2026-10-11T15:19:01.854989+00:00",
+      "title": "Lina and the Door at the Silent Mountain Village",
+      "format": "short",
+      "uploaded_at": "2026-10-11T15:06:23.757276+00:00"
     }
   },
   "pending": {
-    "nlcinkOfOng": {
-      "content_id": "rayvan-procedural-2983e2974b4faf03",
-      "title": "Lina and the Door at the Silent Mountain Village",
+    "rueW2ITVARs": {
+      "content_id": "rayvan-procedural-03ca31b71976f734",
+      "title": "Tara and the Door at the Library Inside A Giant Tree",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T15:06:23.757276+00:00",
+      "uploaded_at": "2026-10-11T15:20:32.592756+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1862,6 +1869,12 @@
     "rayvan-procedural-2983e2974b4faf03": {
       "at": "2026-10-11T15:06:21.451148+00:00",
       "title": "Lina and the Door at the Silent Mountain Village",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-03ca31b71976f734": {
+      "at": "2026-10-11T15:20:30.091300+00:00",
+      "title": "Tara and the Door at the Library Inside A Giant Tree",
       "format": "short",
       "result": "accepted"
     }
