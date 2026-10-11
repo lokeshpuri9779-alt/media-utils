@@ -47,6 +47,13 @@ def candidate_ids():
     return {str(a["name"])[len(PREFIX):] for a in artifacts()}
 
 
+def valid_package_members(names):
+    """Allow legacy video-only packages and verified optional JPEG covers."""
+    names = set(names)
+    return ({"candidate.json", "video.mp4"} <= names
+            and names <= {"candidate.json", "video.mp4", "cover.jpg", "cover_wide.jpg"})
+
+
 def prepare(path, candidate):
     """Write a self-describing package; called only after full creative QA."""
     from astra_v2.creative import inspect_video
@@ -120,7 +127,7 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
             try:
                 with zipfile.ZipFile(archive) as z:
                     names = set(z.namelist())
-                    if not {"candidate.json", "video.mp4"} <= names or not names <= {"candidate.json", "video.mp4", "cover.jpg", "cover_wide.jpg"}:
+                    if not valid_package_members(names):
                         continue
                     if z.getinfo("video.mp4").file_size > MAX_BYTES:
                         continue
