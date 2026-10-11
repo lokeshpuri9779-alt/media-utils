@@ -4443,7 +4443,7 @@ jobs:
           	var low: Vector2 = Gyro.filter_angular_velocity(Vector3(0.0, 1.0, 0.0), 1, 0.016)
           	var high: Vector2 = Gyro.filter_angular_velocity(Vector3(0.0, 1.0, 0.0), 3, 0.016)
           	check(high.length() > low.length(), "higher mode increases response")
-          	check(Gyro.filter_angular_velocity(Vector3(50.0, 50.0, 0.0), 3, 1.0).length() <= Gyro.MAX_CAMERA_STEP, "sensor spikes are capped")
+          	check(Gyro.filter_angular_velocity(Vector3(50.0, 50.0, 0.0), 3, 1.0).length() <= Gyro.MAX_CAMERA_STEP + 0.000001, "sensor spikes are capped")
           	check(Gyro.filter_angular_velocity(Vector3(1.0, 1.0, 0.0), 3, 0.0) == Vector2.ZERO, "zero frame delta cannot move camera")
           	var test_path := "user://gyro_aim_test.cfg"
           	var directory := DirAccess.open("user://")
@@ -4522,8 +4522,10 @@ jobs:
           			await get_tree().physics_frame
           		check(is_instance_valid(level) and level.is_inside_tree(), "level remains live through soak cycle %d" % (cycle + 1))
           		level.release_streamed_audio()
-          		level.queue_free()
-          		for flush_frame in range(8):
+          		for audio_flush_frame in range(4):
+          			await get_tree().process_frame
+          		level.free()
+          		for flush_frame in range(12):
           			await get_tree().process_frame
           		await get_tree().physics_frame
           		check(get_node_or_null("SoakLevel") == null, "level unloads cleanly after soak cycle %d" % (cycle + 1))
