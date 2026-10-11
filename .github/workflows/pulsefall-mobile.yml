@@ -3201,6 +3201,168 @@ jobs:
           path.write_text(source)
           PY
 
+      - name: Add configurable mobile HUD layout
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(source, old, new, label):
+              if source.count(old) != 1:
+                  raise SystemExit(f"Expected one {label} anchor, found {source.count(old)}")
+              return source.replace(old, new, 1)
+
+          path = Path("game/mobile/mobile_tuning.gd")
+          source = path.read_text()
+          source = replace_once(
+              source,
+              "const AIM_MAX := 1.5\n",
+              "const AIM_MAX := 1.5\nconst TOUCH_MIN := 0.8\nconst TOUCH_MAX := 1.3\nconst REACH_MIN := 0.0\nconst REACH_MAX := 120.0\n",
+              "layout tuning constants",
+          )
+          source = replace_once(
+              source,
+              "static var current_aim_strength := 1.0\n",
+              "static var current_aim_strength := 1.0\nstatic var current_touch_scale := 1.0\nstatic var current_reach_offset := 0.0\n",
+              "layout tuning state",
+          )
+          source = replace_once(
+              source,
+              "static func load_values(path: String = CONFIG_PATH) -> Dictionary:\n",
+              "static func clamp_touch(value: float) -> float:\n\treturn snappedf(clampf(value, TOUCH_MIN, TOUCH_MAX), 0.1)\n\n\nstatic func clamp_reach(value: float) -> float:\n\treturn snappedf(clampf(value, REACH_MIN, REACH_MAX), 20.0)\n\n\nstatic func load_values(path: String = CONFIG_PATH) -> Dictionary:\n",
+              "layout clamp functions",
+          )
+          source = replace_once(
+              source,
+              "\tvar aim := 1.0\n",
+              "\tvar aim := 1.0\n\tvar touch := 1.0\n\tvar reach := 0.0\n",
+              "layout load defaults",
+          )
+          source = replace_once(
+              source,
+              '\t\taim = float(config.get_value(SECTION, "aim_assist_strength", aim))\n',
+              '\t\taim = float(config.get_value(SECTION, "aim_assist_strength", aim))\n\t\ttouch = float(config.get_value(SECTION, "touch_scale", touch))\n\t\treach = float(config.get_value(SECTION, "reach_offset", reach))\n',
+              "layout config load",
+          )
+          source = replace_once(
+              source,
+              '\t\t"aim_assist_strength": clamp_aim(aim),\n',
+              '\t\t"aim_assist_strength": clamp_aim(aim),\n\t\t"touch_scale": clamp_touch(touch),\n\t\t"reach_offset": clamp_reach(reach),\n',
+              "layout load result",
+          )
+          source = replace_once(
+              source,
+              "\t\tcurrent_aim_strength = result.aim_assist_strength\n",
+              "\t\tcurrent_aim_strength = result.aim_assist_strength\n\t\tcurrent_touch_scale = result.touch_scale\n\t\tcurrent_reach_offset = result.reach_offset\n",
+              "layout current state",
+          )
+          source = replace_once(
+              source,
+              "\n\nstatic func get_aim_strength() -> float:\n",
+              '\n\nstatic func save_layout(touch: float, reach: float, path: String = CONFIG_PATH) -> int:\n\tvar config := ConfigFile.new()\n\tif FileAccess.file_exists(path):\n\t\tconfig.load(path)\n\tvar safe_touch := clamp_touch(touch)\n\tvar safe_reach := clamp_reach(reach)\n\tconfig.set_value(SECTION, "touch_scale", safe_touch)\n\tconfig.set_value(SECTION, "reach_offset", safe_reach)\n\tvar result := config.save(path)\n\tif path == CONFIG_PATH and result == OK:\n\t\tcurrent_touch_scale = safe_touch\n\t\tcurrent_reach_offset = safe_reach\n\t\tloaded = true\n\treturn result\n\n\nstatic func get_aim_strength() -> float:\n',
+              "layout save function",
+          )
+          path.write_text(source)
+
+          path = Path("game/mobile/mobile_controls.gd")
+          source = path.read_text()
+          source = replace_once(
+              source,
+              "var aim_assist_strength := 1.0\n",
+              "var aim_assist_strength := 1.0\nvar touch_scale := 1.0\nvar reach_offset := 0.0\nvar layout_baselines: Dictionary = {}\n",
+              "layout control state",
+          )
+          source = replace_once(
+              source,
+              "var tuning_close_button: Button\n",
+              "var touch_value_label: Label\nvar reach_value_label: Label\nvar touch_minus_button: Button\nvar touch_plus_button: Button\nvar reach_minus_button: Button\nvar reach_plus_button: Button\nvar tuning_close_button: Button\n",
+              "layout control widgets",
+          )
+          source = replace_once(
+              source,
+              "\ttuning_panel.offset_bottom = 306\n",
+              "\ttuning_panel.offset_bottom = 430\n",
+              "expanded tuning panel",
+          )
+          source = replace_once(
+              source,
+              '\taim_label.position = Vector2(22, 130)\n\ttuning_panel.add_child(aim_label)\n',
+              '\taim_label.position = Vector2(22, 130)\n\ttuning_panel.add_child(aim_label)\n\tvar touch_label := Label.new()\n\ttouch_label.text = "TOUCH SIZE"\n\ttouch_label.position = Vector2(22, 192)\n\ttuning_panel.add_child(touch_label)\n\tvar reach_label := Label.new()\n\treach_label.text = "THUMB REACH"\n\treach_label.position = Vector2(22, 254)\n\ttuning_panel.add_child(reach_label)\n',
+              "layout tuning labels",
+          )
+          source = replace_once(
+              source,
+              "\taim_value_label = _make_value_label(Vector2(160, 124))\n\ttuning_panel.add_child(look_value_label)\n\ttuning_panel.add_child(aim_value_label)\n",
+              "\taim_value_label = _make_value_label(Vector2(160, 124))\n\ttouch_value_label = _make_value_label(Vector2(160, 186))\n\treach_value_label = _make_value_label(Vector2(160, 248))\n\ttuning_panel.add_child(look_value_label)\n\ttuning_panel.add_child(aim_value_label)\n\ttuning_panel.add_child(touch_value_label)\n\ttuning_panel.add_child(reach_value_label)\n",
+              "layout tuning values",
+          )
+          source = replace_once(
+              source,
+              '\taim_plus_button = _make_tuning_button("+", Vector2(242, 118))\n\ttuning_close_button = _make_tuning_button("DONE", Vector2(244, 166), Vector2(92, 42))\n\tfor button in [look_minus_button, look_plus_button, aim_minus_button, aim_plus_button, tuning_close_button]:\n',
+              '\taim_plus_button = _make_tuning_button("+", Vector2(242, 118))\n\ttouch_minus_button = _make_tuning_button("-", Vector2(112, 180))\n\ttouch_plus_button = _make_tuning_button("+", Vector2(242, 180))\n\treach_minus_button = _make_tuning_button("-", Vector2(112, 242))\n\treach_plus_button = _make_tuning_button("+", Vector2(242, 242))\n\ttuning_close_button = _make_tuning_button("DONE", Vector2(244, 304), Vector2(92, 42))\n\tfor button in [look_minus_button, look_plus_button, aim_minus_button, aim_plus_button, touch_minus_button, touch_plus_button, reach_minus_button, reach_plus_button, tuning_close_button]:\n',
+              "layout tuning buttons",
+          )
+          source = replace_once(
+              source,
+              "\t_build_tuning_ui(root)\n",
+              "\t_build_tuning_ui(root)\n\t_capture_action_layout()\n",
+              "layout capture",
+          )
+          source = replace_once(
+              source,
+              "dash_button, tuning_button, look_minus_button, look_plus_button, aim_minus_button, aim_plus_button, tuning_close_button]",
+              "dash_button, tuning_button, look_minus_button, look_plus_button, aim_minus_button, aim_plus_button, touch_minus_button, touch_plus_button, reach_minus_button, reach_plus_button, tuning_close_button]",
+              "layout touch registry",
+          )
+          source = replace_once(
+              source,
+              "\telif button == aim_plus_button:\n\t\t_adjust_aim(0.1)\n\telif button == tuning_close_button:",
+              "\telif button == aim_plus_button:\n\t\t_adjust_aim(0.1)\n\telif button == touch_minus_button:\n\t\t_adjust_touch(-0.1)\n\telif button == touch_plus_button:\n\t\t_adjust_touch(0.1)\n\telif button == reach_minus_button:\n\t\t_adjust_reach(-20.0)\n\telif button == reach_plus_button:\n\t\t_adjust_reach(20.0)\n\telif button == tuning_close_button:",
+              "layout button routing",
+          )
+          source = replace_once(
+              source,
+              "\taim_assist_strength = values.aim_assist_strength\n",
+              "\taim_assist_strength = values.aim_assist_strength\n\ttouch_scale = values.touch_scale\n\treach_offset = values.reach_offset\n",
+              "layout values load",
+          )
+          source = replace_once(
+              source,
+              "\n\nfunc _store_tuning() -> void:\n",
+              '\n\nfunc _adjust_touch(delta: float) -> void:\n\ttouch_scale = MobileTuning.clamp_touch(touch_scale + delta)\n\t_store_tuning()\n\t_apply_action_layout()\n\n\nfunc _adjust_reach(delta: float) -> void:\n\treach_offset = MobileTuning.clamp_reach(reach_offset + delta)\n\t_store_tuning()\n\t_apply_action_layout()\n\n\nfunc _capture_action_layout() -> void:\n\tlayout_baselines.clear()\n\tfor button in [fire_button, jump_button, recover_button, pulse_button, weapon_button, dash_button]:\n\t\tif is_instance_valid(button):\n\t\t\tlayout_baselines[button] = Rect2(Vector2(button.offset_left, button.offset_top), Vector2(button.offset_right - button.offset_left, button.offset_bottom - button.offset_top))\n\t_apply_action_layout()\n\n\nfunc _apply_action_layout() -> void:\n\tfor button in [fire_button, jump_button, recover_button, pulse_button, weapon_button, dash_button]:\n\t\tif not is_instance_valid(button) or not layout_baselines.has(button):\n\t\t\tcontinue\n\t\tvar baseline: Rect2 = layout_baselines[button]\n\t\tvar scaled_size := baseline.size * touch_scale\n\t\tvar center := baseline.position + baseline.size * 0.5 + Vector2(-reach_offset, 0.0)\n\t\tbutton.offset_left = center.x - scaled_size.x * 0.5\n\t\tbutton.offset_top = center.y - scaled_size.y * 0.5\n\t\tbutton.offset_right = center.x + scaled_size.x * 0.5\n\t\tbutton.offset_bottom = center.y + scaled_size.y * 0.5\n\n\nfunc _store_tuning() -> void:\n',
+              "layout adjustment functions",
+          )
+          source = replace_once(
+              source,
+              "\tMobileTuning.save_values(look_sensitivity_scale, aim_assist_strength)\n",
+              "\tMobileTuning.save_values(look_sensitivity_scale, aim_assist_strength)\n\tMobileTuning.save_layout(touch_scale, reach_offset)\n",
+              "layout persistence",
+          )
+          source = replace_once(
+              source,
+              '\tif is_instance_valid(aim_value_label):\n\t\taim_value_label.text = "%d%%" % int(round(aim_assist_strength * 100.0))\n',
+              '\tif is_instance_valid(aim_value_label):\n\t\taim_value_label.text = "%d%%" % int(round(aim_assist_strength * 100.0))\n\tif is_instance_valid(touch_value_label):\n\t\ttouch_value_label.text = "%d%%" % int(round(touch_scale * 100.0))\n\tif is_instance_valid(reach_value_label):\n\t\treach_value_label.text = "%d px" % int(reach_offset)\n',
+              "layout value labels",
+          )
+          path.write_text(source)
+
+          path = Path("game/mobile/controls_test.gd")
+          source = path.read_text()
+          source = replace_once(
+              source,
+              '\tcheck(tuning_module.save_values(1.7, 0.4, test_path) == OK, "mobile tuning persists without error")\n\tvar restored: Dictionary = tuning_module.load_values(test_path)\n\tcheck(is_equal_approx(restored.look_sensitivity, 1.7) and is_equal_approx(restored.aim_assist_strength, 0.4), "mobile tuning survives a config round trip")\n',
+              '\tcheck(tuning_module.save_values(1.7, 0.4, test_path) == OK, "mobile tuning persists without error")\n\tcheck(tuning_module.save_layout(1.2, 80.0, test_path) == OK, "HUD layout tuning persists without error")\n\tvar restored: Dictionary = tuning_module.load_values(test_path)\n\tcheck(is_equal_approx(restored.look_sensitivity, 1.7) and is_equal_approx(restored.aim_assist_strength, 0.4), "mobile tuning survives a config round trip")\n\tcheck(is_equal_approx(restored.touch_scale, 1.2) and is_equal_approx(restored.reach_offset, 80.0), "HUD size and reach survive a config round trip")\n',
+              "layout persistence tests",
+          )
+          source = replace_once(
+              source,
+              '\tcheck(controls.aim_assist_strength < old_aim, "aim-assist strength changes from the touch panel")\n\tcontrols._toggle_tuning(false)\n',
+              '\tcheck(controls.aim_assist_strength < old_aim, "aim-assist strength changes from the touch panel")\n\tvar fire_before: Rect2 = controls.fire_button.get_global_rect()\n\tvar touch_plus: Vector2 = controls.touch_plus_button.get_global_rect().get_center()\n\ttouch(controls, 93, touch_plus, true)\n\ttouch(controls, 93, Vector2.ZERO, false)\n\tcheck(controls.fire_button.get_global_rect().size.x > fire_before.size.x, "touch-size tuning enlarges action targets")\n\tvar center_before: float = controls.fire_button.get_global_rect().get_center().x\n\tvar reach_plus: Vector2 = controls.reach_plus_button.get_global_rect().get_center()\n\ttouch(controls, 94, reach_plus, true)\n\ttouch(controls, 94, Vector2.ZERO, false)\n\tcheck(controls.fire_button.get_global_rect().get_center().x < center_before, "thumb-reach tuning moves action controls inward")\n\tcontrols._toggle_tuning(false)\n',
+              "layout UI tests",
+          )
+          path.write_text(source)
+          PY
+
       - name: Add graceful runtime lifecycle soak
         shell: bash
         run: |
@@ -3454,7 +3616,7 @@ jobs:
 
           Controls:
           Left virtual stick — Move
-          Right-side swipe — Camera (TUNE adjusts sensitivity)
+          Right-side swipe — Camera (TUNE adjusts sensitivity, touch size and thumb reach)
           FIRE button — Aim + fire
           Soft aim assist — active near crosshair (TUNE adjusts strength or turns it off)
           JUMP button — Jump
@@ -3511,8 +3673,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=27
-          version/name="0.2.7-mobile-alpha"
+          version/code=28
+          version/name="0.2.8-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
