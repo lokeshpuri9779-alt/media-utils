@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 47,
-  "confirmed_today": 46,
-  "last_attempt_at": "2026-10-11T13:21:19.381297+00:00",
+  "attempts": 48,
+  "confirmed_today": 47,
+  "last_attempt_at": "2026-10-11T13:33:22.377208+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -916,14 +916,21 @@
       "title": "Mara and the Tiny Machine at the City Beneath The Ocean",
       "format": "short",
       "uploaded_at": "2026-10-11T13:13:01.091121+00:00"
+    },
+    "rayvan-procedural-906e66bb2dc84914": {
+      "video_id": "57WyuOInJ0o",
+      "confirmed_at": "2026-10-11T13:32:25.012780+00:00",
+      "title": "Tara and the Door at the City Beneath The Ocean",
+      "format": "short",
+      "uploaded_at": "2026-10-11T13:21:21.548025+00:00"
     }
   },
   "pending": {
-    "57WyuOInJ0o": {
-      "content_id": "rayvan-procedural-906e66bb2dc84914",
-      "title": "Tara and the Door at the City Beneath The Ocean",
+    "R_sEXcYQi9E": {
+      "content_id": "rayvan-procedural-bbc14d86d166a7bd",
+      "title": "Pip and the Tiny Machine at the Forgotten Moon Colony",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T13:21:21.548025+00:00",
+      "uploaded_at": "2026-10-11T13:33:23.822103+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1745,6 +1752,12 @@
     "rayvan-procedural-906e66bb2dc84914": {
       "at": "2026-10-11T13:21:19.381281+00:00",
       "title": "Tara and the Door at the City Beneath The Ocean",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-bbc14d86d166a7bd": {
+      "at": "2026-10-11T13:33:22.377193+00:00",
+      "title": "Pip and the Tiny Machine at the Forgotten Moon Colony",
       "format": "short",
       "result": "accepted"
     }
