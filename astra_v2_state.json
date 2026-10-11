@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-12",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 10,
+  "attempts": 11,
   "confirmed_today": 10,
-  "last_attempt_at": "2026-10-11T20:48:00.438138+00:00",
+  "last_attempt_at": "2026-10-11T21:03:49.234192+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1163,8 +1163,17 @@
       "uploaded_at": "2026-10-11T20:48:01.756569+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "n8QAygkqD7Y": {
+      "content_id": "rayvan-procedural-78605db16c370ee7",
+      "title": "Ivo and the Clock at the City Beneath The Ocean",
+      "day": "2026-10-12",
+      "uploaded_at": "2026-10-11T21:03:50.603179+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -2185,6 +2194,12 @@
     "rayvan-procedural-a4419f13fb516d12": {
       "at": "2026-10-11T20:48:00.438123+00:00",
       "title": "Arun and the Tiny Machine at the Abandoned Observatory",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-78605db16c370ee7": {
+      "at": "2026-10-11T21:03:49.234176+00:00",
+      "title": "Ivo and the Clock at the City Beneath The Ocean",
       "format": "short",
       "result": "accepted"
     }
