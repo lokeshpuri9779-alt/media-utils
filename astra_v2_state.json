@@ -3,7 +3,7 @@
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 39,
-  "confirmed_today": 38,
+  "confirmed_today": 39,
   "last_attempt_at": "2026-10-11T11:10:23.257162+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -860,19 +860,17 @@
       "title": "Lina and the Tiny Machine at the Silent Mountain Village",
       "format": "short",
       "uploaded_at": "2026-10-11T10:55:10.514511+00:00"
-    }
-  },
-  "pending": {
-    "xHa5YLVAYDo": {
-      "content_id": "rayvan-procedural-155395d7ac77809b",
+    },
+    "rayvan-procedural-155395d7ac77809b": {
+      "video_id": "xHa5YLVAYDo",
+      "confirmed_at": "2026-10-11T11:14:33.088026+00:00",
       "title": "Mara and the A Clock at A Floating Market",
-      "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T11:10:25.209056+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-11T11:10:25.209056+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
