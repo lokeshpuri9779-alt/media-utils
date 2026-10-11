@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-12",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 3,
+  "attempts": 4,
   "confirmed_today": 3,
-  "last_attempt_at": "2026-10-11T18:59:33.814468+00:00",
+  "last_attempt_at": "2026-10-11T19:15:51.015446+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1114,8 +1114,17 @@
       "uploaded_at": "2026-10-11T18:59:35.537128+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "dyiGeuLzm7I": {
+      "content_id": "trend-brief-2026-10-11-am",
+      "title": "Why white sox vs cleveland guardians match player stats Is Getting Attention Now | RAYVAN",
+      "day": "2026-10-12",
+      "uploaded_at": "2026-10-11T19:15:52.959302+00:00",
+      "genre": "current",
+      "format": "long"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -2095,6 +2104,12 @@
       "at": "2026-10-11T18:59:33.814450+00:00",
       "title": "Arun and the Lantern at the Glass Desert",
       "format": "short",
+      "result": "accepted"
+    },
+    "trend-brief-2026-10-11-am": {
+      "at": "2026-10-11T19:15:51.015436+00:00",
+      "title": "Why white sox vs cleveland guardians match player stats Is Getting Attention Now | RAYVAN",
+      "format": "long",
       "result": "accepted"
     }
   },
