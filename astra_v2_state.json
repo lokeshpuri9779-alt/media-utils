@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 27,
-  "confirmed_today": 26,
-  "last_attempt_at": "2026-10-11T00:26:55.642416+00:00",
+  "attempts": 28,
+  "confirmed_today": 27,
+  "last_attempt_at": "2026-10-11T00:40:35.900287+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -776,14 +776,21 @@
       "title": "Tara and the Seed at the Library Inside A Giant Tree",
       "format": "short",
       "uploaded_at": "2026-10-11T00:09:12.957949+00:00"
+    },
+    "rayvan-procedural-410b57bb3e97baa7": {
+      "video_id": "fjxuPPS3uFQ",
+      "confirmed_at": "2026-10-11T00:39:17.163156+00:00",
+      "title": "Noor and the Clock at the Library Inside A Giant Tree",
+      "format": "short",
+      "uploaded_at": "2026-10-11T00:26:56.946526+00:00"
     }
   },
   "pending": {
-    "fjxuPPS3uFQ": {
-      "content_id": "rayvan-procedural-410b57bb3e97baa7",
-      "title": "Noor and the Clock at the Library Inside A Giant Tree",
+    "Jwi88DKq1RA": {
+      "content_id": "rayvan-procedural-e10ed50a320cec37",
+      "title": "Pip and the Tiny Machine at the Library Inside A Giant Tree",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T00:26:56.946526+00:00",
+      "uploaded_at": "2026-10-11T00:40:38.036393+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1485,6 +1492,12 @@
     "rayvan-procedural-410b57bb3e97baa7": {
       "at": "2026-10-11T00:26:55.642400+00:00",
       "title": "Noor and the Clock at the Library Inside A Giant Tree",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-e10ed50a320cec37": {
+      "at": "2026-10-11T00:40:35.900272+00:00",
+      "title": "Pip and the Tiny Machine at the Library Inside A Giant Tree",
       "format": "short",
       "result": "accepted"
     }
