@@ -66,6 +66,10 @@ def prepare(path, candidate):
     package.mkdir(exist_ok=True)
     (package / "candidate.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
     (package / "video.mp4").write_bytes(video.read_bytes())
+    for suffix, name in (("_cover.jpg", "cover.jpg"), ("_cover_wide.jpg", "cover_wide.jpg")):
+        cover = video.with_name(video.stem + suffix)
+        if cover.is_file() and 0 < cover.stat().st_size <= 5 * 1024 * 1024:
+            (package / name).write_bytes(cover.read_bytes())
     return package
 
 
@@ -115,7 +119,7 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
                 continue
             try:
                 with zipfile.ZipFile(archive) as z:
-                    if sorted(z.namelist()) != ["candidate.json", "video.mp4"]:
+                    if not {"candidate.json", "video.mp4"} <= set(z.namelist()) or not set(z.namelist()) <= {"candidate.json", "video.mp4", "cover.jpg", "cover_wide.jpg"}:
                         continue
                     if z.getinfo("video.mp4").file_size > MAX_BYTES:
                         continue
