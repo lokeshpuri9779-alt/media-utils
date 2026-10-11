@@ -17,6 +17,16 @@ class AnimalScenesTests(unittest.TestCase):
         self.assertEqual(select_subject({"title": "The Forest"},
                                         {"speech": "A parrot flew overhead"}), "bird")
 
+    def test_subject_follows_narration_order(self):
+        story = {"title": "The monkey and the dog"}
+        self.assertEqual(select_subject(story, {"speech": "The dog chased a monkey"}), "dog")
+        self.assertEqual(select_subject(story, {"speech": "The monkey startled a dog"}), "monkey")
+        self.assertEqual(select_subject(story, {"speech": "A parrot landed near a dog"}), "bird")
+
+    def test_shot_takes_priority_over_story_title(self):
+        self.assertEqual(select_subject({"title": "The Cat"},
+                                        {"speech": "A monkey escaped"}), "monkey")
+
     def test_animation_changes_frames(self):
         for subject in ("dog", "monkey", "bird"):
             with self.subTest(subject=subject):
