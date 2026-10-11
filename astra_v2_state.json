@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-12",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 6,
+  "attempts": 7,
   "confirmed_today": 6,
-  "last_attempt_at": "2026-10-11T19:37:50.881309+00:00",
+  "last_attempt_at": "2026-10-11T19:55:03.507745+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1135,8 +1135,17 @@
       "uploaded_at": "2026-10-11T19:37:53.328370+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "Xkz5OXw8baE": {
+      "content_id": "rayvan-procedural-cd677d5d04b15bb5",
+      "title": "Arun and the Map at the Abandoned Observatory",
+      "day": "2026-10-12",
+      "uploaded_at": "2026-10-11T19:55:05.667776+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -2133,6 +2142,12 @@
     "rayvan-procedural-2ffa9673b0e07bb3": {
       "at": "2026-10-11T19:37:50.881294+00:00",
       "title": "Noor and the Door at the Train Station At The Edge Of Time",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-cd677d5d04b15bb5": {
+      "at": "2026-10-11T19:55:03.507728+00:00",
+      "title": "Arun and the Map at the Abandoned Observatory",
       "format": "short",
       "result": "accepted"
     }
