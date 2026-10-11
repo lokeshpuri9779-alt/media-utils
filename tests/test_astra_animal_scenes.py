@@ -31,6 +31,17 @@ class AnimalScenesTests(unittest.TestCase):
         self.assertEqual(select_subject({"title": "The Cat"},
                                         {"speech": "A monkey escaped"}), "monkey")
 
+    def test_scene_direction_selects_character(self):
+        story = {"title": "A clock in the museum"}
+        self.assertEqual(
+            select_subject(story, {"visual_prompt": "A rabbit leaps through the garden"}),
+            "rabbit",
+        )
+        self.assertEqual(
+            select_subject(story, {"action": "A bird circles above the train"}),
+            "bird",
+        )
+
     def test_animation_changes_frames(self):
         for subject in ("dog", "monkey", "bird", "rabbit"):
             with self.subTest(subject=subject):
