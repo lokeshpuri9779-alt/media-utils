@@ -3548,6 +3548,171 @@ jobs:
           path.write_text(source)
           PY
 
+      - name: Add configurable haptic feedback
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(source, old, new, label):
+              if source.count(old) != 1:
+                  raise SystemExit(f"Expected one {label} anchor, found {source.count(old)}")
+              return source.replace(old, new, 1)
+
+          path = Path("game/mobile/mobile_tuning.gd")
+          source = path.read_text()
+          source = replace_once(
+              source,
+              "static var current_auto_fire := false\n",
+              "static var current_auto_fire := false\nstatic var current_haptics_enabled := true\n",
+              "haptics state",
+          )
+          source = replace_once(
+              source,
+              "\tvar auto_fire := false\n",
+              "\tvar auto_fire := false\n\tvar haptics_enabled := true\n",
+              "haptics load default",
+          )
+          source = replace_once(
+              source,
+              '\t\tauto_fire = bool(config.get_value(SECTION, "auto_fire", auto_fire))\n',
+              '\t\tauto_fire = bool(config.get_value(SECTION, "auto_fire", auto_fire))\n\t\thaptics_enabled = bool(config.get_value(SECTION, "haptics_enabled", haptics_enabled))\n',
+              "haptics config load",
+          )
+          source = replace_once(
+              source,
+              '\t\t"auto_fire": auto_fire,\n',
+              '\t\t"auto_fire": auto_fire,\n\t\t"haptics_enabled": haptics_enabled,\n',
+              "haptics load result",
+          )
+          source = replace_once(
+              source,
+              "\t\tcurrent_auto_fire = result.auto_fire\n",
+              "\t\tcurrent_auto_fire = result.auto_fire\n\t\tcurrent_haptics_enabled = result.haptics_enabled\n",
+              "haptics current state",
+          )
+          source = replace_once(
+              source,
+              "\n\nstatic func get_aim_strength() -> float:\n",
+              '\n\nstatic func save_haptics_enabled(enabled: bool, path: String = CONFIG_PATH) -> int:\n\tvar config := ConfigFile.new()\n\tif FileAccess.file_exists(path):\n\t\tconfig.load(path)\n\tconfig.set_value(SECTION, "haptics_enabled", enabled)\n\tvar result := config.save(path)\n\tif path == CONFIG_PATH and result == OK:\n\t\tcurrent_haptics_enabled = enabled\n\t\tloaded = true\n\treturn result\n\n\nstatic func get_haptics_enabled() -> bool:\n\tif not loaded:\n\t\tload_values()\n\treturn current_haptics_enabled\n\n\nstatic func pulse_haptic(duration_ms: int) -> bool:\n\tif not get_haptics_enabled():\n\t\treturn false\n\tif OS.has_feature("mobile"):\n\t\tInput.vibrate_handheld(clampi(duration_ms, 1, 250))\n\treturn true\n\n\nstatic func get_aim_strength() -> float:\n',
+              "haptics persistence and router",
+          )
+          path.write_text(source)
+
+          path = Path("game/mobile/mobile_controls.gd")
+          source = path.read_text()
+          source = replace_once(
+              source,
+              "var auto_fire_latched := false\n",
+              "var auto_fire_latched := false\nvar haptics_enabled := true\n",
+              "haptics control state",
+          )
+          source = replace_once(
+              source,
+              "var auto_fire_button: Button\nvar tuning_close_button: Button\n",
+              "var auto_fire_button: Button\nvar haptics_button: Button\nvar tuning_close_button: Button\n",
+              "haptics widget",
+          )
+          source = replace_once(
+              source,
+              "\ttuning_panel.offset_bottom = 492\n",
+              "\ttuning_panel.offset_bottom = 554\n",
+              "haptics panel size",
+          )
+          source = replace_once(
+              source,
+              '\ttuning_panel.add_child(auto_label)\n',
+              '\ttuning_panel.add_child(auto_label)\n\tvar haptics_label := Label.new()\n\thaptics_label.text = "HAPTICS"\n\thaptics_label.position = Vector2(22, 378)\n\ttuning_panel.add_child(haptics_label)\n',
+              "haptics label",
+          )
+          source = replace_once(
+              source,
+              '\tauto_fire_button = _make_tuning_button("OFF", Vector2(184, 304), Vector2(152, 44))\n\ttuning_close_button = _make_tuning_button("DONE", Vector2(244, 366), Vector2(92, 42))\n\tfor button in [look_minus_button, look_plus_button, aim_minus_button, aim_plus_button, touch_minus_button, touch_plus_button, reach_minus_button, reach_plus_button, auto_fire_button, tuning_close_button]:\n',
+              '\tauto_fire_button = _make_tuning_button("OFF", Vector2(184, 304), Vector2(152, 44))\n\thaptics_button = _make_tuning_button("ON", Vector2(184, 366), Vector2(152, 44))\n\ttuning_close_button = _make_tuning_button("DONE", Vector2(244, 428), Vector2(92, 42))\n\tfor button in [look_minus_button, look_plus_button, aim_minus_button, aim_plus_button, touch_minus_button, touch_plus_button, reach_minus_button, reach_plus_button, auto_fire_button, haptics_button, tuning_close_button]:\n',
+              "haptics panel button",
+          )
+          source = replace_once(
+              source,
+              "reach_minus_button, reach_plus_button, auto_fire_button, tuning_close_button]",
+              "reach_minus_button, reach_plus_button, auto_fire_button, haptics_button, tuning_close_button]",
+              "haptics touch registry",
+          )
+          source = replace_once(
+              source,
+              "\telif button == auto_fire_button:\n\t\t_toggle_auto_fire()\n\telif button == tuning_close_button:",
+              "\telif button == auto_fire_button:\n\t\t_toggle_auto_fire()\n\telif button == haptics_button:\n\t\t_toggle_haptics()\n\telif button == tuning_close_button:",
+              "haptics button routing",
+          )
+          source = replace_once(
+              source,
+              "\tauto_fire_enabled = values.auto_fire\n",
+              "\tauto_fire_enabled = values.auto_fire\n\thaptics_enabled = values.haptics_enabled\n",
+              "haptics load",
+          )
+          source = replace_once(
+              source,
+              "\n\nfunc _store_tuning() -> void:\n",
+              '\n\nfunc _toggle_haptics() -> void:\n\thaptics_enabled = not haptics_enabled\n\t_store_tuning()\n\tMobileTuning.pulse_haptic(24)\n\n\nfunc _store_tuning() -> void:\n',
+              "haptics toggle",
+          )
+          source = replace_once(
+              source,
+              "\tMobileTuning.save_accessibility(auto_fire_enabled)\n",
+              "\tMobileTuning.save_accessibility(auto_fire_enabled)\n\tMobileTuning.save_haptics_enabled(haptics_enabled)\n",
+              "haptics store",
+          )
+          source = replace_once(
+              source,
+              '\tif is_instance_valid(auto_fire_button):\n\t\tauto_fire_button.text = "ON — TAP TOGGLE" if auto_fire_enabled else "OFF"\n',
+              '\tif is_instance_valid(auto_fire_button):\n\t\tauto_fire_button.text = "ON — TAP TOGGLE" if auto_fire_enabled else "OFF"\n\tif is_instance_valid(haptics_button):\n\t\thaptics_button.text = "ON" if haptics_enabled else "OFF"\n',
+              "haptics label refresh",
+          )
+          path.write_text(source)
+
+          routed = 0
+          for script in Path("game").rglob("*.gd"):
+              if script == Path("game/mobile/mobile_tuning.gd"):
+                  continue
+              text = script.read_text()
+              count = text.count("Input.vibrate_handheld(")
+              if count:
+                  text = text.replace("Input.vibrate_handheld(", "MobileTuning.pulse_haptic(")
+                  script.write_text(text)
+                  routed += count
+          if routed < 8:
+              raise SystemExit(f"Expected at least 8 gameplay haptics, routed {routed}")
+          bypasses = [
+              str(script) for script in Path("game").rglob("*.gd")
+              if script != Path("game/mobile/mobile_tuning.gd")
+              and "Input.vibrate_handheld(" in script.read_text()
+          ]
+          if bypasses:
+              raise SystemExit("Unrouted haptics: " + ", ".join(bypasses))
+          print(f"Centralized {routed} gameplay haptic call sites")
+
+          path = Path("game/mobile/controls_test.gd")
+          source = path.read_text()
+          source = replace_once(
+              source,
+              '\tcheck(tuning_module.save_accessibility(true, test_path) == OK, "auto-fire preference persists without error")\n\tvar restored: Dictionary = tuning_module.load_values(test_path)\n',
+              '\tcheck(tuning_module.save_accessibility(true, test_path) == OK, "auto-fire preference persists without error")\n\tcheck(tuning_module.save_haptics_enabled(false, test_path) == OK, "haptics preference persists without error")\n\tvar restored: Dictionary = tuning_module.load_values(test_path)\n',
+              "haptics persistence test",
+          )
+          source = replace_once(
+              source,
+              '\tcheck(restored.auto_fire, "auto-fire preference survives a config round trip")\n',
+              '\tcheck(restored.auto_fire, "auto-fire preference survives a config round trip")\n\tcheck(not restored.haptics_enabled, "haptics preference survives a config round trip")\n',
+              "haptics round-trip test",
+          )
+          source = replace_once(
+              source,
+              '\tcheck(controls.auto_fire_enabled, "TUNE enables accessible tap-toggle auto-fire")\n\tcontrols._toggle_tuning(false)\n',
+              '\tcheck(controls.auto_fire_enabled, "TUNE enables accessible tap-toggle auto-fire")\n\tvar haptics_toggle: Vector2 = controls.haptics_button.get_global_rect().get_center()\n\ttouch(controls, 98, haptics_toggle, true)\n\ttouch(controls, 98, Vector2.ZERO, false)\n\tcheck(not controls.haptics_enabled, "TUNE disables haptic feedback")\n\tcheck(not tuning_module.pulse_haptic(20), "disabled haptics suppress feedback requests")\n\tcontrols._toggle_tuning(false)\n',
+              "haptics interaction tests",
+          )
+          path.write_text(source)
+          PY
+
       - name: Add graceful runtime lifecycle soak
         shell: bash
         run: |
@@ -3803,7 +3968,7 @@ jobs:
           Left virtual stick — Move
           Right-side swipe — Camera (TUNE adjusts sensitivity, touch size and thumb reach)
           FIRE button — Aim + fire
-          Soft aim assist — active near crosshair (TUNE adjusts strength or turns it off)\n          Optional tap-toggle AUTO FIRE — enable in TUNE for accessibility
+          Soft aim assist — active near crosshair (TUNE adjusts strength or turns it off)\n          Optional tap-toggle AUTO FIRE and configurable HAPTICS — enable or disable in TUNE
           JUMP button — Jump
           F11 or Alt+Enter — Fullscreen
           RECOVER button — return from pits/stuck geometry
@@ -3858,8 +4023,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=29
-          version/name="0.2.9-mobile-alpha"
+          version/code=30
+          version/name="0.2.10-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
