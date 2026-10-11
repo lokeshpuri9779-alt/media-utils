@@ -82,7 +82,8 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [x] Auto-fire option for accessibility.
 - [x] Haptics.
 - [x] Camera collision improvements.
-- [ ] Better recoil, hit-stop, hit markers and damage direction feedback.
+- [x] Hit markers and directional incoming-damage feedback.
+- [ ] Better recoil and hit-stop.
 
 ### P3 — Combat content
 - [ ] At least 3 genuinely different weapons.
@@ -223,3 +224,14 @@ Validated build: commit `6d7ee52c6ce2bdc3b06994165e015edb51a1dc21`; APK SHA256 `
 - [x] Workflow run `38136620728` passed import, five-cycle lifecycle soak, extraction, controls, aim-assist and camera gates: 85 checks total, zero detected shutdown leaks, and successful arm64 Android export/upload.
 
 Validated build: commit `0533aea94eea6ba68bab6538b4c9c45c1ed855e0`; APK SHA256 `565ab32ba35467e6fe72e558209d2af56dc83d224955367a6c00dc4ccbe9cfdb`; 521,144,788 bytes. v0.2.10 remains the known-good rollback. Human camera comfort, navigation in tight spaces, real-device performance/thermal behavior, player-controlled combat, a complete objective-to-extraction run, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
+
+
+## Validated v0.2.12 combat-readability checkpoint (2026-10-11)
+
+- [x] Added a centered hit-confirmation pulse driven by actual projectile collision callbacks.
+- [x] Added front/right/back/left incoming-damage indicators derived from attacker position in player-local space.
+- [x] Routed enemy shot origins through the armor-aware player damage handler without bypassing damage reduction.
+- [x] Added nine combat-feedback regression checks.
+- [x] Workflow run `38156931685` passed import, five-cycle lifecycle soak, extraction, controls, aim-assist, camera and combat-feedback gates: 94 checks total, zero detected shutdown leaks, and successful arm64 Android export/upload.
+
+Validated build: commit `14119b3e7259e54b400179448028d64adf54094c`; APK SHA256 `f92b315f6c1f30fea6d5fc6a1462135c9d97a3bccce0d372959dd3953470ed3b`; 521,144,951 bytes. v0.2.11 remains the known-good rollback. Recoil/hit-stop tuning, human readability and comfort, player-controlled combat/navigation, real-device performance/thermal behavior, a complete human objective-to-extraction run, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
