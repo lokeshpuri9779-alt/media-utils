@@ -26,10 +26,15 @@ SUBJECTS = (
 def select_subject(story, shot):
     local = " ".join(str(shot.get(k) or "") for k in ("speech", "headline", "label")).lower()
     global_text = " ".join(str(story.get(k) or "") for k in ("title", "question", "answer")).lower()
+    # A shot should depict the subject mentioned in that shot, not the first
+    # matching word from the entire episode or the fixed subject catalog.
+    # Prefer the earliest mention when several objects appear in one beat.
     for text in (local, global_text):
-        for name, pattern in SUBJECTS:
-            if re.search(pattern, text):
-                return name
+        matches = [(match.start(), name)
+                   for name, pattern in SUBJECTS
+                   if (match := re.search(pattern, text))]
+        if matches:
+            return min(matches, key=lambda item: item[0])[1]
     return None
 
 
