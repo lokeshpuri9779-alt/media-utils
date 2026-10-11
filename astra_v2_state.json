@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 69,
+  "attempts": 70,
   "confirmed_today": 69,
-  "last_attempt_at": "2026-10-11T17:56:15.406632+00:00",
+  "last_attempt_at": "2026-10-11T18:15:20.675029+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1079,8 +1079,17 @@
       "uploaded_at": "2026-10-11T17:56:17.704617+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "gTVBT08ubE0": {
+      "content_id": "rayvan-procedural-1f9832ce93af6276",
+      "title": "Arun and the Door at the Abandoned Observatory",
+      "day": "2026-10-11",
+      "uploaded_at": "2026-10-11T18:15:22.250166+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -2029,6 +2038,12 @@
     "rayvan-procedural-9016bbf0c63e4030": {
       "at": "2026-10-11T17:56:15.406616+00:00",
       "title": "Arun and the Seed at the Glass Desert",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-1f9832ce93af6276": {
+      "at": "2026-10-11T18:15:20.675013+00:00",
+      "title": "Arun and the Door at the Abandoned Observatory",
       "format": "short",
       "result": "accepted"
     }
