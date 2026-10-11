@@ -3676,7 +3676,14 @@ jobs:
               text = script.read_text()
               count = text.count("Input.vibrate_handheld(")
               if count:
-                  text = text.replace("Input.vibrate_handheld(", "MobileTuning.pulse_haptic(")
+                  router = "MobileTuning"
+                  if "const MobileTuning" not in text:
+                      router = "PulseHaptics"
+                      first_break = text.find("\n")
+                      if first_break < 0:
+                          raise SystemExit(f"Cannot inject haptic router into {script}")
+                      text = text[:first_break + 1] + 'const PulseHaptics = preload("res://mobile/mobile_tuning.gd")\n' + text[first_break + 1:]
+                  text = text.replace("Input.vibrate_handheld(", f"{router}.pulse_haptic(")
                   script.write_text(text)
                   routed += count
           if routed < 8:
