@@ -4139,7 +4139,7 @@ jobs:
 
           func _apply_weapon_recoil() -> void:
           	recoil_shot_index += 1
-          	var recoil := CombatFeelScript.recoil_for_weapon(weapon_mode, recoil_shot_index)
+          	var recoil: Vector2 = CombatFeelScript.recoil_for_weapon(weapon_mode, recoil_shot_index)
           	player_input.apply_weapon_recoil(recoil)
           '''
           path.write_text(source)
