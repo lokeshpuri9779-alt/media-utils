@@ -150,6 +150,18 @@ def draw_subject(image, subject, t, accent):
         d.arc((x-48, y+18, x+48, y+85), 5, 175,
               fill=(60, 40, 42), width=6)
 
+    elif subject == "book":
+        x = cx + sway
+        d.rounded_rectangle((x-260, 650, x+260, 1080), radius=20,
+                            fill=(103, 59, 78), outline=accent, width=9)
+        d.polygon([(x, 690), (x-220, 720), (x-220, 1020), (x, 990)],
+                  fill=(244, 223, 181))
+        d.polygon([(x, 690), (x+220, 720), (x+220, 1020), (x, 990)],
+                  fill=(228, 208, 171))
+        d.line((x, 690, x, 990), fill=(125, 92, 70), width=6)
+        for y in (785, 845, 905):
+            d.line((x-185, y, x-45, y+5), fill=(151, 125, 100), width=4)
+            d.line((x+45, y+5, x+185, y), fill=(151, 125, 100), width=4)
     elif subject in ("ocean", "whale"):
         for i in range(5):
             y = 675+i*105
