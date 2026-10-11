@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 44,
+  "attempts": 45,
   "confirmed_today": 44,
-  "last_attempt_at": "2026-10-11T12:28:28.373447+00:00",
+  "last_attempt_at": "2026-10-11T12:54:34.659576+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -904,8 +904,17 @@
       "uploaded_at": "2026-10-11T12:28:30.345004+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "6xMvkfwz7-A": {
+      "content_id": "rayvan-procedural-2fb5d523f835cef6",
+      "title": "Lina and the Clock at the Forgotten Moon Colony",
+      "day": "2026-10-11",
+      "uploaded_at": "2026-10-11T12:54:36.029537+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -1704,6 +1713,12 @@
     "rayvan-procedural-b52d1f1192c8aed9": {
       "at": "2026-10-11T12:28:28.373429+00:00",
       "title": "Mara and the A Door at A Floating Market",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-2fb5d523f835cef6": {
+      "at": "2026-10-11T12:54:34.659560+00:00",
+      "title": "Lina and the Clock at the Forgotten Moon Colony",
       "format": "short",
       "result": "accepted"
     }
