@@ -197,6 +197,13 @@ def make_long_candidate(path, excluded_ids, excluded_titles):
             print("ASTRA_LONG_QA_REJECTED=" + str(exc)[:1800])
             return None
         raise
+    # Produce a real-video-frame cover for long-form episodes without paid APIs.
+    # Keep the video publishable if cover extraction fails.
+    try:
+        from astra_v2.cover_frames import extract_long_cover
+        extract_long_cover(path)
+    except (OSError, RuntimeError, ValueError, ImportError) as cover_error:
+        print("ASTRA_LONG_COVER_UNAVAILABLE=" + type(cover_error).__name__)
     meta = dict(legacy.CONTENT_META)
     cid = str(meta.get("content_id") or episode)
     if cid in excluded_ids or title.casefold().strip() in excluded_titles:
