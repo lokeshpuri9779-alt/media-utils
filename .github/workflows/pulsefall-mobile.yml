@@ -3866,25 +3866,22 @@ jobs:
               'signal died\nsignal hit_confirmed\nsignal damage_received(direction: String)\n',
               1
           )
-          old = '''func take_damage(amount: int) -> void:
-          	if incapacitated:
-          		return
-          	health = maxi(health - amount, 0)
-          	hit.rpc()
-          	health_changed.emit(health, max_health)
-          '''
-          new = '''func take_damage(amount: int, attacker_position: Vector3 = Vector3.INF) -> void:
-          	if incapacitated:
-          		return
-          	health = maxi(health - amount, 0)
-          	hit.rpc()
-          	health_changed.emit(health, max_health)
-          	if attacker_position != Vector3.INF:
-          		damage_received.emit(CombatFeedbackScript.classify_damage_direction(global_transform.basis, attacker_position, global_position))
-          '''
-          if old not in source:
-              raise SystemExit("player damage function anchor missing")
-          source = source.replace(old, new, 1)
+          damage_signature = 'func take_damage(amount: int) -> void:'
+          if damage_signature not in source:
+              raise SystemExit("player damage signature missing")
+          source = source.replace(
+              damage_signature,
+              'func take_damage(amount: int, attacker_position: Vector3 = Vector3.INF) -> void:',
+              1
+          )
+          health_anchor = '\thealth_changed.emit(health, max_health)\n\tif health <= 0:'
+          if health_anchor not in source:
+              raise SystemExit("player health notification anchor missing")
+          source = source.replace(
+              health_anchor,
+              '\thealth_changed.emit(health, max_health)\n\tif attacker_position != Vector3.INF:\n\t\tdamage_received.emit(CombatFeedbackScript.classify_damage_direction(global_transform.basis, attacker_position, global_position))\n\tif health <= 0:',
+              1
+          )
           source = source.replace(
               '\tbullet.add_collision_exception_with(self)\n',
               '\tbullet.add_collision_exception_with(self)\n\tbullet.shooter = self\n',
