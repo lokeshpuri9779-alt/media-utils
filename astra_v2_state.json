@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 51,
-  "confirmed_today": 50,
-  "last_attempt_at": "2026-10-11T14:15:06.731547+00:00",
+  "attempts": 52,
+  "confirmed_today": 51,
+  "last_attempt_at": "2026-10-11T14:25:34.665461+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -944,14 +944,21 @@
       "title": "Lina and the Seed at the Silent Mountain Village",
       "format": "short",
       "uploaded_at": "2026-10-11T14:05:37.877601+00:00"
+    },
+    "rayvan-procedural-c3b7439eb02cb74c": {
+      "video_id": "VvHju7o1Pmo",
+      "confirmed_at": "2026-10-11T14:24:49.694612+00:00",
+      "title": "Pip and the Map at the City Beneath The Ocean",
+      "format": "short",
+      "uploaded_at": "2026-10-11T14:15:08.126852+00:00"
     }
   },
   "pending": {
-    "VvHju7o1Pmo": {
-      "content_id": "rayvan-procedural-c3b7439eb02cb74c",
-      "title": "Pip and the Map at the City Beneath The Ocean",
+    "v-6Ag-KXN2k": {
+      "content_id": "rayvan-procedural-1663ec619fab21f7",
+      "title": "Tara and the Tiny Machine at the City Beneath The Ocean",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T14:15:08.126852+00:00",
+      "uploaded_at": "2026-10-11T14:25:36.488879+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1797,6 +1804,12 @@
     "rayvan-procedural-c3b7439eb02cb74c": {
       "at": "2026-10-11T14:15:06.731530+00:00",
       "title": "Pip and the Map at the City Beneath The Ocean",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-1663ec619fab21f7": {
+      "at": "2026-10-11T14:25:34.665445+00:00",
+      "title": "Tara and the Tiny Machine at the City Beneath The Ocean",
       "format": "short",
       "result": "accepted"
     }
