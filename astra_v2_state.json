@@ -3,7 +3,7 @@
   "day": "2026-10-12",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 9,
-  "confirmed_today": 8,
+  "confirmed_today": 9,
   "last_attempt_at": "2026-10-11T20:28:14.181304+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -1147,19 +1147,17 @@
       "title": "Ivo and the Tiny Machine at the Library Inside A Giant Tree",
       "format": "short",
       "uploaded_at": "2026-10-11T20:07:42.375533+00:00"
-    }
-  },
-  "pending": {
-    "V1eYC4sbGTA": {
-      "content_id": "rayvan-procedural-25aafd820d351d1f",
+    },
+    "rayvan-procedural-25aafd820d351d1f": {
+      "video_id": "V1eYC4sbGTA",
+      "confirmed_at": "2026-10-11T20:32:06.543532+00:00",
       "title": "Ivo and the Sealed Letter Addressed To Tomorrow at the Abandoned Observatory",
-      "day": "2026-10-12",
-      "uploaded_at": "2026-10-11T20:28:16.134465+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-11T20:28:16.134465+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
