@@ -80,7 +80,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [x] Adjustable aim-assist strength.
 - [ ] Gyroscope option.
 - [x] Auto-fire option for accessibility.
-- [ ] Haptics.
+- [x] Haptics.
 - [ ] Camera collision improvements.
 - [ ] Better recoil, hit-stop, hit markers and damage direction feedback.
 
@@ -203,3 +203,13 @@ Validated build: commit `8358f0f0fdfea9435a066cefd9aa87ae753c5182`; APK SHA256 `
 - [x] Workflow run `38119103020` passed import, five-cycle lifecycle soak, extraction, controls and aim-assist gates: 74 checks total, zero detected shutdown leaks, and successful arm64 Android export/upload.
 
 Validated build: commit `152613696aaf8bfdffe7d7cc2d58a6f32932b4db`; APK SHA256 `7db0cc8c97e6ec9b8933c4aa17233edf792e495bbe196e96d1a24006923162e3`; 521,140,527 bytes. v0.2.8 remains the known-good rollback. Real-device installation/performance/thermal testing, player-controlled combat and navigation, a complete human objective-to-extraction run, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
+
+
+## Validated v0.2.10 configurable-haptics checkpoint (2026-10-11)
+
+- [x] Added a persisted HAPTICS switch to the in-game TUNE panel; disabling it suppresses feedback without changing touch input behavior.
+- [x] Centralized 10 gameplay haptic call sites behind the accessibility setting and added a source gate that rejects bypasses.
+- [x] Added persistence round-trip and live TUNE interaction coverage; controls expanded to 35 checks.
+- [x] Workflow run `38133637468` passed import, five-cycle lifecycle soak, extraction, controls and aim-assist gates: 78 checks total, zero detected shutdown leaks, and successful arm64 Android export/upload.
+
+Validated build: commit `6d7ee52c6ce2bdc3b06994165e015edb51a1dc21`; APK SHA256 `a03c92d23e6e481f99c6cd5846ddcdf3a5ec2042069c844c99947df7ff287a20`; 521,140,527 bytes. v0.2.9 remains the known-good rollback. Real-device haptic behavior, installation/performance/thermal testing, player-controlled combat and navigation, a complete human objective-to-extraction run, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
