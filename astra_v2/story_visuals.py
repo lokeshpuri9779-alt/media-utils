@@ -11,6 +11,7 @@ SUBJECTS = (
     ("cat", r"\bcat\b|\bfeline\b|\bkitten\b"),
     ("dog", r"\bdog\b|\bpuppy\b|\bhound\b"),
     ("monkey", r"\bmonkey\b|\bape\b|\bbaboon\b"),
+    ("bird", r"\bbird\b|\bparrot\b|\bsparrow\b|\bcrow\b|\bpigeon\b"),
     ("book", r"\bbook\b|\blibrar\w*|\bpages\b|\bnewspaper\b"),
     ("ocean", r"\bocean\b|\bunderwater\b|\bfish\b|\bjellyfish\b|\bcoral\b"),
     ("clock", r"\bclock\b|\btimepiece\b|\bclocktower\b"),
@@ -73,6 +74,20 @@ def draw_subject(image, subject, t, accent):
             d.ellipse((x+dx-22, 850, x+dx+22, 900), fill=(30, 42, 45))
         d.polygon([(x-18, 938), (x+18, 938), (x, 960)], fill=(255, 185, 190))
         d.arc((x-55, 955, x+55, 990), 0, 180, fill=(35, 38, 44), width=5)
+    elif subject == "bird":
+        x = cx + int(75 * math.sin(t * 1.3))
+        y = 820 + int(55 * math.sin(t * 2.1))
+        wing = int(95 * math.sin(t * 7.0))
+        d.ellipse((x-125, y-80, x+125, y+125),
+                  fill=(63, 160, 166), outline=(132, 220, 207), width=7)
+        d.polygon([(x-45, y+5), (x-220, y-85-wing),
+                   (x-160, y+100)], fill=(37, 117, 150))
+        d.polygon([(x+45, y+5), (x+220, y-85-wing),
+                   (x+160, y+100)], fill=(37, 117, 150))
+        for dx in (-55, 55):
+            d.ellipse((x+dx-15, y-45, x+dx+15, y-15), fill=(24, 39, 47))
+        d.polygon([(x-24, y+7), (x+24, y+7), (x, y+55)],
+                  fill=(246, 177, 72))
     elif subject in ("dog", "monkey"):
         x = cx + sway
         bob = int(15 * abs(math.sin(t * 2.5)))
