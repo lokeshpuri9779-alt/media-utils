@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 53,
-  "confirmed_today": 52,
-  "last_attempt_at": "2026-10-11T14:33:50.746705+00:00",
+  "attempts": 54,
+  "confirmed_today": 53,
+  "last_attempt_at": "2026-10-11T14:45:12.808126+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -958,14 +958,21 @@
       "title": "Tara and the Tiny Machine at the City Beneath The Ocean",
       "format": "short",
       "uploaded_at": "2026-10-11T14:25:36.488879+00:00"
+    },
+    "rayvan-procedural-625a0ed1969a2025": {
+      "video_id": "2UGoffstR90",
+      "confirmed_at": "2026-10-11T14:44:22.964259+00:00",
+      "title": "Tara and the Tiny Machine at the Silent Mountain Village",
+      "format": "short",
+      "uploaded_at": "2026-10-11T14:33:52.172530+00:00"
     }
   },
   "pending": {
-    "2UGoffstR90": {
-      "content_id": "rayvan-procedural-625a0ed1969a2025",
-      "title": "Tara and the Tiny Machine at the Silent Mountain Village",
+    "7Dc5bY8ZFcY": {
+      "content_id": "rayvan-procedural-1e7da5e51c5ee387",
+      "title": "Lina and the Musical Note Nobody Else Can Hear at the Silent Mountain Village",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T14:33:52.172530+00:00",
+      "uploaded_at": "2026-10-11T14:45:14.185269+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1823,6 +1830,12 @@
     "rayvan-procedural-625a0ed1969a2025": {
       "at": "2026-10-11T14:33:50.746691+00:00",
       "title": "Tara and the Tiny Machine at the Silent Mountain Village",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-1e7da5e51c5ee387": {
+      "at": "2026-10-11T14:45:12.808113+00:00",
+      "title": "Lina and the Musical Note Nobody Else Can Hear at the Silent Mountain Village",
       "format": "short",
       "result": "accepted"
     }
