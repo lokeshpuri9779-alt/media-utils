@@ -76,8 +76,8 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 
 ### P2 — Controls / feel
 - [ ] Configurable HUD positions and touch sizes.
-- [ ] Adjustable camera sensitivity.
-- [ ] Adjustable aim-assist strength.
+- [x] Adjustable camera sensitivity.
+- [x] Adjustable aim-assist strength.
 - [ ] Gyroscope option.
 - [ ] Auto-fire option for accessibility.
 - [ ] Haptics.
@@ -174,3 +174,13 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [x] Eliminate the headless shutdown leak: explicit streamed-audio release plus graceful fixture teardown removed four retained OGG objects and two resources. CI now fails on ObjectDB, resource or RID leakage.
 
 Validated v0.2.6 checkpoint: commit `1f32bbe98604123a4fecae3683615fc73a8ce737`, workflow run `37850241618`, clean import gate, five 120-frame level load/run/unload cycles, 55 automated checks passed, zero detected shutdown leaks, and Android export/upload succeeded. Arm64 APK SHA256: `18732347b23a0f45f668835ded0fd35bd4fe4764c777f989b395a986924f56b8`. v0.2.5 remains the rollback build. This accelerated lifecycle gate is not the queued 20–30 minute real-time soak and does not establish real-device performance, a complete player-controlled run, or benchmark superiority.
+
+
+## Validated v0.2.7 mobile-tuning checkpoint (2026-10-09)
+
+- [x] Added an in-game TUNE panel with persisted 50–200% look sensitivity and 0–150% aim-assist strength, including a fully manual/off setting.
+- [x] Added safe clamping and configuration round-trip coverage; expanded controls to 22 checks and aim assist to 13 checks.
+- [x] Strengthened streamed-audio teardown before scene exit after the leak gate caught a nondeterministic OGG playback retention; eight cleanup frames now run per test unload.
+- [x] Workflow run `37881198895` passed import, five-cycle lifecycle soak, extraction, controls and aim-assist gates: 65 checks total, zero detected shutdown leaks, and successful arm64 Android export/upload.
+
+Validated build: commit `1f2ae1b510a5d8d81cc5034936172431bb608a54`; APK SHA256 `9af4993caf3aeb4adfcf6deb2e0d148b9d2eb6112300964a7b8df3bee1e3650d`; 521,136,431 bytes. v0.2.6 remains the known-good rollback. This is still not evidence of real-device performance, human navigation, player-controlled combat/run completion, a 20–30 minute real-time soak, or benchmark superiority.
