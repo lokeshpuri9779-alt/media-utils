@@ -119,7 +119,8 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
                 continue
             try:
                 with zipfile.ZipFile(archive) as z:
-                    if not {"candidate.json", "video.mp4"} <= set(z.namelist()) or not set(z.namelist()) <= {"candidate.json", "video.mp4", "cover.jpg", "cover_wide.jpg"}:
+                    names = set(z.namelist())
+                    if not {"candidate.json", "video.mp4"} <= names or not names <= {"candidate.json", "video.mp4", "cover.jpg", "cover_wide.jpg"}:
                         continue
                     if z.getinfo("video.mp4").file_size > MAX_BYTES:
                         continue
@@ -148,7 +149,7 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
                 continue
             # Recover optional covers for the publisher from trusted artifacts.
             for cover_name in ("cover.jpg", "cover_wide.jpg"):
-                if cover_name in set(z.namelist()):
+                if cover_name in names:
                     try:
                         with zipfile.ZipFile(archive) as cover_zip:
                             entry = cover_zip.getinfo(cover_name)
