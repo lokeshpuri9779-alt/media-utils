@@ -171,6 +171,19 @@ def run():
                 result = youtube.status(video_id)
                 if result.get("privacyStatus") != "public":
                     raise RuntimeError("YouTube did not confirm public visibility: review uploaded video.")
+                # Thumbnail failures must not duplicate or invalidate an accepted upload.
+                # YouTube's custom-thumbnail endpoint is for eligible long-form videos;
+                # Shorts cannot be assigned arbitrary cover files here.
+                if candidate.get("format") == "long":
+                    wide_cover = video.with_name(video.stem + "_cover_wide.jpg")
+                    if wide_cover.is_file():
+                        try:
+                            youtube.set_thumbnail(video_id, wide_cover)
+                            report["thumbnail"] = "applied"
+                        except Exception as thumbnail_error:
+                            report["thumbnail"] = "not_applied_" + type(thumbnail_error).__name__
+                    else:
+                        report["thumbnail"] = "cover_missing"
                 confirmed = reconcile(youtube, state)
                 report.update(
                     outcome="published" if video_id in confirmed else "processing",
