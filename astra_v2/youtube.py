@@ -134,7 +134,7 @@ class Youtube:
         metadata = {
             "snippet": {"title": title[:100], "description": description[:5000],
                         "categoryId": "24", "defaultLanguage": "en"},
-            "status": {"privacyStatus": "public", "selfDeclaredMadeForKids": False,
+            "status": {"privacyStatus": "public", "selfDeclaredMadeForKids": True,
                        "containsSyntheticMedia": bool(synthetic)},
         }
         result = self.client.post(UPLOAD, params={
