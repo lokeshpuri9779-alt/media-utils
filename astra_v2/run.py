@@ -12,6 +12,7 @@ from astra_v2.control import (
 from astra_v2.creative import CreativeSkip, make_candidate, make_long_candidate
 from astra_v2.youtube import Youtube, YoutubeError
 from astra_v2.long_cadence import long_upload_due as historical_long_upload_due
+from astra_v2.publication_quality import publication_rejection
 
 
 def channel_config():
@@ -138,6 +139,10 @@ def run():
                 if candidate.get("format") == "long" and not historical_long_upload_due(
                     state, utcnow(), performance=read_json("performance.json")):
                     report.update(outcome="skipped", reason="longform_24h_cooldown")
+                    return report
+                rejection = publication_rejection(candidate)
+                if rejection:
+                    report.update(outcome="quality_skip", reason=rejection)
                     return report
                 cid = candidate["content_id"]
                 title = candidate["title"]
