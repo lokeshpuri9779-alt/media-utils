@@ -42,6 +42,20 @@ class AnimalScenesTests(unittest.TestCase):
             "bird",
         )
 
+    def test_animal_not_hidden_by_book_overlay(self):
+        # Book artwork formerly covered both animals at the center of the shot.
+        for subject in ("dog", "monkey"):
+            with self.subTest(subject=subject):
+                image = Image.new("RGB", (1080, 1920), (24, 34, 52))
+                self.assertTrue(draw_subject(image, subject, 0.0, (236, 174, 112)))
+                self.assertNotEqual(image.getpixel((520, 850)), (244, 223, 181))
+                self.assertNotEqual(image.getpixel((520, 850)), (228, 208, 171))
+
+    def test_book_remains_illustrated(self):
+        image = Image.new("RGB", (1080, 1920), (24, 34, 52))
+        self.assertTrue(draw_subject(image, "book", 0.0, (236, 174, 112)))
+        self.assertEqual(image.getpixel((400, 800)), (244, 223, 181))
+
     def test_animation_changes_frames(self):
         for subject in ("dog", "monkey", "bird", "rabbit"):
             with self.subTest(subject=subject):
