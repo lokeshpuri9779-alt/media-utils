@@ -3,7 +3,7 @@
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 57,
-  "confirmed_today": 56,
+  "confirmed_today": 57,
   "last_attempt_at": "2026-10-11T15:20:30.091316+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -986,19 +986,17 @@
       "title": "Lina and the Door at the Silent Mountain Village",
       "format": "short",
       "uploaded_at": "2026-10-11T15:06:23.757276+00:00"
-    }
-  },
-  "pending": {
-    "rueW2ITVARs": {
-      "content_id": "rayvan-procedural-03ca31b71976f734",
+    },
+    "rayvan-procedural-03ca31b71976f734": {
+      "video_id": "rueW2ITVARs",
+      "confirmed_at": "2026-10-11T15:24:56.968859+00:00",
       "title": "Tara and the Door at the Library Inside A Giant Tree",
-      "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T15:20:32.592756+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-11T15:20:32.592756+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
