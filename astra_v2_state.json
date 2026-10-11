@@ -3,7 +3,7 @@
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 40,
-  "confirmed_today": 39,
+  "confirmed_today": 40,
   "last_attempt_at": "2026-10-11T11:30:00.812886+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -867,19 +867,17 @@
       "title": "Mara and the A Clock at A Floating Market",
       "format": "short",
       "uploaded_at": "2026-10-11T11:10:25.209056+00:00"
-    }
-  },
-  "pending": {
-    "zYqdC3IRV8k": {
-      "content_id": "rayvan-procedural-2243885c0dd3548b",
+    },
+    "rayvan-procedural-2243885c0dd3548b": {
+      "video_id": "zYqdC3IRV8k",
+      "confirmed_at": "2026-10-11T11:34:18.517611+00:00",
       "title": "Lina and the Lantern at the Library Inside A Giant Tree",
-      "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T11:30:02.621728+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-11T11:30:02.621728+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
