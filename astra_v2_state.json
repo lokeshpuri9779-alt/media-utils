@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 48,
+  "attempts": 49,
   "confirmed_today": 48,
-  "last_attempt_at": "2026-10-11T13:33:22.377208+00:00",
+  "last_attempt_at": "2026-10-11T13:51:32.902393+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -932,8 +932,17 @@
       "uploaded_at": "2026-10-11T13:33:23.822103+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "idM8Jfh2R_o": {
+      "content_id": "rayvan-procedural-097f263097fe9074",
+      "title": "Tara and the Tiny Machine at the Library Inside A Giant Tree",
+      "day": "2026-10-11",
+      "uploaded_at": "2026-10-11T13:51:34.301244+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -1756,6 +1765,12 @@
     "rayvan-procedural-bbc14d86d166a7bd": {
       "at": "2026-10-11T13:33:22.377193+00:00",
       "title": "Pip and the Tiny Machine at the Forgotten Moon Colony",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-097f263097fe9074": {
+      "at": "2026-10-11T13:51:32.902379+00:00",
+      "title": "Tara and the Tiny Machine at the Library Inside A Giant Tree",
       "format": "short",
       "result": "accepted"
     }
