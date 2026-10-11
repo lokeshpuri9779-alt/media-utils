@@ -21,6 +21,15 @@ class StoryVisualTests(unittest.TestCase):
         self.assertEqual(select_subject({"title": "The Museum of Tomorrows"},
                                         {"speech": "A cat appeared at the museum."}), "cat")
 
+    def test_ocean_does_not_draw_whale(self):
+        ocean = Image.new("RGB", (1080, 1920), (8, 11, 28))
+        whale = Image.new("RGB", (1080, 1920), (8, 11, 28))
+        self.assertTrue(draw_subject(ocean, "ocean", 0.0, (188, 163, 255)))
+        self.assertTrue(draw_subject(whale, "whale", 0.0, (188, 163, 255)))
+        # Center of the whale's body is deliberately empty in ocean-only scenes.
+        self.assertEqual(ocean.getpixel((520, 900)), (8, 11, 28))
+        self.assertEqual(whale.getpixel((520, 900)), (79, 155, 185))
+
     def test_subject_draws_actual_pixels(self):
         for subject in ("cat", "book", "ocean", "clock", "tree", "train", "moon", "robot"):
             with self.subTest(subject=subject):
