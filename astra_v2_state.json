@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "day": "2026-10-11",
+  "day": "2026-10-12",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 71,
-  "confirmed_today": 70,
-  "last_attempt_at": "2026-10-11T18:22:44.813044+00:00",
+  "attempts": 1,
+  "confirmed_today": 0,
+  "last_attempt_at": "2026-10-11T18:37:51.323379+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1084,14 +1084,21 @@
       "title": "Arun and the Door at the Abandoned Observatory",
       "format": "short",
       "uploaded_at": "2026-10-11T18:15:22.250166+00:00"
+    },
+    "rayvan-procedural-220feaacc68fda44": {
+      "video_id": "LyfWxagM2Ck",
+      "confirmed_at": "2026-10-11T18:36:49.696860+00:00",
+      "title": "Mara and the Musical Note Nobody Else Can Hear at the Glass Desert",
+      "format": "short",
+      "uploaded_at": "2026-10-11T18:22:46.801107+00:00"
     }
   },
   "pending": {
-    "LyfWxagM2Ck": {
-      "content_id": "rayvan-procedural-220feaacc68fda44",
-      "title": "Mara and the Musical Note Nobody Else Can Hear at the Glass Desert",
-      "day": "2026-10-11",
-      "uploaded_at": "2026-10-11T18:22:46.801107+00:00",
+    "YP5GOkbvDAU": {
+      "content_id": "rayvan-procedural-2d731f165b65c168",
+      "title": "Ivo and the Musical Note Nobody Else Can Hear at the Train Station At The Edge Of Time",
+      "day": "2026-10-12",
+      "uploaded_at": "2026-10-11T18:37:53.380344+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -2057,6 +2064,12 @@
     "rayvan-procedural-220feaacc68fda44": {
       "at": "2026-10-11T18:22:44.813031+00:00",
       "title": "Mara and the Musical Note Nobody Else Can Hear at the Glass Desert",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-2d731f165b65c168": {
+      "at": "2026-10-11T18:37:51.323364+00:00",
+      "title": "Ivo and the Musical Note Nobody Else Can Hear at the Train Station At The Edge Of Time",
       "format": "short",
       "result": "accepted"
     }
