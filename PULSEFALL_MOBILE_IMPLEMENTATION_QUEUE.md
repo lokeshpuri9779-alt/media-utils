@@ -78,7 +78,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [x] Configurable HUD positions and touch sizes.
 - [x] Adjustable camera sensitivity.
 - [x] Adjustable aim-assist strength.
-- [ ] Gyroscope option.
+- [x] Optional gyroscope aim with persisted OFF/LOW/MED/HIGH modes, noise dead-zone and bounded sensor-spike response.
 - [x] Auto-fire option for accessibility.
 - [x] Haptics.
 - [x] Camera collision improvements.
@@ -246,3 +246,15 @@ Validated build: commit `14119b3e7259e54b400179448028d64adf54094c`; APK SHA256 `
 - [x] Workflow runs `38161695322` and `38161695339` passed import, five-cycle lifecycle soak, extraction, controls, aim-assist, camera, combat-feedback and combat-feel gates: 103 checks total, zero detected shutdown leaks, and successful arm64 Android exports.
 
 Validated build: commit `41b06f2c961325ba86020435bcb0a40b1f22fded`; APK SHA256 `7522371c60e2740dabdf1256fb71d4728590558b531bd5cd76f6e03cc2aebd78`; 521,149,202 bytes. v0.2.12 remains the known-good rollback. Recoil strength and hit-stop feel still require player-controlled device testing; human navigation, real-device performance/thermal behavior, a complete objective-to-extraction run, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
+
+
+
+## Validated v0.2.14 gyro-control checkpoint (2026-10-12)
+
+- [x] Added optional gyro aiming with persisted OFF/LOW/MED/HIGH response modes; the default remains OFF.
+- [x] Added a 0.04 rad/s sensor dead-zone and a bounded per-frame camera step to suppress drift and spikes.
+- [x] Added eleven gyro math/config checks covering defaults, mode scaling, axis mapping, dead-zone filtering, frame-delta safety, spike capping and persistence.
+- [x] Initial validation rejected one floating-point boundary assertion and exposed an audio teardown leak; commit `a53599238563d5ab81df226397f45a7e4070dba6` corrected the assertion tolerance and strengthened the soak to flush audio before synchronous scene release.
+- [x] Workflow runs `38185810049` and `38185810078` passed import, five-cycle lifecycle soak, extraction, controls, aim-assist, camera, combat-feedback, combat-feel and gyro gates: 114 checks total, zero detected shutdown leaks, and successful arm64 Android exports.
+
+Validated build: commit `a53599238563d5ab81df226397f45a7e4070dba6`; APK SHA256 `a38e2123950db88d22fa7434da408bd4dcc4eb7704eb4331c335aa2fb5a39853`; 521,153,447 bytes. v0.2.13 remains the known-good rollback. Physical sensor direction/latency and comfort require real-device player testing; human navigation, real-device performance/thermal behavior, a complete objective-to-extraction run, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
