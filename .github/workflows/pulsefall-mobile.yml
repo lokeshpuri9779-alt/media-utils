@@ -3679,10 +3679,12 @@ jobs:
                   router = "MobileTuning"
                   if "const MobileTuning" not in text:
                       router = "PulseHaptics"
-                      first_break = text.find("\n")
-                      if first_break < 0:
-                          raise SystemExit(f"Cannot inject haptic router into {script}")
-                      text = text[:first_break + 1] + 'const PulseHaptics = preload("res://mobile/mobile_tuning.gd")\n' + text[first_break + 1:]
+                      lines = text.splitlines(keepends=True)
+                      extends_index = next((i for i, line in enumerate(lines) if line.lstrip().startswith("extends ")), -1)
+                      if extends_index < 0:
+                          raise SystemExit(f"Cannot find extends declaration in {script}")
+                      lines.insert(extends_index + 1, 'const PulseHaptics = preload("res://mobile/mobile_tuning.gd")\n')
+                      text = "".join(lines)
                   text = text.replace("Input.vibrate_handheld(", f"{router}.pulse_haptic(")
                   script.write_text(text)
                   routed += count
