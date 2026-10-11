@@ -83,7 +83,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [x] Haptics.
 - [x] Camera collision improvements.
 - [x] Hit markers and directional incoming-damage feedback.
-- [ ] Better recoil and hit-stop.
+- [x] Bounded per-weapon recoil with automatic recovery and enemy-local hit-stop.
 
 ### P3 — Combat content
 - [ ] At least 3 genuinely different weapons.
@@ -235,3 +235,14 @@ Validated build: commit `0533aea94eea6ba68bab6538b4c9c45c1ed855e0`; APK SHA256 `
 - [x] Workflow run `38156931685` passed import, five-cycle lifecycle soak, extraction, controls, aim-assist, camera and combat-feedback gates: 94 checks total, zero detected shutdown leaks, and successful arm64 Android export/upload.
 
 Validated build: commit `14119b3e7259e54b400179448028d64adf54094c`; APK SHA256 `f92b315f6c1f30fea6d5fc6a1462135c9d97a3bccce0d372959dd3953470ed3b`; 521,144,951 bytes. v0.2.11 remains the known-good rollback. Recoil/hit-stop tuning, human readability and comfort, player-controlled combat/navigation, real-device performance/thermal behavior, a complete human objective-to-extraction run, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
+
+
+## Validated v0.2.13 combat-feel checkpoint (2026-10-11)
+
+- [x] Added distinct carbine, scatter and lance recoil impulses with alternating bounded yaw and automatic pitch/yaw recovery.
+- [x] Added enemy-local hit-stop capped at 50 ms; extraction timers and global game time remain unaffected.
+- [x] Added nine recoil and hit-stop boundary checks.
+- [x] Initial validation rejected an untyped recoil vector before export; commit `41b06f2c961325ba86020435bcb0a40b1f22fded` corrected it.
+- [x] Workflow runs `38161695322` and `38161695339` passed import, five-cycle lifecycle soak, extraction, controls, aim-assist, camera, combat-feedback and combat-feel gates: 103 checks total, zero detected shutdown leaks, and successful arm64 Android exports.
+
+Validated build: commit `41b06f2c961325ba86020435bcb0a40b1f22fded`; APK SHA256 `7522371c60e2740dabdf1256fb71d4728590558b531bd5cd76f6e03cc2aebd78`; 521,149,202 bytes. v0.2.12 remains the known-good rollback. Recoil strength and hit-stop feel still require player-controlled device testing; human navigation, real-device performance/thermal behavior, a complete objective-to-extraction run, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
