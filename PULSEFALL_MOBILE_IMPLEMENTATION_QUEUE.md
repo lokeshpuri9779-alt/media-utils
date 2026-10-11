@@ -81,7 +81,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [ ] Gyroscope option.
 - [x] Auto-fire option for accessibility.
 - [x] Haptics.
-- [ ] Camera collision improvements.
+- [x] Camera collision improvements.
 - [ ] Better recoil, hit-stop, hit markers and damage direction feedback.
 
 ### P3 — Combat content
@@ -213,3 +213,13 @@ Validated build: commit `152613696aaf8bfdffe7d7cc2d58a6f32932b4db`; APK SHA256 `
 - [x] Workflow run `38133637468` passed import, five-cycle lifecycle soak, extraction, controls and aim-assist gates: 78 checks total, zero detected shutdown leaks, and successful arm64 Android export/upload.
 
 Validated build: commit `6d7ee52c6ce2bdc3b06994165e015edb51a1dc21`; APK SHA256 `a03c92d23e6e481f99c6cd5846ddcdf3a5ec2042069c844c99947df7ff287a20`; 521,140,527 bytes. v0.2.9 remains the known-good rollback. Real-device haptic behavior, installation/performance/thermal testing, player-controlled combat and navigation, a complete human objective-to-extraction run, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
+
+
+## Validated v0.2.11 camera-collision checkpoint (2026-10-11)
+
+- [x] Replaced the thin third-person camera probe with a 0.22 m swept sphere, added a 0.08 m wall margin and tightened the camera near plane to 0.08 m.
+- [x] Explicitly excluded the player body and limited camera collision to world geometry, reducing self-collision and wall clipping risk.
+- [x] Added seven camera-configuration regression checks.
+- [x] Workflow run `38136620728` passed import, five-cycle lifecycle soak, extraction, controls, aim-assist and camera gates: 85 checks total, zero detected shutdown leaks, and successful arm64 Android export/upload.
+
+Validated build: commit `0533aea94eea6ba68bab6538b4c9c45c1ed855e0`; APK SHA256 `565ab32ba35467e6fe72e558209d2af56dc83d224955367a6c00dc4ccbe9cfdb`; 521,144,788 bytes. v0.2.10 remains the known-good rollback. Human camera comfort, navigation in tight spaces, real-device performance/thermal behavior, player-controlled combat, a complete objective-to-extraction run, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
