@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 25,
-  "confirmed_today": 24,
-  "last_attempt_at": "2026-10-10T23:59:43.479345+00:00",
+  "attempts": 26,
+  "confirmed_today": 25,
+  "last_attempt_at": "2026-10-11T00:09:11.266784+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -762,14 +762,21 @@
       "title": "Arun and the Door at the Glass Desert",
       "format": "short",
       "uploaded_at": "2026-10-10T23:52:40.833164+00:00"
+    },
+    "rayvan-procedural-250d80d333732f78": {
+      "video_id": "x-CabbA_2ko",
+      "confirmed_at": "2026-10-11T00:08:21.964128+00:00",
+      "title": "Noor and the Clock at the Abandoned Observatory",
+      "format": "short",
+      "uploaded_at": "2026-10-10T23:59:45.520679+00:00"
     }
   },
   "pending": {
-    "x-CabbA_2ko": {
-      "content_id": "rayvan-procedural-250d80d333732f78",
-      "title": "Noor and the Clock at the Abandoned Observatory",
+    "iryZ8xoXkCw": {
+      "content_id": "rayvan-procedural-36e4987f185fe507",
+      "title": "Tara and the Seed at the Library Inside A Giant Tree",
       "day": "2026-10-11",
-      "uploaded_at": "2026-10-10T23:59:45.520679+00:00",
+      "uploaded_at": "2026-10-11T00:09:12.957949+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -1459,6 +1466,12 @@
     "rayvan-procedural-250d80d333732f78": {
       "at": "2026-10-10T23:59:43.479330+00:00",
       "title": "Noor and the Clock at the Abandoned Observatory",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-36e4987f185fe507": {
+      "at": "2026-10-11T00:09:11.266769+00:00",
+      "title": "Tara and the Seed at the Library Inside A Giant Tree",
       "format": "short",
       "result": "accepted"
     }
