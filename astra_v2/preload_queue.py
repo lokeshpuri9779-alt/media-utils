@@ -148,7 +148,7 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
                 continue
             # Recover optional covers for the publisher from trusted artifacts.
             for cover_name in ("cover.jpg", "cover_wide.jpg"):
-                if cover_name in names:
+                if cover_name in set(z.namelist()):
                     try:
                         with zipfile.ZipFile(archive) as cover_zip:
                             entry = cover_zip.getinfo(cover_name)
