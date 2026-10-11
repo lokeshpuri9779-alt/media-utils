@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-11",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 66,
+  "attempts": 67,
   "confirmed_today": 66,
-  "last_attempt_at": "2026-10-11T17:00:53.211997+00:00",
+  "last_attempt_at": "2026-10-11T17:20:06.281861+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1058,8 +1058,17 @@
       "uploaded_at": "2026-10-11T17:00:54.523271+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
+  "pending": {
+    "0jtOY8coHlg": {
+      "content_id": "rayvan-procedural-0e428873f600aa30",
+      "title": "Emi and the Lantern at the Glass Desert",
+      "day": "2026-10-11",
+      "uploaded_at": "2026-10-11T17:20:08.982976+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "YouTube oauth_refresh: HTTP 400; reason=http_error",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -1990,6 +1999,12 @@
     "rayvan-procedural-a9af24893193d0fc": {
       "at": "2026-10-11T17:00:53.211982+00:00",
       "title": "Arun and the Musical Note Nobody Else Can Hear at the Forgotten Moon Colony",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-0e428873f600aa30": {
+      "at": "2026-10-11T17:20:06.281845+00:00",
+      "title": "Emi and the Lantern at the Glass Desert",
       "format": "short",
       "result": "accepted"
     }
