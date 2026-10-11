@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-12",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 7,
-  "confirmed_today": 6,
-  "last_attempt_at": "2026-10-11T19:55:03.507745+00:00",
+  "attempts": 8,
+  "confirmed_today": 7,
+  "last_attempt_at": "2026-10-11T20:07:41.037732+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1133,14 +1133,21 @@
       "title": "Noor and the Door at the Train Station At The Edge Of Time",
       "format": "short",
       "uploaded_at": "2026-10-11T19:37:53.328370+00:00"
+    },
+    "rayvan-procedural-cd677d5d04b15bb5": {
+      "video_id": "Xkz5OXw8baE",
+      "confirmed_at": "2026-10-11T20:06:54.951666+00:00",
+      "title": "Arun and the Map at the Abandoned Observatory",
+      "format": "short",
+      "uploaded_at": "2026-10-11T19:55:05.667776+00:00"
     }
   },
   "pending": {
-    "Xkz5OXw8baE": {
-      "content_id": "rayvan-procedural-cd677d5d04b15bb5",
-      "title": "Arun and the Map at the Abandoned Observatory",
+    "EfNGLMCkhw8": {
+      "content_id": "rayvan-procedural-259914ec57939524",
+      "title": "Ivo and the Tiny Machine at the Library Inside A Giant Tree",
       "day": "2026-10-12",
-      "uploaded_at": "2026-10-11T19:55:05.667776+00:00",
+      "uploaded_at": "2026-10-11T20:07:42.375533+00:00",
       "genre": "fiction",
       "format": "short"
     }
@@ -2148,6 +2155,12 @@
     "rayvan-procedural-cd677d5d04b15bb5": {
       "at": "2026-10-11T19:55:03.507728+00:00",
       "title": "Arun and the Map at the Abandoned Observatory",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-procedural-259914ec57939524": {
+      "at": "2026-10-11T20:07:41.037717+00:00",
+      "title": "Ivo and the Tiny Machine at the Library Inside A Giant Tree",
       "format": "short",
       "result": "accepted"
     }
