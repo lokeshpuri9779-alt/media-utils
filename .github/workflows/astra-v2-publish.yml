@@ -124,22 +124,28 @@ jobs:
           command -v ffprobe
 
       - name: Test automated long-form cover generation
+        id: cover_tests
         if: steps.preflight.outputs.render_due == 'true'
         run: python -m unittest discover -s tests -p 'test_astra_cover_frames.py' -v
       - name: Enforce real frame-to-frame motion
+        id: motion_tests
         if: steps.preflight.outputs.render_due == 'true'
         run: python -m unittest discover -s tests -p 'test_astra_motion_gate.py' -v
       - name: Verify animated animal scenes
+        id: animal_tests
         if: steps.preflight.outputs.render_due == 'true'
         run: python -m unittest discover -s tests -p 'test_astra_animal_scenes.py' -v
       - name: Test trusted video and cover packages
+        id: cover_package_tests
         if: steps.preflight.outputs.render_due == 'true'
         run: python -m unittest discover -s tests -p 'test_astra_preload_covers.py' -v
       - name: Verify publication safety gate
+        id: quality_tests
         if: steps.preflight.outputs.render_due == 'true'
         run: python -m unittest discover -s tests -p 'test_astra_publication_quality.py' -v
 
       - name: Run V2 policy and API regression tests
+        id: policy_tests
         if: steps.preflight.outputs.render_due == 'true'
         run: |
           python -m unittest discover -s tests -p 'test_astra_v2.py' -v
@@ -147,6 +153,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_astra_youtube_oauth_errors.py' -v
 
       - name: Block foreground animation and caption overlaps
+        id: layer_tests
         if: steps.preflight.outputs.render_due == 'true'
         run: python -m unittest discover -s tests -p 'test_scene_layer_contract.py' -v
 
@@ -165,6 +172,13 @@ jobs:
           JOB_RESULT: ${{ job.status }}
           DEPENDENCIES_RESULT: ${{ steps.dependencies.outcome }}
           PUBLISH_RESULT: ${{ steps.publish_video.outcome }}
+          COVER_TESTS: ${{ steps.cover_tests.outcome }}
+          MOTION_TESTS: ${{ steps.motion_tests.outcome }}
+          ANIMAL_TESTS: ${{ steps.animal_tests.outcome }}
+          COVER_PACKAGE_TESTS: ${{ steps.cover_package_tests.outcome }}
+          QUALITY_TESTS: ${{ steps.quality_tests.outcome }}
+          POLICY_TESTS: ${{ steps.policy_tests.outcome }}
+          LAYER_TESTS: ${{ steps.layer_tests.outcome }}
         shell: bash
         run: |
           python - <<'PY'
@@ -185,6 +199,13 @@ jobs:
               "job_status_before_persist": os.getenv("JOB_RESULT", "unknown"),
               "dependencies_step": os.getenv("DEPENDENCIES_RESULT", "unknown"),
               "publish_step": os.getenv("PUBLISH_RESULT", "unknown"),
+              "cover_tests": os.getenv("COVER_TESTS", "unknown"),
+              "motion_tests": os.getenv("MOTION_TESTS", "unknown"),
+              "animal_tests": os.getenv("ANIMAL_TESTS", "unknown"),
+              "cover_package_tests": os.getenv("COVER_PACKAGE_TESTS", "unknown"),
+              "quality_tests": os.getenv("QUALITY_TESTS", "unknown"),
+              "policy_tests": os.getenv("POLICY_TESTS", "unknown"),
+              "layer_tests": os.getenv("LAYER_TESTS", "unknown"),
           }
           p.write_text(json.dumps(state, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
           PY
