@@ -10,15 +10,22 @@
   "published": {},
   "pending": {},
   "last_outcome": "ready",
-  "last_preflight_at": "2026-10-12T18:45:45.355180+00:00",
+  "last_preflight_at": "2026-10-12T18:49:21.422300+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-12T18:46:28.589044+00:00",
+    "at": "2026-10-12T18:49:50.453126+00:00",
     "preflight_step": "success",
     "render_due": "true",
     "job_status_before_persist": "failure",
     "dependencies_step": "success",
-    "publish_step": "skipped"
+    "publish_step": "skipped",
+    "cover_tests": "failure",
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "layer_tests": "skipped"
   }
 }
