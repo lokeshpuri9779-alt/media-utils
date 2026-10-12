@@ -473,8 +473,7 @@ def score_audio(plan, duration, genre, path):
     return {'peak_dbfs':round(20*math.log10(max(float(np.max(np.abs(mixed))),1e-9)),2),'voice':'Kokoro expressive profile','music':'subtle procedural bed'}
 
 
-@lru_cache(maxsize=5)
-@lru_cache(maxsize=24)
+@lru_cache(maxsize=6)
 def background(genre, variant=0):
     """Reproducible shot-specific lighting without additional model/API cost."""
     top,bottom,accent=THEMES[genre]
