@@ -91,9 +91,12 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
     # Only confirmed published IDs unlock the following installment.
     from astra_v2.control import STATE_FILE, read_json, state_for_day
     published = set(state_for_day(read_json(STATE_FILE)).get("published", {}))
+    # Shorts-first publishing: a ready long-form package must not displace
+    # eligible Shorts merely because the separate long-form lane completed.
+    # Long-form remains eligible when no valid Short is available.
     for entry in sorted(artifacts(), key=lambda a: (
-        0 if allow_long and str(a.get("name", "")).startswith(
-            ("astra-preloaded-planet-clocks-", "astra-preloaded-trend-brief-")) else 1,
+        1 if str(a.get("name", "")).startswith(
+            ("astra-preloaded-planet-clocks-", "astra-preloaded-trend-brief-")) else 0,
         a.get("created_at", ""))):
         cid = str(entry["name"])[len(PREFIX):]
         if os.getenv("ASTRA_SERIES_PUBLICATION", "0") == "1" and not cid.startswith("rayvan-season-01-episode-"):
