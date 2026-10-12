@@ -132,6 +132,11 @@ def make_candidate(path, excluded_ids, excluded_titles):
             rendered = render_short(story, path)
             evaluation = evaluate_studio_render(story, rendered, video_path=path)
             if not evaluation.get("pass"):
+                from astra_v2.stage_feedback import record
+                director = evaluation.get("director") or {}
+                for component, score in (director.get("component_scores") or {}).items():
+                    record("quality", str(component), "fail", evidence={"score": score, "candidate": story.get("content_id")}, action="Review Creative Director repair plan", candidate_id=story.get("content_id"))
+                record("render", "studio_render", "fail", evidence={"hard_failures": director.get("hard_failures"), "media_failures": (evaluation.get("media_qa") or {}).get("hard_failures"), "layer_failures": (evaluation.get("layer_qa") or {}).get("failures")}, action=str(director.get("repair_plan") or "")[:250], candidate_id=story.get("content_id"))
                 print("Premium QA rejected:", story["content_id"],
                       json.dumps({"action": (evaluation.get("director") or {}).get("action"),
                                   "scores": (evaluation.get("director") or {}).get("component_scores"),
@@ -142,6 +147,9 @@ def make_candidate(path, excluded_ids, excluded_titles):
                                   "layer_failures": (evaluation.get("layer_qa") or {}).get("failures"),
                                   "duration": rendered.get("duration")}, default=str))
                 continue
+            from astra_v2.stage_feedback import record
+            record("quality", "creative_director", "pass", evidence={"scores": (evaluation.get("director") or {}).get("component_scores") or {}}, candidate_id=story.get("content_id"))
+            record("render", "studio_render", "pass", evidence={"duration": rendered.get("duration"), "renderer": rendered.get("renderer")}, candidate_id=story.get("content_id"))
             legacy.CONTENT_META = {
                 "genre": story["genre"], "content_id": story["content_id"],
                 "source": story.get("source"), "creative_director": evaluation["director"],
