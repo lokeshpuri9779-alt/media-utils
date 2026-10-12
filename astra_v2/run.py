@@ -135,6 +135,7 @@ def run():
                     # Prefer previously rendered, approved MP4s from the durable
                     # queue; never skip duplicate/format/channel safety checks.
                     candidate = None
+                    candidate_from_preload = False
                     if os.getenv("ASTRA_PRELOAD_ENABLED", "1") == "1":
                         try:
                             from astra_v2.preload_queue import take
@@ -149,6 +150,7 @@ def run():
                         candidate = ((make_long_candidate(video, previous_ids | live_ids, live_titles) if long_due else None)
                                      or make_candidate(video, previous_ids | live_ids, live_titles))
                     else:
+                        candidate_from_preload = True
                         print("ASTRA_PRELOAD_CONSUMED=" + candidate["content_id"])
                 except CreativeSkip as exc:
                     from astra_v2.stage_feedback import record
@@ -160,7 +162,7 @@ def run():
                     report.update(outcome="skipped", reason="longform_24h_cooldown")
                     return report
                 rejection = publication_rejection(candidate)
-                if rejection and os.getenv("ASTRA_PRELOAD_ONLY", "0") != "1":
+                if rejection and candidate_from_preload and os.getenv("ASTRA_PRELOAD_ONLY", "0") != "1":
                     # Old queue artifacts can predate the current publication
                     # policy. Never upload them; render a fresh approved story
                     # instead of wasting every scheduled slot on stale media.
