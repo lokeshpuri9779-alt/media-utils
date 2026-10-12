@@ -64,7 +64,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [x] ETC2/ASTC texture import enabled for Android.
 - [x] Produce APK validated by Android export and automated runtime checks; real-device installation remains pending.
 - [x] Verify APK package metadata, signature, checksum and arm64-only architecture after export.
-- [ ] Add AAB export path for Play Store release candidates.
+- [x] Add a validated Gradle-backed AAB export path for release candidates; production upload-key signing remains pending.
 
 ### P1 — Core mobile game loop
 - [ ] Replace wave-only structure with 5–10 minute run.
@@ -268,3 +268,14 @@ Validated build: commit `a53599238563d5ab81df226397f45a7e4070dba6`; APK SHA256 `
 - [x] Workflow runs `38201451553` and `38201451551` passed 114 game/runtime checks, the seven APK package checks, zero detected shutdown leaks, and successful arm64 Android export/upload.
 
 Validated build: commit `5f6775ef2c922391a0ef0a23dea5c0de66d09113`; APK SHA256 `b3d03f40abde5f248a9c6b27c36be38eed4825389d5ae29257598b8c05960705`; 521,153,447 bytes. v0.2.14 remains the known-good rollback. This verifies archive identity/integrity, not physical installation, player-controlled combat/navigation, real-device performance/thermal behavior, a complete human objective-to-extraction run, a 20–30 minute real-time soak, or benchmark superiority.
+
+
+## Validated v0.2.16 AAB-export checkpoint (2026-10-12)
+
+- [x] Added a separate Gradle-backed Android App Bundle export path with pinned Godot 4.7.2 templates, Java 17 and explicit Android SDK dependencies.
+- [x] Added fail-closed AAB checksum, ZIP-integrity, JAR-signature, base-manifest and arm64-v8a-only checks.
+- [x] Returned a nondeterministic extraction-test audio teardown leak to the stability queue; pre-flush plus synchronous scene release removed the leak without weakening the gate.
+- [x] Split APK and AAB delivery artifacts so the directly installable APK stays below the download service's per-archive limit.
+- [x] Workflow runs `38226352754` and `38226352752` passed 114 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
+
+Validated build: commit `ad4a66102cad3338c42e2ddf344b293514c363ae`; APK SHA256 `6198aaf9981d6bdbf47568d78770100c533ae54303faf7071da2b4554923a993`; 521,153,447 bytes. v0.2.15 remains the known-good rollback. The AAB is debug-signed for pipeline validation only; production upload-key signing, store submission, physical installation, player-controlled combat/navigation, real-device performance/thermal behavior, a complete human objective-to-extraction run, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
