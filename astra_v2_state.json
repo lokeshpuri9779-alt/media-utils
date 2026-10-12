@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 21,
-  "confirmed_today": 20,
-  "last_attempt_at": "2026-10-12T23:02:02.356659+00:00",
+  "attempts": 22,
+  "confirmed_today": 21,
+  "last_attempt_at": "2026-10-12T23:10:11.941106+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -147,25 +147,32 @@
       "title": "The Bear Who Fixed the Moon",
       "format": "short",
       "uploaded_at": "2026-10-12T22:53:20.498847+00:00"
+    },
+    "rayvan-free-original-1ecf425b029c3427": {
+      "video_id": "W1KfkBmnCII",
+      "confirmed_at": "2026-10-12T23:08:08.223098+00:00",
+      "title": "The Signal Hidden Inside a Seed",
+      "format": "short",
+      "uploaded_at": "2026-10-12T23:02:04.459924+00:00"
     }
   },
   "pending": {
-    "W1KfkBmnCII": {
-      "content_id": "rayvan-free-original-1ecf425b029c3427",
-      "title": "The Signal Hidden Inside a Seed",
+    "wWP8LbknBVg": {
+      "content_id": "rayvan-free-original-91bb2e14b884a96b",
+      "title": "The Door That Remembered the Moon",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-12T23:02:04.459924+00:00",
+      "uploaded_at": "2026-10-12T23:10:14.062878+00:00",
       "genre": "fiction",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-12T23:00:29.964682+00:00",
+  "last_preflight_at": "2026-10-12T23:08:07.772986+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-12T23:02:04.875912+00:00",
+    "at": "2026-10-12T23:10:14.390317+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -307,6 +314,12 @@
     "rayvan-free-original-1ecf425b029c3427": {
       "at": "2026-10-12T23:02:02.356643+00:00",
       "title": "The Signal Hidden Inside a Seed",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-free-original-91bb2e14b884a96b": {
+      "at": "2026-10-12T23:10:11.941091+00:00",
+      "title": "The Door That Remembered the Moon",
       "format": "short",
       "result": "accepted"
     }
