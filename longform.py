@@ -52,7 +52,7 @@ def long_plan():
     return plan
 
 
-def choose_episode(data,now):
+def choose_episode(data,now,excluded_ids=()):
     """Return at most two quality long-form episodes per India-local day.
 
     The one-time sourced Planet Clocks episode remains valid. After that, Astra
@@ -86,7 +86,7 @@ def choose_episode(data,now):
     if len(today_long)>=2:
         print("ASTRA_LONGFORM_SUPPLY=daily_cap_reached")
         return None
-    if not planet_published:
+    if not planet_published and EPISODE_ID not in excluded_ids:
         return EPISODE_ID
 
     snap=data.get('trend_snapshot') or {}
