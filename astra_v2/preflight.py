@@ -98,9 +98,11 @@ def main():
         from astra_v2.run import channel_config
         channel_name, expected_id = channel_config()
         report["channel"] = channel_name
+        authenticated = False
         if state.get("pending"):
             with Youtube(expected_id) as youtube:
                 youtube.authorize()  # validates exact authorized channel
+                authenticated = True
                 confirmed, pending, review = reconcile_pending(youtube, state, channel_name)
             report.update(
                 confirmed_prior=confirmed,
@@ -112,6 +114,14 @@ def main():
         allowed, reason = due(state, utcnow(), limit=limit, spacing_minutes=interval)
         report["render_due"] = allowed
         report["reason"] = reason
+        # Check OAuth before downloading render dependencies or creating media.
+        # Never attempt a public upload when neither configured identity works.
+        if allowed and not authenticated:
+            with Youtube(expected_id) as youtube:
+                youtube.authorize()  # primary -> community fallback, channel locked
+            report["oauth_preflight"] = "authorized"
+        elif authenticated:
+            report["oauth_preflight"] = "authorized"
         if report.get("confirmed_prior"):
             report["outcome"] = "published"
             report["video_url"] = "https://www.youtube.com/watch?v=" + report["confirmed_prior"][-1]
