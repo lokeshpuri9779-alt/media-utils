@@ -114,9 +114,9 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [ ] Replay variation sufficient for repeated sessions.
 
 ### P6 — Performance / compatibility
-- [ ] Low / Medium / High graphics presets.
-- [ ] 30 FPS fallback / 60 FPS target.
-- [ ] Resolution scaling tiers.
+- [x] Low / Medium / High graphics presets.
+- [x] 30 FPS fallback / 60 FPS target.
+- [x] Resolution scaling tiers.
 - [ ] Texture/memory budget.
 - [ ] Thermal/battery sanity pass.
 - [ ] 2–4 GB RAM low-end test profile.
@@ -138,7 +138,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 
 ### P8 — Commercial release
 - [ ] Production signing.
-- [ ] Android App Bundle.
+- [x] Android App Bundle export path; production signing remains pending.
 - [ ] Play Asset Delivery if needed.
 - [ ] Store icon/screenshots/trailer.
 - [ ] Privacy policy and data-safety declaration.
@@ -279,3 +279,16 @@ Validated build: commit `5f6775ef2c922391a0ef0a23dea5c0de66d09113`; APK SHA256 `
 - [x] Workflow runs `38226352754` and `38226352752` passed 114 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
 
 Validated build: commit `ad4a66102cad3338c42e2ddf344b293514c363ae`; APK SHA256 `6198aaf9981d6bdbf47568d78770100c533ae54303faf7071da2b4554923a993`; 521,153,447 bytes. v0.2.15 remains the known-good rollback. The AAB is debug-signed for pipeline validation only; production upload-key signing, store submission, physical installation, player-controlled combat/navigation, real-device performance/thermal behavior, a complete human objective-to-extraction run, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
+
+
+
+## Validated v0.2.17 performance-scaling checkpoint (2026-10-12)
+
+- [x] Added persisted LOW/MED/HIGH graphics presets to the in-game TUNE panel.
+- [x] LOW targets a locked 30 FPS at 60% render scale with shadows and bloom disabled; MED targets 60 FPS at 72%; HIGH targets 60 FPS at 85%.
+- [x] Preset changes apply FPS and render scale immediately; the complete lighting profile is applied on scene load.
+- [x] Added twelve deterministic graphics-preset checks covering clamping, FPS targets, ordered resolution tiers, cost controls and persistence.
+- [x] The first packaging attempt correctly built version code 37 but failed because its verification assertion still expected 36; commit `47058e85a34cf4c9a0e2e824e1311c557cd2a0e7` corrected the stale assertion without weakening the gate.
+- [x] Workflow runs `38233000010` and `38233000014` passed 126 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
+
+Validated build: commit `47058e85a34cf4c9a0e2e824e1311c557cd2a0e7`; APK SHA256 `bddd3656ed11e321b9fcbd87c3def12fdcae8802fa55028b64a9cd5d41ecbffb`; 521,153,447 bytes. v0.2.16 remains the known-good rollback. These profiles are controllable targets, not measured device results: physical installation, frame pacing, P90 frame time, thermal/battery behavior, player-controlled combat/navigation, a complete human objective-to-extraction run, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
