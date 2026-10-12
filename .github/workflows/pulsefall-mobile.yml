@@ -4777,8 +4777,50 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=35
-          version/name="0.2.15-mobile-alpha"
+          version/code=36
+          version/name="0.2.16-mobile-alpha"
+          graphics/opengl_debug=false
+          shader_baker/enabled=false
+
+          [preset.1]
+
+          name="Android AAB"
+          platform="Android"
+          runnable=false
+          dedicated_server=false
+          custom_features=""
+          export_filter="all_resources"
+          include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn"
+          export_path="build/PULSEFALL_MOBILE_ALPHA.aab"
+          patches=PackedStringArray()
+          encryption_include_filters=""
+          encryption_exclude_filters=""
+          seed=0
+          encrypt_pck=false
+          encrypt_directory=false
+          script_export_mode=2
+
+          [preset.1.options]
+
+          custom_template/debug=""
+          custom_template/release=""
+          gradle_build/use_gradle_build=true
+          gradle_build/export_format=1
+          package/unique_name="com.pulsefall.blacksite"
+          package/name="PULSEFALL"
+          package/signed=true
+          architectures/armeabi-v7a=false
+          architectures/arm64-v8a=true
+          architectures/x86=false
+          architectures/x86_64=false
+          screen/immersive_mode=true
+          screen/support_small=true
+          screen/support_normal=true
+          screen/support_large=true
+          screen/support_xlarge=true
+          version/code=36
+          version/name="0.2.16-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -4842,10 +4884,44 @@ jobs:
             exit 1
           fi
 
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
       - name: Set up Android SDK
         uses: android-actions/setup-android@v4
         with:
           packages: ''
+
+      - name: Install Android Gradle dependencies
+        shell: bash
+        run: |
+          set -euxo pipefail
+          yes | sdkmanager --sdk_root="$ANDROID_SDK_ROOT" --licenses >/dev/null || true
+          sdkmanager --sdk_root="$ANDROID_SDK_ROOT" \
+            "platform-tools" \
+            "build-tools;35.0.1" \
+            "platforms;android-35" \
+            "cmdline-tools;latest" \
+            "cmake;3.10.2.4988404" \
+            "ndk;28.1.13356709"
+
+      - name: Export Android AAB
+        shell: bash
+        run: |
+          set -euxo pipefail
+          GODOT="$(find /tmp/godot -type f -name 'Godot*_linux.x86_64' | head -n1)"
+          test -x "$GODOT"
+          TEMPLATE_ROOT="$HOME/.local/share/godot/export_templates/4.7.2.stable"
+          mkdir -p "$TEMPLATE_ROOT" /tmp/pulsefall-export-templates
+          wget -q "https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_export_templates.tpz" -O /tmp/pulsefall-export-templates.tpz
+          unzip -q -o /tmp/pulsefall-export-templates.tpz -d /tmp/pulsefall-export-templates
+          cp -a /tmp/pulsefall-export-templates/templates/. "$TEMPLATE_ROOT/"
+          test -f "$TEMPLATE_ROOT/android_source.zip"
+          "$GODOT" --headless --path game --install-android-build-template --export-debug "Android AAB" "$GITHUB_WORKSPACE/game/build/PULSEFALL_MOBILE_ALPHA.aab"
+          test -s game/build/PULSEFALL_MOBILE_ALPHA.aab
 
       - name: Export Android APK
         id: export
@@ -4868,13 +4944,17 @@ jobs:
           if [ -z "$APK" ]; then
             APK="$(find "$HOME/.local/share/godot/builds" -type f -name 'PULSEFALL_MOBILE_ALPHA.apk' | head -n1 || true)"
           fi
+          AAB="$(find game -type f -name 'PULSEFALL_MOBILE_ALPHA.aab' | head -n1)"
           test -n "$APK"
+          test -n "$AAB"
           mkdir -p artifact
           cp "$APK" artifact/PULSEFALL_MOBILE_ALPHA.apk
+          cp "$AAB" artifact/PULSEFALL_MOBILE_ALPHA.aab
           cp game/PULSEFALL_README.txt artifact/
           cp game/THIRD_PARTY_NOTICES.txt artifact/
           sha256sum artifact/PULSEFALL_MOBILE_ALPHA.apk > artifact/PULSEFALL_MOBILE_ALPHA_SHA256.txt
-          ls -lh artifact/PULSEFALL_MOBILE_ALPHA.apk
+          sha256sum artifact/PULSEFALL_MOBILE_ALPHA.aab > artifact/PULSEFALL_MOBILE_ALPHA_AAB_SHA256.txt
+          ls -lh artifact/PULSEFALL_MOBILE_ALPHA.apk artifact/PULSEFALL_MOBILE_ALPHA.aab
 
       - name: Verify APK identity, signature and architecture
         shell: bash
@@ -4891,15 +4971,26 @@ jobs:
           cat /tmp/aapt-badging.err
           test -n "$BADGING"
           printf '%s\n' "$BADGING"
-          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='35' versionName='0.2.15-mobile-alpha'" <<<"$BADGING"
+          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='36' versionName='0.2.16-mobile-alpha'" <<<"$BADGING"
           grep -Fq "application-label:'PULSEFALL'" <<<"$BADGING"
           mapfile -t ABI_DIRS < <(unzip -Z1 "$APK" | awk -F/ '/^lib\/[^/]+\/.*\.so$/ {print $2}' | sort -u)
           test "${#ABI_DIRS[@]}" -eq 1
           test "${ABI_DIRS[0]}" = "arm64-v8a"
           echo "APK PACKAGE CHECKS: 7 FAILURES: 0"
           echo "PACKAGE: com.pulsefall.blacksite"
-          echo "VERSION: 35 / 0.2.15-mobile-alpha"
+          echo "VERSION: 36 / 0.2.16-mobile-alpha"
           echo "ABI: arm64-v8a"
+
+          AAB="artifact/PULSEFALL_MOBILE_ALPHA.aab"
+          sha256sum -c artifact/PULSEFALL_MOBILE_ALPHA_AAB_SHA256.txt
+          unzip -tq "$AAB"
+          jarsigner -verify "$AAB"
+          unzip -Z1 "$AAB" | grep -Fxq "base/manifest/AndroidManifest.xml"
+          mapfile -t AAB_ABI_DIRS < <(unzip -Z1 "$AAB" | awk -F/ '/^base\/lib\/[^/]+\/.*\.so$/ {print $3}' | sort -u)
+          test "${#AAB_ABI_DIRS[@]}" -eq 1
+          test "${AAB_ABI_DIRS[0]}" = "arm64-v8a"
+          echo "AAB PACKAGE CHECKS: 5 FAILURES: 0"
+          echo "AAB ABI: arm64-v8a"
 
       - name: Upload Android build
         uses: actions/upload-artifact@v4
@@ -4907,7 +4998,9 @@ jobs:
           name: PULSEFALL_MOBILE_ALPHA
           path: |
             artifact/PULSEFALL_MOBILE_ALPHA.apk
+            artifact/PULSEFALL_MOBILE_ALPHA.aab
             artifact/PULSEFALL_MOBILE_ALPHA_SHA256.txt
+            artifact/PULSEFALL_MOBILE_ALPHA_AAB_SHA256.txt
             artifact/PULSEFALL_README.txt
             artifact/THIRD_PARTY_NOTICES.txt
           if-no-files-found: error
