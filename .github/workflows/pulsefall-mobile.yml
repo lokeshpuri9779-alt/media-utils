@@ -4893,7 +4893,7 @@ jobs:
           printf '%s\n' "$BADGING"
           grep -Fq "package: name='com.pulsefall.blacksite' versionCode='35' versionName='0.2.15-mobile-alpha'" <<<"$BADGING"
           grep -Fq "application-label:'PULSEFALL'" <<<"$BADGING"
-          mapfile -t ABI_DIRS < <(unzip -Z1 "$APK" | awk -F/ '/^lib\\/[^/]+\\/.*\\.so$/ {print $2}' | sort -u)
+          mapfile -t ABI_DIRS < <(unzip -Z1 "$APK" | awk -F/ '/^lib\/[^/]+\/.*\.so$/ {print $2}' | sort -u)
           test "${#ABI_DIRS[@]}" -eq 1
           test "${ABI_DIRS[0]}" = "arm64-v8a"
           echo "APK PACKAGE CHECKS: 7 FAILURES: 0"
