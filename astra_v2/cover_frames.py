@@ -59,8 +59,11 @@ def extract_long_cover(video):
             continue
     if not candidates:
         raise RuntimeError("No valid thumbnail frames")
+    print("ASTRA_LONG_COVER_SAMPLES=" + str(len(candidates)))
     destination = video.with_name(video.stem + "_cover_wide.jpg")
-    destination.write_bytes(max(candidates, key=lambda item: item[0])[1])
+    winner = max(candidates, key=lambda item: item[0])
+    destination.write_bytes(winner[1])
+    print("ASTRA_LONG_COVER_SCORE=" + f"{winner[0]:.2f}")
     if not 0 < destination.stat().st_size <= 2 * 1024 * 1024:
         raise RuntimeError("Invalid long-form cover")
     return destination
