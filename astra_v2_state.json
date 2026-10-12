@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 18,
-  "confirmed_today": 17,
-  "last_attempt_at": "2026-10-12T22:32:46.587368+00:00",
+  "attempts": 19,
+  "confirmed_today": 18,
+  "last_attempt_at": "2026-10-12T22:43:29.990890+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -126,25 +126,32 @@
       "title": "The Shadow That Was Late",
       "format": "short",
       "uploaded_at": "2026-10-12T22:23:40.647829+00:00"
+    },
+    "rayvan-anthology-20dc79fbdc44c430": {
+      "video_id": "aB1y-bQDC9I",
+      "confirmed_at": "2026-10-12T22:42:32.789974+00:00",
+      "title": "The Train to Nowhere",
+      "format": "short",
+      "uploaded_at": "2026-10-12T22:32:48.157557+00:00"
     }
   },
   "pending": {
-    "aB1y-bQDC9I": {
-      "content_id": "rayvan-anthology-20dc79fbdc44c430",
-      "title": "The Train to Nowhere",
+    "F3P2LqE4L4c": {
+      "content_id": "rayvan-anthology-a69514f6ca78e1f8",
+      "title": "The Cat in the Clocktower",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-12T22:32:48.157557+00:00",
+      "uploaded_at": "2026-10-12T22:43:32.194848+00:00",
       "genre": "fiction",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-12T22:31:36.249296+00:00",
+  "last_preflight_at": "2026-10-12T22:42:32.348634+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-12T22:32:48.472830+00:00",
+    "at": "2026-10-12T22:43:32.497229+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -268,6 +275,12 @@
     "rayvan-anthology-20dc79fbdc44c430": {
       "at": "2026-10-12T22:32:46.587351+00:00",
       "title": "The Train to Nowhere",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-anthology-a69514f6ca78e1f8": {
+      "at": "2026-10-12T22:43:29.990875+00:00",
+      "title": "The Cat in the Clocktower",
       "format": "short",
       "result": "accepted"
     }
