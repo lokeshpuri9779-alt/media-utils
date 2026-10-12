@@ -2241,7 +2241,13 @@
     }
   },
   "last_feedback_attempt_at": "2026-10-12T13:13:32.181109+00:00",
-  "last_preflight_at": "2026-10-12T18:38:58.504248+00:00",
+  "last_preflight_at": "2026-10-12T18:43:24.667268+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready"
-}
+  "last_preflight_outcome": "ready",
+  "last_publisher_job_diagnostic": {
+    "at": "2026-10-12T18:44:08.600496+00:00",
+    "preflight_step": "success",
+    "render_due": "true",
+    "job_status_before_persist": "failure"
+  }
+}\n
