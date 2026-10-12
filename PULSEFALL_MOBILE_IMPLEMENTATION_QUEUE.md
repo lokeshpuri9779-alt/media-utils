@@ -63,7 +63,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [x] Android SDK setup updated to current action.
 - [x] ETC2/ASTC texture import enabled for Android.
 - [x] Produce APK validated by Android export and automated runtime checks; real-device installation remains pending.
-- [ ] Verify package metadata, architecture and checksum.
+- [x] Verify APK package metadata, signature, checksum and arm64-only architecture after export.
 - [ ] Add AAB export path for Play Store release candidates.
 
 ### P1 — Core mobile game loop
@@ -258,3 +258,13 @@ Validated build: commit `41b06f2c961325ba86020435bcb0a40b1f22fded`; APK SHA256 `
 - [x] Workflow runs `38185810049` and `38185810078` passed import, five-cycle lifecycle soak, extraction, controls, aim-assist, camera, combat-feedback, combat-feel and gyro gates: 114 checks total, zero detected shutdown leaks, and successful arm64 Android exports.
 
 Validated build: commit `a53599238563d5ab81df226397f45a7e4070dba6`; APK SHA256 `a38e2123950db88d22fa7434da408bd4dcc4eb7704eb4331c335aa2fb5a39853`; 521,153,447 bytes. v0.2.13 remains the known-good rollback. Physical sensor direction/latency and comfort require real-device player testing; human navigation, real-device performance/thermal behavior, a complete objective-to-extraction run, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
+
+
+## Validated v0.2.15 APK-identity checkpoint (2026-10-12)
+
+- [x] Added a fail-closed seven-point post-export gate for checksum, APK signature, package ID, version code/name, app label, and native ABI contents.
+- [x] Confirmed package `com.pulsefall.blacksite`, version code `35`, version name `0.2.15-mobile-alpha`, label `PULSEFALL`, valid v2/v3 signature, and arm64-v8a-only native payload.
+- [x] Initial inspection runs rejected tooling defects in aapt status handling and ABI regex parsing; commit `5f6775ef2c922391a0ef0a23dea5c0de66d09113` corrected both without weakening the checks.
+- [x] Workflow runs `38201451553` and `38201451551` passed 114 game/runtime checks, the seven APK package checks, zero detected shutdown leaks, and successful arm64 Android export/upload.
+
+Validated build: commit `5f6775ef2c922391a0ef0a23dea5c0de66d09113`; APK SHA256 `b3d03f40abde5f248a9c6b27c36be38eed4825389d5ae29257598b8c05960705`; 521,153,447 bytes. v0.2.14 remains the known-good rollback. This verifies archive identity/integrity, not physical installation, player-controlled combat/navigation, real-device performance/thermal behavior, a complete human objective-to-extraction run, a 20–30 minute real-time soak, or benchmark superiority.
