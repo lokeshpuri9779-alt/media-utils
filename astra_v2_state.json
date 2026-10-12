@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 20,
-  "confirmed_today": 19,
-  "last_attempt_at": "2026-10-12T22:53:19.072405+00:00",
+  "attempts": 21,
+  "confirmed_today": 20,
+  "last_attempt_at": "2026-10-12T23:02:02.356659+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -140,25 +140,32 @@
       "title": "The Cat in the Clocktower",
       "format": "short",
       "uploaded_at": "2026-10-12T22:43:32.194848+00:00"
+    },
+    "rayvan-anthology-6a4266fc010c04c6": {
+      "video_id": "u2pckNO_aXY",
+      "confirmed_at": "2026-10-12T23:00:30.361922+00:00",
+      "title": "The Bear Who Fixed the Moon",
+      "format": "short",
+      "uploaded_at": "2026-10-12T22:53:20.498847+00:00"
     }
   },
   "pending": {
-    "u2pckNO_aXY": {
-      "content_id": "rayvan-anthology-6a4266fc010c04c6",
-      "title": "The Bear Who Fixed the Moon",
+    "W1KfkBmnCII": {
+      "content_id": "rayvan-free-original-1ecf425b029c3427",
+      "title": "The Signal Hidden Inside a Seed",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-12T22:53:20.498847+00:00",
+      "uploaded_at": "2026-10-12T23:02:04.459924+00:00",
       "genre": "fiction",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-12T22:51:56.332868+00:00",
+  "last_preflight_at": "2026-10-12T23:00:29.964682+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-12T22:53:20.867734+00:00",
+    "at": "2026-10-12T23:02:04.875912+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -294,6 +301,12 @@
     "rayvan-anthology-6a4266fc010c04c6": {
       "at": "2026-10-12T22:53:19.072389+00:00",
       "title": "The Bear Who Fixed the Moon",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-free-original-1ecf425b029c3427": {
+      "at": "2026-10-12T23:02:02.356643+00:00",
+      "title": "The Signal Hidden Inside a Seed",
       "format": "short",
       "result": "accepted"
     }
