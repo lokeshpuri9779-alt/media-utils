@@ -180,7 +180,7 @@ jobs:
               "render_due": os.getenv("PREFLIGHT_DUE", ""),
               "job_status_before_persist": os.getenv("JOB_RESULT", "unknown"),
           }
-          p.write_text(json.dumps(state, indent=2, ensure_ascii=False) + "\\n", encoding="utf-8")
+          p.write_text(json.dumps(state, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
           PY
 
       - name: Persist state even after failures
