@@ -73,11 +73,20 @@ def draw_subject(image, subject, t, accent):
     sway = int(math.sin(t * 1.7) * 14)
     if subject == "cat":
         x = cx + sway
+        # Animated tail, attentive ear tilt and intermittent blinking make the
+        # character read as alive without changing the CPU drawing pipeline.
+        tail = int(95 * math.sin(t * 2.2))
+        d.arc((x+95, 790-tail//3, x+315, 1100+tail//3),
+              205, 355, fill=(205, 125, 65), width=26)
         d.ellipse((x-155, 740, x+155, 1050), fill=(205, 125, 65), outline=(255, 198, 115), width=7)
         d.polygon([(x-140, 785), (x-120, 600), (x-20, 735)], fill=(205, 125, 65))
         d.polygon([(x+140, 785), (x+120, 600), (x+20, 735)], fill=(205, 125, 65))
+        blink = abs(math.sin(t * 1.15 + 0.6)) > 0.985
         for dx in (-70, 70):
-            d.ellipse((x+dx-22, 850, x+dx+22, 900), fill=(30, 42, 45))
+            if blink:
+                d.line((x+dx-22, 875, x+dx+22, 875), fill=(30, 42, 45), width=8)
+            else:
+                d.ellipse((x+dx-22, 850, x+dx+22, 900), fill=(30, 42, 45))
         d.polygon([(x-18, 938), (x+18, 938), (x, 960)], fill=(255, 185, 190))
         d.arc((x-55, 955, x+55, 990), 0, 180, fill=(35, 38, 44), width=5)
     elif subject == "rabbit":
@@ -149,6 +158,11 @@ def draw_subject(image, subject, t, accent):
                   fill=(244, 223, 181))
         d.polygon([(x, 690), (x+220, 720), (x+220, 1020), (x, 990)],
                   fill=(228, 208, 171))
+        # A page visibly turns rather than leaving the illustrated book static.
+        flip = (math.sin(t * 1.4) + 1.0) / 2.0
+        page_edge = x + int(205 * (1.0 - 2.0 * flip))
+        d.polygon([(x, 690), (page_edge, 720), (page_edge, 1020), (x, 990)],
+                  fill=(252, 235, 200))
         d.line((x, 690, x, 990), fill=(125, 92, 70), width=6)
         for y in (785, 845, 905):
             d.line((x-185, y, x-45, y+5), fill=(151, 125, 100), width=4)
