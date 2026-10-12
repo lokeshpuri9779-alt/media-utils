@@ -108,6 +108,9 @@ def run():
                     memory = refresh_channel_memory(learning)
                     legacy.save_performance(learning)
                     analytics_state = learning.get("analytics_state") or {}
+                    from astra_v2.stage_feedback import record
+                    record("analytics", "private_reports", "pass" if analytics_state.get("videos_updated", 0) else "unknown", evidence={"status": analytics_state.get("status"), "videos_updated": analytics_state.get("videos_updated", 0)})
+                    record("learning", "channel_memory", "pass" if memory.get("video_count", 0) else "unknown", evidence={"video_count": memory.get("video_count", 0)})
                     report["feedback"] = {
                         "analytics_status": analytics_state.get("status", "unknown"),
                         "videos_updated": analytics_state.get("videos_updated", 0),
@@ -148,6 +151,8 @@ def run():
                     else:
                         print("ASTRA_PRELOAD_CONSUMED=" + candidate["content_id"])
                 except CreativeSkip as exc:
+                    from astra_v2.stage_feedback import record
+                    record("quality", "candidate_selection", "fail", evidence={"reason": str(exc)[:200]}, action="Diagnose story supply and creative gate failures")
                     report.update(outcome="quality_skip", reason=str(exc)[:250])
                     return report
                 if candidate.get("format") == "long" and not historical_long_upload_due(
