@@ -35,7 +35,7 @@ def main():
     long_queued = any(str(a.get("name", "")).startswith("astra-preloaded-")
                       and str(a.get("name", ""))[len("astra-preloaded-"):].startswith(("planet-clocks-", "trend-brief-"))
                       for a in usable)
-    if len(usable) >= target and (not long_lane or long_queued):
+    if len(usable) >= target and not long_lane:
         print("ASTRA_PRELOAD="+json.dumps({"outcome":"buffer_full","usable_count":len(usable),"total_artifacts":len(queue)}))
         return
     # Reuse the already-fetched artifact listing: avoid a second GitHub API call.
@@ -56,7 +56,7 @@ def main():
             # may attempt the licensed, QA-gated long-form renderer. An absent
             # or rejected long candidate must never starve the Shorts backlog.
             candidate = None
-            if long_lane and not long_queued:
+            if long_lane:
                 # The analytics refresh does not populate trend_snapshot.
                 # Fetch source-linked trends for this render only; fail closed
                 # when upstream data is missing or insufficiently sourced.
