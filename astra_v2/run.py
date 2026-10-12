@@ -126,6 +126,8 @@ def run():
                 report.update(outcome="skipped", reason=reason)
                 return report
             long_due = historical_long_upload_due(state, utcnow(), performance=read_json("performance.json"))
+            report["longform_due"] = bool(long_due)
+            print("ASTRA_LONGFORM_DUE=" + str(bool(long_due)).lower())
             live_ids, live_titles = youtube.recent(youtube_channel)
             previous_ids = set(state["published"]) | set(state.get("reserved", {}))
             previous_ids.update(item.get("content_id", "") for item in state["pending"].values())
@@ -147,8 +149,11 @@ def run():
                         if os.getenv("ASTRA_PRELOAD_ONLY", "0") == "1":
                             report.update(outcome="skipped", reason=("preload_queue_error" if report.get("queue_error_type") else "preload_queue_empty"))
                             return report
-                        candidate = ((make_long_candidate(video, previous_ids | live_ids, live_titles) if long_due else None)
-                                     or make_candidate(video, previous_ids | live_ids, live_titles))
+                        long_candidate = make_long_candidate(video, previous_ids | live_ids, live_titles) if long_due else None
+                        if long_due and long_candidate is None:
+                            report["longform_selection"] = "no_eligible_approved_episode"
+                            print("ASTRA_LONGFORM_SELECTION=no_eligible_approved_episode")
+                        candidate = long_candidate or make_candidate(video, previous_ids | live_ids, live_titles)
                     else:
                         candidate_from_preload = True
                         print("ASTRA_PRELOAD_CONSUMED=" + candidate["content_id"])
