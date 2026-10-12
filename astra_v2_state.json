@@ -1178,7 +1178,7 @@
     }
   },
   "pending": {},
-  "last_outcome": "failure",
+  "last_outcome": "quality_skip",
   "last_error": "No authorized upload identity for RAYVAN (primary:invalid_grant, community:invalid_grant)",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -2215,5 +2215,5 @@
       "result": "accepted"
     }
   },
-  "last_feedback_attempt_at": "2026-10-11T17:00:34.842767+00:00"
+  "last_feedback_attempt_at": "2026-10-12T13:13:32.181109+00:00"
 }
