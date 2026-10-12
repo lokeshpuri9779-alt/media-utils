@@ -147,6 +147,14 @@ def run():
                         except CreativeSkip as long_error:
                             report["longform_selection"] = "quality_rejected"
                             print("ASTRA_LONGFORM_SELECTION=quality_rejected:" + str(long_error)[:180])
+                        except RuntimeError as long_error:
+                            # The long renderer may fail its own quality gate;
+                            # do not let that suppress an otherwise approved Short.
+                            message = str(long_error).lower()
+                            if not any(term in message for term in ("quality", "creative", "no approved", "no candidates")):
+                                raise
+                            report["longform_selection"] = "render_quality_rejected"
+                            print("ASTRA_LONGFORM_SELECTION=render_quality_rejected:" + str(long_error)[:180])
                         if candidate is None:
                             report.setdefault("longform_selection", "no_eligible_approved_episode")
                             print("ASTRA_LONGFORM_SELECTION=" + report["longform_selection"])
