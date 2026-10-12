@@ -125,7 +125,7 @@ def run():
             if not allowed:
                 report.update(outcome="skipped", reason=reason)
                 return report
-            long_due = historical_long_upload_due(state, utcnow(), spacing_hours=24, performance=read_json("performance.json"))
+            long_due = historical_long_upload_due(state, utcnow(), spacing_hours=12, performance=read_json("performance.json"))
             report["longform_due"] = bool(long_due)
             print("ASTRA_LONGFORM_DUE=" + str(bool(long_due)).lower())
             live_ids, live_titles = youtube.recent(youtube_channel)
@@ -168,8 +168,8 @@ def run():
                     report.update(outcome="quality_skip", reason=str(exc)[:250])
                     return report
                 if candidate.get("format") == "long" and not historical_long_upload_due(
-                    state, utcnow(), spacing_hours=24, performance=read_json("performance.json")):
-                    report.update(outcome="skipped", reason="longform_24h_cooldown")
+                    state, utcnow(), spacing_hours=12, performance=read_json("performance.json")):
+                    report.update(outcome="skipped", reason="longform_12h_cooldown")
                     return report
                 rejection = publication_rejection(candidate)
                 if rejection and candidate_from_preload and os.getenv("ASTRA_PRELOAD_ONLY", "0") != "1":
