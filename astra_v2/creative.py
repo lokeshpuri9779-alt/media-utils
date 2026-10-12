@@ -102,8 +102,14 @@ def make_candidate(path, excluded_ids, excluded_titles):
                                story for story in premium_stories
                                if not story.get("series_id")
                                and int.from_bytes(hashlib.sha256(str(story.get("content_id", "")).encode()).digest()[:8], "big") % lane_count == lane_index]
+    from astra_v2.publication_quality import publication_rejection
     for story in premium_stories:
         if not (story.get("production_ready") or story.get("validation_candidate")):
+            continue
+        # Do not spend rendering time on stories the publisher will reject.
+        rejection = publication_rejection(story)
+        if rejection:
+            print("Story publication preflight rejected:", story.get("content_id"), rejection)
             continue
         if story["content_id"] in excluded_ids or story["title"].casefold().strip() in excluded_titles:
             continue
