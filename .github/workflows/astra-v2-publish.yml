@@ -168,7 +168,9 @@ jobs:
             cd "$WORKTREE"
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            git add -A -- performance.json astra_v2_state.json astra_stage_feedback.json SHORTS.md
+            for f in performance.json astra_v2_state.json astra_stage_feedback.json SHORTS.md; do
+              if [ -e "$f" ]; then git add -- "$f"; fi
+            done
             if ! git diff --cached --quiet; then
               git commit -m 'Update verified ASTRA V2 runtime journal [skip ci]'
               git push origin HEAD:refs/heads/astra-state
