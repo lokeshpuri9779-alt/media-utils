@@ -155,6 +155,34 @@ jobs:
           ASTRA_PRELOAD_ONLY: '0' # Scan only policy-approved queued media, then allow a fresh QA-gated render
         run: python -m astra_v2.run
 
+      - name: Record post-preflight workflow stage outcomes
+        if: always()
+        env:
+          PREFLIGHT_RESULT: ${{ steps.preflight.outcome }}
+          PREFLIGHT_DUE: ${{ steps.preflight.outputs.render_due }}
+          JOB_RESULT: ${{ job.status }}
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os
+          from datetime import datetime, timezone
+          from pathlib import Path
+          p = Path("astra_v2_state.json")
+          try:
+              state = json.loads(p.read_text(encoding="utf-8"))
+              if not isinstance(state, dict):
+                  raise ValueError("state not an object")
+          except (OSError, ValueError):
+              state = {}
+          state["last_publisher_job_diagnostic"] = {
+              "at": datetime.now(timezone.utc).isoformat(),
+              "preflight_step": os.getenv("PREFLIGHT_RESULT", "unknown"),
+              "render_due": os.getenv("PREFLIGHT_DUE", ""),
+              "job_status_before_persist": os.getenv("JOB_RESULT", "unknown"),
+          }
+          p.write_text(json.dumps(state, indent=2, ensure_ascii=False) + "\\n", encoding="utf-8")
+          PY
+
       - name: Persist state even after failures
         if: always()
         shell: bash
