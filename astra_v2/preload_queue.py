@@ -82,7 +82,7 @@ def prepare(path, candidate):
 
 
 def take(excluded_ids, excluded_titles, output, allow_long=True):
-    """Get the oldest valid queued render. Return None for an empty queue.
+    """Get the newest eligible queued render. Return None for an empty queue.
 
     Corrupt/untrusted artifacts fail closed and are never published.
     """
