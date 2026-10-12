@@ -177,7 +177,13 @@ class Youtube:
         self.check(response, "thumbnail_set")
         return True
 
-    def upload(self, video, title, description, synthetic=False):
+    def upload(self, video, title, description, synthetic=False, made_for_kids=None):
+        # Audience classification is independent of animation style.
+        # The publisher may supply an explicit per-video classification.
+        if made_for_kids is None:
+            made_for_kids = os.getenv("ASTRA_MADE_FOR_KIDS", "1") == "1"
+        if not isinstance(made_for_kids, bool):
+            raise ValueError("made_for_kids must be a boolean")
         tags, hashtags = self.discover_tags(title, description)
         existing = {token.casefold() for token in description.split() if token.startswith("#")}
         extra = [tag for tag in hashtags if tag.casefold() not in existing]
@@ -186,7 +192,7 @@ class Youtube:
         metadata = {
             "snippet": {"title": title[:100], "description": description[:5000],
                         "tags": tags, "categoryId": "24", "defaultLanguage": "en"},
-            "status": {"privacyStatus": "public", "selfDeclaredMadeForKids": True,
+            "status": {"privacyStatus": "public", "selfDeclaredMadeForKids": made_for_kids,
                        "containsSyntheticMedia": bool(synthetic)},
         }
         result = self.client.post(UPLOAD, params={
