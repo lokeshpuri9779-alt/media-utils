@@ -135,7 +135,17 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 from astra_v2.stage_feedback import record
                 director = evaluation.get("director") or {}
                 for component, score in (director.get("component_scores") or {}).items():
-                    record("quality", str(component), "fail", evidence={"score": score, "candidate": story.get("content_id")}, action="Review Creative Director repair plan", candidate_id=story.get("content_id"))
+                    stage = str(component).lower().replace("-", "_")
+                    stage = {"visual_quality": "visuals", "visual": "visuals",
+                             "novelty": "story", "coherence": "script",
+                             "technical": "render", "retention": "hook",
+                             "motion": "animation"}.get(stage, stage)
+                    if stage not in ("research", "story", "script", "hook", "characters",
+                                     "visuals", "animation", "camera", "lighting", "audio",
+                                     "captions", "pacing", "render", "quality", "metadata",
+                                     "thumbnail", "publish", "analytics", "learning"):
+                        stage = "quality"
+                    record(stage, str(component), "unknown", evidence={"score": score, "candidate": story.get("content_id")}, action="Compare score to component threshold before classifying failure", candidate_id=story.get("content_id"))
                 record("render", "studio_render", "fail", evidence={"hard_failures": director.get("hard_failures"), "media_failures": (evaluation.get("media_qa") or {}).get("hard_failures"), "layer_failures": (evaluation.get("layer_qa") or {}).get("failures")}, action=str(director.get("repair_plan") or "")[:250], candidate_id=story.get("content_id"))
                 print("Premium QA rejected:", story["content_id"],
                       json.dumps({"action": (evaluation.get("director") or {}).get("action"),
