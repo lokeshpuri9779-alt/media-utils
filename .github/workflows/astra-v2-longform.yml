@@ -3,7 +3,8 @@ name: ASTRA V2 - Long-form Preload
 on:
   workflow_dispatch:
   schedule:
-    - cron: '15 1,13 * * *'
+    # 07:30 and 19:30 IST, after the 07:00/19:00 episode eligibility gates.
+    - cron: '0 2,14 * * *'
 
 concurrency:
   group: astra-v2-longform-render
