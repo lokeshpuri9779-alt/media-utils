@@ -99,7 +99,23 @@ def run():
                 try:
                     import cloud_once as legacy
                     legacy.refresh_performance()
-                    report["feedback"] = "requested_public_statistics"
+                    # Run the existing private Analytics collector and update
+                    # channel learning on the same bounded feedback cadence.
+                    from datetime import datetime
+                    from zoneinfo import ZoneInfo
+                    from autonomy import refresh_analytics
+                    from channel_memory import refresh_channel_memory
+                    learning = legacy.load_performance()
+                    refresh_analytics(learning, datetime.now(ZoneInfo("Asia/Kolkata")))
+                    memory = refresh_channel_memory(learning)
+                    legacy.save_performance(learning)
+                    analytics_state = learning.get("analytics_state") or {}
+                    report["feedback"] = {
+                        "analytics_status": analytics_state.get("status", "unknown"),
+                        "videos_updated": analytics_state.get("videos_updated", 0),
+                        "queries_succeeded": analytics_state.get("queries_succeeded", 0),
+                        "channel_memory_videos": memory.get("video_count", 0),
+                    }
                 except Exception as feedback_error:
                     report["feedback"] = "unavailable_" + type(feedback_error).__name__
             limit = min(100, max(1, int(os.getenv("ASTRA_MAX_DAILY_UPLOADS", "100"))))
