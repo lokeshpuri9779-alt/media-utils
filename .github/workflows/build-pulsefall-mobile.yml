@@ -2121,8 +2121,12 @@ jobs:
           	level._begin_extraction()
           	check(progression.runs == runs_before + 1 and progression.credits == reward_credits and not level.extraction_active, "repeated completion cannot duplicate rewards or restart escape")
           	level.release_streamed_audio()
-          	level.queue_free()
-          	for flush_frame in range(8):
+          	# Give the audio server time to detach decoder playback before freeing
+          	# the scene, then use synchronous teardown as in the clean soak gate.
+          	for audio_flush_frame in range(4):
+          		await get_tree().process_frame
+          	level.free()
+          	for flush_frame in range(12):
           		await get_tree().process_frame
           	await get_tree().physics_frame
           	print("EXTRACTION TEST FAILURES: ", failures)
