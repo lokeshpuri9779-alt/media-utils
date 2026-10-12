@@ -64,6 +64,7 @@ def choose_episode(data,now):
     if now.hour >= 19:
         slot = 1
     if slot < 0:
+        print("ASTRA_LONGFORM_SUPPLY=before_first_daily_slot")
         return None
 
     today=now.date().isoformat()
@@ -83,6 +84,7 @@ def choose_episode(data,now):
                 continue
 
     if len(today_long)>=2:
+        print("ASTRA_LONGFORM_SUPPLY=daily_cap_reached")
         return None
     if not planet_published:
         return EPISODE_ID
@@ -94,7 +96,11 @@ def choose_episode(data,now):
     except (ValueError,TypeError):
         fresh=False
     from longform_trends import available
-    if not fresh or not available(snap.get('items') or []):
+    if not fresh:
+        print("ASTRA_LONGFORM_SUPPLY=missing_or_stale_trend_snapshot")
+        return None
+    if not available(snap.get('items') or []):
+        print("ASTRA_LONGFORM_SUPPLY=insufficient_sourced_trend_topics")
         return None
 
     # Strict daily slots: never backfill a missed AM episode during the PM
@@ -102,7 +108,10 @@ def choose_episode(data,now):
     # night and protects audience quality/notification cadence.
     slot_name='am' if slot==0 else 'pm'
     episode_id=f"trend-brief-{today}-{slot_name}"
-    return None if episode_id in seen_ids else episode_id
+    if episode_id in seen_ids:
+        print("ASTRA_LONGFORM_SUPPLY=episode_already_used")
+        return None
+    return episode_id
 
 
 @studio.lru_cache(maxsize=1)
