@@ -54,6 +54,24 @@ jobs:
           timeout 360s python -m pip install --disable-pip-version-check -r requirements.txt
           command -v ffmpeg
           command -v ffprobe
+      - name: Validate long-form cadence and approved package rules
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_cover_frames.py' -v
+          python -m unittest discover -s tests -p 'test_astra_preload_covers.py' -v
+          python -m unittest discover -s tests -p 'test_astra_publication_quality.py' -v
+      - name: Check long-form selection and queue policy
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import os
+          from astra_v2.long_cadence import long_upload_due
+          from datetime import datetime, timezone
+          now = datetime.now(timezone.utc)
+          assert not long_upload_due({}, now, performance=None), "Missing history must fail closed"
+          assert os.environ["ASTRA_LONG_ONLY"] == "1", "Dedicated lane must not render Shorts"
+          assert os.environ["ASTRA_LONG_ENABLED"] == "1"
+          print("ASTRA_LONGFORM_ISOLATION_PREFLIGHT=passed")
+          PY
       - name: Render quality-approved long video
         id: render
         run: python -m astra_v2.preload_worker
