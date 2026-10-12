@@ -54,10 +54,10 @@ class QueueFormatSelectionTests(unittest.TestCase):
                 z.writestr("video.mp4", video)
             return stream.getvalue()
 
-        packages = {11: package("long-first", "long"),
+        packages = {11: package("planet-clocks-long-first", "long"),
                     12: package("short-next", "short")}
         entries = [
-            {"name": "astra-preloaded-long-first", "id": 11,
+            {"name": "astra-preloaded-planet-clocks-long-first", "id": 11,
              "created_at": "2026-10-10T00:00:00Z", "workflow_run": {"id": 101}},
             {"name": "astra-preloaded-short-next", "id": 12,
              "created_at": "2026-10-10T01:00:00Z", "workflow_run": {"id": 102}},
