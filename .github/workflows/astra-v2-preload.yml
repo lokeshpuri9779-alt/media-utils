@@ -35,7 +35,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        lane: [0, 1, 2, 3]
+        lane: [1, 2, 3]
     runs-on: ubuntu-24.04
     timeout-minutes: 26
     env:
@@ -44,7 +44,7 @@ jobs:
       ASTRA_PRELOAD_LANES: '4'
       ASTRA_SERIALIZED_PRELOAD: '0' # Continue producing new original stories after Season 1
       ASTRA_PRELOAD_LANE: '${{ matrix.lane }}'
-      ASTRA_LONG_ENABLED: '${{ matrix.lane == 0 && 1 || 0 }}'
+      ASTRA_LONG_ENABLED: '0'
       ASTRA_OPENAI_ENABLED: '0'
       ASTRA_OPENAI_ALLOW_PAID_API: '0'
       ORT_DISABLE_TELEMETRY: '1'
