@@ -64,13 +64,26 @@ def make_candidate(path, excluded_ids, excluded_titles):
     premium_stories = (series_stories if serialized_preload else
                        series_stories + anthology_catalog() + free_catalog() + original_catalog() + catalog()
                        + procedural_catalog(excluded_ids, limit=128))
-    # Fail loudly in diagnostics when every prewritten story is already consumed.
-    # This does not silently recycle scripts or promise infinite original plots.
-    available_count = sum(
-        1 for story in premium_stories
-        if story.get("content_id") not in excluded_ids
-        and str(story.get("title", "")).casefold().strip() not in excluded_titles
-    )
+    # Count truly eligible stories, not just unseen template IDs.
+    # Diagnostics only: never bypass the publication or creative gates.
+    from astra_v2.publication_quality import publication_rejection
+    supply = {"total": len(premium_stories), "seen": 0, "not_ready": 0,
+              "publication_rejected": {}, "eligible": 0}
+    for story in premium_stories:
+        if (story.get("content_id") in excluded_ids
+                or str(story.get("title", "")).casefold().strip() in excluded_titles):
+            supply["seen"] += 1
+        elif not (story.get("production_ready") or story.get("validation_candidate")):
+            supply["not_ready"] += 1
+        else:
+            rejection = publication_rejection(story)
+            if rejection:
+                reasons = supply["publication_rejected"]
+                reasons[rejection] = reasons.get(rejection, 0) + 1
+            else:
+                supply["eligible"] += 1
+    print("ASTRA_STORY_SUPPLY=" + json.dumps(supply, sort_keys=True))
+    available_count = supply["eligible"]
     if not serialized_preload and available_count <= 4:
         print("ASTRA_STORY_SUPPLY_WARNING=" + json.dumps({
             "remaining": available_count,
