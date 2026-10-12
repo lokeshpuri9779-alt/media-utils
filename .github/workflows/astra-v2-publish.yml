@@ -170,6 +170,7 @@ jobs:
       - name: Record post-preflight workflow stage outcomes
         if: always()
         env:
+          EARLY_TESTS_RESULT: ${{ steps.early_tests.outcome }}
           PREFLIGHT_RESULT: ${{ steps.preflight.outcome }}
           PREFLIGHT_DUE: ${{ steps.preflight.outputs.render_due }}
           JOB_RESULT: ${{ job.status }}
@@ -199,6 +200,7 @@ jobs:
               state = {}
           state["last_publisher_job_diagnostic"] = {
               "at": datetime.now(timezone.utc).isoformat(),
+              "early_tests": os.getenv("EARLY_TESTS_RESULT", "unknown"),
               "preflight_step": os.getenv("PREFLIGHT_RESULT", "unknown"),
               "render_due": os.getenv("PREFLIGHT_DUE", ""),
               "job_status_before_persist": os.getenv("JOB_RESULT", "unknown"),
