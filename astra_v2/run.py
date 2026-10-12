@@ -160,6 +160,20 @@ def run():
                     report.update(outcome="skipped", reason="longform_24h_cooldown")
                     return report
                 rejection = publication_rejection(candidate)
+                if rejection and os.getenv("ASTRA_PRELOAD_ONLY", "0") != "1":
+                    # Old queue artifacts can predate the current publication
+                    # policy. Never upload them; render a fresh approved story
+                    # instead of wasting every scheduled slot on stale media.
+                    print("ASTRA_PRELOAD_REJECTED=" + json.dumps({
+                        "content_id": candidate.get("content_id"),
+                        "reason": rejection, "action": "fresh_candidate_fallback",
+                    }))
+                    try:
+                        candidate = make_candidate(video, previous_ids | live_ids, live_titles)
+                    except CreativeSkip as exc:
+                        report.update(outcome="quality_skip", reason=str(exc)[:250])
+                        return report
+                    rejection = publication_rejection(candidate)
                 if rejection:
                     report.update(outcome="quality_skip", reason=rejection)
                     return report
