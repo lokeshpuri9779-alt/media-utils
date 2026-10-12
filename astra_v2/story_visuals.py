@@ -179,9 +179,20 @@ def draw_subject(image, subject, t, accent):
         d.line((cx, 870, cx+int(math.sin(a)*135), 870-int(math.cos(a)*135)), fill=(245, 235, 211), width=12)
         d.line((cx, 870, cx+int(math.sin(a*.16)*90), 870-int(math.cos(a*.16)*90)), fill=accent, width=17)
     elif subject == "tree":
-        d.polygon([(cx-70, 1120), (cx-45, 790), (cx+50, 790), (cx+85, 1120)], fill=(120, 82, 54))
-        for x,y,r in ((cx-135,790,145),(cx+130,790,155),(cx,670,190)):
-            d.ellipse((x-r,y-r,x+r,y+r), fill=(45, 132, 96), outline=(85, 177, 120), width=7)
+        # Wind bends the trunk and moves entire canopy clusters, not just stars.
+        bend = int(34 * math.sin(t * 1.7))
+        d.polygon([(cx-70, 1120), (cx-45+bend//2, 790),
+                   (cx+50+bend//2, 790), (cx+85, 1120)], fill=(120, 82, 54))
+        for j, (x, y, r) in enumerate(((cx-135, 790, 145),
+                                       (cx+130, 790, 155), (cx, 670, 190))):
+            sway = int((35+j*9) * math.sin(t*1.7+j*.2))
+            d.ellipse((x-r+sway, y-r, x+r+sway, y+r),
+                      fill=(45, 132, 96), outline=(85, 177, 120), width=7)
+        for j in range(35):
+            phase = t*1.7+j*.67
+            x = cx-240+(j*97)%480+int(32*math.sin(phase))
+            y = 550+(j*71)%410+int(28*math.cos(phase))
+            d.ellipse((x-7, y-5, x+7, y+5), fill=(110, 198, 117))
     elif subject == "train":
         x=cx+sway
         d.rounded_rectangle((x-230, 690, x+230, 1080), radius=45, fill=(100, 105, 156), outline=accent, width=9)
