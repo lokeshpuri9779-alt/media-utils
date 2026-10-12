@@ -224,11 +224,29 @@ def draw_subject(image, subject, t, accent):
             y = 550+(j*71)%410+int(28*math.cos(phase))
             d.ellipse((x-7, y-5, x+7, y+5), fill=(110, 198, 117))
     elif subject == "train":
-        x=cx+sway
-        d.rounded_rectangle((x-230, 690, x+230, 1080), radius=45, fill=(100, 105, 156), outline=accent, width=9)
-        d.rectangle((x-160, 740, x+160, 900), fill=(42, 69, 91))
+        # Tracks and sleepers scroll independently from the locomotive.
+        # Unlike a fixed train card, the motion reads as forward travel.
+        track_y = 1125
+        d.line((95, track_y, 970, track_y), fill=(151, 154, 166), width=12)
+        d.line((95, track_y+78, 970, track_y+78), fill=(151, 154, 166), width=12)
+        offset = int(t * 95) % 120
+        for sleeper in range(-1, 10):
+            sx = 95 + sleeper * 120 - offset
+            d.line((sx, track_y-12, sx+30, track_y+93),
+                   fill=(101, 83, 79), width=17)
+        x=cx+int(10*math.sin(t*2.5))
+        y_shift=int(5*math.sin(t*8))
+        d.rounded_rectangle((x-230, 690+y_shift, x+230, 1080+y_shift),
+                            radius=45, fill=(100, 105, 156), outline=accent, width=9)
+        d.rectangle((x-160, 740+y_shift, x+160, 900+y_shift), fill=(42, 69, 91))
         for dx in (-135,135):
-            d.ellipse((x+dx-45, 1020, x+dx+45, 1110), fill=(35, 41, 57), outline=accent, width=6)
+            d.ellipse((x+dx-45, 1020+y_shift, x+dx+45, 1110+y_shift),
+                      fill=(35, 41, 57), outline=accent, width=6)
+            hub_x=x+dx
+            angle=t*7
+            d.line((hub_x, 1065+y_shift,
+                    hub_x+int(30*math.cos(angle)), 1065+y_shift+int(30*math.sin(angle))),
+                   fill=(194, 199, 211), width=6)
     elif subject == "moon":
         d.ellipse((cx-240+sway, 620, cx+240+sway, 1100), fill=(215, 207, 177), outline=accent, width=8)
         for dx,dy,r in ((-85,-85,46),(110,50,65),(-45,115,33)):
