@@ -151,6 +151,8 @@ jobs:
 
       - name: Generate, validate, publish, and verify
         if: steps.preflight.outputs.render_due == 'true'
+        env:
+          ASTRA_PRELOAD_ONLY: '0' # Allow fresh QA-gated render when queued artifacts fail current publication policy
         run: python -m astra_v2.run
 
       - name: Persist state even after failures
