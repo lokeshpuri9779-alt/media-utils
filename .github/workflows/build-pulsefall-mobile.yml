@@ -4699,6 +4699,176 @@ jobs:
               environment_path.write_text(environment_text.replace("volumetric_fog_enabled = true", "volumetric_fog_enabled = false", 1))
           PY
 
+      - name: Add mobile graphics performance presets
+        shell: bash
+        run: |
+          set -euxo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(source, old, new, label):
+              count = source.count(old)
+              if count != 1:
+                  raise SystemExit(f"Expected one {label} anchor, found {count}")
+              return source.replace(old, new, 1)
+
+          tuning_path = Path("game/mobile/mobile_tuning.gd")
+          source = tuning_path.read_text()
+          source = replace_once(source, "static var current_gyro_mode := 0\n", "static var current_gyro_mode := 0\nstatic var current_graphics_preset := 1\n", "graphics preset state")
+          source = replace_once(source, "\tvar gyro_mode := 0\n", "\tvar gyro_mode := 0\n\tvar graphics_preset := 1\n", "graphics load default")
+          source = replace_once(source, '\t\tgyro_mode = clampi(int(config.get_value(SECTION, "gyro_mode", gyro_mode)), 0, 3)\n', '\t\tgyro_mode = clampi(int(config.get_value(SECTION, "gyro_mode", gyro_mode)), 0, 3)\n\t\tgraphics_preset = safe_graphics_preset(int(config.get_value(SECTION, "graphics_preset", graphics_preset)))\n', "graphics config load")
+          source = replace_once(source, '\t\t"gyro_mode": gyro_mode,\n', '\t\t"gyro_mode": gyro_mode,\n\t\t"graphics_preset": graphics_preset,\n', "graphics load result")
+          source = replace_once(source, "\t\tcurrent_gyro_mode = result.gyro_mode\n", "\t\tcurrent_gyro_mode = result.gyro_mode\n\t\tcurrent_graphics_preset = result.graphics_preset\n", "graphics current state")
+          source = replace_once(
+              source,
+              "\n\nstatic func save_gyro_mode(mode: int, path: String = CONFIG_PATH) -> int:\n",
+              '''
+
+
+          static func safe_graphics_preset(preset: int) -> int:
+          	return clampi(preset, 0, 2)
+
+
+          static func graphics_profile_for_preset(preset: int) -> Dictionary:
+          	match safe_graphics_preset(preset):
+          		0:
+          			return {"name": "LOW", "max_fps": 30, "resolution_scale": 0.60, "shadows": false, "bloom": false}
+          		2:
+          			return {"name": "HIGH", "max_fps": 60, "resolution_scale": 0.85, "shadows": true, "bloom": true}
+          		_:
+          			return {"name": "MED", "max_fps": 60, "resolution_scale": 0.72, "shadows": true, "bloom": true}
+
+
+          static func save_graphics_preset(preset: int, path: String = CONFIG_PATH) -> int:
+          	var safe_preset := safe_graphics_preset(preset)
+          	var config := ConfigFile.new()
+          	if FileAccess.file_exists(path):
+          		config.load(path)
+          	config.set_value(SECTION, "graphics_preset", safe_preset)
+          	var result := config.save(path)
+          	if path == CONFIG_PATH and result == OK:
+          		current_graphics_preset = safe_preset
+          		loaded = true
+          	return result
+
+
+          static func get_graphics_preset() -> int:
+          	if not loaded:
+          		load_values()
+          	return current_graphics_preset
+
+
+          static func get_graphics_profile() -> Dictionary:
+          	return graphics_profile_for_preset(get_graphics_preset())
+
+
+          static func save_gyro_mode(mode: int, path: String = CONFIG_PATH) -> int:
+          ''',
+              "graphics persistence",
+          )
+          tuning_path.write_text(source)
+
+          controls_path = Path("game/mobile/mobile_controls.gd")
+          source = controls_path.read_text()
+          source = replace_once(source, "var gyro_mode := 0\n", "var gyro_mode := 0\nvar graphics_preset := 1\n", "graphics control state")
+          source = replace_once(source, "var gyro_button: Button\nvar tuning_close_button: Button\n", "var gyro_button: Button\nvar graphics_button: Button\nvar tuning_close_button: Button\n", "graphics widget")
+          source = replace_once(source, "\ttuning_panel.offset_bottom = 616\n", "\ttuning_panel.offset_bottom = 678\n", "graphics panel size")
+          source = replace_once(source, '\ttuning_panel.add_child(gyro_label)\n', '\ttuning_panel.add_child(gyro_label)\n\tvar graphics_label := Label.new()\n\tgraphics_label.text = "GRAPHICS"\n\tgraphics_label.position = Vector2(22, 502)\n\ttuning_panel.add_child(graphics_label)\n', "graphics label")
+          source = replace_once(
+              source,
+              '\tgyro_button = _make_tuning_button("OFF", Vector2(184, 428), Vector2(152, 44))\n\ttuning_close_button = _make_tuning_button("DONE", Vector2(244, 490), Vector2(92, 42))\n\tfor button in [look_minus_button, look_plus_button, aim_minus_button, aim_plus_button, touch_minus_button, touch_plus_button, reach_minus_button, reach_plus_button, auto_fire_button, haptics_button, gyro_button, tuning_close_button]:\n',
+              '\tgyro_button = _make_tuning_button("OFF", Vector2(184, 428), Vector2(152, 44))\n\tgraphics_button = _make_tuning_button("MED", Vector2(184, 490), Vector2(152, 44))\n\ttuning_close_button = _make_tuning_button("DONE", Vector2(244, 552), Vector2(92, 42))\n\tfor button in [look_minus_button, look_plus_button, aim_minus_button, aim_plus_button, touch_minus_button, touch_plus_button, reach_minus_button, reach_plus_button, auto_fire_button, haptics_button, gyro_button, graphics_button, tuning_close_button]:\n',
+              "graphics panel button",
+          )
+          source = replace_once(source, "reach_minus_button, reach_plus_button, auto_fire_button, haptics_button, gyro_button, tuning_close_button]", "reach_minus_button, reach_plus_button, auto_fire_button, haptics_button, gyro_button, graphics_button, tuning_close_button]", "graphics touch registry")
+          source = replace_once(source, "\telif button == gyro_button:\n\t\t_cycle_gyro_mode()\n\telif button == tuning_close_button:", "\telif button == gyro_button:\n\t\t_cycle_gyro_mode()\n\telif button == graphics_button:\n\t\t_cycle_graphics_preset()\n\telif button == tuning_close_button:", "graphics button routing")
+          source = replace_once(source, "\tgyro_mode = values.gyro_mode\n", "\tgyro_mode = values.gyro_mode\n\tgraphics_preset = values.graphics_preset\n", "graphics load")
+          source = replace_once(
+              source,
+              "\n\nfunc _cycle_gyro_mode() -> void:\n",
+              '''
+
+
+          func _cycle_graphics_preset() -> void:
+          	graphics_preset = (graphics_preset + 1) % 3
+          	_store_tuning()
+          	var profile: Dictionary = MobileTuning.graphics_profile_for_preset(graphics_preset)
+          	Engine.max_fps = int(profile.max_fps)
+          	var window := get_window()
+          	if is_instance_valid(window):
+          		window.scaling_3d_scale = float(profile.resolution_scale)
+          		window.scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR
+
+
+          func _cycle_gyro_mode() -> void:
+          ''',
+              "graphics cycle",
+          )
+          source = replace_once(source, "\tMobileTuning.save_gyro_mode(gyro_mode)\n", "\tMobileTuning.save_gyro_mode(gyro_mode)\n\tMobileTuning.save_graphics_preset(graphics_preset)\n", "graphics store")
+          source = replace_once(source, '\tif is_instance_valid(gyro_button):\n\t\tgyro_button.text = ["OFF", "LOW", "MED", "HIGH"][clampi(gyro_mode, 0, 3)]\n', '\tif is_instance_valid(gyro_button):\n\t\tgyro_button.text = ["OFF", "LOW", "MED", "HIGH"][clampi(gyro_mode, 0, 3)]\n\tif is_instance_valid(graphics_button):\n\t\tgraphics_button.text = str(MobileTuning.graphics_profile_for_preset(graphics_preset).name)\n', "graphics label refresh")
+          controls_path.write_text(source)
+
+          settings_path = Path("game/menu/settings.gd")
+          source = settings_path.read_text()
+          source = replace_once(source, "extends Node\n", 'extends Node\n\nconst MobileTuning = preload("res://mobile/mobile_tuning.gd")\n', "settings graphics preload")
+          source = replace_once(source, '\tvar mobile_renderer := str(ProjectSettings.get_setting("rendering/renderer/rendering_method", "")) == "mobile" or OS.has_feature("mobile")\n', '\tvar mobile_renderer := str(ProjectSettings.get_setting("rendering/renderer/rendering_method", "")) == "mobile" or OS.has_feature("mobile")\n\tvar mobile_profile: Dictionary = MobileTuning.get_graphics_profile() if mobile_renderer else {}\n', "settings graphics profile")
+          source = replace_once(source, '\tEngine.max_fps = Settings.config_file.get_value("video", "max_fps")', '\tEngine.max_fps = int(mobile_profile.max_fps) if mobile_renderer else Settings.config_file.get_value("video", "max_fps")', "settings target fps")
+          source = replace_once(source, '\twindow.scaling_3d_scale = Settings.config_file.get_value("video", "resolution_scale")', '\twindow.scaling_3d_scale = float(mobile_profile.resolution_scale) if mobile_renderer else Settings.config_file.get_value("video", "resolution_scale")', "settings resolution scale")
+          source = replace_once(source, '\tif not Settings.config_file.get_value("rendering", "shadow_mapping"):\n', '\tif (mobile_renderer and not bool(mobile_profile.shadows)) or (not mobile_renderer and not Settings.config_file.get_value("rendering", "shadow_mapping")):\n', "settings mobile shadows")
+          source = replace_once(source, '\tenvironment.glow_enabled = Settings.config_file.get_value("rendering", "bloom")', '\tenvironment.glow_enabled = bool(mobile_profile.bloom) if mobile_renderer else Settings.config_file.get_value("rendering", "bloom")', "settings mobile bloom")
+          settings_path.write_text(source)
+          PY
+
+          cat > game/mobile/graphics_preset_test.gd <<'PULSEFALL_GRAPHICS_TEST'
+          extends Node
+
+          const Tuning = preload("res://mobile/mobile_tuning.gd")
+          var failures := 0
+          var checks := 0
+
+          func check(value: bool, message: String) -> void:
+          	checks += 1
+          	if value:
+          		print("PASS: ", message)
+          	else:
+          		failures += 1
+          		push_error("FAIL: " + message)
+
+
+          func _ready() -> void:
+          	check(Tuning.safe_graphics_preset(-4) == 0, "graphics preset clamps below LOW")
+          	check(Tuning.safe_graphics_preset(8) == 2, "graphics preset clamps above HIGH")
+          	var low: Dictionary = Tuning.graphics_profile_for_preset(0)
+          	var medium: Dictionary = Tuning.graphics_profile_for_preset(1)
+          	var high: Dictionary = Tuning.graphics_profile_for_preset(2)
+          	check(low.name == "LOW" and low.max_fps == 30, "LOW supplies the 30 FPS fallback")
+          	check(medium.name == "MED" and medium.max_fps == 60, "MED targets 60 FPS")
+          	check(high.name == "HIGH" and high.max_fps == 60, "HIGH targets 60 FPS")
+          	check(low.resolution_scale < medium.resolution_scale and medium.resolution_scale < high.resolution_scale, "resolution tiers increase monotonically")
+          	check(is_equal_approx(low.resolution_scale, 0.60) and is_equal_approx(medium.resolution_scale, 0.72) and is_equal_approx(high.resolution_scale, 0.85), "resolution tiers match mobile budget targets")
+          	check(not low.shadows and not low.bloom, "LOW removes shadow and bloom cost")
+          	check(medium.shadows and medium.bloom, "MED preserves core lighting")
+          	check(high.shadows and high.bloom, "HIGH preserves core lighting")
+          	var test_path := "user://graphics_preset_test.cfg"
+          	var directory := DirAccess.open("user://")
+          	if directory and directory.file_exists("graphics_preset_test.cfg"):
+          		directory.remove("graphics_preset_test.cfg")
+          	check(Tuning.save_graphics_preset(7, test_path) == OK, "graphics preference persists without error")
+          	var restored: Dictionary = Tuning.load_values(test_path)
+          	check(restored.graphics_preset == 2, "persisted graphics preset is clamped and restored")
+          	if directory and directory.file_exists("graphics_preset_test.cfg"):
+          		directory.remove("graphics_preset_test.cfg")
+          	print("GRAPHICS PRESET CHECKS: ", checks, " FAILURES: ", failures)
+          	get_tree().quit(0 if failures == 0 else 1)
+          PULSEFALL_GRAPHICS_TEST
+
+          cat > game/mobile/graphics_preset_test.tscn <<'PULSEFALL_GRAPHICS_TEST'
+          [gd_scene load_steps=2 format=3]
+          [ext_resource type="Script" path="res://mobile/graphics_preset_test.gd" id="1"]
+          [node name="GraphicsPresetTests" type="Node"]
+          script = ExtResource("1")
+          PULSEFALL_GRAPHICS_TEST
+
       - name: Add license and build notes
         shell: bash
         run: |
@@ -4737,7 +4907,7 @@ jobs:
           Missing extraction or dying during escape retries from the escape checkpoint.
 
           Target:
-          Android landscape. Mobile controls are built in. Graphics defaults are reduced for phone GPUs.
+          Android landscape. Mobile controls are built in. TUNE offers LOW (30 FPS / 60% scale), MED (60 FPS / 72%), and HIGH (60 FPS / 85%) graphics targets.
           EOF
 
       - name: Create Android export preset
@@ -4753,7 +4923,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.apk"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -4781,8 +4951,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=36
-          version/name="0.2.16-mobile-alpha"
+          version/code=37
+          version/name="0.2.17-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
 
@@ -4795,7 +4965,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.aab"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -4823,8 +4993,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=36
-          version/name="0.2.16-mobile-alpha"
+          version/code=37
+          version/name="0.2.17-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -4857,6 +5027,8 @@ jobs:
           FEEL_RC=$?
           timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/gyro_aim_test.tscn > /tmp/gyro-aim-test.log 2>&1
           GYRO_RC=$?
+          timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/graphics_preset_test.tscn > /tmp/graphics-preset-test.log 2>&1
+          GRAPHICS_RC=$?
           set -e
           cat /tmp/import.log
           cat /tmp/runtime.log
@@ -4867,7 +5039,8 @@ jobs:
           cat /tmp/combat-feedback-test.log
           cat /tmp/combat-feel-test.log
           cat /tmp/gyro-aim-test.log
-          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log; then
+          cat /tmp/graphics-preset-test.log
+          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log; then
             echo "PULSEFALL mobile validation detected a script/runtime failure."
             exit 1
           fi
@@ -4883,8 +5056,8 @@ jobs:
             echo "PULSEFALL mobile validation detected unsupported renderer features."
             exit 1
           fi
-          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ]; then
-            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC"
+          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ] || [ "$GRAPHICS_RC" -ne 0 ]; then
+            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC graphics=$GRAPHICS_RC"
             exit 1
           fi
 
@@ -4976,14 +5149,14 @@ jobs:
           cat /tmp/aapt-badging.err
           test -n "$BADGING"
           printf '%s\n' "$BADGING"
-          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='36' versionName='0.2.16-mobile-alpha'" <<<"$BADGING"
+          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='36' versionName='0.2.17-mobile-alpha'" <<<"$BADGING"
           grep -Fq "application-label:'PULSEFALL'" <<<"$BADGING"
           mapfile -t ABI_DIRS < <(unzip -Z1 "$APK" | awk -F/ '/^lib\/[^/]+\/.*\.so$/ {print $2}' | sort -u)
           test "${#ABI_DIRS[@]}" -eq 1
           test "${ABI_DIRS[0]}" = "arm64-v8a"
           echo "APK PACKAGE CHECKS: 7 FAILURES: 0"
           echo "PACKAGE: com.pulsefall.blacksite"
-          echo "VERSION: 36 / 0.2.16-mobile-alpha"
+          echo "VERSION: 36 / 0.2.17-mobile-alpha"
           echo "ABI: arm64-v8a"
 
           AAB="artifact/PULSEFALL_MOBILE_ALPHA.aab"
