@@ -114,13 +114,12 @@ class DurableLongFormCadenceTests(unittest.TestCase):
         self.assertFalse(self.check(self.state, self.now, performance={}))
         self.assertFalse(self.check(self.state, self.now, performance={"videos": None}))
 
-    def test_historical_public_long_survives_empty_journal(self):
+    def test_historical_public_long_allows_second_after_12_hours(self):
         history = {"videos": {"public-long": {
             "format": "long", "visibility": "public",
             "published_at": (self.now - timedelta(hours=23)).isoformat(),
         }}}
-        self.assertFalse(self.check(self.state, self.now, performance=history))
-        self.assertTrue(self.check(self.state, self.now + timedelta(hours=1), performance=history))
+        self.assertTrue(self.check(self.state, self.now, performance=history))
 
     def test_unresolved_long_transfer_blocks_even_after_24_hours(self):
         self.state["reserved"] = {"indeterminate": {
