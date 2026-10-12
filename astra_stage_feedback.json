@@ -297,6 +297,39 @@
       },
       "proposed_action": "",
       "candidate_id": "rayvan-anthology-a9a002d2ef7f9c8f"
+    },
+    {
+      "at": "2026-10-12T22:02:40.385463+00:00",
+      "stage": "quality",
+      "element": "creative_director",
+      "outcome": "pass",
+      "evidence": {
+        "scores": {
+          "hook": 94.0,
+          "retention": 92.0,
+          "visual": 100.0,
+          "pacing": 100.0,
+          "audio": 99.74,
+          "captions": 100.0,
+          "novelty": 100.0,
+          "coherence": 92.0,
+          "technical": 100.0
+        }
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-anthology-2906bc6378365d3e"
+    },
+    {
+      "at": "2026-10-12T22:02:40.386330+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "pass",
+      "evidence": {
+        "duration": 14.867,
+        "renderer": "studio-7.1.1"
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-anthology-2906bc6378365d3e"
     }
   ],
   "stage_counts": {
@@ -397,7 +430,7 @@
       "regressed": 0
     },
     "render": {
-      "pass": 9,
+      "pass": 10,
       "fail": 0,
       "skip": 0,
       "unknown": 0,
@@ -405,7 +438,7 @@
       "regressed": 0
     },
     "quality": {
-      "pass": 9,
+      "pass": 10,
       "fail": 0,
       "skip": 0,
       "unknown": 0,

@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 14,
-  "confirmed_today": 13,
-  "last_attempt_at": "2026-10-12T21:55:05.447880+00:00",
+  "attempts": 15,
+  "confirmed_today": 14,
+  "last_attempt_at": "2026-10-12T22:02:40.441684+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -98,25 +98,32 @@
       "title": "The Robot Who Collected Laughter",
       "format": "short",
       "uploaded_at": "2026-10-12T21:47:03.874071+00:00"
+    },
+    "rayvan-anthology-a9a002d2ef7f9c8f": {
+      "video_id": "fb-bUJD2uDM",
+      "confirmed_at": "2026-10-12T22:00:46.800983+00:00",
+      "title": "The Ocean Above the City",
+      "format": "short",
+      "uploaded_at": "2026-10-12T21:55:07.462855+00:00"
     }
   },
   "pending": {
-    "fb-bUJD2uDM": {
-      "content_id": "rayvan-anthology-a9a002d2ef7f9c8f",
-      "title": "The Ocean Above the City",
+    "CkHDJJp4z_Y": {
+      "content_id": "rayvan-anthology-2906bc6378365d3e",
+      "title": "The Museum of Tomorrows",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-12T21:55:07.462855+00:00",
+      "uploaded_at": "2026-10-12T22:02:42.196839+00:00",
       "genre": "fiction",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-12T21:53:39.764194+00:00",
+  "last_preflight_at": "2026-10-12T22:00:46.416562+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-12T21:55:07.779033+00:00",
+    "at": "2026-10-12T22:02:42.518196+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -216,6 +223,12 @@
     "rayvan-anthology-a9a002d2ef7f9c8f": {
       "at": "2026-10-12T21:55:05.447866+00:00",
       "title": "The Ocean Above the City",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-anthology-2906bc6378365d3e": {
+      "at": "2026-10-12T22:02:40.441669+00:00",
+      "title": "The Museum of Tomorrows",
       "format": "short",
       "result": "accepted"
     }
