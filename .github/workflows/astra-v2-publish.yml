@@ -103,6 +103,7 @@ jobs:
         run: python -m astra_v2.preflight
 
       - name: Install free rendering dependencies
+        id: dependencies
         if: steps.preflight.outputs.render_due == 'true'
         run: |
           # Prevent a blocked package network request from occupying the
@@ -150,6 +151,7 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_scene_layer_contract.py' -v
 
       - name: Generate, validate, publish, and verify
+        id: publish_video
         if: steps.preflight.outputs.render_due == 'true'
         env:
           ASTRA_PRELOAD_ONLY: '0' # Scan only policy-approved queued media, then allow a fresh QA-gated render
@@ -161,6 +163,8 @@ jobs:
           PREFLIGHT_RESULT: ${{ steps.preflight.outcome }}
           PREFLIGHT_DUE: ${{ steps.preflight.outputs.render_due }}
           JOB_RESULT: ${{ job.status }}
+          DEPENDENCIES_RESULT: ${{ steps.dependencies.outcome }}
+          PUBLISH_RESULT: ${{ steps.publish_video.outcome }}
         shell: bash
         run: |
           python - <<'PY'
@@ -179,6 +183,8 @@ jobs:
               "preflight_step": os.getenv("PREFLIGHT_RESULT", "unknown"),
               "render_due": os.getenv("PREFLIGHT_DUE", ""),
               "job_status_before_persist": os.getenv("JOB_RESULT", "unknown"),
+              "dependencies_step": os.getenv("DEPENDENCIES_RESULT", "unknown"),
+              "publish_step": os.getenv("PUBLISH_RESULT", "unknown"),
           }
           p.write_text(json.dumps(state, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
           PY
