@@ -132,6 +132,39 @@
       },
       "proposed_action": "",
       "candidate_id": "rayvan-season-01-episode-02"
+    },
+    {
+      "at": "2026-10-12T21:17:54.454511+00:00",
+      "stage": "quality",
+      "element": "creative_director",
+      "outcome": "pass",
+      "evidence": {
+        "scores": {
+          "hook": 94.0,
+          "retention": 92.0,
+          "visual": 100.0,
+          "pacing": 100.0,
+          "audio": 98.33,
+          "captions": 98.97,
+          "novelty": 100.0,
+          "coherence": 92.0,
+          "technical": 100.0
+        }
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-season-01-episode-03"
+    },
+    {
+      "at": "2026-10-12T21:17:54.455314+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "pass",
+      "evidence": {
+        "duration": 53.633,
+        "renderer": "studio-7.1.1"
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-season-01-episode-03"
     }
   ],
   "stage_counts": {
@@ -232,7 +265,7 @@
       "regressed": 0
     },
     "render": {
-      "pass": 4,
+      "pass": 5,
       "fail": 0,
       "skip": 0,
       "unknown": 0,
@@ -240,7 +273,7 @@
       "regressed": 0
     },
     "quality": {
-      "pass": 4,
+      "pass": 5,
       "fail": 0,
       "skip": 0,
       "unknown": 0,
