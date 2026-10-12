@@ -114,6 +114,9 @@ def main():
         allowed, reason = due(state, utcnow(), limit=limit, spacing_minutes=interval)
         report["render_due"] = allowed
         report["reason"] = reason
+        # Persist scheduler evidence even when no upload is attempted.
+        state["last_preflight_at"] = report["at"]
+        state["last_preflight_reason"] = reason
         # Check OAuth before downloading render dependencies or creating media.
         # Never attempt a public upload when neither configured identity works.
         if allowed and not authenticated:
@@ -144,6 +147,8 @@ def main():
         state["last_outcome"] = "failure"
         raise
     finally:
+        state["last_preflight_at"] = report["at"]
+        state["last_preflight_outcome"] = report["outcome"]
         report.update(attempts_today=state["attempts"], confirmed_today=state["confirmed_today"],
                       pending=len(state["pending"]), blocked_until=state.get("blocked_until") or None)
         write_json(STATE_FILE, state)
