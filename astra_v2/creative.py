@@ -175,6 +175,11 @@ def make_candidate(path, excluded_ids, excluded_titles):
             raise
     meta = dict(legacy.CONTENT_META)
     content_id = str(meta.get("content_id") or "").strip()
+    # The legacy renderer can return a technically approved but unpublished
+    # template. Reject it here before any later upload/queue handoff.
+    final_rejection = publication_rejection({"content_id": content_id, "title": title})
+    if final_rejection:
+        raise CreativeSkip(final_rejection)
     if not (title and description and content_id):
         raise CreativeSkip("missing_story_identity_or_script")
     # A previous legacy-loop edge case could return its final rejected render.
