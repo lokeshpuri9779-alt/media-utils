@@ -88,7 +88,7 @@ def sourced_topics(items, limit=5):
     ranked.sort(key=lambda x:(x['score'],x['topic']),reverse=True)
     return ranked[:limit]
 
-def story_candidate(items):
+def story_candidate(items, offset=0):
     """Pick one source-deep topic for a coherent long-form story."""
     topics=sourced_topics(items,limit=8)
     deep=[]
@@ -97,13 +97,14 @@ def story_candidate(items):
         # sensitive; one headline is not enough substance for a deep story.
         if len(t.get('sources') or []) >= 2:
             deep.append(t)
-    return deep[0] if deep else None
+    return deep[offset] if len(deep) > offset else None
 
 def available(items, minimum=1):
-    return story_candidate(items) is not None
+    return len([t for t in sourced_topics(items, limit=8)
+                if len(t.get('sources') or []) >= 2]) >= minimum
 
-def build_plan(items):
-    t=story_candidate(items)
+def build_plan(items, offset=0):
+    t=story_candidate(items, offset=offset)
     if not t:
         raise RuntimeError('No trend has enough independent source depth for a quality long-form story.')
     topic=t['topic']; headline=t['headline']; sources=t['source_names']
@@ -249,7 +250,9 @@ def thumbnail(path, topics):
 
 
 def render(out, episode_id, trend_items):
-    plan,topics=build_plan(trend_items)
+    # The evening edition must cover a different independently sourced topic.
+    offset = 1 if str(episode_id).endswith('-pm') else 0
+    plan,topics=build_plan(trend_items, offset=offset)
     # Apply only evidence-backed pacing lessons; absent evidence leaves the
     # authored structure untouched.
     try:
