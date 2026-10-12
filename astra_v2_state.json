@@ -3,7 +3,7 @@
   "day": "2026-10-12",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
   "attempts": 14,
-  "confirmed_today": 13,
+  "confirmed_today": 14,
   "last_attempt_at": "2026-10-12T15:06:02.632561+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -1182,19 +1182,17 @@
       "title": "The Fox Who Borrowed Sunrise",
       "format": "short",
       "uploaded_at": "2026-10-12T14:49:43.375050+00:00"
-    }
-  },
-  "pending": {
-    "0lf-vzoI5vo": {
-      "content_id": "rayvan-anthology-535144f2435abf94",
+    },
+    "rayvan-anthology-535144f2435abf94": {
+      "video_id": "0lf-vzoI5vo",
+      "confirmed_at": "2026-10-12T15:07:30.800270+00:00",
       "title": "The Little Robot and the Kite",
-      "day": "2026-10-12",
-      "uploaded_at": "2026-10-12T15:06:04.441515+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-12T15:06:04.441515+00:00"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
   "last_error": "No authorized upload identity for RAYVAN (primary:invalid_grant, community:invalid_grant)",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
