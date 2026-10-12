@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 15,
-  "confirmed_today": 14,
-  "last_attempt_at": "2026-10-12T22:02:40.441684+00:00",
+  "attempts": 16,
+  "confirmed_today": 15,
+  "last_attempt_at": "2026-10-12T22:11:27.381512+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -105,25 +105,32 @@
       "title": "The Ocean Above the City",
       "format": "short",
       "uploaded_at": "2026-10-12T21:55:07.462855+00:00"
+    },
+    "rayvan-anthology-2906bc6378365d3e": {
+      "video_id": "CkHDJJp4z_Y",
+      "confirmed_at": "2026-10-12T22:10:15.601333+00:00",
+      "title": "The Museum of Tomorrows",
+      "format": "short",
+      "uploaded_at": "2026-10-12T22:02:42.196839+00:00"
     }
   },
   "pending": {
-    "CkHDJJp4z_Y": {
-      "content_id": "rayvan-anthology-2906bc6378365d3e",
-      "title": "The Museum of Tomorrows",
+    "HKoOULQuYl8": {
+      "content_id": "rayvan-anthology-2d0e491203919c7a",
+      "title": "The Garden on the Moon",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-12T22:02:42.196839+00:00",
+      "uploaded_at": "2026-10-12T22:11:29.518526+00:00",
       "genre": "fiction",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-12T22:00:46.416562+00:00",
+  "last_preflight_at": "2026-10-12T22:10:15.232096+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-12T22:02:42.518196+00:00",
+    "at": "2026-10-12T22:11:29.846379+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -229,6 +236,12 @@
     "rayvan-anthology-2906bc6378365d3e": {
       "at": "2026-10-12T22:02:40.441669+00:00",
       "title": "The Museum of Tomorrows",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-anthology-2d0e491203919c7a": {
+      "at": "2026-10-12T22:11:27.381496+00:00",
+      "title": "The Garden on the Moon",
       "format": "short",
       "result": "accepted"
     }
