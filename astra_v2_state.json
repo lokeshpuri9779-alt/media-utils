@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 3,
-  "confirmed_today": 2,
-  "last_attempt_at": "2026-10-12T19:23:02.321060+00:00",
+  "attempts": 4,
+  "confirmed_today": 3,
+  "last_attempt_at": "2026-10-12T19:31:00.945876+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -21,25 +21,32 @@
       "title": "The Library Beneath the Last Tree | Original Microfiction",
       "format": "short",
       "uploaded_at": "2026-10-12T19:09:03.741409+00:00"
+    },
+    "moon-tidal-lock-v1": {
+      "video_id": "-Osbeu_jzb4",
+      "confirmed_at": "2026-10-12T19:30:17.801674+00:00",
+      "title": "Why We Always See the Same Side of the Moon",
+      "format": "short",
+      "uploaded_at": "2026-10-12T19:23:04.155242+00:00"
     }
   },
   "pending": {
-    "-Osbeu_jzb4": {
-      "content_id": "moon-tidal-lock-v1",
-      "title": "Why We Always See the Same Side of the Moon",
+    "rrUdpkUWj9U": {
+      "content_id": "iss-sixteen-sunrises-v1",
+      "title": "Why Astronauts See About 16 Sunrises a Day",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-12T19:23:04.155242+00:00",
+      "uploaded_at": "2026-10-12T19:31:04.288127+00:00",
       "genre": "space",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-12T19:22:03.785194+00:00",
+  "last_preflight_at": "2026-10-12T19:30:17.348316+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-12T19:23:04.391255+00:00",
+    "at": "2026-10-12T19:31:04.514885+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -73,6 +80,12 @@
     "moon-tidal-lock-v1": {
       "at": "2026-10-12T19:23:02.321044+00:00",
       "title": "Why We Always See the Same Side of the Moon",
+      "format": "short",
+      "result": "accepted"
+    },
+    "iss-sixteen-sunrises-v1": {
+      "at": "2026-10-12T19:31:00.945854+00:00",
+      "title": "Why Astronauts See About 16 Sunrises a Day",
       "format": "short",
       "result": "accepted"
     }
