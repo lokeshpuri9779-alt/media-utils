@@ -7,6 +7,7 @@ this repository's own successful, trusted main-branch preload workflow.
 from __future__ import annotations
 
 import hashlib
+from datetime import datetime
 import json
 import os
 import subprocess
@@ -97,7 +98,7 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
     for entry in sorted(artifacts(), key=lambda a: (
         1 if str(a.get("name", "")).startswith(
             ("astra-preloaded-planet-clocks-", "astra-preloaded-trend-brief-")) else 0,
-        a.get("created_at", "")), reverse=True):
+        -datetime.fromisoformat(str(a.get("created_at") or "1970-01-01T00:00:00Z").replace("Z", "+00:00")).timestamp())):
         cid = str(entry["name"])[len(PREFIX):]
         if os.getenv("ASTRA_SERIES_PUBLICATION", "0") == "1" and not cid.startswith("rayvan-season-01-episode-"):
             continue
