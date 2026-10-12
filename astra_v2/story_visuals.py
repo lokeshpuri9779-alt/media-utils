@@ -139,8 +139,14 @@ def draw_subject(image, subject, t, accent):
         d.arc((x+100, y+20, x+260+int(30*math.sin(t*3)), y+240),
               190, 350, fill=fur, width=22)
         d.ellipse((x-130, y+60, x+130, y+300), fill=fur)
-        for dx in (-75, 75):
-            d.rounded_rectangle((x+dx-30, y+260, x+dx+30, y+365),
+        # Alternating footfall with a slight phase offset: the legs actually
+        # step rather than the entire character only bobbing in place.
+        stride = math.sin(t * 5.2)
+        for side, dx in enumerate((-75, 75)):
+            step = int(35 * stride * (1 if side == 0 else -1))
+            lift = int(25 * max(0.0, stride * (1 if side == 0 else -1)))
+            d.rounded_rectangle((x+dx-30+step, y+260-lift,
+                                 x+dx+30+step, y+365-lift),
                                 radius=20, fill=fur)
         d.ellipse((x-155, y-180, x+155, y+115), fill=fur)
         for dx in (-135, 135):
