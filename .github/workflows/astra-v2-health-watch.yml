@@ -1,0 +1,57 @@
+name: ASTRA V2 - Publisher Health Watch
+
+# Independent operational check, not development CI and never uploads a video.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17,47 * * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  health:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Check publisher heartbeat and state
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, subprocess, sys
+          from datetime import datetime, timezone
+
+          repo = os.environ["REPO"]
+          def api(endpoint):
+              result = subprocess.run(
+                  ["gh", "api", f"repos/{repo}/{endpoint}"],
+                  capture_output=True, text=True, timeout=35, check=True)
+              return json.loads(result.stdout)
+
+          # Check real workflow executions, not only the saved upload journal.
+          runs = api("actions/workflows/astra-v2-publish.yml/runs?per_page=10")
+          completed = [r for r in runs.get("workflow_runs", [])
+                       if r.get("status") == "completed"]
+          now = datetime.now(timezone.utc)
+          if not completed:
+              print("ASTRA_HEALTH=FAIL:no_completed_publisher_runs")
+              sys.exit(1)
+          latest = max(completed, key=lambda r: r.get("updated_at") or "")
+          timestamp = datetime.fromisoformat(latest["updated_at"].replace("Z", "+00:00"))
+          age_minutes = (now - timestamp).total_seconds() / 60
+          print(f"ASTRA_PUBLISHER_LAST_RUN={latest.get('html_url')}")
+          print(f"ASTRA_PUBLISHER_LAST_CONCLUSION={latest.get('conclusion')}")
+          print(f"ASTRA_PUBLISHER_LAST_AGE_MINUTES={age_minutes:.1f}")
+          if latest.get("conclusion") != "success":
+              print("ASTRA_HEALTH=FAIL:last_publisher_run_failed")
+              sys.exit(1)
+          # A 90-minute threshold allows normal GitHub cron delays and queued jobs.
+          if age_minutes > 90:
+              print("ASTRA_HEALTH=FAIL:publisher_schedule_stale")
+              sys.exit(1)
+          print("ASTRA_HEALTH=OK:publisher_running")
+          PY
