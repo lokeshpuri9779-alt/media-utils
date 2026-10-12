@@ -3,8 +3,8 @@ from datetime import timedelta
 from astra_v2.control import parse_time
 
 
-def long_upload_due(state, now, spacing_hours=12, performance=None):
-    """Require 12h since the most recent confirmed long video by default.
+def long_upload_due(state, now, spacing_hours=24, performance=None):
+    """Require 24h since the most recent confirmed long video by default.
 
     An unresolved long-form reservation or pending transfer blocks the lane
     regardless of age. This never affects Shorts. Pass the astra-state
