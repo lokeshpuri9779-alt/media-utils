@@ -4887,7 +4887,9 @@ jobs:
           test -x "$APKSIGNER"
           sha256sum -c artifact/PULSEFALL_MOBILE_ALPHA_SHA256.txt
           "$APKSIGNER" verify --verbose --print-certs "$APK"
-          BADGING="$("$AAPT" dump badging "$APK")"
+          BADGING="$("$AAPT" dump badging "$APK" 2>/tmp/aapt-badging.err || true)"
+          cat /tmp/aapt-badging.err
+          test -n "$BADGING"
           printf '%s\n' "$BADGING"
           grep -Fq "package: name='com.pulsefall.blacksite' versionCode='35' versionName='0.2.15-mobile-alpha'" <<<"$BADGING"
           grep -Fq "application-label:'PULSEFALL'" <<<"$BADGING"
