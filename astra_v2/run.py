@@ -138,7 +138,19 @@ def run():
                     # queue; never skip duplicate/format/channel safety checks.
                     candidate = None
                     candidate_from_preload = False
-                    if os.getenv("ASTRA_PRELOAD_ENABLED", "1") == "1":
+                    # A Shorts-heavy preload queue must not indefinitely starve
+                    # an eligible long-form slot. Try the approved long episode
+                    # first, then fall back to the normal preload/Shorts path.
+                    if long_due and os.getenv("ASTRA_PRELOAD_ONLY", "0") != "1":
+                        try:
+                            candidate = make_long_candidate(video, previous_ids | live_ids, live_titles)
+                        except CreativeSkip as long_error:
+                            report["longform_selection"] = "quality_rejected"
+                            print("ASTRA_LONGFORM_SELECTION=quality_rejected:" + str(long_error)[:180])
+                        if candidate is None:
+                            report.setdefault("longform_selection", "no_eligible_approved_episode")
+                            print("ASTRA_LONGFORM_SELECTION=" + report["longform_selection"])
+                    if candidate is None and os.getenv("ASTRA_PRELOAD_ENABLED", "1") == "1":
                         try:
                             from astra_v2.preload_queue import take
                             candidate = take(previous_ids | live_ids, live_titles, video, allow_long=long_due)
@@ -149,14 +161,11 @@ def run():
                         if os.getenv("ASTRA_PRELOAD_ONLY", "0") == "1":
                             report.update(outcome="skipped", reason=("preload_queue_error" if report.get("queue_error_type") else "preload_queue_empty"))
                             return report
-                        long_candidate = make_long_candidate(video, previous_ids | live_ids, live_titles) if long_due else None
-                        if long_due and long_candidate is None:
-                            report["longform_selection"] = "no_eligible_approved_episode"
-                            print("ASTRA_LONGFORM_SELECTION=no_eligible_approved_episode")
-                        candidate = long_candidate or make_candidate(video, previous_ids | live_ids, live_titles)
+                        candidate = make_candidate(video, previous_ids | live_ids, live_titles)
                     else:
-                        candidate_from_preload = True
-                        print("ASTRA_PRELOAD_CONSUMED=" + candidate["content_id"])
+                        candidate_from_preload = bool(candidate.get("queue_artifact_id"))
+                        if candidate_from_preload:
+                            print("ASTRA_PRELOAD_CONSUMED=" + candidate["content_id"])
                 except CreativeSkip as exc:
                     from astra_v2.stage_feedback import record
                     record("quality", "candidate_selection", "fail", evidence={"reason": str(exc)[:200]}, action="Diagnose story supply and creative gate failures")
