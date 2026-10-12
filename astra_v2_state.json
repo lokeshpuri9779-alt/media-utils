@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 25,
-  "confirmed_today": 24,
-  "last_attempt_at": "2026-10-12T23:43:36.432836+00:00",
+  "attempts": 26,
+  "confirmed_today": 25,
+  "last_attempt_at": "2026-10-12T23:51:22.458103+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -175,25 +175,32 @@
       "title": "The Whale Above the Clouds",
       "format": "short",
       "uploaded_at": "2026-10-12T23:31:10.539769+00:00"
+    },
+    "rayvan-original-silentcomet-v1": {
+      "video_id": "6ay1d8Gw0Rw",
+      "confirmed_at": "2026-10-12T23:50:00.082424+00:00",
+      "title": "The Comet That Stopped",
+      "format": "short",
+      "uploaded_at": "2026-10-12T23:43:38.093924+00:00"
     }
   },
   "pending": {
-    "6ay1d8Gw0Rw": {
-      "content_id": "rayvan-original-silentcomet-v1",
-      "title": "The Comet That Stopped",
+    "jAyOcm4Om7Y": {
+      "content_id": "rayvan-original-lightkeeper-v1",
+      "title": "The Last Lightkeeper | Original Microfiction",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-12T23:43:38.093924+00:00",
+      "uploaded_at": "2026-10-12T23:51:24.331704+00:00",
       "genre": "fiction",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-12T23:42:15.314445+00:00",
+  "last_preflight_at": "2026-10-12T23:49:59.687904+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-12T23:43:38.439638+00:00",
+    "at": "2026-10-12T23:51:24.680033+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -359,6 +366,12 @@
     "rayvan-original-silentcomet-v1": {
       "at": "2026-10-12T23:43:36.432824+00:00",
       "title": "The Comet That Stopped",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-original-lightkeeper-v1": {
+      "at": "2026-10-12T23:51:22.458089+00:00",
+      "title": "The Last Lightkeeper | Original Microfiction",
       "format": "short",
       "result": "accepted"
     }
