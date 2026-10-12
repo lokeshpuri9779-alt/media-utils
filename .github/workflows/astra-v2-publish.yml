@@ -9,7 +9,7 @@ on:
   schedule:
     - cron: '*/5 * * * *'
   workflow_run:
-    workflows: ['ASTRA V2 - Preload Approved Videos']
+    workflows: ['ASTRA V2 - Preload Approved Videos', 'ASTRA V2 - Long-form Preload']
     types: [completed]
 
 concurrency:
