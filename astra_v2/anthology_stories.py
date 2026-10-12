@@ -52,6 +52,21 @@ PLOTS = [
  ("UP THE TOWER","It climbed a staircase filled with gears and old feathers.","robot","THE CLIMB","build"),
  ("A BIRD WAS TRAPPED","A little bird had become stuck between the clock's giant gears.","robot","THE SECRET","twist"),
  ("TIME MOVED AGAIN","The cat freed the bird and the bells rang across the waking town.","signal","DING DONG","payoff")]),
+ ("the-fox-and-the-stolen-sunrise","The Fox Who Borrowed Sunrise","animal fantasy","A fox tries to return a missing sunrise to a sleepy valley.",[
+ ("THE SKY STAYED DARK","A small fox woke to discover that the sun had not risen over the valley.","forest","MISSING MORNING","reveal"),
+ ("A LIGHT IN THE HILLS","Following a golden glow, the fox found a frightened firefly carrying a tiny spark.","signal","FOLLOW THE GLOW","build"),
+ ("THE SPARK WAS A KEY","The spark opened an ancient lantern on the hilltop, releasing the morning light.","door","THE SECRET","twist"),
+ ("MORNING CAME BACK","The valley brightened, and the fox curled up beside the lantern as birds began to sing.","forest","SUNRISE RETURNS","payoff")]),
+ ("the-little-robot-and-the-kite","The Little Robot and the Kite","cartoon adventure","A repair robot builds a kite that teaches it to fly.",[
+ ("THE KITE FLEW AWAY","A little robot watched its handmade kite escape over the workshop roof.","robot","KITE ESCAPES","reveal"),
+ ("CHASE THROUGH THE TOWN","It followed the kite across rooftops and under the town's old clocktower.","door","ROOFTOP CHASE","build"),
+ ("THE WIND WAS HELPING","At the tower, the robot discovered the kite was guiding it toward a broken weather vane.","signal","HIDDEN MESSAGE","twist"),
+ ("THE SKY WAS FULL OF KITES","The robot repaired the vane and the townspeople filled the bright sky with colorful kites.","planet","FLY TOGETHER","payoff")]),
+ ("the-bear-who-fixed-the-moon","The Bear Who Fixed the Moon","whimsical comedy","A bear mistakes the moon's reflection for a broken moon.",[
+ ("THE MOON WAS IN PIECES","A bear saw the moon shattered across the ripples of a mountain lake.","planet","BROKEN MOON","reveal"),
+ ("HE FETCHED HIS TOOLS","He carried a toolbox to the shore and tried to collect every shining fragment.","robot","REPAIR TIME","build"),
+ ("A FROG SHOWED HIM","A frog jumped into the lake and the pieces danced again, revealing the trick of the water.","forest","THE REVEAL","twist"),
+ ("THE BEAR LAUGHED","When the lake became still, the moon looked whole again and the bear packed away his tools.","planet","MOON RESTORED","payoff")]),
 ]
 
 def catalog():
