@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 23,
-  "confirmed_today": 22,
-  "last_attempt_at": "2026-10-12T23:23:47.068218+00:00",
+  "attempts": 24,
+  "confirmed_today": 23,
+  "last_attempt_at": "2026-10-12T23:31:08.759365+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -161,25 +161,32 @@
       "title": "The Door That Remembered the Moon",
       "format": "short",
       "uploaded_at": "2026-10-12T23:10:14.062878+00:00"
+    },
+    "rayvan-free-original-1e5869965be72db7": {
+      "video_id": "dCiBmOscE7k",
+      "confirmed_at": "2026-10-12T23:29:48.139388+00:00",
+      "title": "The Ship That Delivered Yesterday",
+      "format": "short",
+      "uploaded_at": "2026-10-12T23:23:48.504636+00:00"
     }
   },
   "pending": {
-    "dCiBmOscE7k": {
-      "content_id": "rayvan-free-original-1e5869965be72db7",
-      "title": "The Ship That Delivered Yesterday",
+    "KxgaQNf5MO0": {
+      "content_id": "rayvan-original-skywhale-v1",
+      "title": "The Whale Above the Clouds",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-12T23:23:48.504636+00:00",
+      "uploaded_at": "2026-10-12T23:31:10.539769+00:00",
       "genre": "fiction",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-12T23:22:30.320177+00:00",
+  "last_preflight_at": "2026-10-12T23:29:47.803906+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-12T23:23:48.845297+00:00",
+    "at": "2026-10-12T23:31:10.868839+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -333,6 +340,12 @@
     "rayvan-free-original-1e5869965be72db7": {
       "at": "2026-10-12T23:23:47.068199+00:00",
       "title": "The Ship That Delivered Yesterday",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-original-skywhale-v1": {
+      "at": "2026-10-12T23:31:08.759351+00:00",
+      "title": "The Whale Above the Clouds",
       "format": "short",
       "result": "accepted"
     }
