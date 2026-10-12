@@ -9,7 +9,7 @@ from astra_v2.control import (
     QUOTA_REASONS, REPORT_FILE, STATE_FILE, due, quota_resume, parse_time,
     read_json, state_for_day, utcnow, write_json,
 )
-from astra_v2.creative import CreativeSkip, make_candidate, make_long_candidate
+from astra_v2.creative import CreativeSkip, make_candidate
 from astra_v2.youtube import Youtube, YoutubeError
 from astra_v2.long_cadence import long_upload_due as historical_long_upload_due
 from astra_v2.publication_quality import publication_rejection
@@ -138,26 +138,14 @@ def run():
                     # queue; never skip duplicate/format/channel safety checks.
                     candidate = None
                     candidate_from_preload = False
-                    # A Shorts-heavy preload queue must not indefinitely starve
-                    # an eligible long-form slot. Try the approved long episode
-                    # first, then fall back to the normal preload/Shorts path.
-                    if long_due and os.getenv("ASTRA_PRELOAD_ONLY", "0") != "1":
-                        try:
-                            candidate = make_long_candidate(video, previous_ids | live_ids, live_titles)
-                        except CreativeSkip as long_error:
-                            report["longform_selection"] = "quality_rejected"
-                            print("ASTRA_LONGFORM_SELECTION=quality_rejected:" + str(long_error)[:180])
-                        except RuntimeError as long_error:
-                            # The long renderer may fail its own quality gate;
-                            # do not let that suppress an otherwise approved Short.
-                            message = str(long_error).lower()
-                            if not any(term in message for term in ("quality", "creative", "no approved", "no candidates")):
-                                raise
-                            report["longform_selection"] = "render_quality_rejected"
-                            print("ASTRA_LONGFORM_SELECTION=render_quality_rejected:" + str(long_error)[:180])
-                        if candidate is None:
-                            report.setdefault("longform_selection", "no_eligible_approved_episode")
-                            print("ASTRA_LONGFORM_SELECTION=" + report["longform_selection"])
+                    # Shorts remain the primary publisher. Never render a long
+                    # episode synchronously in this lane: a slow render could
+                    # delay or suppress scheduled Shorts.
+                    # Long-form uploads may only use independently pre-rendered,
+                    # quality-approved queue artifacts.
+                    if long_due:
+                        report["longform_selection"] = "pre_rendered_queue_only"
+                        print("ASTRA_LONGFORM_SELECTION=pre_rendered_queue_only")
                     if candidate is None and os.getenv("ASTRA_PRELOAD_ENABLED", "1") == "1":
                         try:
                             from astra_v2.preload_queue import take
