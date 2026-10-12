@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 5,
+  "attempts": 6,
   "confirmed_today": 5,
-  "last_attempt_at": "2026-10-12T19:45:19.078271+00:00",
+  "last_attempt_at": "2026-10-12T19:55:09.055311+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -44,29 +44,38 @@
       "uploaded_at": "2026-10-12T19:45:20.812058+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "U2EMNbNvlPI": {
+      "content_id": "rayvan-anthology-5eeedecf037b0d14",
+      "title": "The Baker Who Borrowed Sunrise",
+      "day": "2026-10-13",
+      "uploaded_at": "2026-10-12T19:55:10.764066+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-12T19:48:02.718538+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_preflight_at": "2026-10-12T19:51:59.379876+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-12T19:48:02.772772+00:00",
+    "at": "2026-10-12T19:55:11.027147+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-12T19:00:44.564068+00:00",
   "reserved": {
@@ -97,6 +106,12 @@
     "iss-orbital-speed-v1": {
       "at": "2026-10-12T19:45:19.078253+00:00",
       "title": "How Fast the Space Station Really Travels",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-anthology-5eeedecf037b0d14": {
+      "at": "2026-10-12T19:55:09.055295+00:00",
+      "title": "The Baker Who Borrowed Sunrise",
       "format": "short",
       "result": "accepted"
     }
