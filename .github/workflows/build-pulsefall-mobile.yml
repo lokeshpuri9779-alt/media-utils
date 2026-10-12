@@ -4920,6 +4920,7 @@ jobs:
           unzip -q -o /tmp/pulsefall-export-templates.tpz -d /tmp/pulsefall-export-templates
           cp -a /tmp/pulsefall-export-templates/templates/. "$TEMPLATE_ROOT/"
           test -f "$TEMPLATE_ROOT/android_source.zip"
+          mkdir -p game/build
           "$GODOT" --headless --path game --install-android-build-template --export-debug "Android AAB" "$GITHUB_WORKSPACE/game/build/PULSEFALL_MOBILE_ALPHA.aab"
           test -s game/build/PULSEFALL_MOBILE_ALPHA.aab
 
