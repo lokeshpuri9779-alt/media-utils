@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 10,
-  "confirmed_today": 9,
-  "last_attempt_at": "2026-10-12T21:17:54.526778+00:00",
+  "attempts": 11,
+  "confirmed_today": 10,
+  "last_attempt_at": "2026-10-12T21:27:54.347008+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -70,25 +70,32 @@
       "title": "The Tomorrow Signal | S1 E02 | Mara",
       "format": "short",
       "uploaded_at": "2026-10-12T20:59:07.003455+00:00"
+    },
+    "rayvan-season-01-episode-03": {
+      "video_id": "dqSu1xdZhcs",
+      "confirmed_at": "2026-10-12T21:24:08.276585+00:00",
+      "title": "The Tomorrow Signal | S1 E03 | Mara",
+      "format": "short",
+      "uploaded_at": "2026-10-12T21:17:56.419048+00:00"
     }
   },
   "pending": {
-    "dqSu1xdZhcs": {
-      "content_id": "rayvan-season-01-episode-03",
-      "title": "The Tomorrow Signal | S1 E03 | Mara",
+    "Xpf8xjmtaUo": {
+      "content_id": "rayvan-season-01-episode-04",
+      "title": "The Tomorrow Signal | S1 E04 | Mara",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-12T21:17:56.419048+00:00",
+      "uploaded_at": "2026-10-12T21:27:56.178960+00:00",
       "genre": "fiction",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-12T21:13:31.464398+00:00",
+  "last_preflight_at": "2026-10-12T21:24:07.891432+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-12T21:17:56.745437+00:00",
+    "at": "2026-10-12T21:27:56.516224+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -164,6 +171,12 @@
     "rayvan-season-01-episode-03": {
       "at": "2026-10-12T21:17:54.526763+00:00",
       "title": "The Tomorrow Signal | S1 E03 | Mara",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-season-01-episode-04": {
+      "at": "2026-10-12T21:27:54.346993+00:00",
+      "title": "The Tomorrow Signal | S1 E04 | Mara",
       "format": "short",
       "result": "accepted"
     }
