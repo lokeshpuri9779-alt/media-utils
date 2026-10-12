@@ -85,6 +85,15 @@ def prepare(path, candidate):
     return package
 
 
+def _artifact_created_timestamp(entry):
+    """Invalid GitHub timestamps must not crash the entire upload queue."""
+    try:
+        value = str(entry.get("created_at") or "1970-01-01T00:00:00Z")
+        return datetime.fromisoformat(value.replace("Z", "+00:00")).timestamp()
+    except (ValueError, TypeError, OverflowError, OSError):
+        return 0.0
+
+
 def take(excluded_ids, excluded_titles, output, allow_long=True):
     """Get the newest eligible queued render. Return None for an empty queue.
 
@@ -102,7 +111,7 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
     for entry in sorted(artifacts(), key=lambda a: (
         1 if str(a.get("name", "")).startswith(
             ("astra-preloaded-planet-clocks-", "astra-preloaded-trend-brief-")) else 0,
-        -datetime.fromisoformat(str(a.get("created_at") or "1970-01-01T00:00:00Z").replace("Z", "+00:00")).timestamp())):
+        -_artifact_created_timestamp(a))):
         cid = str(entry["name"])[len(PREFIX):]
         if os.getenv("ASTRA_SERIES_PUBLICATION", "0") == "1" and not cid.startswith("rayvan-season-01-episode-"):
             continue
