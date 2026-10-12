@@ -561,6 +561,39 @@
       },
       "proposed_action": "",
       "candidate_id": "rayvan-free-original-91bb2e14b884a96b"
+    },
+    {
+      "at": "2026-10-12T23:23:47.014951+00:00",
+      "stage": "quality",
+      "element": "creative_director",
+      "outcome": "pass",
+      "evidence": {
+        "scores": {
+          "hook": 94.0,
+          "retention": 92.0,
+          "visual": 100.0,
+          "pacing": 100.0,
+          "audio": 96.71,
+          "captions": 97.07,
+          "novelty": 100.0,
+          "coherence": 92.0,
+          "technical": 100.0
+        }
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-free-original-1e5869965be72db7"
+    },
+    {
+      "at": "2026-10-12T23:23:47.016029+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "pass",
+      "evidence": {
+        "duration": 20.467,
+        "renderer": "studio-7.1.1"
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-free-original-1e5869965be72db7"
     }
   ],
   "stage_counts": {
@@ -661,7 +694,7 @@
       "regressed": 0
     },
     "render": {
-      "pass": 17,
+      "pass": 18,
       "fail": 0,
       "skip": 0,
       "unknown": 0,
@@ -669,7 +702,7 @@
       "regressed": 0
     },
     "quality": {
-      "pass": 17,
+      "pass": 18,
       "fail": 0,
       "skip": 0,
       "unknown": 0,
