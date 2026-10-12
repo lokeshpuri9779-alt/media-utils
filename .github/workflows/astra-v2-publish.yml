@@ -161,7 +161,7 @@ jobs:
           git fetch origin astra-state
           WORKTREE="$(mktemp -d)"
           git worktree add --detach "$WORKTREE" origin/astra-state
-          for f in performance.json astra_v2_state.json SHORTS.md; do
+          for f in performance.json astra_v2_state.json astra_stage_feedback.json SHORTS.md; do
             if [ -f "$f" ]; then cp "$f" "$WORKTREE/$f"; fi
           done
           (
