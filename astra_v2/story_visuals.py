@@ -30,13 +30,23 @@ def select_subject(story, shot):
     # A shot should depict the subject mentioned in that shot, not the first
     # matching word from the entire episode or the fixed subject catalog.
     # Prefer the earliest mention when several objects appear in one beat.
-    for text in (local, global_text):
+    for text in (local,):
         matches = [(match.start(), name)
                    for name, pattern in SUBJECTS
                    if (match := re.search(pattern, text))]
         if matches:
             return min(matches, key=lambda item: item[0])[1]
-    return None
+    # A title-level subject is appropriate only when the beat supplies no
+    # distinct visual direction. Otherwise it makes every shot repeat the
+    # same illustration even when the storyboard changes locations/actions.
+    explicit_visual = str(shot.get("visual_prompt") or shot.get("visual") or "").strip().lower()
+    generic_visuals = {"", "story", "illustration", "fiction", "subject"}
+    if explicit_visual not in generic_visuals:
+        return None
+    matches = [(match.start(), name)
+               for name, pattern in SUBJECTS
+               if (match := re.search(pattern, global_text))]
+    return min(matches, key=lambda item: item[0])[1] if matches else None
 
 
 def draw_subject(image, subject, t, accent):
