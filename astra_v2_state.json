@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-12",
   "created_at": "2026-10-08T16:02:47.886922+00:00",
-  "attempts": 12,
+  "attempts": 13,
   "confirmed_today": 12,
-  "last_attempt_at": "2026-10-11T21:25:11.616424+00:00",
+  "last_attempt_at": "2026-10-12T14:49:42.084498+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1177,8 +1177,17 @@
       "uploaded_at": "2026-10-11T21:25:13.991897+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "quality_skip",
+  "pending": {
+    "0Bhmz78RS8Y": {
+      "content_id": "rayvan-anthology-90c111ee3cab7400",
+      "title": "The Fox Who Borrowed Sunrise",
+      "day": "2026-10-12",
+      "uploaded_at": "2026-10-12T14:49:43.375050+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "No authorized upload identity for RAYVAN (primary:invalid_grant, community:invalid_grant)",
   "reserved": {
     "rayvan-original-lightkeeper-v1": {
@@ -2211,6 +2220,12 @@
     "rayvan-procedural-dabbe8b3cfe7281c": {
       "at": "2026-10-11T21:25:11.616409+00:00",
       "title": "Ivo and the Map at the Library Inside A Giant Tree",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-anthology-90c111ee3cab7400": {
+      "at": "2026-10-12T14:49:42.084481+00:00",
+      "title": "The Fox Who Borrowed Sunrise",
       "format": "short",
       "result": "accepted"
     }

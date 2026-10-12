@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "events": [
+    {
+      "at": "2026-10-12T14:49:42.014393+00:00",
+      "stage": "quality",
+      "element": "creative_director",
+      "outcome": "pass",
+      "evidence": {
+        "scores": {
+          "hook": 94.0,
+          "retention": 92.0,
+          "visual": 100.0,
+          "pacing": 100.0,
+          "audio": 99.61,
+          "captions": 100.0,
+          "novelty": 100.0,
+          "coherence": 92.0,
+          "technical": 100.0
+        }
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-anthology-90c111ee3cab7400"
+    },
+    {
+      "at": "2026-10-12T14:49:42.014818+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "pass",
+      "evidence": {
+        "duration": 19.567,
+        "renderer": "studio-7.1.1"
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-anthology-90c111ee3cab7400"
+    }
+  ],
+  "stage_counts": {
+    "research": {
+      "pass": 0,
+      "fail": 0,
+      "skip": 0,
+      "unknown": 0,
+      "improved": 0,
+      "regressed": 0
+    },
+    "story": {
+      "pass": 0,
+      "fail": 0,
+      "skip": 0,
+      "unknown": 0,
+      "improved": 0,
+      "regressed": 0
+    },
+    "script": {
+      "pass": 0,
+      "fail": 0,
+      "skip": 0,
+      "unknown": 0,
+      "improved": 0,
+      "regressed": 0
+    },
+    "hook": {
+      "pass": 0,
+      "fail": 0,
+      "skip": 0,
+      "unknown": 0,
+      "improved": 0,
+      "regressed": 0
+    },
+    "characters": {
+      "pass": 0,
+      "fail": 0,
+      "skip": 0,
+      "unknown": 0,
+      "improved": 0,
+      "regressed": 0
+    },
+    "visuals": {
+      "pass": 0,
+      "fail": 0,
+      "skip": 0,
+      "unknown": 0,
+      "improved": 0,
+      "regressed": 0
+    },
+    "animation": {
+      "pass": 0,
+      "fail": 0,
+      "skip": 0,
+      "unknown": 0,
+      "improved": 0,
+      "regressed": 0
+    },
+    "camera": {
+      "pass": 0,
+      "fail": 0,
+      "skip": 0,
+      "unknown": 0,
+      "improved": 0,
+      "regressed": 0
+    },
+    "lighting": {
+      "pass": 0,
+      "fail": 0,
+      "skip": 0,
+      "unknown": 0,
+      "improved": 0,
+      "regressed": 0
+    },
+    "audio": {
+      "pass": 0,
+      "fail": 0,
+      "skip": 0,
+      "unknown": 0,
+      "improved": 0,
+      "regressed": 0
+    },
+    "captions": {
+      "pass": 0,
+      "fail": 0,
+      "skip": 0,
+      "unknown": 0,
+      "improved": 0,
+      "regressed": 0
+    },
+    "pacing": {
+      "pass": 0,
+      "fail": 0,
+      "skip": 0,
+      "unknown": 0,
+      "improved": 0,
+      "regressed": 0
+    },
+    "render": {
+      "pass": 1,
+      "fail": 0,
+      "skip": 0,
+      "unknown": 0,
+      "improved": 0,
+      "regressed": 0
+    },
+    "quality": {
+      "pass": 1,
+      "fail": 0,
+      "skip": 0,
+      "unknown": 0,
+      "improved": 0,
+      "regressed": 0
+    },
+    "metadata": {
+      "pass": 0,
+      "fail": 0,
+      "skip": 0,
+      "unknown": 0,
+      "improved": 0,
+      "regressed": 0
+    },
+    "thumbnail": {
+      "pass": 0,
+      "fail": 0,
+      "skip": 0,
+      "unknown": 0,
+      "improved": 0,
+      "regressed": 0
+    },
+    "publish": {
+      "pass": 0,
+      "fail": 0,
+      "skip": 0,
+      "unknown": 0,
+      "improved": 0,
+      "regressed": 0
+    },
+    "analytics": {
+      "pass": 0,
+      "fail": 0,
+      "skip": 0,
+      "unknown": 0,
+      "improved": 0,
+      "regressed": 0
+    },
+    "learning": {
+      "pass": 0,
+      "fail": 0,
+      "skip": 0,
+      "unknown": 0,
+      "improved": 0,
+      "regressed": 0
+    }
+  }
+}
