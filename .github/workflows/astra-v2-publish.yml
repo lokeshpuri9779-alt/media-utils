@@ -123,10 +123,7 @@ jobs:
           command -v ffmpeg
           command -v ffprobe
 
-      - name: Test automated long-form cover generation
-        id: cover_tests
-        if: steps.preflight.outputs.render_due == 'true'
-        run: python -m unittest discover -s tests -p 'test_astra_cover_frames.py' -v
+      # Long-form cover tests execute in astra-v2-longform.yml, not the Shorts publisher.
       - name: Enforce real frame-to-frame motion
         id: motion_tests
         if: steps.preflight.outputs.render_due == 'true'
