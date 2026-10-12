@@ -11,6 +11,18 @@ import subprocess
 from pathlib import Path
 
 
+def _composition_score(jpeg):
+    """Reward subject-rich, nonblank centers while retaining room for a title."""
+    from PIL import Image, ImageFilter, ImageStat
+    with Image.open(io.BytesIO(jpeg)) as source:
+        image = source.convert("L").resize((320, 180))
+        edges = image.filter(ImageFilter.FIND_EDGES)
+        center = ImageStat.Stat(edges.crop((70, 25, 250, 155))).mean[0]
+        sides = (ImageStat.Stat(edges.crop((0, 0, 60, 180))).mean[0]
+                 + ImageStat.Stat(edges.crop((260, 0, 320, 180))).mean[0]) / 2
+        return center * 0.8 - sides * 0.15
+
+
 def _frame_score(jpeg):
     """Simple deterministic clarity/exposure heuristic, no paid vision API."""
     from PIL import Image, ImageFilter, ImageStat
@@ -41,7 +53,7 @@ def extract_long_cover(video):
         raise ValueError("Invalid video duration")
     # Seek across the hook and early story, not just a single fixed timestamp.
     timestamps = sorted(set(min(duration / 2, max(0.0, duration * fraction))
-                            for fraction in (0.03, 0.08, 0.14, 0.22, 0.30)))
+                            for fraction in (0.03, 0.08, 0.14, 0.22, 0.30, 0.38, 0.46)))
     candidates = []
     for timestamp in timestamps:
         try:
@@ -54,7 +66,7 @@ def extract_long_cover(video):
                 capture_output=True, timeout=30, check=True,
             )
             if result.stdout and len(result.stdout) <= 2 * 1024 * 1024:
-                candidates.append((_frame_score(result.stdout), result.stdout))
+                candidates.append((_frame_score(result.stdout) + _composition_score(result.stdout), result.stdout))
         except (subprocess.SubprocessError, OSError, ValueError):
             continue
     if not candidates:
