@@ -4997,14 +4997,24 @@ jobs:
           echo "AAB PACKAGE CHECKS: 5 FAILURES: 0"
           echo "AAB ABI: arm64-v8a"
 
-      - name: Upload Android build
+      - name: Upload Android APK
         uses: actions/upload-artifact@v4
         with:
-          name: PULSEFALL_MOBILE_ALPHA
+          name: PULSEFALL_MOBILE_ALPHA_APK
           path: |
             artifact/PULSEFALL_MOBILE_ALPHA.apk
-            artifact/PULSEFALL_MOBILE_ALPHA.aab
             artifact/PULSEFALL_MOBILE_ALPHA_SHA256.txt
+            artifact/PULSEFALL_README.txt
+            artifact/THIRD_PARTY_NOTICES.txt
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload Android AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: PULSEFALL_MOBILE_ALPHA_AAB
+          path: |
+            artifact/PULSEFALL_MOBILE_ALPHA.aab
             artifact/PULSEFALL_MOBILE_ALPHA_AAB_SHA256.txt
             artifact/PULSEFALL_README.txt
             artifact/THIRD_PARTY_NOTICES.txt
