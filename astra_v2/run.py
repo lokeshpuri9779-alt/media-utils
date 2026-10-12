@@ -205,7 +205,8 @@ def run():
                 state["attempts"] += 1
                 write_json(STATE_FILE, state)
                 video_id = youtube.upload(
-                    video, title, description, candidate["synthetic"])
+                    video, title, description, candidate["synthetic"],
+                    made_for_kids=candidate.get("made_for_kids"))
                 state["reserved"][cid]["result"] = "accepted"
                 state["pending"][video_id] = {
                     "content_id": cid, "title": title, "day": state["day"],
