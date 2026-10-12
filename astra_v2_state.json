@@ -10,11 +10,11 @@
   "published": {},
   "pending": {},
   "last_outcome": "ready",
-  "last_preflight_at": "2026-10-12T18:52:09.187799+00:00",
+  "last_preflight_at": "2026-10-12T18:55:12.832130+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-12T18:52:52.088103+00:00",
+    "at": "2026-10-12T18:55:40.250218+00:00",
     "preflight_step": "success",
     "render_due": "true",
     "job_status_before_persist": "failure",
@@ -26,6 +26,8 @@
     "cover_package_tests": "success",
     "quality_tests": "success",
     "policy_tests": "failure",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
     "layer_tests": "skipped"
   }
 }
