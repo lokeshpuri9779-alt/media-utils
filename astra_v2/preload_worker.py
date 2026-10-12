@@ -85,6 +85,9 @@ def main():
                 except CreativeSkip as exc:
                     print("ASTRA_LONG_PRELOAD_SKIP=" + str(exc)[:150])
             if candidate is None:
+                if os.getenv("ASTRA_LONG_ONLY", "0") == "1":
+                    print("ASTRA_LONG_PRELOAD_SKIP=no_approved_long_episode")
+                    return
                 candidate = make_candidate(video, excluded, set())
         except CreativeSkip as exc:
             print("ASTRA_PRELOAD="+json.dumps({"outcome":"no_approved_candidate","reason":str(exc)[:100]}))
