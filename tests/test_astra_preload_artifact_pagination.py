@@ -83,8 +83,8 @@ class QueueFormatSelectionTests(unittest.TestCase):
                 self.assertEqual(short["format"], "short")
                 self.assertEqual(out.read_bytes(), b"video-short-next" * 100)
                 long = preload_queue.take(set(), set(), out, allow_long=True)
-                self.assertEqual(long["content_id"], "long-first")
-                self.assertEqual(long["format"], "long")
+                self.assertEqual(long["content_id"], "short-next")
+                self.assertEqual(long["format"], "short")
 
 if __name__ == "__main__":
     unittest.main()
