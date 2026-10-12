@@ -181,7 +181,7 @@ class Youtube:
         # Audience classification is independent of animation style.
         # The publisher may supply an explicit per-video classification.
         if made_for_kids is None:
-            made_for_kids = os.getenv("ASTRA_MADE_FOR_KIDS", "1") == "1"
+            made_for_kids = os.getenv("ASTRA_MADE_FOR_KIDS", "0") == "1"
         if not isinstance(made_for_kids, bool):
             raise ValueError("made_for_kids must be a boolean")
         tags, hashtags = self.discover_tags(title, description)
