@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 16,
-  "confirmed_today": 15,
-  "last_attempt_at": "2026-10-12T22:11:27.381512+00:00",
+  "attempts": 17,
+  "confirmed_today": 16,
+  "last_attempt_at": "2026-10-12T22:23:38.976837+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -112,25 +112,32 @@
       "title": "The Museum of Tomorrows",
       "format": "short",
       "uploaded_at": "2026-10-12T22:02:42.196839+00:00"
+    },
+    "rayvan-anthology-2d0e491203919c7a": {
+      "video_id": "HKoOULQuYl8",
+      "confirmed_at": "2026-10-12T22:22:21.235679+00:00",
+      "title": "The Garden on the Moon",
+      "format": "short",
+      "uploaded_at": "2026-10-12T22:11:29.518526+00:00"
     }
   },
   "pending": {
-    "HKoOULQuYl8": {
-      "content_id": "rayvan-anthology-2d0e491203919c7a",
-      "title": "The Garden on the Moon",
+    "RDHUMIuh5nY": {
+      "content_id": "rayvan-anthology-0566139be012f920",
+      "title": "The Shadow That Was Late",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-12T22:11:29.518526+00:00",
+      "uploaded_at": "2026-10-12T22:23:40.647829+00:00",
       "genre": "fiction",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-12T22:10:15.232096+00:00",
+  "last_preflight_at": "2026-10-12T22:22:20.807871+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-12T22:11:29.846379+00:00",
+    "at": "2026-10-12T22:23:40.995103+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -242,6 +249,12 @@
     "rayvan-anthology-2d0e491203919c7a": {
       "at": "2026-10-12T22:11:27.381496+00:00",
       "title": "The Garden on the Moon",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-anthology-0566139be012f920": {
+      "at": "2026-10-12T22:23:38.976823+00:00",
+      "title": "The Shadow That Was Late",
       "format": "short",
       "result": "accepted"
     }
