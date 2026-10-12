@@ -35,6 +35,18 @@ class QueueTimestampTests(unittest.TestCase):
         self.assertGreater(preload_queue._artifact_created_timestamp({"created_at": "2026-10-12T19:00:00Z"}), 0)
 
 
+class QueueFreshnessTests(unittest.TestCase):
+    def test_stale_pre_render_is_rejected(self):
+        from datetime import datetime, timezone
+        now = datetime(2026, 10, 13, 12, tzinfo=timezone.utc)
+        old = {"created_at": "2026-10-10T11:00:00Z"}
+        fresh = {"created_at": "2026-10-12T12:00:00Z"}
+        self.assertFalse(preload_queue._artifact_fresh(old, 48, now))
+        self.assertTrue(preload_queue._artifact_fresh(fresh, 48, now))
+        self.assertTrue(preload_queue._artifact_fresh(old, 0, now))
+        self.assertFalse(preload_queue._artifact_fresh({"created_at": "invalid"}, 48, now))
+
+
 class QueueFormatSelectionTests(unittest.TestCase):
     """Shorts win during cooldown; long-form wins when its cadence is due."""
 
