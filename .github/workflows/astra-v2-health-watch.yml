@@ -53,5 +53,36 @@ jobs:
           if age_minutes > 90:
               print("ASTRA_HEALTH=FAIL:publisher_schedule_stale")
               sys.exit(1)
-          print("ASTRA_HEALTH=OK:publisher_running")
+          # A green publisher can still skip every upload. Check publication
+          # independently so recurring no-video failures are visible.
+          import base64
+          try:
+              state_file = api("contents/astra_v2_state.json?ref=astra-state")
+              state = json.loads(base64.b64decode(state_file["content"]).decode("utf-8"))
+          except (KeyError, ValueError, UnicodeDecodeError, subprocess.CalledProcessError) as exc:
+              print(f"ASTRA_HEALTH=FAIL:journal_unavailable:{type(exc).__name__}")
+              sys.exit(1)
+          published = state.get("published") or {}
+          timestamps = []
+          for item in published.values():
+              if not isinstance(item, dict):
+                  continue
+              raw = item.get("confirmed_at")
+              if not raw:
+                  continue
+              try:
+                  timestamps.append(datetime.fromisoformat(raw.replace("Z", "+00:00")))
+              except (ValueError, TypeError):
+                  continue
+          if not timestamps:
+              print("ASTRA_HEALTH=FAIL:no_confirmed_publications")
+              sys.exit(1)
+          last_publication = max(timestamps)
+          publication_age_hours = (now - last_publication).total_seconds() / 3600
+          print(f"ASTRA_LAST_PUBLICATION_AGE_HOURS={publication_age_hours:.1f}")
+          # This is a visibility alarm, not an automatic quota-bypassing retry.
+          if publication_age_hours > 6:
+              print("ASTRA_HEALTH=FAIL:publication_stale")
+              sys.exit(1)
+          print("ASTRA_HEALTH=OK:publisher_running_and_publishing")
           PY
