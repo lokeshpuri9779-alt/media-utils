@@ -131,11 +131,16 @@ def main():
             report["outcome"] = "processing"
         else:
             report["outcome"] = "ready" if allowed else "skipped"
+        # A recovered OAuth identity must clear stale invalid_grant diagnostics.
+        if report.get("oauth_preflight") == "authorized":
+            state.pop("last_error", None)
+            state.pop("last_error_at", None)
         state["last_outcome"] = report["outcome"]
         return report
     except Exception as exc:
         report.update(outcome="failure", reason=type(exc).__name__ + ": " + str(exc)[:150])
         state["last_error"] = str(exc)[:300]
+        state["last_error_at"] = utcnow().isoformat()
         state["last_outcome"] = "failure"
         raise
     finally:
