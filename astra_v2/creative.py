@@ -233,7 +233,7 @@ def make_long_candidate(path, excluded_ids, excluded_titles):
     import cloud_once as legacy
     from longform import choose_episode
     from ypp_safety import enforce
-    episode = choose_episode(legacy.load_performance(), datetime.now(ZoneInfo("Asia/Kolkata")))
+    episode = choose_episode(legacy.load_performance(), datetime.now(ZoneInfo("Asia/Kolkata")), excluded_ids=excluded_ids)
     if not episode or episode in excluded_ids:
         return None
     try:
