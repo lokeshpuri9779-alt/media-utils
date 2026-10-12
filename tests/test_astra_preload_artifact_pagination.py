@@ -28,6 +28,13 @@ class QueueDiscoveryTests(unittest.TestCase):
 
 
 
+class QueueTimestampTests(unittest.TestCase):
+    def test_invalid_artifact_timestamp_does_not_crash_queue_sort(self):
+        self.assertEqual(preload_queue._artifact_created_timestamp({"created_at": "broken"}), 0.0)
+        self.assertEqual(preload_queue._artifact_created_timestamp({"created_at": None}), 0.0)
+        self.assertGreater(preload_queue._artifact_created_timestamp({"created_at": "2026-10-12T19:00:00Z"}), 0)
+
+
 class QueueFormatSelectionTests(unittest.TestCase):
     """Regression: an older cooling long-form render must not starve Shorts."""
 
