@@ -114,7 +114,7 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
         run = _api(f"repos/{repo}/actions/runs/{run_id}")
         if (run.get("conclusion") != "success"
                 or run.get("head_branch") != "main"
-                or run.get("name") != "ASTRA V2 - Preload Approved Videos"):
+                or run.get("name") not in ("ASTRA V2 - Preload Approved Videos", "ASTRA V2 - Long-form Preload")):
             continue
         with tempfile.TemporaryDirectory(prefix="astra-queue-") as tmp:
             archive = Path(tmp) / "artifact.zip"
@@ -135,6 +135,8 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
                     if candidate.get("content_id") != cid:
                         continue
                     if candidate.get("format") not in ("short", "long"):
+                        continue
+                    if run.get("name") == "ASTRA V2 - Long-form Preload" and candidate["format"] != "long":
                         continue
                     if candidate["format"] == "long" and not allow_long:
                         continue
