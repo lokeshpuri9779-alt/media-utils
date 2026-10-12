@@ -163,6 +163,10 @@ def make_candidate(path, excluded_ids, excluded_titles):
     else:
         if lane_count > 1:
             raise CreativeSkip('no_approved_candidate_in_preload_lane')
+        # Do not waste a full render on the unreviewed legacy template pool.
+        # The existing final publication gate remains mandatory if opted in.
+        if os.getenv("ASTRA_ALLOW_LEGACY_FALLBACK", "0") != "1":
+            raise CreativeSkip("no_approved_original_story_available")
         try:
             title, description = legacy.make_short(
                 path, excluded_ids=excluded_ids, excluded_titles=excluded_titles)
