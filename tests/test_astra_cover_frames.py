@@ -1,8 +1,10 @@
 """Fast, deterministic tests for free ASTRA long-form cover extraction."""
+import io
 import json
 import tempfile
 import unittest
 from pathlib import Path
+from PIL import Image
 from unittest.mock import patch
 from astra_v2.cover_frames import extract_long_cover
 
@@ -18,19 +20,21 @@ class CoverFramesTests(unittest.TestCase):
             video = Path(d) / "story.mp4"
             video.write_bytes(b"mock video")
             calls = []
+            frame = io.BytesIO()
+            Image.new("RGB", (1280, 720), (100, 130, 180)).save(frame, format="JPEG")
+            jpeg = frame.getvalue()
 
             def fake_run(cmd, **kwargs):
                 calls.append(cmd)
                 if cmd[0] == "ffprobe":
                     return type("Result", (), {"stdout": json.dumps({"format": {"duration": "180"}})})()
-                destination = Path(cmd[-1])
-                destination.write_bytes(b"jpeg mock")
-                return type("Result", (), {"stdout": ""})()
+                return type("Result", (), {"stdout": jpeg})()
 
             with patch("astra_v2.cover_frames.subprocess.run", side_effect=fake_run):
                 cover = extract_long_cover(video)
             self.assertEqual(cover.name, "story_cover_wide.jpg")
-            self.assertEqual(len(calls), 2)
+            self.assertEqual(len(calls), 8)
+            self.assertEqual(cover.read_bytes(), jpeg)
             self.assertIn("scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720", calls[1])
             self.assertEqual(calls[1][calls[1].index("-ss") + 1], "5.400")
 
