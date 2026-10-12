@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 13,
-  "confirmed_today": 12,
-  "last_attempt_at": "2026-10-12T21:47:02.189221+00:00",
+  "attempts": 14,
+  "confirmed_today": 13,
+  "last_attempt_at": "2026-10-12T21:55:05.447880+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -91,25 +91,32 @@
       "title": "The Library of Unwritten Books",
       "format": "short",
       "uploaded_at": "2026-10-12T21:35:35.514697+00:00"
+    },
+    "rayvan-anthology-672972bb35f02622": {
+      "video_id": "TxhLg-1HEeU",
+      "confirmed_at": "2026-10-12T21:53:40.373844+00:00",
+      "title": "The Robot Who Collected Laughter",
+      "format": "short",
+      "uploaded_at": "2026-10-12T21:47:03.874071+00:00"
     }
   },
   "pending": {
-    "TxhLg-1HEeU": {
-      "content_id": "rayvan-anthology-672972bb35f02622",
-      "title": "The Robot Who Collected Laughter",
+    "fb-bUJD2uDM": {
+      "content_id": "rayvan-anthology-a9a002d2ef7f9c8f",
+      "title": "The Ocean Above the City",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-12T21:47:03.874071+00:00",
+      "uploaded_at": "2026-10-12T21:55:07.462855+00:00",
       "genre": "fiction",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-12T21:45:44.935024+00:00",
+  "last_preflight_at": "2026-10-12T21:53:39.764194+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-12T21:47:04.215072+00:00",
+    "at": "2026-10-12T21:55:07.779033+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -203,6 +210,12 @@
     "rayvan-anthology-672972bb35f02622": {
       "at": "2026-10-12T21:47:02.189206+00:00",
       "title": "The Robot Who Collected Laughter",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-anthology-a9a002d2ef7f9c8f": {
+      "at": "2026-10-12T21:55:05.447866+00:00",
+      "title": "The Ocean Above the City",
       "format": "short",
       "result": "accepted"
     }
