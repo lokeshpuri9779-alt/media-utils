@@ -7,7 +7,7 @@ this repository's own successful, trusted main-branch preload workflow.
 from __future__ import annotations
 
 import hashlib
-from datetime import datetime
+from datetime import datetime, timezone
 import json
 import os
 import subprocess
@@ -94,6 +94,18 @@ def _artifact_created_timestamp(entry):
         return 0.0
 
 
+
+def _artifact_fresh(entry, max_age_hours, now=None):
+    """Reject old pre-renders when freshness policy is enabled."""
+    if max_age_hours <= 0:
+        return True
+    created = _artifact_created_timestamp(entry)
+    if created <= 0:
+        return False
+    current = (now or datetime.now(timezone.utc)).timestamp()
+    return 0 <= current - created <= max_age_hours * 3600
+
+
 def take(excluded_ids, excluded_titles, output, allow_long=True):
     """Get the newest eligible queued render. Return None for an empty queue.
 
@@ -113,7 +125,11 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
             ("astra-preloaded-planet-clocks-", "astra-preloaded-trend-brief-"))
         return (0 if (is_long and allow_long) or (not is_long and not allow_long) else 1,
                 -_artifact_created_timestamp(entry))
+    max_age_hours = max(0, int(os.getenv("ASTRA_PRELOAD_MAX_AGE_HOURS", "0")))
     for entry in sorted(artifacts(), key=priority):
+        if not _artifact_fresh(entry, max_age_hours):
+            print("ASTRA_PRELOAD_STALE_SKIP=" + str(entry.get("name", "")))
+            continue
         cid = str(entry["name"])[len(PREFIX):]
         if os.getenv("ASTRA_SERIES_PUBLICATION", "0") == "1" and not cid.startswith("rayvan-season-01-episode-"):
             continue
