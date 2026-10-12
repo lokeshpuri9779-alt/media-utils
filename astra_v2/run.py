@@ -101,8 +101,6 @@ def run():
                     legacy.refresh_performance()
                     # Run the existing private Analytics collector and update
                     # channel learning on the same bounded feedback cadence.
-                    from datetime import datetime
-                    from zoneinfo import ZoneInfo
                     from autonomy import refresh_analytics
                     from channel_memory import refresh_channel_memory
                     learning = legacy.load_performance()
