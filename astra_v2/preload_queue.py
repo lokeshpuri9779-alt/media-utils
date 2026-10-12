@@ -105,13 +105,15 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
     # Only confirmed published IDs unlock the following installment.
     from astra_v2.control import STATE_FILE, read_json, state_for_day
     published = set(state_for_day(read_json(STATE_FILE)).get("published", {}))
-    # Shorts-first publishing: a ready long-form package must not displace
-    # eligible Shorts merely because the separate long-form lane completed.
-    # Long-form remains eligible when no valid Short is available.
-    for entry in sorted(artifacts(), key=lambda a: (
-        1 if str(a.get("name", "")).startswith(
-            ("astra-preloaded-planet-clocks-", "astra-preloaded-trend-brief-")) else 0,
-        -_artifact_created_timestamp(a))):
+    # When the 12-hour long-form cadence is due, try approved long-form
+    # artifacts first. Otherwise prefer Shorts and exclude cooling long-form.
+    # Preserve newest-first order within each class.
+    def priority(entry):
+        is_long = str(entry.get("name", "")).startswith(
+            ("astra-preloaded-planet-clocks-", "astra-preloaded-trend-brief-"))
+        return (0 if (is_long and allow_long) or (not is_long and not allow_long) else 1,
+                -_artifact_created_timestamp(entry))
+    for entry in sorted(artifacts(), key=priority):
         cid = str(entry["name"])[len(PREFIX):]
         if os.getenv("ASTRA_SERIES_PUBLICATION", "0") == "1" and not cid.startswith("rayvan-season-01-episode-"):
             continue
