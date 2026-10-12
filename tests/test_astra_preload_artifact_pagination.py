@@ -50,7 +50,7 @@ class QueueFreshnessTests(unittest.TestCase):
 class QueueFormatSelectionTests(unittest.TestCase):
     """Shorts win during cooldown; long-form wins when its cadence is due."""
 
-    @patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/repo", "ASTRA_SERIES_PUBLICATION": "0"})
+    @patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/repo", "ASTRA_SERIES_PUBLICATION": "0", "ASTRA_PRELOAD_MAX_AGE_HOURS": "0"})
     def test_cooling_long_is_skipped_and_short_is_selected(self):
         import hashlib
         import io
