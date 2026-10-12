@@ -142,6 +142,16 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
                         continue
                     if not all(candidate.get(k) for k in ("title", "description", "content_id", "genre", "format")):
                         continue
+                    # Queue packages may have been created under older policy.
+                    # Reject them here and keep scanning for approved artifacts,
+                    # instead of returning the first stale package every run.
+                    from astra_v2.publication_quality import publication_rejection
+                    rejection = publication_rejection(candidate)
+                    if rejection:
+                        print("ASTRA_PRELOAD_POLICY_SKIP=" + json.dumps({
+                            "content_id": cid, "reason": rejection,
+                        }))
+                        continue
                     video = z.read("video.mp4")
             except (ValueError, KeyError, zipfile.BadZipFile, json.JSONDecodeError):
                 continue
