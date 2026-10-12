@@ -29,6 +29,7 @@ jobs:
       ASTRA_MADE_FOR_KIDS: '0' # General-audience originals; explicitly child-directed candidates must override
       ASTRA_LONG_ENABLED: '1'
       ASTRA_PRELOAD_ENABLED: '1'
+      ASTRA_PRELOAD_MAX_AGE_HOURS: '48' # Skip old rendered visuals; render fresh when queue is stale
       ASTRA_PRELOAD_ONLY: '0'
       ASTRA_SERIES_PUBLICATION: '0' # Allow new approved originals after completed Season 1
       ASTRA_OPENAI_ENABLED: '0'
