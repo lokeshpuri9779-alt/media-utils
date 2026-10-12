@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 7,
+  "attempts": 8,
   "confirmed_today": 7,
-  "last_attempt_at": "2026-10-12T20:02:57.050935+00:00",
+  "last_attempt_at": "2026-10-12T20:17:22.321552+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -58,28 +58,38 @@
       "uploaded_at": "2026-10-12T20:02:58.649756+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-12T20:07:33.869307+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "2rBqw8UHIo8": {
+      "content_id": "rayvan-season-01-episode-01",
+      "title": "The Tomorrow Signal | S1 E01 | Mara",
+      "day": "2026-10-13",
+      "uploaded_at": "2026-10-12T20:17:23.946213+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-12T20:13:13.615772+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-12T20:07:34.556621+00:00",
+    "at": "2026-10-12T20:17:24.288145+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-12T19:00:44.564068+00:00",
   "reserved": {
@@ -122,6 +132,12 @@
     "rayvan-anthology-cd5ab05aa5231438": {
       "at": "2026-10-12T20:02:57.050918+00:00",
       "title": "The Last Firefly",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-season-01-episode-01": {
+      "at": "2026-10-12T20:17:22.321538+00:00",
+      "title": "The Tomorrow Signal | S1 E01 | Mara",
       "format": "short",
       "result": "accepted"
     }
