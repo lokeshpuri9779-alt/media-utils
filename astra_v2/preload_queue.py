@@ -68,6 +68,10 @@ def prepare(path, candidate):
         raise ValueError("Publication quality rejected: " + rejection)
     payload = {k: candidate[k] for k in (
         "content_id", "title", "description", "synthetic", "genre", "format")}
+    if "made_for_kids" in candidate:
+        if not isinstance(candidate["made_for_kids"], bool):
+            raise ValueError("made_for_kids must be boolean")
+        payload["made_for_kids"] = candidate["made_for_kids"]
     payload["sha256"] = hashlib.sha256(video.read_bytes()).hexdigest()
     payload["media"] = media
     package = video.parent / "preload-package"
