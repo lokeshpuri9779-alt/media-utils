@@ -2,32 +2,51 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 0,
+  "attempts": 1,
   "confirmed_today": 0,
-  "last_attempt_at": "",
+  "last_attempt_at": "2026-10-12T19:00:53.784484+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {},
-  "pending": {},
-  "last_outcome": "ready",
-  "last_preflight_at": "2026-10-12T18:55:12.832130+00:00",
+  "pending": {
+    "6YAL01HpinY": {
+      "content_id": "rayvan-original-spacesong-v1",
+      "title": "The Song From the Empty Ship | Original Microfiction",
+      "day": "2026-10-13",
+      "uploaded_at": "2026-10-12T19:00:56.796216+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-12T19:00:09.974267+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-12T18:55:40.250218+00:00",
+    "at": "2026-10-12T19:00:57.084894+00:00",
     "preflight_step": "success",
     "render_due": "true",
-    "job_status_before_persist": "failure",
+    "job_status_before_persist": "success",
     "dependencies_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "cover_tests": "",
     "motion_tests": "success",
     "animal_tests": "success",
     "cover_package_tests": "success",
     "quality_tests": "success",
-    "policy_tests": "failure",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
+  },
+  "last_feedback_attempt_at": "2026-10-12T19:00:44.564068+00:00",
+  "reserved": {
+    "rayvan-original-spacesong-v1": {
+      "at": "2026-10-12T19:00:53.784470+00:00",
+      "title": "The Song From the Empty Ship | Original Microfiction",
+      "format": "short",
+      "result": "accepted"
+    }
   }
 }
