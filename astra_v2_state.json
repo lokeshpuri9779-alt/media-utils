@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 11,
-  "confirmed_today": 10,
-  "last_attempt_at": "2026-10-12T21:27:54.347008+00:00",
+  "attempts": 12,
+  "confirmed_today": 11,
+  "last_attempt_at": "2026-10-12T21:35:33.985248+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -77,25 +77,32 @@
       "title": "The Tomorrow Signal | S1 E03 | Mara",
       "format": "short",
       "uploaded_at": "2026-10-12T21:17:56.419048+00:00"
+    },
+    "rayvan-season-01-episode-04": {
+      "video_id": "Xpf8xjmtaUo",
+      "confirmed_at": "2026-10-12T21:34:16.207223+00:00",
+      "title": "The Tomorrow Signal | S1 E04 | Mara",
+      "format": "short",
+      "uploaded_at": "2026-10-12T21:27:56.178960+00:00"
     }
   },
   "pending": {
-    "Xpf8xjmtaUo": {
-      "content_id": "rayvan-season-01-episode-04",
-      "title": "The Tomorrow Signal | S1 E04 | Mara",
+    "061EIqWjnQQ": {
+      "content_id": "rayvan-anthology-542cd01a50f64edb",
+      "title": "The Library of Unwritten Books",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-12T21:27:56.178960+00:00",
+      "uploaded_at": "2026-10-12T21:35:35.514697+00:00",
       "genre": "fiction",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-12T21:24:07.891432+00:00",
+  "last_preflight_at": "2026-10-12T21:34:15.735277+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-12T21:27:56.516224+00:00",
+    "at": "2026-10-12T21:35:35.849142+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -177,6 +184,12 @@
     "rayvan-season-01-episode-04": {
       "at": "2026-10-12T21:27:54.346993+00:00",
       "title": "The Tomorrow Signal | S1 E04 | Mara",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-anthology-542cd01a50f64edb": {
+      "at": "2026-10-12T21:35:33.985234+00:00",
+      "title": "The Library of Unwritten Books",
       "format": "short",
       "result": "accepted"
     }
