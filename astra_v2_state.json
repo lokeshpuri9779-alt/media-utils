@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 17,
-  "confirmed_today": 16,
-  "last_attempt_at": "2026-10-12T22:23:38.976837+00:00",
+  "attempts": 18,
+  "confirmed_today": 17,
+  "last_attempt_at": "2026-10-12T22:32:46.587368+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -119,25 +119,32 @@
       "title": "The Garden on the Moon",
       "format": "short",
       "uploaded_at": "2026-10-12T22:11:29.518526+00:00"
+    },
+    "rayvan-anthology-0566139be012f920": {
+      "video_id": "RDHUMIuh5nY",
+      "confirmed_at": "2026-10-12T22:31:36.620486+00:00",
+      "title": "The Shadow That Was Late",
+      "format": "short",
+      "uploaded_at": "2026-10-12T22:23:40.647829+00:00"
     }
   },
   "pending": {
-    "RDHUMIuh5nY": {
-      "content_id": "rayvan-anthology-0566139be012f920",
-      "title": "The Shadow That Was Late",
+    "aB1y-bQDC9I": {
+      "content_id": "rayvan-anthology-20dc79fbdc44c430",
+      "title": "The Train to Nowhere",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-12T22:23:40.647829+00:00",
+      "uploaded_at": "2026-10-12T22:32:48.157557+00:00",
       "genre": "fiction",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-12T22:22:20.807871+00:00",
+  "last_preflight_at": "2026-10-12T22:31:36.249296+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-12T22:23:40.995103+00:00",
+    "at": "2026-10-12T22:32:48.472830+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -255,6 +262,12 @@
     "rayvan-anthology-0566139be012f920": {
       "at": "2026-10-12T22:23:38.976823+00:00",
       "title": "The Shadow That Was Late",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-anthology-20dc79fbdc44c430": {
+      "at": "2026-10-12T22:32:46.587351+00:00",
+      "title": "The Train to Nowhere",
       "format": "short",
       "result": "accepted"
     }
