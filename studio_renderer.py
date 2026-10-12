@@ -474,13 +474,20 @@ def score_audio(plan, duration, genre, path):
 
 
 @lru_cache(maxsize=5)
-def background(genre):
+@lru_cache(maxsize=24)
+def background(genre, variant=0):
+    """Reproducible shot-specific lighting without additional model/API cost."""
     top,bottom,accent=THEMES[genre]
+    variant=int(variant)%6
     y,x=np.mgrid[0:H,0:W]
     blend=y/H
-    glow=np.exp(-(((x-W*.65)/(W*.8))**2+((y-H*.40)/(H*.48))**2)*3)
+    glow_x=(.28,.48,.68,.78,.38,.58)[variant]
+    glow_y=(.32,.50,.40,.62,.58,.28)[variant]
+    glow=np.exp(-(((x-W*glow_x)/(W*.8))**2+((y-H*glow_y)/(H*.48))**2)*3)
     arr=np.zeros((H,W,3),dtype=np.uint8)
-    for c in range(3): arr[:,:,c]=np.clip(top[c]*(1-blend)+bottom[c]*blend+glow*accent[c]*.09,0,255)
+    for channel in range(3):
+        tint=(variant-2)*2 if channel==variant%3 else 0
+        arr[:,:,channel]=np.clip(top[channel]*(1-blend)+bottom[channel]*blend+glow*accent[channel]*.09+tint,0,255)
     return Image.fromarray(arr)
 
 
@@ -982,7 +989,11 @@ def render_frame(plan,t,genre,total):
     index=next((i for i,s in enumerate(plan) if t<s['end']),len(plan)-1)
     s=plan[index];u=t-s['start']; accent=THEMES[genre][2]
     s,micro=_micro_scene_direction(s,t,genre)
-    im=background(genre).copy()
+    # Use the shot's own storyboard text for stable lighting variation.
+    # Keep one palette per shot (not per frame) to prevent flicker.
+    visual_identity = str(s.get('visual_prompt') or s.get('visual') or '') + str(s.get('headline') or '')
+    variant = int.from_bytes(hashlib.sha256(visual_identity.encode()).digest()[:2], 'big') % 6
+    im=background(genre, variant).copy()
     # Camera treatment is chosen by the director per narrative beat.
     cam=s.get('director_camera','push'); energy=float(s.get('director_energy',.5))
     if cam in {'push','drift','track'}:
