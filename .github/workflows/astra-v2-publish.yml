@@ -141,13 +141,18 @@ jobs:
         if: steps.preflight.outputs.render_due == 'true'
         run: python -m unittest discover -s tests -p 'test_astra_publication_quality.py' -v
 
-      - name: Run V2 policy and API regression tests
+      - name: Run V2 policy regression tests
         id: policy_tests
         if: steps.preflight.outputs.render_due == 'true'
-        run: |
-          python -m unittest discover -s tests -p 'test_astra_v2.py' -v
-          python -m unittest discover -s tests -p 'test_astra_preload_artifact_pagination.py' -v
-          python -m unittest discover -s tests -p 'test_astra_youtube_oauth_errors.py' -v
+        run: python -m unittest discover -s tests -p 'test_astra_v2.py' -v
+      - name: Run queue artifact regression tests
+        id: queue_tests
+        if: steps.preflight.outputs.render_due == 'true'
+        run: python -m unittest discover -s tests -p 'test_astra_preload_artifact_pagination.py' -v
+      - name: Run YouTube OAuth regression tests
+        id: oauth_tests
+        if: steps.preflight.outputs.render_due == 'true'
+        run: python -m unittest discover -s tests -p 'test_astra_youtube_oauth_errors.py' -v
 
       - name: Block foreground animation and caption overlaps
         id: layer_tests
@@ -175,6 +180,8 @@ jobs:
           COVER_PACKAGE_TESTS: ${{ steps.cover_package_tests.outcome }}
           QUALITY_TESTS: ${{ steps.quality_tests.outcome }}
           POLICY_TESTS: ${{ steps.policy_tests.outcome }}
+          QUEUE_TESTS: ${{ steps.queue_tests.outcome }}
+          OAUTH_TESTS: ${{ steps.oauth_tests.outcome }}
           LAYER_TESTS: ${{ steps.layer_tests.outcome }}
         shell: bash
         run: |
@@ -202,6 +209,8 @@ jobs:
               "cover_package_tests": os.getenv("COVER_PACKAGE_TESTS", "unknown"),
               "quality_tests": os.getenv("QUALITY_TESTS", "unknown"),
               "policy_tests": os.getenv("POLICY_TESTS", "unknown"),
+              "queue_tests": os.getenv("QUEUE_TESTS", "unknown"),
+              "oauth_tests": os.getenv("OAUTH_TESTS", "unknown"),
               "layer_tests": os.getenv("LAYER_TESTS", "unknown"),
           }
           p.write_text(json.dumps(state, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
