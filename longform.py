@@ -99,7 +99,8 @@ def choose_episode(data,now):
     if not fresh:
         print("ASTRA_LONGFORM_SUPPLY=missing_or_stale_trend_snapshot")
         return None
-    if not available(snap.get('items') or []):
+    # The evening edition requires a second independently sourced topic.
+    if not available(snap.get('items') or [], minimum=(2 if slot == 1 else 1)):
         print("ASTRA_LONGFORM_SUPPLY=insufficient_sourced_trend_topics")
         return None
 
