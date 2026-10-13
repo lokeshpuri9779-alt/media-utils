@@ -105,8 +105,34 @@ def draw_prop(image,index,t,x=540,y=900):
              (233,192,91),(154,231,184))
     color=palette[MATERIALS.index(material)]
     if kind in ("car","train","airplane","boat","rocket","bicycle"):
-        d.rounded_rectangle((x-140,y-45,x+140,y+70),radius=25,fill=color)
-        for dx in (-90,90): d.ellipse((x+dx-30,y+50,x+dx+30,y+110),fill=(40,48,58))
+        ink=(38,47,62)
+        if kind=="car":
+            d.rounded_rectangle((x-145,y-30,x+145,y+65),radius=25,fill=color)
+            d.polygon(((x-90,y-30),(x-50,y-95),(x+55,y-95),(x+100,y-30)),fill=color)
+            d.polygon(((x-43,y-85),(x+48,y-85),(x+75,y-35),(x-70,y-35)),fill=(195,226,238))
+            for dx in (-100,100): d.ellipse((x+dx-32,y+43,x+dx+32,y+107),fill=ink)
+        elif kind=="train":
+            d.rounded_rectangle((x-150,y-110,x+150,y+70),radius=25,fill=color)
+            for dx in (-100,-25,50): d.rectangle((x+dx,y-85,x+dx+53,y-28),fill=(198,228,240))
+            d.rectangle((x-125,y+50,x+125,y+85),fill=ink)
+            for dx in (-95,95): d.ellipse((x+dx-27,y+66,x+dx+27,y+120),fill=ink)
+        elif kind=="airplane":
+            d.polygon(((x-165,y-10),(x+160,y-25),(x+195,y),(x+160,y+25),(x-165,y+10)),fill=color)
+            d.polygon(((x-30,y),(x+15,y-125),(x+80,y-125),(x+50,y),(x+65,y+110),(x+15,y+110)),fill=color)
+        elif kind=="boat":
+            d.polygon(((x-145,y+25),(x+145,y+25),(x+100,y+105),(x-100,y+105)),fill=color)
+            d.polygon(((x-10,y+15),(x-10,y-150),(x+115,y+15)),fill=(244,235,207))
+            d.line((x-10,y-150,x-10,y+25),fill=ink,width=9)
+        elif kind=="rocket":
+            d.ellipse((x-45,y-155,x+45,y+90),fill=color)
+            d.polygon(((x-45,y+40),(x-90,y+115),(x+90,y+115),(x+45,y+40)),fill=color)
+            d.ellipse((x-23,y-55,x+23,y-9),fill=(198,230,242))
+            flame=int(20*math.sin(t*8))
+            d.polygon(((x-20,y+90),(x,y+165+flame),(x+20,y+90)),fill=(255,177,73))
+        else:
+            for dx in (-95,95): d.ellipse((x+dx-45,y+5,x+dx+45,y+95),outline=ink,width=12)
+            d.line(((x-95,y+50),(x,y-35),(x+95,y+50),(x-95,y+50),(x+5,y+50)),fill=color,width=12)
+            d.line((x,y-35,x+30,y-70),fill=color,width=9)
     elif kind in ("tree","flower","mushroom"):
         if kind=="tree":
             d.rectangle((x-19,y-10,x+19,y+140),fill=(121,88,61))
