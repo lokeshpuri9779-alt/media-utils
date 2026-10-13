@@ -110,6 +110,7 @@ def render(plan, output, fps=8, seconds_per_scene=2, video=False):
     motion_failures = []
     scene_fingerprints = []
     visual_collisions = []
+    seen_cast_pairs = set()
     for scene in plan["scenes"]:
         first, later = frame(scene, 0.0), frame(scene, 0.75)
         if ImageChops.difference(first, later).getbbox() is None:
@@ -122,8 +123,12 @@ def render(plan, output, fps=8, seconds_per_scene=2, video=False):
         artwork_only.paste(first.crop((0, 80, W, 550)), (0, 0))
         artwork_only.paste(first.crop((0, 570, W, 870)), (0, 500))
         fingerprint = hashlib.sha256(artwork_only.resize((108, 172)).tobytes()).hexdigest()
-        if fingerprint in scene_fingerprints:
+        # Background changes must not disguise a repeated cast/prop pairing.
+        # Keep both the semantic pairing gate and pixel-level scene gate.
+        pair = (scene["character_id"], scene["object_id"])
+        if pair in seen_cast_pairs or fingerprint in scene_fingerprints:
             visual_collisions.append(scene["scene"])
+        seen_cast_pairs.add(pair)
         scene_fingerprints.append(fingerprint)
         if len(previews) < 12:
             previews.append(first.resize((270, 480)))
