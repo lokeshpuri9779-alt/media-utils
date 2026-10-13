@@ -184,6 +184,21 @@ class StoryCastAlignmentTests(unittest.TestCase):
                 with self.subTest(actors=actors), self.assertRaises(ValueError):
                     load_story_file(path, "invalid-cast")
 
+    def test_narration_cannot_name_missing_ensemble_actor(self):
+        import json
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from astra_v2.coordinated_development import load_story_file
+        with TemporaryDirectory() as tmp:
+            path = Path(tmp) / "story.json"
+            path.write_text(json.dumps({"mode": "ensemble", "scenes": [
+                {"actors": ["fox"], "narration": "A fox and a dog discover a gift."}]}))
+            with self.assertRaises(ValueError):
+                load_story_file(path, "missing-dog")
+            path.write_text(json.dumps({"mode": "ensemble", "scenes": [
+                {"actors": ["fox", "dog"], "narration": "A fox and a dog discover a gift."}]}))
+            self.assertTrue(load_story_file(path, "present-dog")["story_subjects_verified"])
+
     def test_unsupported_action_fails_before_output(self):
         from pathlib import Path
         from tempfile import TemporaryDirectory
