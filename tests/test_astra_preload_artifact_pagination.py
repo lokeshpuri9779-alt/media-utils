@@ -107,6 +107,48 @@ class QueueFormatSelectionTests(unittest.TestCase):
 
 
     @patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/repo", "ASTRA_PRELOAD_MAX_AGE_HOURS": "0"})
+    def test_cover_archive_does_not_shadow_artifact_metadata(self):
+        import hashlib
+        import io
+        import json
+        import tempfile
+        import zipfile
+        from pathlib import Path
+        from types import SimpleNamespace
+
+        video = b"valid-short-frames"
+        candidate = {"content_id": "with-cover", "title": "Original with cover",
+                     "description": "Original narrative", "genre": "fiction",
+                     "format": "short", "synthetic": True,
+                     "sha256": hashlib.sha256(video).hexdigest()}
+        stream = io.BytesIO()
+        with zipfile.ZipFile(stream, "w") as z:
+            z.writestr("candidate.json", json.dumps(candidate))
+            z.writestr("video.mp4", video)
+            z.writestr("cover.jpg", b"jpeg-cover")
+        entry = {"name": "astra-preloaded-with-cover", "id": 42,
+                 "created_at": "2026-10-13T05:00:00Z", "workflow_run": {"id": 123}}
+        trusted = {"conclusion": "success", "head_branch": "main",
+                   "name": "ASTRA V2 - Preload Approved Videos"}
+
+        def download(args, **kwargs):
+            kwargs["stdout"].write(stream.getvalue())
+            return SimpleNamespace(returncode=0)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "selected.mp4"
+            with patch.object(preload_queue, "artifacts", return_value=[entry]), \
+                 patch.object(preload_queue, "_api", return_value=trusted), \
+                 patch.object(preload_queue.subprocess, "run", side_effect=download), \
+                 patch("astra_v2.creative.inspect_video", return_value={"seconds": 30}), \
+                 patch("astra_v2.publication_quality.publication_rejection", return_value=None):
+                selected = preload_queue.take(set(), set(), out, allow_long=False)
+            self.assertEqual(selected["queue_artifact_id"], 42)
+            self.assertEqual(selected["content_id"], "with-cover")
+            self.assertEqual(out.read_bytes(), video)
+            self.assertEqual(out.with_name("selected_cover.jpg").read_bytes(), b"jpeg-cover")
+
+    @patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/repo", "ASTRA_PRELOAD_MAX_AGE_HOURS": "0"})
     def test_malformed_candidate_does_not_block_valid_short(self):
         import hashlib
         import io
