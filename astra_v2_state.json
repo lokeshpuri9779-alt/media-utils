@@ -3,7 +3,7 @@
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 55,
-  "confirmed_today": 54,
+  "confirmed_today": 55,
   "last_attempt_at": "2026-10-13T15:24:42.066421+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -385,25 +385,22 @@
       "title": "The Koala and the Last Night Train",
       "format": "short",
       "uploaded_at": "2026-10-13T15:16:58.141084+00:00"
-    }
-  },
-  "pending": {
-    "2aOjUYIO1mc": {
-      "content_id": "rayvan-forge-3312b1b94a5648f8",
+    },
+    "rayvan-forge-3312b1b94a5648f8": {
+      "video_id": "2aOjUYIO1mc",
+      "confirmed_at": "2026-10-13T15:26:03.583907+00:00",
       "title": "The Beaver's Midnight Bridge",
-      "day": "2026-10-13",
-      "uploaded_at": "2026-10-13T15:24:43.583524+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": ""
+      "uploaded_at": "2026-10-13T15:24:43.583524+00:00"
     }
   },
-  "last_outcome": "processing",
-  "last_preflight_at": "2026-10-13T15:25:07.363260+00:00",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-13T15:26:03.256163+00:00",
   "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "processing",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T15:25:07.802401+00:00",
+    "at": "2026-10-13T15:26:03.665573+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "false",
