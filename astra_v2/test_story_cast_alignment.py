@@ -199,6 +199,26 @@ class StoryCastAlignmentTests(unittest.TestCase):
                 {"actors": ["fox", "dog"], "narration": "A fox and a dog discover a gift."}]}))
             self.assertTrue(load_story_file(path, "present-dog")["story_subjects_verified"])
 
+    def test_authored_story_preserves_recurring_prop(self):
+        import json
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from astra_v2.coordinated_development import load_story_file
+        with TemporaryDirectory() as tmp:
+            path = Path(tmp) / "story.json"
+            path.write_text(json.dumps({"mode": "ensemble", "scenes": [
+                {"actors": ["fox"], "object_id": 1900},
+                {"actors": ["fox", "dog"], "action": "carry"},
+                {"actors": ["fox"], "action": "celebrate"}]}))
+            plan = load_story_file(path, "prop-continuity")
+            self.assertEqual([scene["object_id"] for scene in plan["scenes"]],
+                             [1900, 1900, 1900])
+            self.assertEqual(plan["scenes"][0]["object"][0], "gift")
+            path.write_text(json.dumps({"mode": "ensemble", "scenes": [
+                {"actors": ["fox"], "object_id": -1}]}))
+            with self.assertRaises(ValueError):
+                load_story_file(path, "invalid-prop")
+
     def test_unsupported_action_fails_before_output(self):
         from pathlib import Path
         from tempfile import TemporaryDirectory
