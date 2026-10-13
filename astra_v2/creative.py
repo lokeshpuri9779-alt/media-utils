@@ -140,6 +140,9 @@ def make_candidate(path, excluded_ids, excluded_titles):
             continue
         except (ValueError, TypeError, OSError) as exc:
             raise CreativeSkip("story_history_unavailable:" + type(exc).__name__) from exc
+    # Even if the publisher state has not been restored in this job,
+    # explicit exclusion arguments remain the authoritative safety net.
+    # Never generate a previously published identity in a parallel lane.
     excluded_ids.update(history_ids)
     excluded_titles.update(history_titles)
     premium_stories = [
@@ -149,7 +152,11 @@ def make_candidate(path, excluded_ids, excluded_titles):
         and story.get("plot_fingerprint") not in history_hashes
         and story.get("plot_key") not in history_plot_keys
     ]
-    print("ASTRA_STORY_HISTORY_EXCLUSIONS=" + str(len(history_ids)))
+    print("ASTRA_STORY_HISTORY_EXCLUSIONS=" + json.dumps({
+        "ids": len(history_ids), "titles": len(history_titles),
+        "fingerprints": len(history_hashes), "plot_keys": len(history_plot_keys),
+        "remaining_candidates": len(premium_stories)
+    }, sort_keys=True))
     print("Premium pool:", len(premium_stories), "seen IDs:", len(excluded_ids),
           "seen titles:", len(excluded_titles))
     # Parallel preload lanes deterministically own disjoint story IDs.
