@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 52,
+  "attempts": 53,
   "confirmed_today": 52,
-  "last_attempt_at": "2026-10-13T15:04:23.985701+00:00",
+  "last_attempt_at": "2026-10-13T15:10:11.557395+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -373,29 +373,39 @@
       "uploaded_at": "2026-10-13T15:04:25.792366+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "oQJoGNw3KWQ": {
+      "content_id": "rayvan-forge-4c4ffed7a5c23528",
+      "title": "The Badger and the Midnight Pie",
+      "day": "2026-10-13",
+      "uploaded_at": "2026-10-13T15:10:13.631514+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": ""
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-13T15:06:18.533107+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_preflight_at": "2026-10-13T15:09:26.698579+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T15:06:18.601261+00:00",
+    "at": "2026-10-13T15:10:13.923791+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-13T07:05:49.939768+00:00",
   "reserved": {
@@ -708,6 +718,13 @@
     "rayvan-forge-4e7b4517dcbfd724": {
       "at": "2026-10-13T15:04:23.985687+00:00",
       "title": "The Squirrel and the Moon Seeds",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-4c4ffed7a5c23528": {
+      "at": "2026-10-13T15:10:11.557379+00:00",
+      "title": "The Badger and the Midnight Pie",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
