@@ -125,10 +125,47 @@ def draw_prop(image,index,t,x=540,y=900):
             for dx in (-55,0,55):
                 d.ellipse((x+dx-13,y-85,x+dx+13,y-59),fill=(248,241,218))
     elif kind in ("star","planet","cloud","mountain"):
-        d.ellipse((x-115,y-115,x+115,y+115),fill=color)
+        if kind=="star":
+            points=[]
+            for i in range(10):
+                angle=-math.pi/2+i*math.pi/5
+                rad=120 if i%2==0 else 50
+                points.append((x+rad*math.cos(angle),y+rad*math.sin(angle)))
+            d.polygon(points,fill=color)
+        elif kind=="planet":
+            d.ellipse((x-100,y-100,x+100,y+100),fill=color)
+            d.arc((x-155,y-65,x+155,y+65),0,359,fill=(243,221,163),width=16)
+        elif kind=="cloud":
+            for dx,dy,rad in ((-75,15,65),(-15,-40,85),(75,0,70)):
+                d.ellipse((x+dx-rad,y+dy-rad,x+dx+rad,y+dy+rad),fill=color)
+            d.rectangle((x-110,y+10,x+120,y+65),fill=color)
+        else:
+            d.polygon(((x-155,y+125),(x,y-145),(x+155,y+125)),fill=color)
+            d.polygon(((x-45,y-65),(x,y-145),(x+45,y-65),(x,y-80)),fill=(235,239,239))
     elif kind in ("clock","ball","apple","pizza","cake"):
-        d.ellipse((x-95,y-95,x+95,y+95),fill=color)
-        d.ellipse((x-15,y-15,x+15,y+15),fill=(40,48,58))
+        if kind=="clock":
+            d.ellipse((x-110,y-110,x+110,y+110),fill=color)
+            d.ellipse((x-95,y-95,x+95,y+95),outline=(39,47,58),width=8)
+            d.line((x,y,x+int(62*math.sin(t)),y-int(62*math.cos(t))),fill=(39,47,58),width=9)
+            d.line((x,y,x+43,y+30),fill=(39,47,58),width=6)
+        elif kind=="ball":
+            d.ellipse((x-100,y-100,x+100,y+100),fill=color)
+            d.arc((x-95,y-95,x+95,y+95),-50,130,fill=(39,47,58),width=7)
+        elif kind=="apple":
+            d.ellipse((x-92,y-75,x+92,y+108),fill=color)
+            d.line((x,y-75,x+15,y-125),fill=(98,73,48),width=10)
+            d.ellipse((x+8,y-130,x+70,y-95),fill=(85,154,88))
+        elif kind=="pizza":
+            d.polygon(((x-130,y-95),(x+130,y-95),(x,y+140)),fill=color)
+            d.line((x-130,y-95,x+130,y-95),fill=(174,120,71),width=24)
+            for dx,dy in ((-45,-45),(40,-45),(0,30)):
+                d.ellipse((x+dx-17,y+dy-17,x+dx+17,y+dy+17),fill=(186,73,65))
+        else:
+            d.rectangle((x-105,y-25,x+105,y+115),fill=color)
+            d.ellipse((x-105,y-45,x+105,y-5),fill=(245,222,210))
+            for dx in (-55,0,55):
+                d.line((x+dx,y-45,x+dx,y-115),fill=(247,235,193),width=9)
+                d.ellipse((x+dx-8,y-135,x+dx+8,y-112),fill=(252,172,75))
     else:
         d.rounded_rectangle((x-100,y-120,x+100,y+120),radius=22,fill=color)
         d.rectangle((x-60,y-55,x+60,y+55),outline=(39,47,58),width=6)
