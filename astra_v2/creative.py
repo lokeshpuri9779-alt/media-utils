@@ -120,7 +120,14 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 if not isinstance(published, dict):
                     raise ValueError("Invalid publisher history")
                 history_ids.update(str(cid) for cid in published)
-                records = published.values()
+                # Pending and reserved uploads are also unsafe to reuse:
+                # the remote upload may have succeeded before local confirmation.
+                pending = history.get("pending", {})
+                reserved = history.get("reserved", {})
+                if not isinstance(pending, dict) or not isinstance(reserved, dict):
+                    raise ValueError("Invalid pending or reserved history")
+                history_ids.update(str(cid) for cid in reserved)
+                records = list(published.values()) + list(pending.values()) + list(reserved.values())
             else:
                 records = history.get("stories", []) if isinstance(history, dict) else history
                 if not isinstance(records, list):
