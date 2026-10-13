@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 33,
-  "confirmed_today": 32,
-  "last_attempt_at": "2026-10-13T08:32:33.721982+00:00",
+  "attempts": 34,
+  "confirmed_today": 33,
+  "last_attempt_at": "2026-10-13T08:48:37.791302+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -231,25 +231,32 @@
       "title": "The Cloud That Wanted a Hat",
       "format": "short",
       "uploaded_at": "2026-10-13T08:23:24.283921+00:00"
+    },
+    "rayvan-anthology-e0cf80928a197bb4": {
+      "video_id": "VZNFMpTNvR4",
+      "confirmed_at": "2026-10-13T08:47:56.719105+00:00",
+      "title": "The Turtle and the Speedy Clock",
+      "format": "short",
+      "uploaded_at": "2026-10-13T08:32:35.433717+00:00"
     }
   },
   "pending": {
-    "VZNFMpTNvR4": {
-      "content_id": "rayvan-anthology-e0cf80928a197bb4",
-      "title": "The Turtle and the Speedy Clock",
+    "gmp-wuSE7J4": {
+      "content_id": "rayvan-anthology-950dcb55e1ae06b0",
+      "title": "The Raccoon and the Midnight Bakery",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-13T08:32:35.433717+00:00",
+      "uploaded_at": "2026-10-13T08:48:39.854501+00:00",
       "genre": "fiction",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-13T08:31:32.288010+00:00",
+  "last_preflight_at": "2026-10-13T08:47:56.395801+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T08:32:35.668001+00:00",
+    "at": "2026-10-13T08:48:40.147416+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -463,6 +470,12 @@
     "rayvan-anthology-e0cf80928a197bb4": {
       "at": "2026-10-13T08:32:33.721968+00:00",
       "title": "The Turtle and the Speedy Clock",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-anthology-950dcb55e1ae06b0": {
+      "at": "2026-10-13T08:48:37.791287+00:00",
+      "title": "The Raccoon and the Midnight Bakery",
       "format": "short",
       "result": "accepted"
     }
