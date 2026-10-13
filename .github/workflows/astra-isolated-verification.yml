@@ -8,6 +8,8 @@ on:
       - '.github/workflows/astra-isolated-verification.yml'
       - 'astra_v2/**'
       - 'tests/**'
+      - 'studio_renderer.py'
+      - 'requirements.txt'
 
 permissions:
   contents: read
@@ -142,4 +144,4 @@ jobs:
       - name: Record verification boundary
         run: |
           echo 'Regression checks completed. No YouTube credentials are provided to this workflow.'
-          echo 'Offline animation sample checked; full production rendering, audio, captions and publication approval remain unverified.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Offline animation and production frame checks completed; neural narration, full production encoding, caption timing with real audio, creative approval and publication remain unverified.' >> "$GITHUB_STEP_SUMMARY"
