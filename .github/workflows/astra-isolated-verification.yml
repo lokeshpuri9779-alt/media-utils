@@ -1,0 +1,50 @@
+name: ASTRA Isolated Verification
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [astra-isolated-verification-20261013]
+    paths:
+      - '.github/workflows/astra-isolated-verification.yml'
+      - 'astra_v2/**'
+      - 'tests/**'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      ASTRA_OPENAI_ENABLED: '0'
+      ASTRA_OPENAI_ALLOW_PAID_API: '0'
+      ASTRA_SERIES_PUBLICATION: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install test and render dependencies
+        run: |
+          python -m pip install --disable-pip-version-check -r requirements.txt
+          command -v ffmpeg
+          command -v ffprobe
+      - name: Run story inventory and publication safeguards
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_story_inventory.py' -v
+          python -m unittest discover -s tests -p 'test_astra_publication_quality.py' -v
+      - name: Run video and animation regression tests
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_motion_gate.py' -v
+          python -m unittest discover -s tests -p 'test_astra_animal_scenes.py' -v
+          python -m unittest discover -s tests -p 'test_scene_layer_contract.py' -v
+          python -m unittest discover -s tests -p 'test_astra_v2.py' -v
+      - name: Run queue and authentication regression tests
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_preload_artifact_pagination.py' -v
+          python -m unittest discover -s tests -p 'test_astra_youtube_oauth_errors.py' -v
+      - name: Record verification boundary
+        run: |
+          echo 'Regression checks completed. No YouTube credentials are provided to this workflow.'
+          echo 'Rendering has NOT been verified by this workflow; production approval remains blocked.' >> "$GITHUB_STEP_SUMMARY"
