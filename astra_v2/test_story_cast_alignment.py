@@ -105,6 +105,15 @@ class StoryCastAlignmentTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             verify_story_cast(plan)
 
+    def test_ensemble_layout_all_cast_sizes(self):
+        from PIL import ImageChops
+        for count in (1, 2, 3, 4):
+            cast = ["fox", "dog", "cat", "rabbit"][:count]
+            scene = build_ensemble_plan("layout-regression", [cast])["scenes"][0]
+            before, after = frame(scene, 0.0), frame(scene, 0.8)
+            self.assertEqual(before.size, (540, 960))
+            self.assertIsNotNone(ImageChops.difference(before, after).getbbox(), count)
+
     def test_ensemble_tampering_is_rejected(self):
         plan = build_ensemble_plan("ensemble-test", [["fox", "dog"]])
         plan["scenes"][0]["actors"][1]["character_id"] = 0
