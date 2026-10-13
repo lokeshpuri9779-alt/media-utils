@@ -92,7 +92,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [ ] One designed miniboss.
 - [ ] One designed multi-phase boss.
 - [ ] Telegraphs and mobile-readable VFX.
-- [ ] Weapon/ability upgrade pool with synergy rules.
+- [x] Weapon/ability upgrade pool with synergy rules.
 
 ### P4 — Level / exploration
 - [ ] One authored Blacksite sector with multiple routes.
@@ -292,3 +292,17 @@ Validated build: commit `ad4a66102cad3338c42e2ddf344b293514c363ae`; APK SHA256 `
 - [x] Workflow runs `38233000010` and `38233000014` passed 126 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
 
 Validated build: commit `47058e85a34cf4c9a0e2e824e1311c557cd2a0e7`; APK SHA256 `bddd3656ed11e321b9fcbd87c3def12fdcae8802fa55028b64a9cd5d41ecbffb`; 521,153,447 bytes. v0.2.16 remains the known-good rollback. These profiles are controllable targets, not measured device results: physical installation, frame pacing, P90 frame time, thermal/battery behavior, player-controlled combat/navigation, a complete human objective-to-extraction run, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
+
+
+
+## Validated v0.2.18 upgrade-synergy checkpoint (2026-10-13)
+
+- [x] Expanded the flat four-choice upgrade set into six stackable branches: RAPID FIRE, CORE+, MOBILITY, ARMOR, PULSE CAPACITOR and PHASE DRIVE.
+- [x] Added visible I/II/III tiers, per-upgrade caps and automatic removal of maxed choices from the selection pool.
+- [x] Added three cross-branch build synergies with immediate gameplay effects: OVERCHARGE, BULWARK and PHASE HUNTER.
+- [x] Added synergy unlock telemetry and an active-synergy summary in the upgrade screen.
+- [x] Added fifteen deterministic upgrade-rule checks covering pools, tiers, caps, invalid selections, prerequisites, simultaneous synergies and UI summaries.
+- [x] Two initial runs failed safely before export on overly broad generated-code patch anchors; commits `690586a9d67019abf9c0c9fe63c0a0eed6c47250` and `fe070e8d65c09053a6d77f0d921290d7eec40178` narrowed the patches while preserving onboarding behavior.
+- [x] Workflow runs `38353822466` and `38353822518` passed 141 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
+
+Validated build: commit `fe070e8d65c09053a6d77f0d921290d7eec40178`; APK SHA256 `f04c5de71107fb2ee8b5a8f561e9e687bcaa79c1d0e7f5b15c56336d751655e1`; 521,157,700 bytes. v0.2.17 remains the known-good rollback. Automated rules prove deterministic unlock/cap behavior, not upgrade fun or balance; player-controlled combat/navigation, complete human extraction, real-device performance/thermal behavior, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
