@@ -446,3 +446,102 @@ def draw_prop(image, index, t, x=540, y=900):
     elif material == "neon":
         d.arc((px-87,py-88,px+87,py+88),185,350,fill=(165,250,255),width=6)
     return kind, material, motion
+
+
+# Third-pass silhouette design. A separate rig is drawn for every species;
+# these designs are intentionally independent of the original shared oval.
+def draw_character_silhouette(image, index, t, x=540, y=900):
+    species, role, style = character(index)
+    d = ImageDraw.Draw(image)
+    phase = math.sin(t * 2.5 + index * .031)
+    y += int(12 * phase)
+    palettes = {
+        "human":(227,172,125),"robot":(126,175,203),"cat":(218,154,97),
+        "dog":(179,132,89),"fox":(239,129,68),"rabbit":(226,212,201),
+        "bear":(141,101,79),"owl":(151,113,88),"bird":(88,173,203),
+        "frog":(99,192,104),"turtle":(87,156,108),"fish":(93,184,213),
+        "mouse":(169,160,170),"monkey":(174,121,81),"lion":(220,166,76),
+        "penguin":(64,77,91),"deer":(174,124,84),"dragon":(101,165,135),
+        "alien":(132,202,158),"ghost":(226,231,240)
+    }
+    color = palettes[species]
+    dark = (42,49,61)
+    w = 66 if style == "tiny" else 116 if style == "round" else 82
+    if species == "fish":
+        d.ellipse((x-125,y-88,x+110,y+65),fill=color)
+        d.polygon(((x-105,y-7),(x-206,y-95),(x-206,y+83)),fill=color)
+        d.polygon(((x-10,y-78),(x+25,y-147),(x+64,y-73)),fill=color)
+    elif species == "ghost":
+        d.pieslice((x-104,y-190,x+104,y+25),180,360,fill=color)
+        d.rectangle((x-104,y-85,x+104,y+97),fill=color)
+        for dx in (-69,0,69):
+            d.ellipse((x+dx-37,y+55,x+dx+37,y+122),fill=color)
+    elif species == "robot":
+        d.rounded_rectangle((x-94,y-154,x+94,y+37),radius=17,fill=color,outline=dark,width=8)
+        d.rectangle((x-55,y+36,x+55,y+129),fill=(90,128,155))
+        d.line((x,y-154,x,y-206),fill=dark,width=9)
+        d.ellipse((x-15,y-226,x+15,y-196),fill=(246,188,89))
+    elif species in ("bird","owl","penguin"):
+        d.ellipse((x-105,y-158,x+105,y+131),fill=color)
+        for side in (-1,1):
+            d.ellipse((x+side*85-45,y-28,x+side*85+45,y+86),fill=(color[0]//2,color[1]//2,color[2]//2))
+        d.polygon(((x-24,y-25),(x+24,y-25),(x,y+13)),fill=(240,177,79))
+        if species=="penguin":
+            d.ellipse((x-67,y-76,x+67,y+117),fill=(239,235,223))
+        if species=="owl":
+            for dx in (-43,43):
+                d.ellipse((x+dx-45,y-113,x+dx+45,y-33),fill=(239,219,180))
+    elif species=="turtle":
+        d.ellipse((x-142,y-74,x+142,y+155),fill=(67,113,78),outline=dark,width=7)
+        d.ellipse((x-99,y-44,x+99,y+126),fill=color)
+        d.ellipse((x-62,y-181,x+62,y-54),fill=(112,186,115))
+        for dx in (-105,105):
+            d.ellipse((x+dx-37,y+104,x+dx+37,y+163),fill=color)
+    elif species=="dragon":
+        d.ellipse((x-w,y-147,x+w,y+96),fill=color)
+        for side in (-1,1):
+            d.polygon(((x+side*65,y-33),(x+side*182,y-148),(x+side*136,y+83)),fill=(77,129,115))
+        for dx in (-53,0,53):
+            d.polygon(((x+dx-22,y-142),(x+dx,y-222),(x+dx+22,y-142)),fill=(228,188,105))
+    elif species=="alien":
+        d.ellipse((x-126,y-176,x+126,y+43),fill=color)
+        d.rounded_rectangle((x-56,y+29,x+56,y+145),radius=28,fill=color)
+    else:
+        d.ellipse((x-w,y-146,x+w,y+56),fill=color)
+        d.rounded_rectangle((x-60,y+30,x+60,y+158),radius=25,fill=color)
+        if species in ("cat","fox","rabbit","mouse","bear","lion","deer"):
+            height=135 if species=="rabbit" else 75
+            for side in (-1,1):
+                d.polygon(((x+side*48,y-113),(x+side*80,y-165-height),(x+side*91,y-96)),fill=color)
+        if species=="dog":
+            for side in (-1,1):
+                d.ellipse((x+side*94-35,y-142,x+side*94+35,y+5),fill=(116,83,67))
+        if species=="lion":
+            d.ellipse((x-128,y-187,x+128,y+77),outline=(180,107,48),width=35)
+        if species=="frog":
+            for dx in (-69,69):
+                d.ellipse((x+dx-39,y-184,x+dx+39,y-108),fill=color)
+        if species=="deer":
+            for side in (-1,1):
+                d.line((x+side*48,y-145,x+side*112,y-263),fill=(117,82,60),width=11)
+                d.line((x+side*88,y-217,x+side*145,y-238),fill=(117,82,60),width=8)
+        if species=="monkey":
+            for dx in (-91,91):
+                d.ellipse((x+dx-35,y-80,x+dx+35,y+11),fill=(221,177,139))
+    # Facial motion uses the same coordinate system for every species.
+    blink = math.sin(t*3.3+index*.13)>.965
+    eye_y = y-69 if species not in ("turtle","fish") else y-91
+    for dx in (-38,38):
+        if blink:
+            d.line((x+dx-14,eye_y,x+dx+14,eye_y),fill=dark,width=5)
+        else:
+            d.ellipse((x+dx-14,eye_y-16,x+dx+14,eye_y+16),fill=(245,243,229))
+            shift=int(5*math.sin(t*1.6+index*.07))
+            d.ellipse((x+dx-6+shift,eye_y-6,x+dx+6+shift,eye_y+8),fill=dark)
+    if species not in ("bird","owl","penguin"):
+        d.arc((x-23,y-44,x+23,y+4),8,170,fill=dark,width=5)
+    return species,role,style
+
+# Use the new silhouette rig for character production, retaining the catalog
+# and opt-in renderer contract.
+draw_character = draw_character_silhouette
