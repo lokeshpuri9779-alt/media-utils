@@ -197,8 +197,12 @@ def frame(scene, t):
     # Draw on transparent layers to avoid hiding the background.
     character_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
     object_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
-    action = number % 4
-    # Character approaches the object, reacts, and then steps back.
+    actions = {"approach": 0, "react": 1, "point": 2, "celebrate": 3}
+    named_action = scene.get("action")
+    if named_action is not None and named_action not in actions:
+        raise ValueError(f"scene {number}: unsupported action {named_action!r}")
+    action = actions[named_action] if named_action is not None else number % 4
+    # Explicit actions are authored stage cues, not inferred narration.
     approach = math.sin(min(1.0, t / 1.4) * math.pi / 2)
     cx = 310 + int(38 * approach) if action in (0, 2) else 320
     ox = 760 - int(50 * approach) if action in (0, 2) else 745
@@ -262,6 +266,11 @@ def frame(scene, t):
 def render(plan, output, fps=8, seconds_per_scene=2, video=False):
     if not isinstance(plan, dict) or not isinstance(plan.get("scenes"), list):
         raise ValueError("invalid scene plan")
+    for scene in plan["scenes"]:
+        if scene.get("action") is not None and scene["action"] not in (
+            "approach", "react", "point", "celebrate"
+        ):
+            raise ValueError(f"scene {scene.get('scene')}: unsupported action")
     if plan.get("ensemble_enabled") or plan.get("story_subjects_verified") or any(
         "subject" in scene or "actors" in scene for scene in plan["scenes"]
     ):
