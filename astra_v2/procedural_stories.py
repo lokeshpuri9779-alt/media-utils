@@ -55,6 +55,7 @@ def catalog(excluded_ids=None, limit=32):
         return []
     result = []
     seen_plot_keys = set()
+    historical_plot_keys = set()
     seen_mysteries = Counter()
     seen_characters = Counter()
     seen_places = Counter()
@@ -68,6 +69,10 @@ def catalog(excluded_ids=None, limit=32):
     # The state branch is restored by the existing preload workflow.
     from astra_v2.control import STATE_FILE, read_json
     state = read_json(STATE_FILE)
+    for group in ("published", "pending"):
+        for record in (state.get(group) or {}).values():
+            if isinstance(record, dict) and record.get("plot_key"):
+                historical_plot_keys.add(str(record["plot_key"]))
     published_titles = [str(item.get("title", "")).casefold()
                         for group in ("published", "pending")
                         for item in (state.get(group) or {}).values()
@@ -89,7 +94,7 @@ def catalog(excluded_ids=None, limit=32):
             continue
         # Reject cast/location swaps with identical mystery, twist and ending.
         plot_key = (m, r, e)
-        if plot_key in seen_plot_keys:
+        if plot_key in seen_plot_keys or f'procedural-v1:{m}:{r}:{e}' in historical_plot_keys:
             continue
         if seen_mysteries[m] >= max(1, (limit + len(MYSTERIES) - 1) // len(MYSTERIES)):
             continue
@@ -121,6 +126,7 @@ def catalog(excluded_ids=None, limit=32):
         result.append({
             "genre": "fiction", "kind": "procedural_fiction",
             "production_ready": True, "content_id": cid,
+            "plot_key": f"procedural-v1:{m}:{r}:{e}",
             "title": title, "hook": beats[0][0],
             "question": f"What happens when {name} discovers {mystery}?",
             "answer": reveal + " " + resolution, "source": "",
