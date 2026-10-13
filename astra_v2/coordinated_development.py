@@ -48,6 +48,36 @@ def build_plan(seed, count=12):
             "publication_allowed": False, "quality_approved": False}
 
 
+
+def build_story_plan(seed, subjects):
+    """Build a scene plan only when every requested species can be drawn."""
+    from astra_v2.character_object_catalog import SPECIES
+    if not isinstance(subjects, list) or not 1 <= len(subjects) <= 120:
+        raise ValueError("subjects must be a list of 1..120 species")
+    scenes = []
+    for i, name in enumerate(subjects):
+        if not isinstance(name, str) or name.lower().strip() not in SPECIES:
+            raise ValueError(f"scene {i+1}: unsupported subject {name!r}")
+        species = name.lower().strip()
+        ci = SPECIES.index(species)*100 + stable_index(seed, "role-style", i, 100)
+        oi = stable_index(seed, "object", i, OBJECT_COUNT)
+        scenes.append({"scene":i+1,"subject":species,"character_id":ci,
+                       "object_id":oi,"character":character(ci),"object":prop(oi),
+                       "duration_seconds":2.0})
+    return {"seed":seed,"scene_count":len(scenes),"scenes":scenes,
+            "story_subjects_verified":True,"publication_allowed":False,
+            "quality_approved":False}
+
+
+def verify_story_cast(plan):
+    """Reject visual cast mismatches rather than silently substituting."""
+    for scene in plan["scenes"]:
+        subject = scene.get("subject")
+        if not subject or character(scene["character_id"])[0] != subject:
+            raise ValueError(f"scene {scene['scene']}: subject/cast mismatch")
+    return True
+
+
 def frame(scene, t):
     """Experimental scene composition with depth, a shared stage and interaction."""
     image = Image.new("RGB", (W, H), BG)
