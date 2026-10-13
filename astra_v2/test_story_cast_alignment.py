@@ -91,6 +91,20 @@ class StoryCastAlignmentTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 render(plan, Path(tmp))
 
+    def test_ensemble_identity_drift_across_scenes_is_rejected(self):
+        plan = build_ensemble_plan("identity-drift", [["fox", "dog"], ["dog", "fox"]])
+        second = plan["scenes"][1]["actors"][0]
+        second["character_id"] = (second["character_id"] // 100) * 100 + (second["character_id"] + 1) % 100
+        plan["scenes"][1]["character_id"] = second["character_id"]
+        with self.assertRaises(ValueError):
+            verify_story_cast(plan)
+
+    def test_primary_actor_mismatch_is_rejected(self):
+        plan = build_ensemble_plan("primary-mismatch", [["fox", "dog"]])
+        plan["scenes"][0]["character_id"] = plan["scenes"][0]["actors"][1]["character_id"]
+        with self.assertRaises(ValueError):
+            verify_story_cast(plan)
+
     def test_ensemble_tampering_is_rejected(self):
         plan = build_ensemble_plan("ensemble-test", [["fox", "dog"]])
         plan["scenes"][0]["actors"][1]["character_id"] = 0
