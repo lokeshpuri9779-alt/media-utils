@@ -71,10 +71,11 @@ def build_story_plan(seed, subjects):
 
 
 def build_narrated_plan(seed, narrations):
-    """Resolve an unambiguous explicitly named protagonist from each line.
+    """Keep one protagonist across scenes; reject competing named subjects.
 
-    Fail closed on absent, conflicting, or unsupported animal names. This is a
-    conservative lexical matcher, not a general semantic language model.
+    A scene without a named subject inherits the previously established one.
+    The first scene must name a supported subject. This intentionally does not
+    attempt semantic pronoun resolution or multiple-character staging.
     """
     import re
     from astra_v2.character_object_catalog import SPECIES
@@ -85,6 +86,7 @@ def build_narrated_plan(seed, narrations):
                "foxes":"fox","wolves":"wolf","hedgehogs":"hedgehog"}
     unsupported = {"hedgehog","wolf","wolfhound","squirrel","horse","elephant","shark"}
     subjects = []
+    protagonist = None
     for i, narration in enumerate(narrations):
         if not isinstance(narration, str) or not narration.strip():
             raise ValueError(f"scene {i+1}: narration is missing")
@@ -94,9 +96,16 @@ def build_narrated_plan(seed, narrations):
         missing = matches.intersection(unsupported)
         if missing:
             raise ValueError(f"scene {i+1}: unsupported narrated subject(s) {sorted(missing)}")
-        if len(known) != 1:
-            raise ValueError(f"scene {i+1}: expected one identifiable subject, found {sorted(known)}")
-        subjects.append(next(iter(known)))
+        if len(known) > 1:
+            raise ValueError(f"scene {i+1}: multiple named species require a multi-character scene")
+        if known:
+            selected = next(iter(known))
+            if protagonist is not None and selected != protagonist:
+                raise ValueError(f"scene {i+1}: protagonist changed from {protagonist} to {selected}")
+            protagonist = selected
+        if protagonist is None:
+            raise ValueError(f"scene {i+1}: first scene must name a supported protagonist")
+        subjects.append(protagonist)
     plan = build_story_plan(seed, subjects)
     for scene, narration in zip(plan["scenes"], narrations):
         scene["narration"] = narration
