@@ -72,7 +72,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [x] Extraction success/failure state, 60-second physical escape, retry checkpoints and duplicate reward protection (20 scripted checks).
 - [x] Run rewards and risk/reward decisions: optional OVERLOAD contracts trade +2 hostiles, +25% enemy health, +20% damage and faster attacks for one bonus upgrade pick and +50% score.
 - [x] Persistent meta-progression between runs.
-- [ ] Continue/resume after app backgrounding.
+- [x] Continue/resume after app backgrounding.
 
 ### P2 — Controls / feel
 - [x] Configurable HUD positions and touch sizes.
@@ -380,3 +380,16 @@ Validated build: commit `abcbfccb27ef3d8b94b5432f57760924560097a8`; APK SHA256 `
 - [x] Workflow runs `38401742810` and `38401742692` passed 268 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
 
 Validated build: commit `45641f3a043b17ed261d1bdcf100c4641e1417b8`; APK SHA256 `297408baa3c03c777c8293d28355c5de57ee48c7f623e753ae147ab37c9d4057`; 521,178,975 bytes. v0.2.23 remains the known-good rollback. Automated checks prove deterministic save/unlock/reward behavior, not progression satisfaction, weapon balance, human navigation, a complete player-controlled extraction run, physical-device performance, or benchmark superiority.
+
+
+## Validated v0.2.25 mobile-resume checkpoint (2026-10-13)
+
+- [x] Added safe persistent run checkpoints at wave starts and extraction, avoiding partial-combat score farming and incomplete enemy-state restoration.
+- [x] Restores wave, score, mission time, extraction phase and the complete capped run-upgrade stack after app restart.
+- [x] Reapplies unlocked build synergies without generating duplicate unlock rewards or telemetry.
+- [x] Added focus-loss recording, seven-day checkpoint expiry, schema versioning, corruption rejection and fail-closed sanitization.
+- [x] Clears the checkpoint only after the successful extraction reward is committed, preserving duplicate-reward protection.
+- [x] Added thirty-three deterministic checkpoint checks covering hostile data, caps, expiry, persistence, corruption and clear behavior.
+- [x] Workflow runs `38441201006` and `38441200954` passed 301 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
+
+Validated build: commit `5f26c254caf8c8f43c151a1ad9037c703fe9f9a4`; APK SHA256 `bf24a197a98b6820bc54d182c3f815e4a67eeb861a15c4f291d849e4fdf468bd`; 521,183,232 bytes. v0.2.24 remains the known-good rollback. Automated checks prove deterministic checkpoint serialization and restoration rules, not Android process-death behavior on physical devices, player-controlled navigation, complete human extraction, real-device performance, or benchmark superiority.
