@@ -220,6 +220,9 @@ jobs:
       - name: Verify jointed arm-to-prop pickup regressions
         run: |
           python -m unittest discover -s tests -p 'test_astra_carry_rig.py' -v
+      - name: Verify illustrated actor expressions and rig alignment
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_storybook_comedy.py' -v
       - name: Render offline comedy pilot
         run: |
           python -m astra_v2.coordinated_development --comedy-pilot --seed astra-comedy-pilot --fps 12 --seconds-per-scene 3 --video --output verification-output/comedy-pilot
