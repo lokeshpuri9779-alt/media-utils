@@ -26,7 +26,7 @@ SUBJECTS = (
     ("clock", r"\bclock\b|\btimepiece\b|\bclocktower\b"),
     ("museum", r"\bmuseum\b|\bexhibit\b|\bartifact\b"),
     ("whale", r"\bwhale\b"),
-    ("tree", r"\bforest\b|\btree\b|\bseed\b|\bfirefl\w*"),
+    ("tree", r"\bforest\b|\btree\b|\bseed\b"),
     ("train", r"\btrain\b|\brailway\b"),
     ("moon", r"\bmoon\b|\blunar\b"),
     ("robot", r"\brobot\b|\bmachine\b"),
