@@ -197,7 +197,7 @@ def frame(scene, t):
     # Draw on transparent layers to avoid hiding the background.
     character_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
     object_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
-    actions = {"approach": 0, "react": 1, "point": 2, "celebrate": 3}
+    actions = {"approach": 0, "react": 1, "point": 2, "celebrate": 3, "carry": 4}
     named_action = scene.get("action")
     if named_action is not None and named_action not in actions:
         raise ValueError(f"scene {number}: unsupported action {named_action!r}")
@@ -241,6 +241,13 @@ def frame(scene, t):
         ox, oy = 540, 1510
     else:
         draw_character(character_layer, scene["character_id"], t, cx, cy)
+    if named_action == "carry":
+        # Stage the object next to the lead actor, moving in sync with them.
+        # This is a simple composited carry cue, not inverse-kinematic gripping.
+        carry_sway = int(28 * math.sin(t * 2.0))
+        lead_x = (slots[0] if actors else cx)
+        ox = lead_x + 95 + carry_sway
+        oy = cy + 70 + int(8 * math.sin(t * 2.0))
     draw_prop(object_layer, scene["object_id"], t, ox, oy)
     image = Image.alpha_composite(image.convert("RGBA"), character_layer.resize((W, H), Image.Resampling.LANCZOS))
     image = Image.alpha_composite(image, object_layer.resize((W, H), Image.Resampling.LANCZOS))
@@ -268,7 +275,7 @@ def render(plan, output, fps=8, seconds_per_scene=2, video=False):
         raise ValueError("invalid scene plan")
     for scene in plan["scenes"]:
         if scene.get("action") is not None and scene["action"] not in (
-            "approach", "react", "point", "celebrate"
+            "approach", "react", "point", "celebrate", "carry"
         ):
             raise ValueError(f"scene {scene.get('scene')}: unsupported action")
     if plan.get("ensemble_enabled") or plan.get("story_subjects_verified") or any(
