@@ -940,9 +940,12 @@ def _micro_scene_direction(shot, t, genre):
     rather than holding one camera composition for an entire spoken beat.
     This is procedural cinematography, NOT AI-generated animation.
     """
-    if genre not in {'current', 'fiction'}:
+    # Fiction must not change camera/layout or flash diagonal transition
+    # panels every second: this caused visible background flicker in Shorts.
+    # Retain the director's shot-level camera until the actual scene cut.
+    if genre != 'current':
         return shot, None
-    interval = NEWS_MICRO_SCENE_SECONDS if genre == 'current' else 1.0
+    interval = NEWS_MICRO_SCENE_SECONDS
     micro_index = max(0, int(t / interval))
     phase = (t % interval) / interval
     x = dict(shot)
