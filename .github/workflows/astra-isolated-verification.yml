@@ -304,6 +304,34 @@ jobs:
           sheet.save(out/"ensemble-contact-sheet.png")
           assert (out/"ensemble-contact-sheet.png").stat().st_size>10000
           PY
+      - name: Render carry-motion contact sheet
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageDraw
+          from astra_v2.coordinated_development import build_ensemble_plan, frame
+          out = Path("verification-output")
+          out.mkdir(exist_ok=True)
+          sheet = Image.new("RGB", (540 * 4, 960 * 2), (20, 30, 45))
+          for i, cast in enumerate((["fox"], ["fox", "dog"],
+                                    ["fox", "dog", "cat"],
+                                    ["fox", "dog", "cat", "rabbit"])):
+              scene = build_ensemble_plan("carry-motion-review", [cast])["scenes"][0]
+              scene["action"] = "carry"
+              for j, t in enumerate((0.0, 0.8)):
+                  sheet.paste(frame(scene, t), (i * 540, j * 960))
+          path = out / "carry-motion-contact-sheet.png"
+          sheet.save(path)
+          assert path.stat().st_size > 10000
+          PY
+      - name: Upload carry-motion contact sheet
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-carry-motion-visual-review
+          path: verification-output/carry-motion-contact-sheet.png
+          if-no-files-found: warn
+          retention-days: 7
       - name: Upload ensemble contact sheet
         if: always()
         uses: actions/upload-artifact@v4
