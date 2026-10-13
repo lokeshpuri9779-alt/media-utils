@@ -35,9 +35,14 @@ def main():
     long_queued = any(str(a.get("name", "")).startswith("astra-preloaded-")
                       and str(a.get("name", ""))[len("astra-preloaded-"):].startswith(("planet-clocks-", "trend-brief-"))
                       for a in usable)
+    # Artifact presence does not imply publishability: older packages can fail
+    # current policy, media QA, or freshness checks. Never let a raw artifact
+    # count permanently starve production of new original Shorts.
     if len(usable) >= target and not long_lane:
-        print("ASTRA_PRELOAD="+json.dumps({"outcome":"buffer_full","usable_count":len(usable),"total_artifacts":len(queue)}))
-        return
+        print("ASTRA_PRELOAD_BUFFER_UNVERIFIED=" + json.dumps({
+            "usable_count": len(usable), "target": target,
+            "action": "attempt_new_approved_render",
+        }))
     # Reuse the already-fetched artifact listing: avoid a second GitHub API call.
     excluded.update(str(item["name"])[len("astra-preloaded-"):] for item in usable)
     if serialized:
