@@ -527,6 +527,7 @@ def main():
     parser.add_argument("--seed", default="astra-development-v1")
     parser.add_argument("--scenes", type=int, default=12)
     parser.add_argument("--fps", type=int, default=8)
+    parser.add_argument("--seconds-per-scene", type=int, default=2)
     parser.add_argument("--output", type=Path, default=Path("development-output"))
     parser.add_argument("--video", action="store_true")
     parser.add_argument("--comedy-pilot", action="store_true",
@@ -543,7 +544,7 @@ def main():
         print(json.dumps({"valid": True, "scene_count": len(plan["scenes"]),
                           "publication_allowed": False, "quality_approved": False}, indent=2))
     else:
-        print(json.dumps(render(plan, args.output, fps=args.fps, video=args.video), indent=2))
+        print(json.dumps(render(plan, args.output, fps=args.fps, seconds_per_scene=args.seconds_per_scene, video=args.video), indent=2))
 
 
 if __name__ == "__main__":
