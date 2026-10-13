@@ -90,7 +90,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [x] Four color-signaled enemy archetypes with distinct flank, direct-pressure, slow-telegraph and standoff behaviors/counters.
 - [ ] Elite variants.
 - [x] One designed miniboss.
-- [ ] One designed multi-phase boss.
+- [x] One designed multi-phase boss.
 - [ ] Telegraphs and mobile-readable VFX.
 - [x] Weapon/ability upgrade pool with synergy rules.
 
@@ -341,3 +341,15 @@ Validated build: commit `d45a68d2586b0bd8be89f72a0b039619570f2cff`; APK SHA256 `
 - [x] Workflow runs `38372252778` and `38372252864` passed 190 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
 
 Validated build: commit `955f21d55ff084d868aedb7100fb611fc826935b`; APK SHA256 `c0d839318d6185cf62238e30f86e27a501b7efe9c2620176eab11adae29f72d8`; 521,170,473 bytes. v0.2.20 remains the known-good rollback. Automated rules prove deterministic phase transitions and rewards, not player-perceived pacing, difficulty, counter readability, human navigation, a complete player-controlled run, physical-device performance, or benchmark superiority.
+
+
+## Validated v0.2.22 OMEGA-WARDEN boss checkpoint (2026-10-13)
+
+- [x] Rebuilt the final-wave OMEGA WARDEN as a three-phase boss with health thresholds at 70% and 35%, phase-specific attack cadence, damage and animation speed.
+- [x] Added bounded two-enemy reinforcement deployments on phase II and phase III, plus explicit mobile-readable arrival, volley-window, movement and exposed-core counter prompts.
+- [x] Added dedicated boss health/scoring rules and telemetry for phase, reinforcement deployment and counter state.
+- [x] Added twenty-one deterministic boss-rule checks covering spawn timing, phase thresholds, scaling, bounded reinforcements, prompts, scoring and telemetry.
+- [x] Initial generation runs safely rejected two fragile source anchors before export; commit `4dc52ba2a2a9c4802d5af057101dd816480b2ea2` replaced them with boundary-based patching without weakening validation.
+- [x] Workflow runs `38386592262` and `38386592240` passed 211 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
+
+Validated build: commit `4dc52ba2a2a9c4802d5af057101dd816480b2ea2`; APK SHA256 `76bb2ceb0acc7c39047db903aff0257e24e715f89bc378381ad8ffb2d6ce3819`; 521,174,722 bytes. v0.2.21 remains the known-good rollback. Automated rules prove deterministic phase/scaling/reinforcement behavior, not boss fun, difficulty or counter readability; player-controlled combat/navigation, a complete human objective-to-extraction run, physical-device performance, and benchmark superiority remain unverified.
