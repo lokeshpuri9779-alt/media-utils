@@ -192,6 +192,56 @@ def draw_prop(image,index,t,x=540,y=900):
             for dx in (-55,0,55):
                 d.line((x+dx,y-45,x+dx,y-115),fill=(247,235,193),width=9)
                 d.ellipse((x+dx-8,y-135,x+dx+8,y-112),fill=(252,172,75))
+    elif kind in ("book","door","phone","computer","camera","gift"):
+        if kind=="book":
+            d.polygon(((x-105,y-115),(x,y-90),(x,y+130),(x-105,y+105)),fill=color)
+            d.polygon(((x,y-90),(x+105,y-115),(x+105,y+105),(x,y+130)),fill=tuple(min(255,v+35) for v in color))
+            d.line((x,y-90,x,y+130),fill=(42,48,58),width=6)
+        elif kind=="door":
+            d.rounded_rectangle((x-85,y-145,x+85,y+145),radius=8,fill=color,outline=(44,50,62),width=9)
+            d.ellipse((x+42,y-5,x+58,y+11),fill=(242,215,135))
+        elif kind=="phone":
+            d.rounded_rectangle((x-70,y-145,x+70,y+145),radius=18,fill=(37,43,55),outline=color,width=12)
+            d.rectangle((x-52,y-112,x+52,y+95),fill=(125,192,216))
+            d.ellipse((x-9,y+111,x+9,y+129),fill=(219,224,225))
+        elif kind=="computer":
+            d.rounded_rectangle((x-135,y-110,x+135,y+85),radius=12,fill=(39,47,59),outline=color,width=13)
+            d.rectangle((x-112,y-90,x+112,y+62),fill=(123,193,215))
+            d.line((x,y+85,x,y+133),fill=color,width=19)
+            d.line((x-70,y+137,x+70,y+137),fill=color,width=14)
+        elif kind=="camera":
+            d.rounded_rectangle((x-130,y-65,x+130,y+90),radius=20,fill=color)
+            d.rectangle((x-85,y-100,x-5,y-60),fill=color)
+            d.ellipse((x-65,y-60,x+65,y+70),fill=(42,50,65))
+            d.ellipse((x-42,y-37,x+42,y+47),fill=(143,207,225))
+        else:
+            d.rectangle((x-105,y-75,x+105,y+115),fill=color)
+            d.line((x,y-75,x,y+115),fill=(245,227,189),width=17)
+            d.line((x-105,y+10,x+105,y+10),fill=(245,227,189),width=17)
+            d.arc((x-60,y-130,x+60,y-50),0,180,fill=(245,227,189),width=12)
+    elif kind in ("cup","bottle","umbrella","lamp","key","hat"):
+        if kind=="cup":
+            d.polygon(((x-90,y-65),(x+65,y-65),(x+45,y+115),(x-65,y+115)),fill=color)
+            d.arc((x+25,y-50,x+135,y+80),-90,90,fill=color,width=17)
+        elif kind=="bottle":
+            d.rounded_rectangle((x-62,y-55,x+62,y+130),radius=19,fill=color)
+            d.rectangle((x-25,y-125,x+25,y-55),fill=color)
+            d.rectangle((x-32,y-135,x+32,y-115),fill=(43,52,65))
+        elif kind=="umbrella":
+            d.pieslice((x-135,y-160,x+135,y+105),180,360,fill=color)
+            d.line((x,y-30,x,y+140),fill=(49,53,65),width=10)
+            d.arc((x-2,y+100,x+65,y+165),0,180,fill=(49,53,65),width=10)
+        elif kind=="lamp":
+            d.polygon(((x-90,y-110),(x+90,y-110),(x+125,y+15),(x-125,y+15)),fill=color)
+            d.line((x,y+15,x,y+145),fill=(48,53,62),width=13)
+            d.line((x-75,y+145,x+75,y+145),fill=(48,53,62),width=15)
+        elif kind=="key":
+            d.ellipse((x-115,y-110,x-15,y-10),outline=color,width=22)
+            d.line((x-12,y-10,x+120,y+120),fill=color,width=22)
+            d.line((x+75,y+80,x+110,y+40),fill=color,width=17)
+        else:
+            d.ellipse((x-85,y-115,x+85,y+20),fill=color)
+            d.rectangle((x-135,y-10,x+135,y+15),fill=color)
     else:
         d.rounded_rectangle((x-100,y-120,x+100,y+120),radius=22,fill=color)
         d.rectangle((x-60,y-55,x+60,y+55),outline=(39,47,58),width=6)
