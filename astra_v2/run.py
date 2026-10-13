@@ -204,6 +204,7 @@ def run():
                 # indeterminate transfer as this risks a duplicate public video.
                 state.setdefault("reserved", {})[cid] = {
                     "at": utcnow().isoformat(), "title": title, "format": candidate["format"],
+                    "plot_key": candidate.get("plot_key", ""),
                     "result": "transfer_pending",
                 }
                 state["last_attempt_at"] = utcnow().isoformat()
