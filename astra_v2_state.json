@@ -3,7 +3,7 @@
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 8,
-  "confirmed_today": 7,
+  "confirmed_today": 8,
   "last_attempt_at": "2026-10-13T22:12:33.030458+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -525,41 +525,37 @@
       "title": "The Beaver and the Paper Lantern",
       "format": "short",
       "uploaded_at": "2026-10-13T21:47:44.625402+00:00"
-    }
-  },
-  "pending": {
-    "v35Gs42UWdw": {
-      "content_id": "rayvan-forge-4220cf5c1a2e8c4f",
+    },
+    "rayvan-forge-4220cf5c1a2e8c4f": {
+      "video_id": "v35Gs42UWdw",
+      "confirmed_at": "2026-10-13T22:12:58.433995+00:00",
       "title": "The Deer and the Missing Violin",
-      "day": "2026-10-14",
-      "uploaded_at": "2026-10-13T22:12:34.739052+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": ""
+      "uploaded_at": "2026-10-13T22:12:34.739052+00:00"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-13T22:11:44.352417+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-13T22:12:58.003337+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T22:12:35.001149+00:00",
+    "at": "2026-10-13T22:12:58.498034+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-13T19:39:16.279796+00:00",
   "reserved": {
