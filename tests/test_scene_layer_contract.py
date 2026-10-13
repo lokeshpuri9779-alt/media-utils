@@ -58,6 +58,20 @@ class ExclusivityTests(unittest.TestCase):
             self.assertEqual(illustrated["foreground"], "illustration")
             self.assertFalse(illustrated["draw_cached_media"])
 
+    def test_fiction_protagonist_overrides_cached_tree_media(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            f = Path(tmp) / "generic_tree.png"
+            f.write_bytes(b"placeholder-exists")
+            for character in ("fox", "firefly", "crab", "squirrel", "otter"):
+                with self.subTest(character=character):
+                    layers = scene_layers({
+                        "visual": "media", "story_subject": character,
+                        "resolved_asset": {"status": "ready", "cache_image": str(f)},
+                    })
+                    self.assertEqual(layers["foreground"], "illustration")
+                    self.assertTrue(layers["draw_visual"])
+                    self.assertFalse(layers["draw_cached_media"])
+
     def test_missing_media_fails_closed(self):
         self.assertFalse(verify_scene_layout([{"visual": "media"}])["pass"])
         self.assertIn("missing_media", scene_layers({"visual": "media"})["foreground"])
