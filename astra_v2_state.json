@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 38,
+  "attempts": 39,
   "confirmed_today": 38,
-  "last_attempt_at": "2026-10-13T11:53:54.568302+00:00",
+  "last_attempt_at": "2026-10-13T12:00:25.453011+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -275,29 +275,38 @@
       "uploaded_at": "2026-10-13T11:53:56.975685+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "Al2s7LNdJ8A": {
+      "content_id": "rayvan-anthology-b86ab6cf110d01bd",
+      "title": "The Rabbit's Lost Shadow",
+      "day": "2026-10-13",
+      "uploaded_at": "2026-10-13T12:00:27.644502+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-13T11:56:17.538656+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_preflight_at": "2026-10-13T11:59:37.530511+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T11:56:17.641033+00:00",
+    "at": "2026-10-13T12:00:27.868321+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-13T07:05:49.939768+00:00",
   "reserved": {
@@ -526,6 +535,12 @@
     "rayvan-forge-a66e3cc9db5a1900": {
       "at": "2026-10-13T11:53:54.568289+00:00",
       "title": "The Duck and the Lost Postcard",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-anthology-b86ab6cf110d01bd": {
+      "at": "2026-10-13T12:00:25.452994+00:00",
+      "title": "The Rabbit's Lost Shadow",
       "format": "short",
       "result": "accepted"
     }
