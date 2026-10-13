@@ -351,7 +351,9 @@ def frame(scene, t):
         floor_y = 1510
         # The fox's hands sit above the torso center; the previous offset
         # placed the gift below the hands even after the pickup completed.
-        hand_y = cy - int(65 * lead_scale) + int(8 * math.sin(t * 2.0))
+        # Catalog carry gesture ends at y + 160, not above the face.
+        # Keep the gift centered at the lowered hand tips in character space.
+        hand_y = cy + int(160 * lead_scale) + int(8 * math.sin(t * 2.0))
         oy = int(floor_y * (1.0 - lift_progress) + hand_y * lift_progress)
     if named_action == "carry":
         # Carry objects should remain visually subordinate to the actor.
@@ -376,6 +378,18 @@ def frame(scene, t):
             object_layer.alpha_composite(artwork, (int(ox - pw / 2), int(oy - ph / 2)))
     else:
         draw_prop(object_layer, scene["object_id"], t, ox, oy)
+    # Draw a foreground grip after the prop so the hands visibly wrap its
+    # sides. This is an explicit 2D interaction cue, not full skeletal IK.
+    if named_action == "carry" and lift_progress > 0.02:
+        grip = ImageDraw.Draw(object_layer)
+        grip_reach = int(72 * lead_scale)
+        grip_width = max(9, int(17 * lead_scale))
+        grip_color = (213, 153, 111, 255)
+        for side in (-1, 1):
+            xhand = int(ox + side * grip_reach)
+            yhand = int(oy + 7 * lead_scale)
+            grip.ellipse((xhand - grip_width, yhand - grip_width,
+                          xhand + grip_width, yhand + grip_width), fill=grip_color)
     # Frame-specific framing: wide setup, tighter reaction, and hero finale.
     # Transform the character and prop together to preserve contact alignment.
     if actors and named_action in ('point', 'react', 'celebrate'):
