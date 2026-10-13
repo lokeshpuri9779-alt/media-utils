@@ -315,6 +315,19 @@ jobs:
                   d.text((x,y+239),f'{SPECIES[index//100]} / {gesture}',
                          fill=(240,241,244))
           board.save(out/'character-gesture-comparison.png')
+          # Inspect object placement through the full scene compositor.
+          from astra_v2.coordinated_development import frame
+          from astra_v2.character_object_catalog import character
+          scenes=[]
+          for count in (1,2,3,4):
+              actors=[{'character_id':i*100} for i in range(count)]
+              scenes.append({'actors':actors,'character_id':0,'object_id':1900,
+                             'action':'carry','scene_index':0})
+          comparison=Image.new('RGB',(4*270,480),(22,31,46))
+          for col,scene in enumerate(scenes):
+              rendered=frame(scene,0.6).convert('RGB')
+              comparison.paste(rendered.resize((270,480)),(col*270,0))
+          comparison.save(out/'carry-ensemble-comparison.png')
           PY
       - name: Upload visual diversity contact sheets
         if: always()
@@ -324,6 +337,7 @@ jobs:
           path: |
             verification-output/*contact-sheet.png
             verification-output/character-gesture-comparison.png
+            verification-output/carry-ensemble-comparison.png
           if-no-files-found: ignore
           retention-days: 7
       - name: Render ensemble contact sheet for visual review
