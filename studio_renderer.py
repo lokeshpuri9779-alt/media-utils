@@ -1022,6 +1022,10 @@ def render_frame(plan,t,genre,total):
         raise CreativeReject('Scene media missing from cache: refusing overlapping/filler fallback.')
     if layers['draw_visual']:
         draw_visual(im,s,t,u,accent)
+    elif genre == 'fiction' and not layers['draw_cached_media'] and not layers['draw_director_asset']:
+        # Licensed icon illustration only for otherwise empty foregrounds.
+        from astra_v2.icon_visuals import overlay_icon
+        overlay_icon(im,s,t,accent)
     if str(s.get('creative_format') or '')=='documentary_montage' and .36 < (u/max(.2,s['duration'])) < .62:
         p=(u/max(.2,s['duration'])-.36)/.26
         pulse=1.0+0.018*math.sin(min(1,p)*math.pi)
