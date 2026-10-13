@@ -310,7 +310,7 @@ jobs:
           {
             "mode": "ensemble",
             "scenes": [
-              {"actors": ["fox"], "action": "approach", "narration": "A fox discovers a mysterious gift."},
+              {"actors": ["fox"], "object_id": 1900, "action": "approach", "narration": "A fox discovers a mysterious gift."},
               {"actors": ["fox", "dog"], "action": "react", "narration": "A dog arrives and notices the gift."},
               {"actors": ["fox", "dog"], "action": "carry", "narration": "Together they carry it toward the village."},
               {"actors": ["fox", "dog", "cat"], "action": "celebrate", "narration": "Their friend joins the celebration."}
