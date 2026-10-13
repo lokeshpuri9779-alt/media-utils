@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 65,
-  "confirmed_today": 64,
-  "last_attempt_at": "2026-10-13T17:25:07.283077+00:00",
+  "attempts": 66,
+  "confirmed_today": 65,
+  "last_attempt_at": "2026-10-13T17:41:55.662273+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -455,14 +455,21 @@
       "title": "The Fox and the Missing Star",
       "format": "short",
       "uploaded_at": "2026-10-13T17:19:16.246737+00:00"
+    },
+    "rayvan-forge-04880880f19894d4": {
+      "video_id": "SuiIOyPHyGg",
+      "confirmed_at": "2026-10-13T17:41:13.894432+00:00",
+      "title": "The Wolf and the Windmill Kite",
+      "format": "short",
+      "uploaded_at": "2026-10-13T17:25:09.008943+00:00"
     }
   },
   "pending": {
-    "SuiIOyPHyGg": {
-      "content_id": "rayvan-forge-04880880f19894d4",
-      "title": "The Wolf and the Windmill Kite",
+    "HLXjuZTrczc": {
+      "content_id": "rayvan-forge-d8bff3e1752e906b",
+      "title": "The Hare and the River Warning",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-13T17:25:09.008943+00:00",
+      "uploaded_at": "2026-10-13T17:41:56.931023+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": ""
@@ -470,11 +477,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-13T17:24:16.513694+00:00",
+  "last_preflight_at": "2026-10-13T17:41:13.404944+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T17:25:10.314188+00:00",
+    "at": "2026-10-13T17:41:57.174492+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -893,6 +900,13 @@
     "rayvan-forge-04880880f19894d4": {
       "at": "2026-10-13T17:25:07.283060+00:00",
       "title": "The Wolf and the Windmill Kite",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-d8bff3e1752e906b": {
+      "at": "2026-10-13T17:41:55.662256+00:00",
+      "title": "The Hare and the River Warning",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
