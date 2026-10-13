@@ -614,9 +614,9 @@ def draw_character_silhouette(image, index, t, x=540, y=900,
         d.line((x-21,y-17,x+21,y-17),fill=dark,width=5)
     elif species not in ("bird","owl","penguin"):
         d.arc((x-23,y-44,x+23,y+4),8,170,fill=dark,width=5)
-    # Overlay articulated arms on gesture cues for eligible species.
-    if species in ("human","robot","cat","dog","fox","rabbit","bear","frog",
-                   "mouse","monkey","lion","deer","alien"):
+    # Overlay gestures for all species: paws/arms, wings, fins and ghostly
+    # appendages must each respond to the same authored story action.
+    if gesture != "idle":
         for side in (-1,1):
             if gesture == "celebrate":
                 hand=(x+side*135,y-145-int(12*math.sin(t*5+side)))
