@@ -73,6 +73,11 @@ def catalog(excluded_ids=None, limit=32):
         for record in (state.get(group) or {}).values():
             if isinstance(record, dict) and record.get("plot_key"):
                 historical_plot_keys.add(str(record["plot_key"]))
+    # Pending transfers and reservations may represent uploaded videos whose
+    # confirmation was interrupted. Exclude them until reconciled.
+    for record in (state.get("reserved") or {}).values():
+        if isinstance(record, dict) and record.get("plot_key"):
+            historical_plot_keys.add(str(record["plot_key"]))
     published_titles = [str(item.get("title", "")).casefold()
                         for group in ("published", "pending")
                         for item in (state.get(group) or {}).values()
