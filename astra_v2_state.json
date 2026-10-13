@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 36,
+  "attempts": 37,
   "confirmed_today": 36,
-  "last_attempt_at": "2026-10-13T09:07:10.576413+00:00",
+  "last_attempt_at": "2026-10-13T11:47:05.234966+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -261,14 +261,23 @@
       "uploaded_at": "2026-10-13T09:07:12.215787+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "quality_skip",
+  "pending": {
+    "Xt3QSyIYjww": {
+      "content_id": "rayvan-anthology-9a64aa9a339d5857",
+      "title": "The Mouse and the Giant Bell",
+      "day": "2026-10-13",
+      "uploaded_at": "2026-10-13T11:47:06.533782+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-13T11:42:29.981867+00:00",
+  "last_preflight_at": "2026-10-13T11:46:12.939364+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T11:44:52.689818+00:00",
+    "at": "2026-10-13T11:47:06.763131+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -500,6 +509,12 @@
     "rayvan-anthology-7c9413360cfe156f": {
       "at": "2026-10-13T09:07:10.576397+00:00",
       "title": "The Monkey and the Missing Banana",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-anthology-9a64aa9a339d5857": {
+      "at": "2026-10-13T11:47:05.234950+00:00",
+      "title": "The Mouse and the Giant Bell",
       "format": "short",
       "result": "accepted"
     }
