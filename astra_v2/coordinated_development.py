@@ -365,8 +365,11 @@ def frame(scene, t):
             prop_scale = 0.55 if actors and len(actors) > 1 else 0.72
             prop_scale *= 0.92 + 0.08 * lift_progress
             # Keep the carried prop in front of the torso, but within arm reach.
-            if lift_progress > 0.85:
-                assert abs(oy - hand_y) < 2, 'carried prop missed hand anchor'
+            if lift_progress >= 0.999:
+                assert abs(oy - hand_y) <= 1, 'carried prop missed hand anchor'
+            else:
+                # During pickup, the gift intentionally moves from floor to hand.
+                assert min(floor_y, hand_y) - 1 <= oy <= max(floor_y, hand_y) + 1
             pw = max(1, int(artwork.width * prop_scale))
             ph = max(1, int(artwork.height * prop_scale))
             artwork = artwork.resize((pw, ph), Image.Resampling.LANCZOS)
