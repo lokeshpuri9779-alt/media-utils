@@ -378,7 +378,7 @@ def load_story_file(path, seed):
         raise ValueError("story requires 1..24 scenes")
     mode = data["mode"]
     if mode == "ensemble":
-        if any(not isinstance(item, dict) or set(item) - {"actors", "action", "narration"}
+        if any(not isinstance(item, dict) or set(item) - {"actors", "action", "narration", "object_id"}
                or "actors" not in item for item in scenes):
             raise ValueError("ensemble scenes require actors, optional action/narration")
         for item in scenes:
@@ -395,6 +395,20 @@ def load_story_file(path, seed):
         plan = build_narrated_plan(seed, [item["narration"] for item in scenes])
     else:
         raise ValueError("unsupported story mode")
+    # A recurring story prop must keep its exact catalog identity across
+    # scenes. Explicit object_id is allowed; otherwise inherit scene one's
+    # prop instead of silently randomizing it every scene.
+    if mode == "ensemble":
+        shared_object = scenes[0].get("object_id", plan["scenes"][0]["object_id"])
+        if type(shared_object) is not int or not 0 <= shared_object < 2000:
+            raise ValueError("object_id must be an integer from 0 to 1999")
+        for scene, item in zip(plan["scenes"], scenes):
+            object_id = item.get("object_id", shared_object)
+            if type(object_id) is not int or not 0 <= object_id < 2000:
+                raise ValueError("object_id must be an integer from 0 to 1999")
+            from astra_v2.character_object_catalog import prop
+            scene["object_id"] = object_id
+            scene["object"] = prop(object_id)
     for scene, item in zip(plan["scenes"], scenes):
         narration = item.get("narration")
         if narration is not None:
