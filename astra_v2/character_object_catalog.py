@@ -528,6 +528,39 @@ def draw_character_silhouette(image, index, t, x=540, y=900):
         if species=="monkey":
             for dx in (-91,91):
                 d.ellipse((x+dx-35,y-80,x+dx+35,y+11),fill=(221,177,139))
+    # Articulated extremities are species-aware and driven by time, not index alone.
+    gait = math.sin(t * 5.0 + index * .09)
+    swing = int(36 * gait)
+    if species in ("human","robot","cat","dog","fox","rabbit","bear","frog",
+                   "mouse","monkey","lion","deer","alien"):
+        for side in (-1,1):
+            shoulder=(x+side*58,y+55)
+            elbow=(x+side*(105+swing//3),y+93+side*swing)
+            hand=(x+side*(122+swing//2),y+138+side*swing)
+            d.line((shoulder,elbow,hand),fill=dark,width=15,joint="curve")
+            d.ellipse((hand[0]-13,hand[1]-13,hand[0]+13,hand[1]+13),fill=color)
+            hip=(x+side*32,y+147)
+            knee=(x+side*(40+swing//2),y+197)
+            foot=(x+side*(43+swing),y+247-abs(swing)//3)
+            d.line((hip,knee,foot),fill=dark,width=17,joint="curve")
+            d.ellipse((foot[0]-21,foot[1]-10,foot[0]+21,foot[1]+11),fill=color)
+    elif species in ("bird","owl","penguin","dragon"):
+        flap = int(42 * math.sin(t*6.0+index*.07))
+        for side in (-1,1):
+            d.polygon(((x+side*65,y-20),
+                       (x+side*160,y-75-flap),
+                       (x+side*116,y+77-flap//2)),fill=color,outline=dark)
+    elif species=="fish":
+        tail=int(32*math.sin(t*7+index*.03))
+        d.polygon(((x-106,y-9),(x-203,y-92+tail),(x-203,y+79+tail)),fill=color,outline=dark)
+    elif species=="turtle":
+        for side in (-1,1):
+            reach=int(18*math.sin(t*3.0+side*1.5))
+            d.ellipse((x+side*133-32,y+23+reach,x+side*133+32,y+87+reach),fill=color,outline=dark,width=4)
+    elif species=="ghost":
+        for side in (-1,1):
+            reach=int(25*math.sin(t*2.4+side))
+            d.ellipse((x+side*105-24,y-9+reach,x+side*105+24,y+43+reach),fill=color)
     # Facial motion uses the same coordinate system for every species.
     blink = math.sin(t*3.3+index*.13)>.965
     eye_y = y-69 if species not in ("turtle","fish") else y-91
