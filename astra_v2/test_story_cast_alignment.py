@@ -1,0 +1,31 @@
+"""Offline regression tests for story subject/cast alignment."""
+import unittest
+from astra_v2.coordinated_development import build_story_plan, verify_story_cast
+from astra_v2.character_object_catalog import character
+
+class StoryCastAlignmentTests(unittest.TestCase):
+    def test_all_supported_subjects_match(self):
+        from astra_v2.character_object_catalog import SPECIES
+        plan = build_story_plan("alignment-regression", list(SPECIES))
+        self.assertTrue(verify_story_cast(plan))
+        for scene in plan["scenes"]:
+            self.assertEqual(scene["subject"], character(scene["character_id"])[0])
+            self.assertFalse(plan["publication_allowed"])
+
+    def test_unsupported_subject_fails_closed(self):
+        with self.assertRaises(ValueError):
+            build_story_plan("alignment-regression", ["hedgehog"])
+
+    def test_tampered_cast_is_rejected(self):
+        plan = build_story_plan("alignment-regression", ["fox"])
+        plan["scenes"][0]["character_id"] = 0
+        with self.assertRaises(ValueError):
+            verify_story_cast(plan)
+
+    def test_invalid_input_is_rejected(self):
+        for subjects in ([], ["fox"] * 121, "fox", [None]):
+            with self.assertRaises(ValueError):
+                build_story_plan("alignment-regression", subjects)
+
+if __name__ == "__main__":
+    unittest.main()
