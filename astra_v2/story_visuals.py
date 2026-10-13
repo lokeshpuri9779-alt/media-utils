@@ -70,11 +70,86 @@ def draw_subject(image, subject, t, accent):
     """Return True when a bespoke subject was drawn; False for unknown subjects."""
     if subject not in {x[0] for x in SUBJECTS}:
         return False
-    # New story characters use the closest existing animated silhouette until
-    # dedicated drawings are available; do not fall back to generic icons.
-    subject = {"fox": "dog", "otter": "dog", "owl": "bird",
-               "duck": "bird", "firefly": "bird", "squirrel": "rabbit",
-               "mouse": "rabbit", "crab": "ocean"}.get(subject, subject)
+    # Dedicated character silhouettes, not aliases of unrelated animals.
+    if subject in {"fox", "otter", "owl", "duck", "firefly", "squirrel", "mouse", "crab"}:
+        d = ImageDraw.Draw(image)
+        x = 520 + int(28 * math.sin(t * 1.7))
+        y = 820 + int(22 * math.sin(t * 2.3))
+        dark = (30, 37, 51)
+        if subject in {"fox", "otter", "squirrel", "mouse"}:
+            fur = {"fox": (222, 112, 51), "otter": (132, 90, 65),
+                   "squirrel": (188, 113, 63), "mouse": (171, 167, 170)}[subject]
+            d.ellipse((x-120,y+50,x+120,y+285),fill=fur)
+            d.ellipse((x-145,y-130,x+145,y+130),fill=fur)
+            if subject == "fox":
+                d.polygon([(x-145,y-55),(x-130,y-255),(x-25,y-120)],fill=fur)
+                d.polygon([(x+145,y-55),(x+130,y-255),(x+25,y-120)],fill=fur)
+                d.polygon([(x-90,y+30),(x+90,y+30),(x,y+145)],fill=(247,225,189))
+                d.polygon([(x+95,y+205),(x+290,y+95+int(30*math.sin(t*3))),
+                           (x+260,y+280)],fill=fur)
+                d.polygon([(x+260,y+120),(x+290,y+95+int(30*math.sin(t*3))),
+                           (x+265,y+180)],fill=(245,230,202))
+            elif subject == "squirrel":
+                d.ellipse((x+95,y-170,x+330,y+250),fill=fur)
+                d.ellipse((x+140,y-120,x+280,y+170),fill=(224,161,92))
+                for dx in (-110,110):
+                    d.ellipse((x+dx-38,y-175,x+dx+38,y-80),fill=fur)
+                d.ellipse((x-65,y+95,x+65,y+250),fill=(236,201,158))
+            elif subject == "mouse":
+                for dx in (-130,130):
+                    d.ellipse((x+dx-85,y-235,x+dx+85,y-60),fill=fur)
+                    d.ellipse((x+dx-58,y-207,x+dx+58,y-85),fill=(224,154,169))
+                d.arc((x+80,y+170,x+310,y+340),180,350,fill=(216,147,164),width=13)
+            else:
+                d.ellipse((x-105,y+40,x+105,y+185),fill=(209,172,126))
+                d.arc((x+90,y+150,x+285,y+310),180,355,fill=fur,width=28)
+                d.ellipse((x-100,y-125,x-35,y-55),fill=fur)
+                d.ellipse((x+35,y-125,x+100,y-55),fill=fur)
+            for dx in (-58,58):
+                d.ellipse((x+dx-15,y-35,x+dx+15,y-3),fill=dark)
+            d.ellipse((x-16,y+35,x+16,y+57),fill=dark)
+        elif subject in {"owl", "duck"}:
+            color = (154,104,77) if subject == "owl" else (240,204,93)
+            d.ellipse((x-145,y-145,x+145,y+260),fill=color)
+            for side in (-1,1):
+                dx=side*120
+                d.ellipse((x+dx-60,y+15,x+dx+60,y+180+int(25*math.sin(t*5+side))),fill=color)
+            if subject == "owl":
+                d.polygon([(x-145,y-65),(x-120,y-240),(x-20,y-130)],fill=color)
+                d.polygon([(x+145,y-65),(x+120,y-240),(x+20,y-130)],fill=color)
+                for dx in (-65,65):
+                    d.ellipse((x+dx-53,y-70,x+dx+53,y+40),fill=(244,223,176))
+                    d.ellipse((x+dx-16,y-40,x+dx+16,y-5),fill=dark)
+            else:
+                for dx in (-58,58):
+                    d.ellipse((x+dx-13,y-35,x+dx+13,y-5),fill=dark)
+            d.polygon([(x-38,y+48),(x+38,y+48),(x,y+105)],fill=(241,140,65))
+        elif subject == "firefly":
+            glow=int(18*abs(math.sin(t*4)))
+            d.ellipse((x-110-glow,y-35-glow,x+110+glow,y+220+glow),fill=(108,120,69))
+            for side in (-1,1):
+                dx=side*110
+                d.ellipse((x+dx-95,y-130,x+dx+95,y+90),fill=(147,213,217))
+            d.ellipse((x-65,y-125,x+65,y+95),fill=(62,76,67))
+            d.ellipse((x-78,y+85,x+78,y+240),fill=(251,221,95))
+            for dx in (-28,28):
+                d.ellipse((x+dx-8,y-65,x+dx+8,y-45),fill=(245,246,224))
+            d.arc((x-65,y-215,x,y-70),185,310,fill=dark,width=7)
+            d.arc((x,y-215,x+65,y-70),230,355,fill=dark,width=7)
+        else:  # crab
+            shell=(217,87,73)
+            d.ellipse((x-160,y-60,x+160,y+175),fill=shell)
+            for side in (-1,1):
+                for i in range(3):
+                    dx=side*(145+i*35)
+                    d.line((x+side*100,y+80+i*24,x+dx,y+205+i*38),fill=shell,width=16)
+                d.line((x+side*140,y+15,x+side*235,y-90),fill=shell,width=19)
+                d.ellipse((x+side*235-48,y-155,x+side*235+48,y-65),fill=shell)
+            for dx in (-60,60):
+                d.line((x+dx,y-30,x+dx,y-115),fill=shell,width=13)
+                d.ellipse((x+dx-23,y-143,x+dx+23,y-100),fill=(247,241,226))
+                d.ellipse((x+dx-9,y-132,x+dx+9,y-112),fill=dark)
+        return True
     d = ImageDraw.Draw(image)
     cx, cy = 520, 850
     # Subject-specific moving scenery behind the central character.
