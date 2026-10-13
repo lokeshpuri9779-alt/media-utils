@@ -2,267 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-13T00:41:58.259464+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 98.92,
-          "captions": 100.0,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-original-marsfootprints-v1"
-    },
-    {
-      "at": "2026-10-13T00:41:58.261098+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 16.167,
-        "renderer": "studio-7.1.1"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-original-marsfootprints-v1"
-    },
-    {
-      "at": "2026-10-13T01:05:51.840530+00:00",
-      "stage": "hook",
-      "element": "hook",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 94.0,
-        "candidate": "mercury-solar-day-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
-      "at": "2026-10-13T01:05:51.842270+00:00",
-      "stage": "hook",
-      "element": "retention",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 83.07766666666666,
-        "candidate": "mercury-solar-day-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
-      "at": "2026-10-13T01:05:51.843800+00:00",
-      "stage": "visuals",
-      "element": "visual",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 100.0,
-        "candidate": "mercury-solar-day-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
-      "at": "2026-10-13T01:05:51.845336+00:00",
-      "stage": "pacing",
-      "element": "pacing",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 62.98899999999999,
-        "candidate": "mercury-solar-day-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
-      "at": "2026-10-13T01:05:51.846861+00:00",
-      "stage": "audio",
-      "element": "audio",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 86.75,
-        "candidate": "mercury-solar-day-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
-      "at": "2026-10-13T01:05:51.848434+00:00",
-      "stage": "captions",
-      "element": "captions",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 87.18,
-        "candidate": "mercury-solar-day-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
-      "at": "2026-10-13T01:05:51.850097+00:00",
-      "stage": "story",
-      "element": "novelty",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 100.0,
-        "candidate": "mercury-solar-day-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
-      "at": "2026-10-13T01:05:51.851732+00:00",
-      "stage": "script",
-      "element": "coherence",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 92.0,
-        "candidate": "mercury-solar-day-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
-      "at": "2026-10-13T01:05:51.853333+00:00",
-      "stage": "render",
-      "element": "technical",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 100.0,
-        "candidate": "mercury-solar-day-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
-      "at": "2026-10-13T01:05:51.854964+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "fail",
-      "evidence": {
-        "hard_failures": [],
-        "media_failures": [],
-        "layer_failures": []
-      },
-      "proposed_action": "['review_story_rhythm_and_tension']",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
-      "at": "2026-10-13T01:05:55.511031+00:00",
-      "stage": "quality",
-      "element": "candidate_selection",
-      "outcome": "fail",
-      "evidence": {
-        "reason": "no_approved_original_story_available"
-      },
-      "proposed_action": "Diagnose story supply and creative gate failures",
-      "candidate_id": ""
-    },
-    {
-      "at": "2026-10-13T01:10:56.000091+00:00",
-      "stage": "hook",
-      "element": "hook",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 94.0,
-        "candidate": "mercury-solar-day-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
-      "at": "2026-10-13T01:10:56.001927+00:00",
-      "stage": "hook",
-      "element": "retention",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 83.07766666666666,
-        "candidate": "mercury-solar-day-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
-      "at": "2026-10-13T01:10:56.003620+00:00",
-      "stage": "visuals",
-      "element": "visual",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 100.0,
-        "candidate": "mercury-solar-day-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
-      "at": "2026-10-13T01:10:56.005348+00:00",
-      "stage": "pacing",
-      "element": "pacing",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 62.98899999999999,
-        "candidate": "mercury-solar-day-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
-      "at": "2026-10-13T01:10:56.007071+00:00",
-      "stage": "audio",
-      "element": "audio",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 88.77,
-        "candidate": "mercury-solar-day-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
-      "at": "2026-10-13T01:10:56.008757+00:00",
-      "stage": "captions",
-      "element": "captions",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 89.17,
-        "candidate": "mercury-solar-day-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
-      "at": "2026-10-13T01:10:56.010521+00:00",
-      "stage": "story",
-      "element": "novelty",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 100.0,
-        "candidate": "mercury-solar-day-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
-      "at": "2026-10-13T01:10:56.012295+00:00",
-      "stage": "script",
-      "element": "coherence",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 92.0,
-        "candidate": "mercury-solar-day-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
       "at": "2026-10-13T01:10:56.014030+00:00",
       "stage": "render",
       "element": "technical",
@@ -7227,6 +6966,259 @@
       },
       "proposed_action": "Diagnose story supply and creative gate failures",
       "candidate_id": ""
+    },
+    {
+      "at": "2026-10-13T09:43:32.352620+00:00",
+      "stage": "hook",
+      "element": "hook",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 94.0,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:43:32.361478+00:00",
+      "stage": "hook",
+      "element": "retention",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 83.07766666666666,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:43:32.369858+00:00",
+      "stage": "visuals",
+      "element": "visual",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 100.0,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:43:32.378059+00:00",
+      "stage": "pacing",
+      "element": "pacing",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 62.98899999999999,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:43:32.389394+00:00",
+      "stage": "audio",
+      "element": "audio",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 88.81,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:43:32.397448+00:00",
+      "stage": "captions",
+      "element": "captions",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 89.17,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:43:32.405577+00:00",
+      "stage": "story",
+      "element": "novelty",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 100.0,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:43:32.413645+00:00",
+      "stage": "script",
+      "element": "coherence",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 92.0,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:43:32.422061+00:00",
+      "stage": "render",
+      "element": "technical",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 100.0,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:43:32.430276+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "fail",
+      "evidence": {
+        "hard_failures": [],
+        "media_failures": [],
+        "layer_failures": []
+      },
+      "proposed_action": "['review_story_rhythm_and_tension']",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:44:43.613842+00:00",
+      "stage": "hook",
+      "element": "hook",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 94.0,
+        "candidate": "saturn-density-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:44:43.622475+00:00",
+      "stage": "hook",
+      "element": "retention",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 76.34133333333332,
+        "candidate": "saturn-density-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:44:43.630838+00:00",
+      "stage": "visuals",
+      "element": "visual",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 100.0,
+        "candidate": "saturn-density-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:44:43.639003+00:00",
+      "stage": "pacing",
+      "element": "pacing",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 47.646,
+        "candidate": "saturn-density-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:44:43.647154+00:00",
+      "stage": "audio",
+      "element": "audio",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 99.82,
+        "candidate": "saturn-density-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:44:43.655361+00:00",
+      "stage": "captions",
+      "element": "captions",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 100.0,
+        "candidate": "saturn-density-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:44:43.663452+00:00",
+      "stage": "story",
+      "element": "novelty",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 100.0,
+        "candidate": "saturn-density-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:44:43.671547+00:00",
+      "stage": "script",
+      "element": "coherence",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 92.0,
+        "candidate": "saturn-density-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:44:43.679694+00:00",
+      "stage": "render",
+      "element": "technical",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 100.0,
+        "candidate": "saturn-density-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:44:43.687876+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "fail",
+      "evidence": {
+        "hard_failures": [],
+        "media_failures": [],
+        "layer_failures": []
+      },
+      "proposed_action": "['review_story_rhythm_and_tension']",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:44:43.696080+00:00",
+      "stage": "quality",
+      "element": "candidate_selection",
+      "outcome": "fail",
+      "evidence": {
+        "reason": "no_approved_original_story_available"
+      },
+      "proposed_action": "Diagnose story supply and creative gate failures",
+      "candidate_id": ""
     }
   ],
   "stage_counts": {
@@ -7327,15 +7319,15 @@
       "regressed": 0
     },
     "render": {
-      "pass": 2,
-      "fail": 55,
+      "pass": 1,
+      "fail": 56,
       "skip": 0,
-      "unknown": 55,
+      "unknown": 56,
       "improved": 0,
       "regressed": 0
     },
     "quality": {
-      "pass": 2,
+      "pass": 1,
       "fail": 46,
       "skip": 0,
       "unknown": 0,
