@@ -132,6 +132,15 @@ class StoryCastAlignmentTests(unittest.TestCase):
         scene["action"] = "approach"
         self.assertIsNotNone(ImageChops.difference(b, frame(scene, 0.8)).getbbox())
 
+    def test_carry_action_with_multiple_actors(self):
+        from PIL import ImageChops
+        for cast in (["fox"], ["fox", "dog"], ["fox", "dog", "cat", "rabbit"]):
+            scene = build_ensemble_plan("carry-ensemble", [cast])["scenes"][0]
+            scene["action"] = "carry"
+            first, second = frame(scene, 0.0), frame(scene, 0.8)
+            self.assertEqual(first.size, (540, 960))
+            self.assertIsNotNone(ImageChops.difference(first, second).getbbox())
+
     def test_unsupported_action_fails_before_output(self):
         from pathlib import Path
         from tempfile import TemporaryDirectory
