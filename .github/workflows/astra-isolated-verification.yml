@@ -125,6 +125,7 @@ jobs:
           story=catalog()[0]
           plan=studio.make_plan(story)
           assert len(plan)>=3, len(plan)
+          assert story.get('production_ready') is True, 'Only approved authored stories may be sampled'
           for i,shot in enumerate(plan):
               assert str(shot.get('speech') or '').strip(), i
               assert str(shot.get('headline') or '').strip(), i
