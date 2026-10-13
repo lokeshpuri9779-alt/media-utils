@@ -19,6 +19,10 @@ def publication_rejection(candidate: dict) -> str | None:
     title = str(candidate.get("title") or "").strip()
     if not content_id or not title:
         return "missing_publication_identity_or_title"
+    if candidate.get("kind") == "unreviewed_causal_draft":
+        return "unreviewed_causal_draft"
+    if candidate.get("production_ready") is False:
+        return "not_production_ready"
     if content_id.startswith(UNREVIEWED_PREFIXES):
         return "unreviewed_template_procedural_story"
     if _ARTICLE_COLLISION.search(title):
