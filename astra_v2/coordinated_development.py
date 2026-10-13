@@ -77,10 +77,18 @@ def render(plan, output, fps=8, seconds_per_scene=2, video=False):
     output.mkdir(parents=True, exist_ok=True)
     previews = []
     motion_failures = []
+    scene_fingerprints = []
+    visual_collisions = []
     for scene in plan["scenes"]:
         first, later = frame(scene, 0.0), frame(scene, 0.75)
         if ImageChops.difference(first, later).getbbox() is None:
             motion_failures.append(scene["scene"])
+        # Frame fingerprints catch visually identical scene openings despite
+        # different catalog identifiers. This is not semantic quality scoring.
+        fingerprint = hashlib.sha256(first.resize((108, 192)).tobytes()).hexdigest()
+        if fingerprint in scene_fingerprints:
+            visual_collisions.append(scene["scene"])
+        scene_fingerprints.append(fingerprint)
         if len(previews) < 12:
             previews.append(first.resize((270, 480)))
     sheet = Image.new("RGB", (270 * 4, 480 * math.ceil(len(previews) / 4)), BG)
@@ -92,6 +100,8 @@ def render(plan, output, fps=8, seconds_per_scene=2, video=False):
         "unique_characters": len({s["character_id"] for s in plan["scenes"]}),
         "unique_objects": len({s["object_id"] for s in plan["scenes"]}),
         "motion_failures": motion_failures,
+        "visually_duplicate_scene_openings": visual_collisions,
+        "unique_scene_frame_fingerprints": len(set(scene_fingerprints)),
         "publication_allowed": False,
         "quality_approved": False,
         "note": "Offline technical candidate; manual creative review required.",
@@ -111,8 +121,8 @@ def render(plan, output, fps=8, seconds_per_scene=2, video=False):
             encoder.close()
     (output / "plan.json").write_text(json.dumps(plan, indent=2))
     (output / "report.json").write_text(json.dumps(report, indent=2))
-    if motion_failures:
-        raise RuntimeError(f"Motion failures in scenes {motion_failures}")
+    if motion_failures or visual_collisions:
+        raise RuntimeError(f"Preview quality gate failed: motion={motion_failures}, duplicate_openings={visual_collisions}")
     return report
 
 
