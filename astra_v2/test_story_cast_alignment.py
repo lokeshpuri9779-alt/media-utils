@@ -27,6 +27,23 @@ class StoryCastAlignmentTests(unittest.TestCase):
         self.assertEqual([scene["subject"] for scene in plan["scenes"]], ["fox", "dog"])
         self.assertTrue(verify_story_cast(plan))
 
+    def test_protagonist_persists_across_unnamed_scenes(self):
+        plan = build_narrated_plan("continuity-test", [
+            "A fox found a mysterious box.",
+            "It carried the box into the forest.",
+            "The fox finally opened it.",
+        ])
+        self.assertEqual([scene["subject"] for scene in plan["scenes"]], ["fox", "fox", "fox"])
+        self.assertTrue(verify_story_cast(plan))
+
+    def test_unannounced_protagonist_switch_fails(self):
+        with self.assertRaises(ValueError):
+            build_narrated_plan("continuity-test", ["The fox entered.", "The dog escaped."])
+
+    def test_first_scene_must_identify_protagonist(self):
+        with self.assertRaises(ValueError):
+            build_narrated_plan("continuity-test", ["It was a dark night.", "The fox appeared."])
+
     def test_narration_rejects_hedgehog_and_ambiguity(self):
         for narration in ("A hedgehog crossed the road.", "The turtle met a fox.", "Suddenly the lights went out."):
             with self.assertRaises(ValueError):
