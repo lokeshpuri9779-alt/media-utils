@@ -49,27 +49,58 @@ def build_plan(seed, count=12):
 
 
 def frame(scene, t):
+    """Experimental scene composition with depth, a shared stage and interaction."""
     image = Image.new("RGB", (W, H), BG)
     d = ImageDraw.Draw(image)
-    # Keep the cast and object in separate composition zones.
-    d.rounded_rectangle((24, 80, W - 24, 550), radius=28,
-                        fill=(31, 44, 65))
-    d.rounded_rectangle((24, 570, W - 24, 870), radius=28,
-                        fill=(34, 49, 68))
-    # Catalog artwork is authored at 1080x1920 scale; render on a
-    # full-size transparent layer then downsample for consistent geometry.
-    canvas = Image.new("RGB", (1080, 1920), BG)
-    draw_character(canvas, scene["character_id"], t, 540, 420)
-    draw_prop(canvas, scene["object_id"], t, 540, 1420)
-    artwork = canvas.resize((W, H), Image.Resampling.LANCZOS)
-    # Use separate crops to avoid replacing panel backgrounds wholesale.
-    image.paste(artwork.crop((0, 0, W, 560)), (0, 0))
-    image.paste(artwork.crop((0, 560, W, 910)), (0, 560))
+    number = scene["scene"]
+    theme = ((29, 48, 75), (48, 42, 73), (34, 67, 68), (72, 48, 58))[number % 4]
+    # Layered atmospheric backdrop and parallax silhouettes.
+    for y in range(H):
+        mix = y / H
+        shade = tuple(int(theme[c] * (1 - mix * 0.55) + BG[c] * mix * 0.55) for c in range(3))
+        d.line((0, y, W, y), fill=shade)
+    drift = int(12 * math.sin(t * 0.7 + number))
+    for i in range(7):
+        xx = (i * 101 + number * 47 + drift) % (W + 110) - 55
+        yy = 125 + (i * 83 + number * 19) % 360
+        rr = 16 + i % 3 * 13
+        d.ellipse((xx-rr, yy-rr, xx+rr, yy+rr), outline=(84, 104, 132), width=2)
+    # Stage shared by both actors, rather than two disconnected panels.
+    d.ellipse((-160, 575, 710, 940), fill=(28, 43, 61))
+    d.ellipse((45, 710, 495, 785), fill=(22, 31, 45))
+    d.line((0, 772, W, 772), fill=(97, 119, 138), width=4)
+    # Draw on transparent layers to avoid hiding the background.
+    character_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
+    object_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
+    action = number % 4
+    # Character approaches the object, reacts, and then steps back.
+    approach = math.sin(min(1.0, t / 1.4) * math.pi / 2)
+    cx = 310 + int(38 * approach) if action in (0, 2) else 320
+    ox = 760 - int(50 * approach) if action in (0, 2) else 745
+    cy = 1060 + int(13 * math.sin(t * 2.4))
+    oy = 1180 + int(15 * math.sin(t * 2.1 + 1.0))
+    draw_character(character_layer, scene["character_id"], t, cx, cy)
+    draw_prop(object_layer, scene["object_id"], t, ox, oy)
+    image = Image.alpha_composite(image.convert("RGBA"), character_layer.resize((W, H), Image.Resampling.LANCZOS))
+    image = Image.alpha_composite(image, object_layer.resize((W, H), Image.Resampling.LANCZOS))
     d = ImageDraw.Draw(image)
-    d.text((30, 28), f"SCENE {scene['scene']:02d} / ASTRA EXPERIMENT", fill=(238, 237, 220))
-    d.text((30, 922), "NOT APPROVED FOR PUBLICATION", fill=(245, 176, 121))
-    return image
-
+    # A visible cause/effect cue is a procedural interaction, not character acting.
+    if action == 0:
+        pulse = 13 + int(7 * (1 + math.sin(t * 3)))
+        d.ellipse((374-pulse, 554-pulse, 374+pulse, 554+pulse),
+                  outline=(250, 216, 127), width=4)
+    elif action == 1:
+        d.arc((295, 370, 480, 570), 190, 320, fill=(150, 215, 224), width=5)
+    elif action == 2:
+        d.line((290, 490, 400, 530), fill=(244, 199, 135), width=5)
+    else:
+        for j in range(3):
+            d.ellipse((390+j*22, 440-j*23, 398+j*22, 448-j*23),
+                      fill=(240, 205, 134))
+    d.rounded_rectangle((18, 20, W-18, 65), radius=14, fill=(18, 26, 40, 220))
+    d.text((30, 35), f"SCENE {number:02d}  /  ASTRA EXPERIMENT", fill=(239, 239, 228))
+    d.text((24, 925), "NOT APPROVED FOR PUBLICATION", fill=(245, 176, 121))
+    return image.convert("RGB")
 
 def render(plan, output, fps=8, seconds_per_scene=2, video=False):
     if not 2 <= fps <= 24 or not 1 <= seconds_per_scene <= 10:
