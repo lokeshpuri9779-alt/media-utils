@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 26,
-  "confirmed_today": 25,
-  "last_attempt_at": "2026-10-12T23:51:22.458103+00:00",
+  "attempts": 27,
+  "confirmed_today": 26,
+  "last_attempt_at": "2026-10-13T00:00:27.175769+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -182,25 +182,32 @@
       "title": "The Comet That Stopped",
       "format": "short",
       "uploaded_at": "2026-10-12T23:43:38.093924+00:00"
+    },
+    "rayvan-original-lightkeeper-v1": {
+      "video_id": "jAyOcm4Om7Y",
+      "confirmed_at": "2026-10-12T23:59:09.645343+00:00",
+      "title": "The Last Lightkeeper | Original Microfiction",
+      "format": "short",
+      "uploaded_at": "2026-10-12T23:51:24.331704+00:00"
     }
   },
   "pending": {
-    "jAyOcm4Om7Y": {
-      "content_id": "rayvan-original-lightkeeper-v1",
-      "title": "The Last Lightkeeper | Original Microfiction",
+    "JGS32qQq0EI": {
+      "content_id": "rayvan-original-doorclock-v1",
+      "title": "The Door That Opened Tomorrow | Original Microfiction",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-12T23:51:24.331704+00:00",
+      "uploaded_at": "2026-10-13T00:00:28.932940+00:00",
       "genre": "fiction",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-12T23:49:59.687904+00:00",
+  "last_preflight_at": "2026-10-12T23:59:09.225758+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-12T23:51:24.680033+00:00",
+    "at": "2026-10-13T00:00:29.411601+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -372,6 +379,12 @@
     "rayvan-original-lightkeeper-v1": {
       "at": "2026-10-12T23:51:22.458089+00:00",
       "title": "The Last Lightkeeper | Original Microfiction",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-original-doorclock-v1": {
+      "at": "2026-10-13T00:00:27.175754+00:00",
+      "title": "The Door That Opened Tomorrow | Original Microfiction",
       "format": "short",
       "result": "accepted"
     }
