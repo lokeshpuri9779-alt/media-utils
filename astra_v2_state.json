@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 37,
+  "attempts": 38,
   "confirmed_today": 37,
-  "last_attempt_at": "2026-10-13T11:47:05.234966+00:00",
+  "last_attempt_at": "2026-10-13T11:53:54.568302+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -268,29 +268,38 @@
       "uploaded_at": "2026-10-13T11:47:06.533782+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "YQH_6kkHg3k": {
+      "content_id": "rayvan-forge-a66e3cc9db5a1900",
+      "title": "The Duck and the Lost Postcard",
+      "day": "2026-10-13",
+      "uploaded_at": "2026-10-13T11:53:56.975685+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-13T11:52:00.219299+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_preflight_at": "2026-10-13T11:53:04.064435+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T11:52:00.292604+00:00",
+    "at": "2026-10-13T11:53:57.202336+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-13T07:05:49.939768+00:00",
   "reserved": {
@@ -513,6 +522,12 @@
     "rayvan-anthology-9a64aa9a339d5857": {
       "at": "2026-10-13T11:47:05.234950+00:00",
       "title": "The Mouse and the Giant Bell",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-forge-a66e3cc9db5a1900": {
+      "at": "2026-10-13T11:53:54.568289+00:00",
+      "title": "The Duck and the Lost Postcard",
       "format": "short",
       "result": "accepted"
     }
