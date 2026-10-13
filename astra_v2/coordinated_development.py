@@ -235,6 +235,12 @@ def frame(scene, t):
         yy = 125 + (i * 83 + number * 19) % 360
         rr = 16 + i % 3 * 13
         d.ellipse((xx-rr, yy-rr, xx+rr, yy+rr), outline=(84, 104, 132), width=2)
+    # Distinct depth layers and lighting give the comedy stage more structure.
+    light_x = 105 + (number % 3) * 155 + int(14 * math.sin(t * 0.6))
+    d.ellipse((light_x - 100, 60, light_x + 100, 270), fill=(58, 75, 96))
+    for k in range(4):
+        x = (k * 153 + 47 + drift // 2) % (W + 90) - 45
+        d.polygon([(x - 28, 635), (x, 435 + 23 * (k % 2)), (x + 29, 635)], fill=(27, 49, 62))
     # Stage shared by both actors, rather than two disconnected panels.
     d.ellipse((-160, 575, 710, 940), fill=(28, 43, 61))
     d.ellipse((45, 710, 495, 785), fill=(22, 31, 45))
@@ -256,6 +262,9 @@ def frame(scene, t):
     oy = 1180 + int(15 * math.sin(t * 2.1 + 1.0))
     actors = scene.get("actors")
     carry_shift = int(28 * math.sin(t * 2.0)) if named_action == "carry" else 0
+    # The prop is lifted during the carry beat, rather than teleporting to the hands.
+    lift_progress = max(0.0, min(1.0, (t - 0.15) / 0.95))
+    lift_progress = lift_progress * lift_progress * (3.0 - 2.0 * lift_progress)
     lead_sway = 0
     if actors:
         # Keep every actor on the same stage, with stable left-to-right slots.
@@ -339,7 +348,9 @@ def frame(scene, t):
         # its deterministic sway. This remains a 2D staged interaction.
         lead_scale = (1.0, 0.82, 0.66, 0.53)[len(actors) - 1] if actors else 1.0
         ox = lead_x + carry_shift + lead_sway
-        oy = cy + int(125 * lead_scale) + int(8 * math.sin(t * 2.0))
+        floor_y = 1510
+        hand_y = cy + int(125 * lead_scale) + int(8 * math.sin(t * 2.0))
+        oy = int(floor_y * (1.0 - lift_progress) + hand_y * lift_progress)
     if named_action == "carry":
         # Carry objects should remain visually subordinate to the actor.
         # Scale the visible prop footprint instead of shrinking its entire
@@ -350,6 +361,7 @@ def frame(scene, t):
         if bbox:
             artwork = native.crop(bbox)
             prop_scale = 0.55 if actors and len(actors) > 1 else 0.72
+            prop_scale *= 0.92 + 0.08 * lift_progress
             pw = max(1, int(artwork.width * prop_scale))
             ph = max(1, int(artwork.height * prop_scale))
             artwork = artwork.resize((pw, ph), Image.Resampling.LANCZOS)
