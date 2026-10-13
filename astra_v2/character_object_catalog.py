@@ -475,7 +475,12 @@ def draw_prop(image, index, t, x=540, y=900):
 
 # Third-pass silhouette design. A separate rig is drawn for every species;
 # these designs are intentionally independent of the original shared oval.
-def draw_character_silhouette(image, index, t, x=540, y=900):
+def draw_character_silhouette(image, index, t, x=540, y=900,
+                              expression="neutral", gesture="idle"):
+    if expression not in ("neutral", "surprised", "happy", "focused"):
+        raise ValueError(f"unsupported facial expression: {expression}")
+    if gesture not in ("idle", "point", "celebrate", "carry"):
+        raise ValueError(f"unsupported gesture: {gesture}")
     species, role, style = character(index)
     d = ImageDraw.Draw(image)
     phase = math.sin(t * 2.5 + index * .031)
@@ -586,18 +591,43 @@ def draw_character_silhouette(image, index, t, x=540, y=900):
         for side in (-1,1):
             reach=int(25*math.sin(t*2.4+side))
             d.ellipse((x+side*105-24,y-9+reach,x+side*105+24,y+43+reach),fill=color)
-    # Facial motion uses the same coordinate system for every species.
-    blink = math.sin(t*3.3+index*.13)>.965
+    # Facial reactions belong to the production silhouette renderer.
+    blink = expression == "neutral" and math.sin(t*3.3+index*.13)>.965
     eye_y = y-69 if species not in ("turtle","fish") else y-91
     for dx in (-38,38):
-        if blink:
+        if expression == "happy":
+            d.arc((x+dx-17,eye_y-12,x+dx+17,eye_y+13),180,360,fill=dark,width=6)
+        elif expression == "surprised":
+            d.ellipse((x+dx-18,eye_y-20,x+dx+18,eye_y+20),fill=(245,243,229))
+            d.ellipse((x+dx-9,eye_y-10,x+dx+9,eye_y+11),fill=dark)
+        elif blink:
             d.line((x+dx-14,eye_y,x+dx+14,eye_y),fill=dark,width=5)
         else:
             d.ellipse((x+dx-14,eye_y-16,x+dx+14,eye_y+16),fill=(245,243,229))
             shift=int(5*math.sin(t*1.6+index*.07))
             d.ellipse((x+dx-6+shift,eye_y-6,x+dx+6+shift,eye_y+8),fill=dark)
-    if species not in ("bird","owl","penguin"):
+            if expression == "focused":
+                d.line((x+dx-19,eye_y-24,x+dx+18,eye_y-18),fill=dark,width=6)
+    if expression == "surprised":
+        d.ellipse((x-13,y-35,x+13,y-3),fill=dark)
+    elif expression == "focused":
+        d.line((x-21,y-17,x+21,y-17),fill=dark,width=5)
+    elif species not in ("bird","owl","penguin"):
         d.arc((x-23,y-44,x+23,y+4),8,170,fill=dark,width=5)
+    # Overlay articulated arms on gesture cues for eligible species.
+    if species in ("human","robot","cat","dog","fox","rabbit","bear","frog",
+                   "mouse","monkey","lion","deer","alien"):
+        for side in (-1,1):
+            if gesture == "celebrate":
+                hand=(x+side*135,y-145-int(12*math.sin(t*5+side)))
+            elif gesture == "point" and side == 1:
+                hand=(x+215,y+15)
+            elif gesture == "carry":
+                hand=(x+side*78,y+145)
+            else:
+                continue
+            d.line(((x+side*58,y+55),hand),fill=dark,width=19)
+            d.ellipse((hand[0]-13,hand[1]-13,hand[0]+13,hand[1]+13),fill=color)
     return species,role,style
 
 # Use the new silhouette rig for character production, retaining the catalog
