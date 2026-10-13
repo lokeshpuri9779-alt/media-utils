@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 30,
+  "attempts": 31,
   "confirmed_today": 30,
-  "last_attempt_at": "2026-10-13T06:33:41.496295+00:00",
+  "last_attempt_at": "2026-10-13T08:13:19.300350+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -219,14 +219,23 @@
       "uploaded_at": "2026-10-13T06:33:43.685491+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "quality_skip",
+  "pending": {
+    "InMQkj_WC6s": {
+      "content_id": "rayvan-anthology-72089163055174ea",
+      "title": "The Penguin Who Delivered Snow",
+      "day": "2026-10-13",
+      "uploaded_at": "2026-10-13T08:13:21.765434+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-13T08:08:11.313707+00:00",
+  "last_preflight_at": "2026-10-13T08:11:21.588746+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T08:10:58.128553+00:00",
+    "at": "2026-10-13T08:13:22.068546+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -423,6 +432,12 @@
       "at": "2026-10-13T06:33:41.496287+00:00",
       "title": "Why brewers schedule Is Getting Attention Now | RAYVAN",
       "format": "long",
+      "result": "accepted"
+    },
+    "rayvan-anthology-72089163055174ea": {
+      "at": "2026-10-13T08:13:19.300337+00:00",
+      "title": "The Penguin Who Delivered Snow",
+      "format": "short",
       "result": "accepted"
     }
   }
