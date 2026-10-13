@@ -306,6 +306,54 @@ def draw_prop(image,index,t,x=540,y=900):
         else:
             d.ellipse((x-85,y-115,x+85,y+20),fill=color)
             d.rectangle((x-135,y-10,x+135,y+15),fill=color)
+    elif kind in ("chair","table","chest","guitar","house","castle","bridge","shoe","backpack","telescope"):
+        ink=(42,49,60)
+        if kind=="chair":
+            d.rounded_rectangle((x-85,y-140,x+85,y+35),radius=12,fill=color)
+            d.rectangle((x-105,y+25,x+105,y+58),fill=color)
+            for dx in (-75,75): d.line((x+dx,y+58,x+dx,y+155),fill=ink,width=17)
+        elif kind=="table":
+            d.rounded_rectangle((x-145,y-20,x+145,y+28),radius=9,fill=color)
+            for dx in (-105,105): d.line((x+dx,y+25,x+dx,y+155),fill=ink,width=20)
+        elif kind=="chest":
+            d.rounded_rectangle((x-125,y-75,x+125,y+125),radius=15,fill=color,outline=ink,width=9)
+            d.arc((x-125,y-145,x+125,y-10),180,360,fill=color,width=26)
+            d.rectangle((x-16,y+0,x+16,y+55),fill=(244,211,113))
+            d.line((x-125,y+20,x+125,y+20),fill=ink,width=8)
+        elif kind=="guitar":
+            d.ellipse((x-100,y-20,x+75,y+165),fill=color,outline=ink,width=6)
+            d.ellipse((x-75,y-105,x+55,y+30),fill=color)
+            d.line((x-8,y-60,x+65,y-205),fill=(125,84,58),width=29)
+            for dx in (-8,0,8): d.line((x+dx,y+130,x+dx+69,y-194),fill=(234,223,195),width=2)
+        elif kind=="house":
+            d.rectangle((x-105,y-40,x+105,y+130),fill=color)
+            d.polygon(((x-145,y-40),(x,y-165),(x+145,y-40)),fill=(157,89,83))
+            d.rectangle((x-26,y+38,x+30,y+130),fill=ink)
+            for dx in (-70,70): d.rectangle((x+dx-17,y-5,x+dx+17,y+32),fill=(190,225,239))
+        elif kind=="castle":
+            d.rectangle((x-105,y-45,x+105,y+145),fill=color)
+            for dx in (-105,105):
+                d.rectangle((x+dx-35,y-125,x+dx+35,y+145),fill=color)
+                for off in (-27,13): d.rectangle((x+dx+off,y-148,x+dx+off+15,y-115),fill=color)
+            d.arc((x-35,y+48,x+35,y+148),180,360,fill=ink,width=17)
+        elif kind=="bridge":
+            d.line((x-150,y+30,x+150,y+30),fill=color,width=24)
+            for dx in (-110,110): d.line((x+dx,y-90,x+dx,y+145),fill=ink,width=17)
+            d.arc((x-105,y-65,x+105,y+105),0,180,fill=color,width=14)
+        elif kind=="shoe":
+            d.polygon(((x-125,y-35),(x-20,y-35),(x+35,y+55),(x+130,y+70),(x+145,y+120),(x-135,y+120)),fill=color)
+            d.line((x-135,y+115,x+145,y+115),fill=ink,width=15)
+            for dy in (20,42,64): d.line((x-30,y+dy,x+27,y+dy),fill=(233,225,208),width=6)
+        elif kind=="backpack":
+            d.rounded_rectangle((x-100,y-100,x+100,y+135),radius=36,fill=color,outline=ink,width=7)
+            d.arc((x-45,y-160,x+45,y-70),180,360,fill=ink,width=12)
+            d.rounded_rectangle((x-70,y+35,x+70,y+110),radius=12,outline=ink,width=8)
+            for dx in (-105,105): d.line((x+dx,y-55,x+dx,y+105),fill=ink,width=12)
+        else:  # telescope
+            d.polygon(((x-135,y-85),(x+90,y-135),(x+120,y-55),(x-100,y+5)),fill=color)
+            d.line((x,y-15,x,y+150),fill=ink,width=13)
+            d.line((x,y+30,x-95,y+145),fill=ink,width=12)
+            d.line((x,y+30,x+95,y+145),fill=ink,width=12)
     else:
         d.rounded_rectangle((x-100,y-120,x+100,y+120),radius=22,fill=color)
         d.rectangle((x-60,y-55,x+60,y+55),outline=(39,47,58),width=6)
