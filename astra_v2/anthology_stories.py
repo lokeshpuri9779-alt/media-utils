@@ -66,8 +66,7 @@ PLOTS = [
  ("THE MOON WAS IN PIECES","A bear saw the moon shattered across the ripples of a mountain lake.","planet","BROKEN MOON","reveal"),
  ("HE FETCHED HIS TOOLS","He carried a toolbox to the shore and tried to collect every shining fragment.","robot","REPAIR TIME","build"),
  ("A FROG SHOWED HIM","A frog jumped into the lake and the pieces danced again, revealing the trick of the water.","forest","THE REVEAL","twist"),
- ("THE BEAR LAUGHED","When the lake became still, the moon looked whole again and the bear packed away his tools.","planet","MOON RESTORED","payoff")]),,
-
+ ("THE BEAR LAUGHED","When the lake became still, the moon looked whole again and the bear packed away his tools.","planet","MOON RESTORED","payoff") ]),
  ("the-penguin-who-delivered-snow","The Penguin Who Delivered Snow","animal comedy","A penguin tries to deliver winter to a town that has never seen snow.",[
  ("A PACKAGE OF SNOW","A penguin arrived at the desert post office carrying a box of snow.","forest","SPECIAL DELIVERY","reveal"),
  ("THE BOX WAS MELTING","The postmaster raced to find shade before the snow disappeared.","door","HURRY UP","build"),
