@@ -49,6 +49,8 @@ jobs:
           assert len(plan['scenes'])==12
           assert report['unique_characters']==12 and report['unique_objects']==12
           assert not report['motion_failures']
+          assert not report['visually_duplicate_scene_openings']
+          assert report['unique_scene_frame_fingerprints']==12
           assert not plan['publication_allowed'] and not report['publication_allowed']
           assert not report['quality_approved']
           assert (root/'preview.mp4').stat().st_size>10000
