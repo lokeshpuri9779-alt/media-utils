@@ -44,6 +44,70 @@ def draw_character(image,index,t,x=540,y=900):
             d.polygon(((x+side*70,y-110),(x+side*80,y-190-ear),(x+side*25,y-160)),fill=base)
     elif species in ("robot","alien","ghost"):
         d.rounded_rectangle((x-100,y-160,x+100,y+55),radius=32,outline=(225,220,190),width=9)
+    # Species-specific features; these are procedural cues, not hand-authored models.
+    if species=="dog":
+        for side in (-1,1):
+            d.ellipse((x+side*105-32,y-125,x+side*105+32,y+15),fill=(114,80,63))
+        d.ellipse((x-20,y+3,x+20,y+28),fill=(36,38,46))
+    elif species=="fox":
+        d.polygon(((x-50,y+2),(x,y+58),(x+50,y+2)),fill=(242,229,204))
+    elif species=="owl":
+        for dx in (-47,47):
+            d.ellipse((x+dx-40,y-83,x+dx+40,y-5),fill=(237,224,196))
+        d.polygon(((x-13,y-4),(x+13,y-4),(x,y+30)),fill=(238,173,71))
+    elif species=="bird":
+        d.polygon(((x-25,y+3),(x+95,y+22),(x-25,y+40)),fill=(236,176,75))
+        d.polygon(((x-45,y-180),(x-15,y-255),(x+20,y-180)),fill=base)
+    elif species=="frog":
+        for dx in (-80,80):
+            d.ellipse((x+dx-31,y-206,x+dx+31,y-144),fill=(102,190,111))
+        d.ellipse((x-20,y+18,x+20,y+38),fill=(48,75,47))
+    elif species=="turtle":
+        d.ellipse((x-125,y+85,x+125,y+275),fill=(66,130,92),outline=(39,88,64),width=14)
+        d.line((x-90,y+180,x+90,y+180),fill=(39,88,64),width=9)
+    elif species=="fish":
+        d.polygon(((x-90,y+50),(x-180,y-30),(x-180,y+130)),fill=base)
+        d.polygon(((x-15,y-180),(x+45,y-260),(x+75,y-165)),fill=base)
+    elif species=="monkey":
+        for dx in (-112,112):
+            d.ellipse((x+dx-45,y-90,x+dx+45,y+20),fill=(184,138,102))
+        d.ellipse((x-55,y-20,x+55,y+70),fill=(214,177,139))
+    elif species=="lion":
+        d.ellipse((x-152,y-208,x+152,y+115),outline=(220,158,68),width=39)
+    elif species=="penguin":
+        d.ellipse((x-80,y+75,x+80,y+255),fill=(239,238,227))
+        d.polygon(((x-22,y-3),(x+22,y-3),(x,y+32)),fill=(234,172,68))
+    elif species=="deer":
+        for side in (-1,1):
+            d.line((x+side*60,y-140,x+side*105,y-270),fill=(134,99,66),width=13)
+            d.line((x+side*86,y-216,x+side*140,y-244),fill=(134,99,66),width=10)
+    elif species=="dragon":
+        for dx in (-65,0,65):
+            d.polygon(((x+dx-30,y-173),(x+dx,y-245),(x+dx+30,y-173)),fill=(108,191,154))
+        d.polygon(((x-100,y+130),(x-205,y+40),(x-165,y+220)),fill=(108,191,154))
+    elif species=="alien":
+        for dx in (-55,55):
+            d.ellipse((x+dx-30,y-70,x+dx+30,y-15),fill=(31,67,72))
+        d.line((x,y-170,x,y-230),fill=base,width=12)
+        d.ellipse((x-15,y-245,x+15,y-215),fill=(237,202,103))
+    elif species=="robot":
+        d.rectangle((x-80,y-150,x+80,y+40),outline=(65,82,97),width=13)
+        d.line((x,y-175,x,y-225),fill=(160,170,182),width=9)
+        d.ellipse((x-15,y-245,x+15,y-215),fill=(238,93,90))
+    elif species=="ghost":
+        d.arc((x-105,y-200,x+105,y+45),180,360,fill=(232,232,243),width=14)
+        for dx in (-70,0,70):
+            d.ellipse((x+dx-30,y+35,x+dx+30,y+100),fill=(229,229,240))
+    elif species=="mouse":
+        for dx in (-95,95):
+            d.ellipse((x+dx-53,y-205,x+dx+53,y-99),fill=(221,170,175))
+    elif species=="bear":
+        d.ellipse((x-58,y+4,x+58,y+75),fill=(205,174,139))
+    elif species=="rabbit":
+        d.ellipse((x-15,y+5,x+15,y+32),fill=(226,165,168))
+    elif species=="cat":
+        d.line((x-25,y+10,x-120,y-4),fill=(38,45,55),width=5)
+        d.line((x+25,y+10,x+120,y-4),fill=(38,45,55),width=5)
     for dx in (-48,48):
         if abs(math.sin(t*1.5))>.99:
             d.line((x+dx-14,y-45,x+dx+14,y-45),fill=(24,29,38),width=6)
