@@ -73,6 +73,14 @@ jobs:
           a=Image.open('verification-output/frame-000.png')
           b=Image.open('verification-output/frame-012.png')
           assert ImageChops.difference(a,b).getbbox() is not None
+          from astra_v2.story_visuals import draw_subject
+          # Newly introduced protagonists must each draw and animate distinctly.
+          for subject in ('hedgehog', 'turtle'):
+              a=Image.new('RGB',(1080,1920),(24,34,52))
+              b=Image.new('RGB',(1080,1920),(24,34,52))
+              assert draw_subject(a,subject,0.0,(236,174,112)),subject
+              assert draw_subject(b,subject,1.0,(236,174,112)),subject
+              assert ImageChops.difference(a,b).getbbox() is not None,subject
           PY
       - name: Upload offline sample and probe
         if: always()
