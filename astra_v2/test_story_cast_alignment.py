@@ -141,6 +141,17 @@ class StoryCastAlignmentTests(unittest.TestCase):
             self.assertEqual(first.size, (540, 960))
             self.assertIsNotNone(ImageChops.difference(first, second).getbbox())
 
+    def test_scaled_carry_prop_differs_from_static_prop(self):
+        from PIL import ImageChops
+        for cast in (["fox"], ["fox", "dog", "cat", "rabbit"]):
+            scene = build_ensemble_plan("carry-prop-size", [cast])["scenes"][0]
+            scene["action"] = "carry"
+            carrying = frame(scene, 0.5)
+            scene["action"] = "react"
+            static = frame(scene, 0.5)
+            self.assertEqual(carrying.size, (540, 960))
+            self.assertIsNotNone(ImageChops.difference(carrying, static).getbbox())
+
     def test_unsupported_action_fails_before_output(self):
         from pathlib import Path
         from tempfile import TemporaryDirectory
