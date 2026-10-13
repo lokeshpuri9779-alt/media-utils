@@ -717,7 +717,7 @@ REWRITTEN_PLOTS = [
 
 AUTHORED_KEYS = {row[0] for row in PLOTS + REWRITTEN_PLOTS}
 
-def catalog(excluded_ids=None, excluded_titles=None, limit=32, excluded_plot_hashes=None, history=None, include_drafts=False):
+def catalog(excluded_ids=None, excluded_titles=None, limit=128, excluded_plot_hashes=None, history=None, include_drafts=False):
     excluded = set(excluded_ids or ())
     titles = {str(t).casefold().strip() for t in (excluded_titles or ())}
     result = []
