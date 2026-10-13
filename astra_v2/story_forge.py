@@ -132,6 +132,58 @@ PLOTS = [
 
 ]
 
+
+# Combinatorial drafts supplement the authored library. They are deliberately
+# NOT marked production-ready: variants need editorial review before publishing.
+DRAFT_ACTORS = ("badger", "beaver", "deer", "duck", "ferret", "goat", "hare", "lynx", "otter", "panda", "raccoon", "wolf")
+DRAFT_PROBLEMS = (
+    ("broken bridge", "a bridge collapsed before the village delivery", "a chain of stepping stones", "the stranded parcel reached its owner"),
+    ("missing bell", "the town bell vanished before the morning ceremony", "a trail of brass dust", "the ceremony began with the recovered bell"),
+    ("flooded garden", "a sudden flood covered the community garden", "a hidden drainage channel", "the vegetables survived and fed the village"),
+    ("lost compass", "the expedition compass disappeared in the fog", "the moss on the northern trees", "the explorers found the route home"),
+    ("dark lighthouse", "the lighthouse went dark during a storm", "a polished mirror and lantern", "the fishing boats returned safely"),
+    ("stolen recipe", "the festival recipe vanished from the bakery", "flour footprints on the cellar stairs", "the bakers recovered the recipe"),
+    ("silent orchestra", "every instrument went quiet before the concert", "a loose curtain blocking the stage acoustics", "the audience heard the concert"),
+    ("runaway balloon", "the festival balloon drifted above the rooftops", "a long ribbon caught in a weather vane", "the balloon landed without harm"),
+    ("frozen fountain", "the village fountain froze before the market", "warm water from the nearby mill", "the fountain flowed again"),
+    ("vanishing footprints", "mysterious footprints ended at the riverbank", "a concealed wooden walkway", "the missing traveler was found"),
+    ("collapsed tunnel", "the mountain tunnel closed before the supply run", "an old miners' side passage", "the supplies arrived on time"),
+    ("broken telescope", "the observatory telescope failed before the eclipse", "a loose focusing wheel", "everyone watched the eclipse"),
+    ("lost invitation", "the royal invitation blew into the forest", "a paper corner caught on a thorn", "the invited guests arrived"),
+    ("stuck windmill", "the windmill stopped before harvest", "a rope tangled around its axle", "the mill ground grain again"),
+    ("empty well", "the village well ran dry overnight", "an underground spring behind loose stones", "clean water returned"),
+    ("missing lantern", "the mountain guide lost the only lantern", "glowing fireflies beside the trail", "the hikers reached shelter"),
+    ("cracked dam", "water leaked through the old pond wall", "clay hidden beneath the reeds", "the pond stayed full"),
+    ("lost painting", "the gallery painting disappeared before opening", "a fresh paint mark on a delivery cart", "the exhibition opened"),
+    ("stalled ferry", "the ferry engine stopped midstream", "a spare paddle beneath the deck", "the passengers reached shore"),
+    ("silent clock", "the station clock stopped before departure", "a small gear lodged beneath the dial", "the trains left on schedule"),
+)
+DRAFT_SETBACKS = (
+    ("the first rope snapped under the strain", "a stronger knot tied around an iron hook"),
+    ("the heavy rain erased the first clue", "a dry footprint beneath the wooden roof"),
+    ("the narrow passage was blocked by fallen branches", "a hidden opening behind the old gate"),
+    ("the villagers doubted the rescue could work", "a careful demonstration that won their help"),
+    ("the first tool broke before the job was finished", "a forgotten spare in the workshop"),
+)
+
+def draft_catalog(limit=996):
+    """Supply exactly 996 uniquely identified plot *drafts*, not reviewed stories."""
+    output = []
+    for actor in DRAFT_ACTORS:
+        for problem, crisis, clue, resolution in DRAFT_PROBLEMS:
+            for setback, solution in DRAFT_SETBACKS:
+                key = f"{actor}-{problem.replace(' ', '-')}-{len(output)}"
+                beats = [
+                    ("THE PROBLEM", f"A {actor} discovered that {crisis}, and everyone nearby needed help before nightfall.", "forest", "URGENT"),
+                    ("THE FIRST ATTEMPT FAILED", f"The {actor} tried to solve the problem alone, but {setback} and the situation grew worse.", "door", "NOT YET"),
+                    ("A BETTER IDEA", f"Then the {actor} noticed {clue}, and used {solution} to make a completely new plan.", "book", "NEW PLAN"),
+                    ("THE RESCUE", f"With the new plan in place, {resolution}, and the {actor} finally celebrated with the neighbors.", "forest", "SAVED"),
+                ]
+                output.append((key, f"The {actor.title()} and the {problem.title()}", "animal adventure", beats))
+                if len(output) >= limit:
+                    return output
+    return output
+
 def plot_fingerprint(beats):
     """Fingerprint story narration, excluding cosmetic titles and labels."""
     narration = " ".join(speech for _, speech, _, _ in beats).casefold()
@@ -139,7 +191,9 @@ def plot_fingerprint(beats):
     return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
 
 
-def catalog(excluded_ids=None, excluded_titles=None, limit=32, excluded_plot_hashes=None, history=None):
+AUTHORED_KEYS = {row[0] for row in PLOTS}
+
+def catalog(excluded_ids=None, excluded_titles=None, limit=32, excluded_plot_hashes=None, history=None, include_drafts=False):
     excluded = set(excluded_ids or ())
     titles = {str(t).casefold().strip() for t in (excluded_titles or ())}
     result = []
@@ -154,7 +208,7 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=32, excluded_plot_has
         fingerprint = str(record.get("plot_fingerprint") or "")
         if fingerprint:
             seen_plots.add(fingerprint)
-    for key, title, genre, beats in PLOTS:
+    for key, title, genre, beats in (PLOTS + (draft_catalog() if include_drafts else [])):
         # Reject malformed or weak authored arcs before any expensive render.
         if len(beats) != 4 or any(not isinstance(b, (tuple, list)) or len(b) != 4 for b in beats):
             continue
@@ -170,8 +224,8 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=32, excluded_plot_has
             continue
         seen_plots.add(fingerprint)
         result.append({
-            "genre": "fiction", "kind": "authored_causal_story",
-            "production_ready": True, "content_id": cid,
+            "genre": "fiction", "kind": ("authored_causal_story" if key in AUTHORED_KEYS else "unreviewed_causal_draft"),
+            "production_ready": key in AUTHORED_KEYS, "content_id": cid,
             "plot_fingerprint": fingerprint,
             "title": title, "hook": beats[0][0],
             "question": beats[0][1], "answer": beats[-1][1],
