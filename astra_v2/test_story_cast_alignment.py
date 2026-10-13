@@ -1,6 +1,6 @@
 """Offline regression tests for story subject/cast alignment."""
 import unittest
-from astra_v2.coordinated_development import build_story_plan, verify_story_cast
+from astra_v2.coordinated_development import build_story_plan, build_narrated_plan, verify_story_cast
 from astra_v2.character_object_catalog import character
 
 class StoryCastAlignmentTests(unittest.TestCase):
@@ -21,6 +21,16 @@ class StoryCastAlignmentTests(unittest.TestCase):
         plan["scenes"][0]["character_id"] = 0
         with self.assertRaises(ValueError):
             verify_story_cast(plan)
+
+    def test_narration_selects_correct_species(self):
+        plan = build_narrated_plan("narration-test", ["The fox found a key.", "A puppy opened the door."])
+        self.assertEqual([scene["subject"] for scene in plan["scenes"]], ["fox", "dog"])
+        self.assertTrue(verify_story_cast(plan))
+
+    def test_narration_rejects_hedgehog_and_ambiguity(self):
+        for narration in ("A hedgehog crossed the road.", "The turtle met a fox.", "Suddenly the lights went out."):
+            with self.assertRaises(ValueError):
+                build_narrated_plan("narration-test", [narration])
 
     def test_invalid_input_is_rejected(self):
         for subjects in ([], ["fox"] * 121, "fox", [None]):
