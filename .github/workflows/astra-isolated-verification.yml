@@ -171,6 +171,21 @@ jobs:
               else:
                   raise AssertionError('Landscape video passed Shorts media gate')
           PY
+      - name: Verify 2000 procedural animation variants
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageChops
+          from astra_v2.motion_elements import COUNT, SHAPES, MOTIONS, COLORS, variant, draw
+          assert COUNT == 2000
+          assert len(SHAPES) == 20 and len(MOTIONS) == 10 and len(COLORS) == 10
+          assert len({variant(i) for i in range(COUNT)}) == COUNT
+          for index in (0, 199, 888, 1999):
+              a=Image.new('RGB',(1080,1920),(20,30,45))
+              b=Image.new('RGB',(1080,1920),(20,30,45))
+              draw(a,index,0)
+              draw(b,index,1.2)
+              assert ImageChops.difference(a,b).getbbox() is not None, index
+          PY
       - name: Record verification boundary
         run: |
           echo 'Regression checks completed. No YouTube credentials are provided to this workflow.'
