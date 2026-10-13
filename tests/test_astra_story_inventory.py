@@ -7,8 +7,8 @@ from astra_v2.story_forge import PLOTS, REWRITTEN_PLOTS, catalog, draft_catalog,
 class StoryInventoryTests(unittest.TestCase):
     def test_authored_inventory_has_distinct_ids(self):
         self.assertEqual(len(PLOTS), 24)
-        self.assertEqual(len(REWRITTEN_PLOTS), 5)
-        self.assertEqual(len(records), 29)
+        self.assertEqual(len(REWRITTEN_PLOTS), 10)
+        self.assertEqual(len(records), 34)
         records = catalog(limit=2000)
         self.assertEqual(len({x["content_id"] for x in records}), len(records))
         self.assertTrue(all(x["production_ready"] for x in records))
