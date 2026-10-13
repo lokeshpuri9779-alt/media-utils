@@ -14,6 +14,7 @@ def audit(kind, start, stop, output):
         raise ValueError("Invalid catalog range")
     output.mkdir(parents=True, exist_ok=True)
     fingerprints = set()
+    signature_counts = {}
     blank = []
     static = []
     errors = []
@@ -34,7 +35,9 @@ def audit(kind, start, stop, output):
             if ImageChops.difference(a, z).getbbox() is None:
                 static.append(index)
             small = a.resize((84, 116))
-            fingerprints.add(hashlib.sha256(small.tobytes()).hexdigest())
+            digest = hashlib.sha256(small.tobytes()).hexdigest()
+            fingerprints.add(digest)
+            signature_counts[digest] = signature_counts.get(digest, 0) + 1
             if (index - start) % max(1, (stop - start) // 12) == 0:
                 examples.append((index, a.resize((210, 290))))
         except Exception as exc:
@@ -48,6 +51,8 @@ def audit(kind, start, stop, output):
     report = {
         "kind": kind, "start": start, "stop": stop, "tested": stop - start,
         "unique_frame_fingerprints": len(fingerprints),
+        "exact_duplicate_render_count": sum(v - 1 for v in signature_counts.values()),
+        "max_same_frame_repetitions": max(signature_counts.values(), default=0),
         "unique_fraction": round(len(fingerprints) / (stop - start), 4),
         "blank_indices": blank, "static_indices": static, "errors": errors,
         "quality_approved": False,
