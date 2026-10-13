@@ -407,6 +407,23 @@ def load_story_file(path, seed):
             scene["action"] = item["action"]
     if not verify_story_cast(plan):
         raise ValueError("story cast verification failed")
+    # A narrated ensemble requires explicit cast references for every named
+    # supported species. This is lexical validation, not semantic parsing.
+    if mode == "ensemble":
+        from astra_v2.character_object_catalog import SPECIES
+        import re
+        for index, (scene, item) in enumerate(zip(plan["scenes"], scenes), 1):
+            narration = item.get("narration", "")
+            if not narration:
+                continue
+            words = set(re.findall(r"[a-z]+", narration.lower()))
+            mentioned = {species for species in SPECIES if species in words}
+            cast = {actor["subject"] for actor in scene["actors"]}
+            if mentioned - cast:
+                raise ValueError(
+                    f"scene {index}: narration mentions species absent from cast: "
+                    f"{sorted(mentioned - cast)}"
+                )
     return plan
 
 
