@@ -233,7 +233,43 @@ def plot_fingerprint(beats):
     return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
 
 
-AUTHORED_KEYS = {row[0] for row in PLOTS}
+
+# A small, manually rewritten set. These are story scripts, not automatic
+# approvals: visual/audio QA and publication safeguards still apply.
+REWRITTEN_PLOTS = [
+    ("beaver-bridge-detour", "The Beaver's Midnight Bridge", "animal adventure", [
+        ("THE LAST DELIVERY", "A beaver promised to deliver medicine before sunset, but the village bridge collapsed beneath the first cart.", "forest", "BRIDGE DOWN"),
+        ("THE RIVER ROSE", "He tried floating the cart across, until rising water swept his rope downstream and soaked the wooden wheels.", "forest", "PLAN FAILED"),
+        ("THE OLD MILL", "A waterwheel nearby gave him an idea: he lashed spare boards into a narrow bridge anchored against the mill.", "door", "NEW CROSSING"),
+        ("JUST IN TIME", "The neighbors steadied the boards while the beaver carried the medicine across, reaching the waiting family before dark.", "forest", "DELIVERED"),
+    ]),
+    ("otter-lighthouse-mirror", "The Otter and the Dark Lighthouse", "animal adventure", [
+        ("LIGHTS OUT", "A sudden storm extinguished the harbor lighthouse while three fishing boats were still navigating toward the rocky shore.", "forest", "NO SIGNAL"),
+        ("THE LANTERN FAILED", "An otter climbed the tower with a lantern, but the wind blew out its flame before anyone could see it.", "door", "STORM"),
+        ("A FLASH OF SILVER", "Noticing moonlight on a metal tray, she positioned polished mirrors to reflect a sheltered lantern across the harbor.", "book", "MIRROR SIGNAL"),
+        ("HOME THROUGH THE FOG", "The captains followed the steady flashes between the rocks, and every boat entered the harbor safely.", "forest", "ALL SAFE"),
+    ]),
+    ("hare-lost-invitation", "The Hare and the Missing Invitation", "animal comedy", [
+        ("THE ROYAL PICNIC", "A hare was responsible for delivering the royal picnic invitations, until a sudden gust scattered them into the forest.", "forest", "INVITES LOST"),
+        ("WRONG ADDRESSES", "He chased one letter through the rain, only to discover its ink had blurred into unreadable streaks.", "door", "OH NO"),
+        ("THE WAX SEALS", "He noticed each envelope carried a different animal crest, and matched those crests to the houses along the trail.", "book", "SMART CLUE"),
+        ("EVERYONE ARRIVED", "The hare delivered the final invitation just before noon, and the picnic guests surprised him with the biggest carrot cake.", "forest", "PICNIC SAVED"),
+    ]),
+    ("raccoon-gallery-cart", "The Raccoon and the Vanished Painting", "animal mystery", [
+        ("EMPTY FRAME", "The gallery's prize painting disappeared an hour before opening, leaving a clean rectangle on the dusty wall.", "door", "MISSING ART"),
+        ("A FALSE TRAIL", "A raccoon followed muddy pawprints outside, but they led only to the gardener's abandoned boots.", "forest", "WRONG CLUE"),
+        ("THE BLUE STREAK", "A fresh blue paint streak on a delivery cart matched the frame, so she checked beneath its folded blankets.", "book", "FOUND IT"),
+        ("THE EXHIBITION OPENS", "The painting had slipped behind the cart during unloading; the raccoon rehung it as the first visitors arrived.", "door", "CASE CLOSED"),
+    ]),
+    ("panda-windmill-rope", "The Panda and the Stubborn Windmill", "animal comedy", [
+        ("NO FLOUR TODAY", "The village windmill stopped spinning on baking day, leaving the panda baker with sacks of unground wheat.", "forest", "MILL STOPPED"),
+        ("A LOUD CREAK", "He pushed a sail with a long pole, but a tangled rope tightened around the axle and stopped it again.", "door", "STUCK AGAIN"),
+        ("THE SAFETY KNOT", "After securing the sails, he climbed the maintenance ladder and untied the knot using a small wooden lever.", "book", "ROPE RELEASED"),
+        ("BREAD FOR EVERYONE", "The windmill turned freely once more, and the baker shared fresh warm loaves with the helpers who held the ladder.", "forest", "FRESH BREAD"),
+    ]),
+]
+
+AUTHORED_KEYS = {row[0] for row in PLOTS + REWRITTEN_PLOTS}
 
 def catalog(excluded_ids=None, excluded_titles=None, limit=32, excluded_plot_hashes=None, history=None, include_drafts=False):
     excluded = set(excluded_ids or ())
@@ -250,7 +286,7 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=32, excluded_plot_has
         fingerprint = str(record.get("plot_fingerprint") or "")
         if fingerprint:
             seen_plots.add(fingerprint)
-    for key, title, genre, beats in (PLOTS + (draft_catalog() if include_drafts else [])):
+    for key, title, genre, beats in (PLOTS + REWRITTEN_PLOTS + (draft_catalog() if include_drafts else [])):
         # Reject malformed or weak authored arcs before any expensive render.
         if len(beats) != 4 or any(not isinstance(b, (tuple, list)) or len(b) != 4 for b in beats):
             continue
