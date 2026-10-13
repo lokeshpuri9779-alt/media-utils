@@ -416,7 +416,7 @@ def render(plan, output, fps=8, seconds_per_scene=2, video=False):
     sheet.save(output / "storyboard.png")
     report = {
         "scene_count": len(plan["scenes"]),
-        "unique_characters": len({s["character_id"] for s in plan["scenes"]}),
+        "unique_characters": len({actor["character_id"] for s in plan["scenes"] for actor in (s.get("actors") or [{"character_id": s["character_id"]}])}),
         "unique_objects": len({s["object_id"] for s in plan["scenes"]}),
         "motion_failures": motion_failures,
         "visually_duplicate_scene_openings": visual_collisions,
