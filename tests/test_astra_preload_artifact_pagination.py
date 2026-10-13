@@ -105,5 +105,52 @@ class QueueFormatSelectionTests(unittest.TestCase):
                 self.assertEqual(long["content_id"], "planet-clocks-long-first")
                 self.assertEqual(long["format"], "long")
 
+
+    @patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/repo", "ASTRA_PRELOAD_MAX_AGE_HOURS": "0"})
+    def test_malformed_candidate_does_not_block_valid_short(self):
+        import hashlib
+        import io
+        import json
+        import tempfile
+        import zipfile
+        from pathlib import Path
+        from types import SimpleNamespace
+
+        def archive(candidate, video=b"original-short-video"):
+            stream = io.BytesIO()
+            with zipfile.ZipFile(stream, "w") as z:
+                z.writestr("candidate.json", json.dumps(candidate))
+                z.writestr("video.mp4", video)
+            return stream.getvalue()
+
+        video = b"original-short-video"
+        good = {"content_id": "good", "title": "Original good", "description": "Original narrative",
+                "genre": "fiction", "format": "short", "synthetic": True,
+                "sha256": hashlib.sha256(video).hexdigest()}
+        packages = {1: archive({"content_id": "bad", "title": None, "format": "short"}),
+                    2: archive(good)}
+        entries = [{"name": "astra-preloaded-" + cid, "id": ident,
+                    "created_at": "2026-10-13T05:00:00Z", "workflow_run": {"id": ident}}
+                   for ident, cid in ((1, "bad"), (2, "good"))]
+
+        def download(args, **kwargs):
+            ident = int(args[2].split("/")[-2])
+            kwargs["stdout"].write(packages[ident])
+            return SimpleNamespace(returncode=0)
+
+        trusted = {"conclusion": "success", "head_branch": "main",
+                   "name": "ASTRA V2 - Preload Approved Videos"}
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "selected.mp4"
+            with patch.object(preload_queue, "artifacts", return_value=entries), \
+                 patch.object(preload_queue, "_api", return_value=trusted), \
+                 patch.object(preload_queue.subprocess, "run", side_effect=download), \
+                 patch("astra_v2.creative.inspect_video", return_value={"seconds": 30}), \
+                 patch("astra_v2.publication_quality.publication_rejection", return_value=None):
+                result = preload_queue.take(set(), set(), out, allow_long=False)
+            self.assertIsNotNone(result)
+            self.assertEqual(result["content_id"], "good")
+            self.assertEqual(out.read_bytes(), video)
+
 if __name__ == "__main__":
     unittest.main()
