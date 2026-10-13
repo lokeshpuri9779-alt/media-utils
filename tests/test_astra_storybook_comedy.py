@@ -43,6 +43,23 @@ class IllustratedComedyArtTests(unittest.TestCase):
                 self.assertTrue(375 <= sx <= 705)
                 self.assertTrue(1130 <= sy <= 1240)
 
+    def test_gift_stays_attached_for_reaction_and_celebration(self):
+        from unittest.mock import patch
+        from astra_v2.coordinated_development import carry_elbow
+        scenes = build_comedy_demo()["scenes"]
+        for scene in scenes[2:]:
+            with self.subTest(action=scene["action"]):
+                with patch("astra_v2.coordinated_development.carry_elbow",
+                           wraps=carry_elbow) as solve:
+                    image = frame(scene, 0.9)
+                    self.assertEqual(image.size, (540, 960))
+                    self.assertGreaterEqual(solve.call_count, 2,
+                        f"{scene['action']} must keep both paws attached to the gift")
+        with patch("astra_v2.coordinated_development.carry_elbow",
+                   wraps=carry_elbow) as solve:
+            frame(scenes[1], 0.9)
+            self.assertEqual(solve.call_count, 0)
+
     def test_all_demo_scenes_render_with_new_art(self):
         plan = build_comedy_demo()
         images = [frame(scene, 0.9) for scene in plan["scenes"]]
