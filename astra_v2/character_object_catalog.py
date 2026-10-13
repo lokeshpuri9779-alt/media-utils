@@ -29,7 +29,7 @@ def prop(index):
     if not isinstance(index,int) or not 0<=index<OBJECT_COUNT: raise ValueError(index)
     return OBJECTS[index//50], MATERIALS[index//5%10], OBJECT_MOTIONS[index%5]
 
-def draw_character(image,index,t,x=540,y=900,expression="neutral"):
+def draw_character(image,index,t,x=540,y=900,expression="neutral",gesture="idle"):
     species,role,style=character(index)
     d=ImageDraw.Draw(image)
     n=index%10
@@ -130,10 +130,20 @@ def draw_character(image,index,t,x=540,y=900,expression="neutral"):
     else:
         d.arc((x-32,y-20,x+32,y+28),0,180,fill=(35,37,43),width=5)
     d.ellipse((x-95,y+55,x+95,y+270),fill=base)
+    if gesture not in ("idle", "point", "celebrate", "carry"):
+        raise ValueError(f"unsupported gesture: {gesture}")
     step=int(30*math.sin(t*4))
     for side in (-1,1):
         d.line((x+side*52,y+235,x+side*52+side*step,y+325),fill=base,width=27)
-        d.line((x+side*85,y+90,x+side*145,y+125+side*step),fill=base,width=19)
+        if gesture == "celebrate":
+            arm_end = (x+side*(110+int(12*math.sin(t*5))), y-100-int(15*math.sin(t*5)))
+        elif gesture == "point" and side == 1:
+            arm_end = (x+235, y+15)
+        elif gesture == "carry":
+            arm_end = (x+side*75, y+160)
+        else:
+            arm_end = (x+side*145, y+125+side*step)
+        d.line((x+side*85,y+90,*arm_end),fill=base,width=19)
     # Visible occupation cues rather than the same badge for every role.
     gold=(248,217,136)
     if role=="chef":
