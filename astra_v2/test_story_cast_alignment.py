@@ -219,6 +219,21 @@ class StoryCastAlignmentTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 load_story_file(path, "invalid-prop")
 
+    def test_authored_story_allows_same_prop_with_changing_cast(self):
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from astra_v2.coordinated_development import build_ensemble_plan, render
+        plan = build_ensemble_plan("continuity-regression", [
+            ["fox"], ["fox", "dog"], ["fox", "dog", "cat"]
+        ])
+        for scene in plan["scenes"]:
+            scene["object_id"] = plan["scenes"][0]["object_id"]
+            scene["object"] = plan["scenes"][0]["object"]
+        with TemporaryDirectory() as tmp:
+            result = render(plan, Path(tmp), fps=2)
+            self.assertFalse(result["publication_allowed"])
+            self.assertTrue((Path(tmp) / "storyboard.png").exists())
+
     def test_unsupported_action_fails_before_output(self):
         from pathlib import Path
         from tempfile import TemporaryDirectory
