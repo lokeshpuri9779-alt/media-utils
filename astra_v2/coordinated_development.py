@@ -85,7 +85,12 @@ def render(plan, output, fps=8, seconds_per_scene=2, video=False):
             motion_failures.append(scene["scene"])
         # Frame fingerprints catch visually identical scene openings despite
         # different catalog identifiers. This is not semantic quality scoring.
-        fingerprint = hashlib.sha256(first.resize((108, 192)).tobytes()).hexdigest()
+        # Exclude scene labels: different scene numbers must not disguise
+        # identical artwork. Compare only the two artwork regions.
+        artwork_only = Image.new("RGB", (W, 860), BG)
+        artwork_only.paste(first.crop((0, 80, W, 550)), (0, 0))
+        artwork_only.paste(first.crop((0, 570, W, 870)), (0, 500))
+        fingerprint = hashlib.sha256(artwork_only.resize((108, 172)).tobytes()).hexdigest()
         if fingerprint in scene_fingerprints:
             visual_collisions.append(scene["scene"])
         scene_fingerprints.append(fingerprint)
