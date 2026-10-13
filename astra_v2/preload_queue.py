@@ -145,6 +145,8 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
         if os.getenv("ASTRA_SERIES_PUBLICATION", "0") == "1" and not cid.startswith("rayvan-season-01-episode-"):
             continue
         if cid in excluded_ids or "/" in cid or ".." in cid:
+            if cid.startswith("rayvan-anthology-"):
+                print("ASTRA_ANTHOLOGY_SKIP=" + json.dumps({"content_id": cid, "reason": "excluded_or_invalid_id"}))
             continue
         if cid.startswith("rayvan-season-01-episode-"):
             try:
@@ -164,6 +166,8 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
         if (run.get("conclusion") != "success"
                 or run.get("head_branch") != "main"
                 or run.get("name") not in ("ASTRA V2 - Preload Approved Videos", "ASTRA V2 - Long-form Preload")):
+            if cid.startswith("rayvan-anthology-"):
+                print("ASTRA_ANTHOLOGY_SKIP=" + json.dumps({"content_id": cid, "reason": "run_not_trusted", "run_status": run.get("conclusion")}))
             continue
         with tempfile.TemporaryDirectory(prefix="astra-queue-") as tmp:
             archive = Path(tmp) / "artifact.zip"
@@ -172,6 +176,8 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
                     ["gh", "api", f"repos/{repo}/actions/artifacts/{entry['id']}/zip"],
                     stdout=dest, stderr=subprocess.PIPE, timeout=90, check=False)
             if result.returncode or archive.stat().st_size > MAX_BYTES:
+                if cid.startswith("rayvan-anthology-"):
+                    print("ASTRA_ANTHOLOGY_SKIP=" + json.dumps({"content_id": cid, "reason": "download_failed_or_oversized", "exit_code": result.returncode}))
                 continue
             try:
                 with zipfile.ZipFile(archive) as z:
