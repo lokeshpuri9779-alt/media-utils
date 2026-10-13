@@ -209,12 +209,26 @@ def frame(scene, t):
         # Keep every actor on the same stage, with stable left-to-right slots.
         # Render each actor onto its own transparent layer before compositing.
         count = len(actors)
-        slots = ([540], [340, 740], [240, 540, 840],
-                 [180, 420, 660, 900])[count - 1]
+        slots = ([540], [290, 790], [210, 540, 870],
+                 [155, 410, 670, 925])[count - 1]
+        # Scale complete actor layers to their available stage width. The
+        # character renderer has a fixed native footprint, so merely changing
+        # center coordinates does not prevent crowding.
+        scale = (1.0, 0.82, 0.66, 0.53)[count - 1]
         for actor, slot in zip(actors, slots):
             actor_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
-            sway = int(13 * math.sin(t * 2.0 + slot / 180))
-            draw_character(actor_layer, actor["character_id"], t, slot + sway, cy)
+            sway = int(9 * math.sin(t * 2.0 + slot / 180))
+            draw_character(actor_layer, actor["character_id"], t, 540, 1060)
+            if scale != 1.0:
+                new_w = int(1080 * scale)
+                new_h = int(1920 * scale)
+                scaled = actor_layer.resize((new_w, new_h), Image.Resampling.LANCZOS)
+                actor_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
+                actor_layer.alpha_composite(scaled, (int(slot + sway - new_w / 2),
+                                                    int(cy - new_h * 1060 / 1920)))
+            else:
+                # The single-actor case keeps the full native composition.
+                pass
             character_layer = Image.alpha_composite(character_layer, actor_layer)
         # Move the prop forward so it does not cover the ensemble.
         ox, oy = 540, 1510
