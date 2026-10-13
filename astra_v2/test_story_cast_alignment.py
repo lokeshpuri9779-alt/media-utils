@@ -171,6 +171,19 @@ class StoryCastAlignmentTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 load_story_file(path, "test")
 
+    def test_story_file_rejects_malformed_actor_types(self):
+        import json
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from astra_v2.coordinated_development import load_story_file
+        with TemporaryDirectory() as tmp:
+            path = Path(tmp) / "story.json"
+            for actors in ("fox", None, [], [42], ["fox"] * 5):
+                path.write_text(json.dumps({"mode": "ensemble", "scenes": [
+                    {"actors": actors}]}))
+                with self.subTest(actors=actors), self.assertRaises(ValueError):
+                    load_story_file(path, "invalid-cast")
+
     def test_unsupported_action_fails_before_output(self):
         from pathlib import Path
         from tempfile import TemporaryDirectory
