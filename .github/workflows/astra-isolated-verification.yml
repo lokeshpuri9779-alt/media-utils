@@ -11,6 +11,11 @@ on:
       - 'studio_renderer.py'
       - 'requirements.txt'
 
+# Keep only the newest verification run for this experimental branch.
+concurrency:
+  group: astra-isolated-verification-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
