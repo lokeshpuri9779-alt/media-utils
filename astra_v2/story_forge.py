@@ -267,6 +267,36 @@ REWRITTEN_PLOTS = [
         ("THE SAFETY KNOT", "After securing the sails, he climbed the maintenance ladder and untied the knot using a small wooden lever.", "book", "ROPE RELEASED"),
         ("BREAD FOR EVERYONE", "The windmill turned freely once more, and the baker shared fresh warm loaves with the helpers who held the ladder.", "forest", "FRESH BREAD"),
     ]),
+    ("fox-fountain-thaw", "The Fox and the Frozen Fountain", "animal adventure", [
+        ("THE WINTER MARKET", "The fox arrived to prepare the market fountain, but an overnight freeze had blocked every pipe beneath the square.", "forest", "FROZEN SOLID"),
+        ("THE WRONG FIX", "He chipped at the ice with a hammer, cracking a decorative tile while the water remained trapped underground.", "door", "STOP HAMMERING"),
+        ("A WARMER ROUTE", "The baker showed him a warm drainage channel, so they circulated gently heated water around the frozen outlet.", "book", "GENTLE HEAT"),
+        ("THE FIRST SPLASH", "The fountain flowed before the market opened, and the fox replaced the cracked tile with help from the mason.", "forest", "MARKET READY"),
+    ]),
+    ("owl-clock-gear", "The Owl and the Station Clock", "animal mystery", [
+        ("THE CLOCK STOPPED", "At dawn the station clock froze at midnight, and the passengers began missing their trains despite arriving early.", "door", "WRONG TIME"),
+        ("A RISKY SHORTCUT", "An owl tried pushing the clock hands forward, but the gears jammed and the minute hand slipped loose.", "door", "GEARS JAMMED"),
+        ("THE TINY SCREW", "Looking behind the dial, she spotted a fallen screw wedged between two gears and removed it with careful tweezers.", "book", "SMALL CLUE"),
+        ("BACK ON TRACK", "After resetting the mechanism against the conductor's watch, she heard the clock chime as the next train arrived.", "forest", "ON TIME"),
+    ]),
+    ("goat-garden-drain", "The Goat and the Floating Garden", "animal adventure", [
+        ("GARDEN UNDERWATER", "A sudden downpour flooded the shared vegetable garden, and a goat watched the seedlings disappear beneath muddy water.", "forest", "FLOOD"),
+        ("THE WALL COLLAPSED", "He built a mud barrier across the path, but the rising water pushed through and washed the barrier away.", "door", "NOT ENOUGH"),
+        ("THE OLD CHANNEL", "A grandmother remembered a buried stone drain, so the goat cleared its opening and guided water toward the meadow.", "book", "DRAIN FOUND"),
+        ("SEEDLINGS SAVED", "The garden slowly emptied, and the neighbors replanted the damaged rows together before the next sunny morning.", "forest", "GARDEN SAVED"),
+    ]),
+    ("lynx-telescope-focus", "The Lynx and the Eclipse", "animal mystery", [
+        ("THE SKY SHOW", "The village gathered for a rare eclipse, but the observatory telescope displayed nothing except a blurry gray circle.", "forest", "BLURRY SKY"),
+        ("THE LENS WAS CLEAN", "A lynx polished the glass again and again, yet every adjustment made the image even less clear.", "door", "STILL BLURRY"),
+        ("ONE LOOSE WHEEL", "She found the focusing wheel wobbling on its shaft, tightened the hidden screw and tested the alignment safely.", "book", "FOCUS FIXED"),
+        ("A SHARED VIEW", "With proper solar filters in place, the visitors took turns viewing the eclipse through the restored telescope.", "forest", "SKY REVEALED"),
+    ]),
+    ("duck-ferry-paddles", "The Duck and the Stalled Ferry", "animal adventure", [
+        ("MIDRIVER TROUBLE", "A ferry stalled halfway across the river, leaving the passengers drifting slowly toward a bend full of reeds.", "forest", "ENGINE STOPPED"),
+        ("THE ROPE SNAPPED", "A duck tried towing the heavy ferry with a rope, but the current pulled it tight until the knot broke.", "door", "ROPE BROKE"),
+        ("TWO SPARE PADDLES", "The captain found emergency paddles beneath the seats, and the duck organized the passengers to row in rhythm.", "book", "ROW TOGETHER"),
+        ("SAFE AT THE PIER", "Their coordinated strokes guided the ferry to a sheltered pier, where a mechanic finally repaired the engine.", "forest", "SAFE LANDING"),
+    ]),
 ]
 
 AUTHORED_KEYS = {row[0] for row in PLOTS + REWRITTEN_PLOTS}
