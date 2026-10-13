@@ -88,7 +88,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 ### P3 — Combat content
 - [x] At least 3 genuinely different weapons.
 - [x] Four color-signaled enemy archetypes with distinct flank, direct-pressure, slow-telegraph and standoff behaviors/counters.
-- [ ] Elite variants.
+- [x] Three deterministic tactical elite variants with distinct stats, readable color/counter cues and score rewards.
 - [x] One designed miniboss.
 - [x] One designed multi-phase boss.
 - [ ] Telegraphs and mobile-readable VFX.
@@ -393,3 +393,15 @@ Validated build: commit `45641f3a043b17ed261d1bdcf100c4641e1417b8`; APK SHA256 `
 - [x] Workflow runs `38441201006` and `38441200954` passed 301 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
 
 Validated build: commit `5f26c254caf8c8f43c151a1ad9037c703fe9f9a4`; APK SHA256 `bf24a197a98b6820bc54d182c3f815e4a67eeb861a15c4f291d849e4fdf468bd`; 521,183,232 bytes. v0.2.24 remains the known-good rollback. Automated checks prove deterministic checkpoint serialization and restoration rules, not Android process-death behavior on physical devices, player-controlled navigation, complete human extraction, real-device performance, or benchmark superiority.
+
+
+## Validated v0.2.26 tactical-elite checkpoint (2026-10-14)
+
+- [x] Added three deterministic mid-run elite variants without crowding the final boss wave: Aegis Bulwark, Phase Stalker and Volt Artillery.
+- [x] Gave each elite a materially different durability, damage, cadence, animation-speed and scale profile, plus a distinct green, magenta or blue emissive beacon.
+- [x] Added explicit mobile-readable arrival/counter prompts and risk-scaled score bonuses of 75%, 55% and 65%.
+- [x] Added spawn/defeat telemetry and preserved Sentinel, OMEGA WARDEN and OVERLOAD behavior.
+- [x] Added twenty-eight deterministic elite checks covering one-per-wave promotion, all-three-in-one-run exposure, combat identities, readable counters/colors, rewards and safe fallbacks.
+- [x] Workflow runs `38449770000` and `38449770366` passed 329 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
+
+Validated build: commit `61ff3583ad3a389df536eda4b01938dd71a81341`; APK SHA256 `5c2782d0862a4f889dfc6e2fc5fd83a4e0f7d65a65322c0866595a81bfd4cd74`; 521,187,483 bytes. v0.2.25 remains the known-good rollback. Automated rules prove deterministic elite scheduling, profiles and rewards, not player-perceived balance, counter readability, complete human objective-to-extraction play, physical-device performance, or benchmark superiority.
