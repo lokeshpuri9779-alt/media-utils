@@ -5989,7 +5989,7 @@ jobs:
           old_handler = '''func _on_boss_phase_changed(phase: int) -> void:
           	MobileMetrics.record("boss_phase", {"phase": phase, "time_seconds": mission_time})
           	if OS.has_feature("mobile"):
-          		Input.vibrate_handheld(70)
+          		PulseHaptics.pulse_haptic(70)
           	if phase == 2:
           		_show_banner("WARDEN PHASE II", "ATTACK CYCLE ACCELERATING", 1.1)
           	elif phase == 3:
@@ -6004,7 +6004,7 @@ jobs:
           		"counter": BossRulesScript.phase_hint(phase)
           	})
           	if OS.has_feature("mobile"):
-          		Input.vibrate_handheld(85 if phase == 3 else 70)
+          		PulseHaptics.pulse_haptic(85 if phase == 3 else 70)
           	boss_label.text = "⚠  OMEGA WARDEN // PHASE %d" % phase
           	_show_banner(BossRulesScript.phase_title(phase), BossRulesScript.phase_hint(phase), 1.35)
           	for index in range(reinforcements):
