@@ -97,11 +97,21 @@ def plot_fingerprint(beats):
     return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
 
 
-def catalog(excluded_ids=None, excluded_titles=None, limit=32, excluded_plot_hashes=None):
+def catalog(excluded_ids=None, excluded_titles=None, limit=32, excluded_plot_hashes=None, history=None):
     excluded = set(excluded_ids or ())
     titles = {str(t).casefold().strip() for t in (excluded_titles or ())}
     result = []
     seen_plots = set(excluded_plot_hashes or ())
+    for record in (history or ()):
+        if not isinstance(record, dict):
+            continue
+        excluded.add(str(record.get("content_id") or ""))
+        title = str(record.get("title") or "").casefold().strip()
+        if title:
+            titles.add(title)
+        fingerprint = str(record.get("plot_fingerprint") or "")
+        if fingerprint:
+            seen_plots.add(fingerprint)
     for key, title, genre, beats in PLOTS:
         cid = "rayvan-forge-" + hashlib.sha256(key.encode()).hexdigest()[:16]
         fingerprint = plot_fingerprint(beats)
