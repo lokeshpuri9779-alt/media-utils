@@ -225,7 +225,21 @@ jobs:
           b = studio_renderer.render_frame(plan[:1], 1.3, 'fiction', 2.0)
           assert a.size == (1080, 1920)
           assert ImageChops.difference(a.convert('RGB'), b.convert('RGB')).getbbox() is not None
+          # Publish reduced preview frames for visual review, not to YouTube.
+          from pathlib import Path
+          out=Path('verification-output')
+          out.mkdir(exist_ok=True)
+          a.resize((270,480)).save(out/'cast-prop-preview-0.png')
+          b.resize((270,480)).save(out/'cast-prop-preview-1.png')
           PY
+      - name: Upload experimental cast and prop previews
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-cast-prop-previews
+          path: verification-output/cast-prop-preview-*.png
+          if-no-files-found: ignore
+          retention-days: 7
       - name: Record verification boundary
         run: |
           echo 'Regression checks completed. No YouTube credentials are provided to this workflow.'
