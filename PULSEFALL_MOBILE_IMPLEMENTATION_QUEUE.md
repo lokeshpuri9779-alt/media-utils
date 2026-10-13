@@ -86,7 +86,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [x] Bounded per-weapon recoil with automatic recovery and enemy-local hit-stop.
 
 ### P3 — Combat content
-- [ ] At least 3 genuinely different weapons.
+- [x] At least 3 genuinely different weapons.
 - [x] Four color-signaled enemy archetypes with distinct flank, direct-pressure, slow-telegraph and standoff behaviors/counters.
 - [ ] Elite variants.
 - [x] One designed miniboss.
@@ -353,3 +353,16 @@ Validated build: commit `955f21d55ff084d868aedb7100fb611fc826935b`; APK SHA256 `
 - [x] Workflow runs `38386592262` and `38386592240` passed 211 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
 
 Validated build: commit `4dc52ba2a2a9c4802d5af057101dd816480b2ea2`; APK SHA256 `76bb2ceb0acc7c39047db903aff0257e24e715f89bc378381ad8ffb2d6ce3819`; 521,174,722 bytes. v0.2.21 remains the known-good rollback. Automated rules prove deterministic phase/scaling/reinforcement behavior, not boss fun, difficulty or counter readability; player-controlled combat/navigation, a complete human objective-to-extraction run, physical-device performance, and benchmark superiority remain unverified.
+
+
+## Validated v0.2.23 distinct-weapon checkpoint (2026-10-13)
+
+- [x] Reworked CARBINE, SCATTER and LANCE into genuinely different combat roles rather than recoil-only variants: mid-range sustained fire, short-range seven-pellet burst and long-range high-damage precision.
+- [x] Added per-weapon projectile count, damage, spread, velocity, maximum range, cadence and color profiles.
+- [x] Added mobile-readable MID/CLOSE/LONG labels on the weapon switch and recorded weapon/role switch telemetry.
+- [x] Preserved Warden health-phase transitions when higher-damage projectiles cross a phase threshold.
+- [x] Added twenty-four deterministic weapon-rule checks for identity, projectile patterns, damage hierarchy, range, speed, cadence, upgrade interaction, role labels, colors, fallback safety and authored-space bounds.
+- [x] Initial generation stopped safely on a boss-modified damage anchor; commit `abcbfccb27ef3d8b94b5432f57760924560097a8` made the patch boss-aware without weakening validation.
+- [x] Workflow runs `38392430728` and `38392430794` passed 235 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
+
+Validated build: commit `abcbfccb27ef3d8b94b5432f57760924560097a8`; APK SHA256 `b20f5f0d9a8e0bf1c3367eff42eeb9d4975e5fea0b753b1ed2cc63cb1717f74b`; 521,174,879 bytes. v0.2.22 remains the known-good rollback. Automated rules prove deterministic weapon differentiation and bounds, not player-perceived balance, aim comfort or weapon fun; player-controlled combat/navigation, a complete human objective-to-extraction run, physical-device performance, and benchmark superiority remain unverified.
