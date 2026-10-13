@@ -296,10 +296,15 @@ def frame(scene, t):
     oy = 1180 + int(15 * math.sin(t * 2.1 + 1.0))
     actors = scene.get("actors")
     storybook = scene.get("visual_style") == "storybook"
+    # The gift remains in the fox's paws after pickup, including reactions
+    # and the trophy-like ending; no teleport back to the stage floor.
+    held_action = named_action == "carry" or (storybook and named_action in ("react", "celebrate"))
     carry_shift = int(28 * math.sin(t * 2.0)) if named_action == "carry" else 0
     # The prop is lifted during the carry beat, rather than teleporting to the hands.
     lift_progress = max(0.0, min(1.0, (t - 0.15) / 0.95))
     lift_progress = lift_progress * lift_progress * (3.0 - 2.0 * lift_progress)
+    if storybook and named_action in ("react", "celebrate"):
+        lift_progress = 1.0
     lead_sway = 0
     lead_shoulders = None
     lead_base = None
@@ -340,7 +345,7 @@ def frame(scene, t):
                               "happy" if named_action == "celebrate" else
                               "focused" if named_action in ("point", "carry") else
                               "neutral")
-                gesture = ("carry_rig" if named_action == "carry" else
+                gesture = ("carry_rig" if held_action else
                            named_action if named_action in ("point", "celebrate") else "idle")
             else:
                 expression = ("surprised" if named_action in ("carry", "react", "celebrate") else
@@ -361,7 +366,7 @@ def frame(scene, t):
                     crouch = int(155 * (1.0 - lift_progress)) if named_action == "carry" and actor_index == 0 else 0
                     place_x = int(slot + sway + (carry_shift if actor_index == 0 else 0) - new_w / 2)
                     place_y = int(cy + crouch - new_h / 2)
-                    if named_action == "carry" and actor_index == 0:
+                    if held_action and actor_index == 0:
                         native_shoulders = tuple(carry_shoulder_anchor(
                             actor["character_id"], actor_t, 540, 1060, side,
                             storybook=storybook)
@@ -385,7 +390,7 @@ def frame(scene, t):
                 shifted.alpha_composite(actor_layer,
                                         (sway + (carry_shift if actor_index == 0 else 0), crouch))
                 actor_layer = shifted
-                if named_action == "carry" and actor_index == 0:
+                if held_action and actor_index == 0:
                     native_shoulders = tuple(carry_shoulder_anchor(
                         actor["character_id"], actor_t, 540, 1060, side,
                         storybook=storybook)
@@ -405,17 +410,17 @@ def frame(scene, t):
                       "focused" if named_action in ("point", "carry") else "neutral")
         render_scene_actor(character_layer, scene["character_id"], t,
                            cx + carry_shift, cy, expression,
-                           "carry_rig" if named_action == "carry" else
+                           "carry_rig" if held_action else
                            named_action if named_action in ("point", "celebrate") else "idle",
                            storybook=storybook)
-        if named_action == "carry":
+        if held_action:
             lead_shoulders = tuple(carry_shoulder_anchor(
                 scene["character_id"], t, cx + carry_shift, cy, side,
                 storybook=storybook)
                 for side in (-1, 1))
             lead_base = ((240, 120, 62) if storybook else character_layer.getpixel((
                 cx + carry_shift, min(1919, int(lead_shoulders[0][1] + 40))))[:3])
-    if named_action == "carry":
+    if held_action:
         # Stage the object next to the lead actor, moving in sync with them.
         # This is a simple composited carry cue, not inverse-kinematic gripping.
         lead_x = (slots[0] if actors else cx)
@@ -428,10 +433,14 @@ def frame(scene, t):
         # Anchor to the actual transformed shoulders, accounting for crop,
         # scaling, idle bob, crouching and lateral movement. This avoids
         # guessing the hand position from a global stage coordinate.
-        hand_y = int(sum(point[1] for point in lead_shoulders) / 2 +
-                     70 * lead_scale) if lead_shoulders else cy + int(160 * lead_scale)
+        anchor_y = int(sum(point[1] for point in lead_shoulders) / 2) if lead_shoulders else cy
+        if storybook and named_action == "celebrate":
+            hand_y = anchor_y - int(172 * lead_scale) - int(14 * math.sin(t * 5))
+            ox += int(36 * lead_scale)
+        else:
+            hand_y = anchor_y + int(70 * lead_scale)
         oy = int(floor_y * (1.0 - lift_progress) + hand_y * lift_progress)
-    if named_action == "carry":
+    if held_action:
         # Carry objects should remain visually subordinate to the actor.
         # Scale the visible prop footprint instead of shrinking its entire
         # transparent drawing canvas.
