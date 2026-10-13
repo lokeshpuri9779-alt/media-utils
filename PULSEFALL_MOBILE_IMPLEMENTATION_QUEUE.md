@@ -429,7 +429,23 @@ Validated build: commit `aa1e9987cec894edd62f6fa44e4434828d08e046`; APK SHA256 `
 - Rollback remains v0.2.27 at `aa1e9987cec894edd62f6fa44e4434828d08e046`, run `38457666612`; its source and GitHub artifact were not changed.
 
 ### QA debt returned to the priority queue
-- [ ] Repair meta_progression_test.gd: push_error is outside the failed-condition branch, so all 33 passing assertions emit misleading ERROR lines. The failure counter is conditional and reports zero; do not call these actual assertion failures.
-- [ ] Explicitly free the standalone meta-progression test profile before shutdown; this fixture reports 3 ObjectDB instances and 1 retained resource. Existing leak gate only covers runtime/extraction logs. Extend it to this fixture after cleanup.
-- [ ] Distinguish expected malformed-checkpoint diagnostics from unexpected errors without broadly suppressing runtime errors.
+- [x] Repaired meta_progression_test.gd in v0.2.29: error logging now occurs only on a failed assertion. The 33 old error lines were misleading test output, not assertion failures.
+- [x] Freed the standalone meta-progression test profile in v0.2.29; its 3 ObjectDB instances and 1 retained-resource warning are gone. The evidence gate now rejects leaks in import and all 20 game-test logs.
+- [x] Malformed checkpoint reads now use JSON instance parsing and its returned error code, close the read handle before clearing invalid files, and fail safely without an engine error. No error allowlist or blanket suppression was added.
 - [ ] Full player-controlled combat/navigation/extraction, real-device installation/frame pacing/thermals and benchmark comparisons remain unverified. No benchmark-superiority or clean-all-fixtures claim is justified by this build.
+
+
+## Validated v0.2.29 QA-gate checkpoint (2026-10-14)
+
+- Fixed progression-fixture error indentation and explicit Node teardown; added a freed-instance assertion.
+- Added malformed-checkpoint removal/retry and valid-but-non-object JSON regressions. Meta progression now has 34 checks; checkpoint handling has 37.
+- Added `scripts/pulsefall_validate_logs.py`: fail closed on missing/empty/unreadable logs, unexpected engine/script errors, singular/plural ObjectDB/resource/RID leaks, nonzero failures, missing/duplicate/reduced completion summaries, incomplete extraction PASS records and unsupported rendering warnings.
+- Gate covers all 21 generated Godot logs (import plus 20 game suites), retaining workflow exit-code checks. Added 17 Python regression tests exercising intentionally bad evidence and correct success/failure exit codes.
+- Local preflight: all 17 gate tests passed; 43 shell scripts and 35 Python generation blocks parsed. Both Android workflows at `617e0446335df14abd84e308002d0397f0fb26c1` succeeded: [38480894291](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38480894291) and [38480894293](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38480894293).
+- Both report 394 game/runtime assertions and 17 gate tests passing, plus 7 APK and 5 AAB checks. Import and all game-test logs contain zero detected engine errors or shutdown leaks. This is a bounded automated test result, not a leak-free guarantee for real gameplay.
+- APK identity: `com.pulsefall.blacksite`, versionCode `49`, versionName `0.2.29-mobile-alpha`, arm64-v8a. APK: 521,195,999 bytes; SHA256 `642c4319ab5452781cd787d27f3d15d5e2135f0923747c9e193ac03e5f93c81b`. Downloaded ZIP SHA256 matched artifact digest `8367460f612e87a2089820284adc84deb59087f13eb3fdd4bfd4550f1efeb1af`.
+- Rollback: v0.2.28 at commit `61e539fec78ac494493f0513d156912dda0c8c7e`, run `38465906162`, artifact `11848108847`. Previous source/APK remain unchanged and its retained local archive passed ZIP integrity verification. GitHub artifact expiry is 2026-10-20T20:55:21Z; rebuild from pinned source if needed after expiry.
+
+### Remaining evidence / returned issues
+- [ ] Investigate the separate AAB editor-export shutdown warning: one ObjectDB instance is reported after successful export, alongside aborted scan-thread/ADB-daemon diagnostics. It is outside the now-clean game-test logs; do not claim all build processes are warning-free. Both AAB identity/integrity checks and APK export passed.
+- [ ] Full player-controlled combat/navigation/objective-to-extraction, actual 5–10 minute duration, first-upgrade timing, physical-device installation/frame pacing/thermals, usability and benchmark comparisons remain open. Scripted game checks do not establish these results or benchmark superiority.
