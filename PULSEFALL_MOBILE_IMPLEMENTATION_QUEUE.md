@@ -87,7 +87,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 
 ### P3 — Combat content
 - [ ] At least 3 genuinely different weapons.
-- [ ] At least 4 enemy archetypes with distinct behaviors/counters.
+- [x] Four color-signaled enemy archetypes with distinct flank, direct-pressure, slow-telegraph and standoff behaviors/counters.
 - [ ] Elite variants.
 - [ ] One designed miniboss.
 - [ ] One designed multi-phase boss.
@@ -319,3 +319,14 @@ Validated build: commit `fe070e8d65c09053a6d77f0d921290d7eec40178`; APK SHA256 `
 - [x] Workflow runs `38359255147` and `38359255145` passed 156 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
 
 Validated build: commit `b3b9fdc3ba83f432dfc97f3eb52b6a59ccd64f71`; APK SHA256 `f16e806f6edca2ce926a8040c05264af4f4ccbaa3b8a26561758b0ca934fe4e2`; 521,161,955 bytes. v0.2.18 remains the known-good rollback. Automated rules prove deterministic contract math and flow continuity, not player-perceived balance or fairness; player-controlled combat/navigation, complete human extraction, real-device performance/thermal behavior, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
+
+
+## Validated v0.2.20 behavior-driven enemy checkpoint (2026-10-13)
+
+- [x] Replaced the three-way stat rotation with four runtime behavior profiles: cyan scouts flank, yellow assault units advance directly, orange heavies expose a slower high-damage telegraph, and violet disruptors retreat under close pressure before resuming ranged attacks.
+- [x] Added distinct emissive role beacons and wave counter hints for mobile readability.
+- [x] Preserved the OMEGA WARDEN path and overload scaling while adding disruptor scoring and role assignment.
+- [x] Added eighteen deterministic archetype checks covering registration, fallback behavior, aim cadence, movement targets, standoff response, unique colors and counter disclosure.
+- [x] Workflow runs `38364637288` and `38364637165` passed 174 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
+
+Validated build: commit `d45a68d2586b0bd8be89f72a0b039619570f2cff`; APK SHA256 `f51d54c701696b14ac3a5a091bd303925e9bcc6c828acae08d6f03c2d50bd38a`; 521,166,216 bytes. v0.2.19 remains the known-good rollback. Automated rules prove deterministic role selection and movement targets, not player-perceived encounter variety or counter readability; player-controlled combat/navigation, complete human extraction, real-device performance/thermal behavior, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
