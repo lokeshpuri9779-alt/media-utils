@@ -19,7 +19,7 @@ class StoryCastAlignmentTests(unittest.TestCase):
             samples[expression] = canvas.crop((465, 805, 615, 945))
         for expression in ("surprised", "happy", "focused"):
             self.assertIsNotNone(
-                ImageChops.difference(samples["neutral"], samples[expression]).getbbox(),
+                ImageChops.difference(samples["neutral"].convert("RGB"), samples[expression].convert("RGB")).getbbox(),
                 f"{expression} face must differ from neutral")
         with self.assertRaises(ValueError):
             draw_character(Image.new("RGBA", (1080, 1920)), 400, 0.4,
