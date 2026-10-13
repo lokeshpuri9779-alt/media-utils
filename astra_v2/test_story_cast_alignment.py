@@ -114,6 +114,24 @@ class StoryCastAlignmentTests(unittest.TestCase):
             self.assertEqual(before.size, (540, 960))
             self.assertIsNotNone(ImageChops.difference(before, after).getbbox(), count)
 
+    def test_explicit_action_cues_change_rendered_frame(self):
+        from PIL import ImageChops
+        scene = build_ensemble_plan("action-cue", [["fox"]])["scenes"][0]
+        scene["action"] = "approach"
+        approach = frame(scene, 0.8)
+        scene["action"] = "celebrate"
+        celebrate = frame(scene, 0.8)
+        self.assertIsNotNone(ImageChops.difference(approach, celebrate).getbbox())
+
+    def test_unsupported_action_fails_before_output(self):
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        plan = build_ensemble_plan("action-cue", [["fox"]])
+        plan["scenes"][0]["action"] = "fly"
+        with TemporaryDirectory() as tmp:
+            with self.assertRaises(ValueError):
+                render(plan, Path(tmp))
+
     def test_ensemble_tampering_is_rejected(self):
         plan = build_ensemble_plan("ensemble-test", [["fox", "dog"]])
         plan["scenes"][0]["actors"][1]["character_id"] = 0
