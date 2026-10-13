@@ -364,6 +364,46 @@ def render(plan, output, fps=8, seconds_per_scene=2, video=False):
     return report
 
 
+
+def load_story_file(path, seed):
+    """Load explicitly authored offline scene casts; never infer or publish."""
+    path = Path(path)
+    if path.stat().st_size > 100_000:
+        raise ValueError("story file exceeds 100 KB")
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict) or set(data) != {"mode", "scenes"}:
+        raise ValueError("story file requires only mode and scenes")
+    scenes = data["scenes"]
+    if not isinstance(scenes, list) or not 1 <= len(scenes) <= 24:
+        raise ValueError("story requires 1..24 scenes")
+    mode = data["mode"]
+    if mode == "ensemble":
+        if any(not isinstance(item, dict) or set(item) - {"actors", "action", "narration"}
+               or "actors" not in item for item in scenes):
+            raise ValueError("ensemble scenes require actors, optional action/narration")
+        plan = build_ensemble_plan(seed, [item["actors"] for item in scenes])
+    elif mode == "narrated":
+        if any(not isinstance(item, dict) or set(item) != {"narration"} or
+               not isinstance(item["narration"], str) for item in scenes):
+            raise ValueError("narrated scenes require narration strings")
+        plan = build_narrated_plan(seed, [item["narration"] for item in scenes])
+    else:
+        raise ValueError("unsupported story mode")
+    for scene, item in zip(plan["scenes"], scenes):
+        narration = item.get("narration")
+        if narration is not None:
+            if not isinstance(narration, str) or len(narration) > 1000:
+                raise ValueError("narration must be text under 1000 characters")
+            scene["narration"] = narration
+        if "action" in item:
+            if item["action"] not in ("approach", "react", "point", "celebrate", "carry"):
+                raise ValueError("unsupported scene action")
+            scene["action"] = item["action"]
+    if not verify_story_cast(plan):
+        raise ValueError("story cast verification failed")
+    return plan
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--seed", default="astra-development-v1")
@@ -371,9 +411,15 @@ def main():
     parser.add_argument("--fps", type=int, default=8)
     parser.add_argument("--output", type=Path, default=Path("development-output"))
     parser.add_argument("--video", action="store_true")
+    parser.add_argument("--story-file", type=Path, help="Explicit offline story JSON")
+    parser.add_argument("--validate-only", action="store_true")
     args = parser.parse_args()
-    plan = build_plan(args.seed, args.scenes)
-    print(json.dumps(render(plan, args.output, fps=args.fps, video=args.video), indent=2))
+    plan = load_story_file(args.story_file, args.seed) if args.story_file else build_plan(args.seed, args.scenes)
+    if args.validate_only:
+        print(json.dumps({"valid": True, "scene_count": len(plan["scenes"]),
+                          "publication_allowed": False, "quality_approved": False}, indent=2))
+    else:
+        print(json.dumps(render(plan, args.output, fps=args.fps, video=args.video), indent=2))
 
 
 if __name__ == "__main__":
