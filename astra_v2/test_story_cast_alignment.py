@@ -152,6 +152,25 @@ class StoryCastAlignmentTests(unittest.TestCase):
             self.assertEqual(carrying.size, (540, 960))
             self.assertIsNotNone(ImageChops.difference(carrying, static).getbbox())
 
+    def test_story_file_validates_explicit_ensemble(self):
+        import json
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from astra_v2.coordinated_development import load_story_file
+        with TemporaryDirectory() as tmp:
+            path = Path(tmp) / "story.json"
+            path.write_text(json.dumps({"mode": "ensemble", "scenes": [
+                {"actors": ["fox", "dog"], "action": "carry", "narration": "A fox carries a gift."},
+                {"actors": ["fox"], "action": "react"}]}))
+            plan = load_story_file(path, "test")
+            self.assertEqual(plan["scenes"][0]["action"], "carry")
+            self.assertEqual(len(plan["scenes"][0]["actors"]), 2)
+            self.assertFalse(plan["publication_allowed"])
+            path.write_text(json.dumps({"mode": "ensemble", "scenes": [
+                {"actors": ["hedgehog"]}]}))
+            with self.assertRaises(ValueError):
+                load_story_file(path, "test")
+
     def test_unsupported_action_fails_before_output(self):
         from pathlib import Path
         from tempfile import TemporaryDirectory
