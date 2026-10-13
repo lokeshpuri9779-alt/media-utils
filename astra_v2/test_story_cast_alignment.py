@@ -4,6 +4,30 @@ from astra_v2.coordinated_development import build_story_plan, build_narrated_pl
 from astra_v2.character_object_catalog import character
 
 class StoryCastAlignmentTests(unittest.TestCase):
+    def test_facial_expressions_change_character_pixels(self):
+        from PIL import Image, ImageChops
+        from astra_v2.character_object_catalog import draw_character
+        samples = {}
+        for expression in ("neutral", "surprised", "happy", "focused"):
+            canvas = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
+            draw_character(canvas, 400, 0.4, 540, 900, expression=expression)
+            samples[expression] = canvas.crop((465, 805, 615, 945))
+        for expression in ("surprised", "happy", "focused"):
+            self.assertIsNotNone(
+                ImageChops.difference(samples["neutral"], samples[expression]).getbbox(),
+                f"{expression} face must differ from neutral")
+        with self.assertRaises(ValueError):
+            draw_character(Image.new("RGBA", (1080, 1920)), 400, 0.4,
+                           expression="unsupported")
+
+    def test_story_action_changes_facial_artwork(self):
+        from PIL import ImageChops
+        plan = build_ensemble_plan("face-action-test", [["fox"]])
+        scene = plan["scenes"][0]
+        neutral = frame({**scene, "action": "approach"}, 0.4)
+        surprised = frame({**scene, "action": "react"}, 0.4)
+        self.assertIsNotNone(ImageChops.difference(neutral, surprised).getbbox())
+
     def test_all_supported_subjects_match(self):
         from astra_v2.character_object_catalog import SPECIES
         plan = build_story_plan("alignment-regression", list(SPECIES))
