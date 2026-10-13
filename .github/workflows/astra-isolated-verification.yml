@@ -186,6 +186,25 @@ jobs:
               draw(b,index,1.2)
               assert ImageChops.difference(a,b).getbbox() is not None, index
           PY
+      - name: Verify character and object catalogs
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageChops
+          from astra_v2.character_object_catalog import (
+              CHARACTER_COUNT, OBJECT_COUNT, character, prop,
+              draw_character, draw_prop,
+          )
+          assert CHARACTER_COUNT == 2000 and OBJECT_COUNT == 2000
+          assert len({character(i) for i in range(2000)}) == 2000
+          assert len({prop(i) for i in range(2000)}) == 2000
+          for fn in (draw_character, draw_prop):
+              for index in (0, 399, 999, 1999):
+                  a=Image.new('RGB',(1080,1920),(20,30,45))
+                  b=Image.new('RGB',(1080,1920),(20,30,45))
+                  fn(a,index,0.0)
+                  fn(b,index,1.0)
+                  assert ImageChops.difference(a,b).getbbox() is not None, (fn.__name__,index)
+          PY
       - name: Record verification boundary
         run: |
           echo 'Regression checks completed. No YouTube credentials are provided to this workflow.'
