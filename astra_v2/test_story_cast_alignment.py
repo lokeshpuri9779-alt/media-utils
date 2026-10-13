@@ -123,6 +123,15 @@ class StoryCastAlignmentTests(unittest.TestCase):
         celebrate = frame(scene, 0.8)
         self.assertIsNotNone(ImageChops.difference(approach, celebrate).getbbox())
 
+    def test_carry_action_has_visible_motion(self):
+        from PIL import ImageChops
+        scene = build_ensemble_plan("carry-cue", [["fox"]])["scenes"][0]
+        scene["action"] = "carry"
+        a, b = frame(scene, 0.0), frame(scene, 0.8)
+        self.assertIsNotNone(ImageChops.difference(a, b).getbbox())
+        scene["action"] = "approach"
+        self.assertIsNotNone(ImageChops.difference(b, frame(scene, 0.8)).getbbox())
+
     def test_unsupported_action_fails_before_output(self):
         from pathlib import Path
         from tempfile import TemporaryDirectory
