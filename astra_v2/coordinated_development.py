@@ -205,6 +205,22 @@ def build_comedy_demo(seed="astra-comedy-pilot"):
     return plan
 
 
+def carry_elbow(shoulder, hand, side, scale=1.0):
+    """Two-bone 2D elbow whose forearm endpoint matches the moving prop.
+
+    A slightly adaptive limb length accommodates the early floor-level reach;
+    this is a procedural cartoon rig, not anatomical inverse kinematics.
+    """
+    dx, dy = hand[0] - shoulder[0], hand[1] - shoulder[1]
+    distance = max(0.001, math.hypot(dx, dy))
+    length = max(140.0 * scale, distance * 0.57)
+    height = math.sqrt(max(0.0, length * length - distance * distance / 4))
+    midpoint = (shoulder[0] + dx / 2, shoulder[1] + dy / 2)
+    elbow = (midpoint[0] + side * dy / distance * height,
+             midpoint[1] - side * dx / distance * height)
+    return elbow
+
+
 def draw_expressive_character(image, index, t, x, y, expression, gesture="idle"):
     """Use full authored poses, falling back only for legacy test renderers."""
     try:
@@ -266,6 +282,8 @@ def frame(scene, t):
     lift_progress = max(0.0, min(1.0, (t - 0.15) / 0.95))
     lift_progress = lift_progress * lift_progress * (3.0 - 2.0 * lift_progress)
     lead_sway = 0
+    lead_shoulders = None
+    lead_base = None
     if actors:
         # Keep every actor on the same stage, with stable left-to-right slots.
         # Render each actor onto its own transparent layer before compositing.
@@ -303,7 +321,8 @@ def frame(scene, t):
                               "happy" if named_action == "celebrate" else
                               "focused" if named_action in ("point", "carry") else
                               "neutral")
-                gesture = named_action if named_action in ("point", "celebrate", "carry") else "idle"
+                gesture = ("carry_rig" if named_action == "carry" else
+                           named_action if named_action in ("point", "celebrate") else "idle")
             else:
                 expression = ("surprised" if named_action in ("carry", "react", "celebrate") else
                               "focused" if named_action == "point" else "neutral")
@@ -320,15 +339,34 @@ def frame(scene, t):
                     new_h = max(1, int(artwork.height * scale))
                     scaled = artwork.resize((new_w, new_h), Image.Resampling.LANCZOS)
                     actor_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
-                    actor_layer.alpha_composite(scaled, (int(slot + sway + (carry_shift if actor_index == 0 else 0) - new_w / 2),
-                                                        int(cy - new_h / 2)))
+                    crouch = int(65 * (1.0 - lift_progress)) if named_action == "carry" and actor_index == 0 else 0
+                    place_x = int(slot + sway + (carry_shift if actor_index == 0 else 0) - new_w / 2)
+                    place_y = int(cy + crouch - new_h / 2)
+                    if named_action == "carry" and actor_index == 0:
+                        bob = int(14 * math.sin(actor_t * 2.2))
+                        lead_shoulders = tuple((
+                            place_x + (540 + side * 85 - bbox[0]) * scale,
+                            place_y + (1060 + bob + 90 - bbox[1]) * scale,
+                        ) for side in (-1, 1))
+                        n = actor["character_id"] % 10
+                        lead_base = (70 + n * 15, 105 + n * 9, 145 + n * 7)
+                    actor_layer.alpha_composite(scaled, (place_x, place_y))
             if scale == 1.0:
                 # The solo ensemble actor must receive the same authored
                 # lateral motion as scaled ensemble members.
                 shifted = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
+                crouch = int(65 * (1.0 - lift_progress)) if named_action == "carry" and actor_index == 0 else 0
                 shifted.alpha_composite(actor_layer,
-                                        (sway + (carry_shift if actor_index == 0 else 0), 0))
+                                        (sway + (carry_shift if actor_index == 0 else 0), crouch))
                 actor_layer = shifted
+                if named_action == "carry" and actor_index == 0:
+                    bob = int(14 * math.sin(actor_t * 2.2))
+                    lead_shoulders = tuple((
+                        540 + side * 85 + sway + carry_shift,
+                        1060 + bob + 90 + crouch,
+                    ) for side in (-1, 1))
+                    n = actor["character_id"] % 10
+                    lead_base = (70 + n * 15, 105 + n * 9, 145 + n * 7)
             character_layer = Image.alpha_composite(character_layer, actor_layer)
         # Move the prop forward so it does not cover the ensemble.
         ox, oy = 540, 1510
@@ -338,7 +376,14 @@ def frame(scene, t):
                       "focused" if named_action in ("point", "carry") else "neutral")
         draw_expressive_character(character_layer, scene["character_id"], t,
                                   cx + carry_shift, cy, expression,
-                                  named_action if named_action in ("point", "celebrate", "carry") else "idle")
+                                  "carry_rig" if named_action == "carry" else
+                                  named_action if named_action in ("point", "celebrate") else "idle")
+        if named_action == "carry":
+            bob = int(14 * math.sin(t * 2.2))
+            lead_shoulders = tuple((cx + carry_shift + side * 85, cy + bob + 90)
+                                   for side in (-1, 1))
+            n = scene["character_id"] % 10
+            lead_base = (70 + n * 15, 105 + n * 9, 145 + n * 7)
     if named_action == "carry":
         # Stage the object next to the lead actor, moving in sync with them.
         # This is a simple composited carry cue, not inverse-kinematic gripping.
@@ -347,13 +392,13 @@ def frame(scene, t):
         # character's torso. For ensemble scenes, match the lead's scale and
         # its deterministic sway. This remains a 2D staged interaction.
         lead_scale = (1.0, 0.82, 0.66, 0.53)[len(actors) - 1] if actors else 1.0
-        ox = lead_x + carry_shift + lead_sway
+        ox = int(sum(point[0] for point in lead_shoulders) / 2) if lead_shoulders else lead_x + carry_shift + lead_sway
         floor_y = 1510
-        # The fox's hands sit above the torso center; the previous offset
-        # placed the gift below the hands even after the pickup completed.
-        # Catalog carry gesture ends at y + 160, not above the face.
-        # Keep the gift centered at the lowered hand tips in character space.
-        hand_y = cy + int(160 * lead_scale) + int(8 * math.sin(t * 2.0))
+        # Anchor to the actual transformed shoulders, accounting for crop,
+        # scaling, idle bob, crouching and lateral movement. This avoids
+        # guessing the hand position from a global stage coordinate.
+        hand_y = int(sum(point[1] for point in lead_shoulders) / 2 +
+                     70 * lead_scale) if lead_shoulders else cy + int(160 * lead_scale)
         oy = int(floor_y * (1.0 - lift_progress) + hand_y * lift_progress)
     if named_action == "carry":
         # Carry objects should remain visually subordinate to the actor.
@@ -376,20 +421,32 @@ def frame(scene, t):
             ph = max(1, int(artwork.height * prop_scale))
             artwork = artwork.resize((pw, ph), Image.Resampling.LANCZOS)
             object_layer.alpha_composite(artwork, (int(ox - pw / 2), int(oy - ph / 2)))
+            if lead_shoulders is not None:
+                # Anatomically linked two-segment arms extend from the
+                # character's transformed shoulders to the exact prop sides.
+                # They render behind the prop; small palms cover its edges.
+                arm_draw = ImageDraw.Draw(character_layer)
+                hand_draw = ImageDraw.Draw(object_layer)
+                arm_width = max(10, int(20 * lead_scale))
+                palm_radius = max(7, int(13 * lead_scale))
+                for index, side in enumerate((-1, 1)):
+                    shoulder = lead_shoulders[index]
+                    hand = (ox + side * pw * 0.46, oy + ph * 0.07)
+                    elbow = carry_elbow(shoulder, hand, side, lead_scale)
+                    arm_draw.line((shoulder, elbow, hand),
+                                  fill=(*lead_base, 255), width=arm_width, joint="curve")
+                    arm_draw.ellipse((elbow[0] - arm_width / 2, elbow[1] - arm_width / 2,
+                                      elbow[0] + arm_width / 2, elbow[1] + arm_width / 2),
+                                     fill=(*lead_base, 255))
+                    hand_draw.ellipse((hand[0] - palm_radius, hand[1] - palm_radius,
+                                       hand[0] + palm_radius, hand[1] + palm_radius),
+                                      fill=(*lead_base, 255))
+                    hand_draw.line((hand[0], hand[1] + palm_radius / 3,
+                                    hand[0] - side * palm_radius * 0.6,
+                                    hand[1] + palm_radius * 0.9),
+                                   fill=(*lead_base, 255), width=max(4, int(7 * lead_scale)))
     else:
         draw_prop(object_layer, scene["object_id"], t, ox, oy)
-    # Draw a foreground grip after the prop so the hands visibly wrap its
-    # sides. This is an explicit 2D interaction cue, not full skeletal IK.
-    if named_action == "carry" and lift_progress > 0.02:
-        grip = ImageDraw.Draw(object_layer)
-        grip_reach = int(72 * lead_scale)
-        grip_width = max(9, int(17 * lead_scale))
-        grip_color = (213, 153, 111, 255)
-        for side in (-1, 1):
-            xhand = int(ox + side * grip_reach)
-            yhand = int(oy + 7 * lead_scale)
-            grip.ellipse((xhand - grip_width, yhand - grip_width,
-                          xhand + grip_width, yhand + grip_width), fill=grip_color)
     # Frame-specific framing: wide setup, tighter reaction, and hero finale.
     # Transform the character and prop together to preserve contact alignment.
     if actors and named_action in ('point', 'react', 'celebrate'):
