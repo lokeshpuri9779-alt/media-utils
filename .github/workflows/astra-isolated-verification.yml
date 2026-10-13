@@ -285,6 +285,33 @@ jobs:
           path: verification-output/*contact-sheet.png
           if-no-files-found: ignore
           retention-days: 7
+      - name: Render ensemble contact sheet for visual review
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageDraw
+          from astra_v2.coordinated_development import build_ensemble_plan, frame, verify_story_cast
+          out=Path("verification-output")
+          out.mkdir(exist_ok=True)
+          casts=[["fox"],["fox","dog"],["fox","dog","cat"],["fox","dog","cat","rabbit"]]
+          plan=build_ensemble_plan("ensemble-visual-review-v1", casts)
+          assert verify_story_cast(plan)
+          sheet=Image.new("RGB",(540*4,960*2),(20,30,45))
+          for i,scene in enumerate(plan["scenes"]):
+              for j,t in enumerate((0.0,0.8)):
+                  tile=frame(scene,t)
+                  sheet.paste(tile,(i*540,j*960))
+          sheet.save(out/"ensemble-contact-sheet.png")
+          assert (out/"ensemble-contact-sheet.png").stat().st_size>10000
+          PY
+      - name: Upload ensemble contact sheet
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-ensemble-visual-review
+          path: verification-output/ensemble-contact-sheet.png
+          if-no-files-found: error
+          retention-days: 7
       - name: Record verification boundary
         run: |
           echo 'Regression checks completed. No YouTube credentials are provided to this workflow.'
