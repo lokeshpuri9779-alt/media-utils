@@ -82,7 +82,13 @@ jobs:
                    'Passing does NOT mean 4,000 independently designed characters/objects.',
                    'Artistic quality approval: **PENDING**.', '']
           for r in sorted(reports,key=lambda x:(x['kind'],x['start'])):
-              summary.append(f"- {r['kind']} {r['start']}–{r['stop']}: {r['unique_frame_fingerprints']} distinct frame fingerprints / 1,000")
+              summary.append(f"- {r['kind']} {r['start']}–{r['stop']}: {r['unique_frame_fingerprints']} distinct frame fingerprints / 1,000; {r['exact_duplicate_render_count']} exact duplicate renders")
+          # Duplicate frames are an explicit quality warning, not proof of
+          # distinct characters. Do not silently certify catalog quality.
+          duplicate_total=sum(r['exact_duplicate_render_count'] for r in reports)
+          summary.append(f"Total exact duplicates within shards: **{duplicate_total}**")
+          summary.append("Visual similarity across different shards remains unmeasured.")
+          summary.append("Automatic redesign and commercial-quality approval remain pending.")
           with open(__import__('os').environ['GITHUB_STEP_SUMMARY'],'a') as f:
               f.write('\n'.join(summary)+'\n')
           PY
