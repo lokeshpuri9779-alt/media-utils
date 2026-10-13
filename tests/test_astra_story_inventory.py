@@ -2,6 +2,7 @@
 import unittest
 
 from astra_v2.story_forge import PLOTS, REWRITTEN_PLOTS, catalog, draft_catalog, editorial_screen, plot_fingerprint
+from astra_v2.publication_quality import publication_rejection
 
 
 class StoryInventoryTests(unittest.TestCase):
@@ -36,6 +37,15 @@ class StoryInventoryTests(unittest.TestCase):
         self.assertEqual(len({row[0] for row in queue}), len(queue))
         self.assertTrue(all(row[0].startswith("badger-") for row in queue))
         self.assertTrue(all(reason in ("causal_mismatch", "character_swap_duplicate") for _, reason in rejected))
+
+    def test_publication_gate_blocks_unreviewed_drafts(self):
+        drafts = [item for item in catalog(limit=2000, include_drafts=True)
+                  if item["kind"] == "unreviewed_causal_draft"]
+        self.assertEqual(len(drafts), 996)
+        self.assertTrue(all(publication_rejection(item) == "unreviewed_causal_draft"
+                            for item in drafts))
+        ready = [item for item in catalog(limit=2000) if item["production_ready"]]
+        self.assertTrue(all(publication_rejection(item) is None for item in ready))
 
     def test_history_excludes_draft(self):
         first = catalog(limit=2000, include_drafts=True)[-1]
