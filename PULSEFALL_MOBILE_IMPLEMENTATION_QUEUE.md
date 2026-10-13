@@ -89,7 +89,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [ ] At least 3 genuinely different weapons.
 - [x] Four color-signaled enemy archetypes with distinct flank, direct-pressure, slow-telegraph and standoff behaviors/counters.
 - [ ] Elite variants.
-- [ ] One designed miniboss.
+- [x] One designed miniboss.
 - [ ] One designed multi-phase boss.
 - [ ] Telegraphs and mobile-readable VFX.
 - [x] Weapon/ability upgrade pool with synergy rules.
@@ -330,3 +330,14 @@ Validated build: commit `b3b9fdc3ba83f432dfc97f3eb52b6a59ccd64f71`; APK SHA256 `
 - [x] Workflow runs `38364637288` and `38364637165` passed 174 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
 
 Validated build: commit `d45a68d2586b0bd8be89f72a0b039619570f2cff`; APK SHA256 `f51d54c701696b14ac3a5a091bd303925e9bcc6c828acae08d6f03c2d50bd38a`; 521,166,216 bytes. v0.2.19 remains the known-good rollback. Automated rules prove deterministic role selection and movement targets, not player-perceived encounter variety or counter readability; player-controlled combat/navigation, complete human extraction, real-device performance/thermal behavior, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
+
+
+## Validated v0.2.21 Sentinel-miniboss checkpoint (2026-10-13)
+
+- [x] Added a wave-three Sentinel intercept as a designed mid-run climax before the final OMEGA WARDEN.
+- [x] Added three health-driven escalation phases with explicit mobile-readable arrival, phase-II and berserk telegraphs.
+- [x] Added dedicated miniboss health, damage and score rules, a +15 core recovery reward, and phase/defeat telemetry.
+- [x] Added sixteen deterministic miniboss-rule checks covering spawn timing, phase thresholds, reward/scoring behavior, telegraphs and telemetry.
+- [x] Workflow runs `38372252778` and `38372252864` passed 190 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
+
+Validated build: commit `955f21d55ff084d868aedb7100fb611fc826935b`; APK SHA256 `c0d839318d6185cf62238e30f86e27a501b7efe9c2620176eab11adae29f72d8`; 521,170,473 bytes. v0.2.20 remains the known-good rollback. Automated rules prove deterministic phase transitions and rewards, not player-perceived pacing, difficulty, counter readability, human navigation, a complete player-controlled run, physical-device performance, or benchmark superiority.
