@@ -220,15 +220,18 @@ def frame(scene, t):
             sway = int(9 * math.sin(t * 2.0 + slot / 180))
             draw_character(actor_layer, actor["character_id"], t, 540, 1060)
             if scale != 1.0:
-                new_w = int(1080 * scale)
-                new_h = int(1920 * scale)
-                scaled = actor_layer.resize((new_w, new_h), Image.Resampling.LANCZOS)
-                actor_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
-                actor_layer.alpha_composite(scaled, (int(slot + sway - new_w / 2),
-                                                    int(cy - new_h * 1060 / 1920)))
-            else:
-                # The single-actor case keeps the full native composition.
-                pass
+                # Crop to actual visible artwork before scaling: resizing a
+                # full-screen transparent canvas shrinks the character twice.
+                bbox = actor_layer.getbbox()
+                if bbox:
+                    artwork = actor_layer.crop(bbox)
+                    new_w = max(1, int(artwork.width * scale))
+                    new_h = max(1, int(artwork.height * scale))
+                    scaled = artwork.resize((new_w, new_h), Image.Resampling.LANCZOS)
+                    actor_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
+                    actor_layer.alpha_composite(scaled, (int(slot + sway - new_w / 2),
+                                                        int(cy - new_h / 2)))
+            # The solo actor keeps its original native composition.
             character_layer = Image.alpha_composite(character_layer, actor_layer)
         # Move the prop forward so it does not cover the ensemble.
         ox, oy = 540, 1510
