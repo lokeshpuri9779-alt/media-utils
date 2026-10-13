@@ -96,6 +96,23 @@ jobs:
               else:
                   raise AssertionError('Silent video passed publication integrity gate')
           PY
+      - name: Verify publication media gate accepts valid audio and portrait
+        run: |
+          python - <<'PY'
+          import subprocess, tempfile
+          from pathlib import Path
+          from astra_v2.creative import inspect_video
+          with tempfile.TemporaryDirectory() as d:
+              p=Path(d)/'valid.mp4'
+              subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y',
+                  '-f','lavfi','-i','testsrc2=size=360x640:rate=12',
+                  '-f','lavfi','-i','sine=frequency=440:sample_rate=24000',
+                  '-t','3','-c:v','libx264','-pix_fmt','yuv420p',
+                  '-c:a','aac','-shortest',str(p)],check=True)
+              result=inspect_video(p)
+              assert result['width']==360 and result['height']==640, result
+              assert 2.5 < result['seconds'] < 3.5, result
+          PY
       - name: Record verification boundary
         run: |
           echo 'Regression checks completed. No YouTube credentials are provided to this workflow.'
