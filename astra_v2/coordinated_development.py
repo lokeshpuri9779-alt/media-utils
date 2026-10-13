@@ -435,8 +435,10 @@ def frame(scene, t):
         # guessing the hand position from a global stage coordinate.
         anchor_y = int(sum(point[1] for point in lead_shoulders) / 2) if lead_shoulders else cy
         if storybook and named_action == "celebrate":
-            hand_y = anchor_y - int(172 * lead_scale) - int(14 * math.sin(t * 5))
-            ox += int(36 * lead_scale)
+            # Stage the gift above and slightly right of the fox's head,
+            # keeping facial acting visible instead of masking the face.
+            hand_y = anchor_y - int(315 * lead_scale) - int(14 * math.sin(t * 5))
+            ox += int(175 * lead_scale)
         else:
             hand_y = anchor_y + int(70 * lead_scale)
         oy = int(floor_y * (1.0 - lift_progress) + hand_y * lift_progress)
@@ -489,6 +491,20 @@ def frame(scene, t):
                                    fill=(*lead_base, 255), width=max(4, int(7 * lead_scale)))
     else:
         draw_prop(object_layer, scene["object_id"], t, ox, oy)
+    if storybook and named_action == "celebrate":
+        # Draw deterministic trophy glints on the same object layer so they
+        # follow the camera's crop/zoom along with the carried gift.
+        glints = ImageDraw.Draw(object_layer)
+        for angle in (0, math.pi / 2, math.pi, 3 * math.pi / 2,
+                      math.pi / 4, 3 * math.pi / 4):
+            radius = 98 + int(9 * math.sin(t * 5 + angle))
+            gx = ox + math.cos(angle) * radius
+            gy = oy + math.sin(angle) * radius
+            arm = 12 + 4 * (math.sin(t * 4 + angle) ** 2)
+            glints.line((gx - arm, gy, gx + arm, gy),
+                        fill=(253, 219, 117, 245), width=6)
+            glints.line((gx, gy - arm, gx, gy + arm),
+                        fill=(253, 219, 117, 245), width=6)
     # Frame-specific framing: wide setup, tighter reaction, and hero finale.
     # Transform the character and prop together to preserve contact alignment.
     if actors and named_action in ('point', 'react', 'celebrate'):
