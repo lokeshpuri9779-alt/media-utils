@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 27,
+  "attempts": 28,
   "confirmed_today": 27,
-  "last_attempt_at": "2026-10-13T00:00:27.175769+00:00",
+  "last_attempt_at": "2026-10-13T00:34:59.635353+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -198,28 +198,38 @@
       "uploaded_at": "2026-10-13T00:00:28.932940+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-13T00:05:09.304537+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "NcmIHjIRhJI": {
+      "content_id": "rayvan-original-robotgarden-v1",
+      "title": "The Robot Who Grew a Forest | Original Microfiction",
+      "day": "2026-10-13",
+      "uploaded_at": "2026-10-13T00:35:01.601758+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-13T00:33:54.564959+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T00:05:09.770239+00:00",
+    "at": "2026-10-13T00:35:02.025785+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-12T19:00:44.564068+00:00",
   "reserved": {
@@ -382,6 +392,12 @@
     "rayvan-original-doorclock-v1": {
       "at": "2026-10-13T00:00:27.175754+00:00",
       "title": "The Door That Opened Tomorrow | Original Microfiction",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-original-robotgarden-v1": {
+      "at": "2026-10-13T00:34:59.635334+00:00",
+      "title": "The Robot Who Grew a Forest | Original Microfiction",
       "format": "short",
       "result": "accepted"
     }
