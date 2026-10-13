@@ -5426,6 +5426,232 @@ jobs:
           script = ExtResource("1")
           PULSEFALL_RISK_TEST
 
+      - name: Add behavior-driven enemy archetypes
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          cat > game/mobile/enemy_archetypes.gd <<'PULSEFALL_ARCHETYPES'
+          class_name EnemyArchetypes
+          extends RefCounted
+
+          const SCOUT := "scout"
+          const ASSAULT := "assault"
+          const HEAVY := "heavy"
+          const DISRUPTOR := "disruptor"
+          const ROLES := [SCOUT, ASSAULT, HEAVY, DISRUPTOR]
+
+          static func normalize(role: String) -> String:
+          	return role if ROLES.has(role) else ASSAULT
+
+          static func profile(role: String) -> Dictionary:
+          	match normalize(role):
+          		SCOUT:
+          			return {"aim_time": 0.55, "preferred_range": 5.0, "color": Color(0.20, 0.95, 1.0), "behavior": "flank", "counter": "TRACK THE CYAN FLANKER"}
+          		HEAVY:
+          			return {"aim_time": 1.55, "preferred_range": 7.0, "color": Color(1.0, 0.34, 0.18), "behavior": "pressure", "counter": "PULSE THE ORANGE TELEGRAPH"}
+          		DISRUPTOR:
+          			return {"aim_time": 1.10, "preferred_range": 12.0, "color": Color(0.72, 0.32, 1.0), "behavior": "standoff", "counter": "CLOSE ON THE VIOLET STANDOFF"}
+          		_:
+          			return {"aim_time": 0.90, "preferred_range": 7.0, "color": Color(1.0, 0.82, 0.24), "behavior": "direct", "counter": "BREAK THE YELLOW ASSAULT LINE"}
+
+          static func target_for_role(role: String, player_position: Vector3, enemy_position: Vector3, age: float) -> Vector3:
+          	var normalized := normalize(role)
+          	var separation := enemy_position - player_position
+          	separation.y = 0.0
+          	var distance := separation.length()
+          	var away := Vector3.BACK if distance <= 0.01 else separation / distance
+          	match normalized:
+          		SCOUT:
+          			var tangent := Vector3(-away.z, 0.0, away.x)
+          			var side := 1.0 if sin(age * 0.9) >= 0.0 else -1.0
+          			return player_position + tangent * side * 4.5
+          		DISRUPTOR:
+          			if distance < 9.0:
+          				return player_position + away * 14.0
+          			return player_position
+          		_:
+          			return player_position
+
+          static func aim_time(role: String) -> float:
+          	return float(profile(role).aim_time)
+
+          static func color_for_role(role: String) -> Color:
+          	return profile(role).color
+
+          static func counter_hint(role: String) -> String:
+          	return str(profile(role).counter)
+          PULSEFALL_ARCHETYPES
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(source, old, new, label):
+              count = source.count(old)
+              if count != 1:
+                  raise SystemExit(f"Expected one {label} anchor, found {count}")
+              return source.replace(old, new, 1)
+
+          robot_path = Path("game/enemies/red_robot/red_robot.gd")
+          robot = robot_path.read_text()
+          robot = replace_once(
+              robot,
+              "extends CharacterBody3D\n",
+              'extends CharacterBody3D\n\nconst EnemyArchetypesScript = preload("res://mobile/enemy_archetypes.gd")\n',
+              "enemy archetype preload",
+          )
+          robot = replace_once(
+              robot,
+              "@export var animation_speed: float = 1.0\n",
+              '@export var animation_speed: float = 1.0\n@export var behavior_role: String = EnemyArchetypesScript.ASSAULT\n@export var aim_duration: float = AIM_TIME\nvar behavior_age := 0.0\n',
+              "enemy behavior state",
+          )
+          robot = replace_once(
+              robot,
+              "\tmax_spawn_health = maxi(health, 1)\n",
+              "\tmax_spawn_health = maxi(health, 1)\n\taim_duration = EnemyArchetypesScript.aim_time(behavior_role)\n\t_add_role_beacon()\n",
+              "enemy behavior initialization",
+          )
+          robot = robot.replace("aim_countdown = AIM_TIME", "aim_countdown = aim_duration")
+          robot = replace_once(
+              robot,
+              "\tanimation_tree.advance(delta * animation_speed)\n",
+              "\tanimation_tree.advance(delta * animation_speed)\n\tbehavior_age += delta\n",
+              "enemy behavior clock",
+          )
+          robot = replace_once(
+              robot,
+              "\ttarget_position = player.global_transform.origin\n",
+              "\ttarget_position = EnemyArchetypesScript.target_for_role(behavior_role, player.global_transform.origin, global_transform.origin, behavior_age)\n",
+              "enemy role targeting",
+          )
+          robot += '''
+
+
+          func _add_role_beacon() -> void:
+          	if bool(get_meta("elite", false)):
+          		return
+          	var beacon := MeshInstance3D.new()
+          	beacon.name = "RoleBeacon"
+          	beacon.position = Vector3(0.0, 2.35, 0.0)
+          	var mesh := SphereMesh.new()
+          	mesh.radius = 0.16
+          	mesh.height = 0.32
+          	beacon.mesh = mesh
+          	var material := StandardMaterial3D.new()
+          	var role_color := EnemyArchetypesScript.color_for_role(behavior_role)
+          	material.albedo_color = role_color
+          	material.emission_enabled = true
+          	material.emission = role_color
+          	material.emission_energy_multiplier = 3.0
+          	beacon.material_override = material
+          	add_child(beacon)
+          '''
+          robot_path.write_text(robot)
+
+          level_path = Path("game/level/level.gd")
+          level = level_path.read_text()
+          level = replace_once(
+              level,
+              "\t\tmatch (spawn_index + wave) % 3:\n",
+              "\t\tmatch (spawn_index + wave) % 4:\n",
+              "four role rotation",
+          )
+          old_heavy = '''			_:
+          				role = "heavy"
+          				robot.health = 9 + wave * 2
+          				robot.shot_damage = 22 + wave
+          				robot.attack_delay = 6.3
+          				robot.animation_speed = 0.88
+          				robot.scale = Vector3.ONE * 1.18
+          '''
+          new_heavy = '''			2:
+          				role = "heavy"
+          				robot.health = 9 + wave * 2
+          				robot.shot_damage = 22 + wave
+          				robot.attack_delay = 6.3
+          				robot.animation_speed = 0.88
+          				robot.scale = Vector3.ONE * 1.18
+          			_:
+          				role = "disruptor"
+          				robot.health = 6 + wave * 2
+          				robot.shot_damage = 13 + wave
+          				robot.attack_delay = 3.6
+          				robot.animation_speed = 1.02
+          				robot.scale = Vector3.ONE * 1.04
+          '''
+          level = replace_once(level, old_heavy, new_heavy, "disruptor role branch")
+          level = replace_once(
+              level,
+              '\trobot.set_meta("role", role)\n',
+              '\trobot.set_meta("role", role)\n\trobot.behavior_role = role\n',
+              "runtime behavior role assignment",
+          )
+          level = replace_once(
+              level,
+              'var base_points := 1500 if elite else (100 if role == "scout" else (190 if role == "assault" else 280))',
+              'var base_points := 1500 if elite else (100 if role == "scout" else (190 if role == "assault" else (280 if role == "heavy" else 230)))',
+              "disruptor score",
+          )
+          level = level.replace('2: return "HOSTILE REINFORCEMENTS"', '2: return "SCOUT FLANKERS // TRACK CYAN SIGNALS"')
+          level = level.replace('3: return "REACTOR ACCESS COMPROMISED"', '3: return "HEAVIES // PULSE THE ORANGE TELEGRAPH"')
+          level = level.replace('4: return "CORE DEFENSES OVERRIDDEN"', '4: return "DISRUPTORS // CLOSE ON VIOLET STANDOFF"')
+          level_path.write_text(level)
+          PY
+
+          cat > game/mobile/enemy_archetypes_test.gd <<'PULSEFALL_ARCHETYPE_TEST'
+          extends Node
+
+          const Archetypes = preload("res://mobile/enemy_archetypes.gd")
+          var checks := 0
+          var failures := 0
+
+          func check(value: bool, message: String) -> void:
+          	checks += 1
+          	if value:
+          		print("PASS: ", message)
+          	else:
+          		failures += 1
+          		push_error("FAIL: " + message)
+
+          func _ready() -> void:
+          	check(Archetypes.ROLES.size() == 4, "four enemy archetypes are registered")
+          	check(Archetypes.ROLES.has(Archetypes.SCOUT) and Archetypes.ROLES.has(Archetypes.DISRUPTOR), "flanker and standoff roles are registered")
+          	check(Archetypes.normalize("unknown") == Archetypes.ASSAULT, "unknown role fails closed to assault")
+          	check(Archetypes.profile(Archetypes.SCOUT).behavior == "flank", "scout uses flank behavior")
+          	check(Archetypes.profile(Archetypes.ASSAULT).behavior == "direct", "assault uses direct behavior")
+          	check(Archetypes.profile(Archetypes.HEAVY).behavior == "pressure", "heavy uses pressure behavior")
+          	check(Archetypes.profile(Archetypes.DISRUPTOR).behavior == "standoff", "disruptor uses standoff behavior")
+          	check(Archetypes.aim_time(Archetypes.SCOUT) < Archetypes.aim_time(Archetypes.ASSAULT), "scout acquires targets quickly")
+          	check(Archetypes.aim_time(Archetypes.HEAVY) > Archetypes.aim_time(Archetypes.ASSAULT), "heavy exposes a longer telegraph")
+          	var player := Vector3.ZERO
+          	var enemy := Vector3(0.0, 0.0, 6.0)
+          	var scout_target := Archetypes.target_for_role(Archetypes.SCOUT, player, enemy, 1.0)
+          	check(absf(scout_target.x) > 4.0 and is_zero_approx(scout_target.z), "scout offsets laterally around the player")
+          	check(Archetypes.target_for_role(Archetypes.ASSAULT, player, enemy, 1.0) == player, "assault advances directly")
+          	check(Archetypes.target_for_role(Archetypes.HEAVY, player, enemy, 1.0) == player, "heavy applies direct pressure")
+          	var disruptor_close := Archetypes.target_for_role(Archetypes.DISRUPTOR, player, enemy, 1.0)
+          	check(disruptor_close.z > enemy.z, "disruptor retreats when pressured inside its range")
+          	var disruptor_far := Archetypes.target_for_role(Archetypes.DISRUPTOR, player, Vector3(0.0, 0.0, 16.0), 1.0)
+          	check(disruptor_far == player, "disruptor advances when outside standoff range")
+          	var colors := {}
+          	for role in Archetypes.ROLES:
+          		colors[Archetypes.color_for_role(role).to_html()] = true
+          	check(colors.size() == 4, "all archetypes have distinct readable signal colors")
+          	check(Archetypes.counter_hint(Archetypes.SCOUT).contains("CYAN"), "scout counter hint matches its signal")
+          	check(Archetypes.counter_hint(Archetypes.HEAVY).contains("PULSE"), "heavy counter hint exposes the PULSE answer")
+          	check(Archetypes.counter_hint(Archetypes.DISRUPTOR).contains("CLOSE"), "disruptor counter hint exposes close pressure")
+          	print("ENEMY ARCHETYPE CHECKS: ", checks, " FAILURES: ", failures)
+          	get_tree().quit(0 if failures == 0 else 1)
+          PULSEFALL_ARCHETYPE_TEST
+
+          cat > game/mobile/enemy_archetypes_test.tscn <<'PULSEFALL_ARCHETYPE_TEST'
+          [gd_scene load_steps=2 format=3]
+          [ext_resource type="Script" path="res://mobile/enemy_archetypes_test.gd" id="1"]
+          [node name="EnemyArchetypeTests" type="Node"]
+          script = ExtResource("1")
+          PULSEFALL_ARCHETYPE_TEST
+
       - name: Add license and build notes
         shell: bash
         run: |
@@ -5464,7 +5690,7 @@ jobs:
           Missing extraction or dying during escape retries from the escape checkpoint.
 
           Target:
-          Android landscape. Mobile controls are built in. TUNE offers LOW (30 FPS / 60% scale), MED (60 FPS / 72%), and HIGH (60 FPS / 85%) graphics targets. Run upgrades stack into synergies, and optional OVERLOAD contracts trade a harder next wave for a bonus upgrade pick and +50% score.
+          Android landscape. Mobile controls are built in. TUNE offers LOW (30 FPS / 60% scale), MED (60 FPS / 72%), and HIGH (60 FPS / 85%) graphics targets. Run upgrades stack into synergies, optional OVERLOAD contracts add risk/reward, and four color-signaled enemy archetypes use flank, direct-pressure, heavy-telegraph and standoff behaviors.
           EOF
 
       - name: Create Android export preset
@@ -5480,7 +5706,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.apk"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -5508,8 +5734,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=39
-          version/name="0.2.19-mobile-alpha"
+          version/code=40
+          version/name="0.2.20-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
 
@@ -5522,7 +5748,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.aab"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -5550,8 +5776,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=39
-          version/name="0.2.19-mobile-alpha"
+          version/code=40
+          version/name="0.2.20-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -5590,6 +5816,8 @@ jobs:
           UPGRADES_RC=$?
           timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/risk_contract_test.tscn > /tmp/risk-contract-test.log 2>&1
           RISK_RC=$?
+          timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/enemy_archetypes_test.tscn > /tmp/enemy-archetypes-test.log 2>&1
+          ARCHETYPES_RC=$?
           set -e
           cat /tmp/import.log
           cat /tmp/runtime.log
@@ -5603,7 +5831,8 @@ jobs:
           cat /tmp/graphics-preset-test.log
           cat /tmp/run-upgrades-test.log
           cat /tmp/risk-contract-test.log
-          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log /tmp/run-upgrades-test.log /tmp/risk-contract-test.log; then
+          cat /tmp/enemy-archetypes-test.log
+          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log /tmp/run-upgrades-test.log /tmp/risk-contract-test.log /tmp/enemy-archetypes-test.log; then
             echo "PULSEFALL mobile validation detected a script/runtime failure."
             exit 1
           fi
@@ -5619,8 +5848,8 @@ jobs:
             echo "PULSEFALL mobile validation detected unsupported renderer features."
             exit 1
           fi
-          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ] || [ "$GRAPHICS_RC" -ne 0 ] || [ "$UPGRADES_RC" -ne 0 ] || [ "$RISK_RC" -ne 0 ]; then
-            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC graphics=$GRAPHICS_RC upgrades=$UPGRADES_RC risk=$RISK_RC"
+          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ] || [ "$GRAPHICS_RC" -ne 0 ] || [ "$UPGRADES_RC" -ne 0 ] || [ "$RISK_RC" -ne 0 ] || [ "$ARCHETYPES_RC" -ne 0 ]; then
+            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC graphics=$GRAPHICS_RC upgrades=$UPGRADES_RC risk=$RISK_RC archetypes=$ARCHETYPES_RC"
             exit 1
           fi
 
@@ -5712,14 +5941,14 @@ jobs:
           cat /tmp/aapt-badging.err
           test -n "$BADGING"
           printf '%s\n' "$BADGING"
-          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='39' versionName='0.2.19-mobile-alpha'" <<<"$BADGING"
+          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='40' versionName='0.2.20-mobile-alpha'" <<<"$BADGING"
           grep -Fq "application-label:'PULSEFALL'" <<<"$BADGING"
           mapfile -t ABI_DIRS < <(unzip -Z1 "$APK" | awk -F/ '/^lib\/[^/]+\/.*\.so$/ {print $2}' | sort -u)
           test "${#ABI_DIRS[@]}" -eq 1
           test "${ABI_DIRS[0]}" = "arm64-v8a"
           echo "APK PACKAGE CHECKS: 7 FAILURES: 0"
           echo "PACKAGE: com.pulsefall.blacksite"
-          echo "VERSION: 39 / 0.2.19-mobile-alpha"
+          echo "VERSION: 40 / 0.2.20-mobile-alpha"
           echo "ABI: arm64-v8a"
 
           AAB="artifact/PULSEFALL_MOBILE_ALPHA.aab"
