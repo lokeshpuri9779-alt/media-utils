@@ -25,6 +25,25 @@ class StoryCastAlignmentTests(unittest.TestCase):
             draw_character(Image.new("RGBA", (1080, 1920)), 400, 0.4,
                            expression="unsupported")
 
+    def test_authored_gestures_change_character_pixels(self):
+        from PIL import Image, ImageChops
+        from astra_v2.character_object_catalog import draw_character
+        # Inspect the real character artwork, not background/action overlays.
+        for character_id in (0, 200, 400, 900, 1700):
+            images = {}
+            for gesture in ("idle", "point", "celebrate", "carry"):
+                canvas = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
+                draw_character(canvas, character_id, 0.4, 540, 900,
+                               expression="neutral", gesture=gesture)
+                images[gesture] = canvas.convert("RGB")
+            for gesture in ("point", "celebrate", "carry"):
+                self.assertIsNotNone(
+                    ImageChops.difference(images["idle"], images[gesture]).getbbox(),
+                    f"character {character_id} {gesture} must differ from idle")
+        with self.assertRaises(ValueError):
+            draw_character(Image.new("RGBA", (1080, 1920)), 400, 0.4,
+                           gesture="unsupported")
+
     def test_story_action_changes_facial_artwork(self):
         from PIL import ImageChops
         plan = build_ensemble_plan("face-action-test", [["fox"]])
