@@ -91,7 +91,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [x] Three deterministic tactical elite variants with distinct stats, readable color/counter cues and score rewards.
 - [x] One designed miniboss.
 - [x] One designed multi-phase boss.
-- [ ] Telegraphs and mobile-readable VFX.
+- [x] State-driven attack telegraphs with role/elite/boss-phase colors, escalating charge VFX and bounded firing flashes.
 - [x] Weapon/ability upgrade pool with synergy rules.
 
 ### P4 — Level / exploration
@@ -405,3 +405,15 @@ Validated build: commit `5f26c254caf8c8f43c151a1ad9037c703fe9f9a4`; APK SHA256 `
 - [x] Workflow runs `38449770000` and `38449770366` passed 329 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
 
 Validated build: commit `61ff3583ad3a389df536eda4b01938dd71a81341`; APK SHA256 `5c2782d0862a4f889dfc6e2fc5fd83a4e0f7d65a65322c0866595a81bfd4cd74`; 521,187,483 bytes. v0.2.25 remains the known-good rollback. Automated rules prove deterministic elite scheduling, profiles and rewards, not player-perceived balance, counter readability, complete human objective-to-extraction play, physical-device performance, or benchmark superiority.
+
+
+## Validated v0.2.27 mobile-telegraph checkpoint (2026-10-14)
+
+- [x] Added state-driven ground-disc and overhead-beacon VFX that appear only while an enemy is aiming or firing, with opacity, pulse rate and scale rising toward the shot.
+- [x] Preserved the cyan/yellow/orange/violet role language and added dedicated green/magenta/blue elite warnings.
+- [x] Added larger Sentinel warnings and three escalating OMEGA WARDEN phase profiles, culminating in a red-core volley cue.
+- [x] Added bounded firing flashes and fail-closed hiding for idle or defeated enemies.
+- [x] Added twenty-six deterministic telegraph checks covering charge timing, visibility states, opacity/scale bounds, role/elite colors and boss-phase escalation.
+- [x] Workflow runs `38457666612` and `38457666611` passed 355 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
+
+Validated build: commit `aa1e9987cec894edd62f6fa44e4434828d08e046`; APK SHA256 `c083e2968da28ac105005fc60797d1b49e1a61c76c8ed292d93b785e472223b0`; 521,191,742 bytes. v0.2.26 remains the known-good rollback. Automated checks prove deterministic VFX state, timing and visual-rule bounds, not physical-device readability, player reaction time, balance, a complete human objective-to-extraction run, real-device performance, or benchmark superiority.
