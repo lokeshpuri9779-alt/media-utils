@@ -240,6 +240,38 @@ jobs:
           path: verification-output/cast-prop-preview-*.png
           if-no-files-found: ignore
           retention-days: 7
+      - name: Build visual diversity contact sheets
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageDraw
+          from astra_v2.character_object_catalog import SPECIES, OBJECTS, draw_character, draw_prop
+          out=Path('verification-output')
+          out.mkdir(exist_ok=True)
+          def sheet(filename, labels, draw_fn, index_fn, columns=5):
+              tile_w,tile_h=220,280
+              rows=(len(labels)+columns-1)//columns
+              canvas=Image.new('RGB',(columns*tile_w,rows*tile_h),(22,31,46))
+              for i,label in enumerate(labels):
+                  tile=Image.new('RGB',(1080,1920),(28,40,59))
+                  draw_fn(tile,index_fn(i),1.1,540,900)
+                  crop=tile.crop((260,570,820,1280)).resize((190,240))
+                  x=(i%columns)*tile_w+15
+                  y=(i//columns)*tile_h+10
+                  canvas.paste(crop,(x,y))
+                  ImageDraw.Draw(canvas).text((x,y+245),label,fill=(240,241,244))
+              canvas.save(out/filename)
+          sheet('character-species-contact-sheet.png',SPECIES,draw_character,lambda i:i*100)
+          sheet('object-categories-contact-sheet.png',OBJECTS,draw_prop,lambda i:i*50)
+          PY
+      - name: Upload visual diversity contact sheets
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-diversity-contact-sheets
+          path: verification-output/*contact-sheet.png
+          if-no-files-found: ignore
+          retention-days: 7
       - name: Record verification boundary
         run: |
           echo 'Regression checks completed. No YouTube credentials are provided to this workflow.'
