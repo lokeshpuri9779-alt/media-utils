@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 35,
-  "confirmed_today": 34,
-  "last_attempt_at": "2026-10-13T08:55:45.283832+00:00",
+  "attempts": 36,
+  "confirmed_today": 35,
+  "last_attempt_at": "2026-10-13T09:07:10.576413+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -245,25 +245,32 @@
       "title": "The Raccoon and the Midnight Bakery",
       "format": "short",
       "uploaded_at": "2026-10-13T08:48:39.854501+00:00"
+    },
+    "rayvan-anthology-c959d422921b404b": {
+      "video_id": "ejgWWpnCWOU",
+      "confirmed_at": "2026-10-13T09:06:35.443817+00:00",
+      "title": "The Dog Who Guarded the Stars",
+      "format": "short",
+      "uploaded_at": "2026-10-13T08:55:47.632992+00:00"
     }
   },
   "pending": {
-    "ejgWWpnCWOU": {
-      "content_id": "rayvan-anthology-c959d422921b404b",
-      "title": "The Dog Who Guarded the Stars",
+    "HnI20vU8BaY": {
+      "content_id": "rayvan-anthology-7c9413360cfe156f",
+      "title": "The Monkey and the Missing Banana",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-13T08:55:47.632992+00:00",
+      "uploaded_at": "2026-10-13T09:07:12.215787+00:00",
       "genre": "fiction",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-13T08:55:05.465989+00:00",
+  "last_preflight_at": "2026-10-13T09:06:35.060566+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T08:55:48.422839+00:00",
+    "at": "2026-10-13T09:07:12.551151+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -489,6 +496,12 @@
     "rayvan-anthology-c959d422921b404b": {
       "at": "2026-10-13T08:55:45.283817+00:00",
       "title": "The Dog Who Guarded the Stars",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-anthology-7c9413360cfe156f": {
+      "at": "2026-10-13T09:07:10.576397+00:00",
+      "title": "The Monkey and the Missing Banana",
       "format": "short",
       "result": "accepted"
     }
