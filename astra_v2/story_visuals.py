@@ -35,9 +35,18 @@ SUBJECTS = (
 def select_subject(story, shot):
     local = " ".join(str(shot.get(k) or "") for k in ("speech", "visual_prompt", "visual", "action", "headline", "label")).lower()
     global_text = " ".join(str(story.get(k) or "") for k in ("title", "question", "answer")).lower()
-    # A shot should depict the subject mentioned in that shot, not the first
-    # matching word from the entire episode or the fixed subject catalog.
-    # Prefer the earliest mention when several objects appear in one beat.
+    # For character-led fiction, retain the title character when a beat
+    # mentions scenery first (for example a tree before the firefly).
+    # This prevents an incidental prop from replacing the protagonist.
+    title = str(story.get("title") or "").lower()
+    title_match = next((name for name, pattern in SUBJECTS
+                        if re.search(pattern, title)), None)
+    characters = {"fox", "owl", "duck", "squirrel", "mouse", "otter",
+                  "crab", "firefly", "cat", "dog", "monkey", "bird",
+                  "rabbit", "whale"}
+    if title_match in characters:
+        return title_match
+    # Otherwise select the earliest locally mentioned subject.
     for text in (local,):
         matches = [(match.start(), name)
                    for name, pattern in SUBJECTS
