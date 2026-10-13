@@ -130,7 +130,7 @@ def draw_character(image,index,t,x=540,y=900,expression="neutral",gesture="idle"
     else:
         d.arc((x-32,y-20,x+32,y+28),0,180,fill=(35,37,43),width=5)
     d.ellipse((x-95,y+55,x+95,y+270),fill=base)
-    if gesture not in ("idle", "point", "celebrate", "carry"):
+    if gesture not in ("idle", "point", "celebrate", "carry", "carry_rig"):
         raise ValueError(f"unsupported gesture: {gesture}")
     step=int(30*math.sin(t*4))
     for side in (-1,1):
@@ -143,7 +143,10 @@ def draw_character(image,index,t,x=540,y=900,expression="neutral",gesture="idle"
             arm_end = (x+side*75, y+160)
         else:
             arm_end = (x+side*145, y+125+side*step)
-        d.line((x+side*85,y+90,*arm_end),fill=base,width=19)
+        # The coordinated renderer supplies jointed, prop-attached arms for
+        # carry_rig. Avoid drawing contradictory fixed arms underneath them.
+        if gesture != "carry_rig":
+            d.line((x+side*85,y+90,*arm_end),fill=base,width=19)
     # Visible occupation cues rather than the same badge for every role.
     gold=(248,217,136)
     if role=="chef":
