@@ -220,6 +220,40 @@ jobs:
       - name: Render offline comedy pilot
         run: |
           python -m astra_v2.coordinated_development --comedy-pilot --seed astra-comedy-pilot --fps 12 --seconds-per-scene 3 --video --output verification-output/comedy-pilot
+      - name: Automatically validate rendered pilot and pickup evidence
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          from PIL import Image, ImageChops
+          root = Path('verification-output/comedy-pilot')
+          required = ('preview.mp4', 'storyboard.png', 'pickup-motion-sheet.png', 'report.json')
+          assert all((root / name).is_file() for name in required), 'missing render or pickup review output'
+          report = json.loads((root / 'report.json').read_text())
+          assert report['publication_allowed'] is False
+          assert report['quality_approved'] is False
+          assert not report['motion_failures'], report['motion_failures']
+          assert not report['visually_duplicate_scene_openings']
+          sheet = Image.open(root / 'pickup-motion-sheet.png').convert('RGB')
+          assert sheet.width >= 1350 and sheet.height >= 480, sheet.size
+          # Verify that the first and last sampled pickup images are different.
+          assert ImageChops.difference(sheet.crop((0, 0, 270, 480)),
+              sheet.crop((sheet.width - 270, 0, sheet.width, 480))).getbbox() is not None
+          info = json.loads(subprocess.check_output(['ffprobe', '-v', 'error',
+              '-select_streams', 'v:0', '-show_entries',
+              'stream=width,height,nb_frames,codec_name', '-of', 'json',
+              str(root / 'preview.mp4')]))
+          stream = info['streams'][0]
+          assert stream['codec_name'] == 'h264', stream
+          assert (stream['width'], stream['height']) == (544, 960), stream
+          assert int(stream['nb_frames']) == 180, stream
+          subprocess.run(['ffmpeg', '-v', 'error', '-xerror', '-i',
+              str(root / 'preview.mp4'), '-f', 'null', '-'], check=True)
+          (root / 'automated-validation.json').write_text(json.dumps({
+              'render_verified': True, 'pickup_sequence_changed': True,
+              'publication_allowed': False, 'creative_approval': 'pending'
+          }, indent=2))
+          PY
       - name: Upload offline comedy pilot
         if: always()
         uses: actions/upload-artifact@v4
