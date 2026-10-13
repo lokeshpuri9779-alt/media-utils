@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 56,
+  "attempts": 57,
   "confirmed_today": 56,
-  "last_attempt_at": "2026-10-13T15:32:04.467535+00:00",
+  "last_attempt_at": "2026-10-13T15:37:59.612286+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -401,28 +401,39 @@
       "uploaded_at": "2026-10-13T15:32:06.275913+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-13T15:33:29.405196+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "BEgq2z1gf-8": {
+      "content_id": "rayvan-forge-ffcea19586b385c7",
+      "title": "The Hedgehog and the Runaway Balloon",
+      "day": "2026-10-13",
+      "uploaded_at": "2026-10-13T15:38:01.241660+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": ""
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-13T15:37:04.660116+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T15:33:29.853683+00:00",
+    "at": "2026-10-13T15:38:01.537420+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-13T07:05:49.939768+00:00",
   "reserved": {
@@ -763,6 +774,13 @@
     "rayvan-forge-291a949747d4a2ec": {
       "at": "2026-10-13T15:32:04.467521+00:00",
       "title": "The Badger and the Empty Well",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-ffcea19586b385c7": {
+      "at": "2026-10-13T15:37:59.612271+00:00",
+      "title": "The Hedgehog and the Runaway Balloon",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
