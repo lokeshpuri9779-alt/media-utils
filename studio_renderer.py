@@ -1573,7 +1573,19 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
                         voice_name=str(ch.get('voice_profile') or 'af_heart'),
                         voice_speed=float(ch.get('voice_speed') or 1.09))
     out=Path(out);out.parent.mkdir(parents=True,exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix='astra_studio_') as tmp:
+    # Keep intermediate audio and encoder logs in RAM when enough tmpfs
+    # capacity is available; preserve disk fallback for reliability.
+    ram_tmp = Path('/dev/shm')
+    ram_free = 0
+    if ram_tmp.is_dir() and os.access(ram_tmp, os.W_OK):
+        try:
+            stats = os.statvfs(ram_tmp)
+            ram_free = stats.f_bavail * stats.f_frsize
+        except OSError:
+            pass
+    tmp_root = str(ram_tmp) if ram_free >= 512 * 1024 * 1024 else None
+    print('ASTRA_TEMP_STORAGE=' + ('ram' if tmp_root else 'disk'))
+    with tempfile.TemporaryDirectory(prefix='astra_studio_', dir=tmp_root) as tmp:
         tmp=Path(tmp);audio=tmp/'mix.wav'
         audio_info=score_audio(plan,duration,genre,audio)
         count=math.ceil(duration*FPS);actual_duration=count/FPS
