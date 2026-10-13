@@ -153,6 +153,9 @@ def run():
                         except Exception as queue_error:
                             report["queue_error_type"] = type(queue_error).__name__
                             print("ASTRA_PRELOAD_FALLBACK=" + type(queue_error).__name__)
+                            import traceback
+                            print("ASTRA_PRELOAD_EXCEPTION_DETAIL=" + str(queue_error)[:500])
+                            traceback.print_exc()
                     if candidate is None:
                         if os.getenv("ASTRA_PRELOAD_ONLY", "0") == "1":
                             report.update(outcome="skipped", reason=("preload_queue_error" if report.get("queue_error_type") else "preload_queue_empty"))
