@@ -1,5 +1,5 @@
 """Render cached, ISC-licensed Lucide SVG primitives without new dependencies."""
-import hashlib
+import math
 import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -63,7 +63,7 @@ def overlay_icon(im,shot,t,accent):
             else: continue
             rendered+=1
         if not rendered: return False
-        bob=int(9*__import__("math").sin(t*1.6))
+        bob=int(9*math.sin(t*1.6))
         im.paste(layer,(330,670+bob),layer)
         return True
     except (OSError,ValueError,ET.ParseError,TypeError):
