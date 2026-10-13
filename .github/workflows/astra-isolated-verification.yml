@@ -61,7 +61,7 @@ jobs:
                   rendered[expression] = canvas.crop((465, 805, 615, 945))
               for expression in ('surprised', 'happy', 'focused'):
                   assert ImageChops.difference(
-                      rendered['neutral'], rendered[expression]
+                      rendered['neutral'].convert('RGB'), rendered[expression].convert('RGB')
                   ).getbbox() is not None, (character_id, expression)
           PY
       - name: Run video and animation regression tests
