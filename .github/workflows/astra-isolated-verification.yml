@@ -223,6 +223,8 @@ jobs:
               shot['end'] = 2.0
               shot['duration'] = 2.0
               shot['experimental_cast_enabled'] = True
+              shot['audio'] = [0.0] * int(2 * studio_renderer.RATE)
+              shot['voice_start'] = 0.0
           # Compare enabled against disabled at the same timestamp to prove
           # that the new catalog is actually composited, not just moving text.
           a = studio_renderer.render_frame(plan[:1], 0.3, 'fiction', 2.0)
