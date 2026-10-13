@@ -43,6 +43,22 @@ def main():
             "usable_count": len(usable), "target": target,
             "action": "attempt_new_approved_render",
         }))
+    # Carry recently published YouTube content IDs into the renderer exclusion
+    # set. This prevents rebuilding an ID that the publisher would reject.
+    # Fail closed to the existing local-state checks if this optional snapshot
+    # is unavailable; the publisher independently checks YouTube before upload.
+    snapshot = Path("astra_recent_youtube_ids.json")
+    if snapshot.is_file():
+        try:
+            payload = json.loads(snapshot.read_text(encoding="utf-8"))
+            ids = payload.get("ids", [])
+            if not isinstance(ids, list):
+                raise ValueError("Invalid YouTube ID snapshot")
+            live_exclusions = {x for x in ids if isinstance(x, str) and x.strip()}
+            excluded.update(live_exclusions)
+            print("ASTRA_PRELOAD_YOUTUBE_EXCLUSIONS=" + str(len(live_exclusions)))
+        except (OSError, ValueError, TypeError) as exc:
+            print("ASTRA_PRELOAD_YOUTUBE_SNAPSHOT_INVALID=" + type(exc).__name__)
     # Reuse the already-fetched artifact listing: avoid a second GitHub API call.
     excluded.update(str(item["name"])[len("astra-preloaded-"):] for item in usable)
     if serialized:
