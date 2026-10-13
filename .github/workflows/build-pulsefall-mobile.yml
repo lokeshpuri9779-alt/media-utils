@@ -7464,14 +7464,14 @@ jobs:
           )
           level = replace_once(
               level,
-              '\t\t_show_banner("WAVE %02d" % wave, _wave_subtitle(), 1.8)\n',
-              '\t\t_show_banner(RunFlowRulesScript.stage_title(wave), RunFlowRulesScript.stage_subtitle(wave), 1.8)\n',
+              '\t\tvar wave_subtitle := "OVERLOAD // +2 HOSTILES // +50% SCORE" if active_risk_contract == RiskContractScript.OVERLOAD else _wave_subtitle()\n\t\t_show_banner("WAVE %02d" % wave, wave_subtitle, 1.8)\n',
+              '\t\tvar operation_subtitle := RunFlowRulesScript.stage_subtitle(wave)\n\t\tif active_risk_contract == RiskContractScript.OVERLOAD:\n\t\t\toperation_subtitle = "OVERLOAD // " + operation_subtitle\n\t\t_show_banner(RunFlowRulesScript.stage_title(wave), operation_subtitle, 1.8)\n',
               "operation stage banner",
           )
           level = replace_once(
               level,
-              "\t\tvar count := mini(3 + wave, 6)\n",
-              "\t\tvar count := RunFlowRulesScript.enemy_count(wave, mission_time)\n",
+              "\t\tvar count := mini(3 + wave, 6) + RiskContractScript.extra_enemies(active_risk_contract)\n",
+              "\t\tvar count := RunFlowRulesScript.enemy_count(wave, mission_time) + RiskContractScript.extra_enemies(active_risk_contract)\n",
               "adaptive operation encounter count",
           )
           level = replace_once(
@@ -7894,7 +7894,7 @@ jobs:
           test "${ABI_DIRS[0]}" = "arm64-v8a"
           echo "APK PACKAGE CHECKS: 7 FAILURES: 0"
           echo "PACKAGE: com.pulsefall.blacksite"
-          echo "VERSION: 43 / 0.2.28-mobile-alpha"
+          echo "VERSION: 48 / 0.2.28-mobile-alpha"
           echo "ABI: arm64-v8a"
 
           AAB="artifact/PULSEFALL_MOBILE_ALPHA.aab"
