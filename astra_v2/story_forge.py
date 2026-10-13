@@ -5,6 +5,7 @@ a finite pool, not an LLM or a guarantee of endlessly original fiction.
 All outputs remain subject to the existing full render and publication gates.
 """
 import hashlib
+import re
 
 PLOTS = [
     ("hedgehog-raincoat", "The Hedgehog and the Raincoat", "animal comedy",
@@ -89,17 +90,28 @@ PLOTS = [
       ("A FAMILY REUNITED", "She delivered the card to a traveling goose who had finally returned home.", "forest", "SPECIAL DELIVERY")]),
 ]
 
-def catalog(excluded_ids=None, excluded_titles=None, limit=32):
+def plot_fingerprint(beats):
+    """Fingerprint story narration, excluding cosmetic titles and labels."""
+    narration = " ".join(speech for _, speech, _, _ in beats).casefold()
+    normalized = " ".join(re.sub(r"[^a-z0-9 ]", " ", narration).split())
+    return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
+
+
+def catalog(excluded_ids=None, excluded_titles=None, limit=32, excluded_plot_hashes=None):
     excluded = set(excluded_ids or ())
     titles = {str(t).casefold().strip() for t in (excluded_titles or ())}
     result = []
+    seen_plots = set(excluded_plot_hashes or ())
     for key, title, genre, beats in PLOTS:
         cid = "rayvan-forge-" + hashlib.sha256(key.encode()).hexdigest()[:16]
-        if cid in excluded or title.casefold() in titles:
+        fingerprint = plot_fingerprint(beats)
+        if cid in excluded or title.casefold() in titles or fingerprint in seen_plots:
             continue
+        seen_plots.add(fingerprint)
         result.append({
             "genre": "fiction", "kind": "authored_causal_story",
             "production_ready": True, "content_id": cid,
+            "plot_fingerprint": fingerprint,
             "title": title, "hook": beats[0][0],
             "question": beats[0][1], "answer": beats[-1][1],
             "source": "", "keywords": ["original fiction", genre],
