@@ -297,6 +297,36 @@ REWRITTEN_PLOTS = [
         ("TWO SPARE PADDLES", "The captain found emergency paddles beneath the seats, and the duck organized the passengers to row in rhythm.", "book", "ROW TOGETHER"),
         ("SAFE AT THE PIER", "Their coordinated strokes guided the ferry to a sheltered pier, where a mechanic finally repaired the engine.", "forest", "SAFE LANDING"),
     ]),
+    ("badger-well-spring", "The Badger and the Empty Well", "animal adventure", [
+        ("NO WATER LEFT", "The village well ran dry before breakfast, and a badger discovered that every bucket scraped against bare stone.", "forest", "WELL EMPTY"),
+        ("DIGGING DEEPER", "He dug beside the wall for hours, but the earth crumbled and no water appeared beneath the dry clay.", "door", "DRY GROUND"),
+        ("THE COOL STONES", "A patch of unusually cool stones revealed an old spring channel, which the badger cleared with the village mason.", "book", "SPRING FOUND"),
+        ("WATER RETURNS", "Clean water trickled back into the well, and the neighbors built a cover to protect their newly restored supply.", "forest", "FRESH WATER"),
+    ]),
+    ("ferret-bell-brass", "The Ferret and the Missing Bell", "animal mystery", [
+        ("SILENT MORNING", "The town bell disappeared before the harvest ceremony, leaving a ferret caretaker staring at the empty wooden tower.", "door", "BELL GONE"),
+        ("A MISLEADING SOUND", "He chased a ringing noise toward the market, but it came from a peddler's basket of tiny handbells.", "forest", "FALSE ALARM"),
+        ("THE BRASS TRAIL", "A trail of brass filings led behind the blacksmith's shed, where workers had moved the bell for emergency repairs.", "book", "MYSTERY SOLVED"),
+        ("THE FIRST CHIME", "The repaired bell returned to its tower just as the crowd assembled, and its bright chime opened the celebration.", "forest", "CEREMONY SAVED"),
+    ]),
+    ("deer-tunnel-passage", "The Deer and the Hidden Passage", "animal adventure", [
+        ("THE ROAD BLOCKED", "A landslide sealed the mountain tunnel while a deer was transporting warm blankets to the village beyond the ridge.", "forest", "TUNNEL CLOSED"),
+        ("A DANGEROUS DETOUR", "She searched the steep cliff path, but loose stones slid beneath her feet and forced her to turn back.", "door", "TURN BACK"),
+        ("THE MINER'S MAP", "Inside the old watch hut, she discovered a miners' map showing a safe side passage around the blocked entrance.", "book", "SECRET ROUTE"),
+        ("BLANKETS DELIVERED", "With a guide checking the passage first, the deer carried the blankets through and reached the waiting villagers.", "forest", "WARM AGAIN"),
+    ]),
+    ("wolf-lantern-fireflies", "The Wolf and the Missing Lantern", "animal adventure", [
+        ("LOST AT DUSK", "A wolf guided hikers along the mountain trail until their only lantern slipped from a pack into the rushing stream.", "forest", "NO LIGHT"),
+        ("THE WRONG TURN", "He followed a pale reflection between the trees, but it was moonlight on water beside a steep drop.", "door", "DANGER AHEAD"),
+        ("THE FIREFLY PATH", "Tiny fireflies gathered near the sheltered valley, revealing familiar trail markers that led toward the ranger's cabin.", "book", "FOLLOW THE SIGNS"),
+        ("SHELTER AT LAST", "The wolf kept everyone together until they reached the cabin, where a ranger offered blankets and a new lantern.", "forest", "SAFE TONIGHT"),
+    ]),
+    ("beaver-dam-clay", "The Beaver and the Leaking Pond", "animal adventure", [
+        ("THE POND SHRINKS", "A beaver discovered water escaping through a crack in the pond wall just before the annual duckling swim.", "forest", "LEAK FOUND"),
+        ("THE PATCH WASHED AWAY", "He packed leaves into the crack, but the current carried them away and the water level continued dropping.", "door", "PATCH FAILED"),
+        ("CLAY BENEATH REEDS", "Under the reeds he found sticky clay, then pressed it into the crack behind a woven barrier of branches.", "book", "STRONGER PATCH"),
+        ("THE SWIM GOES ON", "The leak slowed to a stop, and the ducklings crossed the restored pond while the beaver checked his repair.", "forest", "POND SAVED"),
+    ]),
 ]
 
 AUTHORED_KEYS = {row[0] for row in PLOTS + REWRITTEN_PLOTS}
