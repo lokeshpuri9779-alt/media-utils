@@ -304,6 +304,34 @@ jobs:
           sheet.save(out/"ensemble-contact-sheet.png")
           assert (out/"ensemble-contact-sheet.png").stat().st_size>10000
           PY
+      - name: Validate and render authored story preview
+        run: |
+          cat > /tmp/astra-authored-story.json <<'JSON'
+          {
+            "mode": "ensemble",
+            "scenes": [
+              {"actors": ["fox"], "action": "approach", "narration": "A fox discovers a mysterious gift."},
+              {"actors": ["fox", "dog"], "action": "react", "narration": "A dog arrives and notices the gift."},
+              {"actors": ["fox", "dog"], "action": "carry", "narration": "Together they carry it toward the village."},
+              {"actors": ["fox", "dog", "cat"], "action": "celebrate", "narration": "Their friend joins the celebration."}
+            ]
+          }
+          JSON
+          python -m astra_v2.coordinated_development \
+            --story-file /tmp/astra-authored-story.json \
+            --seed authored-story-review-v1 --validate-only
+          python -m astra_v2.coordinated_development \
+            --story-file /tmp/astra-authored-story.json \
+            --seed authored-story-review-v1 --fps 4 \
+            --output verification-output/authored-story
+      - name: Upload authored story preview
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-authored-story-preview
+          path: verification-output/authored-story/
+          if-no-files-found: warn
+          retention-days: 7
       - name: Render carry-motion contact sheet
         run: |
           python - <<'PY'
