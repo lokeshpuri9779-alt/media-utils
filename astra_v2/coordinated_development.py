@@ -323,7 +323,12 @@ def render(plan, output, fps=8, seconds_per_scene=2, video=False):
         # Background changes must not disguise a repeated cast/prop pairing.
         # Keep both the semantic pairing gate and pixel-level scene gate.
         pair = (scene["character_id"], scene["object_id"])
-        if pair in seen_cast_pairs or fingerprint in scene_fingerprints:
+        # Story-led scenes may intentionally reuse the same protagonist and
+        # prop. Their actual artwork must still change. Random catalog demos
+        # retain the stricter repeated-pair rejection.
+        repeated_pair = pair in seen_cast_pairs
+        repeated_artwork = fingerprint in scene_fingerprints
+        if repeated_artwork or (repeated_pair and not plan.get("story_subjects_verified")):
             visual_collisions.append(scene["scene"])
         seen_cast_pairs.add(pair)
         scene_fingerprints.append(fingerprint)
