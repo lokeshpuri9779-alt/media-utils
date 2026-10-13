@@ -44,7 +44,39 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_astra_preload_artifact_pagination.py' -v
           python -m unittest discover -s tests -p 'test_astra_youtube_oauth_errors.py' -v
+      - name: Render and inspect offline animation sample
+        run: |
+          mkdir -p verification-output
+          python - <<'PY'
+          from PIL import Image
+          from astra_v2.story_visuals import draw_subject
+          for i in range(24):
+              frame=Image.new('RGB',(360,640),(24,34,52))
+              assert draw_subject(frame,'robot',i/12,(236,174,112))
+              frame.save(f'verification-output/frame-{i:03d}.png')
+          PY
+          ffmpeg -hide_banner -loglevel error -y -framerate 12 -i verification-output/frame-%03d.png -c:v libx264 -pix_fmt yuv420p verification-output/sample.mp4
+          ffprobe -v error -select_streams v:0 -show_entries stream=width,height,nb_frames -of json verification-output/sample.mp4 > verification-output/probe.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from PIL import Image,ImageChops
+          p=json.loads(Path('verification-output/probe.json').read_text())['streams'][0]
+          assert (p['width'],p['height'])==(360,640)
+          assert int(p['nb_frames'])==24
+          a=Image.open('verification-output/frame-000.png')
+          b=Image.open('verification-output/frame-012.png')
+          assert ImageChops.difference(a,b).getbbox() is not None
+          PY
+      - name: Upload offline sample and probe
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-offline-render-check
+          path: verification-output/
+          if-no-files-found: ignore
+          retention-days: 7
       - name: Record verification boundary
         run: |
           echo 'Regression checks completed. No YouTube credentials are provided to this workflow.'
-          echo 'Rendering has NOT been verified by this workflow; production approval remains blocked.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Offline animation sample checked; full production rendering, audio, captions and publication approval remain unverified.' >> "$GITHUB_STEP_SUMMARY"
