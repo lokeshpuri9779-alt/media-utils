@@ -1,6 +1,6 @@
 """Offline regression tests for story subject/cast alignment."""
 import unittest
-from astra_v2.coordinated_development import build_story_plan, build_narrated_plan, verify_story_cast
+from astra_v2.coordinated_development import build_story_plan, build_narrated_plan, build_ensemble_plan, verify_story_cast
 from astra_v2.character_object_catalog import character
 
 class StoryCastAlignmentTests(unittest.TestCase):
@@ -48,6 +48,25 @@ class StoryCastAlignmentTests(unittest.TestCase):
         for narration in ("A hedgehog crossed the road.", "The turtle met a fox.", "Suddenly the lights went out."):
             with self.assertRaises(ValueError):
                 build_narrated_plan("narration-test", [narration])
+
+    def test_ensemble_cast_is_stable_across_scenes(self):
+        plan = build_ensemble_plan("ensemble-test", [["fox", "dog"], ["dog"], ["fox", "dog"]])
+        self.assertTrue(verify_story_cast(plan))
+        first = plan["scenes"][0]["actors"]
+        last = plan["scenes"][2]["actors"]
+        self.assertEqual([a["character_id"] for a in first], [a["character_id"] for a in last])
+        self.assertFalse(plan["publication_allowed"])
+
+    def test_ensemble_rejects_invalid_cast(self):
+        for cast in ([["hedgehog"]], [["fox", "fox"]], [[]], [["fox"] * 5]):
+            with self.assertRaises(ValueError):
+                build_ensemble_plan("ensemble-test", cast)
+
+    def test_ensemble_tampering_is_rejected(self):
+        plan = build_ensemble_plan("ensemble-test", [["fox", "dog"]])
+        plan["scenes"][0]["actors"][1]["character_id"] = 0
+        with self.assertRaises(ValueError):
+            verify_story_cast(plan)
 
     def test_invalid_input_is_rejected(self):
         for subjects in ([], ["fox"] * 121, "fox", [None]):
