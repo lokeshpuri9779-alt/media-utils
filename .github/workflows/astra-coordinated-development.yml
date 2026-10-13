@@ -1,14 +1,8 @@
 name: ASTRA Coordinated Development Pipeline
 
+# Manual-only on the isolated branch to avoid duplicate render jobs.
 on:
   workflow_dispatch:
-  push:
-    branches: [astra-isolated-verification-20261013]
-    paths:
-      - 'astra_v2/character_object_catalog.py'
-      - 'astra_v2/coordinated_development.py'
-      - 'tests/test_astra_coordinated_development.py'
-      - '.github/workflows/astra-coordinated-development.yml'
 
 permissions:
   contents: read
