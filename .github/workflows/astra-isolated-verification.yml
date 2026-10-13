@@ -297,13 +297,33 @@ jobs:
               canvas.save(out/filename)
           sheet('character-species-contact-sheet.png',SPECIES,draw_character,lambda i:i*100)
           sheet('object-categories-contact-sheet.png',OBJECTS,draw_prop,lambda i:i*50)
+          # Pose comparison uses identical species, timing and camera position;
+          # only the authored gesture changes. Reviewability is not a quality score.
+          gestures=('idle','point','celebrate','carry')
+          species_indices=(0,200,400,900,1100,1500,1700,1900)
+          tile_w,tile_h=210,270
+          board=Image.new('RGB',(len(gestures)*tile_w,
+                                 len(species_indices)*tile_h),(22,31,46))
+          d=ImageDraw.Draw(board)
+          for row,index in enumerate(species_indices):
+              for col,gesture in enumerate(gestures):
+                  tile=Image.new('RGB',(1080,1920),(28,40,59))
+                  draw_character(tile,index,0.4,540,900,gesture=gesture)
+                  crop=tile.crop((300,600,780,1200)).resize((190,235))
+                  x,y=col*tile_w+10,row*tile_h+8
+                  board.paste(crop,(x,y))
+                  d.text((x,y+239),f'{SPECIES[index//100]} / {gesture}',
+                         fill=(240,241,244))
+          board.save(out/'character-gesture-comparison.png')
           PY
       - name: Upload visual diversity contact sheets
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: astra-diversity-contact-sheets
-          path: verification-output/*contact-sheet.png
+          path: |
+            verification-output/*contact-sheet.png
+            verification-output/character-gesture-comparison.png
           if-no-files-found: ignore
           retention-days: 7
       - name: Render ensemble contact sheet for visual review
