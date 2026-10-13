@@ -59,6 +59,20 @@ def main():
             print("ASTRA_PRELOAD_YOUTUBE_EXCLUSIONS=" + str(len(live_exclusions)))
         except (OSError, ValueError, TypeError) as exc:
             print("ASTRA_PRELOAD_YOUTUBE_SNAPSHOT_INVALID=" + type(exc).__name__)
+    # Read the live channel before rendering: a queued candidate can already
+    # have been published without appearing in the local journal.
+    try:
+        from astra_v2.run import channel_config
+        from astra_v2.youtube import Youtube
+        _, expected_channel_id = channel_config()
+        with Youtube(expected_channel_id) as youtube:
+            channel = youtube.authorize()
+            recent_ids, _ = youtube.recent(channel)
+        excluded.update(recent_ids)
+        print("ASTRA_PRELOAD_LIVE_YOUTUBE_EXCLUSIONS=" + str(len(recent_ids)))
+    except Exception as exc:
+        # Publisher still enforces the authoritative live duplicate check.
+        print("ASTRA_PRELOAD_LIVE_YOUTUBE_UNAVAILABLE=" + type(exc).__name__)
     # Reuse the already-fetched artifact listing: avoid a second GitHub API call.
     excluded.update(str(item["name"])[len("astra-preloaded-"):] for item in usable)
     if serialized:
