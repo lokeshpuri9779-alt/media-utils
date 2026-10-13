@@ -36,3 +36,14 @@ def test_duplicate_artwork_is_detected_despite_scene_number(tmp_path):
     import json
     report = json.loads((tmp_path / "report.json").read_text())
     assert report["visually_duplicate_scene_openings"] == [2]
+
+
+def test_scene_composition_has_motion_and_distinct_backdrops():
+    from PIL import ImageChops
+    plan = build_plan("cinematic-composition", 4)
+    scene = plan["scenes"][0]
+    a = frame(scene, 0.0)
+    b = frame(scene, 0.8)
+    assert ImageChops.difference(a, b).getbbox() is not None
+    assert a.getpixel((10, 10)) != a.getpixel((10, 700))
+    assert frame(plan["scenes"][1], 0.0).getpixel((10, 10)) != a.getpixel((10, 10))
