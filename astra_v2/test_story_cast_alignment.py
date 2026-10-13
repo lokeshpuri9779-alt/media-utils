@@ -1,6 +1,6 @@
 """Offline regression tests for story subject/cast alignment."""
 import unittest
-from astra_v2.coordinated_development import build_story_plan, build_narrated_plan, build_ensemble_plan, verify_story_cast, frame
+from astra_v2.coordinated_development import build_story_plan, build_narrated_plan, build_ensemble_plan, verify_story_cast, frame, render
 from astra_v2.character_object_catalog import character
 
 class StoryCastAlignmentTests(unittest.TestCase):
@@ -71,6 +71,25 @@ class StoryCastAlignmentTests(unittest.TestCase):
         self.assertEqual(both.size, (540, 960))
         self.assertIsNotNone(ImageChops.difference(both, solo).getbbox())
         self.assertIsNotNone(ImageChops.difference(both, frame(scene, 1.1)).getbbox())
+
+    def test_render_rejects_cast_mismatch_without_trusting_flag(self):
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        plan = build_ensemble_plan("render-gate-test", [["fox", "dog"]])
+        plan.pop("story_subjects_verified")
+        plan["scenes"][0]["actors"][1]["character_id"] = 0
+        with TemporaryDirectory() as tmp:
+            with self.assertRaises(ValueError):
+                render(plan, Path(tmp))
+
+    def test_render_rejects_missing_ensemble_cast(self):
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        plan = build_ensemble_plan("render-gate-test", [["fox"]])
+        plan["scenes"][0].pop("actors")
+        with TemporaryDirectory() as tmp:
+            with self.assertRaises(ValueError):
+                render(plan, Path(tmp))
 
     def test_ensemble_tampering_is_rejected(self):
         plan = build_ensemble_plan("ensemble-test", [["fox", "dog"]])
