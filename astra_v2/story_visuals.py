@@ -35,24 +35,25 @@ SUBJECTS = (
 def select_subject(story, shot):
     local = " ".join(str(shot.get(k) or "") for k in ("speech", "visual_prompt", "visual", "action", "headline", "label")).lower()
     global_text = " ".join(str(story.get(k) or "") for k in ("title", "question", "answer")).lower()
-    # For character-led fiction, retain the title character when a beat
-    # mentions scenery first (for example a tree before the firefly).
-    # This prevents an incidental prop from replacing the protagonist.
+    # Respect the scene's narrated characters; a title protagonist is only
+    # preferred over incidental scenery, never over a different actor.
     title = str(story.get("title") or "").lower()
-    title_match = next((name for name, pattern in SUBJECTS
-                        if re.search(pattern, title)), None)
+    title_matches = [(m.start(), name) for name, pattern in SUBJECTS
+                     if (m := re.search(pattern, title))]
+    title_subject = min(title_matches, key=lambda item: item[0])[1] if title_matches else None
     characters = {"fox", "owl", "duck", "squirrel", "mouse", "otter",
                   "crab", "firefly", "cat", "dog", "monkey", "bird",
                   "rabbit", "whale"}
-    if title_match in characters:
-        return title_match
-    # Otherwise select the earliest locally mentioned subject.
-    for text in (local,):
-        matches = [(match.start(), name)
-                   for name, pattern in SUBJECTS
-                   if (match := re.search(pattern, text))]
-        if matches:
-            return min(matches, key=lambda item: item[0])[1]
+    local_matches = [(m.start(), name) for name, pattern in SUBJECTS
+                     if (m := re.search(pattern, local))]
+    local_matches.sort()
+    local_characters = [name for _, name in local_matches if name in characters]
+    if local_characters:
+        return local_characters[0]
+    if title_subject in characters and local_matches:
+        return title_subject
+    if local_matches:
+        return local_matches[0][1]
     # A title-level subject is appropriate only when the beat supplies no
     # distinct visual direction. Otherwise it makes every shot repeat the
     # same illustration even when the storyboard changes locations/actions.
