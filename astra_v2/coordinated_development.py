@@ -251,7 +251,22 @@ def frame(scene, t):
         lead_x = (slots[0] if actors else cx)
         ox = lead_x + 95 + carry_shift
         oy = cy + 70 + int(8 * math.sin(t * 2.0))
-    draw_prop(object_layer, scene["object_id"], t, ox, oy)
+    if named_action == "carry":
+        # Carry objects should remain visually subordinate to the actor.
+        # Scale the visible prop footprint instead of shrinking its entire
+        # transparent drawing canvas.
+        native = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
+        draw_prop(native, scene["object_id"], t, 540, 960)
+        bbox = native.getbbox()
+        if bbox:
+            artwork = native.crop(bbox)
+            prop_scale = 0.55 if actors and len(actors) > 1 else 0.72
+            pw = max(1, int(artwork.width * prop_scale))
+            ph = max(1, int(artwork.height * prop_scale))
+            artwork = artwork.resize((pw, ph), Image.Resampling.LANCZOS)
+            object_layer.alpha_composite(artwork, (int(ox - pw / 2), int(oy - ph / 2)))
+    else:
+        draw_prop(object_layer, scene["object_id"], t, ox, oy)
     image = Image.alpha_composite(image.convert("RGBA"), character_layer.resize((W, H), Image.Resampling.LANCZOS))
     image = Image.alpha_composite(image, object_layer.resize((W, H), Image.Resampling.LANCZOS))
     d = ImageDraw.Draw(image)
