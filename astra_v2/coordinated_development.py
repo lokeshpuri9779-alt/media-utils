@@ -97,7 +97,7 @@ def frame(scene, t):
         for j in range(3):
             d.ellipse((390+j*22, 440-j*23, 398+j*22, 448-j*23),
                       fill=(240, 205, 134))
-    d.rounded_rectangle((18, 20, W-18, 65), radius=14, fill=(18, 26, 40, 220))
+    d.rounded_rectangle((18, 20, W-18, 65), radius=14, fill=(18, 26, 40, 255))
     d.text((30, 35), f"SCENE {number:02d}  /  ASTRA EXPERIMENT", fill=(239, 239, 228))
     d.text((24, 925), "NOT APPROVED FOR PUBLICATION", fill=(245, 176, 121))
     return image.convert("RGB")
