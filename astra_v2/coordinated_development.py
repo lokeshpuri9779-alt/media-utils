@@ -14,6 +14,7 @@ from PIL import Image, ImageDraw, ImageChops
 from astra_v2.character_object_catalog import (
     CHARACTER_COUNT, OBJECT_COUNT, character, prop, draw_character, draw_prop,
 )
+from astra_v2.storybook_comedy_art import draw_storybook_character, shoulder_anchor as storybook_shoulder_anchor
 
 W, H = 540, 960
 BG = (19, 27, 43)
@@ -198,6 +199,8 @@ def build_comedy_demo(seed="astra-comedy-pilot"):
         scene["action"] = action
         scene["narration"] = narration
         scene["duration_seconds"] = 2.0
+        # Opt-in illustrated actors on the isolated pilot only.
+        scene["visual_style"] = "storybook"
     plan["pilot_type"] = "offline_comedy"
     plan["publication_allowed"] = False
     plan["quality_approved"] = False
@@ -205,8 +208,10 @@ def build_comedy_demo(seed="astra-comedy-pilot"):
     return plan
 
 
-def carry_shoulder_anchor(index, t, x, y, side):
-    """Return the exact shoulder joint of the active catalog renderer."""
+def carry_shoulder_anchor(index, t, x, y, side, storybook=False):
+    """Return the exact shoulder joint of the selected character renderer."""
+    if storybook:
+        return storybook_shoulder_anchor(index, t, x, y, side)
     if getattr(draw_character, "__name__", "") == "draw_character_silhouette":
         return (x + side * 58, y + int(12 * math.sin(t * 2.5 + index * .031)) + 55)
     return (x + side * 85, y + int(14 * math.sin(t * 2.2)) + 90)
@@ -238,6 +243,13 @@ def draw_expressive_character(image, index, t, x, y, expression, gesture="idle")
         if "unexpected keyword argument 'expression'" in str(exc):
             return draw_character(image, index, t, x, y)
         raise
+
+
+def render_scene_actor(image, index, t, x, y, expression, gesture, storybook=False):
+    if storybook and character(index)[0] in ("fox", "rabbit"):
+        return draw_storybook_character(image, index, t, x, y,
+                                        expression=expression, gesture=gesture)
+    return draw_expressive_character(image, index, t, x, y, expression, gesture)
 
 
 def frame(scene, t):
@@ -283,6 +295,7 @@ def frame(scene, t):
     cy = 1060 + int(13 * math.sin(t * 2.4))
     oy = 1180 + int(15 * math.sin(t * 2.1 + 1.0))
     actors = scene.get("actors")
+    storybook = scene.get("visual_style") == "storybook"
     carry_shift = int(28 * math.sin(t * 2.0)) if named_action == "carry" else 0
     # The prop is lifted during the carry beat, rather than teleporting to the hands.
     lift_progress = max(0.0, min(1.0, (t - 0.15) / 0.95))
@@ -333,8 +346,8 @@ def frame(scene, t):
                 expression = ("surprised" if named_action in ("carry", "react", "celebrate") else
                               "focused" if named_action == "point" else "neutral")
                 gesture = "point" if named_action == "point" else "idle"
-            draw_expressive_character(actor_layer, actor["character_id"], actor_t, 540, 1060,
-                                      expression, gesture)
+            render_scene_actor(actor_layer, actor["character_id"], actor_t, 540, 1060,
+                               expression, gesture, storybook=storybook)
             if scale != 1.0:
                 # Crop to actual visible artwork before scaling: resizing a
                 # full-screen transparent canvas shrinks the character twice.
@@ -350,7 +363,8 @@ def frame(scene, t):
                     place_y = int(cy + crouch - new_h / 2)
                     if named_action == "carry" and actor_index == 0:
                         native_shoulders = tuple(carry_shoulder_anchor(
-                            actor["character_id"], actor_t, 540, 1060, side)
+                            actor["character_id"], actor_t, 540, 1060, side,
+                            storybook=storybook)
                             for side in (-1, 1))
                         lead_shoulders = tuple((
                             place_x + (point[0] - bbox[0]) * scale,
@@ -359,9 +373,9 @@ def frame(scene, t):
                         # The original actor layer has already been replaced
                         # with a blank compositing canvas. Sample color from
                         # the preserved, unscaled cropped artwork instead.
-                        lead_base = artwork.getpixel((
+                        lead_base = ((240, 120, 62) if storybook else artwork.getpixel((
                             int(540 - bbox[0]),
-                            int(native_shoulders[0][1] + 40 - bbox[1])))[:3]
+                            int(native_shoulders[0][1] + 40 - bbox[1])))[:3])
                     actor_layer.alpha_composite(scaled, (place_x, place_y))
             if scale == 1.0:
                 # The solo ensemble actor must receive the same authored
@@ -373,14 +387,15 @@ def frame(scene, t):
                 actor_layer = shifted
                 if named_action == "carry" and actor_index == 0:
                     native_shoulders = tuple(carry_shoulder_anchor(
-                        actor["character_id"], actor_t, 540, 1060, side)
+                        actor["character_id"], actor_t, 540, 1060, side,
+                        storybook=storybook)
                         for side in (-1, 1))
                     lead_shoulders = tuple((
                         point[0] + sway + carry_shift, point[1] + crouch
                     ) for point in native_shoulders)
-                    lead_base = actor_layer.getpixel((
+                    lead_base = ((240, 120, 62) if storybook else actor_layer.getpixel((
                         int(540 + sway + carry_shift),
-                        min(1919, int(native_shoulders[0][1] + 40 + crouch))))[:3]
+                        min(1919, int(native_shoulders[0][1] + 40 + crouch))))[:3])
             character_layer = Image.alpha_composite(character_layer, actor_layer)
         # Move the prop forward so it does not cover the ensemble.
         ox, oy = 540, 1510
@@ -388,16 +403,18 @@ def frame(scene, t):
         expression = ("surprised" if named_action == "react" else
                       "happy" if named_action == "celebrate" else
                       "focused" if named_action in ("point", "carry") else "neutral")
-        draw_expressive_character(character_layer, scene["character_id"], t,
-                                  cx + carry_shift, cy, expression,
-                                  "carry_rig" if named_action == "carry" else
-                                  named_action if named_action in ("point", "celebrate") else "idle")
+        render_scene_actor(character_layer, scene["character_id"], t,
+                           cx + carry_shift, cy, expression,
+                           "carry_rig" if named_action == "carry" else
+                           named_action if named_action in ("point", "celebrate") else "idle",
+                           storybook=storybook)
         if named_action == "carry":
             lead_shoulders = tuple(carry_shoulder_anchor(
-                scene["character_id"], t, cx + carry_shift, cy, side)
+                scene["character_id"], t, cx + carry_shift, cy, side,
+                storybook=storybook)
                 for side in (-1, 1))
-            lead_base = character_layer.getpixel((
-                cx + carry_shift, min(1919, int(lead_shoulders[0][1] + 40))))[:3]
+            lead_base = ((240, 120, 62) if storybook else character_layer.getpixel((
+                cx + carry_shift, min(1919, int(lead_shoulders[0][1] + 40))))[:3])
     if named_action == "carry":
         # Stage the object next to the lead actor, moving in sync with them.
         # This is a simple composited carry cue, not inverse-kinematic gripping.
@@ -423,7 +440,7 @@ def frame(scene, t):
         bbox = native.getbbox()
         if bbox:
             artwork = native.crop(bbox)
-            prop_scale = 0.55 if actors and len(actors) > 1 else 0.72
+            prop_scale = (0.72 if actors and len(actors) > 1 else 0.80) if storybook else (0.55 if actors and len(actors) > 1 else 0.72)
             prop_scale *= 0.92 + 0.08 * lift_progress
             # Keep the carried prop in front of the torso, but within arm reach.
             if lift_progress >= 0.999:
