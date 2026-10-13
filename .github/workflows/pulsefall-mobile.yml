@@ -5017,27 +5017,24 @@ jobs:
           	var picks: Array[Dictionary] = choices.slice(0, mini(3, choices.size()))
           '''
           source = replace_once(source, old_choices, new_choices, "upgrade choice pool")
-          old_button = '''	for i in range(3):
-          		var pick: Array = picks[i]
-          		var button := Button.new()
-          		button.text = str(pick[0]) + "\n" + str(pick[1])
-          		button.position = Vector2(55 + i * 265, 105)
-          		button.size = Vector2(220, 112)
-          		button.add_theme_font_size_override("font_size", 17)
-          		button.pressed.connect(_choose_run_upgrade.bind(str(pick[2]), str(pick[0])))
-          		card.add_child(button)
-          '''
-          new_button = '''	for i in range(picks.size()):
-          		var pick: Dictionary = picks[i]
-          		var button := Button.new()
-          		button.text = str(pick.title) + "\n" + str(pick.description)
-          		button.position = Vector2(55 + i * 265, 105)
-          		button.size = Vector2(220, 112)
-          		button.add_theme_font_size_override("font_size", 17)
-          		button.pressed.connect(_choose_run_upgrade.bind(str(pick.id), str(pick.title)))
-          		card.add_child(button)
-          '''
-          source = replace_once(source, old_button, new_button, "upgrade choice buttons")
+          source = replace_once(
+              source,
+              "\tfor i in range(3):\n\t\tvar pick: Array = picks[i]\n",
+              "\tfor i in range(picks.size()):\n\t\tvar pick: Dictionary = picks[i]\n",
+              "upgrade choice iteration",
+          )
+          source = replace_once(
+              source,
+              '\t\tbutton.text = str(pick[0]) + "\\n" + str(pick[1])\n',
+              '\t\tbutton.text = str(pick.title) + "\\n" + str(pick.description)\n',
+              "upgrade choice text",
+          )
+          source = replace_once(
+              source,
+              '\t\tbutton.pressed.connect(_choose_run_upgrade.bind(str(pick[2]), str(pick[0])))\n',
+              '\t\tbutton.pressed.connect(_choose_run_upgrade.bind(str(pick.id), str(pick.title)))\n',
+              "upgrade choice callback",
+          )
           source = replace_once(
               source,
               'var note := _make_label("Choose one. Your run changes immediately.", 15, Color(0.72, 0.80, 0.90))',
