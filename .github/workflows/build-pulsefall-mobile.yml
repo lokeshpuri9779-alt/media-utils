@@ -5172,6 +5172,260 @@ jobs:
           script = ExtResource("1")
           PULSEFALL_UPGRADE_TEST
 
+      - name: Add optional overload risk contracts
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          cat > game/mobile/risk_contract.gd <<'PULSEFALL_RISK'
+          class_name RiskContract
+          extends RefCounted
+
+          const SAFE := "safe"
+          const OVERLOAD := "overload"
+
+          static func normalize(contract: String) -> String:
+          	return OVERLOAD if contract == OVERLOAD else SAFE
+
+          static func bonus_upgrade_picks(contract: String) -> int:
+          	return 1 if normalize(contract) == OVERLOAD else 0
+
+          static func extra_enemies(contract: String) -> int:
+          	return 2 if normalize(contract) == OVERLOAD else 0
+
+          static func health_multiplier(contract: String) -> float:
+          	return 1.25 if normalize(contract) == OVERLOAD else 1.0
+
+          static func damage_multiplier(contract: String) -> float:
+          	return 1.20 if normalize(contract) == OVERLOAD else 1.0
+
+          static func attack_delay_multiplier(contract: String) -> float:
+          	return 0.88 if normalize(contract) == OVERLOAD else 1.0
+
+          static func score_multiplier(contract: String) -> float:
+          	return 1.50 if normalize(contract) == OVERLOAD else 1.0
+
+          static func scaled_health(base_health: int, contract: String) -> int:
+          	return maxi(1, int(ceil(float(base_health) * health_multiplier(contract))))
+
+          static func scaled_damage(base_damage: int, contract: String) -> int:
+          	return maxi(1, int(ceil(float(base_damage) * damage_multiplier(contract))))
+
+          static func scaled_score(base_score: int, contract: String) -> int:
+          	return maxi(0, int(round(float(base_score) * score_multiplier(contract))))
+
+          static func summary(contract: String) -> String:
+          	if normalize(contract) == OVERLOAD:
+          		return "OVERLOAD: +2 HOSTILES, +25% HP, +20% DAMAGE, +50% SCORE, BONUS PICK"
+          	return "SAFE: STANDARD THREAT, ONE UPGRADE"
+          PULSEFALL_RISK
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(source, old, new, label):
+              count = source.count(old)
+              if count != 1:
+                  raise SystemExit(f"Expected one {label} anchor, found {count}")
+              return source.replace(old, new, 1)
+
+          p = Path("game/level/level.gd")
+          s = p.read_text()
+          s = replace_once(
+              s,
+              'const RunUpgradesScript = preload("res://mobile/run_upgrades.gd")\n',
+              'const RunUpgradesScript = preload("res://mobile/run_upgrades.gd")\nconst RiskContractScript = preload("res://mobile/risk_contract.gd")\n',
+              "risk contract preload",
+          )
+          s = replace_once(
+              s,
+              "var pulse_cooldown_multiplier := 1.0\n",
+              'var pulse_cooldown_multiplier := 1.0\nvar pending_risk_contract := RiskContractScript.SAFE\nvar active_risk_contract := RiskContractScript.SAFE\nvar overload_bonus_pick_pending := false\n',
+              "risk contract state",
+          )
+          s = replace_once(
+              s,
+              '\t\t_show_banner("OMEGA WARDEN", "BOSS SIGNAL ACQUIRED", 2.4)\n',
+              '\t\tvar boss_subtitle := "OVERLOAD // WARDEN THREAT AMPLIFIED" if active_risk_contract == RiskContractScript.OVERLOAD else "BOSS SIGNAL ACQUIRED"\n\t\t_show_banner("OMEGA WARDEN", boss_subtitle, 2.4)\n',
+              "boss overload banner",
+          )
+          s = replace_once(
+              s,
+              '\t\t_show_banner("WAVE %02d" % wave, _wave_subtitle(), 1.8)\n',
+              '\t\tvar wave_subtitle := "OVERLOAD // +2 HOSTILES // +50% SCORE" if active_risk_contract == RiskContractScript.OVERLOAD else _wave_subtitle()\n\t\t_show_banner("WAVE %02d" % wave, wave_subtitle, 1.8)\n',
+              "wave overload banner",
+          )
+          s = replace_once(
+              s,
+              "\t\tvar count := mini(3 + wave, 6)\n",
+              "\t\tvar count := mini(3 + wave, 6) + RiskContractScript.extra_enemies(active_risk_contract)\n",
+              "overload enemy count",
+          )
+          s = replace_once(
+              s,
+              "\trobot.exploded.connect(_on_robot_exploded.bind(robot))\n",
+              '''	if active_risk_contract == RiskContractScript.OVERLOAD:
+          		robot.health = RiskContractScript.scaled_health(robot.health, active_risk_contract)
+          		robot.shot_damage = RiskContractScript.scaled_damage(robot.shot_damage, active_risk_contract)
+          		robot.attack_delay *= RiskContractScript.attack_delay_multiplier(active_risk_contract)
+          		robot.set_meta("risk_contract", active_risk_contract)
+          	robot.exploded.connect(_on_robot_exploded.bind(robot))
+          ''',
+              "overload enemy scaling",
+          )
+          s = replace_once(
+              s,
+              "\tscore += base_points * maxi(wave, 1)\n",
+              "\tscore += RiskContractScript.scaled_score(base_points * maxi(wave, 1), active_risk_contract)\n",
+              "overload score reward",
+          )
+          s = replace_once(
+              s,
+              "\tif hostiles == 0:\n\t\tmission_active = false\n",
+              '''	if hostiles == 0:
+          		var completed_risk_contract := active_risk_contract
+          		active_risk_contract = RiskContractScript.SAFE
+          		if completed_risk_contract == RiskContractScript.OVERLOAD:
+          			MobileMetrics.record("risk_contract_complete", {"contract": completed_risk_contract, "wave": wave, "time_seconds": mission_time})
+          		mission_active = false
+          ''',
+              "contract completion",
+          )
+          s = replace_once(
+              s,
+              "\t\tcard.offset_top = -175\n\t\tcard.offset_bottom = 175\n",
+              "\t\tcard.offset_top = -220\n\t\tcard.offset_bottom = 220\n",
+              "upgrade card height",
+          )
+          s = replace_once(
+              s,
+              'var title := _make_label("PULSE ADAPTATION", 31, Color(0.36, 0.9, 1.0))',
+              'var panel_title := "OVERLOAD BONUS PICK" if overload_bonus_pick_pending else "PULSE ADAPTATION"\n\tvar title := _make_label(panel_title, 31, Color(0.36, 0.9, 1.0))',
+              "upgrade panel title",
+          )
+          s = replace_once(
+              s,
+              '\tif upgrade_panel != null or active_player == null:\n\t\treturn\n\tInput.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)\n',
+              '\tif upgrade_panel != null or active_player == null:\n\t\treturn\n\tif not overload_bonus_pick_pending:\n\t\tpending_risk_contract = RiskContractScript.SAFE\n\tInput.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)\n',
+              "upgrade contract reset",
+          )
+          old_note = '''	var note := _make_label("ACTIVE SYNERGIES: " + RunUpgradesScript.synergy_summary(upgrade_stacks), 15, Color(0.72, 0.80, 0.90))
+          	note.anchor_right = 1.0
+          	note.offset_top = 264
+          	note.offset_bottom = 302
+          	note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	card.add_child(note)
+          '''
+          new_note = '''	var note := _make_label("", 14, Color(0.72, 0.80, 0.90))
+          	note.anchor_right = 1.0
+          	note.offset_top = 350
+          	note.offset_bottom = 395
+          	note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	card.add_child(note)
+          	if overload_bonus_pick_pending:
+          		note.text = "CONTRACT REWARD // CHOOSE ONE MORE ADAPTATION"
+          	else:
+          		var contract_button := Button.new()
+          		contract_button.text = "SAFE CONTRACT\\nSTANDARD THREAT"
+          		contract_button.position = Vector2(190, 238)
+          		contract_button.size = Vector2(480, 92)
+          		contract_button.add_theme_font_size_override("font_size", 16)
+          		contract_button.pressed.connect(_toggle_risk_contract.bind(contract_button, note))
+          		card.add_child(contract_button)
+          		_refresh_risk_contract_ui(contract_button, note)
+          '''
+          s = replace_once(s, old_note, new_note, "risk contract upgrade UI")
+          s = replace_once(
+              s,
+              "\tvar previous_stacks := upgrade_stacks.duplicate(true)\n",
+              "\tvar resolving_bonus_pick := overload_bonus_pick_pending\n\tvar previous_stacks := upgrade_stacks.duplicate(true)\n",
+              "bonus pick resolution",
+          )
+          old_finish = '''	_show_banner(upgrade_name, "ADAPTATION INSTALLED", 1.0)
+          	await get_tree().create_timer(1.05).timeout
+          	mission_active = true
+          	_start_wave()
+          '''
+          new_finish = '''	if pending_risk_contract == RiskContractScript.OVERLOAD and not resolving_bonus_pick:
+          		active_risk_contract = RiskContractScript.OVERLOAD
+          		overload_bonus_pick_pending = true
+          		MobileMetrics.record("risk_contract_selected", {"contract": active_risk_contract, "wave": wave + 1, "time_seconds": mission_time})
+          	_show_banner(upgrade_name, "ADAPTATION INSTALLED", 0.8)
+          	await get_tree().create_timer(0.85).timeout
+          	if overload_bonus_pick_pending and not resolving_bonus_pick:
+          		_show_upgrade_choice()
+          		return
+          	if resolving_bonus_pick:
+          		overload_bonus_pick_pending = false
+          	pending_risk_contract = RiskContractScript.SAFE
+          	mission_active = true
+          	_start_wave()
+          '''
+          s = replace_once(s, old_finish, new_finish, "upgrade completion flow")
+          s += '''
+
+
+          func _toggle_risk_contract(button: Button, note: Label) -> void:
+          	pending_risk_contract = RiskContractScript.OVERLOAD if pending_risk_contract == RiskContractScript.SAFE else RiskContractScript.SAFE
+          	_refresh_risk_contract_ui(button, note)
+          	if OS.has_feature("mobile"):
+          		Input.vibrate_handheld(24)
+
+
+          func _refresh_risk_contract_ui(button: Button, note: Label) -> void:
+          	if pending_risk_contract == RiskContractScript.OVERLOAD:
+          		button.text = "OVERLOAD CONTRACT ARMED\\nBONUS PICK + SCORE FOR A HARDER NEXT WAVE"
+          		button.modulate = Color(1.0, 0.58, 0.38)
+          	else:
+          		button.text = "SAFE CONTRACT\\nSTANDARD THREAT"
+          		button.modulate = Color.WHITE
+          	note.text = RiskContractScript.summary(pending_risk_contract) + "\\nACTIVE SYNERGIES: " + RunUpgradesScript.synergy_summary(upgrade_stacks)
+          '''
+          p.write_text(s)
+          PY
+
+          cat > game/mobile/risk_contract_test.gd <<'PULSEFALL_RISK_TEST'
+          extends Node
+
+          const Contract = preload("res://mobile/risk_contract.gd")
+          var failures := 0
+          var checks := 0
+
+          func check(value: bool, message: String) -> void:
+          	checks += 1
+          	if value:
+          		print("PASS: ", message)
+          	else:
+          		failures += 1
+          		push_error("FAIL: " + message)
+
+          func _ready() -> void:
+          	check(Contract.normalize("unknown") == Contract.SAFE, "unknown contracts fail closed to SAFE")
+          	check(Contract.bonus_upgrade_picks(Contract.SAFE) == 0, "SAFE grants one normal pick only")
+          	check(Contract.bonus_upgrade_picks(Contract.OVERLOAD) == 1, "OVERLOAD grants exactly one bonus pick")
+          	check(Contract.extra_enemies(Contract.SAFE) == 0, "SAFE adds no hostiles")
+          	check(Contract.extra_enemies(Contract.OVERLOAD) == 2, "OVERLOAD adds two hostiles")
+          	check(is_equal_approx(Contract.health_multiplier(Contract.OVERLOAD), 1.25), "OVERLOAD raises hostile health 25 percent")
+          	check(is_equal_approx(Contract.damage_multiplier(Contract.OVERLOAD), 1.20), "OVERLOAD raises hostile damage 20 percent")
+          	check(is_equal_approx(Contract.attack_delay_multiplier(Contract.OVERLOAD), 0.88), "OVERLOAD accelerates attack cadence")
+          	check(is_equal_approx(Contract.score_multiplier(Contract.OVERLOAD), 1.50), "OVERLOAD raises score 50 percent")
+          	check(Contract.scaled_health(5, Contract.OVERLOAD) == 7, "health scaling rounds threat upward")
+          	check(Contract.scaled_damage(11, Contract.OVERLOAD) == 14, "damage scaling rounds threat upward")
+          	check(Contract.scaled_score(190, Contract.OVERLOAD) == 285, "score reward scales deterministically")
+          	check(Contract.scaled_health(5, Contract.SAFE) == 5 and Contract.scaled_damage(11, Contract.SAFE) == 11, "SAFE preserves baseline combat stats")
+          	check(Contract.summary(Contract.OVERLOAD).contains("BONUS PICK"), "OVERLOAD summary discloses its reward")
+          	check(Contract.summary(Contract.OVERLOAD).contains("+25% HP") and Contract.summary(Contract.OVERLOAD).contains("+20% DAMAGE"), "OVERLOAD summary discloses combat risk")
+          	print("RISK CONTRACT CHECKS: ", checks, " FAILURES: ", failures)
+          	get_tree().quit(0 if failures == 0 else 1)
+          PULSEFALL_RISK_TEST
+
+          cat > game/mobile/risk_contract_test.tscn <<'PULSEFALL_RISK_TEST'
+          [gd_scene load_steps=2 format=3]
+          [ext_resource type="Script" path="res://mobile/risk_contract_test.gd" id="1"]
+          [node name="RiskContractTests" type="Node"]
+          script = ExtResource("1")
+          PULSEFALL_RISK_TEST
+
       - name: Add license and build notes
         shell: bash
         run: |
@@ -5210,7 +5464,7 @@ jobs:
           Missing extraction or dying during escape retries from the escape checkpoint.
 
           Target:
-          Android landscape. Mobile controls are built in. TUNE offers LOW (30 FPS / 60% scale), MED (60 FPS / 72%), and HIGH (60 FPS / 85%) graphics targets. Run upgrades now stack into OVERCHARGE, BULWARK, and PHASE HUNTER synergies.
+          Android landscape. Mobile controls are built in. TUNE offers LOW (30 FPS / 60% scale), MED (60 FPS / 72%), and HIGH (60 FPS / 85%) graphics targets. Run upgrades stack into synergies, and optional OVERLOAD contracts trade a harder next wave for a bonus upgrade pick and +50% score.
           EOF
 
       - name: Create Android export preset
@@ -5226,7 +5480,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.apk"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -5254,8 +5508,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=38
-          version/name="0.2.18-mobile-alpha"
+          version/code=39
+          version/name="0.2.19-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
 
@@ -5268,7 +5522,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.aab"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -5296,8 +5550,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=38
-          version/name="0.2.18-mobile-alpha"
+          version/code=39
+          version/name="0.2.19-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -5334,6 +5588,8 @@ jobs:
           GRAPHICS_RC=$?
           timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/run_upgrades_test.tscn > /tmp/run-upgrades-test.log 2>&1
           UPGRADES_RC=$?
+          timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/risk_contract_test.tscn > /tmp/risk-contract-test.log 2>&1
+          RISK_RC=$?
           set -e
           cat /tmp/import.log
           cat /tmp/runtime.log
@@ -5346,7 +5602,8 @@ jobs:
           cat /tmp/gyro-aim-test.log
           cat /tmp/graphics-preset-test.log
           cat /tmp/run-upgrades-test.log
-          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log /tmp/run-upgrades-test.log; then
+          cat /tmp/risk-contract-test.log
+          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log /tmp/run-upgrades-test.log /tmp/risk-contract-test.log; then
             echo "PULSEFALL mobile validation detected a script/runtime failure."
             exit 1
           fi
@@ -5362,8 +5619,8 @@ jobs:
             echo "PULSEFALL mobile validation detected unsupported renderer features."
             exit 1
           fi
-          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ] || [ "$GRAPHICS_RC" -ne 0 ] || [ "$UPGRADES_RC" -ne 0 ]; then
-            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC graphics=$GRAPHICS_RC upgrades=$UPGRADES_RC"
+          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ] || [ "$GRAPHICS_RC" -ne 0 ] || [ "$UPGRADES_RC" -ne 0 ] || [ "$RISK_RC" -ne 0 ]; then
+            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC graphics=$GRAPHICS_RC upgrades=$UPGRADES_RC risk=$RISK_RC"
             exit 1
           fi
 
@@ -5455,14 +5712,14 @@ jobs:
           cat /tmp/aapt-badging.err
           test -n "$BADGING"
           printf '%s\n' "$BADGING"
-          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='38' versionName='0.2.18-mobile-alpha'" <<<"$BADGING"
+          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='39' versionName='0.2.19-mobile-alpha'" <<<"$BADGING"
           grep -Fq "application-label:'PULSEFALL'" <<<"$BADGING"
           mapfile -t ABI_DIRS < <(unzip -Z1 "$APK" | awk -F/ '/^lib\/[^/]+\/.*\.so$/ {print $2}' | sort -u)
           test "${#ABI_DIRS[@]}" -eq 1
           test "${ABI_DIRS[0]}" = "arm64-v8a"
           echo "APK PACKAGE CHECKS: 7 FAILURES: 0"
           echo "PACKAGE: com.pulsefall.blacksite"
-          echo "VERSION: 38 / 0.2.18-mobile-alpha"
+          echo "VERSION: 39 / 0.2.19-mobile-alpha"
           echo "ABI: arm64-v8a"
 
           AAB="artifact/PULSEFALL_MOBILE_ALPHA.aab"
