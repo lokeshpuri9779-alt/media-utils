@@ -289,8 +289,12 @@ def frame(scene, t):
         # Stage the object next to the lead actor, moving in sync with them.
         # This is a simple composited carry cue, not inverse-kinematic gripping.
         lead_x = (slots[0] if actors else cx)
-        ox = lead_x + 95 + carry_shift + lead_sway
-        oy = cy + 70 + int(8 * math.sin(t * 2.0))
+        # Carry the object between the two lowered hands, not beside the
+        # character's torso. For ensemble scenes, match the lead's scale and
+        # its deterministic sway. This remains a 2D staged interaction.
+        lead_scale = (1.0, 0.82, 0.66, 0.53)[len(actors) - 1] if actors else 1.0
+        ox = lead_x + carry_shift + lead_sway
+        oy = cy + int(125 * lead_scale) + int(8 * math.sin(t * 2.0))
     if named_action == "carry":
         # Carry objects should remain visually subordinate to the actor.
         # Scale the visible prop footprint instead of shrinking its entire
