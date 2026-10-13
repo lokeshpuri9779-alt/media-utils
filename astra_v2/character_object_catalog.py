@@ -55,9 +55,41 @@ def draw_character(image,index,t,x=540,y=900):
     for side in (-1,1):
         d.line((x+side*52,y+235,x+side*52+side*step,y+325),fill=base,width=27)
         d.line((x+side*85,y+90,x+side*145,y+125+side*step),fill=base,width=19)
-    # Role identity is represented by an animated badge; distinct roles still
-    # require bespoke costume designs before commercial-quality approval.
-    d.ellipse((x-24,y+120,x+24,y+168),outline=(248,217,136),width=7)
+    # Visible occupation cues rather than the same badge for every role.
+    gold=(248,217,136)
+    if role=="chef":
+        d.rectangle((x-60,y-240,x+60,y-183),fill=(244,241,226))
+        for dx in (-43,0,43):
+            d.ellipse((x+dx-35,y-285,x+dx+35,y-215),fill=(244,241,226))
+    elif role=="pilot":
+        d.polygon(((x-95,y-165),(x+95,y-165),(x+70,y-205),(x-70,y-205)),fill=(45,63,93))
+        d.rectangle((x-65,y-202,x+65,y-184),fill=gold)
+    elif role=="scientist":
+        d.rectangle((x-77,y+85,x-37,y+230),fill=(236,235,225))
+        d.rectangle((x+37,y+85,x+77,y+230),fill=(236,235,225))
+        d.ellipse((x-19,y+118,x+19,y+154),outline=gold,width=6)
+    elif role=="detective":
+        d.polygon(((x-110,y-168),(x+110,y-168),(x+60,y-213),(x-60,y-213)),fill=(86,65,53))
+        d.line((x-100,y-174,x+100,y-174),fill=gold,width=8)
+    elif role=="musician":
+        d.ellipse((x+90,y+100,x+155,y+190),outline=gold,width=10)
+        d.line((x+155,y+100,x+155,y-25),fill=gold,width=8)
+    elif role=="athlete":
+        d.line((x-85,y+105,x+85,y+105),fill=gold,width=13)
+        d.text((x-14,y+130),"1",fill=gold)
+    elif role=="builder":
+        d.arc((x-95,y-260,x+95,y-145),180,360,fill=gold,width=23)
+        d.line((x-110,y-175,x+110,y-175),fill=gold,width=13)
+    elif role=="artist":
+        d.ellipse((x+95,y+100,x+165,y+155),outline=gold,width=9)
+        for dx in (105,130,155):
+            d.ellipse((x+dx,y+125,x+dx+10,y+135),fill=(240,130,140))
+    elif role=="farmer":
+        d.line((x-110,y-185,x+110,y-185),fill=(177,137,76),width=20)
+        d.arc((x-80,y-250,x+80,y-150),180,360,fill=(177,137,76),width=19)
+    else:  # explorer
+        d.rectangle((x-78,y+100,x+78,y+145),outline=gold,width=8)
+        d.ellipse((x-22,y+106,x+22,y+150),outline=gold,width=6)
     return species,role,style
 
 def draw_prop(image,index,t,x=540,y=900):
