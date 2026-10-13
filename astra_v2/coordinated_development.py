@@ -205,6 +205,13 @@ def build_comedy_demo(seed="astra-comedy-pilot"):
     return plan
 
 
+def carry_shoulder_anchor(index, t, x, y, side):
+    """Return the exact shoulder joint of the active catalog renderer."""
+    if getattr(draw_character, "__name__", "") == "draw_character_silhouette":
+        return (x + side * 58, y + int(12 * math.sin(t * 2.5 + index * .031)) + 55)
+    return (x + side * 85, y + int(14 * math.sin(t * 2.2)) + 90)
+
+
 def carry_elbow(shoulder, hand, side, scale=1.0):
     """Two-bone 2D elbow whose forearm endpoint matches the moving prop.
 
@@ -343,13 +350,15 @@ def frame(scene, t):
                     place_x = int(slot + sway + (carry_shift if actor_index == 0 else 0) - new_w / 2)
                     place_y = int(cy + crouch - new_h / 2)
                     if named_action == "carry" and actor_index == 0:
-                        bob = int(14 * math.sin(actor_t * 2.2))
+                        native_shoulders = tuple(carry_shoulder_anchor(
+                            actor["character_id"], actor_t, 540, 1060, side)
+                            for side in (-1, 1))
                         lead_shoulders = tuple((
-                            place_x + (540 + side * 85 - bbox[0]) * scale,
-                            place_y + (1060 + bob + 90 - bbox[1]) * scale,
-                        ) for side in (-1, 1))
-                        n = actor["character_id"] % 10
-                        lead_base = (70 + n * 15, 105 + n * 9, 145 + n * 7)
+                            place_x + (point[0] - bbox[0]) * scale,
+                            place_y + (point[1] - bbox[1]) * scale,
+                        ) for point in native_shoulders)
+                        lead_base = actor_layer.getpixel((
+                            540, min(1919, int(native_shoulders[0][1] + 40))))[:3]
                     actor_layer.alpha_composite(scaled, (place_x, place_y))
             if scale == 1.0:
                 # The solo ensemble actor must receive the same authored
@@ -360,13 +369,14 @@ def frame(scene, t):
                                         (sway + (carry_shift if actor_index == 0 else 0), crouch))
                 actor_layer = shifted
                 if named_action == "carry" and actor_index == 0:
-                    bob = int(14 * math.sin(actor_t * 2.2))
+                    native_shoulders = tuple(carry_shoulder_anchor(
+                        actor["character_id"], actor_t, 540, 1060, side)
+                        for side in (-1, 1))
                     lead_shoulders = tuple((
-                        540 + side * 85 + sway + carry_shift,
-                        1060 + bob + 90 + crouch,
-                    ) for side in (-1, 1))
-                    n = actor["character_id"] % 10
-                    lead_base = (70 + n * 15, 105 + n * 9, 145 + n * 7)
+                        point[0] + sway + carry_shift, point[1] + crouch
+                    ) for point in native_shoulders)
+                    lead_base = actor_layer.getpixel((
+                        540, min(1919, int(native_shoulders[0][1] + 40))))[:3]
             character_layer = Image.alpha_composite(character_layer, actor_layer)
         # Move the prop forward so it does not cover the ensemble.
         ox, oy = 540, 1510
@@ -379,11 +389,11 @@ def frame(scene, t):
                                   "carry_rig" if named_action == "carry" else
                                   named_action if named_action in ("point", "celebrate") else "idle")
         if named_action == "carry":
-            bob = int(14 * math.sin(t * 2.2))
-            lead_shoulders = tuple((cx + carry_shift + side * 85, cy + bob + 90)
-                                   for side in (-1, 1))
-            n = scene["character_id"] % 10
-            lead_base = (70 + n * 15, 105 + n * 9, 145 + n * 7)
+            lead_shoulders = tuple(carry_shoulder_anchor(
+                scene["character_id"], t, cx + carry_shift, cy, side)
+                for side in (-1, 1))
+            lead_base = character_layer.getpixel((
+                cx + carry_shift, min(1919, int(lead_shoulders[0][1] + 40))))[:3]
     if named_action == "carry":
         # Stage the object next to the lead actor, moving in sync with them.
         # This is a simple composited carry cue, not inverse-kinematic gripping.
@@ -433,6 +443,8 @@ def frame(scene, t):
                     shoulder = lead_shoulders[index]
                     hand = (ox + side * pw * 0.46, oy + ph * 0.07)
                     elbow = carry_elbow(shoulder, hand, side, lead_scale)
+                    arm_draw.line((shoulder, elbow, hand),
+                                  fill=(42, 49, 61, 255), width=arm_width + 6, joint="curve")
                     arm_draw.line((shoulder, elbow, hand),
                                   fill=(*lead_base, 255), width=arm_width, joint="curve")
                     arm_draw.ellipse((elbow[0] - arm_width / 2, elbow[1] - arm_width / 2,
