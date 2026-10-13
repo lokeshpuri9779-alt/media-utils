@@ -80,6 +80,22 @@ jobs:
           path: verification-output/
           if-no-files-found: ignore
           retention-days: 7
+      - name: Verify publication media gate rejects silent or undersized video
+        run: |
+          python - <<'PY'
+          import subprocess, tempfile
+          from pathlib import Path
+          from astra_v2.creative import inspect_video, CreativeSkip
+          with tempfile.TemporaryDirectory() as d:
+              p=Path(d)/'silent.mp4'
+              subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-f','lavfi','-i','testsrc2=size=360x640:rate=12','-t','3','-c:v','libx264','-pix_fmt','yuv420p',str(p)],check=True)
+              try:
+                  inspect_video(p)
+              except CreativeSkip as exc:
+                  assert str(exc)=='video_audio_orientation_or_duration_failed', str(exc)
+              else:
+                  raise AssertionError('Silent video passed publication integrity gate')
+          PY
       - name: Record verification boundary
         run: |
           echo 'Regression checks completed. No YouTube credentials are provided to this workflow.'
