@@ -222,8 +222,19 @@ def frame(scene, t):
         scale = (1.0, 0.82, 0.66, 0.53)[count - 1]
         for actor_index, (actor, slot) in enumerate(zip(actors, slots)):
             actor_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
-            sway = int(9 * math.sin(t * 2.0 + slot / 180))
-            draw_character(actor_layer, actor["character_id"], t, 540, 1060)
+            # Distinct, deterministic actor timing: ensemble members do not
+            # all blink/bob in lockstep. The lead moves towards the prop on
+            # approach and points toward it on the authored point cue.
+            phase = actor_index * 0.43 + (actor["character_id"] % 7) * 0.11
+            sway = int(9 * math.sin(t * 2.0 + slot / 180 + phase))
+            actor_t = t + phase
+            if named_action == "approach":
+                sway += int((22 if actor_index == 0 else 8) * approach)
+            elif named_action == "react":
+                sway += int(7 * math.sin(t * 5.2 + phase))
+            elif named_action == "celebrate":
+                sway += int(12 * math.sin(t * 4.0 + phase))
+            draw_character(actor_layer, actor["character_id"], actor_t, 540, 1060)
             if scale != 1.0:
                 # Crop to actual visible artwork before scaling: resizing a
                 # full-screen transparent canvas shrinks the character twice.
