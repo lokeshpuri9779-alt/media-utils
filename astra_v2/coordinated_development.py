@@ -69,6 +69,40 @@ def build_story_plan(seed, subjects):
             "quality_approved":False}
 
 
+
+def build_narrated_plan(seed, narrations):
+    """Resolve an unambiguous explicitly named protagonist from each line.
+
+    Fail closed on absent, conflicting, or unsupported animal names. This is a
+    conservative lexical matcher, not a general semantic language model.
+    """
+    import re
+    from astra_v2.character_object_catalog import SPECIES
+    if not isinstance(narrations, list) or not 1 <= len(narrations) <= 120:
+        raise ValueError("narrations must contain 1..120 nonempty strings")
+    aliases = {"people":"human","person":"human","man":"human","woman":"human",
+               "puppy":"dog","kitten":"cat","bunny":"rabbit","penguins":"penguin",
+               "foxes":"fox","wolves":"wolf","hedgehogs":"hedgehog"}
+    unsupported = {"hedgehog","wolf","wolfhound","squirrel","horse","elephant","shark"}
+    subjects = []
+    for i, narration in enumerate(narrations):
+        if not isinstance(narration, str) or not narration.strip():
+            raise ValueError(f"scene {i+1}: narration is missing")
+        words = set(re.findall(r"[a-z]+", narration.lower()))
+        matches = {aliases.get(word, word) for word in words}
+        known = matches.intersection(SPECIES)
+        missing = matches.intersection(unsupported)
+        if missing:
+            raise ValueError(f"scene {i+1}: unsupported narrated subject(s) {sorted(missing)}")
+        if len(known) != 1:
+            raise ValueError(f"scene {i+1}: expected one identifiable subject, found {sorted(known)}")
+        subjects.append(next(iter(known)))
+    plan = build_story_plan(seed, subjects)
+    for scene, narration in zip(plan["scenes"], narrations):
+        scene["narration"] = narration
+    return plan
+
+
 def verify_story_cast(plan):
     """Reject visual cast mismatches rather than silently substituting."""
     for scene in plan["scenes"]:
