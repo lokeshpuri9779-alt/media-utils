@@ -134,6 +134,11 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=32, excluded_plot_has
         if fingerprint:
             seen_plots.add(fingerprint)
     for key, title, genre, beats in PLOTS:
+        # Reject malformed or weak authored arcs before any expensive render.
+        if len(beats) != 4 or len({b[1].casefold().strip() for b in beats}) != 4:
+            continue
+        if any(len(b) != 4 or len(b[1].split()) < 9 for b in beats):
+            continue
         cid = "rayvan-forge-" + hashlib.sha256(key.encode()).hexdigest()[:16]
         fingerprint = plot_fingerprint(beats)
         if cid in excluded or title.casefold() in titles or fingerprint in seen_plots:
