@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 54,
+  "attempts": 55,
   "confirmed_today": 54,
-  "last_attempt_at": "2026-10-13T15:16:56.044836+00:00",
+  "last_attempt_at": "2026-10-13T15:24:42.066421+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -387,29 +387,39 @@
       "uploaded_at": "2026-10-13T15:16:58.141084+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "2aOjUYIO1mc": {
+      "content_id": "rayvan-forge-3312b1b94a5648f8",
+      "title": "The Beaver's Midnight Bridge",
+      "day": "2026-10-13",
+      "uploaded_at": "2026-10-13T15:24:43.583524+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": ""
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-13T15:19:30.996975+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_preflight_at": "2026-10-13T15:23:54.920704+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T15:21:39.335144+00:00",
-    "early_tests": "failure",
-    "preflight_step": "skipped",
-    "render_due": "",
-    "job_status_before_persist": "failure",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "at": "2026-10-13T15:24:43.814597+00:00",
+    "early_tests": "success",
+    "preflight_step": "success",
+    "render_due": "true",
+    "job_status_before_persist": "success",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-13T07:05:49.939768+00:00",
   "reserved": {
@@ -736,6 +746,13 @@
     "rayvan-forge-d2eefb776ff9e2db": {
       "at": "2026-10-13T15:16:56.044822+00:00",
       "title": "The Koala and the Last Night Train",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-3312b1b94a5648f8": {
+      "at": "2026-10-13T15:24:42.066406+00:00",
+      "title": "The Beaver's Midnight Bridge",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
