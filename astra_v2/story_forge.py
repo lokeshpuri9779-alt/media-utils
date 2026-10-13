@@ -166,6 +166,48 @@ DRAFT_SETBACKS = (
     ("the first tool broke before the job was finished", "a forgotten spare in the workshop"),
 )
 
+# Editorial triage only. Passing does not grant publication approval.
+COMPATIBLE_SETBACKS = {
+    "broken bridge": (0, 2, 3, 4),
+    "missing bell": (1, 3),
+    "flooded garden": (0, 2, 3, 4),
+    "lost compass": (1, 2, 3),
+    "dark lighthouse": (0, 3, 4),
+    "stolen recipe": (1, 3),
+    "silent orchestra": (3, 4),
+    "runaway balloon": (0, 3, 4),
+    "frozen fountain": (2, 3, 4),
+    "vanishing footprints": (1, 2, 3),
+    "collapsed tunnel": (0, 2, 3, 4),
+    "broken telescope": (3, 4),
+    "lost invitation": (1, 3),
+    "stuck windmill": (0, 3, 4),
+    "empty well": (2, 3, 4),
+    "missing lantern": (1, 3),
+    "cracked dam": (0, 3, 4),
+    "lost painting": (1, 3),
+    "stalled ferry": (0, 3, 4),
+    "silent clock": (3, 4),
+}
+
+def editorial_screen():
+    """Collapse actor swaps and incompatible setbacks into a rewrite queue."""
+    selected, rejected, seen = [], [], set()
+    for record in draft_catalog():
+        key, title, genre, beats = record
+        problem = next((p for p in COMPATIBLE_SETBACKS if ("-" + p.replace(" ", "-") + "-") in key), None)
+        setback_text = beats[1][1]
+        setback = next((i for i, pair in enumerate(DRAFT_SETBACKS) if pair[0] in setback_text), None)
+        signature = (problem, setback)
+        if problem is None or setback not in COMPATIBLE_SETBACKS[problem]:
+            rejected.append((key, "causal_mismatch"))
+        elif signature in seen:
+            rejected.append((key, "character_swap_duplicate"))
+        else:
+            seen.add(signature)
+            selected.append(record)
+    return {"rewrite_queue": selected, "rejected": rejected}
+
 def draft_catalog(limit=996):
     """Supply exactly 996 uniquely identified plot *drafts*, not reviewed stories."""
     output = []
