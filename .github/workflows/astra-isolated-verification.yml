@@ -142,6 +142,8 @@ jobs:
               shot['start']=float(i)*2
               shot['end']=float(i+1)*2
               shot['duration']=2.0
+              shot['audio']=[0.0]*int(2*studio.RATE)
+              shot['voice_start']=shot['start']
           frames=[]
           for t in (0.3,2.3):
               frame=studio.render_frame(plan,t,story['genre'],len(plan)*2)
