@@ -46,7 +46,8 @@ def reconcile(youtube, state):
             state["published"][cid] = {"video_id": video_id, "confirmed_at": utcnow().isoformat(),
                                         "uploaded_at": item.get("uploaded_at"),
                                         "format": item.get("format", "short"),
-                                        "title": item.get("title", "")}
+                                        "title": item.get("title", ""),
+                                        "plot_key": item.get("plot_key", "")}
             if item.get("day") == state["day"]:
                 state["confirmed_today"] += 1
             del state["pending"][video_id]
@@ -216,6 +217,7 @@ def run():
                     "content_id": cid, "title": title, "day": state["day"],
                     "uploaded_at": utcnow().isoformat(),
                     "genre": candidate["genre"], "format": candidate["format"],
+                    "plot_key": candidate.get("plot_key", ""),
                 }
                 write_json(STATE_FILE, state)
                 result = youtube.status(video_id)
