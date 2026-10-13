@@ -221,9 +221,15 @@ jobs:
               shot['end'] = 2.0
               shot['duration'] = 2.0
               shot['experimental_cast_enabled'] = True
+          # Compare enabled against disabled at the same timestamp to prove
+          # that the new catalog is actually composited, not just moving text.
           a = studio_renderer.render_frame(plan[:1], 0.3, 'fiction', 2.0)
+          plan[0]['experimental_cast_enabled'] = False
+          baseline = studio_renderer.render_frame(plan[:1], 0.3, 'fiction', 2.0)
+          plan[0]['experimental_cast_enabled'] = True
           b = studio_renderer.render_frame(plan[:1], 1.3, 'fiction', 2.0)
           assert a.size == (1080, 1920)
+          assert ImageChops.difference(a.convert('RGB'), baseline.convert('RGB')).getbbox() is not None, 'Cast layer not visible'
           assert ImageChops.difference(a.convert('RGB'), b.convert('RGB')).getbbox() is not None
           # Publish reduced preview frames for visual review, not to YouTube.
           from pathlib import Path
