@@ -23,7 +23,7 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-24.04
-    timeout-minutes: 28
+    timeout-minutes: 15
     env:
       ASTRA_CHANNEL: rayvan
       ASTRA_MADE_FOR_KIDS: '0' # General-audience originals; explicitly child-directed candidates must override
