@@ -150,6 +150,7 @@ def build_ensemble_plan(seed, scene_casts):
 
 def verify_story_cast(plan):
     """Reject visual cast mismatches rather than silently substituting."""
+    established_cast = {}
     for scene in plan["scenes"]:
         if plan.get("ensemble_enabled") and not scene.get("actors"):
             raise ValueError(f"scene {scene['scene']}: ensemble cast missing")
@@ -158,9 +159,17 @@ def verify_story_cast(plan):
         subject = scene.get("subject")
         if not subject or character(scene["character_id"])[0] != subject:
             raise ValueError(f"scene {scene['scene']}: subject/cast mismatch")
-        for actor in scene.get("actors", []):
+        actors = scene.get("actors", [])
+        if actors and (scene["character_id"] != actors[0]["character_id"] or subject != actors[0]["subject"]):
+            raise ValueError(f"scene {scene['scene']}: primary actor mismatch")
+        if len(actors) != len({actor["subject"] for actor in actors}):
+            raise ValueError(f"scene {scene['scene']}: duplicate ensemble actor")
+        for actor in actors:
             if character(actor["character_id"])[0] != actor["subject"]:
                 raise ValueError(f"scene {scene['scene']}: ensemble actor mismatch")
+            previous = established_cast.setdefault(actor["subject"], actor["character_id"])
+            if previous != actor["character_id"]:
+                raise ValueError(f"scene {scene['scene']}: actor identity changed")
     return True
 
 
