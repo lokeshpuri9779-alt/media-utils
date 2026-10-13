@@ -1,6 +1,6 @@
 """Offline regression tests for story subject/cast alignment."""
 import unittest
-from astra_v2.coordinated_development import build_story_plan, build_narrated_plan, build_ensemble_plan, verify_story_cast
+from astra_v2.coordinated_development import build_story_plan, build_narrated_plan, build_ensemble_plan, verify_story_cast, frame
 from astra_v2.character_object_catalog import character
 
 class StoryCastAlignmentTests(unittest.TestCase):
@@ -61,6 +61,16 @@ class StoryCastAlignmentTests(unittest.TestCase):
         for cast in ([["hedgehog"]], [["fox", "fox"]], [[]], [["fox"] * 5]):
             with self.assertRaises(ValueError):
                 build_ensemble_plan("ensemble-test", cast)
+
+    def test_ensemble_frame_has_multiple_visible_actors(self):
+        from PIL import ImageChops
+        plan = build_ensemble_plan("ensemble-frame-test", [["fox", "dog"]])
+        scene = plan["scenes"][0]
+        both = frame(scene, 0.4)
+        solo = frame({**scene, "actors": [scene["actors"][0]]}, 0.4)
+        self.assertEqual(both.size, (540, 960))
+        self.assertIsNotNone(ImageChops.difference(both, solo).getbbox())
+        self.assertIsNotNone(ImageChops.difference(both, frame(scene, 1.1)).getbbox())
 
     def test_ensemble_tampering_is_rejected(self):
         plan = build_ensemble_plan("ensemble-test", [["fox", "dog"]])
