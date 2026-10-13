@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 46,
+  "attempts": 47,
   "confirmed_today": 46,
-  "last_attempt_at": "2026-10-13T13:45:16.254703+00:00",
+  "last_attempt_at": "2026-10-13T14:10:35.524029+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -331,28 +331,38 @@
       "uploaded_at": "2026-10-13T13:45:17.685001+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "ready",
-  "last_preflight_at": "2026-10-13T14:08:53.345540+00:00",
+  "pending": {
+    "krpoDvcsJf0": {
+      "content_id": "rayvan-forge-f99e6e918bfcfec2",
+      "title": "The Beaver and the Broken Bridge",
+      "day": "2026-10-13",
+      "uploaded_at": "2026-10-13T14:10:37.402424+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-13T14:09:48.125415+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T14:09:25.235303+00:00",
+    "at": "2026-10-13T14:10:37.634118+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
-    "job_status_before_persist": "failure",
+    "job_status_before_persist": "success",
     "dependencies_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "cover_tests": "",
     "motion_tests": "success",
-    "animal_tests": "failure",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-13T07:05:49.939768+00:00",
   "reserved": {
@@ -629,6 +639,12 @@
     "rayvan-forge-30b2d4937897e912": {
       "at": "2026-10-13T13:45:16.254689+00:00",
       "title": "The Squirrel and the Silent Bell",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-forge-f99e6e918bfcfec2": {
+      "at": "2026-10-13T14:10:35.524015+00:00",
+      "title": "The Beaver and the Broken Bridge",
       "format": "short",
       "result": "accepted"
     }
