@@ -1,0 +1,88 @@
+name: ASTRA Parallel Asset Development Audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [astra-isolated-verification-20261013]
+    paths:
+      - 'astra_v2/character_object_catalog.py'
+      - 'astra_v2/asset_development_audit.py'
+      - '.github/workflows/astra-parallel-development.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: astra-parallel-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  catalog-audit:
+    name: Audit ${{ matrix.kind }} ${{ matrix.start }}-${{ matrix.stop }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        include:
+          - {kind: character, start: 0, stop: 1000}
+          - {kind: character, start: 1000, stop: 2000}
+          - {kind: object, start: 0, stop: 1000}
+          - {kind: object, start: 1000, stop: 2000}
+    env:
+      ASTRA_OPENAI_ENABLED: '0'
+      ASTRA_OPENAI_ALLOW_PAID_API: '0'
+      ASTRA_SERIES_PUBLICATION: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check Pillow==11.3.0
+      - name: Render and audit every indexed asset
+        run: |
+          python -m astra_v2.asset_development_audit --kind ${{ matrix.kind }} --start ${{ matrix.start }} --stop ${{ matrix.stop }} --output audit-output
+      - name: Upload audit report and contact sheet
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-${{ matrix.kind }}-${{ matrix.start }}
+          path: audit-output/
+          if-no-files-found: warn
+          retention-days: 7
+
+  aggregate:
+    needs: [catalog-audit]
+    if: always()
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: audit-*
+          path: audits
+          merge-multiple: false
+      - name: Validate complete coverage and summarize
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          reports=[json.loads(p.read_text()) for p in Path('audits').rglob('*-audit.json')]
+          expected={('character',0,1000),('character',1000,2000),('object',0,1000),('object',1000,2000)}
+          seen={(r['kind'],r['start'],r['stop']) for r in reports}
+          assert seen==expected, f'Missing or unexpected reports: {expected-seen}'
+          for r in reports:
+              assert r['tested']==1000
+              assert not r['blank_indices'] and not r['static_indices'] and not r['errors']
+          summary=['## ASTRA offline asset development audit', '',
+                   '4,000 indexed configurations checked in four independent jobs.',
+                   'No credentials, paid generation, YouTube upload or production merge.',
+                   'Passing does NOT mean 4,000 independently designed characters/objects.',
+                   'Artistic quality approval: **PENDING**.', '']
+          for r in sorted(reports,key=lambda x:(x['kind'],x['start'])):
+              summary.append(f"- {r['kind']} {r['start']}–{r['stop']}: {r['unique_frame_fingerprints']} distinct frame fingerprints / 1,000")
+          with open(__import__('os').environ['GITHUB_STEP_SUMMARY'],'a') as f:
+              f.write('\n'.join(summary)+'\n')
+          PY
