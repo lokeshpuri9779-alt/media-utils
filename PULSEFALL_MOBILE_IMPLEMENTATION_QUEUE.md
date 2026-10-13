@@ -70,7 +70,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [ ] Replace wave-only structure with 5–10 minute run.
 - [ ] Entry -> objective -> combat -> upgrade choice -> miniboss/boss -> extraction.
 - [x] Extraction success/failure state, 60-second physical escape, retry checkpoints and duplicate reward protection (20 scripted checks).
-- [ ] Run rewards and risk/reward decisions.
+- [x] Run rewards and risk/reward decisions: optional OVERLOAD contracts trade +2 hostiles, +25% enemy health, +20% damage and faster attacks for one bonus upgrade pick and +50% score.
 - [ ] Persistent meta-progression between runs.
 - [ ] Continue/resume after app backgrounding.
 
@@ -306,3 +306,16 @@ Validated build: commit `47058e85a34cf4c9a0e2e824e1311c557cd2a0e7`; APK SHA256 `
 - [x] Workflow runs `38353822466` and `38353822518` passed 141 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
 
 Validated build: commit `fe070e8d65c09053a6d77f0d921290d7eec40178`; APK SHA256 `f04c5de71107fb2ee8b5a8f561e9e687bcaa79c1d0e7f5b15c56336d751655e1`; 521,157,700 bytes. v0.2.17 remains the known-good rollback. Automated rules prove deterministic unlock/cap behavior, not upgrade fun or balance; player-controlled combat/navigation, complete human extraction, real-device performance/thermal behavior, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
+
+
+## Validated v0.2.19 overload-contract checkpoint (2026-10-13)
+
+- [x] Added an explicit SAFE/OVERLOAD decision to each post-objective upgrade screen.
+- [x] OVERLOAD grants one bonus upgrade pick and +50% encounter score in exchange for two additional hostiles, +25% hostile health, +20% hostile damage and 12% faster attack cadence on the next encounter.
+- [x] Preserved SAFE as the default and fail-closed behavior for unknown contract values.
+- [x] Added contract selection/completion telemetry and visible pre-wave risk disclosure.
+- [x] Added fifteen deterministic contract-rule checks covering reward count, threat scaling, score scaling, rounding, SAFE preservation and UI disclosure.
+- [x] Initial runs stopped before validation on a generated UI indentation anchor; commits `4e5b74edd3337ab423d9a84bd9e90f7b5cf122b8` and `b3b9fdc3ba83f432dfc97f3eb52b6a59ccd64f71` repaired the anchor without weakening validation.
+- [x] Workflow runs `38359255147` and `38359255145` passed 156 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
+
+Validated build: commit `b3b9fdc3ba83f432dfc97f3eb52b6a59ccd64f71`; APK SHA256 `f16e806f6edca2ce926a8040c05264af4f4ccbaa3b8a26561758b0ca934fe4e2`; 521,161,955 bytes. v0.2.18 remains the known-good rollback. Automated rules prove deterministic contract math and flow continuity, not player-perceived balance or fairness; player-controlled combat/navigation, complete human extraction, real-device performance/thermal behavior, a 20–30 minute real-time soak, and benchmark superiority remain unverified.
