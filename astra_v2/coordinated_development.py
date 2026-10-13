@@ -151,6 +151,10 @@ def build_ensemble_plan(seed, scene_casts):
 def verify_story_cast(plan):
     """Reject visual cast mismatches rather than silently substituting."""
     for scene in plan["scenes"]:
+        if plan.get("ensemble_enabled") and not scene.get("actors"):
+            raise ValueError(f"scene {scene['scene']}: ensemble cast missing")
+        if plan.get("story_subjects_verified") and not scene.get("subject"):
+            raise ValueError(f"scene {scene['scene']}: verified story subject missing")
         subject = scene.get("subject")
         if not subject or character(scene["character_id"])[0] != subject:
             raise ValueError(f"scene {scene['scene']}: subject/cast mismatch")
@@ -230,7 +234,11 @@ def frame(scene, t):
     return image.convert("RGB")
 
 def render(plan, output, fps=8, seconds_per_scene=2, video=False):
-    if plan.get("story_subjects_verified"):
+    if not isinstance(plan, dict) or not isinstance(plan.get("scenes"), list):
+        raise ValueError("invalid scene plan")
+    if plan.get("ensemble_enabled") or plan.get("story_subjects_verified") or any(
+        "subject" in scene or "actors" in scene for scene in plan["scenes"]
+    ):
         verify_story_cast(plan)
     if not 2 <= fps <= 24 or not 1 <= seconds_per_scene <= 10:
         raise ValueError("fps or duration outside safe range")
