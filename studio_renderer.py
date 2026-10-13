@@ -961,6 +961,10 @@ def _micro_scene_direction(shot, t, genre):
     x['director_motion'] = motions[(micro_index + offset // 7) % len(motions)]
     if x.get('director_asset') != 'source-document':
         x['director_style'] = styles[(micro_index + offset // 11) % len(styles)]
+    # Preserve one coherent visual language within a narrative beat; switching
+    # styles every second makes the subject appear to change materials.
+    if genre == 'fiction' and x.get('director_asset') != 'source-document':
+        x['director_style'] = styles[(offset // 11) % len(styles)]
     x['micro_scene_index'] = micro_index
     x['micro_scene_phase'] = phase
     return x, {'index': micro_index, 'phase': phase, 'interval': interval}
