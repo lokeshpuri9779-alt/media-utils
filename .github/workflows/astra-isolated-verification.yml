@@ -43,6 +43,24 @@ jobs:
       - name: Verify story-to-character alignment regression tests
         run: |
           python -m unittest astra_v2.test_story_cast_alignment -v
+      - name: Verify full catalog facial expressions without test fixtures
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageChops
+          from astra_v2.character_object_catalog import draw_character
+          import inspect
+          assert 'expression' in inspect.signature(draw_character).parameters
+          for character_id in (0, 200, 400, 900, 1700):
+              rendered = {}
+              for expression in ('neutral', 'surprised', 'happy', 'focused'):
+                  canvas = Image.new('RGBA', (1080, 1920), (0, 0, 0, 0))
+                  draw_character(canvas, character_id, 0.4, 540, 900, expression=expression)
+                  rendered[expression] = canvas.crop((465, 805, 615, 945))
+              for expression in ('surprised', 'happy', 'focused'):
+                  assert ImageChops.difference(
+                      rendered['neutral'], rendered[expression]
+                  ).getbbox() is not None, (character_id, expression)
+          PY
       - name: Run video and animation regression tests
         run: |
           python -m unittest discover -s tests -p 'test_astra_motion_gate.py' -v
