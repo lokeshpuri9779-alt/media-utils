@@ -7,9 +7,9 @@ from PIL import Image, ImageDraw
 
 ROOT=Path("asset_cache/lucide")
 ALIASES={"fox":"dog","otter":"dog","owl":"bird","duck":"bird","firefly":"bug",
-         "mouse":"rat","crab":"fish","ocean":"waves","tree":"trees",
+         "mouse":"rat","crab":"fish","ocean":"water","tree":"trees",
          "museum":"building","whale":"fish","robot":"bot","clock":"clock",
-         "train":"train","moon":"moon","book":"book-open","squirrel":"squirrel"}
+         "train":"tram-front","moon":"moon","book":"book-open","squirrel":"squirrel"}
 def pick_icon(shot):
     from astra_v2.free_icon_cache import NAMES
     text=" ".join(str(shot.get(k) or "") for k in
