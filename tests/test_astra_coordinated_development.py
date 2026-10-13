@@ -24,3 +24,15 @@ def test_frame_and_storyboard(tmp_path):
     assert (tmp_path / "storyboard.png").is_file()
     assert (tmp_path / "plan.json").is_file()
     assert (tmp_path / "report.json").is_file()
+
+
+def test_duplicate_artwork_is_detected_despite_scene_number(tmp_path):
+    import pytest
+    plan = build_plan("same-artwork", 2)
+    plan["scenes"][1]["character_id"] = plan["scenes"][0]["character_id"]
+    plan["scenes"][1]["object_id"] = plan["scenes"][0]["object_id"]
+    with pytest.raises(RuntimeError, match="duplicate_openings"):
+        render(plan, tmp_path, fps=4, video=False)
+    import json
+    report = json.loads((tmp_path / "report.json").read_text())
+    assert report["visually_duplicate_scene_openings"] == [2]
