@@ -6535,7 +6535,7 @@ jobs:
           	checks += 1
           	if not condition:
           		failures += 1
-          	push_error(message)
+          		push_error(message)
 
 
           func _ready() -> void:
@@ -6581,6 +6581,8 @@ jobs:
           	var slow_reward := profile.complete_run(0, 700.0)
           	check(slow_reward == 100, "slow extraction omits the pace bonus")
           	check(profile.best_score == 12000, "weaker runs cannot reduce best score")
+          	profile.free()
+          	check(not is_instance_valid(profile), "standalone profile is freed before shutdown")
           	print("META PROGRESSION CHECKS: ", checks, " FAILURES: ", failures)
           	get_tree().quit(0 if failures == 0 else 1)
           PULSEFALL_META_TEST
@@ -6664,8 +6666,15 @@ jobs:
           	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
           	if file == null:
           		return {}
-          	var parsed = JSON.parse_string(file.get_as_text())
-          	var state := sanitize_state(parsed)
+          	var encoded := file.get_as_text()
+          	file.close()
+          	# Instance parsing returns an error code for corrupt saves without
+          	# emitting an engine error. Unexpected engine errors stay fatal in CI.
+          	var parser := JSON.new()
+          	if parser.parse(encoded) != OK:
+          		clear_checkpoint()
+          		return {}
+          	var state := sanitize_state(parser.data)
           	if state.is_empty() or is_expired(state, int(Time.get_unix_time_from_system())):
           		clear_checkpoint()
           		return {}
@@ -6883,6 +6892,13 @@ jobs:
           	corrupt.store_string("{broken")
           	corrupt = null
           	check(RunCheckpoint.load_checkpoint().is_empty(), "corrupt checkpoint fails closed")
+          	check(not FileAccess.file_exists(RunCheckpoint.SAVE_PATH), "malformed checkpoint is removed")
+          	check(RunCheckpoint.load_checkpoint().is_empty(), "retry after corrupt checkpoint stays empty")
+          	corrupt = FileAccess.open(RunCheckpoint.SAVE_PATH, FileAccess.WRITE)
+          	corrupt.store_string("[]")
+          	corrupt = null
+          	check(RunCheckpoint.load_checkpoint().is_empty(), "valid non-object JSON fails closed")
+          	check(not FileAccess.file_exists(RunCheckpoint.SAVE_PATH), "invalid JSON shape is removed")
           	RunCheckpoint.clear_checkpoint()
           	check(not RunCheckpoint.save_checkpoint({"phase": "invalid"}), "invalid checkpoint cannot overwrite state")
           	print("RUN CHECKPOINT CHECKS: ", checks, " FAILURES: ", failures)
@@ -7656,8 +7672,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=48
-          version/name="0.2.28-mobile-alpha"
+          version/code=49
+          version/name="0.2.29-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
 
@@ -7698,8 +7714,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=48
-          version/name="0.2.28-mobile-alpha"
+          version/code=49
+          version/name="0.2.29-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -7708,6 +7724,7 @@ jobs:
         shell: bash
         run: |
           set -euxo pipefail
+          python3 control/scripts/test_pulsefall_validate_logs.py -v
           GODOT_URL="https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_linux.x86_64.zip"
           wget -q "$GODOT_URL" -O /tmp/godot.zip
           unzip -q /tmp/godot.zip -d /tmp/godot
@@ -7778,6 +7795,7 @@ jobs:
           cat /tmp/elite-rules-test.log
           cat /tmp/telegraph-rules-test.log
           cat /tmp/run-flow-rules-test.log
+          python3 control/scripts/pulsefall_validate_logs.py /tmp
           if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log /tmp/run-upgrades-test.log /tmp/risk-contract-test.log /tmp/enemy-archetypes-test.log /tmp/miniboss-rules-test.log /tmp/boss-rules-test.log /tmp/weapon-rules-test.log /tmp/meta-progression-test.log /tmp/run-checkpoint-test.log /tmp/elite-rules-test.log /tmp/telegraph-rules-test.log /tmp/run-flow-rules-test.log; then
             echo "PULSEFALL mobile validation detected a script/runtime failure."
             exit 1
@@ -7887,14 +7905,14 @@ jobs:
           cat /tmp/aapt-badging.err
           test -n "$BADGING"
           printf '%s\n' "$BADGING"
-          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='48' versionName='0.2.28-mobile-alpha'" <<<"$BADGING"
+          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='49' versionName='0.2.29-mobile-alpha'" <<<"$BADGING"
           grep -Fq "application-label:'PULSEFALL'" <<<"$BADGING"
           mapfile -t ABI_DIRS < <(unzip -Z1 "$APK" | awk -F/ '/^lib\/[^/]+\/.*\.so$/ {print $2}' | sort -u)
           test "${#ABI_DIRS[@]}" -eq 1
           test "${ABI_DIRS[0]}" = "arm64-v8a"
           echo "APK PACKAGE CHECKS: 7 FAILURES: 0"
           echo "PACKAGE: com.pulsefall.blacksite"
-          echo "VERSION: 48 / 0.2.28-mobile-alpha"
+          echo "VERSION: 49 / 0.2.29-mobile-alpha"
           echo "ABI: arm64-v8a"
 
           AAB="artifact/PULSEFALL_MOBILE_ALPHA.aab"
@@ -7931,4 +7949,3 @@ jobs:
             artifact/THIRD_PARTY_NOTICES.txt
           if-no-files-found: error
           retention-days: 7
-
