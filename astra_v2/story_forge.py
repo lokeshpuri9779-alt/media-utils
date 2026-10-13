@@ -196,8 +196,8 @@ def editorial_screen():
     for record in draft_catalog():
         key, title, genre, beats = record
         problem = next((p for p in COMPATIBLE_SETBACKS if ("-" + p.replace(" ", "-") + "-") in key), None)
-        setback_text = beats[1][1]
-        setback = next((i for i, pair in enumerate(DRAFT_SETBACKS) if pair[0] in setback_text), None)
+        # Drafts are emitted in fixed five-arc order per actor/problem.
+        setback = int(key.rsplit("-", 1)[1]) % len(DRAFT_SETBACKS)
         signature = (problem, setback)
         if problem is None or setback not in COMPATIBLE_SETBACKS[problem]:
             rejected.append((key, "causal_mismatch"))
