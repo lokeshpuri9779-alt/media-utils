@@ -8,6 +8,14 @@ import re
 from PIL import ImageDraw
 
 SUBJECTS = (
+    ("fox", r"\bfox\b|\bfoxes\b"),
+    ("owl", r"\bowl\b|\bowls\b"),
+    ("duck", r"\bduck\b|\bgoose\b|\bgeese\b"),
+    ("squirrel", r"\bsquirrel\b|\bchipmunk\b"),
+    ("mouse", r"\bmouse\b|\bmice\b|\bmole\b"),
+    ("otter", r"\botter\b|\bbeaver\b"),
+    ("crab", r"\bcrab\b"),
+    ("firefly", r"\bfirefl\w*\b"),
     ("cat", r"\bcat\b|\bfeline\b|\bkitten\b"),
     ("dog", r"\bdog\b|\bpuppy\b|\bhound\b"),
     ("monkey", r"\bmonkey\b|\bape\b|\bbaboon\b"),
