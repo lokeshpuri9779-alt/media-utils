@@ -6896,6 +6896,209 @@ jobs:
           script = ExtResource("1")
           PULSEFALL_CHECKPOINT_SCENE
 
+      - name: Add readable tactical elite variants
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          cat > game/mobile/elite_rules.gd <<'PULSEFALL_ELITES'
+          class_name EliteRules
+          extends RefCounted
+
+          const NONE := "none"
+          const BULWARK := "bulwark"
+          const PHASE_STALKER := "phase_stalker"
+          const VOLT_ARTILLERY := "volt_artillery"
+          const VARIANTS := [BULWARK, PHASE_STALKER, VOLT_ARTILLERY]
+
+          static func normalize(variant: String) -> String:
+          	return variant if VARIANTS.has(variant) else NONE
+
+          static func should_promote(wave: int, spawn_index: int) -> bool:
+          	return wave >= 2 and wave <= 4 and spawn_index == (wave + 1) % 3
+
+          static func variant_for_spawn(wave: int, spawn_index: int) -> String:
+          	if not should_promote(wave, spawn_index):
+          		return NONE
+          	return VARIANTS[(wave + spawn_index) % VARIANTS.size()]
+
+          static func profile(variant: String) -> Dictionary:
+          	match normalize(variant):
+          		BULWARK:
+          			return {"title": "AEGIS BULWARK", "counter": "FLANK GREEN ARMOR // SUSTAINED FIRE", "health": 1.80, "damage": 0.88, "delay": 1.18, "animation": 0.82, "scale": 1.24, "score": 1.75, "color": Color(0.25, 1.0, 0.42)}
+          		PHASE_STALKER:
+          			return {"title": "PHASE STALKER", "counter": "TRACK MAGENTA // BREAK ITS RUSH", "health": 0.90, "damage": 1.18, "delay": 0.72, "animation": 1.32, "scale": 0.96, "score": 1.55, "color": Color(1.0, 0.20, 0.82)}
+          		VOLT_ARTILLERY:
+          			return {"title": "VOLT ARTILLERY", "counter": "DODGE BLUE CHARGE // CLOSE DISTANCE", "health": 1.20, "damage": 1.48, "delay": 1.28, "animation": 0.92, "scale": 1.12, "score": 1.65, "color": Color(0.18, 0.58, 1.0)}
+          		_:
+          			return {"title": "", "counter": "", "health": 1.0, "damage": 1.0, "delay": 1.0, "animation": 1.0, "scale": 1.0, "score": 1.0, "color": Color.WHITE}
+
+          static func score_for_variant(base_score: int, variant: String) -> int:
+          	return maxi(base_score, 0) if normalize(variant) == NONE else roundi(float(maxi(base_score, 0)) * float(profile(variant).score))
+
+          static func title(variant: String) -> String:
+          	return str(profile(variant).title)
+
+          static func counter_hint(variant: String) -> String:
+          	return str(profile(variant).counter)
+
+          static func color_for_variant(variant: String) -> Color:
+          	return profile(variant).color
+          PULSEFALL_ELITES
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(source, old, new, label):
+              count = source.count(old)
+              if count != 1:
+                  raise SystemExit(f"Expected one {label} anchor, found {count}")
+              return source.replace(old, new, 1)
+
+          level_path = Path("game/level/level.gd")
+          level = level_path.read_text()
+          level = replace_once(
+              level,
+              'const BossRulesScript = preload("res://mobile/boss_rules.gd")\n',
+              'const BossRulesScript = preload("res://mobile/boss_rules.gd")\nconst EliteRulesScript = preload("res://mobile/elite_rules.gd")\n',
+              "elite level preload",
+          )
+          spawn_start = level.find("func _spawn_robot_at")
+          risk_anchor = level.find("\tif active_risk_contract == RiskContractScript.OVERLOAD:", spawn_start)
+          if spawn_start < 0 or risk_anchor < 0:
+              raise SystemExit("Elite spawn insertion anchors missing")
+          elite_spawn = '''	var elite_variant := EliteRulesScript.variant_for_spawn(wave, spawn_index)
+          	if not elite and not miniboss and elite_variant != EliteRulesScript.NONE:
+          		var elite_profile := EliteRulesScript.profile(elite_variant)
+          		robot.set_meta("elite_variant", elite_variant)
+          		robot.health = maxi(1, ceili(float(robot.health) * float(elite_profile.health)))
+          		robot.shot_damage = maxi(1, ceili(float(robot.shot_damage) * float(elite_profile.damage)))
+          		robot.attack_delay *= float(elite_profile.delay)
+          		robot.animation_speed *= float(elite_profile.animation)
+          		robot.scale *= float(elite_profile.scale)
+          		MobileMetrics.record("elite_spawned", {"variant": elite_variant, "wave": wave, "time_seconds": mission_time})
+          		_show_banner(EliteRulesScript.title(elite_variant), EliteRulesScript.counter_hint(elite_variant), 1.1)
+          '''
+          level = level[:risk_anchor] + elite_spawn + level[risk_anchor:]
+          exploded_start = level.find("func _on_robot_exploded")
+          score_anchor = level.find("\tscore += RiskContractScript.scaled_score", exploded_start)
+          if exploded_start < 0 or score_anchor < 0:
+              raise SystemExit("Elite reward insertion anchors missing")
+          elite_reward = '''	var elite_variant := str(robot.get_meta("elite_variant", EliteRulesScript.NONE))
+          	if elite_variant != EliteRulesScript.NONE:
+          		base_points = EliteRulesScript.score_for_variant(base_points, elite_variant)
+          		MobileMetrics.record("elite_defeated", {"variant": elite_variant, "wave": wave, "time_seconds": mission_time, "base_points": base_points})
+          '''
+          level = level[:score_anchor] + elite_reward + level[score_anchor:]
+          level_path.write_text(level)
+
+          robot_path = Path("game/enemies/red_robot/red_robot.gd")
+          robot = robot_path.read_text()
+          robot = replace_once(
+              robot,
+              'const BossRulesScript = preload("res://mobile/boss_rules.gd")\n',
+              'const BossRulesScript = preload("res://mobile/boss_rules.gd")\nconst EliteRulesScript = preload("res://mobile/elite_rules.gd")\n',
+              "elite enemy preload",
+          )
+          robot = replace_once(
+              robot,
+              "\t_add_role_beacon()\n",
+              "\t_add_role_beacon()\n\t_add_elite_beacon()\n",
+              "elite visual initialization",
+          )
+          robot += '''
+
+
+          func _add_elite_beacon() -> void:
+          	var elite_variant := str(get_meta("elite_variant", EliteRulesScript.NONE))
+          	if elite_variant == EliteRulesScript.NONE:
+          		return
+          	var beacon := MeshInstance3D.new()
+          	beacon.name = "EliteBeacon"
+          	beacon.position = Vector3(0.0, 2.78, 0.0)
+          	var mesh := SphereMesh.new()
+          	mesh.radius = 0.30
+          	mesh.height = 0.60
+          	beacon.mesh = mesh
+          	var material := StandardMaterial3D.new()
+          	var elite_color := EliteRulesScript.color_for_variant(elite_variant)
+          	material.albedo_color = elite_color
+          	material.emission_enabled = true
+          	material.emission = elite_color
+          	material.emission_energy_multiplier = 4.5
+          	beacon.material_override = material
+          	add_child(beacon)
+          '''
+          robot_path.write_text(robot)
+          PY
+
+          cat > game/mobile/elite_rules_test.gd <<'PULSEFALL_ELITE_TEST'
+          extends Node
+
+          const Rules = preload("res://mobile/elite_rules.gd")
+          var checks := 0
+          var failures := 0
+
+          func check(value: bool, message: String) -> void:
+          	checks += 1
+          	if value:
+          		print("PASS: ", message)
+          	else:
+          		failures += 1
+          		push_error("FAIL: " + message)
+
+          func _ready() -> void:
+          	check(Rules.VARIANTS.size() == 3, "three elite variants are registered")
+          	check(Rules.normalize("unknown") == Rules.NONE, "unknown elite variant fails closed")
+          	check(not Rules.should_promote(1, 0), "opening wave remains elite-free")
+          	check(Rules.should_promote(2, 0), "wave two promotes one deterministic elite")
+          	check(Rules.should_promote(3, 1), "wave three promotes one deterministic elite")
+          	check(Rules.should_promote(4, 2), "wave four promotes one deterministic elite")
+          	check(not Rules.should_promote(5, 0), "final boss wave does not add an elite variant")
+          	check(Rules.variant_for_spawn(2, 0) != Rules.NONE, "eligible spawn resolves an elite variant")
+          	check(Rules.variant_for_spawn(2, 1) == Rules.NONE, "ineligible spawn remains standard")
+          	var seen := {}
+          	for wave in range(2, 5):
+          		for spawn_index in range(3):
+          			var variant := Rules.variant_for_spawn(wave, spawn_index)
+          			if variant != Rules.NONE:
+          				seen[variant] = true
+          	check(seen.size() == 3, "one run exposes all three elite variants")
+          	var bulwark := Rules.profile(Rules.BULWARK)
+          	var stalker := Rules.profile(Rules.PHASE_STALKER)
+          	var artillery := Rules.profile(Rules.VOLT_ARTILLERY)
+          	check(float(bulwark.health) > 1.5, "Bulwark has a meaningful durability identity")
+          	check(float(bulwark.animation) < 1.0, "Bulwark pressure is deliberately readable")
+          	check(float(stalker.delay) < 0.8, "Phase Stalker attacks materially faster")
+          	check(float(stalker.animation) > 1.2, "Phase Stalker movement is visibly faster")
+          	check(float(artillery.damage) > 1.4, "Volt Artillery delivers high-threat shots")
+          	check(float(artillery.delay) > 1.0, "Volt Artillery exposes a longer charge window")
+          	check(Rules.title(Rules.BULWARK).contains("BULWARK"), "Bulwark title identifies the threat")
+          	check(Rules.title(Rules.PHASE_STALKER).contains("STALKER"), "Stalker title identifies the threat")
+          	check(Rules.title(Rules.VOLT_ARTILLERY).contains("ARTILLERY"), "Artillery title identifies the threat")
+          	check(Rules.counter_hint(Rules.BULWARK).contains("GREEN"), "Bulwark counter matches its green signal")
+          	check(Rules.counter_hint(Rules.PHASE_STALKER).contains("MAGENTA"), "Stalker counter matches its magenta signal")
+          	check(Rules.counter_hint(Rules.VOLT_ARTILLERY).contains("BLUE"), "Artillery counter matches its blue signal")
+          	var colors := {}
+          	for variant in Rules.VARIANTS:
+          		colors[Rules.color_for_variant(variant).to_html()] = true
+          	check(colors.size() == 3, "elite variants have distinct signal colors")
+          	check(Rules.score_for_variant(100, Rules.BULWARK) == 175, "Bulwark risk earns a 75 percent score bonus")
+          	check(Rules.score_for_variant(100, Rules.PHASE_STALKER) == 155, "Stalker risk earns a 55 percent score bonus")
+          	check(Rules.score_for_variant(100, Rules.VOLT_ARTILLERY) == 165, "Artillery risk earns a 65 percent score bonus")
+          	check(Rules.score_for_variant(100, Rules.NONE) == 100, "standard enemies retain baseline score")
+          	check(Rules.score_for_variant(-50, Rules.BULWARK) == 0, "elite score floors invalid negative values")
+          	print("ELITE VARIANT CHECKS: ", checks, " FAILURES: ", failures)
+          	get_tree().quit(0 if failures == 0 else 1)
+          PULSEFALL_ELITE_TEST
+
+          cat > game/mobile/elite_rules_test.tscn <<'PULSEFALL_ELITE_TEST'
+          [gd_scene load_steps=2 format=3]
+          [ext_resource type="Script" path="res://mobile/elite_rules_test.gd" id="1"]
+          [node name="EliteRuleTests" type="Node"]
+          script = ExtResource("1")
+          PULSEFALL_ELITE_TEST
+
       - name: Add license and build notes
         shell: bash
         run: |
@@ -6934,7 +7137,7 @@ jobs:
           Missing extraction or dying during escape retries from the escape checkpoint.
 
           Target:
-          Android landscape. Mobile controls are built in. TUNE offers LOW (30 FPS / 60% scale), MED (60 FPS / 72%), and HIGH (60 FPS / 85%) graphics targets. Run upgrades stack into synergies, optional OVERLOAD contracts add risk/reward, and four color-signaled enemy archetypes use distinct behaviors. Wave three culminates in a three-phase Sentinel miniboss; the final OMEGA WARDEN now has three rule-driven phases, bounded reinforcement deployments and explicit mobile counter prompts.
+          Android landscape. Mobile controls are built in. TUNE offers LOW (30 FPS / 60% scale), MED (60 FPS / 72%), and HIGH (60 FPS / 85%) graphics targets. Run upgrades stack into synergies, optional OVERLOAD contracts add risk/reward, and four color-signaled enemy archetypes use distinct behaviors, while three readable elite variants add distinct durability, speed and artillery counters. Wave three culminates in a three-phase Sentinel miniboss; the final OMEGA WARDEN now has three rule-driven phases, bounded reinforcement deployments and explicit mobile counter prompts.
           EOF
 
       - name: Create Android export preset
@@ -6950,7 +7153,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn,mobile/meta_progression_test.gd,mobile/meta_progression_test.tscn,mobile/run_checkpoint_test.gd,mobile/run_checkpoint_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn,mobile/meta_progression_test.gd,mobile/meta_progression_test.tscn,mobile/run_checkpoint_test.gd,mobile/run_checkpoint_test.tscn,mobile/elite_rules_test.gd,mobile/elite_rules_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.apk"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -6978,8 +7181,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=45
-          version/name="0.2.25-mobile-alpha"
+          version/code=46
+          version/name="0.2.26-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
 
@@ -6992,7 +7195,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn,mobile/meta_progression_test.gd,mobile/meta_progression_test.tscn,mobile/run_checkpoint_test.gd,mobile/run_checkpoint_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn,mobile/meta_progression_test.gd,mobile/meta_progression_test.tscn,mobile/run_checkpoint_test.gd,mobile/run_checkpoint_test.tscn,mobile/elite_rules_test.gd,mobile/elite_rules_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.aab"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -7020,8 +7223,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=45
-          version/name="0.2.25-mobile-alpha"
+          version/code=46
+          version/name="0.2.26-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -7072,6 +7275,8 @@ jobs:
           META_RC=$?
           timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/run_checkpoint_test.tscn > /tmp/run-checkpoint-test.log 2>&1
           CHECKPOINT_RC=$?
+          timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/elite_rules_test.tscn > /tmp/elite-rules-test.log 2>&1
+          ELITE_RC=$?
           set -e
           cat /tmp/import.log
           cat /tmp/runtime.log
@@ -7091,7 +7296,8 @@ jobs:
           cat /tmp/weapon-rules-test.log
           cat /tmp/meta-progression-test.log
           cat /tmp/run-checkpoint-test.log
-          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log /tmp/run-upgrades-test.log /tmp/risk-contract-test.log /tmp/enemy-archetypes-test.log /tmp/miniboss-rules-test.log /tmp/boss-rules-test.log /tmp/weapon-rules-test.log /tmp/meta-progression-test.log /tmp/run-checkpoint-test.log; then
+          cat /tmp/elite-rules-test.log
+          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log /tmp/run-upgrades-test.log /tmp/risk-contract-test.log /tmp/enemy-archetypes-test.log /tmp/miniboss-rules-test.log /tmp/boss-rules-test.log /tmp/weapon-rules-test.log /tmp/meta-progression-test.log /tmp/run-checkpoint-test.log /tmp/elite-rules-test.log; then
             echo "PULSEFALL mobile validation detected a script/runtime failure."
             exit 1
           fi
@@ -7107,8 +7313,8 @@ jobs:
             echo "PULSEFALL mobile validation detected unsupported renderer features."
             exit 1
           fi
-          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ] || [ "$GRAPHICS_RC" -ne 0 ] || [ "$UPGRADES_RC" -ne 0 ] || [ "$RISK_RC" -ne 0 ] || [ "$ARCHETYPES_RC" -ne 0 ] || [ "$MINIBOSS_RC" -ne 0 ] || [ "$BOSS_RC" -ne 0 ] || [ "$WEAPON_RC" -ne 0 ] || [ "$META_RC" -ne 0 ] || [ "$CHECKPOINT_RC" -ne 0 ]; then
-            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC graphics=$GRAPHICS_RC upgrades=$UPGRADES_RC risk=$RISK_RC archetypes=$ARCHETYPES_RC miniboss=$MINIBOSS_RC boss=$BOSS_RC weapons=$WEAPON_RC meta=$META_RC checkpoint=$CHECKPOINT_RC"
+          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ] || [ "$GRAPHICS_RC" -ne 0 ] || [ "$UPGRADES_RC" -ne 0 ] || [ "$RISK_RC" -ne 0 ] || [ "$ARCHETYPES_RC" -ne 0 ] || [ "$MINIBOSS_RC" -ne 0 ] || [ "$BOSS_RC" -ne 0 ] || [ "$WEAPON_RC" -ne 0 ] || [ "$META_RC" -ne 0 ] || [ "$CHECKPOINT_RC" -ne 0 ] || [ "$ELITE_RC" -ne 0 ]; then
+            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC graphics=$GRAPHICS_RC upgrades=$UPGRADES_RC risk=$RISK_RC archetypes=$ARCHETYPES_RC miniboss=$MINIBOSS_RC boss=$BOSS_RC weapons=$WEAPON_RC meta=$META_RC checkpoint=$CHECKPOINT_RC elite=$ELITE_RC"
             exit 1
           fi
 
@@ -7200,14 +7406,14 @@ jobs:
           cat /tmp/aapt-badging.err
           test -n "$BADGING"
           printf '%s\n' "$BADGING"
-          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='45' versionName='0.2.25-mobile-alpha'" <<<"$BADGING"
+          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='46' versionName='0.2.26-mobile-alpha'" <<<"$BADGING"
           grep -Fq "application-label:'PULSEFALL'" <<<"$BADGING"
           mapfile -t ABI_DIRS < <(unzip -Z1 "$APK" | awk -F/ '/^lib\/[^/]+\/.*\.so$/ {print $2}' | sort -u)
           test "${#ABI_DIRS[@]}" -eq 1
           test "${ABI_DIRS[0]}" = "arm64-v8a"
           echo "APK PACKAGE CHECKS: 7 FAILURES: 0"
           echo "PACKAGE: com.pulsefall.blacksite"
-          echo "VERSION: 43 / 0.2.25-mobile-alpha"
+          echo "VERSION: 43 / 0.2.26-mobile-alpha"
           echo "ABI: arm64-v8a"
 
           AAB="artifact/PULSEFALL_MOBILE_ALPHA.aab"
