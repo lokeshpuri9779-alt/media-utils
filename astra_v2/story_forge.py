@@ -109,6 +109,27 @@ PLOTS = [
       ("THE WHEELBARROW MOVED", "A sleepy tortoise rolled out from beneath a wheelbarrow with the pie balanced on top.", "forest", "SURPRISE"),
       ("THE JUDGES LAUGHED", "The pie arrived just in time, and the tortoise earned a prize for careful delivery.", "door", "FIRST PRIZE")]),
 
+    ("koala-night-train", "The Koala and the Last Night Train", "animal adventure",
+     [("THE TRAIN LEFT EARLY", "A koala arrived at the station and saw the last train rolling away with his medicine parcel.", "clock", "TOO LATE"),
+      ("THE TUNNEL WAS CLOSED", "He raced down a shortcut but found the old tunnel blocked by fallen rocks.", "door", "NO WAY THROUGH"),
+      ("THE SIGNAL MIRROR", "He climbed the signal tower and flashed his pocket mirror toward the conductor.", "signal", "LOOK HERE"),
+      ("THE TRAIN RETURNED", "The conductor stopped at the next platform and brought the parcel back before sunrise.", "ship", "JUST IN TIME")]),
+    ("rabbit-lantern-swap", "The Rabbit and the Borrowed Lantern", "animal mystery",
+     [("EVERY LANTERN WENT BLUE", "A rabbit hung festival lanterns, but every flame glowed blue when the music began.", "forest", "BLUE LIGHT"),
+      ("THE PAINT WAS NORMAL", "She checked the glass and the candles, yet nothing explained the strange color.", "door", "NO CLUE"),
+      ("THE BLUE PAPER SHADOW", "She discovered a blue paper banner reflecting its color onto every white lantern.", "book", "THERE IT IS"),
+      ("A RAINBOW FESTIVAL", "The villagers hung banners in different colors and made the brightest festival yet.", "forest", "RAINBOW NIGHT")]),
+    ("fox-floating-market", "The Fox and the Floating Market", "animal adventure",
+     [("THE MARKET FLOATED AWAY", "A fox woke to find the river market drifting downstream after its mooring snapped.", "ship", "DRIFTING AWAY"),
+      ("THE ROPE WAS TOO SHORT", "She tried to pull the market home, but her longest rope could not reach the dock.", "ship", "NOT ENOUGH"),
+      ("A CHAIN OF BOATS", "She asked the fishermen to connect their boats and pass a new rope across the current.", "ship", "WORK TOGETHER"),
+      ("BREAKFAST ON THE RIVER", "The floating market returned safely and opened with hot breakfast for its rescuers.", "door", "MARKET OPEN")]),
+    ("mole-singing-pipes", "The Mole and the Singing Pipes", "animal mystery",
+     [("THE FLOOR BEGAN TO SING", "A mole heard musical notes rising through the bakery floor every morning.", "door", "WHO IS SINGING"),
+      ("THE OVEN WAS SILENT", "He checked the oven and the cellar, but the mysterious tune kept changing.", "door", "STILL SINGING"),
+      ("WIND IN THE WATER PIPES", "He traced the melody to a loose pipe cap that whistled whenever the wind blew.", "forest", "MYSTERY SOLVED"),
+      ("A NEW BAKERY SONG", "The baker tuned the pipe caps and greeted customers with a different song each day.", "door", "SING ALONG")]),
+
 ]
 
 def plot_fingerprint(beats):
