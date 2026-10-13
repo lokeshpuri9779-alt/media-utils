@@ -30,16 +30,27 @@ def artifacts():
     if not repo or "/" not in repo:
         return []
     matched = []
-    for page in range(1, 11):
+    seen = set()
+    # GitHub's artifact listing is paginated. Keep a bounded scan, but
+    # prioritize fresh renders even if older artifacts dominate the listing.
+    for page in range(1, 31):
         data = _api(f"repos/{repo}/actions/artifacts?per_page=100&page={page}")
         batch = data.get("artifacts") or []
-        matched.extend(x for x in batch
-                       if isinstance(x, dict)
-                       and str(x.get("name") or "").startswith(PREFIX)
-                       and not x.get("expired", True)
-                       and (x.get("workflow_run") or {}).get("head_branch") == "main")
+        for item in batch:
+            if not isinstance(item, dict):
+                continue
+            if (not str(item.get("name") or "").startswith(PREFIX)
+                    or item.get("expired", True)
+                    or (item.get("workflow_run") or {}).get("head_branch") != "main"):
+                continue
+            key = item.get("id")
+            if key in seen:
+                continue
+            seen.add(key)
+            matched.append(item)
         if len(batch) < 100:
             break
+    matched.sort(key=_artifact_created_timestamp, reverse=True)
     print("ASTRA_ARTIFACT_DISCOVERY=" + json.dumps({"approved_artifacts": len(matched), "pages_scanned": page}))
     return matched
 
