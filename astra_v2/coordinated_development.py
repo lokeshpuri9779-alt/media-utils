@@ -223,6 +223,7 @@ def frame(scene, t):
     oy = 1180 + int(15 * math.sin(t * 2.1 + 1.0))
     actors = scene.get("actors")
     carry_shift = int(28 * math.sin(t * 2.0)) if named_action == "carry" else 0
+    lead_sway = 0
     if actors:
         # Keep every actor on the same stage, with stable left-to-right slots.
         # Render each actor onto its own transparent layer before compositing.
@@ -247,6 +248,8 @@ def frame(scene, t):
                 sway += int(7 * math.sin(t * 5.2 + phase))
             elif named_action == "celebrate":
                 sway += int(12 * math.sin(t * 4.0 + phase))
+            if actor_index == 0:
+                lead_sway = sway
             expression = ("surprised" if named_action == "react" else
                           "happy" if named_action == "celebrate" else
                           "focused" if named_action in ("point", "carry") else
@@ -265,9 +268,12 @@ def frame(scene, t):
                     actor_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
                     actor_layer.alpha_composite(scaled, (int(slot + sway + (carry_shift if actor_index == 0 else 0) - new_w / 2),
                                                         int(cy - new_h / 2)))
-            if scale == 1.0 and carry_shift and actor_index == 0:
+            if scale == 1.0:
+                # The solo ensemble actor must receive the same authored
+                # lateral motion as scaled ensemble members.
                 shifted = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
-                shifted.alpha_composite(actor_layer, (carry_shift, 0))
+                shifted.alpha_composite(actor_layer,
+                                        (sway + (carry_shift if actor_index == 0 else 0), 0))
                 actor_layer = shifted
             character_layer = Image.alpha_composite(character_layer, actor_layer)
         # Move the prop forward so it does not cover the ensemble.
@@ -283,7 +289,7 @@ def frame(scene, t):
         # Stage the object next to the lead actor, moving in sync with them.
         # This is a simple composited carry cue, not inverse-kinematic gripping.
         lead_x = (slots[0] if actors else cx)
-        ox = lead_x + 95 + carry_shift
+        ox = lead_x + 95 + carry_shift + lead_sway
         oy = cy + 70 + int(8 * math.sin(t * 2.0))
     if named_action == "carry":
         # Carry objects should remain visually subordinate to the actor.
