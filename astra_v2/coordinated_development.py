@@ -112,12 +112,51 @@ def build_narrated_plan(seed, narrations):
     return plan
 
 
+
+def build_ensemble_plan(seed, scene_casts):
+    """Explicit multi-character casting with stable identities across scenes.
+
+    Each scene names its visible species. Unsupported species, duplicate actors
+    and scenes without actors are rejected. This does not infer dialogue roles.
+    """
+    from astra_v2.character_object_catalog import SPECIES
+    if not isinstance(scene_casts, list) or not 1 <= len(scene_casts) <= 120:
+        raise ValueError("scene_casts must contain 1..120 scenes")
+    registry = {}
+    scenes = []
+    for i, cast in enumerate(scene_casts):
+        if not isinstance(cast, list) or not 1 <= len(cast) <= 4:
+            raise ValueError(f"scene {i+1}: expected 1..4 visible actors")
+        if any(not isinstance(name, str) or name not in SPECIES for name in cast):
+            raise ValueError(f"scene {i+1}: unsupported actor")
+        if len(set(cast)) != len(cast):
+            raise ValueError(f"scene {i+1}: duplicate actor")
+        actors = []
+        for name in cast:
+            if name not in registry:
+                ci = SPECIES.index(name)*100 + stable_index(seed, "actor-"+name, 0, 100)
+                registry[name] = ci
+            ci = registry[name]
+            actors.append({"subject":name,"character_id":ci,"character":character(ci)})
+        oi = stable_index(seed, "object", i, OBJECT_COUNT)
+        scenes.append({"scene":i+1,"actors":actors,"subject":actors[0]["subject"],
+                       "character_id":actors[0]["character_id"],
+                       "character":actors[0]["character"],"object_id":oi,
+                       "object":prop(oi),"duration_seconds":2.0})
+    return {"seed":seed,"scene_count":len(scenes),"scenes":scenes,
+            "story_subjects_verified":True,"ensemble_enabled":True,
+            "publication_allowed":False,"quality_approved":False}
+
+
 def verify_story_cast(plan):
     """Reject visual cast mismatches rather than silently substituting."""
     for scene in plan["scenes"]:
         subject = scene.get("subject")
         if not subject or character(scene["character_id"])[0] != subject:
             raise ValueError(f"scene {scene['scene']}: subject/cast mismatch")
+        for actor in scene.get("actors", []):
+            if character(actor["character_id"])[0] != actor["subject"]:
+                raise ValueError(f"scene {scene['scene']}: ensemble actor mismatch")
     return True
 
 
