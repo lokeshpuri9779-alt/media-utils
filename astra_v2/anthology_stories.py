@@ -66,7 +66,38 @@ PLOTS = [
  ("THE MOON WAS IN PIECES","A bear saw the moon shattered across the ripples of a mountain lake.","planet","BROKEN MOON","reveal"),
  ("HE FETCHED HIS TOOLS","He carried a toolbox to the shore and tried to collect every shining fragment.","robot","REPAIR TIME","build"),
  ("A FROG SHOWED HIM","A frog jumped into the lake and the pieces danced again, revealing the trick of the water.","forest","THE REVEAL","twist"),
- ("THE BEAR LAUGHED","When the lake became still, the moon looked whole again and the bear packed away his tools.","planet","MOON RESTORED","payoff")]),
+ ("THE BEAR LAUGHED","When the lake became still, the moon looked whole again and the bear packed away his tools.","planet","MOON RESTORED","payoff")]),,
+
+ ("the-penguin-who-delivered-snow","The Penguin Who Delivered Snow","animal comedy","A penguin tries to deliver winter to a town that has never seen snow.",[
+ ("A PACKAGE OF SNOW","A penguin arrived at the desert post office carrying a box of snow.","forest","SPECIAL DELIVERY","reveal"),
+ ("THE BOX WAS MELTING","The postmaster raced to find shade before the snow disappeared.","door","HURRY UP","build"),
+ ("THE CLOUD MACHINE","Inside the box was a tiny machine that could make one snow cloud.","robot","THE SECRET","twist"),
+ ("A SNOWY SURPRISE","The penguin switched it on and the whole town celebrated its first snowfall.","planet","WINTER ARRIVES","payoff")]),
+ ("the-monkey-and-the-missing-banana","The Monkey and the Missing Banana","animal comedy","A monkey detective discovers who keeps stealing the bananas.",[
+ ("BANANAS VANISHED","Every morning, one banana disappeared from the monkey's kitchen.","forest","THE MYSTERY","reveal"),
+ ("TINY FOOTPRINTS","The monkey followed little footprints past the market and into a garden.","door","FOLLOW CLUES","build"),
+ ("A HUNGRY ROBOT","Behind a wall, a tiny robot was using banana peels to fuel its toy car.","robot","THE CULPRIT","twist"),
+ ("THE GREAT BANANA RACE","The monkey traded a basket of peels for a ride and they raced home laughing.","ship","CASE CLOSED","payoff")]),
+ ("the-dog-who-guarded-the-stars","The Dog Who Guarded the Stars","animal fantasy","A brave puppy returns fallen stars to the night sky.",[
+ ("STARS FELL DOWN","A puppy woke to find three bright stars glowing in the backyard.","planet","FALLEN STARS","reveal"),
+ ("THE SKY WENT DARK","As more stars fell, the puppy carried them toward the tallest hill.","forest","THE CLIMB","build"),
+ ("A KITE BECAME A LADDER","A lost kite caught a strong wind and lifted the glowing stars above the clouds.","ship","THE PLAN","twist"),
+ ("THE SKY SPARKLED AGAIN","The puppy released the stars and watched the night sky light up once more.","planet","MISSION COMPLETE","payoff")]),
+ ("the-turtle-and-the-speedy-clock","The Turtle and the Speedy Clock","animal comedy","A turtle learns that slowing down can save a runaway town clock.",[
+ ("TIME RAN TOO FAST","A turtle noticed that the town clock was spinning faster than everyone could walk.","signal","TOO FAST","reveal"),
+ ("EVERYONE RUSHED","The rabbit tried to stop the gears but kept slipping on the tower stairs.","door","HURRY","build"),
+ ("A SMALL STONE","The turtle found a loose stone beneath the clock and carefully fixed the wobbly gear.","robot","SLOW AND STEADY","twist"),
+ ("TIME FELT RIGHT","The bells rang at the correct hour and the town finally enjoyed a peaceful afternoon.","forest","ALL FIXED","payoff")]),
+ ("the-cloud-that-wanted-a-hat","The Cloud That Wanted a Hat","whimsical comedy","A tiny cloud searches for the perfect hat before a windy parade.",[
+ ("A CLOUD WANTED A HAT","A little cloud floated into town wearing a paper hat that immediately blew away.","planet","HAT TROUBLE","reveal"),
+ ("EVERY HAT FLEW OFF","It tried a giant helmet, a flowerpot and even a bright umbrella.","door","TRY AGAIN","build"),
+ ("THE RAINBOW RIBBON","A child tied a colorful ribbon to a kite and offered it to the cloud.","ship","A BETTER IDEA","twist"),
+ ("THE PARADE BEGAN","The cloud wore its rainbow kite proudly and shaded everyone at the parade.","forest","PERFECT FIT","payoff")]),
+ ("the-raccoon-and-the-midnight-bakery","The Raccoon and the Midnight Bakery","animal mystery","A raccoon investigates the mysterious smell of bread at midnight.",[
+ ("BREAD AT MIDNIGHT","A raccoon smelled fresh bread coming from a bakery that had been closed for years.","door","WHO IS BAKING","reveal"),
+ ("FLOUR ON THE FLOOR","Tiny flour footprints led through the dark kitchen to a locked cupboard.","signal","FOLLOW THE TRAIL","build"),
+ ("THE SECRET BAKER","Inside, a little robot had been baking bread for the neighborhood's stray animals.","robot","THE REVEAL","twist"),
+ ("A FEAST FOR ALL","The raccoon opened the doors and every hungry animal joined the midnight feast.","forest","SHARE THE BREAD","payoff")]),
 ]
 
 def catalog():
