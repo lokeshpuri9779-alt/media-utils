@@ -152,7 +152,26 @@ jobs:
           retention-days: 7
       - name: Render and approve next original video
         id: render
-        run: python -m astra_v2.preload_worker
+        run: |
+          /usr/bin/time -v -o /tmp/astra-render-memory.txt python -m astra_v2.preload_worker
+      - name: Report render peak RAM
+        if: always()
+        run: |
+          if test -f /tmp/astra-render-memory.txt; then
+            cat /tmp/astra-render-memory.txt
+            python - <<'PY'
+          import re
+          from pathlib import Path
+          data = Path("/tmp/astra-render-memory.txt").read_text()
+          match = re.search(r"Maximum resident set size \(kbytes\):\s*(\d+)", data)
+          if match:
+              print("ASTRA_RENDER_PEAK_RAM_MIB=" + str(round(int(match.group(1)) / 1024, 1)))
+          else:
+              print("ASTRA_RENDER_PEAK_RAM_UNAVAILABLE")
+          PY
+          else
+            echo "ASTRA_RENDER_PEAK_RAM_UNAVAILABLE"
+          fi
       - name: Persist approved video in Actions artifact storage
         if: steps.render.outputs.content_id != ''
         uses: actions/upload-artifact@v4
