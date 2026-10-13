@@ -482,7 +482,7 @@ def draw_character_silhouette(image, index, t, x=540, y=900,
                               expression="neutral", gesture="idle"):
     if expression not in ("neutral", "surprised", "happy", "focused"):
         raise ValueError(f"unsupported facial expression: {expression}")
-    if gesture not in ("idle", "point", "celebrate", "carry"):
+    if gesture not in ("idle", "point", "celebrate", "carry", "carry_rig"):
         raise ValueError(f"unsupported gesture: {gesture}")
     species, role, style = character(index)
     d = ImageDraw.Draw(image)
@@ -570,8 +570,9 @@ def draw_character_silhouette(image, index, t, x=540, y=900,
             shoulder=(x+side*58,y+55)
             elbow=(x+side*(105+swing//3),y+93+side*swing)
             hand=(x+side*(122+swing//2),y+138+side*swing)
-            d.line((shoulder,elbow,hand),fill=dark,width=15,joint="curve")
-            d.ellipse((hand[0]-13,hand[1]-13,hand[0]+13,hand[1]+13),fill=color)
+            if gesture != "carry_rig":
+                d.line((shoulder,elbow,hand),fill=dark,width=15,joint="curve")
+                d.ellipse((hand[0]-13,hand[1]-13,hand[0]+13,hand[1]+13),fill=color)
             hip=(x+side*32,y+147)
             knee=(x+side*(40+swing//2),y+197)
             foot=(x+side*(43+swing),y+247-abs(swing)//3)
