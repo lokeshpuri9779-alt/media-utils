@@ -59,6 +59,12 @@ def select_subject(story, shot):
     # same illustration even when the storyboard changes locations/actions.
     explicit_visual = str(shot.get("visual_prompt") or shot.get("visual") or "").strip().lower()
     generic_visuals = {"", "story", "illustration", "fiction", "subject"}
+    # A scenery-only storyboard cue must not erase the named protagonist.
+    # Preserve genuinely different explicit visual directions (e.g. clock,
+    # train, robot) and locally named actors.
+    scenery_visuals = {"forest", "tree", "woods", "landscape", "background", "nature"}
+    if title_subject in characters and explicit_visual in scenery_visuals:
+        return title_subject
     if explicit_visual not in generic_visuals:
         return None
     matches = [(match.start(), name)
