@@ -6503,19 +6503,16 @@ jobs:
 
           player = Path("game/player/player.gd")
           source = player.read_text()
-          old = '''func cycle_weapon() -> String:
-          	weapon_mode = (weapon_mode + 1) % 3
-          	_refresh_weapon_cooldown()
-          	return get_weapon_name()
-          '''
-          new = '''func cycle_weapon() -> String:
+          start = source.find("func cycle_weapon() -> String:")
+          end = source.find("\n\nfunc trigger_dash()", start)
+          if start < 0 or end < 0:
+              raise SystemExit("weapon progression boundaries missing")
+          replacement = '''func cycle_weapon() -> String:
           	weapon_mode = MetaProgression.next_weapon_mode(weapon_mode)
           	_refresh_weapon_cooldown()
           	return get_weapon_name()
           '''
-          if source.count(old) != 1:
-              raise SystemExit("weapon progression anchor missing")
-          player.write_text(source.replace(old, new, 1))
+          player.write_text(source[:start] + replacement + source[end:])
 
           level = Path("game/level/level.gd")
           source = level.read_text()
