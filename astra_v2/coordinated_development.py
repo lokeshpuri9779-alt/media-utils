@@ -133,6 +133,8 @@ def frame(scene, t):
     return image.convert("RGB")
 
 def render(plan, output, fps=8, seconds_per_scene=2, video=False):
+    if plan.get("story_subjects_verified"):
+        verify_story_cast(plan)
     if not 2 <= fps <= 24 or not 1 <= seconds_per_scene <= 10:
         raise ValueError("fps or duration outside safe range")
     output.mkdir(parents=True, exist_ok=True)
