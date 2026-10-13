@@ -460,11 +460,25 @@ def render(plan, output, fps=8, seconds_per_scene=2, video=False):
         seen_cast_pairs.add(pair)
         scene_fingerprints.append(fingerprint)
         if len(previews) < 12:
-            previews.append(first.resize((270, 480)))
+            # Show the completed interaction, not only the floor-level first
+            # frame. Motion validation and scene fingerprints still use first.
+            preview_frame = frame(scene, min(seconds_per_scene - 0.1, 1.4)) if scene.get('action') == 'carry' else first
+            previews.append(preview_frame.resize((270, 480)))
     sheet = Image.new("RGB", (270 * 4, 480 * math.ceil(len(previews) / 4)), BG)
     for i, image in enumerate(previews):
         sheet.paste(image, ((i % 4) * 270, (i // 4) * 480))
     sheet.save(output / "storyboard.png")
+    # Explicit contact-sheet evidence across the pickup arc, so a successful
+    # first-frame storyboard cannot mask a failed or incomplete interaction.
+    carry_scenes = [s for s in plan["scenes"] if s.get("action") == "carry"]
+    if carry_scenes:
+        samples = [0.0, 0.35, 0.7, 1.1, min(seconds_per_scene - 0.1, 1.8)]
+        pickup_sheet = Image.new("RGB", (270 * len(samples), 480 * len(carry_scenes)), BG)
+        for row, carry_scene in enumerate(carry_scenes):
+            for column, sample in enumerate(samples):
+                pickup_sheet.paste(frame(carry_scene, max(0.0, sample)).resize((270, 480)),
+                                   (column * 270, row * 480))
+        pickup_sheet.save(output / "pickup-motion-sheet.png")
     report = {
         "scene_count": len(plan["scenes"]),
         "unique_characters": len({actor["character_id"] for s in plan["scenes"] for actor in (s.get("actors") or [{"character_id": s["character_id"]}])}),
