@@ -173,6 +173,38 @@ def verify_story_cast(plan):
     return True
 
 
+def build_comedy_demo(seed="astra-comedy-pilot"):
+    """One coherent offline comedy beat, not random unrelated catalog scenes.
+
+    A fox tries to carry a gift, a rabbit reacts, and the fox celebrates.
+    Keep the same actors and prop across all five shots.
+    """
+    plan = build_ensemble_plan(seed, [
+        ["fox", "rabbit"], ["fox", "rabbit"], ["fox", "rabbit"],
+        ["fox", "rabbit"], ["fox", "rabbit"],
+    ])
+    actions = ("approach", "point", "carry", "react", "celebrate")
+    narrations = (
+        "A fox spots a mystery gift.",
+        "The rabbit points at the suspicious box.",
+        "The fox grabs it before thinking.",
+        "The rabbit freezes in disbelief.",
+        "The fox celebrates like it won a trophy.",
+    )
+    # Gift category is index 38 of the 40-category prop catalog.
+    for scene, action, narration in zip(plan["scenes"], actions, narrations):
+        scene["object_id"] = 1900
+        scene["object"] = prop(1900)
+        scene["action"] = action
+        scene["narration"] = narration
+        scene["duration_seconds"] = 2.0
+    plan["pilot_type"] = "offline_comedy"
+    plan["publication_allowed"] = False
+    plan["quality_approved"] = False
+    verify_story_cast(plan)
+    return plan
+
+
 def draw_expressive_character(image, index, t, x, y, expression, gesture="idle"):
     """Use full authored poses, falling back only for legacy test renderers."""
     try:
