@@ -128,7 +128,26 @@ def make_candidate(path, excluded_ids, excluded_titles):
                                 or story.get("plot_fingerprint") not in ledger_hashes)]
         print("ASTRA_STORY_HISTORY_EXCLUSIONS=" + str(len(history_records)))
     except FileNotFoundError:
-        pass
+        # The publisher already persists confirmed videos in its durable
+        # state. Reuse that ledger when no separate history export exists.
+        state_path = os.getenv("ASTRA_PUBLISHER_STATE_PATH", "astra_v2_state.json")
+        try:
+            with open(state_path, "r", encoding="utf-8") as state_file:
+                saved_state = json.load(state_file)
+            published = saved_state.get("published", {})
+            if not isinstance(published, dict):
+                raise ValueError("Published ledger must be a dictionary")
+            excluded_ids.update(str(cid) for cid in published)
+            excluded_titles.update(
+                str(record.get("title")).casefold().strip()
+                for record in published.values()
+                if isinstance(record, dict) and record.get("title")
+            )
+            print("ASTRA_PUBLISHED_HISTORY_EXCLUSIONS=" + str(len(published)))
+        except FileNotFoundError:
+            pass
+        except (ValueError, json.JSONDecodeError, TypeError, OSError) as exc:
+            raise CreativeSkip("publisher_history_unavailable:" + type(exc).__name__) from exc
     except (ValueError, json.JSONDecodeError, TypeError, OSError) as exc:
         # Never silently ignore a damaged or unreadable exclusion ledger:
         # doing so risks publishing a duplicate.
