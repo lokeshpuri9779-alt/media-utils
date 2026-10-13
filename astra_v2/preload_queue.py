@@ -170,6 +170,15 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
                     if z.getinfo("video.mp4").file_size > MAX_BYTES:
                         continue
                     candidate = json.loads(z.read("candidate.json"))
+                    # Artifact JSON is untrusted: malformed packages must not
+                    # abort selection of other approved Shorts or long videos.
+                    if not isinstance(candidate, dict):
+                        print("ASTRA_PRELOAD_INVALID_CANDIDATE_TYPE=" + cid)
+                        continue
+                    if not all(isinstance(candidate.get(k), str) for k in
+                               ("content_id", "title", "description", "genre", "format")):
+                        print("ASTRA_PRELOAD_INVALID_CANDIDATE_FIELDS=" + cid)
+                        continue
                     if candidate.get("content_id") != cid:
                         continue
                     if candidate.get("format") not in ("short", "long"):
