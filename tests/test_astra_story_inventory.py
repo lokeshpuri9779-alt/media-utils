@@ -31,6 +31,11 @@ class StoryInventoryTests(unittest.TestCase):
                 self.assertTrue(all(len(beat[1].split()) >= 9 for beat in beats))
                 self.assertEqual(len({beat[1].casefold() for beat in beats}), 4)
 
+    def test_default_catalog_exposes_full_authored_inventory(self):
+        records = catalog()
+        self.assertEqual(len(records), 79)
+        self.assertTrue(all(item["kind"] == "authored_causal_story" for item in records))
+
     def test_draft_inventory_count_and_unique_titles(self):
         drafts = draft_catalog()
         self.assertEqual(len(drafts), 996)
