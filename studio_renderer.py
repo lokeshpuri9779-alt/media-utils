@@ -1043,6 +1043,16 @@ def render_frame(plan,t,genre,total):
         seed = int.from_bytes(hashlib.sha256(visual_identity.encode()).digest()[:8], 'big')
         for slot, (ax, ay) in enumerate(((145, 460), (915, 480), (165, 1180))):
             draw_motion_element(im, (seed + slot * 397) % COUNT, t, ax, ay, 24)
+    # Opt-in procedural cast and prop layer for isolated storyboard previews.
+    # The original primary visual remains authoritative; no asset substitution.
+    if genre == 'fiction' and s.get('experimental_cast_enabled', False) and not layers['draw_cached_media']:
+        from astra_v2.character_object_catalog import draw_character, draw_prop
+        cast_key = str(s.get('character_key') or visual_identity)
+        prop_key = str(s.get('object_key') or visual_identity)
+        character_id = int.from_bytes(hashlib.sha256(cast_key.encode()).digest()[:4], 'big') % 2000
+        object_id = int.from_bytes(hashlib.sha256(prop_key.encode()).digest()[:4], 'big') % 2000
+        draw_character(im, character_id, t, 540, 870)
+        draw_prop(im, object_id, t, 820, 1090)
     # Transition accents occur under the hero, never on top of the narration
     # captions or newly selected subject illustration.
     transition_layer(im,s,t,u,accent)
