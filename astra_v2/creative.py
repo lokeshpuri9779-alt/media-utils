@@ -107,6 +107,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
     history_ids = set()
     history_titles = set()
     history_hashes = set()
+    history_plot_keys = set()
     for history_path, is_publisher_state in (
         (os.getenv("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json"), False),
         (os.getenv("ASTRA_PUBLISHER_STATE_PATH", "astra_v2_state.json"), True),
@@ -133,6 +134,8 @@ def make_candidate(path, excluded_ids, excluded_titles):
                     history_titles.add(str(record["title"]).casefold().strip())
                 if record.get("plot_fingerprint"):
                     history_hashes.add(str(record["plot_fingerprint"]))
+                if record.get("plot_key"):
+                    history_plot_keys.add(str(record["plot_key"]))
         except FileNotFoundError:
             continue
         except (ValueError, TypeError, OSError) as exc:
@@ -144,6 +147,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
         if story.get("content_id") not in history_ids
         and str(story.get("title", "")).casefold().strip() not in history_titles
         and story.get("plot_fingerprint") not in history_hashes
+        and story.get("plot_key") not in history_plot_keys
     ]
     print("ASTRA_STORY_HISTORY_EXCLUSIONS=" + str(len(history_ids)))
     print("Premium pool:", len(premium_stories), "seen IDs:", len(excluded_ids),
