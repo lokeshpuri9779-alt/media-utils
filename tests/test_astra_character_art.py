@@ -16,6 +16,16 @@ class CharacterArtworkTests(unittest.TestCase):
                 shot = {"speech": "A tree rustled in the wind", "visual_prompt": "tree"}
                 self.assertEqual(select_subject(story, shot), character)
 
+    def test_title_character_survives_scenery_only_visual(self):
+        for character in CHARACTERS:
+            with self.subTest(character=character):
+                story = {"title": f"The {character} and the broken bridge"}
+                for visual in ("forest", "tree", "woods", "landscape"):
+                    shot = {"speech": "A strange sound echoed nearby", "visual": visual}
+                    self.assertEqual(select_subject(story, shot), character)
+        story = {"title": "The fox and the broken bridge"}
+        self.assertEqual(select_subject(story, {"speech": "The owl arrived", "visual": "forest"}), "owl")
+
     def test_characters_have_distinct_visible_art(self):
         images = {}
         for character in CHARACTERS:
