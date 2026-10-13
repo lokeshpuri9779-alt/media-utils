@@ -5043,7 +5043,7 @@ jobs:
           )
           source = replace_once(
               source,
-              "\tactive_player.apply_run_upgrade(upgrade_id)\n\tMobileMetrics.record",
+              "\tactive_player.apply_run_upgrade(upgrade_id)\n",
               '''	var previous_stacks := upgrade_stacks.duplicate(true)
           	upgrade_stacks = RunUpgradesScript.add_stack(upgrade_stacks, upgrade_id)
           	active_player.apply_run_upgrade(upgrade_id)
@@ -5051,7 +5051,7 @@ jobs:
           		pulse_cooldown_multiplier = maxf(0.62, pulse_cooldown_multiplier * 0.84)
           	for synergy_id in RunUpgradesScript.newly_unlocked(previous_stacks, upgrade_stacks):
           		_apply_run_synergy(synergy_id)
-          	MobileMetrics.record''',
+          ''',
               "upgrade application",
           )
           source += '''
