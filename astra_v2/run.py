@@ -131,6 +131,7 @@ def run():
             live_ids, live_titles = youtube.recent(youtube_channel)
             previous_ids = set(state["published"]) | set(state.get("reserved", {}))
             previous_ids.update(item.get("content_id", "") for item in state["pending"].values())
+            print("ASTRA_QUEUE_EXCLUSIONS=" + json.dumps({"state_ids": len(previous_ids), "youtube_ids": len(live_ids), "anthology_matches": [{"content_id": cid, "state": cid in previous_ids, "youtube": cid in live_ids} for cid in ("rayvan-anthology-90c111ee3cab7400", "rayvan-anthology-535144f2435abf94")]}))
             with tempfile.TemporaryDirectory(prefix="astra-v2-") as temp:
                 video = Path(temp) / "short.mp4"
                 try:
