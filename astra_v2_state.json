@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 29,
+  "attempts": 30,
   "confirmed_today": 29,
-  "last_attempt_at": "2026-10-13T00:41:58.333971+00:00",
+  "last_attempt_at": "2026-10-13T06:33:41.496295+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -212,14 +212,23 @@
       "uploaded_at": "2026-10-13T00:42:00.062335+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "quality_skip",
+  "pending": {
+    "402yYfGZVzA": {
+      "content_id": "trend-brief-2026-10-12-am",
+      "title": "Why brewers schedule Is Getting Attention Now | RAYVAN",
+      "day": "2026-10-13",
+      "uploaded_at": "2026-10-13T06:33:43.685491+00:00",
+      "genre": "current",
+      "format": "long"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-13T06:20:46.249132+00:00",
+  "last_preflight_at": "2026-10-13T06:32:48.453013+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T06:22:53.772700+00:00",
+    "at": "2026-10-13T06:33:46.242531+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -410,6 +419,12 @@
       "at": "2026-10-13T00:41:58.333953+00:00",
       "title": "The Footprints That Were Not There | Original Microfiction",
       "format": "short",
+      "result": "accepted"
+    },
+    "trend-brief-2026-10-12-am": {
+      "at": "2026-10-13T06:33:41.496287+00:00",
+      "title": "Why brewers schedule Is Getting Attention Now | RAYVAN",
+      "format": "long",
       "result": "accepted"
     }
   }
