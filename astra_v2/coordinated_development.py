@@ -173,14 +173,17 @@ def verify_story_cast(plan):
     return True
 
 
-def draw_expressive_character(image, index, t, x, y, expression):
-    """Use facial states when supported; preserve legacy test renderers."""
+def draw_expressive_character(image, index, t, x, y, expression, gesture="idle"):
+    """Use full authored poses, falling back only for legacy test renderers."""
     try:
-        return draw_character(image, index, t, x, y, expression=expression)
+        return draw_character(image, index, t, x, y,
+                              expression=expression, gesture=gesture)
     except TypeError as exc:
-        if "unexpected keyword argument 'expression'" not in str(exc):
-            raise
-        return draw_character(image, index, t, x, y)
+        if "unexpected keyword argument 'gesture'" in str(exc):
+            return draw_character(image, index, t, x, y, expression=expression)
+        if "unexpected keyword argument 'expression'" in str(exc):
+            return draw_character(image, index, t, x, y)
+        raise
 
 
 def frame(scene, t):
@@ -249,7 +252,7 @@ def frame(scene, t):
                           "focused" if named_action in ("point", "carry") else
                           "neutral")
             draw_expressive_character(actor_layer, actor["character_id"], actor_t, 540, 1060,
-                                      expression)
+                                      expression, named_action if named_action in ("point", "celebrate", "carry") else "idle")
             if scale != 1.0:
                 # Crop to actual visible artwork before scaling: resizing a
                 # full-screen transparent canvas shrinks the character twice.
@@ -274,7 +277,8 @@ def frame(scene, t):
                       "happy" if named_action == "celebrate" else
                       "focused" if named_action in ("point", "carry") else "neutral")
         draw_expressive_character(character_layer, scene["character_id"], t,
-                                  cx + carry_shift, cy, expression)
+                                  cx + carry_shift, cy, expression,
+                                  named_action if named_action in ("point", "celebrate", "carry") else "idle")
     if named_action == "carry":
         # Stage the object next to the lead actor, moving in sync with them.
         # This is a simple composited carry cue, not inverse-kinematic gripping.
