@@ -208,6 +208,149 @@ def editorial_screen():
             selected.append(record)
     return {"rewrite_queue": selected, "rejected": rejected}
 
+DRAFT_CAUSAL_ARCS = {
+    "broken bridge": (
+        ("the temporary boards slid off the wet riverbank", "building a braced crossing above the strongest current"),
+        ("the rope disappeared into the rushing water", "fastening a new line to a secure upstream anchor"),
+        ("the narrow path ended at a flooded ditch", "marking a stable route around the damaged section"),
+        ("the first crossing frightened the younger villagers", "testing each plank together before anyone crossed"),
+        ("the borrowed hammer cracked the support beam", "using the miller's spare timber to reinforce the span"),
+    ),
+    "missing bell": (
+        ("the tower stairs were locked for repairs", "asking the caretaker to unlock the safe access door"),
+        ("the search led to the wrong market stall", "following the distinctive brass dust toward the workshop"),
+        ("the old storage passage was blocked", "finding the tower's second service entrance"),
+        ("the crowd accused the wrong visitor", "checking the delivery register before making accusations"),
+        ("the first inspection found only an empty hook", "searching the repair cart for the missing bell"),
+    ),
+    "flooded garden": (
+        ("a dirt wall sent water toward the houses", "opening the old drain away from the vegetable beds"),
+        ("the runoff washed away the first channel", "lining the diversion trench with flat stones"),
+        ("the garden gate trapped the floodwater inside", "lifting the gate and clearing the downstream ditch"),
+        ("the volunteers disagreed about where to dig", "marking the lowest safe outlet with a measuring string"),
+        ("the borrowed shovel broke in the mud", "using the gardener's long-handled spade to clear debris"),
+    ),
+    "lost compass": (
+        ("the path vanished into thick fog", "following the marked ridge instead of guessing directions"),
+        ("a stream erased the footprints ahead", "using the moss and fixed trail signs to confirm north"),
+        ("the group reached a fork with no signs", "checking the ridge contour against an old guidepost"),
+        ("two hikers disagreed about the correct direction", "comparing landmarks before choosing the route"),
+        ("the map became soaked and unreadable", "tracing the established trail markers back to camp"),
+    ),
+    "dark lighthouse": (
+        ("the exposed flame blew out in the storm", "sheltering a lantern behind the tower window"),
+        ("the backup lantern had no usable wick", "borrowing a sealed lamp from the harbor office"),
+        ("the tower door jammed in the wind", "entering through the sheltered service passage"),
+        ("the fishermen could not distinguish the signal", "using a repeated flash pattern agreed with the captains"),
+        ("the first mirror slipped from its stand", "securing the reflector to a heavy wooden frame"),
+    ),
+    "stolen recipe": (
+        ("the flour trail ended in the crowded market", "checking the bakery's locked storeroom first"),
+        ("a spilled sack covered the footprints", "following the paper scraps toward the cellar"),
+        ("the cellar door stuck behind stacked crates", "moving the crates carefully with the apprentice"),
+        ("the bakers blamed a visitor without evidence", "checking who moved the recipe box during cleaning"),
+        ("the first search damaged a loose notebook page", "sorting the scattered sheets on a clean table"),
+    ),
+    "silent orchestra": (
+        ("the drummer's louder rhythm drowned out the strings", "checking whether the stage curtains blocked the sound"),
+        ("the first rehearsal ended with exhausted players", "listening from the back row before changing the arrangement"),
+        ("the musicians faced away from the audience", "turning the music stands toward the open hall"),
+        ("the conductor insisted the instruments were broken", "testing one instrument from the audience seats"),
+        ("the curtain pulley jammed halfway open", "asking the stage crew to free the rope safely"),
+    ),
+    "runaway balloon": (
+        ("the trailing cord snapped in the gust", "using the emergency tether kept beside the launch platform"),
+        ("the balloon drifted beyond the low rooftops", "alerting the ground crew at the far field"),
+        ("the narrow alley blocked the rescue cart", "taking the cart around the square to the open meadow"),
+        ("the crowd pulled the ropes in different directions", "assigning one signal caller to coordinate the crew"),
+        ("the first grappling hook missed the ribbon", "waiting until the balloon passed the safe landing field"),
+    ),
+    "frozen fountain": (
+        ("hammering cracked a decorative stone", "circulating warm water through the frozen outlet"),
+        ("the hot water cooled before reaching the blockage", "insulating the pipe while gently warming the joint"),
+        ("the first drain was blocked by fallen leaves", "clearing the leaves before testing the flow"),
+        ("the workers argued about using open flames", "choosing a safe low-temperature thawing method"),
+        ("the old wrench slipped on the icy valve", "using a properly fitted tool after warming the handle"),
+    ),
+    "vanishing footprints": (
+        ("the footprints disappeared in river mud", "looking for marks on the dry boards nearby"),
+        ("the rain washed away the shallow tracks", "searching beneath the covered landing for fresh clues"),
+        ("the bridge ended at a locked storage gate", "asking the ferryman who last used the walkway"),
+        ("the villagers followed the wrong set of tracks", "comparing the boot pattern with the missing traveler's shoes"),
+        ("the first lantern failed beside the bank", "searching at daylight along the safe marked path"),
+    ),
+    "collapsed tunnel": (
+        ("loose stones kept falling near the entrance", "closing the unsafe approach and consulting the old route map"),
+        ("the first shovel could not shift the rubble", "finding the miners' maintained side passage"),
+        ("the mountain trail was too steep for supplies", "using the lower service path shown on the sign"),
+        ("the group wanted to climb over the collapse", "keeping everyone outside the danger zone while scouting"),
+        ("the cart wheel broke on the rocky detour", "borrowing a smaller handcart for the safe passage"),
+    ),
+    "broken telescope": (
+        ("polishing the glass did not improve the image", "checking the focus wheel and eyepiece alignment"),
+        ("the tripod shook whenever someone approached", "stabilizing the legs on the observatory platform"),
+        ("the eyepiece was fitted backward", "asking the astronomer to reinstall the correct lens"),
+        ("the crowd demanded a view before the instrument was ready", "testing the telescope safely before admitting visitors"),
+        ("the focusing knob spun without moving the lens", "tightening the loose set screw inside the housing"),
+    ),
+    "lost invitation": (
+        ("the wind scattered the letters into wet grass", "collecting the envelopes beneath the sheltered hedges"),
+        ("the address ink blurred in the rain", "matching each wax seal with the invitation register"),
+        ("the garden gate locked before the courier returned", "asking the caretaker to open the side entrance"),
+        ("two guests claimed the same envelope", "checking the royal guest list against the seals"),
+        ("the courier's satchel strap broke", "borrowing a covered basket to protect the recovered letters"),
+    ),
+    "stuck windmill": (
+        ("the rope tightened around the axle", "locking the sails before removing the tangled line"),
+        ("the blades would not turn despite strong wind", "checking the brake lever before touching the gears"),
+        ("the mill ladder was blocked by grain sacks", "clearing the maintenance route with the miller"),
+        ("the villagers pushed the sails in different directions", "assigning the miller to coordinate the safe repair"),
+        ("the first tool slipped off the jammed pulley", "using the correct spanner to free the mechanism"),
+    ),
+    "empty well": (
+        ("digging beside the well only loosened dry clay", "examining the old spring channel behind the stones"),
+        ("the bucket returned with only mud", "clearing sediment from the intake opening"),
+        ("the well cover hid the inspection hatch", "opening the hatch with the mason's help"),
+        ("the villagers blamed the dry weather alone", "checking the blocked feeder channel before digging deeper"),
+        ("the first hook bent inside the shaft", "using the mason's lifting tool to clear the obstruction"),
+    ),
+    "missing lantern": (
+        ("the first candle went out in the wind", "following the marked trail toward the ranger cabin"),
+        ("the trail forked beside a steep ravine", "checking the safe route markers by moonlight"),
+        ("the hikers lost sight of the nearest shelter", "staying together and using the ridge's familiar landmarks"),
+        ("the group wanted to split up and search", "keeping everyone together until the ranger arrived"),
+        ("the spare torch had an empty battery", "using the ranger's emergency signal markers"),
+    ),
+    "cracked dam": (
+        ("the leaf patch washed out of the crack", "pressing clay behind a woven branch barrier"),
+        ("the water undermined the first pile of stones", "reinforcing the bank above the leaking channel"),
+        ("the reed bed hid the damaged section", "marking the leak before clearing vegetation"),
+        ("the villagers argued over draining the whole pond", "testing a small controlled repair first"),
+        ("the borrowed spade snapped against a rock", "using the beaver's broad digging tool to reach the clay"),
+    ),
+    "lost painting": (
+        ("the first search followed the wrong delivery cart", "checking fresh paint streaks against the frame"),
+        ("rain washed the muddy tracks from the courtyard", "looking beneath the covered loading platform"),
+        ("the gallery storeroom was locked", "asking the curator to inspect the delivery inventory"),
+        ("visitors accused the cleaners without evidence", "checking the transport log before searching anyone"),
+        ("the packing blanket hid the edge of the frame", "unfolding the delivery cart's coverings with the curator"),
+    ),
+    "stalled ferry": (
+        ("the towing rope broke against the current", "organizing the passengers to use emergency paddles"),
+        ("the engine would not restart in the rain", "steering toward the sheltered landing without the motor"),
+        ("reeds caught the ferry's rudder", "freeing the obstruction from the deck with a boat hook"),
+        ("the passengers all paddled at different speeds", "calling a steady rhythm for coordinated strokes"),
+        ("the spare oar cracked against a rock", "using the remaining paddles to reach the nearby pier"),
+    ),
+    "silent clock": (
+        ("turning the hands did not restart the mechanism", "checking the gears behind the dial"),
+        ("the pendulum stopped again after one swing", "removing the loose screw wedged near its pivot"),
+        ("the inspection hatch stuck shut", "asking the clockmaker to open the maintenance panel"),
+        ("the passengers argued about the real time", "checking the conductor's reliable watch first"),
+        ("the first screwdriver slipped inside the housing", "using a correctly sized tool to secure the loose gear"),
+    ),
+}
+
 def draft_catalog(limit=996):
     """Supply exactly 996 uniquely identified plot *drafts*, not reviewed stories."""
     output = []
@@ -215,11 +358,14 @@ def draft_catalog(limit=996):
         for problem, crisis, clue, resolution in DRAFT_PROBLEMS:
             for setback, solution in DRAFT_SETBACKS:
                 key = f"{actor}-{problem.replace(' ', '-')}-{len(output)}"
+                # Use a problem-specific failed attempt; random generic setbacks
+                # previously made many combinations nonsensical.
+                obstacle, recovery = DRAFT_CAUSAL_ARCS[problem][DRAFT_SETBACKS.index((setback, solution))]
                 beats = [
-                    ("THE PROBLEM", f"A {actor} discovered that {crisis}, and everyone nearby needed help before nightfall.", "forest", "URGENT"),
-                    ("THE FIRST ATTEMPT FAILED", f"The {actor} tried to solve the problem alone, but {setback} and the situation grew worse.", "door", "NOT YET"),
-                    ("A BETTER IDEA", f"Then the {actor} noticed {clue}, and used {solution} to make a completely new plan.", "book", "NEW PLAN"),
-                    ("THE RESCUE", f"With the new plan in place, {resolution}, and the {actor} finally celebrated with the neighbors.", "forest", "SAVED"),
+                    ("THE PROBLEM", f"A {actor} discovered that {crisis}, while the village waited anxiously for help before sunset.", "forest", "URGENT"),
+                    ("THE FIRST ATTEMPT FAILED", f"The {actor} tried a quick repair, but {obstacle}, making the original plan impossible to finish.", "door", "NOT YET"),
+                    ("A BETTER IDEA", f"Remembering {clue}, the {actor} chose a safer approach: {recovery}, and asked the neighbors to assist.", "book", "NEW PLAN"),
+                    ("THE RESCUE", f"After everyone followed the revised plan, {resolution}, and the {actor} checked that the solution would last.", "forest", "SAVED"),
                 ]
                 output.append((key, f"The {actor.title()} and the {problem.title()} — {len(output) + 1}", "animal adventure", beats))
                 if len(output) >= limit:
