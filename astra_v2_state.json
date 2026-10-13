@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 42,
-  "confirmed_today": 41,
-  "last_attempt_at": "2026-10-13T12:44:43.361875+00:00",
+  "attempts": 43,
+  "confirmed_today": 42,
+  "last_attempt_at": "2026-10-13T12:55:11.260659+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -294,25 +294,32 @@
       "title": "The Mole and the Star Map",
       "format": "short",
       "uploaded_at": "2026-10-13T12:18:03.755618+00:00"
+    },
+    "rayvan-forge-d7f2ea161649eae1": {
+      "video_id": "7ww0WcqPimI",
+      "confirmed_at": "2026-10-13T12:54:31.982956+00:00",
+      "title": "The Fox and the Rain Garden",
+      "format": "short",
+      "uploaded_at": "2026-10-13T12:44:45.455639+00:00"
     }
   },
   "pending": {
-    "7ww0WcqPimI": {
-      "content_id": "rayvan-forge-d7f2ea161649eae1",
-      "title": "The Fox and the Rain Garden",
+    "Up-mzzEr9e0": {
+      "content_id": "rayvan-forge-8287c40918e9f286",
+      "title": "The Pigeon Who Fixed Noon",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-13T12:44:45.455639+00:00",
+      "uploaded_at": "2026-10-13T12:55:13.092967+00:00",
       "genre": "fiction",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-13T12:43:51.412825+00:00",
+  "last_preflight_at": "2026-10-13T12:54:31.672659+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T12:44:46.012287+00:00",
+    "at": "2026-10-13T12:55:13.350204+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -580,6 +587,12 @@
     "rayvan-forge-d7f2ea161649eae1": {
       "at": "2026-10-13T12:44:43.361861+00:00",
       "title": "The Fox and the Rain Garden",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-forge-8287c40918e9f286": {
+      "at": "2026-10-13T12:55:11.260644+00:00",
+      "title": "The Pigeon Who Fixed Noon",
       "format": "short",
       "result": "accepted"
     }
