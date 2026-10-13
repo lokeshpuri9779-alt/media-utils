@@ -46,8 +46,10 @@ def scene_layers(shot):
         bool(resolved.get("cache_image")) and
         Path(str(resolved.get("cache_image"))).is_file()
     )
-    if shot.get("story_subject") and visual != "media":
-        # Fiction subject takes precedence over generic director cards.
+    if shot.get("story_subject"):
+        # Fiction protagonists take precedence even when an incidental media
+        # cue exists. Otherwise the media branch can replace the character
+        # with a generic tree or unrelated stock image.
         foreground = "illustration"
     elif visual in ILLUSTRATED_VISUALS:
         foreground = "illustration"
