@@ -32,7 +32,7 @@ class CarryRigRegression(unittest.TestCase):
             draw_character(image, index, 0.25, 540, 1060,
                            expression="focused", gesture=gesture)
             images.append(image)
-        self.assertIsNotNone(ImageChops.difference(*images).getbbox())
+        self.assertIsNotNone(ImageChops.difference(images[0].convert("RGB"), images[1].convert("RGB")).getbbox())
 
     def test_gift_pickup_changes_artwork_across_five_frames(self):
         scene = build_comedy_demo()["scenes"][2]
