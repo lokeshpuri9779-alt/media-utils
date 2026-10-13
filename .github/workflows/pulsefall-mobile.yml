@@ -7099,6 +7099,242 @@ jobs:
           script = ExtResource("1")
           PULSEFALL_ELITE_TEST
 
+      - name: Add state-driven mobile attack telegraphs
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          cat > game/mobile/telegraph_rules.gd <<'PULSEFALL_TELEGRAPHS'
+          class_name TelegraphRules
+          extends RefCounted
+
+          const HIDDEN := "hidden"
+          const CHARGING := "charging"
+          const FIRING := "firing"
+
+          static func charge_ratio(remaining: float, duration: float) -> float:
+          	var safe_duration := maxf(duration, 0.05)
+          	return clampf(1.0 - maxf(remaining, 0.0) / safe_duration, 0.0, 1.0)
+
+          static func pulse_scale(charge: float, age: float) -> float:
+          	var safe_charge := clampf(charge, 0.0, 1.0)
+          	return clampf(0.76 + safe_charge * 0.38 + sin(age * (4.0 + safe_charge * 7.0)) * (0.035 + safe_charge * 0.055), 0.68, 1.24)
+
+          static func opacity(charge: float) -> float:
+          	return clampf(0.28 + clampf(charge, 0.0, 1.0) * 0.62, 0.28, 0.90)
+
+          static func state_name(is_aiming: bool, is_firing: bool, dead: bool) -> String:
+          	if dead:
+          		return HIDDEN
+          	if is_firing:
+          		return FIRING
+          	if is_aiming:
+          		return CHARGING
+          	return HIDDEN
+
+          static func profile(role: String, elite_variant: String, is_miniboss: bool, is_boss: bool, boss_phase: int) -> Dictionary:
+          	if is_boss:
+          		if boss_phase >= 3:
+          			return {"name": "RED CORE VOLLEY", "color": Color(1.0, 0.08, 0.04), "radius": 1.55, "beacon": 0.46}
+          		if boss_phase == 2:
+          			return {"name": "HUNTER VOLLEY", "color": Color(1.0, 0.30, 0.06), "radius": 1.42, "beacon": 0.42}
+          		return {"name": "WARDEN BURST", "color": Color(1.0, 0.68, 0.12), "radius": 1.30, "beacon": 0.38}
+          	if is_miniboss:
+          		return {"name": "SENTINEL CHARGE", "color": Color(1.0, 0.32, 0.08), "radius": 1.20, "beacon": 0.36}
+          	match elite_variant:
+          		"bulwark":
+          			return {"name": "BULWARK BURST", "color": Color(0.25, 1.0, 0.42), "radius": 1.10, "beacon": 0.34}
+          		"phase_stalker":
+          			return {"name": "STALKER RUSH", "color": Color(1.0, 0.20, 0.82), "radius": 0.95, "beacon": 0.31}
+          		"volt_artillery":
+          			return {"name": "ARTILLERY CHARGE", "color": Color(0.18, 0.58, 1.0), "radius": 1.18, "beacon": 0.36}
+          	match role:
+          		"scout":
+          			return {"name": "SCOUT SHOT", "color": Color(0.20, 0.95, 1.0), "radius": 0.82, "beacon": 0.25}
+          		"heavy":
+          			return {"name": "HEAVY CHARGE", "color": Color(1.0, 0.34, 0.18), "radius": 1.02, "beacon": 0.31}
+          		"disruptor":
+          			return {"name": "DISRUPTOR SHOT", "color": Color(0.72, 0.32, 1.0), "radius": 0.92, "beacon": 0.28}
+          		_:
+          			return {"name": "ASSAULT SHOT", "color": Color(1.0, 0.82, 0.24), "radius": 0.88, "beacon": 0.27}
+          PULSEFALL_TELEGRAPHS
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(source, old, new, label):
+              count = source.count(old)
+              if count != 1:
+                  raise SystemExit(f"Expected one {label} anchor, found {count}")
+              return source.replace(old, new, 1)
+
+          robot_path = Path("game/enemies/red_robot/red_robot.gd")
+          robot = robot_path.read_text()
+          robot = replace_once(
+              robot,
+              'const EliteRulesScript = preload("res://mobile/elite_rules.gd")\n',
+              'const EliteRulesScript = preload("res://mobile/elite_rules.gd")\nconst TelegraphRulesScript = preload("res://mobile/telegraph_rules.gd")\n',
+              "telegraph enemy preload",
+          )
+          robot = replace_once(
+              robot,
+              "var behavior_age := 0.0\n",
+              "var behavior_age := 0.0\nvar telegraph_flash := 0.0\nvar telegraph_disc: MeshInstance3D = null\nvar telegraph_beacon: MeshInstance3D = null\nvar telegraph_material: StandardMaterial3D = null\nvar telegraph_beacon_material: StandardMaterial3D = null\n",
+              "telegraph state",
+          )
+          robot = replace_once(
+              robot,
+              "\t_add_elite_beacon()\n",
+              "\t_add_elite_beacon()\n\t_add_attack_telegraph()\n",
+              "telegraph initialization",
+          )
+          robot = replace_once(
+              robot,
+              "\tbehavior_age += delta\n",
+              "\tbehavior_age += delta\n\t_update_attack_telegraph(delta)\n",
+              "telegraph runtime update",
+          )
+          robot = replace_once(
+              robot,
+              "func shoot() -> void:\n",
+              "func shoot() -> void:\n\ttelegraph_flash = 0.16\n",
+              "telegraph firing flash",
+          )
+          robot += '''
+
+
+          func _add_attack_telegraph() -> void:
+          	telegraph_disc = MeshInstance3D.new()
+          	telegraph_disc.name = "AttackTelegraphDisc"
+          	telegraph_disc.position = Vector3(0.0, 0.055, 0.0)
+          	var disc_mesh := CylinderMesh.new()
+          	disc_mesh.top_radius = 1.0
+          	disc_mesh.bottom_radius = 1.0
+          	disc_mesh.height = 0.035
+          	disc_mesh.radial_segments = 24
+          	telegraph_disc.mesh = disc_mesh
+          	telegraph_material = StandardMaterial3D.new()
+          	telegraph_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+          	telegraph_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+          	telegraph_material.emission_enabled = true
+          	telegraph_disc.material_override = telegraph_material
+          	telegraph_disc.visible = false
+          	add_child(telegraph_disc)
+
+          	telegraph_beacon = MeshInstance3D.new()
+          	telegraph_beacon.name = "AttackTelegraphBeacon"
+          	telegraph_beacon.position = Vector3(0.0, 2.42, 0.0)
+          	var beacon_mesh := SphereMesh.new()
+          	beacon_mesh.radius = 0.30
+          	beacon_mesh.height = 0.60
+          	telegraph_beacon.mesh = beacon_mesh
+          	telegraph_beacon_material = StandardMaterial3D.new()
+          	telegraph_beacon_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+          	telegraph_beacon_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+          	telegraph_beacon_material.emission_enabled = true
+          	telegraph_beacon.material_override = telegraph_beacon_material
+          	telegraph_beacon.visible = false
+          	add_child(telegraph_beacon)
+
+
+          func _update_attack_telegraph(delta: float) -> void:
+          	if telegraph_disc == null or telegraph_beacon == null:
+          		return
+          	telegraph_flash = maxf(telegraph_flash - delta, 0.0)
+          	var visual_state := TelegraphRulesScript.state_name(state == State.AIM, state == State.SHOOTING or telegraph_flash > 0.0, dead)
+          	var visible_now := visual_state != TelegraphRulesScript.HIDDEN
+          	telegraph_disc.visible = visible_now
+          	telegraph_beacon.visible = visible_now
+          	if not visible_now:
+          		return
+          	var elite_variant := str(get_meta("elite_variant", EliteRulesScript.NONE))
+          	var visual_profile := TelegraphRulesScript.profile(behavior_role, elite_variant, bool(get_meta("miniboss", false)), bool(get_meta("elite", false)), boss_phase)
+          	var charge := 1.0 if visual_state == TelegraphRulesScript.FIRING else TelegraphRulesScript.charge_ratio(aim_countdown, aim_duration)
+          	var pulse := TelegraphRulesScript.pulse_scale(charge, behavior_age)
+          	var visual_color: Color = visual_profile.color
+          	var alpha := TelegraphRulesScript.opacity(charge)
+          	if visual_state == TelegraphRulesScript.FIRING:
+          		alpha = 1.0
+          		pulse = 1.24
+          	var transparent_color := Color(visual_color.r, visual_color.g, visual_color.b, alpha)
+          	telegraph_material.albedo_color = transparent_color
+          	telegraph_material.emission = visual_color
+          	telegraph_material.emission_energy_multiplier = 1.8 + charge * 3.2
+          	telegraph_beacon_material.albedo_color = transparent_color
+          	telegraph_beacon_material.emission = visual_color
+          	telegraph_beacon_material.emission_energy_multiplier = 2.8 + charge * 4.0
+          	var radius := float(visual_profile.radius) * pulse
+          	telegraph_disc.scale = Vector3(radius, 1.0, radius)
+          	var beacon_scale := float(visual_profile.beacon) * (0.82 + charge * 0.58)
+          	telegraph_beacon.scale = Vector3.ONE * beacon_scale
+          '''
+          robot_path.write_text(robot)
+          PY
+
+          cat > game/mobile/telegraph_rules_test.gd <<'PULSEFALL_TELEGRAPH_TEST'
+          extends Node
+
+          const Rules = preload("res://mobile/telegraph_rules.gd")
+          var checks := 0
+          var failures := 0
+
+          func check(value: bool, message: String) -> void:
+          	checks += 1
+          	if value:
+          		print("PASS: ", message)
+          	else:
+          		failures += 1
+          		push_error("FAIL: " + message)
+
+          func _ready() -> void:
+          	check(Rules.charge_ratio(1.0, 1.0) == 0.0, "charge begins empty")
+          	check(is_equal_approx(Rules.charge_ratio(0.5, 1.0), 0.5), "charge reaches half at midpoint")
+          	check(Rules.charge_ratio(0.0, 1.0) == 1.0, "charge completes at firing window")
+          	check(Rules.charge_ratio(-1.0, 1.0) == 1.0, "negative remaining time clamps safely")
+          	check(Rules.charge_ratio(1.0, 0.0) == 0.0, "zero duration fails safely")
+          	check(Rules.opacity(0.0) >= 0.28, "telegraph remains visible at charge start")
+          	check(Rules.opacity(1.0) >= 0.89, "telegraph becomes highly visible before firing")
+          	check(Rules.opacity(2.0) <= 0.90, "telegraph opacity is bounded")
+          	check(Rules.pulse_scale(0.0, 0.0) >= 0.68, "pulse scale has a readable minimum")
+          	check(Rules.pulse_scale(1.0, 10.0) <= 1.24, "pulse scale cannot overwhelm the screen")
+          	check(Rules.state_name(false, false, false) == Rules.HIDDEN, "idle enemies hide attack telegraphs")
+          	check(Rules.state_name(true, false, false) == Rules.CHARGING, "aiming enemies expose charge state")
+          	check(Rules.state_name(true, true, false) == Rules.FIRING, "firing state overrides charging")
+          	check(Rules.state_name(true, true, true) == Rules.HIDDEN, "dead enemies hide all attack VFX")
+          	var scout := Rules.profile("scout", "none", false, false, 1)
+          	var assault := Rules.profile("assault", "none", false, false, 1)
+          	var heavy := Rules.profile("heavy", "none", false, false, 1)
+          	var disruptor := Rules.profile("disruptor", "none", false, false, 1)
+          	check(scout.color != assault.color and heavy.color != disruptor.color, "normal attack profiles preserve role colors")
+          	check(float(heavy.radius) > float(scout.radius), "heavy charge has a larger warning footprint")
+          	check(str(heavy.name).contains("CHARGE"), "heavy profile names its long telegraph")
+          	var bulwark := Rules.profile("assault", "bulwark", false, false, 1)
+          	var stalker := Rules.profile("assault", "phase_stalker", false, false, 1)
+          	var artillery := Rules.profile("assault", "volt_artillery", false, false, 1)
+          	check(bulwark.color != stalker.color and stalker.color != artillery.color, "elite attack colors stay distinct")
+          	check(float(artillery.radius) > float(stalker.radius), "artillery charge warns across a larger area")
+          	check(str(stalker.name).contains("STALKER"), "stalker attack VFX identifies its rush")
+          	var sentinel := Rules.profile("heavy", "none", true, false, 1)
+          	check(str(sentinel.name).contains("SENTINEL"), "miniboss owns a dedicated telegraph")
+          	check(float(sentinel.radius) >= 1.2, "miniboss telegraph is boss-scale readable")
+          	var boss_one := Rules.profile("heavy", "none", false, true, 1)
+          	var boss_two := Rules.profile("heavy", "none", false, true, 2)
+          	var boss_three := Rules.profile("heavy", "none", false, true, 3)
+          	check(boss_one.color != boss_two.color and boss_two.color != boss_three.color, "boss phases change telegraph color")
+          	check(float(boss_one.radius) < float(boss_two.radius) and float(boss_two.radius) < float(boss_three.radius), "boss warning footprint escalates by phase")
+          	check(str(boss_three.name).contains("RED CORE"), "final boss telegraph identifies red-core volley")
+          	check(float(boss_three.beacon) > float(boss_one.beacon), "final phase beacon grows with danger")
+          	print("TELEGRAPH RULE CHECKS: ", checks, " FAILURES: ", failures)
+          	get_tree().quit(0 if failures == 0 else 1)
+          PULSEFALL_TELEGRAPH_TEST
+
+          cat > game/mobile/telegraph_rules_test.tscn <<'PULSEFALL_TELEGRAPH_TEST'
+          [gd_scene load_steps=2 format=3]
+          [ext_resource type="Script" path="res://mobile/telegraph_rules_test.gd" id="1"]
+          [node name="TelegraphRuleTests" type="Node"]
+          script = ExtResource("1")
+          PULSEFALL_TELEGRAPH_TEST
+
       - name: Add license and build notes
         shell: bash
         run: |
@@ -7137,7 +7373,7 @@ jobs:
           Missing extraction or dying during escape retries from the escape checkpoint.
 
           Target:
-          Android landscape. Mobile controls are built in. TUNE offers LOW (30 FPS / 60% scale), MED (60 FPS / 72%), and HIGH (60 FPS / 85%) graphics targets. Run upgrades stack into synergies, optional OVERLOAD contracts add risk/reward, and four color-signaled enemy archetypes use distinct behaviors, while three readable elite variants add distinct durability, speed and artillery counters. Wave three culminates in a three-phase Sentinel miniboss; the final OMEGA WARDEN now has three rule-driven phases, bounded reinforcement deployments and explicit mobile counter prompts.
+          Android landscape. Mobile controls are built in. TUNE offers LOW (30 FPS / 60% scale), MED (60 FPS / 72%), and HIGH (60 FPS / 85%) graphics targets. Run upgrades stack into synergies, optional OVERLOAD contracts add risk/reward, and four color-signaled enemy archetypes use distinct behaviors, while three readable elite variants add distinct durability, speed and artillery counters. State-driven ground discs and overhead charge beacons now telegraph every normal, elite, Sentinel and OMEGA WARDEN attack with escalating phase colors. Wave three culminates in a three-phase Sentinel miniboss; the final OMEGA WARDEN now has three rule-driven phases, bounded reinforcement deployments and explicit mobile counter prompts.
           EOF
 
       - name: Create Android export preset
@@ -7153,7 +7389,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn,mobile/meta_progression_test.gd,mobile/meta_progression_test.tscn,mobile/run_checkpoint_test.gd,mobile/run_checkpoint_test.tscn,mobile/elite_rules_test.gd,mobile/elite_rules_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn,mobile/meta_progression_test.gd,mobile/meta_progression_test.tscn,mobile/run_checkpoint_test.gd,mobile/run_checkpoint_test.tscn,mobile/elite_rules_test.gd,mobile/elite_rules_test.tscn,mobile/telegraph_rules_test.gd,mobile/telegraph_rules_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.apk"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -7181,8 +7417,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=46
-          version/name="0.2.26-mobile-alpha"
+          version/code=47
+          version/name="0.2.27-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
 
@@ -7195,7 +7431,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn,mobile/meta_progression_test.gd,mobile/meta_progression_test.tscn,mobile/run_checkpoint_test.gd,mobile/run_checkpoint_test.tscn,mobile/elite_rules_test.gd,mobile/elite_rules_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn,mobile/meta_progression_test.gd,mobile/meta_progression_test.tscn,mobile/run_checkpoint_test.gd,mobile/run_checkpoint_test.tscn,mobile/elite_rules_test.gd,mobile/elite_rules_test.tscn,mobile/telegraph_rules_test.gd,mobile/telegraph_rules_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.aab"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -7223,8 +7459,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=46
-          version/name="0.2.26-mobile-alpha"
+          version/code=47
+          version/name="0.2.27-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -7277,6 +7513,8 @@ jobs:
           CHECKPOINT_RC=$?
           timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/elite_rules_test.tscn > /tmp/elite-rules-test.log 2>&1
           ELITE_RC=$?
+          timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/telegraph_rules_test.tscn > /tmp/telegraph-rules-test.log 2>&1
+          TELEGRAPH_RC=$?
           set -e
           cat /tmp/import.log
           cat /tmp/runtime.log
@@ -7297,7 +7535,8 @@ jobs:
           cat /tmp/meta-progression-test.log
           cat /tmp/run-checkpoint-test.log
           cat /tmp/elite-rules-test.log
-          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log /tmp/run-upgrades-test.log /tmp/risk-contract-test.log /tmp/enemy-archetypes-test.log /tmp/miniboss-rules-test.log /tmp/boss-rules-test.log /tmp/weapon-rules-test.log /tmp/meta-progression-test.log /tmp/run-checkpoint-test.log /tmp/elite-rules-test.log; then
+          cat /tmp/telegraph-rules-test.log
+          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log /tmp/run-upgrades-test.log /tmp/risk-contract-test.log /tmp/enemy-archetypes-test.log /tmp/miniboss-rules-test.log /tmp/boss-rules-test.log /tmp/weapon-rules-test.log /tmp/meta-progression-test.log /tmp/run-checkpoint-test.log /tmp/elite-rules-test.log /tmp/telegraph-rules-test.log; then
             echo "PULSEFALL mobile validation detected a script/runtime failure."
             exit 1
           fi
@@ -7313,8 +7552,8 @@ jobs:
             echo "PULSEFALL mobile validation detected unsupported renderer features."
             exit 1
           fi
-          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ] || [ "$GRAPHICS_RC" -ne 0 ] || [ "$UPGRADES_RC" -ne 0 ] || [ "$RISK_RC" -ne 0 ] || [ "$ARCHETYPES_RC" -ne 0 ] || [ "$MINIBOSS_RC" -ne 0 ] || [ "$BOSS_RC" -ne 0 ] || [ "$WEAPON_RC" -ne 0 ] || [ "$META_RC" -ne 0 ] || [ "$CHECKPOINT_RC" -ne 0 ] || [ "$ELITE_RC" -ne 0 ]; then
-            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC graphics=$GRAPHICS_RC upgrades=$UPGRADES_RC risk=$RISK_RC archetypes=$ARCHETYPES_RC miniboss=$MINIBOSS_RC boss=$BOSS_RC weapons=$WEAPON_RC meta=$META_RC checkpoint=$CHECKPOINT_RC elite=$ELITE_RC"
+          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ] || [ "$GRAPHICS_RC" -ne 0 ] || [ "$UPGRADES_RC" -ne 0 ] || [ "$RISK_RC" -ne 0 ] || [ "$ARCHETYPES_RC" -ne 0 ] || [ "$MINIBOSS_RC" -ne 0 ] || [ "$BOSS_RC" -ne 0 ] || [ "$WEAPON_RC" -ne 0 ] || [ "$META_RC" -ne 0 ] || [ "$CHECKPOINT_RC" -ne 0 ] || [ "$ELITE_RC" -ne 0 ] || [ "$TELEGRAPH_RC" -ne 0 ]; then
+            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC graphics=$GRAPHICS_RC upgrades=$UPGRADES_RC risk=$RISK_RC archetypes=$ARCHETYPES_RC miniboss=$MINIBOSS_RC boss=$BOSS_RC weapons=$WEAPON_RC meta=$META_RC checkpoint=$CHECKPOINT_RC elite=$ELITE_RC telegraph=$TELEGRAPH_RC"
             exit 1
           fi
 
@@ -7406,14 +7645,14 @@ jobs:
           cat /tmp/aapt-badging.err
           test -n "$BADGING"
           printf '%s\n' "$BADGING"
-          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='46' versionName='0.2.26-mobile-alpha'" <<<"$BADGING"
+          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='47' versionName='0.2.27-mobile-alpha'" <<<"$BADGING"
           grep -Fq "application-label:'PULSEFALL'" <<<"$BADGING"
           mapfile -t ABI_DIRS < <(unzip -Z1 "$APK" | awk -F/ '/^lib\/[^/]+\/.*\.so$/ {print $2}' | sort -u)
           test "${#ABI_DIRS[@]}" -eq 1
           test "${ABI_DIRS[0]}" = "arm64-v8a"
           echo "APK PACKAGE CHECKS: 7 FAILURES: 0"
           echo "PACKAGE: com.pulsefall.blacksite"
-          echo "VERSION: 43 / 0.2.26-mobile-alpha"
+          echo "VERSION: 43 / 0.2.27-mobile-alpha"
           echo "ABI: arm64-v8a"
 
           AAB="artifact/PULSEFALL_MOBILE_ALPHA.aab"
