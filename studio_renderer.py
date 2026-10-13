@@ -1036,6 +1036,13 @@ def render_frame(plan,t,genre,total):
         moved=im.resize((nw,nh),Image.Resampling.BICUBIC)
         dx=max(0,(nw-W)//2); dy=max(0,(nh-H)//2)
         im=moved.crop((dx,dy,dx+W,dy+H))
+    # Deterministic scene-specific motion accents. These stay at the edges,
+    # outside the central protagonist and lower caption region.
+    if genre == 'fiction' and not layers['draw_cached_media']:
+        from astra_v2.motion_elements import draw as draw_motion_element, COUNT
+        seed = int.from_bytes(hashlib.sha256(visual_identity.encode()).digest()[:8], 'big')
+        for slot, (ax, ay) in enumerate(((145, 460), (915, 480), (165, 1180))):
+            draw_motion_element(im, (seed + slot * 397) % COUNT, t, ax, ay, 24)
     # Transition accents occur under the hero, never on top of the narration
     # captions or newly selected subject illustration.
     transition_layer(im,s,t,u,accent)
