@@ -2,357 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-12T21:47:02.127534+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 99.18,
-          "captions": 100.0,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-anthology-672972bb35f02622"
-    },
-    {
-      "at": "2026-10-12T21:47:02.128547+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 15.6,
-        "renderer": "studio-7.1.1"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-anthology-672972bb35f02622"
-    },
-    {
-      "at": "2026-10-12T21:55:05.388814+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 99.71,
-          "captions": 100.0,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-anthology-a9a002d2ef7f9c8f"
-    },
-    {
-      "at": "2026-10-12T21:55:05.389654+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 15.533,
-        "renderer": "studio-7.1.1"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-anthology-a9a002d2ef7f9c8f"
-    },
-    {
-      "at": "2026-10-12T22:02:40.385463+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 99.74,
-          "captions": 100.0,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-anthology-2906bc6378365d3e"
-    },
-    {
-      "at": "2026-10-12T22:02:40.386330+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 14.867,
-        "renderer": "studio-7.1.1"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-anthology-2906bc6378365d3e"
-    },
-    {
-      "at": "2026-10-12T22:11:27.333196+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 99.36,
-          "captions": 100.0,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-anthology-2d0e491203919c7a"
-    },
-    {
-      "at": "2026-10-12T22:11:27.333943+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 15.7,
-        "renderer": "studio-7.1.1"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-anthology-2d0e491203919c7a"
-    },
-    {
-      "at": "2026-10-12T22:23:38.911354+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 99.52,
-          "captions": 100.0,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-anthology-0566139be012f920"
-    },
-    {
-      "at": "2026-10-12T22:23:38.912428+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 14.267,
-        "renderer": "studio-7.1.1"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-anthology-0566139be012f920"
-    },
-    {
-      "at": "2026-10-12T22:32:46.518855+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 97.49,
-          "captions": 97.63,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-anthology-20dc79fbdc44c430"
-    },
-    {
-      "at": "2026-10-12T22:32:46.519958+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 13.9,
-        "renderer": "studio-7.1.1"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-anthology-20dc79fbdc44c430"
-    },
-    {
-      "at": "2026-10-12T22:43:29.939336+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 98.96,
-          "captions": 100.0,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-anthology-a69514f6ca78e1f8"
-    },
-    {
-      "at": "2026-10-12T22:43:29.940189+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 13.9,
-        "renderer": "studio-7.1.1"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-anthology-a69514f6ca78e1f8"
-    },
-    {
-      "at": "2026-10-12T22:53:19.001480+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 99.28,
-          "captions": 100.0,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-anthology-6a4266fc010c04c6"
-    },
-    {
-      "at": "2026-10-12T22:53:19.002732+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 18.267,
-        "renderer": "studio-7.1.1"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-anthology-6a4266fc010c04c6"
-    },
-    {
-      "at": "2026-10-12T23:02:02.298910+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 99.56,
-          "captions": 100.0,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-free-original-1ecf425b029c3427"
-    },
-    {
-      "at": "2026-10-12T23:02:02.300014+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 18.933,
-        "renderer": "studio-7.1.1"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-free-original-1ecf425b029c3427"
-    },
-    {
-      "at": "2026-10-12T23:10:11.874421+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 96.68,
-          "captions": 97.21,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-free-original-91bb2e14b884a96b"
-    },
-    {
-      "at": "2026-10-12T23:10:11.875727+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 21.467,
-        "renderer": "studio-7.1.1"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-free-original-91bb2e14b884a96b"
-    },
-    {
-      "at": "2026-10-12T23:23:47.014951+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 96.71,
-          "captions": 97.07,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-free-original-1e5869965be72db7"
-    },
-    {
       "at": "2026-10-12T23:23:47.016029+00:00",
       "stage": "render",
       "element": "studio_render",
@@ -7370,6 +7019,259 @@
       },
       "proposed_action": "Diagnose story supply and creative gate failures",
       "candidate_id": ""
+    },
+    {
+      "at": "2026-10-13T09:20:22.157746+00:00",
+      "stage": "hook",
+      "element": "hook",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 94.0,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:20:22.168185+00:00",
+      "stage": "hook",
+      "element": "retention",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 83.07766666666666,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:20:22.178271+00:00",
+      "stage": "visuals",
+      "element": "visual",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 100.0,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:20:22.188034+00:00",
+      "stage": "pacing",
+      "element": "pacing",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 62.98899999999999,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:20:22.197723+00:00",
+      "stage": "audio",
+      "element": "audio",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 88.79,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:20:22.207481+00:00",
+      "stage": "captions",
+      "element": "captions",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 89.17,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:20:22.217369+00:00",
+      "stage": "story",
+      "element": "novelty",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 100.0,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:20:22.227123+00:00",
+      "stage": "script",
+      "element": "coherence",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 92.0,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:20:22.237005+00:00",
+      "stage": "render",
+      "element": "technical",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 100.0,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:20:22.246657+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "fail",
+      "evidence": {
+        "hard_failures": [],
+        "media_failures": [],
+        "layer_failures": []
+      },
+      "proposed_action": "['review_story_rhythm_and_tension']",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:21:37.796826+00:00",
+      "stage": "hook",
+      "element": "hook",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 94.0,
+        "candidate": "saturn-density-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:21:37.806849+00:00",
+      "stage": "hook",
+      "element": "retention",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 76.34133333333332,
+        "candidate": "saturn-density-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:21:37.816934+00:00",
+      "stage": "visuals",
+      "element": "visual",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 100.0,
+        "candidate": "saturn-density-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:21:37.827540+00:00",
+      "stage": "pacing",
+      "element": "pacing",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 47.646,
+        "candidate": "saturn-density-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:21:37.839069+00:00",
+      "stage": "audio",
+      "element": "audio",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 99.81,
+        "candidate": "saturn-density-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:21:37.849383+00:00",
+      "stage": "captions",
+      "element": "captions",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 100.0,
+        "candidate": "saturn-density-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:21:37.859448+00:00",
+      "stage": "story",
+      "element": "novelty",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 100.0,
+        "candidate": "saturn-density-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:21:37.869590+00:00",
+      "stage": "script",
+      "element": "coherence",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 92.0,
+        "candidate": "saturn-density-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:21:37.879504+00:00",
+      "stage": "render",
+      "element": "technical",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 100.0,
+        "candidate": "saturn-density-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:21:37.892643+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "fail",
+      "evidence": {
+        "hard_failures": [],
+        "media_failures": [],
+        "layer_failures": []
+      },
+      "proposed_action": "['review_story_rhythm_and_tension']",
+      "candidate_id": "saturn-density-v1"
+    },
+    {
+      "at": "2026-10-13T09:21:37.902572+00:00",
+      "stage": "quality",
+      "element": "candidate_selection",
+      "outcome": "fail",
+      "evidence": {
+        "reason": "no_approved_original_story_available"
+      },
+      "proposed_action": "Diagnose story supply and creative gate failures",
+      "candidate_id": ""
     }
   ],
   "stage_counts": {
@@ -7385,7 +7287,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 52,
+      "unknown": 54,
       "improved": 0,
       "regressed": 0
     },
@@ -7393,7 +7295,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 52,
+      "unknown": 54,
       "improved": 0,
       "regressed": 0
     },
@@ -7401,7 +7303,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 104,
+      "unknown": 108,
       "improved": 0,
       "regressed": 0
     },
@@ -7417,7 +7319,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 52,
+      "unknown": 54,
       "improved": 0,
       "regressed": 0
     },
@@ -7449,7 +7351,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 52,
+      "unknown": 54,
       "improved": 0,
       "regressed": 0
     },
@@ -7457,7 +7359,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 52,
+      "unknown": 54,
       "improved": 0,
       "regressed": 0
     },
@@ -7465,21 +7367,21 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 52,
+      "unknown": 54,
       "improved": 0,
       "regressed": 0
     },
     "render": {
-      "pass": 18,
-      "fail": 52,
+      "pass": 8,
+      "fail": 54,
       "skip": 0,
-      "unknown": 52,
+      "unknown": 54,
       "improved": 0,
       "regressed": 0
     },
     "quality": {
-      "pass": 18,
-      "fail": 44,
+      "pass": 7,
+      "fail": 45,
       "skip": 0,
       "unknown": 0,
       "improved": 0,
