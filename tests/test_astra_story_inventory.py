@@ -1,7 +1,7 @@
 """Regression tests for ASTRA's authored and opt-in draft story inventory."""
 import unittest
 
-from astra_v2.story_forge import PLOTS, REWRITTEN_PLOTS, catalog, draft_catalog, editorial_screen, plot_fingerprint
+from astra_v2.story_forge import PLOTS, REWRITTEN_PLOTS, DRAFT_CAUSAL_ARCS, DRAFT_PROBLEMS, catalog, draft_catalog, editorial_screen, plot_fingerprint
 from astra_v2.publication_quality import publication_rejection
 
 
@@ -37,6 +37,17 @@ class StoryInventoryTests(unittest.TestCase):
         self.assertEqual(len({x[0] for x in drafts}), 996)
         self.assertEqual(len({x[1] for x in drafts}), 996)
         self.assertEqual(len({plot_fingerprint(x[3]) for x in drafts}), 996)
+
+    def test_all_draft_causal_arcs_are_problem_specific(self):
+        self.assertEqual(len(DRAFT_CAUSAL_ARCS), 20)
+        self.assertEqual({row[0] for row in DRAFT_PROBLEMS}, set(DRAFT_CAUSAL_ARCS))
+        self.assertTrue(all(len(arcs) == 5 for arcs in DRAFT_CAUSAL_ARCS.values()))
+        self.assertEqual(len({pair for arcs in DRAFT_CAUSAL_ARCS.values()
+                              for pair in arcs}), 100)
+        for key, title, genre, beats in draft_catalog():
+            with self.subTest(key=key):
+                self.assertEqual(len(beats), 4)
+                self.assertTrue(all(len(beat[1].split()) >= 9 for beat in beats))
 
     def test_drafts_are_not_publication_ready(self):
         records = catalog(limit=2000, include_drafts=True)
