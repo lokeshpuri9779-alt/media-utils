@@ -529,10 +529,16 @@ def main():
     parser.add_argument("--fps", type=int, default=8)
     parser.add_argument("--output", type=Path, default=Path("development-output"))
     parser.add_argument("--video", action="store_true")
+    parser.add_argument("--comedy-pilot", action="store_true",
+                        help="Render the fixed offline fox/rabbit comedy pilot")
     parser.add_argument("--story-file", type=Path, help="Explicit offline story JSON")
     parser.add_argument("--validate-only", action="store_true")
     args = parser.parse_args()
-    plan = load_story_file(args.story_file, args.seed) if args.story_file else build_plan(args.seed, args.scenes)
+    if args.comedy_pilot and args.story_file:
+        parser.error("--comedy-pilot and --story-file are mutually exclusive")
+    plan = (build_comedy_demo(args.seed) if args.comedy_pilot else
+            load_story_file(args.story_file, args.seed) if args.story_file else
+            build_plan(args.seed, args.scenes))
     if args.validate_only:
         print(json.dumps({"valid": True, "scene_count": len(plan["scenes"]),
                           "publication_allowed": False, "quality_approved": False}, indent=2))
