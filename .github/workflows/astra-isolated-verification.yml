@@ -47,8 +47,11 @@ jobs:
         run: |
           python - <<'PY'
           from PIL import Image, ImageChops
-          from astra_v2.character_object_catalog import draw_character
-          import inspect
+          import importlib, inspect
+          import astra_v2.character_object_catalog as catalog
+          # Earlier tests may replace draw_character with a silhouette
+          # fixture. Reload the actual catalog before verifying face pixels.
+          draw_character = importlib.reload(catalog).draw_character
           assert 'expression' in inspect.signature(draw_character).parameters
           for character_id in (0, 200, 400, 900, 1700):
               rendered = {}
