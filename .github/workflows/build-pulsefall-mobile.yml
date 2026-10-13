@@ -6371,6 +6371,230 @@ jobs:
           [node name="WeaponRulesTests" type="Node"]
           script = ExtResource("1")
           PULSEFALL_WEAPON_SCENE
+
+      - name: Add permanent arsenal progression
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          cat > game/mobile/meta_progression.gd <<'PULSEFALL_META'
+          extends Node
+
+          const SAVE_PATH := "user://pulsefall_meta.json"
+          const SAVE_VERSION := 2
+          const SCATTER_CREDITS := 250
+          const LANCE_CREDITS := 900
+          const MAX_INTEGRITY_BONUS := 30
+          const MAX_CADENCE_BONUS := 0.12
+
+          var credits: int = 0
+          var runs: int = 0
+          var best_score: int = 0
+          var meta_level: int = 1
+
+
+          func _ready() -> void:
+          	load_state()
+
+
+          static func level_for_credits(value: int) -> int:
+          	return maxi(1, 1 + int(sqrt(float(maxi(value, 0)) / 450.0)))
+
+
+          static func integrity_bonus_for_level(level: int) -> int:
+          	return mini(maxi(level - 1, 0) * 3, MAX_INTEGRITY_BONUS)
+
+
+          static func cadence_multiplier_for_level(level: int) -> float:
+          	var bonus := minf(float(maxi(level - 1, 0)) * 0.012, MAX_CADENCE_BONUS)
+          	return 1.0 - bonus
+
+
+          static func unlocked_modes_for_credits(value: int) -> Array[int]:
+          	var modes: Array[int] = [0]
+          	if value >= SCATTER_CREDITS:
+          		modes.append(1)
+          	if value >= LANCE_CREDITS:
+          		modes.append(2)
+          	return modes
+
+
+          func is_weapon_unlocked(mode: int) -> bool:
+          	return mode in unlocked_modes_for_credits(credits)
+
+
+          func next_weapon_mode(current: int) -> int:
+          	var modes := unlocked_modes_for_credits(credits)
+          	var index := modes.find(current)
+          	if index < 0:
+          		return modes[0]
+          	return modes[(index + 1) % modes.size()]
+
+
+          func arsenal_status() -> String:
+          	var modes := unlocked_modes_for_credits(credits)
+          	if modes.size() >= 3:
+          		return "ARSENAL COMPLETE"
+          	if modes.size() == 2:
+          		return "LANCE AT %d CR" % LANCE_CREDITS
+          	return "SCATTER AT %d CR" % SCATTER_CREDITS
+
+
+          func complete_run(score: int, time_seconds: float) -> int:
+          	var reward := 100 + maxi(int(score / 120), 0)
+          	if time_seconds > 0.0 and time_seconds < 600.0:
+          		reward += 50
+          	credits += reward
+          	runs += 1
+          	best_score = maxi(best_score, score)
+          	meta_level = level_for_credits(credits)
+          	save_state()
+          	return reward
+
+
+          func apply_to_player(player) -> void:
+          	if player == null or player.has_meta("pulsefall_meta_applied"):
+          		return
+          	player.set_meta("pulsefall_meta_applied", true)
+          	player.max_health += integrity_bonus_for_level(meta_level)
+          	player.health = player.max_health
+          	player.weapon_fire_rate_multiplier *= cadence_multiplier_for_level(meta_level)
+          	player._refresh_weapon_cooldown()
+          	player.health_changed.emit(player.health, player.max_health)
+          	MobileMetrics.record("meta_progression_applied", {
+          		"credits": credits,
+          		"level": meta_level,
+          		"integrity_bonus": integrity_bonus_for_level(meta_level),
+          		"cadence_multiplier": cadence_multiplier_for_level(meta_level),
+          		"weapons": unlocked_modes_for_credits(credits).size(),
+          	})
+
+
+          func save_state() -> void:
+          	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+          	if file == null:
+          		return
+          	file.store_string(JSON.stringify({
+          		"save_version": SAVE_VERSION,
+          		"credits": credits,
+          		"runs": runs,
+          		"best_score": best_score,
+          		"meta_level": meta_level,
+          	}))
+
+
+          func load_state() -> void:
+          	if not FileAccess.file_exists(SAVE_PATH):
+          		return
+          	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
+          	if file == null:
+          		return
+          	var parsed = JSON.parse_string(file.get_as_text())
+          	if not parsed is Dictionary:
+          		return
+          	credits = maxi(int(parsed.get("credits", 0)), 0)
+          	runs = maxi(int(parsed.get("runs", 0)), 0)
+          	best_score = maxi(int(parsed.get("best_score", 0)), 0)
+          	meta_level = level_for_credits(credits)
+          PULSEFALL_META
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          player = Path("game/player/player.gd")
+          source = player.read_text()
+          old = '''func cycle_weapon() -> String:
+          	weapon_mode = (weapon_mode + 1) % 3
+          	_refresh_weapon_cooldown()
+          	return get_weapon_name()
+          '''
+          new = '''func cycle_weapon() -> String:
+          	weapon_mode = MetaProgression.next_weapon_mode(weapon_mode)
+          	_refresh_weapon_cooldown()
+          	return get_weapon_name()
+          '''
+          if source.count(old) != 1:
+              raise SystemExit("weapon progression anchor missing")
+          player.write_text(source.replace(old, new, 1))
+
+          level = Path("game/level/level.gd")
+          source = level.read_text()
+          old = '_show_banner("EXTRACTION COMPLETE", "SCORE %06d  //  +%d CREDITS  //  META LV %d" % [score, reward, MetaProgression.meta_level], 8.0)'
+          new = '_show_banner("EXTRACTION COMPLETE", "SCORE %06d  //  +%d CR  //  LV %d  //  %s" % [score, reward, MetaProgression.meta_level, MetaProgression.arsenal_status()], 8.0)'
+          if source.count(old) != 1:
+              raise SystemExit("extraction progression banner anchor missing")
+          level.write_text(source.replace(old, new, 1))
+          PY
+
+          cat > game/mobile/meta_progression_test.gd <<'PULSEFALL_META_TEST'
+          extends Node
+
+          const Rules = preload("res://mobile/meta_progression.gd")
+          var checks := 0
+          var failures := 0
+
+
+          func check(condition: bool, message: String) -> void:
+          	checks += 1
+          	if not condition:
+          		failures += 1
+          	push_error(message)
+
+
+          func _ready() -> void:
+          	check(Rules.level_for_credits(-20) == 1, "negative legacy credits fail closed")
+          	check(Rules.level_for_credits(0) == 1, "new profile begins at level one")
+          	check(Rules.level_for_credits(449) == 1, "level one boundary is stable")
+          	check(Rules.level_for_credits(450) == 2, "first permanent stat level unlocks")
+          	check(Rules.level_for_credits(1800) == 3, "quadratic level curve remains bounded")
+          	check(Rules.integrity_bonus_for_level(1) == 0, "new profile has no hidden integrity boost")
+          	check(Rules.integrity_bonus_for_level(2) == 3, "each level grants readable integrity")
+          	check(Rules.integrity_bonus_for_level(99) == 30, "integrity bonus has a hard cap")
+          	check(is_equal_approx(Rules.cadence_multiplier_for_level(1), 1.0), "new profile keeps baseline cadence")
+          	check(Rules.cadence_multiplier_for_level(2) < 1.0, "levels improve weapon cadence")
+          	check(Rules.cadence_multiplier_for_level(99) >= 0.88, "permanent cadence bonus has a hard cap")
+          	check(Rules.unlocked_modes_for_credits(0) == [0], "carbine is the safe starter weapon")
+          	check(Rules.unlocked_modes_for_credits(249) == [0], "scatter cannot unlock early")
+          	check(Rules.unlocked_modes_for_credits(250) == [0, 1], "scatter unlock threshold is inclusive")
+          	check(Rules.unlocked_modes_for_credits(899) == [0, 1], "lance cannot unlock early")
+          	check(Rules.unlocked_modes_for_credits(900) == [0, 1, 2], "lance unlock threshold is inclusive")
+          	var profile := Rules.new()
+          	profile.credits = 0
+          	check(profile.next_weapon_mode(0) == 0, "locked arsenal cannot cycle into unavailable gear")
+          	check(not profile.is_weapon_unlocked(1), "locked scatter reports unavailable")
+          	check(profile.arsenal_status().contains("SCATTER"), "starter status names the next unlock")
+          	profile.credits = 250
+          	check(profile.next_weapon_mode(0) == 1, "scatter joins the cycle after unlocking")
+          	check(profile.next_weapon_mode(1) == 0, "two-weapon cycle wraps safely")
+          	check(profile.is_weapon_unlocked(1), "scatter reports permanently unlocked")
+          	check(profile.arsenal_status().contains("LANCE"), "mid-tier status names the next unlock")
+          	profile.credits = 900
+          	check(profile.next_weapon_mode(1) == 2, "lance joins the cycle after unlocking")
+          	check(profile.next_weapon_mode(2) == 0, "complete arsenal wraps to carbine")
+          	check(profile.next_weapon_mode(99) == 0, "invalid persisted mode fails closed")
+          	check(profile.arsenal_status() == "ARSENAL COMPLETE", "complete arsenal status is explicit")
+          	profile.credits = 0
+          	profile.runs = 0
+          	profile.best_score = 0
+          	var reward := profile.complete_run(12000, 500.0)
+          	check(reward == 250, "sub-ten-minute extraction earns score and pace rewards")
+          	check(profile.credits == 250 and profile.runs == 1, "successful extraction persists career totals")
+          	check(profile.best_score == 12000, "best score advances on successful extraction")
+          	check(profile.is_weapon_unlocked(1), "a strong first extraction can unlock scatter")
+          	var slow_reward := profile.complete_run(0, 700.0)
+          	check(slow_reward == 100, "slow extraction omits the pace bonus")
+          	check(profile.best_score == 12000, "weaker runs cannot reduce best score")
+          	print("META PROGRESSION CHECKS: ", checks, " FAILURES: ", failures)
+          	get_tree().quit(0 if failures == 0 else 1)
+          PULSEFALL_META_TEST
+
+          cat > game/mobile/meta_progression_test.tscn <<'PULSEFALL_META_SCENE'
+          [gd_scene load_steps=2 format=3]
+          [ext_resource type="Script" path="res://mobile/meta_progression_test.gd" id="1"]
+          [node name="MetaProgressionTests" type="Node"]
+          script = ExtResource("1")
+          PULSEFALL_META_SCENE
+
       - name: Add license and build notes
         shell: bash
         run: |
@@ -6425,7 +6649,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn,mobile/meta_progression_test.gd,mobile/meta_progression_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.apk"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -6453,8 +6677,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=43
-          version/name="0.2.23-mobile-alpha"
+          version/code=44
+          version/name="0.2.24-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
 
@@ -6467,7 +6691,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn,mobile/meta_progression_test.gd,mobile/meta_progression_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.aab"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -6495,8 +6719,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=43
-          version/name="0.2.23-mobile-alpha"
+          version/code=44
+          version/name="0.2.24-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -6543,6 +6767,8 @@ jobs:
           BOSS_RC=$?
           timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/weapon_rules_test.tscn > /tmp/weapon-rules-test.log 2>&1
           WEAPON_RC=$?
+          timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/meta_progression_test.tscn > /tmp/meta-progression-test.log 2>&1
+          META_RC=$?
           set -e
           cat /tmp/import.log
           cat /tmp/runtime.log
@@ -6560,7 +6786,8 @@ jobs:
           cat /tmp/miniboss-rules-test.log
           cat /tmp/boss-rules-test.log
           cat /tmp/weapon-rules-test.log
-          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log /tmp/run-upgrades-test.log /tmp/risk-contract-test.log /tmp/enemy-archetypes-test.log /tmp/miniboss-rules-test.log /tmp/boss-rules-test.log /tmp/weapon-rules-test.log; then
+          cat /tmp/meta-progression-test.log
+          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log /tmp/run-upgrades-test.log /tmp/risk-contract-test.log /tmp/enemy-archetypes-test.log /tmp/miniboss-rules-test.log /tmp/boss-rules-test.log /tmp/weapon-rules-test.log /tmp/meta-progression-test.log; then
             echo "PULSEFALL mobile validation detected a script/runtime failure."
             exit 1
           fi
@@ -6576,8 +6803,8 @@ jobs:
             echo "PULSEFALL mobile validation detected unsupported renderer features."
             exit 1
           fi
-          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ] || [ "$GRAPHICS_RC" -ne 0 ] || [ "$UPGRADES_RC" -ne 0 ] || [ "$RISK_RC" -ne 0 ] || [ "$ARCHETYPES_RC" -ne 0 ] || [ "$MINIBOSS_RC" -ne 0 ] || [ "$BOSS_RC" -ne 0 ] || [ "$WEAPON_RC" -ne 0 ]; then
-            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC graphics=$GRAPHICS_RC upgrades=$UPGRADES_RC risk=$RISK_RC archetypes=$ARCHETYPES_RC miniboss=$MINIBOSS_RC boss=$BOSS_RC weapons=$WEAPON_RC"
+          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ] || [ "$GRAPHICS_RC" -ne 0 ] || [ "$UPGRADES_RC" -ne 0 ] || [ "$RISK_RC" -ne 0 ] || [ "$ARCHETYPES_RC" -ne 0 ] || [ "$MINIBOSS_RC" -ne 0 ] || [ "$BOSS_RC" -ne 0 ] || [ "$WEAPON_RC" -ne 0 ] || [ "$META_RC" -ne 0 ]; then
+            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC graphics=$GRAPHICS_RC upgrades=$UPGRADES_RC risk=$RISK_RC archetypes=$ARCHETYPES_RC miniboss=$MINIBOSS_RC boss=$BOSS_RC weapons=$WEAPON_RC meta=$META_RC"
             exit 1
           fi
 
@@ -6669,14 +6896,14 @@ jobs:
           cat /tmp/aapt-badging.err
           test -n "$BADGING"
           printf '%s\n' "$BADGING"
-          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='43' versionName='0.2.23-mobile-alpha'" <<<"$BADGING"
+          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='43' versionName='0.2.24-mobile-alpha'" <<<"$BADGING"
           grep -Fq "application-label:'PULSEFALL'" <<<"$BADGING"
           mapfile -t ABI_DIRS < <(unzip -Z1 "$APK" | awk -F/ '/^lib\/[^/]+\/.*\.so$/ {print $2}' | sort -u)
           test "${#ABI_DIRS[@]}" -eq 1
           test "${ABI_DIRS[0]}" = "arm64-v8a"
           echo "APK PACKAGE CHECKS: 7 FAILURES: 0"
           echo "PACKAGE: com.pulsefall.blacksite"
-          echo "VERSION: 43 / 0.2.23-mobile-alpha"
+          echo "VERSION: 43 / 0.2.24-mobile-alpha"
           echo "ABI: arm64-v8a"
 
           AAB="artifact/PULSEFALL_MOBILE_ALPHA.aab"
