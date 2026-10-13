@@ -3,7 +3,7 @@
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 31,
-  "confirmed_today": 30,
+  "confirmed_today": 31,
   "last_attempt_at": "2026-10-13T08:13:19.300350+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -217,40 +217,37 @@
       "title": "Why brewers schedule Is Getting Attention Now | RAYVAN",
       "format": "long",
       "uploaded_at": "2026-10-13T06:33:43.685491+00:00"
-    }
-  },
-  "pending": {
-    "InMQkj_WC6s": {
-      "content_id": "rayvan-anthology-72089163055174ea",
+    },
+    "rayvan-anthology-72089163055174ea": {
+      "video_id": "InMQkj_WC6s",
+      "confirmed_at": "2026-10-13T08:13:52.009463+00:00",
       "title": "The Penguin Who Delivered Snow",
-      "day": "2026-10-13",
-      "uploaded_at": "2026-10-13T08:13:21.765434+00:00",
-      "genre": "fiction",
-      "format": "short"
+      "format": "short",
+      "uploaded_at": "2026-10-13T08:13:21.765434+00:00"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-13T08:11:21.588746+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-13T08:13:51.628286+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T08:13:22.068546+00:00",
+    "at": "2026-10-13T08:13:52.388388+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-13T07:05:49.939768+00:00",
   "reserved": {
