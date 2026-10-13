@@ -6592,6 +6592,310 @@ jobs:
           script = ExtResource("1")
           PULSEFALL_META_SCENE
 
+
+      - name: Add safe mobile run resume checkpoints
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          cat > game/mobile/run_checkpoint.gd <<'PULSEFALL_CHECKPOINT'
+          extends Node
+
+          const SAVE_PATH := "user://pulsefall_run_checkpoint.json"
+          const SAVE_VERSION := 1
+          const MAX_AGE_SECONDS := 604800
+          const VALID_PHASES := ["wave", "extraction"]
+          const UPGRADE_CAPS := {
+          	"rapid": 3,
+          	"core": 3,
+          	"mobility": 3,
+          	"armor": 3,
+          	"capacitor": 2,
+          	"phase_drive": 2,
+          }
+
+
+          static func sanitize_state(raw) -> Dictionary:
+          	if not raw is Dictionary:
+          		return {}
+          	var phase := str(raw.get("phase", ""))
+          	if not VALID_PHASES.has(phase):
+          		return {}
+          	var saved_wave := clampi(int(raw.get("wave", 1)), 1, 5)
+          	var stacks: Dictionary = {}
+          	var raw_stacks = raw.get("upgrade_stacks", {})
+          	if raw_stacks is Dictionary:
+          		for upgrade_id in UPGRADE_CAPS:
+          			var count := clampi(int(raw_stacks.get(upgrade_id, 0)), 0, int(UPGRADE_CAPS[upgrade_id]))
+          			if count > 0:
+          				stacks[upgrade_id] = count
+          	return {
+          		"save_version": SAVE_VERSION,
+          		"phase": phase,
+          		"wave": saved_wave,
+          		"score": maxi(int(raw.get("score", 0)), 0),
+          		"mission_time": clampf(float(raw.get("mission_time", 0.0)), 0.0, 7200.0),
+          		"extraction_remaining": clampf(float(raw.get("extraction_remaining", 60.0)), 1.0, 60.0),
+          		"upgrade_stacks": stacks,
+          		"saved_at": maxi(int(raw.get("saved_at", 0)), 0),
+          	}
+
+
+          static func is_expired(state: Dictionary, now_unix: int) -> bool:
+          	var saved_at := int(state.get("saved_at", 0))
+          	return saved_at <= 0 or now_unix - saved_at > MAX_AGE_SECONDS
+
+
+          func save_checkpoint(raw: Dictionary) -> bool:
+          	var state := sanitize_state(raw)
+          	if state.is_empty():
+          		return false
+          	state.saved_at = int(Time.get_unix_time_from_system())
+          	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+          	if file == null:
+          		return false
+          	file.store_string(JSON.stringify(state))
+          	return true
+
+
+          func load_checkpoint() -> Dictionary:
+          	if not FileAccess.file_exists(SAVE_PATH):
+          		return {}
+          	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
+          	if file == null:
+          		return {}
+          	var parsed = JSON.parse_string(file.get_as_text())
+          	var state := sanitize_state(parsed)
+          	if state.is_empty() or is_expired(state, int(Time.get_unix_time_from_system())):
+          		clear_checkpoint()
+          		return {}
+          	return state
+
+
+          func clear_checkpoint() -> void:
+          	if FileAccess.file_exists(SAVE_PATH):
+          		DirAccess.remove_absolute(ProjectSettings.globalize_path(SAVE_PATH))
+          PULSEFALL_CHECKPOINT
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          project = Path("game/project.godot")
+          source = project.read_text()
+          anchor = 'MetaProgression="*res://mobile/meta_progression.gd"'
+          if source.count(anchor) != 1:
+              raise SystemExit("meta autoload anchor missing")
+          source = source.replace(anchor, anchor + '\nRunCheckpoint="*res://mobile/run_checkpoint.gd"', 1)
+          project.write_text(source)
+
+          level = Path("game/level/level.gd")
+          source = level.read_text()
+
+          ready_anchor = '\tawait get_tree().create_timer(0.5).timeout\n\tif MetaProgression.runs == 0:'
+          ready_replacement = '''	var resume_state := RunCheckpoint.load_checkpoint()
+          	if not resume_state.is_empty():
+          		await get_tree().create_timer(0.25).timeout
+          		await _restore_run_checkpoint(resume_state)
+          		return
+
+          	await get_tree().create_timer(0.5).timeout
+          	if MetaProgression.runs == 0:'''
+          if source.count(ready_anchor) != 1:
+              raise SystemExit("resume ready anchor missing")
+          source = source.replace(ready_anchor, ready_replacement, 1)
+
+          wave_anchor = '''	if wave > TOTAL_WAVES:
+          		_finish_mission()
+          		return
+
+          	hostiles = 0'''
+          wave_replacement = '''	if wave > TOTAL_WAVES:
+          		_finish_mission()
+          		return
+
+          	RunCheckpoint.save_checkpoint(_capture_run_checkpoint("wave"))
+          	hostiles = 0'''
+          if source.count(wave_anchor) != 1:
+              raise SystemExit("wave checkpoint anchor missing")
+          source = source.replace(wave_anchor, wave_replacement, 1)
+
+          extraction_anchor = '\textraction_remaining = EXTRACTION_SECONDS\n\tmission_active = false'
+          extraction_replacement = '\textraction_remaining = EXTRACTION_SECONDS\n\tRunCheckpoint.save_checkpoint(_capture_run_checkpoint("extraction"))\n\tmission_active = false'
+          if source.count(extraction_anchor) != 1:
+              raise SystemExit("extraction checkpoint anchor missing")
+          source = source.replace(extraction_anchor, extraction_replacement, 1)
+
+          reward_anchor = '\tvar reward := MetaProgression.complete_run(score, mission_time)\n'
+          if source.count(reward_anchor) != 1:
+              raise SystemExit("completion checkpoint anchor missing")
+          source = source.replace(reward_anchor, reward_anchor + '\tRunCheckpoint.clear_checkpoint()\n', 1)
+
+          source += '''
+
+
+          func _capture_run_checkpoint(phase: String) -> Dictionary:
+          	return {
+          		"phase": phase,
+          		"wave": clampi(wave, 1, TOTAL_WAVES),
+          		"score": score,
+          		"mission_time": mission_time,
+          		"extraction_remaining": extraction_remaining if extraction_active else EXTRACTION_SECONDS,
+          		"upgrade_stacks": upgrade_stacks.duplicate(true),
+          	}
+
+
+          func _restore_run_upgrades(saved_stacks: Dictionary) -> void:
+          	upgrade_stacks = {}
+          	pulse_cooldown_multiplier = 1.0
+          	for upgrade_id in RunUpgradesScript.DEFINITIONS:
+          		var count := clampi(int(saved_stacks.get(upgrade_id, 0)), 0, int(RunUpgradesScript.DEFINITIONS[upgrade_id].max_stacks))
+          		for stack_index in range(count):
+          			upgrade_stacks = RunUpgradesScript.add_stack(upgrade_stacks, upgrade_id)
+          			active_player.apply_run_upgrade(upgrade_id)
+          			if upgrade_id == "capacitor":
+          				pulse_cooldown_multiplier = maxf(0.62, pulse_cooldown_multiplier * 0.84)
+          	for synergy_id in RunUpgradesScript.active_synergies(upgrade_stacks):
+          		match synergy_id:
+          			"overcharge":
+          				active_player.apply_run_upgrade("overcharge")
+          				pulse_cooldown_multiplier = maxf(0.52, pulse_cooldown_multiplier * 0.85)
+          			"bulwark":
+          				active_player.apply_run_upgrade("bulwark")
+          			"phase_hunter":
+          				active_player.apply_run_upgrade("phase_hunter")
+
+
+          func _restore_run_checkpoint(state: Dictionary) -> void:
+          	score = maxi(int(state.get("score", 0)), 0)
+          	mission_time = maxf(float(state.get("mission_time", 0.0)), 0.0)
+          	_restore_run_upgrades(state.get("upgrade_stacks", {}))
+          	MobileMetrics.record("run_resumed", {
+          		"phase": state.phase,
+          		"wave": state.wave,
+          		"score": score,
+          		"time_seconds": mission_time,
+          	})
+          	_show_banner("RUN RESUMED", "SAFE CHECKPOINT  //  WAVE %02d" % int(state.wave), 1.6)
+          	await get_tree().create_timer(1.0).timeout
+          	if str(state.phase) == "extraction":
+          		wave = int(state.wave)
+          		_begin_extraction()
+          		return
+          	wave = int(state.wave) - 1
+          	mission_active = true
+          	_start_wave()
+
+
+          func _notification(what: int) -> void:
+          	if what != NOTIFICATION_APPLICATION_FOCUS_OUT:
+          		return
+          	if extraction_active and not run_completed:
+          		RunCheckpoint.save_checkpoint(_capture_run_checkpoint("extraction"))
+          	MobileMetrics.record("application_backgrounded", {
+          		"wave": wave,
+          		"score": score,
+          		"extraction": extraction_active,
+          	})
+          '''
+          level.write_text(source)
+          PY
+
+          cat > game/mobile/run_checkpoint_test.gd <<'PULSEFALL_CHECKPOINT_TEST'
+          extends Node
+
+          const Rules = preload("res://mobile/run_checkpoint.gd")
+          var checks := 0
+          var failures := 0
+
+
+          func check(condition: bool, message: String) -> void:
+          	checks += 1
+          	if not condition:
+          		failures += 1
+          		push_error(message)
+
+
+          func _ready() -> void:
+          	RunCheckpoint.clear_checkpoint()
+          	check(Rules.sanitize_state(null).is_empty(), "null checkpoint fails closed")
+          	check(Rules.sanitize_state([]).is_empty(), "non-dictionary checkpoint fails closed")
+          	check(Rules.sanitize_state({}).is_empty(), "missing phase fails closed")
+          	check(Rules.sanitize_state({"phase": "combat"}).is_empty(), "unknown phase fails closed")
+          	var base := Rules.sanitize_state({
+          		"phase": "wave",
+          		"wave": 3,
+          		"score": 4500,
+          		"mission_time": 245.5,
+          		"upgrade_stacks": {"rapid": 2, "core": 1},
+          		"saved_at": 1000,
+          	})
+          	check(base.phase == "wave", "wave phase survives sanitization")
+          	check(base.wave == 3, "wave number survives sanitization")
+          	check(base.score == 4500, "score survives sanitization")
+          	check(is_equal_approx(base.mission_time, 245.5), "mission time survives sanitization")
+          	check(base.upgrade_stacks == {"rapid": 2, "core": 1}, "valid upgrade stacks survive sanitization")
+          	check(base.save_version == 1, "checkpoint schema version is explicit")
+          	var hostile := Rules.sanitize_state({
+          		"phase": "extraction",
+          		"wave": 99,
+          		"score": -50,
+          		"mission_time": -10.0,
+          		"extraction_remaining": 999.0,
+          		"upgrade_stacks": {"rapid": 99, "capacitor": 99, "unknown": 8},
+          		"saved_at": -1,
+          	})
+          	check(hostile.wave == 5, "wave is clamped to authored run")
+          	check(hostile.score == 0, "negative score fails closed")
+          	check(hostile.mission_time == 0.0, "negative mission time fails closed")
+          	check(hostile.extraction_remaining == 60.0, "extraction time cannot exceed authored limit")
+          	check(hostile.upgrade_stacks.rapid == 3, "three-tier upgrade cap is enforced")
+          	check(hostile.upgrade_stacks.capacitor == 2, "two-tier upgrade cap is enforced")
+          	check(not hostile.upgrade_stacks.has("unknown"), "unknown upgrades are discarded")
+          	check(hostile.saved_at == 0, "negative timestamp fails closed")
+          	var minimum := Rules.sanitize_state({
+          		"phase": "extraction",
+          		"wave": 0,
+          		"extraction_remaining": -5.0,
+          	})
+          	check(minimum.wave == 1, "wave cannot underflow")
+          	check(minimum.extraction_remaining == 1.0, "resume always preserves an actionable extraction window")
+          	check(not Rules.is_expired({"saved_at": 1000}, 1000 + Rules.MAX_AGE_SECONDS), "seven-day boundary remains valid")
+          	check(Rules.is_expired({"saved_at": 1000}, 1001 + Rules.MAX_AGE_SECONDS), "old checkpoint expires")
+          	check(Rules.is_expired({"saved_at": 0}, 1000), "missing timestamp expires")
+          	var wrote := RunCheckpoint.save_checkpoint({
+          		"phase": "wave",
+          		"wave": 2,
+          		"score": 900,
+          		"mission_time": 82.0,
+          		"upgrade_stacks": {"mobility": 2, "phase_drive": 1},
+          	})
+          	check(wrote, "valid checkpoint writes successfully")
+          	check(FileAccess.file_exists(RunCheckpoint.SAVE_PATH), "checkpoint file exists after write")
+          	var loaded := RunCheckpoint.load_checkpoint()
+          	check(loaded.phase == "wave" and loaded.wave == 2, "checkpoint round trip preserves location")
+          	check(loaded.score == 900 and is_equal_approx(loaded.mission_time, 82.0), "checkpoint round trip preserves progress")
+          	check(loaded.upgrade_stacks == {"mobility": 2, "phase_drive": 1}, "checkpoint round trip preserves build")
+          	check(loaded.saved_at > 0, "write records a real timestamp")
+          	RunCheckpoint.clear_checkpoint()
+          	check(not FileAccess.file_exists(RunCheckpoint.SAVE_PATH), "clear removes completed checkpoint")
+          	check(RunCheckpoint.load_checkpoint().is_empty(), "load without checkpoint returns empty")
+          	var corrupt := FileAccess.open(RunCheckpoint.SAVE_PATH, FileAccess.WRITE)
+          	corrupt.store_string("{broken")
+          	corrupt = null
+          	check(RunCheckpoint.load_checkpoint().is_empty(), "corrupt checkpoint fails closed")
+          	RunCheckpoint.clear_checkpoint()
+          	check(not RunCheckpoint.save_checkpoint({"phase": "invalid"}), "invalid checkpoint cannot overwrite state")
+          	print("RUN CHECKPOINT CHECKS: ", checks, " FAILURES: ", failures)
+          	get_tree().quit(0 if failures == 0 else 1)
+          PULSEFALL_CHECKPOINT_TEST
+
+          cat > game/mobile/run_checkpoint_test.tscn <<'PULSEFALL_CHECKPOINT_SCENE'
+          [gd_scene load_steps=2 format=3]
+          [ext_resource type="Script" path="res://mobile/run_checkpoint_test.gd" id="1"]
+          [node name="RunCheckpointTests" type="Node"]
+          script = ExtResource("1")
+          PULSEFALL_CHECKPOINT_SCENE
+
       - name: Add license and build notes
         shell: bash
         run: |
@@ -6646,7 +6950,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn,mobile/meta_progression_test.gd,mobile/meta_progression_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn,mobile/meta_progression_test.gd,mobile/meta_progression_test.tscn,mobile/run_checkpoint_test.gd,mobile/run_checkpoint_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.apk"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -6674,8 +6978,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=44
-          version/name="0.2.24-mobile-alpha"
+          version/code=45
+          version/name="0.2.25-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
 
@@ -6688,7 +6992,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn,mobile/meta_progression_test.gd,mobile/meta_progression_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn,mobile/meta_progression_test.gd,mobile/meta_progression_test.tscn,mobile/run_checkpoint_test.gd,mobile/run_checkpoint_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.aab"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -6716,8 +7020,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=44
-          version/name="0.2.24-mobile-alpha"
+          version/code=45
+          version/name="0.2.25-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -6766,6 +7070,8 @@ jobs:
           WEAPON_RC=$?
           timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/meta_progression_test.tscn > /tmp/meta-progression-test.log 2>&1
           META_RC=$?
+          timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/run_checkpoint_test.tscn > /tmp/run-checkpoint-test.log 2>&1
+          CHECKPOINT_RC=$?
           set -e
           cat /tmp/import.log
           cat /tmp/runtime.log
@@ -6784,7 +7090,8 @@ jobs:
           cat /tmp/boss-rules-test.log
           cat /tmp/weapon-rules-test.log
           cat /tmp/meta-progression-test.log
-          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log /tmp/run-upgrades-test.log /tmp/risk-contract-test.log /tmp/enemy-archetypes-test.log /tmp/miniboss-rules-test.log /tmp/boss-rules-test.log /tmp/weapon-rules-test.log /tmp/meta-progression-test.log; then
+          cat /tmp/run-checkpoint-test.log
+          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log /tmp/run-upgrades-test.log /tmp/risk-contract-test.log /tmp/enemy-archetypes-test.log /tmp/miniboss-rules-test.log /tmp/boss-rules-test.log /tmp/weapon-rules-test.log /tmp/meta-progression-test.log /tmp/run-checkpoint-test.log; then
             echo "PULSEFALL mobile validation detected a script/runtime failure."
             exit 1
           fi
@@ -6800,8 +7107,8 @@ jobs:
             echo "PULSEFALL mobile validation detected unsupported renderer features."
             exit 1
           fi
-          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ] || [ "$GRAPHICS_RC" -ne 0 ] || [ "$UPGRADES_RC" -ne 0 ] || [ "$RISK_RC" -ne 0 ] || [ "$ARCHETYPES_RC" -ne 0 ] || [ "$MINIBOSS_RC" -ne 0 ] || [ "$BOSS_RC" -ne 0 ] || [ "$WEAPON_RC" -ne 0 ] || [ "$META_RC" -ne 0 ]; then
-            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC graphics=$GRAPHICS_RC upgrades=$UPGRADES_RC risk=$RISK_RC archetypes=$ARCHETYPES_RC miniboss=$MINIBOSS_RC boss=$BOSS_RC weapons=$WEAPON_RC meta=$META_RC"
+          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ] || [ "$GRAPHICS_RC" -ne 0 ] || [ "$UPGRADES_RC" -ne 0 ] || [ "$RISK_RC" -ne 0 ] || [ "$ARCHETYPES_RC" -ne 0 ] || [ "$MINIBOSS_RC" -ne 0 ] || [ "$BOSS_RC" -ne 0 ] || [ "$WEAPON_RC" -ne 0 ] || [ "$META_RC" -ne 0 ] || [ "$CHECKPOINT_RC" -ne 0 ]; then
+            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC graphics=$GRAPHICS_RC upgrades=$UPGRADES_RC risk=$RISK_RC archetypes=$ARCHETYPES_RC miniboss=$MINIBOSS_RC boss=$BOSS_RC weapons=$WEAPON_RC meta=$META_RC checkpoint=$CHECKPOINT_RC"
             exit 1
           fi
 
@@ -6893,14 +7200,14 @@ jobs:
           cat /tmp/aapt-badging.err
           test -n "$BADGING"
           printf '%s\n' "$BADGING"
-          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='44' versionName='0.2.24-mobile-alpha'" <<<"$BADGING"
+          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='45' versionName='0.2.25-mobile-alpha'" <<<"$BADGING"
           grep -Fq "application-label:'PULSEFALL'" <<<"$BADGING"
           mapfile -t ABI_DIRS < <(unzip -Z1 "$APK" | awk -F/ '/^lib\/[^/]+\/.*\.so$/ {print $2}' | sort -u)
           test "${#ABI_DIRS[@]}" -eq 1
           test "${ABI_DIRS[0]}" = "arm64-v8a"
           echo "APK PACKAGE CHECKS: 7 FAILURES: 0"
           echo "PACKAGE: com.pulsefall.blacksite"
-          echo "VERSION: 43 / 0.2.24-mobile-alpha"
+          echo "VERSION: 43 / 0.2.25-mobile-alpha"
           echo "ABI: arm64-v8a"
 
           AAB="artifact/PULSEFALL_MOBILE_ALPHA.aab"
