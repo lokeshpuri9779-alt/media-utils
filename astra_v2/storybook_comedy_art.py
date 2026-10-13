@@ -18,6 +18,7 @@ def metrics(index, t, x, y):
 
 def shoulder_anchor(index, t, x, y, side):
     x, y = metrics(index, t, x, y)
+    y += int(7 * math.sin(t * 4.5))  # focused carry acting bounce
     return (x + side * 101, y + 123)
 
 
@@ -97,8 +98,7 @@ def draw_storybook_character(image, index, t, x=540, y=1060,
     # Arms are omitted only for the coordinated full-body carry rig.
     if gesture != "carry_rig":
         for side in (-1, 1):
-            shoulder = shoulder_anchor(index, t, x, y - bounce, side)
-            shoulder = (shoulder[0], shoulder[1] + bounce)
+            shoulder = (x + side * 101, y + 123)
             if gesture == "point" and side == 1:
                 hand = (x + 244, y + 26)
             elif gesture == "celebrate":
