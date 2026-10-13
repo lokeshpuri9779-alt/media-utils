@@ -207,7 +207,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
             record("render", "studio_render", "pass", evidence={"duration": rendered.get("duration"), "renderer": rendered.get("renderer")}, candidate_id=story.get("content_id"))
             legacy.CONTENT_META = {
                 "genre": story["genre"], "content_id": story["content_id"],
-                "source": story.get("source"), "creative_director": evaluation["director"],
+                "source": story.get("source"), "plot_key": story.get("plot_key", ""), "creative_director": evaluation["director"],
                 "renderer": rendered.get("renderer"), "format": "short",
             }
             title = story["title"]
@@ -265,7 +265,8 @@ def make_candidate(path, excluded_ids, excluded_titles):
     synthetic = bool(verdict.get("ai_disclosure_required"))
     return {"title": title, "description": description, "content_id": content_id,
             "media": media, "synthetic": synthetic,
-            "genre": str(meta.get("genre") or ""), "format": "short"}
+            "genre": str(meta.get("genre") or ""), "format": "short",
+            "plot_key": str(meta.get("plot_key") or "")}
 
 
 def make_long_candidate(path, excluded_ids, excluded_titles):
