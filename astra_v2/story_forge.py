@@ -333,6 +333,12 @@ REWRITTEN_PLOTS = [
         ("THE CELLAR CLUE", "A torn recipe corner clung to a flour sack beside the cellar stairs, where a draft had scattered loose papers.", "book", "PAPER TRAIL"),
         ("THE PIE RETURNS", "She recovered the recipe beneath the cellar shelf and baked the festival pie while her apprentice secured the box.", "door", "FESTIVAL SAVED"),
     ]),
+    ("raccoon-orchestra-curtain", "The Raccoon and the Silent Orchestra", "animal comedy", [
+        ("THE QUIET CONCERT", "A raccoon conductor raised his baton at the village concert, but the audience could barely hear a single instrument.", "door", "TOO QUIET"),
+        ("LOUDER DIDN'T HELP", "He ordered the musicians to play harder, until a drumstick snapped and the exhausted players stopped altogether.", "forest", "PLAN FAILED"),
+        ("THE HIDDEN CURTAIN", "From the balcony he noticed a thick rehearsal curtain hanging between the stage and audience, swallowing every note.", "book", "CURTAIN FOUND"),
+        ("MUSIC AT LAST", "The stage crew lifted the curtain, and the orchestra played softly enough to hear every melody across the hall.", "door", "BRAVO"),
+    ]),
 ]
 
 AUTHORED_KEYS = {row[0] for row in PLOTS + REWRITTEN_PLOTS}
