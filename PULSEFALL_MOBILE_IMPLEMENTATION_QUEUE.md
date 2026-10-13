@@ -67,7 +67,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [x] Add a validated Gradle-backed AAB export path for release candidates; production upload-key signing remains pending.
 
 ### P1 — Core mobile game loop
-- [ ] Replace wave-only structure with 5–10 minute run.
+- [ ] Verify a 5–10 minute player-controlled run; v0.2.28 implements staged presentation and adaptive pacing, but actual duration is unmeasured.
 - [ ] Entry -> objective -> combat -> upgrade choice -> miniboss/boss -> extraction.
 - [x] Extraction success/failure state, 60-second physical escape, retry checkpoints and duplicate reward protection (20 scripted checks).
 - [x] Run rewards and risk/reward decisions: optional OVERLOAD contracts trade +2 hostiles, +25% enemy health, +20% damage and faster attacks for one bonus upgrade pick and +50% score.
@@ -417,3 +417,19 @@ Validated build: commit `61ff3583ad3a389df536eda4b01938dd71a81341`; APK SHA256 `
 - [x] Workflow runs `38457666612` and `38457666611` passed 355 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
 
 Validated build: commit `aa1e9987cec894edd62f6fa44e4434828d08e046`; APK SHA256 `c083e2968da28ac105005fc60797d1b49e1a61c76c8ed292d93b785e472223b0`; 521,191,742 bytes. v0.2.26 remains the known-good rollback. Automated checks prove deterministic VFX state, timing and visual-rule bounds, not physical-device readability, player reaction time, balance, a complete human objective-to-extraction run, real-device performance, or benchmark superiority.
+
+
+## Validated v0.2.28 operation-flow checkpoint (2026-10-14)
+
+- Added six named operation stages, pace-state HUD, stage-start telemetry and bounded catch-up reductions to non-boss encounters/objectives. OVERLOAD enemy additions remain intact.
+- Target window is 300–600 seconds (nominal 510 seconds), not a measured player result. Keep full-run duration and ordered-flow usability gates open until player-controlled QA.
+- Corrected stale generation anchors that conflicted with risk-contract banners/counts; both workflows at commit `61e539fec78ac494493f0513d156912dda0c8c7e` passed: runs `38465906162` and `38465906148`.
+- 389 scripted game/runtime assertions (including 34 new flow checks), 7 APK checks and 5 AAB checks reported zero failures. APK versionCode 48, versionName 0.2.28-mobile-alpha, arm64-v8a.
+- APK: 521,195,999 bytes; SHA256 `b21b363c5356c7fe9d98dfb145275d1d034147e6c4e84ca44f2284a57004e905`.
+- Rollback remains v0.2.27 at `aa1e9987cec894edd62f6fa44e4434828d08e046`, run `38457666612`; its source and GitHub artifact were not changed.
+
+### QA debt returned to the priority queue
+- [ ] Repair meta_progression_test.gd: push_error is outside the failed-condition branch, so all 33 passing assertions emit misleading ERROR lines. The failure counter is conditional and reports zero; do not call these actual assertion failures.
+- [ ] Explicitly free the standalone meta-progression test profile before shutdown; this fixture reports 3 ObjectDB instances and 1 retained resource. Existing leak gate only covers runtime/extraction logs. Extend it to this fixture after cleanup.
+- [ ] Distinguish expected malformed-checkpoint diagnostics from unexpected errors without broadly suppressing runtime errors.
+- [ ] Full player-controlled combat/navigation/extraction, real-device installation/frame pacing/thermals and benchmark comparisons remain unverified. No benchmark-superiority or clean-all-fixtures claim is justified by this build.
