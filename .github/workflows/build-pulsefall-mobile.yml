@@ -5652,6 +5652,228 @@ jobs:
           script = ExtResource("1")
           PULSEFALL_ARCHETYPE_TEST
 
+      - name: Add a designed mid-run Sentinel miniboss
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          cat > game/mobile/miniboss_rules.gd <<'PULSEFALL_MINIBOSS'
+          class_name MinibossRules
+          extends RefCounted
+
+          const SPAWN_WAVE := 3
+          const CORE_REWARD := 15
+          const BASE_SCORE := 900
+
+          static func should_spawn(wave: int) -> bool:
+          	return wave == SPAWN_WAVE
+
+          static func health_for_wave(wave: int) -> int:
+          	return 22 + maxi(wave, 1) * 4
+
+          static func damage_for_wave(wave: int) -> int:
+          	return 18 + maxi(wave, 1)
+
+          static func score_for_wave(wave: int) -> int:
+          	return BASE_SCORE * maxi(wave, 1)
+
+          static func phase_for_ratio(health_ratio: float) -> int:
+          	if health_ratio <= 0.34:
+          		return 3
+          	if health_ratio <= 0.67:
+          		return 2
+          	return 1
+
+          static func phase_title(phase: int) -> String:
+          	match clampi(phase, 1, 3):
+          		2:
+          			return "SENTINEL PHASE II"
+          		3:
+          			return "SENTINEL BERSERK"
+          		_:
+          			return "SENTINEL INTERCEPT"
+
+          static func phase_hint(phase: int) -> String:
+          	match clampi(phase, 1, 3):
+          		2:
+          			return "ARMOR FRACTURED // ATTACK CYCLE RISING"
+          		3:
+          			return "PULSE THE ORANGE TELEGRAPH // MAXIMUM PRESSURE"
+          		_:
+          			return "MID-RUN GUARDIAN // BREAK ITS TELEGRAPH"
+          PULSEFALL_MINIBOSS
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(source, old, new, label):
+              count = source.count(old)
+              if count != 1:
+                  raise SystemExit(f"Expected one {label} anchor, found {count}")
+              return source.replace(old, new, 1)
+
+          level_path = Path("game/level/level.gd")
+          level = level_path.read_text()
+          level = replace_once(
+              level,
+              'const RiskContractScript = preload("res://mobile/risk_contract.gd")\n',
+              'const RiskContractScript = preload("res://mobile/risk_contract.gd")\nconst MinibossRulesScript = preload("res://mobile/miniboss_rules.gd")\n',
+              "miniboss level preload",
+          )
+          level = replace_once(
+              level,
+              "func _spawn_robot_at(marker_index: int, elite: bool, spawn_index: int) -> void:\n",
+              "func _spawn_robot_at(marker_index: int, elite: bool, spawn_index: int, miniboss: bool = false) -> void:\n",
+              "miniboss spawn signature",
+          )
+          old_wave_spawn = '''		for i in range(count):
+          			_spawn_robot_at(i % robot_spawn_points.get_child_count(), false, i)
+
+          	_update_hud()
+          '''
+          new_wave_spawn = '''		for i in range(count):
+          			_spawn_robot_at(i % robot_spawn_points.get_child_count(), false, i)
+          		if MinibossRulesScript.should_spawn(wave):
+          			_show_banner(MinibossRulesScript.phase_title(1), MinibossRulesScript.phase_hint(1), 1.8)
+          			_spawn_robot_at((count + 1) % robot_spawn_points.get_child_count(), false, count, true)
+
+          	_update_hud()
+          '''
+          level = replace_once(level, old_wave_spawn, new_wave_spawn, "wave three miniboss spawn")
+          level = replace_once(
+              level,
+              '\t\tvar boss_subtitle := "OVERLOAD // WARDEN THREAT AMPLIFIED" if active_risk_contract == RiskContractScript.OVERLOAD else "BOSS SIGNAL ACQUIRED"\n',
+              '\t\tboss_label.text = "⚠  OMEGA WARDEN ACTIVE"\n\t\tvar boss_subtitle := "OVERLOAD // WARDEN THREAT AMPLIFIED" if active_risk_contract == RiskContractScript.OVERLOAD else "BOSS SIGNAL ACQUIRED"\n',
+              "boss label reset",
+          )
+          level = replace_once(
+              level,
+              '\trobot.set_meta("role", role)\n\trobot.behavior_role = role\n',
+              '''	robot.set_meta("role", role)
+          	robot.behavior_role = role
+          	if miniboss:
+          		role = "sentinel"
+          		robot.set_meta("role", role)
+          		robot.set_meta("miniboss", true)
+          		robot.behavior_role = "heavy"
+          		robot.health = MinibossRulesScript.health_for_wave(wave)
+          		robot.shot_damage = MinibossRulesScript.damage_for_wave(wave)
+          		robot.attack_delay = 4.0
+          		robot.animation_speed = 0.94
+          		robot.scale = Vector3.ONE * 1.36
+          		boss_label.text = "⚠  SENTINEL INTERCEPTOR ACTIVE"
+          		boss_label.visible = true
+          ''',
+              "sentinel spawn tuning",
+          )
+          level = replace_once(
+              level,
+              '\tif elite:\n\t\trobot.phase_changed.connect(_on_boss_phase_changed)\n',
+              '\tif elite:\n\t\trobot.phase_changed.connect(_on_boss_phase_changed)\n\telif miniboss:\n\t\trobot.phase_changed.connect(_on_miniboss_phase_changed)\n',
+              "sentinel phase signal",
+          )
+          level = replace_once(
+              level,
+              '\tvar elite := bool(robot.get_meta("elite", false))\n\tvar role := str(robot.get_meta("role", "standard"))\n',
+              '\tvar elite := bool(robot.get_meta("elite", false))\n\tvar miniboss := bool(robot.get_meta("miniboss", false))\n\tvar role := str(robot.get_meta("role", "standard"))\n',
+              "sentinel defeat state",
+          )
+          level = replace_once(
+              level,
+              'var base_points := 1500 if elite else (100 if role == "scout" else (190 if role == "assault" else (280 if role == "heavy" else 230)))',
+              'var base_points := 1500 if elite else (MinibossRulesScript.BASE_SCORE if miniboss else (100 if role == "scout" else (190 if role == "assault" else (280 if role == "heavy" else 230))))',
+              "sentinel score",
+          )
+          level = replace_once(
+              level,
+              '\tif elite:\n\t\tboss_label.visible = false\n\t_update_hud()\n',
+              '''	if elite or miniboss:
+          		boss_label.visible = false
+          	if miniboss and active_player != null:
+          		active_player.heal(MinibossRulesScript.CORE_REWARD)
+          		MobileMetrics.record("miniboss_defeated", {"wave": wave, "time_seconds": mission_time, "score": score})
+          		_show_banner("SENTINEL NEUTRALIZED", "+%d CORE // MID-RUN THREAT CLEARED" % MinibossRulesScript.CORE_REWARD, 1.25)
+          	_update_hud()
+          ''',
+              "sentinel defeat reward",
+          )
+          level += '''
+
+
+          func _on_miniboss_phase_changed(phase: int) -> void:
+          	MobileMetrics.record("miniboss_phase", {"phase": phase, "wave": wave, "time_seconds": mission_time})
+          	if OS.has_feature("mobile"):
+          		Input.vibrate_handheld(55)
+          	_show_banner(MinibossRulesScript.phase_title(phase), MinibossRulesScript.phase_hint(phase), 1.15)
+          '''
+          level_path.write_text(level)
+
+          robot_path = Path("game/enemies/red_robot/red_robot.gd")
+          robot = robot_path.read_text()
+          robot = replace_once(
+              robot,
+              'const EnemyArchetypesScript = preload("res://mobile/enemy_archetypes.gd")\n',
+              'const EnemyArchetypesScript = preload("res://mobile/enemy_archetypes.gd")\nconst MinibossRulesScript = preload("res://mobile/miniboss_rules.gd")\n',
+              "miniboss enemy preload",
+          )
+          robot = replace_once(
+              robot,
+              '\tif not bool(get_meta("elite", false)) or dead:\n\t\treturn\n\tvar ratio := float(health) / float(max_spawn_health)\n\tvar next_phase := 1\n\tif ratio <= 0.34:\n\t\tnext_phase = 3\n\telif ratio <= 0.67:\n\t\tnext_phase = 2\n',
+              '''	var is_elite := bool(get_meta("elite", false))
+          	var is_miniboss := bool(get_meta("miniboss", false))
+          	if (not is_elite and not is_miniboss) or dead:
+          		return
+          	var ratio := float(health) / float(max_spawn_health)
+          	var next_phase := MinibossRulesScript.phase_for_ratio(ratio)
+          ''',
+              "shared boss phase thresholds",
+          )
+          robot_path.write_text(robot)
+          PY
+
+          cat > game/mobile/miniboss_rules_test.gd <<'PULSEFALL_MINIBOSS_TEST'
+          extends Node
+
+          const Rules = preload("res://mobile/miniboss_rules.gd")
+          var checks := 0
+          var failures := 0
+
+          func check(value: bool, message: String) -> void:
+          	checks += 1
+          	if value:
+          		print("PASS: ", message)
+          	else:
+          		failures += 1
+          		push_error("FAIL: " + message)
+
+          func _ready() -> void:
+          	check(not Rules.should_spawn(1), "miniboss does not interrupt the opening wave")
+          	check(not Rules.should_spawn(2), "miniboss remains reserved before midpoint")
+          	check(Rules.should_spawn(3), "Sentinel spawns at the midpoint wave")
+          	check(not Rules.should_spawn(4) and not Rules.should_spawn(5), "miniboss does not duplicate before the final boss")
+          	check(Rules.health_for_wave(3) == 34, "wave-three Sentinel health is deterministic")
+          	check(Rules.damage_for_wave(3) == 21, "wave-three Sentinel damage is deterministic")
+          	check(Rules.score_for_wave(3) == 2700, "wave-three Sentinel score reward is meaningful")
+          	check(Rules.CORE_REWARD == 15, "Sentinel defeat grants a bounded recovery reward")
+          	check(Rules.phase_for_ratio(1.0) == 1, "full-health Sentinel begins in phase one")
+          	check(Rules.phase_for_ratio(0.68) == 1, "phase one holds above the threshold")
+          	check(Rules.phase_for_ratio(0.67) == 2, "67 percent health enters phase two")
+          	check(Rules.phase_for_ratio(0.35) == 2, "phase two holds above berserk threshold")
+          	check(Rules.phase_for_ratio(0.34) == 3, "34 percent health enters berserk")
+          	check(Rules.phase_title(2).contains("PHASE II"), "phase-two title is explicit")
+          	check(Rules.phase_title(3).contains("BERSERK"), "final phase communicates escalation")
+          	check(Rules.phase_hint(3).contains("PULSE") and Rules.phase_hint(3).contains("ORANGE"), "berserk hint exposes the readable counter")
+          	print("MINIBOSS RULE CHECKS: ", checks, " FAILURES: ", failures)
+          	get_tree().quit(0 if failures == 0 else 1)
+          PULSEFALL_MINIBOSS_TEST
+
+          cat > game/mobile/miniboss_rules_test.tscn <<'PULSEFALL_MINIBOSS_TEST'
+          [gd_scene load_steps=2 format=3]
+          [ext_resource type="Script" path="res://mobile/miniboss_rules_test.gd" id="1"]
+          [node name="MinibossRuleTests" type="Node"]
+          script = ExtResource("1")
+          PULSEFALL_MINIBOSS_TEST
+
       - name: Add license and build notes
         shell: bash
         run: |
@@ -5690,7 +5912,7 @@ jobs:
           Missing extraction or dying during escape retries from the escape checkpoint.
 
           Target:
-          Android landscape. Mobile controls are built in. TUNE offers LOW (30 FPS / 60% scale), MED (60 FPS / 72%), and HIGH (60 FPS / 85%) graphics targets. Run upgrades stack into synergies, optional OVERLOAD contracts add risk/reward, and four color-signaled enemy archetypes use flank, direct-pressure, heavy-telegraph and standoff behaviors.
+          Android landscape. Mobile controls are built in. TUNE offers LOW (30 FPS / 60% scale), MED (60 FPS / 72%), and HIGH (60 FPS / 85%) graphics targets. Run upgrades stack into synergies, optional OVERLOAD contracts add risk/reward, and four color-signaled enemy archetypes use distinct behaviors. Wave three now culminates in a three-phase Sentinel miniboss before the final Warden.
           EOF
 
       - name: Create Android export preset
@@ -5706,7 +5928,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.apk"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -5734,8 +5956,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=40
-          version/name="0.2.20-mobile-alpha"
+          version/code=41
+          version/name="0.2.21-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
 
@@ -5748,7 +5970,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.aab"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -5776,8 +5998,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=40
-          version/name="0.2.20-mobile-alpha"
+          version/code=41
+          version/name="0.2.21-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -5818,6 +6040,8 @@ jobs:
           RISK_RC=$?
           timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/enemy_archetypes_test.tscn > /tmp/enemy-archetypes-test.log 2>&1
           ARCHETYPES_RC=$?
+          timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/miniboss_rules_test.tscn > /tmp/miniboss-rules-test.log 2>&1
+          MINIBOSS_RC=$?
           set -e
           cat /tmp/import.log
           cat /tmp/runtime.log
@@ -5832,7 +6056,8 @@ jobs:
           cat /tmp/run-upgrades-test.log
           cat /tmp/risk-contract-test.log
           cat /tmp/enemy-archetypes-test.log
-          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log /tmp/run-upgrades-test.log /tmp/risk-contract-test.log /tmp/enemy-archetypes-test.log; then
+          cat /tmp/miniboss-rules-test.log
+          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log /tmp/run-upgrades-test.log /tmp/risk-contract-test.log /tmp/enemy-archetypes-test.log /tmp/miniboss-rules-test.log; then
             echo "PULSEFALL mobile validation detected a script/runtime failure."
             exit 1
           fi
@@ -5848,8 +6073,8 @@ jobs:
             echo "PULSEFALL mobile validation detected unsupported renderer features."
             exit 1
           fi
-          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ] || [ "$GRAPHICS_RC" -ne 0 ] || [ "$UPGRADES_RC" -ne 0 ] || [ "$RISK_RC" -ne 0 ] || [ "$ARCHETYPES_RC" -ne 0 ]; then
-            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC graphics=$GRAPHICS_RC upgrades=$UPGRADES_RC risk=$RISK_RC archetypes=$ARCHETYPES_RC"
+          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ] || [ "$GRAPHICS_RC" -ne 0 ] || [ "$UPGRADES_RC" -ne 0 ] || [ "$RISK_RC" -ne 0 ] || [ "$ARCHETYPES_RC" -ne 0 ] || [ "$MINIBOSS_RC" -ne 0 ]; then
+            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC graphics=$GRAPHICS_RC upgrades=$UPGRADES_RC risk=$RISK_RC archetypes=$ARCHETYPES_RC miniboss=$MINIBOSS_RC"
             exit 1
           fi
 
@@ -5941,14 +6166,14 @@ jobs:
           cat /tmp/aapt-badging.err
           test -n "$BADGING"
           printf '%s\n' "$BADGING"
-          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='40' versionName='0.2.20-mobile-alpha'" <<<"$BADGING"
+          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='41' versionName='0.2.21-mobile-alpha'" <<<"$BADGING"
           grep -Fq "application-label:'PULSEFALL'" <<<"$BADGING"
           mapfile -t ABI_DIRS < <(unzip -Z1 "$APK" | awk -F/ '/^lib\/[^/]+\/.*\.so$/ {print $2}' | sort -u)
           test "${#ABI_DIRS[@]}" -eq 1
           test "${ABI_DIRS[0]}" = "arm64-v8a"
           echo "APK PACKAGE CHECKS: 7 FAILURES: 0"
           echo "PACKAGE: com.pulsefall.blacksite"
-          echo "VERSION: 40 / 0.2.20-mobile-alpha"
+          echo "VERSION: 41 / 0.2.21-mobile-alpha"
           echo "ABI: arm64-v8a"
 
           AAB="artifact/PULSEFALL_MOBILE_ALPHA.aab"
