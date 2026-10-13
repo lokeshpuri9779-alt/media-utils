@@ -62,7 +62,11 @@ def overlay_icon(im,shot,t,accent):
                 draw.rounded_rectangle((x,y,x+w,y+h),radius=12,outline=color,width=10)
             else: continue
             rendered+=1
-        if not rendered: return False
+        if not rendered:
+            # Lucide icons frequently use SVG paths. A clean visual fallback
+            # is preferable to silently rendering nothing or inventing shapes.
+            # The full path renderer can be enabled once tested independently.
+            return False
         bob=int(9*math.sin(t*1.6))
         im.paste(layer,(330,670+bob),layer)
         return True
