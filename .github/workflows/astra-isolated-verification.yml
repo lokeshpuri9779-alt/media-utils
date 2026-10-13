@@ -212,6 +212,17 @@ jobs:
               draw(b,index,1.2)
               assert ImageChops.difference(a,b).getbbox() is not None, index
           PY
+      - name: Render offline comedy pilot
+        run: |
+          python -m astra_v2.coordinated_development --comedy-pilot --seed astra-comedy-pilot --fps 8 --video --output verification-output/comedy-pilot
+      - name: Upload offline comedy pilot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-offline-comedy-pilot
+          path: verification-output/comedy-pilot/
+          if-no-files-found: ignore
+          retention-days: 7
       - name: Verify character and object catalogs
         run: |
           python - <<'PY'
