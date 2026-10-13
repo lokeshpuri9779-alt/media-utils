@@ -215,13 +215,12 @@ def carry_shoulder_anchor(index, t, x, y, side):
 def carry_elbow(shoulder, hand, side, scale=1.0):
     """Two-bone 2D elbow whose forearm endpoint matches the moving prop.
 
-    A slightly adaptive limb length accommodates the early floor-level reach;
-    this is a procedural cartoon rig, not anatomical inverse kinematics.
+    A narrow elbow bend prevents the exaggerated diamond-shaped reach.
+    Segments remain connected to the gift throughout the lift.
     """
     dx, dy = hand[0] - shoulder[0], hand[1] - shoulder[1]
     distance = max(0.001, math.hypot(dx, dy))
-    length = max(140.0 * scale, distance * 0.57)
-    height = math.sqrt(max(0.0, length * length - distance * distance / 4))
+    height = max(16.0 * scale, min(44.0 * scale, distance * 0.13))
     midpoint = (shoulder[0] + dx / 2, shoulder[1] + dy / 2)
     elbow = (midpoint[0] + side * dy / distance * height,
              midpoint[1] - side * dx / distance * height)
@@ -346,7 +345,7 @@ def frame(scene, t):
                     new_h = max(1, int(artwork.height * scale))
                     scaled = artwork.resize((new_w, new_h), Image.Resampling.LANCZOS)
                     actor_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
-                    crouch = int(65 * (1.0 - lift_progress)) if named_action == "carry" and actor_index == 0 else 0
+                    crouch = int(155 * (1.0 - lift_progress)) if named_action == "carry" and actor_index == 0 else 0
                     place_x = int(slot + sway + (carry_shift if actor_index == 0 else 0) - new_w / 2)
                     place_y = int(cy + crouch - new_h / 2)
                     if named_action == "carry" and actor_index == 0:
@@ -357,14 +356,18 @@ def frame(scene, t):
                             place_x + (point[0] - bbox[0]) * scale,
                             place_y + (point[1] - bbox[1]) * scale,
                         ) for point in native_shoulders)
-                        lead_base = actor_layer.getpixel((
-                            540, min(1919, int(native_shoulders[0][1] + 40))))[:3]
+                        # The original actor layer has already been replaced
+                        # with a blank compositing canvas. Sample color from
+                        # the preserved, unscaled cropped artwork instead.
+                        lead_base = artwork.getpixel((
+                            int(540 - bbox[0]),
+                            int(native_shoulders[0][1] + 40 - bbox[1])))[:3]
                     actor_layer.alpha_composite(scaled, (place_x, place_y))
             if scale == 1.0:
                 # The solo ensemble actor must receive the same authored
                 # lateral motion as scaled ensemble members.
                 shifted = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
-                crouch = int(65 * (1.0 - lift_progress)) if named_action == "carry" and actor_index == 0 else 0
+                crouch = int(155 * (1.0 - lift_progress)) if named_action == "carry" and actor_index == 0 else 0
                 shifted.alpha_composite(actor_layer,
                                         (sway + (carry_shift if actor_index == 0 else 0), crouch))
                 actor_layer = shifted
@@ -376,7 +379,8 @@ def frame(scene, t):
                         point[0] + sway + carry_shift, point[1] + crouch
                     ) for point in native_shoulders)
                     lead_base = actor_layer.getpixel((
-                        540, min(1919, int(native_shoulders[0][1] + 40))))[:3]
+                        int(540 + sway + carry_shift),
+                        min(1919, int(native_shoulders[0][1] + 40 + crouch))))[:3]
             character_layer = Image.alpha_composite(character_layer, actor_layer)
         # Move the prop forward so it does not cover the ensemble.
         ox, oy = 540, 1510
