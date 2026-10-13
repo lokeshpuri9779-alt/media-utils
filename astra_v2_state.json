@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 44,
-  "confirmed_today": 43,
-  "last_attempt_at": "2026-10-13T13:14:47.611381+00:00",
+  "attempts": 45,
+  "confirmed_today": 44,
+  "last_attempt_at": "2026-10-13T13:22:40.311580+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -308,25 +308,32 @@
       "title": "The Pigeon Who Fixed Noon",
       "format": "short",
       "uploaded_at": "2026-10-13T12:55:13.092967+00:00"
+    },
+    "rayvan-forge-6ede72cef1b96de5": {
+      "video_id": "Ugpr3h2oXOw",
+      "confirmed_at": "2026-10-13T13:21:56.738460+00:00",
+      "title": "The Crab and the Moonlit Path",
+      "format": "short",
+      "uploaded_at": "2026-10-13T13:14:49.089845+00:00"
     }
   },
   "pending": {
-    "Ugpr3h2oXOw": {
-      "content_id": "rayvan-forge-6ede72cef1b96de5",
-      "title": "The Crab and the Moonlit Path",
+    "bQK7BQ7kD0o": {
+      "content_id": "rayvan-forge-080807a86e74a141",
+      "title": "The Firefly Lighthouse",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-13T13:14:49.089845+00:00",
+      "uploaded_at": "2026-10-13T13:22:43.420532+00:00",
       "genre": "fiction",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-13T13:13:58.212836+00:00",
+  "last_preflight_at": "2026-10-13T13:21:56.346169+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T13:14:49.334051+00:00",
+    "at": "2026-10-13T13:22:43.619120+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -606,6 +613,12 @@
     "rayvan-forge-6ede72cef1b96de5": {
       "at": "2026-10-13T13:14:47.611368+00:00",
       "title": "The Crab and the Moonlit Path",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-forge-080807a86e74a141": {
+      "at": "2026-10-13T13:22:40.311564+00:00",
+      "title": "The Firefly Lighthouse",
       "format": "short",
       "result": "accepted"
     }
