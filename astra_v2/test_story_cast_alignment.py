@@ -232,7 +232,7 @@ class StoryCastAlignmentTests(unittest.TestCase):
         with TemporaryDirectory() as tmp:
             result = render(plan, Path(tmp), fps=2)
             self.assertFalse(result["publication_allowed"])
-            self.assertTrue((Path(tmp) / "storyboard.png").exists())
+            self.assertTrue((Path(tmp) / "report.json").exists())
 
     def test_unsupported_action_fails_before_output(self):
         from pathlib import Path
