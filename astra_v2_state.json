@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 48,
+  "attempts": 49,
   "confirmed_today": 48,
-  "last_attempt_at": "2026-10-13T14:18:11.504812+00:00",
+  "last_attempt_at": "2026-10-13T14:42:02.294027+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -345,14 +345,23 @@
       "uploaded_at": "2026-10-13T14:18:13.524519+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "quality_skip",
+  "pending": {
+    "8r74epVgCB0": {
+      "content_id": "rayvan-forge-a344508e01b71870",
+      "title": "The Hedgehog and the Raincoat",
+      "day": "2026-10-13",
+      "uploaded_at": "2026-10-13T14:42:04.575334+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-13T14:36:05.336087+00:00",
+  "last_preflight_at": "2026-10-13T14:39:44.283997+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T14:38:43.611768+00:00",
+    "at": "2026-10-13T14:42:04.911958+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -656,6 +665,12 @@
     "rayvan-anthology-2d367521db3c2a50": {
       "at": "2026-10-13T14:18:11.504799+00:00",
       "title": "The Otter's Floating Library",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-forge-a344508e01b71870": {
+      "at": "2026-10-13T14:42:02.294012+00:00",
+      "title": "The Hedgehog and the Raincoat",
       "format": "short",
       "result": "accepted"
     }
