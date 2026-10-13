@@ -4869,6 +4869,312 @@ jobs:
           script = ExtResource("1")
           PULSEFALL_GRAPHICS_TEST
 
+      - name: Add stack-aware run upgrade synergies
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          cat > game/mobile/run_upgrades.gd <<'PULSEFALL_UPGRADES'
+          class_name RunUpgrades
+          extends RefCounted
+
+          const DEFINITIONS := {
+          	"rapid": {"title": "RAPID FIRE", "description": "Faster weapon cycle", "max_stacks": 3, "tag": "WEAPON"},
+          	"core": {"title": "CORE+", "description": "+18 max integrity", "max_stacks": 3, "tag": "DEFENSE"},
+          	"mobility": {"title": "MOBILITY", "description": "Faster traversal", "max_stacks": 3, "tag": "MOVEMENT"},
+          	"armor": {"title": "ARMOR", "description": "Reduce incoming damage", "max_stacks": 3, "tag": "DEFENSE"},
+          	"capacitor": {"title": "PULSE CAPACITOR", "description": "Shorter PULSE cooldown", "max_stacks": 2, "tag": "ABILITY"},
+          	"phase_drive": {"title": "PHASE DRIVE", "description": "Shorter DASH cooldown", "max_stacks": 2, "tag": "MOVEMENT"},
+          }
+
+          const SYNERGIES := {
+          	"overcharge": {"title": "OVERCHARGE", "requires": {"rapid": 2, "capacitor": 1}},
+          	"bulwark": {"title": "BULWARK", "requires": {"core": 2, "armor": 2}},
+          	"phase_hunter": {"title": "PHASE HUNTER", "requires": {"mobility": 2, "phase_drive": 1}},
+          }
+
+
+          static func stack_count(stacks: Dictionary, upgrade_id: String) -> int:
+          	return maxi(int(stacks.get(upgrade_id, 0)), 0)
+
+
+          static func add_stack(stacks: Dictionary, upgrade_id: String) -> Dictionary:
+          	var result := stacks.duplicate(true)
+          	if not DEFINITIONS.has(upgrade_id):
+          		return result
+          	var maximum := int(DEFINITIONS[upgrade_id].max_stacks)
+          	result[upgrade_id] = mini(stack_count(result, upgrade_id) + 1, maximum)
+          	return result
+
+
+          static func available_choices(stacks: Dictionary) -> Array[Dictionary]:
+          	var choices: Array[Dictionary] = []
+          	for upgrade_id in DEFINITIONS:
+          		var definition: Dictionary = DEFINITIONS[upgrade_id]
+          		var count := stack_count(stacks, upgrade_id)
+          		var maximum := int(definition.max_stacks)
+          		if count >= maximum:
+          			continue
+          		var next_tier := count + 1
+          		choices.append({
+          			"id": upgrade_id,
+          			"title": "%s  %s" % [definition.title, _roman(next_tier)],
+          			"description": "%s  [%s]" % [definition.description, definition.tag],
+          			"tier": next_tier,
+          			"max_stacks": maximum,
+          		})
+          	return choices
+
+
+          static func active_synergies(stacks: Dictionary) -> Array[String]:
+          	var active: Array[String] = []
+          	for synergy_id in SYNERGIES:
+          		var requirements: Dictionary = SYNERGIES[synergy_id].requires
+          		var unlocked := true
+          		for upgrade_id in requirements:
+          			if stack_count(stacks, upgrade_id) < int(requirements[upgrade_id]):
+          				unlocked = false
+          				break
+          		if unlocked:
+          			active.append(synergy_id)
+          	active.sort()
+          	return active
+
+
+          static func newly_unlocked(before: Dictionary, after: Dictionary) -> Array[String]:
+          	var previous := active_synergies(before)
+          	var unlocked: Array[String] = []
+          	for synergy_id in active_synergies(after):
+          		if not previous.has(synergy_id):
+          			unlocked.append(synergy_id)
+          	return unlocked
+
+
+          static func synergy_title(synergy_id: String) -> String:
+          	if not SYNERGIES.has(synergy_id):
+          		return synergy_id.to_upper()
+          	return str(SYNERGIES[synergy_id].title)
+
+
+          static func synergy_summary(stacks: Dictionary) -> String:
+          	var titles: Array[String] = []
+          	for synergy_id in active_synergies(stacks):
+          		titles.append(synergy_title(synergy_id))
+          	return "NONE" if titles.is_empty() else ", ".join(titles)
+
+
+          static func _roman(tier: int) -> String:
+          	match clampi(tier, 1, 3):
+          		2:
+          			return "II"
+          		3:
+          			return "III"
+          		_:
+          			return "I"
+          PULSEFALL_UPGRADES
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(source, old, new, label):
+              count = source.count(old)
+              if count != 1:
+                  raise SystemExit(f"Expected one {label} anchor, found {count}")
+              return source.replace(old, new, 1)
+
+          level_path = Path("game/level/level.gd")
+          source = level_path.read_text()
+          source = replace_once(
+              source,
+              "extends Node3D\n",
+              'extends Node3D\n\nconst RunUpgradesScript = preload("res://mobile/run_upgrades.gd")\n',
+              "upgrade level preload",
+          )
+          source = replace_once(
+              source,
+              "var first_upgrade_recorded := false\n",
+              "var first_upgrade_recorded := false\nvar upgrade_stacks: Dictionary = {}\nvar pulse_cooldown_multiplier := 1.0\n",
+              "upgrade run state",
+          )
+          source = replace_once(
+              source,
+              "\tpulse_cooldown = 16.0\n",
+              "\tpulse_cooldown = 16.0 * pulse_cooldown_multiplier\n",
+              "pulse cooldown scaling",
+          )
+          old_choices = '''	var choices := [
+          		["RAPID FIRE", "Faster weapon cycle", "rapid"],
+          		["CORE+", "+18 max integrity", "core"],
+          		["MOBILITY", "Faster traversal", "mobility"],
+          		["ARMOR", "Reduce incoming damage", "armor"],
+          	]
+          	var picks := choices.duplicate()
+          	picks.shuffle()
+          	picks = picks.slice(0, 3)
+          '''
+          new_choices = '''	var choices: Array[Dictionary] = RunUpgradesScript.available_choices(upgrade_stacks)
+          	choices.shuffle()
+          	var picks: Array[Dictionary] = choices.slice(0, mini(3, choices.size()))
+          '''
+          source = replace_once(source, old_choices, new_choices, "upgrade choice pool")
+          old_button = '''	for i in range(3):
+          		var pick: Array = picks[i]
+          		var button := Button.new()
+          		button.text = str(pick[0]) + "\n" + str(pick[1])
+          		button.position = Vector2(55 + i * 265, 105)
+          		button.size = Vector2(220, 112)
+          		button.add_theme_font_size_override("font_size", 17)
+          		button.pressed.connect(_choose_run_upgrade.bind(str(pick[2]), str(pick[0])))
+          		card.add_child(button)
+          '''
+          new_button = '''	for i in range(picks.size()):
+          		var pick: Dictionary = picks[i]
+          		var button := Button.new()
+          		button.text = str(pick.title) + "\n" + str(pick.description)
+          		button.position = Vector2(55 + i * 265, 105)
+          		button.size = Vector2(220, 112)
+          		button.add_theme_font_size_override("font_size", 17)
+          		button.pressed.connect(_choose_run_upgrade.bind(str(pick.id), str(pick.title)))
+          		card.add_child(button)
+          '''
+          source = replace_once(source, old_button, new_button, "upgrade choice buttons")
+          source = replace_once(
+              source,
+              'var note := _make_label("Choose one. Your run changes immediately.", 15, Color(0.72, 0.80, 0.90))',
+              'var note := _make_label("ACTIVE SYNERGIES: " + RunUpgradesScript.synergy_summary(upgrade_stacks), 15, Color(0.72, 0.80, 0.90))',
+              "upgrade synergy summary",
+          )
+          source = replace_once(
+              source,
+              "\tactive_player.apply_run_upgrade(upgrade_id)\n\tMobileMetrics.record",
+              '''	var previous_stacks := upgrade_stacks.duplicate(true)
+          	upgrade_stacks = RunUpgradesScript.add_stack(upgrade_stacks, upgrade_id)
+          	active_player.apply_run_upgrade(upgrade_id)
+          	if upgrade_id == "capacitor":
+          		pulse_cooldown_multiplier = maxf(0.62, pulse_cooldown_multiplier * 0.84)
+          	for synergy_id in RunUpgradesScript.newly_unlocked(previous_stacks, upgrade_stacks):
+          		_apply_run_synergy(synergy_id)
+          	MobileMetrics.record''',
+              "upgrade application",
+          )
+          source += '''
+
+
+          func _apply_run_synergy(synergy_id: String) -> void:
+          	match synergy_id:
+          		"overcharge":
+          			active_player.apply_run_upgrade("overcharge")
+          			pulse_cooldown_multiplier = maxf(0.52, pulse_cooldown_multiplier * 0.85)
+          		"bulwark":
+          			active_player.apply_run_upgrade("bulwark")
+          		"phase_hunter":
+          			active_player.apply_run_upgrade("phase_hunter")
+          		_:
+          			return
+          	MobileMetrics.record("synergy_unlocked", {"synergy": synergy_id, "wave": wave, "time_seconds": mission_time})
+          	_show_banner(RunUpgradesScript.synergy_title(synergy_id), "BUILD SYNERGY ONLINE", 1.25)
+          '''
+          level_path.write_text(source)
+
+          player_path = Path("game/player/player.gd")
+          source = player_path.read_text()
+          source = replace_once(
+              source,
+              "var recoil_shot_index := 0\n",
+              "var recoil_shot_index := 0\nvar dash_cooldown_multiplier := 1.0\n",
+              "dash upgrade state",
+          )
+          source = replace_once(
+              source,
+              "\t\t\"armor\":\n\t\t\tdamage_reduction = minf(0.42, damage_reduction + 0.10)\n",
+              '''		"armor":
+          			damage_reduction = minf(0.42, damage_reduction + 0.10)
+          		"phase_drive":
+          			dash_cooldown_multiplier = maxf(0.62, dash_cooldown_multiplier * 0.84)
+          		"overcharge":
+          			weapon_fire_rate_multiplier = maxf(0.52, weapon_fire_rate_multiplier * 0.90)
+          			_refresh_weapon_cooldown()
+          		"bulwark":
+          			max_health += 25
+          			health = mini(max_health, health + 25)
+          			damage_reduction = minf(0.50, damage_reduction + 0.08)
+          			health_changed.emit(health, max_health)
+          		"phase_hunter":
+          			move_speed_multiplier = minf(1.70, move_speed_multiplier * 1.08)
+          			dash_cooldown_multiplier = maxf(0.52, dash_cooldown_multiplier * 0.82)
+          ''',
+              "player upgrade effects",
+          )
+          source = replace_once(
+              source,
+              "\tdash_cooldown = 1.15\n",
+              "\tdash_cooldown = 1.15 * dash_cooldown_multiplier\n",
+              "dash cooldown scaling",
+          )
+          player_path.write_text(source)
+          PY
+
+          cat > game/mobile/run_upgrades_test.gd <<'PULSEFALL_UPGRADE_TEST'
+          extends Node
+
+          const Upgrades = preload("res://mobile/run_upgrades.gd")
+          var failures := 0
+          var checks := 0
+
+          func check(value: bool, message: String) -> void:
+          	checks += 1
+          	if value:
+          		print("PASS: ", message)
+          	else:
+          		failures += 1
+          		push_error("FAIL: " + message)
+
+
+          func has_choice(choices: Array[Dictionary], upgrade_id: String) -> bool:
+          	for choice in choices:
+          		if choice.id == upgrade_id:
+          			return true
+          	return false
+
+
+          func _ready() -> void:
+          	var empty: Dictionary = {}
+          	var base_choices := Upgrades.available_choices(empty)
+          	check(base_choices.size() == 6, "all six base upgrades are initially available")
+          	check(Upgrades.active_synergies(empty).is_empty(), "fresh run has no active synergy")
+          	check(Upgrades.stack_count(empty, "rapid") == 0, "missing stack defaults to zero")
+          	var rapid_one := Upgrades.add_stack(empty, "rapid")
+          	check(rapid_one.rapid == 1, "selection adds one stack")
+          	var rapid_three := Upgrades.add_stack(Upgrades.add_stack(rapid_one, "rapid"), "rapid")
+          	var rapid_capped := Upgrades.add_stack(rapid_three, "rapid")
+          	check(rapid_capped.rapid == 3, "upgrade stacks clamp at configured maximum")
+          	check(not has_choice(Upgrades.available_choices(rapid_capped), "rapid"), "maxed upgrade leaves the choice pool")
+          	check(Upgrades.add_stack(empty, "unknown").is_empty(), "unknown upgrade cannot mutate the build")
+          	check(str(Upgrades.available_choices(rapid_one).filter(func(choice): return choice.id == "rapid")[0].title).ends_with("II"), "next choice exposes its stack tier")
+          	var overcharge_before := {"rapid": 2}
+          	check(not Upgrades.active_synergies(overcharge_before).has("overcharge"), "OVERCHARGE cannot unlock early")
+          	var overcharge_after := {"rapid": 2, "capacitor": 1}
+          	check(Upgrades.newly_unlocked(overcharge_before, overcharge_after) == ["overcharge"], "rapid plus capacitor unlocks OVERCHARGE")
+          	var bulwark_before := {"core": 2, "armor": 1}
+          	check(not Upgrades.active_synergies(bulwark_before).has("bulwark"), "BULWARK requires both defense branches")
+          	var bulwark_after := {"core": 2, "armor": 2}
+          	check(Upgrades.newly_unlocked(bulwark_before, bulwark_after) == ["bulwark"], "core plus armor unlocks BULWARK")
+          	var hunter_after := {"mobility": 2, "phase_drive": 1}
+          	check(Upgrades.active_synergies(hunter_after).has("phase_hunter"), "mobility plus phase drive unlocks PHASE HUNTER")
+          	var all_active := {"rapid": 2, "capacitor": 1, "core": 2, "armor": 2, "mobility": 2, "phase_drive": 1}
+          	check(Upgrades.active_synergies(all_active).size() == 3, "all three synergies can coexist")
+          	check(Upgrades.synergy_summary(all_active).contains("OVERCHARGE") and Upgrades.synergy_summary(all_active).contains("BULWARK") and Upgrades.synergy_summary(all_active).contains("PHASE HUNTER"), "synergy summary exposes the complete build")
+          	print("RUN UPGRADE CHECKS: ", checks, " FAILURES: ", failures)
+          	get_tree().quit(0 if failures == 0 else 1)
+          PULSEFALL_UPGRADE_TEST
+
+          cat > game/mobile/run_upgrades_test.tscn <<'PULSEFALL_UPGRADE_TEST'
+          [gd_scene load_steps=2 format=3]
+          [ext_resource type="Script" path="res://mobile/run_upgrades_test.gd" id="1"]
+          [node name="RunUpgradeTests" type="Node"]
+          script = ExtResource("1")
+          PULSEFALL_UPGRADE_TEST
+
       - name: Add license and build notes
         shell: bash
         run: |
@@ -4907,7 +5213,7 @@ jobs:
           Missing extraction or dying during escape retries from the escape checkpoint.
 
           Target:
-          Android landscape. Mobile controls are built in. TUNE offers LOW (30 FPS / 60% scale), MED (60 FPS / 72%), and HIGH (60 FPS / 85%) graphics targets.
+          Android landscape. Mobile controls are built in. TUNE offers LOW (30 FPS / 60% scale), MED (60 FPS / 72%), and HIGH (60 FPS / 85%) graphics targets. Run upgrades now stack into OVERCHARGE, BULWARK, and PHASE HUNTER synergies.
           EOF
 
       - name: Create Android export preset
@@ -4923,7 +5229,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.apk"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -4951,8 +5257,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=37
-          version/name="0.2.17-mobile-alpha"
+          version/code=38
+          version/name="0.2.18-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
 
@@ -4965,7 +5271,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.aab"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -4993,8 +5299,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=37
-          version/name="0.2.17-mobile-alpha"
+          version/code=38
+          version/name="0.2.18-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -5029,6 +5335,8 @@ jobs:
           GYRO_RC=$?
           timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/graphics_preset_test.tscn > /tmp/graphics-preset-test.log 2>&1
           GRAPHICS_RC=$?
+          timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/run_upgrades_test.tscn > /tmp/run-upgrades-test.log 2>&1
+          UPGRADES_RC=$?
           set -e
           cat /tmp/import.log
           cat /tmp/runtime.log
@@ -5040,7 +5348,8 @@ jobs:
           cat /tmp/combat-feel-test.log
           cat /tmp/gyro-aim-test.log
           cat /tmp/graphics-preset-test.log
-          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log; then
+          cat /tmp/run-upgrades-test.log
+          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log /tmp/run-upgrades-test.log; then
             echo "PULSEFALL mobile validation detected a script/runtime failure."
             exit 1
           fi
@@ -5056,8 +5365,8 @@ jobs:
             echo "PULSEFALL mobile validation detected unsupported renderer features."
             exit 1
           fi
-          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ] || [ "$GRAPHICS_RC" -ne 0 ]; then
-            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC graphics=$GRAPHICS_RC"
+          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ] || [ "$GRAPHICS_RC" -ne 0 ] || [ "$UPGRADES_RC" -ne 0 ]; then
+            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC graphics=$GRAPHICS_RC upgrades=$UPGRADES_RC"
             exit 1
           fi
 
@@ -5149,14 +5458,14 @@ jobs:
           cat /tmp/aapt-badging.err
           test -n "$BADGING"
           printf '%s\n' "$BADGING"
-          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='37' versionName='0.2.17-mobile-alpha'" <<<"$BADGING"
+          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='38' versionName='0.2.18-mobile-alpha'" <<<"$BADGING"
           grep -Fq "application-label:'PULSEFALL'" <<<"$BADGING"
           mapfile -t ABI_DIRS < <(unzip -Z1 "$APK" | awk -F/ '/^lib\/[^/]+\/.*\.so$/ {print $2}' | sort -u)
           test "${#ABI_DIRS[@]}" -eq 1
           test "${ABI_DIRS[0]}" = "arm64-v8a"
           echo "APK PACKAGE CHECKS: 7 FAILURES: 0"
           echo "PACKAGE: com.pulsefall.blacksite"
-          echo "VERSION: 37 / 0.2.17-mobile-alpha"
+          echo "VERSION: 38 / 0.2.18-mobile-alpha"
           echo "ABI: arm64-v8a"
 
           AAB="artifact/PULSEFALL_MOBILE_ALPHA.aab"
