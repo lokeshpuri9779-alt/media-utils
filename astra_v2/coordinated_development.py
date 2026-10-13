@@ -349,7 +349,9 @@ def frame(scene, t):
         lead_scale = (1.0, 0.82, 0.66, 0.53)[len(actors) - 1] if actors else 1.0
         ox = lead_x + carry_shift + lead_sway
         floor_y = 1510
-        hand_y = cy + int(125 * lead_scale) + int(8 * math.sin(t * 2.0))
+        # The fox's hands sit above the torso center; the previous offset
+        # placed the gift below the hands even after the pickup completed.
+        hand_y = cy - int(65 * lead_scale) + int(8 * math.sin(t * 2.0))
         oy = int(floor_y * (1.0 - lift_progress) + hand_y * lift_progress)
     if named_action == "carry":
         # Carry objects should remain visually subordinate to the actor.
@@ -362,12 +364,27 @@ def frame(scene, t):
             artwork = native.crop(bbox)
             prop_scale = 0.55 if actors and len(actors) > 1 else 0.72
             prop_scale *= 0.92 + 0.08 * lift_progress
+            # Keep the carried prop in front of the torso, but within arm reach.
+            if lift_progress > 0.85:
+                assert abs(oy - hand_y) < 2, 'carried prop missed hand anchor'
             pw = max(1, int(artwork.width * prop_scale))
             ph = max(1, int(artwork.height * prop_scale))
             artwork = artwork.resize((pw, ph), Image.Resampling.LANCZOS)
             object_layer.alpha_composite(artwork, (int(ox - pw / 2), int(oy - ph / 2)))
     else:
         draw_prop(object_layer, scene["object_id"], t, ox, oy)
+    # Frame-specific framing: wide setup, tighter reaction, and hero finale.
+    # Transform the character and prop together to preserve contact alignment.
+    if actors and named_action in ('point', 'react', 'celebrate'):
+        zoom = {'point': 1.05, 'react': 1.11, 'celebrate': 1.08}[named_action]
+        def framed(layer):
+            nw, nh = int(1080 * zoom), int(1920 * zoom)
+            enlarged = layer.resize((nw, nh), Image.Resampling.BICUBIC)
+            xoff = (nw - 1080) // 2
+            yoff = (nh - 1920) // 2
+            return enlarged.crop((xoff, yoff, xoff + 1080, yoff + 1920))
+        character_layer = framed(character_layer)
+        object_layer = framed(object_layer)
     image = Image.alpha_composite(image.convert("RGBA"), character_layer.resize((W, H), Image.Resampling.LANCZOS))
     image = Image.alpha_composite(image, object_layer.resize((W, H), Image.Resampling.LANCZOS))
     d = ImageDraw.Draw(image)
