@@ -173,6 +173,16 @@ def verify_story_cast(plan):
     return True
 
 
+def draw_expressive_character(image, index, t, x, y, expression):
+    """Use facial states when supported; preserve legacy test renderers."""
+    try:
+        return draw_character(image, index, t, x, y, expression=expression)
+    except TypeError as exc:
+        if "unexpected keyword argument 'expression'" not in str(exc):
+            raise
+        return draw_character(image, index, t, x, y)
+
+
 def frame(scene, t):
     """Experimental scene composition with depth, a shared stage and interaction."""
     image = Image.new("RGB", (W, H), BG)
@@ -238,8 +248,8 @@ def frame(scene, t):
                           "happy" if named_action == "celebrate" else
                           "focused" if named_action in ("point", "carry") else
                           "neutral")
-            draw_character(actor_layer, actor["character_id"], actor_t, 540, 1060,
-                           expression=expression)
+            draw_expressive_character(actor_layer, actor["character_id"], actor_t, 540, 1060,
+                                      expression)
             if scale != 1.0:
                 # Crop to actual visible artwork before scaling: resizing a
                 # full-screen transparent canvas shrinks the character twice.
@@ -263,8 +273,8 @@ def frame(scene, t):
         expression = ("surprised" if named_action == "react" else
                       "happy" if named_action == "celebrate" else
                       "focused" if named_action in ("point", "carry") else "neutral")
-        draw_character(character_layer, scene["character_id"], t, cx + carry_shift, cy,
-                       expression=expression)
+        draw_expressive_character(character_layer, scene["character_id"], t,
+                                  cx + carry_shift, cy, expression)
     if named_action == "carry":
         # Stage the object next to the lead actor, moving in sync with them.
         # This is a simple composited carry cue, not inverse-kinematic gripping.
