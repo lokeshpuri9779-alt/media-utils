@@ -6028,23 +6028,22 @@ jobs:
               'const MinibossRulesScript = preload("res://mobile/miniboss_rules.gd")\nconst BossRulesScript = preload("res://mobile/boss_rules.gd")\n',
               "boss rules enemy preload",
           )
-          robot = replace_once(
-              robot,
-              'var next_phase := MinibossRulesScript.phase_for_ratio(ratio)\n',
-              'var next_phase := BossRulesScript.phase_for_ratio(ratio) if is_elite else MinibossRulesScript.phase_for_ratio(ratio)\n',
-              "separate warden phase thresholds",
-          )
-          robot = replace_once(
-              robot,
-              '''	if boss_phase == 2:
-          		attack_delay = maxf(1.9, attack_delay * 0.72)
-          		animation_tree.speed_scale = maxf(animation_tree.speed_scale, 1.18)
-          	elif boss_phase == 3:
-          		attack_delay = maxf(1.25, attack_delay * 0.68)
-          		shot_damage += 6
-          		animation_tree.speed_scale = maxf(animation_tree.speed_scale, 1.34)
-          ''',
-              '''	if is_elite:
+          phase_start = robot.find("func _update_boss_phase() -> void:\n")
+          phase_emit = robot.find("\tphase_changed.emit(boss_phase)", phase_start)
+          if phase_start < 0 or phase_emit < 0:
+              raise SystemExit("Warden phase function boundaries missing")
+          phase_end = phase_emit + len("\tphase_changed.emit(boss_phase)")
+          new_phase_function = '''func _update_boss_phase() -> void:
+          	var is_elite := bool(get_meta("elite", false))
+          	var is_miniboss := bool(get_meta("miniboss", false))
+          	if (not is_elite and not is_miniboss) or dead:
+          		return
+          	var ratio := float(health) / float(max_spawn_health)
+          	var next_phase := BossRulesScript.phase_for_ratio(ratio) if is_elite else MinibossRulesScript.phase_for_ratio(ratio)
+          	if next_phase <= boss_phase:
+          		return
+          	boss_phase = next_phase
+          	if is_elite:
           		attack_delay = BossRulesScript.attack_delay_for_phase(boss_phase)
           		shot_damage = BossRulesScript.damage_for_phase(boss_phase)
           		animation_speed = BossRulesScript.animation_speed_for_phase(boss_phase)
@@ -6056,9 +6055,8 @@ jobs:
           		attack_delay = maxf(1.25, attack_delay * 0.68)
           		shot_damage += 6
           		animation_tree.speed_scale = maxf(animation_tree.speed_scale, 1.34)
-          ''',
-              "warden phase mechanics",
-          )
+          	phase_changed.emit(boss_phase)'''
+          robot = robot[:phase_start] + new_phase_function + robot[phase_end:]
           robot_path.write_text(robot)
           PY
 
