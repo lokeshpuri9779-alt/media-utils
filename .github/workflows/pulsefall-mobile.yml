@@ -7335,6 +7335,245 @@ jobs:
           script = ExtResource("1")
           PULSEFALL_TELEGRAPH_TEST
 
+      - name: Convert waves into a paced operation flow
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          cat > game/mobile/run_flow_rules.gd <<'PULSEFALL_RUN_FLOW'
+          class_name RunFlowRules
+          extends RefCounted
+
+          const MIN_RUN_SECONDS := 300.0
+          const TARGET_RUN_SECONDS := 510.0
+          const MAX_RUN_SECONDS := 600.0
+          const STAGE_COUNT := 6
+          const FLOW_CONTRACT := ["ENTRY", "COMBAT", "OBJECTIVE", "UPGRADE", "MINIBOSS", "BOSS", "EXTRACTION"]
+          const STAGES := {
+          	1: {"title": "INITIAL BREACH", "subtitle": "ENTER BLACKSITE // CLEAR THE DECK", "target_end": 75.0},
+          	2: {"title": "RELAY HUNT", "subtitle": "SECURE PULSE DATA // ADAPT AEGIS", "target_end": 165.0},
+          	3: {"title": "SENTINEL INTERCEPT", "subtitle": "MID-RUN GUARDIAN // BREAK ITS TELEGRAPH", "target_end": 285.0},
+          	4: {"title": "CORE ASSAULT", "subtitle": "OVERRIDE DEFENSES // PREPARE THE WARDEN", "target_end": 390.0},
+          	5: {"title": "OMEGA WARDEN", "subtitle": "FINAL THREAT // EARN EXTRACTION", "target_end": 480.0},
+          	6: {"title": "EXTRACTION", "subtitle": "REACH THE BEACON // ESCAPE ALIVE", "target_end": 510.0},
+          }
+
+          static func stage_id(wave: int, extraction_active: bool = false) -> int:
+          	if extraction_active:
+          		return 6
+          	return clampi(wave, 1, 5)
+
+          static func stage(wave: int, extraction_active: bool = false) -> Dictionary:
+          	return STAGES[stage_id(wave, extraction_active)]
+
+          static func stage_title(wave: int, extraction_active: bool = false) -> String:
+          	return str(stage(wave, extraction_active).title)
+
+          static func stage_subtitle(wave: int, extraction_active: bool = false) -> String:
+          	return str(stage(wave, extraction_active).subtitle)
+
+          static func target_end(wave: int, extraction_active: bool = false) -> float:
+          	return float(stage(wave, extraction_active).target_end)
+
+          static func pace_state(wave: int, elapsed: float, extraction_active: bool = false) -> String:
+          	var over := maxf(elapsed, 0.0) - target_end(wave, extraction_active)
+          	if over > 60.0:
+          		return "CRITICAL"
+          	if over > 0.0:
+          		return "PRESSURE"
+          	return "ON PACE"
+
+          static func seconds_to_target(wave: int, elapsed: float, extraction_active: bool = false) -> int:
+          	return maxi(0, ceili(target_end(wave, extraction_active) - maxf(elapsed, 0.0)))
+
+          static func enemy_count(wave: int, elapsed: float) -> int:
+          	var baseline := mini(3 + clampi(wave, 1, 5), 6)
+          	if pace_state(wave, elapsed) == "CRITICAL":
+          		return maxi(3, baseline - 1)
+          	return baseline
+
+          static func objective_count(wave: int, elapsed: float) -> int:
+          	return 1 if pace_state(wave, elapsed) == "CRITICAL" else 2
+
+          static func relay_hold_seconds(wave: int, elapsed: float) -> float:
+          	return 1.5 if pace_state(wave, elapsed) == "CRITICAL" else 2.5
+
+          static func hud_text(wave: int, elapsed: float, extraction_active: bool = false) -> String:
+          	var id := stage_id(wave, extraction_active)
+          	var remaining := seconds_to_target(wave, elapsed, extraction_active)
+          	return "STAGE %d/%d  %s  //  %s  %02d:%02d" % [id, STAGE_COUNT, stage_title(wave, extraction_active), pace_state(wave, elapsed, extraction_active), remaining / 60, remaining % 60]
+
+          static func valid_target_window() -> bool:
+          	return MIN_RUN_SECONDS >= 300.0 and MAX_RUN_SECONDS <= 600.0 and TARGET_RUN_SECONDS >= MIN_RUN_SECONDS and TARGET_RUN_SECONDS <= MAX_RUN_SECONDS
+          PULSEFALL_RUN_FLOW
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(source, old, new, label):
+              count = source.count(old)
+              if count != 1:
+                  raise SystemExit(f"Expected one {label} anchor, found {count}")
+              return source.replace(old, new, 1)
+
+          level_path = Path("game/level/level.gd")
+          level = level_path.read_text()
+          level = replace_once(
+              level,
+              'const EliteRulesScript = preload("res://mobile/elite_rules.gd")\n',
+              'const EliteRulesScript = preload("res://mobile/elite_rules.gd")\nconst RunFlowRulesScript = preload("res://mobile/run_flow_rules.gd")\n',
+              "run flow preload",
+          )
+          level = replace_once(
+              level,
+              "var timer_label: Label\n",
+              "var timer_label: Label\nvar operation_phase_label: Label\n",
+              "operation HUD state",
+          )
+          timer_block = '''	timer_label = _make_label("00:00", 17, Color(0.7, 0.75, 0.84))
+          	timer_label.anchor_left = 1.0
+          	timer_label.anchor_right = 1.0
+          	timer_label.offset_left = -95
+          	timer_label.offset_right = -25
+          	timer_label.offset_top = 41
+          	top.add_child(timer_label)
+          '''
+          operation_block = timer_block + '''
+          	operation_phase_label = _make_label("STAGE 1/6  INITIAL BREACH", 16, Color(0.42, 0.92, 1.0))
+          	operation_phase_label.anchor_left = 0.5
+          	operation_phase_label.anchor_right = 0.5
+          	operation_phase_label.offset_left = -330
+          	operation_phase_label.offset_right = 330
+          	operation_phase_label.offset_top = 14
+          	operation_phase_label.offset_bottom = 42
+          	operation_phase_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+          	top.add_child(operation_phase_label)
+          '''
+          level = replace_once(level, timer_block, operation_block, "operation HUD label")
+          level = replace_once(
+              level,
+              '\twave_label.text = "WAVE %02d/%02d" % [mini(wave, TOTAL_WAVES), TOTAL_WAVES]\n',
+              '\twave_label.text = "OP %02d/%02d" % [RunFlowRulesScript.stage_id(wave, extraction_active), RunFlowRulesScript.STAGE_COUNT]\n\t_update_operation_hud()\n',
+              "operation stage HUD",
+          )
+          level = replace_once(
+              level,
+              '\t\ttimer_label.text = "%02d:%02d" % [mins, secs]\n',
+              '\t\ttimer_label.text = "%02d:%02d" % [mins, secs]\n\t\t_update_operation_hud()\n',
+              "operation pace clock",
+          )
+          level = replace_once(
+              level,
+              '\t\t_show_banner("WAVE %02d" % wave, _wave_subtitle(), 1.8)\n',
+              '\t\t_show_banner(RunFlowRulesScript.stage_title(wave), RunFlowRulesScript.stage_subtitle(wave), 1.8)\n',
+              "operation stage banner",
+          )
+          level = replace_once(
+              level,
+              "\t\tvar count := mini(3 + wave, 6)\n",
+              "\t\tvar count := RunFlowRulesScript.enemy_count(wave, mission_time)\n",
+              "adaptive operation encounter count",
+          )
+          level = replace_once(
+              level,
+              "\tcache_goal = 2\n",
+              "\tcache_goal = RunFlowRulesScript.objective_count(wave, mission_time)\n",
+              "adaptive cache objective",
+          )
+          level = replace_once(
+              level,
+              "\tvar relay: ObjectiveRelay = ObjectiveRelayScript.new()\n",
+              "\tvar relay: ObjectiveRelay = ObjectiveRelayScript.new()\n\trelay.hold_seconds = RunFlowRulesScript.relay_hold_seconds(wave, mission_time)\n",
+              "adaptive relay objective",
+          )
+          checkpoint_anchor = '\tRunCheckpoint.save_checkpoint(_capture_run_checkpoint("wave"))\n'
+          stage_telemetry = checkpoint_anchor + '''	MobileMetrics.record("operation_stage_started", {
+          		"stage": RunFlowRulesScript.stage_id(wave),
+          		"title": RunFlowRulesScript.stage_title(wave),
+          		"pace": RunFlowRulesScript.pace_state(wave, mission_time),
+          		"time_seconds": mission_time,
+          	})
+          '''
+          level = replace_once(level, checkpoint_anchor, stage_telemetry, "operation stage telemetry")
+          level += '''
+
+
+          func _update_operation_hud() -> void:
+          	if operation_phase_label == null:
+          		return
+          	operation_phase_label.text = RunFlowRulesScript.hud_text(wave, mission_time, extraction_active)
+          	match RunFlowRulesScript.pace_state(wave, mission_time, extraction_active):
+          		"CRITICAL":
+          			operation_phase_label.add_theme_color_override("font_color", Color(1.0, 0.28, 0.24))
+          		"PRESSURE":
+          			operation_phase_label.add_theme_color_override("font_color", Color(1.0, 0.72, 0.20))
+          		_:
+          			operation_phase_label.add_theme_color_override("font_color", Color(0.42, 0.92, 1.0))
+          '''
+          level_path.write_text(level)
+          PY
+
+          cat > game/mobile/run_flow_rules_test.gd <<'PULSEFALL_RUN_FLOW_TEST'
+          extends Node
+
+          const Rules = preload("res://mobile/run_flow_rules.gd")
+          var checks := 0
+          var failures := 0
+
+          func check(value: bool, message: String) -> void:
+          	checks += 1
+          	if value:
+          		print("PASS: ", message)
+          	else:
+          		failures += 1
+          		push_error("FAIL: " + message)
+
+          func _ready() -> void:
+          	check(Rules.valid_target_window(), "run target stays inside the five-to-ten-minute gate")
+          	check(Rules.MIN_RUN_SECONDS == 300.0, "minimum target is five minutes")
+          	check(Rules.MAX_RUN_SECONDS == 600.0, "maximum target is ten minutes")
+          	check(Rules.TARGET_RUN_SECONDS == 510.0, "nominal operation target is eight minutes thirty seconds")
+          	check(Rules.STAGE_COUNT == 6, "operation exposes six readable stages")
+          	check(Rules.FLOW_CONTRACT.front() == "ENTRY", "operation begins with entry")
+          	check(Rules.FLOW_CONTRACT.has("OBJECTIVE") and Rules.FLOW_CONTRACT.has("UPGRADE"), "operation includes objective and upgrade beats")
+          	check(Rules.FLOW_CONTRACT.has("MINIBOSS") and Rules.FLOW_CONTRACT.has("BOSS"), "operation includes miniboss and boss climaxes")
+          	check(Rules.FLOW_CONTRACT.back() == "EXTRACTION", "operation ends with physical extraction")
+          	check(Rules.stage_id(0) == 1, "invalid opening wave clamps to stage one")
+          	check(Rules.stage_id(3) == 3, "mid-run wave maps to Sentinel stage")
+          	check(Rules.stage_id(5) == 5, "final combat maps to Warden stage")
+          	check(Rules.stage_id(5, true) == 6, "active extraction maps to stage six")
+          	check(Rules.stage_title(3).contains("SENTINEL"), "mid-run stage names the miniboss")
+          	check(Rules.stage_title(5).contains("WARDEN"), "final combat names the boss")
+          	check(Rules.stage_title(5, true).contains("EXTRACTION"), "escape stage is explicit")
+          	check(Rules.target_end(1) < Rules.target_end(2) and Rules.target_end(2) < Rules.target_end(3), "early stage deadlines are ordered")
+          	check(Rules.target_end(3) < Rules.target_end(4) and Rules.target_end(4) < Rules.target_end(5), "late combat deadlines are ordered")
+          	check(Rules.target_end(5) < Rules.target_end(5, true), "extraction receives a dedicated time budget")
+          	check(Rules.pace_state(2, 100.0) == "ON PACE", "player below stage target is on pace")
+          	check(Rules.pace_state(2, 180.0) == "PRESSURE", "small target overrun enters pressure")
+          	check(Rules.pace_state(2, 240.0) == "CRITICAL", "large target overrun enters critical pacing")
+          	check(Rules.seconds_to_target(1, 15.0) == 60, "stage countdown reports remaining target time")
+          	check(Rules.seconds_to_target(1, 90.0) == 0, "expired target countdown clamps to zero")
+          	check(Rules.enemy_count(4, 300.0) == 6, "on-pace late encounter keeps its authored threat")
+          	check(Rules.enemy_count(4, 500.0) == 5, "critical pacing removes one hostile without trivializing combat")
+          	check(Rules.enemy_count(1, 300.0) >= 3, "compression never drops below three hostiles")
+          	check(Rules.objective_count(2, 100.0) == 2, "on-pace exploration keeps two pickups")
+          	check(Rules.objective_count(2, 240.0) == 1, "critical pacing shortens the collection objective")
+          	check(Rules.relay_hold_seconds(4, 300.0) == 2.5, "on-pace relay keeps the full hold")
+          	check(Rules.relay_hold_seconds(4, 500.0) == 1.5, "critical pacing shortens relay hold without skipping it")
+          	check(Rules.hud_text(3, 200.0).contains("STAGE 3/6"), "HUD exposes operation progress")
+          	check(Rules.hud_text(3, 200.0).contains("SENTINEL"), "HUD identifies the current climax")
+          	check(Rules.hud_text(5, 490.0, true).contains("EXTRACTION"), "HUD switches to extraction stage")
+          	print("RUN FLOW CHECKS: ", checks, " FAILURES: ", failures)
+          	get_tree().quit(0 if failures == 0 else 1)
+          PULSEFALL_RUN_FLOW_TEST
+
+          cat > game/mobile/run_flow_rules_test.tscn <<'PULSEFALL_RUN_FLOW_TEST'
+          [gd_scene load_steps=2 format=3]
+          [ext_resource type="Script" path="res://mobile/run_flow_rules_test.gd" id="1"]
+          [node name="RunFlowRuleTests" type="Node"]
+          script = ExtResource("1")
+          PULSEFALL_RUN_FLOW_TEST
+
       - name: Add license and build notes
         shell: bash
         run: |
@@ -7373,7 +7612,7 @@ jobs:
           Missing extraction or dying during escape retries from the escape checkpoint.
 
           Target:
-          Android landscape. Mobile controls are built in. TUNE offers LOW (30 FPS / 60% scale), MED (60 FPS / 72%), and HIGH (60 FPS / 85%) graphics targets. Run upgrades stack into synergies, optional OVERLOAD contracts add risk/reward, and four color-signaled enemy archetypes use distinct behaviors, while three readable elite variants add distinct durability, speed and artillery counters. State-driven ground discs and overhead charge beacons now telegraph every normal, elite, Sentinel and OMEGA WARDEN attack with escalating phase colors. Wave three culminates in a three-phase Sentinel miniboss; the final OMEGA WARDEN now has three rule-driven phases, bounded reinforcement deployments and explicit mobile counter prompts.
+          Android landscape. Mobile controls are built in. TUNE offers LOW (30 FPS / 60% scale), MED (60 FPS / 72%), and HIGH (60 FPS / 85%) graphics targets. Run upgrades stack into synergies, optional OVERLOAD contracts add risk/reward, and four color-signaled enemy archetypes use distinct behaviors, while three readable elite variants add distinct durability, speed and artillery counters. State-driven ground discs and overhead charge beacons now telegraph every normal, elite, Sentinel and OMEGA WARDEN attack with escalating phase colors. The run is presented as a six-stage operation with an 8:30 target, explicit objective/upgrade/climax beats and bounded pacing compression when a stage exceeds its target. Wave three culminates in a three-phase Sentinel miniboss; the final OMEGA WARDEN now has three rule-driven phases, bounded reinforcement deployments and explicit mobile counter prompts.
           EOF
 
       - name: Create Android export preset
@@ -7389,7 +7628,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn,mobile/meta_progression_test.gd,mobile/meta_progression_test.tscn,mobile/run_checkpoint_test.gd,mobile/run_checkpoint_test.tscn,mobile/elite_rules_test.gd,mobile/elite_rules_test.tscn,mobile/telegraph_rules_test.gd,mobile/telegraph_rules_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn,mobile/meta_progression_test.gd,mobile/meta_progression_test.tscn,mobile/run_checkpoint_test.gd,mobile/run_checkpoint_test.tscn,mobile/elite_rules_test.gd,mobile/elite_rules_test.tscn,mobile/telegraph_rules_test.gd,mobile/telegraph_rules_test.tscn,mobile/run_flow_rules_test.gd,mobile/run_flow_rules_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.apk"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -7417,8 +7656,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=47
-          version/name="0.2.27-mobile-alpha"
+          version/code=48
+          version/name="0.2.28-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
 
@@ -7431,7 +7670,7 @@ jobs:
           custom_features=""
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
-          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn,mobile/meta_progression_test.gd,mobile/meta_progression_test.tscn,mobile/run_checkpoint_test.gd,mobile/run_checkpoint_test.tscn,mobile/elite_rules_test.gd,mobile/elite_rules_test.tscn,mobile/telegraph_rules_test.gd,mobile/telegraph_rules_test.tscn"
+          exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn,mobile/meta_progression_test.gd,mobile/meta_progression_test.tscn,mobile/run_checkpoint_test.gd,mobile/run_checkpoint_test.tscn,mobile/elite_rules_test.gd,mobile/elite_rules_test.tscn,mobile/telegraph_rules_test.gd,mobile/telegraph_rules_test.tscn,mobile/run_flow_rules_test.gd,mobile/run_flow_rules_test.tscn"
           export_path="build/PULSEFALL_MOBILE_ALPHA.aab"
           patches=PackedStringArray()
           encryption_include_filters=""
@@ -7459,8 +7698,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=47
-          version/name="0.2.27-mobile-alpha"
+          version/code=48
+          version/name="0.2.28-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -7515,6 +7754,8 @@ jobs:
           ELITE_RC=$?
           timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/telegraph_rules_test.tscn > /tmp/telegraph-rules-test.log 2>&1
           TELEGRAPH_RC=$?
+          timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/run_flow_rules_test.tscn > /tmp/run-flow-rules-test.log 2>&1
+          FLOW_RC=$?
           set -e
           cat /tmp/import.log
           cat /tmp/runtime.log
@@ -7536,7 +7777,8 @@ jobs:
           cat /tmp/run-checkpoint-test.log
           cat /tmp/elite-rules-test.log
           cat /tmp/telegraph-rules-test.log
-          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log /tmp/run-upgrades-test.log /tmp/risk-contract-test.log /tmp/enemy-archetypes-test.log /tmp/miniboss-rules-test.log /tmp/boss-rules-test.log /tmp/weapon-rules-test.log /tmp/meta-progression-test.log /tmp/run-checkpoint-test.log /tmp/elite-rules-test.log /tmp/telegraph-rules-test.log; then
+          cat /tmp/run-flow-rules-test.log
+          if grep -Eiq 'SCRIPT ERROR|Parse Error|Compile Error|Invalid call|Invalid access|nonexistent function|Failed to load script' /tmp/import.log /tmp/runtime.log /tmp/extraction-test.log /tmp/controls-test.log /tmp/aim-assist-test.log /tmp/camera-collision-test.log /tmp/combat-feedback-test.log /tmp/combat-feel-test.log /tmp/gyro-aim-test.log /tmp/graphics-preset-test.log /tmp/run-upgrades-test.log /tmp/risk-contract-test.log /tmp/enemy-archetypes-test.log /tmp/miniboss-rules-test.log /tmp/boss-rules-test.log /tmp/weapon-rules-test.log /tmp/meta-progression-test.log /tmp/run-checkpoint-test.log /tmp/elite-rules-test.log /tmp/telegraph-rules-test.log /tmp/run-flow-rules-test.log; then
             echo "PULSEFALL mobile validation detected a script/runtime failure."
             exit 1
           fi
@@ -7552,8 +7794,8 @@ jobs:
             echo "PULSEFALL mobile validation detected unsupported renderer features."
             exit 1
           fi
-          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ] || [ "$GRAPHICS_RC" -ne 0 ] || [ "$UPGRADES_RC" -ne 0 ] || [ "$RISK_RC" -ne 0 ] || [ "$ARCHETYPES_RC" -ne 0 ] || [ "$MINIBOSS_RC" -ne 0 ] || [ "$BOSS_RC" -ne 0 ] || [ "$WEAPON_RC" -ne 0 ] || [ "$META_RC" -ne 0 ] || [ "$CHECKPOINT_RC" -ne 0 ] || [ "$ELITE_RC" -ne 0 ] || [ "$TELEGRAPH_RC" -ne 0 ]; then
-            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC graphics=$GRAPHICS_RC upgrades=$UPGRADES_RC risk=$RISK_RC archetypes=$ARCHETYPES_RC miniboss=$MINIBOSS_RC boss=$BOSS_RC weapons=$WEAPON_RC meta=$META_RC checkpoint=$CHECKPOINT_RC elite=$ELITE_RC telegraph=$TELEGRAPH_RC"
+          if [ "$IMPORT_RC" -ne 0 ] || [ "$RUN_RC" -ne 0 ] || [ "$TEST_RC" -ne 0 ] || [ "$CONTROLS_RC" -ne 0 ] || [ "$AIM_RC" -ne 0 ] || [ "$CAMERA_RC" -ne 0 ] || [ "$COMBAT_RC" -ne 0 ] || [ "$FEEL_RC" -ne 0 ] || [ "$GYRO_RC" -ne 0 ] || [ "$GRAPHICS_RC" -ne 0 ] || [ "$UPGRADES_RC" -ne 0 ] || [ "$RISK_RC" -ne 0 ] || [ "$ARCHETYPES_RC" -ne 0 ] || [ "$MINIBOSS_RC" -ne 0 ] || [ "$BOSS_RC" -ne 0 ] || [ "$WEAPON_RC" -ne 0 ] || [ "$META_RC" -ne 0 ] || [ "$CHECKPOINT_RC" -ne 0 ] || [ "$ELITE_RC" -ne 0 ] || [ "$TELEGRAPH_RC" -ne 0 ] || [ "$FLOW_RC" -ne 0 ]; then
+            echo "Godot validation exit codes: import=$IMPORT_RC runtime=$RUN_RC extraction=$TEST_RC controls=$CONTROLS_RC aim=$AIM_RC camera=$CAMERA_RC combat=$COMBAT_RC feel=$FEEL_RC gyro=$GYRO_RC graphics=$GRAPHICS_RC upgrades=$UPGRADES_RC risk=$RISK_RC archetypes=$ARCHETYPES_RC miniboss=$MINIBOSS_RC boss=$BOSS_RC weapons=$WEAPON_RC meta=$META_RC checkpoint=$CHECKPOINT_RC elite=$ELITE_RC telegraph=$TELEGRAPH_RC flow=$FLOW_RC"
             exit 1
           fi
 
@@ -7645,14 +7887,14 @@ jobs:
           cat /tmp/aapt-badging.err
           test -n "$BADGING"
           printf '%s\n' "$BADGING"
-          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='47' versionName='0.2.27-mobile-alpha'" <<<"$BADGING"
+          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='48' versionName='0.2.28-mobile-alpha'" <<<"$BADGING"
           grep -Fq "application-label:'PULSEFALL'" <<<"$BADGING"
           mapfile -t ABI_DIRS < <(unzip -Z1 "$APK" | awk -F/ '/^lib\/[^/]+\/.*\.so$/ {print $2}' | sort -u)
           test "${#ABI_DIRS[@]}" -eq 1
           test "${ABI_DIRS[0]}" = "arm64-v8a"
           echo "APK PACKAGE CHECKS: 7 FAILURES: 0"
           echo "PACKAGE: com.pulsefall.blacksite"
-          echo "VERSION: 43 / 0.2.27-mobile-alpha"
+          echo "VERSION: 43 / 0.2.28-mobile-alpha"
           echo "ABI: arm64-v8a"
 
           AAB="artifact/PULSEFALL_MOBILE_ALPHA.aab"
