@@ -129,6 +129,10 @@ def make_candidate(path, excluded_ids, excluded_titles):
         print("ASTRA_STORY_HISTORY_EXCLUSIONS=" + str(len(history_records)))
     except FileNotFoundError:
         pass
+    except (ValueError, json.JSONDecodeError, TypeError, OSError) as exc:
+        # Never silently ignore a damaged or unreadable exclusion ledger:
+        # doing so risks publishing a duplicate.
+        raise CreativeSkip("story_history_unavailable:" + type(exc).__name__) from exc
     print("Premium pool:", len(premium_stories), "seen IDs:", len(excluded_ids),
           "seen titles:", len(excluded_titles))
     # Parallel preload lanes deterministically own disjoint story IDs.
