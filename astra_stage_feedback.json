@@ -2,183 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-12T15:06:02.571195+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 19.3,
-        "renderer": "studio-7.1.1"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-anthology-535144f2435abf94"
-    },
-    {
-      "at": "2026-10-12T20:17:22.253126+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 97.72,
-          "captions": 97.95,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-season-01-episode-01"
-    },
-    {
-      "at": "2026-10-12T20:17:22.253811+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 56.033,
-        "renderer": "studio-7.1.1"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-season-01-episode-01"
-    },
-    {
-      "at": "2026-10-12T20:59:04.707006+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 98.49,
-          "captions": 99.01,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-season-01-episode-02"
-    },
-    {
-      "at": "2026-10-12T20:59:04.707722+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 52.2,
-        "renderer": "studio-7.1.1"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-season-01-episode-02"
-    },
-    {
-      "at": "2026-10-12T21:17:54.454511+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 98.33,
-          "captions": 98.97,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-season-01-episode-03"
-    },
-    {
-      "at": "2026-10-12T21:17:54.455314+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 53.633,
-        "renderer": "studio-7.1.1"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-season-01-episode-03"
-    },
-    {
-      "at": "2026-10-12T21:27:54.286532+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 99.49,
-          "captions": 100.0,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-season-01-episode-04"
-    },
-    {
-      "at": "2026-10-12T21:27:54.287211+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 51.067,
-        "renderer": "studio-7.1.1"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-season-01-episode-04"
-    },
-    {
-      "at": "2026-10-12T21:35:33.919179+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 99.27,
-          "captions": 100.0,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-anthology-542cd01a50f64edb"
-    },
-    {
-      "at": "2026-10-12T21:35:33.920987+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 14.933,
-        "renderer": "studio-7.1.1"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-anthology-542cd01a50f64edb"
-    },
-    {
       "at": "2026-10-12T21:47:02.127534+00:00",
       "stage": "quality",
       "element": "creative_director",
@@ -7415,6 +7238,138 @@
       },
       "proposed_action": "",
       "candidate_id": "rayvan-anthology-72089163055174ea"
+    },
+    {
+      "at": "2026-10-13T09:16:37.014055+00:00",
+      "stage": "hook",
+      "element": "hook",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 94.0,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:16:37.024439+00:00",
+      "stage": "hook",
+      "element": "retention",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 83.07766666666666,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:16:37.034046+00:00",
+      "stage": "visuals",
+      "element": "visual",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 100.0,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:16:37.043610+00:00",
+      "stage": "pacing",
+      "element": "pacing",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 62.98899999999999,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:16:37.053301+00:00",
+      "stage": "audio",
+      "element": "audio",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 86.81,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:16:37.062846+00:00",
+      "stage": "captions",
+      "element": "captions",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 87.18,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:16:37.072481+00:00",
+      "stage": "story",
+      "element": "novelty",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 100.0,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:16:37.082086+00:00",
+      "stage": "script",
+      "element": "coherence",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 92.0,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:16:37.091918+00:00",
+      "stage": "render",
+      "element": "technical",
+      "outcome": "unknown",
+      "evidence": {
+        "score": 100.0,
+        "candidate": "mercury-solar-day-v1"
+      },
+      "proposed_action": "Compare score to component threshold before classifying failure",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:16:37.101484+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "fail",
+      "evidence": {
+        "hard_failures": [],
+        "media_failures": [],
+        "layer_failures": []
+      },
+      "proposed_action": "['review_story_rhythm_and_tension']",
+      "candidate_id": "mercury-solar-day-v1"
+    },
+    {
+      "at": "2026-10-13T09:16:41.650402+00:00",
+      "stage": "quality",
+      "element": "candidate_selection",
+      "outcome": "fail",
+      "evidence": {
+        "reason": "no_approved_original_story_available"
+      },
+      "proposed_action": "Diagnose story supply and creative gate failures",
+      "candidate_id": ""
     }
   ],
   "stage_counts": {
@@ -7430,7 +7385,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 51,
+      "unknown": 52,
       "improved": 0,
       "regressed": 0
     },
@@ -7438,7 +7393,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 51,
+      "unknown": 52,
       "improved": 0,
       "regressed": 0
     },
@@ -7446,7 +7401,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 102,
+      "unknown": 104,
       "improved": 0,
       "regressed": 0
     },
@@ -7462,7 +7417,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 51,
+      "unknown": 52,
       "improved": 0,
       "regressed": 0
     },
@@ -7494,7 +7449,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 51,
+      "unknown": 52,
       "improved": 0,
       "regressed": 0
     },
@@ -7502,7 +7457,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 51,
+      "unknown": 52,
       "improved": 0,
       "regressed": 0
     },
@@ -7510,21 +7465,21 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 51,
+      "unknown": 52,
       "improved": 0,
       "regressed": 0
     },
     "render": {
-      "pass": 24,
-      "fail": 51,
+      "pass": 18,
+      "fail": 52,
       "skip": 0,
-      "unknown": 51,
+      "unknown": 52,
       "improved": 0,
       "regressed": 0
     },
     "quality": {
-      "pass": 23,
-      "fail": 43,
+      "pass": 18,
+      "fail": 44,
       "skip": 0,
       "unknown": 0,
       "improved": 0,
