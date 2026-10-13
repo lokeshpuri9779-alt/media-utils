@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 58,
-  "confirmed_today": 57,
-  "last_attempt_at": "2026-10-13T15:44:16.438082+00:00",
+  "attempts": 59,
+  "confirmed_today": 58,
+  "last_attempt_at": "2026-10-13T15:52:52.295089+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -406,14 +406,21 @@
       "title": "The Hedgehog and the Runaway Balloon",
       "format": "short",
       "uploaded_at": "2026-10-13T15:38:01.241660+00:00"
+    },
+    "rayvan-forge-66fa1ca9575bce76": {
+      "video_id": "-di_Ee_o9iI",
+      "confirmed_at": "2026-10-13T15:51:59.990990+00:00",
+      "title": "The Raccoon and the Silent Orchestra",
+      "format": "short",
+      "uploaded_at": "2026-10-13T15:44:17.607566+00:00"
     }
   },
   "pending": {
-    "-di_Ee_o9iI": {
-      "content_id": "rayvan-forge-66fa1ca9575bce76",
-      "title": "The Raccoon and the Silent Orchestra",
+    "8Kq-Sr1MyBk": {
+      "content_id": "rayvan-forge-603117eacb21c2ba",
+      "title": "The Goat and the Lighthouse Shadow",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-13T15:44:17.607566+00:00",
+      "uploaded_at": "2026-10-13T15:52:53.825268+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": ""
@@ -421,11 +428,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-13T15:43:17.144628+00:00",
+  "last_preflight_at": "2026-10-13T15:51:59.578645+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T15:44:17.855252+00:00",
+    "at": "2026-10-13T15:52:54.745669+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -795,6 +802,13 @@
     "rayvan-forge-66fa1ca9575bce76": {
       "at": "2026-10-13T15:44:16.438066+00:00",
       "title": "The Raccoon and the Silent Orchestra",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-603117eacb21c2ba": {
+      "at": "2026-10-13T15:52:52.295075+00:00",
+      "title": "The Goat and the Lighthouse Shadow",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
