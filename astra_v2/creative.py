@@ -102,6 +102,33 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 premium_stories.insert(0, generated)
         except (RuntimeError, ValueError, KeyError, json.JSONDecodeError) as exc:
             print("OpenAI story skipped:", type(exc).__name__)
+    # Apply the optional persistent story ledger before expensive rendering.
+    # Existing publisher ID/title exclusions remain authoritative.
+    ledger_path = os.getenv("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json")
+    try:
+        with open(ledger_path, "r", encoding="utf-8") as history_file:
+            history_records = json.load(history_file)
+        if isinstance(history_records, dict):
+            history_records = history_records.get("stories", [])
+        if not isinstance(history_records, list):
+            raise ValueError("Story history must be a list")
+        ledger_ids = {str(record.get("content_id")) for record in history_records
+                      if isinstance(record, dict) and record.get("content_id")}
+        ledger_titles = {str(record.get("title")).casefold().strip()
+                         for record in history_records
+                         if isinstance(record, dict) and record.get("title")}
+        ledger_hashes = {str(record.get("plot_fingerprint")) for record in history_records
+                         if isinstance(record, dict) and record.get("plot_fingerprint")}
+        excluded_ids.update(ledger_ids)
+        excluded_titles.update(ledger_titles)
+        premium_stories = [story for story in premium_stories
+                           if story.get("content_id") not in ledger_ids
+                           and str(story.get("title", "")).casefold().strip() not in ledger_titles
+                           and (not story.get("plot_fingerprint")
+                                or story.get("plot_fingerprint") not in ledger_hashes)]
+        print("ASTRA_STORY_HISTORY_EXCLUSIONS=" + str(len(history_records)))
+    except FileNotFoundError:
+        pass
     print("Premium pool:", len(premium_stories), "seen IDs:", len(excluded_ids),
           "seen titles:", len(excluded_titles))
     # Parallel preload lanes deterministically own disjoint story IDs.
