@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 45,
-  "confirmed_today": 44,
-  "last_attempt_at": "2026-10-13T13:22:40.311580+00:00",
+  "attempts": 46,
+  "confirmed_today": 45,
+  "last_attempt_at": "2026-10-13T13:45:16.254703+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -315,25 +315,32 @@
       "title": "The Crab and the Moonlit Path",
       "format": "short",
       "uploaded_at": "2026-10-13T13:14:49.089845+00:00"
+    },
+    "rayvan-forge-080807a86e74a141": {
+      "video_id": "bQK7BQ7kD0o",
+      "confirmed_at": "2026-10-13T13:44:29.024909+00:00",
+      "title": "The Firefly Lighthouse",
+      "format": "short",
+      "uploaded_at": "2026-10-13T13:22:43.420532+00:00"
     }
   },
   "pending": {
-    "bQK7BQ7kD0o": {
-      "content_id": "rayvan-forge-080807a86e74a141",
-      "title": "The Firefly Lighthouse",
+    "OV9YZPO0I9s": {
+      "content_id": "rayvan-forge-30b2d4937897e912",
+      "title": "The Squirrel and the Silent Bell",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-13T13:22:43.420532+00:00",
+      "uploaded_at": "2026-10-13T13:45:17.685001+00:00",
       "genre": "fiction",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-13T13:21:56.346169+00:00",
+  "last_preflight_at": "2026-10-13T13:44:28.684060+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T13:22:43.619120+00:00",
+    "at": "2026-10-13T13:45:17.852427+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -619,6 +626,12 @@
     "rayvan-forge-080807a86e74a141": {
       "at": "2026-10-13T13:22:40.311564+00:00",
       "title": "The Firefly Lighthouse",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-forge-30b2d4937897e912": {
+      "at": "2026-10-13T13:45:16.254689+00:00",
+      "title": "The Squirrel and the Silent Bell",
       "format": "short",
       "result": "accepted"
     }
