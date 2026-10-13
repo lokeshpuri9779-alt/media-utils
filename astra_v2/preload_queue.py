@@ -146,7 +146,7 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
             continue
         if cid in excluded_ids or "/" in cid or ".." in cid:
             if cid.startswith("rayvan-anthology-"):
-                print("ASTRA_ANTHOLOGY_SKIP=" + json.dumps({"content_id": cid, "reason": "excluded_or_invalid_id"}))
+                print("ASTRA_ANTHOLOGY_SKIP=" + json.dumps({"content_id": cid, "reason": "duplicate_content_id" if cid in excluded_ids else "invalid_content_id"}))
             continue
         if cid.startswith("rayvan-season-01-episode-"):
             try:
