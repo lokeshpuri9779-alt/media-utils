@@ -282,12 +282,20 @@ def frame(scene, t):
                 sway += int(12 * math.sin(t * 4.0 + phase))
             if actor_index == 0:
                 lead_sway = sway
-            expression = ("surprised" if named_action == "react" else
-                          "happy" if named_action == "celebrate" else
-                          "focused" if named_action in ("point", "carry") else
-                          "neutral")
+            # Actor-specific comedy blocking: the rabbit reacts to the fox
+            # instead of mirroring the fox's expression in every shot.
+            if actor_index == 0:
+                expression = ("surprised" if named_action == "react" else
+                              "happy" if named_action == "celebrate" else
+                              "focused" if named_action in ("point", "carry") else
+                              "neutral")
+                gesture = named_action if named_action in ("point", "celebrate", "carry") else "idle"
+            else:
+                expression = ("surprised" if named_action in ("carry", "react", "celebrate") else
+                              "focused" if named_action == "point" else "neutral")
+                gesture = "point" if named_action == "point" else "idle"
             draw_expressive_character(actor_layer, actor["character_id"], actor_t, 540, 1060,
-                                      expression, named_action if named_action in ("point", "celebrate", "carry") else "idle")
+                                      expression, gesture)
             if scale != 1.0:
                 # Crop to actual visible artwork before scaling: resizing a
                 # full-screen transparent canvas shrinks the character twice.
