@@ -29,7 +29,7 @@ class StoryCastAlignmentTests(unittest.TestCase):
         from PIL import Image, ImageChops
         from astra_v2.character_object_catalog import draw_character
         # Inspect the real character artwork, not background/action overlays.
-        for character_id in (0, 200, 400, 900, 1700):
+        for character_id in range(0, 2000, 100):
             images = {}
             for gesture in ("idle", "point", "celebrate", "carry"):
                 canvas = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
