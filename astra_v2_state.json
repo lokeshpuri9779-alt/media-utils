@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 41,
+  "attempts": 42,
   "confirmed_today": 41,
-  "last_attempt_at": "2026-10-13T12:18:01.660843+00:00",
+  "last_attempt_at": "2026-10-13T12:44:43.361875+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -296,28 +296,38 @@
       "uploaded_at": "2026-10-13T12:18:03.755618+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-13T12:22:37.208147+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "7ww0WcqPimI": {
+      "content_id": "rayvan-forge-d7f2ea161649eae1",
+      "title": "The Fox and the Rain Garden",
+      "day": "2026-10-13",
+      "uploaded_at": "2026-10-13T12:44:45.455639+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-13T12:43:51.412825+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T12:22:37.626998+00:00",
+    "at": "2026-10-13T12:44:46.012287+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-13T07:05:49.939768+00:00",
   "reserved": {
@@ -564,6 +574,12 @@
     "rayvan-forge-06e245ecfd3fd6e1": {
       "at": "2026-10-13T12:18:01.660827+00:00",
       "title": "The Mole and the Star Map",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-forge-d7f2ea161649eae1": {
+      "at": "2026-10-13T12:44:43.361861+00:00",
+      "title": "The Fox and the Rain Garden",
       "format": "short",
       "result": "accepted"
     }
