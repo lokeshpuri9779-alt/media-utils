@@ -61,6 +61,11 @@ def draw_subject(image, subject, t, accent):
     """Return True when a bespoke subject was drawn; False for unknown subjects."""
     if subject not in {x[0] for x in SUBJECTS}:
         return False
+    # New story characters use the closest existing animated silhouette until
+    # dedicated drawings are available; do not fall back to generic icons.
+    subject = {"fox": "dog", "otter": "dog", "owl": "bird",
+               "duck": "bird", "firefly": "bird", "squirrel": "rabbit",
+               "mouse": "rabbit", "crab": "ocean"}.get(subject, subject)
     d = ImageDraw.Draw(image)
     cx, cy = 520, 850
     # Subject-specific moving scenery behind the central character.
