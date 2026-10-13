@@ -381,6 +381,12 @@ def load_story_file(path, seed):
         if any(not isinstance(item, dict) or set(item) - {"actors", "action", "narration"}
                or "actors" not in item for item in scenes):
             raise ValueError("ensemble scenes require actors, optional action/narration")
+        for item in scenes:
+            actors = item["actors"]
+            if not isinstance(actors, list) or not 1 <= len(actors) <= 4 or any(
+                not isinstance(actor, str) for actor in actors
+            ):
+                raise ValueError("ensemble actors must be a list of 1..4 species names")
         plan = build_ensemble_plan(seed, [item["actors"] for item in scenes])
     elif mode == "narrated":
         if any(not isinstance(item, dict) or set(item) != {"narration"} or
