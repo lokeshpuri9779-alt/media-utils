@@ -179,7 +179,7 @@ def draft_catalog(limit=996):
                     ("A BETTER IDEA", f"Then the {actor} noticed {clue}, and used {solution} to make a completely new plan.", "book", "NEW PLAN"),
                     ("THE RESCUE", f"With the new plan in place, {resolution}, and the {actor} finally celebrated with the neighbors.", "forest", "SAVED"),
                 ]
-                output.append((key, f"The {actor.title()} and the {problem.title()}", "animal adventure", beats))
+                output.append((key, f"The {actor.title()} and the {problem.title()} — {len(output) + 1}", "animal adventure", beats))
                 if len(output) >= limit:
                     return output
     return output
