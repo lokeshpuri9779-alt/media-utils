@@ -209,6 +209,7 @@ def frame(scene, t):
     cy = 1060 + int(13 * math.sin(t * 2.4))
     oy = 1180 + int(15 * math.sin(t * 2.1 + 1.0))
     actors = scene.get("actors")
+    carry_shift = int(28 * math.sin(t * 2.0)) if named_action == "carry" else 0
     if actors:
         # Keep every actor on the same stage, with stable left-to-right slots.
         # Render each actor onto its own transparent layer before compositing.
@@ -219,7 +220,7 @@ def frame(scene, t):
         # character renderer has a fixed native footprint, so merely changing
         # center coordinates does not prevent crowding.
         scale = (1.0, 0.82, 0.66, 0.53)[count - 1]
-        for actor, slot in zip(actors, slots):
+        for actor_index, (actor, slot) in enumerate(zip(actors, slots)):
             actor_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
             sway = int(9 * math.sin(t * 2.0 + slot / 180))
             draw_character(actor_layer, actor["character_id"], t, 540, 1060)
@@ -233,20 +234,22 @@ def frame(scene, t):
                     new_h = max(1, int(artwork.height * scale))
                     scaled = artwork.resize((new_w, new_h), Image.Resampling.LANCZOS)
                     actor_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
-                    actor_layer.alpha_composite(scaled, (int(slot + sway - new_w / 2),
+                    actor_layer.alpha_composite(scaled, (int(slot + sway + (carry_shift if actor_index == 0 else 0) - new_w / 2),
                                                         int(cy - new_h / 2)))
-            # The solo actor keeps its original native composition.
+            if scale == 1.0 and carry_shift and actor_index == 0:
+                shifted = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
+                shifted.alpha_composite(actor_layer, (carry_shift, 0))
+                actor_layer = shifted
             character_layer = Image.alpha_composite(character_layer, actor_layer)
         # Move the prop forward so it does not cover the ensemble.
         ox, oy = 540, 1510
     else:
-        draw_character(character_layer, scene["character_id"], t, cx, cy)
+        draw_character(character_layer, scene["character_id"], t, cx + carry_shift, cy)
     if named_action == "carry":
         # Stage the object next to the lead actor, moving in sync with them.
         # This is a simple composited carry cue, not inverse-kinematic gripping.
-        carry_sway = int(28 * math.sin(t * 2.0))
         lead_x = (slots[0] if actors else cx)
-        ox = lead_x + 95 + carry_sway
+        ox = lead_x + 95 + carry_shift
         oy = cy + 70 + int(8 * math.sin(t * 2.0))
     draw_prop(object_layer, scene["object_id"], t, ox, oy)
     image = Image.alpha_composite(image.convert("RGBA"), character_layer.resize((W, H), Image.Resampling.LANCZOS))
