@@ -358,3 +358,91 @@ def draw_prop(image,index,t,x=540,y=900):
         d.rounded_rectangle((x-100,y-120,x+100,y+120),radius=22,fill=color)
         d.rectangle((x-60,y-55,x+60,y+55),outline=(39,47,58),width=6)
     return kind,material,motion
+
+
+# Second-pass art direction: styles affect visible anatomy, facial expression,
+# and markings instead of relying only on the catalog index or base palette.
+_base_draw_character = draw_character
+_base_draw_prop = draw_prop
+
+def draw_character(image, index, t, x=540, y=900):
+    species, role, style = _base_draw_character(image, index, t, x, y)
+    d = ImageDraw.Draw(image)
+    bob = int(14 * math.sin(t * 2.2))
+    cy = y + bob
+    ink = (32, 43, 58)
+    light = (246, 238, 220)
+    # Blinking and shifting pupils create expressions that animate in time.
+    blink = math.sin(t * 3.3 + index * 0.13) > 0.965
+    glance = int(7 * math.sin(t * 1.7 + index * 0.07))
+    for side in (-1, 1):
+        ex = x + side * 42
+        ey = cy - 56
+        if blink:
+            d.arc((ex-19, ey-4, ex+19, ey+9), 0, 180, fill=ink, width=5)
+        else:
+            d.ellipse((ex-19, ey-22, ex+19, ey+22), fill=light)
+            d.ellipse((ex-7+glance, ey-8, ex+7+glance, ey+9), fill=ink)
+            d.ellipse((ex-4+glance, ey-7, ex+1+glance, ey-2), fill=(255,255,255))
+    smile = int(6 * math.sin(t * 2 + index))
+    d.arc((x-29, cy-9+smile, x+29, cy+38+smile), 8, 170, fill=ink, width=5)
+    if style == "striped":
+        for k in range(4):
+            yy = cy - 139 + k * 30
+            d.arc((x-79, yy, x+79, yy+25), 15, 165, fill=(242,213,149), width=8)
+    elif style == "spotted":
+        for dx, dy, rad in ((-75,-120,12),(72,-114,17),(-69,9,15),(65,27,11)):
+            d.ellipse((x+dx-rad,cy+dy-rad,x+dx+rad,cy+dy+rad),fill=(235,202,135))
+    elif style == "angular":
+        d.polygon(((x-88,cy-130),(x-43,cy-179),(x,cy-137),(x+46,cy-180),(x+88,cy-130)),outline=ink)
+    elif style == "soft":
+        for dx in (-67,67):
+            d.ellipse((x+dx-19,cy+2,x+dx+19,cy+30),fill=(242,157,155))
+    elif style == "bright":
+        d.arc((x-107,cy-185,x+107,cy+70),190,325,fill=(255,239,115),width=12)
+    elif style == "dark":
+        d.arc((x-110,cy-182,x+110,cy+74),25,160,fill=(35,42,62),width=15)
+    elif style == "tall":
+        d.line((x-65,cy+89,x-75,cy+156),fill=ink,width=14)
+        d.line((x+65,cy+89,x+75,cy+156),fill=ink,width=14)
+    elif style == "tiny":
+        d.ellipse((x-34,cy+84,x-10,cy+107),fill=ink)
+        d.ellipse((x+10,cy+84,x+34,cy+107),fill=ink)
+    elif style == "round":
+        d.arc((x-130,cy-170,x+130,cy+106),30,145,fill=light,width=9)
+    return species, role, style
+
+def draw_prop(image, index, t, x=540, y=900):
+    kind, material, motion = _base_draw_prop(image, index, t, x, y)
+    d = ImageDraw.Draw(image)
+    # The underlying renderer shifts most props in time. Texture follows
+    # that motion to keep it attached to the prop rather than the backdrop.
+    px = x
+    py = y
+    accent = (244, 237, 215)
+    if material == "wood":
+        for dy in (-25,5,35):
+            d.arc((px-70,py+dy-16,px+70,py+dy+16),5,170,fill=(117,75,48),width=3)
+    elif material == "metal":
+        for k in range(3):
+            d.line((px-70+k*24,py-48,px-30+k*24,py+48),fill=(214,228,237),width=4)
+    elif material == "glass":
+        d.line((px-48,py-60,px-22,py+28),fill=(224,250,252),width=9)
+    elif material == "stone":
+        for dx,dy in ((-40,-22),(29,15),(-14,48)):
+            d.line((px+dx-13,py+dy,px+dx+7,py+dy-10,px+dx+18,py+dy+3),fill=(90,98,104),width=3)
+    elif material == "fabric":
+        for dx in range(-55,56,22):
+            d.line((px+dx,py-35,px+dx+18,py+45),fill=(235,219,196),width=2)
+    elif material == "paper":
+        d.line((px-42,py-25,px+42,py-25),fill=(180,174,156),width=3)
+        d.line((px-42,py-6,px+26,py-6),fill=(180,174,156),width=3)
+    elif material == "ceramic":
+        d.arc((px-63,py-60,px+63,py+64),195,300,fill=accent,width=7)
+    elif material == "plastic":
+        d.ellipse((px-47,py-44,px-25,py-22),fill=(255,255,255))
+    elif material == "gold":
+        d.arc((px-75,py-75,px+75,py+75),205,320,fill=(255,242,160),width=9)
+    elif material == "neon":
+        d.arc((px-87,py-88,px+87,py+88),185,350,fill=(165,250,255),width=6)
+    return kind, material, motion
