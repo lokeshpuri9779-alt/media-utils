@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 61,
-  "confirmed_today": 60,
-  "last_attempt_at": "2026-10-13T16:34:32.605997+00:00",
+  "attempts": 62,
+  "confirmed_today": 61,
+  "last_attempt_at": "2026-10-13T16:40:47.349112+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -427,14 +427,21 @@
       "title": "The Ferret and the Rope Crossing",
       "format": "short",
       "uploaded_at": "2026-10-13T16:09:16.340858+00:00"
+    },
+    "rayvan-forge-87c916494d199452": {
+      "video_id": "nBv7-n1_Qu4",
+      "confirmed_at": "2026-10-13T16:40:06.659734+00:00",
+      "title": "The Wolf and the Singing Fountain",
+      "format": "short",
+      "uploaded_at": "2026-10-13T16:34:34.199551+00:00"
     }
   },
   "pending": {
-    "nBv7-n1_Qu4": {
-      "content_id": "rayvan-forge-87c916494d199452",
-      "title": "The Wolf and the Singing Fountain",
+    "smLOswVdosg": {
+      "content_id": "rayvan-forge-175e1f39b5d0e2f0",
+      "title": "The Otter and the Echoing Well",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-13T16:34:34.199551+00:00",
+      "uploaded_at": "2026-10-13T16:40:48.534001+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": ""
@@ -442,11 +449,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-13T16:33:53.844213+00:00",
+  "last_preflight_at": "2026-10-13T16:40:06.249201+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T16:34:34.524811+00:00",
+    "at": "2026-10-13T16:40:48.787275+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -837,6 +844,13 @@
     "rayvan-forge-87c916494d199452": {
       "at": "2026-10-13T16:34:32.605982+00:00",
       "title": "The Wolf and the Singing Fountain",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-175e1f39b5d0e2f0": {
+      "at": "2026-10-13T16:40:47.349094+00:00",
+      "title": "The Otter and the Echoing Well",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
