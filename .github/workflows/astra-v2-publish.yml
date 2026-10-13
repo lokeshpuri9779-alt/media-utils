@@ -99,6 +99,7 @@ jobs:
         id: early_tests
         run: |
           python -m unittest discover -s tests -p 'test_astra_youtube_oauth_errors.py' -v
+          python -m unittest discover -s tests -p 'test_astra_story_inventory.py' -v
           python -m unittest discover -s tests -p 'test_astra_preload_artifact_pagination.py' -v
 
       - name: Reconcile pending uploads and check schedule
