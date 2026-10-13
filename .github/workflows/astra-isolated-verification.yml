@@ -322,7 +322,7 @@ jobs:
           for count in (1,2,3,4):
               actors=[{'character_id':i*100} for i in range(count)]
               scenes.append({'actors':actors,'character_id':0,'object_id':1900,
-                             'action':'carry','scene_index':0})
+                             'action':'carry','scene':0,'scene_index':0})
           comparison=Image.new('RGB',(4*270,480),(22,31,46))
           for col,scene in enumerate(scenes):
               rendered=frame(scene,0.6).convert('RGB')
