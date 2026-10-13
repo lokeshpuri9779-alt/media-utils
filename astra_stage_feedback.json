@@ -759,6 +759,39 @@
       },
       "proposed_action": "",
       "candidate_id": "rayvan-original-robotgarden-v1"
+    },
+    {
+      "at": "2026-10-13T00:41:58.259464+00:00",
+      "stage": "quality",
+      "element": "creative_director",
+      "outcome": "pass",
+      "evidence": {
+        "scores": {
+          "hook": 94.0,
+          "retention": 92.0,
+          "visual": 100.0,
+          "pacing": 100.0,
+          "audio": 98.92,
+          "captions": 100.0,
+          "novelty": 100.0,
+          "coherence": 92.0,
+          "technical": 100.0
+        }
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-original-marsfootprints-v1"
+    },
+    {
+      "at": "2026-10-13T00:41:58.261098+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "pass",
+      "evidence": {
+        "duration": 16.167,
+        "renderer": "studio-7.1.1"
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-original-marsfootprints-v1"
     }
   ],
   "stage_counts": {
@@ -859,7 +892,7 @@
       "regressed": 0
     },
     "render": {
-      "pass": 23,
+      "pass": 24,
       "fail": 0,
       "skip": 0,
       "unknown": 0,
@@ -867,7 +900,7 @@
       "regressed": 0
     },
     "quality": {
-      "pass": 23,
+      "pass": 24,
       "fail": 0,
       "skip": 0,
       "unknown": 0,

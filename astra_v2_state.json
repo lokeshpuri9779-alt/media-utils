@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 28,
-  "confirmed_today": 27,
-  "last_attempt_at": "2026-10-13T00:34:59.635353+00:00",
+  "attempts": 29,
+  "confirmed_today": 28,
+  "last_attempt_at": "2026-10-13T00:41:58.333971+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -196,25 +196,32 @@
       "title": "The Door That Opened Tomorrow | Original Microfiction",
       "format": "short",
       "uploaded_at": "2026-10-13T00:00:28.932940+00:00"
+    },
+    "rayvan-original-robotgarden-v1": {
+      "video_id": "NcmIHjIRhJI",
+      "confirmed_at": "2026-10-13T00:40:06.065445+00:00",
+      "title": "The Robot Who Grew a Forest | Original Microfiction",
+      "format": "short",
+      "uploaded_at": "2026-10-13T00:35:01.601758+00:00"
     }
   },
   "pending": {
-    "NcmIHjIRhJI": {
-      "content_id": "rayvan-original-robotgarden-v1",
-      "title": "The Robot Who Grew a Forest | Original Microfiction",
+    "RlismYyrvmc": {
+      "content_id": "rayvan-original-marsfootprints-v1",
+      "title": "The Footprints That Were Not There | Original Microfiction",
       "day": "2026-10-13",
-      "uploaded_at": "2026-10-13T00:35:01.601758+00:00",
+      "uploaded_at": "2026-10-13T00:42:00.062335+00:00",
       "genre": "fiction",
       "format": "short"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-13T00:33:54.564959+00:00",
+  "last_preflight_at": "2026-10-13T00:40:05.589622+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T00:35:02.025785+00:00",
+    "at": "2026-10-13T00:42:00.479343+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -398,6 +405,12 @@
     "rayvan-original-robotgarden-v1": {
       "at": "2026-10-13T00:34:59.635334+00:00",
       "title": "The Robot Who Grew a Forest | Original Microfiction",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-original-marsfootprints-v1": {
+      "at": "2026-10-13T00:41:58.333953+00:00",
+      "title": "The Footprints That Were Not There | Original Microfiction",
       "format": "short",
       "result": "accepted"
     }
