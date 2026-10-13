@@ -40,6 +40,13 @@ jobs:
     timeout-minutes: 26
     env:
       GH_TOKEN: ${{ github.token }}
+      ASTRA_CHANNEL: rayvan
+      YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+      YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+      YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+      YOUTUBE_COMMUNITY_CLIENT_ID: ${{ secrets.YOUTUBE_COMMUNITY_CLIENT_ID }}
+      YOUTUBE_COMMUNITY_CLIENT_SECRET: ${{ secrets.YOUTUBE_COMMUNITY_CLIENT_SECRET }}
+      YOUTUBE_COMMUNITY_REFRESH_TOKEN: ${{ secrets.YOUTUBE_COMMUNITY_REFRESH_TOKEN }}
       ASTRA_PRELOAD_BUFFER: '24'
       ASTRA_PRELOAD_LANES: '4'
       ASTRA_SERIALIZED_PRELOAD: '0' # Continue producing new original stories after Season 1
