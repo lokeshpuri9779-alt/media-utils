@@ -113,6 +113,32 @@ jobs:
               assert result['width']==360 and result['height']==640, result
               assert 2.5 < result['seconds'] < 3.5, result
           PY
+      - name: Verify production storyboard and timed caption frames offline
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageChops
+          import studio_renderer as studio
+          from astra_v2.story_forge import catalog
+          story=catalog()[0]
+          plan=studio.make_plan(story)
+          assert len(plan)>=3, len(plan)
+          for i,shot in enumerate(plan):
+              assert str(shot.get('speech') or '').strip(), i
+              assert str(shot.get('headline') or '').strip(), i
+          # Production renderer frame path, with synthetic timing to avoid voice downloads.
+          for i,shot in enumerate(plan):
+              shot['start']=float(i)*2
+              shot['end']=float(i+1)*2
+              shot['duration']=2.0
+          frames=[]
+          for t in (0.3,2.3):
+              frame=studio.render_frame(plan,t,story['genre'],len(plan)*2)
+              assert isinstance(frame,Image.Image)
+              assert frame.size==(studio.W,studio.H)
+              frames.append(frame)
+          assert ImageChops.difference(frames[0].convert('RGB'),frames[1].convert('RGB')).getbbox() is not None
+          PY
       - name: Record verification boundary
         run: |
           echo 'Regression checks completed. No YouTube credentials are provided to this workflow.'
