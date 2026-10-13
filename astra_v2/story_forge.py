@@ -327,6 +327,12 @@ REWRITTEN_PLOTS = [
         ("CLAY BENEATH REEDS", "Under the reeds he found sticky clay, then pressed it into the crack behind a woven barrier of branches.", "book", "STRONGER PATCH"),
         ("THE SWIM GOES ON", "The leak slowed to a stop, and the ducklings crossed the restored pond while the beaver checked his repair.", "forest", "POND SAVED"),
     ]),
+    ("squirrel-recipe-flour", "The Squirrel and the Stolen Recipe", "animal mystery", [
+        ("THE FESTIVAL DISASTER", "A squirrel baker opened her recipe box before the autumn festival and found the prize-winning pie instructions missing.", "door", "RECIPE GONE"),
+        ("THE WRONG SUSPECT", "She followed floury footprints into the courtyard, but the tracks belonged to her apprentice carrying fresh bread.", "forest", "FALSE LEAD"),
+        ("THE CELLAR CLUE", "A torn recipe corner clung to a flour sack beside the cellar stairs, where a draft had scattered loose papers.", "book", "PAPER TRAIL"),
+        ("THE PIE RETURNS", "She recovered the recipe beneath the cellar shelf and baked the festival pie while her apprentice secured the box.", "door", "FESTIVAL SAVED"),
+    ]),
 ]
 
 AUTHORED_KEYS = {row[0] for row in PLOTS + REWRITTEN_PLOTS}
