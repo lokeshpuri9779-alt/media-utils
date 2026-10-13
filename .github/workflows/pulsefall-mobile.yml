@@ -6309,8 +6309,8 @@ jobs:
           source = replace_once(source, "func hit() -> void:\n", "func hit(damage_amount: int = 1) -> void:\n", "enemy damage signature")
           source = replace_once(
               source,
-              "\thealth -= 1\n\tif health == 0:\n",
-              "\thealth = maxi(health - maxi(damage_amount, 1), 0)\n\tif health <= 0:\n",
+              "\thealth -= 1\n\t_update_boss_phase()\n\tif health == 0:\n",
+              "\thealth = maxi(health - maxi(damage_amount, 1), 0)\n\t_update_boss_phase()\n\tif health <= 0:\n",
               "enemy damage application",
           )
           enemy.write_text(source)
