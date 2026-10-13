@@ -141,6 +141,27 @@ jobs:
               frames.append(frame)
           assert ImageChops.difference(frames[0].convert('RGB'),frames[1].convert('RGB')).getbbox() is not None
           PY
+      - name: Verify landscape video cannot pass Shorts media gate
+        run: |
+          python - <<'PY'
+          import subprocess, tempfile
+          from pathlib import Path
+          from astra_v2.creative import inspect_video, CreativeSkip
+          with tempfile.TemporaryDirectory() as d:
+              p=Path(d)/'landscape.mp4'
+              subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y',
+                  '-f','lavfi','-i','testsrc2=size=640x360:rate=12',
+                  '-f','lavfi','-i','sine=frequency=440:sample_rate=24000',
+                  '-t','3','-c:v','libx264','-pix_fmt','yuv420p',
+                  '-c:a','aac','-shortest',str(p)],check=True,timeout=90)
+              assert p.stat().st_size>30000
+              try:
+                  inspect_video(p,fmt='short')
+              except CreativeSkip as exc:
+                  assert str(exc)=='video_audio_orientation_or_duration_failed',str(exc)
+              else:
+                  raise AssertionError('Landscape video passed Shorts media gate')
+          PY
       - name: Record verification boundary
         run: |
           echo 'Regression checks completed. No YouTube credentials are provided to this workflow.'
