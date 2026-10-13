@@ -102,56 +102,50 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 premium_stories.insert(0, generated)
         except (RuntimeError, ValueError, KeyError, json.JSONDecodeError) as exc:
             print("OpenAI story skipped:", type(exc).__name__)
-    # Apply the optional persistent story ledger before expensive rendering.
-    # Existing publisher ID/title exclusions remain authoritative.
-    ledger_path = os.getenv("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json")
-    try:
-        with open(ledger_path, "r", encoding="utf-8") as history_file:
-            history_records = json.load(history_file)
-        if isinstance(history_records, dict):
-            history_records = history_records.get("stories", [])
-        if not isinstance(history_records, list):
-            raise ValueError("Story history must be a list")
-        ledger_ids = {str(record.get("content_id")) for record in history_records
-                      if isinstance(record, dict) and record.get("content_id")}
-        ledger_titles = {str(record.get("title")).casefold().strip()
-                         for record in history_records
-                         if isinstance(record, dict) and record.get("title")}
-        ledger_hashes = {str(record.get("plot_fingerprint")) for record in history_records
-                         if isinstance(record, dict) and record.get("plot_fingerprint")}
-        excluded_ids.update(ledger_ids)
-        excluded_titles.update(ledger_titles)
-        premium_stories = [story for story in premium_stories
-                           if story.get("content_id") not in ledger_ids
-                           and str(story.get("title", "")).casefold().strip() not in ledger_titles
-                           and (not story.get("plot_fingerprint")
-                                or story.get("plot_fingerprint") not in ledger_hashes)]
-        print("ASTRA_STORY_HISTORY_EXCLUSIONS=" + str(len(history_records)))
-    except FileNotFoundError:
-        # The publisher already persists confirmed videos in its durable
-        # state. Reuse that ledger when no separate history export exists.
-        state_path = os.getenv("ASTRA_PUBLISHER_STATE_PATH", "astra_v2_state.json")
+    # Merge every available exclusion source; a partial external ledger must
+    # never mask previously confirmed videos in publisher state.
+    history_ids = set()
+    history_titles = set()
+    history_hashes = set()
+    for history_path, is_publisher_state in (
+        (os.getenv("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json"), False),
+        (os.getenv("ASTRA_PUBLISHER_STATE_PATH", "astra_v2_state.json"), True),
+    ):
         try:
-            with open(state_path, "r", encoding="utf-8") as state_file:
-                saved_state = json.load(state_file)
-            published = saved_state.get("published", {})
-            if not isinstance(published, dict):
-                raise ValueError("Published ledger must be a dictionary")
-            excluded_ids.update(str(cid) for cid in published)
-            excluded_titles.update(
-                str(record.get("title")).casefold().strip()
-                for record in published.values()
-                if isinstance(record, dict) and record.get("title")
-            )
-            print("ASTRA_PUBLISHED_HISTORY_EXCLUSIONS=" + str(len(published)))
+            with open(history_path, "r", encoding="utf-8") as history_file:
+                history = json.load(history_file)
+            if is_publisher_state:
+                published = history.get("published", {})
+                if not isinstance(published, dict):
+                    raise ValueError("Invalid publisher history")
+                history_ids.update(str(cid) for cid in published)
+                records = published.values()
+            else:
+                records = history.get("stories", []) if isinstance(history, dict) else history
+                if not isinstance(records, list):
+                    raise ValueError("Invalid story history")
+            for record in records:
+                if not isinstance(record, dict):
+                    continue
+                if record.get("content_id"):
+                    history_ids.add(str(record["content_id"]))
+                if record.get("title"):
+                    history_titles.add(str(record["title"]).casefold().strip())
+                if record.get("plot_fingerprint"):
+                    history_hashes.add(str(record["plot_fingerprint"]))
         except FileNotFoundError:
-            pass
-        except (ValueError, json.JSONDecodeError, TypeError, OSError) as exc:
-            raise CreativeSkip("publisher_history_unavailable:" + type(exc).__name__) from exc
-    except (ValueError, json.JSONDecodeError, TypeError, OSError) as exc:
-        # Never silently ignore a damaged or unreadable exclusion ledger:
-        # doing so risks publishing a duplicate.
-        raise CreativeSkip("story_history_unavailable:" + type(exc).__name__) from exc
+            continue
+        except (ValueError, TypeError, OSError) as exc:
+            raise CreativeSkip("story_history_unavailable:" + type(exc).__name__) from exc
+    excluded_ids.update(history_ids)
+    excluded_titles.update(history_titles)
+    premium_stories = [
+        story for story in premium_stories
+        if story.get("content_id") not in history_ids
+        and str(story.get("title", "")).casefold().strip() not in history_titles
+        and story.get("plot_fingerprint") not in history_hashes
+    ]
+    print("ASTRA_STORY_HISTORY_EXCLUSIONS=" + str(len(history_ids)))
     print("Premium pool:", len(premium_stories), "seen IDs:", len(excluded_ids),
           "seen titles:", len(excluded_titles))
     # Parallel preload lanes deterministically own disjoint story IDs.
