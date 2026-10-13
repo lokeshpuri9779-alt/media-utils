@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "day": "2026-10-13",
+  "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 67,
-  "confirmed_today": 66,
-  "last_attempt_at": "2026-10-13T18:04:42.654585+00:00",
+  "attempts": 1,
+  "confirmed_today": 0,
+  "last_attempt_at": "2026-10-13T18:30:28.291799+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -469,14 +469,21 @@
       "title": "The Hare and the River Warning",
       "format": "short",
       "uploaded_at": "2026-10-13T17:41:56.931023+00:00"
+    },
+    "rayvan-forge-609131e9f2bbd2d0": {
+      "video_id": "KJYfcJUe03s",
+      "confirmed_at": "2026-10-13T18:29:39.135836+00:00",
+      "title": "The Ferret and the Blurry Moon",
+      "format": "short",
+      "uploaded_at": "2026-10-13T18:04:44.688885+00:00"
     }
   },
   "pending": {
-    "KJYfcJUe03s": {
-      "content_id": "rayvan-forge-609131e9f2bbd2d0",
-      "title": "The Ferret and the Blurry Moon",
-      "day": "2026-10-13",
-      "uploaded_at": "2026-10-13T18:04:44.688885+00:00",
+    "sri-ueIeEf4": {
+      "content_id": "rayvan-forge-f8d1e9d3d604d196",
+      "title": "The Panda and the Missing Ingredient",
+      "day": "2026-10-14",
+      "uploaded_at": "2026-10-13T18:30:30.538242+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": ""
@@ -484,11 +491,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-13T18:03:50.362437+00:00",
+  "last_preflight_at": "2026-10-13T18:29:38.743873+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T18:04:45.071173+00:00",
+    "at": "2026-10-13T18:30:30.795591+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -921,6 +928,13 @@
     "rayvan-forge-609131e9f2bbd2d0": {
       "at": "2026-10-13T18:04:42.654568+00:00",
       "title": "The Ferret and the Blurry Moon",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-f8d1e9d3d604d196": {
+      "at": "2026-10-13T18:30:28.291776+00:00",
+      "title": "The Panda and the Missing Ingredient",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
