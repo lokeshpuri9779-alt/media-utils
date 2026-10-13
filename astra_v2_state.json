@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 31,
+  "attempts": 32,
   "confirmed_today": 31,
-  "last_attempt_at": "2026-10-13T08:13:19.300350+00:00",
+  "last_attempt_at": "2026-10-13T08:23:22.337887+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -226,28 +226,38 @@
       "uploaded_at": "2026-10-13T08:13:21.765434+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-13T08:13:51.628286+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "8gZSJ2INyCg": {
+      "content_id": "rayvan-anthology-d7fa314f9218ce30",
+      "title": "The Cloud That Wanted a Hat",
+      "day": "2026-10-13",
+      "uploaded_at": "2026-10-13T08:23:24.283921+00:00",
+      "genre": "fiction",
+      "format": "short"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-13T08:22:31.985475+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-13T08:13:52.388388+00:00",
+    "at": "2026-10-13T08:23:24.507455+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-13T07:05:49.939768+00:00",
   "reserved": {
@@ -434,6 +444,12 @@
     "rayvan-anthology-72089163055174ea": {
       "at": "2026-10-13T08:13:19.300337+00:00",
       "title": "The Penguin Who Delivered Snow",
+      "format": "short",
+      "result": "accepted"
+    },
+    "rayvan-anthology-d7fa314f9218ce30": {
+      "at": "2026-10-13T08:23:22.337872+00:00",
+      "title": "The Cloud That Wanted a Hat",
       "format": "short",
       "result": "accepted"
     }
