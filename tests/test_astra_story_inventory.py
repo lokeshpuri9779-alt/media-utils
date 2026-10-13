@@ -14,6 +14,23 @@ class StoryInventoryTests(unittest.TestCase):
         self.assertEqual(len({x["content_id"] for x in records}), len(records))
         self.assertTrue(all(x["production_ready"] for x in records))
 
+    def test_rewritten_story_editorial_structure(self):
+        self.assertEqual(len(REWRITTEN_PLOTS), 55)
+        keys = [story[0] for story in REWRITTEN_PLOTS]
+        titles = [story[1].casefold() for story in REWRITTEN_PLOTS]
+        fingerprints = [plot_fingerprint(story[3]) for story in REWRITTEN_PLOTS]
+        self.assertEqual(len(set(keys)), 55)
+        self.assertEqual(len(set(titles)), 55)
+        self.assertEqual(len(set(fingerprints)), 55)
+        for key, title, genre, beats in REWRITTEN_PLOTS:
+            with self.subTest(story=key):
+                self.assertEqual(len(beats), 4)
+                self.assertTrue(title.strip() and genre.strip())
+                self.assertTrue(all(len(beat) == 4 for beat in beats))
+                self.assertTrue(all(all(isinstance(part, str) and part.strip() for part in beat) for beat in beats))
+                self.assertTrue(all(len(beat[1].split()) >= 9 for beat in beats))
+                self.assertEqual(len({beat[1].casefold() for beat in beats}), 4)
+
     def test_draft_inventory_count_and_unique_titles(self):
         drafts = draft_catalog()
         self.assertEqual(len(drafts), 996)
