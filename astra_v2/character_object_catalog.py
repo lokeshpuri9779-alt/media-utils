@@ -29,7 +29,7 @@ def prop(index):
     if not isinstance(index,int) or not 0<=index<OBJECT_COUNT: raise ValueError(index)
     return OBJECTS[index//50], MATERIALS[index//5%10], OBJECT_MOTIONS[index%5]
 
-def draw_character(image,index,t,x=540,y=900):
+def draw_character(image,index,t,x=540,y=900,expression="neutral"):
     species,role,style=character(index)
     d=ImageDraw.Draw(image)
     n=index%10
@@ -108,12 +108,27 @@ def draw_character(image,index,t,x=540,y=900):
     elif species=="cat":
         d.line((x-25,y+10,x-120,y-4),fill=(38,45,55),width=5)
         d.line((x+25,y+10,x+120,y-4),fill=(38,45,55),width=5)
+    if expression not in ("neutral", "surprised", "happy", "focused"):
+        raise ValueError(f"unsupported facial expression: {expression}")
     for dx in (-48,48):
-        if abs(math.sin(t*1.5))>.99:
+        if expression == "happy":
+            d.arc((x+dx-17,y-55,x+dx+17,y-29),180,360,fill=(24,29,38),width=6)
+        elif expression == "surprised":
+            d.ellipse((x+dx-19,y-68,x+dx+19,y-25),fill=(24,29,38))
+            d.ellipse((x+dx-8,y-61,x+dx+3,y-45),fill=(248,248,239))
+        elif expression == "focused":
+            d.ellipse((x+dx-13,y-60,x+dx+13,y-32),fill=(24,29,38))
+            d.line((x+dx-22,y-70,x+dx+19,y-63),fill=(35,37,43),width=6)
+        elif abs(math.sin(t*1.5))>.99:
             d.line((x+dx-14,y-45,x+dx+14,y-45),fill=(24,29,38),width=6)
         else:
             d.ellipse((x+dx-13,y-60,x+dx+13,y-32),fill=(24,29,38))
-    d.arc((x-32,y-20,x+32,y+28),0,180,fill=(35,37,43),width=5)
+    if expression == "surprised":
+        d.ellipse((x-15,y-12,x+15,y+23),fill=(35,37,43))
+    elif expression == "focused":
+        d.line((x-24,y+13,x+24,y+13),fill=(35,37,43),width=5)
+    else:
+        d.arc((x-32,y-20,x+32,y+28),0,180,fill=(35,37,43),width=5)
     d.ellipse((x-95,y+55,x+95,y+270),fill=base)
     step=int(30*math.sin(t*4))
     for side in (-1,1):
