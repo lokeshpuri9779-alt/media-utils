@@ -1,12 +1,14 @@
 """Regression tests for ASTRA's authored and opt-in draft story inventory."""
 import unittest
 
-from astra_v2.story_forge import PLOTS, catalog, draft_catalog, editorial_screen, plot_fingerprint
+from astra_v2.story_forge import PLOTS, REWRITTEN_PLOTS, catalog, draft_catalog, editorial_screen, plot_fingerprint
 
 
 class StoryInventoryTests(unittest.TestCase):
     def test_authored_inventory_has_distinct_ids(self):
         self.assertEqual(len(PLOTS), 24)
+        self.assertEqual(len(REWRITTEN_PLOTS), 5)
+        self.assertEqual(len(records), 29)
         records = catalog(limit=2000)
         self.assertEqual(len({x["content_id"] for x in records}), len(records))
         self.assertTrue(all(x["production_ready"] for x in records))
