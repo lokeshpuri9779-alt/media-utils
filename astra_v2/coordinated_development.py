@@ -234,7 +234,12 @@ def frame(scene, t):
                 sway += int(7 * math.sin(t * 5.2 + phase))
             elif named_action == "celebrate":
                 sway += int(12 * math.sin(t * 4.0 + phase))
-            draw_character(actor_layer, actor["character_id"], actor_t, 540, 1060)
+            expression = ("surprised" if named_action == "react" else
+                          "happy" if named_action == "celebrate" else
+                          "focused" if named_action in ("point", "carry") else
+                          "neutral")
+            draw_character(actor_layer, actor["character_id"], actor_t, 540, 1060,
+                           expression=expression)
             if scale != 1.0:
                 # Crop to actual visible artwork before scaling: resizing a
                 # full-screen transparent canvas shrinks the character twice.
@@ -255,7 +260,11 @@ def frame(scene, t):
         # Move the prop forward so it does not cover the ensemble.
         ox, oy = 540, 1510
     else:
-        draw_character(character_layer, scene["character_id"], t, cx + carry_shift, cy)
+        expression = ("surprised" if named_action == "react" else
+                      "happy" if named_action == "celebrate" else
+                      "focused" if named_action in ("point", "carry") else "neutral")
+        draw_character(character_layer, scene["character_id"], t, cx + carry_shift, cy,
+                       expression=expression)
     if named_action == "carry":
         # Stage the object next to the lead actor, moving in sync with them.
         # This is a simple composited carry cue, not inverse-kinematic gripping.
