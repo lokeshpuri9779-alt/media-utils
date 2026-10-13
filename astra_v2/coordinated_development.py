@@ -191,7 +191,22 @@ def frame(scene, t):
     ox = 760 - int(50 * approach) if action in (0, 2) else 745
     cy = 1060 + int(13 * math.sin(t * 2.4))
     oy = 1180 + int(15 * math.sin(t * 2.1 + 1.0))
-    draw_character(character_layer, scene["character_id"], t, cx, cy)
+    actors = scene.get("actors")
+    if actors:
+        # Keep every actor on the same stage, with stable left-to-right slots.
+        # Render each actor onto its own transparent layer before compositing.
+        count = len(actors)
+        slots = ([540], [340, 740], [240, 540, 840],
+                 [180, 420, 660, 900])[count - 1]
+        for actor, slot in zip(actors, slots):
+            actor_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
+            sway = int(13 * math.sin(t * 2.0 + slot / 180))
+            draw_character(actor_layer, actor["character_id"], t, slot + sway, cy)
+            character_layer = Image.alpha_composite(character_layer, actor_layer)
+        # Move the prop forward so it does not cover the ensemble.
+        ox, oy = 540, 1510
+    else:
+        draw_character(character_layer, scene["character_id"], t, cx, cy)
     draw_prop(object_layer, scene["object_id"], t, ox, oy)
     image = Image.alpha_composite(image.convert("RGBA"), character_layer.resize((W, H), Image.Resampling.LANCZOS))
     image = Image.alpha_composite(image, object_layer.resize((W, H), Image.Resampling.LANCZOS))
