@@ -229,7 +229,7 @@ def frame(scene, t):
         mix = y / H
         shade = tuple(int(theme[c] * (1 - mix * 0.55) + BG[c] * mix * 0.55) for c in range(3))
         d.line((0, y, W, y), fill=shade)
-    drift = int(12 * math.sin(t * 0.7 + number))
+    drift = int(12 * math.sin(t * 0.7 + number) + 8 * math.sin(t * 0.35))
     for i in range(7):
         xx = (i * 101 + number * 47 + drift) % (W + 110) - 55
         yy = 125 + (i * 83 + number * 19) % 360
@@ -248,7 +248,8 @@ def frame(scene, t):
         raise ValueError(f"scene {number}: unsupported action {named_action!r}")
     action = actions[named_action] if named_action is not None else number % 4
     # Explicit actions are authored stage cues, not inferred narration.
-    approach = math.sin(min(1.0, t / 1.4) * math.pi / 2)
+    progress = max(0.0, min(1.0, t / 2.2))
+    approach = progress * progress * (3.0 - 2.0 * progress)
     cx = 310 + int(38 * approach) if action in (0, 2) else 320
     ox = 760 - int(50 * approach) if action in (0, 2) else 745
     cy = 1060 + int(13 * math.sin(t * 2.4))
@@ -273,6 +274,10 @@ def frame(scene, t):
             # approach and points toward it on the authored point cue.
             phase = actor_index * 0.43 + (actor["character_id"] % 7) * 0.11
             sway = int(9 * math.sin(t * 2.0 + slot / 180 + phase))
+            if named_action == 'carry' and actor_index == 1:
+                sway += int(14 * max(0.0, math.sin((t - 0.35) * 3.1)))
+            if named_action == 'celebrate' and actor_index == 0:
+                sway += int(10 * math.sin(t * 7.0))
             actor_t = t + phase
             if named_action == "approach":
                 sway += int((22 if actor_index == 0 else 8) * approach)
@@ -367,6 +372,12 @@ def frame(scene, t):
         for j in range(3):
             d.ellipse((390+j*22, 440-j*23, 398+j*22, 448-j*23),
                       fill=(240, 205, 134))
+    if named_action and scene.get('actors'):
+        cue = {'approach': 'WHAT IS THAT?', 'point': 'DONT TOUCH IT!',
+               'carry': 'TOO LATE...', 'react': 'OH NO!',
+               'celebrate': 'I DID IT!'}[named_action]
+        d.rounded_rectangle((80, 105, W-80, 157), radius=18, fill=(19, 30, 48, 230))
+        d.text((W // 2 - 4 * len(cue), 124), cue, fill=(255, 228, 169))
     d.rounded_rectangle((18, 20, W-18, 65), radius=14, fill=(18, 26, 40, 255))
     d.text((30, 35), f"SCENE {number:02d}  /  ASTRA EXPERIMENT", fill=(239, 239, 228))
     d.text((24, 925), "NOT APPROVED FOR PUBLICATION", fill=(245, 176, 121))
