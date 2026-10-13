@@ -108,8 +108,22 @@ def draw_prop(image,index,t,x=540,y=900):
         d.rounded_rectangle((x-140,y-45,x+140,y+70),radius=25,fill=color)
         for dx in (-90,90): d.ellipse((x+dx-30,y+50,x+dx+30,y+110),fill=(40,48,58))
     elif kind in ("tree","flower","mushroom"):
-        d.rectangle((x-17,y-10,x+17,y+140),fill=(121,88,61))
-        d.ellipse((x-110,y-150,x+110,y+35),fill=color)
+        if kind=="tree":
+            d.rectangle((x-19,y-10,x+19,y+140),fill=(121,88,61))
+            for dx,dy in ((-60,-40),(60,-40),(0,-110)):
+                d.ellipse((x+dx-75,y+dy-70,x+dx+75,y+dy+70),fill=color)
+        elif kind=="flower":
+            d.line((x,y+140,x,y-35),fill=(83,154,93),width=12)
+            for k in range(7):
+                angle=k*math.tau/7+t*.12
+                px=x+58*math.cos(angle);py=y-55+58*math.sin(angle)
+                d.ellipse((px-35,py-35,px+35,py+35),fill=color)
+            d.ellipse((x-30,y-85,x+30,y-25),fill=(251,210,97))
+        else:
+            d.rounded_rectangle((x-28,y-10,x+28,y+130),radius=15,fill=(233,221,201))
+            d.pieslice((x-125,y-160,x+125,y+70),180,360,fill=color)
+            for dx in (-55,0,55):
+                d.ellipse((x+dx-13,y-85,x+dx+13,y-59),fill=(248,241,218))
     elif kind in ("star","planet","cloud","mountain"):
         d.ellipse((x-115,y-115,x+115,y+115),fill=color)
     elif kind in ("clock","ball","apple","pizza","cake"):
