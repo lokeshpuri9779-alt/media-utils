@@ -71,7 +71,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [ ] Entry -> objective -> combat -> upgrade choice -> miniboss/boss -> extraction.
 - [x] Extraction success/failure state, 60-second physical escape, retry checkpoints and duplicate reward protection (20 scripted checks).
 - [x] Run rewards and risk/reward decisions: optional OVERLOAD contracts trade +2 hostiles, +25% enemy health, +20% damage and faster attacks for one bonus upgrade pick and +50% score.
-- [ ] Persistent meta-progression between runs.
+- [x] Persistent meta-progression between runs.
 - [ ] Continue/resume after app backgrounding.
 
 ### P2 — Controls / feel
@@ -104,9 +104,9 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [ ] Environmental storytelling instead of text dumps.
 
 ### P5 — Progression / retention
-- [ ] Permanent weapon unlock progression.
+- [x] Permanent weapon unlock progression.
 - [ ] PULSE ability progression.
-- [ ] Account/meta level.
+- [x] Account/meta level.
 - [ ] Daily/weekly challenge architecture without pay-to-win.
 - [ ] Reward pacing audit.
 - [ ] First-session onboarding.
@@ -126,7 +126,7 @@ Market-scale KPIs such as total downloads, revenue, DAU and rankings cannot be g
 - [ ] Investigate package size only if an installation, distribution or performance problem is demonstrated.
 
 ### P7 — QA / analytics
-- [ ] Automated regression tests for controls, combat, save, extraction and progression.
+- [x] Automated regression tests for controls, combat, save, extraction and progression.
 - [ ] 20–30 minute soak test.
 - [ ] Local crash/performance diagnostics.
 - [ ] KPI event schema: install, tutorial, mission start, death, upgrade, extraction, second run.
@@ -366,3 +366,17 @@ Validated build: commit `4dc52ba2a2a9c4802d5af057101dd816480b2ea2`; APK SHA256 `
 - [x] Workflow runs `38392430728` and `38392430794` passed 235 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
 
 Validated build: commit `abcbfccb27ef3d8b94b5432f57760924560097a8`; APK SHA256 `b20f5f0d9a8e0bf1c3367eff42eeb9d4975e5fea0b753b1ed2cc63cb1717f74b`; 521,174,879 bytes. v0.2.22 remains the known-good rollback. Automated rules prove deterministic weapon differentiation and bounds, not player-perceived balance, aim comfort or weapon fun; player-controlled combat/navigation, a complete human objective-to-extraction run, physical-device performance, and benchmark superiority remain unverified.
+
+
+## Validated v0.2.24 permanent-progression checkpoint (2026-10-13)
+
+- [x] Added permanent credit-based arsenal progression: CARBINE remains the safe starter, SCATTER unlocks at 250 credits and LANCE at 900 credits.
+- [x] Locked weapons are excluded from the mobile weapon cycle; invalid persisted modes fail closed to CARBINE.
+- [x] Added a persistent meta-level curve with bounded integrity (+30 maximum) and fire-cadence (+12% maximum) bonuses.
+- [x] Migrated legacy saves by deriving meta level from non-negative credits, preventing stale or corrupted level fields from granting impossible bonuses.
+- [x] Added explicit next-unlock/extraction messaging and progression telemetry.
+- [x] Added thirty-three deterministic progression checks covering unlock boundaries, cycling, fallbacks, reward pacing, score persistence and permanent-bonus caps.
+- [x] Initial runs stopped safely on a generated-code anchor and then exposed a stale APK version assertion; commits `143bc7a082c40e68012746f98496e63f643e3b84` and `45641f3a043b17ed261d1bdcf100c4641e1417b8` repaired those gates without weakening validation.
+- [x] Workflow runs `38401742810` and `38401742692` passed 268 game/runtime checks, seven APK package checks, five AAB package checks, five lifecycle cycles with zero detected game-test shutdown leaks, and both Android exports.
+
+Validated build: commit `45641f3a043b17ed261d1bdcf100c4641e1417b8`; APK SHA256 `297408baa3c03c777c8293d28355c5de57ee48c7f623e753ae147ab37c9d4057`; 521,178,975 bytes. v0.2.23 remains the known-good rollback. Automated checks prove deterministic save/unlock/reward behavior, not progression satisfaction, weapon balance, human navigation, a complete player-controlled extraction run, physical-device performance, or benchmark superiority.
