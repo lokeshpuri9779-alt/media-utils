@@ -5293,8 +5293,8 @@ jobs:
           )
           s = replace_once(
               s,
-              "\t\tcard.offset_top = -175\n\t\tcard.offset_bottom = 175\n",
-              "\t\tcard.offset_top = -220\n\t\tcard.offset_bottom = 220\n",
+              "\tcard.offset_top = -175\n\tcard.offset_bottom = 175\n",
+              "\tcard.offset_top = -220\n\tcard.offset_bottom = 220\n",
               "upgrade card height",
           )
           s = replace_once(
