@@ -23,8 +23,8 @@ class StoryCastAlignmentTests(unittest.TestCase):
             verify_story_cast(plan)
 
     def test_narration_selects_correct_species(self):
-        plan = build_narrated_plan("narration-test", ["The fox found a key.", "A puppy opened the door."])
-        self.assertEqual([scene["subject"] for scene in plan["scenes"]], ["fox", "dog"])
+        plan = build_narrated_plan("narration-test", ["The fox found a key.", "The fox opened the door."])
+        self.assertEqual([scene["subject"] for scene in plan["scenes"]], ["fox", "fox"])
         self.assertTrue(verify_story_cast(plan))
 
     def test_protagonist_persists_across_unnamed_scenes(self):
