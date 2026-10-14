@@ -1,0 +1,63 @@
+name: ASTRA parallel story rehearsal (offline)
+on:
+  workflow_dispatch:
+  push:
+    branches: [astra-isolated-verification-20261013]
+    paths:
+      - 'astra_v2/render_story_batch.py'
+      - 'astra_v2/story_batch.py'
+      - '.github/workflows/astra-parallel-story-rehearsal.yml'
+permissions:
+  contents: read
+concurrency:
+  group: astra-parallel-story-rehearsal-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  render-story:
+    name: Offline story ${{ matrix.story }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        story: [0, 1, 2, 3]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install offline rendering dependencies
+        run: |
+          python -m pip install --disable-pip-version-check pillow imageio-ffmpeg
+      - name: Test story batch contracts
+        run: python -m unittest discover -s tests -p 'test_astra_story_batch.py' -v
+      - name: Render one story independently
+        run: |
+          python -m astra_v2.render_story_batch --index ${{ matrix.story }} --fps 8 --seconds-per-scene 2 --output verification-output/story-${{ matrix.story }}
+      - name: Validate silent MP4 and offline gate
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import imageio_ffmpeg
+          import subprocess
+          roots = list(Path("verification-output").glob("story-*"))
+          assert len(roots) == 1
+          root = roots[0]
+          report = json.loads((root / "batch-result.json").read_text())
+          assert report["publication_allowed"] is False
+          assert report["quality_approved"] is False
+          assert report["video_has_audio"] is False
+          assert (root / "preview.mp4").stat().st_size > 1000
+          cmd = [imageio_ffmpeg.get_ffmpeg_exe(), "-v", "error", "-i", str(root / "preview.mp4"), "-f", "null", "-"]
+          subprocess.run(cmd, check=True, timeout=60)
+          PY
+      - name: Upload independent story preview
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-offline-story-${{ matrix.story }}
+          path: verification-output/story-${{ matrix.story }}/
+          if-no-files-found: ignore
+          retention-days: 7
