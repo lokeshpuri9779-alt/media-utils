@@ -37,6 +37,16 @@ class LocomotionTests(unittest.TestCase):
                 walk = frame(dict(base, action="walk"), timestamp)
                 self.assertIsNotNone(ImageChops.difference(jump, walk).getbbox())
 
+    def test_production_silhouette_accepts_all_locomotion_cues(self):
+        from PIL import Image
+        from astra_v2.character_object_catalog import draw_character_silhouette
+        for gesture in ("walk", "run", "jump", "dance"):
+            with self.subTest(gesture=gesture):
+                canvas = Image.new("RGBA", (1080, 1920))
+                draw_character_silhouette(canvas, 0, 0.4, 540, 960,
+                                          expression="neutral", gesture=gesture)
+                self.assertIsNotNone(canvas.getbbox())
+
     def test_publishing_remains_disabled(self):
         plan = build_ensemble_plan("locomotion-check", [["cat", "dog"]])
         self.assertFalse(plan["publication_allowed"])
