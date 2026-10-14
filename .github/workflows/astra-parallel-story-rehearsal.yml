@@ -6,6 +6,8 @@ on:
     paths:
       - 'astra_v2/render_story_batch.py'
       - 'astra_v2/story_batch.py'
+      - 'astra_v2/coordinated_development.py'
+      - 'tests/test_astra_locomotion.py'
       - '.github/workflows/astra-parallel-story-rehearsal.yml'
 permissions:
   contents: read
@@ -32,6 +34,8 @@ jobs:
           python -m pip install --disable-pip-version-check pillow imageio-ffmpeg
       - name: Test story batch contracts
         run: python -m unittest discover -s tests -p 'test_astra_story_batch.py' -v
+      - name: Verify new locomotion cues
+        run: python -m unittest discover -s tests -p 'test_astra_locomotion.py' -v
       - name: Render one story independently
         run: |
           python -m astra_v2.render_story_batch --index ${{ matrix.story }} --fps 8 --seconds-per-scene 2 --output verification-output/story-${{ matrix.story }}
