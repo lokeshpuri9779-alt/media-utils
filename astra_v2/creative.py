@@ -284,7 +284,8 @@ def make_candidate(path, excluded_ids, excluded_titles):
     return {"title": title, "description": description, "content_id": content_id,
             "media": media, "synthetic": synthetic,
             "genre": str(meta.get("genre") or ""), "format": "short",
-            "plot_key": str(meta.get("plot_key") or "")}
+            "plot_key": str(meta.get("plot_key") or ""),
+            "renderer": str(meta.get("renderer") or "astra-v2")}
 
 
 def make_long_candidate(path, excluded_ids, excluded_titles):
