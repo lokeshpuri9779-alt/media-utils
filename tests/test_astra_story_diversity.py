@@ -27,6 +27,12 @@ class HistoryAuditTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             audit_history([], threshold=1.2)
 
+    def test_empty_story_fails_continuity(self):
+        from astra_v2.story_diversity_audit import audit
+        result = audit([{"title": "Empty", "scenes": []}])["results"][0]
+        self.assertFalse(result["continuity_ok"])
+        self.assertFalse(result["repair_sequence_ok"])
+
     def test_similarity_bounds(self):
         a = story("A", ["An owl flies"], ["fly"])
         b = story("B", ["A fox runs"], ["run"])
