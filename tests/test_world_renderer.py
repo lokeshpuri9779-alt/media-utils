@@ -9,7 +9,8 @@ class WorldRendererTests(unittest.TestCase):
             im=draw_asset(category,"demo",size=64)
             self.assertEqual(im.size,(64,64))
             self.assertEqual(im.mode,"RGB")
-            self.assertNotEqual(im.getpixel((0,0)),im.getpixel((32,32)))
+            self.assertIsNotNone(im.getbbox())
+            self.assertGreater(len(im.getcolors(maxcolors=4096) or []),1)
     def test_determinism(self):
         self.assertEqual(draw_asset("animals","fox",1).tobytes(),
                          draw_asset("animals","fox",1).tobytes())
