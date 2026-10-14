@@ -632,6 +632,34 @@ def render(plan, output, fps=8, seconds_per_scene=2, video=False):
                     encoder.send(frame(scene, k / fps).tobytes())
         finally:
             encoder.close()
+        if plan.get("pilot_type") == "offline_comedy":
+            from astra_v2.comedy_sound import write_soundtrack
+            sound_report = write_soundtrack(
+                plan, output / "soundtrack.wav", seconds_per_scene=seconds_per_scene,
+            )
+            source_mp4 = output / "preview.mp4"
+            multiplexed_mp4 = output / "preview-with-sound.mp4"
+            subprocess.run([
+                "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
+                "-i", str(source_mp4), "-i", str(output / "soundtrack.wav"),
+                "-map", "0:v:0", "-map", "1:a:0",
+                "-c:v", "copy", "-c:a", "aac", "-b:a", "128k",
+                "-ar", "24000", "-ac", "1", "-movflags", "+faststart",
+                "-t", str(len(plan["scenes"]) * seconds_per_scene),
+                str(multiplexed_mp4),
+            ], check=True, timeout=90)
+            audio_streams = json.loads(subprocess.check_output([
+                "ffprobe", "-v", "error", "-show_entries",
+                "stream=codec_type,codec_name", "-of", "json",
+                str(multiplexed_mp4),
+            ], timeout=20))["streams"]
+            if not any(s.get("codec_type") == "audio" and
+                       s.get("codec_name") == "aac" for s in audio_streams):
+                raise RuntimeError("the comedy pilot is missing AAC audio")
+            multiplexed_mp4.replace(source_mp4)
+            report["audio_codec"] = "aac"
+            report["audio_origin"] = sound_report["origin"]
+            report["original_audio_cues"] = sound_report["cue_count"]
     (output / "plan.json").write_text(json.dumps(plan, indent=2))
     (output / "report.json").write_text(json.dumps(report, indent=2))
     if motion_failures or visual_collisions:
