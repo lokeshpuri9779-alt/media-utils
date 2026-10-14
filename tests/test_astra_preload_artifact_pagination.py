@@ -200,6 +200,8 @@ class StudioRendererFloorTests(unittest.TestCase):
         check = preload_queue._studio_meets_floor
         self.assertFalse(check("studio-7.1.1", "7.2.0"))
         self.assertTrue(check("studio-7.2.0", "7.2.0"))
+        self.assertFalse(check("studio-7.2.0", "7.2.1"))
+        self.assertTrue(check("studio-7.2.1", "7.2.1"))
         self.assertTrue(check("studio-7.10.0", "7.2.0"))
         self.assertFalse(check("unknown", "7.2.0"))
         self.assertFalse(check("studio-8", "7.2.0"))
