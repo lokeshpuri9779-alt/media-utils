@@ -294,7 +294,8 @@ def frame(scene, t):
     # Draw on transparent layers to avoid hiding the background.
     character_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
     object_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
-    actions = {"approach": 0, "react": 1, "point": 2, "celebrate": 3, "carry": 4}
+    actions = {"approach": 0, "react": 1, "point": 2, "celebrate": 3, "carry": 4,
+               "walk": 5, "run": 6, "jump": 7, "dance": 8}
     named_action = scene.get("action")
     if named_action is not None and named_action not in actions:
         raise ValueError(f"scene {number}: unsupported action {named_action!r}")
@@ -346,6 +347,22 @@ def frame(scene, t):
                 sway += int(18 * math.exp(-1.35 * elapsed) *
                             math.sin(9.0 * elapsed))
             actor_t = t + phase
+            # Opt-in locomotion for experimental story batches only.
+            # Lead and supporting actor use different phase offsets.
+            if named_action in ("walk", "run", "jump", "dance"):
+                speed = {"walk": 2.7, "run": 6.3, "jump": 4.0, "dance": 5.2}[named_action]
+                stride = math.sin(t * speed + phase)
+                if named_action == "walk":
+                    sway += int(23 * math.sin(min(t, 1.8) / 1.8 * math.pi / 2))
+                    sway += int(5 * stride)
+                elif named_action == "run":
+                    sway += int(44 * math.sin(min(t, 1.8) / 1.8 * math.pi / 2))
+                    sway += int(12 * stride)
+                elif named_action == "jump":
+                    # Vertical displacement in stage coordinates.
+                    actor_t += 0.18
+                else:
+                    sway += int(24 * stride)
             if named_action == "approach":
                 sway += int((22 if actor_index == 0 else 8) * approach)
             elif named_action == "react":
@@ -568,7 +585,8 @@ def render(plan, output, fps=8, seconds_per_scene=2, video=False):
         raise ValueError("invalid scene plan")
     for scene in plan["scenes"]:
         if scene.get("action") is not None and scene["action"] not in (
-            "approach", "react", "point", "celebrate", "carry"
+            "approach", "react", "point", "celebrate", "carry",
+            "walk", "run", "jump", "dance"
         ):
             raise ValueError(f"scene {scene.get('scene')}: unsupported action")
     if plan.get("ensemble_enabled") or plan.get("story_subjects_verified") or any(
