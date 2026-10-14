@@ -138,7 +138,7 @@ def _stage(d, shot, t):
     text = " ".join(str(shot.get(k) or "") for k in
                     ("story_title", "speech", "visual_prompt", "action")).lower()
     seed = int.from_bytes(hashlib.sha256(text.encode()).digest()[:4], "big")
-    setting = scene_setting(shot)
+    setting = str(shot.get("story_setting") or scene_setting(shot))
     beat = scene_phase(shot)
     night = bool(re.search(r"\b(?:night|moon|stars?|dark|shadow|midnight)\b", text))
     sky = (92, 126, 149) if night else (122, 162, 152)
