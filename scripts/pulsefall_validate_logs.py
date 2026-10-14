@@ -10,11 +10,11 @@ import sys
 
 
 # Explicit evidence contract: a missing suite or reduced coverage is not green.
-# Extraction currently reports only failures, so its 24 PASS records are counted.
+# Extraction currently reports only failures, so its 25 PASS records are counted.
 SUITES = {
     "cache-navigation-test.log": ("CACHE NAVIGATION CHECKS", 10, None),
     "runtime.log": ("RUNTIME SOAK CHECKS", 10, 5),
-    "extraction-test.log": ("EXTRACTION TEST FAILURES", 24, None),
+    "extraction-test.log": ("EXTRACTION TEST FAILURES", 25, None),
     "controls-test.log": ("CONTROLS CHECKS", 35, None),
     "aim-assist-test.log": ("AIM ASSIST CHECKS", 13, None),
     "camera-collision-test.log": ("CAMERA COLLISION CHECKS", 7, None),
