@@ -48,7 +48,9 @@ jobs:
           from astra_v2.story_history import evaluate_and_record, read_history
           path = Path("offline-history/stories.jsonl")
           outcomes = []
-          for episode in (1, 2):
+          # Advance the rehearsal episodes on every run instead of replaying 1 and 2 forever.
+          base_episode = int('${{ github.run_number }}') * 2 - 1
+          for episode in (base_episode, base_episode + 1):
               result = evaluate_and_record(build_story_batch(episode=episode)["stories"], path)
               outcomes.append({"episode": episode, "recorded": result["recorded"], "duplicates": result["near_duplicates"]})
               assert not result["publication_allowed"] and not result["quality_approved"]
