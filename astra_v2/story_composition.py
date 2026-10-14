@@ -33,3 +33,22 @@ def compose(template, seed, episode):
         resolution[1],
     )
     return beats
+
+
+def action_for_beat(index, narration):
+    """Map story events to supported procedural action cues."""
+    text = narration.lower()
+    if index == 0:
+        return "approach"
+    if any(word in text for word in ("chases", "races", "runaway", "rushes")):
+        return "run"
+    if any(word in text for word in ("repairs", "returns", "carries", "lifts", "uses")):
+        return "carry"
+    if any(word in text for word in ("discovers", "clue", "notices", "examines")):
+        return "point"
+    if index == 4 or any(word in text for word in ("celebrates", "applause")):
+        return "celebrate"
+    if any(word in text for word in ("surprise", "mysterious")):
+        return "react"
+    return ("walk", "point", "react", "carry", "celebrate")[index % 5]
+
