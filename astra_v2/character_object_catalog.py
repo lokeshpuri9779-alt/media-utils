@@ -491,7 +491,7 @@ def draw_character_silhouette(image, index, t, x=540, y=900,
                               expression="neutral", gesture="idle"):
     if expression not in ("neutral", "surprised", "happy", "focused"):
         raise ValueError(f"unsupported facial expression: {expression}")
-    if gesture not in ("idle", "point", "celebrate", "carry", "carry_rig"):
+    if gesture not in ("idle", "point", "celebrate", "carry", "carry_rig", "walk", "run", "jump", "dance"):
         raise ValueError(f"unsupported gesture: {gesture}")
     species, role, style = character(index)
     d = ImageDraw.Draw(image)
@@ -571,20 +571,31 @@ def draw_character_silhouette(image, index, t, x=540, y=900,
             for dx in (-91,91):
                 d.ellipse((x+dx-35,y-80,x+dx+35,y+11),fill=(221,177,139))
     # Articulated extremities are species-aware and driven by time, not index alone.
-    gait = math.sin(t * 5.0 + index * .09)
-    swing = int(36 * gait)
+    pace = 9.0 if gesture == "run" else 5.0 if gesture in ("walk", "dance") else 3.0 if gesture == "jump" else 5.0
+    stride = 65 if gesture == "run" else 42 if gesture == "walk" else 32 if gesture == "dance" else 36
+    gait = math.sin(t * pace + index * .09)
+    swing = int(stride * gait)
     if species in ("human","robot","cat","dog","fox","rabbit","bear","frog",
                    "mouse","monkey","lion","deer","alien"):
         for side in (-1,1):
             shoulder=(x+side*58,y+55)
             elbow=(x+side*(105+swing//3),y+93+side*swing)
             hand=(x+side*(122+swing//2),y+138+side*swing)
+            if gesture == "jump":
+                elbow=(x+side*108,y-10)
+                hand=(x+side*132,y-83)
+            elif gesture == "dance":
+                elbow=(x+side*(105+swing//3),y+32-side*swing)
+                hand=(x+side*145,y-55-side*swing)
             if gesture != "carry_rig":
                 d.line((shoulder,elbow,hand),fill=dark,width=15,joint="curve")
                 d.ellipse((hand[0]-13,hand[1]-13,hand[0]+13,hand[1]+13),fill=color)
             hip=(x+side*32,y+147)
             knee=(x+side*(40+swing//2),y+197)
             foot=(x+side*(43+swing),y+247-abs(swing)//3)
+            if gesture == "jump":
+                knee=(x+side*68,y+183)
+                foot=(x+side*88,y+215)
             d.line((hip,knee,foot),fill=dark,width=17,joint="curve")
             d.ellipse((foot[0]-21,foot[1]-10,foot[0]+21,foot[1]+11),fill=color)
     elif species in ("bird","owl","penguin","dragon"):
