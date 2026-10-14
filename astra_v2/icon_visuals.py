@@ -6,10 +6,12 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 
 ROOT=Path("asset_cache/lucide")
-ALIASES={"fox":"dog","otter":"dog","owl":"bird","duck":"bird","firefly":"bug",
-         "mouse":"rat","crab":"fish","ocean":"water","tree":"trees",
-         "museum":"building","whale":"fish","robot":"bot","clock":"clock",
-         "train":"tram-front","moon":"moon","book":"book-open","squirrel":"squirrel"}
+ALIASES={"ocean":"water","tree":"trees","museum":"building",
+         "robot":"bot","clock":"clock","train":"tram-front",
+         "moon":"moon","book":"book-open","squirrel":"squirrel"}
+# Never substitute another species as the focal animal. Such substitutions
+# made story characters appear as unrelated generic icons.
+UNSUPPORTED_ANIMALS={"fox","otter","owl","duck","firefly","mouse","crab","whale"}
 def pick_icon(shot):
     from astra_v2.free_icon_cache import NAMES
     text=" ".join(str(shot.get(k) or "") for k in
@@ -18,6 +20,7 @@ def pick_icon(shot):
     matches=[]
     for name,pattern in SUBJECTS:
         found=re.search(pattern,text)
+        if found and name in UNSUPPORTED_ANIMALS: return None
         if found: matches.append((found.start(),ALIASES.get(name,name)))
     if matches:
         name=min(matches)[1]
