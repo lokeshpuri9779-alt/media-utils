@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 47,
-  "confirmed_today": 46,
-  "last_attempt_at": "2026-10-14T14:58:30.834935+00:00",
+  "attempts": 48,
+  "confirmed_today": 47,
+  "last_attempt_at": "2026-10-14T15:22:50.649142+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -798,14 +798,21 @@
       "title": "The Penguin and the Runaway Sled",
       "format": "short",
       "uploaded_at": "2026-10-14T14:51:46.975505+00:00"
+    },
+    "rayvan-forge-2ae56e5d0bf9aadf": {
+      "video_id": "9g7WH9nLlxY",
+      "confirmed_at": "2026-10-14T15:21:58.225883+00:00",
+      "title": "The Frog and the Echo Concert",
+      "format": "short",
+      "uploaded_at": "2026-10-14T14:58:32.079663+00:00"
     }
   },
   "pending": {
-    "9g7WH9nLlxY": {
-      "content_id": "rayvan-forge-2ae56e5d0bf9aadf",
-      "title": "The Frog and the Echo Concert",
+    "fwwok77i5ME": {
+      "content_id": "rayvan-forge-5ec46c9c617fecda",
+      "title": "The Raccoon and the Mixed-Up Paint",
       "day": "2026-10-14",
-      "uploaded_at": "2026-10-14T14:58:32.079663+00:00",
+      "uploaded_at": "2026-10-14T15:22:52.244028+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": ""
@@ -813,11 +820,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T14:57:30.152037+00:00",
+  "last_preflight_at": "2026-10-14T15:21:57.754085+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T14:58:32.329379+00:00",
+    "at": "2026-10-14T15:22:52.452103+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -1579,6 +1586,13 @@
     "rayvan-forge-2ae56e5d0bf9aadf": {
       "at": "2026-10-14T14:58:30.834917+00:00",
       "title": "The Frog and the Echo Concert",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-5ec46c9c617fecda": {
+      "at": "2026-10-14T15:22:50.649127+00:00",
+      "title": "The Raccoon and the Mixed-Up Paint",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
