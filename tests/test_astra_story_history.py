@@ -7,6 +7,14 @@ def story(words):
     return {"title": words, "scenes": [{"narration": words, "action": "approach"}]}
 
 class StoryHistoryTests(unittest.TestCase):
+    def test_selection_validates_threshold_even_without_candidates(self):
+        from astra_v2.story_history import select_novel_stories
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "history.jsonl"
+            for threshold in (-0.01, 1.01):
+                with self.assertRaises(ValueError):
+                    select_novel_stories([], path, threshold=threshold)
+
     def test_selection_skips_repeated_batch_before_finding_new_story(self):
         from astra_v2.story_history import select_novel_stories
         with tempfile.TemporaryDirectory() as directory:
