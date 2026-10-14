@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 46,
-  "confirmed_today": 45,
-  "last_attempt_at": "2026-10-14T14:51:45.326427+00:00",
+  "attempts": 47,
+  "confirmed_today": 46,
+  "last_attempt_at": "2026-10-14T14:58:30.834935+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -791,14 +791,21 @@
       "title": "The Fox and the Floating Market",
       "format": "short",
       "uploaded_at": "2026-10-14T14:20:06.397002+00:00"
+    },
+    "rayvan-forge-c6e1febf4b55e972": {
+      "video_id": "8yFiPwXUVcY",
+      "confirmed_at": "2026-10-14T14:57:30.605541+00:00",
+      "title": "The Penguin and the Runaway Sled",
+      "format": "short",
+      "uploaded_at": "2026-10-14T14:51:46.975505+00:00"
     }
   },
   "pending": {
-    "8yFiPwXUVcY": {
-      "content_id": "rayvan-forge-c6e1febf4b55e972",
-      "title": "The Penguin and the Runaway Sled",
+    "9g7WH9nLlxY": {
+      "content_id": "rayvan-forge-2ae56e5d0bf9aadf",
+      "title": "The Frog and the Echo Concert",
       "day": "2026-10-14",
-      "uploaded_at": "2026-10-14T14:51:46.975505+00:00",
+      "uploaded_at": "2026-10-14T14:58:32.079663+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": ""
@@ -806,11 +813,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T14:50:55.212973+00:00",
+  "last_preflight_at": "2026-10-14T14:57:30.152037+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T14:51:47.227092+00:00",
+    "at": "2026-10-14T14:58:32.329379+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -1565,6 +1572,13 @@
     "rayvan-forge-c6e1febf4b55e972": {
       "at": "2026-10-14T14:51:45.326412+00:00",
       "title": "The Penguin and the Runaway Sled",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-2ae56e5d0bf9aadf": {
+      "at": "2026-10-14T14:58:30.834917+00:00",
+      "title": "The Frog and the Echo Concert",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
