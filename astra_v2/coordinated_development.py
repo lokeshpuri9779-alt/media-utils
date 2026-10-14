@@ -16,6 +16,7 @@ from astra_v2.character_object_catalog import (
 )
 from astra_v2.storybook_comedy_art import draw_storybook_character, shoulder_anchor as storybook_shoulder_anchor
 from astra_v2.cinematic_comedy import camera_frame, draw_gift_surprise, dissolve
+from astra_v2.comedy_captions import draw_caption
 
 W, H = 540, 960
 BG = (19, 27, 43)
@@ -544,8 +545,11 @@ def frame(scene, t):
                {'approach': 'WHAT IS THAT?', 'point': 'DONT TOUCH IT!',
                 'carry': 'TOO LATE...', 'react': 'OH NO!',
                 'celebrate': 'I DID IT!'}[named_action])
-        d.rounded_rectangle((80, 105, W-80, 157), radius=18, fill=(19, 30, 48, 230))
-        d.text((W // 2 - 4 * len(cue), 124), cue, fill=(255, 228, 169))
+        if storybook:
+            draw_caption(image, named_action, t, storybook=True)
+        else:
+            d.rounded_rectangle((80, 105, W-80, 157), radius=18, fill=(19, 30, 48, 230))
+            d.text((W // 2 - 4 * len(cue), 124), cue, fill=(255, 228, 169))
     d.rounded_rectangle((18, 20, W-18, 65), radius=14, fill=(18, 26, 40, 255))
     d.text((30, 35), f"SCENE {number:02d}  /  ASTRA EXPERIMENT", fill=(239, 239, 228))
     d.text((24, 925), "NOT APPROVED FOR PUBLICATION", fill=(245, 176, 121))
