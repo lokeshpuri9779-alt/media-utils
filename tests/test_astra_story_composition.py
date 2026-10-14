@@ -15,7 +15,7 @@ class CompositionTests(unittest.TestCase):
 
     def test_event_to_action_mapping(self):
         self.assertEqual(action_for_beat(1, "The rabbit chases a lamp."), "run")
-        self.assertEqual(action_for_beat(3, "The robot repairs the clock."), "carry")
+        self.assertEqual(action_for_beat(3, "The robot repairs the clock."), "repair")
         self.assertEqual(action_for_beat(2, "They discover a clue."), "point")
         self.assertEqual(action_for_beat(4, "A new friendship begins."), "celebrate")
 
