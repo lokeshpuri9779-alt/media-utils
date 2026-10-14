@@ -7,6 +7,11 @@ import math
 import re
 
 ACTION_PATTERNS=(
+    ("repair",r"\b(?:repair|repairs|repairing|fix|fixes|fixing|mend|mends|mending)\b"),
+    ("carry",r"\b(?:carry|carries|carrying|lift|lifts|lifting|hold|holds|holding)\b"),
+    ("throw",r"\b(?:throw|throws|throwing|toss|tosses|tossing)\b"),
+    ("pick",r"\b(?:pick up|picks up|picking up|grab|grabs|grabbing)\b"),
+    ("wave",r"\b(?:wave|waves|waving|greet|greets|greeting)\b"),
     ("run",r"\b(?:run|runs|running|sprint|sprints|chase|chasing)\b"),
     ("jump",r"\b(?:jump|jumps|jumping|leap|leaps|hops|hop)\b"),
     ("dance",r"\b(?:dance|dances|dancing|celebrat\w*)\b"),
@@ -25,6 +30,16 @@ def offset(action,t,scale=1.0):
     if not math.isfinite(t) or not math.isfinite(scale) or scale<0:
         raise ValueError("invalid motion parameters")
     phase=t*2*math.pi
+    if action=="repair":
+        return round(9*math.sin(phase*2.1)*scale),round(15*math.sin(phase*2.1)*scale)
+    if action=="carry":
+        return round(12*math.sin(t*1.3)*scale),round(4*abs(math.sin(phase))*scale)
+    if action=="throw":
+        return round(24*math.sin(phase*.55)*scale),round(-38*max(0,math.sin(phase*.55))*scale)
+    if action=="pick":
+        return 0,round(36*(1-math.cos(phase*.5))*scale)
+    if action=="wave":
+        return round(17*math.sin(phase*1.8)*scale),round(-14*abs(math.sin(phase*1.8))*scale)
     if action=="run":
         return round(48*math.sin(t*3.2)*scale),round(18*abs(math.sin(phase*3))*scale)
     if action=="jump":
