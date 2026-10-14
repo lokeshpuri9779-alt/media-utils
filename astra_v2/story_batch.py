@@ -25,6 +25,22 @@ TEMPLATES = (
      "genre": "discovery", "location": "observatory", "beats": ("The alien discovers a telescope.", "The owl points to the stars.",
                "The alien carries the telescope.", "The owl reacts to the view.",
                "The alien celebrates the discovery.")},
+    {"title": "The Runaway Lantern", "cast": ("fox", "rabbit"), "prop": "lantern",
+     "genre": "chase", "location": "park", "beats": ("A lantern rolls away in the wind.", "The rabbit races after its glow.",
+               "The fox catches the lantern near a tree.", "The rabbit notices a hidden trail.",
+               "Together they light the way home.")},
+    {"title": "The Clockwork Surprise", "cast": ("robot", "owl"), "prop": "clock",
+     "genre": "puzzle", "location": "workshop", "beats": ("A workshop clock begins running backward.", "The owl spots a missing gear.",
+               "The robot carries the clock to the workbench.", "A secret compartment opens.",
+               "They discover a tiny music box inside.")},
+    {"title": "The Picnic Switch", "cast": ("dog", "bear"), "prop": "basket",
+     "genre": "comedy", "location": "park", "beats": ("A picnic basket appears in the wrong place.", "The dog points toward a trail of crumbs.",
+               "The bear lifts the basket with care.", "A curious squirrel has swapped the lunches.",
+               "Everyone shares the picnic instead.")},
+    {"title": "The Midnight Signal", "cast": ("alien", "cat"), "prop": "telescope",
+     "genre": "science-fiction", "location": "observatory", "beats": ("A mysterious light flashes across the sky.", "The cat points toward a distant star.",
+               "The alien adjusts the telescope.", "The signal turns into a friendly greeting.",
+               "They send a bright reply into the night.")},
 )
 ACTIONS = ("approach", "point", "carry", "react", "celebrate")
 # New locomotion cues are deliberately confined to selected story templates.
@@ -33,6 +49,10 @@ STORY_ACTIONS = {
     "Robot's Lost Key": ("run", "point", "carry", "react", "celebrate"),
     "The Umbrella Mix-up": ("approach", "jump", "carry", "react", "dance"),
     "The Alien's Telescope": ("walk", "point", "carry", "jump", "dance"),
+    "The Runaway Lantern": ("run", "run", "carry", "react", "walk"),
+    "The Clockwork Surprise": ("approach", "point", "carry", "react", "dance"),
+    "The Picnic Switch": ("walk", "point", "carry", "react", "celebrate"),
+    "The Midnight Signal": ("approach", "point", "carry", "react", "celebrate"),
 }
 
 
