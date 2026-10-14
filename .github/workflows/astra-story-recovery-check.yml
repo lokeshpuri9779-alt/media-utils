@@ -31,8 +31,22 @@ jobs:
           python -m unittest discover -s tests -p 'test_story_forge_authored_additions.py' -v
       - name: Validate renderer and creative-director regression tests
         run: |
-          python -m unittest discover -s tests -p 'test_studio_renderer.py' -v
-          python -m unittest discover -s tests -p 'test_quality_lab.py' -v
+          python - <<'PY'
+          import unittest
+          patterns = ['test_studio_renderer.py', 'test_quality_lab.py']
+          found = 0
+          for pattern in patterns:
+              suite = unittest.defaultTestLoader.discover('tests', pattern=pattern)
+              count = suite.countTestCases()
+              print(f'{pattern}: {count} discovered tests', flush=True)
+              if count:
+                  result = unittest.TextTestRunner(verbosity=2).run(suite)
+                  if not result.wasSuccessful():
+                      raise SystemExit(f'{pattern} failed')
+                  found += count
+          if found == 0:
+              raise SystemExit('No renderer or creative-director tests discovered')
+          PY
       - name: Confirm original story publication policy tests
         run: |
           python -m unittest discover -s tests -p 'test_astra_publication_quality.py' -v
