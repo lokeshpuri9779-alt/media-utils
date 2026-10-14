@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 29,
+  "attempts": 30,
   "confirmed_today": 29,
-  "last_attempt_at": "2026-10-14T08:55:36.437994+00:00",
+  "last_attempt_at": "2026-10-14T09:28:11.673955+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -681,28 +681,39 @@
       "uploaded_at": "2026-10-14T08:55:38.311677+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-14T08:58:18.703793+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "W5vy6HtJboA": {
+      "content_id": "rayvan-forge-b8f093551cb4cdf3",
+      "title": "The Badger and the Foggy Compass",
+      "day": "2026-10-14",
+      "uploaded_at": "2026-10-14T09:28:13.680131+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": ""
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-14T09:27:13.978833+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T08:58:19.183128+00:00",
+    "at": "2026-10-14T09:28:13.884442+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-14T07:41:50.802300+00:00",
   "reserved": {
@@ -1323,6 +1334,13 @@
     "rayvan-forge-023c7788559ac04c": {
       "at": "2026-10-14T08:55:36.437979+00:00",
       "title": "The Deer and the Paper Bridge",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-b8f093551cb4cdf3": {
+      "at": "2026-10-14T09:28:11.673941+00:00",
+      "title": "The Badger and the Foggy Compass",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
