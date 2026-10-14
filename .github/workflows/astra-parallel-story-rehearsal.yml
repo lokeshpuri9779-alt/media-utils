@@ -17,6 +17,8 @@ on:
       - 'astra_v2/render_story_batch.py'
       - 'astra_v2/story_batch.py'
       - 'astra_v2/story_diversity_audit.py'
+      - 'astra_v2/story_history.py'
+      - 'tests/test_astra_story_history.py'
       - 'tests/test_astra_story_diversity.py'
       - 'astra_v2/story_composition.py'
       - 'tests/test_astra_story_composition.py'
@@ -63,6 +65,8 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_astra_locomotion.py' -v
       - name: Verify distinct environments
         run: python -m unittest discover -s tests -p 'test_astra_story_environments.py' -v
+      - name: Test persistent offline story history
+        run: python -m unittest discover -s tests -p 'test_astra_story_history.py' -v
       - name: Test story history and near-duplicate detection
         run: python -m unittest discover -s tests -p 'test_astra_story_diversity.py' -v
       - name: Verify story diversity and continuity
