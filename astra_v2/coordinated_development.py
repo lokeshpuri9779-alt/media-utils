@@ -571,9 +571,15 @@ def frame(scene, t):
         cue = ('HONK?!' if storybook and named_action == 'celebrate' and t >= 1.65 else
                {'approach': 'WHAT IS THAT?', 'point': 'DONT TOUCH IT!',
                 'carry': 'TOO LATE...', 'react': 'OH NO!',
-                'celebrate': 'I DID IT!'}[named_action])
+                'celebrate': 'I DID IT!', 'walk': 'ON MY WAY!',
+                'run': 'HURRY!', 'jump': 'UP WE GO!',
+                'dance': 'LET US DANCE!'}[named_action])
         if storybook:
-            draw_caption(image, named_action, t, storybook=True)
+            if named_action in ("approach", "point", "carry", "react", "celebrate"):
+                draw_caption(image, named_action, t, storybook=True)
+            else:
+                d.rounded_rectangle((85, 100, W-85, 158), radius=16, fill=(19, 30, 48, 230))
+                d.text((W // 2 - 4 * len(cue), 122), cue, fill=(255, 228, 169))
         else:
             d.rounded_rectangle((80, 105, W-80, 157), radius=18, fill=(19, 30, 48, 230))
             d.text((W // 2 - 4 * len(cue), 124), cue, fill=(255, 228, 169))
