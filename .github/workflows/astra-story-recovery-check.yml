@@ -1,0 +1,27 @@
+name: ASTRA Story Recovery Check
+on:
+  push:
+    branches:
+      - proposal/story-supply-recovery-oct15
+    paths:
+      - astra_v2/story_forge.py
+      - tests/test_story_forge_authored_additions.py
+      - .github/workflows/astra-story-recovery-check.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  candidate-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify authored stories enter quality-gated catalog
+        run: |
+          python -m unittest discover -s tests -p 'test_story_forge_authored_additions.py' -v
+      - name: Confirm original story publication policy tests
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_publication_quality.py' -v
