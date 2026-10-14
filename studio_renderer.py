@@ -1599,6 +1599,13 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
     layer_report=verify_scene_layout(plan)
     if not layer_report['pass']:
         raise CreativeReject('Scene collision QA failed: '+json.dumps(layer_report['failures']))
+    if ch.get('visual_contract') == 'pillow_duo_v2':
+        from astra_v2.pillow_duo_scene import scene_pair
+        from astra_v2.layer_contract import scene_layers
+        if os.environ.get('ASTRA_STUDIO_PILLOW_DUO', '1') != '1':
+            raise CreativeReject('Pillow duo required for this authored story but disabled.')
+        if not plan or any(not scene_pair(shot) or not scene_layers(shot)['draw_visual'] for shot in plan):
+            raise CreativeReject('Pillow duo story would silently render unrelated icons or media.')
     duration=voice_plan(plan,genre,
                         voice_name=str(ch.get('voice_profile') or 'af_heart'),
                         voice_speed=float(ch.get('voice_speed') or 1.09))
@@ -1658,7 +1665,8 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
         wide.resize((1280,720),Image.Resampling.LANCZOS).save(
             out.with_name(out.stem+"_cover_wide.jpg"),quality=92,optimize=True)
     from astra_v2.pillow_duo_scene import scene_pair
-    duo_count = (sum(bool(scene_pair(shot)) for shot in plan)
+    from astra_v2.layer_contract import scene_layers
+    duo_count = (sum(bool(scene_pair(shot)) and scene_layers(shot)['draw_visual'] for shot in plan)
                  if genre == 'fiction' and os.environ.get('ASTRA_STUDIO_PILLOW_DUO','1') == '1'
                  else 0)
     micro_count=(math.ceil(actual_duration / NEWS_MICRO_SCENE_SECONDS) if genre=='current' else len(plan))
