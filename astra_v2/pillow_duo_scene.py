@@ -83,6 +83,15 @@ def scene_mood(shot):
         return "curious"
     if re.search(r"\b(?:smile|laugh|celebrat\w*|happy|cheer|dance)\b", text):
         return "happy"
+    role = str(shot.get("story_beat") or "")
+    if role == "reveal":
+        return "curious"
+    if role == "build":
+        return "surprised"
+    if role == "twist":
+        return "alert"
+    if role == "payoff":
+        return "happy"
     return "alert"
 
 
@@ -394,6 +403,34 @@ def prop_position(action, t):
             int(1216*(1-progress)+1060*progress))
 
 
+def story_prop_position(shot, t):
+    """Prop follows the narrated four-beat action, not a fixed screen icon.
+
+    The local scene time is bounded so a long narration doesn't teleport props.
+    Ball chase: escape -> pursuit -> catch -> carry.
+    Other props retain the existing reliable pickup trajectory.
+    """
+    prop = scene_prop(shot)
+    action = str(shot.get("story_action") or "idle").lower()
+    beat = scene_phase(shot)
+    p = _ease(max(0.0, float(t)) / 2.2)
+    if prop == "ball":
+        if beat == 0:
+            return (int(380 + 430*p), int(1190 - 34*abs(math.sin(t*3.2))))
+        if beat == 1:
+            return (int(810 - 455*p), int(1175 - 66*abs(math.sin(t*4.1))))
+        if beat == 2:
+            return (int(355 + 72*p), int(1184 - 116*p))
+        return (427, 1068)
+    if prop == "box" and beat < 2 and action not in ("carry","pick","repair"):
+        if beat == 0:
+            return (int(410+270*p), 1190)
+        return (int(680-190*p), 1190)
+    if prop == "lantern" and beat == 3:
+        return (433, 1060)
+    return prop_position(action, t)
+
+
 def draw_duo(image, shot, t):
     """Return True only when the complete illustrated duo was drawn."""
     pair=scene_pair(shot)
@@ -408,11 +445,17 @@ def draw_duo(image, shot, t):
     prop=scene_prop(shot)
     pickup=action in {"pick","pickup","pick_up","carry","repair","hold"}
     progress=_ease((max(0,t)-.15)/.9) if pickup else 0.0
-    prop_pos=prop_position(action,t)
-    # Stable positions are large enough to read on mobile.
+    prop_pos=story_prop_position(shot,t)
+    beat=scene_phase(shot)
+    # Characters retain stable left/right identities, but the director changes
+    # their blocking as stakes rise and they react to a moving physical prop.
     for idx,name in enumerate(pair):
-        x=298 if idx==0 else 788
-        y=846
+        x=(290,330,308,280)[beat] if idx == 0 else (800,752,785,802)[beat]
+        y=(852,878,855,850)[beat]
+        if action in ("run","walk"):
+            x += int((1 if idx == 0 else -1)*52*_ease(max(0,t)/2.4))
+        elif action == "jump":
+            x += int((1 if idx == 0 else -1)*25*_ease(max(0,t)/1.8))
         hand_target=prop_pos if idx==0 and prop and pickup and progress>.25 else None
         actor_mood=mood
         if mood=="angry" and idx==0:
