@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 6,
+  "attempts": 7,
   "confirmed_today": 6,
-  "last_attempt_at": "2026-10-14T22:32:51.255203+00:00",
+  "last_attempt_at": "2026-10-14T22:50:00.510085+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -901,29 +901,40 @@
       "renderer": "studio-7.1.1"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "g4BD-1hOGbQ": {
+      "content_id": "rayvan-forge-efb21c89f3ab39c2",
+      "title": "The Astronaut and the Silent Moon",
+      "day": "2026-10-15",
+      "uploaded_at": "2026-10-14T22:50:02.495687+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.1.1"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T22:36:03.870953+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_preflight_at": "2026-10-14T22:49:06.742610+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T22:36:03.936824+00:00",
+    "at": "2026-10-14T22:50:02.717699+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-14T19:48:51.586899+00:00",
   "reserved": {
@@ -1764,6 +1775,14 @@
     "rayvan-forge-6bb686a2e2df0f2a": {
       "at": "2026-10-14T22:32:51.255188+00:00",
       "title": "The Heron and the Missing Moon",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.1.1",
+      "result": "accepted"
+    },
+    "rayvan-forge-efb21c89f3ab39c2": {
+      "at": "2026-10-14T22:50:00.510069+00:00",
+      "title": "The Astronaut and the Silent Moon",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.1.1",
