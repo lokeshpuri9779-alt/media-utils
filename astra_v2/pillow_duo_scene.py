@@ -12,17 +12,17 @@ COLORS = {"fox": (235, 119, 54), "rabbit": (235, 217, 193),
           "cat": (203, 142, 91), "dog": (180, 130, 83),
           "owl": (159, 117, 84), "mouse": (178, 171, 175),
           "otter": (151, 107, 77), "squirrel": (193, 123, 72)}
-ALIASES = {"rabbit": r"\\b(?:rabbit|bunny|hare)\\b",
-           "dog": r"\\b(?:dog|puppy)\\b",
-           "cat": r"\\b(?:cat|kitten)\\b",
-           "mouse": r"\\b(?:mouse|mice)\\b"}
+ALIASES = {"rabbit": r"\b(?:rabbit|bunny|hare)\b",
+           "dog": r"\b(?:dog|puppy)\b",
+           "cat": r"\b(?:cat|kitten)\b",
+           "mouse": r"\b(?:mouse|mice)\b"}
 
 def scene_pair(shot):
     narration = " ".join(str(shot.get(k) or "") for k in
                          ("speech", "visual_prompt", "action")).lower()
     found = []
     for name in ACTORS:
-        pattern = ALIASES.get(name, r"\\b" + name + r"\\b")
+        pattern = ALIASES.get(name, r"\b" + name + r"\b")
         match = re.search(pattern, narration)
         if match:
             found.append((match.start(), name))
@@ -82,7 +82,7 @@ def draw_duo(image, shot, t):
             d.arc((x-27,y+5,x+27,y+40),0,180,fill=dark,width=5)
         else:
             d.ellipse((x-10,y+22,x+10,y+47),fill=dark)
-    if re.search(r"\\b(?:box|parcel|package|gift)\\b",
+    if re.search(r"\b(?:box|parcel|package|gift)\b",
                  " ".join(str(shot.get(k) or "") for k in ("speech","visual_prompt","action")).lower()):
         d.rounded_rectangle((485,1140,595,1250),radius=8,fill=(157,109,65))
         d.line((540,1140,540,1250),fill=(242,217,159),width=11)
