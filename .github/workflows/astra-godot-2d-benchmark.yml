@@ -22,7 +22,8 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y godot3-server ffmpeg
-          godot3-server --version
+          command -v godot3-server
+          godot3-server --version || true
       - name: Render 2D character animation headlessly
         run: |
           mkdir -p godot-benchmark-output
