@@ -49,6 +49,19 @@ jobs:
           if found == 0:
               raise SystemExit('No production controller or publication policy tests discovered')
           PY
+      - name: Check story duration preflight for all recovery stories
+        run: |
+          python - <<'PY'
+          from astra_v2.story_forge import catalog
+          from astra_v2.creative import script_duration_preflight
+          from tests.test_story_forge_authored_additions import EXPECTED
+          stories = [story for story in catalog() if story["title"] in EXPECTED]
+          assert len(stories) == len(EXPECTED), "Recovery catalog incomplete"
+          failures = [story["title"] for story in stories if not script_duration_preflight(story)]
+          print(f"Duration preflight: {len(stories) - len(failures)}/{len(stories)} accepted")
+          if failures:
+              raise SystemExit("Rejected: " + ", ".join(failures))
+          PY
       - name: Confirm original story publication policy tests
         run: |
           python -m unittest discover -s tests -p 'test_astra_publication_quality.py' -v
