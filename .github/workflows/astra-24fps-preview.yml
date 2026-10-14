@@ -25,6 +25,8 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_astra_animation_timing.py' -v
       - name: Verify real-scene temporal motion
         run: python -m unittest discover -s tests -p 'test_astra_24fps_motion.py' -v
+      - name: Verify walking running jumping and dancing
+        run: python -m unittest discover -s tests -p 'test_astra_locomotion.py' -v
       - name: Render isolated 24fps story
         run: python -m astra_v2.render_story_batch --index 0 --episode 1 --fps 24 --seconds-per-scene 2 --output preview-24fps
       - name: Validate rendered frame rate and publication gate
