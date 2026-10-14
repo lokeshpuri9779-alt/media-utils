@@ -245,6 +245,12 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
                                 cover_path.write_bytes(cover_zip.read(cover_name))
                     except (OSError, ValueError, KeyError, zipfile.BadZipFile):
                         pass
+            # Opt-in Studio-only queue mode for controlled rollout. Legacy packages
+            # remain untouched and can be selected again by disabling the flag.
+            if os.getenv("ASTRA_REQUIRE_STUDIO_PRELOAD", "0") == "1" and not str(candidate.get("renderer") or "").startswith("studio-"):
+                print("ASTRA_PRELOAD_NON_STUDIO_SKIP=" + json.dumps({"content_id": cid, "renderer": candidate.get("renderer") or "unknown"}))
+                out.unlink(missing_ok=True)
+                continue
             candidate["media"] = media
             candidate["queue_artifact_id"] = entry["id"]
             if not isinstance(candidate.get("renderer"), str) or not candidate["renderer"].strip():
