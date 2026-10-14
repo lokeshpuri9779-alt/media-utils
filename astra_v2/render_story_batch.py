@@ -16,6 +16,8 @@ def render_one(index, output, seed="astra-story-rehearsal", fps=8, seconds_per_s
     report = render(plan, Path(output), fps=fps,
                     seconds_per_scene=seconds_per_scene, video=True)
     report["title"] = plan["title"]
+    from astra_v2.story_subtitles import write_srt
+    write_srt(plan, Path(output) / "captions.srt", seconds_per_scene=seconds_per_scene)
     from astra_v2.story_batch_audio import soundtrack, add_audio
     output = Path(output)
     soundtrack(plan, output / "soundtrack.wav", seconds_per_scene=seconds_per_scene)
