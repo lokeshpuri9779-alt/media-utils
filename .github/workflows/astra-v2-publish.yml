@@ -98,6 +98,8 @@ jobs:
 
       - name: Test queue and OAuth diagnostics
         id: early_tests
+        env:
+          ASTRA_REQUIRE_STUDIO_PRELOAD: '0'
         run: |
           python -m unittest discover -s tests -p 'test_astra_youtube_oauth_errors.py' -v
           python -m unittest discover -s tests -p 'test_astra_story_inventory.py' -v
@@ -153,6 +155,8 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_astra_v2.py' -v
       - name: Run queue artifact regression tests
         id: queue_tests
+        env:
+          ASTRA_REQUIRE_STUDIO_PRELOAD: '0'
         if: steps.preflight.outputs.render_due == 'true'
         run: python -m unittest discover -s tests -p 'test_astra_preload_artifact_pagination.py' -v
       - name: Run YouTube OAuth regression tests
