@@ -524,19 +524,10 @@ def frame(scene, t):
     image = Image.alpha_composite(image.convert("RGBA"), character_layer.resize((W, H), Image.Resampling.LANCZOS))
     image = Image.alpha_composite(image, object_layer.resize((W, H), Image.Resampling.LANCZOS))
     d = ImageDraw.Draw(image)
-    # A visible cause/effect cue is a procedural interaction, not character acting.
-    if action == 0:
-        pulse = 13 + int(7 * (1 + math.sin(t * 3)))
-        d.ellipse((374-pulse, 554-pulse, 374+pulse, 554+pulse),
-                  outline=(250, 216, 127), width=4)
-    elif action == 1:
-        d.arc((295, 370, 480, 570), 190, 320, fill=(150, 215, 224), width=5)
-    elif action == 2:
-        d.line((290, 490, 400, 530), fill=(244, 199, 135), width=5)
-    else:
-        for j in range(3):
-            d.ellipse((390+j*22, 440-j*23, 398+j*22, 448-j*23),
-                      fill=(240, 205, 134))
+    # Remove detached debugging-style interaction marks (yellow ring,
+    # yellow diagonal stroke, cyan arc). These marks did not track the
+    # characters or props and read as rendering artifacts. Physical
+    # acting, props, camera motion and audio cues remain unchanged.
     if storybook and named_action in ("approach", "point", "carry", "react", "celebrate"):
         image = camera_frame(image.convert("RGB"), named_action, min(3., t))
         d = ImageDraw.Draw(image)
