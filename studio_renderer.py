@@ -1103,8 +1103,19 @@ def render_frame(plan,t,genre,total):
     elif mode=='question' and text and ('?' in s.get('speech','') or s.get('director_role')=='cold_open'):
         text=text.rstrip(' .!?')+'?'
     if s.get('countdown') and t>s['voice_start']+dur+.1: text='YOUR TURN'
+    # Shared caption engine is opt-in on the isolated branch. Default studio
+    # production visuals remain byte-for-byte on their existing caption path.
+    if s.get('experimental_shared_captions'):
+        from astra_v2.shared_caption_engine import draw_shared_caption
+        caption_style = str(s.get('shared_caption_style') or
+                            ('documentary' if fmt in {'documentary_montage',
+                                                     'cinematic_mini_doc'}
+                             else 'suspense' if fmt == 'microfiction_cinematic'
+                             else 'narration'))
+        draw_shared_caption(im, text, style=caption_style,
+                            language=str(s.get('language') or 'auto'))
     # Caption surface also changes with the selected creative format.
-    if fmt in {'cinematic_mini_doc','microfiction_cinematic'}:
+    elif fmt in {'cinematic_mini_doc','microfiction_cinematic'}:
         d.rounded_rectangle((118,1530,900,1636),radius=18,fill=(5,8,14))
         fit_text(d,text,(145,1538,874,1628),size=37,fill=(242,245,250),max_lines=2)
     elif fmt=='documentary_montage':
