@@ -539,3 +539,10 @@ Validated build: commit `aa1e9987cec894edd62f6fa44e4434828d08e046`; APK SHA256 `
 - Candidate `4273ec7e4156d25b373d02a841b961bd8504c441` queues revival state immediately and applies checkpoint transform/interpolation reset at the start of the player's actual `_physics_process`. A guarded generation anchor ensures the hook is inserted exactly once.
 - The evidence validator now explicitly rejects `Interpolated Camera3D triggered from outside physics process`; an 18th validator regression injects that warning and proves a false green is rejected. Existing 408 game checks remain.
 - Local validation passed: 18 validator regressions, workflow YAML, 46 shell scripts and 37 embedded Python blocks. Version is 0.2.33-mobile-alpha/code 53. CI: [38592302023](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38592302023), [38592302200](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38592302200). Keep v0.2.31 as rollback until both complete cleanly.
+
+
+## Strict recovery-gate harness repair (2026-10-14)
+
+- v0.2.33 runs 38592302023/38592302200 failed the now-strict runtime gate, correctly blocking Android packaging. The generated recovery method compiled, but the extraction harness had disabled `active_player` physics for scripted wave traversal and never re-enabled it. Consequently the queued physics-loop teleport could not execute: two state assertions failed and the old warning remained.
+- Candidate `30acf6ed0e22167d6e6c3d09c761c9f805df7b6e` re-enables player physics after scripted wave traversal and before all recovery checks, with a new assertion proving physics processing is active. Expected evidence is now 409 game checks across 21 suites plus 18 validator regressions; the explicit Camera3D warning rejection remains unchanged.
+- Local validation passed: 18 validator tests, workflow YAML, 46 shell scripts and 37 embedded Python blocks. Version 0.2.34-mobile-alpha/code 54. CI: [38600469919](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38600469919), [38600469837](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38600469837). v0.2.31 remains the validated rollback until both succeed.
