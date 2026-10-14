@@ -7700,7 +7700,7 @@ jobs:
           export_filter="all_resources"
           include_filter="THIRD_PARTY_NOTICES.txt,PULSEFALL_README.txt"
           exclude_filter="screenshots/*,mobile/extraction_test.gd,mobile/extraction_test.tscn,mobile/controls_test.gd,mobile/controls_test.tscn,mobile/aim_assist_test.gd,mobile/aim_assist_test.tscn,mobile/runtime_soak_test.gd,mobile/runtime_soak_test.tscn,mobile/camera_collision_test.gd,mobile/camera_collision_test.tscn,mobile/combat_feedback_test.gd,mobile/combat_feedback_test.tscn,mobile/combat_feel_test.gd,mobile/combat_feel_test.tscn,mobile/gyro_aim_test.gd,mobile/gyro_aim_test.tscn,mobile/graphics_preset_test.gd,mobile/graphics_preset_test.tscn,mobile/run_upgrades_test.gd,mobile/run_upgrades_test.tscn,mobile/risk_contract_test.gd,mobile/risk_contract_test.tscn,mobile/enemy_archetypes_test.gd,mobile/enemy_archetypes_test.tscn,mobile/miniboss_rules_test.gd,mobile/miniboss_rules_test.tscn,mobile/boss_rules_test.gd,mobile/boss_rules_test.tscn,mobile/weapon_rules_test.gd,mobile/weapon_rules_test.tscn,mobile/meta_progression_test.gd,mobile/meta_progression_test.tscn,mobile/run_checkpoint_test.gd,mobile/run_checkpoint_test.tscn,mobile/elite_rules_test.gd,mobile/elite_rules_test.tscn,mobile/telegraph_rules_test.gd,mobile/telegraph_rules_test.tscn,mobile/run_flow_rules_test.gd,mobile/run_flow_rules_test.tscn"
-          export_path="build/PULSEFALL_MOBILE_ALPHA.aab"
+          export_path="../android-artifacts/PULSEFALL_MOBILE_ALPHA.aab"
           patches=PackedStringArray()
           encryption_include_filters=""
           encryption_exclude_filters=""
@@ -7963,9 +7963,11 @@ jobs:
           unzip -q -o /tmp/pulsefall-export-templates.tpz -d /tmp/pulsefall-export-templates
           cp -a /tmp/pulsefall-export-templates/templates/. "$TEMPLATE_ROOT/"
           test -f "$TEMPLATE_ROOT/android_source.zip"
-          mkdir -p game/build
-          "$GODOT" --headless --verbose --path game --install-android-build-template --export-debug "Android AAB" "$GITHUB_WORKSPACE/game/build/PULSEFALL_MOBILE_ALPHA.aab" 2>&1 | tee diagnostics/android-aab-export.log
-          test -s game/build/PULSEFALL_MOBILE_ALPHA.aab
+          # Export products must not enter the resource scanner or later exports.
+          mkdir -p game/build android-artifacts
+          touch game/build/.gdignore
+          "$GODOT" --headless --verbose --path game --install-android-build-template --export-debug "Android AAB" "$GITHUB_WORKSPACE/android-artifacts/PULSEFALL_MOBILE_ALPHA.aab" 2>&1 | tee diagnostics/android-aab-export.log
+          test -s android-artifacts/PULSEFALL_MOBILE_ALPHA.aab
 
       - name: Export Android APK
         id: export
@@ -7988,7 +7990,7 @@ jobs:
           if [ -z "$APK" ]; then
             APK="$(find "$HOME/.local/share/godot/builds" -type f -name 'PULSEFALL_MOBILE_ALPHA.apk' | head -n1 || true)"
           fi
-          AAB="$(find game -type f -name 'PULSEFALL_MOBILE_ALPHA.aab' | head -n1)"
+          AAB="android-artifacts/PULSEFALL_MOBILE_ALPHA.aab"
           test -n "$APK"
           test -n "$AAB"
           mkdir -p artifact
