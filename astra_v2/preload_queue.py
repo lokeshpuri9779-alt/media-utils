@@ -107,9 +107,9 @@ def meets_studio_renderer_floor(renderer, minimum):
     An unknown, malformed or non-Studio renderer never satisfies the floor.
     """
     import re
-    pattern = re.compile(r"^studio-(\\d+)\\.(\\d+)\\.(\\d+)(?:$|[-+])")
+    pattern = re.compile(r"^studio-(\d+)\.(\d+)\.(\d+)(?:$|[-+])")
     current = pattern.match(str(renderer or ""))
-    required = re.fullmatch(r"(\\d+)\\.(\\d+)\\.(\\d+)", str(minimum or ""))
+    required = re.fullmatch(r"(\d+)\.(\d+)\.(\d+)", str(minimum or ""))
     if not required:
         return not str(minimum or "").strip()
     if not current:
