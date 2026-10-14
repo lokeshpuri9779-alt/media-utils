@@ -30,6 +30,7 @@ jobs:
       ASTRA_LONG_ENABLED: '1'
       ASTRA_PRELOAD_ENABLED: '1'
       ASTRA_REQUIRE_STUDIO_PRELOAD: '1' # Prefer verified Studio artifacts; retain fresh-render fallback
+      ASTRA_MIN_STUDIO_VERSION: '7.2.0' # Reject older Shorts preloads; keep fresh-render fallback
       ASTRA_PRELOAD_MAX_AGE_HOURS: '48' # Skip old rendered visuals; render fresh when queue is stale
       ASTRA_PRELOAD_ONLY: '0'
       ASTRA_SERIES_PUBLICATION: '0' # Allow new approved originals after completed Season 1

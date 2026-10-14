@@ -194,5 +194,66 @@ class QueueFormatSelectionTests(unittest.TestCase):
             self.assertEqual(result["content_id"], "good")
             self.assertEqual(out.read_bytes(), video)
 
+class StudioRendererFloorTests(unittest.TestCase):
+    def test_version_comparison_is_numeric_and_fails_closed(self):
+        check = preload_queue._studio_meets_floor
+        self.assertFalse(check("studio-7.1.1", "7.2.0"))
+        self.assertTrue(check("studio-7.2.0", "7.2.0"))
+        self.assertTrue(check("studio-7.10.0", "7.2.0"))
+        self.assertFalse(check("unknown", "7.2.0"))
+        self.assertFalse(check("studio-8", "7.2.0"))
+        self.assertTrue(check("studio-7.1.1", ""))
+        with self.assertRaises(ValueError):
+            check("studio-7.2.0", "invalid")
+
+    @patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/repo",
+             "ASTRA_PRELOAD_MAX_AGE_HOURS": "0",
+             "ASTRA_MIN_STUDIO_VERSION": "7.2.0",
+             "ASTRA_REQUIRE_STUDIO_PRELOAD": "1"})
+    def test_old_studio_short_skipped_and_new_short_selected(self):
+        import io
+        import json
+        import hashlib
+        import tempfile
+        import zipfile
+        from pathlib import Path
+        from types import SimpleNamespace
+        video = b"dummy-valid-video" * 100
+        def package(cid, renderer):
+            candidate = {"content_id": cid, "format": "short",
+                "title": "Original " + cid, "description": "Original narrative",
+                "genre": "fiction", "synthetic": True, "renderer": renderer,
+                "sha256": hashlib.sha256(video).hexdigest()}
+            stream = io.BytesIO()
+            with zipfile.ZipFile(stream, "w") as z:
+                z.writestr("candidate.json", json.dumps(candidate))
+                z.writestr("video.mp4", video)
+            return stream.getvalue()
+        packages = {1: package("old-studio", "studio-7.1.1"),
+                    2: package("new-studio", "studio-7.2.0")}
+        entries = [
+            {"name": "astra-preloaded-old-studio", "id": 1,
+             "created_at": "2026-10-15T12:00:00Z", "workflow_run": {"id": 101}},
+            {"name": "astra-preloaded-new-studio", "id": 2,
+             "created_at": "2026-10-15T11:00:00Z", "workflow_run": {"id": 102}}]
+        trusted = {"conclusion": "success", "head_branch": "main",
+                   "name": "ASTRA V2 - Preload Approved Videos"}
+        def download(args, **kwargs):
+            ident = int(args[2].split("/")[-2])
+            kwargs["stdout"].write(packages[ident])
+            return SimpleNamespace(returncode=0)
+        with tempfile.TemporaryDirectory() as temp:
+            out = Path(temp) / "chosen.mp4"
+            with patch.object(preload_queue, "artifacts", return_value=entries), \
+                 patch.object(preload_queue, "_api", return_value=trusted), \
+                 patch.object(preload_queue.subprocess, "run", side_effect=download), \
+                 patch("astra_v2.creative.inspect_video", return_value={"seconds": 30}), \
+                 patch("astra_v2.publication_quality.publication_rejection", return_value=None):
+                chosen = preload_queue.take(set(), set(), out, allow_long=False)
+            self.assertEqual(chosen["content_id"], "new-studio")
+            self.assertEqual(chosen["renderer"], "studio-7.2.0")
+            self.assertEqual(out.read_bytes(), video)
+
+
 if __name__ == "__main__":
     unittest.main()

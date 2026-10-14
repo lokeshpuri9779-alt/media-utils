@@ -19,6 +19,25 @@ PREFIX = "astra-preloaded-"
 MAX_BYTES = 200 * 1024 * 1024
 
 
+def _studio_meets_floor(renderer, minimum):
+    """Reject malformed and older Studio preload provenance, not fresh renders.
+
+    No floor means legacy behavior. Compare dotted version numbers numerically
+    (7.10.0 is newer than 7.2.0), never with lexical string comparison.
+    """
+    import re
+    if not minimum:
+        return True
+    def parse(value):
+        m = re.fullmatch(r"(?:studio-)?(\\d+)\\.(\\d+)\\.(\\d+)", str(value or "").strip())
+        return tuple(map(int, m.groups())) if m else None
+    version = parse(renderer)
+    floor = parse(minimum)
+    if floor is None:
+        raise ValueError("Invalid ASTRA_MIN_STUDIO_VERSION setting")
+    return version is not None and version >= floor
+
+
 def _api(path):
     result = subprocess.run(["gh", "api", path], capture_output=True, text=True,
                             timeout=30, check=True)
@@ -209,6 +228,15 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
                     if candidate["format"] == "long" and not allow_long:
                         continue
                     if candidate.get("title", "").casefold().strip() in excluded_titles:
+                        continue
+                    # The controlled Studio 7.2 rollout must not consume an
+                    # old 7.1 video just because its package is still fresh.
+                    # Long-form remains unaffected by this Shorts-only floor.
+                    floor = os.getenv("ASTRA_MIN_STUDIO_VERSION", "").strip()
+                    if candidate["format"] == "short" and not _studio_meets_floor(candidate.get("renderer"), floor):
+                        print("ASTRA_PRELOAD_OLD_STUDIO_SKIP=" + json.dumps({
+                            "content_id": cid, "renderer": candidate.get("renderer") or "unknown",
+                            "required": floor}))
                         continue
                     if not all(candidate.get(k) for k in ("title", "description", "content_id", "genre", "format")):
                         continue
