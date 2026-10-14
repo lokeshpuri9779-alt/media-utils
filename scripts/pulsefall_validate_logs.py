@@ -48,6 +48,10 @@ UNSUPPORTED_RENDERER = re.compile(
     r"Volumetric fog is only available",
     re.IGNORECASE,
 )
+OUTSIDE_PHYSICS_CAMERA = re.compile(
+    r"Interpolated Camera3D triggered from outside physics process",
+    re.IGNORECASE,
+)
 
 
 def validate_logs(log_dir: Path) -> list[str]:
@@ -63,7 +67,8 @@ def validate_logs(log_dir: Path) -> list[str]:
             problems.append(f"{name}: empty evidence")
             continue
         for line in lines:
-            if ENGINE_FAILURE.search(line) or UNSUPPORTED_RENDERER.search(line):
+            if (ENGINE_FAILURE.search(line) or UNSUPPORTED_RENDERER.search(line)
+                    or OUTSIDE_PHYSICS_CAMERA.search(line)):
                 problems.append(f"{name}: {line}")
             if re.search(r"\bFAILURES:\s*[1-9][0-9]*\b", line):
                 problems.append(f"{name}: nonzero assertion failures: {line}")
@@ -94,7 +99,8 @@ def main(argv: list[str]) -> int:
         return 1
     checks = sum(suite[1] for suite in SUITES.values())
     print(f"PULSEFALL EVIDENCE GATE: {len(SUITES)} suites, {checks} checks, "
-          "zero engine errors or shutdown leaks across import and all game-test logs")
+          "zero engine errors, prohibited interpolation warnings or shutdown leaks "
+          "across import and all game-test logs")
     return 0
 
 
