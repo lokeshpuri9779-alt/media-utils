@@ -1,6 +1,11 @@
 name: ASTRA parallel story rehearsal (offline)
 on:
   workflow_dispatch:
+    inputs:
+      episode:
+        description: 'Offline episode number (1-100000)'
+        required: false
+        default: '1'
   push:
     branches: [astra-isolated-verification-20261013]
     paths:
@@ -49,7 +54,7 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_astra_story_environments.py' -v
       - name: Render one story independently
         run: |
-          python -m astra_v2.render_story_batch --index ${{ matrix.story }} --fps 8 --seconds-per-scene 2 --output verification-output/story-${{ matrix.story }}
+          python -m astra_v2.render_story_batch --index ${{ matrix.story }} --episode ${{ github.event.inputs.episode || '1' }} --fps 8 --seconds-per-scene 2 --output verification-output/story-${{ matrix.story }}
       - name: Validate AAC MP4 and offline gate
         run: |
           python - <<'PY'
