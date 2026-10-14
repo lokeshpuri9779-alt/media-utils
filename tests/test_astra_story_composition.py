@@ -40,6 +40,16 @@ class CompositionTests(unittest.TestCase):
                     self.assertEqual(plan["scenes"][3]["action"], "repair")
                 self.assertNotIn("for  ", " ".join(beats))
 
+    def test_repair_is_not_replayed_in_finale(self):
+        for episode in range(1, 15):
+            batch = build_story_batch("repair-finale", limit=8, episode=episode, composed=True)
+            for plan in batch["stories"]:
+                scenes = plan["scenes"]
+                self.assertEqual(scenes[-1]["action"], "celebrate")
+                if scenes[-2]["action"] == "repair":
+                    self.assertEqual(scenes[-1]["object_condition_before"], "repaired")
+                    self.assertEqual(scenes[-1]["object_condition_after"], "repaired")
+
     def test_repair_state_persists(self):
         batch = build_story_batch("state-check", limit=8, composed=True)
         for plan in batch["stories"]:
