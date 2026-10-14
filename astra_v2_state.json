@@ -3,7 +3,7 @@
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 28,
-  "confirmed_today": 27,
+  "confirmed_today": 28,
   "last_attempt_at": "2026-10-14T08:14:55.098393+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -665,41 +665,37 @@
       "title": "The Panda and the Tunnel Lanterns",
       "format": "short",
       "uploaded_at": "2026-10-14T07:42:05.009901+00:00"
-    }
-  },
-  "pending": {
-    "GXRL1Qzzlgc": {
-      "content_id": "rayvan-forge-038677619e169b52",
+    },
+    "rayvan-forge-038677619e169b52": {
+      "video_id": "GXRL1Qzzlgc",
+      "confirmed_at": "2026-10-14T08:18:01.122103+00:00",
       "title": "The Wolf and the Missing Lantern",
-      "day": "2026-10-14",
-      "uploaded_at": "2026-10-14T08:14:56.917112+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": ""
+      "uploaded_at": "2026-10-14T08:14:56.917112+00:00"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-14T08:14:08.109530+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-14T08:18:00.704946+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T08:14:57.189804+00:00",
+    "at": "2026-10-14T08:18:01.195633+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-14T07:41:50.802300+00:00",
   "reserved": {
