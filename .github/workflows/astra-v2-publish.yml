@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['.github/workflows/astra-v2-publish.yml', 'astra_v2/preload_queue.py', 'astra_v2/run.py', 'astra_v2/story_forge.py', 'tests/test_astra_story_inventory.py']
+    paths: ['.github/workflows/astra-v2-publish.yml', 'astra_v2/preload_queue.py', 'astra_v2/run.py', 'astra_v2/creative.py', 'astra_v2/preflight.py', 'astra_v2/story_forge.py', 'tests/test_astra_story_inventory.py']
   schedule:
     - cron: '*/5 * * * *'
   workflow_run:
@@ -101,6 +101,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_astra_youtube_oauth_errors.py' -v
           python -m unittest discover -s tests -p 'test_astra_story_inventory.py' -v
           python -m unittest discover -s tests -p 'test_astra_preload_artifact_pagination.py' -v
+          python -m unittest discover -s tests -p 'test_astra_renderer_provenance.py' -v
 
       - name: Reconcile pending uploads and check schedule
         id: preflight
