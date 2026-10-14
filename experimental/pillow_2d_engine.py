@@ -77,8 +77,9 @@ def render(t: float, settings: Settings = Settings()) -> Image.Image:
 def render_mp4(path: str, duration: float=7, fps: int=24, settings: Settings=Settings()) -> None:
     """Stream raw frames to ffmpeg; bounded memory, no intermediate PNG files."""
     import subprocess
+    from imageio_ffmpeg import get_ffmpeg_exe
     if duration<=0 or fps<=0: raise ValueError("duration and fps must be positive")
-    command=["ffmpeg","-hide_banner","-loglevel","error","-y","-f","rawvideo",
+    command=[get_ffmpeg_exe(),"-hide_banner","-loglevel","error","-y","-f","rawvideo",
              "-pix_fmt","rgb24","-s",f"{settings.width}x{settings.height}",
              "-r",str(fps),"-i","-","-c:v","libx264","-preset","veryfast",
              "-pix_fmt","yuv420p","-movflags","+faststart",path]
