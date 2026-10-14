@@ -231,7 +231,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_astra_cinematic_comedy.py' -v
       - name: Render offline comedy pilot
         run: |
-          python -m astra_v2.coordinated_development --comedy-pilot --seed astra-comedy-pilot --fps 12 --seconds-per-scene 3 --video --output verification-output/comedy-pilot
+          python -m astra_v2.coordinated_development --comedy-pilot --seed astra-comedy-pilot --fps 24 --seconds-per-scene 3 --video --output verification-output/comedy-pilot
       - name: Automatically validate rendered pilot and pickup evidence
         run: |
           python - <<'PY'
@@ -278,7 +278,7 @@ jobs:
           stream = info['streams'][0]
           assert stream['codec_name'] == 'h264', stream
           assert (stream['width'], stream['height']) == (544, 960), stream
-          assert int(stream['nb_frames']) == 180, stream
+          assert int(stream['nb_frames']) == 360, stream
           audio = json.loads(subprocess.check_output([
               'ffprobe', '-v', 'error', '-select_streams', 'a:0',
               '-show_entries', 'stream=codec_name,sample_rate,channels',
