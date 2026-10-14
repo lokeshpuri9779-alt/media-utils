@@ -539,6 +539,22 @@ def frame(scene, t):
             ph = max(1, int(artwork.height * prop_scale))
             artwork = artwork.resize((pw, ph), Image.Resampling.LANCZOS)
             object_layer.alpha_composite(artwork, (int(ox - pw / 2), int(oy - ph / 2)))
+            if named_action == "repair":
+                # Visible, timed before/after state: a cracked object is
+                # progressively restored while the lead holds it.
+                repair_d = ImageDraw.Draw(object_layer)
+                damage = max(0.0, 1.0 - min(1.0, t / 1.4))
+                if damage > 0.02:
+                    x0, y0 = int(ox), int(oy)
+                    crack = [(x0 - int(pw * .23), y0 - int(ph * .24)),
+                             (x0 - int(pw * .04), y0 - int(ph * .05)),
+                             (x0 + int(pw * .12), y0 + int(ph * .04)),
+                             (x0 + int(pw * .23), y0 + int(ph * .22))]
+                    end = max(2, int(len(crack) * damage))
+                    repair_d.line(crack[:end], fill=(22, 27, 36, 255), width=max(3, int(8 * damage)))
+                else:
+                    repair_d.ellipse((ox + pw * .19, oy - ph * .30, ox + pw * .24, oy - ph * .25),
+                                     fill=(245, 225, 133, 255))
             if storybook and named_action == "celebrate":
                 draw_gift_surprise(object_layer, ox, oy, pw, ph, t)
             if lead_shoulders is not None:
