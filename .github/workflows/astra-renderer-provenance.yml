@@ -4,6 +4,8 @@ on:
     paths:
       - 'astra_v2/creative.py'
       - 'astra_v2/preload_queue.py'
+      - '.github/workflows/astra-v2-publish.yml'
+      - 'tests/test_astra_preload_artifact_pagination.py'
       - 'astra_v2/run.py'
       - 'astra_v2/preflight.py'
       - 'tests/test_astra_renderer_provenance.py'
@@ -25,4 +27,6 @@ jobs:
       - name: Check Python syntax
         run: python -m compileall -q astra_v2/creative.py astra_v2/preload_queue.py astra_v2/run.py astra_v2/preflight.py tests/test_astra_renderer_provenance.py
       - name: Check renderer handoff
-        run: python -m unittest discover -s tests -p test_astra_renderer_provenance.py -v
+        run: |
+          python -m unittest discover -s tests -p test_astra_renderer_provenance.py -v
+          ASTRA_MIN_STUDIO_VERSION='' python -m unittest discover -s tests -p test_astra_preload_artifact_pagination.py -v
