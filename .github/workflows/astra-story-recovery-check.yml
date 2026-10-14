@@ -1,5 +1,12 @@
 name: ASTRA Story Recovery Check
 on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - astra_v2/story_forge.py
+      - tests/test_story_forge_authored_additions.py
+      - .github/workflows/astra-story-recovery-check.yml
   push:
     branches:
       - proposal/story-supply-recovery-oct15
