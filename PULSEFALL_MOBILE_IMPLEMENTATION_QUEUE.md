@@ -523,3 +523,11 @@ Validated build: commit `aa1e9987cec894edd62f6fa44e4434828d08e046`; APK SHA256 `
 - APK artifact `11896681617` was downloaded and verified: artifact ZIP SHA256 `aa12611cdf991c902ba7105bc728d08acfc1a433434dce706dac369072aee94c`; APK 521,196,164 bytes, SHA256 `b7c978a8a571776aa249f9764dc17fb1c531ebd1ac5c529526b0be4190708a26`. Embedded BUILD_SOURCE identifies the exact control/foundation commits and validator hashes.
 - Recovery now explicitly resets physics interpolation after checkpoint teleport; position and velocity restoration checks pass. However, both extraction test logs still contain the Camera3D outside-physics-process interpolation warning during timeout recovery. The state fix is validated, but elimination of the visual warning is NOT validated; return physics-frame scheduling to the queue.
 - v0.2.31 is the current validated automated-test rollback. v0.2.30 remains available at source `f45c5720c931c0af26f0463afea8693ebb007838` and artifact `11873291529`. Full player-controlled run/navigation/combat, physical-device install/performance/thermals and benchmark superiority remain open.
+
+
+## Physics-frame recovery candidate (2026-10-14)
+
+- v0.2.31 validated in runs 38566728367/38566728389, but both retained the Camera3D outside-physics-process warning specifically between expired-beacon rejection and timeout-recovery completion. Post-teleport interpolation reset alone did not satisfy this quality gate.
+- Candidate `e6705fe54a3cca2afb4b663ff4f945208b599093` changes revival into a physics-frame coroutine: health/velocity state updates immediately, checkpoint transform and interpolation reset occur on the next physics frame, and teardown is guarded. Two new assertions verify queued and completed teleport state, raising the expected total to 408 across 21 suites.
+- Local validation passed: 17 evidence-validator regressions; workflow YAML; 46 shell scripts; 37 embedded Python blocks. Version is 0.2.32-mobile-alpha/code 52.
+- Android CI is running: [38583904011](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38583904011) and [38583904018](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38583904018). Keep the warning OPEN until both logs prove it absent and all runtime/export/package gates pass. v0.2.31 remains the validated rollback.
