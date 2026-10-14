@@ -19,7 +19,15 @@ def audit_story(output, expected_seconds=10):
     duration = re.search(r"Duration:\s*(\d+):(\d+):(\d+(?:\.\d+)?)", details)
     seconds = (int(duration[1]) * 3600 + int(duration[2]) * 60 +
                float(duration[3])) if duration else None
+    manifest_path = output / "production-manifest.json"
+    manifest = json.loads(manifest_path.read_text()) if manifest_path.is_file() else {}
     checks = {
+        "production_manifest": manifest.get("continuity_passed") is True and
+                               manifest.get("publication_allowed") is False,
+        "assets_checksums_present": all(
+            item.get("sha256") and item.get("bytes", 0) > 0
+            for item in manifest.get("assets", {}).values()
+        ) and len(manifest.get("assets", {})) >= 5,
         "file_nonempty": video.stat().st_size > 1000,
         "subtitles_present": (output / "captions.srt").is_file() and
                              (output / "captions.srt").stat().st_size > 20,
