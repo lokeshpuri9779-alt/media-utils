@@ -389,11 +389,15 @@ def make_plan(ch):
     ch["creative_format"] = fmt["name"]
     formatted = apply_format(plan, fmt)
     if ch.get('genre') == 'fiction':
-        from astra_v2.pillow_duo_scene import scene_pair
+        from astra_v2.pillow_duo_scene import scene_pair, scene_setting
         # Keep the explicitly named cast across narration beats, rather than
         # requiring both protagonists to be repeated in every spoken line.
         named_cast = scene_pair({'speech': str(ch.get('title') or '')})
+        first_beat = (ch.get('story_beats') or [{}])[0]
+        setting = scene_setting({'story_title': ch.get('title'), 'speech': first_beat.get('speech')})
         for shot in formatted:
+            shot['story_title'] = str(ch.get('title') or '')
+            shot['story_setting'] = setting
             shot['story_subject'] = select_subject(ch, shot)
             shot['story_action'] = choose_action(shot)
             if named_cast and shot['story_subject'] in (None, *named_cast):
