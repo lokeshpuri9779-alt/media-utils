@@ -2483,6 +2483,7 @@ jobs:
           # If `true`, the aim button was toggled checked by a short press (instead of being held down).
           var toggled_aim: bool = false
           var touch_aim_mode := false
+          var pending_camera_rotation := Vector2.ZERO
           
           # The duration the aiming button was held for (in seconds).
           var aiming_timer: float = 0.0
@@ -2505,6 +2506,7 @@ jobs:
           
           
           func _ready() -> void:
+          	camera_animation.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS
           	if get_multiplayer_authority() == multiplayer.get_unique_id():
           		camera_camera.make_current()
           		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -2524,7 +2526,7 @@ jobs:
           	var camera_speed_this_frame: float = delta * CAMERA_CONTROLLER_ROTATION_SPEED
           	if aiming:
           		camera_speed_this_frame *= 0.5
-          	rotate_camera(camera_move * camera_speed_this_frame)
+          	queue_camera_rotation(camera_move * camera_speed_this_frame)
           	var current_aim := _current_aim()
           
           	if current_aim:
@@ -2588,7 +2590,19 @@ jobs:
           		var camera_speed_this_frame = CAMERA_MOUSE_ROTATION_SPEED
           		if aiming:
           			camera_speed_this_frame *= 0.75
-          		rotate_camera(input_event.screen_relative * camera_speed_this_frame)
+          		queue_camera_rotation(input_event.screen_relative * camera_speed_this_frame)
+
+
+          func _physics_process(_delta: float) -> void:
+          	if pending_camera_rotation == Vector2.ZERO:
+          		return
+          	var rotation_step := pending_camera_rotation
+          	pending_camera_rotation = Vector2.ZERO
+          	rotate_camera(rotation_step)
+
+
+          func queue_camera_rotation(move: Vector2) -> void:
+          	pending_camera_rotation += move
           
           
           func rotate_camera(move: Vector2) -> void:
@@ -2717,6 +2731,9 @@ jobs:
           	Input.action_release("aim")
           	check(not input._current_aim() and not input.toggled_aim, "short fire tap cannot latch touch aim")
           	input.free()
+          	var input_source := FileAccess.get_file_as_string("res://player/player_input.gd")
+          	check(input_source.contains("func _physics_process") and input_source.contains("pending_camera_rotation"), "camera rotation is consumed by the physics loop")
+          	check(input_source.contains("ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS"), "camera animation advances on physics frames")
           	touch(controls, 0, fire, true)
           	controls.queue_free()
           	await get_tree().process_frame
@@ -7711,8 +7728,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=54
-          version/name="0.2.34-mobile-alpha"
+          version/code=55
+          version/name="0.2.35-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
 
@@ -7753,8 +7770,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=54
-          version/name="0.2.34-mobile-alpha"
+          version/code=55
+          version/name="0.2.35-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -8086,14 +8103,14 @@ jobs:
           cat /tmp/aapt-badging.err
           test -n "$BADGING"
           printf '%s\n' "$BADGING"
-          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='54' versionName='0.2.34-mobile-alpha'" <<<"$BADGING"
+          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='55' versionName='0.2.35-mobile-alpha'" <<<"$BADGING"
           grep -Fq "application-label:'PULSEFALL'" <<<"$BADGING"
           mapfile -t ABI_DIRS < <(unzip -Z1 "$APK" | awk -F/ '/^lib\/[^/]+\/.*\.so$/ {print $2}' | sort -u)
           test "${#ABI_DIRS[@]}" -eq 1
           test "${ABI_DIRS[0]}" = "arm64-v8a"
           echo "APK PACKAGE CHECKS: 7 FAILURES: 0"
           echo "PACKAGE: com.pulsefall.blacksite"
-          echo "VERSION: 54 / 0.2.34-mobile-alpha"
+          echo "VERSION: 55 / 0.2.35-mobile-alpha"
           echo "ABI: arm64-v8a"
 
           AAB="artifact/PULSEFALL_MOBILE_ALPHA.aab"
