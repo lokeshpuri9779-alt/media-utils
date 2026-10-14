@@ -23,6 +23,14 @@ class PlotPatternTests(unittest.TestCase):
         self.assertFalse(plot_repetition(story(), story()))
         self.assertEqual(plot_signature(story()), ())
 
+    def test_generic_cooperation_alone_not_duplicate(self):
+        self.assertFalse(plot_repetition(story("Friends gather.", "Together they laugh."),
+                                         story("Friends gather.", "Together they laugh.")))
+
+    def test_single_conflict_cue_not_sufficient(self):
+        self.assertFalse(plot_repetition(story("A missing lamp.", "The sun rises."),
+                                         story("A missing bell.", "The rain falls.")))
+
     def test_different_beat_count_not_flagged(self):
         self.assertFalse(plot_repetition(story("A missing key."), story("A missing key.", "A clue.")))
 
