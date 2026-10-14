@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 9,
-  "confirmed_today": 8,
-  "last_attempt_at": "2026-10-14T23:13:07.455290+00:00",
+  "attempts": 10,
+  "confirmed_today": 9,
+  "last_attempt_at": "2026-10-14T23:20:20.925653+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -915,14 +915,22 @@
       "format": "short",
       "uploaded_at": "2026-10-14T22:56:38.619832+00:00",
       "renderer": "studio-7.1.1"
+    },
+    "rayvan-forge-af1410e33546585c": {
+      "video_id": "zF-GLGho5Yo",
+      "confirmed_at": "2026-10-14T23:19:32.034837+00:00",
+      "title": "The Witch and the Borrowed Rain",
+      "format": "short",
+      "uploaded_at": "2026-10-14T23:13:08.961459+00:00",
+      "renderer": "studio-7.1.1"
     }
   },
   "pending": {
-    "zF-GLGho5Yo": {
-      "content_id": "rayvan-forge-af1410e33546585c",
-      "title": "The Witch and the Borrowed Rain",
+    "Phg3iqnENek": {
+      "content_id": "rayvan-forge-9edbc8b3e414dfb0",
+      "title": "The Submarine and the Glass Reef",
       "day": "2026-10-15",
-      "uploaded_at": "2026-10-14T23:13:08.961459+00:00",
+      "uploaded_at": "2026-10-14T23:20:22.395505+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -931,11 +939,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T23:12:21.120803+00:00",
+  "last_preflight_at": "2026-10-14T23:19:31.608367+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T23:13:09.513278+00:00",
+    "at": "2026-10-14T23:20:22.683482+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -1815,6 +1823,14 @@
     "rayvan-forge-af1410e33546585c": {
       "at": "2026-10-14T23:13:07.455275+00:00",
       "title": "The Witch and the Borrowed Rain",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.1.1",
+      "result": "accepted"
+    },
+    "rayvan-forge-9edbc8b3e414dfb0": {
+      "at": "2026-10-14T23:20:20.925638+00:00",
+      "title": "The Submarine and the Glass Reef",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.1.1",
