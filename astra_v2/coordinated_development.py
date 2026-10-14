@@ -539,7 +539,7 @@ def frame(scene, t):
             ph = max(1, int(artwork.height * prop_scale))
             artwork = artwork.resize((pw, ph), Image.Resampling.LANCZOS)
             object_layer.alpha_composite(artwork, (int(ox - pw / 2), int(oy - ph / 2)))
-            if named_action == "repair":
+            if named_action == "repair" and scene.get("object_condition_before", "damaged") == "damaged":
                 # Visible, timed before/after state: a cracked object is
                 # progressively restored while the lead holds it.
                 repair_d = ImageDraw.Draw(object_layer)
@@ -585,6 +585,12 @@ def frame(scene, t):
                                    fill=(*lead_base, 255), width=max(4, int(7 * lead_scale)))
     else:
         draw_prop(object_layer, scene["object_id"], t, ox, oy)
+        if scene.get("object_condition_before") == "damaged":
+            # Preserve a visibly damaged object until its repair beat.
+            damage_d = ImageDraw.Draw(object_layer)
+            damage_d.line(((ox - 48, oy - 56), (ox - 12, oy - 13),
+                           (ox + 19, oy + 8), (ox + 42, oy + 52)),
+                          fill=(22, 27, 36, 255), width=8)
     if storybook and named_action == "celebrate":
         # Draw deterministic trophy glints on the same object layer so they
         # follow the camera's crop/zoom along with the carried gift.
