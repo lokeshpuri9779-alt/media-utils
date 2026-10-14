@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 18,
+  "attempts": 19,
   "confirmed_today": 18,
-  "last_attempt_at": "2026-10-14T02:56:28.123470+00:00",
+  "last_attempt_at": "2026-10-14T03:26:30.573054+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -604,28 +604,39 @@
       "uploaded_at": "2026-10-14T02:56:29.854590+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-14T02:58:44.866967+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "gibGzhFP5ms": {
+      "content_id": "rayvan-forge-105631468ff5afac",
+      "title": "The Lynx and the Garden Thief",
+      "day": "2026-10-14",
+      "uploaded_at": "2026-10-14T03:26:32.626019+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": ""
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-14T03:25:42.421836+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T02:58:45.316847+00:00",
+    "at": "2026-10-14T03:26:33.156768+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-13T19:39:16.279796+00:00",
   "reserved": {
@@ -1169,6 +1180,13 @@
     "rayvan-forge-50dcebe9375b07e0": {
       "at": "2026-10-14T02:56:28.123455+00:00",
       "title": "The Ferret and the Midnight Garden",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-105631468ff5afac": {
+      "at": "2026-10-14T03:26:30.573034+00:00",
+      "title": "The Lynx and the Garden Thief",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
