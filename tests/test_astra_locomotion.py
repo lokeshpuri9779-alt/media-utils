@@ -28,6 +28,15 @@ class LocomotionTests(unittest.TestCase):
         grounded = frame(idle_scene, t)
         self.assertIsNotNone(ImageChops.difference(grounded, airborne).getbbox())
 
+    def test_jump_vs_walk_at_multiple_timestamps(self):
+        plan = build_ensemble_plan("solo-jump-check", [["cat"]])
+        base = plan["scenes"][0]
+        for timestamp in (0.3, 0.6, 0.9):
+            with self.subTest(timestamp=timestamp):
+                jump = frame(dict(base, action="jump"), timestamp)
+                walk = frame(dict(base, action="walk"), timestamp)
+                self.assertIsNotNone(ImageChops.difference(jump, walk).getbbox())
+
     def test_publishing_remains_disabled(self):
         plan = build_ensemble_plan("locomotion-check", [["cat", "dog"]])
         self.assertFalse(plan["publication_allowed"])
