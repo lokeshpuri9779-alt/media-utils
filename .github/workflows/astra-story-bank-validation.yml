@@ -25,7 +25,8 @@ jobs:
         with:
           python-version: '3.11'
       - name: Validate story bank and publication rejection
-        run: python -m unittest discover -s tests -p 'test_story_draft_bank.py' -v
+        run: |
+          python -m unittest discover -s tests -p 'test_story_draft_bank.py' -v
           python -m unittest discover -s tests -p 'test_story_development.py' -v
           python -m unittest discover -s tests -p 'test_story_supply_audit.py' -v
       - name: Check complete draft and outline inventories
