@@ -62,6 +62,16 @@ jobs:
           if failures:
               raise SystemExit("Rejected: " + ", ".join(failures))
           PY
+      - name: Prepare one production story for render smoke test
+        run: |
+          python - <<'PY'
+          from astra_v2.story_forge import catalog
+          from studio_renderer import make_plan, creative_quality_gate
+          story = next(s for s in catalog() if s["title"] == "The Raccoon and the Midnight Bakery")
+          plan = make_plan(story)
+          creative_quality_gate(story, plan)
+          print("Story plan accepted:", story["title"], "scenes:", len(plan))
+          PY
       - name: Confirm original story publication policy tests
         run: |
           python -m unittest discover -s tests -p 'test_astra_publication_quality.py' -v
