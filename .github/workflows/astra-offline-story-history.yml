@@ -9,6 +9,7 @@ on:
       - 'astra_v2/plot_pattern_audit.py'
       - 'tests/test_astra_plot_pattern_audit.py'
       - 'astra_v2/story_batch.py'
+      - 'astra_v2/story_composition.py'
       - '.github/workflows/astra-offline-story-history.yml'
 permissions:
   contents: read
