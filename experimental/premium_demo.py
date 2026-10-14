@@ -8,6 +8,7 @@ import argparse,json
 from pathlib import Path
 from PIL import Image,ImageDraw
 from experimental.premium_compositor import Layer,render,quality_report
+from experimental.asset_gate import scan
 
 SCENES=(
  ("garden", (116,211,255), ("character","prop")),
@@ -16,26 +17,15 @@ SCENES=(
  ("celebration", (255,193,214), ("character","prop")),
 )
 def discover(library):
-    root=Path(library)
-    result={}
-    for kind in ("character","prop","background"):
-        records=[]
-        for p in sorted((root/kind).glob("*.json")):
-            info=json.loads(p.read_text())
-            asset=Path(info["path"])
-            if not asset.is_absolute() and not asset.exists():
-                asset=root/kind/asset.name
-            if not asset.is_file():continue
-            if info.get("approved_for_production") and info.get("license_verified"):
-                records.append((asset,info))
-        result[kind]=records
-    return result
+    approved=scan(library)["approved"]
+    return {kind:[(Path(p),{"kind":kind}) for p in paths]
+            for kind,paths in approved.items()}
 
 def build(library="premium-assets",output="premium-demo",fps=12,duration=24):
     import imageio_ffmpeg,subprocess
     assets=discover(library)
-    if not assets["character"] or not assets["prop"]:
-        raise RuntimeError("Requires at least one reviewed/licensed character and prop; no placeholder substitution")
+    if not assets["character"] or not assets["prop"] or len(assets["background"])<4:
+        raise RuntimeError("Requires reviewed/licensed characters, props, and four backgrounds; no placeholder substitution")
     if fps<1 or duration<20 or duration>30:raise ValueError("demo must run 20-30 seconds")
     out=Path(output);out.mkdir(parents=True,exist_ok=True)
     w,h=360,640
@@ -59,6 +49,19 @@ def build(library="premium-assets",output="premium-demo",fps=12,duration=24):
             layers=[Layer(str(character),108+dx,410+dy,150,180,"character",1),
                     Layer(str(prop),270,430,104,110,"prop",2)]
             frame=render(layers,w,h,bg)
+            # Real approved background art replaces the procedural landscape.
+            bgpath=assets["background"][scene_index][0]
+            with Image.open(bgpath) as bgimage:
+                backdrop=bgimage.convert("RGB").resize((w,h),Image.Resampling.LANCZOS)
+            # Composite the actual cutouts onto the supplied location artwork.
+            for item in layers:
+                with Image.open(item.path) as sprite:
+                    rgba=sprite.convert("RGBA")
+                    rgba.thumbnail((item.width,item.height),Image.Resampling.LANCZOS)
+                    x=int(item.cx-item.width/2)+(item.width-rgba.width)//2
+                    y=int(item.cy-item.height/2)+(item.height-rgba.height)//2
+                    backdrop.paste(rgba,(x,y),rgba)
+            frame=backdrop
             if i%(frames//4)==0:
                 frame.save(out/f"scene-{scene_index+1}-{name}.png")
                 metrics.append({"scene":name,**quality_report(frame,layers)})
