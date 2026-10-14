@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/workflows/astra-24fps-preview.yml'
       - 'astra_v2/coordinated_development.py'
+      - 'astra_v2/character_object_catalog.py'
       - 'astra_v2/animation_timing.py'
       - 'tests/test_astra_locomotion.py'
       - 'tests/test_astra_24fps_motion.py'
