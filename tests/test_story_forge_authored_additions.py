@@ -15,7 +15,7 @@ EXPECTED = {
 
 class AuthoredAdditionsTests(unittest.TestCase):
     def test_new_authored_stories_are_discoverable(self):
-        stories = catalog(limit=10000)
+        stories = catalog()
         selected = [s for s in stories if s["title"] in EXPECTED]
         self.assertEqual({s["title"] for s in selected}, EXPECTED)
         for story in selected:
@@ -27,7 +27,7 @@ class AuthoredAdditionsTests(unittest.TestCase):
             self.assertTrue(all(len(b["speech"].split()) >= 9 for b in story["story_beats"]))
 
     def test_used_story_is_not_selected_again(self):
-        stories = [s for s in catalog(limit=10000) if s["title"] in EXPECTED]
+        stories = [s for s in catalog() if s["title"] in EXPECTED]
         self.assertEqual(len(stories), len(EXPECTED))
         ids = [s["content_id"] for s in stories]
         fingerprints = [s["plot_fingerprint"] for s in stories]
