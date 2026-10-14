@@ -223,6 +223,9 @@ jobs:
       - name: Verify illustrated actor expressions and rig alignment
         run: |
           python -m unittest discover -s tests -p 'test_astra_storybook_comedy.py' -v
+      - name: Verify original soundtrack synthesis and cue timing
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_comedy_sound.py' -v
       - name: Render offline comedy pilot
         run: |
           python -m astra_v2.coordinated_development --comedy-pilot --seed astra-comedy-pilot --fps 12 --seconds-per-scene 3 --video --output verification-output/comedy-pilot
@@ -233,13 +236,20 @@ jobs:
           from pathlib import Path
           from PIL import Image, ImageChops
           root = Path('verification-output/comedy-pilot')
-          required = ('preview.mp4', 'storyboard.png', 'pickup-motion-sheet.png', 'report.json')
+          required = ('preview.mp4', 'storyboard.png', 'pickup-motion-sheet.png',
+                      'report.json', 'soundtrack.wav', 'sound-cues.json')
           assert all((root / name).is_file() for name in required), 'missing render or pickup review output'
           report = json.loads((root / 'report.json').read_text())
           assert report['publication_allowed'] is False
           assert report['quality_approved'] is False
           assert not report['motion_failures'], report['motion_failures']
           assert not report['visually_duplicate_scene_openings']
+          assert report.get('audio_codec') == 'aac'
+          assert report.get('audio_origin') == 'deterministic-original-synthesis'
+          cues = json.loads((root / 'sound-cues.json').read_text())
+          assert cues['licensed_audio_assets_used'] is False
+          assert cues['cue_count'] >= 10
+          assert report['original_audio_cues'] == cues['cue_count']
           sheet = Image.open(root / 'pickup-motion-sheet.png').convert('RGB')
           assert sheet.width >= 1350 and sheet.height >= 480, sheet.size
           # Verify that the first and last sampled pickup images are different.
@@ -253,10 +263,28 @@ jobs:
           assert stream['codec_name'] == 'h264', stream
           assert (stream['width'], stream['height']) == (544, 960), stream
           assert int(stream['nb_frames']) == 180, stream
+          audio = json.loads(subprocess.check_output([
+              'ffprobe', '-v', 'error', '-select_streams', 'a:0',
+              '-show_entries', 'stream=codec_name,sample_rate,channels',
+              '-of', 'json', str(root / 'preview.mp4')
+          ]))['streams']
+          assert len(audio) == 1 and audio[0]['codec_name'] == 'aac', audio
+          assert audio[0]['sample_rate'] == '24000' and audio[0]['channels'] == 1, audio
+          import wave, struct, math
+          with wave.open(str(root / 'soundtrack.wav'), 'rb') as snd:
+              assert snd.getnframes() == 360000
+              data = snd.readframes(snd.getnframes())
+          samples = struct.iter_unpack('<h', data)
+          squares = [s[0] * s[0] for s in samples]
+          assert math.sqrt(sum(squares) / len(squares)) > 250, 'silent soundtrack'
           subprocess.run(['ffmpeg', '-v', 'error', '-xerror', '-i',
               str(root / 'preview.mp4'), '-f', 'null', '-'], check=True)
+          subprocess.run(['ffmpeg', '-v', 'error', '-xerror', '-i',
+              str(root / 'preview.mp4'), '-map', '0:a:0',
+              '-f', 'null', '-'], check=True)
           (root / 'automated-validation.json').write_text(json.dumps({
               'render_verified': True, 'pickup_sequence_changed': True,
+              'audio_verified': True, 'audio_origin': 'original_synthesis',
               'publication_allowed': False, 'creative_approval': 'pending'
           }, indent=2))
           PY
