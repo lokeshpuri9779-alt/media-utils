@@ -7,7 +7,18 @@ def read_history(path):
     file = Path(path)
     if not file.exists():
         return []
-    return [json.loads(line) for line in file.read_text(encoding="utf-8").splitlines() if line.strip()]
+    records = []
+    for number, line in enumerate(file.read_text(encoding="utf-8").splitlines(), 1):
+        if not line.strip():
+            continue
+        try:
+            record = json.loads(line)
+        except json.JSONDecodeError as exc:
+            raise ValueError(f"Corrupt history line {number}") from exc
+        if not isinstance(record, dict) or not isinstance(record.get("scenes"), list) or not record["scenes"] or not all(isinstance(s, dict) and isinstance(s.get("narration"), str) and isinstance(s.get("action"), str) for s in record["scenes"]):
+            raise ValueError(f"Invalid history story on line {number}")
+        records.append(record)
+    return records
 
 def evaluate_and_record(stories, path, threshold=0.82):
     previous = read_history(path)
