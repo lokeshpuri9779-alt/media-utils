@@ -420,11 +420,12 @@ def frame(scene, t):
                               "focused" if named_action in ("point", "carry") else
                               "neutral")
                 gesture = ("carry_rig" if held_action else
-                           named_action if named_action in ("point", "celebrate") else "idle")
+                           named_action if named_action in ("point", "celebrate", "walk", "run", "jump", "dance") else "idle")
             else:
                 expression = ("surprised" if named_action in ("carry", "react", "celebrate") else
                               "focused" if named_action == "point" else "neutral")
-                gesture = "point" if named_action == "point" else "idle"
+                gesture = (named_action if named_action in ("walk", "run", "jump", "dance") else
+                           "point" if named_action == "point" else "idle")
             render_scene_actor(actor_layer, actor["character_id"], actor_t, 540, 1060,
                                expression, gesture, storybook=storybook)
             if scale != 1.0:
@@ -489,7 +490,7 @@ def frame(scene, t):
         render_scene_actor(character_layer, scene["character_id"], t,
                            cx + carry_shift, cy, expression,
                            "carry_rig" if held_action else
-                           named_action if named_action in ("point", "celebrate") else "idle",
+                           named_action if named_action in ("point", "celebrate", "walk", "run", "jump", "dance") else "idle",
                            storybook=storybook)
         if held_action:
             lead_shoulders = tuple(carry_shoulder_anchor(
