@@ -73,6 +73,23 @@ class RendererProvenanceTests(unittest.TestCase):
             reconcile(youtube, state)
         self.assertEqual(state["published"]["original-123"]["renderer"], "unknown")
 
+    def test_preflight_reconciliation_preserves_renderer(self):
+        from unittest.mock import Mock, patch
+        from astra_v2.control import state_for_day
+        from astra_v2.preflight import reconcile_pending
+        state = state_for_day()
+        state["pending"]["video456"] = {
+            "content_id": "original-456", "day": state["day"],
+            "renderer": "studio-test-v2", "title": "Original",
+        }
+        youtube = Mock()
+        youtube.status.return_value = {"privacyStatus": "public", "uploadStatus": "processed"}
+        with patch("astra_v2.preflight.record_verified_video") as recorder:
+            confirmed, pending, review = reconcile_pending(youtube, state, "rayvan")
+        self.assertEqual((confirmed, pending, review), (["video456"], [], []))
+        self.assertEqual(state["published"]["original-456"]["renderer"], "studio-test-v2")
+        recorder.assert_called_once()
+
     def test_publisher_records_renderer(self):
         src = (ROOT / "run.py").read_text(encoding="utf-8")
         self.assertIn('"renderer": candidate.get("renderer") or "unknown"', src)
