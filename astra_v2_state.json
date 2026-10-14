@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 50,
-  "confirmed_today": 49,
-  "last_attempt_at": "2026-10-14T16:04:24.409368+00:00",
+  "attempts": 51,
+  "confirmed_today": 50,
+  "last_attempt_at": "2026-10-14T16:14:36.859233+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -819,14 +819,21 @@
       "title": "The Rabbit and the Frozen Clock",
       "format": "short",
       "uploaded_at": "2026-10-14T15:34:40.781390+00:00"
+    },
+    "rayvan-forge-7bb65c8927167eba": {
+      "video_id": "OjZa_GSPeIk",
+      "confirmed_at": "2026-10-14T16:13:26.723177+00:00",
+      "title": "The Otter and the Floating Stage",
+      "format": "short",
+      "uploaded_at": "2026-10-14T16:04:25.960370+00:00"
     }
   },
   "pending": {
-    "OjZa_GSPeIk": {
-      "content_id": "rayvan-forge-7bb65c8927167eba",
-      "title": "The Otter and the Floating Stage",
+    "U3pBJ8GlSGg": {
+      "content_id": "rayvan-forge-1322e856bc08a961",
+      "title": "The Turtle and the River Letter",
       "day": "2026-10-14",
-      "uploaded_at": "2026-10-14T16:04:25.960370+00:00",
+      "uploaded_at": "2026-10-14T16:14:38.834831+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": ""
@@ -834,11 +841,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T16:03:30.804666+00:00",
+  "last_preflight_at": "2026-10-14T16:13:26.216159+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T16:04:26.189868+00:00",
+    "at": "2026-10-14T16:14:39.106871+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -1621,6 +1628,13 @@
     "rayvan-forge-7bb65c8927167eba": {
       "at": "2026-10-14T16:04:24.409353+00:00",
       "title": "The Otter and the Floating Stage",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-1322e856bc08a961": {
+      "at": "2026-10-14T16:14:36.859218+00:00",
+      "title": "The Turtle and the River Letter",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
