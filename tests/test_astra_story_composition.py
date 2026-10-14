@@ -25,6 +25,16 @@ class CompositionTests(unittest.TestCase):
         damaged = dict(scene, object_condition_before="damaged")
         self.assertIsNotNone(ImageChops.difference(frame(intact, 0.2), frame(damaged, 0.2)).getbbox())
 
+    def test_broken_object_has_matching_repair(self):
+        for episode in range(1, 15):
+            batch = build_story_batch("causality", limit=8, episode=episode, composed=True)
+            for plan in batch["stories"]:
+                beats = [scene["narration"].lower() for scene in plan["scenes"]]
+                if "a broken " in beats[0]:
+                    self.assertIn("repairs the ", beats[3])
+                    self.assertEqual(plan["scenes"][3]["action"], "repair")
+                self.assertNotIn("for  ", " ".join(beats))
+
     def test_repair_state_persists(self):
         batch = build_story_batch("state-check", limit=8, composed=True)
         for plan in batch["stories"]:
