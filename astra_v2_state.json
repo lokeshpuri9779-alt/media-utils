@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 40,
-  "confirmed_today": 39,
-  "last_attempt_at": "2026-10-14T13:05:09.243613+00:00",
+  "attempts": 41,
+  "confirmed_today": 40,
+  "last_attempt_at": "2026-10-14T13:13:01.522936+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -749,14 +749,21 @@
       "title": "The Owl and the Station Clock",
       "format": "short",
       "uploaded_at": "2026-10-14T12:28:26.871337+00:00"
+    },
+    "rayvan-forge-f8a3582867926d4d": {
+      "video_id": "BHHRB4GTKOw",
+      "confirmed_at": "2026-10-14T13:11:56.909028+00:00",
+      "title": "The Hare and the Missing Invitation",
+      "format": "short",
+      "uploaded_at": "2026-10-14T13:05:11.203568+00:00"
     }
   },
   "pending": {
-    "BHHRB4GTKOw": {
-      "content_id": "rayvan-forge-f8a3582867926d4d",
-      "title": "The Hare and the Missing Invitation",
+    "187LzZerZhM": {
+      "content_id": "rayvan-forge-e24c3c16e49a82ac",
+      "title": "The Otter and the Dark Lighthouse",
       "day": "2026-10-14",
-      "uploaded_at": "2026-10-14T13:05:11.203568+00:00",
+      "uploaded_at": "2026-10-14T13:13:03.632249+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": ""
@@ -764,11 +771,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T13:04:08.788664+00:00",
+  "last_preflight_at": "2026-10-14T13:11:56.514589+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T13:05:11.439361+00:00",
+    "at": "2026-10-14T13:13:03.894186+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -1481,6 +1488,13 @@
     "rayvan-forge-f8a3582867926d4d": {
       "at": "2026-10-14T13:05:09.243595+00:00",
       "title": "The Hare and the Missing Invitation",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-e24c3c16e49a82ac": {
+      "at": "2026-10-14T13:13:01.522917+00:00",
+      "title": "The Otter and the Dark Lighthouse",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
