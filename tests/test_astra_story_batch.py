@@ -1,5 +1,5 @@
 import unittest
-from astra_v2.story_batch import ACTIONS, TEMPLATES, build_story_batch
+from astra_v2.story_batch import STORY_ACTIONS, TEMPLATES, build_story_batch
 from astra_v2.coordinated_development import verify_story_cast
 
 
@@ -18,7 +18,7 @@ class StoryBatchTests(unittest.TestCase):
             self.assertTrue(all(scene["location"] == story["location"] for scene in story["scenes"]))
         for story in stories:
             self.assertTrue(verify_story_cast(story))
-            self.assertEqual(tuple(s["action"] for s in story["scenes"]), ACTIONS)
+            self.assertEqual(tuple(s["action"] for s in story["scenes"]), STORY_ACTIONS[story["title"]])
             self.assertFalse(story["publication_allowed"])
             self.assertFalse(story["quality_approved"])
 
