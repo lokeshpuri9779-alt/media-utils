@@ -1,6 +1,10 @@
 name: ASTRA 24 FPS preview (offline)
 on:
   workflow_dispatch:
+  push:
+    branches: [astra-isolated-verification-20261013]
+    paths:
+      - '.github/workflows/astra-24fps-preview.yml'
 permissions:
   contents: read
 jobs:
