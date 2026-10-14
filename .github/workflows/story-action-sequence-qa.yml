@@ -1,0 +1,28 @@
+name: Story action sequence visual QA
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/action-sequence-continuity-qa
+  pull_request:
+    paths:
+      - 'astra_v2/story_action_motion.py'
+      - 'astra_v2/story_visuals.py'
+      - 'studio_renderer.py'
+      - 'tests/test_story_action_sequence_render.py'
+      - '.github/workflows/story-action-sequence-qa.yml'
+permissions:
+  contents: read
+jobs:
+  sequence-render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install 'Pillow>=10,<12'
+      - run: python -m unittest discover -s tests -p 'test_story_action_sequence_render.py' -v
+      - run: python -m unittest discover -s tests -p 'test_character_action_render.py' -v
+      - run: python -m unittest discover -s tests -p 'test_story_action_motion.py' -v
