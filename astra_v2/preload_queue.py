@@ -29,7 +29,7 @@ def _studio_meets_floor(renderer, minimum):
     if not minimum:
         return True
     def parse(value):
-        m = re.fullmatch(r"(?:studio-)?(\\d+)\\.(\\d+)\\.(\\d+)", str(value or "").strip())
+        m = re.fullmatch(r"(?:studio-)?(\d+)\.(\d+)\.(\d+)", str(value or "").strip())
         return tuple(map(int, m.groups())) if m else None
     version = parse(renderer)
     floor = parse(minimum)
