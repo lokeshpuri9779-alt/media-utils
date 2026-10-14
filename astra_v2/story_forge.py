@@ -762,6 +762,45 @@ NEW_AUTHORED_PLOTS = [
     ]),
 ]
 
+NEW_AUTHORED_PLOTS.extend([
+    ("otter-tide-clock", "The Otter and the Tide Clock", "animal mystery", [
+        ("THE CLOCK RAN BACKWARD", "An otter noticed the harbor clock ticking backward just before the fishing boats were due to return.", "clock", "WRONG WAY"),
+        ("THE KEEPER WAS MISSING", "She searched the empty clock tower while the rising tide covered the steps to the dock.", "door", "TIME RUNNING OUT"),
+        ("A ROPE ON THE GEAR", "She found a wet mooring rope wrapped around the clock's exposed drive wheel and called the keeper for help.", "robot", "HIDDEN SNAG"),
+        ("THE HARBOR BELLS RANG", "The keeper freed the rope and restored the clock, while the otter guided the returning boats with the harbor bell.", "signal", "SAFE RETURN"),
+    ]),
+    ("lynx-glass-orchestra", "The Lynx and the Glass Orchestra", "animal comedy", [
+        ("THE MUSIC WAS MISSING", "A young lynx arrived at the village concert and discovered the instruments had been packed onto the wrong wagon.", "signal", "NO INSTRUMENTS"),
+        ("EVERY IDEA SOUNDED WRONG", "She tried drumming on crates and whistling through leaves, but neither could carry a melody across the square.", "forest", "TRY AGAIN"),
+        ("THE RAIN MADE MUSIC", "She heard raindrops ringing against different glass jars and arranged them under the eaves by their pitch.", "door", "A NEW SOUND"),
+        ("AN UNEXPECTED ENCORE", "The villagers joined with wooden spoons and gentle taps, turning the rainy evening into a sparkling glass orchestra.", "signal", "BRAVO"),
+    ]),
+    ("panda-bridge-paint", "The Panda and the Invisible Bridge", "animal adventure", [
+        ("THE BRIDGE DISAPPEARED", "A panda carrying festival lanterns reached the stream and found the narrow footbridge hidden beneath thick morning fog.", "forest", "WHERE IS IT"),
+        ("THE FIRST STEP SLIPPED", "He tried following the sound of the water, but his foot slipped on a wet stone near the bank.", "ship", "TOO DANGEROUS"),
+        ("BELLS MARKED THE WAY", "He spotted the bridge's safety rope and tied tiny bells along it so the other walkers could follow its safe route.", "signal", "FOLLOW THE BELLS"),
+        ("LIGHTS ACROSS THE STREAM", "The walkers crossed one at a time holding the rope, and the panda hung the lanterns on the far side for the festival.", "forest", "WE MADE IT"),
+    ]),
+    ("seal-snow-postoffice", "The Seal and the Snow Post Office", "animal mystery", [
+        ("LETTERS IN THE SNOW", "A seal found the seaside post office buried beneath fresh snow just before the winter holiday deliveries.", "door", "MAIL TRAPPED"),
+        ("THE SLED LOST ITS LOAD", "She packed the letters onto a small sled, but a gust scattered the envelopes across the frozen harbor.", "ship", "OH NO"),
+        ("A MAP OF FOOTPRINTS", "She noticed each envelope had landed beside a different animal's fresh footprints and sorted the letters by the nearby tracks.", "book", "FOLLOW THE TRACKS"),
+        ("EVERY LETTER ARRIVED", "With help from the neighbors, she delivered the rescued mail and found a thank you card waiting at her own door.", "door", "SPECIAL DELIVERY"),
+    ]),
+    ("heron-moon-mirror", "The Heron and the Missing Moon", "animal fantasy", [
+        ("THE MOON VANISHED", "A heron looked into the village pond and saw that the bright full moon had disappeared from the water.", "planet", "WHERE IS THE MOON"),
+        ("THE WATER TURNED CLOUDY", "She searched behind the reeds and splashed toward the center, only making the muddy pond harder to see through.", "forest", "NO REFLECTION"),
+        ("THE MILL GATE OPENED", "She discovered a blocked stream had stirred the pond with silt and asked the miller to reopen the gentle water channel.", "ship", "CLEAR WATER"),
+        ("TWO MOONS SHONE", "As the water settled, the moon returned to the pond beside its twin in the sky, and the heron laughed at the mystery.", "planet", "MYSTERY SOLVED"),
+    ]),
+    ("ferret-bakery-lift", "The Ferret and the Rising Bread", "animal comedy", [
+        ("THE DOUGH ESCAPED", "A ferret baker returned from the market to find a giant bowl of dough swelling over the kitchen counter.", "door", "TOO MUCH DOUGH"),
+        ("THE LID FLEW OFF", "He pushed a heavy lid onto the bowl, but the dough rose again and tipped the lid onto the flour sacks.", "robot", "IT KEEPS GROWING"),
+        ("SMALLER LOAVES", "He divided the dough into little trays and gave each loaf enough space to rise without spilling.", "book", "SMART FIX"),
+        ("A VILLAGE FEAST", "The bakery filled with warm rolls, and the ferret shared the unexpected extra bread with the whole village.", "door", "FRESH BREAD"),
+    ]),
+])
+
 AUTHORED_KEYS = {row[0] for row in PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS}
 
 def catalog(excluded_ids=None, excluded_titles=None, limit=128, excluded_plot_hashes=None, history=None, include_drafts=False):
