@@ -36,7 +36,7 @@ def render(sources,output,fps=30,seconds=4):
                             "-preset","veryfast","-crf","20",str(clip)],check=True)
             clips.append(clip)
         concat=Path(folder)/"clips.txt"
-        concat.write_text("".join(f"file '{clip}'\\n" for clip in clips))
+        concat.write_text("".join(f"file '{clip}'\n" for clip in clips))
         subprocess.run([ffmpeg,"-y","-loglevel","error","-f","concat","-safe","0",
                         "-i",str(concat),"-c","copy","-movflags","+faststart",str(output)],check=True)
     return {"file":str(output),"scenes":len(sources),"fps":fps,
