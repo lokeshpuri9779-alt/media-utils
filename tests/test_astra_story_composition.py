@@ -1,6 +1,7 @@
 import unittest
 from astra_v2.story_batch import build_story_batch
 from astra_v2.story_composition import action_for_beat
+from astra_v2.story_batch_audio import NOTES
 
 class CompositionTests(unittest.TestCase):
     def test_coherent_five_beats_and_safety(self):
@@ -12,6 +13,12 @@ class CompositionTests(unittest.TestCase):
             self.assertTrue(all(s["narration"].endswith(".") for s in plan["scenes"]))
             self.assertFalse(plan["publication_allowed"])
             self.assertFalse(plan["quality_approved"])
+
+    def test_all_composed_actions_have_audio(self):
+        batch = build_story_batch("coverage", limit=8, composed=True)
+        for plan in batch["stories"]:
+            for scene in plan["scenes"]:
+                self.assertIn(scene["action"], NOTES)
 
     def test_event_to_action_mapping(self):
         self.assertEqual(action_for_beat(1, "The rabbit chases a lamp."), "run")
