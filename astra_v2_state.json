@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 41,
-  "confirmed_today": 40,
-  "last_attempt_at": "2026-10-14T13:13:01.522936+00:00",
+  "attempts": 42,
+  "confirmed_today": 41,
+  "last_attempt_at": "2026-10-14T13:43:04.969082+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -756,14 +756,21 @@
       "title": "The Hare and the Missing Invitation",
       "format": "short",
       "uploaded_at": "2026-10-14T13:05:11.203568+00:00"
+    },
+    "rayvan-forge-e24c3c16e49a82ac": {
+      "video_id": "187LzZerZhM",
+      "confirmed_at": "2026-10-14T13:42:11.436518+00:00",
+      "title": "The Otter and the Dark Lighthouse",
+      "format": "short",
+      "uploaded_at": "2026-10-14T13:13:03.632249+00:00"
     }
   },
   "pending": {
-    "187LzZerZhM": {
-      "content_id": "rayvan-forge-e24c3c16e49a82ac",
-      "title": "The Otter and the Dark Lighthouse",
+    "futukgxIijQ": {
+      "content_id": "rayvan-forge-2576b852a831a137",
+      "title": "The Panda and the Stubborn Windmill",
       "day": "2026-10-14",
-      "uploaded_at": "2026-10-14T13:13:03.632249+00:00",
+      "uploaded_at": "2026-10-14T13:43:06.611589+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": ""
@@ -771,11 +778,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T13:11:56.514589+00:00",
+  "last_preflight_at": "2026-10-14T13:42:10.998762+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T13:13:03.894186+00:00",
+    "at": "2026-10-14T13:43:06.872532+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -1495,6 +1502,13 @@
     "rayvan-forge-e24c3c16e49a82ac": {
       "at": "2026-10-14T13:13:01.522917+00:00",
       "title": "The Otter and the Dark Lighthouse",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-2576b852a831a137": {
+      "at": "2026-10-14T13:43:04.969067+00:00",
+      "title": "The Panda and the Stubborn Windmill",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
