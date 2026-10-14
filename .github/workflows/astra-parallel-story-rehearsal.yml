@@ -7,6 +7,7 @@ on:
       - 'astra_v2/render_story_batch.py'
       - 'astra_v2/story_batch.py'
       - 'astra_v2/coordinated_development.py'
+      - 'astra_v2/story_batch_audio.py'
       - 'tests/test_astra_locomotion.py'
       - 'tests/test_astra_story_batch.py'
       - '.github/workflows/astra-parallel-story-rehearsal.yml'
@@ -40,7 +41,7 @@ jobs:
       - name: Render one story independently
         run: |
           python -m astra_v2.render_story_batch --index ${{ matrix.story }} --fps 8 --seconds-per-scene 2 --output verification-output/story-${{ matrix.story }}
-      - name: Validate silent MP4 and offline gate
+      - name: Validate AAC MP4 and offline gate
         run: |
           python - <<'PY'
           import json
@@ -53,7 +54,9 @@ jobs:
           report = json.loads((root / "batch-result.json").read_text())
           assert report["publication_allowed"] is False
           assert report["quality_approved"] is False
-          assert report["video_has_audio"] is False
+          assert report["video_has_audio"] is True
+          assert report["spoken_narration"] is False
+          assert (root / "story-audio-manifest.json").exists()
           assert (root / "preview.mp4").stat().st_size > 1000
           cmd = [imageio_ffmpeg.get_ffmpeg_exe(), "-v", "error", "-i", str(root / "preview.mp4"), "-f", "null", "-"]
           subprocess.run(cmd, check=True, timeout=60)
