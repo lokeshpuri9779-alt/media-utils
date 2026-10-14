@@ -194,5 +194,82 @@ class QueueFormatSelectionTests(unittest.TestCase):
             self.assertEqual(result["content_id"], "good")
             self.assertEqual(out.read_bytes(), video)
 
+
+class StudioRendererFloorTests(unittest.TestCase):
+    def test_version_floor_parses_numerically(self):
+        accept = preload_queue.meets_studio_renderer_floor
+        self.assertFalse(accept("studio-7.1.1", "7.2.0"))
+        self.assertTrue(accept("studio-7.2.0", "7.2.0"))
+        self.assertTrue(accept("studio-7.10.1", "7.2.0"))
+        self.assertTrue(accept("studio-8.0.0", "7.2.0"))
+        self.assertFalse(accept("studio-7.1.99", "7.2.0"))
+        self.assertFalse(accept("unknown", "7.2.0"))
+        self.assertFalse(accept("pillow-experiment", "7.2.0"))
+        self.assertFalse(accept("studio-7.2", "7.2.0"))
+        self.assertTrue(accept("studio-7.1.1", ""))
+
+    @patch.dict(os.environ, {
+        "GITHUB_REPOSITORY": "owner/repo",
+        "ASTRA_PRELOAD_MAX_AGE_HOURS": "0",
+        "ASTRA_MIN_STUDIO_SHORT_RENDERER": "7.2.0",
+        "ASTRA_REQUIRE_STUDIO_PRELOAD": "1",
+    })
+    def test_old_queued_short_is_skipped_in_favor_of_72(self):
+        import hashlib
+        import io
+        import json
+        import tempfile
+        import zipfile
+        from pathlib import Path
+        from types import SimpleNamespace
+
+        def archive(cid, renderer):
+            video = ("frames-" + cid).encode() * 150
+            candidate = {
+                "content_id": cid, "title": "Original " + cid,
+                "description": "An original story.", "genre": "fiction",
+                "format": "short", "synthetic": True,
+                "renderer": renderer,
+                "sha256": hashlib.sha256(video).hexdigest(),
+            }
+            buf = io.BytesIO()
+            with zipfile.ZipFile(buf, "w") as zipfile_obj:
+                zipfile_obj.writestr("candidate.json", json.dumps(candidate))
+                zipfile_obj.writestr("video.mp4", video)
+            return buf.getvalue()
+
+        packages = {
+            11: archive("old-studio-archived", "studio-7.1.1"),
+            12: archive("new-studio-original", "studio-7.2.0"),
+        }
+        entries = [
+            {"name": "astra-preloaded-old-studio-archived", "id": 11,
+             "created_at": "2026-10-15T06:00:00Z",
+             "workflow_run": {"id": 111}},
+            {"name": "astra-preloaded-new-studio-original", "id": 12,
+             "created_at": "2026-10-15T05:00:00Z",
+             "workflow_run": {"id": 112}},
+        ]
+        trusted = {"conclusion": "success", "head_branch": "main",
+                   "name": "ASTRA V2 - Preload Approved Videos"}
+
+        def download(args, **kwargs):
+            artifact_id = int(args[2].split("/")[-2])
+            kwargs["stdout"].write(packages[artifact_id])
+            return SimpleNamespace(returncode=0)
+
+        with tempfile.TemporaryDirectory() as temp:
+            out = Path(temp) / "selected.mp4"
+            with patch.object(preload_queue, "artifacts", return_value=entries), \\
+                 patch.object(preload_queue, "_api", return_value=trusted), \\
+                 patch.object(preload_queue.subprocess, "run", side_effect=download), \\
+                 patch("astra_v2.creative.inspect_video", return_value={"seconds": 24}), \\
+                 patch("astra_v2.publication_quality.publication_rejection", return_value=None):
+                selected = preload_queue.take(set(), set(), out, allow_long=False)
+            self.assertEqual(selected["renderer"], "studio-7.2.0")
+            self.assertEqual(selected["content_id"], "new-studio-original")
+            self.assertEqual(out.read_bytes(), b"frames-new-studio-original" * 150)
+
+
 if __name__ == "__main__":
     unittest.main()
