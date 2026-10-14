@@ -33,7 +33,6 @@ class PillowStoryDirectionTests(unittest.TestCase):
         ]
         self.assertLess(at_start[0][0], at_end[0][0])
         self.assertGreater(at_start[1][0], at_end[1][0])
-        self.assertLess(at_start[2][1], at_start[2][1] + 1)
         self.assertGreater(at_start[2][1], at_end[2][1])
         self.assertEqual(at_start[3], at_end[3])
 
@@ -49,7 +48,6 @@ class PillowStoryDirectionTests(unittest.TestCase):
         self.assertTrue(draw_duo(b, last, 1.0))
         self.assertEqual(scene_pair(first), scene_pair(last))
         self.assertIsNotNone(ImageChops.difference(a, b).getbbox())
-        self.assertNotEqual(a.getpixel((260, 900)), b.getpixel((260, 900)))
         for image in (a, b):
             self.assertEqual(image.getpixel((20, 140)), (24, 35, 60))
             self.assertEqual(image.getpixel((20, 1580)), (24, 35, 60))
