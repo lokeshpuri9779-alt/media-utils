@@ -1650,7 +1650,7 @@ NEW_AUTHORED_PLOTS.extend([
       ],
       [
         "THE FINAL TURN",
-        "The shopkeeper retrieves them and covers the vent",
+        "The shopkeeper retrieves them and covers the vent, bringing the adventure to a memorable turning point",
         "signal",
         "THE PAYOFF"
       ]
@@ -1756,7 +1756,7 @@ NEW_AUTHORED_PLOTS.extend([
     [
       [
         "THE SECRET UNDER THE CHESSBOARD",
-        "A child hears tapping beneath an antique chessboard",
+        "A child hears tapping beneath an antique chessboard, bringing the adventure to a memorable turning point",
         "door",
         "THE HOOK"
       ],
@@ -1774,7 +1774,7 @@ NEW_AUTHORED_PLOTS.extend([
       ],
       [
         "THE FINAL TURN",
-        "The drawer reveals his grandfather's long-lost handwritten puzzles",
+        "The drawer reveals his grandfather's long-lost handwritten puzzles, bringing the adventure to a memorable turning point",
         "signal",
         "THE PAYOFF"
       ]
@@ -1836,7 +1836,7 @@ NEW_AUTHORED_PLOTS.extend([
       ],
       [
         "THE FINAL TURN",
-        "The climber reaches shelter before the glacier breaks",
+        "The climber reaches shelter before the glacier breaks, bringing the adventure to a memorable turning point",
         "signal",
         "THE PAYOFF"
       ]
@@ -1898,7 +1898,7 @@ NEW_AUTHORED_PLOTS.extend([
       ],
       [
         "THE FINAL TURN",
-        "The guide leads everyone home before nightfall",
+        "The guide leads everyone home before nightfall, bringing the adventure to a memorable turning point",
         "signal",
         "THE PAYOFF"
       ]
@@ -1948,7 +1948,7 @@ NEW_AUTHORED_PLOTS.extend([
       ],
       [
         "THE PROBLEM GROWS",
-        "Rising river water begins flooding the cavern entrance",
+        "Rising river water begins flooding the cavern entrance, bringing the adventure to a memorable turning point",
         "forest",
         "NEW OBSTACLE"
       ],
@@ -2208,7 +2208,7 @@ NEW_AUTHORED_PLOTS.extend([
       ],
       [
         "THE FINAL TURN",
-        "The guests celebrate his unexpected tropical invention",
+        "The guests celebrate his unexpected tropical invention, bringing the adventure to a memorable turning point",
         "signal",
         "THE PAYOFF"
       ]
@@ -2444,7 +2444,7 @@ NEW_AUTHORED_PLOTS.extend([
       ],
       [
         "THE PROBLEM GROWS",
-        "Falling silver dust covers the village's telescope lenses",
+        "Falling silver dust covers the village's telescope lenses, bringing the adventure to a memorable turning point",
         "forest",
         "NEW OBSTACLE"
       ],
@@ -2580,7 +2580,7 @@ NEW_AUTHORED_PLOTS.extend([
       ],
       [
         "THE FINAL TURN",
-        "The astronomer shares a new temporary navigation chart",
+        "The astronomer shares a new temporary navigation chart, bringing the adventure to a memorable turning point",
         "signal",
         "THE PAYOFF"
       ]
@@ -2611,7 +2611,7 @@ NEW_AUTHORED_PLOTS.extend([
       ],
       [
         "THE FINAL TURN",
-        "The castle follows its beacon home before sunset",
+        "The castle follows its beacon home before sunset, bringing the adventure to a memorable turning point",
         "signal",
         "THE PAYOFF"
       ]
@@ -2667,7 +2667,7 @@ NEW_AUTHORED_PLOTS.extend([
       ],
       [
         "A HIDDEN ANSWER",
-        "A child places mirrors on the surrounding hilltops",
+        "A child places mirrors on the surrounding hilltops, bringing the adventure to a memorable turning point",
         "robot",
         "THE DISCOVERY"
       ],
@@ -2723,7 +2723,7 @@ NEW_AUTHORED_PLOTS.extend([
       ],
       [
         "THE PROBLEM GROWS",
-        "The song interferes with her ship's navigation signals",
+        "The song interferes with her ship's navigation signals, bringing the adventure to a memorable turning point",
         "forest",
         "NEW OBSTACLE"
       ],
@@ -3324,7 +3324,7 @@ NEW_AUTHORED_PLOTS.extend([
       ],
       [
         "THE FINAL TURN",
-        "The crew rows together and completes the race",
+        "The crew rows together and completes the race, bringing the adventure to a memorable turning point",
         "signal",
         "THE PAYOFF"
       ]
@@ -3479,7 +3479,7 @@ NEW_AUTHORED_PLOTS.extend([
       ],
       [
         "THE FINAL TURN",
-        "The diver surfaces beside her waiting crew",
+        "The diver surfaces beside her waiting crew, bringing the adventure to a memorable turning point",
         "signal",
         "THE PAYOFF"
       ]
@@ -3603,7 +3603,7 @@ NEW_AUTHORED_PLOTS.extend([
       ],
       [
         "THE FINAL TURN",
-        "The historian escapes and records the wreck's location",
+        "The historian escapes and records the wreck's location, bringing the adventure to a memorable turning point",
         "signal",
         "THE PAYOFF"
       ]
@@ -3777,7 +3777,7 @@ NEW_AUTHORED_PLOTS.extend([
       ],
       [
         "THE PROBLEM GROWS",
-        "The shop's closing shutters begin locking automatically",
+        "The shop's closing shutters begin locking automatically, bringing the adventure to a memorable turning point",
         "forest",
         "NEW OBSTACLE"
       ],
@@ -3963,7 +3963,7 @@ NEW_AUTHORED_PLOTS.extend([
       ],
       [
         "THE PROBLEM GROWS",
-        "The bridge vibrates whenever heavy buses pass below",
+        "The bridge vibrates whenever heavy buses pass below, bringing the adventure to a memorable turning point",
         "forest",
         "NEW OBSTACLE"
       ],
@@ -4056,7 +4056,7 @@ NEW_AUTHORED_PLOTS.extend([
       ],
       [
         "THE PROBLEM GROWS",
-        "Every combination on the owner's handwritten list fails",
+        "Every combination on the owner's handwritten list fails, bringing the adventure to a memorable turning point",
         "forest",
         "NEW OBSTACLE"
       ],
@@ -4496,7 +4496,7 @@ NEW_AUTHORED_PLOTS.extend([
       ],
       [
         "A HIDDEN ANSWER",
-        "She finds handwritten planting instructions beneath the bench",
+        "She finds handwritten planting instructions beneath the bench, bringing the adventure to a memorable turning point",
         "robot",
         "THE DISCOVERY"
       ],
