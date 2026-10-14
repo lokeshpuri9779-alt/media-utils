@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 26,
-  "confirmed_today": 25,
-  "last_attempt_at": "2026-10-14T07:07:46.743549+00:00",
+  "attempts": 27,
+  "confirmed_today": 26,
+  "last_attempt_at": "2026-10-14T07:42:03.021164+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -651,14 +651,21 @@
       "title": "The Owl and the Moonlit Dam",
       "format": "short",
       "uploaded_at": "2026-10-14T07:01:18.017776+00:00"
+    },
+    "rayvan-forge-d22c6754d188fdcf": {
+      "video_id": "iCKN2aqFmQQ",
+      "confirmed_at": "2026-10-14T07:41:10.634890+00:00",
+      "title": "The Beaver and the Leaking Pond",
+      "format": "short",
+      "uploaded_at": "2026-10-14T07:07:48.279110+00:00"
     }
   },
   "pending": {
-    "iCKN2aqFmQQ": {
-      "content_id": "rayvan-forge-d22c6754d188fdcf",
-      "title": "The Beaver and the Leaking Pond",
+    "CLHllFrRI30": {
+      "content_id": "rayvan-forge-59b03730dd3cba3b",
+      "title": "The Panda and the Tunnel Lanterns",
       "day": "2026-10-14",
-      "uploaded_at": "2026-10-14T07:07:48.279110+00:00",
+      "uploaded_at": "2026-10-14T07:42:05.009901+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": ""
@@ -666,11 +673,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T07:07:03.550970+00:00",
+  "last_preflight_at": "2026-10-14T07:41:10.228264+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T07:07:48.502236+00:00",
+    "at": "2026-10-14T07:42:05.230677+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -687,7 +694,7 @@
     "oauth_tests": "success",
     "layer_tests": "success"
   },
-  "last_feedback_attempt_at": "2026-10-13T19:39:16.279796+00:00",
+  "last_feedback_attempt_at": "2026-10-14T07:41:50.802300+00:00",
   "reserved": {
     "rayvan-original-spacesong-v1": {
       "at": "2026-10-12T19:00:53.784470+00:00",
@@ -1285,6 +1292,13 @@
     "rayvan-forge-d22c6754d188fdcf": {
       "at": "2026-10-14T07:07:46.743531+00:00",
       "title": "The Beaver and the Leaking Pond",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-59b03730dd3cba3b": {
+      "at": "2026-10-14T07:42:03.021149+00:00",
+      "title": "The Panda and the Tunnel Lanterns",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
