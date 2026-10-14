@@ -31,6 +31,12 @@ class StoryBatchTests(unittest.TestCase):
         self.assertEqual(build_story_batch("repeat", episode=2),
                          build_story_batch("repeat", episode=2))
 
+    def test_adjacent_episode_batches_do_not_repeat_titles(self):
+        first = build_story_batch("rotation", episode=1)["stories"]
+        second = build_story_batch("rotation", episode=2)["stories"]
+        self.assertTrue({story["title"] for story in first}.isdisjoint(
+            {story["title"] for story in second}))
+
     def test_expanded_catalog(self):
         self.assertEqual(len(TEMPLATES), 8)
         self.assertEqual(build_story_batch("full", 8)["story_count"], 8)
