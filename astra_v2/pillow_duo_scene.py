@@ -83,6 +83,15 @@ def scene_mood(shot):
         return "curious"
     if re.search(r"\b(?:smile|laugh|celebrat\w*|happy|cheer|dance)\b", text):
         return "happy"
+    role = str(shot.get("story_beat") or "")
+    if role == "reveal":
+        return "curious"
+    if role == "build":
+        return "surprised"
+    if role == "twist":
+        return "alert"
+    if role == "payoff":
+        return "happy"
     return "alert"
 
 
@@ -99,34 +108,121 @@ def _line(d, pts, color, width=9):
     d.line(pts, fill=color, width=width, joint="curve")
 
 
-def _stage(d, shot, t):
-    """Shallow parallax environment, leaving headline/captions untouched."""
+def scene_setting(shot):
+    """Choose a stable story setting from authored title and scene context."""
     text = " ".join(str(shot.get(k) or "") for k in
-                    ("speech", "visual_prompt", "action")).lower()
+                    ("story_title", "speech", "visual_prompt", "action")).lower()
+    if re.search(r"\b(?:library|chapter|bookshop|bookshelf|bookshelves)\b", text):
+        return "library"
+    if re.search(r"\b(?:harbor|harbour|lighthouse|pier|boat dock)\b", text):
+        return "harbor"
+    if re.search(r"\b(?:river|stream|pond|floating|dock|water)\b", text):
+        return "river"
+    if re.search(r"\b(?:garden|flower|greenhouse|plant|bloom)\b", text):
+        return "garden"
+    if re.search(r"\b(?:hillside|hill|meadow|mountain|kite)\b", text):
+        return "hillside"
+    if re.search(r"\b(?:town|market|festival|village|bakery)\b", text):
+        return "village"
+    return "forest"
+
+
+def scene_phase(shot):
+    """Unique four-beat staging with a deterministic fallback for previews."""
+    role = str(shot.get("story_beat") or "").lower()
+    return {"reveal": 0, "build": 1, "twist": 2, "payoff": 3}.get(role, 0)
+
+
+def _stage(d, shot, t):
+    """Draw story-specific depth and changing shot accents inside safe zone."""
+    text = " ".join(str(shot.get(k) or "") for k in
+                    ("story_title", "speech", "visual_prompt", "action")).lower()
     seed = int.from_bytes(hashlib.sha256(text.encode()).digest()[:4], "big")
-    night = bool(re.search(r"\b(?:night|moon|stars?|dark|shadow)\b", text))
-    palette = ((92, 129, 155), (53, 95, 109)) if night else ((114, 162, 145), (67, 123, 117))
-    # Translucent sky discs and environmental layers within the subject stage.
-    sunx = 680 if seed % 2 else 390
-    d.ellipse((sunx-132, 550, sunx+132, 814), fill=palette[0])
-    for idx in range(4):
-        x = 118 + (idx * 279 + seed % 107) % 800
-        y = 790 + (idx % 2)*48
-        d.polygon(((x-85, 1060), (x+8, y), (x+106, 1060)), fill=(28, 79, 81))
-    # Clean ground with tactile foreground plants, not a full-screen card.
-    d.ellipse((70, 1178, 1005, 1363), fill=(32, 67, 78))
-    d.ellipse((110, 1225, 975, 1340), fill=(43, 83, 83))
-    for i in range(12):
-        x = 125 + (seed // 3 + i*149) % 810
-        y = 1235 + (i % 3) * 21
-        d.arc((x-27, y-22, x+27, y+22), 192, 345, fill=(82, 155, 125), width=5)
-    for i in range(9):
-        x = 165 + (seed + i*137) % 760
-        y = 570 + (i*79) % 375
-        r = 3 + i % 3
-        drift = int(6*math.sin(t*0.8 + i))
-        d.ellipse((x-r, y-r+drift, x+r, y+r+drift),
-                  fill=(220, 213, 161) if night else (152, 200, 177))
+    setting = str(shot.get("story_setting") or scene_setting(shot))
+    beat = scene_phase(shot)
+    night = bool(re.search(r"\b(?:night|moon|stars?|dark|shadow|midnight)\b", text))
+    sky = (92, 126, 149) if night else (122, 162, 152)
+    far = (56, 99, 112) if night else (85, 135, 121)
+    earth = (35, 76, 83) if night else (52, 107, 98)
+    # Hero moon/sun shifts perspective across four narrative beats.
+    sunx = (260, 700, 460, 790)[beat]
+    d.ellipse((sunx-94, 570, sunx+94, 758), fill=sky)
+    if setting == "hillside":
+        d.polygon([(85, 1184), (245, 790), (475, 1178)], fill=far)
+        d.polygon([(390, 1188), (695, 755), (1010, 1188)], fill=(54, 100, 105))
+        d.arc((90, 1120, 997, 1430), 185, 340, fill=(94, 161, 129), width=12)
+        # A high trail marker gives a different landmark than the flat forest.
+        x = 920 if beat < 2 else 135
+        d.line((x, 1117, x, 907), fill=(183, 154, 107), width=17)
+        d.polygon(((x-55, 915), (x+42, 915), (x+42, 980), (x-55, 980)),
+                  fill=(190, 137, 83))
+    elif setting in ("river", "harbor"):
+        d.polygon([(100, 1113), (310, 921), (475, 1115)], fill=far)
+        d.polygon([(680, 1119), (878, 910), (1000, 1117)], fill=(63, 111, 120))
+        d.rounded_rectangle((90, 1175, 989, 1347), radius=68,
+                            fill=(42, 103, 125))
+        for i in range(5):
+            x = 133 + i*183 + int(10*math.sin(t*1.1+i))
+            d.arc((x, 1210+(i%2)*35, x+140, 1280+(i%2)*35),
+                  190, 335, fill=(116, 176, 184), width=6)
+        if setting == "harbor":
+            for x in (125, 890):
+                d.line((x, 930, x, 1220), fill=(140, 126, 101), width=20)
+                d.arc((x-26, 925, x+26, 971), 180, 350, fill=(225, 198, 129), width=6)
+    elif setting == "library":
+        for x in (135, 760):
+            d.rounded_rectangle((x, 625, x+196, 1136),
+                                radius=15, fill=(102, 81, 89))
+            for row in range(3):
+                yy = 730+row*130
+                d.line((x+18, yy+76, x+180, yy+76),
+                       fill=(217, 183, 135), width=10)
+                for book in range(7):
+                    bx=x+25+book*22
+                    bh=64+(seed+row+book)%19
+                    d.rectangle((bx, yy+70-bh, bx+15, yy+68),
+                                fill=((121+book*15)%210, 121+(row*20)%75, 135+(book*9)%65))
+    elif setting == "garden":
+        d.polygon([(77, 1180),(370, 886),(625, 1166)],fill=far)
+        d.polygon([(600, 1170),(845, 924),(1010, 1188)],fill=(58, 120, 110))
+        for i in range(6):
+            x=115+i*158
+            yy=1157+(i%2)*39
+            d.line((x,yy,x,yy+120),fill=(74,140,98),width=11)
+            for j in range(5):
+                ang=j*(2*math.pi/5)
+                px=x+24*math.cos(ang);py=yy+22*math.sin(ang)
+                d.ellipse((px-13,py-13,px+13,py+13),fill=(214,146,157))
+            d.ellipse((x-12,yy-12,x+12,yy+12),fill=(244,216,115))
+    elif setting == "village":
+        for i,x in enumerate((96, 410, 782)):
+            h=185+((seed+i*29)%75)
+            d.polygon(((x,1158-h),(x+98,1068-h),(x+210,1158-h)),
+                      fill=(120,109,118))
+            d.rounded_rectangle((x,1158-h,x+210,1171),radius=5,
+                                fill=(103,143,143))
+            d.rectangle((x+83,1133-h,x+127,1197-h),fill=(217,193,125))
+    else:
+        for idx in range(5):
+            x = 107 + (idx*197 + seed%63)%860
+            y = 834 + idx%2*65
+            d.polygon(((x-97,1140),(x,y),(x+98,1140)),
+                      fill=far if idx%2 else (45,93,102))
+    # Keep actors grounded and protect all headline/caption regions.
+    d.ellipse((70, 1188, 1010, 1361), fill=earth)
+    d.ellipse((120, 1234, 970, 1335), fill=(51, 114, 102))
+    for i in range(10):
+        x=140+(seed//7+i*161)%790
+        y=1255+(i%3)*19
+        d.arc((x-25,y-16,x+25,y+19),196,342,fill=(103,166,127),width=4)
+    for i in range(8):
+        x=130+(seed+i*157)%820
+        y=590+(i*97)%330
+        radius=2+i%3
+        drift=int(5*math.sin(t*.85+i))
+        d.ellipse((x-radius,y-radius+drift,x+radius,y+radius+drift),
+                  fill=(230,218,162) if night else (170,211,191))
+
 
 
 def _facial(d, x, y, mood, t, actor_idx):
@@ -307,6 +403,34 @@ def prop_position(action, t):
             int(1216*(1-progress)+1060*progress))
 
 
+def story_prop_position(shot, t):
+    """Prop follows the narrated four-beat action, not a fixed screen icon.
+
+    The local scene time is bounded so a long narration doesn't teleport props.
+    Ball chase: escape -> pursuit -> catch -> carry.
+    Other props retain the existing reliable pickup trajectory.
+    """
+    prop = scene_prop(shot)
+    action = str(shot.get("story_action") or "idle").lower()
+    beat = scene_phase(shot)
+    p = _ease(max(0.0, float(t)) / 2.2)
+    if prop == "ball":
+        if beat == 0:
+            return (int(380 + 430*p), int(1190 - 34*abs(math.sin(t*3.2))))
+        if beat == 1:
+            return (int(810 - 455*p), int(1175 - 66*abs(math.sin(t*4.1))))
+        if beat == 2:
+            return (int(355 + 72*p), int(1184 - 116*p))
+        return (427, 1068)
+    if prop == "box" and beat < 2 and action not in ("carry","pick","repair"):
+        if beat == 0:
+            return (int(410+270*p), 1190)
+        return (int(680-190*p), 1190)
+    if prop == "lantern" and beat == 3:
+        return (433, 1060)
+    return prop_position(action, t)
+
+
 def draw_duo(image, shot, t):
     """Return True only when the complete illustrated duo was drawn."""
     pair=scene_pair(shot)
@@ -321,11 +445,17 @@ def draw_duo(image, shot, t):
     prop=scene_prop(shot)
     pickup=action in {"pick","pickup","pick_up","carry","repair","hold"}
     progress=_ease((max(0,t)-.15)/.9) if pickup else 0.0
-    prop_pos=prop_position(action,t)
-    # Stable positions are large enough to read on mobile.
+    prop_pos=story_prop_position(shot,t)
+    beat=scene_phase(shot)
+    # Characters retain stable left/right identities, but the director changes
+    # their blocking as stakes rise and they react to a moving physical prop.
     for idx,name in enumerate(pair):
-        x=298 if idx==0 else 788
-        y=846
+        x=(290,330,308,280)[beat] if idx == 0 else (800,752,785,802)[beat]
+        y=(852,878,855,850)[beat]
+        if action in ("run","walk"):
+            x += int((1 if idx == 0 else -1)*52*_ease(max(0,t)/2.4))
+        elif action == "jump":
+            x += int((1 if idx == 0 else -1)*25*_ease(max(0,t)/1.8))
         hand_target=prop_pos if idx==0 and prop and pickup and progress>.25 else None
         actor_mood=mood
         if mood=="angry" and idx==0:

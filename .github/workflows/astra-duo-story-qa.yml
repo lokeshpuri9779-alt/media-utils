@@ -6,6 +6,9 @@ on:
       - astra_v2/pillow_duo_stories.py
       - astra_v2/story_forge.py
       - tests/test_pillow_duo_story_supply.py
+      - tests/test_pillow_story_direction.py
+      - studio_renderer.py
+      - astra_v2/pillow_duo_scene.py
       - astra_v2/story_action_motion.py
       - tests/test_story_action_motion.py
       - tests/test_astra_story_inventory.py
@@ -28,6 +31,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_story_action_motion.py' -v
           python -m unittest discover -s tests -p 'test_astra_story_inventory.py' -v
           python -m unittest discover -s tests -p 'test_pillow_duo_story_supply.py' -v
+          python -m unittest discover -s tests -p 'test_pillow_story_direction.py' -v
       - name: Render one complete voiced two-character Short
         run: |
           mkdir -p duo-preview
