@@ -23,6 +23,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Install story planning dependency
+        run: python -m pip install --disable-pip-version-check pillow
       - name: Restore previous history artifact
         env:
           GH_TOKEN: ${{ github.token }}
