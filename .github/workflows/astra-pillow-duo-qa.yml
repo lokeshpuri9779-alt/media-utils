@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - 'astra_v2/pillow_duo_scene.py'
+      - 'astra_v2/pillow_scene_direction.py'
+      - 'tests/test_pillow_scene_direction.py'
       - 'astra_v2/icon_visuals.py'
       - 'studio_renderer.py'
       - 'tests/test_pillow_duo_scene.py'
@@ -28,6 +30,7 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_astra_icon_visuals.py' -v
           python -m unittest discover -s tests -p 'test_pillow_duo_scene.py' -v
+          python -m unittest discover -s tests -p 'test_pillow_scene_direction.py' -v
           python -m unittest discover -s tests -p 'test_pillow_duo_continuity.py' -v
           python -m unittest discover -s tests -p 'test_pillow_duo_studio.py' -v
       - name: Render two-character motion artifact

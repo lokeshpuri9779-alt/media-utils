@@ -1,0 +1,187 @@
+"""Deterministic scene direction for the CPU-only Pillow duo renderer.
+
+Narrated locations drive a SMALL set of different illustrated environments.
+No network/media calls, no new engine, no overlays in caption/headline regions.
+"""
+from __future__ import annotations
+
+import hashlib
+import math
+import re
+
+GROUND_TOP = 1180
+
+SCENE_CUES = (
+    ("library", r"\b(?:library|bookshelf|shelves|bookcase|books?|pages?|reading|curtain)\b"),
+    ("harbor", r"\b(?:harbor|harbour|pier|dock|seawall|fishing boats?)\b"),
+    ("river", r"\b(?:river|stream|pond|water|floating|bank|inlet|flood|tide)\b"),
+    ("garden", r"\b(?:garden|flower|petal|greenhouse|soil|seed|plant|greenery)\b"),
+    ("village", r"\b(?:village|market|fountain|square|festival|picnic|street|stall)\b"),
+    ("meadow", r"\b(?:meadow|field|grassland|flat clearing)\b"),
+    ("hill", r"\b(?:hillside|hill|rocky|rocks?|winding path|ridge|mountain|slope)\b"),
+    ("winter", r"\b(?:winter|snow|icy|frost|frozen)\b"),
+    ("night", r"\b(?:night|moon|stars?|dark|midnight|shadow)\b"),
+    ("forest", r"\b(?:forest|woodland|woods|trees?|leaves|branch|oak)\b"),
+)
+
+
+def story_setting(shot):
+    """Choose environment from *this beat's* words rather than one generic set."""
+    text = " ".join(str(shot.get(k) or "") for k in
+                    ("speech", "visual_prompt", "headline")).lower()
+    for name, pattern in SCENE_CUES:
+        if re.search(pattern, text):
+            return name
+    return "forest"
+
+
+def _text_seed(shot):
+    source = " ".join(str(shot.get(k) or "") for k in
+                      ("speech", "headline"))
+    return int.from_bytes(hashlib.sha256(source.encode()).digest()[:4], "big")
+
+
+def _line(d, xy, color, width=5):
+    d.line(xy, fill=color, width=width, joint="curve")
+
+
+def draw_story_stage(d, shot, t):
+    """Background features only in x=55..1025, y=485..1370 stage bounds."""
+    setting = story_setting(shot)
+    seed = _text_seed(shot)
+    nighttime = setting == "night" or bool(re.search(
+        r"\b(?:midnight|moonlight|at night|after dark)\b",
+        str(shot.get("speech") or "").lower()))
+    sky = (74, 109, 153) if nighttime else (96, 157, 165)
+    ground = (41, 75, 88) if setting in ("river", "harbor") else (53, 100, 91)
+    # Midground silhouettes differ by location and follow the stated setting.
+    d.ellipse((530, 555, 765, 790), fill=(132, 163, 181) if nighttime else sky)
+    if setting in ("river", "harbor"):
+        for y, fill in [(1040,(54,115,151)),(1118,(49,130,155)),(1187,(45,112,137))]:
+            d.polygon([(60,y+40),(235,y+12),(460,y+42),
+                       (687,y+9),(1025,y+37),(1025,y+97),(60,y+97)],fill=fill)
+        for i in range(6):
+            x = 135+i*151
+            drift=int(8*math.sin(t*.9+i))
+            _line(d,[(x,1120+drift),(x+75,1120+drift)],(155,209,221),5)
+        if setting == "harbor":
+            d.polygon([(100,1105),(452,1105),(420,1158),(112,1158)],fill=(144,109,80))
+            for x in (120,275,430):
+                d.rectangle((x,1140,x+18,1270),fill=(108,86,71))
+            d.polygon([(750,990),(816,927),(882,990)],fill=(222,219,171))
+            d.polygon([(733,1070),(899,1070),(861,1112),(770,1112)],fill=(112,89,76))
+    elif setting == "library":
+        d.rounded_rectangle((98,540,445,1130),radius=12,fill=(95,83,91),outline=(166,138,111),width=9)
+        d.rounded_rectangle((635,540,989,1130),radius=12,fill=(95,83,91),outline=(166,138,111),width=9)
+        for shelf_x in (110,650):
+            for row in range(4):
+                yy=615+row*125
+                d.rectangle((shelf_x,yy+70,shelf_x+314,yy+82),fill=(182,136,87))
+                for i in range(11):
+                    x=shelf_x+10+i*26
+                    color=[(186,108,92),(106,155,147),(201,169,102),(142,120,165)][(i+row)%4]
+                    d.rectangle((x,yy,x+17,yy+70),fill=color)
+        d.rounded_rectangle((455,589,624,956),radius=65,fill=(124,166,189),outline=(229,202,170),width=10)
+        d.line((540,610,540,948),fill=(226,211,184),width=8)
+    elif setting in ("village",):
+        for i in range(4):
+            x=75+i*258
+            roof=690+(i%2)*44
+            d.rectangle((x,roof+95,x+224,1112),fill=(120,134,139))
+            d.polygon([(x-10,roof+95),(x+110,roof),(x+235,roof+95)],fill=(171,113,104))
+            d.rectangle((x+35,roof+149,x+103,roof+230),fill=(187,205,189))
+        if "fountain" in str(shot.get("speech") or "").lower():
+            d.ellipse((424,1025,657,1150),fill=(56,121,161))
+            d.line((540,1030,540,940),fill=(173,204,204),width=9)
+            d.arc((490,925,590,1030),185,355,fill=(160,210,234),width=8)
+    elif setting == "garden":
+        for i in range(3):
+            x=145+i*282
+            d.rounded_rectangle((x,1015,x+215,1140),radius=25,fill=(116,87,73))
+            for j in range(4):
+                fx=x+29+j*47
+                d.line((fx,1035,fx,962),fill=(101,178,113),width=7)
+                col=[(244,178,183),(248,214,114),(154,191,229)][(i+j)%3]
+                d.ellipse((fx-24,928,fx+24,976),fill=col)
+                d.ellipse((fx-8,946,fx+8,962),fill=(237,223,152))
+        for i in range(5):
+            d.ellipse((120+i*185,780+i%2*40,207+i*185,908+i%2*40),fill=(59,119,108))
+    else:
+        # Forest, night, hill, meadow and winter use genuinely different
+        # landmarks rather than a repeat of the same four triangles.
+        hill_fill = ((73,112,144) if setting == "winter"
+                     else (51,109,101) if setting == "meadow"
+                     else (66,113,113))
+        for i in range(3):
+            x=75+i*345
+            d.ellipse((x-95,890+i%2*50,x+415,1240+i%2*50),fill=hill_fill)
+        if setting == "hill":
+            d.polygon([(65,1177),(370,950),(540,1155),(820,880),(1025,1160),(1025,1197),(55,1197)],
+                      fill=(81,114,109))
+            for i in range(7):
+                x=155+i*125
+                d.ellipse((x-26,1124+(i%2)*22,x+29,1152+(i%2)*22),fill=(124,132,126))
+        elif setting in ("forest","night"):
+            for i in range(5):
+                x=95+i*211
+                h=790+(seed+i*19)%120
+                d.rectangle((x+22,h+172,x+55,1115),fill=(105,91,76))
+                d.polygon([(x-55,h+175),(x+37,h-10),(x+132,h+175)],fill=(38,104,103))
+                d.polygon([(x-42,h+105),(x+37,h-50),(x+118,h+105)],fill=(42,120,106))
+        elif setting == "winter":
+            for i in range(7):
+                x=100+i*140
+                d.ellipse((x-18,1092+i%2*20,x+26,1109+i%2*20),fill=(208,224,229))
+            for i in range(6):
+                x=170+i*142
+                d.ellipse((x,760+(i*47)%180,x+8,768+(i*47)%180),fill=(218,229,242))
+        elif setting == "meadow":
+            for i in range(16):
+                x=90+i*60
+                yy=1088+(i%3)*18
+                d.arc((x-25,yy-20,x+25,yy+20),195,340,fill=(107,181,121),width=5)
+    d.ellipse((65,1215,1025,1340),fill=ground)
+    d.ellipse((120,1235,975,1315),fill=(64,115,102) if setting!="harbor" else (51,110,117))
+    # Foreground micro-movement is subtle and secondary to the character rig.
+    for i in range(9):
+        x=120+(seed+i*137)%825
+        y=575+(i*79)%315
+        delta=int(4*math.sin(t*.8+i))
+        d.ellipse((x-3,y-3+delta,x+3,y+3+delta),fill=(230,218,168) if nighttime else (177,207,186))
+    return setting
+
+
+def actor_translation(action, t, index):
+    """Body translation is separate from limb gait, not global camera movement."""
+    if action not in ("run","walk"):
+        return 0
+    amplitude = 85 if action == "run" else 44
+    elapsed=max(0.0,min(float(t),2.4))/2.4
+    return int(amplitude*elapsed*(1 if index==0 else .55))
+
+
+def prop_trajectory(shot, t):
+    """A story object changes place according to the narrated action."""
+    speech=str(shot.get("speech") or "").lower()
+    role=str(shot.get("story_beat") or "").lower()
+    action=str(shot.get("story_action") or "").lower()
+    time=max(0,float(t))
+    progress=min(1,time/.95)
+    progress=progress*progress*(3-2*progress)
+    # When the twist explicitly catches the object, contact wins over the
+    # earlier rolling/drifting verb in the same spoken sentence.
+    if role in ("twist", "payoff") and action in ("carry","pick","repair","hold"):
+        return (int(540-110*progress),int(1216-161*progress)) if role=="twist" else (430,1055)
+    if re.search(r"\b(?:roll|rolled|rolling|runaway|bounced|bounce)\b",speech):
+        x=250+int(min(time,2.2)*205)
+        y=1180-int(45*abs(math.sin(time*4.4)))
+        return x,y
+    if re.search(r"\b(?:drift|drifted|floating|floated|current)\b",speech):
+        return 235+int(min(time,2.2)*177),1148+int(12*math.sin(time*3))
+    if role=="payoff" and action=="carry":
+        return (430,1055)
+    if action in ("carry","pick","repair","hold"):
+        return (int(540-110*progress),int(1216-161*progress))
+    if action=="throw":
+        return (int(490+335*progress),int(1150-180*math.sin(progress*math.pi)))
+    return (540,1216)
