@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 11,
+  "attempts": 12,
   "confirmed_today": 11,
-  "last_attempt_at": "2026-10-14T23:40:35.724446+00:00",
+  "last_attempt_at": "2026-10-14T23:46:25.643409+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -941,29 +941,40 @@
       "renderer": "studio-7.2.0"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "eGyQH3_6Mx8": {
+      "content_id": "rayvan-forge-59e60769aa3a8eeb",
+      "title": "The Fox and Cat's Runaway Ball",
+      "day": "2026-10-15",
+      "uploaded_at": "2026-10-14T23:46:27.246121+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.2.0"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T23:41:44.372202+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_preflight_at": "2026-10-14T23:45:36.853621+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T23:42:12.283477+00:00",
-    "early_tests": "failure",
-    "preflight_step": "skipped",
-    "render_due": "",
-    "job_status_before_persist": "failure",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "at": "2026-10-14T23:46:27.555886+00:00",
+    "early_tests": "success",
+    "preflight_step": "success",
+    "render_due": "true",
+    "job_status_before_persist": "success",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-14T19:48:51.586899+00:00",
   "reserved": {
@@ -1844,6 +1855,14 @@
     "rayvan-forge-85ec649e102a0c0a": {
       "at": "2026-10-14T23:40:35.724431+00:00",
       "title": "The Historian and the Hidden Staircase",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.2.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-59e60769aa3a8eeb": {
+      "at": "2026-10-14T23:46:25.643392+00:00",
+      "title": "The Fox and Cat's Runaway Ball",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.2.0",
