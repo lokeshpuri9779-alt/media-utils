@@ -7,12 +7,13 @@ from __future__ import annotations
 import argparse,hashlib,json,re,shutil
 from pathlib import Path
 from PIL import Image
+from experimental.background_cutout import remove_solid_background
 
 KINDS=("character","prop","background")
 MAX_BYTES=12*1024*1024
 MAX_PIXELS=16_000_000
 
-def import_asset(source,library="premium-assets",name=None,kind="prop"):
+def import_asset(source,library="premium-assets",name=None,kind="prop",auto_cutout=False):
     source=Path(source)
     if kind not in KINDS: raise ValueError("unsupported kind")
     if not source.is_file() or source.suffix.lower() not in (".png",".webp"):
@@ -25,9 +26,9 @@ def import_asset(source,library="premium-assets",name=None,kind="prop"):
     with Image.open(source) as im:
         w,h=im.size
         if w*h>MAX_PIXELS or min(w,h)<64: raise ValueError("unsupported image dimensions")
-        if kind in ("character","prop") and "A" not in im.getbands() and "transparency" not in im.info:
-            raise ValueError("characters and props require transparency; remove background first")
-        rgba=im.convert("RGBA")
+        if kind in ("character","prop") and "A" not in im.getbands() and "transparency" not in im.info and not auto_cutout:
+            raise ValueError("characters and props require transparency; use --auto-cutout for flat backgrounds")
+        rgba=remove_solid_background(im) if auto_cutout and kind in ("character","prop") and "A" not in im.getbands() and "transparency" not in im.info else im.convert("RGBA")
         if kind in ("character","prop"):
             alpha=rgba.getchannel("A")
             if alpha.getextrema()==(255,255): raise ValueError("image has no transparent pixels")
@@ -48,8 +49,9 @@ def main():
     p.add_argument("source")
     p.add_argument("--library",default="premium-assets")
     p.add_argument("--name")
+    p.add_argument("--auto-cutout",action="store_true")
     p.add_argument("--kind",choices=KINDS,default="prop")
     a=p.parse_args()
-    print(json.dumps(import_asset(a.source,a.library,a.name,a.kind),indent=2))
+    print(json.dumps(import_asset(a.source,a.library,a.name,a.kind,a.auto_cutout),indent=2))
 
 if __name__=="__main__":main()
