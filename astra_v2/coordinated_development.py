@@ -359,7 +359,7 @@ def frame(scene, t):
                     sway += int(44 * math.sin(min(t, 1.8) / 1.8 * math.pi / 2))
                     sway += int(12 * stride)
                 elif named_action == "jump":
-                    # Vertical displacement in stage coordinates.
+                    # Vertical displacement applied to the complete actor layer.
                     actor_t += 0.18
                 else:
                     sway += int(24 * stride)
@@ -401,7 +401,9 @@ def frame(scene, t):
                     actor_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
                     crouch = int(155 * (1.0 - lift_progress)) if named_action == "carry" and actor_index == 0 else 0
                     place_x = int(slot + sway + (carry_shift if actor_index == 0 else 0) - new_w / 2)
-                    place_y = int(cy + crouch - new_h / 2)
+                    jump_offset = int(95 * max(0.0, math.sin(t * 3.4 + phase))) if named_action == "jump" else 0
+                    dance_offset = int(22 * math.sin(t * 5.2 + phase)) if named_action == "dance" else 0
+                    place_y = int(cy + crouch - new_h / 2 - jump_offset + dance_offset)
                     if held_action and actor_index == 0:
                         native_shoulders = tuple(carry_shoulder_anchor(
                             actor["character_id"], actor_t, 540, 1060, side,
