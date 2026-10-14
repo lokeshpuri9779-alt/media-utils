@@ -258,6 +258,8 @@ jobs:
       - name: Render offline comedy pilot
         run: |
           python -m astra_v2.coordinated_development --comedy-pilot --seed astra-comedy-pilot --fps 24 --seconds-per-scene 3 --video --output verification-output/comedy-pilot
+      - name: Test sustained-motion quality diagnostics
+        run: python -m unittest discover -s tests -p 'test_astra_motion_quality_diagnostics.py' -v
       - name: Audit 24fps per-scene motion
         run: |
           python - <<'PY'
