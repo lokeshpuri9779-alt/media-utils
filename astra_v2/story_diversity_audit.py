@@ -56,10 +56,12 @@ def similarity(a, b):
     """Blend narration-token Jaccard and action-sequence similarity."""
     ta, tb = story_tokens(a), story_tokens(b)
     lexical = len(ta & tb) / len(ta | tb) if ta | tb else 1.0
+    # Detect repeated plot scaffolds even when the narration uses different words.
+    same_structure = fingerprint(a) == fingerprint(b)
     aa = [s.get("action") for s in a.get("scenes", [])]
     ab = [s.get("action") for s in b.get("scenes", [])]
     actions = sum(x == y for x, y in zip(aa, ab)) / max(len(aa), len(ab), 1)
-    return round(0.8 * lexical + 0.2 * actions, 4)
+    return 1.0 if same_structure else round(0.8 * lexical + 0.2 * actions, 4)
 
 def audit_history(stories, history=(), threshold=0.82):
     """Compare candidates against prior story plans; caller manages history storage."""
