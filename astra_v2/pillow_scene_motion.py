@@ -23,7 +23,7 @@ def camera_motion(frame: Image.Image, t: float, *, strength: float = 0.012) -> I
     phase=(1-math.cos(2*math.pi*(t % 7.0)/7.0))/2
     zoom=1+strength*phase
     new_size=(math.ceil(width*zoom),math.ceil(height*zoom))
-    scaled=frame.resize(new_size,Image.Resampling.BICUBIC)
+    scaled=frame.resize(new_size,Image.Resampling.BILINEAR)
     left=(new_size[0]-width)//2
     top=(new_size[1]-height)//2
     return scaled.crop((left,top,left+width,top+height))
