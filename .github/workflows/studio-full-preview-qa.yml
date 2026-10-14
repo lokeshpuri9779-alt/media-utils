@@ -1,10 +1,23 @@
 name: ASTRA Full Studio Preview QA
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'tests/verify_studio_preview.py'
+      - '.github/workflows/studio-full-preview-qa.yml'
 permissions:
   contents: read
 jobs:
+  syntax-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m py_compile tests/verify_studio_preview.py studio_renderer.py
   full-studio-preview:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     timeout-minutes: 40
     env:
