@@ -65,6 +65,24 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_astra_locomotion.py' -v
       - name: Verify distinct environments
         run: python -m unittest discover -s tests -p 'test_astra_story_environments.py' -v
+      - name: Audit cross-episode story repetition offline
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from tempfile import TemporaryDirectory
+          from astra_v2.story_batch import build_story_batch
+          from astra_v2.story_history import evaluate_and_record, read_history
+          with TemporaryDirectory() as directory:
+              history = Path(directory) / 'history.jsonl'
+              first = build_story_batch(episode=1)['stories']
+              second = build_story_batch(episode=2)['stories']
+              a = evaluate_and_record(first, history)
+              b = evaluate_and_record(second, history)
+              assert len(read_history(history)) == a['recorded'] + b['recorded']
+              assert not a['publication_allowed'] and not b['publication_allowed']
+              print(json.dumps({'episode_1': a['recorded'], 'episode_2': b['recorded'], 'episode_2_near_duplicates': b['near_duplicates']}))
+          PY
       - name: Test persistent offline story history
         run: python -m unittest discover -s tests -p 'test_astra_story_history.py' -v
       - name: Test story history and near-duplicate detection
