@@ -6,7 +6,7 @@ generic robot/door icons for unrelated fiction.
 import math
 import re
 from PIL import ImageDraw
-from astra_v2.story_action_motion import offset
+from astra_v2.story_action_motion import offset as action_offset
 
 SUBJECTS = (
     ("fox", r"\bfox\b|\bfoxes\b"),
@@ -78,7 +78,7 @@ def draw_subject(image, subject, t, accent, action='idle'):
     """Return True when a bespoke subject was drawn; False for unknown subjects."""
     if subject not in {x[0] for x in SUBJECTS}:
         return False
-    motion_x, motion_y = offset(action, t)
+    motion_x, motion_y = action_offset(action, t)
     # Dedicated character silhouettes, not aliases of unrelated animals.
     if subject in {"fox", "otter", "owl", "duck", "firefly", "squirrel", "mouse", "crab"}:
         d = ImageDraw.Draw(image)
