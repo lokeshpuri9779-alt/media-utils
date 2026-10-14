@@ -330,12 +330,19 @@ def frame(scene, t):
             if named_action == 'carry' and actor_index == 1:
                 sway += int(14 * max(0.0, math.sin((t - 0.35) * 3.1)))
             if named_action == 'celebrate' and actor_index == 0:
-                sway += int(10 * math.sin(t * 7.0))
+                # Anticipation, bounce and settle: a damped oscillation avoids
+                # perpetual mechanical shaking in the final hero pose.
+                elapsed = max(0.0, t - 0.12)
+                sway += int(18 * math.exp(-1.35 * elapsed) *
+                            math.sin(9.0 * elapsed))
             actor_t = t + phase
             if named_action == "approach":
                 sway += int((22 if actor_index == 0 else 8) * approach)
             elif named_action == "react":
-                sway += int(7 * math.sin(t * 5.2 + phase))
+                # Brief recoil followed by a settled hold for readability.
+                recoil = max(0.0, t - 0.18)
+                sway += int(16 * math.exp(-2.0 * recoil) *
+                            math.sin(8.0 * recoil + phase))
             elif named_action == "celebrate":
                 sway += int(12 * math.sin(t * 4.0 + phase))
             if actor_index == 0:
