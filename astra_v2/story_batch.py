@@ -7,7 +7,7 @@ import hashlib
 import json
 from astra_v2.coordinated_development import build_ensemble_plan, verify_story_cast
 from astra_v2.character_object_catalog import OBJECTS, prop
-from astra_v2.story_composition import compose
+from astra_v2.story_composition import compose, action_for_beat
 
 TEMPLATES = (
     {"title": "The Missing Cake", "cast": ("cat", "dog"), "prop": "cake",
@@ -82,7 +82,8 @@ def build_story_batch(seed="astra-story-rehearsal", limit=4, episode=1, composed
         plan = build_ensemble_plan(story_seed, [list(template["cast"]) for _ in ACTIONS])
         prop_index = OBJECTS.index(template["prop"]) * 50
         beats = compose(template, seed, episode) if composed else template["beats"]
-        for scene, action, narration in zip(plan["scenes"], STORY_ACTIONS[template["title"]], beats):
+        actions = tuple(action_for_beat(j, narration) for j, narration in enumerate(beats)) if composed else STORY_ACTIONS[template["title"]]
+        for scene, action, narration in zip(plan["scenes"], actions, beats):
             scene.update(object_id=prop_index, object=prop(prop_index),
                          action=action, narration=narration, visual_style="storybook",
                          location=template["location"], genre=template["genre"],
