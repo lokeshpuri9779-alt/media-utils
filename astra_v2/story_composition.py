@@ -20,6 +20,14 @@ SCENARIOS = (
      "delivers the message before sunrise", "A distant bell rings in thanks."),
     ("a glowing {prop}", "follows the light from the {prop}", "a doorway reflected in the {prop}",
      "opens a passage to the garden", "The garden blooms overnight."),
+    ("a singing {prop}", "records the melody of the {prop}", "a rhythm matching the village bells",
+     "conducts a midnight concert", "The village wakes to music."),
+    ("a shrinking {prop}", "measures the changing {prop}", "a tiny doorway beneath the table",
+     "guides an ant colony through the doorway", "The ants build a colorful monument."),
+    ("a floating {prop}", "tests why the {prop} rises", "a warm current above the chimney",
+     "builds a safe landing platform", "The neighbors cheer from their windows."),
+    ("a whispering {prop}", "listens carefully to the {prop}", "a forgotten name in the whisper",
+     "reunites two old pen pals", "A handwritten letter arrives at dawn."),
 )
 
 
