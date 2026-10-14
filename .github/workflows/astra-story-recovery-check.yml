@@ -1,0 +1,121 @@
+name: ASTRA Story Recovery Check
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - astra_v2/story_forge.py
+      - tests/test_story_forge_authored_additions.py
+      - .github/workflows/astra-story-recovery-check.yml
+  push:
+    branches:
+      - proposal/story-supply-recovery-oct15
+    paths:
+      - astra_v2/story_forge.py
+      - tests/test_story_forge_authored_additions.py
+      - .github/workflows/astra-story-recovery-check.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  candidate-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install production test dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Verify authored stories enter quality-gated catalog
+        run: |
+          python -m unittest discover -s tests -p 'test_story_forge_authored_additions.py' -v
+      - name: Validate production controller and publication policy regression tests
+        run: |
+          python - <<'PY'
+          import unittest
+          patterns = ['test_astra_v2.py', 'test_astra_publication_quality.py']
+          found = 0
+          for pattern in patterns:
+              suite = unittest.defaultTestLoader.discover('tests', pattern=pattern)
+              count = suite.countTestCases()
+              print(f'{pattern}: {count} discovered tests', flush=True)
+              if count:
+                  result = unittest.TextTestRunner(verbosity=2).run(suite)
+                  if not result.wasSuccessful():
+                      raise SystemExit(f'{pattern} failed')
+                  found += count
+          if found == 0:
+              raise SystemExit('No production controller or publication policy tests discovered')
+          PY
+      - name: Check story duration preflight for all recovery stories
+        run: |
+          python - <<'PY'
+          from astra_v2.story_forge import catalog
+          from astra_v2.creative import script_duration_preflight
+          from tests.test_story_forge_authored_additions import EXPECTED
+          stories = [story for story in catalog() if story["title"] in EXPECTED]
+          assert len(stories) == len(EXPECTED), "Recovery catalog incomplete"
+          failures = [story["title"] for story in stories if not script_duration_preflight(story)]
+          print(f"Duration preflight: {len(stories) - len(failures)}/{len(stories)} accepted")
+          if failures:
+              raise SystemExit("Rejected: " + ", ".join(failures))
+          PY
+      - name: Prepare one production story for render smoke test
+        run: |
+          python - <<'PY'
+          from astra_v2.story_forge import catalog
+          from studio_renderer import make_plan, creative_quality_gate, _repair_plan
+          story = next(s for s in catalog() if s["title"] == "The Raccoon and the Midnight Bakery")
+          plan = make_plan(story)
+          try:
+              creative_quality_gate(story, plan)
+          except RuntimeError:
+              plan = _repair_plan(story, plan, 1)
+              creative_quality_gate(story, plan)
+          print("Story plan accepted:", story["title"], "scenes:", len(plan))
+          PY
+      - name: Confirm original story publication policy tests
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_publication_quality.py' -v
+
+  render-validation:
+    needs: candidate-validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install renderer dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Render one complete recovery Short and enforce audiovisual QA
+        timeout-minutes: 20
+        run: |
+          mkdir -p recovery-render
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from astra_v2.story_forge import catalog
+          from studio_renderer import render_short
+          from quality_lab import evaluate_studio_render
+          story = next(s for s in catalog() if s["title"] == "The Raccoon and the Midnight Bakery")
+          output = Path("recovery-render/recovery-short.mp4")
+          report = render_short(story, output)
+          decision = evaluate_studio_render(story, report, video_path=output)
+          Path("recovery-render/qa.json").write_text(json.dumps(decision, indent=2, default=str))
+          print("RENDER_OUTPUT_BYTES", output.stat().st_size)
+          print("RENDER_QA_PASS", decision.get("pass"))
+          if not decision.get("pass"):
+              raise SystemExit("Rendered video failed audiovisual/director QA")
+          PY
+      - name: Save render and QA evidence (never publish)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-recovery-render-evidence
+          path: recovery-render/
+          if-no-files-found: warn
+          retention-days: 3
