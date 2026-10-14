@@ -287,6 +287,44 @@ def frame(scene, t):
     for k in range(4):
         x = (k * 153 + 47 + drift // 2) % (W + 90) - 45
         d.polygon([(x - 28, 635), (x, 435 + 23 * (k % 2)), (x + 29, 635)], fill=(27, 49, 62))
+    # Lightweight, location-specific silhouettes for offline story rehearsal.
+    # Render behind actors and props; no external assets or GPU required.
+    location = scene.get("location")
+    if location == "bakery":
+        d.rounded_rectangle((35, 300, 190, 590), radius=14, fill=(122, 74, 65))
+        d.rectangle((48, 323, 177, 359), fill=(235, 184, 115))
+        for shelf_y in (402, 494):
+            d.rectangle((47, shelf_y, 178, shelf_y + 9), fill=(226, 173, 102))
+            for pastry_x in (75, 120, 158):
+                d.ellipse((pastry_x - 17, shelf_y - 30, pastry_x + 17, shelf_y + 1),
+                          fill=(225, 156, 94))
+        d.rounded_rectangle((350, 340, 510, 540), radius=12, fill=(148, 92, 79))
+        d.rectangle((365, 355, 495, 465), fill=(242, 206, 142))
+    elif location == "workshop":
+        d.rectangle((35, 335, 205, 565), fill=(49, 73, 89))
+        for gx in (72, 125, 175):
+            for gy in (365, 435, 510):
+                d.ellipse((gx - 17, gy - 17, gx + 17, gy + 17),
+                          outline=(160, 193, 200), width=5)
+        d.rectangle((365, 415, 515, 560), fill=(76, 94, 105))
+        for xx in (390, 445, 495):
+            d.line((xx, 430, xx, 545), fill=(166, 181, 186), width=5)
+    elif location == "park":
+        for tx in (65, 465):
+            d.rectangle((tx - 13, 385, tx + 13, 635), fill=(91, 70, 54))
+            for yy, rr in ((390, 82), (340, 61)):
+                d.ellipse((tx - rr, yy - rr, tx + rr, yy + rr),
+                          fill=(55, 119, 79))
+        d.ellipse((240, 190, 315, 265), fill=(241, 213, 132))
+        d.line((0, 610, W, 610), fill=(93, 145, 98), width=7)
+    elif location == "observatory":
+        d.ellipse((355, 235, 525, 405), fill=(79, 88, 132))
+        d.rectangle((370, 340, 510, 585), fill=(57, 67, 109))
+        d.polygon([(355, 355), (440, 270), (525, 355)], fill=(112, 123, 167))
+        for sx, sy in ((70, 210), (155, 310), (270, 170), (325, 365), (485, 145)):
+            d.ellipse((sx - 3, sy - 3, sx + 3, sy + 3), fill=(245, 236, 197))
+        d.line((115, 535, 215, 425), fill=(169, 187, 202), width=14)
+        d.ellipse((175, 395, 235, 455), outline=(198, 208, 220), width=8)
     # Stage shared by both actors, rather than two disconnected panels.
     d.ellipse((-160, 575, 710, 940), fill=(28, 43, 61))
     d.ellipse((45, 710, 495, 785), fill=(22, 31, 45))
