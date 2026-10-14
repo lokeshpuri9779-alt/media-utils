@@ -14,6 +14,12 @@ SCENARIOS = (
      "carries the {prop} safely home", "Everyone celebrates the rescue."),
     ("a misplaced {prop}", "follows clues to the {prop}", "the {prop} near a helpful stranger",
      "returns the {prop} to its owner", "The friends celebrate finding its owner."),
+    ("an enchanted {prop}", "tests the strange {prop}", "a map appearing on the {prop}",
+     "uses the map to guide a traveler", "The traveler waves goodbye."),
+    ("a frozen {prop}", "warms the icy {prop}", "a hidden message inside the {prop}",
+     "delivers the message before sunrise", "A distant bell rings in thanks."),
+    ("a glowing {prop}", "follows the light from the {prop}", "a doorway reflected in the {prop}",
+     "opens a passage to the garden", "The garden blooms overnight."),
 )
 
 
