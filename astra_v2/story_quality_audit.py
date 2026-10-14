@@ -1,4 +1,5 @@
 """Offline media quality evidence; never grants publishing permission."""
+import hashlib
 import json
 import subprocess
 from pathlib import Path
@@ -21,7 +22,16 @@ def audit_story(output, expected_seconds=10):
                float(duration[3])) if duration else None
     manifest_path = output / "production-manifest.json"
     manifest = json.loads(manifest_path.read_text()) if manifest_path.is_file() else {}
+    asset_hashes_match = bool(manifest.get("assets"))
+    for filename, metadata in manifest.get("assets", {}).items():
+        asset = output / filename
+        if not asset.is_file() or asset.stat().st_size != metadata.get("bytes"):
+            asset_hashes_match = False
+            continue
+        if hashlib.sha256(asset.read_bytes()).hexdigest() != metadata.get("sha256"):
+            asset_hashes_match = False
     checks = {
+        "asset_hashes_match": asset_hashes_match,
         "production_manifest": manifest.get("continuity_passed") is True and
                                manifest.get("publication_allowed") is False,
         "assets_checksums_present": all(
