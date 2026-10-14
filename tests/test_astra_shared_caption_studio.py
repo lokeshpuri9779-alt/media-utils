@@ -9,6 +9,8 @@ class SharedStudioIntegrationTests(unittest.TestCase):
         stories = studio_renderer._story_plan({
             "genre": "fiction", "content_id": "caption-integration-smoke",
             "title": "The surprise", "topic": "A fox finds a gift",
+            "question": "What is in the gift?",
+            "answer": "A duck jumps out!",
         })
         self.assertTrue(stories)
         shot = dict(stories[0])
