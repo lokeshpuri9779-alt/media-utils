@@ -16,6 +16,7 @@ on:
     paths:
       - 'astra_v2/render_story_batch.py'
       - 'astra_v2/story_batch.py'
+      - 'astra_v2/story_diversity_audit.py'
       - 'astra_v2/story_composition.py'
       - 'tests/test_astra_story_composition.py'
       - 'astra_v2/coordinated_development.py'
@@ -61,6 +62,16 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_astra_locomotion.py' -v
       - name: Verify distinct environments
         run: python -m unittest discover -s tests -p 'test_astra_story_environments.py' -v
+      - name: Verify story diversity and continuity
+        run: |
+          python - <<'PY'
+          from astra_v2.story_batch import build_story_batch
+          from astra_v2.story_diversity_audit import audit
+          result = audit(build_story_batch(episode=int('${{ github.event.inputs.episode || '1' }}'))['stories'])
+          assert result['structural_duplicates'] == 0, result
+          assert all(r['continuity_ok'] and r['repair_sequence_ok'] for r in result['results']), result
+          assert result['publication_allowed'] is False
+          PY
       - name: Render one story independently
         run: |
           python -m astra_v2.render_story_batch --index ${{ matrix.story }} --episode ${{ github.event.inputs.episode || '1' }} ${{ github.event.inputs.authored == 'true' && '--authored' || '' }} --fps 8 --seconds-per-scene 2 --output verification-output/story-${{ matrix.story }}
