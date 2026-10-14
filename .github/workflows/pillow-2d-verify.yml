@@ -1,0 +1,32 @@
+name: Pillow 2D isolated verification
+on:
+  push:
+    branches:
+      - experiment/pillow-2d-optimized
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Pillow
+        run: python -m pip install 'Pillow>=10,<12'
+      - name: Unit tests
+        run: python -m unittest discover -s tests -p 'test_pillow_2d_engine.py' -v
+      - name: Render isolated MP4
+        run: |
+          mkdir -p /tmp/astra-pillow
+          python -c "from experimental.pillow_2d_engine import render_mp4; render_mp4('/tmp/astra-pillow/preview.mp4',duration=3,fps=24)"
+          ffprobe -v error -show_entries stream=width,height,nb_frames,r_frame_rate -of json /tmp/astra-pillow/preview.mp4
+      - name: Upload preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: pillow-2d-preview
+          path: /tmp/astra-pillow/preview.mp4
+          retention-days: 3
