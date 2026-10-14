@@ -2,6 +2,11 @@ name: ASTRA parallel story rehearsal (offline)
 on:
   workflow_dispatch:
     inputs:
+      composed:
+        description: 'Use experimental rule-based story composition'
+        required: false
+        type: boolean
+        default: false
       episode:
         description: 'Offline episode number (1-100000)'
         required: false
@@ -11,6 +16,8 @@ on:
     paths:
       - 'astra_v2/render_story_batch.py'
       - 'astra_v2/story_batch.py'
+      - 'astra_v2/story_composition.py'
+      - 'tests/test_astra_story_composition.py'
       - 'astra_v2/coordinated_development.py'
       - 'astra_v2/story_quality_audit.py'
       - 'astra_v2/story_subtitles.py'
@@ -46,6 +53,8 @@ jobs:
           python -m pip install --disable-pip-version-check pillow imageio-ffmpeg
       - name: Test story batch contracts
         run: python -m unittest discover -s tests -p 'test_astra_story_batch.py' -v
+      - name: Verify experimental story composition
+        run: python -m unittest discover -s tests -p 'test_astra_story_composition.py' -v
       - name: Verify scene and cast continuity
         run: python -m unittest discover -s tests -p 'test_astra_story_manifest.py' -v
       - name: Verify new locomotion cues
@@ -54,7 +63,7 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_astra_story_environments.py' -v
       - name: Render one story independently
         run: |
-          python -m astra_v2.render_story_batch --index ${{ matrix.story }} --episode ${{ github.event.inputs.episode || '1' }} --fps 8 --seconds-per-scene 2 --output verification-output/story-${{ matrix.story }}
+          python -m astra_v2.render_story_batch --index ${{ matrix.story }} --episode ${{ github.event.inputs.episode || '1' }} ${{ github.event.inputs.composed == 'true' && '--composed' || '' }} --fps 8 --seconds-per-scene 2 --output verification-output/story-${{ matrix.story }}
       - name: Validate AAC MP4 and offline gate
         run: |
           python - <<'PY'
