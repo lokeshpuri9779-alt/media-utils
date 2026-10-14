@@ -16,12 +16,11 @@ class LocomotionTests(unittest.TestCase):
 
     def test_full_size_actor_jumps_vertically(self):
         """Regression: single-member ensemble previously lacked jump offset."""
-        from PIL import ImageChops
         plan = build_ensemble_plan("solo-jump-check", [["cat"]])
         scene = plan["scenes"][0]
         scene.update(action="jump", visual_style="storybook")
         # Hold background time fixed by comparing jump against an otherwise
-        # identical idle scene at the same instant. This isolates the authored
+        # identical grounded scene at the same instant. This isolates the authored
         # movement cue from animated environmental elements.
         t = 0.45
         airborne = frame(scene, t)
