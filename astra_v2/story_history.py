@@ -31,3 +31,26 @@ def evaluate_and_record(stories, path, threshold=0.82):
             for story in accepted:
                 handle.write(json.dumps(story, sort_keys=True) + "\n")
     return {**result, "recorded": len(accepted), "publication_allowed": False, "quality_approved": False}
+
+
+def select_novel_stories(candidate_batches, path, limit=4, threshold=0.82):
+    """Select novel offline plans from multiple candidate batches before recording.
+
+    Never relax the novelty threshold to fill a quota; return fewer stories instead.
+    """
+    if not isinstance(limit, int) or limit < 1:
+        raise ValueError("limit must be positive")
+    previous = read_history(path)
+    selected = []
+    considered = 0
+    for batch in candidate_batches:
+        for story in batch:
+            considered += 1
+            if not audit_history([story], history=[*previous, *selected],
+                                 threshold=threshold)["results"][0]["near_duplicate"]:
+                selected.append(story)
+                if len(selected) == limit:
+                    return {"stories": selected, "considered": considered,
+                            "shortfall": 0, "publication_allowed": False}
+    return {"stories": selected, "considered": considered,
+            "shortfall": limit - len(selected), "publication_allowed": False}
