@@ -2,6 +2,8 @@ import unittest
 from astra_v2.story_batch import build_story_batch
 from astra_v2.story_composition import action_for_beat
 from astra_v2.story_batch_audio import NOTES
+from astra_v2.coordinated_development import frame
+from PIL import ImageChops
 
 class CompositionTests(unittest.TestCase):
     def test_coherent_five_beats_and_safety(self):
@@ -13,6 +15,15 @@ class CompositionTests(unittest.TestCase):
             self.assertTrue(all(s["narration"].endswith(".") for s in plan["scenes"]))
             self.assertFalse(plan["publication_allowed"])
             self.assertFalse(plan["quality_approved"])
+
+    def test_object_condition_changes_render(self):
+        batch = build_story_batch("visual-condition", limit=8, composed=True)
+        plan = next((p for p in batch["stories"] if any(s["action"] == "repair" for s in p["scenes"])), None)
+        self.assertIsNotNone(plan)
+        scene = next(s for s in plan["scenes"] if s["action"] == "repair")
+        intact = dict(scene, object_condition_before="repaired")
+        damaged = dict(scene, object_condition_before="damaged")
+        self.assertIsNotNone(ImageChops.difference(frame(intact, 0.2), frame(damaged, 0.2)).getbbox())
 
     def test_repair_state_persists(self):
         batch = build_story_batch("state-check", limit=8, composed=True)
