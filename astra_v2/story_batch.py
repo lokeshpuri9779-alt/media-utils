@@ -10,19 +10,19 @@ from astra_v2.character_object_catalog import OBJECTS, prop
 
 TEMPLATES = (
     {"title": "The Missing Cake", "cast": ("cat", "dog"), "prop": "cake",
-     "beats": ("The cat discovers a missing cake.", "The dog points at the crumbs.",
+     "genre": "mystery", "location": "bakery", "beats": ("The cat discovers a missing cake.", "The dog points at the crumbs.",
                "The cat follows the trail.", "The dog reacts to the surprise.",
                "The cat celebrates the discovery.")},
     {"title": "Robot's Lost Key", "cast": ("robot", "mouse"), "prop": "key",
-     "beats": ("The robot searches for a lost key.", "The mouse points at a clue.",
+     "genre": "adventure", "location": "workshop", "beats": ("The robot searches for a lost key.", "The mouse points at a clue.",
                "The robot carries the key.", "The mouse reacts in disbelief.",
                "The robot celebrates the recovery.")},
     {"title": "The Umbrella Mix-up", "cast": ("bear", "frog"), "prop": "umbrella",
-     "beats": ("The bear finds a mysterious umbrella.", "The frog points at it.",
+     "genre": "slapstick", "location": "park", "beats": ("The bear finds a mysterious umbrella.", "The frog points at it.",
                "The bear carries the umbrella.", "The frog reacts to the mix-up.",
                "The bear celebrates the rescue.")},
     {"title": "The Alien's Telescope", "cast": ("alien", "owl"), "prop": "telescope",
-     "beats": ("The alien discovers a telescope.", "The owl points to the stars.",
+     "genre": "discovery", "location": "observatory", "beats": ("The alien discovers a telescope.", "The owl points to the stars.",
                "The alien carries the telescope.", "The owl reacts to the view.",
                "The alien celebrates the discovery.")},
 )
@@ -46,7 +46,7 @@ def build_story_batch(seed="astra-story-rehearsal", limit=4):
         for scene, action, narration in zip(plan["scenes"], ACTIONS, template["beats"]):
             scene.update(object_id=prop_index, object=prop(prop_index),
                          action=action, narration=narration, visual_style="storybook")
-        plan.update(title=template["title"], pilot_type="offline_story_batch",
+        plan.update(title=template["title"], genre=template["genre"], location=template["location"], pilot_type="offline_story_batch",
                     publication_allowed=False, quality_approved=False)
         verify_story_cast(plan)
         stories.append(plan)
