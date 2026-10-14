@@ -11,6 +11,7 @@ class SharedStudioIntegrationTests(unittest.TestCase):
             "title": "The surprise", "topic": "A fox finds a gift",
             "question": "What is in the gift?",
             "answer": "A duck jumps out!",
+            "hook": "A strange box appears",
         })
         self.assertTrue(stories)
         shot = dict(stories[0])
