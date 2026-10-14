@@ -226,6 +226,9 @@ jobs:
       - name: Verify original soundtrack synthesis and cue timing
         run: |
           python -m unittest discover -s tests -p 'test_astra_comedy_sound.py' -v
+      - name: Test cinematic camera, dissolves and timed finale punchline
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_cinematic_comedy.py' -v
       - name: Render offline comedy pilot
         run: |
           python -m astra_v2.coordinated_development --comedy-pilot --seed astra-comedy-pilot --fps 12 --seconds-per-scene 3 --video --output verification-output/comedy-pilot
@@ -237,18 +240,31 @@ jobs:
           from PIL import Image, ImageChops
           root = Path('verification-output/comedy-pilot')
           required = ('preview.mp4', 'storyboard.png', 'pickup-motion-sheet.png',
-                      'report.json', 'soundtrack.wav', 'sound-cues.json')
+                      'report.json', 'soundtrack.wav', 'sound-cues.json',
+                      'cinematic-beats.png')
           assert all((root / name).is_file() for name in required), 'missing render or pickup review output'
           report = json.loads((root / 'report.json').read_text())
           assert report['publication_allowed'] is False
           assert report['quality_approved'] is False
           assert not report['motion_failures'], report['motion_failures']
           assert not report['visually_duplicate_scene_openings']
+          assert report.get('cinematic_camera') is True
+          assert report.get('duck_surprise') is True
+          assert report.get('scene_dissolves') is True
+          beats = Image.open(root / 'cinematic-beats.png').convert('RGB')
+          assert beats.size == (1350, 960), beats.size
+          assert ImageChops.difference(
+              beats.crop((1080, 0, 1350, 480)),
+              beats.crop((1080, 480, 1350, 960))
+          ).getbbox() is not None, 'finale beat lacks progression'
           assert report.get('audio_codec') == 'aac'
           assert report.get('audio_origin') == 'deterministic-original-synthesis'
           cues = json.loads((root / 'sound-cues.json').read_text())
           assert cues['licensed_audio_assets_used'] is False
-          assert cues['cue_count'] >= 10
+          assert cues['cue_count'] >= 14
+          assert len([cue for cue in cues['cues']
+                      if cue['event'] == 'duck_honk' and
+                      cue['scene'] == 5 and 13.4 < cue['at_seconds'] < 14.5]) == 1
           assert report['original_audio_cues'] == cues['cue_count']
           sheet = Image.open(root / 'pickup-motion-sheet.png').convert('RGB')
           assert sheet.width >= 1350 and sheet.height >= 480, sheet.size
@@ -285,6 +301,7 @@ jobs:
           (root / 'automated-validation.json').write_text(json.dumps({
               'render_verified': True, 'pickup_sequence_changed': True,
               'audio_verified': True, 'audio_origin': 'original_synthesis',
+              'cinematic_beats_verified': True, 'duck_gag_sound_verified': True,
               'publication_allowed': False, 'creative_approval': 'pending'
           }, indent=2))
           PY
