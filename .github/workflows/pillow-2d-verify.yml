@@ -19,16 +19,19 @@ jobs:
         run: python -m pip install 'Pillow>=10,<12'
       - name: Unit tests
         run: python -m unittest discover -s tests -p 'test_pillow_2d_engine.py' -v
-      - name: Install FFmpeg
+      - name: Install bundled FFmpeg (no apt)
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y ffmpeg
-          ffmpeg -version | head -n 1
+          python -m pip install 'imageio-ffmpeg>=0.5,<1'
+          mkdir -p /tmp/astra-bin
+          python -c "import imageio_ffmpeg, os; os.symlink(imageio_ffmpeg.get_ffmpeg_exe(), '/tmp/astra-bin/ffmpeg')"
+          echo '/tmp/astra-bin' >> "$GITHUB_PATH"
+          /tmp/astra-bin/ffmpeg -version | head -n 1
       - name: Render isolated MP4
         run: |
           mkdir -p /tmp/astra-pillow
           python -c "from experimental.pillow_2d_engine import render_mp4; render_mp4('/tmp/astra-pillow/preview.mp4',duration=3,fps=24)"
-          ffprobe -v error -show_entries stream=width,height,nb_frames,r_frame_rate -of json /tmp/astra-pillow/preview.mp4
+          test -s /tmp/astra-pillow/preview.mp4
+          ffmpeg -hide_banner -i /tmp/astra-pillow/preview.mp4 -f null - 2>&1 | tail -n 8
       - name: Benchmark frame rendering
         run: |
           python -c "from experimental.benchmark_pillow_2d import benchmark; benchmark('/tmp/astra-pillow/benchmark.json')"
