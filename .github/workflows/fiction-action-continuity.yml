@@ -1,0 +1,20 @@
+name: ASTRA Fiction Action Continuity
+on:
+  pull_request:
+    paths:
+      - 'astra_v2/story_action_motion.py'
+      - 'tests/test_fiction_action_continuity.py'
+      - '.github/workflows/fiction-action-continuity.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  fiction-action-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest tests.test_fiction_action_continuity -v
