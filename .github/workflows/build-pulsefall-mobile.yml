@@ -7979,6 +7979,38 @@ jobs:
           "$GODOT" --headless --verbose --path game --export-debug "Android AAB" "$GITHUB_WORKSPACE/android-artifacts/PULSEFALL_MOBILE_ALPHA.aab" 2>&1 | tee diagnostics/android-aab-export.log
           test -s android-artifacts/PULSEFALL_MOBILE_ALPHA.aab
 
+      - name: Validate AAB exporter cleanup
+        shell: bash
+        run: |
+          set -euxo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          def clean_export(log):
+              text = re.sub(r'\x1b\[[0-?]*[ -/]*[@-~]', '', log)
+              completed = re.search(r'\[\s*DONE\s*\]\s+export\b', text)
+              failure = re.search(r'(?:^|\n)\s*(?:SCRIPT ERROR|ERROR):|Scan thread aborted|leaked at exit|resources? still in use at exit|Leaked instance:', text, re.I)
+              return bool(completed) and failure is None
+          good = '[ DONE ] export\n'
+          fixtures = [
+              (good, True),
+              ('\x1b[92m[ DONE ]\x1b[39m export\n', True),
+              ('', False),
+              ('export started\n', False),
+              (good + 'WARNING: Scan thread aborted...\n', False),
+              (good + 'WARNING: 1 ObjectDB instance was leaked at exit\n', False),
+              (good + 'ERROR: export failed\n', False),
+              (good + 'WARNING: 1 resource still in use at exit\n', False),
+          ]
+          for log, expected in fixtures:
+              assert clean_export(log) == expected, repr(log)
+          print('EXPORT GATE REGRESSION CHECKS: 8 FAILURES: 0')
+          log = Path('diagnostics/android-aab-export.log').read_text(encoding='utf-8')
+          if not clean_export(log):
+              raise SystemExit('AAB export evidence missing completion or contains engine/cleanup failures')
+          print('AAB EXPORT CLEANUP GATE: PASS')
+          PY
+
       - name: Export Android APK
         id: export
         uses: firebelley/godot-export@v8.0.0
