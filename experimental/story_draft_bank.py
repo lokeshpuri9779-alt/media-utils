@@ -22,7 +22,7 @@ def draft_bank():
         uid=hashlib.sha256(seed.encode()).hexdigest()[:20]
         drafts.append({
             "content_id":"astra-draft-"+uid,
-            "title":f"The {hero.title()} and the {setting.title()} {obj.title()}",
+            "title":f"The {hero.title()} and the {setting.title()} {obj.title()}: {problem.title()}",
             "premise":f"In the {setting}, a {hero} discovers that a {obj} {problem}.",
             "hero":hero,"setting":setting,"central_object":obj,"conflict":problem,
             "kind":"unreviewed_causal_draft",
