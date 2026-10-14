@@ -1599,6 +1599,7 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
     with tempfile.TemporaryDirectory(prefix='astra_studio_', dir=tmp_root) as tmp:
         tmp=Path(tmp);audio=tmp/'mix.wav'
         audio_info=score_audio(plan,duration,genre,audio)
+        from astra_v2.pillow_scene_motion import render_scene_frame
         count=math.ceil(duration*FPS);actual_duration=count/FPS
         cmd=[get_ffmpeg_exe(),'-hide_banner','-loglevel','error','-y',
              '-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r',str(FPS),'-i','pipe:0',
@@ -1609,7 +1610,7 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
             proc=subprocess.Popen(cmd,stdin=subprocess.PIPE,stdout=subprocess.DEVNULL,stderr=log)
             try:
                 for i in range(count):
-                    proc.stdin.write(render_frame(plan,i/FPS,genre,duration).tobytes())
+                    proc.stdin.write(render_scene_frame(render_frame,plan,i/FPS,genre,duration).tobytes())
                 proc.stdin.close()
                 if proc.wait(timeout=120)!=0: raise RuntimeError('FFmpeg could not encode Studio output.')
             except Exception:
