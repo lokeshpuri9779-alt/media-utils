@@ -50,7 +50,7 @@ jobs:
               for x in members:
                   p=Path(x.filename)
                   assert not p.is_absolute() and '..' not in p.parts, 'Unsafe ZIP path'
-                  assert not (x.external_attr>>16)&0o170000 == 0o120000, 'Symlinks not allowed'
+                  assert ((x.external_attr >> 16) & 0o170000) != 0o120000, 'Symlinks not allowed'
               z.extractall('unpacked')
           roots=[p.parent for p in Path('unpacked').rglob('rebuild.py')]
           assert len(roots)==1, 'Expected exactly one rebuild.py'
