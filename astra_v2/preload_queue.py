@@ -83,8 +83,10 @@ def prepare(path, candidate):
         if not isinstance(candidate["made_for_kids"], bool):
             raise ValueError("made_for_kids must be boolean")
         payload["made_for_kids"] = candidate["made_for_kids"]
-    if isinstance(candidate.get("renderer"), str) and candidate["renderer"].strip():
-        payload["renderer"] = candidate["renderer"]
+    renderer = candidate.get("renderer")
+    if not isinstance(renderer, str) or not renderer.strip() or renderer.strip() == "unknown":
+        raise ValueError("Approved preload is missing verified renderer provenance")
+    payload["renderer"] = renderer.strip()
     payload["sha256"] = hashlib.sha256(video.read_bytes()).hexdigest()
     payload["media"] = media
     package = video.parent / "preload-package"
@@ -245,5 +247,10 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
                         pass
             candidate["media"] = media
             candidate["queue_artifact_id"] = entry["id"]
+            if not isinstance(candidate.get("renderer"), str) or not candidate["renderer"].strip():
+                print("ASTRA_PRELOAD_RENDERER_UNVERIFIED=" + json.dumps({
+                    "content_id": cid, "artifact_id": entry["id"],
+                    "workflow_run_id": run_id,
+                }))
             return candidate
     return None
