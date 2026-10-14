@@ -7963,10 +7963,20 @@ jobs:
           unzip -q -o /tmp/pulsefall-export-templates.tpz -d /tmp/pulsefall-export-templates
           cp -a /tmp/pulsefall-export-templates/templates/. "$TEMPLATE_ROOT/"
           test -f "$TEMPLATE_ROOT/android_source.zip"
+          # Mirror the pinned engine's default-template installation before its
+          # editor starts, avoiding install_android_template's scan_changes().
+          test ! -d game/android/build
+          mkdir -p game/android/build
+          touch game/android/build/.gdignore
+          unzip -q "$TEMPLATE_ROOT/android_source.zip" -d game/android/build
+          printf '4.7.2.stable\n' > game/android/.build_version
+          test -f game/android/build/gradlew
+          chmod +x game/android/build/gradlew
+          test -f game/android/build/.gdignore
           # Export products must not enter the resource scanner or later exports.
           mkdir -p game/build android-artifacts
           touch game/build/.gdignore
-          "$GODOT" --headless --verbose --path game --install-android-build-template --export-debug "Android AAB" "$GITHUB_WORKSPACE/android-artifacts/PULSEFALL_MOBILE_ALPHA.aab" 2>&1 | tee diagnostics/android-aab-export.log
+          "$GODOT" --headless --verbose --path game --export-debug "Android AAB" "$GITHUB_WORKSPACE/android-artifacts/PULSEFALL_MOBILE_ALPHA.aab" 2>&1 | tee diagnostics/android-aab-export.log
           test -s android-artifacts/PULSEFALL_MOBILE_ALPHA.aab
 
       - name: Export Android APK
