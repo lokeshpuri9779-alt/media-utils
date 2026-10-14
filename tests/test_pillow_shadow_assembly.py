@@ -18,8 +18,11 @@ class NarratedShadowTests(unittest.TestCase):
             render_mp4(str(video),duration=1,fps=8)
             with wave.open(str(voice),"wb") as f:
                 f.setnchannels(1);f.setsampwidth(2);f.setframerate(16000)
-                f.writeframes(b"\\x00\\x00"*16000)
-            sub.write_text("1\\n00:00:00,000 --> 00:00:00,900\\nTest caption\\n",encoding="utf-8")
+                f.writeframes(bytes(2)*16000)
+            sub.write_text("""1
+00:00:00,000 --> 00:00:00,900
+Test caption
+""",encoding="utf-8")
             report=assemble(video,voice,out,sub)
             self.assertEqual(report["caption_source"],"provided_srt")
             self.assertFalse(report["publication_eligible"])
