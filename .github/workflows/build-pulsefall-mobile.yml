@@ -7685,8 +7685,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=49
-          version/name="0.2.29-mobile-alpha"
+          version/code=50
+          version/name="0.2.30-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
 
@@ -7727,11 +7727,104 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=49
-          version/name="0.2.29-mobile-alpha"
+          version/code=50
+          version/name="0.2.30-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
+
+      - name: Repair remaining-cache navigation
+        shell: bash
+        run: |
+          set -euxo pipefail
+          cat > game/mobile/cache_navigation.gd <<'GDSCRIPT'
+          extends RefCounted
+
+          static func nearest(candidates: Array, origin: Vector3, excluded: Node = null) -> PulseCache:
+          	var best: PulseCache = null
+          	var best_distance := INF
+          	for candidate in candidates:
+          		if not is_instance_valid(candidate) or not candidate is PulseCache:
+          			continue
+          		if candidate == excluded or candidate.consumed or candidate.is_queued_for_deletion() or not candidate.is_inside_tree():
+          			continue
+          		var distance: float = origin.distance_squared_to(candidate.global_position)
+          		if distance < best_distance:
+          			best = candidate
+          			best_distance = distance
+          	return best
+          GDSCRIPT
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('game/level/level.gd')
+          s = p.read_text()
+          def once(old, new):
+              global s
+              assert s.count(old) == 1, ('cache navigation anchor', old, s.count(old))
+              s = s.replace(old, new, 1)
+          once('\t\tadd_child(cache)\n', '\t\tadd_child(cache)\n\t_refresh_cache_navigation()\n')
+          once('\tcache_collected += 1\n\tscore += 250 * maxi(wave, 1)\n\tobjective_has_position = false', '\tcache_collected += 1\n\tscore += 250 * maxi(wave, 1)\n\t_refresh_cache_navigation(_cache)')
+          s += '''
+
+          func _refresh_cache_navigation(excluded: PulseCache = null) -> void:
+          	var origin := global_position
+          	if is_instance_valid(active_player):
+          		origin = active_player.global_position
+          	var target: PulseCache = preload("res://mobile/cache_navigation.gd").nearest(get_children(), origin, excluded)
+          	objective_has_position = target != null
+          	if target != null:
+          		objective_world_position = target.global_position
+          '''
+          p.write_text(s)
+          p = Path('game/export_presets.cfg')
+          s = p.read_text().replace('mobile/run_flow_rules_test.tscn"', 'mobile/run_flow_rules_test.tscn,mobile/cache_navigation_test.gd,mobile/cache_navigation_test.tscn"')
+          p.write_text(s)
+          PY
+          cat > game/mobile/cache_navigation_test.gd <<'GDSCRIPT'
+          extends Node3D
+          const Rules = preload("res://mobile/cache_navigation.gd")
+          var checks := 0
+          var failures := 0
+          func check(value: bool, message: String) -> void:
+          	checks += 1
+          	if not value:
+          		failures += 1
+          		push_error(message)
+          func _ready() -> void:
+          	position = Vector3(20, 0, 0)
+          	var a := PulseCache.new()
+          	var b := PulseCache.new()
+          	a.position = Vector3(2, 0, 0)
+          	b.position = Vector3(8, 0, 0)
+          	add_child(a)
+          	add_child(b)
+          	check(Rules.nearest([], global_position) == null, "empty objective clears guidance")
+          	check(Rules.nearest([null, self], global_position) == null, "non-cache candidates ignored")
+          	check(Rules.nearest([b, a], global_position) == a, "nearest cache selected regardless of order")
+          	check(Rules.nearest([a, b], Vector3(30, 0, 0)) == b, "world-space player location respected")
+          	check(Rules.nearest([a, b], global_position, a) == b, "pickup callback excludes collected cache immediately")
+          	a.consumed = true
+          	check(Rules.nearest([a, b], global_position) == b, "consumed cache retargets to remaining cache")
+          	b.consumed = true
+          	check(Rules.nearest([a, b], global_position) == null, "all consumed clears target")
+          	b.consumed = false
+          	b.queue_free()
+          	check(Rules.nearest([a, b], global_position) == null, "queued deletion cannot remain a target")
+          	var detached := PulseCache.new()
+          	check(Rules.nearest([detached], global_position) == null, "detached cache ignored")
+          	detached.free()
+          	check(Rules.nearest([detached], global_position) == null, "freed cache ignored safely")
+          	a.free()
+          	await get_tree().process_frame
+          	print("CACHE NAVIGATION CHECKS: %d FAILURES: %d" % [checks, failures])
+          	get_tree().quit(1 if failures else 0)
+          GDSCRIPT
+          cat > game/mobile/cache_navigation_test.tscn <<'TSCN'
+          [gd_scene load_steps=2 format=3]
+          [ext_resource type="Script" path="res://mobile/cache_navigation_test.gd" id="1"]
+          [node name="CacheNavigationTest" type="Node3D"]
+          script = ExtResource("1")
+          TSCN
 
       - name: Runtime and script validation
         shell: bash
@@ -7786,7 +7879,11 @@ jobs:
           TELEGRAPH_RC=$?
           timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/run_flow_rules_test.tscn > /tmp/run-flow-rules-test.log 2>&1
           FLOW_RC=$?
+          timeout 30 "$GODOT" --headless --audio-driver Dummy --path game res://mobile/cache_navigation_test.tscn > /tmp/cache-navigation-test.log 2>&1
+          NAVIGATION_RC=$?
           set -e
+          cat /tmp/cache-navigation-test.log
+          test "$NAVIGATION_RC" -eq 0
           cat /tmp/import.log
           cat /tmp/runtime.log
           cat /tmp/extraction-test.log
@@ -7919,14 +8016,14 @@ jobs:
           cat /tmp/aapt-badging.err
           test -n "$BADGING"
           printf '%s\n' "$BADGING"
-          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='49' versionName='0.2.29-mobile-alpha'" <<<"$BADGING"
+          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='50' versionName='0.2.30-mobile-alpha'" <<<"$BADGING"
           grep -Fq "application-label:'PULSEFALL'" <<<"$BADGING"
           mapfile -t ABI_DIRS < <(unzip -Z1 "$APK" | awk -F/ '/^lib\/[^/]+\/.*\.so$/ {print $2}' | sort -u)
           test "${#ABI_DIRS[@]}" -eq 1
           test "${ABI_DIRS[0]}" = "arm64-v8a"
           echo "APK PACKAGE CHECKS: 7 FAILURES: 0"
           echo "PACKAGE: com.pulsefall.blacksite"
-          echo "VERSION: 49 / 0.2.29-mobile-alpha"
+          echo "VERSION: 50 / 0.2.30-mobile-alpha"
           echo "ABI: arm64-v8a"
 
           AAB="artifact/PULSEFALL_MOBILE_ALPHA.aab"
