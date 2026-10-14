@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 53,
-  "confirmed_today": 52,
-  "last_attempt_at": "2026-10-14T16:52:53.735284+00:00",
+  "attempts": 54,
+  "confirmed_today": 53,
+  "last_attempt_at": "2026-10-14T17:14:18.852447+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -840,14 +840,21 @@
       "title": "The Owl and the Last Library Light",
       "format": "short",
       "uploaded_at": "2026-10-14T16:40:31.433221+00:00"
+    },
+    "rayvan-anthology-90c111ee3cab7400": {
+      "video_id": "Xfu448jnJdA",
+      "confirmed_at": "2026-10-14T17:13:22.169579+00:00",
+      "title": "The Fox Who Borrowed Sunrise",
+      "format": "short",
+      "uploaded_at": "2026-10-14T16:52:55.077473+00:00"
     }
   },
   "pending": {
-    "Xfu448jnJdA": {
-      "content_id": "rayvan-anthology-90c111ee3cab7400",
-      "title": "The Fox Who Borrowed Sunrise",
+    "PIGVkILU8e8": {
+      "content_id": "rayvan-anthology-535144f2435abf94",
+      "title": "The Little Robot and the Kite",
       "day": "2026-10-14",
-      "uploaded_at": "2026-10-14T16:52:55.077473+00:00",
+      "uploaded_at": "2026-10-14T17:14:21.159764+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": ""
@@ -855,11 +862,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T16:52:02.769647+00:00",
+  "last_preflight_at": "2026-10-14T17:13:21.780383+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T16:52:55.298006+00:00",
+    "at": "2026-10-14T17:14:21.385337+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -1663,6 +1670,13 @@
     "rayvan-anthology-90c111ee3cab7400": {
       "at": "2026-10-14T16:52:53.735267+00:00",
       "title": "The Fox Who Borrowed Sunrise",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-anthology-535144f2435abf94": {
+      "at": "2026-10-14T17:14:18.852431+00:00",
+      "title": "The Little Robot and the Kite",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
