@@ -69,6 +69,21 @@ class StorySupplyTests(unittest.TestCase):
             scene_pair({"speech": "The rabbit warned the fox."}),
             ("rabbit", "fox"))
 
+    def test_every_authored_duo_keeps_same_two_actors_in_all_four_scenes(self):
+        from studio_renderer import make_plan
+        stories = catalog(limit=256)
+        wanted = {s[1] for s in DUO_PLOTS}
+        for story in stories:
+            if story["title"] not in wanted:
+                continue
+            with self.subTest(title=story["title"]):
+                cast = scene_pair({"speech": story["title"]})
+                plan = make_plan(story)
+                self.assertEqual(len(plan), 4)
+                for shot in plan:
+                    self.assertEqual(shot.get("story_cast"), cast)
+                    self.assertEqual(scene_pair(shot), cast)
+
     def test_used_story_cannot_be_reissued(self):
         story=catalog(limit=256)[0]
         expected_title="The Fox and Rabbit's Last Lantern"
