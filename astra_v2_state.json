@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 4,
+  "attempts": 5,
   "confirmed_today": 4,
-  "last_attempt_at": "2026-10-14T22:11:14.093792+00:00",
+  "last_attempt_at": "2026-10-14T22:23:08.964713+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -885,29 +885,40 @@
       "renderer": "unknown"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "PqkL9ld7sg4": {
+      "content_id": "rayvan-forge-298d4806ac22dd67",
+      "title": "The Otter and the Paper Boat Race",
+      "day": "2026-10-15",
+      "uploaded_at": "2026-10-14T22:23:10.895529+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "unknown"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T22:16:10.938438+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_preflight_at": "2026-10-14T22:22:08.911399+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T22:16:11.001506+00:00",
+    "at": "2026-10-14T22:23:11.167639+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-14T19:48:51.586899+00:00",
   "reserved": {
@@ -1732,6 +1743,14 @@
     "rayvan-forge-32b010417f0ac2ce": {
       "at": "2026-10-14T22:11:14.093776+00:00",
       "title": "The Penguin and the Silent Trumpet",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "unknown",
+      "result": "accepted"
+    },
+    "rayvan-forge-298d4806ac22dd67": {
+      "at": "2026-10-14T22:23:08.964698+00:00",
+      "title": "The Otter and the Paper Boat Race",
       "format": "short",
       "plot_key": "",
       "renderer": "unknown",
