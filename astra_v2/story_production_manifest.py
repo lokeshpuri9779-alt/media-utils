@@ -43,6 +43,7 @@ def create_manifest(plan, output, seconds_per_scene=2):
         }
     manifest = {
         "title": plan["title"],
+        "episode": plan.get("episode", 1),
         "genre": plan["genre"],
         "location": plan["location"],
         "duration_seconds": len(scenes) * seconds_per_scene,
