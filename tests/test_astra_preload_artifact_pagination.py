@@ -260,10 +260,10 @@ class StudioRendererFloorTests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as temp:
             out = Path(temp) / "selected.mp4"
-            with patch.object(preload_queue, "artifacts", return_value=entries), \\
-                 patch.object(preload_queue, "_api", return_value=trusted), \\
-                 patch.object(preload_queue.subprocess, "run", side_effect=download), \\
-                 patch("astra_v2.creative.inspect_video", return_value={"seconds": 24}), \\
+            with patch.object(preload_queue, "artifacts", return_value=entries), \
+                 patch.object(preload_queue, "_api", return_value=trusted), \
+                 patch.object(preload_queue.subprocess, "run", side_effect=download), \
+                 patch("astra_v2.creative.inspect_video", return_value={"seconds": 24}), \
                  patch("astra_v2.publication_quality.publication_rejection", return_value=None):
                 selected = preload_queue.take(set(), set(), out, allow_long=False)
             self.assertEqual(selected["renderer"], "studio-7.2.0")
