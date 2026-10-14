@@ -24,6 +24,11 @@ class CinematicComedyTests(unittest.TestCase):
             self.assertEqual(changed.size, source.size)
             self.assertEqual(changed.getpixel((0, 0)), (41, 74, 98))
             self.assertEqual(changed.getpixel((539, 959)), (41, 74, 98))
+        # The 2-actor rabbit reaction keeps the fox's outer ear in frame.
+        for sample in (0.6, 2.3):
+            zoom, dx, _ = camera_params("react", sample)
+            left_edge = 270 + dx - 540 / (2 * zoom)
+            self.assertLess(left_edge, 19)
         with self.assertRaises(ValueError):
             camera_params("fly", .5)
 
