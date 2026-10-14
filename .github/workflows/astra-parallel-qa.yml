@@ -1,0 +1,62 @@
+name: ASTRA Parallel Quality Gates
+on:
+  pull_request:
+    paths:
+      - 'astra_v2/story_action_motion.py'
+      - 'astra_v2/story_visuals.py'
+      - 'tests/test_fiction_action_continuity.py'
+      - 'tests/test_story_action_sequence_render.py'
+      - 'tests/test_studio_audio_gate.py'
+      - 'tests/verify_studio_preview.py'
+      - '.github/workflows/astra-parallel-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: astra-parallel-qa-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  motion-regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest tests.test_fiction_action_continuity -v
+  story-render-regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pillow
+      - run: python -m unittest tests.test_story_action_sequence_render -v
+  audio-stream-regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pillow imageio-ffmpeg
+      - run: python -m unittest tests.test_studio_audio_gate -v
+  parallel-gate:
+    needs: [motion-regressions, story-render-regressions, audio-stream-regressions]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail closed if any independent gate failed
+        env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+        run: |
+          python - <<'PY'
+          import json,os,sys
+          results={name:job['result'] for name,job in json.loads(os.environ['NEEDS_JSON']).items()}
+          print(results)
+          sys.exit(0 if results and all(result=='success' for result in results.values()) else 1)
+          PY
