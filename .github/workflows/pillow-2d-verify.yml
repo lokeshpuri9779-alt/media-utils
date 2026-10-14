@@ -23,6 +23,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_motion_profiles.py' -v
           python -m unittest discover -s tests -p 'test_asset_library.py' -v
           python -m unittest discover -s tests -p 'test_world_library.py' -v
+          python -m unittest discover -s tests -p 'test_world_renderer.py' -v
       - name: Install bundled FFmpeg (no apt)
         run: |
           python -m pip install 'imageio-ffmpeg>=0.5,<1'
@@ -39,6 +40,8 @@ jobs:
       - name: Benchmark frame rendering
         run: |
           python -c "from experimental.benchmark_pillow_2d import benchmark; benchmark('/tmp/astra-pillow/benchmark.json')"
+      - name: Render world contact sheet
+        run: python -c "from experimental.world_renderer import contact_sheet; contact_sheet().save('world-contact-sheet.png')"
       - name: Upload preview
         uses: actions/upload-artifact@v4
         with:
