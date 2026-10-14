@@ -47,6 +47,7 @@ class QueueFreshnessTests(unittest.TestCase):
         self.assertFalse(preload_queue._artifact_fresh({"created_at": "invalid"}, 48, now))
 
 
+@patch.dict(os.environ, {"ASTRA_MIN_STUDIO_VERSION": ""})
 class QueueFormatSelectionTests(unittest.TestCase):
     """Shorts win during cooldown; long-form wins when its cadence is due."""
 
