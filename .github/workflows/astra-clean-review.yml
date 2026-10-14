@@ -50,6 +50,9 @@ jobs:
           p='clean-review/ASTRA_clean_24s.mp4'
           subprocess.run([get_ffmpeg_exe(),'-v','error','-i',p,'-f','null','-'],check=True)
           PY
+      - name: Validate output metadata
+        if: steps.scenes.outputs.available == 'true'
+        run: python -m experimental.clean_cinematic_verify clean-review/ASTRA_clean_24s.mp4
       - uses: actions/upload-artifact@v4
         if: steps.scenes.outputs.available == 'true'
         with:
