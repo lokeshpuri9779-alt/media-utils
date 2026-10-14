@@ -11,11 +11,16 @@ def create_manifest(plan, output, seconds_per_scene=2):
     if not scenes:
         raise ValueError("no scenes")
     continuity = []
+    previous_cast = None
     for index, scene in enumerate(scenes):
         if not scene.get("caption") or not scene.get("action"):
             raise ValueError(f"scene {index} missing caption or action")
         if scene.get("location") != plan.get("location"):
             raise ValueError(f"scene {index} has inconsistent location")
+        cast = [a.get("character_id") for a in scene.get("actors", [])]
+        if previous_cast is not None and cast != previous_cast:
+            raise ValueError(f"scene {index} has inconsistent cast")
+        previous_cast = cast
         continuity.append({
             "scene": index + 1,
             "start_seconds": index * seconds_per_scene,
@@ -23,7 +28,7 @@ def create_manifest(plan, output, seconds_per_scene=2):
             "action": scene["action"],
             "location": scene["location"],
             "caption": scene["caption"],
-            "cast": [a.get("character_id") for a in scene.get("actors", [])],
+            "cast": cast,
         })
     output = Path(output)
     assets = {}
