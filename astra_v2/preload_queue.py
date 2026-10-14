@@ -100,6 +100,23 @@ def prepare(path, candidate):
     return package
 
 
+def meets_studio_renderer_floor(renderer, minimum):
+    """Allow only a verified Studio release at or newer than the chosen floor.
+
+    Used for queued Shorts while allowing independently QA-gated fresh renders.
+    An unknown, malformed or non-Studio renderer never satisfies the floor.
+    """
+    import re
+    pattern = re.compile(r"^studio-(\\d+)\\.(\\d+)\\.(\\d+)(?:$|[-+])")
+    current = pattern.match(str(renderer or ""))
+    required = re.fullmatch(r"(\\d+)\\.(\\d+)\\.(\\d+)", str(minimum or ""))
+    if not required:
+        return not str(minimum or "").strip()
+    if not current:
+        return False
+    return tuple(int(x) for x in current.groups()) >= tuple(int(x) for x in required.groups())
+
+
 def _artifact_created_timestamp(entry):
     """Invalid GitHub timestamps must not crash the entire upload queue."""
     try:
@@ -220,6 +237,16 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
                     if rejection:
                         print("ASTRA_PRELOAD_POLICY_SKIP=" + json.dumps({
                             "content_id": cid, "reason": rejection,
+                        }))
+                        continue
+                    # A Studio-prefix-only check still allowed old 7.1.x Shorts.
+                    # Apply the rollout floor to pre-rendered Shorts specifically.
+                    # Long-form keeps its own separately validated engine policy.
+                    minimum = os.getenv("ASTRA_MIN_STUDIO_SHORT_RENDERER", "").strip()
+                    if candidate["format"] == "short" and minimum and not meets_studio_renderer_floor(candidate.get("renderer"), minimum):
+                        print("ASTRA_PRELOAD_OLD_STUDIO_SKIP=" + json.dumps({
+                            "content_id": cid, "renderer": candidate.get("renderer") or "unknown",
+                            "minimum": minimum,
                         }))
                         continue
                     video = z.read("video.mp4")
