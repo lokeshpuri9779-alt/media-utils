@@ -229,6 +229,9 @@ jobs:
       - name: Test cinematic camera, dissolves and timed finale punchline
         run: |
           python -m unittest discover -s tests -p 'test_astra_cinematic_comedy.py' -v
+      - name: Test shared caption engine across formats and styles
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_shared_captions.py' -v
       - name: Verify enlarged mobile-safe captions
         run: |
           python -m unittest discover -s tests -p 'test_astra_comedy_captions.py' -v
