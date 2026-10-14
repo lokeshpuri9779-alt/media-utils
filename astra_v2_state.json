@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 25,
-  "confirmed_today": 24,
-  "last_attempt_at": "2026-10-14T07:01:15.510186+00:00",
+  "attempts": 26,
+  "confirmed_today": 25,
+  "last_attempt_at": "2026-10-14T07:07:46.743549+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -644,14 +644,21 @@
       "title": "The Beaver and the Wet Painting",
       "format": "short",
       "uploaded_at": "2026-10-14T06:11:59.861487+00:00"
+    },
+    "rayvan-forge-07d119ca4da54d9e": {
+      "video_id": "ucfWn72imH8",
+      "confirmed_at": "2026-10-14T07:07:03.960699+00:00",
+      "title": "The Owl and the Moonlit Dam",
+      "format": "short",
+      "uploaded_at": "2026-10-14T07:01:18.017776+00:00"
     }
   },
   "pending": {
-    "ucfWn72imH8": {
-      "content_id": "rayvan-forge-07d119ca4da54d9e",
-      "title": "The Owl and the Moonlit Dam",
+    "iCKN2aqFmQQ": {
+      "content_id": "rayvan-forge-d22c6754d188fdcf",
+      "title": "The Beaver and the Leaking Pond",
       "day": "2026-10-14",
-      "uploaded_at": "2026-10-14T07:01:18.017776+00:00",
+      "uploaded_at": "2026-10-14T07:07:48.279110+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": ""
@@ -659,11 +666,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T06:59:51.393874+00:00",
+  "last_preflight_at": "2026-10-14T07:07:03.550970+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T07:01:18.262192+00:00",
+    "at": "2026-10-14T07:07:48.502236+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -1271,6 +1278,13 @@
     "rayvan-forge-07d119ca4da54d9e": {
       "at": "2026-10-14T07:01:15.510167+00:00",
       "title": "The Owl and the Moonlit Dam",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-d22c6754d188fdcf": {
+      "at": "2026-10-14T07:07:46.743531+00:00",
+      "title": "The Beaver and the Leaking Pond",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
