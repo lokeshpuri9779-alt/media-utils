@@ -229,6 +229,9 @@ jobs:
       - name: Test cinematic camera, dissolves and timed finale punchline
         run: |
           python -m unittest discover -s tests -p 'test_astra_cinematic_comedy.py' -v
+      - name: Verify enlarged mobile-safe captions
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_comedy_captions.py' -v
       - name: Render offline comedy pilot
         run: |
           python -m astra_v2.coordinated_development --comedy-pilot --seed astra-comedy-pilot --fps 24 --seconds-per-scene 3 --video --output verification-output/comedy-pilot
