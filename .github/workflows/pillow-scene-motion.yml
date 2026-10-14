@@ -1,0 +1,20 @@
+name: Studio Pillow scene-aware motion verification
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - integration/pillow-scene-aware-motion
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install 'Pillow>=10,<12'
+      - run: python -m unittest discover -s tests -p 'test_pillow_scene_motion.py' -v
+      - run: python -m py_compile studio_renderer.py astra_v2/pillow_scene_motion.py
