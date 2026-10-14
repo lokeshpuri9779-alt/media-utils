@@ -17,10 +17,15 @@ class CompositionTests(unittest.TestCase):
             self.assertFalse(plan["quality_approved"])
 
     def test_object_condition_changes_render(self):
-        batch = build_story_batch("visual-condition", limit=8, composed=True)
-        plan = next((p for p in batch["stories"] if any(s["action"] == "repair" for s in p["scenes"])), None)
-        self.assertIsNotNone(plan)
-        scene = next(s for s in plan["scenes"] if s["action"] == "repair")
+        # Repair is one of several scenarios; do not assume it occurs in a single batch.
+        scene = None
+        for episode in range(1, 101):
+            batch = build_story_batch("visual-condition", limit=8, episode=episode, composed=True)
+            scene = next((s for p in batch["stories"] for s in p["scenes"]
+                          if s["action"] == "repair"), None)
+            if scene is not None:
+                break
+        self.assertIsNotNone(scene, "No repair scene generated across 100 deterministic episodes")
         intact = dict(scene, object_condition_before="repaired")
         damaged = dict(scene, object_condition_before="damaged")
         self.assertIsNotNone(ImageChops.difference(frame(intact, 0.2), frame(damaged, 0.2)).getbbox())
