@@ -16,9 +16,26 @@ class RendererProvenanceTests(unittest.TestCase):
         returns = [n.value for n in ast.walk(fn) if isinstance(n, ast.Return) and isinstance(n.value, ast.Dict)]
         self.assertTrue(any(any(isinstance(k, ast.Constant) and k.value == "renderer" for k in d.keys) for d in returns))
 
+    def test_preload_package_rejects_unknown_renderer_before_writing(self):
+        import tempfile
+        from unittest.mock import patch
+        from astra_v2.preload_queue import prepare
+        from astra_v2.creative import inspect_video
+        with tempfile.TemporaryDirectory() as folder:
+            video = Path(folder) / "video.mp4"
+            video.write_bytes(b"fake-video")
+            candidate = {"content_id": "test", "title": "Test",
+                         "description": "Test", "genre": "fiction",
+                         "format": "short", "synthetic": True,
+                         "renderer": "unknown"}
+            with patch("astra_v2.creative.inspect_video", return_value={"seconds": 30}):
+                with self.assertRaisesRegex(ValueError, "renderer provenance"):
+                    prepare(video, candidate)
+            self.assertFalse((Path(folder) / "preload-package").exists())
+
     def test_preload_package_preserves_renderer(self):
         src = (ROOT / "preload_queue.py").read_text(encoding="utf-8")
-        self.assertIn('payload["renderer"] = candidate["renderer"]', src)
+        self.assertIn('payload["renderer"] = renderer.strip()', src)
 
     def test_preflight_records_renderer(self):
         src = (ROOT / "preflight.py").read_text(encoding="utf-8")
