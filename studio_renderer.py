@@ -28,7 +28,7 @@ from character_animation import character_storyboard
 from astra_v2.story_visuals import select_subject, draw_subject
 from astra_v2.story_action_motion import choose_action
 
-VERSION = "studio-7.2.0"
+VERSION = "studio-7.2.1"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 NEWS_MICRO_SCENE_SECONDS = 0.67
 NEWS_MICRO_TRANSITION_SECONDS = 0.10
