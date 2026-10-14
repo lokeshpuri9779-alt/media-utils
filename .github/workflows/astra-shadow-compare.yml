@@ -1,0 +1,38 @@
+name: ASTRA Shadow Engine Comparison
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run comparison unit tests
+        run: python3 -m unittest discover -s tests -p 'test_engine_comparison.py' -v
+      - name: Generate evidence-based comparison
+        shell: bash
+        run: |
+          mkdir -p shadow-report
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          from experimental.engine_comparison import compare
+          # No claims of production quality without measured evidence.
+          # Main and candidate remain ineligible until their real reports are provided.
+          root=Path('shadow-report')
+          main=root/'main_evidence.json'
+          candidate=root/'experimental_evidence.json'
+          main.write_text(json.dumps({"source":"main","evidence_available":False},indent=2))
+          candidate.write_text(json.dumps({"source":"experimental","evidence_available":False},indent=2))
+          result=compare(json.loads(main.read_text()),json.loads(candidate.read_text()))
+          (root/'comparison.json').write_text(json.dumps(result,indent=2))
+          assert not result['switch_main'] and not result['publish']
+          PY
+      - name: Upload comparison evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-shadow-comparison
+          path: shadow-report/
+          retention-days: 7

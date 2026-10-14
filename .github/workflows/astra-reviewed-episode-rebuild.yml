@@ -1,0 +1,71 @@
+name: ASTRA Reviewed Episode Rebuild
+on:
+  workflow_dispatch:
+    inputs:
+      package_url:
+        description: 'HTTPS URL of approved episode ZIP (must contain ASTRA_VERIFIED_DELIVERY or ASTRA_REVIEW_READY directory)'
+        required: true
+        type: string
+      sha256:
+        description: 'Expected SHA-256 checksum of ZIP (64 hex characters)'
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Validate input
+        env:
+          URL: ${{ inputs.package_url }}
+          HASH: ${{ inputs.sha256 }}
+        run: |
+          python3 - <<'PY'
+          import os,re,urllib.parse
+          u=urllib.parse.urlsplit(os.environ['URL'])
+          assert u.scheme=='https' and u.hostname, 'HTTPS URL required'
+          assert not u.username and not u.password, 'Credentials in URL prohibited'
+          assert re.fullmatch(r'[a-fA-F0-9]{64}',os.environ['HASH']), 'Invalid SHA-256'
+          PY
+      - name: Install FFmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y ffmpeg
+      - name: Fetch reviewed package and verify checksum
+        env:
+          URL: ${{ inputs.package_url }}
+          HASH: ${{ inputs.sha256 }}
+        run: |
+          curl --fail --location --retry 2 --max-time 120 --max-filesize 50000000 "$URL" -o episode.zip
+          echo "$HASH  episode.zip" | sha256sum --check --status
+      - name: Safe extract, rebuild and verify
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile,subprocess,sys
+          with zipfile.ZipFile('episode.zip') as z:
+              members=z.infolist()
+              assert len(members)<200, 'Too many archive members'
+              assert sum(x.file_size for x in members)<200_000_000, 'Archive too large'
+              for x in members:
+                  p=Path(x.filename)
+                  assert not p.is_absolute() and '..' not in p.parts, 'Unsafe ZIP path'
+                  assert ((x.external_attr >> 16) & 0o170000) != 0o120000, 'Symlinks not allowed'
+              z.extractall('unpacked')
+          roots=[p.parent for p in Path('unpacked').rglob('rebuild.py')]
+          assert len(roots)==1, 'Expected exactly one rebuild.py'
+          root=roots[0]
+          assert (root/'verify.py').is_file(), 'Missing verification script'
+          subprocess.run([sys.executable,str(root/'rebuild.py')],check=True)
+          subprocess.run([sys.executable,str(root/'verify.py')],check=True)
+          Path('episode-root.txt').write_text(str(root))
+          PY
+      - name: Upload reviewed MP4 and verification report
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-reviewed-episode
+          path: |
+            unpacked/**/ASTRA_REBUILT_24s.mp4
+            unpacked/**/VERIFICATION.json
+          if-no-files-found: error
+          retention-days: 7

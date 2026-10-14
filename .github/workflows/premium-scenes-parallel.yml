@@ -1,0 +1,47 @@
+name: Premium scenes isolated parallel render
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  scene:
+    if: ${{ false }}
+    strategy:
+      fail-fast: false
+      matrix:
+        scene: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install 'Pillow>=10,<12' 'imageio-ffmpeg>=0.5,<1'
+      - run: python -m experimental.parallel_scene_worker --scene ${{ matrix.scene }} --library premium-assets --output scene-output
+      - uses: actions/upload-artifact@v4
+        with:
+          name: scene-${{ matrix.scene }}
+          path: scene-output/
+          retention-days: 3
+  assemble:
+    if: ${{ false }}
+    needs: scene
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install 'imageio-ffmpeg>=0.5,<1'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: scene-*
+          path: scene-output
+          merge-multiple: true
+      - run: python -m experimental.parallel_scene_assemble --directory scene-output --output scene-output/final.mp4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: premium-final-review-only
+          path: scene-output/final.mp4
+          retention-days: 3

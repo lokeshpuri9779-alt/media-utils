@@ -1,0 +1,53 @@
+name: ASTRA Story Bank Validation
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - experiment/pillow-2d-optimized
+    paths:
+      - experimental/story_draft_bank.py
+      - experimental/story_development.py
+      - experimental/story_supply_audit.py
+      - tests/test_story_draft_bank.py
+      - tests/test_story_development.py
+      - tests/test_story_supply_audit.py
+      - tests/test_story_forge_authored_additions.py
+      - astra_v2/story_forge.py
+      - astra_v2/publication_quality.py
+      - .github/workflows/astra-story-bank-validation.yml
+permissions:
+  contents: read
+jobs:
+  story-bank-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate story bank and publication rejection
+        run: |
+          python -m unittest discover -s tests -p 'test_story_draft_bank.py' -v
+          python -m unittest discover -s tests -p 'test_story_development.py' -v
+          python -m unittest discover -s tests -p 'test_story_supply_audit.py' -v
+          python -m unittest discover -s tests -p 'test_story_forge_authored_additions.py' -v
+      - name: Check complete draft and outline inventories
+        run: |
+          python - <<'PY'
+          from experimental.story_draft_bank import draft_bank
+          from experimental.story_development import development_batch
+          from astra_v2.publication_quality import publication_rejection
+          drafts = draft_bank()
+          outlines = development_batch()
+          assert len(drafts) == len(outlines) == 1024
+          assert len({x["title"] for x in drafts}) == 1024
+          assert len({x["content_id"] for x in outlines}) == 1024
+          assert all(publication_rejection(x) for x in outlines)
+          from experimental.story_supply_audit import audit
+          report = audit()
+          assert report['approved_for_publication'] == 0
+          assert report['unique_titles'] == 1024
+          print('STORY_SUPPLY_AUDIT:', report)
+          print("PASS: 1024 drafts and outlines, no automatic publication eligibility")
+          PY

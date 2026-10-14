@@ -1,0 +1,85 @@
+name: Pillow 2D isolated verification
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Pillow
+        run: python -m pip install 'Pillow>=10,<12' 'imageio-ffmpeg>=0.5,<1'
+      - name: Unit tests
+        run: |
+          python -m unittest discover -s tests -p 'test_pillow_2d_engine.py' -v
+          python -m unittest discover -s tests -p 'test_motion_profiles.py' -v
+          python -m unittest discover -s tests -p 'test_asset_library.py' -v
+          python -m unittest discover -s tests -p 'test_world_library.py' -v
+          python -m unittest discover -s tests -p 'test_world_renderer.py' -v
+          python -m unittest discover -s tests -p 'test_item_renderer.py' -v
+          python -m unittest discover -s tests -p 'test_scene_composer.py' -v
+          python -m unittest discover -s tests -p 'test_interaction_engine.py' -v
+          python -m unittest discover -s tests -p 'test_animated_assets.py' -v
+          python -m unittest discover -s tests -p 'test_story_director.py' -v
+          python -m unittest discover -s tests -p 'test_story_video.py' -v
+          python -m unittest discover -s tests -p 'test_premium_assets.py' -v
+          python -m unittest discover -s tests -p 'test_premium_compositor.py' -v
+          python -m unittest discover -s tests -p 'test_background_cutout.py' -v
+          python -m unittest discover -s tests -p 'test_premium_demo.py' -v
+          python -m unittest discover -s tests -p 'test_asset_gate.py' -v
+          python -m unittest discover -s tests -p 'test_parallel_scene_plan.py' -v
+      - name: Install bundled FFmpeg (no apt)
+        run: |
+          python -m pip install 'imageio-ffmpeg>=0.5,<1'
+          mkdir -p /tmp/astra-bin
+          python -c "import imageio_ffmpeg, os; os.symlink(imageio_ffmpeg.get_ffmpeg_exe(), '/tmp/astra-bin/ffmpeg')"
+          echo '/tmp/astra-bin' >> "$GITHUB_PATH"
+          /tmp/astra-bin/ffmpeg -version | head -n 1
+      - name: Render isolated MP4
+        run: |
+          mkdir -p /tmp/astra-pillow
+          python -c "from experimental.pillow_2d_engine import render_mp4; render_mp4('/tmp/astra-pillow/preview.mp4',duration=3,fps=24)"
+          test -s /tmp/astra-pillow/preview.mp4
+          ffmpeg -hide_banner -i /tmp/astra-pillow/preview.mp4 -f null - 2>&1 | tail -n 8
+      - name: Benchmark frame rendering
+        run: |
+          python -c "from experimental.benchmark_pillow_2d import benchmark; benchmark('/tmp/astra-pillow/benchmark.json')"
+      - name: Render world contact sheet
+        run: python -c "from experimental.world_renderer import contact_sheet; contact_sheet().save('world-contact-sheet.png')"
+      - name: Render composed scene frames
+        run: |
+          python -c "from experimental.scene_composer import sample_plan,compose; [compose(sample_plan(),t).save('composed-scene-%s.png'%i) for i,t in enumerate((0,1,2))]"
+      - name: Render interaction timeline previews
+        run: |
+          python -c "from experimental.scene_composer import ScenePlan,SceneObject,compose; from experimental.interaction_engine import Interaction,apply_interactions; p=ScenePlan((SceneObject('house','architecture',90,350,120),SceneObject('apple','food',260,440,68))); events=(Interaction(0,1,'pickup',1,1),); [compose(apply_interactions(p,events,t),t).save('interaction-%s.png'%i) for i,t in enumerate((0,1.5,3))]"
+      - name: Render animal and state preview sheets
+        run: |
+          python -c "from PIL import Image; from experimental.animated_assets import ANIMALS,STATES,animal_frame,item_state_frame; a=Image.new('RGBA',(96*len(ANIMALS),96*2)); [a.paste(animal_frame(kind,t,96),(i*96,j*96)) for j,t in enumerate((0,.2)) for i,kind in enumerate(ANIMALS)]; a.save('animal-motion-sheet.png'); b=Image.new('RGBA',(96*len(STATES),96)); [b.paste(item_state_frame('house','architecture',state,96),(i*96,0)) for i,state in enumerate(STATES)]; b.save('object-state-sheet.png')"
+      - name: Generate story variety demo
+        run: python -m experimental.story_demo
+      - name: Render playable story demo MP4
+        run: python -m experimental.story_video
+      - name: Audit demo before integration
+        run: python -m experimental.demo_audit
+      - name: Generate deterministic parallel render plan
+        run: python -m experimental.parallel_scene_plan --scenes 14 --workers 4 --output parallel-plan.json
+      - name: Upload preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: pillow-2d-preview
+          path: |
+            /tmp/astra-pillow/preview.mp4
+            /tmp/astra-pillow/benchmark.json
+            story-demo/
+            world-contact-sheet.png
+            composed-scene-*.png
+            interaction-*.png
+            animal-motion-sheet.png
+            object-state-sheet.png
+            parallel-plan.json
+          retention-days: 3

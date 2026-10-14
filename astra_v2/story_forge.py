@@ -715,7 +715,54 @@ REWRITTEN_PLOTS = [
     ]),
 ]
 
-AUTHORED_KEYS = {row[0] for row in PLOTS + REWRITTEN_PLOTS}
+# Fresh authored plots for quality-gated replenishment; never bypass QA.
+NEW_AUTHORED_PLOTS = [
+    ("raccoon-midnight-bakery", "The Raccoon and the Midnight Bakery", "animal comedy", [
+        ("A BELL IN THE NIGHT", "At midnight, a raccoon baker heard his shop bell ring although the door was locked and the street was empty.", "door", "WHO RANG"),
+        ("FLOUR ON THE FLOOR", "He followed a trail of flour toward the oven, but the tiny footprints stopped beneath a tall stack of trays.", "door", "MYSTERY STEPS"),
+        ("A HIDDEN CUSTOMER", "Behind the trays, he found a hungry hedgehog sheltering from the rain beside the bell's loose pull cord.", "forest", "FOUND YOU"),
+        ("BREAKFAST BEFORE DAWN", "The raccoon baked a warm bun for his guest, fixed the bell cord, and opened the bakery to a line of smiling neighbors.", "door", "BAKERY OPEN"),
+    ]),
+    ("penguin-stage-fright", "The Penguin and the Silent Trumpet", "animal comedy", [
+        ("THE CONCERT BEGAN", "A young penguin lifted his trumpet for the winter concert, but not a single note came out before the waiting crowd.", "signal", "NO SOUND"),
+        ("A PANICKED SEARCH", "He blew harder and checked every valve while his bandmates tried to keep the audience entertained with clapping.", "robot", "WHERE IS MUSIC"),
+        ("THE RED MITTEN", "His friend spotted the penguin's red mitten tucked inside the trumpet bell where he had hidden it for safekeeping.", "signal", "THE MISSING NOTE"),
+        ("ONE LOUD FINISH", "He pulled out the mitten, played the opening melody, and turned his embarrassing mistake into the band's funniest encore.", "signal", "ENCORE"),
+    ]),
+    ("beaver-floating-garden", "The Beaver and the Floating Garden", "animal adventure", [
+        ("THE GARDEN DRIFTED", "A beaver woke to find the village's floating vegetable garden drifting away after a night of heavy river rain.", "ship", "GARDEN ADRIFT"),
+        ("THE ROPE SNAPPED", "She paddled after the garden and caught its loose rope, but the current snapped it against a submerged branch.", "ship", "HOLD ON"),
+        ("THE QUIET INLET", "She noticed a calm inlet beyond the reeds and used her paddle to steer the garden toward its sheltered water.", "forest", "SAFE WATER"),
+        ("HARVEST AT HOME", "The villagers helped secure new mooring lines, and everyone celebrated with vegetables picked from the rescued garden.", "forest", "HARVEST SAVED"),
+    ]),
+
+    ("mole-lantern-path", "The Mole and the Lantern Path", "animal adventure", [
+        ("THE PATH WENT DARK", "A young mole found that the lanterns marking the woodland footpath had gone dark after a storm.", "forest", "LOST LIGHT"),
+        ("THE FIRST FIX FAILED", "He replaced the first lantern's bulb, but the next lantern still flickered and went out.", "signal", "STILL DARK"),
+        ("THE HIDDEN WIRE", "Following the loose cable, he discovered a fallen branch had pulled the power connector apart.", "forest", "FOUND THE BREAK"),
+        ("THE LIGHTS RETURNED", "With the park keeper's help, he reconnected the safe low voltage line and guided the walkers home.", "signal", "WAY HOME"),
+    ]),
+    ("otter-paper-boat", "The Otter and the Paper Boat Race", "animal comedy", [
+        ("THE BOAT SANK", "An otter folded a paper boat for the river race, but the first splash soaked its hull.", "ship", "SOGGY START"),
+        ("A HEAVIER BOAT", "She tried wrapping the boat in thick cloth, only to watch it sink before the starting bell.", "ship", "TOO HEAVY"),
+        ("A LIGHTER DESIGN", "She shaped a fresh paper hull and protected its bottom with a thin coat of natural wax.", "book", "NEW DESIGN"),
+        ("THE FINISH LINE", "Her little boat floated across the pond, and she cheered for the other racers beside her.", "ship", "FINISH"),
+    ]),
+    ("badger-missing-notes", "The Badger and the Vanishing Music", "animal mystery", [
+        ("THE MUSIC VANISHED", "A badger conductor opened the orchestra's folder and found every sheet of music missing.", "book", "EMPTY FOLDER"),
+        ("THE WIND'S TRICK", "He searched the rehearsal hall while a draft kept rattling the window beside the stage.", "door", "FOLLOW THE WIND"),
+        ("NOTES IN THE RAFTERS", "Looking upward, he saw the pages caught in a net beneath the ceiling vent.", "book", "THERE THEY ARE"),
+        ("THE CONCERT BEGAN", "The stage crew recovered the pages safely, and the orchestra played its opening song on time.", "signal", "MUSIC RETURNS"),
+    ]),
+    ("fox-festival-lights", "The Fox and the Festival of Shadows", "animal adventure", [
+        ("THE LIGHTS WENT OUT", "A fox arrived at the lantern festival just as the village square lost its electricity.", "door", "DARK FESTIVAL"),
+        ("A BRIGHT IDEA FAILED", "She placed one lantern on the stage, but its tiny glow could not reach the crowd.", "signal", "NOT ENOUGH"),
+        ("THE MIRROR CIRCLE", "She arranged the festival's polished mirrors around several battery lanterns to spread their light.", "robot", "REFLECT THE GLOW"),
+        ("SHADOWS STARTED DANCING", "The villagers used the gentle reflections to perform shadow puppets until the power returned.", "forest", "SHOWTIME"),
+    ]),
+]
+
+AUTHORED_KEYS = {row[0] for row in PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS}
 
 def catalog(excluded_ids=None, excluded_titles=None, limit=128, excluded_plot_hashes=None, history=None, include_drafts=False):
     excluded = set(excluded_ids or ())
@@ -732,7 +779,7 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=128, excluded_plot_ha
         fingerprint = str(record.get("plot_fingerprint") or "")
         if fingerprint:
             seen_plots.add(fingerprint)
-    for key, title, genre, beats in (PLOTS + REWRITTEN_PLOTS + (draft_catalog() if include_drafts else [])):
+    for key, title, genre, beats in (PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS + (draft_catalog() if include_drafts else [])):
         # Reject malformed or weak authored arcs before any expensive render.
         if len(beats) != 4 or any(not isinstance(b, (tuple, list)) or len(b) != 4 for b in beats):
             continue
