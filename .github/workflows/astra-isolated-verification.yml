@@ -229,6 +229,9 @@ jobs:
       - name: Test cinematic camera, dissolves and timed finale punchline
         run: |
           python -m unittest discover -s tests -p 'test_astra_cinematic_comedy.py' -v
+      - name: Verify Studio frame rendering with timed captions
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_shared_caption_studio.py' -v
       - name: Test narration and dialogue caption timing
         run: |
           python -m unittest discover -s tests -p 'test_astra_caption_timing.py' -v
