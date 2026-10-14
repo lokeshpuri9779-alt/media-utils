@@ -23,7 +23,7 @@ PLOTS = [
       ],
       [
         "THE LANTERN WAS FIXED",
-        "The rabbit repaired the lantern with a spare wick while the fox held the box of tools steady.",
+        "The rabbit repaired the lantern with a spare wick while the fox held the lantern steady.",
         "story",
         "THE LIGHT RETURNS"
       ],
