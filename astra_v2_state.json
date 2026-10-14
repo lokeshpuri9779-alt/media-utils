@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 0,
+  "attempts": 1,
   "confirmed_today": 0,
-  "last_attempt_at": "2026-10-14T17:14:18.852447+00:00",
+  "last_attempt_at": "2026-10-14T21:51:02.817074+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -856,29 +856,39 @@
       "uploaded_at": "2026-10-14T17:14:21.159764+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "quality_skip",
+  "pending": {
+    "e64KRJsW-Ug": {
+      "content_id": "rayvan-forge-d7ffc8615a8830ec",
+      "title": "The Badger and the Vanishing Music",
+      "day": "2026-10-15",
+      "uploaded_at": "2026-10-14T21:51:04.317495+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": ""
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T20:53:48.695965+00:00",
+  "last_preflight_at": "2026-10-14T21:50:02.806803+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T21:33:34.589541+00:00",
-    "early_tests": "failure",
-    "preflight_step": "skipped",
-    "render_due": "",
-    "job_status_before_persist": "failure",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "at": "2026-10-14T21:51:04.605980+00:00",
+    "early_tests": "success",
+    "preflight_step": "success",
+    "render_due": "true",
+    "job_status_before_persist": "success",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-14T19:48:51.586899+00:00",
   "reserved": {
@@ -1674,6 +1684,13 @@
     "rayvan-anthology-535144f2435abf94": {
       "at": "2026-10-14T17:14:18.852431+00:00",
       "title": "The Little Robot and the Kite",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-d7ffc8615a8830ec": {
+      "at": "2026-10-14T21:51:02.817055+00:00",
+      "title": "The Badger and the Vanishing Music",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
