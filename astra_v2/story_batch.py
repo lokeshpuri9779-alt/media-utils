@@ -83,13 +83,16 @@ def build_story_batch(seed="astra-story-rehearsal", limit=4, episode=1, composed
         prop_index = OBJECTS.index(template["prop"]) * 50
         beats = compose(template, seed, episode) if composed else template["beats"]
         actions = tuple(action_for_beat(j, narration) for j, narration in enumerate(beats)) if composed else STORY_ACTIONS[template["title"]]
+        damaged_story = composed and "a broken " in beats[0].lower()
         repaired = False
         for scene, action, narration in zip(plan["scenes"], actions, beats):
-            scene["object_condition_before"] = "repaired" if repaired else "intact"
+            scene["object_condition_before"] = ("repaired" if repaired else
+                                                "damaged" if damaged_story else "intact")
             if action == "repair":
                 scene["object_condition_before"] = "damaged"
                 repaired = True
-            scene["object_condition_after"] = "repaired" if repaired else "intact"
+            scene["object_condition_after"] = ("repaired" if repaired else
+                                               "damaged" if damaged_story else "intact")
             scene.update(object_id=prop_index, object=prop(prop_index),
                          action=action, narration=narration, visual_style="storybook",
                          location=template["location"], genre=template["genre"],
