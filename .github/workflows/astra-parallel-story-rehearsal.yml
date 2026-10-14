@@ -128,10 +128,21 @@ jobs:
         run: |
           python -m astra_v2.story_quality_audit --output verification-output/story-${{ matrix.story }} --expected-seconds 10
       - name: Upload independent story preview
-        if: always()
+        id: upload_primary
+        if: success()
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: astra-offline-story-${{ matrix.story }}
           path: verification-output/story-${{ matrix.story }}/
-          if-no-files-found: ignore
+          if-no-files-found: error
+          retention-days: 7
+      - name: Retry artifact upload after transient network failure
+        id: upload_retry
+        if: steps.upload_primary.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-offline-story-${{ matrix.story }}
+          path: verification-output/story-${{ matrix.story }}/
+          if-no-files-found: error
           retention-days: 7
