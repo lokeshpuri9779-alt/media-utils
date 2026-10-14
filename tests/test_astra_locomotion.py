@@ -1,0 +1,24 @@
+import unittest
+from PIL import ImageChops
+from astra_v2.coordinated_development import build_ensemble_plan, frame, render
+
+
+class LocomotionTests(unittest.TestCase):
+    def test_new_motion_cues_produce_different_frames(self):
+        for action in ("walk", "run", "jump", "dance"):
+            with self.subTest(action=action):
+                plan = build_ensemble_plan("locomotion-check", [["cat", "dog"]])
+                scene = plan["scenes"][0]
+                scene.update(action=action, visual_style="storybook")
+                first = frame(scene, 0.15)
+                later = frame(scene, 0.8)
+                self.assertIsNotNone(ImageChops.difference(first, later).getbbox())
+
+    def test_publishing_remains_disabled(self):
+        plan = build_ensemble_plan("locomotion-check", [["cat", "dog"]])
+        self.assertFalse(plan["publication_allowed"])
+        self.assertFalse(plan["quality_approved"])
+
+
+if __name__ == "__main__":
+    unittest.main()
