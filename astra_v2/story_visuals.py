@@ -6,6 +6,7 @@ generic robot/door icons for unrelated fiction.
 import math
 import re
 from PIL import ImageDraw
+from astra_v2.story_action_motion import offset as action_offset
 
 SUBJECTS = (
     ("fox", r"\bfox\b|\bfoxes\b"),
@@ -73,15 +74,16 @@ def select_subject(story, shot):
     return min(matches, key=lambda item: item[0])[1] if matches else None
 
 
-def draw_subject(image, subject, t, accent):
+def draw_subject(image, subject, t, accent, action='idle'):
     """Return True when a bespoke subject was drawn; False for unknown subjects."""
     if subject not in {x[0] for x in SUBJECTS}:
         return False
+    motion_x, motion_y = action_offset(action, t)
     # Dedicated character silhouettes, not aliases of unrelated animals.
     if subject in {"fox", "otter", "owl", "duck", "firefly", "squirrel", "mouse", "crab"}:
         d = ImageDraw.Draw(image)
-        x = 520 + int(28 * math.sin(t * 1.7))
-        y = 820 + int(22 * math.sin(t * 2.3))
+        x = 520 + motion_x + int(28 * math.sin(t * 1.7))
+        y = 820 + motion_y + int(22 * math.sin(t * 2.3))
         dark = (30, 37, 51)
         if subject in {"fox", "otter", "squirrel", "mouse"}:
             fur = {"fox": (222, 112, 51), "otter": (132, 90, 65),
@@ -158,7 +160,7 @@ def draw_subject(image, subject, t, accent):
                 d.ellipse((x+dx-9,y-132,x+dx+9,y-112),fill=dark)
         return True
     d = ImageDraw.Draw(image)
-    cx, cy = 520, 850
+    cx, cy = 520 + motion_x, 850 + motion_y
     # Subject-specific moving scenery behind the central character.
     if subject in ("cat", "clock"):
         for i in range(5):

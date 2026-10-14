@@ -26,6 +26,7 @@ from imageio_ffmpeg import get_ffmpeg_exe
 from semantic_broll import infer_visual_intent
 from character_animation import character_storyboard
 from astra_v2.story_visuals import select_subject, draw_subject
+from astra_v2.story_action_motion import choose_action
 
 VERSION = "studio-7.1.1"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
@@ -390,6 +391,7 @@ def make_plan(ch):
     if ch.get('genre') == 'fiction':
         for shot in formatted:
             shot['story_subject'] = select_subject(ch, shot)
+            shot['story_action'] = choose_action(shot)
     return formatted
 
 
@@ -518,7 +520,7 @@ def starfield(d,t,accent):
 
 def draw_visual(im,s,t,u,accent):
     d=ImageDraw.Draw(im); visual=s['visual']; p=ease(u/.55)
-    if s.get('story_subject') and draw_subject(im, s['story_subject'], t, accent):
+    if s.get('story_subject') and draw_subject(im, s['story_subject'], t, accent, s.get('story_action','idle')):
         return
     # All graphics live above the caption zone, away from Shorts controls.
     cx,cy=505,865
