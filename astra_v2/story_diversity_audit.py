@@ -23,12 +23,12 @@ def audit(stories):
         repeated = key in seen
         seen.add(key)
         scenes = story.get("scenes", [])
-        continuity = all(
+        continuity = bool(scenes) and all(
             a.get("object_condition_after") == b.get("object_condition_before")
             for a, b in zip(scenes, scenes[1:])
         )
         repair_count = sum(s.get("action") == "repair" for s in scenes)
-        repairs_valid = repair_count <= 1 and all(
+        repairs_valid = bool(scenes) and repair_count <= 1 and all(
             s.get("object_condition_after") == "repaired"
             for s in scenes[next((i for i,s in enumerate(scenes) if s.get("action") == "repair"), len(scenes)):]
         )
