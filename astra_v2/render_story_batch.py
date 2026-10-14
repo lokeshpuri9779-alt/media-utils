@@ -29,6 +29,8 @@ def render_one(index, output, seed="astra-story-rehearsal", fps=8, seconds_per_s
     report["spoken_narration"] = False
     report["publication_allowed"] = False
     (Path(output) / "batch-result.json").write_text(json.dumps(report, indent=2))
+    from astra_v2.story_production_manifest import create_manifest
+    create_manifest(plan, output, seconds_per_scene=seconds_per_scene)
     return report
 
 
