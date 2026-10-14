@@ -16,7 +16,15 @@ def render_one(index, output, seed="astra-story-rehearsal", fps=8, seconds_per_s
     report = render(plan, Path(output), fps=fps,
                     seconds_per_scene=seconds_per_scene, video=True)
     report["title"] = plan["title"]
-    report["video_has_audio"] = False  # Generic story renders are silent today.
+    from astra_v2.story_batch_audio import soundtrack, add_audio
+    output = Path(output)
+    soundtrack(plan, output / "soundtrack.wav", seconds_per_scene=seconds_per_scene)
+    add_audio(output / "preview.mp4", output / "soundtrack.wav",
+              output / "preview-with-audio.mp4")
+    (output / "preview-with-audio.mp4").replace(output / "preview.mp4")
+    report["video_has_audio"] = True
+    report["audio_origin"] = "original-procedural-sound-effects"
+    report["spoken_narration"] = False
     report["publication_allowed"] = False
     (Path(output) / "batch-result.json").write_text(json.dumps(report, indent=2))
     return report
