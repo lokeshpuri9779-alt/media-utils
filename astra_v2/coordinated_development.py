@@ -611,7 +611,7 @@ def frame(scene, t):
                 'carry': 'TOO LATE...', 'react': 'OH NO!',
                 'celebrate': 'I DID IT!', 'walk': 'ON MY WAY!',
                 'run': 'HURRY!', 'jump': 'UP WE GO!',
-                'dance': 'LET US DANCE!'}[named_action])
+                'dance': 'LET US DANCE!', 'repair': 'LET ME FIX IT!'}[named_action])
         if storybook:
             if named_action in ("approach", "point", "carry", "react", "celebrate"):
                 draw_caption(image, named_action, t, storybook=True)
