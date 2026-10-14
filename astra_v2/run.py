@@ -40,14 +40,15 @@ def reconcile(youtube, state):
             import cloud_once as legacy
             legacy.CONTENT_META = {
                 "content_id": cid, "format": item.get("format", "short"), "visibility": "public",
-                "genre": item.get("genre", ""), "renderer": "astra-v2",
+                "genre": item.get("genre", ""), "renderer": item.get("renderer") or "astra-v2",
             }
             legacy.record_video(video_id, item.get("title", "RAYVAN Short"))
             state["published"][cid] = {"video_id": video_id, "confirmed_at": utcnow().isoformat(),
                                         "uploaded_at": item.get("uploaded_at"),
                                         "format": item.get("format", "short"),
                                         "title": item.get("title", ""),
-                                        "plot_key": item.get("plot_key", "")}
+                                        "plot_key": item.get("plot_key", ""),
+                                        "renderer": item.get("renderer") or "astra-v2"}
             if item.get("day") == state["day"]:
                 state["confirmed_today"] += 1
             del state["pending"][video_id]
@@ -205,6 +206,7 @@ def run():
                 state.setdefault("reserved", {})[cid] = {
                     "at": utcnow().isoformat(), "title": title, "format": candidate["format"],
                     "plot_key": candidate.get("plot_key", ""),
+                    "renderer": candidate.get("renderer") or "astra-v2",
                     "result": "transfer_pending",
                 }
                 state["last_attempt_at"] = utcnow().isoformat()
@@ -219,6 +221,7 @@ def run():
                     "uploaded_at": utcnow().isoformat(),
                     "genre": candidate["genre"], "format": candidate["format"],
                     "plot_key": candidate.get("plot_key", ""),
+                    "renderer": candidate.get("renderer") or "astra-v2",
                 }
                 write_json(STATE_FILE, state)
                 result = youtube.status(video_id)
@@ -242,6 +245,7 @@ def run():
                     outcome="published" if video_id in confirmed else "processing",
                     video_url="https://www.youtube.com/watch?v=" + video_id,
                     content_id=cid, media=candidate["media"],
+                    renderer=candidate.get("renderer") or "astra-v2",
                 )
                 return report
     except YoutubeError as exc:
