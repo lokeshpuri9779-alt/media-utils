@@ -478,3 +478,13 @@ Validated build: commit `aa1e9987cec894edd62f6fa44e4434828d08e046`; APK SHA256 `
 - Navigation selection-rule/build gate is now validated; complete player-controlled multi-cache navigation, readability, combat and extraction remain OPEN. These scripted checks do not prove human performance, installation on physical devices, frame pacing, 5–10 minute player duration or benchmark superiority.
 - Both verbose AAB logs still show one EditorFileSystemDirectory leak after export. Keep exporter cleanup in the queue, without conflating it with clean game-test logs or claiming resolution.
 - Rollback preserved in GitHub: v0.2.29 artifact `11857430196`, source `617e0446335df14abd84e308002d0397f0fb26c1`; verified unexpired. The old local APK copy was found incomplete during delivery checks and must not be used as a rollback binary; use the checksum-verified GitHub artifact instead.
+
+
+## Export resource-scan isolation trial (2026-10-14)
+
+- Baseline rechecked: navigation runs 38519080485/38519080539 remain successful; v0.2.30 stays the validated rollback. No gameplay/version changes in this batch.
+- Candidate `bf86d9e618b865792272f1911815197bd7e6fe72` moves the AAB export from inside the project to sibling `android-artifacts/`, updates its preset and packaging source, and marks `game/build/` with `.gdignore` before export so generated APK output is not scanned as a project resource.
+- Hypothesis under test: export products inside the project can provoke filesystem rescans during shutdown. This is not yet proven to cause the observed EditorFileSystemDirectory leak. Verbose diagnostics remain enabled, no warning is suppressed, and no APK-size threshold is introduced.
+- Local validation passed: YAML, all 45 shell scripts, 36 embedded Python blocks and output-path assertions.
+- Both validation runs started: [38545232929](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38545232929), [38545232926](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38545232926). Next check: compare AAB scan-abort/leak diagnostics against baseline, confirm 404 game checks and package checks still pass, inspect artifact provenance. Leave exporter issue OPEN unless the evidence confirms cleanup; if unchanged, investigate template-install scan separately.
+- Player-controlled run/navigation/combat, physical-device installation/performance and benchmark comparisons remain unverified.
