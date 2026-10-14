@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 51,
-  "confirmed_today": 50,
-  "last_attempt_at": "2026-10-14T16:14:36.859233+00:00",
+  "attempts": 52,
+  "confirmed_today": 51,
+  "last_attempt_at": "2026-10-14T16:40:29.836021+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -826,14 +826,21 @@
       "title": "The Otter and the Floating Stage",
       "format": "short",
       "uploaded_at": "2026-10-14T16:04:25.960370+00:00"
+    },
+    "rayvan-forge-1322e856bc08a961": {
+      "video_id": "U3pBJ8GlSGg",
+      "confirmed_at": "2026-10-14T16:39:29.986212+00:00",
+      "title": "The Turtle and the River Letter",
+      "format": "short",
+      "uploaded_at": "2026-10-14T16:14:38.834831+00:00"
     }
   },
   "pending": {
-    "U3pBJ8GlSGg": {
-      "content_id": "rayvan-forge-1322e856bc08a961",
-      "title": "The Turtle and the River Letter",
+    "AugDbf5ZxvY": {
+      "content_id": "rayvan-forge-4355a9c5ec3d7b67",
+      "title": "The Owl and the Last Library Light",
       "day": "2026-10-14",
-      "uploaded_at": "2026-10-14T16:14:38.834831+00:00",
+      "uploaded_at": "2026-10-14T16:40:31.433221+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": ""
@@ -841,11 +848,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T16:13:26.216159+00:00",
+  "last_preflight_at": "2026-10-14T16:39:29.585826+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T16:14:39.106871+00:00",
+    "at": "2026-10-14T16:40:31.633695+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -1635,6 +1642,13 @@
     "rayvan-forge-1322e856bc08a961": {
       "at": "2026-10-14T16:14:36.859218+00:00",
       "title": "The Turtle and the River Letter",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-4355a9c5ec3d7b67": {
+      "at": "2026-10-14T16:40:29.836007+00:00",
+      "title": "The Owl and the Last Library Light",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
