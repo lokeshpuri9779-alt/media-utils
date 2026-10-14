@@ -449,3 +449,14 @@ Validated build: commit `aa1e9987cec894edd62f6fa44e4434828d08e046`; APK SHA256 `
 ### Remaining evidence / returned issues
 - [ ] Investigate the separate AAB editor-export shutdown warning: one ObjectDB instance is reported after successful export, alongside aborted scan-thread/ADB-daemon diagnostics. It is outside the now-clean game-test logs; do not claim all build processes are warning-free. Both AAB identity/integrity checks and APK export passed.
 - [ ] Full player-controlled combat/navigation/objective-to-extraction, actual 5–10 minute duration, first-upgrade timing, physical-device installation/frame pacing/thermals, usability and benchmark comparisons remain open. Scripted game checks do not establish these results or benchmark superiority.
+
+
+## Build provenance and export diagnostics (2026-10-14)
+
+- Implemented in `3fc2cd03b39b93c0f963745e802c5a6c777f1564`: both control checkouts use `${{ github.sha }}` instead of the moving branch. A hard check rejects a mismatched checked-out commit before game generation.
+- Both APK/AAB archives now include BUILD_SOURCE.txt with control/foundation commit, run/attempt/workflow reference and SHA256 hashes of the evidence-gate scripts.
+- AAB export enables verbose output, preserves its log with pipefail (export failures cannot be hidden by tee), and uploads diagnostics even after a failed build. This adds evidence; it does not yet fix or waive the known exporter shutdown warning.
+- Local validation passed: workflow YAML, 44 shell scripts, 35 embedded Python blocks, exact-ref/provenance/pipefail/always-upload assertions.
+- CI validation pending: [38513078192](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38513078192) and [38513078187](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38513078187). Do not mark this batch fully validated until both complete and the verbose leak details are reviewed.
+- v0.2.29 runtime content/version are unchanged. Its validated source `617e0446335df14abd84e308002d0397f0fb26c1`, APK artifact `11857430196` and AAB artifact `11857124786` remain untouched; both artifacts verified unexpired through 2026-10-20.
+- Navigation issue identified by source inspection for the next gameplay batch: cache HUD targets only the first cache and clears objective_has_position after any cache pickup, leaving remaining caches without distance guidance. Repair target selection and add multi-cache regression coverage; human navigation/readability QA remains required.
