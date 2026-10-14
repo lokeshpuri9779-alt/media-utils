@@ -1,0 +1,25 @@
+name: Storyboard MP4 smoke QA
+on:
+  workflow_dispatch:
+  push:
+    branches: [feature/story-sequence-mp4-smoke]
+  pull_request:
+    paths:
+      - 'tests/story_sequence_mp4_smoke.py'
+      - 'astra_v2/story_action_motion.py'
+      - 'astra_v2/story_visuals.py'
+      - '.github/workflows/storyboard-mp4-smoke.yml'
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install 'Pillow>=10,<12'
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - run: python -m tests.story_sequence_mp4_smoke
