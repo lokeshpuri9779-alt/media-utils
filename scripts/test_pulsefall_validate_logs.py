@@ -30,7 +30,7 @@ class ValidationGateTests(unittest.TestCase):
 
     def test_complete_clean_evidence_passes(self):
         self.assertEqual(validate_logs(self.logs), [])
-        self.assertEqual(sum(s[1] for s in SUITES.values()), 394)
+        self.assertEqual(sum(s[1] for s in SUITES.values()), 404)
 
     def test_every_missing_log_fails(self):
         for name in ("import.log", *SUITES):
