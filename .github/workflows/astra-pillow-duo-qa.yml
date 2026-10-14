@@ -9,6 +9,9 @@ on:
       - 'tests/test_pillow_duo_continuity.py'
       - 'tests/test_pillow_duo_studio.py'
       - 'tests/test_astra_icon_visuals.py'
+      - 'tests/test_astra_preload_artifact_pagination.py'
+      - 'astra_v2/preload_queue.py'
+      - '.github/workflows/astra-v2-publish.yml'
       - 'tools/pillow_studio_preview.py'
       - '.github/workflows/astra-pillow-duo-qa.yml'
   workflow_dispatch:
@@ -26,6 +29,7 @@ jobs:
       - run: python -m pip install 'Pillow>=10,<12' 'imageio-ffmpeg>=0.5,<1' 'numpy>=1.24' 'httpx>=0.25'
       - name: Validate duo matching and animation
         run: |
+          python -m unittest discover -s tests -p 'test_astra_preload_artifact_pagination.py' -v
           python -m unittest discover -s tests -p 'test_astra_icon_visuals.py' -v
           python -m unittest discover -s tests -p 'test_pillow_duo_scene.py' -v
           python -m unittest discover -s tests -p 'test_pillow_duo_continuity.py' -v
