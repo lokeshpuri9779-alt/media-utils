@@ -83,6 +83,8 @@ def prepare(path, candidate):
         if not isinstance(candidate["made_for_kids"], bool):
             raise ValueError("made_for_kids must be boolean")
         payload["made_for_kids"] = candidate["made_for_kids"]
+    if isinstance(candidate.get("renderer"), str) and candidate["renderer"].strip():
+        payload["renderer"] = candidate["renderer"]
     payload["sha256"] = hashlib.sha256(video.read_bytes()).hexdigest()
     payload["media"] = media
     package = video.parent / "preload-package"
