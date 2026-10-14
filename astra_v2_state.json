@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 34,
-  "confirmed_today": 33,
-  "last_attempt_at": "2026-10-14T10:45:41.598923+00:00",
+  "attempts": 35,
+  "confirmed_today": 34,
+  "last_attempt_at": "2026-10-14T11:11:44.056105+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -707,14 +707,21 @@
       "title": "The Deer and the Hidden Passage",
       "format": "short",
       "uploaded_at": "2026-10-14T10:38:59.651254+00:00"
+    },
+    "rayvan-forge-ee24494c29dc04c5": {
+      "video_id": "7hcFDsjw6A4",
+      "confirmed_at": "2026-10-14T11:10:53.965255+00:00",
+      "title": "The Duck and the Stalled Ferry",
+      "format": "short",
+      "uploaded_at": "2026-10-14T10:45:43.522448+00:00"
     }
   },
   "pending": {
-    "7hcFDsjw6A4": {
-      "content_id": "rayvan-forge-ee24494c29dc04c5",
-      "title": "The Duck and the Stalled Ferry",
+    "uIEMRh3VgvE": {
+      "content_id": "rayvan-forge-5c3c9970e0205042",
+      "title": "The Lynx and the Eclipse",
       "day": "2026-10-14",
-      "uploaded_at": "2026-10-14T10:45:43.522448+00:00",
+      "uploaded_at": "2026-10-14T11:11:45.479654+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": ""
@@ -722,11 +729,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T10:44:50.803002+00:00",
+  "last_preflight_at": "2026-10-14T11:10:53.498298+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T10:45:43.802114+00:00",
+    "at": "2026-10-14T11:11:45.711513+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -1397,6 +1404,13 @@
     "rayvan-forge-ee24494c29dc04c5": {
       "at": "2026-10-14T10:45:41.598909+00:00",
       "title": "The Duck and the Stalled Ferry",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-5c3c9970e0205042": {
+      "at": "2026-10-14T11:11:44.056091+00:00",
+      "title": "The Lynx and the Eclipse",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
