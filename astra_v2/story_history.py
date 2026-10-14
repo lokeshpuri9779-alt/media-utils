@@ -40,6 +40,8 @@ def select_novel_stories(candidate_batches, path, limit=4, threshold=0.82):
     """
     if not isinstance(limit, int) or limit < 1:
         raise ValueError("limit must be positive")
+    if not 0 <= threshold <= 1:
+        raise ValueError("threshold must be between 0 and 1")
     previous = read_history(path)
     selected = []
     considered = 0
