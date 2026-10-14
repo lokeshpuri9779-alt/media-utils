@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['.github/workflows/astra-v2-publish.yml', 'astra_v2/preload_queue.py', 'astra_v2/run.py']
+    paths: ['.github/workflows/astra-v2-publish.yml', 'astra_v2/preload_queue.py', 'astra_v2/run.py', 'astra_v2/story_forge.py', 'tests/test_astra_story_inventory.py']
   schedule:
     - cron: '*/5 * * * *'
   workflow_run:
