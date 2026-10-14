@@ -474,7 +474,7 @@ def frame(scene, t):
                         storybook=storybook)
                         for side in (-1, 1))
                     lead_shoulders = tuple((
-                        point[0] + sway + carry_shift, point[1] + crouch
+                        point[0] + sway + carry_shift, point[1] + crouch - jump_offset + dance_offset
                     ) for point in native_shoulders)
                     lead_base = ((240, 120, 62) if storybook else actor_layer.getpixel((
                         int(540 + sway + carry_shift),
