@@ -53,7 +53,8 @@ def build_story_batch(seed="astra-story-rehearsal", limit=4):
         for scene, action, narration in zip(plan["scenes"], STORY_ACTIONS[template["title"]], template["beats"]):
             scene.update(object_id=prop_index, object=prop(prop_index),
                          action=action, narration=narration, visual_style="storybook",
-                         location=template["location"], genre=template["genre"])
+                         location=template["location"], genre=template["genre"],
+                         caption=narration)
         plan.update(title=template["title"], genre=template["genre"], location=template["location"], pilot_type="offline_story_batch",
                     publication_allowed=False, quality_approved=False)
         verify_story_cast(plan)
