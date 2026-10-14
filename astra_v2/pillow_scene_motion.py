@@ -24,7 +24,6 @@ def camera_motion(frame: Image.Image, t: float, *, strength: float = 0.012) -> I
     # Tiny zoom avoids revealing missing pixels; same content stays visible.
     phase=(1-math.cos(2*math.pi*(t % 7.0)/7.0))/2
     zoom=1+strength*phase
-    new_size=(math.ceil(width*zoom),math.ceil(height*zoom))
     # Crop before resizing: only the final output pixels need interpolation.
     # Avoid scaling a larger-than-output intermediate frame.
     crop_w=width/zoom
@@ -34,7 +33,6 @@ def camera_motion(frame: Image.Image, t: float, *, strength: float = 0.012) -> I
     return frame.transform((width,height),Image.Transform.EXTENT,
                            (left,top,left+crop_w,top+crop_h),
                            resample=Image.Resampling.BILINEAR)
-    #
 
 
 def render_scene_frame(renderer,plan,t,genre,duration):
