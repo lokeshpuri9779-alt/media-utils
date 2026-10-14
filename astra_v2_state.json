@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 38,
-  "confirmed_today": 37,
-  "last_attempt_at": "2026-10-14T12:16:33.103119+00:00",
+  "attempts": 39,
+  "confirmed_today": 38,
+  "last_attempt_at": "2026-10-14T12:28:24.617650+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -735,14 +735,21 @@
       "title": "The Raccoon and the Vanished Painting",
       "format": "short",
       "uploaded_at": "2026-10-14T11:55:22.405068+00:00"
+    },
+    "rayvan-forge-a5eacafc9fc28652": {
+      "video_id": "Jq94t1fUFm8",
+      "confirmed_at": "2026-10-14T12:27:25.568377+00:00",
+      "title": "The Goat and the Floating Garden",
+      "format": "short",
+      "uploaded_at": "2026-10-14T12:16:35.027386+00:00"
     }
   },
   "pending": {
-    "Jq94t1fUFm8": {
-      "content_id": "rayvan-forge-a5eacafc9fc28652",
-      "title": "The Goat and the Floating Garden",
+    "xsj_UdbfLuk": {
+      "content_id": "rayvan-forge-a3ecbebc8306a927",
+      "title": "The Owl and the Station Clock",
       "day": "2026-10-14",
-      "uploaded_at": "2026-10-14T12:16:35.027386+00:00",
+      "uploaded_at": "2026-10-14T12:28:26.871337+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": ""
@@ -750,11 +757,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T12:15:35.027563+00:00",
+  "last_preflight_at": "2026-10-14T12:27:25.205318+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T12:16:35.237086+00:00",
+    "at": "2026-10-14T12:28:27.098183+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -1453,6 +1460,13 @@
     "rayvan-forge-a5eacafc9fc28652": {
       "at": "2026-10-14T12:16:33.103106+00:00",
       "title": "The Goat and the Floating Garden",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-a3ecbebc8306a927": {
+      "at": "2026-10-14T12:28:24.617637+00:00",
+      "title": "The Owl and the Station Clock",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
