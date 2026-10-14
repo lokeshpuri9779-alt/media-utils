@@ -9,6 +9,7 @@ on:
       - 'astra_v2/coordinated_development.py'
       - 'astra_v2/story_quality_audit.py'
       - 'astra_v2/story_subtitles.py'
+      - 'astra_v2/story_production_manifest.py'
       - 'astra_v2/story_batch_audio.py'
       - 'tests/test_astra_locomotion.py'
       - 'tests/test_astra_story_batch.py'
