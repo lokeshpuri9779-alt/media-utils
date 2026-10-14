@@ -15,7 +15,7 @@ class CompositionTests(unittest.TestCase):
     def test_reproducible_and_distinct_from_authored(self):
         first = build_story_batch("composed", episode=4, composed=True)
         self.assertEqual(first, build_story_batch("composed", episode=4, composed=True))
-        authored = build_story_batch("composed", episode=4)
+        authored = build_story_batch("composed", episode=4, composed=False)
         self.assertNotEqual(first["stories"][0]["scenes"][0]["caption"],
                             authored["stories"][0]["scenes"][0]["caption"])
 
