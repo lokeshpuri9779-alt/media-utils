@@ -30,7 +30,7 @@ class ValidationGateTests(unittest.TestCase):
 
     def test_complete_clean_evidence_passes(self):
         self.assertEqual(validate_logs(self.logs), [])
-        self.assertEqual(sum(s[1] for s in SUITES.values()), 409)
+        self.assertEqual(sum(s[1] for s in SUITES.values()), 411)
 
     def test_every_missing_log_fails(self):
         for name in ("import.log", *SUITES):
@@ -89,13 +89,13 @@ class ValidationGateTests(unittest.TestCase):
 
     def test_incomplete_or_duplicate_summary_fails(self):
         path = self.logs / "controls-test.log"
-        for content in ("CONTROLS CHECKS: 34 FAILURES: 0\n", "CONTROLS CHECKS: 35 FAILURES: 0\n" * 2):
+        for content in ("CONTROLS CHECKS: 36 FAILURES: 0\n", "CONTROLS CHECKS: 37 FAILURES: 0\n" * 2):
             with self.subTest(content=content):
                 path.write_text(content)
                 self.assertTrue(validate_logs(self.logs))
 
     def test_shell_echo_is_not_completion_evidence(self):
-        (self.logs / "controls-test.log").write_text("echo 'CONTROLS CHECKS: 35 FAILURES: 0'\n")
+        (self.logs / "controls-test.log").write_text("echo 'CONTROLS CHECKS: 37 FAILURES: 0'\n")
         self.assertTrue(validate_logs(self.logs))
 
     def test_incomplete_extraction_pass_records_fail(self):
@@ -119,7 +119,7 @@ class ValidationGateTests(unittest.TestCase):
         self.assertTrue(validate_logs(self.logs))
 
     def test_ansi_and_crlf_are_supported(self):
-        (self.logs / "controls-test.log").write_bytes(b"\x1b[32mCONTROLS CHECKS: 35 FAILURES: 0\x1b[0m\r\n")
+        (self.logs / "controls-test.log").write_bytes(b"\x1b[32mCONTROLS CHECKS: 37 FAILURES: 0\x1b[0m\r\n")
         self.assertEqual(validate_logs(self.logs), [])
 
     def test_cli_success_failure_and_usage_exit_codes(self):
