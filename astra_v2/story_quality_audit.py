@@ -21,6 +21,8 @@ def audit_story(output, expected_seconds=10):
                float(duration[3])) if duration else None
     checks = {
         "file_nonempty": video.stat().st_size > 1000,
+        "subtitles_present": (output / "captions.srt").is_file() and
+                             (output / "captions.srt").stat().st_size > 20,
         "video_h264": "Video: h264" in details,
         "audio_aac": "Audio: aac" in details,
         "duration_matches": seconds is not None and abs(seconds - expected_seconds) < 0.5,
