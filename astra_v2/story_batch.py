@@ -64,10 +64,18 @@ def build_story_batch(seed="astra-story-rehearsal", limit=4, episode=1):
     if not isinstance(limit, int) or not 1 <= limit <= len(TEMPLATES):
         raise ValueError("limit outside template catalog")
     # Stable seeded ordering, with no duplicate template inside a batch.
+    # Rotate through all authored plots before any template repeats.
+    # The cycle is reproducible for a given seed; episodes within one cycle
+    # get disjoint sets when the requested batch size divides catalog size.
+    cycle = (episode - 1) // max(1, (len(TEMPLATES) // limit))
+    slot = (episode - 1) % max(1, (len(TEMPLATES) // limit))
     order = sorted(range(len(TEMPLATES)),
-                   key=lambda i: hashlib.sha256(f"{seed}|episode-{episode}|{i}".encode()).digest())
+                   key=lambda i: hashlib.sha256(f"{seed}|cycle-{cycle}|{i}".encode()).digest())
+    selected = order[slot * limit:(slot + 1) * limit]
+    if len(selected) < limit:
+        selected += order[:limit - len(selected)]
     stories = []
-    for i in order[:limit]:
+    for i in selected:
         template = TEMPLATES[i]
         story_seed = f"{seed}|episode-{episode}|story-{i}"
         plan = build_ensemble_plan(story_seed, [list(template["cast"]) for _ in ACTIONS])
