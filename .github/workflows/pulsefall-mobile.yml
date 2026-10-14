@@ -136,7 +136,7 @@ jobs:
           )
           s=s.replace(
               'var motion := Vector2()\n',
-              'var motion := Vector2()\n\n@export var max_health: int = 100\nvar health: int = 100\nvar incapacitated: bool = false\n'
+              'var motion := Vector2()\n\n@export var max_health: int = 100\nvar health: int = 100\nvar incapacitated: bool = false\nvar revival_teleport_pending: bool = false\n'
           )
           s=s.replace(
               'func _ready() -> void:\n\t# Pre-initialize orientation transform.\n',
@@ -185,10 +185,16 @@ jobs:
           	incapacitated = false
           	health = max_health
           	velocity = Vector3.ZERO
-          	transform.origin = initial_position
-          	# Recovery is a teleport: do not interpolate from the old location.
-          	reset_physics_interpolation()
+          	revival_teleport_pending = true
           	health_changed.emit(health, max_health)
+          	# Parent motion propagates to the interpolated camera, so perform the
+          	# checkpoint teleport inside a physics frame rather than after a timer.
+          	await get_tree().physics_frame
+          	if not is_inside_tree():
+          		return
+          	transform.origin = initial_position
+          	reset_physics_interpolation()
+          	revival_teleport_pending = false
           GDSCRIPT
 
       - name: Install PULSEFALL wave director and HUD
@@ -2110,8 +2116,12 @@ jobs:
           	check(level.extraction_active, "final boss clear starts physical extraction")
           	level.active_player.velocity = Vector3(9, -5, 3)
           	level.active_player.revive()
-          	check(level.active_player.position.is_equal_approx(level.active_player.initial_position), "revive restores checkpoint position synchronously")
+          	check(level.active_player.revival_teleport_pending, "revive queues checkpoint teleport for the physics frame")
           	check(level.active_player.velocity == Vector3.ZERO, "revive clears pre-teleport velocity")
+          	await get_tree().physics_frame
+          	await get_tree().process_frame
+          	check(not level.active_player.revival_teleport_pending, "revive completes checkpoint teleport on a physics frame")
+          	check(level.active_player.position.distance_to(level.active_player.initial_position) < 0.25, "revive restores checkpoint position")
           	var runs_before: int = progression.runs
           	var credits_before: int = progression.credits
           	level._begin_extraction()
@@ -7690,8 +7700,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=51
-          version/name="0.2.31-mobile-alpha"
+          version/code=52
+          version/name="0.2.32-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
 
@@ -7732,8 +7742,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=51
-          version/name="0.2.31-mobile-alpha"
+          version/code=52
+          version/name="0.2.32-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -8065,14 +8075,14 @@ jobs:
           cat /tmp/aapt-badging.err
           test -n "$BADGING"
           printf '%s\n' "$BADGING"
-          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='51' versionName='0.2.31-mobile-alpha'" <<<"$BADGING"
+          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='52' versionName='0.2.32-mobile-alpha'" <<<"$BADGING"
           grep -Fq "application-label:'PULSEFALL'" <<<"$BADGING"
           mapfile -t ABI_DIRS < <(unzip -Z1 "$APK" | awk -F/ '/^lib\/[^/]+\/.*\.so$/ {print $2}' | sort -u)
           test "${#ABI_DIRS[@]}" -eq 1
           test "${ABI_DIRS[0]}" = "arm64-v8a"
           echo "APK PACKAGE CHECKS: 7 FAILURES: 0"
           echo "PACKAGE: com.pulsefall.blacksite"
-          echo "VERSION: 51 / 0.2.31-mobile-alpha"
+          echo "VERSION: 52 / 0.2.32-mobile-alpha"
           echo "ABI: arm64-v8a"
 
           AAB="artifact/PULSEFALL_MOBILE_ALPHA.aab"
