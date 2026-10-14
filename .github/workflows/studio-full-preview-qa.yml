@@ -1,0 +1,38 @@
+name: ASTRA Full Studio Preview QA
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  full-studio-preview:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      ORT_DISABLE_TELEMETRY: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install Studio production dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Cache voice model
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/astra-voice
+          key: astra-kokoro-v1-beb0d184
+      - name: Render real Studio narration preview (no YouTube upload)
+        run: |
+          mkdir -p /tmp/astra-studio-review
+          python studio_renderer.py --preview /tmp/astra-studio-review/studio-preview.mp4 --stills-dir /tmp/astra-studio-review/stills
+      - name: Verify completed MP4 and audio
+        run: python -m tests.verify_studio_preview /tmp/astra-studio-review/studio-preview.mp4
+      - name: Upload preview and review frames
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-studio-full-preview
+          path: /tmp/astra-studio-review/
+          retention-days: 7
+          if-no-files-found: warn
