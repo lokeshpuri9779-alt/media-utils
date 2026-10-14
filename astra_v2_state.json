@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 48,
-  "confirmed_today": 47,
-  "last_attempt_at": "2026-10-14T15:22:50.649142+00:00",
+  "attempts": 49,
+  "confirmed_today": 48,
+  "last_attempt_at": "2026-10-14T15:34:38.378477+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -805,14 +805,21 @@
       "title": "The Frog and the Echo Concert",
       "format": "short",
       "uploaded_at": "2026-10-14T14:58:32.079663+00:00"
+    },
+    "rayvan-forge-5ec46c9c617fecda": {
+      "video_id": "fwwok77i5ME",
+      "confirmed_at": "2026-10-14T15:33:41.403772+00:00",
+      "title": "The Raccoon and the Mixed-Up Paint",
+      "format": "short",
+      "uploaded_at": "2026-10-14T15:22:52.244028+00:00"
     }
   },
   "pending": {
-    "fwwok77i5ME": {
-      "content_id": "rayvan-forge-5ec46c9c617fecda",
-      "title": "The Raccoon and the Mixed-Up Paint",
+    "8m-EsGUODvk": {
+      "content_id": "rayvan-forge-edb8ecc767f55421",
+      "title": "The Rabbit and the Frozen Clock",
       "day": "2026-10-14",
-      "uploaded_at": "2026-10-14T15:22:52.244028+00:00",
+      "uploaded_at": "2026-10-14T15:34:40.781390+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": ""
@@ -820,11 +827,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T15:21:57.754085+00:00",
+  "last_preflight_at": "2026-10-14T15:33:41.008482+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T15:22:52.452103+00:00",
+    "at": "2026-10-14T15:34:41.022689+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -1593,6 +1600,13 @@
     "rayvan-forge-5ec46c9c617fecda": {
       "at": "2026-10-14T15:22:50.649127+00:00",
       "title": "The Raccoon and the Mixed-Up Paint",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-edb8ecc767f55421": {
+      "at": "2026-10-14T15:34:38.378462+00:00",
+      "title": "The Rabbit and the Frozen Clock",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
