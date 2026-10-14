@@ -24,4 +24,4 @@ def plot_repetition(a, b):
     left, right = plot_signature(a), plot_signature(b)
     if not left or not right or len(left) != len(right):
         return False
-    return all(x == y for x, y in zip(left, right)) and any(left)
+    # Generic or empty cue sequences cannot establish plot equivalence.\n    meaningful = {"loss", "damage", "pursuit", "mystery", "recovery"}\n    observed = {cue for beat in left for cue in beat}\n    cue_beats = sum(bool(beat) for beat in left)\n    return (cue_beats >= 2 and len(observed) >= 2\n            and bool(observed & meaningful) and left == right)
