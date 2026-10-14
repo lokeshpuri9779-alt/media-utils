@@ -29,11 +29,11 @@ jobs:
       - name: Verify authored stories enter quality-gated catalog
         run: |
           python -m unittest discover -s tests -p 'test_story_forge_authored_additions.py' -v
-      - name: Validate renderer and creative-director regression tests
+      - name: Validate production controller and publication policy regression tests
         run: |
           python - <<'PY'
           import unittest
-          patterns = ['test_studio_renderer.py', 'test_quality_lab.py']
+          patterns = ['test_astra_v2.py', 'test_astra_publication_quality.py']
           found = 0
           for pattern in patterns:
               suite = unittest.defaultTestLoader.discover('tests', pattern=pattern)
@@ -45,7 +45,7 @@ jobs:
                       raise SystemExit(f'{pattern} failed')
                   found += count
           if found == 0:
-              raise SystemExit('No renderer or creative-director tests discovered')
+              raise SystemExit('No production controller or publication policy tests discovered')
           PY
       - name: Confirm original story publication policy tests
         run: |
