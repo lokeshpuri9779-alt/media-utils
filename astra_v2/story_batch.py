@@ -57,7 +57,7 @@ STORY_ACTIONS = {
 }
 
 
-def build_story_batch(seed="astra-story-rehearsal", limit=4, episode=1, composed=False):
+def build_story_batch(seed="astra-story-rehearsal", limit=4, episode=1, composed=True):
     if not isinstance(episode, int) or not 1 <= episode <= 100000:
         raise ValueError("episode outside supported range")
     if not isinstance(seed, str) or not seed.strip():
@@ -102,10 +102,10 @@ if __name__ == "__main__":
     parser.add_argument("--seed", default="astra-story-rehearsal")
     parser.add_argument("--limit", type=int, default=4)
     parser.add_argument("--episode", type=int, default=1)
-    parser.add_argument("--composed", action="store_true")
+    parser.add_argument("--authored", action="store_true", help="Use legacy authored regression fixtures")
     parser.add_argument("--output", default="verification-output/story-batch.json")
     args = parser.parse_args()
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(build_story_batch(args.seed, args.limit, args.episode, args.composed), indent=2))
+    output.write_text(json.dumps(build_story_batch(args.seed, args.limit, args.episode, not args.authored), indent=2))
     print(f"Offline story batch written: {output}")
