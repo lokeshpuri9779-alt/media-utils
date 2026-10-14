@@ -583,6 +583,19 @@ def frame(scene, t):
         else:
             d.rounded_rectangle((80, 105, W-80, 157), radius=18, fill=(19, 30, 48, 230))
             d.text((W // 2 - 4 * len(cue), 124), cue, fill=(255, 228, 169))
+    # Offline authored captions, timed to each scene and never used as speech.
+    if scene.get("pilot_type") == "offline_story_batch" or (
+        scene.get("visual_style") == "storybook" and scene.get("caption")
+    ):
+        words = str(scene.get("caption", "")).strip()
+        if words:
+            import textwrap
+            caption_lines = textwrap.wrap(words, width=35)[:3]
+            d.rounded_rectangle((32, 794, W-32, 875), radius=16,
+                                fill=(15, 23, 39))
+            for line_index, line in enumerate(caption_lines):
+                d.text((48, 804 + 22 * line_index), line,
+                       fill=(250, 242, 213))
     d.rounded_rectangle((18, 20, W-18, 65), radius=14, fill=(18, 26, 40, 255))
     d.text((30, 35), f"SCENE {number:02d}  /  ASTRA EXPERIMENT", fill=(239, 239, 228))
     d.text((24, 925), "NOT APPROVED FOR PUBLICATION", fill=(245, 176, 121))
