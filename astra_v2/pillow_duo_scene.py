@@ -38,7 +38,11 @@ PROPS = {
 
 
 def scene_pair(shot):
-    """Extract first two explicitly named animals in narrated order."""
+    """Return the stable director cast, or named actors in narrated order.
+
+    A story's left/right screen identity must not switch when narration
+    reverses the order of the same two animal names between scenes.
+    """
     text = " ".join(str(shot.get(k) or "") for k in
                     ("speech", "visual_prompt", "action")).lower()
     found = []
@@ -46,16 +50,17 @@ def scene_pair(shot):
         match = re.search(ALIASES[name], text)
         if match:
             found.append((match.start(), name))
-    if len(found) >= 2:
-        return tuple(name for _, name in sorted(found)[:2])
-    # The director can supply an explicitly named two-actor cast from the
-    # story title. Do not invent a partner or override different local actors.
     cast = shot.get("story_cast") or ()
     if isinstance(cast, (list, tuple)) and len(cast) == 2:
         cast = tuple(str(x).lower() for x in cast)
         if all(x in ACTORS for x in cast) and len(set(cast)) == 2:
-            if not found or found[0][1] in cast:
+            # A third named species means this shot may require a different
+            # compositor; never misrepresent it as one of the core duo.
+            if all(name in cast for _, name in found):
                 return cast
+            return ()
+    if len(found) >= 2:
+        return tuple(name for _, name in sorted(found)[:2])
     return ()
 
 

@@ -6,6 +6,7 @@ All outputs remain subject to the existing full render and publication gates.
 """
 import hashlib
 import re
+from astra_v2.pillow_duo_stories import PLOTS as PILLOW_DUO_PLOTS
 
 PLOTS = [
     ("hedgehog-raincoat", "The Hedgehog and the Raincoat", "animal comedy",
@@ -878,7 +879,7 @@ NEW_AUTHORED_PLOTS.extend([
     ]),
 ])
 
-AUTHORED_KEYS = {row[0] for row in PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS}
+AUTHORED_KEYS = {row[0] for row in PILLOW_DUO_PLOTS + PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS}
 
 def catalog(excluded_ids=None, excluded_titles=None, limit=128, excluded_plot_hashes=None, history=None, include_drafts=False):
     excluded = set(excluded_ids or ())
@@ -895,7 +896,7 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=128, excluded_plot_ha
         fingerprint = str(record.get("plot_fingerprint") or "")
         if fingerprint:
             seen_plots.add(fingerprint)
-    for key, title, genre, beats in (PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS + (draft_catalog() if include_drafts else [])):
+    for key, title, genre, beats in (PILLOW_DUO_PLOTS + PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS + (draft_catalog() if include_drafts else [])):
         # Reject malformed or weak authored arcs before any expensive render.
         if len(beats) != 4 or any(not isinstance(b, (tuple, list)) or len(b) != 4 for b in beats):
             continue
