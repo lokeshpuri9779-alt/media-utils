@@ -469,3 +469,12 @@ Validated build: commit `aa1e9987cec894edd62f6fa44e4434828d08e046`; APK SHA256 `
 - Added ten deterministic navigation tests and expanded strict evidence contract to 404 checks across 21 suites. These are selection-rule checks, not player-controlled navigation or human readability results.
 - Local: 17 evidence-gate tests passed; YAML, 45 shell scripts and 36 embedded Python blocks parsed. Both CI jobs passed the guarded navigation-generation step and are running runtime validation: [38519080539](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38519080539), [38519080485](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38519080485).
 - Keep candidate validation OPEN until Godot checks, Android exports and package gates succeed. Do not replace the known-good v0.2.29 APK/rollback with this candidate yet. No store publication or physical-device test was performed.
+
+
+## Validated v0.2.30 navigation checkpoint (2026-10-14)
+
+- Both candidate runs 38519080485 and 38519080539 succeeded at `f45c5720c931c0af26f0463afea8693ebb007838`. Navigation selection checks: 10/10; all game suites: 404 assertions across 21 suites, zero detected engine errors/shutdown leaks in import and game-test logs; evidence-gate regressions: 17/17; APK/AAB package checks: 7/7 and 5/5.
+- APK artifact `11873291529` inspected. ZIP digest matched `0929da05107e34410c46901279c00fb4a605072f05c3b8543ef76e7b93ed5dcd`. APK is 521,196,164 bytes, SHA256 `27f0b60d637ff4e434500532f2623993dd730d5cb1c116ac742b1e489c65f424`. BUILD_SOURCE.txt identifies the exact candidate commit and control-script hashes. Version 0.2.30-mobile-alpha / code 50.
+- Navigation selection-rule/build gate is now validated; complete player-controlled multi-cache navigation, readability, combat and extraction remain OPEN. These scripted checks do not prove human performance, installation on physical devices, frame pacing, 5–10 minute player duration or benchmark superiority.
+- Both verbose AAB logs still show one EditorFileSystemDirectory leak after export. Keep exporter cleanup in the queue, without conflating it with clean game-test logs or claiming resolution.
+- Rollback preserved in GitHub: v0.2.29 artifact `11857430196`, source `617e0446335df14abd84e308002d0397f0fb26c1`; verified unexpired. The old local APK copy was found incomplete during delivery checks and must not be used as a rollback binary; use the checksum-verified GitHub artifact instead.
