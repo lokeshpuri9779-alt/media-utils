@@ -44,3 +44,35 @@ def audit(stories):
 if __name__ == "__main__":
     from astra_v2.story_batch import build_story_batch
     print(json.dumps(audit(build_story_batch()["stories"]), indent=2))
+
+# Heuristic near-duplicate detection; not a semantic embedding model.
+STOPWORDS = frozenset("the a an and or to in at on with for from into of is was are they it its their then".split())
+
+def story_tokens(story):
+    words = re.findall(r"[a-z]+", " ".join(s.get("narration", "") for s in story.get("scenes", [])).lower())
+    return set(words) - STOPWORDS
+
+def similarity(a, b):
+    """Blend narration-token Jaccard and action-sequence similarity."""
+    ta, tb = story_tokens(a), story_tokens(b)
+    lexical = len(ta & tb) / len(ta | tb) if ta | tb else 1.0
+    aa = [s.get("action") for s in a.get("scenes", [])]
+    ab = [s.get("action") for s in b.get("scenes", [])]
+    actions = sum(x == y for x, y in zip(aa, ab)) / max(len(aa), len(ab), 1)
+    return round(0.8 * lexical + 0.2 * actions, 4)
+
+def audit_history(stories, history=(), threshold=0.82):
+    """Compare candidates against prior story plans; caller manages history storage."""
+    if not 0 <= threshold <= 1:
+        raise ValueError("threshold must be between 0 and 1")
+    accepted = list(history)
+    results = []
+    for story in stories:
+        score = max((similarity(story, old) for old in accepted), default=0.0)
+        near_duplicate = score >= threshold
+        results.append({"title": story.get("title"), "max_similarity": score,
+                        "near_duplicate": near_duplicate})
+        if not near_duplicate:
+            accepted.append(story)
+    return {"results": results, "near_duplicates": sum(r["near_duplicate"] for r in results),
+            "publication_allowed": False, "quality_approved": False}
