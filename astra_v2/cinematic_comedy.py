@@ -12,7 +12,9 @@ CAMERA_PRESETS = {
     "approach": (1.015, 1.075, -15, 10),
     "point": (1.13, 1.19, 13, -2),
     "carry": (1.035, 1.115, -6, 13),
-    "react": (1.14, 1.235, 12, -18),
+    # Keep both actors readable during the rabbit's startled reaction; the
+    # former 1.235x rightward push cut half the fox out of the frame.
+    "react": (1.055, 1.12, -17, -10),
     "celebrate": (1.085, 1.17, -10, -18),
 }
 
