@@ -33,7 +33,7 @@ def record_verified_video(video_id: str, item: dict, channel_name: str):
         "genre": item.get("genre") or "unknown",
         "visibility": "public",
         "channel_key": channel_name,
-        "renderer": entry.get("renderer") or "astra-v2",
+        "renderer": item.get("renderer") or entry.get("renderer") or "unknown",
     })
     write_json("performance.json", data)
     ordered = sorted(
@@ -68,6 +68,7 @@ def reconcile_pending(youtube: Youtube, state: dict, channel_name: str):
                 "title": entry.get("title") or "",
                 "format": entry.get("format", "short"),
                 "uploaded_at": entry.get("uploaded_at"),
+                "renderer": entry.get("renderer") or "unknown",
             }
             if entry.get("day") == state.get("day"):
                 state["confirmed_today"] = int(state.get("confirmed_today", 0)) + 1
