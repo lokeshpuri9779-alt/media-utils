@@ -7,7 +7,7 @@ from astra_v2.coordinated_development import frame
 
 class EnvironmentTests(unittest.TestCase):
     def test_four_distinct_locations_and_rendered_frames(self):
-        stories = build_story_batch()["stories"]
+        stories = build_story_batch(limit=8)["stories"]
         self.assertEqual(len({story["location"] for story in stories}), 4)
         frames = [frame(story["scenes"][0], 0.5) for story in stories]
         for i in range(len(frames)):
