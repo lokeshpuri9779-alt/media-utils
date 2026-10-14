@@ -28,7 +28,7 @@ class StoryHistoryTests(unittest.TestCase):
     def test_malformed_history_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "history.jsonl"
-            path.write_text('{"scenes": []}\\n', encoding="utf-8")
+            path.write_text('{"scenes": []}\n', encoding="utf-8")
             with self.assertRaises(ValueError):
                 read_history(path)
 
