@@ -14,6 +14,19 @@ class CompositionTests(unittest.TestCase):
             self.assertFalse(plan["publication_allowed"])
             self.assertFalse(plan["quality_approved"])
 
+    def test_repair_state_persists(self):
+        batch = build_story_batch("state-check", limit=8, composed=True)
+        for plan in batch["stories"]:
+            repaired = False
+            for scene in plan["scenes"]:
+                if repaired:
+                    self.assertEqual(scene["object_condition_before"], "repaired")
+                    self.assertEqual(scene["object_condition_after"], "repaired")
+                if scene["action"] == "repair":
+                    self.assertEqual(scene["object_condition_before"], "damaged")
+                    self.assertEqual(scene["object_condition_after"], "repaired")
+                    repaired = True
+
     def test_all_composed_actions_have_audio(self):
         batch = build_story_batch("coverage", limit=8, composed=True)
         for plan in batch["stories"]:
