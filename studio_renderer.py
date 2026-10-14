@@ -28,7 +28,7 @@ from character_animation import character_storyboard
 from astra_v2.story_visuals import select_subject, draw_subject
 from astra_v2.story_action_motion import choose_action
 
-VERSION = "studio-7.1.1"
+VERSION = "studio-7.2.0"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 NEWS_MICRO_SCENE_SECONDS = 0.67
 NEWS_MICRO_TRANSITION_SECONDS = 0.10
@@ -389,9 +389,15 @@ def make_plan(ch):
     ch["creative_format"] = fmt["name"]
     formatted = apply_format(plan, fmt)
     if ch.get('genre') == 'fiction':
+        from astra_v2.pillow_duo_scene import scene_pair
+        # Keep the explicitly named cast across narration beats, rather than
+        # requiring both protagonists to be repeated in every spoken line.
+        named_cast = scene_pair({'speech': str(ch.get('title') or '')})
         for shot in formatted:
             shot['story_subject'] = select_subject(ch, shot)
             shot['story_action'] = choose_action(shot)
+            if named_cast and shot['story_subject'] in (None, *named_cast):
+                shot['story_cast'] = named_cast
     return formatted
 
 
@@ -1026,7 +1032,14 @@ def render_frame(plan,t,genre,total):
         # production scenes must never render blank after failed acquisition.
         raise CreativeReject('Scene media missing from cache: refusing overlapping/filler fallback.')
     if layers['draw_visual']:
-        draw_visual(im,s,t,u,accent)
+        # The Pillow duo is a single foreground alternative, never an overlay.
+        # Only narration-grounded pairs use it; other shots retain Studio art.
+        if genre == 'fiction' and os.environ.get('ASTRA_STUDIO_PILLOW_DUO', '1') == '1':
+            from astra_v2.pillow_duo_scene import draw_duo
+            if not draw_duo(im, s, u):
+                draw_visual(im,s,t,u,accent)
+        else:
+            draw_visual(im,s,t,u,accent)
     elif genre == 'fiction' and not layers['draw_cached_media'] and not layers['draw_director_asset']:
         # Licensed icon illustration only for otherwise empty foregrounds.
         from astra_v2.icon_visuals import overlay_icon
@@ -1640,12 +1653,17 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
         wide=cover_frame.crop((0, (H-int(W*9/16))//2, W, (H+int(W*9/16))//2))
         wide.resize((1280,720),Image.Resampling.LANCZOS).save(
             out.with_name(out.stem+"_cover_wide.jpg"),quality=92,optimize=True)
+    from astra_v2.pillow_duo_scene import scene_pair
+    duo_count = (sum(bool(scene_pair(shot)) for shot in plan)
+                 if genre == 'fiction' and os.environ.get('ASTRA_STUDIO_PILLOW_DUO','1') == '1'
+                 else 0)
     micro_count=(math.ceil(actual_duration / NEWS_MICRO_SCENE_SECONDS) if genre=='current' else len(plan))
     visual_rate=(micro_count / actual_duration) if actual_duration > 0 else 0.0
     report={'cover_path':str(cover_path) if cover_candidates else None,'renderer':VERSION,'genre':genre,'frames':count,'duration':round(actual_duration,3),
             'resolution':[W,H],'fps':FPS,'audio':audio_info,'creative_quality':creative_report,'layer_qa':layer_report,
             'visual_edit':{
                 'narration_beat_count':len(plan),
+                'pillow_duo_scenes':duo_count,
                 'visual_scene_count':micro_count,
                 'visual_scene_rate_per_second':round(visual_rate,3),
                 'target_scene_rate_range':[1.0,2.0] if genre=='current' else None,
