@@ -46,7 +46,17 @@ def scene_pair(shot):
         match = re.search(ALIASES[name], text)
         if match:
             found.append((match.start(), name))
-    return tuple(name for _, name in sorted(found)[:2]) if len(found) >= 2 else ()
+    if len(found) >= 2:
+        return tuple(name for _, name in sorted(found)[:2])
+    # The director can supply an explicitly named two-actor cast from the
+    # story title. Do not invent a partner or override different local actors.
+    cast = shot.get("story_cast") or ()
+    if isinstance(cast, (list, tuple)) and len(cast) == 2:
+        cast = tuple(str(x).lower() for x in cast)
+        if all(x in ACTORS for x in cast) and len(set(cast)) == 2:
+            if not found or found[0][1] in cast:
+                return cast
+    return ()
 
 
 def scene_prop(shot):
@@ -280,6 +290,18 @@ def _prop(d, name, x, y, t):
         d.ellipse((x-21,y-25,x+21,y+42),fill=(255,237,174))
 
 
+def prop_position(action, t):
+    """Deterministic continuous object travel; never reset a carried prop."""
+    action = str(action).lower()
+    pickup = action in {"pick","pickup","pick_up","carry","repair","hold"}
+    throw = action == "throw"
+    progress = _ease((max(0, t)-.15)/.9) if pickup or throw else 0.0
+    if throw:
+        return (540+int(300*progress), 1140-int(190*math.sin(progress*math.pi)))
+    return (int(540*(1-progress)+433*progress),
+            int(1216*(1-progress)+1060*progress))
+
+
 def draw_duo(image, shot, t):
     """Return True only when the complete illustrated duo was drawn."""
     pair=scene_pair(shot)
@@ -293,14 +315,8 @@ def draw_duo(image, shot, t):
     mood=scene_mood(shot)
     prop=scene_prop(shot)
     pickup=action in {"pick","pickup","pick_up","carry","repair","hold"}
-    throw=action=="throw"
     progress=_ease((max(0,t)-.15)/.9) if pickup else 0.0
-    if throw:
-        progress=_ease((max(0,t)-.15)/.9)
-        prop_pos=(540+int(300*progress), 1140-int(190*math.sin(progress*math.pi)))
-    else:
-        prop_pos=(int(540*(1-progress)+433*progress),
-                  int(1216*(1-progress)+1060*progress))
+    prop_pos=prop_position(action,t)
     # Stable positions are large enough to read on mobile.
     for idx,name in enumerate(pair):
         x=298 if idx==0 else 788
