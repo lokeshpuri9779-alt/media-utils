@@ -19,7 +19,7 @@ ACTION_EVENTS = {
     "point": ((0.45, "warning"), (1.2, "whisper_swoosh")),
     "carry": ((0.18, "soft_footstep"), (0.65, "lift"), (1.5, "pop")),
     "react": ((0.55, "gasp"), (2.0, "hesitant")),
-    "celebrate": ((0.25, "fanfare"), (1.2, "fanfare_tail"), (2.32, "finale")),
+    "celebrate": ((0.25, "fanfare"), (1.2, "fanfare_tail"), (1.69, "duck_honk"), (2.32, "finale")),
 }
 
 
@@ -98,6 +98,10 @@ def _event_notes(mix, cue):
             _add_note(mix, at + i * .19, .57, f, .17, "round")
     elif name == "fanfare_tail":
         _add_note(mix, at, .78, 1046.5, .14, "bell")
+    elif name == "duck_honk":
+        # Rubber-duck squeeze: two short descending rounded notes.
+        _add_note(mix, at, .23, 960, .26, "round", 540)
+        _add_note(mix, at + .22, .18, 850, .23, "round", 490)
     elif name == "finale":
         for f in (523.25, 659.25, 783.99, 1046.5):
             _add_note(mix, at, .52, f, .095, "bell")
