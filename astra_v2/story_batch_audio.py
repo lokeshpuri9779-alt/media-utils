@@ -15,6 +15,7 @@ NOTES = {
     "dance": (440, 4.0), "approach": (230, 2.0),
     "point": (720, 1.0), "carry": (330, 1.5),
     "react": (580, 1.0), "celebrate": (660, 3.0),
+    "repair": (390, 4.0),
 }
 
 
