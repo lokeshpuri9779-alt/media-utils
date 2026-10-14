@@ -645,7 +645,7 @@ def render(plan, output, fps=8, seconds_per_scene=2, video=False):
     for scene in plan["scenes"]:
         if scene.get("action") is not None and scene["action"] not in (
             "approach", "react", "point", "celebrate", "carry",
-            "walk", "run", "jump", "dance"
+            "walk", "run", "jump", "dance", "repair"
         ):
             raise ValueError(f"scene {scene.get('scene')}: unsupported action")
     if plan.get("ensemble_enabled") or plan.get("story_subjects_verified") or any(
