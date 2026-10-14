@@ -1,5 +1,6 @@
 import unittest
 from astra_v2.story_batch import STORY_ACTIONS, TEMPLATES, build_story_batch
+from astra_v2.story_composition import action_for_beat
 from astra_v2.coordinated_development import verify_story_cast
 
 
@@ -19,6 +20,10 @@ class StoryBatchTests(unittest.TestCase):
             self.assertTrue(all(scene["caption"] == scene["narration"] for scene in story["scenes"]))
         for story in stories:
             self.assertTrue(verify_story_cast(story))
+            self.assertEqual(tuple(s["action"] for s in story["scenes"]),
+                             tuple(action_for_beat(i, s["narration"]) for i, s in enumerate(story["scenes"])))
+        authored = build_story_batch(composed=False)["stories"]
+        for story in authored:
             self.assertEqual(tuple(s["action"] for s in story["scenes"]), STORY_ACTIONS[story["title"]])
             self.assertFalse(story["publication_allowed"])
             self.assertFalse(story["quality_approved"])
