@@ -333,7 +333,7 @@ def frame(scene, t):
     character_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
     object_layer = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
     actions = {"approach": 0, "react": 1, "point": 2, "celebrate": 3, "carry": 4,
-               "walk": 5, "run": 6, "jump": 7, "dance": 8}
+               "walk": 5, "run": 6, "jump": 7, "dance": 8, "repair": 9}
     named_action = scene.get("action")
     if named_action is not None and named_action not in actions:
         raise ValueError(f"scene {number}: unsupported action {named_action!r}")
@@ -349,12 +349,12 @@ def frame(scene, t):
     storybook = scene.get("visual_style") == "storybook"
     # The gift remains in the fox's paws after pickup, including reactions
     # and the trophy-like ending; no teleport back to the stage floor.
-    held_action = named_action == "carry" or (storybook and named_action in ("react", "celebrate"))
-    carry_shift = int(28 * math.sin(t * 2.0)) if named_action == "carry" else 0
+    held_action = named_action in ("carry", "repair") or (storybook and named_action in ("react", "celebrate"))
+    carry_shift = int(28 * math.sin(t * 2.0)) if named_action in ("carry", "repair") else 0
     # The prop is lifted during the carry beat, rather than teleporting to the hands.
     lift_progress = max(0.0, min(1.0, (t - 0.15) / 0.95))
     lift_progress = lift_progress * lift_progress * (3.0 - 2.0 * lift_progress)
-    if storybook and named_action in ("react", "celebrate"):
+    if storybook and named_action in ("react", "celebrate", "repair"):
         lift_progress = 1.0
     lead_sway = 0
     lead_shoulders = None
