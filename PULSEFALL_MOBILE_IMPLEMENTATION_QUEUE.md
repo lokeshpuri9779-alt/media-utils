@@ -460,3 +460,12 @@ Validated build: commit `aa1e9987cec894edd62f6fa44e4434828d08e046`; APK SHA256 `
 - CI validation pending: [38513078192](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38513078192) and [38513078187](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38513078187). Do not mark this batch fully validated until both complete and the verbose leak details are reviewed.
 - v0.2.29 runtime content/version are unchanged. Its validated source `617e0446335df14abd84e308002d0397f0fb26c1`, APK artifact `11857430196` and AAB artifact `11857124786` remain untouched; both artifacts verified unexpired through 2026-10-20.
 - Navigation issue identified by source inspection for the next gameplay batch: cache HUD targets only the first cache and clears objective_has_position after any cache pickup, leaving remaining caches without distance guidance. Repair target selection and add multi-cache regression coverage; human navigation/readability QA remains required.
+
+
+## Cache-navigation repair and provenance validation (2026-10-14)
+
+- Provenance batch `3fc2cd03b39b93c0f963745e802c5a6c777f1564` validated: runs 38513078192 and 38513078187 both succeeded, with 394 game assertions, 17 evidence-gate tests and 12 package checks. Verbose logs on both identify the AAB shutdown leak as one `EditorFileSystemDirectory`; this narrows the issue to editor-export cleanup, but does not resolve it or establish real-device stability.
+- v0.2.30 candidate `f45c5720c931c0af26f0463afea8693ebb007838` repairs cache HUD selection after initial spawn and each pickup. Select nearest remaining in world coordinates; ignore consumed, excluded, queued, detached, freed and non-cache candidates; clear guidance when no target remains.
+- Added ten deterministic navigation tests and expanded strict evidence contract to 404 checks across 21 suites. These are selection-rule checks, not player-controlled navigation or human readability results.
+- Local: 17 evidence-gate tests passed; YAML, 45 shell scripts and 36 embedded Python blocks parsed. Both CI jobs passed the guarded navigation-generation step and are running runtime validation: [38519080539](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38519080539), [38519080485](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38519080485).
+- Keep candidate validation OPEN until Godot checks, Android exports and package gates succeed. Do not replace the known-good v0.2.29 APK/rollback with this candidate yet. No store publication or physical-device test was performed.
