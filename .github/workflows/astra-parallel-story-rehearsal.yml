@@ -2,8 +2,8 @@ name: ASTRA parallel story rehearsal (offline)
 on:
   workflow_dispatch:
     inputs:
-      composed:
-        description: 'Use experimental rule-based story composition'
+      authored:
+        description: 'Use legacy authored stories for regression testing'
         required: false
         type: boolean
         default: false
@@ -63,7 +63,7 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_astra_story_environments.py' -v
       - name: Render one story independently
         run: |
-          python -m astra_v2.render_story_batch --index ${{ matrix.story }} --episode ${{ github.event.inputs.episode || '1' }} ${{ github.event.inputs.composed == 'true' && '--composed' || '' }} --fps 8 --seconds-per-scene 2 --output verification-output/story-${{ matrix.story }}
+          python -m astra_v2.render_story_batch --index ${{ matrix.story }} --episode ${{ github.event.inputs.episode || '1' }} ${{ github.event.inputs.authored == 'true' && '--authored' || '' }} --fps 8 --seconds-per-scene 2 --output verification-output/story-${{ matrix.story }}
       - name: Validate AAC MP4 and offline gate
         run: |
           python - <<'PY'
