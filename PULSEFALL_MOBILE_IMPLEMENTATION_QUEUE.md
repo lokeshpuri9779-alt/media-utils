@@ -488,3 +488,12 @@ Validated build: commit `aa1e9987cec894edd62f6fa44e4434828d08e046`; APK SHA256 `
 - Local validation passed: YAML, all 45 shell scripts, 36 embedded Python blocks and output-path assertions.
 - Both validation runs started: [38545232929](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38545232929), [38545232926](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/38545232926). Next check: compare AAB scan-abort/leak diagnostics against baseline, confirm 404 game checks and package checks still pass, inspect artifact provenance. Leave exporter issue OPEN unless the evidence confirms cleanup; if unchanged, investigate template-install scan separately.
 - Player-controlled run/navigation/combat, physical-device installation/performance and benchmark comparisons remain unverified.
+
+
+## Export isolation result and template-install trial (2026-10-14)
+
+- Runs 38545232929/38545232926 both succeeded at bf86d9e618b865792272f1911815197bd7e6fe72: 404 game checks, clean import/game-suite evidence, 7 APK and 5 AAB checks. Output isolation did NOT eliminate the aborted scan or single EditorFileSystemDirectory leak in either AAB export. Return exporter cleanup to the queue; retain output isolation as build hygiene, without claiming a measured size/performance benefit.
+- Inspected Godot 4.7.2-stable source: editor/export/export_template_manager.cpp installs android_source.zip into android/build, writes android/.build_version and build/.gdignore, then invokes EditorFileSystem::scan_changes(). core/version.h confirms the default full-config identifier is 4.7.2.stable for this engine configuration.
+- Candidate 351c18dc46885c3bb654dea4501eb78d0ca1b61e mirrors default template setup before the editor starts, using the already-downloaded pinned template archive; removes --install-android-build-template from the export invocation. No warnings are suppressed. Rejects an unexpected pre-existing build directory and verifies gradlew/.gdignore.
+- Local validation passed: 45 shell scripts, 36 Python blocks, YAML and template-install ordering. CI triggered; leak-removal hypothesis remains UNVERIFIED until both build logs are reviewed. Check template-version acceptance, AAB/APK identity/signature gates and all runtime evidence before promotion.
+- v0.2.30 gameplay and prior validated rollback are unchanged. Full player-controlled and real-device/benchmark gates remain open; exporter cleanup is not a claim of gameplay quality.
