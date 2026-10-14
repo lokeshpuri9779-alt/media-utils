@@ -25,10 +25,25 @@ class RendererProvenanceTests(unittest.TestCase):
         self.assertIn('"renderer": item.get("renderer") or entry.get("renderer") or "unknown"', src)
         self.assertIn('"renderer": entry.get("renderer") or "unknown"', src)
 
+    def test_analytics_feedback_has_required_imports(self):
+        source = (ROOT / "run.py").read_text(encoding="utf-8")
+        tree = ast.parse(source)
+        imports = {alias.name for node in tree.body
+                   if isinstance(node, ast.ImportFrom)
+                   and node.module in {"datetime", "zoneinfo"}
+                   for alias in node.names}
+        self.assertIn("datetime", imports)
+        self.assertIn("ZoneInfo", imports)
+
+    def test_missing_renderer_is_not_mislabeled(self):
+        for name in ("creative.py", "run.py", "preflight.py"):
+            source = (ROOT / name).read_text(encoding="utf-8")
+            self.assertNotIn('or "astra-v2"', source)
+
     def test_publisher_records_renderer(self):
         src = (ROOT / "run.py").read_text(encoding="utf-8")
-        self.assertIn('"renderer": candidate.get("renderer") or "astra-v2"', src)
-        self.assertIn('renderer=candidate.get("renderer") or "astra-v2"', src)
+        self.assertIn('"renderer": candidate.get("renderer") or "unknown"', src)
+        self.assertIn('renderer=candidate.get("renderer") or "unknown"', src)
 
 
 if __name__ == "__main__":
