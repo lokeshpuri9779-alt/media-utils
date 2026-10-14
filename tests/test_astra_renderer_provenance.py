@@ -40,6 +40,39 @@ class RendererProvenanceTests(unittest.TestCase):
             source = (ROOT / name).read_text(encoding="utf-8")
             self.assertNotIn('or "astra-v2"', source)
 
+    def test_reconcile_preserves_real_renderer(self):
+        from unittest.mock import Mock, patch
+        from types import SimpleNamespace
+        from astra_v2.control import state_for_day
+        from astra_v2.run import reconcile
+        state = state_for_day()
+        state["pending"]["video123"] = {
+            "content_id": "original-123", "day": state["day"],
+            "renderer": "studio-test-v1", "title": "Original",
+        }
+        youtube = Mock()
+        youtube.status.return_value = {"privacyStatus": "public", "uploadStatus": "processed"}
+        with patch.dict("sys.modules", {"cloud_once": SimpleNamespace(
+                CONTENT_META={}, record_video=lambda video_id, title: None)}):
+            self.assertEqual(reconcile(youtube, state), ["video123"])
+        self.assertEqual(state["published"]["original-123"]["renderer"], "studio-test-v1")
+
+    def test_reconcile_does_not_invent_renderer(self):
+        from unittest.mock import Mock, patch
+        from types import SimpleNamespace
+        from astra_v2.control import state_for_day
+        from astra_v2.run import reconcile
+        state = state_for_day()
+        state["pending"]["video123"] = {
+            "content_id": "original-123", "day": state["day"], "title": "Original",
+        }
+        youtube = Mock()
+        youtube.status.return_value = {"privacyStatus": "public", "uploadStatus": "processed"}
+        with patch.dict("sys.modules", {"cloud_once": SimpleNamespace(
+                CONTENT_META={}, record_video=lambda video_id, title: None)}):
+            reconcile(youtube, state)
+        self.assertEqual(state["published"]["original-123"]["renderer"], "unknown")
+
     def test_publisher_records_renderer(self):
         src = (ROOT / "run.py").read_text(encoding="utf-8")
         self.assertIn('"renderer": candidate.get("renderer") or "unknown"', src)
