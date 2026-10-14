@@ -1,0 +1,75 @@
+name: ASTRA offline story-history ledger
+on:
+  workflow_dispatch:
+  push:
+    branches: [astra-isolated-verification-20261013]
+    paths:
+      - 'astra_v2/story_history.py'
+      - 'tests/test_astra_story_history.py'
+      - 'astra_v2/story_diversity_audit.py'
+      - 'astra_v2/plot_pattern_audit.py'
+      - 'tests/test_astra_plot_pattern_audit.py'
+      - 'astra_v2/story_batch.py'
+      - 'astra_v2/story_composition.py'
+      - '.github/workflows/astra-offline-story-history.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: astra-offline-story-history
+  cancel-in-progress: false
+jobs:
+  history:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install story planning dependency
+        run: python -m pip install --disable-pip-version-check pillow
+      - name: Verify plot-pattern regression cases
+        run: python -m unittest discover -s tests -p 'test_astra_plot_pattern_audit.py' -v
+      - name: Verify history-aware novelty selection
+        run: python -m unittest discover -s tests -p 'test_astra_story_history.py' -v
+      - name: Restore previous history artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p offline-history
+          # Require the last successful ledger; never silently reset the originality history.
+          run_id=$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/astra-offline-story-history.yml/runs?branch=astra-isolated-verification-20261013&status=success&per_page=10" --jq '.workflow_runs[0].id // empty')
+          if [ -z "$run_id" ]; then
+            echo "::error::No prior successful history ledger. Explicit bootstrap required."
+            exit 1
+          fi
+          gh run download "$run_id" --repo "$GITHUB_REPOSITORY" --name astra-offline-story-history --dir offline-history
+          test -s offline-history/stories.jsonl || { echo "::error::Restored history missing or empty"; exit 1; }
+          echo "Restored history from run $run_id"
+      - name: Update history from two offline episodes
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from astra_v2.story_batch import build_story_batch
+          from astra_v2.story_history import evaluate_and_record, read_history, select_novel_stories
+          path = Path("offline-history/stories.jsonl")
+          base_episode = int('${{ github.run_number }}') * 2 - 1
+          episodes = (base_episode, base_episode + 1)
+          candidates = [build_story_batch(episode=episode)["stories"] for episode in episodes]
+          selection = select_novel_stories(candidates, path, limit=4)
+          result = evaluate_and_record(selection["stories"], path)
+          assert result["recorded"] == len(selection["stories"]), "Selection disagrees with history gate"
+          assert not result["publication_allowed"] and not result["quality_approved"]
+          print(json.dumps({"episodes": episodes, "considered": selection["considered"],
+                            "recorded": result["recorded"], "shortfall": selection["shortfall"],
+                            "total_history": len(read_history(path))}))
+          PY
+      - name: Upload offline history for subsequent runs
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-offline-story-history
+          path: offline-history/stories.jsonl
+          retention-days: 90
+          if-no-files-found: error

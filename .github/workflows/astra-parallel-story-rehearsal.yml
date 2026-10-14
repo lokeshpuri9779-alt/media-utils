@@ -1,0 +1,148 @@
+name: ASTRA parallel story rehearsal (offline)
+on:
+  workflow_dispatch:
+    inputs:
+      authored:
+        description: 'Use legacy authored stories for regression testing'
+        required: false
+        type: boolean
+        default: false
+      episode:
+        description: 'Offline episode number (1-100000)'
+        required: false
+        default: '1'
+  push:
+    branches: [astra-isolated-verification-20261013]
+    paths:
+      - 'astra_v2/render_story_batch.py'
+      - 'astra_v2/story_batch.py'
+      - 'astra_v2/story_diversity_audit.py'
+      - 'astra_v2/plot_pattern_audit.py'
+      - 'tests/test_astra_plot_pattern_audit.py'
+      - 'astra_v2/story_history.py'
+      - 'tests/test_astra_story_history.py'
+      - 'tests/test_astra_story_diversity.py'
+      - 'astra_v2/story_composition.py'
+      - 'tests/test_astra_story_composition.py'
+      - 'astra_v2/coordinated_development.py'
+      - 'astra_v2/story_quality_audit.py'
+      - 'astra_v2/story_subtitles.py'
+      - 'astra_v2/story_production_manifest.py'
+      - 'tests/test_astra_story_manifest.py'
+      - 'astra_v2/story_batch_audio.py'
+      - 'tests/test_astra_locomotion.py'
+      - 'tests/test_astra_story_batch.py'
+      - 'tests/test_astra_story_environments.py'
+      - '.github/workflows/astra-parallel-story-rehearsal.yml'
+permissions:
+  contents: read
+concurrency:
+  group: astra-parallel-story-rehearsal-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  render-story:
+    name: Offline story ${{ matrix.story }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        story: [0, 1, 2, 3]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install offline rendering dependencies
+        run: |
+          python -m pip install --disable-pip-version-check pillow imageio-ffmpeg
+      - name: Test story batch contracts
+        run: python -m unittest discover -s tests -p 'test_astra_story_batch.py' -v
+      - name: Verify experimental story composition
+        run: python -m unittest discover -s tests -p 'test_astra_story_composition.py' -v
+      - name: Verify scene and cast continuity
+        run: python -m unittest discover -s tests -p 'test_astra_story_manifest.py' -v
+      - name: Verify new locomotion cues
+        run: python -m unittest discover -s tests -p 'test_astra_locomotion.py' -v
+      - name: Verify distinct environments
+        run: python -m unittest discover -s tests -p 'test_astra_story_environments.py' -v
+      - name: Audit cross-episode story repetition offline
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from tempfile import TemporaryDirectory
+          from astra_v2.story_batch import build_story_batch
+          from astra_v2.story_history import evaluate_and_record, read_history
+          with TemporaryDirectory() as directory:
+              history = Path(directory) / 'history.jsonl'
+              first = build_story_batch(episode=1)['stories']
+              second = build_story_batch(episode=2)['stories']
+              a = evaluate_and_record(first, history)
+              b = evaluate_and_record(second, history)
+              assert len(read_history(history)) == a['recorded'] + b['recorded']
+              assert not a['publication_allowed'] and not b['publication_allowed']
+              print(json.dumps({'episode_1': a['recorded'], 'episode_2': b['recorded'], 'episode_2_near_duplicates': b['near_duplicates']}))
+          PY
+      - name: Test persistent offline story history
+        run: python -m unittest discover -s tests -p 'test_astra_story_history.py' -v
+      - name: Test story history and near-duplicate detection
+        run: python -m unittest discover -s tests -p 'test_astra_story_diversity.py' -v
+      - name: Test plot-pattern false positives and repeats
+        run: python -m unittest discover -s tests -p 'test_astra_plot_pattern_audit.py' -v
+      - name: Verify story diversity and continuity
+        run: |
+          python - <<'PY'
+          from astra_v2.story_batch import build_story_batch
+          from astra_v2.story_diversity_audit import audit
+          result = audit(build_story_batch(episode=int('${{ github.event.inputs.episode || '1' }}'))['stories'])
+          assert result['structural_duplicates'] == 0, result
+          assert all(r['continuity_ok'] and r['repair_sequence_ok'] for r in result['results']), result
+          assert result['publication_allowed'] is False
+          PY
+      - name: Render one story independently
+        run: |
+          python -m astra_v2.render_story_batch --index ${{ matrix.story }} --episode ${{ github.event.inputs.episode || '1' }} ${{ github.event.inputs.authored == 'true' && '--authored' || '' }} --fps 8 --seconds-per-scene 2 --output verification-output/story-${{ matrix.story }}
+      - name: Validate AAC MP4 and offline gate
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import imageio_ffmpeg
+          import subprocess
+          roots = list(Path("verification-output").glob("story-*"))
+          assert len(roots) == 1
+          root = roots[0]
+          report = json.loads((root / "batch-result.json").read_text())
+          assert report["publication_allowed"] is False
+          assert report["quality_approved"] is False
+          assert report["video_has_audio"] is True
+          assert report["spoken_narration"] is False
+          assert (root / "story-audio-manifest.json").exists()
+          assert (root / "preview.mp4").stat().st_size > 1000
+          cmd = [imageio_ffmpeg.get_ffmpeg_exe(), "-v", "error", "-i", str(root / "preview.mp4"), "-f", "null", "-"]
+          subprocess.run(cmd, check=True, timeout=60)
+          PY
+      - name: Audit encoded video, soundtrack and motion
+        run: |
+          python -m astra_v2.story_quality_audit --output verification-output/story-${{ matrix.story }} --expected-seconds 10
+      - name: Upload independent story preview
+        id: upload_primary
+        if: success()
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-offline-story-${{ matrix.story }}
+          path: verification-output/story-${{ matrix.story }}/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Retry artifact upload after transient network failure
+        id: upload_retry
+        if: steps.upload_primary.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-offline-story-${{ matrix.story }}
+          path: verification-output/story-${{ matrix.story }}/
+          if-no-files-found: error
+          retention-days: 7

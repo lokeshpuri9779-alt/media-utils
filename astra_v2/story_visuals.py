@@ -8,6 +8,8 @@ import re
 from PIL import ImageDraw
 
 SUBJECTS = (
+    ("hedgehog", r"\bhedgehog\b|\bhedgehogs\b"),
+    ("turtle", r"\bturtle\b|\btortoise\b"),
     ("fox", r"\bfox\b|\bfoxes\b"),
     ("owl", r"\bowl\b|\bowls\b"),
     ("duck", r"\bduck\b|\bgoose\b|\bgeese\b"),
@@ -41,7 +43,7 @@ def select_subject(story, shot):
     title_matches = [(m.start(), name) for name, pattern in SUBJECTS
                      if (m := re.search(pattern, title))]
     title_subject = min(title_matches, key=lambda item: item[0])[1] if title_matches else None
-    characters = {"fox", "owl", "duck", "squirrel", "mouse", "otter",
+    characters = {"hedgehog", "turtle", "fox", "owl", "duck", "squirrel", "mouse", "otter",
                   "crab", "firefly", "cat", "dog", "monkey", "bird",
                   "rabbit", "whale"}
     local_matches = [(m.start(), name) for name, pattern in SUBJECTS
@@ -77,6 +79,49 @@ def draw_subject(image, subject, t, accent):
     """Return True when a bespoke subject was drawn; False for unknown subjects."""
     if subject not in {x[0] for x in SUBJECTS}:
         return False
+    # Original animated silhouettes for authored hedgehog and turtle stories.
+    # Draw at the same 1080x1920 design coordinates as existing subjects.
+    if subject in {"hedgehog", "turtle"}:
+        d = ImageDraw.Draw(image)
+        x = 520 + int(38 * math.sin(t * 1.6))
+        y = 875 + int(18 * math.sin(t * 2.5))
+        dark = (33, 42, 51)
+        blink = abs(math.sin(t * 1.25 + 0.4)) > 0.985
+        if subject == "hedgehog":
+            quill = (113, 75, 65)
+            for i in range(15):
+                a = math.pi * (0.10 + i * 0.8 / 14)
+                qx = x + int(172 * math.cos(a))
+                qy = y - int(125 * math.sin(a))
+                tipx = x + int(250 * math.cos(a))
+                tipy = y - int(265 * math.sin(a)) + int(9 * math.sin(t * 3 + i))
+                d.polygon([(qx-19, qy+20), (tipx, tipy), (qx+19, qy+20)], fill=quill)
+            d.ellipse((x-170, y-145, x+170, y+180), fill=(182, 127, 94))
+            d.ellipse((x-125, y-90, x+125, y+125), fill=(233, 193, 151))
+            for dx in (-65, 65):
+                if blink:
+                    d.line((x+dx-17,y-10,x+dx+17,y-10),fill=dark,width=8)
+                else:
+                    d.ellipse((x+dx-14,y-25,x+dx+14,y+5),fill=dark)
+            d.ellipse((x-20,y+40,x+20,y+70),fill=dark)
+            for dx in (-95,95):
+                d.ellipse((x+dx-40,y+145,x+dx+40,y+200),fill=(182,127,94))
+        else:
+            shell = (67, 141, 99)
+            d.ellipse((x-210,y-105,x+210,y+180),fill=shell,outline=(123,193,126),width=13)
+            for dx in (-110,0,110):
+                d.arc((x+dx-65,y-70,x+dx+65,y+130),15,165,fill=(39,98,74),width=9)
+            stride = int(24*math.sin(t*3.2))
+            for dx,phase in ((-140,1),(140,-1)):
+                d.ellipse((x+dx-58+stride*phase,y+135,x+dx+58+stride*phase,y+235),fill=(125,184,117))
+            d.ellipse((x-118,y-190,x+118,y+35),fill=(143,193,128))
+            for dx in (-52,52):
+                if blink:
+                    d.line((x+dx-18,y-91,x+dx+18,y-91),fill=dark,width=8)
+                else:
+                    d.ellipse((x+dx-15,y-110,x+dx+15,y-78),fill=dark)
+            d.arc((x-45,y-70,x+45,y-5),0,180,fill=dark,width=6)
+        return True
     # Dedicated character silhouettes, not aliases of unrelated animals.
     if subject in {"fox", "otter", "owl", "duck", "firefly", "squirrel", "mouse", "crab"}:
         d = ImageDraw.Draw(image)

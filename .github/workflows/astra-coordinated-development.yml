@@ -1,0 +1,62 @@
+name: ASTRA Coordinated Development Pipeline
+
+# Manual-only on the isolated branch to avoid duplicate render jobs.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: astra-coordinated-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  develop-and-verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      ASTRA_OPENAI_ENABLED: '0'
+      ASTRA_OPENAI_ALLOW_PAID_API: '0'
+      ASTRA_SERIES_PUBLICATION: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install offline preview dependencies
+        run: python -m pip install --disable-pip-version-check Pillow==11.3.0 imageio-ffmpeg==0.6.0 pytest==8.4.2
+      - name: Validate planner and frame renderer
+        run: python -m pytest -q tests/test_astra_coordinated_development.py
+      - name: Build complete offline storyboard and sample MP4
+        run: python -m astra_v2.coordinated_development --seed coordinated-preview-2026 --scenes 12 --fps 8 --output development-output --video
+      - name: Verify MP4, coverage and safety gates
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from imageio_ffmpeg import get_ffmpeg_exe
+          import subprocess
+          root=Path('development-output')
+          plan=json.loads((root/'plan.json').read_text())
+          report=json.loads((root/'report.json').read_text())
+          assert len(plan['scenes'])==12
+          assert report['unique_characters']==12 and report['unique_objects']==12
+          assert not report['motion_failures']
+          assert not report['visually_duplicate_scene_openings']
+          assert report['unique_scene_frame_fingerprints']==12
+          assert not plan['publication_allowed'] and not report['publication_allowed']
+          assert not report['quality_approved']
+          assert (root/'preview.mp4').stat().st_size>10000
+          assert (root/'storyboard.png').stat().st_size>1000
+          subprocess.run([get_ffmpeg_exe(),'-v','error','-i',str(root/'preview.mp4'),'-f','null','-'],check=True)
+          print('Offline preview decoded; quality approval intentionally remains pending.')
+          PY
+      - name: Publish artifacts for human review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-coordinated-development-preview
+          path: development-output/
+          retention-days: 7
+          if-no-files-found: warn

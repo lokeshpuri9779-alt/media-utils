@@ -1,0 +1,573 @@
+name: ASTRA Isolated Verification
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [astra-isolated-verification-20261013]
+    paths:
+      - '.github/workflows/astra-isolated-verification.yml'
+      - 'astra_v2/**'
+      - 'tests/**'
+      - 'studio_renderer.py'
+      - 'requirements.txt'
+
+# Keep only the newest verification run for this experimental branch.
+concurrency:
+  group: astra-isolated-verification-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      ASTRA_OPENAI_ENABLED: '0'
+      ASTRA_OPENAI_ALLOW_PAID_API: '0'
+      ASTRA_SERIES_PUBLICATION: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install test and render dependencies
+        run: |
+          python -m pip install --disable-pip-version-check -r requirements.txt
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            sudo apt-get update -qq
+            sudo DEBIAN_FRONTEND=noninteractive apt-get install -y ffmpeg
+          fi
+          command -v ffmpeg
+          command -v ffprobe
+      - name: Run story inventory and publication safeguards
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_story_inventory.py' -v
+          python -m unittest discover -s tests -p 'test_astra_publication_quality.py' -v
+      - name: Verify story-to-character alignment regression tests
+        run: |
+          python -m unittest astra_v2.test_story_cast_alignment -v
+      - name: Verify full catalog facial expressions without test fixtures
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageChops
+          import importlib, inspect
+          import astra_v2.character_object_catalog as catalog
+          # Earlier tests may replace draw_character with a silhouette
+          # fixture. Reload the actual catalog before verifying face pixels.
+          draw_character = importlib.reload(catalog).draw_character
+          assert 'expression' in inspect.signature(draw_character).parameters
+          for character_id in (0, 200, 400, 900, 1700):
+              rendered = {}
+              for expression in ('neutral', 'surprised', 'happy', 'focused'):
+                  canvas = Image.new('RGBA', (1080, 1920), (0, 0, 0, 0))
+                  draw_character(canvas, character_id, 0.4, 540, 900, expression=expression)
+                  rendered[expression] = canvas.crop((465, 805, 615, 945))
+              for expression in ('surprised', 'happy', 'focused'):
+                  assert ImageChops.difference(
+                      rendered['neutral'].convert('RGB'), rendered[expression].convert('RGB')
+                  ).getbbox() is not None, (character_id, expression)
+          PY
+      - name: Run video and animation regression tests
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_motion_gate.py' -v
+          python -m unittest discover -s tests -p 'test_astra_animal_scenes.py' -v
+          python -m unittest discover -s tests -p 'test_scene_layer_contract.py' -v
+          python -m unittest discover -s tests -p 'test_astra_v2.py' -v
+      - name: Run queue and authentication regression tests
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_preload_artifact_pagination.py' -v
+          python -m unittest discover -s tests -p 'test_astra_youtube_oauth_errors.py' -v
+      - name: Render and inspect offline animation sample
+        run: |
+          mkdir -p verification-output
+          python - <<'PY'
+          from PIL import Image
+          from astra_v2.story_visuals import draw_subject
+          for i in range(24):
+              frame=Image.new('RGB',(360,640),(24,34,52))
+              assert draw_subject(frame,'robot',i/12,(236,174,112))
+              frame.save(f'verification-output/frame-{i:03d}.png')
+          PY
+          ffmpeg -hide_banner -loglevel error -y -framerate 12 -i verification-output/frame-%03d.png -c:v libx264 -pix_fmt yuv420p verification-output/sample.mp4
+          ffprobe -v error -select_streams v:0 -show_entries stream=width,height,nb_frames -of json verification-output/sample.mp4 > verification-output/probe.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from PIL import Image,ImageChops
+          p=json.loads(Path('verification-output/probe.json').read_text())['streams'][0]
+          assert (p['width'],p['height'])==(360,640)
+          assert int(p['nb_frames'])==24
+          a=Image.open('verification-output/frame-000.png')
+          b=Image.open('verification-output/frame-012.png')
+          assert ImageChops.difference(a,b).getbbox() is not None
+          from astra_v2.story_visuals import draw_subject
+          # Newly introduced protagonists must each draw and animate distinctly.
+          for subject in ('hedgehog', 'turtle'):
+              a=Image.new('RGB',(1080,1920),(24,34,52))
+              b=Image.new('RGB',(1080,1920),(24,34,52))
+              assert draw_subject(a,subject,0.0,(236,174,112)),subject
+              assert draw_subject(b,subject,1.0,(236,174,112)),subject
+              assert ImageChops.difference(a,b).getbbox() is not None,subject
+          PY
+      - name: Upload offline sample and probe
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-offline-render-check
+          path: verification-output/
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Verify publication media gate rejects silent or undersized video
+        run: |
+          python - <<'PY'
+          import subprocess, tempfile
+          from pathlib import Path
+          from astra_v2.creative import inspect_video, CreativeSkip
+          with tempfile.TemporaryDirectory() as d:
+              p=Path(d)/'silent.mp4'
+              subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-f','lavfi','-i','testsrc2=size=360x640:rate=12','-t','3','-c:v','libx264','-pix_fmt','yuv420p',str(p)],check=True)
+              try:
+                  inspect_video(p)
+              except CreativeSkip as exc:
+                  assert str(exc)=='video_audio_orientation_or_duration_failed', str(exc)
+              else:
+                  raise AssertionError('Silent video passed publication integrity gate')
+          PY
+      - name: Verify publication media gate accepts valid audio and portrait
+        run: |
+          python - <<'PY'
+          import subprocess, tempfile
+          from pathlib import Path
+          from astra_v2.creative import inspect_video
+          with tempfile.TemporaryDirectory() as d:
+              p=Path(d)/'valid.mp4'
+              subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y',
+                  '-f','lavfi','-i','testsrc2=size=360x640:rate=12',
+                  '-f','lavfi','-i','sine=frequency=440:sample_rate=24000',
+                  '-t','3','-c:v','libx264','-pix_fmt','yuv420p',
+                  '-c:a','aac','-shortest',str(p)],check=True)
+              result=inspect_video(p)
+              assert result['width']==360 and result['height']==640, result
+              assert 2.5 < result['seconds'] < 3.5, result
+          PY
+      - name: Verify production storyboard and timed caption frames offline
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageChops
+          import studio_renderer as studio
+          from astra_v2.story_forge import catalog
+          story=catalog()[0]
+          plan=studio.make_plan(story)
+          assert len(plan)>=3, len(plan)
+          assert story.get('production_ready') is True, 'Only approved authored stories may be sampled'
+          for i,shot in enumerate(plan):
+              assert str(shot.get('speech') or '').strip(), i
+              assert str(shot.get('headline') or '').strip(), i
+          # Production renderer frame path, with synthetic timing to avoid voice downloads.
+          for i,shot in enumerate(plan):
+              shot['start']=float(i)*2
+              shot['end']=float(i+1)*2
+              shot['duration']=2.0
+              shot['audio']=[0.0]*int(2*studio.RATE)
+              shot['voice_start']=shot['start']
+          frames=[]
+          for t in (0.3,2.3):
+              frame=studio.render_frame(plan,t,story['genre'],len(plan)*2)
+              assert isinstance(frame,Image.Image)
+              assert frame.size==(studio.W,studio.H)
+              frames.append(frame)
+          assert ImageChops.difference(frames[0].convert('RGB'),frames[1].convert('RGB')).getbbox() is not None
+          PY
+      - name: Verify landscape video cannot pass Shorts media gate
+        run: |
+          python - <<'PY'
+          import subprocess, tempfile
+          from pathlib import Path
+          from astra_v2.creative import inspect_video, CreativeSkip
+          with tempfile.TemporaryDirectory() as d:
+              p=Path(d)/'landscape.mp4'
+              subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y',
+                  '-f','lavfi','-i','testsrc2=size=640x360:rate=12',
+                  '-f','lavfi','-i','sine=frequency=440:sample_rate=24000',
+                  '-t','3','-c:v','libx264','-pix_fmt','yuv420p',
+                  '-c:a','aac','-shortest',str(p)],check=True,timeout=90)
+              assert p.stat().st_size>30000
+              try:
+                  inspect_video(p,fmt='short')
+              except CreativeSkip as exc:
+                  assert str(exc)=='video_audio_orientation_or_duration_failed',str(exc)
+              else:
+                  raise AssertionError('Landscape video passed Shorts media gate')
+          PY
+      - name: Verify 2000 procedural animation variants
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageChops
+          from astra_v2.motion_elements import COUNT, SHAPES, MOTIONS, COLORS, variant, draw
+          assert COUNT == 2000
+          assert len(SHAPES) == 20 and len(MOTIONS) == 10 and len(COLORS) == 10
+          assert len({variant(i) for i in range(COUNT)}) == COUNT
+          for index in (0, 199, 888, 1999):
+              a=Image.new('RGB',(1080,1920),(20,30,45))
+              b=Image.new('RGB',(1080,1920),(20,30,45))
+              draw(a,index,0)
+              draw(b,index,1.2)
+              assert ImageChops.difference(a,b).getbbox() is not None, index
+          PY
+      - name: Verify jointed arm-to-prop pickup regressions
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_carry_rig.py' -v
+      - name: Verify illustrated actor expressions and rig alignment
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_storybook_comedy.py' -v
+      - name: Verify original soundtrack synthesis and cue timing
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_comedy_sound.py' -v
+      - name: Test cinematic camera, dissolves and timed finale punchline
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_cinematic_comedy.py' -v
+      - name: Verify Studio frame rendering with timed captions
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_shared_caption_studio.py' -v
+      - name: Test narration and dialogue caption timing
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_caption_timing.py' -v
+      - name: Test shared caption engine across formats and styles
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_shared_captions.py' -v
+      - name: Verify enlarged mobile-safe captions
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_comedy_captions.py' -v
+      - name: Guard against detached gesture effects
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_detached_effects.py' -v
+      - name: Verify diverse offline story batch
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_story_batch.py' -v
+          python -m astra_v2.story_batch --output verification-output/story-batch.json
+      - name: Upload offline story batch
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-offline-story-batch
+          path: verification-output/story-batch.json
+          if-no-files-found: ignore
+      - name: Render offline comedy pilot
+        run: |
+          python -m astra_v2.coordinated_development --comedy-pilot --seed astra-comedy-pilot --fps 24 --seconds-per-scene 3 --video --output verification-output/comedy-pilot
+      - name: Test sustained-motion quality diagnostics
+        run: python -m unittest discover -s tests -p 'test_astra_motion_quality_diagnostics.py' -v
+      - name: Audit 24fps per-scene motion
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from astra_v2.coordinated_development import build_comedy_demo
+          from astra_v2.pilot_motion_audit import audit
+          output = Path('verification-output/comedy-pilot/motion-audit.json')
+          report = audit(build_comedy_demo(), output, fps=24, seconds_per_scene=3)
+          assert report['total_frames_expected'] == 360
+          assert report['scene_count'] == 5
+          assert report['all_scenes_have_motion'], report['scenes']
+          assert all(len(scene['adjacent_frame_differences']) == 4
+                     for scene in report['scenes'])
+          assert not report['publication_allowed']
+          PY
+      - name: Automatically validate rendered pilot and pickup evidence
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          from PIL import Image, ImageChops
+          root = Path('verification-output/comedy-pilot')
+          required = ('preview.mp4', 'storyboard.png', 'pickup-motion-sheet.png',
+                      'report.json', 'soundtrack.wav', 'sound-cues.json',
+                      'cinematic-beats.png', 'motion-audit.json')
+          assert all((root / name).is_file() for name in required), 'missing render or pickup review output'
+          report = json.loads((root / 'report.json').read_text())
+          assert report['publication_allowed'] is False
+          assert report['quality_approved'] is False
+          assert not report['motion_failures'], report['motion_failures']
+          assert not report['visually_duplicate_scene_openings']
+          assert report.get('cinematic_camera') is True
+          assert report.get('duck_surprise') is True
+          assert report.get('scene_dissolves') is True
+          beats = Image.open(root / 'cinematic-beats.png').convert('RGB')
+          assert beats.size == (1350, 960), beats.size
+          assert ImageChops.difference(
+              beats.crop((1080, 0, 1350, 480)),
+              beats.crop((1080, 480, 1350, 960))
+          ).getbbox() is not None, 'finale beat lacks progression'
+          assert report.get('audio_codec') == 'aac'
+          assert report.get('audio_origin') == 'deterministic-original-synthesis'
+          cues = json.loads((root / 'sound-cues.json').read_text())
+          assert cues['licensed_audio_assets_used'] is False
+          assert cues['cue_count'] >= 14
+          assert len([cue for cue in cues['cues']
+                      if cue['event'] == 'duck_honk' and
+                      cue['scene'] == 5 and 13.4 < cue['at_seconds'] < 14.5]) == 1
+          assert report['original_audio_cues'] == cues['cue_count']
+          sheet = Image.open(root / 'pickup-motion-sheet.png').convert('RGB')
+          assert sheet.width >= 1350 and sheet.height >= 480, sheet.size
+          # Verify that the first and last sampled pickup images are different.
+          assert ImageChops.difference(sheet.crop((0, 0, 270, 480)),
+              sheet.crop((sheet.width - 270, 0, sheet.width, 480))).getbbox() is not None
+          info = json.loads(subprocess.check_output(['ffprobe', '-v', 'error',
+              '-select_streams', 'v:0', '-show_entries',
+              'stream=width,height,nb_frames,codec_name', '-of', 'json',
+              str(root / 'preview.mp4')]))
+          stream = info['streams'][0]
+          assert stream['codec_name'] == 'h264', stream
+          assert (stream['width'], stream['height']) == (544, 960), stream
+          assert int(stream['nb_frames']) == 360, stream
+          audio = json.loads(subprocess.check_output([
+              'ffprobe', '-v', 'error', '-select_streams', 'a:0',
+              '-show_entries', 'stream=codec_name,sample_rate,channels',
+              '-of', 'json', str(root / 'preview.mp4')
+          ]))['streams']
+          assert len(audio) == 1 and audio[0]['codec_name'] == 'aac', audio
+          assert audio[0]['sample_rate'] == '24000' and audio[0]['channels'] == 1, audio
+          import wave, struct, math
+          with wave.open(str(root / 'soundtrack.wav'), 'rb') as snd:
+              assert snd.getnframes() == 360000
+              data = snd.readframes(snd.getnframes())
+          samples = struct.iter_unpack('<h', data)
+          squares = [s[0] * s[0] for s in samples]
+          assert math.sqrt(sum(squares) / len(squares)) > 250, 'silent soundtrack'
+          subprocess.run(['ffmpeg', '-v', 'error', '-xerror', '-i',
+              str(root / 'preview.mp4'), '-f', 'null', '-'], check=True)
+          subprocess.run(['ffmpeg', '-v', 'error', '-xerror', '-i',
+              str(root / 'preview.mp4'), '-map', '0:a:0',
+              '-f', 'null', '-'], check=True)
+          (root / 'automated-validation.json').write_text(json.dumps({
+              'render_verified': True, 'pickup_sequence_changed': True,
+              'audio_verified': True, 'audio_origin': 'original_synthesis',
+              'cinematic_beats_verified': True, 'duck_gag_sound_verified': True,
+              'publication_allowed': False, 'creative_approval': 'pending'
+          }, indent=2))
+          PY
+      - name: Upload offline comedy pilot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-offline-comedy-pilot
+          path: verification-output/comedy-pilot/
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Verify character and object catalogs
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageChops
+          from astra_v2.character_object_catalog import (
+              CHARACTER_COUNT, OBJECT_COUNT, character, prop,
+              draw_character, draw_prop,
+          )
+          assert CHARACTER_COUNT == 2000 and OBJECT_COUNT == 2000
+          assert len({character(i) for i in range(2000)}) == 2000
+          assert len({prop(i) for i in range(2000)}) == 2000
+          for fn in (draw_character, draw_prop):
+              for index in (0, 399, 999, 1999):
+                  a=Image.new('RGB',(1080,1920),(20,30,45))
+                  b=Image.new('RGB',(1080,1920),(20,30,45))
+                  fn(a,index,0.0)
+                  fn(b,index,1.0)
+                  assert ImageChops.difference(a,b).getbbox() is not None, (fn.__name__,index)
+          PY
+      - name: Verify opt-in character and prop renderer integration
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageChops
+          import studio_renderer
+          from astra_v2.story_forge import catalog
+          stories = catalog()
+          assert stories, 'No approved authored stories available'
+          story = stories[0]
+          plan = studio_renderer.make_plan(story)
+          assert plan
+          for shot in plan:
+              shot['start'] = 0.0
+              shot['end'] = 2.0
+              shot['duration'] = 2.0
+              shot['experimental_cast_enabled'] = True
+              shot['audio'] = [0.0] * int(2 * studio_renderer.RATE)
+              shot['voice_start'] = 0.0
+          # Compare enabled against disabled at the same timestamp to prove
+          # that the new catalog is actually composited, not just moving text.
+          a = studio_renderer.render_frame(plan[:1], 0.3, 'fiction', 2.0)
+          plan[0]['experimental_cast_enabled'] = False
+          baseline = studio_renderer.render_frame(plan[:1], 0.3, 'fiction', 2.0)
+          plan[0]['experimental_cast_enabled'] = True
+          b = studio_renderer.render_frame(plan[:1], 1.3, 'fiction', 2.0)
+          assert a.size == (1080, 1920)
+          assert ImageChops.difference(a.convert('RGB'), baseline.convert('RGB')).getbbox() is not None, 'Cast layer not visible'
+          assert ImageChops.difference(a.convert('RGB'), b.convert('RGB')).getbbox() is not None
+          # Publish reduced preview frames for visual review, not to YouTube.
+          from pathlib import Path
+          out=Path('verification-output')
+          out.mkdir(exist_ok=True)
+          a.resize((270,480)).save(out/'cast-prop-preview-0.png')
+          b.resize((270,480)).save(out/'cast-prop-preview-1.png')
+          PY
+      - name: Upload experimental cast and prop previews
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-cast-prop-previews
+          path: verification-output/cast-prop-preview-*.png
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Build visual diversity contact sheets
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageDraw
+          from astra_v2.character_object_catalog import SPECIES, OBJECTS, draw_character, draw_prop
+          out=Path('verification-output')
+          out.mkdir(exist_ok=True)
+          def sheet(filename, labels, draw_fn, index_fn, columns=5):
+              tile_w,tile_h=220,280
+              rows=(len(labels)+columns-1)//columns
+              canvas=Image.new('RGB',(columns*tile_w,rows*tile_h),(22,31,46))
+              for i,label in enumerate(labels):
+                  tile=Image.new('RGB',(1080,1920),(28,40,59))
+                  draw_fn(tile,index_fn(i),1.1,540,900)
+                  crop=tile.crop((260,570,820,1280)).resize((190,240))
+                  x=(i%columns)*tile_w+15
+                  y=(i//columns)*tile_h+10
+                  canvas.paste(crop,(x,y))
+                  ImageDraw.Draw(canvas).text((x,y+245),label,fill=(240,241,244))
+              canvas.save(out/filename)
+          sheet('character-species-contact-sheet.png',SPECIES,draw_character,lambda i:i*100)
+          sheet('object-categories-contact-sheet.png',OBJECTS,draw_prop,lambda i:i*50)
+          # Pose comparison uses identical species, timing and camera position;
+          # only the authored gesture changes. Reviewability is not a quality score.
+          gestures=('idle','point','celebrate','carry')
+          species_indices=(0,200,400,900,1100,1500,1700,1900)
+          tile_w,tile_h=210,270
+          board=Image.new('RGB',(len(gestures)*tile_w,
+                                 len(species_indices)*tile_h),(22,31,46))
+          d=ImageDraw.Draw(board)
+          for row,index in enumerate(species_indices):
+              for col,gesture in enumerate(gestures):
+                  tile=Image.new('RGB',(1080,1920),(28,40,59))
+                  draw_character(tile,index,0.4,540,900,gesture=gesture)
+                  crop=tile.crop((300,600,780,1200)).resize((190,235))
+                  x,y=col*tile_w+10,row*tile_h+8
+                  board.paste(crop,(x,y))
+                  d.text((x,y+239),f'{SPECIES[index//100]} / {gesture}',
+                         fill=(240,241,244))
+          board.save(out/'character-gesture-comparison.png')
+          # Inspect object placement through the full scene compositor.
+          from astra_v2.coordinated_development import frame
+          from astra_v2.character_object_catalog import character
+          scenes=[]
+          for count in (1,2,3,4):
+              actors=[{'character_id':i*100} for i in range(count)]
+              scenes.append({'actors':actors,'character_id':0,'object_id':1900,
+                             'action':'carry','scene':0,'scene_index':0})
+          comparison=Image.new('RGB',(4*270,480),(22,31,46))
+          for col,scene in enumerate(scenes):
+              rendered=frame(scene,0.6).convert('RGB')
+              comparison.paste(rendered.resize((270,480)),(col*270,0))
+          comparison.save(out/'carry-ensemble-comparison.png')
+          PY
+      - name: Upload visual diversity contact sheets
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-diversity-contact-sheets
+          path: |
+            verification-output/*contact-sheet.png
+            verification-output/character-gesture-comparison.png
+            verification-output/carry-ensemble-comparison.png
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Render ensemble contact sheet for visual review
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageDraw
+          from astra_v2.coordinated_development import build_ensemble_plan, frame, verify_story_cast
+          out=Path("verification-output")
+          out.mkdir(exist_ok=True)
+          casts=[["fox"],["fox","dog"],["fox","dog","cat"],["fox","dog","cat","rabbit"]]
+          plan=build_ensemble_plan("ensemble-visual-review-v1", casts)
+          assert verify_story_cast(plan)
+          sheet=Image.new("RGB",(540*4,960*2),(20,30,45))
+          for i,scene in enumerate(plan["scenes"]):
+              for j,t in enumerate((0.0,0.8)):
+                  tile=frame(scene,t)
+                  sheet.paste(tile,(i*540,j*960))
+          sheet.save(out/"ensemble-contact-sheet.png")
+          assert (out/"ensemble-contact-sheet.png").stat().st_size>10000
+          PY
+      - name: Validate and render authored story preview
+        run: |
+          cat > /tmp/astra-authored-story.json <<'JSON'
+          {
+            "mode": "ensemble",
+            "scenes": [
+              {"actors": ["fox"], "object_id": 1900, "action": "approach", "narration": "A fox discovers a mysterious gift."},
+              {"actors": ["fox", "dog"], "action": "react", "narration": "A dog arrives and notices the gift."},
+              {"actors": ["fox", "dog"], "action": "carry", "narration": "Together they carry it toward the village."},
+              {"actors": ["fox", "dog", "cat"], "action": "celebrate", "narration": "Their friend joins the celebration."}
+            ]
+          }
+          JSON
+          python -m astra_v2.coordinated_development \
+            --story-file /tmp/astra-authored-story.json \
+            --seed authored-story-review-v1 --validate-only
+          python -m astra_v2.coordinated_development \
+            --story-file /tmp/astra-authored-story.json \
+            --seed authored-story-review-v1 --fps 4 \
+            --output verification-output/authored-story
+      - name: Upload authored story preview
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-authored-story-preview
+          path: verification-output/authored-story/
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Render carry-motion contact sheet
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageDraw
+          from astra_v2.coordinated_development import build_ensemble_plan, frame
+          out = Path("verification-output")
+          out.mkdir(exist_ok=True)
+          sheet = Image.new("RGB", (540 * 4, 960 * 2), (20, 30, 45))
+          for i, cast in enumerate((["fox"], ["fox", "dog"],
+                                    ["fox", "dog", "cat"],
+                                    ["fox", "dog", "cat", "rabbit"])):
+              scene = build_ensemble_plan("carry-motion-review", [cast])["scenes"][0]
+              scene["action"] = "carry"
+              for j, t in enumerate((0.0, 0.8)):
+                  sheet.paste(frame(scene, t), (i * 540, j * 960))
+          path = out / "carry-motion-contact-sheet.png"
+          sheet.save(path)
+          assert path.stat().st_size > 10000
+          PY
+      - name: Upload carry-motion contact sheet
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-carry-motion-visual-review
+          path: verification-output/carry-motion-contact-sheet.png
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Upload ensemble contact sheet
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-ensemble-visual-review
+          path: verification-output/ensemble-contact-sheet.png
+          if-no-files-found: error
+          retention-days: 7
+      - name: Record verification boundary
+        run: |
+          echo 'Regression checks completed. No YouTube credentials are provided to this workflow.'
+          echo 'Offline animation and production frame checks completed; neural narration, full production encoding, caption timing with real audio, creative approval and publication remain unverified.' >> "$GITHUB_STEP_SUMMARY"

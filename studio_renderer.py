@@ -1036,6 +1036,23 @@ def render_frame(plan,t,genre,total):
         moved=im.resize((nw,nh),Image.Resampling.BICUBIC)
         dx=max(0,(nw-W)//2); dy=max(0,(nh-H)//2)
         im=moved.crop((dx,dy,dx+W,dy+H))
+    # Deterministic scene-specific motion accents. These stay at the edges,
+    # outside the central protagonist and lower caption region.
+    if genre == 'fiction' and not layers['draw_cached_media']:
+        from astra_v2.motion_elements import draw as draw_motion_element, COUNT
+        seed = int.from_bytes(hashlib.sha256(visual_identity.encode()).digest()[:8], 'big')
+        for slot, (ax, ay) in enumerate(((145, 460), (915, 480), (165, 1180))):
+            draw_motion_element(im, (seed + slot * 397) % COUNT, t, ax, ay, 24)
+    # Opt-in procedural cast and prop layer for isolated storyboard previews.
+    # The original primary visual remains authoritative; no asset substitution.
+    if genre == 'fiction' and s.get('experimental_cast_enabled', False) and not layers['draw_cached_media']:
+        from astra_v2.character_object_catalog import draw_character, draw_prop
+        cast_key = str(s.get('character_key') or visual_identity)
+        prop_key = str(s.get('object_key') or visual_identity)
+        character_id = int.from_bytes(hashlib.sha256(cast_key.encode()).digest()[:4], 'big') % 2000
+        object_id = int.from_bytes(hashlib.sha256(prop_key.encode()).digest()[:4], 'big') % 2000
+        draw_character(im, character_id, t, 540, 870)
+        draw_prop(im, object_id, t, 820, 1090)
     # Transition accents occur under the hero, never on top of the narration
     # captions or newly selected subject illustration.
     transition_layer(im,s,t,u,accent)
@@ -1086,8 +1103,44 @@ def render_frame(plan,t,genre,total):
     elif mode=='question' and text and ('?' in s.get('speech','') or s.get('director_role')=='cold_open'):
         text=text.rstrip(' .!?')+'?'
     if s.get('countdown') and t>s['voice_start']+dur+.1: text='YOUR TURN'
+    if s.get('experimental_shared_captions'):
+        # Optional word-aligned timestamps take precedence over approximate
+        # speech slicing. Without them, derive explicitly estimated windows.
+        from astra_v2.caption_timing import build_caption_windows, active_caption
+        aligned = s.get('caption_word_times')
+        start = float(s['voice_start'])
+        if aligned is not None:
+            windows = build_caption_windows(s['speech'], start=start,
+                                            word_times=aligned,
+                                            words_per_caption=width)
+        elif dur > .12:
+            windows = build_caption_windows(s['speech'], start=start,
+                                            duration=dur,
+                                            words_per_caption=width)
+        else:
+            windows = []
+        timed_text = active_caption(windows, t)
+        text = timed_text or ''
+        if mode == 'keyword' and text:
+            text = max(text.split(), key=len).upper()
+        elif mode == 'question' and text and (
+                '?' in s.get('speech', '') or s.get('director_role') == 'cold_open'):
+            text = text.rstrip(' .!?') + '?'
+        if s.get('countdown') and t > start + dur + .1:
+            text = 'YOUR TURN'
+    # Shared caption engine is opt-in on the isolated branch. Default studio
+    # production visuals remain byte-for-byte on their existing caption path.
+    if s.get('experimental_shared_captions'):
+        from astra_v2.shared_caption_engine import draw_shared_caption
+        caption_style = str(s.get('shared_caption_style') or
+                            ('documentary' if fmt in {'documentary_montage',
+                                                     'cinematic_mini_doc'}
+                             else 'suspense' if fmt == 'microfiction_cinematic'
+                             else 'narration'))
+        draw_shared_caption(im, text, style=caption_style,
+                            language=str(s.get('language') or 'auto'))
     # Caption surface also changes with the selected creative format.
-    if fmt in {'cinematic_mini_doc','microfiction_cinematic'}:
+    elif fmt in {'cinematic_mini_doc','microfiction_cinematic'}:
         d.rounded_rectangle((118,1530,900,1636),radius=18,fill=(5,8,14))
         fit_text(d,text,(145,1538,874,1628),size=37,fill=(242,245,250),max_lines=2)
     elif fmt=='documentary_montage':

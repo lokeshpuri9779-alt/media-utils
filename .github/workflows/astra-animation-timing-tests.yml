@@ -1,0 +1,22 @@
+name: ASTRA animation timing tests (offline)
+on:
+  workflow_dispatch:
+  push:
+    branches: [astra-isolated-verification-20261013]
+    paths:
+      - 'astra_v2/animation_timing.py'
+      - 'tests/test_astra_animation_timing.py'
+      - '.github/workflows/astra-animation-timing-tests.yml'
+permissions:
+  contents: read
+jobs:
+  timing-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify 24fps timing and motion primitives
+        run: python -m unittest discover -s tests -p 'test_astra_animation_timing.py' -v
