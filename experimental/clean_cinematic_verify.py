@@ -1,13 +1,13 @@
 """Validate rendered ASTRA clean review video using FFmpeg's ffprobe."""
 from __future__ import annotations
-import argparse,json,subprocess
+import argparse,json,subprocess,shutil
 from pathlib import Path
-from imageio_ffmpeg import get_ffmpeg_exe
 
 def validate(path, expected_seconds=24, width=720, height=1280, fps=30):
     path=Path(path)
     if not path.is_file() or path.stat().st_size<1024:raise RuntimeError("MP4 missing or empty")
-    ffprobe=str(get_ffmpeg_exe()).replace("ffmpeg","ffprobe")
+    ffprobe=shutil.which("ffprobe")
+    if not ffprobe: raise RuntimeError("ffprobe is not installed")
     try:
         proc=subprocess.run([ffprobe,"-v","error","-select_streams","v:0",
             "-show_entries","stream=codec_name,width,height,r_frame_rate,nb_frames",
