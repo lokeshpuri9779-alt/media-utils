@@ -58,6 +58,8 @@ def similarity(a, b):
     lexical = len(ta & tb) / len(ta | tb) if ta | tb else 1.0
     # Detect repeated plot scaffolds even when the narration uses different words.
     same_structure = fingerprint(a) == fingerprint(b)
+    # Plot action sequences alone are a weak signal; keep this as a review flag,
+    # not an automatic rejection of otherwise different narratives.
     aa = [s.get("action") for s in a.get("scenes", [])]
     ab = [s.get("action") for s in b.get("scenes", [])]
     actions = sum(x == y for x, y in zip(aa, ab)) / max(len(aa), len(ab), 1)
