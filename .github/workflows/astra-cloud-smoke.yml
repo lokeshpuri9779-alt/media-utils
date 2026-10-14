@@ -1,0 +1,32 @@
+name: ASTRA Cloud Smoke Test
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install free CPU dependencies
+        run: |
+          python3 -m pip install --user pillow imageio-ffmpeg
+      - name: Run timeline and audio tests
+        run: |
+          python3 -m unittest discover -s tests -p 'test_episode*.py' -v
+      - name: Run synthetic cinematic smoke render
+        run: |
+          python3 -m experimental.clean_cinematic_smoke
+      - name: Collect smoke outputs
+        if: always()
+        run: |
+          mkdir -p smoke-artifacts
+          find . -maxdepth 4 -type f \( -name '*.mp4' -o -name '*.srt' \) -not -path './.git/*' -exec cp -n {} smoke-artifacts/ \; || true
+          printf 'Synthetic test only. Not approved for YouTube publication.\n' > smoke-artifacts/NOTICE.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: astra-cloud-smoke
+          path: smoke-artifacts/
+          retention-days: 7
