@@ -1,0 +1,52 @@
+name: ASTRA Pillow duo integration QA
+on:
+  pull_request:
+    paths:
+      - 'astra_v2/pillow_duo_scene.py'
+      - 'astra_v2/icon_visuals.py'
+      - 'studio_renderer.py'
+      - 'tests/test_pillow_duo_scene.py'
+      - '.github/workflows/astra-pillow-duo-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install 'Pillow>=10,<12' 'imageio-ffmpeg>=0.5,<1'
+      - name: Validate duo matching and animation
+        run: python -m unittest discover -s tests -p 'test_pillow_duo_scene.py' -v
+      - name: Render two-character motion artifact
+        run: |
+          mkdir -p preview
+          python - <<'PY'
+          from PIL import Image
+          from astra_v2.pillow_duo_scene import draw_duo
+          from imageio_ffmpeg import get_ffmpeg_exe
+          import subprocess
+          path='preview/pillow-duo-motion.mp4'
+          cmd=[get_ffmpeg_exe(),'-hide_banner','-loglevel','error','-y',
+               '-f','rawvideo','-pix_fmt','rgb24','-s','1080x1920','-r','8',
+               '-i','-','-c:v','libx264','-preset','ultrafast','-pix_fmt','yuv420p',path]
+          proc=subprocess.Popen(cmd,stdin=subprocess.PIPE)
+          shot={'speech':'The fox and rabbit run to carry a gift box.', 'story_action':'run'}
+          for i in range(24):
+              im=Image.new('RGB',(1080,1920),(24,35,60))
+              assert draw_duo(im,shot,i/8)
+              proc.stdin.write(im.tobytes())
+          proc.stdin.close()
+          assert proc.wait()==0
+          subprocess.run([get_ffmpeg_exe(),'-v','error','-i',path,'-f','null','-'],check=True)
+          print('Verified decoded duo MP4:',path)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: astra-pillow-duo-motion
+          path: preview/pillow-duo-motion.mp4
+          retention-days: 7
