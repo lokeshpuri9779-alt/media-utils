@@ -1,0 +1,45 @@
+name: ASTRA Godot 2D isolated benchmark
+on:
+  workflow_dispatch:
+  push:
+    branches: [astra-isolated-verification-20261013]
+    paths:
+      - '.github/workflows/astra-godot-2d-benchmark.yml'
+      - 'astra_v2/godot_benchmark/**'
+permissions:
+  contents: read
+jobs:
+  benchmark:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      ASTRA_SERIES_PUBLICATION: '0'
+      ASTRA_OPENAI_ENABLED: '0'
+      ASTRA_OPENAI_ALLOW_PAID_API: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Godot from Ubuntu repositories
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y godot3-server ffmpeg
+          godot3-server --version
+      - name: Render 2D character animation headlessly
+        run: |
+          mkdir -p godot-benchmark-output
+          godot3-server --path astra_v2/godot_benchmark --no-window --script res://benchmark.gd
+          test -s godot-benchmark-output/benchmark.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          result=json.loads(Path('godot-benchmark-output/benchmark.json').read_text())
+          assert result['engine']=='godot3'
+          assert result['frames']==48
+          assert result['publication_allowed'] is False
+          PY
+      - name: Upload benchmark metrics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-godot-2d-benchmark
+          path: godot-benchmark-output/
+          if-no-files-found: ignore
