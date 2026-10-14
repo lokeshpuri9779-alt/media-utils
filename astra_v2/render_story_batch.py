@@ -6,8 +6,8 @@ from astra_v2.story_batch import build_story_batch
 from astra_v2.coordinated_development import render
 
 
-def render_one(index, output, seed="astra-story-rehearsal", fps=8, seconds_per_scene=2):
-    batch = build_story_batch(seed)
+def render_one(index, output, seed="astra-story-rehearsal", fps=8, seconds_per_scene=2, episode=1):
+    batch = build_story_batch(seed, episode=episode)
     if not isinstance(index, int) or not 0 <= index < batch["story_count"]:
         raise ValueError("story index outside batch")
     plan = batch["stories"][index]
@@ -16,6 +16,7 @@ def render_one(index, output, seed="astra-story-rehearsal", fps=8, seconds_per_s
     report = render(plan, Path(output), fps=fps,
                     seconds_per_scene=seconds_per_scene, video=True)
     report["title"] = plan["title"]
+    report["episode"] = plan["episode"]
     from astra_v2.story_subtitles import write_srt
     write_srt(plan, Path(output) / "captions.srt", seconds_per_scene=seconds_per_scene)
     from astra_v2.story_batch_audio import soundtrack, add_audio
@@ -38,9 +39,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--index", type=int, required=True)
     parser.add_argument("--seed", default="astra-story-rehearsal")
+    parser.add_argument("--episode", type=int, default=1)
     parser.add_argument("--output", required=True)
     parser.add_argument("--fps", type=int, default=8)
     parser.add_argument("--seconds-per-scene", type=int, default=2)
     args = parser.parse_args()
     print(json.dumps(render_one(args.index, args.output, args.seed,
-                                args.fps, args.seconds_per_scene), indent=2))
+                                args.fps, args.seconds_per_scene, args.episode), indent=2))
