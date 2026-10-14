@@ -16,6 +16,7 @@ class StoryBatchTests(unittest.TestCase):
         self.assertEqual(len({s["location"] for s in stories}), 4)
         for story in stories:
             self.assertTrue(all(scene["location"] == story["location"] for scene in story["scenes"]))
+            self.assertTrue(all(scene["caption"] == scene["narration"] for scene in story["scenes"]))
         for story in stories:
             self.assertTrue(verify_story_cast(story))
             self.assertEqual(tuple(s["action"] for s in story["scenes"]), STORY_ACTIONS[story["title"]])
