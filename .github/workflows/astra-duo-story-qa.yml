@@ -44,7 +44,7 @@ jobs:
           p=Path('duo-preview/duo-short.mp4')
           report=render_short(s,p)
           verdict=evaluate_studio_render(s,report,video_path=p)
-          assert report['renderer']=='studio-7.2.0'
+          assert report['renderer']=='studio-7.2.1'
           assert report['visual_edit']['pillow_duo_scenes']==4
           assert verdict['pass'],verdict
           print('ASTRA_DUO_FULL_RENDER_VERIFIED',p.stat().st_size)
