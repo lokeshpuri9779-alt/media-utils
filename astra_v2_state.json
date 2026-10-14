@@ -3,7 +3,7 @@
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 35,
-  "confirmed_today": 34,
+  "confirmed_today": 35,
   "last_attempt_at": "2026-10-14T11:11:44.056105+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -714,41 +714,37 @@
       "title": "The Duck and the Stalled Ferry",
       "format": "short",
       "uploaded_at": "2026-10-14T10:45:43.522448+00:00"
-    }
-  },
-  "pending": {
-    "uIEMRh3VgvE": {
-      "content_id": "rayvan-forge-5c3c9970e0205042",
+    },
+    "rayvan-forge-5c3c9970e0205042": {
+      "video_id": "uIEMRh3VgvE",
+      "confirmed_at": "2026-10-14T11:16:02.728015+00:00",
       "title": "The Lynx and the Eclipse",
-      "day": "2026-10-14",
-      "uploaded_at": "2026-10-14T11:11:45.479654+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": ""
+      "uploaded_at": "2026-10-14T11:11:45.479654+00:00"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-14T11:10:53.498298+00:00",
-  "last_preflight_reason": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-14T11:16:02.372647+00:00",
+  "last_preflight_reason": "min_interval",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T11:11:45.711513+00:00",
+    "at": "2026-10-14T11:16:02.802636+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-14T07:41:50.802300+00:00",
   "reserved": {
