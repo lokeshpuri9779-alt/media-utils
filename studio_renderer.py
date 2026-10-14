@@ -1026,7 +1026,14 @@ def render_frame(plan,t,genre,total):
         # production scenes must never render blank after failed acquisition.
         raise CreativeReject('Scene media missing from cache: refusing overlapping/filler fallback.')
     if layers['draw_visual']:
-        draw_visual(im,s,t,u,accent)
+        # The Pillow duo is a single foreground alternative, never an overlay.
+        # Only narration-grounded pairs use it; other shots retain Studio art.
+        if genre == 'fiction' and os.environ.get('ASTRA_STUDIO_PILLOW_DUO', '1') == '1':
+            from astra_v2.pillow_duo_scene import draw_duo
+            if not draw_duo(im, s, u):
+                draw_visual(im,s,t,u,accent)
+        else:
+            draw_visual(im,s,t,u,accent)
     elif genre == 'fiction' and not layers['draw_cached_media'] and not layers['draw_director_asset']:
         # Licensed icon illustration only for otherwise empty foregrounds.
         from astra_v2.icon_visuals import overlay_icon
