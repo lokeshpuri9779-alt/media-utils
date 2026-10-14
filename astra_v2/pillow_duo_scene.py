@@ -83,7 +83,9 @@ def scene_mood(shot):
         return "curious"
     if re.search(r"\b(?:smile|laugh|celebrat\w*|happy|cheer|dance)\b", text):
         return "happy"
-    return "alert"
+    return {"reveal":"curious", "build":"surprised",
+            "twist":"curious","payoff":"happy"}.get(
+                str(shot.get("story_beat") or "").lower(), "alert")
 
 
 def _blend(a, b, k):
@@ -100,33 +102,9 @@ def _line(d, pts, color, width=9):
 
 
 def _stage(d, shot, t):
-    """Shallow parallax environment, leaving headline/captions untouched."""
-    text = " ".join(str(shot.get(k) or "") for k in
-                    ("speech", "visual_prompt", "action")).lower()
-    seed = int.from_bytes(hashlib.sha256(text.encode()).digest()[:4], "big")
-    night = bool(re.search(r"\b(?:night|moon|stars?|dark|shadow)\b", text))
-    palette = ((92, 129, 155), (53, 95, 109)) if night else ((114, 162, 145), (67, 123, 117))
-    # Translucent sky discs and environmental layers within the subject stage.
-    sunx = 680 if seed % 2 else 390
-    d.ellipse((sunx-132, 550, sunx+132, 814), fill=palette[0])
-    for idx in range(4):
-        x = 118 + (idx * 279 + seed % 107) % 800
-        y = 790 + (idx % 2)*48
-        d.polygon(((x-85, 1060), (x+8, y), (x+106, 1060)), fill=(28, 79, 81))
-    # Clean ground with tactile foreground plants, not a full-screen card.
-    d.ellipse((70, 1178, 1005, 1363), fill=(32, 67, 78))
-    d.ellipse((110, 1225, 975, 1340), fill=(43, 83, 83))
-    for i in range(12):
-        x = 125 + (seed // 3 + i*149) % 810
-        y = 1235 + (i % 3) * 21
-        d.arc((x-27, y-22, x+27, y+22), 192, 345, fill=(82, 155, 125), width=5)
-    for i in range(9):
-        x = 165 + (seed + i*137) % 760
-        y = 570 + (i*79) % 375
-        r = 3 + i % 3
-        drift = int(6*math.sin(t*0.8 + i))
-        d.ellipse((x-r, y-r+drift, x+r, y+r+drift),
-                  fill=(220, 213, 161) if night else (152, 200, 177))
+    # Directed scenery uses the narrated location, not a recurring stock scene.
+    from astra_v2.pillow_scene_direction import draw_story_stage
+    return draw_story_stage(d,shot,t)
 
 
 def _facial(d, x, y, mood, t, actor_idx):
@@ -321,12 +299,16 @@ def draw_duo(image, shot, t):
     prop=scene_prop(shot)
     pickup=action in {"pick","pickup","pick_up","carry","repair","hold"}
     progress=_ease((max(0,t)-.15)/.9) if pickup else 0.0
-    prop_pos=prop_position(action,t)
+    from astra_v2.pillow_scene_direction import prop_trajectory, actor_translation
+    prop_pos=(prop_trajectory(shot,t) if shot.get("story_beat") else
+              prop_position(action,t))
     # Stable positions are large enough to read on mobile.
     for idx,name in enumerate(pair):
-        x=298 if idx==0 else 788
+        x=(298 if idx==0 else 772)+actor_translation(action,t,idx)
         y=846
-        hand_target=prop_pos if idx==0 and prop and pickup and progress>.25 else None
+        hand_target=(prop_pos if idx==0 and prop and pickup and
+                     (progress>.25 or shot.get("story_beat")=="payoff")
+                     else None)
         actor_mood=mood
         if mood=="angry" and idx==0:
             actor_mood="curious"  # Reaction shot, not two identical emotions.
