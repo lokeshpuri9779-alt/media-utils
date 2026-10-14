@@ -42,7 +42,9 @@ def action_for_beat(index, narration):
         return "approach"
     if any(word in text for word in ("chases", "races", "runaway", "rushes")):
         return "run"
-    if any(word in text for word in ("repairs", "returns", "carries", "lifts", "uses")):
+    if "repairs" in text or "repair" in text:
+        return "repair"
+    if any(word in text for word in ("returns", "carries", "lifts", "uses")):
         return "carry"
     if any(word in text for word in ("discovers", "clue", "notices", "examines")):
         return "point"
