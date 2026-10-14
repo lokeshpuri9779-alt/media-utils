@@ -68,4 +68,10 @@ jobs:
           path: |
             /tmp/astra-pillow/preview.mp4
             /tmp/astra-pillow/benchmark.json
+            story-demo/
+            world-contact-sheet.png
+            composed-scene-*.png
+            interaction-*.png
+            animal-motion-sheet.png
+            object-state-sheet.png
           retention-days: 3
