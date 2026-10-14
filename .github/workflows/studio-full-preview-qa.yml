@@ -17,7 +17,7 @@ jobs:
           python-version: '3.12'
       - run: python -m py_compile tests/verify_studio_preview.py studio_renderer.py
   full-studio-preview:
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
     runs-on: ubuntu-24.04
     timeout-minutes: 40
     env:
