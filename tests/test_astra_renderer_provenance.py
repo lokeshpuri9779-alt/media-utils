@@ -20,6 +20,11 @@ class RendererProvenanceTests(unittest.TestCase):
         src = (ROOT / "preload_queue.py").read_text(encoding="utf-8")
         self.assertIn('payload["renderer"] = candidate["renderer"]', src)
 
+    def test_preflight_records_renderer(self):
+        src = (ROOT / "preflight.py").read_text(encoding="utf-8")
+        self.assertIn('"renderer": item.get("renderer") or entry.get("renderer") or "unknown"', src)
+        self.assertIn('"renderer": entry.get("renderer") or "unknown"', src)
+
     def test_publisher_records_renderer(self):
         src = (ROOT / "run.py").read_text(encoding="utf-8")
         self.assertIn('"renderer": candidate.get("renderer") or "astra-v2"', src)
