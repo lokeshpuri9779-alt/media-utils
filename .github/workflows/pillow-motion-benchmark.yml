@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - benchmark/pillow-motion-1080p
+      - optimization/pillow-motion-fastpath
 permissions:
   contents: read
 jobs:
