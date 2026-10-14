@@ -79,6 +79,12 @@ def draw_subject(image, subject, t, accent, action='idle'):
     if subject not in {x[0] for x in SUBJECTS}:
         return False
     motion_x, motion_y = action_offset(action, t)
+    # Action-dependent acting stays within the subject-safe region; unlike
+    # camera motion it moves limbs and facial features relative to the body.
+    gait = math.sin(t * (8.0 if action == "run" else 4.2))
+    step = int(44 * gait) if action in {"run", "walk"} else 0
+    gesture = int(52 * math.sin(t * 5.0)) if action in {"wave", "throw", "repair", "pick", "carry"} else 0
+    blink_now = abs(math.sin(t * 1.65 + 0.3)) > 0.985
     # Dedicated character silhouettes, not aliases of unrelated animals.
     if subject in {"fox", "otter", "owl", "duck", "firefly", "squirrel", "mouse", "crab"}:
         d = ImageDraw.Draw(image)
@@ -114,8 +120,19 @@ def draw_subject(image, subject, t, accent, action='idle'):
                 d.arc((x+90,y+150,x+285,y+310),180,355,fill=fur,width=28)
                 d.ellipse((x-100,y-125,x-35,y-55),fill=fur)
                 d.ellipse((x+35,y-125,x+100,y-55),fill=fur)
+            for side, dx in enumerate((-70,70)):
+                stride = step * (1 if side == 0 else -1)
+                d.rounded_rectangle((x+dx-24+stride,y+245-abs(stride)//3,
+                                     x+dx+24+stride,y+340-abs(stride)//3),
+                                    radius=16,fill=fur)
+                arm_lift = gesture * (1 if side == 1 else -1)
+                d.line((x+dx,y+115,x+dx+arm_lift,y+170-abs(arm_lift)),
+                       fill=fur,width=27)
             for dx in (-58,58):
-                d.ellipse((x+dx-15,y-35,x+dx+15,y-3),fill=dark)
+                if blink_now:
+                    d.line((x+dx-18,y-18,x+dx+18,y-18),fill=dark,width=7)
+                else:
+                    d.ellipse((x+dx-15,y-35,x+dx+15,y-3),fill=dark)
             d.ellipse((x-16,y+35,x+16,y+57),fill=dark)
         elif subject in {"owl", "duck"}:
             color = (154,104,77) if subject == "owl" else (240,204,93)
@@ -247,7 +264,7 @@ def draw_subject(image, subject, t, accent, action='idle'):
         d.ellipse((x-130, y+60, x+130, y+300), fill=fur)
         # Alternating footfall with a slight phase offset: the legs actually
         # step rather than the entire character only bobbing in place.
-        stride = math.sin(t * 5.2)
+        stride = math.sin(t * (8.0 if action == "run" else 5.2))
         for side, dx in enumerate((-75, 75)):
             step = int(35 * stride * (1 if side == 0 else -1))
             lift = int(25 * max(0.0, stride * (1 if side == 0 else -1)))
@@ -255,6 +272,11 @@ def draw_subject(image, subject, t, accent, action='idle'):
                                  x+dx+30+step, y+365-lift),
                                 radius=20, fill=fur)
         d.ellipse((x-155, y-180, x+155, y+115), fill=fur)
+        if action in {"wave", "carry", "repair", "pick", "throw"}:
+            for side in (-1, 1):
+                reach = gesture if side == 1 else -gesture//3
+                d.line((x+side*115,y+125,x+side*155+reach,y+100-abs(reach)),
+                       fill=fur,width=30)
         for dx in (-135, 135):
             d.ellipse((x+dx-42, y-120, x+dx+42, y+25),
                       fill=(117, 76, 55))
