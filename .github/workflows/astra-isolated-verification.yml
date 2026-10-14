@@ -232,6 +232,21 @@ jobs:
       - name: Render offline comedy pilot
         run: |
           python -m astra_v2.coordinated_development --comedy-pilot --seed astra-comedy-pilot --fps 24 --seconds-per-scene 3 --video --output verification-output/comedy-pilot
+      - name: Audit 24fps per-scene motion
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from astra_v2.coordinated_development import build_comedy_demo
+          from astra_v2.pilot_motion_audit import audit
+          output = Path('verification-output/comedy-pilot/motion-audit.json')
+          report = audit(build_comedy_demo(), output, fps=24, seconds_per_scene=3)
+          assert report['total_frames_expected'] == 360
+          assert report['scene_count'] == 5
+          assert report['all_scenes_have_motion'], report['scenes']
+          assert all(len(scene['adjacent_frame_differences']) == 4
+                     for scene in report['scenes'])
+          assert not report['publication_allowed']
+          PY
       - name: Automatically validate rendered pilot and pickup evidence
         run: |
           python - <<'PY'
@@ -241,7 +256,7 @@ jobs:
           root = Path('verification-output/comedy-pilot')
           required = ('preview.mp4', 'storyboard.png', 'pickup-motion-sheet.png',
                       'report.json', 'soundtrack.wav', 'sound-cues.json',
-                      'cinematic-beats.png')
+                      'cinematic-beats.png', 'motion-audit.json')
           assert all((root / name).is_file() for name in required), 'missing render or pickup review output'
           report = json.loads((root / 'report.json').read_text())
           assert report['publication_allowed'] is False
