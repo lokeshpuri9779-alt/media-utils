@@ -168,6 +168,10 @@ def prop_trajectory(shot, t):
     time=max(0,float(t))
     progress=min(1,time/.95)
     progress=progress*progress*(3-2*progress)
+    # When the twist explicitly catches the object, contact wins over the
+    # earlier rolling/drifting verb in the same spoken sentence.
+    if role in ("twist", "payoff") and action in ("carry","pick","repair","hold"):
+        return (int(540-110*progress),int(1216-161*progress)) if role=="twist" else (430,1055)
     if re.search(r"\b(?:roll|rolled|rolling|runaway|bounced|bounce)\b",speech):
         x=250+int(min(time,2.2)*205)
         y=1180-int(45*abs(math.sin(time*4.4)))
