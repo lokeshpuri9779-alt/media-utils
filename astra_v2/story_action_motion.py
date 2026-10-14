@@ -7,17 +7,17 @@ import math
 import re
 
 ACTION_PATTERNS=(
-    ("repair",r"\b(?:repair|repairs|repairing|fix|fixes|fixing|mend|mends|mending)\b"),
-    ("carry",r"\b(?:carry|carries|carrying|lift|lifts|lifting|hold|holds|holding)\b"),
-    ("throw",r"\b(?:throw|throws|throwing|toss|tosses|tossing)\b"),
-    ("pick",r"\b(?:pick up|picks up|picking up|grab|grabs|grabbing)\b"),
-    ("wave",r"\b(?:wave|waves|waving|greet|greets|greeting)\b"),
-    ("run",r"\b(?:run|runs|running|sprint|sprints|chase|chasing)\b"),
-    ("jump",r"\b(?:jump|jumps|jumping|leap|leaps|hops|hop)\b"),
-    ("dance",r"\b(?:dance|dances|dancing|celebrat\w*)\b"),
-    ("hide",r"\b(?:hide|hides|hiding|crouch|ducked)\b"),
-    ("walk",r"\b(?:walk|walks|walking|approach|approaches|approaching)\b"),
-    ("look",r"\b(?:look|looks|looking|watch|watches|stare|stares)\b"),
+    ("repair",r"\b(?:repair|repairs|repaired|repairing|fix|fixes|fixed|fixing|mend|mends|mended|mending)\b"),
+    ("carry",r"\b(?:carry|carries|carried|carrying|lift|lifts|lifted|lifting|hold|holds|held|holding)\b"),
+    ("throw",r"\b(?:throw|throws|threw|thrown|throwing|toss|tosses|tossed|tossing)\b"),
+    ("pick",r"\b(?:pick up|picks up|picked up|picking up|grab|grabs|grabbed|grabbing)\b"),
+    ("wave",r"\b(?:wave|waves|waved|waving|greet|greets|greeted|greeting)\b"),
+    ("run",r"\b(?:run|runs|ran|running|sprint|sprints|sprinted|chase|chased|chasing)\b"),
+    ("jump",r"\b(?:jump|jumps|jumped|jumping|leap|leaps|leapt|leaped|hops|hopped|hop)\b"),
+    ("dance",r"\b(?:dance|dances|danced|dancing|celebrat\w*)\b"),
+    ("hide",r"\b(?:hide|hides|hid|hidden|hiding|crouch|crouched|ducked)\b"),
+    ("walk",r"\b(?:walk|walks|walked|walking|approach|approaches|approached|approaching)\b"),
+    ("look",r"\b(?:look|looks|looked|looking|watch|watches|watched|stare|stares|stared)\b"),
 )
 def choose_action(shot):
     text=" ".join(str(shot.get(k) or "") for k in ("action","visual_prompt","visual","speech")).lower()
