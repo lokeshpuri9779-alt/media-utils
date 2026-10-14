@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 30,
-  "confirmed_today": 29,
-  "last_attempt_at": "2026-10-14T09:28:11.673955+00:00",
+  "attempts": 31,
+  "confirmed_today": 30,
+  "last_attempt_at": "2026-10-14T09:34:23.621675+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -679,14 +679,21 @@
       "title": "The Deer and the Paper Bridge",
       "format": "short",
       "uploaded_at": "2026-10-14T08:55:38.311677+00:00"
+    },
+    "rayvan-forge-b8f093551cb4cdf3": {
+      "video_id": "W5vy6HtJboA",
+      "confirmed_at": "2026-10-14T09:33:40.669985+00:00",
+      "title": "The Badger and the Foggy Compass",
+      "format": "short",
+      "uploaded_at": "2026-10-14T09:28:13.680131+00:00"
     }
   },
   "pending": {
-    "W5vy6HtJboA": {
-      "content_id": "rayvan-forge-b8f093551cb4cdf3",
-      "title": "The Badger and the Foggy Compass",
+    "JFl9KSHu5PM": {
+      "content_id": "rayvan-forge-2584ba24e621f504",
+      "title": "The Squirrel and the Stolen Recipe",
       "day": "2026-10-14",
-      "uploaded_at": "2026-10-14T09:28:13.680131+00:00",
+      "uploaded_at": "2026-10-14T09:34:25.744279+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": ""
@@ -694,11 +701,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T09:27:13.978833+00:00",
+  "last_preflight_at": "2026-10-14T09:33:40.316375+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T09:28:13.884442+00:00",
+    "at": "2026-10-14T09:34:25.968461+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -1341,6 +1348,13 @@
     "rayvan-forge-b8f093551cb4cdf3": {
       "at": "2026-10-14T09:28:11.673941+00:00",
       "title": "The Badger and the Foggy Compass",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-2584ba24e621f504": {
+      "at": "2026-10-14T09:34:23.621659+00:00",
+      "title": "The Squirrel and the Stolen Recipe",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
