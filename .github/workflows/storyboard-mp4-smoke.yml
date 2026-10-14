@@ -21,4 +21,5 @@ jobs:
         with:
           python-version: '3.11'
       - run: python -m pip install 'Pillow>=10,<12'
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - run: python -m tests.story_sequence_mp4_smoke
