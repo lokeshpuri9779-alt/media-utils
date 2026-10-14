@@ -24,9 +24,14 @@ jobs:
           mkdir -p /tmp/astra-pillow
           python -c "from experimental.pillow_2d_engine import render_mp4; render_mp4('/tmp/astra-pillow/preview.mp4',duration=3,fps=24)"
           ffprobe -v error -show_entries stream=width,height,nb_frames,r_frame_rate -of json /tmp/astra-pillow/preview.mp4
+      - name: Benchmark frame rendering
+        run: |
+          python -c "from experimental.benchmark_pillow_2d import benchmark; benchmark('/tmp/astra-pillow/benchmark.json')"
       - name: Upload preview
         uses: actions/upload-artifact@v4
         with:
           name: pillow-2d-preview
-          path: /tmp/astra-pillow/preview.mp4
+          path: |
+            /tmp/astra-pillow/preview.mp4
+            /tmp/astra-pillow/benchmark.json
           retention-days: 3
