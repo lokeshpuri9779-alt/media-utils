@@ -15,7 +15,7 @@ SUITES = {
     "cache-navigation-test.log": ("CACHE NAVIGATION CHECKS", 10, None),
     "runtime.log": ("RUNTIME SOAK CHECKS", 10, 5),
     "extraction-test.log": ("EXTRACTION TEST FAILURES", 25, None),
-    "controls-test.log": ("CONTROLS CHECKS", 35, None),
+    "controls-test.log": ("CONTROLS CHECKS", 37, None),
     "aim-assist-test.log": ("AIM ASSIST CHECKS", 13, None),
     "camera-collision-test.log": ("CAMERA COLLISION CHECKS", 7, None),
     "combat-feedback-test.log": ("COMBAT FEEDBACK CHECKS", 9, None),
