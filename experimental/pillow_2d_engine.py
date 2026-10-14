@@ -3,6 +3,7 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass
 from PIL import Image, ImageDraw
+from experimental.motion_profiles import evaluate
 
 @dataclass(frozen=True)
 class Settings:
@@ -33,10 +34,10 @@ def render(t: float, settings: Settings = Settings()) -> Image.Image:
         y=120+i*54
         oval(x-47,y-14,x+47,y+14,(37+i*3,53+i*3,79+i*3))
     d.rectangle((*point(0,515),*point(360,640)),fill=(44,85,73))
-    walk=ease(t/2.3)
-    x=80+130*walk
-    cycle=math.sin(t*10)*max(0,1-t/2.4)
-    y=390-abs(cycle)*5
+    motion=evaluate(t)
+    x=80+130*motion.walk
+    cycle=motion.stride
+    y=390-motion.bob
     skin=(241,188,122)
     oval(x-43,516,x+43,528,(27,58,57))
     for side in (-1,1):
@@ -46,30 +47,31 @@ def render(t: float, settings: Settings = Settings()) -> Image.Image:
         line(hip,knee,(47,74,112),12)
         line(knee,foot,(47,74,112),11)
         line(foot,(foot[0]+side*11,515),(31,36,48),9)
-    lift=ease((t-2.55)/.65)
+    lift=motion.pickup
     bx=275*(1-lift)+(x+79)*lift
     by=493*(1-lift)+(y-5)*lift
     oval(bx-18,by-18,bx+18,by+18,(245,171,59))
     oval(x-38,y-34,x+38,y+77,(84,170,199))
     for side in (-1,1):
         shoulder=(x+side*29,y-8)
-        hand=(x+52+27*lift,y+36-41*lift) if side==1 else (x-52,y+36+11*cycle)
+        hand=(x+52+27*lift,y+36-41*lift) if side==1 else (x-52,y+36+11*motion.left_arm)
         elbow=((shoulder[0]+hand[0])/2+side*7,(shoulder[1]+hand[1])/2+12)
         line(shoulder,elbow,skin,11)
         line(elbow,hand,skin,10)
         oval(hand[0]-6,hand[1]-6,hand[0]+6,hand[1]+6,skin)
     oval(x-36,y-107,x+36,y-34,skin)
-    blink=t%2.35<.11
+    blink=motion.blink
     for side in (-1,1):
         ex=x+side*15
         if blink: line((ex-5,y-74),(ex+5,y-74),(34,39,48),2)
         else: oval(ex-3,y-78,ex+3,y-71,(34,39,48))
     d.arc((*point(x-13,y-67),*point(x+13,y-49)),0,180,fill=(113,56,52),width=max(1,2*s))
-    if t>4.3:
+    if motion.celebration>0:
         for j in range(7):
             cx=(j*67+23)%360
             cy=120+(j*41)%170+8*math.sin(t*2+j)
-            oval(cx-3,cy-3,cx+3,cy+3,(248,210,101))
+            radius=3*motion.celebration
+            oval(cx-radius,cy-radius,cx+radius,cy+radius,(248,210,101))
     return canvas.resize((w,h),Image.Resampling.LANCZOS)
 
 def render_mp4(path: str, duration: float=7, fps: int=24, settings: Settings=Settings()) -> None:
