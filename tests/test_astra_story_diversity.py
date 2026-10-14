@@ -33,6 +33,12 @@ class HistoryAuditTests(unittest.TestCase):
         self.assertFalse(result["continuity_ok"])
         self.assertFalse(result["repair_sequence_ok"])
 
+    def test_same_structure_with_character_substitution_rejected(self):
+        a = story("A", ["The cat repairs the clock"], ["repair"])
+        b = story("B", ["The dog repairs the clock"], ["repair"])
+        self.assertEqual(similarity(a, b), 1.0)
+        self.assertEqual(audit_history([b], history=[a])["near_duplicates"], 1)
+
     def test_similarity_bounds(self):
         a = story("A", ["An owl flies"], ["fly"])
         b = story("B", ["A fox runs"], ["run"])
