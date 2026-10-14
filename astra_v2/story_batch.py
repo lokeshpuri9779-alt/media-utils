@@ -27,6 +27,13 @@ TEMPLATES = (
                "The alien celebrates the discovery.")},
 )
 ACTIONS = ("approach", "point", "carry", "react", "celebrate")
+# New locomotion cues are deliberately confined to selected story templates.
+STORY_ACTIONS = {
+    "The Missing Cake": ("walk", "point", "carry", "react", "celebrate"),
+    "Robot's Lost Key": ("run", "point", "carry", "react", "celebrate"),
+    "The Umbrella Mix-up": ("approach", "jump", "carry", "react", "dance"),
+    "The Alien's Telescope": ("walk", "point", "carry", "jump", "dance"),
+}
 
 
 def build_story_batch(seed="astra-story-rehearsal", limit=4):
@@ -43,7 +50,7 @@ def build_story_batch(seed="astra-story-rehearsal", limit=4):
         story_seed = f"{seed}|story-{i}"
         plan = build_ensemble_plan(story_seed, [list(template["cast"]) for _ in ACTIONS])
         prop_index = OBJECTS.index(template["prop"]) * 50
-        for scene, action, narration in zip(plan["scenes"], ACTIONS, template["beats"]):
+        for scene, action, narration in zip(plan["scenes"], STORY_ACTIONS[template["title"]], template["beats"]):
             scene.update(object_id=prop_index, object=prop(prop_index),
                          action=action, narration=narration, visual_style="storybook",
                          location=template["location"], genre=template["genre"])
