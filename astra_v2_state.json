@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 5,
+  "attempts": 6,
   "confirmed_today": 5,
-  "last_attempt_at": "2026-10-14T22:23:08.964713+00:00",
+  "last_attempt_at": "2026-10-14T22:32:51.255203+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -893,29 +893,40 @@
       "renderer": "unknown"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "mXM2olqn_10": {
+      "content_id": "rayvan-forge-6bb686a2e2df0f2a",
+      "title": "The Heron and the Missing Moon",
+      "day": "2026-10-15",
+      "uploaded_at": "2026-10-14T22:32:52.764117+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.1.1"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T22:27:11.610737+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_preflight_at": "2026-10-14T22:31:44.475915+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T22:27:46.599786+00:00",
-    "early_tests": "failure",
-    "preflight_step": "skipped",
-    "render_due": "",
-    "job_status_before_persist": "failure",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "at": "2026-10-14T22:32:53.039418+00:00",
+    "early_tests": "success",
+    "preflight_step": "success",
+    "render_due": "true",
+    "job_status_before_persist": "success",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-14T19:48:51.586899+00:00",
   "reserved": {
@@ -1751,6 +1762,14 @@
       "format": "short",
       "plot_key": "",
       "renderer": "unknown",
+      "result": "accepted"
+    },
+    "rayvan-forge-6bb686a2e2df0f2a": {
+      "at": "2026-10-14T22:32:51.255188+00:00",
+      "title": "The Heron and the Missing Moon",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.1.1",
       "result": "accepted"
     }
   }
