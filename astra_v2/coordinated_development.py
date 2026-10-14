@@ -260,6 +260,16 @@ def frame(scene, t):
     d = ImageDraw.Draw(image)
     number = scene["scene"]
     theme = ((29, 48, 75), (48, 42, 73), (34, 67, 68), (72, 48, 58))[number % 4]
+    # Location-specific palettes are opt-in for offline story rehearsals.
+    # Keep the established comedy pilot's original palette unchanged.
+    locations = {
+        "bakery": ((97, 62, 65), (120, 84, 68)),
+        "workshop": ((37, 65, 91), (67, 92, 109)),
+        "park": ((34, 83, 71), (67, 112, 82)),
+        "observatory": ((32, 34, 85), (59, 49, 108)),
+    }
+    if scene.get("location") in locations:
+        theme = locations[scene["location"]][number % 2]
     # Layered atmospheric backdrop and parallax silhouettes.
     for y in range(H):
         mix = y / H
