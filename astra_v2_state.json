@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 37,
-  "confirmed_today": 36,
-  "last_attempt_at": "2026-10-14T11:55:20.624338+00:00",
+  "attempts": 38,
+  "confirmed_today": 37,
+  "last_attempt_at": "2026-10-14T12:16:33.103119+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -728,14 +728,21 @@
       "title": "The Fox and the Frozen Fountain",
       "format": "short",
       "uploaded_at": "2026-10-14T11:48:23.972119+00:00"
+    },
+    "rayvan-forge-68dc3522eacae4ca": {
+      "video_id": "3Od1ZoshdQM",
+      "confirmed_at": "2026-10-14T12:15:35.551836+00:00",
+      "title": "The Raccoon and the Vanished Painting",
+      "format": "short",
+      "uploaded_at": "2026-10-14T11:55:22.405068+00:00"
     }
   },
   "pending": {
-    "3Od1ZoshdQM": {
-      "content_id": "rayvan-forge-68dc3522eacae4ca",
-      "title": "The Raccoon and the Vanished Painting",
+    "Jq94t1fUFm8": {
+      "content_id": "rayvan-forge-a5eacafc9fc28652",
+      "title": "The Goat and the Floating Garden",
       "day": "2026-10-14",
-      "uploaded_at": "2026-10-14T11:55:22.405068+00:00",
+      "uploaded_at": "2026-10-14T12:16:35.027386+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": ""
@@ -743,11 +750,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-14T11:54:30.432508+00:00",
+  "last_preflight_at": "2026-10-14T12:15:35.027563+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T11:55:22.631725+00:00",
+    "at": "2026-10-14T12:16:35.237086+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -1439,6 +1446,13 @@
     "rayvan-forge-68dc3522eacae4ca": {
       "at": "2026-10-14T11:55:20.624322+00:00",
       "title": "The Raccoon and the Vanished Painting",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-a5eacafc9fc28652": {
+      "at": "2026-10-14T12:16:33.103106+00:00",
+      "title": "The Goat and the Floating Garden",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
