@@ -1103,6 +1103,31 @@ def render_frame(plan,t,genre,total):
     elif mode=='question' and text and ('?' in s.get('speech','') or s.get('director_role')=='cold_open'):
         text=text.rstrip(' .!?')+'?'
     if s.get('countdown') and t>s['voice_start']+dur+.1: text='YOUR TURN'
+    if s.get('experimental_shared_captions'):
+        # Optional word-aligned timestamps take precedence over approximate
+        # speech slicing. Without them, derive explicitly estimated windows.
+        from astra_v2.caption_timing import build_caption_windows, active_caption
+        aligned = s.get('caption_word_times')
+        start = float(s['voice_start'])
+        if aligned is not None:
+            windows = build_caption_windows(s['speech'], start=start,
+                                            word_times=aligned,
+                                            words_per_caption=width)
+        elif dur > .12:
+            windows = build_caption_windows(s['speech'], start=start,
+                                            duration=dur,
+                                            words_per_caption=width)
+        else:
+            windows = []
+        timed_text = active_caption(windows, t)
+        text = timed_text or ''
+        if mode == 'keyword' and text:
+            text = max(text.split(), key=len).upper()
+        elif mode == 'question' and text and (
+                '?' in s.get('speech', '') or s.get('director_role') == 'cold_open'):
+            text = text.rstrip(' .!?') + '?'
+        if s.get('countdown') and t > start + dur + .1:
+            text = 'YOUR TURN'
     # Shared caption engine is opt-in on the isolated branch. Default studio
     # production visuals remain byte-for-byte on their existing caption path.
     if s.get('experimental_shared_captions'):
