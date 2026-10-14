@@ -18,15 +18,24 @@ def camera_motion(frame: Image.Image, t: float, *, strength: float = 0.012) -> I
         raise ValueError("Invalid motion parameters")
     if strength == 0:
         return frame
+    if frame.width < 2 or frame.height < 2:
+        return frame
     width,height=frame.size
     # Tiny zoom avoids revealing missing pixels; same content stays visible.
     phase=(1-math.cos(2*math.pi*(t % 7.0)/7.0))/2
     zoom=1+strength*phase
     new_size=(math.ceil(width*zoom),math.ceil(height*zoom))
-    scaled=frame.resize(new_size,Image.Resampling.BILINEAR)
-    left=(new_size[0]-width)//2
-    top=(new_size[1]-height)//2
-    return scaled.crop((left,top,left+width,top+height))
+    # Crop before resizing: only the final output pixels need interpolation.
+    # Avoid scaling a larger-than-output intermediate frame.
+    crop_w=width/zoom
+    crop_h=height/zoom
+    left=(width-crop_w)/2
+    top=(height-crop_h)/2
+    return frame.transform((width,height),Image.Transform.EXTENT,
+                           (left,top,left+crop_w,top+crop_h),
+                           resample=Image.Resampling.BILINEAR)
+    #
+
 
 def render_scene_frame(renderer,plan,t,genre,duration):
     frame=renderer(plan,t,genre,duration)
