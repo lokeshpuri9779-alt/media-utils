@@ -111,6 +111,13 @@ class ValidationGateTests(unittest.TestCase):
         self.append("runtime.log", "WARNING: Volumetric fog is only available in Forward+")
         self.assertTrue(validate_logs(self.logs))
 
+    def test_outside_physics_camera_interpolation_fails(self):
+        self.append(
+            "extraction-test.log",
+            "WARNING: [Physics interpolation] Interpolated Camera3D triggered from outside physics process",
+        )
+        self.assertTrue(validate_logs(self.logs))
+
     def test_ansi_and_crlf_are_supported(self):
         (self.logs / "controls-test.log").write_bytes(b"\x1b[32mCONTROLS CHECKS: 35 FAILURES: 0\x1b[0m\r\n")
         self.assertEqual(validate_logs(self.logs), [])
