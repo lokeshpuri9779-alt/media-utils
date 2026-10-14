@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 22,
+  "attempts": 23,
   "confirmed_today": 22,
-  "last_attempt_at": "2026-10-14T05:10:31.972514+00:00",
+  "last_attempt_at": "2026-10-14T05:43:45.133544+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -632,28 +632,39 @@
       "uploaded_at": "2026-10-14T05:10:33.300886+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-14T05:13:44.910087+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "HfwbnCI_vDA": {
+      "content_id": "rayvan-forge-eed47bc25d9bfef1",
+      "title": "The Raccoon and the Missing Ferry Rope",
+      "day": "2026-10-14",
+      "uploaded_at": "2026-10-14T05:43:46.960929+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": ""
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-14T05:42:53.474443+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T05:13:45.338371+00:00",
+    "at": "2026-10-14T05:43:47.222113+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-13T19:39:16.279796+00:00",
   "reserved": {
@@ -1225,6 +1236,13 @@
     "rayvan-forge-30707d1b9f9be836": {
       "at": "2026-10-14T05:10:31.972499+00:00",
       "title": "The Duck and the Fast Clock",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-eed47bc25d9bfef1": {
+      "at": "2026-10-14T05:43:45.133530+00:00",
+      "title": "The Raccoon and the Missing Ferry Rope",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
