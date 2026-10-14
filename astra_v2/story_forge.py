@@ -801,6 +801,83 @@ NEW_AUTHORED_PLOTS.extend([
     ]),
 ])
 
+
+# Curated cross-genre narratives: distinct settings, stakes, reversals, and resolutions.
+NEW_AUTHORED_PLOTS.extend([
+    ("robot-last-sunrise", "The Robot Who Borrowed Tomorrow", "science fiction", [
+        ("THE SUN DID NOT RISE", "A maintenance robot woke to find its city's artificial sunrise projector dark and every morning train stopped.", "robot", "NO SUNRISE"),
+        ("THE BACKUP WAS EMPTY", "It raced through silent tunnels to the backup battery, only to discover the stored power had already drained away.", "signal", "POWER GONE"),
+        ("THE STARS HELD ENERGY", "A forgotten observatory had solar cells charged by yesterday's light, and the robot rerouted their reserve through the old grid.", "planet", "ONE LAST CHARGE"),
+        ("A CITY WOKE TOGETHER", "The projector painted dawn across the skyline as the trains restarted, while the robot saved the remaining energy for tomorrow.", "signal", "DAWN RETURNS"),
+    ]),
+    ("detective-vanishing-score", "The Detective and the Vanishing Score", "detective mystery", [
+        ("THE FINAL PAGE VANISHED", "Minutes before a grand concert, a young detective discovered the orchestra's handwritten finale missing from its locked glass case.", "book", "LOCKED ROOM"),
+        ("EVERY CLUE POINTED UP", "A feather and a trail of glitter led toward the ceiling, but the skylight had been locked since midnight.", "door", "IMPOSSIBLE EXIT"),
+        ("THE MIRROR HELD THE NOTES", "She spotted the music reflected backward in a polished trophy and realized the score had been pressed onto the glass by condensation.", "book", "HIDDEN IN PLAIN SIGHT"),
+        ("THE CONCERT FINISHED LOUD", "The conductor copied the recovered notes, and the final chord revealed the culprit was a harmless paper-loving magpie.", "signal", "CASE CLOSED"),
+    ]),
+    ("astronaut-silent-moon", "The Astronaut and the Silent Moon", "space adventure", [
+        ("THE MOON STOPPED ANSWERING", "An astronaut approached a remote lunar greenhouse after its weekly radio signal vanished during a meteor shower.", "planet", "RADIO SILENCE"),
+        ("THE AIRLOCK WOULD NOT OPEN", "Dust clogged the outer door while the greenhouse's oxygen alarm flashed behind the frosted window.", "robot", "TIME RUNNING OUT"),
+        ("A SHADOW SHOWED THE PATH", "She noticed the rotating shadow of a broken antenna pointing to an emergency maintenance hatch beneath the solar panels.", "signal", "HIDDEN HATCH"),
+        ("THE GARDEN SENT A MESSAGE", "She restored the antenna and heard the botanist's relieved voice as the greenhouse lights bloomed across the crater.", "planet", "SIGNAL RESTORED"),
+    ]),
+    ("chef-midnight-train", "The Chef and the Midnight Train", "culinary comedy", [
+        ("DINNER LEFT WITHOUT HIM", "A chef watched the midnight dining train depart while his famous festival dessert sat unfinished on the station platform.", "ship", "TRAIN GONE"),
+        ("THE CART LOST A WHEEL", "He pushed a food cart along the parallel market road until one wheel broke and his ingredients scattered into the rain.", "door", "TOTAL DISASTER"),
+        ("THE MARKET BECAME A KITCHEN", "Street vendors lent him hot pans and fresh fruit, and he transformed the ruined dessert into tiny caramelized fruit cups.", "forest", "NEW RECIPE"),
+        ("THE TRAIN CAME BACK HUNGRY", "A signal delay returned the passengers to the station, where they discovered the best meal of their journey waiting outside.", "signal", "SURPRISE FEAST"),
+    ]),
+    ("witch-rain-contract", "The Witch and the Borrowed Rain", "cozy fantasy", [
+        ("A TOWN RAN OUT OF CLOUDS", "An apprentice witch promised rain for the harvest festival, but her cloud jar produced only one tiny silver droplet.", "planet", "EMPTY SKY"),
+        ("THE DROPLET STOLE COLORS", "Every place the droplet landed turned gray, and the apprentice feared she had traded the village's colors for rain.", "forest", "WRONG SPELL"),
+        ("THE COLORS WERE HIDING", "She followed the gray footprints to a sleeping rainbow moth whose wings had folded around the missing colors.", "forest", "SECRET REVEALED"),
+        ("A RAINBOW WATERED FIELDS", "The witch woke the moth gently, and its bright wings scattered gentle rain over the crops without washing away a single color.", "planet", "HARVEST SAVED"),
+    ]),
+    ("runner-bridge-relay", "The Runner and the Broken Relay", "sports drama", [
+        ("THE BATON SNAPPED", "A rookie runner's relay baton cracked moments before the championship race, and her team had no spare equipment.", "signal", "RACE IN DANGER"),
+        ("THE FIRST HANDOFF FAILED", "She practiced with a rolled cloth substitute, but it slipped from her teammate's hand on every fast exchange.", "forest", "TRY AGAIN"),
+        ("A QUIET COACH SAW THE ANSWER", "Their coach noticed the cloth needed a rigid center and built a legal replacement from an approved spare training baton.", "robot", "ONE MORE CHANCE"),
+        ("THE LAST HANDOFF WORKED", "They completed a clean race and finished second, celebrating teamwork instead of the victory they had imagined.", "signal", "FINISH TOGETHER"),
+    ]),
+    ("museum-clock-heist", "The Museum and the Clockwork Thief", "heist mystery", [
+        ("THE DIAMOND CASE WAS EMPTY", "A museum guard found an antique compass missing while the alarms stayed silent and every gallery door remained sealed.", "clock", "IMPOSSIBLE THEFT"),
+        ("THE CLOCK STRUCK THIRTEEN", "A peculiar thirteenth chime led her to a clockwork display where fresh scratches marked the wooden floor.", "clock", "STRANGE CHIME"),
+        ("THE THIEF WAS A MACHINE", "Inside the display, a misprogrammed cleaning automaton had mistaken the compass for a loose metal part and stored it in its toolbox.", "robot", "NOT A CRIMINAL"),
+        ("THE EXHIBIT GOT A NEW GUARD", "The compass returned to its case, and the museum gave the little automaton a proper route that avoided priceless objects.", "door", "TREASURE SAFE"),
+    ]),
+    ("ghost-hotel-key", "The Ghost and the Hotel Key", "gentle supernatural", [
+        ("ROOM NINE KEPT RINGING", "A night clerk heard the service bell ring from a hotel room that had been empty for fifty years.", "door", "WHO IS THERE"),
+        ("THE HALLWAY TURNED COLD", "She followed a trail of old keys to the locked room, where a shadow appeared whenever the grandfather clock chimed.", "clock", "MIDNIGHT SHADOW"),
+        ("THE SHADOW WAS A MESSAGE", "A hidden projector behind the clock played an old recording of the hotel's founder asking someone to reopen the ballroom.", "robot", "A LAST WISH"),
+        ("THE BALLROOM FILLED AGAIN", "The clerk restored the dusty ballroom and hosted a dance, while the mysterious bell rang once more in celebration.", "signal", "ONE LAST DANCE"),
+    ]),
+    ("submarine-glass-reef", "The Submarine and the Glass Reef", "underwater thriller", [
+        ("THE SONAR SAW A WALL", "A research submarine found an enormous shimmering barrier across its route home as its navigation lights began to fail.", "ship", "TRAPPED BELOW"),
+        ("THE CURRENT PUSHED HARDER", "The captain tried reversing, but a powerful current dragged the vessel toward sharp rocks beneath the glowing wall.", "ship", "DANGER AHEAD"),
+        ("THE WALL WAS ALIVE", "The scientist recognized a harmless bloom of luminous plankton and used its movement to locate a calm channel between the rocks.", "planet", "FOLLOW THE LIGHT"),
+        ("THE SUBMARINE ROSE AT DAWN", "They escaped through the channel and surfaced beside the research ship with footage of the rare underwater spectacle.", "ship", "BACK TO SUNLIGHT"),
+    ]),
+    ("historian-secret-stair", "The Historian and the Hidden Staircase", "historical adventure", [
+        ("THE MAP LOST A STREET", "A young historian found a century-old town map showing a street that had vanished beneath the modern market square.", "book", "MISSING STREET"),
+        ("THE STONE STEPS ENDED", "She opened a forgotten cellar door and descended a staircase that ended abruptly against a newly built brick wall.", "door", "DEAD END"),
+        ("THE OLD BELL MARKED NORTH", "An inscription on the market bell revealed the staircase had been mirrored on the map to hide a wartime shelter.", "signal", "READ IT BACKWARD"),
+        ("A SHELTER BECAME A MUSEUM", "She found the preserved shelter and helped the town open it as a place to remember the families who once hid there.", "book", "HISTORY FOUND"),
+    ]),
+    ("lovers-star-post", "The Two Letters Under the Stars", "romantic adventure", [
+        ("TWO LETTERS CROSSED", "Two childhood friends sent invitations to meet at the old observatory, but a storm scattered both envelopes.", "planet", "MISSED CONNECTION"),
+        ("THE TRAIN WENT THE WRONG WAY", "Each boarded a different train believing the other had moved away, and the observatory was due to close at sunset.", "ship", "LAST CHANCE"),
+        ("THE CONSTELLATION WAS A CLUE", "A shared sketch of their favorite constellation revealed the same rooftop meeting place written on the back of both letters.", "planet", "SAME DESTINATION"),
+        ("THEY MET ABOVE THE CITY", "They reached the observatory from opposite staircases and watched the first stars appear, laughing about their crossed journeys.", "planet", "TOGETHER AGAIN"),
+    ]),
+    ("inventor-pocket-storm", "The Inventor and the Pocket Storm", "steampunk fantasy", [
+        ("THUNDER FIT IN A BOX", "A young inventor accidentally trapped a tiny thunderstorm inside a brass music box during the village science fair.", "robot", "POCKET THUNDER"),
+        ("THE BOX BEGAN TO FLOAT", "Every time the music played, the storm grew stronger and lifted the inventor's workshop off its foundations.", "signal", "UP IN THE AIR"),
+        ("THE WIND FOLLOWED MUSIC", "She realized the storm changed direction with each note and composed a low melody that guided it toward an open window.", "book", "CHANGE THE TUNE"),
+        ("RAIN FELL ON THE GARDEN", "The little storm escaped into the sky and watered the dry community garden while the workshop settled safely back to earth.", "forest", "PERFECT WEATHER"),
+    ]),
+])
+
 AUTHORED_KEYS = {row[0] for row in PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS}
 
 def catalog(excluded_ids=None, excluded_titles=None, limit=128, excluded_plot_hashes=None, history=None, include_drafts=False):
