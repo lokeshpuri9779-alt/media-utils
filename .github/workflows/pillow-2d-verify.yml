@@ -28,6 +28,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_scene_composer.py' -v
           python -m unittest discover -s tests -p 'test_interaction_engine.py' -v
           python -m unittest discover -s tests -p 'test_animated_assets.py' -v
+          python -m unittest discover -s tests -p 'test_story_director.py' -v
       - name: Install bundled FFmpeg (no apt)
         run: |
           python -m pip install 'imageio-ffmpeg>=0.5,<1'
@@ -55,6 +56,8 @@ jobs:
       - name: Render animal and state preview sheets
         run: |
           python -c "from PIL import Image; from experimental.animated_assets import ANIMALS,STATES,animal_frame,item_state_frame; a=Image.new('RGBA',(96*len(ANIMALS),96*2)); [a.paste(animal_frame(kind,t,96),(i*96,j*96)) for j,t in enumerate((0,.2)) for i,kind in enumerate(ANIMALS)]; a.save('animal-motion-sheet.png'); b=Image.new('RGBA',(96*len(STATES),96)); [b.paste(item_state_frame('house','architecture',state,96),(i*96,0)) for i,state in enumerate(STATES)]; b.save('object-state-sheet.png')"
+      - name: Generate story variety demo
+        run: python -m experimental.story_demo
       - name: Upload preview
         uses: actions/upload-artifact@v4
         with:
