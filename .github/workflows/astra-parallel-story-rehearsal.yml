@@ -8,6 +8,7 @@ on:
       - 'astra_v2/story_batch.py'
       - 'astra_v2/coordinated_development.py'
       - 'tests/test_astra_locomotion.py'
+      - 'tests/test_astra_story_batch.py'
       - '.github/workflows/astra-parallel-story-rehearsal.yml'
 permissions:
   contents: read
