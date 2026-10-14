@@ -10,6 +10,7 @@ on:
       - 'astra_v2/story_quality_audit.py'
       - 'astra_v2/story_subtitles.py'
       - 'astra_v2/story_production_manifest.py'
+      - 'tests/test_astra_story_manifest.py'
       - 'astra_v2/story_batch_audio.py'
       - 'tests/test_astra_locomotion.py'
       - 'tests/test_astra_story_batch.py'
@@ -40,6 +41,8 @@ jobs:
           python -m pip install --disable-pip-version-check pillow imageio-ffmpeg
       - name: Test story batch contracts
         run: python -m unittest discover -s tests -p 'test_astra_story_batch.py' -v
+      - name: Verify scene and cast continuity
+        run: python -m unittest discover -s tests -p 'test_astra_story_manifest.py' -v
       - name: Verify new locomotion cues
         run: python -m unittest discover -s tests -p 'test_astra_locomotion.py' -v
       - name: Verify distinct environments
