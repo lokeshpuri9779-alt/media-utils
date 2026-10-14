@@ -5,6 +5,7 @@ on:
     branches: [astra-isolated-verification-20261013]
     paths:
       - 'astra_v2/story_history.py'
+      - 'tests/test_astra_story_history.py'
       - 'astra_v2/story_diversity_audit.py'
       - 'astra_v2/plot_pattern_audit.py'
       - 'tests/test_astra_plot_pattern_audit.py'
@@ -30,6 +31,8 @@ jobs:
         run: python -m pip install --disable-pip-version-check pillow
       - name: Verify plot-pattern regression cases
         run: python -m unittest discover -s tests -p 'test_astra_plot_pattern_audit.py' -v
+      - name: Verify history-aware novelty selection
+        run: python -m unittest discover -s tests -p 'test_astra_story_history.py' -v
       - name: Restore previous history artifact
         env:
           GH_TOKEN: ${{ github.token }}
@@ -50,16 +53,18 @@ jobs:
           import json
           from pathlib import Path
           from astra_v2.story_batch import build_story_batch
-          from astra_v2.story_history import evaluate_and_record, read_history
+          from astra_v2.story_history import evaluate_and_record, read_history, select_novel_stories
           path = Path("offline-history/stories.jsonl")
-          outcomes = []
-          # Advance the rehearsal episodes on every run instead of replaying 1 and 2 forever.
           base_episode = int('${{ github.run_number }}') * 2 - 1
-          for episode in (base_episode, base_episode + 1):
-              result = evaluate_and_record(build_story_batch(episode=episode)["stories"], path)
-              outcomes.append({"episode": episode, "recorded": result["recorded"], "duplicates": result["near_duplicates"]})
-              assert not result["publication_allowed"] and not result["quality_approved"]
-          print(json.dumps({"outcomes": outcomes, "total_history": len(read_history(path))}))
+          episodes = (base_episode, base_episode + 1)
+          candidates = [build_story_batch(episode=episode)["stories"] for episode in episodes]
+          selection = select_novel_stories(candidates, path, limit=4)
+          result = evaluate_and_record(selection["stories"], path)
+          assert result["recorded"] == len(selection["stories"]), "Selection disagrees with history gate"
+          assert not result["publication_allowed"] and not result["quality_approved"]
+          print(json.dumps({"episodes": episodes, "considered": selection["considered"],
+                            "recorded": result["recorded"], "shortfall": selection["shortfall"],
+                            "total_history": len(read_history(path))}))
           PY
       - name: Upload offline history for subsequent runs
         uses: actions/upload-artifact@v4
