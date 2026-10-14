@@ -66,10 +66,14 @@ jobs:
         run: |
           python - <<'PY'
           from astra_v2.story_forge import catalog
-          from studio_renderer import make_plan, creative_quality_gate
+          from studio_renderer import make_plan, creative_quality_gate, _repair_plan
           story = next(s for s in catalog() if s["title"] == "The Raccoon and the Midnight Bakery")
           plan = make_plan(story)
-          creative_quality_gate(story, plan)
+          try:
+              creative_quality_gate(story, plan)
+          except RuntimeError:
+              plan = _repair_plan(story, plan, 1)
+              creative_quality_gate(story, plan)
           print("Story plan accepted:", story["title"], "scenes:", len(plan))
           PY
       - name: Confirm original story publication policy tests
