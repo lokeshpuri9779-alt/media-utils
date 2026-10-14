@@ -2121,6 +2121,10 @@ jobs:
           		level._choose_run_upgrade("core", "CORE+")
           		await get_tree().create_timer(3.2).timeout
           	check(level.extraction_active, "final boss clear starts physical extraction")
+          	# The scripted wave traversal disables player physics. Recovery itself
+          	# must run under the same physics loop used by real gameplay.
+          	level.active_player.set_physics_process(true)
+          	check(level.active_player.is_physics_processing(), "extraction recovery runs with player physics enabled")
           	level.active_player.velocity = Vector3(9, -5, 3)
           	level.active_player.revive()
           	check(level.active_player.revival_teleport_pending, "revive queues checkpoint teleport for the player physics loop")
@@ -7707,8 +7711,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=53
-          version/name="0.2.33-mobile-alpha"
+          version/code=54
+          version/name="0.2.34-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
 
@@ -7749,8 +7753,8 @@ jobs:
           screen/support_normal=true
           screen/support_large=true
           screen/support_xlarge=true
-          version/code=53
-          version/name="0.2.33-mobile-alpha"
+          version/code=54
+          version/name="0.2.34-mobile-alpha"
           graphics/opengl_debug=false
           shader_baker/enabled=false
           EOF
@@ -8082,14 +8086,14 @@ jobs:
           cat /tmp/aapt-badging.err
           test -n "$BADGING"
           printf '%s\n' "$BADGING"
-          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='53' versionName='0.2.33-mobile-alpha'" <<<"$BADGING"
+          grep -Fq "package: name='com.pulsefall.blacksite' versionCode='54' versionName='0.2.34-mobile-alpha'" <<<"$BADGING"
           grep -Fq "application-label:'PULSEFALL'" <<<"$BADGING"
           mapfile -t ABI_DIRS < <(unzip -Z1 "$APK" | awk -F/ '/^lib\/[^/]+\/.*\.so$/ {print $2}' | sort -u)
           test "${#ABI_DIRS[@]}" -eq 1
           test "${ABI_DIRS[0]}" = "arm64-v8a"
           echo "APK PACKAGE CHECKS: 7 FAILURES: 0"
           echo "PACKAGE: com.pulsefall.blacksite"
-          echo "VERSION: 53 / 0.2.33-mobile-alpha"
+          echo "VERSION: 54 / 0.2.34-mobile-alpha"
           echo "ABI: arm64-v8a"
 
           AAB="artifact/PULSEFALL_MOBILE_ALPHA.aab"
