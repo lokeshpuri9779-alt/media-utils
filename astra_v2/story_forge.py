@@ -913,6 +913,7 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=128, excluded_plot_ha
         seen_plots.add(fingerprint)
         result.append({
             "genre": "fiction", "kind": ("authored_causal_story" if key in AUTHORED_KEYS else "unreviewed_causal_draft"),
+            "visual_contract": "pillow_duo_v2" if key in {row[0] for row in PILLOW_DUO_PLOTS} else None,
             "production_ready": key in AUTHORED_KEYS, "content_id": cid,
             "plot_fingerprint": fingerprint,
             "title": title, "hook": beats[0][0],
