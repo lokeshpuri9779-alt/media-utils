@@ -1,0 +1,44 @@
+name: ASTRA 24 FPS preview (offline)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  render-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ASTRA_OPENAI_ENABLED: '0'
+      ASTRA_OPENAI_ALLOW_PAID_API: '0'
+      ASTRA_SERIES_PUBLICATION: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --disable-pip-version-check pillow imageio-ffmpeg
+      - name: Verify timing tests
+        run: python -m unittest discover -s tests -p 'test_astra_animation_timing.py' -v
+      - name: Render isolated 24fps story
+        run: python -m astra_v2.render_story_batch --index 0 --episode 1 --fps 24 --seconds-per-scene 2 --output preview-24fps
+      - name: Validate rendered frame rate and publication gate
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          import imageio_ffmpeg
+          root = Path("preview-24fps")
+          report = json.loads((root / "batch-result.json").read_text())
+          assert report["publication_allowed"] is False
+          assert report["quality_approved"] is False
+          video = root / "preview.mp4"
+          assert video.stat().st_size > 1000
+          subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(), "-v", "error", "-i", str(video), "-f", "null", "-"], check=True, timeout=120)
+          print("24 FPS render decoded successfully; publishing disabled")
+          PY
+      - name: Upload 24fps preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-24fps-preview
+          path: preview-24fps/
+          retention-days: 7
