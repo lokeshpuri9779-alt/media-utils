@@ -463,8 +463,10 @@ def frame(scene, t):
                 # lateral motion as scaled ensemble members.
                 shifted = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
                 crouch = int(155 * (1.0 - lift_progress)) if named_action == "carry" and actor_index == 0 else 0
+                jump_offset = int(95 * max(0.0, math.sin(t * 3.4 + phase))) if named_action == "jump" else 0
+                dance_offset = int(22 * math.sin(t * 5.2 + phase)) if named_action == "dance" else 0
                 shifted.alpha_composite(actor_layer,
-                                        (sway + (carry_shift if actor_index == 0 else 0), crouch))
+                                        (sway + (carry_shift if actor_index == 0 else 0), crouch - jump_offset + dance_offset))
                 actor_layer = shifted
                 if held_action and actor_index == 0:
                     native_shoulders = tuple(carry_shoulder_anchor(
