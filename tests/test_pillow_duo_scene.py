@@ -3,6 +3,11 @@ from PIL import Image
 from astra_v2.pillow_duo_scene import scene_pair, draw_duo
 
 class PillowDuoTests(unittest.TestCase):
+    def test_no_wrong_species_icon(self):
+        from astra_v2.icon_visuals import pick_icon
+        self.assertIsNone(pick_icon({"speech": "The fox met the rabbit."}))
+        self.assertIsNone(pick_icon({"speech": "The owl found the moon."}))
+
     def test_two_named_actors(self):
         self.assertEqual(scene_pair({"speech": "The fox warned the rabbit about a box."}), ("fox", "rabbit"))
     def test_no_invented_partner(self):
