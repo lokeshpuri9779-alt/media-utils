@@ -49,6 +49,26 @@ class StorySupplyTests(unittest.TestCase):
         self.assertEqual([s.get("story_cast") for s in plan],[cast]*4)
         self.assertTrue(all(s.get("story_subject") in cast for s in plan))
 
+    def test_pair_keeps_left_right_positions_through_narration_reversal(self):
+        cast = ("fox", "rabbit")
+        self.assertEqual(
+            scene_pair({"speech": "The rabbit warned the fox about the lantern.",
+                        "story_cast": cast}), cast)
+        self.assertEqual(
+            scene_pair({"speech": "The fox carried the lantern.",
+                        "story_cast": cast}), cast)
+        self.assertEqual(
+            scene_pair({"speech": "They reached the bridge.",
+                        "story_cast": cast}), cast)
+        # An unrelated named animal should not be silently replaced.
+        self.assertEqual(
+            scene_pair({"speech": "The owl arrived beside the fox.",
+                        "story_cast": cast}), ())
+        # An uncast story still follows narration order.
+        self.assertEqual(
+            scene_pair({"speech": "The rabbit warned the fox."}),
+            ("rabbit", "fox"))
+
     def test_used_story_cannot_be_reissued(self):
         story=catalog(limit=256)[0]
         expected_title="The Fox and Rabbit's Last Lantern"
