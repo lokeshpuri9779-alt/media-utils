@@ -715,7 +715,35 @@ REWRITTEN_PLOTS = [
     ]),
 ]
 
-AUTHORED_KEYS = {row[0] for row in PLOTS + REWRITTEN_PLOTS}
+# Fresh authored plots for quality-gated replenishment; never bypass QA.
+NEW_AUTHORED_PLOTS = [
+    ("mole-lantern-path", "The Mole and the Lantern Path", "animal adventure", [
+        ("THE PATH WENT DARK", "A young mole found that the lanterns marking the woodland footpath had gone dark after a storm.", "forest", "LOST LIGHT"),
+        ("THE FIRST FIX FAILED", "He replaced the first lantern's bulb, but the next lantern still flickered and went out.", "signal", "STILL DARK"),
+        ("THE HIDDEN WIRE", "Following the loose cable, he discovered a fallen branch had pulled the power connector apart.", "forest", "FOUND THE BREAK"),
+        ("THE LIGHTS RETURNED", "With the park keeper's help, he reconnected the safe low voltage line and guided the walkers home.", "signal", "WAY HOME"),
+    ]),
+    ("otter-paper-boat", "The Otter and the Paper Boat Race", "animal comedy", [
+        ("THE BOAT SANK", "An otter folded a paper boat for the river race, but the first splash soaked its hull.", "ship", "SOGGY START"),
+        ("A HEAVIER BOAT", "She tried wrapping the boat in thick cloth, only to watch it sink before the starting bell.", "ship", "TOO HEAVY"),
+        ("A LIGHTER DESIGN", "She shaped a fresh paper hull and protected its bottom with a thin coat of natural wax.", "book", "NEW DESIGN"),
+        ("THE FINISH LINE", "Her little boat floated across the pond, and she cheered for the other racers beside her.", "ship", "FINISH"),
+    ]),
+    ("badger-missing-notes", "The Badger and the Vanishing Music", "animal mystery", [
+        ("THE MUSIC VANISHED", "A badger conductor opened the orchestra's folder and found every sheet of music missing.", "book", "EMPTY FOLDER"),
+        ("THE WIND'S TRICK", "He searched the rehearsal hall while a draft kept rattling the window beside the stage.", "door", "FOLLOW THE WIND"),
+        ("NOTES IN THE RAFTERS", "Looking upward, he saw the pages caught in a net beneath the ceiling vent.", "book", "THERE THEY ARE"),
+        ("THE CONCERT BEGAN", "The stage crew recovered the pages safely, and the orchestra played its opening song on time.", "signal", "MUSIC RETURNS"),
+    ]),
+    ("fox-festival-lights", "The Fox and the Festival of Shadows", "animal adventure", [
+        ("THE LIGHTS WENT OUT", "A fox arrived at the lantern festival just as the village square lost its electricity.", "door", "DARK FESTIVAL"),
+        ("A BRIGHT IDEA FAILED", "She placed one lantern on the stage, but its tiny glow could not reach the crowd.", "signal", "NOT ENOUGH"),
+        ("THE MIRROR CIRCLE", "She arranged the festival's polished mirrors around several battery lanterns to spread their light.", "robot", "REFLECT THE GLOW"),
+        ("SHADOWS STARTED DANCING", "The villagers used the gentle reflections to perform shadow puppets until the power returned.", "forest", "SHOWTIME"),
+    ]),
+]
+
+AUTHORED_KEYS = {row[0] for row in PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS}
 
 def catalog(excluded_ids=None, excluded_titles=None, limit=128, excluded_plot_hashes=None, history=None, include_drafts=False):
     excluded = set(excluded_ids or ())
@@ -732,7 +760,7 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=128, excluded_plot_ha
         fingerprint = str(record.get("plot_fingerprint") or "")
         if fingerprint:
             seen_plots.add(fingerprint)
-    for key, title, genre, beats in (PLOTS + REWRITTEN_PLOTS + (draft_catalog() if include_drafts else [])):
+    for key, title, genre, beats in (PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS + (draft_catalog() if include_drafts else [])):
         # Reject malformed or weak authored arcs before any expensive render.
         if len(beats) != 4 or any(not isinstance(b, (tuple, list)) or len(b) != 4 for b in beats):
             continue
