@@ -36,18 +36,20 @@ STORY_ACTIONS = {
 }
 
 
-def build_story_batch(seed="astra-story-rehearsal", limit=4):
+def build_story_batch(seed="astra-story-rehearsal", limit=4, episode=1):
+    if not isinstance(episode, int) or not 1 <= episode <= 100000:
+        raise ValueError("episode outside supported range")
     if not isinstance(seed, str) or not seed.strip():
         raise ValueError("seed must be a nonempty string")
     if not isinstance(limit, int) or not 1 <= limit <= len(TEMPLATES):
         raise ValueError("limit outside template catalog")
     # Stable seeded ordering, with no duplicate template inside a batch.
     order = sorted(range(len(TEMPLATES)),
-                   key=lambda i: hashlib.sha256(f"{seed}|{i}".encode()).digest())
+                   key=lambda i: hashlib.sha256(f"{seed}|episode-{episode}|{i}".encode()).digest())
     stories = []
     for i in order[:limit]:
         template = TEMPLATES[i]
-        story_seed = f"{seed}|story-{i}"
+        story_seed = f"{seed}|episode-{episode}|story-{i}"
         plan = build_ensemble_plan(story_seed, [list(template["cast"]) for _ in ACTIONS])
         prop_index = OBJECTS.index(template["prop"]) * 50
         for scene, action, narration in zip(plan["scenes"], STORY_ACTIONS[template["title"]], template["beats"]):
@@ -55,11 +57,11 @@ def build_story_batch(seed="astra-story-rehearsal", limit=4):
                          action=action, narration=narration, visual_style="storybook",
                          location=template["location"], genre=template["genre"],
                          caption=narration)
-        plan.update(title=template["title"], genre=template["genre"], location=template["location"], pilot_type="offline_story_batch",
+        plan.update(title=template["title"], episode=episode, genre=template["genre"], location=template["location"], pilot_type="offline_story_batch",
                     publication_allowed=False, quality_approved=False)
         verify_story_cast(plan)
         stories.append(plan)
-    return {"seed": seed, "story_count": len(stories), "stories": stories,
+    return {"seed": seed, "episode": episode, "story_count": len(stories), "stories": stories,
             "publication_allowed": False, "quality_approved": False}
 
 
@@ -69,9 +71,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--seed", default="astra-story-rehearsal")
     parser.add_argument("--limit", type=int, default=4)
+    parser.add_argument("--episode", type=int, default=1)
     parser.add_argument("--output", default="verification-output/story-batch.json")
     args = parser.parse_args()
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(build_story_batch(args.seed, args.limit), indent=2))
+    output.write_text(json.dumps(build_story_batch(args.seed, args.limit, args.episode), indent=2))
     print(f"Offline story batch written: {output}")
