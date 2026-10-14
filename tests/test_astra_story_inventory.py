@@ -1,7 +1,7 @@
 """Regression tests for ASTRA's authored and opt-in draft story inventory."""
 import unittest
 
-from astra_v2.story_forge import PLOTS, REWRITTEN_PLOTS, DRAFT_CAUSAL_ARCS, DRAFT_PROBLEMS, catalog, draft_catalog, editorial_screen, plot_fingerprint
+from astra_v2.story_forge import PLOTS, REWRITTEN_PLOTS, NEW_AUTHORED_PLOTS, DRAFT_CAUSAL_ARCS, DRAFT_PROBLEMS, catalog, draft_catalog, editorial_screen, plot_fingerprint
 from astra_v2.publication_quality import publication_rejection
 
 
@@ -10,7 +10,7 @@ class StoryInventoryTests(unittest.TestCase):
         self.assertEqual(len(PLOTS), 24)
         self.assertEqual(len(REWRITTEN_PLOTS), 55)
         records = catalog(limit=2000)
-        self.assertEqual(len(records), 79)
+        self.assertEqual(len(records), len(PLOTS) + len(REWRITTEN_PLOTS) + len(NEW_AUTHORED_PLOTS))
         self.assertEqual(len({x["content_id"] for x in records}), len(records))
         self.assertTrue(all(x["production_ready"] for x in records))
 
@@ -33,7 +33,7 @@ class StoryInventoryTests(unittest.TestCase):
 
     def test_default_catalog_exposes_full_authored_inventory(self):
         records = catalog()
-        self.assertEqual(len(records), 79)
+        self.assertEqual(len(records), len(PLOTS) + len(REWRITTEN_PLOTS) + len(NEW_AUTHORED_PLOTS))
         self.assertTrue(all(item["kind"] == "authored_causal_story" for item in records))
 
     def test_draft_inventory_count_and_unique_titles(self):
