@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 24,
+  "attempts": 25,
   "confirmed_today": 24,
-  "last_attempt_at": "2026-10-14T06:11:58.397238+00:00",
+  "last_attempt_at": "2026-10-14T07:01:15.510186+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -646,28 +646,39 @@
       "uploaded_at": "2026-10-14T06:11:59.861487+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-14T06:14:59.987565+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "ucfWn72imH8": {
+      "content_id": "rayvan-forge-07d119ca4da54d9e",
+      "title": "The Owl and the Moonlit Dam",
+      "day": "2026-10-14",
+      "uploaded_at": "2026-10-14T07:01:18.017776+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": ""
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-14T06:59:51.393874+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T06:15:00.465026+00:00",
+    "at": "2026-10-14T07:01:18.262192+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-13T19:39:16.279796+00:00",
   "reserved": {
@@ -1253,6 +1264,13 @@
     "rayvan-forge-538f0d4a65b0c538": {
       "at": "2026-10-14T06:11:58.397193+00:00",
       "title": "The Beaver and the Wet Painting",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-07d119ca4da54d9e": {
+      "at": "2026-10-14T07:01:15.510167+00:00",
+      "title": "The Owl and the Moonlit Dam",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
