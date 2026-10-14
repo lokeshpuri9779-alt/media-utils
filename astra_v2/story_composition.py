@@ -39,6 +39,8 @@ def action_for_beat(index, narration):
     text = narration.lower()
     if index == 0:
         return "approach"
+    if index == 4:
+        return "celebrate"
     if any(word in text for word in ("chases", "races", "runaway", "rushes")):
         return "run"
     if "repairs" in text or "repair" in text:
