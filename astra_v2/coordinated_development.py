@@ -15,6 +15,7 @@ from astra_v2.character_object_catalog import (
     CHARACTER_COUNT, OBJECT_COUNT, character, prop, draw_character, draw_prop,
 )
 from astra_v2.storybook_comedy_art import draw_storybook_character, shoulder_anchor as storybook_shoulder_anchor
+from astra_v2.cinematic_comedy import camera_frame, draw_gift_surprise, dissolve
 
 W, H = 540, 960
 BG = (19, 27, 43)
@@ -463,6 +464,8 @@ def frame(scene, t):
             ph = max(1, int(artwork.height * prop_scale))
             artwork = artwork.resize((pw, ph), Image.Resampling.LANCZOS)
             object_layer.alpha_composite(artwork, (int(ox - pw / 2), int(oy - ph / 2)))
+            if storybook and named_action == "celebrate":
+                draw_gift_surprise(object_layer, ox, oy, pw, ph, t)
             if lead_shoulders is not None:
                 # Anatomically linked two-segment arms extend from the
                 # character's transformed shoulders to the exact prop sides.
@@ -533,10 +536,14 @@ def frame(scene, t):
         for j in range(3):
             d.ellipse((390+j*22, 440-j*23, 398+j*22, 448-j*23),
                       fill=(240, 205, 134))
+    if storybook and named_action in ("approach", "point", "carry", "react", "celebrate"):
+        image = camera_frame(image.convert("RGB"), named_action, min(3., t))
+        d = ImageDraw.Draw(image)
     if named_action and scene.get('actors'):
-        cue = {'approach': 'WHAT IS THAT?', 'point': 'DONT TOUCH IT!',
-               'carry': 'TOO LATE...', 'react': 'OH NO!',
-               'celebrate': 'I DID IT!'}[named_action]
+        cue = ('HONK?!' if storybook and named_action == 'celebrate' and t >= 1.65 else
+               {'approach': 'WHAT IS THAT?', 'point': 'DONT TOUCH IT!',
+                'carry': 'TOO LATE...', 'react': 'OH NO!',
+                'celebrate': 'I DID IT!'}[named_action])
         d.rounded_rectangle((80, 105, W-80, 157), radius=18, fill=(19, 30, 48, 230))
         d.text((W // 2 - 4 * len(cue), 124), cue, fill=(255, 228, 169))
     d.rounded_rectangle((18, 20, W-18, 65), radius=14, fill=(18, 26, 40, 255))
@@ -597,6 +604,14 @@ def render(plan, output, fps=8, seconds_per_scene=2, video=False):
     for i, image in enumerate(previews):
         sheet.paste(image, ((i % 4) * 270, (i // 4) * 480))
     sheet.save(output / "storyboard.png")
+    if plan.get("pilot_type") == "offline_comedy":
+        # Early vs late frames reveal the camera move and duck-in-box finale.
+        beat_sheet = Image.new("RGB", (270 * len(plan["scenes"]), 960), BG)
+        for i, scene in enumerate(plan["scenes"]):
+            for row, sample in enumerate((0.6, min(seconds_per_scene - .1, 2.3))):
+                beat_sheet.paste(frame(scene, sample).resize((270, 480)),
+                                 (i * 270, row * 480))
+        beat_sheet.save(output / "cinematic-beats.png")
     # Explicit contact-sheet evidence across the pickup arc, so a successful
     # first-frame storyboard cannot mask a failed or incomplete interaction.
     carry_scenes = [s for s in plan["scenes"] if s.get("action") == "carry"]
@@ -617,6 +632,9 @@ def render(plan, output, fps=8, seconds_per_scene=2, video=False):
         "unique_scene_frame_fingerprints": len(set(scene_fingerprints)),
         "publication_allowed": False,
         "quality_approved": False,
+        "cinematic_camera": plan.get("pilot_type") == "offline_comedy",
+        "duck_surprise": plan.get("pilot_type") == "offline_comedy",
+        "scene_dissolves": plan.get("pilot_type") == "offline_comedy",
         "note": "Offline technical candidate; manual creative review required.",
     }
     if video:
@@ -627,9 +645,15 @@ def render(plan, output, fps=8, seconds_per_scene=2, video=False):
         )
         encoder.send(None)
         try:
-            for scene in plan["scenes"]:
+            for i, scene in enumerate(plan["scenes"]):
+                prev = (frame(plan["scenes"][i - 1], seconds_per_scene - 1 / fps)
+                        if i and plan.get("pilot_type") == "offline_comedy" else None)
                 for k in range(fps * seconds_per_scene):
-                    encoder.send(frame(scene, k / fps).tobytes())
+                    local = k / fps
+                    current = frame(scene, local)
+                    if prev is not None and local < .25:
+                        current = dissolve(prev, current, local)
+                    encoder.send(current.tobytes())
         finally:
             encoder.close()
         if plan.get("pilot_type") == "offline_comedy":
