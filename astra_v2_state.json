@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 35,
+  "attempts": 36,
   "confirmed_today": 35,
-  "last_attempt_at": "2026-10-14T11:11:44.056105+00:00",
+  "last_attempt_at": "2026-10-14T11:48:22.829407+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -723,28 +723,39 @@
       "uploaded_at": "2026-10-14T11:11:45.479654+00:00"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-14T11:16:02.372647+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "8JEpnaTosb4": {
+      "content_id": "rayvan-forge-25e0d0f2222fc452",
+      "title": "The Fox and the Frozen Fountain",
+      "day": "2026-10-14",
+      "uploaded_at": "2026-10-14T11:48:23.972119+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": ""
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-14T11:47:22.932435+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-14T11:16:02.802636+00:00",
+    "at": "2026-10-14T11:48:24.214243+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-14T07:41:50.802300+00:00",
   "reserved": {
@@ -1407,6 +1418,13 @@
     "rayvan-forge-5c3c9970e0205042": {
       "at": "2026-10-14T11:11:44.056091+00:00",
       "title": "The Lynx and the Eclipse",
+      "format": "short",
+      "plot_key": "",
+      "result": "accepted"
+    },
+    "rayvan-forge-25e0d0f2222fc452": {
+      "at": "2026-10-14T11:48:22.829393+00:00",
+      "title": "The Fox and the Frozen Fountain",
       "format": "short",
       "plot_key": "",
       "result": "accepted"
