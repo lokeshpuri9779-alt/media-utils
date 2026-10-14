@@ -130,12 +130,21 @@ def draw_character(image,index,t,x=540,y=900,expression="neutral",gesture="idle"
     else:
         d.arc((x-32,y-20,x+32,y+28),0,180,fill=(35,37,43),width=5)
     d.ellipse((x-95,y+55,x+95,y+270),fill=base)
-    if gesture not in ("idle", "point", "celebrate", "carry", "carry_rig"):
+    if gesture not in ("idle", "point", "celebrate", "carry", "carry_rig", "walk", "run", "jump", "dance"):
         raise ValueError(f"unsupported gesture: {gesture}")
-    step=int(30*math.sin(t*4))
+    speed = 8 if gesture == "run" else 4 if gesture == "walk" else 5 if gesture == "dance" else 4
+    amplitude = 62 if gesture == "run" else 36 if gesture in ("walk", "dance") else 30
+    step = int(amplitude * math.sin(t * speed))
     for side in (-1,1):
-        d.line((x+side*52,y+235,x+side*52+side*step,y+325),fill=base,width=27)
-        if gesture == "celebrate":
+        leg_swing = side * step if gesture in ("walk", "run", "dance") else side * 30 if gesture == "jump" else side * step
+        knee = (x + side * 52 + leg_swing // 2, y + 280 - (12 if gesture == "run" else 0))
+        foot = (x + side * 52 + leg_swing, y + (295 if gesture == "jump" else 325))
+        d.line(((x + side * 52, y + 235), knee, foot), fill=base, width=27, joint="curve")
+        if gesture in ("walk", "run", "dance"):
+            arm_end = (x + side * (145 - step), y + 120 + side * step)
+        elif gesture == "jump":
+            arm_end = (x + side * 130, y - 85)
+        elif gesture == "celebrate":
             arm_end = (x+side*(110+int(12*math.sin(t*5))), y-100-int(15*math.sin(t*5)))
         elif gesture == "point" and side == 1:
             arm_end = (x+235, y+15)
