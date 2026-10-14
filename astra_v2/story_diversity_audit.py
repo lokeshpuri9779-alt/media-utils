@@ -2,6 +2,7 @@
 import hashlib
 import json
 import re
+from astra_v2.plot_pattern_audit import plot_repetition
 
 def fingerprint(story):
     """Structural fingerprint independent of titles and character names."""
@@ -73,9 +74,10 @@ def audit_history(stories, history=(), threshold=0.82):
     results = []
     for story in stories:
         score = max((similarity(story, old) for old in accepted), default=0.0)
-        near_duplicate = score >= threshold
+        repeated_plot = any(plot_repetition(story, old) for old in accepted)
+        near_duplicate = score >= threshold or repeated_plot
         results.append({"title": story.get("title"), "max_similarity": score,
-                        "near_duplicate": near_duplicate})
+                        "near_duplicate": near_duplicate, "repeated_plot_pattern": repeated_plot})
         if not near_duplicate:
             accepted.append(story)
     return {"results": results, "near_duplicates": sum(r["near_duplicate"] for r in results),
