@@ -26,8 +26,15 @@ class StoryBatchTests(unittest.TestCase):
     def test_reproducibility_and_seed_variation(self):
         self.assertEqual(build_story_batch("repeat"), build_story_batch("repeat"))
         self.assertEqual(build_story_batch("repeat", 2)["story_count"], 2)
+        self.assertNotEqual(build_story_batch("repeat", episode=1),
+                            build_story_batch("repeat", episode=2))
+        self.assertEqual(build_story_batch("repeat", episode=2),
+                         build_story_batch("repeat", episode=2))
 
     def test_invalid_inputs(self):
+        for episode in (0, -1, 100001, "2"):
+            with self.assertRaises(ValueError):
+                build_story_batch(episode=episode)
         for seed, limit in (("", 1), ("valid", 0), ("valid", len(TEMPLATES)+1)):
             with self.assertRaises(ValueError):
                 build_story_batch(seed, limit)
