@@ -5,6 +5,11 @@ on:
     branches: [astra-isolated-verification-20261013]
     paths:
       - '.github/workflows/astra-24fps-preview.yml'
+      - 'astra_v2/coordinated_development.py'
+      - 'astra_v2/animation_timing.py'
+      - 'tests/test_astra_locomotion.py'
+      - 'tests/test_astra_24fps_motion.py'
+      - 'tests/test_astra_animation_timing.py'
 permissions:
   contents: read
 jobs:
