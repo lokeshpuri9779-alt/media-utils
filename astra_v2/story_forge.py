@@ -717,6 +717,25 @@ REWRITTEN_PLOTS = [
 
 # Fresh authored plots for quality-gated replenishment; never bypass QA.
 NEW_AUTHORED_PLOTS = [
+    ("raccoon-midnight-bakery", "The Raccoon and the Midnight Bakery", "animal comedy", [
+        ("A BELL IN THE NIGHT", "At midnight, a raccoon baker heard his shop bell ring although the door was locked and the street was empty.", "door", "WHO RANG"),
+        ("FLOUR ON THE FLOOR", "He followed a trail of flour toward the oven, but the tiny footprints stopped beneath a tall stack of trays.", "door", "MYSTERY STEPS"),
+        ("A HIDDEN CUSTOMER", "Behind the trays, he found a hungry hedgehog sheltering from the rain beside the bell's loose pull cord.", "forest", "FOUND YOU"),
+        ("BREAKFAST BEFORE DAWN", "The raccoon baked a warm bun for his guest, fixed the bell cord, and opened the bakery to a line of smiling neighbors.", "door", "BAKERY OPEN"),
+    ]),
+    ("penguin-stage-fright", "The Penguin and the Silent Trumpet", "animal comedy", [
+        ("THE CONCERT BEGAN", "A young penguin lifted his trumpet for the winter concert, but not a single note came out before the waiting crowd.", "signal", "NO SOUND"),
+        ("A PANICKED SEARCH", "He blew harder and checked every valve while his bandmates tried to keep the audience entertained with clapping.", "robot", "WHERE IS MUSIC"),
+        ("THE RED MITTEN", "His friend spotted the penguin's red mitten tucked inside the trumpet bell where he had hidden it for safekeeping.", "signal", "THE MISSING NOTE"),
+        ("ONE LOUD FINISH", "He pulled out the mitten, played the opening melody, and turned his embarrassing mistake into the band's funniest encore.", "signal", "ENCORE"),
+    ]),
+    ("beaver-floating-garden", "The Beaver and the Floating Garden", "animal adventure", [
+        ("THE GARDEN DRIFTED", "A beaver woke to find the village's floating vegetable garden drifting away after a night of heavy river rain.", "ship", "GARDEN ADRIFT"),
+        ("THE ROPE SNAPPED", "She paddled after the garden and caught its loose rope, but the current snapped it against a submerged branch.", "ship", "HOLD ON"),
+        ("THE QUIET INLET", "She noticed a calm inlet beyond the reeds and used her paddle to steer the garden toward its sheltered water.", "forest", "SAFE WATER"),
+        ("HARVEST AT HOME", "The villagers helped secure new mooring lines, and everyone celebrated with vegetables picked from the rescued garden.", "forest", "HARVEST SAVED"),
+    ]),
+
     ("mole-lantern-path", "The Mole and the Lantern Path", "animal adventure", [
         ("THE PATH WENT DARK", "A young mole found that the lanterns marking the woodland footpath had gone dark after a storm.", "forest", "LOST LIGHT"),
         ("THE FIRST FIX FAILED", "He replaced the first lantern's bulb, but the next lantern still flickered and went out.", "signal", "STILL DARK"),
