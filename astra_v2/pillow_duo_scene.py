@@ -116,8 +116,8 @@ def _blend(a, b, k):
 
 
 def _ease(t):
-    t = max(0.0, min(1.0, t))
-    return t*t*(3-2*t)
+    from astra_v2.story_motion import smoothstep
+    return smoothstep(t)
 
 
 def _line(d, pts, color, width=9):
@@ -131,7 +131,10 @@ def _stage(d, shot, t):
 
 
 def _facial(d, x, y, mood, t, actor_idx):
-    blink = abs(math.sin(t*1.7 + actor_idx*.6)) > .985
+    from astra_v2.story_motion import evaluate
+    # Optimized Pillow's deterministic blink profile avoids per-frame random
+    # motion and gives each actor an independent phase.
+    blink = evaluate(t + actor_idx * .31).blink
     for side in (-1, 1):
         ex=x+side*50
         # Expression brows move independently from eyes.
