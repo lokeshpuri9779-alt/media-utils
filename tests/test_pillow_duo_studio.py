@@ -40,5 +40,19 @@ class PillowStudioHookTests(unittest.TestCase):
             frame = render_frame([shot], 1.3, "fiction", 2.4)
         self.assertEqual(frame.size, (1080, 1920))
 
+    def test_strict_preflight_blocks_before_asset_work(self):
+        from studio_renderer import render_short, CreativeReject
+        shot = {"start": 0.0, "end": 2.4, "duration": 2.4,
+                "speech": "A lone fox walks through a doorway.",
+                "headline": "A lone fox", "label": "A lone fox",
+                "visual": "story", "creative_format": "microfiction_cinematic"}
+        with patch.dict("os.environ", {"ASTRA_PILLOW_DUO_STRICT": "1", "ASTRA_STUDIO_PILLOW_DUO": "1"}):
+            with patch("studio_renderer.make_plan", return_value=[shot]):
+                with patch("studio_renderer.creative_quality_gate", return_value={}):
+                    with patch("studio_renderer.asset_manifest") as assets:
+                        with self.assertRaisesRegex(CreativeReject, "Pillow Duo preflight rejected"):
+                            render_short({"genre": "fiction"}, "/tmp/should-not-render.mp4")
+                        assets.assert_not_called()
+
 if __name__ == "__main__":
     unittest.main()
