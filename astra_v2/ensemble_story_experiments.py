@@ -92,6 +92,33 @@ PILOTS = [
             ("THEY KEPT THE BROKEN CLOCK","The museum displayed the damaged clock beside the photograph, with a new label: evidence of a rescue, not a crime.","resolution",{"cat":"clap","owl":"clap","mouse":"wave"}),
         ],
     },
+    {
+        "key":"festival-lantern-recovery",
+        "title":"The Night the Lantern Went Missing",
+        "genre_name":"festival rescue adventure",
+        "cast":("fox","rabbit","cat","owl","mouse"),
+        "logline":"Five friends follow a lost lantern lens across their town and restore the festival light before darkness.",
+        "beats":[
+            ("THE MARKET WENT DARK",
+             "Just before the lantern festival, the fox and rabbit found the town's signal lantern broken beneath an empty market stall.",
+             "crowd",{"fox":"pick","rabbit":"point","cat":"look","owl":"wave","mouse":"look"}),
+            ("THE REPAIR REVEALED A CLUE",
+             "At the workshop, the cat opened the lantern and discovered its focusing glass was missing. The owl noticed a station luggage tag stuck under its hinge.",
+             "clue",{"cat":"open","owl":"point","mouse":"look","rabbit":"wave","fox":"look"}),
+            ("THE WRONG PARCEL",
+             "At the station, the mouse pulled a mislabeled box from lost property and found the glass lens inside. The last train had already departed.",
+             "confrontation",{"mouse":"pull","cat":"point","fox":"look","owl":"wave","rabbit":"look"}),
+            ("THE FOREST SHORTCUT",
+             "The five friends ran through the forest, but a fallen branch blocked the shortcut. The fox pushed it aside while the rabbit carried the recovered glass in its box.",
+             "action",{"fox":"push","rabbit":"carry","cat":"run","owl":"wave","mouse":"jump"}),
+            ("THE LANTERN REIGNITED",
+             "In the garden beside the festival stage, the owl repaired the lantern using the recovered lens while the cat held its frame steady.",
+             "reveal",{"owl":"repair","cat":"carry","fox":"point","rabbit":"look","mouse":"clap"}),
+            ("LIGHT FOR EVERYONE",
+             "The five friends carried the shining lantern home to the hill where their neighbors waited. Its warm beam lit the gathering and everyone celebrated together.",
+             "resolution",{"fox":"carry","rabbit":"wave","cat":"clap","owl":"point","mouse":"dance"}),
+        ],
+    },
 ]
 
 STAGE_SEQUENCES = {
@@ -101,6 +128,7 @@ STAGE_SEQUENCES = {
     "silent-orchestra":("concert_hall","concert_hall","bridge","concert_hall","bridge"),
     "bridge-that-lied":("bridge","tunnel","tunnel","bridge","river","hills"),
     "impossible-photo":("museum","museum","gallery","museum","museum"),
+    "festival-lantern-recovery":("market","workshop","station","forest","garden","home"),
 }
 
 def catalog():
