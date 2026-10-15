@@ -1,6 +1,10 @@
 name: ASTRA Ensemble Engine Active (Artifact Only)
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/astra-ensemble-active.yml'
+      - 'tools/astra_ensemble_active.py'
   schedule:
     - cron: '17 1 * * *'
 permissions:
