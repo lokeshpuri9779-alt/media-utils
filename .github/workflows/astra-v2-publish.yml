@@ -111,13 +111,26 @@ jobs:
         id: preflight
         run: python -m astra_v2.preflight
 
+      - name: Configure fast pinned-package installer
+        if: steps.preflight.outputs.render_due == 'true'
+        uses: astral-sh/setup-uv@v6
+        continue-on-error: true
+        with:
+          enable-cache: true
+
       - name: Install free rendering dependencies
         id: dependencies
         if: steps.preflight.outputs.render_due == 'true'
         run: |
-          # Prevent a blocked package network request from occupying the
-          # only serialized publisher for the entire 28-minute job timeout.
-          timeout 360s python -m pip install --disable-pip-version-check -r requirements.txt
+          # Preserve the lightweight preflight path. Only install the full
+          # pinned stack when the publisher actually needs to render.
+          if command -v uv >/dev/null 2>&1 && timeout 240s uv pip install --system -r requirements.txt; then
+            echo 'ASTRA_INSTALL_MODE=uv'
+          else
+            echo 'ASTRA_UV_FALLBACK=legacy-pip'
+            timeout 360s python -m pip install --disable-pip-version-check -r requirements.txt
+            echo 'ASTRA_INSTALL_MODE=pip-fallback'
+          fi
           # Ubuntu hosted runners normally include ffmpeg; avoid apt mirror stalls.
           if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
             for attempt in 1 2 3; do
