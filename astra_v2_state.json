@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 40,
-  "confirmed_today": 39,
-  "last_attempt_at": "2026-10-15T10:55:40.978211+00:00",
+  "attempts": 41,
+  "confirmed_today": 40,
+  "last_attempt_at": "2026-10-15T11:15:00.777422+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1163,14 +1163,22 @@
       "format": "short",
       "uploaded_at": "2026-10-15T10:44:27.702643+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-2dbbdb6192526ffc": {
+      "video_id": "FeupJyXmmmA",
+      "confirmed_at": "2026-10-15T11:14:07.450899+00:00",
+      "title": "The Fox and Squirrel's Lost Wish Train",
+      "format": "short",
+      "uploaded_at": "2026-10-15T10:55:42.912293+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "FeupJyXmmmA": {
-      "content_id": "rayvan-forge-2dbbdb6192526ffc",
-      "title": "The Fox and Squirrel's Lost Wish Train",
+    "7ZHyooAJaRo": {
+      "content_id": "rayvan-forge-4d876b2037498625",
+      "title": "The Squirrel and Fox's Midnight Kite",
       "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T10:55:42.912293+00:00",
+      "uploaded_at": "2026-10-15T11:15:03.259008+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -1179,11 +1187,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T10:55:00.478985+00:00",
+  "last_preflight_at": "2026-10-15T11:14:07.024456+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T10:55:43.189226+00:00",
+    "at": "2026-10-15T11:15:03.493802+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2311,6 +2319,14 @@
     "rayvan-forge-2dbbdb6192526ffc": {
       "at": "2026-10-15T10:55:40.978195+00:00",
       "title": "The Fox and Squirrel's Lost Wish Train",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-4d876b2037498625": {
+      "at": "2026-10-15T11:15:00.777400+00:00",
+      "title": "The Squirrel and Fox's Midnight Kite",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
