@@ -157,7 +157,7 @@ def _story_set_dressing(d, environment, shot, t, accent):
                   ("speech","headline","visual_prompt")).lower()
     # Useful environmental detail: a physical clock on the wall, never
     # a floating motion guide. Clock hands move continuously across frames.
-    if (re.search(r"\\b(?:clock|timepiece|alarm)\\b", text) and
+    if (re.search(r"\b(?:clock|timepiece|alarm)\b", text) and
             environment in ("courtroom","museum","clocktower","gallery","library")):
         cx,cy=855,646
         d.ellipse((cx-55,cy-55,cx+55,cy+55),fill=(235,221,183),
@@ -170,14 +170,14 @@ def _story_set_dressing(d, environment, shot, t, accent):
                fill=(63,72,84),width=5)
         d.line((cx,cy,cx-int(18*math.sin(t*.003)),
                 cy-int(18*math.cos(t*.003))),fill=(63,72,84),width=7)
-    if (re.search(r"\\b(?:photograph|photo|picture|portrait)\\b",text) and
+    if (re.search(r"\b(?:photograph|photo|picture|portrait)\b",text) and
             environment in ("museum","gallery","courtroom","attic")):
         d.rounded_rectangle((705,855,895,1000),radius=8,
                             fill=(222,207,175),outline=(105,86,82),width=8)
         d.polygon(((731,963),(779,917),(811,947),(850,901),
                    (875,966)),fill=(90,146,149))
         d.ellipse((754,881,780,907),fill=(214,173,104))
-    if re.search(r"\\b(?:storm|raining|rainfall|heavy rain)\\b",text) and environment in ("river","bridge","hills","street"):
+    if re.search(r"\b(?:storm|raining|rainfall|heavy rain)\b",text) and environment in ("river","bridge","hills","street"):
         for k in range(16):
             x=100+(k*61)%900
             y=565+(k*93)%490 + int(11*math.sin(t*1.5+k))
