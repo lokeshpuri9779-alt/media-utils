@@ -9,6 +9,7 @@ from __future__ import annotations
 import hashlib
 import math
 import re
+from functools import lru_cache
 
 from PIL import ImageDraw
 
@@ -45,55 +46,56 @@ PROPS = {
 }
 
 
-def scene_pair(shot):
-    """Return the stable director cast, or named actors in narrated order.
-
-    A story's left/right screen identity must not switch when narration
-    reverses the order of the same two animal names between scenes.
-    """
-    text = " ".join(str(shot.get(k) or "") for k in
-                    ("speech", "visual_prompt", "action")).lower()
-    found = []
+@lru_cache(maxsize=2048)
+def _cached_actor_mentions(text):
+    """All supported animal matches, computed once for a stable shot."""
+    found=[]
     for name in ACTORS:
-        match = re.search(ALIASES[name], text)
-        if match:
-            found.append((match.start(), name))
-    cast = shot.get("story_cast") or ()
-    if isinstance(cast, (list, tuple)) and len(cast) == 2:
-        cast = tuple(str(x).lower() for x in cast)
-        if all(x in ACTORS for x in cast) and len(set(cast)) == 2:
-            # A third named species means this shot may require a different
-            # compositor; never misrepresent it as one of the core duo.
-            if all(name in cast for _, name in found):
-                return cast
-            return ()
-    if len(found) >= 2:
-        return tuple(name for _, name in sorted(found)[:2])
-    return ()
+        m=re.search(ALIASES[name],text)
+        if m:
+            found.append((m.start(),name))
+    return tuple(sorted(found))
 
-
-def scene_prop(shot):
-    text = " ".join(str(shot.get(k) or "") for k in
-                    ("speech", "visual_prompt", "action")).lower()
-    found = [(m.start(), name) for name, pattern in PROPS.items()
-             if (m := re.search(pattern, text))]
+@lru_cache(maxsize=2048)
+def _cached_prop(text):
+    found=[(m.start(),name) for name,pattern in PROPS.items()
+           if (m:=re.search(pattern,text))]
     return min(found)[1] if found else None
 
+@lru_cache(maxsize=2048)
+def _cached_mood(text,role):
+    if re.search(r"\b(?:oh no|shocked|surpris\w*|gasp|scream|scared|panic)\b",text):
+        return "surprised"
+    if re.search(r"\b(?:don't|do not|stop|angry|warn\w*|danger|furious)\b",text):
+        return "angry"
+    if re.search(r"\b(?:what|why|wonder|mystery|curious|question)\b",text):
+        return "curious"
+    if re.search(r"\b(?:smile|laugh|celebrat\w*|happy|cheer|dance)\b",text):
+        return "happy"
+    return {"reveal":"curious","build":"surprised",
+            "twist":"curious","payoff":"happy"}.get(role,"alert")
+
+def scene_pair(shot):
+    """Keep story-level left/right identity, never hide a third named animal."""
+    text=" ".join(str(shot.get(k) or "") for k in
+                  ("speech","visual_prompt","action")).lower()
+    found=_cached_actor_mentions(text)
+    cast=shot.get("story_cast") or ()
+    if isinstance(cast,(list,tuple)) and len(cast)==2:
+        cast=tuple(str(x).lower() for x in cast)
+        if all(x in ACTORS for x in cast) and len(set(cast))==2:
+            return cast if all(name in cast for _,name in found) else ()
+    return tuple(name for _,name in found[:2]) if len(found)>=2 else ()
+
+def scene_prop(shot):
+    text=" ".join(str(shot.get(k) or "") for k in
+                  ("speech","visual_prompt","action")).lower()
+    return _cached_prop(text)
 
 def scene_mood(shot):
-    text = " ".join(str(shot.get(k) or "") for k in
-                    ("speech", "visual_prompt", "headline", "action")).lower()
-    if re.search(r"\b(?:oh no|shocked|surpris\w*|gasp|scream|scared|panic)\b", text):
-        return "surprised"
-    if re.search(r"\b(?:don't|do not|stop|angry|warn\w*|danger|furious)\b", text):
-        return "angry"
-    if re.search(r"\b(?:what|why|wonder|mystery|curious|question)\b", text):
-        return "curious"
-    if re.search(r"\b(?:smile|laugh|celebrat\w*|happy|cheer|dance)\b", text):
-        return "happy"
-    return {"reveal":"curious", "build":"surprised",
-            "twist":"curious","payoff":"happy"}.get(
-                str(shot.get("story_beat") or "").lower(), "alert")
+    text=" ".join(str(shot.get(k) or "") for k in
+                  ("speech","visual_prompt","headline","action")).lower()
+    return _cached_mood(text,str(shot.get("story_beat") or "").lower())
 
 
 def _blend(a, b, k):
