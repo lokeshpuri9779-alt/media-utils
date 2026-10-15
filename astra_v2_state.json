@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-16",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 6,
+  "attempts": 7,
   "confirmed_today": 6,
-  "last_attempt_at": "2026-10-15T20:02:56.433367+00:00",
+  "last_attempt_at": "2026-10-15T20:11:04.608596+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1429,28 +1429,40 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-15T20:07:50.213772+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "mfmY-nB7xs8": {
+      "content_id": "rayvan-forge-c8ea535c693b45df",
+      "title": "The Owl and Otter's Storm Lantern",
+      "day": "2026-10-16",
+      "uploaded_at": "2026-10-15T20:11:06.223847+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-15T20:10:14.202487+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T20:07:50.866131+00:00",
+    "at": "2026-10-15T20:11:06.474506+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-15T20:02:42.551460+00:00",
   "reserved": {
@@ -2819,6 +2831,14 @@
     "rayvan-forge-373deafaae678377": {
       "at": "2026-10-15T20:02:56.433350+00:00",
       "title": "The Fox and Cat's Rocket Parcel",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-c8ea535c693b45df": {
+      "at": "2026-10-15T20:11:04.608579+00:00",
+      "title": "The Owl and Otter's Storm Lantern",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
