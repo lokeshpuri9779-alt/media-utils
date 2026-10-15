@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-16",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 11,
-  "confirmed_today": 10,
-  "last_attempt_at": "2026-10-15T21:18:21.816413+00:00",
+  "attempts": 12,
+  "confirmed_today": 11,
+  "last_attempt_at": "2026-10-15T21:37:00.018547+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1459,14 +1459,22 @@
       "format": "short",
       "uploaded_at": "2026-10-15T21:07:53.916115+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-8b817a42f302a722": {
+      "video_id": "VpLuRp1t6n0",
+      "confirmed_at": "2026-10-15T21:36:14.352549+00:00",
+      "title": "The Mouse and Squirrel's Missing Flower",
+      "format": "short",
+      "uploaded_at": "2026-10-15T21:18:22.944863+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "VpLuRp1t6n0": {
-      "content_id": "rayvan-forge-8b817a42f302a722",
-      "title": "The Mouse and Squirrel's Missing Flower",
+    "TBXZIm3umQE": {
+      "content_id": "rayvan-forge-1994c5737fa2c58f",
+      "title": "The Cat and Otter's River Key",
       "day": "2026-10-16",
-      "uploaded_at": "2026-10-15T21:18:22.944863+00:00",
+      "uploaded_at": "2026-10-15T21:37:01.357326+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -1475,11 +1483,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T21:17:44.993604+00:00",
+  "last_preflight_at": "2026-10-15T21:36:13.926914+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T21:18:23.185673+00:00",
+    "at": "2026-10-15T21:37:01.591988+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2903,6 +2911,14 @@
     "rayvan-forge-8b817a42f302a722": {
       "at": "2026-10-15T21:18:21.816398+00:00",
       "title": "The Mouse and Squirrel's Missing Flower",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-1994c5737fa2c58f": {
+      "at": "2026-10-15T21:37:00.018530+00:00",
+      "title": "The Cat and Otter's River Key",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
