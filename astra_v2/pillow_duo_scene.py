@@ -34,6 +34,14 @@ PROPS = {
     "ball": r"\b(?:ball|orb|marble)\b",
     "flower": r"\b(?:flower|bouquet|rose)\b",
     "lantern": r"\b(?:lantern|lamp|light)\b",
+    "key": r"\b(?:key|keys)\b",
+    "bell": r"\b(?:bell|chime)\b",
+    "compass": r"\b(?:compass|navigation dial)\b",
+    "shield": r"\b(?:shield|badge)\b",
+    "rocket": r"\b(?:rocket|spaceship)\b",
+    "heart": r"\b(?:heart|valentine)\b",
+    "wrench": r"\b(?:wrench|spanner)\b",
+    "clock": r"\b(?:clock|timepiece)\b",
 }
 
 
@@ -175,8 +183,12 @@ def _ears_and_tail(d, actor, x, y, t, fur):
             d.ellipse((ex-32,y-129,ex+32,y-33),fill=fur)
 
 
-def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None):
+def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
+           interact_side=1, visual_recipe=None):
+    from astra_v2.procedural_visual_library import draw_costume_detail, draw_accessory
     fur=FUR[name]
+    if visual_recipe:
+        fur=_blend(fur, visual_recipe["fur"], .12 if name in ("fox","rabbit") else .27)
     stride=math.sin(t*(8.4 if action=="run" else 4.6)+idx*math.pi)
     gait=int(43*stride) if action in ("walk","run") else 0
     bob=int(26*abs(math.sin(t*5+idx))) if action=="jump" else int(6*math.sin(t*2+idx))
@@ -199,7 +211,8 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None):
         shoe=(82,181,179) if idx==0 else (177,143,212)
         d.ellipse((sx+step-32,y+394-abs(step)//5,
                    sx+step+32,y+421-abs(step)//5),fill=shoe)
-    costume=(60,151,159) if idx==0 else (139,113,178)
+    costume=(visual_recipe["fabric"] if visual_recipe else
+             (60,151,159) if idx==0 else (139,113,178))
     d.rounded_rectangle((x-102,y+102,x+102,y+309),radius=50,
                         fill=costume,outline=INK,width=5)
     d.polygon(((x-50,y+105),(x,y+169),(x+50,y+105)),
@@ -208,6 +221,8 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None):
     for yy in (197,242):
         d.ellipse((x-6, y+yy-6,x+6,y+yy+6),
                   fill=(245,213,115),outline=INK,width=2)
+    if visual_recipe:
+        draw_costume_detail(d,x,y,visual_recipe)
     # Jointed arms, with a real end-effector target when holding an object.
     hands=[]
     for side in (-1,1):
@@ -215,8 +230,8 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None):
         wave=action in ("wave","warn","throw") and side==1
         arm_raise=80*abs(math.sin(t*4.5+idx)) if wave else 0
         hand=(x+side*153,y+218-arm_raise)
-        if hand_target is not None and side==1:
-            hand=(hand_target[0]-22,hand_target[1]+2)
+        if hand_target is not None and side==interact_side:
+            hand=(hand_target[0]-side*22,hand_target[1]+2)
         elbow=((shoulder[0]+hand[0])*.5+side*18,
                (shoulder[1]+hand[1])*.5+14)
         _line(d,[shoulder,elbow,hand],fur,22)
@@ -235,11 +250,13 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None):
             ex=x+side*51
             d.ellipse((ex-45,y-70,ex+45,y+35),fill=CREAM)
     _facial(d,x,y,mood,t,idx)
+    if visual_recipe:
+        draw_accessory(d,x,y,visual_recipe)
     return hands
 
 
-def _prop(d, name, x, y, t):
-    """Draw the one narrated physical object. Never invent story props."""
+def _prop(d, name, x, y, t, *, symbol_id=None):
+    """Draw the narrated object, with an optional stable illustrated emblem."""
     x,y=int(x),int(y)
     if name=="box":
         d.rounded_rectangle((x-79,y-67,x+79,y+67),radius=9,
@@ -271,6 +288,13 @@ def _prop(d, name, x, y, t):
                             fill=(245,205,116),outline=INK,width=6)
         d.arc((x-32,y-91,x+32,y-33),180,355,fill=CREAM,width=9)
         d.ellipse((x-21,y-25,x+21,y+42),fill=(255,237,174))
+    else:
+        from astra_v2.procedural_visual_library import draw_icon, icon_for_story
+        draw_icon(d,icon_for_story(name,name),x,y,size=120)
+        return
+    if symbol_id is not None and name in ("box","book","ball","lantern"):
+        from astra_v2.procedural_visual_library import draw_icon
+        draw_icon(d,symbol_id,x,y+13,size=33)
 
 
 def prop_position(action, t):
@@ -302,17 +326,29 @@ def draw_duo(image, shot, t):
     from astra_v2.pillow_scene_direction import prop_trajectory, actor_translation
     prop_pos=(prop_trajectory(shot,t) if shot.get("story_beat") else
               prop_position(action,t))
-    # Stable positions are large enough to read on mobile.
+    from astra_v2.procedural_visual_library import (
+        character_recipe, visual_identity, icon_for_story, MOTIFS)
+    stable_key=shot.get("story_visual_seed") or "|".join(pair)
     for idx,name in enumerate(pair):
         x=(298 if idx==0 else 772)+actor_translation(action,t,idx)
+        if idx==1 and action=="carry":
+            x-=105
         y=846
-        hand_target=(prop_pos if idx==0 and prop and pickup and
-                     (progress>.25 or shot.get("story_beat")=="payoff")
-                     else None)
+        contact=bool(prop and pickup and
+                     (progress>.25 or shot.get("story_beat")=="payoff"))
+        hand_target=(prop_pos if contact else None)
         actor_mood=mood
         if mood=="angry" and idx==0:
             actor_mood="curious"  # Reaction shot, not two identical emotions.
-        _actor(d,name,x,y,t,action,actor_mood,idx,hand_target=hand_target)
+        if idx==1 and action!="carry":
+            hand_target=None
+        recipe=character_recipe(visual_identity(stable_key,name,idx))
+        _actor(d,name,x,y,t,action,actor_mood,idx,
+               hand_target=hand_target,interact_side=1 if idx==0 else -1,
+               visual_recipe=recipe)
     if prop:
-        _prop(d,prop,*prop_pos,t)
+        motif={"box":"star","ball":"star","flower":"flower",
+               "lantern":"sun","book":"book"}.get(prop,prop)
+        symbol_id=icon_for_story(motif,stable_key) if motif in MOTIFS else None
+        _prop(d,prop,*prop_pos,t,symbol_id=symbol_id)
     return True
