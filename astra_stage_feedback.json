@@ -2,30 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-13T04:04:15.023017+00:00",
-      "stage": "hook",
-      "element": "retention",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 76.34133333333332,
-        "candidate": "saturn-density-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "saturn-density-v1"
-    },
-    {
-      "at": "2026-10-13T04:04:15.026628+00:00",
-      "stage": "visuals",
-      "element": "visual",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 100.0,
-        "candidate": "saturn-density-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "saturn-density-v1"
-    },
-    {
       "at": "2026-10-13T04:04:15.030209+00:00",
       "stage": "pacing",
       "element": "pacing",
@@ -7215,6 +7191,39 @@
       },
       "proposed_action": "Diagnose story supply and creative gate failures",
       "candidate_id": ""
+    },
+    {
+      "at": "2026-10-15T00:00:48.178774+00:00",
+      "stage": "quality",
+      "element": "creative_director",
+      "outcome": "pass",
+      "evidence": {
+        "scores": {
+          "hook": 94.0,
+          "retention": 92.0,
+          "visual": 100.0,
+          "pacing": 100.0,
+          "audio": 98.26,
+          "captions": 98.79,
+          "novelty": 100.0,
+          "coherence": 92.0,
+          "technical": 100.0
+        }
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-forge-54e28b2d4424e599"
+    },
+    {
+      "at": "2026-10-15T00:00:48.188770+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "pass",
+      "evidence": {
+        "duration": 22.767,
+        "renderer": "studio-7.2.1"
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-forge-54e28b2d4424e599"
     }
   ],
   "stage_counts": {
@@ -7246,7 +7255,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 107,
+      "unknown": 106,
       "improved": 0,
       "regressed": 0
     },
@@ -7262,7 +7271,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 54,
+      "unknown": 53,
       "improved": 0,
       "regressed": 0
     },
@@ -7315,7 +7324,7 @@
       "regressed": 0
     },
     "render": {
-      "pass": 2,
+      "pass": 3,
       "fail": 54,
       "skip": 0,
       "unknown": 54,
@@ -7323,7 +7332,7 @@
       "regressed": 0
     },
     "quality": {
-      "pass": 2,
+      "pass": 3,
       "fail": 57,
       "skip": 0,
       "unknown": 0,
