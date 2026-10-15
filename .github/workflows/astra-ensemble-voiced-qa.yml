@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - 'tools/astra_ensemble_voiced_preview.py'
+      - 'astra_v2/ensemble_scene.py'
+      - 'tests/test_ensemble_narrated_30fps.py'
       - '.github/workflows/astra-ensemble-voiced-qa.yml'
       - 'astra_v2/ensemble_story_experiments.py'
   workflow_dispatch:
@@ -11,7 +13,7 @@ permissions:
 jobs:
   narrated-pilot:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 35
     env:
       ASTRA_EXPERIMENT_ENSEMBLE: '1'
       ASTRA_OPENAI_ENABLED: '0'
@@ -26,6 +28,8 @@ jobs:
           enable-cache: true
       - name: Install exact offline production dependencies
         run: uv pip install --system -r requirements.txt
+      - name: Verify Studio-rate narration plan and publication isolation
+        run: python -m unittest discover -s tests -p 'test_ensemble_narrated_30fps.py' -v
       - name: Render complete ensemble drama with narrated sound
         run: python -m tools.astra_ensemble_voiced_preview
       - name: Verify real video and audio tracks
@@ -38,6 +42,12 @@ jobs:
           p=subprocess.run([get_ffmpeg_exe(),'-v','error','-i',str(path),'-f','null','-'],check=True)
           info=json.loads(Path('preview/astra-ensemble-voiced-pilot.json').read_text())
           assert info['cast_count']==5 and info['published_to_youtube']==False
+          assert info['production_ready'] is False
+          assert info['fps']==30 and info['resolution']==[1080,1920]
+          assert info['camera_takes']==2*info['beats']
+          assert info['visual_qa']['pass'] is True
+          assert info['media_qa']['audio_and_video_decoded'] is True
+          assert abs(info['media_qa']['encoded_fps']-30)<.01
           print('ASTRA_NARRATED_ENSEMBLE_QA_PASS')
           PY
       - uses: actions/upload-artifact@v4
