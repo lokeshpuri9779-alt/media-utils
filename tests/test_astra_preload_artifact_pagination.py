@@ -20,6 +20,19 @@ class QueueDiscoveryTests(unittest.TestCase):
 
     @patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/repo"})
     @patch.object(preload_queue, "_api")
+    def test_malformed_workflow_metadata_does_not_block_valid_artifacts(self, api):
+        api.return_value = {"artifacts": [
+            {"name": "astra-preloaded-malformed", "expired": False,
+             "workflow_run": "not-a-dictionary"},
+            {"name": "astra-preloaded-list", "expired": False,
+             "workflow_run": []},
+            {"name": "astra-preloaded-good", "expired": False,
+             "workflow_run": {"head_branch": "main"}},
+        ]}
+        self.assertEqual(preload_queue.candidate_ids(), {"good"})
+
+    @patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/repo"})
+    @patch.object(preload_queue, "_api")
     def test_single_page(self, api):
         api.return_value = {"artifacts": [{"name": "astra-preloaded-yes",
                            "expired": False, "workflow_run": {"head_branch": "main"}}]}
