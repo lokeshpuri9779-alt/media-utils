@@ -1,0 +1,53 @@
+name: ASTRA Species Fidelity Art QA
+on:
+  pull_request:
+    paths:
+      - 'astra_v2/story_visuals.py'
+      - 'astra_v2/distinct_animal_art.py'
+      - 'tests/test_distinct_animal_art.py'
+      - 'tests/test_astra_character_art.py'
+      - '.github/workflows/astra-v2-preload.yml'
+      - '.github/workflows/astra-species-fidelity-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-animals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install --disable-pip-version-check 'Pillow>=10,<12' 'numpy>=1.24' 'httpx>=0.25' 'imageio-ffmpeg>=0.5'
+      - name: Check subject accuracy and actual Studio foreground frames
+        run: |
+          python -m unittest discover -s tests -p 'test_distinct_animal_art.py' -v
+          python -m unittest discover -s tests -p 'test_astra_character_art.py' -v
+          python -m unittest discover -s tests -p 'test_story_visuals.py' -v
+      - name: Render isolated animal art contact sheet (not for publication)
+        run: |
+          mkdir -p animal-preview
+          python - <<'PY'
+          from PIL import Image,ImageDraw
+          from astra_v2.story_visuals import draw_subject
+          animals=('beaver','mole','penguin','heron')
+          canvas=Image.new('RGB',(4*280,520),(14,19,32))
+          d=ImageDraw.Draw(canvas)
+          for idx,animal in enumerate(animals):
+              frame=Image.new('RGB',(1080,1920),(21,32,51))
+              assert draw_subject(frame,animal,.7,(120,180,210),'run')
+              crop=frame.crop((155,500,925,1310))
+              crop.thumbnail((270,475))
+              canvas.paste(crop,(idx*280+5,35))
+              d.text((idx*280+10,10),animal.upper(),fill=(250,245,232))
+          canvas.save('animal-preview/four-true-species.png')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: astra-exact-animal-visual-qa
+          path: animal-preview/
+          if-no-files-found: warn
+          retention-days: 7
