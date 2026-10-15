@@ -61,6 +61,21 @@ class FictionVisualGuardTests(unittest.TestCase):
         self.assertEqual(report["sampled_frames"],4)
         self.assertTrue(report["pass"])
 
+    def test_long_story_samples_without_blocking_extra_scenes(self):
+        plan=[{"start":i*2.0,"end":i*2.0+2.0,"duration":2.0}
+              for i in range(90)]
+        calls=[]
+        def clean(shots,t,genre,total):
+            calls.append(t)
+            return self.canvas()
+        report=validate_fiction_frames(plan,clean,180,max_beats=20)
+        self.assertEqual(report["sampled_beats"],20)
+        self.assertEqual(report["total_beats"],90)
+        self.assertEqual(report["sampled_frames"],40)
+        self.assertEqual(len(calls),40)
+        self.assertLess(calls[0],.1)
+        self.assertGreater(calls[-1],178)
+
     def test_ensemble_scenes_remain_safe_and_diverse(self):
         from astra_v2.ensemble_stage import ENVIRONMENTS,draw_ensemble_stage
         from astra_v2.ensemble_scene import ensemble_frame,_positions
