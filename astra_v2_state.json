@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 55,
-  "confirmed_today": 54,
-  "last_attempt_at": "2026-10-15T15:09:25.663405+00:00",
+  "attempts": 56,
+  "confirmed_today": 55,
+  "last_attempt_at": "2026-10-15T15:20:07.191558+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1283,14 +1283,22 @@
       "format": "short",
       "uploaded_at": "2026-10-15T14:43:47.214983+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-77259ad42c99895b": {
+      "video_id": "JujlK6h5im4",
+      "confirmed_at": "2026-10-15T15:19:17.477583+00:00",
+      "title": "The Squirrel's Giant Sandwich",
+      "format": "short",
+      "uploaded_at": "2026-10-15T15:09:27.140211+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "JujlK6h5im4": {
-      "content_id": "rayvan-forge-77259ad42c99895b",
-      "title": "The Squirrel's Giant Sandwich",
+    "27ZsAMGBdfo": {
+      "content_id": "rayvan-forge-b40c69f9f16abb1e",
+      "title": "The Blacksmith's Silent Bell",
       "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T15:09:27.140211+00:00",
+      "uploaded_at": "2026-10-15T15:20:09.050325+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -1299,11 +1307,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T15:08:35.158863+00:00",
+  "last_preflight_at": "2026-10-15T15:19:16.928247+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T15:09:27.482903+00:00",
+    "at": "2026-10-15T15:20:09.571232+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2551,6 +2559,14 @@
     "rayvan-forge-77259ad42c99895b": {
       "at": "2026-10-15T15:09:25.663389+00:00",
       "title": "The Squirrel's Giant Sandwich",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-b40c69f9f16abb1e": {
+      "at": "2026-10-15T15:20:07.191539+00:00",
+      "title": "The Blacksmith's Silent Bell",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
