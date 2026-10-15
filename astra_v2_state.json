@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 22,
-  "confirmed_today": 21,
-  "last_attempt_at": "2026-10-15T02:34:12.827786+00:00",
+  "attempts": 23,
+  "confirmed_today": 22,
+  "last_attempt_at": "2026-10-15T03:00:07.345193+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1019,14 +1019,22 @@
       "format": "short",
       "uploaded_at": "2026-10-15T02:21:06.181657+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-aa018232ecab9edc": {
+      "video_id": "j_N0_bj7RiM",
+      "confirmed_at": "2026-10-15T02:58:20.942004+00:00",
+      "title": "The Owl and Fox's Storm Warning",
+      "format": "short",
+      "uploaded_at": "2026-10-15T02:34:14.609660+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "j_N0_bj7RiM": {
-      "content_id": "rayvan-forge-aa018232ecab9edc",
-      "title": "The Owl and Fox's Storm Warning",
+    "tdsHrrNZ_JM": {
+      "content_id": "rayvan-forge-151f1a0063f22f08",
+      "title": "The Cat and Mouse's Blue Flower",
       "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T02:34:14.609660+00:00",
+      "uploaded_at": "2026-10-15T03:00:09.006597+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -1035,11 +1043,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T02:31:56.858045+00:00",
+  "last_preflight_at": "2026-10-15T02:58:20.642488+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T02:34:14.952010+00:00",
+    "at": "2026-10-15T03:00:09.298676+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2023,6 +2031,14 @@
     "rayvan-forge-aa018232ecab9edc": {
       "at": "2026-10-15T02:34:12.827767+00:00",
       "title": "The Owl and Fox's Storm Warning",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-151f1a0063f22f08": {
+      "at": "2026-10-15T03:00:07.345176+00:00",
+      "title": "The Cat and Mouse's Blue Flower",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
