@@ -33,6 +33,28 @@ class QueueDiscoveryTests(unittest.TestCase):
 
     @patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/repo"})
     @patch.object(preload_queue, "_api")
+    def test_malformed_artifact_page_fails_closed(self, api):
+        api.return_value = {"artifacts": {"unexpected": "object"}}
+        self.assertEqual(preload_queue.artifacts(), [])
+        api.assert_called_once()
+
+    @patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/repo"})
+    @patch.object(preload_queue, "_api")
+    def test_missing_or_invalid_artifact_ids_are_skipped(self, api):
+        api.return_value = {"artifacts": [
+            {"name": "astra-preloaded-no-id", "expired": False,
+             "workflow_run": {"head_branch": "main"}},
+            {"id": "abc", "name": "astra-preloaded-string-id", "expired": False,
+             "workflow_run": {"head_branch": "main"}},
+            {"id": 0, "name": "astra-preloaded-zero-id", "expired": False,
+             "workflow_run": {"head_branch": "main"}},
+            {"id": 99, "name": "astra-preloaded-valid", "expired": False,
+             "workflow_run": {"head_branch": "main"}},
+        ]}
+        self.assertEqual(preload_queue.candidate_ids(), {"valid"})
+
+    @patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/repo"})
+    @patch.object(preload_queue, "_api")
     def test_single_page(self, api):
         api.return_value = {"artifacts": [{"name": "astra-preloaded-yes",
                            "expired": False, "workflow_run": {"head_branch": "main"}}]}
