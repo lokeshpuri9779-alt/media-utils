@@ -373,6 +373,61 @@ def _story_set_dressing(d, environment, shot, t, accent):
         for yy in (945,957,969,981):
             d.line((505,yy,628,yy),fill=(101,95,105),width=2)
         d.line((560,1001,560,1096),fill=(107,86,78),width=10)
+    # Extra story-grounded set pieces are drawn BEFORE characters so actors
+    # can pass in front of them. Only animate the mechanical parts explicitly
+    # mentioned in the narration; never spawn unrelated décor mid-beat.
+    if environment in ("home","library","museum","attic","school","station") and re.search(
+            r"\b(?:door|doorway|locked room|cellar|entrance)\b", text):
+        opened=bool(re.search(r"\b(?:open|opened|opening|unlocked)\b", text))
+        progress=max(0.0,min(1.0,float(t)/1.0))
+        progress=progress*progress*(3-2*progress) if opened else 0.0
+        left,right=813,955
+        d.rectangle((left,760,right,1098),fill=(50,64,72),
+                    outline=(182,156,126),width=8)
+        # The door folds sideways on its hinge: stable geometry, no flash.
+        width=round((right-left)*(1-.77*progress))
+        d.rectangle((left,766,left+width,1091),fill=(137,100,78),
+                    outline=(95,73,62),width=5)
+        d.ellipse((left+max(9,width-18),923,left+max(18,width-8),937),
+                  fill=(229,195,121))
+    if environment in ("home","library","attic","museum") and re.search(
+            r"\b(?:window|curtain|drapes|outside the glass)\b", text):
+        d.rounded_rectangle((137,626,354,935),radius=8,
+                            fill=(126,172,181),outline=(207,183,144),width=9)
+        d.line((247,636,247,927),fill=(207,183,144),width=7)
+        d.line((145,775,347,775),fill=(207,183,144),width=7)
+        sway=round(6*math.sin(float(t)*1.2))
+        for left,right in ((143,191),(304,347)):
+            d.polygon(((left,642),(right,642),
+                       (right+sway,875),(left+sway,860)),
+                      fill=(157,117,125))
+    if environment in ("library","museum","gallery","school","home") and re.search(
+            r"\b(?:letter|note|map|paper|page|document|scroll)\b", text):
+        # An inspectable paper on a physical table, not a floating screen HUD.
+        d.polygon(((398,1083),(622,1083),(646,1135),(377,1135)),
+                  fill=(114,87,75))
+        d.polygon(((427,1060),(590,1053),(605,1103),(419,1112)),
+                  fill=(228,210,174),outline=(137,117,94))
+        for row in range(3):
+            y=1068+row*12
+            d.line((449,y,558-row*13,y-2),fill=(131,126,111),width=3)
+    if environment in ("forest","hills","garden","market","street") and re.search(
+            r"\b(?:breeze|gust|wind|storm|blowing|swaying)\b", text):
+        for k in range(4):
+            x=180+k*217
+            bend=round(10*math.sin(float(t)*1.5+k*.7))
+            d.line((x,1127,x+bend,1076),fill=(81,144,102),width=6)
+            d.ellipse((x+bend-15,1057,x+bend+16,1081),
+                      fill=(108,164,114))
+    if environment in ("hills","bridge","river","harbor") and re.search(
+            r"\b(?:footprints|tracks|trail|path|detour)\b", text):
+        # Foreground tracks provide spatial direction and scale, not a long
+        # glowing curve across the story's action zone.
+        for k in range(5):
+            x=199+k*148
+            y=1188+(k%2)*21
+            d.ellipse((x-15,y-6,x+9,y+8),fill=(116,132,119))
+            d.ellipse((x+20,y+9,x+40,y+18),fill=(116,132,119))
     if environment in ("hills","street","bridge","garden","forest","market"):
         # A moving but predictable set of foreground plants and small stones
         # adds depth without spawning extra animals or flickering props.
