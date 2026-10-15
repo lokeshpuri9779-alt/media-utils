@@ -81,10 +81,15 @@ def scene_pair(shot):
                   ("speech","visual_prompt","action")).lower()
     found=_cached_actor_mentions(text)
     cast=shot.get("story_cast") or ()
-    if isinstance(cast,(list,tuple)) and len(cast)==2:
+    if isinstance(cast,(list,tuple)) and cast:
+        # An explicit cast is authoritative: never discard extra characters
+        # and accidentally infer a smaller pair from narration.
+        if len(cast) != 2:
+            return ()
         cast=tuple(str(x).lower() for x in cast)
-        if all(x in ACTORS for x in cast) and len(set(cast))==2:
-            return cast if all(name in cast for _,name in found) else ()
+        if not (all(x in ACTORS for x in cast) and len(set(cast))==2):
+            return ()
+        return cast if all(name in cast for _,name in found) else ()
     # Never silently drop a third named species from a supposedly duo shot.
     distinct = tuple(dict.fromkeys(name for _, name in found))
     return distinct if len(distinct) == 2 else ()
