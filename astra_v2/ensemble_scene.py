@@ -41,13 +41,14 @@ def _acted_position(j, x, y, width, action, t):
     """
     action = str(action or "look")
     time = max(0.0, min(2.4, float(t)))
-    progress = min(1.0, time / 1.6)
-    progress = progress * progress * (3 - 2 * progress)
+    from astra_v2.story_motion import smoothstep, evaluate
+    progress = smoothstep(time / 1.6)
+    motion = evaluate(time + j * .11, walk_end=1.6)
     phase = time * (5.0 if action == "run" else 2.7) + j * 1.13
     if action == "run":
-        dx, dy = int(65 * progress), -int(9 * abs(math.sin(phase)))
+        dx, dy = int(65 * progress), -round(1.8 * motion.bob)
     elif action == "walk":
-        dx, dy = int(36 * progress), -int(6 * abs(math.sin(phase)))
+        dx, dy = int(36 * progress), -round(1.2 * motion.bob)
     elif action in ("push", "carry"):
         dx, dy = int(28 * progress), -int(3 * abs(math.sin(phase)))
     elif action == "pull":
