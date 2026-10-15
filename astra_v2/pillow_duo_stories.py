@@ -476,7 +476,7 @@ PLOTS = [
       [
         [
           "THE CLOCK RAN BACKWARD",
-          "The dog and squirrel found the festival clock counting backward just before the town parade began.",
+          "The dog and squirrel ran toward the festival clock counting backward just before the town parade began.",
           "story",
           "WRONG TIME"
         ],
