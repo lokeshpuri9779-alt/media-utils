@@ -76,6 +76,19 @@ class EnsembleExperimentsTests(unittest.TestCase):
         _,im2=self._frame(b,.4)
         self.assertIsNotNone(ImageChops.difference(im1,im2).getbbox())
 
+    def test_story_director_preserves_ensemble_cast_all_beats(self):
+        from studio_renderer import make_plan
+        for story in catalog():
+            plan=make_plan(dict(story))
+            self.assertEqual(len(plan),len(story["story_beats"]))
+            for beat in plan:
+                self.assertEqual(tuple(beat["story_cast"]),tuple(story["story_cast"]))
+                self.assertTrue(beat["experimental_ensemble"])
+                self.assertEqual(beat["visual"],"story")
+                self.assertIn(beat["scene_style"],
+                              ("crowd","clue","confrontation","reaction","action","reveal","resolution"))
+                self.assertTrue(beat["story_visual_seed"])
+
     def test_real_studio_render_uses_ensemble_only_when_enabled(self):
         from studio_renderer import render_frame, RATE
         beat=dict(catalog()[0]["story_beats"][0])
