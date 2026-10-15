@@ -1,4 +1,4 @@
-"""Isolated six-pilot ensemble visual comparison with no YouTube publishing."""
+"""Full-beat six-pilot ensemble visual comparison; NEVER uploads to YouTube."""
 from __future__ import annotations
 import json
 import os
@@ -12,7 +12,6 @@ from astra_v2.ensemble_story_experiments import catalog
 from studio_renderer import render_frame, W, H, RATE
 
 FPS=8
-SHOTS_PER_PILOT=3
 BEAT_SECONDS=1.35
 
 def preview(path="preview/astra-ensemble-six-pilots.mp4"):
@@ -23,8 +22,9 @@ def preview(path="preview/astra-ensemble-six-pilots.mp4"):
     catalog_data=catalog()
     for story in catalog_data:
         beats=story["story_beats"]
-        chosen=(beats[0], beats[len(beats)//2], beats[-1])
-        for beat in chosen:
+        # Preserve EVERY authored scene; the older 3-frame sampler skipped
+        # causes and consequences, making stories appear incoherent.
+        for beat in beats:
             timeline.append((story,beat))
     duration=len(timeline)*BEAT_SECONDS
     cmd=[get_ffmpeg_exe(),"-hide_banner","-loglevel","error","-y",
