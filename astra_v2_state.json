@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 61,
-  "confirmed_today": 60,
-  "last_attempt_at": "2026-10-15T16:57:35.027731+00:00",
+  "attempts": 62,
+  "confirmed_today": 61,
+  "last_attempt_at": "2026-10-15T17:11:32.439126+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1331,14 +1331,22 @@
       "format": "short",
       "uploaded_at": "2026-10-15T16:33:35.694577+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-166f30c0c3717add": {
+      "video_id": "0uhY5EUm--k",
+      "confirmed_at": "2026-10-15T17:10:51.390112+00:00",
+      "title": "The Postman and the Last Letter",
+      "format": "short",
+      "uploaded_at": "2026-10-15T16:57:37.159906+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "0uhY5EUm--k": {
-      "content_id": "rayvan-forge-166f30c0c3717add",
-      "title": "The Postman and the Last Letter",
+    "i9cEHxo_Myk": {
+      "content_id": "rayvan-forge-bf4ae688a068bcdd",
+      "title": "The Locked Aquarium Vault",
       "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T16:57:37.159906+00:00",
+      "uploaded_at": "2026-10-15T17:11:34.175785+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -1347,11 +1355,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T16:56:48.318661+00:00",
+  "last_preflight_at": "2026-10-15T17:10:50.903769+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T16:57:37.400054+00:00",
+    "at": "2026-10-15T17:11:34.498493+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2647,6 +2655,14 @@
     "rayvan-forge-166f30c0c3717add": {
       "at": "2026-10-15T16:57:35.027716+00:00",
       "title": "The Postman and the Last Letter",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-bf4ae688a068bcdd": {
+      "at": "2026-10-15T17:11:32.439110+00:00",
+      "title": "The Locked Aquarium Vault",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
