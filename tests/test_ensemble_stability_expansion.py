@@ -17,6 +17,18 @@ from studio_renderer import render_frame, RATE
 class EnsembleStabilityExpansionTests(unittest.TestCase):
     BG=(24,35,54)
 
+    def test_new_six_environment_story_uses_every_expansion_pack(self):
+        stories=catalog()
+        self.assertEqual(len(stories),7)
+        last=stories[-1]
+        self.assertEqual(len(last["story_beats"]),6)
+        self.assertEqual(
+            [x["story_environment"] for x in last["story_beats"]],
+            ["market","workshop","station","forest","garden","home"])
+        self.assertEqual(len(last["story_cast"]),5)
+        self.assertTrue(all(x["experimental_ensemble"] for x in last["story_beats"]))
+        self.assertFalse(last["production_ready"])
+
     def test_six_additional_sets_are_actually_drawable(self):
         self.assertGreaterEqual(len(ENVIRONMENTS),19)
         for name in ("garden","workshop","market","station","home","forest"):
