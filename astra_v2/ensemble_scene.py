@@ -275,7 +275,7 @@ def _composition_geometry(idx, x, y, width, focus_idx, style):
     return (left,top,width,h,src_x,src_y,src_w,src_h)
 
 
-def _prop_stage_position(shot, spots, cast, focus, t):
+def _prop_stage_position(shot, spots, cast, focus, t, *, origin_spots=None):
     """Return (screen position, holder index, continuous grip strength).
 
     Object movement depends on the action. A box being opened or a clock
@@ -289,18 +289,27 @@ def _prop_stage_position(shot, spots, cast, focus, t):
     handlers=("pick","carry","repair","open","push","pull","throw")
     holder=next((i for i,name in enumerate(cast) if roles.get(name) in handlers),
                 cast.index(focus))
-    idx,x,y,width=next(spot for spot in spots if spot[0]==holder)
     style=str(shot.get("scene_style") or "crowd").lower()
-    left,top,w,h,cx,cy,sw,sh=_composition_geometry(
-        idx,x,y,width,cast.index(focus),style)
-    # Transform the right-hand rig anchor to the projected actor coordinates.
-    hand_x=left+(425-cx)*w/sw
-    hand_y=top+(582-cy)*h/sh
+    focus_idx=cast.index(focus)
+    def projected_hand(placements):
+        idx,x,y,width=next(spot for spot in placements if spot[0]==holder)
+        left,top,w,h,cx,cy,sw,sh=_composition_geometry(
+            idx,x,y,width,focus_idx,style)
+        # Same shoulder/hand geometry as the 560x820 character sprite.
+        return (left+(425-cx)*w/sw,top+(582-cy)*h/sh)
+
+    hand_x,hand_y=projected_hand(spots)
     hand=(int(hand_x),int(hand_y))
-    # Props begin on the floor beside their actual handler, not teleported in
-    # from the arbitrary center of every scene.
-    ground=(int(max(140,min(950,hand_x-32))),
-            int(max(1110,min(1262,hand_y+148))))
+    # Ground props are world-space objects, not children of the moving actor.
+    # The pickup target may follow the actor; the starting object may not.
+    reference=origin_spots if origin_spots is not None else spots
+    rest_x,rest_y=projected_hand(reference)
+    ri,rx,ry,rw=next(spot for spot in reference if spot[0]==holder)
+    # Actor contact shadows are drawn at local y=785. A rear actor's floor
+    # is nearer the horizon than the foreground floor.
+    ground_y=ry+785*rw/560.0
+    ground=(int(max(140,min(950,rest_x-32))),
+            int(max(1060,min(1262,ground_y-25))))
     action=str(roles.get(cast[holder]) or "idle")
     now=max(0.0,float(t))
     move=_ease((now-.10)/1.0)
@@ -322,12 +331,50 @@ def _prop_stage_position(shot, spots, cast, focus, t):
         # The object starts in the grip. It separates only after release, and
         # the launch trajectory is C0 continuous (no teleporting at the cut).
         release=.56
+        # Record one world-space release point. After separation, the prop
+        # flies independently rather than rubber-banding to a moving wrist.
+        if now>release and origin_spots is not None:
+            at_release=grounded_positions(cast,style,release,roles,focus)
+            throw_origin=projected_hand(at_release)
+        else:
+            throw_origin=hand
         flight=_ease((now-release)/.82)
-        position=(round(hand[0]+205*flight),
-                  round(hand[1]-175*math.sin(math.pi*flight)))
+        position=(round(throw_origin[0]+205*flight),
+                  round(throw_origin[1]-175*math.sin(math.pi*flight)))
         grip=1.0-_ease((now-release)/.24)
         return position,holder,grip
     return ground,holder,0.0
+
+def _contact_anchor(obj,position,action,t):
+    """Which physical edge of the narrated prop the active paw should grasp.
+
+    The old rig aimed the wrist into the *center* of an object and then drew
+    the entire object on top, making the hand disappear behind it.
+    """
+    x,y=position
+    if action in ("push","pull"):
+        edge=-1 if action=="push" else 1
+        return (int(x+edge*52),int(y-8))
+    if action=="open":
+        from astra_v2.pillow_duo_scene import _ease
+        rise=round(67*_ease((max(0.0,t)-.15)/.85)) if obj=="box" else 0
+        return (int(x+48),int(y-52-rise))
+    edge={"box":57,"book":48,"ball":43,"lantern":38,
+          "flower":23}.get(obj,35)
+    return (int(x+edge),int(y-18))
+
+
+def _front_paw(d,species,contact,scale):
+    """Small foreground paw closes over the prop rather than being occluded."""
+    from astra_v2.pillow_duo_scene import FUR, CREAM, INK
+    x,y=contact
+    radius=max(7,round(13*scale))
+    d.ellipse((x-radius,y-radius,x+radius,y+radius),
+              fill=CREAM,outline=INK,width=max(2,round(2*scale)))
+    # A species-colored short cuff connects the grasp visually.
+    d.arc((x-radius-3,y-radius-3,x+radius+3,y+radius+3),
+          165,325,fill=FUR[species],width=max(2,round(3*scale)))
+
 
 def _stable_moods(shot,cast):
     override=shot.get("mood_notes") or {}
@@ -386,7 +433,9 @@ def ensemble_frame(im,shot,t):
     seed=str(shot.get("story_visual_seed") or "|".join(cast))
     obj=scene_prop(shot)
     focus_idx=cast.index(focus)
-    prop_state=(_prop_stage_position(shot,spots,cast,focus,t) if obj else None)
+    rest_spots=grounded_positions(cast,style,0.0,roles,focus) if obj else None
+    prop_state=(_prop_stage_position(shot,spots,cast,focus,t,
+                                   origin_spots=rest_spots) if obj else None)
     # Actors in the distant row render first, then nearer, preserving depth.
     for i,x,y,width in spots:
         name=cast[i]
@@ -401,8 +450,10 @@ def ensemble_frame(im,shot,t):
                 action in ("pick","carry","repair","open","push","pull","throw")):
             left,top,w,h,cx,cy,sw,sh=_composition_geometry(
                 i,x,y,width,focus_idx,style)
-            px,py=prop_state[0]
-            hand_local=(cx+(px-left)*sw/w,cy+(py-top)*sh/h)
+            px,py=_contact_anchor(obj,prop_state[0],action,t)
+            # _actor intentionally offsets the endpoint by 22 rig pixels.
+            # Compensate here so its real projected hand meets the prop edge.
+            hand_local=(cx+(px-left)*sw/w+22,cy+(py-top)*sh/h-2)
         sprite=_sprite(name,i,action,moods[name],t+i*.11,seed,
                        hand_target=hand_local,
                        hand_strength=(prop_state[2] if hand_local is not None else 1.0))
@@ -423,6 +474,15 @@ def ensemble_frame(im,shot,t):
         handler=cast[prop_state[1]]
         action=str(roles.get(handler) or "idle")
         _prop(d,obj,*prop_state[0],t,action=action)
+        if action in ("pick","carry","repair","open","push","pull","throw"):
+            # Finish the grip in front of the object, unlike the original
+            # order where the opaque prop erased the actor's rendered paw.
+            contact=_contact_anchor(obj,prop_state[0],action,t)
+            strength=prop_state[2]
+            if strength>.35:
+                holder_spot=next(p for p in spots if p[0]==prop_state[1])
+                scale=holder_spot[3]/560.0
+                _front_paw(d,handler,contact,scale)
     if subshot_index:
         _second_camera_take(im,focus_x)
     return True
