@@ -138,5 +138,54 @@ class EnsemblePhysicalMotionTests(unittest.TestCase):
         self.assertEqual(frame.getpixel((1050,1700)),original.getpixel((1050,1700)))
         self.assertNotEqual(frame.getpixel((710,900)),original.getpixel((710,900)))
 
+    def test_prop_does_not_slide_on_floor_before_pickup(self):
+        from astra_v2.ensemble_scene import grounded_positions
+        shot=self.shot("carry")
+        cast=shot["story_cast"]
+        roles=shot["acting_notes"]
+        origin=grounded_positions(cast,"action",0,roles,"fox")
+        first=grounded_positions(cast,"action",.01,roles,"fox")
+        later=grounded_positions(cast,"action",.08,roles,"fox")
+        a=_prop_stage_position(shot,first,cast,"fox",.01,origin_spots=origin)
+        b=_prop_stage_position(shot,later,cast,"fox",.08,origin_spots=origin)
+        self.assertNotEqual(first,later)  # The performer really moves.
+        self.assertEqual(a[0],b[0])  # The grounded box does not follow.
+        lifted=_prop_stage_position(
+            shot,grounded_positions(cast,"action",1.2,roles,"fox"),
+            cast,"fox",1.2,origin_spots=origin)
+        self.assertGreater(a[0][1],lifted[0][1])
+        self.assertGreater(lifted[2],.95)
+
+    def test_throw_after_release_no_longer_follows_current_actor(self):
+        from astra_v2.ensemble_scene import grounded_positions
+        shot=self.shot("throw")
+        cast=shot["story_cast"]
+        roles=shot["acting_notes"]
+        origin=grounded_positions(cast,"action",0,roles,"fox")
+        live=grounded_positions(cast,"action",1.1,roles,"fox")
+        moved=[(i,x+(110 if i==0 else 0),y,w) for i,x,y,w in live]
+        a=_prop_stage_position(shot,live,cast,"fox",1.1,origin_spots=origin)
+        b=_prop_stage_position(shot,moved,cast,"fox",1.1,origin_spots=origin)
+        self.assertEqual(a[0],b[0])  # Flight has an independent origin.
+        self.assertLess(a[2],.05)
+
+    def test_front_hand_is_visible_over_held_object(self):
+        from astra_v2.ensemble_scene import (
+            grounded_positions, _contact_anchor)
+        from astra_v2.pillow_duo_scene import CREAM
+        shot=self.shot("pick")
+        shot["speech"]="The fox picked up the box."
+        frame=Image.new("RGB",(1080,1920),(20,30,51))
+        self.assertTrue(ensemble_frame(frame,shot,1.3))
+        roles=shot["acting_notes"]
+        cast=shot["story_cast"]
+        live=grounded_positions(cast,"action",1.3,roles,"fox")
+        origin=grounded_positions(cast,"action",0,roles,"fox")
+        state=_prop_stage_position(
+            shot,live,cast,"fox",1.3,origin_spots=origin)
+        self.assertGreater(state[2],.95)
+        contact=_contact_anchor("box",state[0],"pick",1.3)
+        self.assertEqual(frame.getpixel(contact),CREAM)
+
 if __name__=="__main__":
     unittest.main()
