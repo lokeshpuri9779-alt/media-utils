@@ -58,9 +58,11 @@ def artifacts():
         for item in batch:
             if not isinstance(item, dict):
                 continue
+            workflow_run = item.get("workflow_run")
             if (not str(item.get("name") or "").startswith(PREFIX)
                     or item.get("expired", True)
-                    or (item.get("workflow_run") or {}).get("head_branch") != "main"):
+                    or not isinstance(workflow_run, dict)
+                    or workflow_run.get("head_branch") != "main"):
                 continue
             key = item.get("id")
             if key in seen:
