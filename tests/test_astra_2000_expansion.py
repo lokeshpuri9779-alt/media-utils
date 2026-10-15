@@ -33,6 +33,15 @@ class ExpandedInventoryTests(unittest.TestCase):
             images.append(im)
         for a,b in ((0,1),(0,2),(1,2)):
             self.assertIsNotNone(ImageChops.difference(images[a],images[b]).getbbox())
+    def test_each_icon_motif_is_visually_distinct_not_a_renamed_clone(self):
+        import hashlib
+        digests=[]
+        for j,motif in enumerate(MOTIFS):
+            im=Image.new("RGB",(240,240),(29,42,61))
+            draw_icon(ImageDraw.Draw(im),j*100,120,120,150)
+            digests.append(hashlib.sha256(im.tobytes()).hexdigest())
+        self.assertEqual(len(set(digests)),len(MOTIFS))
+
     def test_exact_2000_causal_draft_records(self):
         plots=candidate_records()
         self.assertEqual(candidate_count(),2000)
