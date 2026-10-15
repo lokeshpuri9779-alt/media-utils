@@ -145,10 +145,12 @@ class EnsemblePhysicalMotionTests(unittest.TestCase):
         roles=shot["acting_notes"]
         origin=grounded_positions(cast,"action",0,roles,"fox")
         first=grounded_positions(cast,"action",.01,roles,"fox")
-        later=grounded_positions(cast,"action",.08,roles,"fox")
+        # Move the performer explicitly during the pre-lift interval. Tiny
+        # natural motions can round to identical pixel coordinates at 30fps.
+        later=[(i,x+(35 if i==0 else 0),y,w) for i,x,y,w in first]
         a=_prop_stage_position(shot,first,cast,"fox",.01,origin_spots=origin)
         b=_prop_stage_position(shot,later,cast,"fox",.08,origin_spots=origin)
-        self.assertNotEqual(first,later)  # The performer really moves.
+        self.assertNotEqual(first,later)
         self.assertEqual(a[0],b[0])  # The grounded box does not follow.
         lifted=_prop_stage_position(
             shot,grounded_positions(cast,"action",1.2,roles,"fox"),
