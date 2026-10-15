@@ -22,6 +22,12 @@ class PillowDuoTests(unittest.TestCase):
         self.assertEqual(scene_pair(shot), ())
         self.assertFalse(duo_compatibility(shot)["supported"])
 
+    def test_malformed_explicit_cast_cannot_fall_back_to_narration(self):
+        shot = {"speech": "The fox and rabbit find a bell.",
+                "story_cast": "fox,rabbit"}
+        self.assertEqual(scene_pair(shot), ())
+        self.assertFalse(duo_compatibility(shot)["supported"])
+
     def test_no_wrong_species_icon(self):
         from astra_v2.icon_visuals import pick_icon
         self.assertIsNone(pick_icon({"speech": "The fox met the rabbit."}))
