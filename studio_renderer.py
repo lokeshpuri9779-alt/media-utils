@@ -1076,8 +1076,12 @@ def render_frame(plan,t,genre,total):
         im=moved.crop((dx,dy,dx+W,dy+H))
     # Transition accents occur under the hero, never on top of the narration
     # captions or newly selected subject illustration.
-    transition_layer(im,s,t,u,accent)
-    _micro_scene_transition(im,micro,accent)
+    # Fiction is a continuous acted scene: these full-height color wipes
+    # appeared as purple flashes in actual exported frames. Preserve news,
+    # sports and challenge grammar, but never overlay animation with them.
+    if genre != 'fiction':
+        transition_layer(im,s,t,u,accent)
+        _micro_scene_transition(im,micro,accent)
     if layers['draw_cached_media']:
         im=composite_cached_asset(im,s.get('resolved_asset',{}),t=t,u=u,shot=s)
     elif layers['draw_director_asset']:
@@ -1142,7 +1146,7 @@ def render_frame(plan,t,genre,total):
         d.rounded_rectangle((126,1470,880,1578),radius=20,fill=(8,12,23))
         fit_text(d,text,(150,1478,856,1568),size=42,fill=(242,245,250),max_lines=2)
     # Brief ink-dark cut transition rather than full-screen flashing.
-    if index>0 and u<.13:
+    if genre != 'fiction' and index>0 and u<.13:
         transition=s.get('format_transition','cinematic')
         if transition=='hard-cut':
             pass
