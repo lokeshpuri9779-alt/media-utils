@@ -190,8 +190,18 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
         if not run_id:
             continue
         if run_id not in trusted_runs:
-            trusted_runs[run_id] = _api(f"repos/{repo}/actions/runs/{run_id}")
+            try:
+                trusted_runs[run_id] = _api(f"repos/{repo}/actions/runs/{run_id}")
+            except (subprocess.CalledProcessError, subprocess.TimeoutExpired,
+                    OSError, ValueError, json.JSONDecodeError) as exc:
+                # One missing or temporarily inaccessible preload run must not
+                # prevent scanning other independently verified video artifacts.
+                print("ASTRA_PRELOAD_RUN_LOOKUP_SKIP=" + json.dumps({
+                    "workflow_run_id": run_id, "reason": type(exc).__name__}))
+                trusted_runs[run_id] = None
         run = trusted_runs[run_id]
+        if not isinstance(run, dict):
+            continue
         if (run.get("conclusion") != "success"
                 or run.get("head_branch") != "main"
                 or run.get("name") not in ("ASTRA V2 - Preload Approved Videos", "ASTRA V2 - Long-form Preload")):
