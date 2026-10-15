@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 14,
-  "confirmed_today": 13,
-  "last_attempt_at": "2026-10-15T00:11:17.676094+00:00",
+  "attempts": 15,
+  "confirmed_today": 14,
+  "last_attempt_at": "2026-10-15T00:45:21.664179+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -955,27 +955,35 @@
       "format": "short",
       "uploaded_at": "2026-10-15T00:00:50.090142+00:00",
       "renderer": "studio-7.2.1"
+    },
+    "rayvan-forge-544a77d35de3971f": {
+      "video_id": "J6G4KRpFhlM",
+      "confirmed_at": "2026-10-15T00:43:23.967438+00:00",
+      "title": "The Dog and Otter's Harbor Lantern",
+      "format": "short",
+      "uploaded_at": "2026-10-15T00:11:19.303280+00:00",
+      "renderer": "studio-7.2.1"
     }
   },
   "pending": {
-    "J6G4KRpFhlM": {
-      "content_id": "rayvan-forge-544a77d35de3971f",
-      "title": "The Dog and Otter's Harbor Lantern",
+    "ux7PsFnhX6k": {
+      "content_id": "rayvan-forge-05aa95d2029bc10f",
+      "title": "The Otter and Squirrel's Floating Gift",
       "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T00:11:19.303280+00:00",
+      "uploaded_at": "2026-10-15T00:45:24.107492+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "renderer": "studio-7.2.1"
+      "renderer": "studio-7.3.0"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T00:10:10.332103+00:00",
+  "last_preflight_at": "2026-10-15T00:43:23.387819+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T00:11:19.509541+00:00",
+    "at": "2026-10-15T00:45:24.413518+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -1898,6 +1906,14 @@
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.2.1",
+      "result": "accepted"
+    },
+    "rayvan-forge-05aa95d2029bc10f": {
+      "at": "2026-10-15T00:45:21.664167+00:00",
+      "title": "The Otter and Squirrel's Floating Gift",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
       "result": "accepted"
     }
   }
