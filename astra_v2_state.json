@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 17,
+  "attempts": 18,
   "confirmed_today": 17,
-  "last_attempt_at": "2026-10-15T01:22:40.765544+00:00",
+  "last_attempt_at": "2026-10-15T01:31:54.912160+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -989,28 +989,40 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-15T01:24:52.169138+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "2WYYocOmtLM": {
+      "content_id": "rayvan-forge-1180ba6035d37484",
+      "title": "The Owl and Mouse's Midnight Repair",
+      "day": "2026-10-15",
+      "uploaded_at": "2026-10-15T01:31:56.252427+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-15T01:30:25.599926+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T01:24:52.702875+00:00",
+    "at": "2026-10-15T01:31:56.587534+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-14T19:48:51.586899+00:00",
   "reserved": {
@@ -1939,6 +1951,14 @@
     "rayvan-forge-4d4eef1038890516": {
       "at": "2026-10-15T01:22:40.765528+00:00",
       "title": "The Cat, the Dog, and the Missing Chapter",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-1180ba6035d37484": {
+      "at": "2026-10-15T01:31:54.912144+00:00",
+      "title": "The Owl and Mouse's Midnight Repair",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
