@@ -31,8 +31,8 @@ PALETTES={
 def _line(d,points,color,width=6):
     d.line(points,fill=color,width=width,joint="curve")
 
-def draw_ensemble_stage(d, environment, t):
-    """Draw the entire mid-screen story stage; all coordinates safe."""
+def draw_ensemble_stage(d, environment, t, shot=None):
+    """Draw story-grounded sets inside the safe region, with no global arcs."""
     name=environment if environment in ENVIRONMENTS else "hills"
     sky,wall,highlight=PALETTES[name]
     d.rectangle((55,485,1025,1370),fill=sky)
@@ -144,6 +144,51 @@ def draw_ensemble_stage(d, environment, t):
                        (x+290,1050)),fill=(73+k*4,116+k*3,114+k*2))
         d.polygon(((140,1100),(460,845),(690,970),(950,790),
                    (1025,1185),(55,1185)),fill=(112,142,130))
-    # Stage is bounded, with subdued corner lighting.
-    d.arc((94,510,987,1260),201,345,fill=highlight,width=4)
+    # Set dressing only when grounded in this beat's narration; no circular
+    # director-guide lines or decorative golden trajectories may leak to film.
+    _story_set_dressing(d, name, shot or {}, t, highlight)
     return name
+
+
+def _story_set_dressing(d, environment, shot, t, accent):
+    """Small story-specific set pieces; stable within each beat."""
+    import re
+    text=" ".join(str(shot.get(key) or "") for key in
+                  ("speech","headline","visual_prompt")).lower()
+    # Useful environmental detail: a physical clock on the wall, never
+    # a floating motion guide. Clock hands move continuously across frames.
+    if (re.search(r"\\b(?:clock|timepiece|alarm)\\b", text) and
+            environment in ("courtroom","museum","clocktower","gallery","library")):
+        cx,cy=855,646
+        d.ellipse((cx-55,cy-55,cx+55,cy+55),fill=(235,221,183),
+                  outline=(83,83,97),width=8)
+        for k in range(12):
+            angle=k*math.pi/6
+            px=cx+43*math.sin(angle);py=cy-43*math.cos(angle)
+            d.ellipse((px-3,py-3,px+3,py+3),fill=(75,75,89))
+        d.line((cx,cy,cx+int(30*math.cos(t*.04)),cy-int(30*math.sin(t*.04))),
+               fill=(63,72,84),width=5)
+        d.line((cx,cy,cx-int(18*math.sin(t*.003)),
+                cy-int(18*math.cos(t*.003))),fill=(63,72,84),width=7)
+    if (re.search(r"\\b(?:photograph|photo|picture|portrait)\\b",text) and
+            environment in ("museum","gallery","courtroom","attic")):
+        d.rounded_rectangle((705,855,895,1000),radius=8,
+                            fill=(222,207,175),outline=(105,86,82),width=8)
+        d.polygon(((731,963),(779,917),(811,947),(850,901),
+                   (875,966)),fill=(90,146,149))
+        d.ellipse((754,881,780,907),fill=(214,173,104))
+    if re.search(r"\\b(?:storm|raining|rainfall|heavy rain)\\b",text) and environment in ("river","bridge","hills","street"):
+        for k in range(16):
+            x=100+(k*61)%900
+            y=565+(k*93)%490 + int(11*math.sin(t*1.5+k))
+            d.line((x,y,x-8,y+24),fill=(141,187,199),width=3)
+    if environment in ("hills","street","bridge"):
+        # A moving but predictable set of foreground plants and small stones
+        # adds depth without spawning extra animals or flickering props.
+        for k in range(7):
+            x=105+k*140
+            y=1208+(k%3)*25
+            d.arc((x-16,y-17,x+16,y+17),180,340,fill=(95,159,127),width=5)
+            if k%2==0:
+                d.ellipse((x+16,y+8,x+36,y+20),fill=(145,153,147))
+
