@@ -53,8 +53,9 @@ jobs:
       - name: Install free rendering dependencies
         run: |
           timeout 360s python -m pip install --disable-pip-version-check -r requirements.txt
-          command -v ffmpeg
-          command -v ffprobe
+          # Ubuntu-24.04 hosted runners do not consistently ship ffmpeg/ffprobe.
+          # Python's imageio-ffmpeg wheel is NOT a substitute for ffprobe.
+          bash tools/astra_ffmpeg_bootstrap.sh
       - name: Validate long-form cadence and approved package rules
         run: |
           python -m unittest discover -s tests -p 'test_astra_cover_frames.py' -v
