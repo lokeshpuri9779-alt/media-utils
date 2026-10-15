@@ -395,13 +395,21 @@ def make_plan(ch):
         # requiring both protagonists to be repeated in every spoken line.
         named_cast = scene_pair({'speech': str(ch.get('title') or '')})
         visual_seed = str(ch.get('content_id') or ch.get('title') or '')
+        experimental_cast = tuple(ch.get("story_cast") or ())
+        ensemble = bool(ch.get("experimental_ensemble") and 3 <= len(experimental_cast) <= 8)
+        if ensemble:
+            from astra_v2.ensemble_scene import cast_for_shot
+            ensemble = bool(cast_for_shot({"story_cast": experimental_cast}))
         for shot in formatted:
             shot['story_subject'] = select_subject(ch, shot)
             shot['story_action'] = choose_action(shot)
             # Wardrobe, colors and accessories are selected once per story.
             # A fresh narration beat must not silently change a character.
             shot['story_visual_seed'] = visual_seed
-            if named_cast and shot['story_subject'] in (None, *named_cast):
+            if ensemble:
+                shot['story_cast'] = experimental_cast
+                shot['experimental_ensemble'] = True
+            elif named_cast and shot['story_subject'] in (None, *named_cast):
                 shot['story_cast'] = named_cast
     return formatted
 
@@ -1042,9 +1050,14 @@ def render_frame(plan,t,genre,total):
         # production scenes must never render blank after failed acquisition.
         raise CreativeReject('Scene media missing from cache: refusing overlapping/filler fallback.')
     if layers['draw_visual']:
-        # The Pillow duo is a single foreground alternative, never an overlay.
-        # Only narration-grounded pairs use it; other shots retain Studio art.
-        if genre == 'fiction' and os.environ.get('ASTRA_STUDIO_PILLOW_DUO', '1') == '1':
+        # Ensemble Studio is isolated until visual QA approves it.
+        # Default production continues through the verified duo renderer.
+        if (genre == 'fiction' and s.get('experimental_ensemble')
+                and os.environ.get('ASTRA_EXPERIMENT_ENSEMBLE', '0') == '1'):
+            from astra_v2.ensemble_scene import ensemble_frame
+            if not ensemble_frame(im,s,u):
+                raise CreativeReject('Experimental ensemble cast cannot be rendered faithfully.')
+        elif genre == 'fiction' and os.environ.get('ASTRA_STUDIO_PILLOW_DUO', '1') == '1':
             from astra_v2.pillow_duo_scene import draw_duo
             if not draw_duo(im, s, u):
                 draw_visual(im,s,t,u,accent)
