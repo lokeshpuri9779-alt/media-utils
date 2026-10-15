@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 54,
-  "confirmed_today": 53,
-  "last_attempt_at": "2026-10-15T14:43:45.380499+00:00",
+  "attempts": 55,
+  "confirmed_today": 54,
+  "last_attempt_at": "2026-10-15T15:09:25.663405+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1275,14 +1275,22 @@
       "format": "short",
       "uploaded_at": "2026-10-15T14:29:44.179602+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-5b8fcb049c2f4d2e": {
+      "video_id": "eUs9o9FtdqI",
+      "confirmed_at": "2026-10-15T15:08:35.579342+00:00",
+      "title": "The Messenger's Broken Seal",
+      "format": "short",
+      "uploaded_at": "2026-10-15T14:43:47.214983+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "eUs9o9FtdqI": {
-      "content_id": "rayvan-forge-5b8fcb049c2f4d2e",
-      "title": "The Messenger's Broken Seal",
+    "JujlK6h5im4": {
+      "content_id": "rayvan-forge-77259ad42c99895b",
+      "title": "The Squirrel's Giant Sandwich",
       "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T14:43:47.214983+00:00",
+      "uploaded_at": "2026-10-15T15:09:27.140211+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -1291,11 +1299,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T14:43:05.425791+00:00",
+  "last_preflight_at": "2026-10-15T15:08:35.158863+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T14:43:47.424683+00:00",
+    "at": "2026-10-15T15:09:27.482903+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2535,6 +2543,14 @@
     "rayvan-forge-5b8fcb049c2f4d2e": {
       "at": "2026-10-15T14:43:45.380484+00:00",
       "title": "The Messenger's Broken Seal",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-77259ad42c99895b": {
+      "at": "2026-10-15T15:09:25.663389+00:00",
+      "title": "The Squirrel's Giant Sandwich",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
