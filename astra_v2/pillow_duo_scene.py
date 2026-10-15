@@ -186,7 +186,8 @@ def _ears_and_tail(d, actor, x, y, t, fur):
 
 
 def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
-           interact_side=1, visual_recipe=None):
+           interact_side=1, visual_recipe=None, ground_y=1267,
+           hand_strength=1.0):
     from astra_v2.procedural_visual_library import draw_costume_detail, draw_accessory
     fur=FUR[name]
     if visual_recipe:
@@ -196,7 +197,10 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
     bob=int(26*abs(math.sin(t*5+idx))) if action=="jump" else int(6*math.sin(t*2+idx))
     y-=bob
     # Ground shadows, tails and articulated legs behind costume.
-    d.ellipse((x-103,1267,x+104,1288),fill=(18,48,58))
+    # Studio draws actors directly at 1080p, while the experimental ensemble
+    # draws them into local transparent sprites. Ground shadows must use the
+    # matching coordinate system or get clipped out of every ensemble frame.
+    d.ellipse((x-103,ground_y-10,x+104,ground_y+11),fill=(18,48,58))
     if name=="fox":
         sweep=int(22*math.sin(t*2))
         d.polygon(((x+65,y+254),(x+179,y+206+sweep),(x+215,y+270+sweep),
@@ -241,7 +245,12 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
         elif action in ("push","pull") and side==interact_side:
             hand=(x+side*157,y+225+int(9*math.sin(t*4)))
         if hand_target is not None and side==interact_side:
-            hand=(hand_target[0]-side*22,hand_target[1]+2)
+            # Ease a reach toward a prop instead of snapping the wrist when
+            # contact begins or ends. Default 1.0 preserves Studio duo poses.
+            strength=_ease(float(hand_strength))
+            target=(hand_target[0]-side*22, hand_target[1]+2)
+            hand=(hand[0]*(1-strength)+target[0]*strength,
+                  hand[1]*(1-strength)+target[1]*strength)
         elbow=((shoulder[0]+hand[0])*.5+side*18,
                (shoulder[1]+hand[1])*.5+14)
         _line(d,[shoulder,elbow,hand],fur,22)

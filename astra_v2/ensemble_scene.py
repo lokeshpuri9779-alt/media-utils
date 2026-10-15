@@ -38,15 +38,17 @@ def _positions(cast,style,t,roles=None,focus=None):
     roles=roles or {}
     if n<=4:
         centers=[int(145+790*(i+.5)/n) for i in range(n)]
-        width=310 if n==3 else 260
+        width=320 if n==3 else 270
         wide=[(i,x,765+(i%2)*29,width) for i,x in enumerate(centers)]
     else:
         back=n//2
         front=n-back
         rear=[int(155+760*(i+.5)/back) for i in range(back)]
         fore=[int(95+880*(i+.5)/front) for i in range(front)]
-        wide=([(i,x,600,170) for i,x in enumerate(rear)] +
-              [(back+i,x,815,225) for i,x in enumerate(fore)])
+        # The foreground row gets enough screen area for expressions; rear
+        # characters remain present without dominating the active story beat.
+        wide=([(i,x,600,184) for i,x in enumerate(rear)] +
+              [(back+i,x,815,250) for i,x in enumerate(fore)])
     if style=="crowd":
         return wide
     focused=cast.index(focus) if focus in cast else 0
@@ -100,7 +102,7 @@ def _positions(cast,style,t,roles=None,focus=None):
                 -42*eased if act=="pull" else
                 8*math.sin(t*1.2+j))
             dy=(-48*abs(math.sin(t*3.5)) if act=="jump" else 0)
-            return (j,int(x+dx),int(745+dy),290)
+            return (j,int(x+dx),int(745+dy),320)
         out.extend(action_spot(j,x) for j,x in zip(protagonists,xs))
         return out
     if style=="resolution":
@@ -108,13 +110,15 @@ def _positions(cast,style,t,roles=None,focus=None):
                 for j,x,y,w in wide]
     return wide
 
-def _sprite(species, index, role, mood, t, style_seed, hand_target=None):
+def _sprite(species, index, role, mood, t, style_seed, hand_target=None,
+            hand_strength=1.0):
     """Draw a rig with optional local hand-to-prop contact, never an icon."""
     im=Image.new("RGBA",(560,820),(0,0,0,0))
     d=ImageDraw.Draw(im)
     recipe=character_recipe(visual_identity(style_seed,species,index))
     _actor(d,species,280,365,t,role,mood,index,
-           hand_target=hand_target, visual_recipe=recipe)
+           hand_target=hand_target, hand_strength=hand_strength,
+           visual_recipe=recipe,ground_y=785)
     return im
 
 def _focus_actor(shot,cast):
@@ -154,39 +158,58 @@ def _composition_geometry(idx, x, y, width, focus_idx, style):
 
 
 def _prop_stage_position(shot, spots, cast, focus, t):
-    """A narrated object follows the active actor's reachable hand or ground."""
-    from astra_v2.pillow_duo_scene import _ease
-    role=shot.get("acting_notes") or {}
-    if not isinstance(role,dict):
-        role={}
-    handlers=("pick","carry","repair","open","push","pull","throw")
-    holder=next((i for i,name in enumerate(cast) if role.get(name) in handlers),
-                cast.index(focus))
-    idx,x,y,width=next((spot for spot in spots if spot[0]==holder))
-    style=str(shot.get("scene_style") or "crowd")
-    geometry=_composition_geometry(idx,x,y,width,cast.index(focus),style)
-    left,top,w,h,cx,cy,sw,sh=geometry
-    # The hand at (425,582) in the original rig, transformed through crop.
-    dest=(int(left+(425-cx)*w/sw),int(top+(582-cy)*h/sh))
-    action=str(role.get(cast[holder]) or "idle")
-    move=_ease((max(0.0,t)-.12)/.95)
-    if action=="throw":
-        # Release after first half, then follow a shallow believable arc.
-        free=_ease((max(0.0,t)-.55)/.8)
-        return (int(dest[0]+165*free),
-                int(dest[1]-115*math.sin(free*math.pi))), holder, False
-    if action in ("pick","carry","repair","open","push","pull"):
-        # Smooth arrival at fingertips. No teleport on individual frames.
-        target_x=dest[0]
-        if action=="push":
-            target_x+=int(65*move)
-        elif action=="pull":
-            target_x-=int(65*move)
-        pos=(int(540*(1-move)+target_x*move),
-             int(1190*(1-move)+dest[1]*move))
-        return pos, holder, move>.2
-    return (540,1140), holder, False
+    """Return (screen position, holder index, continuous grip strength).
 
+    Object movement depends on the action. A box being opened or a clock
+    repaired stays grounded, unlike a carried object. The holder is selected
+    deterministically and world-space contact follows its current pose.
+    """
+    from astra_v2.pillow_duo_scene import _ease
+    roles=shot.get("acting_notes") or {}
+    if not isinstance(roles,dict):
+        roles={}
+    handlers=("pick","carry","repair","open","push","pull","throw")
+    holder=next((i for i,name in enumerate(cast) if roles.get(name) in handlers),
+                cast.index(focus))
+    idx,x,y,width=next(spot for spot in spots if spot[0]==holder)
+    style=str(shot.get("scene_style") or "crowd").lower()
+    left,top,w,h,cx,cy,sw,sh=_composition_geometry(
+        idx,x,y,width,cast.index(focus),style)
+    # Transform the right-hand rig anchor to the projected actor coordinates.
+    hand_x=left+(425-cx)*w/sw
+    hand_y=top+(582-cy)*h/sh
+    hand=(int(hand_x),int(hand_y))
+    # Props begin on the floor beside their actual handler, not teleported in
+    # from the arbitrary center of every scene.
+    ground=(int(max(140,min(950,hand_x-32))),
+            int(max(1110,min(1262,hand_y+148))))
+    action=str(roles.get(cast[holder]) or "idle")
+    now=max(0.0,float(t))
+    move=_ease((now-.10)/1.0)
+
+    if action in ("pick","carry"):
+        position=(round(ground[0]+(hand[0]-ground[0])*move),
+                  round(ground[1]+(hand[1]-ground[1])*move))
+        return position,holder,_ease((move-.06)/.55)
+    if action in ("repair","open"):
+        # Repair/open require a stable work surface; only the actor reaches.
+        work=(ground[0],max(1090,ground[1]-48))
+        return work,holder,_ease((now-.10)/.60)
+    if action in ("push","pull"):
+        direction=1 if action=="push" else -1
+        anchor=(ground[0],max(1090,ground[1]-44))
+        position=(round(anchor[0]+direction*95*move),anchor[1])
+        return position,holder,_ease((now-.03)/.42)
+    if action=="throw":
+        # The object starts in the grip. It separates only after release, and
+        # the launch trajectory is C0 continuous (no teleporting at the cut).
+        release=.56
+        flight=_ease((now-release)/.82)
+        position=(round(hand[0]+205*flight),
+                  round(hand[1]-175*math.sin(math.pi*flight)))
+        grip=1.0-_ease((now-release)/.24)
+        return position,holder,grip
+    return ground,holder,0.0
 
 def _stable_moods(shot,cast):
     override=shot.get("mood_notes") or {}
@@ -231,14 +254,15 @@ def ensemble_frame(im,shot,t):
             action="look"
         # Individual phase avoids cloned synchronous blinking/steps.
         hand_local=None
-        if (prop_state and i==prop_state[1] and prop_state[2] and
-                action in ("pick","carry","repair","open","push","pull")):
+        if (prop_state and i==prop_state[1] and prop_state[2]>0 and
+                action in ("pick","carry","repair","open","push","pull","throw")):
             left,top,w,h,cx,cy,sw,sh=_composition_geometry(
                 i,x,y,width,focus_idx,style)
             px,py=prop_state[0]
             hand_local=(cx+(px-left)*sw/w,cy+(py-top)*sh/h)
         sprite=_sprite(name,i,action,moods[name],t+i*.11,seed,
-                       hand_target=hand_local)
+                       hand_target=hand_local,
+                       hand_strength=(prop_state[2] if hand_local is not None else 1.0))
         # In a clue/reveal/reaction beat, switch from a tiny full-body group
         # sprite to a dramatic head-and-shoulders shot for the lead actor.
         if name==focus and style in ("clue","reaction","reveal"):

@@ -182,6 +182,27 @@ def _story_set_dressing(d, environment, shot, t, accent):
             x=100+(k*61)%900
             y=565+(k*93)%490 + int(11*math.sin(t*1.5+k))
             d.line((x,y,x-8,y+24),fill=(141,187,199),width=3)
+    # Foreground activity is conditional on the spoken event; it is not a
+    # random decorative overlay that could flash at every shot boundary.
+    if environment in ("river","bridge") and re.search(r"\b(?:boat|ferry|raft)\b",text):
+        water_bob=int(3*math.sin(t*1.2))
+        d.polygon(((535,1000+water_bob),(770,1000+water_bob),
+                   (732,1034+water_bob),(572,1034+water_bob)),
+                  fill=(147,104,79),outline=(67,76,84))
+        d.line((644,992+water_bob,644,906+water_bob),fill=(91,78,72),width=8)
+        d.polygon(((649,911+water_bob),(649,973+water_bob),
+                   (713,974+water_bob)),fill=(230,216,177))
+    if environment in ("bridge","tunnel") and re.search(r"\b(?:bolt|counterweight|rope|pulley)\b",text):
+        d.rounded_rectangle((840,905,891,943),radius=7,
+                            fill=(121,137,143),outline=(52,62,71),width=6)
+        for yy in (940,967,994):
+            d.rectangle((858,yy,872,yy+14),fill=(189,186,156))
+    if environment=="concert_hall" and re.search(r"\b(?:score|music|note|orchestra)\b",text):
+        d.polygon(((490,920),(640,920),(656,1001),(475,1001)),
+                  fill=(225,211,182),outline=(76,67,79))
+        for yy in (945,957,969,981):
+            d.line((505,yy,628,yy),fill=(101,95,105),width=2)
+        d.line((560,1001,560,1096),fill=(107,86,78),width=10)
     if environment in ("hills","street","bridge"):
         # A moving but predictable set of foreground plants and small stones
         # adds depth without spawning extra animals or flickering props.
