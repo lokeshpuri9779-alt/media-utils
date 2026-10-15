@@ -3,7 +3,7 @@
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 13,
-  "confirmed_today": 12,
+  "confirmed_today": 13,
   "last_attempt_at": "2026-10-15T00:00:48.266747+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -947,26 +947,23 @@
       "format": "short",
       "uploaded_at": "2026-10-14T23:46:27.246121+00:00",
       "renderer": "studio-7.2.0"
-    }
-  },
-  "pending": {
-    "FXWlgdxnTmw": {
-      "content_id": "rayvan-forge-54e28b2d4424e599",
+    },
+    "rayvan-forge-54e28b2d4424e599": {
+      "video_id": "FXWlgdxnTmw",
+      "confirmed_at": "2026-10-15T00:02:57.240072+00:00",
       "title": "The Fox and Rabbit's Last Lantern",
-      "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T00:00:50.090142+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
+      "uploaded_at": "2026-10-15T00:00:50.090142+00:00",
       "renderer": "studio-7.2.1"
     }
   },
-  "last_outcome": "processing",
-  "last_preflight_at": "2026-10-15T00:01:15.505951+00:00",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-15T00:02:56.826180+00:00",
   "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "processing",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T00:01:16.171277+00:00",
+    "at": "2026-10-15T00:02:57.313842+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "false",
