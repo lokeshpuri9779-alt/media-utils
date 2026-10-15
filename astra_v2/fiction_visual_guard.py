@@ -81,19 +81,27 @@ def sudden_edge_panel(a,b):
     return False
 
 
-def validate_fiction_frames(plan, renderer, total, *, max_beats=30):
+def validate_fiction_frames(plan, renderer, total, *, max_beats=48):
     """Sample final composited frames before voice+video publication.
 
     A Studio render should never reach the public queue if a sampled frame
     contains a story-spanning decorative amber guide or an edge-wide flash.
-    Keep the first and last beat even when unexpectedly long.
+    Full Shorts are sampled beat-by-beat. Longer stories are sampled evenly
+    at a bounded cost and never rejected merely for having more scenes.
     """
     if not plan:
         raise CreativeReject("Fiction visual validation needs scene beats")
-    if len(plan)>max_beats:
-        raise CreativeReject("Fiction visual validation exceeds sampled-scene limit")
+    if max_beats<2:
+        raise ValueError("max_beats must allow first and last scenes")
+    count=len(plan)
+    if count<=max_beats:
+        scene_indices=range(count)
+    else:
+        scene_indices=sorted(set(
+            round(j*(count-1)/(max_beats-1)) for j in range(max_beats)))
     checks=0
-    for i,shot in enumerate(plan):
+    for i in scene_indices:
+        shot=plan[i]
         dur=float(shot.get("duration") or 0)
         if dur<=.16:
             raise CreativeReject("Fiction scene too brief for visual QA")
@@ -107,5 +115,6 @@ def validate_fiction_frames(plan, renderer, total, *, max_beats=30):
             raise CreativeReject(f"Fiction amber-guide-arc artifact in beat {i+1}")
         if sudden_edge_panel(earlier,later):
             raise CreativeReject(f"Fiction edge-transition flash in beat {i+1}")
-    return {"pass": True, "sampled_frames": checks, "sampled_beats":len(plan),
+    return {"pass": True, "sampled_frames": checks,
+            "sampled_beats":len(scene_indices), "total_beats":count,
             "artifact_rules":("amber_arc","edge_flash")}
