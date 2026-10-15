@@ -7,6 +7,7 @@ on:
       - 'astra_v2/story_motion.py'
       - 'astra_v2/pillow_duo_scene.py'
       - 'astra_v2/ensemble_scene.py'
+      - 'tests/test_ensemble_physical_motion.py'
       - 'experimental/motion_profiles.py'
       - 'tools/astra_unified_preview.py'
       - 'tools/astra_unified_coverage.py'
@@ -34,6 +35,8 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_pillow_duo_story_supply.py' -v
       - name: Run existing scene integration
         run: python -m unittest discover -s tests -p 'test_astra_animal_scenes.py' -v
+      - name: Validate grounding, contacts, and camera continuity
+        run: python -m unittest discover -s tests -p 'test_ensemble_physical_motion.py' -v
       - name: Audit all currently production-eligible stories
         run: python -m tools.astra_unified_coverage
       - name: Render four scene families through one engine
