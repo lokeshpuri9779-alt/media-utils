@@ -6,7 +6,7 @@ import math
 import unittest
 from PIL import Image
 from astra_v2.ensemble_scene import (
-    _sprite, _positions, _prop_stage_position, ensemble_frame)
+    _sprite, _positions, grounded_positions, _prop_stage_position, ensemble_frame)
 from astra_v2.ensemble_story_experiments import catalog
 
 
@@ -80,6 +80,59 @@ class EnsemblePhysicalMotionTests(unittest.TestCase):
         self.assertEqual(len(spots),8)
         self.assertGreater(min(w for _,_,_,w in spots),175)
 
+
+    def test_background_cast_feet_are_grounded_and_keep_motion(self):
+        """Small supporting actors stand on the stage rather than in midair."""
+        cast=("fox","rabbit","owl","mouse","cat","dog","otter","squirrel")
+        roles={"fox":"jump","rabbit":"run","owl":"look","mouse":"wave"}
+        for style in ("crowd","clue","confrontation","reaction","action","reveal","resolution"):
+            spots=grounded_positions(cast,style,.0,roles,"fox")
+            self.assertEqual(len(spots),len(cast))
+            for idx,x,y,w in spots:
+                if idx==0 and style in ("clue","reaction","reveal"):
+                    continue  # intentionally cropped lead close-up
+                target=1115 if w<=200 else 1220 if w<=300 else 1250
+                shadow_y=y+785*w/560.0
+                self.assertLess(abs(shadow_y-target),18,(style,idx,shadow_y,target))
+                self.assertLess(y+820*w/560.0,1372)
+        a=grounded_positions(cast,"action",.15,roles,"rabbit")
+        b=grounded_positions(cast,"action",.56,roles,"rabbit")
+        self.assertNotEqual(a[0][2],b[0][2])  # jump still changes altitude
+        self.assertNotEqual(a[1][1],b[1][1])  # run still travels horizontally
+
+    def test_second_camera_take_keeps_world_blocking_constant(self):
+        from astra_v2.ensemble_scene import directed_subshot
+        shot=self.shot("pick","action")
+        shot.update(duration=1.5,experimental_subshots=True)
+        first_style,first_cut=directed_subshot(shot,.4)
+        second_style,second_cut=directed_subshot(shot,1.0)
+        self.assertNotEqual(first_style,second_style)
+        self.assertEqual((first_cut,second_cut),(0,1))
+        for time in (.79,.81):
+            spots=grounded_positions(shot["story_cast"],shot["scene_style"],
+                                     time,shot["acting_notes"],"fox")
+            self.assertEqual({i for i,*_ in spots},set(range(3)))
+        left=grounded_positions(shot["story_cast"],shot["scene_style"],
+                                .79,shot["acting_notes"],"fox")
+        right=grounded_positions(shot["story_cast"],shot["scene_style"],
+                                 .81,shot["acting_notes"],"fox")
+        for before,after in zip(left,right):
+            self.assertLess(math.dist(before[1:3],after[1:3]),10)
+        obj_a=_prop_stage_position(shot,left,shot["story_cast"],"fox",.79)[0]
+        obj_b=_prop_stage_position(shot,right,shot["story_cast"],"fox",.81)[0]
+        self.assertLess(math.dist(obj_a,obj_b),10)
+
+    def test_camera_optical_crop_keeps_outer_margins_unchanged(self):
+        from astra_v2.ensemble_scene import _second_camera_take
+        frame=Image.new("RGB",(1080,1920),(20,30,50))
+        from PIL import ImageDraw
+        painter=ImageDraw.Draw(frame)
+        painter.rectangle((300,800,700,1200),fill=(135,200,160))
+        original=frame.copy()
+        _second_camera_take(frame,540)
+        self.assertEqual(frame.getpixel((10,800)),original.getpixel((10,800)))
+        self.assertEqual(frame.getpixel((1050,1700)),original.getpixel((1050,1700)))
+        self.assertNotEqual(frame.getpixel((300,800)),original.getpixel((300,800)))
 
 if __name__=="__main__":
     unittest.main()
