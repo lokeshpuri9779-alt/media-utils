@@ -106,12 +106,13 @@ def prepare(path, candidate):
     if not isinstance(renderer, str) or not renderer.strip() or renderer.strip() == "unknown":
         raise ValueError("Approved preload is missing verified renderer provenance")
     payload["renderer"] = renderer.strip()
-    payload["sha256"] = hashlib.sha256(video.read_bytes()).hexdigest()
+    video_bytes = video.read_bytes()
+    payload["sha256"] = hashlib.sha256(video_bytes).hexdigest()
     payload["media"] = media
     package = video.parent / "preload-package"
     package.mkdir(exist_ok=True)
     (package / "candidate.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
-    (package / "video.mp4").write_bytes(video.read_bytes())
+    (package / "video.mp4").write_bytes(video_bytes)
     for suffix, name in (("_cover.jpg", "cover.jpg"), ("_cover_wide.jpg", "cover_wide.jpg")):
         cover = video.with_name(video.stem + suffix)
         if cover.is_file() and 0 < cover.stat().st_size <= 5 * 1024 * 1024:
