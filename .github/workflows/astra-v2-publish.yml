@@ -26,6 +26,7 @@ jobs:
     timeout-minutes: 15
     env:
       ASTRA_CHANNEL: rayvan
+      ASTRA_UNIFIED_STORY_ENGINE: '1' # One Studio renderer for directed, solo, duo and ensemble scenes; fail closed
       ASTRA_MADE_FOR_KIDS: '0' # General-audience originals; explicitly child-directed candidates must override
       ASTRA_LONG_ENABLED: '1'
       ASTRA_PRELOAD_ENABLED: '1'
