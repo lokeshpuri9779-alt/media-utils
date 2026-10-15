@@ -12,7 +12,7 @@ from astra_v2.ensemble_story_experiments import catalog
 from studio_renderer import render_frame, W, H, RATE
 
 FPS=8
-BEAT_SECONDS=1.35
+BEAT_SECONDS=1.50
 
 def preview(path="preview/astra-ensemble-six-pilots.mp4"):
     os.environ["ASTRA_EXPERIMENT_ENSEMBLE"]="1"
@@ -42,12 +42,14 @@ def preview(path="preview/astra-ensemble-six-pilots.mp4"):
                         audio=np.zeros(int(RATE*BEAT_SECONDS),dtype=np.float32),
                         story_subject=story["story_cast"][0],
                         story_visual_seed=story["content_id"],
+                        experimental_subshots=True,
                         director_camera="still",
                         creative_format="microfiction_cinematic",
                         format_brand="minimal")
             manifest.append({"story":story["title"],"cast":list(story["story_cast"]),
                              "cast_size":len(story["story_cast"]),
                              "scene":shot["headline"],"style":shot["scene_style"],
+                             "shot_count":2,"camera_cuts":1,
                              "time_start_seconds":round(start,2)})
             # All frames use full Studio composition including captions.
             for f in range(round(BEAT_SECONDS*FPS)):
@@ -70,12 +72,15 @@ def preview(path="preview/astra-ensemble-six-pilots.mp4"):
         "pilot_count":len(catalog_data),
         "cast_sizes":[len(s["story_cast"]) for s in catalog_data],
         "scene_count":len(timeline),
+        "directed_shot_count":len(timeline)*2,
+        "nonflashing_camera_cuts":len(timeline),
         "source":"authored deterministic ensemble experiments",
         "fps":FPS,"silent_preview":True,
         "scenes":manifest,
     },indent=2),encoding="utf-8")
     print(json.dumps({"pilot_count":len(catalog_data),
                       "mp4":str(path),"scene_count":len(timeline),
+                      "directed_shot_count":len(timeline)*2,
                       "silence_intentional":True}))
     return str(path)
 
