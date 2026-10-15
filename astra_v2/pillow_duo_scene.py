@@ -70,7 +70,7 @@ def _cached_mood(text,role):
         return "angry"
     if re.search(r"\b(?:what|why|wonder|mystery|curious|question)\b",text):
         return "curious"
-    if re.search(r"\b(?:smile|laugh|celebrat\w*|happy|cheer|dance)\b",text):
+    if re.search(r"\b(?:smil\w*|laugh\w*|celebrat\w*|happ(?:y|ily|iness)|joy\w*|cheer\w*|danc\w*)\b",text):
         return "happy"
     return {"reveal":"curious","build":"surprised",
             "twist":"curious","payoff":"happy"}.get(role,"alert")
