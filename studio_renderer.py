@@ -1023,7 +1023,13 @@ def render_frame(plan,t,genre,total):
     s,micro=_micro_scene_direction(s,t,genre)
     # Use the shot's own storyboard text for stable lighting variation.
     # Keep one palette per shot (not per frame) to prevent flicker.
-    visual_identity = str(s.get('visual_prompt') or s.get('visual') or '') + str(s.get('headline') or '')
+    # Fiction keeps one outer background across successive story beats.
+    # Previously a headline-based palette changed abruptly at each cut,
+    # resembling a full-frame flash even when the actor set was stable.
+    visual_identity = (str(s.get('story_visual_seed') or '')
+                       if genre == 'fiction' and s.get('story_visual_seed')
+                       else str(s.get('visual_prompt') or s.get('visual') or '') +
+                            str(s.get('headline') or ''))
     variant = int.from_bytes(hashlib.sha256(visual_identity.encode()).digest()[:2], 'big') % 6
     im=background(genre, variant).copy()
     # Camera treatment is chosen by the director per narrative beat.
@@ -1092,7 +1098,7 @@ def render_frame(plan,t,genre,total):
         d.text((250,1220),str(comparison_labels[0]),font=font(24),anchor='mm',fill=(210,218,233))
         d.text((830,1220),str(comparison_labels[1]),font=font(24),anchor='mm',fill=(210,218,233))
     # Director-controlled pattern interrupts are sparse and narrative, not constant.
-    if s.get('director_pattern_interrupt') and u<.16:
+    if genre != 'fiction' and s.get('director_pattern_interrupt') and u<.16:
         a=int(150*(1-u/.16))
         d.line((70,600,940,600),fill=accent+(a,) if im.mode=='RGBA' else accent,width=9)
     # Format-specific identity/headline treatment. Studio 7 deliberately avoids
