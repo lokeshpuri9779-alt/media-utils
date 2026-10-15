@@ -375,5 +375,253 @@ PLOTS = [
         "PARADE SAVED"
       ]
     ]
-  ]
+  ],
+    [
+      "fox-owl-midnight-bell",
+      "The Bell That Rang at Midnight",
+      "mystery",
+      [
+        [
+          "A BELL WITH NO ROPE",
+          "The fox and owl heard a bell ring inside the abandoned clock tower, though its rope had been cut.",
+          "story",
+          "WHO RANG IT"
+        ],
+        [
+          "THE FLOOR WAS WET",
+          "The owl noticed fresh water beneath the bell while the fox searched for footprints across the tower floor.",
+          "story",
+          "WATER CLUE"
+        ],
+        [
+          "THE RAIN MADE MUSIC",
+          "The fox found a loose roof pipe, and the owl realized raindrops were striking the bell through the pipe.",
+          "story",
+          "THE REAL CAUSE"
+        ],
+        [
+          "A QUIETER NIGHT",
+          "The fox repaired the pipe while the owl held the lantern, and the bell finally stayed silent during the storm.",
+          "story",
+          "MYSTERY SOLVED"
+        ]
+      ]
+    ],
+    [
+      "rabbit-mouse-wandering-book",
+      "The Book That Kept Moving",
+      "library comedy",
+      [
+        [
+          "THE BOOK CHANGED SHELVES",
+          "The rabbit and mouse returned a book to the library shelf, but found it on another shelf the next morning.",
+          "story",
+          "MISSING AGAIN"
+        ],
+        [
+          "THEY SET A WATCH",
+          "The mouse hid behind a chair while the rabbit watched the book through a gap in the shelves.",
+          "story",
+          "STAY QUIET"
+        ],
+        [
+          "A SLOPING SHELF",
+          "The rabbit saw the book slide slowly on a tilted shelf, and the mouse caught it before it fell.",
+          "story",
+          "NOT A GHOST"
+        ],
+        [
+          "THE LIBRARY WAS LEVEL",
+          "The mouse tightened the shelf bracket while the rabbit held the book, and the wandering book stayed in place.",
+          "story",
+          "CASE CLOSED"
+        ]
+      ]
+    ],
+    [
+      "cat-otter-floating-key",
+      "The Key Beneath the Bridge",
+      "river adventure",
+      [
+        [
+          "THE KEY FELL IN",
+          "The cat dropped the key to the riverside workshop, and the otter watched it sink beneath the wooden bridge.",
+          "story",
+          "LOST KEY"
+        ],
+        [
+          "THE CURRENT WAS FAST",
+          "The otter tried to reach the key, but the cat saw the strong current pushing it toward a deep channel.",
+          "story",
+          "TOO DANGEROUS"
+        ],
+        [
+          "A MAGNET ON A STRING",
+          "The cat found a magnet in the workshop while the otter tied it securely to a long fishing line.",
+          "story",
+          "A SAFER PLAN"
+        ],
+        [
+          "THE DOOR OPENED",
+          "The otter pulled the key from the shallow water with the magnet, and the cat unlocked the workshop before sunset.",
+          "story",
+          "KEY RECOVERED"
+        ]
+      ]
+    ],
+    [
+      "dog-squirrel-festival-clock",
+      "The Festival Clock Surprise",
+      "festival comedy",
+      [
+        [
+          "THE CLOCK RAN BACKWARD",
+          "The dog and squirrel found the festival clock counting backward just before the town parade began.",
+          "story",
+          "WRONG TIME"
+        ],
+        [
+          "THE PARADE WAITED",
+          "The squirrel checked the clock hands while the dog kept the waiting parade away from the moving gears.",
+          "story",
+          "TIME TROUBLE"
+        ],
+        [
+          "THE GEARS WERE REVERSED",
+          "The dog discovered two swapped gears, and the squirrel used a wrench to fit them into their proper places.",
+          "story",
+          "FOUND THE ERROR"
+        ],
+        [
+          "THE PARADE STARTED",
+          "The squirrel tested the repaired clock while the dog rang the bell, and the parade began on time.",
+          "story",
+          "RIGHT ON TIME"
+        ]
+      ]
+    ],
+    [
+      "owl-otter-storm-lantern",
+      "The Lantern Across the River",
+      "storm rescue",
+      [
+        [
+          "THE SIGNAL WENT DARK",
+          "The owl and otter saw the warning lantern go dark across the river just as storm clouds gathered.",
+          "story",
+          "DARK SIGNAL"
+        ],
+        [
+          "THE BRIDGE WAS CLOSED",
+          "The otter found the bridge blocked by fallen branches while the owl searched for another safe route.",
+          "story",
+          "NO CROSSING"
+        ],
+        [
+          "A ROPE FROM THE BANK",
+          "The owl secured a rope to a sturdy post while the otter guided a spare lantern across on a floating raft.",
+          "story",
+          "NEW SIGNAL"
+        ],
+        [
+          "THE BOATS TURNED HOME",
+          "The otter lit the replacement lantern while the owl rang the bell, guiding the last boats away from danger.",
+          "story",
+          "RIVER SAFE"
+        ]
+      ]
+    ],
+    [
+      "fox-cat-rocket-parcel",
+      "The Rocket-Shaped Parcel",
+      "workshop mystery",
+      [
+        [
+          "A PARCEL BEGAN TO TICK",
+          "The fox and cat found a rocket-shaped parcel ticking outside their workshop, with no sender written on the box.",
+          "story",
+          "STRANGE DELIVERY"
+        ],
+        [
+          "THEY CHECKED THE CLOCK",
+          "The cat held the parcel still while the fox listened carefully and found the ticking came from inside a small clock.",
+          "story",
+          "WHAT IS INSIDE"
+        ],
+        [
+          "A SURPRISE COUNTDOWN",
+          "The fox opened the parcel and the cat discovered a harmless clock counting down to the workshop anniversary.",
+          "story",
+          "NOT A ROCKET"
+        ],
+        [
+          "A PARTY AT ZERO",
+          "The cat rang the bell when the clock reached zero, and the fox opened a box of celebration flowers.",
+          "story",
+          "HAPPY ANNIVERSARY"
+        ]
+      ]
+    ],
+    [
+      "mouse-squirrel-missing-flower",
+      "The Flower That Vanished",
+      "garden mystery",
+      [
+        [
+          "THE FLOWER DISAPPEARED",
+          "The mouse and squirrel found an empty flowerpot where the festival's prize flower had stood the night before.",
+          "story",
+          "EMPTY POT"
+        ],
+        [
+          "THE SOIL LEFT A TRAIL",
+          "The squirrel spotted a line of soil along the path while the mouse followed it toward the garden shed.",
+          "story",
+          "FOLLOW THE SOIL"
+        ],
+        [
+          "THE WIND MOVED THE POT",
+          "The mouse found the flowerpot behind a loose shed door, and the squirrel saw how the wind had pushed it there.",
+          "story",
+          "WINDY SECRET"
+        ],
+        [
+          "THE FLOWER RETURNED",
+          "The squirrel secured the shed door while the mouse carried the flowerpot back to the festival table.",
+          "story",
+          "FLOWER FOUND"
+        ]
+      ]
+    ],
+    [
+      "rabbit-dog-lost-compass",
+      "The Compass That Pointed Home",
+      "forest adventure",
+      [
+        [
+          "THE COMPASS SPUN",
+          "The rabbit and dog lost their trail when their compass began spinning beside an old forest gate.",
+          "story",
+          "WHICH WAY"
+        ],
+        [
+          "THE GATE WAS MAGNETIC",
+          "The dog noticed the compass changed direction near the iron gate while the rabbit compared it with the stars.",
+          "story",
+          "FALSE NORTH"
+        ],
+        [
+          "THEY MOVED AWAY",
+          "The rabbit carried the compass into the clearing, and the dog watched its needle settle toward the true trail.",
+          "story",
+          "TRUE DIRECTION"
+        ],
+        [
+          "HOME BEFORE DARK",
+          "The dog followed the corrected compass while the rabbit held the lantern, and they reached home before dark.",
+          "story",
+          "SAFE AT HOME"
+        ]
+      ]
+    ],
 ]
