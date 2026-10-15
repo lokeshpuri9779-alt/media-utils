@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 48,
-  "confirmed_today": 47,
-  "last_attempt_at": "2026-10-15T13:05:13.340681+00:00",
+  "attempts": 49,
+  "confirmed_today": 48,
+  "last_attempt_at": "2026-10-15T13:12:33.797629+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1227,14 +1227,22 @@
       "format": "short",
       "uploaded_at": "2026-10-15T12:38:55.305688+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-06356ea5bf4bf7f3": {
+      "video_id": "kqkc5gd_WQU",
+      "confirmed_at": "2026-10-15T13:11:53.101030+00:00",
+      "title": "The Archer and the Wind",
+      "format": "short",
+      "uploaded_at": "2026-10-15T13:05:14.771603+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "kqkc5gd_WQU": {
-      "content_id": "rayvan-forge-06356ea5bf4bf7f3",
-      "title": "The Archer and the Wind",
+    "UsngV6IZtNg": {
+      "content_id": "rayvan-forge-332be0384bddbb17",
+      "title": "The Missing Lighthouse Keeper",
       "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T13:05:14.771603+00:00",
+      "uploaded_at": "2026-10-15T13:12:35.085015+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -1243,11 +1251,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T13:04:29.597453+00:00",
+  "last_preflight_at": "2026-10-15T13:11:52.739418+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T13:05:15.022325+00:00",
+    "at": "2026-10-15T13:12:35.318916+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2439,6 +2447,14 @@
     "rayvan-forge-06356ea5bf4bf7f3": {
       "at": "2026-10-15T13:05:13.340665+00:00",
       "title": "The Archer and the Wind",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-332be0384bddbb17": {
+      "at": "2026-10-15T13:12:33.797614+00:00",
+      "title": "The Missing Lighthouse Keeper",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
