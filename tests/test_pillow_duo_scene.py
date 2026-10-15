@@ -11,6 +11,11 @@ class PillowDuoTests(unittest.TestCase):
         self.assertFalse(unsupported["supported"])
         self.assertEqual(unsupported["reason"], "requires_two_supported_animals")
 
+    def test_three_named_species_are_not_silently_reduced_to_two(self):
+        shot = {"speech": "The fox, rabbit, and owl investigate a bell."}
+        self.assertEqual(scene_pair(shot), ())
+        self.assertFalse(duo_compatibility(shot)["supported"])
+
     def test_no_wrong_species_icon(self):
         from astra_v2.icon_visuals import pick_icon
         self.assertIsNone(pick_icon({"speech": "The fox met the rabbit."}))
