@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 60,
-  "confirmed_today": 59,
-  "last_attempt_at": "2026-10-15T16:33:34.071425+00:00",
+  "attempts": 61,
+  "confirmed_today": 60,
+  "last_attempt_at": "2026-10-15T16:57:35.027731+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1323,14 +1323,22 @@
       "format": "short",
       "uploaded_at": "2026-10-15T16:17:29.231361+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-d4340a1d50d266bc": {
+      "video_id": "Jv40UGslYGk",
+      "confirmed_at": "2026-10-15T16:56:48.682496+00:00",
+      "title": "The Rooftop Cloud Collector",
+      "format": "short",
+      "uploaded_at": "2026-10-15T16:33:35.694577+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "Jv40UGslYGk": {
-      "content_id": "rayvan-forge-d4340a1d50d266bc",
-      "title": "The Rooftop Cloud Collector",
+    "0uhY5EUm--k": {
+      "content_id": "rayvan-forge-166f30c0c3717add",
+      "title": "The Postman and the Last Letter",
       "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T16:33:35.694577+00:00",
+      "uploaded_at": "2026-10-15T16:57:37.159906+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -1339,11 +1347,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T16:32:27.943753+00:00",
+  "last_preflight_at": "2026-10-15T16:56:48.318661+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T16:33:35.919616+00:00",
+    "at": "2026-10-15T16:57:37.400054+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2631,6 +2639,14 @@
     "rayvan-forge-d4340a1d50d266bc": {
       "at": "2026-10-15T16:33:34.071409+00:00",
       "title": "The Rooftop Cloud Collector",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-166f30c0c3717add": {
+      "at": "2026-10-15T16:57:35.027716+00:00",
+      "title": "The Postman and the Last Letter",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
