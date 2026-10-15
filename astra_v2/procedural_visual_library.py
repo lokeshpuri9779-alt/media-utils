@@ -7,6 +7,7 @@ The eight supported characters retain species-specific silhouettes.
 from __future__ import annotations
 import hashlib
 import math
+from functools import lru_cache
 from PIL import ImageDraw
 
 SPECIES = ("fox", "rabbit", "cat", "dog", "owl", "mouse", "otter", "squirrel")
@@ -47,6 +48,10 @@ def visual_identity(story, name, slot=0):
     if name not in SPECIES:
         raise ValueError("unsupported actor")
     stable=str(story or "astra-default")
+    return _cached_visual_identity(stable,name,int(slot))
+
+@lru_cache(maxsize=4096)
+def _cached_visual_identity(stable, name, slot):
     seed=hashlib.sha256(f"{stable}|{name}|{slot}".encode()).digest()
     local=int.from_bytes(seed[:8],"big") % CHARACTERS_PER_SPECIES
     return SPECIES.index(name)*CHARACTERS_PER_SPECIES + local
@@ -62,6 +67,10 @@ def icon_recipe(index):
 def icon_for_story(motif, story, salt=""):
     if motif not in MOTIFS:
         raise ValueError("unknown motif")
+    return _cached_icon_selection(str(story),motif,str(salt))
+
+@lru_cache(maxsize=4096)
+def _cached_icon_selection(story, motif, salt):
     digest=hashlib.sha256(f"{story}|{motif}|{salt}".encode()).digest()
     local=int.from_bytes(digest[:8],"big")%100
     return MOTIFS.index(motif)*100 + local
