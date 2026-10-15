@@ -153,7 +153,7 @@ def draw_icon(d, index, x, y, size=48):
         for j in range(8):
             theta=j*math.pi/4
             stroke((.63*math.cos(theta),.63*math.sin(theta)),
-                   (.94*math.cos(theta),.94*math.sin(theta)),width=4)
+                   (.94*math.cos(theta),.94*math.sin(theta)),fill=col,width=5)
     elif motif=="flower":
         for j in range(6):
             theta=j*math.pi/3
@@ -179,7 +179,8 @@ def draw_icon(d, index, x, y, size=48):
         oval(-.05,-.72,.86,.16,fill=col)
         path((-.88,-.05),(.88,-.05),(0,.94))
     elif motif=="leaf":
-        oval(-.70,-.82,.70,.82)
+        path((-.76,.70),(-.67,-.18),(-.22,-.81),(.74,-.93),
+             (.77,-.22),(.38,.59),(-.76,.70))
         stroke((-.62,.74),(.66,-.74),width=5)
         stroke((-.24,.22),(-.56,-.12),width=3)
         stroke((.15,-.15),(.52,.06),width=3)
@@ -233,9 +234,9 @@ def draw_icon(d, index, x, y, size=48):
         stroke((-.83,.59),(.83,.59),width=5)
     elif motif=="key":
         oval(-.90,-.76,-.13,.04,fill=paper)
-        stroke((-.24,-.13),(.82,.86),width=9)
-        stroke((.51,.55),(.83,.20),width=7)
-        stroke((.68,.74),(.95,.44),width=7)
+        stroke((-.24,-.13),(.82,.86),fill=col,width=9)
+        stroke((.51,.55),(.83,.20),fill=col,width=7)
+        stroke((.68,.74),(.95,.44),fill=col,width=7)
     elif motif=="wrench":
         path((-.91,-.80),(-.58,-.96),(-.19,-.45),
              (.07,-.37),(.78,.55),(.49,.84),(-.42,.06),
@@ -243,11 +244,11 @@ def draw_icon(d, index, x, y, size=48):
         oval(.35,.42,.61,.68,fill=paper)
     elif motif=="anchor":
         oval(-.19,-.92,.19,-.56,fill=paper)
-        stroke((0,-.55),(0,.80),width=8)
-        stroke((-.57,-.17),(.57,-.17),width=7)
-        d.arc((*xy(-.83,.10),*xy(.83,.90)),0,180,fill=ink,width=7)
-        stroke((-.86,.38),(-.73,.86),width=6)
-        stroke((.86,.38),(.73,.86),width=6)
+        stroke((0,-.55),(0,.80),fill=col,width=8)
+        stroke((-.57,-.17),(.57,-.17),fill=col,width=7)
+        d.arc((*xy(-.83,.10),*xy(.83,.90)),0,180,fill=col,width=7)
+        stroke((-.86,.38),(-.73,.86),fill=col,width=6)
+        stroke((.86,.38),(.73,.86),fill=col,width=6)
     else:
         raise ValueError("unknown motif recipe")
     # Distinct decoration geometry within each motif; bounded and stable.
