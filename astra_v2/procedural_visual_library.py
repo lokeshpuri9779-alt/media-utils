@@ -119,45 +119,143 @@ def _star(cx,cy,r,tips=5):
             for j in range(tips*2)]
 
 def draw_icon(d, index, x, y, size=48):
-    """Draw the matching silhouette plus deterministic ornament; no substitutions."""
+    """Render 20 different silhouettes and 10 palettes x 10 ornaments.
+
+    Index is a visual STYLE ID, not a claim of 2,000 semantic icon concepts.
+    No unrelated icon is substituted for a narrated object.
+    """
     v=icon_recipe(index)
-    motif=v["motif"]
-    palette=v["palette"]
-    deco=v["decoration"]
+    motif, palette, deco = v["motif"],v["palette"],v["decoration"]
     colors=((239,190,100),(113,181,173),(197,134,179),(225,143,103),
             (155,180,222),(194,183,113),(147,204,150),(217,154,141),
             (192,155,217),(131,183,202))
-    color=colors[palette]
+    col=colors[palette]
     ink=(35,45,62)
-    r=max(9,int(size*.47))
-    if motif in ("star","sun","flower","compass"):
-        d.polygon(_star(x,y,r,5 if motif!="compass" else 4),fill=color,outline=ink,width=3)
-    elif motif in ("moon","cloud"):
-        d.ellipse((x-r,y-r,x+r,y+r),fill=color,outline=ink,width=3)
-        if motif=="moon": d.ellipse((x-r//3,y-r-4,x+r+9,y+r-15),fill=(40,75,85))
-        else:
-            d.ellipse((x-r,y-r//2,x+r,y+r//2),fill=color)
-    elif motif in ("heart","leaf","feather"):
-        d.polygon(((x-r,y-r//2),(x-r//2,y-r),(x,y-r//2),(x+r//2,y-r),
-                   (x+r,y-r//2),(x,y+r)),fill=color,outline=ink,width=3)
-    elif motif in ("diamond","shield","mountain","rocket"):
-        d.polygon(((x,y-r),(x+r,y-r//5),(x+r//2,y+r),(x-r//2,y+r),(x-r,y-r//5)),
-                  fill=color,outline=ink,width=3)
-    elif motif in ("book","lantern","clock","bell"):
-        d.rounded_rectangle((x-r,y-r,x+r,y+r),radius=max(3,r//5),
-                            fill=color,outline=ink,width=3)
-        d.line((x,y-r+6,x,y+r-6),fill=ink,width=3)
-    elif motif in ("key","wrench","anchor"):
-        d.ellipse((x-r//2,y-r,x+r//2,y),outline=color,width=8)
-        d.line((x,y,x,y+r),fill=color,width=8)
-        d.line((x,y+r//2,x+r//2,y+r//2),fill=ink,width=4)
+    paper=(251,242,215)
+    r=max(10,int(size*.46))
+    def xy(dx,dy):
+        return (round(x+dx*r),round(y+dy*r))
+    def oval(ax,ay,bx,by,*,fill=col,outline=ink,width=3):
+        a=xy(ax,ay); b=xy(bx,by)
+        d.ellipse((*a,*b),fill=fill,outline=outline,width=width)
+    def path(*points,fill=col,outline=ink,width=3):
+        d.polygon([xy(*p) for p in points],fill=fill,outline=outline,width=width)
+    def stroke(*points,fill=ink,width=4):
+        d.line([xy(*p) for p in points],fill=fill,width=width,joint="curve")
+    def rect(ax,ay,bx,by,fill=col,radius=.12):
+        a=xy(ax,ay);b=xy(bx,by)
+        d.rounded_rectangle((*a,*b),radius=max(2,int(radius*r)),
+                            fill=fill,outline=ink,width=3)
+    if motif=="star":
+        d.polygon(_star(x,y,r,5),fill=col,outline=ink,width=3)
+    elif motif=="sun":
+        oval(-.49,-.49,.49,.49)
+        for j in range(8):
+            theta=j*math.pi/4
+            stroke((.63*math.cos(theta),.63*math.sin(theta)),
+                   (.94*math.cos(theta),.94*math.sin(theta)),width=4)
+    elif motif=="flower":
+        for j in range(6):
+            theta=j*math.pi/3
+            cx=.47*math.cos(theta);cy=.47*math.sin(theta)
+            oval(cx-.33,cy-.33,cx+.33,cy+.33,fill=col,outline=ink,width=2)
+        oval(-.25,-.25,.25,.25,fill=(248,221,121))
+    elif motif=="compass":
+        oval(-.91,-.91,.91,.91)
+        path((0,-.81),(.24,0),(0,.81),(-.24,0),fill=paper)
+        path((-.81,0),(0,-.24),(.81,0),(0,.24),fill=(226,132,112))
+        oval(-.13,-.13,.13,.13,fill=ink,outline=ink)
+    elif motif=="moon":
+        oval(-.85,-.85,.85,.85)
+        # A crescent whose inner cutout uses a consistent cutout fill.
+        oval(-.25,-.98,1.0,.30,fill=(40,75,85),outline=(40,75,85),width=0)
+    elif motif=="cloud":
+        oval(-.94,-.16,-.29,.53,fill=col)
+        oval(-.50,-.74,.31,.37,fill=col)
+        oval(.12,-.38,.96,.53,fill=col)
+        rect(-.77,.02,.78,.55,fill=col,radius=.16)
+    elif motif=="heart":
+        oval(-.86,-.72,.05,.16,fill=col)
+        oval(-.05,-.72,.86,.16,fill=col)
+        path((-.88,-.05),(.88,-.05),(0,.94))
+    elif motif=="leaf":
+        oval(-.70,-.82,.70,.82)
+        stroke((-.62,.74),(.66,-.74),width=5)
+        stroke((-.24,.22),(-.56,-.12),width=3)
+        stroke((.15,-.15),(.52,.06),width=3)
+    elif motif=="feather":
+        oval(-.43,-.90,.53,.63)
+        stroke((-.62,.93),(.40,-.77),width=5)
+        for k in range(4):
+            yy=.45-k*.32
+            stroke((-.36,yy),(.26,yy-.20),width=2)
+    elif motif=="diamond":
+        path((-.66,-.28),(-.36,-.85),(.36,-.85),(.66,-.28),
+             (0,.9))
+        stroke((-.66,-.28),(.66,-.28),width=3)
+        stroke((-.36,-.85),(0,.9),(.36,-.85),width=2)
+    elif motif=="shield":
+        path((-.83,-.80),(.83,-.80),(.70,.30),(0,.97),(-.70,.30))
+        stroke((0,-.55),(0,.57),width=4)
+        stroke((-.43,0),(.43,0),width=4)
+    elif motif=="mountain":
+        path((-.98,.85),(-.14,-.90),(.32,.14),(.55,-.37),
+             (1,.85))
+        path((-.47,-.13),(-.14,-.90),(.14,-.14),
+             (-.12,-.30),fill=paper)
+    elif motif=="rocket":
+        path((0,-.99),(.47,-.47),(.41,.58),(-.41,.58),
+             (-.47,-.47))
+        oval(-.24,-.33,.24,.14,fill=(182,222,220))
+        path((-.41,.20),(-.85,.76),(-.35,.59))
+        path((.41,.20),(.85,.76),(.35,.59))
+        path((-.25,.58),(0,1.05),(.25,.58),fill=(244,154,90))
+    elif motif=="book":
+        path((-.91,-.70),(-.16,-.62),(0,-.39),(0,.85),(-.91,.65))
+        path((0,-.39),(.16,-.62),(.91,-.70),(.91,.65),(0,.85),fill=paper)
+        stroke((0,-.39),(0,.85),width=4)
+        for yy in (-.25,.12,.43):
+            stroke((-.74,yy),(-.21,yy+.07),width=2)
+    elif motif=="lantern":
+        rect(-.65,-.61,.65,.80,fill=col,radius=.15)
+        oval(-.32,-.93,.32,-.42,fill=None,outline=ink,width=5)
+        rect(-.45,-.35,.45,.52,fill=(247,215,131),radius=.05)
+        stroke((-.61,-.58),(.61,.77),width=3)
+    elif motif=="clock":
+        oval(-.88,-.88,.88,.88,fill=paper)
+        stroke((0,0),(0,-.59),width=6)
+        stroke((0,0),(.52,.27),width=5)
+        oval(-.10,-.10,.10,.10,fill=ink,outline=ink)
+    elif motif=="bell":
+        path((-.76,.57),(-.62,.35),(-.56,-.33),(-.28,-.67),
+             (.28,-.67),(.56,-.33),(.62,.35),(.76,.57))
+        oval(-.20,.56,.20,.89,fill=(244,178,116))
+        stroke((-.83,.59),(.83,.59),width=5)
+    elif motif=="key":
+        oval(-.90,-.76,-.13,.04,fill=paper)
+        stroke((-.24,-.13),(.82,.86),width=9)
+        stroke((.51,.55),(.83,.20),width=7)
+        stroke((.68,.74),(.95,.44),width=7)
+    elif motif=="wrench":
+        path((-.91,-.80),(-.58,-.96),(-.19,-.45),
+             (.07,-.37),(.78,.55),(.49,.84),(-.42,.06),
+             (-.61,-.02),(-.97,-.48),fill=col)
+        oval(.35,.42,.61,.68,fill=paper)
+    elif motif=="anchor":
+        oval(-.19,-.92,.19,-.56,fill=paper)
+        stroke((0,-.55),(0,.80),width=8)
+        stroke((-.57,-.17),(.57,-.17),width=7)
+        d.arc((*xy(-.83,.10),*xy(.83,.90)),0,180,fill=ink,width=7)
+        stroke((-.86,.38),(-.73,.86),width=6)
+        stroke((.86,.38),(.73,.86),width=6)
     else:
-        d.ellipse((x-r,y-r,x+r,y+r),fill=color,outline=ink,width=3)
-    # Ten distinct ornament geometries, not just a filename variation.
+        raise ValueError("unknown motif recipe")
+    # Distinct decoration geometry within each motif; bounded and stable.
     if deco:
         for k in range(1+(deco-1)//3):
-            ox=x-r+7+((k*13+deco*7)%(2*r-14))
-            oy=y+r-8-(k*7%max(7,r))
-            d.ellipse((ox-2-deco%3,oy-2,ox+2+deco%3,oy+2),
-                      fill=(255,238,200))
+            ax=-.85+((k*17+deco*13)%160)/100
+            ay=.83-(k*19+deco*7)%47/100
+            px,py=xy(ax,ay)
+            rad=2+deco%3
+            d.ellipse((px-rad,py-rad,px+rad,py+rad),fill=(255,239,206))
     return v["id"]
