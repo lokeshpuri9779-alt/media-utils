@@ -18,7 +18,11 @@ ACTION_PATTERNS=(
     ("point",r"\b(?:point|points|pointed|pointing|signal|signals|signaled)\b"),
     ("hug",r"\b(?:hug|hugs|hugged|hugging|embrace|embraced)\b"),
     ("clap",r"\b(?:clap|claps|clapped|clapping|applaud|applauded)\b"),
-    ("run",r"\b(?:run|runs|ran|running|sprint|sprints|sprinted|chase|chased|chasing)\b"),
+    ("catch",r"\b(?:catch|catches|caught|catching|intercept|intercepts|intercepted)\b"),
+    ("chase",r"\b(?:chase|chases|chased|chasing|pursue|pursues|pursued|pursuing)\b"),
+    ("swim",r"\b(?:swim|swims|swam|swimming|paddle|paddles|paddled|paddling)\b"),
+    ("sneak",r"\b(?:sneak|sneaks|sneaked|sneaking|tiptoe|tiptoes|tiptoed|tiptoeing|creep|creeps|crept|creeping)\b"),
+    ("run",r"\b(?:run|runs|ran|running|sprint|sprints|sprinted)\b"),
     ("jump",r"\b(?:jump|jumps|jumped|jumping|leap|leaps|leapt|leaped|hops|hopped|hop)\b"),
     ("dance",r"\b(?:dance|dances|danced|dancing|celebrat\w*)\b"),
     ("hide",r"\b(?:hide|hides|hid|hidden|hiding|crouch|crouched|ducked)\b"),
@@ -58,6 +62,14 @@ def offset(action,t,scale=1.0):
         return 0,round(36*(1-math.cos(phase*.5))*scale)
     if action=="wave":
         return round(17*math.sin(phase*1.8)*scale),round(-14*abs(math.sin(phase*1.8))*scale)
+    if action=="catch":
+        return round(13*math.sin(t*2.7)*scale),round(-19*min(1,max(0,t)/.9)*scale)
+    if action=="chase":
+        return round(68*math.sin(t*3.4)*scale),round(21*abs(math.sin(phase*3.1))*scale)
+    if action=="swim":
+        return round(28*math.sin(t*2.1)*scale),round(25*math.sin(phase*1.3)*scale)
+    if action=="sneak":
+        return round(12*math.sin(t*1.1)*scale),round(4*abs(math.sin(phase*.9))*scale)
     if action=="run":
         return round(48*math.sin(t*3.2)*scale),round(18*abs(math.sin(phase*3))*scale)
     if action=="jump":
