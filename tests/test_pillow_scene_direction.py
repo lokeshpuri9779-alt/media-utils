@@ -34,6 +34,20 @@ class DirectedPillowScenesTests(unittest.TestCase):
                     Image.new("RGB",(rect[2]-rect[0],rect[3]-rect[1]),(24,35,60))).getbbox())
         self.assertEqual(len(set(sigs)),len(sigs))
 
+    def test_authored_location_is_not_replaced_by_handheld_props(self):
+        self.assertEqual(story_setting({
+            "speech":"The fox carried a book and a flower through the village.",
+            "story_environment":"village"}),"village")
+        self.assertEqual(story_setting({
+            "speech":"They read a letter near the river bank.",
+            "story_environment":"river"}),"river")
+        self.assertEqual(story_setting({
+            "speech":"They held a flower at the hillside crossing."}),"hill")
+        self.assertEqual(story_setting({
+            "speech":"They carried a book into the village square."}),"village")
+        self.assertEqual(story_setting({
+            "speech":"The friends opened a book at the library."}),"library")
+
     def test_ball_rolls_and_the_catch_overrides_earlier_roll_verb(self):
         first={"speech":"The fox and cat watched the ball roll away.",
                "story_beat":"reveal","story_action":"idle"}

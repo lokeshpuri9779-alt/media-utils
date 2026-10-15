@@ -13,10 +13,14 @@ from functools import lru_cache
 GROUND_TOP = 1180
 
 SCENE_CUES = (
-    ("library", r"\b(?:library|bookshelf|shelves|bookcase|books?|pages?|reading|curtain)\b"),
+    # Handheld books, pages and curtains are objects, not locations. Never
+    # change the whole set to a library just because a character holds a book.
+    ("library", r"\b(?:library|bookshelf|shelves|bookcase|reading room)\b"),
     ("harbor", r"\b(?:harbor|harbour|pier|dock|seawall|fishing boats?)\b"),
     ("river", r"\b(?:river|stream|pond|water|floating|bank|inlet|flood|tide)\b"),
-    ("garden", r"\b(?:garden|flower|petal|greenhouse|soil|seed|plant|greenery)\b"),
+    # A flower carried through a village should not teleport the cast into a
+    # garden; only location-specific terms select that illustrated set.
+    ("garden", r"\b(?:garden|flowerbed|greenhouse|botanical garden)\b"),
     ("village", r"\b(?:village|market|fountain|square|festival|picnic|street|stall)\b"),
     ("meadow", r"\b(?:meadow|field|grassland|flat clearing)\b"),
     ("hill", r"\b(?:hillside|hill|rocky|rocks?|winding path|ridge|mountain|slope)\b"),
@@ -34,9 +38,14 @@ def story_setting(shot):
 
 @lru_cache(maxsize=2048)
 def _cached_scene_setting(text,direct):
+    # Explicitly spoken locations outrank the storyboard suggestion (e.g.
+    # "in a library" beats an earlier harbor setting). Handheld objects are
+    # intentionally excluded from SCENE_CUES so they cannot cause set swaps.
     for name,pattern in SCENE_CUES:
         if re.search(pattern,text):
             return name
+    # No explicit setting in the line: maintain the authored location rather
+    # than injecting the default forest every time a character says "book".
     return direct if direct in {key for key,_ in SCENE_CUES} else "forest"
 
 def _text_seed(shot):
