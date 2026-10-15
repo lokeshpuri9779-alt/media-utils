@@ -81,6 +81,9 @@ def scene_pair(shot):
                   ("speech","visual_prompt","action")).lower()
     found=_cached_actor_mentions(text)
     cast=shot.get("story_cast") or ()
+    # Malformed declared casts must not be bypassed by text inference.
+    if "story_cast" in shot and shot["story_cast"] is not None and not isinstance(shot["story_cast"], (list, tuple)):
+        return ()
     if isinstance(cast,(list,tuple)) and cast:
         # An explicit cast is authoritative: never discard extra characters
         # and accidentally infer a smaller pair from narration.
