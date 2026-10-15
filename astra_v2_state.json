@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-16",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 19,
-  "confirmed_today": 18,
-  "last_attempt_at": "2026-10-15T23:32:32.955959+00:00",
+  "attempts": 20,
+  "confirmed_today": 19,
+  "last_attempt_at": "2026-10-15T23:38:54.789992+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1523,14 +1523,22 @@
       "format": "short",
       "uploaded_at": "2026-10-15T23:05:46.028350+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-76f6c4f0dc977755": {
+      "video_id": "LTIsVDWi7BY",
+      "confirmed_at": "2026-10-15T23:38:18.619076+00:00",
+      "title": "The Owl and Rabbit's Upside-Down Rain",
+      "format": "short",
+      "uploaded_at": "2026-10-15T23:32:35.909107+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "LTIsVDWi7BY": {
-      "content_id": "rayvan-forge-76f6c4f0dc977755",
-      "title": "The Owl and Rabbit's Upside-Down Rain",
+    "ejGgPvO2uvE": {
+      "content_id": "rayvan-forge-2b4c1a219de859e1",
+      "title": "The Cat and Otter's Glowing Window",
       "day": "2026-10-16",
-      "uploaded_at": "2026-10-15T23:32:35.909107+00:00",
+      "uploaded_at": "2026-10-15T23:38:56.340970+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -1539,11 +1547,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T23:31:48.748878+00:00",
+  "last_preflight_at": "2026-10-15T23:38:18.198032+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T23:32:36.482706+00:00",
+    "at": "2026-10-15T23:38:56.543422+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -3031,6 +3039,14 @@
     "rayvan-forge-76f6c4f0dc977755": {
       "at": "2026-10-15T23:32:32.955943+00:00",
       "title": "The Owl and Rabbit's Upside-Down Rain",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-2b4c1a219de859e1": {
+      "at": "2026-10-15T23:38:54.789977+00:00",
+      "title": "The Cat and Otter's Glowing Window",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
