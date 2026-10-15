@@ -162,6 +162,22 @@ def draw_story_stage(d, shot, t):
                 d.arc((x-25,yy-20,x+25,yy+20),195,340,fill=(107,181,121),width=5)
     d.ellipse((65,1215,1025,1340),fill=ground)
     d.ellipse((120,1235,975,1315),fill=(64,115,102) if setting!="harbor" else (51,110,117))
+    # Story-seeded, fixed environmental dressing: each location has a
+    # foreground/midground silhouette. The details never re-roll per frame.
+    for k in range(7):
+        x=95+(seed//(k+1)+k*151)%890
+        y=1070+(k%3)*41
+        if setting in ("forest","night","garden","meadow"):
+            d.line((x,y+24,x+4,y-15),fill=(81,146,103),width=5)
+            d.ellipse((x-10,y-20,x+16,y+3),
+                      fill=((199,158,115) if k%2 else (145,186,134)))
+        elif setting in ("village","library","hill"):
+            d.rounded_rectangle((x-11,y-5,x+17,y+16),radius=4,
+                                fill=(131,117,109))
+        elif setting in ("river","harbor"):
+            d.line((x-20,y,x+24,y),fill=(133,187,196),width=4)
+        elif setting=="winter":
+            d.ellipse((x-9,y-9,x+12,y+10),fill=(211,229,234))
     # Foreground micro-movement is subtle and secondary to the character rig.
     for i in range(9):
         x=120+(seed+i*137)%825
