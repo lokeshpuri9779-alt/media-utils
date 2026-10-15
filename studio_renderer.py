@@ -403,6 +403,10 @@ def make_plan(ch):
             # used when a structured cast is not supplied by the story forge.
             unified_cast = (tuple(declared) if isinstance(declared, (tuple, list))
                             else cast_from_title(ch.get("title", "")))
+        # A character introduced halfway through an authored story must join
+        # only from that beat onward, then retain stable cast/order thereafter.
+        progressive_cast = list(unified_cast) if unified_mode else []
+        fixed_cast = isinstance(ch.get("story_cast"), (tuple, list))
         experimental_cast = tuple(ch.get("story_cast") or ())
         ensemble = bool(ch.get("experimental_ensemble") and 3 <= len(experimental_cast) <= 8)
         if ensemble:
@@ -415,9 +419,17 @@ def make_plan(ch):
             # A fresh narration beat must not silently change a character.
             shot['story_visual_seed'] = visual_seed
             if unified_mode:
-                if unified_cast:
-                    shot['story_cast'] = unified_cast
-                    if len(unified_cast) >= 3:
+                if not fixed_cast:
+                    # The narration and visual prompt can introduce a new
+                    # species after the opening beat. Do not invent it earlier.
+                    newly_named = cast_from_title(" ".join(str(shot.get(k) or "")
+                                     for k in ("speech", "visual_prompt", "action")))
+                    for animal in newly_named:
+                        if animal not in progressive_cast:
+                            progressive_cast.append(animal)
+                if progressive_cast:
+                    shot['story_cast'] = tuple(progressive_cast)
+                    if len(progressive_cast) >= 3:
                         shot['experimental_ensemble'] = True
             elif ensemble:
                 shot['story_cast'] = experimental_cast
