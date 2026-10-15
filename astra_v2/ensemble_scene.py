@@ -64,7 +64,7 @@ def _positions(cast,style,t,roles=None,focus=None):
         others=[j for j in range(n) if j not in protagonists]
         rear_x=[int(165+735*(j+.5)/max(1,len(others))) for j in range(len(others))]
         out=[(idx,rear_x[k],600,138) for k,idx in enumerate(others)]
-        out.extend((j,centers[j],692+(k%2)*32,330 if j==focused else 285)
+        out.extend((j,centers[j],692+(k%2)*32,445 if j==focused else 285)
                    for k,j in enumerate(protagonists))
         return out
     if style=="confrontation":
@@ -72,7 +72,7 @@ def _positions(cast,style,t,roles=None,focus=None):
         others=[j for j in range(n) if j not in protagonists]
         out=[(j,int(130+800*(k+.5)/max(1,len(others))),615,145)
              for k,j in enumerate(others)]
-        out.extend((j,310 if k==0 else 758,715,330)
+        out.extend((j,310 if k==0 else 758,710,385)
                    for k,j in enumerate(protagonists))
         return out
     if style=="action":
@@ -178,6 +178,10 @@ def ensemble_frame(im,shot,t):
             action="look"
         # Individual phase avoids cloned synchronous blinking/steps.
         sprite=_sprite(name,i,action,moods[name],t+i*.11,seed)
+        # In a clue/reveal/reaction beat, switch from a tiny full-body group
+        # sprite to a dramatic head-and-shoulders shot for the lead actor.
+        if name==focus and style in ("clue","reaction","reveal"):
+            sprite=sprite.crop((94,175,466,692))
         height=int(sprite.height*width/sprite.width)
         sprite=sprite.resize((width,height),Image.Resampling.BILINEAR)
         left=int(x-width/2)
