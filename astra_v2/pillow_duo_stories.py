@@ -378,7 +378,7 @@ PLOTS = [
   ],
     [
       "fox-owl-midnight-bell",
-      "The Bell That Rang at Midnight",
+      "The Fox and Owl's Midnight Bell",
       "mystery",
       [
         [
@@ -409,7 +409,7 @@ PLOTS = [
     ],
     [
       "rabbit-mouse-wandering-book",
-      "The Book That Kept Moving",
+      "The Rabbit and Mouse's Wandering Book",
       "library comedy",
       [
         [
@@ -440,7 +440,7 @@ PLOTS = [
     ],
     [
       "cat-otter-floating-key",
-      "The Key Beneath the Bridge",
+      "The Cat and Otter's River Key",
       "river adventure",
       [
         [
@@ -471,7 +471,7 @@ PLOTS = [
     ],
     [
       "dog-squirrel-festival-clock",
-      "The Festival Clock Surprise",
+      "The Dog and Squirrel's Festival Clock",
       "festival comedy",
       [
         [
@@ -502,7 +502,7 @@ PLOTS = [
     ],
     [
       "owl-otter-storm-lantern",
-      "The Lantern Across the River",
+      "The Owl and Otter's Storm Lantern",
       "storm rescue",
       [
         [
@@ -533,7 +533,7 @@ PLOTS = [
     ],
     [
       "fox-cat-rocket-parcel",
-      "The Rocket-Shaped Parcel",
+      "The Fox and Cat's Rocket Parcel",
       "workshop mystery",
       [
         [
@@ -564,7 +564,7 @@ PLOTS = [
     ],
     [
       "mouse-squirrel-missing-flower",
-      "The Flower That Vanished",
+      "The Mouse and Squirrel's Missing Flower",
       "garden mystery",
       [
         [
@@ -595,7 +595,7 @@ PLOTS = [
     ],
     [
       "rabbit-dog-lost-compass",
-      "The Compass That Pointed Home",
+      "The Rabbit and Dog's Lost Compass",
       "forest adventure",
       [
         [
