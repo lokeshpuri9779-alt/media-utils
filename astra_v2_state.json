@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 65,
-  "confirmed_today": 64,
-  "last_attempt_at": "2026-10-15T18:02:01.581466+00:00",
+  "attempts": 66,
+  "confirmed_today": 65,
+  "last_attempt_at": "2026-10-15T18:13:27.158585+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1363,14 +1363,22 @@
       "format": "short",
       "uploaded_at": "2026-10-15T17:44:24.768891+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-9be303361ec946e4": {
+      "video_id": "pxumj90Eadk",
+      "confirmed_at": "2026-10-15T18:12:48.097838+00:00",
+      "title": "The Museum's Thirteenth Footprint",
+      "format": "short",
+      "uploaded_at": "2026-10-15T18:02:03.651463+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "pxumj90Eadk": {
-      "content_id": "rayvan-forge-9be303361ec946e4",
-      "title": "The Museum's Thirteenth Footprint",
+    "SW02VaMo0c8": {
+      "content_id": "rayvan-forge-b07f4e4fbb0458b9",
+      "title": "The Robot Who Collected Echoes",
       "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T18:02:03.651463+00:00",
+      "uploaded_at": "2026-10-15T18:13:29.109554+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -1379,11 +1387,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T18:00:53.369573+00:00",
+  "last_preflight_at": "2026-10-15T18:12:47.567588+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T18:02:03.891194+00:00",
+    "at": "2026-10-15T18:13:29.342900+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2711,6 +2719,14 @@
     "rayvan-forge-9be303361ec946e4": {
       "at": "2026-10-15T18:02:01.581449+00:00",
       "title": "The Museum's Thirteenth Footprint",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-b07f4e4fbb0458b9": {
+      "at": "2026-10-15T18:13:27.158569+00:00",
+      "title": "The Robot Who Collected Echoes",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
