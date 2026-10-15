@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 53,
+  "attempts": 54,
   "confirmed_today": 53,
-  "last_attempt_at": "2026-10-15T14:29:42.789534+00:00",
+  "last_attempt_at": "2026-10-15T14:43:45.380499+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1277,28 +1277,40 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-15T14:30:45.829210+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "eUs9o9FtdqI": {
+      "content_id": "rayvan-forge-5b8fcb049c2f4d2e",
+      "title": "The Messenger's Broken Seal",
+      "day": "2026-10-15",
+      "uploaded_at": "2026-10-15T14:43:47.214983+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-15T14:43:05.425791+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T14:30:46.447887+00:00",
+    "at": "2026-10-15T14:43:47.424683+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-15T07:55:56.023002+00:00",
   "reserved": {
@@ -2515,6 +2527,14 @@
     "rayvan-forge-b84beafe883cd6b7": {
       "at": "2026-10-15T14:29:42.789517+00:00",
       "title": "The Star Shepherd",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-5b8fcb049c2f4d2e": {
+      "at": "2026-10-15T14:43:45.380484+00:00",
+      "title": "The Messenger's Broken Seal",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
