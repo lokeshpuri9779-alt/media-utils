@@ -28,6 +28,35 @@ class PillowDuoTests(unittest.TestCase):
         self.assertEqual(scene_pair(shot), ())
         self.assertFalse(duo_compatibility(shot)["supported"])
 
+    def test_declared_cast_keeps_left_right_order(self):
+        shot = {"speech": "The fox greets the rabbit.",
+                "story_cast": ["rabbit", "fox"]}
+        self.assertEqual(scene_pair(shot), ("rabbit", "fox"))
+
+    def test_declared_cast_rejects_duplicate_and_unknown(self):
+        for cast in (["fox", "fox"], ["fox", "dragon"], ["fox"], []):
+            if not cast:
+                continue  # An empty cast means the story has no declared cast.
+            with self.subTest(cast=cast):
+                self.assertFalse(duo_compatibility({
+                    "speech": "The fox and rabbit greet each other.",
+                    "story_cast": cast})["supported"])
+
+    def test_declared_cast_rejects_extra_narrated_actor(self):
+        shot = {"speech": "The fox, rabbit, and owl gather.",
+                "story_cast": ["fox", "rabbit"]}
+        self.assertFalse(duo_compatibility(shot)["supported"])
+
+    def test_supported_pair_renders_distinct_animated_frames(self):
+        shot = {"speech": "The fox and rabbit carry a box.",
+                "story_cast": ["fox", "rabbit"], "story_action": "carry"}
+        frames = []
+        for timestamp in (0.0, 0.35, 0.7):
+            frame = Image.new("RGB", (1080, 1920), (24, 35, 60))
+            self.assertTrue(draw_duo(frame, shot, timestamp))
+            frames.append(frame.tobytes())
+        self.assertEqual(len(set(frames)), 3)
+
     def test_no_wrong_species_icon(self):
         from astra_v2.icon_visuals import pick_icon
         self.assertIsNone(pick_icon({"speech": "The fox met the rabbit."}))
