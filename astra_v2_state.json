@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 27,
-  "confirmed_today": 26,
-  "last_attempt_at": "2026-10-15T04:39:46.075334+00:00",
+  "attempts": 28,
+  "confirmed_today": 27,
+  "last_attempt_at": "2026-10-15T04:48:21.155826+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1059,14 +1059,22 @@
       "format": "short",
       "uploaded_at": "2026-10-15T04:08:00.464686+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-f8a14bd702969a61": {
+      "video_id": "IcXlFI_QQVc",
+      "confirmed_at": "2026-10-15T04:46:44.700196+00:00",
+      "title": "The Panda and the Invisible Bridge",
+      "format": "short",
+      "uploaded_at": "2026-10-15T04:39:47.479031+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "IcXlFI_QQVc": {
-      "content_id": "rayvan-forge-f8a14bd702969a61",
-      "title": "The Panda and the Invisible Bridge",
+    "4vi88rC8s5Q": {
+      "content_id": "rayvan-forge-ba6e01bc496b1c48",
+      "title": "The Seal and the Snow Post Office",
       "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T04:39:47.479031+00:00",
+      "uploaded_at": "2026-10-15T04:48:22.755324+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -1075,11 +1083,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T04:37:59.073451+00:00",
+  "last_preflight_at": "2026-10-15T04:46:44.282782+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T04:39:47.852586+00:00",
+    "at": "2026-10-15T04:48:23.096327+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2103,6 +2111,14 @@
     "rayvan-forge-f8a14bd702969a61": {
       "at": "2026-10-15T04:39:46.075318+00:00",
       "title": "The Panda and the Invisible Bridge",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-ba6e01bc496b1c48": {
+      "at": "2026-10-15T04:48:21.155813+00:00",
+      "title": "The Seal and the Snow Post Office",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
