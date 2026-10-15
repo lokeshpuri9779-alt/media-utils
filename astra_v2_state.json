@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 21,
+  "attempts": 22,
   "confirmed_today": 21,
-  "last_attempt_at": "2026-10-15T02:21:04.351195+00:00",
+  "last_attempt_at": "2026-10-15T02:34:12.827786+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1021,29 +1021,40 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "j_N0_bj7RiM": {
+      "content_id": "rayvan-forge-aa018232ecab9edc",
+      "title": "The Owl and Fox's Storm Warning",
+      "day": "2026-10-15",
+      "uploaded_at": "2026-10-15T02:34:14.609660+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T02:24:55.868118+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_preflight_at": "2026-10-15T02:31:56.858045+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T02:24:55.923311+00:00",
+    "at": "2026-10-15T02:34:14.952010+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-14T19:48:51.586899+00:00",
   "reserved": {
@@ -2004,6 +2015,14 @@
     "rayvan-forge-9f8170c6b0a62fa4": {
       "at": "2026-10-15T02:21:04.351177+00:00",
       "title": "The Otter and Rabbit's River Message",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-aa018232ecab9edc": {
+      "at": "2026-10-15T02:34:12.827767+00:00",
+      "title": "The Owl and Fox's Storm Warning",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
