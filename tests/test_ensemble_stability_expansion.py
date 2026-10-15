@@ -19,8 +19,8 @@ class EnsembleStabilityExpansionTests(unittest.TestCase):
 
     def test_new_six_environment_story_uses_every_expansion_pack(self):
         stories=catalog()
-        self.assertEqual(len(stories),7)
-        last=stories[-1]
+        self.assertEqual(len(stories),9)
+        last=next(s for s in stories if s['title']=='The Night the Lantern Went Missing')
         self.assertEqual(len(last["story_beats"]),6)
         self.assertEqual(
             [x["story_environment"] for x in last["story_beats"]],
