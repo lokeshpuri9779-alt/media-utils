@@ -64,7 +64,12 @@ def _positions(cast,style,t,roles=None,focus=None):
         others=[j for j in range(n) if j not in protagonists]
         rear_x=[int(165+735*(j+.5)/max(1,len(others))) for j in range(len(others))]
         out=[(idx,rear_x[k],600,138) for k,idx in enumerate(others)]
-        out.extend((j,centers[j],692+(k%2)*32,445 if j==focused else 285)
+        # A slow optical push toward the active hero changes framing without
+        # toggling scene assets or abruptly switching character visibility.
+        push=min(1.0,max(0.0,float(t))/1.5)
+        push=push*push*(3-2*push)
+        out.extend((j,centers[j],692+(k%2)*32,
+                    445+int(9*push) if j==focused else 285)
                    for k,j in enumerate(protagonists))
         return out
     if style=="confrontation":
@@ -85,8 +90,18 @@ def _positions(cast,style,t,roles=None,focus=None):
         others=[j for j in range(n) if j not in protagonists]
         out=[(j,int(130+800*(k+.5)/max(1,len(others))),590,145)
              for k,j in enumerate(others)]
-        out.extend((j,int(x+23*math.sin(t*2.1+j)),745,290)
-                   for j,x in zip(protagonists,xs))
+        # Stage real translational motion rather than cloning stationary poses.
+        def action_spot(j,x):
+            act=roles.get(cast[j],"look")
+            travel=min(1.0,max(0.0,float(t))/1.35)
+            eased=travel*travel*(3-2*travel)
+            dx=(80*eased if act=="run" else
+                42*eased if act=="push" else
+                -42*eased if act=="pull" else
+                8*math.sin(t*1.2+j))
+            dy=(-48*abs(math.sin(t*3.5)) if act=="jump" else 0)
+            return (j,int(x+dx),int(745+dy),290)
+        out.extend(action_spot(j,x) for j,x in zip(protagonists,xs))
         return out
     if style=="resolution":
         return [(j,x,y-35+int(5*math.sin(t*3+j)),w)
