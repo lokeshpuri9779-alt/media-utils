@@ -49,7 +49,11 @@ def _cached_scene_setting(text,direct):
     return direct if direct in {key for key,_ in SCENE_CUES} else "forest"
 
 def _text_seed(shot):
-    source = " ".join(str(shot.get(k) or "") for k in ("speech", "headline"))
+    # Preserve scenery positions, sky decorations and landmarks across beats.
+    # Narration and headlines change every beat; they must NOT reseed scenery.
+    source = str(shot.get("story_visual_seed") or "").strip()
+    if not source:
+        source = " ".join(str(shot.get(k) or "") for k in ("speech", "headline"))
     return _cached_stage_seed(source)
 
 @lru_cache(maxsize=2048)
