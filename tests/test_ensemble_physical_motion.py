@@ -97,8 +97,12 @@ class EnsemblePhysicalMotionTests(unittest.TestCase):
                 self.assertLess(y+820*w/560.0,1372)
         a=grounded_positions(cast,"action",.15,roles,"rabbit")
         b=grounded_positions(cast,"action",.56,roles,"rabbit")
-        self.assertNotEqual(a[0][2],b[0][2])  # jump still changes altitude
-        self.assertNotEqual(a[1][1],b[1][1])  # run still travels horizontally
+        jump_a=next(y for i,x,y,w in a if i==0)
+        jump_b=next(y for i,x,y,w in b if i==0)
+        run_a=next(x for i,x,y,w in a if i==1)
+        run_b=next(x for i,x,y,w in b if i==1)
+        self.assertNotEqual(jump_a,jump_b)  # jump still changes altitude
+        self.assertNotEqual(run_a,run_b)  # run still travels horizontally
 
     def test_second_camera_take_keeps_world_blocking_constant(self):
         from astra_v2.ensemble_scene import directed_subshot
