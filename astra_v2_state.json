@@ -3,7 +3,7 @@
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 36,
-  "confirmed_today": 35,
+  "confirmed_today": 36,
   "last_attempt_at": "2026-10-15T07:47:44.451570+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -1131,27 +1131,24 @@
       "format": "short",
       "uploaded_at": "2026-10-15T07:15:39.828697+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "nxyB1piGPzU": {
-      "content_id": "rayvan-forge-5b6ecf9ed6266389",
+    },
+    "rayvan-forge-5b6ecf9ed6266389": {
+      "video_id": "nxyB1piGPzU",
+      "confirmed_at": "2026-10-15T07:55:31.039708+00:00",
       "title": "The Inventor and the Pocket Storm",
-      "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T07:47:46.255866+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
+      "uploaded_at": "2026-10-15T07:47:46.255866+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T07:45:45.186010+00:00",
+  "last_preflight_at": "2026-10-15T07:55:30.177694+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T07:47:46.643352+00:00",
+    "at": "2026-10-15T07:56:07.559184+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -1168,7 +1165,7 @@
     "oauth_tests": "success",
     "layer_tests": "success"
   },
-  "last_feedback_attempt_at": "2026-10-14T19:48:51.586899+00:00",
+  "last_feedback_attempt_at": "2026-10-15T07:55:56.023002+00:00",
   "reserved": {
     "rayvan-original-spacesong-v1": {
       "at": "2026-10-12T19:00:53.784470+00:00",
