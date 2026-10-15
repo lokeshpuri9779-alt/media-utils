@@ -347,8 +347,6 @@ def draw_duo(image, shot, t):
     action=str(shot.get("story_action") or "idle").lower()
     mood=scene_mood(shot)
     prop=scene_prop(shot)
-    pickup=action in {"pick","pickup","pick_up","carry","repair","hold"}
-    progress=_ease((max(0,t)-.15)/.9) if pickup else 0.0
     from astra_v2.pillow_scene_direction import prop_trajectory, actor_translation
     prop_pos=(prop_trajectory(shot,t)
               if shot.get("story_beat") and action not in ("push","pull","open")
@@ -361,9 +359,15 @@ def draw_duo(image, shot, t):
         if idx==1 and action=="carry":
             x-=105
         y=846
-        contact=bool(prop and (pickup or action in ("push","pull")) and
-                     (progress>.25 or shot.get("story_beat")=="payoff"))
-        hand_target=(prop_pos if contact else None)
+        # A story prop may be picked up, repaired, opened, pushed or pulled.
+        # The previous threshold abruptly snapped the wrist into place, and
+        # accidentally excluded push/pull entirely because pickup was False.
+        # Blend contact from the first reach through a smooth extension.
+        interact_actions={"pick","pickup","pick_up","carry","repair",
+                          "hold","open","push","pull"}
+        hand_strength=(_ease((max(0.0,float(t))-.06)/.86)
+                       if prop and action in interact_actions else 0.0)
+        hand_target=prop_pos if hand_strength>0 else None
         actor_mood=mood
         if mood=="angry" and idx==0:
             actor_mood="curious"  # Reaction shot, not two identical emotions.
@@ -371,7 +375,8 @@ def draw_duo(image, shot, t):
             hand_target=None
         recipe=character_recipe(visual_identity(stable_key,name,idx))
         _actor(d,name,x,y,t,action,actor_mood,idx,
-               hand_target=hand_target,interact_side=1 if idx==0 else -1,
+               hand_target=hand_target,hand_strength=hand_strength,
+               interact_side=1 if idx==0 else -1,
                visual_recipe=recipe)
     if prop:
         motif={"box":"star","ball":"star","flower":"flower",

@@ -9,6 +9,7 @@ on:
       - 'studio_renderer.py'
       - 'tests/test_pillow_duo_scene.py'
       - 'tests/test_pillow_duo_continuity.py'
+      - 'tests/test_pillow_contact_timing.py'
       - 'tests/test_pillow_duo_studio.py'
       - 'tests/test_astra_icon_visuals.py'
       - 'tools/pillow_studio_preview.py'
@@ -32,6 +33,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_pillow_duo_scene.py' -v
           python -m unittest discover -s tests -p 'test_pillow_scene_direction.py' -v
           python -m unittest discover -s tests -p 'test_pillow_duo_continuity.py' -v
+          python -m unittest discover -s tests -p 'test_pillow_contact_timing.py' -v
           python -m unittest discover -s tests -p 'test_pillow_duo_studio.py' -v
       - name: Render two-character motion artifact
         run: |
