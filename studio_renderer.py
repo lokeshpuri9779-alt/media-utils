@@ -48,6 +48,7 @@ THEMES = {
 
 
 @lru_cache(maxsize=128)
+@lru_cache(maxsize=80)
 def font(size, regular=False):
     name = 'DejaVuSans.ttf' if regular else 'DejaVuSans-Bold.ttf'
     for root in ('/usr/share/fonts/truetype/dejavu', '/usr/share/fonts/dejavu'):
@@ -520,9 +521,14 @@ def planet_texture(earth=False, hot=False):
     return Image.fromarray(np.dstack([col,alpha]))
 
 
-def starfield(d,t,accent):
+@lru_cache(maxsize=1)
+def _starfield_points():
+    """The original fixed star layout, generated only once per process."""
     rng=np.random.default_rng(17)
-    for x,y,r,phase in zip(rng.integers(45,1035,65),rng.integers(475,1330,65),rng.integers(1,4,65),rng.random(65)):
+    return tuple(zip(rng.integers(45,1035,65),rng.integers(475,1330,65),rng.integers(1,4,65),rng.random(65)))
+
+def starfield(d,t,accent):
+    for x,y,r,phase in _starfield_points():
         v=int(70+90*(.5+.5*math.sin(t*.7+phase*6)))
         yy=int(y+math.sin(t*.23+phase)*9)
         d.ellipse((int(x-r),yy-int(r),int(x+r),yy+int(r)),fill=(v,v,min(255,v+25)))
