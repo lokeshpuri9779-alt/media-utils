@@ -42,10 +42,26 @@ def long_amber_guide_arc(image):
     span=np.flatnonzero(slender)
     if span[-1]-span[0]<100:
         return False
-    ys=np.argmax(mask,axis=0)[slender]*3
-    # Shallow gradients across most of the shot distinguish a sweeping guide
-    # arc from a regular roof line or thin horizontal room detail.
-    return bool(np.percentile(ys,90)-np.percentile(ys,10)>42)
+    xs=np.flatnonzero(slender).astype(np.float64)*5 + 100.0
+    ys=np.argmax(mask,axis=0)[slender].astype(np.float64)*3 + 560.0
+    if np.percentile(ys,90)-np.percentile(ys,10)<=42:
+        return False
+    # Architectural trim, warm foliage and shelves may also occupy many
+    # thin golden columns, but those marks do not form ONE smooth arch.
+    # A real guide arc follows a continuous, convex quadratic trajectory
+    # with a substantial rise at its center and a small fit residual.
+    try:
+        coeff=np.polyfit(xs,ys,2)
+    except (np.linalg.LinAlgError,ValueError):
+        return False
+    fit=np.polyval(coeff,xs)
+    error=np.abs(ys-fit)
+    lo,hi=float(xs.min()),float(xs.max())
+    mid=(lo+hi)/2
+    sag=(float(np.polyval(coeff,lo))+
+         float(np.polyval(coeff,hi)))/2-float(np.polyval(coeff,mid))
+    return bool(coeff[0]>0 and sag>48 and
+                np.median(error)<18 and np.percentile(error,85)<36)
 
 
 def sudden_edge_panel(a,b):
