@@ -1,0 +1,41 @@
+name: ASTRA Ensemble Story Experiments QA
+on:
+  pull_request:
+    paths:
+      - 'astra_v2/ensemble_scene.py'
+      - 'astra_v2/ensemble_stage.py'
+      - 'astra_v2/ensemble_story_experiments.py'
+      - 'studio_renderer.py'
+      - 'tests/test_ensemble_experiments.py'
+      - 'tests/test_ensemble_direction.py'
+      - 'tools/astra_ensemble_preview.py'
+      - '.github/workflows/astra-ensemble-experiments-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ensemble:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    env:
+      ASTRA_EXPERIMENT_ENSEMBLE: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: python -m pip install --disable-pip-version-check 'Pillow>=10,<12' 'imageio-ffmpeg>=0.5,<1' 'numpy>=1.24' 'httpx>=0.25'
+      - name: Full ensemble story QA with strict isolation
+        run: |
+          python -m unittest discover -s tests -p 'test_ensemble_experiments.py' -v
+          python -m unittest discover -s tests -p 'test_ensemble_direction.py' -v
+      - name: Six-pilot 3–8 cast Studio storyboard comparison
+        run: python -m tools.astra_ensemble_preview
+      - uses: actions/upload-artifact@v4
+        with:
+          name: astra-ensemble-six-pilots
+          path: |
+            preview/astra-ensemble-six-pilots.mp4
+            preview/astra-ensemble-six-pilots.json
+          retention-days: 7
