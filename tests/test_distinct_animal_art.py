@@ -44,6 +44,32 @@ class ExactAnimalArtTests(unittest.TestCase):
                 self.assertTrue(draw_subject(b,name,.8,(133,174,212),"run"))
                 self.assertIsNotNone(ImageChops.difference(a,b).getbbox())
 
+    def test_studio_picks_real_animal_over_generic_robot_or_tree_cue(self):
+        from unittest.mock import patch
+        import numpy as np
+        import studio_renderer
+        from astra_v2.layer_contract import scene_layers
+        for name,visual in (("penguin","robot"),("heron","forest"),
+                            ("beaver","ship"),("mole","door")):
+            with self.subTest(name=name):
+                subject=select_subject({"title":f"The {name} and the moon"},
+                                       {"speech":f"A {name} searched for its friend.",
+                                        "visual":visual})
+                self.assertEqual(subject,name)
+                shot={"visual":visual,"story_subject":subject,
+                    "story_action":"walk","speech":f"The {name} walked home.",
+                    "headline":f"The {name} returned",
+                    "start":0.0,"end":2.4,"duration":2.4,
+                    "voice_start":.1,"audio":np.zeros(24000,dtype=np.float32),
+                    "creative_format":"microfiction_cinematic",
+                    "format_brand":"minimal","director_camera":"still"}
+                self.assertEqual(scene_layers(shot)["foreground"],"illustration")
+                with patch.object(studio_renderer,"draw_subject",
+                                  wraps=studio_renderer.draw_subject) as spy:
+                    frame=studio_renderer.render_frame([shot],.7,"fiction",2.4)
+                self.assertEqual(frame.size,(1080,1920))
+                self.assertTrue(any(call.args[1]==name for call in spy.call_args_list))
+
     def test_unknown_species_stays_unrendered(self):
         im=Image.new("RGB",(1080,1920),(17,22,38))
         self.assertFalse(draw_subject(im,"imaginary-new-animal",1,(140,170,200)))
