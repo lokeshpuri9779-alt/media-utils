@@ -11,7 +11,7 @@ class QueueDiscoveryTests(unittest.TestCase):
     def test_pagination_and_null_metadata(self, api):
         first = [{"name": f"unrelated-{i}", "expired": False} for i in range(99)]
         first.append({"name": "astra-preloaded-bad", "expired": False, "workflow_run": None})
-        second = [{"name": "astra-preloaded-good", "expired": False,
+        second = [{"id": 201, "name": "astra-preloaded-good", "expired": False,
                    "workflow_run": {"head_branch": "main"}}]
         api.side_effect = [{"artifacts": first}, {"artifacts": second}]
         self.assertEqual([a["name"] for a in preload_queue.artifacts()],
@@ -26,7 +26,7 @@ class QueueDiscoveryTests(unittest.TestCase):
              "workflow_run": "not-a-dictionary"},
             {"name": "astra-preloaded-list", "expired": False,
              "workflow_run": []},
-            {"name": "astra-preloaded-good", "expired": False,
+            {"id": 202, "name": "astra-preloaded-good", "expired": False,
              "workflow_run": {"head_branch": "main"}},
         ]}
         self.assertEqual(preload_queue.candidate_ids(), {"good"})
@@ -56,7 +56,7 @@ class QueueDiscoveryTests(unittest.TestCase):
     @patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/repo"})
     @patch.object(preload_queue, "_api")
     def test_single_page(self, api):
-        api.return_value = {"artifacts": [{"name": "astra-preloaded-yes",
+        api.return_value = {"artifacts": [{"id": 203, "name": "astra-preloaded-yes",
                            "expired": False, "workflow_run": {"head_branch": "main"}}]}
         self.assertEqual(preload_queue.candidate_ids(), {"yes"})
         api.assert_called_once()
