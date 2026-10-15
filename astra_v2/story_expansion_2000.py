@@ -1,0 +1,133 @@
+"""2,000 deterministic four-beat *editorial story candidates* for ASTRA.
+
+20 written causal premises x 10 animal duos x 10 settings = 2,000.
+NOT 2,000 independently authored plots. Not production-approved or publishable.
+The exact plot mechanism remains visible for reviewers to reject repetitions.
+"""
+from __future__ import annotations
+
+ANIMAL_PAIRS = (
+    ("fox","rabbit"), ("cat","dog"), ("owl","mouse"), ("otter","squirrel"),
+    ("fox","cat"), ("dog","rabbit"), ("squirrel","mouse"), ("owl","fox"),
+    ("otter","rabbit"), ("cat","mouse"),
+)
+SETTINGS = (
+    "woodland trail", "village square", "hillside market", "river bank",
+    "seaside harbor", "snowy meadow", "library courtyard", "lighthouse road",
+    "garden path", "mountain pass",
+)
+# Each arc specifies its own mistake, causal clue and grounded resolution.
+# Verbs deliberately do not depend on the geographical setting.
+MECHANISMS = (
+ ("lantern-rain","Rain-Damaged Lantern","their lantern had gone dark just before the evening procession",
+  "they replaced the wick, but water kept dripping onto the flame",
+  "a narrow crack around the glass cover was letting in the rain",
+  "sealed the crack with resin and carried the relit lantern to the procession"),
+ ("missing-book","Missing Storybook","the children's storybook had vanished from its wooden box",
+  "they searched the reading tent, but only an empty ribbon was left behind",
+  "a scrap of matching ribbon was caught beneath a loose bench",
+  "lifted the bench together and returned the book before story time"),
+ ("runaway-ball","Runaway Festival Ball","the festival's painted ball rolled downhill toward a flooded ditch",
+  "they chased it directly, but the slippery bank forced them to stop",
+  "a fallen branch could guide the ball into a shallow puddle instead",
+  "positioned the branch safely and recovered the ball without entering the ditch"),
+ ("flower-frost","Frostbitten Flower","the last festival flower was wilting in the unexpected cold",
+  "they moved it into sunlight, but the soil remained frozen overnight",
+  "warm water hidden in a covered jug could loosen the icy earth gently",
+  "warmed the roots slowly and replanted the flower in a sheltered bed"),
+ ("sealed-parcel","Misdelivered Gift Box","a gift box arrived without its recipient's name on the label",
+  "they carried it door to door, but no neighbor recognized the wrapping",
+  "a tiny crest on the ribbon matched the old community theater's emblem",
+  "delivered the sealed gift box to the theater's waiting costume maker"),
+ ("lantern-mirror","Mirror Lantern","their lantern was too faint to signal the hikers across the valley",
+  "they lifted it higher, but the light vanished into the thick fog",
+  "an old metal mirror could redirect the beam toward a clear gap",
+  "set the mirror at an angle and guided the hikers along the marked trail"),
+ ("folded-letter","Folded Letter","a folded letter was found inside a book with half its address missing",
+  "they guessed the destination, but the first delivery reached the wrong house",
+  "the paper's watermark named the town's original post office",
+  "asked the postmaster to trace the missing address and returned the letter"),
+ ("ball-bell","Bell-Shaped Ball","a hollow ball stopped making its cheerful ringing sound",
+  "they shook it harder, but the rattle inside stayed completely still",
+  "a loose seam revealed a small metal bead trapped in the lining",
+  "opened the seam carefully and restored the ringing bead before the games"),
+ ("drought-flower","Thirsty Flower","a rare flower began drooping as its watering can ran dry",
+  "they carried a bucket uphill, but most water spilled over the rocky path",
+  "a string could wick water slowly from the bucket into the dry soil",
+  "set up the simple wick and watched the flower recover by morning"),
+ ("broken-lid","Broken Box Lid","the community donation box could not close before a sudden storm",
+  "they tied it with string, but the warped lid lifted in the wind",
+  "one hinge had loosened and could be tightened with a spare pin",
+  "repaired the hinge and carried the dry donations to the community hall"),
+ ("snowy-lantern","Snow-Covered Lantern","the safety lantern disappeared beneath a fresh blanket of snow",
+  "they swept the path, but the next gust hid every familiar landmark",
+  "a warm patch beneath a nearby stone showed where its flame had melted snow",
+  "dug out the lantern safely and marked the route with bright ribbons"),
+ ("hidden-chapter","Hidden Book Chapter","the old library book ended before its final chapter",
+  "they checked the shelves, but the missing pages had no matching cover",
+  "a penciled page number on a bookmark pointed to the repair desk",
+  "found the loose chapter and bound it into the book before the reading"),
+ ("ball-river","Floating Ball","a painted ball floated away just as the river began rising",
+  "they reached with a long stick, but the fast current pushed it farther",
+  "the shallower bend downstream was blocked by reeds that could hold it",
+  "waited at the bend and pulled the ball ashore with a safe rope"),
+ ("flower-shade","Sunburned Flower","the newly planted flower curled its petals under the harsh sun",
+  "they poured extra water, but its leaves continued drying in the heat",
+  "a woven basket could shade the plant without stopping the breeze",
+  "raised the basket on stakes and helped the flower bloom again"),
+ ("box-rattle","Rattling Parcel","a fragile gift box began rattling on the way to the celebration",
+  "they hurried onward, but the rattling grew worse on every uneven stone",
+  "the wrapping had shifted and left a delicate ornament unprotected",
+  "repacked the box with soft cloth and completed the delivery carefully"),
+ ("lantern-shadow","Shadow Lantern","a strange shadow from the lantern frightened the younger animals",
+  "they moved the lantern away, but the shadow grew larger across the wall",
+  "a paper cutout behind the glass was making the enormous silhouette",
+  "removed the cutout and taught everyone how shadows change with distance"),
+ ("waterlogged-book","Waterlogged Book","rain soaked the history book that held the village's oldest recipe",
+  "they placed it near a hot stove, but the damp pages began to curl",
+  "dry blotting paper could draw out moisture without scorching the ink",
+  "dried the pages gently and saved the handwritten recipe for the cooks"),
+ ("ball-in-tree","Ball in the Tree","the children's ball became wedged in a tall tree before the match",
+  "they jumped beneath it, but their hands could not reach the branches",
+  "a padded loop on a long pole could catch the ball without breaking twigs",
+  "lifted the ball free carefully and restarted the game on safer ground"),
+ ("flower-night","Night-Blooming Flower","the celebrated flower remained closed when the evening festival began",
+  "they carried it into a bright tent, but the petals closed even tighter",
+  "an old gardener's notebook explained that it opened in cool darkness",
+  "moved the flower outside and watched it open beneath the first stars"),
+ ("missing-box-key","Locked Keepsake Box","a small keepsake box stayed locked when its owner needed an old photograph",
+  "they tried a spare key, but it did not fit the delicate latch",
+  "a stamped mark beneath the box named the original village craftsman",
+  "asked the craftsman to unlock it without damage and returned the photograph"),
+)
+
+def candidate_records():
+    """Return review-source tuples compatible with story_forge's serializer."""
+    records=[]
+    for mechanism in MECHANISMS:
+        key,title,problem,setback,clue,resolution=mechanism
+        for a,b in ANIMAL_PAIRS:
+            for setting in SETTINGS:
+                place="the "+setting
+                name_a=a.capitalize(); name_b=b.capitalize()
+                beats=[
+                    ("A SUDDEN PROBLEM",
+                     f"At {place}, the {a} and {b} discovered {problem} just before their neighbors arrived for the day's gathering.",
+                     "story", "THE DISCOVERY"),
+                    ("THE FIRST PLAN FAILED",
+                     f"The {a} tried a quick solution, but {setback}, so the {b} searched for a safer way forward.",
+                     "story", "A NEW OBSTACLE"),
+                    ("A CLUE CHANGED EVERYTHING",
+                     f"The {b} noticed that {clue}, and the {a} immediately understood why their first attempt had failed.",
+                     "story", "THE CLUE"),
+                    ("THEY SOLVED IT TOGETHER",
+                     f"Working together at {place}, the {a} and {b} {resolution}, and their neighbors could finally celebrate.",
+                     "story", "THE RESOLUTION"),
+                ]
+                uid=f"exp2000-{key}-{a}-{b}-{setting.replace(' ','-')}"
+                story_title=f"The {name_a} and {name_b}: {title} at the {setting.title()}"
+                records.append((uid,story_title,"unreviewed animal story candidates",beats))
+    return records
+
+def candidate_count():
+    return len(MECHANISMS)*len(ANIMAL_PAIRS)*len(SETTINGS)

@@ -28,7 +28,7 @@ from character_animation import character_storyboard
 from astra_v2.story_visuals import select_subject, draw_subject
 from astra_v2.story_action_motion import choose_action
 
-VERSION = "studio-7.2.1"
+VERSION = "studio-7.3.0"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 NEWS_MICRO_SCENE_SECONDS = 0.67
 NEWS_MICRO_TRANSITION_SECONDS = 0.10
@@ -393,9 +393,13 @@ def make_plan(ch):
         # Keep the explicitly named cast across narration beats, rather than
         # requiring both protagonists to be repeated in every spoken line.
         named_cast = scene_pair({'speech': str(ch.get('title') or '')})
+        visual_seed = str(ch.get('content_id') or ch.get('title') or '')
         for shot in formatted:
             shot['story_subject'] = select_subject(ch, shot)
             shot['story_action'] = choose_action(shot)
+            # Wardrobe, colors and accessories are selected once per story.
+            # A fresh narration beat must not silently change a character.
+            shot['story_visual_seed'] = visual_seed
             if named_cast and shot['story_subject'] in (None, *named_cast):
                 shot['story_cast'] = named_cast
     return formatted

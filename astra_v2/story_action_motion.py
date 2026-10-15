@@ -12,6 +12,12 @@ ACTION_PATTERNS=(
     ("throw",r"\b(?:throw|throws|threw|thrown|throwing|toss|tosses|tossed|tossing)\b"),
     ("pick",r"\b(?:pick up|picks up|picked up|picking up|grab|grabs|grabbed|grabbing)\b"),
     ("wave",r"\b(?:wave|waves|waved|waving|greet|greets|greeted|greeting)\b"),
+    ("open",r"\b(?:open|opens|opened|opening|unseal|unsealed)\b"),
+    ("push",r"\b(?:push|pushes|pushed|pushing|shove|shoves|shoved)\b"),
+    ("pull",r"\b(?:pull|pulls|pulled|pulling|drag|drags|dragged)\b"),
+    ("point",r"\b(?:point|points|pointed|pointing|signal|signals|signaled)\b"),
+    ("hug",r"\b(?:hug|hugs|hugged|hugging|embrace|embraced)\b"),
+    ("clap",r"\b(?:clap|claps|clapped|clapping|applaud|applauded)\b"),
     ("run",r"\b(?:run|runs|ran|running|sprint|sprints|sprinted|chase|chased|chasing)\b"),
     ("jump",r"\b(?:jump|jumps|jumped|jumping|leap|leaps|leapt|leaped|hops|hopped|hop)\b"),
     ("dance",r"\b(?:dance|dances|danced|dancing|celebrat\w*)\b"),
@@ -30,6 +36,18 @@ def offset(action,t,scale=1.0):
     if not math.isfinite(t) or not math.isfinite(scale) or scale<0:
         raise ValueError("invalid motion parameters")
     phase=t*2*math.pi
+    if action=="open":
+        return 0,round(4*math.sin(t*2)*scale)
+    if action=="push":
+        return round(36*min(1,max(0,t)/1.2)*scale),0
+    if action=="pull":
+        return round(-36*min(1,max(0,t)/1.2)*scale),0
+    if action=="point":
+        return round(7*math.sin(t*1.5)*scale),round(-8*scale)
+    if action=="hug":
+        return 0,round(-9*scale)
+    if action=="clap":
+        return 0,round(9*math.sin(t*7)*scale)
     if action=="repair":
         return round(9*math.sin(phase*2.1)*scale),round(15*math.sin(phase*2.1)*scale)
     if action=="carry":
