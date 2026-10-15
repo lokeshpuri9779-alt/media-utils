@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 41,
-  "confirmed_today": 40,
-  "last_attempt_at": "2026-10-15T11:15:00.777422+00:00",
+  "attempts": 42,
+  "confirmed_today": 41,
+  "last_attempt_at": "2026-10-15T11:23:48.633772+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1171,14 +1171,22 @@
       "format": "short",
       "uploaded_at": "2026-10-15T10:55:42.912293+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-4d876b2037498625": {
+      "video_id": "7ZHyooAJaRo",
+      "confirmed_at": "2026-10-15T11:23:03.802131+00:00",
+      "title": "The Squirrel and Fox's Midnight Kite",
+      "format": "short",
+      "uploaded_at": "2026-10-15T11:15:03.259008+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "7ZHyooAJaRo": {
-      "content_id": "rayvan-forge-4d876b2037498625",
-      "title": "The Squirrel and Fox's Midnight Kite",
+    "PCkBJYr9C14": {
+      "content_id": "rayvan-forge-2cbd4deb68f7fb25",
+      "title": "The Owl and Dog's Missing Noon",
       "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T11:15:03.259008+00:00",
+      "uploaded_at": "2026-10-15T11:23:50.284042+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -1187,11 +1195,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T11:14:07.024456+00:00",
+  "last_preflight_at": "2026-10-15T11:23:03.417747+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T11:15:03.493802+00:00",
+    "at": "2026-10-15T11:23:50.558620+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2327,6 +2335,14 @@
     "rayvan-forge-4d876b2037498625": {
       "at": "2026-10-15T11:15:00.777400+00:00",
       "title": "The Squirrel and Fox's Midnight Kite",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-2cbd4deb68f7fb25": {
+      "at": "2026-10-15T11:23:48.633758+00:00",
+      "title": "The Owl and Dog's Missing Noon",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
