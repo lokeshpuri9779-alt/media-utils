@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 58,
-  "confirmed_today": 57,
-  "last_attempt_at": "2026-10-15T15:59:19.473568+00:00",
+  "attempts": 59,
+  "confirmed_today": 58,
+  "last_attempt_at": "2026-10-15T16:17:27.324029+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1307,14 +1307,22 @@
       "format": "short",
       "uploaded_at": "2026-10-15T15:47:08.595148+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-5e079c649361e5c7": {
+      "video_id": "NzVWky_srI8",
+      "confirmed_at": "2026-10-15T16:16:04.190434+00:00",
+      "title": "The Octopus's Glass Maze",
+      "format": "short",
+      "uploaded_at": "2026-10-15T15:59:21.127916+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "NzVWky_srI8": {
-      "content_id": "rayvan-forge-5e079c649361e5c7",
-      "title": "The Octopus's Glass Maze",
+    "cGwWrecqaXM": {
+      "content_id": "rayvan-forge-49baa01877db88fc",
+      "title": "The Goalkeeper's Torn Glove",
       "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T15:59:21.127916+00:00",
+      "uploaded_at": "2026-10-15T16:17:29.231361+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -1323,11 +1331,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T15:58:34.451768+00:00",
+  "last_preflight_at": "2026-10-15T16:16:03.719817+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T15:59:21.376944+00:00",
+    "at": "2026-10-15T16:17:29.464340+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2599,6 +2607,14 @@
     "rayvan-forge-5e079c649361e5c7": {
       "at": "2026-10-15T15:59:19.473554+00:00",
       "title": "The Octopus's Glass Maze",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-49baa01877db88fc": {
+      "at": "2026-10-15T16:17:27.324015+00:00",
+      "title": "The Goalkeeper's Torn Glove",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
