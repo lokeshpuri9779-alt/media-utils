@@ -13,8 +13,12 @@ SUBJECTS = (
     ("owl", r"\bowl\b|\bowls\b"),
     ("duck", r"\bduck\b|\bgoose\b|\bgeese\b"),
     ("squirrel", r"\bsquirrel\b|\bchipmunk\b"),
-    ("mouse", r"\bmouse\b|\bmice\b|\bmole\b"),
-    ("otter", r"\botter\b|\bbeaver\b"),
+    ("mouse", r"\bmouse\b|\bmice\b"),
+    ("mole", r"\bmoles?\b"),
+    ("otter", r"\botter\b"),
+    ("beaver", r"\bbeavers?\b"),
+    ("penguin", r"\bpenguins?\b"),
+    ("heron", r"\bherons?\b"),
     ("crab", r"\bcrab\b"),
     ("firefly", r"\bfirefl\w*\b"),
     ("cat", r"\bcat\b|\bfeline\b|\bkitten\b"),
@@ -43,6 +47,7 @@ def select_subject(story, shot):
                      if (m := re.search(pattern, title))]
     title_subject = min(title_matches, key=lambda item: item[0])[1] if title_matches else None
     characters = {"fox", "owl", "duck", "squirrel", "mouse", "otter",
+                  "beaver", "mole", "penguin", "heron",
                   "crab", "firefly", "cat", "dog", "monkey", "bird",
                   "rabbit", "whale"}
     local_matches = [(m.start(), name) for name, pattern in SUBJECTS
@@ -76,6 +81,9 @@ def select_subject(story, shot):
 
 def draw_subject(image, subject, t, accent, action='idle'):
     """Return True when a bespoke subject was drawn; False for unknown subjects."""
+    from astra_v2.distinct_animal_art import SPECIES, draw_distinct_animal
+    if subject in SPECIES:
+        return draw_distinct_animal(image,subject,t,accent,action)
     if subject not in {x[0] for x in SUBJECTS}:
         return False
     motion_x, motion_y = action_offset(action, t)
