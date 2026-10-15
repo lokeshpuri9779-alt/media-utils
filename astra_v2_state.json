@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 15,
+  "attempts": 16,
   "confirmed_today": 15,
-  "last_attempt_at": "2026-10-15T00:45:21.664179+00:00",
+  "last_attempt_at": "2026-10-15T00:52:44.036236+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -973,28 +973,40 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-15T00:45:53.148737+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "bpYFBiiHXRI": {
+      "content_id": "rayvan-forge-de955c1d524d3a23",
+      "title": "The Rabbit and Squirrel's Festival Ball",
+      "day": "2026-10-15",
+      "uploaded_at": "2026-10-15T00:52:45.613243+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-15T00:51:44.409754+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T00:45:53.674103+00:00",
+    "at": "2026-10-15T00:52:45.865487+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-14T19:48:51.586899+00:00",
   "reserved": {
@@ -1907,6 +1919,14 @@
     "rayvan-forge-05aa95d2029bc10f": {
       "at": "2026-10-15T00:45:21.664167+00:00",
       "title": "The Otter and Squirrel's Floating Gift",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-de955c1d524d3a23": {
+      "at": "2026-10-15T00:52:44.036218+00:00",
+      "title": "The Rabbit and Squirrel's Festival Ball",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
