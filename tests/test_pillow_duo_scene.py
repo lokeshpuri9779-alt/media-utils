@@ -1,8 +1,16 @@
 import unittest
 from PIL import Image
-from astra_v2.pillow_duo_scene import scene_pair, draw_duo
+from astra_v2.pillow_duo_scene import scene_pair, draw_duo, duo_compatibility
 
 class PillowDuoTests(unittest.TestCase):
+    def test_pre_render_compatibility(self):
+        supported = duo_compatibility({"speech": "The fox and rabbit find a bell."})
+        self.assertTrue(supported["supported"])
+        self.assertEqual(supported["cast"], ("fox", "rabbit"))
+        unsupported = duo_compatibility({"speech": "A lone fox finds a bell."})
+        self.assertFalse(unsupported["supported"])
+        self.assertEqual(unsupported["reason"], "requires_two_supported_animals")
+
     def test_no_wrong_species_icon(self):
         from astra_v2.icon_visuals import pick_icon
         self.assertIsNone(pick_icon({"speech": "The fox met the rabbit."}))
