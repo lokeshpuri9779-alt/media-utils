@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 31,
-  "confirmed_today": 30,
-  "last_attempt_at": "2026-10-15T05:53:53.459000+00:00",
+  "attempts": 32,
+  "confirmed_today": 31,
+  "last_attempt_at": "2026-10-15T06:14:51.201012+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1091,14 +1091,22 @@
       "format": "short",
       "uploaded_at": "2026-10-15T05:44:41.165902+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-70abcf639cbae50c": {
+      "video_id": "rnHydFM4jmk",
+      "confirmed_at": "2026-10-15T06:13:11.734413+00:00",
+      "title": "The Detective and the Vanishing Score",
+      "format": "short",
+      "uploaded_at": "2026-10-15T05:53:55.090597+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "rnHydFM4jmk": {
-      "content_id": "rayvan-forge-70abcf639cbae50c",
-      "title": "The Detective and the Vanishing Score",
+    "1MaBXCZt8T0": {
+      "content_id": "rayvan-forge-a2a05bfca88852f6",
+      "title": "The Chef and the Midnight Train",
       "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T05:53:55.090597+00:00",
+      "uploaded_at": "2026-10-15T06:14:52.866228+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -1107,11 +1115,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T05:52:16.161389+00:00",
+  "last_preflight_at": "2026-10-15T06:13:11.399284+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T05:53:55.472168+00:00",
+    "at": "2026-10-15T06:14:53.199354+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2167,6 +2175,14 @@
     "rayvan-forge-70abcf639cbae50c": {
       "at": "2026-10-15T05:53:53.458984+00:00",
       "title": "The Detective and the Vanishing Score",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-a2a05bfca88852f6": {
+      "at": "2026-10-15T06:14:51.200996+00:00",
+      "title": "The Chef and the Midnight Train",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
