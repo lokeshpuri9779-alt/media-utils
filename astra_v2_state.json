@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 36,
+  "attempts": 37,
   "confirmed_today": 36,
-  "last_attempt_at": "2026-10-15T07:47:44.451570+00:00",
+  "last_attempt_at": "2026-10-15T10:07:36.440416+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1141,14 +1141,25 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "quality_skip",
+  "pending": {
+    "SI4CChqGGSU": {
+      "content_id": "rayvan-forge-693e9f4e94e59dba",
+      "title": "The Fox and Owl's Upside-Down Map",
+      "day": "2026-10-15",
+      "uploaded_at": "2026-10-15T10:07:38.358918+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T09:41:40.910035+00:00",
+  "last_preflight_at": "2026-10-15T10:05:50.823415+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T09:42:33.512866+00:00",
+    "at": "2026-10-15T10:07:38.689956+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2244,6 +2255,14 @@
     "rayvan-forge-5b6ecf9ed6266389": {
       "at": "2026-10-15T07:47:44.451554+00:00",
       "title": "The Inventor and the Pocket Storm",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-693e9f4e94e59dba": {
+      "at": "2026-10-15T10:07:36.440400+00:00",
+      "title": "The Fox and Owl's Upside-Down Map",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
