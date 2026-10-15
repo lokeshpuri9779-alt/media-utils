@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 39,
-  "confirmed_today": 38,
-  "last_attempt_at": "2026-10-15T10:44:26.091150+00:00",
+  "attempts": 40,
+  "confirmed_today": 39,
+  "last_attempt_at": "2026-10-15T10:55:40.978211+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1155,14 +1155,22 @@
       "format": "short",
       "uploaded_at": "2026-10-15T10:16:52.175564+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-08e9f82d554dac45": {
+      "video_id": "URbUiGjPnOY",
+      "confirmed_at": "2026-10-15T10:55:00.891533+00:00",
+      "title": "The Mouse and Squirrel's Echoing Tunnel",
+      "format": "short",
+      "uploaded_at": "2026-10-15T10:44:27.702643+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "URbUiGjPnOY": {
-      "content_id": "rayvan-forge-08e9f82d554dac45",
-      "title": "The Mouse and Squirrel's Echoing Tunnel",
+    "FeupJyXmmmA": {
+      "content_id": "rayvan-forge-2dbbdb6192526ffc",
+      "title": "The Fox and Squirrel's Lost Wish Train",
       "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T10:44:27.702643+00:00",
+      "uploaded_at": "2026-10-15T10:55:42.912293+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -1171,11 +1179,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T10:43:38.559646+00:00",
+  "last_preflight_at": "2026-10-15T10:55:00.478985+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T10:44:28.275582+00:00",
+    "at": "2026-10-15T10:55:43.189226+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2295,6 +2303,14 @@
     "rayvan-forge-08e9f82d554dac45": {
       "at": "2026-10-15T10:44:26.091134+00:00",
       "title": "The Mouse and Squirrel's Echoing Tunnel",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-2dbbdb6192526ffc": {
+      "at": "2026-10-15T10:55:40.978195+00:00",
+      "title": "The Fox and Squirrel's Lost Wish Train",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
