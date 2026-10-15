@@ -8,6 +8,7 @@ from __future__ import annotations
 import hashlib
 import math
 import re
+from functools import lru_cache
 
 GROUND_TOP = 1180
 
@@ -26,18 +27,24 @@ SCENE_CUES = (
 
 
 def story_setting(shot):
-    """Choose environment from *this beat's* words rather than one generic set."""
+    """Choose the explicitly narrated setting, then directed setting."""
     text = " ".join(str(shot.get(k) or "") for k in
                     ("speech", "visual_prompt", "headline")).lower()
-    for name, pattern in SCENE_CUES:
-        if re.search(pattern, text):
-            return name
-    return "forest"
+    return _cached_scene_setting(text,str(shot.get("story_environment") or "").lower().strip())
 
+@lru_cache(maxsize=2048)
+def _cached_scene_setting(text,direct):
+    for name,pattern in SCENE_CUES:
+        if re.search(pattern,text):
+            return name
+    return direct if direct in {key for key,_ in SCENE_CUES} else "forest"
 
 def _text_seed(shot):
-    source = " ".join(str(shot.get(k) or "") for k in
-                      ("speech", "headline"))
+    source = " ".join(str(shot.get(k) or "") for k in ("speech", "headline"))
+    return _cached_stage_seed(source)
+
+@lru_cache(maxsize=2048)
+def _cached_stage_seed(source):
     return int.from_bytes(hashlib.sha256(source.encode()).digest()[:4], "big")
 
 
@@ -172,11 +179,12 @@ def prop_trajectory(shot, t):
     # earlier rolling/drifting verb in the same spoken sentence.
     if role in ("twist", "payoff") and action in ("carry","pick","repair","hold"):
         return (int(540-110*progress),int(1216-161*progress)) if role=="twist" else (430,1055)
-    if re.search(r"\b(?:roll|rolled|rolling|runaway|bounced|bounce)\b",speech):
+    mode=_cached_prop_verb(speech)
+    if mode=="roll":
         x=250+int(min(time,2.2)*205)
         y=1180-int(45*abs(math.sin(time*4.4)))
         return x,y
-    if re.search(r"\b(?:drift|drifted|floating|floated|current)\b",speech):
+    if mode=="drift":
         return 235+int(min(time,2.2)*177),1148+int(12*math.sin(time*3))
     if role=="payoff" and action=="carry":
         return (430,1055)
@@ -185,3 +193,13 @@ def prop_trajectory(shot, t):
     if action=="throw":
         return (int(490+335*progress),int(1150-180*math.sin(progress*math.pi)))
     return (540,1216)
+
+
+@lru_cache(maxsize=2048)
+def _cached_prop_verb(speech):
+    """Motion verb lookup once per beat rather than every 1/30 second."""
+    if re.search(r"\b(?:roll|rolled|rolling|runaway|bounced|bounce)\b",speech):
+        return "roll"
+    if re.search(r"\b(?:drift|drifted|floating|floated|current)\b",speech):
+        return "drift"
+    return "none"
