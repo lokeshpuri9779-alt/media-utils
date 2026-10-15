@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - 'astra_v2/ensemble_scene.py'
+      - 'astra_v2/fiction_visual_guard.py'
+      - 'tests/test_fiction_visual_guard.py'
       - 'astra_v2/ensemble_stage.py'
       - 'astra_v2/ensemble_story_experiments.py'
       - 'studio_renderer.py'
@@ -36,6 +38,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_ensemble_artifact_activity.py' -v
           python -m unittest discover -s tests -p 'test_ensemble_physical_motion.py' -v
           python -m unittest discover -s tests -p 'test_ensemble_stability_expansion.py' -v
+          python -m unittest discover -s tests -p 'test_fiction_visual_guard.py' -v
       - name: Verify stable fiction edges and story-directed set catalog
         run: |
           python - <<'PY'
