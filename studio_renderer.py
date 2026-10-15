@@ -1066,6 +1066,10 @@ def render_frame(plan,t,genre,total):
         elif genre == 'fiction' and os.environ.get('ASTRA_STUDIO_PILLOW_DUO', '1') == '1':
             from astra_v2.pillow_duo_scene import draw_duo
             if not draw_duo(im, s, u):
+                # Optional fail-closed production gate: never replace an
+                # unsupported two-character story with unrelated generic art.
+                if os.environ.get('ASTRA_PILLOW_DUO_STRICT', '0') == '1':
+                    raise CreativeReject('Pillow Duo cannot represent this fiction scene; repair its cast or storyboard.')
                 draw_visual(im,s,t,u,accent)
         else:
             draw_visual(im,s,t,u,accent)
@@ -1605,6 +1609,23 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
             plan=_repair_plan(ch,plan,repair_attempts)
     if any(s.get("creative_format")=="ai_character_cinematic" for s in plan):
         ch["character_storyboard_plan"]=character_storyboard(ch,plan)
+    # Fail before asset acquisition, narration and FFmpeg when strict Pillow
+    # fiction mode cannot faithfully illustrate an eligible visual scene.
+    if (genre == 'fiction' and os.environ.get('ASTRA_PILLOW_DUO_STRICT', '0') == '1'
+            and os.environ.get('ASTRA_STUDIO_PILLOW_DUO', '1') == '1'):
+        from astra_v2.pillow_duo_scene import duo_compatibility
+        from astra_v2.layer_contract import scene_layers
+        for index, shot in enumerate(plan):
+            if not scene_layers(shot)['draw_visual']:
+                continue
+            if (shot.get('experimental_ensemble')
+                    and os.environ.get('ASTRA_EXPERIMENT_ENSEMBLE', '0') == '1'):
+                continue
+            suitability = duo_compatibility(shot)
+            if not suitability['supported']:
+                raise CreativeReject(
+                    f'Pillow Duo preflight rejected fiction shot {index + 1}: '
+                    + suitability['reason'])
     assets=asset_manifest(ch,plan)
     resolved_assets=prepare_media_cache(resolve_assets(assets))
     resolved_assets=acquire_story_media(resolved_assets)

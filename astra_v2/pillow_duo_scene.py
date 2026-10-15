@@ -81,11 +81,24 @@ def scene_pair(shot):
                   ("speech","visual_prompt","action")).lower()
     found=_cached_actor_mentions(text)
     cast=shot.get("story_cast") or ()
-    if isinstance(cast,(list,tuple)) and len(cast)==2:
+    # Explicitly empty casts cannot justify inventing characters from prose.
+    if "story_cast" in shot and isinstance(shot["story_cast"], (list, tuple)) and not shot["story_cast"]:
+        return ()
+    # Malformed declared casts must not be bypassed by text inference.
+    if "story_cast" in shot and shot["story_cast"] is not None and not isinstance(shot["story_cast"], (list, tuple)):
+        return ()
+    if isinstance(cast,(list,tuple)) and cast:
+        # An explicit cast is authoritative: never discard extra characters
+        # and accidentally infer a smaller pair from narration.
+        if len(cast) != 2:
+            return ()
         cast=tuple(str(x).lower() for x in cast)
-        if all(x in ACTORS for x in cast) and len(set(cast))==2:
-            return cast if all(name in cast for _,name in found) else ()
-    return tuple(name for _,name in found[:2]) if len(found)>=2 else ()
+        if not (all(x in ACTORS for x in cast) and len(set(cast))==2):
+            return ()
+        return cast if all(name in cast for _,name in found) else ()
+    # Never silently drop a third named species from a supposedly duo shot.
+    distinct = tuple(dict.fromkeys(name for _, name in found))
+    return distinct if len(distinct) == 2 else ()
 
 def scene_prop(shot):
     text=" ".join(str(shot.get(k) or "") for k in
@@ -345,6 +358,14 @@ def prop_position(action, t):
         return (540+int(300*progress), 1140-int(190*math.sin(progress*math.pi)))
     return (int(540*(1-progress)+433*progress),
             int(1216*(1-progress)+1060*progress))
+
+
+def duo_compatibility(shot):
+    """Check scene suitability before rendering; no invented animal partners."""
+    pair = scene_pair(shot)
+    if not pair:
+        return {"supported": False, "reason": "requires_two_supported_animals", "cast": ()}
+    return {"supported": True, "reason": "supported", "cast": pair}
 
 
 def draw_duo(image, shot, t):
