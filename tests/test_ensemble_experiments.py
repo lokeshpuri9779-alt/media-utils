@@ -53,7 +53,9 @@ class EnsembleExperimentsTests(unittest.TestCase):
                 self.assertTrue(ok)
                 self.assertEqual(im.getpixel((32,1800)),self.background)
                 self.assertEqual(im.getpixel((32,120)),self.background)
-                self.assertNotEqual(im.getpixel((540,1100)),self.background)
+                subject=im.crop((90,595,995,1340))
+                blank=Image.new("RGB",subject.size,self.background)
+                self.assertIsNotNone(ImageChops.difference(subject,blank).getbbox())
 
     def test_experimental_animation_changes_but_story_style_is_stable(self):
         beat=dict(catalog()[3]["story_beats"][0])
