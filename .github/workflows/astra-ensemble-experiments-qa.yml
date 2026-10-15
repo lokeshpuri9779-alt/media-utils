@@ -42,14 +42,14 @@ jobs:
           from astra_v2.ensemble_stage import ENVIRONMENTS
           from astra_v2.ensemble_story_experiments import catalog
           assert len(ENVIRONMENTS)>=19
-          assert len(catalog())==6
+          assert len(catalog())==7
           print('ASTRA_ENSEMBLE_SCENE_VARIANTS',len(ENVIRONMENTS))
           PY
-      - name: Six-pilot 3–8 cast Studio storyboard comparison
+      - name: Seven-pilot 3–8 cast Studio storyboard comparison
         run: python -m tools.astra_ensemble_preview
       - uses: actions/upload-artifact@v4
         with:
-          name: astra-ensemble-six-pilots
+          name: astra-ensemble-seven-pilots
           path: |
             preview/astra-ensemble-six-pilots.mp4
             preview/astra-ensemble-six-pilots.json
