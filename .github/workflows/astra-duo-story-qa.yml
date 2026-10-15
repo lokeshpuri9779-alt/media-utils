@@ -5,6 +5,9 @@ on:
     paths:
       - astra_v2/pillow_duo_stories.py
       - astra_v2/story_forge.py
+      - astra_v2/editorial_batch_oct2026.py
+      - tests/test_editorial_oct2026.py
+      - tools/editorial_oct2026_preview.py
       - tests/test_pillow_duo_story_supply.py
       - tests/test_studio721_release.py
       - studio_renderer.py
@@ -34,6 +37,7 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_story_action_motion.py' -v
           python -m unittest discover -s tests -p 'test_astra_story_inventory.py' -v
+          python -m unittest discover -s tests -p 'test_editorial_oct2026.py' -v
           python -m unittest discover -s tests -p 'test_pillow_duo_story_supply.py' -v
           python -m unittest discover -s tests -p 'test_pillow_scene_direction.py' -v
       - name: Verify Studio 7.3.0 provenance and live publisher regression tests
@@ -60,10 +64,15 @@ jobs:
           assert verdict['pass'],verdict
           print('ASTRA_DUO_FULL_RENDER_VERIFIED',p.stat().st_size)
           PY
+      - name: Render all 80 authored story beats as storyboard contact sheet
+        run: python -m tools.editorial_oct2026_preview
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: astra-duo-voiced-preview
-          path: duo-preview/
+          path: |
+            duo-preview/
+            preview/editorial-oct2026-scenes.png
+            preview/editorial-oct2026-qa.json
           if-no-files-found: warn
           retention-days: 7
