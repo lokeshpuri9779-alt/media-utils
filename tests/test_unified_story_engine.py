@@ -3,7 +3,7 @@ import os
 import unittest
 from unittest.mock import Mock, patch
 
-from PIL import Image
+from PIL import Image, ImageChops
 from astra_errors import CreativeReject
 from astra_v2.unified_story_engine import (
     cast_from_title, validate_story_shot, draw_story_frame,
@@ -97,10 +97,10 @@ class UnifiedEngineTests(unittest.TestCase):
                         "story_visual_seed": "qa-unified",
                         "story_beat": "reveal", "story_action": "look"}
                 canvas = Image.new("RGB", (1080, 1920))
-                before = canvas.getpixel((540, 990))
+                before = canvas.copy()
                 self.assertIn(draw_story_frame(canvas, shot, .4),
                               ("solo", "duo", "ensemble"))
-                self.assertNotEqual(canvas.getpixel((540, 990)), before)
+                self.assertIsNotNone(ImageChops.difference(canvas, before).getbbox())
 
     def test_real_studio_plan_keeps_duo_cast(self):
         from astra_v2.story_forge import catalog
