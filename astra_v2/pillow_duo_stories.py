@@ -507,13 +507,13 @@ PLOTS = [
       [
         [
           "THE SIGNAL WENT DARK",
-          "The owl and otter saw the warning lantern go dark across the river just as storm clouds gathered.",
+          "The owl and otter ran toward the warning lantern when it went dark across the river just as storm clouds gathered.",
           "story",
           "DARK SIGNAL"
         ],
         [
           "THE BRIDGE WAS CLOSED",
-          "The otter found the bridge blocked by fallen branches while the owl searched for another safe route.",
+          "The otter pulled a fallen branch away from the bridge while the owl searched for another safe route.",
           "story",
           "NO CROSSING"
         ],
