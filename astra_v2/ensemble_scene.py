@@ -156,7 +156,24 @@ def _positions(cast,style,t,roles=None,focus=None):
         out.extend(action_spot(j,x) for j,x in zip(protagonists,xs))
         return out
     if style=="resolution":
-        # Each cast member responds on their own beat, no synchronized clones.
+        # A final payoff must actually show the decisive character reacting.
+        # Eight equal tiny sprites make the climax unreadable on a phone.
+        # Keep EVERY named actor present, but group supporting performers
+        # behind two foreground leads. No cast toggles or substitute animals.
+        if n>=5:
+            supporting_actions=("carry","pick","repair","open","push","pull",
+                                "hug","dance","clap","point","wave")
+            partner=next((j for j,name in enumerate(cast)
+                          if j!=focused and roles.get(name) in supporting_actions),
+                         next(j for j in range(n) if j!=focused))
+            leads=(focused,partner)
+            others=[j for j in range(n) if j not in leads]
+            rear=[(j,int(140+800*(k+.5)/len(others)),565+(k%2)*18,145)
+                  for k,j in enumerate(others)]
+            front=[(focused,305,742,355),(partner,785,750,335)]
+            return [_acted_position(j,x,y,w,roles.get(cast[j]),t)
+                    for j,x,y,w in rear+front]
+        # Smaller stories already have readable character faces.
         return [_acted_position(j,x+int(11*math.sin(t*1.4+j)),
                  y-35+int(8*math.sin(t*2.1+j*.9)),w,
                  roles.get(cast[j]),t)
