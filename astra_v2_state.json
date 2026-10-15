@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 47,
-  "confirmed_today": 46,
-  "last_attempt_at": "2026-10-15T12:38:53.745239+00:00",
+  "attempts": 48,
+  "confirmed_today": 47,
+  "last_attempt_at": "2026-10-15T13:05:13.340681+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1219,14 +1219,22 @@
       "format": "short",
       "uploaded_at": "2026-10-15T12:21:59.139987+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-48a3ee8a29133046": {
+      "video_id": "-tqG2gP6Nvc",
+      "confirmed_at": "2026-10-15T13:04:29.958072+00:00",
+      "title": "The Galaxy's Missing Color",
+      "format": "short",
+      "uploaded_at": "2026-10-15T12:38:55.305688+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "-tqG2gP6Nvc": {
-      "content_id": "rayvan-forge-48a3ee8a29133046",
-      "title": "The Galaxy's Missing Color",
+    "kqkc5gd_WQU": {
+      "content_id": "rayvan-forge-06356ea5bf4bf7f3",
+      "title": "The Archer and the Wind",
       "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T12:38:55.305688+00:00",
+      "uploaded_at": "2026-10-15T13:05:14.771603+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -1235,11 +1243,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T12:38:15.252593+00:00",
+  "last_preflight_at": "2026-10-15T13:04:29.597453+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T12:38:55.541056+00:00",
+    "at": "2026-10-15T13:05:15.022325+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2423,6 +2431,14 @@
     "rayvan-forge-48a3ee8a29133046": {
       "at": "2026-10-15T12:38:53.745222+00:00",
       "title": "The Galaxy's Missing Color",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-06356ea5bf4bf7f3": {
+      "at": "2026-10-15T13:05:13.340665+00:00",
+      "title": "The Archer and the Wind",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
