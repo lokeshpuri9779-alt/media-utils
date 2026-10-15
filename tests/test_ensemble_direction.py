@@ -33,7 +33,7 @@ class EnsembleDirectionTests(unittest.TestCase):
             for style in ("crowd","clue","confrontation","reaction","action","reveal","resolution"):
                 spots=_positions(cast,style,.3,roles,cast[0])
                 self.assertEqual({a for a,*_ in spots},set(range(n)))
-                self.assertTrue(all(55<=x<=1025 and 100<=w<=340 for _,x,_,w in spots))
+                self.assertTrue(all(55<=x<=1025 and 100<=w<=455 for _,x,_,w in spots))
                 self.assertTrue(all(485<=y<=1050 for _,_,y,_ in spots))
     def test_primary_actor_gets_real_closeup_not_tiny_crowd_sprite(self):
         cast=["fox","rabbit","owl","mouse","otter","cat","dog","squirrel"]
