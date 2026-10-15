@@ -160,6 +160,9 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
         return (0 if (is_long and allow_long) or (not is_long and not allow_long) else 1,
                 -_artifact_created_timestamp(entry))
     max_age_hours = max(0, int(os.getenv("ASTRA_PRELOAD_MAX_AGE_HOURS", "0")))
+    # Several approved artifacts often belong to one four-lane preload run.
+    # Verify each run once per queue scan rather than issuing duplicate API calls.
+    trusted_runs = {}
     for entry in sorted(artifacts(), key=priority):
         if not _artifact_fresh(entry, max_age_hours):
             print("ASTRA_PRELOAD_STALE_SKIP=" + str(entry.get("name", "")))
@@ -185,7 +188,9 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
         run_id = (entry.get("workflow_run") or {}).get("id")
         if not run_id:
             continue
-        run = _api(f"repos/{repo}/actions/runs/{run_id}")
+        if run_id not in trusted_runs:
+            trusted_runs[run_id] = _api(f"repos/{repo}/actions/runs/{run_id}")
+        run = trusted_runs[run_id]
         if (run.get("conclusion") != "success"
                 or run.get("head_branch") != "main"
                 or run.get("name") not in ("ASTRA V2 - Preload Approved Videos", "ASTRA V2 - Long-form Preload")):
