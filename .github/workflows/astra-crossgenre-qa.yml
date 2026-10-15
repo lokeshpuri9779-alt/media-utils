@@ -1,0 +1,57 @@
+name: ASTRA Cross Genre Story QA
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'astra_v2/crossgenre_directed_24.py'
+      - 'astra_v2/story_forge.py'
+      - 'tests/test_crossgenre_directed_24.py'
+      - 'tests/test_astra_story_inventory.py'
+      - 'tools/astra_crossgenre_preview.py'
+      - '.github/workflows/astra-crossgenre-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  directed-storyboard:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate new stories and no draft approval bypass
+        run: |
+          python -m unittest discover -s tests -p 'test_crossgenre_directed_24.py' -v
+          python -m unittest discover -s tests -p 'test_astra_story_inventory.py' -v
+      - name: Compose 48 genuine Studio scenes for visual inspection
+        run: python -m tools.astra_crossgenre_preview
+      - name: Render real voiced Studio sample with Creative Director gates
+        run: |
+          mkdir -p preview
+          python - <<'PY'
+          from pathlib import Path
+          from astra_v2.story_forge import catalog
+          from studio_renderer import render_short
+          from quality_lab import evaluate_studio_render
+          s=next(x for x in catalog(limit=400) if x['title']=="The Cat Who Ran a Bakery")
+          path=Path("preview/cat-bakery-directed.mp4")
+          result=render_short(s,path)
+          decision=evaluate_studio_render(s,result,video_path=path)
+          assert result['renderer']=='studio-7.3.0'
+          assert decision['pass'],decision
+          assert path.stat().st_size>30000
+          print("ASTRA_CROSSGENRE_REAL_MP4_PASS",path.stat().st_size)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: astra-24-crossgenre-studio-preview
+          path: |
+            preview/astra-crossgenre-directed24.png
+            preview/astra-crossgenre-directed24.json
+            preview/cat-bakery-directed.mp4
+          if-no-files-found: warn
+          retention-days: 7
