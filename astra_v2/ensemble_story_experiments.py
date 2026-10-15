@@ -94,10 +94,21 @@ PILOTS = [
     },
 ]
 
+STAGE_SEQUENCES = {
+    "missing-tomorrow":("courtroom","courtroom","clocktower","river","courtroom"),
+    "memory-library":("library","library","attic","library","library"),
+    "last-shadow-auction":("auction","auction","street","street","auction"),
+    "silent-orchestra":("concert_hall","concert_hall","bridge","concert_hall","bridge"),
+    "bridge-that-lied":("bridge","tunnel","tunnel","bridge","river","hills"),
+    "impossible-photo":("museum","museum","gallery","museum","museum"),
+}
+
 def catalog():
     stories=[]
     for plot in PILOTS:
         beats=[]
+        stage_sequence=STAGE_SEQUENCES[plot["key"]]
+        assert len(stage_sequence)==len(plot["beats"])
         for i,(headline,speech,style,acting) in enumerate(plot["beats"]):
             beats.append({
                 "headline":headline,
@@ -108,6 +119,7 @@ def catalog():
                 "duration":2.4,
                 "story_beat":("reveal","build","twist","payoff")[min(3,i*4//len(plot["beats"]))],
                 "scene_style":style,
+                "story_environment":stage_sequence[i],
                 "acting_notes":acting,
                 "story_cast":plot["cast"],
                 "experimental_ensemble":True,
