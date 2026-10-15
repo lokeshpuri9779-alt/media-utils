@@ -192,9 +192,13 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
     fur=FUR[name]
     if visual_recipe:
         fur=_blend(fur, visual_recipe["fur"], .12 if name in ("fox","rabbit") else .27)
-    stride=math.sin(t*(8.4 if action=="run" else 4.6)+idx*math.pi)
-    gait=int(43*stride) if action in ("walk","run") else 0
-    bob=int(26*abs(math.sin(t*5+idx))) if action=="jump" else int(6*math.sin(t*2+idx))
+    stride=math.sin(t*(8.4 if action in ("run","chase") else 3.4 if action=="sneak" else 4.6)+idx*math.pi)
+    gait=int((51 if action=="chase" else 21 if action=="sneak" else 43)*stride) if action in ("walk","run","chase","sneak") else 0
+    if action=="swim":
+        gait=int(25*math.sin(t*6.0+idx*math.pi))
+    bob=(int(26*abs(math.sin(t*5+idx))) if action=="jump" else
+         int(17*math.sin(t*4.2+idx)) if action=="swim" else
+         int(6*math.sin(t*2+idx)))
     y-=bob
     # Ground shadows, tails and articulated legs behind costume.
     # Studio draws actors directly at 1080p, while the experimental ensemble
@@ -235,8 +239,14 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
         shoulder=(x+side*87,y+150)
         wave=action in ("wave","warn","throw","point") and side==1
         arm_raise=80*abs(math.sin(t*4.5+idx)) if wave else 0
+        if action=="swim":
+            arm_raise=45*math.sin(t*7+idx*math.pi+(0 if side==1 else math.pi))
         hand=(x+side*153,y+218-arm_raise)
-        if action=="point" and side==1:
+        if action=="catch" and side==1:
+            hand=(x+176,y+118)
+        elif action=="sneak":
+            hand=(x+side*125,y+235)
+        elif action=="point" and side==1:
             hand=(x+185,y+112)
         elif action=="clap":
             hand=(x+side*(33+25*abs(math.sin(t*8))),y+173)
@@ -322,13 +332,15 @@ def _prop(d, name, x, y, t, *, symbol_id=None, action="idle"):
 def prop_position(action, t):
     """Deterministic continuous object travel; never reset a carried prop."""
     action = str(action).lower()
-    pickup = action in {"pick","pickup","pick_up","carry","repair","hold"}
+    pickup = action in {"pick","pickup","pick_up","carry","repair","hold","catch"}
     throw = action == "throw"
     progress = _ease((max(0, t)-.15)/.9) if pickup or throw or action in ("push","pull") else 0.0
     if action=="push":
         return (540+round(125*progress),1216)
     if action=="pull":
         return (540-round(125*progress),1216)
+    if action=="catch":
+        return (750-round(320*progress),1145-round(90*progress)-round(68*math.sin(progress*math.pi)))
     if throw:
         return (540+int(300*progress), 1140-int(190*math.sin(progress*math.pi)))
     return (int(540*(1-progress)+433*progress),
@@ -364,7 +376,7 @@ def draw_duo(image, shot, t):
         # accidentally excluded push/pull entirely because pickup was False.
         # Blend contact from the first reach through a smooth extension.
         interact_actions={"pick","pickup","pick_up","carry","repair",
-                          "hold","open","push","pull"}
+                          "hold","open","push","pull","catch"}
         hand_strength=(_ease((max(0.0,float(t))-.06)/.86)
                        if prop and action in interact_actions else 0.0)
         hand_target=prop_pos if hand_strength>0 else None

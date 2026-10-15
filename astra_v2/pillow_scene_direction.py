@@ -169,11 +169,12 @@ def draw_story_stage(d, shot, t):
 
 def actor_translation(action, t, index):
     """Body translation is separate from limb gait, not global camera movement."""
-    if action not in ("run","walk"):
+    if action not in ("run","walk","chase","sneak","swim"):
         return 0
-    amplitude = 85 if action == "run" else 44
+    amplitude = {"run":85,"walk":44,"chase":155,"sneak":32,"swim":65}[action]
     elapsed=max(0.0,min(float(t),2.4))/2.4
-    return int(amplitude*elapsed*(1 if index==0 else .55))
+    follow=(.2 if action=="chase" else .55) if index else 1.0
+    return int(amplitude*elapsed*follow)
 
 
 def prop_trajectory(shot, t):
@@ -186,8 +187,10 @@ def prop_trajectory(shot, t):
     progress=progress*progress*(3-2*progress)
     # When the twist explicitly catches the object, contact wins over the
     # earlier rolling/drifting verb in the same spoken sentence.
-    if role in ("twist", "payoff") and action in ("carry","pick","repair","hold"):
+    if role in ("twist", "payoff") and action in ("carry","pick","repair","hold","catch"):
         return (int(540-110*progress),int(1216-161*progress)) if role=="twist" else (430,1055)
+    if action=="catch":
+        return (750-round(320*progress),1145-round(90*progress)-round(68*math.sin(progress*math.pi)))
     mode=_cached_prop_verb(speech)
     if mode=="roll":
         x=250+int(min(time,2.2)*205)
