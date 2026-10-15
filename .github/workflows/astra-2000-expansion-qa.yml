@@ -10,6 +10,7 @@ on:
       - 'studio_renderer.py'
       - 'tests/test_astra_2000_expansion.py'
       - 'tests/test_astra_2000_actions.py'
+      - 'tools/astra_asset_contact_sheet.py'
       - '.github/workflows/astra-2000-expansion-qa.yml'
   workflow_dispatch:
 permissions:
@@ -51,6 +52,8 @@ jobs:
           Path('preview/expansion-inventory.json').write_text(json.dumps(manifest,indent=2))
           print(json.dumps(manifest,sort_keys=True))
           PY
+      - name: Visual sample of icons and costumes
+        run: python -m tools.astra_asset_contact_sheet
       - name: Visual sample of integrated animation
         run: python -m tools.pillow_studio_preview
       - uses: actions/upload-artifact@v4
@@ -59,4 +62,6 @@ jobs:
           path: |
             preview/expansion-inventory.json
             preview/pillow-studio-composite.mp4
+            preview/icon-motif-gallery.png
+            preview/character-wardrobe-gallery.png
           retention-days: 7
