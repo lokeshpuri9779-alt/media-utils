@@ -51,6 +51,7 @@ jobs:
         with:
           name: astra-ensemble-seven-pilots
           path: |
-            preview/astra-ensemble-six-pilots.mp4
-            preview/astra-ensemble-six-pilots.json
+            preview/astra-ensemble-seven-pilots.mp4
+            preview/astra-ensemble-seven-pilots.json
           retention-days: 7
+          if-no-files-found: error
