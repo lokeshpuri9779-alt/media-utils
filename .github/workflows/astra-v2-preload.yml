@@ -8,6 +8,8 @@ on:
       - '.github/workflows/astra-v2-preload.yml'
       - 'studio_renderer.py'
       - 'astra_v2/story_visuals.py'
+      - 'astra_v2/distinct_animal_art.py'
+      - 'tests/test_distinct_animal_art.py'
       - 'astra_v2/pillow_duo_scene.py'
       - 'astra_v2/pillow_scene_direction.py'
       - 'astra_v2/pillow_duo_stories.py'
@@ -119,7 +121,9 @@ jobs:
       - name: Test actual cached icon animation
         run: python -m unittest discover -s tests -p 'test_astra_icon_visuals.py' -v
       - name: Verify distinct animated story characters
-        run: python -m unittest discover -s tests -p 'test_astra_character_art.py' -v
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_character_art.py' -v
+          python -m unittest discover -s tests -p 'test_distinct_animal_art.py' -v
       - name: Enforce animation and caption collision guard
         run: |
           python -m unittest discover -s tests -p 'test_scene_layer_contract.py' -v
