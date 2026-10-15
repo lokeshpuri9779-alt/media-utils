@@ -16,6 +16,12 @@ class PillowDuoTests(unittest.TestCase):
         self.assertEqual(scene_pair(shot), ())
         self.assertFalse(duo_compatibility(shot)["supported"])
 
+    def test_explicit_three_character_cast_is_not_reduced(self):
+        shot = {"speech": "The fox and rabbit search together.",
+                "story_cast": ["fox", "rabbit", "owl"]}
+        self.assertEqual(scene_pair(shot), ())
+        self.assertFalse(duo_compatibility(shot)["supported"])
+
     def test_no_wrong_species_icon(self):
         from astra_v2.icon_visuals import pick_icon
         self.assertIsNone(pick_icon({"speech": "The fox met the rabbit."}))
