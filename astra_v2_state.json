@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 49,
-  "confirmed_today": 48,
-  "last_attempt_at": "2026-10-15T13:12:33.797629+00:00",
+  "attempts": 50,
+  "confirmed_today": 49,
+  "last_attempt_at": "2026-10-15T13:24:12.948164+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1235,14 +1235,22 @@
       "format": "short",
       "uploaded_at": "2026-10-15T13:05:14.771603+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-332be0384bddbb17": {
+      "video_id": "UsngV6IZtNg",
+      "confirmed_at": "2026-10-15T13:23:26.455228+00:00",
+      "title": "The Missing Lighthouse Keeper",
+      "format": "short",
+      "uploaded_at": "2026-10-15T13:12:35.085015+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "UsngV6IZtNg": {
-      "content_id": "rayvan-forge-332be0384bddbb17",
-      "title": "The Missing Lighthouse Keeper",
+    "90AyW5mrspY": {
+      "content_id": "rayvan-forge-8c2e746d5b38880b",
+      "title": "The Map on the Mountain Goat",
       "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T13:12:35.085015+00:00",
+      "uploaded_at": "2026-10-15T13:24:14.577806+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -1251,11 +1259,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T13:11:52.739418+00:00",
+  "last_preflight_at": "2026-10-15T13:23:26.124466+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T13:12:35.318916+00:00",
+    "at": "2026-10-15T13:24:14.819674+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2455,6 +2463,14 @@
     "rayvan-forge-332be0384bddbb17": {
       "at": "2026-10-15T13:12:33.797614+00:00",
       "title": "The Missing Lighthouse Keeper",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-8c2e746d5b38880b": {
+      "at": "2026-10-15T13:24:12.948146+00:00",
+      "title": "The Map on the Mountain Goat",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
