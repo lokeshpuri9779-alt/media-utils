@@ -54,6 +54,7 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       ASTRA_CHANNEL: rayvan
+      ASTRA_UNIFIED_STORY_ENGINE: '1' # One Studio renderer for directed, solo, duo and ensemble scenes; fail closed
       YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
       YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
       YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
