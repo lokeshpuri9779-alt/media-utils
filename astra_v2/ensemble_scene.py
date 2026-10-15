@@ -180,6 +180,54 @@ def _positions(cast,style,t,roles=None,focus=None):
                 for j,x,y,w in wide]
     return wide
 
+def grounded_positions(cast, style, t, roles=None, focus=None):
+    """Return actor placements with perspective-correct feet on the set floor.
+
+    Previous rear actors ended near y=800, hundreds of pixels above the
+    illustrated floor. Calibrate each actor against its *rest* pose so runs,
+    jumps and dance bounces still move naturally instead of being clamped.
+    """
+    roles=roles or {}
+    live=_positions(cast,style,t,roles,focus)
+    rest={i:(y,w) for i,x,y,w in _positions(cast,style,0.0,roles,focus)}
+    focused=cast.index(focus) if focus in cast else 0
+    grounded=[]
+    for i,x,y,w in live:
+        # Only the lead's explicitly cropped head-and-shoulders shot lacks
+        # feet. Keep the close-up framing instead of forcing an offscreen sole.
+        if (i==focused and style in ("clue","reaction","reveal")):
+            grounded.append((i,x,y,w))
+            continue
+        rest_y,rest_w=rest[i]
+        floor=(1115 if w<=200 else 1220 if w<=300 else 1250)
+        shift=floor-(rest_y+785*rest_w/560.0)
+        new_y=round(y+shift)
+        # 820px source sprites include a visible foot shadow at local y=785;
+        # never clip it outside the platform-safe 485..1370 stage.
+        max_y=int(1370-820*w/560.0)
+        grounded.append((i,x,max(485,min(max_y,new_y)),w))
+    return grounded
+
+
+def _second_camera_take(im, focus_x):
+    """A modest optical close-up on the existing stage, not a cast re-layout.
+
+    Objects, hands and scenery share ONE world-space transform across the
+    camera cut. The stage's outer caption/background pixels are untouched.
+    """
+    left,top,right,bottom=55,485,1025,1370
+    width,height=right-left,bottom-top
+    src_w=round(width/1.065)
+    src_h=round(height/1.065)
+    cx=max(left+src_w//2,min(right-src_w//2,int(focus_x)))
+    cy=(top+bottom)//2
+    x0=max(left,min(right-src_w,cx-src_w//2))
+    y0=max(top,min(bottom-src_h,cy-src_h//2))
+    image=im.crop((x0,y0,x0+src_w,y0+src_h))
+    image=image.resize((width,height),Image.Resampling.BICUBIC)
+    im.paste(image,(left,top))
+
+
 def _sprite(species, index, role, mood, t, style_seed, hand_target=None,
             hand_strength=1.0):
     """Draw a rig with optional local hand-to-prop contact, never an icon."""
@@ -321,14 +369,17 @@ def ensemble_frame(im,shot,t):
 
     d=ImageDraw.Draw(im)
     draw_ensemble_stage(d,shot.get("story_environment"),t,shot)
-    style, subshot_index = directed_subshot(shot,t)
+    camera_style, subshot_index = directed_subshot(shot,t)
+    # A camera cut must not change the actors' world positions or move props
+    # into a new layout. Use the original blocking for both compositions.
+    style=str(shot.get("scene_style") or "crowd").lower()
     if style not in SCENE_STYLES:
         style="crowd"
     roles=shot.get("acting_notes") or {}
     if not isinstance(roles,dict):
         roles={}
     focus=_focus_actor(shot,cast)
-    spots=_positions(cast,style,t,roles,focus)
+    spots=grounded_positions(cast,style,t,roles,focus)
     focus_x=next(x for i,x,y,w in spots if cast[i]==focus)
     _stage_cue(d,shot,style,t,focus_x)
     moods=_stable_moods(shot,cast)
@@ -372,4 +423,6 @@ def ensemble_frame(im,shot,t):
         handler=cast[prop_state[1]]
         action=str(roles.get(handler) or "idle")
         _prop(d,obj,*prop_state[0],t,action=action)
+    if subshot_index:
+        _second_camera_take(im,focus_x)
     return True
