@@ -91,8 +91,17 @@ def _positions(cast,style,t,roles=None,focus=None):
             protagonists += [j for j in range(n) if j not in protagonists][:3-len(protagonists)]
         xs={1:[540],2:[340,740],3:[230,540,850]}[len(protagonists)]
         others=[j for j in range(n) if j not in protagonists]
-        out=[(j,int(130+800*(k+.5)/max(1,len(others))),590,145)
-             for k,j in enumerate(others)]
+        def background_spot(k,j):
+            x=int(130+800*(k+.5)/max(1,len(others)))
+            act=roles.get(cast[j],"look")
+            if act in ("dance","wave","clap","point"):
+                x+=int(12*math.sin(t*4.2+j))
+                y=590-int(10*abs(math.sin(t*5+j)))
+            else:
+                x+=int(5*math.sin(t*.7+j))
+                y=590
+            return (j,x,y,145)
+        out=[background_spot(k,j) for k,j in enumerate(others)]
         # Stage real translational motion rather than cloning stationary poses.
         def action_spot(j,x):
             act=roles.get(cast[j],"look")
