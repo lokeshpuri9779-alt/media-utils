@@ -227,9 +227,17 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
     hands=[]
     for side in (-1,1):
         shoulder=(x+side*87,y+150)
-        wave=action in ("wave","warn","throw") and side==1
+        wave=action in ("wave","warn","throw","point") and side==1
         arm_raise=80*abs(math.sin(t*4.5+idx)) if wave else 0
         hand=(x+side*153,y+218-arm_raise)
+        if action=="point" and side==1:
+            hand=(x+185,y+112)
+        elif action=="clap":
+            hand=(x+side*(33+25*abs(math.sin(t*8))),y+173)
+        elif action=="hug":
+            hand=(x+side*44,y+172)
+        elif action in ("push","pull") and side==interact_side:
+            hand=(x+side*157,y+225+int(9*math.sin(t*4)))
         if hand_target is not None and side==interact_side:
             hand=(hand_target[0]-side*22,hand_target[1]+2)
         elbow=((shoulder[0]+hand[0])*.5+side*18,
@@ -255,13 +263,16 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
     return hands
 
 
-def _prop(d, name, x, y, t, *, symbol_id=None):
+def _prop(d, name, x, y, t, *, symbol_id=None, action="idle"):
     """Draw the narrated object, with an optional stable illustrated emblem."""
     x,y=int(x),int(y)
     if name=="box":
         d.rounded_rectangle((x-79,y-67,x+79,y+67),radius=9,
                             fill=(155,105,65),outline=(72,51,48),width=5)
-        d.polygon(((x-77,y-66),(x+76,y-66),(x+65,y-45),(x-66,y-45)),
+        opened=_ease((max(0,t)-.15)/.85) if action=="open" else 0.0
+        rise=int(opened*74)
+        d.polygon(((x-77,y-66-rise),(x+76,y-66-rise),
+                   (x+65,y-45-rise),(x-66,y-45-rise)),
                   fill=(197,146,92))
         d.line((x,y-65,x,y+67),fill=(244,218,164),width=13)
         d.line((x-73,y+5,x+75,y+5),fill=(244,218,164),width=11)
@@ -302,7 +313,11 @@ def prop_position(action, t):
     action = str(action).lower()
     pickup = action in {"pick","pickup","pick_up","carry","repair","hold"}
     throw = action == "throw"
-    progress = _ease((max(0, t)-.15)/.9) if pickup or throw else 0.0
+    progress = _ease((max(0, t)-.15)/.9) if pickup or throw or action in ("push","pull") else 0.0
+    if action=="push":
+        return (540+round(125*progress),1216)
+    if action=="pull":
+        return (540-round(125*progress),1216)
     if throw:
         return (540+int(300*progress), 1140-int(190*math.sin(progress*math.pi)))
     return (int(540*(1-progress)+433*progress),
@@ -324,8 +339,9 @@ def draw_duo(image, shot, t):
     pickup=action in {"pick","pickup","pick_up","carry","repair","hold"}
     progress=_ease((max(0,t)-.15)/.9) if pickup else 0.0
     from astra_v2.pillow_scene_direction import prop_trajectory, actor_translation
-    prop_pos=(prop_trajectory(shot,t) if shot.get("story_beat") else
-              prop_position(action,t))
+    prop_pos=(prop_trajectory(shot,t)
+              if shot.get("story_beat") and action not in ("push","pull","open")
+              else prop_position(action,t))
     from astra_v2.procedural_visual_library import (
         character_recipe, visual_identity, icon_for_story, MOTIFS)
     stable_key=shot.get("story_visual_seed") or "|".join(pair)
@@ -334,7 +350,7 @@ def draw_duo(image, shot, t):
         if idx==1 and action=="carry":
             x-=105
         y=846
-        contact=bool(prop and pickup and
+        contact=bool(prop and (pickup or action in ("push","pull")) and
                      (progress>.25 or shot.get("story_beat")=="payoff"))
         hand_target=(prop_pos if contact else None)
         actor_mood=mood
@@ -350,5 +366,5 @@ def draw_duo(image, shot, t):
         motif={"box":"star","ball":"star","flower":"flower",
                "lantern":"sun","book":"book"}.get(prop,prop)
         symbol_id=icon_for_story(motif,stable_key) if motif in MOTIFS else None
-        _prop(d,prop,*prop_pos,t,symbol_id=symbol_id)
+        _prop(d,prop,*prop_pos,t,symbol_id=symbol_id,action=action)
     return True
