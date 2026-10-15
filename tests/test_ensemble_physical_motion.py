@@ -132,7 +132,7 @@ class EnsemblePhysicalMotionTests(unittest.TestCase):
         _second_camera_take(frame,540)
         self.assertEqual(frame.getpixel((10,800)),original.getpixel((10,800)))
         self.assertEqual(frame.getpixel((1050,1700)),original.getpixel((1050,1700)))
-        self.assertNotEqual(frame.getpixel((300,800)),original.getpixel((300,800)))
+        self.assertNotEqual(frame.getpixel((710,900)),original.getpixel((710,900)))
 
 if __name__=="__main__":
     unittest.main()
