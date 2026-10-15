@@ -1,0 +1,25 @@
+name: ASTRA Long-form Codec Bootstrap QA
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/astra-v2-longform.yml'
+      - '.github/workflows/astra-longform-codec-qa.yml'
+      - 'tools/astra_ffmpeg_bootstrap.sh'
+      - 'tests/test_astra_ffmpeg_bootstrap.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  codec-bootstrap:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate bootstrap shell syntax and fail-closed contract
+        run: |
+          bash -n tools/astra_ffmpeg_bootstrap.sh
+          python -m unittest discover -s tests -p 'test_astra_ffmpeg_bootstrap.py' -v
+      - name: Verify both real system codec binaries without API secrets
+        run: bash tools/astra_ffmpeg_bootstrap.sh
