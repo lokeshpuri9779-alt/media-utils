@@ -106,14 +106,24 @@ def validate_fiction_frames(plan, renderer, total, *, max_beats=48):
         if dur<=.16:
             raise CreativeReject("Fiction scene too brief for visual QA")
         start=float(shot.get("start") or 0)
-        times=(start+min(.04,dur*.10),
-               start+min(.29,dur*.48))
-        earlier=renderer(plan,times[0],"fiction",total)
-        later=renderer(plan,times[1],"fiction",total)
-        checks+=2
-        if long_amber_guide_arc(earlier) or long_amber_guide_arc(later):
+        times=[start+min(.04,dur*.10),
+               start+min(.29,dur*.48)]
+        if shot.get("experimental_subshots") and dur>=1.2:
+            # The old two-frame sampler only inspected the FIRST camera
+            # composition, missing arcs and flashes in the second shot.
+            cut=dur*.53
+            times.extend((start+max(0.0,cut-.045),
+                          start+min(dur-.02,cut+.045),
+                          start+min(dur-.02,dur*.77)))
+        frames=[renderer(plan,at,"fiction",total) for at in times]
+        checks+=len(frames)
+        if any(long_amber_guide_arc(frame) for frame in frames):
             raise CreativeReject(f"Fiction amber-guide-arc artifact in beat {i+1}")
-        if sudden_edge_panel(earlier,later):
+        # Flash checks are within the first continuous take and across the
+        # deliberately cut second take; no hard camera change is by itself
+        # a failure, only a full-height edge-panel color jump.
+        pairs=((0,1),(2,3),(3,4)) if len(frames)==5 else ((0,1),)
+        if any(sudden_edge_panel(frames[a],frames[b]) for a,b in pairs):
             raise CreativeReject(f"Fiction edge-transition flash in beat {i+1}")
     return {"pass": True, "sampled_frames": checks,
             "sampled_beats":len(scene_indices), "total_beats":count,
