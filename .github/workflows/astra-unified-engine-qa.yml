@@ -1,0 +1,73 @@
+name: ASTRA Unified Story Engine QA
+on:
+  pull_request:
+    paths:
+      - 'astra_v2/unified_story_engine.py'
+      - 'studio_renderer.py'
+      - 'astra_v2/story_motion.py'
+      - 'astra_v2/pillow_duo_scene.py'
+      - 'astra_v2/ensemble_scene.py'
+      - 'tests/test_ensemble_physical_motion.py'
+      - 'experimental/motion_profiles.py'
+      - 'tools/astra_unified_preview.py'
+      - 'tools/astra_unified_coverage.py'
+      - 'tests/test_unified_story_engine.py'
+      - '.github/workflows/astra-unified-engine-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Compile integrated rendering paths
+        run: python -m compileall -q astra_v2/unified_story_engine.py studio_renderer.py
+      - name: Validate unified actor routing and fail-closed behavior
+        run: python -m unittest discover -s tests -p 'test_unified_story_engine.py' -v
+      - name: Run existing dual-character contract
+        run: python -m unittest discover -s tests -p 'test_pillow_duo_story_supply.py' -v
+      - name: Run existing scene integration
+        run: python -m unittest discover -s tests -p 'test_astra_animal_scenes.py' -v
+      - name: Validate grounding, contacts, and camera continuity
+        run: python -m unittest discover -s tests -p 'test_ensemble_physical_motion.py' -v
+      - name: Audit all currently production-eligible stories
+        run: python -m tools.astra_unified_coverage
+      - name: Render four scene families through one engine
+        run: python -m tools.astra_unified_preview
+      - name: Decode and verify animation preview
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          from imageio_ffmpeg import get_ffmpeg_exe
+          preview = Path("preview/astra-unified-engine-preview.mp4")
+          data = json.loads(Path("preview/astra-unified-engine-preview.json").read_text())
+          assert data["modes"] == ["solo", "duo", "ensemble", "directed"]
+          assert data["published_to_youtube"] is False
+          assert data["production_ready"] is False
+          assert preview.stat().st_size > 30000
+          subprocess.run([get_ffmpeg_exe(), "-v", "error", "-i", str(preview),
+                          "-f", "null", "-"], check=True)
+          print("ASTRA_UNIFIED_MP4_DECODE_OK")
+          PY
+      - name: Save unified story preview for human visual review
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-unified-four-grammar-preview
+          path: |
+            preview/astra-unified-engine-preview.mp4
+            preview/astra-unified-engine-preview.json
+            preview/astra-unified-solo.png
+            preview/astra-unified-duo.png
+            preview/astra-unified-ensemble.png
+            preview/astra-unified-directed.png
+            runtime-health/astra-unified-coverage.json
+          retention-days: 7
+          if-no-files-found: error

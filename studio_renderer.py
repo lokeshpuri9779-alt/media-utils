@@ -395,6 +395,18 @@ def make_plan(ch):
         # requiring both protagonists to be repeated in every spoken line.
         named_cast = scene_pair({'speech': str(ch.get('title') or '')})
         visual_seed = str(ch.get('content_id') or ch.get('title') or '')
+        unified_mode = os.environ.get("ASTRA_UNIFIED_STORY_ENGINE", "0") == "1"
+        if unified_mode:
+            from astra_v2.unified_story_engine import cast_from_title
+            declared = ch.get("story_cast")
+            # Keep one explicit cast through every beat. The title's cast is
+            # used when a structured cast is not supplied by the story forge.
+            unified_cast = (tuple(declared) if isinstance(declared, (tuple, list))
+                            else cast_from_title(ch.get("title", "")))
+        # A character introduced halfway through an authored story must join
+        # only from that beat onward, then retain stable cast/order thereafter.
+        progressive_cast = list(unified_cast) if unified_mode else []
+        fixed_cast = isinstance(ch.get("story_cast"), (tuple, list))
         experimental_cast = tuple(ch.get("story_cast") or ())
         ensemble = bool(ch.get("experimental_ensemble") and 3 <= len(experimental_cast) <= 8)
         if ensemble:
@@ -406,7 +418,20 @@ def make_plan(ch):
             # Wardrobe, colors and accessories are selected once per story.
             # A fresh narration beat must not silently change a character.
             shot['story_visual_seed'] = visual_seed
-            if ensemble:
+            if unified_mode:
+                if not fixed_cast:
+                    # The narration and visual prompt can introduce a new
+                    # species after the opening beat. Do not invent it earlier.
+                    newly_named = cast_from_title(" ".join(str(shot.get(k) or "")
+                                     for k in ("speech", "visual_prompt", "action")))
+                    for animal in newly_named:
+                        if animal not in progressive_cast:
+                            progressive_cast.append(animal)
+                if progressive_cast:
+                    shot['story_cast'] = tuple(progressive_cast)
+                    if len(progressive_cast) >= 3:
+                        shot['experimental_ensemble'] = True
+            elif ensemble:
                 shot['story_cast'] = experimental_cast
                 shot['experimental_ensemble'] = True
             elif named_cast and shot['story_subject'] in (None, *named_cast):
@@ -1056,9 +1081,14 @@ def render_frame(plan,t,genre,total):
         # production scenes must never render blank after failed acquisition.
         raise CreativeReject('Scene media missing from cache: refusing overlapping/filler fallback.')
     if layers['draw_visual']:
-        # Ensemble Studio is isolated until visual QA approves it.
-        # Default production continues through the verified duo renderer.
-        if (genre == 'fiction' and s.get('experimental_ensemble')
+        # The unified Studio fiction renderer owns all supported animal casts.
+        # Unrepresentable scenes fail closed; never mask a broken story with
+        # unrelated generic art or silently switch publishing engines.
+        if genre == 'fiction' and os.environ.get('ASTRA_UNIFIED_STORY_ENGINE', '0') == '1':
+            from astra_v2.unified_story_engine import draw_story_frame
+            draw_story_frame(im, s, u, draw_directed=draw_visual,
+                             global_time=t, accent=accent)
+        elif (genre == 'fiction' and s.get('experimental_ensemble')
                 and os.environ.get('ASTRA_EXPERIMENT_ENSEMBLE', '0') == '1'):
             from astra_v2.ensemble_scene import ensemble_frame
             if not ensemble_frame(im,s,u):
@@ -1066,8 +1096,6 @@ def render_frame(plan,t,genre,total):
         elif genre == 'fiction' and os.environ.get('ASTRA_STUDIO_PILLOW_DUO', '1') == '1':
             from astra_v2.pillow_duo_scene import draw_duo
             if not draw_duo(im, s, u):
-                # Optional fail-closed production gate: never replace an
-                # unsupported two-character story with unrelated generic art.
                 if os.environ.get('ASTRA_PILLOW_DUO_STRICT', '0') == '1':
                     raise CreativeReject('Pillow Duo cannot represent this fiction scene; repair its cast or storyboard.')
                 draw_visual(im,s,t,u,accent)
@@ -1612,7 +1640,8 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
     # Fail before asset acquisition, narration and FFmpeg when strict Pillow
     # fiction mode cannot faithfully illustrate an eligible visual scene.
     if (genre == 'fiction' and os.environ.get('ASTRA_PILLOW_DUO_STRICT', '0') == '1'
-            and os.environ.get('ASTRA_STUDIO_PILLOW_DUO', '1') == '1'):
+            and os.environ.get('ASTRA_STUDIO_PILLOW_DUO', '1') == '1'
+            and os.environ.get('ASTRA_UNIFIED_STORY_ENGINE', '0') != '1'):
         from astra_v2.pillow_duo_scene import duo_compatibility
         from astra_v2.layer_contract import scene_layers
         for index, shot in enumerate(plan):
@@ -1626,6 +1655,15 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
                 raise CreativeReject(
                     f'Pillow Duo preflight rejected fiction shot {index + 1}: '
                     + suitability['reason'])
+    if genre == 'fiction' and os.environ.get('ASTRA_UNIFIED_STORY_ENGINE', '0') == '1':
+        from astra_v2.unified_story_engine import validate_story_shot
+        from astra_v2.layer_contract import scene_layers
+        for index, shot in enumerate(plan):
+            if scene_layers(shot)['draw_visual']:
+                try:
+                    validate_story_shot(shot)
+                except CreativeReject as exc:
+                    raise CreativeReject(f'Unified Studio preflight shot {index + 1}: {exc}') from exc
     assets=asset_manifest(ch,plan)
     resolved_assets=prepare_media_cache(resolve_assets(assets))
     resolved_assets=acquire_story_media(resolved_assets)
