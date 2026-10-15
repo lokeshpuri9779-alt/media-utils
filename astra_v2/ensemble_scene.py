@@ -32,6 +32,41 @@ def cast_for_shot(shot):
         return ()
     return cast
 
+def _acted_position(j, x, y, width, action, t):
+    """Continuous blocking in all compositions, not just 'action' shots.
+
+    A role can approach, recoil, jump or celebrate during an establishing,
+    clue or reaction scene. Fixed ID + time gives stable, repeatable motion;
+    the cast never appears/disappears to simulate activity.
+    """
+    action = str(action or "look")
+    time = max(0.0, min(2.4, float(t)))
+    progress = min(1.0, time / 1.6)
+    progress = progress * progress * (3 - 2 * progress)
+    phase = time * (5.0 if action == "run" else 2.7) + j * 1.13
+    if action == "run":
+        dx, dy = int(65 * progress), -int(9 * abs(math.sin(phase)))
+    elif action == "walk":
+        dx, dy = int(36 * progress), -int(6 * abs(math.sin(phase)))
+    elif action in ("push", "carry"):
+        dx, dy = int(28 * progress), -int(3 * abs(math.sin(phase)))
+    elif action == "pull":
+        dx, dy = -int(28 * progress), -int(3 * abs(math.sin(phase)))
+    elif action == "jump":
+        dx, dy = 0, -int(45 * abs(math.sin(time * 3.0)))
+    elif action in ("clap", "dance", "wave", "hug"):
+        dx, dy = int(8 * math.sin(phase)), -int(10 * abs(math.sin(phase)))
+    elif action in ("pick", "repair", "open"):
+        dx, dy = int(9 * progress), int(6 * progress)
+    elif action == "hide":
+        dx, dy = -int(9 * progress), int(18 * progress)
+    else:
+        dx, dy = int(3 * math.sin(time * 1.05 + j)), 0
+    # Keep staging bounded; limb rig handles fine motion separately.
+    return (j, max(65, min(1015, int(x + dx))),
+            max(510, min(1030, int(y + dy))), int(width))
+
+
 def _positions(cast,style,t,roles=None,focus=None):
     """Readable staging: full cast in wides, 1–3 leads larger in dramatic beats."""
     n=len(cast)
@@ -50,7 +85,8 @@ def _positions(cast,style,t,roles=None,focus=None):
         wide=([(i,x,600,184) for i,x in enumerate(rear)] +
               [(back+i,x,815,250) for i,x in enumerate(fore)])
     if style=="crowd":
-        return wide
+        return [_acted_position(j,x,y,w,roles.get(cast[j]),t)
+                for j,x,y,w in wide]
     focused=cast.index(focus) if focus in cast else 0
     active=[i for i,name in enumerate(cast)
             if roles.get(name) in ("open","pick","carry","push","pull","repair",
@@ -74,7 +110,8 @@ def _positions(cast,style,t,roles=None,focus=None):
         out.extend((j,centers[j],692+(k%2)*32,
                     445+int(9*push) if j==focused else 285)
                    for k,j in enumerate(protagonists))
-        return out
+        return [_acted_position(j,x,y,w,roles.get(cast[j]),t)
+                for j,x,y,w in out]
     if style=="confrontation":
         protagonists=[focused]+[j for j in range(n) if j!=focused][:1]
         others=[j for j in range(n) if j not in protagonists]
@@ -82,7 +119,8 @@ def _positions(cast,style,t,roles=None,focus=None):
              for k,j in enumerate(others)]
         out.extend((j,310 if k==0 else 758,710,385)
                    for k,j in enumerate(protagonists))
-        return out
+        return [_acted_position(j,x,y,w,roles.get(cast[j]),t)
+                for j,x,y,w in out]
     if style=="action":
         protagonists=active[:3]
         if focused not in protagonists:
@@ -119,8 +157,9 @@ def _positions(cast,style,t,roles=None,focus=None):
         return out
     if style=="resolution":
         # Each cast member responds on their own beat, no synchronized clones.
-        return [(j,x+int(11*math.sin(t*1.4+j)),
-                 y-35+int(8*math.sin(t*2.1+j*.9)),w)
+        return [_acted_position(j,x+int(11*math.sin(t*1.4+j)),
+                 y-35+int(8*math.sin(t*2.1+j*.9)),w,
+                 roles.get(cast[j]),t)
                 for j,x,y,w in wide]
     return wide
 

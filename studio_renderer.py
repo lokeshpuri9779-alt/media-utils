@@ -1631,6 +1631,13 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
     duration=voice_plan(plan,genre,
                         voice_name=str(ch.get('voice_profile') or 'af_heart'),
                         voice_speed=float(ch.get('voice_speed') or 1.09))
+    # Reject the actual rendered golden-guide and edge-flash signatures
+    # BEFORE FFmpeg or automatic publication. This samples the same final
+    # Studio compositor that public videos use, not isolated preview code.
+    if genre=='fiction' and os.environ.get('ASTRA_FICTION_VISUAL_GUARD','1')=='1':
+        from astra_v2.fiction_visual_guard import validate_fiction_frames
+        creative_report['fiction_visual_guard']=validate_fiction_frames(
+            plan,render_frame,duration)
     out=Path(out);out.parent.mkdir(parents=True,exist_ok=True)
     # Keep intermediate audio and encoder logs in RAM when enough tmpfs
     # capacity is available; preserve disk fallback for reliability.

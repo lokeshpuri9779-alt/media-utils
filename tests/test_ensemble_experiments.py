@@ -20,9 +20,9 @@ class EnsembleExperimentsTests(unittest.TestCase):
 
     def test_seven_noninterchangeable_pilots_with_different_casts(self):
         rows=catalog()
-        self.assertEqual(len(rows),7)
-        self.assertEqual([len(s["story_cast"]) for s in rows],[5,6,4,7,8,3,5])
-        self.assertEqual(len({s["title"] for s in rows}),7)
+        self.assertEqual(len(rows),9)
+        self.assertEqual([len(s["story_cast"]) for s in rows],[5,6,4,7,8,3,5,5,4])
+        self.assertEqual(len({s["title"] for s in rows}),9)
         for story in rows:
             self.assertFalse(story["production_ready"])
             self.assertEqual(publication_rejection(story),"not_production_ready")

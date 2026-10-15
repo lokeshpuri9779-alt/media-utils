@@ -1,4 +1,4 @@
-"""Full-beat seven-pilot ensemble visual comparison; NEVER uploads to YouTube."""
+"""Full-beat nine-pilot ensemble visual comparison; NEVER uploads to YouTube."""
 from __future__ import annotations
 import json
 import os
@@ -14,7 +14,7 @@ from studio_renderer import render_frame, W, H, RATE
 FPS=8
 BEAT_SECONDS=1.50
 
-def preview(path="preview/astra-ensemble-seven-pilots.mp4"):
+def preview(path="preview/astra-ensemble-nine-pilots.mp4"):
     os.environ["ASTRA_EXPERIMENT_ENSEMBLE"]="1"
     path=Path(path)
     path.parent.mkdir(parents=True,exist_ok=True)
@@ -66,7 +66,7 @@ def preview(path="preview/astra-ensemble-seven-pilots.mp4"):
                     "-f","null","-"],check=True)
     if path.stat().st_size<25_000:
         raise RuntimeError("Empty ensemble preview")
-    (path.parent/"astra-ensemble-seven-pilots.json").write_text(json.dumps({
+    (path.parent/"astra-ensemble-nine-pilots.json").write_text(json.dumps({
         "experimental_not_for_publication":True,
         "no_approved_public_upload":True,
         "pilot_count":len(catalog_data),
