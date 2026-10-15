@@ -30,9 +30,9 @@ class EnsembleContinuityBatchTests(unittest.TestCase):
         # No corner stage rails or decorative arcs.
         stage=self._plain()
         draw_ensemble_stage(ImageDraw.Draw(stage),"hills",.8,shot)
-        self.assertEqual(stage.getpixel((150,730)),self.BG
-                         if stage.getpixel((150,730))==self.BG
-                         else stage.getpixel((150,730)))  # no pixel assumptions
+        # The universal golden stage arc was the only instance of this
+        # highlight tone in the hills stage; it must be completely absent.
+        self.assertNotIn((220,194,130),stage.getdata())
 
     def test_story_set_dressing_requires_narrated_props(self):
         blank=self._plain()
