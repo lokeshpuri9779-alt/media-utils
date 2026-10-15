@@ -383,7 +383,7 @@ PLOTS = [
       [
         [
           "A BELL WITH NO ROPE",
-          "The fox and owl heard a bell ring inside the abandoned clock tower, though its rope had been cut.",
+          "The fox and owl ran toward a bell ringing inside the abandoned clock tower, though its rope had been cut.",
           "story",
           "WHO RANG IT"
         ],
