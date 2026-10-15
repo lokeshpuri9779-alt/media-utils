@@ -38,14 +38,15 @@ def story_setting(shot):
 
 @lru_cache(maxsize=2048)
 def _cached_scene_setting(text,direct):
-    # The authored director location is the continuity anchor for a beat.
-    # A prop or incidental landmark in narration cannot override this set.
-    if direct in {key for key,_ in SCENE_CUES}:
-        return direct
+    # Explicitly spoken locations outrank the storyboard suggestion (e.g.
+    # "in a library" beats an earlier harbor setting). Handheld objects are
+    # intentionally excluded from SCENE_CUES so they cannot cause set swaps.
     for name,pattern in SCENE_CUES:
         if re.search(pattern,text):
             return name
-    return "forest"
+    # No explicit setting in the line: maintain the authored location rather
+    # than injecting the default forest every time a character says "book".
+    return direct if direct in {key for key,_ in SCENE_CUES} else "forest"
 
 def _text_seed(shot):
     source = " ".join(str(shot.get(k) or "") for k in ("speech", "headline"))
