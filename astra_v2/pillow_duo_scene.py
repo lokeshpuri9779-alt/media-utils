@@ -85,7 +85,9 @@ def scene_pair(shot):
         cast=tuple(str(x).lower() for x in cast)
         if all(x in ACTORS for x in cast) and len(set(cast))==2:
             return cast if all(name in cast for _,name in found) else ()
-    return tuple(name for _,name in found[:2]) if len(found)>=2 else ()
+    # Never silently drop a third named species from a supposedly duo shot.
+    distinct = tuple(dict.fromkeys(name for _, name in found))
+    return distinct if len(distinct) == 2 else ()
 
 def scene_prop(shot):
     text=" ".join(str(shot.get(k) or "") for k in
