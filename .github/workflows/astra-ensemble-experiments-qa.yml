@@ -9,6 +9,7 @@ on:
       - 'tests/test_ensemble_experiments.py'
       - 'tests/test_ensemble_direction.py'
       - 'tests/test_ensemble_artifact_activity.py'
+      - 'tests/test_ensemble_physical_motion.py'
       - 'tools/astra_ensemble_preview.py'
       - '.github/workflows/astra-ensemble-experiments-qa.yml'
   workflow_dispatch:
@@ -32,6 +33,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_ensemble_experiments.py' -v
           python -m unittest discover -s tests -p 'test_ensemble_direction.py' -v
           python -m unittest discover -s tests -p 'test_ensemble_artifact_activity.py' -v
+          python -m unittest discover -s tests -p 'test_ensemble_physical_motion.py' -v
       - name: Six-pilot 3–8 cast Studio storyboard comparison
         run: python -m tools.astra_ensemble_preview
       - uses: actions/upload-artifact@v4
