@@ -347,6 +347,14 @@ def prop_position(action, t):
             int(1216*(1-progress)+1060*progress))
 
 
+def duo_compatibility(shot):
+    """Check scene suitability before rendering; no invented animal partners."""
+    pair = scene_pair(shot)
+    if not pair:
+        return {"supported": False, "reason": "requires_two_supported_animals", "cast": ()}
+    return {"supported": True, "reason": "supported", "cast": pair}
+
+
 def draw_duo(image, shot, t):
     """Return True only when the complete illustrated duo was drawn."""
     pair=scene_pair(shot)
