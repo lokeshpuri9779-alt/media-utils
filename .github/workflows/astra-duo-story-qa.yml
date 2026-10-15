@@ -5,6 +5,8 @@ on:
     paths:
       - astra_v2/pillow_duo_stories.py
       - astra_v2/story_forge.py
+      - astra_v2/crossgenre_directed_24.py
+      - tests/test_crossgenre_directed_24.py
       - astra_v2/editorial_batch_oct2026.py
       - tests/test_editorial_oct2026.py
       - tools/editorial_oct2026_preview.py
@@ -37,6 +39,7 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_story_action_motion.py' -v
           python -m unittest discover -s tests -p 'test_astra_story_inventory.py' -v
+          python -m unittest discover -s tests -p 'test_crossgenre_directed_24.py' -v
           python -m unittest discover -s tests -p 'test_editorial_oct2026.py' -v
           python -m unittest discover -s tests -p 'test_pillow_duo_story_supply.py' -v
           python -m unittest discover -s tests -p 'test_pillow_scene_direction.py' -v
