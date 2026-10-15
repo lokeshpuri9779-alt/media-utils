@@ -93,13 +93,13 @@ def _positions(cast,style,t,roles=None,focus=None):
                 for j,x,y,w in wide]
     return wide
 
-def _sprite(species, index, role, mood, t, style_seed):
-    """Draw one rig to its own transparent layer, never a stock character icon."""
+def _sprite(species, index, role, mood, t, style_seed, hand_target=None):
+    """Draw a rig with optional local hand-to-prop contact, never an icon."""
     im=Image.new("RGBA",(560,820),(0,0,0,0))
     d=ImageDraw.Draw(im)
     recipe=character_recipe(visual_identity(style_seed,species,index))
     _actor(d,species,280,365,t,role,mood,index,
-           visual_recipe=recipe)
+           hand_target=hand_target, visual_recipe=recipe)
     return im
 
 def _focus_actor(shot,cast):
@@ -114,29 +114,64 @@ def _focus_actor(shot,cast):
                 return name
     return cast[0]
 
-def _stage_cue(d,shot,style,t,focus_x):
-    """Genre-motivated spotlight/foreground accents, not repeated cards."""
-    if style=="clue":
-        d.ellipse((focus_x-95,630,focus_x+95,820),
-                  outline=(225,201,143),width=7)
-        for k in range(3):
-            d.line((focus_x-110-k*12,710-k*10,
-                    focus_x-145-k*12,678-k*10),fill=(217,205,166),width=4)
-    elif style=="confrontation":
-        d.line((540,660,540,1145),fill=(199,136,118),width=5)
-    elif style=="reaction":
-        for k in range(5):
-            x=100+k*194
-            d.arc((x,660,x+90,780),20,155,fill=(185,178,138),width=4)
-    elif style=="reveal":
-        d.ellipse((focus_x-165,575,focus_x+165,875),
-                  outline=(246,208,130),width=8)
+def _stage_cue(d, shot, style, t, focus_x):
+    """Story-driven focus without guide arcs, rings, or repeated swooshes."""
+    if style in ("clue","reveal"):
+        # A grounded shadow gives evidence scenes depth without flashing.
+        d.ellipse((focus_x-160,1200,focus_x+160,1275),
+                  fill=(42,78,85))
     elif style=="action":
-        for k in range(5):
-            y=650+k*120
-            d.line((70,y,130,y-12),fill=(133,185,191),width=5)
-    elif style=="resolution":
-        d.arc((160,570,930,1170),202,335,fill=(226,197,125),width=6)
+        # Short ground-level motion streaks, never across the characters.
+        for j in range(3):
+            x=180+j*90+int(8*math.sin(t*1.8+j))
+            d.line((x,1264+j*7,x+60,1264+j*7),
+                   fill=(103,149,151),width=4)
+
+
+def _composition_geometry(idx, x, y, width, focus_idx, style):
+    """Map 560x820 actor rig into final screen for accurate physical contact."""
+    cropped=(idx==focus_idx and style in ("clue","reaction","reveal"))
+    src_x,src_y,src_w,src_h=(94,175,372,517) if cropped else (0,0,560,820)
+    h=int(src_h*width/src_w)
+    left=max(55,min(1025-width,int(x-width/2)))
+    top=max(485,min(1370-h,y))
+    return (left,top,width,h,src_x,src_y,src_w,src_h)
+
+
+def _prop_stage_position(shot, spots, cast, focus, t):
+    """A narrated object follows the active actor's reachable hand or ground."""
+    from astra_v2.pillow_duo_scene import _ease
+    role=shot.get("acting_notes") or {}
+    if not isinstance(role,dict):
+        role={}
+    handlers=("pick","carry","repair","open","push","pull","throw")
+    holder=next((i for i,name in enumerate(cast) if role.get(name) in handlers),
+                cast.index(focus))
+    idx,x,y,width=next((spot for spot in spots if spot[0]==holder))
+    style=str(shot.get("scene_style") or "crowd")
+    geometry=_composition_geometry(idx,x,y,width,cast.index(focus),style)
+    left,top,w,h,cx,cy,sw,sh=geometry
+    # The hand at (425,582) in the original rig, transformed through crop.
+    dest=(int(left+(425-cx)*w/sw),int(top+(582-cy)*h/sh))
+    action=str(role.get(cast[holder]) or "idle")
+    move=_ease((max(0.0,t)-.12)/.95)
+    if action=="throw":
+        # Release after first half, then follow a shallow believable arc.
+        free=_ease((max(0.0,t)-.55)/.8)
+        return (int(dest[0]+165*free),
+                int(dest[1]-115*math.sin(free*math.pi))), holder, False
+    if action in ("pick","carry","repair","open","push","pull"):
+        # Smooth arrival at fingertips. No teleport on individual frames.
+        target_x=dest[0]
+        if action=="push":
+            target_x+=int(65*move)
+        elif action=="pull":
+            target_x-=int(65*move)
+        pos=(int(540*(1-move)+target_x*move),
+             int(1190*(1-move)+dest[1]*move))
+        return pos, holder, move>.2
+    return (540,1140), holder, False
+
 
 def _stable_moods(shot,cast):
     override=shot.get("mood_notes") or {}
@@ -155,7 +190,7 @@ def ensemble_frame(im,shot,t):
         return False
 
     d=ImageDraw.Draw(im)
-    draw_ensemble_stage(d,shot.get("story_environment"),t)
+    draw_ensemble_stage(d,shot.get("story_environment"),t,shot)
     style=str(shot.get("scene_style") or "crowd").lower()
     if style not in SCENE_STYLES:
         style="crowd"
@@ -168,6 +203,9 @@ def ensemble_frame(im,shot,t):
     _stage_cue(d,shot,style,t,focus_x)
     moods=_stable_moods(shot,cast)
     seed=str(shot.get("story_visual_seed") or "|".join(cast))
+    obj=scene_prop(shot)
+    focus_idx=cast.index(focus)
+    prop_state=(_prop_stage_position(shot,spots,cast,focus,t) if obj else None)
     # Actors in the distant row render first, then nearer, preserving depth.
     for i,x,y,width in spots:
         name=cast[i]
@@ -177,7 +215,15 @@ def ensemble_frame(im,shot,t):
                           "open","push","pull","point","hug","clap"):
             action="look"
         # Individual phase avoids cloned synchronous blinking/steps.
-        sprite=_sprite(name,i,action,moods[name],t+i*.11,seed)
+        hand_local=None
+        if (prop_state and i==prop_state[1] and prop_state[2] and
+                action in ("pick","carry","repair","open","push","pull")):
+            left,top,w,h,cx,cy,sw,sh=_composition_geometry(
+                i,x,y,width,focus_idx,style)
+            px,py=prop_state[0]
+            hand_local=(cx+(px-left)*sw/w,cy+(py-top)*sh/h)
+        sprite=_sprite(name,i,action,moods[name],t+i*.11,seed,
+                       hand_target=hand_local)
         # In a clue/reveal/reaction beat, switch from a tiny full-body group
         # sprite to a dramatic head-and-shoulders shot for the lead actor.
         if name==focus and style in ("clue","reaction","reveal"):
@@ -189,10 +235,9 @@ def ensemble_frame(im,shot,t):
         left=max(55,min(1025-width,left))
         top=max(485,min(1370-height,y))
         im.paste(sprite,(left,top),sprite)
-    obj=scene_prop(shot)
-    if obj and style in ("clue","reveal","action","confrontation"):
-        # The clue is prominent in evidence-centric scenes, rather than
-        # dropping every object into the same bottom-center box.
-        stage_obj_x=int(530+50*math.sin(t*1.5)) if style=="action" else 540
-        _prop(d,obj,stage_obj_x,1142,t)
+    if prop_state and style in ("clue","reveal","action","confrontation","resolution"):
+        # The object is staged as real evidence and follows the active grip.
+        handler=cast[prop_state[1]]
+        action=str(roles.get(handler) or "idle")
+        _prop(d,obj,*prop_state[0],t,action=action)
     return True
