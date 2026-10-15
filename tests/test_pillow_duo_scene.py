@@ -35,8 +35,6 @@ class PillowDuoTests(unittest.TestCase):
 
     def test_declared_cast_rejects_duplicate_and_unknown(self):
         for cast in (["fox", "fox"], ["fox", "dragon"], ["fox"], []):
-            if not cast:
-                continue  # An empty cast means the story has no declared cast.
             with self.subTest(cast=cast):
                 self.assertFalse(duo_compatibility({
                     "speech": "The fox and rabbit greet each other.",
