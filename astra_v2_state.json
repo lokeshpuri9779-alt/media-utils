@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 25,
-  "confirmed_today": 24,
-  "last_attempt_at": "2026-10-15T03:38:19.062580+00:00",
+  "attempts": 26,
+  "confirmed_today": 25,
+  "last_attempt_at": "2026-10-15T04:07:58.900323+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1043,14 +1043,22 @@
       "format": "short",
       "uploaded_at": "2026-10-15T03:31:57.630223+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-0b38b9527f9be7d9": {
+      "video_id": "mMYVbzSVWmg",
+      "confirmed_at": "2026-10-15T04:06:12.218630+00:00",
+      "title": "The Otter and the Tide Clock",
+      "format": "short",
+      "uploaded_at": "2026-10-15T03:38:20.428556+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "mMYVbzSVWmg": {
-      "content_id": "rayvan-forge-0b38b9527f9be7d9",
-      "title": "The Otter and the Tide Clock",
+    "kbgQfoDfztk": {
+      "content_id": "rayvan-forge-1a890e0671411ec3",
+      "title": "The Lynx and the Glass Orchestra",
       "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T03:38:20.428556+00:00",
+      "uploaded_at": "2026-10-15T04:08:00.464686+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -1059,11 +1067,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T03:37:06.067868+00:00",
+  "last_preflight_at": "2026-10-15T04:06:11.884091+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T03:38:20.734785+00:00",
+    "at": "2026-10-15T04:08:00.784212+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2071,6 +2079,14 @@
     "rayvan-forge-0b38b9527f9be7d9": {
       "at": "2026-10-15T03:38:19.062563+00:00",
       "title": "The Otter and the Tide Clock",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-1a890e0671411ec3": {
+      "at": "2026-10-15T04:07:58.900305+00:00",
+      "title": "The Lynx and the Glass Orchestra",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
