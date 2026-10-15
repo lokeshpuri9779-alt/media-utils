@@ -102,6 +102,22 @@ class UnifiedEngineTests(unittest.TestCase):
                               ("solo", "duo", "ensemble"))
                 self.assertIsNotNone(ImageChops.difference(canvas, before).getbbox())
 
+    def test_newly_introduced_characters_persist_without_cast_reset(self):
+        from astra_v2.story_forge import catalog
+        from studio_renderer import make_plan
+        stories = catalog(limit=256)
+        for title, lead in (("The Owl and the Last Library Light", "owl"),
+                            ("The Cat Who Ran a Bakery", "cat")):
+            story = next(s for s in stories if s["title"] == title)
+            with self.subTest(title=title):
+                with patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"}):
+                    plan = make_plan(dict(story))
+                casts = [tuple(shot.get("story_cast") or ()) for shot in plan]
+                self.assertTrue(all(lead in cast for cast in casts))
+                self.assertTrue(any(len(cast) > 1 for cast in casts))
+                self.assertTrue(all(set(a).issubset(b)
+                                    for a, b in zip(casts, casts[1:])))
+
     def test_real_studio_plan_keeps_duo_cast(self):
         from astra_v2.story_forge import catalog
         from studio_renderer import make_plan
