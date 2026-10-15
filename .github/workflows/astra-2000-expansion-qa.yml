@@ -1,0 +1,62 @@
+name: ASTRA 2000 Asset and Story QA
+on:
+  pull_request:
+    paths:
+      - 'astra_v2/procedural_visual_library.py'
+      - 'astra_v2/story_expansion_2000.py'
+      - 'astra_v2/story_forge.py'
+      - 'astra_v2/pillow_duo_scene.py'
+      - 'astra_v2/story_action_motion.py'
+      - 'studio_renderer.py'
+      - 'tests/test_astra_2000_expansion.py'
+      - 'tests/test_astra_2000_actions.py'
+      - '.github/workflows/astra-2000-expansion-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install free CPU renderer dependencies
+        run: python -m pip install 'Pillow>=10,<12' 'imageio-ffmpeg>=0.5,<1' 'numpy>=1.24' 'httpx>=0.25'
+      - name: Verify 2000 recipes and strict editorial quarantine
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_2000_expansion.py' -v
+          python -m unittest discover -s tests -p 'test_astra_2000_actions.py' -v
+          python -m unittest discover -s tests -p 'test_story_action_motion.py' -v
+          python -m unittest discover -s tests -p 'test_pillow_duo_scene.py' -v
+          python -m unittest discover -s tests -p 'test_astra_story_inventory.py' -v
+      - name: Save honest asset and candidate inventory
+        run: |
+          mkdir -p preview
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from astra_v2.procedural_visual_library import CHARACTER_VARIANTS, ICON_VARIANTS, SPECIES, MOTIFS
+          from astra_v2.story_expansion_2000 import candidate_count
+          manifest={
+            'character_skin_variants':CHARACTER_VARIANTS,'character_base_species':len(SPECIES),
+            'icon_style_variants':ICON_VARIANTS,'icon_base_motifs':len(MOTIFS),
+            'review_only_story_candidates':candidate_count(),
+            'independently_authored_new_stories':0,
+            'production_approved_in_expansion':0,
+            'rendering':'Pillow CPU deterministic on demand',
+          }
+          Path('preview/expansion-inventory.json').write_text(json.dumps(manifest,indent=2))
+          print(json.dumps(manifest,sort_keys=True))
+          PY
+      - name: Visual sample of integrated animation
+        run: python -m tools.pillow_studio_preview
+      - uses: actions/upload-artifact@v4
+        with:
+          name: astra-2000-expansion-qa
+          path: |
+            preview/expansion-inventory.json
+            preview/pillow-studio-composite.mp4
+          retention-days: 7
