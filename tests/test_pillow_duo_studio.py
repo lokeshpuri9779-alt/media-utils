@@ -24,7 +24,7 @@ class PillowStudioHookTests(unittest.TestCase):
         shot = {"start": 0.0, "end": 2.4, "duration": 2.4,
                 "voice_start": .08, "audio": np.zeros(RATE, dtype=np.float32),
                 "speech": "A lone fox enters the doorway.",
-                "headline": "A lonely fox", "visual": "story",
+                "headline": "A lonely fox", "label": "A lonely fox", "visual": "story",
                 "director_camera": "still", "creative_format": "microfiction_cinematic"}
         with patch.dict("os.environ", {"ASTRA_PILLOW_DUO_STRICT": "1", "ASTRA_STUDIO_PILLOW_DUO": "1"}):
             with self.assertRaisesRegex(CreativeReject, "Pillow Duo cannot represent"):
@@ -34,7 +34,7 @@ class PillowStudioHookTests(unittest.TestCase):
         shot = {"start": 0.0, "end": 2.4, "duration": 2.4,
                 "voice_start": .08, "audio": np.zeros(RATE, dtype=np.float32),
                 "speech": "A lone fox enters the doorway.",
-                "headline": "A lonely fox", "visual": "story",
+                "headline": "A lonely fox", "label": "A lonely fox", "visual": "story",
                 "director_camera": "still", "creative_format": "microfiction_cinematic"}
         with patch.dict("os.environ", {"ASTRA_PILLOW_DUO_STRICT": "0", "ASTRA_STUDIO_PILLOW_DUO": "1"}):
             frame = render_frame([shot], 1.3, "fiction", 2.4)
