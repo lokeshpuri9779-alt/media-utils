@@ -10,6 +10,7 @@ from PIL import ImageDraw
 ENVIRONMENTS=frozenset((
     "courtroom","clocktower","river","library","attic","auction",
     "street","concert_hall","bridge","tunnel","hills","museum","gallery",
+    "garden","workshop","market","station","home","forest",
 ))
 BOUNDS=(55,485,1025,1370)
 PALETTES={
@@ -26,6 +27,12 @@ PALETTES={
     "hills":((87,136,150),(88,136,124),(220,194,130)),
     "museum":((87,99,125),(126,116,111),(193,172,132)),
     "gallery":((55,96,122),(74,114,121),(217,179,111)),
+    "garden":((97,150,147),(74,122,91),(180,204,148)),
+    "workshop":((88,111,124),(101,88,78),(198,165,116)),
+    "market":((122,147,151),(120,111,99),(221,181,133)),
+    "station":((101,131,143),(106,109,122),(192,179,157)),
+    "home":((112,137,151),(125,107,105),(210,179,145)),
+    "forest":((66,122,121),(60,111,92),(152,181,123)),
 }
 
 def _line(d,points,color,width=6):
@@ -74,11 +81,13 @@ def draw_ensemble_stage(d, environment, t, shot=None):
         if name=="bridge":
             for x in (105,920):
                 d.rectangle((x,580,x+22,1050),fill=(183,145,111))
-            _line(d,((115,620),(540,894),(932,620)),highlight,9)
-            _line(d,((115,1025),(932,1025)),(190,151,109),18)
-            for x in range(195,925,95):
-                top=620+abs(525-x)*.5
-                _line(d,((x,top),(x,1025)),(201,167,132),5)
+            # A real low timber crossing, not the old bright scene-spanning
+            # suspension curve that resembled a renderer guide arc.
+            d.rectangle((116,1002,935,1042),fill=(150,105,78))
+            for x in range(154,933,92):
+                d.rectangle((x,958,x+14,1030),fill=(123,96,83))
+                d.ellipse((x+3,967,x+11,975),fill=(192,170,141))
+            _line(d,((124,961),(931,961)),(130,111,94),8)
     elif name in ("library","attic"):
         for x in (100,660):
             d.rounded_rectangle((x,565,x+320,1120),radius=10,
@@ -137,6 +146,63 @@ def draw_ensemble_stage(d, environment, t, shot=None):
         for k in range(5):
             y=790+k*70
             _line(d,((360-k*24,y),(726+k*24,y)),highlight,7)
+    elif name in ("garden","forest"):
+        # Real foreground/midground plants with fixed identities per scene.
+        for row in range(2):
+            for k in range(5):
+                x=105+k*210+(row%2)*24
+                top=720+row*185+(k%2)*29
+                if name=="forest":
+                    d.rectangle((x+37,top+63,x+66,1120),fill=(104,81,69))
+                    d.polygon(((x-42,top+130),(x+49,top-80),
+                               (x+132,top+130)),fill=(48+row*12,112+row*6,87))
+                    d.polygon(((x-26,top+38),(x+49,top-125),
+                               (x+113,top+38)),fill=(59+row*8,132,97))
+                else:
+                    d.rounded_rectangle((x-19,top+94,x+104,top+151),radius=8,
+                                        fill=(132,96,80))
+                    for j in range(3):
+                        px=x+j*36
+                        d.line((px,top+106,px,top+32),fill=(65,139,87),width=6)
+                        d.ellipse((px-15,top+11,px+15,top+41),
+                                  fill=((220,152,151) if j%2 else (234,198,105)))
+    elif name=="workshop":
+        for x in (115,750):
+            d.rectangle((x,600,x+210,1020),fill=(101,88,83),outline=highlight,width=7)
+            for y in (697,845,974):
+                d.rectangle((x+10,y,x+199,y+15),fill=(157,133,105))
+            for k in range(6):
+                px=x+24+(k%3)*61;py=632+(k//3)*159
+                d.rectangle((px,py,px+28,py+53),fill=(128+k*11,145,148))
+        d.rounded_rectangle((327,990,740,1130),radius=10,fill=(137,98,77))
+        for x in (396,660):
+            d.rectangle((x,1110,x+25,1280),fill=(104,79,66))
+    elif name=="market":
+        for x,color in ((90,(194,114,94)),(390,(124,165,150)),(698,(211,166,102))):
+            d.rectangle((x+20,760,x+235,1060),fill=(141,127,116))
+            for stripe in range(5):
+                d.polygon(((x+stripe*52,728),(x+(stripe+1)*52,728),
+                           (x+(stripe+1)*52,800),(x+stripe*52,800)),
+                          fill=color if stripe%2==0 else (237,218,183))
+            d.rectangle((x+10,1027,x+260,1070),fill=(119,86,74))
+    elif name=="station":
+        for x in (122,648):
+            d.rounded_rectangle((x,568,x+281,1040),radius=15,
+                                fill=(86,105,117),outline=highlight,width=8)
+            for k in range(3):
+                y=626+k*125
+                d.rectangle((x+20,y,x+260,y+85),fill=(157,199,205))
+        d.rectangle((70,1030,1020,1075),fill=(141,131,114))
+        d.line((110,1170,990,1170),fill=(174,176,170),width=12)
+    elif name=="home":
+        d.rectangle((115,577,971,1115),fill=(154,127,112))
+        for x in (169,718):
+            d.rounded_rectangle((x,652,x+193,924),radius=12,
+                                fill=(119,166,176),outline=(222,199,151),width=12)
+            d.line((x+96,660,x+96,916),fill=(222,199,151),width=8)
+        d.rounded_rectangle((430,847,667,1118),radius=9,
+                            fill=(101,87,82),outline=highlight,width=8)
+        d.ellipse((605,978,623,995),fill=(235,208,138))
     else: # hills
         for k in range(4):
             x=95+k*245
@@ -203,7 +269,7 @@ def _story_set_dressing(d, environment, shot, t, accent):
         for yy in (945,957,969,981):
             d.line((505,yy,628,yy),fill=(101,95,105),width=2)
         d.line((560,1001,560,1096),fill=(107,86,78),width=10)
-    if environment in ("hills","street","bridge"):
+    if environment in ("hills","street","bridge","garden","forest","market"):
         # A moving but predictable set of foreground plants and small stones
         # adds depth without spawning extra animals or flickering props.
         for k in range(7):
