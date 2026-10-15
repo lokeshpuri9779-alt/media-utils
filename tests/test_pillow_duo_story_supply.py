@@ -8,7 +8,7 @@ from astra_v2.publication_quality import publication_rejection
 
 class StorySupplyTests(unittest.TestCase):
     def test_unique_curated_not_generic_templates(self):
-        self.assertEqual(len(DUO_PLOTS), 12)
+        self.assertGreaterEqual(len(DUO_PLOTS), 12)
         keys=[s[0] for s in DUO_PLOTS]
         titles=[s[1].casefold() for s in DUO_PLOTS]
         self.assertEqual(len(set(keys)), len(keys))
@@ -29,8 +29,8 @@ class StorySupplyTests(unittest.TestCase):
         wanted={s[1] for s in DUO_PLOTS}
         selected=[s for s in found if s["title"] in wanted]
         self.assertEqual({s["title"] for s in selected}, wanted)
-        self.assertEqual(len({s["content_id"] for s in selected}),12)
-        self.assertEqual(len({s["plot_fingerprint"] for s in selected}),12)
+        self.assertEqual(len({s["content_id"] for s in selected}),len(DUO_PLOTS))
+        self.assertEqual(len({s["plot_fingerprint"] for s in selected}),len(DUO_PLOTS))
         for story in selected:
             self.assertEqual(story["kind"], "authored_causal_story")
             self.assertTrue(story["production_ready"])
