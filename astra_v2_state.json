@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 59,
-  "confirmed_today": 58,
-  "last_attempt_at": "2026-10-15T16:17:27.324029+00:00",
+  "attempts": 60,
+  "confirmed_today": 59,
+  "last_attempt_at": "2026-10-15T16:33:34.071425+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1315,14 +1315,22 @@
       "format": "short",
       "uploaded_at": "2026-10-15T15:59:21.127916+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-49baa01877db88fc": {
+      "video_id": "cGwWrecqaXM",
+      "confirmed_at": "2026-10-15T16:32:28.324628+00:00",
+      "title": "The Goalkeeper's Torn Glove",
+      "format": "short",
+      "uploaded_at": "2026-10-15T16:17:29.231361+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "cGwWrecqaXM": {
-      "content_id": "rayvan-forge-49baa01877db88fc",
-      "title": "The Goalkeeper's Torn Glove",
+    "Jv40UGslYGk": {
+      "content_id": "rayvan-forge-d4340a1d50d266bc",
+      "title": "The Rooftop Cloud Collector",
       "day": "2026-10-15",
-      "uploaded_at": "2026-10-15T16:17:29.231361+00:00",
+      "uploaded_at": "2026-10-15T16:33:35.694577+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
@@ -1331,11 +1339,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-15T16:16:03.719817+00:00",
+  "last_preflight_at": "2026-10-15T16:32:27.943753+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T16:17:29.464340+00:00",
+    "at": "2026-10-15T16:33:35.919616+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2615,6 +2623,14 @@
     "rayvan-forge-49baa01877db88fc": {
       "at": "2026-10-15T16:17:27.324015+00:00",
       "title": "The Goalkeeper's Torn Glove",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-d4340a1d50d266bc": {
+      "at": "2026-10-15T16:33:34.071409+00:00",
+      "title": "The Rooftop Cloud Collector",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
