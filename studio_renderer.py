@@ -1066,6 +1066,10 @@ def render_frame(plan,t,genre,total):
         elif genre == 'fiction' and os.environ.get('ASTRA_STUDIO_PILLOW_DUO', '1') == '1':
             from astra_v2.pillow_duo_scene import draw_duo
             if not draw_duo(im, s, u):
+                # Optional fail-closed production gate: never replace an
+                # unsupported two-character story with unrelated generic art.
+                if os.environ.get('ASTRA_PILLOW_DUO_STRICT', '0') == '1':
+                    raise CreativeReject('Pillow Duo cannot represent this fiction scene; repair its cast or storyboard.')
                 draw_visual(im,s,t,u,accent)
         else:
             draw_visual(im,s,t,u,accent)
