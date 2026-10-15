@@ -1056,9 +1056,13 @@ def render_frame(plan,t,genre,total):
         # production scenes must never render blank after failed acquisition.
         raise CreativeReject('Scene media missing from cache: refusing overlapping/filler fallback.')
     if layers['draw_visual']:
-        # Ensemble Studio is isolated until visual QA approves it.
-        # Default production continues through the verified duo renderer.
-        if (genre == 'fiction' and s.get('experimental_ensemble')
+        # The unified Studio fiction renderer owns all supported animal casts.
+        # Unrepresentable scenes fail closed; never mask a broken story with
+        # unrelated generic art or silently switch publishing engines.
+        if genre == 'fiction' and os.environ.get('ASTRA_UNIFIED_STORY_ENGINE', '0') == '1':
+            from astra_v2.unified_story_engine import draw_story_frame
+            draw_story_frame(im, s, u)
+        elif (genre == 'fiction' and s.get('experimental_ensemble')
                 and os.environ.get('ASTRA_EXPERIMENT_ENSEMBLE', '0') == '1'):
             from astra_v2.ensemble_scene import ensemble_frame
             if not ensemble_frame(im,s,u):
@@ -1066,8 +1070,6 @@ def render_frame(plan,t,genre,total):
         elif genre == 'fiction' and os.environ.get('ASTRA_STUDIO_PILLOW_DUO', '1') == '1':
             from astra_v2.pillow_duo_scene import draw_duo
             if not draw_duo(im, s, u):
-                # Optional fail-closed production gate: never replace an
-                # unsupported two-character story with unrelated generic art.
                 if os.environ.get('ASTRA_PILLOW_DUO_STRICT', '0') == '1':
                     raise CreativeReject('Pillow Duo cannot represent this fiction scene; repair its cast or storyboard.')
                 draw_visual(im,s,t,u,accent)
@@ -1626,6 +1628,15 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
                 raise CreativeReject(
                     f'Pillow Duo preflight rejected fiction shot {index + 1}: '
                     + suitability['reason'])
+    if genre == 'fiction' and os.environ.get('ASTRA_UNIFIED_STORY_ENGINE', '0') == '1':
+        from astra_v2.unified_story_engine import validate_story_shot
+        from astra_v2.layer_contract import scene_layers
+        for index, shot in enumerate(plan):
+            if scene_layers(shot)['draw_visual']:
+                try:
+                    validate_story_shot(shot)
+                except CreativeReject as exc:
+                    raise CreativeReject(f'Unified Studio preflight shot {index + 1}: {exc}') from exc
     assets=asset_manifest(ch,plan)
     resolved_assets=prepare_media_cache(resolve_assets(assets))
     resolved_assets=acquire_story_media(resolved_assets)
