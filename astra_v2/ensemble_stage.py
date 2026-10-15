@@ -11,6 +11,8 @@ ENVIRONMENTS=frozenset((
     "courtroom","clocktower","river","library","attic","auction",
     "street","concert_hall","bridge","tunnel","hills","museum","gallery",
     "garden","workshop","market","station","home","forest",
+    "bakery","greenhouse","observatory","cave","school","lighthouse",
+    "theater","harbor",
 ))
 BOUNDS=(55,485,1025,1370)
 PALETTES={
@@ -33,6 +35,14 @@ PALETTES={
     "station":((101,131,143),(106,109,122),(192,179,157)),
     "home":((112,137,151),(125,107,105),(210,179,145)),
     "forest":((66,122,121),(60,111,92),(152,181,123)),
+    "bakery":((115,127,136),(156,115,98),(232,183,129)),
+    "greenhouse":((90,143,154),(80,133,101),(184,216,169)),
+    "observatory":((48,86,123),(70,92,122),(193,213,226)),
+    "cave":((61,80,89),(70,75,72),(144,160,144)),
+    "school":((126,146,164),(139,118,108),(220,192,142)),
+    "lighthouse":((86,147,169),(57,114,142),(225,213,173)),
+    "theater":((105,76,114),(137,78,95),(225,191,136)),
+    "harbor":((90,143,166),(78,123,139),(213,195,152)),
 }
 
 def _line(d,points,color,width=6):
@@ -203,6 +213,100 @@ def draw_ensemble_stage(d, environment, t, shot=None):
         d.rounded_rectangle((430,847,667,1118),radius=9,
                             fill=(101,87,82),outline=highlight,width=8)
         d.ellipse((605,978,623,995),fill=(235,208,138))
+    elif name=="bakery":
+        d.rectangle((118,600,968,1090),fill=(175,148,129))
+        d.rectangle((140,626,946,664),fill=(114,88,78))
+        for x in (166,726):
+            d.rounded_rectangle((x,704,x+242,1001),radius=16,
+                                fill=(96,93,88),outline=highlight,width=9)
+            for yy in (790,884):
+                d.rectangle((x+19,yy,x+222,yy+13),fill=(216,180,129))
+        d.rounded_rectangle((388,983,694,1137),radius=16,
+                            fill=(169,115,85),outline=highlight,width=7)
+        for j in range(4):
+            x=421+j*65
+            d.ellipse((x-21,954,x+25,991),fill=(218,163,107))
+            _line(d,((x-12,970),(x+12,970)),(169,112,81),3)
+    elif name=="greenhouse":
+        for j in range(4):
+            x=95+j*255
+            d.polygon(((x,1092),(x+15,619),(x+230,619),(x+240,1092)),
+                      fill=(113,174,155),outline=highlight,width=7)
+            d.rectangle((x+35,735,x+200,1045),fill=(98,143,127))
+        for row in range(2):
+            for j in range(7):
+                x=105+j*137
+                y=900+row*100
+                d.line((x,y+130,x,y),fill=(65,132,89),width=7)
+                d.ellipse((x-21,y-38,x+21,y+5),fill=(168,198,111))
+    elif name=="observatory":
+        d.polygon(((86,1020),(150,718),(394,624),(691,624),(916,718),
+                   (983,1020)),fill=(83,119,143))
+        d.ellipse((329,562,756,891),fill=(129,152,173),outline=highlight,width=12)
+        d.rectangle((340,729,745,1099),fill=(69,89,118))
+        d.polygon(((447,652),(716,650),(728,679),(460,702)),
+                  fill=(194,199,196))
+        d.ellipse((683,625,783,717),fill=(53,74,100),outline=highlight,width=7)
+        for i in range(12):
+            x=132+(i*173)%816
+            y=551+(i*73)%150
+            d.ellipse((x,y,x+5,y+5),fill=(220,225,217))
+    elif name=="cave":
+        d.polygon(((55,600),(185,537),(309,681),(479,573),(668,681),
+                   (831,523),(1025,609),(1025,1110),(55,1110)),
+                  fill=(99,102,96))
+        for j in range(8):
+            x=80+j*121
+            h=84+(j%3)*31
+            d.polygon(((x,565),(x+55,565),(x+29,565+h)),
+                      fill=(68,82,84))
+        d.ellipse((230,829,851,1169),fill=(43,62,75),outline=(128,135,128),width=12)
+        for j in range(4):
+            x=155+j*211
+            d.polygon(((x,1130),(x+54,982),(x+104,1130)),
+                      fill=(152,146,130))
+    elif name=="school":
+        d.rectangle((109,589,971,1090),fill=(153,139,132))
+        d.rounded_rectangle((273,614,797,857),radius=18,
+                            fill=(49,91,88),outline=(219,189,131),width=10)
+        for j in range(4):
+            x=135+j*226
+            d.rounded_rectangle((x,943,x+165,1087),radius=13,
+                                fill=(135,95,76),outline=(202,168,125),width=5)
+            d.rectangle((x+22,1076,x+39,1148),fill=(91,75,63))
+            d.rectangle((x+133,1076,x+150,1148),fill=(91,75,63))
+    elif name=="lighthouse":
+        d.polygon(((55,1088),(317,1028),(597,1098),(1025,1027),
+                   (1025,1165),(55,1165)),fill=(73,130,142))
+        d.polygon(((404,1065),(464,615),(610,615),(670,1065)),
+                  fill=(223,209,184),outline=(104,115,117),width=7)
+        d.polygon(((466,616),(494,536),(580,536),(610,616)),fill=(142,89,88))
+        d.rectangle((488,580,586,630),fill=(239,213,135))
+        for j in range(4):
+            x=130+j*247
+            y=1112+(j%2)*22
+            _line(d,((x,y),(x+130,y+12)),(163,205,217),5)
+    elif name=="theater":
+        d.rectangle((83,561,1005,1097),fill=(67,57,88))
+        for x,flipped in ((105,1),(805,-1)):
+            d.polygon(((x,576),(x+flipped*147,576),
+                       (x+flipped*108,1090),(x,1090)),
+                      fill=(167,69,93))
+        d.rectangle((192,1030,887,1121),fill=(139,96,79))
+        for j in range(4):
+            x=233+j*190
+            d.ellipse((x-26,591,x+26,632),fill=(232,197,135))
+            d.line((x,630,x,669),fill=(224,190,134),width=9)
+    elif name=="harbor":
+        d.polygon(((55,824),(305,734),(535,835),(805,723),
+                   (1025,816),(1025,1100),(55,1100)),fill=(92,152,160))
+        for j in range(4):
+            y=1017+j*33
+            _line(d,((60,y),(1022,y+11)),(127+j*6,190,195),5)
+        d.rectangle((150,963,886,1013),fill=(155,119,91))
+        for x in range(178,880,155):
+            d.rectangle((x,982,x+22,1206),fill=(105,86,75))
+        d.polygon(((587,925),(656,844),(735,924)),fill=(221,199,148))
     else: # hills
         for k in range(4):
             x=95+k*245
