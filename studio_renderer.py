@@ -395,6 +395,14 @@ def make_plan(ch):
         # requiring both protagonists to be repeated in every spoken line.
         named_cast = scene_pair({'speech': str(ch.get('title') or '')})
         visual_seed = str(ch.get('content_id') or ch.get('title') or '')
+        unified_mode = os.environ.get("ASTRA_UNIFIED_STORY_ENGINE", "0") == "1"
+        if unified_mode:
+            from astra_v2.unified_story_engine import cast_from_title
+            declared = ch.get("story_cast")
+            # Keep one explicit cast through every beat. The title's cast is
+            # used when a structured cast is not supplied by the story forge.
+            unified_cast = (tuple(declared) if isinstance(declared, (tuple, list))
+                            else cast_from_title(ch.get("title", "")))
         experimental_cast = tuple(ch.get("story_cast") or ())
         ensemble = bool(ch.get("experimental_ensemble") and 3 <= len(experimental_cast) <= 8)
         if ensemble:
@@ -406,7 +414,12 @@ def make_plan(ch):
             # Wardrobe, colors and accessories are selected once per story.
             # A fresh narration beat must not silently change a character.
             shot['story_visual_seed'] = visual_seed
-            if ensemble:
+            if unified_mode:
+                if unified_cast:
+                    shot['story_cast'] = unified_cast
+                    if len(unified_cast) >= 3:
+                        shot['experimental_ensemble'] = True
+            elif ensemble:
                 shot['story_cast'] = experimental_cast
                 shot['experimental_ensemble'] = True
             elif named_cast and shot['story_subject'] in (None, *named_cast):
@@ -1061,7 +1074,8 @@ def render_frame(plan,t,genre,total):
         # unrelated generic art or silently switch publishing engines.
         if genre == 'fiction' and os.environ.get('ASTRA_UNIFIED_STORY_ENGINE', '0') == '1':
             from astra_v2.unified_story_engine import draw_story_frame
-            draw_story_frame(im, s, u)
+            draw_story_frame(im, s, u, draw_directed=draw_visual,
+                             global_time=t, accent=accent)
         elif (genre == 'fiction' and s.get('experimental_ensemble')
                 and os.environ.get('ASTRA_EXPERIMENT_ENSEMBLE', '0') == '1'):
             from astra_v2.ensemble_scene import ensemble_frame
@@ -1614,7 +1628,8 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
     # Fail before asset acquisition, narration and FFmpeg when strict Pillow
     # fiction mode cannot faithfully illustrate an eligible visual scene.
     if (genre == 'fiction' and os.environ.get('ASTRA_PILLOW_DUO_STRICT', '0') == '1'
-            and os.environ.get('ASTRA_STUDIO_PILLOW_DUO', '1') == '1'):
+            and os.environ.get('ASTRA_STUDIO_PILLOW_DUO', '1') == '1'
+            and os.environ.get('ASTRA_UNIFIED_STORY_ENGINE', '0') != '1'):
         from astra_v2.pillow_duo_scene import duo_compatibility
         from astra_v2.layer_contract import scene_layers
         for index, shot in enumerate(plan):
