@@ -97,7 +97,8 @@ def proposal(index):
     emotional = _pick(index, EMOTIONAL_TURNS, 43)
     # The dimensions rotate at different strides; this produces a large
     # deterministic combination space without claiming every draft is unique.
-    title = f"The Mystery of {setting.split()[-1].capitalize()}: {clue.capitalize()}"
+    # Use compact, searchable story titles rather than generic inventory labels.
+    title = f"The {visual.capitalize()} Mystery of the {setting.split()[-1].capitalize()}"
     beats = (
         ("reveal", f"At {setting}, {actor} discovered that {mystery}, {stakes}.", visual),
         ("build", f"An investigation uncovered {discovery}; meanwhile, {emotional}.", "book"),
