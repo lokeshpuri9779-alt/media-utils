@@ -210,23 +210,25 @@ def run():
                     from astra_v2.character_registry import initial_character
                     from astra_v2.character_bootstrap import register_approved_character
                     snapshot_path = Path("character-continuity.json")
-                    if snapshot_path.is_file():
-                        from astra_v2.character_snapshot import read_snapshot
-                        current_snapshot = read_snapshot(snapshot_path)
-                        if candidate.get("character_id") not in current_snapshot["characters"]:
-                            # Validate the same explicit approval and episode
-                            # contract as the existing-character path.
-                            staged = register_approved_character(current_snapshot, candidate)
-                            first_state = staged["characters"][candidate["character_id"]]
-                            build_character_manifests(candidate, first_state)
-                            write_json(Path("runtime-health/character-first-candidate.json"), {
-                                "content_id": cid,
-                                "character_id": candidate["character_id"],
-                                "character_name": candidate["character_name"],
-                                "character_approved": True,
-                                "format": "short",
-                                "character_episode": candidate["character_episode"],
-                            })
+                    from astra_v2.character_snapshot import read_snapshot
+                    current_snapshot = (
+                        read_snapshot(snapshot_path) if snapshot_path.is_file()
+                        else {"version": 1, "characters": {}}
+                    )
+                    if candidate.get("character_id") not in current_snapshot["characters"]:
+                        # Validate the same explicit approval and episode
+                        # contract as the existing-character path.
+                        staged = register_approved_character(current_snapshot, candidate)
+                        first_state = staged["characters"][candidate["character_id"]]
+                        build_character_manifests(candidate, first_state)
+                        write_json(Path("runtime-health/character-first-candidate.json"), {
+                            "content_id": cid,
+                            "character_id": candidate["character_id"],
+                            "character_name": candidate["character_name"],
+                            "character_approved": True,
+                            "format": "short",
+                            "character_episode": candidate["character_episode"],
+                        })
                 # Optional continuity manifests are emitted only for explicitly
                 # approved characters already present in durable memory.
                 # No missing character is silently invented.
