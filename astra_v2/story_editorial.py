@@ -31,7 +31,16 @@ def triage(stories, history=()):
         issues = editorial_issues(story, seen)
         item = {"content_id": story.get("content_id"), "issues": issues,
                 "publication_blocked": bool(publication_rejection(story))}
-        if issues:
+        # Requiring a human/model editorial decision is a workflow state,
+        # not itself a structural defect. Keep the proposal publication-blocked,
+        # but make structurally sound drafts visible in the review queue.
+        blocking_issues = [issue for issue in issues
+                           if issue != "human_or_model_editorial_review_required"]
+        item["blocking_issues"] = blocking_issues
+        item["awaiting_editorial_decision"] = (
+            "human_or_model_editorial_review_required" in issues
+        )
+        if blocking_issues:
             rejected.append(item)
         else:
             review.append(item)

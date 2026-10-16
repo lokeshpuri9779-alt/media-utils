@@ -7,10 +7,11 @@ class StoryEditorialTests(unittest.TestCase):
     def test_proposals_never_auto_approved(self):
         story = proposal(0)
         result = triage([story])
-        self.assertEqual(result["ready_for_review"], [])
-        self.assertEqual(len(result["needs_work"]), 1)
-        self.assertTrue(result["needs_work"][0]["publication_blocked"])
-        self.assertIn("human_or_model_editorial_review_required", result["needs_work"][0]["issues"])
+        self.assertEqual(len(result["ready_for_review"]), 1)
+        self.assertEqual(result["needs_work"], [])
+        self.assertTrue(result["ready_for_review"][0]["publication_blocked"])
+        self.assertTrue(result["ready_for_review"][0]["awaiting_editorial_decision"])
+        self.assertIn("human_or_model_editorial_review_required", result["ready_for_review"][0]["issues"])
         self.assertFalse(story["production_ready"])
 
     def test_repeated_story_rejected(self):
