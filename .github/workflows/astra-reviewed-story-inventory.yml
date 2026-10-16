@@ -8,7 +8,7 @@ on:
     paths:
       - 'astra_v2/story_inventory.py'
       - 'astra_v2/production_story_gate.py'
-      - 'tests/test_astra_story_inventory.py'
+      - 'tests/test_astra_remaining_story_inventory.py'
       - '.github/workflows/astra-reviewed-story-inventory.yml'
 
 permissions:
@@ -31,7 +31,9 @@ jobs:
             git show origin/astra-state:astra_story_history.json > astra_story_history.json
           fi
       - name: Run inventory regressions
-        run: python -m unittest discover -s tests -p test_astra_story_inventory.py -v
+        run: |
+          python -m unittest discover -s tests -p test_astra_story_inventory.py -v
+          python -m unittest discover -s tests -p test_astra_remaining_story_inventory.py -v
       - name: Measure eligible authored story inventory
         run: python -m astra_v2.story_inventory
       - name: Archive report
