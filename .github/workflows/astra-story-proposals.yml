@@ -51,6 +51,42 @@ jobs:
         run: python -m astra_v2.story_editorial_report
       - name: Audit production eligibility without promotion
         run: python -m astra_v2.story_supply_review
+      - name: Summarize reviewable story supply without approval
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          ledger_path = Path("runtime-health/story_proposals.json")
+          review_path = Path("runtime-health/story_supply_review.json")
+          ledger = json.loads(ledger_path.read_text()) if ledger_path.exists() else {"proposals": []}
+          review = json.loads(review_path.read_text()) if review_path.exists() else {}
+          proposals = ledger.get("proposals", [])
+          assessments = {x.get("content_id"): x for x in review.get("proposals", [])}
+          lines = [
+              "## ASTRA story supply review",
+              "",
+              f"- Unreviewed proposals available: **{len(proposals)}**",
+              f"- Editorial issues flagged: **{review.get('editorial_issue_count', 'not assessed')}**",
+              f"- Publication quality blocks: **{review.get('publication_blocked_count', 'not assessed')}**",
+              "- Automatically approved: **0** (approval remains a separate human decision)",
+              "",
+              "| Candidate ID | Editorial flags | Publication block |",
+              "|---|---|---|",
+          ]
+          for item in proposals[:30]:
+              cid = item.get("content_id", "missing-id")
+              assess = assessments.get(cid, {})
+              issues = ", ".join(assess.get("editorial_issues", [])) or "none reported"
+              block = assess.get("publication_rejection") or "none reported"
+              lines.append(f"| {cid} | {issues} | {block} |")
+          if not proposals:
+              lines += ["", "No candidate proposals were generated; inspect the proposal-generation step and restored novelty history."]
+          with open(__import__("os").environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as out:
+              out.write("\n".join(lines) + "\n")
+          print(f"ASTRA_REVIEWABLE_PROPOSALS={len(proposals)}")
+          print(f"ASTRA_APPROVED_FOR_PRODUCTION={review.get('approved_for_production', 0)}")
+          PY
       - name: Store unreviewed proposal ledger
         uses: actions/upload-artifact@v4
         with:
