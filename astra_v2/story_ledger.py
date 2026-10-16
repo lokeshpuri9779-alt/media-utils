@@ -171,3 +171,24 @@ def audit_committed_state(state):
                 result["valid"] += 1
     result["ready"] = result["records"] == result["valid"]
     return result
+
+
+def migrate_valid_fingerprints(path, state):
+    """Conservatively import only verified identities from legacy state.
+
+    Missing legacy hashes remain unprotected by the fingerprint ledger;
+    callers must retain existing content-ID/title/plot-key duplicate checks.
+    Returns explicit coverage counts rather than claiming full migration.
+    """
+    report = audit_committed_state(state)
+    if report["invalid"] or report["conflicting"]:
+        raise StoryLedgerError("story_publisher_history_untrusted")
+    fingerprints = []
+    for status in ("reserved", "pending", "published"):
+        for record in state.get(status, {}).values():
+            fp = record.get("plot_fingerprint")
+            if fp:
+                fingerprints.append(fp)
+    archive = archive_fingerprints(path, fingerprints)
+    return {"archive": archive, "coverage": report,
+            "complete": report["ready"]}
