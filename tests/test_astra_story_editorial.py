@@ -25,6 +25,12 @@ class StoryEditorialTests(unittest.TestCase):
         changed["title"] = "A completely different title"
         self.assertIn("narrative_duplicate", editorial_issues(changed, [original]))
 
+    def test_high_overlap_plot_is_flagged_below_old_threshold(self):
+        first = {"story_beats": [{"speech": "A curious fox investigates a broken bridge light before winter. The fox compares the wiring with a metal part and discovers the cause."}]}
+        second = {"story_beats": [{"speech": "A curious fox investigates a broken bridge light before winter. The fox compares the wiring with a metal part and discovers the cause, then repairs it."}]}
+        from astra_v2.story_editorial import is_semantic_near_duplicate
+        self.assertTrue(is_semantic_near_duplicate(second, [first]))
+
     def test_distinct_story_text_is_not_automatically_duplicate(self):
         first = proposal(21)
         second = proposal(88)
