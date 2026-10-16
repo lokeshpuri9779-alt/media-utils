@@ -192,3 +192,21 @@ class DurableStoryLedgerTests(unittest.TestCase):
         ]
         with self.assertRaisesRegex(ValueError, "invalid_source_plot_fingerprint"):
             plan_episode("wind-house", 1, scenes, source_plot_fingerprint="invalid")
+
+    def test_story_forge_bridge_preserves_production_identity(self):
+        from astra_v2.story_forge import propose_episode_from_story
+        story = {"content_id": "sample-forge-1", "plot_fingerprint": FP_A,
+                 "story_beats": [
+                     {"speech": "Bridge breaks", "headline": "Problem", "label": "Bridge down"},
+                     {"speech": "Team finds timber", "headline": "Plan", "label": "Materials ready"},
+                     {"speech": "Team repairs bridge", "headline": "Repair", "label": "Bridge open"},
+                 ]}
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "ledger.json"
+            proposal = propose_episode_from_story(story, "bridge-series", 1, ledger_path=path)
+            self.assertEqual(proposal["source_plot_fingerprint"], FP_A)
+            self.assertEqual(proposal["source_content_id"], "sample-forge-1")
+            self.assertFalse(proposal["production_ready"])
+            archive_fingerprints(path, [FP_A])
+            with self.assertRaisesRegex(ValueError, "already_used"):
+                propose_episode_from_story(story, "bridge-series", 2, ledger_path=path)
