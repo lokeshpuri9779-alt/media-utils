@@ -25,7 +25,10 @@ def rehearse_state_restore(state_path, archive_path=None):
         raise StoryLedgerError("story_publisher_history_untrusted")
     archive_sha256 = None
     if archive_path is not None:
-        archive_sha256 = hashlib.sha256(Path(archive_path).read_bytes()).hexdigest()
+        archive_source = Path(archive_path)
+        if not archive_source.is_file():
+            raise StoryLedgerError("story_ledger_restore_missing")
+        archive_sha256 = hashlib.sha256(archive_source.read_bytes()).hexdigest()
     with tempfile.TemporaryDirectory(prefix="astra-archive-rehearsal-") as root:
         first = Path(root) / "runner-one"
         second = Path(root) / "runner-two"
