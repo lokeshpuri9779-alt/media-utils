@@ -201,7 +201,11 @@ def replenish(path, count=24, history=()):
     for _ in range(count * 200):
         if len(added) >= count:
             break
-        candidate = proposal(next_index)
+        if next_index % 2:
+            from astra_v2.genre_story_supply import genre_proposal
+            candidate = genre_proposal(next_index)
+        else:
+            candidate = proposal(next_index)
         next_index += 1
         if not is_near_duplicate(candidate, prior):
             if publication_rejection(candidate) != "unreviewed_causal_draft":

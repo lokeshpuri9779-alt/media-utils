@@ -10,6 +10,7 @@ on:
     paths:
       - '.github/workflows/astra-story-proposals.yml'
       - 'astra_v2/autonomous_story_proposals.py'
+      - 'astra_v2/genre_story_supply.py'
       - 'astra_v2/proposal_history.py'
       - 'astra_v2/shorts_novelty.py'
       - 'astra_v2/publication_quality.py'
