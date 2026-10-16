@@ -966,6 +966,14 @@ def propose_episode_from_story(story, series_id, episode_number, state=None, led
     source_fingerprint = story.get("plot_fingerprint")
     if not source_fingerprint:
         raise ValueError("episode_source_fingerprint_required")
+    # The original source identity must agree with its own beat narration.
+    # Otherwise a caller could substitute an unrelated, unused fingerprint.
+    if source_fingerprint != plot_fingerprint([
+        (str(beat.get("headline") or ""), beat["speech"],
+         str(beat.get("background") or ""), str(beat.get("label") or ""))
+        for beat in beats
+    ]):
+        raise ValueError("episode_source_fingerprint_mismatch")
     if ledger_path is None:
         proposal = plan_episode(series_id, episode_number, scenes, state=state,
                                 source_plot_fingerprint=source_fingerprint)
