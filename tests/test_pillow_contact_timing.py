@@ -60,7 +60,8 @@ class ProductionDuoContactTests(unittest.TestCase):
         for action in ("pick", "carry", "release", "drop", "put_down"):
             with self.subTest(action=action):
                 targets = []
-                for frame in range(1, 17):
+                last_frame = 9 if action in ("release", "drop", "put_down") else 16
+                for frame in range(1, last_frame + 1):
                     args, _ = self.paint(action, frame / 8.0)
                     target = args[0].kwargs["hand_target"]
                     self.assertIsNotNone(target)
@@ -75,11 +76,25 @@ class ProductionDuoContactTests(unittest.TestCase):
             with self.subTest(action=action):
                 for t in (0.2, 0.5, 0.8, 1.2, 1.8):
                     args, _ = self.paint(action, t)
-                    x, y = args[0].kwargs["hand_target"]
+                    target = args[0].kwargs["hand_target"]
+                    if action in ("release", "drop", "put_down") and t >= 1.2:
+                        self.assertIsNone(target)
+                        continue
+                    x, y = target
                     self.assertGreaterEqual(x, 0)
                     self.assertLess(x, 1080)
                     self.assertGreaterEqual(y, 0)
                     self.assertLess(y, 1920)
+
+    def test_release_grip_withdraws_after_object_departure(self):
+        for action in ("release", "drop", "put_down"):
+            with self.subTest(action=action):
+                strengths = [self.paint(action, t)[0][0].kwargs["hand_strength"]
+                             for t in (.8, 1.0, 1.1, 1.2)]
+                self.assertGreater(strengths[0], strengths[1])
+                self.assertTrue(all(a > b for a, b in zip(strengths, strengths[1:])))
+                self.assertEqual(strengths[-1], 0.0)
+                self.assertIsNone(self.paint(action, 1.2)[0][0].kwargs["hand_target"])
 
     def test_movement_without_narrated_prop_does_not_generate_grip(self):
         for action in ("run","dance","look","wave"):
