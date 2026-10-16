@@ -33,6 +33,6 @@ def test_squirrel_tail_has_larger_silhouette_than_cat_tail():
 
 
 def test_species_tail_rendering_is_deterministic():
-    assert list(_render_tail("squirrel").getdata()) == list(
-        _render_tail("squirrel").getdata()
-    )
+    first = _render_tail("squirrel")
+    second = _render_tail("squirrel")
+    assert first.tobytes() == second.tobytes()
