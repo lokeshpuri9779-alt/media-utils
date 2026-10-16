@@ -3,7 +3,7 @@
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 1,
-  "confirmed_today": 0,
+  "confirmed_today": 1,
   "last_attempt_at": "2026-10-16T18:33:26.243879+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -1627,57 +1627,38 @@
       "format": "short",
       "uploaded_at": "2026-10-16T18:20:38.162284+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "oCCfZegcPl4": {
-      "content_id": "rayvan-original-glassforest-v1",
+    },
+    "rayvan-original-glassforest-v1": {
+      "video_id": "oCCfZegcPl4",
+      "confirmed_at": "2026-10-16T18:34:02.560606+00:00",
       "title": "The Forest That Held the Wind",
-      "day": "2026-10-17",
-      "uploaded_at": "2026-10-16T18:33:27.860188+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "882223f97b6f427b764e451f47943541bc1def255afd665c59a91a87455214d0",
-      "story_beats": [
-        {
-          "speech": "A ranger entered a forest where every tree stood perfectly still."
-        },
-        {
-          "speech": "She heard the sound of a storm trapped inside the clear trunks."
-        },
-        {
-          "speech": "At the forest center she found a broken flute that once guided the wind."
-        },
-        {
-          "speech": "She repaired the flute and played one note, releasing a gentle breeze."
-        }
-      ],
+      "uploaded_at": "2026-10-16T18:33:27.860188+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-16T18:32:42.438393+00:00",
-  "last_preflight_reason": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-16T18:34:01.974587+00:00",
+  "last_preflight_reason": "min_interval",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-16T18:33:28.302967+00:00",
+    "at": "2026-10-16T18:34:02.638163+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-16T08:06:44.296862+00:00",
   "reserved": {
