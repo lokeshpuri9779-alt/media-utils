@@ -75,6 +75,16 @@ class DanceMotionTests(unittest.TestCase):
         air_pixel = airborne.getpixel((540 + 95, shadow_y))
         self.assertNotEqual(ground_pixel, air_pixel)
 
+    def test_locomotion_foot_plant_and_swing(self):
+        # Both gait phases must animate and stay deterministic.
+        for action in ("walk", "run", "chase", "sneak"):
+            with self.subTest(action=action):
+                start = self.render(0.0, action)
+                swing = self.render(0.35, action)
+                self.assertNotEqual(start.tobytes(), swing.tobytes())
+                self.assertEqual(swing.tobytes(),
+                                 self.render(0.35, action).tobytes())
+
     def test_dance_is_deterministic(self):
         self.assertEqual(self.render(0.25).tobytes(), self.render(0.25).tobytes())
 
