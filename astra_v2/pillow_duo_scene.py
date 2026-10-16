@@ -177,11 +177,20 @@ def _ears_and_tail(d, actor, x, y, t, fur):
                       fill=fur)
             d.polygon(((ex-24,y-117),(ex+side*12,y-207),(ex+19,y-111)),
                       fill=(255,191,158))
-    elif actor in ("cat","squirrel"):
+    elif actor=="cat":
         for side in (-1,1):
             ex=x+side*83
             d.polygon(((ex-51,y-98),(ex+side*19,y-209),(ex+47,y-105)),fill=fur)
-        d.arc((x+86,y+133,x+240,y+370),190,352,fill=fur,width=27)
+        # Cats have a compact curved tail; keep it distinct from the
+        # squirrel's oversized plume so silhouettes remain species-readable.
+        d.arc((x+86,y+133,x+220,y+330),190,352,fill=fur,width=25)
+    elif actor=="squirrel":
+        for side in (-1,1):
+            ex=x+side*83
+            d.polygon(((ex-51,y-98),(ex+side*19,y-209),(ex+47,y-105)),fill=fur)
+        # A high, bushy curled tail gives squirrels a separate silhouette.
+        d.arc((x+76,y+86,x+290,y+390),205,505,fill=fur,width=42)
+        d.arc((x+100,y+113,x+265,y+355),205,505,fill=CREAM,width=8)
     elif actor=="dog":
         for side in (-1,1):
             ex=x+side*114
@@ -313,6 +322,18 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
             ex=x+side*51
             d.ellipse((ex-45,y-70,ex+45,y+35),fill=CREAM)
     _facial(d,x,y,mood,t,idx)
+    # Species-specific facial markers supplement the shared expressive face.
+    if name=="owl":
+        d.polygon(((x-22,y+35),(x+22,y+35),(x,y+72)),
+                  fill=(242,170,61),outline=INK)
+    elif name in ("cat","mouse"):
+        # Fine, symmetric whiskers remain inside the scene's safe region.
+        for side in (-1,1):
+            start=x+side*76
+            end=x+side*143
+            for offset in (-4,13,29):
+                _line(d,[(start,y+47+offset),(end,y+35+offset)],
+                      INK,3)
     if visual_recipe:
         draw_accessory(d,x,y,visual_recipe)
     return hands
