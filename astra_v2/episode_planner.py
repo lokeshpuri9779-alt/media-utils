@@ -41,7 +41,7 @@ def known_fingerprints(state):
 
 
 def _validate_state_continuity(scenes):
-    """Validate explicit state transitions without guessing from prose."""
+    """Validate adjacent explicit state transitions without guessing from prose."""
     previous_after = None
     for index, scene in enumerate(scenes):
         before = scene.get("state_before")
@@ -53,8 +53,9 @@ def _validate_state_continuity(scenes):
         if index and previous_after is not None and before is not None:
             if _normalize(previous_after) != _normalize(before):
                 raise ValueError("scene_state_discontinuity")
-        if after is not None:
-            previous_after = after
+        # A scene with no explicit after-state breaks the chain; never compare
+        # a later scene against a stale state from two or more scenes earlier.
+        previous_after = after
 
 
 def plan_episode(series_id, episode_number, scenes, state=None):
