@@ -4,7 +4,6 @@ Planning never grants publication approval. A proposal remains a draft until
 separate editorial, render, and publisher quality gates pass.
 """
 import hashlib
-import json
 import re
 
 
@@ -20,8 +19,10 @@ def fingerprint(episode):
 
 
 def known_fingerprints(state):
-    """Read confirmed, reserved and pending fingerprints from persistent state."""
+    """Read active fingerprints and durable archival ledger entries."""
     known = set()
+    if not isinstance(state, dict):
+        return known
     for bucket in ("published", "reserved", "pending"):
         entries = state.get(bucket) or {}
         if not isinstance(entries, dict):
@@ -31,6 +32,11 @@ def known_fingerprints(state):
                 for key in ("plot_fingerprint", "plot_hash"):
                     if entry.get(key):
                         known.add(str(entry[key]))
+    ledger = state.get("fingerprint_ledger") or {}
+    if isinstance(ledger, dict):
+        archived = ledger.get("archived") or []
+        if isinstance(archived, (list, tuple, set)):
+            known.update(fp for fp in archived if isinstance(fp, str) and fp)
     return known
 
 
