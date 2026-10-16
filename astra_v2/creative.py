@@ -119,6 +119,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 if not isinstance(pending, dict) or not isinstance(reserved, dict):
                     raise ValueError("Invalid pending or reserved history")
                 history_ids.update(str(cid) for cid in reserved)
+                history_ids.update(str(cid) for cid in pending)
                 records = list(published.values()) + list(pending.values()) + list(reserved.values())
             else:
                 records = history.get("stories", []) if isinstance(history, dict) else history
