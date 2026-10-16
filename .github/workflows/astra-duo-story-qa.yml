@@ -71,6 +71,30 @@ jobs:
           assert verdict['pass'],verdict
           print('ASTRA_DUO_FULL_RENDER_VERIFIED',p.stat().st_size)
           PY
+      - name: Render complete voiced Short in exclusive Pillow Duo mode
+        env:
+          ASTRA_PILLOW_DUO_ONLY: '1'
+          ASTRA_UNIFIED_STORY_ENGINE: '1'
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from astra_v2.story_forge import catalog
+          from studio_renderer import render_short
+          from quality_lab import evaluate_studio_render
+          from imageio_ffmpeg import get_ffmpeg_exe
+          import subprocess
+          story = next(s for s in catalog(limit=256)
+                       if s['title'] == "The Fox and Rabbit's Last Lantern")
+          path = Path('duo-preview/duo-exclusive-voiced.mp4')
+          report = render_short(story, path)
+          verdict = evaluate_studio_render(story, report, video_path=path)
+          assert verdict['pass'], verdict
+          assert path.is_file() and path.stat().st_size > 10000
+          subprocess.run([get_ffmpeg_exe(), '-v', 'error', '-i', str(path),
+                          '-map', '0:v:0', '-map', '0:a:0',
+                          '-f', 'null', '-'], check=True)
+          print('ASTRA_DUO_EXCLUSIVE_VOICED_VERIFIED', path.stat().st_size)
+          PY
       - name: Verify MP4 video and audio decoding
         run: |
           python - <<'PY'

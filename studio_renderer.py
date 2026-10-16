@@ -1094,11 +1094,18 @@ def render_frame(plan,t,genre,total):
         # A raw storyboard may be inspected before assets are bound. Actual
         # production scenes must never render blank after failed acquisition.
         raise CreativeReject('Scene media missing from cache: refusing overlapping/filler fallback.')
+    if os.environ.get('ASTRA_PILLOW_DUO_ONLY', '0') == '1' and (
+            genre != 'fiction' or not layers['draw_visual']):
+        raise CreativeReject('Pillow Duo only: non-character visual rejected.')
     if layers['draw_visual']:
         # The unified Studio fiction renderer owns all supported animal casts.
         # Unrepresentable scenes fail closed; never mask a broken story with
         # unrelated generic art or silently switch publishing engines.
-        if genre == 'fiction' and os.environ.get('ASTRA_UNIFIED_STORY_ENGINE', '0') == '1':
+        if os.environ.get('ASTRA_PILLOW_DUO_ONLY', '0') == '1':
+            from astra_v2.pillow_duo_scene import draw_duo
+            if not draw_duo(im, s, u):
+                raise CreativeReject('Pillow Duo only: unsupported scene; no fallback.')
+        elif genre == 'fiction' and os.environ.get('ASTRA_UNIFIED_STORY_ENGINE', '0') == '1':
             from astra_v2.unified_story_engine import draw_story_frame
             draw_story_frame(im, s, u, draw_directed=draw_visual,
                              global_time=t, accent=accent)
@@ -1651,6 +1658,19 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
             plan=_repair_plan(ch,plan,repair_attempts)
     if any(s.get("creative_format")=="ai_character_cinematic" for s in plan):
         ch["character_storyboard_plan"]=character_storyboard(ch,plan)
+    if os.environ.get('ASTRA_PILLOW_DUO_ONLY', '0') == '1':
+        if genre != 'fiction':
+            raise CreativeReject('Pillow Duo only: non-fiction story rejected.')
+        from astra_v2.pillow_duo_scene import duo_compatibility
+        from astra_v2.layer_contract import scene_layers
+        for index, shot in enumerate(plan):
+            if not scene_layers(shot)['draw_visual']:
+                raise CreativeReject(
+                    f'Pillow Duo only: shot {index + 1} lacks character visuals.')
+            suitability = duo_compatibility(shot)
+            if not suitability['supported']:
+                raise CreativeReject(
+                    f'Pillow Duo only: shot {index + 1}: ' + suitability['reason'])
     # Fail before asset acquisition, narration and FFmpeg when strict Pillow
     # fiction mode cannot faithfully illustrate an eligible visual scene.
     if (genre == 'fiction' and os.environ.get('ASTRA_PILLOW_DUO_STRICT', '0') == '1'

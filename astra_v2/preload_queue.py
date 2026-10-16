@@ -157,6 +157,9 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
 
     Corrupt/untrusted artifacts fail closed and are never published.
     """
+    # Old preload manifests cannot prove the actual visual engine.
+    if os.getenv("ASTRA_PILLOW_DUO_ONLY", "0") == "1":
+        return None
     from astra_v2.creative import inspect_video
     repo = os.environ.get("GITHUB_REPOSITORY", "")
     # Rendering can run in parallel; publication cannot skip story episodes.

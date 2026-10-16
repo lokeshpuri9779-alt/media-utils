@@ -79,6 +79,21 @@ def make_candidate(path, excluded_ids, excluded_titles):
     premium_stories = (series_stories if serialized_preload else
                        series_stories + approved_authored_candidates(forge_catalog(excluded_ids, excluded_titles)) + anthology_catalog() + free_catalog() + original_catalog() + catalog()
                        + procedural_catalog(excluded_ids, limit=128))
+    # Opt-in release gate: only two-character fiction with a drawable Pillow duo
+    # may enter candidate rendering. Never fall back to abstract icon stories.
+    if os.getenv("ASTRA_PILLOW_DUO_ONLY", "0") == "1":
+        def pillow_duo_eligible(story):
+            if story.get("genre") != "fiction":
+                return False
+            shots = story.get("story_beats") or story.get("scenes") or story.get("shots") or story.get("beats")
+            if not isinstance(shots, (list, tuple)) or not shots:
+                return False
+            return all(isinstance(shot, dict)
+                       and bool(shot.get("speech"))
+                       and bool(shot.get("visual"))
+                       for shot in shots)
+        premium_stories = [story for story in premium_stories
+                           if pillow_duo_eligible(story)]
     # Count truly eligible stories, not just unseen template IDs.
     # Diagnostics only: never bypass the publication or creative gates.
     from astra_v2.publication_quality import publication_rejection

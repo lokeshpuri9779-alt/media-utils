@@ -41,6 +41,32 @@ jobs:
           python -m unittest discover -s tests -p 'test_pillow_contact_timing.py' -v
           python -m unittest discover -s tests -p 'test_studio_directed_motion.py' -v
           python -m unittest discover -s tests -p 'test_pillow_duo_studio.py' -v
+      - name: Exclusive Pillow Duo fail-closed regression
+        env:
+          ASTRA_PILLOW_DUO_ONLY: '1'
+          ASTRA_UNIFIED_STORY_ENGINE: '1'
+        run: |
+          python - <<'PY'
+          import os
+          from unittest.mock import patch
+          from PIL import Image
+          from astra_v2 import preload_queue
+          from studio_renderer import render_frame, CreativeReject
+
+          with patch.object(preload_queue, 'take', wraps=preload_queue.take) as guarded:
+              result = preload_queue.take(set(), set(), 'preview/unused.mp4')
+              assert result is None
+          # A solo/nonfiction scene cannot escape into the unified engine.
+          shot = {'start': 0, 'duration': 2, 'end': 2, 'speech': 'A simple icon',
+                  'visual': 'a decorative icon', 'story_action': 'look'}
+          try:
+              render_frame([shot], 0.5, 'current', 2)
+          except CreativeReject:
+              pass
+          else:
+              raise AssertionError('Exclusive mode accepted non-fiction visuals')
+          print('Exclusive preload and renderer guards passed')
+          PY
       - name: Render two-character motion artifact
         run: |
           mkdir -p preview
@@ -69,6 +95,22 @@ jobs:
           assert proc.wait()==0
           subprocess.run([get_ffmpeg_exe(),'-v','error','-i',path,'-f','null','-'],check=True)
           print('Verified decoded duo MP4:',path)
+          PY
+      - name: Render exclusive-mode Studio Duo MP4
+        env:
+          ASTRA_PILLOW_DUO_ONLY: '1'
+          ASTRA_UNIFIED_STORY_ENGINE: '1'
+        run: |
+          python -m tools.pillow_studio_preview
+          python - <<'PY'
+          from pathlib import Path
+          from imageio_ffmpeg import get_ffmpeg_exe
+          import subprocess
+          path = Path('preview/pillow-studio-composite.mp4')
+          assert path.is_file() and path.stat().st_size > 10000
+          subprocess.run([get_ffmpeg_exe(), '-v', 'error', '-i', str(path),
+                          '-f', 'null', '-'], check=True)
+          print('Exclusive Duo Studio MP4 decoded:', path.stat().st_size)
           PY
       - name: Render full Studio scene compositor preview (silent)
         run: python -m tools.pillow_studio_preview
