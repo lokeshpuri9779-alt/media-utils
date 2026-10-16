@@ -100,10 +100,10 @@ def proposal(index):
     # Use compact, searchable story titles rather than generic inventory labels.
     title = f"The {visual.capitalize()} Mystery of the {setting.split()[-1].capitalize()}"
     beats = (
-        ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}, {stakes}.", visual),
-        ("investigation", f"Instead of guessing, {actor} compared {clue} with {discovery}; {emotional}.", "book"),
-        ("twist", f"The comparison showed that {reversal}. This explained the original mystery rather than introducing a new one.", clue if clue in VISUALS else "signal"),
-        ("payoff", f"With the cause understood, {actor} {resolution}. The community saw how the evidence led to the solution.", _pick(index, VISUALS, 3)),
+        ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}, {stakes}. If the cause stayed hidden, the neighbors would not know which route or system was safe to use.", visual),
+        ("investigation", f"Instead of guessing, {actor} compared {clue} with {discovery}; {emotional}. The details matched the timing of the first warning, giving the investigation a testable explanation rather than another suspicion.", "book"),
+        ("twist", f"The comparison showed that {reversal}. This explained the original mystery rather than introducing a new one. {actor} checked the clue again and found that it fit the evidence gathered at the start.", clue if clue in VISUALS else "signal"),
+        ("payoff", f"With the cause understood, {actor} {resolution}. The community saw how the evidence led to the solution, and the team recorded what they learned so the same problem could be recognized earlier next time.", _pick(index, VISUALS, 3)),
     )
     fingerprint_text = " ".join(beat[1] for beat in beats).casefold()
     return {
