@@ -6,7 +6,7 @@ on:
     - cron: '17 */6 * * *'
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: astra-story-proposals
@@ -21,19 +21,26 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Restore latest unreviewed proposal ledger
+      - name: Restore persistent proposal ledger
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           mkdir -p runtime-health
-          gh run list --workflow astra-story-proposals.yml --status success --limit 20 --json databaseId |
-            python -c 'import json,sys; print("\n".join(str(x["databaseId"]) for x in json.load(sys.stdin)))' |
-            while read -r id; do
-              if gh run download "$id" --name astra-unreviewed-story-ledger --dir runtime-health 2>/dev/null; then
-                echo "ASTRA_PROPOSAL_LEDGER_RESTORED=$id"
-                break
-              fi
-            done
+          git fetch --depth=1 origin astra-state
+          if git cat-file -e origin/astra-state:runtime-health/story_proposals.json 2>/dev/null; then
+            git show origin/astra-state:runtime-health/story_proposals.json > runtime-health/story_proposals.json
+            echo "ASTRA_PROPOSAL_LEDGER_RESTORED=astra-state"
+          else
+            echo "No durable ledger found; attempting artifact migration."
+            gh run list --workflow astra-story-proposals.yml --status success --limit 20 --json databaseId |
+              python -c 'import json,sys; print("\n".join(str(x["databaseId"]) for x in json.load(sys.stdin)))' |
+              while read -r id; do
+                if gh run download "$id" --name astra-unreviewed-story-ledger --dir runtime-health 2>/dev/null; then
+                  echo "ASTRA_PROPOSAL_LEDGER_RESTORED_FROM_ARTIFACT=$id"
+                  break
+                fi
+              done
+          fi
       - name: Restore publication novelty history from state branch
         run: |
           git fetch --depth=1 origin astra-state
@@ -87,6 +94,28 @@ jobs:
           print(f"ASTRA_REVIEWABLE_PROPOSALS={len(proposals)}")
           print(f"ASTRA_APPROVED_FOR_PRODUCTION={review.get('approved_for_production', 0)}")
           PY
+      - name: Persist proposal ledger to astra-state
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p /tmp/astra-proposal-persist
+          cp runtime-health/story_proposals.json /tmp/astra-proposal-persist/story_proposals.json
+          cp runtime-health/story_editorial_report.json /tmp/astra-proposal-persist/story_editorial_report.json
+          cp runtime-health/story_supply_review.json /tmp/astra-proposal-persist/story_supply_review.json
+          git fetch --depth=1 origin astra-state
+          git checkout -B astra-state origin/astra-state
+          mkdir -p runtime-health
+          cp /tmp/astra-proposal-persist/*.json runtime-health/
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add runtime-health/story_proposals.json runtime-health/story_editorial_report.json runtime-health/story_supply_review.json
+          if git diff --cached --quiet; then
+            echo "ASTRA_DURABLE_LEDGER_CHANGED=false"
+          else
+            git commit -m "Persist ASTRA story proposal inventory"
+            git push origin astra-state
+            echo "ASTRA_DURABLE_LEDGER_CHANGED=true"
+          fi
       - name: Store unreviewed proposal ledger
         uses: actions/upload-artifact@v4
         with:
