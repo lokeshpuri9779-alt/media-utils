@@ -106,3 +106,26 @@ def archive_lifecycle_record(path, record, lifecycle_status):
     ):
         raise StoryLedgerError("story_lifecycle_fingerprint_missing")
     return archive_fingerprints(path, [fingerprint])
+
+
+def archive_committed_state(path, state):
+    """Import committed publisher identities without changing publisher behavior.
+
+    This opt-in operation is for migration/reconciliation, not upload approval.
+    Never archive drafts or uncommitted candidates.
+    """
+    if not isinstance(state, dict):
+        raise StoryLedgerError("story_publisher_state_invalid")
+    identities = []
+    for key in ("reserved", "pending", "published"):
+        records = state.get(key, {})
+        if not isinstance(records, dict):
+            raise StoryLedgerError("story_publisher_state_invalid")
+        for record in records.values():
+            if not isinstance(record, dict):
+                raise StoryLedgerError("story_lifecycle_record_invalid")
+            fp = record.get("plot_fingerprint")
+            if not isinstance(fp, str) or len(fp) != 64 or any(ch not in "0123456789abcdef" for ch in fp):
+                raise StoryLedgerError("story_lifecycle_fingerprint_missing")
+            identities.append(fp)
+    return archive_fingerprints(path, identities)
