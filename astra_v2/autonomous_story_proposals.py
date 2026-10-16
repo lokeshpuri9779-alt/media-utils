@@ -85,17 +85,19 @@ def proposal(index):
     """Create a deterministic four-beat candidate from independent plot dimensions."""
     if not isinstance(index, int) or isinstance(index, bool) or index < 0:
         raise ValueError("Invalid proposal index")
+    # Stagger small, co-prime-ish strides so all dimensions evolve early,
+    # not only after thousands of candidates; the full product remains large.
     actor, role = _pick(index, ACTORS, 1)
-    setting, setting_visual = _pick(index, SETTINGS, len(ACTORS))
-    mystery, clue, visual = _pick(index, MYSTERIES, len(ACTORS) * len(SETTINGS))
-    stakes = _pick(index, STAKES, len(ACTORS) * len(SETTINGS) * len(MYSTERIES))
-    discovery = _pick(index, DISCOVERIES, len(ACTORS) * len(SETTINGS) * len(MYSTERIES) * len(STAKES))
-    reversal = _pick(index, REVERSALS, len(ACTORS) * len(SETTINGS) * len(MYSTERIES) * len(STAKES) * len(DISCOVERIES))
-    resolution = _pick(index, RESOLUTIONS, len(ACTORS) * len(SETTINGS) * len(MYSTERIES) * len(STAKES) * len(DISCOVERIES) * len(REVERSALS))
-    emotional = _pick(index, EMOTIONAL_TURNS, len(ACTORS) * len(SETTINGS) * len(MYSTERIES) * len(STAKES) * len(DISCOVERIES) * len(REVERSALS) * len(RESOLUTIONS))
+    setting, setting_visual = _pick(index, SETTINGS, 7)
+    mystery, clue, visual = _pick(index, MYSTERIES, 13)
+    stakes = _pick(index, STAKES, 19)
+    discovery = _pick(index, DISCOVERIES, 23)
+    reversal = _pick(index, REVERSALS, 31)
+    resolution = _pick(index, RESOLUTIONS, 37)
+    emotional = _pick(index, EMOTIONAL_TURNS, 43)
     # The dimensions rotate at different strides; this produces a large
     # deterministic combination space without claiming every draft is unique.
-    title = f"The {mystery.split()[1].capitalize()} Mystery at {setting.split()[-1].capitalize()}"
+    title = f"The Mystery of {setting.split()[-1].capitalize()}: {clue.capitalize()}"
     beats = (
         ("reveal", f"At {setting}, {actor} discovered that {mystery}, {stakes}.", visual),
         ("build", f"An investigation uncovered {discovery}; meanwhile, {emotional}.", "book"),
