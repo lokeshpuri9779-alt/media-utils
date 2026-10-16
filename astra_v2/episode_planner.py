@@ -58,7 +58,7 @@ def _validate_state_continuity(scenes):
         previous_after = after
 
 
-def plan_episode(series_id, episode_number, scenes, state=None):
+def plan_episode(series_id, episode_number, scenes, state=None, source_plot_fingerprint=None):
     """Validate a causal episode outline without approving it for production."""
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{1,63}", str(series_id)):
         raise ValueError("invalid_series_id")
@@ -82,12 +82,17 @@ def plan_episode(series_id, episode_number, scenes, state=None):
                 "scenes": normalized, "production_ready": False,
                 "kind": "unreviewed_episode_plan"}
     proposal["plot_fingerprint"] = fingerprint(proposal)
-    if proposal["plot_fingerprint"] in known_fingerprints(state or {}):
+    known = known_fingerprints(state or {})
+    if source_plot_fingerprint is not None:
+        if not isinstance(source_plot_fingerprint, str) or not re.fullmatch(r"[0-9a-f]{64}", source_plot_fingerprint):
+            raise ValueError("invalid_source_plot_fingerprint")
+        proposal["source_plot_fingerprint"] = source_plot_fingerprint
+    if proposal["plot_fingerprint"] in known or (source_plot_fingerprint is not None and source_plot_fingerprint in known):
         raise ValueError("episode_plot_already_used")
     return proposal
 
 
-def plan_episode_with_ledger(series_id, episode_number, scenes, ledger_path, state=None):
+def plan_episode_with_ledger(series_id, episode_number, scenes, ledger_path, state=None, source_plot_fingerprint=None):
     """Plan against durable archived fingerprints without approving the proposal.
 
     This is a planning-only adapter; it never writes the archive. Archive writes
@@ -107,4 +112,4 @@ def plan_episode_with_ledger(series_id, episode_number, scenes, ledger_path, sta
     if any(not isinstance(fp, str) or len(fp) != 64 or any(ch not in "0123456789abcdef" for ch in fp) for fp in historical):
         raise ValueError("episode_story_ledger_invalid_state")
     combined_state["fingerprint_ledger"] = {"version": 1, "archived": sorted(set(ledger["archived"]).union(historical))}
-    return plan_episode(series_id, episode_number, scenes, combined_state)
+    return plan_episode(series_id, episode_number, scenes, combined_state, source_plot_fingerprint=source_plot_fingerprint)
