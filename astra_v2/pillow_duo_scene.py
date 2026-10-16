@@ -237,11 +237,15 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
     for side in (-1,1):
         sx=x+side*54
         step=side*gait
-        _line(d,[(sx,y+285),(sx+step//2,y+342),(sx+step,y+406-abs(step)//5)],
-              fur, 28)
+        # Lift a foot only on its forward swing; keep the planted foot
+        # at ground height through the opposite half of the stride.
+        lift=(int(24*max(0.0,side*stride)) if action in
+              ("walk","run","chase","sneak") else abs(step)//5)
+        _line(d,[(sx,y+285),(sx+step//2,y+342-lift//2),
+                 (sx+step,y+406-lift)],fur,28)
         shoe=(82,181,179) if idx==0 else (177,143,212)
-        d.ellipse((sx+step-32,y+394-abs(step)//5,
-                   sx+step+32,y+421-abs(step)//5),fill=shoe)
+        d.ellipse((sx+step-32,y+394-lift,
+                   sx+step+32,y+421-lift),fill=shoe)
     costume=(visual_recipe["fabric"] if visual_recipe else
              (60,151,159) if idx==0 else (139,113,178))
     d.rounded_rectangle((x-102,y+102,x+102,y+309),radius=50,
@@ -275,7 +279,7 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
         if action=="catch" and side==1:
             hand=(x+176,y+118)
         elif action=="sneak":
-            hand=(x+side*125,y+235)
+            hand=(x+side*125,y+235+int(side*19*stride))
         elif action=="point" and side==1:
             hand=(x+185,y+112)
         elif action=="clap":
