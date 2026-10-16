@@ -411,6 +411,15 @@ def draw_duo(image, shot, t):
     # Physical hand contact: once grasped, the object is driven by the
     # actor's hand anchor rather than an unrelated overlay trajectory.
     contact_actions={"pick","pickup","pick_up","carry","hold","repair","catch"}
+    # Release transitions smoothly back to the staged prop position instead
+    # of snapping away from the hand on the first release frame.
+    if prop and action in ("release","drop","put_down"):
+        release=_ease((max(0.0,float(t))-.15)/.55)
+        actor_x=298+actor_translation(action,t,0)
+        held=(actor_x+175-22,846+215+2)
+        staged=prop_trajectory(shot,t) if shot.get("story_beat") else (433,1060)
+        prop_pos=(round(held[0]*(1-release)+staged[0]*release),
+                  round(held[1]*(1-release)+staged[1]*release))
     if prop and action in ("push","pull"):
         # Begin contact before object travel so the hand does not chase a
         # moving prop; ease the object only after the reach phase.
@@ -437,7 +446,7 @@ def draw_duo(image, shot, t):
         # accidentally excluded push/pull entirely because pickup was False.
         # Blend contact from the first reach through a smooth extension.
         interact_actions={"pick","pickup","pick_up","carry","repair",
-                          "hold","open","push","pull","catch"}
+                          "hold","open","push","pull","catch","release","drop","put_down"}
         hand_strength=(_ease((max(0.0,float(t))-.06)/.86)
                        if prop and action in interact_actions else 0.0)
         hand_target=prop_pos if hand_strength>0 else None
