@@ -160,6 +160,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
     excluded_ids.update(history_ids)
     excluded_titles.update(history_titles)
     from astra_v2.shorts_novelty import is_near_duplicate
+    from astra_v2.story_planning import is_planned_story
     premium_stories = [
         story for story in premium_stories
         if story.get("content_id") not in history_ids
@@ -167,6 +168,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
         and story.get("plot_fingerprint") not in history_hashes
         and story.get("plot_key") not in history_plot_keys
         and not is_near_duplicate(story, history_narratives)
+        and (not story.get("production_ready") or is_planned_story(story))
     ]
     print("ASTRA_STORY_HISTORY_EXCLUSIONS=" + json.dumps({
         "ids": len(history_ids), "titles": len(history_titles),
