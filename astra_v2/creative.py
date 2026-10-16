@@ -263,6 +263,11 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 "source": story.get("source"), "plot_key": story.get("plot_key", ""),
                 "plot_fingerprint": story.get("plot_fingerprint", ""),
                 "story_beats": [{"speech": str(beat.get("speech") or "")} for beat in story.get("story_beats", [])],
+                # Preserve explicit, reviewed character records for later
+                # post-publication continuity; never infer them from narration.
+                "character_id": story.get("character_id"),
+                "character_approved": story.get("character_approved") is True,
+                "character_episode": story.get("character_episode"),
                 "creative_director": evaluation["director"],
                 "renderer": rendered.get("renderer"), "format": "short",
             }
@@ -325,6 +330,9 @@ def make_candidate(path, excluded_ids, excluded_titles):
             "plot_key": str(meta.get("plot_key") or ""),
             "plot_fingerprint": str(meta.get("plot_fingerprint") or ""),
             "story_beats": meta.get("story_beats") or [],
+            "character_id": meta.get("character_id"),
+            "character_approved": meta.get("character_approved") is True,
+            "character_episode": meta.get("character_episode"),
             "renderer": str(meta.get("renderer") or "unknown")}
 
 
