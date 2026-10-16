@@ -235,7 +235,7 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
     y-=bob
     # Keep feet in world-space contact while the torso subtly bobs.
     # The torso/head use the animated y; leg endpoints use the unbobbed base.
-    leg_y=y+bob
+    leg_y=(y+bob if action in ("idle","walk","run","chase","sneak","carry") else y)
     # Ground shadows, tails and articulated legs behind costume.
     # Studio draws actors directly at 1080p, while the experimental ensemble
     # draws them into local transparent sprites. Ground shadows must use the
