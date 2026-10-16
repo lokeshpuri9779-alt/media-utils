@@ -103,6 +103,8 @@ def prepare(path, candidate):
         # Studio version alone cannot attest to the actual visual engine.
         # Never publish a pre-rendered video without Duo provenance.
         return None
+    if os.environ.get("ASTRA_PILLOW_DUO_ONLY") == "1":
+        return None
     from astra_v2.creative import inspect_video
     video = Path(path)
     fmt = candidate.get("format", "short")
