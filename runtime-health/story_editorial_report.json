@@ -2989,6 +2989,126 @@
       "publication_blocked": true,
       "blocking_issues": [],
       "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-5ddb5f4b0e2de8337785",
+      "title": "The Waterwheel Mystery of the Market",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-587602a9fbf28825c045",
+      "title": "The Waterwheel Mystery of the Museum",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-5094bbc4a87a80bddb12",
+      "title": "The Map Mystery of the Observatory",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-46566a59ef861734e2cd",
+      "title": "The Door Mystery of the Garden",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-8e89f5c3f2c2f4dc5c6c",
+      "title": "The River Mystery of the Greenhouse",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-095b10da083adfa1f674",
+      "title": "The Statue Mystery of the Village",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-a004763b45a41a8d20e6",
+      "title": "The Bell Mystery of the Village",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-e452f19ad7c9f3dfa7f3",
+      "title": "The Bell Mystery of the Observatory",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-53409165152595ad5472",
+      "title": "The Waterwheel Mystery of the Library",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-8abd5c07b1b0427a2004",
+      "title": "The Waterwheel Mystery of the Market",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-a9b67125698711c46d1f",
+      "title": "The Signal Mystery of the Museum",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-1675d6dfdb9c48c4fe0d",
+      "title": "The Door Mystery of the Observatory",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
     }
   ],
   "needs_work": [
@@ -7546,9 +7666,1507 @@
         "narrative_duplicate"
       ],
       "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-a142094f38551ab4171a",
+      "title": "The Bridge Mystery of the Library",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-proposal-640596f8fcf822274568",
+        "matched_title": "The Bell Mystery of the Railway",
+        "jaccard_similarity": 0.7244,
+        "dice_similarity": 0.8633,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-c2821ca4e67e857e6275",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-6ef0d337675e15d1a1c4",
+      "title": "Fantasy: Trees Singing The Wrong Melody",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-54ebc60703d274c6d3d9",
+        "matched_title": "Fantasy: Trees Singing The Wrong Melody",
+        "jaccard_similarity": 0.7327,
+        "dice_similarity": 0.8676,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-79120cd6e7a094fccc09",
+      "title": "Discovery: A Book Glowing After Sunset",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-8b95fe3e0f71180a2c38",
+        "matched_title": "Discovery: A Book Glowing After Sunset",
+        "jaccard_similarity": 0.7273,
+        "dice_similarity": 0.8676,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-d3587334152b8ca7b272",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-694862848e79cb5ed0c0",
+        "matched_title": "Adventure: A Vanished Footbridge",
+        "jaccard_similarity": 0.7273,
+        "dice_similarity": 0.8716,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-7e38837eac3fbb54fdcb",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-7a7c06b3253587fc2f53",
+        "matched_title": "Science Fiction: An Unexplained Blinking Light",
+        "jaccard_similarity": 0.7347,
+        "dice_similarity": 0.8756,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-e4935028e70b4faca896",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-e460055271b372154e2f",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-2b38290fc89fd4fcd5b8",
+      "title": "Fantasy: Trees Singing The Wrong Melody",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-933e8190c06a99e0da94",
+      "title": "Discovery: A Book Glowing After Sunset",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-e56651257192e667a6fc",
+      "title": "The Signal Mystery of the Village",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-proposal-587602a9fbf28825c045",
+        "matched_title": "The Waterwheel Mystery of the Museum",
+        "jaccard_similarity": 0.7323,
+        "dice_similarity": 0.8727,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-92f6cc6f913c03e94b59",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-f543fac8a4f0b3dde26d",
+        "matched_title": "Adventure: A Vanished Footbridge",
+        "jaccard_similarity": 0.7451,
+        "dice_similarity": 0.8789,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-2d813a1cb47a8a267d49",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-b1fa20eed265bb0332e3",
+      "title": "Fantasy: Trees Singing The Wrong Melody",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-847c816686f61e53316b",
+      "title": "Discovery: A Book Glowing After Sunset",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-5aec71a3f53d19ba74cc",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-61e37eb1b72cd3442568",
+        "matched_title": "Adventure: A Vanished Footbridge",
+        "jaccard_similarity": 0.7228,
+        "dice_similarity": 0.8507,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-bdfda6d4c15b00c5985d",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-64d7b348551d2fd3a7f2",
+        "matched_title": "Science Fiction: An Unexplained Blinking Light",
+        "jaccard_similarity": 0.7476,
+        "dice_similarity": 0.88,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-1fa0ffc54bc829375afb",
+      "title": "Discovery: A Book Glowing After Sunset",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-ba93811069319651d653",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-d000d3e17107cb1f2d09",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-9c74a0e9c891c7ecafb1",
+      "title": "Fantasy: Trees Singing The Wrong Melody",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-052292b395f16bf51b5c",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-6eec0a7ec9d9d41cca43",
+        "matched_title": "Adventure: A Vanished Footbridge",
+        "jaccard_similarity": 0.7234,
+        "dice_similarity": 0.8488,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-b64be80860d0eda49d91",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-f3487ef22fe99a617522",
+        "matched_title": "Science Fiction: An Unexplained Blinking Light",
+        "jaccard_similarity": 0.7312,
+        "dice_similarity": 0.8585,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-72034e40290e3f0dc595",
+      "title": "The Door Mystery of the Library",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-proposal-46566a59ef861734e2cd",
+        "matched_title": "The Door Mystery of the Garden",
+        "jaccard_similarity": 0.7442,
+        "dice_similarity": 0.8732,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-f82dfb0b730816fb06fb",
+      "title": "Fantasy: Trees Singing The Wrong Melody",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-e89ddfdb8ad394219ba8",
+      "title": "Discovery: A Book Glowing After Sunset",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-94dc845f34405ccc8185",
+        "matched_title": "Discovery: A Book Glowing After Sunset",
+        "jaccard_similarity": 0.7234,
+        "dice_similarity": 0.8462,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-a4db6313fe90a93da903",
+      "title": "Fantasy: Trees Singing The Wrong Melody",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-a570e351ac1db69f1b76",
+      "title": "The Telescope Mystery of the Market",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-proposal-72034e40290e3f0dc595",
+        "matched_title": "The Door Mystery of the Library",
+        "jaccard_similarity": 0.7209,
+        "dice_similarity": 0.8652,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-fb09ecca36524e7487ea",
+      "title": "Discovery: A Book Glowing After Sunset",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-a274131e57753c45244c",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-9b9d8053747bae9999eb",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-94b0657b9fedb39d341a",
+      "title": "Discovery: A Book Glowing After Sunset",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-44abcf5a518bd1cad5ae",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-1f97ab38b8f6115c8802",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-60c44e089b1e483f444e",
+      "title": "Fantasy: Trees Singing The Wrong Melody",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-2b4812cb16e6f58317dd",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-12d5dcdd051aec03e86c",
+        "matched_title": "Science Fiction: An Unexplained Blinking Light",
+        "jaccard_similarity": 0.7273,
+        "dice_similarity": 0.8704,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-167ba7e02adf41f9a5ff",
+      "title": "Fantasy: Trees Singing The Wrong Melody",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-e5759c5de3c2c55291ba",
+        "matched_title": "Fantasy: Trees Singing The Wrong Melody",
+        "jaccard_similarity": 0.7353,
+        "dice_similarity": 0.8727,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-26fc468df43db6515683",
+      "title": "Discovery: A Book Glowing After Sunset",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-c58796bae9cca6cef593",
+        "matched_title": "Discovery: A Book Glowing After Sunset",
+        "jaccard_similarity": 0.7327,
+        "dice_similarity": 0.8727,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-bb19602d58bb714a91fe",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-5967f85b2623d1514ad4",
+        "matched_title": "Adventure: A Vanished Footbridge",
+        "jaccard_similarity": 0.7212,
+        "dice_similarity": 0.8676,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-ee021a061bb7420b5851",
+      "title": "Fantasy: Trees Singing The Wrong Melody",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-1f22b0907f705102a18b",
+      "title": "The Statue Mystery of the Railway",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-proposal-095b10da083adfa1f674",
+        "matched_title": "The Statue Mystery of the Village",
+        "jaccard_similarity": 0.7364,
+        "dice_similarity": 0.8786,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-68622c466c6596407a72",
+      "title": "Discovery: A Book Glowing After Sunset",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-bdd2497cdf36d334bddb",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-6ca6ea69f08db3af71df",
+      "title": "The Signal Mystery of the Railway",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-805728c44cfc725ba5ee",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-7892ff11826638f24773",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-748d43b35c694d38ec57",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-6671748c3129c5adcef1",
+      "title": "Fantasy: Trees Singing The Wrong Melody",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-e5759c5de3c2c55291ba",
+        "matched_title": "Fantasy: Trees Singing The Wrong Melody",
+        "jaccard_similarity": 0.7255,
+        "dice_similarity": 0.8688,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-8bd10637ccc2b6867602",
+      "title": "Discovery: A Book Glowing After Sunset",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-9546c0db7afbb0f294b0",
+      "title": "The Lighthouse Mystery of the Library",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-proposal-a3ac635b93852d56cbb7",
+        "matched_title": "The Lighthouse Mystery of the Library",
+        "jaccard_similarity": 0.7213,
+        "dice_similarity": 0.8561,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-86dce1c622eb70fd6043",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-55a0169b54104ae8f349",
+      "title": "Fantasy: Trees Singing The Wrong Melody",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-b91e5672ff64247434d1",
+      "title": "Discovery: A Book Glowing After Sunset",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-e4d7673f9d0812b8e307",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-7bc446b94921d675958c",
+      "title": "The Snow Mystery of the Greenhouse",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-proposal-5afded2e0ac39098639e",
+        "matched_title": "The Snow Mystery of the Greenhouse",
+        "jaccard_similarity": 0.7258,
+        "dice_similarity": 0.8476,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-cbbbf7548e2b4b90ac38",
+      "title": "Discovery: A Book Glowing After Sunset",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-467aa94d2c86ff7b8999",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-7abb3285efb1538e6b41",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-0fcbe0560248a2a739dc",
+      "title": "Fantasy: Trees Singing The Wrong Melody",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-f5647f4e476e770c6069",
+      "title": "The Snow Mystery of the Museum",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-proposal-7bc446b94921d675958c",
+        "matched_title": "The Snow Mystery of the Greenhouse",
+        "jaccard_similarity": 0.75,
+        "dice_similarity": 0.8652,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-25937bdeee8a309502e0",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-20b8072e27a831caa002",
+        "matched_title": "Adventure: A Vanished Footbridge",
+        "jaccard_similarity": 0.7212,
+        "dice_similarity": 0.8496,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-a6911eed5220b1aa7121",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-17c4cf279214aa6c430c",
+      "title": "Fantasy: Trees Singing The Wrong Melody",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-b5d58d5f0400183fafd0",
+      "title": "Discovery: A Book Glowing After Sunset",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-030c4a7fd79ba8825d56",
+      "title": "Fantasy: Trees Singing The Wrong Melody",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-e916c6d32aaf0473b811",
+        "matched_title": "Fantasy: Trees Singing The Wrong Melody",
+        "jaccard_similarity": 0.7255,
+        "dice_similarity": 0.8468,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-74b897dbabcf7f0342c8",
+      "title": "Discovery: A Book Glowing After Sunset",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-d626751818b5526cb260",
+        "matched_title": "Discovery: A Book Glowing After Sunset",
+        "jaccard_similarity": 0.72,
+        "dice_similarity": 0.8416,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-12939aee3689e466aade",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-ebdb0dbfee8caa5ad0ca",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-0d7c82f2acbcb1d26c90",
+      "title": "Discovery: A Book Glowing After Sunset",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-8bd10637ccc2b6867602",
+        "matched_title": "Discovery: A Book Glowing After Sunset",
+        "jaccard_similarity": 0.7273,
+        "dice_similarity": 0.8624,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-dd0ecc0dffac0d36c097",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-8ee9baed12b6476a5afc",
+        "matched_title": "Adventure: A Vanished Footbridge",
+        "jaccard_similarity": 0.7451,
+        "dice_similarity": 0.8636,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-a48e92c282cc0ccbd266",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-db6f45695c71ebb248cc",
+        "matched_title": "Science Fiction: An Unexplained Blinking Light",
+        "jaccard_similarity": 0.7526,
+        "dice_similarity": 0.8651,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-364c13de6de32003bf1b",
+      "title": "Fantasy: Trees Singing The Wrong Melody",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-genre-acf1f64e1fddc1fe39ac",
+        "matched_title": "Fantasy: Trees Singing The Wrong Melody",
+        "jaccard_similarity": 0.74,
+        "dice_similarity": 0.8611,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-4ed94ed47b855d6dd93e",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-9cc1a5b9570333025038",
+      "title": "Fantasy: Trees Singing The Wrong Melody",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-6f822eede303dd312360",
+      "title": "Discovery: A Book Glowing After Sunset",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-cff226ed8757a82ab3b4",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-c1e02dbc7916fd3f283d",
+      "title": "Fantasy: Trees Singing The Wrong Melody",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-0fe72fd6b4267f9e3edb",
+      "title": "Discovery: A Book Glowing After Sunset",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-c10d41d275c9a599ec26",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-3b623957b7f7d42c54e4",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-f8a1d533d5a1bb6c9823",
+      "title": "The Map Mystery of the Village",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-proposal-305198d8f5ad4ebc2454",
+        "matched_title": "The Map Mystery of the Village",
+        "jaccard_similarity": 0.7244,
+        "dice_similarity": 0.8456,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-cef68cda4a4f0c75bd21",
+      "title": "Adventure: A Vanished Footbridge",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-33ddc574430c2db93254",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-6a283ae574e4c1abc944",
+      "title": "Fantasy: Trees Singing The Wrong Melody",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-5287f07dcf5080cc0a5d",
+      "title": "Discovery: A Book Glowing After Sunset",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-02d3d3154727ff92f127",
+      "title": "Science Fiction: An Unexplained Blinking Light",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-b4cbacc4ee19de573960",
+      "title": "Fantasy: Trees Singing The Wrong Melody",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-genre-405d18107c499fd3a0c2",
+      "title": "Discovery: A Book Glowing After Sunset",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [
+        "insufficient_visual_variety"
+      ],
+      "awaiting_editorial_decision": true
     }
   ],
-  "total_proposals": 536,
-  "requires_editorial_review": 536,
+  "total_proposals": 636,
+  "requires_editorial_review": 636,
   "automatic_publication_enabled": false
 }
