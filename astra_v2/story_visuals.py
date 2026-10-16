@@ -7,6 +7,7 @@ import math
 import re
 from PIL import ImageDraw
 from astra_v2.story_action_motion import offset as action_offset
+from astra_v2.motion_curves import limb_pose
 
 SUBJECTS = (
     ("fox", r"\bfox\b|\bfoxes\b"),
@@ -100,9 +101,7 @@ def draw_subject(image, subject, t, accent, action='idle'):
     motion_x, motion_y = action_offset(action, t)
     # Action-dependent acting stays within the subject-safe region; unlike
     # camera motion it moves limbs and facial features relative to the body.
-    gait = math.sin(t * (8.0 if action == "run" else 4.2))
-    step = int(44 * gait) if action in {"run", "walk"} else 0
-    gesture = int(52 * math.sin(t * 5.0)) if action in {"wave", "throw", "repair", "pick", "carry"} else 0
+    pose = limb_pose(action, t)
     blink_now = abs(math.sin(t * 1.65 + 0.3)) > 0.985
     # Dedicated character silhouettes, not aliases of unrelated animals.
     if subject in {"fox", "otter", "owl", "duck", "firefly", "squirrel", "mouse", "crab"}:
@@ -140,11 +139,11 @@ def draw_subject(image, subject, t, accent, action='idle'):
                 d.ellipse((x-100,y-125,x-35,y-55),fill=fur)
                 d.ellipse((x+35,y-125,x+100,y-55),fill=fur)
             for side, dx in enumerate((-70,70)):
-                stride = step * (1 if side == 0 else -1)
+                stride = pose["left_foot_x"] if side == 0 else pose["right_foot_x"]
                 d.rounded_rectangle((x+dx-24+stride,y+245-abs(stride)//3,
                                      x+dx+24+stride,y+340-abs(stride)//3),
                                     radius=16,fill=fur)
-                arm_lift = gesture * (1 if side == 1 else -1)
+                arm_lift = pose["left_hand_y"] if side == 0 else pose["right_hand_y"]
                 d.line((x+dx,y+115,x+dx+arm_lift,y+170-abs(arm_lift)),
                        fill=fur,width=27)
             for dx in (-58,58):

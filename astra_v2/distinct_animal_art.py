@@ -6,6 +6,7 @@ aliases, AI image provider, or pretrained GPU model is required.
 import math
 from PIL import ImageDraw
 from astra_v2.story_action_motion import offset
+from astra_v2.motion_curves import limb_pose
 
 SPECIES = ("beaver", "mole", "penguin", "heron")
 INK = (35, 45, 56)
@@ -30,9 +31,9 @@ def _eyes(draw, x, y, half_sep, t, phase, *, pupil=True, size=12):
 
 
 def _feet(draw, x, y, color, t, action):
-    stride=int(30*math.sin(t*7)) if action in ("run","walk") else 0
+    pose=limb_pose(action,t)
     for side in (-1,1):
-        shift=side*stride
+        shift=pose["left_foot_x"] if side<0 else pose["right_foot_x"]
         legx=x+side*76
         draw.line((legx,y+235,legx+shift,y+326),fill=color,width=35)
         draw.ellipse((legx+shift-41,y+312,legx+shift+41,y+336),fill=color)
