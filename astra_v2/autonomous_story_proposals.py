@@ -120,6 +120,34 @@ def proposal(index):
     }
 
 
+
+def _backfill_story_title(story):
+    """Replace legacy inventory labels with titles derived from the story content."""
+    title = str(story.get("title") or "").strip()
+    if title and not title.casefold().startswith(("unreviewed story proposal", "story proposal ")):
+        return title
+    beats = story.get("story_beats") or []
+    first = beats[0] if beats and isinstance(beats[0], dict) else {}
+    visual = str(first.get("visual") or "curious").replace("_", " ").strip().title()
+    speech = str(first.get("speech") or "")
+    import re
+    match = re.search(r"\bin (?:a|an|the) ([a-z][a-z -]{2,45}?)(?:,| needed to| was| would)", speech, re.IGNORECASE)
+    setting = match.group(1).strip().title() if match else "Hidden World"
+    return f"The {visual} Mystery of {setting}"
+
+
+def _backfill_legacy_titles(proposals):
+    changed = 0
+    for story in proposals:
+        if not isinstance(story, dict):
+            continue
+        title = _backfill_story_title(story)
+        if title != story.get("title"):
+            story["title"] = title
+            changed += 1
+    return changed
+
+
 def replenish(path, count=24, history=()):
     """Persist novel proposals atomically; never promote or publish them."""
     if not 1 <= count <= 100:
@@ -133,6 +161,7 @@ def replenish(path, count=24, history=()):
             raise ValueError("Invalid proposal ledger")
     else:
         state = {"next_index": 0, "proposals": []}
+    _backfill_legacy_titles(state["proposals"])
     prior = list(history) + state["proposals"]
     next_index = int(state.get("next_index", 0))
     added = []
