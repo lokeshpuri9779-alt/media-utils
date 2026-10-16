@@ -33,6 +33,10 @@ class GenreStorySupplyTests(unittest.TestCase):
         story = genre_proposal(123, structure_index=selected)
         self.assertEqual(story["plot_structure"], NARRATIVE_STRUCTURES[-1][0])
 
+    def test_expanded_scenario_catalog(self):
+        self.assertGreaterEqual(len(SCENARIOS), 24)
+        self.assertEqual(len({(item[0], item[3]) for item in SCENARIOS}), len(SCENARIOS))
+
     def test_reject_negative_index(self):
         with self.assertRaises(ValueError):
             genre_proposal(-1)

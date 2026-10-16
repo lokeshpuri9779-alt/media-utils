@@ -11,6 +11,26 @@ SCENARIOS = (
     ("rescue", "a snowy valley", "a resourceful mountain goat", "a lost puppy across a frozen stream", "a sheltered path lay behind a fallen pine", "guided the puppy along the safe path", "snow"),
     ("discovery", "an underwater library", "a playful octopus", "a book glowing after sunset", "the pages reflected an ancient mosaic", "showed the reef its forgotten history", "book"),
 )
+EXTRA_SCENARIOS = (
+    ("comedy", "a bustling bakery", "a mischievous squirrel", "a cake that kept changing colors", "the icing reacted to the warm kitchen lights", "served a rainbow dessert for the celebration", "cake"),
+    ("comedy", "a puppet theater", "a nervous stagehand", "a puppet performing without strings", "a hidden fan was lifting its paper costume", "turned the surprise into a funny finale", "puppet"),
+    ("adventure", "a volcanic island", "a curious sea otter", "a compass pointing toward the ocean", "a submerged metal sculpture was pulling the needle", "found the safe route around the reef", "ship"),
+    ("adventure", "a cloud-top village", "a young glider pilot", "a vanished delivery basket", "the basket had landed on a drifting cloud", "retrieved the supplies with a wind-powered glider", "cloud"),
+    ("friendship", "a busy train station", "a shy hedgehog", "two friends waiting at the wrong platform", "their invitations listed different departure times", "brought everyone together for the trip", "train"),
+    ("friendship", "a woodland picnic", "a friendly rabbit", "a picnic basket that nobody claimed", "a newcomer had prepared it as a welcome gift", "invited the newcomer to join the celebration", "basket"),
+    ("science fiction", "a lunar greenhouse", "a thoughtful astronaut", "plants growing toward the floor", "an experimental gravity plate was still switched on", "adjusted the plate and saved the seedlings", "garden"),
+    ("science fiction", "a futuristic transit hub", "a young mechanic", "a train arriving before its departure", "two station clocks were showing different time zones", "synchronized the clocks and restored the timetable", "clock"),
+    ("competition", "a floating sports arena", "a competitive dolphin", "the scoreboard awarding points backward", "the sensor had been installed upside down", "restarted the contest fairly", "ball"),
+    ("competition", "a mountain music festival", "a young violinist", "a final note nobody could play", "the score contained a playful musical riddle", "invited the audience to complete the melody", "music"),
+    ("fantasy", "a moonlit castle", "a young apprentice", "a staircase changing direction every hour", "a spell was following the castle's ancient sundial", "guided everyone safely to the banquet", "clock"),
+    ("fantasy", "a village of giant mushrooms", "a tiny fairy", "lanterns floating away at dusk", "the lanterns were following enchanted fireflies", "led them back with a gentle song", "lantern"),
+    ("rescue", "a coral lagoon", "a young sea turtle", "a seahorse tangled in discarded rope", "a nearby crab knew a safe way to loosen the knots", "freed the seahorse without damaging the reef", "river"),
+    ("rescue", "a windy hilltop", "a brave sparrow", "a nest slipping from a branch", "a nearby vine could support the nest until the storm passed", "secured the nest and sheltered the chicks", "tree"),
+    ("discovery", "a desert observatory", "a young stargazer", "a star appearing in the wrong constellation", "a polished weather balloon was reflecting distant lights", "recorded the optical illusion for future explorers", "telescope"),
+    ("discovery", "a forgotten garden maze", "an inventive mole", "flowers blooming in a perfect spiral", "an underground water channel shaped the growth", "mapped the channel and revived the garden", "garden"),
+)
+SCENARIOS = SCENARIOS + EXTRA_SCENARIOS
+
 MOTIVATIONS = (
     "wanted to prove they could help without being asked",
     "hoped to keep a promise to a close friend",
