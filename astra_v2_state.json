@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 12,
+  "attempts": 13,
   "confirmed_today": 12,
-  "last_attempt_at": "2026-10-16T23:46:04.710667+00:00",
+  "last_attempt_at": "2026-10-16T23:53:37.209170+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1725,28 +1725,55 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-16T23:50:14.311554+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "1EA0pgW32ro": {
+      "content_id": "rayvan-original-rivercompass-v1",
+      "title": "The Compass That Pointed to Kindness",
+      "day": "2026-10-17",
+      "uploaded_at": "2026-10-16T23:53:38.451185+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "bba8f9dd34d1949ea6fe3c97a10b9e82ba72e1c9a1f31a19d2b6fca7c504f77e",
+      "story_beats": [
+        {
+          "speech": "A courier's compass spun away from north whenever someone nearby needed help."
+        },
+        {
+          "speech": "It led her to a flooded bridge where a family waited on the far bank."
+        },
+        {
+          "speech": "After helping them cross, the needle pointed toward a stranded shepherd on the hill."
+        },
+        {
+          "speech": "The courier helped each traveler and the compass finally settled, pointing toward her own home."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-16T23:52:58.036785+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-16T23:50:14.753941+00:00",
+    "at": "2026-10-16T23:53:38.699135+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-16T20:08:22.753942+00:00",
   "reserved": {
@@ -3666,6 +3693,29 @@
         },
         {
           "speech": "Neighbors followed the route together and reached the hill before the rain returned."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-original-rivercompass-v1": {
+      "at": "2026-10-16T23:53:37.209154+00:00",
+      "title": "The Compass That Pointed to Kindness",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "bba8f9dd34d1949ea6fe3c97a10b9e82ba72e1c9a1f31a19d2b6fca7c504f77e",
+      "story_beats": [
+        {
+          "speech": "A courier's compass spun away from north whenever someone nearby needed help."
+        },
+        {
+          "speech": "It led her to a flooded bridge where a family waited on the far bank."
+        },
+        {
+          "speech": "After helping them cross, the needle pointed toward a stranded shepherd on the hill."
+        },
+        {
+          "speech": "The courier helped each traveler and the compass finally settled, pointing toward her own home."
         }
       ],
       "renderer": "studio-7.3.0",
