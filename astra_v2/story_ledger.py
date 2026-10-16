@@ -27,7 +27,7 @@ def read_ledger(path):
     if not isinstance(data, dict) or data.get("version") != 1:
         raise StoryLedgerError("story_ledger_invalid_schema")
     archived = data.get("archived")
-    if not isinstance(archived, list) or any(not isinstance(fp, str) or not fp for fp in archived):
+    if not isinstance(archived, list) or any(not isinstance(fp, str) or len(fp) != 64 or any(c not in "0123456789abcdef" for c in fp) for fp in archived):
         raise StoryLedgerError("story_ledger_invalid_archive")
     return {"version": 1, "archived": sorted(set(archived))}
 
