@@ -100,6 +100,34 @@ jobs:
           subprocess.run([get_ffmpeg_exe(),'-v','error','-i',path,'-f','null','-'],check=True)
           print('Verified decoded species showcase MP4:',path)
           PY
+      - name: Render two-character interaction showcase
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageDraw
+          from astra_v2.pillow_duo_scene import _actor
+          from imageio_ffmpeg import get_ffmpeg_exe
+          import subprocess
+          path='preview/astra-pair-interaction.mp4'
+          cmd=[get_ffmpeg_exe(),'-hide_banner','-loglevel','error','-y',
+               '-f','rawvideo','-pix_fmt','rgb24','-s','1080x1920','-r','8',
+               '-i','-','-c:v','libx264','-preset','ultrafast','-pix_fmt','yuv420p',path]
+          proc=subprocess.Popen(cmd,stdin=subprocess.PIPE)
+          for i in range(72):
+              t=i/8
+              im=Image.new('RGB',(1080,1920),(238,245,247))
+              d=ImageDraw.Draw(im)
+              d.text((65,110),'ASTRA pair interaction: cat and squirrel',fill=(25,42,58))
+              d.line((55,1190,1025,1190),fill=(99,145,149),width=5)
+              # First greet one another, then mirror a celebratory dance.
+              action='wave' if i<32 else 'dance'
+              _actor(d,'cat',325,760,t,action,'happy',0,ground_y=1190)
+              _actor(d,'squirrel',735,760,t,action,'happy',1,ground_y=1190)
+              proc.stdin.write(im.tobytes())
+          proc.stdin.close()
+          assert proc.wait()==0
+          subprocess.run([get_ffmpeg_exe(),'-v','error','-i',path,'-f','null','-'],check=True)
+          print('Verified decoded interaction MP4:',path)
+          PY
       - name: Render full Studio scene compositor preview (silent)
         run: python -m tools.pillow_studio_preview
       - name: Render four new actions in actual Studio
@@ -110,6 +138,7 @@ jobs:
           path: |
             preview/pillow-duo-motion.mp4
             preview/astra-species-showcase.mp4
+            preview/astra-pair-interaction.mp4
             preview/pillow-studio-composite.mp4
             preview/astra-four-directed-actions.mp4
             preview/astra-four-directed-actions.json
