@@ -54,6 +54,33 @@ class ProductionDuoContactTests(unittest.TestCase):
                     _, second = self.paint(action, t)
                     self.assertEqual(first.tobytes(), second.tobytes())
 
+    def test_hand_target_motion_has_no_single_frame_teleport(self):
+        # Measure target-anchor travel between adjacent sampled frames.
+        # This is a continuity guard, not a claim of pixel-perfect anatomy.
+        for action in ("pick", "carry", "release", "drop", "put_down"):
+            with self.subTest(action=action):
+                targets = []
+                for frame in range(0, 17):
+                    args, _ = self.paint(action, frame / 8.0)
+                    target = args[0].kwargs["hand_target"]
+                    self.assertIsNotNone(target)
+                    targets.append(target)
+                for before, after in zip(targets, targets[1:]):
+                    dx = after[0] - before[0]
+                    dy = after[1] - before[1]
+                    self.assertLessEqual((dx * dx + dy * dy) ** 0.5, 180.0)
+
+    def test_contact_target_stays_inside_master_canvas(self):
+        for action in ("pick", "carry", "release", "drop", "put_down"):
+            with self.subTest(action=action):
+                for t in (0.2, 0.5, 0.8, 1.2, 1.8):
+                    args, _ = self.paint(action, t)
+                    x, y = args[0].kwargs["hand_target"]
+                    self.assertGreaterEqual(x, 0)
+                    self.assertLess(x, 1080)
+                    self.assertGreaterEqual(y, 0)
+                    self.assertLess(y, 1920)
+
     def test_movement_without_narrated_prop_does_not_generate_grip(self):
         for action in ("run","dance","look","wave"):
             args,_=self.paint(action,.7)
