@@ -37,6 +37,23 @@ class ProductionDuoContactTests(unittest.TestCase):
         self.assertTrue(all(a < b for a,b in zip(strengths,strengths[1:])))
         self.assertEqual(strengths[-1],1.0)
 
+    def test_release_and_drop_keep_hand_target_during_ease(self):
+        for action in ("release", "drop", "put_down"):
+            with self.subTest(action=action):
+                for t in (.2, .45, .8):
+                    args, image = self.paint(action, t)
+                    self.assertIsNotNone(args[0].kwargs["hand_target"])
+                    self.assertGreater(args[0].kwargs["hand_strength"], 0.0)
+                    self.assertEqual(image.size, (1080, 1920))
+
+    def test_release_motion_is_deterministic_across_phases(self):
+        for action in ("release", "drop", "put_down"):
+            with self.subTest(action=action):
+                for t in (.2, .45, .8, 1.2):
+                    _, first = self.paint(action, t)
+                    _, second = self.paint(action, t)
+                    self.assertEqual(first.tobytes(), second.tobytes())
+
     def test_movement_without_narrated_prop_does_not_generate_grip(self):
         for action in ("run","dance","look","wave"):
             args,_=self.paint(action,.7)
