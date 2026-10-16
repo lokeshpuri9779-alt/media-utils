@@ -30,7 +30,7 @@ class AutonomousStoryProposalTests(unittest.TestCase):
         self.assertTrue(all(item["production_ready"] is False for item in candidates))
         self.assertTrue(all(item["title"] != f"Unreviewed story proposal {i + 1}"
                             for i, item in enumerate(candidates)))
-        self.assertTrue(all(item["title"].startswith("The ") and "Mystery of the" in item["title"]
+        self.assertTrue(all(item["title"].startswith("The ") and "Mystery of " in item["title"]
                             for item in candidates))
 
     def test_story_beats_form_a_causal_chain(self):
@@ -56,7 +56,7 @@ class AutonomousStoryProposalTests(unittest.TestCase):
         candidates = [proposal(index) for index in range(300)]
         titles = [item["title"] for item in candidates]
         self.assertEqual(len(titles), len(set(titles)))
-        self.assertTrue(all("Mystery of " in title and "Case" in title for title in titles))
+        self.assertTrue(all("Mystery of " in title and "Case #" in title for title in titles))
         self.assertNotIn("Unknown Setting", " ".join(titles))
 
     def test_invalid_indices_and_batch_sizes_rejected(self):
