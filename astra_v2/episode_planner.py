@@ -15,9 +15,7 @@ def _normalize(value):
 def fingerprint(episode):
     """Stable narrative fingerprint, independent of cosmetic title changes."""
     scenes = episode.get("scenes") or []
-    narrative = " ".join(_normalize(scene.get("cause", "") + " " +
-                                  scene.get("action", "") + " " +
-                                  scene.get("consequence", "")) for scene in scenes)
+    narrative = " ".join(_normalize(" ".join(str(scene.get(k, "")) for k in ("cause", "action", "consequence"))) for scene in scenes)
     return hashlib.sha256(narrative.encode("utf-8")).hexdigest()
 
 
