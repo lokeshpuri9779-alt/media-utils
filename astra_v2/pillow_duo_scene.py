@@ -189,13 +189,11 @@ def _ears_and_tail(d, actor, x, y, t, fur):
             ex=x+side*83
             d.polygon(((ex-51,y-98),(ex+side*19,y-209),(ex+47,y-105)),fill=fur)
         # Solid tapered plume rather than an open wire-loop silhouette.
-        d.polygon(((x+76,y+263),(x+122,y+204),(x+148,y+126),
-                   (x+207,y+78),(x+267,y+103),(x+295,y+163),
-                   (x+280,y+225),(x+231,y+254),(x+182,y+237),
-                   (x+141,y+292)),fill=fur)
-        d.polygon(((x+137,y+258),(x+172,y+207),(x+203,y+169),
-                   (x+253,y+162),(x+259,y+202),(x+218,y+225),
-                   (x+182,y+215)),fill=CREAM)
+        d.ellipse((x+110,y+82,x+292,y+287),fill=fur,outline=INK,width=5)
+        d.ellipse((x+146,y+116,x+256,y+238),fill=CREAM)
+        d.ellipse((x+195,y+152,x+271,y+242),fill=fur)
+        d.polygon(((x+83,y+264),(x+147,y+205),(x+190,y+248),
+                   (x+129,y+310)),fill=fur)
     elif actor=="dog":
         for side in (-1,1):
             ex=x+side*114
@@ -206,12 +204,10 @@ def _ears_and_tail(d, actor, x, y, t, fur):
             d.ellipse((ex-56,y-211,ex+56,y-91),fill=fur,outline=INK,width=4)
             d.ellipse((ex-38,y-193,ex+38,y-108),fill=(234,165,181))
     elif actor=="owl":
-        # Short rounded feather tufts; avoid the cat's tall triangular ears.
+        # Low rounded crown feathers, not cat-like pointed ears.
         for side in (-1,1):
-            ex=x+side*86
-            d.ellipse((ex-35,y-148,ex+35,y-65),fill=fur,outline=INK,width=4)
-            d.polygon(((ex-24,y-104),(ex+side*17,y-165),
-                       (ex+29,y-95)),fill=fur)
+            ex=x+side*72
+            d.ellipse((ex-38,y-145,ex+38,y-84),fill=fur,outline=INK,width=4)
     else:
         for side in (-1,1):
             ex=x+side*107
@@ -326,9 +322,11 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
             ex=x+side*59
             d.ellipse((ex-41,y+42,ex+41,y+106),fill=CREAM)
     if name=="owl":
+        # Wide facial discs and brow arcs make the owl readable at Shorts scale.
         for side in (-1,1):
-            ex=x+side*51
-            d.ellipse((ex-45,y-70,ex+45,y+35),fill=CREAM)
+            ex=x+side*52
+            d.ellipse((ex-54,y-86,ex+54,y+49),fill=CREAM)
+            d.arc((ex-50,y-88,ex+50,y+37),190,350,fill=INK,width=5)
     _facial(d,x,y,mood,t,idx)
     # Species-specific facial markers supplement the shared expressive face.
     if name=="owl":
