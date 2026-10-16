@@ -1,6 +1,6 @@
 """Regression tests for the ASTRA Studio preview audio gate."""
 import unittest
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -39,6 +39,28 @@ class StudioAudioGateTests(unittest.TestCase):
             ):
                 with self.assertRaisesRegex(ValueError, "both video and narration audio"):
                     verify(path)
+
+    def _verify_audio_level_rejected(self, level):
+        with TemporaryDirectory() as td:
+            path = Path(td) / "preview.mp4"
+            path.write_bytes(b"x" * 10001)
+            results = [
+                Mock(stderr="Stream #0:0: Video: h264\nStream #0:1: Audio: aac"),
+                Mock(stderr=""),
+                Mock(stderr=""),
+                Mock(stderr=f"max_volume: {level} dB"),
+            ]
+            with patch("tests.verify_studio_preview.get_ffmpeg_exe", return_value="ffmpeg"), patch(
+                "tests.verify_studio_preview.run", side_effect=results
+            ):
+                with self.assertRaisesRegex(ValueError, "silent or nearly silent"):
+                    verify(path)
+
+    def test_silent_audio_rejected(self):
+        self._verify_audio_level_rejected("-inf")
+
+    def test_nearly_silent_audio_rejected(self):
+        self._verify_audio_level_rejected("-60.0")
 
     def test_audible_audio_level_parsed(self):
         self.assertAlmostEqual(parse_max_volume(" [Parsed_volumedetect] max_volume: -12.4 dB"), -12.4)
