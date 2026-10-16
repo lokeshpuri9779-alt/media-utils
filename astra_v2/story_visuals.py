@@ -38,7 +38,7 @@ SUBJECTS = (
 )
 
 def select_subject(story, shot):
-    local = " ".join(str(shot.get(k) or "") for k in ("speech", "visual_prompt", "visual", "action", "headline", "label")).lower()
+    local = " ".join(str(shot.get(k) or "") for k in ("visual_intent", "speech", "visual_prompt", "visual", "action", "headline", "label")).lower()
     global_text = " ".join(str(story.get(k) or "") for k in ("title", "question", "answer")).lower()
     # Respect the scene's narrated characters; a title protagonist is only
     # preferred over incidental scenery, never over a different actor.

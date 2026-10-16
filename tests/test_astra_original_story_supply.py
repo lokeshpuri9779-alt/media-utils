@@ -20,6 +20,7 @@ class OriginalStorySupplyTests(unittest.TestCase):
                 self.assertGreaterEqual(len(beats), 4)
                 self.assertEqual(len({beat["speech"] for beat in beats}), len(beats))
                 self.assertTrue(all(beat["speech"] and beat["visual"] for beat in beats))
+                self.assertTrue(all(beat["visual_intent"] == beat["speech"] for beat in beats))
 
     def test_replenishment_has_four_distinct_story_ids(self):
         ids = {story["content_id"] for story in catalog()}

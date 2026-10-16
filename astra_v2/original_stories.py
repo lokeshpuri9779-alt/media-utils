@@ -12,6 +12,7 @@ def beats(*scenes):
             "headline": title,
             "speech": speech,
             "visual": visual,
+            "visual_intent": speech,
             "label": label,
             "sub": "AN ORIGINAL RAYVAN STORY",
             "story_beat": role,
