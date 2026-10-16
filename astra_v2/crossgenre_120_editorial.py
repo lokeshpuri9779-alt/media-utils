@@ -3730,3 +3730,12 @@ EDITORIAL_STORY_PROPOSALS = [
 
 def candidates():
     return tuple(EDITORIAL_STORY_PROPOSALS)
+
+def not_in_production():
+    """Return proposals with titles absent from the current active catalog.
+
+    This is a review shortlist, not a publication approval or novelty guarantee.
+    """
+    from astra_v2.story_forge import catalog
+    existing={str(item.get('title') or '').casefold().strip() for item in catalog(limit=10000)}
+    return tuple(item for item in candidates() if str(item[1]).casefold().strip() not in existing)
