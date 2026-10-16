@@ -100,5 +100,11 @@ def plan_episode_with_ledger(series_id, episode_number, scenes, ledger_path, sta
     except StoryLedgerError as exc:
         raise ValueError("episode_story_ledger_unavailable") from exc
     combined_state = dict(state or {})
-    combined_state["fingerprint_ledger"] = ledger
+    previous = combined_state.get("fingerprint_ledger") or {}
+    if not isinstance(previous, dict) or not isinstance(previous.get("archived", []), (list, tuple, set)):
+        raise ValueError("episode_story_ledger_invalid_state")
+    historical = previous.get("archived", [])
+    if any(not isinstance(fp, str) or len(fp) != 64 or any(ch not in "0123456789abcdef" for ch in fp) for fp in historical):
+        raise ValueError("episode_story_ledger_invalid_state")
+    combined_state["fingerprint_ledger"] = {"version": 1, "archived": sorted(set(ledger["archived"]).union(historical))}
     return plan_episode(series_id, episode_number, scenes, combined_state)
