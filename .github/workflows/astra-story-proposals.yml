@@ -119,7 +119,7 @@ jobs:
           cp astra_v2_state.json /tmp/astra-proposal-persist/astra_v2_state.json
           if [ -f astra_story_history.json ]; then cp astra_story_history.json /tmp/astra-proposal-persist/astra_story_history.json; fi
           rm -f astra_v2_state.json astra_story_history.json
-          git stash push --include-untracked -m "ASTRA proposal ledger handoff" -- runtime-health astra_v2_state.json astra_story_history.json
+          git stash push --include-untracked -m "ASTRA proposal ledger handoff" -- runtime-health
           git checkout -B astra-state origin/astra-state
           mkdir -p runtime-health
           cp /tmp/astra-proposal-persist/*.json runtime-health/
