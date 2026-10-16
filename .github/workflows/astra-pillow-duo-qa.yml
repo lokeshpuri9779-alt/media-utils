@@ -56,8 +56,9 @@ jobs:
           proc=subprocess.Popen(cmd,stdin=subprocess.PIPE)
           shots=[
             {'speech':'The fox and rabbit were curious about the gift box.', 'story_action':'look'},
-            {'speech':'The fox warned the rabbit about the gift box!', 'story_action':'wave'},
+            {'speech':'The fox and rabbit watch as the fox picks up the gift box carefully.', 'story_action':'pick_up'},
             {'speech':'The fox and rabbit carry the gift box together.', 'story_action':'carry'},
+            {'speech':'The fox and rabbit put down and release the gift box together.', 'story_action':'release'},
           ]
           for j,shot in enumerate(shots):
               for i in range(24):
