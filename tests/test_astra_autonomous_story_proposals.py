@@ -30,6 +30,8 @@ class AutonomousStoryProposalTests(unittest.TestCase):
         self.assertTrue(all(item["production_ready"] is False for item in candidates))
         self.assertTrue(all(item["title"] != f"Unreviewed story proposal {i + 1}"
                             for i, item in enumerate(candidates)))
+        self.assertTrue(all(item["title"].startswith("The ") and "Mystery of the" in item["title"]
+                            for item in candidates))
 
     def test_invalid_indices_and_batch_sizes_rejected(self):
         with self.assertRaises(ValueError):
