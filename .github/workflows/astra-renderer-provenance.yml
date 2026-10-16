@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - 'astra_v2/creative.py'
+      - 'astra_v2/original_stories.py'
+      - 'tests/test_astra_original_story_supply.py'
       - 'astra_v2/preload_queue.py'
       - 'astra_v2/run.py'
       - 'astra_v2/preflight.py'
@@ -25,7 +27,9 @@ jobs:
       - name: Install lightweight YouTube client for runtime tests
         run: python -m pip install --disable-pip-version-check 'httpx==0.28.1'
       - name: Check Python syntax
-        run: python -m compileall -q astra_v2/creative.py astra_v2/preload_queue.py astra_v2/run.py astra_v2/preflight.py tests/test_astra_renderer_provenance.py tests/test_preload_run_resilience.py
+        run: python -m compileall -q astra_v2/creative.py astra_v2/preload_queue.py astra_v2/run.py astra_v2/preflight.py tests/test_astra_renderer_provenance.py tests/test_preload_run_resilience.py astra_v2/original_stories.py tests/test_astra_original_story_supply.py
+      - name: Check original story inventory and publication policy
+        run: python -m unittest discover -s tests -p test_astra_original_story_supply.py -v
       - name: Check renderer handoff
         run: python -m unittest discover -s tests -p test_astra_renderer_provenance.py -v
       - name: Reproduce live publisher queue tests with Studio 7.2 floor
