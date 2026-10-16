@@ -83,10 +83,23 @@ LESSONS = (
 )
 
 
-def genre_proposal(index):
+def balanced_genre_index(index, recent):
+    """Choose an underrepresented genre deterministically from recent accepted proposals."""
+    from collections import Counter
+    counts = Counter(
+        str(item.get("genre"))
+        for item in recent[-500:]
+        if isinstance(item, dict) and item.get("genre")
+    )
+    lowest = min(counts.get(row[0], 0) for row in SCENARIOS)
+    options = [offset for offset, row in enumerate(SCENARIOS) if counts.get(row[0], 0) == lowest]
+    return options[index % len(options)]
+
+
+def genre_proposal(index, scenario_index=None):
     if not isinstance(index, int) or isinstance(index, bool) or index < 0:
         raise ValueError("Invalid proposal index")
-    genre, setting, hero, problem, reveal, solution, visual = SCENARIOS[index % len(SCENARIOS)]
+    genre, setting, hero, problem, reveal, solution, visual = SCENARIOS[(index if scenario_index is None else scenario_index) % len(SCENARIOS)]
     complication = COMPLICATIONS[(index // len(SCENARIOS)) % len(COMPLICATIONS)]
     lesson = LESSONS[(index // (len(SCENARIOS) * len(COMPLICATIONS))) % len(LESSONS)]
     motivation = MOTIVATIONS[(index // 3) % len(MOTIVATIONS)]
