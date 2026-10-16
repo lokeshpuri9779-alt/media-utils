@@ -85,3 +85,20 @@ def plan_episode(series_id, episode_number, scenes, state=None):
     if proposal["plot_fingerprint"] in known_fingerprints(state or {}):
         raise ValueError("episode_plot_already_used")
     return proposal
+
+
+def plan_episode_with_ledger(series_id, episode_number, scenes, ledger_path, state=None):
+    """Plan against durable archived fingerprints without approving the proposal.
+
+    This is a planning-only adapter; it never writes the archive. Archive writes
+    require an explicit lifecycle decision by a separate caller.
+    """
+    from astra_v2.story_ledger import read_ledger, StoryLedgerError
+
+    try:
+        ledger = read_ledger(ledger_path)
+    except StoryLedgerError as exc:
+        raise ValueError("episode_story_ledger_unavailable") from exc
+    combined_state = dict(state or {})
+    combined_state["fingerprint_ledger"] = ledger
+    return plan_episode(series_id, episode_number, scenes, combined_state)
