@@ -2,19 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-13T05:11:53.155590+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "fail",
-      "evidence": {
-        "hard_failures": [],
-        "media_failures": [],
-        "layer_failures": []
-      },
-      "proposed_action": "['review_story_rhythm_and_tension']",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
       "at": "2026-10-13T05:11:58.372146+00:00",
       "stage": "quality",
       "element": "candidate_selection",
@@ -7372,6 +7359,17 @@
       },
       "proposed_action": "Diagnose story supply and creative gate failures",
       "candidate_id": ""
+    },
+    {
+      "at": "2026-10-16T12:05:04.320129+00:00",
+      "stage": "quality",
+      "element": "candidate_selection",
+      "outcome": "fail",
+      "evidence": {
+        "reason": "no_approved_original_story_available"
+      },
+      "proposed_action": "Diagnose story supply and creative gate failures",
+      "candidate_id": ""
     }
   ],
   "stage_counts": {
@@ -7473,7 +7471,7 @@
     },
     "render": {
       "pass": 25,
-      "fail": 46,
+      "fail": 45,
       "skip": 0,
       "unknown": 45,
       "improved": 0,
@@ -7481,7 +7479,7 @@
     },
     "quality": {
       "pass": 25,
-      "fail": 99,
+      "fail": 100,
       "skip": 0,
       "unknown": 0,
       "improved": 0,
