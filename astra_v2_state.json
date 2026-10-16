@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 11,
+  "attempts": 12,
   "confirmed_today": 11,
-  "last_attempt_at": "2026-10-16T23:34:55.242971+00:00",
+  "last_attempt_at": "2026-10-16T23:46:04.710667+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1717,28 +1717,55 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-16T23:37:57.727516+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "mQ-9KB6ukuI": {
+      "content_id": "rayvan-original-paperboatrescue-v1",
+      "title": "The Paper Boat Rescue",
+      "day": "2026-10-17",
+      "uploaded_at": "2026-10-16T23:46:06.768547+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "375f2e8f83be28d29c331142f42e7abd4cd62730b1b1e87385d4ccc785035585",
+      "story_beats": [
+        {
+          "speech": "After heavy rain, a child saw neighbors trapped on the far side of the square."
+        },
+        {
+          "speech": "She folded an old town map into a paper boat and floated it into the current."
+        },
+        {
+          "speech": "The boat traced a narrow alley where the water was shallow enough to cross safely."
+        },
+        {
+          "speech": "Neighbors followed the route together and reached the hill before the rain returned."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-16T23:45:22.398794+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-16T23:37:58.222480+00:00",
+    "at": "2026-10-16T23:46:06.974209+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-16T20:08:22.753942+00:00",
   "reserved": {
@@ -3635,6 +3662,29 @@
         },
         {
           "speech": "Families recognized their pictures and returned to the square to celebrate together."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-original-paperboatrescue-v1": {
+      "at": "2026-10-16T23:46:04.710650+00:00",
+      "title": "The Paper Boat Rescue",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "375f2e8f83be28d29c331142f42e7abd4cd62730b1b1e87385d4ccc785035585",
+      "story_beats": [
+        {
+          "speech": "After heavy rain, a child saw neighbors trapped on the far side of the square."
+        },
+        {
+          "speech": "She folded an old town map into a paper boat and floated it into the current."
+        },
+        {
+          "speech": "The boat traced a narrow alley where the water was shallow enough to cross safely."
+        },
+        {
+          "speech": "Neighbors followed the route together and reached the hill before the rain returned."
         }
       ],
       "renderer": "studio-7.3.0",
