@@ -51,6 +51,16 @@ PAYOFF_STYLES = (
     "The discovery opened the door to another adventure",
     "The group started a new tradition together",
 )
+NARRATIVE_STRUCTURES = (
+    ("misunderstanding", "The hero first believed a friend was responsible, but decided to listen before judging.", "A conversation revealed the surprising truth behind the confusion.", "The friends cleared up the misunderstanding and rebuilt trust."),
+    ("rivalry-to-teamwork", "A rival challenged the hero to solve the problem first, turning the task into a contest.", "The rival noticed a clue that the hero had missed, and competition became cooperation.", "Both rivals combined their ideas and shared the victory."),
+    ("failed-invention", "The hero invented a quick solution, but the invention caused a harmless new complication.", "A tiny design mistake explained why the invention behaved unexpectedly.", "The hero redesigned it and demonstrated the safer version."),
+    ("unexpected-helper", "The hero overlooked a quiet teammate while asking everyone else for advice.", "The quiet teammate knew the crucial detail and finally spoke up.", "The hero gave the teammate credit and they finished together."),
+    ("difficult-choice", "The hero had to choose between personal success and helping someone in trouble.", "A new clue showed that helping first would also reveal a better path forward.", "The hero chose kindness and found a satisfying solution."),
+    ("race-against-time", "The hero had only a short time before an important event would begin.", "A careful shortcut appeared after the team abandoned a risky first plan.", "The team completed the task safely just in time."),
+    ("role-reversal", "The hero expected to lead, but a younger companion offered an unusual plan.", "The companion understood a detail that the experienced hero had missed.", "The hero followed the companion's lead and celebrated the new leader."),
+    ("small-kindness", "The hero stopped to help a stranger even though a bigger task was waiting.", "The stranger's knowledge unexpectedly explained the bigger problem.", "Their kindness came full circle when the stranger helped everyone succeed."),
+)
 COMPLICATIONS = (
     "The first plan failed when the weather changed",
     "A rival misunderstood the clue and ran the wrong way",
@@ -83,18 +93,19 @@ def genre_proposal(index):
     partner = PARTNERS[(index // 5) % len(PARTNERS)]
     strategy = STRATEGIES[(index // 7) % len(STRATEGIES)]
     payoff_style = PAYOFF_STYLES[(index // 11) % len(PAYOFF_STYLES)]
+    structure_id, opening, middle, ending = NARRATIVE_STRUCTURES[(index // 13) % len(NARRATIVE_STRUCTURES)]
     beats = [
-        ("reveal", f"At {setting}, {hero} encountered {problem}. Everyone stopped what they were doing. The hero {motivation} and teamed up with {partner} before the situation spoiled an important day.", visual),
-        ("build", f"The hero tried a simple solution, but it did not work. {complication}. {strategy}. Rather than give up, the friends compared what they had seen and searched for one overlooked detail.", "book"),
+        ("reveal", f"At {setting}, {hero} encountered {problem}. Everyone stopped what they were doing. The hero {motivation} and teamed up with {partner}. {opening}", visual),
+        ("build", f"The hero tried a simple solution, but it did not work. {complication}. {strategy}. {middle}", "book"),
         ("twist", f"The overlooked detail explained everything: {reveal}. The group realized that the original problem had a different cause than they first assumed. They tested the explanation before acting.", visual),
-        ("payoff", f"With the mystery understood, the hero {solution}. {lesson}. {payoff_style}. The friends remembered the discovery for their next adventure.", visual),
+        ("payoff", f"With the mystery understood, the hero {solution}. {ending} {lesson}. {payoff_style}.", visual),
     ]
     narration = " ".join(speech for _, speech, _ in beats).casefold()
     return {
         "content_id": "astra-genre-" + hashlib.sha256(f"genre-{index}".encode()).hexdigest()[:20],
         "title": f"{genre.title()}: {problem.title()}",
         "genre": genre,
-        "plot_structure": "problem-investigation-reversal-resolution",
+        "plot_structure": structure_id,
         "premise_id": f"{genre}:{problem}",
         "outcome_id": solution,
         "kind": "unreviewed_causal_draft",
