@@ -20,6 +20,11 @@ class GenreStorySupplyTests(unittest.TestCase):
         self.assertGreaterEqual(len({story["story_beats"][3]["speech"] for story in stories}), 64)
         self.assertTrue(all(not story["production_ready"] for story in stories))
 
+    def test_eight_narrative_structures(self):
+        stories = [genre_proposal(i) for i in range(128)]
+        self.assertEqual(len({story["plot_structure"] for story in stories}), 8)
+        self.assertTrue(all(story["premise_id"] and story["outcome_id"] for story in stories))
+
     def test_reject_negative_index(self):
         with self.assertRaises(ValueError):
             genre_proposal(-1)
