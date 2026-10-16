@@ -1,0 +1,46 @@
+"""Read-only production-supply assessment for unreviewed story proposals.
+
+No story promotion or publication occurs here.
+"""
+import json
+from pathlib import Path
+from astra_v2.proposal_history import load_history
+from astra_v2.story_editorial import editorial_issues
+from astra_v2.publication_quality import publication_rejection
+
+
+def assess(ledger_path, publisher_path="astra_v2_state.json",
+           story_path="astra_story_history.json"):
+    ledger = json.loads(Path(ledger_path).read_text(encoding="utf-8"))
+    if not isinstance(ledger, dict) or not isinstance(ledger.get("proposals"), list):
+        raise ValueError("Invalid proposal ledger")
+    history = load_history(publisher_path, story_path)
+    reviewed = []
+    for story in ledger["proposals"]:
+        if not isinstance(story, dict):
+            raise ValueError("Invalid proposal")
+        issues = editorial_issues(story, history)
+        rejection = publication_rejection(story)
+        reviewed.append({
+            "content_id": story.get("content_id"),
+            "editorial_issues": issues,
+            "publication_rejection": rejection,
+            "eligible_for_automatic_publishing": False,
+        })
+        history.append(story)
+    return {
+        "proposal_count": len(reviewed),
+        "editorial_issue_count": sum(bool(x["editorial_issues"]) for x in reviewed),
+        "publication_blocked_count": sum(bool(x["publication_rejection"]) for x in reviewed),
+        "approved_for_production": 0,
+        "proposals": reviewed,
+    }
+
+
+if __name__ == "__main__":
+    import os
+    result = assess(os.getenv("ASTRA_PROPOSAL_LEDGER", "runtime-health/story_proposals.json"))
+    path = Path(os.getenv("ASTRA_SUPPLY_REVIEW_REPORT", "runtime-health/story_supply_review.json"))
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    print("ASTRA_STORY_SUPPLY_REVIEW=" + json.dumps({k: v for k, v in result.items() if k != "proposals"}))
