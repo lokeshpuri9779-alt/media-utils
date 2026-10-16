@@ -1598,12 +1598,13 @@
     }
   },
   "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-16T17:34:52.125889+00:00",
+  "last_outcome": "skipped",
+  "last_error": "",
+  "last_preflight_at": "2026-10-16T17:36:42.700860+00:00",
   "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "last_preflight_outcome": "skipped",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-16T17:34:52.632788+00:00",
+    "at": "2026-10-16T17:36:42.778081+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "false",
