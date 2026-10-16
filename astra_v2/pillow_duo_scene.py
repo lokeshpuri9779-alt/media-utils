@@ -451,7 +451,7 @@ def draw_duo(image, shot, t):
                        if prop and action in interact_actions else 0.0)
         if action in ("release","drop","put_down"):
             # Let go as the prop falls: do not keep the wrist glued to it.
-            hand_strength *= 1.0-_ease((max(0.0,float(t))-.15)/.55)
+            hand_strength *= 1.0-_ease((max(0.0,float(t))-.15)/.85)
         hand_target=prop_pos if prop and action in interact_actions else None
         actor_mood=mood
         if mood=="angry" and idx==0:
