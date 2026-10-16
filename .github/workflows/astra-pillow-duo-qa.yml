@@ -92,7 +92,8 @@ jobs:
                   from PIL import ImageDraw
                   d=ImageDraw.Draw(im)
                   d.text((70,110),f'ASTRA species: {name}',fill=(25,42,58))
-                  _actor(d,name,500,740,i/8,'walk','curious',0,ground_y=1160)
+                  action=('walk','wave','dance')[('cat','squirrel','owl').index(name)]
+                  _actor(d,name,500,740,i/8,action,'curious',0,ground_y=1160)
                   proc.stdin.write(im.tobytes())
           proc.stdin.close()
           assert proc.wait()==0
