@@ -84,3 +84,12 @@ class DurableStoryLedgerTests(unittest.TestCase):
             path = Path(directory) / "story-ledger.json"
             with self.assertRaisesRegex(StoryLedgerError, "fingerprint_missing"):
                 archive_lifecycle_record(path, {}, "published")
+
+    def test_invalid_existing_archive_fails_closed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "story-ledger.json"
+            original = json.dumps({"version": 1, "archived": ["not-a-sha256"]})
+            path.write_text(original, encoding="utf-8")
+            with self.assertRaisesRegex(StoryLedgerError, "invalid_archive"):
+                archive_fingerprints(path, [FP_A])
+            self.assertEqual(path.read_text(encoding="utf-8"), original)
