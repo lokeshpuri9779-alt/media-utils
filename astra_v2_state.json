@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-16",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 24,
+  "attempts": 25,
   "confirmed_today": 24,
-  "last_attempt_at": "2026-10-16T13:13:28.443302+00:00",
+  "last_attempt_at": "2026-10-16T13:20:55.532512+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1573,28 +1573,40 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-16T13:14:08.663398+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "VlMBZcIn9-0": {
+      "content_id": "rayvan-original-clockworkbridge-v1",
+      "title": "The Bridge That Remembered | Original Microfiction",
+      "day": "2026-10-16",
+      "uploaded_at": "2026-10-16T13:20:57.455993+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-16T13:19:52.267470+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-16T13:14:09.130467+00:00",
+    "at": "2026-10-16T13:20:57.721973+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-16T08:06:44.296862+00:00",
   "reserved": {
@@ -3107,6 +3119,14 @@
     "rayvan-original-moonpost-v1": {
       "at": "2026-10-16T13:13:28.443288+00:00",
       "title": "The Post Office on the Moon | Original Microfiction",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-original-clockworkbridge-v1": {
+      "at": "2026-10-16T13:20:55.532496+00:00",
+      "title": "The Bridge That Remembered | Original Microfiction",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
