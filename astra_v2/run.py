@@ -207,7 +207,6 @@ def run():
                 # postpublication hook alone may bootstrap the character.
                 if candidate.get("character_approved") is True and candidate.get("format") == "short":
                     from astra_v2.character_manifest_bridge import build_character_manifests
-                    from astra_v2.character_registry import initial_character
                     from astra_v2.character_bootstrap import register_approved_character
                     snapshot_path = Path("character-continuity.json")
                     from astra_v2.character_snapshot import read_snapshot
