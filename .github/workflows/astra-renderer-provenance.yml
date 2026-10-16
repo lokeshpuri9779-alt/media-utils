@@ -8,6 +8,7 @@ on:
       - 'tests/test_astra_shorts_fingerprint_lifecycle.py'
       - 'astra_v2/shorts_novelty.py'
       - 'tests/test_astra_shorts_novelty.py'
+      - 'tests/test_astra_shorts_novelty_integration.py'
       - 'astra_v2/preload_queue.py'
       - 'astra_v2/run.py'
       - 'astra_v2/preflight.py'
@@ -37,6 +38,8 @@ jobs:
         run: python -m unittest discover -s tests -p test_astra_shorts_fingerprint_lifecycle.py -v
       - name: Check Shorts near-duplicate detector
         run: python -m unittest discover -s tests -p test_astra_shorts_novelty.py -v
+      - name: Check Shorts novelty history integration
+        run: python -m unittest discover -s tests -p test_astra_shorts_novelty_integration.py -v
       - name: Check renderer handoff
         run: python -m unittest discover -s tests -p test_astra_renderer_provenance.py -v
       - name: Reproduce live publisher queue tests with Studio 7.2 floor
