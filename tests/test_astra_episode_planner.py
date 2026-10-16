@@ -1,5 +1,6 @@
 import unittest
 from astra_v2.episode_planner import plan_episode, fingerprint
+from astra_v2.story_forge import catalog, propose_episode_from_story
 
 SCENES = [
     {"cause":"The bridge collapses", "action":"Mira surveys the river", "consequence":"She discovers a lost path"},
@@ -29,6 +30,16 @@ class EpisodePlannerTests(unittest.TestCase):
     def test_fingerprint_tolerates_nontext_fields(self):
         result = fingerprint({"scenes": [{"cause": None, "action": 42, "consequence": "Done"}]})
         self.assertEqual(len(result), 64)
+
+    def test_story_forge_proposes_only_unapproved_episode(self):
+        story = catalog(limit=1)[0]
+        proposal = propose_episode_from_story(story, "river-town", 1)
+        self.assertFalse(proposal["production_ready"])
+        self.assertEqual(proposal["kind"], "unreviewed_episode_plan")
+        self.assertEqual(proposal["source_content_id"], story["content_id"])
+        with self.assertRaisesRegex(ValueError, "already_used"):
+            propose_episode_from_story(story, "river-town", 2,
+                {"reserved": {"old": {"plot_fingerprint": proposal["plot_fingerprint"]}}})
 
     def test_requires_causal_scenes(self):
         with self.assertRaises(ValueError):
