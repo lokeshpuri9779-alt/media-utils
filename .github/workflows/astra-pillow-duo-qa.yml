@@ -57,7 +57,7 @@ jobs:
               result = preload_queue.take(set(), set(), 'preview/unused.mp4')
               assert result is None
           # A solo/nonfiction scene cannot escape into the unified engine.
-          shot = {'start': 0, 'duration': 2, 'speech': 'A simple icon',
+          shot = {'start': 0, 'duration': 2, 'end': 2, 'speech': 'A simple icon',
                   'visual': 'a decorative icon', 'story_action': 'look'}
           try:
               render_frame([shot], 0.5, 'current', 2)
