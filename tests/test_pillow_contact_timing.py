@@ -147,6 +147,25 @@ class ProductionDuoContactTests(unittest.TestCase):
             arm_paths.append(paths)
         self.assertNotEqual(arm_paths[0][0], arm_paths[1][0])
 
+    def test_carry_hand_targets_upper_box_edge_not_box_center(self):
+        from PIL import ImageDraw
+        image = Image.new("RGB", (1080, 1920), (24, 35, 60))
+        d = ImageDraw.Draw(image)
+        arms = []
+        from astra_v2.pillow_duo_scene import _line
+        def record(draw, points, color, width=5):
+            if width == 22 and len(points) == 3:
+                arms.append(tuple(points))
+            return _line(draw, points, color, width)
+        with patch("astra_v2.pillow_duo_scene._line", side_effect=record):
+            _actor(d, "fox", 400, 846, .5, "carry", "curious", 0,
+                   hand_target=(500, 1100), interact_side=1,
+                   hand_strength=1.0)
+        self.assertTrue(arms)
+        hand = arms[0][-1]
+        self.assertAlmostEqual(hand[0], 435)
+        self.assertAlmostEqual(hand[1], 1037)
+
     def test_movement_without_narrated_prop_does_not_generate_grip(self):
         for action in ("run","dance","look","wave"):
             args,_=self.paint(action,.7)
