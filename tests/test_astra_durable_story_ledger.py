@@ -119,3 +119,31 @@ class DurableStoryLedgerTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "already_used"):
                 plan_episode_with_ledger("bell-town", 2, scenes, path)
             self.assertFalse(proposal["production_ready"])
+
+    def test_memory_archive_is_not_lost_when_disk_archive_is_empty(self):
+        from astra_v2.episode_planner import fingerprint, plan_episode_with_ledger
+        scenes = [
+            {"cause": "Door sticks", "action": "Check frame", "consequence": "Warp discovered"},
+            {"cause": "Warp discovered", "action": "Plane wood", "consequence": "Frame aligns"},
+            {"cause": "Frame aligns", "action": "Open door", "consequence": "Room accessible"},
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "story-ledger.json"
+            previous = fingerprint({"scenes": scenes})
+            with self.assertRaisesRegex(ValueError, "already_used"):
+                plan_episode_with_ledger("repair-room", 2, scenes, path, state={
+                    "fingerprint_ledger": {"archived": [previous]}
+                })
+
+    def test_invalid_memory_archive_fails_closed(self):
+        from astra_v2.episode_planner import plan_episode_with_ledger
+        scenes = [
+            {"cause": "Rain starts", "action": "Find shelter", "consequence": "Tent found"},
+            {"cause": "Tent found", "action": "Raise tent", "consequence": "Cover ready"},
+            {"cause": "Cover ready", "action": "Enter tent", "consequence": "Dry inside"},
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaisesRegex(ValueError, "invalid_state"):
+                plan_episode_with_ledger("rain-camp", 1, scenes, Path(directory) / "ledger.json", state={
+                    "fingerprint_ledger": {"archived": ["broken"]}
+                })
