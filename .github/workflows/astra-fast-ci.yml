@@ -2,13 +2,8 @@ name: ASTRA Fast CI
 
 on:
   pull_request:
-    paths:
-      - 'astra_v2/**'
-      - 'tests/**'
-      - 'studio_renderer.py'
-      - 'quality_lab.py'
-      - '.github/workflows/astra-fast-ci.yml'
   workflow_dispatch:
+  merge_group:
 
 permissions:
   contents: read
