@@ -65,6 +65,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
     from astra_v2.anthology_stories import catalog as anthology_catalog
     from astra_v2.free_story_engine import catalog as free_catalog
     from astra_v2.story_forge import catalog as forge_catalog
+    from astra_v2.production_story_gate import approved_authored_candidates
     from astra_v2.omniroute_local import catalog as routed_catalog
     from studio_renderer import render_short
     from quality_lab import evaluate_studio_render
@@ -76,7 +77,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
     series_stories = routed_catalog(excluded_ids, excluded_titles=excluded_titles)
     serialized_preload = os.getenv("ASTRA_SERIALIZED_PRELOAD", "0") == "1"
     premium_stories = (series_stories if serialized_preload else
-                       series_stories + forge_catalog(excluded_ids, excluded_titles) + anthology_catalog() + free_catalog() + original_catalog() + catalog()
+                       series_stories + approved_authored_candidates(forge_catalog(excluded_ids, excluded_titles)) + anthology_catalog() + free_catalog() + original_catalog() + catalog()
                        + procedural_catalog(excluded_ids, limit=128))
     # Count truly eligible stories, not just unseen template IDs.
     # Diagnostics only: never bypass the publication or creative gates.
