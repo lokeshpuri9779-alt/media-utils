@@ -116,6 +116,21 @@ jobs:
             git push origin astra-state
             echo "ASTRA_DURABLE_LEDGER_CHANGED=true"
           fi
+      - name: Verify durable ledger write and read-back
+        run: |
+          git fetch origin astra-state
+          git show origin/astra-state:runtime-health/story_proposals.json > /tmp/astra-ledger-readback.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          expected = json.loads(Path("/tmp/astra-proposal-persist/story_proposals.json").read_text(encoding="utf-8"))
+          actual = json.loads(Path("/tmp/astra-ledger-readback.json").read_text(encoding="utf-8"))
+          if expected != actual:
+              raise SystemExit("Durable ledger read-back differs from the generated ledger")
+          print("ASTRA_DURABLE_LEDGER_READBACK=verified")
+          print(f"ASTRA_DURABLE_PROPOSAL_COUNT={len(actual.get('proposals', []))}")
+          print(f"ASTRA_DURABLE_NEXT_INDEX={actual.get('next_index', 'missing')}")
+          PY
       - name: Store unreviewed proposal ledger
         uses: actions/upload-artifact@v4
         with:
