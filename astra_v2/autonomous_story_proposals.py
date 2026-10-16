@@ -212,6 +212,19 @@ def replenish(path, count=24, history=()):
                 raise ValueError("Proposal unexpectedly bypassed or failed publication isolation")
             added.append(candidate)
             prior.append(candidate)
+    # Track the real acceptance rate rather than assuming every generated idea is usable.
+    attempts = next_index - int(state.get("next_index", 0))
+    acceptance_rate = round(len(added) / attempts, 4) if attempts else 0.0
+    state["supply_health"] = {
+        "requested": count,
+        "accepted": len(added),
+        "attempted": attempts,
+        "acceptance_rate": acceptance_rate,
+        "exhaustion_warning": len(added) < count or (attempts >= count * 4),
+    }
+    if state["supply_health"]["exhaustion_warning"]:
+        print("ASTRA_STORY_SUPPLY_EXHAUSTION_WARNING=1")
+    print(f"ASTRA_STORY_SUPPLY_ACCEPTANCE_RATE={acceptance_rate}")
     state["next_index"] = next_index
     state["proposals"].extend(added)
     target.parent.mkdir(parents=True, exist_ok=True)
