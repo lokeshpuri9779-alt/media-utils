@@ -113,6 +113,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
     history_titles = set()
     history_hashes = set()
     history_plot_keys = set()
+    history_narratives = []
     for history_path, is_publisher_state in (
         (os.getenv("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json"), False),
         (os.getenv("ASTRA_PUBLISHER_STATE_PATH", "astra_v2_state.json"), True),
@@ -147,6 +148,8 @@ def make_candidate(path, excluded_ids, excluded_titles):
                     history_hashes.add(str(record["plot_fingerprint"]))
                 if record.get("plot_key"):
                     history_plot_keys.add(str(record["plot_key"]))
+                if record.get("story_beats"):
+                    history_narratives.append(record)
         except FileNotFoundError:
             continue
         except (ValueError, TypeError, OSError) as exc:
@@ -156,12 +159,14 @@ def make_candidate(path, excluded_ids, excluded_titles):
     # Never generate a previously published identity in a parallel lane.
     excluded_ids.update(history_ids)
     excluded_titles.update(history_titles)
+    from astra_v2.shorts_novelty import is_near_duplicate
     premium_stories = [
         story for story in premium_stories
         if story.get("content_id") not in history_ids
         and str(story.get("title", "")).casefold().strip() not in history_titles
         and story.get("plot_fingerprint") not in history_hashes
         and story.get("plot_key") not in history_plot_keys
+        and not is_near_duplicate(story, history_narratives)
     ]
     print("ASTRA_STORY_HISTORY_EXCLUSIONS=" + json.dumps({
         "ids": len(history_ids), "titles": len(history_titles),
