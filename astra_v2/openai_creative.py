@@ -108,6 +108,10 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
     ])
     if planning_issues(story):
         raise ValueError("Generated story failed causal planning")
+    from astra_v2.story_editorial import editorial_issues
+    editorial = editorial_issues(story, prior_stories)
+    if editorial:
+        raise ValueError("Generated story failed editorial review: " + ",".join(editorial))
     if is_near_duplicate(story, prior_stories):
         raise ValueError("Generated story repeats narrative history")
     return story
