@@ -44,6 +44,16 @@ class GenreStorySupplyTests(unittest.TestCase):
         speeches = [genre_proposal(i)["story_beats"][1]["speech"] for i in range(256)]
         self.assertTrue(all(any(choice in speech for choice in CHARACTER_DECISIONS) for speech in speeches))
 
+    def test_character_arc_is_causally_linked(self):
+        from astra_v2.genre_story_supply import CHARACTER_ARCS
+        for index in range(256):
+            story = genre_proposal(index)
+            opening, choice, growth = CHARACTER_ARCS[(index // 19) % len(CHARACTER_ARCS)]
+            self.assertIn(opening, story["story_beats"][0]["speech"])
+            self.assertIn(choice, story["story_beats"][1]["speech"])
+            self.assertIn(growth, story["story_beats"][3]["speech"])
+            self.assertEqual(story["character_arc_id"], opening)
+
     def test_reject_negative_index(self):
         with self.assertRaises(ValueError):
             genre_proposal(-1)
