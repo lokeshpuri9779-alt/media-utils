@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-16",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 27,
+  "attempts": 28,
   "confirmed_today": 27,
-  "last_attempt_at": "2026-10-16T17:32:36.838284+00:00",
+  "last_attempt_at": "2026-10-16T17:42:27.434478+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1597,29 +1597,55 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "zGfFXH-aW0M": {
+      "content_id": "rayvan-original-cloudtailor-v1",
+      "title": "The Tailor of Thunder",
+      "day": "2026-10-16",
+      "uploaded_at": "2026-10-16T17:42:29.533848+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "9e6cf689f4b7c5eb58d15adcff9702726ad9c3c7aa96d7f8f6d65fae75621648",
+      "story_beats": [
+        {
+          "speech": "A young sky tailor saw a thundercloud split above the orchard."
+        },
+        {
+          "speech": "The torn cloud spilled its rain far beyond the thirsty trees."
+        },
+        {
+          "speech": "She used a bright rainbow as thread and stitched the cloud together."
+        },
+        {
+          "speech": "The repaired cloud rained gently, and the orchard filled with blossoms."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-16T17:36:42.700860+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_preflight_at": "2026-10-16T17:41:29.193598+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-16T17:36:42.778081+00:00",
+    "at": "2026-10-16T17:42:29.788473+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-16T08:06:44.296862+00:00",
   "reserved": {
@@ -3171,6 +3197,29 @@
         },
         {
           "speech": "She sent the warning, and the paper planet unfolded into a brilliant sail."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-original-cloudtailor-v1": {
+      "at": "2026-10-16T17:42:27.434462+00:00",
+      "title": "The Tailor of Thunder",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "9e6cf689f4b7c5eb58d15adcff9702726ad9c3c7aa96d7f8f6d65fae75621648",
+      "story_beats": [
+        {
+          "speech": "A young sky tailor saw a thundercloud split above the orchard."
+        },
+        {
+          "speech": "The torn cloud spilled its rain far beyond the thirsty trees."
+        },
+        {
+          "speech": "She used a bright rainbow as thread and stitched the cloud together."
+        },
+        {
+          "speech": "The repaired cloud rained gently, and the orchard filled with blossoms."
         }
       ],
       "renderer": "studio-7.3.0",
