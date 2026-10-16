@@ -17,7 +17,7 @@ def semantic_signature(story):
     return tokens - stop
 
 
-def is_semantic_near_duplicate(story, history=(), threshold=0.82):
+def is_semantic_near_duplicate(story, history=(), threshold=0.72):
     """Detect high-overlap plot narration; conservative and deterministic."""
     current = semantic_signature(story)
     if not current:
