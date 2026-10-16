@@ -1,6 +1,11 @@
 name: ASTRA - Eight Gate Production Readiness
 
 on:
+  pull_request:
+    paths:
+      - 'astra_v2/production_readiness.py'
+      - 'tests/test_astra_production_readiness.py'
+      - '.github/workflows/astra-eight-gate-readiness.yml'
   workflow_dispatch:
   schedule:
     - cron: '43 */6 * * *'
