@@ -938,3 +938,38 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=256, excluded_plot_ha
         if len(result) >= limit:
             break
     return result
+
+
+def propose_episode_from_story(story, series_id, episode_number, state=None, ledger_path=None):
+    """Create a non-publishable episode draft while retaining source identity.
+
+    The production story fingerprint is distinct from the causal-outline hash.
+    Neither a draft nor this adapter grants publication approval.
+    """
+    from astra_v2.episode_planner import plan_episode, plan_episode_with_ledger
+
+    if not isinstance(story, dict):
+        raise ValueError("episode_story_invalid")
+    beats = story.get("story_beats") or []
+    if not isinstance(beats, list) or len(beats) < 3:
+        raise ValueError("episode_requires_three_or_more_beats")
+    scenes = []
+    for beat in beats:
+        speech = beat.get("speech") if isinstance(beat, dict) else None
+        if not isinstance(speech, str) or not speech.strip():
+            raise ValueError("episode_beat_missing_speech")
+        scenes.append({
+            "cause": speech.strip(),
+            "action": str(beat.get("headline") or "Story progresses").strip(),
+            "consequence": str(beat.get("label") or "Next scene").strip(),
+        })
+    source_fingerprint = story.get("plot_fingerprint")
+    if ledger_path is None:
+        proposal = plan_episode(series_id, episode_number, scenes, state=state,
+                                source_plot_fingerprint=source_fingerprint)
+    else:
+        proposal = plan_episode_with_ledger(series_id, episode_number, scenes,
+                                            ledger_path, state=state,
+                                            source_plot_fingerprint=source_fingerprint)
+    proposal["source_content_id"] = str(story.get("content_id") or "")
+    return proposal
