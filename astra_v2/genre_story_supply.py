@@ -101,6 +101,19 @@ CHARACTER_ARCS = (
     ("worried about disappointing their mentor", "explained the difficult choice to their mentor", "found that integrity mattered more than approval"),
     ("wanted to keep a promise at any cost", "changed the plan to protect everyone safely", "understood that caring for people mattered more than rigid plans"),
 )
+# Each emotional choice unlocks a concrete step in the external investigation.
+# These bridges are indexed alongside CHARACTER_ARCS and must stay aligned.
+ARC_PLOT_BRIDGES = (
+    ("The missing assistance had blocked the search.", "The friend joined the search and uncovered the clue needed for the solution."),
+    ("The overlooked teammate held the missing evidence.", "Giving the teammate credit encouraged them to share the evidence that unlocked the solution."),
+    ("The concealed mistake had sent the investigation in the wrong direction.", "The admission corrected the false lead and revealed where to look next."),
+    ("The newcomer knew a route the others had dismissed.", "Trusting the newcomer opened that route and revealed the crucial clue."),
+    ("Rushing past the quiet teammate had hidden a warning.", "Listening revealed the warning and made the next step safe."),
+    ("The untested idea was the only remaining lead.", "Testing the idea produced the evidence needed to proceed."),
+    ("Fear of disapproval had kept the real dilemma secret.", "Explaining the choice brought guidance that made a safe solution possible."),
+    ("Following the original plan would put someone at risk.", "Changing the plan protected the group and opened a safer way to solve the problem."),
+)
+
 CHARACTER_DECISIONS = (
     "They chose to listen instead of interrupting",
     "They shared the credit instead of claiming the prize",
@@ -175,10 +188,11 @@ def genre_proposal(index, scenario_index=None, structure_index=None):
     strategy = STRATEGIES[(index // 7) % len(STRATEGIES)]
     payoff_style = PAYOFF_STYLES[(index // 11) % len(PAYOFF_STYLES)]
     arc_problem, arc_choice, arc_growth = CHARACTER_ARCS[(index // 19) % len(CHARACTER_ARCS)]
+    blocked_plot, unlocked_plot = ARC_PLOT_BRIDGES[(index // 19) % len(ARC_PLOT_BRIDGES)]
     structure_id, opening, middle, ending = NARRATIVE_STRUCTURES[((index // 13) if structure_index is None else structure_index) % len(NARRATIVE_STRUCTURES)]
     beats = [
         ("reveal", f"At {setting}, {hero} encountered {problem}. Everyone stopped what they were doing. The hero {motivation} and teamed up with {partner}. {opening} The hero {arc_problem}.", visual),
-        ("build", f"The hero tried a simple solution, but it did not work. {complication}. {strategy}. The hero {arc_choice}. {middle}", "book"),
+        ("build", f"The hero tried a simple solution, but it did not work. {complication}. {strategy}. {blocked_plot} The hero {arc_choice}. {unlocked_plot} {middle}", "book"),
         ("twist", f"The overlooked detail explained everything: {reveal}. The group realized that the original problem had a different cause than they first assumed. They tested the explanation before acting.", visual),
         ("payoff", f"With the mystery understood, the hero {solution}. {ending} The hero {arc_growth}. {payoff_style}.", visual),
     ]
@@ -189,6 +203,7 @@ def genre_proposal(index, scenario_index=None, structure_index=None):
         "genre": genre,
         "plot_structure": structure_id,
         "character_arc_id": arc_problem,
+        "plot_dependency_id": (index // 19) % len(ARC_PLOT_BRIDGES),
         "premise_id": f"{genre}:{problem}",
         "outcome_id": solution,
         "kind": "unreviewed_causal_draft",
