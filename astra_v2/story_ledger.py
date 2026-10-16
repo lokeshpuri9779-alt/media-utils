@@ -65,3 +65,23 @@ def archive_fingerprints(path, fingerprints):
             pass
         raise StoryLedgerError("story_ledger_write_failed") from exc
     return {"version": 1, "archived": merged}
+
+
+def archive_lifecycle_record(path, record, lifecycle_status):
+    """Archive a story identity only after an explicit lifecycle event.
+
+    This function does not approve stories. Callers must provide a recorded
+    reservation, pending upload, published, or retired status; draft/proposed
+    records are deliberately not archived as consumed stories.
+    """
+    allowed = {"reserved", "pending", "published", "retired"}
+    if lifecycle_status not in allowed:
+        raise StoryLedgerError("story_lifecycle_status_not_archivable")
+    if not isinstance(record, dict):
+        raise StoryLedgerError("story_lifecycle_record_invalid")
+    fingerprint = record.get("plot_fingerprint") or record.get("plot_hash")
+    if not isinstance(fingerprint, str) or len(fingerprint) != 64 or any(
+        c not in "0123456789abcdef" for c in fingerprint
+    ):
+        raise StoryLedgerError("story_lifecycle_fingerprint_missing")
+    return archive_fingerprints(path, [fingerprint])
