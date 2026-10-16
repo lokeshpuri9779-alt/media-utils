@@ -168,7 +168,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
         and story.get("plot_fingerprint") not in history_hashes
         and story.get("plot_key") not in history_plot_keys
         and not is_near_duplicate(story, history_narratives)
-        and (not story.get("production_ready") or is_planned_story(story))
+        and (not str(story.get("content_id") or "").startswith("rayvan-original-") or is_planned_story(story))
     ]
     print("ASTRA_STORY_HISTORY_EXCLUSIONS=" + json.dumps({
         "ids": len(history_ids), "titles": len(history_titles),
