@@ -1,58 +1,124 @@
-"""Autonomous *proposal* supply from reviewed narrative parts.
-
-These are unreviewed proposals, never publication-ready. Novelty memory is
-persistent; candidates must be editorially approved before entering production.
-"""
+"""Persistent, compositional proposal generation; proposals are never auto-approved."""
 import hashlib
 import json
 import os
 from pathlib import Path
 
-ACTORS = ("a lighthouse keeper", "a curious fox", "a repair robot", "a young astronomer", "a river otter")
-SETTINGS = ("a flooded village", "a silent observatory", "an abandoned railway", "a mountain garden", "a coastal library")
-PROBLEMS = (
-    ("the warning bell stopped working", "an old copper wire", "restored the warning bell"),
-    ("the bridge lights went dark", "a forgotten hand-cranked generator", "lit the bridge again"),
-    ("the waterwheel froze", "a hidden warm spring", "freed the waterwheel"),
-    ("the signal tower lost power", "a polished mirror", "sent a daylight signal"),
-    ("the town map disappeared", "a faded engraving on stone", "recovered the route"),
+ACTORS = (
+    ("a lighthouse keeper", "keeper"), ("a curious fox", "fox"),
+    ("a repair robot", "robot"), ("a young astronomer", "astronomer"),
+    ("a river otter", "otter"), ("a retired cartographer", "cartographer"),
+    ("a clockmaker", "clockmaker"), ("a storm chaser", "storm chaser"),
 )
+SETTINGS = (
+    ("a flooded village", "village"), ("a silent observatory", "observatory"),
+    ("an abandoned railway", "railway"), ("a mountain garden", "garden"),
+    ("a coastal library", "library"), ("a floating market", "market"),
+    ("a desert greenhouse", "greenhouse"), ("an underground museum", "museum"),
+)
+MYSTERIES = (
+    ("the warning bell rang beneath the lake", "a bell-shaped sonar echo", "bell"),
+    ("every bridge light blinked in a different rhythm", "a pattern hidden in the wiring", "bridge"),
+    ("the waterwheel turned only at midnight", "warm water flowing uphill", "waterwheel"),
+    ("the signal tower sent messages to an empty sky", "a mirror reflecting a distant beacon", "signal"),
+    ("the town's oldest map changed each morning", "new streets etched into a stone tile", "map"),
+    ("all the shadows pointed toward one locked door", "a clockwork shadow moving against the sun", "door"),
+    ("the stars vanished above a single rooftop", "a lens hidden in a broken telescope", "telescope"),
+    ("a river flowed backward for exactly one minute", "a gate buried under the riverbed", "river"),
+    ("the museum's smallest statue changed position nightly", "tiny wet footprints beside its case", "statue"),
+    ("the orchard echoed words nobody had spoken", "a repeating distress call in the wind", "signal"),
+    ("the lighthouse beam stopped before reaching the sea", "a jammed brass lens mechanism", "lighthouse"),
+    ("fresh snow appeared inside a sealed room", "a cold draft from a forgotten tunnel", "snow"),
+)
+STAKES = (
+    "before the evacuation bell sent everyone away",
+    "before the last ferry left the harbor",
+    "before the mountain pass closed for winter",
+    "before the town's water supply ran dry",
+    "before the annual night market began",
+    "before sunrise erased the only clue",
+)
+DISCOVERIES = (
+    "an overlooked maintenance log", "a melody remembered by an elderly neighbor",
+    "a map drawn on the back of a family photograph", "a sequence of lights from a passing train",
+    "a small mechanical part lodged beneath the floor", "a message carried by migrating birds",
+    "a set of tide marks on the oldest wall", "a constellation reflected in a puddle",
+    "a child's drawing that matched the broken machine", "a trail of warm stones beneath the snow",
+)
+REVERSALS = (
+    "the apparent sabotage was actually an emergency signal",
+    "the missing object had been protecting the town from a larger danger",
+    "the machine was working correctly but responding to a hidden second control",
+    "the supposed intruder was trying to return something that had been lost",
+    "the strange phenomenon was caused by two systems that had fallen out of sync",
+    "the clue pointed away from the obvious culprit and toward an overlooked helper",
+    "the warning described tomorrow's weather rather than today's",
+    "the locked room was hiding a safe route, not a stolen treasure",
+)
+RESOLUTIONS = (
+    "repaired the mechanism and taught the neighbors how to maintain it",
+    "sent a clear signal that guided the missing travelers home",
+    "opened the hidden channel and restored the town's water",
+    "reunited the separated team and returned the lost object",
+    "redirected the danger toward an empty field and kept the village safe",
+    "restored the night lights and reopened the route before dawn",
+    "shared the discovery so the whole community could solve the problem together",
+    "left a reliable warning system for the next generation",
+)
+EMOTIONAL_TURNS = (
+    "pride gave way to doubt before trust returned",
+    "fear turned into curiosity when the clue finally made sense",
+    "a lonely task became a shared effort",
+    "an old disagreement was resolved by a small act of kindness",
+    "the hero learned that asking for help was the missing step",
+    "a seemingly useless object proved essential",
+)
+VISUALS = ("bell", "bridge", "waterwheel", "signal", "map", "door", "telescope", "river",
+           "statue", "lighthouse", "snow", "clock", "lantern", "ship", "garden", "book")
+
+
+def _pick(index, values, stride):
+    return values[(index // stride) % len(values)]
 
 
 def proposal(index):
-    if not isinstance(index, int) or index < 0:
+    """Create a deterministic four-beat candidate from independent plot dimensions."""
+    if not isinstance(index, int) or isinstance(index, bool) or index < 0:
         raise ValueError("Invalid proposal index")
-    actor = ACTORS[index % len(ACTORS)]
-    setting = SETTINGS[(index // len(ACTORS)) % len(SETTINGS)]
-    problem, clue, payoff = PROBLEMS[(index // (len(ACTORS) * len(SETTINGS))) % len(PROBLEMS)]
-    key = f"proposal-{index}"
-    cycle = index // (len(ACTORS) * len(SETTINGS) * len(PROBLEMS))
-    # Vary the causal setting across cycles without asserting editorial novelty.
-    occasion = ("annual festival", "winter market", "morning evacuation",
-                "village reunion", "spring parade")[cycle % 5]
-    sentences = (
-        f"At {setting}, {actor} discovered that {problem} just before the {occasion}.",
-        f"The first repair attempt failed, and worried neighbors began preparing to leave before the {occasion}.",
-        f"After searching old records, the hero discovered {clue} and organized a careful second attempt for the {occasion}.",
-        f"With help from the neighbors, the hero {payoff}, and the {occasion} could finally begin.",
+    actor, role = _pick(index, ACTORS, 1)
+    setting, setting_visual = _pick(index, SETTINGS, len(ACTORS))
+    mystery, clue, visual = _pick(index, MYSTERIES, len(ACTORS) * len(SETTINGS))
+    stakes = _pick(index, STAKES, len(ACTORS) * len(SETTINGS) * len(MYSTERIES))
+    discovery = _pick(index, DISCOVERIES, len(ACTORS) * len(SETTINGS) * len(MYSTERIES) * len(STAKES))
+    reversal = _pick(index, REVERSALS, len(ACTORS) * len(SETTINGS) * len(MYSTERIES) * len(STAKES) * len(DISCOVERIES))
+    resolution = _pick(index, RESOLUTIONS, len(ACTORS) * len(SETTINGS) * len(MYSTERIES) * len(STAKES) * len(DISCOVERIES) * len(REVERSALS))
+    emotional = _pick(index, EMOTIONAL_TURNS, len(ACTORS) * len(SETTINGS) * len(MYSTERIES) * len(STAKES) * len(DISCOVERIES) * len(REVERSALS) * len(RESOLUTIONS))
+    # The dimensions rotate at different strides; this produces a large
+    # deterministic combination space without claiming every draft is unique.
+    title = f"The {mystery.split()[1].capitalize()} Mystery at {setting.split()[-1].capitalize()}"
+    beats = (
+        ("reveal", f"At {setting}, {actor} discovered that {mystery}, {stakes}.", visual),
+        ("build", f"An investigation uncovered {discovery}; meanwhile, {emotional}.", "book"),
+        ("twist", f"The evidence revealed that {reversal}, changing what the hero believed about the mystery.", clue if clue in VISUALS else "signal"),
+        ("payoff", f"Using the clue, the hero {resolution}, and the community understood what had happened.", _pick(index, VISUALS, 3)),
     )
+    fingerprint_text = " ".join(beat[1] for beat in beats).casefold()
     return {
-        "content_id": "astra-proposal-" + hashlib.sha256(key.encode()).hexdigest()[:20],
-        "title": f"Unreviewed story proposal {index + 1}",
+        "content_id": "astra-proposal-" + hashlib.sha256(f"proposal-{index}".encode()).hexdigest()[:20],
+        "title": title,
         "kind": "unreviewed_causal_draft",
         "production_ready": False,
-        "plot_fingerprint": hashlib.sha256(" ".join(sentences).casefold().encode()).hexdigest(),
+        "proposal_index": index,
+        "plot_fingerprint": hashlib.sha256(fingerprint_text.encode()).hexdigest(),
         "story_beats": [
-            {"story_beat": role, "speech": speech, "visual": visual}
-            for role, speech, visual in zip(
-                ("reveal", "build", "twist", "payoff"), sentences,
-                ("forest", "door", "book", "signal"))
+            {"story_beat": role_name, "speech": speech, "visual": visual_name}
+            for role_name, speech, visual_name in beats
         ],
     }
 
 
 def replenish(path, count=24, history=()):
-    """Persist novel proposals, not publishable stories, with atomic replace."""
+    """Persist novel proposals atomically; never promote or publish them."""
     if not 1 <= count <= 100:
         raise ValueError("Proposal batch size out of range")
     from astra_v2.shorts_novelty import is_near_duplicate
@@ -73,7 +139,8 @@ def replenish(path, count=24, history=()):
         candidate = proposal(next_index)
         next_index += 1
         if not is_near_duplicate(candidate, prior):
-            assert publication_rejection(candidate) == "unreviewed_causal_draft"
+            if publication_rejection(candidate) != "unreviewed_causal_draft":
+                raise ValueError("Proposal unexpectedly bypassed or failed publication isolation")
             added.append(candidate)
             prior.append(candidate)
     state["next_index"] = next_index
