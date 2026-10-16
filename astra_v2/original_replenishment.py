@@ -67,4 +67,66 @@ def catalog(story):
                ("NOTHING WOULD GROW", "She planted it, but every leaf froze before it could unfold.", "door", "ANOTHER FAILURE", "build"),
                ("A MEMORY OF SUNLIGHT", "The seed opened only when she placed it beside an old glass panel that stored afternoon light.", "signal", "WARMTH REMEMBERED", "twist"),
                ("THE GREENHOUSE WOKE", "The seed grew into a flowering vine, warming the greenhouse enough for the other plants to return.", "forest", "SPRING RETURNS", "payoff")])
+        ,
+        story("rainclock", "The Clock That Borrowed Rain", "Who was stealing the clouds?", "A town clockmaker discovers the clock stores every raindrop before a drought.", [
+            ("THE DRY STORM", "Clouds gathered over the town, but not a single drop reached the streets.", "planet", "NO RAIN", "reveal"),
+            ("WATER IN THE GEARS", "The clockmaker heard tiny splashes inside the clock whenever its hands moved.", "clock", "HIDDEN WATER", "build"),
+            ("THE LAST TURN", "She opened the gears and found a reservoir filling while the fields cracked.", "door", "DROUGHT REVEALED", "twist"),
+            ("RAIN FOR EVERYONE", "She reset the clock to release the stored rain across the thirsty valley.", "forest", "RAIN RETURNS", "payoff")]),
+        story("lighthousefox", "The Fox at the Lighthouse", "Why did the lighthouse go dark?", "A young fox follows a trail of blue shells to relight a lighthouse before ships reach the rocks.", [
+            ("THE DARK BEAM", "A fox on the cliffs noticed the lighthouse beam had vanished in a storm.", "signal", "LIGHT OUT", "reveal"),
+            ("SHELLS IN THE RAIN", "Blue shells glowed along a path leading beneath the lighthouse.", "forest", "FOLLOW THE GLOW", "build"),
+            ("THE JAMMED LENS", "Inside, the fox found a fallen bell rope wedged against the turning lens.", "clock", "BLOCKED", "twist"),
+            ("THE COAST SHONE", "The fox pulled the rope free and the lighthouse guided every ship past the rocks.", "ship", "SHIPS SAFE", "payoff")]),
+        story("librarycloud", "The Library Above the Rain", "Who moved the town's missing books?", "A librarian discovers a cloud library collecting stories people have forgotten.", [
+            ("BOOKS LIFTED AWAY", "Every night, one book floated from the library toward a cloud above the rooftops.", "planet", "MISSING BOOKS", "reveal"),
+            ("A STAIR OF PAGES", "The librarian folded discarded pages into steps that reached the cloud.", "door", "UPWARD PATH", "build"),
+            ("THE EMPTY SHELVES", "Inside, she found the books preserving memories the town had stopped telling.", "signal", "MEMORIES STORED", "twist"),
+            ("STORIES CAME HOME", "She read one forgotten tale aloud and the books drifted back to their rightful shelves.", "forest", "MEMORY RESTORED", "payoff")]),
+        story("rivercompass", "The Compass That Pointed to Kindness", "Why did a compass ignore north?", "A courier follows a strange compass to deliver help to the people who need it most.", [
+            ("THE NEEDLE TURNED", "A courier's compass spun away from north whenever someone nearby needed help.", "clock", "WRONG DIRECTION", "reveal"),
+            ("THE BRIDGE IN FOG", "It led her to a flooded bridge where a family waited on the far bank.", "ship", "PEOPLE STRANDED", "build"),
+            ("THE FINAL DELIVERY", "After helping them cross, the needle pointed toward a stranded shepherd on the hill.", "signal", "ANOTHER CALL", "twist"),
+            ("HOME BY SUNSET", "The courier helped each traveler and the compass finally settled, pointing toward her own home.", "forest", "JOURNEY COMPLETE", "payoff")]),
+        story("midnightmuseum", "The Museum of Midnight", "Why did the exhibits move only at night?", "A night guard helps a tiny dinosaur return a stolen fossil to its proper place.", [
+            ("FOOTPRINTS IN DUST", "A night guard found tiny footprints circling an empty fossil display.", "door", "SOMETHING MOVED", "reveal"),
+            ("THE TINY RUNAWAY", "A little stone dinosaur stepped from the shadows carrying one missing bone.", "forest", "FOSSIL ALIVE", "build"),
+            ("THE WRONG SKELETON", "The guard realized the bone belonged to a different exhibit damaged during a storm.", "clock", "MIXED UP", "twist"),
+            ("THE PAST REBUILT", "Together they returned the bone, and every exhibit settled quietly before sunrise.", "signal", "MUSEUM RESTORED", "payoff")]),
+        story("moonbridge", "The Bridge to the Sleeping Moon", "Why did the moon stop rising?", "Two siblings repair a bridge of light so the moon can rise above their winter village.", [
+            ("THE MOON STOOD STILL", "Two siblings watched the moon hover above the mountain night after night.", "planet", "NO MOONRISE", "reveal"),
+            ("A MISSING SPAN", "They discovered a gap in the silver bridge that carried moonlight over the ridge.", "door", "GAP IN LIGHT", "build"),
+            ("THE SHATTERED LANTERN", "Their grandmother's lantern held the final piece of moonlight needed to mend it.", "lantern", "LAST SPARK", "twist"),
+            ("NIGHT MOVED AGAIN", "They placed the spark in the gap and the moon rose, bathing the village in silver.", "planet", "MOONRISE", "payoff")]),
+        story("pocketvolcano", "The Volcano in a Teacup", "Can a tiny volcano save a frozen village?", "A potter learns to redirect a miniature volcano's warmth into a frozen village.", [
+            ("A WARM CUP", "A potter found a teacup that rumbled and glowed like a tiny volcano.", "clock", "STRANGE HEAT", "reveal"),
+            ("THE VILLAGE FROZE", "A sudden frost covered the village while the teacup grew hotter on the kiln shelf.", "forest", "COLD ARRIVES", "build"),
+            ("A CHANNEL OF CLAY", "The potter shaped a clay channel that carried the cup's gentle warmth beneath the streets.", "door", "A PLAN FOR HEAT", "twist"),
+            ("WINDOWS GLOWED", "The village thawed safely, and the tiny volcano settled into a quiet red ember.", "signal", "WARMTH RESTORED", "payoff")]),
+        story("paperboatrescue", "The Paper Boat Rescue", "How can a paper boat cross a flooded city?", "A child folds a map into a boat to guide neighbors across flooded streets.", [
+            ("THE STREETS BECAME RIVERS", "After heavy rain, a child saw neighbors trapped on the far side of the square.", "ship", "FLOODWATERS", "reveal"),
+            ("A MAP SET SAIL", "She folded an old town map into a paper boat and floated it into the current.", "door", "FOLLOW THE MAP", "build"),
+            ("THE HIDDEN CHANNEL", "The boat traced a narrow alley where the water was shallow enough to cross safely.", "signal", "SAFE ROUTE", "twist"),
+            ("EVERYONE CROSSED", "Neighbors followed the route together and reached the hill before the rain returned.", "forest", "RESCUED", "payoff")]),
+        story("snowglobeweather", "The Snow Globe Forecast", "Why did tomorrow's weather appear in a snow globe?", "A meteorologist uses a mysterious globe to warn a mountain village of an avalanche.", [
+            ("SNOW INSIDE GLASS", "A meteorologist saw a miniature mountain inside a snow globe change before each storm.", "planet", "TOMORROW'S SNOW", "reveal"),
+            ("THE WHITE SLOPE", "The globe showed a fresh crack running down the mountain above the village.", "signal", "DANGER LINE", "build"),
+            ("THE WARNING", "She recognized the crack as an avalanche path and alerted the village before dawn.", "door", "EVACUATE", "twist"),
+            ("THE VALLEY STAYED SAFE", "The snow slid into an empty valley while every family watched from the shelter.", "forest", "NO ONE HARMED", "payoff")]),
+        story("lastfirework", "The Last Firework Maker", "How could one quiet firework reunite a town?", "An aging maker creates a silent firework that projects memories across the night sky.", [
+            ("NO ONE CAME", "The old firework maker prepared for the town festival, but nobody remembered its date.", "clock", "FORGOTTEN FESTIVAL", "reveal"),
+            ("A BOX OF DRAWINGS", "She found children's drawings tucked inside the paper tubes from past festivals.", "door", "OLD MEMORIES", "build"),
+            ("LIGHT WITHOUT NOISE", "She built one silent firework that painted those drawings across the clouds.", "signal", "MEMORIES IN LIGHT", "twist"),
+            ("THE SQUARE FILLED", "Families recognized their pictures and returned to the square to celebrate together.", "forest", "TOWN REUNITED", "payoff")]),
+        story("desertwell", "The Well That Remembered Rain", "Why did an empty well echo with thunder?", "A young engineer follows the well's echoes to uncover a buried rainwater system.", [
+            ("THUNDER UNDERGROUND", "A young engineer heard thunder from a dry well beneath the desert square.", "signal", "SOUND BELOW", "reveal"),
+            ("STONE MARKS", "She found old marks leading from the well toward dunes beyond the village.", "door", "ANCIENT ROUTE", "build"),
+            ("THE BURIED CHANNEL", "Digging at the final mark revealed a blocked channel that once carried rainwater underground.", "ship", "WATER PATH", "twist"),
+            ("THE WELL FILLED", "The villagers cleared the channel and the next storm filled their well instead of flooding the road.", "forest", "WATER SAVED", "payoff")]),
+        story("starcartographer", "The Cartographer of Falling Stars", "Why did the stars fall in the same pattern?", "A mapmaker discovers falling stars are marking a safe route for migrating sky creatures.", [
+            ("STARS ON THE HILLS", "A mapmaker found glowing stones falling onto the hills in a repeating pattern.", "planet", "A PATTERN", "reveal"),
+            ("THE MAP CHANGED", "Each new stone marked a turn across the mountain pass that no map recorded.", "signal", "NEW ROUTE", "build"),
+            ("WINGS IN THE DARK", "At the pass she saw a flock of sky creatures unable to cross the stormy ridge.", "ship", "LOST MIGRATION", "twist"),
+            ("A PATH THROUGH STORMS", "She mapped the glowing trail and the flock followed it safely beyond the mountains.", "forest", "MIGRATION SAFE", "payoff")])
+
     ]
