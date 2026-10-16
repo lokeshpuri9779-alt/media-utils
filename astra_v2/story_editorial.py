@@ -17,20 +17,32 @@ def semantic_signature(story):
     return tokens - stop
 
 
-def is_semantic_near_duplicate(story, history=(), threshold=0.72):
-    """Detect high-overlap plot narration; conservative and deterministic."""
+def semantic_duplicate_match(story, history=(), threshold=0.72):
+    """Return the strongest text-overlap match as auditable evidence."""
     current = semantic_signature(story)
+    best = None
     if not current:
-        return False
+        return None
     for prior in history:
         previous = semantic_signature(prior)
         if not previous:
             continue
         union = current | previous
         similarity = len(current & previous) / len(union) if union else 0.0
-        if similarity >= threshold:
-            return True
-    return False
+        if best is None or similarity > best["similarity"]:
+            best = {
+                "matched_content_id": prior.get("content_id"),
+                "matched_title": prior.get("title"),
+                "similarity": round(similarity, 4),
+                "threshold": threshold,
+                "method": "plot_narration_token_jaccard",
+            }
+    return best if best and best["similarity"] >= threshold else None
+
+
+def is_semantic_near_duplicate(story, history=(), threshold=0.72):
+    """Detect high-overlap plot narration; conservative and deterministic."""
+    return semantic_duplicate_match(story, history, threshold) is not None
 
 def editorial_issues(story, history=()):
     issues = list(planning_issues(story))
@@ -54,8 +66,11 @@ def triage(stories, history=()):
     seen = list(history)
     for story in stories:
         issues = editorial_issues(story, seen)
-        item = {"content_id": story.get("content_id"), "issues": issues,
+        item = {"content_id": story.get("content_id"), "title": story.get("title"),
+                "issues": issues,
                 "publication_blocked": bool(publication_rejection(story))}
+        if "narrative_duplicate" in issues:
+            item["novelty_evidence"] = semantic_duplicate_match(story, seen)
         # Requiring a human/model editorial decision is a workflow state,
         # not itself a structural defect. Keep the proposal publication-blocked,
         # but make structurally sound drafts visible in the review queue.
