@@ -136,3 +136,38 @@ def archive_committed_state(path, state):
                 raise StoryLedgerError("story_lifecycle_fingerprint_missing")
             identities.append(fp)
     return archive_fingerprints(path, identities)
+
+
+def audit_committed_state(state):
+    """Read-only migration readiness audit; does not write or approve uploads.
+
+    Legacy publisher records can lack a fingerprint. Report them explicitly so
+    a production migration never silently discards historical identities.
+    """
+    if not isinstance(state, dict):
+        raise StoryLedgerError("story_publisher_state_invalid")
+    result = {"ready": True, "records": 0, "valid": 0,
+              "missing": 0, "invalid": 0, "conflicting": 0}
+    for status in ("reserved", "pending", "published"):
+        records = state.get(status, {})
+        if not isinstance(records, dict):
+            raise StoryLedgerError("story_publisher_state_invalid")
+        for record in records.values():
+            result["records"] += 1
+            if not isinstance(record, dict):
+                result["invalid"] += 1
+                continue
+            fp = record.get("plot_fingerprint")
+            alias = record.get("plot_hash")
+            if fp is not None and alias is not None and fp != alias:
+                result["conflicting"] += 1
+            elif fp is None or fp == "":
+                result["missing"] += 1
+            elif not isinstance(fp, str) or len(fp) != 64 or any(
+                char not in "0123456789abcdef" for char in fp
+            ):
+                result["invalid"] += 1
+            else:
+                result["valid"] += 1
+    result["ready"] = result["records"] == result["valid"]
+    return result
