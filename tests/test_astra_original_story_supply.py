@@ -12,6 +12,9 @@ class OriginalStorySupplyTests(unittest.TestCase):
         titles = [story["title"].casefold().strip() for story in stories]
         self.assertEqual(len(ids), len(set(ids)))
         self.assertEqual(len(titles), len(set(titles)))
+        fingerprints = [story["plot_fingerprint"] for story in stories]
+        self.assertEqual(len(fingerprints), len(set(fingerprints)))
+        self.assertTrue(all(len(value) == 64 for value in fingerprints))
         for story in stories:
             with self.subTest(story=story["content_id"]):
                 self.assertTrue(story["production_ready"])
