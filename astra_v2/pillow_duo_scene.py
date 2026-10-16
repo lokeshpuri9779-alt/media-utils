@@ -446,7 +446,7 @@ def draw_duo(image, shot, t):
         # accidentally excluded push/pull entirely because pickup was False.
         # Blend contact from the first reach through a smooth extension.
         interact_actions={"pick","pickup","pick_up","carry","repair",
-                          "hold","open","push","pull","catch"}
+                          "hold","open","push","pull","catch","release","drop","put_down"}
         hand_strength=(_ease((max(0.0,float(t))-.06)/.86)
                        if prop and action in interact_actions else 0.0)
         hand_target=prop_pos if hand_strength>0 else None
