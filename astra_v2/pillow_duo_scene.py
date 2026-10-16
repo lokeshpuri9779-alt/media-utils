@@ -417,7 +417,7 @@ def draw_duo(image, shot, t):
         release=_ease((max(0.0,float(t))-.15)/.55)
         actor_x=298+actor_translation(action,t,0)
         held=(actor_x+175-22,846+215+2)
-        staged=prop_trajectory(shot,t) if shot.get("story_beat") else (433,1060)
+        staged=(held[0],1200)
         prop_pos=(round(held[0]*(1-release)+staged[0]*release),
                   round(held[1]*(1-release)+staged[1]*release))
     if prop and action in ("push","pull"):
@@ -453,7 +453,7 @@ def draw_duo(image, shot, t):
         # the object all the way to its resting position.
         if action in ("release","drop","put_down"):
             hand_strength *= 1.0-_ease((max(0.0,float(t))-.45)/.75)
-        hand_target=prop_pos if hand_strength>0 else None
+        hand_target=prop_pos if prop and action in interact_actions else None
         actor_mood=mood
         if mood=="angry" and idx==0:
             actor_mood="curious"  # Reaction shot, not two identical emotions.
