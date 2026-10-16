@@ -222,7 +222,7 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
     if visual_recipe:
         fur=_blend(fur, visual_recipe["fur"], .12 if name in ("fox","rabbit") else .27)
     stride=math.sin(t*(8.4 if action in ("run","chase") else 3.4 if action=="sneak" else 4.6)+idx*math.pi)
-    gait=int((51 if action=="chase" else 21 if action=="sneak" else 43)*stride) if action in ("walk","run","chase","sneak","dance") else 0
+    gait=int((51 if action=="chase" else 21 if action=="sneak" else 43)*stride) if action in ("walk","run","chase","sneak","dance","carry") else 0
     if action=="swim":
         gait=int(25*math.sin(t*6.0+idx*math.pi))
     if action=="dance":
@@ -253,7 +253,7 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
         # Lift a foot only on its forward swing; keep the planted foot
         # at ground height through the opposite half of the stride.
         lift=(int(24*max(0.0,side*stride)) if action in
-              ("walk","run","chase","sneak") else abs(step)//5)
+              ("walk","run","chase","sneak","carry") else abs(step)//5)
         _line(d,[(sx,y+285),(sx+step//2,y+342-lift//2),
                  (sx+step,y+406-lift)],fur,28)
         shoe=(82,181,179) if idx==0 else (177,143,212)

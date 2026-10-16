@@ -112,6 +112,25 @@ class ProductionDuoContactTests(unittest.TestCase):
         self.assertGreater(late[0].kwargs["hand_target"][0],
                            early[0].kwargs["hand_target"][0])
 
+    def test_carry_leg_cycle_changes_rendered_frames(self):
+        # With the cast and prop fixed to a carry beat, gait should animate.
+        # Whole-frame inequality also includes subtle stage motion; capture
+        # _actor's local leg drawing in a future pixel-isolation test.
+        from unittest.mock import patch as mock_patch
+        from astra_v2.pillow_duo_scene import _line
+        segments = []
+        for t in (0.3, 0.6):
+            leg_lines = []
+            def record_line(draw, points, color, width=5):
+                if width == 28 and len(points) == 3:
+                    leg_lines.append(tuple(points))
+                return _line(draw, points, color, width)
+            with mock_patch("astra_v2.pillow_duo_scene._line", side_effect=record_line):
+                self.paint("carry", t)
+            self.assertEqual(len(leg_lines), 4)
+            segments.append(leg_lines)
+        self.assertNotEqual(segments[0], segments[1])
+
     def test_movement_without_narrated_prop_does_not_generate_grip(self):
         for action in ("run","dance","look","wave"):
             args,_=self.paint(action,.7)
