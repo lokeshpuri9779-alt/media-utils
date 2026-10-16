@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 6,
-  "confirmed_today": 5,
-  "last_attempt_at": "2026-10-16T21:45:42.614033+00:00",
+  "attempts": 7,
+  "confirmed_today": 6,
+  "last_attempt_at": "2026-10-16T22:09:20.539251+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1667,30 +1667,38 @@
       "format": "short",
       "uploaded_at": "2026-10-16T21:38:44.356153+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-original-starcartographer-v1": {
+      "video_id": "RsqhuNxo8lE",
+      "confirmed_at": "2026-10-16T22:08:11.462640+00:00",
+      "title": "The Cartographer of Falling Stars",
+      "format": "short",
+      "uploaded_at": "2026-10-16T21:45:43.973523+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "RsqhuNxo8lE": {
-      "content_id": "rayvan-original-starcartographer-v1",
-      "title": "The Cartographer of Falling Stars",
+    "BsQsoCIwEa4": {
+      "content_id": "rayvan-original-midnightmuseum-v1",
+      "title": "The Museum of Midnight",
       "day": "2026-10-17",
-      "uploaded_at": "2026-10-16T21:45:43.973523+00:00",
+      "uploaded_at": "2026-10-16T22:09:22.213909+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "aaf05de1f71e029e72119b095cbba4c7027b0ccbd91e94f52e0225e43e854abc",
+      "plot_fingerprint": "a22dd0f3dac881c759adf46b5d2f5f8ebf43174b782605cf1e036057d03bd1b3",
       "story_beats": [
         {
-          "speech": "A mapmaker found glowing stones falling onto the hills in a repeating pattern."
+          "speech": "A night guard found tiny footprints circling an empty fossil display."
         },
         {
-          "speech": "Each new stone marked a turn across the mountain pass that no map recorded."
+          "speech": "A little stone dinosaur stepped from the shadows carrying one missing bone."
         },
         {
-          "speech": "At the pass she saw a flock of sky creatures unable to cross the stormy ridge."
+          "speech": "The guard realized the bone belonged to a different exhibit damaged during a storm."
         },
         {
-          "speech": "She mapped the glowing trail and the flock followed it safely beyond the mountains."
+          "speech": "Together they returned the bone, and every exhibit settled quietly before sunrise."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -1698,11 +1706,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-16T21:45:10.998357+00:00",
+  "last_preflight_at": "2026-10-16T22:08:11.099030+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-16T21:45:44.181712+00:00",
+    "at": "2026-10-16T22:09:22.444892+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -3499,6 +3507,29 @@
         },
         {
           "speech": "She mapped the glowing trail and the flock followed it safely beyond the mountains."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-original-midnightmuseum-v1": {
+      "at": "2026-10-16T22:09:20.539232+00:00",
+      "title": "The Museum of Midnight",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "a22dd0f3dac881c759adf46b5d2f5f8ebf43174b782605cf1e036057d03bd1b3",
+      "story_beats": [
+        {
+          "speech": "A night guard found tiny footprints circling an empty fossil display."
+        },
+        {
+          "speech": "A little stone dinosaur stepped from the shadows carrying one missing bone."
+        },
+        {
+          "speech": "The guard realized the bone belonged to a different exhibit damaged during a storm."
+        },
+        {
+          "speech": "Together they returned the bone, and every exhibit settled quietly before sunrise."
         }
       ],
       "renderer": "studio-7.3.0",
