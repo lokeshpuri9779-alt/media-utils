@@ -19,7 +19,8 @@ class ReleaseHandTests(unittest.TestCase):
                 self.assertTrue(scene.draw_duo(Image.new("RGB", (1080, 1920)), shot, t))
         self.assertGreater(strengths[0], 0)
         self.assertGreater(strengths[0], strengths[2])
-        self.assertEqual(strengths[2], 0)
+        self.assertGreater(strengths[2], strengths[4])
+        self.assertEqual(strengths[4], 0)
         self.assertEqual(strengths[5], 0)
 
 if __name__ == "__main__":
