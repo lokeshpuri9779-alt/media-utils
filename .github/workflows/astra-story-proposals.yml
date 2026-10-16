@@ -14,6 +14,8 @@ on:
       - 'astra_v2/shorts_novelty.py'
       - 'astra_v2/publication_quality.py'
       - 'astra_v2/story_editorial_report.py'
+      - 'astra_v2/story_editorial.py'
+      - 'tests/test_astra_story_editorial.py'
       - 'astra_v2/story_supply_review.py'
 
 permissions:
