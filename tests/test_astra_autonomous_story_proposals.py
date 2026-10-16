@@ -44,6 +44,14 @@ class AutonomousStoryProposalTests(unittest.TestCase):
         self.assertIn("cause understood", beats[3]["speech"])
         self.assertTrue(all(item["production_ready"] is False for item in [item]))
 
+    def test_legacy_generic_titles_are_backfilled_from_story_content(self):
+        from astra_v2.autonomous_story_proposals import _backfill_legacy_titles
+        items = [{"title": "Unreviewed story proposal 157",
+                  "story_beats": [{"visual": "bell",
+                                   "speech": "As the keeper in a flooded village, a lighthouse keeper needed to understand why the warning bell rang."}]}]
+        self.assertEqual(_backfill_legacy_titles(items), 1)
+        self.assertEqual(items[0]["title"], "The Bell Mystery of Flooded Village")
+
     def test_invalid_indices_and_batch_sizes_rejected(self):
         with self.assertRaises(ValueError):
             proposal(-1)
