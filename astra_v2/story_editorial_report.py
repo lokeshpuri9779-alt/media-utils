@@ -12,7 +12,10 @@ def report(ledger_path, output_path, history=()):
         raise ValueError("Invalid proposal ledger")
     result = triage(proposals, history=history)
     result["total_proposals"] = len(proposals)
-    result["requires_editorial_review"] = len(result["needs_work"])
+    result["requires_editorial_review"] = sum(
+        bool(item.get("awaiting_editorial_decision"))
+        for item in result["ready_for_review"] + result["needs_work"]
+    )
     result["automatic_publication_enabled"] = False
     output = Path(output_path)
     output.parent.mkdir(parents=True, exist_ok=True)
