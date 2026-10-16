@@ -5,6 +5,16 @@ single script. No news feeds, third-party video, copied media, or paid APIs.
 Each storyboard uses Astra Studio's procedural imagery.
 """
 
+import hashlib
+import re
+
+
+def narrative_fingerprint(shots):
+    """Stable story fingerprint based on narrated events, not cosmetic labels."""
+    narration = " ".join(str(shot[1]) for shot in shots).casefold()
+    normalized = " ".join(re.sub(r"[^a-z0-9 ]", " ", narration).split())
+    return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
+
 
 def beats(*scenes):
     return [
@@ -28,6 +38,7 @@ def story(key, title, question, answer, shots):
         "kind": "microfiction",
         "premium_story": False,  # procedural fiction; no external-source-media requirement
         "production_ready": True,
+        "plot_fingerprint": narrative_fingerprint(shots),
         "content_id": "rayvan-original-" + key + "-v1",
         "title": title,
         "hook": shots[0][0],
