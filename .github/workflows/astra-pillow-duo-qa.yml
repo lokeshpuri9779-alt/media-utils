@@ -74,6 +74,31 @@ jobs:
           subprocess.run([get_ffmpeg_exe(),'-v','error','-i',path,'-f','null','-'],check=True)
           print('Verified decoded duo MP4:',path)
           PY
+      - name: Render dedicated cat squirrel owl species showcase
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          from astra_v2.pillow_duo_scene import _actor
+          from imageio_ffmpeg import get_ffmpeg_exe
+          import subprocess
+          path='preview/astra-species-showcase.mp4'
+          cmd=[get_ffmpeg_exe(),'-hide_banner','-loglevel','error','-y',
+               '-f','rawvideo','-pix_fmt','rgb24','-s','1080x1920','-r','8',
+               '-i','-','-c:v','libx264','-preset','ultrafast','-pix_fmt','yuv420p',path]
+          proc=subprocess.Popen(cmd,stdin=subprocess.PIPE)
+          for name in ('cat','squirrel','owl'):
+              for i in range(24):
+                  im=Image.new('RGB',(1080,1920),(238,245,247))
+                  from PIL import ImageDraw
+                  d=ImageDraw.Draw(im)
+                  d.text((70,110),f'ASTRA species: {name}',fill=(25,42,58))
+                  _actor(d,name,540,830,i/8,'walk','curious',0,ground_y=1250)
+                  proc.stdin.write(im.tobytes())
+          proc.stdin.close()
+          assert proc.wait()==0
+          subprocess.run([get_ffmpeg_exe(),'-v','error','-i',path,'-f','null','-'],check=True)
+          print('Verified decoded species showcase MP4:',path)
+          PY
       - name: Render full Studio scene compositor preview (silent)
         run: python -m tools.pillow_studio_preview
       - name: Render four new actions in actual Studio
@@ -83,6 +108,7 @@ jobs:
           name: astra-pillow-duo-motion
           path: |
             preview/pillow-duo-motion.mp4
+            preview/astra-species-showcase.mp4
             preview/pillow-studio-composite.mp4
             preview/astra-four-directed-actions.mp4
             preview/astra-four-directed-actions.json
