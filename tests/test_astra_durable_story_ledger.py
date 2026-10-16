@@ -165,3 +165,30 @@ class DurableStoryLedgerTests(unittest.TestCase):
             for process in processes:
                 self.assertEqual(process.wait(timeout=20), 0)
             self.assertEqual(set(read_ledger(path)["archived"]), set(fingerprints))
+
+    def test_source_production_fingerprint_is_checked_separately(self):
+        from astra_v2.episode_planner import plan_episode_with_ledger
+        scenes = [
+            {"cause": "Storm arrives", "action": "Find rope", "consequence": "Rope secured"},
+            {"cause": "Rope secured", "action": "Tie boat", "consequence": "Boat stays"},
+            {"cause": "Boat stays", "action": "Wait safely", "consequence": "Storm passes"},
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "story-ledger.json"
+            archive_fingerprints(path, [FP_A])
+            with self.assertRaisesRegex(ValueError, "already_used"):
+                plan_episode_with_ledger("harbor", 1, scenes, path, source_plot_fingerprint=FP_A)
+            proposal = plan_episode_with_ledger("harbor", 1, scenes, path, source_plot_fingerprint=FP_B)
+            self.assertEqual(proposal["source_plot_fingerprint"], FP_B)
+            self.assertNotEqual(proposal["plot_fingerprint"], FP_B)
+            self.assertFalse(proposal["production_ready"])
+
+    def test_invalid_source_fingerprint_is_rejected(self):
+        from astra_v2.episode_planner import plan_episode
+        scenes = [
+            {"cause": "Wind rises", "action": "Close shutters", "consequence": "House safe"},
+            {"cause": "House safe", "action": "Light lantern", "consequence": "Room bright"},
+            {"cause": "Room bright", "action": "Read story", "consequence": "Night passes"},
+        ]
+        with self.assertRaisesRegex(ValueError, "invalid_source_plot_fingerprint"):
+            plan_episode("wind-house", 1, scenes, source_plot_fingerprint="invalid")
