@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 4,
+  "attempts": 5,
   "confirmed_today": 4,
-  "last_attempt_at": "2026-10-16T21:24:10.059491+00:00",
+  "last_attempt_at": "2026-10-16T21:38:42.822575+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1661,28 +1661,55 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-16T21:25:07.664859+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "DqMXO_EL5yM": {
+      "content_id": "rayvan-original-brassfirefly-v1",
+      "title": "The Brass Firefly",
+      "day": "2026-10-17",
+      "uploaded_at": "2026-10-16T21:38:44.356153+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "9ed9d39ec600446f1fea58cd4f303a12d64f6412a1ce851144a7fc8e6a8ae910",
+      "story_beats": [
+        {
+          "speech": "A clockmaker found a brass firefly blinking beneath a pile of broken gears."
+        },
+        {
+          "speech": "After repair, it flew in circles and ignored every lantern in the town."
+        },
+        {
+          "speech": "The clockmaker realized it was searching for a lighthouse bell hidden by thick fog."
+        },
+        {
+          "speech": "When the bell rang, the firefly lit a safe path for every traveler crossing the marsh."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-16T21:37:59.418914+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-16T21:25:08.125317+00:00",
+    "at": "2026-10-16T21:38:44.627367+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-16T20:08:22.753942+00:00",
   "reserved": {
@@ -3418,6 +3445,29 @@
         },
         {
           "speech": "Rescuers followed the sound, found the hiker, and the orchard finally fell quiet."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-original-brassfirefly-v1": {
+      "at": "2026-10-16T21:38:42.822558+00:00",
+      "title": "The Brass Firefly",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "9ed9d39ec600446f1fea58cd4f303a12d64f6412a1ce851144a7fc8e6a8ae910",
+      "story_beats": [
+        {
+          "speech": "A clockmaker found a brass firefly blinking beneath a pile of broken gears."
+        },
+        {
+          "speech": "After repair, it flew in circles and ignored every lantern in the town."
+        },
+        {
+          "speech": "The clockmaker realized it was searching for a lighthouse bell hidden by thick fog."
+        },
+        {
+          "speech": "When the bell rang, the firefly lit a safe path for every traveler crossing the marsh."
         }
       ],
       "renderer": "studio-7.3.0",
