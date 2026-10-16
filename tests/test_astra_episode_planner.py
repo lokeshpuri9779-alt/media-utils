@@ -22,6 +22,14 @@ class EpisodePlannerTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "already_used"):
                     plan_episode("river-town", 2, SCENES, {bucket: {"old": {"plot_fingerprint": first["plot_fingerprint"]}}})
 
+    def test_boolean_episode_number_is_invalid(self):
+        with self.assertRaisesRegex(ValueError, "invalid_episode_number"):
+            plan_episode("river-town", True, SCENES)
+
+    def test_fingerprint_tolerates_nontext_fields(self):
+        result = fingerprint({"scenes": [{"cause": None, "action": 42, "consequence": "Done"}]})
+        self.assertEqual(len(result), 64)
+
     def test_requires_causal_scenes(self):
         with self.assertRaises(ValueError):
             plan_episode("river-town", 1, [{"action": "A character walks"}])

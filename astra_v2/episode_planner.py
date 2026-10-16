@@ -15,9 +15,7 @@ def _normalize(value):
 def fingerprint(episode):
     """Stable narrative fingerprint, independent of cosmetic title changes."""
     scenes = episode.get("scenes") or []
-    narrative = " ".join(_normalize(scene.get("cause", "") + " " +
-                                  scene.get("action", "") + " " +
-                                  scene.get("consequence", "")) for scene in scenes)
+    narrative = " ".join(_normalize(" ".join(str(scene.get(k, "")) for k in ("cause", "action", "consequence"))) for scene in scenes)
     return hashlib.sha256(narrative.encode("utf-8")).hexdigest()
 
 
@@ -40,7 +38,7 @@ def plan_episode(series_id, episode_number, scenes, state=None):
     """Validate a causal episode outline without approving it for production."""
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{1,63}", str(series_id)):
         raise ValueError("invalid_series_id")
-    if not isinstance(episode_number, int) or episode_number < 1:
+    if type(episode_number) is not int or episode_number < 1:
         raise ValueError("invalid_episode_number")
     if not isinstance(scenes, list) or len(scenes) < 3:
         raise ValueError("episode_requires_three_or_more_scenes")
