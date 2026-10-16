@@ -94,17 +94,6 @@ def valid_package_members(names):
 
 def prepare(path, candidate):
     """Write a self-describing package; called only after full creative QA."""
-    # Existing preload artifacts only attest to Studio version, not the
-    # specific visual engine used. In exclusive mode, render a fresh Duo
-    # candidate until the preload manifest carries verified engine provenance.
-    if os.getenv("ASTRA_PILLOW_DUO_ONLY", "0") == "1":
-        return None
-    if os.getenv("ASTRA_PILLOW_DUO_ONLY", "0") == "1":
-        # Studio version alone cannot attest to the actual visual engine.
-        # Never publish a pre-rendered video without Duo provenance.
-        return None
-    if os.environ.get("ASTRA_PILLOW_DUO_ONLY") == "1":
-        return None
     from astra_v2.creative import inspect_video
     video = Path(path)
     fmt = candidate.get("format", "short")
@@ -168,6 +157,9 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
 
     Corrupt/untrusted artifacts fail closed and are never published.
     """
+    # Old preload manifests cannot prove the actual visual engine.
+    if os.getenv("ASTRA_PILLOW_DUO_ONLY", "0") == "1":
+        return None
     from astra_v2.creative import inspect_video
     repo = os.environ.get("GITHUB_REPOSITORY", "")
     # Rendering can run in parallel; publication cannot skip story episodes.
