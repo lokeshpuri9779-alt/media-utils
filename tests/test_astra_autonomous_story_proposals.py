@@ -21,6 +21,16 @@ class AutonomousStoryProposalTests(unittest.TestCase):
             self.assertGreater(after["next_index"], before["next_index"])
             self.assertTrue(all(publication_rejection(s) for s in after["proposals"]))
 
+    def test_compositional_dimensions_produce_distinct_story_fingerprints(self):
+        candidates = [proposal(index) for index in range(300)]
+        self.assertEqual(len({item["plot_fingerprint"] for item in candidates}), 300)
+        self.assertGreaterEqual(len({item["story_beats"][0]["visual"] for item in candidates}), 8)
+        self.assertGreaterEqual(len({item["story_beats"][2]["speech"] for item in candidates}), 8)
+        self.assertTrue(all(item["kind"] == "unreviewed_causal_draft" for item in candidates))
+        self.assertTrue(all(item["production_ready"] is False for item in candidates))
+        self.assertTrue(all(item["title"] != f"Unreviewed story proposal {i + 1}"
+                            for i, item in enumerate(candidates)))
+
     def test_invalid_indices_and_batch_sizes_rejected(self):
         with self.assertRaises(ValueError):
             proposal(-1)
