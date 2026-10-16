@@ -309,3 +309,30 @@ class DurableStoryLedgerTests(unittest.TestCase):
                 migrate_valid_fingerprints(path, {"published": {
                     "bad": {"plot_fingerprint": FP_A, "plot_hash": FP_B}}})
             self.assertEqual(read_ledger(path)["archived"], sorted([FP_A, FP_B]))
+
+    def test_archive_survives_simulated_runner_restart(self):
+        from astra_v2.story_ledger import migrate_valid_fingerprints
+        from astra_v2.episode_planner import plan_episode_with_ledger
+        scenes = [
+            {"cause": "Rain starts", "action": "Find shelter", "consequence": "Group is dry"},
+            {"cause": "Group is dry", "action": "Build a fire", "consequence": "Group is warm"},
+            {"cause": "Group is warm", "action": "Wait for dawn", "consequence": "Sun returns"},
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            runner_a = Path(directory) / "runner-a"
+            runner_b = Path(directory) / "runner-b"
+            runner_a.mkdir()
+            runner_b.mkdir()
+            original = runner_a / "astra_story_fingerprints.json"
+            state = {"reserved": {"r": {"plot_fingerprint": FP_A}},
+                     "published": {"old": {"plot_fingerprint": ""}}}
+            first = migrate_valid_fingerprints(original, state)
+            self.assertFalse(first["complete"])
+            # Simulate persisting the archive in the state branch and restoring
+            # it into a completely separate ephemeral Actions workspace.
+            restored = runner_b / original.name
+            restored.write_bytes(original.read_bytes())
+            with self.assertRaisesRegex(ValueError, "already_used"):
+                plan_episode_with_ledger("rain-series", 1, scenes, restored,
+                                         source_plot_fingerprint=FP_A)
+            self.assertEqual(read_ledger(restored)["archived"], [FP_A])
