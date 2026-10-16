@@ -194,20 +194,21 @@ class DurableStoryLedgerTests(unittest.TestCase):
             plan_episode("wind-house", 1, scenes, source_plot_fingerprint="invalid")
 
     def test_story_forge_bridge_preserves_production_identity(self):
-        from astra_v2.story_forge import propose_episode_from_story
-        story = {"content_id": "sample-forge-1", "plot_fingerprint": FP_A,
+        from astra_v2.story_forge import propose_episode_from_story, plot_fingerprint
+        story = {"content_id": "sample-forge-1",
                  "story_beats": [
                      {"speech": "Bridge breaks", "headline": "Problem", "label": "Bridge down"},
                      {"speech": "Team finds timber", "headline": "Plan", "label": "Materials ready"},
                      {"speech": "Team repairs bridge", "headline": "Repair", "label": "Bridge open"},
                  ]}
+        story["plot_fingerprint"] = plot_fingerprint([(beat.get("headline", ""), beat["speech"], "", beat.get("label", "")) for beat in story["story_beats"]])
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "ledger.json"
             proposal = propose_episode_from_story(story, "bridge-series", 1, ledger_path=path)
-            self.assertEqual(proposal["source_plot_fingerprint"], FP_A)
+            self.assertEqual(proposal["source_plot_fingerprint"], story["plot_fingerprint"])
             self.assertEqual(proposal["source_content_id"], "sample-forge-1")
             self.assertFalse(proposal["production_ready"])
-            archive_fingerprints(path, [FP_A])
+            archive_fingerprints(path, [story["plot_fingerprint"]])
             with self.assertRaisesRegex(ValueError, "already_used"):
                 propose_episode_from_story(story, "bridge-series", 2, ledger_path=path)
 
@@ -220,3 +221,13 @@ class DurableStoryLedgerTests(unittest.TestCase):
         ]}
         with self.assertRaisesRegex(ValueError, "source_fingerprint_required"):
             propose_episode_from_story(story, "boat-series", 1)
+
+    def test_story_forge_rejects_substituted_fingerprint(self):
+        from astra_v2.story_forge import propose_episode_from_story
+        story = {"plot_fingerprint": FP_A, "story_beats": [
+            {"speech": "A fox loses a map"},
+            {"speech": "A rabbit finds a trail"},
+            {"speech": "They return safely"},
+        ]}
+        with self.assertRaisesRegex(ValueError, "source_fingerprint_mismatch"):
+            propose_episode_from_story(story, "fox-trail", 1)
