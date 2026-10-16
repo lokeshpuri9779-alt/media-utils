@@ -15,7 +15,7 @@ class ReleaseHandTests(unittest.TestCase):
             strengths.append(kwargs["hand_strength"])
             return []
         with patch.object(scene, "_actor", side_effect=capture):
-            for t in (0.2, 0.5, 1.0):
+            for t in (0.8, 1.0, 1.2):
                 self.assertTrue(scene.draw_duo(Image.new("RGB", (1080, 1920)), shot, t))
         self.assertGreater(strengths[0], 0)
         self.assertGreater(strengths[0], strengths[2])
