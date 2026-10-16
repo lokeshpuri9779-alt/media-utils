@@ -181,6 +181,54 @@ def _backfill_legacy_titles(proposals):
     return changed
 
 
+
+def _ai_proposal(index):
+    """Use an optional OpenAI-compatible API; fail closed to local story generation."""
+    import urllib.request
+    key = os.getenv("ASTRA_STORY_AI_API_KEY", "").strip()
+    endpoint = os.getenv("ASTRA_STORY_AI_ENDPOINT", "https://api.openai.com/v1/chat/completions").strip()
+    model = os.getenv("ASTRA_STORY_AI_MODEL", "").strip()
+    if not key or not model or not endpoint.startswith("https://"):
+        return None
+    request_body = {
+        "model": model,
+        "temperature": 1,
+        "response_format": {"type": "json_object"},
+        "messages": [
+            {"role": "system", "content": "Write original, family-friendly, visually animatable short cartoon stories. Return JSON with title (string), and story_beats (array of exactly four objects). Each beat has story_beat, speech, visual. The beats must be reveal, build, twist, payoff in that order. The twist must explain the opening mystery; payoff must resolve it. No copyrighted characters, graphic violence, or unsafe instructions."},
+            {"role": "user", "content": f"Create a fresh story candidate number {index}. Avoid formulaic repair plots. Vary genre, protagonist, setting, conflict, emotional stakes, discovery, and ending. Each narration beat 25 to 65 words. Reply with JSON only."},
+        ],
+    }
+    request = urllib.request.Request(endpoint, data=json.dumps(request_body).encode("utf-8"), headers={
+        "Authorization": "Bearer " + key, "Content-Type": "application/json",
+    }, method="POST")
+    with urllib.request.urlopen(request, timeout=25) as response:
+        payload = json.loads(response.read(200000).decode("utf-8"))
+    candidate = json.loads(payload["choices"][0]["message"]["content"])
+    beats = candidate.get("story_beats")
+    if not isinstance(candidate.get("title"), str) or not 8 <= len(candidate["title"].strip()) <= 130:
+        raise ValueError("Invalid AI story title")
+    if not isinstance(beats, list) or len(beats) != 4:
+        raise ValueError("Invalid AI story beats")
+    for beat, role in zip(beats, ("reveal", "build", "twist", "payoff")):
+        if not isinstance(beat, dict) or beat.get("story_beat") != role:
+            raise ValueError("Invalid AI story structure")
+        if not isinstance(beat.get("speech"), str) or not 60 <= len(beat["speech"]) <= 800:
+            raise ValueError("Invalid AI story narration")
+        if not isinstance(beat.get("visual"), str) or not 1 <= len(beat["visual"]) <= 60:
+            raise ValueError("Invalid AI story visual")
+    fingerprint_text = " ".join(beat["speech"] for beat in beats).casefold()
+    return {
+        "content_id": "astra-ai-proposal-" + hashlib.sha256(f"ai-{index}-{fingerprint_text}".encode()).hexdigest()[:20],
+        "title": candidate["title"].strip(),
+        "kind": "unreviewed_causal_draft",
+        "production_ready": False,
+        "proposal_index": index,
+        "source": "ai_story_supply",
+        "plot_fingerprint": hashlib.sha256(fingerprint_text.encode()).hexdigest(),
+        "story_beats": beats,
+    }
+
 def replenish(path, count=24, history=()):
     """Persist novel proposals atomically; never promote or publish them."""
     if not 1 <= count <= 100:
@@ -201,7 +249,14 @@ def replenish(path, count=24, history=()):
     for _ in range(count * 200):
         if len(added) >= count:
             break
-        candidate = proposal(next_index)
+        candidate = None
+        if os.getenv("ASTRA_STORY_AI_API_KEY") and os.getenv("ASTRA_STORY_AI_MODEL"):
+            try:
+                candidate = _ai_proposal(next_index)
+            except (ValueError, KeyError, IndexError, OSError, TimeoutError, json.JSONDecodeError) as exc:
+                print("ASTRA_AI_STORY_FALLBACK=" + type(exc).__name__)
+        if candidate is None:
+            candidate = proposal(next_index)
         next_index += 1
         if not is_near_duplicate(candidate, prior):
             if publication_rejection(candidate) != "unreviewed_causal_draft":

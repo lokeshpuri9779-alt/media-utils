@@ -64,6 +64,9 @@ jobs:
       - name: Generate novel unreviewed proposals
         env:
           ASTRA_PROPOSAL_BATCH: "100"
+          ASTRA_STORY_AI_API_KEY: ${{ secrets.ASTRA_STORY_AI_API_KEY }}
+          ASTRA_STORY_AI_MODEL: ${{ vars.ASTRA_STORY_AI_MODEL }}
+          ASTRA_STORY_AI_ENDPOINT: ${{ vars.ASTRA_STORY_AI_ENDPOINT }}
         run: python -m astra_v2.autonomous_story_proposals
       - name: Verify isolation and persistence
         run: |
