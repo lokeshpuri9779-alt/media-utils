@@ -34,10 +34,19 @@ jobs:
                 break
               fi
             done
+      - name: Restore publication novelty history from state branch
+        run: |
+          git fetch --depth=1 origin astra-state
+          git show origin/astra-state:astra_v2_state.json > astra_v2_state.json
+          if git cat-file -e origin/astra-state:astra_story_history.json 2>/dev/null; then
+            git show origin/astra-state:astra_story_history.json > astra_story_history.json
+          fi
       - name: Generate novel unreviewed proposals
         run: python -m astra_v2.autonomous_story_proposals
       - name: Verify isolation and persistence
-        run: python -m unittest discover -s tests -p test_astra_autonomous_story_proposals.py -v
+        run: |
+          python -m unittest discover -s tests -p test_astra_autonomous_story_proposals.py -v
+          python -m unittest discover -s tests -p test_astra_proposal_history.py -v
       - name: Triage proposals without granting publication approval
         run: python -m astra_v2.story_editorial_report
       - name: Store unreviewed proposal ledger

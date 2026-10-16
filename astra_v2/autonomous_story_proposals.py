@@ -86,5 +86,7 @@ def replenish(path, count=24, history=()):
 
 
 if __name__ == "__main__":
+    from astra_v2.proposal_history import load_history
     print("ASTRA_NEW_UNREVIEWED_PROPOSALS=" + str(replenish(
-        os.getenv("ASTRA_PROPOSAL_LEDGER", "runtime-health/story_proposals.json"))))
+        os.getenv("ASTRA_PROPOSAL_LEDGER", "runtime-health/story_proposals.json"),
+        history=load_history())))
