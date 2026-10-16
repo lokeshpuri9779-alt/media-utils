@@ -13,6 +13,15 @@ def run(*args):
     return subprocess.run(args, check=True, capture_output=True, text=True)
 
 
+def parse_max_volume(stderr):
+    """Return FFmpeg volumedetect max_volume in dB, rejecting absent measurements."""
+    match = re.search(r"max_volume:\s*(-?inf|[-+]?\d+(?:\.\d+)?)\s*dB",
+                      stderr, re.IGNORECASE)
+    if not match:
+        raise ValueError("Could not measure Studio audio level")
+    return float("-inf") if match.group(1).lower() == "-inf" else float(match.group(1))
+
+
 def verify(video):
     video = Path(video)
     if not video.is_file() or video.stat().st_size < 10000:
@@ -28,11 +37,7 @@ def verify(video):
     # Stream presence and successful decoding do not prove that narration is audible.
     levels = run(ff, "-hide_banner", "-i", str(video), "-map", "0:a:0",
                  "-af", "volumedetect", "-f", "null", "-")
-    match = re.search(r"max_volume:\s*(-?inf|[-+]?\d+(?:\.\d+)?)\s*dB",
-                      levels.stderr, re.IGNORECASE)
-    if not match:
-        raise ValueError("Could not measure Studio audio level")
-    max_volume = float("-inf") if match.group(1).lower() == "-inf" else float(match.group(1))
+    max_volume = parse_max_volume(levels.stderr)
     if max_volume <= -60.0:
         raise ValueError(f"Studio narration is silent or nearly silent (max_volume={max_volume} dB)")
 
