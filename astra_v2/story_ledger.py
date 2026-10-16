@@ -192,3 +192,27 @@ def migrate_valid_fingerprints(path, state):
     archive = archive_fingerprints(path, fingerprints)
     return {"archive": archive, "coverage": report,
             "complete": report["ready"]}
+
+
+def verify_restored_archive(path, state):
+    """Fail closed if restored archive omits any valid committed-state hash.
+
+    Does not mutate the archive or publisher state. Incomplete legacy records
+    remain visible through coverage and require older identity checks.
+    """
+    target = Path(path)
+    if not target.is_file():
+        raise StoryLedgerError("story_ledger_restore_missing")
+    coverage = audit_committed_state(state)
+    if coverage["invalid"] or coverage["conflicting"]:
+        raise StoryLedgerError("story_publisher_history_untrusted")
+    archived = set(read_ledger(target)["archived"])
+    missing = set()
+    for status in ("reserved", "pending", "published"):
+        for record in state.get(status, {}).values():
+            fp = record.get("plot_fingerprint")
+            if fp and fp not in archived:
+                missing.add(fp)
+    if missing:
+        raise StoryLedgerError("story_ledger_restore_incomplete")
+    return {"verified": True, "coverage": coverage, "archived_count": len(archived)}
