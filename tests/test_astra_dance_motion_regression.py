@@ -1,6 +1,6 @@
 """Regression tests for deterministic Pillow character dance motion."""
 import unittest
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageChops
 from astra_v2.pillow_duo_scene import _actor
 
 
@@ -27,6 +27,20 @@ class DanceMotionTests(unittest.TestCase):
             with self.subTest(action=action):
                 self.assertNotEqual(self.render(0.0, action).tobytes(),
                                     self.render(0.4, action).tobytes())
+
+    def test_action_motion_changes_a_meaningful_pixel_area(self):
+        # A blinking eye alone must not count as substantial animation.
+        # Compare two poses using a conservative changed-pixel threshold.
+        for action, later in (("dance", 0.25), ("walk", 0.35),
+                              ("run", 0.25), ("jump", 0.25)):
+            with self.subTest(action=action):
+                first = self.render(0.0, action)
+                second = self.render(later, action)
+                diff = ImageChops.difference(first, second).convert("L")
+                changed = diff.point(lambda value: 255 if value >= 24 else 0)
+                changed_pixels = changed.histogram()[255]
+                self.assertGreater(changed_pixels, 2000,
+                                   f"{action} only changed {changed_pixels} pixels")
 
     def test_dance_is_deterministic(self):
         self.assertEqual(self.render(0.25).tobytes(), self.render(0.25).tobytes())
