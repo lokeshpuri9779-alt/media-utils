@@ -36,3 +36,32 @@ def test_species_tail_rendering_is_deterministic():
     first = _render_tail("squirrel")
     second = _render_tail("squirrel")
     assert first.tobytes() == second.tobytes()
+
+from astra_v2.pillow_duo_scene import _actor
+
+
+def _render_actor(actor):
+    image = Image.new("RGB", (720, 800), (250, 250, 250))
+    draw = ImageDraw.Draw(image)
+    _actor(draw, actor, 330, 300, 0.4, "idle", "curious", 0,
+           ground_y=720)
+    return image
+
+
+def test_owl_has_visible_species_specific_beak():
+    image = _render_actor("owl")
+    # Beak triangle is drawn after the shared face; its center should
+    # retain the dedicated golden-orange fill.
+    assert image.getpixel((330, 350)) == (242, 170, 61)
+
+
+def test_cat_has_visible_whiskers_outside_cheek():
+    image = _render_actor("cat")
+    # Inspect the outer whisker region away from the face outline and eyes.
+    dark_pixels = 0
+    for y in range(335, 385):
+        for x in range(448, 470):
+            red, green, blue = image.getpixel((x, y))
+            if red < 90 and green < 100 and blue < 120:
+                dark_pixels += 1
+    assert dark_pixels >= 8
