@@ -336,3 +336,20 @@ class DurableStoryLedgerTests(unittest.TestCase):
                 plan_episode_with_ledger("rain-series", 1, scenes, restored,
                                          source_plot_fingerprint=FP_A)
             self.assertEqual(read_ledger(restored)["archived"], [FP_A])
+
+    def test_restored_archive_requires_all_known_committed_hashes(self):
+        from astra_v2.story_ledger import verify_restored_archive
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "ledger.json"
+            state = {"reserved": {"a": {"plot_fingerprint": FP_A}},
+                     "published": {"b": {"plot_fingerprint": FP_B},
+                                   "old": {"plot_fingerprint": ""}}}
+            with self.assertRaisesRegex(StoryLedgerError, "restore_missing"):
+                verify_restored_archive(path, state)
+            archive_fingerprints(path, [FP_A])
+            with self.assertRaisesRegex(StoryLedgerError, "restore_incomplete"):
+                verify_restored_archive(path, state)
+            archive_fingerprints(path, [FP_B])
+            result = verify_restored_archive(path, state)
+            self.assertTrue(result["verified"])
+            self.assertEqual(result["coverage"]["missing"], 1)
