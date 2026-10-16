@@ -3,7 +3,7 @@
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 10,
-  "confirmed_today": 9,
+  "confirmed_today": 10,
   "last_attempt_at": "2026-10-16T23:07:37.862514+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -1699,57 +1699,38 @@
       "format": "short",
       "uploaded_at": "2026-10-16T22:47:45.235991+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "KOggGWSRFmM": {
-      "content_id": "rayvan-original-snowglobeweather-v1",
+    },
+    "rayvan-original-snowglobeweather-v1": {
+      "video_id": "KOggGWSRFmM",
+      "confirmed_at": "2026-10-16T23:11:00.116731+00:00",
       "title": "The Snow Globe Forecast",
-      "day": "2026-10-17",
-      "uploaded_at": "2026-10-16T23:07:39.163294+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "86a5203b3f6d839a53b1d25c20d02ecbec0f471fa0b4d1f0cc690352a77a09cb",
-      "story_beats": [
-        {
-          "speech": "A meteorologist saw a miniature mountain inside a snow globe change before each storm."
-        },
-        {
-          "speech": "The globe showed a fresh crack running down the mountain above the village."
-        },
-        {
-          "speech": "She recognized the crack as an avalanche path and alerted the village before dawn."
-        },
-        {
-          "speech": "The snow slid into an empty valley while every family watched from the shelter."
-        }
-      ],
+      "uploaded_at": "2026-10-16T23:07:39.163294+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-16T23:06:51.053697+00:00",
-  "last_preflight_reason": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-16T23:10:59.715846+00:00",
+  "last_preflight_reason": "min_interval",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-16T23:07:39.326110+00:00",
+    "at": "2026-10-16T23:11:00.197383+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-16T20:08:22.753942+00:00",
   "reserved": {
