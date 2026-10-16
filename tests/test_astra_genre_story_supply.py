@@ -25,6 +25,14 @@ class GenreStorySupplyTests(unittest.TestCase):
         self.assertEqual(len({story["plot_structure"] for story in stories}), 8)
         self.assertTrue(all(story["premise_id"] and story["outcome_id"] for story in stories))
 
+    def test_balances_underrepresented_structures(self):
+        from astra_v2.genre_story_supply import balanced_structure_index, NARRATIVE_STRUCTURES
+        recent = [{"plot_structure": row[0]} for row in NARRATIVE_STRUCTURES[:-1] for _ in range(4)]
+        selected = balanced_structure_index(123, recent)
+        self.assertEqual(NARRATIVE_STRUCTURES[selected][0], NARRATIVE_STRUCTURES[-1][0])
+        story = genre_proposal(123, structure_index=selected)
+        self.assertEqual(story["plot_structure"], NARRATIVE_STRUCTURES[-1][0])
+
     def test_reject_negative_index(self):
         with self.assertRaises(ValueError):
             genre_proposal(-1)
