@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from astra_v2.story_ledger import StoryLedgerError, archive_fingerprints, read_ledger
+from astra_v2.story_ledger import StoryLedgerError, archive_fingerprints, archive_lifecycle_record, read_ledger
 
 
 FP_A = "a" * 64
@@ -68,3 +68,19 @@ class DurableStoryLedgerTests(unittest.TestCase):
             path.write_text("{broken", encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "ledger_unavailable"):
                 plan_episode_with_ledger("village", 2, scenes, path)
+
+
+    def test_only_explicit_consumed_lifecycle_states_archive(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "story-ledger.json"
+            with self.assertRaisesRegex(StoryLedgerError, "not_archivable"):
+                archive_lifecycle_record(path, {"plot_fingerprint": FP_A}, "draft")
+            self.assertFalse(path.exists())
+            archive_lifecycle_record(path, {"plot_fingerprint": FP_A}, "reserved")
+            self.assertEqual(read_ledger(path)["archived"], [FP_A])
+
+    def test_lifecycle_archival_rejects_missing_fingerprint(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "story-ledger.json"
+            with self.assertRaisesRegex(StoryLedgerError, "fingerprint_missing"):
+                archive_lifecycle_record(path, {}, "published")
