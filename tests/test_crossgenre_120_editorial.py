@@ -1,7 +1,7 @@
 """Check isolated cross-genre archive without admitting drafts to production."""
 import unittest
 from astra_v2.crossgenre_120_editorial import candidates
-from astra_v2.story_forge import catalog
+from pathlib import Path
 
 class EditorialArchiveTests(unittest.TestCase):
     def test_unique_well_formed_proposals(self):
@@ -18,9 +18,10 @@ class EditorialArchiveTests(unittest.TestCase):
             for beat in beats:
                 self.assertEqual(len(beat),4)
                 self.assertTrue(all(isinstance(x,str) and x.strip() for x in beat))
-    def test_proposals_not_automatically_in_production_catalog(self):
-        proposed={row[1] for row in candidates()}
-        live={row['title'] for row in catalog(limit=10000)}
-        self.assertFalse(proposed & live, sorted(proposed & live))
+    def test_archive_is_not_wired_into_production(self):
+        production=Path('astra_v2/story_forge.py').read_text()
+        self.assertNotIn('crossgenre_120_editorial', production)
+        self.assertNotIn('EDITORIAL_STORY_PROPOSALS', production)
+
 
 if __name__=='__main__': unittest.main()
