@@ -1,0 +1,21 @@
+name: ASTRA Crossgenre 120 Editorial QA
+on:
+  pull_request:
+    paths:
+      - 'astra_v2/crossgenre_120_editorial.py'
+      - 'tests/test_crossgenre_120_editorial.py'
+      - '.github/workflows/astra-crossgenre-120-editorial-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  editorial-archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check isolated proposals
+        run: python -m unittest discover -s tests -p 'test_crossgenre_120_editorial.py' -v
