@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 9,
-  "confirmed_today": 8,
-  "last_attempt_at": "2026-10-16T22:47:43.753811+00:00",
+  "attempts": 10,
+  "confirmed_today": 9,
+  "last_attempt_at": "2026-10-16T23:07:37.862514+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1691,30 +1691,38 @@
       "format": "short",
       "uploaded_at": "2026-10-16T22:41:38.612744+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-original-desertwell-v1": {
+      "video_id": "Ev526DE8bjk",
+      "confirmed_at": "2026-10-16T23:06:51.521988+00:00",
+      "title": "The Well That Remembered Rain",
+      "format": "short",
+      "uploaded_at": "2026-10-16T22:47:45.235991+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "Ev526DE8bjk": {
-      "content_id": "rayvan-original-desertwell-v1",
-      "title": "The Well That Remembered Rain",
+    "KOggGWSRFmM": {
+      "content_id": "rayvan-original-snowglobeweather-v1",
+      "title": "The Snow Globe Forecast",
       "day": "2026-10-17",
-      "uploaded_at": "2026-10-16T22:47:45.235991+00:00",
+      "uploaded_at": "2026-10-16T23:07:39.163294+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "094772fae9f2d39e3a67ea75a496d46f79b843eff1731087ad2a85b7af7eeda8",
+      "plot_fingerprint": "86a5203b3f6d839a53b1d25c20d02ecbec0f471fa0b4d1f0cc690352a77a09cb",
       "story_beats": [
         {
-          "speech": "A young engineer heard thunder from a dry well beneath the desert square."
+          "speech": "A meteorologist saw a miniature mountain inside a snow globe change before each storm."
         },
         {
-          "speech": "She found old marks leading from the well toward dunes beyond the village."
+          "speech": "The globe showed a fresh crack running down the mountain above the village."
         },
         {
-          "speech": "Digging at the final mark revealed a blocked channel that once carried rainwater underground."
+          "speech": "She recognized the crack as an avalanche path and alerted the village before dawn."
         },
         {
-          "speech": "The villagers cleared the channel and the next storm filled their well instead of flooding the road."
+          "speech": "The snow slid into an empty valley while every family watched from the shelter."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -1722,11 +1730,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-16T22:47:03.857010+00:00",
+  "last_preflight_at": "2026-10-16T23:06:51.053697+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-16T22:47:45.503028+00:00",
+    "at": "2026-10-16T23:07:39.326110+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -3592,6 +3600,29 @@
         },
         {
           "speech": "The villagers cleared the channel and the next storm filled their well instead of flooding the road."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-original-snowglobeweather-v1": {
+      "at": "2026-10-16T23:07:37.862495+00:00",
+      "title": "The Snow Globe Forecast",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "86a5203b3f6d839a53b1d25c20d02ecbec0f471fa0b4d1f0cc690352a77a09cb",
+      "story_beats": [
+        {
+          "speech": "A meteorologist saw a miniature mountain inside a snow globe change before each storm."
+        },
+        {
+          "speech": "The globe showed a fresh crack running down the mountain above the village."
+        },
+        {
+          "speech": "She recognized the crack as an avalanche path and alerted the village before dawn."
+        },
+        {
+          "speech": "The snow slid into an empty valley while every family watched from the shelter."
         }
       ],
       "renderer": "studio-7.3.0",
