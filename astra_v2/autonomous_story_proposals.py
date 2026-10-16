@@ -215,12 +215,29 @@ def replenish(path, count=24, history=()):
     # Track the real acceptance rate rather than assuming every generated idea is usable.
     attempts = next_index - int(state.get("next_index", 0))
     acceptance_rate = round(len(added) / attempts, 4) if attempts else 0.0
+    from collections import Counter
+    recent = (state["proposals"] + added)[-500:]
+    genres = Counter(str(item.get("genre", "mystery")) for item in recent if isinstance(item, dict))
+    structures = Counter(str(item.get("plot_structure", "legacy")) for item in recent if isinstance(item, dict))
+    pairs = Counter(
+        (str(item.get("premise_id")), str(item.get("outcome_id")))
+        for item in recent
+        if isinstance(item, dict) and item.get("premise_id") and item.get("outcome_id")
+    )
+    diversity = {
+        "window": len(recent),
+        "genre_counts": dict(sorted(genres.items())),
+        "structure_counts": dict(sorted(structures.items())),
+        "unique_structural_pairs": len(pairs),
+        "repeated_structural_pairs": sum(n - 1 for n in pairs.values() if n > 1),
+    }
     state["supply_health"] = {
         "requested": count,
         "accepted": len(added),
         "attempted": attempts,
         "acceptance_rate": acceptance_rate,
         "exhaustion_warning": len(added) < count or (attempts >= count * 4),
+        "diversity": diversity,
     }
     if state["supply_health"]["exhaustion_warning"]:
         print("ASTRA_STORY_SUPPLY_EXHAUSTION_WARNING=1")
