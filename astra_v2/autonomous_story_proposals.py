@@ -98,7 +98,7 @@ def proposal(index):
     # The dimensions rotate at different strides; this produces a large
     # deterministic combination space without claiming every draft is unique.
     # Use compact, searchable story titles rather than generic inventory labels.
-    title = f"The {visual.capitalize()} Mystery of {setting_visual.capitalize()} — {role.title()}'s Case"
+    title = f"The {visual.capitalize()} Mystery of {setting_visual.capitalize()} — {role.title()}'s Case #{index + 1:04d}"
     beats = (
         ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}, {stakes}. If the cause stayed hidden, the neighbors would not know which route or system was safe to use.", visual),
         ("build", f"Instead of guessing, {actor} compared {clue} with {discovery}; {emotional}. The details matched the timing of the first warning, giving the investigation a testable explanation rather than another suspicion.", "book"),
