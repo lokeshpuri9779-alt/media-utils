@@ -18,11 +18,14 @@ on:
       - astra_v2/pillow_duo_scene.py
       - astra_v2/pillow_scene_direction.py
       - tests/test_pillow_scene_direction.py
+      - tests/test_astra_duo_setting_consistency.py
       - astra_v2/story_action_motion.py
       - tests/test_story_action_motion.py
       - tests/test_astra_story_inventory.py
       - .github/workflows/astra-duo-story-qa.yml
   workflow_dispatch:
+  schedule:
+    - cron: '23 3 * * *'
 permissions:
   contents: read
 jobs:
@@ -43,6 +46,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_editorial_oct2026.py' -v
           python -m unittest discover -s tests -p 'test_pillow_duo_story_supply.py' -v
           python -m unittest discover -s tests -p 'test_pillow_scene_direction.py' -v
+          python -m unittest discover -s tests -p 'test_astra_duo_setting_consistency.py' -v
       - name: Verify Studio 7.3.0 provenance and live publisher regression tests
         env:
           ASTRA_MIN_STUDIO_VERSION: '7.3.0'
@@ -66,6 +70,15 @@ jobs:
           assert report['visual_edit']['pillow_duo_scenes']==4
           assert verdict['pass'],verdict
           print('ASTRA_DUO_FULL_RENDER_VERIFIED',p.stat().st_size)
+          PY
+      - name: Verify MP4 video and audio decoding
+        run: |
+          python - <<'PY'
+          import subprocess
+          from imageio_ffmpeg import get_ffmpeg_exe
+          video='duo-preview/duo-short.mp4'
+          subprocess.run([get_ffmpeg_exe(),'-v','error','-i',video,'-f','null','-'],check=True)
+          print('ASTRA_DUO_MP4_DECODE_OK')
           PY
       - name: Render all 80 authored story beats as storyboard contact sheet
         run: python -m tools.editorial_oct2026_preview
