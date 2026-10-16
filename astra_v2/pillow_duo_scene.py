@@ -390,6 +390,15 @@ def draw_duo(image, shot, t):
     from astra_v2.procedural_visual_library import (
         character_recipe, visual_identity, icon_for_story, MOTIFS)
     stable_key=shot.get("story_visual_seed") or "|".join(pair)
+    # Physical hand contact: once grasped, the object is driven by the
+    # actor's hand anchor rather than an unrelated overlay trajectory.
+    contact_actions={"pick","pickup","pick_up","carry","hold","repair","catch"}
+    if prop and action in contact_actions:
+        grasp=_ease((max(0.0,float(t))-.15)/.9)
+        actor_x=298+actor_translation(action,t,0)
+        held=(actor_x+175, 846+215)
+        prop_pos=(round(prop_pos[0]*(1-grasp)+held[0]*grasp),
+                  round(prop_pos[1]*(1-grasp)+held[1]*grasp))
     for idx,name in enumerate(pair):
         x=(298 if idx==0 else 772)+actor_translation(action,t,idx)
         if idx==1 and action=="carry":
