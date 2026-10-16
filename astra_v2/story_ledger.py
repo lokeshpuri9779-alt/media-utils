@@ -100,7 +100,11 @@ def archive_lifecycle_record(path, record, lifecycle_status):
         raise StoryLedgerError("story_lifecycle_status_not_archivable")
     if not isinstance(record, dict):
         raise StoryLedgerError("story_lifecycle_record_invalid")
-    fingerprint = record.get("plot_fingerprint") or record.get("plot_hash")
+    primary = record.get("plot_fingerprint")
+    alias = record.get("plot_hash")
+    if primary is not None and alias is not None and primary != alias:
+        raise StoryLedgerError("story_lifecycle_fingerprint_conflict")
+    fingerprint = primary if primary is not None else alias
     if not isinstance(fingerprint, str) or len(fingerprint) != 64 or any(
         c not in "0123456789abcdef" for c in fingerprint
     ):
