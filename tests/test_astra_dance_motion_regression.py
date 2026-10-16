@@ -16,6 +16,18 @@ class DanceMotionTests(unittest.TestCase):
         self.assertIsNotNone(first.getbbox())
         self.assertNotEqual(first.tobytes(), second.tobytes())
 
+    def test_locomotion_and_jump_have_visible_motion(self):
+        for action, later in (("walk", 0.35), ("run", 0.25), ("chase", 0.25), ("jump", 0.25)):
+            with self.subTest(action=action):
+                self.assertNotEqual(self.render(0.0, action).tobytes(),
+                                    self.render(later, action).tobytes())
+
+    def test_interaction_actions_have_visible_motion(self):
+        for action in ("wave", "clap", "swim", "push", "pull"):
+            with self.subTest(action=action):
+                self.assertNotEqual(self.render(0.0, action).tobytes(),
+                                    self.render(0.4, action).tobytes())
+
     def test_dance_is_deterministic(self):
         self.assertEqual(self.render(0.25).tobytes(), self.render(0.25).tobytes())
 
