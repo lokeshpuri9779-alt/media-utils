@@ -214,7 +214,7 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
         gait=int(25*math.sin(t*6.0+idx*math.pi))
     if action=="dance":
         gait=int(34*math.sin(t*6.2+idx*math.pi))
-    bob=(int(26*abs(math.sin(t*5+idx))) if action=="jump" else
+    bob=(int(92*math.sin(math.pi*min(1.0,max(0.0,float(t)%1.2/1.2))**2) if action=="jump" else
          int(17*math.sin(t*4.2+idx)) if action=="swim" else
          int(6*math.sin(t*2+idx)))
     if action=="dance":
@@ -224,7 +224,8 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
     # Studio draws actors directly at 1080p, while the experimental ensemble
     # draws them into local transparent sprites. Ground shadows must use the
     # matching coordinate system or get clipped out of every ensemble frame.
-    d.ellipse((x-103,ground_y-10,x+104,ground_y+11),fill=(18,48,58))
+    shadow_half_width=max(62,103-int(max(0,bob)*.28)) if action=="jump" else 103
+    d.ellipse((x-shadow_half_width,ground_y-10,x+shadow_half_width,ground_y+11),fill=(18,48,58))
     if name=="fox":
         sweep=int(22*math.sin(t*2))
         d.polygon(((x+65,y+254),(x+179,y+206+sweep),(x+215,y+270+sweep),
