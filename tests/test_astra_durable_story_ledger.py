@@ -1,4 +1,5 @@
 import json
+from concurrent.futures import ThreadPoolExecutor
 import tempfile
 import unittest
 from pathlib import Path
@@ -93,3 +94,11 @@ class DurableStoryLedgerTests(unittest.TestCase):
             with self.assertRaisesRegex(StoryLedgerError, "invalid_archive"):
                 archive_fingerprints(path, [FP_A])
             self.assertEqual(path.read_text(encoding="utf-8"), original)
+
+    def test_parallel_archival_does_not_lose_updates(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "story-ledger.json"
+            fingerprints = [format(index, "064x") for index in range(32)]
+            with ThreadPoolExecutor(max_workers=8) as pool:
+                list(pool.map(lambda fp: archive_fingerprints(path, [fp]), fingerprints))
+            self.assertEqual(set(read_ledger(path)["archived"]), set(fingerprints))
