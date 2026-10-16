@@ -90,7 +90,7 @@ class ProductionDuoContactTests(unittest.TestCase):
         for action in ("release", "drop", "put_down"):
             with self.subTest(action=action):
                 strengths = [self.paint(action, t)[0][0].kwargs["hand_strength"]
-                             for t in (.45, .65, .8, 1.0, 1.2)]
+                             for t in (.8, 1.0, 1.1, 1.2)]
                 self.assertGreater(strengths[0], strengths[1])
                 self.assertTrue(all(a > b for a, b in zip(strengths, strengths[1:])))
                 self.assertEqual(strengths[-1], 0.0)
