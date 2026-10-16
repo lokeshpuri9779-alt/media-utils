@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 7,
+  "attempts": 8,
   "confirmed_today": 7,
-  "last_attempt_at": "2026-10-16T22:09:20.539251+00:00",
+  "last_attempt_at": "2026-10-16T22:41:36.797417+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1685,28 +1685,55 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-16T22:12:52.413218+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "XDasaMGzu6M": {
+      "content_id": "rayvan-original-pocketvolcano-v1",
+      "title": "The Volcano in a Teacup",
+      "day": "2026-10-17",
+      "uploaded_at": "2026-10-16T22:41:38.612744+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "2be69388e42713d9ac8598bd381e32af7aa285aabc86b25e9a7448daa9376323",
+      "story_beats": [
+        {
+          "speech": "A potter found a teacup that rumbled and glowed like a tiny volcano."
+        },
+        {
+          "speech": "A sudden frost covered the village while the teacup grew hotter on the kiln shelf."
+        },
+        {
+          "speech": "The potter shaped a clay channel that carried the cup's gentle warmth beneath the streets."
+        },
+        {
+          "speech": "The village thawed safely, and the tiny volcano settled into a quiet red ember."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-16T22:40:31.711827+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-16T22:12:53.009094+00:00",
+    "at": "2026-10-16T22:41:38.833415+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-16T20:08:22.753942+00:00",
   "reserved": {
@@ -3511,6 +3538,29 @@
         },
         {
           "speech": "Together they returned the bone, and every exhibit settled quietly before sunrise."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-original-pocketvolcano-v1": {
+      "at": "2026-10-16T22:41:36.797387+00:00",
+      "title": "The Volcano in a Teacup",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "2be69388e42713d9ac8598bd381e32af7aa285aabc86b25e9a7448daa9376323",
+      "story_beats": [
+        {
+          "speech": "A potter found a teacup that rumbled and glowed like a tiny volcano."
+        },
+        {
+          "speech": "A sudden frost covered the village while the teacup grew hotter on the kiln shelf."
+        },
+        {
+          "speech": "The potter shaped a clay channel that carried the cup's gentle warmth beneath the streets."
+        },
+        {
+          "speech": "The village thawed safely, and the tiny volcano settled into a quiet red ember."
         }
       ],
       "renderer": "studio-7.3.0",
