@@ -19,3 +19,19 @@ class StoryLedgerIntegrityTests(unittest.TestCase):
         proposal = plan_episode('village', 1, SCENES)
         self.assertIs(proposal['production_ready'], False)
         self.assertEqual(proposal['kind'], 'unreviewed_episode_plan')
+
+    def test_cosmetic_case_and_punctuation_do_not_change_fingerprint(self):
+        altered = [
+            {k: v.upper() + '!!!' for k, v in scene.items()}
+            for scene in SCENES
+        ]
+        self.assertEqual(fingerprint({'scenes': SCENES}),
+                         fingerprint({'scenes': altered}))
+
+    def test_scene_order_changes_fingerprint(self):
+        reordered = [SCENES[1], SCENES[0], SCENES[2]]
+        self.assertNotEqual(fingerprint({'scenes': SCENES}),
+                            fingerprint({'scenes': reordered}))
+
+    def test_malformed_ledger_does_not_crash_lookup(self):
+        self.assertEqual(known_fingerprints({'fingerprint_ledger': {'archived': None}}), set())
