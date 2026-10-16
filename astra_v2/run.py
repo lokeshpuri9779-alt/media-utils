@@ -49,6 +49,7 @@ def reconcile(youtube, state):
                                         "format": item.get("format", "short"),
                                         "title": item.get("title", ""),
                                         "plot_key": item.get("plot_key", ""),
+                                        "plot_fingerprint": item.get("plot_fingerprint", ""),
                                         "renderer": item.get("renderer") or "unknown"}
             if item.get("day") == state["day"]:
                 state["confirmed_today"] += 1
@@ -207,6 +208,7 @@ def run():
                 state.setdefault("reserved", {})[cid] = {
                     "at": utcnow().isoformat(), "title": title, "format": candidate["format"],
                     "plot_key": candidate.get("plot_key", ""),
+                    "plot_fingerprint": candidate.get("plot_fingerprint", ""),
                     "renderer": candidate.get("renderer") or "unknown",
                     "result": "transfer_pending",
                 }
@@ -222,6 +224,7 @@ def run():
                     "uploaded_at": utcnow().isoformat(),
                     "genre": candidate["genre"], "format": candidate["format"],
                     "plot_key": candidate.get("plot_key", ""),
+                    "plot_fingerprint": candidate.get("plot_fingerprint", ""),
                     "renderer": candidate.get("renderer") or "unknown",
                 }
                 write_json(STATE_FILE, state)
