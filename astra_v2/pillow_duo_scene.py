@@ -453,7 +453,9 @@ def draw_duo(image, shot, t):
         # the object all the way to its resting position.
         if action in ("release","drop","put_down"):
             hand_strength *= 1.0-_ease((max(0.0,float(t))-.45)/.75)
-        hand_target=prop_pos if hand_strength>0 else None
+        # During release, withdraw toward the original held anchor while
+        # the prop descends independently; otherwise the wrist follows it down.
+        hand_target=(held if action in ("release","drop","put_down") else prop_pos) if hand_strength>0 else None
         actor_mood=mood
         if mood=="angry" and idx==0:
             actor_mood="curious"  # Reaction shot, not two identical emotions.
