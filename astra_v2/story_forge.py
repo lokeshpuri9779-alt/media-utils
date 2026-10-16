@@ -938,3 +938,25 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=256, excluded_plot_ha
         if len(result) >= limit:
             break
     return result
+
+
+def propose_episode_from_story(story, series_id, episode_number, state=None):
+    """Create an editorial-only causal episode proposal from a vetted four-beat story.
+
+    This deliberately does not add the proposal to production catalog().
+    """
+    from astra_v2.episode_planner import plan_episode
+    beats = story.get("story_beats") or []
+    if len(beats) < 3:
+        raise ValueError("episode_requires_three_or_more_beats")
+    scenes = []
+    for index, beat in enumerate(beats):
+        speech = beat.get("speech") if isinstance(beat, dict) else None
+        if not isinstance(speech, str) or not speech.strip():
+            raise ValueError("episode_beat_missing_speech")
+        scenes.append({"cause": speech.strip(),
+                       "action": str(beat.get("headline") or "Story progresses").strip(),
+                       "consequence": str(beat.get("label") or "Next scene").strip()})
+    proposal = plan_episode(series_id, episode_number, scenes, state=state)
+    proposal["source_content_id"] = str(story.get("content_id") or "")
+    return proposal
