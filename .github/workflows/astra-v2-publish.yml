@@ -193,6 +193,33 @@ jobs:
           ASTRA_PRELOAD_ONLY: '0' # Scan only policy-approved queued media, then allow a fresh QA-gated render
         run: python -m astra_v2.run
 
+      - name: Persist verified character episode if approved manifests exist
+        if: steps.publish_video.outcome == 'success'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from astra_v2.postpublish_character_memory import apply_published_episode
+
+          snapshot = Path('character-continuity.json')
+          proposal = Path('runtime-health/character-proposal.json')
+          episode = Path('runtime-health/character-episode.json')
+          report = Path('runtime-health/astra-v2-report.json')
+          # Never infer or fabricate character identities from a video.
+          # Until the approved generator supplies both manifests, do nothing.
+          if not (snapshot.is_file() and proposal.is_file() and episode.is_file() and report.is_file()):
+              print('ASTRA_CHARACTER_MEMORY=skipped_missing_verified_inputs')
+          else:
+              publication = json.loads(report.read_text(encoding='utf-8'))
+              if publication.get('outcome') != 'published':
+                  print('ASTRA_CHARACTER_MEMORY=skipped_unconfirmed_publication')
+              else:
+                  apply_published_episode(snapshot, proposal, episode, report)
+                  print('ASTRA_CHARACTER_MEMORY=updated')
+          PY
+
       - name: Record post-preflight workflow stage outcomes
         if: always()
         env:
