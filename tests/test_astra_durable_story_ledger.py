@@ -210,3 +210,13 @@ class DurableStoryLedgerTests(unittest.TestCase):
             archive_fingerprints(path, [FP_A])
             with self.assertRaisesRegex(ValueError, "already_used"):
                 propose_episode_from_story(story, "bridge-series", 2, ledger_path=path)
+
+    def test_story_forge_bridge_requires_production_identity(self):
+        from astra_v2.story_forge import propose_episode_from_story
+        story = {"content_id": "missing-fingerprint", "story_beats": [
+            {"speech": "A boat drifts"},
+            {"speech": "A rope is found"},
+            {"speech": "The boat is secured"},
+        ]}
+        with self.assertRaisesRegex(ValueError, "source_fingerprint_required"):
+            propose_episode_from_story(story, "boat-series", 1)
