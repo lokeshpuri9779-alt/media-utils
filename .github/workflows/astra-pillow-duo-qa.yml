@@ -96,6 +96,22 @@ jobs:
           subprocess.run([get_ffmpeg_exe(),'-v','error','-i',path,'-f','null','-'],check=True)
           print('Verified decoded duo MP4:',path)
           PY
+      - name: Render exclusive-mode Studio Duo MP4
+        env:
+          ASTRA_PILLOW_DUO_ONLY: '1'
+          ASTRA_UNIFIED_STORY_ENGINE: '1'
+        run: |
+          python -m tools.pillow_studio_preview
+          python - <<'PY'
+          from pathlib import Path
+          from imageio_ffmpeg import get_ffmpeg_exe
+          import subprocess
+          path = Path('preview/pillow-studio-composite.mp4')
+          assert path.is_file() and path.stat().st_size > 10000
+          subprocess.run([get_ffmpeg_exe(), '-v', 'error', '-i', str(path),
+                          '-f', 'null', '-'], check=True)
+          print('Exclusive Duo Studio MP4 decoded:', path.stat().st_size)
+          PY
       - name: Render full Studio scene compositor preview (silent)
         run: python -m tools.pillow_studio_preview
       - name: Render four new actions in actual Studio
