@@ -34,6 +34,14 @@ class StoryEditorialTests(unittest.TestCase):
         self.assertEqual(match["matched_content_id"], "story-a")
         self.assertGreaterEqual(match["similarity"], match["threshold"])
 
+    def test_fingerprint_match_is_reported_even_without_text_overlap(self):
+        first = {"content_id": "story-fp", "title": "Earlier", "plot_fingerprint": "same-plot", "story_beats": [{"speech": "blue"}]}
+        second = {"content_id": "story-fp-new", "title": "New", "plot_fingerprint": "same-plot", "story_beats": [{"speech": "orange"}]}
+        from astra_v2.story_editorial import semantic_duplicate_match
+        match = semantic_duplicate_match(second, [first])
+        self.assertTrue(match["plot_fingerprint_match"])
+        self.assertEqual(match["matched_content_id"], "story-fp")
+
     def test_high_overlap_plot_is_flagged_below_old_threshold(self):
         first = {"story_beats": [{"speech": "A curious fox investigates a broken bridge light before winter. The fox compares the wiring with a metal part and discovers the cause."}]}
         second = {"story_beats": [{"speech": "A curious fox investigates a broken bridge light before winter. The fox compares the wiring with a metal part and discovers the cause, then repairs it."}]}
