@@ -94,6 +94,11 @@ def valid_package_members(names):
 
 def prepare(path, candidate):
     """Write a self-describing package; called only after full creative QA."""
+    # Existing preload artifacts only attest to Studio version, not the
+    # specific visual engine used. In exclusive mode, render a fresh Duo
+    # candidate until the preload manifest carries verified engine provenance.
+    if os.getenv("ASTRA_PILLOW_DUO_ONLY", "0") == "1":
+        return None
     from astra_v2.creative import inspect_video
     video = Path(path)
     fmt = candidate.get("format", "short")
