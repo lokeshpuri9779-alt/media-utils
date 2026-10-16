@@ -5,6 +5,7 @@ be restored from a trusted astra-state snapshot by the caller.
 """
 import argparse
 import json
+import hashlib
 import shutil
 import tempfile
 from pathlib import Path
@@ -16,10 +17,15 @@ from astra_v2.story_ledger import (
 
 
 def rehearse_state_restore(state_path, archive_path=None):
-    state = json.loads(Path(state_path).read_text(encoding="utf-8"))
+    state_bytes = Path(state_path).read_bytes()
+    state = json.loads(state_bytes.decode("utf-8"))
+    state_sha256 = hashlib.sha256(state_bytes).hexdigest()
     coverage = audit_committed_state(state)
     if coverage["invalid"] or coverage["conflicting"]:
         raise StoryLedgerError("story_publisher_history_untrusted")
+    archive_sha256 = None
+    if archive_path is not None:
+        archive_sha256 = hashlib.sha256(Path(archive_path).read_bytes()).hexdigest()
     with tempfile.TemporaryDirectory(prefix="astra-archive-rehearsal-") as root:
         first = Path(root) / "runner-one"
         second = Path(root) / "runner-two"
@@ -40,6 +46,8 @@ def rehearse_state_restore(state_path, archive_path=None):
             "coverage": coverage,
             "archived_count": verified["archived_count"],
             "live_state_modified": False,
+            "source_state_sha256": state_sha256,
+            "source_archive_sha256": archive_sha256,
         }
 
 
