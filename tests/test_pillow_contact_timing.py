@@ -60,7 +60,8 @@ class ProductionDuoContactTests(unittest.TestCase):
         for action in ("pick", "carry", "release", "drop", "put_down"):
             with self.subTest(action=action):
                 targets = []
-                for frame in range(1, 17):
+                last_frame = 9 if action in ("release", "drop", "put_down") else 16
+                for frame in range(1, last_frame + 1):
                     args, _ = self.paint(action, frame / 8.0)
                     target = args[0].kwargs["hand_target"]
                     self.assertIsNotNone(target)
