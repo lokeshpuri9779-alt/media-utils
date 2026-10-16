@@ -203,6 +203,22 @@ def run():
                 if cid in live_ids | previous_ids or title.casefold().strip() in live_titles:
                     report.update(outcome="duplicate_blocked", content_id=cid)
                     return report
+                # Optional continuity manifests are emitted only for explicitly
+                # approved characters already present in durable memory.
+                # No missing character is silently invented.
+                if candidate.get("character_approved") is True:
+                    from astra_v2.character_snapshot import read_snapshot
+                    from astra_v2.character_manifest_bridge import build_character_manifests
+                    snapshot_path = Path("character-continuity.json")
+                    if snapshot_path.is_file():
+                        snapshot = read_snapshot(snapshot_path)
+                        character_state = snapshot["characters"].get(candidate.get("character_id"))
+                        if character_state is not None:
+                            proposal, episode = build_character_manifests(candidate, character_state)
+                            manifest_dir = Path("runtime-health")
+                            manifest_dir.mkdir(parents=True, exist_ok=True)
+                            write_json(manifest_dir / "character-proposal.json", proposal)
+                            write_json(manifest_dir / "character-episode.json", episode)
                 description = candidate["description"] + "\nASTRA-V2-ID:" + cid
                 # Reserve identity and interval BEFORE upload; never auto-retry an
                 # indeterminate transfer as this risks a duplicate public video.
