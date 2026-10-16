@@ -282,6 +282,15 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
         if action=="swim":
             arm_raise=45*math.sin(t*7+idx*math.pi+(0 if side==1 else math.pi))
         hand=(x+side*153,y+218-arm_raise)
+        if wave:
+            # Raise the waving hand above the head; the old 80px offset
+            # never lifted it past the shoulder, making waves unreadable.
+            phase=math.sin(t*5.5+idx)
+            hand=(x+126+int(24*phase),y-115+int(18*phase))
+        elif action=="dance":
+            # Opposing overhead gestures create a recognizable dance pose.
+            phase=math.sin(t*6.2+idx*math.pi)
+            hand=(x+side*(120+int(18*phase)),y+18-int(95*max(0,side*phase)))
         if action in ("walk","run","chase","sneak"):
             # Counter-swing the arms against the leg gait. Opposite arms
             # advance together with opposite legs, rather than hanging still.
