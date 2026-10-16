@@ -54,7 +54,10 @@ def artifacts():
     # prioritize fresh renders even if older artifacts dominate the listing.
     for page in range(1, 31):
         data = _api(f"repos/{repo}/actions/artifacts?per_page=100&page={page}")
-        batch = data.get("artifacts") or []
+        batch = data.get("artifacts") if isinstance(data, dict) else None
+        if not isinstance(batch, list):
+            print("ASTRA_ARTIFACT_INVALID_PAGE=" + str(page))
+            break
         for item in batch:
             if not isinstance(item, dict):
                 continue
@@ -65,6 +68,8 @@ def artifacts():
                     or workflow_run.get("head_branch") != "main"):
                 continue
             key = item.get("id")
+            if not isinstance(key, int) or isinstance(key, bool) or key <= 0:
+                continue
             if key in seen:
                 continue
             seen.add(key)
