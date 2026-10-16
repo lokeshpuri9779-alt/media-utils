@@ -52,3 +52,24 @@ class StoryLedgerIntegrityTests(unittest.TestCase):
         ]
         with self.assertRaisesRegex(ValueError, 'scene_state_discontinuity'):
             plan_episode('village', 4, scenes)
+
+    def test_missing_after_state_breaks_old_continuity_chain(self):
+        scenes = [
+            {'cause': 'Gate jams', 'action': 'Inspect hinge', 'consequence': 'Pin bent',
+             'state_before': 'gate jammed', 'state_after': 'pin bent'},
+            {'cause': 'Rain starts', 'action': 'Wait under roof', 'consequence': 'Rain stops'},
+            {'cause': 'Gate moves', 'action': 'Open gate', 'consequence': 'Village passes',
+             'state_before': 'gate repaired', 'state_after': 'gate open'},
+        ]
+        # No explicit transition connects scenes 1 and 3, so do not compare
+        # scene 3 against scene 1's stale after-state.
+        self.assertFalse(plan_episode('village', 5, scenes)['production_ready'])
+
+    def test_blank_explicit_state_is_rejected(self):
+        scenes = [
+            {'cause': 'Gate jams', 'action': 'Inspect hinge', 'consequence': 'Pin bent',
+             'state_before': 'gate jammed', 'state_after': ' '},
+            *SCENES[1:],
+        ]
+        with self.assertRaisesRegex(ValueError, 'invalid_scene_state_after'):
+            plan_episode('village', 6, scenes)
