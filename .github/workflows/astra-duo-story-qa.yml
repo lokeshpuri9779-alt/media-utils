@@ -30,7 +30,7 @@ permissions:
   contents: read
 jobs:
   preview:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
@@ -71,14 +71,41 @@ jobs:
           assert verdict['pass'],verdict
           print('ASTRA_DUO_FULL_RENDER_VERIFIED',p.stat().st_size)
           PY
-      - name: Verify MP4 video and audio decoding
+      - name: Verify MP4 codecs, both stream decodes, and duration metadata
+        run: |
+          set -euo pipefail
+          video='duo-preview/duo-short.mp4'
+          ffprobe -v error -show_entries stream=index,codec_type,codec_name,duration,width,height -show_entries format=duration,size -of json "$video" > duo-preview/mp4-probe.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('duo-preview/mp4-probe.json').read_text())
+          streams=d.get('streams', [])
+          video_streams=[s for s in streams if s.get('codec_type')=='video']
+          audio_streams=[s for s in streams if s.get('codec_type')=='audio']
+          assert video_streams, 'MP4 is missing a video stream'
+          assert audio_streams, 'MP4 is missing narration/audio stream'
+          v,a=video_streams[0],audio_streams[0]
+          assert v.get('codec_name')=='h264', f"Expected H.264 video, got {v.get('codec_name')}"
+          assert a.get('codec_name')=='aac', f"Expected AAC audio, got {a.get('codec_name')}"
+          assert (v.get('width'),v.get('height'))==(1080,1920), f"Unexpected frame size: {v.get('width')}x{v.get('height')}"
+          assert float(d.get('format',{}).get('duration',0))>0, 'Missing/invalid container duration'
+          assert float(a.get('duration',0) or d['format']['duration'])>0, 'Missing/invalid audio duration'
+          print('ASTRA_MP4_METADATA_OK', json.dumps({'video_codec':v['codec_name'],'audio_codec':a['codec_name'],'resolution':[v['width'],v['height']],'duration':d['format']['duration']}))
+          PY
+          ffmpeg -v error -i "$video" -map 0:v:0 -f null -
+          ffmpeg -v error -i "$video" -map 0:a:0 -f null -
+          ffmpeg -v error -i "$video" -map 0:v:0 -map 0:a:0 -f null -
+          echo 'ASTRA_DUO_MP4_BOTH_STREAMS_DECODE_OK'
+      - name: Write machine-readable render verification evidence
+        if: always()
         run: |
           python - <<'PY'
-          import subprocess
-          from imageio_ffmpeg import get_ffmpeg_exe
-          video='duo-preview/duo-short.mp4'
-          subprocess.run([get_ffmpeg_exe(),'-v','error','-i',video,'-map','0:v:0','-map','0:a:0','-f','null','-'],check=True)
-          print('ASTRA_DUO_MP4_DECODE_OK')
+          import json
+          from pathlib import Path
+          p=Path('duo-preview/mp4-probe.json')
+          report={'workflow':'ASTRA Studio Duo Story QA','mp4_probe_present':p.is_file(),'mp4_probe':json.loads(p.read_text()) if p.is_file() else None}
+          Path('duo-preview/verification-evidence.json').write_text(json.dumps(report,indent=2)+'\n')
           PY
       - name: Render all 80 authored story beats as storyboard contact sheet
         run: python -m tools.editorial_oct2026_preview
