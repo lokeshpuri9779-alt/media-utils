@@ -418,6 +418,8 @@ def draw_duo(image, shot, t):
         displacement=round((125 if action=="push" else -125)*travel)
         prop_pos=(540+displacement,1216)
     if prop and action in contact_actions:
+        # A smooth, monotonic grasp phase avoids the prop drifting back
+        # toward its staging point after contact has been established.
         grasp=_ease((max(0.0,float(t))-.15)/.9)
         actor_x=298+actor_translation(action,t,0)
         # Match the actual right-hand target used by _actor (target x - 22).
