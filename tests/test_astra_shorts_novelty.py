@@ -1,4 +1,6 @@
 import unittest
+from itertools import combinations
+from astra_v2.original_stories import catalog
 from astra_v2.shorts_novelty import similarity, is_near_duplicate
 
 
@@ -22,6 +24,14 @@ class ShortsNoveltyTests(unittest.TestCase):
 
     def test_missing_narration_does_not_match(self):
         self.assertEqual(similarity(story(""), story("")), 0.0)
+
+    def test_original_catalog_has_no_near_duplicate_pairs(self):
+        stories = catalog()
+        self.assertGreaterEqual(len(stories), 10)
+        for left, right in combinations(stories, 2):
+            with self.subTest(left=left['content_id'], right=right['content_id']):
+                self.assertFalse(is_near_duplicate(left, [right]),
+                                 f"Similarity: {similarity(left, right):.3f}")
 
     def test_invalid_threshold(self):
         with self.assertRaises(ValueError):
