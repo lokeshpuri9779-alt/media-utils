@@ -25,6 +25,15 @@ class StoryEditorialTests(unittest.TestCase):
         changed["title"] = "A completely different title"
         self.assertIn("narrative_duplicate", editorial_issues(changed, [original]))
 
+    def test_semantic_duplicate_reports_match_evidence(self):
+        first = {"content_id": "story-a", "title": "First", "story_beats": [{"speech": "A curious fox investigates a broken bridge light before winter. The fox compares the wiring with a metal part and discovers the cause."}]}
+        second = {"content_id": "story-b", "title": "Second", "story_beats": [{"speech": "A curious fox investigates a broken bridge light before winter. The fox compares the wiring with a metal part and discovers the cause, then repairs it."}]}
+        from astra_v2.story_editorial import semantic_duplicate_match
+        match = semantic_duplicate_match(second, [first])
+        self.assertIsNotNone(match)
+        self.assertEqual(match["matched_content_id"], "story-a")
+        self.assertGreaterEqual(match["similarity"], match["threshold"])
+
     def test_high_overlap_plot_is_flagged_below_old_threshold(self):
         first = {"story_beats": [{"speech": "A curious fox investigates a broken bridge light before winter. The fox compares the wiring with a metal part and discovers the cause."}]}
         second = {"story_beats": [{"speech": "A curious fox investigates a broken bridge light before winter. The fox compares the wiring with a metal part and discovers the cause, then repairs it."}]}
