@@ -91,6 +91,16 @@ INNER_CONFLICTS = (
     "The hero feared disappointing someone they admired",
     "The hero wanted to keep a promise even when plans changed",
 )
+CHARACTER_ARCS = (
+    ("feared asking for help", "decided to ask a friend for help", "realized that teamwork made them stronger"),
+    ("wanted all the credit", "publicly credited the teammate who solved the clue", "learned that sharing success felt better than winning alone"),
+    ("was afraid to admit a mistake", "admitted the mistake and corrected it", "earned trust by telling the truth"),
+    ("distrusted a newcomer", "invited the newcomer to lead the next step", "discovered that trust grows through listening"),
+    ("rushed ahead without listening", "stopped and carefully listened to the quieter teammate", "learned that patience can reveal the best answer"),
+    ("doubted their own unusual idea", "tested the idea with the group", "gained confidence through careful experimentation"),
+    ("worried about disappointing their mentor", "explained the difficult choice to their mentor", "found that integrity mattered more than approval"),
+    ("wanted to keep a promise at any cost", "changed the plan to protect everyone safely", "understood that caring for people mattered more than rigid plans"),
+)
 CHARACTER_DECISIONS = (
     "They chose to listen instead of interrupting",
     "They shared the credit instead of claiming the prize",
@@ -164,14 +174,13 @@ def genre_proposal(index, scenario_index=None, structure_index=None):
     partner = PARTNERS[(index // 5) % len(PARTNERS)]
     strategy = STRATEGIES[(index // 7) % len(STRATEGIES)]
     payoff_style = PAYOFF_STYLES[(index // 11) % len(PAYOFF_STYLES)]
-    inner_conflict = INNER_CONFLICTS[(index // 19) % len(INNER_CONFLICTS)]
-    character_decision = CHARACTER_DECISIONS[(index // 23) % len(CHARACTER_DECISIONS)]
+    arc_problem, arc_choice, arc_growth = CHARACTER_ARCS[(index // 19) % len(CHARACTER_ARCS)]
     structure_id, opening, middle, ending = NARRATIVE_STRUCTURES[((index // 13) if structure_index is None else structure_index) % len(NARRATIVE_STRUCTURES)]
     beats = [
-        ("reveal", f"At {setting}, {hero} encountered {problem}. Everyone stopped what they were doing. The hero {motivation} and teamed up with {partner}. {opening} {inner_conflict}.", visual),
-        ("build", f"The hero tried a simple solution, but it did not work. {complication}. {strategy}. {character_decision}. {middle}", "book"),
+        ("reveal", f"At {setting}, {hero} encountered {problem}. Everyone stopped what they were doing. The hero {motivation} and teamed up with {partner}. {opening} The hero {arc_problem}.", visual),
+        ("build", f"The hero tried a simple solution, but it did not work. {complication}. {strategy}. The hero {arc_choice}. {middle}", "book"),
         ("twist", f"The overlooked detail explained everything: {reveal}. The group realized that the original problem had a different cause than they first assumed. They tested the explanation before acting.", visual),
-        ("payoff", f"With the mystery understood, the hero {solution}. {ending} {lesson}. {payoff_style}.", visual),
+        ("payoff", f"With the mystery understood, the hero {solution}. {ending} The hero {arc_growth}. {payoff_style}.", visual),
     ]
     narration = " ".join(speech for _, speech, _ in beats).casefold()
     return {
@@ -179,6 +188,7 @@ def genre_proposal(index, scenario_index=None, structure_index=None):
         "title": f"{genre.title()}: {problem.title()}",
         "genre": genre,
         "plot_structure": structure_id,
+        "character_arc_id": arc_problem,
         "premise_id": f"{genre}:{problem}",
         "outcome_id": solution,
         "kind": "unreviewed_causal_draft",
