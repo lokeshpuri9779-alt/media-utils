@@ -5,6 +5,8 @@ supply the ledger path and explicitly persist fingerprints after their own
 lifecycle decision. Corrupt ledgers fail closed rather than being overwritten.
 """
 import json
+import fcntl
+import contextlib
 import os
 import tempfile
 from pathlib import Path
@@ -32,15 +34,34 @@ def read_ledger(path):
     return {"version": 1, "archived": sorted(set(archived))}
 
 
+@contextlib.contextmanager
+def _exclusive_archive_lock(target):
+    """Serialize read/merge/write across cooperating POSIX processes."""
+    target.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        with (target.parent / (target.name + ".lock")).open("a+b") as lock:
+            fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
+            try:
+                yield
+            finally:
+                fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
+    except OSError as exc:
+        raise StoryLedgerError("story_ledger_lock_failed") from exc
+
+
 def archive_fingerprints(path, fingerprints):
     """Atomically add valid SHA-256 fingerprints; never remove prior entries."""
     additions = list(fingerprints)
     if any(not isinstance(fp, str) or len(fp) != 64 or any(c not in "0123456789abcdef" for c in fp) for fp in additions):
         raise StoryLedgerError("story_ledger_invalid_fingerprint")
     target = Path(path)
+    with _exclusive_archive_lock(target):
+        return _archive_fingerprints_locked(target, additions)
+
+
+def _archive_fingerprints_locked(target, additions):
     current = read_ledger(target)
     merged = sorted(set(current["archived"]).union(additions))
-    target.parent.mkdir(parents=True, exist_ok=True)
     fd, temporary = tempfile.mkstemp(prefix=target.name + ".", suffix=".tmp", dir=str(target.parent))
     try:
         with os.fdopen(fd, "w", encoding="utf-8") as stream:
