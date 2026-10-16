@@ -1,4 +1,5 @@
 import json
+import hashlib
 import tempfile
 import unittest
 from pathlib import Path
@@ -28,6 +29,8 @@ class StoryArchiveRehearsalTests(unittest.TestCase):
             self.assertFalse(result["historical_coverage_complete"])
             self.assertEqual(result["coverage"]["missing"], 1)
             self.assertEqual(result["archived_count"], 2)
+            self.assertEqual(result["source_state_sha256"], hashlib.sha256(before_state).hexdigest())
+            self.assertEqual(result["source_archive_sha256"], hashlib.sha256(before_archive).hexdigest())
             self.assertEqual(state.read_bytes(), before_state)
             self.assertEqual(archive.read_bytes(), before_archive)
 
