@@ -210,6 +210,13 @@ jobs:
           # Never infer or fabricate character identities from a video.
           # Until the approved generator supplies both manifests, do nothing.
           first = Path('runtime-health/character-first-candidate.json')
+          print('ASTRA_CHARACTER_MANIFESTS=' + json.dumps({
+              'first_candidate': first.is_file(),
+              'proposal': proposal.is_file(),
+              'episode': episode.is_file(),
+              'snapshot': snapshot.is_file(),
+              'report': report.is_file(),
+          }, sort_keys=True))
           if first.is_file() and report.is_file():
               from astra_v2.first_published_character import apply_first_published_episode
               from astra_v2.character_snapshot import read_snapshot
