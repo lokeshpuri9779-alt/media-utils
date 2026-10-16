@@ -53,6 +53,17 @@ def select_subject(story, shot):
     local_matches = [(m.start(), name) for name, pattern in SUBJECTS
                      if (m := re.search(pattern, local))]
     local_matches.sort()
+    # Prioritize the physical subject explicitly named in visual intent.
+    # This avoids a generic background cue winning over the storyboard actor.
+    directed = str(shot.get("visual_intent") or "").lower()
+    directed_matches = [(m.start(), name) for name, pattern in SUBJECTS
+                        if (m := re.search(pattern, directed))]
+    directed_matches.sort()
+    if directed_matches:
+        directed_characters = [name for _, name in directed_matches if name in characters]
+        if directed_characters:
+            return directed_characters[0]
+        return directed_matches[0][1]
     local_characters = [name for _, name in local_matches if name in characters]
     if local_characters:
         return local_characters[0]
