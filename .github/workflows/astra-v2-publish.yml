@@ -209,7 +209,31 @@ jobs:
           report = Path('runtime-health/astra-v2-report.json')
           # Never infer or fabricate character identities from a video.
           # Until the approved generator supplies both manifests, do nothing.
-          if not (snapshot.is_file() and proposal.is_file() and episode.is_file() and report.is_file()):
+          first = Path('runtime-health/character-first-candidate.json')
+          if first.is_file() and report.is_file():
+              from astra_v2.first_published_character import apply_first_published_episode
+              from astra_v2.character_snapshot import read_snapshot
+              import os
+              import tempfile
+              candidate = json.loads(first.read_text(encoding='utf-8'))
+              publication = json.loads(report.read_text(encoding='utf-8'))
+              if publication.get('outcome') == 'published':
+                  existing = read_snapshot(snapshot) if snapshot.is_file() else {'version': 1, 'characters': {}}
+                  updated = apply_first_published_episode(existing, candidate, publication)
+                  fd, temp = tempfile.mkstemp(prefix='.astra-character-', dir=snapshot.parent)
+                  try:
+                      with os.fdopen(fd, 'w', encoding='utf-8') as handle:
+                          json.dump(updated, handle, indent=2, sort_keys=True)
+                          handle.flush()
+                          os.fsync(handle.fileno())
+                      os.replace(temp, snapshot)
+                  finally:
+                      if os.path.exists(temp):
+                          os.unlink(temp)
+                  print('ASTRA_CHARACTER_MEMORY=first_episode_persisted')
+              else:
+                  print('ASTRA_CHARACTER_MEMORY=skipped_unconfirmed_first_episode')
+          elif not (snapshot.is_file() and proposal.is_file() and episode.is_file() and report.is_file()):
               print('ASTRA_CHARACTER_MEMORY=skipped_missing_verified_inputs')
           else:
               publication = json.loads(report.read_text(encoding='utf-8'))
