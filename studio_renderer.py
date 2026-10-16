@@ -423,7 +423,7 @@ def make_plan(ch):
                     # The narration and visual prompt can introduce a new
                     # species after the opening beat. Do not invent it earlier.
                     newly_named = cast_from_title(" ".join(str(shot.get(k) or "")
-                                     for k in ("speech", "visual_prompt", "action")))
+                                     for k in ("visual_intent", "speech", "visual_prompt", "action")))
                     for animal in newly_named:
                         if animal not in progressive_cast:
                             progressive_cast.append(animal)
