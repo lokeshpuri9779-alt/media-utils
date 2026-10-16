@@ -102,3 +102,20 @@ class DurableStoryLedgerTests(unittest.TestCase):
             with ThreadPoolExecutor(max_workers=8) as pool:
                 list(pool.map(lambda fp: archive_fingerprints(path, [fp]), fingerprints))
             self.assertEqual(set(read_ledger(path)["archived"]), set(fingerprints))
+
+    def test_publisher_record_identity_roundtrip_blocks_reuse(self):
+        from astra_v2.episode_planner import plan_episode, plan_episode_with_ledger
+
+        scenes = [
+            {"cause": "Bell cracks", "action": "Find brass", "consequence": "Metal acquired"},
+            {"cause": "Metal acquired", "action": "Repair bell", "consequence": "Bell rings"},
+            {"cause": "Bell rings", "action": "Call neighbors", "consequence": "Town gathers"},
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "story-ledger.json"
+            proposal = plan_episode("bell-town", 1, scenes)
+            publisher_record = {"content_id": "episode-1", "plot_fingerprint": proposal["plot_fingerprint"]}
+            archive_lifecycle_record(path, publisher_record, "published")
+            with self.assertRaisesRegex(ValueError, "already_used"):
+                plan_episode_with_ledger("bell-town", 2, scenes, path)
+            self.assertFalse(proposal["production_ready"])
