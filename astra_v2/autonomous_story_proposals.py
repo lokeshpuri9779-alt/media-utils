@@ -75,6 +75,36 @@ EMOTIONAL_TURNS = (
 )
 VISUALS = ("bell", "bridge", "waterwheel", "signal", "map", "door", "telescope", "river",
            "statue", "lighthouse", "snow", "clock", "lantern", "ship", "garden", "book")
+INVESTIGATION_METHODS = (
+    "tested the pattern against a hand-drawn timeline",
+    "reconstructed the mechanism from its worn parts",
+    "compared witness accounts taken separately",
+    "tracked the signal across three locations",
+    "built a small safe model to test the theory",
+    "checked the clue against weather and tide records",
+    "followed the sound to its physical source",
+    "mapped which events happened before each failure",
+)
+OBSTACLES = (
+    "a sudden power cut interrupted the first test",
+    "two witnesses remembered the event differently",
+    "the clue was damaged by rain before it could be copied",
+    "the safest route was blocked by a fallen tree",
+    "the first explanation failed a simple repeat test",
+    "a ticking timer left only minutes to compare the evidence",
+    "the team had to work without disturbing nesting animals",
+    "the useful part was hidden inside an ordinary object",
+)
+CONSEQUENCES = (
+    "and prevented the next scheduled outage",
+    "while keeping the evacuation route open",
+    "without wasting the town limited supplies",
+    "and made the result easy for children to verify",
+    "before the weather changed again",
+    "while protecting the fragile original clue",
+    "and left a practical check for future caretakers",
+    "without blaming anyone before the evidence was clear",
+)
 
 
 def _pick(index, values, stride):
@@ -95,15 +125,18 @@ def proposal(index):
     reversal = _pick(index, REVERSALS, 31)
     resolution = _pick(index, RESOLUTIONS, 37)
     emotional = _pick(index, EMOTIONAL_TURNS, 43)
+    method = _pick(index, INVESTIGATION_METHODS, 47)
+    obstacle = _pick(index, OBSTACLES, 53)
+    consequence = _pick(index, CONSEQUENCES, 59)
     # The dimensions rotate at different strides; this produces a large
     # deterministic combination space without claiming every draft is unique.
     # Use compact, searchable story titles rather than generic inventory labels.
     title = f"The {visual.capitalize()} Mystery of the {setting.split()[-1].capitalize()}"
     beats = (
         ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}, {stakes}. If the cause stayed hidden, the neighbors would not know which route or system was safe to use.", visual),
-        ("build", f"Instead of guessing, {actor} compared {clue} with {discovery}; {emotional}. The details matched the timing of the first warning, giving the investigation a testable explanation rather than another suspicion.", "book"),
+        ("build", f"Instead of guessing, {actor} compared {clue} with {discovery}; {emotional}. {method}, but {obstacle}. The details matched the timing of the first warning, giving the investigation a testable explanation rather than another suspicion.", "book"),
         ("twist", f"The comparison showed that {reversal}. This explained the original mystery rather than introducing a new one. {actor} checked the clue again and found that it fit the evidence gathered at the start.", clue if clue in VISUALS else "signal"),
-        ("payoff", f"With the cause understood, {actor} {resolution}. The community saw how the evidence led to the solution, and the team recorded what they learned so the same problem could be recognized earlier next time.", _pick(index, VISUALS, 3)),
+        ("payoff", f"With the cause understood, {actor} {resolution}. The community saw how the evidence led to the solution {consequence}. The team recorded what they learned so the same problem could be recognized earlier next time.", _pick(index, VISUALS, 3)),
     )
     fingerprint_text = " ".join(beat[1] for beat in beats).casefold()
     return {
@@ -188,4 +221,5 @@ if __name__ == "__main__":
     from astra_v2.proposal_history import load_history
     print("ASTRA_NEW_UNREVIEWED_PROPOSALS=" + str(replenish(
         os.getenv("ASTRA_PROPOSAL_LEDGER", "runtime-health/story_proposals.json"),
+        count=int(os.getenv("ASTRA_PROPOSAL_BATCH", "24")),
         history=load_history())))
