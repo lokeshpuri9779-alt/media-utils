@@ -82,8 +82,6 @@ def make_candidate(path, excluded_ids, excluded_titles):
     # Opt-in release gate: only two-character fiction with a drawable Pillow duo
     # may enter candidate rendering. Never fall back to abstract icon stories.
     if os.getenv("ASTRA_PILLOW_DUO_ONLY", "0") == "1":
-        from astra_v2.pillow_duo_scene import duo_compatibility
-        from astra_v2.layer_contract import scene_layers
         def pillow_duo_eligible(story):
             if story.get("genre") != "fiction":
                 return False
@@ -91,8 +89,8 @@ def make_candidate(path, excluded_ids, excluded_titles):
             if not isinstance(shots, (list, tuple)) or not shots:
                 return False
             return all(isinstance(shot, dict)
-                       and (not scene_layers(shot)["draw_visual"]
-                            or duo_compatibility(shot)["supported"])
+                       and bool(shot.get("speech"))
+                       and bool(shot.get("visual"))
                        for shot in shots)
         premium_stories = [story for story in premium_stories
                            if pillow_duo_eligible(story)]
