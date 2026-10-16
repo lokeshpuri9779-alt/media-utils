@@ -15,6 +15,18 @@ class StorySubjectDiversityTests(unittest.TestCase):
         shot = {"visual": "spaceship", "speech": "The dog ran through the ship."}
         self.assertEqual(select_subject(story, shot), "dog")
 
+    def test_directed_scene_subject_overrides_background_cue(self):
+        story = {"title": "The Garden on the Moon"}
+        shot = {"speech": "The forest was silent.", "visual": "forest",
+                "visual_intent": "A repair robot fixes a broken bridge."}
+        self.assertEqual(select_subject(story, shot), "robot")
+
+    def test_directed_setting_is_respected(self):
+        story = {"title": "The Seed from Saturn"}
+        shot = {"speech": "A tree grows beside the station.", "visual": "forest",
+                "visual_intent": "A lunar surface under the moon."}
+        self.assertEqual(select_subject(story, shot), "moon")
+
     def test_generic_visual_can_inherit_title_subject(self):
         story = {"title": "The Cat and the Moon"}
         self.assertEqual(select_subject(story, {"visual": "story"}), "cat")
