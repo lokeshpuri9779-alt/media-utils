@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-16",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 28,
+  "attempts": 29,
   "confirmed_today": 28,
-  "last_attempt_at": "2026-10-16T17:42:27.434478+00:00",
+  "last_attempt_at": "2026-10-16T17:57:23.409829+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1605,28 +1605,55 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-16T17:43:16.094342+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "Fv-Nqm2Kork": {
+      "content_id": "rayvan-original-clockseed-v1",
+      "title": "The Seed Inside the Clock",
+      "day": "2026-10-16",
+      "uploaded_at": "2026-10-16T17:57:25.125424+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "e512e71df41320f4ac156a42362d11c2a2db8e50039d24b4b0a996a484639ec6",
+      "story_beats": [
+        {
+          "speech": "A watchmaker found a green shoot growing through the hands of his oldest clock."
+        },
+        {
+          "speech": "Whenever he wound the clock, another leaf opened."
+        },
+        {
+          "speech": "The leaves showed a forgotten garden buried beneath the town square."
+        },
+        {
+          "speech": "He uncovered the garden, and the town clock began to ring again."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-16T17:56:37.024656+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-16T17:43:16.594927+00:00",
+    "at": "2026-10-16T17:57:25.342090+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-16T08:06:44.296862+00:00",
   "reserved": {
@@ -3201,6 +3228,29 @@
         },
         {
           "speech": "The repaired cloud rained gently, and the orchard filled with blossoms."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-original-clockseed-v1": {
+      "at": "2026-10-16T17:57:23.409812+00:00",
+      "title": "The Seed Inside the Clock",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "e512e71df41320f4ac156a42362d11c2a2db8e50039d24b4b0a996a484639ec6",
+      "story_beats": [
+        {
+          "speech": "A watchmaker found a green shoot growing through the hands of his oldest clock."
+        },
+        {
+          "speech": "Whenever he wound the clock, another leaf opened."
+        },
+        {
+          "speech": "The leaves showed a forgotten garden buried beneath the town square."
+        },
+        {
+          "speech": "He uncovered the garden, and the town clock began to ring again."
         }
       ],
       "renderer": "studio-7.3.0",
