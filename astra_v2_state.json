@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 8,
-  "confirmed_today": 7,
-  "last_attempt_at": "2026-10-16T22:41:36.797417+00:00",
+  "attempts": 9,
+  "confirmed_today": 8,
+  "last_attempt_at": "2026-10-16T22:47:43.753811+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1683,30 +1683,38 @@
       "format": "short",
       "uploaded_at": "2026-10-16T22:09:22.213909+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-original-pocketvolcano-v1": {
+      "video_id": "XDasaMGzu6M",
+      "confirmed_at": "2026-10-16T22:47:04.187105+00:00",
+      "title": "The Volcano in a Teacup",
+      "format": "short",
+      "uploaded_at": "2026-10-16T22:41:38.612744+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "XDasaMGzu6M": {
-      "content_id": "rayvan-original-pocketvolcano-v1",
-      "title": "The Volcano in a Teacup",
+    "Ev526DE8bjk": {
+      "content_id": "rayvan-original-desertwell-v1",
+      "title": "The Well That Remembered Rain",
       "day": "2026-10-17",
-      "uploaded_at": "2026-10-16T22:41:38.612744+00:00",
+      "uploaded_at": "2026-10-16T22:47:45.235991+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "2be69388e42713d9ac8598bd381e32af7aa285aabc86b25e9a7448daa9376323",
+      "plot_fingerprint": "094772fae9f2d39e3a67ea75a496d46f79b843eff1731087ad2a85b7af7eeda8",
       "story_beats": [
         {
-          "speech": "A potter found a teacup that rumbled and glowed like a tiny volcano."
+          "speech": "A young engineer heard thunder from a dry well beneath the desert square."
         },
         {
-          "speech": "A sudden frost covered the village while the teacup grew hotter on the kiln shelf."
+          "speech": "She found old marks leading from the well toward dunes beyond the village."
         },
         {
-          "speech": "The potter shaped a clay channel that carried the cup's gentle warmth beneath the streets."
+          "speech": "Digging at the final mark revealed a blocked channel that once carried rainwater underground."
         },
         {
-          "speech": "The village thawed safely, and the tiny volcano settled into a quiet red ember."
+          "speech": "The villagers cleared the channel and the next storm filled their well instead of flooding the road."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -1714,11 +1722,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-16T22:40:31.711827+00:00",
+  "last_preflight_at": "2026-10-16T22:47:03.857010+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-16T22:41:38.833415+00:00",
+    "at": "2026-10-16T22:47:45.503028+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -3561,6 +3569,29 @@
         },
         {
           "speech": "The village thawed safely, and the tiny volcano settled into a quiet red ember."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-original-desertwell-v1": {
+      "at": "2026-10-16T22:47:43.753795+00:00",
+      "title": "The Well That Remembered Rain",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "094772fae9f2d39e3a67ea75a496d46f79b843eff1731087ad2a85b7af7eeda8",
+      "story_beats": [
+        {
+          "speech": "A young engineer heard thunder from a dry well beneath the desert square."
+        },
+        {
+          "speech": "She found old marks leading from the well toward dunes beyond the village."
+        },
+        {
+          "speech": "Digging at the final mark revealed a blocked channel that once carried rainwater underground."
+        },
+        {
+          "speech": "The villagers cleared the channel and the next storm filled their well instead of flooding the road."
         }
       ],
       "renderer": "studio-7.3.0",
