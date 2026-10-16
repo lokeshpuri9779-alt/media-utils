@@ -189,11 +189,11 @@ def draw_story_stage(d, shot, t):
 
 def actor_translation(action, t, index):
     """Body translation is separate from limb gait, not global camera movement."""
-    if action not in ("run","walk","chase","sneak","swim"):
+    if action not in ("run","walk","chase","sneak","swim","carry"):
         return 0
-    amplitude = {"run":85,"walk":44,"chase":155,"sneak":32,"swim":65}[action]
+    amplitude = {"run":85,"walk":44,"chase":155,"sneak":32,"swim":65,"carry":62}[action]
     elapsed=max(0.0,min(float(t),2.4))/2.4
-    follow=(.2 if action=="chase" else .55) if index else 1.0
+    follow=(1.0 if action=="carry" else .2 if action=="chase" else .55) if index else 1.0
     return int(amplitude*elapsed*follow)
 
 
