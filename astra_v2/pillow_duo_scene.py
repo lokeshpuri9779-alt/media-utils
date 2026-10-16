@@ -209,12 +209,16 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
     if visual_recipe:
         fur=_blend(fur, visual_recipe["fur"], .12 if name in ("fox","rabbit") else .27)
     stride=math.sin(t*(8.4 if action in ("run","chase") else 3.4 if action=="sneak" else 4.6)+idx*math.pi)
-    gait=int((51 if action=="chase" else 21 if action=="sneak" else 43)*stride) if action in ("walk","run","chase","sneak") else 0
+    gait=int((51 if action=="chase" else 21 if action=="sneak" else 43)*stride) if action in ("walk","run","chase","sneak","dance") else 0
     if action=="swim":
         gait=int(25*math.sin(t*6.0+idx*math.pi))
+    if action=="dance":
+        gait=int(34*math.sin(t*6.2+idx*math.pi))
     bob=(int(26*abs(math.sin(t*5+idx))) if action=="jump" else
          int(17*math.sin(t*4.2+idx)) if action=="swim" else
          int(6*math.sin(t*2+idx)))
+    if action=="dance":
+        bob=int(18*abs(math.sin(t*6.2+idx*math.pi)))
     y-=bob
     # Ground shadows, tails and articulated legs behind costume.
     # Studio draws actors directly at 1080p, while the experimental ensemble
@@ -255,6 +259,8 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
         shoulder=(x+side*87,y+150)
         wave=action in ("wave","warn","throw","point") and side==1
         arm_raise=80*abs(math.sin(t*4.5+idx)) if wave else 0
+        if action=="dance":
+            arm_raise=45+48*math.sin(t*6.2+idx*math.pi+(0 if side==1 else math.pi))
         if action=="swim":
             arm_raise=45*math.sin(t*7+idx*math.pi+(0 if side==1 else math.pi))
         hand=(x+side*153,y+218-arm_raise)
