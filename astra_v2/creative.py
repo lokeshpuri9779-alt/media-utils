@@ -41,6 +41,19 @@ def script_duration_preflight(story, minimum_words=0):
     return True
 
 
+def publisher_history_ids(state):
+    """Reserve all publisher identities, including unconfirmed pending uploads."""
+    ids = set()
+    for bucket in ("published", "pending", "reserved"):
+        records = state.get(bucket, {})
+        if not isinstance(records, dict):
+            raise ValueError("Invalid publisher history: " + bucket)
+        ids.update(str(cid) for cid in records)
+        ids.update(str(record["content_id"]) for record in records.values()
+                   if isinstance(record, dict) and record.get("content_id"))
+    return ids
+
+
 def make_candidate(path, excluded_ids, excluded_titles):
     import cloud_once as legacy
     from ypp_safety import enforce
@@ -111,14 +124,13 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 published = history.get("published", {})
                 if not isinstance(published, dict):
                     raise ValueError("Invalid publisher history")
-                history_ids.update(str(cid) for cid in published)
+                history_ids.update(publisher_history_ids(history))
                 # Pending and reserved uploads are also unsafe to reuse:
                 # the remote upload may have succeeded before local confirmation.
                 pending = history.get("pending", {})
                 reserved = history.get("reserved", {})
                 if not isinstance(pending, dict) or not isinstance(reserved, dict):
                     raise ValueError("Invalid pending or reserved history")
-                history_ids.update(str(cid) for cid in reserved)
                 records = list(published.values()) + list(pending.values()) + list(reserved.values())
             else:
                 records = history.get("stories", []) if isinstance(history, dict) else history
