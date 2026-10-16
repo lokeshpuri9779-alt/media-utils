@@ -279,3 +279,17 @@ class DurableStoryLedgerTests(unittest.TestCase):
             with self.assertRaisesRegex(StoryLedgerError, "fingerprint_conflict"):
                 archive_committed_state(path, state)
             self.assertEqual(read_ledger(path)["archived"], [FP_A])
+
+    def test_migration_readiness_audit_reports_legacy_gaps_without_writes(self):
+        from astra_v2.story_ledger import audit_committed_state
+        state = {"reserved": {"r": {"plot_fingerprint": FP_A}},
+                 "pending": {"p": {"plot_fingerprint": ""}},
+                 "published": {"v": {"plot_fingerprint": FP_B, "plot_hash": FP_A}},
+                 "drafts": {"d": {"plot_fingerprint": FP_A}}}
+        result = audit_committed_state(state)
+        self.assertEqual(result["records"], 3)
+        self.assertEqual(result["valid"], 1)
+        self.assertEqual(result["missing"], 1)
+        self.assertEqual(result["conflicting"], 1)
+        self.assertFalse(result["ready"])
+        self.assertEqual(state["pending"]["p"]["plot_fingerprint"], "")
