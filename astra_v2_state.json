@@ -3,7 +3,7 @@
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 2,
-  "confirmed_today": 1,
+  "confirmed_today": 2,
   "last_attempt_at": "2026-10-16T19:08:57.495347+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -1635,57 +1635,38 @@
       "format": "short",
       "uploaded_at": "2026-10-16T18:33:27.860188+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "Sl1uZRDsp8A": {
-      "content_id": "rayvan-original-submarinestar-v1",
+    },
+    "rayvan-original-submarinestar-v1": {
+      "video_id": "Sl1uZRDsp8A",
+      "confirmed_at": "2026-10-16T19:12:26.846501+00:00",
       "title": "The Star Beneath the Sea",
-      "day": "2026-10-17",
-      "uploaded_at": "2026-10-16T19:08:59.372663+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "ab67a41b22d1edbc412cb084bfb34c3d18f23c0cf9c1c60d172db438778dd9a2",
-      "story_beats": [
-        {
-          "speech": "A submarine crew spotted a tiny star shining on the ocean floor."
-        },
-        {
-          "speech": "The star drifted toward a canyon where their instruments stopped working."
-        },
-        {
-          "speech": "Inside its glow they found a beacon from a ship lost decades earlier."
-        },
-        {
-          "speech": "They followed its light through the canyon and guided another lost vessel home."
-        }
-      ],
+      "uploaded_at": "2026-10-16T19:08:59.372663+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-16T19:08:07.681337+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-16T19:12:25.867704+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-16T19:08:59.584979+00:00",
+    "at": "2026-10-16T19:12:26.911883+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-16T08:06:44.296862+00:00",
   "reserved": {
