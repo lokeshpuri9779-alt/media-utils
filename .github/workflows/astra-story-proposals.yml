@@ -49,6 +49,8 @@ jobs:
           python -m unittest discover -s tests -p test_astra_proposal_history.py -v
       - name: Triage proposals without granting publication approval
         run: python -m astra_v2.story_editorial_report
+      - name: Audit production eligibility without promotion
+        run: python -m astra_v2.story_supply_review
       - name: Store unreviewed proposal ledger
         uses: actions/upload-artifact@v4
         with:
@@ -56,5 +58,6 @@ jobs:
           path: |
             runtime-health/story_proposals.json
             runtime-health/story_editorial_report.json
+            runtime-health/story_supply_review.json
           if-no-files-found: error
           retention-days: 90
