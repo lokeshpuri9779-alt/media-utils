@@ -964,6 +964,8 @@ def propose_episode_from_story(story, series_id, episode_number, state=None, led
             "consequence": str(beat.get("label") or "Next scene").strip(),
         })
     source_fingerprint = story.get("plot_fingerprint")
+    if not source_fingerprint:
+        raise ValueError("episode_source_fingerprint_required")
     if ledger_path is None:
         proposal = plan_episode(series_id, episode_number, scenes, state=state,
                                 source_plot_fingerprint=source_fingerprint)
