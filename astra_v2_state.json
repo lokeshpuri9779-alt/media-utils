@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 5,
+  "attempts": 6,
   "confirmed_today": 5,
-  "last_attempt_at": "2026-10-16T21:38:42.822575+00:00",
+  "last_attempt_at": "2026-10-16T21:45:42.614033+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1669,28 +1669,55 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-16T21:43:14.619173+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "RsqhuNxo8lE": {
+      "content_id": "rayvan-original-starcartographer-v1",
+      "title": "The Cartographer of Falling Stars",
+      "day": "2026-10-17",
+      "uploaded_at": "2026-10-16T21:45:43.973523+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "aaf05de1f71e029e72119b095cbba4c7027b0ccbd91e94f52e0225e43e854abc",
+      "story_beats": [
+        {
+          "speech": "A mapmaker found glowing stones falling onto the hills in a repeating pattern."
+        },
+        {
+          "speech": "Each new stone marked a turn across the mountain pass that no map recorded."
+        },
+        {
+          "speech": "At the pass she saw a flock of sky creatures unable to cross the stormy ridge."
+        },
+        {
+          "speech": "She mapped the glowing trail and the flock followed it safely beyond the mountains."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-16T21:45:10.998357+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-16T21:43:15.199818+00:00",
+    "at": "2026-10-16T21:45:44.181712+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-16T20:08:22.753942+00:00",
   "reserved": {
@@ -3449,6 +3476,29 @@
         },
         {
           "speech": "When the bell rang, the firefly lit a safe path for every traveler crossing the marsh."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-original-starcartographer-v1": {
+      "at": "2026-10-16T21:45:42.614019+00:00",
+      "title": "The Cartographer of Falling Stars",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "aaf05de1f71e029e72119b095cbba4c7027b0ccbd91e94f52e0225e43e854abc",
+      "story_beats": [
+        {
+          "speech": "A mapmaker found glowing stones falling onto the hills in a repeating pattern."
+        },
+        {
+          "speech": "Each new stone marked a turn across the mountain pass that no map recorded."
+        },
+        {
+          "speech": "At the pass she saw a flock of sky creatures unable to cross the stormy ridge."
+        },
+        {
+          "speech": "She mapped the glowing trail and the flock followed it safely beyond the mountains."
         }
       ],
       "renderer": "studio-7.3.0",
