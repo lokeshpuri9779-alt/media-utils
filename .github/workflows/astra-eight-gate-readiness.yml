@@ -1,0 +1,39 @@
+name: ASTRA - Eight Gate Production Readiness
+
+on:
+  pull_request:
+    paths:
+      - 'astra_v2/production_readiness.py'
+      - 'tests/test_astra_production_readiness.py'
+      - '.github/workflows/astra-eight-gate-readiness.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '43 */6 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'astra_v2/production_readiness.py'
+      - 'tests/test_astra_production_readiness.py'
+
+permissions:
+  contents: read
+
+jobs:
+  readiness:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run fail-closed readiness regression tests
+        run: python -m unittest discover -s tests -p test_astra_production_readiness.py -v
+      - name: Generate eight-gate readiness report
+        run: python -m astra_v2.production_readiness
+      - name: Archive readiness report
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-eight-gate-readiness
+          path: runtime-health/production_readiness.json
+          retention-days: 30
