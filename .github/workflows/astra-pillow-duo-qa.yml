@@ -149,12 +149,23 @@ jobs:
               # for the entire transfer.
               cat_holding=32<=i<50
               squirrel_holding=i>=48
+              def smoothstep(v):
+                  v=max(0.0,min(1.0,v))
+                  return v*v*(3-2*v)
+              # Blend wrist targets in/out instead of instantly attaching
+              # and detaching hands at the possession boundaries.
+              cat_strength=(smoothstep((i-32)/6) *
+                            (1-smoothstep((i-48)/6))) if cat_holding or 48<=i<54 else 0
+              squirrel_strength=smoothstep((i-46)/8) if i>=46 else 0
+              # A small celebratory wave follows the received object.
+              if i>=62:
+                  squirrel_action='wave'
               _actor(d,'cat',left_x,760,t,cat_action,'happy',0,
-                     hand_target=(px,py) if cat_holding else None,
-                     interact_side=1,ground_y=1190)
+                     hand_target=(px,py) if cat_strength>0 else None,
+                     hand_strength=cat_strength,interact_side=1,ground_y=1190)
               _actor(d,'squirrel',right_x,760,t,squirrel_action,'happy',1,
-                     hand_target=(px,py) if squirrel_holding else None,
-                     interact_side=-1,ground_y=1190)
+                     hand_target=(px,py) if squirrel_strength>0 else None,
+                     hand_strength=squirrel_strength,interact_side=-1,ground_y=1190)
               # Draw the prop after the arms so the contact remains legible.
               d.ellipse((px-27,py-27,px+27,py+27),
                         fill=(248,195,79),outline=(25,42,58),width=5)
