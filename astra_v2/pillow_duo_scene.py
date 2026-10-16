@@ -233,6 +233,9 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
     if action=="dance":
         bob=int(18*abs(math.sin(t*6.2+idx*math.pi)))
     y-=bob
+    # Keep feet in world-space contact while the torso subtly bobs.
+    # The torso/head use the animated y; leg endpoints use the unbobbed base.
+    leg_y=y+bob
     # Ground shadows, tails and articulated legs behind costume.
     # Studio draws actors directly at 1080p, while the experimental ensemble
     # draws them into local transparent sprites. Ground shadows must use the
@@ -254,11 +257,11 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
         # at ground height through the opposite half of the stride.
         lift=(int(24*max(0.0,side*stride)) if action in
               ("walk","run","chase","sneak","carry") else abs(step)//5)
-        _line(d,[(sx,y+285),(sx+step//2,y+342-lift//2),
-                 (sx+step,y+406-lift)],fur,28)
+        _line(d,[(sx,leg_y+285),(sx+step//2,leg_y+342-lift//2),
+                 (sx+step,leg_y+406-lift)],fur,28)
         shoe=(82,181,179) if idx==0 else (177,143,212)
-        d.ellipse((sx+step-32,y+394-lift,
-                   sx+step+32,y+421-lift),fill=shoe)
+        d.ellipse((sx+step-32,leg_y+394-lift,
+                   sx+step+32,leg_y+421-lift),fill=shoe)
     costume=(visual_recipe["fabric"] if visual_recipe else
              (60,151,159) if idx==0 else (139,113,178))
     d.rounded_rectangle((x-102,y+102,x+102,y+309),radius=50,
