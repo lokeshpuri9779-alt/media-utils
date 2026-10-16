@@ -190,6 +190,67 @@ jobs:
           subprocess.run([get_ffmpeg_exe(),'-v','error','-i',path,'-f','null','-'],check=True)
           print('Verified decoded interaction MP4:',path)
           PY
+      - name: Render 24-second three-scene story QA
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageDraw, ImageFont
+          from astra_v2.pillow_duo_scene import _actor
+          from imageio_ffmpeg import get_ffmpeg_exe
+          import subprocess, math
+          path='preview/astra-24s-story-qa.mp4'
+          ff=get_ffmpeg_exe()
+          cmd=[ff,'-hide_banner','-loglevel','error','-y','-f','rawvideo',
+               '-pix_fmt','rgb24','-s','1080x1920','-r','6','-i','-',
+               '-c:v','libx264','-preset','ultrafast','-pix_fmt','yuv420p',path]
+          proc=subprocess.Popen(cmd,stdin=subprocess.PIPE)
+          font=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',47)
+          captions=('A squirrel lost its golden treasure.',
+                    'A kind cat helped find it.',
+                    'Together, they celebrated!')
+          for i in range(144):
+              t=i/6
+              scene=min(2,i//48)
+              colors=((214,235,248),(238,224,191),(217,236,221))
+              im=Image.new('RGB',(1080,1920),colors[scene])
+              d=ImageDraw.Draw(im)
+              d.ellipse((730,175,920,365),fill=(255,227,150))
+              d.ellipse((-150,720,620,1270),fill=(145,198,170))
+              d.ellipse((490,750,1250,1240),fill=(116,178,150))
+              d.rectangle((0,1160,1080,1920),fill=(105,162,126))
+              for tx in (95,990):
+                  d.rectangle((tx-18,760,tx+18,1170),fill=(116,86,65))
+                  d.ellipse((tx-105,650,tx+105,920),fill=(65,145,101))
+              if scene==0:
+                  cx,sx=330,740
+                  ca,sa='look','warn'
+                  px,py=545,1100
+              elif scene==1:
+                  progress=(i-48)/47
+                  cx=330+int(60*progress)
+                  sx=740-int(60*progress)
+                  ca,sa='walk','wave'
+                  px,py=545,1100-int(180*progress)
+              else:
+                  cx,sx=390,670
+                  ca,sa='dance','dance'
+                  px,py=540,900
+              _actor(d,'cat',cx,770,t,ca,'happy',0,ground_y=1190)
+              _actor(d,'squirrel',sx,770,t,sa,'happy',1,ground_y=1190)
+              d.ellipse((px-30,py-30,px+30,py+30),
+                        fill=(248,195,79),outline=(25,42,58),width=5)
+              # High-contrast caption safe area for mobile viewing.
+              d.rounded_rectangle((45,1470,1035,1625),radius=28,
+                                  fill=(24,45,57))
+              text=captions[scene]
+              bb=d.textbbox((0,0),text,font=font)
+              d.text(((1080-(bb[2]-bb[0]))//2,1520),text,
+                     font=font,fill=(255,255,255))
+              proc.stdin.write(im.tobytes())
+          proc.stdin.close()
+          assert proc.wait()==0
+          subprocess.run([ff,'-v','error','-i',path,'-f','null','-'],check=True)
+          print('Verified silent three-scene story QA:',path)
+          PY
       - name: Render full Studio scene compositor preview (silent)
         run: python -m tools.pillow_studio_preview
       - name: Render four new actions in actual Studio
@@ -201,6 +262,7 @@ jobs:
             preview/pillow-duo-motion.mp4
             preview/astra-species-showcase.mp4
             preview/astra-pair-interaction.mp4
+            preview/astra-24s-story-qa.mp4
             preview/pillow-studio-composite.mp4
             preview/astra-four-directed-actions.mp4
             preview/astra-four-directed-actions.json
