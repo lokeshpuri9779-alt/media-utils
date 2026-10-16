@@ -45,7 +45,7 @@ def archive_fingerprints(path, fingerprints):
     try:
         with os.fdopen(fd, "w", encoding="utf-8") as stream:
             json.dump({"version": 1, "archived": merged}, stream, sort_keys=True, separators=(",", ":"))
-            stream.write("\\n")
+            stream.write("\n")
             stream.flush()
             os.fsync(stream.fileno())
         os.replace(temporary, target)
