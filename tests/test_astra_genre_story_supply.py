@@ -13,6 +13,13 @@ class GenreStorySupplyTests(unittest.TestCase):
             self.assertFalse(item["production_ready"])
             self.assertTrue(publication_rejection(item))
 
+    def test_expanded_motivations_partners_and_payoffs(self):
+        stories = [genre_proposal(i) for i in range(512)]
+        self.assertEqual(len({story["plot_fingerprint"] for story in stories}), 512)
+        self.assertGreaterEqual(len({story["story_beats"][0]["speech"] for story in stories}), 64)
+        self.assertGreaterEqual(len({story["story_beats"][3]["speech"] for story in stories}), 64)
+        self.assertTrue(all(not story["production_ready"] for story in stories))
+
     def test_reject_negative_index(self):
         with self.assertRaises(ValueError):
             genre_proposal(-1)
