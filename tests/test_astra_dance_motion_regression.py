@@ -58,6 +58,23 @@ class DanceMotionTests(unittest.TestCase):
                 self.assertNotEqual(left_delta, 0)
                 self.assertEqual(left_delta, -right_delta)
 
+    def test_jump_has_grounded_takeoff_and_landing(self):
+        # The jump cycle must return to its grounded starting pose.
+        start = self.render(0.0, "jump")
+        airborne = self.render(0.6, "jump")
+        landed = self.render(1.2, "jump")
+        self.assertNotEqual(start.tobytes(), airborne.tobytes())
+        self.assertEqual(start.tobytes(), landed.tobytes())
+
+    def test_jump_height_changes_shadow_footprint(self):
+        # Shadow at ground level remains wider than when airborne.
+        start = self.render(0.0, "jump")
+        airborne = self.render(0.6, "jump")
+        shadow_y = 1267
+        ground_pixel = start.getpixel((540 + 95, shadow_y))
+        air_pixel = airborne.getpixel((540 + 95, shadow_y))
+        self.assertNotEqual(ground_pixel, air_pixel)
+
     def test_dance_is_deterministic(self):
         self.assertEqual(self.render(0.25).tobytes(), self.render(0.25).tobytes())
 
