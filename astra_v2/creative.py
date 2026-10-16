@@ -254,7 +254,9 @@ def make_candidate(path, excluded_ids, excluded_titles):
             legacy.CONTENT_META = {
                 "genre": story["genre"], "content_id": story["content_id"],
                 "source": story.get("source"), "plot_key": story.get("plot_key", ""),
-                "plot_fingerprint": story.get("plot_fingerprint", ""), "creative_director": evaluation["director"],
+                "plot_fingerprint": story.get("plot_fingerprint", ""),
+                "story_beats": [{"speech": str(beat.get("speech") or "")} for beat in story.get("story_beats", [])],
+                "creative_director": evaluation["director"],
                 "renderer": rendered.get("renderer"), "format": "short",
             }
             title = story["title"]
@@ -315,6 +317,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
             "genre": str(meta.get("genre") or ""), "format": "short",
             "plot_key": str(meta.get("plot_key") or ""),
             "plot_fingerprint": str(meta.get("plot_fingerprint") or ""),
+            "story_beats": meta.get("story_beats") or [],
             "renderer": str(meta.get("renderer") or "unknown")}
 
 
