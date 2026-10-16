@@ -162,7 +162,7 @@ class ProductionDuoContactTests(unittest.TestCase):
                    hand_target=(500, 1100), interact_side=1,
                    hand_strength=1.0)
         self.assertTrue(arms)
-        hand = arms[0][-1]
+        hand = arms[-1][-1]
         self.assertAlmostEqual(hand[0], 435)
         self.assertAlmostEqual(hand[1], 1037)
 
