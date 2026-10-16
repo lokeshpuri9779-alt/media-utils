@@ -26,11 +26,15 @@ def proposal(index):
     setting = SETTINGS[(index // len(ACTORS)) % len(SETTINGS)]
     problem, clue, payoff = PROBLEMS[(index // (len(ACTORS) * len(SETTINGS))) % len(PROBLEMS)]
     key = f"proposal-{index}"
+    cycle = index // (len(ACTORS) * len(SETTINGS) * len(PROBLEMS))
+    # Vary the causal setting across cycles without asserting editorial novelty.
+    occasion = ("annual festival", "winter market", "morning evacuation",
+                "village reunion", "spring parade")[cycle % 5]
     sentences = (
-        f"At {setting}, {actor} discovered that {problem} just before the annual festival.",
-        f"The first repair attempt failed, and worried neighbors began preparing to leave the area.",
-        f"After searching old records, the hero discovered {clue} and organized a careful second attempt.",
-        f"With help from the neighbors, the hero {payoff}, and the festival could finally begin.",
+        f"At {setting}, {actor} discovered that {problem} just before the {occasion}.",
+        f"The first repair attempt failed, and worried neighbors began preparing to leave before the {occasion}.",
+        f"After searching old records, the hero discovered {clue} and organized a careful second attempt for the {occasion}.",
+        f"With help from the neighbors, the hero {payoff}, and the {occasion} could finally begin.",
     )
     return {
         "content_id": "astra-proposal-" + hashlib.sha256(key.encode()).hexdigest()[:20],
@@ -63,7 +67,7 @@ def replenish(path, count=24, history=()):
     prior = list(history) + state["proposals"]
     next_index = int(state.get("next_index", 0))
     added = []
-    for _ in range(count * 50):
+    for _ in range(count * 200):
         if len(added) >= count:
             break
         candidate = proposal(next_index)
