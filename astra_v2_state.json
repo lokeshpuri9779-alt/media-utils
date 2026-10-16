@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-16",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 26,
+  "attempts": 27,
   "confirmed_today": 26,
-  "last_attempt_at": "2026-10-16T13:27:20.324977+00:00",
+  "last_attempt_at": "2026-10-16T17:32:36.838284+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1589,14 +1589,40 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "quality_skip",
+  "pending": {
+    "IfzQqRm0YYQ": {
+      "content_id": "rayvan-original-paperplanet-v1",
+      "title": "The Planet Made of Paper",
+      "day": "2026-10-16",
+      "uploaded_at": "2026-10-16T17:32:38.287808+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "3a81d71578bc75e50652ea9a9e9e3b082eea90e7d7c689f89f396220d8ebd7ef",
+      "story_beats": [
+        {
+          "speech": "A cartographer watched a distant planet fold like a sheet of paper."
+        },
+        {
+          "speech": "Each new crease formed a symbol on her star map."
+        },
+        {
+          "speech": "Together the symbols revealed an asteroid heading toward her home."
+        },
+        {
+          "speech": "She sent the warning, and the paper planet unfolded into a brilliant sail."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-16T17:30:01.819244+00:00",
+  "last_preflight_at": "2026-10-16T17:31:57.234201+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-16T17:30:38.103910+00:00",
+    "at": "2026-10-16T17:32:38.573770+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -3142,6 +3168,29 @@
       "title": "The Museum of Lost Rain | Original Microfiction",
       "format": "short",
       "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-original-paperplanet-v1": {
+      "at": "2026-10-16T17:32:36.838268+00:00",
+      "title": "The Planet Made of Paper",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "3a81d71578bc75e50652ea9a9e9e3b082eea90e7d7c689f89f396220d8ebd7ef",
+      "story_beats": [
+        {
+          "speech": "A cartographer watched a distant planet fold like a sheet of paper."
+        },
+        {
+          "speech": "Each new crease formed a symbol on her star map."
+        },
+        {
+          "speech": "Together the symbols revealed an asteroid heading toward her home."
+        },
+        {
+          "speech": "She sent the warning, and the paper planet unfolded into a brilliant sail."
+        }
+      ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
     }
