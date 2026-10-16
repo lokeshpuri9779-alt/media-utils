@@ -258,3 +258,13 @@ class DurableStoryLedgerTests(unittest.TestCase):
             with self.assertRaisesRegex(StoryLedgerError, "fingerprint_missing"):
                 archive_committed_state(path, bad)
             self.assertEqual(read_ledger(path)["archived"], sorted([FP_A, FP_B]))
+
+    def test_conflicting_lifecycle_fingerprint_aliases_fail_closed(self):
+        from astra_v2.story_ledger import archive_lifecycle_record
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "ledger.json"
+            with self.assertRaisesRegex(StoryLedgerError, "fingerprint_conflict"):
+                archive_lifecycle_record(path, {"plot_fingerprint": FP_A, "plot_hash": FP_B}, "reserved")
+            self.assertFalse(path.exists())
+            result = archive_lifecycle_record(path, {"plot_fingerprint": FP_A, "plot_hash": FP_A}, "reserved")
+            self.assertEqual(result["archived"], [FP_A])
