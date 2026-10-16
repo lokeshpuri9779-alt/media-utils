@@ -314,7 +314,7 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
             # Ease a reach toward a prop instead of snapping the wrist when
             # contact begins or ends. Default 1.0 preserves Studio duo poses.
             strength=_ease(float(hand_strength))
-            target=(hand_target[0]-side*65, hand_target[1]+2)
+            target=(hand_target[0]-side*65, hand_target[1]-63)
             hand=(hand[0]*(1-strength)+target[0]*strength,
                   hand[1]*(1-strength)+target[1]*strength)
         elbow=((shoulder[0]+hand[0])*.5+side*18,
