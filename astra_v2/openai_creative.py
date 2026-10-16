@@ -21,7 +21,7 @@ def enabled():
             and bool(os.getenv("OPENAI_API_KEY")))
 
 
-def generate(excluded_ids, excluded_titles):
+def generate(excluded_ids, excluded_titles, prior_stories=()):
     """Return a validated original microfiction story, or None when disabled."""
     if not enabled():
         return None
@@ -87,7 +87,9 @@ def generate(excluded_ids, excluded_titles):
     ).hexdigest()[:20]
     if cid in excluded_ids:
         raise ValueError("Duplicate story content")
-    return {
+    from astra_v2.shorts_novelty import is_near_duplicate
+    from astra_v2.story_planning import planning_issues
+    story = {
         "genre": "fiction", "kind": "microfiction",
         "production_ready": True, "content_id": cid,
         "title": title, "hook": beats[0]["headline"],
@@ -98,3 +100,14 @@ def generate(excluded_ids, excluded_titles):
             for beat in beats
         ],
     }
+    # Model generation is not an originality guarantee. Validate the full
+    # narration and reject known published/pending/reserved narratives.
+    from astra_v2.story_forge import plot_fingerprint
+    story["plot_fingerprint"] = plot_fingerprint([
+        ("", beat["speech"], "", "") for beat in story["story_beats"]
+    ])
+    if planning_issues(story):
+        raise ValueError("Generated story failed causal planning")
+    if is_near_duplicate(story, prior_stories):
+        raise ValueError("Generated story repeats narrative history")
+    return story
