@@ -1116,9 +1116,9 @@ def render_frame(plan,t,genre,total):
         else:
             draw_visual(im,s,t,u,accent)
     elif genre == 'fiction' and not layers['draw_cached_media'] and not layers['draw_director_asset']:
-        # Licensed icon illustration only for otherwise empty foregrounds.
-        from astra_v2.icon_visuals import overlay_icon
-        overlay_icon(im,s,t,accent)
+        # Fiction must not silently substitute a generic icon for a missing
+        # character or environmental scene. Preserve the news/icon pipeline.
+        raise CreativeReject('Unified Studio: fiction scene has no drawable visual or authorized media.')
     if str(s.get('creative_format') or '')=='documentary_montage' and .36 < (u/max(.2,s['duration'])) < .62:
         p=(u/max(.2,s['duration'])-.36)/.26
         pulse=1.0+0.018*math.sin(min(1,p)*math.pi)
