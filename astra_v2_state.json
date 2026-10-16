@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-16",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 21,
+  "attempts": 22,
   "confirmed_today": 21,
-  "last_attempt_at": "2026-10-15T23:57:41.713331+00:00",
+  "last_attempt_at": "2026-10-16T00:31:25.042487+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1549,28 +1549,40 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-15T23:59:26.049026+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "h4BXdiiYM4A": {
+      "content_id": "rayvan-forge-bef55a155ad444dc",
+      "title": "The Rabbit and Otter's Paper Moon",
+      "day": "2026-10-16",
+      "uploaded_at": "2026-10-16T00:31:27.647169+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-16T00:30:26.452304+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-15T23:59:26.699425+00:00",
+    "at": "2026-10-16T00:31:27.930410+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-15T20:02:42.551460+00:00",
   "reserved": {
@@ -3059,6 +3071,14 @@
     "rayvan-forge-37990880d138207e": {
       "at": "2026-10-15T23:57:41.713317+00:00",
       "title": "The Dog and Mouse's Traveling Bookshelf",
+      "format": "short",
+      "plot_key": "",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-forge-bef55a155ad444dc": {
+      "at": "2026-10-16T00:31:25.042471+00:00",
+      "title": "The Rabbit and Otter's Paper Moon",
       "format": "short",
       "plot_key": "",
       "renderer": "studio-7.3.0",
