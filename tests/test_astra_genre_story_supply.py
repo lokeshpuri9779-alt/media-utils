@@ -68,6 +68,19 @@ class GenreStorySupplyTests(unittest.TestCase):
             self.assertFalse(story["production_ready"])
             self.assertTrue(publication_rejection(story))
 
+    def test_character_consequences_persist_into_ending(self):
+        from astra_v2.genre_story_supply import ARC_CONSEQUENCES, CHARACTER_ARCS
+        self.assertEqual(len(ARC_CONSEQUENCES), len(CHARACTER_ARCS))
+        for index in range(512):
+            story = genre_proposal(index)
+            arc_index = (index // 19) % len(ARC_CONSEQUENCES)
+            lasting, acknowledged = ARC_CONSEQUENCES[arc_index]
+            self.assertIn(lasting, story["story_beats"][2]["speech"])
+            self.assertIn(acknowledged, story["story_beats"][3]["speech"])
+            self.assertEqual(story["consequence_id"], arc_index)
+            self.assertFalse(story["production_ready"])
+            self.assertTrue(publication_rejection(story))
+
     def test_reject_negative_index(self):
         with self.assertRaises(ValueError):
             genre_proposal(-1)
