@@ -203,6 +203,30 @@ def run():
                 if cid in live_ids | previous_ids or title.casefold().strip() in live_titles:
                     report.update(outcome="duplicate_blocked", content_id=cid)
                     return report
+                # Keep explicit approved metadata for a first episode; the
+                # postpublication hook alone may bootstrap the character.
+                if candidate.get("character_approved") is True and candidate.get("format") == "short":
+                    from astra_v2.character_manifest_bridge import build_character_manifests
+                    from astra_v2.character_registry import initial_character
+                    from astra_v2.character_bootstrap import register_approved_character
+                    snapshot_path = Path("character-continuity.json")
+                    if snapshot_path.is_file():
+                        from astra_v2.character_snapshot import read_snapshot
+                        current_snapshot = read_snapshot(snapshot_path)
+                        if candidate.get("character_id") not in current_snapshot["characters"]:
+                            # Validate the same explicit approval and episode
+                            # contract as the existing-character path.
+                            staged = register_approved_character(current_snapshot, candidate)
+                            first_state = staged["characters"][candidate["character_id"]]
+                            build_character_manifests(candidate, first_state)
+                            write_json(Path("runtime-health/character-first-candidate.json"), {
+                                "content_id": cid,
+                                "character_id": candidate["character_id"],
+                                "character_name": candidate["character_name"],
+                                "character_approved": True,
+                                "format": "short",
+                                "character_episode": candidate["character_episode"],
+                            })
                 # Optional continuity manifests are emitted only for explicitly
                 # approved characters already present in durable memory.
                 # No missing character is silently invented.
