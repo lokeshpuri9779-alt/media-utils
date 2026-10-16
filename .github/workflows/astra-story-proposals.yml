@@ -1,0 +1,47 @@
+name: ASTRA - Autonomous Story Proposal Inventory
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */6 * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: astra-story-proposals
+  cancel-in-progress: false
+
+jobs:
+  propose:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Restore latest unreviewed proposal ledger
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p runtime-health
+          gh run list --workflow astra-story-proposals.yml --status success --limit 20 --json databaseId |
+            python -c 'import json,sys; print("\n".join(str(x["databaseId"]) for x in json.load(sys.stdin)))' |
+            while read -r id; do
+              if gh run download "$id" --name astra-unreviewed-story-ledger --dir runtime-health 2>/dev/null; then
+                echo "ASTRA_PROPOSAL_LEDGER_RESTORED=$id"
+                break
+              fi
+            done
+      - name: Generate novel unreviewed proposals
+        run: python -m astra_v2.autonomous_story_proposals
+      - name: Verify isolation and persistence
+        run: python -m unittest discover -s tests -p test_astra_autonomous_story_proposals.py -v
+      - name: Store unreviewed proposal ledger
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-unreviewed-story-ledger
+          path: runtime-health/story_proposals.json
+          if-no-files-found: error
+          retention-days: 90
