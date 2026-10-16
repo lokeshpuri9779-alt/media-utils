@@ -1,4 +1,6 @@
 import json
+import subprocess
+import sys
 from concurrent.futures import ThreadPoolExecutor
 import tempfile
 import unittest
@@ -147,3 +149,19 @@ class DurableStoryLedgerTests(unittest.TestCase):
                 plan_episode_with_ledger("rain-camp", 1, scenes, Path(directory) / "ledger.json", state={
                     "fingerprint_ledger": {"archived": ["broken"]}
                 })
+
+    def test_separate_processes_preserve_all_fingerprints(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "story-ledger.json"
+            script = (
+                "import sys; from astra_v2.story_ledger import archive_fingerprints; "
+                "archive_fingerprints(sys.argv[1], [sys.argv[2]])"
+            )
+            fingerprints = [format(index + 100, "064x") for index in range(12)]
+            processes = [
+                subprocess.Popen([sys.executable, "-c", script, str(path), fp])
+                for fp in fingerprints
+            ]
+            for process in processes:
+                self.assertEqual(process.wait(timeout=20), 0)
+            self.assertEqual(set(read_ledger(path)["archived"]), set(fingerprints))
