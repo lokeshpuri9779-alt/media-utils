@@ -21,6 +21,23 @@ class StoryVisualTests(unittest.TestCase):
         self.assertEqual(select_subject({"title": "The Museum of Tomorrows"},
                                         {"speech": "A cat appeared at the museum."}), "cat")
 
+    def test_explicit_storyboard_visual_beats_incidental_narration(self):
+        story = {"title": "The Orchard of Echoes"}
+        shot = {"speech": "The trees repeated a distress call from the orchard.",
+                "visual_prompt": "signal"}
+        self.assertEqual(select_subject(story, shot), "signal")
+
+    def test_scene_specific_objects_draw_distinct_pixels(self):
+        subjects = ("orchard", "signal", "bottle", "shoreline", "bell", "lantern")
+        rendered = []
+        for subject in subjects:
+            image = Image.new("RGB", (1080, 1920), (8, 11, 28))
+            self.assertTrue(draw_subject(image, subject, 0.6, (188, 163, 255)))
+            rendered.append(image)
+        for index, image in enumerate(rendered):
+            for other in rendered[index + 1:]:
+                self.assertIsNotNone(ImageChops.difference(image, other).getbbox())
+
     def test_ocean_does_not_draw_whale(self):
         ocean = Image.new("RGB", (1080, 1920), (8, 11, 28))
         whale = Image.new("RGB", (1080, 1920), (8, 11, 28))
@@ -37,7 +54,7 @@ class StoryVisualTests(unittest.TestCase):
         self.assertIn(whale_fill, [color for _, color in whale_pixels])
 
     def test_subject_draws_actual_pixels(self):
-        for subject in ("cat", "book", "ocean", "clock", "tree", "train", "moon", "robot"):
+        for subject in ("cat", "book", "ocean", "clock", "tree", "train", "moon", "robot", "orchard", "signal", "bottle", "shoreline", "bell", "lantern"):
             with self.subTest(subject=subject):
                 image = Image.new("RGB", (1080, 1920), (8, 11, 28))
                 self.assertTrue(draw_subject(image, subject, 0.5, (188, 163, 255)))
