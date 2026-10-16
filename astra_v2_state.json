@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "day": "2026-10-16",
+  "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 31,
-  "confirmed_today": 30,
-  "last_attempt_at": "2026-10-16T18:20:36.903086+00:00",
+  "attempts": 1,
+  "confirmed_today": 0,
+  "last_attempt_at": "2026-10-16T18:33:26.243879+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1619,30 +1619,38 @@
       "format": "short",
       "uploaded_at": "2026-10-16T18:11:07.954979+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-original-mirrorbird-v1": {
+      "video_id": "DLJ8eOu1Ji4",
+      "confirmed_at": "2026-10-16T18:32:42.820054+00:00",
+      "title": "The Bird in the Mirror",
+      "format": "short",
+      "uploaded_at": "2026-10-16T18:20:38.162284+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "DLJ8eOu1Ji4": {
-      "content_id": "rayvan-original-mirrorbird-v1",
-      "title": "The Bird in the Mirror",
-      "day": "2026-10-16",
-      "uploaded_at": "2026-10-16T18:20:38.162284+00:00",
+    "oCCfZegcPl4": {
+      "content_id": "rayvan-original-glassforest-v1",
+      "title": "The Forest That Held the Wind",
+      "day": "2026-10-17",
+      "uploaded_at": "2026-10-16T18:33:27.860188+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "c4a4459373a610be7b9e7de579a9ab8a0485910f54514337a572c9b933574a99",
+      "plot_fingerprint": "882223f97b6f427b764e451f47943541bc1def255afd665c59a91a87455214d0",
       "story_beats": [
         {
-          "speech": "A child saw a bright blue bird inside a mirror on a rainy day."
+          "speech": "A ranger entered a forest where every tree stood perfectly still."
         },
         {
-          "speech": "The reflection showed a nest beside a river that was beginning to flood."
+          "speech": "She heard the sound of a storm trapped inside the clear trunks."
         },
         {
-          "speech": "She recognized the old bridge and ran to the river behind her house."
+          "speech": "At the forest center she found a broken flute that once guided the wind."
         },
         {
-          "speech": "She moved the nest to higher branches, and the bird sang outside her window."
+          "speech": "She repaired the flute and played one note, releasing a gentle breeze."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -1650,11 +1658,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-16T18:20:00.122233+00:00",
+  "last_preflight_at": "2026-10-16T18:32:42.438393+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-16T18:20:38.375931+00:00",
+    "at": "2026-10-16T18:33:28.302967+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -3313,6 +3321,29 @@
         },
         {
           "speech": "She moved the nest to higher branches, and the bird sang outside her window."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-original-glassforest-v1": {
+      "at": "2026-10-16T18:33:26.243863+00:00",
+      "title": "The Forest That Held the Wind",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "882223f97b6f427b764e451f47943541bc1def255afd665c59a91a87455214d0",
+      "story_beats": [
+        {
+          "speech": "A ranger entered a forest where every tree stood perfectly still."
+        },
+        {
+          "speech": "She heard the sound of a storm trapped inside the clear trunks."
+        },
+        {
+          "speech": "At the forest center she found a broken flute that once guided the wind."
+        },
+        {
+          "speech": "She repaired the flute and played one note, releasing a gentle breeze."
         }
       ],
       "renderer": "studio-7.3.0",
