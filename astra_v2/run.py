@@ -227,6 +227,7 @@ def run():
                     "genre": candidate["genre"], "format": candidate["format"],
                     "plot_key": candidate.get("plot_key", ""),
                     "plot_fingerprint": candidate.get("plot_fingerprint", ""),
+                    "story_beats": candidate.get("story_beats") or [],
                     "renderer": candidate.get("renderer") or "unknown",
                 }
                 write_json(STATE_FILE, state)
