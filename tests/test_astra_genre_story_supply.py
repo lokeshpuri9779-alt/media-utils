@@ -37,6 +37,13 @@ class GenreStorySupplyTests(unittest.TestCase):
         self.assertGreaterEqual(len(SCENARIOS), 24)
         self.assertEqual(len({(item[0], item[3]) for item in SCENARIOS}), len(SCENARIOS))
 
+    def test_character_decision_variety(self):
+        from astra_v2.genre_story_supply import INNER_CONFLICTS, CHARACTER_DECISIONS
+        self.assertGreaterEqual(len(INNER_CONFLICTS), 8)
+        self.assertGreaterEqual(len(CHARACTER_DECISIONS), 8)
+        speeches = [genre_proposal(i)["story_beats"][1]["speech"] for i in range(256)]
+        self.assertTrue(all(any(choice in speech for choice in CHARACTER_DECISIONS) for speech in speeches))
+
     def test_reject_negative_index(self):
         with self.assertRaises(ValueError):
             genre_proposal(-1)

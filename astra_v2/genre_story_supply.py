@@ -81,6 +81,26 @@ NARRATIVE_STRUCTURES = (
     ("role-reversal", "The hero expected to lead, but a younger companion offered an unusual plan.", "The companion understood a detail that the experienced hero had missed.", "The hero followed the companion's lead and celebrated the new leader."),
     ("small-kindness", "The hero stopped to help a stranger even though a bigger task was waiting.", "The stranger's knowledge unexpectedly explained the bigger problem.", "Their kindness came full circle when the stranger helped everyone succeed."),
 )
+INNER_CONFLICTS = (
+    "The hero worried that asking for help would look like failure",
+    "The hero wanted to win but knew a friend needed support",
+    "The hero was afraid to admit an earlier mistake",
+    "The hero struggled to trust a newcomer",
+    "The hero was impatient with a slower teammate",
+    "The hero doubted whether their unusual idea could work",
+    "The hero feared disappointing someone they admired",
+    "The hero wanted to keep a promise even when plans changed",
+)
+CHARACTER_DECISIONS = (
+    "They chose to listen instead of interrupting",
+    "They shared the credit instead of claiming the prize",
+    "They admitted the mistake before anyone was blamed",
+    "They trusted a teammate with a different approach",
+    "They slowed down to protect someone vulnerable",
+    "They tested their idea instead of insisting they were right",
+    "They asked for help despite feeling embarrassed",
+    "They kept the promise by finding a safer alternative",
+)
 COMPLICATIONS = (
     "The first plan failed when the weather changed",
     "A rival misunderstood the clue and ran the wrong way",
@@ -144,10 +164,12 @@ def genre_proposal(index, scenario_index=None, structure_index=None):
     partner = PARTNERS[(index // 5) % len(PARTNERS)]
     strategy = STRATEGIES[(index // 7) % len(STRATEGIES)]
     payoff_style = PAYOFF_STYLES[(index // 11) % len(PAYOFF_STYLES)]
+    inner_conflict = INNER_CONFLICTS[(index // 19) % len(INNER_CONFLICTS)]
+    character_decision = CHARACTER_DECISIONS[(index // 23) % len(CHARACTER_DECISIONS)]
     structure_id, opening, middle, ending = NARRATIVE_STRUCTURES[((index // 13) if structure_index is None else structure_index) % len(NARRATIVE_STRUCTURES)]
     beats = [
-        ("reveal", f"At {setting}, {hero} encountered {problem}. Everyone stopped what they were doing. The hero {motivation} and teamed up with {partner}. {opening}", visual),
-        ("build", f"The hero tried a simple solution, but it did not work. {complication}. {strategy}. {middle}", "book"),
+        ("reveal", f"At {setting}, {hero} encountered {problem}. Everyone stopped what they were doing. The hero {motivation} and teamed up with {partner}. {opening} {inner_conflict}.", visual),
+        ("build", f"The hero tried a simple solution, but it did not work. {complication}. {strategy}. {character_decision}. {middle}", "book"),
         ("twist", f"The overlooked detail explained everything: {reveal}. The group realized that the original problem had a different cause than they first assumed. They tested the explanation before acting.", visual),
         ("payoff", f"With the mystery understood, the hero {solution}. {ending} {lesson}. {payoff_style}.", visual),
     ]
