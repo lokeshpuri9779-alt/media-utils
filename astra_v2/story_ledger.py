@@ -129,6 +129,9 @@ def archive_committed_state(path, state):
             if not isinstance(record, dict):
                 raise StoryLedgerError("story_lifecycle_record_invalid")
             fp = record.get("plot_fingerprint")
+            alias = record.get("plot_hash")
+            if alias is not None and fp != alias:
+                raise StoryLedgerError("story_lifecycle_fingerprint_conflict")
             if not isinstance(fp, str) or len(fp) != 64 or any(ch not in "0123456789abcdef" for ch in fp):
                 raise StoryLedgerError("story_lifecycle_fingerprint_missing")
             identities.append(fp)
