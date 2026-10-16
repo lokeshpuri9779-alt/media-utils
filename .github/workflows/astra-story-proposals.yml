@@ -38,10 +38,14 @@ jobs:
         run: python -m astra_v2.autonomous_story_proposals
       - name: Verify isolation and persistence
         run: python -m unittest discover -s tests -p test_astra_autonomous_story_proposals.py -v
+      - name: Triage proposals without granting publication approval
+        run: python -m astra_v2.story_editorial_report
       - name: Store unreviewed proposal ledger
         uses: actions/upload-artifact@v4
         with:
           name: astra-unreviewed-story-ledger
-          path: runtime-health/story_proposals.json
+          path: |
+            runtime-health/story_proposals.json
+            runtime-health/story_editorial_report.json
           if-no-files-found: error
           retention-days: 90
