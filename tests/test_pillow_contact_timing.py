@@ -3,6 +3,7 @@ import unittest
 from unittest.mock import patch
 from PIL import Image
 from astra_v2.pillow_duo_scene import _actor, draw_duo
+from astra_v2.pillow_scene_direction import actor_translation
 
 
 class ProductionDuoContactTests(unittest.TestCase):
@@ -95,6 +96,21 @@ class ProductionDuoContactTests(unittest.TestCase):
                 self.assertTrue(all(a > b for a, b in zip(strengths, strengths[1:])))
                 self.assertEqual(strengths[-1], 0.0)
                 self.assertIsNone(self.paint(action, 1.2)[0][0].kwargs["hand_target"])
+
+    def test_carry_moves_both_actors_and_held_prop_together(self):
+        self.assertEqual(actor_translation("carry", 0.0, 0), 0)
+        for t in (0.4, 1.2, 2.4):
+            with self.subTest(t=t):
+                travel = actor_translation("carry", t, 0)
+                self.assertGreater(travel, 0)
+                self.assertEqual(travel, actor_translation("carry", t, 1))
+                args, _ = self.paint("carry", t)
+                self.assertEqual(args[0].args[2], 298 + travel)
+                self.assertEqual(args[1].args[2], 772 + travel - 105)
+        early, _ = self.paint("carry", 1.2)
+        late, _ = self.paint("carry", 2.4)
+        self.assertGreater(late[0].kwargs["hand_target"][0],
+                           early[0].kwargs["hand_target"][0])
 
     def test_movement_without_narrated_prop_does_not_generate_grip(self):
         for action in ("run","dance","look","wave"):
