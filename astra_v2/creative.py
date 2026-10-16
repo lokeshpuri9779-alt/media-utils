@@ -87,7 +87,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
         def pillow_duo_eligible(story):
             if story.get("genre") != "fiction":
                 return False
-            shots = story.get("scenes") or story.get("shots") or story.get("beats")
+            shots = story.get("story_beats") or story.get("scenes") or story.get("shots") or story.get("beats")
             if not isinstance(shots, (list, tuple)) or not shots:
                 return False
             return all(isinstance(shot, dict)
