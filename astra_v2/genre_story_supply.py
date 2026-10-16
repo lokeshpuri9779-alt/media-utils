@@ -114,6 +114,18 @@ ARC_PLOT_BRIDGES = (
     ("Following the original plan would put someone at risk.", "Changing the plan protected the group and opened a safer way to solve the problem."),
 )
 
+# Observable consequence of each decision, carried from discovery into resolution.
+ARC_CONSEQUENCES = (
+    ("The friend stayed with the team and kept helping.", "The hero thanked the friend and invited them to future adventures."),
+    ("The teammate's contribution remained visible to everyone.", "The hero shared the final celebration and credit with the teammate."),
+    ("The corrected mistake stayed acknowledged rather than hidden.", "The hero openly explained the repair and accepted responsibility."),
+    ("The newcomer continued guiding the group after the discovery.", "The hero welcomed the newcomer as a trusted partner."),
+    ("The quiet teammate's warning remained part of the safer plan.", "The hero made space for the teammate's voice at the celebration."),
+    ("The tested idea became the team's evidence-based plan.", "The hero recorded what the experiment taught everyone."),
+    ("The mentor understood why the difficult choice was necessary.", "The hero stood by the choice and discussed its consequences."),
+    ("The safer plan continued protecting everyone through the finish.", "The hero renewed the promise in a safer and kinder form."),
+)
+
 CHARACTER_DECISIONS = (
     "They chose to listen instead of interrupting",
     "They shared the credit instead of claiming the prize",
@@ -189,12 +201,13 @@ def genre_proposal(index, scenario_index=None, structure_index=None):
     payoff_style = PAYOFF_STYLES[(index // 11) % len(PAYOFF_STYLES)]
     arc_problem, arc_choice, arc_growth = CHARACTER_ARCS[(index // 19) % len(CHARACTER_ARCS)]
     blocked_plot, unlocked_plot = ARC_PLOT_BRIDGES[(index // 19) % len(ARC_PLOT_BRIDGES)]
+    lasting_effect, acknowledged_effect = ARC_CONSEQUENCES[(index // 19) % len(ARC_CONSEQUENCES)]
     structure_id, opening, middle, ending = NARRATIVE_STRUCTURES[((index // 13) if structure_index is None else structure_index) % len(NARRATIVE_STRUCTURES)]
     beats = [
         ("reveal", f"At {setting}, {hero} encountered {problem}. Everyone stopped what they were doing. The hero {motivation} and teamed up with {partner}. {opening} The hero {arc_problem}.", visual),
         ("build", f"The hero tried a simple solution, but it did not work. {complication}. {strategy}. {blocked_plot} The hero {arc_choice}. {unlocked_plot} {middle}", "book"),
-        ("twist", f"The overlooked detail explained everything: {reveal}. The group realized that the original problem had a different cause than they first assumed. They tested the explanation before acting.", visual),
-        ("payoff", f"With the mystery understood, the hero {solution}. {ending} The hero {arc_growth}. {payoff_style}.", visual),
+        ("twist", f"The overlooked detail explained everything: {reveal}. The group realized that the original problem had a different cause than they first assumed. They tested the explanation before acting. {lasting_effect}", visual),
+        ("payoff", f"With the mystery understood, the hero {solution}. {ending} {acknowledged_effect} The hero {arc_growth}. {payoff_style}.", visual),
     ]
     narration = " ".join(speech for _, speech, _ in beats).casefold()
     return {
@@ -204,6 +217,7 @@ def genre_proposal(index, scenario_index=None, structure_index=None):
         "plot_structure": structure_id,
         "character_arc_id": arc_problem,
         "plot_dependency_id": (index // 19) % len(ARC_PLOT_BRIDGES),
+        "consequence_id": (index // 19) % len(ARC_CONSEQUENCES),
         "premise_id": f"{genre}:{problem}",
         "outcome_id": solution,
         "kind": "unreviewed_causal_draft",
