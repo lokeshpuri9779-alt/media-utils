@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 3,
+  "attempts": 4,
   "confirmed_today": 3,
-  "last_attempt_at": "2026-10-16T19:21:17.759062+00:00",
+  "last_attempt_at": "2026-10-16T21:24:10.059491+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1653,14 +1653,40 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "quality_skip",
+  "pending": {
+    "bRDTM4YgHOM": {
+      "content_id": "rayvan-original-echo-orchard-v1",
+      "title": "The Orchard of Echoes",
+      "day": "2026-10-17",
+      "uploaded_at": "2026-10-16T21:24:11.300563+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "264a4d7cdc4e83f83206c80eea07bd894d9a0758a5ef3f54341be8e2b590194a",
+      "story_beats": [
+        {
+          "speech": "A sound engineer heard her own greeting return from an empty orchard."
+        },
+        {
+          "speech": "Each tree repeated a different fragment whenever the wind crossed its branches."
+        },
+        {
+          "speech": "She assembled the fragments into a rescue call from a hiker trapped beyond the ridge."
+        },
+        {
+          "speech": "Rescuers followed the sound, found the hiker, and the orchard finally fell quiet."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-16T21:10:57.740874+00:00",
+  "last_preflight_at": "2026-10-16T21:23:01.961224+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-16T21:11:40.111454+00:00",
+    "at": "2026-10-16T21:24:11.629697+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -3388,6 +3414,29 @@
         },
         {
           "speech": "She lit the first lantern, and the villagers carried the others into the night."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-original-echo-orchard-v1": {
+      "at": "2026-10-16T21:24:10.059474+00:00",
+      "title": "The Orchard of Echoes",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "264a4d7cdc4e83f83206c80eea07bd894d9a0758a5ef3f54341be8e2b590194a",
+      "story_beats": [
+        {
+          "speech": "A sound engineer heard her own greeting return from an empty orchard."
+        },
+        {
+          "speech": "Each tree repeated a different fragment whenever the wind crossed its branches."
+        },
+        {
+          "speech": "She assembled the fragments into a rescue call from a hiker trapped beyond the ridge."
+        },
+        {
+          "speech": "Rescuers followed the sound, found the hiker, and the orchard finally fell quiet."
         }
       ],
       "renderer": "studio-7.3.0",
