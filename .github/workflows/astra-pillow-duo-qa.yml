@@ -118,22 +118,44 @@ jobs:
               d=ImageDraw.Draw(im)
               d.text((65,110),'ASTRA pair interaction: cat and squirrel',fill=(25,42,58))
               d.line((55,1190,1025,1190),fill=(99,145,149),width=5)
-              # Story beats: greeting, approaching, and shared celebration.
-              if i<24:
-                  action='wave'
+              # Narrative beats: greet, approach, pick up, hand off, receive.
+              if i<16:
                   left_x,right_x=325,735
-              elif i<40:
-                  action='walk'
-                  progress=(i-24)/15
+                  cat_action=squirrel_action='wave'
+              elif i<32:
+                  progress=(i-16)/15
                   left_x=325+int(65*progress)
                   right_x=735-int(65*progress)
+                  cat_action=squirrel_action='walk'
               else:
-                  action='dance'
                   left_x,right_x=390,670
-              # Keep a shared prop between the pair as a visual focal point.
-              d.ellipse((510,1065,570,1125),fill=(248,195,79),outline=(25,42,58),width=5)
-              _actor(d,'cat',left_x,760,t,action,'happy',0,ground_y=1190)
-              _actor(d,'squirrel',right_x,760,t,action,'happy',1,ground_y=1190)
+                  cat_action=squirrel_action='hold'
+              # The golden object starts on the floor, rises with the cat's
+              # reaching hand, travels across the gap, and ends with squirrel.
+              if i<32:
+                  px,py=540,1094
+              elif i<44:
+                  progress=(i-32)/11
+                  px=540-int(10*progress)
+                  py=1094-int(195*progress)
+              elif i<56:
+                  progress=(i-44)/11
+                  px=530+int(55*progress)
+                  py=899
+              else:
+                  px,py=585,899
+              cat_holding=32<=i<56
+              squirrel_holding=i>=44
+              _actor(d,'cat',left_x,760,t,cat_action,'happy',0,
+                     hand_target=(px,py) if cat_holding else None,
+                     interact_side=1,ground_y=1190)
+              _actor(d,'squirrel',right_x,760,t,squirrel_action,'happy',1,
+                     hand_target=(px,py) if squirrel_holding else None,
+                     interact_side=-1,ground_y=1190)
+              # Draw the prop after the arms so the contact remains legible.
+              d.ellipse((px-27,py-27,px+27,py+27),
+                        fill=(248,195,79),outline=(25,42,58),width=5)
+              d.ellipse((px-9,py-14,px+1,py-4),fill=(255,247,203))
               proc.stdin.write(im.tobytes())
           proc.stdin.close()
           assert proc.wait()==0
