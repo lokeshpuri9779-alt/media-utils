@@ -99,6 +99,10 @@ def prepare(path, candidate):
     # candidate until the preload manifest carries verified engine provenance.
     if os.getenv("ASTRA_PILLOW_DUO_ONLY", "0") == "1":
         return None
+    if os.getenv("ASTRA_PILLOW_DUO_ONLY", "0") == "1":
+        # Studio version alone cannot attest to the actual visual engine.
+        # Never publish a pre-rendered video without Duo provenance.
+        return None
     from astra_v2.creative import inspect_video
     video = Path(path)
     fmt = candidate.get("format", "short")
