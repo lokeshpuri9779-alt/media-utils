@@ -84,14 +84,6 @@ def make_candidate(path, excluded_ids, excluded_titles):
             else:
                 supply["eligible"] += 1
     print("ASTRA_STORY_SUPPLY=" + json.dumps(supply, sort_keys=True))
-    available_count = supply["eligible"]
-    if not serialized_preload and available_count <= 4:
-        print("ASTRA_STORY_SUPPLY_WARNING=" + json.dumps({
-            "remaining": available_count,
-            "total": len(premium_stories),
-            "reason": "finite_original_story_inventory",
-            "action": "replenish_with_new_reviewed_plots",
-        }))
     # Explicitly opted-in paid model may propose a new story; the generated
     # storyboard still goes through the same renderer and QA as curated work.
     from astra_v2.openai_creative import enabled as openai_enabled, generate as openai_generate
@@ -164,6 +156,25 @@ def make_candidate(path, excluded_ids, excluded_titles):
         "fingerprints": len(history_hashes), "plot_keys": len(history_plot_keys),
         "remaining_candidates": len(premium_stories)
     }, sort_keys=True))
+    # This is the actual remaining publishable pool after merging every history
+    # ledger. Earlier supply diagnostics cannot account for publisher-state IDs.
+    publishable_remaining = sum(
+        1 for candidate in premium_stories
+        if (candidate.get("production_ready") or candidate.get("validation_candidate"))
+        and not publication_rejection(candidate)
+        and candidate.get("content_id") not in excluded_ids
+        and str(candidate.get("title", "")).casefold().strip() not in excluded_titles
+    )
+    print("ASTRA_STORY_SUPPLY_AFTER_HISTORY=" + json.dumps({
+        "remaining": publishable_remaining, "pool": len(premium_stories),
+    }, sort_keys=True))
+    if not serialized_preload and publishable_remaining <= 4:
+        print("ASTRA_STORY_SUPPLY_WARNING=" + json.dumps({
+            "remaining": publishable_remaining,
+            "total": len(premium_stories),
+            "reason": "finite_original_story_inventory",
+            "action": "replenish_with_new_reviewed_plots",
+        }))
     print("Premium pool:", len(premium_stories), "seen IDs:", len(excluded_ids),
           "seen titles:", len(excluded_titles))
     # Parallel preload lanes deterministically own disjoint story IDs.
