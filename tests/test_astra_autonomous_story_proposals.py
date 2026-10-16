@@ -33,6 +33,14 @@ class AutonomousStoryProposalTests(unittest.TestCase):
         self.assertTrue(all(item["title"].startswith("The ") and "Mystery of the" in item["title"]
                             for item in candidates))
 
+    def test_added_plot_axes_expand_story_supply_variation(self):
+        candidates = [proposal(index) for index in range(1200)]
+        investigation = {item["story_beats"][1]["speech"] for item in candidates}
+        payoff = {item["story_beats"][3]["speech"] for item in candidates}
+        self.assertGreaterEqual(len(investigation), 30)
+        self.assertGreaterEqual(len(payoff), 30)
+        self.assertEqual(len({item["plot_fingerprint"] for item in candidates}), 1200)
+
     def test_story_beats_form_a_causal_chain(self):
         item = proposal(37)
         beats = item["story_beats"]

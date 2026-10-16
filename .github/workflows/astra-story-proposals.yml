@@ -28,7 +28,7 @@ concurrency:
 jobs:
   propose:
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -62,6 +62,8 @@ jobs:
             git show origin/astra-state:astra_story_history.json > astra_story_history.json
           fi
       - name: Generate novel unreviewed proposals
+        env:
+          ASTRA_PROPOSAL_BATCH: "100"
         run: python -m astra_v2.autonomous_story_proposals
       - name: Verify isolation and persistence
         run: |
