@@ -1,5 +1,7 @@
 import unittest
-from PIL import Image, ImageChops
+from PIL import Image, ImageChops, ImageDraw
+from unittest.mock import patch
+from astra_v2.pillow_duo_scene import _actor, _line
 from astra_v2.pillow_duo_scene import scene_pair, scene_mood, scene_prop, prop_position, draw_duo
 
 class DuoContinuityTests(unittest.TestCase):
@@ -15,6 +17,15 @@ class DuoContinuityTests(unittest.TestCase):
         self.assertEqual(scene_mood({"speech":"Warning danger!"}),"angry")
         self.assertEqual(scene_prop({"speech":"A gift box."}),"box")
         self.assertIsNone(scene_prop({"speech":"A lone fox."}))
+    def test_idle_feet_stay_planted_while_torso_bobs(self):
+        heights=[]
+        for t in (0.0, 0.4, 0.8, 1.2, 1.6):
+            image=Image.new("RGB",(1080,1920),(24,35,60))
+            with patch("astra_v2.pillow_duo_scene._line", wraps=_line) as lines:
+                _actor(ImageDraw.Draw(image),"fox",298,846,t,"idle","happy",0)
+            heights.append([int(call.args[1][-1][1]) for call in lines.call_args_list[:2]])
+        self.assertEqual(heights, [[1252,1252]]*5)
+
     def test_safe_area_and_repeatability(self):
         shot={"speech":"The fox and rabbit carry a box.","story_action":"carry"}
         a=Image.new("RGB",(1080,1920),(24,35,60))
