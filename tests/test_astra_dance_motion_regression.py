@@ -85,6 +85,14 @@ class DanceMotionTests(unittest.TestCase):
                 self.assertEqual(swing.tobytes(),
                                  self.render(0.35, action).tobytes())
 
+    def test_carry_prop_contact_remains_stable_after_grasp(self):
+        # The carry pose at the same timestamp must remain deterministic
+        # after the grasp phase has completed.
+        first = self.render(1.1, "carry")
+        second = self.render(1.1, "carry")
+        self.assertEqual(first.tobytes(), second.tobytes())
+        self.assertIsNotNone(first.getbbox())
+
     def test_dance_is_deterministic(self):
         self.assertEqual(self.render(0.25).tobytes(), self.render(0.25).tobytes())
 
