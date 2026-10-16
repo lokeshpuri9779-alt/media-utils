@@ -12,6 +12,8 @@ on:
       - 'tests/test_astra_preload_novelty.py'
       - 'tests/test_astra_original_replenishment.py'
       - 'astra_v2/original_replenishment.py'
+      - 'astra_v2/autonomous_story_proposals.py'
+      - 'tests/test_astra_autonomous_story_proposals.py'
       - 'astra_v2/preload_queue.py'
       - 'astra_v2/run.py'
       - 'astra_v2/preflight.py'
@@ -47,6 +49,8 @@ jobs:
         run: python -m unittest discover -s tests -p test_astra_preload_novelty.py -v
       - name: Verify replenished original story supply
         run: python -m unittest discover -s tests -p test_astra_original_replenishment.py -v
+      - name: Verify autonomous unreviewed story proposals
+        run: python -m unittest discover -s tests -p test_astra_autonomous_story_proposals.py -v
       - name: Check renderer handoff
         run: python -m unittest discover -s tests -p test_astra_renderer_provenance.py -v
       - name: Reproduce live publisher queue tests with Studio 7.2 floor
