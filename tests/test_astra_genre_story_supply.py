@@ -54,6 +54,20 @@ class GenreStorySupplyTests(unittest.TestCase):
             self.assertIn(growth, story["story_beats"][3]["speech"])
             self.assertEqual(story["character_arc_id"], opening)
 
+    def test_character_choice_unlocks_external_plot(self):
+        from astra_v2.genre_story_supply import ARC_PLOT_BRIDGES, CHARACTER_ARCS
+        self.assertEqual(len(ARC_PLOT_BRIDGES), len(CHARACTER_ARCS))
+        for index in range(512):
+            story = genre_proposal(index)
+            arc_index = (index // 19) % len(ARC_PLOT_BRIDGES)
+            blocked, unlocked = ARC_PLOT_BRIDGES[arc_index]
+            build = story["story_beats"][1]["speech"]
+            self.assertLess(build.index(blocked), build.index(CHARACTER_ARCS[arc_index][1]))
+            self.assertLess(build.index(CHARACTER_ARCS[arc_index][1]), build.index(unlocked))
+            self.assertEqual(story["plot_dependency_id"], arc_index)
+            self.assertFalse(story["production_ready"])
+            self.assertTrue(publication_rejection(story))
+
     def test_reject_negative_index(self):
         with self.assertRaises(ValueError):
             genre_proposal(-1)
