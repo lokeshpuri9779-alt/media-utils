@@ -77,7 +77,7 @@ jobs:
           import subprocess
           from imageio_ffmpeg import get_ffmpeg_exe
           video='duo-preview/duo-short.mp4'
-          subprocess.run([get_ffmpeg_exe(),'-v','error','-i',video,'-f','null','-'],check=True)
+          subprocess.run([get_ffmpeg_exe(),'-v','error','-i',video,'-map','0:v:0','-map','0:a:0','-f','null','-'],check=True)
           print('ASTRA_DUO_MP4_DECODE_OK')
           PY
       - name: Render all 80 authored story beats as storyboard contact sheet
