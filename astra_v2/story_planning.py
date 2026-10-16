@@ -24,7 +24,8 @@ def planning_issues(story):
             issues.append("short_or_empty_narration")
         if not str(beat.get("visual") or "").strip():
             issues.append("missing_visual_direction")
-    if tuple(roles) != ROLES:
+    if (roles[0] != "reveal" or roles[-1] != "payoff"
+            or any(role not in ("build", "mechanism", "twist") for role in roles[1:-1])):
         issues.append("missing_causal_story_progression")
     if len(set(narrations)) != 4:
         issues.append("repeated_narration")
