@@ -24,4 +24,14 @@ def verify_mp4_streams(video_path):
                              "-map", "0:v:0", "-map", "0:a:0", "-f", "null", "-"],
                             capture_output=True, timeout=120)
     result.check_returncode()
-    return {"pass": True, "decoded_video_and_audio": True}
+    audio = subprocess.run([ffmpeg, "-v", "error", "-nostdin", "-i", str(video),
+                            "-map", "0:a:0", "-vn", "-ac", "1", "-ar", "8000",
+                            "-c:a", "pcm_s16le", "-f", "s16le", "pipe:1"],
+                           capture_output=True, timeout=120)
+    audio.check_returncode()
+    rms = pcm_rms_dbfs(audio.stdout)
+    if rms < -55:
+        raise ValueError("final MP4 audio is silent or too quiet")
+    return {"pass": True, "decoded_video_and_audio": True,
+            "audio_rms_dbfs": round(rms, 2),
+            "decoded_audio_samples": len(audio.stdout) // 2}
