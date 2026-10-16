@@ -71,18 +71,21 @@ def select_subject(story, shot):
         if directed_characters:
             return directed_characters[0]
         return directed_matches[0][1]
-    # Concrete storyboard visuals must win over incidental nouns in narration.
+    # Prefer an explicitly named local character, then a concrete directed
+    # object/setting. An unsupported explicit visual must not silently inherit
+    # an unrelated character from the title.
     scenery_visuals = {"forest", "tree", "woods", "landscape", "background", "nature"}
     explicit_visual = str(shot.get("visual_prompt") or shot.get("visual") or "").strip().lower()
     generic_visuals = {"", "story", "illustration", "fiction", "subject"}
+    local_characters = [name for _, name in local_matches if name in characters]
+    if local_characters:
+        return local_characters[0]
     if explicit_visual not in generic_visuals and explicit_visual not in scenery_visuals:
         visual_matches = [(m.start(), name) for name, pattern in SUBJECTS
                           if (m := re.search(pattern, explicit_visual))]
         if visual_matches:
             return min(visual_matches, key=lambda item: item[0])[1]
-    local_characters = [name for _, name in local_matches if name in characters]
-    if local_characters:
-        return local_characters[0]
+        return None
     if title_subject in characters and local_matches:
         return title_subject
     if local_matches:
