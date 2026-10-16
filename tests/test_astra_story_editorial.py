@@ -18,6 +18,18 @@ class StoryEditorialTests(unittest.TestCase):
         story = proposal(1)
         self.assertIn("narrative_duplicate", editorial_issues(story, [story]))
 
+    def test_semantic_duplicate_ignores_title_and_generated_id(self):
+        original = proposal(17)
+        changed = dict(original)
+        changed["content_id"] = "different-id"
+        changed["title"] = "A completely different title"
+        self.assertIn("narrative_duplicate", editorial_issues(changed, [original]))
+
+    def test_distinct_story_text_is_not_automatically_duplicate(self):
+        first = proposal(21)
+        second = proposal(88)
+        self.assertNotIn("narrative_duplicate", editorial_issues(second, [first]))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -7,6 +7,31 @@ from astra_v2.shorts_novelty import is_near_duplicate
 from astra_v2.publication_quality import publication_rejection
 
 
+
+def semantic_signature(story):
+    """Normalize plot-level dimensions, excluding title and generated IDs."""
+    beats = story.get("story_beats") or []
+    text = " ".join(str(beat.get("speech") or "") for beat in beats if isinstance(beat, dict))
+    tokens = {token.strip(".,!?;:()[]{}\"'").lower() for token in text.split()}
+    stop = {"the", "a", "an", "and", "or", "but", "to", "of", "in", "on", "at", "for", "with", "as", "is", "was", "were", "be", "that", "this", "it", "they", "their", "then", "when", "why", "how", "after", "before", "instead", "using", "showed", "understood", "community", "story", "mystery"}
+    return tokens - stop
+
+
+def is_semantic_near_duplicate(story, history=(), threshold=0.82):
+    """Detect high-overlap plot narration; conservative and deterministic."""
+    current = semantic_signature(story)
+    if not current:
+        return False
+    for prior in history:
+        previous = semantic_signature(prior)
+        if not previous:
+            continue
+        union = current | previous
+        similarity = len(current & previous) / len(union) if union else 0.0
+        if similarity >= threshold:
+            return True
+    return False
+
 def editorial_issues(story, history=()):
     issues = list(planning_issues(story))
     beats = story.get("story_beats") or []
@@ -15,7 +40,7 @@ def editorial_issues(story, history=()):
         issues.append("insufficient_narrative_detail")
     if len({str(b.get("visual") or "") for b in beats if isinstance(b, dict)}) < 3:
         issues.append("insufficient_visual_variety")
-    if is_near_duplicate(story, history):
+    if is_near_duplicate(story, history) or is_semantic_near_duplicate(story, history):
         issues.append("narrative_duplicate")
     if story.get("kind") == "unreviewed_causal_draft":
         issues.append("human_or_model_editorial_review_required")
