@@ -231,3 +231,15 @@ class DurableStoryLedgerTests(unittest.TestCase):
         ]}
         with self.assertRaisesRegex(ValueError, "source_fingerprint_mismatch"):
             propose_episode_from_story(story, "fox-trail", 1)
+
+    def test_invalid_utf8_ledger_fails_closed_without_overwrite(self):
+        from astra_v2.story_ledger import read_ledger, StoryLedgerError
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "ledger.json"
+            corrupted = b"\\xff\\xfe\\x00"
+            path.write_bytes(corrupted)
+            with self.assertRaisesRegex(StoryLedgerError, "story_ledger_unreadable"):
+                read_ledger(path)
+            with self.assertRaises(StoryLedgerError):
+                archive_fingerprints(path, [FP_A])
+            self.assertEqual(path.read_bytes(), corrupted)
