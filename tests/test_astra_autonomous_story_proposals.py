@@ -33,6 +33,17 @@ class AutonomousStoryProposalTests(unittest.TestCase):
         self.assertTrue(all(item["title"].startswith("The ") and "Mystery of the" in item["title"]
                             for item in candidates))
 
+    def test_story_beats_form_a_causal_chain(self):
+        item = proposal(37)
+        beats = item["story_beats"]
+        self.assertEqual([b["story_beat"] for b in beats],
+                         ["reveal", "build", "twist", "payoff"])
+        self.assertIn("needed to understand why", beats[0]["speech"])
+        self.assertIn("compared", beats[1]["speech"])
+        self.assertIn("explained the original mystery", beats[2]["speech"])
+        self.assertIn("cause understood", beats[3]["speech"])
+        self.assertTrue(all(item["production_ready"] is False for item in [item]))
+
     def test_invalid_indices_and_batch_sizes_rejected(self):
         with self.assertRaises(ValueError):
             proposal(-1)
