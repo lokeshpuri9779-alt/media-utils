@@ -1,0 +1,38 @@
+name: ASTRA Ten-Minute Development Checks
+
+# Frequent, read-only engineering checks. No code writes or publishing.
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: astra-ten-minute-development-checks
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install lightweight validation dependencies
+        run: python -m pip install --disable-pip-version-check 'Pillow>=10,<12' 'httpx==0.28.1'
+      - name: Compile ASTRA modules
+        run: python -m compileall -q astra_v2
+      - name: Validate story originality and production boundaries
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_story_*.py' -q
+          python -m unittest discover -s tests -p 'test_astra_shorts_novelty*.py' -q
+          python -m unittest discover -s tests -p 'test_astra_production_story_gate.py' -q
+          python -m unittest discover -s tests -p 'test_astra_renderer_provenance.py' -q
+          python -m unittest discover -s tests -p 'test_astra_shorts_fingerprint_lifecycle.py' -q
+          python -m unittest discover -s tests -p 'test_astra_production_readiness.py' -q
