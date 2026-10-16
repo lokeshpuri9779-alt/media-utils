@@ -144,4 +144,4 @@ def catalog():
                   ("THE LEAVES GLOWED", "Each new leaf pointed toward a ship lost beyond the rings.", "signal", "SIGNAL FOUND", "twist"),
                   ("A WAY HOME", "Following the glowing leaves, the lost crew finally found their way home.", "ship", "RESCUE", "payoff"),
               ]),
-    ]
+    ] + __import__("astra_v2.original_replenishment", fromlist=["catalog"]).catalog(story)
