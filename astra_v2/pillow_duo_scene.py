@@ -414,7 +414,6 @@ def draw_duo(image, shot, t):
     if prop and action in ("push","pull"):
         # Begin contact before object travel so the hand does not chase a
         # moving prop; ease the object only after the reach phase.
-        reach=_ease((max(0.0,float(t))-.06)/.36)
         travel=_ease((max(0.0,float(t))-.42)/.85)
         displacement=round((125 if action=="push" else -125)*travel)
         prop_pos=(540+displacement,1216)
