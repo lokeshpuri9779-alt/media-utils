@@ -188,9 +188,14 @@ def _ears_and_tail(d, actor, x, y, t, fur):
         for side in (-1,1):
             ex=x+side*83
             d.polygon(((ex-51,y-98),(ex+side*19,y-209),(ex+47,y-105)),fill=fur)
-        # A high, bushy curled tail gives squirrels a separate silhouette.
-        d.arc((x+76,y+86,x+290,y+390),205,505,fill=fur,width=42)
-        d.arc((x+100,y+113,x+265,y+355),205,505,fill=CREAM,width=8)
+        # Solid tapered plume rather than an open wire-loop silhouette.
+        d.polygon(((x+76,y+263),(x+122,y+204),(x+148,y+126),
+                   (x+207,y+78),(x+267,y+103),(x+295,y+163),
+                   (x+280,y+225),(x+231,y+254),(x+182,y+237),
+                   (x+141,y+292)),fill=fur)
+        d.polygon(((x+137,y+258),(x+172,y+207),(x+203,y+169),
+                   (x+253,y+162),(x+259,y+202),(x+218,y+225),
+                   (x+182,y+215)),fill=CREAM)
     elif actor=="dog":
         for side in (-1,1):
             ex=x+side*114
@@ -201,9 +206,12 @@ def _ears_and_tail(d, actor, x, y, t, fur):
             d.ellipse((ex-56,y-211,ex+56,y-91),fill=fur,outline=INK,width=4)
             d.ellipse((ex-38,y-193,ex+38,y-108),fill=(234,165,181))
     elif actor=="owl":
+        # Short rounded feather tufts; avoid the cat's tall triangular ears.
         for side in (-1,1):
-            ex=x+side*92
-            d.polygon(((ex-54,y-112),(ex+side*16,y-212),(ex+55,y-99)),fill=fur)
+            ex=x+side*86
+            d.ellipse((ex-35,y-148,ex+35,y-65),fill=fur,outline=INK,width=4)
+            d.polygon(((ex-24,y-104),(ex+side*17,y-165),
+                       (ex+29,y-95)),fill=fur)
     else:
         for side in (-1,1):
             ex=x+side*107
