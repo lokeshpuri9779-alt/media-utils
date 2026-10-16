@@ -37,7 +37,7 @@ class AutonomousStoryProposalTests(unittest.TestCase):
         item = proposal(37)
         beats = item["story_beats"]
         self.assertEqual([b["story_beat"] for b in beats],
-                         ["reveal", "investigation", "twist", "payoff"])
+                         ["reveal", "build", "twist", "payoff"])
         self.assertIn("needed to understand why", beats[0]["speech"])
         self.assertIn("compared", beats[1]["speech"])
         self.assertIn("explained the original mystery", beats[2]["speech"])
