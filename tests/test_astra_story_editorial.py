@@ -32,7 +32,7 @@ class StoryEditorialTests(unittest.TestCase):
         match = semantic_duplicate_match(second, [first])
         self.assertIsNotNone(match)
         self.assertEqual(match["matched_content_id"], "story-a")
-        self.assertGreaterEqual(match["similarity"], match["threshold"])
+        self.assertGreaterEqual(match["jaccard_similarity"], match["jaccard_threshold"])
 
     def test_fingerprint_match_is_reported_even_without_text_overlap(self):
         first = {"content_id": "story-fp", "title": "Earlier", "plot_fingerprint": "same-plot", "story_beats": [{"speech": "blue"}]}
