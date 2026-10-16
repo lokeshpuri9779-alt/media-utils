@@ -114,10 +114,24 @@ jobs:
           proc=subprocess.Popen(cmd,stdin=subprocess.PIPE)
           for i in range(72):
               t=i/8
-              im=Image.new('RGB',(1080,1920),(238,245,247))
+              im=Image.new('RGB',(1080,1920),(210,235,246))
               d=ImageDraw.Draw(im)
+              # Layered park environment provides visual depth and a grounded
+              # stage while keeping actors and handoff object unobstructed.
+              d.ellipse((680,190,875,385),fill=(255,226,141))
+              d.ellipse((-150,650,610,1180),fill=(163,207,191))
+              d.ellipse((480,690,1250,1180),fill=(135,191,175))
+              d.rectangle((0,1115,1080,1920),fill=(112,172,133))
+              d.polygon([(0,1260),(1080,1190),(1080,1920),(0,1920)],
+                        fill=(93,151,118))
+              for tx,ty in ((115,775),(965,765)):
+                  d.rectangle((tx-18,ty,tx+18,1160),fill=(116,85,63))
+                  d.ellipse((tx-110,ty-130,tx+110,ty+100),fill=(62,144,105))
+                  d.ellipse((tx-80,ty-175,tx+80,ty+45),fill=(79,164,115))
+              for cx,cy in ((130,1350),(910,1410),(195,1550),(865,1650)):
+                  d.ellipse((cx-18,cy-10,cx+18,cy+10),fill=(237,218,130))
               d.text((65,110),'ASTRA pair interaction: cat and squirrel',fill=(25,42,58))
-              d.line((55,1190,1025,1190),fill=(99,145,149),width=5)
+              d.line((55,1190,1025,1190),fill=(68,121,93),width=5)
               # Narrative beats: greet, approach, pick up, hand off, receive.
               if i<16:
                   left_x,right_x=325,735
