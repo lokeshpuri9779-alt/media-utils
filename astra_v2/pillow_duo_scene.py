@@ -177,11 +177,23 @@ def _ears_and_tail(d, actor, x, y, t, fur):
                       fill=fur)
             d.polygon(((ex-24,y-117),(ex+side*12,y-207),(ex+19,y-111)),
                       fill=(255,191,158))
-    elif actor in ("cat","squirrel"):
+    elif actor=="cat":
         for side in (-1,1):
             ex=x+side*83
             d.polygon(((ex-51,y-98),(ex+side*19,y-209),(ex+47,y-105)),fill=fur)
-        d.arc((x+86,y+133,x+240,y+370),190,352,fill=fur,width=27)
+        # Cats have a compact curved tail; keep it distinct from the
+        # squirrel's oversized plume so silhouettes remain species-readable.
+        d.arc((x+86,y+133,x+220,y+330),190,352,fill=fur,width=25)
+    elif actor=="squirrel":
+        for side in (-1,1):
+            ex=x+side*83
+            d.polygon(((ex-51,y-98),(ex+side*19,y-209),(ex+47,y-105)),fill=fur)
+        # Solid tapered plume rather than an open wire-loop silhouette.
+        d.ellipse((x+110,y+82,x+292,y+287),fill=fur,outline=INK,width=5)
+        d.ellipse((x+146,y+116,x+256,y+238),fill=CREAM)
+        d.ellipse((x+195,y+152,x+271,y+242),fill=fur)
+        d.polygon(((x+83,y+264),(x+147,y+205),(x+190,y+248),
+                   (x+129,y+310)),fill=fur)
     elif actor=="dog":
         for side in (-1,1):
             ex=x+side*114
@@ -192,9 +204,10 @@ def _ears_and_tail(d, actor, x, y, t, fur):
             d.ellipse((ex-56,y-211,ex+56,y-91),fill=fur,outline=INK,width=4)
             d.ellipse((ex-38,y-193,ex+38,y-108),fill=(234,165,181))
     elif actor=="owl":
+        # Low rounded crown feathers, not cat-like pointed ears.
         for side in (-1,1):
-            ex=x+side*92
-            d.polygon(((ex-54,y-112),(ex+side*16,y-212),(ex+55,y-99)),fill=fur)
+            ex=x+side*72
+            d.ellipse((ex-38,y-145,ex+38,y-84),fill=fur,outline=INK,width=4)
     else:
         for side in (-1,1):
             ex=x+side*107
@@ -269,6 +282,15 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
         if action=="swim":
             arm_raise=45*math.sin(t*7+idx*math.pi+(0 if side==1 else math.pi))
         hand=(x+side*153,y+218-arm_raise)
+        if wave:
+            # Raise the waving hand above the head; the old 80px offset
+            # never lifted it past the shoulder, making waves unreadable.
+            phase=math.sin(t*5.5+idx)
+            hand=(x+126+int(24*phase),y-115+int(18*phase))
+        elif action=="dance":
+            # Opposing overhead gestures create a recognizable dance pose.
+            phase=math.sin(t*6.2+idx*math.pi)
+            hand=(x+side*(120+int(18*phase)),y+18-int(95*max(0,side*phase)))
         if action in ("walk","run","chase","sneak"):
             # Counter-swing the arms against the leg gait. Opposite arms
             # advance together with opposite legs, rather than hanging still.
@@ -309,10 +331,24 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
             ex=x+side*59
             d.ellipse((ex-41,y+42,ex+41,y+106),fill=CREAM)
     if name=="owl":
+        # Wide facial discs and brow arcs make the owl readable at Shorts scale.
         for side in (-1,1):
-            ex=x+side*51
-            d.ellipse((ex-45,y-70,ex+45,y+35),fill=CREAM)
+            ex=x+side*52
+            d.ellipse((ex-54,y-86,ex+54,y+49),fill=CREAM)
+            d.arc((ex-50,y-88,ex+50,y+37),190,350,fill=INK,width=5)
     _facial(d,x,y,mood,t,idx)
+    # Species-specific facial markers supplement the shared expressive face.
+    if name=="owl":
+        d.polygon(((x-22,y+35),(x+22,y+35),(x,y+72)),
+                  fill=(242,170,61),outline=INK)
+    elif name in ("cat","mouse"):
+        # Fine, symmetric whiskers remain inside the scene's safe region.
+        for side in (-1,1):
+            start=x+side*76
+            end=x+side*143
+            for offset in (-4,13,29):
+                _line(d,[(start,y+47+offset),(end,y+35+offset)],
+                      INK,3)
     if visual_recipe:
         draw_accessory(d,x,y,visual_recipe)
     return hands

@@ -9,6 +9,7 @@ on:
       - 'astra_v2/icon_visuals.py'
       - 'studio_renderer.py'
       - 'tests/test_pillow_duo_scene.py'
+      - 'tests/test_astra_species_fidelity.py'
       - 'tests/test_pillow_duo_continuity.py'
       - 'tests/test_pillow_contact_timing.py'
       - 'tests/test_studio_directed_motion.py'
@@ -35,6 +36,10 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_astra_icon_visuals.py' -v
           python -m unittest discover -s tests -p 'test_pillow_duo_scene.py' -v
+      - name: Verify species-specific pixel regression tests
+        run: |
+          python -m pip install 'pytest>=8,<10'
+          python -m pytest -q tests/test_astra_species_fidelity.py
           python -m unittest discover -s tests -p 'test_pillow_scene_direction.py' -v
           python -m unittest discover -s tests -p 'test_astra_stage_continuity.py' -v
           python -m unittest discover -s tests -p 'test_pillow_duo_continuity.py' -v
@@ -70,6 +75,183 @@ jobs:
           subprocess.run([get_ffmpeg_exe(),'-v','error','-i',path,'-f','null','-'],check=True)
           print('Verified decoded duo MP4:',path)
           PY
+      - name: Render dedicated cat squirrel owl species showcase
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          from astra_v2.pillow_duo_scene import _actor
+          from imageio_ffmpeg import get_ffmpeg_exe
+          import subprocess
+          path='preview/astra-species-showcase.mp4'
+          cmd=[get_ffmpeg_exe(),'-hide_banner','-loglevel','error','-y',
+               '-f','rawvideo','-pix_fmt','rgb24','-s','1080x1920','-r','8',
+               '-i','-','-c:v','libx264','-preset','ultrafast','-pix_fmt','yuv420p',path]
+          proc=subprocess.Popen(cmd,stdin=subprocess.PIPE)
+          for name in ('cat','squirrel','owl'):
+              for i in range(24):
+                  im=Image.new('RGB',(1080,1920),(238,245,247))
+                  from PIL import ImageDraw
+                  d=ImageDraw.Draw(im)
+                  d.text((70,110),f'ASTRA species: {name}',fill=(25,42,58))
+                  action=('walk','wave','dance')[('cat','squirrel','owl').index(name)]
+                  _actor(d,name,500,740,i/8,action,'curious',0,ground_y=1160)
+                  proc.stdin.write(im.tobytes())
+          proc.stdin.close()
+          assert proc.wait()==0
+          subprocess.run([get_ffmpeg_exe(),'-v','error','-i',path,'-f','null','-'],check=True)
+          print('Verified decoded species showcase MP4:',path)
+          PY
+      - name: Render two-character interaction showcase
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageDraw
+          from astra_v2.pillow_duo_scene import _actor
+          from imageio_ffmpeg import get_ffmpeg_exe
+          import subprocess
+          path='preview/astra-pair-interaction.mp4'
+          cmd=[get_ffmpeg_exe(),'-hide_banner','-loglevel','error','-y',
+               '-f','rawvideo','-pix_fmt','rgb24','-s','1080x1920','-r','8',
+               '-i','-','-c:v','libx264','-preset','ultrafast','-pix_fmt','yuv420p',path]
+          proc=subprocess.Popen(cmd,stdin=subprocess.PIPE)
+          for i in range(72):
+              t=i/8
+              im=Image.new('RGB',(1080,1920),(210,235,246))
+              d=ImageDraw.Draw(im)
+              # Layered park environment provides visual depth and a grounded
+              # stage while keeping actors and handoff object unobstructed.
+              d.ellipse((680,190,875,385),fill=(255,226,141))
+              d.ellipse((-150,650,610,1180),fill=(163,207,191))
+              d.ellipse((480,690,1250,1180),fill=(135,191,175))
+              d.rectangle((0,1115,1080,1920),fill=(112,172,133))
+              d.polygon([(0,1260),(1080,1190),(1080,1920),(0,1920)],
+                        fill=(93,151,118))
+              for tx,ty in ((115,775),(965,765)):
+                  d.rectangle((tx-18,ty,tx+18,1160),fill=(116,85,63))
+                  d.ellipse((tx-110,ty-130,tx+110,ty+100),fill=(62,144,105))
+                  d.ellipse((tx-80,ty-175,tx+80,ty+45),fill=(79,164,115))
+              for cx,cy in ((130,1350),(910,1410),(195,1550),(865,1650)):
+                  d.ellipse((cx-18,cy-10,cx+18,cy+10),fill=(237,218,130))
+              d.text((65,110),'ASTRA pair interaction: cat and squirrel',fill=(25,42,58))
+              d.line((55,1190,1025,1190),fill=(68,121,93),width=5)
+              # Narrative beats: greet, approach, pick up, hand off, receive.
+              if i<16:
+                  left_x,right_x=325,735
+                  cat_action=squirrel_action='wave'
+              elif i<32:
+                  progress=(i-16)/15
+                  left_x=325+int(65*progress)
+                  right_x=735-int(65*progress)
+                  cat_action=squirrel_action='walk'
+              else:
+                  left_x,right_x=390,670
+                  cat_action=squirrel_action='hold'
+              # The golden object starts on the floor, rises with the cat's
+              # reaching hand, travels across the gap, and ends with squirrel.
+              if i<32:
+                  px,py=540,1094
+              elif i<44:
+                  progress=(i-32)/11
+                  px=540-int(10*progress)
+                  py=1094-int(195*progress)
+              elif i<56:
+                  progress=(i-44)/11
+                  px=530+int(55*progress)
+                  py=899
+              else:
+                  px,py=585,899
+              # Explicit possession phases: cat pickup, short shared contact,
+              # then squirrel-only hold. Avoid two hands owning the object
+              # for the entire transfer.
+              cat_holding=32<=i<50
+              squirrel_holding=i>=48
+              def smoothstep(v):
+                  v=max(0.0,min(1.0,v))
+                  return v*v*(3-2*v)
+              # Blend wrist targets in/out instead of instantly attaching
+              # and detaching hands at the possession boundaries.
+              cat_strength=(smoothstep((i-32)/6) *
+                            (1-smoothstep((i-48)/6))) if cat_holding or 48<=i<54 else 0
+              squirrel_strength=smoothstep((i-46)/8) if i>=46 else 0
+              # A small celebratory wave follows the received object.
+              if i>=62:
+                  squirrel_action='wave'
+              _actor(d,'cat',left_x,760,t,cat_action,'happy',0,
+                     hand_target=(px,py) if cat_strength>0 else None,
+                     hand_strength=cat_strength,interact_side=1,ground_y=1190)
+              _actor(d,'squirrel',right_x,760,t,squirrel_action,'happy',1,
+                     hand_target=(px,py) if squirrel_strength>0 else None,
+                     hand_strength=squirrel_strength,interact_side=-1,ground_y=1190)
+              # Draw the prop after the arms so the contact remains legible.
+              d.ellipse((px-27,py-27,px+27,py+27),
+                        fill=(248,195,79),outline=(25,42,58),width=5)
+              d.ellipse((px-9,py-14,px+1,py-4),fill=(255,247,203))
+              proc.stdin.write(im.tobytes())
+          proc.stdin.close()
+          assert proc.wait()==0
+          subprocess.run([get_ffmpeg_exe(),'-v','error','-i',path,'-f','null','-'],check=True)
+          print('Verified decoded interaction MP4:',path)
+          PY
+      - name: Render 24-second three-scene story QA
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageDraw, ImageFont
+          from astra_v2.pillow_duo_scene import _actor
+          from imageio_ffmpeg import get_ffmpeg_exe
+          import subprocess, math
+          path='preview/astra-24s-story-qa.mp4'
+          ff=get_ffmpeg_exe()
+          cmd=[ff,'-hide_banner','-loglevel','error','-y','-f','rawvideo',
+               '-pix_fmt','rgb24','-s','1080x1920','-r','6','-i','-',
+               '-c:v','libx264','-preset','ultrafast','-pix_fmt','yuv420p',path]
+          proc=subprocess.Popen(cmd,stdin=subprocess.PIPE)
+          font=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',47)
+          captions=('A squirrel lost its golden treasure.',
+                    'A kind cat helped find it.',
+                    'Together, they celebrated!')
+          for i in range(144):
+              t=i/6
+              scene=min(2,i//48)
+              colors=((214,235,248),(238,224,191),(217,236,221))
+              im=Image.new('RGB',(1080,1920),colors[scene])
+              d=ImageDraw.Draw(im)
+              d.ellipse((730,175,920,365),fill=(255,227,150))
+              d.ellipse((-150,720,620,1270),fill=(145,198,170))
+              d.ellipse((490,750,1250,1240),fill=(116,178,150))
+              d.rectangle((0,1160,1080,1920),fill=(105,162,126))
+              for tx in (95,990):
+                  d.rectangle((tx-18,760,tx+18,1170),fill=(116,86,65))
+                  d.ellipse((tx-105,650,tx+105,920),fill=(65,145,101))
+              if scene==0:
+                  cx,sx=330,740
+                  ca,sa='look','warn'
+                  px,py=545,1100
+              elif scene==1:
+                  progress=(i-48)/47
+                  cx=330+int(60*progress)
+                  sx=740-int(60*progress)
+                  ca,sa='walk','wave'
+                  px,py=545,1100-int(180*progress)
+              else:
+                  cx,sx=390,670
+                  ca,sa='dance','dance'
+                  px,py=540,900
+              _actor(d,'cat',cx,770,t,ca,'happy',0,ground_y=1190)
+              _actor(d,'squirrel',sx,770,t,sa,'happy',1,ground_y=1190)
+              d.ellipse((px-30,py-30,px+30,py+30),
+                        fill=(248,195,79),outline=(25,42,58),width=5)
+              # High-contrast caption safe area for mobile viewing.
+              d.rounded_rectangle((45,1470,1035,1625),radius=28,
+                                  fill=(24,45,57))
+              text=captions[scene]
+              bb=d.textbbox((0,0),text,font=font)
+              d.text(((1080-(bb[2]-bb[0]))//2,1520),text,
+                     font=font,fill=(255,255,255))
+              proc.stdin.write(im.tobytes())
+          proc.stdin.close()
+          assert proc.wait()==0
+          subprocess.run([ff,'-v','error','-i',path,'-f','null','-'],check=True)
+          print('Verified silent three-scene story QA:',path)
+          PY
       - name: Render full Studio scene compositor preview (silent)
         run: python -m tools.pillow_studio_preview
       - name: Render four new actions in actual Studio
@@ -79,6 +261,9 @@ jobs:
           name: astra-pillow-duo-motion
           path: |
             preview/pillow-duo-motion.mp4
+            preview/astra-species-showcase.mp4
+            preview/astra-pair-interaction.mp4
+            preview/astra-24s-story-qa.mp4
             preview/pillow-studio-composite.mp4
             preview/astra-four-directed-actions.mp4
             preview/astra-four-directed-actions.json
