@@ -48,7 +48,7 @@ RESOLUTIONS = [
 ]
 
 def catalog(excluded_ids=None, limit=32):
-    """Return deterministic unseen candidates, bounded to protect CPU render lanes."""
+    """Return unreviewed draft candidates, never publication-approved stories."""
     excluded = set(excluded_ids or ())
     limit = max(0, min(int(limit), 128))
     if limit == 0:
@@ -129,8 +129,8 @@ def catalog(excluded_ids=None, limit=32):
         seen_places[p] += 1
         seen_pairs.add((c, p))
         result.append({
-            "genre": "fiction", "kind": "procedural_fiction",
-            "production_ready": True, "content_id": cid,
+            "genre": "fiction", "kind": "unreviewed_causal_draft",
+            "production_ready": False, "content_id": cid,
             "plot_key": f"procedural-v1:{m}:{r}:{e}",
             "title": title, "hook": beats[0][0],
             "question": f"What happens when {name} discovers {mystery}?",
