@@ -144,8 +144,11 @@ jobs:
                   py=899
               else:
                   px,py=585,899
-              cat_holding=32<=i<56
-              squirrel_holding=i>=44
+              # Explicit possession phases: cat pickup, short shared contact,
+              # then squirrel-only hold. Avoid two hands owning the object
+              # for the entire transfer.
+              cat_holding=32<=i<50
+              squirrel_holding=i>=48
               _actor(d,'cat',left_x,760,t,cat_action,'happy',0,
                      hand_target=(px,py) if cat_holding else None,
                      interact_side=1,ground_y=1190)
