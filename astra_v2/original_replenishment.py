@@ -47,7 +47,6 @@ def catalog(story):
                ("WHISPERS IN GLASS", "She heard the sound of a storm trapped inside the clear trunks.", "signal", "LISTEN CLOSE", "build"),
                ("THE BROKEN FLUTE", "At the forest center she found a broken flute that once guided the wind.", "door", "MISSING NOTE", "twist"),
                ("THE FOREST BREATHED", "She repaired the flute and played one note, releasing a gentle breeze.", "forest", "WIND RETURNS", "payoff")]),
-,
         story("echo-orchard", "The Orchard of Echoes", "Why did the trees repeat every word?", "A sound engineer discovers the orchard is echoing a lost distress call.",
               [("THE TREES REPLIED", "A sound engineer heard her own greeting return from an empty orchard.", "forest", "WHO ANSWERED", "reveal"),
                ("A VOICE IN THE BARK", "Each tree repeated a different fragment whenever the wind crossed its branches.", "tree", "BROKEN MESSAGE", "build"),
