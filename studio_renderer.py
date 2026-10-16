@@ -1098,27 +1098,18 @@ def render_frame(plan,t,genre,total):
         # The unified Studio fiction renderer owns all supported animal casts.
         # Unrepresentable scenes fail closed; never mask a broken story with
         # unrelated generic art or silently switch publishing engines.
-        if genre == 'fiction' and os.environ.get('ASTRA_UNIFIED_STORY_ENGINE', '0') == '1':
+        if genre == 'fiction':
+            # One fiction scene director owns solo, duo and ensemble grammar.
+            # Legacy engine flags no longer select alternate renderers.
             from astra_v2.unified_story_engine import draw_story_frame
             draw_story_frame(im, s, u, draw_directed=draw_visual,
                              global_time=t, accent=accent)
-        elif (genre == 'fiction' and s.get('experimental_ensemble')
-                and os.environ.get('ASTRA_EXPERIMENT_ENSEMBLE', '0') == '1'):
-            from astra_v2.ensemble_scene import ensemble_frame
-            if not ensemble_frame(im,s,u):
-                raise CreativeReject('Experimental ensemble cast cannot be rendered faithfully.')
-        elif genre == 'fiction' and os.environ.get('ASTRA_STUDIO_PILLOW_DUO', '1') == '1':
-            from astra_v2.pillow_duo_scene import draw_duo
-            if not draw_duo(im, s, u):
-                if os.environ.get('ASTRA_PILLOW_DUO_STRICT', '0') == '1':
-                    raise CreativeReject('Pillow Duo cannot represent this fiction scene; repair its cast or storyboard.')
-                draw_visual(im,s,t,u,accent)
         else:
             draw_visual(im,s,t,u,accent)
     elif genre == 'fiction' and not layers['draw_cached_media'] and not layers['draw_director_asset']:
-        # Licensed icon illustration only for otherwise empty foregrounds.
-        from astra_v2.icon_visuals import overlay_icon
-        overlay_icon(im,s,t,accent)
+        # Fiction must not silently substitute a generic icon for a missing
+        # character or environmental scene. Preserve the news/icon pipeline.
+        raise CreativeReject('Unified Studio: fiction scene has no drawable visual or authorized media.')
     if str(s.get('creative_format') or '')=='documentary_montage' and .36 < (u/max(.2,s['duration'])) < .62:
         p=(u/max(.2,s['duration'])-.36)/.26
         pulse=1.0+0.018*math.sin(min(1,p)*math.pi)

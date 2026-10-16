@@ -1,9 +1,9 @@
-"""Confirm Studio's real frame compositor invokes Pillow for a named pair."""
+"""Confirm Studio routes fiction cast sizes through the unified scene director."""
 import unittest
 from unittest.mock import patch
 import numpy as np
 from studio_renderer import render_frame, RATE
-from astra_v2.pillow_duo_scene import draw_duo
+from astra_v2.unified_story_engine import draw_story_frame
 
 class PillowStudioHookTests(unittest.TestCase):
     def test_fiction_duo_uses_actual_studio_frame_path(self):
@@ -14,45 +14,23 @@ class PillowStudioHookTests(unittest.TestCase):
                 "visual": "story", "story_subject": "fox",
                 "story_cast": ("fox", "rabbit"), "story_action": "carry",
                 "director_camera": "still", "creative_format": "microfiction_cinematic"}
-        with patch("astra_v2.pillow_duo_scene.draw_duo", wraps=draw_duo) as spy:
+        with patch("astra_v2.unified_story_engine.draw_story_frame", wraps=draw_story_frame) as spy:
             frame = render_frame([shot], 1.3, "fiction", 2.4)
         self.assertEqual(spy.call_count, 1)
         self.assertEqual(frame.size, (1080, 1920))
         self.assertEqual(frame.mode, "RGB")
-    def test_strict_mode_rejects_unsupported_duo(self):
-        from studio_renderer import CreativeReject
+    def test_single_character_uses_unified_directed_scene(self):
         shot = {"start": 0.0, "end": 2.4, "duration": 2.4,
                 "voice_start": .08, "audio": np.zeros(RATE, dtype=np.float32),
                 "speech": "A lone fox enters the doorway.",
                 "headline": "A lonely fox", "label": "A lonely fox", "visual": "story",
                 "director_camera": "still", "creative_format": "microfiction_cinematic"}
-        with patch.dict("os.environ", {"ASTRA_PILLOW_DUO_STRICT": "1", "ASTRA_STUDIO_PILLOW_DUO": "1"}):
-            with self.assertRaisesRegex(CreativeReject, "Pillow Duo cannot represent"):
-                render_frame([shot], 1.3, "fiction", 2.4)
-
-    def test_default_mode_preserves_legacy_fallback(self):
-        shot = {"start": 0.0, "end": 2.4, "duration": 2.4,
-                "voice_start": .08, "audio": np.zeros(RATE, dtype=np.float32),
-                "speech": "A lone fox enters the doorway.",
-                "headline": "A lonely fox", "label": "A lonely fox", "visual": "story",
-                "director_camera": "still", "creative_format": "microfiction_cinematic"}
-        with patch.dict("os.environ", {"ASTRA_PILLOW_DUO_STRICT": "0", "ASTRA_STUDIO_PILLOW_DUO": "1"}):
+        with patch("astra_v2.unified_story_engine.draw_story_frame",
+                   wraps=draw_story_frame) as spy:
             frame = render_frame([shot], 1.3, "fiction", 2.4)
+        self.assertEqual(spy.call_count, 1)
         self.assertEqual(frame.size, (1080, 1920))
 
-    def test_strict_preflight_blocks_before_asset_work(self):
-        from studio_renderer import render_short, CreativeReject
-        shot = {"start": 0.0, "end": 2.4, "duration": 2.4,
-                "speech": "A lone fox walks through a doorway.",
-                "headline": "A lone fox", "label": "A lone fox",
-                "visual": "story", "creative_format": "microfiction_cinematic"}
-        with patch.dict("os.environ", {"ASTRA_PILLOW_DUO_STRICT": "1", "ASTRA_STUDIO_PILLOW_DUO": "1"}):
-            with patch("studio_renderer.make_plan", return_value=[shot]):
-                with patch("studio_renderer.creative_quality_gate", return_value={}):
-                    with patch("studio_renderer.asset_manifest") as assets:
-                        with self.assertRaisesRegex(CreativeReject, "Pillow Duo preflight rejected"):
-                            render_short({"genre": "fiction"}, "/tmp/should-not-render.mp4")
-                        assets.assert_not_called()
 
 if __name__ == "__main__":
     unittest.main()
