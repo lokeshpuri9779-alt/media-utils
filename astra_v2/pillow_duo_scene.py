@@ -264,6 +264,13 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
         if action=="swim":
             arm_raise=45*math.sin(t*7+idx*math.pi+(0 if side==1 else math.pi))
         hand=(x+side*153,y+218-arm_raise)
+        if action in ("walk","run","chase","sneak"):
+            # Counter-swing the arms against the leg gait. Opposite arms
+            # advance together with opposite legs, rather than hanging still.
+            swing=math.sin(t*(8.4 if action in ("run","chase") else
+                             3.4 if action=="sneak" else 4.6)+idx*math.pi)
+            extent=52 if action in ("run","chase") else 19 if action=="sneak" else 32
+            hand=(x+side*153,y+218+int(side*extent*swing))
         if action=="catch" and side==1:
             hand=(x+176,y+118)
         elif action=="sneak":
