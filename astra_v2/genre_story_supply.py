@@ -96,7 +96,25 @@ def balanced_genre_index(index, recent):
     return options[index % len(options)]
 
 
-def genre_proposal(index, scenario_index=None):
+def balanced_structure_index(index, recent):
+    """Choose a less-used narrative structure from the rolling proposal window."""
+    from collections import Counter
+    counts = Counter(
+        str(item.get("plot_structure"))
+        for item in recent[-500:]
+        if isinstance(item, dict) and item.get("plot_structure") in {
+            row[0] for row in NARRATIVE_STRUCTURES
+        }
+    )
+    minimum = min(counts.get(row[0], 0) for row in NARRATIVE_STRUCTURES)
+    options = [
+        offset for offset, row in enumerate(NARRATIVE_STRUCTURES)
+        if counts.get(row[0], 0) == minimum
+    ]
+    return options[index % len(options)]
+
+
+def genre_proposal(index, scenario_index=None, structure_index=None):
     if not isinstance(index, int) or isinstance(index, bool) or index < 0:
         raise ValueError("Invalid proposal index")
     genre, setting, hero, problem, reveal, solution, visual = SCENARIOS[(index if scenario_index is None else scenario_index) % len(SCENARIOS)]
@@ -106,7 +124,7 @@ def genre_proposal(index, scenario_index=None):
     partner = PARTNERS[(index // 5) % len(PARTNERS)]
     strategy = STRATEGIES[(index // 7) % len(STRATEGIES)]
     payoff_style = PAYOFF_STYLES[(index // 11) % len(PAYOFF_STYLES)]
-    structure_id, opening, middle, ending = NARRATIVE_STRUCTURES[(index // 13) % len(NARRATIVE_STRUCTURES)]
+    structure_id, opening, middle, ending = NARRATIVE_STRUCTURES[((index // 13) if structure_index is None else structure_index) % len(NARRATIVE_STRUCTURES)]
     beats = [
         ("reveal", f"At {setting}, {hero} encountered {problem}. Everyone stopped what they were doing. The hero {motivation} and teamed up with {partner}. {opening}", visual),
         ("build", f"The hero tried a simple solution, but it did not work. {complication}. {strategy}. {middle}", "book"),
