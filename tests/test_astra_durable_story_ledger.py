@@ -293,3 +293,19 @@ class DurableStoryLedgerTests(unittest.TestCase):
         self.assertEqual(result["conflicting"], 1)
         self.assertFalse(result["ready"])
         self.assertEqual(state["pending"]["p"]["plot_fingerprint"], "")
+
+    def test_legacy_migration_imports_valid_only_and_reports_missing(self):
+        from astra_v2.story_ledger import migrate_valid_fingerprints
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "ledger.json"
+            state = {"reserved": {"a": {"plot_fingerprint": FP_A},
+                                  "legacy": {"plot_fingerprint": ""}},
+                     "published": {"p": {"plot_fingerprint": FP_B}}}
+            result = migrate_valid_fingerprints(path, state)
+            self.assertEqual(result["archive"]["archived"], sorted([FP_A, FP_B]))
+            self.assertEqual(result["coverage"]["missing"], 1)
+            self.assertFalse(result["complete"])
+            with self.assertRaisesRegex(StoryLedgerError, "history_untrusted"):
+                migrate_valid_fingerprints(path, {"published": {
+                    "bad": {"plot_fingerprint": FP_A, "plot_hash": FP_B}}})
+            self.assertEqual(read_ledger(path)["archived"], sorted([FP_A, FP_B]))
