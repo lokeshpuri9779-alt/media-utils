@@ -24,7 +24,7 @@ def read_ledger(path):
     try:
         with target.open("r", encoding="utf-8") as stream:
             data = json.load(stream)
-    except (OSError, json.JSONDecodeError) as exc:
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
         raise StoryLedgerError("story_ledger_unreadable") from exc
     if not isinstance(data, dict) or data.get("version") != 1:
         raise StoryLedgerError("story_ledger_invalid_schema")
