@@ -2,18 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-13T05:35:59.202677+00:00",
-      "stage": "script",
-      "element": "coherence",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 92.0,
-        "candidate": "mercury-solar-day-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
       "at": "2026-10-13T05:35:59.209196+00:00",
       "stage": "render",
       "element": "technical",
@@ -7341,6 +7329,17 @@
       },
       "proposed_action": "Diagnose story supply and creative gate failures",
       "candidate_id": ""
+    },
+    {
+      "at": "2026-10-16T19:40:14.448338+00:00",
+      "stage": "quality",
+      "element": "candidate_selection",
+      "outcome": "fail",
+      "evidence": {
+        "reason": "no_approved_original_story_available"
+      },
+      "proposed_action": "Diagnose story supply and creative gate failures",
+      "candidate_id": ""
     }
   ],
   "stage_counts": {
@@ -7364,7 +7363,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 43,
+      "unknown": 42,
       "improved": 0,
       "regressed": 0
     },
@@ -7450,7 +7449,7 @@
     },
     "quality": {
       "pass": 25,
-      "fail": 127,
+      "fail": 128,
       "skip": 0,
       "unknown": 0,
       "improved": 0,
