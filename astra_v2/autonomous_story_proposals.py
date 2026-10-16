@@ -202,8 +202,8 @@ def replenish(path, count=24, history=()):
         if len(added) >= count:
             break
         if next_index % 2:
-            from astra_v2.genre_story_supply import genre_proposal
-            candidate = genre_proposal(next_index)
+            from astra_v2.genre_story_supply import genre_proposal, balanced_genre_index
+            candidate = genre_proposal(balanced_genre_index(next_index, prior))
         else:
             candidate = proposal(next_index)
         next_index += 1
