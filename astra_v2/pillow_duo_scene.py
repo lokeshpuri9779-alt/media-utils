@@ -295,8 +295,15 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
             target=(hand_target[0]-side*22, hand_target[1]+2)
             hand=(hand[0]*(1-strength)+target[0]*strength,
                   hand[1]*(1-strength)+target[1]*strength)
-        elbow=((shoulder[0]+hand[0])*.5+side*18,
-               (shoulder[1]+hand[1])*.5+14)
+        # Bend the interacting elbow toward the torso while reaching or
+        # withdrawing, avoiding a rigid midpoint hinge across the gesture.
+        if hand_target is not None and side==interact_side:
+            bend=_ease(float(hand_strength))
+            elbow=((shoulder[0]+hand[0])*.5+side*(18-29*bend),
+                   (shoulder[1]+hand[1])*.5+14-25*bend)
+        else:
+            elbow=((shoulder[0]+hand[0])*.5+side*18,
+                   (shoulder[1]+hand[1])*.5+14)
         _line(d,[shoulder,elbow,hand],fur,22)
         d.ellipse((hand[0]-13,hand[1]-13,hand[0]+13,hand[1]+13),
                   fill=CREAM,outline=INK,width=3)
