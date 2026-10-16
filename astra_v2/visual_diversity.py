@@ -5,7 +5,7 @@ A match is a review signal, not automatic proof of duplicate storytelling.
 """
 from __future__ import annotations
 
-from PIL import Image, ImageChops, ImageStat
+from PIL import Image
 
 
 def stage_signature(image):
@@ -47,3 +47,25 @@ def suspicious_reuse(current_frames, prior_frames, *, max_distance=3, min_matche
                 matched += 1
                 break
     return matched >= min_matches
+
+
+def screen_story_frames(render_frame, plan, total):
+    """Sample authored beats at their midpoint for consistent comparisons."""
+    if not plan:
+        raise ValueError("story plan must contain beats")
+    frames=[]
+    for shot in plan:
+        start=float(shot.get("start") or 0)
+        duration=float(shot.get("duration") or 0)
+        if duration <= 0:
+            raise ValueError("invalid beat duration")
+        frames.append(render_frame(plan,start+duration*.5,"fiction",total))
+    return frames
+
+
+def review_visual_reuse(current_frames, prior_frames):
+    """Non-publishing diagnostic; never block a release without calibration."""
+    return {"review_required": suspicious_reuse(current_frames,prior_frames),
+            "sampled_current":len(current_frames),
+            "sampled_previous":len(prior_frames),
+            "enforcement":"diagnostic_only"}
