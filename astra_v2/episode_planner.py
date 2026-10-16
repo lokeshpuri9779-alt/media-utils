@@ -40,6 +40,23 @@ def known_fingerprints(state):
     return known
 
 
+def _validate_state_continuity(scenes):
+    """Validate explicit state transitions without guessing from prose."""
+    previous_after = None
+    for index, scene in enumerate(scenes):
+        before = scene.get("state_before")
+        after = scene.get("state_after")
+        if before is not None and (not isinstance(before, str) or not before.strip()):
+            raise ValueError("invalid_scene_state_before")
+        if after is not None and (not isinstance(after, str) or not after.strip()):
+            raise ValueError("invalid_scene_state_after")
+        if index and previous_after is not None and before is not None:
+            if _normalize(previous_after) != _normalize(before):
+                raise ValueError("scene_state_discontinuity")
+        if after is not None:
+            previous_after = after
+
+
 def plan_episode(series_id, episode_number, scenes, state=None):
     """Validate a causal episode outline without approving it for production."""
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{1,63}", str(series_id)):
@@ -56,6 +73,10 @@ def plan_episode(series_id, episode_number, scenes, state=None):
         if any(not isinstance(scene.get(k), str) or not scene[k].strip() for k in fields):
             raise ValueError("scene_missing_causal_fields")
         normalized.append({k: scene[k].strip() for k in fields})
+        for state_key in ("state_before", "state_after"):
+            if state_key in scene:
+                normalized[-1][state_key] = scene[state_key]
+    _validate_state_continuity(normalized)
     proposal = {"series_id": series_id, "episode": episode_number,
                 "scenes": normalized, "production_ready": False,
                 "kind": "unreviewed_episode_plan"}
