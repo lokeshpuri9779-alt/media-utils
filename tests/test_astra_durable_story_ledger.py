@@ -243,3 +243,18 @@ class DurableStoryLedgerTests(unittest.TestCase):
             with self.assertRaises(StoryLedgerError):
                 archive_fingerprints(path, [FP_A])
             self.assertEqual(path.read_bytes(), corrupted)
+
+    def test_committed_state_migration_only_imports_lifecycle_records(self):
+        from astra_v2.story_ledger import archive_committed_state
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "ledger.json"
+            state = {"reserved": {"r": {"plot_fingerprint": FP_A}},
+                     "pending": {"v": {"plot_fingerprint": FP_B}},
+                     "published": {"p": {"plot_fingerprint": FP_A}},
+                     "drafts": {"d": {"plot_fingerprint": "c" * 64}}}
+            result = archive_committed_state(path, state)
+            self.assertEqual(result["archived"], sorted([FP_A, FP_B]))
+            bad = {"published": {"p": {"plot_fingerprint": ""}}}
+            with self.assertRaisesRegex(StoryLedgerError, "fingerprint_missing"):
+                archive_committed_state(path, bad)
+            self.assertEqual(read_ledger(path)["archived"], sorted([FP_A, FP_B]))
