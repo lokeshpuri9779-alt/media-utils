@@ -113,6 +113,10 @@ def prepare(path, candidate):
     if not isinstance(renderer, str) or not renderer.strip() or renderer.strip() == "unknown":
         raise ValueError("Approved preload is missing verified renderer provenance")
     payload["renderer"] = renderer.strip()
+    if fmt == "short":
+        payload["plot_fingerprint"] = str(candidate.get("plot_fingerprint") or "")
+        payload["plot_key"] = str(candidate.get("plot_key") or "")
+        payload["story_beats"] = candidate.get("story_beats") or []
     video_bytes = video.read_bytes()
     payload["sha256"] = hashlib.sha256(video_bytes).hexdigest()
     payload["media"] = media
@@ -279,6 +283,19 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
                             "content_id": cid, "reason": rejection,
                         }))
                         continue
+                    if candidate["format"] == "short":
+                        from astra_v2.shorts_novelty import is_near_duplicate
+                        from astra_v2.creative import publisher_history_ids
+                        journal = state_for_day(read_json(STATE_FILE))
+                        if candidate.get("content_id") in publisher_history_ids(journal):
+                            print("ASTRA_PRELOAD_DUPLICATE_ID_SKIP=" + cid)
+                            continue
+                        prior = [item for bucket in ("published", "pending", "reserved")
+                                 for item in (journal.get(bucket) or {}).values()
+                                 if isinstance(item, dict)]
+                        if is_near_duplicate(candidate, prior):
+                            print("ASTRA_PRELOAD_NOVELTY_SKIP=" + cid)
+                            continue
                     video = z.read("video.mp4")
             except (ValueError, KeyError, zipfile.BadZipFile, json.JSONDecodeError):
                 continue
