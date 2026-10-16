@@ -531,15 +531,20 @@ def score_audio(plan, duration, genre, path):
 def background(genre, variant=0):
     """Reproducible shot-specific lighting without additional model/API cost."""
     top,bottom,accent=THEMES[genre]
-    variant=int(variant)%6
+    variant=int(variant)%(24 if genre == 'fiction' else 6)
     y,x=np.mgrid[0:H,0:W]
     blend=y/H
-    glow_x=(.28,.48,.68,.78,.38,.58)[variant]
-    glow_y=(.32,.50,.40,.62,.58,.28)[variant]
+    glow_x=(.28,.48,.68,.78,.38,.58)[variant%6]
+    glow_y=(.32,.50,.40,.62,.58,.28)[variant%6]
     glow=np.exp(-(((x-W*glow_x)/(W*.8))**2+((y-H*glow_y)/(H*.48))**2)*3)
     arr=np.zeros((H,W,3),dtype=np.uint8)
     for channel in range(3):
-        tint=(variant-2)*2 if channel==variant%3 else 0
+        # Fiction has four restrained lighting families while retaining its
+        # stable story-level palette; no per-frame random hue or flashing.
+        family=variant//6 if genre == 'fiction' else 0
+        tint=((variant%6)-2)*2 if channel==variant%3 else 0
+        if genre == 'fiction':
+            tint += ((0, 0, 0), (8, -3, -6), (-5, 7, 1), (4, 2, 9))[family][channel]
         arr[:,:,channel]=np.clip(top[channel]*(1-blend)+bottom[channel]*blend+glow*accent[channel]*.09+tint,0,255)
     return Image.fromarray(arr)
 
@@ -1064,7 +1069,7 @@ def render_frame(plan,t,genre,total):
                        if genre == 'fiction' and s.get('story_visual_seed')
                        else str(s.get('visual_prompt') or s.get('visual') or '') +
                             str(s.get('headline') or ''))
-    variant = int.from_bytes(hashlib.sha256(visual_identity.encode()).digest()[:2], 'big') % 6
+    variant = int.from_bytes(hashlib.sha256(visual_identity.encode()).digest()[:2], 'big') % (24 if genre == 'fiction' else 6)
     im=background(genre, variant).copy()
     # Camera treatment is chosen by the director per narrative beat.
     cam=s.get('director_camera','push'); energy=float(s.get('director_energy',.5))
