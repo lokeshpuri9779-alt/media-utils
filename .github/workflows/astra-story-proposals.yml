@@ -83,7 +83,7 @@ jobs:
           if not proposals:
               lines += ["", "No candidate proposals were generated; inspect the proposal-generation step and restored novelty history."]
           with open(__import__("os").environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as out:
-              out.write("\\n".join(lines) + "\\n")
+              out.write("\n".join(lines) + "\n")
           print(f"ASTRA_REVIEWABLE_PROPOSALS={len(proposals)}")
           print(f"ASTRA_APPROVED_FOR_PRODUCTION={review.get('approved_for_production', 0)}")
           PY
