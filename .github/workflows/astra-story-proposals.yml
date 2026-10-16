@@ -4,6 +4,17 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '17 */6 * * *'
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/astra-story-proposals.yml'
+      - 'astra_v2/autonomous_story_proposals.py'
+      - 'astra_v2/proposal_history.py'
+      - 'astra_v2/shorts_novelty.py'
+      - 'astra_v2/publication_quality.py'
+      - 'astra_v2/story_editorial_report.py'
+      - 'astra_v2/story_supply_review.py'
 
 permissions:
   contents: write
