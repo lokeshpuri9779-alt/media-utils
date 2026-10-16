@@ -459,7 +459,9 @@ def draw_duo(image, shot, t):
         # After releasing a prop, withdraw the wrist instead of following
         # the object all the way to its resting position.
         if action in ("release","drop","put_down"):
-            hand_strength *= 1.0-_ease((max(0.0,float(t))-.45)/.75)
+            # Begin retracting as the object starts falling, so the palm
+            # visibly separates from the prop instead of lingering nearby.
+            hand_strength *= 1.0-_ease((max(0.0,float(t))-.25)/.55)
         # During release, withdraw toward the original held anchor while
         # the prop descends independently; otherwise the wrist follows it down.
         hand_target=(held if action in ("release","drop","put_down") else prop_pos) if hand_strength>0 else None
