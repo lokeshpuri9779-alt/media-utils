@@ -411,6 +411,13 @@ def draw_duo(image, shot, t):
     # Physical hand contact: once grasped, the object is driven by the
     # actor's hand anchor rather than an unrelated overlay trajectory.
     contact_actions={"pick","pickup","pick_up","carry","hold","repair","catch"}
+    if prop and action in ("push","pull"):
+        # Begin contact before object travel so the hand does not chase a
+        # moving prop; ease the object only after the reach phase.
+        reach=_ease((max(0.0,float(t))-.06)/.36)
+        travel=_ease((max(0.0,float(t))-.42)/.85)
+        displacement=round((125 if action=="push" else -125)*travel)
+        prop_pos=(540+displacement,1216)
     if prop and action in contact_actions:
         grasp=_ease((max(0.0,float(t))-.15)/.9)
         actor_x=298+actor_translation(action,t,0)
