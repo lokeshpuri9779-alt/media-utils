@@ -100,13 +100,6 @@ def make_candidate(path, excluded_ids, excluded_titles):
     # Explicitly opted-in paid model may propose a new story; the generated
     # storyboard still goes through the same renderer and QA as curated work.
     from astra_v2.openai_creative import enabled as openai_enabled, generate as openai_generate
-    if openai_enabled() and not serialized_preload:
-        try:
-            generated = openai_generate(excluded_ids, excluded_titles)
-            if generated:
-                premium_stories.insert(0, generated)
-        except (RuntimeError, ValueError, KeyError, json.JSONDecodeError) as exc:
-            print("OpenAI story skipped:", type(exc).__name__)
     # Merge every available exclusion source; a partial external ledger must
     # never mask previously confirmed videos in publisher state.
     history_ids = set()
@@ -161,6 +154,14 @@ def make_candidate(path, excluded_ids, excluded_titles):
     excluded_titles.update(history_titles)
     from astra_v2.shorts_novelty import is_near_duplicate
     from astra_v2.story_planning import is_planned_story
+    # Generate after loading all ledgers, so model proposals see actual history.
+    if openai_enabled() and not serialized_preload:
+        try:
+            generated = openai_generate(excluded_ids, excluded_titles, history_narratives)
+            if generated:
+                premium_stories.insert(0, generated)
+        except (RuntimeError, ValueError, KeyError, json.JSONDecodeError) as exc:
+            print("OpenAI story skipped:", type(exc).__name__)
     premium_stories = [
         story for story in premium_stories
         if story.get("content_id") not in history_ids
