@@ -1279,6 +1279,176 @@
       "publication_blocked": true,
       "blocking_issues": [],
       "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-8d79629f457eefdb5733",
+      "title": "The Waterwheel Mystery of the Village",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-1f267b24e605a4b08433",
+      "title": "The Signal Mystery of the Railway",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-73c0597eea3f2f1a38c1",
+      "title": "The Map Mystery of the Market",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-12f403ef1ee9f20b89a3",
+      "title": "The Door Mystery of the Greenhouse",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-7fe7274419155bdca1be",
+      "title": "The Telescope Mystery of the Village",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-7c8fb1932c416d991893",
+      "title": "The River Mystery of the Railway",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-f4a7beb17f3667c47e79",
+      "title": "The Statue Mystery of the Library",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-70121d1089e64204643c",
+      "title": "The Statue Mystery of the Market",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-1df2edd28c7781080aec",
+      "title": "The Lighthouse Mystery of the Museum",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-0b9e0af5e2e70c5ac974",
+      "title": "The Bell Mystery of the Garden",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-993d781e224c40ff53ef",
+      "title": "The Bridge Mystery of the Market",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-cf47b473ea611b390778",
+      "title": "The Waterwheel Mystery of the Village",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-ee9f2f41ce64e73228df",
+      "title": "The Signal Mystery of the Observatory",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-65909210c0e6dd3b73c1",
+      "title": "The Door Mystery of the Market",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-ded2100cb2e98db7ad20",
+      "title": "The Telescope Mystery of the Museum",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-f69000e6e4dcba2e12ca",
+      "title": "The Telescope Mystery of the Museum",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-cb82b5670f556c83dd2d",
+      "title": "The Statue Mystery of the Railway",
+      "issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_blocked": true,
+      "blocking_issues": [],
+      "awaiting_editorial_decision": true
     }
   ],
   "needs_work": [
@@ -1293,9 +1463,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-afd87c274633c66dbdd5",
         "matched_title": "Unreviewed story proposal 26",
-        "similarity": 0.7273,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7273,
+        "dice_similarity": 0.86,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1313,9 +1486,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-b0900ab0a1d2e6fd6e90",
         "matched_title": "Unreviewed story proposal 76",
-        "similarity": 0.7209,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7209,
+        "dice_similarity": 0.86,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1333,9 +1509,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-b22344e6275cc15d831c",
         "matched_title": "Unreviewed story proposal 101",
-        "similarity": 0.7209,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7209,
+        "dice_similarity": 0.86,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1353,9 +1532,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-afd87c274633c66dbdd5",
         "matched_title": "Unreviewed story proposal 26",
-        "similarity": 0.7442,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7442,
+        "dice_similarity": 0.86,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1373,9 +1555,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-d043b0bdd476fdc8631c",
         "matched_title": "Unreviewed story proposal 51",
-        "similarity": 0.725,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.725,
+        "dice_similarity": 0.8542,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1393,9 +1578,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-b0900ab0a1d2e6fd6e90",
         "matched_title": "Unreviewed story proposal 76",
-        "similarity": 0.7381,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7381,
+        "dice_similarity": 0.86,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1413,9 +1601,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-b22344e6275cc15d831c",
         "matched_title": "Unreviewed story proposal 101",
-        "similarity": 0.7381,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7381,
+        "dice_similarity": 0.86,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1433,9 +1624,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-d28337da9f616010bb5a",
         "matched_title": "Unreviewed story proposal 288",
-        "similarity": 0.7442,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7442,
+        "dice_similarity": 0.86,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1453,9 +1647,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-1b62888e049112b7adc6",
         "matched_title": "Unreviewed story proposal 313",
-        "similarity": 0.7436,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7436,
+        "dice_similarity": 0.8632,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1473,9 +1670,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-919cca514b0afde68d39",
         "matched_title": "Unreviewed story proposal 338",
-        "similarity": 0.7381,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7381,
+        "dice_similarity": 0.86,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1493,9 +1693,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-3eb9430530e3f9e6f109",
         "matched_title": "Unreviewed story proposal 363",
-        "similarity": 0.7381,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7381,
+        "dice_similarity": 0.86,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1513,9 +1716,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-efb201e2b536fc275fa8",
         "matched_title": "The Mystery of Museum: Warm water flowing uphill",
-        "similarity": 0.7544,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7544,
+        "dice_similarity": 0.8819,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1533,9 +1739,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-a904f0ec2cb41c9c4988",
         "matched_title": "The Mystery of Village: A mirror reflecting a distant beacon",
-        "similarity": 0.7586,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7586,
+        "dice_similarity": 0.8788,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1553,9 +1762,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-4622d81e179cc55092db",
         "matched_title": "The Mystery of Library: New streets etched into a stone tile",
-        "similarity": 0.7333,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7333,
+        "dice_similarity": 0.8769,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1586,9 +1798,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-bec9ec65113faf9a6ba1",
         "matched_title": "The Mystery of Observatory: A bell-shaped sonar echo",
-        "similarity": 0.7273,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7273,
+        "dice_similarity": 0.8689,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1606,9 +1821,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-5df72548628738b851ed",
         "matched_title": "The Mystery of Garden: A pattern hidden in the wiring",
-        "similarity": 0.7368,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7368,
+        "dice_similarity": 0.8819,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1626,9 +1844,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-2bcaf8a375685a9b851c",
         "matched_title": "The Mystery of Greenhouse: A mirror reflecting a distant beacon",
-        "similarity": 0.7458,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7458,
+        "dice_similarity": 0.8696,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1659,9 +1880,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-1bed3800cce042951c61",
         "matched_title": "The Mystery of Observatory: New streets etched into a stone tile",
-        "similarity": 0.7333,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7333,
+        "dice_similarity": 0.8759,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1679,9 +1903,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-ef89794aabbcb1a59f8d",
         "matched_title": "The Mystery of Railway: New streets etched into a stone tile",
-        "similarity": 0.7213,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7213,
+        "dice_similarity": 0.8777,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1699,9 +1926,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-ef6acb4962ac94de5ab3",
         "matched_title": "The Telescope Mystery of the Library",
-        "similarity": 0.7414,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7414,
+        "dice_similarity": 0.8682,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1719,9 +1949,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-838a77e12919c2ab7e13",
         "matched_title": "The River Mystery of the Greenhouse",
-        "similarity": 0.7333,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7333,
+        "dice_similarity": 0.8788,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1739,9 +1972,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-df37e873dc182845c8b5",
         "matched_title": "The Snow Mystery of the Market",
-        "similarity": 0.7414,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7414,
+        "dice_similarity": 0.8769,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1759,9 +1995,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-77c145bea2fc5cd59b4f",
         "matched_title": "The Bridge Mystery of the Observatory",
-        "similarity": 0.7333,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7333,
+        "dice_similarity": 0.8722,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1779,9 +2018,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-a057b0f48df5ab5742b5",
         "matched_title": "The Bridge Mystery of the Railway",
-        "similarity": 0.7241,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7241,
+        "dice_similarity": 0.8682,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1799,9 +2041,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-01c7df8631a8ff4439e8",
         "matched_title": "The Signal Mystery of the Market",
-        "similarity": 0.7258,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7258,
+        "dice_similarity": 0.8613,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1819,9 +2064,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-eca7a9a6ab99d572d1d6",
         "matched_title": "The Door Mystery of the Village",
-        "similarity": 0.7281,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7281,
+        "dice_similarity": 0.8627,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1839,9 +2087,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-42dfd8a5b8795470dea4",
         "matched_title": "The Signal Mystery of the Village",
-        "similarity": 0.7411,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7411,
+        "dice_similarity": 0.8653,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1859,9 +2110,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-aabf4cb5dad47bf49d99",
         "matched_title": "The Snow Mystery of the Garden",
-        "similarity": 0.7345,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7345,
+        "dice_similarity": 0.873,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1879,9 +2133,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-14ac246df4b983914cb9",
         "matched_title": "The Bridge Mystery of the Village",
-        "similarity": 0.7257,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7257,
+        "dice_similarity": 0.8594,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1899,9 +2156,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-ff680fe224fc023adc5a",
         "matched_title": "The Waterwheel Mystery of the Observatory",
-        "similarity": 0.7345,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7345,
+        "dice_similarity": 0.8755,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1919,9 +2179,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-39c3b5182d9583cb7645",
         "matched_title": "The Map Mystery of the Market",
-        "similarity": 0.7241,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7241,
+        "dice_similarity": 0.8627,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1952,9 +2215,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-78887f8117ac28e4f847",
         "matched_title": "The Bell Mystery of the Library",
-        "similarity": 0.7339,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7339,
+        "dice_similarity": 0.8689,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1972,9 +2238,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-6a32364597fc6ab594f2",
         "matched_title": "The Signal Mystery of the Railway",
-        "similarity": 0.735,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.735,
+        "dice_similarity": 0.876,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -1992,9 +2261,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-438b64859cdec67f2767",
         "matched_title": "The Map Mystery of the Garden",
-        "similarity": 0.7241,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7241,
+        "dice_similarity": 0.8549,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2012,9 +2284,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-ff680fe224fc023adc5a",
         "matched_title": "The Waterwheel Mystery of the Observatory",
-        "similarity": 0.7368,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7368,
+        "dice_similarity": 0.8685,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2032,9 +2307,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-425f62200056b51aee1a",
         "matched_title": "The River Mystery of the Observatory",
-        "similarity": 0.75,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.75,
+        "dice_similarity": 0.8784,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2065,9 +2343,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-8adbe6117403ed387bbe",
         "matched_title": "The Signal Mystery of the Library",
-        "similarity": 0.735,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.735,
+        "dice_similarity": 0.875,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2085,9 +2366,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-5c72169735e10ac6d573",
         "matched_title": "The Bell Mystery of the Garden",
-        "similarity": 0.7232,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7232,
+        "dice_similarity": 0.8675,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2118,9 +2402,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-f09000a9d6cb196a9ca9",
         "matched_title": "The Telescope Mystery of the Greenhouse",
-        "similarity": 0.7407,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7407,
+        "dice_similarity": 0.8714,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2138,9 +2425,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-470389dd21c32dda9e9f",
         "matched_title": "The Signal Mystery of the Garden",
-        "similarity": 0.7265,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7265,
+        "dice_similarity": 0.8706,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2158,9 +2448,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-5afded2e0ac39098639e",
         "matched_title": "The Snow Mystery of the Greenhouse",
-        "similarity": 0.7217,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7217,
+        "dice_similarity": 0.8571,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2178,9 +2471,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-9d49af041566b04f5ca5",
         "matched_title": "The Bridge Mystery of the Library",
-        "similarity": 0.7304,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7304,
+        "dice_similarity": 0.875,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2198,9 +2494,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-305198d8f5ad4ebc2454",
         "matched_title": "The Map Mystery of the Village",
-        "similarity": 0.7311,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7311,
+        "dice_similarity": 0.875,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2218,9 +2517,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-98c4493fa25c5fa34567",
         "matched_title": "The Map Mystery of the Observatory",
-        "similarity": 0.7458,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7458,
+        "dice_similarity": 0.8794,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2238,9 +2540,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-4ca9f2392854e1d55441",
         "matched_title": "The Door Mystery of the Garden",
-        "similarity": 0.7227,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7227,
+        "dice_similarity": 0.8638,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2258,9 +2563,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-5c72169735e10ac6d573",
         "matched_title": "The Bell Mystery of the Garden",
-        "similarity": 0.7257,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7257,
+        "dice_similarity": 0.864,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2278,9 +2586,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-44dc83187a937db0e8e4",
         "matched_title": "The Door Mystery of the Village",
-        "similarity": 0.7333,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7333,
+        "dice_similarity": 0.8669,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2298,9 +2609,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-d64cf0a115c2207220ab",
         "matched_title": "The Telescope Mystery of the Village",
-        "similarity": 0.7477,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7477,
+        "dice_similarity": 0.8835,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2318,9 +2632,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-c5cc34f1b39f801e362c",
         "matched_title": "The River Mystery of the Market",
-        "similarity": 0.7411,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7411,
+        "dice_similarity": 0.8775,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2351,9 +2668,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-f713d05537dd605a9acb",
         "matched_title": "The Lighthouse Mystery of the Observatory",
-        "similarity": 0.7456,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7456,
+        "dice_similarity": 0.88,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2371,9 +2691,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-90bc2ee804224a132460",
         "matched_title": "The Snow Mystery of the Market",
-        "similarity": 0.7288,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7288,
+        "dice_similarity": 0.8638,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2391,9 +2714,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-2ae21c518b06c1efee31",
         "matched_title": "The Snow Mystery of the Garden",
-        "similarity": 0.7355,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.7355,
+        "dice_similarity": 0.8779,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2411,9 +2737,12 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-02c4579d0227d5478afe",
         "matched_title": "The Snow Mystery of the Library",
-        "similarity": 0.725,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.725,
+        "dice_similarity": 0.8659,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2431,9 +2760,175 @@
       "novelty_evidence": {
         "matched_content_id": "astra-proposal-ce869503bde29a122233",
         "matched_title": "The Bell Mystery of the Market",
-        "similarity": 0.735,
-        "threshold": 0.72,
-        "method": "plot_narration_token_jaccard"
+        "jaccard_similarity": 0.735,
+        "dice_similarity": 0.8726,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-1ae4418bb361ccbf8ebe",
+      "title": "The Map Mystery of the Library",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-proposal-e9e39538839cb76e4a83",
+        "matched_title": "The Map Mystery of the Greenhouse",
+        "jaccard_similarity": 0.7368,
+        "dice_similarity": 0.8661,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-31dac47594f6947181f7",
+      "title": "The Signal Mystery of the Greenhouse",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-proposal-70121d1089e64204643c",
+        "matched_title": "The Statue Mystery of the Market",
+        "jaccard_similarity": 0.7321,
+        "dice_similarity": 0.879,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "insufficient_visual_variety",
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-6e8a5cd800f59cb45b40",
+      "title": "The Snow Mystery of the Observatory",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-proposal-ce67a701f3f9ed6ba7f4",
+        "matched_title": "The Snow Mystery of the Garden",
+        "jaccard_similarity": 0.7297,
+        "dice_similarity": 0.8653,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-eb023c51f8568f70f187",
+      "title": "The Snow Mystery of the Railway",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-proposal-431f7f50b9f3cf1856d8",
+        "matched_title": "The Snow Mystery of the Railway",
+        "jaccard_similarity": 0.7217,
+        "dice_similarity": 0.8458,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-9a4d1628a11790042dd2",
+      "title": "The Bridge Mystery of the Greenhouse",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-proposal-993d781e224c40ff53ef",
+        "matched_title": "The Bridge Mystery of the Market",
+        "jaccard_similarity": 0.7304,
+        "dice_similarity": 0.8672,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-6bec18cc4a4212d6b8d9",
+      "title": "The Map Mystery of the Railway",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-proposal-02f3bf4d463554d46521",
+        "matched_title": "The Map Mystery of the Library",
+        "jaccard_similarity": 0.7345,
+        "dice_similarity": 0.872,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
+      },
+      "blocking_issues": [
+        "narrative_duplicate"
+      ],
+      "awaiting_editorial_decision": true
+    },
+    {
+      "content_id": "astra-proposal-3ccd1b3da4b40a9eb529",
+      "title": "The Map Mystery of the Library",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_blocked": true,
+      "novelty_evidence": {
+        "matched_content_id": "astra-proposal-6bec18cc4a4212d6b8d9",
+        "matched_title": "The Map Mystery of the Railway",
+        "jaccard_similarity": 0.7217,
+        "dice_similarity": 0.864,
+        "jaccard_threshold": 0.72,
+        "dice_threshold": 0.88,
+        "plot_fingerprint_match": false,
+        "method": "plot_fingerprint_and_narration_similarity"
       },
       "blocking_issues": [
         "narrative_duplicate"
@@ -2441,7 +2936,7 @@
       "awaiting_editorial_decision": true
     }
   ],
-  "total_proposals": 188,
-  "requires_editorial_review": 188,
+  "total_proposals": 212,
+  "requires_editorial_review": 212,
   "automatic_publication_enabled": false
 }
