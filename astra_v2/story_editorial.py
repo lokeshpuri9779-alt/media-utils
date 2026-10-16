@@ -18,26 +18,44 @@ def semantic_signature(story):
 
 
 def semantic_duplicate_match(story, history=(), threshold=0.72):
-    """Return the strongest text-overlap match as auditable evidence."""
+    """Return the strongest overlap match, including all active duplicate signals."""
     current = semantic_signature(story)
+    current_fp = story.get("plot_fingerprint")
+    beats = story.get("story_beats") or []
+    current_words = {token for beat in beats if isinstance(beat, dict)
+                     for token in str(beat.get("speech") or "").casefold().split()}
     best = None
-    if not current:
-        return None
     for prior in history:
-        previous = semantic_signature(prior)
-        if not previous:
+        if not isinstance(prior, dict):
             continue
+        previous = semantic_signature(prior)
         union = current | previous
-        similarity = len(current & previous) / len(union) if union else 0.0
-        if best is None or similarity > best["similarity"]:
-            best = {
-                "matched_content_id": prior.get("content_id"),
-                "matched_title": prior.get("title"),
-                "similarity": round(similarity, 4),
-                "threshold": threshold,
-                "method": "plot_narration_token_jaccard",
-            }
-    return best if best and best["similarity"] >= threshold else None
+        jaccard = len(current & previous) / len(union) if union else 0.0
+        prior_beats = prior.get("story_beats") or []
+        prior_words = {token for beat in prior_beats if isinstance(beat, dict)
+                       for token in str(beat.get("speech") or "").casefold().split()}
+        dice = (2 * len(current_words & prior_words) / (len(current_words) + len(prior_words))
+                if current_words and prior_words else 0.0)
+        fingerprint_match = bool(current_fp and current_fp == prior.get("plot_fingerprint"))
+        candidate = {
+            "matched_content_id": prior.get("content_id"),
+            "matched_title": prior.get("title"),
+            "jaccard_similarity": round(jaccard, 4),
+            "dice_similarity": round(dice, 4),
+            "jaccard_threshold": threshold,
+            "dice_threshold": 0.88,
+            "plot_fingerprint_match": fingerprint_match,
+            "method": "plot_fingerprint_and_narration_similarity",
+        }
+        if best is None or (fingerprint_match, jaccard, dice) > (
+                best["plot_fingerprint_match"], best["jaccard_similarity"], best["dice_similarity"]):
+            best = candidate
+    if not best:
+        return None
+    triggered = (best["plot_fingerprint_match"] or
+                 best["jaccard_similarity"] >= threshold or
+                 best["dice_similarity"] >= 0.88)
+    return best if triggered else None
 
 
 def is_semantic_near_duplicate(story, history=(), threshold=0.72):
