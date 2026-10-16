@@ -1,0 +1,54 @@
+name: ASTRA Fast CI
+
+on:
+  pull_request:
+    paths:
+      - 'astra_v2/**'
+      - 'tests/**'
+      - 'studio_renderer.py'
+      - 'quality_lab.py'
+      - '.github/workflows/astra-fast-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: astra-fast-ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  stories:
+    name: Story and novelty checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile story modules
+        run: python -m compileall -q astra_v2
+      - name: Run story and novelty safeguards
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_story_*.py' -v
+          python -m unittest discover -s tests -p 'test_astra_shorts_novelty*.py' -v
+          python -m unittest discover -s tests -p 'test_astra_autonomous_story_proposals.py' -v
+          python -m unittest discover -s tests -p 'test_astra_model_story_novelty.py' -v
+  production:
+    name: Publisher and package safety
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install lightweight API client
+        run: python -m pip install --disable-pip-version-check 'httpx==0.28.1'
+      - name: Verify publishing and renderer boundaries
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_renderer_provenance.py' -v
+          python -m unittest discover -s tests -p 'test_astra_shorts_fingerprint_lifecycle.py' -v
+          python -m unittest discover -s tests -p 'test_astra_preload_novelty.py' -v
+          python -m unittest discover -s tests -p 'test_astra_production_readiness.py' -v
