@@ -214,9 +214,11 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
         gait=int(25*math.sin(t*6.0+idx*math.pi))
     if action=="dance":
         gait=int(34*math.sin(t*6.2+idx*math.pi))
+    # Keep planted feet at a fixed stage height. Applying idle breathing bob
+    # to the whole actor made standing feet hover and walking feet slide.
+    # Only genuinely airborne / buoyant actions translate the entire rig.
     bob=(int(92*math.sin(math.pi*min(1.0,max(0.0,float(t)%1.2/1.2)))**2) if action=="jump" else
-         int(17*math.sin(t*4.2+idx)) if action=="swim" else
-         int(6*math.sin(t*2+idx)))
+         int(17*math.sin(t*4.2+idx)) if action=="swim" else 0)
     if action=="dance":
         bob=int(18*abs(math.sin(t*6.2+idx*math.pi)))
     y-=bob
