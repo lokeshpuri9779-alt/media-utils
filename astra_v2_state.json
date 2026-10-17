@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-18",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 5,
+  "attempts": 6,
   "confirmed_today": 5,
-  "last_attempt_at": "2026-10-17T21:17:17.803314+00:00",
+  "last_attempt_at": "2026-10-17T21:32:56.477792+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1861,28 +1861,55 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-17T21:21:32.000127+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "k-VPPbPd0js": {
+      "content_id": "rayvan-forge-e6f17a8f0e28d9b7",
+      "title": "The Tapir and the Mangrove Bell",
+      "day": "2026-10-18",
+      "uploaded_at": "2026-10-17T21:32:57.938532+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "a42c7e5e0c04aaca05e438a8a27955d707c49a6b8414f1934de0d56c7539cca3",
+      "story_beats": [
+        {
+          "speech": "A tapir found the island school cut off when a high tide flooded the mangrove walkway."
+        },
+        {
+          "speech": "He guided a skiff toward the school but a fallen branch blocked the usual channel."
+        },
+        {
+          "speech": "He heard the harbor bell through an open tidal passage and marked the channel with floating coconuts."
+        },
+        {
+          "speech": "The school boat followed his coconut markers safely and the villagers later cleared the blocked channel."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-17T21:32:14.368729+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-17T21:21:32.426202+00:00",
+    "at": "2026-10-17T21:32:58.395115+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-17T20:37:31.543351+00:00",
   "reserved": {
@@ -4197,13 +4224,36 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-forge-e6f17a8f0e28d9b7": {
+      "at": "2026-10-17T21:32:56.477778+00:00",
+      "title": "The Tapir and the Mangrove Bell",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "a42c7e5e0c04aaca05e438a8a27955d707c49a6b8414f1934de0d56c7539cca3",
+      "story_beats": [
+        {
+          "speech": "A tapir found the island school cut off when a high tide flooded the mangrove walkway."
+        },
+        {
+          "speech": "He guided a skiff toward the school but a fallen branch blocked the usual channel."
+        },
+        {
+          "speech": "He heard the harbor bell through an open tidal passage and marked the channel with floating coconuts."
+        },
+        {
+          "speech": "The school boat followed his coconut markers safely and the villagers later cleared the blocked channel."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-17T21:21:32.426100+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-17T21:32:58.395031+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -4211,25 +4261,25 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-17T21:21:32.426183+00:00",
+    "at": "2026-10-17T21:32:58.395098+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-17T21:17:07.073036+00:00",
+    "at": "2026-10-17T21:32:44.866921+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-de49d08927c67c6e",
-    "video_url": "https://www.youtube.com/watch?v=Tqcxl11pftA"
+    "content_id": "rayvan-forge-e6f17a8f0e28d9b7",
+    "video_url": "https://www.youtube.com/watch?v=k-VPPbPd0js"
   },
   "last_workflow_result": {
-    "at": "2026-10-17T21:21:32.426082+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-17T21:32:58.395013+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval"
+    "outcome": "processing",
+    "reason": ""
   }
 }
