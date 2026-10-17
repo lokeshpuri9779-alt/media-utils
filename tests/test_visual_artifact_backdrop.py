@@ -47,6 +47,19 @@ class ArtifactBackdropTests(unittest.TestCase):
         self.assertEqual(rendered.crop((0, 1100, 1080, 1920)).tobytes(),
                          base.crop((0, 1100, 1080, 1920)).tobytes())
 
+    def test_every_supported_scene_has_a_distinct_backdrop(self):
+        import hashlib
+        from astra_v2.visual_artifact_library import SCENES
+        seen = set()
+        for scene in SCENES:
+            with self.subTest(scene=scene):
+                self.assertEqual(choose_scene({"story_environment": scene}), scene)
+                image = Image.new("RGB", (1080, 1920), (10, 20, 30))
+                rendered = apply_backdrop(image, {"story_environment": scene}, "stable-id")
+                digest = hashlib.sha256(rendered.tobytes()).hexdigest()
+                self.assertNotIn(digest, seen)
+                seen.add(digest)
+
     def test_invalid_dimensions_fail_closed(self):
         with self.assertRaises(ValueError):
             apply_backdrop(Image.new("RGB", (540, 720)), {"speech": "forest"}, "id")
