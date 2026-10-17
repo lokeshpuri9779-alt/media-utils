@@ -22,16 +22,22 @@ def assess(ledger_path, publisher_path="astra_v2_state.json",
     editorial_reason_counts = Counter()
     publication_reason_counts = Counter()
     structurally_sound_count = 0
+    family_totals = Counter()
+    family_issues = {}
     novelty_index = NoveltyIndex(history)
     semantic_previous = [(prior, _semantic_features(prior)) for prior in history
                          if isinstance(prior, dict)]
     for story in ledger["proposals"]:
         if not isinstance(story, dict):
             raise ValueError("Invalid proposal")
+        family = "genre" if str(story.get("content_id") or "").startswith("astra-genre-") else "mystery" if str(story.get("content_id") or "").startswith("astra-proposal-") else "other"
+        family_totals[family] += 1
+        family_issues.setdefault(family, Counter())
         issues = editorial_issues(story, history, novelty_index=novelty_index,
                                   semantic_previous=semantic_previous)
         rejection = publication_rejection(story)
         editorial_reason_counts.update(issues)
+        family_issues[family].update(issues)
         if rejection:
             publication_reason_counts[rejection] += 1
         if not [issue for issue in issues
@@ -53,6 +59,11 @@ def assess(ledger_path, publisher_path="astra_v2_state.json",
         "approved_for_production": 0,
         "structurally_sound_unreviewed_count": structurally_sound_count,
         "editorial_reason_counts": dict(sorted(editorial_reason_counts.items())),
+        "generator_family_diagnostics": {
+            family: {"proposal_count": count,
+                     "editorial_reason_counts": dict(sorted(family_issues[family].items()))}
+            for family, count in sorted(family_totals.items())
+        },
         "publication_rejection_reason_counts": dict(sorted(publication_reason_counts.items())),
         "proposals": reviewed,
     }
