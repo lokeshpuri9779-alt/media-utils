@@ -359,6 +359,9 @@ jobs:
           # Require the real journal to avoid misleading empty-history counts.
           if [ -s astra_v2_state.json ] && [ -s astra_story_history.json ]; then
             python -m astra_v2.story_inventory_audit
+            # Report approved-story runway from the same restored production ledgers.
+            # Read-only: this never approves or publishes a story.
+            python -m astra_v2.story_runway
           else
             echo 'ASTRA_STORY_INVENTORY_AUDIT=skipped_missing_persistent_history'
           fi
