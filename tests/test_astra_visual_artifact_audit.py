@@ -11,7 +11,7 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(audit_samples(frames([55, 60, 65, 70, 75, 80]))["warnings"], [])
 
     def test_empty_frames(self):
-        report = audit_samples(frames([70, 0, 0, 0, 70]))
+        report = audit_samples(frames([70, 0, 0, 0, 70]), fps=2)
         self.assertIn("nearly_black_frames", [x["type"] for x in report["warnings"]])
 
     def test_frozen_sequence(self):
