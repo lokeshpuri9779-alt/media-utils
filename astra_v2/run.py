@@ -212,47 +212,46 @@ def run():
                     and bool(candidate.get("character_id"))
                     else "not_approved_or_missing_identity"
                 )
-                # Keep explicit approved metadata for a first episode; the
-                # postpublication hook alone may bootstrap the character.
+                # Optional continuity metadata must never abort a valid upload.
+                # Invalid approved records are diagnosed and skipped; publication
+                # policy, duplicate checks, and verified persistence stay intact.
                 if candidate.get("character_approved") is True and candidate.get("format") == "short":
-                    from astra_v2.character_manifest_bridge import build_character_manifests
-                    from astra_v2.character_bootstrap import register_approved_character
-                    snapshot_path = Path("character-continuity.json")
-                    from astra_v2.character_snapshot import read_snapshot
-                    current_snapshot = (
-                        read_snapshot(snapshot_path) if snapshot_path.is_file()
-                        else {"version": 1, "characters": {}}
-                    )
-                    if candidate.get("character_id") not in current_snapshot["characters"]:
-                        # Validate the same explicit approval and episode
-                        # contract as the existing-character path.
-                        staged = register_approved_character(current_snapshot, candidate)
-                        first_state = staged["characters"][candidate["character_id"]]
-                        build_character_manifests(candidate, first_state)
-                        write_json(Path("runtime-health/character-first-candidate.json"), {
-                            "content_id": cid,
-                            "character_id": candidate["character_id"],
-                            "character_name": candidate["character_name"],
-                            "character_approved": True,
-                            "format": "short",
-                            "character_episode": candidate["character_episode"],
-                        })
-                # Optional continuity manifests are emitted only for explicitly
-                # approved characters already present in durable memory.
-                # No missing character is silently invented.
-                if candidate.get("character_approved") is True:
-                    from astra_v2.character_snapshot import read_snapshot
-                    from astra_v2.character_manifest_bridge import build_character_manifests
-                    snapshot_path = Path("character-continuity.json")
-                    if snapshot_path.is_file():
-                        snapshot = read_snapshot(snapshot_path)
-                        character_state = snapshot["characters"].get(candidate.get("character_id"))
-                        if character_state is not None:
-                            proposal, episode = build_character_manifests(candidate, character_state)
-                            manifest_dir = Path("runtime-health")
-                            manifest_dir.mkdir(parents=True, exist_ok=True)
+                    try:
+                        from astra_v2.character_manifest_bridge import build_character_manifests
+                        from astra_v2.character_bootstrap import register_approved_character
+                        from astra_v2.character_snapshot import read_snapshot
+                        snapshot_path = Path("character-continuity.json")
+                        snapshot = (
+                            read_snapshot(snapshot_path) if snapshot_path.is_file()
+                            else {"version": 1, "characters": {}}
+                        )
+                        character_id = candidate.get("character_id")
+                        manifest_dir = Path("runtime-health")
+                        manifest_dir.mkdir(parents=True, exist_ok=True)
+                        if character_id not in snapshot["characters"]:
+                            staged = register_approved_character(snapshot, candidate)
+                            first_state = staged["characters"][character_id]
+                            build_character_manifests(candidate, first_state)
+                            write_json(manifest_dir / "character-first-candidate.json", {
+                                "content_id": cid,
+                                "character_id": character_id,
+                                "character_name": candidate["character_name"],
+                                "character_approved": True,
+                                "format": "short",
+                                "character_episode": candidate["character_episode"],
+                            })
+                            report["character_memory"] = "first_episode_staged"
+                        else:
+                            proposal, episode = build_character_manifests(
+                                candidate, snapshot["characters"][character_id]
+                            )
                             write_json(manifest_dir / "character-proposal.json", proposal)
                             write_json(manifest_dir / "character-episode.json", episode)
+                            report["character_memory"] = "existing_episode_staged"
+                    except (ValueError, TypeError, KeyError) as exc:
+                        report["character_memory"] = "invalid_approved_metadata"
+                        report["character_memory_error"] = type(exc).__name__
+                        print("ASTRA_CHARACTER_MEMORY=invalid_approved_metadata", type(exc).__name__)
                 description = candidate["description"] + "\nASTRA-V2-ID:" + cid
                 # Reserve identity and interval BEFORE upload; never auto-retry an
                 # indeterminate transfer as this risks a duplicate public video.
