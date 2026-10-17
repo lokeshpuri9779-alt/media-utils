@@ -63,6 +63,14 @@ jobs:
           for f in performance.json astra_v2_state.json astra_stage_feedback.json SHORTS.md; do
             git checkout origin/astra-state -- "$f" 2>/dev/null || true
           done
+          # Restore existing fingerprint history when present. Do not synthesize it.
+          if git cat-file -e origin/astra-state:astra_story_history.json 2>/dev/null; then
+            git show origin/astra-state:astra_story_history.json > astra_story_history.json
+            echo 'ASTRA_STORY_HISTORY_RESTORE=present'
+          else
+            rm -f astra_story_history.json
+            echo 'ASTRA_STORY_HISTORY_RESTORE=missing'
+          fi
           # Optional character continuity snapshot; no new state is invented.
           git checkout origin/astra-state -- character-continuity.json 2>/dev/null || true
           # The legacy state branch previously contained a zero-byte performance
@@ -331,6 +339,22 @@ jobs:
           for f in performance.json astra_v2_state.json astra_stage_feedback.json SHORTS.md; do
             if [ -f "$f" ]; then cp "$f" "$WORKTREE/$f"; fi
           done
+          # Persist only a real, validated history file. Never manufacture
+          # an empty history that would conceal missing novelty evidence.
+          if [ -f astra_story_history.json ]; then
+            python - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path("astra_story_history.json").read_text(encoding="utf-8"))
+          stories = data.get("stories") if isinstance(data, dict) else data
+          if not isinstance(stories, list) or any(not isinstance(item, dict) for item in stories):
+              raise ValueError("Invalid ASTRA story history")
+          print("ASTRA_STORY_HISTORY_PERSIST_COUNT=" + str(len(stories)))
+          PY
+            cp astra_story_history.json "$WORKTREE/astra_story_history.json"
+          else
+            echo 'ASTRA_STORY_HISTORY_PERSIST=missing_no_placeholder'
+          fi
           if [ -f character-continuity.json ]; then
             python - <<'PY'
           from astra_v2.character_snapshot import read_snapshot
@@ -346,6 +370,7 @@ jobs:
               if [ -e "$f" ]; then git add -- "$f"; fi
             done
             if [ -f character-continuity.json ]; then git add -- character-continuity.json; fi
+            if [ -f astra_story_history.json ]; then git add -- astra_story_history.json; fi
             if ! git diff --cached --quiet; then
               git commit -m 'Update verified ASTRA V2 runtime journal [skip ci]'
               git push origin HEAD:refs/heads/astra-state
