@@ -13,9 +13,9 @@ class StorySupplyDiagnosticsTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             ledger = Path(folder) / "ledger.json"
             ledger.write_text(json.dumps({"proposals": [
-                {"content_id": "draft-1", "title": "A Signal",
+                {"content_id": "astra-genre-1", "title": "A Signal",
                  "kind": "unreviewed_causal_draft", "production_ready": False},
-                {"content_id": "draft-2", "title": "A Repair",
+                {"content_id": "astra-proposal-2", "title": "A Repair",
                  "kind": "unreviewed_causal_draft", "production_ready": False}
             ]}))
             with patch("astra_v2.story_supply_review.load_history", return_value=[]):
@@ -27,6 +27,8 @@ class StorySupplyDiagnosticsTests(unittest.TestCase):
                          {"unreviewed_causal_draft": 2})
         self.assertEqual(result["editorial_reason_counts"].get(
             "human_or_model_editorial_review_required"), 2)
+        self.assertEqual(result["generator_family_diagnostics"]["genre"]["proposal_count"], 1)
+        self.assertEqual(result["generator_family_diagnostics"]["mystery"]["proposal_count"], 1)
         self.assertTrue(all(not row["eligible_for_automatic_publishing"]
                             for row in result["proposals"]))
 
