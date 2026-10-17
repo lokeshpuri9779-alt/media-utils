@@ -1,0 +1,47 @@
+name: ASTRA Visual Review Diagnostic
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 3 * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: astra-visual-review-diagnostic
+  cancel-in-progress: true
+
+jobs:
+  report:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore real persistent history (read only)
+        run: |
+          set -euo pipefail
+          git fetch --depth=1 origin astra-state
+          git show origin/astra-state:astra_v2_state.json > astra_v2_state.json
+          git show origin/astra-state:astra_story_history.json > astra_story_history.json
+          test -s astra_v2_state.json
+          test -s astra_story_history.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate review-only report
+        run: |
+          python -m astra_v2.visual_review_queue
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report=json.loads(Path("runtime-health/visual_review_queue.json").read_text())
+          assert report["read_only"] is True
+          assert report["status"] == "review_required"
+          print("VISUAL_REVIEW_COUNT=", report["visual_review_count"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: astra-visual-review-queue
+          path: runtime-health/visual_review_queue.json
+          retention-days: 30
