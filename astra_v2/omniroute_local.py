@@ -130,7 +130,8 @@ def catalog(excluded_ids=(), max_candidates=12, excluded_titles=()):
             speeches = episode_arcs[episode]
             beats = [(headline, speeches[i], visual_id, label, role)
                      for i, (headline, _speech, visual_id, label, role) in enumerate(beats)]
-        proposals.append({
+        from astra_v2.series_character_approval import approved_character_metadata
+        story_record = {
             "genre": "fiction", "kind": "microfiction",
             "series_id": "the-tomorrow-signal-s1", "season": 1,
             "episode": episode, "previous_episode_id": (
@@ -146,7 +147,10 @@ def catalog(excluded_ids=(), max_candidates=12, excluded_titles=()):
                  "duration": 1.0}
                 for h, s, v, label, role in beats
             ],
-        })
+        }
+        story_record["protagonist_name"] = name
+        story_record.update(approved_character_metadata(story_record))
+        proposals.append(story_record)
         if len(proposals) >= max_candidates:
             break
     return proposals
