@@ -1870,12 +1870,13 @@
     }
   },
   "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-17T21:33:39.705437+00:00",
+  "last_outcome": "skipped",
+  "last_error": "",
+  "last_preflight_at": "2026-10-17T21:34:47.099311+00:00",
   "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "last_preflight_outcome": "skipped",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-17T21:33:40.158000+00:00",
+    "at": "2026-10-17T21:34:47.182249+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "false",
@@ -4231,8 +4232,8 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-17T21:33:40.157921+00:00",
-    "publication_outcome": "published",
+    "at": "2026-10-17T21:34:47.182139+00:00",
+    "publication_outcome": "skipped",
     "publication_reason": "min_interval",
     "character_memory": "not_reported",
     "character_memory_error": null,
@@ -4242,9 +4243,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-17T21:33:40.157986+00:00",
+    "at": "2026-10-17T21:34:47.182229+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "skipped",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -4255,12 +4256,12 @@
     "video_url": "https://www.youtube.com/watch?v=k-VPPbPd0js"
   },
   "last_workflow_result": {
-    "at": "2026-10-17T21:33:40.157904+00:00",
+    "at": "2026-10-17T21:34:47.182116+00:00",
     "preflight_due": "false",
     "preflight_step": "success",
     "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "published",
+    "outcome": "skipped",
     "reason": "min_interval"
   }
 }
