@@ -209,6 +209,29 @@ def genre_proposal(index, scenario_index=None, structure_index=None):
         ("twist", f"The overlooked detail explained everything: {reveal}. The group realized that the original problem had a different cause than they first assumed. They tested the explanation before acting. {lasting_effect}", visual),
         ("payoff", f"With the mystery understood, the hero {solution}. {ending} {acknowledged_effect} The hero {arc_growth}. {payoff_style}.", visual),
     ]
+    # Scene identifiers should track distinct story events rather than
+    # repeating the opening prop for the reveal and resolution.
+    # All identifiers are existing renderer-facing visual categories.
+    scene_visuals = {
+        "comedy": ("balloon", "puppet", "cake"),
+        "adventure": ("bridge", "ship", "cloud"),
+        "friendship": ("garden", "train", "basket"),
+        "science fiction": ("signal", "clock", "garden"),
+        "competition": ("flag", "ball", "music"),
+        "fantasy": ("forest", "clock", "lantern"),
+        "rescue": ("snow", "river", "tree"),
+        "discovery": ("book", "telescope", "garden"),
+    }
+    alternatives = scene_visuals[genre]
+    used = {visual, "book"}
+    revised = []
+    for position, (beat_name, speech, scene) in enumerate(beats):
+        if position >= 2 and scene in used:
+            scene = next((candidate for candidate in alternatives
+                          if candidate not in used), scene)
+        revised.append((beat_name, speech, scene))
+        used.add(scene)
+    beats = revised
     narration = " ".join(speech for _, speech, _ in beats).casefold()
     return {
         "content_id": "astra-genre-" + hashlib.sha256(f"genre-{index}".encode()).hexdigest()[:20],
