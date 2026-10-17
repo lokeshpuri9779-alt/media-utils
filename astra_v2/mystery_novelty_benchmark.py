@@ -153,6 +153,41 @@ def measure_sequential_novelty(sample_start=0, sample_count=300):
         "history_mutated": False,
     }
 
+
+def measure_sequential_rejection_reasons(sample_start=0, sample_count=200):
+    """Attribute duplicate flags to conservative novelty and semantic screens.
+
+    Flags may overlap; no thresholds or publishing decisions are changed.
+    """
+    if sample_start < 0 or not 1 <= sample_count <= 1000:
+        raise ValueError("Invalid sequential window")
+    novelty = NoveltyIndex([])
+    semantic = []
+    counts = {"novelty_only": 0, "semantic_only": 0, "both": 0, "accepted": 0}
+    for i in range(sample_start, sample_start + sample_count):
+        candidate = proposal(i)
+        novelty_hit = novelty.is_near_duplicate(candidate)
+        semantic_hit = _semantic_match_features(
+            candidate, _semantic_features(candidate), semantic, 0.72
+        ) is not None
+        if novelty_hit and semantic_hit:
+            counts["both"] += 1
+        elif novelty_hit:
+            counts["novelty_only"] += 1
+        elif semantic_hit:
+            counts["semantic_only"] += 1
+        else:
+            counts["accepted"] += 1
+            novelty.add(candidate)
+            semantic.append((candidate, _semantic_features(candidate)))
+    return {
+        "sample_start": sample_start,
+        "sample_count": sample_count,
+        "reason_counts": counts,
+        "publication_approved": 0,
+        "history_mutated": False,
+    }
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--history-start", type=int, default=0)
@@ -160,6 +195,9 @@ if __name__ == "__main__":
     parser.add_argument("--sample-start", type=int, default=10000)
     parser.add_argument("--sample-count", type=int, default=100)
     args = parser.parse_args()
+    print("ASTRA_MYSTERY_REJECTION_REASONS=" + json.dumps(measure_sequential_rejection_reasons(
+        args.history_start, args.history_count
+    ), sort_keys=True))
     print("ASTRA_MYSTERY_SEQUENTIAL_NOVELTY=" + json.dumps(measure_sequential_novelty(
         args.history_start, args.history_count
     ), sort_keys=True))
