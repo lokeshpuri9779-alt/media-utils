@@ -48,7 +48,7 @@ def apply_backdrop(image, shot, identity):
     scene=choose_scene(shot)
     if scene is None:
         return image
-    seed=int.from_bytes(hashlib.sha256(str(identity).encode()).digest()[:4],"big")
+    seed=int.from_bytes(hashlib.sha256((str(identity) + "|" + scene).encode()).digest()[:4],"big")
     palette=PALETTES[seed%len(PALETTES)]
     bg,accent,light,star=palette
     # Upper half environmental silhouette; actors and captions remain rendered
