@@ -188,6 +188,49 @@ def measure_sequential_rejection_reasons(sample_start=0, sample_count=200):
         "history_mutated": False,
     }
 
+def diagnose_duplicate_pressure(sample_start=0, sample_count=200):
+    """Read-only collision attribution by accepted-story plot and architecture.
+
+    The same conservative screens decide acceptance; diagnostics never approve
+    or write a candidate into the production ledger.
+    """
+    from collections import Counter
+    from astra_v2.autonomous_story_proposals import PLOT_ENGINES, NARRATIVE_ARCHITECTURES
+    if sample_start < 0 or not 1 <= sample_count <= 1000:
+        raise ValueError("Invalid sequential window")
+    novelty = NoveltyIndex([])
+    semantic = []
+    collisions = Counter()
+    accepted = Counter()
+    for i in range(sample_start, sample_start + sample_count):
+        candidate = proposal(i)
+        plot = (i // 11) % len(PLOT_ENGINES)
+        architecture = (i // 5) % len(NARRATIVE_ARCHITECTURES)
+        novelty_hit = novelty.is_near_duplicate(candidate)
+        semantic_hit = _semantic_match_features(
+            candidate, _semantic_features(candidate), semantic, 0.72
+        ) is not None
+        if novelty_hit or semantic_hit:
+            collisions[(plot, architecture, "both" if novelty_hit and semantic_hit else
+                        "novelty_only" if novelty_hit else "semantic_only")] += 1
+        else:
+            accepted[(plot, architecture)] += 1
+            novelty.add(candidate)
+            semantic.append((candidate, _semantic_features(candidate)))
+    return {
+        "sample_start": sample_start,
+        "sample_count": sample_count,
+        "accepted_count": sum(accepted.values()),
+        "rejected_count": sum(collisions.values()),
+        "collisions": [
+            {"plot": p, "architecture": a, "reason": reason, "count": count}
+            for (p, a, reason), count in sorted(collisions.items())
+        ],
+        "publication_approved": 0,
+        "history_mutated": False,
+    }
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--history-start", type=int, default=0)
