@@ -7,8 +7,8 @@ from astra_v2.autonomous_story_proposals import proposal
 class ControlledMysteryComparisonTests(unittest.TestCase):
     def test_frozen_generator_and_deterministic_comparison(self):
         self.assertNotEqual(
-            legacy_proposal(100)["story_beats"][0]["speech"],
-            proposal(100)["story_beats"][0]["speech"],
+            legacy_proposal(100)["story_beats"][1]["speech"],
+            proposal(100)["story_beats"][1]["speech"],
         )
         result = compare_generators(history_count=12, sample_start=200, sample_count=12)
         self.assertEqual(result, compare_generators(history_count=12, sample_start=200, sample_count=12))
