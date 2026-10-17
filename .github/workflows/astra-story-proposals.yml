@@ -74,15 +74,15 @@ jobs:
       - name: Generate novel unreviewed proposals
         env:
           ASTRA_PROPOSAL_BATCH: "100"
-        run: python -m astra_v2.autonomous_story_proposals
+        run: /usr/bin/time -f "ASTRA_STAGE_GENERATION_SECONDS=%e ASTRA_STAGE_GENERATION_PEAK_KB=%M" python -m astra_v2.autonomous_story_proposals
       - name: Verify isolation and persistence
         run: |
           python -m unittest discover -s tests -p test_astra_autonomous_story_proposals.py -v
           python -m unittest discover -s tests -p test_astra_proposal_history.py -v
       - name: Triage proposals without granting publication approval
-        run: python -m astra_v2.story_editorial_report
+        run: /usr/bin/time -f "ASTRA_STAGE_TRIAGE_SECONDS=%e ASTRA_STAGE_TRIAGE_PEAK_KB=%M" python -m astra_v2.story_editorial_report
       - name: Audit production eligibility without promotion
-        run: python -m astra_v2.story_supply_review
+        run: /usr/bin/time -f "ASTRA_STAGE_AUDIT_SECONDS=%e ASTRA_STAGE_AUDIT_PEAK_KB=%M" python -m astra_v2.story_supply_review
       - name: Summarize reviewable story supply without approval
         if: always()
         run: |
