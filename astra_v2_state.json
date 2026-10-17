@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 22,
-  "confirmed_today": 21,
-  "last_attempt_at": "2026-10-17T10:30:17.955558+00:00",
+  "attempts": 23,
+  "confirmed_today": 22,
+  "last_attempt_at": "2026-10-17T10:41:56.009366+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1795,30 +1795,38 @@
       "format": "short",
       "uploaded_at": "2026-10-17T10:11:34.551088+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-9e6023fefdb1f4b2": {
+      "video_id": "5N4BRwzWBmw",
+      "confirmed_at": "2026-10-17T10:41:10.139061+00:00",
+      "title": "The Penguin and the Aurora Compass",
+      "format": "short",
+      "uploaded_at": "2026-10-17T10:30:20.886664+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "5N4BRwzWBmw": {
-      "content_id": "rayvan-forge-9e6023fefdb1f4b2",
-      "title": "The Penguin and the Aurora Compass",
+    "5tSHeH4E4HY": {
+      "content_id": "rayvan-forge-f8110313b15155e7",
+      "title": "The Mouse and the Missing Constellation",
       "day": "2026-10-17",
-      "uploaded_at": "2026-10-17T10:30:20.886664+00:00",
+      "uploaded_at": "2026-10-17T10:41:58.544925+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "ca482ca1f5c40786bef8084384a2dd2c43274e6920165379f55074df197c8144",
+      "plot_fingerprint": "24b78064cd5239151e1b4cbfb5ce696eea16130c91f67ed3c116b79a02a55487",
       "story_beats": [
         {
-          "speech": "A penguin watched the research compass spin wildly beneath an unusually bright polar sky."
+          "speech": "A mouse discovered that one star was missing from the theater's painted night sky."
         },
         {
-          "speech": "She noticed the old radio antenna pointed toward camp whenever its signal grew strongest."
+          "speech": "She checked the backdrop and found the star still painted beneath a strip of black fabric."
         },
         {
-          "speech": "She marked each stronger radio pulse with a flag and traced a route around the crevasses."
+          "speech": "She helped the stage crew realign the curtain so the whole constellation became visible."
         },
         {
-          "speech": "The team followed her flags back to the station and repaired the compass indoors."
+          "speech": "The audience watched the stars shine together as the opening music finally played."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -1826,11 +1834,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-17T10:29:34.576070+00:00",
+  "last_preflight_at": "2026-10-17T10:41:09.761038+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-17T10:30:21.267999+00:00",
+    "at": "2026-10-17T10:41:58.882036+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -3999,10 +4007,33 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-forge-f8110313b15155e7": {
+      "at": "2026-10-17T10:41:56.009350+00:00",
+      "title": "The Mouse and the Missing Constellation",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "24b78064cd5239151e1b4cbfb5ce696eea16130c91f67ed3c116b79a02a55487",
+      "story_beats": [
+        {
+          "speech": "A mouse discovered that one star was missing from the theater's painted night sky."
+        },
+        {
+          "speech": "She checked the backdrop and found the star still painted beneath a strip of black fabric."
+        },
+        {
+          "speech": "She helped the stage crew realign the curtain so the whole constellation became visible."
+        },
+        {
+          "speech": "The audience watched the stars shine together as the opening music finally played."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-17T10:30:21.267934+00:00",
+    "at": "2026-10-17T10:41:58.881965+00:00",
     "publication_outcome": "processing",
     "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
