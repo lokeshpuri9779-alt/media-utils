@@ -3,7 +3,7 @@
   "day": "2026-10-18",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 1,
-  "confirmed_today": 0,
+  "confirmed_today": 1,
   "last_attempt_at": "2026-10-17T19:56:16.383007+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -1819,57 +1819,38 @@
       "format": "short",
       "uploaded_at": "2026-10-17T10:57:45.356802+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "-jyXlrQUwLU": {
-      "content_id": "rayvan-forge-17a66304a8162574",
+    },
+    "rayvan-forge-17a66304a8162574": {
+      "video_id": "-jyXlrQUwLU",
+      "confirmed_at": "2026-10-17T19:56:46.271717+00:00",
       "title": "The Marten and the Echo Vault",
-      "day": "2026-10-18",
-      "uploaded_at": "2026-10-17T19:56:17.963720+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "0558e277e06a3f61dbb9e9e48fe0a1eb3f2e2ff0354c7ae21395331fcc298a50",
-      "story_beats": [
-        {
-          "speech": "A pine marten heard her own voice returning as three different notes from a closed mountain tunnel."
-        },
-        {
-          "speech": "She found the tunnel gate locked while a lost hiking party waited on the other side for help."
-        },
-        {
-          "speech": "She tapped the stone wall and traced the highest echo to a narrow speaking pipe beside the gate."
-        },
-        {
-          "speech": "She called through the pipe to the gatekeeper's cabin and guided the hikers out through the reopened tunnel."
-        }
-      ],
+      "uploaded_at": "2026-10-17T19:56:17.963720+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-17T19:54:35.482925+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-17T19:56:45.835387+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-17T19:56:18.385448+00:00",
+    "at": "2026-10-17T19:56:46.350063+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-17T08:22:29.019770+00:00",
   "reserved": {
@@ -4095,10 +4076,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-17T19:56:18.385348+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-17T19:56:46.349952+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -4106,9 +4087,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-17T19:56:18.385431+00:00",
+    "at": "2026-10-17T19:56:46.350047+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   }
 }
