@@ -3,7 +3,7 @@
   "day": "2026-10-18",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 5,
-  "confirmed_today": 4,
+  "confirmed_today": 5,
   "last_attempt_at": "2026-10-17T21:17:17.803314+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -1851,57 +1851,38 @@
       "format": "short",
       "uploaded_at": "2026-10-17T21:09:13.598792+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "Tqcxl11pftA": {
-      "content_id": "rayvan-forge-de49d08927c67c6e",
+    },
+    "rayvan-forge-de49d08927c67c6e": {
+      "video_id": "Tqcxl11pftA",
+      "confirmed_at": "2026-10-17T21:21:32.346390+00:00",
       "title": "The Pangolin and the River Lanterns",
-      "day": "2026-10-18",
-      "uploaded_at": "2026-10-17T21:17:19.390675+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "31d166d9f92a423d76ac2aba81e2a0268f4ab2a2283645cf707ce7cef8a05ea8",
-      "story_beats": [
-        {
-          "speech": "A pangolin discovered the river bridge lanterns had gone out before the night market opened."
-        },
-        {
-          "speech": "He replaced every lantern wick but river spray extinguished the little flames again and again."
-        },
-        {
-          "speech": "He noticed empty river shells shielding a fisherman's stove and fitted protective covers around the lanterns."
-        },
-        {
-          "speech": "The protected lanterns illuminated the crossing and the traders opened the evening market safely."
-        }
-      ],
+      "uploaded_at": "2026-10-17T21:17:19.390675+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-17T21:16:44.960747+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-17T21:21:32.000127+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-17T21:17:19.690963+00:00",
+    "at": "2026-10-17T21:21:32.426202+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-17T20:37:31.543351+00:00",
   "reserved": {
@@ -4219,10 +4200,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-17T21:17:19.690878+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-17T21:21:32.426100+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -4230,9 +4211,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-17T21:17:19.690945+00:00",
+    "at": "2026-10-17T21:21:32.426183+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -4243,12 +4224,12 @@
     "video_url": "https://www.youtube.com/watch?v=Tqcxl11pftA"
   },
   "last_workflow_result": {
-    "at": "2026-10-17T21:17:19.690859+00:00",
-    "preflight_due": "true",
+    "at": "2026-10-17T21:21:32.426082+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": ""
+    "outcome": "published",
+    "reason": "min_interval"
   }
 }
