@@ -66,11 +66,24 @@ class StoryFactoryTests(unittest.TestCase):
             self.assertEqual(first["next_slot"],500)
             self.assertEqual(len(output.read_text().splitlines()),500)
             self.assertEqual(first["last_awaiting_review"],len(MECHANISMS))
+            self.assertEqual(first["last_repeated_plots"],500-len(MECHANISMS))
+            self.assertEqual(first["distinct_source_premises"],len(MECHANISMS))
             self.assertEqual(generate(state,output,batch_size=500),500)
             second=json.loads(state.read_text())
             self.assertEqual(second["next_slot"],1000)
             self.assertEqual(second["last_awaiting_review"],0)
+            self.assertEqual(second["last_repeated_plots"],500)
             self.assertEqual(len(output.read_text().splitlines()),500)
+    def test_signature_history_also_blocks_repeated_premise(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            state=Path(tmp)/"state.json"
+            output=Path(tmp)/"candidates.jsonl"
+            signature=candidate_at(0)["plot_signature"]
+            state.write_text(json.dumps({"next_slot":0,"seen_plot_signatures":[signature]}))
+            generate(state,output,batch_size=1)
+            review=json.loads(output.with_name("story_factory_review.jsonl").read_text().strip())
+            self.assertEqual(review["status"],"needs_new_plot")
+            self.assertFalse(review["production_ready"])
     def test_sample_unique_ids(self):
         self.assertEqual(len({candidate_at(i)["candidate_id"] for i in range(1000)}),1000)
 if __name__=="__main__": unittest.main()
