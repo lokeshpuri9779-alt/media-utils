@@ -200,6 +200,54 @@ PLOT_ENGINES = (
         "The archive had preserved two different eras of the same settlement",
         "created a layered map and reunited families with their missing history",
     ),
+    (
+        "A shared garden began failing after a well-intended repair",
+        "compared soil samples before and after the repair",
+        "The new drainage channel was washing nutrients away",
+        "rerouted the drainage and helped the gardeners restore the soil",
+    ),
+    (
+        "An emergency broadcast seemed to predict accidents that never happened",
+        "compared broadcast timestamps with maintenance records",
+        "The warnings were delayed recordings from earlier safety drills",
+        "corrected the transmitter clock and documented the drill archive",
+    ),
+    (
+        "A museum exhibit went dark whenever visitors approached",
+        "tested the display with different visitor paths and lighting levels",
+        "A protective sensor was mistaking reflections for dangerous heat",
+        "recalibrated the sensor and kept the fragile exhibit protected",
+    ),
+    (
+        "Two villages claimed ownership of the same ancient bridge",
+        "compared historical agreements with the bridge's repair records",
+        "Both villages had inherited different maintenance duties, not exclusive ownership",
+        "formed a joint repair council and reopened the crossing",
+    ),
+    (
+        "A rescue boat repeatedly returned to the wrong shore",
+        "charted the current against the boat's navigation marks",
+        "An underwater obstruction had redirected the river after the last storm",
+        "marked the safer channel and removed the obstruction carefully",
+    ),
+    (
+        "A school science fair lost power just before judging",
+        "isolated the electrical circuits and checked each project's load",
+        "A demonstration battery was feeding current backward into the shared circuit",
+        "installed isolation switches and restarted the fair safely",
+    ),
+    (
+        "A mountain village's food store emptied faster than deliveries arrived",
+        "tracked storage losses and compared the delivery schedule with weather records",
+        "A damaged vent was spoiling food rather than anyone stealing it",
+        "repaired the vent and introduced a shared inventory check",
+    ),
+    (
+        "A historic clock began sounding the wrong hour during an important festival",
+        "observed its mechanism through one full cycle without adjusting it",
+        "A replacement gear had the wrong number of teeth",
+        "installed the correct gear and preserved the old part as evidence",
+    ),
 )
 
 # Narrative architectures change the order and agency of the investigation.
