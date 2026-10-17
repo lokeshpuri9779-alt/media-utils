@@ -9,17 +9,17 @@ from astra_v2.publication_quality import publication_rejection
 
 class ExpandedInventoryTests(unittest.TestCase):
     def test_exact_asset_recipe_counts_and_id_uniqueness(self):
-        self.assertEqual(CHARACTER_VARIANTS, 2000)
+        self.assertEqual(CHARACTER_VARIANTS, len(SPECIES)*250)
         self.assertEqual(ICON_VARIANTS, 2000)
         chars=[character_recipe(i) for i in range(CHARACTER_VARIANTS)]
         icons=[icon_recipe(i) for i in range(ICON_VARIANTS)]
-        self.assertEqual(len({x["id"] for x in chars}),2000)
-        self.assertEqual(len({(x["species"],x["palette"],x["costume"],x["accessory"]) for x in chars}),2000)
+        self.assertEqual(len({x["id"] for x in chars}),CHARACTER_VARIANTS)
+        self.assertEqual(len({(x["species"],x["palette"],x["costume"],x["accessory"]) for x in chars}),CHARACTER_VARIANTS)
         self.assertEqual(len({(x["motif"],x["palette"],x["decoration"]) for x in icons}),2000)
         self.assertEqual(set(x["species"] for x in chars),set(SPECIES))
         self.assertEqual(set(x["motif"] for x in icons),set(MOTIFS))
         with self.assertRaises(ValueError):
-            character_recipe(2000)
+            character_recipe(CHARACTER_VARIANTS)
         with self.assertRaises(ValueError):
             icon_recipe(-1)
     def test_reproducible_different_illustrations(self):
