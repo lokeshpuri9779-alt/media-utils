@@ -9,6 +9,8 @@ import shutil
 import tempfile
 import zipfile
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from astra_v2.illustrated_asset_validation import validate_library
 
