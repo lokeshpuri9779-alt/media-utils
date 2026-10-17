@@ -373,6 +373,8 @@ jobs:
             # Report approved-story runway from the same restored production ledgers.
             # Read-only: this never approves or publishes a story.
             python -m astra_v2.story_runway
+            # Explain exhaustion using the existing editorial and novelty gates.
+            python -m astra_v2.story_supply_diagnostic
           else
             echo 'ASTRA_STORY_INVENTORY_AUDIT=skipped_missing_persistent_history'
           fi
