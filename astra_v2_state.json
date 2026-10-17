@@ -1,9 +1,9 @@
 {
   "version": 2,
-  "day": "2026-10-17",
+  "day": "2026-10-18",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 24,
-  "confirmed_today": 24,
+  "attempts": 0,
+  "confirmed_today": 0,
   "last_attempt_at": "2026-10-17T10:57:43.372521+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -1824,11 +1824,11 @@
   "pending": {},
   "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-10-17T18:22:03.948949+00:00",
+  "last_preflight_at": "2026-10-17T18:29:45.747464+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-17T18:22:43.093477+00:00",
+    "at": "2026-10-17T18:30:29.559895+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -4046,7 +4046,7 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-17T18:22:43.093435+00:00",
+    "at": "2026-10-17T18:30:29.559835+00:00",
     "publication_outcome": "quality_skip",
     "character_memory": "not_reported",
     "character_memory_error": null,
