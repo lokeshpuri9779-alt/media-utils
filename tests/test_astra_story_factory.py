@@ -1,6 +1,9 @@
 """Story factory capacity, determinism, and publishing safety."""
 import unittest
-from astra_v2.story_factory import TARGET, CAPACITY, candidate_at, screen_candidate
+import tempfile
+import json
+from pathlib import Path
+from astra_v2.story_factory import TARGET, CAPACITY, candidate_at, screen_candidate, generate
 
 class StoryFactoryTests(unittest.TestCase):
     def test_capacity(self):
@@ -28,6 +31,24 @@ class StoryFactoryTests(unittest.TestCase):
         second=candidate_at(len(MECHANISMS))
         self.assertNotEqual(first["candidate_id"],second["candidate_id"])
         self.assertEqual(first["plot_signature"],second["plot_signature"])
+    def test_end_to_end_resume_and_review_queue(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            state=Path(tmp)/"state.json"
+            output=Path(tmp)/"candidates.jsonl"
+            self.assertEqual(generate(state, output, batch_size=31),31)
+            first=json.loads(state.read_text())
+            self.assertEqual(first["next_slot"],31)
+            self.assertEqual(first["last_awaiting_review"],len(first["seen_premise_keys"]))
+            review=output.with_name("story_factory_review.jsonl")
+            decisions=[json.loads(line) for line in review.read_text().splitlines()]
+            self.assertEqual(len(decisions),31)
+            self.assertTrue(all(not item["production_ready"] for item in decisions))
+            self.assertEqual(generate(state, output, batch_size=31),31)
+            second=json.loads(state.read_text())
+            self.assertEqual(second["next_slot"],62)
+            self.assertEqual(second["last_awaiting_review"],0)
+            self.assertTrue(all(json.loads(line)["status"]=="needs_new_plot"
+                                for line in review.read_text().splitlines()))
     def test_sample_unique_ids(self):
         self.assertEqual(len({candidate_at(i)["candidate_id"] for i in range(1000)}),1000)
 if __name__=="__main__": unittest.main()
