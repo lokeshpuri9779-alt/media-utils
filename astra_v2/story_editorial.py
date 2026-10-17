@@ -18,26 +18,22 @@ def semantic_signature(story):
     return tokens - stop
 
 
-def semantic_duplicate_match(story, history=(), threshold=0.72):
-    """Return the strongest overlap match, including all active duplicate signals."""
-    current = semantic_signature(story)
-    current_fp = story.get("plot_fingerprint")
+def _semantic_features(story):
     beats = story.get("story_beats") or []
-    current_words = {token for beat in beats if isinstance(beat, dict)
-                     for token in str(beat.get("speech") or "").casefold().split()}
+    words = {token for beat in beats if isinstance(beat, dict)
+             for token in str(beat.get("speech") or "").casefold().split()}
+    return (semantic_signature(story), words, story.get("plot_fingerprint"))
+
+
+def _semantic_match_features(story, current, previous_items, threshold):
+    signature, words, fingerprint = current
     best = None
-    for prior in history:
-        if not isinstance(prior, dict):
-            continue
-        previous = semantic_signature(prior)
-        union = current | previous
-        jaccard = len(current & previous) / len(union) if union else 0.0
-        prior_beats = prior.get("story_beats") or []
-        prior_words = {token for beat in prior_beats if isinstance(beat, dict)
-                       for token in str(beat.get("speech") or "").casefold().split()}
-        dice = (2 * len(current_words & prior_words) / (len(current_words) + len(prior_words))
-                if current_words and prior_words else 0.0)
-        fingerprint_match = bool(current_fp and current_fp == prior.get("plot_fingerprint"))
+    for prior, (other_signature, other_words, other_fp) in previous_items:
+        union = signature | other_signature
+        jaccard = len(signature & other_signature) / len(union) if union else 0.0
+        dice = (2 * len(words & other_words) / (len(words) + len(other_words))
+                if words and other_words else 0.0)
+        fingerprint_match = bool(fingerprint and fingerprint == other_fp)
         candidate = {
             "matched_content_id": prior.get("content_id"),
             "matched_title": prior.get("title"),
@@ -59,11 +55,18 @@ def semantic_duplicate_match(story, history=(), threshold=0.72):
     return best if triggered else None
 
 
+def semantic_duplicate_match(story, history=(), threshold=0.72):
+    """Return strongest overlap match; retain the original comparison rules."""
+    previous = [(prior, _semantic_features(prior)) for prior in history
+                if isinstance(prior, dict)]
+    return _semantic_match_features(story, _semantic_features(story), previous, threshold)
+
+
 def is_semantic_near_duplicate(story, history=(), threshold=0.72):
     """Detect high-overlap plot narration; conservative and deterministic."""
     return semantic_duplicate_match(story, history, threshold) is not None
 
-def editorial_issues(story, history=(), novelty_index=None):
+def editorial_issues(story, history=(), novelty_index=None, semantic_previous=None):
     issues = list(planning_issues(story))
     beats = story.get("story_beats") or []
     narration = " ".join(str(b.get("speech") or "") for b in beats if isinstance(b, dict))
@@ -73,7 +76,11 @@ def editorial_issues(story, history=(), novelty_index=None):
         issues.append("insufficient_visual_variety")
     duplicate = (novelty_index.is_near_duplicate(story) if novelty_index is not None
                  else is_near_duplicate(story, history))
-    if duplicate or is_semantic_near_duplicate(story, history):
+    semantic_duplicate = (_semantic_match_features(story, _semantic_features(story),
+                          semantic_previous, 0.72) is not None
+                          if semantic_previous is not None
+                          else is_semantic_near_duplicate(story, history))
+    if duplicate or semantic_duplicate:
         issues.append("narrative_duplicate")
     if story.get("kind") == "unreviewed_causal_draft":
         issues.append("human_or_model_editorial_review_required")
@@ -86,8 +93,11 @@ def triage(stories, history=()):
     rejected = []
     seen = list(history)
     novelty_index = NoveltyIndex(seen)
+    semantic_previous = [(prior, _semantic_features(prior)) for prior in seen
+                         if isinstance(prior, dict)]
     for story in stories:
-        issues = editorial_issues(story, seen, novelty_index=novelty_index)
+        issues = editorial_issues(story, seen, novelty_index=novelty_index,
+                                  semantic_previous=semantic_previous)
         item = {"content_id": story.get("content_id"), "title": story.get("title"),
                 "issues": issues,
                 "publication_blocked": bool(publication_rejection(story))}
@@ -108,4 +118,5 @@ def triage(stories, history=()):
             review.append(item)
         seen.append(story)
         novelty_index.add(story)
+        semantic_previous.append((story, _semantic_features(story)))
     return {"ready_for_review": review, "needs_work": rejected}
