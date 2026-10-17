@@ -49,6 +49,32 @@ class EditorialIntakeTests(unittest.TestCase):
         self.assertEqual(result["intake_count"], 0)
         self.assertIn("narrative_duplicate", result["audit"]["results"][0]["issues"])
 
+    def test_failed_audit_removes_stale_approved_export(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            output = root / "approved.json"
+            output.write_text('{"stories":[{"content_id":"stale"}]}', encoding="utf-8")
+            (root / "stories.json").write_text('{"stories":[]}', encoding="utf-8")
+            (root / "reviews.json").write_text('{"reviews":[]}', encoding="utf-8")
+            with self.assertRaises(FileNotFoundError):
+                intake_files(root / "stories.json", root / "reviews.json", output,
+                             root / "missing-state.json", root / "missing-history.json")
+            self.assertFalse(output.exists())
+
+    def test_valid_empty_export_replaces_stale_output(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            output = root / "approved.json"
+            output.write_text('{"stories":[{"content_id":"stale"}]}', encoding="utf-8")
+            (root / "stories.json").write_text('{"stories":[]}', encoding="utf-8")
+            (root / "reviews.json").write_text('{"reviews":[]}', encoding="utf-8")
+            (root / "state.json").write_text('{}', encoding="utf-8")
+            (root / "history.json").write_text('{"stories":[]}', encoding="utf-8")
+            result = intake_files(root / "stories.json", root / "reviews.json", output,
+                                  root / "state.json", root / "history.json")
+            self.assertEqual(result["intake_count"], 0)
+            self.assertEqual(json.loads(output.read_text(encoding="utf-8")), {"stories": []})
+
     def test_missing_persistent_history_blocks_export(self):
         story = catalog(limit=1)[0]
         with tempfile.TemporaryDirectory() as temp:
