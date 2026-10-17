@@ -68,6 +68,23 @@ def apply_backdrop(image, shot, identity):
         d.arc((-200,730,1280,1150),180,355,fill=accent+"88",width=18)
     else:
         d.line((90,950,990,950),fill=accent+"99",width=16)
+    # Three atmospheric planes give depth without external assets or
+    # covering the actor/caption-owned lower part of the frame.
+    # Shapes stay behind the recognizable scene motifs drawn below.
+    if scene in {"forest","garden","mountain","snowfield","desert","island","cave"}:
+        d.polygon(((0,730),(240,610),(450,720),(730,570),(1080,700),(1080,1100),(0,1100)),
+                  fill=accent+"30")
+        d.polygon(((0,850),(220,760),(510,850),(830,720),(1080,840),(1080,1100),(0,1100)),
+                  fill=light+"20")
+    elif scene in {"underwater","harbor","lighthouse","space","observatory"}:
+        d.ellipse((-240,680,1320,1320),outline=accent+"44",width=90)
+        d.ellipse((-120,760,1200,1220),outline=light+"22",width=36)
+    else:
+        for i in range(4):
+            x=55+i*285
+            height=145+(seed//(i+1))%125
+            d.rectangle((x,950-height,x+190,950),fill=accent+"30")
+        d.line((0,960,1080,960),fill=light+"33",width=12)
     # Readable scene-specific motifs replace artificial identity barcodes.
     # The backdrop is still opt-in and remains behind foreground actors.
     if scene == "observatory":
