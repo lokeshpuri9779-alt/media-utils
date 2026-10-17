@@ -40,11 +40,12 @@ def candidate_at(index):
     if not 0 <= index < TARGET:
         raise IndexError(index)
     n = index
+    mechanism_index = n % len(MECHANISMS); n //= len(MECHANISMS)
     role = n % 3; n //= 3
     context = CONTEXTS[n % len(CONTEXTS)]; n //= len(CONTEXTS)
     setting = SETTINGS[n % len(SETTINGS)]; n //= len(SETTINGS)
     a,b = ANIMAL_PAIRS[n % len(ANIMAL_PAIRS)]; n //= len(ANIMAL_PAIRS)
-    key,title,problem,setback,clue,resolution = MECHANISMS[n]
+    key,title,problem,setback,clue,resolution = MECHANISMS[mechanism_index]
     lead,partner = ((a,b),(b,a),(a,b))[role]
     place = "the " + setting
     deadline,audience = context
