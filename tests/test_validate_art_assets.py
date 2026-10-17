@@ -19,6 +19,8 @@ class ValidateArtAssetsTests(unittest.TestCase):
  def test_rejects_low_resolution_background(self):
   Image.new("RGB",(400,700),(20,30,40)).save(self.root/"art/assets/forest.jpg")
   r=self.check([{"id":"forest","path":"art/assets/forest.jpg","category":"background","status":"approved"}]); self.assertFalse(r["pass"]); self.assertIn("background",r["failures"][0])
+ def test_empty_manifest_fails_closed(self):
+  r=self.check([]); self.assertFalse(r["pass"]); self.assertIn("no approved assets",r["failures"][0])
  def test_missing_asset_fails_closed(self):
   r=self.check([{"id":"missing","path":"art/assets/missing.png","category":"background","status":"approved"}]); self.assertFalse(r["pass"])
 if __name__=="__main__": unittest.main()

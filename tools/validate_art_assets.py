@@ -31,6 +31,7 @@ def validate(manifest_path=MANIFEST):
         else:
             if w<MIN_FG[0] or h<MIN_FG[1]: failures.append(f"{aid}: foreground {w}x{h} below {MIN_FG[0]}x{MIN_FG[1]}")
             if not alpha: failures.append(f"{aid}: foreground has no usable transparency")
+    if approved == 0: failures.append("no approved assets registered; refusing to claim generated-art deployment is ready")
     return {"pass":not failures,"assets":len(data["assets"]),"approved":approved,"failures":failures,"warnings":warnings,"minimums":{"background":list(MIN_BG),"foreground":list(MIN_FG)}}
 if __name__=="__main__":
     result=validate(Path(sys.argv[1]) if len(sys.argv)>1 else MANIFEST); print(json.dumps(result,indent=2)); raise SystemExit(0 if result["pass"] else 1)
