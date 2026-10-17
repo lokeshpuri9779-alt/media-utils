@@ -375,6 +375,8 @@ jobs:
             python -m astra_v2.story_runway
             # Explain exhaustion using the existing editorial and novelty gates.
             python -m astra_v2.story_supply_diagnostic
+            # Separate read-only scene-review queue; never auto-approve stories.
+            python -m astra_v2.visual_review_queue
           else
             echo 'ASTRA_STORY_INVENTORY_AUDIT=skipped_missing_persistent_history'
           fi
@@ -393,6 +395,9 @@ jobs:
           # Keep story diagnostics separate from publisher and novelty ledgers.
           if [ -s runtime-health/story_supply_diagnostic.json ]; then
             cp runtime-health/story_supply_diagnostic.json "$WORKTREE/story_supply_diagnostic.json"
+          fi
+          if [ -s runtime-health/visual_review_queue.json ]; then
+            cp runtime-health/visual_review_queue.json "$WORKTREE/visual_review_queue.json"
           fi
           if [ -f astra_story_history.json ]; then
             echo 'ASTRA_STORY_HISTORY_CHECKPOINT=present'
@@ -430,6 +435,7 @@ jobs:
             if [ -f astra_story_history.json ]; then git add -- astra_story_history.json; fi
             # Stage the new diagnostic report; copying alone does not commit it.
             if [ -s story_supply_diagnostic.json ]; then git add -- story_supply_diagnostic.json; fi
+            if [ -s visual_review_queue.json ]; then git add -- visual_review_queue.json; fi
             if ! git diff --cached --quiet; then
               git commit -m 'Update verified ASTRA V2 runtime journal [skip ci]'
               git push origin HEAD:refs/heads/astra-state
