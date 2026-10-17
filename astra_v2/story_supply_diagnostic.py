@@ -38,3 +38,7 @@ if __name__ == "__main__":
         os.getenv("ASTRA_PUBLISHER_STATE_PATH", "astra_v2_state.json"),
         os.getenv("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json"))
     print("ASTRA_STORY_SUPPLY_DIAGNOSTIC=" + json.dumps(report, sort_keys=True))
+    # Separate read-only report artifact, never rewrite publisher state.
+    output = Path(os.getenv("ASTRA_STORY_SUPPLY_REPORT", "runtime-health/story_supply_diagnostic.json"))
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(report, indent=2, sort_keys=True), encoding="utf-8")
