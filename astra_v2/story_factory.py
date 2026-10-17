@@ -56,7 +56,8 @@ def candidate_at(index):
       f"With {audience} watching, they {resolution}, then explained the clue so their neighbors could prevent the problem next time."
     ]
     identity=f"factory-v1:{index}:{key}:{a}:{b}:{setting}:{context[0]}:{role}"
-    return {"candidate_id":hashlib.sha256(identity.encode()).hexdigest()[:24],
+    plot_signature = hashlib.sha256(key.encode()).hexdigest()[:16]
+    return {"plot_signature":plot_signature,"candidate_id":hashlib.sha256(identity.encode()).hexdigest()[:24],
             "slot":index,"premise_key":key,"title":title,
             "setting":setting,"context":context[0],"characters":[a,b],
             "story_beats":beats,"kind":"unreviewed_causal_draft",
