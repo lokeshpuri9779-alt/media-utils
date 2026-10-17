@@ -102,8 +102,10 @@ def triage(stories, history=(), use_semantic_index=False):
     rejected = []
     seen = list(history)
     novelty_index = NoveltyIndex(seen)
-    semantic_previous = [(prior, _semantic_features(prior)) for prior in seen
-                         if isinstance(prior, dict)]
+    # Indexed mode owns its feature cache; avoid building a second full copy.
+    semantic_previous = (None if use_semantic_index else
+                         [(prior, _semantic_features(prior)) for prior in seen
+                          if isinstance(prior, dict)])
     semantic_index = SemanticCandidateIndex(seen) if use_semantic_index else None
     for story in stories:
         issues = editorial_issues(story, seen, novelty_index=novelty_index,
@@ -131,7 +133,8 @@ def triage(stories, history=(), use_semantic_index=False):
             review.append(item)
         seen.append(story)
         novelty_index.add(story)
-        semantic_previous.append((story, _semantic_features(story)))
         if semantic_index is not None:
             semantic_index.add(story)
+        else:
+            semantic_previous.append((story, _semantic_features(story)))
     return {"ready_for_review": review, "needs_work": rejected}
