@@ -3,7 +3,7 @@
   "day": "2026-10-18",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 3,
-  "confirmed_today": 2,
+  "confirmed_today": 3,
   "last_attempt_at": "2026-10-17T20:10:23.778375+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -1835,42 +1835,24 @@
       "format": "short",
       "uploaded_at": "2026-10-17T20:03:45.307552+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "kRnfU_iLp1Q": {
-      "content_id": "rayvan-forge-9597014499522a3b",
+    },
+    "rayvan-forge-9597014499522a3b": {
+      "video_id": "kRnfU_iLp1Q",
+      "confirmed_at": "2026-10-17T20:21:48.117939+00:00",
       "title": "The Lynx and the Snowglass Markers",
-      "day": "2026-10-18",
-      "uploaded_at": "2026-10-17T20:10:25.881917+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "d2b78f7cd5557e9854c1852e8265017b73df1cfe9bde250bb2a93d0b136c578e",
-      "story_beats": [
-        {
-          "speech": "A lynx discovered that fresh snow had buried the markers leading to a mountain shelter before dusk."
-        },
-        {
-          "speech": "She followed the last tracks uphill but the wind erased them before she reached the ridge."
-        },
-        {
-          "speech": "She noticed colored glass fragments on the old trail posts reflecting the low evening sunlight."
-        },
-        {
-          "speech": "She followed the reflections to the shelter and helped its keeper raise taller markers for future travelers."
-        }
-      ],
+      "uploaded_at": "2026-10-17T20:10:25.881917+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-10-17T20:09:37.250272+00:00",
+  "last_preflight_at": "2026-10-17T20:21:47.741067+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-17T20:10:26.655786+00:00",
+    "at": "2026-10-17T20:22:34.446252+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -4157,10 +4139,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-17T20:10:26.655740+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-17T20:22:34.446193+00:00",
+    "publication_outcome": "quality_skip",
+    "publication_reason": "no_approved_original_story_available",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -4168,25 +4150,25 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-17T20:10:26.655777+00:00",
+    "at": "2026-10-17T20:22:34.446242+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-17T20:10:08.906140+00:00",
-    "outcome": "processing",
-    "reason": "",
-    "content_id": "rayvan-forge-9597014499522a3b",
-    "video_url": "https://www.youtube.com/watch?v=kRnfU_iLp1Q"
+    "at": "2026-10-17T20:22:20.548965+00:00",
+    "outcome": "quality_skip",
+    "reason": "no_approved_original_story_available",
+    "content_id": "",
+    "video_url": ""
   },
   "last_workflow_result": {
-    "at": "2026-10-17T20:10:26.655726+00:00",
+    "at": "2026-10-17T20:22:34.446173+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": ""
+    "outcome": "quality_skip",
+    "reason": "no_approved_original_story_available"
   }
 }
