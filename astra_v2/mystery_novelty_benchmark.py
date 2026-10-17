@@ -238,6 +238,9 @@ if __name__ == "__main__":
     parser.add_argument("--sample-start", type=int, default=10000)
     parser.add_argument("--sample-count", type=int, default=100)
     args = parser.parse_args()
+    print("ASTRA_MYSTERY_DUPLICATE_PRESSURE=" + json.dumps(diagnose_duplicate_pressure(
+        args.history_start, args.history_count
+    ), sort_keys=True))
     print("ASTRA_MYSTERY_REJECTION_REASONS=" + json.dumps(measure_sequential_rejection_reasons(
         args.history_start, args.history_count
     ), sort_keys=True))
