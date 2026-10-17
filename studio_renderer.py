@@ -28,6 +28,7 @@ from character_animation import character_storyboard
 from astra_v2.story_visuals import select_subject, draw_subject
 from astra_v2.story_action_motion import choose_action
 from astra_v2.interaction_props import draw_interaction_prop
+from astra.asset_library import draw_asset_for_scene
 
 VERSION = "studio-7.3.0"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
@@ -582,6 +583,10 @@ def starfield(d,t,accent):
 
 def draw_visual(im,s,t,u,accent):
     d=ImageDraw.Draw(im); visual=s['visual']; p=ease(u/.55)
+    # Prefer approved generated ASTRA art when a relevant local asset exists.
+    # Missing/invalid art is a no-op, preserving the established renderer path.
+    if draw_asset_for_scene(im, s, t):
+        return
     if s.get('story_subject') and draw_subject(im, s['story_subject'], t, accent, s.get('story_action','idle')):
         draw_interaction_prop(im, s, t)
         return

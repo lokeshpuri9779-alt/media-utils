@@ -104,3 +104,10 @@ Explicit user approval is required before:
 - [ ] Gather real YouTube audience and monetization metrics only when connected analytics permit; do not infer them from uploads.
 
 - [ ] Optimize full preload-buffer runs: skip dependency installation when 24 approved artifacts are already queued (observed 2026-10-10).
+
+
+## Generated cartoon assets for Shorts (2026-10-18)
+- [~] Wire manifest-approved, locally stored generated art into Studio Shorts scenes; invalid/missing assets keep the existing renderer fallback.
+- [ ] Add individually cropped, alpha-validated PNGs from the generated ASTRA atlas pack under `art/assets/`; composite atlas sheets must not be used as character cutouts.
+- [ ] Run asset-library tests and a 1080x1920 sample render; verify no checkerboard remnants, halos, clipping, or character-scale regressions.
+- [ ] Keep Shorts upload visibility and publication safeguards unchanged until the rendered sample passes QA.
