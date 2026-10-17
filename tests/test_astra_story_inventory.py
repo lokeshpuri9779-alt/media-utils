@@ -1,7 +1,7 @@
 """Regression tests for ASTRA's authored and opt-in draft story inventory."""
 import unittest
 
-from astra_v2.story_forge import PILLOW_DUO_PLOTS, PLOTS, REWRITTEN_PLOTS, NEW_AUTHORED_PLOTS, EDITORIAL_OCT2026_PLOTS, CROSSGENRE_DIRECTED_24, AUTHORED_REPLENISHMENT_OCT2026, AUTHORED_BATCH_341, AUTHORED_BATCH_364, AUTHORED_BATCH_407, DRAFT_CAUSAL_ARCS, DRAFT_PROBLEMS, catalog, draft_catalog, editorial_screen, plot_fingerprint
+from astra_v2.story_forge import PILLOW_DUO_PLOTS, PLOTS, REWRITTEN_PLOTS, NEW_AUTHORED_PLOTS, EDITORIAL_OCT2026_PLOTS, CROSSGENRE_DIRECTED_24, AUTHORED_REPLENISHMENT_OCT2026, AUTHORED_BATCH_341, AUTHORED_BATCH_364, AUTHORED_BATCH_407, AUTHORED_BATCH_420, DRAFT_CAUSAL_ARCS, DRAFT_PROBLEMS, catalog, draft_catalog, editorial_screen, plot_fingerprint
 from astra_v2.publication_quality import publication_rejection
 
 
@@ -10,9 +10,20 @@ class StoryInventoryTests(unittest.TestCase):
         self.assertEqual(len(PLOTS), 24)
         self.assertEqual(len(REWRITTEN_PLOTS), 55)
         records = catalog(limit=2000)
-        self.assertEqual(len(records), len(PILLOW_DUO_PLOTS) + len(PLOTS) + len(REWRITTEN_PLOTS) + len(NEW_AUTHORED_PLOTS) + len(EDITORIAL_OCT2026_PLOTS) + len(CROSSGENRE_DIRECTED_24) + len(AUTHORED_REPLENISHMENT_OCT2026) + len(AUTHORED_BATCH_341) + len(AUTHORED_BATCH_364) + len(AUTHORED_BATCH_407))
+        self.assertEqual(len(records), len(PILLOW_DUO_PLOTS) + len(PLOTS) + len(REWRITTEN_PLOTS) + len(NEW_AUTHORED_PLOTS) + len(EDITORIAL_OCT2026_PLOTS) + len(CROSSGENRE_DIRECTED_24) + len(AUTHORED_REPLENISHMENT_OCT2026) + len(AUTHORED_BATCH_341) + len(AUTHORED_BATCH_364) + len(AUTHORED_BATCH_407) + len(AUTHORED_BATCH_420))
         self.assertEqual(len({x["content_id"] for x in records}), len(records))
         self.assertTrue(all(x["production_ready"] for x in records))
+
+    def test_new_replenishment_batch_is_structurally_valid(self):
+        self.assertEqual(len(AUTHORED_BATCH_420), 12)
+        self.assertEqual(len({row[0] for row in AUTHORED_BATCH_420}), 12)
+        self.assertEqual(len({row[1].casefold() for row in AUTHORED_BATCH_420}), 12)
+        for key, title, genre, beats in AUTHORED_BATCH_420:
+            with self.subTest(story=key):
+                self.assertEqual(len(beats), 4)
+                self.assertTrue(title.strip() and genre.strip())
+                self.assertTrue(all(len(beat) == 4 for beat in beats))
+                self.assertTrue(all(len(beat[1].split()) >= 9 for beat in beats))
 
     def test_rewritten_story_editorial_structure(self):
         self.assertEqual(len(REWRITTEN_PLOTS), 55)
