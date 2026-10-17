@@ -227,11 +227,13 @@ def make_candidate(path, excluded_ids, excluded_titles):
         if story["content_id"] in excluded_ids or story["title"].casefold().strip() in excluded_titles:
             continue
         if not script_duration_preflight(story):
+            print("ASTRA_CANDIDATE_DURATION_REJECTED=" + json.dumps({"content_id": story.get("content_id"), "reason": "script_duration_preflight_failed"}, sort_keys=True))
             continue
         try:
             rendered = render_short(story, path)
             evaluation = evaluate_studio_render(story, rendered, video_path=path)
             if not evaluation.get("pass"):
+                print("ASTRA_CANDIDATE_RENDER_QA_REJECTED=" + json.dumps({"content_id": story.get("content_id"), "reason": "creative_render_qa_failed"}, sort_keys=True))
                 from astra_v2.stage_feedback import record
                 director = evaluation.get("director") or {}
                 for component, score in (director.get("component_scores") or {}).items():
@@ -285,6 +287,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 + "\nSubscribe: https://www.youtube.com/channel/" + legacy.expected_channel_id())
             break
         except Exception as exc:
+            print("ASTRA_CANDIDATE_RENDER_EXCEPTION=" + json.dumps({"content_id": story.get("content_id"), "exception_type": type(exc).__name__}, sort_keys=True))
             print("Premium candidate rejected:", story.get("content_id"),
                   type(exc).__name__, str(exc)[:250])
     else:
