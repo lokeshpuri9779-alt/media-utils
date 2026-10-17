@@ -55,7 +55,7 @@ class StudioRuntimeOptimizationTests(unittest.TestCase):
                                          "story_environment":"harbor"}),"library")
         self.assertEqual(story_setting({"speech":"The fox looked up.",
                                          "story_environment":"harbor"}),"harbor")
-        self.assertEqual(story_setting({"speech":"The fox looked up."}),"forest")
+        self.assertEqual(story_setting({"speech":"The fox looked up."}),"meadow")
         rolling={"speech":"The ball rolled across the river.","story_action":"idle"}
         a=prop_trajectory(rolling,.2)
         b=prop_trajectory(rolling,1.6)
