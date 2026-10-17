@@ -1,0 +1,85 @@
+name: ASTRA CC0 artwork batch
+on:
+  workflow_dispatch:
+    inputs:
+      archive_url:
+        description: 'Direct HTTPS ZIP link to a verified CC0 artwork pack'
+        required: true
+        type: string
+      source_page:
+        description: 'Official CC0 pack page (provenance)'
+        required: true
+        type: string
+      artist:
+        description: 'Artist / creator'
+        required: true
+        default: Kenney
+        type: string
+      kind:
+        description: 'Artwork type'
+        required: true
+        default: prop
+        type: choice
+        options: [prop, character, background, pose, effect]
+permissions:
+  contents: read
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pillow
+      - name: Download and unpack approved ZIP safely
+        env:
+          PACK_URL: ${{ inputs.archive_url }}
+        run: |
+          python - <<'PY'
+          import os, pathlib, urllib.parse, urllib.request, zipfile
+          url=os.environ["PACK_URL"]
+          parsed=urllib.parse.urlsplit(url)
+          if parsed.scheme!="https" or parsed.hostname not in {"kenney.nl","www.kenney.nl","github.com","raw.githubusercontent.com","objects.githubusercontent.com"}:
+              raise SystemExit("Archive URL host not approved")
+          req=urllib.request.Request(url,headers={"User-Agent":"ASTRA-Asset-Importer/1.0"})
+          with urllib.request.urlopen(req,timeout=40) as r:
+              if urllib.parse.urlsplit(r.url).hostname not in {"kenney.nl","www.kenney.nl","github.com","raw.githubusercontent.com","objects.githubusercontent.com","release-assets.githubusercontent.com"}:
+                  raise SystemExit("Unexpected redirect host")
+              data=r.read(40*1024*1024+1)
+          if len(data)>40*1024*1024: raise SystemExit("Archive exceeds 40 MB")
+          pathlib.Path("pack.zip").write_bytes(data)
+          dest=pathlib.Path("incoming")
+          dest.mkdir()
+          with zipfile.ZipFile("pack.zip") as z:
+              entries=z.infolist()
+              if len(entries)>5000 or sum(i.file_size for i in entries)>180*1024*1024:
+                  raise SystemExit("Archive expansion limit exceeded")
+              for i in entries:
+                  path=pathlib.PurePosixPath(i.filename)
+                  if path.is_absolute() or ".." in path.parts or i.is_dir():
+                      continue
+                  if path.suffix.lower()!=".png": continue
+                  target=dest.joinpath(*path.parts)
+                  target.parent.mkdir(parents=True,exist_ok=True)
+                  with z.open(i) as src, target.open("wb") as out:
+                      import shutil
+                      shutil.copyfileobj(src,out)
+          PY
+      - name: Import, validate and count artwork
+        env:
+          SOURCE_PAGE: ${{ inputs.source_page }}
+          ARTIST: ${{ inputs.artist }}
+          KIND: ${{ inputs.kind }}
+        run: |
+          python -m astra_v2.cc0_pack_importer --pack incoming --root . --source "$SOURCE_PAGE" --artist "$ARTIST" --kind "$KIND"
+          python -m astra_v2.illustrated_asset_validation --root . --min-assets 1
+      - name: Package verified artwork for review
+        run: |
+          tar -czf astra-artwork-batch.tar.gz art/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: astra-verified-cc0-artwork
+          path: astra-artwork-batch.tar.gz
+          retention-days: 14
