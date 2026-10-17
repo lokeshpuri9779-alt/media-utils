@@ -63,6 +63,19 @@ def candidate_at(index):
             "generation_method":"deterministic_composition",
             "independent_plot_claim":False}
 
+def screen_candidate(candidate, previously_seen=()):
+    """Conservative review; never authorizes publication."""
+    reasons = []
+    beats = candidate["story_beats"]
+    if len(beats) != 4 or any(len(beat.split()) < 12 for beat in beats):
+        reasons.append("weak_causal_structure")
+    if candidate["premise_key"] in previously_seen:
+        reasons.append("repeated_underlying_plot_mechanism")
+    return {"candidate_id": candidate["candidate_id"],
+            "premise_key": candidate["premise_key"],
+            "status": "needs_new_plot" if reasons else "awaiting_editorial_review",
+            "issues": reasons, "production_ready": False}
+
 def generate(state_path, output_path, batch_size=500):
     if not 1 <= batch_size <= 5000:
         raise ValueError("batch_size must be between 1 and 5000")
@@ -72,12 +85,22 @@ def generate(state_path, output_path, batch_size=500):
     if not 0 <= cursor <= TARGET: raise ValueError("invalid cursor")
     end=min(cursor+batch_size,TARGET)
     rows=[candidate_at(i) for i in range(cursor,end)]
+    seen=set(state.get("seen_premise_keys", []))
+    review=[]
+    for row in rows:
+        review.append(screen_candidate(row, seen))
+        seen.add(row["premise_key"])
     out=Path(output_path); out.parent.mkdir(parents=True,exist_ok=True)
     with out.open("w") as f:
         for row in rows: f.write(json.dumps(row,ensure_ascii=False)+"\n")
+    review_path=out.with_name("story_factory_review.jsonl")
+    with review_path.open("w") as f:
+        for row in review: f.write(json.dumps(row,ensure_ascii=False)+"\n")
     state_file.parent.mkdir(parents=True,exist_ok=True)
     state_file.write_text(json.dumps({"version":1,"next_slot":end,
-        "target":TARGET,"last_batch":len(rows),"complete":end==TARGET},indent=2)+"\n")
+        "target":TARGET,"last_batch":len(rows),"complete":end==TARGET,
+        "seen_premise_keys":sorted(seen),
+        "last_awaiting_review":sum(x["status"]=="awaiting_editorial_review" for x in review)},indent=2)+"\n")
     return len(rows)
 
 if __name__=="__main__":
