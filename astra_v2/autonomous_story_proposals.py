@@ -353,7 +353,7 @@ def proposal(index):
     title = f"The {visual.capitalize()} Mystery of the {setting.split()[-1].capitalize()}"
     beats = (
         ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}, {stakes}. {plot_problem}. {arc_setup}. The neighbors needed a trustworthy explanation before taking action.", visual),
-        ("build", f"Instead of guessing, {actor} compared {clue}, {plot_evidence}, and {discovery}; {emotional}. {causal_opening}. {actor} {causal_test} and {plot_action}. {arc_decision}; {method}, but {obstacle}. The evidence gave the team a testable explanation rather than another suspicion.", "book"),
+        ("build", f"Instead of guessing, {actor} compared {clue} with {discovery}; then examined {plot_evidence}; {emotional}. {causal_opening}. {actor} {causal_test} and {plot_action}. {arc_decision}; {method}, but {obstacle}. The evidence gave the team a testable explanation rather than another suspicion.", "book"),
         ("twist", f"{causal_reveal}: {reversal}. {plot_reveal}. {arc_turn}. {plot_verification}. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. {actor} checked the clue again and found that it fit the evidence gathered at the start.", clue if clue in VISUALS else "signal"),
         ("payoff", f"With the cause understood, {actor} {resolution}. The community saw how the evidence led to the solution {consequence}. {causal_aftermath}. Together they {plot_outcome}. {arc_aftermath}.", _pick(index, VISUALS, 3)),
     )
