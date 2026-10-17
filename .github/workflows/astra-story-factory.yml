@@ -1,0 +1,40 @@
+name: ASTRA Story Factory Replenishment
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: astra-story-factory
+  cancel-in-progress: false
+jobs:
+  replenish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: astra-state
+          path: state
+          persist-credentials: true
+      - uses: actions/checkout@v4
+        with:
+          path: code
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Generate review-only candidates
+        working-directory: code
+        run: |
+          python -m astra_v2.story_factory --state ../state/story_factory_state.json --output ../state/story_factory_candidates.jsonl --batch-size 500
+      - name: Commit persistent cursor and latest review batch
+        working-directory: state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add story_factory_state.json story_factory_candidates.jsonl story_factory_review.jsonl
+          if ! git diff --cached --quiet; then
+            git commit -m "Replenish review-only story candidate batch"
+            git push origin HEAD:astra-state
+          fi
