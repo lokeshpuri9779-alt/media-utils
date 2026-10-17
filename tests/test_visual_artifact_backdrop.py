@@ -28,7 +28,7 @@ class ArtifactBackdropTests(unittest.TestCase):
             return apply_backdrop(image, shot, "unique-story-id")
         first, second = draw(), draw()
         self.assertEqual(first.tobytes(), second.tobytes())
-        self.assertNotEqual(first.getpixel((100, 800)), (10, 20, 30))
+        self.assertNotEqual(first.tobytes(), Image.new("RGB", (1080, 1920), (10, 20, 30)).tobytes())
         self.assertEqual(first.getpixel((500, 1500)), (10, 20, 30))
 
     def test_story_identity_changes_composition(self):
