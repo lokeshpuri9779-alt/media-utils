@@ -74,10 +74,10 @@ def generate(state_path, output_path, batch_size=500):
     rows=[candidate_at(i) for i in range(cursor,end)]
     out=Path(output_path); out.parent.mkdir(parents=True,exist_ok=True)
     with out.open("w") as f:
-        for row in rows: f.write(json.dumps(row,ensure_ascii=False)+"\\n")
+        for row in rows: f.write(json.dumps(row,ensure_ascii=False)+"\n")
     state_file.parent.mkdir(parents=True,exist_ok=True)
     state_file.write_text(json.dumps({"version":1,"next_slot":end,
-        "target":TARGET,"last_batch":len(rows),"complete":end==TARGET},indent=2)+"\\n")
+        "target":TARGET,"last_batch":len(rows),"complete":end==TARGET},indent=2)+"\n")
     return len(rows)
 
 if __name__=="__main__":
