@@ -7,6 +7,7 @@ on:
       - 'astra_v2/visual_artifact_comparison.py'
       - 'astra_v2/visual_layered_prototype.py'
       - 'astra_v2/visual_layered_comparison.py'
+      - 'astra_v2/visual_hybrid_prototype.py'
       - 'tests/test_visual_layered_prototype.py'
       - '.github/workflows/astra-artifact-comparison.yml'
 jobs:
