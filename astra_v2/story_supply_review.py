@@ -3,6 +3,7 @@
 No story promotion or publication occurs here.
 """
 import json
+from collections import Counter
 from pathlib import Path
 from astra_v2.proposal_history import load_history
 from astra_v2.story_editorial import editorial_issues
@@ -18,6 +19,9 @@ def assess(ledger_path, publisher_path="astra_v2_state.json",
         raise ValueError("Invalid proposal ledger")
     history = load_history(publisher_path, story_path)
     reviewed = []
+    editorial_reason_counts = Counter()
+    publication_reason_counts = Counter()
+    structurally_sound_count = 0
     novelty_index = NoveltyIndex(history)
     semantic_previous = [(prior, _semantic_features(prior)) for prior in history
                          if isinstance(prior, dict)]
@@ -27,6 +31,12 @@ def assess(ledger_path, publisher_path="astra_v2_state.json",
         issues = editorial_issues(story, history, novelty_index=novelty_index,
                                   semantic_previous=semantic_previous)
         rejection = publication_rejection(story)
+        editorial_reason_counts.update(issues)
+        if rejection:
+            publication_reason_counts[rejection] += 1
+        if not [issue for issue in issues
+                if issue != "human_or_model_editorial_review_required"]:
+            structurally_sound_count += 1
         reviewed.append({
             "content_id": story.get("content_id"),
             "editorial_issues": issues,
@@ -41,6 +51,9 @@ def assess(ledger_path, publisher_path="astra_v2_state.json",
         "editorial_issue_count": sum(bool(x["editorial_issues"]) for x in reviewed),
         "publication_blocked_count": sum(bool(x["publication_rejection"]) for x in reviewed),
         "approved_for_production": 0,
+        "structurally_sound_unreviewed_count": structurally_sound_count,
+        "editorial_reason_counts": dict(sorted(editorial_reason_counts.items())),
+        "publication_rejection_reason_counts": dict(sorted(publication_reason_counts.items())),
         "proposals": reviewed,
     }
 
