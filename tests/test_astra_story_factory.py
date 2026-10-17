@@ -3,7 +3,7 @@ import unittest
 import tempfile
 import json
 from pathlib import Path
-from astra_v2.story_factory import TARGET, CAPACITY, candidate_at, screen_candidate, generate
+from astra_v2.story_factory import TARGET, CAPACITY, MECHANISMS, candidate_at, screen_candidate, generate
 
 class StoryFactoryTests(unittest.TestCase):
     def test_capacity(self):
@@ -23,10 +23,10 @@ class StoryFactoryTests(unittest.TestCase):
         self.assertEqual(screen_candidate(item, [item["premise_key"]])["status"], "needs_new_plot")
         self.assertFalse(screen_candidate(item, [])["production_ready"])
     def test_first_batch_rotates_premises(self):
-        from astra_v2.story_expansion_2000 import MECHANISMS
+        from astra_v2.story_factory import MECHANISMS
         self.assertEqual(len({candidate_at(i)["premise_key"] for i in range(len(MECHANISMS))}),len(MECHANISMS))
     def test_plot_identity_survives_cosmetic_variations(self):
-        from astra_v2.story_expansion_2000 import MECHANISMS
+        from astra_v2.story_factory import MECHANISMS
         first=candidate_at(0)
         second=candidate_at(len(MECHANISMS))
         self.assertNotEqual(first["candidate_id"],second["candidate_id"])
@@ -46,9 +46,12 @@ class StoryFactoryTests(unittest.TestCase):
             self.assertEqual(generate(state, output, batch_size=31),31)
             second=json.loads(state.read_text())
             self.assertEqual(second["next_slot"],62)
-            self.assertEqual(second["last_awaiting_review"],0)
-            self.assertTrue(all(json.loads(line)["status"]=="needs_new_plot"
-                                for line in review.read_text().splitlines()))
+            self.assertEqual(second["last_awaiting_review"],len(MECHANISMS)-31)
+            self.assertEqual(sum(json.loads(line)["status"]=="needs_new_plot"
+                                 for line in review.read_text().splitlines()), 62-len(MECHANISMS))
+    def test_expanded_premises_have_distinct_keys(self):
+        self.assertGreaterEqual(len(MECHANISMS),42)
+        self.assertEqual(len({row[0] for row in MECHANISMS}),len(MECHANISMS))
     def test_sample_unique_ids(self):
         self.assertEqual(len({candidate_at(i)["candidate_id"] for i in range(1000)}),1000)
 if __name__=="__main__": unittest.main()

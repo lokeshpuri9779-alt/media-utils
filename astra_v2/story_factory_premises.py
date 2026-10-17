@@ -1,0 +1,19 @@
+"""Additional independently specified causal mechanisms for editorial candidates.
+
+Each entry is problem, failed intervention, discovery, and causal resolution.
+These are source premises, not production-approved videos.
+"""
+NEW_MECHANISMS = (
+ ("signal-mirror","The False Lighthouse Flash","a lighthouse signal flashed toward the harbor at the wrong intervals","they replaced the lamp timer but the confusing flashes continued","a loose mirror on the outer railing was reflecting each beam twice","secured the mirror and tested the signal from the harbor"),
+ ("orchard-map","The Orchard's Missing Row","the orchard map led workers to an empty planting row","they measured from the old fence but the trees still seemed missing","the boundary fence had been moved after a flood","located the original stone markers and corrected the map"),
+ ("canal-gate","The Canal Gate That Would Not Close","the irrigation gate would not seal before the evening release","they tightened the handle but water still rushed beneath it","a fallen branch was wedged inside the lower track","lifted the branch with a hooked pole and closed the gate safely"),
+ ("theater-shadow","The Extra Shadow on Stage","an unexpected shadow spoiled the village play","they moved the spotlight but the shadow followed the performers","a painted scenery panel was hanging in front of the backstage lamp","raised the panel and rehearsed the lighting again"),
+ ("bakery-bell","The Bakery Bell That Rang Twice","the bakery bell rang twice for every delivery","they replaced its rope but the double ring remained","a swinging sign struck the bell on the return stroke","fastened the sign and tested the bell with the delivery team"),
+ ("snow-tracks","The Snow Trail That Disappeared","the rescue team's trail markers vanished overnight","they set larger flags but the next morning those were buried too","wind from the narrow pass had piled snow against the markers","moved the route to a sheltered ridge and recorded its landmarks"),
+ ("harbor-compass","The Compass That Pointed to the Dock","the harbor compass pointed toward the dock instead of north","they recalibrated it but the needle turned back toward the pier","a newly installed iron winch was disturbing the needle","moved the compass station away from the winch and checked bearings"),
+ ("museum-drawer","The Museum Drawer That Jammed","the museum's specimen drawer would not open before an exhibition","they pulled the handle harder but the wood began to crack","a paper label had slipped behind the drawer rail","removed the label with a thin tool and opened the drawer gently"),
+ ("festival-kites","The Kites That Would Not Rise","every kite at the festival dipped toward the same field","they lengthened the strings but the kites still lost lift","a line of tall trees blocked the steady wind","moved the launch area to an open meadow and adjusted the tails"),
+ ("bridge-whistle","The Bridge Whistle With No Train","the bridge warning whistle sounded though no train was approaching","they checked the signal lever but it had not moved","a gust through a loose ventilation pipe made the same tone","secured the pipe and confirmed the warning system still worked"),
+ ("greenhouse-frost","The Frosted Greenhouse Corner","one corner of the greenhouse froze despite the heater running","they increased the temperature but only the center grew warmer","a cracked vent let cold air blow directly onto the seedlings","sealed the vent and moved the seedlings until temperatures stabilized"),
+ ("river-parcel","The Parcel That Floated Upstream","a parcel seemed to travel upstream against the river current","they followed the main channel but could not explain its movement","an eddy behind the old stone pier carried floating objects backward","retrieved the parcel from the eddy and marked the hazard for boaters"),
+)
