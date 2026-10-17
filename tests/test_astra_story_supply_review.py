@@ -19,6 +19,21 @@ class SupplyReviewTests(unittest.TestCase):
             self.assertTrue(all(not x["eligible_for_automatic_publishing"]
                                 for x in result["proposals"]))
 
+    def test_review_queue_contains_only_editorial_only_candidates(self):
+        with tempfile.TemporaryDirectory() as root:
+            ledger = Path(root) / "proposals.json"
+            ledger.write_text(json.dumps({"proposals": [proposal(i) for i in range(12)]}))
+            result = assess(ledger, Path(root) / "missing-publisher.json",
+                            Path(root) / "missing-stories.json")
+            expected = [entry for entry in result["proposals"]
+                        if entry["editorial_issues"] == ["human_or_model_editorial_review_required"]]
+            self.assertEqual(result["review_queue"], expected)
+            self.assertEqual(len(result["review_queue"]),
+                             result["structurally_sound_unreviewed_count"])
+            self.assertTrue(all(not entry["eligible_for_automatic_publishing"]
+                                for entry in result["review_queue"]))
+            self.assertEqual(result["approved_for_production"], 0)
+
     def test_published_fingerprint_is_flagged(self):
         with tempfile.TemporaryDirectory() as root:
             candidate = proposal(0)
