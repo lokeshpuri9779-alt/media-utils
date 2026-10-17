@@ -21,6 +21,11 @@ class StorySupplyDiagnosticsTests(unittest.TestCase):
             with patch("astra_v2.story_supply_review.load_history", return_value=[]):
                 result = assess(ledger)
         self.assertEqual(result["proposal_count"], 2)
+        self.assertEqual(result["family_counts"], {"mystery": 2})
+        self.assertEqual(sum(result["narrative_duplicates_by_family"].values()),
+                         result["editorial_reason_counts"].get("narrative_duplicate", 0))
+        self.assertEqual(sum(result["visual_variety_issues_by_family"].values()),
+                         result["editorial_reason_counts"].get("insufficient_visual_variety", 0))
         self.assertEqual(result["approved_for_production"], 0)
         self.assertEqual(result["publication_blocked_count"], 2)
         self.assertEqual(result["publication_rejection_reason_counts"],

@@ -22,6 +22,9 @@ def assess(ledger_path, publisher_path="astra_v2_state.json",
     editorial_reason_counts = Counter()
     publication_reason_counts = Counter()
     structurally_sound_count = 0
+    family_counts = Counter()
+    duplicate_by_family = Counter()
+    visual_issues_by_family = Counter()
     novelty_index = NoveltyIndex(history)
     semantic_previous = [(prior, _semantic_features(prior)) for prior in history
                          if isinstance(prior, dict)]
@@ -32,6 +35,12 @@ def assess(ledger_path, publisher_path="astra_v2_state.json",
                                   semantic_previous=semantic_previous)
         rejection = publication_rejection(story)
         editorial_reason_counts.update(issues)
+        family = str(story.get('genre') or 'mystery')
+        family_counts[family] += 1
+        if 'narrative_duplicate' in issues:
+            duplicate_by_family[family] += 1
+        if 'insufficient_visual_variety' in issues:
+            visual_issues_by_family[family] += 1
         if rejection:
             publication_reason_counts[rejection] += 1
         if not [issue for issue in issues
@@ -53,6 +62,9 @@ def assess(ledger_path, publisher_path="astra_v2_state.json",
         "approved_for_production": 0,
         "structurally_sound_unreviewed_count": structurally_sound_count,
         "editorial_reason_counts": dict(sorted(editorial_reason_counts.items())),
+        "family_counts": dict(sorted(family_counts.items())),
+        "narrative_duplicates_by_family": dict(sorted(duplicate_by_family.items())),
+        "visual_variety_issues_by_family": dict(sorted(visual_issues_by_family.items())),
         "publication_rejection_reason_counts": dict(sorted(publication_reason_counts.items())),
         "proposals": reviewed,
     }
