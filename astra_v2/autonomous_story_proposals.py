@@ -107,6 +107,48 @@ CONSEQUENCES = (
 )
 
 
+# Different evidence paths require different actions and explanations;
+# these are not cosmetic title/character substitutions.
+CAUSAL_PATHS = (
+    (
+        "The first clue contradicted the town's explanation",
+        "tested a competing explanation against the original clue",
+        "Only the second explanation accounted for both observations",
+        "The team documented the rejected explanation so it would not mislead anyone again",
+    ),
+    (
+        "A failed test revealed that an important assumption was wrong",
+        "repeated the test under controlled conditions",
+        "The repeated result exposed the missing cause",
+        "The team added a repeatable check to catch the same failure early",
+    ),
+    (
+        "Two witnesses described incompatible versions of the event",
+        "reconstructed the timeline from independent records",
+        "The timeline showed how both witnesses had seen different stages of the same event",
+        "The team published a shared timeline so future warnings could be interpreted correctly",
+    ),
+    (
+        "A harmless-looking side effect threatened the safest route",
+        "traced the side effect backward to the mechanism that triggered it",
+        "The traced chain of events identified the hidden trigger",
+        "The team isolated the trigger and checked that the safe route stayed open",
+    ),
+    (
+        "The obvious solution would have damaged the only surviving clue",
+        "built a reversible test before touching the original evidence",
+        "The reversible test revealed the cause without destroying the clue",
+        "The team preserved the original evidence for future investigators",
+    ),
+    (
+        "A helper's earlier warning had been dismissed as unrelated",
+        "compared the warning with the new physical evidence",
+        "The warning predicted the failure more accurately than the first theory",
+        "The team included the helper in designing a better early-warning procedure",
+    ),
+)
+
+
 def _pick(index, values, stride):
     return values[(index // stride) % len(values)]
 
@@ -128,15 +170,16 @@ def proposal(index):
     method = _pick(index, INVESTIGATION_METHODS, 47)
     obstacle = _pick(index, OBSTACLES, 53)
     consequence = _pick(index, CONSEQUENCES, 59)
+    causal_opening, causal_test, causal_reveal, causal_aftermath = _pick(index, CAUSAL_PATHS, 17)
     # The dimensions rotate at different strides; this produces a large
     # deterministic combination space without claiming every draft is unique.
     # Use compact, searchable story titles rather than generic inventory labels.
     title = f"The {visual.capitalize()} Mystery of the {setting.split()[-1].capitalize()}"
     beats = (
         ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}, {stakes}. If the cause stayed hidden, the neighbors would not know which route or system was safe to use.", visual),
-        ("build", f"Instead of guessing, {actor} compared {clue} with {discovery}; {emotional}. {method}, but {obstacle}. The details matched the timing of the first warning, giving the investigation a testable explanation rather than another suspicion.", "book"),
-        ("twist", f"The comparison showed that {reversal}. This explained the original mystery rather than introducing a new one. {actor} checked the clue again and found that it fit the evidence gathered at the start.", clue if clue in VISUALS else "signal"),
-        ("payoff", f"With the cause understood, {actor} {resolution}. The community saw how the evidence led to the solution {consequence}. The team recorded what they learned so the same problem could be recognized earlier next time.", _pick(index, VISUALS, 3)),
+        ("build", f"Instead of guessing, {actor} compared {clue} with {discovery}; {emotional}. {causal_opening}. {actor} {causal_test}; {method}, but {obstacle}. The details matched the timing of the first warning, giving the investigation a testable explanation rather than another suspicion.", "book"),
+        ("twist", f"{causal_reveal}: {reversal}. This explained the original mystery rather than introducing a new one. {actor} checked the clue again and found that it fit the evidence gathered at the start.", clue if clue in VISUALS else "signal"),
+        ("payoff", f"With the cause understood, {actor} {resolution}. The community saw how the evidence led to the solution {consequence}. {causal_aftermath}.", _pick(index, VISUALS, 3)),
     )
     # Reserve distinct, story-relevant visual keys across the four beats.
     # This fixes avoidable visual repetition without changing narration or
