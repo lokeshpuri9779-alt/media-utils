@@ -1,6 +1,12 @@
 name: ASTRA Blender Scene Feasibility
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - astra/batch-256-scene-motifs
+    paths:
+      - 'scripts/astra_blender_scene_probe.py'
+      - '.github/workflows/astra-blender-scene-feasibility.yml'
 jobs:
   probe:
     runs-on: ubuntu-latest
