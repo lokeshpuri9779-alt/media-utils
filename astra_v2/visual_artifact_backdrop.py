@@ -76,6 +76,12 @@ def apply_backdrop(image, shot, identity):
             y=300+(seed//(i+1))%600
             r=15+(i*11)%70
             d.ellipse((x-r,y-r,x+r,y+r),outline=light+"99",width=7)
+    # Distinct scene identity marker prevents identical silhouette variants.
+    scene_code = SCENES.index(scene) + 1
+    for bit in range(5):
+        if scene_code & (1 << bit):
+            x = 80 + bit * 32
+            d.rounded_rectangle((x, 1000, x + 22, 1022), radius=5, fill=light + "bb")
     # Confine environmental art to the upper scene region. Existing subject,
     # headline, and caption drawing retain ownership of their own layers.
     overlay.paste((0, 0, 0, 0), (0, 1100, 1080, 1920))
