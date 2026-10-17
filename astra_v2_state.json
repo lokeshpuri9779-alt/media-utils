@@ -1824,11 +1824,11 @@
   "pending": {},
   "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-10-17T19:00:12.891994+00:00",
+  "last_preflight_at": "2026-10-17T19:03:09.993920+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-17T19:00:55.591337+00:00",
+    "at": "2026-10-17T19:03:55.551406+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -4046,8 +4046,9 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-17T19:00:55.591245+00:00",
+    "at": "2026-10-17T19:03:55.551309+00:00",
     "publication_outcome": "quality_skip",
+    "publication_reason": "no_approved_original_story_available",
     "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
@@ -4056,7 +4057,7 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-17T19:00:55.591321+00:00",
+    "at": "2026-10-17T19:03:55.551390+00:00",
     "history_file_present": true,
     "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
