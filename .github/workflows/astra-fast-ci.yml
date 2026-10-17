@@ -36,6 +36,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_astra_story_supply_review.py' -v
           python -m unittest discover -s tests -p 'test_editorial_cache_parity.py' -v
           python -m unittest discover -s tests -p 'test_semantic_candidate_index.py' -v
+          python -m unittest discover -s tests -p 'test_indexed_triage_parity.py' -v
           python -m unittest discover -s tests -p 'test_astra_production_story_gate.py' -v
           python -m unittest discover -s tests -p 'test_astra_motion_curves.py' -v
           python -m unittest discover -s tests -p 'test_astra_interaction_props.py' -v

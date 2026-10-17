@@ -71,7 +71,7 @@ def is_semantic_near_duplicate(story, history=(), threshold=0.72):
     """Detect high-overlap plot narration; conservative and deterministic."""
     return semantic_duplicate_match(story, history, threshold) is not None
 
-def editorial_issues(story, history=(), novelty_index=None, semantic_previous=None):
+def editorial_issues(story, history=(), novelty_index=None, semantic_previous=None, semantic_index=None):
     issues = list(planning_issues(story))
     beats = story.get("story_beats") or []
     narration = " ".join(str(b.get("speech") or "") for b in beats if isinstance(b, dict))
@@ -81,7 +81,9 @@ def editorial_issues(story, history=(), novelty_index=None, semantic_previous=No
         issues.append("insufficient_visual_variety")
     duplicate = (novelty_index.is_near_duplicate(story) if novelty_index is not None
                  else is_near_duplicate(story, history))
-    semantic_duplicate = (_semantic_match_features(story, _semantic_features(story),
+    semantic_duplicate = (semantic_index.match(story) is not None
+                          if semantic_index is not None else
+                          _semantic_match_features(story, _semantic_features(story),
                           semantic_previous, 0.72) is not None
                           if semantic_previous is not None
                           else is_semantic_near_duplicate(story, history))
@@ -92,23 +94,28 @@ def editorial_issues(story, history=(), novelty_index=None, semantic_previous=No
     return sorted(set(issues))
 
 
-def triage(stories, history=()):
+def triage(stories, history=(), use_semantic_index=False):
     """Partition for review only; no proposal can be promoted here."""
+    if use_semantic_index:
+        from astra_v2.semantic_candidate_index import SemanticCandidateIndex
     review = []
     rejected = []
     seen = list(history)
     novelty_index = NoveltyIndex(seen)
     semantic_previous = [(prior, _semantic_features(prior)) for prior in seen
                          if isinstance(prior, dict)]
+    semantic_index = SemanticCandidateIndex(seen) if use_semantic_index else None
     for story in stories:
         issues = editorial_issues(story, seen, novelty_index=novelty_index,
-                                  semantic_previous=semantic_previous)
+                                  semantic_previous=semantic_previous,
+                                  semantic_index=semantic_index)
         item = {"content_id": story.get("content_id"), "title": story.get("title"),
                 "issues": issues,
                 "publication_blocked": bool(publication_rejection(story))}
         if "narrative_duplicate" in issues:
-            item["novelty_evidence"] = _semantic_match_features(
-                story, _semantic_features(story), semantic_previous, 0.72)
+            item["novelty_evidence"] = (semantic_index.match(story) if semantic_index is not None
+                                        else _semantic_match_features(
+                                            story, _semantic_features(story), semantic_previous, 0.72))
         # Requiring a human/model editorial decision is a workflow state,
         # not itself a structural defect. Keep the proposal publication-blocked,
         # but make structurally sound drafts visible in the review queue.
@@ -125,4 +132,6 @@ def triage(stories, history=()):
         seen.append(story)
         novelty_index.add(story)
         semantic_previous.append((story, _semantic_features(story)))
+        if semantic_index is not None:
+            semantic_index.add(story)
     return {"ready_for_review": review, "needs_work": rejected}
