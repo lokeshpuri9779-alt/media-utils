@@ -3,7 +3,7 @@
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 15,
-  "confirmed_today": 14,
+  "confirmed_today": 15,
   "last_attempt_at": "2026-10-17T00:07:53.394787+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -1739,57 +1739,38 @@
       "format": "short",
       "uploaded_at": "2026-10-16T23:59:59.869162+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "wvvDPKEwqlU": {
-      "content_id": "rayvan-original-rainclock-v1",
+    },
+    "rayvan-original-rainclock-v1": {
+      "video_id": "wvvDPKEwqlU",
+      "confirmed_at": "2026-10-17T00:08:53.661077+00:00",
       "title": "The Clock That Borrowed Rain",
-      "day": "2026-10-17",
-      "uploaded_at": "2026-10-17T00:07:55.181369+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "57c1692af65cb5df45b4a18fcd23d41062036324ad50db4409e5b494f1f6ea26",
-      "story_beats": [
-        {
-          "speech": "Clouds gathered over the town, but not a single drop reached the streets."
-        },
-        {
-          "speech": "The clockmaker heard tiny splashes inside the clock whenever its hands moved."
-        },
-        {
-          "speech": "She opened the gears and found a reservoir filling while the fields cracked."
-        },
-        {
-          "speech": "She reset the clock to release the stored rain across the thirsty valley."
-        }
-      ],
+      "uploaded_at": "2026-10-17T00:07:55.181369+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-17T00:06:59.313010+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-17T00:08:53.263811+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-17T00:07:55.604811+00:00",
+    "at": "2026-10-17T00:08:53.745814+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-16T20:08:22.753942+00:00",
   "reserved": {
@@ -3783,5 +3764,15 @@
       "renderer": "studio-7.3.0",
       "result": "accepted"
     }
+  },
+  "last_character_memory_diagnostic": {
+    "at": "2026-10-17T00:08:53.745678+00:00",
+    "publication_outcome": "published",
+    "character_memory": "not_reported",
+    "character_memory_error": null,
+    "first_candidate_manifest": false,
+    "existing_character_proposal": false,
+    "existing_character_episode": false,
+    "continuity_snapshot_present": false
   }
 }
