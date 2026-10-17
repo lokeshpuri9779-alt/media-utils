@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 15,
+  "attempts": 16,
   "confirmed_today": 15,
-  "last_attempt_at": "2026-10-17T00:07:53.394787+00:00",
+  "last_attempt_at": "2026-10-17T00:14:30.747465+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1749,28 +1749,55 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-17T00:08:53.263811+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "FeheBqqFKb8": {
+      "content_id": "rayvan-original-winterseed-v1",
+      "title": "The Seed That Remembered Spring",
+      "day": "2026-10-17",
+      "uploaded_at": "2026-10-17T00:14:32.513623+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "02b7fcf4e7ce0545251dd90a9c1fc736af09eb638a7c8d858bdc1ba4b71ef597",
+      "story_beats": [
+        {
+          "speech": "A gardener found one warm seed beneath the frozen floor of an abandoned greenhouse."
+        },
+        {
+          "speech": "She planted it, but every leaf froze before it could unfold."
+        },
+        {
+          "speech": "The seed opened only when she placed it beside an old glass panel that stored afternoon light."
+        },
+        {
+          "speech": "The seed grew into a flowering vine, warming the greenhouse enough for the other plants to return."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-17T00:13:35.340885+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-17T00:08:53.745814+00:00",
+    "at": "2026-10-17T00:14:32.821807+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-16T20:08:22.753942+00:00",
   "reserved": {
@@ -3763,12 +3790,35 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-original-winterseed-v1": {
+      "at": "2026-10-17T00:14:30.747448+00:00",
+      "title": "The Seed That Remembered Spring",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "02b7fcf4e7ce0545251dd90a9c1fc736af09eb638a7c8d858bdc1ba4b71ef597",
+      "story_beats": [
+        {
+          "speech": "A gardener found one warm seed beneath the frozen floor of an abandoned greenhouse."
+        },
+        {
+          "speech": "She planted it, but every leaf froze before it could unfold."
+        },
+        {
+          "speech": "The seed opened only when she placed it beside an old glass panel that stored afternoon light."
+        },
+        {
+          "speech": "The seed grew into a flowering vine, warming the greenhouse enough for the other plants to return."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-17T00:08:53.745678+00:00",
-    "publication_outcome": "published",
-    "character_memory": "not_reported",
+    "at": "2026-10-17T00:14:32.821747+00:00",
+    "publication_outcome": "processing",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
