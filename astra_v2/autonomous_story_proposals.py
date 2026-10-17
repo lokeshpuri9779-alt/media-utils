@@ -185,7 +185,7 @@ def replenish(path, count=24, history=()):
     """Persist novel proposals atomically; never promote or publish them."""
     if not 1 <= count <= 100:
         raise ValueError("Proposal batch size out of range")
-    from astra_v2.shorts_novelty import is_near_duplicate
+    from astra_v2.proposal_novelty_index import NoveltyIndex
     from astra_v2.publication_quality import publication_rejection
     target = Path(path)
     if target.exists():
@@ -196,6 +196,7 @@ def replenish(path, count=24, history=()):
         state = {"next_index": 0, "proposals": []}
     _backfill_legacy_titles(state["proposals"])
     prior = list(history) + state["proposals"]
+    novelty_index = NoveltyIndex(prior)
     next_index = int(state.get("next_index", 0))
     added = []
     for _ in range(count * 200):
@@ -211,11 +212,12 @@ def replenish(path, count=24, history=()):
         else:
             candidate = proposal(next_index)
         next_index += 1
-        if not is_near_duplicate(candidate, prior):
+        if not novelty_index.is_near_duplicate(candidate):
             if publication_rejection(candidate) != "unreviewed_causal_draft":
                 raise ValueError("Proposal unexpectedly bypassed or failed publication isolation")
             added.append(candidate)
             prior.append(candidate)
+            novelty_index.add(candidate)
     # Track the real acceptance rate rather than assuming every generated idea is usable.
     attempts = next_index - int(state.get("next_index", 0))
     acceptance_rate = round(len(added) / attempts, 4) if attempts else 0.0
