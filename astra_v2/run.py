@@ -203,6 +203,15 @@ def run():
                 if cid in live_ids | previous_ids or title.casefold().strip() in live_titles:
                     report.update(outcome="duplicate_blocked", content_id=cid)
                     return report
+                # Report whether character memory is eligible for this Short.
+                # This is diagnostic only: it never changes upload eligibility.
+                report["character_memory"] = (
+                    "approved" if candidate.get("character_approved") is True
+                    and candidate.get("format") == "short"
+                    and isinstance(candidate.get("character_id"), str)
+                    and bool(candidate.get("character_id"))
+                    else "not_approved_or_missing_identity"
+                )
                 # Keep explicit approved metadata for a first episode; the
                 # postpublication hook alone may bootstrap the character.
                 if candidate.get("character_approved") is True and candidate.get("format") == "short":
