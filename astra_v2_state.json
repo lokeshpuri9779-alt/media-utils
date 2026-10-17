@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 19,
+  "attempts": 20,
   "confirmed_today": 19,
-  "last_attempt_at": "2026-10-17T00:41:23.531685+00:00",
+  "last_attempt_at": "2026-10-17T09:16:54.115087+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1781,14 +1781,40 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "quality_skip",
+  "pending": {
+    "KYPpOlXAJbw": {
+      "content_id": "rayvan-forge-9cae721e0174be45",
+      "title": "The Rabbit and the Paper Telescope",
+      "day": "2026-10-17",
+      "uploaded_at": "2026-10-17T09:16:55.525095+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "c78ac8004ac665f2de854e62df2b1dcc80d2c6f4fc5a259af4609a088f33fbb5",
+      "story_beats": [
+        {
+          "speech": "A rabbit arrived at the observatory and found thick clouds hiding the annual meteor shower."
+        },
+        {
+          "speech": "She built a cardboard telescope but discovered it could only magnify raindrops on the window."
+        },
+        {
+          "speech": "She noticed the clouds opening above the distant hill and used the pond reflection to locate a clear viewpoint."
+        },
+        {
+          "speech": "She led her friends uphill and they counted bright meteors together before the clouds returned."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-17T09:02:40.617091+00:00",
+  "last_preflight_at": "2026-10-17T09:15:43.034204+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-17T09:03:22.480453+00:00",
+    "at": "2026-10-17T09:16:55.978016+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -3888,12 +3914,35 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-forge-9cae721e0174be45": {
+      "at": "2026-10-17T09:16:54.115071+00:00",
+      "title": "The Rabbit and the Paper Telescope",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "c78ac8004ac665f2de854e62df2b1dcc80d2c6f4fc5a259af4609a088f33fbb5",
+      "story_beats": [
+        {
+          "speech": "A rabbit arrived at the observatory and found thick clouds hiding the annual meteor shower."
+        },
+        {
+          "speech": "She built a cardboard telescope but discovered it could only magnify raindrops on the window."
+        },
+        {
+          "speech": "She noticed the clouds opening above the distant hill and used the pond reflection to locate a clear viewpoint."
+        },
+        {
+          "speech": "She led her friends uphill and they counted bright meteors together before the clouds returned."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-17T09:03:22.480380+00:00",
-    "publication_outcome": "quality_skip",
-    "character_memory": "not_reported",
+    "at": "2026-10-17T09:16:55.977966+00:00",
+    "publication_outcome": "processing",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,

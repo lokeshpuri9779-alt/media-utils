@@ -2,30 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-13T06:22:49.266337+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "fail",
-      "evidence": {
-        "hard_failures": [],
-        "media_failures": [],
-        "layer_failures": []
-      },
-      "proposed_action": "['review_story_rhythm_and_tension']",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
-      "at": "2026-10-13T06:22:53.606194+00:00",
-      "stage": "quality",
-      "element": "candidate_selection",
-      "outcome": "fail",
-      "evidence": {
-        "reason": "no_approved_original_story_available"
-      },
-      "proposed_action": "Diagnose story supply and creative gate failures",
-      "candidate_id": ""
-    },
-    {
       "at": "2026-10-13T06:52:01.813749+00:00",
       "stage": "hook",
       "element": "hook",
@@ -7295,6 +7271,39 @@
       },
       "proposed_action": "Diagnose story supply and creative gate failures",
       "candidate_id": ""
+    },
+    {
+      "at": "2026-10-17T09:16:54.043182+00:00",
+      "stage": "quality",
+      "element": "creative_director",
+      "outcome": "pass",
+      "evidence": {
+        "scores": {
+          "hook": 94.0,
+          "retention": 92.0,
+          "visual": 100.0,
+          "pacing": 100.0,
+          "audio": 98.08,
+          "captions": 98.67,
+          "novelty": 100.0,
+          "coherence": 92.0,
+          "technical": 100.0
+        }
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-forge-9cae721e0174be45"
+    },
+    {
+      "at": "2026-10-17T09:16:54.048989+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "pass",
+      "evidence": {
+        "duration": 23.167,
+        "renderer": "studio-7.3.0"
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-forge-9cae721e0174be45"
     }
   ],
   "stage_counts": {
@@ -7395,16 +7404,16 @@
       "regressed": 0
     },
     "render": {
-      "pass": 26,
-      "fail": 38,
+      "pass": 27,
+      "fail": 37,
       "skip": 0,
       "unknown": 37,
       "improved": 0,
       "regressed": 0
     },
     "quality": {
-      "pass": 26,
-      "fail": 177,
+      "pass": 27,
+      "fail": 176,
       "skip": 0,
       "unknown": 0,
       "improved": 0,
