@@ -1784,11 +1784,11 @@
   "pending": {},
   "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-10-17T08:03:36.244425+00:00",
+  "last_preflight_at": "2026-10-17T08:21:54.801414+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-17T08:04:30.947410+00:00",
+    "at": "2026-10-17T08:22:41.509736+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -1805,7 +1805,7 @@
     "oauth_tests": "success",
     "layer_tests": "success"
   },
-  "last_feedback_attempt_at": "2026-10-16T20:08:22.753942+00:00",
+  "last_feedback_attempt_at": "2026-10-17T08:22:29.019770+00:00",
   "reserved": {
     "rayvan-original-spacesong-v1": {
       "at": "2026-10-12T19:00:53.784470+00:00",
@@ -3891,7 +3891,7 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-17T08:04:30.947351+00:00",
+    "at": "2026-10-17T08:22:41.509628+00:00",
     "publication_outcome": "quality_skip",
     "character_memory": "not_reported",
     "character_memory_error": null,
