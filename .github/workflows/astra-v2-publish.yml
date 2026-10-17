@@ -308,6 +308,13 @@ jobs:
               "existing_character_episode": Path("runtime-health/character-episode.json").is_file(),
               "continuity_snapshot_present": Path("character-continuity.json").is_file(),
           }
+          history_path = Path("astra_story_history.json")
+          state["last_story_history_diagnostic"] = {
+              "at": datetime.now(timezone.utc).isoformat(),
+              "history_file_present": history_path.is_file(),
+              "publication_outcome": report.get("outcome", "no_report"),
+              "note": "Missing history is not evidence of an upload or a complete fingerprint archive",
+          }
           state["last_publisher_job_diagnostic"] = {
               "at": datetime.now(timezone.utc).isoformat(),
               "early_tests": os.getenv("EARLY_TESTS_RESULT", "unknown"),
@@ -340,6 +347,11 @@ jobs:
           for f in performance.json astra_v2_state.json astra_stage_feedback.json SHORTS.md; do
             if [ -f "$f" ]; then cp "$f" "$WORKTREE/$f"; fi
           done
+          if [ -f astra_story_history.json ]; then
+            echo 'ASTRA_STORY_HISTORY_CHECKPOINT=present'
+          else
+            echo 'ASTRA_STORY_HISTORY_CHECKPOINT=missing_no_verified_record'
+          fi
           # Persist only existing, schema-valid story histories.
           if [ -f astra_story_history.json ]; then
             python - <<'PY'
