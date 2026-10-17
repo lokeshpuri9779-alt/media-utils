@@ -15,6 +15,13 @@ GROUND_TOP = 1180
 SCENE_CUES = (
     # Handheld books, pages and curtains are objects, not locations. Never
     # change the whole set to a library just because a character holds a book.
+    ("observatory", r"\b(?:observatory|telescope|planetarium|astronomer)\b"),
+    ("railway", r"\b(?:railway|railroad|train station|locomotive|rail tracks?)\b"),
+    ("museum", r"\b(?:museum|gallery|exhibit|exhibition)\b"),
+    ("workshop", r"\b(?:workshop|factory|forge|repair shop|mechanical room)\b"),
+    ("cavern", r"\b(?:cave|cavern|underground|echo vault|crystal chamber)\b"),
+    ("mangrove", r"\b(?:mangrove|swamp|wetland|marsh|bayou)\b"),
+    ("desert", r"\b(?:desert|dunes?|oasis|sandstorm|arid)\b"),
     ("library", r"\b(?:library|bookshelf|shelves|bookcase|reading room)\b"),
     ("harbor", r"\b(?:harbor|harbour|pier|dock|seawall|fishing boats?)\b"),
     ("river", r"\b(?:river|stream|pond|water|floating|bank|inlet|flood|tide)\b"),
@@ -46,7 +53,7 @@ def _cached_scene_setting(text,direct):
             return name
     # No explicit setting in the line: maintain the authored location rather
     # than injecting the default forest every time a character says "book".
-    return direct if direct in {key for key,_ in SCENE_CUES} else "forest"
+    return direct if direct in {key for key,_ in SCENE_CUES} else "meadow"
 
 def _text_seed(shot):
     # Preserve scenery positions, sky decorations and landmarks across beats.
@@ -90,6 +97,68 @@ def draw_story_stage(d, shot, t):
                 d.rectangle((x,1140,x+18,1270),fill=(108,86,71))
             d.polygon([(750,990),(816,927),(882,990)],fill=(222,219,171))
             d.polygon([(733,1070),(899,1070),(861,1112),(770,1112)],fill=(112,89,76))
+    elif setting == "observatory":
+        d.ellipse((260,560,820,1120),fill=(81,104,147),outline=(204,191,163),width=12)
+        for radius in (120,190,258):
+            d.arc((540-radius,820-radius,540+radius,820+radius),
+                  195,345,fill=(193,197,210),width=6)
+        d.polygon(((420,1040),(480,840),(560,805),(595,854),(505,1060)),
+                  fill=(176,182,193),outline=(60,71,91))
+        d.ellipse((560,792,675,850),fill=(64,81,116),outline=(221,202,165),width=9)
+        d.rectangle((500,1050,585,1160),fill=(93,100,118))
+    elif setting == "railway":
+        for yy in (1045,1130):
+            d.line((65,yy,1025,yy),fill=(190,180,166),width=17)
+        for x in range(90,1030,95):
+            d.rectangle((x,1028,x+28,1160),fill=(115,89,73))
+        d.rounded_rectangle((150,715,885,1015),radius=32,
+                            fill=(130,86,89),outline=(221,190,149),width=12)
+        for x in (220,430,640):
+            d.rounded_rectangle((x,760,x+155,902),radius=18,
+                                fill=(109,164,184),outline=(230,211,177),width=8)
+        for x in (280,750):
+            d.ellipse((x-65,972,x+65,1102),fill=(57,64,77),outline=(201,175,130),width=12)
+    elif setting == "museum":
+        for x in (100,395,690):
+            d.rectangle((x,630,x+255,960),fill=(114,104,130),outline=(220,181,116),width=16)
+            d.polygon(((x+45,850),(x+125,685),(x+210,850)),
+                      fill=(166,150,117))
+        d.rectangle((300,1050,780,1180),fill=(166,149,134))
+        d.ellipse((440,875,640,1070),fill=(188,171,140),outline=(81,82,90),width=7)
+    elif setting == "workshop":
+        for x in (95,710):
+            d.rectangle((x,670,x+265,1060),fill=(85,98,111),outline=(178,150,121),width=12)
+            for k in range(4):
+                xx=x+35+k*55
+                d.line((xx,730,xx+25,825),fill=(195,174,135),width=12)
+        d.rounded_rectangle((330,1040,750,1150),radius=14,fill=(158,112,79))
+        for x in (400,540,670):
+            d.ellipse((x-42,900,x+42,984),fill=(121,137,146),outline=(56,69,83),width=9)
+    elif setting == "cavern":
+        d.polygon(((60,620),(180,820),(280,650),(410,865),(550,600),
+                   (680,820),(850,650),(1020,835),(1020,1130),(60,1130)),
+                  fill=(76,84,116))
+        for x in (190,490,810):
+            d.polygon(((x-80,1130),(x,850),(x+90,1130)),
+                      fill=(115,168,190),outline=(68,104,133))
+    elif setting == "mangrove":
+        for i in range(5):
+            x=135+i*198
+            d.ellipse((x-110,655,x+115,840),fill=(48,117,93))
+            d.line((x,820,x,1135),fill=(100,80,65),width=22)
+            for side in (-1,1):
+                d.line((x,945,x+side*85,1150),fill=(116,87,70),width=12)
+        d.polygon(((60,1100),(290,1085),(490,1110),(780,1080),(1020,1105),
+                   (1020,1190),(60,1190)),fill=(64,134,142))
+    elif setting == "desert":
+        d.ellipse((800,590,930,720),fill=(248,207,129))
+        for i in range(4):
+            x=80+i*275
+            d.ellipse((x-125,915+i%2*55,x+390,1220+i%2*55),
+                      fill=(199,150,100) if i%2 else (228,184,121))
+        for x in (230,825):
+            d.line((x,980,x,1130),fill=(73,128,96),width=19)
+            d.arc((x-55,970,x+12,1060),5,95,fill=(73,128,96),width=14)
     elif setting == "library":
         d.rounded_rectangle((98,540,445,1130),radius=12,fill=(95,83,91),outline=(166,138,111),width=9)
         d.rounded_rectangle((635,540,989,1130),radius=12,fill=(95,83,91),outline=(166,138,111),width=9)
