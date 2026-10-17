@@ -10,6 +10,7 @@ on:
       - 'astra_v2/proposal_novelty_index.py'
       - 'astra_v2/semantic_candidate_index.py'
       - 'astra_v2/semantic_index_benchmark.py'
+      - 'astra_v2/triage_index_benchmark.py'
       - '.github/workflows/astra-proposal-benchmark.yml'
 
 permissions:
@@ -67,6 +68,10 @@ jobs:
         run: |
           python -m astra_v2.semantic_index_benchmark --count 500 --probes 100 | tee semantic-index-benchmark.json
           python -m astra_v2.semantic_index_benchmark --count 1500 --probes 100 | tee semantic-index-benchmark-1500.json
+      - name: Compare complete indexed and exhaustive triage
+        run: |
+          python -m astra_v2.triage_index_benchmark --count 100 | tee triage-index-100.json
+          python -m astra_v2.triage_index_benchmark --count 500 | tee triage-index-500.json
       - name: Upload benchmark measurements
         uses: actions/upload-artifact@v4
         with:
@@ -76,5 +81,7 @@ jobs:
             proposal-benchmark-500.json
             semantic-index-benchmark.json
             semantic-index-benchmark-1500.json
+            triage-index-100.json
+            triage-index-500.json
           if-no-files-found: error
           retention-days: 30
