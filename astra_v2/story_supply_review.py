@@ -66,6 +66,7 @@ def assess(ledger_path, publisher_path="astra_v2_state.json",
         "narrative_duplicates_by_family": dict(sorted(duplicate_by_family.items())),
         "visual_variety_issues_by_family": dict(sorted(visual_issues_by_family.items())),
         "publication_rejection_reason_counts": dict(sorted(publication_reason_counts.items())),
+        "review_queue": [x for x in reviewed if x["editorial_issues"] == ["human_or_model_editorial_review_required"]],
         "proposals": reviewed,
     }
 
@@ -76,4 +77,5 @@ if __name__ == "__main__":
     path = Path(os.getenv("ASTRA_SUPPLY_REVIEW_REPORT", "runtime-health/story_supply_review.json"))
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(result, indent=2), encoding="utf-8")
-    print("ASTRA_STORY_SUPPLY_REVIEW=" + json.dumps({k: v for k, v in result.items() if k != "proposals"}))
+    print("ASTRA_STORY_SUPPLY_REVIEW=" + json.dumps({k: v for k, v in result.items() if k not in ("proposals", "review_queue")}))
+    print("ASTRA_STORY_REVIEW_QUEUE=" + json.dumps({"count": len(result["review_queue"]), "content_ids": [x["content_id"] for x in result["review_queue"][:25]], "approval_granted": False}))
