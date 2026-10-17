@@ -906,7 +906,7 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=256, excluded_plot_ha
         expanded = candidate_records()
     else:
         expanded = []
-    for key, title, genre, beats in (PILLOW_DUO_PLOTS + PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS + EDITORIAL_OCT2026_PLOTS + CROSSGENRE_DIRECTED_24 + AUTHORED_REPLENISHMENT_OCT2026 + (draft_catalog() if include_drafts else []) + expanded):
+    for key, title, genre, beats in (AUTHORED_REPLENISHMENT_OCT2026 + PILLOW_DUO_PLOTS + PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS + EDITORIAL_OCT2026_PLOTS + CROSSGENRE_DIRECTED_24 + (draft_catalog() if include_drafts else []) + expanded):
         # Reject malformed or weak authored arcs before any expensive render.
         if len(beats) != 4 or any(not isinstance(b, (tuple, list)) or len(b) != 4 for b in beats):
             continue
