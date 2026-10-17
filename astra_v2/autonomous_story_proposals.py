@@ -250,6 +250,25 @@ PLOT_ENGINES = (
     ),
 )
 
+PLOT_EVIDENCE = (
+    ("a mismatched alarm log", "a controlled replay separated the echo from a real warning"),
+    ("a stamped transfer receipt", "the handoff signatures located the missing delivery"),
+    ("unequal meter readings", "the second meter revealed who was losing resources"),
+    ("two copies of the promise", "the witnesses agreed on the promise's original intent"),
+    ("footprints beside a safety marker", "the markers formed a route away from danger"),
+    ("a damaged prize container", "the container's condition proved it was moved for safety"),
+    ("fresh animal tracks near the gate", "the tracks confirmed where the passage was blocked"),
+    ("two dated survey sketches", "the sketches showed the settlement changing over time"),
+    ("soil samples from both banks", "the samples isolated the drainage failure"),
+    ("a recording with an old timestamp", "the archive matched the broadcast to a past drill"),
+    ("a reflection caught on a test card", "the card revealed why the sensor misread visitors"),
+    ("a shared maintenance ledger", "the ledger separated access rights from repair duties"),
+    ("a river depth chart", "the chart traced the current around the obstruction"),
+    ("a reverse-current indicator", "the indicator isolated the faulty demonstration circuit"),
+    ("a spoiled sample from the vent", "the sample proved the storage loss was not theft"),
+    ("a gear tooth-count sketch", "the sketch exposed the incorrect replacement ratio"),
+)
+
 # Narrative architectures change the order and agency of the investigation.
 # Every arc still resolves its initial problem and remains unreviewed.
 NARRATIVE_ARCHITECTURES = (
@@ -327,14 +346,15 @@ def proposal(index):
     causal_opening, causal_test, causal_reveal, causal_aftermath = _pick(index, CAUSAL_PATHS, 17)
     plot_problem, plot_action, plot_reveal, plot_outcome = _pick(index, PLOT_ENGINES, 11)
     arc_setup, arc_decision, arc_turn, arc_aftermath = _pick(index, NARRATIVE_ARCHITECTURES, 5)
+    plot_evidence, plot_verification = PLOT_EVIDENCE[(index // 11) % len(PLOT_EVIDENCE)]
     # The dimensions rotate at different strides; this produces a large
     # deterministic combination space without claiming every draft is unique.
     # Use compact, searchable story titles rather than generic inventory labels.
     title = f"The {visual.capitalize()} Mystery of the {setting.split()[-1].capitalize()}"
     beats = (
         ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}, {stakes}. {plot_problem}. {arc_setup}. The neighbors needed a trustworthy explanation before taking action.", visual),
-        ("build", f"Instead of guessing, {actor} compared {clue} with {discovery}; {emotional}. {causal_opening}. {actor} {causal_test} and {plot_action}. {arc_decision}; {method}, but {obstacle}. The evidence gave the team a testable explanation rather than another suspicion.", "book"),
-        ("twist", f"{causal_reveal}: {reversal}. {plot_reveal}. {arc_turn}. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. {actor} checked the clue again and found that it fit the evidence gathered at the start.", clue if clue in VISUALS else "signal"),
+        ("build", f"Instead of guessing, {actor} compared {clue}, {plot_evidence}, and {discovery}; {emotional}. {causal_opening}. {actor} {causal_test} and {plot_action}. {arc_decision}; {method}, but {obstacle}. The evidence gave the team a testable explanation rather than another suspicion.", "book"),
+        ("twist", f"{causal_reveal}: {reversal}. {plot_reveal}. {plot_verification}. {arc_turn}. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. {actor} checked the clue again and found that it fit the evidence gathered at the start.", clue if clue in VISUALS else "signal"),
         ("payoff", f"With the cause understood, {actor} {resolution}. The community saw how the evidence led to the solution {consequence}. {causal_aftermath}. Together they {plot_outcome}. {arc_aftermath}.", _pick(index, VISUALS, 3)),
     )
     # Reserve distinct, story-relevant visual keys across the four beats.
