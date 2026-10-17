@@ -11,7 +11,7 @@ import json
 from pathlib import Path
 
 KINDS = frozenset(("character", "background", "prop", "pose", "effect"))
-LICENSES = frozenset(("CC0-1.0", "CC-BY-4.0", "public-domain", "original"))
+LICENSES = frozenset(("CC0-1.0", "CC-BY-4.0", "CC-BY-3.0", "public-domain", "original"))
 MAX_BYTES = 16 * 1024 * 1024
 
 def validate_library(root, manifest="art/manifest.json"):
@@ -42,7 +42,7 @@ def validate_library(root, manifest="art/manifest.json"):
             raise ValueError("missing or oversized asset")
         if entry.get("kind") not in KINDS or entry.get("license") not in LICENSES:
             raise ValueError("unsupported asset kind or license")
-        if not entry.get("artist") or not entry.get("source"):
+        if entry.get("license") in ("CC-BY-3.0", "CC-BY-4.0") and not entry.get("artist"):\n            raise ValueError("attribution-required art needs credited artist")\n        if not entry.get("artist") or not entry.get("source"):
             raise ValueError("asset provenance required")
         raw = file_path.read_bytes()
         digest = hashlib.sha256(raw).hexdigest()
