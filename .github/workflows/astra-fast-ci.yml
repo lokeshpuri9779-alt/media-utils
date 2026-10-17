@@ -56,6 +56,7 @@ jobs:
           python -m astra_v2.mystery_novelty_benchmark --history-start 5000 --history-count 200 --sample-start 10000 --sample-count 100
           python -m unittest discover -s tests -p 'test_genre_visual_variety.py' -v
           python -m unittest discover -s tests -p 'test_astra_production_story_gate.py' -v
+          python -m unittest discover -s tests -p 'test_editorial_approval_manifest.py' -v
           python -m unittest discover -s tests -p 'test_astra_motion_curves.py' -v
           python -m unittest discover -s tests -p 'test_astra_interaction_props.py' -v
           python -m unittest discover -s tests -p 'test_astra_model_story_novelty.py' -v
