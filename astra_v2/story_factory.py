@@ -96,7 +96,11 @@ def generate(state_path, output_path, batch_size=500):
     review=[]
     accepted_plot_signatures=set(state.get("seen_plot_signatures", []))
     for row in rows:
-        review.append(screen_candidate(row, seen))
+        decision=screen_candidate(row, seen)
+        if row["plot_signature"] in accepted_plot_signatures and "repeated_underlying_plot_mechanism" not in decision["issues"]:
+            decision["issues"].append("repeated_underlying_plot_mechanism")
+            decision["status"]="needs_new_plot"
+        review.append(decision)
         seen.add(row["premise_key"])
         accepted_plot_signatures.add(row["plot_signature"])
     out=Path(output_path); out.parent.mkdir(parents=True,exist_ok=True)
@@ -110,7 +114,10 @@ def generate(state_path, output_path, batch_size=500):
         "target":TARGET,"last_batch":len(rows),"complete":end==TARGET,
         "seen_premise_keys":sorted(seen),
         "seen_plot_signatures":sorted(accepted_plot_signatures),
-        "last_awaiting_review":sum(x["status"]=="awaiting_editorial_review" for x in review)},indent=2)+"\n")
+        "last_awaiting_review":sum(x["status"]=="awaiting_editorial_review" for x in review),
+        "last_repeated_plots":sum(x["status"]=="needs_new_plot" for x in review),
+        "distinct_source_premises":len(MECHANISMS),
+        "review_only_combinations_target":TARGET},indent=2)+"\n")
     return len(rows)
 
 if __name__=="__main__":
