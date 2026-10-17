@@ -1790,12 +1790,13 @@
     }
   },
   "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-17T09:17:21.934845+00:00",
+  "last_outcome": "skipped",
+  "last_error": "",
+  "last_preflight_at": "2026-10-17T09:17:46.847577+00:00",
   "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "last_preflight_outcome": "skipped",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-17T09:17:22.522405+00:00",
+    "at": "2026-10-17T09:17:47.032455+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "false",
@@ -3921,8 +3922,8 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-17T09:17:22.522308+00:00",
-    "publication_outcome": "published",
+    "at": "2026-10-17T09:17:47.032361+00:00",
+    "publication_outcome": "skipped",
     "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
