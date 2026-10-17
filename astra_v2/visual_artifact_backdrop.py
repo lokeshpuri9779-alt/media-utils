@@ -28,7 +28,7 @@ SCENE_TERMS = {
     "city": ("city", "street"),
     "workshop": ("workshop", "mechanic"),
     "castle": ("castle",),
-    "snowfield": ("snow", "ice"),
+    "snowfield": ("snowfield", "snow", "ice"),
     "island": ("island",),
     "museum": ("museum",),
 }
