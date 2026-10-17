@@ -92,6 +92,9 @@ if __name__ == "__main__":
     parser.add_argument("--sample-start", type=int, default=10000)
     parser.add_argument("--sample-count", type=int, default=100)
     args = parser.parse_args()
-    print("ASTRA_MYSTERY_GENERATOR_COMPARISON=" + json.dumps(compare_generators(\n        args.history_start, args.history_count, args.sample_start, args.sample_count\n    ), sort_keys=True))\n    print("ASTRA_MYSTERY_NOVELTY_BENCHMARK=" + json.dumps(benchmark(
+    print("ASTRA_MYSTERY_GENERATOR_COMPARISON=" + json.dumps(compare_generators(
+        args.history_start, args.history_count, args.sample_start, args.sample_count
+    ), sort_keys=True))
+    print("ASTRA_MYSTERY_NOVELTY_BENCHMARK=" + json.dumps(benchmark(
         args.history_start, args.history_count, args.sample_start, args.sample_count
     ), sort_keys=True))
