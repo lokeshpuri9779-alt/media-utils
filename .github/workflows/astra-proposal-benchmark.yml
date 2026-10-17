@@ -6,6 +6,8 @@ on:
     branches: [main]
     paths:
       - 'astra_v2/proposal_performance_benchmark.py'
+      - 'astra_v2/story_editorial.py'
+      - 'astra_v2/proposal_novelty_index.py'
       - '.github/workflows/astra-proposal-benchmark.yml'
 
 permissions:
@@ -27,12 +29,15 @@ jobs:
       - name: Benchmark cached proposal pipeline without publishing
         run: |
           python -m astra_v2.proposal_performance_benchmark --count 100 | tee proposal-benchmark.json
+          python -m astra_v2.proposal_performance_benchmark --count 500 | tee proposal-benchmark-500.json
           python - <<'PY'
           import json, os
           from pathlib import Path
           data = json.loads(Path("proposal-benchmark.json").read_text())
           assert data["publication_enabled"] is False
           assert data["count"] == 100
+          larger = json.loads(Path("proposal-benchmark-500.json").read_text())
+          assert larger["count"] == 500 and larger["publication_enabled"] is False
           lines = [
               "## ASTRA proposal benchmark (100 deterministic candidates)",
               "",
@@ -41,6 +46,15 @@ jobs:
               f"| Generation | {data['generation_seconds']} |",
               f"| Editorial triage | {data['triage_seconds']} |",
               f"| Cached audit | {data['audit_seconds']} |",
+              "",
+              "",
+              "## ASTRA proposal benchmark (500 deterministic candidates)",
+              "",
+              "| Stage | Seconds |",
+              "|---|---:|",
+              f"| Generation | {larger['generation_seconds']} |",
+              f"| Editorial triage | {larger['triage_seconds']} |",
+              f"| Cached audit | {larger['audit_seconds']} |",
               "",
               "Benchmark only: no story publication or production approval.",
           ]
@@ -51,6 +65,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: astra-proposal-benchmark
-          path: proposal-benchmark.json
+          path: |
+            proposal-benchmark.json
+            proposal-benchmark-500.json
           if-no-files-found: error
           retention-days: 30
