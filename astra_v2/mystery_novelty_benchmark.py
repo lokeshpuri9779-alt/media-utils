@@ -85,6 +85,41 @@ def compare_generators(history_start=0, history_count=200, sample_start=10000, s
     }
 
 
+
+def compare_against_legacy_counterparts(sample_start=10000, sample_count=100):
+    """Hard-negative comparison: each candidate faces its same-index old draft.
+
+    Reports exact/near-duplicate flags, not a claim of creative quality.
+    """
+    from astra_v2.mystery_generator_baseline import legacy_proposal
+    from astra_v2.autonomous_story_proposals import proposal as current_proposal
+    if sample_start < 0 or not 1 <= sample_count <= 1000:
+        raise ValueError("Invalid counterpart window")
+    results = {}
+    for label, generator in (("legacy", legacy_proposal), ("current", current_proposal)):
+        duplicates = []
+        for index in range(sample_start, sample_start + sample_count):
+            prior = legacy_proposal(index)
+            candidate = generator(index)
+            if NoveltyIndex([prior]).is_near_duplicate(candidate) or _semantic_match_features(
+                candidate, _semantic_features(candidate), [(prior, _semantic_features(prior))], 0.72
+            ) is not None:
+                duplicates.append(index)
+        results[label] = {
+            "duplicate_count": len(duplicates),
+            "duplicate_rate": round(len(duplicates) / sample_count, 4),
+            "duplicate_indices": duplicates,
+        }
+    return {
+        "sample_start": sample_start,
+        "sample_count": sample_count,
+        "results": results,
+        "duplicate_rate_change": round(results["current"]["duplicate_rate"] - results["legacy"]["duplicate_rate"], 4),
+        "publication_approved": 0,
+        "history_mutated": False,
+        "interpretation": "same-index legacy counterpart overlap; not a real-world editorial novelty rate",
+    }
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--history-start", type=int, default=0)
@@ -92,6 +127,9 @@ if __name__ == "__main__":
     parser.add_argument("--sample-start", type=int, default=10000)
     parser.add_argument("--sample-count", type=int, default=100)
     args = parser.parse_args()
+    print("ASTRA_MYSTERY_COUNTERPART_COMPARISON=" + json.dumps(compare_against_legacy_counterparts(
+        args.sample_start, args.sample_count
+    ), sort_keys=True))
     print("ASTRA_MYSTERY_GENERATOR_COMPARISON=" + json.dumps(compare_generators(
         args.history_start, args.history_count, args.sample_start, args.sample_count
     ), sort_keys=True))
