@@ -1,0 +1,26 @@
+name: ASTRA Artifact Backdrop Comparison
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'astra_v2/visual_artifact_backdrop.py'
+      - 'astra_v2/visual_artifact_comparison.py'
+      - '.github/workflows/astra-artifact-comparison.yml'
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install Pillow
+      - run: python -m astra_v2.visual_artifact_comparison --output runtime-artifacts/artifact-comparison
+      - uses: actions/upload-artifact@v4
+        with:
+          name: astra-artifact-backdrop-comparison
+          path: runtime-artifacts/artifact-comparison/
+          retention-days: 7
