@@ -50,8 +50,13 @@ class StoryFactoryTests(unittest.TestCase):
             self.assertEqual(sum(json.loads(line)["status"]=="needs_new_plot"
                                  for line in review.read_text().splitlines()), 62-len(MECHANISMS))
     def test_expanded_premises_have_distinct_keys(self):
-        self.assertGreaterEqual(len(MECHANISMS),42)
+        self.assertGreaterEqual(len(MECHANISMS),54)
         self.assertEqual(len({row[0] for row in MECHANISMS}),len(MECHANISMS))
+    def test_third_role_is_not_duplicate_story(self):
+        a=candidate_at(0)
+        b=candidate_at(len(MECHANISMS)*2)
+        self.assertEqual(a["premise_key"],b["premise_key"])
+        self.assertNotEqual(a["story_beats"],b["story_beats"])
     def test_sample_unique_ids(self):
         self.assertEqual(len({candidate_at(i)["candidate_id"] for i in range(1000)}),1000)
 if __name__=="__main__": unittest.main()
