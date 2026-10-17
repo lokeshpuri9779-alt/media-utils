@@ -3,7 +3,7 @@ import unittest
 import tempfile
 import json
 from pathlib import Path
-from astra_v2.story_factory import TARGET, CAPACITY, candidate_at, screen_candidate, generate
+from astra_v2.story_factory import TARGET, CAPACITY, MECHANISMS, candidate_at, screen_candidate, generate
 
 class StoryFactoryTests(unittest.TestCase):
     def test_capacity(self):
@@ -46,9 +46,9 @@ class StoryFactoryTests(unittest.TestCase):
             self.assertEqual(generate(state, output, batch_size=31),31)
             second=json.loads(state.read_text())
             self.assertEqual(second["next_slot"],62)
-            self.assertEqual(second["last_awaiting_review"],0)
-            self.assertTrue(all(json.loads(line)["status"]=="needs_new_plot"
-                                for line in review.read_text().splitlines()))
+            self.assertEqual(second["last_awaiting_review"],len(MECHANISMS)-31)
+            self.assertEqual(sum(json.loads(line)["status"]=="needs_new_plot"
+                                 for line in review.read_text().splitlines()), 62-len(MECHANISMS))
     def test_expanded_premises_have_distinct_keys(self):
         self.assertGreaterEqual(len(MECHANISMS),42)
         self.assertEqual(len({row[0] for row in MECHANISMS}),len(MECHANISMS))
