@@ -48,9 +48,12 @@ def generate(output):
     image_path = output / "backdrop-comparison.png"
     sheet.save(image_path, optimize=True)
     report = {"samples": len(rows), "unique_backdrops": len(unique_hashes),
+              "visual_quality_approved": False,
+              "production_ready": False,
+              "review_required": ["scene readability", "depth", "lighting", "composition", "full-video integration"],
               "scenes": [x[0] for x in rows],
               "artifact_mode": "opt-in", "scope": "backdrop layer only",
-              "note": "Synthetic baseline, not full video render or human visual approval"}
+              "note": "Synthetic baseline; passing pixel checks does not constitute visual approval or production readiness"}
     (output / "comparison.json").write_text(json.dumps(report, indent=2) + "\n")
     return image_path
 
