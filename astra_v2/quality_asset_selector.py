@@ -22,7 +22,7 @@ def select_assets(root, *, kind, tags=(), style=None, min_size=128, limit=5,
     for entry in manifest["assets"]:
         if entry["id"] not in verified or entry["kind"]!=kind:
             continue
-        if entry["license"]=="CC-BY-4.0" and not allow_attribution:
+        if entry["license"] in ("CC-BY-3.0", "CC-BY-4.0") and not allow_attribution:
             continue
         if style and entry.get("style")!=style:
             continue
