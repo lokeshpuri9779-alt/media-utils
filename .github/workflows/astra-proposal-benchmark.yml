@@ -1,0 +1,56 @@
+name: ASTRA - Story Proposal Performance Benchmark
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'astra_v2/proposal_performance_benchmark.py'
+      - '.github/workflows/astra-proposal-benchmark.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: astra-proposal-benchmark
+  cancel-in-progress: false
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Benchmark cached proposal pipeline without publishing
+        run: |
+          python -m astra_v2.proposal_performance_benchmark --count 100 | tee proposal-benchmark.json
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          data = json.loads(Path("proposal-benchmark.json").read_text())
+          assert data["publication_enabled"] is False
+          assert data["count"] == 100
+          lines = [
+              "## ASTRA proposal benchmark (100 deterministic candidates)",
+              "",
+              "| Stage | Seconds |",
+              "|---|---:|",
+              f"| Generation | {data['generation_seconds']} |",
+              f"| Editorial triage | {data['triage_seconds']} |",
+              f"| Cached audit | {data['audit_seconds']} |",
+              "",
+              "Benchmark only: no story publication or production approval.",
+          ]
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as out:
+              out.write("\n".join(lines) + "\n")
+          PY
+      - name: Upload benchmark measurements
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-proposal-benchmark
+          path: proposal-benchmark.json
+          if-no-files-found: error
+          retention-days: 30
