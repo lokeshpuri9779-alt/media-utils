@@ -9,21 +9,16 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 from astra_v2.visual_artifact_backdrop import apply_backdrop, choose_scene
 
-SAMPLES = (
-    ("lighthouse", "The lighthouse keeper follows a strange signal"),
-    ("forest", "A fox follows the trail through the forest"),
-    ("museum", "The museum clock stopped at midnight"),
-    ("railway", "The railway station hides a mystery"),
-    ("underwater", "An underwater rescue begins"),
-    ("garden", "The garden blooms after the rain"),
-    ("castle", "A secret inside the castle"),
-    ("city", "A strange light over the city"),
-)
+# Exercise every supported procedural environment, not just a curated subset.
+from astra_v2.visual_artifact_library import SCENES
+SAMPLES = tuple((scene, f"A mystery in the {scene}") for scene in SCENES)
+
 
 def generate(output):
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
     rows = []
+    unique_hashes = set()
     for i, (expected, speech) in enumerate(SAMPLES):
         shot = {"speech": speech, "story_environment": expected}
         actual = choose_scene(shot)
@@ -34,6 +29,11 @@ def generate(output):
         after = apply_backdrop(before.copy(), shot, identity)
         if before.tobytes() == after.tobytes():
             raise ValueError(f"Artifact failed to alter scene: {expected}")
+        import hashlib
+        digest = hashlib.sha256(after.tobytes()).hexdigest()
+        if digest in unique_hashes:
+            raise ValueError(f"Duplicate backdrop output for {expected}")
+        unique_hashes.add(digest)
         before.thumbnail((270, 480))
         after.thumbnail((270, 480))
         rows.append((expected, before, after))
@@ -47,7 +47,8 @@ def generate(output):
         sheet.paste(after.resize((540, 480)), (540, y + 35))
     image_path = output / "backdrop-comparison.png"
     sheet.save(image_path, optimize=True)
-    report = {"samples": len(rows), "scenes": [x[0] for x in rows],
+    report = {"samples": len(rows), "unique_backdrops": len(unique_hashes),
+              "scenes": [x[0] for x in rows],
               "artifact_mode": "opt-in", "scope": "backdrop layer only",
               "note": "Synthetic baseline, not full video render or human visual approval"}
     (output / "comparison.json").write_text(json.dumps(report, indent=2) + "\n")
