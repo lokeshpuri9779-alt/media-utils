@@ -8,9 +8,8 @@ import json
 import time
 from astra_v2.autonomous_story_proposals import proposal
 from astra_v2.story_editorial import triage
-from astra_v2.story_supply_review import editorial_issues
 from astra_v2.proposal_novelty_index import NoveltyIndex
-from astra_v2.story_editorial import _semantic_features
+from astra_v2.story_editorial import _semantic_features, editorial_issues
 
 
 def benchmark(count=100):
