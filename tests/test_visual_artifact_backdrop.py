@@ -37,6 +37,16 @@ class ArtifactBackdropTests(unittest.TestCase):
         b = apply_backdrop(Image.new("RGB", (1080, 1920)), shot, "story-beta")
         self.assertNotEqual(a.tobytes(), b.tobytes())
 
+    def test_authored_setting_overrides_incidental_narration(self):
+        shot = {"story_environment": "forest", "speech": "The museum guide remembers the city"}
+        self.assertEqual(choose_scene(shot), "forest")
+
+    def test_no_pixels_change_in_caption_region(self):
+        base = Image.new("RGB", (1080, 1920), (15, 25, 35))
+        rendered = apply_backdrop(base.copy(), {"story_environment": "city"}, "scene")
+        self.assertEqual(rendered.crop((0, 1100, 1080, 1920)).tobytes(),
+                         base.crop((0, 1100, 1080, 1920)).tobytes())
+
     def test_invalid_dimensions_fail_closed(self):
         with self.assertRaises(ValueError):
             apply_backdrop(Image.new("RGB", (540, 720)), {"speech": "forest"}, "id")
