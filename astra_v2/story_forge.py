@@ -10,6 +10,7 @@ from astra_v2.pillow_duo_stories import PLOTS as PILLOW_DUO_PLOTS
 from astra_v2.editorial_batch_oct2026 import PLOTS as EDITORIAL_OCT2026_PLOTS
 from astra_v2.crossgenre_directed_24 import PLOTS as CROSSGENRE_DIRECTED_24
 from astra_v2.authored_replenishment_oct2026 import PLOTS as AUTHORED_REPLENISHMENT_OCT2026
+from astra_v2.authored_batch_341 import PLOTS as AUTHORED_BATCH_341
 
 PLOTS = [
     ("hedgehog-raincoat", "The Hedgehog and the Raincoat", "animal comedy",
@@ -882,7 +883,7 @@ NEW_AUTHORED_PLOTS.extend([
     ]),
 ])
 
-AUTHORED_KEYS = {row[0] for row in PILLOW_DUO_PLOTS + PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS + EDITORIAL_OCT2026_PLOTS + CROSSGENRE_DIRECTED_24 + AUTHORED_REPLENISHMENT_OCT2026}
+AUTHORED_KEYS = {row[0] for row in PILLOW_DUO_PLOTS + PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS + EDITORIAL_OCT2026_PLOTS + CROSSGENRE_DIRECTED_24 + AUTHORED_REPLENISHMENT_OCT2026 + AUTHORED_BATCH_341}
 
 def catalog(excluded_ids=None, excluded_titles=None, limit=256, excluded_plot_hashes=None, history=None, include_drafts=False, include_expansion=False):
     excluded = set(excluded_ids or ())
@@ -906,7 +907,7 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=256, excluded_plot_ha
         expanded = candidate_records()
     else:
         expanded = []
-    for key, title, genre, beats in (AUTHORED_REPLENISHMENT_OCT2026 + PILLOW_DUO_PLOTS + PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS + EDITORIAL_OCT2026_PLOTS + CROSSGENRE_DIRECTED_24 + (draft_catalog() if include_drafts else []) + expanded):
+    for key, title, genre, beats in (AUTHORED_BATCH_341 + AUTHORED_REPLENISHMENT_OCT2026 + PILLOW_DUO_PLOTS + PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS + EDITORIAL_OCT2026_PLOTS + CROSSGENRE_DIRECTED_24 + (draft_catalog() if include_drafts else []) + expanded):
         # Reject malformed or weak authored arcs before any expensive render.
         if len(beats) != 4 or any(not isinstance(b, (tuple, list)) or len(b) != 4 for b in beats):
             continue
