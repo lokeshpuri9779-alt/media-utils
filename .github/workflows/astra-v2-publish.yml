@@ -301,6 +301,7 @@ jobs:
           state["last_character_memory_diagnostic"] = {
               "at": datetime.now(timezone.utc).isoformat(),
               "publication_outcome": report.get("outcome", "no_report"),
+              "publication_reason": str(report.get("reason") or "")[:250],
               "character_memory": report.get("character_memory", "not_reported"),
               "character_memory_error": report.get("character_memory_error"),
               "first_candidate_manifest": Path("runtime-health/character-first-candidate.json").is_file(),
