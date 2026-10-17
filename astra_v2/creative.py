@@ -78,30 +78,9 @@ def make_candidate(path, excluded_ids, excluded_titles):
     # episode's failure rather than silently publishing a different storyline.
     series_stories = routed_catalog(excluded_ids, excluded_titles=excluded_titles)
     serialized_preload = os.getenv("ASTRA_SERIALIZED_PRELOAD", "0") == "1"
-    # Opt-in editorial supply: re-audit against persistent history at render time.
-    # Missing or invalid manifests fail closed; this cannot grant approval.
-    editorial_stories = []
-    editorial_source = os.getenv("ASTRA_EDITORIAL_STORIES_FILE", "").strip()
-    editorial_reviews = os.getenv("ASTRA_EDITORIAL_REVIEWS_FILE", "").strip()
-    if editorial_source or editorial_reviews:
-        if not editorial_source or not editorial_reviews:
-            raise CreativeSkip("editorial_intake_incomplete_configuration")
-        try:
-            from astra_v2.editorial_approved_intake import approved_intake
-            from astra_v2.proposal_history import load_history
-            from pathlib import Path
-            publisher_file = Path(os.getenv("ASTRA_PUBLISHER_STATE_PATH", "astra_v2_state.json"))
-            story_history_file = Path(os.getenv("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json"))
-            if not publisher_file.is_file() or not story_history_file.is_file():
-                raise FileNotFoundError("editorial_intake_requires_complete_history")
-            authored_doc = json.loads(Path(editorial_source).read_text(encoding="utf-8"))
-            reviews_doc = json.loads(Path(editorial_reviews).read_text(encoding="utf-8"))
-            editorial_stories = approved_intake(
-                authored_doc["stories"], reviews_doc["reviews"],
-                load_history(publisher_file, story_history_file))["stories"]
-            print("ASTRA_EDITORIAL_INTAKE_CANDIDATES=" + str(len(editorial_stories)))
-        except (OSError, ValueError, TypeError, KeyError) as exc:
-            raise CreativeSkip("editorial_intake_unavailable:" + type(exc).__name__) from exc
+    # Optional editorial supply is always re-audited before creative selection.
+    from astra_v2.editorial_creative_source import load_editorial_stories
+    editorial_stories = load_editorial_stories()
     premium_stories = (series_stories if serialized_preload else
                        series_stories + editorial_stories + approved_authored_candidates(forge_catalog(excluded_ids, excluded_titles)) + anthology_catalog() + free_catalog() + original_catalog()
                        + replenishment_catalog(make_original_story) + catalog()
