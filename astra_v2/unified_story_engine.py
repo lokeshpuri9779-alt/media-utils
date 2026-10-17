@@ -27,6 +27,24 @@ def _mentioned_animals(shot):
     return tuple(dict.fromkeys(name for _, name in sorted(matches)))
 
 
+# Species named in currently generated Shorts that the Pillow actor library
+# cannot yet draw. Never turn these protagonists into unrelated trees.
+UNSUPPORTED_NAMED_ANIMALS = (
+    "tapir", "pangolin", "stoat", "lynx", "ferret", "marten",
+)
+
+def validate_title_subject(story):
+    """Fail closed for a named unsupported animal protagonist."""
+    title = str(story.get("title") or story.get("headline") or "").lower()
+    if str(story.get("genre") or "") != "fiction":
+        return
+    for species in UNSUPPORTED_NAMED_ANIMALS:
+        if re.search(r"\\b" + re.escape(species) + r"s?\\b", title):
+            raise CreativeReject(
+                "Unified Studio: no faithful character artwork for named "
+                + species + " protagonist; reject generic background substitution"
+            )
+
 def cast_from_title(title):
     """Recognize a stable 1–8 animal cast in title order, without inventing it."""
     return _mentioned_animals({"speech": str(title)})
