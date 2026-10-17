@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 18,
-  "confirmed_today": 17,
-  "last_attempt_at": "2026-10-17T00:33:40.764575+00:00",
+  "attempts": 19,
+  "confirmed_today": 18,
+  "last_attempt_at": "2026-10-17T00:41:23.531685+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1763,30 +1763,38 @@
       "format": "short",
       "uploaded_at": "2026-10-17T00:21:30.783477+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-original-librarycloud-v1": {
+      "video_id": "8RqY9j7qmQo",
+      "confirmed_at": "2026-10-17T00:40:45.543633+00:00",
+      "title": "The Library Above the Rain",
+      "format": "short",
+      "uploaded_at": "2026-10-17T00:33:42.563418+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "8RqY9j7qmQo": {
-      "content_id": "rayvan-original-librarycloud-v1",
-      "title": "The Library Above the Rain",
+    "FGZT87SWcYM": {
+      "content_id": "rayvan-original-tideglass-v1",
+      "title": "The Glass That Held the Tide",
       "day": "2026-10-17",
-      "uploaded_at": "2026-10-17T00:33:42.563418+00:00",
+      "uploaded_at": "2026-10-17T00:41:25.250354+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "0fd010d91f248e8f68eb71462e23fe377455b0be3c505abbb12ac8fa2ec8fb43",
+      "plot_fingerprint": "45e4e425f9a1aa98a98b2a315291677ba8cd1d6ac241a0b1a1885e308638456c",
       "story_beats": [
         {
-          "speech": "Every night, one book floated from the library toward a cloud above the rooftops."
+          "speech": "A diver found a glass bottle containing a tiny moving shoreline."
         },
         {
-          "speech": "The librarian folded discarded pages into steps that reached the cloud."
+          "speech": "At home, she learned the nearby beach had lost its tide overnight."
         },
         {
-          "speech": "Inside, she found the books preserving memories the town had stopped telling."
+          "speech": "A hairline crack appeared as the tiny waves pushed against the glass."
         },
         {
-          "speech": "She read one forgotten tale aloud and the books drifted back to their rightful shelves."
+          "speech": "She opened the bottle at the empty shore, and the tide rolled back beneath the moon."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -1794,11 +1802,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-17T00:32:52.699661+00:00",
+  "last_preflight_at": "2026-10-17T00:40:45.165470+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-17T00:33:42.872972+00:00",
+    "at": "2026-10-17T00:41:25.539504+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -3875,10 +3883,33 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-original-tideglass-v1": {
+      "at": "2026-10-17T00:41:23.531668+00:00",
+      "title": "The Glass That Held the Tide",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "45e4e425f9a1aa98a98b2a315291677ba8cd1d6ac241a0b1a1885e308638456c",
+      "story_beats": [
+        {
+          "speech": "A diver found a glass bottle containing a tiny moving shoreline."
+        },
+        {
+          "speech": "At home, she learned the nearby beach had lost its tide overnight."
+        },
+        {
+          "speech": "A hairline crack appeared as the tiny waves pushed against the glass."
+        },
+        {
+          "speech": "She opened the bottle at the empty shore, and the tide rolled back beneath the moon."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-17T00:33:42.872896+00:00",
+    "at": "2026-10-17T00:41:25.539458+00:00",
     "publication_outcome": "processing",
     "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
