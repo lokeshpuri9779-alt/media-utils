@@ -4,6 +4,8 @@ This does not upload, render, publish, or modify live queue state.
 """
 import argparse
 import json
+import os
+import tempfile
 from pathlib import Path
 from astra_v2.editorial_approval_manifest import validate_manifest
 from astra_v2.proposal_history import load_history
@@ -19,6 +21,9 @@ def approved_intake(stories, reviews, history=()):
 
 def intake_files(stories_path, reviews_path, output_path,
                  publisher_path="astra_v2_state.json", story_history_path="astra_story_history.json"):
+    # A failed audit must never leave a previously approved export reusable.
+    output = Path(output_path)
+    output.unlink(missing_ok=True)
     story_doc = json.loads(Path(stories_path).read_text(encoding="utf-8"))
     review_doc = json.loads(Path(reviews_path).read_text(encoding="utf-8"))
     # Production intake must never treat absent history as an empty history.
@@ -26,10 +31,18 @@ def intake_files(stories_path, reviews_path, output_path,
         raise FileNotFoundError("editorial_intake_requires_complete_history")
     history = load_history(publisher_path, story_history_path)
     result = approved_intake(story_doc["stories"], review_doc["reviews"], history)
-    output = Path(output_path)
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps({"stories": result["stories"]}, indent=2),
-                      encoding="utf-8")
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=output.parent,
+                                         prefix=".astra-intake-", suffix=".tmp",
+                                         delete=False) as handle:
+            temporary = Path(handle.name)
+            json.dump({"stories": result["stories"]}, handle, indent=2)
+        os.replace(temporary, output)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
     return result
 
 
