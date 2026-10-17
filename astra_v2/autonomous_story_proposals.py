@@ -202,6 +202,59 @@ PLOT_ENGINES = (
     ),
 )
 
+# Narrative architectures change the order and agency of the investigation.
+# Every arc still resolves its initial problem and remains unreviewed.
+NARRATIVE_ARCHITECTURES = (
+    (
+        "Before acting, the team had to choose between two costly alternatives",
+        "A limited trial ruled out the tempting shortcut",
+        "The protagonist changed course after the evidence challenged the first plan",
+        "The final choice preserved the evidence and earned back the community's trust",
+    ),
+    (
+        "The apparent solution worked briefly, then exposed a deeper consequence",
+        "The team stopped the fix and measured the new harm",
+        "The second attempt addressed the underlying cause instead of the symptom",
+        "The community adopted a safer long-term maintenance plan",
+    ),
+    (
+        "Two allies disagreed about which clue deserved attention",
+        "They split the investigation into independent tests",
+        "Their separate findings became consistent only when combined",
+        "Both allies received credit and agreed to share evidence earlier",
+    ),
+    (
+        "A strict deadline made careful investigation seem impossible",
+        "The protagonist negotiated a temporary safe pause",
+        "The pause allowed a small test that prevented a larger mistake",
+        "The team created an emergency procedure that protects time for verification",
+    ),
+    (
+        "The first witness seemed unreliable but held the only missing detail",
+        "The protagonist asked the witness to reconstruct the event without interruption",
+        "The missing detail reconciled the conflicting accounts",
+        "The witness was invited to help document the corrected record",
+    ),
+    (
+        "The team could rescue one group immediately or protect everyone later",
+        "They created a temporary safeguard while testing the permanent solution",
+        "The safeguard bought time to resolve the cause without abandoning anyone",
+        "The final solution removed the tradeoff and kept the safeguard available",
+    ),
+    (
+        "A trusted tool produced a confident but misleading result",
+        "The protagonist verified its output using a different method",
+        "The independent measurement uncovered the tool's hidden limitation",
+        "The team required independent verification before future critical decisions",
+    ),
+    (
+        "An earlier mistake left the protagonist reluctant to intervene",
+        "A friend proposed a reversible action with a clear stopping rule",
+        "The cautious trial succeeded because the protagonist acknowledged the old mistake",
+        "The protagonist taught others how to test uncertain ideas safely",
+    ),
+)
+
 def _pick(index, values, stride):
     return values[(index // stride) % len(values)]
 
@@ -225,15 +278,16 @@ def proposal(index):
     consequence = _pick(index, CONSEQUENCES, 59)
     causal_opening, causal_test, causal_reveal, causal_aftermath = _pick(index, CAUSAL_PATHS, 17)
     plot_problem, plot_action, plot_reveal, plot_outcome = _pick(index, PLOT_ENGINES, 11)
+    arc_setup, arc_decision, arc_turn, arc_aftermath = _pick(index, NARRATIVE_ARCHITECTURES, 5)
     # The dimensions rotate at different strides; this produces a large
     # deterministic combination space without claiming every draft is unique.
     # Use compact, searchable story titles rather than generic inventory labels.
     title = f"The {visual.capitalize()} Mystery of the {setting.split()[-1].capitalize()}"
     beats = (
-        ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}, {stakes}. {plot_problem}. The neighbors needed a trustworthy explanation before taking action.", visual),
-        ("build", f"Instead of guessing, {actor} compared {clue} with {discovery}; {emotional}. {causal_opening}. {actor} {causal_test} and {plot_action}; {method}, but {obstacle}. The evidence gave the team a testable explanation rather than another suspicion.", "book"),
-        ("twist", f"{causal_reveal}: {reversal}. {plot_reveal}. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. {actor} checked the clue again and found that it fit the evidence gathered at the start.", clue if clue in VISUALS else "signal"),
-        ("payoff", f"With the cause understood, {actor} {resolution}. The community saw how the evidence led to the solution {consequence}. {causal_aftermath}. Together they {plot_outcome}.", _pick(index, VISUALS, 3)),
+        ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}, {stakes}. {plot_problem}. {arc_setup}. The neighbors needed a trustworthy explanation before taking action.", visual),
+        ("build", f"Instead of guessing, {actor} compared {clue} with {discovery}; {emotional}. {causal_opening}. {actor} {causal_test} and {plot_action}. {arc_decision}; {method}, but {obstacle}. The evidence gave the team a testable explanation rather than another suspicion.", "book"),
+        ("twist", f"{causal_reveal}: {reversal}. {plot_reveal}. {arc_turn}. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. {actor} checked the clue again and found that it fit the evidence gathered at the start.", clue if clue in VISUALS else "signal"),
+        ("payoff", f"With the cause understood, {actor} {resolution}. The community saw how the evidence led to the solution {consequence}. {causal_aftermath}. Together they {plot_outcome}. {arc_aftermath}.", _pick(index, VISUALS, 3)),
     )
     # Reserve distinct, story-relevant visual keys across the four beats.
     # This fixes avoidable visual repetition without changing narration or
