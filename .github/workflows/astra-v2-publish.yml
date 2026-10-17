@@ -282,6 +282,23 @@ jobs:
                   raise ValueError("state not an object")
           except (OSError, ValueError):
               state = {}
+          report_path = Path("runtime-health/astra-v2-report.json")
+          try:
+              report = json.loads(report_path.read_text(encoding="utf-8"))
+              if not isinstance(report, dict):
+                  report = {}
+          except (OSError, ValueError):
+              report = {}
+          state["last_character_memory_diagnostic"] = {
+              "at": datetime.now(timezone.utc).isoformat(),
+              "publication_outcome": report.get("outcome", "no_report"),
+              "character_memory": report.get("character_memory", "not_reported"),
+              "character_memory_error": report.get("character_memory_error"),
+              "first_candidate_manifest": Path("runtime-health/character-first-candidate.json").is_file(),
+              "existing_character_proposal": Path("runtime-health/character-proposal.json").is_file(),
+              "existing_character_episode": Path("runtime-health/character-episode.json").is_file(),
+              "continuity_snapshot_present": Path("character-continuity.json").is_file(),
+          }
           state["last_publisher_job_diagnostic"] = {
               "at": datetime.now(timezone.utc).isoformat(),
               "early_tests": os.getenv("EARLY_TESTS_RESULT", "unknown"),
