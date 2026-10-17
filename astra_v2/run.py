@@ -52,6 +52,16 @@ def reconcile(youtube, state):
                                         "plot_fingerprint": item.get("plot_fingerprint", ""),
                                         "story_beats": item.get("story_beats") or [],
                                         "renderer": item.get("renderer") or "unknown"}
+            # Record only API-confirmed public, processed uploads. A failed
+            # history write must not misclassify an already-published video.
+            try:
+                from astra_v2.verified_story_history import record_confirmed
+                recorded = record_confirmed(
+                    os.getenv("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json"),
+                    cid, state["published"][cid])
+                print("ASTRA_VERIFIED_STORY_HISTORY=" + ("recorded" if recorded else "already_present"))
+            except (OSError, ValueError, TypeError) as history_error:
+                print("ASTRA_VERIFIED_STORY_HISTORY=unavailable:" + type(history_error).__name__)
             if item.get("day") == state["day"]:
                 state["confirmed_today"] += 1
             del state["pending"][video_id]
