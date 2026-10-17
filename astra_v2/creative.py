@@ -266,6 +266,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 # Preserve explicit, reviewed character records for later
                 # post-publication continuity; never infer them from narration.
                 "character_id": story.get("character_id"),
+                "character_name": story.get("character_name"),
                 "character_approved": story.get("character_approved") is True,
                 "character_episode": story.get("character_episode"),
                 "creative_director": evaluation["director"],
@@ -331,6 +332,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
             "plot_fingerprint": str(meta.get("plot_fingerprint") or ""),
             "story_beats": meta.get("story_beats") or [],
             "character_id": meta.get("character_id"),
+            "character_name": meta.get("character_name"),
             "character_approved": meta.get("character_approved") is True,
             "character_episode": meta.get("character_episode"),
             "renderer": str(meta.get("renderer") or "unknown")}
