@@ -2,7 +2,7 @@
 
 These are reproducible *visual variants*, NOT 2,000 biological species, hand-
 drawn SVG files or individual images. No downloads, secrets or paid models.
-The eight supported characters retain species-specific silhouettes.
+All supported characters retain species-specific silhouettes.
 """
 from __future__ import annotations
 import hashlib
@@ -10,7 +10,8 @@ import math
 from functools import lru_cache
 from PIL import ImageDraw
 
-SPECIES = ("fox", "rabbit", "cat", "dog", "owl", "mouse", "otter", "squirrel")
+from astra_v2.pillow_duo_scene import ACTORS
+SPECIES = ACTORS
 PALETTES = (
     ((228,120,64),(58,158,164)), ((208,105,76),(117,116,187)),
     ((180,137,95),(64,123,156)), ((232,159,87),(149,102,134)),
@@ -31,7 +32,7 @@ MOTIFS = (
 ICON_VARIANTS = len(MOTIFS)*10*10
 
 def character_recipe(index):
-    """Return a full art recipe, with bijective index 0..1999."""
+    """Return a deterministic art recipe for every supported species."""
     if not isinstance(index,int) or not 0 <= index < CHARACTER_VARIANTS:
         raise ValueError("character design index out of range")
     species_id, local = divmod(index, CHARACTERS_PER_SPECIES)
