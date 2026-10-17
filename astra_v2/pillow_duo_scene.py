@@ -13,18 +13,24 @@ from functools import lru_cache
 
 from PIL import ImageDraw
 
-ACTORS = ("fox", "rabbit", "cat", "dog", "owl", "mouse", "otter", "squirrel")
+ACTORS = ("fox", "rabbit", "cat", "dog", "owl", "mouse", "otter", "squirrel", "tapir", "pangolin", "stoat", "lynx", "ferret", "marten")
 ALIASES = {
     "fox": r"\bfox(?:es)?\b", "rabbit": r"\b(?:rabbit|bunny|hare)s?\b",
     "cat": r"\b(?:cat|kitten)s?\b", "dog": r"\b(?:dog|puppy|puppies)\b",
     "owl": r"\bowls?\b", "mouse": r"\b(?:mouse|mice)\b",
     "otter": r"\botters?\b", "squirrel": r"\bsquirrels?\b",
+    "tapir": r"\btapirs?\b", "pangolin": r"\bpangolins?\b",
+    "stoat": r"\bstoats?\b", "lynx": r"\blynx(?:es)?\b",
+    "ferret": r"\bferrets?\b", "marten": r"\bmartens?\b",
 }
 FUR = {
     "fox": (238, 125, 58), "rabbit": (235, 219, 198),
     "cat": (204, 145, 94), "dog": (186, 138, 95),
     "owl": (167, 117, 85), "mouse": (182, 176, 181),
     "otter": (157, 113, 83), "squirrel": (199, 128, 75),
+    "tapir": (112, 88, 83), "pangolin": (173, 126, 78),
+    "stoat": (225, 212, 182), "lynx": (184, 143, 97),
+    "ferret": (190, 159, 119), "marten": (134, 100, 74),
 }
 INK = (37, 43, 58)
 CREAM = (255, 236, 202)
@@ -203,6 +209,32 @@ def _ears_and_tail(d, actor, x, y, t, fur):
             ex=x+side*105
             d.ellipse((ex-56,y-211,ex+56,y-91),fill=fur,outline=INK,width=4)
             d.ellipse((ex-38,y-193,ex+38,y-108),fill=(234,165,181))
+    elif actor in ("lynx", "marten"):
+        for side in (-1,1):
+            ex=x+side*82
+            d.polygon(((ex-47,y-95),(ex+side*23,y-226),(ex+45,y-101)),
+                      fill=fur,outline=INK)
+            if actor=="lynx":
+                d.line((ex+side*23,y-225,ex+side*29,y-259),fill=INK,width=9)
+        if actor=="marten":
+            d.arc((x+84,y+136,x+224,y+348),180,352,fill=fur,width=30)
+    elif actor=="tapir":
+        for side in (-1,1):
+            ex=x+side*103
+            d.ellipse((ex-39,y-173,ex+39,y-61),fill=fur,outline=INK,width=4)
+            d.ellipse((ex-21,y-147,ex+21,y-79),fill=(200,155,149))
+    elif actor=="pangolin":
+        for side in (-1,1):
+            ex=x+side*83
+            d.ellipse((ex-44,y-162,ex+44,y-79),fill=fur,outline=INK,width=4)
+        d.arc((x+83,y+128,x+264,y+365),155,353,fill=fur,width=42)
+    elif actor in ("stoat", "ferret"):
+        for side in (-1,1):
+            ex=x+side*82
+            d.ellipse((ex-30,y-182,ex+30,y-91),fill=fur,outline=INK,width=4)
+        d.arc((x+75,y+153,x+227,y+342),165,352,fill=fur,width=24)
+        if actor=="stoat":
+            d.ellipse((x+207,y+299,x+246,y+343),fill=INK)
     elif actor=="owl":
         # Low rounded crown feathers, not cat-like pointed ears.
         for side in (-1,1):
@@ -340,6 +372,25 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
             d.ellipse((ex-54,y-86,ex+54,y+49),fill=CREAM)
             d.arc((ex-50,y-88,ex+50,y+37),190,350,fill=INK,width=5)
     _facial(d,x,y,mood,t,idx)
+    if name=="tapir":
+        # Downturned flexible snout, visibly unlike the generic rounded face.
+        d.rounded_rectangle((x-30,y+48,x+44,y+168),radius=30,
+                            fill=fur,outline=INK,width=5)
+        d.ellipse((x+13,y+144,x+26,y+155),fill=INK)
+    elif name=="pangolin":
+        # Overlapping scales along the crown and shoulders.
+        for row in range(3):
+            for col in range(5-row):
+                px=x-87+col*43+row*21
+                py=y-108+row*35
+                d.arc((px-20,py-13,px+21,py+30),5,175,
+                      fill=(95,68,47),width=5)
+    elif name=="lynx":
+        for side in (-1,1):
+            d.line((x+side*83,y+63,x+side*130,y+88),fill=INK,width=4)
+    elif name in ("ferret","marten","stoat"):
+        d.ellipse((x-72,y-22,x-25,y+32),fill=(84,64,59))
+        d.ellipse((x+25,y-22,x+72,y+32),fill=(84,64,59))
     # Species-specific facial markers supplement the shared expressive face.
     if name=="owl":
         d.polygon(((x-22,y+35),(x+22,y+35),(x,y+72)),

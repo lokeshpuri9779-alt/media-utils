@@ -7,10 +7,27 @@ from astra_v2.unified_story_engine import validate_title_subject
 
 
 class NamedCharacterVisualTests(unittest.TestCase):
-    def test_screenshot_species_fail_closed(self):
+    def test_screenshot_species_supported(self):
         for animal in ("Tapir", "Pangolin", "Stoat", "Lynx", "Ferret", "Marten"):
-            with self.subTest(animal=animal), self.assertRaises(CreativeReject):
+            with self.subTest(animal=animal):
                 validate_title_subject({"genre": "fiction", "title": "The "+animal+" and the Mangrove Bell"})
+
+    def test_new_species_resolve_to_solo_actors(self):
+        from astra_v2.unified_story_engine import validate_story_shot
+        for animal in ("tapir", "pangolin", "stoat", "lynx", "ferret", "marten"):
+            with self.subTest(animal=animal):
+                self.assertEqual(validate_story_shot({"speech": "The "+animal+" found a lantern"}), "solo")
+
+    def test_rendered_actors_have_distinct_silhouettes(self):
+        from PIL import Image, ImageDraw, ImageChops
+        from astra_v2.pillow_duo_scene import _actor
+        frames = {}
+        for animal in ("tapir", "pangolin", "stoat", "lynx", "ferret", "marten"):
+            frame = Image.new("RGB", (1080, 1920), (245, 245, 245))
+            _actor(ImageDraw.Draw(frame), animal, 540, 850, 0.3, "idle",
+                   "alert", 0)
+            frames[animal] = frame.crop((260, 520, 830, 1100)).tobytes()
+        self.assertEqual(len(set(frames.values())), 6)
 
     def test_supported_cast_still_allowed(self):
         for animal in ("Fox", "Rabbit", "Otter", "Owl"):
