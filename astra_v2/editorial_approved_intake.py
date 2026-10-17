@@ -21,6 +21,9 @@ def intake_files(stories_path, reviews_path, output_path,
                  publisher_path="astra_v2_state.json", story_history_path="astra_story_history.json"):
     story_doc = json.loads(Path(stories_path).read_text(encoding="utf-8"))
     review_doc = json.loads(Path(reviews_path).read_text(encoding="utf-8"))
+    # Production intake must never treat absent history as an empty history.
+    if not Path(publisher_path).is_file() or not Path(story_history_path).is_file():
+        raise FileNotFoundError("editorial_intake_requires_complete_history")
     history = load_history(publisher_path, story_history_path)
     result = approved_intake(story_doc["stories"], review_doc["reviews"], history)
     output = Path(output_path)
