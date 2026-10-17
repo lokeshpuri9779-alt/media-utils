@@ -149,6 +149,59 @@ CAUSAL_PATHS = (
 )
 
 
+# Distinct plot engines: each has a different core problem, intervention, and outcome.
+# These are story-level premises, not just investigation phrasing.
+PLOT_ENGINES = (
+    (
+        "A false alarm threatened to split the town into rival rescue teams",
+        "tested which warnings were reliable before anyone was sent into danger",
+        "The alarm had been triggered by a harmless echo, not an approaching disaster",
+        "published a verified warning protocol and reunited the rescue teams",
+    ),
+    (
+        "A vital delivery disappeared between two checkpoints",
+        "reconstructed custody of the delivery and found a mistaken handoff",
+        "The supposed theft was a routing error made during an emergency",
+        "returned the delivery and introduced a shared handoff record",
+    ),
+    (
+        "A new machine improved one neighborhood while harming another",
+        "measured the unintended effects across both neighborhoods",
+        "The machine diverted resources from the people it was meant to help",
+        "redesigned the controls to distribute the benefit fairly",
+    ),
+    (
+        "An old promise prevented neighbors from asking for urgent help",
+        "found out what each neighbor believed the promise required",
+        "Both sides had been protecting the same person without realizing it",
+        "negotiated a new agreement and restored cooperation",
+    ),
+    (
+        "An apparent intruder was leaving clues at abandoned buildings",
+        "followed the clues without confronting the unknown visitor",
+        "The visitor was a lost caretaker marking a safe escape route",
+        "guided the caretaker home and preserved the escape markings",
+    ),
+    (
+        "A competition prize vanished just before the final challenge",
+        "audited the rules and checked who had access to the prize",
+        "The prize had been moved to protect it from a hidden hazard",
+        "repaired the unsafe venue and restarted the competition transparently",
+    ),
+    (
+        "A flood barrier protected the village but trapped wildlife upstream",
+        "modeled the water flow and traced the animals' blocked passage",
+        "A forgotten maintenance gate could protect both homes and wildlife",
+        "opened a safe passage and installed a seasonal gate inspection",
+    ),
+    (
+        "An archive's newest records contradicted its oldest map",
+        "compared the records with physical landmarks that had survived",
+        "The archive had preserved two different eras of the same settlement",
+        "created a layered map and reunited families with their missing history",
+    ),
+)
+
 def _pick(index, values, stride):
     return values[(index // stride) % len(values)]
 
@@ -171,15 +224,16 @@ def proposal(index):
     obstacle = _pick(index, OBSTACLES, 53)
     consequence = _pick(index, CONSEQUENCES, 59)
     causal_opening, causal_test, causal_reveal, causal_aftermath = _pick(index, CAUSAL_PATHS, 17)
+    plot_problem, plot_action, plot_reveal, plot_outcome = _pick(index, PLOT_ENGINES, 11)
     # The dimensions rotate at different strides; this produces a large
     # deterministic combination space without claiming every draft is unique.
     # Use compact, searchable story titles rather than generic inventory labels.
     title = f"The {visual.capitalize()} Mystery of the {setting.split()[-1].capitalize()}"
     beats = (
-        ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}, {stakes}. If the cause stayed hidden, the neighbors would not know which route or system was safe to use.", visual),
-        ("build", f"Instead of guessing, {actor} compared {clue} with {discovery}; {emotional}. {causal_opening}. {actor} {causal_test}; {method}, but {obstacle}. The details matched the timing of the first warning, giving the investigation a testable explanation rather than another suspicion.", "book"),
-        ("twist", f"{causal_reveal}: {reversal}. This explained the original mystery rather than introducing a new one. {actor} checked the clue again and found that it fit the evidence gathered at the start.", clue if clue in VISUALS else "signal"),
-        ("payoff", f"With the cause understood, {actor} {resolution}. The community saw how the evidence led to the solution {consequence}. {causal_aftermath}.", _pick(index, VISUALS, 3)),
+        ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}, {stakes}. {plot_problem}. If the cause stayed hidden, the neighbors would not know which route or system was safe to use.", visual),
+        ("build", f"Instead of guessing, {actor} compared {clue} with {discovery}; {emotional}. {causal_opening}. {actor} {causal_test} and {plot_action}; {method}, but {obstacle}. The details matched the timing of the first warning, giving the investigation a testable explanation rather than another suspicion.", "book"),
+        ("twist", f"{causal_reveal}: {reversal}. {plot_reveal}. This explained the original mystery rather than introducing a new one. {actor} checked the clue again and found that it fit the evidence gathered at the start.", clue if clue in VISUALS else "signal"),
+        ("payoff", f"With the cause understood, {actor} {resolution}. The community saw how the evidence led to the solution {consequence}. {causal_aftermath}. Together they {plot_outcome}.", _pick(index, VISUALS, 3)),
     )
     # Reserve distinct, story-relevant visual keys across the four beats.
     # This fixes avoidable visual repetition without changing narration or
