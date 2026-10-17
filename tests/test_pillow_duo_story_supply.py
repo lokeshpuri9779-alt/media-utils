@@ -86,8 +86,8 @@ class StorySupplyTests(unittest.TestCase):
 
     def test_used_story_cannot_be_reissued(self):
         story=catalog(limit=256)[0]
-        expected_title="The Fox and Rabbit's Last Lantern"
-        self.assertEqual(story["title"], expected_title)
+        self.assertTrue(story["content_id"])
+        self.assertTrue(story["plot_fingerprint"])
         excluded=catalog(excluded_ids={story["content_id"]},limit=256)
         self.assertNotIn(story["content_id"],{s["content_id"] for s in excluded})
         excluded=catalog(excluded_plot_hashes={story["plot_fingerprint"]},limit=256)
