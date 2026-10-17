@@ -102,7 +102,8 @@ def triage(stories, history=()):
                 "issues": issues,
                 "publication_blocked": bool(publication_rejection(story))}
         if "narrative_duplicate" in issues:
-            item["novelty_evidence"] = _semantic_match_features(\n                story, _semantic_features(story), semantic_previous, 0.72)
+            item["novelty_evidence"] = _semantic_match_features(
+                story, _semantic_features(story), semantic_previous, 0.72)
         # Requiring a human/model editorial decision is a workflow state,
         # not itself a structural defect. Keep the proposal publication-blocked,
         # but make structurally sound drafts visible in the review queue.
