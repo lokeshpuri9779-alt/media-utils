@@ -3,7 +3,7 @@
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 14,
-  "confirmed_today": 13,
+  "confirmed_today": 14,
   "last_attempt_at": "2026-10-16T23:59:58.087171+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -1731,41 +1731,23 @@
       "format": "short",
       "uploaded_at": "2026-10-16T23:53:38.451185+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "4FjXORHxnBc": {
-      "content_id": "rayvan-original-moonbridge-v1",
+    },
+    "rayvan-original-moonbridge-v1": {
+      "video_id": "4FjXORHxnBc",
+      "confirmed_at": "2026-10-17T00:01:57.594943+00:00",
       "title": "The Bridge to the Sleeping Moon",
-      "day": "2026-10-17",
-      "uploaded_at": "2026-10-16T23:59:59.869162+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "1e1e18cca81f0871962f8edcde8ad4be8362c015e9eb159bde671a1fb42ba380",
-      "story_beats": [
-        {
-          "speech": "Two siblings watched the moon hover above the mountain night after night."
-        },
-        {
-          "speech": "They discovered a gap in the silver bridge that carried moonlight over the ridge."
-        },
-        {
-          "speech": "Their grandmother's lantern held the final piece of moonlight needed to mend it."
-        },
-        {
-          "speech": "They placed the spark in the gap and the moon rose, bathing the village in silver."
-        }
-      ],
+      "uploaded_at": "2026-10-16T23:59:59.869162+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
-  "last_preflight_at": "2026-10-17T00:00:28.232391+00:00",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-17T00:01:57.181651+00:00",
   "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "processing",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-17T00:00:28.847333+00:00",
+    "at": "2026-10-17T00:01:57.662741+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "false",
