@@ -41,6 +41,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_proposal_visual_variety.py' -v
           python -m unittest discover -s tests -p 'test_mystery_causal_paths.py' -v
           python -m unittest discover -s tests -p 'test_mystery_novelty_benchmark.py' -v
+          python -m unittest discover -s tests -p 'test_mystery_generator_comparison.py' -v
           python -m unittest discover -s tests -p 'test_genre_visual_variety.py' -v
           python -m unittest discover -s tests -p 'test_astra_production_story_gate.py' -v
           python -m unittest discover -s tests -p 'test_astra_motion_curves.py' -v
