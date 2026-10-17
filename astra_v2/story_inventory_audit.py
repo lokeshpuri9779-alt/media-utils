@@ -9,7 +9,11 @@ from astra_v2.story_forge import catalog
 
 
 def audit(publisher_path="astra_v2_state.json", story_path="astra_story_history.json"):
-    # An absent journal would falsely classify previously published plots as new.\n    for source in (publisher_path, story_path):\n        if not Path(source).is_file() or not Path(source).stat().st_size:\n            raise ValueError("Missing persistent novelty history: " + str(source))\n    history = load_history(publisher_path, story_path)
+    # An absent journal would falsely classify previously published plots as new.
+    for source in (publisher_path, story_path):
+        if not Path(source).is_file() or not Path(source).stat().st_size:
+            raise ValueError("Missing persistent novelty history: " + str(source))
+    history = load_history(publisher_path, story_path)
     ids = {str(x.get("content_id")) for x in history if x.get("content_id")}
     titles = {str(x.get("title")).casefold().strip() for x in history if x.get("title")}
     # The authored catalog is assessed without history filtering, so exhausted
