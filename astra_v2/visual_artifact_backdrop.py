@@ -37,7 +37,7 @@ def choose_scene(shot):
     text = " ".join(str(shot.get(k) or "") for k in
                     ("story_environment", "visual_prompt", "speech", "headline")).lower()
     for scene in SCENES:
-        if any(re.search(r"\\b"+re.escape(term)+r"\\b",text) for term in SCENE_TERMS[scene]):
+        if any(re.search(r"\b"+re.escape(term)+r"\b",text) for term in SCENE_TERMS[scene]):
             return scene
     return None
 
