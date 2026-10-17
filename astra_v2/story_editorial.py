@@ -29,9 +29,13 @@ def _semantic_match_features(story, current, previous_items, threshold):
     signature, words, fingerprint = current
     best = None
     for prior, (other_signature, other_words, other_fp) in previous_items:
-        union = signature | other_signature
-        jaccard = len(signature & other_signature) / len(union) if union else 0.0
-        dice = (2 * len(words & other_words) / (len(words) + len(other_words))
+        # Disjoint token counts cannot reach the thresholds; keep exact
+        # scores for evidence/ranking even when the match is impossible.
+        shared_signature = len(signature & other_signature)
+        union_size = len(signature) + len(other_signature) - shared_signature
+        jaccard = shared_signature / union_size if union_size else 0.0
+        shared_words = len(words & other_words) if words and other_words else 0
+        dice = (2 * shared_words / (len(words) + len(other_words))
                 if words and other_words else 0.0)
         fingerprint_match = bool(fingerprint and fingerprint == other_fp)
         candidate = {
