@@ -131,4 +131,10 @@ def draw_story_frame(image, shot, t, *, draw_directed=None,
         success = True
     if not success:
         raise CreativeReject("Unified Studio: " + mode + " scene failed to render faithfully")
+    if stable_shot.get("illustrated_assets") is not None:
+        from astra_v2.illustrated_story_compositor import apply_story_art
+        try:
+            apply_story_art(image, stable_shot)
+        except (ValueError, OSError) as exc:
+            raise CreativeReject("Unified Studio: illustrated artwork rejected: " + str(exc)) from exc
     return mode
