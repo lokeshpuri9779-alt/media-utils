@@ -90,12 +90,16 @@ def draw_asset_for_scene(image: Image.Image, scene: dict, t: float = 0.0,
     category = str(asset.get("category") or "").lower()
     width, height = image.size
     if category == "background":
+        if source.width < 540 or source.height < 960:
+            return False
         fitted = ImageOps.fit(source, (width, height), method=Image.Resampling.LANCZOS)
         image.paste(fitted.convert(image.mode), (0, 0))
         return True
 
     alpha = source.getchannel("A")
     if alpha.getextrema() == (255, 255):
+        return False
+    if source.width < 256 or source.height < 256:
         return False
     if category == "character":
         max_w, max_h = int(width * 0.76), int(height * 0.55)

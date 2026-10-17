@@ -111,3 +111,10 @@ Explicit user approval is required before:
 - [ ] Add individually cropped, alpha-validated PNGs from the generated ASTRA atlas pack under `art/assets/`; composite atlas sheets must not be used as character cutouts.
 - [ ] Run asset-library tests and a 1080x1920 sample render; verify no checkerboard remnants, halos, clipping, or character-scale regressions.
 - [ ] Keep Shorts upload visibility and publication safeguards unchanged until the rendered sample passes QA.
+
+
+## Generated asset production gate (2026-10-18)
+- [x] Reject low-resolution atlas thumbnails before enlarging them into 9:16 backgrounds or foreground sprites.
+- [x] Add a manifest validator for transparency, dimensions, path safety, and approval status.
+- [ ] Import individually rendered high-resolution ASTRA characters, props, and vertical backgrounds; the composite overview sheet alone is not production-ready.
+- [ ] Run the validator and render a sample Short with registered generated art before marking deployment complete.
