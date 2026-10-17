@@ -40,11 +40,12 @@ def candidate_at(index):
     if not 0 <= index < TARGET:
         raise IndexError(index)
     n = index
+    mechanism_index = n % len(MECHANISMS); n //= len(MECHANISMS)
     role = n % 3; n //= 3
     context = CONTEXTS[n % len(CONTEXTS)]; n //= len(CONTEXTS)
     setting = SETTINGS[n % len(SETTINGS)]; n //= len(SETTINGS)
     a,b = ANIMAL_PAIRS[n % len(ANIMAL_PAIRS)]; n //= len(ANIMAL_PAIRS)
-    key,title,problem,setback,clue,resolution = MECHANISMS[n]
+    key,title,problem,setback,clue,resolution = MECHANISMS[mechanism_index]
     lead,partner = ((a,b),(b,a),(a,b))[role]
     place = "the " + setting
     deadline,audience = context
@@ -55,7 +56,8 @@ def candidate_at(index):
       f"With {audience} watching, they {resolution}, then explained the clue so their neighbors could prevent the problem next time."
     ]
     identity=f"factory-v1:{index}:{key}:{a}:{b}:{setting}:{context[0]}:{role}"
-    return {"candidate_id":hashlib.sha256(identity.encode()).hexdigest()[:24],
+    plot_signature = hashlib.sha256(key.encode()).hexdigest()[:16]
+    return {"plot_signature":plot_signature,"candidate_id":hashlib.sha256(identity.encode()).hexdigest()[:24],
             "slot":index,"premise_key":key,"title":title,
             "setting":setting,"context":context[0],"characters":[a,b],
             "story_beats":beats,"kind":"unreviewed_causal_draft",
@@ -87,9 +89,11 @@ def generate(state_path, output_path, batch_size=500):
     rows=[candidate_at(i) for i in range(cursor,end)]
     seen=set(state.get("seen_premise_keys", []))
     review=[]
+    accepted_plot_signatures=set(state.get("seen_plot_signatures", []))
     for row in rows:
         review.append(screen_candidate(row, seen))
         seen.add(row["premise_key"])
+        accepted_plot_signatures.add(row["plot_signature"])
     out=Path(output_path); out.parent.mkdir(parents=True,exist_ok=True)
     with out.open("w") as f:
         for row in rows: f.write(json.dumps(row,ensure_ascii=False)+"\n")
@@ -100,6 +104,7 @@ def generate(state_path, output_path, batch_size=500):
     state_file.write_text(json.dumps({"version":1,"next_slot":end,
         "target":TARGET,"last_batch":len(rows),"complete":end==TARGET,
         "seen_premise_keys":sorted(seen),
+        "seen_plot_signatures":sorted(accepted_plot_signatures),
         "last_awaiting_review":sum(x["status"]=="awaiting_editorial_review" for x in review)},indent=2)+"\n")
     return len(rows)
 

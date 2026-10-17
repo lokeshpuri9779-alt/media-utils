@@ -19,6 +19,15 @@ class StoryFactoryTests(unittest.TestCase):
         self.assertEqual(screen_candidate(item, [])["status"], "awaiting_editorial_review")
         self.assertEqual(screen_candidate(item, [item["premise_key"]])["status"], "needs_new_plot")
         self.assertFalse(screen_candidate(item, [])["production_ready"])
+    def test_first_batch_rotates_premises(self):
+        from astra_v2.story_expansion_2000 import MECHANISMS
+        self.assertEqual(len({candidate_at(i)["premise_key"] for i in range(len(MECHANISMS))}),len(MECHANISMS))
+    def test_plot_identity_survives_cosmetic_variations(self):
+        from astra_v2.story_expansion_2000 import MECHANISMS
+        first=candidate_at(0)
+        second=candidate_at(len(MECHANISMS))
+        self.assertNotEqual(first["candidate_id"],second["candidate_id"])
+        self.assertEqual(first["plot_signature"],second["plot_signature"])
     def test_sample_unique_ids(self):
         self.assertEqual(len({candidate_at(i)["candidate_id"] for i in range(1000)}),1000)
 if __name__=="__main__": unittest.main()
