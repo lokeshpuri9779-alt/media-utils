@@ -230,9 +230,9 @@ def proposal(index):
     # Use compact, searchable story titles rather than generic inventory labels.
     title = f"The {visual.capitalize()} Mystery of the {setting.split()[-1].capitalize()}"
     beats = (
-        ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}, {stakes}. {plot_problem}. If the cause stayed hidden, the neighbors would not know which route or system was safe to use.", visual),
-        ("build", f"Instead of guessing, {actor} compared {clue} with {discovery}; {emotional}. {causal_opening}. {actor} {causal_test} and {plot_action}; {method}, but {obstacle}. The details matched the timing of the first warning, giving the investigation a testable explanation rather than another suspicion.", "book"),
-        ("twist", f"{causal_reveal}: {reversal}. {plot_reveal}. This explained the original mystery rather than introducing a new one. {actor} checked the clue again and found that it fit the evidence gathered at the start.", clue if clue in VISUALS else "signal"),
+        ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}, {stakes}. {plot_problem}. The neighbors needed a trustworthy explanation before taking action.", visual),
+        ("build", f"Instead of guessing, {actor} compared {clue} with {discovery}; {emotional}. {causal_opening}. {actor} {causal_test} and {plot_action}; {method}, but {obstacle}. The evidence gave the team a testable explanation rather than another suspicion.", "book"),
+        ("twist", f"{causal_reveal}: {reversal}. {plot_reveal}. The team compared this explanation with the original evidence. {actor} checked the clue again and found that it fit the evidence gathered at the start.", clue if clue in VISUALS else "signal"),
         ("payoff", f"With the cause understood, {actor} {resolution}. The community saw how the evidence led to the solution {consequence}. {causal_aftermath}. Together they {plot_outcome}.", _pick(index, VISUALS, 3)),
     )
     # Reserve distinct, story-relevant visual keys across the four beats.
