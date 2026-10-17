@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 13,
+  "attempts": 14,
   "confirmed_today": 13,
-  "last_attempt_at": "2026-10-16T23:53:37.209170+00:00",
+  "last_attempt_at": "2026-10-16T23:59:58.087171+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1733,29 +1733,55 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "4FjXORHxnBc": {
+      "content_id": "rayvan-original-moonbridge-v1",
+      "title": "The Bridge to the Sleeping Moon",
+      "day": "2026-10-17",
+      "uploaded_at": "2026-10-16T23:59:59.869162+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "1e1e18cca81f0871962f8edcde8ad4be8362c015e9eb159bde671a1fb42ba380",
+      "story_beats": [
+        {
+          "speech": "Two siblings watched the moon hover above the mountain night after night."
+        },
+        {
+          "speech": "They discovered a gap in the silver bridge that carried moonlight over the ridge."
+        },
+        {
+          "speech": "Their grandmother's lantern held the final piece of moonlight needed to mend it."
+        },
+        {
+          "speech": "They placed the spark in the gap and the moon rose, bathing the village in silver."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-16T23:56:15.927659+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_preflight_at": "2026-10-16T23:59:20.524864+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-16T23:56:16.002192+00:00",
+    "at": "2026-10-17T00:00:00.249248+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-16T20:08:22.753942+00:00",
   "reserved": {
@@ -3698,6 +3724,29 @@
         },
         {
           "speech": "The courier helped each traveler and the compass finally settled, pointing toward her own home."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    },
+    "rayvan-original-moonbridge-v1": {
+      "at": "2026-10-16T23:59:58.087156+00:00",
+      "title": "The Bridge to the Sleeping Moon",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "1e1e18cca81f0871962f8edcde8ad4be8362c015e9eb159bde671a1fb42ba380",
+      "story_beats": [
+        {
+          "speech": "Two siblings watched the moon hover above the mountain night after night."
+        },
+        {
+          "speech": "They discovered a gap in the silver bridge that carried moonlight over the ridge."
+        },
+        {
+          "speech": "Their grandmother's lantern held the final piece of moonlight needed to mend it."
+        },
+        {
+          "speech": "They placed the spark in the gap and the moon rose, bathing the village in silver."
         }
       ],
       "renderer": "studio-7.3.0",
