@@ -1,16 +1,16 @@
 {
-  "proposal_count": 2336,
-  "editorial_issue_count": 2336,
-  "publication_blocked_count": 2336,
+  "proposal_count": 2436,
+  "editorial_issue_count": 2436,
+  "publication_blocked_count": 2436,
   "approved_for_production": 0,
-  "structurally_sound_unreviewed_count": 1145,
+  "structurally_sound_unreviewed_count": 1186,
   "editorial_reason_counts": {
-    "human_or_model_editorial_review_required": 2336,
+    "human_or_model_editorial_review_required": 2436,
     "insufficient_visual_variety": 416,
-    "narrative_duplicate": 821
+    "narrative_duplicate": 880
   },
   "publication_rejection_reason_counts": {
-    "unreviewed_causal_draft": 2336
+    "unreviewed_causal_draft": 2436
   },
   "proposals": [
     {
@@ -19931,6 +19931,865 @@
     },
     {
       "content_id": "astra-proposal-90408da4972000669d77",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-f34d1cc7873bb57155f3",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-fcfb9888571427a8c583",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-a91402f04d3523002870",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-46a664adcfaf910b508b",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-dc1625f4161904dc51f9",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-5329ee71290b8a188ca0",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-9f745eb1b863b5942894",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-aaebb94b49d720c969e2",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-0679a790cf430ec8b2aa",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-b7c4ff03950e8656296b",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-5d72126662b46dde0051",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-7a4e4466874091665724",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-2783f937067ce05bc48d",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-4becfa4e8e040b9e7179",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-77249cfcc63f3937a456",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-cbe9caac0594c1911ded",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-563f440738127d51e4c7",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-d673f656aa63196db63a",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-6360b85329455cdb8fae",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-de1d345413e4a604293f",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-5ea08dfaac63dee09fe3",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-613e32358ee5ff1b8623",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-1be4ee3ff5a5c8ef8e3d",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-bb84f2739572d08326eb",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-d9929e5b22353f8c76a3",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-fc576f9bc74f7746c7cb",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-1cb96e086a640abad39e",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-8a70394e253a72b80116",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-c968ba529089c4089891",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-8396a3b3e7a843770cd7",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-b18c54c00bf34db4bcbe",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-00b0ad84cdfb4d53c53b",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-4f3b2b596fb0fd37624a",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-383a404560b91f8e4004",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-c9eb53a29ed4051f4d21",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-179eb51e3c34819f2107",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-0dca676cd302aaeeda61",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-827e9a1ef5553d6458af",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-00e5ccb029a5d650fa39",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-0239f56a6b72e62fcb4c",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-1d39e715b2af6d552738",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-0dfe421e4857b97e93bf",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-30485027a952e4396332",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-1723628dc7b1d87977c3",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-14c887cbc17ab9164d7f",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-89011cc406202051e0eb",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-c52d1af6c9d93dc8af8c",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-1b911c916b1a54654d11",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-2ba67a03ed49ee8f45bc",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-7152eb5078b5626b9817",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-a4c608c8352a1e8b5ad4",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-1e5bee4d5c6f5807ce4d",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-795591c5d055ae0e878a",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-2afe6fbe23ea648133e2",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-1b3716f080a60e1ca11a",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-588ece5ee19f7ef256ec",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-4d0a670bb619ea891d91",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-db7f2b76d081a1f2e4d6",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-0b95b3409cd02b06ea15",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-272f23b6d6a83cab4e54",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-c63ed47d8348658e22e0",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-dce7594be4cdebc8afb7",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-166672e6819a3f3fcee8",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-f69b2da66d089efb2824",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-b7a90d7aebf9f01acb22",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-87902427784fcde09ee7",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-ef271d6d565d7653091e",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-0db89cdfb90ac581ebf3",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-14c03439b5d13be9c8ce",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-5dc292074853b0cd0952",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-a0439fdbe75a51d5c122",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-0160e4f8005f855a2a7b",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-3d207a98dfc12ccce194",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-bccd1dcdf9a58e748ecb",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-9b3e2107921620929f9b",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-6c5cefa257dcd763cb80",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-08eb25943bb9ae370979",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-1fd2325b383813dd7449",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-6e4cf6f6491f4b775cdc",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-1c7c2c4c0ba0695011f5",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-847648245956ca428232",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-0e2989e004c00072d83b",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-481437a402d49d35e502",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-a3e2a0a5e312e1792051",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-cc502d8166e6075ea5d4",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-664dd1649519fc9974a8",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-b39ba70e3ad86bb1ca04",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-f45166acc5b7710f8cc2",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-7d41c5eee0a26e1d1a56",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-87bc3a5b5a567447f920",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-4f3ca2fc018f6d1aaa49",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-cc4a23c8d944143c26c4",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-c1ed1650b19732a385c1",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-59f0429162e65d8981e4",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-3c14f19903f2d30b0e5b",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-df51a40650fabdc75416",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-121d82bc8f081abc65a6",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-fa51b37338a4270946be",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required",
+        "narrative_duplicate"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-2f20d86b3cdc308c6497",
+      "editorial_issues": [
+        "human_or_model_editorial_review_required"
+      ],
+      "publication_rejection": "unreviewed_causal_draft",
+      "eligible_for_automatic_publishing": false
+    },
+    {
+      "content_id": "astra-proposal-e60b0ec8f26f1a76765b",
       "editorial_issues": [
         "human_or_model_editorial_review_required",
         "narrative_duplicate"
