@@ -4,7 +4,9 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
-from astra_v2.story_expansion_2000 import MECHANISMS, ANIMAL_PAIRS, SETTINGS
+from astra_v2.story_expansion_2000 import MECHANISMS as BASE_MECHANISMS, ANIMAL_PAIRS, SETTINGS
+from astra_v2.story_factory_premises import NEW_MECHANISMS
+MECHANISMS = BASE_MECHANISMS + NEW_MECHANISMS
 
 TARGET = 196000
 CONTEXTS = (
@@ -31,8 +33,8 @@ CONTEXTS = (
     ("as the garden lights dimmed", "the evening visitors"),
     ("before the children's recital", "the music teachers"),
 )
-# 30 mechanisms x 10 pairs x 10 settings x 22 contexts x 3 decision roles
-# = 198,000 slots; first 196,000 are addressable without storing them.
+# Capacity is derived from authored source premises and variation dimensions.
+# Candidate slots are not independently original plots.
 CAPACITY = len(MECHANISMS)*len(ANIMAL_PAIRS)*len(SETTINGS)*len(CONTEXTS)*3
 assert CAPACITY >= TARGET
 
