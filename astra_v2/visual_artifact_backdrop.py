@@ -49,33 +49,25 @@ def apply_backdrop(image, shot, identity):
     if scene is None:
         return image
     seed=int.from_bytes(hashlib.sha256((str(identity) + "|" + scene).encode()).digest()[:4],"big")
-    palette=PALETTES[seed%len(PALETTES)]
+    # Keep a consistent palette per environment; story identity may vary details,
+    # but must not make a snowfield look like a desert or vice versa.
+    palette=PALETTES[SCENES.index(scene)%len(PALETTES)]
     bg,accent,light,star=palette
-    # Upper half environmental silhouette; actors and captions remain rendered
-    # later by the existing Studio pipeline.
+    # A quiet atmospheric background avoids the former shared skyline/triangle
+    # shapes colliding with the recognizable, scene-specific focal objects.
     overlay=Image.new("RGBA",image.size,(0,0,0,0))
     d=ImageDraw.Draw(overlay)
-    if scene in {"city","village","castle","library","museum","workshop","laboratory"}:
-        for i in range(7):
-            x=i*165-25
-            h=200+(seed//(i+1))%230
-            d.rectangle((x,940-h,x+130,940),fill=accent+"99")
-            for yy in range(940-h+35,925,65):
-                d.rectangle((x+30,yy,x+55,yy+22),fill=light+"88")
-    elif scene in {"forest","garden","island","snowfield","mountain","desert"}:
-        for i in range(7):
-            x=i*190-80
-            peak=380+(seed//(i+1))%260
-            d.polygon(((x,950),(x+100,950-peak),(x+220,950)),fill=accent+"99")
-    elif scene in {"observatory","lighthouse","railway","harbor","space"}:
-        d.ellipse((240,380,840,980),outline=light+"99",width=22)
-        d.polygon(((280,940),(360,530),(720,530),(800,940)),fill=accent+"88")
+    if scene in {"underwater","harbor","island"}:
+        d.arc((-120,710,1200,1100),180,350,fill=light+"55",width=13)
+    elif scene in {"space","observatory","snowfield"}:
+        for i in range(8):
+            x=90+(seed//(i+1)+i*127)%900
+            y=220+(seed//(i+3)+i*71)%330
+            d.ellipse((x,y,x+8,y+8),fill=light+"99")
+    elif scene in {"forest","garden","mountain","desert"}:
+        d.arc((-200,730,1280,1150),180,355,fill=accent+"88",width=18)
     else:
-        for i in range(11):
-            x=(seed+i*193)%1080
-            y=300+(seed//(i+1))%600
-            r=15+(i*11)%70
-            d.ellipse((x-r,y-r,x+r,y+r),outline=light+"99",width=7)
+        d.line((90,950,990,950),fill=accent+"99",width=16)
     # Readable scene-specific motifs replace artificial identity barcodes.
     # The backdrop is still opt-in and remains behind foreground actors.
     if scene == "observatory":
