@@ -428,6 +428,8 @@ jobs:
             done
             if [ -f character-continuity.json ]; then git add -- character-continuity.json; fi
             if [ -f astra_story_history.json ]; then git add -- astra_story_history.json; fi
+            # Stage the new diagnostic report; copying alone does not commit it.
+            if [ -s story_supply_diagnostic.json ]; then git add -- story_supply_diagnostic.json; fi
             if ! git diff --cached --quiet; then
               git commit -m 'Update verified ASTRA V2 runtime journal [skip ci]'
               git push origin HEAD:refs/heads/astra-state
