@@ -5,6 +5,7 @@ This module never authorizes publication or changes production_ready.
 from astra_v2.story_planning import planning_issues
 from astra_v2.shorts_novelty import is_near_duplicate
 from astra_v2.publication_quality import publication_rejection
+from astra_v2.proposal_novelty_index import NoveltyIndex
 
 
 
@@ -62,7 +63,7 @@ def is_semantic_near_duplicate(story, history=(), threshold=0.72):
     """Detect high-overlap plot narration; conservative and deterministic."""
     return semantic_duplicate_match(story, history, threshold) is not None
 
-def editorial_issues(story, history=()):
+def editorial_issues(story, history=(), novelty_index=None):
     issues = list(planning_issues(story))
     beats = story.get("story_beats") or []
     narration = " ".join(str(b.get("speech") or "") for b in beats if isinstance(b, dict))
@@ -70,7 +71,9 @@ def editorial_issues(story, history=()):
         issues.append("insufficient_narrative_detail")
     if len({str(b.get("visual") or "") for b in beats if isinstance(b, dict)}) < 3:
         issues.append("insufficient_visual_variety")
-    if is_near_duplicate(story, history) or is_semantic_near_duplicate(story, history):
+    duplicate = (novelty_index.is_near_duplicate(story) if novelty_index is not None
+                 else is_near_duplicate(story, history))
+    if duplicate or is_semantic_near_duplicate(story, history):
         issues.append("narrative_duplicate")
     if story.get("kind") == "unreviewed_causal_draft":
         issues.append("human_or_model_editorial_review_required")
@@ -82,8 +85,9 @@ def triage(stories, history=()):
     review = []
     rejected = []
     seen = list(history)
+    novelty_index = NoveltyIndex(seen)
     for story in stories:
-        issues = editorial_issues(story, seen)
+        issues = editorial_issues(story, seen, novelty_index=novelty_index)
         item = {"content_id": story.get("content_id"), "title": story.get("title"),
                 "issues": issues,
                 "publication_blocked": bool(publication_rejection(story))}
@@ -103,4 +107,5 @@ def triage(stories, history=()):
         else:
             review.append(item)
         seen.append(story)
+        novelty_index.add(story)
     return {"ready_for_review": review, "needs_work": rejected}
