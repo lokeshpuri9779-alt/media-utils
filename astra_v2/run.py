@@ -329,6 +329,15 @@ def run():
         raise
     finally:
         state["last_outcome"] = report["outcome"]
+        # Persist a bounded, non-sensitive production outcome so scheduled-run
+        # failures remain diagnosable even when Actions logs are unavailable.
+        state["last_production_result"] = {
+            "at": report["at"],
+            "outcome": str(report["outcome"])[:80],
+            "reason": str(report.get("reason") or "")[:250],
+            "content_id": str(report.get("content_id") or "")[:160],
+            "video_url": str(report.get("video_url") or "")[:250],
+        }
         write_json(STATE_FILE, state)
         report.update(
             attempts_today=state["attempts"],
