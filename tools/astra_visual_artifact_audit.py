@@ -13,15 +13,17 @@ from pathlib import Path
 import numpy as np
 from imageio_ffmpeg import get_ffmpeg_exe
 
-SAMPLE_FPS = 2
+SAMPLE_FPS = 6
 SAMPLE_SIZE = (96, 170)
 
 
 def audit_samples(frames, fps=SAMPLE_FPS):
     """Find obvious blank runs, held frames and one-frame luminance flashes."""
     arr = np.asarray(frames, dtype=np.uint8)
-    if arr.ndim != 3 or arr.shape[0] < 2:
-        raise ValueError("Need at least two grayscale frames (N,H,W)")
+    if not (0 < fps <= 120):
+        raise ValueError("fps must be between 0 and 120")
+    if arr.ndim != 3 or arr.shape[0] < 2 or not arr.shape[1] or not arr.shape[2]:
+        raise ValueError("Need at least two nonempty grayscale frames (N,H,W)")
     means = arr.mean(axis=(1, 2))
     dark = (arr < 12).mean(axis=(1, 2)) > .985
     bright = (arr > 245).mean(axis=(1, 2)) > .985
@@ -43,8 +45,25 @@ def audit_samples(frames, fps=SAMPLE_FPS):
 
     runs(dark, "nearly_black_frames", 1.0)
     runs(bright, "nearly_white_frames", 1.0)
+    # Both horizontal edges black while the central picture is present:
+    # a diagnostic for unintended letterboxing in a vertical Short.
+    edge_rows = max(1, arr.shape[1] // 20)
+    edge_dark = ((arr[:, :edge_rows, :] < 12).mean(axis=(1, 2)) > .97) & \
+                ((arr[:, -edge_rows:, :] < 12).mean(axis=(1, 2)) > .97)
+    middle = arr[:, edge_rows:-edge_rows, :] if arr.shape[1] > 2 * edge_rows else arr
+    edge_bars = edge_dark & (middle.mean(axis=(1, 2)) > 35)
+    runs(edge_bars, "horizontal_black_bars", 2.0)
     # Consecutive frame-pair differences are not independent scene boundaries.
     runs(diffs < .35, "near_frozen_frames", 3.0)
+    # Repeated A/B/A brightness changes may indicate unintended flicker.
+    # These are review candidates, not proof of a rendering defect.
+    if len(means) >= 5:
+        delta = np.diff(means)
+        alternating = ((delta[:-1] * delta[1:] < 0)
+                       & (np.abs(delta[:-1]) >= 30)
+                       & (np.abs(delta[1:]) >= 30)
+                       & (np.abs(means[:-2] - means[2:]) <= 15))
+        runs(alternating, "alternating_luminance_flicker", .5)
     # A single bright/dark spike returning to its original level is more
     # suspicious than a legitimate sustained lighting change or scene cut.
     for i in range(1, len(means) - 1):
@@ -81,7 +100,7 @@ def audit_videos(paths):
         except (OSError, RuntimeError, ValueError, subprocess.SubprocessError) as exc:
             results[str(path)] = {"status": "unavailable", "warnings": [],
                                   "error": str(exc)[:240]}
-    return {"version": 1, "sample_fps": SAMPLE_FPS,
+    return {"version": 2, "sample_fps": SAMPLE_FPS,
             "purpose": "Objective diagnostic evidence; human visual review still required",
             "videos": results}
 
