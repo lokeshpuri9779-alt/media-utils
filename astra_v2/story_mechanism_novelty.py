@@ -11,6 +11,9 @@ def mechanism_novelty_queue(history_mechanisms=(), limit=None):
     """Select at most one review candidate per unused mechanism."""
     if limit is not None and (not isinstance(limit, int) or limit < 0):
         raise ValueError("limit_must_be_nonnegative_integer")
+    if limit == 0:
+        return {"review_queue": [], "suppressed_variants": 0,
+                "publication_enabled": False}
     used = set(history_mechanisms)
     selected = []
     rejected_repeats = 0
