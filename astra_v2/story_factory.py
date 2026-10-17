@@ -57,6 +57,9 @@ def candidate_at(index):
       f"{partner.capitalize()} examined the evidence and realized {clue}; together they revised their plan rather than repeating the mistake.",
       f"With {audience} watching, they {resolution}, then explained the clue so their neighbors could prevent the problem next time."
     ]
+    if role == 2:
+        beats[1] = f"{partner.capitalize()} tried to isolate the problem first, but {setback}; {lead} stopped the attempt before further damage."
+        beats[2] = f"{lead.capitalize()} compared the failed attempt with the evidence and realized {clue}; they planned a safer joint response."
     identity=f"factory-v1:{index}:{key}:{a}:{b}:{setting}:{context[0]}:{role}"
     plot_signature = hashlib.sha256(key.encode()).hexdigest()[:16]
     return {"plot_signature":plot_signature,"candidate_id":hashlib.sha256(identity.encode()).hexdigest()[:24],
