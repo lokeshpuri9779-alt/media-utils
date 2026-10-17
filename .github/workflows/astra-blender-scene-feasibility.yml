@@ -1,0 +1,30 @@
+name: ASTRA Blender Scene Feasibility
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - astra/batch-256-scene-motifs
+    paths:
+      - 'scripts/astra_blender_scene_probe.py'
+      - '.github/workflows/astra-blender-scene-feasibility.yml'
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Blender
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y blender
+      - name: Render bounded sample
+        run: blender -b -t 2 --python scripts/astra_blender_scene_probe.py -- --output runtime-artifacts/blender-scene-probe
+      - name: Upload samples and timing
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-blender-scene-probe
+          path: runtime-artifacts/blender-scene-probe/
+          retention-days: 7
