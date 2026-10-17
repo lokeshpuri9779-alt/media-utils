@@ -3,7 +3,7 @@
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 19,
-  "confirmed_today": 18,
+  "confirmed_today": 19,
   "last_attempt_at": "2026-10-17T00:41:23.531685+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -1771,42 +1771,24 @@
       "format": "short",
       "uploaded_at": "2026-10-17T00:33:42.563418+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "FGZT87SWcYM": {
-      "content_id": "rayvan-original-tideglass-v1",
+    },
+    "rayvan-original-tideglass-v1": {
+      "video_id": "FGZT87SWcYM",
+      "confirmed_at": "2026-10-17T01:12:50.914694+00:00",
       "title": "The Glass That Held the Tide",
-      "day": "2026-10-17",
-      "uploaded_at": "2026-10-17T00:41:25.250354+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "45e4e425f9a1aa98a98b2a315291677ba8cd1d6ac241a0b1a1885e308638456c",
-      "story_beats": [
-        {
-          "speech": "A diver found a glass bottle containing a tiny moving shoreline."
-        },
-        {
-          "speech": "At home, she learned the nearby beach had lost its tide overnight."
-        },
-        {
-          "speech": "A hairline crack appeared as the tiny waves pushed against the glass."
-        },
-        {
-          "speech": "She opened the bottle at the empty shore, and the tide rolled back beneath the moon."
-        }
-      ],
+      "uploaded_at": "2026-10-17T00:41:25.250354+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-10-17T00:40:45.165470+00:00",
+  "last_preflight_at": "2026-10-17T01:12:50.449007+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-17T00:41:25.539504+00:00",
+    "at": "2026-10-17T01:13:45.956675+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -3909,9 +3891,9 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-17T00:41:25.539458+00:00",
-    "publication_outcome": "processing",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-17T01:13:45.956600+00:00",
+    "publication_outcome": "quality_skip",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
