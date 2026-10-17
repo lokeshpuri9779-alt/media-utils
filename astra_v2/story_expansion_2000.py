@@ -1,7 +1,7 @@
 """2,000 deterministic four-beat *editorial story candidates* for ASTRA.
 
-20 written causal premises x 10 animal duos x 10 settings = 2,000.
-NOT 2,000 independently authored plots. Not production-approved or publishable.
+30 written causal premises x 10 animal duos x 10 settings = 3,000.
+NOT 3,000 independently authored plots. Not production-approved or publishable.
 The exact plot mechanism remains visible for reviewers to reject repetitions.
 """
 from __future__ import annotations
@@ -95,6 +95,46 @@ MECHANISMS = (
   "they carried it into a bright tent, but the petals closed even tighter",
   "an old gardener's notebook explained that it opened in cool darkness",
   "moved the flower outside and watched it open beneath the first stars"),
+ ("false-alarm","False Alarm at the Bridge","the warning bell rang although the bridge was empty",
+  "they closed the crossing, but the bell kept ringing after the wind stopped",
+  "a dangling vine was brushing the bell rope whenever the gate moved",
+  "secured the vine and tested the warning system before reopening the crossing"),
+ ("reversed-map","The Reversed Trail Map","the rescue map led volunteers away from the shelter",
+  "they followed the marked turns twice, but both paths ended at the same fence",
+  "the compass rose had been printed backward on the replacement sheet",
+  "corrected the orientation and marked the verified route to the shelter"),
+ ("shared-water","The Shared Water Tank","two gardens received too little water from their shared tank",
+  "they opened both taps wider, but the tank emptied even faster",
+  "a hidden leak beneath the connecting pipe was wasting the supply",
+  "patched the pipe and agreed on a fair watering schedule"),
+ ("clock-delay","The Late Festival Clock","the tower clock announced the festival an hour too late",
+  "they reset the hands, but the clock fell behind again by noon",
+  "the pendulum was brushing a loose banner on each swing",
+  "moved the banner and checked the clock against the town bell"),
+ ("echo-signal","The Misleading Echo","a distress whistle seemed to come from the abandoned quarry",
+  "they searched the quarry, but nobody was there to answer",
+  "the canyon wall was reflecting a whistle from the opposite ridge",
+  "followed the direct sound and helped the stranded traveler return"),
+ ("seed-mixup","The Mixed Seed Trays","the nursery's labeled seedlings grew into the wrong flowers",
+  "they swapped the labels, but the next row was still mismatched",
+  "the trays had been rotated when the greenhouse roof was repaired",
+  "matched each seedling to the planting records and restored the rows"),
+ ("stuck-ferry","The Stuck Ferry Rope","the small ferry stopped halfway across the quiet channel",
+  "they pulled harder, but the guide rope tightened around its wheel",
+  "a drifting branch had jammed the pulley beneath the deck",
+  "cleared the branch from shore and tested the ferry before passengers boarded"),
+ ("silent-radio","The Silent Radio","the lookout radio stopped receiving the daily weather bulletin",
+  "they replaced its batteries, but only faint static came through",
+  "a bent antenna connector had come loose during the last storm",
+  "secured the connector and confirmed the bulletin with the lookout"),
+ ("mistaken-footprints","The Footprints That Vanished","fresh footprints led toward the locked storage shed",
+  "they suspected a visitor, but the shed's seal had never been broken",
+  "a wheeled cart left tread marks that looked like overlapping footsteps",
+  "traced the cart to its owner and cleared the misunderstanding"),
+ ("weight-balance","The Uneven Cargo Cart","the supply cart tilted dangerously on the market road",
+  "they tightened its wheels, but the cart still leaned at every corner",
+  "heavy jars had been packed on one side beneath the cloth",
+  "balanced the load and delivered the supplies without a spill"),
  ("missing-box-key","Locked Keepsake Box","a small keepsake box stayed locked when its owner needed an old photograph",
   "they tried a spare key, but it did not fit the delicate latch",
   "a stamped mark beneath the box named the original village craftsman",

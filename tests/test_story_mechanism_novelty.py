@@ -15,7 +15,7 @@ class MechanismNoveltyQueueTests(unittest.TestCase):
         result = mechanism_novelty_queue()
         keys = [item["mechanism"] for item in result["review_queue"]]
         self.assertEqual(len(keys), len(set(keys)))
-        self.assertEqual(len(keys), 20)
+        self.assertEqual(len(keys), 30)
         self.assertFalse(result["publication_enabled"])
         self.assertTrue(all(not x["production_ready"] for x in result["review_queue"]))
 
