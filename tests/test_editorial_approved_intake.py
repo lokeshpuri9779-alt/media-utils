@@ -34,6 +34,17 @@ class EditorialIntakeTests(unittest.TestCase):
         altered = dict(story, title=story["title"] + " changed")
         self.assertEqual(approved_intake([altered], [approved])["intake_count"], 0)
 
+    def test_published_plot_fingerprint_blocks_intake(self):
+        candidates = catalog(limit=128)
+        passing = next((story for story in candidates if not candidate_issues(story)), None)
+        if passing is None:
+            self.skipTest("No authored candidate passes existing gates")
+        history = [{"content_id": "already-published",
+                    "plot_fingerprint": passing["plot_fingerprint"]}]
+        result = approved_intake([passing], [record(passing)], history)
+        self.assertEqual(result["intake_count"], 0)
+        self.assertIn("narrative_duplicate", result["audit"]["results"][0]["issues"])
+
     def test_missing_review_fails_closed(self):
         story = catalog(limit=1)[0]
         self.assertEqual(approved_intake([story], [])["intake_count"], 0)
