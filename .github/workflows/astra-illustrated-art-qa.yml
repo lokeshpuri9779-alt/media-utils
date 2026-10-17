@@ -1,0 +1,26 @@
+name: ASTRA Illustrated Art QA
+on:
+  pull_request:
+    paths:
+      - 'art/**'
+      - 'astra_v2/illustrated_asset_validation.py'
+      - 'tests/test_illustrated_asset_validation.py'
+      - '.github/workflows/astra-illustrated-art-qa.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'art/**'
+      - 'astra_v2/illustrated_asset_validation.py'
+      - 'tests/test_illustrated_asset_validation.py'
+      - '.github/workflows/astra-illustrated-art-qa.yml'
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pillow
+      - run: python -m unittest discover -s tests -p 'test_illustrated_asset_validation.py' -v
+      - run: python -m astra_v2.illustrated_asset_validation --root .
