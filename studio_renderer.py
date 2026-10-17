@@ -1626,6 +1626,9 @@ def _repair_plan(ch,plan,attempt):
 def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None):
     genre=ch.get('genre','challenge')
     if genre not in THEMES: raise ValueError('Unsupported genre')
+    if genre == 'fiction' and os.environ.get('ASTRA_UNIFIED_STORY_ENGINE', '0') == '1':
+        from astra_v2.unified_story_engine import validate_title_subject
+        validate_title_subject(ch)
     plan=make_plan(ch)
     if int(director_repair_pass or 0) > 0:
         plan=_repair_plan(ch,plan,int(director_repair_pass))
