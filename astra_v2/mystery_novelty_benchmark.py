@@ -120,6 +120,39 @@ def compare_against_legacy_counterparts(sample_start=10000, sample_count=100):
         "interpretation": "same-index legacy counterpart overlap; not a real-world editorial novelty rate",
     }
 
+
+def measure_sequential_novelty(sample_start=0, sample_count=300):
+    """Measure actual generated sequence pressure, adding each accepted candidate.
+
+    This is a synthetic in-memory diagnostic; never modifies the story ledger.
+    """
+    if sample_start < 0 or not 1 <= sample_count <= 1000:
+        raise ValueError("Invalid sequential window")
+    index = NoveltyIndex([])
+    accepted = []
+    semantic = []
+    duplicate_indices = []
+    for candidate_index in range(sample_start, sample_start + sample_count):
+        candidate = proposal(candidate_index)
+        if index.is_near_duplicate(candidate) or _semantic_match_features(
+            candidate, _semantic_features(candidate), semantic, 0.72
+        ) is not None:
+            duplicate_indices.append(candidate_index)
+        else:
+            accepted.append(candidate)
+            index.add(candidate)
+            semantic.append((candidate, _semantic_features(candidate)))
+    return {
+        "sample_start": sample_start,
+        "sample_count": sample_count,
+        "accepted_count": len(accepted),
+        "duplicate_count": len(duplicate_indices),
+        "duplicate_rate": round(len(duplicate_indices) / sample_count, 4),
+        "duplicate_indices": duplicate_indices,
+        "publication_approved": 0,
+        "history_mutated": False,
+    }
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--history-start", type=int, default=0)
@@ -127,6 +160,9 @@ if __name__ == "__main__":
     parser.add_argument("--sample-start", type=int, default=10000)
     parser.add_argument("--sample-count", type=int, default=100)
     args = parser.parse_args()
+    print("ASTRA_MYSTERY_SEQUENTIAL_NOVELTY=" + json.dumps(measure_sequential_novelty(
+        args.history_start, args.history_count
+    ), sort_keys=True))
     print("ASTRA_MYSTERY_COUNTERPART_COMPARISON=" + json.dumps(compare_against_legacy_counterparts(
         args.sample_start, args.sample_count
     ), sort_keys=True))
