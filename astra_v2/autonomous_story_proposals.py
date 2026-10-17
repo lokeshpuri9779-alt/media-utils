@@ -138,6 +138,17 @@ def proposal(index):
         ("twist", f"The comparison showed that {reversal}. This explained the original mystery rather than introducing a new one. {actor} checked the clue again and found that it fit the evidence gathered at the start.", clue if clue in VISUALS else "signal"),
         ("payoff", f"With the cause understood, {actor} {resolution}. The community saw how the evidence led to the solution {consequence}. The team recorded what they learned so the same problem could be recognized earlier next time.", _pick(index, VISUALS, 3)),
     )
+    # Reserve distinct, story-relevant visual keys across the four beats.
+    # This fixes avoidable visual repetition without changing narration or
+    # treating these unreviewed proposals as publishable.
+    visual_keys = [beat[2] for beat in beats]
+    if len(set(visual_keys)) < 3:
+        replacement = next(
+            (key for key in (setting_visual, "lantern", "clock", "garden")
+             if key not in visual_keys), None
+        )
+        if replacement is not None:
+            beats = beats[:3] + ((beats[3][0], beats[3][1], replacement),)
     fingerprint_text = " ".join(beat[1] for beat in beats).casefold()
     return {
         "content_id": "astra-proposal-" + hashlib.sha256(f"proposal-{index}".encode()).hexdigest()[:20],
