@@ -8,6 +8,8 @@ on:
       - 'astra_v2/proposal_performance_benchmark.py'
       - 'astra_v2/story_editorial.py'
       - 'astra_v2/proposal_novelty_index.py'
+      - 'astra_v2/semantic_candidate_index.py'
+      - 'astra_v2/semantic_index_benchmark.py'
       - '.github/workflows/astra-proposal-benchmark.yml'
 
 permissions:
@@ -61,6 +63,10 @@ jobs:
           with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as out:
               out.write("\n".join(lines) + "\n")
           PY
+      - name: Compare indexed and exhaustive semantic matching
+        run: |
+          python -m astra_v2.semantic_index_benchmark --count 500 --probes 100 | tee semantic-index-benchmark.json
+          python -m astra_v2.semantic_index_benchmark --count 1500 --probes 100 | tee semantic-index-benchmark-1500.json
       - name: Upload benchmark measurements
         uses: actions/upload-artifact@v4
         with:
@@ -68,5 +74,7 @@ jobs:
           path: |
             proposal-benchmark.json
             proposal-benchmark-500.json
+            semantic-index-benchmark.json
+            semantic-index-benchmark-1500.json
           if-no-files-found: error
           retention-days: 30
