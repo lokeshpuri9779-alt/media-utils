@@ -57,6 +57,20 @@ class StoryFactoryTests(unittest.TestCase):
         b=candidate_at(len(MECHANISMS)*2)
         self.assertEqual(a["premise_key"],b["premise_key"])
         self.assertNotEqual(a["story_beats"],b["story_beats"])
+    def test_scheduled_batch_size_and_resume(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            state=Path(tmp)/"state.json"
+            output=Path(tmp)/"candidates.jsonl"
+            self.assertEqual(generate(state,output,batch_size=500),500)
+            first=json.loads(state.read_text())
+            self.assertEqual(first["next_slot"],500)
+            self.assertEqual(len(output.read_text().splitlines()),500)
+            self.assertEqual(first["last_awaiting_review"],len(MECHANISMS))
+            self.assertEqual(generate(state,output,batch_size=500),500)
+            second=json.loads(state.read_text())
+            self.assertEqual(second["next_slot"],1000)
+            self.assertEqual(second["last_awaiting_review"],0)
+            self.assertEqual(len(output.read_text().splitlines()),500)
     def test_sample_unique_ids(self):
         self.assertEqual(len({candidate_at(i)["candidate_id"] for i in range(1000)}),1000)
 if __name__=="__main__": unittest.main()
