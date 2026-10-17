@@ -17,10 +17,12 @@ def approved_intake(stories, reviews, history=()):
             "publication_triggered": False}
 
 
-def intake_files(stories_path, reviews_path, output_path,\n                 publisher_path="astra_v2_state.json", story_history_path="astra_story_history.json"):
+def intake_files(stories_path, reviews_path, output_path,
+                 publisher_path="astra_v2_state.json", story_history_path="astra_story_history.json"):
     story_doc = json.loads(Path(stories_path).read_text(encoding="utf-8"))
     review_doc = json.loads(Path(reviews_path).read_text(encoding="utf-8"))
-    history = load_history(publisher_path, story_history_path)\n    result = approved_intake(story_doc["stories"], review_doc["reviews"], history)
+    history = load_history(publisher_path, story_history_path)
+    result = approved_intake(story_doc["stories"], review_doc["reviews"], history)
     output = Path(output_path)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps({"stories": result["stories"]}, indent=2),
@@ -32,9 +34,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--stories", required=True)
     parser.add_argument("--reviews", required=True)
-    parser.add_argument("--output", required=True)\n    parser.add_argument("--publisher-state", default="astra_v2_state.json")\n    parser.add_argument("--story-history", default="astra_story_history.json")
+    parser.add_argument("--output", required=True)
+    parser.add_argument("--publisher-state", default="astra_v2_state.json")
+    parser.add_argument("--story-history", default="astra_story_history.json")
     args = parser.parse_args()
-    result = intake_files(args.stories, args.reviews, args.output,\n                          args.publisher_state, args.story_history)
+    result = intake_files(args.stories, args.reviews, args.output,
+                          args.publisher_state, args.story_history)
     print("ASTRA_EDITORIAL_INTAKE=" + json.dumps({
         "intake_count": result["intake_count"],
         "rejected_count": len(result["audit"]["results"]) - result["intake_count"],
