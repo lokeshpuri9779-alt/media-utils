@@ -1,4 +1,8 @@
 import unittest
+import json
+import tempfile
+from pathlib import Path
+from astra_v2.editorial_approved_intake import intake_files
 from astra_v2.story_forge import catalog
 from astra_v2.autonomous_story_proposals import proposal
 from astra_v2.editorial_approval_manifest import story_digest
@@ -44,6 +48,18 @@ class EditorialIntakeTests(unittest.TestCase):
         result = approved_intake([passing], [record(passing)], history)
         self.assertEqual(result["intake_count"], 0)
         self.assertIn("narrative_duplicate", result["audit"]["results"][0]["issues"])
+
+    def test_missing_persistent_history_blocks_export(self):
+        story = catalog(limit=1)[0]
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / "stories.json").write_text(json.dumps({"stories": [story]}))
+            (root / "reviews.json").write_text(json.dumps({"reviews": [record(story)]}))
+            with self.assertRaises(FileNotFoundError):
+                intake_files(root / "stories.json", root / "reviews.json",
+                             root / "approved.json", root / "missing-state.json",
+                             root / "missing-history.json")
+            self.assertFalse((root / "approved.json").exists())
 
     def test_missing_review_fails_closed(self):
         story = catalog(limit=1)[0]
