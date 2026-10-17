@@ -78,9 +78,21 @@ jobs:
       - name: Restore published and reserved IDs
         run: |
           git fetch origin astra-state
-          for f in performance.json astra_v2_state.json; do
-            git checkout origin/astra-state -- "$f" 2>/dev/null || true
+          for f in performance.json astra_v2_state.json astra_story_history.json; do
+            if git cat-file -e "origin/astra-state:$f" 2>/dev/null; then
+              git show "origin/astra-state:$f" > "$f"
+              echo "ASTRA_STATE_RESTORE=$f:restored"
+            else
+              # Missing history must remain missing, never replaced with an empty file.
+              rm -f "$f"
+              echo "ASTRA_STATE_RESTORE=$f:missing"
+            fi
           done
+          if test -s astra_v2_state.json && test -s astra_story_history.json; then
+            echo "ASTRA_EDITORIAL_HISTORY_READY=1"
+          else
+            echo "ASTRA_EDITORIAL_HISTORY_READY=0"
+          fi
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
