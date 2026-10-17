@@ -298,6 +298,17 @@ jobs:
                   report = {}
           except (OSError, ValueError):
               report = {}
+          # Workflow-level diagnostic is persisted even when preflight skips
+          # the render controller; never imply that an upload occurred.
+          state["last_workflow_result"] = {
+              "at": datetime.now(timezone.utc).isoformat(),
+              "preflight_due": os.getenv("PREFLIGHT_DUE", ""),
+              "preflight_step": os.getenv("PREFLIGHT_RESULT", "unknown"),
+              "publish_step": os.getenv("PUBLISH_RESULT", "unknown"),
+              "job_status_before_persist": os.getenv("JOB_RESULT", "unknown"),
+              "outcome": str(report.get("outcome") or "no_report")[:80],
+              "reason": str(report.get("reason") or "")[:250],
+          }
           state["last_character_memory_diagnostic"] = {
               "at": datetime.now(timezone.utc).isoformat(),
               "publication_outcome": report.get("outcome", "no_report"),
