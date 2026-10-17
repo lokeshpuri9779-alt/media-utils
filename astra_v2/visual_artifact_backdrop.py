@@ -34,11 +34,12 @@ SCENE_TERMS = {
 }
 
 def choose_scene(shot):
-    text = " ".join(str(shot.get(k) or "") for k in
-                    ("story_environment", "visual_prompt", "speech", "headline")).lower()
-    for scene in SCENES:
-        if any(re.search(r"\b"+re.escape(term)+r"\b",text) for term in SCENE_TERMS[scene]):
-            return scene
+    # Authored setting wins over incidental location words in narration.
+    for key in ("story_environment", "visual_prompt", "speech", "headline"):
+        text = str(shot.get(key) or "").lower()
+        for scene in SCENES:
+            if any(re.search(r"\b"+re.escape(term)+r"\b",text) for term in SCENE_TERMS[scene]):
+                return scene
     return None
 
 def apply_backdrop(image, shot, identity):
@@ -75,5 +76,8 @@ def apply_backdrop(image, shot, identity):
             y=300+(seed//(i+1))%600
             r=15+(i*11)%70
             d.ellipse((x-r,y-r,x+r,y+r),outline=light+"99",width=7)
+    # Confine environmental art to the upper scene region. Existing subject,
+    # headline, and caption drawing retain ownership of their own layers.
+    overlay.paste((0, 0, 0, 0), (0, 1100, 1080, 1920))
     image.paste(Image.alpha_composite(image.convert("RGBA"),overlay).convert("RGB"))
     return image
