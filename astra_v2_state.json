@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-17",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 20,
+  "attempts": 21,
   "confirmed_today": 20,
-  "last_attempt_at": "2026-10-17T09:16:54.115087+00:00",
+  "last_attempt_at": "2026-10-17T10:11:32.102816+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1789,14 +1789,40 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "quality_skip",
+  "pending": {
+    "qdwyEqtbv2g": {
+      "content_id": "rayvan-forge-77e5909cd28c28aa",
+      "title": "The Crab and the Split Lighthouse Beam",
+      "day": "2026-10-17",
+      "uploaded_at": "2026-10-17T10:11:34.551088+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "0f7f94318bfd77a6c66138f3c2b1220eacf6de069e859dc7f0bc50560b0063a8",
+      "story_beats": [
+        {
+          "speech": "A crab saw two lighthouse beams sweeping different directions during a foggy harbor night."
+        },
+        {
+          "speech": "She climbed the tower and found a loose prism dividing the single warning light."
+        },
+        {
+          "speech": "She held the prism in place while the keeper secured its bracket against the shaking wind."
+        },
+        {
+          "speech": "The restored beam guided the last ferry around the reef and safely into the harbor."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-17T10:00:40.522431+00:00",
+  "last_preflight_at": "2026-10-17T10:10:14.462832+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-17T10:01:23.129860+00:00",
+    "at": "2026-10-17T10:11:34.915659+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -3919,12 +3945,35 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-forge-77e5909cd28c28aa": {
+      "at": "2026-10-17T10:11:32.102799+00:00",
+      "title": "The Crab and the Split Lighthouse Beam",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "0f7f94318bfd77a6c66138f3c2b1220eacf6de069e859dc7f0bc50560b0063a8",
+      "story_beats": [
+        {
+          "speech": "A crab saw two lighthouse beams sweeping different directions during a foggy harbor night."
+        },
+        {
+          "speech": "She climbed the tower and found a loose prism dividing the single warning light."
+        },
+        {
+          "speech": "She held the prism in place while the keeper secured its bracket against the shaking wind."
+        },
+        {
+          "speech": "The restored beam guided the last ferry around the reef and safely into the harbor."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-17T10:01:23.129781+00:00",
-    "publication_outcome": "quality_skip",
-    "character_memory": "not_reported",
+    "at": "2026-10-17T10:11:34.915599+00:00",
+    "publication_outcome": "processing",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
