@@ -3,7 +3,7 @@
   "day": "2026-10-19",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 1,
-  "confirmed_today": 0,
+  "confirmed_today": 1,
   "last_attempt_at": "2026-10-18T19:21:26.350904+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -2027,57 +2027,38 @@
       "format": "short",
       "uploaded_at": "2026-10-18T17:12:05.203406+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "cbHsfTGDcMA": {
-      "content_id": "rayvan-forge-f105a1704c26058b",
+    },
+    "rayvan-forge-f105a1704c26058b": {
+      "video_id": "cbHsfTGDcMA",
+      "confirmed_at": "2026-10-18T19:22:08.743910+00:00",
       "title": "The Heron and the Broken Bridge",
-      "day": "2026-10-19",
-      "uploaded_at": "2026-10-18T19:21:27.869906+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "3227064425e3d75fa150e2275d7bbd38b033284d4b55a8133e9b56ba9b9e2dcc",
-      "story_beats": [
-        {
-          "speech": "A heron discovered that the village footbridge sagged whenever the morning delivery cart reached its center."
-        },
-        {
-          "speech": "She tied the loose rail to a tree, but the bridge deck still tilted under an empty basket."
-        },
-        {
-          "speech": "Beneath the planks, she found a counterweight rope trapped around a fallen branch instead of its pulley."
-        },
-        {
-          "speech": "The heron freed the rope from shore, tested the empty bridge, and reopened it only after the counterweight balanced."
-        }
-      ],
+      "uploaded_at": "2026-10-18T19:21:27.869906+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-18T19:20:04.180500+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-18T19:22:08.294644+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-18T19:21:28.346322+00:00",
+    "at": "2026-10-18T19:22:08.796525+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-18T08:46:01.214178+00:00",
   "reserved": {
@@ -4901,10 +4882,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-18T19:21:28.346240+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-18T19:22:08.796451+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -4912,9 +4893,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-18T19:21:28.346306+00:00",
+    "at": "2026-10-18T19:22:08.796516+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -4925,12 +4906,12 @@
     "video_url": "https://www.youtube.com/watch?v=cbHsfTGDcMA"
   },
   "last_workflow_result": {
-    "at": "2026-10-18T19:21:28.346217+00:00",
-    "preflight_due": "true",
+    "at": "2026-10-18T19:22:08.796435+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": ""
+    "outcome": "published",
+    "reason": "min_interval"
   }
 }
