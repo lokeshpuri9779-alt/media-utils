@@ -118,3 +118,10 @@ Explicit user approval is required before:
 - [x] Add a manifest validator for transparency, dimensions, path safety, and approval status.
 - [ ] Import individually rendered high-resolution ASTRA characters, props, and vertical backgrounds; the composite overview sheet alone is not production-ready.
 - [ ] Run the validator and render a sample Short with registered generated art before marking deployment complete.
+
+
+## Shorts story-supply incident — 2026-10-18
+- [x] Confirm publisher preflight is authorized but latest outcome is `quality_skip`, not an upload.
+- [x] Identify zero remaining production-ready authored stories after history exclusions.
+- [x] Add 12 fresh authored causal plots to the existing Story Forge catalog without promoting the old 996 drafts.
+- [ ] Verify CI and next publisher result; resolve only after a public YouTube URL is confirmed.
