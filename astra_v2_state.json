@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-18",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 21,
-  "confirmed_today": 20,
-  "last_attempt_at": "2026-10-18T16:01:06.512205+00:00",
+  "attempts": 22,
+  "confirmed_today": 21,
+  "last_attempt_at": "2026-10-18T16:16:25.007000+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1979,30 +1979,38 @@
       "format": "short",
       "uploaded_at": "2026-10-18T15:53:29.809120+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-cfc637be8f133b76": {
+      "video_id": "HMTd-G05bhA",
+      "confirmed_at": "2026-10-18T16:15:37.168045+00:00",
+      "title": "The Puffin and the Fog Horn",
+      "format": "short",
+      "uploaded_at": "2026-10-18T16:01:07.795401+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "HMTd-G05bhA": {
-      "content_id": "rayvan-forge-cfc637be8f133b76",
-      "title": "The Puffin and the Fog Horn",
+    "2zlx72fcT5c": {
+      "content_id": "rayvan-forge-5eae9e0195996032",
+      "title": "The Kingfisher and the Signal Flags",
       "day": "2026-10-18",
-      "uploaded_at": "2026-10-18T16:01:07.795401+00:00",
+      "uploaded_at": "2026-10-18T16:16:26.844142+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "9e9d63d377aa2b261fefdce2a481476be867969cb2ef5bfb0ce4e208a2e564c5",
+      "plot_fingerprint": "fde4687b7601596682dce7582f8f28e791bb1bf65cc68e8976f22f0448827dec",
       "story_beats": [
         {
-          "speech": "A puffin heard the island fog horn sounding twice whenever the lighthouse keeper pressed it once."
+          "speech": "A kingfisher saw two harbor signal flags pointing in opposite directions as fog covered the bay."
         },
         {
-          "speech": "She checked the button and cables, but the second blast still echoed across the harbor."
+          "speech": "She copied the nearest flag, but a fishing boat turned toward the shallow rocks instead."
         },
         {
-          "speech": "She found a cracked metal flap that bounced in the wind and briefly opened the horn again."
+          "speech": "She climbed the lighthouse stairs and found a tangled pulley holding the warning flag upside down."
         },
         {
-          "speech": "The keeper replaced the flap and tested one clear blast before allowing the ferries to depart."
+          "speech": "She freed the pulley and rang the harbor bell until the boat steered back into safe water."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -2010,11 +2018,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-18T16:00:25.140316+00:00",
+  "last_preflight_at": "2026-10-18T16:15:36.679750+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-18T16:01:08.111177+00:00",
+    "at": "2026-10-18T16:16:27.141420+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -4712,10 +4720,33 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-forge-5eae9e0195996032": {
+      "at": "2026-10-18T16:16:25.006969+00:00",
+      "title": "The Kingfisher and the Signal Flags",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "fde4687b7601596682dce7582f8f28e791bb1bf65cc68e8976f22f0448827dec",
+      "story_beats": [
+        {
+          "speech": "A kingfisher saw two harbor signal flags pointing in opposite directions as fog covered the bay."
+        },
+        {
+          "speech": "She copied the nearest flag, but a fishing boat turned toward the shallow rocks instead."
+        },
+        {
+          "speech": "She climbed the lighthouse stairs and found a tangled pulley holding the warning flag upside down."
+        },
+        {
+          "speech": "She freed the pulley and rang the harbor bell until the boat steered back into safe water."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-18T16:01:08.111092+00:00",
+    "at": "2026-10-18T16:16:27.141326+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -4726,20 +4757,20 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-18T16:01:08.111162+00:00",
+    "at": "2026-10-18T16:16:27.141395+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-18T16:00:56.065362+00:00",
+    "at": "2026-10-18T16:16:08.524893+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-cfc637be8f133b76",
-    "video_url": "https://www.youtube.com/watch?v=HMTd-G05bhA"
+    "content_id": "rayvan-forge-5eae9e0195996032",
+    "video_url": "https://www.youtube.com/watch?v=2zlx72fcT5c"
   },
   "last_workflow_result": {
-    "at": "2026-10-18T16:01:08.111070+00:00",
+    "at": "2026-10-18T16:16:27.141307+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
