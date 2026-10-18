@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-19",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 2,
-  "confirmed_today": 1,
-  "last_attempt_at": "2026-10-18T19:29:54.206219+00:00",
+  "attempts": 3,
+  "confirmed_today": 2,
+  "last_attempt_at": "2026-10-18T19:39:46.207157+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -2035,30 +2035,38 @@
       "format": "short",
       "uploaded_at": "2026-10-18T19:21:27.869906+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-42ff731d8970abaa": {
+      "video_id": "FoZINAJ8H2U",
+      "confirmed_at": "2026-10-18T19:39:05.057108+00:00",
+      "title": "The Mole and the Silent Bakery",
+      "format": "short",
+      "uploaded_at": "2026-10-18T19:29:55.804142+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "FoZINAJ8H2U": {
-      "content_id": "rayvan-forge-42ff731d8970abaa",
-      "title": "The Mole and the Silent Bakery",
+    "rBxo1cVR-3k": {
+      "content_id": "rayvan-forge-ff415abd6e29a2ac",
+      "title": "The Badger and the Floating Library",
       "day": "2026-10-19",
-      "uploaded_at": "2026-10-18T19:29:55.804142+00:00",
+      "uploaded_at": "2026-10-18T19:39:47.367607+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "35b73dd382ec51258ca4b7c2d81c275ad2ebf2c66f5ed8505b8c8c084cc8f7c1",
+      "plot_fingerprint": "64009ea10d9ea9efc3f6de4aae53e78b426c7270f054feecac10cdf0c98d318d",
       "story_beats": [
         {
-          "speech": "A mole found the bakery oven cold just before the town's annual harvest breakfast was supposed to begin."
+          "speech": "A badger discovered rainwater creeping under the library entrance toward shelves of handwritten village records."
         },
         {
-          "speech": "He piled on extra firewood, but smoke spilled through the bakery door and forced everyone outside."
+          "speech": "He stacked books against the door, but water soaked the bottom volumes and continued spreading across the floor."
         },
         {
-          "speech": "From the roof ladder, the mole noticed a loose metal cap had slipped sideways over the chimney opening."
+          "speech": "Following a thin stream uphill, he found a blocked drain diverting the courtyard runoff toward the library."
         },
         {
-          "speech": "After the oven cooled, the baker secured the cap, checked the draft, and baked the morning loaves safely."
+          "speech": "The badger moved the books onto tables, cleared the drain with helpers, and dried the rescued records carefully."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -2066,11 +2074,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-18T19:29:02.814466+00:00",
+  "last_preflight_at": "2026-10-18T19:39:04.703769+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-18T19:29:56.125081+00:00",
+    "at": "2026-10-18T19:39:47.707420+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -4929,10 +4937,33 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-forge-ff415abd6e29a2ac": {
+      "at": "2026-10-18T19:39:46.207144+00:00",
+      "title": "The Badger and the Floating Library",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "64009ea10d9ea9efc3f6de4aae53e78b426c7270f054feecac10cdf0c98d318d",
+      "story_beats": [
+        {
+          "speech": "A badger discovered rainwater creeping under the library entrance toward shelves of handwritten village records."
+        },
+        {
+          "speech": "He stacked books against the door, but water soaked the bottom volumes and continued spreading across the floor."
+        },
+        {
+          "speech": "Following a thin stream uphill, he found a blocked drain diverting the courtyard runoff toward the library."
+        },
+        {
+          "speech": "The badger moved the books onto tables, cleared the drain with helpers, and dried the rescued records carefully."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-18T19:29:56.125015+00:00",
+    "at": "2026-10-18T19:39:47.707340+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -4943,20 +4974,20 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-18T19:29:56.125069+00:00",
+    "at": "2026-10-18T19:39:47.707406+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-18T19:29:42.043088+00:00",
+    "at": "2026-10-18T19:39:35.098433+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-42ff731d8970abaa",
-    "video_url": "https://www.youtube.com/watch?v=FoZINAJ8H2U"
+    "content_id": "rayvan-forge-ff415abd6e29a2ac",
+    "video_url": "https://www.youtube.com/watch?v=rBxo1cVR-3k"
   },
   "last_workflow_result": {
-    "at": "2026-10-18T19:29:56.124995+00:00",
+    "at": "2026-10-18T19:39:47.707322+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
