@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-18",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 14,
-  "confirmed_today": 13,
-  "last_attempt_at": "2026-10-18T01:53:37.444196+00:00",
+  "attempts": 15,
+  "confirmed_today": 14,
+  "last_attempt_at": "2026-10-18T02:07:16.509423+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1923,30 +1923,38 @@
       "format": "short",
       "uploaded_at": "2026-10-18T01:35:51.526279+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-ac270d1d65bd0048": {
+      "video_id": "oEK480SPf1U",
+      "confirmed_at": "2026-10-18T02:06:21.471157+00:00",
+      "title": "The Heron and the Moon Mail",
+      "format": "short",
+      "uploaded_at": "2026-10-18T01:53:38.935539+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "oEK480SPf1U": {
-      "content_id": "rayvan-forge-ac270d1d65bd0048",
-      "title": "The Heron and the Moon Mail",
+    "fBPVfTxL9pg": {
+      "content_id": "rayvan-forge-6351e7e849512afa",
+      "title": "The Penguin and the Warm Compass",
       "day": "2026-10-18",
-      "uploaded_at": "2026-10-18T01:53:38.935539+00:00",
+      "uploaded_at": "2026-10-18T02:07:18.359676+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "8fe13497fbfb11a810861ebbcadbecebfd038d0d38a6a948c6bbb282c57251e6",
+      "plot_fingerprint": "6a775106859c49763f53eee5caf7f9637da1c50260d46e0f4093720aa9bb66a1",
       "story_beats": [
         {
-          "speech": "A heron found a blue-glowing envelope on the riverbank beneath the old moonlit postbox."
+          "speech": "A penguin guide found every compass in the snow camp pointing away from the marked northern trail."
         },
         {
-          "speech": "She carried it through the village but the rain had erased the name and house number."
+          "speech": "The team followed old flags but reached a ridge where the wind had buried the familiar route."
         },
         {
-          "speech": "She noticed a faded stamp depicting the old water tower and followed its tiny landmarks through the quiet streets."
+          "speech": "The penguin found a strong magnet beside the map case and moved it away from the instruments."
         },
         {
-          "speech": "The heron delivered the letter to a retired cartographer who restored the village's lost map collection."
+          "speech": "The compasses settled and the team followed the corrected bearings safely back to the warm research camp."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -1954,11 +1962,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-18T01:52:52.807138+00:00",
+  "last_preflight_at": "2026-10-18T02:06:21.100413+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-18T01:53:39.283293+00:00",
+    "at": "2026-10-18T02:07:18.691489+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -4495,10 +4503,33 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-forge-6351e7e849512afa": {
+      "at": "2026-10-18T02:07:16.509407+00:00",
+      "title": "The Penguin and the Warm Compass",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "6a775106859c49763f53eee5caf7f9637da1c50260d46e0f4093720aa9bb66a1",
+      "story_beats": [
+        {
+          "speech": "A penguin guide found every compass in the snow camp pointing away from the marked northern trail."
+        },
+        {
+          "speech": "The team followed old flags but reached a ridge where the wind had buried the familiar route."
+        },
+        {
+          "speech": "The penguin found a strong magnet beside the map case and moved it away from the instruments."
+        },
+        {
+          "speech": "The compasses settled and the team followed the corrected bearings safely back to the warm research camp."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-18T01:53:39.283211+00:00",
+    "at": "2026-10-18T02:07:18.691419+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -4509,20 +4540,20 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-18T01:53:39.283278+00:00",
+    "at": "2026-10-18T02:07:18.691478+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-18T01:53:23.573621+00:00",
+    "at": "2026-10-18T02:07:00.058528+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-ac270d1d65bd0048",
-    "video_url": "https://www.youtube.com/watch?v=oEK480SPf1U"
+    "content_id": "rayvan-forge-6351e7e849512afa",
+    "video_url": "https://www.youtube.com/watch?v=fBPVfTxL9pg"
   },
   "last_workflow_result": {
-    "at": "2026-10-18T01:53:39.283188+00:00",
+    "at": "2026-10-18T02:07:18.691396+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
