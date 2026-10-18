@@ -1,0 +1,23 @@
+name: ASTRA - Editorial Candidate Report
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 3 * * *'
+permissions:
+  contents: read
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build review-only candidate report
+        run: PYTHONPATH=. python tools/astra_editorial_candidate_report.py --limit 100 --output astra-editorial-review.json
+      - name: Upload review artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-editorial-candidates
+          path: astra-editorial-review.json
+          retention-days: 14
