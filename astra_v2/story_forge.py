@@ -16,6 +16,7 @@ from astra_v2.authored_batch_407 import PLOTS as AUTHORED_BATCH_407
 from astra_v2.authored_batch_420 import PLOTS as AUTHORED_BATCH_420
 from astra_v2.authored_batch_421 import PLOTS as AUTHORED_BATCH_421
 from astra_v2.authored_batch_422 import PLOTS as AUTHORED_BATCH_422
+from astra_v2.authored_batch_423 import PLOTS as AUTHORED_BATCH_423
 
 PLOTS = [
     ("hedgehog-raincoat", "The Hedgehog and the Raincoat", "animal comedy",
@@ -888,7 +889,7 @@ NEW_AUTHORED_PLOTS.extend([
     ]),
 ])
 
-AUTHORED_KEYS = {row[0] for row in PILLOW_DUO_PLOTS + PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS + EDITORIAL_OCT2026_PLOTS + CROSSGENRE_DIRECTED_24 + AUTHORED_REPLENISHMENT_OCT2026 + AUTHORED_BATCH_341 + AUTHORED_BATCH_364 + AUTHORED_BATCH_407 + AUTHORED_BATCH_420 + AUTHORED_BATCH_421 + AUTHORED_BATCH_422}
+AUTHORED_KEYS = {row[0] for row in PILLOW_DUO_PLOTS + PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS + EDITORIAL_OCT2026_PLOTS + CROSSGENRE_DIRECTED_24 + AUTHORED_REPLENISHMENT_OCT2026 + AUTHORED_BATCH_341 + AUTHORED_BATCH_364 + AUTHORED_BATCH_407 + AUTHORED_BATCH_420 + AUTHORED_BATCH_421 + AUTHORED_BATCH_422 + AUTHORED_BATCH_423}
 
 def catalog(excluded_ids=None, excluded_titles=None, limit=256, excluded_plot_hashes=None, history=None, include_drafts=False, include_expansion=False):
     excluded = set(excluded_ids or ())
@@ -912,7 +913,7 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=256, excluded_plot_ha
         expanded = candidate_records()
     else:
         expanded = []
-    for key, title, genre, beats in (AUTHORED_BATCH_422 + AUTHORED_BATCH_421 + AUTHORED_BATCH_420 + AUTHORED_BATCH_407 + AUTHORED_BATCH_364 + AUTHORED_BATCH_341 + AUTHORED_REPLENISHMENT_OCT2026 + PILLOW_DUO_PLOTS + PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS + EDITORIAL_OCT2026_PLOTS + CROSSGENRE_DIRECTED_24 + (draft_catalog() if include_drafts else []) + expanded):
+    for key, title, genre, beats in (AUTHORED_BATCH_423 + AUTHORED_BATCH_422 + AUTHORED_BATCH_421 + AUTHORED_BATCH_420 + AUTHORED_BATCH_407 + AUTHORED_BATCH_364 + AUTHORED_BATCH_341 + AUTHORED_REPLENISHMENT_OCT2026 + PILLOW_DUO_PLOTS + PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS + EDITORIAL_OCT2026_PLOTS + CROSSGENRE_DIRECTED_24 + (draft_catalog() if include_drafts else []) + expanded):
         # Reject malformed or weak authored arcs before any expensive render.
         if len(beats) != 4 or any(not isinstance(b, (tuple, list)) or len(b) != 4 for b in beats):
             continue
