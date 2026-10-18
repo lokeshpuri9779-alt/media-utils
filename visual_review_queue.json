@@ -1,8 +1,40 @@
 {
-  "history_records": 807,
+  "history_records": 809,
   "read_only": true,
   "status": "review_required",
   "stories": [
+    {
+      "content_id": "rayvan-forge-32c5c0100a79e33a",
+      "distinct_visuals": 2,
+      "issues": [
+        "insufficient_visual_variety"
+      ],
+      "publication_approved_by_report": false,
+      "scene_count": 4,
+      "title": "The Otter and the Missing Ferry Bell",
+      "visuals": [
+        "ship",
+        "signal",
+        "ship",
+        "signal"
+      ]
+    },
+    {
+      "content_id": "rayvan-forge-1ab066c5130f679d",
+      "distinct_visuals": 2,
+      "issues": [
+        "insufficient_visual_variety"
+      ],
+      "publication_approved_by_report": false,
+      "scene_count": 4,
+      "title": "The Squirrel and the Late Clock",
+      "visuals": [
+        "clock",
+        "signal",
+        "clock",
+        "signal"
+      ]
+    },
     {
       "content_id": "rayvan-forge-e95945e765f72638",
       "distinct_visuals": 2,
@@ -1430,5 +1462,5 @@
       ]
     }
   ],
-  "visual_review_count": 89
+  "visual_review_count": 91
 }
