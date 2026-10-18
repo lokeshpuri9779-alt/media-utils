@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-18",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 17,
-  "confirmed_today": 16,
-  "last_attempt_at": "2026-10-18T02:36:42.042521+00:00",
+  "attempts": 18,
+  "confirmed_today": 17,
+  "last_attempt_at": "2026-10-18T02:53:27.903667+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1947,30 +1947,38 @@
       "format": "short",
       "uploaded_at": "2026-10-18T02:19:20.920922+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-33980efb0c8dfcd7": {
+      "video_id": "N14DRb8Zs9M",
+      "confirmed_at": "2026-10-18T02:52:45.552628+00:00",
+      "title": "The Fox and the Missing Shadow",
+      "format": "short",
+      "uploaded_at": "2026-10-18T02:36:43.738286+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "N14DRb8Zs9M": {
-      "content_id": "rayvan-forge-33980efb0c8dfcd7",
-      "title": "The Fox and the Missing Shadow",
+    "OK95FTLCBws": {
+      "content_id": "rayvan-forge-f117ff59af74412d",
+      "title": "The Squirrel and the Singing Roof",
       "day": "2026-10-18",
-      "uploaded_at": "2026-10-18T02:36:43.738286+00:00",
+      "uploaded_at": "2026-10-18T02:53:29.868193+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "46412db5260ceb5f5b7315032c060ea6734d6de066dc7ad021dce8acbabe334b",
+      "plot_fingerprint": "34b521ae902b5f7c37bb54744467b8bd03944644eef9e2931426b99364ca7983",
       "story_beats": [
         {
-          "speech": "A fox noticed her shadow disappear on the village square just as the lantern festival began."
+          "speech": "A squirrel heard a strange musical note from the bakery roof whenever the evening rain began."
         },
         {
-          "speech": "She carried a lantern around the square but every shadow appeared in a different direction."
+          "speech": "She searched the attic for a flute but found only buckets and a loose metal gutter."
         },
         {
-          "speech": "An old glass canopy scattered the lantern light from several angles and softened every shadow beneath it."
+          "speech": "She secured the gutter and discovered rainwater had been striking a hollow pipe like a musical instrument."
         },
         {
-          "speech": "The villagers adjusted the lanterns and the fox's shadow returned as the festival lights formed a bright arch."
+          "speech": "The baker kept the harmless rain pipe and invited neighbors to listen during the next gentle shower."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -1978,11 +1986,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-18T02:35:49.962820+00:00",
+  "last_preflight_at": "2026-10-18T02:52:45.219916+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-18T02:36:44.106905+00:00",
+    "at": "2026-10-18T02:53:30.209130+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -4588,10 +4596,33 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-forge-f117ff59af74412d": {
+      "at": "2026-10-18T02:53:27.903651+00:00",
+      "title": "The Squirrel and the Singing Roof",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "34b521ae902b5f7c37bb54744467b8bd03944644eef9e2931426b99364ca7983",
+      "story_beats": [
+        {
+          "speech": "A squirrel heard a strange musical note from the bakery roof whenever the evening rain began."
+        },
+        {
+          "speech": "She searched the attic for a flute but found only buckets and a loose metal gutter."
+        },
+        {
+          "speech": "She secured the gutter and discovered rainwater had been striking a hollow pipe like a musical instrument."
+        },
+        {
+          "speech": "The baker kept the harmless rain pipe and invited neighbors to listen during the next gentle shower."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-18T02:36:44.106817+00:00",
+    "at": "2026-10-18T02:53:30.209048+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -4602,20 +4633,20 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-18T02:36:44.106889+00:00",
+    "at": "2026-10-18T02:53:30.209114+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-18T02:36:21.443839+00:00",
+    "at": "2026-10-18T02:53:17.050388+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-33980efb0c8dfcd7",
-    "video_url": "https://www.youtube.com/watch?v=N14DRb8Zs9M"
+    "content_id": "rayvan-forge-f117ff59af74412d",
+    "video_url": "https://www.youtube.com/watch?v=OK95FTLCBws"
   },
   "last_workflow_result": {
-    "at": "2026-10-18T02:36:44.106799+00:00",
+    "at": "2026-10-18T02:53:30.209031+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
