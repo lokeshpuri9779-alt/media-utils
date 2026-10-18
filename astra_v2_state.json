@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-18",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 15,
-  "confirmed_today": 14,
-  "last_attempt_at": "2026-10-18T02:07:16.509423+00:00",
+  "attempts": 16,
+  "confirmed_today": 15,
+  "last_attempt_at": "2026-10-18T02:19:19.482714+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1931,30 +1931,38 @@
       "format": "short",
       "uploaded_at": "2026-10-18T01:53:38.935539+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-6351e7e849512afa": {
+      "video_id": "fBPVfTxL9pg",
+      "confirmed_at": "2026-10-18T02:18:36.911961+00:00",
+      "title": "The Penguin and the Warm Compass",
+      "format": "short",
+      "uploaded_at": "2026-10-18T02:07:18.359676+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "fBPVfTxL9pg": {
-      "content_id": "rayvan-forge-6351e7e849512afa",
-      "title": "The Penguin and the Warm Compass",
+    "hbux3SPbwDI": {
+      "content_id": "rayvan-forge-26f30c9ae482d7d8",
+      "title": "The Raccoon and the Museum Footsteps",
       "day": "2026-10-18",
-      "uploaded_at": "2026-10-18T02:07:18.359676+00:00",
+      "uploaded_at": "2026-10-18T02:19:20.920922+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "6a775106859c49763f53eee5caf7f9637da1c50260d46e0f4093720aa9bb66a1",
+      "plot_fingerprint": "e99b418a917f63dfc558fefa7886ea77b7341a38370cf9e25e8d0d8d462b9ac0",
       "story_beats": [
         {
-          "speech": "A penguin guide found every compass in the snow camp pointing away from the marked northern trail."
+          "speech": "A raccoon guard found tiny footprints inside the closed museum beside a display of ancient maps."
         },
         {
-          "speech": "The team followed old flags but reached a ridge where the wind had buried the familiar route."
+          "speech": "He checked every lock and saw no damage, but a second trail appeared beside the glass cabinet."
         },
         {
-          "speech": "The penguin found a strong magnet beside the map case and moved it away from the instruments."
+          "speech": "He discovered a rolling display had drifted overnight and its dusty wheels had made the mysterious tracks."
         },
         {
-          "speech": "The compasses settled and the team followed the corrected bearings safely back to the warm research camp."
+          "speech": "The raccoon locked the display wheels and added floor markers so the museum could open safely in the morning."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -1962,11 +1970,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-18T02:06:21.100413+00:00",
+  "last_preflight_at": "2026-10-18T02:18:36.488949+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-18T02:07:18.691489+00:00",
+    "at": "2026-10-18T02:19:21.177456+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -4526,10 +4534,33 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-forge-26f30c9ae482d7d8": {
+      "at": "2026-10-18T02:19:19.482698+00:00",
+      "title": "The Raccoon and the Museum Footsteps",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "e99b418a917f63dfc558fefa7886ea77b7341a38370cf9e25e8d0d8d462b9ac0",
+      "story_beats": [
+        {
+          "speech": "A raccoon guard found tiny footprints inside the closed museum beside a display of ancient maps."
+        },
+        {
+          "speech": "He checked every lock and saw no damage, but a second trail appeared beside the glass cabinet."
+        },
+        {
+          "speech": "He discovered a rolling display had drifted overnight and its dusty wheels had made the mysterious tracks."
+        },
+        {
+          "speech": "The raccoon locked the display wheels and added floor markers so the museum could open safely in the morning."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-18T02:07:18.691419+00:00",
+    "at": "2026-10-18T02:19:21.177373+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -4540,20 +4571,20 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-18T02:07:18.691478+00:00",
+    "at": "2026-10-18T02:19:21.177441+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-18T02:07:00.058528+00:00",
+    "at": "2026-10-18T02:19:07.503632+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-6351e7e849512afa",
-    "video_url": "https://www.youtube.com/watch?v=fBPVfTxL9pg"
+    "content_id": "rayvan-forge-26f30c9ae482d7d8",
+    "video_url": "https://www.youtube.com/watch?v=hbux3SPbwDI"
   },
   "last_workflow_result": {
-    "at": "2026-10-18T02:07:18.691396+00:00",
+    "at": "2026-10-18T02:19:21.177353+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
