@@ -3,7 +3,7 @@
   "day": "2026-10-18",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 19,
-  "confirmed_today": 18,
+  "confirmed_today": 19,
   "last_attempt_at": "2026-10-18T15:32:57.515682+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -1963,57 +1963,38 @@
       "format": "short",
       "uploaded_at": "2026-10-18T02:53:29.868193+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "oFTRsVovSBk": {
-      "content_id": "rayvan-forge-c02997da53bd18a1",
+    },
+    "rayvan-forge-c02997da53bd18a1": {
+      "video_id": "oFTRsVovSBk",
+      "confirmed_at": "2026-10-18T15:33:40.074030+00:00",
       "title": "The Beaver and the Floodgate",
-      "day": "2026-10-18",
-      "uploaded_at": "2026-10-18T15:32:59.485558+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "4f349b1e7e50cd959e6a65a8bc33eb25abf7275e2c68079158180fda9eacf3e7",
-      "story_beats": [
-        {
-          "speech": "A beaver found the village floodgate stuck open while the river climbed toward the sleeping houses."
-        },
-        {
-          "speech": "He pushed the handle with a branch, but the swollen current bent the branch in half."
-        },
-        {
-          "speech": "He noticed a loose safety pin wedged beneath the gate and freed it with a narrow stone."
-        },
-        {
-          "speech": "The gate finally closed, and the villagers built a stronger emergency handle before the next storm."
-        }
-      ],
+      "uploaded_at": "2026-10-18T15:32:59.485558+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-18T15:31:32.150364+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-18T15:33:39.748894+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-18T15:32:59.986635+00:00",
+    "at": "2026-10-18T15:33:40.158027+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-18T08:46:01.214178+00:00",
   "reserved": {
@@ -4653,10 +4634,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-18T15:32:59.986553+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-18T15:33:40.157922+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -4664,9 +4645,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-18T15:32:59.986620+00:00",
+    "at": "2026-10-18T15:33:40.158011+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -4677,12 +4658,12 @@
     "video_url": "https://www.youtube.com/watch?v=oFTRsVovSBk"
   },
   "last_workflow_result": {
-    "at": "2026-10-18T15:32:59.986533+00:00",
-    "preflight_due": "true",
+    "at": "2026-10-18T15:33:40.157898+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": ""
+    "outcome": "published",
+    "reason": "min_interval"
   }
 }
