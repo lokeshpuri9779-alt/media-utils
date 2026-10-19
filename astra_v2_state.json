@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-19",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 15,
-  "confirmed_today": 14,
-  "last_attempt_at": "2026-10-19T12:25:52.826441+00:00",
+  "attempts": 16,
+  "confirmed_today": 15,
+  "last_attempt_at": "2026-10-19T12:51:05.855644+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -2139,30 +2139,38 @@
       "format": "short",
       "uploaded_at": "2026-10-19T12:07:51.498276+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-2157969b2905fd6f": {
+      "video_id": "mFH3ltc2XME",
+      "confirmed_at": "2026-10-19T12:50:15.871272+00:00",
+      "title": "The Ferret and the Cold Oven",
+      "format": "short",
+      "uploaded_at": "2026-10-19T12:25:54.620868+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "mFH3ltc2XME": {
-      "content_id": "rayvan-forge-2157969b2905fd6f",
-      "title": "The Ferret and the Cold Oven",
+    "dI0gbVNa6rU": {
+      "content_id": "rayvan-forge-7e820ae82d7aac6d",
+      "title": "The Seal and the Drifting Buoy",
       "day": "2026-10-19",
-      "uploaded_at": "2026-10-19T12:25:54.620868+00:00",
+      "uploaded_at": "2026-10-19T12:51:07.320670+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "fff9af471f04c97bab980eddf3e9ccf70abb290c44cc3c60ecd39df5debfa1a8",
+      "plot_fingerprint": "6ca5be92cef3c0eb27de8f87c1bcead3aa12b5dbfe75202289979b98116c36df",
       "story_beats": [
         {
-          "speech": "A ferret arrived at the bakery to find every loaf still pale despite the oven's glowing indicator."
+          "speech": "A seal noticed the harbor's red navigation buoy drifting toward the shallow rocks before the morning ferry arrived."
         },
         {
-          "speech": "He turned the temperature dial higher, but the dough remained cold after another careful check."
+          "speech": "She pushed the buoy back, but the current carried it away as soon as she let go."
         },
         {
-          "speech": "Behind the control panel, he found a disconnected wire feeding the oven's heating element."
+          "speech": "Beneath the buoy, she spotted its anchor chain caught around a floating piece of timber."
         },
         {
-          "speech": "The baker called a technician, who restored the connection and verified safe heat before baking."
+          "speech": "The harbor crew removed the timber, reset the anchor, and checked the channel before reopening it."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -2170,11 +2178,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-19T12:25:12.915084+00:00",
+  "last_preflight_at": "2026-10-19T12:50:15.422707+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-19T12:25:54.906988+00:00",
+    "at": "2026-10-19T12:51:07.607350+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -5332,10 +5340,33 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-forge-7e820ae82d7aac6d": {
+      "at": "2026-10-19T12:51:05.855626+00:00",
+      "title": "The Seal and the Drifting Buoy",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "6ca5be92cef3c0eb27de8f87c1bcead3aa12b5dbfe75202289979b98116c36df",
+      "story_beats": [
+        {
+          "speech": "A seal noticed the harbor's red navigation buoy drifting toward the shallow rocks before the morning ferry arrived."
+        },
+        {
+          "speech": "She pushed the buoy back, but the current carried it away as soon as she let go."
+        },
+        {
+          "speech": "Beneath the buoy, she spotted its anchor chain caught around a floating piece of timber."
+        },
+        {
+          "speech": "The harbor crew removed the timber, reset the anchor, and checked the channel before reopening it."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-19T12:25:54.906902+00:00",
+    "at": "2026-10-19T12:51:07.607300+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -5346,20 +5377,20 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-19T12:25:54.906972+00:00",
+    "at": "2026-10-19T12:51:07.607342+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-19T12:25:38.930240+00:00",
+    "at": "2026-10-19T12:50:44.120383+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-2157969b2905fd6f",
-    "video_url": "https://www.youtube.com/watch?v=mFH3ltc2XME"
+    "content_id": "rayvan-forge-7e820ae82d7aac6d",
+    "video_url": "https://www.youtube.com/watch?v=dI0gbVNa6rU"
   },
   "last_workflow_result": {
-    "at": "2026-10-19T12:25:54.906879+00:00",
+    "at": "2026-10-19T12:51:07.607276+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
