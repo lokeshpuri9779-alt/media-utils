@@ -1,7 +1,7 @@
 """2,000 deterministic four-beat *editorial story candidates* for ASTRA.
 
-30 written causal premises x 10 animal duos x 10 settings = 3,000.
-NOT 3,000 independently authored plots. Not production-approved or publishable.
+36 written causal premises x 10 animal duos x 10 settings = 3,600.
+NOT 3,600 independently authored plots. Not production-approved or publishable.
 The exact plot mechanism remains visible for reviewers to reject repetitions.
 """
 from __future__ import annotations
@@ -139,6 +139,12 @@ MECHANISMS = (
   "they tried a spare key, but it did not fit the delicate latch",
   "a stamped mark beneath the box named the original village craftsman",
   "asked the craftsman to unlock it without damage and returned the photograph"),
+ ( "silent-windmill", "The Windmill That Stopped", "the community windmill stopped turning while the grain mill waited for flour", "they oiled the axle, but the sails still shuddered without completing a turn", "a bird's abandoned nesting twine had wound tightly around the brake lever", "unwound the twine, checked the brake, and restarted the mill for the bakers"),
+ ( "painted-sign", "The Sign That Pointed Backward", "a freshly painted direction sign sent festival visitors toward a closed road", "they turned the sign around, but visitors arriving from the other side became confused", "the painter had copied the arrows from a reflection in a shop window", "repainted the arrows from a verified map and guided everyone to the fair"),
+ ( "floating-seed", "The Seed That Would Not Sink", "a rare tree seed floated away from the nursery during a spring flood", "they tried to catch it with a net, but the current carried it beneath a narrow bridge", "a line of fallen leaves showed a quiet backwater where floating objects gathered", "waited beside the backwater, retrieved the seed, and planted it above the flood line"),
+ ( "mismatched-bells", "The Bells in the Wrong Order", "the musical bells for the village performance rang an unfamiliar melody", "they tightened every hanging cord, but the tune sounded even more confused", "the smallest bell had been hung where the largest should have been", "reordered the bells by pitch and performed the melody before the audience arrived"),
+ ( "fading-mural", "The Picture That Disappeared", "the children's outdoor mural began fading before its unveiling", "they painted another layer, but the colors washed away after a light shower", "the new paint had been mixed with water instead of the protective binder", "mixed the remaining pigments correctly and restored the mural beneath a temporary awning"),
+ ( "night-bridge", "The Bridge With Two Shadows", "two moving shadows beneath the footbridge frightened travelers after sunset", "they hung a brighter lamp, but the shadows stretched farther across the walkway", "a loose lantern reflector was splitting one moving branch into two silhouettes", "secured the reflector, trimmed the fallen branch safely, and reopened the lit crossing"),
 )
 
 def candidate_records():
