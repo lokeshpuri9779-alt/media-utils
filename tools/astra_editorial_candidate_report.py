@@ -13,16 +13,22 @@ def build_report(limit=100, rotation=0, seen=None):
     existing_fingerprints = {x["plot_fingerprint"] for x in authored}
     mechanisms = {row[0] for row in MECHANISMS}
     unique = {}
+    seen_mechanisms = set()
+    # Mechanism-level novelty is distinct from cosmetic setting/character variants.
+    # Previously seen fingerprints must never be presented as new authored plots.
     for key, title, genre, beats in candidate_records():
         fp = plot_fingerprint(beats)
         if title.casefold().strip() in existing_titles or fp in existing_fingerprints:
             continue
-        if fp in unique or fp in seen:
+        if fp in unique:
             continue
         if len(beats) != 4 or any(len(b[1].split()) < 9 for b in beats):
             continue
         mechanism = next((m for m in mechanisms if key.startswith("exp2000-" + m + "-")), None)
         if mechanism is None:
+            continue
+        if fp in seen:
+            seen_mechanisms.add(mechanism)
             continue
         unique[fp] = {"key": key, "title": title, "mechanism": mechanism,
                       "plot_fingerprint": fp, "beats": beats,
@@ -46,7 +52,14 @@ def build_report(limit=100, rotation=0, seen=None):
                 selected.append(buckets[mechanism].pop(0))
     remaining = len(unique) - len(selected)
     status = "exhausted" if remaining == 0 else "low" if remaining < limit * 3 else "healthy"
-    return {"remaining_unreviewed_after_selection": remaining, "supply_status": status,
+    selected_mechanisms = {x["mechanism"] for x in selected}
+    # A candidate can have a fresh fingerprint while repeating a known causal premise.
+    newly_introduced_mechanisms = selected_mechanisms - seen_mechanisms
+    return {"authored_premises_total": len(mechanisms),
+            "new_premises_in_batch": len(newly_introduced_mechanisms),
+            "reused_premises_in_batch": len(selected_mechanisms & seen_mechanisms),
+            "cosmetic_variants_are_new_plots": False,
+            "remaining_unreviewed_after_selection": remaining, "supply_status": status,
             "requires_new_authored_mechanisms": status != "healthy",
             "source_candidates": candidate_count(), "unique_candidates": len(unique),
             "selected_for_review": len(selected), "mechanisms_represented": len({x["mechanism"] for x in selected}), "publication_approved": 0,

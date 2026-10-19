@@ -52,6 +52,9 @@ jobs:
               f"- Unreviewed candidates remaining: **{remaining}**\\n"
               f"- Supply status: **{status}**\\n"
               f"- Recorded ledger fingerprints: **{report['ledger_seen_total']}**\\n"
+              f"- New causal premises in batch: **{report['new_premises_in_batch']}**\\n"
+              f"- Reused causal premises in batch: **{report['reused_premises_in_batch']}**\\n"
+              "- Character and setting variants are not independent original plots\\n"
               "- Publication approvals: **0** (review required)\\n"
           )
           with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as out:
