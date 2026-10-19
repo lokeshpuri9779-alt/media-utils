@@ -3,7 +3,7 @@
   "day": "2026-10-19",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 22,
-  "confirmed_today": 21,
+  "confirmed_today": 22,
   "last_attempt_at": "2026-10-19T14:32:32.284616+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -2195,57 +2195,38 @@
       "format": "short",
       "uploaded_at": "2026-10-19T14:19:30.192047+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "KVfdmmvFQuc": {
-      "content_id": "rayvan-forge-d368e4b5a5a99815",
+    },
+    "rayvan-forge-d368e4b5a5a99815": {
+      "video_id": "KVfdmmvFQuc",
+      "confirmed_at": "2026-10-19T14:35:42.905345+00:00",
       "title": "The Turtle and the Reversed Map",
-      "day": "2026-10-19",
-      "uploaded_at": "2026-10-19T14:32:33.781036+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "a572543f691bd0787916d7ece19218f049584e946da4c7329a63889b04b42d63",
-      "story_beats": [
-        {
-          "speech": "A turtle preparing a museum exhibition discovered that every visitor following the ancient map reached the wrong gallery."
-        },
-        {
-          "speech": "He changed the direction arrows, but the route still led guests back to the entrance."
-        },
-        {
-          "speech": "Under the frame, he noticed the map had been mounted backward during the last cleaning."
-        },
-        {
-          "speech": "The curator turned the map around, verified the landmarks, and opened the exhibition with clear directions."
-        }
-      ],
+      "uploaded_at": "2026-10-19T14:32:33.781036+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-19T14:31:29.623743+00:00",
-  "last_preflight_reason": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-19T14:35:42.489410+00:00",
+  "last_preflight_reason": "min_interval",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-19T14:32:34.111216+00:00",
+    "at": "2026-10-19T14:35:42.986229+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-19T08:50:14.960164+00:00",
   "reserved": {
@@ -5552,10 +5533,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-19T14:32:34.111135+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-19T14:35:42.986130+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -5563,9 +5544,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-19T14:32:34.111201+00:00",
+    "at": "2026-10-19T14:35:42.986213+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -5576,12 +5557,12 @@
     "video_url": "https://www.youtube.com/watch?v=KVfdmmvFQuc"
   },
   "last_workflow_result": {
-    "at": "2026-10-19T14:32:34.111117+00:00",
-    "preflight_due": "true",
+    "at": "2026-10-19T14:35:42.986112+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": ""
+    "outcome": "published",
+    "reason": "min_interval"
   }
 }
