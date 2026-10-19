@@ -1,6 +1,6 @@
 """2,000 deterministic four-beat *editorial story candidates* for ASTRA.
 
-36 written causal premises x 10 animal duos x 10 settings = 3,600.
+42 written causal premises x 10 animal duos x 10 settings = 4,200.
 NOT 3,600 independently authored plots. Not production-approved or publishable.
 The exact plot mechanism remains visible for reviewers to reject repetitions.
 """
@@ -145,6 +145,12 @@ MECHANISMS = (
  ( "mismatched-bells", "The Bells in the Wrong Order", "the musical bells for the village performance rang an unfamiliar melody", "they tightened every hanging cord, but the tune sounded even more confused", "the smallest bell had been hung where the largest should have been", "reordered the bells by pitch and performed the melody before the audience arrived"),
  ( "fading-mural", "The Picture That Disappeared", "the children's outdoor mural began fading before its unveiling", "they painted another layer, but the colors washed away after a light shower", "the new paint had been mixed with water instead of the protective binder", "mixed the remaining pigments correctly and restored the mural beneath a temporary awning"),
  ( "night-bridge", "The Bridge With Two Shadows", "two moving shadows beneath the footbridge frightened travelers after sunset", "they hung a brighter lamp, but the shadows stretched farther across the walkway", "a loose lantern reflector was splitting one moving branch into two silhouettes", "secured the reflector, trimmed the fallen branch safely, and reopened the lit crossing"),
+ ("tide-clock", "The Tide Clock That Lied", "the harbor's tide clock showed safe crossing time while water covered the stepping stones", "they adjusted its hands, but the clock gave the same wrong warning at the next tide", "the tide float had become caught beneath a drifting wooden crate", "freed the float from the shore and checked its reading against the waterline before reopening the path"),
+ ("paper-kites", "The Kites That Pulled Apart", "the children's joined kites kept separating before the hilltop exhibition", "they tied tighter knots, but the paper tore whenever the wind picked up", "the connecting cord was fixed to the fragile paper instead of the wooden spars", "reattached the cord to the spars and launched both kites without tearing their sails"),
+ ("glowing-pond", "The Pond That Glowed at Noon", "bright patches appeared on the pond just as the wildlife count began", "they shaded the water with a cloth, but the glowing spots moved to another bank", "sunlight was reflecting from discarded foil caught among the reeds", "collected the foil with a long-handled net and completed the count without disturbing the nesting birds"),
+ ("forgotten-recipe", "The Recipe With No Measurements", "the bakery found an old festival recipe with every ingredient listed but no quantities", "they doubled their first mixture, but the dough became too heavy to rise", "faint flour marks on the original measuring bowl showed where each ingredient had once been filled", "tested the bowl marks in a small batch and baked enough bread for the festival"),
+ ("vanishing-footbridge", "The Footbridge That Seemed to Move", "travelers reported that the wooden footbridge appeared farther downstream each morning", "they planted a sign beside it, but the sign seemed to shift too", "the bank was eroding beneath the signposts while the bridge remained anchored in place", "closed the unsafe approach and marked a stable route until the bank could be reinforced"),
+ ("whistling-roof", "The Roof That Whistled", "a high whistle from the school roof interrupted every outdoor lesson", "they shut the classroom windows, but the whistle continued whenever a breeze rose", "a loose roof vent had a narrow gap that made the wind sing through it", "secured the vent from a safe maintenance platform and brought the class back outside"),
 )
 
 def candidate_records():

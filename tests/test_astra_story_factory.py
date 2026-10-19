@@ -46,9 +46,9 @@ class StoryFactoryTests(unittest.TestCase):
             self.assertEqual(generate(state, output, batch_size=31),31)
             second=json.loads(state.read_text())
             self.assertEqual(second["next_slot"],62)
-            self.assertEqual(second["last_awaiting_review"],len(MECHANISMS)-31)
+            self.assertEqual(second["last_awaiting_review"],min(31, max(0, len(MECHANISMS)-31)))
             self.assertEqual(sum(json.loads(line)["status"]=="needs_new_plot"
-                                 for line in review.read_text().splitlines()), 62-len(MECHANISMS))
+                                 for line in review.read_text().splitlines()), max(0, 62-len(MECHANISMS)))
     def test_expanded_premises_have_distinct_keys(self):
         self.assertGreaterEqual(len(MECHANISMS),54)
         self.assertEqual(len({row[0] for row in MECHANISMS}),len(MECHANISMS))
