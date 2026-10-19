@@ -50,12 +50,24 @@ def build_report(limit=100, rotation=0, seen=None):
         for mechanism in sorted(buckets):
             if buckets[mechanism] and len(selected) < limit:
                 selected.append(buckets[mechanism].pop(0))
+    # Triage is diagnostic only: a fresh fingerprint cannot authorize publication.
+    for item in selected:
+        repeated_premise = item["mechanism"] in seen_mechanisms
+        item["editorial_priority"] = "rewrite_required" if repeated_premise else "individual_review"
+        item["editorial_issues"] = (
+            ["reused_causal_premise_with_cosmetic_variation"] if repeated_premise else []
+        )
+        item["requires_human_editorial_approval"] = True
+        item["production_ready"] = False
     remaining = len(unique) - len(selected)
     status = "exhausted" if remaining == 0 else "low" if remaining < limit * 3 else "healthy"
     selected_mechanisms = {x["mechanism"] for x in selected}
     # A candidate can have a fresh fingerprint while repeating a known causal premise.
     newly_introduced_mechanisms = selected_mechanisms - seen_mechanisms
-    return {"authored_premises_total": len(mechanisms),
+    rewrite_count = sum(x["editorial_priority"] == "rewrite_required" for x in selected)
+    return {"rewrite_required": rewrite_count,
+            "individual_review_required": len(selected) - rewrite_count,
+            "authored_premises_total": len(mechanisms),
             "new_premises_in_batch": len(newly_introduced_mechanisms),
             "reused_premises_in_batch": len(selected_mechanisms & seen_mechanisms),
             "cosmetic_variants_are_new_plots": False,
