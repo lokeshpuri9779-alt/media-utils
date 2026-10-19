@@ -300,14 +300,20 @@ def direct_story(ch, plan):
         energy={'cold_open':1.0,'build':.68,'proof':.52,'payoff':.88,'outlook':.62,'resolution':.45}[role]
         # Deterministic shot variation prevents every story from inheriting the
         # same composition while keeping renders reproducible for CI.
-        seed=int(hashlib.sha256((topic+text+str(i)).encode()).hexdigest()[:8],16)
+        digest=hashlib.sha256((topic+text+str(i)).encode()).digest()
+        seed=int.from_bytes(digest[:4], 'big')
+        # Independent deterministic choices: using seed % 4 for camera,
+        # layout and motion locked all three to the same four combinations.
+        camera_index=digest[4] % 4
+        layout_index=digest[5] % 4
+        motion_index=digest[6] % 4
         shot.update(director_role=role,director_energy=energy,
                     director_semantics=semantics,
-                    director_camera=['push','drift','reveal','track'][seed%4],
-                    director_layout=['focus-left','focus-right','center','split'][seed%4],
+                    director_camera=['push','drift','reveal','track'][camera_index],
+                    director_layout=['focus-left','focus-right','center','split'][layout_index],
                     director_pattern_interrupt=(i>0 and role in {'proof','payoff','outlook'}),
                     director_source_depth=source_count,
-                    director_motion=['arc','scan','pulse','parallax'][seed%4],
+                    director_motion=['arc','scan','pulse','parallax'][motion_index],
                     director_cut_rate=round(.55 + energy*.75,2),
                     director_caption_mode=('question' if role=='cold_open' and '?' in str(shot.get('speech','')) else 'phrase'),
                     director_style=(
