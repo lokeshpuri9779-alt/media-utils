@@ -13,8 +13,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Build review-only candidate report
-        run: PYTHONPATH=. python tools/astra_editorial_candidate_report.py --limit 100 --output astra-editorial-review.json
+      - name: Build rotating review-only candidate report
+        shell: bash
+        run: |
+          rotation=$(( $(date -u +%s) / 86400 ))
+          PYTHONPATH=. python tools/astra_editorial_candidate_report.py --limit 100 --rotation "$rotation" --output astra-editorial-review.json
       - name: Upload review artifact
         uses: actions/upload-artifact@v4
         with:
