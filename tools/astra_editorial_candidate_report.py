@@ -6,7 +6,7 @@ from pathlib import Path
 from astra_v2.story_expansion_2000 import candidate_records, candidate_count, MECHANISMS
 from astra_v2.story_forge import catalog, plot_fingerprint
 
-def build_report(limit=100):
+def build_report(limit=100, rotation=0):
     authored = catalog(limit=2000)
     existing_titles = {x["title"].casefold().strip() for x in authored}
     existing_fingerprints = {x["plot_fingerprint"] for x in authored}
@@ -32,6 +32,12 @@ def build_report(limit=100):
         buckets[item["mechanism"]].append(item)
     for bucket in buckets.values():
         bucket.sort(key=lambda x: hashlib.sha256(x["key"].encode()).hexdigest())
+    # Rotate within each mechanism to surface different candidates across days.
+    # Rotation changes review order only; it never grants production approval.
+    for bucket in buckets.values():
+        if bucket:
+            shift = (rotation * max(1, limit // max(1, len(buckets)))) % len(bucket)
+            bucket[:] = bucket[shift:] + bucket[:shift]
     selected = []
     while len(selected) < limit and any(buckets.values()):
         for mechanism in sorted(buckets):
@@ -46,10 +52,13 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", default="astra-editorial-review.json")
     parser.add_argument("--limit", type=int, default=100)
+    parser.add_argument("--rotation", type=int, default=0)
     args = parser.parse_args()
     if not 1 <= args.limit <= 500:
         parser.error("--limit must be between 1 and 500")
-    report = build_report(args.limit)
+    if args.rotation < 0:
+        parser.error("--rotation must be nonnegative")
+    report = build_report(args.limit, args.rotation)
     Path(args.output).write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({k: v for k, v in report.items() if k != "candidates"}))
 
