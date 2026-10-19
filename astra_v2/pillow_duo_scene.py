@@ -349,11 +349,17 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
             # Ease a reach toward a prop instead of snapping the wrist when
             # contact begins or ends. Default 1.0 preserves Studio duo poses.
             strength=_ease(float(hand_strength))
-            target=(hand_target[0]-side*22, hand_target[1]+2)
+            target=(hand_target[0]-side*65, hand_target[1]-63)
             hand=(hand[0]*(1-strength)+target[0]*strength,
                   hand[1]*(1-strength)+target[1]*strength)
         elbow=((shoulder[0]+hand[0])*.5+side*18,
                (shoulder[1]+hand[1])*.5+14)
+        if action=="carry" and hand_target is not None and side==interact_side:
+            # Brace the inside arm beneath the shared prop instead of leaving
+            # a straight, hanging limb; the elbow rises slightly during lift.
+            lift_phase=_ease((max(0.0,float(t))-.12)/.72)
+            elbow=((shoulder[0]+hand[0])*.5+side*30,
+                   (shoulder[1]+hand[1])*.5-18-12*lift_phase)
         _line(d,[shoulder,elbow,hand],fur,22)
         d.ellipse((hand[0]-13,hand[1]-13,hand[0]+13,hand[1]+13),
                   fill=CREAM,outline=INK,width=3)
@@ -506,7 +512,7 @@ def draw_duo(image, shot, t):
     if prop and action in ("release","drop","put_down"):
         release=_ease((max(0.0,float(t))-.15)/.55)
         actor_x=298+actor_translation(action,t,0)
-        held=(actor_x+175-22,846+215+2)
+        held=(actor_x+185,846+215+2)
         staged=prop_trajectory(shot,t) if shot.get("story_beat") else (433,1060)
         prop_pos=(round(held[0]*(1-release)+staged[0]*release),
                   round(held[1]*(1-release)+staged[1]*release))
