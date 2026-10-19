@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-19",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 19,
+  "attempts": 20,
   "confirmed_today": 19,
-  "last_attempt_at": "2026-10-19T13:56:03.472815+00:00",
+  "last_attempt_at": "2026-10-19T14:05:44.290870+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -2181,28 +2181,55 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-19T13:59:27.065176+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "Ycf07JRuxNs": {
+      "content_id": "rayvan-forge-650d891a414c8d75",
+      "title": "The Mouse and the Wrong Signal",
+      "day": "2026-10-19",
+      "uploaded_at": "2026-10-19T14:05:46.249076+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "fc3464c482401b2d7be78a16ccd7bc5b5592e1a87d5f4913aa6f94be2ef1022c",
+      "story_beats": [
+        {
+          "speech": "A station mouse saw the platform signal remain red long after the last train had cleared the track."
+        },
+        {
+          "speech": "He waved his lantern toward the signal box, but the distant operator could not see through the rain."
+        },
+        {
+          "speech": "Inspecting the mechanism with the signalman, he found a broken spring preventing the lever from resetting."
+        },
+        {
+          "speech": "The signalman replaced the spring, verified the empty track, and restored the correct signal safely."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-19T14:05:00.945487+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-19T13:59:27.587602+00:00",
+    "at": "2026-10-19T14:05:46.551580+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-19T08:50:14.960164+00:00",
   "reserved": {
@@ -5437,13 +5464,36 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-forge-650d891a414c8d75": {
+      "at": "2026-10-19T14:05:44.290851+00:00",
+      "title": "The Mouse and the Wrong Signal",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "fc3464c482401b2d7be78a16ccd7bc5b5592e1a87d5f4913aa6f94be2ef1022c",
+      "story_beats": [
+        {
+          "speech": "A station mouse saw the platform signal remain red long after the last train had cleared the track."
+        },
+        {
+          "speech": "He waved his lantern toward the signal box, but the distant operator could not see through the rain."
+        },
+        {
+          "speech": "Inspecting the mechanism with the signalman, he found a broken spring preventing the lever from resetting."
+        },
+        {
+          "speech": "The signalman replaced the spring, verified the empty track, and restored the correct signal safely."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-19T13:59:27.587526+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-19T14:05:46.551523+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -5451,25 +5501,25 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-19T13:59:27.587591+00:00",
+    "at": "2026-10-19T14:05:46.551561+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-19T13:55:45.063373+00:00",
+    "at": "2026-10-19T14:05:31.062383+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-faa86179f5ff07ee",
-    "video_url": "https://www.youtube.com/watch?v=l1SDhqaeX9Y"
+    "content_id": "rayvan-forge-650d891a414c8d75",
+    "video_url": "https://www.youtube.com/watch?v=Ycf07JRuxNs"
   },
   "last_workflow_result": {
-    "at": "2026-10-19T13:59:27.587504+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-19T14:05:46.551508+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval"
+    "outcome": "processing",
+    "reason": ""
   }
 }
