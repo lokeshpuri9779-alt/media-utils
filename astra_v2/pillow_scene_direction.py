@@ -24,7 +24,10 @@ SCENE_CUES = (
     ("desert", r"\b(?:desert|dunes?|oasis|sandstorm|arid)\b"),
     ("library", r"\b(?:library|bookshelf|shelves|bookcase|reading room)\b"),
     ("harbor", r"\b(?:harbor|harbour|pier|dock|seawall|fishing boats?)\b"),
-    ("river", r"\b(?:river|stream|pond|water|floating|bank|inlet|flood|tide)\b"),
+    # Water, floating objects and tides are not sufficient evidence of a
+    # location change: a village fountain or a floating gift must not teleport
+    # the cast to a river. Require an actual water-body location cue.
+    ("river", r"\b(?:river|stream|pond|creek|canal|lake|inlet|riverbank|river bank|lakeshore)\b"),
     # A flower carried through a village should not teleport the cast into a
     # garden; only location-specific terms select that illustrated set.
     ("garden", r"\b(?:garden|flowerbed|greenhouse|botanical garden)\b"),
