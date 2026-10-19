@@ -80,7 +80,12 @@ def structural_quality_penalties(report: dict) -> dict:
         p=min(15.0,empty_risk*5.0)
         score-=p; penalties.append({"type":"empty-space","points":p,"detail":f"{empty_risk} scene(s) risk excessive letterbox/pillarbox space"})
 
-    return {"score":round(max(0.0,score),2),"penalties":penalties,"pass":score>=78.0}
+    # A numerical score of 88 previously allowed severely repetitive scenes
+    # through the 78-point gate. Treat insufficient visual diversity as a
+    # blocking structural failure, without weakening any existing checks.
+    diversity_failed = any(p["type"] == "visual-diversity" for p in penalties)
+    return {"score":round(max(0.0,score),2),"penalties":penalties,
+            "pass":score>=78.0 and not diversity_failed}
 
 
 def assess_render(report: dict) -> dict:
