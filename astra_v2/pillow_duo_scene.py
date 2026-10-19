@@ -106,6 +106,27 @@ def scene_pair(shot):
     distinct = tuple(dict.fromkeys(name for _, name in found))
     return distinct if len(distinct) == 2 else ()
 
+def infer_story_prop(story):
+    """Infer only an unambiguous repeated physical prop from authored beats.
+
+    Ignore one-off objects and generic titles: the same object must be named
+    in at least two separate beats. Ties remain unresolved rather than
+    choosing a possibly wrong object and changing the plot.
+    """
+    counts = {}
+    beats = story.get("story_beats") or ()
+    for beat in beats:
+        text = " ".join(str(beat.get(k) or "") for k in ("speech", "visual", "visual_prompt")).lower()
+        mentioned = {name for name, pattern in PROPS.items() if re.search(pattern, text)}
+        for name in mentioned:
+            counts[name] = counts.get(name, 0) + 1
+    if not counts:
+        return None
+    maximum = max(counts.values())
+    winners = [name for name, count in counts.items() if count == maximum]
+    return winners[0] if maximum >= 2 and len(winners) == 1 else None
+
+
 def scene_prop(shot):
     # An explicitly authored prop identity takes precedence over incidental
     # mentions in narration. This keeps a carried/repaired object stable when
