@@ -6,7 +6,7 @@ from tools.astra_editorial_candidate_report import build_report
 class PremiseDiversityTests(unittest.TestCase):
     def test_first_batch_distinguishes_premises_from_variants(self):
         report = build_report(limit=100)
-        self.assertEqual(report["authored_premises_total"], 36)
+        self.assertEqual(report["authored_premises_total"], 42)
         self.assertFalse(report["cosmetic_variants_are_new_plots"])
         self.assertEqual(report["new_premises_in_batch"], report["mechanisms_represented"])
         self.assertEqual(report["reused_premises_in_batch"], 0)
