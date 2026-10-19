@@ -12,6 +12,8 @@ on:
       - 'tests/test_astra_species_fidelity.py'
       - 'tests/test_pillow_duo_continuity.py'
       - 'tests/test_pillow_contact_timing.py'
+      - 'tests/test_pillow_grounded_release.py'
+      - 'tests/test_pillow_release_hand.py'
       - 'tests/test_studio_directed_motion.py'
       - 'tools/astra_four_actions_preview.py'
       - 'astra_v2/story_action_motion.py'
@@ -44,6 +46,8 @@ jobs:
           python -m unittest discover -s tests -p 'test_astra_stage_continuity.py' -v
           python -m unittest discover -s tests -p 'test_pillow_duo_continuity.py' -v
           python -m unittest discover -s tests -p 'test_pillow_contact_timing.py' -v
+          python -m unittest discover -s tests -p 'test_pillow_grounded_release.py' -v
+          python -m unittest discover -s tests -p 'test_pillow_release_hand.py' -v
           python -m unittest discover -s tests -p 'test_studio_directed_motion.py' -v
           python -m unittest discover -s tests -p 'test_pillow_duo_studio.py' -v
       - name: Render two-character motion artifact

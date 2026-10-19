@@ -352,8 +352,15 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
             target=(hand_target[0]-side*22, hand_target[1]+2)
             hand=(hand[0]*(1-strength)+target[0]*strength,
                   hand[1]*(1-strength)+target[1]*strength)
-        elbow=((shoulder[0]+hand[0])*.5+side*18,
-               (shoulder[1]+hand[1])*.5+14)
+        # Bend the interacting elbow toward the torso while reaching or
+        # withdrawing, avoiding a rigid midpoint hinge across the gesture.
+        if hand_target is not None and side==interact_side:
+            bend=_ease(float(hand_strength))
+            elbow=((shoulder[0]+hand[0])*.5+side*(18-29*bend),
+                   (shoulder[1]+hand[1])*.5+14-25*bend)
+        else:
+            elbow=((shoulder[0]+hand[0])*.5+side*18,
+                   (shoulder[1]+hand[1])*.5+14)
         _line(d,[shoulder,elbow,hand],fur,22)
         d.ellipse((hand[0]-13,hand[1]-13,hand[0]+13,hand[1]+13),
                   fill=CREAM,outline=INK,width=3)
@@ -507,7 +514,7 @@ def draw_duo(image, shot, t):
         release=_ease((max(0.0,float(t))-.15)/.55)
         actor_x=298+actor_translation(action,t,0)
         held=(actor_x+175-22,846+215+2)
-        staged=prop_trajectory(shot,t) if shot.get("story_beat") else (433,1060)
+        staged=(held[0],1200)
         prop_pos=(round(held[0]*(1-release)+staged[0]*release),
                   round(held[1]*(1-release)+staged[1]*release))
     if prop and action in ("push","pull"):
@@ -542,8 +549,12 @@ def draw_duo(image, shot, t):
         # After releasing a prop, withdraw the wrist instead of following
         # the object all the way to its resting position.
         if action in ("release","drop","put_down"):
+            # Preserve the contact interval expected by production motion
+            # continuity checks; withdrawal completes after the release phase.
             hand_strength *= 1.0-_ease((max(0.0,float(t))-.45)/.75)
-        hand_target=prop_pos if hand_strength>0 else None
+        # During release, withdraw toward the original held anchor while
+        # the prop descends independently; otherwise the wrist follows it down.
+        hand_target=(held if action in ("release","drop","put_down") else prop_pos) if hand_strength>0 else None
         actor_mood=mood
         if mood=="angry" and idx==0:
             actor_mood="curious"  # Reaction shot, not two identical emotions.
