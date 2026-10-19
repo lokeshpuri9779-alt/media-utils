@@ -51,7 +51,7 @@ class StoryInventoryTests(unittest.TestCase):
 
     def test_default_catalog_exposes_full_authored_inventory(self):
         records = catalog()
-        self.assertEqual(len(records), len(PILLOW_DUO_PLOTS) + len(PLOTS) + len(REWRITTEN_PLOTS) + len(NEW_AUTHORED_PLOTS) + len(EDITORIAL_OCT2026_PLOTS) + len(CROSSGENRE_DIRECTED_24) + len(AUTHORED_REPLENISHMENT_OCT2026) + len(AUTHORED_BATCH_341) + len(AUTHORED_BATCH_364) + len(AUTHORED_BATCH_407) + len(AUTHORED_BATCH_420) + len(AUTHORED_BATCH_421) + len(AUTHORED_BATCH_422) + len(AUTHORED_BATCH_423))
+        self.assertEqual(len(records), len(PILLOW_DUO_PLOTS) + len(PLOTS) + len(REWRITTEN_PLOTS) + len(NEW_AUTHORED_PLOTS) + len(EDITORIAL_OCT2026_PLOTS) + len(CROSSGENRE_DIRECTED_24) + len(AUTHORED_REPLENISHMENT_OCT2026) + len(AUTHORED_BATCH_341) + len(AUTHORED_BATCH_364) + len(AUTHORED_BATCH_407) + len(AUTHORED_BATCH_420) + len(AUTHORED_BATCH_421) + len(AUTHORED_BATCH_422) + len(AUTHORED_BATCH_423) + len(AUTHORED_BATCH_424))
         self.assertTrue(all(item["kind"] == "authored_causal_story" for item in records))
 
     def test_draft_inventory_count_and_unique_titles(self):
