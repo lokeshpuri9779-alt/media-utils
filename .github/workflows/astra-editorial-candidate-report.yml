@@ -34,6 +34,31 @@ jobs:
           rotation=$(( $(date -u +%s) / 86400 ))
           cd source
           PYTHONPATH=. python tools/astra_editorial_candidate_report.py --limit 100 --rotation "$rotation" --ledger astra-editorial-ledger.json --output astra-editorial-review.json
+      - name: Summarize candidate supply and flag depletion
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          report = json.loads(Path("source/astra-editorial-review.json").read_text())
+          status = report["supply_status"]
+          selected = report["selected_for_review"]
+          remaining = report["remaining_unreviewed_after_selection"]
+          summary = (
+              "## ASTRA editorial candidate supply\\n\\n"
+              f"- New review-only candidates: **{selected}**\\n"
+              f"- Unreviewed candidates remaining: **{remaining}**\\n"
+              f"- Supply status: **{status}**\\n"
+              f"- Recorded ledger fingerprints: **{report['ledger_seen_total']}**\\n"
+              "- Publication approvals: **0** (review required)\\n"
+          )
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as out:
+              out.write(summary)
+          if status != "healthy" or report["ledger_exhausted"]:
+              print(f"::warning::ASTRA editorial supply {status}: {remaining} candidates remain. Author new causal premises before depletion; never auto-approve review drafts.")
+          PY
       - name: Persist ledger on dedicated branch
         shell: bash
         run: |
