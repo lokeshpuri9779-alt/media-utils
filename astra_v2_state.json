@@ -2208,11 +2208,11 @@
   "pending": {},
   "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-10-19T20:44:06.386172+00:00",
+  "last_preflight_at": "2026-10-19T20:51:51.253129+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-19T20:44:48.339400+00:00",
+    "at": "2026-10-19T20:52:41.797308+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2229,7 +2229,7 @@
     "oauth_tests": "success",
     "layer_tests": "success"
   },
-  "last_feedback_attempt_at": "2026-10-19T08:50:14.960164+00:00",
+  "last_feedback_attempt_at": "2026-10-19T20:52:24.403538+00:00",
   "reserved": {
     "rayvan-original-spacesong-v1": {
       "at": "2026-10-12T19:00:53.784470+00:00",
@@ -5534,7 +5534,7 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-19T20:44:48.339316+00:00",
+    "at": "2026-10-19T20:52:41.797259+00:00",
     "publication_outcome": "quality_skip",
     "publication_reason": "no_approved_original_story_available",
     "character_memory": "not_reported",
@@ -5545,20 +5545,20 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-19T20:44:48.339384+00:00",
+    "at": "2026-10-19T20:52:41.797299+00:00",
     "history_file_present": true,
     "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-19T20:44:32.673026+00:00",
+    "at": "2026-10-19T20:52:24.103000+00:00",
     "outcome": "quality_skip",
     "reason": "no_approved_original_story_available",
     "content_id": "",
     "video_url": ""
   },
   "last_workflow_result": {
-    "at": "2026-10-19T20:44:48.339291+00:00",
+    "at": "2026-10-19T20:52:41.797237+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
