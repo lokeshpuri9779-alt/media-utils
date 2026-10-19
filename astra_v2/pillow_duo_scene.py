@@ -107,6 +107,16 @@ def scene_pair(shot):
     return distinct if len(distinct) == 2 else ()
 
 def scene_prop(shot):
+    # An explicitly authored prop identity takes precedence over incidental
+    # mentions in narration. This keeps a carried/repaired object stable when
+    # later beats introduce another object (e.g. a key beside a gift).
+    declared = shot.get("story_prop")
+    if declared is not None:
+        name = str(declared).lower().strip()
+        if name not in PROPS:
+            from astra_errors import CreativeReject
+            raise CreativeReject("Studio story prop is not representable: " + name[:60])
+        return name
     text=" ".join(str(shot.get(k) or "") for k in
                   ("speech","visual_prompt","action")).lower()
     return _cached_prop(text)
