@@ -2,18 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-13T09:44:43.613842+00:00",
-      "stage": "hook",
-      "element": "hook",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 94.0,
-        "candidate": "saturn-density-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "saturn-density-v1"
-    },
-    {
       "at": "2026-10-13T09:44:43.622475+00:00",
       "stage": "hook",
       "element": "retention",
@@ -7150,6 +7138,17 @@
       },
       "proposed_action": "Diagnose story supply and creative gate failures",
       "candidate_id": ""
+    },
+    {
+      "at": "2026-10-19T19:34:18.798584+00:00",
+      "stage": "quality",
+      "element": "candidate_selection",
+      "outcome": "fail",
+      "evidence": {
+        "reason": "no_approved_original_story_available"
+      },
+      "proposed_action": "Diagnose story supply and creative gate failures",
+      "candidate_id": ""
     }
   ],
   "stage_counts": {
@@ -7181,7 +7180,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 34,
+      "unknown": 33,
       "improved": 0,
       "regressed": 0
     },
@@ -7259,7 +7258,7 @@
     },
     "quality": {
       "pass": 33,
-      "fail": 364,
+      "fail": 365,
       "skip": 0,
       "unknown": 0,
       "improved": 0,
