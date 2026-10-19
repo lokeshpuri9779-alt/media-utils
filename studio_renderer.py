@@ -425,7 +425,13 @@ def make_plan(ch):
         if ensemble:
             from astra_v2.ensemble_scene import cast_for_shot
             ensemble = bool(cast_for_shot({"story_cast": experimental_cast}))
+        # The story forge can declare the main physical object once rather
+        # than repeating it in every narration beat. Explicit beat overrides
+        # remain authoritative when the plot intentionally changes objects.
+        story_prop = ch.get('story_prop')
         for shot in formatted:
+            if story_prop is not None:
+                shot.setdefault('story_prop', story_prop)
             shot['story_subject'] = select_subject(ch, shot)
             shot['story_action'] = choose_action(shot)
             # Wardrobe, colors and accessories are selected once per story.
