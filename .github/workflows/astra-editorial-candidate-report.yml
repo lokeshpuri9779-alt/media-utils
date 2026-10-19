@@ -4,37 +4,54 @@ on:
   schedule:
     - cron: '17 3 * * *'
 permissions:
-  contents: read
+  contents: write
+concurrency:
+  group: astra-editorial-ledger
+  cancel-in-progress: false
 jobs:
   report:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: source
+          persist-credentials: false
+      - name: Checkout durable editorial ledger
+        uses: actions/checkout@v4
+        with:
+          ref: astra-editorial-ledger-state
+          path: ledger-store
+          persist-credentials: true
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Restore prior editorial ledger
-        uses: actions/cache/restore@v4
-        with:
-          path: astra-editorial-ledger.json
-          key: astra-editorial-ledger-${{ github.run_id }}
-          restore-keys: |
-            astra-editorial-ledger-
       - name: Build rotating review-only candidate report
         shell: bash
         run: |
+          set -euo pipefail
+          test -s ledger-store/editorial-ledger.json
+          cp ledger-store/editorial-ledger.json source/astra-editorial-ledger.json
           rotation=$(( $(date -u +%s) / 86400 ))
+          cd source
           PYTHONPATH=. python tools/astra_editorial_candidate_report.py --limit 100 --rotation "$rotation" --ledger astra-editorial-ledger.json --output astra-editorial-review.json
-      - name: Save editorial ledger
-        uses: actions/cache/save@v4
-        with:
-          path: astra-editorial-ledger.json
-          key: astra-editorial-ledger-${{ github.run_id }}
+      - name: Persist ledger on dedicated branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp source/astra-editorial-ledger.json ledger-store/editorial-ledger.json
+          cd ledger-store
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add editorial-ledger.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Record reviewed ASTRA editorial candidates"
+            git push origin HEAD:astra-editorial-ledger-state
+          fi
       - name: Upload review artifact
         uses: actions/upload-artifact@v4
         with:
           name: astra-editorial-candidates
           path: |
-            astra-editorial-review.json
-            astra-editorial-ledger.json
+            source/astra-editorial-review.json
+            source/astra-editorial-ledger.json
           retention-days: 14
