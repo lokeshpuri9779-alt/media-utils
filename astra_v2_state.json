@@ -3,7 +3,7 @@
   "day": "2026-10-19",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 14,
-  "confirmed_today": 13,
+  "confirmed_today": 14,
   "last_attempt_at": "2026-10-19T12:07:49.921595+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -2131,57 +2131,38 @@
       "format": "short",
       "uploaded_at": "2026-10-19T11:53:53.673807+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "JnoDOCWrWdU": {
-      "content_id": "rayvan-forge-877255dd72fbb45f",
+    },
+    "rayvan-forge-877255dd72fbb45f": {
+      "video_id": "JnoDOCWrWdU",
+      "confirmed_at": "2026-10-19T12:11:23.022436+00:00",
       "title": "The Goat and the Silent Bell",
-      "day": "2026-10-19",
-      "uploaded_at": "2026-10-19T12:07:51.498276+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "0e8bd6c2a4a8891e8dadec6c60b3da7cc13caff14920981210be01c688613f11",
-      "story_beats": [
-        {
-          "speech": "A goat noticed the village bell stayed silent even though its clock struck noon."
-        },
-        {
-          "speech": "She pulled the bell rope twice, but only a dull scraping sound echoed from above."
-        },
-        {
-          "speech": "Climbing the stairs, she found the bell's swinging clapper caught behind a bent bracket."
-        },
-        {
-          "speech": "The caretaker straightened the bracket, tested the clapper, and rang the bell for the village."
-        }
-      ],
+      "uploaded_at": "2026-10-19T12:07:51.498276+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-19T12:07:07.423273+00:00",
-  "last_preflight_reason": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-19T12:11:22.484385+00:00",
+  "last_preflight_reason": "min_interval",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-19T12:07:51.840618+00:00",
+    "at": "2026-10-19T12:11:23.094922+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-19T08:50:14.960164+00:00",
   "reserved": {
@@ -5304,10 +5285,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-19T12:07:51.840536+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-19T12:11:23.094840+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -5315,9 +5296,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-19T12:07:51.840603+00:00",
+    "at": "2026-10-19T12:11:23.094910+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -5328,12 +5309,12 @@
     "video_url": "https://www.youtube.com/watch?v=JnoDOCWrWdU"
   },
   "last_workflow_result": {
-    "at": "2026-10-19T12:07:51.840515+00:00",
-    "preflight_due": "true",
+    "at": "2026-10-19T12:11:23.094817+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": ""
+    "outcome": "published",
+    "reason": "min_interval"
   }
 }
