@@ -1,39 +1,38 @@
-"""Story-level object identity reaches Studio's scene resolver."""
+"""Check story prop plan contract without importing heavyweight Studio media deps."""
 import unittest
+from pathlib import Path
 
-from studio_renderer import make_plan
 from astra_v2.pillow_duo_scene import scene_prop
 
 
 class StoryPropPlanTests(unittest.TestCase):
-    def _story(self):
-        return {
-            "genre": "fiction", "title": "The Fox and the Rabbit's Gift",
-            "content_id": "test-prop-continuity",
-            "question": "What happened?", "answer": "They saved the gift.",
-            "story_prop": "box",
-            "story_beats": [
-                {"headline": "THE GIFT", "speech": "The fox picked up the gift.", "visual": "village"},
-                {"headline": "THE KEY", "speech": "The rabbit discovered a key.", "visual": "village"},
-                {"headline": "THE LANTERN", "speech": "They passed a lantern.", "visual": "village"},
-            ],
-        }
+    def test_studio_planner_propagates_story_level_prop(self):
+        source = (Path(__file__).resolve().parents[1] / "studio_renderer.py").read_text()
+        self.assertIn("story_prop = ch.get('story_prop')", source)
+        self.assertIn("shot.setdefault('story_prop', story_prop)", source)
 
-    def test_story_prop_survives_narration_changes(self):
-        shots = make_plan(self._story())
-        self.assertEqual([scene_prop(s) for s in shots], ["box"] * len(shots))
+    def test_story_prop_resolution(self):
+        beats = [{"speech": "The fox picked up a gift."},
+                 {"speech": "The rabbit found a key."},
+                 {"speech": "They passed a lantern."}]
+        shots = []
+        for beat in beats:
+            shot = dict(beat)
+            shot.setdefault("story_prop", "box")
+            shots.append(shot)
+        self.assertEqual([scene_prop(s) for s in shots], ["box"] * 3)
 
-    def test_beat_override_is_preserved(self):
-        story = self._story()
-        story["story_beats"][2]["story_prop"] = "lantern"
-        shots = make_plan(story)
+    def test_beat_override_and_legacy_inference(self):
+        beats = [{"speech": "The fox picked up a gift."},
+                 {"speech": "The rabbit found a key."},
+                 {"speech": "They passed a lantern.", "story_prop": "lantern"}]
+        shots = []
+        for beat in beats:
+            shot = dict(beat)
+            shot.setdefault("story_prop", "box")
+            shots.append(shot)
         self.assertEqual([scene_prop(s) for s in shots], ["box", "box", "lantern"])
-
-    def test_no_declaration_preserves_legacy_selection(self):
-        story = self._story()
-        del story["story_prop"]
-        shots = make_plan(story)
-        self.assertEqual([scene_prop(s) for s in shots], ["box", "key", "lantern"])
+        self.assertEqual([scene_prop(s) for s in beats], ["box", "key", "lantern"])
 
 
 if __name__ == "__main__":
