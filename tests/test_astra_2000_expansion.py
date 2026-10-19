@@ -1,4 +1,4 @@
-"""Inventory and production-safety gate for ASTRA's 3,600-candidate story expansion."""
+"""Inventory and production-safety gate for ASTRA's 4,200-candidate story expansion."""
 import unittest
 from PIL import Image, ImageDraw, ImageChops
 from astra_v2.procedural_visual_library import (
@@ -42,14 +42,14 @@ class ExpandedInventoryTests(unittest.TestCase):
             digests.append(hashlib.sha256(im.tobytes()).hexdigest())
         self.assertEqual(len(set(digests)),len(MOTIFS))
 
-    def test_exact_3600_causal_draft_records(self):
+    def test_exact_4200_causal_draft_records(self):
         plots=candidate_records()
-        self.assertEqual(candidate_count(),3600)
-        self.assertEqual(len(plots),3600)
-        self.assertEqual(len({p[0] for p in plots}),3600)
-        self.assertEqual(len({p[1] for p in plots}),3600)
+        self.assertEqual(candidate_count(),4200)
+        self.assertEqual(len(plots),4200)
+        self.assertEqual(len({p[0] for p in plots}),4200)
+        self.assertEqual(len({p[1] for p in plots}),4200)
         from astra_v2.story_forge import plot_fingerprint
-        self.assertEqual(len({plot_fingerprint(p[3]) for p in plots}),3600)
+        self.assertEqual(len({plot_fingerprint(p[3]) for p in plots}),4200)
         for key,title,genre,beats in plots:
             self.assertEqual(len(beats),4)
             self.assertTrue(all(len(x[1].split())>=9 for x in beats))
@@ -60,7 +60,7 @@ class ExpandedInventoryTests(unittest.TestCase):
         self.assertTrue(all(s["production_ready"] for s in default))
         all_review=catalog(limit=5000,include_expansion=True)
         expansion=[s for s in all_review if s["kind"]=="unreviewed_causal_draft"]
-        self.assertEqual(len(expansion),3600)
+        self.assertEqual(len(expansion),4200)
         self.assertTrue(all(not s["production_ready"] for s in expansion))
         self.assertTrue(all(publication_rejection(s)=="unreviewed_causal_draft" for s in expansion))
         self.assertEqual(len({s["content_id"] for s in all_review}),len(all_review))
