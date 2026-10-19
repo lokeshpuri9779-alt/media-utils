@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-19",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 12,
-  "confirmed_today": 11,
-  "last_attempt_at": "2026-10-19T11:30:30.402072+00:00",
+  "attempts": 13,
+  "confirmed_today": 12,
+  "last_attempt_at": "2026-10-19T11:53:52.120407+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -2115,30 +2115,38 @@
       "format": "short",
       "uploaded_at": "2026-10-19T11:15:05.768293+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-41f8628baf0d33dd": {
+      "video_id": "4Gk3MKBkWpM",
+      "confirmed_at": "2026-10-19T11:53:07.819140+00:00",
+      "title": "The Panda and the Missing Bridge Pin",
+      "format": "short",
+      "uploaded_at": "2026-10-19T11:30:33.372828+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "4Gk3MKBkWpM": {
-      "content_id": "rayvan-forge-41f8628baf0d33dd",
-      "title": "The Panda and the Missing Bridge Pin",
+    "I8LwBX04Cek": {
+      "content_id": "rayvan-forge-78a284f29403a9a5",
+      "title": "The Crane and the Floating Walkway",
       "day": "2026-10-19",
-      "uploaded_at": "2026-10-19T11:30:33.372828+00:00",
+      "uploaded_at": "2026-10-19T11:53:53.673807+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "7bb8f3b0ae7112c501709ea6a3314a80a70787b23dc54815c64902e2a1bf20f1",
+      "plot_fingerprint": "87633aebb7da3d493b7f3bc02bb974e3ae49be55b7292e2d370729c17d382fde",
       "story_beats": [
         {
-          "speech": "A panda discovered the bamboo footbridge rattled whenever villagers carried baskets across the stream."
+          "speech": "A crane found the marsh boardwalk rising unevenly as families approached the birdwatching platform."
         },
         {
-          "speech": "He added extra planks, but the bridge still shifted whenever anyone stepped near the center."
+          "speech": "She placed stones on the planks, but the far end kept lifting above the water."
         },
         {
-          "speech": "Beneath the railing, he noticed a missing locking pin in the main support joint."
+          "speech": "Below the platform, she discovered a buoyant barrel had broken free of its retaining strap."
         },
         {
-          "speech": "The builders installed a new pin, tested the empty bridge, and reopened the crossing."
+          "speech": "The ranger secured the barrel, balanced the walkway, and reopened the platform after testing."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -2146,11 +2154,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-19T11:29:33.453849+00:00",
+  "last_preflight_at": "2026-10-19T11:53:07.498999+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-19T11:30:33.628968+00:00",
+    "at": "2026-10-19T11:53:53.963551+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -5239,10 +5247,33 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-forge-78a284f29403a9a5": {
+      "at": "2026-10-19T11:53:52.120392+00:00",
+      "title": "The Crane and the Floating Walkway",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "87633aebb7da3d493b7f3bc02bb974e3ae49be55b7292e2d370729c17d382fde",
+      "story_beats": [
+        {
+          "speech": "A crane found the marsh boardwalk rising unevenly as families approached the birdwatching platform."
+        },
+        {
+          "speech": "She placed stones on the planks, but the far end kept lifting above the water."
+        },
+        {
+          "speech": "Below the platform, she discovered a buoyant barrel had broken free of its retaining strap."
+        },
+        {
+          "speech": "The ranger secured the barrel, balanced the walkway, and reopened the platform after testing."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-19T11:30:33.628918+00:00",
+    "at": "2026-10-19T11:53:53.963469+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -5253,20 +5284,20 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-19T11:30:33.628959+00:00",
+    "at": "2026-10-19T11:53:53.963536+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-19T11:30:06.600099+00:00",
+    "at": "2026-10-19T11:53:37.331916+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-41f8628baf0d33dd",
-    "video_url": "https://www.youtube.com/watch?v=4Gk3MKBkWpM"
+    "content_id": "rayvan-forge-78a284f29403a9a5",
+    "video_url": "https://www.youtube.com/watch?v=I8LwBX04Cek"
   },
   "last_workflow_result": {
-    "at": "2026-10-19T11:30:33.628901+00:00",
+    "at": "2026-10-19T11:53:53.963448+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
