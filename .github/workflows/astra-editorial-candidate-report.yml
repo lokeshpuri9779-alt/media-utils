@@ -13,14 +13,28 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Restore prior editorial ledger
+        uses: actions/cache/restore@v4
+        with:
+          path: astra-editorial-ledger.json
+          key: astra-editorial-ledger-${{ github.run_id }}
+          restore-keys: |
+            astra-editorial-ledger-
       - name: Build rotating review-only candidate report
         shell: bash
         run: |
           rotation=$(( $(date -u +%s) / 86400 ))
-          PYTHONPATH=. python tools/astra_editorial_candidate_report.py --limit 100 --rotation "$rotation" --output astra-editorial-review.json
+          PYTHONPATH=. python tools/astra_editorial_candidate_report.py --limit 100 --rotation "$rotation" --ledger astra-editorial-ledger.json --output astra-editorial-review.json
+      - name: Save editorial ledger
+        uses: actions/cache/save@v4
+        with:
+          path: astra-editorial-ledger.json
+          key: astra-editorial-ledger-${{ github.run_id }}
       - name: Upload review artifact
         uses: actions/upload-artifact@v4
         with:
           name: astra-editorial-candidates
-          path: astra-editorial-review.json
+          path: |
+            astra-editorial-review.json
+            astra-editorial-ledger.json
           retention-days: 14

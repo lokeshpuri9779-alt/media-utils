@@ -6,7 +6,8 @@ from pathlib import Path
 from astra_v2.story_expansion_2000 import candidate_records, candidate_count, MECHANISMS
 from astra_v2.story_forge import catalog, plot_fingerprint
 
-def build_report(limit=100, rotation=0):
+def build_report(limit=100, rotation=0, seen=None):
+    seen = set(seen or ())
     authored = catalog(limit=2000)
     existing_titles = {x["title"].casefold().strip() for x in authored}
     existing_fingerprints = {x["plot_fingerprint"] for x in authored}
@@ -16,7 +17,7 @@ def build_report(limit=100, rotation=0):
         fp = plot_fingerprint(beats)
         if title.casefold().strip() in existing_titles or fp in existing_fingerprints:
             continue
-        if fp in unique:
+        if fp in unique or fp in seen:
             continue
         if len(beats) != 4 or any(len(b[1].split()) < 9 for b in beats):
             continue
@@ -53,12 +54,22 @@ def main():
     parser.add_argument("--output", default="astra-editorial-review.json")
     parser.add_argument("--limit", type=int, default=100)
     parser.add_argument("--rotation", type=int, default=0)
+    parser.add_argument("--ledger", default="")
     args = parser.parse_args()
     if not 1 <= args.limit <= 500:
         parser.error("--limit must be between 1 and 500")
     if args.rotation < 0:
         parser.error("--rotation must be nonnegative")
-    report = build_report(args.limit, args.rotation)
+    ledger_path = Path(args.ledger) if args.ledger else None
+    previous = json.loads(ledger_path.read_text(encoding="utf-8")) if ledger_path and ledger_path.exists() else {"version": 1, "seen": []}
+    if previous.get("version") != 1 or not isinstance(previous.get("seen"), list) or not all(isinstance(x, str) for x in previous["seen"]):
+        raise ValueError("invalid_editorial_ledger")
+    report = build_report(args.limit, args.rotation, seen=previous["seen"])
+    if ledger_path:
+        updated = sorted(set(previous["seen"]) | {x["plot_fingerprint"] for x in report["candidates"]})
+        ledger_path.write_text(json.dumps({"version": 1, "seen": updated}, indent=2) + "\n", encoding="utf-8")
+        report["ledger_seen_total"] = len(updated)
+        report["ledger_exhausted"] = len(report["candidates"]) < args.limit
     Path(args.output).write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({k: v for k, v in report.items() if k != "candidates"}))
 
