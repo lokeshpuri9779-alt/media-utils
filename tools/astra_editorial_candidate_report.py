@@ -44,7 +44,11 @@ def build_report(limit=100, rotation=0, seen=None):
         for mechanism in sorted(buckets):
             if buckets[mechanism] and len(selected) < limit:
                 selected.append(buckets[mechanism].pop(0))
-    return {"source_candidates": candidate_count(), "unique_candidates": len(unique),
+    remaining = len(unique) - len(selected)
+    status = "exhausted" if remaining == 0 else "low" if remaining < limit * 3 else "healthy"
+    return {"remaining_unreviewed_after_selection": remaining, "supply_status": status,
+            "requires_new_authored_mechanisms": status != "healthy",
+            "source_candidates": candidate_count(), "unique_candidates": len(unique),
             "selected_for_review": len(selected), "mechanisms_represented": len({x["mechanism"] for x in selected}), "publication_approved": 0,
             "note": "Review-only output. Do not feed to publisher without individual editorial approval.",
             "candidates": selected}
