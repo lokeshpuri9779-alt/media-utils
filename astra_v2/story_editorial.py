@@ -41,7 +41,8 @@ def _semantic_match_features(story, current, previous_items, threshold):
         fingerprint_match = bool(fingerprint and fingerprint == other_fp)
         score = (fingerprint_match, jaccard, dice)
         if best_score is None or score > best_score:
-            best_score = score
+            # The reference scorer compares raw candidates to rounded incumbent evidence.
+            best_score = (fingerprint_match, round(jaccard, 4), round(dice, 4))
             best = {
                 "matched_content_id": prior.get("content_id"),
                 "matched_title": prior.get("title"),
