@@ -9,7 +9,7 @@ class EditorialShortlistTests(unittest.TestCase):
     def test_only_editorial_only_drafts_are_shortlisted(self):
         with tempfile.TemporaryDirectory() as root:
             root = Path(root)
-            stories = [{"content_id": str(i), "title": "Story", "production_ready": False}
+            stories = [{"content_id": str(i), "title": f"Story {i}", "production_ready": False}
                        for i in range(3)]
             audits = [
                 {"content_id": "0", "editorial_issues": ["human_or_model_editorial_review_required"],
