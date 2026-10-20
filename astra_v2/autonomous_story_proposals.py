@@ -407,8 +407,11 @@ def replenish(path, count=24, history=()):
     _backfill_legacy_titles(state["proposals"])
     prior = list(history) + state["proposals"]
     novelty_index = NoveltyIndex(prior)
+    from astra_v2.semantic_candidate_index import SemanticCandidateIndex
+    semantic_index = SemanticCandidateIndex(prior)
     next_index = int(state.get("next_index", 0))
     added = []
+    semantic_rejected = 0
     for _ in range(count * 200):
         if len(added) >= count:
             break
@@ -423,11 +426,15 @@ def replenish(path, count=24, history=()):
             candidate = proposal(next_index)
         next_index += 1
         if not novelty_index.is_near_duplicate(candidate):
+            if semantic_index.match(candidate) is not None:
+                semantic_rejected += 1
+                continue
             if publication_rejection(candidate) != "unreviewed_causal_draft":
                 raise ValueError("Proposal unexpectedly bypassed or failed publication isolation")
             added.append(candidate)
             prior.append(candidate)
             novelty_index.add(candidate)
+            semantic_index.add(candidate)
     # Track the real acceptance rate rather than assuming every generated idea is usable.
     attempts = next_index - int(state.get("next_index", 0))
     acceptance_rate = round(len(added) / attempts, 4) if attempts else 0.0
@@ -451,6 +458,7 @@ def replenish(path, count=24, history=()):
         "requested": count,
         "accepted": len(added),
         "attempted": attempts,
+        "semantic_duplicates_rejected": semantic_rejected,
         "acceptance_rate": acceptance_rate,
         "exhaustion_warning": len(added) < count or (attempts >= count * 4),
         "diversity": diversity,
