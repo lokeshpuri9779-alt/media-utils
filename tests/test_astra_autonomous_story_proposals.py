@@ -1,6 +1,7 @@
 import json
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 from astra_v2.autonomous_story_proposals import replenish, proposal
 from astra_v2.publication_quality import publication_rejection
@@ -20,6 +21,27 @@ class AutonomousStoryProposalTests(unittest.TestCase):
             self.assertEqual(len({s["plot_fingerprint"] for s in after["proposals"]}), first + second)
             self.assertGreater(after["next_index"], before["next_index"])
             self.assertTrue(all(publication_rejection(s) for s in after["proposals"]))
+
+    def test_semantic_duplicates_are_skipped_before_persistence(self):
+        with tempfile.TemporaryDirectory() as root:
+            path = Path(root) / "proposals.json"
+            from astra_v2.semantic_candidate_index import SemanticCandidateIndex
+            original = SemanticCandidateIndex.match
+            calls = {"count": 0}
+
+            def reject_first(index, candidate, threshold=0.72):
+                calls["count"] += 1
+                if calls["count"] == 1:
+                    return {"matched_content_id": "prior"}
+                return original(index, candidate, threshold)
+
+            with patch.object(SemanticCandidateIndex, "match", reject_first):
+                count = replenish(path, count=2)
+            state = json.loads(path.read_text())
+            self.assertEqual(count, 2)
+            self.assertEqual(state["supply_health"]["semantic_duplicates_rejected"], 1)
+            self.assertGreater(state["supply_health"]["attempted"], count)
+            self.assertTrue(all(not item["production_ready"] for item in state["proposals"]))
 
     def test_compositional_dimensions_produce_distinct_story_fingerprints(self):
         candidates = [proposal(index) for index in range(300)]
