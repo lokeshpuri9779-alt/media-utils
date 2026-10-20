@@ -111,10 +111,8 @@ jobs:
           Path("/tmp/astra-existing-proposal-ids.json").write_text(
               json.dumps([x["content_id"] for x in ledger["proposals"]]), encoding="utf-8")
           PY
-      - name: Generate novel unreviewed proposals
-        env:
-          ASTRA_PROPOSAL_BATCH: "100"
-        run: /usr/bin/time -f "ASTRA_STAGE_GENERATION_SECONDS=%e ASTRA_STAGE_GENERATION_PEAK_KB=%M" python -m astra_v2.autonomous_story_proposals
+      - name: Generate unreviewed proposals with eight isolated workers
+        run: /usr/bin/time -f "ASTRA_STAGE_GENERATION_SECONDS=%e ASTRA_STAGE_GENERATION_PEAK_KB=%M" python -m astra_v2.parallel_story_inventory
       - name: Snapshot inventory before plot-first replenishment
         run: |
           python - <<'PY'
