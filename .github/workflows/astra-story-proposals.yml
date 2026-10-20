@@ -200,6 +200,23 @@ jobs:
             --output runtime-health/story_review_packet.json \
             --stories-output runtime-health/story_review_stories.json \
             --reviews-output runtime-health/story_review_decisions.json
+runtime-health/story_review_preparation.json
+      - name: Prepare exported editorial candidates without approval
+        run: |
+          python -m astra_v2.editorial_batch_preparation \
+            --stories runtime-health/story_review_stories.json \
+            --output runtime-health/story_review_preparation.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          result = json.loads(Path("runtime-health/story_review_preparation.json").read_text())
+          stories = json.loads(Path("runtime-health/story_review_stories.json").read_text())["stories"]
+          assert result["count"] == len(stories)
+          assert result["approved_count"] == 0
+          assert result["publication_triggered"] is False
+          assert all(not item["story"]["production_ready"] for item in result["stories"])
+          print("ASTRA_EDITORIAL_PREPARATION_VERIFIED=" + str(result["count"]))
+          PY
       - name: Summarize reviewable story supply without approval
         if: always()
         run: |
