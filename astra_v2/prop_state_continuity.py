@@ -30,6 +30,8 @@ def assign_prop_states(shots):
             # ambiguous 'repair' intentions or generic action labels.
             speech = str(item.get("speech") or "")
             if REPAIR.search(speech):
+                if state == "damaged":
+                    item["story_prop_repair_transition"] = True
                 state = "repaired"
             elif DAMAGE.search(speech):
                 state = "damaged"
