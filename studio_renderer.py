@@ -437,6 +437,8 @@ def make_plan(ch):
                 shot.setdefault('story_prop', story_prop)
             if ch.get('story_prop_id') is not None:
                 shot.setdefault('story_prop_id', ch['story_prop_id'])
+            if 'story_prop_owner' in ch:
+                shot.setdefault('story_prop_owner', ch['story_prop_owner'])
             shot['story_subject'] = select_subject(ch, shot)
             shot['story_action'] = choose_action(shot)
             # Wardrobe, colors and accessories are selected once per story.
