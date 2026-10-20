@@ -168,15 +168,32 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 premium_stories.insert(0, generated)
         except (RuntimeError, ValueError, KeyError, json.JSONDecodeError) as exc:
             print("OpenAI story skipped:", type(exc).__name__)
-    premium_stories = [
-        story for story in premium_stories
-        if story.get("content_id") not in history_ids
-        and str(story.get("title", "")).casefold().strip() not in history_titles
-        and story.get("plot_fingerprint") not in history_hashes
-        and story.get("plot_key") not in history_plot_keys
-        and not is_near_duplicate(story, history_narratives)
-        and (not str(story.get("content_id") or "").startswith("rayvan-original-") or is_planned_story(story))
-    ]
+    # Attribute history exclusions before discarding candidates. This is
+    # diagnostic only; preserve the exact original filter conditions.
+    history_filter = {"before": len(premium_stories), "remaining": 0,
+                      "id": 0, "title": 0, "fingerprint": 0,
+                      "plot_key": 0, "near_duplicate": 0,
+                      "unplanned_original": 0}
+    remaining_stories = []
+    for story in premium_stories:
+        if story.get("content_id") in history_ids:
+            history_filter["id"] += 1
+        elif str(story.get("title", "")).casefold().strip() in history_titles:
+            history_filter["title"] += 1
+        elif story.get("plot_fingerprint") in history_hashes:
+            history_filter["fingerprint"] += 1
+        elif story.get("plot_key") in history_plot_keys:
+            history_filter["plot_key"] += 1
+        elif not (not is_near_duplicate(story, history_narratives)):
+            history_filter["near_duplicate"] += 1
+        elif (str(story.get("content_id") or "").startswith("rayvan-original-")
+              and not is_planned_story(story)):
+            history_filter["unplanned_original"] += 1
+        else:
+            remaining_stories.append(story)
+    premium_stories = remaining_stories
+    history_filter["remaining"] = len(premium_stories)
+    print("ASTRA_STORY_HISTORY_FILTER=" + json.dumps(history_filter, sort_keys=True))
     print("ASTRA_STORY_HISTORY_EXCLUSIONS=" + json.dumps({
         "ids": len(history_ids), "titles": len(history_titles),
         "fingerprints": len(history_hashes), "plot_keys": len(history_plot_keys),
