@@ -14,7 +14,18 @@ from astra_v2.proposal_history import load_history
 def approved_intake(stories, reviews, history=()):
     audit = validate_manifest(stories, reviews, history)
     approved_ids = {entry["content_id"] for entry in audit["results"] if entry["approved"]}
-    approved = [story for story in stories if story["content_id"] in approved_ids]
+    approved = []
+    for reviewed in stories:
+        if reviewed["content_id"] not in approved_ids:
+            continue
+        # Normalize only after hash-bound editorial approval validation.
+        # Preserve original reviewed files and their signed content hashes.
+        story = dict(reviewed)
+        if story.get("kind") == "authored_causal_story" and story.get("story_beats"):
+            if story.get("genre") not in (None, "", "fiction"):
+                raise ValueError("reviewed_authored_story_genre_conflict")
+            story["genre"] = "fiction"
+        approved.append(story)
     return {"stories": approved, "audit": audit, "intake_count": len(approved),
             "publication_triggered": False}
 
