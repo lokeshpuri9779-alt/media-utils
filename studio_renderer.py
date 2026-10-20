@@ -97,19 +97,29 @@ def scene(headline, speech, visual, label='', sub='', duration=0, **extra):
 
 def _story_plan(ch):
     genre, cid = ch.get('genre', 'challenge'), ch.get('content_id', '')
-    q, a = ch['question'].replace('\n', ' '), ch['answer'].replace('\n', ' ')
-    # Premium stories carry their own editorial beat sheet. The renderer follows
-    # the story rather than forcing the story into a reusable genre template.
+    # Reviewed beat sheets are authoritative; legacy Q/A is only required for
+    # stories without an authored scene plan.
     if ch.get('story_beats'):
         out=[]
-        for raw in ch['story_beats']:
+        for index, raw in enumerate(ch['story_beats']):
+            if not isinstance(raw, dict):
+                raise ValueError('Invalid authored story beat')
             item=dict(raw)
+            speech = str(item.pop('speech', '')).strip()
+            visual = str(item.pop('visual', '')).strip()
+            if not speech or not visual:
+                raise ValueError('Authored story beat requires speech and visual')
+            headline = str(item.pop('headline', '')).strip()
+            if not headline:
+                role = str(item.get('story_beat') or '').strip().replace('_', ' ')
+                headline = (role or 'STORY BEAT').upper()
             out.append(scene(
-                item.pop('headline'), item.pop('speech'), item.pop('visual'),
+                headline, speech, visual,
                 item.pop('label',''), item.pop('sub',''), duration=item.pop('duration',0),
                 **item
             ))
         return out
+    q, a = ch['question'].replace('\\n', ' '), ch['answer'].replace('\\n', ' ')
     if cid == 'venus-spin':
         return [
             scene('ONE SPIN\nLONGER THAN A YEAR', 'On Venus, one spin takes longer than a year.', 'planet', 'VENUS', 'THE CLOCK RUNS DIFFERENTLY'),
