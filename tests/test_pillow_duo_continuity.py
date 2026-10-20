@@ -17,6 +17,20 @@ class DuoContinuityTests(unittest.TestCase):
         self.assertEqual(scene_mood({"speech":"Warning danger!"}),"angry")
         self.assertEqual(scene_prop({"speech":"A gift box."}),"box")
         self.assertIsNone(scene_prop({"speech":"A lone fox."}))
+    def test_grounded_prop_position_persists_across_shot_times(self):
+        shot={"speech":"The fox and rabbit see the gift box.",
+              "story_cast":("fox","rabbit"), "story_action":"idle",
+              "persistent_prop_status":"grounded",
+              "persistent_prop_position":(400,1200)}
+        observed=[]
+        def record_prop(draw, name, x, y, t, **kwargs):
+            observed.append((x,y))
+        for t in (0.0, 0.7, 1.4):
+            image=Image.new("RGB",(1080,1920),(24,35,60))
+            with patch("astra_v2.pillow_duo_scene._prop", side_effect=record_prop):
+                self.assertTrue(draw_duo(image,shot,t))
+        self.assertEqual(observed, [(400,1200)]*3)
+
     def test_idle_feet_stay_planted_while_torso_bobs(self):
         heights=[]
         for t in (0.0, 0.4, 0.8, 1.2, 1.6):

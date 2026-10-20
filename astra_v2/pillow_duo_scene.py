@@ -643,6 +643,17 @@ def draw_duo(image, shot, t):
         held=owner_hand(action)
         prop_pos=(round(prop_pos[0]*(1-grasp)+held[0]*grasp),
                   round(prop_pos[1]*(1-grasp)+held[1]*grasp))
+    # Cross-shot persistence: story planning may pass the last world-space
+    # prop position forward as persistent_prop_position. When its status is
+    # grounded/placed, idle or locomotion shots must not reset it to staging.
+    persistent_position=shot.get("persistent_prop_position")
+    persistent_status=str(shot.get("persistent_prop_status") or "").lower()
+    if (prop and persistent_status in ("grounded", "placed")
+            and isinstance(persistent_position, (tuple, list))
+            and len(persistent_position)==2
+            and action not in contact_actions
+            and action not in ("push", "pull", "throw", "release", "drop", "put_down")):
+        prop_pos=(int(persistent_position[0]), int(persistent_position[1]))
     for idx,name in enumerate(pair):
         x=(298 if idx==0 else 772)+actor_translation(action,t,idx)
         if idx==1 and action=="carry":
