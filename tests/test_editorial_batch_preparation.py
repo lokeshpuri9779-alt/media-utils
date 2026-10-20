@@ -16,7 +16,10 @@ class EditorialBatchPreparationTests(unittest.TestCase):
 
     def test_rejects_duplicates_and_invalid_documents(self):
         story = {"content_id": "one", "story_beats": []}
-        for document in ({}, {"stories": [story, story]}, {"stories": [None]}):
+        for document in ({}, {"stories": [story, story]}, {"stories": [None]},
+                         {"stories": [{"content_id": [], "story_beats": []}]},
+                         {"stories": [{"content_id": "", "story_beats": []}]},
+                         {"stories": [{"content_id": 12, "story_beats": []}]}):
             with self.subTest(document=document):
                 with self.assertRaises(ValueError):
                     prepare_batch(document)
