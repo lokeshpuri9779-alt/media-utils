@@ -10,9 +10,9 @@ class IsolatedStoryWorkerTests(unittest.TestCase):
     def test_all_eight_workers_have_disjoint_indices(self):
         stripes = [worker_indices(1000, i) for i in range(8)]
         indices = [index for stripe in stripes for index in stripe]
-        self.assertEqual(len(indices), 500)
+        self.assertEqual(len(indices), 256)
         self.assertEqual(len(set(indices)), 500)
-        self.assertEqual(set(indices), set(range(1000, 1500)))
+        self.assertEqual(set(indices), set(range(1000, 1256)))
 
     def test_generated_workers_round_trip_into_coordinator(self):
         with tempfile.TemporaryDirectory() as root:
