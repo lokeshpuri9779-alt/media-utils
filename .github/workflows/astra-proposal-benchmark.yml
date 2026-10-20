@@ -75,6 +75,11 @@ jobs:
           python -m astra_v2.triage_index_benchmark --count 500 --history-count 100 | tee triage-index-benchmark-500.json
       - name: Benchmark production triage and audit on bounded real inventory
         run: |
+          git fetch --depth=1 origin astra-state
+          mkdir -p runtime-health
+          if git cat-file -e origin/astra-state:runtime-health/story_proposals.json 2>/dev/null; then
+            git show origin/astra-state:runtime-health/story_proposals.json > runtime-health/story_proposals.json
+          fi
           if [ -f runtime-health/story_proposals.json ]; then
             python -m astra_v2.triage_audit_benchmark --sample 100 | tee triage-audit-real-100.json
           else
