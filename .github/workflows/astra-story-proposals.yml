@@ -14,6 +14,7 @@ on:
       - 'astra_v2/proposal_history.py'
       - 'astra_v2/persisted_plot_proposals.py'
       - 'astra_v2/plot_first_proposals.py'
+      - 'astra_v2/plot_first_inventory.py'
       - 'astra_v2/shorts_novelty.py'
       - 'astra_v2/publication_quality.py'
       - 'astra_v2/story_editorial_report.py'
@@ -92,6 +93,10 @@ jobs:
         env:
           ASTRA_PROPOSAL_BATCH: "100"
         run: /usr/bin/time -f "ASTRA_STAGE_GENERATION_SECONDS=%e ASTRA_STAGE_GENERATION_PEAK_KB=%M" python -m astra_v2.autonomous_story_proposals
+      - name: Replenish unreviewed inventory with history-filtered plot-first drafts
+        env:
+          ASTRA_PLOT_FIRST_BATCH: "10"
+        run: python -m astra_v2.plot_first_inventory
       - name: Verify isolation and persistence
         run: |
           python -m unittest discover -s tests -p test_astra_autonomous_story_proposals.py -v
