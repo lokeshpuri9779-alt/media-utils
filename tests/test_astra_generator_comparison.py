@@ -11,6 +11,12 @@ class GeneratorComparisonTests(unittest.TestCase):
             self.assertEqual(result[arm]["publication_approved"], 0)
             self.assertLessEqual(result[arm]["max_pairwise_token_jaccard"], 1.0)
 
+    def test_structural_metadata_is_explicit(self):
+        result = compare(limit=8)
+        self.assertEqual(result["legacy"]["structural_metadata_coverage"], 0)
+        self.assertEqual(result["plot_first"]["structural_metadata_coverage"], 8)
+        self.assertEqual(result["plot_first"]["repeated_structural_keys"], 0)
+
     def test_seeded_comparison_is_reproducible(self):
         self.assertEqual(compare(limit=8, seed=17), compare(limit=8, seed=17))
 

@@ -6,12 +6,20 @@ from astra_v2.plot_first_proposals import proposals
 from astra_v2.story_editorial import editorial_issues, semantic_signature
 
 
+def _structure(story):
+    """Causal architecture, distinct from wording or character names."""
+    return tuple(str(story.get(field) or "").casefold().strip()
+                 for field in ("problem", "obstacle", "recovery", "consequence", "verification"))
+
+
 def _stats(stories):
     issues = Counter()
     signatures = []
     for story in stories:
         issues.update(editorial_issues(story))
         signatures.append(semantic_signature(story))
+    complete = [_structure(story) for story in stories if all(_structure(story))]
+    structure_counts = Counter(complete)
     overlaps = []
     for i, left in enumerate(signatures):
         for right in signatures[:i]:
@@ -22,6 +30,8 @@ def _stats(stories):
         "editorial_issues": dict(sorted(issues.items())),
         "max_pairwise_token_jaccard": round(max(overlaps, default=0), 4),
         "mean_pairwise_token_jaccard": round(sum(overlaps) / len(overlaps), 4) if overlaps else 0.0,
+        "structural_metadata_coverage": len(complete),
+        "repeated_structural_keys": sum(n - 1 for n in structure_counts.values() if n > 1),
         "publication_approved": 0,
     }
 
