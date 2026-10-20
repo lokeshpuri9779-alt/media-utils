@@ -1,7 +1,11 @@
 {
   "approved_for_production": 0,
   "candidate_count": 25,
+  "candidates_with_resolution_continuity_flags": 6,
   "candidates_with_reused_narration": 24,
+  "candidates_with_reused_plot_arc": 12,
+  "candidates_with_scene_integrity_flags": 0,
+  "candidates_with_visual_alignment_flags": 1,
   "publication_enabled": false,
   "review_candidates": [
     {
@@ -13,7 +17,10 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [],
       "reused_narration_beats": 0,
+      "reused_plot_arc": false,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -40,7 +47,8 @@
           "visual": "signal"
         }
       ],
-      "title": "The Forest Mystery of Hidden World"
+      "title": "The Forest Mystery of Hidden World",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-54826b0edb56e2371303",
@@ -51,7 +59,12 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [
+        "setup_resolution_subject_switch"
+      ],
       "reused_narration_beats": 2,
+      "reused_plot_arc": false,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -78,7 +91,8 @@
           "visual": "bell"
         }
       ],
-      "title": "The Mystery of Market: A repeating distress call in the wind"
+      "title": "The Mystery of Market: A repeating distress call in the wind",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-b08beb9b846d6b88b6dc",
@@ -89,7 +103,12 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [
+        "setup_resolution_subject_switch"
+      ],
       "reused_narration_beats": 3,
+      "reused_plot_arc": false,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -116,7 +135,8 @@
           "visual": "bridge"
         }
       ],
-      "title": "The Mystery of Greenhouse: A repeating distress call in the wind"
+      "title": "The Mystery of Greenhouse: A repeating distress call in the wind",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-93e7a97e8d5024e95ed0",
@@ -127,7 +147,12 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [
+        "setup_resolution_subject_switch"
+      ],
       "reused_narration_beats": 2,
+      "reused_plot_arc": false,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -154,7 +179,8 @@
           "visual": "signal"
         }
       ],
-      "title": "The Mystery of Museum: A jammed brass lens mechanism"
+      "title": "The Mystery of Museum: A jammed brass lens mechanism",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-4acb49ebb760eba93aea",
@@ -165,7 +191,12 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [
+        "setup_resolution_subject_switch"
+      ],
       "reused_narration_beats": 3,
+      "reused_plot_arc": true,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -192,7 +223,8 @@
           "visual": "door"
         }
       ],
-      "title": "The Mystery of Village: A jammed brass lens mechanism"
+      "title": "The Mystery of Village: A jammed brass lens mechanism",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-f06fed34f4653f27ddd3",
@@ -203,7 +235,12 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [
+        "setup_resolution_subject_switch"
+      ],
       "reused_narration_beats": 3,
+      "reused_plot_arc": true,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -230,7 +267,8 @@
           "visual": "river"
         }
       ],
-      "title": "The Mystery of Observatory: A cold draft from a forgotten tunnel"
+      "title": "The Mystery of Observatory: A cold draft from a forgotten tunnel",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-5af5fd1e908bcfc38429",
@@ -241,7 +279,10 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [],
       "reused_narration_beats": 3,
+      "reused_plot_arc": false,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -268,7 +309,8 @@
           "visual": "snow"
         }
       ],
-      "title": "The Mystery of Railway: A cold draft from a forgotten tunnel"
+      "title": "The Mystery of Railway: A cold draft from a forgotten tunnel",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-d74ce283e57c695af235",
@@ -279,7 +321,12 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [
+        "setup_resolution_subject_switch"
+      ],
       "reused_narration_beats": 3,
+      "reused_plot_arc": false,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -306,7 +353,8 @@
           "visual": "lantern"
         }
       ],
-      "title": "The Mystery of Railway: A bell-shaped sonar echo"
+      "title": "The Mystery of Railway: A bell-shaped sonar echo",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-9cc87ef4a51b9f2b0298",
@@ -317,7 +365,10 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [],
       "reused_narration_beats": 3,
+      "reused_plot_arc": true,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -344,7 +395,8 @@
           "visual": "book"
         }
       ],
-      "title": "The Mystery of Library: A bell-shaped sonar echo"
+      "title": "The Mystery of Library: A bell-shaped sonar echo",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-290cd52b95037e03c652",
@@ -355,7 +407,10 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [],
       "reused_narration_beats": 3,
+      "reused_plot_arc": true,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -382,7 +437,8 @@
           "visual": "bridge"
         }
       ],
-      "title": "The Mystery of Market: A pattern hidden in the wiring"
+      "title": "The Mystery of Market: A pattern hidden in the wiring",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-f2e632e9d0ce8f200bbc",
@@ -393,7 +449,10 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [],
       "reused_narration_beats": 3,
+      "reused_plot_arc": true,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -420,7 +479,8 @@
           "visual": "signal"
         }
       ],
-      "title": "The Mystery of Greenhouse: A pattern hidden in the wiring"
+      "title": "The Mystery of Greenhouse: A pattern hidden in the wiring",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-13354f5254ab86dccd91",
@@ -431,7 +491,10 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [],
       "reused_narration_beats": 3,
+      "reused_plot_arc": true,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -458,7 +521,8 @@
           "visual": "door"
         }
       ],
-      "title": "The Mystery of Greenhouse: Warm water flowing uphill"
+      "title": "The Mystery of Greenhouse: Warm water flowing uphill",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-efb201e2b536fc275fa8",
@@ -469,7 +533,10 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [],
       "reused_narration_beats": 3,
+      "reused_plot_arc": false,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -496,7 +563,8 @@
           "visual": "telescope"
         }
       ],
-      "title": "The Mystery of Museum: Warm water flowing uphill"
+      "title": "The Mystery of Museum: Warm water flowing uphill",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-edf13806a81c6ad2f220",
@@ -507,7 +575,10 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [],
       "reused_narration_beats": 3,
+      "reused_plot_arc": true,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -534,7 +605,8 @@
           "visual": "lantern"
         }
       ],
-      "title": "The Mystery of Observatory: A mirror reflecting a distant beacon"
+      "title": "The Mystery of Observatory: A mirror reflecting a distant beacon",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-75c65e2790ffa933cba2",
@@ -545,7 +617,10 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [],
       "reused_narration_beats": 3,
+      "reused_plot_arc": true,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -572,7 +647,8 @@
           "visual": "ship"
         }
       ],
-      "title": "The Mystery of Railway: New streets etched into a stone tile"
+      "title": "The Mystery of Railway: New streets etched into a stone tile",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-c0055140495a2881ac18",
@@ -583,7 +659,10 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [],
       "reused_narration_beats": 3,
+      "reused_plot_arc": false,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -610,7 +689,8 @@
           "visual": "bell"
         }
       ],
-      "title": "The Mystery of Garden: New streets etched into a stone tile"
+      "title": "The Mystery of Garden: New streets etched into a stone tile",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-4622d81e179cc55092db",
@@ -621,7 +701,10 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [],
       "reused_narration_beats": 2,
+      "reused_plot_arc": false,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -648,7 +731,8 @@
           "visual": "bridge"
         }
       ],
-      "title": "The Mystery of Library: New streets etched into a stone tile"
+      "title": "The Mystery of Library: New streets etched into a stone tile",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-d0062c6a6e9396eab57a",
@@ -659,7 +743,10 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [],
       "reused_narration_beats": 3,
+      "reused_plot_arc": true,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -686,7 +773,10 @@
           "visual": "waterwheel"
         }
       ],
-      "title": "The Mystery of Library: A clockwork shadow moving against the sun"
+      "title": "The Mystery of Library: A clockwork shadow moving against the sun",
+      "visual_alignment_flags": [
+        "scene_1_visual_cue_mismatch"
+      ]
     },
     {
       "content_id": "astra-proposal-ce3038f3827ef8fc5e14",
@@ -697,7 +787,10 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [],
       "reused_narration_beats": 3,
+      "reused_plot_arc": true,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -724,7 +817,8 @@
           "visual": "telescope"
         }
       ],
-      "title": "The Mystery of Greenhouse: A lens hidden in a broken telescope"
+      "title": "The Mystery of Greenhouse: A lens hidden in a broken telescope",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-e93c9a62aa4134c1267f",
@@ -735,7 +829,10 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [],
       "reused_narration_beats": 3,
+      "reused_plot_arc": false,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -762,7 +859,8 @@
           "visual": "statue"
         }
       ],
-      "title": "The Mystery of Museum: A lens hidden in a broken telescope"
+      "title": "The Mystery of Museum: A lens hidden in a broken telescope",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-42264628418a2bdb9a59",
@@ -773,7 +871,10 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [],
       "reused_narration_beats": 3,
+      "reused_plot_arc": false,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -800,7 +901,8 @@
           "visual": "snow"
         }
       ],
-      "title": "The Mystery of Museum: A gate buried under the riverbed"
+      "title": "The Mystery of Museum: A gate buried under the riverbed",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-e4cecc76abf934826d68",
@@ -811,7 +913,10 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [],
       "reused_narration_beats": 3,
+      "reused_plot_arc": true,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -838,7 +943,8 @@
           "visual": "clock"
         }
       ],
-      "title": "The Mystery of Village: A gate buried under the riverbed"
+      "title": "The Mystery of Village: A gate buried under the riverbed",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-aed0b92af7f7e31e6216",
@@ -849,7 +955,10 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [],
       "reused_narration_beats": 3,
+      "reused_plot_arc": true,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -876,7 +985,8 @@
           "visual": "garden"
         }
       ],
-      "title": "The Mystery of Observatory: Tiny wet footprints beside its case"
+      "title": "The Mystery of Observatory: Tiny wet footprints beside its case",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-7d593391b4ccf45d0972",
@@ -887,7 +997,10 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [],
       "reused_narration_beats": 3,
+      "reused_plot_arc": false,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -914,7 +1027,8 @@
           "visual": "bell"
         }
       ],
-      "title": "The Mystery of Railway: Tiny wet footprints beside its case"
+      "title": "The Mystery of Railway: Tiny wet footprints beside its case",
+      "visual_alignment_flags": []
     },
     {
       "content_id": "astra-proposal-36b6ea75d4ab541c9cef",
@@ -925,7 +1039,10 @@
       "genre": null,
       "production_ready": false,
       "publication_rejection": "unreviewed_causal_draft",
+      "resolution_continuity_flags": [],
       "reused_narration_beats": 2,
+      "reused_plot_arc": false,
+      "scene_integrity_flags": [],
       "story_beats": [
         {
           "headline": null,
@@ -952,9 +1069,10 @@
           "visual": "map"
         }
       ],
-      "title": "The Mystery of Library: A repeating distress call in the wind"
+      "title": "The Mystery of Library: A repeating distress call in the wind",
+      "visual_alignment_flags": []
     }
   ],
   "schema_version": 1,
-  "source_proposal_count": 5316
+  "source_proposal_count": 5426
 }
