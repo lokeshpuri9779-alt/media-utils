@@ -439,7 +439,7 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
     return hands
 
 
-def _prop(d, name, x, y, t, *, symbol_id=None, action="idle", condition=None):
+def _prop(d, name, x, y, t, *, symbol_id=None, action="idle", condition=None, repair_transition=False):
     """Draw the narrated object, with an optional stable illustrated emblem."""
     x,y=int(x),int(y)
     if name=="box":
@@ -479,33 +479,60 @@ def _prop(d, name, x, y, t, *, symbol_id=None, action="idle", condition=None):
         from astra_v2.procedural_visual_library import draw_icon, icon_for_story
         draw_icon(d,icon_for_story(name,name),x,y,size=120)
         return
+    repair_progress = _ease((max(0.0, float(t)) - .2) / 1.15) if repair_transition else 0.0
+    damage_scale = 1.0 - repair_progress
+    if repair_transition and condition == "repaired" and damage_scale > 0:
+        condition = "damaged"
+    if repair_transition and condition == "damaged":
+        class _RepairMarks:
+            """Contract damaged details smoothly as the object is repaired."""
+            def __init__(self, target):
+                self.target = target
+            def point(self, point):
+                return (round(x + (point[0] - x) * damage_scale),
+                        round(y + (point[1] - y) * damage_scale))
+            def line(self, points, **kwargs):
+                kwargs["width"] = max(1, round(kwargs.get("width", 1) * damage_scale))
+                self.target.line([self.point(p) for p in points], **kwargs)
+            def ellipse(self, bounds, **kwargs):
+                p, q = self.point(bounds[:2]), self.point(bounds[2:])
+                self.target.ellipse((*p, *q), **kwargs)
+            def polygon(self, points, **kwargs):
+                self.target.polygon([self.point(p) for p in points], **kwargs)
+            def arc(self, bounds, start, end, **kwargs):
+                p, q = self.point(bounds[:2]), self.point(bounds[2:])
+                kwargs["width"] = max(1, round(kwargs.get("width", 1) * damage_scale))
+                self.target.arc((*p, *q), start, end, **kwargs)
+        damage_draw = _RepairMarks(d)
+    else:
+        damage_draw = d
     # Condition-specific details are drawn in the object's own coordinates
     # so they remain attached during pickup, carry and repair transitions.
     if condition == "damaged":
         if name == "box":
-            d.line([(x-57,y-43),(x-24,y-13),(x-42,y+15),(x-5,y+48)],
+            damage_draw.line([(x-57,y-43),(x-24,y-13),(x-42,y+15),(x-5,y+48)],
                    fill=(69,47,41),width=8,joint="curve")
-            d.line([(x-24,y-13),(x+7,y-28)],fill=(69,47,41),width=5)
+            damage_draw.line([(x-24,y-13),(x+7,y-28)],fill=(69,47,41),width=5)
         elif name == "book":
             # Torn page edge and creased cover, not a generic surface crack.
-            d.polygon([(x+48,y-60),(x+70,y-45),(x+51,y-30)],
+            damage_draw.polygon([(x+48,y-60),(x+70,y-45),(x+51,y-30)],
                       fill=(250,250,250))
-            d.line([(x-44,y-48),(x-17,y-17),(x-37,y+11),(x-4,y+39)],
+            damage_draw.line([(x-44,y-48),(x-17,y-17),(x-37,y+11),(x-4,y+39)],
                    fill=(96,58,57),width=6)
         elif name == "ball":
             # A puncture and deflation seam.
-            d.ellipse((x+17,y-21,x+41,y+3),fill=(64,52,54))
-            d.arc((x-47,y-34,x+34,y+50),15,135,fill=(119,80,60),width=7)
+            damage_draw.ellipse((x+17,y-21,x+41,y+3),fill=(64,52,54))
+            damage_draw.arc((x-47,y-34,x+34,y+50),15,135,fill=(119,80,60),width=7)
         elif name == "flower":
             # Drooping stem and fallen petal.
-            d.line([(x,y+10),(x+18,y+33),(x+28,y+65)],
+            damage_draw.line([(x,y+10),(x+18,y+33),(x+28,y+65)],
                    fill=(73,105,69),width=8)
-            d.ellipse((x+37,y+52,x+65,y+77),fill=(215,129,147))
+            damage_draw.ellipse((x+37,y+52,x+65,y+77),fill=(215,129,147))
         elif name == "lantern":
             # Cracked glass and dimmed central glow.
-            d.line([(x-22,y-31),(x+3,y-7),(x-10,y+13),(x+21,y+42)],
+            damage_draw.line([(x-22,y-31),(x+3,y-7),(x-10,y+13),(x+21,y+42)],
                    fill=(81,91,104),width=6)
-            d.line([(x+3,y-7),(x+25,y-18)],fill=(81,91,104),width=4)
+            damage_draw.line([(x+3,y-7),(x+25,y-18)],fill=(81,91,104),width=4)
     if symbol_id is not None and name in ("box","book","ball","lantern"):
         from astra_v2.procedural_visual_library import draw_icon
         draw_icon(d,symbol_id,x,y+13,size=33)
@@ -617,5 +644,6 @@ def draw_duo(image, shot, t):
                "lantern":"sun","book":"book"}.get(prop,prop)
         symbol_id=icon_for_story(motif,stable_key) if motif in MOTIFS else None
         _prop(d,prop,*prop_pos,t,symbol_id=symbol_id,action=action,
-              condition=shot.get("story_prop_state"))
+              condition=shot.get("story_prop_state"),
+              repair_transition=bool(shot.get("story_prop_repair_transition")))
     return True
