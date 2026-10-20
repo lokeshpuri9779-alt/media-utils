@@ -161,6 +161,18 @@ def shortlist(ledger_path, review_path, output_path, limit=25):
         # This narrow heuristic flags disconnected endings only when a concrete
         # opening subject and a different ending subject are both identifiable.
         entry["causal_continuity_flags"] = list(entry["resolution_continuity_flags"])
+        entry["causal_continuity_evidence"] = []
+        if entry["causal_continuity_flags"] and len(entry["story_beats"]) >= 2:
+            opening = str(entry["story_beats"][0].get("speech") or "")
+            ending = str(entry["story_beats"][-1].get("speech") or "")
+            entry["causal_continuity_evidence"].append({
+                "flag": "setup_resolution_subject_switch",
+                "opening_scene": 1,
+                "ending_scene": len(entry["story_beats"]),
+                "opening_excerpt": opening[:240],
+                "ending_excerpt": ending[:240],
+                "review_note": "Check whether the ending resolves the opening problem; related objects may be legitimate.",
+            })
     result = {
         "candidates_with_resolution_continuity_flags": sum(
             bool(entry["resolution_continuity_flags"]) for entry in selected
