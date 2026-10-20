@@ -439,7 +439,7 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
     return hands
 
 
-def _prop(d, name, x, y, t, *, symbol_id=None, action="idle"):
+def _prop(d, name, x, y, t, *, symbol_id=None, action="idle", condition=None):
     """Draw the narrated object, with an optional stable illustrated emblem."""
     x,y=int(x),int(y)
     if name=="box":
@@ -479,6 +479,12 @@ def _prop(d, name, x, y, t, *, symbol_id=None, action="idle"):
         from astra_v2.procedural_visual_library import draw_icon, icon_for_story
         draw_icon(d,icon_for_story(name,name),x,y,size=120)
         return
+    # Show damage on the same illustrated object; repaired/intact versions
+    # retain the original artwork. Marks follow the object as it moves.
+    if condition == "damaged":
+        d.line([(x-34,y-43),(x-8,y-12),(x-23,y+9),(x+19,y+42)],
+               fill=(63,48,53),width=8,joint="curve")
+        d.line([(x-8,y-12),(x+27,y-26)],fill=(63,48,53),width=6)
     if symbol_id is not None and name in ("box","book","ball","lantern"):
         from astra_v2.procedural_visual_library import draw_icon
         draw_icon(d,symbol_id,x,y+13,size=33)
@@ -589,5 +595,6 @@ def draw_duo(image, shot, t):
         motif={"box":"star","ball":"star","flower":"flower",
                "lantern":"sun","book":"book"}.get(prop,prop)
         symbol_id=icon_for_story(motif,stable_key) if motif in MOTIFS else None
-        _prop(d,prop,*prop_pos,t,symbol_id=symbol_id,action=action)
+        _prop(d,prop,*prop_pos,t,symbol_id=symbol_id,action=action,
+              condition=shot.get("story_prop_state"))
     return True
