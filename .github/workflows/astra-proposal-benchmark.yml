@@ -10,6 +10,7 @@ on:
       - 'astra_v2/proposal_novelty_index.py'
       - 'astra_v2/semantic_candidate_index.py'
       - 'astra_v2/semantic_index_benchmark.py'
+      - 'astra_v2/semantic_candidate_diagnostics.py'
       - 'astra_v2/triage_index_benchmark.py'
       - 'astra_v2/triage_audit_benchmark.py'
       - '.github/workflows/astra-proposal-benchmark.yml'
@@ -81,6 +82,7 @@ jobs:
             git show origin/astra-state:runtime-health/story_proposals.json > runtime-health/story_proposals.json
           fi
           if [ -f runtime-health/story_proposals.json ]; then
+            python -m astra_v2.semantic_candidate_diagnostics --sample 1000 | tee semantic-candidate-fanout-1000.json
             for sample in 100 500 1000; do
               python -m astra_v2.triage_audit_benchmark --sample "$sample" | tee "triage-audit-real-${sample}.json"
             done
@@ -129,6 +131,7 @@ jobs:
             proposal-benchmark-500.json
             semantic-index-benchmark.json
             semantic-index-benchmark-1500.json
+            semantic-candidate-fanout-1000.json
             triage-index-benchmark-100.json
             triage-index-benchmark-500.json
             triage-audit-real-100.json
