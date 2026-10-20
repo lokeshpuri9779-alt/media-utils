@@ -17,7 +17,8 @@ def shortlist(ledger_path, review_path, output_path, limit=25):
         raise ValueError("Proposal/audit count mismatch")
     selected = []
     seen_titles = set()
-    for story, audit in zip(proposals, assessments):
+    # Prefer the newest proposals while retaining full ledger/audit identity checks.
+    for story, audit in zip(reversed(proposals), reversed(assessments)):
         if not isinstance(story, dict) or not isinstance(audit, dict):
             raise ValueError("Invalid proposal or audit entry")
         if story.get("content_id") != audit.get("content_id"):

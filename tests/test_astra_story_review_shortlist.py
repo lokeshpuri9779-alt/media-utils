@@ -22,7 +22,7 @@ class EditorialShortlistTests(unittest.TestCase):
             (root / "ledger.json").write_text(json.dumps({"proposals": stories}))
             (root / "audit.json").write_text(json.dumps({"proposals": audits}))
             result = shortlist(root / "ledger.json", root / "audit.json", root / "out.json")
-            self.assertEqual([x["content_id"] for x in result["review_candidates"]], ["0", "2"])
+            self.assertEqual([x["content_id"] for x in result["review_candidates"]], ["2", "0"])
             self.assertEqual(result["approved_for_production"], 0)
             self.assertFalse(result["publication_enabled"])
             self.assertTrue(all(not x["production_ready"] for x in result["review_candidates"]))
