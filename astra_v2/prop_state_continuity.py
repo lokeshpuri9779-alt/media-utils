@@ -12,7 +12,7 @@ DAMAGE = re.compile(r"\b(?:broke|broken|cracked|damaged|shattered)\b", re.I)
 
 def assign_prop_states(shots):
     """Attach a consistent condition timeline without mutating input shots."""
-    state = None
+    states = {}
     result = []
     for shot in shots:
         item = dict(shot)
@@ -20,6 +20,7 @@ def assign_prop_states(shots):
         if not prop:
             result.append(item)
             continue
+        state = states.get(prop)
         declared = item.get("story_prop_state")
         if declared is not None:
             if declared not in CONDITIONS:
@@ -37,5 +38,6 @@ def assign_prop_states(shots):
                 state = "damaged"
             if state is not None:
                 item["story_prop_state"] = state
+        states[prop] = state
         result.append(item)
     return result
