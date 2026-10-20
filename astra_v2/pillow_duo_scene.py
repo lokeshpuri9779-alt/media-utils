@@ -596,6 +596,29 @@ def draw_duo(image, shot, t):
         if owner_idx == 1 and current_action == "carry":
             actor_x -= 105
         return (actor_x + hand_side * 153, 1063)
+    # A handoff is animated only when both endpoints are explicitly authored.
+    # No character is inferred from the narration or generic action name.
+    handoff_from = shot.get("story_prop_handoff_from")
+    handoff_to = shot.get("story_prop_handoff_to")
+    handoff = action in ("handoff", "hand_off", "give", "pass") and (
+        isinstance(handoff_from, str) and isinstance(handoff_to, str)
+        and handoff_from.strip().casefold() != handoff_to.strip().casefold()
+    )
+    if handoff:
+        from_idx = next((i for i, name in enumerate(pair)
+                         if name.casefold() == handoff_from.strip().casefold()), None)
+        to_idx = next((i for i, name in enumerate(pair)
+                       if name.casefold() == handoff_to.strip().casefold()), None)
+        handoff = from_idx is not None and to_idx is not None
+    if handoff and prop:
+        def hand_anchor(idx):
+            x = (298 if idx == 0 else 772) + actor_translation(action, t, idx)
+            return (x + (153 if idx == 0 else -153), 1063)
+        start, end = hand_anchor(from_idx), hand_anchor(to_idx)
+        phase = _ease((max(0.0, float(t)) - .18) / 1.05)
+        prop_pos = (round(start[0] * (1 - phase) + end[0] * phase),
+                    round(start[1] * (1 - phase) + end[1] * phase
+                          - 52 * math.sin(math.pi * phase)))
     # Physical hand contact: once grasped, the object is driven by the
     # actor's hand anchor rather than an unrelated overlay trajectory.
     contact_actions={"pick","pickup","pick_up","carry","hold","repair","catch"}
@@ -637,11 +660,17 @@ def draw_duo(image, shot, t):
         # the object all the way to its resting position.
         if action in ("release","drop","put_down"):
             hand_strength *= 1.0-_ease((max(0.0,float(t))-.45)/.75)
-        hand_target=prop_pos if hand_strength>0 else None
+        if handoff and prop:
+            hand_strength = _ease((max(0.0, float(t)) - .06) / .7)
+            hand_target = prop_pos if idx in (from_idx, to_idx) else None
+        else:
+            hand_target=prop_pos if hand_strength>0 else None
         actor_mood=mood
         if mood=="angry" and idx==0:
             actor_mood="curious"  # Reaction shot, not two identical emotions.
-        if owner_active:
+        if handoff and prop:
+            pass  # Both authored participants reach toward the transferred prop.
+        elif owner_active:
             if idx != owner_idx:
                 hand_target = None
         elif idx==1 and action!="carry":
