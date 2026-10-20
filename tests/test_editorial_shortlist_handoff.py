@@ -20,6 +20,9 @@ class ShortlistHandoffTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.stories = [proposal(0), proposal(1)]
+        # Adjacent generated proposals can share a title; exercise two selected IDs.
+        for index, story in enumerate(self.stories):
+            story["title"] = f"Editorial handoff CI fixture {index}"
         self.stories[0]["editorial_context"] = {"preserve_full_payload": True}
         self.write("ledger.json", {"proposals": self.stories})
         self.write("audit.json", {"proposals": [
