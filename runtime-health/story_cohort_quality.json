@@ -1,0 +1,18 @@
+{
+  "approved_for_production": 0,
+  "historical": {
+    "issue:human_or_model_editorial_review_required": 5536,
+    "issue:insufficient_visual_variety": 416,
+    "issue:narrative_duplicate": 1587,
+    "publication_blocked": 5536,
+    "total": 5536
+  },
+  "new": {
+    "issue:human_or_model_editorial_review_required": 100,
+    "issue:narrative_duplicate": 22,
+    "publication_blocked": 100,
+    "total": 100
+  },
+  "publication_enabled": false,
+  "schema_version": 1
+}
