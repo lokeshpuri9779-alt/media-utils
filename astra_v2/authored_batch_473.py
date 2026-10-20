@@ -3,20 +3,20 @@ PLOTS = [
 ("mole-market-signs", "The Mole and the Turning Market Signs", "market mystery", [
 ("MIXED UP", "Before sunrise, a mole discovered that every market sign pointed shoppers toward the wrong street.", "village", "WRONG WAY"),
 ("THE FIRST TRY", "He straightened each arrow, but passing delivery carts shook them loose all over again.", "village", "FAILED"),
-("THE CLUE", "Beneath one post, he found a worn wooden peg that let the whole sign spin freely.", "door", "LOOSE PEG"),
+("THE CLUE", "Beneath one post, he found a worn wooden peg that let the whole sign spin freely.", "clock", "LOOSE PEG"),
 ("MARKET OPENS", "A carpenter secured the pegs, and the mole welcomed shoppers along the correct route.", "village", "RESTORED"),
 ]),
 ("heron-ferry-bell", "The Heron and the Ferry Bell", "river rescue", [
 ("A DARK CROSSING", "A heron carried medicine to a village, but the ferry lantern failed in the evening mist.", "ship", "NO LIGHT"),
-("THE WRONG GLOW", "The boat followed a distant glow until shallow reeds scraped its hull near the riverbank.", "ship", "DANGER"),
+("THE WRONG GLOW", "The boat followed a distant glow until shallow reeds scraped its hull near the riverbank.", "forest", "DANGER"),
 ("A FAMILIAR SOUND", "The heron recognized the safe landing bell ringing steadily through the thick river mist.", "signal", "LISTEN"),
 ("SAFE ARRIVAL", "The ferryman followed the marked channel toward the bell and delivered the medicine before closing.", "ship", "DELIVERED"),
 ]),
 ("fox-museum-lamp", "The Fox and the Missing Museum Shadow", "museum puzzle", [
 ("A BLANK WALL", "A fox opened the museum and found its famous dinosaur shadow had vanished from the exhibition wall.", "museum", "MISSING"),
-("THE WRONG GUESS", "She pulled back the new curtain, but the enormous dinosaur silhouette still would not appear.", "museum", "NO SHADOW"),
+("THE WRONG GUESS", "She pulled back the new curtain, but the enormous dinosaur silhouette still would not appear.", "door", "NO SHADOW"),
 ("A TINY CLUE", "A visiting mouse noticed thick dust covering the narrow lamp lens behind the skeleton display.", "door", "DUST"),
-("THE SHADOW RETURNS", "The curator cleaned the lens, and the giant dinosaur shadow returned for the delighted visitors.", "museum", "RETURNED"),
+("THE SHADOW RETURNS", "The curator cleaned the lens, and the giant dinosaur shadow returned for the delighted visitors.", "signal", "RETURNED"),
 ]),
 ("badger-sprinkler-dial", "The Badger and the Midnight Sprinklers", "garden mystery", [
 ("A COLD SHOWER", "A badger woke at midnight to find garden sprinklers soaking his seedlings in the cold.", "forest", "MIDNIGHT"),
