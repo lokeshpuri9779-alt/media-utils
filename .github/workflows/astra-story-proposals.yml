@@ -93,10 +93,37 @@ jobs:
         env:
           ASTRA_PROPOSAL_BATCH: "100"
         run: /usr/bin/time -f "ASTRA_STAGE_GENERATION_SECONDS=%e ASTRA_STAGE_GENERATION_PEAK_KB=%M" python -m astra_v2.autonomous_story_proposals
+      - name: Snapshot inventory before plot-first replenishment
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          ledger = json.loads(Path("runtime-health/story_proposals.json").read_text(encoding="utf-8"))
+          Path("/tmp/astra-plot-first-before.json").write_text(json.dumps(
+              [x.get("content_id") for x in ledger["proposals"]]), encoding="utf-8")
+          PY
       - name: Replenish unreviewed inventory with history-filtered plot-first drafts
         env:
           ASTRA_PLOT_FIRST_BATCH: "10"
         run: python -m astra_v2.plot_first_inventory
+      - name: Verify plot-first additions and isolation
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from astra_v2.publication_quality import publication_rejection
+          previous = set(json.loads(Path("/tmp/astra-plot-first-before.json").read_text(encoding="utf-8")))
+          ledger = json.loads(Path("runtime-health/story_proposals.json").read_text(encoding="utf-8"))
+          added = [x for x in ledger["proposals"] if x.get("content_id") not in previous]
+          if len(added) > 10 or len({x.get("content_id") for x in added}) != len(added):
+              raise SystemExit("Invalid plot-first replenishment count or duplicate IDs")
+          if any(x.get("production_ready") is not False or
+                 publication_rejection(x) != "unreviewed_causal_draft" for x in added):
+              raise SystemExit("Plot-first inventory contains an unsafe addition")
+          print("ASTRA_PLOT_FIRST_ADDED_VERIFIED=" + str(len(added)))
+          Path("/tmp/astra-plot-first-ids.json").write_text(
+              json.dumps([x["content_id"] for x in added]), encoding="utf-8")
+          PY
       - name: Verify isolation and persistence
         run: |
           python -m unittest discover -s tests -p test_astra_autonomous_story_proposals.py -v
@@ -182,6 +209,11 @@ jobs:
           actual = json.loads(Path("/tmp/astra-ledger-readback.json").read_text(encoding="utf-8"))
           if expected != actual:
               raise SystemExit("Durable ledger read-back differs from the generated ledger")
+          expected_ids = json.loads(Path("/tmp/astra-plot-first-ids.json").read_text(encoding="utf-8"))
+          durable_ids = {x.get("content_id") for x in actual.get("proposals", [])}
+          if not set(expected_ids).issubset(durable_ids):
+              raise SystemExit("Plot-first additions missing from durable state")
+          print("ASTRA_DURABLE_PLOT_FIRST_ADDED=" + str(len(expected_ids)))
           print("ASTRA_DURABLE_LEDGER_READBACK=verified")
           print(f"ASTRA_DURABLE_PROPOSAL_COUNT={len(actual.get('proposals', []))}")
           print(f"ASTRA_DURABLE_NEXT_INDEX={actual.get('next_index', 'missing')}")
