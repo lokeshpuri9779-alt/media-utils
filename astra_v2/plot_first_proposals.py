@@ -60,7 +60,14 @@ def consequence_for(problem):
                 DEFAULT_CONSEQUENCE)
 
 
-def proposals(limit=100, excluded_plot_hashes=()):
+def structural_key(story):
+    """Stable causal key; exclude cosmetics and reject missing fields."""
+    fields = ("problem", "obstacle", "recovery", "consequence", "verification")
+    values = tuple(str(story.get(field) or "").casefold().strip() for field in fields)
+    return values if all(values) else None
+
+
+def proposals(limit=100, excluded_plot_hashes=(), excluded_structural_keys=()):
     seen = set(excluded_plot_hashes)
     seen_structures = set(excluded_structural_keys)
     # Include existing authored stories in novelty history by default.
