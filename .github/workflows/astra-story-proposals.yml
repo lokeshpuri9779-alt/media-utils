@@ -206,6 +206,10 @@ jobs:
               "editorial_issues_flagged": review.get("editorial_issue_count"),
               "publication_quality_blocks": review.get("publication_blocked_count"),
               "approved_for_production": 0,
+              "structurally_sound_unreviewed_count": review.get("structurally_sound_unreviewed_count"),
+              "editorial_review_queue_count": len(review.get("review_queue", [])),
+              "editorial_reason_counts": review.get("editorial_reason_counts", {}),
+              "publication_rejection_reason_counts": review.get("publication_rejection_reason_counts", {}),
           }
           Path("runtime-health/story_supply_status.json").write_text(
               json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
