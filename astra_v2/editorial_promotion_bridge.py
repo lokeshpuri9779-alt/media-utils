@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 
 from astra_v2.editorial_approval_manifest import story_digest, validate_manifest
+from astra_v2.proposal_history import load_history
 
 
 def promote_reviewed_batch(stories, decisions, history=()):
@@ -57,6 +58,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--stories", required=True)
     parser.add_argument("--decisions", required=True)
+    parser.add_argument("--publisher-state", required=True)
+    parser.add_argument("--story-history", required=True)
     parser.add_argument("--output-stories", required=True)
     parser.add_argument("--output-decisions", required=True)
     args = parser.parse_args()
@@ -67,7 +70,13 @@ def main():
         path.unlink(missing_ok=True)
     stories = json.loads(Path(args.stories).read_text(encoding="utf-8"))["stories"]
     decisions = json.loads(Path(args.decisions).read_text(encoding="utf-8"))["reviews"]
-    output = promote_reviewed_batch(stories, decisions)
+    # Never promote against an implicit empty history. Both persisted histories
+    # must be present, as required by the production editorial intake.
+    for history_path in (args.publisher_state, args.story_history):
+        if not Path(history_path).is_file():
+            raise FileNotFoundError("editorial_promotion_requires_complete_history")
+    history = load_history(args.publisher_state, args.story_history)
+    output = promote_reviewed_batch(stories, decisions, history)
     for path, payload in zip(destinations, output):
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
