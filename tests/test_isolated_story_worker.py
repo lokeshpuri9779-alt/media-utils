@@ -11,7 +11,7 @@ class IsolatedStoryWorkerTests(unittest.TestCase):
         stripes = [worker_indices(1000, i) for i in range(8)]
         indices = [index for stripe in stripes for index in stripe]
         self.assertEqual(len(indices), 256)
-        self.assertEqual(len(set(indices)), 500)
+        self.assertEqual(len(set(indices)), 256)
         self.assertEqual(set(indices), set(range(1000, 1256)))
 
     def test_generated_workers_round_trip_into_coordinator(self):
@@ -24,7 +24,7 @@ class IsolatedStoryWorkerTests(unittest.TestCase):
                     directory / "checkpoint.json", directory / "stories.json",
                     batch_id="batch", worker_index=i))
             merged = combine_workers("batch", workers)
-            self.assertEqual(merged["count"], 500)
+            self.assertEqual(merged["count"], 256)
             self.assertEqual(merged["approved_count"], 0)
             self.assertFalse(merged["publication_triggered"])
 

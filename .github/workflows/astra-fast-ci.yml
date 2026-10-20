@@ -39,6 +39,12 @@ jobs:
           python -m unittest discover -s tests -p 'test_astra_durable_story_ledger.py' -v
           python -m unittest discover -s tests -p 'test_astra_shorts_novelty*.py' -v
           python -m unittest discover -s tests -p 'test_astra_autonomous_story_proposals.py' -v
+          python -m unittest discover -s tests -p 'test_story_batch_checkpoint.py' -v
+          python -m unittest discover -s tests -p 'test_parallel_story_workers.py' -v
+          python -m unittest discover -s tests -p 'test_isolated_story_worker.py' -v
+          python -m unittest discover -s tests -p 'test_global_story_novelty.py' -v
+          python -m unittest discover -s tests -p 'test_single_writer_story_ledger.py' -v
+          python -m unittest discover -s tests -p 'test_parallel_story_inventory.py' -v
           python -m unittest discover -s tests -p 'test_astra_proposal_history.py' -v
           python -m unittest discover -s tests -p 'test_astra_story_supply_review.py' -v
           python -m unittest discover -s tests -p 'test_editorial_cache_parity.py' -v
