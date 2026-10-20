@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-20",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 2,
-  "confirmed_today": 1,
-  "last_attempt_at": "2026-10-20T08:30:31.834894+00:00",
+  "attempts": 3,
+  "confirmed_today": 2,
+  "last_attempt_at": "2026-10-20T08:57:29.711092+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -2211,30 +2211,38 @@
       "format": "short",
       "uploaded_at": "2026-10-20T08:24:22.937511+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-forge-71acde15f90e5a99": {
+      "video_id": "xp3XA6PNKBs",
+      "confirmed_at": "2026-10-20T08:56:32.453070+00:00",
+      "title": "The Heron and the Ferry Bell",
+      "format": "short",
+      "uploaded_at": "2026-10-20T08:30:34.043091+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "xp3XA6PNKBs": {
-      "content_id": "rayvan-forge-71acde15f90e5a99",
-      "title": "The Heron and the Ferry Bell",
+    "gOWjsFWXWmg": {
+      "content_id": "rayvan-forge-80c11c9b714647d3",
+      "title": "The Badger and the Midnight Sprinklers",
       "day": "2026-10-20",
-      "uploaded_at": "2026-10-20T08:30:34.043091+00:00",
+      "uploaded_at": "2026-10-20T08:57:31.291589+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "73809a3d5898b9f1cbbd1a047ee74bb5ed7966a426c31ce3f5ad0a54116dd996",
+      "plot_fingerprint": "000678fe2195a4fbda0e6dd166c4a42b59d515b0cab5b9dce922b834a35dfca8",
       "story_beats": [
         {
-          "speech": "A heron carried medicine to a village, but the ferry lantern failed in the evening mist."
+          "speech": "A badger woke at midnight to find garden sprinklers soaking his seedlings in the cold."
         },
         {
-          "speech": "The boat followed a distant glow until shallow reeds scraped its hull near the riverbank."
+          "speech": "He moved the timer hands forward, but the sprinklers still started after sunset that evening."
         },
         {
-          "speech": "The heron recognized the safe landing bell ringing steadily through the thick river mist."
+          "speech": "A rabbit discovered the timer's day and night labels had been swapped during spring cleaning."
         },
         {
-          "speech": "The ferryman followed the marked channel toward the bell and delivered the medicine before closing."
+          "speech": "They corrected the labels, and the seedlings received water only after the morning air warmed."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -2242,11 +2250,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-20T08:29:21.330889+00:00",
+  "last_preflight_at": "2026-10-20T08:56:31.989323+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-20T08:30:34.427094+00:00",
+    "at": "2026-10-20T08:57:31.582978+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2263,7 +2271,7 @@
     "oauth_tests": "success",
     "layer_tests": "success"
   },
-  "last_feedback_attempt_at": "2026-10-19T20:52:24.403538+00:00",
+  "last_feedback_attempt_at": "2026-10-20T08:57:10.520919+00:00",
   "reserved": {
     "rayvan-original-spacesong-v1": {
       "at": "2026-10-12T19:00:53.784470+00:00",
@@ -5611,10 +5619,33 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-forge-80c11c9b714647d3": {
+      "at": "2026-10-20T08:57:29.711074+00:00",
+      "title": "The Badger and the Midnight Sprinklers",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "000678fe2195a4fbda0e6dd166c4a42b59d515b0cab5b9dce922b834a35dfca8",
+      "story_beats": [
+        {
+          "speech": "A badger woke at midnight to find garden sprinklers soaking his seedlings in the cold."
+        },
+        {
+          "speech": "He moved the timer hands forward, but the sprinklers still started after sunset that evening."
+        },
+        {
+          "speech": "A rabbit discovered the timer's day and night labels had been swapped during spring cleaning."
+        },
+        {
+          "speech": "They corrected the labels, and the seedlings received water only after the morning air warmed."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-20T08:30:34.427055+00:00",
+    "at": "2026-10-20T08:57:31.582923+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -5625,20 +5656,20 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-20T08:30:34.427087+00:00",
+    "at": "2026-10-20T08:57:31.582969+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-20T08:29:49.727937+00:00",
+    "at": "2026-10-20T08:57:10.094901+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-71acde15f90e5a99",
-    "video_url": "https://www.youtube.com/watch?v=xp3XA6PNKBs"
+    "content_id": "rayvan-forge-80c11c9b714647d3",
+    "video_url": "https://www.youtube.com/watch?v=gOWjsFWXWmg"
   },
   "last_workflow_result": {
-    "at": "2026-10-20T08:30:34.426947+00:00",
+    "at": "2026-10-20T08:57:31.582850+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -5647,42 +5678,8 @@
     "reason": ""
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-20T08:30:34.427052+00:00",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 5,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3
-        },
-        "seen": 89,
-        "total": 161
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 161,
-        "fingerprint": 0,
-        "id": 89,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 72,
-        "title": 0,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 72,
-        "remaining": 5
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "considered": 1,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 0
-      }
-    },
+    "at": "2026-10-20T08:57:31.582919+00:00",
+    "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
