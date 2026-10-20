@@ -1,10 +1,10 @@
 {
   "items": [
     {
-      "content_id": "astra-proposal-5e4d1e85f14315eeef1c",
-      "title": "The Door Mystery of the Market",
+      "content_id": "astra-proposal-39af269b89f60103727d",
+      "title": "The Telescope Mystery of the Market",
       "kind": "unreviewed_causal_draft",
-      "story_sha256": "d1e431c0a9562a8a1ee725fdefda2111d03fc5b1286807e9061da2ba9237eb7b",
+      "story_sha256": "20dd03be26665c4c7dd8c58741843a6a00192cefc6fc63137e5ece3cb10cbd68",
       "candidate_issues": [
         "human_or_model_editorial_review_required",
         "not_production_ready",
@@ -15,38 +15,164 @@
       "story_beats": [
         {
           "story_beat": "reveal",
-          "speech": "As the otter in a floating market, a river otter needed to understand why all the shadows pointed toward one locked door, before the evacuation bell sent everyone away. A rescue boat repeatedly returned to the wrong shore. An earlier mistake left the protagonist reluctant to intervene. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "door"
+          "speech": "As the otter in a floating market, a river otter needed to understand why the stars vanished above a single rooftop, before the mountain pass closed for winter. A rescue boat repeatedly returned to the wrong shore. Before acting, the team had to choose between two costly alternatives. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "telescope"
         },
         {
           "story_beat": "build",
-          "speech": "Instead of guessing, a river otter compared a clockwork shadow moving against the sun with a child's drawing that matched the broken machine; a lonely task became a shared effort. A helper's earlier warning had been dismissed as unrelated. a river otter compared the warning with the new physical evidence and charted the current against the boat's navigation marks. A friend proposed a reversible action with a clear stopping rule; built a small safe model to test the theory, but the safest route was blocked by a fallen tree. The evidence gave the team a testable explanation rather than another suspicion.",
+          "speech": "Instead of guessing, a river otter compared a lens hidden in a broken telescope with a message carried by migrating birds; pride gave way to doubt before trust returned. Two witnesses described incompatible versions of the event. a river otter reconstructed the timeline from independent records and charted the current against the boat's navigation marks. A limited trial ruled out the tempting shortcut; mapped which events happened before each failure, but the team had to work without disturbing nesting animals. The evidence gave the team a testable explanation rather than another suspicion.",
           "visual": "book"
         },
         {
           "story_beat": "twist",
-          "speech": "The warning predicted the failure more accurately than the first theory: the missing object had been protecting the town from a larger danger. An underwater obstruction had redirected the river after the last storm. The cautious trial succeeded because the protagonist acknowledged the old mistake. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a river otter checked the clue again and found that it fit the evidence gathered at the start.",
+          "speech": "The timeline showed how both witnesses had seen different stages of the same event: the warning described tomorrow's weather rather than today's. An underwater obstruction had redirected the river after the last storm. The protagonist changed course after the evidence challenged the first plan. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a river otter checked the clue again and found that it fit the evidence gathered at the start.",
           "visual": "signal"
         },
         {
           "story_beat": "payoff",
-          "speech": "With the cause understood, a river otter restored the night lights and reopened the route before dawn. The community saw how the evidence led to the solution and prevented the next scheduled outage. The team included the helper in designing a better early-warning procedure. Together they marked the safer channel and removed the obstruction carefully. The protagonist taught others how to test uncertain ideas safely.",
+          "speech": "With the cause understood, a river otter opened the hidden channel and restored the town's water. The community saw how the evidence led to the solution and made the result easy for children to verify. The team published a shared timeline so future warnings could be interpreted correctly. Together they marked the safer channel and removed the obstruction carefully. The final choice preserved the evidence and earned back the community's trust.",
+          "visual": "telescope"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-39af269b89f60103727d",
+        "story_sha256": "20dd03be26665c4c7dd8c58741843a6a00192cefc6fc63137e5ece3cb10cbd68",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-93fa90958fdc9d9e8c85",
+      "title": "The Lighthouse Mystery of the Market",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "4f948795dcb7e9e7e02f9c1b92f2988788f12f6dfa4dc7e74f209762e7e0086c",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the astronomer in a floating market, a young astronomer needed to understand why the lighthouse beam stopped before reaching the sea, before sunrise erased the only clue. A vital delivery disappeared between two checkpoints. A strict deadline made careful investigation seem impossible. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "lighthouse"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a young astronomer compared a jammed brass lens mechanism with a child's drawing that matched the broken machine; fear turned into curiosity when the clue finally made sense. The first clue contradicted the town's explanation. a young astronomer tested a competing explanation against the original clue and reconstructed custody of the delivery and found a mistaken handoff. The protagonist negotiated a temporary safe pause; tested the pattern against a hand-drawn timeline, but the useful part was hidden inside an ordinary object. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "Only the second explanation accounted for both observations: the apparent sabotage was actually an emergency signal. The supposed theft was a routing error made during an emergency. The pause allowed a small test that prevented a larger mistake. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a young astronomer checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a young astronomer reunited the separated team and returned the lost object. The community saw how the evidence led to the solution and made the result easy for children to verify. The team documented the rejected explanation so it would not mislead anyone again. Together they returned the delivery and introduced a shared handoff record. The team created an emergency procedure that protects time for verification.",
+          "visual": "lighthouse"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-93fa90958fdc9d9e8c85",
+        "story_sha256": "4f948795dcb7e9e7e02f9c1b92f2988788f12f6dfa4dc7e74f209762e7e0086c",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-03beab0fa9d23c558b14",
+      "title": "The Bridge Mystery of the Market",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "93c63a73e1d180add6440ad1b4118b5ce9faa76ecbe18a9d895437604419abf8",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the astronomer in a floating market, a young astronomer needed to understand why every bridge light blinked in a different rhythm, before sunrise erased the only clue. A flood barrier protected the village but trapped wildlife upstream. The team could rescue one group immediately or protect everyone later. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "bridge"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a young astronomer compared a pattern hidden in the wiring with a sequence of lights from a passing train; the hero learned that asking for help was the missing step. A helper's earlier warning had been dismissed as unrelated. a young astronomer compared the warning with the new physical evidence and modeled the water flow and traced the animals' blocked passage. They created a temporary safeguard while testing the permanent solution; followed the sound to its physical source, but a ticking timer left only minutes to compare the evidence. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "The warning predicted the failure more accurately than the first theory: the strange phenomenon was caused by two systems that had fallen out of sync. A forgotten maintenance gate could protect both homes and wildlife. The safeguard bought time to resolve the cause without abandoning anyone. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a young astronomer checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a young astronomer repaired the mechanism and taught the neighbors how to maintain it. The community saw how the evidence led to the solution without wasting the town limited supplies. The team included the helper in designing a better early-warning procedure. Together they opened a safe passage and installed a seasonal gate inspection. The final solution removed the tradeoff and kept the safeguard available.",
+          "visual": "signal"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-03beab0fa9d23c558b14",
+        "story_sha256": "93c63a73e1d180add6440ad1b4118b5ce9faa76ecbe18a9d895437604419abf8",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-ff89c5d8c256f231450f",
+      "title": "The Statue Mystery of the Garden",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "853d8adf4bfe4f3a533fa677decff69d3030e3d2005196485c179b2d9d028c29",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the astronomer in a mountain garden, a young astronomer needed to understand why the museum's smallest statue changed position nightly, before the mountain pass closed for winter. A vital delivery disappeared between two checkpoints. Before acting, the team had to choose between two costly alternatives. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "statue"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a young astronomer compared tiny wet footprints beside its case with an overlooked maintenance log; an old disagreement was resolved by a small act of kindness. A failed test revealed that an important assumption was wrong. a young astronomer repeated the test under controlled conditions and reconstructed custody of the delivery and found a mistaken handoff. A limited trial ruled out the tempting shortcut; checked the clue against weather and tide records, but the first explanation failed a simple repeat test. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "The repeated result exposed the missing cause: the machine was working correctly but responding to a hidden second control. The supposed theft was a routing error made during an emergency. The protagonist changed course after the evidence challenged the first plan. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a young astronomer checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a young astronomer left a reliable warning system for the next generation. The community saw how the evidence led to the solution while keeping the evacuation route open. The team added a repeatable check to catch the same failure early. Together they returned the delivery and introduced a shared handoff record. The final choice preserved the evidence and earned back the community's trust.",
           "visual": "garden"
         }
       ],
       "review_template": {
-        "content_id": "astra-proposal-5e4d1e85f14315eeef1c",
-        "story_sha256": "d1e431c0a9562a8a1ee725fdefda2111d03fc5b1286807e9061da2ba9237eb7b",
+        "content_id": "astra-proposal-ff89c5d8c256f231450f",
+        "story_sha256": "853d8adf4bfe4f3a533fa677decff69d3030e3d2005196485c179b2d9d028c29",
         "decision": "pending",
         "reviewer": "",
         "review_notes": ""
       }
     },
     {
-      "content_id": "astra-proposal-41b48560bb044553f8f0",
-      "title": "The Map Mystery of the Library",
+      "content_id": "astra-proposal-808ec31819aaac03a1fb",
+      "title": "The River Mystery of the Village",
       "kind": "unreviewed_causal_draft",
-      "story_sha256": "6f8a3a03d55a99d998b0ca97b8ffca2a1f6cc451ed4d276e4f35d72c6eeec5fa",
+      "story_sha256": "f248a0ebf2f0d68a357acc9cdc67b71f9883e55162cb7e020e9fd8b10eeb1407",
       "candidate_issues": [
         "human_or_model_editorial_review_required",
         "not_production_ready",
@@ -57,38 +183,38 @@
       "story_beats": [
         {
           "story_beat": "reveal",
-          "speech": "As the clockmaker in a coastal library, a clockmaker needed to understand why the town's oldest map changed each morning, before sunrise erased the only clue. A rescue boat repeatedly returned to the wrong shore. A trusted tool produced a confident but misleading result. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "map"
+          "speech": "As the astronomer in a flooded village, a young astronomer needed to understand why a river flowed backward for exactly one minute, before the last ferry left the harbor. A mountain village's food store emptied faster than deliveries arrived. A strict deadline made careful investigation seem impossible. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "river"
         },
         {
           "story_beat": "build",
-          "speech": "Instead of guessing, a clockmaker compared new streets etched into a stone tile with a child's drawing that matched the broken machine; a lonely task became a shared effort. The obvious solution would have damaged the only surviving clue. a clockmaker built a reversible test before touching the original evidence and charted the current against the boat's navigation marks. The protagonist verified its output using a different method; built a small safe model to test the theory, but the safest route was blocked by a fallen tree. The evidence gave the team a testable explanation rather than another suspicion.",
+          "speech": "Instead of guessing, a young astronomer compared a gate buried under the riverbed with a trail of warm stones beneath the snow; a lonely task became a shared effort. The first clue contradicted the town's explanation. a young astronomer tested a competing explanation against the original clue and tracked storage losses and compared the delivery schedule with weather records. The protagonist negotiated a temporary safe pause; built a small safe model to test the theory, but the safest route was blocked by a fallen tree. The evidence gave the team a testable explanation rather than another suspicion.",
           "visual": "book"
         },
         {
           "story_beat": "twist",
-          "speech": "The reversible test revealed the cause without destroying the clue: the apparent sabotage was actually an emergency signal. An underwater obstruction had redirected the river after the last storm. The independent measurement uncovered the tool's hidden limitation. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a clockmaker checked the clue again and found that it fit the evidence gathered at the start.",
+          "speech": "Only the second explanation accounted for both observations: the missing object had been protecting the town from a larger danger. A damaged vent was spoiling food rather than anyone stealing it. The pause allowed a small test that prevented a larger mistake. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a young astronomer checked the clue again and found that it fit the evidence gathered at the start.",
           "visual": "signal"
         },
         {
           "story_beat": "payoff",
-          "speech": "With the cause understood, a clockmaker restored the night lights and reopened the route before dawn. The community saw how the evidence led to the solution and prevented the next scheduled outage. The team preserved the original evidence for future investigators. Together they marked the safer channel and removed the obstruction carefully. The team required independent verification before future critical decisions.",
-          "visual": "lantern"
+          "speech": "With the cause understood, a young astronomer shared the discovery so the whole community could solve the problem together. The community saw how the evidence led to the solution and prevented the next scheduled outage. The team documented the rejected explanation so it would not mislead anyone again. Together they repaired the vent and introduced a shared inventory check. The team created an emergency procedure that protects time for verification.",
+          "visual": "telescope"
         }
       ],
       "review_template": {
-        "content_id": "astra-proposal-41b48560bb044553f8f0",
-        "story_sha256": "6f8a3a03d55a99d998b0ca97b8ffca2a1f6cc451ed4d276e4f35d72c6eeec5fa",
+        "content_id": "astra-proposal-808ec31819aaac03a1fb",
+        "story_sha256": "f248a0ebf2f0d68a357acc9cdc67b71f9883e55162cb7e020e9fd8b10eeb1407",
         "decision": "pending",
         "reviewer": "",
         "review_notes": ""
       }
     },
     {
-      "content_id": "astra-proposal-e6745723d264809cc4be",
-      "title": "The Map Mystery of the Garden",
+      "content_id": "astra-proposal-41c591e93fd5adab740c",
+      "title": "The Bell Mystery of the Observatory",
       "kind": "unreviewed_causal_draft",
-      "story_sha256": "62a07a3b85bf5af0655afb3360545d0102f6fe6878f60c6e12f3defc0dc524a4",
+      "story_sha256": "e7dadf6f0905a006ba5d82529f055e1a111c7c92d92d432ba18c702faa29c3aa",
       "candidate_issues": [
         "human_or_model_editorial_review_required",
         "not_production_ready",
@@ -99,38 +225,80 @@
       "story_beats": [
         {
           "story_beat": "reveal",
-          "speech": "As the robot in a mountain garden, a repair robot needed to understand why the town's oldest map changed each morning, before sunrise erased the only clue. Two villages claimed ownership of the same ancient bridge. The team could rescue one group immediately or protect everyone later. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "map"
+          "speech": "As the robot in a silent observatory, a repair robot needed to understand why the warning bell rang beneath the lake, before the last ferry left the harbor. An old promise prevented neighbors from asking for urgent help. Two allies disagreed about which clue deserved attention. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "bell"
         },
         {
           "story_beat": "build",
-          "speech": "Instead of guessing, a repair robot compared new streets etched into a stone tile with a child's drawing that matched the broken machine; fear turned into curiosity when the clue finally made sense. The obvious solution would have damaged the only surviving clue. a repair robot built a reversible test before touching the original evidence and compared historical agreements with the bridge's repair records. They created a temporary safeguard while testing the permanent solution; tracked the signal across three locations, but the safest route was blocked by a fallen tree. The evidence gave the team a testable explanation rather than another suspicion.",
+          "speech": "Instead of guessing, a repair robot compared a bell-shaped sonar echo with a trail of warm stones beneath the snow; a lonely task became a shared effort. Two witnesses described incompatible versions of the event. a repair robot reconstructed the timeline from independent records and found out what each neighbor believed the promise required. They split the investigation into independent tests; reconstructed the mechanism from its worn parts, but a sudden power cut interrupted the first test. The evidence gave the team a testable explanation rather than another suspicion.",
           "visual": "book"
         },
         {
           "story_beat": "twist",
-          "speech": "The reversible test revealed the cause without destroying the clue: the apparent sabotage was actually an emergency signal. Both villages had inherited different maintenance duties, not exclusive ownership. The safeguard bought time to resolve the cause without abandoning anyone. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a repair robot checked the clue again and found that it fit the evidence gathered at the start.",
+          "speech": "The timeline showed how both witnesses had seen different stages of the same event: the missing object had been protecting the town from a larger danger. Both sides had been protecting the same person without realizing it. Their separate findings became consistent only when combined. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a repair robot checked the clue again and found that it fit the evidence gathered at the start.",
           "visual": "signal"
         },
         {
           "story_beat": "payoff",
-          "speech": "With the cause understood, a repair robot restored the night lights and reopened the route before dawn. The community saw how the evidence led to the solution and prevented the next scheduled outage. The team preserved the original evidence for future investigators. Together they formed a joint repair council and reopened the crossing. The final solution removed the tradeoff and kept the safeguard available.",
+          "speech": "With the cause understood, a repair robot redirected the danger toward an empty field and kept the village safe. The community saw how the evidence led to the solution before the weather changed again. The team published a shared timeline so future warnings could be interpreted correctly. Together they negotiated a new agreement and restored cooperation. Both allies received credit and agreed to share evidence earlier.",
+          "visual": "signal"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-41c591e93fd5adab740c",
+        "story_sha256": "e7dadf6f0905a006ba5d82529f055e1a111c7c92d92d432ba18c702faa29c3aa",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-ef1921d6c992143a3328",
+      "title": "The Signal Mystery of the Village",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "c68643ed99a101a0eba417b61d341bdc053d9ae7202bafb0ee05689287faf7a4",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the robot in a flooded village, a repair robot needed to understand why the signal tower sent messages to an empty sky, before the last ferry left the harbor. A shared garden began failing after a well-intended repair. Two allies disagreed about which clue deserved attention. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a repair robot compared a mirror reflecting a distant beacon with a small mechanical part lodged beneath the floor; a seemingly useless object proved essential. The first clue contradicted the town's explanation. a repair robot tested a competing explanation against the original clue and compared soil samples before and after the repair. They split the investigation into independent tests; mapped which events happened before each failure, but the team had to work without disturbing nesting animals. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "Only the second explanation accounted for both observations: the clue pointed away from the obvious culprit and toward an overlooked helper. The new drainage channel was washing nutrients away. Their separate findings became consistent only when combined. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a repair robot checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a repair robot sent a clear signal that guided the missing travelers home. The community saw how the evidence led to the solution without wasting the town limited supplies. The team documented the rejected explanation so it would not mislead anyone again. Together they rerouted the drainage and helped the gardeners restore the soil. Both allies received credit and agreed to share evidence earlier.",
           "visual": "clock"
         }
       ],
       "review_template": {
-        "content_id": "astra-proposal-e6745723d264809cc4be",
-        "story_sha256": "62a07a3b85bf5af0655afb3360545d0102f6fe6878f60c6e12f3defc0dc524a4",
+        "content_id": "astra-proposal-ef1921d6c992143a3328",
+        "story_sha256": "c68643ed99a101a0eba417b61d341bdc053d9ae7202bafb0ee05689287faf7a4",
         "decision": "pending",
         "reviewer": "",
         "review_notes": ""
       }
     },
     {
-      "content_id": "astra-proposal-97163ec4fe8b602b945c",
-      "title": "The Map Mystery of the Railway",
+      "content_id": "astra-proposal-510ee12b4d2de7df46fb",
+      "title": "The Snow Mystery of the Museum",
       "kind": "unreviewed_causal_draft",
-      "story_sha256": "6dc2cb75008b5035d856a9b26d8786baba8162a51367068291054edc60e5daf4",
+      "story_sha256": "4bcb3bc73506c7a92d621e18bb25ff7b995fc6e0fb7c58c37c62c54f13c5073a",
       "candidate_issues": [
         "human_or_model_editorial_review_required",
         "not_production_ready",
@@ -141,290 +309,38 @@
       "story_beats": [
         {
           "story_beat": "reveal",
-          "speech": "As the otter in an abandoned railway, a river otter needed to understand why the town's oldest map changed each morning, before sunrise erased the only clue. Two villages claimed ownership of the same ancient bridge. The first witness seemed unreliable but held the only missing detail. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "map"
+          "speech": "As the fox in an underground museum, a curious fox needed to understand why fresh snow appeared inside a sealed room, before the evacuation bell sent everyone away. A new machine improved one neighborhood while harming another. A trusted tool produced a confident but misleading result. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "snow"
         },
         {
           "story_beat": "build",
-          "speech": "Instead of guessing, a river otter compared new streets etched into a stone tile with a constellation reflected in a puddle; fear turned into curiosity when the clue finally made sense. The obvious solution would have damaged the only surviving clue. a river otter built a reversible test before touching the original evidence and compared historical agreements with the bridge's repair records. The protagonist asked the witness to reconstruct the event without interruption; tracked the signal across three locations, but the safest route was blocked by a fallen tree. The evidence gave the team a testable explanation rather than another suspicion.",
+          "speech": "Instead of guessing, a curious fox compared a cold draft from a forgotten tunnel with a child's drawing that matched the broken machine; fear turned into curiosity when the clue finally made sense. A failed test revealed that an important assumption was wrong. a curious fox repeated the test under controlled conditions and measured the unintended effects across both neighborhoods. The protagonist verified its output using a different method; reconstructed the mechanism from its worn parts, but a sudden power cut interrupted the first test. The evidence gave the team a testable explanation rather than another suspicion.",
           "visual": "book"
         },
         {
           "story_beat": "twist",
-          "speech": "The reversible test revealed the cause without destroying the clue: the apparent sabotage was actually an emergency signal. Both villages had inherited different maintenance duties, not exclusive ownership. The missing detail reconciled the conflicting accounts. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a river otter checked the clue again and found that it fit the evidence gathered at the start.",
+          "speech": "The repeated result exposed the missing cause: the apparent sabotage was actually an emergency signal. The machine diverted resources from the people it was meant to help. The independent measurement uncovered the tool's hidden limitation. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a curious fox checked the clue again and found that it fit the evidence gathered at the start.",
           "visual": "signal"
         },
         {
           "story_beat": "payoff",
-          "speech": "With the cause understood, a river otter restored the night lights and reopened the route before dawn. The community saw how the evidence led to the solution without blaming anyone before the evidence was clear. The team preserved the original evidence for future investigators. Together they formed a joint repair council and reopened the crossing. The witness was invited to help document the corrected record.",
-          "visual": "lighthouse"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-97163ec4fe8b602b945c",
-        "story_sha256": "6dc2cb75008b5035d856a9b26d8786baba8162a51367068291054edc60e5daf4",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-342e547e34478b98ffe3",
-      "title": "The Signal Mystery of the Railway",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "fbad873052671e91cf08e6e5ba8293ba38e08a968cffd879c1bd3643976083b5",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the robot in an abandoned railway, a repair robot needed to understand why the signal tower sent messages to an empty sky, before sunrise erased the only clue. Two villages claimed ownership of the same ancient bridge. A strict deadline made careful investigation seem impossible. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a repair robot compared a mirror reflecting a distant beacon with a constellation reflected in a puddle; fear turned into curiosity when the clue finally made sense. The obvious solution would have damaged the only surviving clue. a repair robot built a reversible test before touching the original evidence and compared historical agreements with the bridge's repair records. The protagonist negotiated a temporary safe pause; tracked the signal across three locations, but the safest route was blocked by a fallen tree. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "The reversible test revealed the cause without destroying the clue: the apparent sabotage was actually an emergency signal. Both villages had inherited different maintenance duties, not exclusive ownership. The pause allowed a small test that prevented a larger mistake. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a repair robot checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a repair robot restored the night lights and reopened the route before dawn. The community saw how the evidence led to the solution without blaming anyone before the evidence was clear. The team preserved the original evidence for future investigators. Together they formed a joint repair council and reopened the crossing. The team created an emergency procedure that protects time for verification.",
-          "visual": "statue"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-342e547e34478b98ffe3",
-        "story_sha256": "fbad873052671e91cf08e6e5ba8293ba38e08a968cffd879c1bd3643976083b5",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-248e400629d0d568ff10",
-      "title": "The Signal Mystery of the Observatory",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "2cad7c5aae0af20911ed0b645c79d0b0b7472e9455b3f215ed832809c7e90113",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the robot in a silent observatory, a repair robot needed to understand why the signal tower sent messages to an empty sky, before the annual night market began. A museum exhibit went dark whenever visitors approached. Two allies disagreed about which clue deserved attention. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a repair robot compared a mirror reflecting a distant beacon with a constellation reflected in a puddle; fear turned into curiosity when the clue finally made sense. A harmless-looking side effect threatened the safest route. a repair robot traced the side effect backward to the mechanism that triggered it and tested the display with different visitor paths and lighting levels. They split the investigation into independent tests; tracked the signal across three locations, but the safest route was blocked by a fallen tree. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "The traced chain of events identified the hidden trigger: the apparent sabotage was actually an emergency signal. A protective sensor was mistaking reflections for dangerous heat. Their separate findings became consistent only when combined. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a repair robot checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a repair robot restored the night lights and reopened the route before dawn. The community saw how the evidence led to the solution without blaming anyone before the evidence was clear. The team isolated the trigger and checked that the safe route stayed open. Together they recalibrated the sensor and kept the fragile exhibit protected. Both allies received credit and agreed to share evidence earlier.",
-          "visual": "telescope"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-248e400629d0d568ff10",
-        "story_sha256": "2cad7c5aae0af20911ed0b645c79d0b0b7472e9455b3f215ed832809c7e90113",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-d7943a0b8e5e73143224",
-      "title": "The Waterwheel Mystery of the Village",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "827a617d072db3f186eef84c5b627fde9eadf15264bb3f9df8aee8b4d7b38ab4",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the clockmaker in a flooded village, a clockmaker needed to understand why the waterwheel turned only at midnight, before the annual night market began. A museum exhibit went dark whenever visitors approached. The apparent solution worked briefly, then exposed a deeper consequence. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "waterwheel"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a clockmaker compared warm water flowing uphill with a constellation reflected in a puddle; fear turned into curiosity when the clue finally made sense. A harmless-looking side effect threatened the safest route. a clockmaker traced the side effect backward to the mechanism that triggered it and tested the display with different visitor paths and lighting levels. The team stopped the fix and measured the new harm; tracked the signal across three locations, but the clue was damaged by rain before it could be copied. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "The traced chain of events identified the hidden trigger: the apparent sabotage was actually an emergency signal. A protective sensor was mistaking reflections for dangerous heat. The second attempt addressed the underlying cause instead of the symptom. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a clockmaker checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a clockmaker restored the night lights and reopened the route before dawn. The community saw how the evidence led to the solution without blaming anyone before the evidence was clear. The team isolated the trigger and checked that the safe route stayed open. Together they recalibrated the sensor and kept the fragile exhibit protected. The community adopted a safer long-term maintenance plan.",
-          "visual": "map"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-d7943a0b8e5e73143224",
-        "story_sha256": "827a617d072db3f186eef84c5b627fde9eadf15264bb3f9df8aee8b4d7b38ab4",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-191016fd15a3d2d35248",
-      "title": "The Waterwheel Mystery of the Museum",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "baa123ec51b73c3b9dd8d30296fa3c098e92abb9a5ed7d733a0e82bb0602b071",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the otter in an underground museum, a river otter needed to understand why the waterwheel turned only at midnight, before the annual night market began. An emergency broadcast seemed to predict accidents that never happened. An earlier mistake left the protagonist reluctant to intervene. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "waterwheel"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a river otter compared warm water flowing uphill with a set of tide marks on the oldest wall; fear turned into curiosity when the clue finally made sense. Two witnesses described incompatible versions of the event. a river otter reconstructed the timeline from independent records and compared broadcast timestamps with maintenance records. A friend proposed a reversible action with a clear stopping rule; tracked the signal across three locations, but the clue was damaged by rain before it could be copied. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "The timeline showed how both witnesses had seen different stages of the same event: the locked room was hiding a safe route, not a stolen treasure. The warnings were delayed recordings from earlier safety drills. The cautious trial succeeded because the protagonist acknowledged the old mistake. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a river otter checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a river otter redirected the danger toward an empty field and kept the village safe. The community saw how the evidence led to the solution without blaming anyone before the evidence was clear. The team published a shared timeline so future warnings could be interpreted correctly. Together they corrected the transmitter clock and documented the drill archive. The protagonist taught others how to test uncertain ideas safely.",
-          "visual": "bridge"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-191016fd15a3d2d35248",
-        "story_sha256": "baa123ec51b73c3b9dd8d30296fa3c098e92abb9a5ed7d733a0e82bb0602b071",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-135371d9c162fe67080a",
-      "title": "The Bridge Mystery of the Greenhouse",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "390315743ebb93cae23995369a2fcb3cd95e37246371dc23d4215068c9af954c",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the otter in a desert greenhouse, a river otter needed to understand why every bridge light blinked in a different rhythm, before the town's water supply ran dry. A shared garden began failing after a well-intended repair. The team could rescue one group immediately or protect everyone later. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "bridge"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a river otter compared a pattern hidden in the wiring with a set of tide marks on the oldest wall; fear turned into curiosity when the clue finally made sense. Two witnesses described incompatible versions of the event. a river otter reconstructed the timeline from independent records and compared soil samples before and after the repair. They created a temporary safeguard while testing the permanent solution; tracked the signal across three locations, but the clue was damaged by rain before it could be copied. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "The timeline showed how both witnesses had seen different stages of the same event: the locked room was hiding a safe route, not a stolen treasure. The new drainage channel was washing nutrients away. The safeguard bought time to resolve the cause without abandoning anyone. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a river otter checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a river otter redirected the danger toward an empty field and kept the village safe. The community saw how the evidence led to the solution without blaming anyone before the evidence was clear. The team published a shared timeline so future warnings could be interpreted correctly. Together they rerouted the drainage and helped the gardeners restore the soil. The final solution removed the tradeoff and kept the safeguard available.",
-          "visual": "garden"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-135371d9c162fe67080a",
-        "story_sha256": "390315743ebb93cae23995369a2fcb3cd95e37246371dc23d4215068c9af954c",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-822dccd9012228aa6883",
-      "title": "The Bridge Mystery of the Market",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "1080b34bc96b646178f60f42cbe4fc0f5193d3f2067b6e44ef5f916f83476d2e",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the keeper in a floating market, a lighthouse keeper needed to understand why every bridge light blinked in a different rhythm, before the town's water supply ran dry. A shared garden began failing after a well-intended repair. The first witness seemed unreliable but held the only missing detail. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "bridge"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a lighthouse keeper compared a pattern hidden in the wiring with a set of tide marks on the oldest wall; pride gave way to doubt before trust returned. Two witnesses described incompatible versions of the event. a lighthouse keeper reconstructed the timeline from independent records and compared soil samples before and after the repair. The protagonist asked the witness to reconstruct the event without interruption; tracked the signal across three locations, but the clue was damaged by rain before it could be copied. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "The timeline showed how both witnesses had seen different stages of the same event: the locked room was hiding a safe route, not a stolen treasure. The new drainage channel was washing nutrients away. The missing detail reconciled the conflicting accounts. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a lighthouse keeper checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a lighthouse keeper redirected the danger toward an empty field and kept the village safe. The community saw how the evidence led to the solution without blaming anyone before the evidence was clear. The team published a shared timeline so future warnings could be interpreted correctly. Together they rerouted the drainage and helped the gardeners restore the soil. The witness was invited to help document the corrected record.",
+          "speech": "With the cause understood, a curious fox redirected the danger toward an empty field and kept the village safe. The community saw how the evidence led to the solution before the weather changed again. The team added a repeatable check to catch the same failure early. Together they redesigned the controls to distribute the benefit fairly. The team required independent verification before future critical decisions.",
           "visual": "ship"
         }
       ],
       "review_template": {
-        "content_id": "astra-proposal-822dccd9012228aa6883",
-        "story_sha256": "1080b34bc96b646178f60f42cbe4fc0f5193d3f2067b6e44ef5f916f83476d2e",
+        "content_id": "astra-proposal-510ee12b4d2de7df46fb",
+        "story_sha256": "4bcb3bc73506c7a92d621e18bb25ff7b995fc6e0fb7c58c37c62c54f13c5073a",
         "decision": "pending",
         "reviewer": "",
         "review_notes": ""
       }
     },
     {
-      "content_id": "astra-proposal-d01f2d2cd873ef3ccdba",
-      "title": "The Bell Mystery of the Market",
+      "content_id": "astra-proposal-5aaae60e5fd21424b46a",
+      "title": "The Door Mystery of the Library",
       "kind": "unreviewed_causal_draft",
-      "story_sha256": "80cc8ee5909145977341fc06d3e4502d08bbbb1b433b0041cc0bc263c02d25ef",
+      "story_sha256": "def194968c98776c50744216445b336571beba5288c1cde35138b21e39b6c577",
       "candidate_issues": [
         "human_or_model_editorial_review_required",
         "not_production_ready",
@@ -435,616 +351,700 @@
       "story_beats": [
         {
           "story_beat": "reveal",
-          "speech": "As the otter in a floating market, a river otter needed to understand why the warning bell rang beneath the lake, before the town's water supply ran dry. An archive's newest records contradicted its oldest map. The first witness seemed unreliable but held the only missing detail. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "bell"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a river otter compared a bell-shaped sonar echo with a set of tide marks on the oldest wall; pride gave way to doubt before trust returned. A failed test revealed that an important assumption was wrong. a river otter repeated the test under controlled conditions and compared the records with physical landmarks that had survived. The protagonist asked the witness to reconstruct the event without interruption; compared witness accounts taken separately, but the clue was damaged by rain before it could be copied. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "The repeated result exposed the missing cause: the locked room was hiding a safe route, not a stolen treasure. The archive had preserved two different eras of the same settlement. The missing detail reconciled the conflicting accounts. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a river otter checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a river otter redirected the danger toward an empty field and kept the village safe. The community saw how the evidence led to the solution without blaming anyone before the evidence was clear. The team added a repeatable check to catch the same failure early. Together they created a layered map and reunited families with their missing history. The witness was invited to help document the corrected record.",
-          "visual": "lantern"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-d01f2d2cd873ef3ccdba",
-        "story_sha256": "80cc8ee5909145977341fc06d3e4502d08bbbb1b433b0041cc0bc263c02d25ef",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-0b22d94d39dd9a7bc237",
-      "title": "The Bell Mystery of the Library",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "aa37cfb00414cb4af964edc0d0983f44736c726eec137d9160e465317ede9704",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the keeper in a coastal library, a lighthouse keeper needed to understand why the warning bell rang beneath the lake, before the mountain pass closed for winter. An archive's newest records contradicted its oldest map. A strict deadline made careful investigation seem impossible. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "bell"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a lighthouse keeper compared a bell-shaped sonar echo with a message carried by migrating birds; pride gave way to doubt before trust returned. A failed test revealed that an important assumption was wrong. a lighthouse keeper repeated the test under controlled conditions and compared the records with physical landmarks that had survived. The protagonist negotiated a temporary safe pause; compared witness accounts taken separately, but the clue was damaged by rain before it could be copied. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "The repeated result exposed the missing cause: the locked room was hiding a safe route, not a stolen treasure. The archive had preserved two different eras of the same settlement. The pause allowed a small test that prevented a larger mistake. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a lighthouse keeper checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a lighthouse keeper redirected the danger toward an empty field and kept the village safe. The community saw how the evidence led to the solution without blaming anyone before the evidence was clear. The team added a repeatable check to catch the same failure early. Together they created a layered map and reunited families with their missing history. The team created an emergency procedure that protects time for verification.",
-          "visual": "snow"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-0b22d94d39dd9a7bc237",
-        "story_sha256": "aa37cfb00414cb4af964edc0d0983f44736c726eec137d9160e465317ede9704",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-135cf9b985e9e59d0e9a",
-      "title": "The Bell Mystery of the Garden",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "04deba424f41b19732835e629f04108552ea7c8f7711b6995ea475e53c8ef2db",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the robot in a mountain garden, a repair robot needed to understand why the warning bell rang beneath the lake, before the mountain pass closed for winter. A flood barrier protected the village but trapped wildlife upstream. Two allies disagreed about which clue deserved attention. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "bell"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a repair robot compared a bell-shaped sonar echo with a message carried by migrating birds; pride gave way to doubt before trust returned. A failed test revealed that an important assumption was wrong. a repair robot repeated the test under controlled conditions and modeled the water flow and traced the animals' blocked passage. They split the investigation into independent tests; compared witness accounts taken separately, but the clue was damaged by rain before it could be copied. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "The repeated result exposed the missing cause: the locked room was hiding a safe route, not a stolen treasure. A forgotten maintenance gate could protect both homes and wildlife. Their separate findings became consistent only when combined. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a repair robot checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a repair robot redirected the danger toward an empty field and kept the village safe. The community saw how the evidence led to the solution without blaming anyone before the evidence was clear. The team added a repeatable check to catch the same failure early. Together they opened a safe passage and installed a seasonal gate inspection. Both allies received credit and agreed to share evidence earlier.",
-          "visual": "statue"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-135cf9b985e9e59d0e9a",
-        "story_sha256": "04deba424f41b19732835e629f04108552ea7c8f7711b6995ea475e53c8ef2db",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-95bfd14cd00fed570449",
-      "title": "The Snow Mystery of the Garden",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "5b743d2f52479db818d89e6c9841c9469de96e70603ecb45c96bb755436e7d2e",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the clockmaker in a mountain garden, a clockmaker needed to understand why fresh snow appeared inside a sealed room, before the mountain pass closed for winter. A flood barrier protected the village but trapped wildlife upstream. The apparent solution worked briefly, then exposed a deeper consequence. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "snow"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a clockmaker compared a cold draft from a forgotten tunnel with a message carried by migrating birds; pride gave way to doubt before trust returned. The first clue contradicted the town's explanation. a clockmaker tested a competing explanation against the original clue and modeled the water flow and traced the animals' blocked passage. The team stopped the fix and measured the new harm; compared witness accounts taken separately, but the clue was damaged by rain before it could be copied. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "Only the second explanation accounted for both observations: the warning described tomorrow's weather rather than today's. A forgotten maintenance gate could protect both homes and wildlife. The second attempt addressed the underlying cause instead of the symptom. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a clockmaker checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a clockmaker redirected the danger toward an empty field and kept the village safe. The community saw how the evidence led to the solution without blaming anyone before the evidence was clear. The team documented the rejected explanation so it would not mislead anyone again. Together they opened a safe passage and installed a seasonal gate inspection. The community adopted a safer long-term maintenance plan.",
-          "visual": "river"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-95bfd14cd00fed570449",
-        "story_sha256": "5b743d2f52479db818d89e6c9841c9469de96e70603ecb45c96bb755436e7d2e",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-18c9ded1a694622bb4d3",
-      "title": "The Snow Mystery of the Railway",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "6bb35a6b37373c274737a415f7097ea018664d7c2f1c5b70af02723d19dc02ae",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the otter in an abandoned railway, a river otter needed to understand why fresh snow appeared inside a sealed room, before the mountain pass closed for winter. A flood barrier protected the village but trapped wildlife upstream. Before acting, the team had to choose between two costly alternatives. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "snow"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a river otter compared a cold draft from a forgotten tunnel with a message carried by migrating birds; pride gave way to doubt before trust returned. The first clue contradicted the town's explanation. a river otter tested a competing explanation against the original clue and modeled the water flow and traced the animals' blocked passage. A limited trial ruled out the tempting shortcut; compared witness accounts taken separately, but the clue was damaged by rain before it could be copied. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "Only the second explanation accounted for both observations: the warning described tomorrow's weather rather than today's. A forgotten maintenance gate could protect both homes and wildlife. The protagonist changed course after the evidence challenged the first plan. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a river otter checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a river otter redirected the danger toward an empty field and kept the village safe. The community saw how the evidence led to the solution and left a practical check for future caretakers. The team documented the rejected explanation so it would not mislead anyone again. Together they opened a safe passage and installed a seasonal gate inspection. The final choice preserved the evidence and earned back the community's trust.",
-          "visual": "telescope"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-18c9ded1a694622bb4d3",
-        "story_sha256": "6bb35a6b37373c274737a415f7097ea018664d7c2f1c5b70af02723d19dc02ae",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-c6d708dbdb04626ad2e6",
-      "title": "The Snow Mystery of the Observatory",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "35ff542edec7b3fbeb8341d75ba2606770b1b79c3e14f593949cd15d1616be4c",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the otter in a silent observatory, a river otter needed to understand why fresh snow appeared inside a sealed room, before the last ferry left the harbor. A competition prize vanished just before the final challenge. An earlier mistake left the protagonist reluctant to intervene. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "snow"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a river otter compared a cold draft from a forgotten tunnel with a message carried by migrating birds; pride gave way to doubt before trust returned. The first clue contradicted the town's explanation. a river otter tested a competing explanation against the original clue and audited the rules and checked who had access to the prize. A friend proposed a reversible action with a clear stopping rule; compared witness accounts taken separately, but the clue was damaged by rain before it could be copied. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "Only the second explanation accounted for both observations: the warning described tomorrow's weather rather than today's. The prize had been moved to protect it from a hidden hazard. The cautious trial succeeded because the protagonist acknowledged the old mistake. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a river otter checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a river otter reunited the separated team and returned the lost object. The community saw how the evidence led to the solution and left a practical check for future caretakers. The team documented the rejected explanation so it would not mislead anyone again. Together they repaired the unsafe venue and restarted the competition transparently. The protagonist taught others how to test uncertain ideas safely.",
-          "visual": "map"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-c6d708dbdb04626ad2e6",
-        "story_sha256": "35ff542edec7b3fbeb8341d75ba2606770b1b79c3e14f593949cd15d1616be4c",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-6d14eb9644c5293c4025",
-      "title": "The Lighthouse Mystery of the Observatory",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "aab528863c9167884529d417f6be2abc390c4159ddbbce65556371a3db168a7a",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the keeper in a silent observatory, a lighthouse keeper needed to understand why the lighthouse beam stopped before reaching the sea, before the last ferry left the harbor. A competition prize vanished just before the final challenge. A trusted tool produced a confident but misleading result. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "lighthouse"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a lighthouse keeper compared a jammed brass lens mechanism with a small mechanical part lodged beneath the floor; pride gave way to doubt before trust returned. The first clue contradicted the town's explanation. a lighthouse keeper tested a competing explanation against the original clue and audited the rules and checked who had access to the prize. The protagonist verified its output using a different method; compared witness accounts taken separately, but two witnesses remembered the event differently. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "Only the second explanation accounted for both observations: the warning described tomorrow's weather rather than today's. The prize had been moved to protect it from a hidden hazard. The independent measurement uncovered the tool's hidden limitation. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a lighthouse keeper checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a lighthouse keeper reunited the separated team and returned the lost object. The community saw how the evidence led to the solution and left a practical check for future caretakers. The team documented the rejected explanation so it would not mislead anyone again. Together they repaired the unsafe venue and restarted the competition transparently. The team required independent verification before future critical decisions.",
-          "visual": "waterwheel"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-6d14eb9644c5293c4025",
-        "story_sha256": "aab528863c9167884529d417f6be2abc390c4159ddbbce65556371a3db168a7a",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-1676d568df37b79b3f83",
-      "title": "The Lighthouse Mystery of the Village",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "ea701ff886bb3b7023ce21b4e4188101151fc089fcc1c6d35835f49f31d8d9c7",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the clockmaker in a flooded village, a clockmaker needed to understand why the lighthouse beam stopped before reaching the sea, before the last ferry left the harbor. An apparent intruder was leaving clues at abandoned buildings. A trusted tool produced a confident but misleading result. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "lighthouse"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a clockmaker compared a jammed brass lens mechanism with a small mechanical part lodged beneath the floor; pride gave way to doubt before trust returned. The first clue contradicted the town's explanation. a clockmaker tested a competing explanation against the original clue and followed the clues without confronting the unknown visitor. The protagonist verified its output using a different method; compared witness accounts taken separately, but two witnesses remembered the event differently. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "Only the second explanation accounted for both observations: the warning described tomorrow's weather rather than today's. The visitor was a lost caretaker marking a safe escape route. The independent measurement uncovered the tool's hidden limitation. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a clockmaker checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a clockmaker reunited the separated team and returned the lost object. The community saw how the evidence led to the solution and left a practical check for future caretakers. The team documented the rejected explanation so it would not mislead anyone again. Together they guided the caretaker home and preserved the escape markings. The team required independent verification before future critical decisions.",
-          "visual": "waterwheel"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-1676d568df37b79b3f83",
-        "story_sha256": "ea701ff886bb3b7023ce21b4e4188101151fc089fcc1c6d35835f49f31d8d9c7",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-945b6088f577343af61a",
-      "title": "The Signal Mystery of the Museum",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "b0f8120f759322dbaee08ee54922e32f754066c89c5657e099d856f475730cd6",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the otter in an underground museum, a river otter needed to understand why the orchard echoed words nobody had spoken, before the last ferry left the harbor. An apparent intruder was leaving clues at abandoned buildings. The first witness seemed unreliable but held the only missing detail. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a river otter compared a repeating distress call in the wind with a small mechanical part lodged beneath the floor; a seemingly useless object proved essential. A helper's earlier warning had been dismissed as unrelated. a river otter compared the warning with the new physical evidence and followed the clues without confronting the unknown visitor. The protagonist asked the witness to reconstruct the event without interruption; compared witness accounts taken separately, but two witnesses remembered the event differently. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "The warning predicted the failure more accurately than the first theory: the warning described tomorrow's weather rather than today's. The visitor was a lost caretaker marking a safe escape route. The missing detail reconciled the conflicting accounts. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a river otter checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a river otter reunited the separated team and returned the lost object. The community saw how the evidence led to the solution and left a practical check for future caretakers. The team included the helper in designing a better early-warning procedure. Together they guided the caretaker home and preserved the escape markings. The witness was invited to help document the corrected record.",
-          "visual": "garden"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-945b6088f577343af61a",
-        "story_sha256": "b0f8120f759322dbaee08ee54922e32f754066c89c5657e099d856f475730cd6",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-737c30af3e27766cf236",
-      "title": "The Signal Mystery of the Greenhouse",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "b059e770c695fc2911f237e35d7870965af03c0a1ac43ceeeabdbe58b2e0980f",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the clockmaker in a desert greenhouse, a clockmaker needed to understand why the orchard echoed words nobody had spoken, before the evacuation bell sent everyone away. An old promise prevented neighbors from asking for urgent help. Two allies disagreed about which clue deserved attention. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a clockmaker compared a repeating distress call in the wind with a small mechanical part lodged beneath the floor; a seemingly useless object proved essential. A helper's earlier warning had been dismissed as unrelated. a clockmaker compared the warning with the new physical evidence and found out what each neighbor believed the promise required. They split the investigation into independent tests; compared witness accounts taken separately, but two witnesses remembered the event differently. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "The warning predicted the failure more accurately than the first theory: the clue pointed away from the obvious culprit and toward an overlooked helper. Both sides had been protecting the same person without realizing it. Their separate findings became consistent only when combined. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a clockmaker checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a clockmaker reunited the separated team and returned the lost object. The community saw how the evidence led to the solution and left a practical check for future caretakers. The team included the helper in designing a better early-warning procedure. Together they negotiated a new agreement and restored cooperation. Both allies received credit and agreed to share evidence earlier.",
-          "visual": "lantern"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-737c30af3e27766cf236",
-        "story_sha256": "b059e770c695fc2911f237e35d7870965af03c0a1ac43ceeeabdbe58b2e0980f",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-3d6ac6248e4452504cc2",
-      "title": "The Statue Mystery of the Library",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "3eb6a24ad7ca4dcffc6b66b93996b3860e9d77dac002b3551d0f86078d112948",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the keeper in a coastal library, a lighthouse keeper needed to understand why the museum's smallest statue changed position nightly, before the evacuation bell sent everyone away. A new machine improved one neighborhood while harming another. Before acting, the team had to choose between two costly alternatives. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "statue"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a lighthouse keeper compared tiny wet footprints beside its case with a sequence of lights from a passing train; a seemingly useless object proved essential. The obvious solution would have damaged the only surviving clue. a lighthouse keeper built a reversible test before touching the original evidence and measured the unintended effects across both neighborhoods. A limited trial ruled out the tempting shortcut; reconstructed the mechanism from its worn parts, but two witnesses remembered the event differently. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "The reversible test revealed the cause without destroying the clue: the clue pointed away from the obvious culprit and toward an overlooked helper. The machine diverted resources from the people it was meant to help. The protagonist changed course after the evidence challenged the first plan. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a lighthouse keeper checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a lighthouse keeper opened the hidden channel and restored the town's water. The community saw how the evidence led to the solution and left a practical check for future caretakers. The team preserved the original evidence for future investigators. Together they redesigned the controls to distribute the benefit fairly. The final choice preserved the evidence and earned back the community's trust.",
-          "visual": "statue"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-3d6ac6248e4452504cc2",
-        "story_sha256": "3eb6a24ad7ca4dcffc6b66b93996b3860e9d77dac002b3551d0f86078d112948",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-2cc6abeb5d331ab9f424",
-      "title": "The River Mystery of the Garden",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "7c557af9e50d433db2716c6438b1d38f3277315e50d2a4a84eb6059935b367f1",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the clockmaker in a mountain garden, a clockmaker needed to understand why a river flowed backward for exactly one minute, before sunrise erased the only clue. A vital delivery disappeared between two checkpoints. A trusted tool produced a confident but misleading result. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "river"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a clockmaker compared a gate buried under the riverbed with a sequence of lights from a passing train; a seemingly useless object proved essential. A harmless-looking side effect threatened the safest route. a clockmaker traced the side effect backward to the mechanism that triggered it and reconstructed custody of the delivery and found a mistaken handoff. The protagonist verified its output using a different method; reconstructed the mechanism from its worn parts, but two witnesses remembered the event differently. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "The traced chain of events identified the hidden trigger: the clue pointed away from the obvious culprit and toward an overlooked helper. The supposed theft was a routing error made during an emergency. The independent measurement uncovered the tool's hidden limitation. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a clockmaker checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a clockmaker opened the hidden channel and restored the town's water. The community saw how the evidence led to the solution and left a practical check for future caretakers. The team isolated the trigger and checked that the safe route stayed open. Together they returned the delivery and introduced a shared handoff record. The team required independent verification before future critical decisions.",
-          "visual": "map"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-2cc6abeb5d331ab9f424",
-        "story_sha256": "7c557af9e50d433db2716c6438b1d38f3277315e50d2a4a84eb6059935b367f1",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-40fcb403949f9ad74302",
-      "title": "The River Mystery of the Railway",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "ea57827c1ffedacd86aef96959d2df4ade0a12c406e74e5d65c641785bb0d6dc",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the otter in an abandoned railway, a river otter needed to understand why a river flowed backward for exactly one minute, before sunrise erased the only clue. A vital delivery disappeared between two checkpoints. The team could rescue one group immediately or protect everyone later. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "river"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a river otter compared a gate buried under the riverbed with a map drawn on the back of a family photograph; a seemingly useless object proved essential. A harmless-looking side effect threatened the safest route. a river otter traced the side effect backward to the mechanism that triggered it and reconstructed custody of the delivery and found a mistaken handoff. They created a temporary safeguard while testing the permanent solution; reconstructed the mechanism from its worn parts, but two witnesses remembered the event differently. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "The traced chain of events identified the hidden trigger: the clue pointed away from the obvious culprit and toward an overlooked helper. The supposed theft was a routing error made during an emergency. The safeguard bought time to resolve the cause without abandoning anyone. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a river otter checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a river otter opened the hidden channel and restored the town's water. The community saw how the evidence led to the solution and left a practical check for future caretakers. The team isolated the trigger and checked that the safe route stayed open. Together they returned the delivery and introduced a shared handoff record. The final solution removed the tradeoff and kept the safeguard available.",
-          "visual": "map"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-40fcb403949f9ad74302",
-        "story_sha256": "ea57827c1ffedacd86aef96959d2df4ade0a12c406e74e5d65c641785bb0d6dc",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-b908d0e8297bf629a462",
-      "title": "The Telescope Mystery of the Observatory",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "1306ab4d2c3300f5476df8fc805e69c7a7012c204b00cfbb521634753c3abb27",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the otter in a silent observatory, a river otter needed to understand why the stars vanished above a single rooftop, before the annual night market began. A false alarm threatened to split the town into rival rescue teams. The first witness seemed unreliable but held the only missing detail. The neighbors needed a trustworthy explanation before taking action.",
-          "visual": "telescope"
-        },
-        {
-          "story_beat": "build",
-          "speech": "Instead of guessing, a river otter compared a lens hidden in a broken telescope with a map drawn on the back of a family photograph; the hero learned that asking for help was the missing step. A harmless-looking side effect threatened the safest route. a river otter traced the side effect backward to the mechanism that triggered it and tested which warnings were reliable before anyone was sent into danger. The protagonist asked the witness to reconstruct the event without interruption; reconstructed the mechanism from its worn parts, but a sudden power cut interrupted the first test. The evidence gave the team a testable explanation rather than another suspicion.",
-          "visual": "book"
-        },
-        {
-          "story_beat": "twist",
-          "speech": "The traced chain of events identified the hidden trigger: the strange phenomenon was caused by two systems that had fallen out of sync. The alarm had been triggered by a harmless echo, not an approaching disaster. The missing detail reconciled the conflicting accounts. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a river otter checked the clue again and found that it fit the evidence gathered at the start.",
-          "visual": "signal"
-        },
-        {
-          "story_beat": "payoff",
-          "speech": "With the cause understood, a river otter opened the hidden channel and restored the town's water. The community saw how the evidence led to the solution while protecting the fragile original clue. The team isolated the trigger and checked that the safe route stayed open. Together they published a verified warning protocol and reunited the rescue teams. The witness was invited to help document the corrected record.",
-          "visual": "bridge"
-        }
-      ],
-      "review_template": {
-        "content_id": "astra-proposal-b908d0e8297bf629a462",
-        "story_sha256": "1306ab4d2c3300f5476df8fc805e69c7a7012c204b00cfbb521634753c3abb27",
-        "decision": "pending",
-        "reviewer": "",
-        "review_notes": ""
-      }
-    },
-    {
-      "content_id": "astra-proposal-4d4b1406fa7277b1a888",
-      "title": "The Door Mystery of the Museum",
-      "kind": "unreviewed_causal_draft",
-      "story_sha256": "f0cf424d8e2b298df5a0bd67bcd9920a413baed8eb0b263bacb3c6f77bbe1b92",
-      "candidate_issues": [
-        "human_or_model_editorial_review_required",
-        "not_production_ready",
-        "not_reviewed_authored_story",
-        "publication_unreviewed_causal_draft"
-      ],
-      "reviewable": false,
-      "story_beats": [
-        {
-          "story_beat": "reveal",
-          "speech": "As the clockmaker in an underground museum, a clockmaker needed to understand why all the shadows pointed toward one locked door, before the annual night market began. A historic clock began sounding the wrong hour during an important festival. The apparent solution worked briefly, then exposed a deeper consequence. The neighbors needed a trustworthy explanation before taking action.",
+          "speech": "As the fox in a coastal library, a curious fox needed to understand why all the shadows pointed toward one locked door, before the mountain pass closed for winter. Two villages claimed ownership of the same ancient bridge. Before acting, the team had to choose between two costly alternatives. The neighbors needed a trustworthy explanation before taking action.",
           "visual": "door"
         },
         {
           "story_beat": "build",
-          "speech": "Instead of guessing, a clockmaker compared a clockwork shadow moving against the sun with a map drawn on the back of a family photograph; the hero learned that asking for help was the missing step. Two witnesses described incompatible versions of the event. a clockmaker reconstructed the timeline from independent records and observed its mechanism through one full cycle without adjusting it. The team stopped the fix and measured the new harm; tested the pattern against a hand-drawn timeline, but a sudden power cut interrupted the first test. The evidence gave the team a testable explanation rather than another suspicion.",
+          "speech": "Instead of guessing, a curious fox compared a clockwork shadow moving against the sun with a message carried by migrating birds; a seemingly useless object proved essential. Two witnesses described incompatible versions of the event. a curious fox reconstructed the timeline from independent records and compared historical agreements with the bridge's repair records. A limited trial ruled out the tempting shortcut; mapped which events happened before each failure, but the team had to work without disturbing nesting animals. The evidence gave the team a testable explanation rather than another suspicion.",
           "visual": "book"
         },
         {
           "story_beat": "twist",
-          "speech": "The timeline showed how both witnesses had seen different stages of the same event: the strange phenomenon was caused by two systems that had fallen out of sync. A replacement gear had the wrong number of teeth. The second attempt addressed the underlying cause instead of the symptom. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a clockmaker checked the clue again and found that it fit the evidence gathered at the start.",
+          "speech": "The timeline showed how both witnesses had seen different stages of the same event: the warning described tomorrow's weather rather than today's. Both villages had inherited different maintenance duties, not exclusive ownership. The protagonist changed course after the evidence challenged the first plan. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a curious fox checked the clue again and found that it fit the evidence gathered at the start.",
           "visual": "signal"
         },
         {
           "story_beat": "payoff",
-          "speech": "With the cause understood, a clockmaker sent a clear signal that guided the missing travelers home. The community saw how the evidence led to the solution while protecting the fragile original clue. The team published a shared timeline so future warnings could be interpreted correctly. Together they installed the correct gear and preserved the old part as evidence. The community adopted a safer long-term maintenance plan.",
+          "speech": "With the cause understood, a curious fox opened the hidden channel and restored the town's water. The community saw how the evidence led to the solution and made the result easy for children to verify. The team published a shared timeline so future warnings could be interpreted correctly. Together they formed a joint repair council and reopened the crossing. The final choice preserved the evidence and earned back the community's trust.",
+          "visual": "door"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-5aaae60e5fd21424b46a",
+        "story_sha256": "def194968c98776c50744216445b336571beba5288c1cde35138b21e39b6c577",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-a665a3814347a8d17ef4",
+      "title": "The Map Mystery of the Railway",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "3f764ef99c98a5ab1e88113cfa4f5a3efc77b14b694390e22ce1966fdffcbc46",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the fox in an abandoned railway, a curious fox needed to understand why the town's oldest map changed each morning, before the last ferry left the harbor. A museum exhibit went dark whenever visitors approached. The team could rescue one group immediately or protect everyone later. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "map"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a curious fox compared new streets etched into a stone tile with a message carried by migrating birds; a seemingly useless object proved essential. A failed test revealed that an important assumption was wrong. a curious fox repeated the test under controlled conditions and tested the display with different visitor paths and lighting levels. They created a temporary safeguard while testing the permanent solution; mapped which events happened before each failure, but the team had to work without disturbing nesting animals. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "The repeated result exposed the missing cause: the clue pointed away from the obvious culprit and toward an overlooked helper. A protective sensor was mistaking reflections for dangerous heat. The safeguard bought time to resolve the cause without abandoning anyone. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a curious fox checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a curious fox sent a clear signal that guided the missing travelers home. The community saw how the evidence led to the solution without wasting the town limited supplies. The team added a repeatable check to catch the same failure early. Together they recalibrated the sensor and kept the fragile exhibit protected. The final solution removed the tradeoff and kept the safeguard available.",
+          "visual": "bell"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-a665a3814347a8d17ef4",
+        "story_sha256": "3f764ef99c98a5ab1e88113cfa4f5a3efc77b14b694390e22ce1966fdffcbc46",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-ac177a19c5814ad93049",
+      "title": "The Bridge Mystery of the Garden",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "0da81f854fec9632bb716f9466ec9035843ece3b84f6acbecfe688d651f89530",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the fox in a mountain garden, a curious fox needed to understand why every bridge light blinked in a different rhythm, before sunrise erased the only clue. A competition prize vanished just before the final challenge. A strict deadline made careful investigation seem impossible. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "bridge"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a curious fox compared a pattern hidden in the wiring with a map drawn on the back of a family photograph; the hero learned that asking for help was the missing step. A helper's earlier warning had been dismissed as unrelated. a curious fox compared the warning with the new physical evidence and audited the rules and checked who had access to the prize. The protagonist negotiated a temporary safe pause; followed the sound to its physical source, but a ticking timer left only minutes to compare the evidence. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "The warning predicted the failure more accurately than the first theory: the strange phenomenon was caused by two systems that had fallen out of sync. The prize had been moved to protect it from a hidden hazard. The pause allowed a small test that prevented a larger mistake. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a curious fox checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a curious fox repaired the mechanism and taught the neighbors how to maintain it. The community saw how the evidence led to the solution while keeping the evacuation route open. The team included the helper in designing a better early-warning procedure. Together they repaired the unsafe venue and restarted the competition transparently. The team created an emergency procedure that protects time for verification.",
+          "visual": "bell"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-ac177a19c5814ad93049",
+        "story_sha256": "0da81f854fec9632bb716f9466ec9035843ece3b84f6acbecfe688d651f89530",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-23ede6620331c5941400",
+      "title": "The Bell Mystery of the Railway",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "5b1439263114ae80850dd6f9f6302ffd7909b7e1d1a56d1392e7612f99c7ce35",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the fox in an abandoned railway, a curious fox needed to understand why the warning bell rang beneath the lake, before sunrise erased the only clue. A competition prize vanished just before the final challenge. The apparent solution worked briefly, then exposed a deeper consequence. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "bell"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a curious fox compared a bell-shaped sonar echo with a map drawn on the back of a family photograph; the hero learned that asking for help was the missing step. The obvious solution would have damaged the only surviving clue. a curious fox built a reversible test before touching the original evidence and audited the rules and checked who had access to the prize. The team stopped the fix and measured the new harm; followed the sound to its physical source, but a ticking timer left only minutes to compare the evidence. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "The reversible test revealed the cause without destroying the clue: the strange phenomenon was caused by two systems that had fallen out of sync. The prize had been moved to protect it from a hidden hazard. The second attempt addressed the underlying cause instead of the symptom. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a curious fox checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a curious fox repaired the mechanism and taught the neighbors how to maintain it. The community saw how the evidence led to the solution while keeping the evacuation route open. The team preserved the original evidence for future investigators. Together they repaired the unsafe venue and restarted the competition transparently. The community adopted a safer long-term maintenance plan.",
+          "visual": "ship"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-23ede6620331c5941400",
+        "story_sha256": "5b1439263114ae80850dd6f9f6302ffd7909b7e1d1a56d1392e7612f99c7ce35",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-6f74b8a0f46f938def12",
+      "title": "The Bell Mystery of the Village",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "5e57ac15e61f81e137d721eb1ef5da7b9a4f0b357e23b9709dd1aadb33096b2f",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the keeper in a flooded village, a lighthouse keeper needed to understand why the warning bell rang beneath the lake, before the evacuation bell sent everyone away. A new machine improved one neighborhood while harming another. Before acting, the team had to choose between two costly alternatives. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "bell"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a lighthouse keeper compared a bell-shaped sonar echo with a trail of warm stones beneath the snow; fear turned into curiosity when the clue finally made sense. A failed test revealed that an important assumption was wrong. a lighthouse keeper repeated the test under controlled conditions and measured the unintended effects across both neighborhoods. A limited trial ruled out the tempting shortcut; reconstructed the mechanism from its worn parts, but a sudden power cut interrupted the first test. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "The repeated result exposed the missing cause: the missing object had been protecting the town from a larger danger. The machine diverted resources from the people it was meant to help. The protagonist changed course after the evidence challenged the first plan. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a lighthouse keeper checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a lighthouse keeper redirected the danger toward an empty field and kept the village safe. The community saw how the evidence led to the solution before the weather changed again. The team added a repeatable check to catch the same failure early. Together they redesigned the controls to distribute the benefit fairly. The final choice preserved the evidence and earned back the community's trust.",
+          "visual": "bell"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-6f74b8a0f46f938def12",
+        "story_sha256": "5e57ac15e61f81e137d721eb1ef5da7b9a4f0b357e23b9709dd1aadb33096b2f",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-ca2d759c378f4b7ebe75",
+      "title": "The Statue Mystery of the Railway",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "e633cc55b0fab05b2db1c34e6a3dda628096931064f828b8fadf20a6f8433953",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the keeper in an abandoned railway, a lighthouse keeper needed to understand why the museum's smallest statue changed position nightly, before the annual night market began. A historic clock began sounding the wrong hour during an important festival. Before acting, the team had to choose between two costly alternatives. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "statue"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a lighthouse keeper compared tiny wet footprints beside its case with a constellation reflected in a puddle; pride gave way to doubt before trust returned. A helper's earlier warning had been dismissed as unrelated. a lighthouse keeper compared the warning with the new physical evidence and observed its mechanism through one full cycle without adjusting it. A limited trial ruled out the tempting shortcut; tested the pattern against a hand-drawn timeline, but the useful part was hidden inside an ordinary object. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "The warning predicted the failure more accurately than the first theory: the locked room was hiding a safe route, not a stolen treasure. A replacement gear had the wrong number of teeth. The protagonist changed course after the evidence challenged the first plan. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a lighthouse keeper checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a lighthouse keeper reunited the separated team and returned the lost object. The community saw how the evidence led to the solution and made the result easy for children to verify. The team included the helper in designing a better early-warning procedure. Together they installed the correct gear and preserved the old part as evidence. The final choice preserved the evidence and earned back the community's trust.",
+          "visual": "waterwheel"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-ca2d759c378f4b7ebe75",
+        "story_sha256": "e633cc55b0fab05b2db1c34e6a3dda628096931064f828b8fadf20a6f8433953",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-ff1f312c288f864125aa",
+      "title": "The Waterwheel Mystery of the Greenhouse",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "e8b6c70ca3024d9de68c6b20730471c64df9a88973ee4a1899ac2ce9205b7e08",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the keeper in a desert greenhouse, a lighthouse keeper needed to understand why the waterwheel turned only at midnight, before the evacuation bell sent everyone away. A shared garden began failing after a well-intended repair. Before acting, the team had to choose between two costly alternatives. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "waterwheel"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a lighthouse keeper compared warm water flowing uphill with a sequence of lights from a passing train; a seemingly useless object proved essential. The first clue contradicted the town's explanation. a lighthouse keeper tested a competing explanation against the original clue and compared soil samples before and after the repair. A limited trial ruled out the tempting shortcut; followed the sound to its physical source, but a ticking timer left only minutes to compare the evidence. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "Only the second explanation accounted for both observations: the clue pointed away from the obvious culprit and toward an overlooked helper. The new drainage channel was washing nutrients away. The protagonist changed course after the evidence challenged the first plan. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a lighthouse keeper checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a lighthouse keeper sent a clear signal that guided the missing travelers home. The community saw how the evidence led to the solution without wasting the town limited supplies. The team documented the rejected explanation so it would not mislead anyone again. Together they rerouted the drainage and helped the gardeners restore the soil. The final choice preserved the evidence and earned back the community's trust.",
+          "visual": "statue"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-ff1f312c288f864125aa",
+        "story_sha256": "e8b6c70ca3024d9de68c6b20730471c64df9a88973ee4a1899ac2ce9205b7e08",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-06d49fd55305641a31a7",
+      "title": "The Snow Mystery of the Observatory",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "be1d0bb8b3f51d592773e398dc414507865653912d188d19075813a8a3a24d04",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the keeper in a silent observatory, a lighthouse keeper needed to understand why fresh snow appeared inside a sealed room, before the annual night market began. An apparent intruder was leaving clues at abandoned buildings. Before acting, the team had to choose between two costly alternatives. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "snow"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a lighthouse keeper compared a cold draft from a forgotten tunnel with a map drawn on the back of a family photograph; the hero learned that asking for help was the missing step. The obvious solution would have damaged the only surviving clue. a lighthouse keeper built a reversible test before touching the original evidence and followed the clues without confronting the unknown visitor. A limited trial ruled out the tempting shortcut; checked the clue against weather and tide records, but a ticking timer left only minutes to compare the evidence. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "The reversible test revealed the cause without destroying the clue: the supposed intruder was trying to return something that had been lost. The visitor was a lost caretaker marking a safe escape route. The protagonist changed course after the evidence challenged the first plan. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a lighthouse keeper checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a lighthouse keeper repaired the mechanism and taught the neighbors how to maintain it. The community saw how the evidence led to the solution while keeping the evacuation route open. The team preserved the original evidence for future investigators. Together they guided the caretaker home and preserved the escape markings. The final choice preserved the evidence and earned back the community's trust.",
+          "visual": "snow"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-06d49fd55305641a31a7",
+        "story_sha256": "be1d0bb8b3f51d592773e398dc414507865653912d188d19075813a8a3a24d04",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-ee2a188333fe0e93d07a",
+      "title": "The Lighthouse Mystery of the Library",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "20fdf4c5bfa5a48f2c60deb108df5ec73d06b4a275ea8c0895352bd3c3af90b0",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the storm chaser in a coastal library, a storm chaser needed to understand why the lighthouse beam stopped before reaching the sea, before sunrise erased the only clue. A false alarm threatened to split the town into rival rescue teams. A strict deadline made careful investigation seem impossible. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "lighthouse"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a storm chaser compared a jammed brass lens mechanism with a child's drawing that matched the broken machine; fear turned into curiosity when the clue finally made sense. A helper's earlier warning had been dismissed as unrelated. a storm chaser compared the warning with the new physical evidence and tested which warnings were reliable before anyone was sent into danger. The protagonist negotiated a temporary safe pause; tested the pattern against a hand-drawn timeline, but the useful part was hidden inside an ordinary object. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "The warning predicted the failure more accurately than the first theory: the apparent sabotage was actually an emergency signal. The alarm had been triggered by a harmless echo, not an approaching disaster. The pause allowed a small test that prevented a larger mistake. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a storm chaser checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a storm chaser reunited the separated team and returned the lost object. The community saw how the evidence led to the solution and made the result easy for children to verify. The team included the helper in designing a better early-warning procedure. Together they published a verified warning protocol and reunited the rescue teams. The team created an emergency procedure that protects time for verification.",
+          "visual": "river"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-ee2a188333fe0e93d07a",
+        "story_sha256": "20fdf4c5bfa5a48f2c60deb108df5ec73d06b4a275ea8c0895352bd3c3af90b0",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-89b7385974d50cfeee25",
+      "title": "The Statue Mystery of the Observatory",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "245e5d4782b7007fc57676116444068a55d71776f2103c1f02e3702a86f4a398",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the storm chaser in a silent observatory, a storm chaser needed to understand why the museum's smallest statue changed position nightly, before the annual night market began. A mountain village's food store emptied faster than deliveries arrived. A trusted tool produced a confident but misleading result. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "statue"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a storm chaser compared tiny wet footprints beside its case with a constellation reflected in a puddle; pride gave way to doubt before trust returned. The obvious solution would have damaged the only surviving clue. a storm chaser built a reversible test before touching the original evidence and tracked storage losses and compared the delivery schedule with weather records. The protagonist verified its output using a different method; tested the pattern against a hand-drawn timeline, but the useful part was hidden inside an ordinary object. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "The reversible test revealed the cause without destroying the clue: the locked room was hiding a safe route, not a stolen treasure. A damaged vent was spoiling food rather than anyone stealing it. The independent measurement uncovered the tool's hidden limitation. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a storm chaser checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a storm chaser reunited the separated team and returned the lost object. The community saw how the evidence led to the solution and made the result easy for children to verify. The team preserved the original evidence for future investigators. Together they repaired the vent and introduced a shared inventory check. The team required independent verification before future critical decisions.",
+          "visual": "book"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-89b7385974d50cfeee25",
+        "story_sha256": "245e5d4782b7007fc57676116444068a55d71776f2103c1f02e3702a86f4a398",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-5768490d6efb7d4faec0",
+      "title": "The River Mystery of the Greenhouse",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "385fe3166586c4bbf47b57c779300f9331e59d914ec9e8bf5497359c379551f4",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the storm chaser in a desert greenhouse, a storm chaser needed to understand why a river flowed backward for exactly one minute, before the town's water supply ran dry. A school science fair lost power just before judging. A strict deadline made careful investigation seem impossible. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "river"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a storm chaser compared a gate buried under the riverbed with a set of tide marks on the oldest wall; pride gave way to doubt before trust returned. A harmless-looking side effect threatened the safest route. a storm chaser traced the side effect backward to the mechanism that triggered it and isolated the electrical circuits and checked each project's load. The protagonist negotiated a temporary safe pause; mapped which events happened before each failure, but the team had to work without disturbing nesting animals. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "The traced chain of events identified the hidden trigger: the warning described tomorrow's weather rather than today's. A demonstration battery was feeding current backward into the shared circuit. The pause allowed a small test that prevented a larger mistake. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a storm chaser checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a storm chaser opened the hidden channel and restored the town's water. The community saw how the evidence led to the solution and made the result easy for children to verify. The team isolated the trigger and checked that the safe route stayed open. Together they installed isolation switches and restarted the fair safely. The team created an emergency procedure that protects time for verification.",
+          "visual": "snow"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-5768490d6efb7d4faec0",
+        "story_sha256": "385fe3166586c4bbf47b57c779300f9331e59d914ec9e8bf5497359c379551f4",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-da8a8881aa235e5cfcd4",
+      "title": "The Signal Mystery of the Market",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "179adb6be0a82707d0770e84f5c5aec410c9e5e356abc062b5062a39c88feed8",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the storm chaser in a floating market, a storm chaser needed to understand why the orchard echoed words nobody had spoken, before the town's water supply ran dry. A new machine improved one neighborhood while harming another. A strict deadline made careful investigation seem impossible. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a storm chaser compared a repeating distress call in the wind with a melody remembered by an elderly neighbor; an old disagreement was resolved by a small act of kindness. Two witnesses described incompatible versions of the event. a storm chaser reconstructed the timeline from independent records and measured the unintended effects across both neighborhoods. The protagonist negotiated a temporary safe pause; checked the clue against weather and tide records, but the first explanation failed a simple repeat test. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "The timeline showed how both witnesses had seen different stages of the same event: the supposed intruder was trying to return something that had been lost. The machine diverted resources from the people it was meant to help. The pause allowed a small test that prevented a larger mistake. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a storm chaser checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a storm chaser left a reliable warning system for the next generation. The community saw how the evidence led to the solution while keeping the evacuation route open. The team published a shared timeline so future warnings could be interpreted correctly. Together they redesigned the controls to distribute the benefit fairly. The team created an emergency procedure that protects time for verification.",
+          "visual": "waterwheel"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-da8a8881aa235e5cfcd4",
+        "story_sha256": "179adb6be0a82707d0770e84f5c5aec410c9e5e356abc062b5062a39c88feed8",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-58659cebf1f54e73b5b2",
+      "title": "The Snow Mystery of the Greenhouse",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "964db4eaa0aae3f71c24e1f3b11ac8b4f19f24aead43736d3ae46d8fd1459b73",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the clockmaker in a desert greenhouse, a clockmaker needed to understand why fresh snow appeared inside a sealed room, before the evacuation bell sent everyone away. A new machine improved one neighborhood while harming another. A trusted tool produced a confident but misleading result. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "snow"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a clockmaker compared a cold draft from a forgotten tunnel with a child's drawing that matched the broken machine; fear turned into curiosity when the clue finally made sense. The first clue contradicted the town's explanation. a clockmaker tested a competing explanation against the original clue and measured the unintended effects across both neighborhoods. The protagonist verified its output using a different method; reconstructed the mechanism from its worn parts, but the useful part was hidden inside an ordinary object. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "Only the second explanation accounted for both observations: the apparent sabotage was actually an emergency signal. The machine diverted resources from the people it was meant to help. The independent measurement uncovered the tool's hidden limitation. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a clockmaker checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a clockmaker redirected the danger toward an empty field and kept the village safe. The community saw how the evidence led to the solution before the weather changed again. The team documented the rejected explanation so it would not mislead anyone again. Together they redesigned the controls to distribute the benefit fairly. The team required independent verification before future critical decisions.",
           "visual": "lantern"
         }
       ],
       "review_template": {
-        "content_id": "astra-proposal-4d4b1406fa7277b1a888",
-        "story_sha256": "f0cf424d8e2b298df5a0bd67bcd9920a413baed8eb0b263bacb3c6f77bbe1b92",
+        "content_id": "astra-proposal-58659cebf1f54e73b5b2",
+        "story_sha256": "964db4eaa0aae3f71c24e1f3b11ac8b4f19f24aead43736d3ae46d8fd1459b73",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-39e874709759e7fbf907",
+      "title": "The Waterwheel Mystery of the Market",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "84bf7e3d808141d4404f43f3fbbca7e9a029392d054c805cb5154bbaf65a75db",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the clockmaker in a floating market, a clockmaker needed to understand why the waterwheel turned only at midnight, before the evacuation bell sent everyone away. An archive's newest records contradicted its oldest map. A trusted tool produced a confident but misleading result. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "waterwheel"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a clockmaker compared warm water flowing uphill with a sequence of lights from a passing train; the hero learned that asking for help was the missing step. A helper's earlier warning had been dismissed as unrelated. a clockmaker compared the warning with the new physical evidence and compared the records with physical landmarks that had survived. The protagonist verified its output using a different method; followed the sound to its physical source, but a ticking timer left only minutes to compare the evidence. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "The warning predicted the failure more accurately than the first theory: the strange phenomenon was caused by two systems that had fallen out of sync. The archive had preserved two different eras of the same settlement. The independent measurement uncovered the tool's hidden limitation. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a clockmaker checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a clockmaker sent a clear signal that guided the missing travelers home. The community saw how the evidence led to the solution without wasting the town limited supplies. The team included the helper in designing a better early-warning procedure. Together they created a layered map and reunited families with their missing history. The team required independent verification before future critical decisions.",
+          "visual": "map"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-39e874709759e7fbf907",
+        "story_sha256": "84bf7e3d808141d4404f43f3fbbca7e9a029392d054c805cb5154bbaf65a75db",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-77919576a707b7ea0b63",
+      "title": "The Lighthouse Mystery of the Museum",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "1dce3920653fb970b307082579ef8029af3a7b7b090ca18a8b539ebf2e67281c",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the clockmaker in an underground museum, a clockmaker needed to understand why the lighthouse beam stopped before reaching the sea, before the annual night market began. An old promise prevented neighbors from asking for urgent help. A trusted tool produced a confident but misleading result. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "lighthouse"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a clockmaker compared a jammed brass lens mechanism with a melody remembered by an elderly neighbor; an old disagreement was resolved by a small act of kindness. A harmless-looking side effect threatened the safest route. a clockmaker traced the side effect backward to the mechanism that triggered it and found out what each neighbor believed the promise required. The protagonist verified its output using a different method; checked the clue against weather and tide records, but the first explanation failed a simple repeat test. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "The traced chain of events identified the hidden trigger: the supposed intruder was trying to return something that had been lost. Both sides had been protecting the same person without realizing it. The independent measurement uncovered the tool's hidden limitation. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a clockmaker checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a clockmaker left a reliable warning system for the next generation. The community saw how the evidence led to the solution while keeping the evacuation route open. The team isolated the trigger and checked that the safe route stayed open. Together they negotiated a new agreement and restored cooperation. The team required independent verification before future critical decisions.",
+          "visual": "river"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-77919576a707b7ea0b63",
+        "story_sha256": "1dce3920653fb970b307082579ef8029af3a7b7b090ca18a8b539ebf2e67281c",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-3c08b5818dbd6524627b",
+      "title": "The River Mystery of the Railway",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "ad30aabe7c3ed59d3df0f86ae396f18ff7098f496cedcb3c8d4ba07c538738d5",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the clockmaker in an abandoned railway, a clockmaker needed to understand why a river flowed backward for exactly one minute, before the last ferry left the harbor. A historic clock began sounding the wrong hour during an important festival. A trusted tool produced a confident but misleading result. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "river"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a clockmaker compared a gate buried under the riverbed with an overlooked maintenance log; a lonely task became a shared effort. A failed test revealed that an important assumption was wrong. a clockmaker repeated the test under controlled conditions and observed its mechanism through one full cycle without adjusting it. The protagonist verified its output using a different method; built a small safe model to test the theory, but the first explanation failed a simple repeat test. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "The repeated result exposed the missing cause: the machine was working correctly but responding to a hidden second control. A replacement gear had the wrong number of teeth. The independent measurement uncovered the tool's hidden limitation. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a clockmaker checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a clockmaker shared the discovery so the whole community could solve the problem together. The community saw how the evidence led to the solution and prevented the next scheduled outage. The team added a repeatable check to catch the same failure early. Together they installed the correct gear and preserved the old part as evidence. The team required independent verification before future critical decisions.",
+          "visual": "snow"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-3c08b5818dbd6524627b",
+        "story_sha256": "ad30aabe7c3ed59d3df0f86ae396f18ff7098f496cedcb3c8d4ba07c538738d5",
+        "decision": "pending",
+        "reviewer": "",
+        "review_notes": ""
+      }
+    },
+    {
+      "content_id": "astra-proposal-32986293b72d5b8f03c1",
+      "title": "The Signal Mystery of the Library",
+      "kind": "unreviewed_causal_draft",
+      "story_sha256": "78ed66246682d9fbd0a846727446a6edfad5d96dd22fb7eb9f1da9ce291a1e8b",
+      "candidate_issues": [
+        "human_or_model_editorial_review_required",
+        "not_production_ready",
+        "not_reviewed_authored_story",
+        "publication_unreviewed_causal_draft"
+      ],
+      "reviewable": false,
+      "story_beats": [
+        {
+          "story_beat": "reveal",
+          "speech": "As the cartographer in a coastal library, a retired cartographer needed to understand why the orchard echoed words nobody had spoken, before sunrise erased the only clue. A false alarm threatened to split the town into rival rescue teams. Two allies disagreed about which clue deserved attention. The neighbors needed a trustworthy explanation before taking action.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "build",
+          "speech": "Instead of guessing, a retired cartographer compared a repeating distress call in the wind with a constellation reflected in a puddle; fear turned into curiosity when the clue finally made sense. A helper's earlier warning had been dismissed as unrelated. a retired cartographer compared the warning with the new physical evidence and tested which warnings were reliable before anyone was sent into danger. They split the investigation into independent tests; tested the pattern against a hand-drawn timeline, but the useful part was hidden inside an ordinary object. The evidence gave the team a testable explanation rather than another suspicion.",
+          "visual": "book"
+        },
+        {
+          "story_beat": "twist",
+          "speech": "The warning predicted the failure more accurately than the first theory: the apparent sabotage was actually an emergency signal. The alarm had been triggered by a harmless echo, not an approaching disaster. Their separate findings became consistent only when combined. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. a retired cartographer checked the clue again and found that it fit the evidence gathered at the start.",
+          "visual": "signal"
+        },
+        {
+          "story_beat": "payoff",
+          "speech": "With the cause understood, a retired cartographer reunited the separated team and returned the lost object. The community saw how the evidence led to the solution and made the result easy for children to verify. The team included the helper in designing a better early-warning procedure. Together they published a verified warning protocol and reunited the rescue teams. Both allies received credit and agreed to share evidence earlier.",
+          "visual": "river"
+        }
+      ],
+      "review_template": {
+        "content_id": "astra-proposal-32986293b72d5b8f03c1",
+        "story_sha256": "78ed66246682d9fbd0a846727446a6edfad5d96dd22fb7eb9f1da9ce291a1e8b",
         "decision": "pending",
         "reviewer": "",
         "review_notes": ""
