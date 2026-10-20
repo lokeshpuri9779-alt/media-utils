@@ -8,7 +8,22 @@ from astra_v2.story_forge import DRAFT_PROBLEMS, DRAFT_CAUSAL_ARCS, catalog
 from astra_v2.story_editorial import editorial_issues
 
 
-VISUALS = ("forest", "door", "book", "ship")
+SCENES = {
+    "bridge": ("river", "bridge", "workshop", "river"),
+    "bell": ("village", "tower", "library", "tower"),
+    "garden": ("garden", "river", "workshop", "garden"),
+    "compass": ("forest", "mountain", "library", "forest"),
+    "lighthouse": ("coast", "lighthouse", "workshop", "coast"),
+    "ferry": ("harbor", "ship", "workshop", "harbor"),
+}
+DEFAULT_SCENES = ("village", "workshop", "library", "village")
+
+
+def scene_sequence(problem):
+    name = problem.casefold()
+    return next((scenes for word, scenes in SCENES.items() if word in name),
+                DEFAULT_SCENES)
+
 
 
 def proposals(limit=100, excluded_plot_hashes=()):
@@ -18,6 +33,7 @@ def proposals(limit=100, excluded_plot_hashes=()):
     seen.update(item["plot_fingerprint"] for item in history)
     output = []
     for problem, crisis, clue, resolution in DRAFT_PROBLEMS:
+        visuals = scene_sequence(problem)
         for arc_index, (obstacle, recovery) in enumerate(DRAFT_CAUSAL_ARCS[problem]):
             key = f"plot-first:{problem}:{arc_index}"
             beats = [
@@ -43,7 +59,7 @@ def proposals(limit=100, excluded_plot_hashes=()):
                     for role, label, speech, visual in zip(
                         ("reveal", "build", "twist", "payoff"),
                         ("THE CRISIS", "THE FAILED PLAN", "THE CLUE", "THE RESULT"),
-                        beats, VISUALS)
+                        beats, visuals)
                 ],
             }
             story["editorial_issues"] = editorial_issues(story, history)
