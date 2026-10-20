@@ -189,7 +189,30 @@ jobs:
           cp /tmp/astra-proposal-persist/*.json runtime-health/
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add runtime-health/story_proposals.json runtime-health/story_editorial_report.json runtime-health/story_supply_review.json
+          # Keep a small, independently readable status alongside the large ledger.
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          ledger = json.loads(Path("runtime-health/story_proposals.json").read_text(encoding="utf-8"))
+          review = json.loads(Path("runtime-health/story_supply_review.json").read_text(encoding="utf-8"))
+          ids = json.loads(Path("/tmp/astra-plot-first-ids.json").read_text(encoding="utf-8"))
+          summary = {
+              "schema_version": 1,
+              "workflow_run_id": "${{ github.run_id }}",
+              "workflow_attempt": "${{ github.run_attempt }}",
+              "commit": "${{ github.sha }}",
+              "total_unreviewed_inventory": len(ledger["proposals"]),
+              "new_plot_first_candidates": len(ids),
+              "editorial_issues_flagged": review.get("editorial_issue_count"),
+              "publication_quality_blocks": review.get("publication_blocked_count"),
+              "approved_for_production": 0,
+              "durable_readback": "pending",
+          }
+          Path("runtime-health/story_supply_status.json").write_text(
+              json.dumps(summary, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
+          print("ASTRA_SUPPLY_STATUS=" + json.dumps(summary, sort_keys=True))
+          PY
+          git add runtime-health/story_proposals.json runtime-health/story_editorial_report.json runtime-health/story_supply_review.json runtime-health/story_supply_status.json
           if [ -f runtime-health/story_mechanisms.json ]; then git add runtime-health/story_mechanisms.json; fi
           if git diff --cached --quiet; then
             echo "ASTRA_DURABLE_LEDGER_CHANGED=false"
@@ -214,6 +237,13 @@ jobs:
           if not set(expected_ids).issubset(durable_ids):
               raise SystemExit("Plot-first additions missing from durable state")
           print("ASTRA_DURABLE_PLOT_FIRST_ADDED=" + str(len(expected_ids)))
+          status = json.loads(__import__("subprocess").check_output(
+              ["git", "show", "origin/astra-state:runtime-health/story_supply_status.json"],
+              text=True))
+          if status["total_unreviewed_inventory"] != len(actual["proposals"]) or (
+                  status["new_plot_first_candidates"] != len(expected_ids)):
+              raise SystemExit("Durable supply status does not match persisted ledger")
+          print("ASTRA_DURABLE_SUPPLY_STATUS=verified")
           print("ASTRA_DURABLE_LEDGER_READBACK=verified")
           print(f"ASTRA_DURABLE_PROPOSAL_COUNT={len(actual.get('proposals', []))}")
           print(f"ASTRA_DURABLE_NEXT_INDEX={actual.get('next_index', 'missing')}")
