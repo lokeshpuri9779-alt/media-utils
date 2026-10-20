@@ -1,5 +1,6 @@
 """Compare legacy drafts and plot-first proposals without publishing either."""
 from collections import Counter
+import random
 from astra_v2.story_forge import draft_catalog
 from astra_v2.plot_first_proposals import proposals
 from astra_v2.story_editorial import editorial_issues, semantic_signature
@@ -25,11 +26,15 @@ def _stats(stories):
     }
 
 
-def compare(limit=30):
+def compare(limit=30, seed=20261020):
     if not 1 <= limit <= 100:
         raise ValueError("limit must be between 1 and 100")
+    # Draw across the full legacy pool rather than taking the first N actor swaps.
+    legacy_pool = draft_catalog()
+    rng = random.Random(seed)
+    legacy_rows = rng.sample(legacy_pool, limit)
     legacy = []
-    for key, title, genre, beats in draft_catalog(limit=limit):
+    for key, title, genre, beats in legacy_rows:
         legacy.append({
             "content_id": key, "title": title, "kind": "unreviewed_causal_draft",
             "production_ready": False,
@@ -39,8 +44,11 @@ def compare(limit=30):
                     ("reveal", "build", "twist", "payoff"), beats)
             ],
         })
-    return {"legacy": _stats(legacy), "plot_first": _stats(proposals(limit=limit)),
-            "comparison_scope": "first N candidates from each generator; not randomized"}
+    plot_pool = proposals(limit=100)
+    plot_rows = rng.sample(plot_pool, limit)
+    return {"legacy": _stats(legacy), "plot_first": _stats(plot_rows),
+            "comparison_scope": "seeded samples across legacy pool (996) and plot-first pool (100); distinct pool sizes",
+            "seed": seed}
 
 
 if __name__ == "__main__":

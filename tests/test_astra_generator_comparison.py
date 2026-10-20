@@ -11,6 +11,9 @@ class GeneratorComparisonTests(unittest.TestCase):
             self.assertEqual(result[arm]["publication_approved"], 0)
             self.assertLessEqual(result[arm]["max_pairwise_token_jaccard"], 1.0)
 
+    def test_seeded_comparison_is_reproducible(self):
+        self.assertEqual(compare(limit=8, seed=17), compare(limit=8, seed=17))
+
     def test_rejects_invalid_limit(self):
         with self.assertRaises(ValueError):
             compare(limit=101)
