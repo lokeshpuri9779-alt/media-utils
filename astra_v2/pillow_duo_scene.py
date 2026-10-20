@@ -479,12 +479,33 @@ def _prop(d, name, x, y, t, *, symbol_id=None, action="idle", condition=None):
         from astra_v2.procedural_visual_library import draw_icon, icon_for_story
         draw_icon(d,icon_for_story(name,name),x,y,size=120)
         return
-    # Show damage on the same illustrated object; repaired/intact versions
-    # retain the original artwork. Marks follow the object as it moves.
+    # Condition-specific details are drawn in the object's own coordinates
+    # so they remain attached during pickup, carry and repair transitions.
     if condition == "damaged":
-        d.line([(x-34,y-43),(x-8,y-12),(x-23,y+9),(x+19,y+42)],
-               fill=(63,48,53),width=8,joint="curve")
-        d.line([(x-8,y-12),(x+27,y-26)],fill=(63,48,53),width=6)
+        if name == "box":
+            d.line([(x-57,y-43),(x-24,y-13),(x-42,y+15),(x-5,y+48)],
+                   fill=(69,47,41),width=8,joint="curve")
+            d.line([(x-24,y-13),(x+7,y-28)],fill=(69,47,41),width=5)
+        elif name == "book":
+            # Torn page edge and creased cover, not a generic surface crack.
+            d.polygon([(x+48,y-60),(x+70,y-45),(x+51,y-30)],
+                      fill=(250,250,250))
+            d.line([(x-44,y-48),(x-17,y-17),(x-37,y+11),(x-4,y+39)],
+                   fill=(96,58,57),width=6)
+        elif name == "ball":
+            # A puncture and deflation seam.
+            d.ellipse((x+17,y-21,x+41,y+3),fill=(64,52,54))
+            d.arc((x-47,y-34,x+34,y+50),15,135,fill=(119,80,60),width=7)
+        elif name == "flower":
+            # Drooping stem and fallen petal.
+            d.line([(x,y+10),(x+18,y+33),(x+28,y+65)],
+                   fill=(73,105,69),width=8)
+            d.ellipse((x+37,y+52,x+65,y+77),fill=(215,129,147))
+        elif name == "lantern":
+            # Cracked glass and dimmed central glow.
+            d.line([(x-22,y-31),(x+3,y-7),(x-10,y+13),(x+21,y+42)],
+                   fill=(81,91,104),width=6)
+            d.line([(x+3,y-7),(x+25,y-18)],fill=(81,91,104),width=4)
     if symbol_id is not None and name in ("box","book","ball","lantern"):
         from astra_v2.procedural_visual_library import draw_icon
         draw_icon(d,symbol_id,x,y+13,size=33)
