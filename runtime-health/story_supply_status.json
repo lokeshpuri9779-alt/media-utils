@@ -1,11 +1,21 @@
 {
   "approved_for_production": 0,
-  "commit": "cd283f352f5b4f6f00876ad2d24336d48f6419da",
-  "editorial_issues_flagged": 4876,
+  "commit": "ef67893e94a35e256247e22f3e9a4b9a5646897f",
+  "editorial_issues_flagged": 4986,
+  "editorial_reason_counts": {
+    "human_or_model_editorial_review_required": 4986,
+    "insufficient_visual_variety": 416,
+    "narrative_duplicate": 1488
+  },
+  "editorial_review_queue_count": 3128,
   "new_plot_first_candidates": 10,
-  "publication_quality_blocks": 4876,
+  "publication_quality_blocks": 4986,
+  "publication_rejection_reason_counts": {
+    "unreviewed_causal_draft": 4986
+  },
   "schema_version": 1,
-  "total_unreviewed_inventory": 4876,
+  "structurally_sound_unreviewed_count": 3128,
+  "total_unreviewed_inventory": 4986,
   "workflow_attempt": "1",
-  "workflow_run_id": "39416900576"
+  "workflow_run_id": "39417800715"
 }
