@@ -43,6 +43,14 @@ class SemanticCandidateIndex:
             positions.update(self.word_postings.get(token, ()))
         if fingerprint:
             positions.update(self.fingerprint_postings.get(fingerprint, ()))
-        # Never change the reference scorer's ranking or evidence format.
+        # A fingerprint match outranks every non-fingerprint candidate in the
+        # reference lexicographic score. Restrict to those matches when present.
+        # Do not threshold-prune other candidates: the reference scorer selects
+        # its best match BEFORE testing thresholds, so pruning can change output.
+        if fingerprint:
+            exact_positions = self.fingerprint_postings.get(fingerprint, ())
+            if exact_positions:
+                positions = exact_positions
+        # Preserve historical order and reference evidence format.
         candidates = [self.items[i] for i in sorted(positions)]
         return _semantic_match_features(story, features, candidates, threshold)
