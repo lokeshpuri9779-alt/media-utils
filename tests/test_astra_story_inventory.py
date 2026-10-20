@@ -6,6 +6,16 @@ from astra_v2.publication_quality import publication_rejection
 
 
 class StoryInventoryTests(unittest.TestCase):
+    def test_latest_authored_batch_passes_actual_production_gate(self):
+        from astra_v2.production_story_gate import candidate_issues
+        latest_titles = {row[1] for row in AUTHORED_BATCH_473}
+        records = [story for story in catalog(limit=2000)
+                   if story["title"] in latest_titles]
+        self.assertEqual(len(records), len(latest_titles))
+        for story in records:
+            with self.subTest(title=story["title"]):
+                self.assertEqual(candidate_issues(story), [])
+
     def test_authored_inventory_has_distinct_ids(self):
         self.assertEqual(len(PLOTS), 24)
         self.assertEqual(len(REWRITTEN_PLOTS), 55)
