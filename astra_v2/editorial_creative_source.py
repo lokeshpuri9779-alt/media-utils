@@ -23,6 +23,16 @@ def load_editorial_stories():
         result = approved_intake(stories["stories"], decisions["reviews"],
                                  load_history(publisher, history))
         print("ASTRA_EDITORIAL_INTAKE_CANDIDATES=" + str(result["intake_count"]))
-        return result["stories"]
+        # Classify only explicitly approved authored narratives after the
+        # hash-bound review audit; never mutate reviewed source documents.
+        output = []
+        for reviewed in result["stories"]:
+            story = dict(reviewed)
+            if story.get("kind") == "authored_causal_story" and story.get("story_beats"):
+                if story.get("genre") not in (None, "", "fiction"):
+                    raise ValueError("reviewed_authored_story_genre_conflict")
+                story["genre"] = "fiction"
+            output.append(story)
+        return output
     except (OSError, ValueError, TypeError, KeyError) as exc:
         raise CreativeSkip("editorial_intake_unavailable:" + type(exc).__name__) from exc
