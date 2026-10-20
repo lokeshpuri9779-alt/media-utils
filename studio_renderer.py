@@ -429,6 +429,9 @@ def make_plan(ch):
         # than repeating it in every narration beat. Explicit beat overrides
         # remain authoritative when the plot intentionally changes objects.
         story_prop = ch.get('story_prop')
+        if story_prop is None and ch.get('story_beats'):
+            from astra_v2.pillow_duo_scene import infer_story_prop
+            story_prop = infer_story_prop(ch)
         for shot in formatted:
             if story_prop is not None:
                 shot.setdefault('story_prop', story_prop)
