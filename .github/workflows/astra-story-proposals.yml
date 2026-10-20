@@ -169,7 +169,7 @@ jobs:
           if not p.is_file():
               raise SystemExit("Editorial shortlist missing after generation")
           data = json.loads(p.read_text(encoding="utf-8"))
-          required = ("candidates_with_title_story_flags", "candidates_with_causal_continuity_flags")
+          required = ("candidates_with_title_story_flags", "candidates_with_causal_continuity_flags", "candidates_with_primary_problem_resolution_flags")
           missing = [key for key in required if key not in data]
           if missing:
               raise SystemExit(f"Editorial shortlist missing diagnostic fields: {missing}")
@@ -177,11 +177,17 @@ jobs:
           if not isinstance(candidates, list):
               raise SystemExit("Editorial shortlist review_candidates must be a list")
           for key, field in (("candidates_with_title_story_flags", "title_story_flags"),
-                             ("candidates_with_causal_continuity_flags", "causal_continuity_flags")):
+                             ("candidates_with_causal_continuity_flags", "causal_continuity_flags"), ("candidates_with_primary_problem_resolution_flags", "primary_problem_resolution_flags")):
               if any(not isinstance(item.get(field), list) for item in candidates):
                   raise SystemExit(f"Editorial shortlist candidates missing {field}")
               if data[key] != sum(bool(item[field]) for item in candidates):
                   raise SystemExit(f"Editorial shortlist count mismatch for {key}")
+          for item in candidates:
+              if not isinstance(item.get("causal_continuity_evidence"), list):
+                  raise SystemExit("Missing causal continuity evidence")
+              evidence = item.get("primary_problem_resolution_evidence")
+              if bool(item["primary_problem_resolution_flags"]) != isinstance(evidence, dict):
+                  raise SystemExit("Primary problem evidence mismatch")
           print(f"Validated diagnostic fields for {len(candidates)} editorial candidates")
           PY
       - name: Summarize reviewable story supply without approval
