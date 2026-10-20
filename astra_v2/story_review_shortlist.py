@@ -108,7 +108,30 @@ def shortlist(ledger_path, review_path, output_path, limit=25):
                     flags.append(f"scene_{index}_beat_order")
                 previous = position
         entry["scene_integrity_flags"] = flags
+    # Conservative lexical check for concrete visual cues. Only flag when
+    # narration explicitly names a recognizable object and the visual tag
+    # belongs to a different recognizable object category.
+    visual_cues = {
+        "bell": {"bell"}, "lighthouse": {"lighthouse"},
+        "snow": {"snow"}, "river": {"river"}, "bridge": {"bridge"},
+        "book": {"book"}, "door": {"door"}, "forest": {"forest"},
+    }
+    for entry in selected:
+        flags = []
+        for index, beat in enumerate(entry["story_beats"], start=1):
+            speech = str(beat.get("speech") or "").casefold()
+            visual = str(beat.get("visual") or "").strip().casefold()
+            mentioned = {cue for cue in visual_cues
+                         if cue in speech.split() or cue + "s" in speech.split()}
+            if len(mentioned) == 1 and visual in visual_cues:
+                cue = next(iter(mentioned))
+                if visual not in visual_cues[cue]:
+                    flags.append(f"scene_{index}_visual_cue_mismatch")
+        entry["visual_alignment_flags"] = flags
     result = {
+        "candidates_with_visual_alignment_flags": sum(
+            bool(entry["visual_alignment_flags"]) for entry in selected
+        ),
         "candidates_with_scene_integrity_flags": sum(
             bool(entry["scene_integrity_flags"]) for entry in selected
         ),
