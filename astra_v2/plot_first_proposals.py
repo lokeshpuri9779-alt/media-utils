@@ -39,6 +39,27 @@ def character_arc(index):
     return ROLES[index % len(ROLES)]
 
 
+# Consequences are tied to the repaired system, not a generic celebration.
+CONSEQUENCES = {
+    "bridge": ("the crossing stayed closed until a load test passed", "the first cart crossed only after the supports held"),
+    "bell": ("the town used runners while the signal was silent", "the restored signal reached the farthest street"),
+    "garden": ("the seedlings were moved to higher ground", "fresh soil held moisture without flooding the roots"),
+    "compass": ("the group marked its last safe position", "the return route matched the landmarks on the map"),
+    "lighthouse": ("the harbor kept boats offshore until the light was reliable", "three passing boats saw the steady beam"),
+    "ferry": ("passengers waited on shore instead of boarding an unsafe vessel", "the ferry completed a supervised crossing"),
+}
+DEFAULT_CONSEQUENCE = (
+    "the team stopped using the damaged system while repairs were checked",
+    "a careful trial showed the repaired system could be trusted",
+)
+
+
+def consequence_for(problem):
+    name = problem.casefold()
+    return next((outcome for word, outcome in CONSEQUENCES.items() if word in name),
+                DEFAULT_CONSEQUENCE)
+
+
 def proposals(limit=100, excluded_plot_hashes=()):
     seen = set(excluded_plot_hashes)
     # Include existing authored stories in novelty history by default.
@@ -47,14 +68,15 @@ def proposals(limit=100, excluded_plot_hashes=()):
     output = []
     for problem, crisis, clue, resolution in DRAFT_PROBLEMS:
         visuals = scene_sequence(problem)
+        immediate_cost, verified_result = consequence_for(problem)
         for arc_index, (obstacle, recovery) in enumerate(DRAFT_CAUSAL_ARCS[problem]):
             key = f"plot-first:{problem}:{arc_index}"
             hero, motivation, decision = character_arc(arc_index)
             beats = [
                 f"The village faced a crisis when {crisis}; {hero} stepped forward to {motivation}.",
-                f"The first rescue plan failed because {obstacle}; {hero} {decision}.",
+                f"The first rescue plan failed because {obstacle}; {hero} {decision}, while {immediate_cost}.",
                 f"After examining {clue}, {hero} chose to {recovery}, even though the neighbors had to abandon their original plan.",
-                f"The new plan worked: {resolution}; {hero} checked the result and explained why the changed plan mattered.",
+                f"The revised plan changed the outcome: {resolution}; {verified_result}, so {hero} could finally reopen the service.",
             ]
             fingerprint = hashlib.sha256(" ".join(beats).casefold().encode()).hexdigest()
             if fingerprint in seen:
@@ -67,6 +89,8 @@ def proposals(limit=100, excluded_plot_hashes=()):
                 "character_role": hero,
                 "character_motivation": motivation,
                 "character_decision": decision,
+                "consequence": immediate_cost,
+                "verification": verified_result,
                 "kind": "unreviewed_causal_draft",
                 "production_ready": False,
                 "plot_fingerprint": fingerprint,
