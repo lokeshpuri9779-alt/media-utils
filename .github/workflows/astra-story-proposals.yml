@@ -198,6 +198,12 @@ jobs:
             --output runtime-health/story_review_packet.json \
             --stories-output runtime-health/story_review_stories.json \
             --reviews-output runtime-health/story_review_decisions.json
+      - name: Generate human-readable editorial review worksheet without approval
+        run: |
+          python -m astra_v2.editorial_review_worksheet \
+            --stories runtime-health/story_review_stories.json \
+            --decisions runtime-health/story_review_decisions.json \
+            --output runtime-health/story_review_worksheet.md
       - name: Prepare exported editorial candidates without approval
         run: |
           python -m astra_v2.editorial_batch_preparation \
