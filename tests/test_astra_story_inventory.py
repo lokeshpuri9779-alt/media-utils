@@ -65,6 +65,7 @@ class StoryInventoryTests(unittest.TestCase):
                 self.assertTrue(all(len(beat) == 4 for beat in beats))
                 self.assertTrue(all(len(beat[1].split()) >= 9 for beat in beats))
                 self.assertEqual(len({beat[1].casefold() for beat in beats}), 4)
+                self.assertGreaterEqual(len({beat[2] for beat in beats}), 3)
 
     def test_draft_inventory_count_and_unique_titles(self):
         drafts = draft_catalog()
