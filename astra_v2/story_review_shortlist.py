@@ -16,6 +16,7 @@ def shortlist(ledger_path, review_path, output_path, limit=25):
     if len(proposals) != len(assessments):
         raise ValueError("Proposal/audit count mismatch")
     selected = []
+    seen_titles = set()
     for story, audit in zip(proposals, assessments):
         if not isinstance(story, dict) or not isinstance(audit, dict):
             raise ValueError("Invalid proposal or audit entry")
@@ -28,6 +29,10 @@ def shortlist(ledger_path, review_path, output_path, limit=25):
             continue
         if story.get("production_ready") is not False:
             raise ValueError("Review candidate must remain unapproved")
+        title_key = str(story.get("title") or "").strip().casefold()
+        if not title_key or title_key in seen_titles:
+            continue
+        seen_titles.add(title_key)
         selected.append({
             "content_id": story.get("content_id"),
             "title": story.get("title"),
