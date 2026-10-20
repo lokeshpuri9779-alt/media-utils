@@ -81,7 +81,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
     from astra_v2.editorial_creative_source import load_editorial_stories
     editorial_stories = load_editorial_stories()
     premium_stories = (series_stories if serialized_preload else
-                       series_stories + editorial_stories + approved_authored_candidates(forge_catalog(excluded_ids, excluded_titles)) + anthology_catalog() + free_catalog() + original_catalog()
+                       series_stories + editorial_stories + approved_authored_candidates(forge_catalog(excluded_ids, excluded_titles, limit=2048)) + anthology_catalog() + free_catalog() + original_catalog()
                        + replenishment_catalog(make_original_story) + catalog()
                        + procedural_catalog(excluded_ids, limit=128))
     # Count truly eligible stories, not just unseen template IDs.
