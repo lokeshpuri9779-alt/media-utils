@@ -32,6 +32,12 @@ def shortlist(ledger_path, review_path, output_path, limit=25):
             "content_id": story.get("content_id"),
             "title": story.get("title"),
             "genre": story.get("genre"),
+            "story_beats": [
+                {"story_beat": beat.get("story_beat"), "headline": beat.get("headline"),
+                 "speech": beat.get("speech"), "visual": beat.get("visual")}
+                for beat in story.get("story_beats", [])[:12]
+                if isinstance(beat, dict)
+            ],
             "editorial_issues": issues,
             "publication_rejection": audit.get("publication_rejection"),
             "production_ready": False,
