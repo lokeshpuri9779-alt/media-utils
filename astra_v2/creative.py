@@ -34,6 +34,19 @@ def inspect_video(path, fmt="short"):
             "width": width, "height": height}
 
 
+def story_description_text(story):
+    """Use authored narration for reviewed stories without legacy Q/A fields."""
+    question, answer = story.get("question"), story.get("answer")
+    if question and answer:
+        return str(question) + "\n" + str(answer)
+    speeches = [str(beat.get("speech") or "").strip()
+                for beat in (story.get("story_beats") or [])
+                if isinstance(beat, dict) and str(beat.get("speech") or "").strip()]
+    if not speeches:
+        raise ValueError("Story has no description narration")
+    return "\n".join(speeches)
+
+
 def narration_word_count(story):
     """Count spoken words, not headings or on-screen labels."""
     return sum(len(str(beat.get("speech") or "").split())
@@ -313,7 +326,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 attribution = "\nAn original fictional microstory; all characters and events are fictional."
             else:
                 attribution = "\nSource: " + story.get("source", "")
-            description = (story["question"] + "\n" + story["answer"]
+            description = (story_description_text(story)
                 + attribution
                 + "\nOriginal visuals; AI-assisted synthetic narration. #Shorts"
                 + "\nSubscribe: https://www.youtube.com/channel/" + legacy.expected_channel_id())
