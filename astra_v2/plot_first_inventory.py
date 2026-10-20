@@ -16,6 +16,8 @@ def append_plot_first(path, limit=10, publisher_path="astra_v2_state.json",
                       story_path="astra_story_history.json"):
     if not 0 <= limit <= 100:
         raise ValueError("Invalid plot-first batch limit")
+    if limit == 0:
+        return 0
     target = Path(path)
     state = json.loads(target.read_text(encoding="utf-8"))
     if not isinstance(state, dict) or not isinstance(state.get("proposals"), list):
