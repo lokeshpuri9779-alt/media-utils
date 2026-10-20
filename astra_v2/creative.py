@@ -184,7 +184,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
             history_filter["fingerprint"] += 1
         elif story.get("plot_key") in history_plot_keys:
             history_filter["plot_key"] += 1
-        elif is_near_duplicate(story, history_narratives):
+        elif not (not is_near_duplicate(story, history_narratives)):
             history_filter["near_duplicate"] += 1
         elif (str(story.get("content_id") or "").startswith("rayvan-original-")
               and not is_planned_story(story)):
