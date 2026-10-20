@@ -29,6 +29,7 @@ jobs:
       - name: Compare story generators (diagnostic only)
         run: |
           python -m unittest discover -s tests -p 'test_astra_generator_comparison.py' -v
+          python -m unittest discover -s tests -p 'test_astra_structural_exclusion.py' -v
           python -m astra_v2.generator_comparison
       - name: Run story and novelty safeguards
         run: |
