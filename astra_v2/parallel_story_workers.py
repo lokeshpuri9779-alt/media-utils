@@ -8,7 +8,7 @@ from pathlib import Path
 from astra_v2.story_batch_checkpoint import checkpoint_record, read_checkpoint
 
 WORKERS = 8
-STORIES_PER_RUN = 500
+STORIES_PER_RUN = 256
 
 
 def worker_allocation(total=STORIES_PER_RUN, workers=WORKERS):
