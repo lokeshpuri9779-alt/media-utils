@@ -583,6 +583,19 @@ def draw_duo(image, shot, t):
     from astra_v2.procedural_visual_library import (
         character_recipe, visual_identity, icon_for_story, MOTIFS)
     stable_key=shot.get("story_visual_seed") or "|".join(pair)
+    # Explicit owner selects the hand anchor; legacy shots keep actor zero.
+    # Unknown owners do not trigger a guessed handoff.
+    owner = shot.get("story_prop_owner")
+    owner_idx = next((i for i, name in enumerate(pair)
+                      if isinstance(owner, str) and owner.strip().casefold() == name.casefold()), None)
+    owner_active = owner_idx is not None
+    hand_x = (298 if owner_idx in (None, 0) else 772)
+    hand_side = 1 if owner_idx in (None, 0) else -1
+    def owner_hand(current_action):
+        actor_x = hand_x + actor_translation(current_action, t, owner_idx or 0)
+        if owner_idx == 1 and current_action == "carry":
+            actor_x -= 105
+        return (actor_x + hand_side * 153, 1063)
     # Physical hand contact: once grasped, the object is driven by the
     # actor's hand anchor rather than an unrelated overlay trajectory.
     contact_actions={"pick","pickup","pick_up","carry","hold","repair","catch"}
@@ -590,8 +603,7 @@ def draw_duo(image, shot, t):
     # of snapping away from the hand on the first release frame.
     if prop and action in ("release","drop","put_down"):
         release=_ease((max(0.0,float(t))-.15)/.55)
-        actor_x=298+actor_translation(action,t,0)
-        held=(actor_x+175-22,846+215+2)
+        held=owner_hand(action)
         staged=prop_trajectory(shot,t) if shot.get("story_beat") else (433,1060)
         prop_pos=(round(held[0]*(1-release)+staged[0]*release),
                   round(held[1]*(1-release)+staged[1]*release))
@@ -605,10 +617,7 @@ def draw_duo(image, shot, t):
         # A smooth, monotonic grasp phase avoids the prop drifting back
         # toward its staging point after contact has been established.
         grasp=_ease((max(0.0,float(t))-.15)/.9)
-        actor_x=298+actor_translation(action,t,0)
-        # Match the actual right-hand target used by _actor (target x - 22).
-        # Without this offset, the held object floats away from the palm.
-        held=(actor_x+175-22, 846+215+2)
+        held=owner_hand(action)
         prop_pos=(round(prop_pos[0]*(1-grasp)+held[0]*grasp),
                   round(prop_pos[1]*(1-grasp)+held[1]*grasp))
     for idx,name in enumerate(pair):
@@ -632,7 +641,10 @@ def draw_duo(image, shot, t):
         actor_mood=mood
         if mood=="angry" and idx==0:
             actor_mood="curious"  # Reaction shot, not two identical emotions.
-        if idx==1 and action!="carry":
+        if owner_active:
+            if idx != owner_idx:
+                hand_target = None
+        elif idx==1 and action!="carry":
             hand_target=None
         recipe=character_recipe(visual_identity(stable_key,name,idx))
         _actor(d,name,x,y,t,action,actor_mood,idx,
