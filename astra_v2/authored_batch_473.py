@@ -2,7 +2,7 @@
 PLOTS = [
 ("mole-market-signs", "The Mole and the Turning Market Signs", "market mystery", [
 ("MIXED UP", "Before sunrise, a mole discovered that every market sign pointed shoppers toward the wrong street.", "village", "WRONG WAY"),
-("THE FIRST TRY", "He straightened each arrow, but passing delivery carts shook them loose all over again.", "village", "FAILED"),
+("THE FIRST TRY", "He straightened each arrow, but passing delivery carts shook them loose all over again.", "clock", "FAILED"),
 ("THE CLUE", "Beneath one post, he found a worn wooden peg that let the whole sign spin freely.", "clock", "LOOSE PEG"),
 ("MARKET OPENS", "A carpenter secured the pegs, and the mole welcomed shoppers along the correct route.", "village", "RESTORED"),
 ]),
