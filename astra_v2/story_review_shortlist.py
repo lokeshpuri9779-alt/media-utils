@@ -128,7 +128,30 @@ def shortlist(ledger_path, review_path, output_path, limit=25):
                 if visual not in visual_cues[cue]:
                     flags.append(f"scene_{index}_visual_cue_mismatch")
         entry["visual_alignment_flags"] = flags
+    # Flag clear setup-to-resolution subject switches. This narrow check only
+    # applies when both scenes mention recognized concrete problem objects;
+    # otherwise the story remains undecided for editorial review.
+    problem_objects = {
+        "bell", "lighthouse", "bridge", "water", "river", "signal",
+        "machine", "door", "clock", "ferry", "train", "radio",
+    }
+    for entry in selected:
+        beats = entry["story_beats"]
+        flags = []
+        if len(beats) >= 2:
+            opening = set(str(beats[0].get("speech") or "").casefold()
+                          .replace(",", " ").replace(".", " ").split())
+            ending = set(str(beats[-1].get("speech") or "").casefold()
+                         .replace(",", " ").replace(".", " ").split())
+            opening_objects = opening & problem_objects
+            ending_objects = ending & problem_objects
+            if opening_objects and ending_objects and not (opening_objects & ending_objects):
+                flags.append("setup_resolution_subject_switch")
+        entry["resolution_continuity_flags"] = flags
     result = {
+        "candidates_with_resolution_continuity_flags": sum(
+            bool(entry["resolution_continuity_flags"]) for entry in selected
+        ),
         "candidates_with_visual_alignment_flags": sum(
             bool(entry["visual_alignment_flags"]) for entry in selected
         ),
