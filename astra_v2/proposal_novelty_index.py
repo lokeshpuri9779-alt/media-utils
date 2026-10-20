@@ -3,6 +3,8 @@
 Exact identities use hash lookups. Narration comparisons remain conservative:
 all previous stories are checked, preserving the existing threshold behavior.
 """
+from collections import defaultdict
+
 from astra_v2.shorts_novelty import tokens, story_text, structural_signature
 
 
@@ -11,6 +13,7 @@ class NoveltyIndex:
         self.fingerprints = set()
         self.structures = set()
         self.token_sets = []
+        self.token_postings = defaultdict(set)
         for story in previous:
             self.add(story)
 
@@ -23,7 +26,11 @@ class NoveltyIndex:
         signature = structural_signature(story)
         if signature is not None:
             self.structures.add(signature)
-        self.token_sets.append(tokens(story_text(story)))
+        word_set = tokens(story_text(story))
+        position = len(self.token_sets)
+        self.token_sets.append(word_set)
+        for word in word_set:
+            self.token_postings[word].add(position)
 
     def is_near_duplicate(self, candidate, threshold=0.88):
         if not 0 < threshold <= 1:
@@ -38,7 +45,13 @@ class NoveltyIndex:
         if not words:
             return False
         count = len(words)
-        for other in self.token_sets:
+        # Zero-overlap stories cannot reach a positive Dice threshold.
+        # Postings preserve exact decisions while avoiding unrelated stories.
+        positions = set()
+        for word in words:
+            positions.update(self.token_postings.get(word, ()))
+        for position in positions:
+            other = self.token_sets[position]
             if not other:
                 continue
             # A Dice score >= threshold is impossible if sizes differ too much.
