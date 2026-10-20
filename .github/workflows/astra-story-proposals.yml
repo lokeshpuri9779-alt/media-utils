@@ -206,7 +206,6 @@ jobs:
               "editorial_issues_flagged": review.get("editorial_issue_count"),
               "publication_quality_blocks": review.get("publication_blocked_count"),
               "approved_for_production": 0,
-              "durable_readback": "pending",
           }
           Path("runtime-health/story_supply_status.json").write_text(
               json.dumps(summary, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
