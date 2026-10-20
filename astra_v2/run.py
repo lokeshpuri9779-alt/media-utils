@@ -331,12 +331,23 @@ def run():
         state["last_outcome"] = report["outcome"]
         # Persist a bounded, non-sensitive production outcome so scheduled-run
         # failures remain diagnosable even when Actions logs are unavailable.
+        # Preserve aggregate story-selection failure counts alongside the outcome.
+        # The creative stage writes this only after exhausting approved candidates.
+        diagnostic_path = Path("runtime-health/story-selection-diagnostic.json")
+        if report["outcome"] == "quality_skip" and diagnostic_path.is_file():
+            try:
+                diagnostic = read_json(diagnostic_path)
+                if isinstance(diagnostic, dict):
+                    report["story_selection"] = diagnostic
+            except (OSError, ValueError, TypeError):
+                pass
         state["last_production_result"] = {
             "at": report["at"],
             "outcome": str(report["outcome"])[:80],
             "reason": str(report.get("reason") or "")[:250],
             "content_id": str(report.get("content_id") or "")[:160],
             "video_url": str(report.get("video_url") or "")[:250],
+            "story_selection": report.get("story_selection") or {},
         }
         write_json(STATE_FILE, state)
         report.update(
