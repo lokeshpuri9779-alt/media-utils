@@ -149,6 +149,18 @@ def shortlist(ledger_path, review_path, output_path, limit=25):
             if opening_objects and ending_objects and not (opening_objects & ending_objects):
                 flags.append("setup_resolution_subject_switch")
         entry["resolution_continuity_flags"] = flags
+    # Conservative lexical diagnostics; never change publication eligibility.
+    title_terms = {"forest", "village", "market", "lighthouse", "river", "bridge", "train", "museum", "orchard", "snow", "bell"}
+    for entry in selected:
+        title_words = set(str(entry.get("title") or "").casefold().replace(":", " ").split())
+        narrative = " ".join(str(b.get("speech") or "") for b in entry["story_beats"]).casefold()
+        narrative_words = set(narrative.replace(",", " ").replace(".", " ").split())
+        promised = title_words & title_terms
+        entry["title_story_flags"] = (["title_setting_not_in_narration"]
+                                      if promised and not promised.issubset(narrative_words) else [])
+        # This narrow heuristic flags disconnected endings only when a concrete
+        # opening subject and a different ending subject are both identifiable.
+        entry["causal_continuity_flags"] = list(entry["resolution_continuity_flags"])
     result = {
         "candidates_with_resolution_continuity_flags": sum(
             bool(entry["resolution_continuity_flags"]) for entry in selected
@@ -165,6 +177,8 @@ def shortlist(ledger_path, review_path, output_path, limit=25):
         "candidates_with_reused_narration": sum(
             bool(entry["reused_narration_beats"]) for entry in selected
         ),
+        "candidates_with_title_story_flags": sum(bool(e["title_story_flags"]) for e in selected),
+        "candidates_with_causal_continuity_flags": sum(bool(e["causal_continuity_flags"]) for e in selected),
         "schema_version": 1,
         "source_proposal_count": len(proposals),
         "review_candidates": selected,
