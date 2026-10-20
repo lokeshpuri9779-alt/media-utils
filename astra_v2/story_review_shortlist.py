@@ -67,7 +67,32 @@ def shortlist(ledger_path, review_path, output_path, limit=25):
             and " ".join(beat["speech"].casefold().split()) in reused
             for beat in entry["story_beats"]
         )
+    # Repeated multi-scene plot structures can hide behind distinct titles.
+    # Compare normalized narration for each scene, excluding the opening setup
+    # so changes to setting or protagonist cannot conceal an identical plot.
+    plot_owners = {}
+    for entry in selected:
+        beats = entry["story_beats"]
+        if len(beats) < 3:
+            continue
+        plot_key = tuple(
+            " ".join(str(beat.get("speech") or "").casefold().split())
+            for beat in beats[1:]
+        )
+        if all(plot_key):
+            plot_owners.setdefault(plot_key, set()).add(entry["content_id"])
+    reused_plots = {key for key, owners in plot_owners.items() if len(owners) > 1}
+    for entry in selected:
+        beats = entry["story_beats"]
+        key = tuple(
+            " ".join(str(beat.get("speech") or "").casefold().split())
+            for beat in beats[1:]
+        )
+        entry["reused_plot_arc"] = len(beats) >= 3 and key in reused_plots
     result = {
+        "candidates_with_reused_plot_arc": sum(
+            entry["reused_plot_arc"] for entry in selected
+        ),
         "candidates_with_reused_narration": sum(
             bool(entry["reused_narration_beats"]) for entry in selected
         ),
