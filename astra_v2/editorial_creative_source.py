@@ -22,6 +22,17 @@ def load_editorial_stories():
         decisions = json.loads(Path(reviews).read_text(encoding="utf-8"))
         result = approved_intake(stories["stories"], decisions["reviews"],
                                  load_history(publisher, history))
+        # Surface why signed approvals are excluded by the live history gate.
+        # Diagnostics only: never alter approval, novelty, or publication decisions.
+        from collections import Counter
+        reasons = Counter(issue for entry in result["audit"]["results"]
+                          for issue in entry["issues"])
+        print("ASTRA_EDITORIAL_INTAKE_AUDIT=" + json.dumps({
+            "reviewed": len(result["audit"]["results"]),
+            "eligible": result["intake_count"],
+            "excluded": len(result["audit"]["results"]) - result["intake_count"],
+            "reasons": dict(sorted(reasons.items())),
+        }, sort_keys=True))
         print("ASTRA_EDITORIAL_INTAKE_CANDIDATES=" + str(result["intake_count"]))
         return result["stories"]
     except (OSError, ValueError, TypeError, KeyError) as exc:
