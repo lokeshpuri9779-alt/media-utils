@@ -60,8 +60,16 @@ def consequence_for(problem):
                 DEFAULT_CONSEQUENCE)
 
 
-def proposals(limit=100, excluded_plot_hashes=()):
+def structural_key(story):
+    """Stable causal key; exclude cosmetics and reject missing fields."""
+    fields = ("problem", "obstacle", "recovery", "consequence", "verification")
+    values = tuple(str(story.get(field) or "").casefold().strip() for field in fields)
+    return values if all(values) else None
+
+
+def proposals(limit=100, excluded_plot_hashes=(), excluded_structural_keys=()):
     seen = set(excluded_plot_hashes)
+    seen_structures = set(excluded_structural_keys)
     # Include existing authored stories in novelty history by default.
     history = catalog(limit=2000)
     seen.update(item["plot_fingerprint"] for item in history)
@@ -78,10 +86,16 @@ def proposals(limit=100, excluded_plot_hashes=()):
                 f"After examining {clue}, {hero} chose to {recovery}, even though the neighbors had to abandon their original plan.",
                 f"The revised plan changed the outcome: {resolution}; {verified_result}, so {hero} could finally reopen the service.",
             ]
+            structure = (problem.casefold().strip(), obstacle.casefold().strip(),
+                         recovery.casefold().strip(), immediate_cost.casefold().strip(),
+                         verified_result.casefold().strip())
+            if structure in seen_structures:
+                continue
             fingerprint = hashlib.sha256(" ".join(beats).casefold().encode()).hexdigest()
             if fingerprint in seen:
                 continue
             seen.add(fingerprint)
+            seen_structures.add(structure)
             story = {
                 "content_id": "astra-proposal-" + hashlib.sha256(key.encode()).hexdigest()[:16],
                 "title": f"The {problem.title()} — Alternative {arc_index + 1}",
