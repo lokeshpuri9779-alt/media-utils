@@ -28,30 +28,30 @@ def _semantic_features(story):
 def _semantic_match_features(story, current, previous_items, threshold):
     signature, words, fingerprint = current
     best = None
+    best_score = None
+    signature_size = len(signature)
+    words_size = len(words)
     for prior, (other_signature, other_words, other_fp) in previous_items:
-        # Disjoint token counts cannot reach the thresholds; keep exact
-        # scores for evidence/ranking even when the match is impossible.
         shared_signature = len(signature & other_signature)
-        union_size = len(signature) + len(other_signature) - shared_signature
+        union_size = signature_size + len(other_signature) - shared_signature
         jaccard = shared_signature / union_size if union_size else 0.0
         shared_words = len(words & other_words) if words and other_words else 0
-        dice = (2 * shared_words / (len(words) + len(other_words))
+        dice = (2 * shared_words / (words_size + len(other_words))
                 if words and other_words else 0.0)
         fingerprint_match = bool(fingerprint and fingerprint == other_fp)
-        if best is None or (fingerprint_match, jaccard, dice) > (
-                best["plot_fingerprint_match"], best["jaccard_similarity"], best["dice_similarity"]):
-
-            candidate = {
+        score = (fingerprint_match, round(jaccard, 4), round(dice, 4))
+        if best_score is None or score > best_score:
+            best_score = score
+            best = {
                 "matched_content_id": prior.get("content_id"),
                 "matched_title": prior.get("title"),
-                "jaccard_similarity": round(jaccard, 4),
-                "dice_similarity": round(dice, 4),
+                "jaccard_similarity": score[1],
+                "dice_similarity": score[2],
                 "jaccard_threshold": threshold,
                 "dice_threshold": 0.88,
                 "plot_fingerprint_match": fingerprint_match,
                 "method": "plot_fingerprint_and_narration_similarity",
             }
-            best = candidate
     if not best:
         return None
     triggered = (best["plot_fingerprint_match"] or
