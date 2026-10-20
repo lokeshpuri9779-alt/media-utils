@@ -3,7 +3,7 @@
   "day": "2026-10-20",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 3,
-  "confirmed_today": 2,
+  "confirmed_today": 3,
   "last_attempt_at": "2026-10-20T08:57:29.711092+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -2219,57 +2219,38 @@
       "format": "short",
       "uploaded_at": "2026-10-20T08:30:34.043091+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "gOWjsFWXWmg": {
-      "content_id": "rayvan-forge-80c11c9b714647d3",
+    },
+    "rayvan-forge-80c11c9b714647d3": {
+      "video_id": "gOWjsFWXWmg",
+      "confirmed_at": "2026-10-20T08:58:09.751748+00:00",
       "title": "The Badger and the Midnight Sprinklers",
-      "day": "2026-10-20",
-      "uploaded_at": "2026-10-20T08:57:31.291589+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "000678fe2195a4fbda0e6dd166c4a42b59d515b0cab5b9dce922b834a35dfca8",
-      "story_beats": [
-        {
-          "speech": "A badger woke at midnight to find garden sprinklers soaking his seedlings in the cold."
-        },
-        {
-          "speech": "He moved the timer hands forward, but the sprinklers still started after sunset that evening."
-        },
-        {
-          "speech": "A rabbit discovered the timer's day and night labels had been swapped during spring cleaning."
-        },
-        {
-          "speech": "They corrected the labels, and the seedlings received water only after the morning air warmed."
-        }
-      ],
+      "uploaded_at": "2026-10-20T08:57:31.291589+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-20T08:56:31.989323+00:00",
-  "last_preflight_reason": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-20T08:58:09.374264+00:00",
+  "last_preflight_reason": "min_interval",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-20T08:57:31.582978+00:00",
+    "at": "2026-10-20T08:58:09.822386+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-20T08:57:10.520919+00:00",
   "reserved": {
@@ -5645,10 +5626,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-20T08:57:31.582923+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-20T08:58:09.822303+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -5656,9 +5637,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-20T08:57:31.582969+00:00",
+    "at": "2026-10-20T08:58:09.822374+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -5669,16 +5650,16 @@
     "video_url": "https://www.youtube.com/watch?v=gOWjsFWXWmg"
   },
   "last_workflow_result": {
-    "at": "2026-10-20T08:57:31.582850+00:00",
-    "preflight_due": "true",
+    "at": "2026-10-20T08:58:09.822256+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": ""
+    "outcome": "published",
+    "reason": "min_interval"
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-20T08:57:31.582919+00:00",
+    "at": "2026-10-20T08:58:09.822300+00:00",
     "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
