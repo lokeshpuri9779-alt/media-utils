@@ -173,6 +173,24 @@ def shortlist(ledger_path, review_path, output_path, limit=25):
                 "ending_excerpt": ending[:240],
                 "review_note": "Check whether the ending resolves the opening problem; related objects may be legitimate.",
             })
+    # Detect a missing primary-problem anchor in the closing narration.
+    # This is evidence for human review, not an automated rejection.
+    anchor_terms = {"signal", "waterwheel", "bridge", "snow", "telescope", "clock", "bell", "lighthouse", "ferry"}
+    for entry in selected:
+        title_tokens = set(str(entry.get("title") or "").casefold().replace(":", " ").split())
+        anchors = sorted(title_tokens & anchor_terms)
+        ending = str(entry["story_beats"][-1].get("speech") or "").casefold() if entry["story_beats"] else ""
+        ending_tokens = set(ending.replace(",", " ").replace(".", " ").split())
+        entry["primary_problem_resolution_flags"] = (
+            ["title_problem_not_addressed_in_final_scene"]
+            if anchors and not (set(anchors) & ending_tokens) else []
+        )
+        entry["primary_problem_resolution_evidence"] = {
+            "title_problem_terms": anchors,
+            "final_scene": len(entry["story_beats"]),
+            "final_excerpt": ending[:240],
+            "note": "Lexical warning only: a valid resolution may use synonyms or indirect references.",
+        } if entry["primary_problem_resolution_flags"] else None
     result = {
         "candidates_with_resolution_continuity_flags": sum(
             bool(entry["resolution_continuity_flags"]) for entry in selected
@@ -191,6 +209,7 @@ def shortlist(ledger_path, review_path, output_path, limit=25):
         ),
         "candidates_with_title_story_flags": sum(bool(e["title_story_flags"]) for e in selected),
         "candidates_with_causal_continuity_flags": sum(bool(e["causal_continuity_flags"]) for e in selected),
+        "candidates_with_primary_problem_resolution_flags": sum(bool(e["primary_problem_resolution_flags"]) for e in selected),
         "schema_version": 1,
         "source_proposal_count": len(proposals),
         "review_candidates": selected,
