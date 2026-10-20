@@ -11,6 +11,7 @@ on:
       - 'astra_v2/semantic_candidate_index.py'
       - 'astra_v2/semantic_index_benchmark.py'
       - 'astra_v2/triage_index_benchmark.py'
+      - 'astra_v2/triage_audit_benchmark.py'
       - '.github/workflows/astra-proposal-benchmark.yml'
 
 permissions:
@@ -72,6 +73,18 @@ jobs:
         run: |
           python -m astra_v2.triage_index_benchmark --count 100 --history-count 100 | tee triage-index-benchmark-100.json
           python -m astra_v2.triage_index_benchmark --count 500 --history-count 100 | tee triage-index-benchmark-500.json
+      - name: Benchmark production triage and audit on bounded real inventory
+        run: |
+          git fetch --depth=1 origin astra-state
+          mkdir -p runtime-health
+          if git cat-file -e origin/astra-state:runtime-health/story_proposals.json 2>/dev/null; then
+            git show origin/astra-state:runtime-health/story_proposals.json > runtime-health/story_proposals.json
+          fi
+          if [ -f runtime-health/story_proposals.json ]; then
+            python -m astra_v2.triage_audit_benchmark --sample 100 | tee triage-audit-real-100.json
+          else
+            echo 'No durable ledger restored in benchmark workflow; skip real-inventory benchmark.'
+          fi
       - name: Upload benchmark measurements
         uses: actions/upload-artifact@v4
         with:
@@ -83,5 +96,6 @@ jobs:
             semantic-index-benchmark-1500.json
             triage-index-benchmark-100.json
             triage-index-benchmark-500.json
+            triage-audit-real-100.json
           if-no-files-found: error
           retention-days: 30
