@@ -10,7 +10,7 @@ def report(ledger_path, output_path, history=()):
     proposals = ledger.get("proposals")
     if not isinstance(proposals, list):
         raise ValueError("Invalid proposal ledger")
-    result = triage(proposals, history=history)
+    result = triage(proposals, history=history, use_semantic_index=True)
     result["total_proposals"] = len(proposals)
     result["requires_editorial_review"] = sum(
         bool(item.get("awaiting_editorial_decision"))
