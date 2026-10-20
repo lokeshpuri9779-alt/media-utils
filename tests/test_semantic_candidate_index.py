@@ -3,7 +3,7 @@ import unittest
 
 from astra_v2.autonomous_story_proposals import proposal
 from astra_v2.semantic_candidate_index import SemanticCandidateIndex
-from astra_v2.story_editorial import semantic_duplicate_match
+from astra_v2.story_editorial import semantic_duplicate_match, triage
 
 
 class SemanticCandidateIndexTests(unittest.TestCase):
@@ -33,6 +33,16 @@ class SemanticCandidateIndexTests(unittest.TestCase):
         unrelated = {"content_id": "third",
                      "story_beats": [{"speech": "silver meadow"}]}
         self.assertIsNone(index.match(unrelated))
+
+    def test_indexed_triage_matches_reference_and_never_approves(self):
+        stories = [proposal(i) for i in range(125)]
+        stories += [dict(stories[7], content_id="repeat-seven")]
+        reference = triage(stories)
+        indexed = triage(stories, use_semantic_index=True)
+        self.assertEqual(indexed, reference)
+        self.assertTrue(all(item["publication_blocked"] for item in
+                            indexed["ready_for_review"] + indexed["needs_work"]))
+        self.assertTrue(all(not story["production_ready"] for story in stories))
 
     def test_invalid_threshold(self):
         with self.assertRaises(ValueError):
