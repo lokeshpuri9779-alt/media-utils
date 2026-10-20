@@ -208,7 +208,7 @@ jobs:
               "approved_for_production": 0,
           }
           Path("runtime-health/story_supply_status.json").write_text(
-              json.dumps(summary, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
+              json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
           print("ASTRA_SUPPLY_STATUS=" + json.dumps(summary, sort_keys=True))
           PY
           git add runtime-health/story_proposals.json runtime-health/story_editorial_report.json runtime-health/story_supply_review.json runtime-health/story_supply_status.json
