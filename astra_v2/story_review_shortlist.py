@@ -50,7 +50,27 @@ def shortlist(ledger_path, review_path, output_path, limit=25):
         })
         if len(selected) >= limit:
             break
+    # Expose reused narration across otherwise distinct story titles for editorial review.
+    # Diagnostic only: this does not approve, reject, or publish candidates.
+    speech_owners = {}
+    for entry in selected:
+        for beat in entry["story_beats"]:
+            speech = beat.get("speech")
+            if isinstance(speech, str) and speech.strip():
+                key = " ".join(speech.casefold().split())
+                speech_owners.setdefault(key, set()).add(entry["content_id"])
+    reused = {speech: owners for speech, owners in speech_owners.items()
+              if len(owners) > 1}
+    for entry in selected:
+        entry["reused_narration_beats"] = sum(
+            isinstance(beat.get("speech"), str)
+            and " ".join(beat["speech"].casefold().split()) in reused
+            for beat in entry["story_beats"]
+        )
     result = {
+        "candidates_with_reused_narration": sum(
+            bool(entry["reused_narration_beats"]) for entry in selected
+        ),
         "schema_version": 1,
         "source_proposal_count": len(proposals),
         "review_candidates": selected,
