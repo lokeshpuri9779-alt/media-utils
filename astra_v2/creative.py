@@ -323,6 +323,11 @@ def make_candidate(path, excluded_ids, excluded_titles):
                   type(exc).__name__, str(exc)[:250])
     else:
         print("ASTRA_STORY_SELECTION=" + json.dumps(selection, sort_keys=True))
+        # Expose bounded aggregate rejection counts to the publisher journal.
+        # No candidate text, secrets, or approval decisions are persisted here.
+        from pathlib import Path as _SelectionPath
+        from astra_v2.control import write_json as _selection_write_json
+        _selection_write_json(_SelectionPath("runtime-health/story-selection-diagnostic.json"), selection)
         if lane_count > 1:
             raise CreativeSkip('no_approved_candidate_in_preload_lane')
         # Do not waste a full render on the unreviewed legacy template pool.
