@@ -200,7 +200,6 @@ jobs:
             --output runtime-health/story_review_packet.json \
             --stories-output runtime-health/story_review_stories.json \
             --reviews-output runtime-health/story_review_decisions.json
-runtime-health/story_review_preparation.json
       - name: Prepare exported editorial candidates without approval
         run: |
           python -m astra_v2.editorial_batch_preparation \
@@ -392,5 +391,6 @@ runtime-health/story_review_preparation.json
             runtime-health/story_review_packet.json
             runtime-health/story_review_stories.json
             runtime-health/story_review_decisions.json
+            runtime-health/story_review_preparation.json
           if-no-files-found: error
           retention-days: 90
