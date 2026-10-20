@@ -9,7 +9,7 @@ from astra_v2.proposal_history import load_history
 from astra_v2.story_editorial import editorial_issues
 from astra_v2.publication_quality import publication_rejection
 from astra_v2.proposal_novelty_index import NoveltyIndex
-from astra_v2.story_editorial import _semantic_features
+from astra_v2.semantic_candidate_index import SemanticCandidateIndex
 
 
 def assess(ledger_path, publisher_path="astra_v2_state.json",
@@ -26,13 +26,12 @@ def assess(ledger_path, publisher_path="astra_v2_state.json",
     duplicate_by_family = Counter()
     visual_issues_by_family = Counter()
     novelty_index = NoveltyIndex(history)
-    semantic_previous = [(prior, _semantic_features(prior)) for prior in history
-                         if isinstance(prior, dict)]
+    semantic_index = SemanticCandidateIndex(history)
     for story in ledger["proposals"]:
         if not isinstance(story, dict):
             raise ValueError("Invalid proposal")
         issues = editorial_issues(story, history, novelty_index=novelty_index,
-                                  semantic_previous=semantic_previous)
+                                  semantic_index=semantic_index)
         rejection = publication_rejection(story)
         editorial_reason_counts.update(issues)
         family = str(story.get('genre') or 'mystery')
@@ -54,7 +53,7 @@ def assess(ledger_path, publisher_path="astra_v2_state.json",
         })
         history.append(story)
         novelty_index.add(story)
-        semantic_previous.append((story, _semantic_features(story)))
+        semantic_index.add(story)
     return {
         "proposal_count": len(reviewed),
         "editorial_issue_count": sum(bool(x["editorial_issues"]) for x in reviewed),
