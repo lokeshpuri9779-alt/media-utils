@@ -34,6 +34,30 @@ class SupplyReviewTests(unittest.TestCase):
                                 for entry in result["review_queue"]))
             self.assertEqual(result["approved_for_production"], 0)
 
+    def test_indexed_audit_matches_reference_editorial_issues(self):
+        from astra_v2.story_editorial import editorial_issues, _semantic_features
+        from astra_v2.proposal_novelty_index import NoveltyIndex
+        with tempfile.TemporaryDirectory() as root:
+            candidates = [proposal(i) for i in range(18)]
+            candidates.append(dict(candidates[0], content_id="repeat-story"))
+            ledger = Path(root) / "ledger.json"
+            ledger.write_text(json.dumps({"proposals": candidates}))
+            result = assess(ledger, Path(root) / "missing-publisher.json",
+                            Path(root) / "missing-stories.json")
+            history = []
+            novelty = NoveltyIndex()
+            semantic = []
+            expected = []
+            for story in candidates:
+                expected.append(editorial_issues(
+                    story, history, novelty_index=novelty, semantic_previous=semantic))
+                history.append(story)
+                novelty.add(story)
+                semantic.append((story, _semantic_features(story)))
+            self.assertEqual(
+                [entry["editorial_issues"] for entry in result["proposals"]], expected)
+            self.assertEqual(result["approved_for_production"], 0)
+
     def test_published_fingerprint_is_flagged(self):
         with tempfile.TemporaryDirectory() as root:
             candidate = proposal(0)
