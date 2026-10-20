@@ -90,6 +90,16 @@ jobs:
               "publication_enabled": False
           }, sort_keys=True))
           PY
+      - name: Snapshot existing proposal identities for cohort comparison
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          ledger_path = Path("runtime-health/story_proposals.json")
+          ledger = json.loads(ledger_path.read_text()) if ledger_path.exists() else {"proposals": []}
+          Path("/tmp/astra-existing-proposal-ids.json").write_text(
+              json.dumps([x["content_id"] for x in ledger["proposals"]]), encoding="utf-8")
+          PY
       - name: Generate novel unreviewed proposals
         env:
           ASTRA_PROPOSAL_BATCH: "100"
@@ -133,6 +143,8 @@ jobs:
         run: /usr/bin/time -f "ASTRA_STAGE_TRIAGE_SECONDS=%e ASTRA_STAGE_TRIAGE_PEAK_KB=%M" python -m astra_v2.story_editorial_report
       - name: Audit production eligibility without promotion
         run: /usr/bin/time -f "ASTRA_STAGE_AUDIT_SECONDS=%e ASTRA_STAGE_AUDIT_PEAK_KB=%M" python -m astra_v2.story_supply_review
+      - name: Compare newly generated proposals with historical inventory
+        run: python -m astra_v2.story_cohort_quality
       - name: Generate read-only editorial shortlist
         run: python -m astra_v2.story_review_shortlist
       - name: Summarize reviewable story supply without approval
@@ -180,6 +192,7 @@ jobs:
           if [ -f runtime-health/story_mechanisms.json ]; then cp runtime-health/story_mechanisms.json /tmp/astra-proposal-persist/story_mechanisms.json; fi
           cp runtime-health/story_editorial_report.json /tmp/astra-proposal-persist/story_editorial_report.json
           cp runtime-health/story_supply_review.json /tmp/astra-proposal-persist/story_supply_review.json
+          cp runtime-health/story_cohort_quality.json /tmp/astra-proposal-persist/story_cohort_quality.json
           cp runtime-health/story_review_shortlist.json /tmp/astra-proposal-persist/story_review_shortlist.json
           git fetch --depth=1 origin astra-state
           # The run restored these state files into the main-branch worktree.
@@ -219,7 +232,7 @@ jobs:
               json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
           print("ASTRA_SUPPLY_STATUS=" + json.dumps(summary, sort_keys=True))
           PY
-          git add runtime-health/story_proposals.json runtime-health/story_editorial_report.json runtime-health/story_supply_review.json runtime-health/story_review_shortlist.json runtime-health/story_supply_status.json
+          git add runtime-health/story_proposals.json runtime-health/story_editorial_report.json runtime-health/story_supply_review.json runtime-health/story_review_shortlist.json runtime-health/story_cohort_quality.json runtime-health/story_supply_status.json
           if [ -f runtime-health/story_mechanisms.json ]; then git add runtime-health/story_mechanisms.json; fi
           if git diff --cached --quiet; then
             echo "ASTRA_DURABLE_LEDGER_CHANGED=false"
@@ -263,6 +276,7 @@ jobs:
             runtime-health/story_proposals.json
             runtime-health/story_editorial_report.json
             runtime-health/story_supply_review.json
+            runtime-health/story_cohort_quality.json
             runtime-health/story_review_shortlist.json
           if-no-files-found: error
           retention-days: 90
