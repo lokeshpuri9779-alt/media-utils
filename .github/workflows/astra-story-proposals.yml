@@ -22,6 +22,8 @@ on:
       - 'tests/test_astra_story_editorial.py'
       - 'astra_v2/story_supply_review.py'
       - 'astra_v2/story_review_shortlist.py'
+      - 'astra_v2/story_cohort_quality.py'
+      - 'tests/test_story_cohort_quality.py'
       - 'astra_v2/story_mechanism_ledger.py'
 
 permissions:
@@ -263,6 +265,19 @@ jobs:
           if status["total_unreviewed_inventory"] != len(actual["proposals"]) or (
                   status["new_plot_first_candidates"] != len(expected_ids)):
               raise SystemExit("Durable supply status does not match persisted ledger")
+          cohort_path = Path("runtime-health/story_cohort_quality.json")
+          if not cohort_path.exists():
+              raise SystemExit("Durable cohort-quality report missing")
+          cohort = json.loads(cohort_path.read_text(encoding="utf-8"))
+          expected_cohort = json.loads(Path("/tmp/astra-proposal-persist/story_cohort_quality.json").read_text(encoding="utf-8"))
+          if cohort != expected_cohort:
+              raise SystemExit("Durable cohort-quality report differs from generated report")
+          if (cohort.get("approved_for_production") != 0 or
+                  cohort.get("publication_enabled") is not False):
+              raise SystemExit("Cohort report must not enable publishing")
+          if sum(cohort.get(group, {}).get("total", 0) for group in ("new", "historical")) != len(actual["proposals"]):
+              raise SystemExit("Cohort totals do not match persisted inventory")
+          print("ASTRA_DURABLE_COHORT_QUALITY=verified")
           print("ASTRA_DURABLE_SUPPLY_STATUS=verified")
           print("ASTRA_DURABLE_LEDGER_READBACK=verified")
           print(f"ASTRA_DURABLE_PROPOSAL_COUNT={len(actual.get('proposals', []))}")
