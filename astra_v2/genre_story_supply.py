@@ -205,9 +205,9 @@ def genre_proposal(index, scenario_index=None, structure_index=None):
     structure_id, opening, middle, ending = NARRATIVE_STRUCTURES[((index // 13) if structure_index is None else structure_index) % len(NARRATIVE_STRUCTURES)]
     beats = [
         ("reveal", f"At {setting}, {hero} encountered {problem}. Everyone stopped what they were doing. The hero {motivation} and teamed up with {partner}. {opening} The hero {arc_problem}.", visual),
-        ("build", f"The hero tried a simple solution, but it did not work. {complication}. {strategy}. {blocked_plot} The hero {arc_choice}. {unlocked_plot} {middle}", "book"),
+        ("build", f"To solve {problem}, the hero tried a simple solution, but it did not work. {complication}. {strategy}. {blocked_plot} The hero {arc_choice}. {unlocked_plot} {middle}", "book"),
         ("twist", f"The overlooked detail explained everything: {reveal}. The group realized that the original problem had a different cause than they first assumed. They tested the explanation before acting. {lasting_effect}", visual),
-        ("payoff", f"With the mystery understood, the hero {solution}. {ending} {acknowledged_effect} The hero {arc_growth}. {payoff_style}.", visual),
+        ("payoff", f"Because {reveal}, the hero {solution}, addressing {problem}. {acknowledged_effect} The hero {arc_growth}. {payoff_style}.", visual),
     ]
     # Scene identifiers should track distinct story events rather than
     # repeating the opening prop for the reveal and resolution.
