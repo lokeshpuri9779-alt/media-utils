@@ -184,7 +184,7 @@ def run():
                 except CreativeSkip as exc:
                     from astra_v2.stage_feedback import record
                     record("quality", "candidate_selection", "fail", evidence={"reason": str(exc)[:200]}, action="Diagnose story supply and creative gate failures")
-                    report.update(outcome="quality_skip", reason=str(exc)[:250])
+                    report.update(outcome="quality_skip", reason=str(exc)[:250], story_selection=getattr(exc, "selection", None) or {})
                     return report
                 if candidate.get("format") == "long" and not historical_long_upload_due(
                     state, utcnow(), spacing_hours=12, performance=read_json("performance.json")):
@@ -202,7 +202,7 @@ def run():
                     try:
                         candidate = make_candidate(video, previous_ids | live_ids, live_titles)
                     except CreativeSkip as exc:
-                        report.update(outcome="quality_skip", reason=str(exc)[:250])
+                        report.update(outcome="quality_skip", reason=str(exc)[:250], story_selection=getattr(exc, "selection", None) or {})
                         return report
                     rejection = publication_rejection(candidate)
                 if rejection:
@@ -337,6 +337,7 @@ def run():
             "reason": str(report.get("reason") or "")[:250],
             "content_id": str(report.get("content_id") or "")[:160],
             "video_url": str(report.get("video_url") or "")[:250],
+            "story_selection": report.get("story_selection") or {},
         }
         write_json(STATE_FILE, state)
         report.update(

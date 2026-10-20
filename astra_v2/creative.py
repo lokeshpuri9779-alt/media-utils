@@ -8,6 +8,10 @@ import subprocess
 class CreativeSkip(Exception):
     """No sufficiently good original candidate is available in this slot."""
 
+    def __init__(self, reason, *, selection=None):
+        super().__init__(reason)
+        self.selection = selection
+
 
 def inspect_video(path, fmt="short"):
     if not path.is_file() or path.stat().st_size < 30_000:
@@ -324,11 +328,11 @@ def make_candidate(path, excluded_ids, excluded_titles):
     else:
         print("ASTRA_STORY_SELECTION=" + json.dumps(selection, sort_keys=True))
         if lane_count > 1:
-            raise CreativeSkip('no_approved_candidate_in_preload_lane')
+            raise CreativeSkip('no_approved_candidate_in_preload_lane', selection=selection)
         # Do not waste a full render on the unreviewed legacy template pool.
         # The existing final publication gate remains mandatory if opted in.
         if os.getenv("ASTRA_ALLOW_LEGACY_FALLBACK", "0") != "1":
-            raise CreativeSkip("no_approved_original_story_available")
+            raise CreativeSkip("no_approved_original_story_available", selection=selection)
         try:
             title, description = legacy.make_short(
                 path, excluded_ids=excluded_ids, excluded_titles=excluded_titles)
