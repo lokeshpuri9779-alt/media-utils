@@ -183,7 +183,11 @@ jobs:
               "| Candidate ID | Editorial flags | Publication block |",
               "|---|---|---|",
           ]
-          for item in proposals[:30]:
+          shortlist_path = Path("runtime-health/story_review_shortlist.json")
+          shortlist = json.loads(shortlist_path.read_text()) if shortlist_path.exists() else {}
+          candidates = shortlist.get("review_candidates", [])
+          lines.insert(5, f"- Recent editorial shortlist: **{len(candidates)}** (human review required)")
+          for item in candidates:
               cid = item.get("content_id", "missing-id")
               assess = assessments.get(cid, {})
               issues = ", ".join(assess.get("editorial_issues", [])) or "none reported"
