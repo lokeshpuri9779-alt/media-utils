@@ -81,7 +81,17 @@ jobs:
             git show origin/astra-state:runtime-health/story_proposals.json > runtime-health/story_proposals.json
           fi
           if [ -f runtime-health/story_proposals.json ]; then
-            python -m astra_v2.triage_audit_benchmark --sample 100 | tee triage-audit-real-100.json
+            for sample in 100 500 1000; do
+              python -m astra_v2.triage_audit_benchmark --sample "$sample" | tee "triage-audit-real-${sample}.json"
+            done
+            python - <<'PY'
+          import json
+          from pathlib import Path
+          rows = [json.loads(Path(f'triage-audit-real-{n}.json').read_text()) for n in (100, 500, 1000)]
+          assert [r['sample_count'] for r in rows] == [100, 500, 1000], 'Insufficient persisted inventory for requested samples'
+          assert all(r['approved_for_production'] == 0 for r in rows)
+          print('ASTRA_REAL_LEDGER_SCALING=' + json.dumps(rows))
+          PY
           else
             echo 'No durable ledger restored in benchmark workflow; skip real-inventory benchmark.'
           fi
@@ -97,5 +107,7 @@ jobs:
             triage-index-benchmark-100.json
             triage-index-benchmark-500.json
             triage-audit-real-100.json
+            triage-audit-real-500.json
+            triage-audit-real-1000.json
           if-no-files-found: error
           retention-days: 30
