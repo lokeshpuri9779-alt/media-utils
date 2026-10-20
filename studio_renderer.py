@@ -460,6 +460,8 @@ def make_plan(ch):
                 shot['experimental_ensemble'] = True
             elif named_cast and shot['story_subject'] in (None, *named_cast):
                 shot['story_cast'] = named_cast
+        from astra_v2.prop_state_continuity import assign_prop_states
+        formatted = assign_prop_states(formatted)
     return formatted
 
 
