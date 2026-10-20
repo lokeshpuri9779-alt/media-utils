@@ -12,6 +12,8 @@ on:
       - 'astra_v2/autonomous_story_proposals.py'
       - 'astra_v2/genre_story_supply.py'
       - 'astra_v2/proposal_history.py'
+      - 'astra_v2/persisted_plot_proposals.py'
+      - 'astra_v2/plot_first_proposals.py'
       - 'astra_v2/shorts_novelty.py'
       - 'astra_v2/publication_quality.py'
       - 'astra_v2/story_editorial_report.py'
@@ -71,6 +73,21 @@ jobs:
           if git cat-file -e origin/astra-state:astra_story_history.json 2>/dev/null; then
             git show origin/astra-state:astra_story_history.json > astra_story_history.json
           fi
+      - name: Audit history-aware plot-first supply (diagnostic only)
+        run: |
+          python - <<'PY'
+          import json
+          from astra_v2.persisted_plot_proposals import proposals_with_history
+          from astra_v2.plot_first_proposals import structural_key
+          candidates = proposals_with_history(limit=100)
+          assert all(not item["production_ready"] for item in candidates)
+          assert len({structural_key(item) for item in candidates}) == len(candidates)
+          print("ASTRA_HISTORY_AWARE_PLOT_SUPPLY=" + json.dumps({
+              "unreviewed_candidates": len(candidates),
+              "approved_for_production": 0,
+              "publication_enabled": False
+          }, sort_keys=True))
+          PY
       - name: Generate novel unreviewed proposals
         env:
           ASTRA_PROPOSAL_BATCH: "100"
