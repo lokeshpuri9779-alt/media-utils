@@ -89,7 +89,29 @@ def shortlist(ledger_path, review_path, output_path, limit=25):
             for beat in beats[1:]
         )
         entry["reused_plot_arc"] = len(beats) >= 3 and key in reused_plots
+    # Surface concrete scene integrity issues without claiming semantic understanding.
+    # A scene with missing speech/visual or a repeated/out-of-order beat label
+    # requires editorial attention; this is never an automatic approval signal.
+    beat_order = {"reveal": 0, "build": 1, "twist": 2, "payoff": 3}
+    for entry in selected:
+        flags = []
+        previous = -1
+        for index, beat in enumerate(entry["story_beats"], start=1):
+            if not isinstance(beat.get("speech"), str) or not beat["speech"].strip():
+                flags.append(f"scene_{index}_missing_narration")
+            if not isinstance(beat.get("visual"), str) or not beat["visual"].strip():
+                flags.append(f"scene_{index}_missing_visual")
+            label = beat.get("story_beat")
+            if label in beat_order:
+                position = beat_order[label]
+                if position <= previous:
+                    flags.append(f"scene_{index}_beat_order")
+                previous = position
+        entry["scene_integrity_flags"] = flags
     result = {
+        "candidates_with_scene_integrity_flags": sum(
+            bool(entry["scene_integrity_flags"]) for entry in selected
+        ),
         "candidates_with_reused_plot_arc": sum(
             entry["reused_plot_arc"] for entry in selected
         ),
