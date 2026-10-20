@@ -11,7 +11,9 @@ def prepare_batch(document):
         raise ValueError("stories_document_invalid")
     stories = document["stories"]
     ids = [s.get("content_id") for s in stories if isinstance(s, dict)]
-    if len(ids) != len(stories) or len(set(ids)) != len(ids):
+    if (len(ids) != len(stories)
+            or any(not isinstance(cid, str) or not cid.strip() for cid in ids)
+            or len(set(ids)) != len(ids)):
         raise ValueError("duplicate_or_invalid_story_ids")
     prepared = [prepare_for_editorial_review(story) for story in stories]
     return {
