@@ -184,7 +184,7 @@ def run():
                 except CreativeSkip as exc:
                     from astra_v2.stage_feedback import record
                     record("quality", "candidate_selection", "fail", evidence={"reason": str(exc)[:200]}, action="Diagnose story supply and creative gate failures")
-                    report.update(outcome="quality_skip", reason=str(exc)[:250])
+                    report.update(outcome="quality_skip", reason=str(exc)[:250], story_selection=getattr(exc, "selection", None) or {})
                     return report
                 if candidate.get("format") == "long" and not historical_long_upload_due(
                     state, utcnow(), spacing_hours=12, performance=read_json("performance.json")):
@@ -202,7 +202,7 @@ def run():
                     try:
                         candidate = make_candidate(video, previous_ids | live_ids, live_titles)
                     except CreativeSkip as exc:
-                        report.update(outcome="quality_skip", reason=str(exc)[:250])
+                        report.update(outcome="quality_skip", reason=str(exc)[:250], story_selection=getattr(exc, "selection", None) or {})
                         return report
                     rejection = publication_rejection(candidate)
                 if rejection:
@@ -331,16 +331,6 @@ def run():
         state["last_outcome"] = report["outcome"]
         # Persist a bounded, non-sensitive production outcome so scheduled-run
         # failures remain diagnosable even when Actions logs are unavailable.
-        # Preserve aggregate story-selection failure counts alongside the outcome.
-        # The creative stage writes this only after exhausting approved candidates.
-        diagnostic_path = Path("runtime-health/story-selection-diagnostic.json")
-        if report["outcome"] == "quality_skip" and diagnostic_path.is_file():
-            try:
-                diagnostic = read_json(diagnostic_path)
-                if isinstance(diagnostic, dict):
-                    report["story_selection"] = diagnostic
-            except (OSError, ValueError, TypeError):
-                pass
         state["last_production_result"] = {
             "at": report["at"],
             "outcome": str(report["outcome"])[:80],
