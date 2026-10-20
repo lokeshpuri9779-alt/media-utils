@@ -338,6 +338,14 @@ jobs:
           if status["total_unreviewed_inventory"] != len(actual["proposals"]) or (
                   status["new_plot_first_candidates"] != len(expected_ids)):
               raise SystemExit("Durable supply status does not match persisted ledger")
+          batch = actual.get("parallel_batch_last")
+          if not isinstance(batch, dict):
+              raise SystemExit("Parallel batch checkpoint missing from durable ledger")
+          if batch.get("proposed") != 256 or batch.get("accepted", -1) < 0 or batch.get("rejected", -1) < 0:
+              raise SystemExit("Parallel batch counts invalid")
+          if batch["accepted"] + batch["rejected"] != batch["proposed"]:
+              raise SystemExit("Parallel batch totals inconsistent")
+          print("ASTRA_DURABLE_PARALLEL_BATCH=verified")
           cohort_path = Path("runtime-health/story_cohort_quality.json")
           if not cohort_path.exists():
               raise SystemExit("Durable cohort-quality report missing")
