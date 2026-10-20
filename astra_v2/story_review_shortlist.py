@@ -2,6 +2,7 @@
 import json
 import os
 from pathlib import Path
+from astra_v2.editorial_approval_manifest import story_digest
 
 
 def shortlist(ledger_path, review_path, output_path, limit=25):
@@ -36,6 +37,7 @@ def shortlist(ledger_path, review_path, output_path, limit=25):
         seen_titles.add(title_key)
         selected.append({
             "content_id": story.get("content_id"),
+            "story_sha256": story_digest(story),
             "title": story.get("title"),
             "genre": story.get("genre"),
             "story_beats": [

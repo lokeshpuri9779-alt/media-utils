@@ -202,6 +202,11 @@ jobs:
           retention-days: 7
       - name: Render and approve next original video
         id: render
+        env:
+          ASTRA_EDITORIAL_STORIES_FILE: editorial/reviewed_stories.json
+          ASTRA_EDITORIAL_REVIEWS_FILE: editorial/reviewed_decisions.json
+          ASTRA_PUBLISHER_STATE_PATH: astra_v2_state.json
+          ASTRA_STORY_HISTORY_PATH: astra_story_history.json
         run: |
           /usr/bin/time -v -o /tmp/astra-render-memory.txt python -m astra_v2.preload_worker
       - name: Report render peak RAM

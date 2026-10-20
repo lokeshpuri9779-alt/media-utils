@@ -125,3 +125,11 @@ Explicit user approval is required before:
 - [x] Identify zero remaining production-ready authored stories after history exclusions.
 - [x] Add 12 fresh authored causal plots to the existing Story Forge catalog without promoting the old 996 drafts.
 - [ ] Verify CI and next publisher result; resolve only after a public YouTube URL is confirmed.
+
+## Editorial shortlist intake — Batch 813 (2026-10-20)
+- [x] Export full shortlist payloads and pending, content-bound decisions through the existing review-packet module.
+- [x] Connect the checked-in reviewed pair to the existing Shorts publisher and preload intake.
+- [x] Add GitHub Actions coverage for actual configured paths and complete current history.
+- [ ] Confirm this PR's Actions checks and the persisted review bundle after merge.
+- [ ] Review and, where needed, rewrite shortlisted stories; record explicit decisions against final payload hashes.
+- [ ] Confirm a new verified YouTube upload separately from intake/CI success.

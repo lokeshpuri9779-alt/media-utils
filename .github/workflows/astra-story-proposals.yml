@@ -22,6 +22,7 @@ on:
       - 'tests/test_astra_story_editorial.py'
       - 'astra_v2/story_supply_review.py'
       - 'astra_v2/story_review_shortlist.py'
+      - 'astra_v2/editorial_review_packet.py'
       - 'astra_v2/story_cohort_quality.py'
       - 'astra_v2/story_cohort_history.py'
       - 'tests/test_story_cohort_history.py'
@@ -190,6 +191,14 @@ jobs:
                   raise SystemExit("Primary problem evidence mismatch")
           print(f"Validated diagnostic fields for {len(candidates)} editorial candidates")
           PY
+      - name: Export full shortlist stories and pending review decisions
+        run: |
+          python -m astra_v2.editorial_review_packet \
+            --stories runtime-health/story_proposals.json \
+            --shortlist runtime-health/story_review_shortlist.json \
+            --output runtime-health/story_review_packet.json \
+            --stories-output runtime-health/story_review_stories.json \
+            --reviews-output runtime-health/story_review_decisions.json
       - name: Summarize reviewable story supply without approval
         if: always()
         run: |
@@ -209,6 +218,7 @@ jobs:
               f"- Editorial issues flagged: **{review.get('editorial_issue_count', 'not assessed')}**",
               f"- Publication quality blocks: **{review.get('publication_blocked_count', 'not assessed')}**",
               "- Automatically approved: **0** (approval remains a separate human decision)",
+              "- Review bundle: full stories, content hashes and pending decisions in the story-ledger artifact.",
               "",
               "| Candidate ID | Editorial flags | Publication block |",
               "|---|---|---|",
@@ -242,6 +252,7 @@ jobs:
           cp runtime-health/story_cohort_quality.json /tmp/astra-proposal-persist/story_cohort_quality.json
           cp runtime-health/story_cohort_history.json /tmp/astra-proposal-persist/story_cohort_history.json
           cp runtime-health/story_review_shortlist.json /tmp/astra-proposal-persist/story_review_shortlist.json
+          cp runtime-health/story_review_{packet,stories,decisions}.json /tmp/astra-proposal-persist/
           git fetch --depth=1 origin astra-state
           # The run restored these state files into the main-branch worktree.
           # Move them out before switching to astra-state, which owns their paths.
@@ -281,6 +292,7 @@ jobs:
           print("ASTRA_SUPPLY_STATUS=" + json.dumps(summary, sort_keys=True))
           PY
           git add runtime-health/story_proposals.json runtime-health/story_editorial_report.json runtime-health/story_supply_review.json runtime-health/story_review_shortlist.json runtime-health/story_cohort_quality.json runtime-health/story_cohort_history.json runtime-health/story_supply_status.json
+          git add runtime-health/story_review_packet.json runtime-health/story_review_stories.json runtime-health/story_review_decisions.json
           if [ -f runtime-health/story_mechanisms.json ]; then git add runtime-health/story_mechanisms.json; fi
           if git diff --cached --quiet; then
             echo "ASTRA_DURABLE_LEDGER_CHANGED=false"
@@ -334,6 +346,13 @@ jobs:
                   latest["narrative_duplicates"] != cohort["new"].get("issue:narrative_duplicate", 0) or
                   latest["publication_enabled"] is not False):
               raise SystemExit("Durable cohort trend does not match current run")
+          for name in ("story_review_packet.json", "story_review_stories.json", "story_review_decisions.json"):
+              expected_bundle = json.loads(Path("/tmp/astra-proposal-persist", name).read_text(encoding="utf-8"))
+              durable_bundle = json.loads(__import__("subprocess").check_output(
+                  ["git", "show", "origin/astra-state:runtime-health/" + name], text=True))
+              if durable_bundle != expected_bundle:
+                  raise SystemExit("Durable review bundle differs: " + name)
+          print("ASTRA_DURABLE_REVIEW_BUNDLE=verified")
           print("ASTRA_DURABLE_COHORT_TREND=verified")
           print("ASTRA_DURABLE_COHORT_QUALITY=verified")
           print("ASTRA_DURABLE_SUPPLY_STATUS=verified")
@@ -352,5 +371,8 @@ jobs:
             runtime-health/story_cohort_quality.json
             runtime-health/story_cohort_history.json
             runtime-health/story_review_shortlist.json
+            runtime-health/story_review_packet.json
+            runtime-health/story_review_stories.json
+            runtime-health/story_review_decisions.json
           if-no-files-found: error
           retention-days: 90

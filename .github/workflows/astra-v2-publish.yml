@@ -199,6 +199,10 @@ jobs:
         id: publish_video
         if: steps.preflight.outputs.render_due == 'true'
         env:
+          ASTRA_EDITORIAL_STORIES_FILE: editorial/reviewed_stories.json
+          ASTRA_EDITORIAL_REVIEWS_FILE: editorial/reviewed_decisions.json
+          ASTRA_PUBLISHER_STATE_PATH: astra_v2_state.json
+          ASTRA_STORY_HISTORY_PATH: astra_story_history.json
           ASTRA_PRELOAD_ONLY: '0' # Scan only policy-approved queued media, then allow a fresh QA-gated render
         shell: bash
         run: |
