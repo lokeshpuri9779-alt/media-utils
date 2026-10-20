@@ -39,14 +39,14 @@ def _semantic_match_features(story, current, previous_items, threshold):
         dice = (2 * shared_words / (words_size + len(other_words))
                 if words and other_words else 0.0)
         fingerprint_match = bool(fingerprint and fingerprint == other_fp)
-        score = (fingerprint_match, round(jaccard, 4), round(dice, 4))
+        score = (fingerprint_match, jaccard, dice)
         if best_score is None or score > best_score:
             best_score = score
             best = {
                 "matched_content_id": prior.get("content_id"),
                 "matched_title": prior.get("title"),
-                "jaccard_similarity": score[1],
-                "dice_similarity": score[2],
+                "jaccard_similarity": round(jaccard, 4),
+                "dice_similarity": round(dice, 4),
                 "jaccard_threshold": threshold,
                 "dice_threshold": 0.88,
                 "plot_fingerprint_match": fingerprint_match,
