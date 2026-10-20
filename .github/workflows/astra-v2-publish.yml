@@ -200,7 +200,10 @@ jobs:
         if: steps.preflight.outputs.render_due == 'true'
         env:
           ASTRA_PRELOAD_ONLY: '0' # Scan only policy-approved queued media, then allow a fresh QA-gated render
-        run: python -m astra_v2.run
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m astra_v2.run 2>&1 | tee astra-story-selection.log
 
       - name: Persist verified character episode if approved manifests exist
         if: steps.publish_video.outcome == 'success'
@@ -308,6 +311,26 @@ jobs:
               "job_status_before_persist": os.getenv("JOB_RESULT", "unknown"),
               "outcome": str(report.get("outcome") or "no_report")[:80],
               "reason": str(report.get("reason") or "")[:250],
+          }
+          # Persist bounded candidate counts so supply failures can be diagnosed
+          # from astra-state without access to private Actions logs.
+          diagnostics = {}
+          log_path = Path("astra-story-selection.log")
+          if log_path.is_file():
+              for line in log_path.read_text(encoding="utf-8", errors="replace").splitlines():
+                  for marker in ("ASTRA_STORY_SUPPLY=", "ASTRA_STORY_HISTORY_FILTER=",
+                                 "ASTRA_STORY_SUPPLY_AFTER_HISTORY=", "ASTRA_STORY_SELECTION="):
+                      if marker in line:
+                          try:
+                              value = json.loads(line.split(marker, 1)[1])
+                              if isinstance(value, dict):
+                                  diagnostics[marker[:-1]] = value
+                          except (ValueError, TypeError):
+                              pass
+          state["last_story_selection_diagnostics"] = {
+              "at": datetime.now(timezone.utc).isoformat(),
+              "counters": diagnostics,
+              "note": "Diagnostic counts only; no approval or publishing effect",
           }
           state["last_character_memory_diagnostic"] = {
               "at": datetime.now(timezone.utc).isoformat(),
