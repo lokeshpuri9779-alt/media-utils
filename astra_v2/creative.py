@@ -216,23 +216,33 @@ def make_candidate(path, excluded_ids, excluded_titles):
                                if not story.get("series_id")
                                and int.from_bytes(hashlib.sha256(str(story.get("content_id", "")).encode()).digest()[:8], "big") % lane_count == lane_index]
     from astra_v2.publication_quality import publication_rejection
+    selection = {"considered": 0, "not_ready": 0, "policy_rejected": {},
+                 "already_seen": 0, "duration_rejected": 0,
+                 "render_qa_rejected": 0, "render_exception": {},
+                 "approved": 0}
     for story in premium_stories:
+        selection["considered"] += 1
         if not (story.get("production_ready") or story.get("validation_candidate")):
+            selection["not_ready"] += 1
             continue
         # Do not spend rendering time on stories the publisher will reject.
         rejection = publication_rejection(story)
         if rejection:
+            selection["policy_rejected"][rejection] = selection["policy_rejected"].get(rejection, 0) + 1
             print("Story publication preflight rejected:", story.get("content_id"), rejection)
             continue
         if story["content_id"] in excluded_ids or story["title"].casefold().strip() in excluded_titles:
+            selection["already_seen"] += 1
             continue
         if not script_duration_preflight(story):
+            selection["duration_rejected"] += 1
             print("ASTRA_CANDIDATE_DURATION_REJECTED=" + json.dumps({"content_id": story.get("content_id"), "reason": "script_duration_preflight_failed"}, sort_keys=True))
             continue
         try:
             rendered = render_short(story, path)
             evaluation = evaluate_studio_render(story, rendered, video_path=path)
             if not evaluation.get("pass"):
+                selection["render_qa_rejected"] += 1
                 print("ASTRA_CANDIDATE_RENDER_QA_REJECTED=" + json.dumps({"content_id": story.get("content_id"), "reason": "creative_render_qa_failed"}, sort_keys=True))
                 from astra_v2.stage_feedback import record
                 director = evaluation.get("director") or {}
@@ -259,6 +269,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
                                   "layer_failures": (evaluation.get("layer_qa") or {}).get("failures"),
                                   "duration": rendered.get("duration")}, default=str))
                 continue
+            selection["approved"] += 1
             from astra_v2.stage_feedback import record
             record("quality", "creative_director", "pass", evidence={"scores": (evaluation.get("director") or {}).get("component_scores") or {}}, candidate_id=story.get("content_id"))
             record("render", "studio_render", "pass", evidence={"duration": rendered.get("duration"), "renderer": rendered.get("renderer")}, candidate_id=story.get("content_id"))
@@ -285,12 +296,16 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 + attribution
                 + "\nOriginal visuals; AI-assisted synthetic narration. #Shorts"
                 + "\nSubscribe: https://www.youtube.com/channel/" + legacy.expected_channel_id())
+            print("ASTRA_STORY_SELECTION=" + json.dumps(selection, sort_keys=True))
             break
         except Exception as exc:
+            kind = type(exc).__name__
+            selection["render_exception"][kind] = selection["render_exception"].get(kind, 0) + 1
             print("ASTRA_CANDIDATE_RENDER_EXCEPTION=" + json.dumps({"content_id": story.get("content_id"), "exception_type": type(exc).__name__}, sort_keys=True))
             print("Premium candidate rejected:", story.get("content_id"),
                   type(exc).__name__, str(exc)[:250])
     else:
+        print("ASTRA_STORY_SELECTION=" + json.dumps(selection, sort_keys=True))
         if lane_count > 1:
             raise CreativeSkip('no_approved_candidate_in_preload_lane')
         # Do not waste a full render on the unreviewed legacy template pool.
