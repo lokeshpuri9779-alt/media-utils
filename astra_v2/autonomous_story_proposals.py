@@ -330,7 +330,7 @@ def proposal(index):
     # The dimensions rotate at different strides; this produces a large
     # deterministic combination space without claiming every draft is unique.
     # Use compact, searchable story titles rather than generic inventory labels.
-    title = f"The {visual.capitalize()} Mystery of the {setting.split()[-1].capitalize()}"
+    title = f"The {visual.capitalize()} Mystery of {setting_visual.capitalize()} — {role.title()}'s Case #{index + 1:04d}"
     beats = (
         ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}, {stakes}. {plot_problem}. {arc_setup}. The neighbors needed a trustworthy explanation before taking action.", visual),
         ("build", f"Instead of guessing, {actor} compared {clue} with {discovery}; {emotional}. {causal_opening}. {actor} {causal_test} and {plot_action}. {arc_decision}; {method}, but {obstacle}. The evidence gave the team a testable explanation rather than another suspicion.", "book"),
@@ -365,18 +365,19 @@ def proposal(index):
 
 
 def _backfill_story_title(story):
-    """Replace legacy inventory labels with titles derived from the story content."""
-    title = str(story.get("title") or "").strip()
-    if title and not title.casefold().startswith(("unreviewed story proposal", "story proposal ")):
-        return title
+    """Derive stable descriptive titles from story beats, not legacy labels."""
+    import re
     beats = story.get("story_beats") or []
     first = beats[0] if beats and isinstance(beats[0], dict) else {}
     visual = str(first.get("visual") or "curious").replace("_", " ").strip().title()
     speech = str(first.get("speech") or "")
-    import re
-    match = re.search(r"\bin (?:a|an|the) ([a-z][a-z -]{2,45}?)(?:,| needed to| was| would)", speech, re.IGNORECASE)
-    setting = match.group(1).strip().title() if match else "Hidden World"
-    return f"The {visual} Mystery of {setting}"
+    setting_match = re.search(
+        r"\bin (?:a|an|the) ([a-z][a-z -]{2,45}?)(?:,| needed to| was| would)",
+        speech, re.IGNORECASE)
+    role_match = re.search(r"^As the ([a-z][a-z -]{1,30}?) in ", speech, re.IGNORECASE)
+    setting = setting_match.group(1).strip().title() if setting_match else "Unknown Setting"
+    role = role_match.group(1).strip().title() if role_match else "Curious Hero"
+    return f"The {visual} Mystery of {setting} — {role}'s Case"
 
 
 def _backfill_legacy_titles(proposals):

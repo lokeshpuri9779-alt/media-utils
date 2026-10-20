@@ -52,7 +52,7 @@ class AutonomousStoryProposalTests(unittest.TestCase):
         self.assertTrue(all(item["production_ready"] is False for item in candidates))
         self.assertTrue(all(item["title"] != f"Unreviewed story proposal {i + 1}"
                             for i, item in enumerate(candidates)))
-        self.assertTrue(all(item["title"].startswith("The ") and "Mystery of the" in item["title"]
+        self.assertTrue(all(item["title"].startswith("The ") and "Mystery of " in item["title"]
                             for item in candidates))
 
     def test_added_plot_axes_expand_story_supply_variation(self):
@@ -80,7 +80,14 @@ class AutonomousStoryProposalTests(unittest.TestCase):
                   "story_beats": [{"visual": "bell",
                                    "speech": "As the keeper in a flooded village, a lighthouse keeper needed to understand why the warning bell rang."}]}]
         self.assertEqual(_backfill_legacy_titles(items), 1)
-        self.assertEqual(items[0]["title"], "The Bell Mystery of Flooded Village")
+        self.assertEqual(items[0]['title'], "The Bell Mystery of Flooded Village — Keeper's Case")
+
+    def test_titles_vary_by_character_role_and_story_dimensions(self):
+        candidates = [proposal(index) for index in range(300)]
+        titles = [item["title"] for item in candidates]
+        self.assertEqual(len(titles), len(set(titles)))
+        self.assertTrue(all("Mystery of " in title and "Case #" in title for title in titles))
+        self.assertNotIn("Unknown Setting", " ".join(titles))
 
     def test_invalid_indices_and_batch_sizes_rejected(self):
         with self.assertRaises(ValueError):
