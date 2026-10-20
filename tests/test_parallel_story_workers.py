@@ -19,10 +19,10 @@ def workers(batch="batch"):
 
 
 class ParallelStoryWorkersTests(unittest.TestCase):
-    def test_500_stories_eight_workers(self):
-        self.assertEqual(worker_allocation(), [63, 63, 63, 63, 62, 62, 62, 62])
+    def test_256_stories_eight_workers(self):
+        self.assertEqual(worker_allocation(), [32] * 8)
         result = combine_workers("batch", workers())
-        self.assertEqual(result["count"], 500)
+        self.assertEqual(result["count"], 256)
         self.assertEqual(result["approved_count"], 0)
         self.assertFalse(result["publication_triggered"])
 
