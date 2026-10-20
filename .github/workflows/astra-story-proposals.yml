@@ -23,6 +23,8 @@ on:
       - 'astra_v2/story_supply_review.py'
       - 'astra_v2/story_review_shortlist.py'
       - 'astra_v2/story_cohort_quality.py'
+      - 'astra_v2/story_cohort_history.py'
+      - 'tests/test_story_cohort_history.py'
       - 'tests/test_story_cohort_quality.py'
       - 'astra_v2/story_mechanism_ledger.py'
 
@@ -61,6 +63,11 @@ jobs:
                   break
                 fi
               done
+          fi
+      - name: Restore bounded cohort history
+        run: |
+          if git cat-file -e origin/astra-state:runtime-health/story_cohort_history.json 2>/dev/null; then
+            git show origin/astra-state:runtime-health/story_cohort_history.json > runtime-health/story_cohort_history.json
           fi
       - name: Restore mechanism review history from state branch
         run: |
@@ -147,6 +154,10 @@ jobs:
         run: /usr/bin/time -f "ASTRA_STAGE_AUDIT_SECONDS=%e ASTRA_STAGE_AUDIT_PEAK_KB=%M" python -m astra_v2.story_supply_review
       - name: Compare newly generated proposals with historical inventory
         run: python -m astra_v2.story_cohort_quality
+      - name: Update bounded cohort trend without approval
+        run: |
+          python -m unittest discover -s tests -p test_story_cohort_history.py -v
+          python -m astra_v2.story_cohort_history
       - name: Generate read-only editorial shortlist
         run: python -m astra_v2.story_review_shortlist
       - name: Summarize reviewable story supply without approval
@@ -195,6 +206,7 @@ jobs:
           cp runtime-health/story_editorial_report.json /tmp/astra-proposal-persist/story_editorial_report.json
           cp runtime-health/story_supply_review.json /tmp/astra-proposal-persist/story_supply_review.json
           cp runtime-health/story_cohort_quality.json /tmp/astra-proposal-persist/story_cohort_quality.json
+          cp runtime-health/story_cohort_history.json /tmp/astra-proposal-persist/story_cohort_history.json
           cp runtime-health/story_review_shortlist.json /tmp/astra-proposal-persist/story_review_shortlist.json
           git fetch --depth=1 origin astra-state
           # The run restored these state files into the main-branch worktree.
@@ -234,7 +246,7 @@ jobs:
               json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
           print("ASTRA_SUPPLY_STATUS=" + json.dumps(summary, sort_keys=True))
           PY
-          git add runtime-health/story_proposals.json runtime-health/story_editorial_report.json runtime-health/story_supply_review.json runtime-health/story_review_shortlist.json runtime-health/story_cohort_quality.json runtime-health/story_supply_status.json
+          git add runtime-health/story_proposals.json runtime-health/story_editorial_report.json runtime-health/story_supply_review.json runtime-health/story_review_shortlist.json runtime-health/story_cohort_quality.json runtime-health/story_cohort_history.json runtime-health/story_supply_status.json
           if [ -f runtime-health/story_mechanisms.json ]; then git add runtime-health/story_mechanisms.json; fi
           if git diff --cached --quiet; then
             echo "ASTRA_DURABLE_LEDGER_CHANGED=false"
@@ -277,6 +289,18 @@ jobs:
               raise SystemExit("Cohort report must not enable publishing")
           if sum(cohort.get(group, {}).get("total", 0) for group in ("new", "historical")) != len(actual["proposals"]):
               raise SystemExit("Cohort totals do not match persisted inventory")
+          trend = json.loads(Path("runtime-health/story_cohort_history.json").read_text())
+          expected_trend = json.loads(Path("/tmp/astra-proposal-persist/story_cohort_history.json").read_text())
+          if trend != expected_trend or not trend.get("runs") or len(trend["runs"]) > 30:
+              raise SystemExit("Durable cohort trend missing or inconsistent")
+          latest = trend["runs"][-1]
+          if (latest["run_id"] != "${{ github.run_id }}" or
+                  latest["attempt"] != "${{ github.run_attempt }}" or
+                  latest["new_proposals"] != cohort["new"].get("total", 0) or
+                  latest["narrative_duplicates"] != cohort["new"].get("issue:narrative_duplicate", 0) or
+                  latest["publication_enabled"] is not False):
+              raise SystemExit("Durable cohort trend does not match current run")
+          print("ASTRA_DURABLE_COHORT_TREND=verified")
           print("ASTRA_DURABLE_COHORT_QUALITY=verified")
           print("ASTRA_DURABLE_SUPPLY_STATUS=verified")
           print("ASTRA_DURABLE_LEDGER_READBACK=verified")
@@ -292,6 +316,7 @@ jobs:
             runtime-health/story_editorial_report.json
             runtime-health/story_supply_review.json
             runtime-health/story_cohort_quality.json
+            runtime-health/story_cohort_history.json
             runtime-health/story_review_shortlist.json
           if-no-files-found: error
           retention-days: 90
