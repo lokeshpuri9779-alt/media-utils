@@ -26,6 +26,19 @@ def scene_sequence(problem):
 
 
 
+ROLES = (
+    ("the patient mechanic", "protect the town's only safe route", "refused to risk a rushed repair"),
+    ("the observant ranger", "keep the youngest neighbors safe", "stopped the team from ignoring a warning"),
+    ("the determined apprentice", "earn trust by solving the problem carefully", "admitted the first idea was wrong"),
+    ("the resourceful caretaker", "preserve a place everyone depended on", "asked for help instead of hiding the damage"),
+    ("the curious cartographer", "find a reliable path for everyone", "checked the evidence before making a promise"),
+)
+
+
+def character_arc(index):
+    return ROLES[index % len(ROLES)]
+
+
 def proposals(limit=100, excluded_plot_hashes=()):
     seen = set(excluded_plot_hashes)
     # Include existing authored stories in novelty history by default.
@@ -36,11 +49,12 @@ def proposals(limit=100, excluded_plot_hashes=()):
         visuals = scene_sequence(problem)
         for arc_index, (obstacle, recovery) in enumerate(DRAFT_CAUSAL_ARCS[problem]):
             key = f"plot-first:{problem}:{arc_index}"
+            hero, motivation, decision = character_arc(arc_index)
             beats = [
-                f"The village faced a crisis when {crisis}; a trusted messenger volunteered to investigate before the deadline.",
-                f"The first rescue plan failed because {obstacle}; the messenger saw that repeating it would make the danger worse.",
-                f"After examining {clue}, the messenger changed course by {recovery}, giving the neighbors a clear way to help.",
-                f"The new plan worked: {resolution}; the messenger checked the result and shared the lesson with the village.",
+                f"The village faced a crisis when {crisis}; {hero} stepped forward to {motivation}.",
+                f"The first rescue plan failed because {obstacle}; {hero} {decision}.",
+                f"After examining {clue}, {hero} chose to {recovery}, even though the neighbors had to abandon their original plan.",
+                f"The new plan worked: {resolution}; {hero} checked the result and explained why the changed plan mattered.",
             ]
             fingerprint = hashlib.sha256(" ".join(beats).casefold().encode()).hexdigest()
             if fingerprint in seen:
@@ -50,6 +64,9 @@ def proposals(limit=100, excluded_plot_hashes=()):
                 "content_id": "astra-proposal-" + hashlib.sha256(key.encode()).hexdigest()[:16],
                 "title": f"The {problem.title()} — Alternative {arc_index + 1}",
                 "genre": "fiction",
+                "character_role": hero,
+                "character_motivation": motivation,
+                "character_decision": decision,
                 "kind": "unreviewed_causal_draft",
                 "production_ready": False,
                 "plot_fingerprint": fingerprint,
