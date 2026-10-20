@@ -160,6 +160,30 @@ jobs:
           python -m astra_v2.story_cohort_history
       - name: Generate read-only editorial shortlist
         run: python -m astra_v2.story_review_shortlist
+      - name: Validate editorial shortlist diagnostic schema
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("runtime-health/story_review_shortlist.json")
+          if not p.is_file():
+              raise SystemExit("Editorial shortlist missing after generation")
+          data = json.loads(p.read_text(encoding="utf-8"))
+          required = ("candidates_with_title_story_flags", "candidates_with_causal_continuity_flags")
+          missing = [key for key in required if key not in data]
+          if missing:
+              raise SystemExit(f"Editorial shortlist missing diagnostic fields: {missing}")
+          candidates = data.get("review_candidates")
+          if not isinstance(candidates, list):
+              raise SystemExit("Editorial shortlist review_candidates must be a list")
+          for key, field in (("candidates_with_title_story_flags", "title_story_flags"),
+                             ("candidates_with_causal_continuity_flags", "causal_continuity_flags")):
+              if any(not isinstance(item.get(field), list) for item in candidates):
+                  raise SystemExit(f"Editorial shortlist candidates missing {field}")
+              if data[key] != sum(bool(item[field]) for item in candidates):
+                  raise SystemExit(f"Editorial shortlist count mismatch for {key}")
+          print(f"Validated diagnostic fields for {len(candidates)} editorial candidates")
+          PY
       - name: Summarize reviewable story supply without approval
         if: always()
         run: |
