@@ -2,18 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-13T10:53:59.018770+00:00",
-      "stage": "hook",
-      "element": "retention",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 83.07766666666666,
-        "candidate": "mercury-solar-day-v1"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "mercury-solar-day-v1"
-    },
-    {
       "at": "2026-10-13T10:53:59.025806+00:00",
       "stage": "visuals",
       "element": "visual",
@@ -7105,6 +7093,17 @@
       },
       "proposed_action": "",
       "candidate_id": "rayvan-forge-71acde15f90e5a99"
+    },
+    {
+      "at": "2026-10-20T12:15:59.227231+00:00",
+      "stage": "quality",
+      "element": "candidate_selection",
+      "outcome": "fail",
+      "evidence": {
+        "reason": "no_approved_original_story_available"
+      },
+      "proposed_action": "Diagnose story supply and creative gate failures",
+      "candidate_id": ""
     }
   ],
   "stage_counts": {
@@ -7136,7 +7135,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 21,
+      "unknown": 20,
       "improved": 0,
       "regressed": 0
     },
@@ -7214,7 +7213,7 @@
     },
     "quality": {
       "pass": 35,
-      "fail": 421,
+      "fail": 422,
       "skip": 0,
       "unknown": 0,
       "improved": 0,

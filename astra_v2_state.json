@@ -2278,27 +2278,28 @@
     }
   },
   "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-20T11:49:52.277632+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "last_outcome": "quality_skip",
+  "last_error": "",
+  "last_preflight_at": "2026-10-20T12:15:19.491899+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-20T11:49:52.802222+00:00",
+    "at": "2026-10-20T12:15:59.393611+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-20T08:57:10.520919+00:00",
   "reserved": {
@@ -5812,9 +5813,9 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-20T11:49:52.802138+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
+    "at": "2026-10-20T12:15:59.393532+00:00",
+    "publication_outcome": "quality_skip",
+    "publication_reason": "no_approved_original_story_available",
     "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
@@ -5823,30 +5824,66 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-20T11:49:52.802208+00:00",
+    "at": "2026-10-20T12:15:59.393597+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-20T11:48:50.407277+00:00",
-    "outcome": "processing",
-    "reason": "",
-    "content_id": "rayvan-forge-f514f89a8d15eb2b",
-    "video_url": "https://www.youtube.com/watch?v=aLNdiR0O1gA"
+    "at": "2026-10-20T12:15:44.901637+00:00",
+    "outcome": "quality_skip",
+    "reason": "no_approved_original_story_available",
+    "content_id": "",
+    "video_url": ""
   },
   "last_workflow_result": {
-    "at": "2026-10-20T11:49:52.802081+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-20T12:15:59.393349+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval"
+    "outcome": "quality_skip",
+    "reason": "no_approved_original_story_available"
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-20T11:49:52.802133+00:00",
-    "counters": {},
+    "at": "2026-10-20T12:15:59.393527+00:00",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 0,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3
+        },
+        "seen": 89,
+        "total": 156
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 156,
+        "fingerprint": 0,
+        "id": 89,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 67,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 67,
+        "remaining": 0
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 0,
+        "considered": 67,
+        "duration_rejected": 0,
+        "not_ready": 64,
+        "policy_rejected": {
+          "not_production_ready": 3
+        },
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
