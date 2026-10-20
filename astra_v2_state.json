@@ -2280,11 +2280,11 @@
   "pending": {},
   "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-10-20T22:23:22.053607+00:00",
+  "last_preflight_at": "2026-10-20T22:29:14.292971+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-20T22:24:11.576189+00:00",
+    "at": "2026-10-20T22:31:03.843231+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -5813,7 +5813,7 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-20T22:24:11.576124+00:00",
+    "at": "2026-10-20T22:31:03.843187+00:00",
     "publication_outcome": "quality_skip",
     "publication_reason": "no_approved_original_story_available",
     "character_memory": "not_reported",
@@ -5824,13 +5824,13 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-20T22:24:11.576178+00:00",
+    "at": "2026-10-20T22:31:03.843223+00:00",
     "history_file_present": true,
     "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-20T22:23:55.983021+00:00",
+    "at": "2026-10-20T22:29:46.193286+00:00",
     "outcome": "quality_skip",
     "reason": "no_approved_original_story_available",
     "content_id": "",
@@ -5843,15 +5843,13 @@
       },
       "already_seen": 0,
       "duration_rejected": 0,
-      "render_qa_rejected": 0,
-      "render_exception": {
-        "KeyError": 1
-      },
+      "render_qa_rejected": 1,
+      "render_exception": {},
       "approved": 0
     }
   },
   "last_workflow_result": {
-    "at": "2026-10-20T22:24:11.575937+00:00",
+    "at": "2026-10-20T22:31:03.843049+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -5860,7 +5858,7 @@
     "reason": "no_approved_original_story_available"
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-20T22:24:11.576117+00:00",
+    "at": "2026-10-20T22:31:03.843183+00:00",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
         "eligible": 1,
@@ -5894,10 +5892,8 @@
         "policy_rejected": {
           "not_production_ready": 3
         },
-        "render_exception": {
-          "KeyError": 1
-        },
-        "render_qa_rejected": 0
+        "render_exception": {},
+        "render_qa_rejected": 1
       }
     },
     "note": "Diagnostic counts only; no approval or publishing effect"
