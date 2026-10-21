@@ -57,13 +57,18 @@ class GitHubReleaseStore:
         release_id = release.get("id")
         if type(release_id) is not int or release_id <= 0:
             raise ValueError("invalid_release_id")
+        expected_count = release.get('assets_count')
+        if expected_count is not None and (type(expected_count) is not int or expected_count < 0 or expected_count > 10000):
+            raise ValueError('invalid_release_assets_count')
         matches = []
+        observed_count = 0
         for page in range(1, 101):
             url = (self.root + "/releases/" + str(release_id) +
                    "/assets?per_page=100&page=" + str(page))
             assets = self._request("GET", url)
             if not isinstance(assets, list) or len(assets) > 100:
                 raise ValueError("invalid_release_assets_page")
+            observed_count += len(assets)
             for asset in assets:
                 if not isinstance(asset, dict):
                     raise ValueError("invalid_release_asset")
@@ -72,6 +77,8 @@ class GitHubReleaseStore:
                     if len(matches) > 1:
                         raise ValueError("duplicate_release_assets")
             if len(assets) < 100:
+                if expected_count is not None and observed_count != expected_count:
+                    raise RuntimeError('incomplete_release_asset_inventory')
                 return matches[0] if matches else None
         raise RuntimeError("release_assets_page_limit")
 
