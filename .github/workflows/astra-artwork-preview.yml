@@ -2,6 +2,12 @@ name: ASTRA Artwork Production Preview
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'astra/background_factory.py'
+      - 'astra/asset_inventory.py'
+      - 'tests/test_background_factory.py'
+      - '.github/workflows/astra-artwork-preview.yml'
   push:
     paths:
       - 'astra/background_factory.py'
@@ -23,6 +29,8 @@ jobs:
           python-version: '3.11'
       - name: Install image dependency
         run: python -m pip install 'Pillow>=10,<12'
+      - name: Test background generator and asset inventory
+        run: python -m unittest discover -s tests -p 'test_background_factory.py' -v
       - name: Render all starter backgrounds
         run: python -m astra.background_factory --output "$RUNNER_TEMP/astra-preview"
       - name: Validate inventory and verify output count
