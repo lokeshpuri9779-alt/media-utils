@@ -104,11 +104,12 @@ def make_preview(output, *, seconds_per_scene=2, fps=8, storyboard=None):
             _srt(output.with_suffix(".srt"), sequence, seconds_per_scene)
         cmd = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
                         "-framerate", str(fps), "-i", str(frames / "%05d.png"),
-                        "-c:v", "libx264", "-pix_fmt", "yuv420p"]
+                        ]
         if story_scenes is not None:
             cmd.extend(["-i", str(audio_path), "-map", "0:v:0", "-map", "1:a:0",
                         "-c:a", "aac", "-shortest"])
-        cmd.extend(["-movflags", "+faststart", str(output)])
+        cmd.extend(["-c:v", "libx264", "-pix_fmt", "yuv420p",
+                    "-movflags", "+faststart", str(output)])
         subprocess.run(cmd, check=True, timeout=180)
         if not output.is_file() or output.stat().st_size == 0:
             raise ValueError("empty_preview_video")
