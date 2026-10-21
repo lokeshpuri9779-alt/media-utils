@@ -25,6 +25,9 @@ def take(output, *, warehouse=None, archive=None):
         os.getenv("ASTRA_EDITORIAL_REVIEWS_FILE", "editorial/reviewed_decisions.json"),
         os.getenv("ASTRA_PUBLISHER_STATE_PATH", "astra_v2_state.json"),
         os.getenv("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json"))
+    # Independent package QA verification is not implemented. Refuse before
+    # claiming a lease, so an intentionally blocked run cannot strand inventory.
+    raise RuntimeError("warehouse_authoritative_qa_verifier_missing")
     claim = warehouse.claim(lease_seconds=3600)
     if claim is None:
         return None
@@ -32,10 +35,6 @@ def take(output, *, warehouse=None, archive=None):
     # evidence. Until the trusted verifier is integrated, fail closed.
     if claim["content_id"] not in runway["eligible_ids"]:
         raise ValueError("warehouse_story_not_editorially_approved")
-    # The independent QA digest must be verified against its authoritative
-    # signed record before enabling warehouse uploads. Until then, do not
-    # reserve eligible packages that can never proceed to publication.
-    raise RuntimeError("warehouse_authoritative_qa_verifier_missing")
     output = Path(output)
     if output.exists():
         raise ValueError("warehouse_output_already_exists")
