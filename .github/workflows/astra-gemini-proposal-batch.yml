@@ -6,6 +6,7 @@ on:
       - '.github/workflows/astra-gemini-proposal-batch.yml'
       - 'astra_v2/gemini_batch.py'
       - 'astra_v2/omniroute_gemini.py'
+      - 'astra_v2/gemini_batch_review.py'
   schedule:
     - cron: '17 2 * * *'
   workflow_dispatch:
