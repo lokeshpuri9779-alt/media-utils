@@ -207,7 +207,6 @@ jobs:
           if-no-files-found: error
           retention-days: 7
       - name: Pre-generate story-directed visual asset cache
-        if: matrix.lane == 0
         shell: bash
         run: |
           python - <<'PY'
