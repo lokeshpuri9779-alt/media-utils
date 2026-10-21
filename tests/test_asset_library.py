@@ -5,7 +5,7 @@ from pathlib import Path
 
 from PIL import Image
 
-from astra.asset_library import draw_asset_for_scene, load_assets, select_asset
+from astra.asset_library import draw_asset_for_scene, load_assets, select_asset, generate_semantic_assets
 
 
 class AssetLibraryTests(unittest.TestCase):
@@ -30,6 +30,18 @@ class AssetLibraryTests(unittest.TestCase):
 
     def tearDown(self):
         self.temp.cleanup()
+
+    def test_generates_verified_story_assets_and_manifest(self):
+        result = generate_semantic_assets([
+            {"visual": "flooded railway bridge", "speech": "Otter sees a bell"}
+        ], output_root=self.root)
+        self.assertEqual(result["generated"], 1)
+        assets = load_assets(self.root / "art" / "manifest.json")
+        self.assertEqual(len(assets), 1)
+        self.assertEqual(assets[0]["category"], "background")
+        with Image.open(assets[0]["_resolved_path"]) as image:
+            self.assertEqual(image.size, (540, 960))
+            self.assertEqual(image.mode, "RGBA")
 
     def test_selects_matching_approved_asset(self):
         selected = select_asset({"story_subject": "fox", "visual": "forest"}, self.manifest)
