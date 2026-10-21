@@ -1,0 +1,58 @@
+name: Recover Gemini reviewed inventory
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Recover approved inventory with history validation
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git fetch origin astra-state
+          git show origin/astra-state:astra_v2_state.json > astra_v2_state.json
+          git show origin/astra-state:astra_story_history.json > astra_story_history.json
+          mkdir -p recovered
+          gh api repos/${{ github.repository }}/actions/artifacts/12376675140/zip > recovered/batch.zip
+          python - <<'PY'
+          import json, zipfile, subprocess
+          from pathlib import Path
+          from astra_v2.gemini_inventory_merge import merge_inventory
+          from astra_v2.proposal_history import load_history
+          def live(name,key):
+              return json.loads(subprocess.check_output(['git','show','origin/astra-state:'+name]))[key]
+          with zipfile.ZipFile('recovered/batch.zip') as z:
+              names=z.namelist()
+              print('ASTRA_RECOVERY_ARCHIVE_FILES='+','.join(names))
+              def archive(name,key):
+                  matches=[n for n in names if n.split('/')[-1]==name]
+                  if len(matches)!=1: raise ValueError('missing_or_ambiguous_'+name)
+                  return json.loads(z.read(matches[0]))[key]
+              stories,reviews=merge_inventory(
+                  live('ai-reviewed-stories.json','stories'),
+                  live('ai-reviewed-decisions.json','reviews'),
+                  archive('ai-reviewed-stories.json','stories'),
+                  archive('ai-reviewed-decisions.json','reviews'),
+                  load_history('astra_v2_state.json','astra_story_history.json'))
+          assert len(stories['stories'])==len(reviews['reviews'])
+          assert len(stories['stories'])>=2,'No eligible recovered stories'
+          Path('recovered/ai-reviewed-stories.json').write_text(json.dumps(stories,indent=2)+'\n')
+          Path('recovered/ai-reviewed-decisions.json').write_text(json.dumps(reviews,indent=2)+'\n')
+          print('ASTRA_RECOVERY_ELIGIBLE='+str(len(stories['stories'])))
+          PY
+          WORKTREE="$(mktemp -d)"
+          git worktree add --detach "$WORKTREE" origin/astra-state
+          cp recovered/ai-reviewed-stories.json "$WORKTREE/"
+          cp recovered/ai-reviewed-decisions.json "$WORKTREE/"
+          (
+            cd "$WORKTREE"
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add ai-reviewed-stories.json ai-reviewed-decisions.json
+            git commit -m 'Recover independently approved Gemini stories [skip ci]'
+            git push origin HEAD:refs/heads/astra-state
+          )
