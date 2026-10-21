@@ -32,6 +32,36 @@ jobs:
         run: |
           git fetch origin astra-state
           git checkout origin/astra-state -- astra_v2_state.json astra_story_history.json
+      - name: Check Gemini model access (safe metadata only)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request, urllib.error
+          from pathlib import Path
+          out = {"status": "unknown", "models": []}
+          key = os.getenv("GEMINI_API_KEY")
+          if not key:
+              out["status"] = "missing_api_key"
+          else:
+              request = urllib.request.Request(
+                  "https://generativelanguage.googleapis.com/v1beta/models?pageSize=100",
+                  headers={"x-goog-api-key": key})
+              try:
+                  with urllib.request.urlopen(request, timeout=20) as response:
+                      data = json.load(response)
+                  out["status"] = "ok"
+                  out["models"] = sorted(m["name"] for m in data.get("models", [])
+                                         if "generateContent" in m.get("supportedGenerationMethods", []))
+              except urllib.error.HTTPError as exc:
+                  out["status"] = "http_" + str(exc.code)
+              except (urllib.error.URLError, TimeoutError):
+                  out["status"] = "transport_error"
+          root = Path("runtime-health")
+          root.mkdir(parents=True, exist_ok=True)
+          (root / "gemini-model-access.json").write_text(json.dumps(out, indent=2) + "\\n")
+          print("ASTRA_GEMINI_MODEL_ACCESS=" + json.dumps(out))
+          PY
       - name: Generate proposals
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -120,6 +150,7 @@ jobs:
         with:
           name: gemini-unreviewed-proposals
           path: |
+            runtime-health/gemini-model-access.json
             runtime-health/gemini-proposals.json
             runtime-health/ai-reviewed-stories.json
             runtime-health/ai-reviewed-decisions.json
