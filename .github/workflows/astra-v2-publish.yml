@@ -230,7 +230,7 @@ jobs:
         run: python -m astra_v2.editorial_runway_diagnostic
 
       - name: Verify remote warehouse readiness when enabled
-        if: steps.preflight.outputs.render_due == 'true'
+        if: steps.preflight.outputs.render_due == 'true' || github.event_name == 'workflow_dispatch'
         env:
           ASTRA_RECEIPT_INDEX: ${{ vars.ASTRA_RECEIPT_INDEX }}
           ASTRA_WAREHOUSE_DATABASE_URL: ${{ secrets.ASTRA_WAREHOUSE_DATABASE_URL }}
