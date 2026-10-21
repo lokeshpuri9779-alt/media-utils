@@ -16,7 +16,7 @@ def enabled():
 def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
     if not enabled():
         return None
-    model = os.getenv("ASTRA_GEMINI_MODEL", "gemini-3.1-flash-lite")
+    model = os.getenv("ASTRA_GEMINI_MODEL", "gemini-2.5-flash-lite")
     if not re.fullmatch(r"[A-Za-z0-9._-]{1,80}", model):
         raise ValueError("Invalid Gemini model")
     prompt = (
