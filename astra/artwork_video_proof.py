@@ -7,6 +7,9 @@ import argparse
 import json
 import subprocess
 import tempfile
+import wave
+import math
+import struct
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
@@ -32,6 +35,30 @@ def _storyboard(path):
         if not isinstance(scene.get("narration"), str) or not 1 <= len(scene["narration"]) <= 500:
             raise ValueError("invalid_narration")
     return scenes
+
+
+def _timed_audio(path, scenes, seconds_per_scene, rate=22050):
+    """Create a silent timing track; do not misrepresent it as speech synthesis."""
+    total = len(scenes) * seconds_per_scene * rate
+    with wave.open(str(path), "wb") as audio:
+        audio.setnchannels(1)
+        audio.setsampwidth(2)
+        audio.setframerate(rate)
+        audio.writeframes(b"\\x00\\x00" * total)
+
+
+def _srt(path, scenes, seconds_per_scene):
+    def stamp(ms):
+        h, rem = divmod(ms, 3600000)
+        m, rem = divmod(rem, 60000)
+        sec, milli = divmod(rem, 1000)
+        return f"{h:02}:{m:02}:{sec:02},{milli:03}"
+    entries = []
+    for idx, scene in enumerate(scenes):
+        start = idx * seconds_per_scene * 1000
+        end = (idx + 1) * seconds_per_scene * 1000
+        entries.append(f"{idx+1}\\n{stamp(start)} --> {stamp(end)}\\n{scene['narration']}\\n")
+    path.write_text("\\n".join(entries) + "\\n", encoding="utf-8")
 
 
 def make_preview(output, *, seconds_per_scene=2, fps=8, storyboard=None):
@@ -71,10 +98,18 @@ def make_preview(output, *, seconds_per_scene=2, fps=8, storyboard=None):
                 frame.save(frames / f"{count:05d}.png")
                 count += 1
         output.parent.mkdir(parents=True, exist_ok=True)
-        subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
+        audio_path = root / "timing.wav"
+        if story_scenes is not None:
+            _timed_audio(audio_path, sequence, seconds_per_scene)
+            _srt(output.with_suffix(".srt"), sequence, seconds_per_scene)
+        cmd = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
                         "-framerate", str(fps), "-i", str(frames / "%05d.png"),
-                        "-c:v", "libx264", "-pix_fmt", "yuv420p",
-                        "-movflags", "+faststart", str(output)], check=True, timeout=180)
+                        "-c:v", "libx264", "-pix_fmt", "yuv420p"]
+        if story_scenes is not None:
+            cmd.extend(["-i", str(audio_path), "-map", "0:v:0", "-map", "1:a:0",
+                        "-c:a", "aac", "-shortest"])
+        cmd.extend(["-movflags", "+faststart", str(output)])
+        subprocess.run(cmd, check=True, timeout=180)
         if not output.is_file() or output.stat().st_size == 0:
             raise ValueError("empty_preview_video")
         return {"scenes": len(sequence), "frames": count, "storyboard": story_scenes is not None,
