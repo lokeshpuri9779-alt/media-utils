@@ -26,7 +26,12 @@ def queue(value):
 
 def png():
     data = io.BytesIO()
-    Image.new("RGB", (540, 960), (22, 66, 99)).save(data, format="PNG")
+    im = Image.new("RGB", (540, 960))
+    from PIL import ImageDraw
+    draw = ImageDraw.Draw(im)
+    for y in range(960):
+        draw.line((0, y, 539, y), fill=(22 + y // 32, 66 + y // 16, 99 + y // 12))
+    im.save(data, format="PNG")
     return data.getvalue()
 
 
