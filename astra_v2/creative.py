@@ -378,6 +378,15 @@ def make_candidate(path, excluded_ids, excluded_titles):
                   type(exc).__name__, str(exc)[:250])
     else:
         print("ASTRA_STORY_SELECTION=" + json.dumps(selection, sort_keys=True))
+        # Preserve a bounded, machine-readable explanation of why no candidate
+        # survived; a structural eligibility count is not publication approval.
+        selection["exhausted"] = True
+        selection["rejection_total"] = (selection["not_ready"] + selection["already_seen"]
+            + selection["duration_rejected"] + selection["render_qa_rejected"]
+            + sum(selection["policy_rejected"].values())
+            + sum(selection["render_exception"].values()))
+        selection["next_action"] = ("replenish_approved_story_supply" if not selection["approved"]
+            else "investigate_render_or_policy_gates")
         if lane_count > 1:
             raise CreativeSkip('no_approved_candidate_in_preload_lane', selection=selection)
         # Do not waste a full render on the unreviewed legacy template pool.
