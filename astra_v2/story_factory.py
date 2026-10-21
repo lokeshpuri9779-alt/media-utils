@@ -93,6 +93,18 @@ def generate(state_path, output_path, batch_size=500):
     end=min(cursor+batch_size,TARGET)
     rows=[candidate_at(i) for i in range(cursor,end)]
     seen=set(state.get("seen_premise_keys", []))
+    # Prioritize newly authored mechanisms without resetting the persistent cursor.
+    # Preserve the slot and derive a new identity to avoid recycling early IDs.
+    unseen=[i for i, mechanism in enumerate(MECHANISMS)
+            if mechanism[0] not in seen]
+    for position, mechanism_index in enumerate(unseen[:len(rows)]):
+        original=rows[position]
+        replacement=candidate_at(mechanism_index)
+        replacement["slot"]=original["slot"]
+        replacement["candidate_id"]=hashlib.sha256(
+            ("factory-priority-v1:" + str(original["slot"]) + ":" +
+             replacement["premise_key"]).encode()).hexdigest()[:24]
+        rows[position]=replacement
     review=[]
     accepted_plot_signatures=set(state.get("seen_plot_signatures", []))
     for row in rows:
