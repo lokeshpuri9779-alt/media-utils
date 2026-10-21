@@ -50,7 +50,11 @@ jobs:
               print("ASTRA_HEALTH=FAIL:last_publisher_run_failed")
               sys.exit(1)
           # Distinguish successful push/manual runs from actual scheduled delivery.
-          scheduled = [r for r in completed if r.get("event") == "schedule"]
+          # Query scheduled executions separately: frequent push/manual runs can
+          # otherwise evict every scheduled event from the first ten results.
+          scheduled_runs = api("actions/workflows/astra-v2-publish.yml/runs?event=schedule&per_page=10")
+          scheduled = [r for r in scheduled_runs.get("workflow_runs", [])
+                       if r.get("status") == "completed"]
           if scheduled:
               scheduled_latest = max(scheduled, key=lambda r: r.get("created_at") or "")
               scheduled_at = datetime.fromisoformat(scheduled_latest["created_at"].replace("Z", "+00:00"))
