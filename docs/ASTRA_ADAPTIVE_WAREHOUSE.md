@@ -28,6 +28,11 @@ ephemeral GitHub Actions artifact must never be treated as a multi-run queue.
 
 ## Integration requirements
 
+The optional shared implementation is documented in
+[ASTRA_SHARED_WAREHOUSE.md](ASTRA_SHARED_WAREHOUSE.md): PostgreSQL receipt indexing,
+atomic claims, server-clock leases and idempotent confirmations. It is separate
+from this JSON pilot and is not configured as the live publisher's backend.
+
 1. Bind approved-story manifest hashes and real review evidence at intake.
 2. Store immutable artifacts in persistent storage with retention and checksums.
 3. Run independent asset, TTS, render, metadata and QA workers ahead of publication.

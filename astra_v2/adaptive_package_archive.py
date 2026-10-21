@@ -159,6 +159,8 @@ def archive_preload_if_enabled(package):
     receipt = PackageArchive(store_from_environment(cache)).put(package, provenance=provenance)
     # Keep receipt outside preload-package: the existing publisher rejects extras.
     Path("preload-archive-receipt.json").write_text(json.dumps(receipt, sort_keys=True, indent=2), encoding="utf-8")
+    from astra_v2.adaptive_shared_queue import index_receipt_if_enabled
+    index_receipt_if_enabled(receipt)
     print("ASTRA_REMOTE_ARCHIVE=" + json.dumps(receipt, sort_keys=True))
     return receipt
 
@@ -173,12 +175,22 @@ def main(argv=None):
     restore = commands.add_parser("restore")
     restore.add_argument("receipt")
     restore.add_argument("destination")
+    indexed = commands.add_parser("restore-indexed")
+    indexed.add_argument("content_id")
+    indexed.add_argument("manifest_sha")
+    indexed.add_argument("destination")
     args = parser.parse_args(argv)
     from astra_v2.adaptive_remote_store import store_from_environment
     bridge = PackageArchive(store_from_environment(args.cache))
     if args.command == "archive":
         result = bridge.put(args.package)
         Path(args.receipt).write_text(json.dumps(result, sort_keys=True, indent=2), encoding="utf-8")
+        from astra_v2.adaptive_shared_queue import index_receipt_if_enabled
+        index_receipt_if_enabled(result)
+    elif args.command == "restore-indexed":
+        from astra_v2.adaptive_shared_queue import warehouse_from_environment
+        receipt = warehouse_from_environment().get_receipt(args.content_id, args.manifest_sha)
+        result = bridge.restore(receipt, args.destination)
     else:
         result = bridge.restore(_read_json(Path(args.receipt), MANIFEST_LIMIT), args.destination)
     print(json.dumps(result, sort_keys=True))

@@ -62,9 +62,11 @@ allowlist. The producer writes `preload-archive-receipt.json` and logs its manif
 reference. An enabled archive failure is visible as a producer failure; it never
 silently reports that unpersisted media was archived.
 
-Keep receipts in the eventual durable inventory/backup. This adapter provides no
-mutable content-ID index, enumeration service or transactional publication queue;
-a lost receipt is not automatically rediscovered. Multiple manifest versions may
+The optional PostgreSQL index in [ASTRA_SHARED_WAREHOUSE.md](ASTRA_SHARED_WAREHOUSE.md)
+persists receipts separately, supports enumeration and restores exact manifest
+versions from another worker. Enable it explicitly with `ASTRA_RECEIPT_INDEX=postgres`.
+Without that index, keep receipts in a durable inventory/backup; this object
+adapter alone does not rediscover lost receipts. Multiple manifest versions may
 refer to the same media. Hash equality proves byte identity, not human review,
 producer trust, unique publication, copyright or continued policy eligibility.
 Recorded provenance is descriptive, not an authenticated workflow attestation.
@@ -83,8 +85,9 @@ Recorded provenance is descriptive, not an authenticated workflow attestation.
 - No live backend, budget/retention policy, credentials or independent-run soak
   test was configured for this change. No production archiving is enabled.
 - SQLite in `adaptive_queue` still coordinates only one shared filesystem.
-  A remote transactional inventory/lease service and persisted manifest receipts
-  remain required before independent publication workers can consume this archive.
+  The optional PostgreSQL backend implements shared receipt indexing and atomic
+  reservations. A hosted instance and validated admission/reconciliation path
+  are still required before publication workers can consume this archive.
 - Publisher migration still needs authoritative editorial evidence, trusted
   producer verification, current renderer/freshness/novelty/history checks,
   transactional reservations and live YouTube confirmation. The bridge does not

@@ -1,0 +1,2 @@
+# Optional shared database client; no connection is enabled by installing it.
+psycopg[binary]==3.3.6
