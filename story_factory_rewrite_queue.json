@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "publication_triggered": false,
+  "approved_count": 0,
+  "available_premises": {
+    "awaiting_editorial_review": 8,
+    "needs_new_plot": 492
+  },
+  "selected_for_rewrite": 3,
+  "blocked_reason": null,
+  "rewrites": [
+    {
+      "candidate_id": "f27be7454dde8266e06efcbb",
+      "source_sha256": "1487e730444ee693a875488295e5046816acaff70463d422275172b4530476c3",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-897bcf6c352badf28bfb",
+        "title": "The Chromatic Echo of Sector Nine",
+        "hook": "The Silent Pulse",
+        "question": "Why did the ancient transmitter only broadcast silence when pointed toward the star?",
+        "answer": "The star was not a light source, but a massive biological eye reading the frequency.",
+        "source": "",
+        "keywords": [
+          "original science fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Silent Pulse",
+            "speech": "The ancient satellite is emitting a signal that defies all known physics, showing us nothing but a vast, empty void tonight.",
+            "visual": "signal",
+            "label": "reveal",
+            "story_beat": "reveal",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Mechanical Alignment",
+            "speech": "I am manually adjusting the dish calibration to isolate the frequency, ensuring we capture every single data packet from the target star.",
+            "visual": "robot",
+            "label": "build",
+            "story_beat": "build",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Unexpected Refraction",
+            "speech": "The light is not coming from the star itself, but reflecting off a massive membrane that seems to be shielding the entire system.",
+            "visual": "ship",
+            "label": "twist",
+            "story_beat": "twist",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Great Observer",
+            "speech": "We thought we were exploring the cosmos, but we were just looking into the iris of a creature that is watching us back.",
+            "visual": "planet",
+            "label": "payoff",
+            "story_beat": "payoff",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "plot_fingerprint": "a10e2a4a41b2a8cea7b060edf34b1a9e56e20111208894272d81750d7d1f928d"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "11472e086e4150c29a9d4805",
+      "source_sha256": "2f5701188ff03acb860ba92cefa2202460430dd990483926449925a9da3f15c9",
+      "status": "rewrite_failed",
+      "error": "RuntimeError",
+      "approved": false
+    },
+    {
+      "candidate_id": "d0c086cd048a1081fd72d1f3",
+      "source_sha256": "1ab46908e4d7e0ba10fb6d2e0f4c848fb1fd9acdc895a9a78dcf28ec19e4e790",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-22496236310958a17950",
+        "title": "The Chronometric Orchard of Sector Zero",
+        "hook": "The Silent Sprouting",
+        "question": "Can the harvest be reclaimed if the passage of time is harvested instead of fruit?",
+        "answer": "The harvest is eternal because the clockwork mechanism buried beneath the soil consumes potential to generate constant light.",
+        "source": "",
+        "keywords": [
+          "original science fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Silent Sprouting",
+            "speech": "These metallic saplings are blooming backwards, turning from silver steel into raw ore before our very eyes this morning.",
+            "visual": "robot",
+            "label": "A rusted automaton kneels in a field of iron flowers that retract into the earth.",
+            "story_beat": "reveal",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Gearbox Beneath",
+            "speech": "If we force these subterranean cogs to rotate clockwise, we might stall the entropy bleeding into our golden summer fields.",
+            "visual": "ship",
+            "label": "Cross-section schematic of a massive brass ship buried deep beneath the loam.",
+            "story_beat": "mechanism",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Temporal Friction",
+            "speech": "Every turn of the wrench causes our own shadows to age prematurely, proving this machine feeds on the operator's personal future.",
+            "visual": "forest",
+            "label": "A dense forest where tree rings spin rapidly, causing leaves to wither and regrow in seconds.",
+            "story_beat": "twist",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Final Calibration",
+            "speech": "We must stop repairing the past and instead let the machine run down, finally allowing us to live in real time.",
+            "visual": "door",
+            "label": "A heavy stone door opens to reveal a sun rising normally for the first time in centuries.",
+            "story_beat": "payoff",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "plot_fingerprint": "7fccf68e04421751dbd249e3b25469f7e43f53407c78112c0fb2cf1498197c24"
+      },
+      "approved": false
+    }
+  ]
+}
