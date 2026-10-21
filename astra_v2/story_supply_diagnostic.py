@@ -7,6 +7,8 @@ import os
 from pathlib import Path
 
 from astra_v2.story_inventory import inventory
+from astra_v2.production_story_gate import approved_authored_candidates
+from astra_v2.story_forge import catalog as forge_catalog
 
 
 def diagnose(publisher_path="astra_v2_state.json",
@@ -19,9 +21,15 @@ def diagnose(publisher_path="astra_v2_state.json",
     state = json.loads(Path(publisher_path).read_text(encoding="utf-8"))
     production = state.get("last_production_result") or {}
     result = inventory(publisher_path, story_path)
+    # Structural eligibility is not production approval. Never describe it as
+    # upload-ready inventory or silently promote proposals.
+    candidates = forge_catalog(set(), set(), limit=2048)
+    approved = approved_authored_candidates(candidates)
+    ready = len(approved)
     return {
-        "status": "supply_exhausted" if result["eligible_after_history_and_editorial"] == 0
-                  else "candidates_remaining",
+        "status": "supply_exhausted" if ready == 0 else "approved_candidates_present",
+        "approved_production_candidates_before_history": ready,
+        "structurally_eligible_not_necessarily_approved": result["eligible_after_history_and_editorial"],
         "latest_production_outcome": production.get("outcome", ""),
         "latest_production_reason": production.get("reason", ""),
         "authored_candidates": result["authored_candidates"],
