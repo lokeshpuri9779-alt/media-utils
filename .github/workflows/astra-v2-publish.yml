@@ -266,6 +266,7 @@ jobs:
         if: steps.preflight.outputs.render_due == 'true'
         env:
           ASTRA_WAREHOUSE_PUBLISH: ${{ vars.ASTRA_WAREHOUSE_PUBLISH || '0' }}
+          ASTRA_WAREHOUSE_PROBE: ${{ vars.ASTRA_WAREHOUSE_PROBE || '0' }}
           ASTRA_WAREHOUSE_UPLOAD_ENABLED: ${{ vars.ASTRA_WAREHOUSE_UPLOAD_ENABLED || '0' }}
           ASTRA_WAREHOUSE_DATABASE_URL: ${{ secrets.ASTRA_WAREHOUSE_DATABASE_URL }}
           ASTRA_WAREHOUSE_NAMESPACE: ${{ vars.ASTRA_WAREHOUSE_NAMESPACE }}
