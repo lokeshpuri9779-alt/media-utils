@@ -33,12 +33,22 @@ class GitHubReleaseStoreTests(unittest.TestCase):
         with patch.object(self.store, "_release", return_value={"assets": [asset]}):
             with patch.object(self.store, "_request", return_value=b"wrong payload!!"):
                 with self.assertRaisesRegex(ValueError, "corrupted"):
-                    self.store.verify_bytes({"sha256": digest, "bytes": len(data)})
+                    self.store.verify_bytes({"sha256": digest, "bytes": len(data), "uri": "github-release://example/repo/astra-media-v1/sha256-" + digest})
 
     def test_missing_asset_fails_closed(self):
         with patch.object(self.store, "_release", return_value={"assets": []}):
             with self.assertRaises(ValueError):
-                self.store.verify_bytes({"sha256": "a" * 64, "bytes": 5})
+                self.store.verify_bytes({"sha256": "a" * 64, "bytes": 5, "uri": "github-release://example/repo/astra-media-v1/sha256-" + "a" * 64})
+
+    def test_rejects_cross_repository_record_before_download(self):
+        digest = "a" * 64
+        with patch.object(self.store, "_release") as remote:
+            with self.assertRaisesRegex(ValueError, "origin_mismatch"):
+                self.store.verify_bytes({
+                    "sha256": digest, "bytes": 5,
+                    "uri": "github-release://other/repo/astra-media-v1/sha256-" + digest,
+                })
+            remote.assert_not_called()
 
     def test_invalid_tag_and_digest(self):
         with self.assertRaises(ValueError):
