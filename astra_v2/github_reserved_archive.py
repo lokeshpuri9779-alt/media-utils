@@ -8,8 +8,10 @@ from __future__ import annotations
 import hashlib
 from pathlib import Path
 
+from astra_v2.adaptive_artifact_store import ArtifactStore
+
 from astra_v2.adaptive_package_archive import PackageArchive, LIMITS
-from astra_v2.github_storage_ledger import reserve, settle, release
+from astra_v2.github_storage_ledger import reserve, settle
 
 
 class ReservedReleaseArchive:
@@ -29,7 +31,9 @@ class ReservedReleaseArchive:
         # Reserve a conservative upper bound including manifest and metadata.
         estimated = sum(p.stat().st_size for p in files) + 65536
         identity = "package-" + hashlib.sha256(
-            str(package.resolve()).encode("utf-8")).hexdigest()
+            "\\n".join(f"{p.name}:{p.stat().st_size}:{ArtifactStore.digest(p)}"
+                      for p in sorted(files, key=lambda item: item.name)).encode("utf-8")
+        ).hexdigest()
         self.ledger.transaction(lambda s: reserve(s, identity, estimated))
         try:
             manifest = self.archive.put(package, provenance=provenance)
