@@ -66,6 +66,56 @@ class GitHubReleaseStoreTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "page_limit"):
                 self.store._find({"id": 7}, "sha256-" + "a" * 64)
 
+    def test_upload_then_restore_verified_bytes(self):
+        data = b"astra preproduced media"
+        digest = hashlib.sha256(data).hexdigest()
+        name = "sha256-" + digest
+        release = {"id": 7, "upload_url": "https://uploads.github.com/test{?name}"}
+        remote = {}
+        uploads = []
+        def api(method, url, payload=None, **kwargs):
+            if "/assets?per_page=" in url:
+                return list(remote.values())
+            if method == "POST":
+                uploads.append(payload)
+                remote[name] = {"id": 42, "name": name, "size": len(payload)}
+                return remote[name]
+            if "/releases/assets/42" in url:
+                return uploads[0]
+            raise AssertionError((method, url))
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "video.mp4"
+            path.write_bytes(data)
+            with patch.object(self.store, "_release", return_value=release):
+                with patch.object(self.store, "_request", side_effect=api):
+                    record = self.store.put(path)
+                    self.assertEqual(self.store.verify_bytes(record), data)
+                    self.assertEqual(self.store.put(path), record)
+        self.assertEqual(uploads, [data])
+
+    def test_corrupt_uploaded_asset_never_receives_receipt(self):
+        data = b"astra media"
+        digest = hashlib.sha256(data).hexdigest()
+        name = "sha256-" + digest
+        asset = {"id": 42, "name": name, "size": len(data)}
+        release = {"id": 7, "upload_url": "https://uploads.github.com/test{?name}"}
+        def api(method, url, payload=None, **kwargs):
+            if "/assets?per_page=" in url:
+                return [] if not hasattr(api, "uploaded") else [asset]
+            if method == "POST":
+                api.uploaded = True
+                return asset
+            if "/releases/assets/42" in url:
+                return b"corruption"
+            raise AssertionError((method, url))
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "video.mp4"
+            path.write_bytes(data)
+            with patch.object(self.store, "_release", return_value=release):
+                with patch.object(self.store, "_request", side_effect=api):
+                    with self.assertRaisesRegex(ValueError, "corrupted"):
+                        self.store.put(path)
+
     def test_invalid_tag_and_digest(self):
         with self.assertRaises(ValueError):
             GitHubReleaseStore("example/repo", token="x", tag="general")
