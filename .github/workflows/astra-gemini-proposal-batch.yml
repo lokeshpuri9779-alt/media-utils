@@ -1,0 +1,32 @@
+name: ASTRA Gemini Proposal Batch
+on:
+  workflow_dispatch:
+    inputs:
+      count:
+        description: Story proposals to request (1-50)
+        required: true
+        default: '10'
+permissions:
+  contents: read
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Generate proposals
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ASTRA_GEMINI_ENABLED: '1'
+          BATCH_COUNT: ${{ inputs.count }}
+        run: python -m astra_v2.gemini_batch --count "$BATCH_COUNT"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gemini-unreviewed-proposals
+          path: runtime-health/gemini-proposals.json
+          if-no-files-found: ignore
+          retention-days: 7
