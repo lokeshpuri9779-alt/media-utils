@@ -23,7 +23,19 @@ def take(output, *, warehouse=None, archive=None):
         return None
     # Do not consume a claim without independently verified editorial and QA
     # evidence. Until the trusted verifier is integrated, fail closed.
-    raise RuntimeError("warehouse_authoritative_evidence_verifier_missing")
+    # Verify the immutable story and its reviewer decision against the same
+    # complete history and production gate used by editorial intake.
+    from astra_v2.editorial_runway_diagnostic import editorial_runway
+    runway = editorial_runway(
+        os.getenv("ASTRA_EDITORIAL_STORIES_FILE", "editorial/reviewed_stories.json"),
+        os.getenv("ASTRA_EDITORIAL_REVIEWS_FILE", "editorial/reviewed_decisions.json"),
+        os.getenv("ASTRA_PUBLISHER_STATE_PATH", "astra_v2_state.json"),
+        os.getenv("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json"))
+    if claim["content_id"] not in runway["eligible_ids"]:
+        raise ValueError("warehouse_story_not_editorially_approved")
+    # The independent QA digest must be verified against its authoritative
+    # signed record before enabling warehouse uploads.
+    raise RuntimeError("warehouse_authoritative_qa_verifier_missing")
     output = Path(output)
     if output.exists():
         raise ValueError("warehouse_output_already_exists")
