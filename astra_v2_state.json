@@ -3,7 +3,7 @@
   "day": "2026-10-21",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 6,
-  "confirmed_today": 5,
+  "confirmed_today": 6,
   "last_attempt_at": "2026-10-21T13:14:53.173458+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -2315,42 +2315,24 @@
       "format": "short",
       "uploaded_at": "2026-10-21T12:50:16.398552+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "2-Q6of-_adI": {
-      "content_id": "rayvan-gemini-fcba97fd95d580d65ae8",
+    },
+    "rayvan-gemini-fcba97fd95d580d65ae8": {
+      "video_id": "2-Q6of-_adI",
+      "confirmed_at": "2026-10-21T13:22:24.465683+00:00",
       "title": "The Archivist of the Obsidian Nebula",
-      "day": "2026-10-21",
-      "uploaded_at": "2026-10-21T13:14:54.726544+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "f550813bd31f0c8077fcee57ba82d2594adc4e681dc02fc1721ec9fca8867de6",
-      "story_beats": [
-        {
-          "speech": "The pulsar emits a rhythm that correlates perfectly with the firing neurons in my own tired, synthetic brain, Commander."
-        },
-        {
-          "speech": "We must anchor these fluctuating gravity wells before the entire sector dissolves into a soup of unformed, chaotic quantum energy."
-        },
-        {
-          "speech": "Look at the stars shifting from burning gas into ink-drawn lines; the fabric of this dimension is fraying quite rapidly."
-        },
-        {
-          "speech": "We are merely ink and thought, characters trapped within a book that a much larger entity is currently closing forever."
-        }
-      ],
+      "uploaded_at": "2026-10-21T13:14:54.726544+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-10-21T13:13:01.481542+00:00",
+  "last_preflight_at": "2026-10-21T13:22:24.046985+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-21T13:14:55.166300+00:00",
+    "at": "2026-10-21T13:23:11.768167+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -6017,10 +5999,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-21T13:14:55.166223+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-21T13:23:11.768104+00:00",
+    "publication_outcome": "quality_skip",
+    "publication_reason": "no_approved_original_story_available",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -6028,30 +6010,41 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-21T13:14:55.166286+00:00",
+    "at": "2026-10-21T13:23:11.768156+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-21T13:13:33.173036+00:00",
-    "outcome": "processing",
-    "reason": "",
-    "content_id": "rayvan-gemini-fcba97fd95d580d65ae8",
-    "video_url": "https://www.youtube.com/watch?v=2-Q6of-_adI",
-    "story_selection": {}
+    "at": "2026-10-21T13:22:54.218585+00:00",
+    "outcome": "quality_skip",
+    "reason": "no_approved_original_story_available",
+    "content_id": "",
+    "video_url": "",
+    "story_selection": {
+      "considered": 67,
+      "not_ready": 64,
+      "policy_rejected": {
+        "not_production_ready": 3
+      },
+      "already_seen": 0,
+      "duration_rejected": 0,
+      "render_qa_rejected": 0,
+      "render_exception": {},
+      "approved": 0
+    }
   },
   "last_workflow_result": {
-    "at": "2026-10-21T13:14:55.166024+00:00",
+    "at": "2026-10-21T13:23:11.767923+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": ""
+    "outcome": "quality_skip",
+    "reason": "no_approved_original_story_available"
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-21T13:14:55.166217+00:00",
+    "at": "2026-10-21T13:23:11.768098+00:00",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
         "eligible": 0,
@@ -6063,26 +6056,28 @@
         "total": 156
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 157,
+        "before": 156,
         "fingerprint": 0,
         "id": 89,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 68,
+        "remaining": 67,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 68,
-        "remaining": 1
+        "pool": 67,
+        "remaining": 0
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
-        "approved": 1,
-        "considered": 1,
+        "approved": 0,
+        "considered": 67,
         "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
+        "not_ready": 64,
+        "policy_rejected": {
+          "not_production_ready": 3
+        },
         "render_exception": {},
         "render_qa_rejected": 0
       }
