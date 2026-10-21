@@ -2350,12 +2350,13 @@
     }
   },
   "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-21T15:13:01.632116+00:00",
+  "last_outcome": "skipped",
+  "last_error": "",
+  "last_preflight_at": "2026-10-21T15:16:01.126306+00:00",
   "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "last_preflight_outcome": "skipped",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-21T15:13:02.247699+00:00",
+    "at": "2026-10-21T15:16:01.200094+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "false",
@@ -6091,8 +6092,8 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-21T15:13:02.247619+00:00",
-    "publication_outcome": "published",
+    "at": "2026-10-21T15:16:01.200035+00:00",
+    "publication_outcome": "skipped",
     "publication_reason": "min_interval",
     "character_memory": "not_reported",
     "character_memory_error": null,
@@ -6102,9 +6103,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-21T15:13:02.247685+00:00",
+    "at": "2026-10-21T15:16:01.200083+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "skipped",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -6116,16 +6117,16 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-21T15:13:02.247548+00:00",
+    "at": "2026-10-21T15:16:01.199979+00:00",
     "preflight_due": "false",
     "preflight_step": "success",
     "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "published",
+    "outcome": "skipped",
     "reason": "min_interval"
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-21T15:13:02.247614+00:00",
+    "at": "2026-10-21T15:16:01.200032+00:00",
     "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
