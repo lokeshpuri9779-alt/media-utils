@@ -22,6 +22,8 @@ def take(output, *, warehouse=None, archive=None):
         os.getenv("ASTRA_EDITORIAL_REVIEWS_FILE", "editorial/reviewed_decisions.json"),
         os.getenv("ASTRA_PUBLISHER_STATE_PATH", "astra_v2_state.json"),
         os.getenv("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json"))
+    # Recheck the reviewed manifest against each queued claim once selected.
+    # This must happen before restore and does not replace audiovisual QA.
     # The remote queue contains digest references, not independently trusted
     # QA verdicts. Do not acquire a lease until a verifier binds a verdict
     # to the exact archived video and approved story.
@@ -34,8 +36,12 @@ def take(output, *, warehouse=None, archive=None):
         return None
     # Do not consume a claim without independently verified editorial and QA
     # evidence. Until the trusted verifier is integrated, fail closed.
-    if claim["content_id"] not in runway["eligible_ids"]:
-        raise ValueError("warehouse_story_not_editorially_approved")
+    from astra_v2.warehouse_editorial_evidence import verify_editorial_claim
+    verify_editorial_claim(
+        claim,
+        os.getenv("ASTRA_EDITORIAL_STORIES_FILE", "editorial/reviewed_stories.json"),
+        os.getenv("ASTRA_EDITORIAL_REVIEWS_FILE", "editorial/reviewed_decisions.json"),
+        eligible_ids=runway["eligible_ids"])
     output = Path(output)
     if output.exists():
         raise ValueError("warehouse_output_already_exists")
