@@ -1,0 +1,54 @@
+name: ASTRA Artwork Production Preview
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'astra/background_factory.py'
+      - 'astra/asset_inventory.py'
+      - 'tests/test_background_factory.py'
+      - '.github/workflows/astra-artwork-preview.yml'
+  push:
+    paths:
+      - 'astra/background_factory.py'
+      - 'astra/asset_inventory.py'
+      - 'tests/test_background_factory.py'
+      - '.github/workflows/astra-artwork-preview.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  render-artwork:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install image dependency
+        run: python -m pip install 'Pillow>=10,<12'
+      - name: Test background generator and asset inventory
+        run: python -m unittest discover -s tests -p 'test_background_factory.py' -v
+      - name: Render all starter backgrounds
+        run: python -m astra.background_factory --output "$RUNNER_TEMP/astra-preview"
+      - name: Validate inventory and verify output count
+        run: |
+          python -m astra.asset_inventory --manifest "$RUNNER_TEMP/astra-preview/art/manifest.json" --strict
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          root = Path(os.environ["RUNNER_TEMP"]) / "astra-preview" / "art"
+          manifest = json.loads((root / "manifest.json").read_text())
+          assert len(manifest["assets"]) == 12
+          assert len(list(root.glob("*.png"))) == 12
+          assert all(row["status"] == "pending_review" for row in manifest["assets"])
+          PY
+      - name: Upload artwork for human visual review
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-starter-backgrounds
+          path: ${{ runner.temp }}/astra-preview/art/
+          if-no-files-found: error
+          retention-days: 14
