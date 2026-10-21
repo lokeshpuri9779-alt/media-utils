@@ -39,6 +39,27 @@ class ReservedReleaseArchiveTests(unittest.TestCase):
         self.assertEqual(calls, ["ledger"])
 
 
+    def test_duplicate_active_reservation_fails_before_upload(self):
+        from astra_v2.github_storage_ledger import SCHEMA
+        state = {"schema": SCHEMA, "capacity_bytes": 1000000,
+                 "used_bytes": 0, "reservations": {}}
+        ledger = Mock()
+        def transaction(transform):
+            nonlocal state
+            state = transform(state)
+        ledger.transaction.side_effect = transaction
+        bridge = ReservedReleaseArchive(Mock(), ledger)
+        def fail_upload(*args, **kwargs):
+            raise RuntimeError("interrupted_upload")
+        bridge.archive.put = Mock(side_effect=fail_upload)
+        with tempfile.TemporaryDirectory() as folder:
+            Path(folder, "video.mp4").write_bytes(b"video")
+            with self.assertRaisesRegex(RuntimeError, "interrupted_upload"):
+                bridge.put(folder)
+            with self.assertRaisesRegex(RuntimeError, "reservation_already_active"):
+                bridge.put(folder)
+        bridge.archive.put.assert_called_once()
+
     def test_same_content_same_reservation_across_paths(self):
         from astra_v2.github_storage_ledger import SCHEMA
         identities = []

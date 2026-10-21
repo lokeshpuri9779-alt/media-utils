@@ -34,7 +34,14 @@ class ReservedReleaseArchive:
             "\\n".join(f"{p.name}:{p.stat().st_size}:{ArtifactStore.digest(p)}"
                       for p in sorted(files, key=lambda item: item.name)).encode("utf-8")
         ).hexdigest()
-        self.ledger.transaction(lambda s: reserve(s, identity, estimated))
+        def reserve_exclusively(state):
+            # Reusing an outstanding reservation would allow two workers to
+            # upload and settle the same identity independently.
+            if identity in state.get("reservations", {}):
+                raise RuntimeError("package_reservation_already_active")
+            return reserve(state, identity, estimated)
+
+        self.ledger.transaction(reserve_exclusively)
         try:
             manifest = self.archive.put(package, provenance=provenance)
             # A ledger reservation remains held if settling fails; this is
