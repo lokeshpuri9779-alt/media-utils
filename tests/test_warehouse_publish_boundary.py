@@ -23,6 +23,21 @@ class FakeWarehouse:
 
 
 class WarehouseBoundaryTests(unittest.TestCase):
+    def test_transfer_acceptance_is_followed_by_lease_renewal(self):
+        # The second fenced renewal must precede status verification. If it
+        # fails, the persisted accepted-upload evidence prevents blind retry.
+        from pathlib import Path
+        source = (Path(__file__).resolve().parents[1] / "astra_v2" / "run.py").read_text()
+        upload = source.index("video_id = youtube.upload(")
+        accepted = source.index('state["reserved"][cid]["result"] = "accepted"', upload)
+        pending_saved = source.index("write_json(STATE_FILE, state)", accepted)
+        renewal = source.index('renew_before_upload(candidate["warehouse_claim"])', pending_saved)
+        status = source.index("result = youtube.status(video_id)", renewal)
+        self.assertLess(upload, accepted)
+        self.assertLess(accepted, pending_saved)
+        self.assertLess(pending_saved, renewal)
+        self.assertLess(renewal, status)
+
     def test_preupload_renewal_requires_live_fenced_lease(self):
         class Warehouse:
             def __init__(self):

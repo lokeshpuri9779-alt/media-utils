@@ -312,6 +312,12 @@ def run():
                     "renderer": candidate.get("renderer") or "unknown",
                 }
                 write_json(STATE_FILE, state)
+                # Transfer may have taken most of the lease. Extend ownership
+                # before checking YouTube status and recording publication.
+                # If renewal fails, retain accepted upload evidence and stop:
+                # an uncertain transfer must never be retried automatically.
+                if candidate.get("warehouse_claim"):
+                    renew_before_upload(candidate["warehouse_claim"])
                 result = youtube.status(video_id)
                 if (candidate.get("warehouse_claim") and result.get("privacyStatus") == "public"
                         and result.get("uploadStatus") == "processed"):
