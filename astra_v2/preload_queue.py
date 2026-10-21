@@ -81,6 +81,25 @@ def artifacts():
     return matched
 
 
+
+def inventory_snapshot(max_age_hours=None, now=None):
+    """Metadata-only inventory; not proof of package or editorial validity."""
+    if max_age_hours is None:
+        max_age_hours = max(0, int(os.getenv("ASTRA_PRELOAD_MAX_AGE_HOURS", "48")))
+    entries = artifacts()
+    fresh = [entry for entry in entries if _artifact_fresh(entry, max_age_hours, now)]
+    ids = {str(entry["name"])[len(PREFIX):] for entry in fresh}
+    return {
+        "discovered_artifacts": len(entries),
+        "fresh_artifacts": len(fresh),
+        "unique_fresh_content_ids": len(ids),
+        "stale_artifacts": len(entries) - len(fresh),
+        "target_buffer": max(0, int(os.getenv("ASTRA_PRELOAD_BUFFER", "24"))),
+        "freshness_hours": max_age_hours,
+        "verification": "metadata_only_not_publishable_count",
+    }
+
+
 def candidate_ids():
     return {str(a["name"])[len(PREFIX):] for a in artifacts()}
 
