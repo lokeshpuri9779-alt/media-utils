@@ -50,26 +50,43 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
     body = json.dumps({"contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {"responseMimeType": "application/json",
                              "temperature": 0.9, "maxOutputTokens": 1500}}).encode()
-    req = urllib.request.Request(
-        "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent",
-        data=body, method="POST", headers={
-            "x-goog-api-key": os.environ["GEMINI_API_KEY"],
-            "Content-Type": "application/json"})
-    for attempt in range(3):
-        try:
-            with urllib.request.urlopen(req, timeout=45) as response:
-                result = json.load(response)
+    # A second free-tier model is tried only after transient provider failures.
+    # Never switch on authentication, quota, invalid-model, or content errors.
+    fallback = os.getenv("ASTRA_GEMINI_FALLBACK_MODEL", "gemini-2.5-flash-lite")
+    if not re.fullmatch(r"[A-Za-z0-9._-]{1,80}", fallback):
+        raise ValueError("Invalid Gemini fallback model")
+    models = [model] + ([fallback] if fallback != model else [])
+    for model_index, active_model in enumerate(models):
+        req = urllib.request.Request(
+            "https://generativelanguage.googleapis.com/v1beta/models/" + active_model + ":generateContent",
+            data=body, method="POST", headers={
+                "x-goog-api-key": os.environ["GEMINI_API_KEY"],
+                "Content-Type": "application/json"})
+        for attempt in range(3):
+            try:
+                with urllib.request.urlopen(req, timeout=45) as response:
+                    result = json.load(response)
+                break
+            except urllib.error.HTTPError as exc:
+                if exc.code in (500, 502, 503, 504):
+                    if attempt < 2:
+                        time.sleep(2 ** attempt)
+                        continue
+                    if model_index + 1 < len(models):
+                        break
+                raise RuntimeError("Gemini HTTP " + str(exc.code)) from exc
+            except (urllib.error.URLError, TimeoutError) as exc:
+                if attempt < 2:
+                    time.sleep(2 ** attempt)
+                    continue
+                if model_index + 1 < len(models):
+                    break
+                raise RuntimeError("Gemini transport failed: " + type(exc).__name__) from exc
+        else:
+            continue
+        # A completed response ends failover; only exhausted transient errors continue.
+        if "result" in locals():
             break
-        except urllib.error.HTTPError as exc:
-            if exc.code in (500, 502, 503, 504) and attempt < 2:
-                time.sleep(2 ** attempt)
-                continue
-            raise RuntimeError("Gemini HTTP " + str(exc.code)) from exc
-        except (urllib.error.URLError, TimeoutError) as exc:
-            if attempt < 2:
-                time.sleep(2 ** attempt)
-                continue
-            raise RuntimeError("Gemini transport failed: " + type(exc).__name__) from exc
     candidates = result.get("candidates") or []
     if not candidates:
         raise ValueError("Gemini returned no candidates")
