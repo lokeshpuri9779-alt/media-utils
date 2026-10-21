@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/astra-gemini-proposal-batch.yml'
+      - 'astra_v2/gemini_batch.py'
   schedule:
     - cron: '17 2 * * *'
   workflow_dispatch:
