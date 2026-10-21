@@ -8,8 +8,12 @@ import urllib.request
 from astra_v2.openai_creative import VISUALS, ROLES
 
 PROMPT = (
-    "Write one genuinely original, coherent, family-safe science-fiction short "
-    "with four cinematic story beats and an unexpected ending. Return only JSON "
+    "Write one genuinely original, coherent, family-safe short story. Vary "
+    "protagonists, settings, motivations, conflict types, emotional stakes and "
+    "endings across generations; avoid defaulting to cosmic archives, simulations "
+    "or corrupted-code revelations. Ground each story in a concrete choice and "
+    "its consequence. Use four cinematic story beats and a meaningful ending. "
+    "Return only JSON "
     "keys title, question, answer, beats. Each beat needs headline, speech, visual, "
     "label, story_beat. Speech 12-24 words per beat; at least three distinct visuals. Visual one of planet, robot, signal, "
     "ship, forest, door; story_beat one of reveal, build, mechanism, twist, payoff. "
