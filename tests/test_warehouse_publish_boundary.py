@@ -43,6 +43,18 @@ class WarehouseBoundaryTests(unittest.TestCase):
         self.assertEqual(len(warehouse.confirmations), 1)
         self.assertEqual(len(warehouse.confirmations[0][1]["confirmation_digest"]), 64)
 
+    def test_invalid_editorial_manifest_never_claims(self):
+        warehouse = FakeWarehouse()
+        class ForbiddenArchive:
+            def restore(self, *_):
+                raise AssertionError("invalid editorial package restored")
+        with patch("astra_v2.editorial_runway_diagnostic.editorial_runway",
+                   side_effect=ValueError("editorial_manifest_invalid")):
+            with self.assertRaisesRegex(ValueError, "editorial_manifest_invalid"):
+                take("/tmp/astra-warehouse-invalid-editorial.mp4",
+                     warehouse=warehouse, archive=ForbiddenArchive())
+        self.assertEqual(warehouse.claim_count, 0)
+
     def test_missing_qa_verifier_never_claims_or_restores(self):
         warehouse = FakeWarehouse()
         class ForbiddenArchive:
