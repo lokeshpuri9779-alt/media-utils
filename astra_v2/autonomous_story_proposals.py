@@ -331,11 +331,17 @@ def proposal(index):
     # deterministic combination space without claiming every draft is unique.
     # Use compact, searchable story titles rather than generic inventory labels.
     title = f"The {visual.capitalize()} Mystery of the {setting.split()[-1].capitalize()}"
+    # Keep one causal premise per candidate. Independent plot/arc templates previously
+    # introduced unrelated incidents (e.g. a bell mystery plus a science fair).
+    # The selected mystery, physical clue, test and repair now drive all four beats.
+    # The chosen plot engine and architecture remain complete causal sequences,
+    # rather than disconnected individual sentences. Preserve their full
+    # problem/action/reveal/outcome progression to maintain novelty.
     beats = (
-        ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}, {stakes}. {plot_problem}. {arc_setup}. The neighbors needed a trustworthy explanation before taking action.", visual),
-        ("build", f"Instead of guessing, {actor} compared {clue} with {discovery}; {emotional}. {causal_opening}. {actor} {causal_test} and {plot_action}. {arc_decision}; {method}, but {obstacle}. The evidence gave the team a testable explanation rather than another suspicion.", "book"),
-        ("twist", f"{causal_reveal}: {reversal}. {plot_reveal}. {arc_turn}. This explained the original mystery rather than introducing a new one. The team compared this explanation with the original evidence. {actor} checked the clue again and found that it fit the evidence gathered at the start.", clue if clue in VISUALS else "signal"),
-        ("payoff", f"With the cause understood, {actor} {resolution}. The community saw how the evidence led to the solution {consequence}. {causal_aftermath}. Together they {plot_outcome}. {arc_aftermath}.", _pick(index, VISUALS, 3)),
+        ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}, {stakes}. {plot_problem}. {arc_setup}.", visual),
+        ("build", f"{actor.capitalize()} compared {clue} with {discovery}. {causal_opening}. {causal_test}. {plot_action}. {arc_decision}. {method}, but {obstacle}.", "book"),
+        ("twist", f"{causal_reveal}. {plot_reveal}. {arc_turn}. This explained the original mystery. The team checked the evidence again.", setting_visual),
+        ("payoff", f"With the cause understood, {actor} {resolution}. {causal_aftermath}. {plot_outcome}. {arc_aftermath}. {consequence}.", _pick(index, VISUALS, 3)),
     )
     # Reserve distinct, story-relevant visual keys across the four beats.
     # This fixes avoidable visual repetition without changing narration or
