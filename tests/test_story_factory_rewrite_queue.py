@@ -13,10 +13,14 @@ def packet():
 
 class RewriteQueueTests(unittest.TestCase):
     def test_rewrite_is_not_approved_or_production_ready(self):
-        result = rewrite_packet(packet(), generator=lambda *a, **k: {"title": "New story", "production_ready": True})
+        result = rewrite_packet(packet(), generator=lambda *a, **k: {"content_id": "new-1", "title": "New story", "production_ready": True})
         self.assertEqual(result["approved_count"], 0)
         self.assertFalse(result["rewrites"][0]["story"]["production_ready"])
         self.assertFalse(result["rewrites"][0]["approved"])
+
+    def test_missing_identity_is_rejected(self):
+        result = rewrite_packet(packet(), generator=lambda *a, **k: {"title": "Missing ID"})
+        self.assertEqual(result["rewrites"][0]["status"], "rewrite_failed")
 
     def test_repeated_plot_does_not_enter_rewrite_queue(self):
         p = packet()
