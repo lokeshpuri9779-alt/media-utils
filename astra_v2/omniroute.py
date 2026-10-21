@@ -11,7 +11,7 @@ PROMPT = (
     "Write one genuinely original, coherent, family-safe science-fiction short "
     "with four cinematic story beats and an unexpected ending. Return only JSON "
     "keys title, question, answer, beats. Each beat needs headline, speech, visual, "
-    "label, story_beat. Speech 10-24 words; visual one of planet, robot, signal, "
+    "label, story_beat. Speech 12-24 words per beat; at least three distinct visuals. Visual one of planet, robot, signal, "
     "ship, forest, door; story_beat one of reveal, build, mechanism, twist, payoff. "
     "Beat one reveal, beat four payoff, middle beats build/mechanism/twist. "
     "Title 8-75 chars. Avoid copyrighted characters and prior titles: "
@@ -72,7 +72,8 @@ def _validate(data, provider, excluded_ids, excluded_titles, prior_stories):
             or title.casefold().strip() in excluded_titles
             or not isinstance(beats, list) or len(beats) != 4):
         raise ValueError(provider + " story title or beat count invalid")
-    validate_beat_quality(beats, provider)\n    for i, beat in enumerate(beats):
+    validate_beat_quality(beats, provider)
+    for i, beat in enumerate(beats):
         if not isinstance(beat, dict):
             raise ValueError(provider + " invalid beat")
         for key in ("headline", "speech", "label"):
