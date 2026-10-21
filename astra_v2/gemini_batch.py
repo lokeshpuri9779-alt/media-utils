@@ -5,14 +5,16 @@ from pathlib import Path
 from astra_v2.omniroute_gemini import generate
 
 
-def generate_batch(count, generator=generate):
+def generate_batch(count, generator=generate, history=()):
     if not 1 <= count <= 50:
         raise ValueError("count must be 1..50")
     stories, failures = [], []
-    ids, titles = set(), set()
+    history = tuple(history)
+    ids = {str(item.get('content_id')) for item in history if isinstance(item, dict) and item.get('content_id')}
+    titles = {str(item.get('title')).casefold().strip() for item in history if isinstance(item, dict) and item.get('title')}
     for i in range(count):
         try:
-            story = generator(ids, titles, tuple(stories))
+            story = generator(ids, titles, history + tuple(stories))
             if story is None:
                 failures.append({"index": i, "reason": "unavailable"})
                 break
@@ -35,7 +37,12 @@ def main():
     parser.add_argument("--count", type=int, default=10)
     parser.add_argument("--output", default="runtime-health/gemini-proposals.json")
     args = parser.parse_args()
-    result = generate_batch(args.count)
+    from astra_v2.proposal_history import load_history
+    publisher = Path('astra_v2_state.json')
+    story_history = Path('astra_story_history.json')
+    if not publisher.is_file() or not story_history.is_file():
+        raise SystemExit('Gemini batch requires complete publication history')
+    result = generate_batch(args.count, history=load_history(publisher, story_history))
     path = Path(args.output)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n")
