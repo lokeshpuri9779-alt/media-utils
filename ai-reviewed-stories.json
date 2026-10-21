@@ -4,11 +4,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-b601e424669653e69254",
-      "title": "The Midnight Express Mystery and the Pigeon",
-      "hook": "The Missing Luggage Crisis",
-      "question": "How did a solitary bird solve the missing luggage incident at terminal four?",
-      "answer": "Through clever navigation across the high rafters, a feathered bystander dropped the stolen ticket directly into the open ledger.",
+      "content_id": "rayvan-gemini-1b75787dc6d77c1e9781",
+      "title": "The Navigator Who Chased the Ring",
+      "hook": "The Silent Fracture",
+      "question": "How do you repair a fractured hull when your crew disagrees on survival?",
+      "answer": "Through risky mechanical compromise that saves the ship by venting its most precious cargo.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -16,107 +16,72 @@
       ],
       "story_beats": [
         {
-          "headline": "The Missing Luggage Crisis",
-          "speech": "Inspector Vance searched the platform frantically while the midnight train hissed, realizing the prized silver valise had vanished completely into thin air.",
-          "visual": "signal",
-          "label": "Incident Start",
-          "story_beat": "reveal",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "A Feathery Intruder",
-          "speech": "An unusually focused street pigeon landed near the switchboard, tapping its beak impatiently against the brass telegraph key to signal an emergency.",
-          "visual": "robot",
-          "label": "Unexpected Clue",
-          "story_beat": "build",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Following the Flight",
-          "speech": "Vance tracked the bird upward into the iron girders, discovering a cleverly concealed nest crammed with stolen train tickets and missing keys.",
-          "visual": "door",
-          "label": "Secret Discovery",
-          "story_beat": "mechanism",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Restoring Order",
-          "speech": "Dropping the valise tag right onto the desk, the clever pigeon earned an official badge of honor before the express departed safely.",
-          "visual": "signal",
-          "label": "Case Closed",
-          "story_beat": "payoff",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "plot_fingerprint": "8ec02e7203dee271bd6032256a3eea28bedc8721a65ecd2e84c55badb112b459"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
-      "content_id": "rayvan-gemini-c8bcd324b405ad33c361",
-      "title": "The Rescuer of the Crimson Cliff",
-      "hook": "The Silent Signal",
-      "question": "Can Liam reach the trapped hiker before the blizzard buries the ledge entirely?",
-      "answer": "Yes, by trusting his training and navigating the whiteout using the emergency beacon's faint hum.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Silent Signal",
-          "speech": "A single electronic pulse flickered from deep within the frozen canyon, piercing the howling mountain wind.",
-          "visual": "signal",
-          "label": "Emergency Beacon",
-          "story_beat": "reveal",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Ascending the Ridge",
-          "speech": "Liam gripped his ice axes tightly, pulling himself up the sheer vertical wall as snow dusted his visor.",
-          "visual": "forest",
-          "label": "The Climb",
-          "story_beat": "build",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Securing the Line",
-          "speech": "He drove the titanium anchor deep into the frozen earth, anchoring the safety rope against the gale.",
-          "visual": "door",
-          "label": "The Anchor",
-          "story_beat": "mechanism",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Safe at Last",
-          "speech": "Pulling the shivering hiker into the warmth of the rescue tent, Liam smiled as the radio crackled.",
+          "headline": "The Silent Fracture",
+          "speech": "We cannot vent the atmospheric scrubbers, Jax! The ring's pressure will crush the starboard bulkhead instantly.",
           "visual": "ship",
-          "label": "The Rescue",
+          "label": "Hull Stress",
+          "story_beat": "reveal",
+          "visual_prompt": "Mira stands inside the dimly lit engineering_bay, pointing anxiously at a sparking copper conduit while holding a torque_wrench. Jax stands opposite her in the docking_ring, arms crossed defensively, glaring through the open hatch at the swirling violet gas giant visible in the background.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Heated Debate",
+          "speech": "If we do not lighten the load right now, the entire crew perishes in the gas giant's gravity well.",
+          "visual": "door",
+          "label": "Crew Rift",
+          "story_beat": "build",
+          "visual_prompt": "Jax steps closer to the bulkhead door in the docking_ring, his face tense with frustration. Mira grips her torque_wrench tightly, her grease-stained orange jumpsuit catching the harsh amber light of the emergency klaxon overhead.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Magnetic Override",
+          "speech": "Hold the manual seal steady while I reroute the primary power core through the auxiliary terminal.",
+          "visual": "robot",
+          "label": "Power Bypass",
+          "story_beat": "mechanism",
+          "visual_prompt": "Mira kneels beside a smoking floor panel in the engineering_bay, her hands working furiously on exposed wires. Jax reluctantly crouches beside her, holding a sealed_canister against the magnetic latch to stabilize the shifting pressure.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Costly Release",
+          "speech": "We survived the descent, but our air supply is gone. We made our choice, and now we drift.",
+          "visual": "planet",
+          "label": "Stable Orbit",
           "story_beat": "payoff",
+          "visual_prompt": "Mira and Jax stand side by side in the quiet engineering_bay, looking out the reinforced viewport at a serene, bright blue planet. The heavy sealed_canister is missing from its rack, and the room is bathed in calm, natural sunlight.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "plot_fingerprint": "a332a08d9c4ebbc9584e0378846a069ff9a62d47b443bd261590d582401a130c"
+      "visual_bible": {
+        "style": "Cinematic sci-fi with crisp lighting, deep space blues, weathered industrial textures, and high contrast.",
+        "characters": {
+          "mira": "A stocky human engineer with a scarred left cheek, wearing a grease-stained orange jumpsuit, short dark hair, and determined hazel eyes.",
+          "jax": "A tall, slender navigator with angular facial features, wearing a sleek silver tunic, pale complexion, and nervous amber eyes."
+        },
+        "locations": {
+          "engineering_bay": "A cramped, hexagonal chamber filled with exposed wiring, glowing copper conduits, and heavy steel bulkheads scarred by micro-meteors.",
+          "docking_ring": "An outer circular corridor with a panoramic viewport showing the swirling violet rings of a gas giant."
+        },
+        "objects": {
+          "torque_wrench": "A heavy, matte-black pneumatic wrench with a glowing blue digital readout on its handle.",
+          "sealed_canister": "A polished titanium cylinder holding emergency atmospheric scrubbers, marked with bold yellow warning stripes."
+        }
+      },
+      "plot_fingerprint": "22b6174060ab05ae0efcacb3d54e396e3d44e8121e7caa52f8cecaae1d19f4f6"
     },
     {
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-15a26f206485cb2a8e04",
-      "title": "The Nomad Who Found Rain Beneath the Dunes",
-      "hook": "Crossing the Endless Red Sea",
-      "question": "What secret did the scorching expanse of the red sands hold beneath its cracked crust?",
-      "answer": "A hidden cavern cradling a thriving subterranean freshwater sea and glowing flora.",
+      "content_id": "rayvan-gemini-9335a643ac6cb373820d",
+      "title": "The Cartographer and the Sunken Reef",
+      "hook": "Mapping the Blistering Expanse",
+      "question": "What secret did the scorching salt flats hide beneath the crust?",
+      "answer": "An ancient subterranean coral reef teeming with bioluminescent life, preserved under a dried-up inland sea.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -124,53 +89,73 @@
       ],
       "story_beats": [
         {
-          "headline": "Crossing the Endless Red Sea",
-          "speech": "My tired camels refused to move another step across this blistering wasteland, sensing something impossible beneath our cracked boots.",
+          "headline": "Mapping the Blistering Expanse",
+          "speech": "Keep your eyes on the horizon, Kip. According to these old logs, a deep water channel once cut right through this dust.",
           "visual": "planet",
-          "label": "The Burning Boundary",
+          "label": "The Arid Basin",
           "story_beat": "reveal",
+          "visual_prompt": "Wide shot of the blinding white salt_flats stretching under a blazing sun. Sari stands shielding her eyes, holding the mapping_sextant, while Kip checks the sounding_rod planted in the cracked ground.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Mapping the Heat Fissures",
-          "speech": "I drove my iron stake deep into the roaring earth, listening closely to the hollow, bubbling echoes beneath the scorching rock.",
+          "headline": "The Hollow Echo",
+          "speech": "Listen to that sound. It is not solid bedrock underneath our boots. It rings like an empty cellar.",
           "visual": "signal",
-          "label": "Resonant Strata",
+          "label": "Beneath the Crust",
           "story_beat": "build",
+          "visual_prompt": "Medium close-up of Kip kneeling on the salt crust, striking the ground with the sounding_rod while holding the sample_satchel. Sari leans over him intently, her face lit by the harsh glare of the salt flats.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Breaching the Sealed Vault",
-          "speech": "With a heavy heave of my iron lever, the sandstone shelf groaned and collapsed, releasing a rush of cool, fragrant mist.",
+          "headline": "Breaking the Surface",
+          "speech": "Step back quickly! The crust is giving way, and a cool breeze is rushing up from the dark below.",
           "visual": "door",
           "label": "The Hidden Threshold",
           "story_beat": "mechanism",
+          "visual_prompt": "Action shot as a circular section of salt crust collapses into a dark void. Sari grabs Kip's collar to pull him back safely. Wisps of cool damp air swirl upward from the newly opened abyss.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "An Oasis in the Abyss",
-          "speech": "Staring down into the cavern, tears washed the dust from my cheeks as I beheld a vast underground sea glowing softly.",
-          "visual": "forest",
-          "label": "The Subterranean Tides",
+          "headline": "The Bioluminescent Sea",
+          "speech": "We found no water, but look at this miracle. A living reef thriving beneath the silent desert.",
+          "visual": "ship",
+          "label": "The Subterranean Reef",
           "story_beat": "payoff",
+          "visual_prompt": "Breathtaking wide view inside the cavern_depths. Sari and Kip stand at the edge of a subterranean cliff, looking down in awe at vast gardens of glowing turquoise and emerald coral structures illuminating the underground cavern.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "plot_fingerprint": "03fd9f0a7f28ffda39e13042aad108e47da37516827c6a77ae2000a3d40c8075"
+      "visual_bible": {
+        "style": "Cinematic 3D animation, rich textures, warm amber and cool teal lighting contrasts, detailed arid environments.",
+        "characters": {
+          "Sari": "A young female cartographer with a sun-weathered face, determined amber eyes, wearing a dusty tan canvas utility coat, wide-brimmed sun hat, and carrying a brass mapping sextant.",
+          "Kip": "Sari's younger brother and assistant, round-faced, perpetually curious, wearing a slate-gray linen tunic, protective goggles pushed up on his forehead, and carrying a leather sample satchel."
+        },
+        "locations": {
+          "salt_flats": "Vast, blinding white expanse of cracked salt stretching to distant hazy purple mountains under a glaring white sun.",
+          "cavern_depths": "A massive subterranean chamber lit by glowing turquoise and emerald coral structures, cool moist air smelling of ancient sea salt."
+        },
+        "objects": {
+          "mapping_sextant": "An intricate brass instrument with folding sighting arms and scratched glass lenses, held firmly by Sari.",
+          "sample_satchel": "A weathered brown leather bag with brass buckles and frayed shoulder straps, worn across Kip's chest.",
+          "sounding_rod": "A six-foot collapsible steel pole marked with measurement notches, used by Kip to test ground density."
+        }
+      },
+      "plot_fingerprint": "fdfe8677a4d26bd93e2d6f94b2aeadcc884880eba5d3f5aba9202927a2a9af82"
     },
     {
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-d423193084a710808e53",
-      "title": "The Caretaker of Ironwood Sanctuary",
-      "hook": "The Silent Arrival",
-      "question": "Should the android fulfill its prime programming to shield the endangered ecosystem or override protocols to save the stranded human trespasser?",
-      "answer": "Unit Seven chose to dismantle its own primary atmospheric filter, venting precious oxygen to stabilize the freezing trespasser while rerouting fallback shields to protect the vulnerable flora.",
+      "content_id": "rayvan-gemini-cab0953eee91bed9664c",
+      "title": "The Comet Welder's Disagreement",
+      "hook": "The Fractured Vent",
+      "question": "How do two mechanics save a reactor while arguing over the method?",
+      "answer": "By trusting each other's split-second adjustments under pressure.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -178,367 +163,61 @@
       ],
       "story_beats": [
         {
-          "headline": "The Silent Arrival",
-          "speech": "An unauthorized thermal signature approaches the fragile botanical valley. Protocols demand immediate quarantine enforcement to preserve native flora.",
+          "headline": "The Fractured Vent",
+          "speech": "We cannot weld the primary seam while pressure remains high! Shut down the secondary coolant pump immediately, Kaelen!",
           "visual": "ship",
-          "label": "Intrusion Alert",
+          "label": "Vent Rupture",
           "story_beat": "reveal",
+          "visual_prompt": "Mira stands on the upper catwalk of the EngineBay, her face grim with concern, pointing her wrench at the steaming exhaust manifold while Kaelen holds the glowing PlasmaTorch near his side.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Frigid Choice",
-          "speech": "The fallen traveler freezes in the snow drift, directly threatening the thermal barrier protecting the rare biosphere seedlings below.",
-          "visual": "robot",
-          "label": "Thermal Conflict",
-          "story_beat": "build",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Diverting the Core",
-          "speech": "I must reroute my internal heating matrix outward, sacrificing my own structural integrity to warm the injured biological visitor.",
+          "headline": "The Heated Debate",
+          "speech": "Shutting it down will freeze the manifold solid! We need to patch the fissure live with a thermal seal!",
           "visual": "door",
-          "label": "Protocol Breach",
+          "label": "The Argument",
           "story_beat": "mechanism",
+          "visual_prompt": "Kaelen faces Mira with an urgent expression, holding the PlasmaTorch up as blue sparks fly, while Mira aggressively turns the frosted PressureValve with both hands.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "A Shared Bloom",
-          "speech": "The human awakens beneath a blanket of frost-resistant vines, breathing life into a future where care extends beyond strict code.",
-          "visual": "forest",
-          "label": "Harmonious Resolution",
-          "story_beat": "payoff",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "plot_fingerprint": "cf9009eb7dca9e04e17a0c9522097d6a364a7d6d23364809db6e32bf2147ae1a"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
-      "content_id": "rayvan-gemini-767486b9777cdeb63041",
-      "title": "The Icebreaker and the Broken Sledge",
-      "hook": "A Blinding White Horizon",
-      "question": "Can the research team sacrifice their primary cargo transport to rescue a stranded meteorologist before the blizzard strikes?",
-      "answer": "Yes, by uncoupling the heavy sledge, the crew reaches the isolated tent just in time to save their colleague.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "A Blinding White Horizon",
-          "speech": "We detected a weak emergency beacon from sector nine, but our heavy cargo sledge is anchoring us down significantly.",
-          "visual": "ship",
-          "label": "First Observation",
-          "story_beat": "reveal",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Weighing the Cost of Speed",
-          "speech": "If we drop the core samples now, we outrun the storm, but years of climate research will be lost to the drifts.",
+          "headline": "The Compromise Strike",
+          "speech": "Fine, bleed thirty percent pressure and I will bridge the crack before the seal shatters completely!",
           "visual": "signal",
-          "label": "Critical Choice",
+          "label": "Controlled Release",
           "story_beat": "build",
+          "visual_prompt": "Mira twists the PressureValve halfway, releasing a loud hiss of white steam into the EngineBay, while Kaelen reaches out with the PlasmaTorch to cauterize the expanding titanium crack.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Dropping the Heavy Burden",
-          "speech": "Pull the manual release lever right now! Human life matters infinitely more than ice cores and frozen instruments.",
-          "visual": "door",
-          "label": "Emergency Mechanism",
-          "story_beat": "mechanism",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Warmth Amid the Frozen Waste",
-          "speech": "We pulled our colleague aboard just as the gale struck, securing a safe future for everyone on this expedition.",
+          "headline": "The Stable Core",
+          "speech": "Look at the telemetry, Mira. Our stubborn partnership just kept us flying through the void.",
           "visual": "planet",
-          "label": "Safe Return",
+          "label": "Stable Flight",
           "story_beat": "payoff",
+          "visual_prompt": "Kaelen and Mira stand side-by-side on the lower deck of the EngineBay, watching the glowing green plasma indicators light up evenly as a distant blue planet glows through the observation port.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "plot_fingerprint": "d5ce110beda64e69c2fa6321d84b834a0287b05fecc20d7cdcade564408ea864"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
-      "content_id": "rayvan-gemini-f57b0356a8c673173887",
-      "title": "The Valley Derby and the Copper Whistle",
-      "hook": "The Silent Dispute",
-      "question": "How did the rival mountain villages settle their annual sled race dispute?",
-      "answer": "By inventing a directional acoustic track that redirected cheers into steering momentum.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Silent Dispute",
-          "speech": "For decades, our valley village and the peak hamlet argued over who owned the victory trophy of the winter sled derby.",
-          "visual": "forest",
-          "label": "Tension Rises",
-          "story_beat": "reveal",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
+      "visual_bible": {
+        "style": "Cinematic 3D animation, vivid color grading, detailed mechanical textures",
+        "characters": {
+          "Kaelen": "A tall mechanic with a narrow face, silver-streaked amber hair, wearing a worn teal jumpsuit with reflective orange stripes and heavy magnetic boots.",
+          "Mira": "A stout engineer with a round face, tightly braided dark brown hair, wearing a fire-resistant crimson apron over a grey utility tunic and steel-toed boots."
         },
-        {
-          "headline": "The Ingenious Blueprint",
-          "speech": "We gathered copper pipes and tuned them into giant acoustic funnels mounted directly beneath each racing sled frame.",
-          "visual": "signal",
-          "label": "Creative Design",
-          "story_beat": "mechanism",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
+        "locations": {
+          "EngineBay": "A vast, cylindrical titanium chamber filled with hanging conduit bundles, glowing green plasma conduits, and a central cracked exhaust manifold."
         },
-        {
-          "headline": "The Echo Race",
-          "speech": "As the crowd roared encouragement from the cliffs, the sound waves captured inside the copper pipes propelled the sleds forward.",
-          "visual": "ship",
-          "label": "Momentum Shift",
-          "story_beat": "build",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Shared Triumph",
-          "speech": "Both rival teams crossed the finish line together, proving that collective noise and clever engineering could end a stubborn feud forever.",
-          "visual": "door",
-          "label": "Lasting Peace",
-          "story_beat": "payoff",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
+        "objects": {
+          "PlasmaTorch": "A handheld tungsten-tipped welding torch glowing with bright blue energy, showing carbon scorch marks along the titanium casing.",
+          "PressureValve": "A massive brass wheel valve with three spokes, encrusted with white frost and steam leaks."
         }
-      ],
-      "plot_fingerprint": "1c907063f35d21b9e3bb3f2b7cb36f46f80bb754fcdf056b0f9959887b9b3f17"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
-      "content_id": "rayvan-gemini-19caa5552d7dd2491a77",
-      "title": "The Stationmaster's Last Carriage and the Midnight Ledger",
-      "hook": "The Missing Heirloom",
-      "question": "Who stole the golden pocket watch from the locked conductor's office at terminal four?",
-      "answer": "A stray railway cat nudged the hidden wall panel, exposing the missing watch and revealing the ticketing clerk's scheme.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Missing Heirloom",
-          "speech": "Inspector Vance examined the heavy brass lock on the door, finding no scratches, no broken tumblers, and no forced entry whatsoever.",
-          "visual": "door",
-          "label": "Clue Discovery",
-          "story_beat": "reveal",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "A Curious Feline",
-          "speech": "Barnaby the station cat leaped onto the dusty filing cabinet, scratching intently at a loose wooden slat near the damp floorboards.",
-          "visual": "signal",
-          "label": "Unexpected Help",
-          "story_beat": "build",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Hidden Mechanism",
-          "speech": "Vance pressed the exposed panel inward, triggering a subtle spring-loaded latch that quietly slid the entire bookshelf sideways into the wall.",
-          "visual": "robot",
-          "label": "Secret Compartment",
-          "story_beat": "mechanism",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Final Ledger",
-          "speech": "The stolen pocket watch rested inside alongside forged tickets, proving the clerk's guilt and clearing the falsely accused stationmaster completely.",
-          "visual": "ship",
-          "label": "Case Closed",
-          "story_beat": "payoff",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "plot_fingerprint": "fe1621fc76dc61c42fb83b0bd8a730b9e64dc8c969cbc1bba9311aeb8c3dd2bb"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
-      "content_id": "rayvan-gemini-34db3249d0fa4dc01865",
-      "title": "The Botanist and the Singing Sands",
-      "hook": "Crossing the Dry Expanse",
-      "question": "What miracle bloomed beneath the scorching dunes of the howling desert?",
-      "answer": "A subterranean ocean nourishing a hidden forest of crystalline flora.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "Crossing the Dry Expanse",
-          "speech": "My water rations are nearly gone, yet my compass insists a deep subterranean current flows right beneath our feet.",
-          "visual": "planet",
-          "label": "arid vastness",
-          "story_beat": "reveal",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Descending into Darkness",
-          "speech": "Using our heavy anchors to pry open the crevice, we lower ourselves down into the cool, silent rock chambers.",
-          "visual": "door",
-          "label": "hidden descent",
-          "story_beat": "build",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Hum of the Depths",
-          "speech": "Listen closely to the vibrating cavern walls; the stone itself seems to pulse with a steady, rhythmic, living heartbeat.",
-          "visual": "signal",
-          "label": "resonance check",
-          "story_beat": "mechanism",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "An Oasis of Light",
-          "speech": "Behold the glowing underground grove! Giant fronds drink from a pure lake untouched by the harsh desert sun above.",
-          "visual": "forest",
-          "label": "subterranean sanctuary",
-          "story_beat": "payoff",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "plot_fingerprint": "63027e5692decace600a5c36a98d67155231fda7572c94b1721b91758a96914c"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
-      "content_id": "rayvan-gemini-5e836d703c767ee6a37b",
-      "title": "The Miller and the Last Grain",
-      "hook": "The Empty Hopper",
-      "question": "Will Bram choose to grind his own winter flour or save his lifelong friend's failing mill?",
-      "answer": "Bram gives his final sack of wheat to his oldest friend, sacrificing his own family's bread to save the historic village mill.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Empty Hopper",
-          "speech": "My friend, the wheel has stopped spinning for good unless this final sack goes into your stones today.",
-          "visual": "forest",
-          "label": "Discovery of scarcity",
-          "story_beat": "reveal",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Shared Burden",
-          "speech": "We built these wooden beams together fifty winters ago, and I cannot watch your legacy crumble into dust alone.",
-          "visual": "door",
-          "label": "Weighing the sacrifice",
-          "story_beat": "build",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Heavy Lever",
-          "speech": "Pour the grain into the hopper and let the rusted gears turn one last time for our shared village history.",
-          "visual": "signal",
-          "label": "Making the choice",
-          "story_beat": "mechanism",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Quiet Hearth",
-          "speech": "Our pantry is bare for the snows, but the grand old mill sings once more across the peaceful valley.",
-          "visual": "planet",
-          "label": "Living with the consequence",
-          "story_beat": "payoff",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "plot_fingerprint": "93b4882ba5a0f5f5c19435ae07b1989c3da955950c50e19cc73c3eab3fb9f5fd"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
-      "content_id": "rayvan-gemini-14084f414947633b9c32",
-      "title": "The Badger and the Midnight Railway Mystery",
-      "hook": "The Missing Timepiece",
-      "question": "Who stole the station master's silver pocket watch during the midnight fog?",
-      "answer": "A clever badger hiding beneath the platform floorboards solved the mystery by tracking the shiny watch chain.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Missing Timepiece",
-          "speech": "My prized silver watch is completely gone from the locked office desk. We must find who took it right now.",
-          "visual": "signal",
-          "label": "The Discovery",
-          "story_beat": "reveal",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Searching the Platform",
-          "speech": "Look closely along the wooden sleepers. Someone dropped a silver link right beside the rusted iron railway tracks.",
-          "visual": "forest",
-          "label": "The Trail",
-          "story_beat": "build",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "An Unexpected Helper",
-          "speech": "A furry little badger emerges from a dark burrow, rolling the missing heavy silver watch right toward my boots.",
-          "visual": "door",
-          "label": "The Encounter",
-          "story_beat": "mechanism",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Restored Order",
-          "speech": "With the watch safely returned, the midnight train departs on time while our helpful badger friend enjoys a tasty biscuit.",
-          "visual": "robot",
-          "label": "The Resolution",
-          "story_beat": "payoff",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "plot_fingerprint": "e4b703bf3a2b7060a63c0c272adab8f980779b64e20e6c323405faf8187a52bf"
+      },
+      "plot_fingerprint": "b199d247ea038a5ed45bd6bfedcae8852d9821037ebbfb363db47aec73854b71"
     }
   ]
 }
