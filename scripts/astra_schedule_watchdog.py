@@ -54,11 +54,11 @@ def main():
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary:
         with open(summary, "a", encoding="utf-8") as out:
-            out.write("## ASTRA publisher schedule watchdog\\n\\n")
-            out.write(f"- Status: {'ALERT' if alert else 'OK'}\\n")
-            out.write(f"- Latest scheduled run: {result['latest_scheduled_run']}\\n")
-            out.write(f"- Minutes since last scheduled run: {age}\\n")
-            out.write("- Monitor only: no workflow dispatch, upload, or production state changes.\\n")
+            out.write("## ASTRA publisher schedule watchdog\n\n")
+            out.write(f"- Status: {'ALERT' if alert else 'OK'}\n")
+            out.write(f"- Latest scheduled run: {result['latest_scheduled_run']}\n")
+            out.write(f"- Minutes since last scheduled run: {age}\n")
+            out.write("- Monitor only: no workflow dispatch, upload, or production state changes.\n")
     if alert:
         print("::warning::ASTRA publisher scheduled execution is overdue or unavailable")
     return 0  # Alert through logs/summary, not a failing workflow.
