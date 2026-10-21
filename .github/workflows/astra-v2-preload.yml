@@ -248,8 +248,12 @@ jobs:
           python - <<'PY'
           import json
           try:
-              from astra_v2.preload_queue import inventory_snapshot
+              from astra_v2.preload_queue import inventory_snapshot, inventory_eligibility_snapshot
               result = inventory_snapshot()
+              try:
+                  result["trusted_run_preflight"] = inventory_eligibility_snapshot()
+              except Exception as audit_exc:
+                  result["trusted_run_preflight"] = {"status": "unavailable", "error_type": type(audit_exc).__name__}
           except Exception as exc:
               result = {"status": "unavailable", "error_type": type(exc).__name__}
           print("ASTRA_PRELOAD_INVENTORY=" + json.dumps(result, sort_keys=True))
