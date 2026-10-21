@@ -194,7 +194,12 @@ def make_candidate(path, excluded_ids, excluded_titles):
                     candidate["plot_fingerprint"] = candidate.get("plot_fingerprint") or plot_fingerprint(
                         [("", b.get("speech", ""), "", "") for b in candidate.get("story_beats", [])])
                     from astra_v2.proposal_history import load_history
-                    complete_history = load_history(os.getenv("ASTRA_PUBLISHER_STATE_PATH", "astra_v2_state.json"), os.getenv("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json"))
+                    from pathlib import Path
+                    publisher_file = os.getenv("ASTRA_PUBLISHER_STATE_PATH", "astra_v2_state.json")
+                    history_file = os.getenv("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json")
+                    if not Path(publisher_file).is_file() or not Path(history_file).is_file():
+                        raise ValueError("editorial_requires_complete_publication_history")
+                    complete_history = load_history(publisher_file, history_file)
                     verdict = assess(candidate, complete_history)
                     from astra_v2.editorial_review_journal import record_review
                     record_review(candidate, verdict, os.getenv('ASTRA_EDITORIAL_AUDIT_PATH', 'runtime-health/ai-editorial-reviews.json'), complete_history)
