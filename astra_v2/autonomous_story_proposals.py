@@ -336,7 +336,7 @@ def proposal(index):
     # The selected mystery, physical clue, test and repair now drive all four beats.
     beats = (
         ("reveal", f"In {setting}, {actor} needed to understand why {mystery}, {stakes}. The community needed an explanation before anyone acted.", visual),
-        ("build", f"{actor.capitalize()} compared {clue} with the available evidence and {method}. But {obstacle}. Rather than blame anyone, the team tested whether the clue could explain the mystery.", "book"),
+        ("build", f"{causal_opening}. {actor.capitalize()} compared {clue} with the available evidence and {method}. But {obstacle}. Rather than blame anyone, the team tested whether the clue could explain the mystery.", "book"),
         ("twist", f"The investigation revealed {reversal}. This explained the original mystery. The team checked the discovery against {clue} and repeated the test to confirm the cause. {emotional.capitalize()}.", setting_visual),
         ("payoff", f"With the cause understood, {actor} {resolution}. The team recorded the evidence and the safe procedure {consequence}.", _pick(index, VISUALS, 3)),
     )
