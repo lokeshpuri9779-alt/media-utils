@@ -54,10 +54,26 @@ class GitHubReleaseStore:
         return "sha256-" + digest
 
     def _find(self, release, name):
-        matches = [a for a in release.get("assets", []) if a.get("name") == name]
-        if len(matches) > 1:
-            raise ValueError("duplicate_release_assets")
-        return matches[0] if matches else None
+        release_id = release.get("id")
+        if type(release_id) is not int or release_id <= 0:
+            raise ValueError("invalid_release_id")
+        matches = []
+        for page in range(1, 101):
+            url = (self.root + "/releases/" + str(release_id) +
+                   "/assets?per_page=100&page=" + str(page))
+            assets = self._request("GET", url)
+            if not isinstance(assets, list) or len(assets) > 100:
+                raise ValueError("invalid_release_assets_page")
+            for asset in assets:
+                if not isinstance(asset, dict):
+                    raise ValueError("invalid_release_asset")
+                if asset.get("name") == name:
+                    matches.append(asset)
+                    if len(matches) > 1:
+                        raise ValueError("duplicate_release_assets")
+            if len(assets) < 100:
+                return matches[0] if matches else None
+        raise RuntimeError("release_assets_page_limit")
 
     def put(self, source):
         source = Path(source)

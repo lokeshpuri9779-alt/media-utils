@@ -15,28 +15,28 @@ class GitHubReleaseStoreTests(unittest.TestCase):
         data = b"original media"
         digest = hashlib.sha256(data).hexdigest()
         asset = {"id": 123, "name": "sha256-" + digest, "size": len(data)}
-        release = {"assets": [asset], "upload_url": "https://uploads.github.com/test{?name}"}
+        release = {"id": 7, "assets": [asset], "upload_url": "https://uploads.github.com/test{?name}"}
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder) / "video.mp4"
             path.write_bytes(data)
             with patch.object(self.store, "_release", return_value=release):
-                with patch.object(self.store, "_request", return_value=data) as req:
+                with patch.object(self.store, "_request", side_effect=lambda method, url, *args, **kwargs: [asset] if "/assets?per_page=" in url else data) as req:
                     record = self.store.put(path)
             self.assertEqual(record["sha256"], digest)
             self.assertEqual(record["bytes"], len(data))
-            self.assertEqual(req.call_count, 1)
+            self.assertEqual(req.call_count, 3)
 
     def test_rejects_corruption(self):
         data = b"original media"
         digest = hashlib.sha256(data).hexdigest()
         asset = {"id": 1, "name": "sha256-" + digest, "size": len(data)}
-        with patch.object(self.store, "_release", return_value={"assets": [asset]}):
-            with patch.object(self.store, "_request", return_value=b"wrong payload!!"):
+        with patch.object(self.store, "_release", return_value={"id": 7, "assets": [asset]}):
+            with patch.object(self.store, "_request", side_effect=lambda method, url, *args, **kwargs: [asset] if "/assets?per_page=" in url else b"wrong payload!!"):
                 with self.assertRaisesRegex(ValueError, "corrupted"):
                     self.store.verify_bytes({"sha256": digest, "bytes": len(data), "uri": "github-release://example/repo/astra-media-v1/sha256-" + digest})
 
     def test_missing_asset_fails_closed(self):
-        with patch.object(self.store, "_release", return_value={"assets": []}):
+        with patch.object(self.store, "_release", return_value={"id": 7, "assets": []}):
             with self.assertRaises(ValueError):
                 self.store.verify_bytes({"sha256": "a" * 64, "bytes": 5, "uri": "github-release://example/repo/astra-media-v1/sha256-" + "a" * 64})
 
@@ -49,6 +49,22 @@ class GitHubReleaseStoreTests(unittest.TestCase):
                     "uri": "github-release://other/repo/astra-media-v1/sha256-" + digest,
                 })
             remote.assert_not_called()
+
+    def test_find_asset_on_second_page(self):
+        name = "sha256-" + "a" * 64
+        target = {"id": 88, "name": name, "size": 4}
+        calls = []
+        def fetch(method, url, *args, **kwargs):
+            calls.append(url)
+            return [{"name": "other-" + str(i)} for i in range(100)] if "page=1" in url else [target]
+        with patch.object(self.store, "_request", side_effect=fetch):
+            self.assertEqual(self.store._find({"id": 7}, name), target)
+        self.assertEqual(len(calls), 2)
+
+    def test_find_fails_closed_at_page_limit(self):
+        with patch.object(self.store, "_request", return_value=[{"name": "other"}] * 100):
+            with self.assertRaisesRegex(RuntimeError, "page_limit"):
+                self.store._find({"id": 7}, "sha256-" + "a" * 64)
 
     def test_invalid_tag_and_digest(self):
         with self.assertRaises(ValueError):
