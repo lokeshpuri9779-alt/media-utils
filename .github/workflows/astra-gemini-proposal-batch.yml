@@ -136,6 +136,9 @@ jobs:
               "review_issues": sorted(set(issue for item in reviews.get("reviews", []) for issue in item.get("issues", []))) if reviews else ["review_not_completed"],
               "approval_pair_present": (root / "ai-reviewed-stories.json").is_file() and (root / "ai-reviewed-decisions.json").is_file(),
           }
+          model_access = read("gemini-model-access.json")
+          if model_access:
+              record["model_access"] = model_access
           (Path(sys.argv[1]) / "gemini-batch-diagnostic.json").write_text(json.dumps(record, indent=2) + "\\n", encoding="utf-8")
           print("ASTRA_GEMINI_BATCH_DIAGNOSTIC=" + json.dumps(record))
           PY
