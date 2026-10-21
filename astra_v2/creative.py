@@ -194,6 +194,8 @@ def make_candidate(path, excluded_ids, excluded_titles):
                     candidate["plot_fingerprint"] = candidate.get("plot_fingerprint") or plot_fingerprint(
                         [("", b.get("speech", ""), "", "") for b in candidate.get("story_beats", [])])
                     verdict = assess(candidate, history_narratives)
+                    from astra_v2.editorial_review_journal import record_review
+                    record_review(candidate, verdict, os.getenv('ASTRA_EDITORIAL_AUDIT_PATH', 'runtime-health/ai-editorial-reviews.json'), history_narratives)
                     if verdict["approved"]:
                         premium_stories.insert(0, candidate)
                         print("ASTRA_OMNIROUTE_EDITORIAL_APPROVED=" + candidate["content_id"])
