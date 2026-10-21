@@ -45,6 +45,30 @@ class InventoryTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "conflicting"):
             self.db.register("story-a", '{"manifest":"different"}')
 
+    def test_renew_and_release(self):
+        self.db.set_approval("story-a", True)
+        lease = self.db.claim("worker-a", now=100, ttl=10)
+        self.db.renew("story-a", "worker-a", lease["fencing"], ttl=30, now=105)
+        self.assertIsNone(self.db.claim("worker-b", now=120))
+        self.db.release("story-a", "worker-a", lease["fencing"])
+        replacement = self.db.claim("worker-b", now=121)
+        self.assertEqual(replacement["fencing"], lease["fencing"] + 1)
+
+    def test_stale_renew_and_release_rejected(self):
+        self.db.set_approval("story-a", True)
+        old = self.db.claim("worker-a", now=100, ttl=10)
+        self.db.claim("worker-b", now=111)
+        with self.assertRaisesRegex(ValueError, "stale"):
+            self.db.renew("story-a", "worker-a", old["fencing"], now=112)
+        with self.assertRaisesRegex(ValueError, "stale"):
+            self.db.release("story-a", "worker-a", old["fencing"])
+
+    def test_expired_renew_rejected(self):
+        self.db.set_approval("story-a", True)
+        lease = self.db.claim("worker-a", now=100, ttl=10)
+        with self.assertRaisesRegex(ValueError, "expired"):
+            self.db.renew("story-a", "worker-a", lease["fencing"], now=111)
+
     def test_reopen_persists(self):
         self.db.set_approval("story-a", True)
         reopened = Inventory(self.path)
