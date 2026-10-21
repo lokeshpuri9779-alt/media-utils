@@ -33,7 +33,8 @@ def take(output, *, warehouse=None, archive=None):
     if claim["content_id"] not in runway["eligible_ids"]:
         raise ValueError("warehouse_story_not_editorially_approved")
     # The independent QA digest must be verified against its authoritative
-    # signed record before enabling warehouse uploads.
+    # signed record before enabling warehouse uploads. Until then, do not
+    # reserve eligible packages that can never proceed to publication.
     raise RuntimeError("warehouse_authoritative_qa_verifier_missing")
     output = Path(output)
     if output.exists():
