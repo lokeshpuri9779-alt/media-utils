@@ -8,6 +8,8 @@ on:
       - 'astra/asset_inventory.py'
       - 'tests/test_background_factory.py'
       - 'astra/artwork_contact_sheet.py'
+      - 'astra/asset_package_qa.py'
+      - 'tests/test_asset_package_qa.py'
       - 'tests/test_artwork_contact_sheet.py'
       - '.github/workflows/astra-artwork-preview.yml'
   push:
@@ -35,6 +37,7 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_background_factory.py' -v
           python -m unittest discover -s tests -p 'test_artwork_contact_sheet.py' -v
+          python -m unittest discover -s tests -p 'test_asset_package_qa.py' -v
       - name: Render all starter backgrounds
         run: python -m astra.background_factory --output "$RUNNER_TEMP/astra-preview"
       - name: Validate inventory and verify output count
@@ -49,6 +52,8 @@ jobs:
           assert len(list(root.glob("*.png"))) == 12
           assert all(row["status"] == "pending_review" for row in manifest["assets"])
           PY
+      - name: Audit preview package before upload
+        run: python -m astra.asset_package_qa --manifest "$RUNNER_TEMP/astra-preview/art/manifest.json" --strict
       - name: Generate labelled contact sheet
         run: python -m astra.artwork_contact_sheet --manifest "$RUNNER_TEMP/astra-preview/art/manifest.json" --output "$RUNNER_TEMP/astra-preview/art/contact-sheet.png"
       - name: Upload artwork for human visual review
