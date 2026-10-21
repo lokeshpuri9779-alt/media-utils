@@ -32,8 +32,10 @@ def take(output, *, warehouse=None, archive=None):
         raise ValueError("warehouse_candidate_identity_mismatch")
     if candidate.get("format") != "short":
         raise ValueError("warehouse_shorts_only")
-    if not claim.get("approval_digest") or not claim.get("qa_digest"):
-        raise ValueError("warehouse_evidence_missing")
+    import re
+    for field in ("approval_digest", "qa_digest"):
+        if not re.fullmatch(r"[a-f0-9]{64}", str(claim.get(field, ""))):
+            raise ValueError("warehouse_evidence_digest_invalid")
     from astra_v2.adaptive_artifact_store import ArtifactStore
     if ArtifactStore.digest(destination / "video.mp4") != candidate.get("sha256"):
         raise ValueError("warehouse_video_digest_mismatch")
