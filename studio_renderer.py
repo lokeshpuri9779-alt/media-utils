@@ -616,8 +616,7 @@ def draw_visual(im,s,t,u,accent):
     d=ImageDraw.Draw(im); visual=s['visual']; p=ease(u/.55)
     # Prefer approved generated ASTRA art when a relevant local asset exists.
     # Missing/invalid art is a no-op, preserving the established renderer path.
-    if draw_asset_for_scene(im, s, t):
-        return
+    # A scene-scoped manifest allows preprocessed art to be injected into the\n    # established Studio pipeline without mutating the global production library.\n    manifest = s.get('artwork_manifest_path')\n    if (draw_asset_for_scene(im, s, t, manifest_path=manifest) if manifest\n            else draw_asset_for_scene(im, s, t)):\n        return
     if s.get('story_subject') and draw_subject(im, s['story_subject'], t, accent, s.get('story_action','idle')):
         draw_interaction_prop(im, s, t)
         return
