@@ -41,6 +41,26 @@ class ReleaseInventoryTests(unittest.TestCase):
                 "assets": [{"size": 1}]
             }])
 
+    def test_paginates_all_release_assets(self):
+        calls = []
+        def assets(release_id, page):
+            calls.append((release_id, page))
+            return [{"size": 2} for _ in range(100)] if page == 1 else [{"size": 3}]
+        result = measure_release_assets(
+            lambda n: [{"id": 7, "tag_name": "astra-media-v1",
+                        "assets_count": 101, "assets": []}],
+            fetch_assets=assets)
+        self.assertEqual(result["used_bytes"], 203)
+        self.assertEqual(result["asset_count"], 101)
+        self.assertEqual(calls, [(7, 1), (7, 2)])
+
+    def test_pagination_rejects_incomplete_asset_count(self):
+        with self.assertRaisesRegex(RuntimeError, "count_mismatch"):
+            measure_release_assets(
+                lambda n: [{"id": 7, "tag_name": "astra-media-v1",
+                            "assets_count": 2, "assets": []}],
+                fetch_assets=lambda rid, page: [{"size": 1}])
+
     def test_invalid_asset_size(self):
         with self.assertRaises(ValueError):
             measure_release_assets(lambda n: [

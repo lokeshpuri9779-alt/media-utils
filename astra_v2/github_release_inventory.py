@@ -13,7 +13,7 @@ import json
 MAX_PAGES = 100
 
 
-def measure_release_assets(fetch_page, *, tag_prefix="astra-media-", max_pages=MAX_PAGES):
+def measure_release_assets(fetch_page, *, fetch_assets=None, tag_prefix="astra-media-", max_pages=MAX_PAGES):
     if not isinstance(tag_prefix, str) or not tag_prefix:
         raise ValueError("invalid_tag_prefix")
     if type(max_pages) is not int or not 1 <= max_pages <= MAX_PAGES:
@@ -32,14 +32,30 @@ def measure_release_assets(fetch_page, *, tag_prefix="astra-media-", max_pages=M
             if not isinstance(tag, str) or not tag.startswith(tag_prefix):
                 continue
             releases_seen += 1
-            assets = release.get("assets")
-            if not isinstance(assets, list):
-                raise ValueError("invalid_assets")
-            # GitHub embeds only a bounded subset of release assets. Never
-            # undercount a release whose asset list may be truncated.
-            if len(assets) >= 30 or (type(release.get("assets_count")) is int
-                                     and release["assets_count"] != len(assets)):
-                raise RuntimeError("release_assets_may_be_truncated")
+            if fetch_assets is None:
+                assets = release.get("assets")
+                if not isinstance(assets, list):
+                    raise ValueError("invalid_assets")
+                if len(assets) >= 30 or (type(release.get("assets_count")) is int
+                                         and release["assets_count"] != len(assets)):
+                    raise RuntimeError("release_assets_may_be_truncated")
+            else:
+                release_id = release.get("id")
+                if type(release_id) is not int or release_id <= 0:
+                    raise ValueError("invalid_release_id")
+                assets = []
+                for asset_page in range(1, max_pages + 1):
+                    batch = fetch_assets(release_id, asset_page)
+                    if not isinstance(batch, list) or len(batch) > 100:
+                        raise ValueError("invalid_assets_page")
+                    assets.extend(batch)
+                    if len(batch) < 100:
+                        break
+                else:
+                    raise RuntimeError("release_assets_page_limit")
+                expected_count = release.get("assets_count")
+                if type(expected_count) is int and expected_count != len(assets):
+                    raise RuntimeError("release_assets_count_mismatch")
             for asset in assets:
                 size = asset.get("size") if isinstance(asset, dict) else None
                 if type(size) is not int or size < 0:
@@ -74,5 +90,17 @@ class GitHubReleaseInventory:
         with urllib.request.urlopen(request, timeout=30) as response:
             return json.load(response)
 
+    def _assets_page(self, release_id, number):
+        repo = urllib.parse.quote(self.repository, safe="/")
+        url = ("https://api.github.com/repos/" + repo + "/releases/" +
+               str(release_id) + "/assets?per_page=100&page=" + str(number))
+        request = urllib.request.Request(url, headers={
+            "Authorization": "Bearer " + self.token,
+            "Accept": "application/vnd.github+json",
+            "X-GitHub-Api-Version": "2022-11-28"})
+        with urllib.request.urlopen(request, timeout=30) as response:
+            return json.load(response)
+
     def measure(self, *, tag_prefix="astra-media-"):
-        return measure_release_assets(self._page, tag_prefix=tag_prefix)
+        return measure_release_assets(self._page, fetch_assets=self._assets_page,
+                                      tag_prefix=tag_prefix)
