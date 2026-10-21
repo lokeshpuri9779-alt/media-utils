@@ -85,6 +85,16 @@ class PreloadQueueTests(unittest.TestCase):
                         result = queue.inventory_eligibility_snapshot()
         self.assertEqual(result["preflight_eligible"], 1)
 
+    def test_integrity_sample_zero_budget_does_not_download(self):
+        with patch.object(queue, "inventory_eligibility_snapshot",
+                          return_value={"preflight_eligible": 7}):
+            with patch.object(queue, "artifacts") as artifacts:
+                result = queue.package_integrity_snapshot(max_packages=0)
+        self.assertEqual(result["checked"], 0)
+        self.assertEqual(result["uninspected"], 7)
+        self.assertEqual(result["integrity_passed"], 0)
+        artifacts.assert_not_called()
+
     def test_prepare_includes_integrity_digest(self):
         with tempfile.TemporaryDirectory() as tmp:
             video = Path(tmp) / "render.mp4"
