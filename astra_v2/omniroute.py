@@ -18,6 +18,18 @@ PROMPT = (
 )
 
 
+
+def validate_beat_quality(beats, provider="OmniRoute"):
+    """Reject proposals known to fail editorial detail/visual-variety gates."""
+    if not isinstance(beats, list) or len(beats) != 4:
+        raise ValueError(provider + " requires exactly four beats")
+    if any(len(str(beat.get("speech") or "").split()) < 12 for beat in beats
+           if isinstance(beat, dict)) or any(not isinstance(beat, dict) for beat in beats):
+        raise ValueError(provider + " narration needs at least 12 words per beat")
+    if len({str(beat.get("visual") or "") for beat in beats}) < 3:
+        raise ValueError(provider + " needs at least three distinct visual types")
+
+
 def _enabled(name, secret):
     return os.getenv(name) == "1" and bool(os.getenv(secret))
 
@@ -60,7 +72,7 @@ def _validate(data, provider, excluded_ids, excluded_titles, prior_stories):
             or title.casefold().strip() in excluded_titles
             or not isinstance(beats, list) or len(beats) != 4):
         raise ValueError(provider + " story title or beat count invalid")
-    for i, beat in enumerate(beats):
+    validate_beat_quality(beats, provider)\n    for i, beat in enumerate(beats):
         if not isinstance(beat, dict):
             raise ValueError(provider + " invalid beat")
         for key in ("headline", "speech", "label"):
