@@ -47,9 +47,16 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+      - name: Verify storyboard audio and subtitles
+        run: |
+          ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of default=nw=1:nk=1 "$RUNNER_TEMP/astra-storyboard-preview.mp4" | grep -Fx aac
+          test -s "$RUNNER_TEMP/astra-storyboard-preview.srt"
+          grep -F '00:00:06,000 --> 00:00:08,000' "$RUNNER_TEMP/astra-storyboard-preview.srt"
       - uses: actions/upload-artifact@v4
         with:
           name: astra-storyboard-review-preview
-          path: ${{ runner.temp }}/astra-storyboard-preview.mp4
+          path: |
+            ${{ runner.temp }}/astra-storyboard-preview.mp4
+            ${{ runner.temp }}/astra-storyboard-preview.srt
           if-no-files-found: error
           retention-days: 14
