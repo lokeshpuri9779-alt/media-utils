@@ -35,6 +35,11 @@ def measure_release_assets(fetch_page, *, tag_prefix="astra-media-", max_pages=M
             assets = release.get("assets")
             if not isinstance(assets, list):
                 raise ValueError("invalid_assets")
+            # GitHub embeds only a bounded subset of release assets. Never
+            # undercount a release whose asset list may be truncated.
+            if len(assets) >= 30 or (type(release.get("assets_count")) is int
+                                     and release["assets_count"] != len(assets)):
+                raise RuntimeError("release_assets_may_be_truncated")
             for asset in assets:
                 size = asset.get("size") if isinstance(asset, dict) else None
                 if type(size) is not int or size < 0:
