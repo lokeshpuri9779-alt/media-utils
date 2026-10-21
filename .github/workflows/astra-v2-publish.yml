@@ -74,6 +74,20 @@ jobs:
           for f in performance.json astra_v2_state.json astra_stage_feedback.json SHORTS.md; do
             git checkout origin/astra-state -- "$f" 2>/dev/null || true
           done
+          # Restore the latest AI editorial evidence as an inseparable pair.
+          # Approval remains subject to current hash and publication-history gates.
+          for f in ai-reviewed-stories.json ai-reviewed-decisions.json ai-editorial-reviews.json; do
+            git checkout origin/astra-state -- "$f" 2>/dev/null || true
+          done
+          if [ -f ai-reviewed-stories.json ] && [ -f ai-reviewed-decisions.json ]; then
+            mkdir -p runtime-health
+            cp ai-reviewed-stories.json runtime-health/ai-reviewed-stories.json
+            cp ai-reviewed-decisions.json runtime-health/ai-reviewed-decisions.json
+          fi
+          if [ -f ai-editorial-reviews.json ]; then
+            mkdir -p runtime-health
+            cp ai-editorial-reviews.json runtime-health/ai-editorial-reviews.json
+          fi
           # Optional character continuity snapshot; no new state is invented.
           git checkout origin/astra-state -- character-continuity.json 2>/dev/null || true
           # Preserve real story fingerprints when available; never synthesize an
@@ -500,6 +514,14 @@ jobs:
           for f in performance.json astra_v2_state.json astra_stage_feedback.json SHORTS.md; do
             if [ -f "$f" ]; then cp "$f" "$WORKTREE/$f"; fi
           done
+          # Checkpoint only a complete AI review pair, never a lone approval.
+          if [ -s runtime-health/ai-reviewed-stories.json ] && [ -s runtime-health/ai-reviewed-decisions.json ]; then
+            cp runtime-health/ai-reviewed-stories.json "$WORKTREE/ai-reviewed-stories.json"
+            cp runtime-health/ai-reviewed-decisions.json "$WORKTREE/ai-reviewed-decisions.json"
+          fi
+          if [ -s runtime-health/ai-editorial-reviews.json ]; then
+            cp runtime-health/ai-editorial-reviews.json "$WORKTREE/ai-editorial-reviews.json"
+          fi
           # Keep story diagnostics separate from publisher and novelty ledgers.
           if [ -s runtime-health/story_supply_diagnostic.json ]; then
             cp runtime-health/story_supply_diagnostic.json "$WORKTREE/story_supply_diagnostic.json"
@@ -541,6 +563,10 @@ jobs:
             done
             if [ -f character-continuity.json ]; then git add -- character-continuity.json; fi
             if [ -f astra_story_history.json ]; then git add -- astra_story_history.json; fi
+            if [ -s ai-reviewed-stories.json ] && [ -s ai-reviewed-decisions.json ]; then
+              git add -- ai-reviewed-stories.json ai-reviewed-decisions.json
+            fi
+            if [ -s ai-editorial-reviews.json ]; then git add -- ai-editorial-reviews.json; fi
             # Stage the new diagnostic report; copying alone does not commit it.
             if [ -s story_supply_diagnostic.json ]; then git add -- story_supply_diagnostic.json; fi
             if [ -s visual_review_queue.json ]; then git add -- visual_review_queue.json; fi
