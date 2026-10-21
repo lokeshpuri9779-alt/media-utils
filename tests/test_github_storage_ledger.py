@@ -18,6 +18,9 @@ class StorageLedgerTests(unittest.TestCase):
         done = settle(s, "video-a", 60)
         self.assertEqual(done["used_bytes"], 70)
         self.assertEqual(done["reservations"], {})
+        self.assertEqual(done["settled"]["video-a"], 60)
+        with self.assertRaisesRegex(RuntimeError, "already_settled"):
+            reserve(done, "video-a", 70)
 
     def test_invalid_and_overallocation(self):
         with self.assertRaises(ValueError):

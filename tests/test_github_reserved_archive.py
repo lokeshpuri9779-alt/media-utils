@@ -80,9 +80,13 @@ class ReservedReleaseArchiveTests(unittest.TestCase):
                 folder = Path(root, dirname)
                 folder.mkdir()
                 Path(folder, "video.mp4").write_bytes(b"same-video")
-                bridge.put(folder)
-        self.assertEqual(len(identities), 2)
-        self.assertEqual(identities[0], identities[1])
+                if dirname == "worker-one":
+                    bridge.put(folder)
+                else:
+                    with self.assertRaisesRegex(RuntimeError, "already_settled"):
+                        bridge.put(folder)
+        self.assertEqual(len(identities), 1)
+        self.assertEqual(state["used_bytes"], len(b"same-video") + 65536)
 
 if __name__ == "__main__":
     unittest.main()
