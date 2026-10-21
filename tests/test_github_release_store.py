@@ -66,6 +66,18 @@ class GitHubReleaseStoreTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "page_limit"):
                 self.store._find({"id": 7}, "sha256-" + "a" * 64)
 
+    def test_incomplete_inventory_fails_closed(self):
+        name = "sha256-" + "a" * 64
+        with patch.object(self.store, "_request", return_value=[]):
+            with self.assertRaisesRegex(RuntimeError, "incomplete_release_asset_inventory"):
+                self.store._find({"id": 7, "assets_count": 1}, name)
+
+    def test_complete_inventory_with_count(self):
+        name = "sha256-" + "a" * 64
+        asset = {"id": 42, "name": name, "size": 4}
+        with patch.object(self.store, "_request", return_value=[asset]):
+            self.assertEqual(self.store._find({"id": 7, "assets_count": 1}, name), asset)
+
     def test_invalid_tag_and_digest(self):
         with self.assertRaises(ValueError):
             GitHubReleaseStore("example/repo", token="x", tag="general")
