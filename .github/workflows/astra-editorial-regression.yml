@@ -1,0 +1,26 @@
+name: ASTRA Editorial Regression
+on:
+  pull_request:
+    paths:
+      - 'astra_v2/independent_editorial_reviewer.py'
+      - 'astra_v2/editorial_review_journal.py'
+      - 'astra_v2/creative.py'
+      - 'tests/test_independent_editorial_reviewer.py'
+      - 'tests/test_editorial_review_journal.py'
+      - '.github/workflows/astra-editorial-regression.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  editorial:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate editorial module syntax
+        run: python -m py_compile astra_v2/independent_editorial_reviewer.py astra_v2/editorial_review_journal.py astra_v2/creative.py
+      - name: Test independent editorial review and journal
+        run: python -m unittest discover -s tests -p 'test_independent_editorial_reviewer.py' -v && python -m unittest discover -s tests -p 'test_editorial_review_journal.py' -v
