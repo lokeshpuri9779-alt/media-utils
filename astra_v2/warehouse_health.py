@@ -20,7 +20,8 @@ def check():
     if counts["expired"] > counts["reserved"]:
         raise ValueError("invalid_expired_count")
     return {"warehouse_reachable": True, "counts": counts,
-            "publication_triggered": False}
+            "publication_triggered": False,
+            "requires_manual_reconciliation": counts["expired"] > 0}
 
 
 def main(argv=None):
