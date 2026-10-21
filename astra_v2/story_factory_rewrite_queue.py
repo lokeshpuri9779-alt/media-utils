@@ -23,11 +23,22 @@ def rewrite_packet(packet, prior=(), limit=3, generator=None):
     from astra_v2.omniroute import generate
     generator = generator or generate
     results = []
+    prior = tuple(prior)
+    excluded_ids = {story["content_id"] for story in prior
+                    if isinstance(story, dict) and isinstance(story.get("content_id"), str)}
+    excluded_titles = {story["title"].casefold().strip() for story in prior
+                       if isinstance(story, dict) and isinstance(story.get("title"), str)}
     for premise in select_premises(packet, limit):
         try:
-            story = generator(set(), set(), prior, premise=premise)
+            story = generator(excluded_ids, excluded_titles, prior, premise=premise)
             if not isinstance(story, dict):
                 raise ValueError("generator_returned_no_story")
+            if not isinstance(story.get("content_id"), str) or not isinstance(story.get("title"), str):
+                raise ValueError("generated_story_missing_identity")
+            if story["content_id"] in excluded_ids or story["title"].casefold().strip() in excluded_titles:
+                raise ValueError("duplicate_rewrite_in_batch")
+            excluded_ids.add(story["content_id"])
+            excluded_titles.add(story["title"].casefold().strip())
             results.append({"candidate_id": premise["candidate_id"],
                             "source_sha256": premise["source_sha256"],
                             "status": "awaiting_independent_editorial_approval",
