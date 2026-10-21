@@ -233,6 +233,14 @@ jobs:
           else
             echo "ASTRA_RENDER_PEAK_RAM_UNAVAILABLE"
           fi
+      - name: Persist approved video in Actions artifact storage
+        if: steps.render.outputs.content_id != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-preloaded-${{ steps.render.outputs.content_id }}
+          path: preload-package/
+          if-no-files-found: error
+          retention-days: 14
       - name: Report pre-render inventory snapshot
         if: always() && matrix.lane == 0
         shell: bash
@@ -255,12 +263,4 @@ jobs:
           name: astra-preload-inventory-${{ github.run_id }}
           path: astra-preload-inventory.json
           if-no-files-found: warn
-          retention-days: 14
-      - name: Persist approved video in Actions artifact storage
-        if: steps.render.outputs.content_id != ''
-        uses: actions/upload-artifact@v4
-        with:
-          name: astra-preloaded-${{ steps.render.outputs.content_id }}
-          path: preload-package/
-          if-no-files-found: error
           retention-days: 14
