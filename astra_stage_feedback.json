@@ -2,18 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-15T02:10:23.799020+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 22.3,
-        "renderer": "studio-7.3.0"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-forge-3373b1529897470a"
-    },
-    {
       "at": "2026-10-15T02:21:04.241015+00:00",
       "stage": "quality",
       "element": "creative_director",
@@ -7019,6 +7007,17 @@
       },
       "proposed_action": "Diagnose story supply and creative gate failures",
       "candidate_id": ""
+    },
+    {
+      "at": "2026-10-21T15:08:08.526156+00:00",
+      "stage": "quality",
+      "element": "candidate_selection",
+      "outcome": "fail",
+      "evidence": {
+        "reason": "no_approved_original_story_available"
+      },
+      "proposed_action": "Diagnose story supply and creative gate failures",
+      "candidate_id": ""
     }
   ],
   "stage_counts": {
@@ -7119,7 +7118,7 @@
       "regressed": 0
     },
     "render": {
-      "pass": 37,
+      "pass": 36,
       "fail": 2,
       "skip": 0,
       "unknown": 2,
@@ -7128,7 +7127,7 @@
     },
     "quality": {
       "pass": 36,
-      "fail": 507,
+      "fail": 508,
       "skip": 0,
       "unknown": 0,
       "improved": 0,
