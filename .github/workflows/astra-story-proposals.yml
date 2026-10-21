@@ -290,6 +290,7 @@ jobs:
           cp runtime-health/story_review_shortlist.json /tmp/astra-proposal-persist/story_review_shortlist.json
           cp runtime-health/story_review_{packet,stories,decisions}.json /tmp/astra-proposal-persist/
           cp runtime-health/story_review_worksheet.md /tmp/astra-proposal-persist/story_review_worksheet.md
+          cp runtime-health/story_review_evidence.json /tmp/astra-proposal-persist/story_review_evidence.json
           git fetch --depth=1 origin astra-state
           # The run restored these state files into the main-branch worktree.
           # Move them out before switching to astra-state, which owns their paths.
@@ -330,7 +331,7 @@ jobs:
           print("ASTRA_SUPPLY_STATUS=" + json.dumps(summary, sort_keys=True))
           PY
           git add runtime-health/story_proposals.json runtime-health/story_editorial_report.json runtime-health/story_supply_review.json runtime-health/story_review_shortlist.json runtime-health/story_cohort_quality.json runtime-health/story_cohort_history.json runtime-health/story_supply_status.json
-          git add runtime-health/story_review_packet.json runtime-health/story_review_stories.json runtime-health/story_review_decisions.json runtime-health/story_review_worksheet.md
+          git add runtime-health/story_review_packet.json runtime-health/story_review_stories.json runtime-health/story_review_decisions.json runtime-health/story_review_worksheet.md runtime-health/story_review_evidence.json
           if [ -f runtime-health/story_mechanisms.json ]; then git add runtime-health/story_mechanisms.json; fi
           if git diff --cached --quiet; then
             echo "ASTRA_DURABLE_LEDGER_CHANGED=false"
@@ -403,6 +404,14 @@ jobs:
               ["git", "show", "origin/astra-state:runtime-health/story_review_worksheet.md"], text=True)
           if durable_worksheet != expected_worksheet:
               raise SystemExit("Durable editorial worksheet differs from generated worksheet")
+          expected_evidence = json.loads(Path("/tmp/astra-proposal-persist/story_review_evidence.json").read_text(encoding="utf-8"))
+          durable_evidence = json.loads(__import__("subprocess").check_output(
+              ["git", "show", "origin/astra-state:runtime-health/story_review_evidence.json"], text=True))
+          if durable_evidence != expected_evidence:
+              raise SystemExit("Durable editorial evidence differs from generated evidence")
+          if durable_evidence.get("approved_count") != 0 or durable_evidence.get("publication_triggered") is not False:
+              raise SystemExit("Editorial evidence must not authorize publishing")
+          print("ASTRA_DURABLE_EDITORIAL_EVIDENCE=verified")
           print("ASTRA_DURABLE_EDITORIAL_WORKSHEET=verified")
           print("ASTRA_DURABLE_REVIEW_BUNDLE=verified")
           print("ASTRA_DURABLE_COHORT_TREND=verified")
@@ -428,5 +437,6 @@ jobs:
             runtime-health/story_review_decisions.json
             runtime-health/story_review_preparation.json
             runtime-health/story_review_worksheet.md
+            runtime-health/story_review_evidence.json
           if-no-files-found: error
           retention-days: 90
