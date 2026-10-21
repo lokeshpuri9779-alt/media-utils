@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-22",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 16,
-  "confirmed_today": 15,
-  "last_attempt_at": "2026-10-21T23:10:46.113169+00:00",
+  "attempts": 17,
+  "confirmed_today": 16,
+  "last_attempt_at": "2026-10-21T23:21:24.898262+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -2467,30 +2467,38 @@
       "format": "short",
       "uploaded_at": "2026-10-21T22:52:31.790638+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-gemini-9335a643ac6cb373820d": {
+      "video_id": "4r1JDSr4Wkc",
+      "confirmed_at": "2026-10-21T23:19:12.722377+00:00",
+      "title": "The Cartographer and the Sunken Reef",
+      "format": "short",
+      "uploaded_at": "2026-10-21T23:10:47.421649+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "4r1JDSr4Wkc": {
-      "content_id": "rayvan-gemini-9335a643ac6cb373820d",
-      "title": "The Cartographer and the Sunken Reef",
+    "YH_6bIr7J18": {
+      "content_id": "rayvan-gemini-cab0953eee91bed9664c",
+      "title": "The Comet Welder's Disagreement",
       "day": "2026-10-22",
-      "uploaded_at": "2026-10-21T23:10:47.421649+00:00",
+      "uploaded_at": "2026-10-21T23:21:26.366411+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "fdfe8677a4d26bd93e2d6f94b2aeadcc884880eba5d3f5aba9202927a2a9af82",
+      "plot_fingerprint": "b199d247ea038a5ed45bd6bfedcae8852d9821037ebbfb363db47aec73854b71",
       "story_beats": [
         {
-          "speech": "Keep your eyes on the horizon, Kip. According to these old logs, a deep water channel once cut right through this dust."
+          "speech": "We cannot weld the primary seam while pressure remains high! Shut down the secondary coolant pump immediately, Kaelen!"
         },
         {
-          "speech": "Listen to that sound. It is not solid bedrock underneath our boots. It rings like an empty cellar."
+          "speech": "Shutting it down will freeze the manifold solid! We need to patch the fissure live with a thermal seal!"
         },
         {
-          "speech": "Step back quickly! The crust is giving way, and a cool breeze is rushing up from the dark below."
+          "speech": "Fine, bleed thirty percent pressure and I will bridge the crack before the seal shatters completely!"
         },
         {
-          "speech": "We found no water, but look at this miracle. A living reef thriving beneath the silent desert."
+          "speech": "Look at the telemetry, Mira. Our stubborn partnership just kept us flying through the void."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -2498,11 +2506,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-21T23:08:08.417861+00:00",
+  "last_preflight_at": "2026-10-21T23:19:11.383762+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-21T23:10:47.912667+00:00",
+    "at": "2026-10-21T23:21:26.792414+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -6603,10 +6611,33 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-cab0953eee91bed9664c": {
+      "at": "2026-10-21T23:21:24.898246+00:00",
+      "title": "The Comet Welder's Disagreement",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "b199d247ea038a5ed45bd6bfedcae8852d9821037ebbfb363db47aec73854b71",
+      "story_beats": [
+        {
+          "speech": "We cannot weld the primary seam while pressure remains high! Shut down the secondary coolant pump immediately, Kaelen!"
+        },
+        {
+          "speech": "Shutting it down will freeze the manifold solid! We need to patch the fissure live with a thermal seal!"
+        },
+        {
+          "speech": "Fine, bleed thirty percent pressure and I will bridge the crack before the seal shatters completely!"
+        },
+        {
+          "speech": "Look at the telemetry, Mira. Our stubborn partnership just kept us flying through the void."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-21T23:10:47.912591+00:00",
+    "at": "2026-10-21T23:21:26.792351+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -6617,21 +6648,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-21T23:10:47.912654+00:00",
+    "at": "2026-10-21T23:21:26.792403+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-21T23:08:33.104712+00:00",
+    "at": "2026-10-21T23:19:55.841294+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-9335a643ac6cb373820d",
-    "video_url": "https://www.youtube.com/watch?v=4r1JDSr4Wkc",
+    "content_id": "rayvan-gemini-cab0953eee91bed9664c",
+    "video_url": "https://www.youtube.com/watch?v=YH_6bIr7J18",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-21T23:10:47.912332+00:00",
+    "at": "2026-10-21T23:21:26.792144+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -6643,32 +6674,32 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-21T23:10:47.912586+00:00",
+    "at": "2026-10-21T23:21:26.792346+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 2,
+        "eligible": 1,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3
         },
         "seen": 89,
-        "total": 158
+        "total": 157
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 158,
+        "before": 157,
         "fingerprint": 0,
         "id": 89,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 69,
+        "remaining": 68,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 69,
-        "remaining": 2
+        "pool": 68,
+        "remaining": 1
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
