@@ -251,7 +251,12 @@ jobs:
               from astra_v2.preload_queue import inventory_snapshot, inventory_eligibility_snapshot
               result = inventory_snapshot()
               try:
-                  result["trusted_run_preflight"] = inventory_eligibility_snapshot()
+                  from astra_v2.control import STATE_FILE, read_json, state_for_day
+                  from astra_v2.creative import publisher_history_ids
+                  journal = state_for_day(read_json(STATE_FILE))
+                  consumed_ids = publisher_history_ids(journal)
+                  result["trusted_run_preflight"] = inventory_eligibility_snapshot(excluded_ids=consumed_ids)
+                  result["trusted_run_preflight"]["excluded_history_ids"] = len(consumed_ids)
               except Exception as audit_exc:
                   result["trusted_run_preflight"] = {"status": "unavailable", "error_type": type(audit_exc).__name__}
           except Exception as exc:
