@@ -5,7 +5,7 @@ import tempfile
 from pathlib import Path
 from unittest.mock import patch
 
-from astra_v2.warehouse_preload import confirm_publication, take
+from astra_v2.warehouse_preload import confirm_publication, renew_before_upload, take
 
 
 class FakeWarehouse:
@@ -23,6 +23,28 @@ class FakeWarehouse:
 
 
 class WarehouseBoundaryTests(unittest.TestCase):
+    def test_preupload_renewal_requires_live_fenced_lease(self):
+        class Warehouse:
+            def __init__(self):
+                self.calls = []
+            def renew(self, *args, **kwargs):
+                self.calls.append((args, kwargs))
+                return "valid-until"
+        warehouse = Warehouse()
+        claim = {"content_id": "test-short", "lease_token": "a" * 32}
+        self.assertEqual(renew_before_upload(claim, warehouse=warehouse), "valid-until")
+        self.assertEqual(warehouse.calls, [(("test-short", "a" * 32), {"lease_seconds": 3600})])
+
+    def test_expired_lease_fails_closed_before_transfer(self):
+        class Warehouse:
+            def renew(self, *args, **kwargs):
+                raise ValueError("invalid_or_expired_lease")
+        with self.assertRaisesRegex(ValueError, "invalid_or_expired_lease"):
+            renew_before_upload({"content_id": "test-short", "lease_token": "a" * 32},
+                                warehouse=Warehouse())
+        with self.assertRaisesRegex(ValueError, "invalid_warehouse_claim"):
+            renew_before_upload({}, warehouse=Warehouse())
+
     def test_public_status_required(self):
         warehouse = FakeWarehouse()
         claim = {"content_id": "test-short", "lease_token": "a" * 32}
