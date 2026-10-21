@@ -43,7 +43,7 @@ jobs:
       ASTRA_GROQ_MODEL: 'llama-3.3-70b-versatile'
       ASTRA_OPENROUTER_ENABLED: ${{ vars.ASTRA_OPENROUTER_ENABLED || '0' }}
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-      ASTRA_OPENROUTER_MODEL: 'meta-llama/llama-3.3-70b-instruct:free'
+      ASTRA_OPENROUTER_MODEL: 'openrouter/free'
       ASTRA_GEMINI_MODEL: 'gemini-3.1-flash-lite'
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       ASTRA_OPENAI_ENABLED: '0'
