@@ -52,7 +52,7 @@ jobs:
           import json, subprocess
           p = subprocess.run(['ffmpeg','-hide_banner','-i','astra-narrated-review.mp4','-vn','-af','astats=metadata=1:reset=0','-f','null','-'],capture_output=True,text=True,check=True)
           import re
-          matches = re.findall(r'RMS level dB:\\s*(-?[0-9.]+)',p.stderr)
+          matches = re.findall(r'RMS level dB:\s*(-?[0-9.]+)',p.stderr)
           if not matches or max(float(x) for x in matches) < -55:
               raise SystemExit('Narration audio too quiet or silent')
           print('ASTRA_NARRATION_RMS_DB=',max(float(x) for x in matches))
