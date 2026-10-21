@@ -71,8 +71,9 @@ def confirm_publication(claim, video_id, status, *, warehouse=None):
     import re
     if not isinstance(claim, dict) or not re.fullmatch(r"[A-Za-z0-9_-]{11}", str(video_id)):
         raise ValueError("invalid_publication_evidence")
-    if not isinstance(status, dict) or status.get("privacyStatus") != "public":
-        raise ValueError("youtube_public_visibility_not_verified")
+    if (not isinstance(status, dict) or status.get("privacyStatus") != "public"
+            or status.get("uploadStatus") != "processed"):
+        raise ValueError("youtube_public_processing_not_verified")
     if warehouse is None:
         from astra_v2.adaptive_shared_queue import warehouse_from_environment
         warehouse = warehouse_from_environment()
