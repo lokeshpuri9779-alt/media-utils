@@ -1,20 +1,80 @@
 {
-  "observed_at": "2026-10-21T19:35:03.005876+00:00",
-  "generated": 20,
+  "observed_at": "2026-10-21T22:49:32.331390+00:00",
+  "generated": 3,
   "requested": 20,
-  "generation_failures": [],
-  "reviewed": 20,
-  "approved": 10,
-  "review_issues": [
-    "The candidate story 'The Rescuer of Granite Peak' closely mirrors the recently published title and premise of 'The Rescuer of the Crimson Cliff'.",
-    "The candidate story title 'The Navigator and the Fractured Hull' follows a recently published naming convention and premise pattern present in the comparison history ('The Icebreaker and the Broken Sledge', 'The Caretaker of Ironwood Sanctuary', 'The Nomad Who Found Rain Beneath the Dunes'), indicating a lack of distinct originality in title and thematic framing.",
-    "The title 'The Caretaker and the Last Heir' strongly parallels recently published titles in the comparison history such as 'The Caretaker of Ironwood Sanctuary', presenting a high risk of repeating recently published premises and tropes regarding caretakers and isolated domains.",
-    "The title and premise ('The Caretaker and the Last Seedling') strongly echo recently published tropes and titles in the comparison history, specifically 'The Caretaker of Ironwood Sanctuary'.",
-    "The title and theme closely mirror recently published works in the comparison history, specifically 'The Caretaker of Ironwood Sanctuary', and present a heavily overlapping thematic premise of an artificial caretaker or archivist protecting a vulnerable natural element.",
-    "ai_editorial_rejection",
-    "review_failed:HTTP_429",
-    "review_provider:rate_limited"
+  "generation_failures": [
+    {
+      "index": 0,
+      "reason": "ValueError"
+    },
+    {
+      "index": 1,
+      "reason": "ValueError"
+    },
+    {
+      "index": 2,
+      "reason": "ValueError"
+    },
+    {
+      "index": 3,
+      "reason": "ValueError"
+    },
+    {
+      "index": 4,
+      "reason": "ValueError"
+    },
+    {
+      "index": 6,
+      "reason": "ValueError"
+    },
+    {
+      "index": 7,
+      "reason": "ValueError"
+    },
+    {
+      "index": 8,
+      "reason": "ValueError"
+    },
+    {
+      "index": 9,
+      "reason": "ValueError"
+    },
+    {
+      "index": 10,
+      "reason": "ValueError"
+    },
+    {
+      "index": 11,
+      "reason": "ValueError"
+    },
+    {
+      "index": 12,
+      "reason": "ValueError"
+    },
+    {
+      "index": 13,
+      "reason": "ValueError"
+    },
+    {
+      "index": 15,
+      "reason": "ValueError"
+    },
+    {
+      "index": 16,
+      "reason": "ValueError"
+    },
+    {
+      "index": 17,
+      "reason": "ValueError"
+    },
+    {
+      "index": 18,
+      "reason": "ValueError"
+    }
   ],
+  "reviewed": 3,
+  "approved": 3,
+  "review_issues": [],
   "approval_pair_present": true,
   "model_access": {
     "status": "ok",
