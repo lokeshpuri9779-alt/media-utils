@@ -43,6 +43,14 @@ class WarehouseBoundaryTests(unittest.TestCase):
         self.assertEqual(len(warehouse.confirmations), 1)
         self.assertEqual(len(warehouse.confirmations[0][1]["confirmation_digest"]), 64)
 
+    def test_missing_qa_never_initializes_remote_dependencies(self):
+        with patch("astra_v2.adaptive_shared_queue.warehouse_from_environment",
+                   side_effect=AssertionError("remote warehouse initialized")):
+            with patch("astra_v2.editorial_runway_diagnostic.editorial_runway",
+                       return_value={"eligible_ids": []}):
+                with self.assertRaisesRegex(RuntimeError, "warehouse_authoritative_qa_verifier_missing"):
+                    take("/tmp/astra-no-remote-dependencies.mp4")
+
     def test_invalid_editorial_manifest_never_claims(self):
         warehouse = FakeWarehouse()
         class ForbiddenArchive:

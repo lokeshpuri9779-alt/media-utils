@@ -15,9 +15,6 @@ def take(output, *, warehouse=None, archive=None):
     from astra_v2.adaptive_package_archive import PackageArchive
     from astra_v2.adaptive_remote_store import store_from_environment
 
-    warehouse = warehouse if warehouse is not None else warehouse_from_environment()
-    archive = archive if archive is not None else PackageArchive(
-        store_from_environment(os.getenv("ASTRA_ARTIFACT_CACHE", "storage/artifacts")))
     # Check editorial readiness before claiming any durable reservation.
     from astra_v2.editorial_runway_diagnostic import editorial_runway
     runway = editorial_runway(
@@ -25,9 +22,13 @@ def take(output, *, warehouse=None, archive=None):
         os.getenv("ASTRA_EDITORIAL_REVIEWS_FILE", "editorial/reviewed_decisions.json"),
         os.getenv("ASTRA_PUBLISHER_STATE_PATH", "astra_v2_state.json"),
         os.getenv("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json"))
-    # Independent package QA verification is not implemented. Refuse before
-    # claiming a lease, so an intentionally blocked run cannot strand inventory.
+    # The remote queue contains digest references, not independently trusted
+    # QA verdicts. Do not acquire a lease until a verifier binds a verdict
+    # to the exact archived video and approved story.
     raise RuntimeError("warehouse_authoritative_qa_verifier_missing")
+    warehouse = warehouse if warehouse is not None else warehouse_from_environment()
+    archive = archive if archive is not None else PackageArchive(
+        store_from_environment(os.getenv("ASTRA_ARTIFACT_CACHE", "storage/artifacts")))
     claim = warehouse.claim(lease_seconds=3600)
     if claim is None:
         return None
