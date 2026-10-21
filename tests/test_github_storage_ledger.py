@@ -1,6 +1,6 @@
 import unittest
 
-from astra_v2.github_storage_ledger import SCHEMA, reserve, settle, release, transact
+from astra_v2.github_storage_ledger import SCHEMA, reserve, settle, release, transact, validate
 
 
 def state():
@@ -29,6 +29,18 @@ class StorageLedgerTests(unittest.TestCase):
             settle(reserve(state(), "a", 20), "a", 21)
         with self.assertRaises(ValueError):
             reserve(reserve(state(), "a", 20), "a", 30)
+
+    def test_zero_byte_settlement_is_exact(self):
+        done = settle(reserve(state(), "zero", 20), "zero", 0)
+        self.assertEqual(done["used_bytes"], 10)
+        self.assertEqual(done["settled"]["zero"], 0)
+        with self.assertRaisesRegex(RuntimeError, "already_settled"):
+            reserve(done, "zero", 20)
+
+    def test_rejects_settled_history_exceeding_used(self):
+        invalid = {**state(), "settled": {"impossible": 11}}
+        with self.assertRaisesRegex(ValueError, "settled_history_exceeds_used"):
+            validate(invalid)
 
     def test_release(self):
         self.assertEqual(release(reserve(state(), "a", 10), "a"), state())

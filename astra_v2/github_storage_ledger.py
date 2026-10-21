@@ -29,10 +29,12 @@ def validate(state):
         raise ValueError("invalid_settled_history")
     for key, value in settled.items():
         if (not isinstance(key, str) or not 1 <= len(key) <= 128
-                or type(value) is not int or value <= 0):
+                or type(value) is not int or value < 0):
             raise ValueError("invalid_settled_entry")
     if set(settled).intersection(reservations):
         raise ValueError("settled_reservation_overlap")
+    if sum(settled.values()) > used:
+        raise ValueError("settled_history_exceeds_used")
     if used + sum(reservations.values()) > cap:
         raise ValueError("ledger_over_capacity")
     return state
@@ -73,7 +75,7 @@ def settle(state, identity, actual_bytes):
     settled = dict(state.get("settled", {}))
     if len(settled) >= 100000:
         raise RuntimeError("settled_history_capacity_exhausted")
-    settled[identity] = actual_bytes if actual_bytes > 0 else original
+    settled[identity] = actual_bytes
     result = {**state, "used_bytes": state["used_bytes"] + actual_bytes,
               "reservations": reservations, "settled": settled}
     validate(result)
