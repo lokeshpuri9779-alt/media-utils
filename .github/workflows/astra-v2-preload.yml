@@ -257,6 +257,13 @@ jobs:
                   consumed_ids = publisher_history_ids(journal)
                   result["trusted_run_preflight"] = inventory_eligibility_snapshot(excluded_ids=consumed_ids)
                   result["trusted_run_preflight"]["excluded_history_ids"] = len(consumed_ids)
+                  try:
+                      from astra_v2.preload_queue import package_integrity_snapshot
+                      result["package_integrity_sample"] = package_integrity_snapshot(
+                          excluded_ids=consumed_ids, max_packages=2)
+                  except Exception as integrity_exc:
+                      result["package_integrity_sample"] = {
+                          "status": "unavailable", "error_type": type(integrity_exc).__name__}
               except Exception as audit_exc:
                   result["trusted_run_preflight"] = {"status": "unavailable", "error_type": type(audit_exc).__name__}
           except Exception as exc:
