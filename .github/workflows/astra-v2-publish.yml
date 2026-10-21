@@ -402,6 +402,9 @@ jobs:
                   report = {}
           except (OSError, ValueError):
               report = {}
+          publish_step = os.getenv("PUBLISH_RESULT", "unknown")
+          fresh_upload_attempted = publish_step == "success" and bool(report.get("content_id"))
+          fresh_publication_confirmed = fresh_upload_attempted and report.get("outcome") == "published"
           # Workflow-level diagnostic is persisted even when preflight skips
           # the render controller; never imply that an upload occurred.
           state["last_workflow_result"] = {
@@ -412,6 +415,9 @@ jobs:
               "job_status_before_persist": os.getenv("JOB_RESULT", "unknown"),
               "outcome": str(report.get("outcome") or "no_report")[:80],
               "reason": str(report.get("reason") or "")[:250],
+              "fresh_upload_attempted": fresh_upload_attempted,
+              "fresh_publication_confirmed": fresh_publication_confirmed,
+              "reconciled_previous_publication": publish_step == "skipped" and report.get("outcome") == "published",
           }
           # Persist bounded candidate counts so supply failures can be diagnosed
           # from astra-state without access to private Actions logs.
