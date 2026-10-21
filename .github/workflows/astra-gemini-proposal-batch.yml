@@ -8,13 +8,13 @@ on:
       - 'astra_v2/omniroute_gemini.py'
       - 'astra_v2/gemini_batch_review.py'
   schedule:
-    - cron: '17 2 * * *'
+    - cron: '17 */6 * * *'
   workflow_dispatch:
     inputs:
       count:
         description: Story proposals to request (1-50)
         required: true
-        default: '10'
+        default: '20'
 permissions:
   contents: write
 jobs:
@@ -67,7 +67,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           ASTRA_GEMINI_ENABLED: '1'
-          BATCH_COUNT: ${{ inputs.count || '10' }}
+          BATCH_COUNT: ${{ inputs.count || '20' }}
           ASTRA_GEMINI_MODEL: 'gemini-3.5-flash-lite'
           ASTRA_GEMINI_FALLBACK_MODEL: 'gemini-3.1-flash-lite'
         run: python -m astra_v2.gemini_batch --count "$BATCH_COUNT"
