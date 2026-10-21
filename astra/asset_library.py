@@ -98,6 +98,15 @@ def load_assets(manifest_path: str | Path = DEFAULT_MANIFEST) -> list[dict]:
 
 def select_asset(scene: dict, manifest_path: str | Path = DEFAULT_MANIFEST) -> dict | None:
     """Choose a relevant approved asset; no match means normal rendering continues."""
+    assets = load_assets(manifest_path)
+    explicit_id = scene.get("artwork_asset_id")
+    if explicit_id:
+        matches = [asset for asset in assets
+                   if asset.get("id") == explicit_id
+                   and asset.get("story_content_id") == scene.get("story_content_id")
+                   and asset.get("scene_id") == scene.get("scene_id")
+                   and asset.get("story_content_id") and asset.get("scene_id")]
+        return matches[0] if len(matches) == 1 else None
     query = _tokens(" ".join(str(scene.get(k) or "") for k in (
         "story_subject", "visual", "visual_intent", "visual_prompt",
         "headline", "label", "speech", "action",
@@ -105,7 +114,10 @@ def select_asset(scene: dict, manifest_path: str | Path = DEFAULT_MANIFEST) -> d
     if not query:
         return None
     ranked = []
-    for asset in load_assets(manifest_path):
+    for asset in assets:
+        # Story-specific art is eligible only through an exact scene binding.
+        if asset.get("story_content_id") or asset.get("scene_id"):
+            continue
         overlap = query & asset["_tags"]
         if not overlap:
             continue
