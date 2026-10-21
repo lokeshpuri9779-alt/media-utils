@@ -2,6 +2,7 @@
 import json
 import os
 import re
+import time
 import urllib.error
 import urllib.request
 
@@ -54,13 +55,21 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         data=body, method="POST", headers={
             "x-goog-api-key": os.environ["GEMINI_API_KEY"],
             "Content-Type": "application/json"})
-    try:
-        with urllib.request.urlopen(req, timeout=45) as response:
-            result = json.load(response)
-    except urllib.error.HTTPError as exc:
-        raise RuntimeError("Gemini HTTP " + str(exc.code)) from exc
-    except (urllib.error.URLError, TimeoutError) as exc:
-        raise RuntimeError("Gemini transport failed: " + type(exc).__name__) from exc
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=45) as response:
+                result = json.load(response)
+            break
+        except urllib.error.HTTPError as exc:
+            if exc.code in (500, 502, 503, 504) and attempt < 2:
+                time.sleep(2 ** attempt)
+                continue
+            raise RuntimeError("Gemini HTTP " + str(exc.code)) from exc
+        except (urllib.error.URLError, TimeoutError) as exc:
+            if attempt < 2:
+                time.sleep(2 ** attempt)
+                continue
+            raise RuntimeError("Gemini transport failed: " + type(exc).__name__) from exc
     candidates = result.get("candidates") or []
     if not candidates:
         raise ValueError("Gemini returned no candidates")
