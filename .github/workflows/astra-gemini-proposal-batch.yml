@@ -63,8 +63,7 @@ jobs:
           git fetch origin astra-state
           STATE_DIR="$(mktemp -d)"
           git worktree add --detach "$STATE_DIR" origin/astra-state
-          cp runtime-health/ai-reviewed-stories.json "$STATE_DIR/ai-reviewed-stories.json"
-          cp runtime-health/ai-reviewed-decisions.json "$STATE_DIR/ai-reviewed-decisions.json"
+          python -m astra_v2.gemini_inventory_merge "$STATE_DIR"
           (
             cd "$STATE_DIR"
             git add ai-reviewed-stories.json ai-reviewed-decisions.json
