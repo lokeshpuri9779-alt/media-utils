@@ -233,6 +233,29 @@ jobs:
           else
             echo "ASTRA_RENDER_PEAK_RAM_UNAVAILABLE"
           fi
+      - name: Report pre-render inventory snapshot
+        if: always() && matrix.lane == 0
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          try:
+              from astra_v2.preload_queue import inventory_snapshot
+              result = inventory_snapshot()
+          except Exception as exc:
+              result = {"status": "unavailable", "error_type": type(exc).__name__}
+          print("ASTRA_PRELOAD_INVENTORY=" + json.dumps(result, sort_keys=True))
+          with open("astra-preload-inventory.json", "w", encoding="utf-8") as handle:
+              json.dump(result, handle, indent=2, sort_keys=True)
+          PY
+      - name: Save inventory diagnostic artifact
+        if: always() && matrix.lane == 0
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-preload-inventory-${{ github.run_id }}
+          path: astra-preload-inventory.json
+          if-no-files-found: warn
+          retention-days: 14
       - name: Persist approved video in Actions artifact storage
         if: steps.render.outputs.content_id != ''
         uses: actions/upload-artifact@v4
