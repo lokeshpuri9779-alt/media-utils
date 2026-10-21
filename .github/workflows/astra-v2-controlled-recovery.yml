@@ -1,0 +1,57 @@
+name: ASTRA V2 - Controlled Publisher Recovery
+on:
+  workflow_run:
+    workflows: ['ASTRA V2 - Publisher Health Watch']
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  actions: write
+  contents: read
+concurrency:
+  group: astra-v2-controlled-recovery
+  cancel-in-progress: false
+jobs:
+  recover:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'failure' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Guarded recovery dispatch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          python - <<'PY'
+          import base64, json, os, subprocess
+          from datetime import datetime, timezone
+          now = datetime.now(timezone.utc)
+          repo = os.environ["REPO"]
+          def api(path):
+              p = subprocess.run(["gh", "api", f"repos/{repo}/{path}"],
+                                 capture_output=True, text=True, check=True, timeout=35)
+              return json.loads(p.stdout)
+          def minutes(raw):
+              if not raw: return float("inf")
+              return (now-datetime.fromisoformat(raw.replace("Z","+00:00"))).total_seconds()/60
+          def skip(reason):
+              print("ASTRA_RECOVERY=SKIP:"+reason)
+              raise SystemExit(0)
+          runs = api("actions/workflows/astra-v2-publish.yml/runs?per_page=30")["workflow_runs"]
+          if any(r["status"] != "completed" for r in runs):
+              skip("publisher_active")
+          if any(minutes(r["created_at"]) < 60 for r in runs):
+              skip("recent_publisher_run")
+          state_file = api("contents/astra_v2_state.json?ref=astra-state")
+          state = json.loads(base64.b64decode(state_file["content"]).decode())
+          if state.get("version") != 2: skip("invalid_journal")
+          if state.get("pending"): skip("pending_upload_requires_reconciliation")
+          if state.get("blocked_until") and minutes(state["blocked_until"]) < 0:
+              skip("publisher_cooldown")
+          own = api("actions/workflows/astra-v2-controlled-recovery.yml/runs?per_page=30")["workflow_runs"]
+          if any(str(r["id"]) != os.environ["GITHUB_RUN_ID"] and
+                 minutes(r["created_at"]) < 90 for r in own):
+              skip("recovery_cooldown")
+          subprocess.run(["gh","workflow","run","astra-v2-publish.yml",
+                          "--repo",repo,"--ref","main"],check=True,timeout=35)
+          print("ASTRA_RECOVERY=DISPATCHED")
+          PY
