@@ -1,0 +1,30 @@
+name: ASTRA Artwork End-to-End Smoke
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'astra/artwork_e2e_smoke.py'
+      - 'tests/test_artwork_e2e_smoke.py'
+      - 'astra/artwork_archive.py'
+      - 'astra/artwork_restore.py'
+      - 'astra/asset_library.py'
+      - '.github/workflows/astra-artwork-e2e.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  artwork-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install 'Pillow>=10,<12'
+      - name: Run end-to-end archive restore render tests
+        run: python -m unittest discover -s tests -p 'test_artwork_e2e_smoke.py' -v
+      - name: Print end-to-end proof
+        run: python -m astra.artwork_e2e_smoke
