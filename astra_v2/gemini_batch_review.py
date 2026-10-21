@@ -12,7 +12,12 @@ def review_batch(document, history, reviewer=assess):
         raise ValueError("invalid_unreviewed_batch")
     approved, decisions, audit = [], [], []
     for proposal in document["stories"]:
-        # Match the live creative pipeline: generated microfiction is not an\n        # eligible authored candidate until explicitly normalized for review.\n        story = dict(proposal)\n        if story.get("kind") != "microfiction":\n            raise ValueError("unexpected_gemini_proposal_kind")\n        story["kind"] = "authored_causal_story"\n        verdict = reviewer(story, history + approved)
+        # Normalize generated microfiction before independent editorial review.
+        story = dict(proposal)
+        if story.get("kind") != "microfiction":
+            raise ValueError("unexpected_gemini_proposal_kind")
+        story["kind"] = "authored_causal_story"
+        verdict = reviewer(story, history + approved)
         record = verdict.get("record")
         accepted = verdict.get("approved") is True and isinstance(record, dict) and record.get("story_sha256") == story_digest(story)
         audit.append({"content_id": story["content_id"], "approved": accepted,
