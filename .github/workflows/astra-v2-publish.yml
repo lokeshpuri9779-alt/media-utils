@@ -516,11 +516,7 @@ jobs:
           for f in performance.json astra_v2_state.json astra_stage_feedback.json SHORTS.md; do
             if [ -f "$f" ]; then cp "$f" "$WORKTREE/$f"; fi
           done
-          # Checkpoint only a complete AI review pair, never a lone approval.
-          if [ -s runtime-health/ai-reviewed-stories.json ] && [ -s runtime-health/ai-reviewed-decisions.json ]; then
-            cp runtime-health/ai-reviewed-stories.json "$WORKTREE/ai-reviewed-stories.json"
-            cp runtime-health/ai-reviewed-decisions.json "$WORKTREE/ai-reviewed-decisions.json"
-          fi
+          # Gemini alone persists the approval pair; publisher must not restore an older snapshot over it.
           if [ -s runtime-health/ai-editorial-reviews.json ]; then
             cp runtime-health/ai-editorial-reviews.json "$WORKTREE/ai-editorial-reviews.json"
           fi
