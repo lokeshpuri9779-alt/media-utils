@@ -71,6 +71,23 @@ class StoryFactoryTests(unittest.TestCase):
             self.assertEqual(second["next_slot"],1000)
             self.assertEqual(second["last_awaiting_review"],0)
             self.assertEqual(len(output.read_text().splitlines()),500)
+    def test_new_mechanisms_enter_after_cursor_advanced(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            state=Path(tmp)/"state.json"
+            output=Path(tmp)/"candidates.jsonl"
+            old_keys=[row[0] for row in MECHANISMS[:-8]]
+            state.write_text(json.dumps({"next_slot": 10000,
+                                         "seen_premise_keys": old_keys,
+                                         "seen_plot_signatures": []}))
+            self.assertEqual(generate(state, output, batch_size=12),12)
+            rows=[json.loads(line) for line in output.read_text().splitlines()]
+            reviews=[json.loads(line) for line in output.with_name("story_factory_review.jsonl").read_text().splitlines()]
+            self.assertEqual({row["premise_key"] for row in rows[:8]},
+                             {row[0] for row in MECHANISMS[-8:]})
+            self.assertTrue(all(r["status"]=="awaiting_editorial_review" for r in reviews[:8]))
+            self.assertEqual(json.loads(state.read_text())["next_slot"],10012)
+            self.assertEqual(len({r["candidate_id"] for r in rows}),12)
+
     def test_sample_unique_ids(self):
         self.assertEqual(len({candidate_at(i)["candidate_id"] for i in range(1000)}),1000)
 if __name__=="__main__": unittest.main()
