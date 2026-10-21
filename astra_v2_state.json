@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-21",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 8,
+  "attempts": 9,
   "confirmed_today": 8,
-  "last_attempt_at": "2026-10-21T14:34:13.799108+00:00",
+  "last_attempt_at": "2026-10-21T15:12:02.820143+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -2341,14 +2341,40 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "quality_skip",
+  "pending": {
+    "PZrU13sOiBc": {
+      "content_id": "rayvan-gemini-9a0b85ba0427ce02f001",
+      "title": "The Librarian of Celestial Geometry",
+      "day": "2026-10-21",
+      "uploaded_at": "2026-10-21T15:12:05.845840+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "7a93496f8bf3a67b935e1b8ecd441344c20aaa15931fab0b75ce66ef8d6ac02b",
+      "story_beats": [
+        {
+          "speech": "Look closely at the constellations, traveler; they are not burning balls of gas but flickers of corrupted code within our glass sky."
+        },
+        {
+          "speech": "We have spent eons calculating the trajectory of these lights, only to find the gears behind them are rusted and grinding down slowly."
+        },
+        {
+          "speech": "The transmission from outside has finally ceased, leaving us in total darkness while the grand simulation begins to shed its final digital skin."
+        },
+        {
+          "speech": "As the outer hand reaches for the sphere to polish it, we realize we are but tiny reflections trapped in a child's forgotten toy."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-21T15:07:17.159174+00:00",
+  "last_preflight_at": "2026-10-21T15:09:01.632475+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-21T15:08:08.684110+00:00",
+    "at": "2026-10-21T15:12:06.478112+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -6058,13 +6084,36 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-9a0b85ba0427ce02f001": {
+      "at": "2026-10-21T15:12:02.820126+00:00",
+      "title": "The Librarian of Celestial Geometry",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "7a93496f8bf3a67b935e1b8ecd441344c20aaa15931fab0b75ce66ef8d6ac02b",
+      "story_beats": [
+        {
+          "speech": "Look closely at the constellations, traveler; they are not burning balls of gas but flickers of corrupted code within our glass sky."
+        },
+        {
+          "speech": "We have spent eons calculating the trajectory of these lights, only to find the gears behind them are rusted and grinding down slowly."
+        },
+        {
+          "speech": "The transmission from outside has finally ceased, leaving us in total darkness while the grand simulation begins to shed its final digital skin."
+        },
+        {
+          "speech": "As the outer hand reaches for the sphere to polish it, we realize we are but tiny reflections trapped in a child's forgotten toy."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-21T15:08:08.684031+00:00",
-    "publication_outcome": "quality_skip",
-    "publication_reason": "no_approved_original_story_available",
-    "character_memory": "not_reported",
+    "at": "2026-10-21T15:12:06.478057+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -6072,41 +6121,30 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-21T15:08:08.684095+00:00",
+    "at": "2026-10-21T15:12:06.478103+00:00",
     "history_file_present": true,
-    "publication_outcome": "quality_skip",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-21T15:07:49.323490+00:00",
-    "outcome": "quality_skip",
-    "reason": "no_approved_original_story_available",
-    "content_id": "",
-    "video_url": "",
-    "story_selection": {
-      "considered": 67,
-      "not_ready": 64,
-      "policy_rejected": {
-        "not_production_ready": 3
-      },
-      "already_seen": 0,
-      "duration_rejected": 0,
-      "render_qa_rejected": 0,
-      "render_exception": {},
-      "approved": 0
-    }
+    "at": "2026-10-21T15:09:37.375141+00:00",
+    "outcome": "processing",
+    "reason": "",
+    "content_id": "rayvan-gemini-9a0b85ba0427ce02f001",
+    "video_url": "https://www.youtube.com/watch?v=PZrU13sOiBc",
+    "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-21T15:08:08.683780+00:00",
+    "at": "2026-10-21T15:12:06.477862+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "quality_skip",
-    "reason": "no_approved_original_story_available"
+    "outcome": "processing",
+    "reason": ""
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-21T15:08:08.684024+00:00",
+    "at": "2026-10-21T15:12:06.478053+00:00",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
         "eligible": 0,
@@ -6118,28 +6156,26 @@
         "total": 156
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 156,
+        "before": 157,
         "fingerprint": 0,
         "id": 89,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 67,
+        "remaining": 68,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 67,
-        "remaining": 0
+        "pool": 68,
+        "remaining": 1
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
-        "approved": 0,
-        "considered": 67,
+        "approved": 1,
+        "considered": 1,
         "duration_rejected": 0,
-        "not_ready": 64,
-        "policy_rejected": {
-          "not_production_ready": 3
-        },
+        "not_ready": 0,
+        "policy_rejected": {},
         "render_exception": {},
         "render_qa_rejected": 0
       }
