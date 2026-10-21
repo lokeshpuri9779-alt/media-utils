@@ -1,6 +1,7 @@
 """Convert Story Factory JSONL into a bounded, non-publishing editorial packet."""
 import argparse
 import json
+import hashlib
 from collections import Counter
 from pathlib import Path
 
@@ -20,6 +21,10 @@ def build_packet(candidates, reviews):
         seen.add(cid)
         if candidate.get("kind") != "unreviewed_causal_draft" or candidate.get("production_ready") is not False:
             raise ValueError("factory_input_must_be_unapproved")
+        if review.get("premise_key") != candidate.get("premise_key"):
+            raise ValueError("candidate_review_premise_mismatch")
+        if not isinstance(candidate.get("story_beats"), list) or len(candidate["story_beats"]) != 4:
+            raise ValueError("invalid_factory_story_beats")
         if review.get("production_ready") is not False:
             raise ValueError("review_must_be_unapproved")
         status = review.get("status")
@@ -30,7 +35,7 @@ def build_packet(candidates, reviews):
             raise ValueError("invalid_review_issues")
         reasons.update(issues)
         items.append({
-            "candidate_id": cid, "title": candidate.get("title"),
+            "candidate_id": cid, "source_sha256": hashlib.sha256(json.dumps(candidate, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode("utf-8")).hexdigest(), "title": candidate.get("title"),
             "premise_key": candidate.get("premise_key"),
             "story_beats": candidate.get("story_beats"),
             "review_status": status, "review_issues": issues,
