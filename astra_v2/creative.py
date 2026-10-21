@@ -187,7 +187,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 premium_stories.insert(0, generated)
                 print("ASTRA_OMNIROUTE_GENERATED=gemini")
         except (RuntimeError, ValueError, KeyError, json.JSONDecodeError) as exc:
-            print("ASTRA_OMNIROUTE_GENERATION_FAILED=" + type(exc).__name__)
+            print("ASTRA_OMNIROUTE_GENERATION_FAILED=" + type(exc).__name__ + ":" + str(exc)[:120])
     if openai_enabled() and not serialized_preload:
         try:
             generated = openai_generate(excluded_ids, excluded_titles, history_narratives)
