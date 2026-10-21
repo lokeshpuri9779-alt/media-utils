@@ -71,6 +71,44 @@ jobs:
             git push origin HEAD:refs/heads/astra-state
           )
           git worktree remove --force "$STATE_DIR"
+      - name: Persist Gemini batch diagnostic
+        if: always()
+        run: |
+          git config user.name "astra-bot"
+          git config user.email "astra-bot@users.noreply.github.com"
+          git fetch origin astra-state
+          STATE_DIR="$(mktemp -d)"
+          git worktree add --detach "$STATE_DIR" origin/astra-state
+          python - "$STATE_DIR" <<'PY'
+          import json
+          import sys
+          from datetime import datetime, timezone
+          from pathlib import Path
+          root = Path("runtime-health")
+          def read(name):
+              path = root / name
+              return json.loads(path.read_text(encoding="utf-8")) if path.is_file() else None
+          proposals = read("gemini-proposals.json")
+          reviews = read("ai-batch-review-audit.json")
+          record = {
+              "observed_at": datetime.now(timezone.utc).isoformat(),
+              "generated": proposals.get("generated") if proposals else None,
+              "requested": proposals.get("requested") if proposals else None,
+              "generation_failures": proposals.get("failures", []) if proposals else ["generation_not_completed"],
+              "reviewed": len(reviews.get("reviews", [])) if reviews else None,
+              "approved": sum(x.get("approved") is True for x in reviews.get("reviews", [])) if reviews else None,
+              "review_issues": sorted(set(issue for item in reviews.get("reviews", []) for issue in item.get("issues", []))) if reviews else ["review_not_completed"],
+              "approval_pair_present": (root / "ai-reviewed-stories.json").is_file() and (root / "ai-reviewed-decisions.json").is_file(),
+          }
+          (Path(sys.argv[1]) / "gemini-batch-diagnostic.json").write_text(json.dumps(record, indent=2) + "\\n", encoding="utf-8")
+          print("ASTRA_GEMINI_BATCH_DIAGNOSTIC=" + json.dumps(record))
+          PY
+          (
+            cd "$STATE_DIR"
+            git add gemini-batch-diagnostic.json
+            git diff --cached --quiet || { git commit -m "Record Gemini batch outcome"; git push origin HEAD:refs/heads/astra-state; }
+          )
+          git worktree remove --force "$STATE_DIR"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
