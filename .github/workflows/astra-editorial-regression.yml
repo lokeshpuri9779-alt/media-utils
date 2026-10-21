@@ -8,6 +8,7 @@ on:
       - 'astra_v2/creative.py'
       - 'tests/test_independent_editorial_reviewer.py'
       - 'tests/test_editorial_review_journal.py'
+      - 'tests/test_independent_editorial_handoff.py'
       - '.github/workflows/astra-editorial-regression.yml'
   workflow_dispatch:
 permissions:
@@ -24,4 +25,4 @@ jobs:
       - name: Validate editorial module syntax
         run: python -m py_compile astra_v2/independent_editorial_reviewer.py astra_v2/editorial_review_journal.py astra_v2/independent_editorial_handoff.py astra_v2/creative.py
       - name: Test independent editorial review and journal
-        run: python -m unittest discover -s tests -p 'test_independent_editorial_reviewer.py' -v && python -m unittest discover -s tests -p 'test_editorial_review_journal.py' -v
+        run: python -m unittest discover -s tests -p 'test_independent_editorial_reviewer.py' -v && python -m unittest discover -s tests -p 'test_editorial_review_journal.py' -v && python -m unittest discover -s tests -p 'test_independent_editorial_handoff.py' -v
