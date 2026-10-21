@@ -179,15 +179,15 @@ def make_candidate(path, excluded_ids, excluded_titles):
     from astra_v2.story_planning import is_planned_story
     # Generate after loading all ledgers, so model proposals see actual history.
     # OmniRoute free-tier model proposals retain every existing publication and QA gate.
-    from astra_v2.omniroute_gemini import enabled as gemini_enabled, generate as gemini_generate
-    if gemini_enabled() and not serialized_preload:
+    from astra_v2.omniroute import enabled as omni_enabled, generate as omni_generate
+    if omni_enabled() and not serialized_preload:
         try:
-            generated = gemini_generate(excluded_ids, excluded_titles, history_narratives)
+            generated = omni_generate(excluded_ids, excluded_titles, history_narratives)
             if generated:
                 premium_stories.insert(0, generated)
-                print("ASTRA_OMNIROUTE_GENERATED=gemini")
+                print("ASTRA_OMNIROUTE_GENERATED=1")
         except (RuntimeError, ValueError, KeyError, json.JSONDecodeError) as exc:
-            print("ASTRA_OMNIROUTE_GENERATION_FAILED=" + type(exc).__name__ + ":" + str(exc)[:120])
+            print("ASTRA_OMNIROUTE_GENERATION_FAILED=" + type(exc).__name__ + ":" + str(exc)[:350])
     if openai_enabled() and not serialized_preload:
         try:
             generated = openai_generate(excluded_ids, excluded_titles, history_narratives)
