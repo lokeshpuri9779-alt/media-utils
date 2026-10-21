@@ -436,6 +436,10 @@ jobs:
                               pass
           state["last_story_selection_diagnostics"] = {
               "at": datetime.now(timezone.utc).isoformat(),
+              "collection_status": ("collected" if diagnostics else
+                                    "not_applicable_publisher_skipped" if publish_step == "skipped" else
+                                    "missing_diagnostics"),
+              "publish_step": publish_step,
               "counters": diagnostics,
               "note": "Diagnostic counts only; no approval or publishing effect",
           }
