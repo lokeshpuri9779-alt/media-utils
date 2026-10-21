@@ -1,47 +1,11 @@
 {
-  "observed_at": "2026-10-21T17:56:34.404877+00:00",
+  "observed_at": "2026-10-21T18:00:40.741564+00:00",
   "generated": 0,
   "requested": 10,
   "generation_failures": [
     {
       "index": 0,
-      "reason": "RuntimeError"
-    },
-    {
-      "index": 1,
-      "reason": "RuntimeError"
-    },
-    {
-      "index": 2,
-      "reason": "RuntimeError"
-    },
-    {
-      "index": 3,
-      "reason": "RuntimeError"
-    },
-    {
-      "index": 4,
-      "reason": "RuntimeError"
-    },
-    {
-      "index": 5,
-      "reason": "RuntimeError"
-    },
-    {
-      "index": 6,
-      "reason": "RuntimeError"
-    },
-    {
-      "index": 7,
-      "reason": "RuntimeError"
-    },
-    {
-      "index": 8,
-      "reason": "RuntimeError"
-    },
-    {
-      "index": 9,
-      "reason": "RuntimeError"
+      "reason": "provider_http_503"
     }
   ],
   "reviewed": null,
