@@ -61,7 +61,8 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
         raise ValueError("Generated story title or beat count invalid")
     from astra_v2.omniroute import validate_beat_quality
     validate_beat_quality(beats, "Gemini")
-    for beat in beats:\n        if not isinstance(beat, dict):
+    for beat in beats:
+        if not isinstance(beat, dict):
             raise ValueError("Invalid beat")
         for key in ("headline", "speech", "label"):
             if not isinstance(beat.get(key), str) or not 2 <= len(beat[key]) <= 220:
