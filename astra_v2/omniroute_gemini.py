@@ -24,7 +24,10 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
         "Return only JSON keys title, question, answer, beats. Each beat must have "
         "headline, speech, visual, label, story_beat. Speech 10-24 words each; "
         "visual one of planet, robot, signal, ship, forest, door; story_beat one "
-        "of reveal, build, mechanism, twist, payoff. Title 8-75 characters. "
+        "of reveal, build, mechanism, twist, payoff. "
+        "Use story_beat reveal for beat one and payoff for beat four; "
+        "beats two and three must be build, mechanism or twist. "
+        "Title 8-75 characters. "
         "Avoid recycled plots, copyrighted characters and these prior titles: "
         + json.dumps(sorted(excluded_titles)[:100]) + "."
     )
