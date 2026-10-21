@@ -50,7 +50,7 @@ jobs:
           report={"generated":len(candidates),"awaiting_editorial_review":counts["awaiting_editorial_review"],
                   "needs_new_plot":counts["needs_new_plot"],"issue_counts":dict(sorted(reasons.items())),
                   "automatically_approved":0,"production_ready":0}
-          Path("story_factory_review_summary.json story_factory_editorial_packet.json").write_text(json.dumps(report,indent=2,sort_keys=True)+chr(10))
+          Path("story_factory_review_summary.json").write_text(json.dumps(report,indent=2,sort_keys=True)+chr(10))
           print("ASTRA_STORY_FACTORY_REVIEW_SUMMARY="+json.dumps(report,sort_keys=True))
           print("Validated review-only replenishment batch:",len(candidates))
           PY
@@ -66,7 +66,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add story_factory_state.json story_factory_candidates.jsonl story_factory_review.jsonl story_factory_review_summary.json
+          git add story_factory_state.json story_factory_candidates.jsonl story_factory_review.jsonl story_factory_review_summary.json story_factory_editorial_packet.json
           if ! git diff --cached --quiet; then
             git commit -m "Replenish review-only story candidate batch"
             git push origin HEAD:astra-state
