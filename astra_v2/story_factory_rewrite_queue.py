@@ -38,8 +38,16 @@ def rewrite_packet(packet, prior=(), limit=3, generator=None):
                             "source_sha256": premise["source_sha256"],
                             "status": "rewrite_failed",
                             "error": type(exc).__name__, "approved": False})
+    statuses = {"awaiting_editorial_review": 0, "needs_new_plot": 0}
+    for item in packet["candidates"]:
+        status = item.get("review_status")
+        if status in statuses:
+            statuses[status] += 1
     return {"schema_version": 1, "publication_triggered": False,
-            "approved_count": 0, "rewrites": results}
+            "approved_count": 0, "available_premises": statuses,
+            "selected_for_rewrite": len(results),
+            "blocked_reason": "no_unique_premises" if not results else None,
+            "rewrites": results}
 
 
 def main():
@@ -51,7 +59,7 @@ def main():
     packet = json.loads(Path(args.packet).read_text(encoding="utf-8"))
     result = rewrite_packet(packet, limit=args.limit)
     Path(args.output).write_text(json.dumps(result, indent=2, ensure_ascii=False) + chr(10), encoding="utf-8")
-    print("ASTRA_REWRITE_QUEUE=" + json.dumps({"attempted": len(result["rewrites"]), "approved": 0}))
+    print("ASTRA_REWRITE_QUEUE=" + json.dumps({"attempted": len(result["rewrites"]), "approved": 0, "available_premises": result["available_premises"], "blocked_reason": result["blocked_reason"]}))
 
 
 if __name__ == "__main__":
