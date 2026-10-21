@@ -45,8 +45,7 @@ def main():
     result = generate_batch(args.count, history=load_history(publisher, story_history))
     path = Path(args.output)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "
-")
+    path.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n")
     print("ASTRA_GEMINI_BATCH=" + json.dumps({
         "requested": result["requested"], "generated": result["generated"],
         "failures": result["failures"]}))
