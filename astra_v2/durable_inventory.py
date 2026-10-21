@@ -76,6 +76,33 @@ class Inventory:
             db.commit()
             return {"content_id": cid, "receipt_json": receipt, "fencing": fence}
 
+    def renew(self, content_id: str, owner: str, fencing: int, ttl: int = 600, now: float | None = None):
+        if not 1 <= ttl <= 86400:
+            raise ValueError("invalid_lease")
+        now = time.time() if now is None else now
+        with self.connect() as db:
+            db.execute("BEGIN IMMEDIATE")
+            changed = db.execute("""UPDATE packages SET lease_until=? WHERE
+                content_id=? AND lease_owner=? AND fencing=? AND state='leased'
+                AND approved=1 AND lease_until>=?""",
+                (now + ttl, content_id, owner, fencing, now)).rowcount
+            if changed != 1:
+                db.rollback()
+                raise ValueError("stale_or_expired_lease")
+            db.commit()
+
+    def release(self, content_id: str, owner: str, fencing: int):
+        with self.connect() as db:
+            db.execute("BEGIN IMMEDIATE")
+            changed = db.execute("""UPDATE packages SET state='ready',
+                lease_owner=NULL,lease_until=NULL WHERE content_id=? AND
+                lease_owner=? AND fencing=? AND state='leased' AND approved=1""",
+                (content_id, owner, fencing)).rowcount
+            if changed != 1:
+                db.rollback()
+                raise ValueError("stale_or_unapproved_lease")
+            db.commit()
+
     def complete(self, content_id: str, owner: str, fencing: int, video_id: str):
         if not video_id:
             raise ValueError("missing_video_id")
