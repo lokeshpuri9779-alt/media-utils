@@ -184,9 +184,37 @@ def make_candidate(path, excluded_ids, excluded_titles):
         try:
             generated = omni_generate(excluded_ids, excluded_titles, history_narratives)
             if generated:
-                premium_stories.insert(0, generated)
-                print("ASTRA_OMNIROUTE_GENERATED=1")
-        except (RuntimeError, ValueError, KeyError, json.JSONDecodeError) as exc:
+                # AI generation is not editorial approval. Promote only through
+                # the independent reviewer and existing hash-bound manifest gate.
+                if os.getenv("ASTRA_AUTONOMOUS_EDITORIAL", "0") == "1":
+                    from astra_v2.independent_editorial_reviewer import assess
+                    from astra_v2.story_forge import plot_fingerprint
+                    candidate = dict(generated)
+                    candidate["kind"] = "authored_causal_story"
+                    candidate["plot_fingerprint"] = candidate.get("plot_fingerprint") or plot_fingerprint(
+                        [("", b.get("speech", ""), "", "") for b in candidate.get("story_beats", [])])
+                    from astra_v2.proposal_history import load_history
+                    from pathlib import Path
+                    publisher_file = os.getenv("ASTRA_PUBLISHER_STATE_PATH", "astra_v2_state.json")
+                    history_file = os.getenv("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json")
+                    if not Path(publisher_file).is_file() or not Path(history_file).is_file():
+                        raise ValueError("editorial_requires_complete_publication_history")
+                    complete_history = load_history(publisher_file, history_file)
+                    verdict = assess(candidate, complete_history)
+                    from astra_v2.editorial_review_journal import record_review
+                    record_review(candidate, verdict, os.getenv('ASTRA_EDITORIAL_AUDIT_PATH', 'runtime-health/ai-editorial-reviews.json'), complete_history)
+                    if verdict["approved"]:
+                        from astra_v2.independent_editorial_handoff import handoff
+                        handoff_stories = handoff(candidate, verdict, complete_history,
+                            os.getenv("ASTRA_AI_REVIEWED_STORIES_PATH", "runtime-health/ai-reviewed-stories.json"),
+                            os.getenv("ASTRA_AI_REVIEWED_DECISIONS_PATH", "runtime-health/ai-reviewed-decisions.json"))
+                        premium_stories[:0] = handoff_stories
+                        print("ASTRA_OMNIROUTE_EDITORIAL_APPROVED=" + candidate["content_id"])
+                    else:
+                        print("ASTRA_OMNIROUTE_EDITORIAL_REJECTED=" + json.dumps(verdict["issues"]))
+                else:
+                    print("ASTRA_OMNIROUTE_EDITORIAL_DISABLED=1")
+        except (RuntimeError, ValueError, KeyError, OSError, TypeError, json.JSONDecodeError) as exc:
             print("ASTRA_OMNIROUTE_GENERATION_FAILED=" + type(exc).__name__ + ":" + str(exc)[:350])
     if openai_enabled() and not serialized_preload:
         try:
