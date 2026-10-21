@@ -44,6 +44,8 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
     candidates = result.get("candidates") or []
     if not candidates:
         raise ValueError("Gemini returned no candidates")
+    if candidates[0].get("finishReason") not in (None, "STOP"):
+        raise ValueError("Gemini response incomplete")
     parts = (candidates[0].get("content") or {}).get("parts") or []
     data = json.loads("".join(part.get("text", "") for part in parts))
     title = data.get("title")
