@@ -96,6 +96,9 @@ class GitHubReleaseStore:
     def verify_bytes(self, record):
         digest = record.get("sha256")
         name = self._asset_name(digest)
+        expected_uri = "github-release://" + self.repository + "/" + self.tag + "/" + name
+        if record.get("uri") != expected_uri:
+            raise ValueError("archive_record_origin_mismatch")
         size = record.get("bytes")
         if type(size) is not int or not 0 < size <= MAX_OBJECT_BYTES:
             raise ValueError("invalid_record_size")
