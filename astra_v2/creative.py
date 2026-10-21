@@ -204,7 +204,11 @@ def make_candidate(path, excluded_ids, excluded_titles):
                     from astra_v2.editorial_review_journal import record_review
                     record_review(candidate, verdict, os.getenv('ASTRA_EDITORIAL_AUDIT_PATH', 'runtime-health/ai-editorial-reviews.json'), complete_history)
                     if verdict["approved"]:
-                        premium_stories.insert(0, candidate)
+                        from astra_v2.independent_editorial_handoff import handoff
+                        handoff_stories = handoff(candidate, verdict, complete_history,
+                            os.getenv("ASTRA_AI_REVIEWED_STORIES_PATH", "runtime-health/ai-reviewed-stories.json"),
+                            os.getenv("ASTRA_AI_REVIEWED_DECISIONS_PATH", "runtime-health/ai-reviewed-decisions.json"))
+                        premium_stories[:0] = handoff_stories
                         print("ASTRA_OMNIROUTE_EDITORIAL_APPROVED=" + candidate["content_id"])
                     else:
                         print("ASTRA_OMNIROUTE_EDITORIAL_REJECTED=" + json.dumps(verdict["issues"]))
