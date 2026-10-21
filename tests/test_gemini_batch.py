@@ -33,6 +33,16 @@ class BatchTests(unittest.TestCase):
         result = generate_batch(10, generator=fail)
         self.assertEqual(len(result["failures"]), 1)
         self.assertEqual(result["generated"], 0)
+        self.assertEqual(result["failures"][0]["reason"], "provider_http_429")
+
+    def test_http_404_stops_and_is_classified(self):
+        calls = []
+        def fail(*args):
+            calls.append(1)
+            raise RuntimeError("Gemini HTTP 404")
+        result = generate_batch(10, generator=fail)
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(result["failures"][0]["reason"], "provider_http_404")
 
 
 if __name__ == "__main__":

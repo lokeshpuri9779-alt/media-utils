@@ -25,8 +25,16 @@ def generate_batch(count, generator=generate, history=()):
             ids.add(cid)
             titles.add(title)
         except (RuntimeError, ValueError, KeyError) as exc:
-            failures.append({"index": i, "reason": type(exc).__name__})
-            if "HTTP 429" in str(exc):
+            message = str(exc)
+            if "Gemini HTTP " in message:
+                code = message.split("Gemini HTTP ", 1)[1].split()[0]
+                reason = "provider_http_" + code if code.isdigit() else "provider_http_error"
+            elif message.startswith("Gemini transport failed:"):
+                reason = "provider_transport_error"
+            else:
+                reason = type(exc).__name__
+            failures.append({"index": i, "reason": reason})
+            if reason.startswith("provider_http_") or reason == "provider_transport_error":
                 break
     return {"status": "unreviewed", "requested": count, "stories": stories,
             "generated": len(stories), "failures": failures}
