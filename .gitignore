@@ -6,6 +6,7 @@ storage/
 .astra_key
 *.enc
 *.mp4
+preload-archive-receipt.json
 
 # Local Astra recovery snapshots; never commit runtime state archives
 backups/
