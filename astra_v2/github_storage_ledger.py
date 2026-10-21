@@ -24,6 +24,15 @@ def validate(state):
         if (not isinstance(key, str) or not 1 <= len(key) <= 128
                 or type(value) is not int or value <= 0):
             raise ValueError("invalid_reservation")
+    settled = state.get("settled", {})
+    if not isinstance(settled, dict) or len(settled) > 100000:
+        raise ValueError("invalid_settled_history")
+    for key, value in settled.items():
+        if (not isinstance(key, str) or not 1 <= len(key) <= 128
+                or type(value) is not int or value <= 0):
+            raise ValueError("invalid_settled_entry")
+    if set(settled).intersection(reservations):
+        raise ValueError("settled_reservation_overlap")
     if used + sum(reservations.values()) > cap:
         raise ValueError("ledger_over_capacity")
     return state
@@ -35,6 +44,8 @@ def reserve(state, identity, size):
         raise ValueError("invalid_identity")
     if type(size) is not int or size <= 0:
         raise ValueError("invalid_size")
+    if identity in state.get("settled", {}):
+        raise RuntimeError("package_already_settled")
     if identity in state["reservations"]:
         if state["reservations"][identity] != size:
             raise ValueError("reservation_conflict")
@@ -57,8 +68,14 @@ def settle(state, identity, actual_bytes):
         raise ValueError("actual_exceeds_reservation")
     reservations = dict(state["reservations"])
     del reservations[identity]
+    if identity in state.get("settled", {}):
+        raise RuntimeError("package_already_settled")
+    settled = dict(state.get("settled", {}))
+    if len(settled) >= 100000:
+        raise RuntimeError("settled_history_capacity_exhausted")
+    settled[identity] = actual_bytes if actual_bytes > 0 else original
     result = {**state, "used_bytes": state["used_bytes"] + actual_bytes,
-              "reservations": reservations}
+              "reservations": reservations, "settled": settled}
     validate(result)
     return result
 
