@@ -59,7 +59,7 @@ jobs:
                   out["status"] = "transport_error"
           root = Path("runtime-health")
           root.mkdir(parents=True, exist_ok=True)
-          (root / "gemini-model-access.json").write_text(json.dumps(out, indent=2) + "\\n")
+          (root / "gemini-model-access.json").write_text(json.dumps(out, indent=2) + "\n")
           print("ASTRA_GEMINI_MODEL_ACCESS=" + json.dumps(out))
           PY
       - name: Generate proposals
@@ -67,11 +67,14 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           ASTRA_GEMINI_ENABLED: '1'
           BATCH_COUNT: ${{ inputs.count || '10' }}
+          ASTRA_GEMINI_MODEL: 'gemini-3.5-flash-lite'
+          ASTRA_GEMINI_FALLBACK_MODEL: 'gemini-3.1-flash-lite'
         run: python -m astra_v2.gemini_batch --count "$BATCH_COUNT"
       - name: Independently review generated proposals
         if: success()
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ASTRA_EDITORIAL_REVIEW_MODEL: 'gemini-3.5-flash-lite'
         run: python -m astra_v2.gemini_batch_review
       - name: Persist approved batch to shared ASTRA state
         if: success()
@@ -139,7 +142,7 @@ jobs:
           model_access = read("gemini-model-access.json")
           if model_access:
               record["model_access"] = model_access
-          (Path(sys.argv[1]) / "gemini-batch-diagnostic.json").write_text(json.dumps(record, indent=2) + "\\n", encoding="utf-8")
+          (Path(sys.argv[1]) / "gemini-batch-diagnostic.json").write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
           print("ASTRA_GEMINI_BATCH_DIAGNOSTIC=" + json.dumps(record))
           PY
           (
