@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['.github/workflows/astra-v2-publish.yml', 'astra_v2/preload_queue.py', 'astra_v2/run.py', 'astra_v2/creative.py', 'astra_v2/preflight.py', 'astra_v2/story_forge.py', 'tests/test_astra_story_inventory.py']
+    paths: ['.github/workflows/astra-v2-publish.yml', 'astra_v2/preload_queue.py', 'astra_v2/run.py', 'astra_v2/creative.py', 'astra_v2/omniroute_gemini.py', 'astra_v2/preflight.py', 'astra_v2/story_forge.py', 'tests/test_astra_story_inventory.py']
   schedule:
     - cron: '*/5 * * * *'
   workflow_run:
@@ -35,7 +35,7 @@ jobs:
       ASTRA_PRELOAD_MAX_AGE_HOURS: '48' # Skip old rendered visuals; render fresh when queue is stale
       ASTRA_PRELOAD_ONLY: '0'
       ASTRA_SERIES_PUBLICATION: '0' # Allow new approved originals after completed Season 1
-      ASTRA_OPENAI_ENABLED: '0'
+      ASTRA_GEMINI_ENABLED: '1'\n      ASTRA_GEMINI_MODEL: 'gemini-2.5-flash-lite'\n      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}\n      ASTRA_OPENAI_ENABLED: '0'
       ASTRA_OPENAI_ALLOW_PAID_API: '0'
       GH_TOKEN: ${{ github.token }}
       ASTRA_MAX_DAILY_UPLOADS: '100'
