@@ -60,6 +60,8 @@ def generate_image(prompt, *, requester=None):
 
 
 def validate_png(image_bytes, kind):
+    if not image_bytes:
+        raise ValueError("Empty image")
     if len(image_bytes) > MAX_BYTES:
         raise ValueError("Image too large")
     with Image.open(io.BytesIO(image_bytes)) as im:
