@@ -9,6 +9,7 @@ on:
       - 'astra/artwork_provenance.py'
       - 'tests/test_artwork_provenance.py'
       - 'tests/test_scene_artwork_manifest.py'
+      - 'tests/test_story_artwork_binding.py'
       - 'studio_renderer.py'
       - 'astra/fixtures/artwork_storyboard_review.json'
       - '.github/workflows/astra-artwork-studio-review.yml'
@@ -42,6 +43,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_artwork_story_bridge.py' -v
           python -m unittest discover -s tests -p 'test_artwork_provenance.py' -v
           python -m unittest discover -s tests -p 'test_scene_artwork_manifest.py' -v
+          python -m unittest discover -s tests -p 'test_story_artwork_binding.py' -v
       - name: Render with existing Studio and Kokoro
         run: |
           python - <<'PY'
