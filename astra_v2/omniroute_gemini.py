@@ -12,7 +12,7 @@ def enabled():
     return os.getenv("ASTRA_GEMINI_ENABLED") == "1" and bool(os.getenv("GEMINI_API_KEY"))
 
 
-def generate(excluded_ids, excluded_titles, prior_stories=()):
+def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
     if not enabled():
         return None
     model = os.getenv("ASTRA_GEMINI_MODEL", "gemini-3.1-flash-lite")
@@ -31,6 +31,18 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
         "Avoid recycled plots, copyrighted characters and these prior titles: "
         + json.dumps(sorted(excluded_titles)[:100]) + "."
     )
+    if premise is not None:
+        if not isinstance(premise, dict) or premise.get("production_ready") is not False or premise.get("review_status") != "awaiting_editorial_review":
+            raise ValueError("Premise must be an unapproved editorial-review candidate")
+        beats = premise.get("story_beats")
+        if not isinstance(beats, list) or len(beats) != 4 or any(not isinstance(x, str) or len(x) > 500 for x in beats):
+            raise ValueError("Invalid premise beats")
+        guidance = json.dumps({"premise_key": premise.get("premise_key"), "beats": beats}, ensure_ascii=False)
+        if len(guidance) > 2600:
+            raise ValueError("Premise exceeds prompt limit")
+        prompt += (" Use this unapproved premise only as inspiration; independently rewrite "
+                   "all dialogue, character decisions, setting details, causal mechanism and ending. "
+                   "Do not copy its narration or claim approval. Premise: " + guidance)
     body = json.dumps({"contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {"responseMimeType": "application/json",
                              "temperature": 0.9, "maxOutputTokens": 1500}}).encode()

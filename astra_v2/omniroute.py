@@ -117,19 +117,23 @@ def _validate(data, provider, excluded_ids, excluded_titles, prior_stories):
     return story
 
 
-def generate(excluded_ids, excluded_titles, prior_stories=()):
+def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
     """Try enabled providers in configured order; never relax publication gates."""
     order = [x.strip().lower() for x in os.getenv(
         "ASTRA_OMNIROUTE_ORDER", "gemini,groq,openrouter").split(",") if x.strip()]
+    if premise is not None and "gemini" not in order:
+        raise ValueError("Premise-guided generation requires configured Gemini provider")
     errors = []
     for provider in order:
         try:
             if provider == "gemini" and _enabled("ASTRA_GEMINI_ENABLED", "GEMINI_API_KEY"):
                 from astra_v2.omniroute_gemini import generate as gemini_generate
-                story = gemini_generate(excluded_ids, excluded_titles, prior_stories)
+                story = gemini_generate(excluded_ids, excluded_titles, prior_stories, premise=premise)
                 if story:
                     print("ASTRA_OMNIROUTE_PROVIDER=gemini")
                     return story
+            elif premise is not None:
+                continue
             elif provider == "groq" and _enabled("ASTRA_GROQ_ENABLED", "GROQ_API_KEY"):
                 data = _openai_compatible("Groq", "https://api.groq.com/openai/v1/chat/completions",
                     os.getenv("ASTRA_GROQ_MODEL", "llama-3.3-70b-versatile"), "GROQ_API_KEY", excluded_titles)
