@@ -195,6 +195,15 @@ jobs:
         if: steps.preflight.outputs.render_due == 'true'
         run: python -m unittest discover -s tests -p 'test_scene_layer_contract.py' -v
 
+      - name: Audit editorial publishing runway without granting approval
+        if: steps.preflight.outputs.render_due == 'true'
+        env:
+          ASTRA_EDITORIAL_STORIES_FILE: editorial/reviewed_stories.json
+          ASTRA_EDITORIAL_REVIEWS_FILE: editorial/reviewed_decisions.json
+          ASTRA_PUBLISHER_STATE_PATH: astra_v2_state.json
+          ASTRA_STORY_HISTORY_PATH: astra_story_history.json
+        run: python -m astra_v2.editorial_runway_diagnostic
+
       - name: Generate, validate, publish, and verify
         id: publish_video
         if: steps.preflight.outputs.render_due == 'true'
