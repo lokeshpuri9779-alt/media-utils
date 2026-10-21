@@ -6,6 +6,8 @@ on:
       - 'tests/test_durable_inventory.py'
       - 'tests/test_warehouse_health.py'
       - 'astra_v2/warehouse_health.py'
+      - 'astra_v2/warehouse_preload.py'
+      - 'tests/test_warehouse_publish_boundary.py'
       - '.github/workflows/astra-durable-inventory-ci.yml'
   push:
     branches: [main]
@@ -14,6 +16,8 @@ on:
       - 'tests/test_durable_inventory.py'
       - 'tests/test_warehouse_health.py'
       - 'astra_v2/warehouse_health.py'
+      - 'astra_v2/warehouse_preload.py'
+      - 'tests/test_warehouse_publish_boundary.py'
       - '.github/workflows/astra-durable-inventory-ci.yml'
 permissions:
   contents: read
@@ -27,6 +31,6 @@ jobs:
         with:
           python-version: '3.12'
       - name: Compile inventory and tests
-        run: python -m compileall -q astra_v2/durable_inventory.py tests/test_durable_inventory.py tests/test_warehouse_health.py astra_v2/warehouse_health.py
+        run: python -m compileall -q astra_v2/durable_inventory.py tests/test_durable_inventory.py tests/test_warehouse_health.py astra_v2/warehouse_health.py astra_v2/warehouse_preload.py tests/test_warehouse_publish_boundary.py
       - name: Run warehouse and inventory regression tests
-        run: python -m unittest discover -s tests -p 'test_durable_inventory.py' -v && python -m unittest discover -s tests -p 'test_warehouse_health.py' -v
+        run: python -m unittest discover -s tests -p 'test_durable_inventory.py' -v && python -m unittest discover -s tests -p 'test_warehouse_health.py' -v && python -m unittest discover -s tests -p 'test_warehouse_publish_boundary.py' -v
