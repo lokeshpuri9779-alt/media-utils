@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['.github/workflows/astra-v2-publish.yml', 'astra_v2/preload_queue.py', 'astra_v2/run.py', 'astra_v2/creative.py', 'astra_v2/omniroute_gemini.py', 'astra_v2/preflight.py', 'astra_v2/story_forge.py', 'tests/test_astra_story_inventory.py']
+    paths: ['.github/workflows/astra-v2-publish.yml', 'astra_v2/preload_queue.py', 'astra_v2/run.py', 'astra_v2/creative.py', 'astra_v2/omniroute_gemini.py', 'astra_v2/omniroute.py', 'astra_v2/preflight.py', 'astra_v2/story_forge.py', 'tests/test_astra_story_inventory.py']
   schedule:
     - cron: '*/5 * * * *'
   workflow_run:
@@ -35,7 +35,7 @@ jobs:
       ASTRA_PRELOAD_MAX_AGE_HOURS: '48' # Skip old rendered visuals; render fresh when queue is stale
       ASTRA_PRELOAD_ONLY: '0'
       ASTRA_SERIES_PUBLICATION: '0' # Allow new approved originals after completed Season 1
-      ASTRA_GEMINI_ENABLED: '1'
+      ASTRA_OMNIROUTE_ORDER: 'gemini,groq,openrouter'\n      ASTRA_GEMINI_ENABLED: '1'\n      ASTRA_GROQ_ENABLED: ${{ vars.ASTRA_GROQ_ENABLED || '0' }}\n      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}\n      ASTRA_GROQ_MODEL: 'llama-3.3-70b-versatile'\n      ASTRA_OPENROUTER_ENABLED: ${{ vars.ASTRA_OPENROUTER_ENABLED || '0' }}\n      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}\n      ASTRA_OPENROUTER_MODEL: 'meta-llama/llama-3.3-70b-instruct:free'
       ASTRA_GEMINI_MODEL: 'gemini-3.1-flash-lite'
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       ASTRA_OPENAI_ENABLED: '0'
