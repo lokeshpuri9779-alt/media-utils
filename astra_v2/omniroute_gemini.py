@@ -19,7 +19,28 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
     model = os.getenv("ASTRA_GEMINI_MODEL", "gemini-3.1-flash-lite")
     if not re.fullmatch(r"[A-Za-z0-9._-]{1,80}", model):
         raise ValueError("Invalid Gemini model")
+    # Rotate concrete creative constraints so consecutive requests do not collapse onto one motif.
+    domains = (
+        "mountain rescue with a human protagonist",
+        "underwater ecological mystery with animal characters",
+        "inventor comedy in a busy market",
+        "historical village friendship and a difficult choice",
+        "forest survival adventure involving cooperation",
+        "railway station mystery with an unexpected helper",
+        "robot caretaker facing an ethical dilemma",
+        "seaside festival with a practical engineering challenge",
+        "desert expedition with a surprising natural discovery",
+        "community sports rivalry resolved through ingenuity",
+        "arctic research expedition and a rescue decision",
+        "spacecraft maintenance adventure with a crew disagreement",
+    )
+    import hashlib
+    rotation = int(hashlib.sha256(("|".join(sorted(excluded_ids)) + str(len(prior_stories))).encode()).hexdigest()[:8], 16)
+    chosen_domain = domains[rotation % len(domains)]
     prompt = (
+        "Required distinct creative domain: " + chosen_domain + ". "
+        "Do not use glassmakers, glassblowers, stained glass, kilns, "
+        "glass workshops, or the title pattern The Glassmaker of. "
         "Write one genuinely original, coherent, family-safe short with "
         "distinct characters, environments, emotional stakes, decisions and consequences. "
         "Vary genres and premises; avoid repeating cosmic archives, simulations or "
@@ -126,7 +147,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         "production_ready": True, "content_id": cid,
         "title": title, "hook": beats[0]["headline"],
         "question": data["question"], "answer": data["answer"],
-        "source": "", "keywords": ["original science fiction", "short story"],
+        "source": "", "keywords": ["original fiction", "short story"],
         "story_beats": [
             {**beat, "sub": "AN ORIGINAL RAYVAN STORY", "duration": 2.1}
             for beat in beats
