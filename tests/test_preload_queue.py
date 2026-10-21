@@ -51,6 +51,28 @@ class PreloadQueueTests(unittest.TestCase):
                         self.assertIsNone(queue.take(set(), set(), "/tmp/unused.mp4"))
                         proc.assert_not_called()
 
+    def test_inventory_eligibility_rejects_untrusted_and_consumed(self):
+        entries = [
+            {"name": "astra-preloaded-consumed", "workflow_run": {"id": 1}},
+            {"name": "astra-preloaded-ready", "workflow_run": {"id": 2}},
+            {"name": "astra-preloaded-untrusted", "workflow_run": {"id": 3}},
+            {"name": "astra-preloaded-ready", "workflow_run": {"id": 2}},
+        ]
+        def lookup(path):
+            return {"conclusion": "success", "head_branch": "main",
+                    "name": ("ASTRA V2 - Preload Approved Videos"
+                             if path.endswith("/2") else "Other")}
+        with patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/repo"}):
+            with patch.object(queue, "artifacts", return_value=entries):
+                with patch.object(queue, "_artifact_fresh", return_value=True):
+                    with patch.object(queue, "_api", side_effect=lookup) as api:
+                        result = queue.inventory_eligibility_snapshot({"consumed"})
+        self.assertEqual(result["preflight_eligible"], 1)
+        self.assertEqual(result["excluded"], 2)
+        self.assertEqual(result["untrusted_run"], 1)
+        self.assertEqual(api.call_count, 2)
+        self.assertIn("not_verified", result["verification"])
+
     def test_prepare_includes_integrity_digest(self):
         with tempfile.TemporaryDirectory() as tmp:
             video = Path(tmp) / "render.mp4"

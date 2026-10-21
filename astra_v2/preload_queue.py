@@ -102,6 +102,59 @@ def inventory_snapshot(max_age_hours=None, now=None):
     }
 
 
+
+def inventory_eligibility_snapshot(excluded_ids=(), max_age_hours=None, now=None):
+    """Bounded, non-downloading eligibility preflight; NOT package validation.
+
+    Excludes consumed IDs and untrusted workflow runs. ZIP contents, editorial
+    policy, media integrity and novelty still require the publisher's take().
+    """
+    if max_age_hours is None:
+        max_age_hours = max(0, int(os.getenv("ASTRA_PRELOAD_MAX_AGE_HOURS", "48")))
+    repo = os.environ.get("GITHUB_REPOSITORY", "").strip()
+    excluded = set(excluded_ids)
+    counts = {"fresh": 0, "excluded": 0, "invalid_id": 0,
+              "untrusted_run": 0, "run_lookup_failed": 0,
+              "preflight_eligible": 0}
+    runs = {}
+    seen = set()
+    for entry in artifacts():
+        if not _artifact_fresh(entry, max_age_hours, now):
+            continue
+        counts["fresh"] += 1
+        cid = str(entry.get("name", ""))[len(PREFIX):]
+        if not cid or "/" in cid or ".." in cid:
+            counts["invalid_id"] += 1
+            continue
+        if cid in excluded or cid in seen:
+            counts["excluded"] += 1
+            continue
+        seen.add(cid)
+        run_id = (entry.get("workflow_run") or {}).get("id")
+        if not repo or not run_id:
+            counts["untrusted_run"] += 1
+            continue
+        if run_id not in runs:
+            try:
+                runs[run_id] = _api(f"repos/{repo}/actions/runs/{run_id}")
+            except (subprocess.CalledProcessError, subprocess.TimeoutExpired,
+                    OSError, ValueError, json.JSONDecodeError):
+                runs[run_id] = None
+        run = runs[run_id]
+        if not isinstance(run, dict):
+            counts["run_lookup_failed"] += 1
+        elif (run.get("conclusion") != "success" or run.get("head_branch") != "main"
+              or run.get("name") != "ASTRA V2 - Preload Approved Videos"):
+            counts["untrusted_run"] += 1
+        else:
+            counts["preflight_eligible"] += 1
+    return {
+        **counts,
+        "target_buffer": max(0, int(os.getenv("ASTRA_PRELOAD_BUFFER", "24"))),
+        "verification": "preflight_only_package_and_policy_not_verified",
+    }
+
+
 def candidate_ids():
     return {str(a["name"])[len(PREFIX):] for a in artifacts()}
 
