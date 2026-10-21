@@ -18,7 +18,7 @@ def take(output, *, warehouse=None, archive=None):
     warehouse = warehouse if warehouse is not None else warehouse_from_environment()
     archive = archive if archive is not None else PackageArchive(
         store_from_environment(os.getenv("ASTRA_ARTIFACT_CACHE", "storage/artifacts")))
-    claim = warehouse.claim()
+    claim = warehouse.claim(lease_seconds=3600)
     if claim is None:
         return None
     output = Path(output)
@@ -44,3 +44,23 @@ def take(output, *, warehouse=None, archive=None):
         "content_id": claim["content_id"], "lease_token": claim["lease_token"],
         "approval_digest": claim["approval_digest"], "qa_digest": claim["qa_digest"]}
     return candidate
+
+
+def confirm_publication(claim, video_id, status, *, warehouse=None):
+    """Confirm only a verified public YouTube video while the lease is valid.
+
+    A failed confirmation leaves the reservation untouched for reconciliation.
+    """
+    import hashlib
+    import re
+    if not isinstance(claim, dict) or not re.fullmatch(r"[A-Za-z0-9_-]{11}", str(video_id)):
+        raise ValueError("invalid_publication_evidence")
+    if not isinstance(status, dict) or status.get("privacyStatus") != "public":
+        raise ValueError("youtube_public_visibility_not_verified")
+    if warehouse is None:
+        from astra_v2.adaptive_shared_queue import warehouse_from_environment
+        warehouse = warehouse_from_environment()
+    content_id = claim["content_id"]
+    token = claim["lease_token"]
+    digest = hashlib.sha256((content_id + ":" + video_id + ":public").encode()).hexdigest()
+    return warehouse.confirm(content_id, token, video_id, confirmation_digest=digest)
