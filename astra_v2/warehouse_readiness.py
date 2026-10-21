@@ -5,7 +5,9 @@ from pathlib import Path
 
 
 def check(*, warehouse_factory=None, store_factory=None):
-    if os.getenv("ASTRA_WAREHOUSE_PUBLISH", "0") != "1":
+    publishing_enabled = os.getenv("ASTRA_WAREHOUSE_PUBLISH", "0") == "1"
+    probe_enabled = os.getenv("ASTRA_WAREHOUSE_PROBE", "0") == "1"
+    if not publishing_enabled and not probe_enabled:
         return {"enabled": False, "publication_triggered": False}
     if os.getenv("ASTRA_WAREHOUSE_UPLOAD_ENABLED", "0") not in {"0", "1"}:
         raise ValueError("invalid_warehouse_upload_switch")
@@ -34,7 +36,7 @@ def check(*, warehouse_factory=None, store_factory=None):
     store = store_factory(os.getenv("ASTRA_ARTIFACT_CACHE", "storage/artifacts"))
     # S3 HeadBucket verifies reachability/permissions without creating objects.
     store.client.head_bucket(Bucket=store.bucket)
-    return {"enabled": True, "warehouse_reachable": True, "artifact_bucket_reachable": True,
+    return {"enabled": publishing_enabled, "probe_enabled": probe_enabled, "warehouse_reachable": True, "artifact_bucket_reachable": True,
             "qa_registry_present": True, "requires_manual_reconciliation": counts["expired"] > 0,
             "publication_triggered": False}
 
