@@ -50,7 +50,7 @@ jobs:
           report={"generated":len(candidates),"awaiting_editorial_review":counts["awaiting_editorial_review"],
                   "needs_new_plot":counts["needs_new_plot"],"issue_counts":dict(sorted(reasons.items())),
                   "automatically_approved":0,"production_ready":0}
-          Path("story_factory_review_summary.json").write_text(json.dumps(report,indent=2,sort_keys=True)+"\n")
+          Path("story_factory_review_summary.json").write_text(json.dumps(report,indent=2,sort_keys=True)+chr(10))
           print("ASTRA_STORY_FACTORY_REVIEW_SUMMARY="+json.dumps(report,sort_keys=True))
           print("Validated review-only replenishment batch:",len(candidates))
           PY
