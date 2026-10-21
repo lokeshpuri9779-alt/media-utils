@@ -1,11 +1,11 @@
 {
-  "observed_at": "2026-10-21T18:11:55.093649+00:00",
+  "observed_at": "2026-10-21T18:18:19.747675+00:00",
   "generated": 0,
   "requested": 10,
   "generation_failures": [
     {
       "index": 0,
-      "reason": "provider_http_503"
+      "reason": "provider_http_404"
     }
   ],
   "reviewed": null,
