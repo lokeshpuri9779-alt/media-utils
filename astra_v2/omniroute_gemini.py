@@ -46,7 +46,13 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         "Vary genres and premises; avoid repeating cosmic archives, simulations or "
         "corrupted-code revelations. Use four cinematic story beats with causal "
         "progression and a meaningful ending. "
-        "Return only JSON keys title, question, answer, beats. Each beat must have "
+        "Return only JSON keys title, question, answer, visual_bible, beats.         "
+        "visual_bible must contain style (string), characters, locations and objects         "
+        "(objects mapping stable names to detailed appearance strings). Define faces,         "
+        "clothing, colours, proportions, setting layout and important prop designs once.         "
+        "Each beat must include visual_prompt describing the exact action, expression,         "
+        "location, participating characters, object condition and who holds each prop.         "
+        "Each beat must also have "
         "headline, speech, visual, label, story_beat. Speech 12-24 words in every beat (at least 48 words total); use at least three distinct visual types across the four beats; "
         "visual one of planet, robot, signal, ship, forest, door; story_beat one "
         "of reveal, build, mechanism, twist, payoff. "
@@ -153,6 +159,19 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
             for beat in beats
         ],
     }
+    if "visual_bible" in data:
+        bible = data["visual_bible"]
+        if (not isinstance(bible, dict) or not isinstance(bible.get("style"), str)
+                or not bible["style"].strip() or len(json.dumps(bible)) > 16000):
+            raise ValueError("Invalid visual bible")
+        for category in ("characters", "locations", "objects"):
+            entries = bible.get(category)
+            if not isinstance(entries, dict) or any(
+                    not isinstance(k, str) or not k.strip()
+                    or not isinstance(v, str) or not v.strip()
+                    for k, v in entries.items()):
+                raise ValueError("Invalid visual bible entities")
+        story["visual_bible"] = bible
     # Model generation is not an originality guarantee. Validate the full
     # narration and reject known published/pending/reserved narratives.
     from astra_v2.story_forge import plot_fingerprint

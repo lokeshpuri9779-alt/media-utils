@@ -97,31 +97,72 @@ def store_asset(image_bytes, root, *, kind, prompt, source="omniroute"):
 
 
 def preproduce(queue, root, *, generator=generate_image, limit=3):
-    output = []
+    """Bound provider calls while retaining every scene and resuming cached work.
+
+    Cache keys include the full narrative, bible, scene and provider/model. This
+    does not assert that repeated text prompts guarantee visual consistency.
+    """
+    from astra_v2.story_art_direction import illustration_requests
+    if not isinstance(limit, int) or not 1 <= limit <= 10:
+        raise ValueError("Invalid generation limit")
+    root = Path(root).resolve()
+    cache = root / "requests"
+    cache.mkdir(parents=True, exist_ok=True)
+    output, calls = [], 0
+    provider_missing = False
     for item in queue.get("rewrites", []):
-        if len(output) >= limit:
-            break
         if item.get("status") != "awaiting_independent_editorial_approval":
             continue
         story = item.get("story") or {}
-        beats = story.get("story_beats") or []
-        if not beats:
-            continue
-        prompt = ("Original family-safe cinematic portrait scene, no text, no logos. "
-                  + str(story.get("title", ""))[:100] + ". "
-                  + str(beats[0].get("speech", ""))[:250])
         try:
-            image = generator(prompt)
-            if image is None:
-                return {"status": "provider_not_configured", "assets": output}
-            asset = store_asset(image, root, kind="scene", prompt=prompt)
-            asset["story_content_id"] = story.get("content_id")
-            output.append(asset)
-        except (ValueError, OSError, RuntimeError) as exc:
+            requests = illustration_requests(story)
+        except (ValueError, TypeError) as exc:
             output.append({"story_content_id": story.get("content_id"),
-                           "status": "generation_failed", "error": type(exc).__name__,
-                           "approved": False})
-    return {"status": "review_only", "assets": output}
+                           "status": "invalid_visual_plan", "error": str(exc),
+                           "approved": False, "production_ready": False})
+            continue
+        for request in requests:
+            prompt = request.pop("prompt")
+            provider = [os.getenv("ASTRA_OMNI_IMAGE_ENDPOINT", ""),
+                        os.getenv("ASTRA_OMNI_IMAGE_MODEL", "")]
+            key = hashlib.sha256(json.dumps([provider, prompt]).encode()).hexdigest()
+            record = cache / (key + ".json")
+            row = {**request, "request_sha256": key,
+                   "approved": False, "production_ready": False}
+            try:
+                if record.is_file():
+                    saved = json.loads(record.read_text())
+                    location = (root / saved["path"]).resolve()
+                    if not location.is_relative_to(root):
+                        raise ValueError("Unsafe cached asset path")
+                    raw = location.read_bytes()
+                    if hashlib.sha256(raw).hexdigest() != saved["sha256"]:
+                        raise ValueError("Cached asset corruption")
+                    validate_png(raw, "scene")
+                    row.update(saved)
+                    # A cache entry cannot grant production approval.
+                    row.update(approved=False, production_ready=False,
+                               continuity_status="not_verified", status="cached_review_only")
+                elif calls >= limit or provider_missing:
+                    row["status"] = "provider_not_configured" if provider_missing else "pending_budget"
+                else:
+                    calls += 1
+                    image = generator(prompt)
+                    if image is None:
+                        provider_missing = True
+                        row["status"] = "provider_not_configured"
+                    else:
+                        asset = store_asset(image, root, kind="scene", prompt=prompt)
+                        row.update(asset, status="review_only")
+                        temporary = record.with_suffix(".tmp")
+                        temporary.write_text(json.dumps(asset, sort_keys=True))
+                        temporary.replace(record)
+            except (ValueError, OSError, RuntimeError, KeyError, TypeError) as exc:
+                row.update(status="generation_failed", error=type(exc).__name__)
+            output.append(row)
+    return {"status": "provider_not_configured" if provider_missing else "review_only",
+            "provider_calls": calls, "assets": output,
+            "production_ready": False, "continuity_status": "not_verified"}
 
 
 def main():
