@@ -145,9 +145,9 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
                 print("ASTRA_OMNIROUTE_PROVIDER=groq")
                 return story
             elif provider == "openrouter" and _enabled("ASTRA_OPENROUTER_ENABLED", "OPENROUTER_API_KEY"):
-                model = os.getenv("ASTRA_OPENROUTER_MODEL", "meta-llama/llama-3.3-70b-instruct:free")
-                if not model.endswith(":free"):
-                    raise ValueError("OpenRouter model must use :free to enforce zero-spend policy")
+                model = os.getenv("ASTRA_OPENROUTER_MODEL", "openrouter/free")
+                if model != "openrouter/free" and not model.endswith(":free"):
+                    raise ValueError("OpenRouter model must be openrouter/free or use :free to enforce zero-spend policy")
                 data = _openai_compatible("OpenRouter", "https://openrouter.ai/api/v1/chat/completions",
                     model, "OPENROUTER_API_KEY", excluded_titles)
                 story = _validate(data, "OpenRouter", excluded_ids, excluded_titles, prior_stories)
