@@ -9,7 +9,7 @@ on:
         required: true
         default: '10'
 permissions:
-  contents: read
+  contents: write
 jobs:
   generate:
     runs-on: ubuntu-latest
@@ -37,6 +37,41 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python -m astra_v2.gemini_batch_review
+      - name: Persist approved batch to shared ASTRA state
+        if: success()
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from astra_v2.editorial_approved_intake import approved_intake
+          from astra_v2.proposal_history import load_history
+          folder = Path("runtime-health")
+          stories = json.loads((folder / "ai-reviewed-stories.json").read_text())["stories"]
+          decisions = json.loads((folder / "ai-reviewed-decisions.json").read_text())["reviews"]
+          history = load_history("astra_v2_state.json", "astra_story_history.json")
+          result = approved_intake(stories, decisions, history)
+          if len(result["stories"]) != len(stories):
+              raise SystemExit("Approved batch changed under full-history validation")
+          print("ASTRA_APPROVED_BATCH_COUNT=" + str(len(stories)))
+          PY
+          if [ "$(python -c 'import json; print(len(json.load(open("runtime-health/ai-reviewed-stories.json"))["stories"]))')" -eq 0 ]; then
+            echo "No approved stories to persist"
+            exit 0
+          fi
+          git config user.name "astra-bot"
+          git config user.email "astra-bot@users.noreply.github.com"
+          git fetch origin astra-state
+          STATE_DIR="$(mktemp -d)"
+          git worktree add --detach "$STATE_DIR" origin/astra-state
+          cp runtime-health/ai-reviewed-stories.json "$STATE_DIR/ai-reviewed-stories.json"
+          cp runtime-health/ai-reviewed-decisions.json "$STATE_DIR/ai-reviewed-decisions.json"
+          (
+            cd "$STATE_DIR"
+            git add ai-reviewed-stories.json ai-reviewed-decisions.json
+            git commit -m "Persist independently approved Gemini batch"
+            git push origin HEAD:refs/heads/astra-state
+          )
+          git worktree remove --force "$STATE_DIR"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
