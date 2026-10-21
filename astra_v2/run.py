@@ -203,7 +203,9 @@ def run():
                     report.update(outcome="skipped", reason="longform_12h_cooldown")
                     return report
                 rejection = publication_rejection(candidate)
-                if rejection and candidate_from_preload and os.getenv("ASTRA_PRELOAD_ONLY", "0") != "1":
+                if (rejection and candidate_from_preload and not candidate.get("warehouse_claim")
+                        and os.getenv("ASTRA_WAREHOUSE_PUBLISH", "0") != "1"
+                        and os.getenv("ASTRA_PRELOAD_ONLY", "0") != "1"):
                     # Old queue artifacts can predate the current publication
                     # policy. Never upload them; render a fresh approved story
                     # instead of wasting every scheduled slot on stale media.
