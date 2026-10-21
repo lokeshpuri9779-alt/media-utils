@@ -335,10 +335,10 @@ def proposal(index):
     # introduced unrelated incidents (e.g. a bell mystery plus a science fair).
     # The selected mystery, physical clue, test and repair now drive all four beats.
     beats = (
-        ("reveal", f"In {setting}, {actor} discovered that {mystery}. With {stakes}, the community needed an explanation before anyone acted.", visual),
-        ("build", f"{actor.capitalize()} found {clue} and {method}. But {obstacle}. Rather than blame anyone, the team tested whether the clue could explain the mystery.", "book"),
-        ("twist", f"The investigation revealed {reversal}. The team checked the discovery against {clue} and repeated the test to confirm the cause. {emotional.capitalize()}.", setting_visual),
-        ("payoff", f"After confirming the cause, {actor} {resolution}. The team recorded the evidence and the safe procedure {consequence}.", _pick(index, VISUALS, 3)),
+        ("reveal", f"In {setting}, {actor} needed to understand why {mystery}, {stakes}. The community needed an explanation before anyone acted.", visual),
+        ("build", f"{actor.capitalize()} compared {clue} with the available evidence and {method}. But {obstacle}. Rather than blame anyone, the team tested whether the clue could explain the mystery.", "book"),
+        ("twist", f"The investigation revealed {reversal}. This explained the original mystery. The team checked the discovery against {clue} and repeated the test to confirm the cause. {emotional.capitalize()}.", setting_visual),
+        ("payoff", f"With the cause understood, {actor} {resolution}. The team recorded the evidence and the safe procedure {consequence}.", _pick(index, VISUALS, 3)),
     )
     # Reserve distinct, story-relevant visual keys across the four beats.
     # This fixes avoidable visual repetition without changing narration or
