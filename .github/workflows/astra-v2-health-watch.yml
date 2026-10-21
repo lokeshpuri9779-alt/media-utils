@@ -49,6 +49,20 @@ jobs:
           if latest.get("conclusion") != "success":
               print("ASTRA_HEALTH=FAIL:last_publisher_run_failed")
               sys.exit(1)
+          # Distinguish successful push/manual runs from actual scheduled delivery.
+          scheduled = [r for r in completed if r.get("event") == "schedule"]
+          if scheduled:
+              scheduled_latest = max(scheduled, key=lambda r: r.get("created_at") or "")
+              scheduled_at = datetime.fromisoformat(scheduled_latest["created_at"].replace("Z", "+00:00"))
+              scheduled_age_minutes = (now - scheduled_at).total_seconds() / 60
+              print(f"ASTRA_PUBLISHER_LAST_SCHEDULED_RUN={scheduled_latest.get('html_url')}")
+              print(f"ASTRA_PUBLISHER_LAST_SCHEDULED_AGE_MINUTES={scheduled_age_minutes:.1f}")
+              if scheduled_age_minutes > 90:
+                  print("ASTRA_HEALTH=FAIL:publisher_schedule_not_firing")
+                  sys.exit(1)
+          else:
+              print("ASTRA_HEALTH=FAIL:no_recent_scheduled_publisher_runs")
+              sys.exit(1)
           # A 90-minute threshold allows normal GitHub cron delays and queued jobs.
           if age_minutes > 90:
               print("ASTRA_HEALTH=FAIL:publisher_schedule_stale")
