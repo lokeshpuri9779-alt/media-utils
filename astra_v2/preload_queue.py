@@ -89,10 +89,12 @@ def inventory_snapshot(max_age_hours=None, now=None):
     entries = artifacts()
     fresh = [entry for entry in entries if _artifact_fresh(entry, max_age_hours, now)]
     ids = {str(entry["name"])[len(PREFIX):] for entry in fresh}
+    eligible_names = [entry for entry in fresh if str(entry.get("name", ""))[len(PREFIX):].strip()]
     return {
         "discovered_artifacts": len(entries),
         "fresh_artifacts": len(fresh),
         "unique_fresh_content_ids": len(ids),
+        "fresh_named_artifacts": len(eligible_names),
         "stale_artifacts": len(entries) - len(fresh),
         "target_buffer": max(0, int(os.getenv("ASTRA_PRELOAD_BUFFER", "24"))),
         "freshness_hours": max_age_hours,
