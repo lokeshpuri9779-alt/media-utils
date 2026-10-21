@@ -23,7 +23,7 @@ def _enabled(name, secret):
 
 
 def enabled():
-    return any((_enabled("ASTRA_GEMINI_ENABLED", "GEMINI_API_KEY"),
+    return any((_enabled("ASTRA_GEMINI_ENABLED", "GEMINI_API_KEY"),\n                _enabled("ASTRA_NVIDIA_ENABLED", "NVIDIA_API_KEY"),
                 _enabled("ASTRA_GROQ_ENABLED", "GROQ_API_KEY"),
                 _enabled("ASTRA_OPENROUTER_ENABLED", "OPENROUTER_API_KEY")))
 
@@ -122,6 +122,13 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
                     os.getenv("ASTRA_GROQ_MODEL", "llama-3.3-70b-versatile"), "GROQ_API_KEY", excluded_titles)
                 story = _validate(data, "Groq", excluded_ids, excluded_titles, prior_stories)
                 print("ASTRA_OMNIROUTE_PROVIDER=groq")
+                return story
+            elif provider == "nvidia" and _enabled("ASTRA_NVIDIA_ENABLED", "NVIDIA_API_KEY"):
+                model = os.getenv("ASTRA_NVIDIA_MODEL", "meta/llama-3.1-70b-instruct")
+                data = _openai_compatible("NVIDIA NIM", "https://integrate.api.nvidia.com/v1/chat/completions",
+                    model, "NVIDIA_API_KEY", excluded_titles)
+                story = _validate(data, "NVIDIA NIM", excluded_ids, excluded_titles, prior_stories)
+                print("ASTRA_OMNIROUTE_PROVIDER=nvidia")
                 return story
             elif provider == "openrouter" and _enabled("ASTRA_OPENROUTER_ENABLED", "OPENROUTER_API_KEY"):
                 model = os.getenv("ASTRA_OPENROUTER_MODEL", "meta-llama/llama-3.3-70b-instruct:free")
