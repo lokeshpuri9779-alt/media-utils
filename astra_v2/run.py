@@ -282,6 +282,9 @@ def run():
                 if (candidate.get("warehouse_claim")
                         and os.getenv("ASTRA_WAREHOUSE_UPLOAD_ENABLED", "0") != "1"):
                     raise RuntimeError("warehouse_publisher_confirmation_not_enabled")
+                if candidate.get("warehouse_claim"):
+                    from astra_v2.warehouse_preload import renew_before_upload
+                    renew_before_upload(candidate["warehouse_claim"])
                 # Reserve identity and interval BEFORE upload; never auto-retry an
                 # indeterminate transfer as this risks a duplicate public video.
                 state.setdefault("reserved", {})[cid] = {
