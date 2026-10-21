@@ -1,0 +1,20 @@
+name: ASTRA Publisher Schedule Watchdog
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17,47 * * * *'
+permissions:
+  actions: read
+  contents: read
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check scheduled publisher activity
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ASTRA_PUBLISHER_WORKFLOW: astra-v2-publish.yml
+          ASTRA_WATCHDOG_MAX_GAP_MINUTES: '45'
+        run: python scripts/astra_schedule_watchdog.py
