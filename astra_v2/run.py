@@ -162,7 +162,16 @@ def run():
                     if long_due:
                         report["longform_selection"] = "pre_rendered_queue_only"
                         print("ASTRA_LONGFORM_SELECTION=pre_rendered_queue_only")
-                    if candidate is None and os.getenv("ASTRA_PRELOAD_ENABLED", "1") == "1":
+                    # Warehouse intake is opt-in. No implicit fallback after a claim:
+                    # a failed restore must not silently render/upload another item.
+                    if candidate is None and os.getenv("ASTRA_WAREHOUSE_PUBLISH", "0") == "1":
+                        from astra_v2.warehouse_preload import take as take_warehouse
+                        candidate = take_warehouse(video)
+                        if candidate is not None:
+                            from astra_v2.creative import inspect_video
+                            candidate["media"] = inspect_video(video, candidate["format"])
+                            candidate_from_preload = True
+                    if candidate is None and os.getenv("ASTRA_WAREHOUSE_PUBLISH", "0") != "1" and os.getenv("ASTRA_PRELOAD_ENABLED", "1") == "1":
                         try:
                             from astra_v2.preload_queue import take
                             candidate = take(previous_ids | live_ids, live_titles, video, allow_long=long_due)
@@ -178,7 +187,7 @@ def run():
                             return report
                         candidate = make_candidate(video, previous_ids | live_ids, live_titles)
                     else:
-                        candidate_from_preload = bool(candidate.get("queue_artifact_id"))
+                        candidate_from_preload = bool(candidate.get("queue_artifact_id") or candidate.get("warehouse_claim"))
                         if candidate_from_preload:
                             print("ASTRA_PRELOAD_CONSUMED=" + candidate["content_id"])
                 except CreativeSkip as exc:
@@ -276,6 +285,10 @@ def run():
                 state["last_attempt_at"] = utcnow().isoformat()
                 state["attempts"] += 1
                 write_json(STATE_FILE, state)
+                # A warehouse reservation is not publication permission. Never upload
+                # while this experimental handoff is incomplete.
+                if candidate.get("warehouse_claim"):
+                    raise RuntimeError("warehouse_publisher_confirmation_not_enabled")
                 video_id = youtube.upload(
                     video, title, description, candidate["synthetic"],
                     made_for_kids=candidate.get("made_for_kids"))
