@@ -8,6 +8,16 @@
         "review_failed:HTTPError"
       ],
       "record": null
+    },
+    {
+      "content_id": "rayvan-gemini-cde7614460c74f382ae4",
+      "story_sha256": "24787bcda34d25f0ffa4e61cb08aa7793d5ade0d07676061cefeb4f9505cdc0f",
+      "approved": false,
+      "issues": [
+        "review_failed:HTTP_503",
+        "review_provider:provider_unavailable"
+      ],
+      "record": null
     }
   ]
 }
