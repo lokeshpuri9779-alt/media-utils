@@ -309,7 +309,8 @@ def run():
                 }
                 write_json(STATE_FILE, state)
                 result = youtube.status(video_id)
-                if candidate.get("warehouse_claim") and result.get("privacyStatus") == "public":
+                if (candidate.get("warehouse_claim") and result.get("privacyStatus") == "public"
+                        and result.get("uploadStatus") == "processed"):
                     from astra_v2.warehouse_preload import confirm_publication
                     confirm_publication(candidate["warehouse_claim"], video_id, result)
                 if result.get("privacyStatus") != "public":
