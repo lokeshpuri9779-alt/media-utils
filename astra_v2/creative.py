@@ -181,8 +181,14 @@ def make_candidate(path, excluded_ids, excluded_titles):
     # OmniRoute free-tier model proposals retain every existing publication and QA gate.
     from astra_v2.omniroute import enabled as omni_enabled, generate as omni_generate
     if omni_enabled() and not serialized_preload:
+        # Explicit stage markers distinguish provider silence, reviewer rejection,
+        # approval persistence and downstream render failures in Actions logs.
+        print("ASTRA_EDITORIAL_STAGE=" + json.dumps({"stage": "generation_started"}, sort_keys=True))
         try:
             generated = omni_generate(excluded_ids, excluded_titles, history_narratives)
+            print("ASTRA_EDITORIAL_STAGE=" + json.dumps({
+                "stage": "candidate_generated" if generated else "no_candidate"
+            }, sort_keys=True))
             if generated:
                 # AI generation is not editorial approval. Promote only through
                 # the independent reviewer and existing hash-bound manifest gate.
@@ -201,6 +207,11 @@ def make_candidate(path, excluded_ids, excluded_titles):
                         raise ValueError("editorial_requires_complete_publication_history")
                     complete_history = load_history(publisher_file, history_file)
                     verdict = assess(candidate, complete_history)
+                    print("ASTRA_EDITORIAL_STAGE=" + json.dumps({
+                        "stage": "review_approved" if verdict["approved"] else "review_rejected",
+                        "issue_counts": len(verdict.get("issues", [])),
+                        "issues": sorted(str(issue)[:80] for issue in verdict.get("issues", []))[:12],
+                    }, sort_keys=True))
                     from astra_v2.editorial_review_journal import record_review
                     record_review(candidate, verdict, os.getenv('ASTRA_EDITORIAL_AUDIT_PATH', 'runtime-health/ai-editorial-reviews.json'), complete_history)
                     if verdict["approved"]:
@@ -209,12 +220,18 @@ def make_candidate(path, excluded_ids, excluded_titles):
                             os.getenv("ASTRA_AI_REVIEWED_STORIES_PATH", "runtime-health/ai-reviewed-stories.json"),
                             os.getenv("ASTRA_AI_REVIEWED_DECISIONS_PATH", "runtime-health/ai-reviewed-decisions.json"))
                         premium_stories[:0] = handoff_stories
+                        print("ASTRA_EDITORIAL_STAGE=" + json.dumps({
+                            "stage": "handoff_persisted", "candidate_count": len(handoff_stories)
+                        }, sort_keys=True))
                         print("ASTRA_OMNIROUTE_EDITORIAL_APPROVED=" + candidate["content_id"])
                     else:
                         print("ASTRA_OMNIROUTE_EDITORIAL_REJECTED=" + json.dumps(verdict["issues"]))
                 else:
                     print("ASTRA_OMNIROUTE_EDITORIAL_DISABLED=1")
         except (RuntimeError, ValueError, KeyError, OSError, TypeError, json.JSONDecodeError) as exc:
+            print("ASTRA_EDITORIAL_STAGE=" + json.dumps({
+                "stage": "generation_or_review_failed", "exception_type": type(exc).__name__
+            }, sort_keys=True))
             print("ASTRA_OMNIROUTE_GENERATION_FAILED=" + type(exc).__name__ + ":" + str(exc)[:350])
     if openai_enabled() and not serialized_preload:
         try:
