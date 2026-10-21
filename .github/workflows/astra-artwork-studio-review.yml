@@ -44,8 +44,19 @@ jobs:
           PY
       - name: Verify actual audio/video streams
         run: |
-          ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 astra-narrated-review.mp4 | grep -Fx '540,960'
+          ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 astra-narrated-review.mp4 | grep -Fx '1080,1920'
           ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of default=nw=1:nk=1 astra-narrated-review.mp4 | grep -E '^(aac|mp3|opus)$'
+      - name: Reject silent or empty narration
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          p = subprocess.run(['ffmpeg','-hide_banner','-i','astra-narrated-review.mp4','-vn','-af','astats=metadata=1:reset=0','-f','null','-'],capture_output=True,text=True,check=True)
+          import re
+          matches = re.findall(r'RMS level dB:\\s*(-?[0-9.]+)',p.stderr)
+          if not matches or max(float(x) for x in matches) < -55:
+              raise SystemExit('Narration audio too quiet or silent')
+          print('ASTRA_NARRATION_RMS_DB=',max(float(x) for x in matches))
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: astra-studio-narrated-review
