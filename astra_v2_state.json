@@ -2350,28 +2350,28 @@
     }
   },
   "pending": {},
-  "last_outcome": "skipped",
+  "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-10-21T15:16:01.126306+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_preflight_at": "2026-10-21T15:25:06.297709+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-21T15:16:01.200094+00:00",
+    "at": "2026-10-21T15:26:14.628698+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-21T08:58:37.277745+00:00",
   "reserved": {
@@ -6092,9 +6092,9 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-21T15:16:01.200035+00:00",
-    "publication_outcome": "skipped",
-    "publication_reason": "min_interval",
+    "at": "2026-10-21T15:26:14.628563+00:00",
+    "publication_outcome": "quality_skip",
+    "publication_reason": "no_approved_original_story_available",
     "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
@@ -6103,31 +6103,78 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-21T15:16:01.200083+00:00",
+    "at": "2026-10-21T15:26:14.628677+00:00",
     "history_file_present": true,
-    "publication_outcome": "skipped",
+    "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-21T15:09:37.375141+00:00",
-    "outcome": "processing",
-    "reason": "",
-    "content_id": "rayvan-gemini-9a0b85ba0427ce02f001",
-    "video_url": "https://www.youtube.com/watch?v=PZrU13sOiBc",
-    "story_selection": {}
+    "at": "2026-10-21T15:25:38.092389+00:00",
+    "outcome": "quality_skip",
+    "reason": "no_approved_original_story_available",
+    "content_id": "",
+    "video_url": "",
+    "story_selection": {
+      "considered": 67,
+      "not_ready": 64,
+      "policy_rejected": {
+        "not_production_ready": 3
+      },
+      "already_seen": 0,
+      "duration_rejected": 0,
+      "render_qa_rejected": 0,
+      "render_exception": {},
+      "approved": 0
+    }
   },
   "last_workflow_result": {
-    "at": "2026-10-21T15:16:01.199979+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-21T15:26:14.628334+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "skipped",
-    "reason": "min_interval"
+    "outcome": "quality_skip",
+    "reason": "no_approved_original_story_available"
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-21T15:16:01.200032+00:00",
-    "counters": {},
+    "at": "2026-10-21T15:26:14.628557+00:00",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 0,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3
+        },
+        "seen": 89,
+        "total": 156
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 156,
+        "fingerprint": 0,
+        "id": 89,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 67,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 67,
+        "remaining": 0
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 0,
+        "considered": 67,
+        "duration_rejected": 0,
+        "not_ready": 64,
+        "policy_rejected": {
+          "not_production_ready": 3
+        },
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
