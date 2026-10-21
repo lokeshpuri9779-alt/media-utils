@@ -204,6 +204,25 @@ jobs:
           ASTRA_STORY_HISTORY_PATH: astra_story_history.json
         run: python -m astra_v2.editorial_runway_diagnostic
 
+      - name: Verify remote warehouse readiness when enabled
+        if: steps.preflight.outputs.render_due == 'true'
+        env:
+          ASTRA_RECEIPT_INDEX: ${{ vars.ASTRA_RECEIPT_INDEX }}
+          ASTRA_WAREHOUSE_DATABASE_URL: ${{ secrets.ASTRA_WAREHOUSE_DATABASE_URL }}
+          ASTRA_WAREHOUSE_NAMESPACE: ${{ vars.ASTRA_WAREHOUSE_NAMESPACE }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${ASTRA_RECEIPT_INDEX:-}" = "postgres" ]; then
+            python -m pip install --disable-pip-version-check 'psycopg[binary]>=3.1,<4'
+            python -m astra_v2.warehouse_health
+          elif [ -n "${ASTRA_RECEIPT_INDEX:-}" ]; then
+            echo "Unsupported warehouse index backend" >&2
+            exit 1
+          else
+            echo 'ASTRA_WAREHOUSE=not_enabled'
+          fi
+
       - name: Generate, validate, publish, and verify
         id: publish_video
         if: steps.preflight.outputs.render_due == 'true'

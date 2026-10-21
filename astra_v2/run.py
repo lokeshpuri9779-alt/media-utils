@@ -162,7 +162,16 @@ def run():
                     if long_due:
                         report["longform_selection"] = "pre_rendered_queue_only"
                         print("ASTRA_LONGFORM_SELECTION=pre_rendered_queue_only")
-                    if candidate is None and os.getenv("ASTRA_PRELOAD_ENABLED", "1") == "1":
+                    # Warehouse intake is opt-in. No implicit fallback after a claim:
+                    # a failed restore must not silently render/upload another item.
+                    if candidate is None and os.getenv("ASTRA_WAREHOUSE_PUBLISH", "0") == "1":
+                        from astra_v2.warehouse_preload import take as take_warehouse
+                        candidate = take_warehouse(video)
+                        if candidate is not None:
+                            from astra_v2.creative import inspect_video
+                            candidate["media"] = inspect_video(video, candidate["format"])
+                            candidate_from_preload = True
+                    if candidate is None and os.getenv("ASTRA_WAREHOUSE_PUBLISH", "0") != "1" and os.getenv("ASTRA_PRELOAD_ENABLED", "1") == "1":
                         try:
                             from astra_v2.preload_queue import take
                             candidate = take(previous_ids | live_ids, live_titles, video, allow_long=long_due)
@@ -173,12 +182,15 @@ def run():
                             print("ASTRA_PRELOAD_EXCEPTION_DETAIL=" + str(queue_error)[:500])
                             traceback.print_exc()
                     if candidate is None:
+                        if os.getenv("ASTRA_WAREHOUSE_PUBLISH", "0") == "1":
+                            report.update(outcome="skipped", reason="warehouse_queue_empty")
+                            return report
                         if os.getenv("ASTRA_PRELOAD_ONLY", "0") == "1":
                             report.update(outcome="skipped", reason=("preload_queue_error" if report.get("queue_error_type") else "preload_queue_empty"))
                             return report
                         candidate = make_candidate(video, previous_ids | live_ids, live_titles)
                     else:
-                        candidate_from_preload = bool(candidate.get("queue_artifact_id"))
+                        candidate_from_preload = bool(candidate.get("queue_artifact_id") or candidate.get("warehouse_claim"))
                         if candidate_from_preload:
                             print("ASTRA_PRELOAD_CONSUMED=" + candidate["content_id"])
                 except CreativeSkip as exc:
@@ -191,7 +203,9 @@ def run():
                     report.update(outcome="skipped", reason="longform_12h_cooldown")
                     return report
                 rejection = publication_rejection(candidate)
-                if rejection and candidate_from_preload and os.getenv("ASTRA_PRELOAD_ONLY", "0") != "1":
+                if (rejection and candidate_from_preload and not candidate.get("warehouse_claim")
+                        and os.getenv("ASTRA_WAREHOUSE_PUBLISH", "0") != "1"
+                        and os.getenv("ASTRA_PRELOAD_ONLY", "0") != "1"):
                     # Old queue artifacts can predate the current publication
                     # policy. Never upload them; render a fresh approved story
                     # instead of wasting every scheduled slot on stale media.
@@ -263,6 +277,11 @@ def run():
                         report["character_memory_error"] = type(exc).__name__
                         print("ASTRA_CHARACTER_MEMORY=invalid_approved_metadata", type(exc).__name__)
                 description = candidate["description"] + "\nASTRA-V2-ID:" + cid
+                # Do not create a local transfer reservation when the warehouse
+                # upload interlock is disabled; no YouTube transfer has started.
+                if (candidate.get("warehouse_claim")
+                        and os.getenv("ASTRA_WAREHOUSE_UPLOAD_ENABLED", "0") != "1"):
+                    raise RuntimeError("warehouse_publisher_confirmation_not_enabled")
                 # Reserve identity and interval BEFORE upload; never auto-retry an
                 # indeterminate transfer as this risks a duplicate public video.
                 state.setdefault("reserved", {})[cid] = {
@@ -291,6 +310,10 @@ def run():
                 }
                 write_json(STATE_FILE, state)
                 result = youtube.status(video_id)
+                if (candidate.get("warehouse_claim") and result.get("privacyStatus") == "public"
+                        and result.get("uploadStatus") == "processed"):
+                    from astra_v2.warehouse_preload import confirm_publication
+                    confirm_publication(candidate["warehouse_claim"], video_id, result)
                 if result.get("privacyStatus") != "public":
                     raise RuntimeError("YouTube did not confirm public visibility: review uploaded video.")
                 # Thumbnail failures must not duplicate or invalidate an accepted upload.

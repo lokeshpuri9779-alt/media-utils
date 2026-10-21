@@ -171,19 +171,26 @@ class PostgresWarehouse:
                 raise ValueError("immutable_queue_entry_conflict")
         return inserted
 
-    def claim(self, *, lease_seconds=900):
+    def claim(self, *, lease_seconds=900, eligible_ids=None):
         _lease(lease_seconds)
+        if eligible_ids is not None:
+            if not isinstance(eligible_ids, (list, tuple, set)):
+                raise ValueError("invalid_eligible_ids")
+            eligible_ids = sorted({_identity(value) for value in eligible_ids})
+            if not eligible_ids:
+                return None
         token = uuid.uuid4().hex
         with self._db() as db:
             row = db.execute("""WITH next_package AS (
                 SELECT content_id FROM astra_package_queue_v1
                 WHERE namespace=%s AND status='ready'
+                AND (%s::text[] IS NULL OR content_id = ANY(%s::text[]))
                 ORDER BY created_at,content_id LIMIT 1 FOR UPDATE SKIP LOCKED
             ) UPDATE astra_package_queue_v1 q SET status='reserved',lease_token=%s,
                 lease_until=clock_timestamp() + %s * INTERVAL '1 second'
                 FROM next_package n WHERE q.namespace=%s AND q.content_id=n.content_id
                 RETURNING q.content_id,q.manifest_sha,q.approval_digest,q.qa_digest,q.lease_until""",
-                (self.namespace, token, lease_seconds, self.namespace)).fetchone()
+                (self.namespace, eligible_ids, eligible_ids, token, lease_seconds, self.namespace)).fetchone()
             if row is None:
                 return None
             receipt = db.execute("""SELECT receipt FROM astra_archive_receipts_v1

@@ -54,6 +54,15 @@ class SharedQueueValidationTests(unittest.TestCase):
             warehouse.list_receipts(after=["story-001"])
         factory.assert_not_called()
 
+    def test_empty_or_invalid_eligibility_never_connects(self):
+        factory = Mock()
+        warehouse = PostgresWarehouse(factory)
+        self.assertIsNone(warehouse.claim(eligible_ids=[]))
+        for ids in ("story-001", ["../invalid"], [42]):
+            with self.subTest(ids=ids), self.assertRaises(ValueError):
+                warehouse.claim(eligible_ids=ids)
+        factory.assert_not_called()
+
     def test_disabled_index_does_not_connect_and_typo_fails(self):
         with patch.dict(os.environ, {}, clear=True), patch("astra_v2.adaptive_shared_queue.warehouse_from_environment") as factory:
             self.assertIsNone(index_receipt_if_enabled(receipt()))
@@ -174,6 +183,15 @@ class PostgresWarehouseIntegrationTests(unittest.TestCase):
         self.assertEqual(len({x["content_id"] for x in claims}), 16)
         self.assertEqual(len({x["lease_token"] for x in claims}), 16)
         self.assertEqual(self.warehouse.counts()["reserved"], 16)
+
+    def test_claim_only_eligible_ids(self):
+        self.add("unapproved")
+        self.add("approved")
+        self.assertIsNone(self.worker().claim(eligible_ids=["not-present"]))
+        claim = self.worker().claim(eligible_ids=["approved"])
+        self.assertEqual(claim["content_id"], "approved")
+        self.assertEqual(self.warehouse.counts()["ready"], 1)
+        self.assertEqual(self.worker().claim(eligible_ids=["unapproved"])["content_id"], "unapproved")
 
     def test_locked_item_does_not_block_another_worker(self):
         self.add("first")
