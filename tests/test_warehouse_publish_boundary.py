@@ -48,7 +48,7 @@ class WarehouseBoundaryTests(unittest.TestCase):
                    side_effect=AssertionError("remote warehouse initialized")):
             with patch("astra_v2.editorial_runway_diagnostic.editorial_runway",
                        return_value={"eligible_ids": []}):
-                with self.assertRaisesRegex(RuntimeError, "warehouse_authoritative_qa_verifier_missing"):
+                with self.assertRaisesRegex(RuntimeError, "warehouse_trusted_qa_registry_not_configured"):
                     take("/tmp/astra-no-remote-dependencies.mp4")
 
     def test_invalid_editorial_manifest_never_claims(self):
@@ -70,7 +70,7 @@ class WarehouseBoundaryTests(unittest.TestCase):
                 raise AssertionError("unapproved package restored")
         with patch("astra_v2.editorial_runway_diagnostic.editorial_runway",
                    return_value={"eligible_ids": []}):
-            with self.assertRaisesRegex(RuntimeError, "warehouse_authoritative_qa_verifier_missing"):
+            with self.assertRaisesRegex(RuntimeError, "warehouse_trusted_qa_registry_not_configured"):
                 take("/tmp/astra-warehouse-test-output.mp4",
                      warehouse=warehouse, archive=ForbiddenArchive())
         self.assertEqual(warehouse.claim_count, 0)
