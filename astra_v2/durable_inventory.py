@@ -110,8 +110,8 @@ class Inventory:
             db.execute("BEGIN IMMEDIATE")
             changed = db.execute("""UPDATE packages SET state='published',video_id=?,
                 lease_owner=NULL,lease_until=NULL WHERE content_id=? AND
-                lease_owner=? AND fencing=? AND state='leased' AND approved=1""",
-                (video_id, content_id, owner, fencing)).rowcount
+                lease_owner=? AND fencing=? AND state='leased' AND approved=1 AND lease_until>=?""",
+                (video_id, content_id, owner, fencing, time.time())).rowcount
             if changed != 1:
                 db.rollback()
                 raise ValueError("stale_or_unapproved_lease")
