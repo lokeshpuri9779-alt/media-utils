@@ -19,8 +19,11 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
     if not re.fullmatch(r"[A-Za-z0-9._-]{1,80}", model):
         raise ValueError("Invalid Gemini model")
     prompt = (
-        "Write one genuinely original, coherent, family-safe science-fiction short "
-        "with four cinematic story beats, causal progression and an unexpected ending. "
+        "Write one genuinely original, coherent, family-safe short with "
+        "distinct characters, environments, emotional stakes, decisions and consequences. "
+        "Vary genres and premises; avoid repeating cosmic archives, simulations or "
+        "corrupted-code revelations. Use four cinematic story beats with causal "
+        "progression and a meaningful ending. "
         "Return only JSON keys title, question, answer, beats. Each beat must have "
         "headline, speech, visual, label, story_beat. Speech 12-24 words in every beat (at least 48 words total); use at least three distinct visual types across the four beats; "
         "visual one of planet, robot, signal, ship, forest, door; story_beat one "
