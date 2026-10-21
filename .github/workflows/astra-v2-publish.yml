@@ -35,8 +35,11 @@ jobs:
       ASTRA_PRELOAD_MAX_AGE_HOURS: '48' # Skip old rendered visuals; render fresh when queue is stale
       ASTRA_PRELOAD_ONLY: '0'
       ASTRA_SERIES_PUBLICATION: '0' # Allow new approved originals after completed Season 1
-      ASTRA_OMNIROUTE_ORDER: 'gemini,groq,openrouter'
+      ASTRA_OMNIROUTE_ORDER: 'gemini,groq,openrouter,nvidia'
       ASTRA_GEMINI_ENABLED: '1'
+      ASTRA_NVIDIA_ENABLED: ${{ vars.ASTRA_NVIDIA_ENABLED || '0' }}
+      NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+      ASTRA_NVIDIA_MODEL: 'meta/llama-3.1-70b-instruct'
       ASTRA_GROQ_ENABLED: ${{ vars.ASTRA_GROQ_ENABLED || '0' }}
       GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
       ASTRA_GROQ_MODEL: 'llama-3.3-70b-versatile'
