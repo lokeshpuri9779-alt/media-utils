@@ -42,3 +42,11 @@ class WatchdogTests(TestCase):
             with contextlib.redirect_stdout(out):
                 self.assertEqual(module.main(), 0)
             self.assertIn('"alert": true', out.getvalue())
+
+    def test_empty_schedule_history_warns(self):
+        now = dt.datetime(2026, 10, 22, 12, tzinfo=dt.timezone.utc)
+        with patch.object(module, "NOW", now), patch.object(module, "get_json", return_value={"workflow_runs": []}), patch.dict(os.environ, {"GITHUB_STEP_SUMMARY": ""}):
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                self.assertEqual(module.main(), 0)
+            self.assertIn('"alert": true', out.getvalue())
