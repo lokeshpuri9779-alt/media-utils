@@ -131,6 +131,8 @@ def main():
         if candidate["content_id"] in excluded:
             raise RuntimeError("Duplicate preloaded content ID")
         package = prepare(video, candidate)
+        from astra_v2.adaptive_package_archive import archive_preload_if_enabled
+        archive_preload_if_enabled(package)
         destination = Path("preload-package")
         destination.mkdir(exist_ok=True)
         for name in ("candidate.json", "video.mp4", "cover.jpg", "cover_wide.jpg"):

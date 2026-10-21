@@ -14,11 +14,11 @@ from astra_v2 import preload_queue as queue
 class PreloadQueueTests(unittest.TestCase):
     def test_artifacts_only_from_main_and_not_expired(self):
         entries = {"artifacts": [
-            {"name": "astra-preloaded-good", "expired": False,
+            {"id": 1, "name": "astra-preloaded-good", "expired": False,
              "workflow_run": {"head_branch": "main"}},
-            {"name": "astra-preloaded-evil", "expired": False,
+            {"id": 2, "name": "astra-preloaded-evil", "expired": False,
              "workflow_run": {"head_branch": "attacker"}},
-            {"name": "astra-preloaded-old", "expired": True,
+            {"id": 3, "name": "astra-preloaded-old", "expired": True,
              "workflow_run": {"head_branch": "main"}},
         ]}
         with patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/repo"}):
@@ -57,7 +57,7 @@ class PreloadQueueTests(unittest.TestCase):
             video.write_bytes(b"safe-media-test")
             candidate = {"content_id": "story-1", "title": "New story",
                          "description": "Original", "synthetic": True,
-                         "genre": "fiction", "format": "short"}
+                         "genre": "fiction", "format": "short", "renderer": "studio-7.3.0"}
             with patch("astra_v2.creative.inspect_video", return_value={
                 "seconds": 12, "width": 1080, "height": 1920, "size": 15}):
                 folder = queue.prepare(video, candidate)
