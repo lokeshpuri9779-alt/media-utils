@@ -277,6 +277,11 @@ def run():
                         report["character_memory_error"] = type(exc).__name__
                         print("ASTRA_CHARACTER_MEMORY=invalid_approved_metadata", type(exc).__name__)
                 description = candidate["description"] + "\nASTRA-V2-ID:" + cid
+                # Do not create a local transfer reservation when the warehouse
+                # upload interlock is disabled; no YouTube transfer has started.
+                if (candidate.get("warehouse_claim")
+                        and os.getenv("ASTRA_WAREHOUSE_UPLOAD_ENABLED", "0") != "1"):
+                    raise RuntimeError("warehouse_publisher_confirmation_not_enabled")
                 # Reserve identity and interval BEFORE upload; never auto-retry an
                 # indeterminate transfer as this risks a duplicate public video.
                 state.setdefault("reserved", {})[cid] = {
@@ -290,10 +295,6 @@ def run():
                 state["last_attempt_at"] = utcnow().isoformat()
                 state["attempts"] += 1
                 write_json(STATE_FILE, state)
-                # Warehouse publication remains fail-closed unless explicitly enabled.
-                # The queue claim is durable; never automatically retry an ambiguous upload.
-                if candidate.get("warehouse_claim") and os.getenv("ASTRA_WAREHOUSE_UPLOAD_ENABLED", "0") != "1":
-                    raise RuntimeError("warehouse_publisher_confirmation_not_enabled")
                 video_id = youtube.upload(
                     video, title, description, candidate["synthetic"],
                     made_for_kids=candidate.get("made_for_kids"))
