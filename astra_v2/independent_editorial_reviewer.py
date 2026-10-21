@@ -31,6 +31,9 @@ def assess(story, history=(), *, model=None, api_key=None, transport=None):
         "originality, causal coherence, clarity, copyright/trademark concerns, "
         "unsafe or misleading content, audience suitability, and YouTube policy "
         "risks. Do not assume originality merely because the author is AI. "
+        "Assess whether the story repeats recently published premises, characters, "
+        "settings, causal mechanisms or endings when comparison history is supplied. "
+        "Do not reject solely for sharing a genre or common vocabulary. "
         'Return JSON only: {"decision":"approve or reject",'
         '"reasons":["specific evidence-based reasons"]}. '
         "Reject if uncertain or unable to review fully. Story:\n"
