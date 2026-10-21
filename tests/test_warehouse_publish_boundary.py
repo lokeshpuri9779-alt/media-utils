@@ -78,6 +78,56 @@ class WarehouseBoundaryTests(unittest.TestCase):
                         take(str(Path(directory) / "output.mp4"), warehouse=warehouse)
         self.assertEqual(warehouse.claim_count, 0)
 
+    def test_approved_package_restores_only_after_both_evidence_checks(self):
+        import hashlib
+        import json
+        from astra_v2.warehouse_qa_evidence import qa_evidence_digest
+        from astra_v2.warehouse_editorial_evidence import approval_evidence_digest
+        from astra_v2.editorial_approval_manifest import story_digest
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            video_bytes = b"approved-package-test-video"
+            digest = hashlib.sha256(video_bytes).hexdigest()
+            story = {"content_id": "test-short", "title": "Approved short"}
+            review = {"content_id": "test-short", "story_sha256": story_digest(story),
+                      "decision": "approve", "reviewer": "editor", "review_notes": "Approved"}
+            approval = approval_evidence_digest(story, review)
+            qa = {"schema": "astra.av.qa.v1", "content_id": "test-short",
+                  "decision": "approve", "reviewer": "qa-reviewer",
+                  "review_notes": "Audio and visual quality accepted",
+                  "video_sha256": digest, "approval_digest": approval}
+            stories = root / "stories.json"
+            reviews = root / "reviews.json"
+            registry = root / "qa.json"
+            stories.write_text(json.dumps({"stories": [story]}))
+            reviews.write_text(json.dumps({"reviews": [review]}))
+            registry.write_text(json.dumps({"schema": "astra.qa.registry.v1", "reviews": [qa]}))
+            candidate = {"content_id": "test-short", "format": "short", "sha256": digest}
+            class Warehouse:
+                def claim(self, **kwargs):
+                    return {"content_id": "test-short", "lease_token": "a" * 32,
+                            "approval_digest": approval, "qa_digest": qa_evidence_digest(qa),
+                            "receipt": {}}
+            class Archive:
+                def restore(self, receipt, destination):
+                    destination.mkdir()
+                    (destination / "video.mp4").write_bytes(video_bytes)
+                    (destination / "candidate.json").write_text(json.dumps(candidate))
+            output = root / "output.mp4"
+            with patch.dict(os.environ, {
+                "ASTRA_TRUSTED_QA_REGISTRY": str(registry),
+                "ASTRA_QA_REGISTRY_ACCESS_CONTROLLED": "1",
+                "ASTRA_EDITORIAL_STORIES_FILE": str(stories),
+                "ASTRA_EDITORIAL_REVIEWS_FILE": str(reviews)}):
+                with patch("astra_v2.editorial_runway_diagnostic.editorial_runway",
+                           return_value={"eligible_ids": ["test-short"]}):
+                    with patch("astra_v2.warehouse_editorial_evidence.review_decision",
+                               return_value=[]):
+                        with patch("astra_v2.creative.inspect_video"):
+                            result = take(output, warehouse=Warehouse(), archive=Archive())
+            self.assertEqual(output.read_bytes(), video_bytes)
+            self.assertEqual(result["warehouse_claim"]["content_id"], "test-short")
+
     def test_invalid_editorial_manifest_never_claims(self):
         warehouse = FakeWarehouse()
         class ForbiddenArchive:
