@@ -34,6 +34,33 @@ def load_editorial_stories():
             "reasons": dict(sorted(reasons.items())),
         }, sort_keys=True))
         print("ASTRA_EDITORIAL_INTAKE_CANDIDATES=" + str(result["intake_count"]))
+        # Include the persistent AI-reviewed pair restored from astra-state.
+        # This pair is not trusted merely because it exists: run the exact
+        # same hash-bound approval and full publication-history gate.
+        persistent_source = Path(os.getenv("ASTRA_PERSISTED_EDITORIAL_STORIES_FILE",
+                                          "runtime-health/ai-reviewed-stories.json"))
+        persistent_reviews = Path(os.getenv("ASTRA_PERSISTED_EDITORIAL_REVIEWS_FILE",
+                                           "runtime-health/ai-reviewed-decisions.json"))
+        if persistent_source.exists() != persistent_reviews.exists():
+            raise CreativeSkip("persistent_editorial_intake_incomplete_pair")
+        if persistent_source.is_file():
+            additional_stories = json.loads(persistent_source.read_text(encoding="utf-8"))
+            additional_reviews = json.loads(persistent_reviews.read_text(encoding="utf-8"))
+            history_records = load_history(publisher, history)
+            # Treat accepted static stories as reserved to avoid selecting
+            # identical candidates from both sources.
+            additional = approved_intake(additional_stories["stories"],
+                                         additional_reviews["reviews"],
+                                         list(history_records) + result["stories"])
+            from collections import Counter
+            additional_reasons = Counter(issue for entry in additional["audit"]["results"]
+                                         for issue in entry["issues"])
+            print("ASTRA_PERSISTED_EDITORIAL_AUDIT=" + json.dumps({
+                "reviewed": len(additional["audit"]["results"]),
+                "eligible": additional["intake_count"],
+                "reasons": dict(sorted(additional_reasons.items())),
+            }, sort_keys=True))
+            result["stories"].extend(additional["stories"])
         return result["stories"]
     except (OSError, ValueError, TypeError, KeyError) as exc:
         raise CreativeSkip("editorial_intake_unavailable:" + type(exc).__name__) from exc
