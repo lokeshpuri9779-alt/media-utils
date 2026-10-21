@@ -237,6 +237,22 @@ jobs:
             exit 1
           fi
 
+      - name: Verify warehouse publishing dependencies without uploading
+        if: steps.preflight.outputs.render_due == 'true'
+        env:
+          ASTRA_WAREHOUSE_PUBLISH: ${{ vars.ASTRA_WAREHOUSE_PUBLISH || '0' }}
+          ASTRA_WAREHOUSE_UPLOAD_ENABLED: ${{ vars.ASTRA_WAREHOUSE_UPLOAD_ENABLED || '0' }}
+          ASTRA_WAREHOUSE_DATABASE_URL: ${{ secrets.ASTRA_WAREHOUSE_DATABASE_URL }}
+          ASTRA_WAREHOUSE_NAMESPACE: ${{ vars.ASTRA_WAREHOUSE_NAMESPACE }}
+          ASTRA_TRUSTED_QA_REGISTRY: ${{ vars.ASTRA_TRUSTED_QA_REGISTRY }}
+          ASTRA_QA_REGISTRY_ACCESS_CONTROLLED: ${{ vars.ASTRA_QA_REGISTRY_ACCESS_CONTROLLED || '0' }}
+          ASTRA_ARTIFACT_S3_BUCKET: ${{ vars.ASTRA_ARTIFACT_S3_BUCKET }}
+          ASTRA_ARTIFACT_S3_ENDPOINT: ${{ vars.ASTRA_ARTIFACT_S3_ENDPOINT }}
+          ASTRA_ARTIFACT_S3_PREFIX: ${{ vars.ASTRA_ARTIFACT_S3_PREFIX }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.ASTRA_ARTIFACT_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.ASTRA_ARTIFACT_AWS_SECRET_ACCESS_KEY }}
+        run: python -m astra_v2.warehouse_readiness
+
       - name: Generate, validate, publish, and verify
         id: publish_video
         if: steps.preflight.outputs.render_due == 'true'
