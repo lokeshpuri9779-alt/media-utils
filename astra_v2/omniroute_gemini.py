@@ -22,7 +22,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
         "Write one genuinely original, coherent, family-safe science-fiction short "
         "with four cinematic story beats, causal progression and an unexpected ending. "
         "Return only JSON keys title, question, answer, beats. Each beat must have "
-        "headline, speech, visual, label, story_beat. Speech 10-24 words each; "
+        "headline, speech, visual, label, story_beat. Speech 12-24 words in every beat (at least 48 words total); use at least three distinct visual types across the four beats; "
         "visual one of planet, robot, signal, ship, forest, door; story_beat one "
         "of reveal, build, mechanism, twist, payoff. "
         "Use story_beat reveal for beat one and payoff for beat four; "
@@ -59,8 +59,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
             or title.casefold().strip() in excluded_titles
             or not isinstance(beats, list) or len(beats) != 4):
         raise ValueError("Generated story title or beat count invalid")
-    for beat in beats:
-        if not isinstance(beat, dict):
+    from astra_v2.omniroute import validate_beat_quality\n    validate_beat_quality(beats, "Gemini")\n    for beat in beats:\n        if not isinstance(beat, dict):
             raise ValueError("Invalid beat")
         for key in ("headline", "speech", "label"):
             if not isinstance(beat.get(key), str) or not 2 <= len(beat[key]) <= 220:
