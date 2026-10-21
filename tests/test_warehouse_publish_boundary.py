@@ -1,5 +1,8 @@
 """Fail-closed warehouse publisher boundary regression tests."""
 import unittest
+import os
+import tempfile
+from pathlib import Path
 from unittest.mock import patch
 
 from astra_v2.warehouse_preload import confirm_publication, take
@@ -50,6 +53,30 @@ class WarehouseBoundaryTests(unittest.TestCase):
                        return_value={"eligible_ids": []}):
                 with self.assertRaisesRegex(RuntimeError, "warehouse_trusted_qa_registry_not_configured"):
                     take("/tmp/astra-no-remote-dependencies.mp4")
+
+    def test_untrusted_registry_never_claims(self):
+        warehouse = FakeWarehouse()
+        with tempfile.TemporaryDirectory() as directory:
+            registry = Path(directory) / "qa.json"
+            registry.write_text('{"schema":"astra.qa.registry.v1","reviews":[]}', encoding="utf-8")
+            with patch.dict(os.environ, {"ASTRA_TRUSTED_QA_REGISTRY": str(registry),
+                                         "ASTRA_QA_REGISTRY_ACCESS_CONTROLLED": "0"}):
+                with patch("astra_v2.editorial_runway_diagnostic.editorial_runway",
+                           return_value={"eligible_ids": []}):
+                    with self.assertRaisesRegex(RuntimeError, "warehouse_qa_registry_trust_not_established"):
+                        take(str(Path(directory) / "output.mp4"), warehouse=warehouse)
+        self.assertEqual(warehouse.claim_count, 0)
+
+    def test_missing_registry_file_never_claims(self):
+        warehouse = FakeWarehouse()
+        with tempfile.TemporaryDirectory() as directory:
+            with patch.dict(os.environ, {"ASTRA_TRUSTED_QA_REGISTRY": str(Path(directory) / "missing.json"),
+                                         "ASTRA_QA_REGISTRY_ACCESS_CONTROLLED": "1"}):
+                with patch("astra_v2.editorial_runway_diagnostic.editorial_runway",
+                           return_value={"eligible_ids": []}):
+                    with self.assertRaisesRegex(RuntimeError, "warehouse_trusted_qa_registry_unavailable"):
+                        take(str(Path(directory) / "output.mp4"), warehouse=warehouse)
+        self.assertEqual(warehouse.claim_count, 0)
 
     def test_invalid_editorial_manifest_never_claims(self):
         warehouse = FakeWarehouse()
