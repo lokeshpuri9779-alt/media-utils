@@ -5,6 +5,7 @@ This module deliberately does not write approval manifests or publish videos.
 import json
 import os
 import urllib.request
+import urllib.error
 from datetime import datetime, timezone
 
 from astra_v2.editorial_approval_manifest import story_digest, review_decision
@@ -19,7 +20,7 @@ def assess(story, history=(), *, model=None, api_key=None, transport=None):
     if problems:
         return {"approved": False, "issues": sorted(set(problems)), "record": None}
     model = model or os.getenv("ASTRA_EDITORIAL_REVIEW_MODEL", "gemini-3.1-flash-lite")
-    api_key = api_key or os.getenv("GEMINI_API_KEY")
+    api_key = api_key if api_key is not None else os.getenv("GEMINI_API_KEY")
     if not api_key:
         return {"approved": False, "issues": ["reviewer_unavailable"], "record": None}
     import re
@@ -60,7 +61,7 @@ def assess(story, history=(), *, model=None, api_key=None, transport=None):
                 or not isinstance(reasons, list) or not reasons
                 or any(not isinstance(x, str) or not x.strip() for x in reasons)):
             raise ValueError("invalid_review_schema")
-    except (ValueError, KeyError, TypeError, OSError) as exc:
+    except (ValueError, KeyError, TypeError, OSError, urllib.error.URLError) as exc:
         return {"approved": False, "issues": ["review_failed:" + type(exc).__name__], "record": None}
     if answer["decision"] != "approve":
         return {"approved": False, "issues": ["ai_editorial_rejection"] + reasons, "record": None}
