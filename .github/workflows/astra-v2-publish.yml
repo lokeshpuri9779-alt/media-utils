@@ -617,3 +617,28 @@ jobs:
                   summary.write(f'- {label}: {present}\n')
 
           PY
+
+      - name: Notify independent publisher heartbeat
+        if: always()
+        continue-on-error: true
+        shell: bash
+        env:
+          ASTRA_HEALTHCHECKS_URL: ${{ secrets.ASTRA_HEALTHCHECKS_URL }}
+          ASTRA_PUBLISH_JOB_STATUS: ${{ job.status }}
+        run: |
+          set -euo pipefail
+          if [ -z "${ASTRA_HEALTHCHECKS_URL:-}" ]; then
+            echo 'ASTRA_HEARTBEAT=skipped_unconfigured'
+            exit 0
+          fi
+          # A failed or cancelled publisher must never be reported as healthy.
+          endpoint="${ASTRA_HEALTHCHECKS_URL}"
+          case "${ASTRA_PUBLISH_JOB_STATUS}" in
+            success) ;;
+            *) endpoint="${endpoint%/}/fail" ;;
+          esac
+          if curl --fail --silent --show-error --max-time 12 --retry 1 --retry-delay 1 --output /dev/null -- "$endpoint"; then
+            echo "ASTRA_HEARTBEAT=sent status=${ASTRA_PUBLISH_JOB_STATUS}"
+          else
+            echo "::warning::ASTRA external heartbeat could not be delivered"
+          fi
