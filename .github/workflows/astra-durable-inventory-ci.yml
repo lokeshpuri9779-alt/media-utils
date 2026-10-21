@@ -2,8 +2,8 @@ name: ASTRA durable inventory CI
 on:
   pull_request:
     paths:
-      - 'astra_v2/durable_inventory.py'
-      - 'tests/test_durable_inventory.py'
+      - 'astra_v2/adaptive_shared_queue.py'
+      - 'tests/test_adaptive_shared_queue.py'
       - 'tests/test_warehouse_health.py'
       - 'astra_v2/warehouse_health.py'
       - 'astra_v2/warehouse_preload.py'
@@ -12,8 +12,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'astra_v2/durable_inventory.py'
-      - 'tests/test_durable_inventory.py'
+      - 'astra_v2/adaptive_shared_queue.py'
+      - 'tests/test_adaptive_shared_queue.py'
       - 'tests/test_warehouse_health.py'
       - 'astra_v2/warehouse_health.py'
       - 'astra_v2/warehouse_preload.py'
@@ -31,6 +31,6 @@ jobs:
         with:
           python-version: '3.12'
       - name: Compile inventory and tests
-        run: python -m compileall -q astra_v2/durable_inventory.py tests/test_durable_inventory.py tests/test_warehouse_health.py astra_v2/warehouse_health.py astra_v2/warehouse_preload.py tests/test_warehouse_publish_boundary.py
+        run: python -m compileall -q astra_v2/adaptive_shared_queue.py tests/test_adaptive_shared_queue.py tests/test_warehouse_health.py astra_v2/warehouse_health.py astra_v2/warehouse_preload.py tests/test_warehouse_publish_boundary.py
       - name: Run warehouse and inventory regression tests
-        run: python -m unittest discover -s tests -p 'test_durable_inventory.py' -v && python -m unittest discover -s tests -p 'test_warehouse_health.py' -v && python -m unittest discover -s tests -p 'test_warehouse_publish_boundary.py' -v
+        run: python -m unittest discover -s tests -p 'test_adaptive_shared_queue.py' -v && python -m unittest discover -s tests -p 'test_warehouse_health.py' -v && python -m unittest discover -s tests -p 'test_warehouse_publish_boundary.py' -v
