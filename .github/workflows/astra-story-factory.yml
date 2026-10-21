@@ -69,6 +69,20 @@ jobs:
         run: |
           if [ "$ASTRA_GEMINI_ENABLED" != "1" ]; then echo "Gemini not configured; skipping rewrite"; exit 0; fi
           python -m astra_v2.story_factory_rewrite_queue --packet ../state/story_factory_editorial_packet.json --output ../state/story_factory_rewrite_queue.json --limit 3
+      - name: Preproduce review-only images via configured free OmniRoute provider
+        working-directory: code
+        env:
+          ASTRA_OMNI_IMAGE_ENDPOINT: ${{ vars.ASTRA_OMNI_IMAGE_ENDPOINT }}
+          ASTRA_OMNI_IMAGE_MODEL: ${{ vars.ASTRA_OMNI_IMAGE_MODEL }}
+          ASTRA_OMNI_IMAGE_FREE_CONFIRMED: ${{ vars.ASTRA_OMNI_IMAGE_FREE_CONFIRMED }}
+          ASTRA_OMNI_IMAGE_API_KEY: ${{ secrets.ASTRA_OMNI_IMAGE_API_KEY }}
+        run: |
+          python -m unittest discover -s tests -p 'test_omniroute_image_assets.py'
+          if [ -z "$ASTRA_OMNI_IMAGE_ENDPOINT" ] || [ -z "$ASTRA_OMNI_IMAGE_MODEL" ]; then
+            echo "Image provider not configured; leaving asset warehouse unchanged"
+          elif [ -f ../state/story_factory_rewrite_queue.json ]; then
+            python -m astra_v2.omniroute_image_assets --queue ../state/story_factory_rewrite_queue.json --root ../state/omni_assets --manifest ../state/story_factory_image_manifest.json --limit 3
+          fi
       - name: Commit persistent cursor and latest review batch
         working-directory: state
         run: |
@@ -76,6 +90,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add story_factory_state.json story_factory_candidates.jsonl story_factory_review.jsonl story_factory_review_summary.json story_factory_editorial_packet.json
           if [ -f story_factory_rewrite_queue.json ]; then git add story_factory_rewrite_queue.json; fi
+          if [ -f story_factory_image_manifest.json ]; then git add story_factory_image_manifest.json omni_assets/; fi
           if ! git diff --cached --quiet; then
             git commit -m "Replenish review-only story candidate batch"
             git push origin HEAD:astra-state
