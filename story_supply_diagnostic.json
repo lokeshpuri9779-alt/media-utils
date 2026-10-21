@@ -1,4 +1,5 @@
 {
+  "approved_production_candidates_before_history": 142,
   "authored_candidates": 253,
   "block_reasons": {
     "insufficient_narrative_detail": 22,
@@ -11,5 +12,6 @@
   "latest_production_outcome": "quality_skip",
   "latest_production_reason": "no_approved_original_story_available",
   "read_only": true,
-  "status": "candidates_remaining"
+  "status": "approved_candidates_present",
+  "structurally_eligible_not_necessarily_approved": 80
 }
