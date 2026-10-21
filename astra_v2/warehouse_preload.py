@@ -21,6 +21,10 @@ def take(output, *, warehouse=None, archive=None):
     claim = warehouse.claim(lease_seconds=3600)
     if claim is None:
         return None
+    # Do not consume a claim without independently verified editorial and QA
+    # evidence. Until the trusted verifier is integrated, fail closed.
+    if os.getenv("ASTRA_WAREHOUSE_EVIDENCE_VERIFIED", "0") != "1":
+        raise RuntimeError("warehouse_authoritative_evidence_verifier_missing")
     output = Path(output)
     if output.exists():
         raise ValueError("warehouse_output_already_exists")
