@@ -26,6 +26,21 @@ class ReleaseInventoryTests(unittest.TestCase):
                 lambda n: [{"tag_name": "other", "assets": []} for _ in range(100)],
                 max_pages=2)
 
+    def test_rejects_truncated_embedded_assets(self):
+        with self.assertRaisesRegex(RuntimeError, "truncated"):
+            measure_release_assets(lambda n: [{
+                "tag_name": "astra-media-many",
+                "assets": [{"size": 1} for _ in range(30)]
+            }])
+
+    def test_rejects_mismatched_asset_count(self):
+        with self.assertRaisesRegex(RuntimeError, "truncated"):
+            measure_release_assets(lambda n: [{
+                "tag_name": "astra-media-many",
+                "assets_count": 4,
+                "assets": [{"size": 1}]
+            }])
+
     def test_invalid_asset_size(self):
         with self.assertRaises(ValueError):
             measure_release_assets(lambda n: [
