@@ -40,12 +40,14 @@ class ReservedReleaseArchiveTests(unittest.TestCase):
 
 
     def test_same_content_same_reservation_across_paths(self):
+        from astra_v2.github_storage_ledger import SCHEMA
         identities = []
+        state = {"schema": SCHEMA, "capacity_bytes": 1000000,
+                 "used_bytes": 0, "reservations": {}}
         def record(transform):
-            from astra_v2.github_storage_ledger import SCHEMA
-            state = {"schema": SCHEMA, "capacity_bytes": 1000000,
-                     "used_bytes": 0, "reservations": {}}
+            nonlocal state
             result = transform(state)
+            state = result
             if result["reservations"]:
                 identities.extend(result["reservations"].keys())
         ledger = Mock()
