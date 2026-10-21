@@ -34,8 +34,10 @@ def handoff(story, verdict, history, stories_path, reviews_path):
     result = approved_intake([story], [record], history)
     if result["intake_count"] != 1:
         raise ValueError("editorial_handoff_not_eligible")
-    # Review manifest is written first; story is written last so an interrupted
-    # handoff cannot expose a new story without its decision.
+    # Prevent reuse of a prior successful story export after a failed write.
+    # A journal is not an atomic two-file transaction; downstream readers must
+    # still validate the complete matching pair.
+    Path(stories_path).unlink(missing_ok=True)
     _atomic_json(reviews_path, {"reviews": [record]})
     _atomic_json(stories_path, {"stories": [story]})
     return result["stories"]
