@@ -81,6 +81,21 @@ def take(output, *, warehouse=None, archive=None):
     return candidate
 
 
+
+def renew_before_upload(claim, *, warehouse=None):
+    """Refuse to start a transfer if its fenced warehouse lease has expired.
+
+    The publisher must call this immediately before YouTube upload. Ambiguous
+    transfers are never requeued or retried by this helper.
+    """
+    if not isinstance(claim, dict) or not claim.get("content_id") or not claim.get("lease_token"):
+        raise ValueError("invalid_warehouse_claim")
+    if warehouse is None:
+        from astra_v2.adaptive_shared_queue import warehouse_from_environment
+        warehouse = warehouse_from_environment()
+    return warehouse.renew(claim["content_id"], claim["lease_token"], lease_seconds=3600)
+
+
 def confirm_publication(claim, video_id, status, *, warehouse=None):
     """Confirm only a verified public YouTube video while the lease is valid.
 
