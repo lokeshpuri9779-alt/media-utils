@@ -50,10 +50,17 @@ jobs:
           report={"generated":len(candidates),"awaiting_editorial_review":counts["awaiting_editorial_review"],
                   "needs_new_plot":counts["needs_new_plot"],"issue_counts":dict(sorted(reasons.items())),
                   "automatically_approved":0,"production_ready":0}
-          Path("story_factory_review_summary.json").write_text(json.dumps(report,indent=2,sort_keys=True)+chr(10))
+          Path("story_factory_review_summary.json story_factory_editorial_packet.json").write_text(json.dumps(report,indent=2,sort_keys=True)+chr(10))
           print("ASTRA_STORY_FACTORY_REVIEW_SUMMARY="+json.dumps(report,sort_keys=True))
           print("Validated review-only replenishment batch:",len(candidates))
           PY
+      - name: Build fail-closed editorial review packet
+        working-directory: code
+        run: |
+          python -m astra_v2.story_factory_review_packet \
+            --candidates ../state/story_factory_candidates.jsonl \
+            --reviews ../state/story_factory_review.jsonl \
+            --output ../state/story_factory_editorial_packet.json
       - name: Commit persistent cursor and latest review batch
         working-directory: state
         run: |
