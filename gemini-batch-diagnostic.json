@@ -1,6 +1,6 @@
 {
-  "observed_at": "2026-10-21T18:55:14.746565+00:00",
-  "generated": 3,
+  "observed_at": "2026-10-21T18:59:46.904859+00:00",
+  "generated": 5,
   "requested": 10,
   "generation_failures": [
     {
@@ -8,23 +8,15 @@
       "reason": "ValueError"
     },
     {
-      "index": 2,
-      "reason": "ValueError"
-    },
-    {
-      "index": 3,
-      "reason": "ValueError"
-    },
-    {
       "index": 4,
       "reason": "ValueError"
     },
     {
-      "index": 6,
+      "index": 5,
       "reason": "ValueError"
     },
     {
-      "index": 7,
+      "index": 8,
       "reason": "ValueError"
     },
     {
@@ -32,12 +24,16 @@
       "reason": "ValueError"
     }
   ],
-  "reviewed": null,
-  "approved": null,
+  "reviewed": 5,
+  "approved": 2,
   "review_issues": [
-    "review_not_completed"
+    "Fails originality assessment due to thematic and titular duplication within the comparative dataset.",
+    "The candidate story 'The Glassmaker of Oakhaven Ridge' bears a strong resemblance in title, setting, and thematic premise to recently published works in the comparison history, specifically 'The Glassmaker of Oakhaven' and 'The Glassmaker's Last Breath'.",
+    "The candidate story title 'The Glassmaker of Sunken Harbor' shares an extremely similar premise, thematic elements, and naming convention with recently published works in the comparison history, specifically 'The Glassmaker of Oakhaven' and 'The Glassmaker's Last Breath'.",
+    "The candidate story title 'The Glassmaker's Last Blue Pitcher' heavily mirrors recently published premises in the comparison history, specifically 'The Glassmaker of Oakhaven' and 'The Glassmaker's Last Breath'.",
+    "ai_editorial_rejection"
   ],
-  "approval_pair_present": false,
+  "approval_pair_present": true,
   "model_access": {
     "status": "ok",
     "models": [
