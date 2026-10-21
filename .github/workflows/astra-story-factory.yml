@@ -61,12 +61,23 @@ jobs:
             --candidates ../state/story_factory_candidates.jsonl \
             --reviews ../state/story_factory_review.jsonl \
             --output ../state/story_factory_editorial_packet.json
+      - name: Rewrite a bounded editorial shortlist with existing Gemini
+        working-directory: code
+        env:
+          ASTRA_GEMINI_ENABLED: ${{ secrets.GEMINI_API_KEY != '' && '1' || '0' }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python -m astra_v2.story_factory_rewrite_queue \\
+            --packet ../state/story_factory_editorial_packet.json \\
+            --output ../state/story_factory_rewrite_queue.json \\
+            --limit 3
       - name: Commit persistent cursor and latest review batch
         working-directory: state
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add story_factory_state.json story_factory_candidates.jsonl story_factory_review.jsonl story_factory_review_summary.json story_factory_editorial_packet.json
+          if [ -f story_factory_rewrite_queue.json ]; then git add story_factory_rewrite_queue.json; fi
           if ! git diff --cached --quiet; then
             git commit -m "Replenish review-only story candidate batch"
             git push origin HEAD:astra-state
