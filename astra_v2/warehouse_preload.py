@@ -27,6 +27,8 @@ def take(output, *, warehouse=None, archive=None):
     # The remote queue contains digest references, not independently trusted
     # QA verdicts. Do not acquire a lease until a verifier binds a verdict
     # to the exact archived video and approved story.
+    # Editorial evidence verification below is deliberately unreachable until
+    # that independent audiovisual verifier exists.
     raise RuntimeError("warehouse_authoritative_qa_verifier_missing")
     warehouse = warehouse if warehouse is not None else warehouse_from_environment()
     archive = archive if archive is not None else PackageArchive(
