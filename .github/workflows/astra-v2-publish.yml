@@ -223,6 +223,20 @@ jobs:
             echo 'ASTRA_WAREHOUSE=not_enabled'
           fi
 
+      - name: Install warehouse publisher dependencies when opted in
+        if: steps.preflight.outputs.render_due == 'true'
+        env:
+          ASTRA_WAREHOUSE_PUBLISH: ${{ vars.ASTRA_WAREHOUSE_PUBLISH || '0' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${ASTRA_WAREHOUSE_PUBLISH}" = "1" ]; then
+            python -m pip install --disable-pip-version-check 'psycopg[binary]>=3.1,<4' 'boto3>=1.34,<2'
+          elif [ "${ASTRA_WAREHOUSE_PUBLISH}" != "0" ]; then
+            echo 'Invalid warehouse publish switch' >&2
+            exit 1
+          fi
+
       - name: Generate, validate, publish, and verify
         id: publish_video
         if: steps.preflight.outputs.render_due == 'true'
@@ -231,6 +245,18 @@ jobs:
           ASTRA_EDITORIAL_REVIEWS_FILE: editorial/reviewed_decisions.json
           ASTRA_PUBLISHER_STATE_PATH: astra_v2_state.json
           ASTRA_STORY_HISTORY_PATH: astra_story_history.json
+          # Explicitly opt-in; absent variables never activate warehouse uploads.
+          ASTRA_WAREHOUSE_PUBLISH: ${{ vars.ASTRA_WAREHOUSE_PUBLISH || '0' }}
+          ASTRA_WAREHOUSE_UPLOAD_ENABLED: ${{ vars.ASTRA_WAREHOUSE_UPLOAD_ENABLED || '0' }}
+          ASTRA_WAREHOUSE_DATABASE_URL: ${{ secrets.ASTRA_WAREHOUSE_DATABASE_URL }}
+          ASTRA_WAREHOUSE_NAMESPACE: ${{ vars.ASTRA_WAREHOUSE_NAMESPACE }}
+          ASTRA_TRUSTED_QA_REGISTRY: ${{ vars.ASTRA_TRUSTED_QA_REGISTRY }}
+          ASTRA_QA_REGISTRY_ACCESS_CONTROLLED: ${{ vars.ASTRA_QA_REGISTRY_ACCESS_CONTROLLED || '0' }}
+          ASTRA_ARTIFACT_S3_BUCKET: ${{ vars.ASTRA_ARTIFACT_S3_BUCKET }}
+          ASTRA_ARTIFACT_S3_ENDPOINT: ${{ vars.ASTRA_ARTIFACT_S3_ENDPOINT }}
+          ASTRA_ARTIFACT_S3_PREFIX: ${{ vars.ASTRA_ARTIFACT_S3_PREFIX }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.ASTRA_ARTIFACT_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.ASTRA_ARTIFACT_AWS_SECRET_ACCESS_KEY }}
           ASTRA_PRELOAD_ONLY: '0' # Scan only policy-approved queued media, then allow a fresh QA-gated render
         shell: bash
         run: |
