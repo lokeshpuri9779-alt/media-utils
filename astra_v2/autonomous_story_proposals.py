@@ -334,11 +334,14 @@ def proposal(index):
     # Keep one causal premise per candidate. Independent plot/arc templates previously
     # introduced unrelated incidents (e.g. a bell mystery plus a science fair).
     # The selected mystery, physical clue, test and repair now drive all four beats.
+    # The chosen plot engine and architecture remain complete causal sequences,
+    # rather than disconnected individual sentences. Preserve their full
+    # problem/action/reveal/outcome progression to maintain novelty.
     beats = (
-        ("reveal", f"In {setting}, {actor} needed to understand why {mystery}, {stakes}. The community needed an explanation before anyone acted.", visual),
-        ("build", f"{causal_opening}. {actor.capitalize()} compared {clue} with the available evidence and {method}. But {obstacle}. Rather than blame anyone, the team tested whether the clue could explain the mystery.", "book"),
-        ("twist", f"The investigation revealed {reversal}. This explained the original mystery. The team checked the discovery against {clue} and repeated the test to confirm the cause. {emotional.capitalize()}.", setting_visual),
-        ("payoff", f"With the cause understood, {actor} {resolution}. The team recorded the evidence and the safe procedure {consequence}.", _pick(index, VISUALS, 3)),
+        ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}, {stakes}. {plot_problem}. {arc_setup}.", visual),
+        ("build", f"{actor.capitalize()} compared {clue} with {discovery}. {causal_opening}. {causal_test}. {plot_action}. {arc_decision}. {method}, but {obstacle}.", "book"),
+        ("twist", f"{causal_reveal}. {plot_reveal}. {arc_turn}. This explained the original mystery. The team checked the evidence again.", setting_visual),
+        ("payoff", f"With the cause understood, {actor} {resolution}. {causal_aftermath}. {plot_outcome}. {arc_aftermath}. {consequence}.", _pick(index, VISUALS, 3)),
     )
     # Reserve distinct, story-relevant visual keys across the four beats.
     # This fixes avoidable visual repetition without changing narration or
