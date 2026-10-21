@@ -39,5 +39,27 @@ class ReservedReleaseArchiveTests(unittest.TestCase):
         self.assertEqual(calls, ["ledger"])
 
 
+    def test_same_content_same_reservation_across_paths(self):
+        identities = []
+        def record(transform):
+            from astra_v2.github_storage_ledger import SCHEMA
+            state = {"schema": SCHEMA, "capacity_bytes": 1000000,
+                     "used_bytes": 0, "reservations": {}}
+            result = transform(state)
+            if result["reservations"]:
+                identities.extend(result["reservations"].keys())
+        ledger = Mock()
+        ledger.transaction.side_effect = record
+        bridge = ReservedReleaseArchive(Mock(), ledger)
+        bridge.archive.put = Mock(return_value={"ok": True})
+        with tempfile.TemporaryDirectory() as root:
+            for dirname in ("worker-one", "worker-two"):
+                folder = Path(root, dirname)
+                folder.mkdir()
+                Path(folder, "video.mp4").write_bytes(b"same-video")
+                bridge.put(folder)
+        self.assertEqual(len(identities), 2)
+        self.assertEqual(identities[0], identities[1])
+
 if __name__ == "__main__":
     unittest.main()
