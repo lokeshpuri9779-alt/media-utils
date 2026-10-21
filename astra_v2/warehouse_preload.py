@@ -24,12 +24,12 @@ def take(output, *, warehouse=None, archive=None):
         os.getenv("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json"))
     # Recheck the reviewed manifest against each queued claim once selected.
     # This must happen before restore and does not replace audiovisual QA.
-    # The remote queue contains digest references, not independently trusted
-    # QA verdicts. Do not acquire a lease until a verifier binds a verdict
-    # to the exact archived video and approved story.
-    # Editorial evidence verification below is deliberately unreachable until
-    # that independent audiovisual verifier exists.
-    raise RuntimeError("warehouse_authoritative_qa_verifier_missing")
+    registry_path = os.getenv("ASTRA_TRUSTED_QA_REGISTRY")
+    if not registry_path:
+        raise RuntimeError("warehouse_trusted_qa_registry_not_configured")
+    registry = Path(registry_path)
+    if not registry.is_file() or registry.is_symlink():
+        raise RuntimeError("warehouse_trusted_qa_registry_unavailable")
     warehouse = warehouse if warehouse is not None else warehouse_from_environment()
     archive = archive if archive is not None else PackageArchive(
         store_from_environment(os.getenv("ASTRA_ARTIFACT_CACHE", "storage/artifacts")))
@@ -62,6 +62,8 @@ def take(output, *, warehouse=None, archive=None):
     from astra_v2.adaptive_artifact_store import ArtifactStore
     if ArtifactStore.digest(destination / "video.mp4") != candidate.get("sha256"):
         raise ValueError("warehouse_video_digest_mismatch")
+    from astra_v2.warehouse_qa_evidence import verify_qa_claim
+    verify_qa_claim(claim, candidate, destination / "video.mp4", registry)
     import shutil
     with (destination / "video.mp4").open("rb") as source, output.open("xb") as target:
         shutil.copyfileobj(source, target, length=1024 * 1024)
