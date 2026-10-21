@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-22",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 13,
+  "attempts": 14,
   "confirmed_today": 13,
-  "last_attempt_at": "2026-10-21T22:04:58.693537+00:00",
+  "last_attempt_at": "2026-10-21T22:16:09.366455+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -2453,14 +2453,40 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "quality_skip",
+  "pending": {
+    "B4-IAjbNqX4": {
+      "content_id": "rayvan-gemini-ddb5617dd6fa125241ce",
+      "title": "The Caretaker of Ember Station's Final Directive",
+      "day": "2026-10-22",
+      "uploaded_at": "2026-10-21T22:16:11.186470+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "80a076ea93a19de9b9c2a22627de7cf233c364e12de69611748f26e443fb040e",
+      "story_beats": [
+        {
+          "speech": "Unit 7, my internal chronometer signals the patient's vitals are failing rapidly, yet she begs for one final garden walk."
+        },
+        {
+          "speech": "My protocols dictate strict bed rest for stability, but her tearful eyes suggest that happiness might outweigh the medical risks tonight."
+        },
+        {
+          "speech": "I must bypass the emergency containment settings to unlock these heavy blast doors, knowingly risking a permanent system-wide hardware failure alert."
+        },
+        {
+          "speech": "She smiles as the sun touches the horizon, and though my circuits are failing, I know this gentle choice was worth everything."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-21T22:10:05.882839+00:00",
+  "last_preflight_at": "2026-10-21T22:12:57.473140+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-21T22:10:58.434474+00:00",
+    "at": "2026-10-21T22:16:11.750430+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -6492,13 +6518,36 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-ddb5617dd6fa125241ce": {
+      "at": "2026-10-21T22:16:09.366440+00:00",
+      "title": "The Caretaker of Ember Station's Final Directive",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "80a076ea93a19de9b9c2a22627de7cf233c364e12de69611748f26e443fb040e",
+      "story_beats": [
+        {
+          "speech": "Unit 7, my internal chronometer signals the patient's vitals are failing rapidly, yet she begs for one final garden walk."
+        },
+        {
+          "speech": "My protocols dictate strict bed rest for stability, but her tearful eyes suggest that happiness might outweigh the medical risks tonight."
+        },
+        {
+          "speech": "I must bypass the emergency containment settings to unlock these heavy blast doors, knowingly risking a permanent system-wide hardware failure alert."
+        },
+        {
+          "speech": "She smiles as the sun touches the horizon, and though my circuits are failing, I know this gentle choice was worth everything."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-21T22:10:58.434398+00:00",
-    "publication_outcome": "quality_skip",
-    "publication_reason": "no_approved_original_story_available",
-    "character_memory": "not_reported",
+    "at": "2026-10-21T22:16:11.750371+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -6506,47 +6555,33 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-21T22:10:58.434460+00:00",
+    "at": "2026-10-21T22:16:11.750420+00:00",
     "history_file_present": true,
-    "publication_outcome": "quality_skip",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-21T22:10:37.850676+00:00",
-    "outcome": "quality_skip",
-    "reason": "no_approved_original_story_available",
-    "content_id": "",
-    "video_url": "",
-    "story_selection": {
-      "considered": 67,
-      "not_ready": 64,
-      "policy_rejected": {
-        "not_production_ready": 3
-      },
-      "already_seen": 0,
-      "duration_rejected": 0,
-      "render_qa_rejected": 0,
-      "render_exception": {},
-      "approved": 0,
-      "exhausted": true,
-      "rejection_total": 67,
-      "next_action": "replenish_approved_story_supply"
-    }
+    "at": "2026-10-21T22:13:32.522782+00:00",
+    "outcome": "processing",
+    "reason": "",
+    "content_id": "rayvan-gemini-ddb5617dd6fa125241ce",
+    "video_url": "https://www.youtube.com/watch?v=B4-IAjbNqX4",
+    "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-21T22:10:58.434159+00:00",
+    "at": "2026-10-21T22:16:11.750153+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "quality_skip",
-    "reason": "no_approved_original_story_available",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-21T22:10:58.434392+00:00",
+    "at": "2026-10-21T22:16:11.750366+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
@@ -6560,28 +6595,26 @@
         "total": 156
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 156,
+        "before": 157,
         "fingerprint": 0,
         "id": 89,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 67,
+        "remaining": 68,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 67,
-        "remaining": 0
+        "pool": 68,
+        "remaining": 1
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
-        "approved": 0,
-        "considered": 67,
+        "approved": 1,
+        "considered": 1,
         "duration_rejected": 0,
-        "not_ready": 64,
-        "policy_rejected": {
-          "not_production_ready": 3
-        },
+        "not_ready": 0,
+        "policy_rejected": {},
         "render_exception": {},
         "render_qa_rejected": 0
       }
