@@ -22,16 +22,29 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Restore complete publication history
+        run: |
+          git fetch origin astra-state
+          git checkout origin/astra-state -- astra_v2_state.json astra_story_history.json
       - name: Generate proposals
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           ASTRA_GEMINI_ENABLED: '1'
           BATCH_COUNT: ${{ inputs.count || '10' }}
         run: python -m astra_v2.gemini_batch --count "$BATCH_COUNT"
+      - name: Independently review generated proposals
+        if: success()
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python -m astra_v2.gemini_batch_review
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: gemini-unreviewed-proposals
-          path: runtime-health/gemini-proposals.json
+          path: |
+            runtime-health/gemini-proposals.json
+            runtime-health/ai-reviewed-stories.json
+            runtime-health/ai-reviewed-decisions.json
+            runtime-health/ai-batch-review-audit.json
           if-no-files-found: ignore
           retention-days: 7
