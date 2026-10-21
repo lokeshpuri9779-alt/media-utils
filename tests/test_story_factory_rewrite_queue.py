@@ -18,6 +18,14 @@ class RewriteQueueTests(unittest.TestCase):
         self.assertFalse(result["rewrites"][0]["story"]["production_ready"])
         self.assertFalse(result["rewrites"][0]["approved"])
 
+    def test_repeated_plot_does_not_enter_rewrite_queue(self):
+        p = packet()
+        p["candidates"][0]["review_status"] = "needs_new_plot"
+        result = rewrite_packet(p, generator=lambda *a, **k: self.fail("should not generate"))
+        self.assertEqual(result["selected_for_rewrite"], 0)
+        self.assertEqual(result["blocked_reason"], "no_unique_premises")
+        self.assertEqual(result["available_premises"]["needs_new_plot"], 1)
+
     def test_rejected_packet_fails_closed(self):
         p = packet()
         p["approved_count"] = 1
