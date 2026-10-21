@@ -21,6 +21,51 @@ def _tokens(value: Any) -> set[str]:
     return set(_WORD.findall(str(value or "").lower()))
 
 
+def generate_semantic_assets(stories, output_root=None, limit=24):
+    """Generate offline story-directed backgrounds with verified manifest."""
+    import hashlib
+    from PIL import ImageDraw
+    root = Path(output_root or ROOT).resolve()
+    folder = root / "art" / "assets" / "generated"
+    folder.mkdir(parents=True, exist_ok=True)
+    entries = []
+    for story in list(stories)[:max(0, min(int(limit), 128))]:
+        if not isinstance(story, dict):
+            continue
+        description = " ".join(str(story.get(k) or "") for k in (
+            "story_subject", "visual", "visual_intent", "visual_prompt", "headline", "speech"))
+        tags = sorted(_tokens(description))
+        if not tags:
+            continue
+        seed = hashlib.sha256(description.encode("utf-8")).digest()
+        identity = hashlib.sha256(description.encode("utf-8")).hexdigest()[:20]
+        im = Image.new("RGBA", (540, 960), (0, 0, 0, 0))
+        draw = ImageDraw.Draw(im, "RGBA")
+        sky = tuple(45 + seed[i] % 100 for i in range(3))
+        draw.rectangle((0, 0, 540, 960), fill=(*sky, 255))
+        for i in range(12):
+            x = (seed[i] * 37 + i * 71) % 540
+            y = (seed[(i + 8) % 32] * 11 + i * 97) % 790
+            radius = 15 + seed[(i + 16) % 32] % 75
+            draw.ellipse((x-radius, y-radius, x+radius, y+radius),
+                         fill=(min(255, sky[0] + 25), min(255, sky[1] + 32),
+                               min(255, sky[2] + 40), 70))
+        draw.polygon([(0, 760), (180, 670), (380, 760), (540, 680),
+                      (540, 960), (0, 960)], fill=(30, 65, 75, 255))
+        destination = folder / (identity + ".png")
+        im.save(destination, format="PNG", optimize=True)
+        with Image.open(destination) as verified:
+            verified.verify()
+        entries.append({"id": "semantic-" + identity,
+                        "path": destination.relative_to(root).as_posix(),
+                        "category": "background", "tags": tags,
+                        "status": "approved", "source": "offline-semantic-generator"})
+    manifest = root / "art" / "manifest.json"
+    manifest.parent.mkdir(parents=True, exist_ok=True)
+    manifest.write_text(json.dumps({"assets": entries}, indent=2), encoding="utf-8")
+    return {"generated": len(entries), "manifest": str(manifest)}
+
+
 def load_assets(manifest_path: str | Path = DEFAULT_MANIFEST) -> list[dict]:
     """Load valid, approved local assets from a JSON manifest."""
     path = Path(manifest_path)

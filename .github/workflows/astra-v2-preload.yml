@@ -206,6 +206,36 @@ jobs:
           path: runtime-health/astra-character-preview.mp4
           if-no-files-found: error
           retention-days: 7
+      - name: Pre-generate story-directed visual asset cache
+        if: matrix.lane == 0
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from astra.asset_library import generate_semantic_assets
+          source = Path("editorial/reviewed_stories.json")
+          data = json.loads(source.read_text(encoding="utf-8"))
+          scenes = []
+          for story in data.get("stories", []):
+              if not story.get("production_ready"):
+                  continue
+              for beat in story.get("story_beats", []):
+                  if isinstance(beat, dict):
+                      scenes.append({**beat, "headline": story.get("title", "")})
+          print("ASTRA_GENERATED_ASSETS=" + json.dumps(
+              generate_semantic_assets(scenes, limit=24), sort_keys=True))
+          PY
+      - name: Save generated visual asset cache
+        if: matrix.lane == 0
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-semantic-assets-${{ github.run_id }}
+          path: |
+            art/manifest.json
+            art/assets/generated/
+          retention-days: 14
+          if-no-files-found: warn
       - name: Render and approve next original video
         id: render
         env:
