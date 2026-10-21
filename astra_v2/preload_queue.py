@@ -144,7 +144,8 @@ def inventory_eligibility_snapshot(excluded_ids=(), max_age_hours=None, now=None
         if not isinstance(run, dict):
             counts["run_lookup_failed"] += 1
         elif (run.get("conclusion") != "success" or run.get("head_branch") != "main"
-              or run.get("name") != "ASTRA V2 - Preload Approved Videos"):
+              or run.get("name") not in ("ASTRA V2 - Preload Approved Videos",
+                                       "ASTRA V2 - Long-form Preload")):
             counts["untrusted_run"] += 1
         else:
             counts["preflight_eligible"] += 1
