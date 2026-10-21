@@ -23,7 +23,7 @@ class WarehouseBoundaryTests(unittest.TestCase):
     def test_public_status_required(self):
         warehouse = FakeWarehouse()
         claim = {"content_id": "test-short", "lease_token": "a" * 32}
-        for status in ({}, {"privacyStatus": "private"}, {"privacyStatus": "unlisted"}):
+        for status in ({}, {"privacyStatus": "private", "uploadStatus": "processed"}, {"privacyStatus": "unlisted", "uploadStatus": "processed"}, {"privacyStatus": "public", "uploadStatus": "uploaded"}, {"privacyStatus": "public", "uploadStatus": "failed"}):
             with self.assertRaises(ValueError):
                 confirm_publication(claim, "12345678901", status, warehouse=warehouse)
         self.assertEqual(warehouse.confirmations, [])
@@ -32,14 +32,14 @@ class WarehouseBoundaryTests(unittest.TestCase):
         warehouse = FakeWarehouse()
         with self.assertRaises(ValueError):
             confirm_publication({"content_id": "test-short", "lease_token": "a" * 32},
-                                "not-an-id", {"privacyStatus": "public"}, warehouse=warehouse)
+                                "not-an-id", {"privacyStatus": "public", "uploadStatus": "processed"}, warehouse=warehouse)
         self.assertEqual(warehouse.confirmations, [])
 
     def test_public_confirmation_is_delegated(self):
         warehouse = FakeWarehouse()
         claim = {"content_id": "test-short", "lease_token": "a" * 32}
         self.assertTrue(confirm_publication(claim, "12345678901",
-                                            {"privacyStatus": "public"}, warehouse=warehouse))
+                                            {"privacyStatus": "public", "uploadStatus": "processed"}, warehouse=warehouse))
         self.assertEqual(len(warehouse.confirmations), 1)
         self.assertEqual(len(warehouse.confirmations[0][1]["confirmation_digest"]), 64)
 
