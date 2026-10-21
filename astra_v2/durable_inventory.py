@@ -103,15 +103,16 @@ class Inventory:
                 raise ValueError("stale_or_unapproved_lease")
             db.commit()
 
-    def complete(self, content_id: str, owner: str, fencing: int, video_id: str):
+    def complete(self, content_id: str, owner: str, fencing: int, video_id: str, now: float | None = None):
         if not video_id:
             raise ValueError("missing_video_id")
+        now = time.time() if now is None else now
         with self.connect() as db:
             db.execute("BEGIN IMMEDIATE")
             changed = db.execute("""UPDATE packages SET state='published',video_id=?,
                 lease_owner=NULL,lease_until=NULL WHERE content_id=? AND
                 lease_owner=? AND fencing=? AND state='leased' AND approved=1 AND lease_until>=?""",
-                (video_id, content_id, owner, fencing, time.time())).rowcount
+                (video_id, content_id, owner, fencing, now)).rowcount
             if changed != 1:
                 db.rollback()
                 raise ValueError("stale_or_unapproved_lease")
