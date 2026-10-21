@@ -73,6 +73,18 @@ class PreloadQueueTests(unittest.TestCase):
         self.assertEqual(api.call_count, 2)
         self.assertIn("not_verified", result["verification"])
 
+    def test_inventory_preflight_accepts_trusted_long_form_workflow(self):
+        entries = [{"name": "astra-preloaded-long-video",
+                    "workflow_run": {"id": 88}}]
+        with patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/repo"}):
+            with patch.object(queue, "artifacts", return_value=entries):
+                with patch.object(queue, "_artifact_fresh", return_value=True):
+                    with patch.object(queue, "_api", return_value={
+                        "conclusion": "success", "head_branch": "main",
+                        "name": "ASTRA V2 - Long-form Preload"}):
+                        result = queue.inventory_eligibility_snapshot()
+        self.assertEqual(result["preflight_eligible"], 1)
+
     def test_prepare_includes_integrity_digest(self):
         with tempfile.TemporaryDirectory() as tmp:
             video = Path(tmp) / "render.mp4"
