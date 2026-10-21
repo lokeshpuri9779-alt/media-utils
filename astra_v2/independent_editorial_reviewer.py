@@ -69,6 +69,19 @@ def assess(story, history=(), *, model=None, api_key=None, transport=None):
                 or not isinstance(reasons, list) or not reasons
                 or any(not isinstance(x, str) or not x.strip() for x in reasons)):
             raise ValueError("invalid_review_schema")
+    except urllib.error.HTTPError as exc:
+        # Do not log response bodies, API keys or provider request URLs.
+        # Status codes distinguish rate limits from invalid models or auth.
+        status = int(exc.code)
+        category = ("rate_limited" if status == 429 else
+                    "model_or_endpoint" if status == 404 else
+                    "authentication" if status in (401, 403) else
+                    "provider_unavailable" if status in (500, 502, 503, 504) else
+                    "request_rejected")
+        return {"approved": False,
+                "issues": ["review_failed:HTTP_" + str(status),
+                           "review_provider:" + category],
+                "record": None}
     except (ValueError, KeyError, TypeError, OSError, urllib.error.URLError) as exc:
         return {"approved": False, "issues": ["review_failed:" + type(exc).__name__], "record": None}
     if answer["decision"] != "approve":
