@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-22",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 4,
-  "confirmed_today": 3,
-  "last_attempt_at": "2026-10-21T19:56:58.569712+00:00",
+  "attempts": 5,
+  "confirmed_today": 4,
+  "last_attempt_at": "2026-10-21T20:09:51.718092+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -2371,30 +2371,38 @@
       "format": "short",
       "uploaded_at": "2026-10-21T19:36:46.912657+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-gemini-b601e424669653e69254": {
+      "video_id": "fxBeu04EY60",
+      "confirmed_at": "2026-10-21T20:06:59.123875+00:00",
+      "title": "The Midnight Express Mystery and the Pigeon",
+      "format": "short",
+      "uploaded_at": "2026-10-21T19:57:00.707981+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "fxBeu04EY60": {
-      "content_id": "rayvan-gemini-b601e424669653e69254",
-      "title": "The Midnight Express Mystery and the Pigeon",
+    "HdgNMMe07Cc": {
+      "content_id": "rayvan-gemini-c8bcd324b405ad33c361",
+      "title": "The Rescuer of the Crimson Cliff",
       "day": "2026-10-22",
-      "uploaded_at": "2026-10-21T19:57:00.707981+00:00",
+      "uploaded_at": "2026-10-21T20:09:53.446200+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "8ec02e7203dee271bd6032256a3eea28bedc8721a65ecd2e84c55badb112b459",
+      "plot_fingerprint": "a332a08d9c4ebbc9584e0378846a069ff9a62d47b443bd261590d582401a130c",
       "story_beats": [
         {
-          "speech": "Inspector Vance searched the platform frantically while the midnight train hissed, realizing the prized silver valise had vanished completely into thin air."
+          "speech": "A single electronic pulse flickered from deep within the frozen canyon, piercing the howling mountain wind."
         },
         {
-          "speech": "An unusually focused street pigeon landed near the switchboard, tapping its beak impatiently against the brass telegraph key to signal an emergency."
+          "speech": "Liam gripped his ice axes tightly, pulling himself up the sheer vertical wall as snow dusted his visor."
         },
         {
-          "speech": "Vance tracked the bird upward into the iron girders, discovering a cleverly concealed nest crammed with stolen train tickets and missing keys."
+          "speech": "He drove the titanium anchor deep into the frozen earth, anchoring the safety rope against the gale."
         },
         {
-          "speech": "Dropping the valise tag right onto the desk, the clever pigeon earned an official badge of honor before the express departed safely."
+          "speech": "Pulling the shivering hiker into the warmth of the rescue tent, Liam smiled as the radio crackled."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -2402,11 +2410,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-21T19:55:05.562341+00:00",
+  "last_preflight_at": "2026-10-21T20:06:58.754055+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-21T19:57:01.152414+00:00",
+    "at": "2026-10-21T20:09:53.863434+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -6231,10 +6239,33 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-c8bcd324b405ad33c361": {
+      "at": "2026-10-21T20:09:51.718075+00:00",
+      "title": "The Rescuer of the Crimson Cliff",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "a332a08d9c4ebbc9584e0378846a069ff9a62d47b443bd261590d582401a130c",
+      "story_beats": [
+        {
+          "speech": "A single electronic pulse flickered from deep within the frozen canyon, piercing the howling mountain wind."
+        },
+        {
+          "speech": "Liam gripped his ice axes tightly, pulling himself up the sheer vertical wall as snow dusted his visor."
+        },
+        {
+          "speech": "He drove the titanium anchor deep into the frozen earth, anchoring the safety rope against the gale."
+        },
+        {
+          "speech": "Pulling the shivering hiker into the warmth of the rescue tent, Liam smiled as the radio crackled."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-21T19:57:01.152364+00:00",
+    "at": "2026-10-21T20:09:53.863355+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -6245,21 +6276,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-21T19:57:01.152406+00:00",
+    "at": "2026-10-21T20:09:53.863420+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-21T19:55:33.531001+00:00",
+    "at": "2026-10-21T20:07:37.610548+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-b601e424669653e69254",
-    "video_url": "https://www.youtube.com/watch?v=fxBeu04EY60",
+    "content_id": "rayvan-gemini-c8bcd324b405ad33c361",
+    "video_url": "https://www.youtube.com/watch?v=HdgNMMe07Cc",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-21T19:57:01.152167+00:00",
+    "at": "2026-10-21T20:09:53.863100+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -6268,30 +6299,30 @@
     "reason": ""
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-21T19:57:01.152359+00:00",
+    "at": "2026-10-21T20:09:53.863348+00:00",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 10,
+        "eligible": 9,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3
         },
         "seen": 89,
-        "total": 166
+        "total": 165
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 166,
+        "before": 165,
         "fingerprint": 0,
         "id": 89,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 77,
+        "remaining": 76,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 77,
-        "remaining": 10
+        "pool": 76,
+        "remaining": 9
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
