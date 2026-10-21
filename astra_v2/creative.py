@@ -214,7 +214,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
                         print("ASTRA_OMNIROUTE_EDITORIAL_REJECTED=" + json.dumps(verdict["issues"]))
                 else:
                     print("ASTRA_OMNIROUTE_EDITORIAL_DISABLED=1")
-        except (RuntimeError, ValueError, KeyError, json.JSONDecodeError) as exc:
+        except (RuntimeError, ValueError, KeyError, OSError, TypeError, json.JSONDecodeError) as exc:
             print("ASTRA_OMNIROUTE_GENERATION_FAILED=" + type(exc).__name__ + ":" + str(exc)[:350])
     if openai_enabled() and not serialized_preload:
         try:
