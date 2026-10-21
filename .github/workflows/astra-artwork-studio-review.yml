@@ -12,6 +12,8 @@ on:
       - 'tests/test_story_artwork_binding.py'
       - 'astra/approved_artwork_render_proof.py'
       - 'tests/test_approved_artwork_render_proof.py'
+      - 'astra/artwork_pixel_proof.py'
+      - 'tests/test_artwork_pixel_proof.py'
       - 'studio_renderer.py'
       - 'astra/fixtures/artwork_storyboard_review.json'
       - '.github/workflows/astra-artwork-studio-review.yml'
@@ -47,6 +49,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_scene_artwork_manifest.py' -v
           python -m unittest discover -s tests -p 'test_story_artwork_binding.py' -v
           python -m unittest discover -s tests -p 'test_approved_artwork_render_proof.py' -v
+          python -m unittest discover -s tests -p 'test_artwork_pixel_proof.py' -v
       - name: Render with existing Studio and Kokoro
         run: |
           python - <<'PY'
@@ -62,6 +65,15 @@ jobs:
           python - <<'PY'
           from astra.approved_artwork_render_proof import render_fixture
           print(render_fixture('/tmp/astra-approved-fixture', 'astra/fixtures/artwork_storyboard_review.json', 'astra-approved-artwork-review.mp4'))
+          PY
+      - name: Inspect decoded artwork pixels in rendered video
+        run: |
+          python - <<'PY'
+          from astra.artwork_pixel_proof import save_pixel_proof
+          report = save_pixel_proof('astra-approved-artwork-review.mp4', 'astra/fixtures/artwork_storyboard_review.json', '/tmp/astra-approved-fixture/art/manifest.json', 'astra-artwork-pixel-proof.json')
+          print('ASTRA_ARTWORK_PIXEL_PROOF=', report)
+          if not report['all_pass']:
+              raise SystemExit('Decoded video frames did not match expected artwork closely enough')
           PY
       - name: Verify actual audio/video streams
         run: |
@@ -88,5 +100,6 @@ jobs:
             astra-artwork-provenance.json
             astra-approved-artwork-review.mp4
             astra-approved-artwork-review.artwork.json
+            astra-artwork-pixel-proof.json
           retention-days: 14
           if-no-files-found: error
