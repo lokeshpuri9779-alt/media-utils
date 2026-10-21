@@ -10,6 +10,8 @@ on:
       - 'tests/test_artwork_provenance.py'
       - 'tests/test_scene_artwork_manifest.py'
       - 'tests/test_story_artwork_binding.py'
+      - 'astra/approved_artwork_render_proof.py'
+      - 'tests/test_approved_artwork_render_proof.py'
       - 'studio_renderer.py'
       - 'astra/fixtures/artwork_storyboard_review.json'
       - '.github/workflows/astra-artwork-studio-review.yml'
@@ -44,6 +46,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_artwork_provenance.py' -v
           python -m unittest discover -s tests -p 'test_scene_artwork_manifest.py' -v
           python -m unittest discover -s tests -p 'test_story_artwork_binding.py' -v
+          python -m unittest discover -s tests -p 'test_approved_artwork_render_proof.py' -v
       - name: Render with existing Studio and Kokoro
         run: |
           python - <<'PY'
@@ -54,10 +57,18 @@ jobs:
           provenance = save_audit('astra/fixtures/artwork_storyboard_review.json', result, 'astra-artwork-provenance.json')
           print('ASTRA_REQUESTED_ARTWORK_VERIFIED=', provenance['requested_backgrounds_verified'])
           PY
+      - name: Render isolated approved artwork fixture with real narration
+        run: |
+          python - <<'PY'
+          from astra.approved_artwork_render_proof import render_fixture
+          print(render_fixture('/tmp/astra-approved-fixture', 'astra/fixtures/artwork_storyboard_review.json', 'astra-approved-artwork-review.mp4'))
+          PY
       - name: Verify actual audio/video streams
         run: |
           ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 astra-narrated-review.mp4 | grep -Fx '1080,1920'
           ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of default=nw=1:nk=1 astra-narrated-review.mp4 | grep -E '^(aac|mp3|opus)$'
+          ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 astra-approved-artwork-review.mp4 | grep -Fx '1080,1920'
+          ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of default=nw=1:nk=1 astra-approved-artwork-review.mp4 | grep -Fx 'aac'
       - name: Reject silent or empty narration
         run: |
           python - <<'PY'
@@ -75,5 +86,7 @@ jobs:
           path: |
             astra-narrated-review.mp4
             astra-artwork-provenance.json
+            astra-approved-artwork-review.mp4
+            astra-approved-artwork-review.artwork.json
           retention-days: 14
           if-no-files-found: error
