@@ -6,6 +6,8 @@ on:
     paths:
       - 'astra/artwork_story_bridge.py'
       - 'tests/test_artwork_story_bridge.py'
+      - 'astra/artwork_provenance.py'
+      - 'tests/test_artwork_provenance.py'
       - 'astra/fixtures/artwork_storyboard_review.json'
       - '.github/workflows/astra-artwork-studio-review.yml'
 
@@ -34,13 +36,18 @@ jobs:
             sudo apt-get install -y ffmpeg
           fi
       - name: Validate storyboard contract
-        run: python -m unittest discover -s tests -p 'test_artwork_story_bridge.py' -v
+        run: |
+          python -m unittest discover -s tests -p 'test_artwork_story_bridge.py' -v
+          python -m unittest discover -s tests -p 'test_artwork_provenance.py' -v
       - name: Render with existing Studio and Kokoro
         run: |
           python - <<'PY'
           from astra.artwork_story_bridge import render_review
+          from astra.artwork_provenance import save_audit
           result = render_review('astra/fixtures/artwork_storyboard_review.json', 'astra-narrated-review.mp4')
           print('ASTRA_STUDIO_REVIEW_RESULT=', result)
+          provenance = save_audit('astra/fixtures/artwork_storyboard_review.json', result, 'astra-artwork-provenance.json')
+          print('ASTRA_REQUESTED_ARTWORK_VERIFIED=', provenance['requested_backgrounds_verified'])
           PY
       - name: Verify actual audio/video streams
         run: |
@@ -60,6 +67,8 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: astra-studio-narrated-review
-          path: astra-narrated-review.mp4
+          path: |
+            astra-narrated-review.mp4
+            astra-artwork-provenance.json
           retention-days: 14
           if-no-files-found: error
