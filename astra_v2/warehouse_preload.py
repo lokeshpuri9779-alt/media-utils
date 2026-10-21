@@ -37,7 +37,9 @@ def take(output, *, warehouse=None, archive=None):
     from astra_v2.adaptive_artifact_store import ArtifactStore
     if ArtifactStore.digest(destination / "video.mp4") != candidate.get("sha256"):
         raise ValueError("warehouse_video_digest_mismatch")
-    output.write_bytes((destination / "video.mp4").read_bytes())
+    import shutil
+    with (destination / "video.mp4").open("rb") as source, output.open("xb") as target:
+        shutil.copyfileobj(source, target, length=1024 * 1024)
     candidate["warehouse_claim"] = {
         "content_id": claim["content_id"], "lease_token": claim["lease_token"],
         "approval_digest": claim["approval_digest"], "qa_digest": claim["qa_digest"]}
