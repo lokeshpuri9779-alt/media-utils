@@ -156,6 +156,89 @@ def inventory_eligibility_snapshot(excluded_ids=(), max_age_hours=None, now=None
     }
 
 
+
+def package_integrity_snapshot(excluded_ids=(), max_packages=4, max_age_hours=None):
+    """Bounded read-only ZIP/hash audit; does not certify publishability.
+
+    Trust the source run before downloading, and never extract ZIP members.
+    Each report states its sample size and uninspected count explicitly.
+    """
+    max_packages = max(0, min(int(max_packages), 12))
+    preflight = inventory_eligibility_snapshot(excluded_ids, max_age_hours)
+    result = {"checked": 0, "integrity_passed": 0, "integrity_failed": 0,
+              "download_failed": 0, "uninspected": preflight["preflight_eligible"],
+              "sample_limit": max_packages,
+              "verification": "bounded_zip_hash_only_not_publishable_count"}
+    if not max_packages:
+        return result
+    repo = os.environ.get("GITHUB_REPOSITORY", "").strip()
+    excluded = set(excluded_ids)
+    seen = set()
+    run_cache = {}
+    for entry in artifacts():
+        if result["checked"] >= max_packages:
+            break
+        if not _artifact_fresh(entry, max_age_hours if max_age_hours is not None
+                               else max(0, int(os.getenv("ASTRA_PRELOAD_MAX_AGE_HOURS", "48")))):
+            continue
+        cid = str(entry.get("name", ""))[len(PREFIX):]
+        if not cid or "/" in cid or ".." in cid or cid in excluded or cid in seen:
+            continue
+        seen.add(cid)
+        run_id = (entry.get("workflow_run") or {}).get("id")
+        if not repo or not run_id:
+            continue
+        if run_id not in run_cache:
+            try:
+                run_cache[run_id] = _api(f"repos/{repo}/actions/runs/{run_id}")
+            except (subprocess.CalledProcessError, subprocess.TimeoutExpired,
+                    OSError, ValueError):
+                run_cache[run_id] = None
+        run = run_cache[run_id]
+        if not isinstance(run, dict) or run.get("conclusion") != "success" or run.get("head_branch") != "main" or run.get("name") not in (
+                "ASTRA V2 - Preload Approved Videos", "ASTRA V2 - Long-form Preload"):
+            continue
+        result["checked"] += 1
+        with tempfile.TemporaryDirectory(prefix="astra-inventory-") as tmp:
+            archive = Path(tmp) / "artifact.zip"
+            try:
+                with archive.open("wb") as dest:
+                    download = subprocess.run(
+                        ["gh", "api", f"repos/{repo}/actions/artifacts/{entry['id']}/zip"],
+                        stdout=dest, stderr=subprocess.PIPE, timeout=90, check=False)
+                if download.returncode or archive.stat().st_size > MAX_BYTES:
+                    result["download_failed"] += 1
+                    continue
+                with zipfile.ZipFile(archive) as z:
+                    if not valid_package_members(z.namelist()):
+                        result["integrity_failed"] += 1
+                        continue
+                    info = z.getinfo("video.mp4")
+                    if not 0 < info.file_size <= MAX_BYTES:
+                        result["integrity_failed"] += 1
+                        continue
+                    candidate = json.loads(z.read("candidate.json"))
+                    if (not isinstance(candidate, dict)
+                            or candidate.get("content_id") != cid
+                            or candidate.get("format") not in ("short", "long")
+                            or not isinstance(candidate.get("sha256"), str)):
+                        result["integrity_failed"] += 1
+                        continue
+                    digest = hashlib.sha256()
+                    with z.open("video.mp4") as video:
+                        for chunk in iter(lambda: video.read(1024 * 1024), b""):
+                            digest.update(chunk)
+                    if digest.hexdigest() != candidate["sha256"]:
+                        result["integrity_failed"] += 1
+                        continue
+                    result["integrity_passed"] += 1
+            except (OSError, ValueError, KeyError, zipfile.BadZipFile,
+                    json.JSONDecodeError, subprocess.TimeoutExpired):
+                result["integrity_failed"] += 1
+    result["uninspected"] = max(0, preflight["preflight_eligible"] - result["checked"])
+    return result
+
+
 def candidate_ids():
     return {str(a["name"])[len(PREFIX):] for a in artifacts()}
 
