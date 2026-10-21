@@ -31,9 +31,9 @@ def assess(story, history=(), *, model=None, api_key=None, transport=None):
         "originality, causal coherence, clarity, copyright/trademark concerns, "
         "unsafe or misleading content, audience suitability, and YouTube policy "
         "risks. Do not assume originality merely because the author is AI. "
-        "Return JSON only: {\\\"decision\\\":\\\"approve or reject\\\","
-        "\\\"reasons\\\":[\\\"specific evidence-based reasons\\\"]}. "
-        "Reject if uncertain or unable to review fully. Story:\\n"
+        'Return JSON only: {"decision":"approve or reject",'
+        '"reasons":["specific evidence-based reasons"]}. '
+        "Reject if uncertain or unable to review fully. Story:\n"
         + json.dumps(story, ensure_ascii=False, sort_keys=True)
     )
     payload = json.dumps({
