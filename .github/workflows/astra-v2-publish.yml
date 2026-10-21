@@ -37,6 +37,7 @@ jobs:
       ASTRA_SERIES_PUBLICATION: '0' # Allow new approved originals after completed Season 1
       ASTRA_OMNIROUTE_ORDER: 'gemini,groq,openrouter'
       ASTRA_GEMINI_ENABLED: '1'
+      ASTRA_AUTONOMOUS_EDITORIAL: '1' # Independent reviewer + hash-bound production intake; fail closed
       ASTRA_GROQ_ENABLED: ${{ vars.ASTRA_GROQ_ENABLED || '0' }}
       GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
       ASTRA_GROQ_MODEL: 'llama-3.3-70b-versatile'
