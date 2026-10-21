@@ -8,10 +8,12 @@ from astra_v2.warehouse_preload import confirm_publication, take
 class FakeWarehouse:
     def __init__(self):
         self.confirmations = []
+        self.claim_count = 0
     def confirm(self, *args, **kwargs):
         self.confirmations.append((args, kwargs))
         return True
     def claim(self, **kwargs):
+        self.claim_count += 1
         return {"content_id": "test-short", "lease_token": "a" * 32,
                 "approval_digest": "b" * 64, "qa_digest": "c" * 64,
                 "receipt": {}}
@@ -41,16 +43,17 @@ class WarehouseBoundaryTests(unittest.TestCase):
         self.assertEqual(len(warehouse.confirmations), 1)
         self.assertEqual(len(warehouse.confirmations[0][1]["confirmation_digest"]), 64)
 
-    def test_unapproved_story_never_restores(self):
+    def test_missing_qa_verifier_never_claims_or_restores(self):
         warehouse = FakeWarehouse()
         class ForbiddenArchive:
             def restore(self, *_):
                 raise AssertionError("unapproved package restored")
         with patch("astra_v2.editorial_runway_diagnostic.editorial_runway",
                    return_value={"eligible_ids": []}):
-            with self.assertRaisesRegex(ValueError, "not_editorially_approved"):
+            with self.assertRaisesRegex(RuntimeError, "warehouse_authoritative_qa_verifier_missing"):
                 take("/tmp/astra-warehouse-test-output.mp4",
                      warehouse=warehouse, archive=ForbiddenArchive())
+        self.assertEqual(warehouse.claim_count, 0)
 
 
 if __name__ == "__main__":
