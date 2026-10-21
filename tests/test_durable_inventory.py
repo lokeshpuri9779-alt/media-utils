@@ -21,7 +21,7 @@ class InventoryTests(unittest.TestCase):
         self.db.set_approval("story-a", True)
         lease = self.db.claim("worker-a", now=100, ttl=20)
         self.assertEqual(lease["fencing"], 1)
-        self.db.complete("story-a", "worker-a", 1, "video-a")
+        self.db.complete("story-a", "worker-a", 1, "video-a", now=105)
         self.assertIsNone(self.db.claim("worker-b", now=200))
 
     def test_expired_worker_cannot_complete(self):
@@ -31,15 +31,21 @@ class InventoryTests(unittest.TestCase):
         new = self.db.claim("worker-b", now=111)
         self.assertEqual(new["fencing"], old["fencing"] + 1)
         with self.assertRaisesRegex(ValueError, "stale"):
-            self.db.complete("story-a", "worker-a", old["fencing"], "wrong")
-        self.db.complete("story-a", "worker-b", new["fencing"], "correct")
+            self.db.complete("story-a", "worker-a", old["fencing"], "wrong", now=112)
+        self.db.complete("story-a", "worker-b", new["fencing"], "correct", now=112)
 
     def test_revoke_approval_blocks_completion(self):
         self.db.set_approval("story-a", True)
         lease = self.db.claim("worker-a", now=100)
         self.db.set_approval("story-a", False)
         with self.assertRaisesRegex(ValueError, "stale"):
-            self.db.complete("story-a", "worker-a", lease["fencing"], "wrong")
+            self.db.complete("story-a", "worker-a", lease["fencing"], "wrong", now=105)
+
+    def test_expired_completion_rejected(self):
+        self.db.set_approval("story-a", True)
+        lease = self.db.claim("worker-a", now=100, ttl=10)
+        with self.assertRaisesRegex(ValueError, "stale"):
+            self.db.complete("story-a", "worker-a", lease["fencing"], "late", now=111)
 
     def test_receipt_conflict_rejected(self):
         with self.assertRaisesRegex(ValueError, "conflicting"):
