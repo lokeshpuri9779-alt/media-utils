@@ -288,9 +288,9 @@ def run():
                 state["last_attempt_at"] = utcnow().isoformat()
                 state["attempts"] += 1
                 write_json(STATE_FILE, state)
-                # A warehouse reservation is not publication permission. Never upload
-                # while this experimental handoff is incomplete.
-                if candidate.get("warehouse_claim"):
+                # Warehouse publication remains fail-closed unless explicitly enabled.
+                # The queue claim is durable; never automatically retry an ambiguous upload.
+                if candidate.get("warehouse_claim") and os.getenv("ASTRA_WAREHOUSE_UPLOAD_ENABLED", "0") != "1":
                     raise RuntimeError("warehouse_publisher_confirmation_not_enabled")
                 video_id = youtube.upload(
                     video, title, description, candidate["synthetic"],
@@ -307,6 +307,9 @@ def run():
                 }
                 write_json(STATE_FILE, state)
                 result = youtube.status(video_id)
+                if candidate.get("warehouse_claim") and result.get("privacyStatus") == "public":
+                    from astra_v2.warehouse_preload import confirm_publication
+                    confirm_publication(candidate["warehouse_claim"], video_id, result)
                 if result.get("privacyStatus") != "public":
                     raise RuntimeError("YouTube did not confirm public visibility: review uploaded video.")
                 # Thumbnail failures must not duplicate or invalidate an accepted upload.
