@@ -15,7 +15,7 @@ def enabled():
 def generate(excluded_ids, excluded_titles, prior_stories=()):
     if not enabled():
         return None
-    model = os.getenv("ASTRA_GEMINI_MODEL", "gemini-2.5-flash-lite")
+    model = os.getenv("ASTRA_GEMINI_MODEL", "gemini-3.1-flash-lite")
     if not re.fullmatch(r"[A-Za-z0-9._-]{1,80}", model):
         raise ValueError("Invalid Gemini model")
     prompt = (
@@ -42,8 +42,10 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
     try:
         with urllib.request.urlopen(req, timeout=45) as response:
             result = json.load(response)
-    except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError) as exc:
-        raise RuntimeError("Gemini request failed: " + type(exc).__name__) from exc
+    except urllib.error.HTTPError as exc:
+        raise RuntimeError("Gemini HTTP " + str(exc.code)) from exc
+    except (urllib.error.URLError, TimeoutError) as exc:
+        raise RuntimeError("Gemini transport failed: " + type(exc).__name__) from exc
     candidates = result.get("candidates") or []
     if not candidates:
         raise ValueError("Gemini returned no candidates")
