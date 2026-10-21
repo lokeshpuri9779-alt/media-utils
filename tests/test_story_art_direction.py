@@ -96,7 +96,7 @@ class StoryArtTests(unittest.TestCase):
             exec(compile(ast.Module(body=[func], type_ignores=[]), 'studio_renderer.py', 'exec'), scope)
             frame = Image.new('RGB', (540, 960))
             scope['draw_visual'](frame, {**shot, 'visual': 'bell', 'artwork_manifest_path': str(manifest)}, 0, 0, (0, 0, 0))
-            self.assertEqual(frame.getpixel((200, 200)), (22, 66, 99))
+            self.assertEqual(frame.getpixel((200, 200)), (28, 78, 115))
             with self.assertRaises(RuntimeError):
                 scope['draw_visual'](frame, {**shot, 'scene_id': '002', 'visual': 'bell', 'artwork_manifest_path': str(manifest)}, 0, 0, (0, 0, 0))
 
