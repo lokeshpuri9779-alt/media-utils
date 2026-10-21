@@ -22,6 +22,8 @@ on:
       - 'tests/test_astra_story_editorial.py'
       - 'astra_v2/story_supply_review.py'
       - 'astra_v2/story_review_shortlist.py'
+      - 'astra_v2/automated_editorial_evidence.py'
+      - 'astra_v2/editorial_evidence_export.py'
       - 'astra_v2/editorial_review_packet.py'
       - 'astra_v2/story_cohort_quality.py'
       - 'astra_v2/story_cohort_history.py'
@@ -198,6 +200,19 @@ jobs:
             --output runtime-health/story_review_packet.json \
             --stories-output runtime-health/story_review_stories.json \
             --reviews-output runtime-health/story_review_decisions.json
+      - name: Export automated editorial evidence without approval
+        run: |
+          python -m astra_v2.editorial_evidence_export \
+            --stories runtime-health/story_review_stories.json \
+            --output runtime-health/story_review_evidence.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          result = json.loads(Path("runtime-health/story_review_evidence.json").read_text())
+          assert result["approved_count"] == 0
+          assert result["publication_triggered"] is False
+          assert all(item["decision"] == "not_approved" for item in result["assessments"])
+          PY
       - name: Generate human-readable editorial review worksheet without approval
         run: |
           python -m astra_v2.editorial_review_worksheet \
