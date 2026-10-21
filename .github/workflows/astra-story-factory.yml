@@ -68,10 +68,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           if [ "$ASTRA_GEMINI_ENABLED" != "1" ]; then echo "Gemini not configured; skipping rewrite"; exit 0; fi
-          python -m astra_v2.story_factory_rewrite_queue \\
-            --packet ../state/story_factory_editorial_packet.json \\
-            --output ../state/story_factory_rewrite_queue.json \\
-            --limit 3
+          python -m astra_v2.story_factory_rewrite_queue --packet ../state/story_factory_editorial_packet.json --output ../state/story_factory_rewrite_queue.json --limit 3
       - name: Commit persistent cursor and latest review batch
         working-directory: state
         run: |
