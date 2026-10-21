@@ -35,10 +35,13 @@ def take(output, *, warehouse=None, archive=None):
     # not an independent trust root. Deployment must enforce separation.
     if os.getenv("ASTRA_QA_REGISTRY_ACCESS_CONTROLLED") != "1":
         raise RuntimeError("warehouse_qa_registry_trust_not_established")
+    # Filter claims to currently eligible editorial IDs, preventing an
+    # unapproved oldest queue entry from blocking approved packages.
+    eligible_ids = runway["eligible_ids"]
     warehouse = warehouse if warehouse is not None else warehouse_from_environment()
     archive = archive if archive is not None else PackageArchive(
         store_from_environment(os.getenv("ASTRA_ARTIFACT_CACHE", "storage/artifacts")))
-    claim = warehouse.claim(lease_seconds=3600)
+    claim = warehouse.claim(lease_seconds=3600, eligible_ids=eligible_ids)
     if claim is None:
         return None
     # Do not consume a claim without independently verified editorial and QA
