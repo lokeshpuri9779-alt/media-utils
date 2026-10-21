@@ -28,8 +28,13 @@ def take(output, *, warehouse=None, archive=None):
     if not registry_path:
         raise RuntimeError("warehouse_trusted_qa_registry_not_configured")
     registry = Path(registry_path)
-    if not registry.is_file() or registry.is_symlink():
+    if (not registry.is_file() or registry.is_symlink()
+            or registry.stat().st_size > 4 * 1024 * 1024):
         raise RuntimeError("warehouse_trusted_qa_registry_unavailable")
+    # A registry delivered by the same writable producer artifact store is
+    # not an independent trust root. Deployment must enforce separation.
+    if os.getenv("ASTRA_QA_REGISTRY_ACCESS_CONTROLLED") != "1":
+        raise RuntimeError("warehouse_qa_registry_trust_not_established")
     warehouse = warehouse if warehouse is not None else warehouse_from_environment()
     archive = archive if archive is not None else PackageArchive(
         store_from_environment(os.getenv("ASTRA_ARTIFACT_CACHE", "storage/artifacts")))
