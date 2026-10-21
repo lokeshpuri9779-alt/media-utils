@@ -80,10 +80,39 @@ def validate_png(image_bytes, kind):
     return {"width": width, "height": height}
 
 
+
+def image_quality_report(image_bytes, kind):
+    """Conservative pixel checks, not semantic or character-continuity approval."""
+    validate_png(image_bytes, kind)
+    with Image.open(io.BytesIO(image_bytes)) as source:
+        sample = source.convert("RGB")
+        sample.thumbnail((96, 96))
+        colors = list(sample.getdata())
+    count = len(colors)
+    luminance = [sum(pixel) / 3 for pixel in colors]
+    average = sum(luminance) / count
+    variance = sum((value - average) ** 2 for value in luminance) / count
+    issues = []
+    if average < 18:
+        issues.append("nearly_black")
+    if average > 248:
+        issues.append("nearly_white")
+    if variance < 20 or len(set(colors)) < 12:
+        issues.append("low_information")
+    return {"passed": not issues, "issues": issues,
+            "average_brightness": round(average, 2),
+            "luminance_variance": round(variance, 2),
+            "semantic_match": "not_verified",
+            "character_continuity": "not_verified"}
+
+
 def store_asset(image_bytes, root, *, kind, prompt, source="omniroute"):
     if kind not in ("scene", "character", "prop", "background", "thumbnail"):
         raise ValueError("Unsupported asset kind")
     dimensions = validate_png(image_bytes, kind)
+    quality = image_quality_report(image_bytes, kind)
+    if not quality["passed"]:
+        raise ValueError("Image failed pixel quality checks: " + ",".join(quality["issues"]))
     digest = hashlib.sha256(image_bytes).hexdigest()
     root = Path(root)
     location = root / "sha256" / digest[:2] / (digest + ".png")
@@ -95,7 +124,7 @@ def store_asset(image_bytes, root, *, kind, prompt, source="omniroute"):
         location.write_bytes(image_bytes)
     return {"sha256": digest, "path": str(location.relative_to(root)),
             "kind": kind, "source": source, "prompt_sha256": hashlib.sha256(prompt.encode()).hexdigest(),
-            "dimensions": dimensions, "approved": False, "production_ready": False}
+            "dimensions": dimensions, "quality": quality, "approved": False, "production_ready": False}
 
 
 def preproduce(queue, root, *, generator=generate_image, limit=3):
