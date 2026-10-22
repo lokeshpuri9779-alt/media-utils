@@ -23,5 +23,41 @@ class GeminiRouteTests(unittest.TestCase):
                 omniroute_gemini.generate(set(), set())
 
 
+    def test_missing_primary_model_uses_free_fallback(self):
+        import io
+        import json
+        import urllib.error
+        from unittest.mock import Mock
+        requested = []
+        def fake_urlopen(request, timeout):
+            requested.append(request.full_url)
+            if "gemini-3.1-flash-lite" in request.full_url:
+                raise urllib.error.HTTPError(request.full_url, 404, "not found", {}, None)
+            return io.BytesIO(json.dumps({"candidates": []}).encode())
+        with patch.dict(os.environ, {
+            "GEMINI_API_KEY": "test", "ASTRA_GEMINI_ENABLED": "1",
+            "ASTRA_GEMINI_MODEL": "gemini-3.1-flash-lite",
+            "ASTRA_GEMINI_FALLBACK_MODEL": "gemini-2.5-flash-lite",
+        }, clear=True), patch.object(omniroute_gemini.urllib.request, "urlopen", side_effect=fake_urlopen):
+            with self.assertRaisesRegex(ValueError, "no candidates"):
+                omniroute_gemini.generate(set(), set())
+        self.assertEqual(len(requested), 2)
+        self.assertIn("gemini-2.5-flash-lite", requested[-1])
+
+    def test_authentication_error_never_falls_back(self):
+        import urllib.error
+        requested = []
+        def fake_urlopen(request, timeout):
+            requested.append(request.full_url)
+            raise urllib.error.HTTPError(request.full_url, 403, "forbidden", {}, None)
+        with patch.dict(os.environ, {
+            "GEMINI_API_KEY": "test", "ASTRA_GEMINI_ENABLED": "1",
+            "ASTRA_GEMINI_MODEL": "gemini-3.1-flash-lite",
+            "ASTRA_GEMINI_FALLBACK_MODEL": "gemini-2.5-flash-lite",
+        }, clear=True), patch.object(omniroute_gemini.urllib.request, "urlopen", side_effect=fake_urlopen):
+            with self.assertRaisesRegex(RuntimeError, "Gemini HTTP 403"):
+                omniroute_gemini.generate(set(), set())
+        self.assertEqual(len(requested), 1)
+
 if __name__ == "__main__":
     unittest.main()
