@@ -35,7 +35,7 @@ def export_bundles(manifest_path, destination):
             raise ValueError("invalid_reviewed_art_story_id")
         if item.get("status") != "approved" or not item.get("scene_id") or not item.get("sha256"):
             raise ValueError("unapproved_art_asset")
-        groups.setdefault(cid, []).append(item)
+        groups.setdefault(cid, []).append({key: value for key, value in item.items() if not key.startswith("_")})
     destination.mkdir(parents=True)
     try:
         for cid, entries in sorted(groups.items()):
