@@ -33,6 +33,26 @@ def load_editorial_stories():
             "excluded": len(result["audit"]["results"]) - result["intake_count"],
             "reasons": dict(sorted(reasons.items())),
         }, sort_keys=True))
+        # Read-only diagnostic: expose the strongest historical narrative match.
+        # Do not change the novelty threshold or any approval decision.
+        from astra_v2.story_editorial import semantic_duplicate_match
+        from astra_v2.shorts_novelty import is_near_duplicate
+        history_records = load_history(publisher, history)
+        for entry in result["audit"]["results"]:
+            if "narrative_duplicate" not in entry["issues"]:
+                continue
+            candidates = [s for s in stories["stories"]
+                          if s.get("content_id") == entry["content_id"]]
+            if len(candidates) != 1:
+                continue
+            match = semantic_duplicate_match(candidates[0], history_records)
+            print("ASTRA_EDITORIAL_DUPLICATE_EVIDENCE=" + json.dumps({
+                "content_id": entry["content_id"],
+                "semantic_match": match,
+                "other_novelty_match": bool(is_near_duplicate(candidates[0], history_records)),
+                "history_record_count": len(history_records),
+                "publication_triggered": False,
+            }, sort_keys=True))
         print("ASTRA_EDITORIAL_INTAKE_CANDIDATES=" + str(result["intake_count"]))
         # Include the persistent AI-reviewed pair restored from astra-state.
         # This pair is not trusted merely because it exists: run the exact
