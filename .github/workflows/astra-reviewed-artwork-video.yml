@@ -130,7 +130,7 @@ jobs:
                                         store, expected_story_id=story["content_id"])
           target = root / "astra-reviewed-video.archive.json"
           temporary = root / "astra-reviewed-video.archive.json.tmp"
-          temporary.write_text(json.dumps(receipt, sort_keys=True) + "\\n", encoding="utf-8")
+          temporary.write_text(json.dumps(receipt, sort_keys=True) + "\n", encoding="utf-8")
           temporary.replace(target)
           print("ASTRA_VIDEO_ARCHIVE_VERIFIED", receipt["video"]["sha256"])
           PY
