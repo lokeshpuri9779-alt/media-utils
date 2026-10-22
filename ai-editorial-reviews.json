@@ -171,6 +171,18 @@
         "reviewed_at": "2026-10-22T22:51:25.042872+00:00",
         "review_model": "gemini-3.1-flash-lite"
       }
+    },
+    {
+      "content_id": "rayvan-gemini-ac3b37cbf0b44527a1f6",
+      "story_sha256": "2b725bccccce7ea8c4b0881f7435c5d33ea2070b4cbc0ffa8a7754cf4a29b5ac",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story title 'The Weaver and the Loom of Winter Frost' is highly derivative of the recently published 'The Weaver and the Loom of Ancient Tides', sharing the same core premise and thematic structure.",
+        "The narrative relies on a 'magical object sacrifice' trope that is functionally identical to several other entries in the provided list, such as 'The Caretaker of Ember Station's Final Directive' and 'The Miller and the Last Grain', which involve sacrificing a personal heirloom to restore a communal resource.",
+        "The causal mechanism of 'unraveling an heirloom to save a hearth' is a repetitive narrative device that lacks sufficient originality when compared to the provided list of recent publications."
+      ],
+      "record": null
     }
   ]
 }
