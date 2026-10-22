@@ -59,6 +59,42 @@ class GeminiRouteTests(unittest.TestCase):
                 omniroute_gemini.generate(set(), set())
         self.assertEqual(len(requested), 1)
 
+    def test_queue_new_plot_request_reaches_gemini_without_rejected_plot(self):
+        import json
+        from astra_v2.story_factory_rewrite_queue import rewrite_packet
+        candidate = {"candidate_id": "c1", "source_sha256": "a" * 64,
+                     "review_status": "needs_new_plot", "decision": "not_approved",
+                     "production_ready": False, "eligible_for_automatic_publishing": False,
+                     "review_issues": ["repeated_underlying_plot_mechanism"],
+                     "title": "REJECTED_TITLE_SENTINEL", "premise_key": "REJECTED_KEY_SENTINEL",
+                     "story_beats": ["REJECTED_BEAT_SENTINEL"] * 4}
+        prompts = []
+        def capture(request, timeout):
+            prompts.append(json.loads(request.data)["contents"][0]["parts"][0]["text"])
+            raise RuntimeError("offline request captured")
+        with patch.dict(os.environ, {"GEMINI_API_KEY": "test", "ASTRA_GEMINI_ENABLED": "1"}, clear=True), patch.object(omniroute_gemini.urllib.request, "urlopen", side_effect=capture):
+            result = rewrite_packet({"approved_count": 0, "publication_triggered": False,
+                                     "candidates": [candidate]}, generator=omniroute_gemini.generate)
+        self.assertEqual(len(prompts), 1)
+        self.assertIn("Invent an entirely new causal plot mechanism", prompts[0])
+        for marker in ("REJECTED_TITLE_SENTINEL", "REJECTED_KEY_SENTINEL", "REJECTED_BEAT_SENTINEL"):
+            self.assertNotIn(marker, prompts[0])
+        self.assertFalse(result["rewrites"][0]["approved"])
+        self.assertEqual(result["rewrites"][0]["status"], "rewrite_failed")
+
+    def test_unsanitized_new_plot_request_never_calls_gemini(self):
+        base = {"review_status": "needs_new_plot", "decision": "not_approved",
+                "production_ready": False, "eligible_for_automatic_publishing": False,
+                "required_next_action": "invent_distinct_causal_plot_mechanism",
+                "review_issues": ["repeated_underlying_plot_mechanism"], "story_beats": []}
+        for changes in ({"story_beats": ["old plot"] * 4}, {"decision": "approved"},
+                        {"eligible_for_automatic_publishing": True}, {"review_issues": []},
+                        {"required_next_action": "rewrite"}, {"production_ready": True}):
+            with self.subTest(changes=changes), patch.dict(os.environ, {"GEMINI_API_KEY": "test", "ASTRA_GEMINI_ENABLED": "1"}, clear=True), patch.object(omniroute_gemini.urllib.request, "urlopen") as network:
+                with self.assertRaises(ValueError):
+                    omniroute_gemini.generate(set(), set(), premise={**base, **changes})
+                network.assert_not_called()
+
     def test_gemini_normalizes_only_known_beat_labels(self):
         import io
         import json

@@ -63,17 +63,31 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         + json.dumps(sorted(excluded_titles)[:100]) + "."
     )
     if premise is not None:
-        if not isinstance(premise, dict) or premise.get("production_ready") is not False or premise.get("review_status") != "awaiting_editorial_review":
+        if not isinstance(premise, dict) or premise.get("production_ready") is not False:
             raise ValueError("Premise must be an unapproved editorial-review candidate")
-        beats = premise.get("story_beats")
-        if not isinstance(beats, list) or len(beats) != 4 or any(not isinstance(x, str) or len(x) > 500 for x in beats):
-            raise ValueError("Invalid premise beats")
-        guidance = json.dumps({"premise_key": premise.get("premise_key"), "beats": beats}, ensure_ascii=False)
-        if len(guidance) > 2600:
-            raise ValueError("Premise exceeds prompt limit")
-        prompt += (" Use this unapproved premise only as inspiration; independently rewrite "
-                   "all dialogue, character decisions, setting details, causal mechanism and ending. "
-                   "Do not copy its narration or claim approval. Premise: " + guidance)
+        if premise.get("review_status") == "needs_new_plot":
+            if (premise.get("decision") != "not_approved"
+                    or premise.get("eligible_for_automatic_publishing") is not False
+                    or premise.get("required_next_action") != "invent_distinct_causal_plot_mechanism"
+                    or "repeated_underlying_plot_mechanism" not in premise.get("review_issues", [])
+                    or premise.get("story_beats") != []):
+                raise ValueError("New-plot request must be sanitized and unapproved")
+            prompt += (" The candidate was rejected for a repeated underlying plot mechanism. "
+                       "Invent an entirely new causal plot mechanism, with new decisions, "
+                       "consequences and ending; cosmetic changes are insufficient. "
+                       "Do not reuse the rejected plot or claim editorial approval.")
+        else:
+            if premise.get("review_status") != "awaiting_editorial_review":
+                raise ValueError("Premise must be an unapproved editorial-review candidate")
+            beats = premise.get("story_beats")
+            if not isinstance(beats, list) or len(beats) != 4 or any(not isinstance(x, str) or len(x) > 500 for x in beats):
+                raise ValueError("Invalid premise beats")
+            guidance = json.dumps({"premise_key": premise.get("premise_key"), "beats": beats}, ensure_ascii=False)
+            if len(guidance) > 2600:
+                raise ValueError("Premise exceeds prompt limit")
+            prompt += (" Use this unapproved premise only as inspiration; independently rewrite "
+                       "all dialogue, character decisions, setting details, causal mechanism and ending. "
+                       "Do not copy its narration or claim approval. Premise: " + guidance)
     body = json.dumps({"contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {"responseMimeType": "application/json",
                              "temperature": 0.9, "maxOutputTokens": 1500}}).encode()
