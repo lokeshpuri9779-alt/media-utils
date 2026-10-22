@@ -75,6 +75,21 @@
         "review_provider:provider_unavailable"
       ],
       "record": null
+    },
+    {
+      "content_id": "rayvan-gemini-32564ff6c34a3252d2d5",
+      "story_sha256": "bfc1cd1b05429c9731f41ca11dd1c24045b8e6d0ce347a20954414d6d6d9b7fe",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-32564ff6c34a3252d2d5",
+        "story_sha256": "bfc1cd1b05429c9731f41ca11dd1c24045b8e6d0ce347a20954414d6d6d9b7fe",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the premises or specific plot points of the provided list of recent publications.; The narrative demonstrates clear causal coherence, moving logically from the discovery of blueprints to the construction and final launch of the sand-ship.; The content is suitable for a general audience and contains no unsafe, misleading, or policy-violating material.; The story structure is well-defined and follows a standard, engaging narrative arc appropriate for short-form storytelling.",
+        "reviewed_at": "2026-10-22T20:46:59.618977+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      }
     }
   ]
 }
