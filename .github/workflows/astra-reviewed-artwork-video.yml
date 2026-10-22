@@ -1,0 +1,103 @@
+name: ASTRA Reviewed Artwork MP4 Preparation
+
+on:
+  workflow_dispatch:
+    inputs:
+      story_path:
+        description: 'Trusted repository story JSON path'
+        required: true
+        type: string
+      receipt_path:
+        description: 'Trusted repository archive receipt JSON path'
+        required: true
+        type: string
+      decisions_path:
+        description: 'Independent reviewed artwork decisions JSON path'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  prepare-reviewed-video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: artwork-archive
+    env:
+      ASTRA_ARTIFACT_S3_BUCKET: ${{ secrets.ASTRA_ARTIFACT_S3_BUCKET }}
+      ASTRA_ARTIFACT_S3_ENDPOINT: ${{ secrets.ASTRA_ARTIFACT_S3_ENDPOINT }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION || 'us-east-1' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Require remote storage configuration
+        run: |
+          test -n "$ASTRA_ARTIFACT_S3_BUCKET" || { echo "Remote artwork storage not configured"; exit 1; }
+          test -n "$AWS_ACCESS_KEY_ID" && test -n "$AWS_SECRET_ACCESS_KEY" || { echo "Remote artwork credentials missing"; exit 1; }
+      - name: Validate trusted checked-in input paths
+        env:
+          STORY_PATH: ${{ inputs.story_path }}
+          RECEIPT_PATH: ${{ inputs.receipt_path }}
+          DECISIONS_PATH: ${{ inputs.decisions_path }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          root = Path.cwd().resolve()
+          for key in ("STORY_PATH", "RECEIPT_PATH", "DECISIONS_PATH"):
+              value = os.environ[key]
+              if not value or value.startswith("-") or not value.endswith(".json"):
+                  raise ValueError(f"invalid_{key.lower()}")
+              path = (root / value).resolve()
+              if not path.is_relative_to(root) or not path.is_file():
+                  raise ValueError(f"missing_or_unsafe_{key.lower()}")
+              if not path.is_relative_to(root / "artwork_reviews"):
+                  raise ValueError(f"input_must_be_in_artwork_reviews_{key.lower()}")
+          PY
+      - name: Install Studio and remote artifact dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install -r requirements.txt 'boto3>=1.34,<2'
+      - name: Restore approved remote art and prepare Studio MP4
+        env:
+          STORY_PATH: ${{ inputs.story_path }}
+          RECEIPT_PATH: ${{ inputs.receipt_path }}
+          DECISIONS_PATH: ${{ inputs.decisions_path }}
+        run: |
+          python -m astra_v2.prepare_reviewed_video \
+            --story-json "$STORY_PATH" \
+            --receipt "$RECEIPT_PATH" \
+            --decisions "$DECISIONS_PATH" \
+            --output-root "$RUNNER_TEMP/astra-reviewed" \
+            --output-mp4 "$RUNNER_TEMP/astra-reviewed-video.mp4"
+      - name: Confirm portrait video and narration streams
+        run: |
+          python - <<'PY'
+          import json, os, subprocess
+          from pathlib import Path
+          path = Path(os.environ["RUNNER_TEMP"]) / "astra-reviewed-video.mp4"
+          streams = json.loads(subprocess.check_output(
+              ["ffprobe", "-v", "error", "-show_streams", "-of", "json", str(path)],
+              text=True))["streams"]
+          videos = [s for s in streams if s.get("codec_type") == "video"]
+          assert len(videos) == 1 and (videos[0]["width"], videos[0]["height"]) == (1080, 1920)
+          assert any(s.get("codec_type") == "audio" for s in streams)
+          PY
+      - name: Upload review video and manifest only
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-reviewed-video-not-published
+          path: |
+            ${{ runner.temp }}/astra-reviewed-video.mp4
+            ${{ runner.temp }}/astra-reviewed-video.json
+            ${{ runner.temp }}/astra-reviewed/art/manifest.json
+          if-no-files-found: error
+          retention-days: 7
