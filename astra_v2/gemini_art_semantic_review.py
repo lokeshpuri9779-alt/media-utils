@@ -44,7 +44,7 @@ def review(story, manifest_path, *, opener=None):
                                 "beats": [{"scene_id": a["scene_id"],
                                            "visual_prompt": b.get("visual_prompt", ""),
                                            "speech": b.get("speech", "")}
-                                          for a, b in zip(assets, beats)]})}]
+                                          for a, b in zip(assets, beats)]}))}]
     for asset in assets:
         raw = (path.parent / asset["path"]).read_bytes()
         parts.append({"text": "Image for scene_id " + asset["scene_id"]})
