@@ -121,7 +121,12 @@ def store_asset(image_bytes, root, *, kind, prompt, source="omniroute"):
         if hashlib.sha256(location.read_bytes()).hexdigest() != digest:
             raise ValueError("Stored asset corruption")
     else:
-        location.write_bytes(image_bytes)
+        temporary = location.with_name(location.name + ".tmp")
+        try:
+            temporary.write_bytes(image_bytes)
+            temporary.replace(location)
+        finally:
+            temporary.unlink(missing_ok=True)
     return {"sha256": digest, "path": str(location.relative_to(root)),
             "kind": kind, "source": source, "prompt_sha256": hashlib.sha256(prompt.encode()).hexdigest(),
             "dimensions": dimensions, "quality": quality, "approved": False, "production_ready": False}
@@ -172,7 +177,11 @@ def preproduce(queue, root, *, generator=generate_image, limit=3):
                     quality = image_quality_report(raw, "scene")
                     if not quality["passed"]:
                         raise ValueError("Cached asset failed pixel quality checks")
-                    row.update(saved)
+                    if saved.get("prompt_sha256") != hashlib.sha256(prompt.encode()).hexdigest():
+                        raise ValueError("Cached asset prompt mismatch")
+                    if saved.get("kind") != "scene":
+                        raise ValueError("Cached asset kind mismatch")
+                    row.update({k: saved[k] for k in ("sha256", "path", "kind", "source", "prompt_sha256", "dimensions") if k in saved})
                     row["quality"] = quality
                     # A cache entry cannot grant production approval.
                     row.update(approved=False, production_ready=False,
