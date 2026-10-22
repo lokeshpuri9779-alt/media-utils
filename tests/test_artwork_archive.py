@@ -1,4 +1,5 @@
 import json
+import hashlib
 import tempfile
 import unittest
 from pathlib import Path
@@ -11,7 +12,7 @@ class FakeStore:
         self.saved = []
     def put(self, path):
         self.saved.append(Path(path).read_bytes())
-        return {"uri": "test://immutable/1", "sha256": "a" * 64, "bytes": len(self.saved[-1])}
+        return {"uri": "test://immutable/1", "sha256": hashlib.sha256(self.saved[-1]).hexdigest(), "bytes": len(self.saved[-1])}
     def verify(self, record):
         return True
 
@@ -30,6 +31,18 @@ class ArtworkArchiveTests(unittest.TestCase):
             self.assertEqual(result["archived"], 1)
             self.assertEqual(result["assets"][0]["status"], "pending_review")
             self.assertEqual(len(store.saved), 1)
+
+    def test_archive_rejects_incorrect_source_digest(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "art").mkdir()
+            Image.new("RGB", (540, 960), "blue").save(root / "art" / "a.png")
+            manifest = root / "art" / "manifest.json"
+            manifest.write_text(json.dumps({"assets": [{"id": "a", "path": "art/a.png", "category": "background", "status": "pending_review", "sha256": "0" * 64}]}))
+            store = FakeStore()
+            with self.assertRaisesRegex(ValueError, "artwork_digest_mismatch"):
+                archive(manifest, store)
+            self.assertEqual(store.saved, [])
 
     def test_archive_fails_before_upload_for_invalid_package(self):
         with tempfile.TemporaryDirectory() as tmp:
