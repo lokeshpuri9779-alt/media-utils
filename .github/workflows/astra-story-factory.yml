@@ -32,6 +32,7 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_astra_story_factory.py'
           python -m unittest discover -s tests -p 'test_story_factory_inventory.py'
+          python -m unittest discover -s tests -p 'test_production_ledger.py'
       - name: Check verified ready-video inventory
         id: inventory
         working-directory: code
@@ -155,6 +156,15 @@ jobs:
               if generated + cached == 0:
                   print("::warning::ASTRA image preproduction produced no usable illustrations")
           PY
+      - name: Build read-only cross-stage production ledger
+        if: always()
+        working-directory: code
+        run: |
+          python -m astra_v2.production_ledger \
+            --publisher-state ../state/astra_v2_state.json \
+            --rewrite-queue ../state/story_factory_rewrite_queue.json \
+            --image-manifest ../state/story_factory_image_manifest.json \
+            --output ../state/story_factory_production_ledger.json
       - name: Archive per-run diagnostics even if state push conflicts
         if: always()
         uses: actions/upload-artifact@v4
@@ -164,6 +174,7 @@ jobs:
             state/story_factory_review_summary.json
             state/story_factory_rewrite_queue.json
             state/story_factory_image_manifest.json
+            state/story_factory_production_ledger.json
           if-no-files-found: warn
           retention-days: 14
       - name: Recover generated scene assets if state push conflicts
