@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "1185514953af7c360253bff8",
-      "source_sha256": "c7c0102138344d18de1faeb6da4dcf9e143da881bfd7d191fc04ee063ab18845",
+      "candidate_id": "29814bab0b851866a8f56143",
+      "source_sha256": "ff646d75f6d930c1d020b1debc9b4ce3a5e8fe9018089fbcf4051508e9a1b82c",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-86dc71b9f90e43d2c2cd",
-        "title": "The Great Tomato Launchpad",
-        "hook": "The Market Chaos",
-        "question": "How did Barnaby sell out of his entire vegetable harvest before noon?",
-        "answer": "He invented an automated pneumatic catapult that precisely tossed tomatoes directly into shoppers' grocery bags.",
+        "content_id": "rayvan-gemini-6d8d44bb21ed937ee531",
+        "title": "The Great Melon-Coring Contraption",
+        "hook": "The Defective Display",
+        "question": "How did Barnaby sell his eccentric invention at the crowded bazaar?",
+        "answer": "By accidentally launching cantaloupes directly into the royal carriage.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,78 +29,76 @@
         ],
         "story_beats": [
           {
-            "headline": "The Market Chaos",
-            "speech": "My fellow stallholders are laughing, but soon every single ripe tomato will find its grateful buyer instantly.",
+            "headline": "The Defective Display",
+            "speech": "Behold the magnificent melon-corer, citizens! It extracts seeds with surgical precision and absolutely no sticky mess whatsoever!",
             "visual": "robot",
-            "label": "The Discovery",
+            "label": "The Market Stall",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby standing in a crowded noisy medieval market square next to a massive wooden robotic catapult, holding a clipboard with a worried expression, wearing a tweed vest and leather goggles, while nearby fruit vendors point and laugh at his bizarre contraption.",
+            "visual_prompt": "Barnaby stands proudly behind a wooden market stall, holding a clunky brass contraption with glowing dials, while pointing to an untouched pile of watermelons behind him in the crowded bazaar.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Engineering the Launch",
-            "speech": "We just need a bit more tension on the rubber springs to achieve maximum market penetration velocity.",
+            "headline": "A Surprising Malfunction",
+            "speech": "Wait, why are the internal gears spinning backward? This was not part of the manufacturer handbook instructions at all!",
             "visual": "signal",
-            "label": "The Assembly",
+            "label": "The Overdrive",
             "story_beat": "build",
-            "visual_prompt": "Barnaby in his cluttered stall workshop tightening a complex network of brass gears and rubber bands on the pneumatic launcher, holding a heavy wrench with a determined smile, surrounded by scattered green tomatoes and fluttering instruction scrolls.",
+            "visual_prompt": "Barnaby frantically struggles with the smoking brass contraption as sparks fly, his face covered in soot while market vendors duck for cover around him.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Trigger Mechanism",
-            "speech": "Watch closely as the acoustic sensor locks onto the sound of clinking coin purses and fires.",
-            "visual": "door",
-            "label": "The Operation",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby pointing proudly at a swinging wooden trapdoor on the launcher that aims directly at the bustling marketplace entrance, holding a brass megaphone while an inquisitive customer approaches holding a coin purse.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Triumphant Payoff",
-            "speech": "Look at that! Perfectly delivered, perfectly caught, and my pockets are overflowing with golden coins!",
+            "headline": "The Aerial Assault",
+            "speech": "Hold onto your crowns! The spring-loaded ejection mechanism has suddenly activated at maximum velocity across the town square!",
             "visual": "ship",
-            "label": "The Success",
+            "label": "The Launch",
+            "story_beat": "mechanism",
+            "visual_prompt": "A dozen round cantaloupes soar through the air in a high arc above the bustling market stalls, launched from the smoking metal device held in Barnaby's trembling hands.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "An Accidental Promotion",
+            "speech": "Oh dear, we scored a direct hit on the Grand Duke. Well, at least the royal family loves fresh fruit salad!",
+            "visual": "door",
+            "label": "The Royal Carriage",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby standing atop his fully operational pneumatic launcher shaped vaguely like an airship hull, holding an empty crate in one hand and a bulging bag of gold coins in the other, while cheering shoppers hold up fresh tomatoes caught mid-air.",
+            "visual_prompt": "Barnaby covers his mouth in shock as three giant watermelons land squarely inside an ornate passing royal carriage, splashing juice over a very grumpy nobleman.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright, colourful stop-motion animation aesthetic with detailed textures, rustic wooden props, and a lively comedic atmosphere.",
+          "style": "Vibrant and humorous animated comedy style with bright colors and expressive character animations.",
           "characters": {
-            "Barnaby": "An eccentric inventor with unruly grey hair, wire-rimmed glasses, wearing a brown tweed vest, rolled-up white shirt sleeves, and leather utility gloves."
+            "Barnaby": "An enthusiastic young inventor with wild red hair, round spectacles, a grease-stained apron, and a perpetually surprised expression."
           },
           "locations": {
-            "market_square": "A bustling, sunlit cobblestone marketplace filled with colourful striped vendor awnings, wooden crates, and milling townspeople in rustic medieval-style clothing.",
-            "workshop_stall": "A cramped market stall overflowing with loose gears, blueprints, hanging lanterns, and heaps of fresh red tomatoes."
+            "Market Square": "A bustling, sunlit medieval bazaar filled with colorful canvas tents, vegetable stalls, and curious townspeople."
           },
           "objects": {
-            "pneumatic_launcher": "A large, complex machine constructed from dark polished oak wood, brass pipes, thick black rubber bands, and a mechanical aiming dial.",
-            "gold_coin_pouch": "A small weathered leather drawstring bag jingling with heavy metallic currency.",
-            "brass_wrench": "A heavy, tarnished antique tool used for tightening machine bolts."
+            "Contraption": "A bulky, whimsical brass device covered in mismatched gears, glowing glass tubes, and a massive red launch lever.",
+            "Cantaloupes": "Bright orange, perfectly round fruits piled high in wooden crates beside the market stall."
           }
         },
-        "plot_fingerprint": "ea08626b0a8fab3947a0c2ada7ed9da758d224ac5aa68ab2091d686771a509bd"
+        "plot_fingerprint": "a04b33294cab23c35c6ebbc9701877307a8a2c10ec5fc11add40b3c311bf7cfe"
       },
       "approved": false
     },
     {
-      "candidate_id": "97b2b41ea84cee558a0461fa",
-      "source_sha256": "7c1e3fe95dfac81ced14a315e2507c6336be21c3acf22287e5f8bd46523b21df",
+      "candidate_id": "a0a689cd9b2319da10979c35",
+      "source_sha256": "ead69cede6b6175272fd49b7c44cf5d90ba9cc53d049eae732008b681872238c",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-80e451579bf70a21e735",
-        "title": "The Mechanical Sausage Slinger Disaster",
-        "hook": "A Sticky Situation at Stall Four",
-        "question": "How did Barnaby turn a noisy market squabble into a sizzling success?",
-        "answer": "By inventing a fully automated meat-missile dispenser that seasoned every flying link on impact.",
+        "content_id": "rayvan-gemini-0f13794edddd886b3f9c",
+        "title": "The Great Mud-Pitcher's Piston Paradox",
+        "hook": "The Interrupted Game",
+        "question": "How did two rival village softball teams settle a decades-long turf war without causing a single riot?",
+        "answer": "By inventing a pneumatic mud-launching machine that automatically scored every disputed outfield hit with absolute mechanical impartiality.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -108,78 +106,78 @@
         ],
         "story_beats": [
           {
-            "headline": "A Sticky Situation at Stall Four",
-            "speech": "Behold my magnificent mechanized meat launcher, designed to feed hungry shoppers faster than they can blink!",
-            "visual": "robot",
-            "label": "The Invention Reveal",
-            "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly behind a brass and wood contraption in a crowded medieval market square, gesturing wildly with a greasy wrench while startled shoppers duck away from a hovering metal arm.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Gearing Up for Launch",
-            "speech": "We must tighten these primary tension springs and load three hundred spicy sausages into the firing chamber immediately!",
-            "visual": "ship",
-            "label": "Loading the Mechanism",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby frantically cranks a large iron wheel on the side of the machine, while his nervous apprentice Pip frantically stuffs long strings of raw sausages into a gaping hopper.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Sizzling Signal",
-            "speech": "When the glowing brass dial hits the red zone, release the emergency seasoning lever and duck for cover!",
+            "headline": "The Interrupted Game",
+            "speech": "Stop arguing about whether that ball hit the oak tree! We need a completely unbiased umpire on this field right now.",
             "visual": "signal",
-            "label": "Activating the Launch",
-            "story_beat": "mechanism",
-            "visual_prompt": "A bright red flare shoots upward from the top of the machine, casting a fiery glow over Barnaby and Pip as steam hisses from copper pipes and sausage links begin to vibrate inside.",
+            "label": "The Dispute",
+            "story_beat": "reveal",
+            "visual_prompt": "Coach Vance, a burly man in green flannel, stands on a muddy softball diamond pointing angrily at a distant oak tree, while holding a vintage brass whistle in his right hand. The weather is overcast and humid.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "A Town Full of Tacos",
-            "speech": "Look at them soar across the plaza! Every single customer caught a perfectly grilled breakfast right in their buns!",
+            "headline": "The Ingenious Invention",
+            "speech": "We will build a counter-weighted catapult using recycled bicycle gears and steel springs to measure every single hit's exact trajectory.",
+            "visual": "robot",
+            "label": "The Build",
+            "story_beat": "build",
+            "visual_prompt": "Marta, a nimble woman in oil-stained denim overalls, welds a series of glowing copper gears together inside a rustic wooden shed, holding a lit welding torch in her left hand.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Mechanical Test",
+            "speech": "Watch the spring-loaded arm release the clay sphere precisely when the rubber bat connects with the leather ball.",
             "visual": "door",
-            "label": "The Delicious Payoff",
+            "label": "The Test",
+            "story_beat": "mechanism",
+            "visual_prompt": "Marta and Coach Vance watch as a complex wooden contraption with a rusty iron piston slams a wet clay ball against a painted wooden target attached to a barn door in the background.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A Lasting Truce",
+            "speech": "The machine has spoken with absolute justice, proving both teams win the championship trophy and ending our rivalry forever.",
+            "visual": "ship",
+            "label": "The Resolution",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby and Pip stand in the doorway of their smoke-filled shop grinning broadly as ecstatic market patrons cheerfully wave freshly grilled sausages caught mid-air from the sky above.",
+            "visual_prompt": "Both village softball teams cheer together in front of the rustic clubhouse, holding up a massive silver trophy while the large pneumatic mud-launching machine sits peacefully in the center, adorned with colorful paper banners.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright, colorful, whimsical slapstick animation style with exaggerated expressions and detailed steampunk machinery.",
+          "style": "Rustic pastoral cinematic animation with vibrant earth tones and warm afternoon lighting",
           "characters": {
-            "Barnaby": "A stout, enthusiastic inventor with bushy gray hair, smudged soot on his cheeks, wearing a worn leather apron over a striped vest.",
-            "Pip": "A hyperactive young apprentice with freckles, oversized goggles perched on his forehead, wearing an oversized blue tunic."
+            "Coach Vance": "Burly middle-aged man with a thick grey beard, wearing a forest green flannel shirt, brown leather work boots, and a weathered cap.",
+            "Marta": "Inventive young woman with braided dark hair, wearing oil-stained denim overalls, a yellow safety vest, and leather work gloves."
           },
           "locations": {
-            "Market Square": "A bustling, sunlit cobblestone marketplace filled with striped canvas awnings, wooden carts piled high with vegetables, and cheerful townsfolk."
+            "The Muddy Diamond": "A sprawling rural softball field surrounded by weeping willow trees, a weathered wooden scoreboard, and rolling green hills under a partly cloudy sky.",
+            "The Workshop Shed": "A cluttered timber workshop filled with hanging copper pipes, scattered bicycle parts, blueprints pinned to pine walls, and a warm glowing hearth."
           },
           "objects": {
-            "Meat Launcher": "A towering contraption made of gleaming brass pipes, wooden crates, ticking clockwork gears, and a large metal hopper.",
-            "Sausage String": "A continuous chain of plump, pink raw sausages tied tightly together with thick cotton twine.",
-            "Seasoning Lever": "A bright red wooden lever attached to a spring-loaded iron hinge covered in dried paprika."
+            "brass_whistle": "A tarnished vintage brass referee whistle attached to a frayed red lanyard, held by Coach Vance.",
+            "pneumatic_machine": "A massive contraption built from rusted iron pistons, shiny copper bicycle chains, and dark oak wood panels, capable of launching clay markers."
           }
         },
-        "plot_fingerprint": "67e9fdda5022b65d4e6e903da67928969c00c2d008eaa15eeef80f2b834fa06b"
+        "plot_fingerprint": "a27b86e51538d28061932bff3785b04769fc4de58d5ed53ca97bd2df63a603d2"
       },
       "approved": false
     },
     {
-      "candidate_id": "86b49c34b49fd0d6261156df",
-      "source_sha256": "d0d2b1e0f2eb1bdf6c51841cb28ab2ed3aa52cde2643b84d22262be33ec0d161",
+      "candidate_id": "6a1970f870e5b349710d9950",
+      "source_sha256": "45ba808a248f73957129216a24c997d187d304731dc6a9ec8c7ec3729b6c12a7",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-6573f0945034a2250132",
-        "title": "The Last Ridge Beacon",
-        "hook": "The Silent Storm",
-        "question": "Can a frozen rescue team guide a lost climber through a blizzard using only sound?",
-        "answer": "Yes, by bouncing acoustic pulses off canyon walls to map a safe path to the shelter.",
+        "content_id": "rayvan-gemini-3e1a6cf1e77e56d14869",
+        "title": "The Mystery of the Phosphor Current",
+        "hook": "The Darkening Trench",
+        "question": "Why did the deep-sea trench suddenly stop glowing?",
+        "answer": "A colony of bioluminescent anemones was trapped by a newly formed silt dam, which Barnaby the octopus cleared using an ancient hydraulic siphon.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -187,63 +185,60 @@
         ],
         "story_beats": [
           {
-            "headline": "The Silent Storm",
-            "speech": "Listen carefully to the echoes bouncing off the gorge walls. That unique double ring is your only way out of this blinding whiteout.",
+            "headline": "The Darkening Trench",
+            "speech": "Look at the western ridge. The bio-lights are fading completely, leaving our entire neighborhood in absolute shadows tonight.",
             "visual": "signal",
-            "label": "Acoustic Mapping",
+            "label": "Fading Glow",
             "story_beat": "reveal",
-            "visual_prompt": "In a snowy mountain pass, female rescue leader Maya in a heavy red parka holds an active sonar emitter broadcasting blue soundwaves toward towering icy cliffs during a heavy blizzard.",
+            "visual_prompt": "Barnaby the octopus pointing one tentacle toward a dark, silent underwater canyon while looking worried beside a bioluminescent lantern.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Climbing the Soundwaves",
-            "speech": "Keep your boots steady on the packed snow ridge. Follow the rising frequency until the pitch matches the horn in your left hand.",
+            "headline": "Discovering the Blockage",
+            "speech": "An enormous mound of gray silt has completely blocked the mineral current, cutting off all necessary nutrients from flowing.",
+            "visual": "door",
+            "label": "Silt Wall",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby examining a massive, imposing wall of gray sediment that seals off a narrow underwater pass, holding a measuring shell.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Hydraulic Siphon",
+            "speech": "If we connect this siphon hose to the natural thermal vent, the resulting pressure will blast the mud wall away instantly.",
+            "visual": "ship",
+            "label": "Pressure Valve",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby frantically attaching a copper pipe siphon between a bubbling thermal vent and the mud wall, working against rising water pressure.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Radiant Return",
+            "speech": "The pressure release worked perfectly, and the brilliant blue current has finally returned to light up our home again.",
             "visual": "forest",
-            "label": "Pine Ridge Trail",
-            "story_beat": "build",
-            "visual_prompt": "Climber Leo in a blue insulated jacket navigates a steep pine forest path covered in thick snow, holding a mechanical tuning fork that glows faintly as he listens to the distant rescue signals.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Cleft Obstacle",
-            "speech": "A massive snowdrift blocks the direct path ahead. We must redirect the acoustic wave around the frozen pillar to find the hidden cabin door.",
-            "visual": "door",
-            "label": "Blocked Passage",
-            "story_beat": "mechanism",
-            "visual_prompt": "Maya stands beside a massive ice wall holding a metallic reflector dish, angling it to bounce a visible sound pulse around a dangerous crevasse toward a recessed wooden shelter door.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Safe Inside",
-            "speech": "You followed the acoustic path right to the threshold. Come inside where it is warm and safe out of this fierce mountain wind.",
-            "visual": "ship",
-            "label": "Rescue Shelter",
+            "label": "Bright Reef",
             "story_beat": "payoff",
-            "visual_prompt": "Inside a secure domed emergency shelter resembling a futuristic metal pod, Maya welcomes a relieved Leo, handing him a steaming thermal flask while the blizzard rages harmlessly outside.",
+            "visual_prompt": "Barnaby smiling happily as vibrant blue and purple anemones along the canyon floor burst back into brilliant luminescence.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Cinematic realism with dramatic lighting, crisp mountain textures, and vibrant colored visual wave effects.",
+          "style": "vibrant underwater animated film style with rich blues, glowing neon flora, and detailed marine textures",
           "characters": {
-            "Maya": "A seasoned female mountain rescue leader with a determined expression, wearing a heavy red parka, black snow pants, and a warm woolen beanie.",
-            "Leo": "A stranded hiker with tired eyes and frost-kissed cheeks, wearing a blue insulated jacket, waterproof trousers, and heavy hiking boots."
+            "Barnaby": "A clever, rust-orange octopus with large expressive amber eyes, wearing a utility belt made of woven kelp straps."
           },
           "locations": {
-            "Mountain_Pass": "A treacherous, high-altitude alpine environment covered in deep snow drifts, towering jagged cliffs, and thick pine trees.",
-            "Emergency_Shelter": "A sturdy, dome-shaped metal rescue pod embedded into the mountainside with a reinforced heavy wooden door and warm interior lighting."
+            "Canyon Trench": "A deep sea canyon featuring towering dark basalt pillars, draped with soft purple sponges and glowing coral formations."
           },
           "objects": {
-            "Sonar_Emitter": "A handheld silver metallic device with a glowing blue digital screen and a directional horn used for generating acoustic mapping pulses.",
-            "Tuning_Fork": "A brass-handled acoustic instrument that vibrates and emits a soft golden hum when detecting the rescue signal.",
-            "Thermal_Flask": "A rugged steel thermos painted dark green, filled with hot herbal tea and held by a screwed-on plastic cup."
+            "Siphon Hose": "A flexible pipe made of coiled giant kelp stems fitted with brass alloy connectors at both ends.",
+            "Thermal Vent": "A rocky chimney spouting warm water and micro-bubbles into the cold deep ocean current."
           }
         },
-        "plot_fingerprint": "e9d702bd0f0fc9ae00effd81f377ff3c3452d2bf16c69ecf49fedf383419a2fc"
+        "plot_fingerprint": "c16a20c762e0ff22f86414e9c8bbc5e5b4d0317c1909e8f8a317d61039793bf3"
       },
       "approved": false
     }
