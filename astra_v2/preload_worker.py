@@ -134,6 +134,12 @@ def main():
         rendered = time.monotonic()
         if candidate["content_id"] in excluded:
             raise RuntimeError("Duplicate preloaded content ID")
+        # Independent media proof after the real Studio renderer returns,
+        # before archiving or offering the package to the publisher.
+        from astra_v2.creative import inspect_video
+        media_proof = inspect_video(video, fmt="long" if candidate.get("format") == "long" else "short")
+        print("ASTRA_PRODUCTION_MEDIA_VERIFIED=" + json.dumps({
+            "content_id": candidate["content_id"], **media_proof}, sort_keys=True))
         package = prepare(video, candidate)
         from astra_v2.adaptive_package_archive import archive_preload_if_enabled
         archive_preload_if_enabled(package)
