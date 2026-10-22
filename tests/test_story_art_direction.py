@@ -77,7 +77,6 @@ class StoryArtTests(unittest.TestCase):
             result = preproduce(queue(story()), root, generator=lambda p: self.fail('must not regenerate silently'))
             self.assertEqual(result['assets'][0]['status'], 'generation_failed')
 
-    @unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"), "FFmpeg tools required")
     def test_reviewed_story_preview_cli_requires_complete_inputs(self):
         with tempfile.TemporaryDirectory() as root:
             output = Path(root) / "preview.mp4"
@@ -88,6 +87,7 @@ class StoryArtTests(unittest.TestCase):
             self.assertIn("--reviewed-art-manifest require --preview", result.stderr)
             self.assertFalse(output.exists())
 
+    @unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"), "FFmpeg tools required")
     def test_studio_preview_produces_valid_vertical_mp4(self):
         with tempfile.TemporaryDirectory() as root:
             output = Path(root) / "studio-preview.mp4"
