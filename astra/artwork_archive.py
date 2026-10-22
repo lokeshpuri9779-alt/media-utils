@@ -33,6 +33,9 @@ def archive(manifest_path, store):
             raise ValueError("archive_verification_failed")
         records.append({"id": row["id"], "status": "pending_review",
                         "category": row["category"], "tags": row.get("tags", []),
+                        "story_content_id": row.get("story_content_id"),
+                        "scene_id": row.get("scene_id"),
+                        "source_status": row.get("status"),
                         "artifact": receipt})
     return {"schema": "astra.artwork.archive.v1", "assets": records,
             "approved": 0, "archived": len(records)}

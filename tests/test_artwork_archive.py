@@ -24,13 +24,15 @@ class ArtworkArchiveTests(unittest.TestCase):
             (root / "art").mkdir()
             Image.new("RGB", (540, 960), "blue").save(root / "art" / "a.png")
             manifest = root / "art" / "manifest.json"
-            manifest.write_text(json.dumps({"assets": [{"id": "a", "path": "art/a.png", "category": "background", "status": "pending_review"}]}))
+            manifest.write_text(json.dumps({"assets": [{"id": "a", "path": "art/a.png", "category": "background", "status": "pending_review", "story_content_id": "story-123", "scene_id": "001"}]}))
             store = FakeStore()
             result = archive(manifest, store)
             self.assertEqual(result["approved"], 0)
             self.assertEqual(result["archived"], 1)
             self.assertEqual(result["assets"][0]["status"], "pending_review")
             self.assertEqual(len(store.saved), 1)
+            self.assertEqual(result["assets"][0]["story_content_id"], "story-123")
+            self.assertEqual(result["assets"][0]["scene_id"], "001")
 
     def test_archive_rejects_incorrect_source_digest(self):
         with tempfile.TemporaryDirectory() as tmp:
