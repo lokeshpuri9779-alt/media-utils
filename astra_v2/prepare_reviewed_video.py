@@ -43,6 +43,25 @@ def verify_ready_video(video_path, ready_path, *, expected_story_id=None):
             "scenes": receipt["scenes"], "verified_for_handoff": True, "published": False}
 
 
+def archive_ready_video(video_path, ready_path, store, *, expected_story_id=None):
+    """Persist an independently reviewed MP4 in the immutable remote store.
+
+    The returned record is a storage reference, not authorization to publish.
+    """
+    verified = verify_ready_video(video_path, ready_path, expected_story_id=expected_story_id)
+    record = store.put(video_path)
+    if record.get("sha256") != verified["sha256"] or record.get("bytes") != verified["video_bytes"]:
+        raise ValueError("archived_video_identity_mismatch")
+    # Force a fresh remote read; a local cache hit is not proof of persistence.
+    stored_path = store.verify(record, refresh=True)
+    if _video_sha256(stored_path) != verified["sha256"]:
+        raise ValueError("archived_video_corrupt")
+    return {"schema": "astra.reviewed.video.archive.v1",
+            "story_content_id": verified["story_content_id"],
+            "video": record, "scenes": verified["scenes"],
+            "independent_artwork_approved": True, "published": False}
+
+
 def prepare_video(story_path, receipt_path, decisions_path, output_root, output_mp4, store, *, runner=None):
     from astra_v2.reviewed_artwork_intake import validate_package
     validation = validate_package(story_path, receipt_path, decisions_path)
