@@ -72,6 +72,153 @@
         }
       },
       "plot_fingerprint": "3d5e4aa00c229343a035894b95b19717bbd23421ed0ea4c21c7eadee699160df"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-eb90dcc071ac203032b0",
+      "title": "The Cartographer of the Boiling Basin",
+      "hook": "The Scorched Frontier",
+      "question": "What secret did the scorching salt flats conceal from the thirsty traveler?",
+      "answer": "Beneath the cracked crust of the dead desert lay a thriving, bioluminescent kelp forest fed by an underground thermal spring.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Scorched Frontier",
+          "speech": "My compass spins in absolute confusion, and the last drop of water has vanished from my flask.",
+          "visual": "planet",
+          "label": "Act I",
+          "story_beat": "reveal",
+          "visual_prompt": "Jessica stands alone on the cracked white salt_basin under an intense amber sun, wearing her sun hat and teal tunic, holding the survey_stake in her right hand and checking the brass_compass with a worried expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hollow Tremor",
+          "speech": "The ground beneath my boots sounds hollow, echoing like a giant drum waiting for a hidden rhythm.",
+          "visual": "ship",
+          "label": "Act II",
+          "story_beat": "build",
+          "visual_prompt": "Jessica kneels on the brittle salt crust in the salt_basin, pressing her ear to the ground while clutching the survey_stake, sweat glistening on her brow under the glaring midday light.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Threshold",
+          "speech": "I levered open the limestone fissure with my survey stake, revealing a cool breath of subterranean mist.",
+          "visual": "door",
+          "label": "Act III",
+          "story_beat": "mechanism",
+          "visual_prompt": "Jessica wedges the wooden survey_stake into a crack in the desert stone, forcing open a heavy slab to vent swirling white mist upward from the dark chasm below.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Sunken Sanctuary",
+          "speech": "Glowing fronds swayed in the damp breeze, proving life thrives where the surface burns without mercy.",
+          "visual": "forest",
+          "label": "Act IV",
+          "story_beat": "payoff",
+          "visual_prompt": "Jessica stands inside the subterranean_cavern, looking up in wonder at massive, glowing blue and purple bioluminescent kelp fronds, holding out her crystal_vessel to catch dripping thermal condensation.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "visual_bible": {
+        "style": "Cinematic stop-motion stop-motion puppet animation with rich textures, dusty amber lighting, and deep shadows.",
+        "characters": {
+          "jessica": "A weary human cartographer with sun-weathered brown skin, emerald eyes, round brass-rimmed spectacles, wearing a dust-faded teal canvas tunic, leather utility belt, and a wide-brimmed sun hat."
+        },
+        "locations": {
+          "salt_basin": "An endless expanse of blinding white cracked salt plains under a blazing sun, flanked by distant orange sand dunes.",
+          "subterranean_cavern": "A vast, cool limestone cavern hidden beneath the desert, illuminated by glowing blue and purple flora."
+        },
+        "objects": {
+          "brass_compass": "A heavy, tarnished brass pocket compass with a cracked glass cover and a needle spinning wildly.",
+          "survey_stake": "A weathered wooden pole notched with measuring lines, gripped tightly in Jessica's right hand.",
+          "crystal_vessel": "A small glass-free ceramic vial glowing faintly from captured water condensation inside."
+        }
+      },
+      "plot_fingerprint": "8b85ee24ec74238a9cbf9fc34fa0a6a0ff68a89c66b8cbcf39a7eb09d8a82257"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-f8dc7e1872377e020401",
+      "title": "The Canopy Watchers and the Amber Root",
+      "hook": "The Fractured Path",
+      "question": "Can two estranged siblings mend their bond by navigating a bioluminescent jungle to secure a vital anchor plant?",
+      "answer": "Yes, by trusting each other across a vast chasm, they successfully harvest the amber root and restore their woodland home.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Fractured Path",
+          "speech": "We cannot cross this chasm alone, Kiran. You hold the anchor steady while I calculate our swing.",
+          "visual": "forest",
+          "label": "Deep Forest Depths",
+          "story_beat": "reveal",
+          "visual_prompt": "Lyra in her teal tunic and braided hair stands near the edge of a massive mossy cliff, holding the copper Resin_Lantern. Kiran, wearing his olive canvas jacket, holds the taut Grappling_Vine tightly in both hands, sweating slightly as a thick mist swirls below them in the Shattered_Canopy.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Bridging the Divide",
+          "speech": "I have got the anchor locked into the bark. Pull yourself across carefully, Lyra, do not look down!",
+          "visual": "signal",
+          "label": "Suspension Bridge",
+          "story_beat": "build",
+          "visual_prompt": "Kiran stands braced against a thick tree trunk, his muscles strained as he holds the iron-pronged Grappling_Vine secured around a sturdy root. Lyra smoothly swings across the misty gap mid-air, her fingerless gloves gripping the rope tightly while the glowing Resin_Lantern dangles from her belt.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Pulse of the Core",
+          "speech": "Look how the amber root responds to our combined weight. The ancient mechanism is waking up right now.",
+          "visual": "door",
+          "label": "The Root Shrine",
+          "story_beat": "mechanism",
+          "visual_prompt": "Inside the glowing Root_Shrine, both siblings stand close together before a massive pulsing Amber_Root. Lyra points excitedly toward the glowing fibers spreading across the cavern walls, while Kiran holds the copper Resin_Lantern up high, illuminating their astonished faces.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Restored Harmony",
+          "speech": "We did it together. Our forest is finally safe for another generation, and we are stronger as a team.",
+          "visual": "planet",
+          "label": "Canopy Overview",
+          "story_beat": "payoff",
+          "visual_prompt": "Kiran and Lyra stand side by side on a wide branch overlooking a vast, glowing expanse of the Shattered_Canopy. They smile warmly at one another, holding the glowing Amber_Root jointly between them as a wave of warm amber light cascades outward across the entire forest.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "visual_bible": {
+        "style": "Cinematic 3D animation with rich bioluminescent lighting, deep emerald greens, and warm amber highlights.",
+        "characters": {
+          "Kiran": "A lanky young man with messy dark hair, wearing a patched olive-green canvas jacket, brown leather trousers, and sturdy climbing boots. He has expressive amber eyes and a determined expression.",
+          "Lyra": "A nimble young woman with braided auburn hair tied back tightly, wearing a teal weather-resistant tunic, reinforced knee pads, and fingerless leather gloves. She has bright green eyes and a focused, analytical demeanor."
+        },
+        "locations": {
+          "Shattered_Canopy": "A dizzying suspension bridge network formed by giant ancient trees, glowing with faint blue moss and hanging roots over a misty abyss.",
+          "Root_Shrine": "A hidden cavern high within the oldest banyan tree, illuminated entirely by massive pulsing amber roots that hum with soothing energy."
+        },
+        "objects": {
+          "Grappling_Vine": "A thick, flexible green vine fitted with a heavy three-pronged iron anchor at the end, worn from heavy use.",
+          "Resin_Lantern": "A small hexagonal copper frame enclosing a glowing golden ball of tree resin, casting warm amber light.",
+          "Amber_Root": "A thick, crystalline root segment pulsing with a warm, steady heartbeat-like light, resting in the center of the shrine."
+        }
+      },
+      "plot_fingerprint": "aea18a281fa7f03a919f5887cf0fc159f6b34a656f2c75cca80057984ab369e5"
     }
   ]
 }
