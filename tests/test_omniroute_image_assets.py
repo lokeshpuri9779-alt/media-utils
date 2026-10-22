@@ -41,7 +41,7 @@ class ImageAssetsTests(unittest.TestCase):
                "ASTRA_OMNI_IMAGE_FREE_CONFIRMED": "1"}
         with patch.dict("os.environ", env, clear=True):
             output = generate_image("scene", requester=lambda req: buffer.getvalue())
-            self.assertTrue(output.startswith(b"\\x89PNG\\r\\n\\x1a\\n"))
+            self.assertTrue(output.startswith(b"\x89PNG\r\n\x1a\n"))
 
     def test_immutable_deduplication_and_corruption(self):
         with tempfile.TemporaryDirectory() as root:
