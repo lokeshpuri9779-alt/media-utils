@@ -30,7 +30,7 @@ class PreparationTests(unittest.TestCase):
             decisions = root / "decisions.json"
             story.write_text(json.dumps({"content_id": "story-a"}))
             receipt.write_text(json.dumps({"schema": "astra.artwork.archive.v1", "assets": [{"id": "x", "story_content_id": "story-a", "scene_id": "001", "category": "background", "artifact": {"sha256": "a" * 64}}]}))
-            decisions.write_text(json.dumps({"x": {"approved": True}}))
+            decisions.write_text(json.dumps({"x": {"approved": True, "sha256": "a" * 64, "semantic_match": True, "character_continuity": True}}))
             manifest = root / "output" / "art" / "manifest.json"
             manifest.parent.mkdir(parents=True)
             manifest.write_text(json.dumps({"assets": [{"scene_id": "001"}]}))
