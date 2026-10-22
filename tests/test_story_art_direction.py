@@ -1,4 +1,5 @@
 import ast
+import hashlib
 import copy
 import io
 import json
@@ -7,7 +8,7 @@ import unittest
 from pathlib import Path
 from PIL import Image
 from astra.asset_library import select_asset, draw_asset_for_scene
-from astra_v2.omniroute_image_assets import preproduce
+from astra_v2.omniroute_image_assets import preproduce, export_reviewed_render_manifest
 from astra_v2.story_art_direction import illustration_requests
 
 
@@ -71,6 +72,28 @@ class StoryArtTests(unittest.TestCase):
             (Path(root) / first['assets'][0]['path']).write_bytes(b'broken')
             result = preproduce(queue(story()), root, generator=lambda p: self.fail('must not regenerate silently'))
             self.assertEqual(result['assets'][0]['status'], 'generation_failed')
+
+    def test_reviewed_image_exports_and_renders_exact_scene(self):
+        with tempfile.TemporaryDirectory() as root:
+            produced = preproduce(queue(story()), root, generator=lambda _: png(), limit=2)
+            decisions = {item["request_sha256"]: {
+                "approved": True, "sha256": item["sha256"],
+                "semantic_match": True, "character_continuity": True}
+                for item in produced["assets"]}
+            manifest = Path(root) / "art" / "manifest.json"
+            result = export_reviewed_render_manifest(produced, root, decisions, manifest)
+            self.assertEqual(result["assets"], 2)
+            asset = json.loads(manifest.read_text())["assets"][0]
+            shot = {"artwork_asset_id": asset["id"], "story_content_id": "otter-bell",
+                    "scene_id": "001", "artwork_manifest_path": str(manifest)}
+            self.assertIsNotNone(select_asset(shot, manifest))
+            frame = Image.new("RGB", (540, 960))
+            self.assertTrue(draw_asset_for_scene(frame, shot, manifest_path=manifest))
+            self.assertEqual(frame.getpixel((200, 200)), (28, 78, 115))
+            self.assertIsNone(select_asset({**shot, "scene_id": "002"}, manifest))
+            with self.assertRaises(ValueError):
+                export_reviewed_render_manifest(produced, root,
+                    {k: {**v, "sha256": "bad"} for k, v in decisions.items()}, manifest)
 
     def test_explicit_binding_never_selects_another_story_or_scene(self):
         with tempfile.TemporaryDirectory() as root:
