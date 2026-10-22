@@ -57,8 +57,8 @@ def main():
                                check=True, capture_output=True, text=True, timeout=30)
         streams = json.loads(probe.stdout)["streams"]
         video = next(s for s in streams if s["codec_type"] == "video")
-        if (video["width"], video["height"]) != (540, 960):
-            raise AssertionError("Incorrect vertical video dimensions")
+        if (video["width"], video["height"]) != (1080, 1920):
+            raise AssertionError(f"Incorrect Studio video dimensions: {video['width']}x{video['height']}")
         if not any(s["codec_type"] == "audio" for s in streams):
             raise AssertionError("Missing narration audio")
         if len(list((root / "stills").glob("scene_*.jpg"))) != len(assets):
