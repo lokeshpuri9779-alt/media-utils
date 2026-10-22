@@ -108,7 +108,10 @@ class GeminiRouteTests(unittest.TestCase):
         self.assertEqual(len(requests), 1)
         config = requests[0]["generationConfig"]
         self.assertEqual(config["responseMimeType"], "application/json")
-        schema = config["responseSchema"]
+        self.assertNotIn("responseSchema", config)
+        schema = config["responseJsonSchema"]
+        self.assertEqual(schema["type"], "object")
+        self.assertEqual(schema["properties"]["visual_bible"]["properties"]["characters"]["additionalProperties"]["type"], "string")
         beat = schema["properties"]["beats"]["items"]["properties"]
         self.assertEqual(set(beat["visual"]["enum"]), VISUALS)
         self.assertEqual(set(beat["story_beat"]["enum"]), ROLES)
