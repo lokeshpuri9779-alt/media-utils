@@ -297,6 +297,7 @@ jobs:
               raise RuntimeError('scheduled_art_restore_missing')
           with open(os.environ['GITHUB_ENV'], 'a', encoding='utf-8') as output:
               output.write('ASTRA_PRELOAD_REVIEWED_ART_MANIFEST=' + str(manifest.resolve()) + '\n')
+              output.write('ASTRA_REVIEWED_ART_CONTENT_ID=' + os.environ['ASTRA_REVIEWED_ART_CONTENT_ID'] + '\n')
           PY
 
       - name: Render and approve next original video
