@@ -88,27 +88,27 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
             prompt += (" Use this unapproved premise only as inspiration; independently rewrite "
                        "all dialogue, character decisions, setting details, causal mechanism and ending. "
                        "Do not copy its narration or claim approval. Premise: " + guidance)
-    # Constrain renderer-facing labels at generation time; validate again below.
-    names = {"type": "OBJECT", "additionalProperties": {"type": "STRING"}}
-    beat_schema = {"type": "OBJECT", "properties": {
-        "headline": {"type": "STRING"}, "speech": {"type": "STRING"},
-        "visual": {"type": "STRING", "enum": sorted(VISUALS)},
-        "label": {"type": "STRING"},
-        "story_beat": {"type": "STRING", "enum": sorted(ROLES)},
-        "visual_prompt": {"type": "STRING"}},
+    # responseJsonSchema accepts JSON Schema including additionalProperties.\n    # responseSchema uses the older Schema type and rejects this constraint.
+    names = {"type": "object", "additionalProperties": {"type": "string"}}
+    beat_schema = {"type": "object", "properties": {
+        "headline": {"type": "string"}, "speech": {"type": "string"},
+        "visual": {"type": "string", "enum": sorted(VISUALS)},
+        "label": {"type": "string"},
+        "story_beat": {"type": "string", "enum": sorted(ROLES)},
+        "visual_prompt": {"type": "string"}},
         "required": ["headline", "speech", "visual", "label", "story_beat", "visual_prompt"]}
-    response_schema = {"type": "OBJECT", "properties": {
-        "title": {"type": "STRING"}, "question": {"type": "STRING"},
-        "answer": {"type": "STRING"},
-        "beats": {"type": "ARRAY", "items": beat_schema, "minItems": 4, "maxItems": 4},
-        "visual_bible": {"type": "OBJECT", "properties": {
-            "style": {"type": "STRING"}, "characters": names,
+    response_schema = {"type": "object", "properties": {
+        "title": {"type": "string"}, "question": {"type": "string"},
+        "answer": {"type": "string"},
+        "beats": {"type": "array", "items": beat_schema, "minItems": 4, "maxItems": 4},
+        "visual_bible": {"type": "object", "properties": {
+            "style": {"type": "string"}, "characters": names,
             "locations": names, "objects": names},
             "required": ["style", "characters", "locations", "objects"]}},
         "required": ["title", "question", "answer", "beats", "visual_bible"]}
     body = json.dumps({"contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {"responseMimeType": "application/json",
-                             "responseSchema": response_schema,
+                             "responseJsonSchema": response_schema,
                              "temperature": 0.9, "maxOutputTokens": 2400}}).encode()
     # A second explicitly configured free-tier model may recover from a removed
     # model (404) or transient failures. Never bypass auth, quota or policy errors.
