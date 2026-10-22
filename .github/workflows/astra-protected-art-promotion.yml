@@ -1,0 +1,72 @@
+name: ASTRA - Protected Artwork Promotion
+
+on:
+  workflow_dispatch:
+    inputs:
+      staging_run_id:
+        description: 'Successful staging workflow run ID containing pending artwork'
+        required: true
+        type: string
+      approval_path:
+        description: 'Committed signed approval JSON under editorial/art-approvals/'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  promote:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: astra-art-approval
+    env:
+      ASTRA_ART_APPROVAL_HMAC_KEY: ${{ secrets.ASTRA_ART_APPROVAL_HMAC_KEY }}
+      STAGING_RUN_ID: ${{ inputs.staging_run_id }}
+      APPROVAL_PATH: ${{ inputs.approval_path }}
+    steps:
+      - name: Require trusted Main branch and configured signing secret
+        shell: bash
+        run: |
+          test "$GITHUB_REF" = "refs/heads/main"
+          test "${#ASTRA_ART_APPROVAL_HMAC_KEY}" -ge 32
+          [[ "$STAGING_RUN_ID" =~ ^[0-9]{1,20}$ ]]
+          [[ "$APPROVAL_PATH" =~ ^editorial/art-approvals/[A-Za-z0-9_-]+\.json$ ]]
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install image verification
+        run: python -m pip install --disable-pip-version-check Pillow
+      - name: Require independently committed signed approval
+        shell: bash
+        run: |
+          test -s "$APPROVAL_PATH"
+          git ls-files --error-unmatch "$APPROVAL_PATH"
+      - name: Retrieve exact staged images from GitHub Actions
+        uses: actions/download-artifact@v4
+        with:
+          name: astra-pending-art-${{ inputs.staging_run_id }}
+          run-id: ${{ inputs.staging_run_id }}
+          github-token: ${{ github.token }}
+          path: runtime-art-staging
+      - name: Validate and promote independently approved artwork
+        shell: bash
+        run: |
+          test -s runtime-art-staging/staging-manifest.json
+          test -s runtime-art-staging/semantic-review.json
+          python -m astra_v2.promote_staged_art \
+            --manifest runtime-art-staging/staging-manifest.json \
+            --semantic runtime-art-staging/semantic-review.json \
+            --decision "$APPROVAL_PATH" \
+            --destination runtime-approved-art
+      - name: Save validated approved artwork only
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-verified-approved-art-${{ github.run_id }}
+          path: runtime-approved-art/
+          if-no-files-found: error
+          retention-days: 7
