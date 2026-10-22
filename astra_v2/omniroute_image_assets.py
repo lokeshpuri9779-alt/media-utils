@@ -199,6 +199,60 @@ def preproduce(queue, root, *, generator=generate_image, limit=3):
             "production_ready": False, "continuity_status": "not_verified"}
 
 
+
+def export_reviewed_render_manifest(preproduction, root, decisions, destination):
+    """Bridge independently approved scene art into Studio's exact-ID manifest.
+
+    Decisions are keyed by request_sha256 and must include the matching asset
+    sha256. Never derive approval from a generated asset's own metadata.
+    """
+    if not isinstance(decisions, dict):
+        raise ValueError("Review decisions must be an object")
+    root = Path(root).resolve()
+    destination = Path(destination)
+    assets = []
+    for row in preproduction.get("assets", []):
+        if row.get("status") not in ("review_only", "cached_review_only"):
+            continue
+        request_id = row.get("request_sha256")
+        decision = decisions.get(request_id)
+        if not isinstance(decision, dict) or decision.get("approved") is not True:
+            continue
+        if decision.get("sha256") != row.get("sha256"):
+            raise ValueError("Review approval does not match image digest")
+        if decision.get("semantic_match") is not True or decision.get("character_continuity") is not True:
+            raise ValueError("Independent visual review is incomplete")
+        content_id, scene_id = row.get("story_content_id"), row.get("scene_id")
+        if not content_id or not scene_id:
+            raise ValueError("Approved scene identity missing")
+        location = (root / row["path"]).resolve()
+        if not location.is_relative_to(root):
+            raise ValueError("Unsafe image path")
+        raw = location.read_bytes()
+        if hashlib.sha256(raw).hexdigest() != row["sha256"]:
+            raise ValueError("Reviewed image digest mismatch")
+        quality = image_quality_report(raw, "scene")
+        if not quality["passed"]:
+            raise ValueError("Reviewed image failed quality checks")
+        assets.append({"id": "reviewed-" + request_id, "path": str(location),
+                       "category": "background", "tags": [],
+                       "status": "approved", "source": row.get("source", "omniroute"),
+                       "story_content_id": content_id, "scene_id": scene_id,
+                       "sha256": row["sha256"]})
+    if not assets:
+        raise ValueError("No independently approved scene illustrations")
+    # Studio resolves asset paths relative to the manifest's grandparent.
+    render_root = destination.parent.parent.resolve()
+    for asset in assets:
+        location = Path(asset["path"])
+        if not location.is_relative_to(render_root):
+            raise ValueError("Approved image is outside renderer asset root")
+        asset["path"] = location.relative_to(render_root).as_posix()
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_text(json.dumps({"assets": assets}, indent=2) + "\n")
+    return {"manifest": str(destination), "assets": len(assets)}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--queue", required=True)
