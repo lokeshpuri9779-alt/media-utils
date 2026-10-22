@@ -56,4 +56,4 @@ def admit_verified_package(warehouse, receipt: dict, *,
     # transactional admission and lease semantics.
     warehouse.save_receipt(receipt)
     return warehouse.enqueue(receipt["content_id"], receipt["manifest"]["sha256"],
-                             approval_digest, qa_digest)
+                             approval_digest=approval_digest, qa_digest=qa_digest)
