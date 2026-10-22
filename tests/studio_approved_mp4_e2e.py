@@ -38,7 +38,7 @@ def main():
                            "story_content_id": story["content_id"], "scene_id": scene,
                            "sha256": hashlib.sha256(filename.read_bytes()).hexdigest(),
                            "review_scope": "ci_fixture_only"})
-        manifest = root / "manifest.json"
+        manifest = art / "manifest.json"
         manifest.write_text(json.dumps({"assets": assets}), encoding="utf-8")
         source = root / "story.json"
         source.write_text(json.dumps(story), encoding="utf-8")
