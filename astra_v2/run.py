@@ -144,7 +144,13 @@ def run():
             report["longform_due"] = bool(long_due)
             print("ASTRA_LONGFORM_DUE=" + str(bool(long_due)).lower())
             live_ids, live_titles = youtube.recent(youtube_channel)
+            from astra_v2.proposal_history import load_history
+            protected_history = load_history(
+                os.getenv("ASTRA_PUBLISHER_STATE_PATH", str(STATE_FILE)),
+                os.getenv("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json"))
             previous_ids = set(state["published"]) | set(state.get("reserved", {}))
+            previous_ids.update(str(record["content_id"]) for record in protected_history
+                                if record.get("content_id"))
             previous_ids.update(item.get("content_id", "") for item in state["pending"].values())
             print("ASTRA_QUEUE_EXCLUSIONS=" + json.dumps({"state_ids": len(previous_ids), "youtube_ids": len(live_ids), "anthology_matches": [{"content_id": cid, "state": cid in previous_ids, "youtube": cid in live_ids} for cid in ("rayvan-anthology-90c111ee3cab7400", "rayvan-anthology-535144f2435abf94")]}))
             with tempfile.TemporaryDirectory(prefix="astra-v2-") as temp:
@@ -224,7 +230,12 @@ def run():
                     return report
                 cid = candidate["content_id"]
                 title = candidate["title"]
-                if cid in live_ids | previous_ids or title.casefold().strip() in live_titles:
+                final_history = load_history(
+                    os.getenv("ASTRA_PUBLISHER_STATE_PATH", str(STATE_FILE)),
+                    os.getenv("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json"))
+                protected_ids = {str(record["content_id"]) for record in final_history
+                                 if record.get("content_id")}
+                if cid in live_ids | previous_ids | protected_ids or title.casefold().strip() in live_titles:
                     report.update(outcome="duplicate_blocked", content_id=cid)
                     return report
                 # Report whether character memory is eligible for this Short.
