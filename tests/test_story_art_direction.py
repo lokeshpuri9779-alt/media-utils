@@ -13,7 +13,7 @@ from pathlib import Path
 from PIL import Image
 from astra.asset_library import select_asset, draw_asset_for_scene
 from astra_v2.omniroute_image_assets import preproduce, export_reviewed_render_manifest
-from astra_v2.story_art_direction import illustration_requests
+from astra_v2.story_art_direction import illustration_requests, bind_reviewed_scenes
 
 
 def story():
@@ -114,6 +114,26 @@ class StoryArtTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 export_reviewed_render_manifest(produced, root,
                     {k: {**v, "sha256": "bad"} for k, v in decisions.items()}, manifest)
+
+    def test_complete_reviewed_scene_binding_is_exact_and_atomic(self):
+        with tempfile.TemporaryDirectory() as root:
+            produced = preproduce(queue(story()), root, generator=lambda _: png(), limit=2)
+            decisions = {row["request_sha256"]: {
+                "approved": True, "sha256": row["sha256"],
+                "semantic_match": True, "character_continuity": True}
+                for row in produced["assets"]}
+            manifest = Path(root) / "art" / "manifest.json"
+            export_reviewed_render_manifest(produced, root, decisions, manifest)
+            shots = [{"speech": "first"}, {"speech": "second"}]
+            bound = bind_reviewed_scenes(shots, "otter-bell", manifest)
+            self.assertEqual([s["scene_id"] for s in bound], ["001", "002"])
+            self.assertEqual(shots, [{"speech": "first"}, {"speech": "second"}])
+            for shot in bound:
+                self.assertIsNotNone(select_asset(shot, manifest))
+            with self.assertRaises(ValueError):
+                bind_reviewed_scenes(shots, "other-story", manifest)
+            with self.assertRaises(ValueError):
+                bind_reviewed_scenes(shots + [{"speech": "third"}], "otter-bell", manifest)
 
     def test_reviewed_art_rejects_modified_bytes_at_render_time(self):
         with tempfile.TemporaryDirectory() as root:
