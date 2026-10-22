@@ -78,6 +78,16 @@ class StoryArtTests(unittest.TestCase):
             self.assertEqual(result['assets'][0]['status'], 'generation_failed')
 
     @unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"), "FFmpeg tools required")
+    def test_reviewed_story_preview_cli_requires_complete_inputs(self):
+        with tempfile.TemporaryDirectory() as root:
+            output = Path(root) / "preview.mp4"
+            result = subprocess.run([sys.executable, "studio_renderer.py", "--preview",
+                                     str(output), "--story-json", str(Path(root) / "story.json")],
+                                    capture_output=True, text=True, timeout=30)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("--reviewed-art-manifest require --preview", result.stderr)
+            self.assertFalse(output.exists())
+
     def test_studio_preview_produces_valid_vertical_mp4(self):
         with tempfile.TemporaryDirectory() as root:
             output = Path(root) / "studio-preview.mp4"
