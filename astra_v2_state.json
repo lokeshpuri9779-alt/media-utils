@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-22",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 19,
-  "confirmed_today": 18,
-  "last_attempt_at": "2026-10-22T16:51:54.333146+00:00",
+  "attempts": 20,
+  "confirmed_today": 19,
+  "last_attempt_at": "2026-10-22T17:16:41.984239+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -2491,30 +2491,38 @@
       "format": "short",
       "uploaded_at": "2026-10-22T01:03:07.328202+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-gemini-6c15f6bd6f78b49db1c2": {
+      "video_id": "k0DgY2Ra6Ro",
+      "confirmed_at": "2026-10-22T17:10:11.589162+00:00",
+      "title": "The Comet Welder and the Iron Breach",
+      "format": "short",
+      "uploaded_at": "2026-10-22T16:51:55.809813+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "k0DgY2Ra6Ro": {
-      "content_id": "rayvan-gemini-6c15f6bd6f78b49db1c2",
-      "title": "The Comet Welder and the Iron Breach",
+    "7AjokmvJ3Wk": {
+      "content_id": "rayvan-gemini-76d4a2c07e46f21d0bb6",
+      "title": "The Soup Spoon That Sang Opera",
       "day": "2026-10-22",
-      "uploaded_at": "2026-10-22T16:51:55.809813+00:00",
+      "uploaded_at": "2026-10-22T17:16:43.169126+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "a94aa53367cf68da606542add52c9342b6ec28edf3134160d93a51782968d538",
+      "plot_fingerprint": "ab7094ca9da3db8503218c71b9547fb48b96b8436f7f6573aacb5d7dc31cf8de",
       "story_beats": [
         {
-          "speech": "We cannot wait for the automated seals. The solar storm is tearing right through our primary bulkhead."
+          "speech": "Behold the culinary marvel of the century! A silver soup spoon that hits high C whenever the broth boils!"
         },
         {
-          "speech": "Your quick-patch method will melt the whole circuit board. We need to reroute power through the secondary conduits first."
+          "speech": "If your cutlery is so talented, prove it right now in my famous hot potato chowder before anyone buys a single bite."
         },
         {
-          "speech": "Fine, weld the magnetic plate over the fracture while I manually balance the core pressure from this terminal."
+          "speech": "Magnificent! The silver soloist is warming up its vocal cords and the entire vegetable stand is completely captivated now!"
         },
         {
-          "speech": "The seal is holding tight. Working together was the only way we survived that solar gale."
+          "speech": "I will take three dozen singing spoons right now, because dinner service needs a proper soprano in every single bowl!"
         }
       ],
       "renderer": "studio-7.3.0"
@@ -2522,11 +2530,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-22T16:47:53.909887+00:00",
+  "last_preflight_at": "2026-10-22T17:10:11.205859+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-22T16:51:56.332289+00:00",
+    "at": "2026-10-22T17:16:43.622193+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -6696,10 +6704,33 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-76d4a2c07e46f21d0bb6": {
+      "at": "2026-10-22T17:16:41.984223+00:00",
+      "title": "The Soup Spoon That Sang Opera",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "ab7094ca9da3db8503218c71b9547fb48b96b8436f7f6573aacb5d7dc31cf8de",
+      "story_beats": [
+        {
+          "speech": "Behold the culinary marvel of the century! A silver soup spoon that hits high C whenever the broth boils!"
+        },
+        {
+          "speech": "If your cutlery is so talented, prove it right now in my famous hot potato chowder before anyone buys a single bite."
+        },
+        {
+          "speech": "Magnificent! The silver soloist is warming up its vocal cords and the entire vegetable stand is completely captivated now!"
+        },
+        {
+          "speech": "I will take three dozen singing spoons right now, because dinner service needs a proper soprano in every single bowl!"
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-22T16:51:56.332197+00:00",
+    "at": "2026-10-22T17:16:43.622114+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -6710,21 +6741,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-22T16:51:56.332276+00:00",
+    "at": "2026-10-22T17:16:43.622179+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-22T16:49:30.666948+00:00",
+    "at": "2026-10-22T17:14:54.944133+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-6c15f6bd6f78b49db1c2",
-    "video_url": "https://www.youtube.com/watch?v=k0DgY2Ra6Ro",
+    "content_id": "rayvan-gemini-76d4a2c07e46f21d0bb6",
+    "video_url": "https://www.youtube.com/watch?v=7AjokmvJ3Wk",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-22T16:51:56.331924+00:00",
+    "at": "2026-10-22T17:16:43.621847+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -6736,32 +6767,32 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-22T16:51:56.332191+00:00",
+    "at": "2026-10-22T17:16:43.622107+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 1,
+        "eligible": 3,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3
         },
         "seen": 89,
-        "total": 157
+        "total": 159
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 157,
+        "before": 159,
         "fingerprint": 0,
         "id": 89,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 68,
+        "remaining": 70,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 68,
-        "remaining": 1
+        "pool": 70,
+        "remaining": 3
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
