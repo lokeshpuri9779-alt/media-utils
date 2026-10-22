@@ -1,18 +1,22 @@
 {
-  "observed_at": "2026-10-22T16:59:08.950373+00:00",
-  "generated": 4,
+  "observed_at": "2026-10-22T18:37:49.160338+00:00",
+  "generated": 2,
   "requested": 20,
   "generation_failures": [
     {
       "index": 0,
-      "reason": "JSONDecodeError"
+      "reason": "ValueError"
     },
     {
       "index": 1,
       "reason": "ValueError"
     },
     {
-      "index": 2,
+      "index": 3,
+      "reason": "ValueError"
+    },
+    {
+      "index": 4,
       "reason": "ValueError"
     },
     {
@@ -28,8 +32,12 @@
       "reason": "ValueError"
     },
     {
+      "index": 8,
+      "reason": "ValueError"
+    },
+    {
       "index": 9,
-      "reason": "JSONDecodeError"
+      "reason": "ValueError"
     },
     {
       "index": 10,
@@ -37,10 +45,6 @@
     },
     {
       "index": 11,
-      "reason": "ValueError"
-    },
-    {
-      "index": 12,
       "reason": "ValueError"
     },
     {
@@ -60,14 +64,23 @@
       "reason": "ValueError"
     },
     {
+      "index": 17,
+      "reason": "ValueError"
+    },
+    {
       "index": 18,
-      "reason": "provider_http_503"
+      "reason": "JSONDecodeError"
+    },
+    {
+      "index": 19,
+      "reason": "ValueError"
     }
   ],
-  "reviewed": 4,
-  "approved": 3,
+  "reviewed": 2,
+  "approved": 0,
   "review_issues": [
-    "The candidate story title 'The Rescuer of Frost Ridge' is substantially similar to the recently published comparison title 'The Rescuer of Frost Peak' and 'The Rescuer of Frostpeak Ridge', representing a repeat of a recently published premise and setting.",
+    "The candidate story title 'The Rescuer of Frostfire Ridge' bears a striking and derivative similarity to recently published works in the comparison history, specifically 'The Rescuer of Frost Peak' and 'The Rescuer of Frostpeak Ridge', repeating the exact premise, character archetype, and setting naming convention.",
+    "The title 'The Cartographer and the Singing Dunes' closely mirrors recently published premises and naming conventions in the comparison history, such as 'The Cartographer and the Sunken Reef' and 'The Botanist and the Singing Sands'.",
     "ai_editorial_rejection"
   ],
   "approval_pair_present": true,
