@@ -20,10 +20,10 @@ class EligibleArtSelectionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "index.json"
             entries = {"approved": {"schema": ART_SCHEMA, "publication_triggered": False,
-                                     "bundle": {"sha256": "a" * 64, "size": 1}}}
+                                     "bundle": {"sha256": "a" * 64, "bytes": 1}}}
             path.write_text(json.dumps({"schema": INDEX_SCHEMA, "entries": entries}))
             index = {"schema": INDEX_SCHEMA, "publication_triggered": False,
-                     "index": {"sha256": "b" * 64, "size": 100}}
+                     "index": {"sha256": "b" * 64, "bytes": 100}}
             story = {"content_id": "approved", "production_ready": True}
             lane = story_lane(story, 4)
             self.assertEqual(select_eligible_art_story(index, Store(path), [story], lane, 4), "approved")
