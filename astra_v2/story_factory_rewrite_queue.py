@@ -48,7 +48,9 @@ def rewrite_packet(packet, prior=(), limit=3, generator=None):
             results.append({"candidate_id": premise["candidate_id"],
                             "source_sha256": premise["source_sha256"],
                             "status": "rewrite_failed",
-                            "error": type(exc).__name__, "approved": False})
+                            "error": type(exc).__name__,
+                            "error_detail": str(exc)[:180] if isinstance(exc, RuntimeError) else type(exc).__name__,
+                            "approved": False})
     statuses = {"awaiting_editorial_review": 0, "needs_new_plot": 0}
     for item in packet["candidates"]:
         status = item.get("review_status")
@@ -70,7 +72,7 @@ def main():
     packet = json.loads(Path(args.packet).read_text(encoding="utf-8"))
     result = rewrite_packet(packet, limit=args.limit)
     Path(args.output).write_text(json.dumps(result, indent=2, ensure_ascii=False) + chr(10), encoding="utf-8")
-    print("ASTRA_REWRITE_QUEUE=" + json.dumps({"attempted": len(result["rewrites"]), "approved": 0, "available_premises": result["available_premises"], "blocked_reason": result["blocked_reason"]}))
+    print("ASTRA_REWRITE_QUEUE=" + json.dumps({"attempted": len(result["rewrites"]), "approved": 0, "available_premises": result["available_premises"], "blocked_reason": result["blocked_reason"], "failures": [r.get("error_detail", r.get("error")) for r in result["rewrites"] if r["status"] == "rewrite_failed"]}))
 
 
 if __name__ == "__main__":
