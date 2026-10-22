@@ -5,6 +5,8 @@ reviewer must provide a separately maintained decision document with hashes.
 """
 import argparse
 import hashlib
+import hmac
+import os
 import json
 import re
 import shutil
@@ -17,6 +19,15 @@ def promote(manifest_path, semantic_path, decision_path, destination):
     manifest_path = Path(manifest_path).resolve(strict=True)
     semantic = json.loads(Path(semantic_path).read_text(encoding="utf-8"))
     decision = json.loads(Path(decision_path).read_text(encoding="utf-8"))
+    signing_key = os.environ.get("ASTRA_ART_APPROVAL_HMAC_KEY", "")
+    signature = decision.get("signature")
+    if len(signing_key) < 32 or not isinstance(signature, str) or not re.fullmatch(r"[0-9a-f]{64}", signature):
+        raise ValueError("authenticated_external_approval_required")
+    signed_payload = {key: value for key, value in decision.items() if key != "signature"}
+    canonical = json.dumps(signed_payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    expected_signature = hmac.new(signing_key.encode("utf-8"), canonical, hashlib.sha256).hexdigest()
+    if not hmac.compare_digest(signature, expected_signature):
+        raise ValueError("external_approval_signature_mismatch")
     technical = audit_staged_art(manifest_path)
     if not technical["technical_pass"]:
         raise ValueError("technical_qa_failed")
