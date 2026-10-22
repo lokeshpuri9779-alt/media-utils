@@ -36,12 +36,17 @@ def generate_image(prompt, *, requester=None):
     if config is None:
         return None
     endpoint, model = config
-    payload = json.dumps({"model": model, "prompt": prompt, "size": "1024x1536",
-                          "response_format": "b64_json"}).encode()
+    native_gemini = endpoint.startswith("https://generativelanguage.googleapis.com/") and ":generateContent" in endpoint
+    if native_gemini:
+        payload = json.dumps({"contents": [{"parts": [{"text": prompt}]}],
+                              "generationConfig": {"responseModalities": ["IMAGE"]}}).encode()
+    else:
+        payload = json.dumps({"model": model, "prompt": prompt, "size": "1024x1536",
+                              "response_format": "b64_json"}).encode()
     headers = {"Content-Type": "application/json"}
     key = os.getenv("ASTRA_OMNI_IMAGE_API_KEY", "")
     if key:
-        headers["Authorization"] = "Bearer " + key
+        headers["x-goog-api-key" if native_gemini else "Authorization"] = key if native_gemini else "Bearer " + key
     request = urllib.request.Request(endpoint, data=payload, headers=headers, method="POST")
     if requester is None:
         def requester(req):
@@ -57,10 +62,22 @@ def generate_image(prompt, *, requester=None):
     if len(raw) > MAX_BYTES:
         raise ValueError("Image response too large")
     response = json.loads(raw)
-    data = response.get("data", [])
-    if not data or not isinstance(data[0].get("b64_json"), str):
-        raise ValueError("Provider did not return base64 image")
-    encoded = data[0]["b64_json"]
+    if native_gemini:
+        parts = [part for candidate in response.get("candidates", [])
+                 for part in candidate.get("content", {}).get("parts", [])
+                 if isinstance(part, dict)]
+        images = [part["inlineData"]["data"] for part in parts
+                  if isinstance(part.get("inlineData"), dict)
+                  and part["inlineData"].get("mimeType") == "image/png"
+                  and isinstance(part["inlineData"].get("data"), str)]
+        if len(images) != 1:
+            raise ValueError("Gemini did not return exactly one PNG image")
+        encoded = images[0]
+    else:
+        data = response.get("data", [])
+        if not isinstance(data, list) or not data or not isinstance(data[0], dict) or not isinstance(data[0].get("b64_json"), str):
+            raise ValueError("Provider did not return base64 image")
+        encoded = data[0]["b64_json"]
     if len(encoded) > MAX_BYTES:
         raise ValueError("Encoded image too large")
     return base64.b64decode(encoded, validate=True)
