@@ -1,85 +1,19 @@
 {
-  "observed_at": "2026-10-22T18:58:04.107403+00:00",
-  "generated": 2,
+  "observed_at": "2026-10-22T19:21:00.277467+00:00",
+  "generated": 0,
   "requested": 20,
   "generation_failures": [
     {
       "index": 0,
-      "reason": "ValueError"
-    },
-    {
-      "index": 1,
-      "reason": "ValueError"
-    },
-    {
-      "index": 3,
-      "reason": "ValueError"
-    },
-    {
-      "index": 4,
-      "reason": "ValueError"
-    },
-    {
-      "index": 5,
-      "reason": "ValueError"
-    },
-    {
-      "index": 6,
-      "reason": "ValueError"
-    },
-    {
-      "index": 7,
-      "reason": "ValueError"
-    },
-    {
-      "index": 8,
-      "reason": "ValueError"
-    },
-    {
-      "index": 9,
-      "reason": "ValueError"
-    },
-    {
-      "index": 10,
-      "reason": "ValueError"
-    },
-    {
-      "index": 11,
-      "reason": "ValueError"
-    },
-    {
-      "index": 12,
-      "reason": "ValueError"
-    },
-    {
-      "index": 13,
-      "reason": "ValueError"
-    },
-    {
-      "index": 14,
-      "reason": "ValueError"
-    },
-    {
-      "index": 15,
-      "reason": "ValueError"
-    },
-    {
-      "index": 16,
-      "reason": "ValueError"
-    },
-    {
-      "index": 17,
-      "reason": "ValueError"
-    },
-    {
-      "index": 18,
-      "reason": "ValueError"
+      "reason": "provider_http_400"
     }
   ],
-  "reviewed": 2,
-  "approved": 2,
-  "review_issues": [],
-  "approval_pair_present": true,
+  "reviewed": null,
+  "approved": null,
+  "review_issues": [
+    "review_not_completed"
+  ],
+  "approval_pair_present": false,
   "model_access": {
     "status": "ok",
     "models": [
