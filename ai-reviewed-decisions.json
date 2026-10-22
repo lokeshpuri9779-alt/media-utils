@@ -1,30 +1,12 @@
 {
   "reviews": [
     {
-      "content_id": "rayvan-gemini-1b75787dc6d77c1e9781",
-      "story_sha256": "937fbaebbc78c7637be5a14809a819615ef12baca60cae41224aef910488a863",
+      "content_id": "rayvan-gemini-42a0c8fdf6f945b02b48",
+      "story_sha256": "a72fbfbc301e3b4f8583b25a49f8b2fd52fa9225353ac9ea58399dd01fb88cb5",
       "decision": "approve",
       "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is original and does not replicate the premises or endings of the provided comparison history.; The narrative demonstrates causal coherence, moving clearly from hull stress and crew conflict to the critical override and the costly payoff.; There are no copyright, trademark, safety, or YouTube policy violations detected.",
-      "reviewed_at": "2026-10-21T22:49:27.901272+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
-      "content_id": "rayvan-gemini-9335a643ac6cb373820d",
-      "story_sha256": "8a195dd2198d1935de37d92b62dda264875026aad71b4618f50857f292ed24f9",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story demonstrates high originality with a distinct plot about discovering a subterranean coral reef beneath salt flats.; Causal coherence is strong, flowing logically from mapping the basin to hearing hollow echoes, breaking the crust, and revealing the reef.; Clear narrative structure with appropriate pacing across four distinct beats.; No copyright or trademark infringements detected, and the premise does not duplicate any titles or plots in the comparison history.; Content is entirely safe, suitable for a general audience, and complies with standard platform policies.",
-      "reviewed_at": "2026-10-21T22:49:28.833601+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
-      "content_id": "rayvan-gemini-cab0953eee91bed9664c",
-      "story_sha256": "546fd1487f935fc7441f30903f328ba37d048c4b4ad550d7c791a9769281654d",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is original and does not duplicate the premises, characters, or settings of the provided comparison history.; Causal coherence is strong, clearly outlining a problem, debate, compromise, and resolution regarding a reactor failure.; The content is safe, appropriate for general audiences, and complies with YouTube policies.; Clarity and structure are well-maintained within the JSON format.",
-      "reviewed_at": "2026-10-21T22:49:29.960095+00:00",
+      "review_notes": "The story is original, self-contained, and structurally sound with clear causal coherence from the inciting emergency spot to the rescue extraction.; No copyright or trademark concerns identified; characters and settings are original.; Contains no unsafe, harmful, or misleading content, complying fully with standard safety and YouTube policy guidelines.; Appropriate for general audiences with an engaging narrative arc.",
+      "reviewed_at": "2026-10-22T00:53:28.032109+00:00",
       "review_model": "gemini-3.5-flash-lite"
     }
   ]

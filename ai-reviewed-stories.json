@@ -4,11 +4,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-1b75787dc6d77c1e9781",
-      "title": "The Navigator Who Chased the Ring",
-      "hook": "The Silent Fracture",
-      "question": "How do you repair a fractured hull when your crew disagrees on survival?",
-      "answer": "Through risky mechanical compromise that saves the ship by venting its most precious cargo.",
+      "content_id": "rayvan-gemini-42a0c8fdf6f945b02b48",
+      "title": "The Rescuer of Frost Peak",
+      "hook": "The Hidden Signal",
+      "question": "Can a lone mountain tracker reach a trapped climber before the blizzard cuts off the descent?",
+      "answer": "Yes, by utilizing an emergency signal flare to guide the rescue helicopter through the blinding alpine snow.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -16,208 +16,62 @@
       ],
       "story_beats": [
         {
-          "headline": "The Silent Fracture",
-          "speech": "We cannot vent the atmospheric scrubbers, Jax! The ring's pressure will crush the starboard bulkhead instantly.",
-          "visual": "ship",
-          "label": "Hull Stress",
-          "story_beat": "reveal",
-          "visual_prompt": "Mira stands inside the dimly lit engineering_bay, pointing anxiously at a sparking copper conduit while holding a torque_wrench. Jax stands opposite her in the docking_ring, arms crossed defensively, glaring through the open hatch at the swirling violet gas giant visible in the background.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Heated Debate",
-          "speech": "If we do not lighten the load right now, the entire crew perishes in the gas giant's gravity well.",
-          "visual": "door",
-          "label": "Crew Rift",
-          "story_beat": "build",
-          "visual_prompt": "Jax steps closer to the bulkhead door in the docking_ring, his face tense with frustration. Mira grips her torque_wrench tightly, her grease-stained orange jumpsuit catching the harsh amber light of the emergency klaxon overhead.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Magnetic Override",
-          "speech": "Hold the manual seal steady while I reroute the primary power core through the auxiliary terminal.",
-          "visual": "robot",
-          "label": "Power Bypass",
-          "story_beat": "mechanism",
-          "visual_prompt": "Mira kneels beside a smoking floor panel in the engineering_bay, her hands working furiously on exposed wires. Jax reluctantly crouches beside her, holding a sealed_canister against the magnetic latch to stabilize the shifting pressure.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Costly Release",
-          "speech": "We survived the descent, but our air supply is gone. We made our choice, and now we drift.",
-          "visual": "planet",
-          "label": "Stable Orbit",
-          "story_beat": "payoff",
-          "visual_prompt": "Mira and Jax stand side by side in the quiet engineering_bay, looking out the reinforced viewport at a serene, bright blue planet. The heavy sealed_canister is missing from its rack, and the room is bathed in calm, natural sunlight.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "visual_bible": {
-        "style": "Cinematic sci-fi with crisp lighting, deep space blues, weathered industrial textures, and high contrast.",
-        "characters": {
-          "mira": "A stocky human engineer with a scarred left cheek, wearing a grease-stained orange jumpsuit, short dark hair, and determined hazel eyes.",
-          "jax": "A tall, slender navigator with angular facial features, wearing a sleek silver tunic, pale complexion, and nervous amber eyes."
-        },
-        "locations": {
-          "engineering_bay": "A cramped, hexagonal chamber filled with exposed wiring, glowing copper conduits, and heavy steel bulkheads scarred by micro-meteors.",
-          "docking_ring": "An outer circular corridor with a panoramic viewport showing the swirling violet rings of a gas giant."
-        },
-        "objects": {
-          "torque_wrench": "A heavy, matte-black pneumatic wrench with a glowing blue digital readout on its handle.",
-          "sealed_canister": "A polished titanium cylinder holding emergency atmospheric scrubbers, marked with bold yellow warning stripes."
-        }
-      },
-      "plot_fingerprint": "22b6174060ab05ae0efcacb3d54e396e3d44e8121e7caa52f8cecaae1d19f4f6"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
-      "content_id": "rayvan-gemini-9335a643ac6cb373820d",
-      "title": "The Cartographer and the Sunken Reef",
-      "hook": "Mapping the Blistering Expanse",
-      "question": "What secret did the scorching salt flats hide beneath the crust?",
-      "answer": "An ancient subterranean coral reef teeming with bioluminescent life, preserved under a dried-up inland sea.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "Mapping the Blistering Expanse",
-          "speech": "Keep your eyes on the horizon, Kip. According to these old logs, a deep water channel once cut right through this dust.",
-          "visual": "planet",
-          "label": "The Arid Basin",
-          "story_beat": "reveal",
-          "visual_prompt": "Wide shot of the blinding white salt_flats stretching under a blazing sun. Sari stands shielding her eyes, holding the mapping_sextant, while Kip checks the sounding_rod planted in the cracked ground.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Hollow Echo",
-          "speech": "Listen to that sound. It is not solid bedrock underneath our boots. It rings like an empty cellar.",
+          "headline": "The Hidden Signal",
+          "speech": "I see the faint blinking emergency beacon through the dense whiteout up near the north ridge.",
           "visual": "signal",
-          "label": "Beneath the Crust",
-          "story_beat": "build",
-          "visual_prompt": "Medium close-up of Kip kneeling on the salt crust, striking the ground with the sounding_rod while holding the sample_satchel. Sari leans over him intently, her face lit by the harsh glare of the salt flats.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Breaking the Surface",
-          "speech": "Step back quickly! The crust is giving way, and a cool breeze is rushing up from the dark below.",
-          "visual": "door",
-          "label": "The Hidden Threshold",
-          "story_beat": "mechanism",
-          "visual_prompt": "Action shot as a circular section of salt crust collapses into a dark void. Sari grabs Kip's collar to pull him back safely. Wisps of cool damp air swirl upward from the newly opened abyss.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Bioluminescent Sea",
-          "speech": "We found no water, but look at this miracle. A living reef thriving beneath the silent desert.",
-          "visual": "ship",
-          "label": "The Subterranean Reef",
-          "story_beat": "payoff",
-          "visual_prompt": "Breathtaking wide view inside the cavern_depths. Sari and Kip stand at the edge of a subterranean cliff, looking down in awe at vast gardens of glowing turquoise and emerald coral structures illuminating the underground cavern.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "visual_bible": {
-        "style": "Cinematic 3D animation, rich textures, warm amber and cool teal lighting contrasts, detailed arid environments.",
-        "characters": {
-          "Sari": "A young female cartographer with a sun-weathered face, determined amber eyes, wearing a dusty tan canvas utility coat, wide-brimmed sun hat, and carrying a brass mapping sextant.",
-          "Kip": "Sari's younger brother and assistant, round-faced, perpetually curious, wearing a slate-gray linen tunic, protective goggles pushed up on his forehead, and carrying a leather sample satchel."
-        },
-        "locations": {
-          "salt_flats": "Vast, blinding white expanse of cracked salt stretching to distant hazy purple mountains under a glaring white sun.",
-          "cavern_depths": "A massive subterranean chamber lit by glowing turquoise and emerald coral structures, cool moist air smelling of ancient sea salt."
-        },
-        "objects": {
-          "mapping_sextant": "An intricate brass instrument with folding sighting arms and scratched glass lenses, held firmly by Sari.",
-          "sample_satchel": "A weathered brown leather bag with brass buckles and frayed shoulder straps, worn across Kip's chest.",
-          "sounding_rod": "A six-foot collapsible steel pole marked with measurement notches, used by Kip to test ground density."
-        }
-      },
-      "plot_fingerprint": "fdfe8677a4d26bd93e2d6f94b2aeadcc884880eba5d3f5aba9202927a2a9af82"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
-      "content_id": "rayvan-gemini-cab0953eee91bed9664c",
-      "title": "The Comet Welder's Disagreement",
-      "hook": "The Fractured Vent",
-      "question": "How do two mechanics save a reactor while arguing over the method?",
-      "answer": "By trusting each other's split-second adjustments under pressure.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Fractured Vent",
-          "speech": "We cannot weld the primary seam while pressure remains high! Shut down the secondary coolant pump immediately, Kaelen!",
-          "visual": "ship",
-          "label": "Vent Rupture",
+          "label": "Emergency Spotted",
           "story_beat": "reveal",
-          "visual_prompt": "Mira stands on the upper catwalk of the EngineBay, her face grim with concern, pointing her wrench at the steaming exhaust manifold while Kaelen holds the glowing PlasmaTorch near his side.",
+          "visual_prompt": "Elena stands on the edge of a snowy cliffside, holding the rescue_radio in her gloved right hand, staring up at a distant blinking red signal in the dark sky.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Heated Debate",
-          "speech": "Shutting it down will freeze the manifold solid! We need to patch the fissure live with a thermal seal!",
-          "visual": "door",
-          "label": "The Argument",
-          "story_beat": "mechanism",
-          "visual_prompt": "Kaelen faces Mira with an urgent expression, holding the PlasmaTorch up as blue sparks fly, while Mira aggressively turns the frosted PressureValve with both hands.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Compromise Strike",
-          "speech": "Fine, bleed thirty percent pressure and I will bridge the crack before the seal shatters completely!",
-          "visual": "signal",
-          "label": "Controlled Release",
+          "headline": "Ascending the Ridge",
+          "speech": "The wind is howling fiercely, but I am closing the distance to the stranded climber now.",
+          "visual": "forest",
+          "label": "The Climb",
           "story_beat": "build",
-          "visual_prompt": "Mira twists the PressureValve halfway, releasing a loud hiss of white steam into the EngineBay, while Kaelen reaches out with the PlasmaTorch to cauterize the expanding titanium crack.",
+          "visual_prompt": "Elena battles a fierce blizzard, climbing a steep icy slope surrounded by snow-dusted pine trees, gripping her ice axe firmly with both hands.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Stable Core",
-          "speech": "Look at the telemetry, Mira. Our stubborn partnership just kept us flying through the void.",
+          "headline": "Reaching the Shelter",
+          "speech": "Hang on just a little longer, Liam! I have reached your ledge and brought warm thermal blankets.",
+          "visual": "door",
+          "label": "The Contact",
+          "story_beat": "mechanism",
+          "visual_prompt": "Elena kneels next to Liam under a rocky overhang, wrapping a silver thermal blanket around his shoulders while holding the signal_flare in her left hand.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Guidance Through the Storm",
+          "speech": "Igniting the emergency flare now so the rescue chopper can lock onto our exact position safely.",
           "visual": "planet",
-          "label": "Stable Flight",
+          "label": "The Extraction",
           "story_beat": "payoff",
-          "visual_prompt": "Kaelen and Mira stand side-by-side on the lower deck of the EngineBay, watching the glowing green plasma indicators light up evenly as a distant blue planet glows through the observation port.",
+          "visual_prompt": "Elena and Liam stand together on the snowy peak under a starry midnight sky, watching a bright crimson flare illuminate the clouds as a rescue helicopter approaches.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
       "visual_bible": {
-        "style": "Cinematic 3D animation, vivid color grading, detailed mechanical textures",
+        "style": "Cinematic live-action photography with cold blue tones, visible breath vapor, and dramatic mountain lighting.",
         "characters": {
-          "Kaelen": "A tall mechanic with a narrow face, silver-streaked amber hair, wearing a worn teal jumpsuit with reflective orange stripes and heavy magnetic boots.",
-          "Mira": "A stout engineer with a round face, tightly braided dark brown hair, wearing a fire-resistant crimson apron over a grey utility tunic and steel-toed boots."
+          "elena": "A seasoned mountain rescue specialist in her late 30s with weathered skin, steady blue eyes, wearing a heavy crimson parka, thermal goggles resting on her forehead, and professional alpine climbing gear.",
+          "liam": "A stranded hiker in his late 20s, exhausted and shivering, wearing a torn yellow jacket dusted with fresh snow, huddled against a granite rock wall."
         },
         "locations": {
-          "EngineBay": "A vast, cylindrical titanium chamber filled with hanging conduit bundles, glowing green plasma conduits, and a central cracked exhaust manifold."
+          "summit_ledge": "A steep, wind-scoured granite cliffside at high altitude, surrounded by jagged peaks and thick swirling mist.",
+          "valley_base": "A snowy alpine basin framed by dense pine forests and steep icy ridges."
         },
         "objects": {
-          "PlasmaTorch": "A handheld tungsten-tipped welding torch glowing with bright blue energy, showing carbon scorch marks along the titanium casing.",
-          "PressureValve": "A massive brass wheel valve with three spokes, encrusted with white frost and steam leaks."
+          "signal_flare": "A heavy steel emergency flare canister emitting a bright, intense crimson beam and thick white smoke.",
+          "rescue_radio": "A rugged black military-grade handheld transceiver with a short rubber antenna and a frost-covered keypad."
         }
       },
-      "plot_fingerprint": "b199d247ea038a5ed45bd6bfedcae8852d9821037ebbfb363db47aec73854b71"
+      "plot_fingerprint": "00db06af858d00438de12af9ebdf8dbdb725d9d6d4398b85203768d20ff73ab7"
     }
   ]
 }
