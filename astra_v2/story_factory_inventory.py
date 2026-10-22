@@ -50,17 +50,53 @@ def count_ready(inventory_path, root):
     return ready
 
 
+def count_trusted_preloads(state_path, target):
+    """Check real Main-branch preload artifacts, excluding recorded publications.
+
+    A valid package hash is inventory evidence, not publisher authorization.
+    Errors return zero so production is never starved by unavailable GitHub API.
+    """
+    import os
+    if not os.getenv("GH_TOKEN") or not os.getenv("GITHUB_REPOSITORY"):
+        return 0
+    try:
+        state = json.loads(Path(state_path).read_text(encoding="utf-8"))
+        if not isinstance(state, dict):
+            return 0
+        published = state.get("published", {})
+        pending = state.get("pending", {})
+        reserved = state.get("reserved", {})
+        if not isinstance(published, dict) or not isinstance(pending, dict) or not isinstance(reserved, dict):
+            return 0
+        excluded = set(published) | set(reserved)
+        excluded.update(row.get("content_id") for row in pending.values() if isinstance(row, dict))
+        from astra_v2.preload_queue import package_integrity_snapshot
+        report = package_integrity_snapshot(excluded_ids=excluded, max_packages=min(target, 12), max_age_hours=48)
+        # The snapshot checks trusted successful Main runs, package members,
+        # content identities and exact MP4 SHA-256. It does not grant approval.
+        return max(0, min(target, int(report.get("integrity_passed", 0))))
+    except (OSError, ValueError, TypeError, KeyError, ImportError):
+        return 0
+    except Exception as exc:
+        # gh API or archive failures must not accidentally suppress generation.
+        print("ASTRA_REMOTE_INVENTORY_UNAVAILABLE=" + type(exc).__name__)
+        return 0
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--inventory", required=True)
     parser.add_argument("--root", required=True)
     parser.add_argument("--target", type=int, default=7)
+    parser.add_argument("--publisher-state")
     args = parser.parse_args()
     if not 1 <= args.target <= 1000:
         raise ValueError("Invalid ready-video inventory target")
-    ready = count_ready(args.inventory, args.root)
+    local_ready = count_ready(args.inventory, args.root)
+    remote_ready = count_trusted_preloads(args.publisher_state, args.target) if args.publisher_state else 0
+    ready = max(local_ready, remote_ready)
     replenish = ready < args.target
-    print("ASTRA_READY_VIDEO_INVENTORY=" + json.dumps({"verified_ready": ready, "target": args.target, "replenish": replenish}))
+    print("ASTRA_READY_VIDEO_INVENTORY=" + json.dumps({"verified_local": local_ready, "hash_verified_trusted_preloads": remote_ready, "counted_stock": ready, "target": args.target, "replenish": replenish, "publisher_revalidates": True}))
     import os
     if os.getenv("GITHUB_OUTPUT"):
         with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
