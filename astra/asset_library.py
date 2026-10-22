@@ -99,6 +99,14 @@ def load_assets(manifest_path: str | Path = DEFAULT_MANIFEST) -> list[dict]:
                     continue
             except OSError:
                 continue
+        # Reject corrupt or disguised files before they enter the approved set.
+        try:
+            with Image.open(candidate) as opened:
+                if opened.format != "PNG" or opened.width < 1 or opened.height < 1:
+                    continue
+                opened.verify()
+        except (OSError, ValueError, SyntaxError):
+            continue
         category = str(row.get("category") or "").lower()
         if category not in {"character", "prop", "background", "overlay"}:
             continue
