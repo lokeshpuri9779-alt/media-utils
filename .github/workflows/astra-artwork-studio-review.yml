@@ -41,7 +41,10 @@ jobs:
           cache: pip
       - name: Install existing production renderer dependencies
         run: |
-          python -m pip install --disable-pip-version-check -r requirements.txt
+          # This review exercises Studio rendering, Kokoro narration and artwork proofs.
+          # Avoid installing unrelated VCS-only transcription/scene-detection packages.
+          grep -vE '^[[:space:]]*(scenedetect-core|faster-whisper)[[:space:]]*@' requirements.txt > /tmp/astra-studio-review-requirements.txt
+          python -m pip install --disable-pip-version-check --prefer-binary -r /tmp/astra-studio-review-requirements.txt
           if ! command -v ffmpeg >/dev/null; then
             sudo apt-get update -qq
             sudo apt-get install -y ffmpeg
