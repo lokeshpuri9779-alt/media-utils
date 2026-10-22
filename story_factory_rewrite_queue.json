@@ -6,7 +6,32 @@
     "awaiting_editorial_review": 0,
     "needs_new_plot": 500
   },
-  "selected_for_rewrite": 0,
-  "blocked_reason": "no_unique_premises",
-  "rewrites": []
+  "selected_for_rewrite": 3,
+  "blocked_reason": null,
+  "rewrites": [
+    {
+      "candidate_id": "4a8d4873b5286406caae5c60",
+      "source_sha256": "895261c6609aebf4c176d4cf250ca4cd7bbbbaf7409b967e992ec9b5310540a7",
+      "status": "rewrite_failed",
+      "error": "RuntimeError",
+      "error_detail": "All enabled OmniRoute providers failed: gemini:Gemini HTTP 404 model=gemini-2.5-flash-lite",
+      "approved": false
+    },
+    {
+      "candidate_id": "6875cac839e3e3e830f6ba87",
+      "source_sha256": "af1403f048db7f769b718327d0ed3fc1f5b8ad6ce5212b92fb3121f38b3ce15a",
+      "status": "rewrite_failed",
+      "error": "RuntimeError",
+      "error_detail": "All enabled OmniRoute providers failed: gemini:Gemini HTTP 404 model=gemini-2.5-flash-lite",
+      "approved": false
+    },
+    {
+      "candidate_id": "289cad0405a27e2057974e13",
+      "source_sha256": "3be61ce582cf199b000b94045b7f6e6b641d82dc8696bf09ce0b45b77c36c89b",
+      "status": "rewrite_failed",
+      "error": "RuntimeError",
+      "error_detail": "All enabled OmniRoute providers failed: gemini:Gemini HTTP 404 model=gemini-2.5-flash-lite",
+      "approved": false
+    }
+  ]
 }
