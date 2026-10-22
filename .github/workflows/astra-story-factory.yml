@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  actions: read
 concurrency:
   group: astra-story-factory
   cancel-in-progress: false
@@ -34,8 +35,11 @@ jobs:
       - name: Check verified ready-video inventory
         id: inventory
         working-directory: code
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
-          python -m astra_v2.story_factory_inventory --inventory ../state/preproduced_video_inventory.json --root ../state --target 7
+          python -m astra_v2.story_factory_inventory --inventory ../state/preproduced_video_inventory.json --root ../state --publisher-state ../state/astra_v2_state.json --target 7
       - name: Generate review-only candidates
         if: steps.inventory.outputs.replenish == 'true'
         working-directory: code
