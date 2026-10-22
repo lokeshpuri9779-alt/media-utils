@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "8eb049a28c717427d20fdfc5",
-      "source_sha256": "93b91d5e5ceacffb4bf5220ebb87a1065b63a5de14a6aff9d2fba7faa7f4beaa",
+      "candidate_id": "1185514953af7c360253bff8",
+      "source_sha256": "c7c0102138344d18de1faeb6da4dcf9e143da881bfd7d191fc04ee063ab18845",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-27e51726d9dcd983b32c",
+        "content_id": "rayvan-gemini-86dc71b9f90e43d2c2cd",
         "title": "The Great Tomato Launchpad",
-        "hook": "The Failed Demonstration",
-        "question": "How did Barnaby sell his anti-bruise tomato delivery helmet?",
-        "answer": "He demonstrated it by dropping a ripe heirloom tomato from the clock tower directly onto the market mayor's head.",
+        "hook": "The Market Chaos",
+        "question": "How did Barnaby sell out of his entire vegetable harvest before noon?",
+        "answer": "He invented an automated pneumatic catapult that precisely tossed tomatoes directly into shoppers' grocery bags.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,78 +29,78 @@
         ],
         "story_beats": [
           {
-            "headline": "The Failed Demonstration",
-            "speech": "Behold the Tomato Cap! No longer shall our precious garden fruits suffer the indignity of a messy marketplace collision.",
+            "headline": "The Market Chaos",
+            "speech": "My fellow stallholders are laughing, but soon every single ripe tomato will find its grateful buyer instantly.",
             "visual": "robot",
-            "label": "The Inventor's Pitch",
+            "label": "The Discovery",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands on a wooden crate in the bustling outdoor market, wearing a metal helmet with springs, holding a red tomato in his hand. The market stall background shows chaotic fruit stands and passing townspeople staring with amusement.",
+            "visual_prompt": "Barnaby standing in a crowded noisy medieval market square next to a massive wooden robotic catapult, holding a clipboard with a worried expression, wearing a tweed vest and leather goggles, while nearby fruit vendors point and laugh at his bizarre contraption.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Mechanical Upgrade",
-            "speech": "Observe the pneumatic cushioning system, calibrated specifically to absorb the kinetic energy of any falling vegetable.",
+            "headline": "Engineering the Launch",
+            "speech": "We just need a bit more tension on the rubber springs to achieve maximum market penetration velocity.",
             "visual": "signal",
-            "label": "Testing the Springs",
+            "label": "The Assembly",
             "story_beat": "build",
-            "visual_prompt": "Barnaby and his skeptical assistant Clara adjust a complex series of brass levers and springs attached to the helmet resting on a wooden table, surrounded by baskets of ripe tomatoes and curious market vendors.",
+            "visual_prompt": "Barnaby in his cluttered stall workshop tightening a complex network of brass gears and rubber bands on the pneumatic launcher, holding a heavy wrench with a determined smile, surrounded by scattered green tomatoes and fluttering instruction scrolls.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Unexpected Trajectory",
-            "speech": "Wait, the tension release valve is stuck, and the calibration lever has slipped toward the high clock tower!",
+            "headline": "The Trigger Mechanism",
+            "speech": "Watch closely as the acoustic sensor locks onto the sound of clinking coin purses and fires.",
             "visual": "door",
-            "label": "The Jammed Lever",
+            "label": "The Operation",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby panics, waving his arms as a giant red tomato gets sucked into an elevated pneumatic tube system leading up toward the village clock tower, while Clara ducks away from flying mechanical parts.",
+            "visual_prompt": "Barnaby pointing proudly at a swinging wooden trapdoor on the launcher that aims directly at the bustling marketplace entrance, holding a brass megaphone while an inquisitive customer approaches holding a coin purse.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Surprising Triumph",
-            "speech": "Look! The delivery helmet worked perfectly on impact, and the mayor declared it the invention of the season!",
+            "headline": "The Triumphant Payoff",
+            "speech": "Look at that! Perfectly delivered, perfectly caught, and my pockets are overflowing with golden coins!",
             "visual": "ship",
-            "label": "The Market Success",
+            "label": "The Success",
             "story_beat": "payoff",
-            "visual_prompt": "The pompous market mayor stands bewildered in the center of the crowded square, wearing the intact tomato helmet with a pristine tomato resting safely on top, while cheering market crowds hand Barnaby sacks of gold coins.",
+            "visual_prompt": "Barnaby standing atop his fully operational pneumatic launcher shaped vaguely like an airship hull, holding an empty crate in one hand and a bulging bag of gold coins in the other, while cheering shoppers hold up fresh tomatoes caught mid-air.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright, whimsical stop-motion animation aesthetic with rich textures and vibrant pastel colors.",
+          "style": "Bright, colourful stop-motion animation aesthetic with detailed textures, rustic wooden props, and a lively comedic atmosphere.",
           "characters": {
-            "Barnaby": "An eccentric inventor in his forties with wild gray hair, wearing a patched green apron and goggles perched on his forehead.",
-            "Clara": "A pragmatic young assistant wearing a practical blue tunic and carrying a clipboard of blueprints.",
-            "Mayor Higgins": "A plump, important town official wearing a fancy purple velvet coat and a very tall top hat."
+            "Barnaby": "An eccentric inventor with unruly grey hair, wire-rimmed glasses, wearing a brown tweed vest, rolled-up white shirt sleeves, and leather utility gloves."
           },
           "locations": {
-            "Market Square": "A bustling cobblestone village marketplace filled with colorful striped awnings, wooden crates, and vegetable stalls."
+            "market_square": "A bustling, sunlit cobblestone marketplace filled with colourful striped vendor awnings, wooden crates, and milling townspeople in rustic medieval-style clothing.",
+            "workshop_stall": "A cramped market stall overflowing with loose gears, blueprints, hanging lanterns, and heaps of fresh red tomatoes."
           },
           "objects": {
-            "Tomato Helmet": "A polished copper headpiece fitted with miniature shock absorbers, velvet padding, and a spring-loaded landing pad on top.",
-            "Heirloom Tomato": "A perfectly round, deeply crimson, oversized organic tomato with a vibrant green stem."
+            "pneumatic_launcher": "A large, complex machine constructed from dark polished oak wood, brass pipes, thick black rubber bands, and a mechanical aiming dial.",
+            "gold_coin_pouch": "A small weathered leather drawstring bag jingling with heavy metallic currency.",
+            "brass_wrench": "A heavy, tarnished antique tool used for tightening machine bolts."
           }
         },
-        "plot_fingerprint": "8d96f2219fff9da37513f7843e7b0915d288345356758c5e81c549f38e210934"
+        "plot_fingerprint": "ea08626b0a8fab3947a0c2ada7ed9da758d224ac5aa68ab2091d686771a509bd"
       },
       "approved": false
     },
     {
-      "candidate_id": "6458ffe20f2fcb00632a1fa9",
-      "source_sha256": "907aea5f095221a9db136f0347262848fa7a26886448c02bcc125cb3f04f0ab0",
+      "candidate_id": "97b2b41ea84cee558a0461fa",
+      "source_sha256": "7c1e3fe95dfac81ced14a315e2507c6336be21c3acf22287e5f8bd46523b21df",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-9edf55aec69505fb2bc3",
-        "title": "The Whispering Ice",
-        "hook": "Sonar Anomaly",
-        "question": "Can acoustic telemetry detect hidden fractures before an ice bridge collapses?",
-        "answer": "Yes, by analyzing unique harmonic resonance patterns unique to shifting sub-glacial shelf structures.",
+        "content_id": "rayvan-gemini-80e451579bf70a21e735",
+        "title": "The Mechanical Sausage Slinger Disaster",
+        "hook": "A Sticky Situation at Stall Four",
+        "question": "How did Barnaby turn a noisy market squabble into a sizzling success?",
+        "answer": "By inventing a fully automated meat-missile dispenser that seasoned every flying link on impact.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -108,78 +108,78 @@
         ],
         "story_beats": [
           {
-            "headline": "Sonar Anomaly",
-            "speech": "Listen to that frequency shift. The sub-glacial cavity is vibrating at a dangerously unnatural resonance frequency today.",
-            "visual": "signal",
-            "label": "Frequency Waveform",
-            "story_beat": "reveal",
-            "visual_prompt": "Dr. Maeve Vance stands inside a dimly lit arctic research tent, staring intently at a glowing green sonar oscilloscope displaying erratic jagged wave spikes. She wears a heavy orange parka with faux-fur hood. The metal telemetry device on the table is frosted at the edges.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Automated Scout",
-            "speech": "We must deploy the tracked rover immediately to map the unstable perimeter before the pressure ridges snap apart.",
+            "headline": "A Sticky Situation at Stall Four",
+            "speech": "Behold my magnificent mechanized meat launcher, designed to feed hungry shoppers faster than they can blink!",
             "visual": "robot",
-            "label": "Crawler Unit",
-            "story_beat": "build",
-            "visual_prompt": "Maeve's gloved hands guide a six-wheeled yellow robotic crawler across a wooden examination table inside the tent. Outside the canvas walls, swirling white snow blurs the horizon. The crawler has active blue optical sensors glowing on its chassis.",
+            "label": "The Invention Reveal",
+            "story_beat": "reveal",
+            "visual_prompt": "Barnaby stands proudly behind a brass and wood contraption in a crowded medieval market square, gesturing wildly with a greasy wrench while startled shoppers duck away from a hovering metal arm.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Crossing the Chasm",
-            "speech": "The rover's telemetry confirms the central arch is holding, but only under severe tensile stress from the tide.",
+            "headline": "Gearing Up for Launch",
+            "speech": "We must tighten these primary tension springs and load three hundred spicy sausages into the firing chamber immediately!",
             "visual": "ship",
-            "label": "Research Vessel",
-            "story_beat": "mechanism",
-            "visual_prompt": "Through the frosted viewport of the communications module, a red-hulled icebreaker ship is moored safely past the hazard zone in the dark fjord. Maeve points out the window with a metal stylus, holding a clipboard against her chest.",
+            "label": "Loading the Mechanism",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby frantically cranks a large iron wheel on the side of the machine, while his nervous apprentice Pip frantically stuffs long strings of raw sausages into a gaping hopper.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Safe Extraction",
-            "speech": "Our acoustic model successfully predicted the fracture timing, allowing the entire field team to evacuate safely.",
-            "visual": "planet",
-            "label": "Glacial Basin",
+            "headline": "The Sizzling Signal",
+            "speech": "When the glowing brass dial hits the red zone, release the emergency seasoning lever and duck for cover!",
+            "visual": "signal",
+            "label": "Activating the Launch",
+            "story_beat": "mechanism",
+            "visual_prompt": "A bright red flare shoots upward from the top of the machine, casting a fiery glow over Barnaby and Pip as steam hisses from copper pipes and sausage links begin to vibrate inside.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A Town Full of Tacos",
+            "speech": "Look at them soar across the plaza! Every single customer caught a perfectly grilled breakfast right in their buns!",
+            "visual": "door",
+            "label": "The Delicious Payoff",
             "story_beat": "payoff",
-            "visual_prompt": "Maeve and her co-researcher stand on a stable bedrock ridge overlooking the massive expanse of the blue-tinted glacier under a clear arctic sky. They hold steaming mugs of tea, watching the distant sunrise illuminate the snow-covered peaks.",
+            "visual_prompt": "Barnaby and Pip stand in the doorway of their smoke-filled shop grinning broadly as ecstatic market patrons cheerfully wave freshly grilled sausages caught mid-air from the sky above.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Cinematic realism with natural cold-weather lighting, crisp textures, and a cool color palette dominated by icy blues, deep charcoals, and high-visibility safety orange.",
+          "style": "Bright, colorful, whimsical slapstick animation style with exaggerated expressions and detailed steampunk machinery.",
           "characters": {
-            "Maeve Vance": "A seasoned arctic researcher in her late thirties with weathered cheeks, sharp hazel eyes, and dark hair pulled back into a practical braid, wearing a heavy-duty orange expedition parka with zippered pockets."
+            "Barnaby": "A stout, enthusiastic inventor with bushy gray hair, smudged soot on his cheeks, wearing a worn leather apron over a striped vest.",
+            "Pip": "A hyperactive young apprentice with freckles, oversized goggles perched on his forehead, wearing an oversized blue tunic."
           },
           "locations": {
-            "Research Tent": "A reinforced geodesic canvas shelter packed with glowing electronic equipment, tangled cables, aluminum worktables, and frost-covered scientific instruments.",
-            "Glacial Ridge": "An expansive outdoor panorama of jagged blue ice walls, powdery snowdrifts, and distant frozen mountains under a pale twilight sky."
+            "Market Square": "A bustling, sunlit cobblestone marketplace filled with striped canvas awnings, wooden carts piled high with vegetables, and cheerful townsfolk."
           },
           "objects": {
-            "oscilloscope": "An old-school analog radar unit retrofitted with a bright green phosphor display screen and metallic toggle switches.",
-            "robotic_crawler": "A rugged, tracked unmanned vehicle painted bright industrial yellow with articulating camera arms and rubber treads.",
-            "clipboard": "An aluminum clipboard holding waterproof data sheets covered in handwritten frequency calculations and seismic charts."
+            "Meat Launcher": "A towering contraption made of gleaming brass pipes, wooden crates, ticking clockwork gears, and a large metal hopper.",
+            "Sausage String": "A continuous chain of plump, pink raw sausages tied tightly together with thick cotton twine.",
+            "Seasoning Lever": "A bright red wooden lever attached to a spring-loaded iron hinge covered in dried paprika."
           }
         },
-        "plot_fingerprint": "0c832fdebfd338d83bc2ef64949a733be472bd3d3601a3642c272f8fa4dab841"
+        "plot_fingerprint": "67e9fdda5022b65d4e6e903da67928969c00c2d008eaa15eeef80f2b834fa06b"
       },
       "approved": false
     },
     {
-      "candidate_id": "72fc84f09b232dd9f09845d2",
-      "source_sha256": "f6562e9eb936f387e6beea6d996f10a063fc7b3320a9e11cf982d8c402629799",
+      "candidate_id": "86b49c34b49fd0d6261156df",
+      "source_sha256": "d0d2b1e0f2eb1bdf6c51841cb28ab2ed3aa52cde2643b84d22262be33ec0d161",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-be691dafed9593639fe6",
-        "title": "The Great Salt-Tide Regatta",
-        "hook": "The Tide Rises",
-        "question": "How do you build a wind-powered vessel that survives the turbulent salt-tide reef?",
-        "answer": "By engineering flexible reed hulls that bend with the crushing wave pressure instead of breaking.",
+        "content_id": "rayvan-gemini-6573f0945034a2250132",
+        "title": "The Last Ridge Beacon",
+        "hook": "The Silent Storm",
+        "question": "Can a frozen rescue team guide a lost climber through a blizzard using only sound?",
+        "answer": "Yes, by bouncing acoustic pulses off canyon walls to map a safe path to the shelter.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -187,63 +187,63 @@
         ],
         "story_beats": [
           {
-            "headline": "The Tide Rises",
-            "speech": "Captain Bram, look at the jagged coral gates! The annual salt-tide race starts now, and our rigid wooden hull will splinter instantly.",
-            "visual": "ship",
-            "label": "The Danger",
-            "story_beat": "reveal",
-            "visual_prompt": "Wide shot of a bustling seaside festival pier during sunset. Captain Bram, an elderly man with a salt-white beard and brass-buttoned coat, points toward a churning, reef-filled ocean. Next to him, a young apprentice named Lyra wears a heavy canvas apron and holds a cracked wooden model of a sailboat. The sea spray catches the warm golden hour light.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Flexible Frame",
-            "speech": "We must replace our rigid planks with woven marsh reeds tied together with elastic kelp ropes to absorb the crushing impact.",
-            "visual": "forest",
-            "label": "The Solution",
-            "story_beat": "build",
-            "visual_prompt": "Medium close-up inside a breezy coastal workshop filled with hanging seaweed and bundles of green marsh grass. Lyra stands by a wooden workbench, her face focused and determined, holding a bundle of flexible reeds in her leather-gloved hands while weaving them into a curved hull shape.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Reef Passage",
-            "speech": "Hold the steering oar steady as the giant wave hits us! Let the reeds flex completely against the stone pillars without snapping.",
+            "headline": "The Silent Storm",
+            "speech": "Listen carefully to the echoes bouncing off the gorge walls. That unique double ring is your only way out of this blinding whiteout.",
             "visual": "signal",
-            "label": "The Test",
-            "story_beat": "mechanism",
-            "visual_prompt": "Action shot on the open water. Bram and Lyra are aboard their strange, flexible reed vessel as a towering wave crashes over them. The hull visibly bends like a bowstring under the pressure, perfectly absorbing the shock while a bright orange safety flare burns on the mast, signaling their successful passage.",
+            "label": "Acoustic Mapping",
+            "story_beat": "reveal",
+            "visual_prompt": "In a snowy mountain pass, female rescue leader Maya in a heavy red parka holds an active sonar emitter broadcasting blue soundwaves toward towering icy cliffs during a heavy blizzard.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Victory at the Pier",
-            "speech": "Our flexible hull survived the worst reef on the coast, proving that bending with the storm is stronger than fighting it.",
+            "headline": "Climbing the Soundwaves",
+            "speech": "Keep your boots steady on the packed snow ridge. Follow the rising frequency until the pitch matches the horn in your left hand.",
+            "visual": "forest",
+            "label": "Pine Ridge Trail",
+            "story_beat": "build",
+            "visual_prompt": "Climber Leo in a blue insulated jacket navigates a steep pine forest path covered in thick snow, holding a mechanical tuning fork that glows faintly as he listens to the distant rescue signals.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Cleft Obstacle",
+            "speech": "A massive snowdrift blocks the direct path ahead. We must redirect the acoustic wave around the frozen pillar to find the hidden cabin door.",
+            "visual": "door",
+            "label": "Blocked Passage",
+            "story_beat": "mechanism",
+            "visual_prompt": "Maya stands beside a massive ice wall holding a metallic reflector dish, angling it to bounce a visible sound pulse around a dangerous crevasse toward a recessed wooden shelter door.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Safe Inside",
+            "speech": "You followed the acoustic path right to the threshold. Come inside where it is warm and safe out of this fierce mountain wind.",
             "visual": "ship",
-            "label": "The Triumph",
+            "label": "Rescue Shelter",
             "story_beat": "payoff",
-            "visual_prompt": "Full shot at the crowded festival finish line pier. Bram and Lyra stand triumphantly on the deck of their intact reed boat, holding a gleaming brass trophy high above their heads while cheering festival crowds wave colorful banners under bright afternoon sun.",
+            "visual_prompt": "Inside a secure domed emergency shelter resembling a futuristic metal pod, Maya welcomes a relieved Leo, handing him a steaming thermal flask while the blizzard rages harmlessly outside.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Vibrant and warm animated maritime art style with rich textures of wood, rope, water, and marsh vegetation.",
+          "style": "Cinematic realism with dramatic lighting, crisp mountain textures, and vibrant colored visual wave effects.",
           "characters": {
-            "Captain Bram": "An elderly seasoned sailor with deep laugh lines, a thick salt-white beard, wearing a weathered navy-blue captain's coat with shiny brass buttons.",
-            "Lyra": "A clever young shipwright in her early twenties with braided brown hair, wearing a sturdy canvas work apron over a linen tunic and leather work gloves."
+            "Maya": "A seasoned female mountain rescue leader with a determined expression, wearing a heavy red parka, black snow pants, and a warm woolen beanie.",
+            "Leo": "A stranded hiker with tired eyes and frost-kissed cheeks, wearing a blue insulated jacket, waterproof trousers, and heavy hiking boots."
           },
           "locations": {
-            "Festival Pier": "A bustling wooden boardwalk decorated with colorful fabric banners, festive lanterns, and excited spectators overlooking the ocean.",
-            "Coastal Workshop": "An open-air wooden shack smelling of salt and dried grass, cluttered with hanging kelp bundles, woodworking tools, and half-built boat frames."
+            "Mountain_Pass": "A treacherous, high-altitude alpine environment covered in deep snow drifts, towering jagged cliffs, and thick pine trees.",
+            "Emergency_Shelter": "A sturdy, dome-shaped metal rescue pod embedded into the mountainside with a reinforced heavy wooden door and warm interior lighting."
           },
           "objects": {
-            "Reed Hull Model": "A small prototype boat made of woven green marsh grass and tied together with dark brown kelp rope.",
-            "Steering Oar": "A long, smooth piece of polished driftwood with a flat paddle end used to guide the vessel.",
-            "Brass Trophy": "A shiny, polished brass cup engraved with crashing ocean waves, reflecting the bright sunlight."
+            "Sonar_Emitter": "A handheld silver metallic device with a glowing blue digital screen and a directional horn used for generating acoustic mapping pulses.",
+            "Tuning_Fork": "A brass-handled acoustic instrument that vibrates and emits a soft golden hum when detecting the rescue signal.",
+            "Thermal_Flask": "A rugged steel thermos painted dark green, filled with hot herbal tea and held by a screwed-on plastic cup."
           }
         },
-        "plot_fingerprint": "f8443593893c1afc11b538ef7e540a8019d8c58857df5b57f57013fe36b6d5be"
+        "plot_fingerprint": "e9d702bd0f0fc9ae00effd81f377ff3c3452d2bf16c69ecf49fedf383419a2fc"
       },
       "approved": false
     }
