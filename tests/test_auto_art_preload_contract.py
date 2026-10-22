@@ -12,8 +12,8 @@ class AutoArtPreloadContractTests(unittest.TestCase):
 
     def test_selection_requires_approved_intake_and_history(self):
         source = Path("astra_v2/preload_art_receipt.py").read_text()
-        self.assertIn("approved_intake(story_doc", source)
-        self.assertIn("load_history(publisher, history)", source)
+        self.assertIn("load_editorial_stories()", source)
+        self.assertIn("from astra_v2.editorial_creative_source import load_editorial_stories", source)
         self.assertIn("select_eligible_art_story(", source)
         self.assertIn("no_eligible_reviewed_art_story_in_lane", source)
 
