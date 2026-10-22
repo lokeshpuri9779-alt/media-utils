@@ -20,10 +20,17 @@ def validate_package(story_path, receipt_path, decisions_path):
     if not count:
         raise ValueError("story_has_no_scenes")
     selected = {}
+    seen_asset_ids = set()
+    receipt_asset_ids = set()
     for row in receipt["assets"]:
         if not isinstance(row, dict):
             raise ValueError("invalid_archive_row")
-        decision = decisions.get(row.get("id"))
+        asset_id = row.get("id")
+        if not isinstance(asset_id, str) or not asset_id or asset_id in seen_asset_ids:
+            raise ValueError("duplicate_or_invalid_archive_asset_id")
+        seen_asset_ids.add(asset_id)
+        receipt_asset_ids.add(asset_id)
+        decision = decisions.get(asset_id)
         if not isinstance(decision, dict) or decision.get("approved") is not True:
             continue
         record = row.get("artifact")
@@ -41,6 +48,10 @@ def validate_package(story_path, receipt_path, decisions_path):
                 or not isinstance(scene, str) or scene in selected):
             raise ValueError("approved_artwork_identity_mismatch")
         selected[scene] = digest
+    if any(not isinstance(asset_id, str) or asset_id not in receipt_asset_ids
+           for asset_id, decision in decisions.items()
+           if isinstance(decision, dict) and decision.get("approved") is True):
+        raise ValueError("orphaned_artwork_approval")
     required = {f"{index:03d}" for index in range(1, count + 1)}
     if set(selected) != required:
         raise ValueError("incomplete_reviewed_artwork_package")
