@@ -249,7 +249,7 @@ def export_reviewed_render_manifest(preproduction, root, decisions, destination)
             raise ValueError("Approved image is outside renderer asset root")
         asset["path"] = location.relative_to(render_root).as_posix()
     destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_text(json.dumps({"assets": assets}, indent=2) + "\\n")
+    destination.write_text(json.dumps({"assets": assets}, indent=2) + "\n")
     return {"manifest": str(destination), "assets": len(assets)}
 
 
