@@ -77,6 +77,21 @@ class StoryArtTests(unittest.TestCase):
             result = preproduce(queue(story()), root, generator=lambda p: self.fail('must not regenerate silently'))
             self.assertEqual(result['assets'][0]['status'], 'generation_failed')
 
+    def test_reviewed_story_preview_cli_requires_complete_inputs(self):
+        # Inspect the argparse branch without importing optional Studio runtime
+        # dependencies (the lightweight Fast CI lane does not install httpx).
+        tree = ast.parse(Path("studio_renderer.py").read_text())
+        main = next(node for node in tree.body
+                    if isinstance(node, ast.If)
+                    and isinstance(node.test, ast.Compare)
+                    and isinstance(node.test.left, ast.Name)
+                    and node.test.left.id == "__name__")
+        source = ast.unparse(main)
+        self.assertIn("--story-json", source)
+        self.assertIn("--reviewed-art-manifest", source)
+        self.assertIn("parser.error", source)
+        self.assertIn("render_short", source)
+
     @unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"), "FFmpeg tools required")
     def test_studio_preview_produces_valid_vertical_mp4(self):
         with tempfile.TemporaryDirectory() as root:
