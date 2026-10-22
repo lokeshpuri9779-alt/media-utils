@@ -3,32 +3,10 @@
   "publication_triggered": false,
   "approved_count": 0,
   "available_premises": {
-    "awaiting_editorial_review": 8,
-    "needs_new_plot": 492
+    "awaiting_editorial_review": 0,
+    "needs_new_plot": 500
   },
-  "selected_for_rewrite": 3,
-  "blocked_reason": null,
-  "rewrites": [
-    {
-      "candidate_id": "0f7461ea73130165d4f5279c",
-      "source_sha256": "8bb2cab497a7e73a0e00f929f0eda3a524a9ed3f09305da5305f302602061f7c",
-      "status": "rewrite_failed",
-      "error": "RuntimeError",
-      "approved": false
-    },
-    {
-      "candidate_id": "51231da7a5b33f215d4a1d70",
-      "source_sha256": "970439450f346fdd6046880faa84396670954040bc1da5e8ed2f7276164a1ddb",
-      "status": "rewrite_failed",
-      "error": "RuntimeError",
-      "approved": false
-    },
-    {
-      "candidate_id": "996dae94023d3d16340513ad",
-      "source_sha256": "e2c813e833326d30fc0d7c8132a334c7bd0ab08c81fbe6e9aadecee15803a935",
-      "status": "rewrite_failed",
-      "error": "RuntimeError",
-      "approved": false
-    }
-  ]
+  "selected_for_rewrite": 0,
+  "blocked_reason": "no_unique_premises",
+  "rewrites": []
 }
