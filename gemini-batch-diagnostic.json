@@ -1,11 +1,11 @@
 {
-  "observed_at": "2026-10-22T16:44:50.913901+00:00",
-  "generated": 2,
+  "observed_at": "2026-10-22T16:59:08.950373+00:00",
+  "generated": 4,
   "requested": 20,
   "generation_failures": [
     {
       "index": 0,
-      "reason": "ValueError"
+      "reason": "JSONDecodeError"
     },
     {
       "index": 1,
@@ -16,27 +16,23 @@
       "reason": "ValueError"
     },
     {
-      "index": 3,
-      "reason": "ValueError"
-    },
-    {
-      "index": 4,
-      "reason": "ValueError"
-    },
-    {
       "index": 5,
       "reason": "ValueError"
     },
     {
       "index": 6,
-      "reason": "JSONDecodeError"
+      "reason": "ValueError"
     },
     {
       "index": 7,
       "reason": "ValueError"
     },
     {
-      "index": 8,
+      "index": 9,
+      "reason": "JSONDecodeError"
+    },
+    {
+      "index": 10,
       "reason": "ValueError"
     },
     {
@@ -57,30 +53,22 @@
     },
     {
       "index": 15,
-      "reason": "JSONDecodeError"
+      "reason": "ValueError"
     },
     {
       "index": 16,
       "reason": "ValueError"
     },
     {
-      "index": 17,
-      "reason": "ValueError"
-    },
-    {
       "index": 18,
-      "reason": "ValueError"
-    },
-    {
-      "index": 19,
-      "reason": "ValueError"
+      "reason": "provider_http_503"
     }
   ],
-  "reviewed": 2,
-  "approved": 1,
+  "reviewed": 4,
+  "approved": 3,
   "review_issues": [
-    "review_failed:HTTP_503",
-    "review_provider:provider_unavailable"
+    "The candidate story title 'The Rescuer of Frost Ridge' is substantially similar to the recently published comparison title 'The Rescuer of Frost Peak' and 'The Rescuer of Frostpeak Ridge', representing a repeat of a recently published premise and setting.",
+    "ai_editorial_rejection"
   ],
   "approval_pair_present": true,
   "model_access": {
