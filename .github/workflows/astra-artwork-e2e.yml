@@ -15,6 +15,8 @@ on:
       - 'astra/asset_library.py'
       - 'tests/test_reviewed_studio_render.py'
       - 'tests/test_reviewed_art_mp4_smoke.py'
+      - 'astra_v2/reviewed_art_bridge.py'
+      - 'tests/test_reviewed_art_bridge_cli.py'
       - '.github/workflows/astra-artwork-e2e.yml'
 
 permissions:
@@ -41,5 +43,7 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_reviewed_studio_render.py' -v
       - name: Encode and decode two-scene reviewed artwork MP4 with audio
         run: python -m unittest discover -s tests -p 'test_reviewed_art_mp4_smoke.py' -v
+      - name: Verify reviewed-art CLI preserves manifest and rejects unsafe paths
+        run: python -m unittest discover -s tests -p 'test_reviewed_art_bridge_cli.py' -v
       - name: Print end-to-end proof
         run: python -m astra.artwork_e2e_smoke

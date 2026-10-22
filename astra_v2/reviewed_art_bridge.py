@@ -94,15 +94,16 @@ def main():
     for arg in ("queue", "images", "decisions", "asset-root", "output-root", "output"):
         parser.add_argument("--" + arg, required=True)
     args = parser.parse_args()
-    result = build_approved_manifest(args.queue, args.images, args.decisions,
-                                     args.asset_root, args.output_root)
+    # Validate destination before any approved bytes are staged.
     target = Path(args.output)
     expected = Path(args.output_root).resolve() / "art" / "manifest.json"
     if target.resolve() != expected:
         raise ValueError("Renderer manifest must be output_root/art/manifest.json")
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(json.dumps(result, sort_keys=True, indent=2) + "\n")
-    print("ASTRA_APPROVED_ART_BRIDGE=" + json.dumps({"approved_scenes": len(result["assets"]),
+    # The shared preload entrypoint merges rather than replacing existing assets.
+    from astra_v2.reviewed_art_preload import prepare_artwork
+    count = prepare_artwork(args.queue, args.images, args.decisions,
+                            args.asset_root, args.output_root)
+    print("ASTRA_APPROVED_ART_BRIDGE=" + json.dumps({"approved_scenes": count,
                                                       "automatic_approvals": 0}))
 
 
