@@ -48,3 +48,28 @@ def illustration_requests(story):
                          "visual_bible_supplied": bool(bible),
                          "continuity_status": "not_verified"})
     return requests
+
+
+def bind_reviewed_scenes(plan, content_id, manifest_path):
+    """Bind every directed beat to its independently approved exact-scene art.
+
+    Return a new plan; never accept partial coverage or a scene from another story.
+    """
+    from astra.asset_library import load_assets
+    if not isinstance(content_id, str) or not content_id.strip() or not plan:
+        raise ValueError("Story identity and nonempty directed plan required")
+    assets = load_assets(manifest_path)
+    bound = []
+    for index, shot in enumerate(plan):
+        scene_id = f"{index + 1:03d}"
+        matches = [asset for asset in assets
+                   if asset.get("story_content_id") == content_id
+                   and asset.get("scene_id") == scene_id
+                   and asset.get("category") == "background"
+                   and asset.get("sha256")]
+        if len(matches) != 1:
+            raise ValueError(f"Missing or ambiguous approved illustration for scene {scene_id}")
+        bound.append({**shot, "artwork_asset_id": matches[0]["id"],
+                      "story_content_id": content_id, "scene_id": scene_id,
+                      "artwork_manifest_path": str(manifest_path)})
+    return bound

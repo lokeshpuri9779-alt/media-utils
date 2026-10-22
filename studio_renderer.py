@@ -1684,6 +1684,11 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
             if repair_attempts>=2: raise
             repair_attempts+=1
             plan=_repair_plan(ch,plan,repair_attempts)
+    # Opt-in full-story art: no partially illustrated output or silent fallback.
+    if ch.get("reviewed_art_manifest"):
+        from astra_v2.story_art_direction import bind_reviewed_scenes
+        plan = bind_reviewed_scenes(plan, ch.get("content_id"),
+                                   ch["reviewed_art_manifest"])
     if any(s.get("creative_format")=="ai_character_cinematic" for s in plan):
         ch["character_storyboard_plan"]=character_storyboard(ch,plan)
     # Fail before asset acquisition, narration and FFmpeg when strict Pillow
