@@ -65,6 +65,16 @@
         "review_provider:provider_unavailable"
       ],
       "record": null
+    },
+    {
+      "content_id": "rayvan-gemini-f00c72fa039603e00f32",
+      "story_sha256": "8680ee6fb36f212e59de71c139629ff90a14fd71588719ff2ee8a06712c3fa86",
+      "approved": false,
+      "issues": [
+        "review_failed:HTTP_503",
+        "review_provider:provider_unavailable"
+      ],
+      "record": null
     }
   ]
 }
