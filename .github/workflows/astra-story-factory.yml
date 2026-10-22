@@ -33,6 +33,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_astra_story_factory.py'
           python -m unittest discover -s tests -p 'test_story_factory_inventory.py'
           python -m unittest discover -s tests -p 'test_production_ledger.py'
+          python -m unittest discover -s tests -p 'test_asset_readiness_audit.py'
       - name: Check verified ready-video inventory
         id: inventory
         working-directory: code
@@ -165,6 +166,15 @@ jobs:
             --rewrite-queue ../state/story_factory_rewrite_queue.json \
             --image-manifest ../state/story_factory_image_manifest.json \
             --output ../state/story_factory_production_ledger.json
+      - name: Verify generated scene files without granting approval
+        if: always()
+        working-directory: code
+        run: |
+          python -m astra_v2.asset_readiness_audit \
+            --rewrite-queue ../state/story_factory_rewrite_queue.json \
+            --image-manifest ../state/story_factory_image_manifest.json \
+            --asset-root ../state/omni_assets \
+            --output ../state/story_factory_asset_readiness.json
       - name: Archive per-run diagnostics even if state push conflicts
         if: always()
         uses: actions/upload-artifact@v4
@@ -175,6 +185,7 @@ jobs:
             state/story_factory_rewrite_queue.json
             state/story_factory_image_manifest.json
             state/story_factory_production_ledger.json
+            state/story_factory_asset_readiness.json
           if-no-files-found: warn
           retention-days: 14
       - name: Recover generated scene assets if state push conflicts
