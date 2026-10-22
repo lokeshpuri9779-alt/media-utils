@@ -241,6 +241,23 @@ jobs:
           python -m unittest discover -s tests -p 'test_reviewed_art_bridge.py' -v
           python -m unittest discover -s tests -p 'test_reviewed_art_preload.py' -v
           python -m unittest discover -s tests -p 'test_preserve_reviewed_manifest.py' -v
+      - name: Discover trusted producer artwork receipt
+        if: vars.ASTRA_REVIEWED_ART_SCHEDULED_RESTORE == '1'
+        env:
+          ASTRA_REVIEWED_ART_INDEX_JSON: ${{ vars.ASTRA_REVIEWED_ART_INDEX_JSON }}
+        run: |
+          if test -n "$ASTRA_REVIEWED_ART_INDEX_JSON"; then
+            echo "ASTRA_ART_RECEIPT_SOURCE=pinned_repository_variable"
+          else
+            python - <<'PY'
+          import os
+          from astra_v2.reviewed_art_receipt_discovery import discover_index
+          receipt = discover_index(os.environ["GITHUB_REPOSITORY"], "trusted-art-receipt")
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as output:
+              output.write("ASTRA_REVIEWED_ART_DISCOVERED_RECEIPT=" + str(receipt) + "\n")
+          print("ASTRA_ART_RECEIPT_SOURCE=trusted_producer_workflow")
+          PY
+          fi
       - name: Restore pinned artwork for scheduled render
         if: vars.ASTRA_REVIEWED_ART_SCHEDULED_RESTORE == '1'
         env:
@@ -258,10 +275,16 @@ jobs:
           from pathlib import Path
           from astra_v2.preload_art_receipt import restore_for_preload
           receipt = os.environ.get('ASTRA_REVIEWED_ART_INDEX_JSON', '')
-          if not receipt or len(receipt.encode()) > 4096:
-              raise ValueError('pinned_art_index_required')
-          Path('astra-art-index-receipt.json').write_text(receipt, encoding='utf-8')
-          os.environ['ASTRA_REVIEWED_ART_INDEX_RECEIPT_FILE'] = 'astra-art-index-receipt.json'
+          discovered = os.environ.get('ASTRA_REVIEWED_ART_DISCOVERED_RECEIPT', '')
+          if receipt:
+              if len(receipt.encode()) > 4096:
+                  raise ValueError('pinned_art_index_too_large')
+              Path('astra-art-index-receipt.json').write_text(receipt, encoding='utf-8')
+              os.environ['ASTRA_REVIEWED_ART_INDEX_RECEIPT_FILE'] = 'astra-art-index-receipt.json'
+          elif discovered:
+              os.environ['ASTRA_REVIEWED_ART_INDEX_RECEIPT_FILE'] = discovered
+          else:
+              raise ValueError('trusted_art_index_required')
           manifest = restore_for_preload()
           if manifest is None:
               raise RuntimeError('scheduled_art_restore_missing')
