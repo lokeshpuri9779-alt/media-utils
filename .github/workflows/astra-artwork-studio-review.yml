@@ -15,6 +15,9 @@ on:
       - 'astra/artwork_pixel_proof.py'
       - 'tests/test_artwork_pixel_proof.py'
       - 'studio_renderer.py'
+      - 'astra_v2/prepare_reviewed_video.py'
+      - 'astra_v2/restore_reviewed_artwork.py'
+      - 'tests/test_prepare_reviewed_video.py'
       - 'tests/studio_approved_mp4_e2e.py'
       - 'astra/fixtures/artwork_storyboard_review.json'
       - '.github/workflows/astra-artwork-studio-review.yml'
@@ -51,6 +54,8 @@ jobs:
           python -m unittest discover -s tests -p 'test_story_artwork_binding.py' -v
           python -m unittest discover -s tests -p 'test_approved_artwork_render_proof.py' -v
           python -m unittest discover -s tests -p 'test_artwork_pixel_proof.py' -v
+      - name: Test remote-reviewed artwork MP4 preparation safety
+        run: python -m unittest discover -s tests -p 'test_prepare_reviewed_video.py' -v
       - name: Verify complete approved-scene Studio MP4 offline
         run: python -m tests.studio_approved_mp4_e2e
       - name: Render with existing Studio and Kokoro
