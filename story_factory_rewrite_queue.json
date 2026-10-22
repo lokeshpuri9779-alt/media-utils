@@ -10,27 +10,241 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "606722a9654cb41ce39ed3d7",
-      "source_sha256": "0a4533a4e3fffead05859aab34b81e96de89f77e1edc52d85544f6a512eaf72b",
-      "status": "rewrite_failed",
-      "error": "RuntimeError",
-      "error_detail": "All enabled OmniRoute providers failed: gemini:Invalid beat visual or narrative role",
+      "candidate_id": "8eb049a28c717427d20fdfc5",
+      "source_sha256": "93b91d5e5ceacffb4bf5220ebb87a1065b63a5de14a6aff9d2fba7faa7f4beaa",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-27e51726d9dcd983b32c",
+        "title": "The Great Tomato Launchpad",
+        "hook": "The Failed Demonstration",
+        "question": "How did Barnaby sell his anti-bruise tomato delivery helmet?",
+        "answer": "He demonstrated it by dropping a ripe heirloom tomato from the clock tower directly onto the market mayor's head.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Failed Demonstration",
+            "speech": "Behold the Tomato Cap! No longer shall our precious garden fruits suffer the indignity of a messy marketplace collision.",
+            "visual": "robot",
+            "label": "The Inventor's Pitch",
+            "story_beat": "reveal",
+            "visual_prompt": "Barnaby stands on a wooden crate in the bustling outdoor market, wearing a metal helmet with springs, holding a red tomato in his hand. The market stall background shows chaotic fruit stands and passing townspeople staring with amusement.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Mechanical Upgrade",
+            "speech": "Observe the pneumatic cushioning system, calibrated specifically to absorb the kinetic energy of any falling vegetable.",
+            "visual": "signal",
+            "label": "Testing the Springs",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby and his skeptical assistant Clara adjust a complex series of brass levers and springs attached to the helmet resting on a wooden table, surrounded by baskets of ripe tomatoes and curious market vendors.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Unexpected Trajectory",
+            "speech": "Wait, the tension release valve is stuck, and the calibration lever has slipped toward the high clock tower!",
+            "visual": "door",
+            "label": "The Jammed Lever",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby panics, waving his arms as a giant red tomato gets sucked into an elevated pneumatic tube system leading up toward the village clock tower, while Clara ducks away from flying mechanical parts.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Surprising Triumph",
+            "speech": "Look! The delivery helmet worked perfectly on impact, and the mayor declared it the invention of the season!",
+            "visual": "ship",
+            "label": "The Market Success",
+            "story_beat": "payoff",
+            "visual_prompt": "The pompous market mayor stands bewildered in the center of the crowded square, wearing the intact tomato helmet with a pristine tomato resting safely on top, while cheering market crowds hand Barnaby sacks of gold coins.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "visual_bible": {
+          "style": "Bright, whimsical stop-motion animation aesthetic with rich textures and vibrant pastel colors.",
+          "characters": {
+            "Barnaby": "An eccentric inventor in his forties with wild gray hair, wearing a patched green apron and goggles perched on his forehead.",
+            "Clara": "A pragmatic young assistant wearing a practical blue tunic and carrying a clipboard of blueprints.",
+            "Mayor Higgins": "A plump, important town official wearing a fancy purple velvet coat and a very tall top hat."
+          },
+          "locations": {
+            "Market Square": "A bustling cobblestone village marketplace filled with colorful striped awnings, wooden crates, and vegetable stalls."
+          },
+          "objects": {
+            "Tomato Helmet": "A polished copper headpiece fitted with miniature shock absorbers, velvet padding, and a spring-loaded landing pad on top.",
+            "Heirloom Tomato": "A perfectly round, deeply crimson, oversized organic tomato with a vibrant green stem."
+          }
+        },
+        "plot_fingerprint": "8d96f2219fff9da37513f7843e7b0915d288345356758c5e81c549f38e210934"
+      },
       "approved": false
     },
     {
-      "candidate_id": "e3ed07ae1a3478aee0a7de94",
-      "source_sha256": "06e8ab88bd23233e741a85f9f4cc564ea77d74c92e77590bcd2c460aa2287cbd",
-      "status": "rewrite_failed",
-      "error": "RuntimeError",
-      "error_detail": "All enabled OmniRoute providers failed: gemini:Invalid beat visual or narrative role",
+      "candidate_id": "6458ffe20f2fcb00632a1fa9",
+      "source_sha256": "907aea5f095221a9db136f0347262848fa7a26886448c02bcc125cb3f04f0ab0",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-9edf55aec69505fb2bc3",
+        "title": "The Whispering Ice",
+        "hook": "Sonar Anomaly",
+        "question": "Can acoustic telemetry detect hidden fractures before an ice bridge collapses?",
+        "answer": "Yes, by analyzing unique harmonic resonance patterns unique to shifting sub-glacial shelf structures.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Sonar Anomaly",
+            "speech": "Listen to that frequency shift. The sub-glacial cavity is vibrating at a dangerously unnatural resonance frequency today.",
+            "visual": "signal",
+            "label": "Frequency Waveform",
+            "story_beat": "reveal",
+            "visual_prompt": "Dr. Maeve Vance stands inside a dimly lit arctic research tent, staring intently at a glowing green sonar oscilloscope displaying erratic jagged wave spikes. She wears a heavy orange parka with faux-fur hood. The metal telemetry device on the table is frosted at the edges.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Automated Scout",
+            "speech": "We must deploy the tracked rover immediately to map the unstable perimeter before the pressure ridges snap apart.",
+            "visual": "robot",
+            "label": "Crawler Unit",
+            "story_beat": "build",
+            "visual_prompt": "Maeve's gloved hands guide a six-wheeled yellow robotic crawler across a wooden examination table inside the tent. Outside the canvas walls, swirling white snow blurs the horizon. The crawler has active blue optical sensors glowing on its chassis.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Crossing the Chasm",
+            "speech": "The rover's telemetry confirms the central arch is holding, but only under severe tensile stress from the tide.",
+            "visual": "ship",
+            "label": "Research Vessel",
+            "story_beat": "mechanism",
+            "visual_prompt": "Through the frosted viewport of the communications module, a red-hulled icebreaker ship is moored safely past the hazard zone in the dark fjord. Maeve points out the window with a metal stylus, holding a clipboard against her chest.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Safe Extraction",
+            "speech": "Our acoustic model successfully predicted the fracture timing, allowing the entire field team to evacuate safely.",
+            "visual": "planet",
+            "label": "Glacial Basin",
+            "story_beat": "payoff",
+            "visual_prompt": "Maeve and her co-researcher stand on a stable bedrock ridge overlooking the massive expanse of the blue-tinted glacier under a clear arctic sky. They hold steaming mugs of tea, watching the distant sunrise illuminate the snow-covered peaks.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "visual_bible": {
+          "style": "Cinematic realism with natural cold-weather lighting, crisp textures, and a cool color palette dominated by icy blues, deep charcoals, and high-visibility safety orange.",
+          "characters": {
+            "Maeve Vance": "A seasoned arctic researcher in her late thirties with weathered cheeks, sharp hazel eyes, and dark hair pulled back into a practical braid, wearing a heavy-duty orange expedition parka with zippered pockets."
+          },
+          "locations": {
+            "Research Tent": "A reinforced geodesic canvas shelter packed with glowing electronic equipment, tangled cables, aluminum worktables, and frost-covered scientific instruments.",
+            "Glacial Ridge": "An expansive outdoor panorama of jagged blue ice walls, powdery snowdrifts, and distant frozen mountains under a pale twilight sky."
+          },
+          "objects": {
+            "oscilloscope": "An old-school analog radar unit retrofitted with a bright green phosphor display screen and metallic toggle switches.",
+            "robotic_crawler": "A rugged, tracked unmanned vehicle painted bright industrial yellow with articulating camera arms and rubber treads.",
+            "clipboard": "An aluminum clipboard holding waterproof data sheets covered in handwritten frequency calculations and seismic charts."
+          }
+        },
+        "plot_fingerprint": "0c832fdebfd338d83bc2ef64949a733be472bd3d3601a3642c272f8fa4dab841"
+      },
       "approved": false
     },
     {
-      "candidate_id": "fdf825396162b57617aef137",
-      "source_sha256": "c84be62744ef90ee79951157f3d23df71a907c7bd74a27f27cea58c73fd3a691",
-      "status": "rewrite_failed",
-      "error": "RuntimeError",
-      "error_detail": "All enabled OmniRoute providers failed: gemini:Invalid beat visual or narrative role",
+      "candidate_id": "72fc84f09b232dd9f09845d2",
+      "source_sha256": "f6562e9eb936f387e6beea6d996f10a063fc7b3320a9e11cf982d8c402629799",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-be691dafed9593639fe6",
+        "title": "The Great Salt-Tide Regatta",
+        "hook": "The Tide Rises",
+        "question": "How do you build a wind-powered vessel that survives the turbulent salt-tide reef?",
+        "answer": "By engineering flexible reed hulls that bend with the crushing wave pressure instead of breaking.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Tide Rises",
+            "speech": "Captain Bram, look at the jagged coral gates! The annual salt-tide race starts now, and our rigid wooden hull will splinter instantly.",
+            "visual": "ship",
+            "label": "The Danger",
+            "story_beat": "reveal",
+            "visual_prompt": "Wide shot of a bustling seaside festival pier during sunset. Captain Bram, an elderly man with a salt-white beard and brass-buttoned coat, points toward a churning, reef-filled ocean. Next to him, a young apprentice named Lyra wears a heavy canvas apron and holds a cracked wooden model of a sailboat. The sea spray catches the warm golden hour light.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Flexible Frame",
+            "speech": "We must replace our rigid planks with woven marsh reeds tied together with elastic kelp ropes to absorb the crushing impact.",
+            "visual": "forest",
+            "label": "The Solution",
+            "story_beat": "build",
+            "visual_prompt": "Medium close-up inside a breezy coastal workshop filled with hanging seaweed and bundles of green marsh grass. Lyra stands by a wooden workbench, her face focused and determined, holding a bundle of flexible reeds in her leather-gloved hands while weaving them into a curved hull shape.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Reef Passage",
+            "speech": "Hold the steering oar steady as the giant wave hits us! Let the reeds flex completely against the stone pillars without snapping.",
+            "visual": "signal",
+            "label": "The Test",
+            "story_beat": "mechanism",
+            "visual_prompt": "Action shot on the open water. Bram and Lyra are aboard their strange, flexible reed vessel as a towering wave crashes over them. The hull visibly bends like a bowstring under the pressure, perfectly absorbing the shock while a bright orange safety flare burns on the mast, signaling their successful passage.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Victory at the Pier",
+            "speech": "Our flexible hull survived the worst reef on the coast, proving that bending with the storm is stronger than fighting it.",
+            "visual": "ship",
+            "label": "The Triumph",
+            "story_beat": "payoff",
+            "visual_prompt": "Full shot at the crowded festival finish line pier. Bram and Lyra stand triumphantly on the deck of their intact reed boat, holding a gleaming brass trophy high above their heads while cheering festival crowds wave colorful banners under bright afternoon sun.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "visual_bible": {
+          "style": "Vibrant and warm animated maritime art style with rich textures of wood, rope, water, and marsh vegetation.",
+          "characters": {
+            "Captain Bram": "An elderly seasoned sailor with deep laugh lines, a thick salt-white beard, wearing a weathered navy-blue captain's coat with shiny brass buttons.",
+            "Lyra": "A clever young shipwright in her early twenties with braided brown hair, wearing a sturdy canvas work apron over a linen tunic and leather work gloves."
+          },
+          "locations": {
+            "Festival Pier": "A bustling wooden boardwalk decorated with colorful fabric banners, festive lanterns, and excited spectators overlooking the ocean.",
+            "Coastal Workshop": "An open-air wooden shack smelling of salt and dried grass, cluttered with hanging kelp bundles, woodworking tools, and half-built boat frames."
+          },
+          "objects": {
+            "Reed Hull Model": "A small prototype boat made of woven green marsh grass and tied together with dark brown kelp rope.",
+            "Steering Oar": "A long, smooth piece of polished driftwood with a flat paddle end used to guide the vessel.",
+            "Brass Trophy": "A shiny, polished brass cup engraved with crashing ocean waves, reflecting the bright sunlight."
+          }
+        },
+        "plot_fingerprint": "f8443593893c1afc11b538ef7e540a8019d8c58857df5b57f57013fe36b6d5be"
+      },
       "approved": false
     }
   ]

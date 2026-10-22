@@ -1,7 +1,146 @@
 {
   "status": "review_only",
-  "provider_calls": 0,
-  "assets": [],
+  "provider_calls": 3,
+  "assets": [
+    {
+      "story_content_id": "rayvan-gemini-27e51726d9dcd983b32c",
+      "scene_id": "001",
+      "story_visual_sha256": "927ed21d41db7f6730be71aaf3d20562704183343db7d8af79dabaf2a685a40a",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "256c0860aec078d1a871dafcfb2ae6bd6274a138f3ec502d34c220f3dd14dd76",
+      "approved": false,
+      "production_ready": false,
+      "status": "generation_failed",
+      "error": "ValueError",
+      "error_detail": "Scenes must be portrait"
+    },
+    {
+      "story_content_id": "rayvan-gemini-27e51726d9dcd983b32c",
+      "scene_id": "002",
+      "story_visual_sha256": "927ed21d41db7f6730be71aaf3d20562704183343db7d8af79dabaf2a685a40a",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "b9333bab0ae5e1f906f5f52cef65a444b0d8415449c20447b616d6acb1c1b904",
+      "approved": false,
+      "production_ready": false,
+      "status": "generation_failed",
+      "error": "ValueError",
+      "error_detail": "Scenes must be portrait"
+    },
+    {
+      "story_content_id": "rayvan-gemini-27e51726d9dcd983b32c",
+      "scene_id": "003",
+      "story_visual_sha256": "927ed21d41db7f6730be71aaf3d20562704183343db7d8af79dabaf2a685a40a",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "0b2e774d6728c7d047ad5c6dacad09d87e9a3ef3cc2ea3ffec3615888bfe9c75",
+      "approved": false,
+      "production_ready": false,
+      "status": "generation_failed",
+      "error": "ValueError",
+      "error_detail": "Scenes must be portrait"
+    },
+    {
+      "story_content_id": "rayvan-gemini-27e51726d9dcd983b32c",
+      "scene_id": "004",
+      "story_visual_sha256": "927ed21d41db7f6730be71aaf3d20562704183343db7d8af79dabaf2a685a40a",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "f9e6da82de5dc1f36c01a786c6f0b3963c27417ed0428e425d8fbf003a98b67a",
+      "approved": false,
+      "production_ready": false,
+      "status": "pending_budget"
+    },
+    {
+      "story_content_id": "rayvan-gemini-9edf55aec69505fb2bc3",
+      "scene_id": "001",
+      "story_visual_sha256": "e65edab84ebb213a10db480b819ccb6161eeee4f06811a696ecbfca7a902e0aa",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "19358d0e5b184af9a3b8b20d429e3f31a718597ce5ae2cbe7a60e6baae34234c",
+      "approved": false,
+      "production_ready": false,
+      "status": "pending_budget"
+    },
+    {
+      "story_content_id": "rayvan-gemini-9edf55aec69505fb2bc3",
+      "scene_id": "002",
+      "story_visual_sha256": "e65edab84ebb213a10db480b819ccb6161eeee4f06811a696ecbfca7a902e0aa",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "49b379f3e13eeff873b7773fd7c27b93b0bee819a4129ca74bc241ade5bed829",
+      "approved": false,
+      "production_ready": false,
+      "status": "pending_budget"
+    },
+    {
+      "story_content_id": "rayvan-gemini-9edf55aec69505fb2bc3",
+      "scene_id": "003",
+      "story_visual_sha256": "e65edab84ebb213a10db480b819ccb6161eeee4f06811a696ecbfca7a902e0aa",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "7f0f09b1479e5419278b1596fb5c29cb64f4e7e931bc84dc54fa8c2da364a198",
+      "approved": false,
+      "production_ready": false,
+      "status": "pending_budget"
+    },
+    {
+      "story_content_id": "rayvan-gemini-9edf55aec69505fb2bc3",
+      "scene_id": "004",
+      "story_visual_sha256": "e65edab84ebb213a10db480b819ccb6161eeee4f06811a696ecbfca7a902e0aa",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "b99bcf1a2976336317f557a4dc0f568289f00be2ea9d7f025e92cb22b7e64355",
+      "approved": false,
+      "production_ready": false,
+      "status": "pending_budget"
+    },
+    {
+      "story_content_id": "rayvan-gemini-be691dafed9593639fe6",
+      "scene_id": "001",
+      "story_visual_sha256": "98b5b42254d5b35a3948400c0cb7edb22c08972f027bb5f623929910e0a7e356",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "c2b25aeb10256212fffd74c5690235f25a465b5d08b2f8aa2ff131b5ef195fef",
+      "approved": false,
+      "production_ready": false,
+      "status": "pending_budget"
+    },
+    {
+      "story_content_id": "rayvan-gemini-be691dafed9593639fe6",
+      "scene_id": "002",
+      "story_visual_sha256": "98b5b42254d5b35a3948400c0cb7edb22c08972f027bb5f623929910e0a7e356",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "622cc8dca04d5d4ae472053f5fb81e71a1bd895b43e21a87847262747969cbaa",
+      "approved": false,
+      "production_ready": false,
+      "status": "pending_budget"
+    },
+    {
+      "story_content_id": "rayvan-gemini-be691dafed9593639fe6",
+      "scene_id": "003",
+      "story_visual_sha256": "98b5b42254d5b35a3948400c0cb7edb22c08972f027bb5f623929910e0a7e356",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "fc33ff636d29334f75606c61f1347bb94c2004f46bda33ad00f383cf5ad5e7ac",
+      "approved": false,
+      "production_ready": false,
+      "status": "pending_budget"
+    },
+    {
+      "story_content_id": "rayvan-gemini-be691dafed9593639fe6",
+      "scene_id": "004",
+      "story_visual_sha256": "98b5b42254d5b35a3948400c0cb7edb22c08972f027bb5f623929910e0a7e356",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "edf15883d2e6e531012462427d961b091d480046e1f084ee68041b0ed17cd616",
+      "approved": false,
+      "production_ready": false,
+      "status": "pending_budget"
+    }
+  ],
   "production_ready": false,
   "continuity_status": "not_verified"
 }
