@@ -10,6 +10,8 @@ on:
       - 'astra/artwork_restore.py'
       - 'astra_v2/restore_reviewed_artwork.py'
       - 'tests/test_restore_reviewed_artwork.py'
+      - 'astra_v2/reviewed_artwork_intake.py'
+      - 'tests/test_reviewed_artwork_intake.py'
       - 'astra/asset_library.py'
       - '.github/workflows/astra-artwork-e2e.yml'
 
@@ -30,5 +32,7 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_artwork_e2e_smoke.py' -v
       - name: Validate independently approved remote artwork restoration
         run: python -m unittest discover -s tests -p 'test_restore_reviewed_artwork.py' -v
+      - name: Validate complete reviewed artwork intake
+        run: python -m unittest discover -s tests -p 'test_reviewed_artwork_intake.py' -v
       - name: Print end-to-end proof
         run: python -m astra.artwork_e2e_smoke
