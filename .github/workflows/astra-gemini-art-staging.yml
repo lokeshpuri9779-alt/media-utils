@@ -19,8 +19,8 @@ jobs:
       ASTRA_GEMINI_ART_ENABLED: '1'
       ASTRA_GEMINI_IMAGE_MODEL: ${{ vars.ASTRA_GEMINI_IMAGE_MODEL }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      ASTRA_EDITORIAL_STORIES_FILE: editorial/stories.json
-      ASTRA_EDITORIAL_REVIEWS_FILE: editorial/reviews.json
+      ASTRA_EDITORIAL_STORIES_FILE: editorial/reviewed_stories.json
+      ASTRA_EDITORIAL_REVIEWS_FILE: editorial/reviewed_decisions.json
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -28,6 +28,15 @@ jobs:
           python-version: '3.12'
       - name: Install image validation
         run: python -m pip install --disable-pip-version-check Pillow
+      - name: Restore persisted publication history
+        shell: bash
+        run: |
+          git fetch origin astra-state
+          for f in astra_v2_state.json astra_story_history.json; do
+            if git cat-file -e "origin/astra-state:$f" 2>/dev/null; then
+              git show "origin/astra-state:$f" > "$f"
+            fi
+          done
       - name: Require persisted publication history
         run: |
           test -s astra_v2_state.json
