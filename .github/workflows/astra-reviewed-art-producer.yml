@@ -39,6 +39,12 @@ jobs:
             echo 'Invalid source run ID' >&2
             exit 1
           fi
+          python - <<'PY'
+          import os
+          from astra_v2.reviewed_art_source_provenance import verify_source_run
+          sha = verify_source_run(os.environ["GITHUB_REPOSITORY"], os.environ["SOURCE_RUN_ID"])
+          print("ASTRA_APPROVED_ART_SOURCE_SHA=" + sha)
+          PY
           mkdir -p reviewed-input
           gh run download "$SOURCE_RUN_ID" --repo "$GITHUB_REPOSITORY" --name astra-approved-art --dir reviewed-input
           test -s reviewed-input/art/manifest.json
