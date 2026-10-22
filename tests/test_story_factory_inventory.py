@@ -18,8 +18,17 @@ class ReadyInventoryTests(unittest.TestCase):
                     self.assertEqual(count_trusted_preloads(state, 7), 4)
             args, kwargs = snapshot.call_args
             self.assertEqual(kwargs["format_filter"], "short")
-            self.assertEqual(kwargs["max_packages"], 7)
+            self.assertEqual(kwargs["max_packages"], 14)
             self.assertTrue({"old", "held", "inflight"}.issubset(kwargs["excluded_ids"]))
+
+    def test_invalid_publisher_state_never_suppresses_generation(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            state = Path(tmp) / "state.json"
+            state.write_text('{"published": [], "pending": {}, "reserved": {}}')
+            with patch.dict("os.environ", {"GH_TOKEN": "offline", "GITHUB_REPOSITORY": "owner/repo"}):
+                with patch("astra_v2.preload_queue.package_integrity_snapshot") as snapshot:
+                    self.assertEqual(count_trusted_preloads(state, 7), 0)
+                    snapshot.assert_not_called()
 
     def test_remote_failure_cannot_suppress_replenishment(self):
         with tempfile.TemporaryDirectory() as tmp:
