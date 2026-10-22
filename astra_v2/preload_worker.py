@@ -83,6 +83,10 @@ def main():
                 "episode": number, "published": cid in state.get("published", {}),
                 "queued_artifact": queued, "excluded": cid in excluded,
             }))
+    # Optional immutable reviewed-art handoff; never enables publishing or
+    # chooses/approves stories. Missing or corrupted receipts fail closed.
+    from astra_v2.preload_art_receipt import restore_for_preload
+    restore_for_preload()
     # The renderer's own creative director and independent media QA must pass.
     with tempfile.TemporaryDirectory(prefix="astra-preload-") as tmp:
         video = Path(tmp) / "render.mp4"
