@@ -64,7 +64,7 @@ def prepare_video(story_path, receipt_path, decisions_path, output_root, output_
                  "published": False}
     temporary = ready_path.with_suffix(".ready.json.tmp")
     try:
-        temporary.write_text(json.dumps(readiness, sort_keys=True) + "\\n", encoding="utf-8")
+        temporary.write_text(json.dumps(readiness, sort_keys=True) + "\n", encoding="utf-8")
         temporary.replace(ready_path)
     finally:
         temporary.unlink(missing_ok=True)
