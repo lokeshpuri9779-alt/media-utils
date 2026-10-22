@@ -328,6 +328,8 @@ def make_candidate(path, excluded_ids, excluded_titles):
             print("ASTRA_CANDIDATE_DURATION_REJECTED=" + json.dumps({"content_id": story.get("content_id"), "reason": "script_duration_preflight_failed"}, sort_keys=True))
             continue
         try:
+            from astra_v2.preload_reviewed_art import attach_reviewed_art
+            story = attach_reviewed_art(story)
             rendered = render_short(story, path)
             evaluation = evaluate_studio_render(story, rendered, video_path=path)
             if not evaluation.get("pass"):
