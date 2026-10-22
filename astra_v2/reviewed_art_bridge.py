@@ -5,6 +5,7 @@ Never converts Story Factory review-only evidence into an approval by itself.
 import argparse
 import hashlib
 import json
+import shutil
 from pathlib import Path
 
 from astra_v2.story_art_direction import illustration_requests
@@ -67,10 +68,17 @@ def build_approved_manifest(queue_path, image_manifest_path, decisions_path, ass
             from astra_v2.omniroute_image_assets import image_quality_report
             if not image_quality_report(raw, "scene")["passed"]:
                 raise ValueError("Approved scene fails image quality validation")
-            # This manifest is a binding contract; assets are not copied.
+            # Copy immutable approved bytes into the renderer's manifest root.
+            # The manifest must live at output_root/art/manifest.json.
+            target = destination / "art" / "assets" / "reviewed" / (approved[key] + ".png")
+            target.parent.mkdir(parents=True, exist_ok=True)
+            if target.is_file() and hashlib.sha256(target.read_bytes()).hexdigest() != approved[key]:
+                raise ValueError("Approved asset destination hash mismatch")
+            if not target.is_file():
+                shutil.copyfile(image_path, target)
             entries.append({"id": "reviewed-" + cid + "-" + key[1], "category": "background",
                             "status": "approved", "story_content_id": cid, "scene_id": key[1],
-                            "sha256": approved[key], "path": str(image_path.relative_to(destination)),
+                            "sha256": approved[key], "path": str(target.relative_to(destination)),
                             "tags": [], "source": "independently-reviewed-story-factory"})
     return {"assets": entries}
 
@@ -83,6 +91,9 @@ def main():
     result = build_approved_manifest(args.queue, args.images, args.decisions,
                                      args.asset_root, args.output_root)
     target = Path(args.output)
+    expected = Path(args.output_root).resolve() / "art" / "manifest.json"
+    if target.resolve() != expected:
+        raise ValueError("Renderer manifest must be output_root/art/manifest.json")
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(result, sort_keys=True, indent=2) + "\n")
     print("ASTRA_APPROVED_ART_BRIDGE=" + json.dumps({"approved_scenes": len(result["assets"]),
