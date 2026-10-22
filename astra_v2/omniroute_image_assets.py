@@ -61,9 +61,19 @@ def generate_image(prompt, *, requester=None):
         raw = requester(request)
     except urllib.error.HTTPError as exc:
         # Preserve safe status information without logging API keys or prompts.
-        if exc.code == 404:
-            raise ValueError("Image provider returned HTTP 404: verify configured endpoint and model") from exc
-        raise ValueError(f"Image provider returned HTTP {exc.code}") from exc
+        # Persist numeric status codes only, never provider text or credentials.
+        code = ""
+        if cloudflare:
+            try:
+                details = json.loads(exc.read(4096))
+                errors = details.get("errors", [])
+                numeric = [str(e["code"]) for e in errors if isinstance(e, dict)
+                           and isinstance(e.get("code"), int)]
+                if numeric:
+                    code = " Cloudflare code=" + ",".join(numeric[:3])
+            except (ValueError, TypeError, KeyError, AttributeError):
+                pass
+        raise ValueError(f"Image provider HTTP {exc.code}" + code) from exc
     if len(raw) > MAX_BYTES:
         raise ValueError("Image response too large")
     # Some compatible image endpoints return image bytes directly instead of JSON.
@@ -85,7 +95,11 @@ def generate_image(prompt, *, requester=None):
     response = json.loads(raw)
     if cloudflare:
         if not response.get("success", False) or not isinstance(response.get("result"), dict):
-            raise ValueError("Cloudflare image generation unsuccessful")
+            errors = response.get("errors", [])
+            numeric = [str(e["code"]) for e in errors if isinstance(e, dict)
+                       and isinstance(e.get("code"), int)] if isinstance(errors, list) else []
+            raise ValueError("Cloudflare image generation unsuccessful"
+                             + (" code=" + ",".join(numeric[:3]) if numeric else ""))
         encoded = response["result"].get("image")
         if not isinstance(encoded, str):
             raise ValueError("Cloudflare did not return base64 image")
@@ -285,7 +299,17 @@ def preproduce(queue, root, *, generator=generate_image, limit=3):
                         temporary.write_text(json.dumps(asset, sort_keys=True))
                         temporary.replace(record)
             except (ValueError, OSError, RuntimeError, KeyError, TypeError) as exc:
-                row.update(status="generation_failed", error=type(exc).__name__)
+                # Whitelist only provider codes, never arbitrary exception text.
+                diagnostic = str(exc) if isinstance(exc, ValueError) else ""
+                if not (diagnostic.startswith("Image provider HTTP ")
+                        or diagnostic.startswith("Cloudflare image generation unsuccessful")
+                        or diagnostic in ("Cloudflare did not return base64 image",
+                                          "Cloudflare image format unsupported",
+                                          "Image resolution too small",
+                                          "Scenes must be portrait")):
+                    diagnostic = type(exc).__name__
+                row.update(status="generation_failed", error=type(exc).__name__,
+                           error_detail=diagnostic[:120])
             output.append(row)
     return {"status": "provider_not_configured" if provider_missing else "review_only",
             "provider_calls": calls, "assets": output,
