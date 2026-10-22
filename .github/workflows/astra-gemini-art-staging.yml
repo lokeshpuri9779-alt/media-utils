@@ -32,7 +32,8 @@ jobs:
         shell: bash
         run: |
           git fetch origin astra-state
-          for f in astra_v2_state.json astra_story_history.json; do
+          for f in astra_v2_state.json astra_story_history.json runtime-health/ai-reviewed-stories.json runtime-health/ai-reviewed-decisions.json; do
+            mkdir -p "$(dirname "$f")"
             if git cat-file -e "origin/astra-state:$f" 2>/dev/null; then
               git show "origin/astra-state:$f" > "$f"
             fi
@@ -41,6 +42,13 @@ jobs:
         run: |
           test -s astra_v2_state.json
           test -s astra_story_history.json
+      - name: Require complete persisted editorial review pair
+        shell: bash
+        run: |
+          if test -e runtime-health/ai-reviewed-stories.json || test -e runtime-health/ai-reviewed-decisions.json; then
+            test -s runtime-health/ai-reviewed-stories.json
+            test -s runtime-health/ai-reviewed-decisions.json
+          fi
       - name: Generate unapproved scene art
         env:
           ASTRA_CONTENT_ID: ${{ inputs.content_id }}
