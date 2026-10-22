@@ -8,8 +8,9 @@ from __future__ import annotations
 from pathlib import Path
 from astra_v2.event_parallel_dispatch import dispatch_batch
 from astra_v2.event_story_adapter import make_story_handler
+from astra_v2.story_batch_checkpoint import checkpoint_record
 from astra_v2.parallel_story_workers import (
-    WORKERS, STORIES_PER_RUN, read_worker_payload,
+    WORKERS, STORIES_PER_RUN, read_worker_payload, combine_workers,
 )
 
 
@@ -48,5 +49,20 @@ def combine_completed_stripes(batch_id, output_root, *, workers=WORKERS,
                             batch_id=f"{batch_id}-stripe-{i}", worker_index=i)
         for i in range(workers)
     ]
-    # All payloads remain unreviewed and require global novelty validation.
-    return payloads
+    # Each source checkpoint was independently validated by read_worker_payload.
+    # Translate only its identity into the canonical coordinator namespace;
+    # preserve exact story IDs and run the existing global uniqueness checks.
+    canonical = []
+    for i, payload in enumerate(payloads):
+        record = payload["checkpoint"]
+        canonical.append({
+            "checkpoint": checkpoint_record(
+                f"{batch_id}-worker-{i}", "generated", record["story_ids"], complete=True
+            ),
+            "stories": payload["stories"],
+        })
+    result = combine_workers(batch_id, canonical, expected_workers=workers,
+                             expected_total=total)
+    # combine_workers enforces duplicate-free IDs and production_ready=False.
+    # It does NOT grant novelty clearance or editorial approval.
+    return result
