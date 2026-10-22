@@ -4,8 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       content_id:
-        description: 'Exact hash-approved editorial story content ID'
-        required: true
+        description: 'Hash-approved content ID, or auto for next eligible story'
+        required: false
+        default: 'auto'
         type: string
 
 permissions:
@@ -49,9 +50,22 @@ jobs:
             test -s runtime-health/ai-reviewed-stories.json
             test -s runtime-health/ai-reviewed-decisions.json
           fi
+      - name: Resolve eligible story
+        id: selection
+        env:
+          REQUESTED_ID: ${{ inputs.content_id }}
+        shell: bash
+        run: |
+          if [[ -z "$REQUESTED_ID" || "$REQUESTED_ID" == "auto" ]]; then
+            python -m astra_v2.select_editorial_art_candidate > /tmp/astra-art-selection.json
+            CONTENT_ID=$(python -c 'import json; print(json.load(open("/tmp/astra-art-selection.json"))["content_id"])')
+          else
+            CONTENT_ID="$REQUESTED_ID"
+          fi
+          echo "content_id=$CONTENT_ID" >> "$GITHUB_OUTPUT"
       - name: Generate unapproved scene art
         env:
-          ASTRA_CONTENT_ID: ${{ inputs.content_id }}
+          ASTRA_CONTENT_ID: ${{ steps.selection.outputs.content_id }}
         run: |
           python -m astra_v2.stage_editorial_art --content-id "$ASTRA_CONTENT_ID" --destination runtime-art-staging
       - name: Independently verify generated PNG integrity and geometry
@@ -59,7 +73,7 @@ jobs:
           python -m astra_v2.staged_art_technical_review runtime-art-staging/staging-manifest.json --output runtime-art-staging/technical-review.json
       - name: Independent Gemini multimodal visual QA
         env:
-          ASTRA_CONTENT_ID: ${{ inputs.content_id }}
+          ASTRA_CONTENT_ID: ${{ steps.selection.outputs.content_id }}
           ASTRA_GEMINI_ART_REVIEW_MODEL: ${{ vars.ASTRA_GEMINI_ART_REVIEW_MODEL }}
         run: |
           python -m astra_v2.review_editorial_art --content-id "$ASTRA_CONTENT_ID" --manifest runtime-art-staging/staging-manifest.json --output runtime-art-staging/semantic-review.json
