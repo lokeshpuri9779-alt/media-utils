@@ -43,6 +43,21 @@ class ImageAssetsTests(unittest.TestCase):
             output = generate_image("scene", requester=lambda req: buffer.getvalue())
             self.assertTrue(output.startswith(b"\x89PNG\r\n\x1a\n"))
 
+    def test_cloudflare_flux_image_contract(self):
+        import base64
+        import json
+        env = {"ASTRA_OMNI_IMAGE_ENDPOINT": "https://api.cloudflare.com/client/v4/accounts/example/ai/run/@cf/black-forest-labs/flux-1-schnell",
+               "ASTRA_OMNI_IMAGE_MODEL": "@cf/black-forest-labs/flux-1-schnell",
+               "ASTRA_OMNI_IMAGE_FREE_CONFIRMED": "1"}
+        def requester(request):
+            payload = json.loads(request.data)
+            self.assertEqual(payload["steps"], 4)
+            self.assertEqual(payload["prompt"], "scene")
+            return json.dumps({"success": True, "result": {"image": base64.b64encode(png()).decode()}}).encode()
+        with patch.dict("os.environ", env, clear=True):
+            result = generate_image("scene", requester=requester)
+            self.assertTrue(result.startswith(bytes.fromhex("89504e470d0a1a0a")))
+
     def test_immutable_deduplication_and_corruption(self):
         with tempfile.TemporaryDirectory() as root:
             a = store_asset(png(), root, kind="scene", prompt="first")
