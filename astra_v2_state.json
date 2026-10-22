@@ -2574,12 +2574,13 @@
     }
   },
   "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-22T21:45:43.712718+00:00",
+  "last_outcome": "skipped",
+  "last_error": "",
+  "last_preflight_at": "2026-10-22T21:46:43.663399+00:00",
   "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "last_preflight_outcome": "skipped",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-22T21:45:44.120492+00:00",
+    "at": "2026-10-22T21:46:43.751595+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "false",
@@ -6959,8 +6960,8 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-22T21:45:44.120433+00:00",
-    "publication_outcome": "published",
+    "at": "2026-10-22T21:46:43.751482+00:00",
+    "publication_outcome": "skipped",
     "publication_reason": "min_interval",
     "character_memory": "not_reported",
     "character_memory_error": null,
@@ -6970,9 +6971,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-22T21:45:44.120481+00:00",
+    "at": "2026-10-22T21:46:43.751578+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "skipped",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -6984,19 +6985,19 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-22T21:45:44.120387+00:00",
+    "at": "2026-10-22T21:46:43.751415+00:00",
     "preflight_due": "false",
     "preflight_step": "success",
     "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "published",
+    "outcome": "skipped",
     "reason": "min_interval",
     "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-22T21:45:44.120429+00:00",
+    "at": "2026-10-22T21:46:43.751477+00:00",
     "collection_status": "not_applicable_publisher_skipped",
     "publish_step": "skipped",
     "counters": {},
