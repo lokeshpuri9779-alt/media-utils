@@ -37,7 +37,12 @@ def generate_image(prompt, *, requester=None):
         return None
     endpoint, model = config
     native_gemini = endpoint.startswith("https://generativelanguage.googleapis.com/") and ":generateContent" in endpoint
-    if native_gemini:
+    cloudflare = endpoint.startswith("https://api.cloudflare.com/client/v4/accounts/") and "/ai/run/" in endpoint
+    if cloudflare:
+        if model != "@cf/black-forest-labs/flux-1-schnell" or not endpoint.endswith("/ai/run/" + model):
+            raise ValueError("Cloudflare endpoint/model mismatch or unsupported model")
+        payload = json.dumps({"prompt": prompt[:2048], "steps": 4}).encode()
+    elif native_gemini:
         payload = json.dumps({"contents": [{"parts": [{"text": prompt}]}],
                               "generationConfig": {"responseModalities": ["IMAGE"]}}).encode()
     else:
@@ -78,6 +83,26 @@ def generate_image(prompt, *, requester=None):
                 raise ValueError("Normalized PNG image too large")
             return decoded
     response = json.loads(raw)
+    if cloudflare:
+        if not response.get("success", False) or not isinstance(response.get("result"), dict):
+            raise ValueError("Cloudflare image generation unsuccessful")
+        encoded = response["result"].get("image")
+        if not isinstance(encoded, str):
+            raise ValueError("Cloudflare did not return base64 image")
+        decoded = base64.b64decode(encoded, validate=True)
+        if len(decoded) > MAX_BYTES:
+            raise ValueError("Cloudflare image too large")
+        with Image.open(io.BytesIO(decoded)) as source:
+            source.verify()
+        with Image.open(io.BytesIO(decoded)) as source:
+            if source.format not in ("JPEG", "PNG"):
+                raise ValueError("Cloudflare image format unsupported")
+            output = io.BytesIO()
+            source.convert("RGB").save(output, format="PNG")
+            normalized = output.getvalue()
+        if len(normalized) > MAX_BYTES:
+            raise ValueError("Cloudflare normalized image too large")
+        return normalized
     if native_gemini:
         parts = [part for candidate in response.get("candidates", [])
                  for part in candidate.get("content", {}).get("parts", [])
