@@ -77,13 +77,15 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
     body = json.dumps({"contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {"responseMimeType": "application/json",
                              "temperature": 0.9, "maxOutputTokens": 1500}}).encode()
-    # A second free-tier model is tried only after transient provider failures.
-    # Never switch on authentication, quota, invalid-model, or content errors.
+    # A second explicitly configured free-tier model may recover from a removed
+    # model (404) or transient failures. Never bypass auth, quota or policy errors.
     fallback = os.getenv("ASTRA_GEMINI_FALLBACK_MODEL", "gemini-2.5-flash-lite")
     if not re.fullmatch(r"[A-Za-z0-9._-]{1,80}", fallback):
         raise ValueError("Invalid Gemini fallback model")
     models = [model] + ([fallback] if fallback != model else [])
+    result = None
     for model_index, active_model in enumerate(models):
+        result = None
         req = urllib.request.Request(
             "https://generativelanguage.googleapis.com/v1beta/models/" + active_model + ":generateContent",
             data=body, method="POST", headers={
@@ -95,6 +97,8 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
                     result = json.load(response)
                 break
             except urllib.error.HTTPError as exc:
+                if exc.code == 404 and model_index + 1 < len(models):
+                    break
                 if exc.code in (500, 502, 503, 504):
                     if attempt < 2:
                         time.sleep(2 ** attempt)
@@ -112,7 +116,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         else:
             continue
         # A completed response ends failover; only exhausted transient errors continue.
-        if "result" in locals():
+        if result is not None:
             break
     candidates = result.get("candidates") or []
     if not candidates:
