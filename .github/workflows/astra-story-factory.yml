@@ -28,12 +28,21 @@ jobs:
         run: python -m pip install 'Pillow>=10,<12'
       - name: Verify generation and publishing safety
         working-directory: code
-        run: python -m unittest discover -s tests -p 'test_astra_story_factory.py'
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_story_factory.py'
+          python -m unittest discover -s tests -p 'test_story_factory_inventory.py'
+      - name: Check verified ready-video inventory
+        id: inventory
+        working-directory: code
+        run: |
+          python -m astra_v2.story_factory_inventory --inventory ../state/preproduced_video_inventory.json --root ../state --target 7
       - name: Generate review-only candidates
+        if: steps.inventory.outputs.replenish == 'true'
         working-directory: code
         run: |
           python -m astra_v2.story_factory --state ../state/story_factory_state.json --output ../state/story_factory_candidates.jsonl --batch-size 500
       - name: Validate candidate and review artifacts before state push
+        if: steps.inventory.outputs.replenish == 'true'
         working-directory: state
         run: |
           python - <<'PY'
@@ -57,6 +66,7 @@ jobs:
           print("Validated review-only replenishment batch:",len(candidates))
           PY
       - name: Build fail-closed editorial review packet
+        if: steps.inventory.outputs.replenish == 'true'
         working-directory: code
         run: |
           python -m astra_v2.story_factory_review_packet \
@@ -64,12 +74,15 @@ jobs:
             --reviews ../state/story_factory_review.jsonl \
             --output ../state/story_factory_editorial_packet.json
       - name: Clear previous image manifest for fresh-run accounting
+        if: steps.inventory.outputs.replenish == 'true'
         working-directory: state
         run: rm -f story_factory_image_manifest.json
       - name: Clear previous rewrite queue for fresh-run accounting
+        if: steps.inventory.outputs.replenish == 'true'
         working-directory: state
         run: rm -f story_factory_rewrite_queue.json
       - name: Rewrite a bounded editorial shortlist with existing Gemini
+        if: steps.inventory.outputs.replenish == 'true'
         working-directory: code
         env:
           ASTRA_GEMINI_ENABLED: ${{ secrets.GEMINI_API_KEY != '' && '1' || '0' }}
@@ -80,6 +93,7 @@ jobs:
           if [ "$ASTRA_GEMINI_ENABLED" != "1" ]; then echo "Gemini not configured; skipping rewrite"; exit 0; fi
           python -m astra_v2.story_factory_rewrite_queue --packet ../state/story_factory_editorial_packet.json --output ../state/story_factory_rewrite_queue.json --limit 3
       - name: Preproduce review-only images via configured free OmniRoute provider
+        if: steps.inventory.outputs.replenish == 'true'
         working-directory: code
         env:
           ASTRA_OMNI_IMAGE_ENDPOINT: ${{ vars.ASTRA_OMNI_IMAGE_ENDPOINT }}
