@@ -66,6 +66,14 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ffmpeg
           python -m pip install -r requirements.txt 'boto3>=1.34,<2'
+      - name: Validate complete independent review package before remote access
+        env:
+          STORY_PATH: ${{ inputs.story_path }}
+          RECEIPT_PATH: ${{ inputs.receipt_path }}
+          DECISIONS_PATH: ${{ inputs.decisions_path }}
+        run: |
+          python -m astra_v2.reviewed_artwork_intake \\
+            --story-json "$STORY_PATH" --receipt "$RECEIPT_PATH" --decisions "$DECISIONS_PATH"
       - name: Restore approved remote art and prepare Studio MP4
         env:
           STORY_PATH: ${{ inputs.story_path }}
