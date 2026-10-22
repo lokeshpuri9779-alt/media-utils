@@ -71,7 +71,7 @@ def count_trusted_preloads(state_path, target):
         excluded = set(published) | set(reserved)
         excluded.update(row.get("content_id") for row in pending.values() if isinstance(row, dict))
         from astra_v2.preload_queue import package_integrity_snapshot
-        report = package_integrity_snapshot(excluded_ids=excluded, max_packages=min(target, 12), max_age_hours=48, format_filter="short")
+        report = package_integrity_snapshot(excluded_ids=excluded, max_packages=min(max(target * 2, target), 24), max_age_hours=48, format_filter="short")
         # The snapshot checks trusted successful Main runs, package members,
         # content identities and exact MP4 SHA-256. It does not grant approval.
         return max(0, min(target, int(report.get("integrity_passed", 0))))
@@ -88,15 +88,21 @@ def main():
     parser.add_argument("--inventory", required=True)
     parser.add_argument("--root", required=True)
     parser.add_argument("--target", type=int, default=7)
+    parser.add_argument("--daily-uploads", type=int, default=0)
+    parser.add_argument("--buffer-hours", type=int, default=0)
     parser.add_argument("--publisher-state")
     args = parser.parse_args()
     if not 1 <= args.target <= 1000:
         raise ValueError("Invalid ready-video inventory target")
+    if args.daily_uploads < 0 or args.daily_uploads > 100 or args.buffer_hours < 0 or args.buffer_hours > 168:
+        raise ValueError("Invalid adaptive buffer settings")
+    if args.daily_uploads and args.buffer_hours:
+        args.target = min(1000, max(args.target, (args.daily_uploads * args.buffer_hours + 23) // 24))
     local_ready = count_ready(args.inventory, args.root)
     remote_ready = count_trusted_preloads(args.publisher_state, args.target) if args.publisher_state else 0
     ready = max(local_ready, remote_ready)
     replenish = ready < args.target
-    print("ASTRA_READY_VIDEO_INVENTORY=" + json.dumps({"verified_local": local_ready, "hash_verified_trusted_preloads": remote_ready, "counted_stock": ready, "target": args.target, "replenish": replenish, "publisher_revalidates": True}))
+    print("ASTRA_READY_VIDEO_INVENTORY=" + json.dumps({"verified_local": local_ready, "hash_verified_trusted_preloads": remote_ready, "counted_stock": ready, "target": args.target, "replenish": replenish, "publisher_revalidates": True, "stock_source": "verified_artifacts_not_publication_approval"}))
     import os
     if os.getenv("GITHUB_OUTPUT"):
         with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
