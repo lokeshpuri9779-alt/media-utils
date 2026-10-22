@@ -1,14 +1,14 @@
 {
-  "observed_at": "2026-10-22T18:51:43.691089+00:00",
-  "generated": 3,
+  "observed_at": "2026-10-22T18:58:04.107403+00:00",
+  "generated": 2,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 1,
+      "index": 0,
       "reason": "ValueError"
     },
     {
-      "index": 2,
+      "index": 1,
       "reason": "ValueError"
     },
     {
@@ -40,7 +40,15 @@
       "reason": "ValueError"
     },
     {
+      "index": 10,
+      "reason": "ValueError"
+    },
+    {
       "index": 11,
+      "reason": "ValueError"
+    },
+    {
+      "index": 12,
       "reason": "ValueError"
     },
     {
@@ -61,24 +69,16 @@
     },
     {
       "index": 17,
-      "reason": "JSONDecodeError"
+      "reason": "ValueError"
     },
     {
       "index": 18,
-      "reason": "JSONDecodeError"
-    },
-    {
-      "index": 19,
       "reason": "ValueError"
     }
   ],
-  "reviewed": 3,
-  "approved": 1,
-  "review_issues": [
-    "The title 'The Botanist and the Subterranean Ocean' closely echoes recently published premises in the provided comparison list, specifically 'The Botanist and the Singing Sands', leading to potential redundancy and lack of distinct originality.",
-    "The title 'The Rescuer of Frost Ridge' and premise closely parallel recently published works in the comparison history, specifically 'The Rescuer of Frost Peak' and 'The Rescuer of Frostpeak Ridge'.",
-    "ai_editorial_rejection"
-  ],
+  "reviewed": 2,
+  "approved": 2,
+  "review_issues": [],
   "approval_pair_present": true,
   "model_access": {
     "status": "ok",
