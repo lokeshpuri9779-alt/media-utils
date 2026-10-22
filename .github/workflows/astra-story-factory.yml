@@ -102,6 +102,33 @@ jobs:
               python -m astra_v2.omniroute_image_assets --queue ../state/story_factory_rewrite_queue.json --root ../state/omni_assets --manifest ../state/story_factory_image_manifest.json --limit 3
             fi
           fi
+      - name: Report actual image preproduction outcome
+        working-directory: state
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("story_factory_image_manifest.json")
+          if not p.exists():
+              print("::warning::ASTRA_IMAGE_RESULT=missing_manifest; no generated illustrations verified")
+          else:
+              result = json.loads(p.read_text())
+              assets = result.get("assets", [])
+              generated = sum(a.get("status") == "review_only" for a in assets)
+              cached = sum(a.get("status") == "cached_review_only" for a in assets)
+              failures = sum(a.get("status") == "generation_failed" for a in assets)
+              print("ASTRA_IMAGE_RESULT=" + json.dumps({
+                  "status": result.get("status"),
+                  "provider_calls": result.get("provider_calls", 0),
+                  "new_images": generated,
+                  "cached_images": cached,
+                  "generation_failures": failures,
+                  "production_ready": False
+              }, sort_keys=True))
+              if generated + cached == 0:
+                  print("::warning::ASTRA image preproduction produced no usable illustrations")
+          PY
       - name: Commit persistent cursor and latest review batch
         working-directory: state
         run: |
