@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-22",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 17,
+  "attempts": 18,
   "confirmed_today": 17,
-  "last_attempt_at": "2026-10-21T23:21:24.898262+00:00",
+  "last_attempt_at": "2026-10-22T01:03:04.890397+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -2485,14 +2485,40 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "quality_skip",
+  "pending": {
+    "epz3Zv2y-fI": {
+      "content_id": "rayvan-gemini-42a0c8fdf6f945b02b48",
+      "title": "The Rescuer of Frost Peak",
+      "day": "2026-10-22",
+      "uploaded_at": "2026-10-22T01:03:07.328202+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "00db06af858d00438de12af9ebdf8dbdb725d9d6d4398b85203768d20ff73ab7",
+      "story_beats": [
+        {
+          "speech": "I see the faint blinking emergency beacon through the dense whiteout up near the north ridge."
+        },
+        {
+          "speech": "The wind is howling fiercely, but I am closing the distance to the stranded climber now."
+        },
+        {
+          "speech": "Hang on just a little longer, Liam! I have reached your ledge and brought warm thermal blankets."
+        },
+        {
+          "speech": "Igniting the emergency flare now so the rescue chopper can lock onto our exact position safely."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-22T00:49:03.743198+00:00",
+  "last_preflight_at": "2026-10-22T01:00:56.523136+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-22T00:50:27.807997+00:00",
+    "at": "2026-10-22T01:03:07.879421+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -6616,13 +6642,36 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-42a0c8fdf6f945b02b48": {
+      "at": "2026-10-22T01:03:04.890380+00:00",
+      "title": "The Rescuer of Frost Peak",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "00db06af858d00438de12af9ebdf8dbdb725d9d6d4398b85203768d20ff73ab7",
+      "story_beats": [
+        {
+          "speech": "I see the faint blinking emergency beacon through the dense whiteout up near the north ridge."
+        },
+        {
+          "speech": "The wind is howling fiercely, but I am closing the distance to the stranded climber now."
+        },
+        {
+          "speech": "Hang on just a little longer, Liam! I have reached your ledge and brought warm thermal blankets."
+        },
+        {
+          "speech": "Igniting the emergency flare now so the rescue chopper can lock onto our exact position safely."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-22T00:50:27.807925+00:00",
-    "publication_outcome": "quality_skip",
-    "publication_reason": "no_approved_original_story_available",
-    "character_memory": "not_reported",
+    "at": "2026-10-22T01:03:07.879357+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -6630,82 +6679,66 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-22T00:50:27.807984+00:00",
+    "at": "2026-10-22T01:03:07.879410+00:00",
     "history_file_present": true,
-    "publication_outcome": "quality_skip",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-22T00:49:28.359508+00:00",
-    "outcome": "quality_skip",
-    "reason": "no_approved_original_story_available",
-    "content_id": "",
-    "video_url": "",
-    "story_selection": {
-      "considered": 67,
-      "not_ready": 64,
-      "policy_rejected": {
-        "not_production_ready": 3
-      },
-      "already_seen": 0,
-      "duration_rejected": 0,
-      "render_qa_rejected": 0,
-      "render_exception": {},
-      "approved": 0,
-      "exhausted": true,
-      "rejection_total": 67,
-      "next_action": "replenish_approved_story_supply"
-    }
+    "at": "2026-10-22T01:01:34.705126+00:00",
+    "outcome": "processing",
+    "reason": "",
+    "content_id": "rayvan-gemini-42a0c8fdf6f945b02b48",
+    "video_url": "https://www.youtube.com/watch?v=epz3Zv2y-fI",
+    "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-22T00:50:27.807666+00:00",
+    "at": "2026-10-22T01:03:07.879139+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "quality_skip",
-    "reason": "no_approved_original_story_available",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-22T00:50:27.807919+00:00",
+    "at": "2026-10-22T01:03:07.879351+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 0,
+        "eligible": 1,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3
         },
         "seen": 89,
-        "total": 156
+        "total": 157
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 156,
+        "before": 157,
         "fingerprint": 0,
         "id": 89,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 67,
+        "remaining": 68,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 67,
-        "remaining": 0
+        "pool": 68,
+        "remaining": 1
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
-        "approved": 0,
-        "considered": 67,
+        "approved": 1,
+        "considered": 1,
         "duration_rejected": 0,
-        "not_ready": 64,
-        "policy_rejected": {
-          "not_production_ready": 3
-        },
+        "not_ready": 0,
+        "policy_rejected": {},
         "render_exception": {},
         "render_qa_rejected": 0
       }
