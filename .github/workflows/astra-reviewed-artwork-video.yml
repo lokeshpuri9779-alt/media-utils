@@ -72,7 +72,7 @@ jobs:
           RECEIPT_PATH: ${{ inputs.receipt_path }}
           DECISIONS_PATH: ${{ inputs.decisions_path }}
         run: |
-          python -m astra_v2.reviewed_artwork_intake \\
+          python -m astra_v2.reviewed_artwork_intake \
             --story-json "$STORY_PATH" --receipt "$RECEIPT_PATH" --decisions "$DECISIONS_PATH"
       - name: Restore approved remote art and prepare Studio MP4
         env:
