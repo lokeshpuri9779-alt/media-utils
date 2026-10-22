@@ -1,0 +1,50 @@
+name: ASTRA - Independently Approved Artwork Source
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install image validation dependency
+        run: python -m pip install --disable-pip-version-check Pillow
+      - name: Validate reviewed artwork before packaging
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from astra.asset_library import load_assets
+          from astra_v2.reviewed_art_producer import export_bundles
+          manifest = Path("art/manifest.json")
+          data = json.loads(manifest.read_text(encoding="utf-8"))
+          rows = data.get("assets")
+          if not isinstance(rows, list) or not rows:
+              raise SystemExit("No independently approved artwork: refusing to publish empty artifact")
+          assets = load_assets(manifest)
+          if len(assets) != len(rows):
+              raise SystemExit("Unverified or missing approved art asset")
+          if not all(a.get("status") == "approved" and a.get("sha256") and a.get("story_content_id") and a.get("scene_id") for a in assets):
+              raise SystemExit("Incomplete reviewed-art approval manifest")
+          bundles = export_bundles(manifest, "runtime-reviewed-art-source-validation")
+          if not bundles:
+              raise SystemExit("No valid reviewed-art story bundles")
+          print("ASTRA_APPROVED_ART_SOURCE_STORIES=" + str(len(bundles)))
+          PY
+      - name: Upload verified reviewed artwork
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-approved-art
+          path: |
+            art/manifest.json
+            art/assets/reviewed/
+          if-no-files-found: error
+          retention-days: 30
