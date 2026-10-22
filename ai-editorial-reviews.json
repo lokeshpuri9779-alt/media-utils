@@ -43,6 +43,18 @@
         "reviewed_at": "2026-10-21T22:14:43.769314+00:00",
         "review_model": "gemini-3.1-flash-lite"
       }
+    },
+    {
+      "content_id": "rayvan-gemini-fcf698cac1023d657733",
+      "story_sha256": "42379f4c01f2ff2ab514e0b8a60b4537c49f7f5ae6924b3cf7181252605dc091",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise, setting, and character archetypes (a stationmaster, a midnight express, and a mystery involving a lost item) are highly derivative of the provided list of recent publications, specifically 'The Stationmaster's Last Carriage and the Midnight Ledger' and 'The Badger and the Midnight Railway Mystery'.",
+        "The narrative structure follows a repetitive pattern of 'The [Profession] and the [Object/Mystery]' that has been saturated in the provided dataset.",
+        "The causal mechanism (a mechanical animal solving a mystery in a Victorian railway setting) lacks sufficient originality to distinguish it from the established cluster of similar stories provided for comparison."
+      ],
+      "record": null
     }
   ]
 }
