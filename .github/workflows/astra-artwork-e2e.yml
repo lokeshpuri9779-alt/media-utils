@@ -25,6 +25,9 @@ on:
       - 'tests/test_reviewed_art_bundle.py'
       - 'astra_v2/remote_reviewed_art.py'
       - 'tests/test_remote_reviewed_art.py'
+      - 'astra_v2/preload_art_receipt.py'
+      - 'astra_v2/preload_worker.py'
+      - 'tests/test_preload_art_receipt.py'
       - 'astra_v2/creative.py'
       - '.github/workflows/astra-artwork-e2e.yml'
 
@@ -62,5 +65,7 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_reviewed_art_bundle.py' -v
       - name: Verify remote approved artwork receipt transport
         run: python -m unittest discover -s tests -p 'test_remote_reviewed_art.py' -v
+      - name: Verify preload remote artwork receipt restoration
+        run: python -m unittest discover -s tests -p 'test_preload_art_receipt.py' -v
       - name: Print end-to-end proof
         run: python -m astra.artwork_e2e_smoke
