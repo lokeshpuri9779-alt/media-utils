@@ -71,7 +71,7 @@ def count_trusted_preloads(state_path, target):
         excluded = set(published) | set(reserved)
         excluded.update(row.get("content_id") for row in pending.values() if isinstance(row, dict))
         from astra_v2.preload_queue import package_integrity_snapshot
-        report = package_integrity_snapshot(excluded_ids=excluded, max_packages=min(target, 12), max_age_hours=48)
+        report = package_integrity_snapshot(excluded_ids=excluded, max_packages=min(target, 12), max_age_hours=48, format_filter="short")
         # The snapshot checks trusted successful Main runs, package members,
         # content identities and exact MP4 SHA-256. It does not grant approval.
         return max(0, min(target, int(report.get("integrity_passed", 0))))
