@@ -129,14 +129,10 @@ jobs:
           fi
           # Ubuntu hosted runners normally include ffmpeg; avoid apt mirror stalls.
           if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
-            for attempt in 1 2 3; do
-              if timeout 120s sudo apt-get update -qq -o Acquire::Retries=2 &&
-                 timeout 120s sudo DEBIAN_FRONTEND=noninteractive apt-get install -y ffmpeg; then
-                break
-              fi
-              echo "FFmpeg installation attempt ${attempt} failed"
-              sleep $((attempt * 5))
-            done
+            # Ubuntu mirror downloads can exceed two minutes; avoid killing
+            # apt midway through a large codec dependency download.
+            timeout 120s sudo apt-get update -qq -o Acquire::Retries=2
+            timeout 600s sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -o Acquire::Retries=3 ffmpeg
           fi
           command -v ffmpeg
           command -v ffprobe
