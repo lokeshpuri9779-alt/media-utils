@@ -157,7 +157,7 @@ def inventory_eligibility_snapshot(excluded_ids=(), max_age_hours=None, now=None
 
 
 
-def package_integrity_snapshot(excluded_ids=(), max_packages=4, max_age_hours=None):
+def package_integrity_snapshot(excluded_ids=(), max_packages=4, max_age_hours=None, format_filter=None):
     """Bounded read-only ZIP/hash audit; does not certify publishability.
 
     Trust the source run before downloading, and never extract ZIP members.
@@ -222,6 +222,13 @@ def package_integrity_snapshot(excluded_ids=(), max_packages=4, max_age_hours=No
                             or candidate.get("content_id") != cid
                             or candidate.get("format") not in ("short", "long")
                             or not isinstance(candidate.get("sha256"), str)):
+                        result["integrity_failed"] += 1
+                        continue
+                    if format_filter is not None and candidate.get("format") != format_filter:
+                        continue
+                    if (not isinstance(candidate.get("renderer"), str)
+                            or not candidate["renderer"].strip()
+                            or candidate["renderer"].strip() == "unknown"):
                         result["integrity_failed"] += 1
                         continue
                     digest = hashlib.sha256()
