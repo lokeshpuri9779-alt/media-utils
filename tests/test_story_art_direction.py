@@ -3,6 +3,10 @@ import hashlib
 import copy
 import io
 import json
+import os
+import shutil
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -72,6 +76,22 @@ class StoryArtTests(unittest.TestCase):
             (Path(root) / first['assets'][0]['path']).write_bytes(b'broken')
             result = preproduce(queue(story()), root, generator=lambda p: self.fail('must not regenerate silently'))
             self.assertEqual(result['assets'][0]['status'], 'generation_failed')
+
+    @unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"), "FFmpeg tools required")
+    def test_studio_preview_produces_valid_vertical_mp4(self):
+        with tempfile.TemporaryDirectory() as root:
+            output = Path(root) / "studio-preview.mp4"
+            env = {**os.environ, "ASTRA_VISUAL_ARTIFACT_BACKDROPS": "0"}
+            subprocess.run([sys.executable, "studio_renderer.py", "--preview", str(output)],
+                           check=True, timeout=180, env=env, capture_output=True, text=True)
+            self.assertTrue(output.is_file())
+            self.assertGreater(output.stat().st_size, 1024)
+            probe = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0",
+                                    "-show_entries", "stream=width,height",
+                                    "-of", "json", str(output)],
+                                   check=True, capture_output=True, text=True, timeout=30)
+            stream = json.loads(probe.stdout)["streams"][0]
+            self.assertEqual((stream["width"], stream["height"]), (540, 960))
 
     def test_reviewed_image_exports_and_renders_exact_scene(self):
         with tempfile.TemporaryDirectory() as root:
