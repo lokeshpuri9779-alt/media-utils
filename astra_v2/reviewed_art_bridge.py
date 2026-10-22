@@ -6,6 +6,7 @@ import argparse
 import hashlib
 import json
 import shutil
+import tempfile
 from pathlib import Path
 
 from astra_v2.story_art_direction import illustration_requests
@@ -23,6 +24,7 @@ def build_approved_manifest(queue_path, image_manifest_path, decisions_path, ass
     root = Path(asset_root).resolve()
     destination = Path(output_root).resolve()
     entries = []
+    staged = []
     stories = {row["story"]["content_id"]: row["story"] for row in queue.get("rewrites", [])
                if isinstance(row, dict) and row.get("status") == "awaiting_independent_editorial_approval"
                and isinstance(row.get("story"), dict) and isinstance(row["story"].get("content_id"), str)}
@@ -74,12 +76,17 @@ def build_approved_manifest(queue_path, image_manifest_path, decisions_path, ass
             target.parent.mkdir(parents=True, exist_ok=True)
             if target.is_file() and hashlib.sha256(target.read_bytes()).hexdigest() != approved[key]:
                 raise ValueError("Approved asset destination hash mismatch")
-            if not target.is_file():
-                shutil.copyfile(image_path, target)
+            staged.append((image_path, target, approved[key]))
             entries.append({"id": "reviewed-" + cid + "-" + key[1], "category": "background",
                             "status": "approved", "story_content_id": cid, "scene_id": key[1],
                             "sha256": approved[key], "path": str(target.relative_to(destination)),
                             "tags": [], "source": "independently-reviewed-story-factory"})
+    # Only write files after every approved scene has passed validation.
+    for source, target, digest in staged:
+        if not target.is_file():
+            shutil.copyfile(source, target)
+        if hashlib.sha256(target.read_bytes()).hexdigest() != digest:
+            raise ValueError("Staged renderer asset hash mismatch")
     return {"assets": entries}
 
 
