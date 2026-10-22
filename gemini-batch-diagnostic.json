@@ -1,6 +1,6 @@
 {
-  "observed_at": "2026-10-22T00:53:30.214956+00:00",
-  "generated": 1,
+  "observed_at": "2026-10-22T06:52:12.640593+00:00",
+  "generated": 0,
   "requested": 20,
   "generation_failures": [
     {
@@ -17,7 +17,7 @@
     },
     {
       "index": 3,
-      "reason": "JSONDecodeError"
+      "reason": "ValueError"
     },
     {
       "index": 4,
@@ -33,6 +33,10 @@
     },
     {
       "index": 7,
+      "reason": "ValueError"
+    },
+    {
+      "index": 8,
       "reason": "ValueError"
     },
     {
@@ -61,7 +65,7 @@
     },
     {
       "index": 15,
-      "reason": "JSONDecodeError"
+      "reason": "ValueError"
     },
     {
       "index": 16,
@@ -80,10 +84,12 @@
       "reason": "ValueError"
     }
   ],
-  "reviewed": 1,
-  "approved": 1,
-  "review_issues": [],
-  "approval_pair_present": true,
+  "reviewed": null,
+  "approved": null,
+  "review_issues": [
+    "review_not_completed"
+  ],
+  "approval_pair_present": false,
   "model_access": {
     "status": "ok",
     "models": [
