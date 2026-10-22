@@ -29,6 +29,27 @@ def restore_for_preload(*, environ=None, store=None):
     if index_file:
         from astra_v2.reviewed_art_receipt_index import lookup
         story_id = env.get("ASTRA_REVIEWED_ART_CONTENT_ID", "").strip()
+        if not story_id and env.get("ASTRA_REVIEWED_ART_AUTO_SELECT") == "1":
+            from astra_v2.editorial_approved_intake import approved_intake
+            from astra_v2.proposal_history import load_history
+            from astra_v2.reviewed_art_eligible_selection import select_eligible_art_story
+            source = Path(env["ASTRA_EDITORIAL_STORIES_FILE"])
+            reviews = Path(env["ASTRA_EDITORIAL_REVIEWS_FILE"])
+            publisher = Path(env.get("ASTRA_PUBLISHER_STATE_PATH", "astra_v2_state.json"))
+            history = Path(env.get("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json"))
+            if not publisher.is_file() or not history.is_file():
+                raise ValueError("reviewed_art_auto_selection_requires_history")
+            story_doc = json.loads(source.read_text(encoding="utf-8"))
+            review_doc = json.loads(reviews.read_text(encoding="utf-8"))
+            eligible = approved_intake(story_doc["stories"], review_doc["reviews"],
+                                       load_history(publisher, history))["stories"]
+            story_id = select_eligible_art_story(
+                receipt, store, eligible, env.get("ASTRA_PRELOAD_LANE", "0"),
+                env.get("ASTRA_PRELOAD_LANES", "1"))
+            if not story_id:
+                raise ValueError("no_eligible_reviewed_art_story_in_lane")
+            env["ASTRA_REVIEWED_ART_CONTENT_ID"] = story_id
+            os.environ["ASTRA_REVIEWED_ART_CONTENT_ID"] = story_id
         if not story_id:
             raise ValueError("reviewed_art_content_id_required")
         receipt = lookup(receipt, story_id, store)
