@@ -40,7 +40,7 @@ def prepare_artwork(queue, images, decisions, asset_root, output_root):
     with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=manifest.parent,
                                      prefix=".reviewed-art-", suffix=".tmp", delete=False) as handle:
         temporary = Path(handle.name)
-        json.dump({"assets": merged}, handle, indent=2, sort_keys=True)
+        json.dump({**existing, "assets": merged}, handle, indent=2, sort_keys=True)
         handle.write("\n")
     try:
         os.replace(temporary, manifest)
