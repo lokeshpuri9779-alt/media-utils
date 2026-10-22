@@ -304,6 +304,16 @@ def make_candidate(path, excluded_ids, excluded_titles):
                                story for story in premium_stories
                                if not story.get("series_id")
                                and int.from_bytes(hashlib.sha256(str(story.get("content_id", "")).encode()).digest()[:8], "big") % lane_count == lane_index]
+    # An approved-art manifest is only valid for its explicitly pinned story.
+    # Never attach its images to another candidate, even on a different lane.
+    if os.getenv("ASTRA_PRELOAD_REVIEWED_ART_MANIFEST"):
+        pinned_id = os.getenv("ASTRA_REVIEWED_ART_CONTENT_ID", "").strip()
+        if not pinned_id:
+            raise ValueError("reviewed_art_content_id_required_for_candidate")
+        premium_stories = [story for story in premium_stories
+                           if story.get("content_id") == pinned_id]
+        if not premium_stories:
+            raise ValueError("pinned_reviewed_art_story_not_available_in_lane")
     from astra_v2.publication_quality import publication_rejection
     selection = {"considered": 0, "not_ready": 0, "policy_rejected": {},
                  "already_seen": 0, "duration_rejected": 0,
