@@ -94,6 +94,8 @@ jobs:
               echo "ASTRA_STATE_RESTORE=$f:missing"
             fi
           done
+          git show origin/astra-state:astra_duplicate_protection.json > astra_duplicate_protection.json
+          test -s astra_duplicate_protection.json
           if test -s astra_v2_state.json && test -s astra_story_history.json; then
             echo "ASTRA_EDITORIAL_HISTORY_READY=1"
           else
