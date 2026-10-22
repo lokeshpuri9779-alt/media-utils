@@ -52,7 +52,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_approved_artwork_render_proof.py' -v
           python -m unittest discover -s tests -p 'test_artwork_pixel_proof.py' -v
       - name: Verify complete approved-scene Studio MP4 offline
-        run: python tests/studio_approved_mp4_e2e.py
+        run: python -m tests.studio_approved_mp4_e2e
       - name: Render with existing Studio and Kokoro
         run: |
           python - <<'PY'
