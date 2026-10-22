@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from astra_v2.prepare_reviewed_video import prepare_video, verify_ready_video
+from astra_v2.prepare_reviewed_video import prepare_video, verify_ready_video, archive_ready_video
 
 
 class PreparationTests(unittest.TestCase):
@@ -75,6 +75,40 @@ class PreparationTests(unittest.TestCase):
             ready.write_text(json.dumps(payload))
             with self.assertRaisesRegex(ValueError, "video_not_eligible"):
                 verify_ready_video(video, ready)
+
+    def test_archive_requires_remote_roundtrip_and_matching_identity(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            video = root / "video.mp4"
+            ready = root / "video.ready.json"
+            video.write_bytes(b"reviewed video bytes")
+            digest = hashlib.sha256(video.read_bytes()).hexdigest()
+            ready.write_text(json.dumps({
+                "schema": "astra.reviewed.video.ready.v1", "story_content_id": "story-a",
+                "video_sha256": digest, "video_bytes": video.stat().st_size,
+                "scenes": 1, "independent_artwork_approved": True, "published": False,
+            }))
+            class FakeStore:
+                def __init__(self):
+                    self.refreshed = False
+                def put(self, path):
+                    return {"uri": "s3://test/archive", "sha256": digest, "bytes": video.stat().st_size}
+                def verify(self, record, *, refresh=False):
+                    self.refreshed = refresh
+                    return video
+            store = FakeStore()
+            result = archive_ready_video(video, ready, store, expected_story_id="story-a")
+            self.assertTrue(store.refreshed)
+            self.assertFalse(result["published"])
+            self.assertEqual(result["video"]["sha256"], digest)
+            with patch.object(store, "put", return_value={"sha256": "0" * 64, "bytes": video.stat().st_size}):
+                with self.assertRaisesRegex(ValueError, "archived_video_identity_mismatch"):
+                    archive_ready_video(video, ready, store)
+            with patch.object(store, "verify", return_value=root / "corrupt.mp4"):
+                (root / "corrupt.mp4").write_bytes(b"corrupt")
+                with self.assertRaisesRegex(ValueError, "archived_video_corrupt"):
+                    archive_ready_video(video, ready, store)
 
 if __name__ == "__main__":
     unittest.main()
