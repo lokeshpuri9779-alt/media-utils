@@ -2574,18 +2574,17 @@
     }
   },
   "pending": {},
-  "last_outcome": "skipped",
-  "last_error": "",
-  "last_preflight_at": "2026-10-22T21:46:43.663399+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_outcome": "ready",
+  "last_preflight_at": "2026-10-22T21:52:16.215841+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-22T21:46:43.751595+00:00",
+    "at": "2026-10-22T21:59:04.940509+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
-    "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
+    "render_due": "true",
+    "job_status_before_persist": "failure",
+    "dependencies_step": "failure",
     "publish_step": "skipped",
     "cover_tests": "",
     "motion_tests": "skipped",
@@ -6960,9 +6959,9 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-22T21:46:43.751482+00:00",
-    "publication_outcome": "skipped",
-    "publication_reason": "min_interval",
+    "at": "2026-10-22T21:59:04.940464+00:00",
+    "publication_outcome": "ready",
+    "publication_reason": "ready",
     "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
@@ -6971,9 +6970,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-22T21:46:43.751578+00:00",
+    "at": "2026-10-22T21:59:04.940502+00:00",
     "history_file_present": true,
-    "publication_outcome": "skipped",
+    "publication_outcome": "ready",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -6985,19 +6984,19 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-22T21:46:43.751415+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-22T21:59:04.940424+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "skipped",
-    "job_status_before_persist": "success",
-    "outcome": "skipped",
-    "reason": "min_interval",
+    "job_status_before_persist": "failure",
+    "outcome": "ready",
+    "reason": "ready",
     "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-22T21:46:43.751477+00:00",
+    "at": "2026-10-22T21:59:04.940461+00:00",
     "collection_status": "not_applicable_publisher_skipped",
     "publish_step": "skipped",
     "counters": {},
