@@ -76,12 +76,29 @@ jobs:
           ASTRA_OMNI_IMAGE_MODEL: ${{ vars.ASTRA_OMNI_IMAGE_MODEL }}
           ASTRA_OMNI_IMAGE_FREE_CONFIRMED: ${{ vars.ASTRA_OMNI_IMAGE_FREE_CONFIRMED }}
           ASTRA_OMNI_IMAGE_API_KEY: ${{ secrets.ASTRA_OMNI_IMAGE_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python -m unittest discover -s tests -p 'test_omniroute_image_assets.py'
           if [ -z "$ASTRA_OMNI_IMAGE_ENDPOINT" ] || [ -z "$ASTRA_OMNI_IMAGE_MODEL" ]; then
-            echo "Image provider not configured; leaving asset warehouse unchanged"
-          elif [ -f ../state/story_factory_rewrite_queue.json ]; then
-            python -m astra_v2.omniroute_image_assets --queue ../state/story_factory_rewrite_queue.json --root ../state/omni_assets --manifest ../state/story_factory_image_manifest.json --limit 3
+            echo "::warning::ASTRA image generation skipped: image endpoint or model is not configured"
+          elif [ "$ASTRA_OMNI_IMAGE_FREE_CONFIRMED" != "1" ]; then
+            echo "::warning::ASTRA image generation skipped: free-tier confirmation is not enabled"
+          elif [ ! -f ../state/story_factory_rewrite_queue.json ]; then
+            echo "::warning::ASTRA image generation skipped: story rewrite queue is missing"
+          else
+            case "$ASTRA_OMNI_IMAGE_ENDPOINT" in
+              https://generativelanguage.googleapis.com/*:generateContent)
+                if [ -z "$ASTRA_OMNI_IMAGE_API_KEY" ]; then
+                  ASTRA_OMNI_IMAGE_API_KEY="$GEMINI_API_KEY"
+                  export ASTRA_OMNI_IMAGE_API_KEY
+                fi
+                ;;
+            esac
+            if [ -z "$ASTRA_OMNI_IMAGE_API_KEY" ]; then
+              echo "::warning::ASTRA image generation skipped: image provider API key is missing"
+            else
+              python -m astra_v2.omniroute_image_assets --queue ../state/story_factory_rewrite_queue.json --root ../state/omni_assets --manifest ../state/story_factory_image_manifest.json --limit 3
+            fi
           fi
       - name: Commit persistent cursor and latest review batch
         working-directory: state
