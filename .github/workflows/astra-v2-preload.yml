@@ -241,6 +241,34 @@ jobs:
           python -m unittest discover -s tests -p 'test_reviewed_art_bridge.py' -v
           python -m unittest discover -s tests -p 'test_reviewed_art_preload.py' -v
           python -m unittest discover -s tests -p 'test_preserve_reviewed_manifest.py' -v
+      - name: Restore pinned artwork for scheduled render
+        if: vars.ASTRA_REVIEWED_ART_SCHEDULED_RESTORE == '1'
+        env:
+          ASTRA_ARTIFACT_S3_BUCKET: ${{ vars.ASTRA_ARTIFACT_S3_BUCKET }}
+          ASTRA_ARTIFACT_S3_ENDPOINT: ${{ vars.ASTRA_ARTIFACT_S3_ENDPOINT }}
+          ASTRA_ARTIFACT_S3_PREFIX: ${{ vars.ASTRA_ARTIFACT_S3_PREFIX }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.ASTRA_ARTIFACT_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.ASTRA_ARTIFACT_AWS_SECRET_ACCESS_KEY }}
+          ASTRA_REVIEWED_ART_CONTENT_ID: ${{ vars.ASTRA_REVIEWED_ART_CONTENT_ID }}
+          ASTRA_REVIEWED_ART_INDEX_JSON: ${{ vars.ASTRA_REVIEWED_ART_INDEX_JSON }}
+        run: |
+          python -m pip install boto3
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from astra_v2.preload_art_receipt import restore_for_preload
+          receipt = os.environ.get('ASTRA_REVIEWED_ART_INDEX_JSON', '')
+          if not receipt or len(receipt.encode()) > 4096:
+              raise ValueError('pinned_art_index_required')
+          Path('astra-art-index-receipt.json').write_text(receipt, encoding='utf-8')
+          os.environ['ASTRA_REVIEWED_ART_INDEX_RECEIPT_FILE'] = 'astra-art-index-receipt.json'
+          manifest = restore_for_preload()
+          if manifest is None:
+              raise RuntimeError('scheduled_art_restore_missing')
+          with open(os.environ['GITHUB_ENV'], 'a', encoding='utf-8') as output:
+              output.write('ASTRA_PRELOAD_REVIEWED_ART_MANIFEST=' + str(manifest.resolve()) + '\n')
+          PY
+
       - name: Render and approve next original video
         id: render
         env:
