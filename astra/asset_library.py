@@ -5,6 +5,7 @@ assets are ignored so the existing renderer remains the safe fallback.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -86,6 +87,18 @@ def load_assets(manifest_path: str | Path = DEFAULT_MANIFEST) -> list[dict]:
         candidate = (root / rel).resolve()
         if root not in candidate.parents or not candidate.is_file():
             continue
+        # A reviewed image must still match its approved bytes at render time.
+        # Do not silently fall back to a different scene after tampering.
+        digest = row.get("sha256")
+        if digest is not None:
+            if not isinstance(digest, str) or len(digest) != 64 or any(
+                    char not in "0123456789abcdef" for char in digest):
+                continue
+            try:
+                if hashlib.sha256(candidate.read_bytes()).hexdigest() != digest:
+                    continue
+            except OSError:
+                continue
         category = str(row.get("category") or "").lower()
         if category not in {"character", "prop", "background", "overlay"}:
             continue

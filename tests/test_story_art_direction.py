@@ -115,6 +115,25 @@ class StoryArtTests(unittest.TestCase):
                 export_reviewed_render_manifest(produced, root,
                     {k: {**v, "sha256": "bad"} for k, v in decisions.items()}, manifest)
 
+    def test_reviewed_art_rejects_modified_bytes_at_render_time(self):
+        with tempfile.TemporaryDirectory() as root:
+            produced = preproduce(queue(story()), root, generator=lambda _: png(), limit=2)
+            decisions = {row["request_sha256"]: {
+                "approved": True, "sha256": row["sha256"],
+                "semantic_match": True, "character_continuity": True}
+                for row in produced["assets"]}
+            manifest = Path(root) / "art" / "manifest.json"
+            export_reviewed_render_manifest(produced, root, decisions, manifest)
+            asset = json.loads(manifest.read_text())["assets"][0]
+            scene = {"artwork_asset_id": asset["id"], "story_content_id": "otter-bell",
+                     "scene_id": "001"}
+            self.assertIsNotNone(select_asset(scene, manifest))
+            location = Path(root) / asset["path"]
+            location.write_bytes(location.read_bytes() + b"tampered")
+            self.assertIsNone(select_asset(scene, manifest))
+            self.assertFalse(draw_asset_for_scene(Image.new("RGB", (540, 960)),
+                                                 scene, manifest_path=manifest))
+
     def test_explicit_binding_never_selects_another_story_or_scene(self):
         with tempfile.TemporaryDirectory() as root:
             art = Path(root) / 'art'
