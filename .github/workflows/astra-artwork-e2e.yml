@@ -14,6 +14,7 @@ on:
       - 'tests/test_reviewed_artwork_intake.py'
       - 'astra/asset_library.py'
       - 'tests/test_reviewed_studio_render.py'
+      - 'tests/test_reviewed_art_mp4_smoke.py'
       - '.github/workflows/astra-artwork-e2e.yml'
 
 permissions:
@@ -38,5 +39,7 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_reviewed_artwork_intake.py' -v
       - name: Prove Studio draws exact reviewed scene and fails on tampering
         run: python -m unittest discover -s tests -p 'test_reviewed_studio_render.py' -v
+      - name: Encode and decode two-scene reviewed artwork MP4 with audio
+        run: python -m unittest discover -s tests -p 'test_reviewed_art_mp4_smoke.py' -v
       - name: Print end-to-end proof
         run: python -m astra.artwork_e2e_smoke
