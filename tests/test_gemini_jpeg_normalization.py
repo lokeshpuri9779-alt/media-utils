@@ -21,5 +21,18 @@ class GeminiJpegNormalizationTests(unittest.TestCase):
         self.assertEqual(validate_png(result, "scene"), {"width": 640, "height": 960})
 
 
+    def test_mislabeled_png_is_rejected_as_jpeg(self):
+        buffer = io.BytesIO()
+        Image.new("RGB", (640, 960), (80, 120, 170)).save(buffer, format="PNG")
+        response = json.dumps({"candidates": [{"content": {"parts": [{
+            "inlineData": {"mimeType": "image/jpeg", "data": base64.b64encode(buffer.getvalue()).decode()}
+        }]}}]}).encode()
+        env = {"ASTRA_OMNI_IMAGE_ENDPOINT": "https://generativelanguage.googleapis.com/v1beta/models/test:generateContent",
+               "ASTRA_OMNI_IMAGE_MODEL": "test", "ASTRA_OMNI_IMAGE_FREE_CONFIRMED": "1"}
+        with patch.dict("os.environ", env, clear=True):
+            with self.assertRaisesRegex(ValueError, "MIME does not match"):
+                generate_image("portrait scene", requester=lambda req: response)
+
+
 if __name__ == "__main__":
     unittest.main()
