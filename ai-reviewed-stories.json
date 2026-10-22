@@ -4,11 +4,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-6c15f6bd6f78b49db1c2",
-      "title": "The Comet Welder and the Iron Breach",
-      "hook": "The Warning Alarm",
-      "question": "Can two estranged mechanics seal a hull breach before the solar wind destroys their vessel?",
-      "answer": "Yes, by trusting each other's distinct repair methods and welding the primary airlock shut.",
+      "content_id": "rayvan-gemini-c598053e1917daf7c758",
+      "title": "The Canopy Watchers and the Amber Root",
+      "hook": "The Frayed Crossing",
+      "question": "Can two wary forest dwellers trust each other to harvest the bioluminescent amber root before the midnight frost locks the deep ravine?",
+      "answer": "Through shared strength and careful coordination, they anchor the vine bridge and unearth the root, securing warmth for both their families through the harsh winter.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -16,281 +16,62 @@
       ],
       "story_beats": [
         {
-          "headline": "The Warning Alarm",
-          "speech": "We cannot wait for the automated seals. The solar storm is tearing right through our primary bulkhead.",
-          "visual": "ship",
-          "label": "Bulkhead Breach",
-          "story_beat": "reveal",
-          "visual_prompt": "Orion stands inside the dark-steel Airlock Bay, holding the plasma_torch in his right hand. He points toward a jagged tear in the outer hull where green starlight streams through. His face is tense under the harsh yellow hazard lights.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Heated Debate",
-          "speech": "Your quick-patch method will melt the whole circuit board. We need to reroute power through the secondary conduits first.",
-          "visual": "door",
-          "label": "Disagreement",
-          "story_beat": "build",
-          "visual_prompt": "Lyra gestures sharply with her bare hands toward the control panel next to the heavy bulkhead door, her expression frustrated. Orion stands a pace away, arms crossed over his teal utility jumpsuit, holding the plasma_torch loosely at his side.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Risky Compromise",
-          "speech": "Fine, weld the magnetic plate over the fracture while I manually balance the core pressure from this terminal.",
-          "visual": "robot",
-          "label": "Joint Repair",
-          "story_beat": "mechanism",
-          "visual_prompt": "Orion presses the magnetic_patch firmly against the sparking hull fracture, while Lyra rapidly taps buttons on a wall-mounted diagnostic console, her face illuminated by the blue screen glow.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Safe Return",
-          "speech": "The seal is holding tight. Working together was the only way we survived that solar gale.",
+          "headline": "The Frayed Crossing",
+          "speech": "The frost is coming fast, Mira. We must cross the chasm now or lose the amber root forever.",
           "visual": "forest",
-          "label": "Sealed Hull",
-          "story_beat": "payoff",
-          "visual_prompt": "Orion and Lyra stand side by side in the Airlock Bay, looking out the reinforced viewport at a peaceful green nebula. Both characters smile tiredly, resting their hands on the secure magnetic_patch now locked firmly in place over the hull.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "visual_bible": {
-        "style": "Cinematic sci-fi animation, high contrast lighting, detailed metallic textures, vibrant atmospheric glows.",
-        "characters": {
-          "Orion": "A tall mechanic with a scarred chin, wearing a heavy teal utility jumpsuit with reinforced magnetic boots, and a weathered brass welding visor pushed up on his forehead.",
-          "Lyra": "An agile engineer with short silver hair, wearing a slate-gray pressure vest over thermal leggings, and carrying a glowing plasma torch clipped to her belt."
-        },
-        "locations": {
-          "Airlock Bay": "A cavernous, dark-steel compartment with yellow hazard stripes along the floor, dangling ceiling cables, and a massive circular outer hatch displaying a distant green nebula.",
-          "Engine Core": "A cylindrical room dominated by a pulsating blue fusion reactor, crisscrossed by overhead catwalks and humming hydraulic pipes."
-        },
-        "objects": {
-          "plasma_torch": "A handheld tool with an ergonomic black grip, a heavy titanium nozzle, and a blue energy readout flickering on the side.",
-          "magnetic_patch": "A circular hexagonal plate made of dark tungsten, pulsing with faint white alignment grids."
-        }
-      },
-      "plot_fingerprint": "a94aa53367cf68da606542add52c9342b6ec28edf3134160d93a51782968d538"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
-      "content_id": "rayvan-gemini-76d4a2c07e46f21d0bb6",
-      "title": "The Soup Spoon That Sang Opera",
-      "hook": "The Grand Unveiling",
-      "question": "Can an inventor sell a singing soup spoon in a loud farmers market?",
-      "answer": "Yes, by letting the soprano spoon audition right inside a boiling pot of potato chowder.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Grand Unveiling",
-          "speech": "Behold the culinary marvel of the century! A silver soup spoon that hits high C whenever the broth boils!",
-          "visual": "planet",
-          "label": "Market Debut",
-          "story_beat": "reveal",
-          "visual_prompt": "Barnaby Finch proudly holds the singing_spoon aloft in the busy Bramblewood Open-Air Market, surrounded by hanging vegetable stalls. He wears his tweed vest and spectacles, smiling wildly while Matilda Higgins watches from her nearby fruit stand with folded arms.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Audition",
-          "speech": "If your cutlery is so talented, prove it right now in my famous hot potato chowder before anyone buys a single bite.",
-          "visual": "door",
-          "label": "The Test",
-          "story_beat": "build",
-          "visual_prompt": "Matilda Higgins gestures firmly toward the potato_pot resting on a brass camping stove in the center of her stall. Barnaby Finch leans over cautiously, holding the singing_spoon just above the bubbling white soup while curious shoppers gather closely around.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "High C in the Chowder",
-          "speech": "Magnificent! The silver soloist is warming up its vocal cords and the entire vegetable stand is completely captivated now!",
-          "visual": "signal",
-          "label": "Aria Active",
-          "story_beat": "mechanism",
-          "visual_prompt": "Steam rises from the potato_pot as the singing_spoon partially dips into the chowder, emitting visible musical notes from its bowl. Barnaby Finch points triumphantly at the pot, and Matilda Higgins looks astonished with her mouth open in sheer delight.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Sold to the Chef",
-          "speech": "I will take three dozen singing spoons right now, because dinner service needs a proper soprano in every single bowl!",
-          "visual": "ship",
-          "label": "Commercial Triumph",
-          "story_beat": "payoff",
-          "visual_prompt": "A cheerful customer hands a stack of gold coins to Barnaby Finch, who eagerly packs singing spoons into a lined wooden box. Matilda Higgins is happily ladling potato chowder into bowls for a massive queue of laughing, paying market patrons.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "visual_bible": {
-        "style": "Bright, colorful stop-motion claymation aesthetic with expressive character features and rich textural details.",
-        "characters": {
-          "Barnaby Finch": "An eccentric inventor with wild gray hair, wearing a patched tweed vest over a striped shirt, round wire-rimmed spectacles, and an expression of desperate enthusiasm. Proportions are slightly cartoonish with large expressive hands.",
-          "Matilda Higgins": "A practical produce vendor with hair tied in a neat red polka-dot bandana, wearing a durable canvas apron over a green dress, sporting a skeptical raised eyebrow."
-        },
-        "locations": {
-          "Bramblewood Open-Air Market": "A bustling, sunlit cobblestone town square packed with striped canvas stalls, hanging vegetable baskets, and a dense crowd of shoppers."
-        },
-        "objects": {
-          "singing_spoon": "A polished silver soup spoon with an ornate handle carved into the miniature shape of a tiny opera singer's face, holding a microscopic scroll.",
-          "potato_pot": "A heavy, dented iron soup pot filled with thick, bubbling white potato chowder, sitting atop a small portable brass camping stove."
-        }
-      },
-      "plot_fingerprint": "ab7094ca9da3db8503218c71b9547fb48b96b8436f7f6573aacb5d7dc31cf8de"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
-      "content_id": "rayvan-gemini-0ea54aa6e7499f49089b",
-      "title": "The Icebreaker's Dilemma in the White Desert",
-      "hook": "The Signal in the Blizzard",
-      "question": "Should the expedition captain risk the whole ship to save a stranded tracker?",
-      "answer": "She launches the final scout sled, choosing human life over strict mission schedules.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Signal in the Blizzard",
-          "speech": "Captain Vesper, our long-range scanner just picked up a distress pulse from the eastern ridge. It is Jax.",
-          "visual": "signal",
-          "label": "Emergency Detected",
-          "story_beat": "reveal",
-          "visual_prompt": "Captain Vesper stands before the glowing green radar_console on the Command Bridge, staring at a blinking red dot on the screen while holding a steaming mug of black coffee.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Weighing the Peril",
-          "speech": "If we launch the rescue sled now, the incoming whiteout could trap us in the ravine forever.",
-          "visual": "ship",
-          "label": "The Hard Choice",
-          "story_beat": "build",
-          "visual_prompt": "Captain Vesper looks out the frosted windows of the Command Bridge at the churning snowstorm outside, holding her mug with both hands, her face illuminated by green instrument glow.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Deploying the Sled",
-          "speech": "Prep the rescue sled immediately. I will not leave a member of our crew behind in this frost.",
-          "visual": "robot",
-          "label": "Engine Ignition",
-          "story_beat": "mechanism",
-          "visual_prompt": "Captain Vesper stands beside the orange rescue_sled inside the cargo bay, pressing the ignition toggle while wearing her heavy crimson parka and snow goggles resting on her forehead.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Reunion on the Ice",
-          "speech": "Grab the tow cable, Jax! We are heading back to the ship before the storm closes our path.",
-          "visual": "door",
-          "label": "Safe Return",
-          "story_beat": "payoff",
-          "visual_prompt": "Tracker Jax in his torn yellow snowsuit climbs aboard the rescue_sled on the Frozen Ridge, grasping the heavy steel tow cable handed to him by Captain Vesper amidst howling wind and swirling snow.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "visual_bible": {
-        "style": "Cinematic 3D animation, stark polar lighting, crisp cold textures, photorealistic snow and ice.",
-        "characters": {
-          "Captain Vesper": "A weathered woman in her late forties with sharp hazel eyes, wearing a heavy crimson parka with frost-rimed fur lining, proportioned solidly.",
-          "Tracker Jax": "A lean man in his thirties with a stubbled jaw and anxious expression, wearing a torn yellow snowsuit covered in white frost."
-        },
-        "locations": {
-          "Command Bridge": "A dimly lit room with glowing green instrument panels, frosted multi-paned windows looking out onto endless pack ice.",
-          "Frozen Ridge": "A jagged expanse of blue glacier ice under a swirling pale sky, wind whipping loose powder into the air."
-        },
-        "objects": {
-          "radar_console": "A glowing green vector screen mounted in a brushed steel housing, displaying blinking tracking dots across a grid.",
-          "rescue_sled": "A low-slung motorized tracked vehicle painted safety orange, equipped with dual headlights and an emergency tow winch."
-        }
-      },
-      "plot_fingerprint": "33850d37c166aeae6044bd9e4060950a3784efc883ad5435086a8ed16aa1e246"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
-      "content_id": "rayvan-gemini-5287313e91b4f26ded9d",
-      "title": "The Rescuer of Frostpeak Ridge",
-      "hook": "The Silent Emergency",
-      "question": "How did the mountain rescue team locate the lost hiker during the blizzard?",
-      "answer": "They followed an emergency rescue signal reflected through a high-altitude emergency beacon tower.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Silent Emergency",
-          "speech": "Dispatch, this is Elena. The storm is blinding, but I just detected a weak emergency signal near the north ridge.",
-          "visual": "signal",
           "label": "Beat One",
           "story_beat": "reveal",
-          "visual_prompt": "Elena stands on the snowy ridge holding a crackling black radio in her gloved right hand, staring intently at the blinking amber emergency signal light mounted on a steel pole.",
+          "visual_prompt": "Wide shot of the deep whispering_ravine. Toren stands on the near slate ledge wearing his heavy tan wool coat, holding the frayed hemp climbing_harness in his leather-gloved hands. Across the gap, Mira peers down anxiously from the opposite side, her woven cap dusted with early frost flakes.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Climbing the Cliff",
-          "speech": "Hold on a little longer! I am cutting my way up the ice wall now, keep your voice steady for me.",
-          "visual": "forest",
+          "headline": "Securing the Anchor",
+          "speech": "Hold the anchor steady while I wedge this timber brace into the crevice so the bridge doesn't snap.",
+          "visual": "planet",
           "label": "Beat Two",
           "story_beat": "build",
-          "visual_prompt": "Elena uses her titanium ice axe in her right hand to strike a vertical wall of hard-packed blue ice, her crimson parka contrasting sharply against the frozen cliffside.",
+          "visual_prompt": "Medium shot of Toren kneeling on the damp rock face, firmly pressing a carved wooden wedge into a slate fissure. Mira leans in from the left, gripping the climbing_harness tightly to tension the line, her olive-green tunic stained with damp moss.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Reaching the Door",
-          "speech": "I found the emergency shelter, but the iron latch is frozen shut by the ice. Give me your heavy shovel.",
-          "visual": "door",
+          "headline": "Reaching the Tuber",
+          "speech": "Careful now, the soil is giving way beneath the roots. Reach down together on my three.",
+          "visual": "signal",
           "label": "Beat Three",
           "story_beat": "mechanism",
-          "visual_prompt": "Elena leans against the heavy frosted iron door of the stone shelter, using both hands to pry at the frozen hinges with the flat edge of her ice axe.",
+          "visual_prompt": "Close-up of Mira and Toren kneeling side by side at the edge of the chasm floor. Both reach into the dark loam with gloved hands, their fingers brushing against the glowing amber_root that pulses with warm golden light.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Safe Return",
-          "speech": "You are safe now. Wrap this thermal blanket tightly around your shoulders while I call the extraction helicopter.",
-          "visual": "ship",
+          "headline": "The Warm Hearth",
+          "speech": "We made it across in time. This radiant root will keep both our forest homes warm until spring arrives.",
+          "visual": "door",
           "label": "Beat Four",
           "story_beat": "payoff",
-          "visual_prompt": "Inside the warm stone shelter, Elena hands a silver foil thermal blanket to the shivering hiker, who clutches it with both hands while staring gratefully at her.",
+          "visual_prompt": "Warm interior shot of a rustic wooden shelter at dusk. Mira and Toren sit together by a glowing hearth, smiling as they place the glowing amber_root into a stone basin, casting long, cozy amber shadows across the timber walls.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
       "visual_bible": {
-        "style": "Cinematic realism with crisp winter lighting, detailed textures of snow, ice, and weathered gear.",
+        "style": "Cinematic stop-motion animation aesthetic with rich mossy textures, deep emerald shadows, and warm golden bioluminescent lighting.",
         "characters": {
-          "elena": "A seasoned mountain rescue leader in her late 30s, featuring a determined face, wind-chapped skin, wearing a heavy crimson parka, black insulated trousers, and thick mountaineering boots.",
-          "hiker": "A stranded young hiker in his 20s, with a pale face, wide anxious eyes, wearing a torn blue jacket and frost-dusted wool cap."
+          "mira": "A nimble wood-forager with bright amber eyes, braided dark hair tucked beneath a woven cap, wearing a patched olive-green tunic, leather travel trousers, and thick-soled climbing boots.",
+          "toren": "A broad-shouldered, patient stone-carver with a kind weathered face, a neatly trimmed grey-streaked beard, wearing a heavy tan wool coat, sturdy leather gloves, and a tool belt laden with wooden wedges."
         },
         "locations": {
-          "ridge": "A steep, jagged alpine ridge covered in deep snowdrifts under a slate-gray storm sky.",
-          "shelter": "A remote stone emergency shelter embedded into the cliffside with a frozen iron door."
+          "whispering_ravine": "A plunging, mist-filled chasm deep within the ancient timberlands, spanned by a fraying suspension rope and walled with damp slate and creeping moss."
         },
         "objects": {
-          "beacon": "A heavy metal emergency rescue signal transmitter mounted on a steel pole, blinking with a steady amber LED light.",
-          "axe": "A lightweight titanium ice axe with a rubber-wrapped handle held by Elena.",
-          "radio": "A black handheld two-way radio with a coiled black antenna and a cracked digital screen."
+          "amber_root": "A thick, knobby subterranean tuber that pulses with a warm golden luminescence, cradled in a bed of damp black soil.",
+          "climbing_harness": "A woven hemp rope harness with polished wooden carabiners, smelling faintly of pine resin.",
+          "meteorological_dial": "A circular brass and cedarwood pocket dial with etched frost markings and a spinning copper needle pointing toward a falling gradient."
         }
       },
-      "plot_fingerprint": "d94c6bdb92f627efd2984f971b056969db14fbc03f0c5be646504eaad2897cc2"
+      "plot_fingerprint": "3d5e4aa00c229343a035894b95b19717bbd23421ed0ea4c21c7eadee699160df"
     }
   ]
 }
