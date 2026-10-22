@@ -29,4 +29,16 @@ def load_history(publisher_path="astra_v2_state.json", story_path="astra_story_h
         if any(not isinstance(item, dict) for item in stories):
             raise ValueError("Invalid story history entry")
         records.extend(stories)
+    protection = Path("astra_duplicate_protection.json")
+    if protection.exists():
+        ledger = json.loads(protection.read_text(encoding="utf-8"))
+        if not isinstance(ledger, dict) or not isinstance(ledger.get("published"), dict) or not isinstance(ledger.get("stories"), list):
+            raise ValueError("Invalid duplicate protection ledger")
+        for cid, item in ledger["published"].items():
+            if not isinstance(item, dict):
+                raise ValueError("Invalid protected publication")
+            records.append({"content_id": str(cid), **item})
+        if any(not isinstance(item, dict) for item in ledger["stories"]):
+            raise ValueError("Invalid protected story history")
+        records.extend(ledger["stories"])
     return records
