@@ -34,7 +34,7 @@ class GeminiImageContractTests(unittest.TestCase):
             "ASTRA_OMNI_IMAGE_FREE_CONFIRMED": "1",
         }
         with patch.dict("os.environ", env, clear=True):
-            with self.assertRaisesRegex(ValueError, "exactly one PNG"):
+            with self.assertRaisesRegex(ValueError, "exactly one supported image"):
                 generate_image("scene", requester=lambda req: b'{"candidates": []}')
 
 
