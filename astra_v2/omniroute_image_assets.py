@@ -66,13 +66,14 @@ def generate_image(prompt, *, requester=None):
         parts = [part for candidate in response.get("candidates", [])
                  for part in candidate.get("content", {}).get("parts", [])
                  if isinstance(part, dict)]
-        images = [part["inlineData"]["data"] for part in parts
+        images = [part["inlineData"] for part in parts
                   if isinstance(part.get("inlineData"), dict)
-                  and part["inlineData"].get("mimeType") == "image/png"
+                  and part["inlineData"].get("mimeType") in ("image/png", "image/jpeg")
                   and isinstance(part["inlineData"].get("data"), str)]
         if len(images) != 1:
-            raise ValueError("Gemini did not return exactly one PNG image")
-        encoded = images[0]
+            raise ValueError("Gemini did not return exactly one supported image")
+        encoded = images[0]["data"]
+        image_mime = images[0]["mimeType"]
     else:
         data = response.get("data", [])
         if not isinstance(data, list) or not data or not isinstance(data[0], dict) or not isinstance(data[0].get("b64_json"), str):
@@ -86,6 +87,18 @@ def generate_image(prompt, *, requester=None):
         raise ValueError("Provider returned invalid base64 image") from exc
     if len(decoded) > MAX_BYTES:
         raise ValueError("Decoded image too large")
+    if native_gemini and image_mime == "image/jpeg":
+        # Gemini may return JPEG; Studio's immutable asset warehouse requires PNG.
+        with Image.open(io.BytesIO(decoded)) as source:
+            source.verify()
+        with Image.open(io.BytesIO(decoded)) as source:
+            if source.format != "JPEG":
+                raise ValueError("Gemini image MIME does not match its content")
+            output = io.BytesIO()
+            source.convert("RGB").save(output, format="PNG")
+            decoded = output.getvalue()
+        if len(decoded) > MAX_BYTES:
+            raise ValueError("Normalized PNG image too large")
     return decoded
 
 
