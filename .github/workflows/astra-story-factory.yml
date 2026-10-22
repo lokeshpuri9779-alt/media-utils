@@ -70,6 +70,8 @@ jobs:
         working-directory: code
         env:
           ASTRA_GEMINI_ENABLED: ${{ secrets.GEMINI_API_KEY != '' && '1' || '0' }}
+          ASTRA_GEMINI_MODEL: ${{ vars.ASTRA_GEMINI_MODEL || 'gemini-3.5-flash-lite' }}
+          ASTRA_GEMINI_FALLBACK_MODEL: ${{ vars.ASTRA_GEMINI_FALLBACK_MODEL || 'gemini-3.1-flash-lite' }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           if [ "$ASTRA_GEMINI_ENABLED" != "1" ]; then echo "Gemini not configured; skipping rewrite"; exit 0; fi
