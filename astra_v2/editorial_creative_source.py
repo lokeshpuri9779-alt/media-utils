@@ -46,6 +46,31 @@ def load_editorial_stories():
             if len(candidates) != 1:
                 continue
             match = semantic_duplicate_match(candidates[0], history_records)
+            # Identify which persisted state bucket contains the exact content ID.
+            # This is diagnostic only; never relax history or approval checks.
+            state = json.loads(publisher.read_text(encoding="utf-8"))
+            target_id = entry["content_id"]
+            history_sources = []
+            for bucket in ("published", "pending", "reserved", "rejected"):
+                entries = state.get(bucket, {})
+                if isinstance(entries, dict):
+                    for key, item in entries.items():
+                        if key == target_id or (isinstance(item, dict) and
+                                                item.get("content_id") == target_id):
+                            history_sources.append({"source": "publisher_state",
+                                                    "bucket": bucket})
+            historical = json.loads(history.read_text(encoding="utf-8"))
+            historical_items = (historical.get("stories", [])
+                                if isinstance(historical, dict) else historical)
+            if isinstance(historical_items, list):
+                for item in historical_items:
+                    if isinstance(item, dict) and item.get("content_id") == target_id:
+                        history_sources.append({"source": "story_history",
+                                                "bucket": "historical"})
+            print("ASTRA_EDITORIAL_HISTORY_SOURCES=" + json.dumps({
+                "content_id": target_id, "matches": history_sources,
+                "publication_triggered": False,
+            }, sort_keys=True))
             print("ASTRA_EDITORIAL_DUPLICATE_EVIDENCE=" + json.dumps({
                 "content_id": entry["content_id"],
                 "semantic_match": match,
