@@ -1,5 +1,6 @@
 """Opt-in remote-reviewed artwork -> Studio MP4 preparation; never publishes."""
 import argparse
+import hashlib
 import json
 import subprocess
 import sys
@@ -50,10 +51,25 @@ def prepare_video(story_path, receipt_path, decisions_path, output_root, output_
         raise ValueError("studio_video_missing")
     report_path = output.with_suffix(".json")
     report = json.loads(report_path.read_text(encoding="utf-8"))
+    if not isinstance(report, dict) or not isinstance(report.get("scenes"), list):
+        raise ValueError("studio_video_invalid_report")
     rendered = report.get("scenes", [])
-    if len(rendered) != expected or any(not shot.get("artwork_asset_id") for shot in rendered):
+    if len(rendered) != expected or any(not isinstance(shot, dict) or not shot.get("artwork_asset_id") for shot in rendered):
         raise ValueError("studio_video_artwork_binding_failed")
-    return {"video": str(output), "manifest": str(manifest), "scenes": expected, "published": False}
+    digest = hashlib.sha256(output.read_bytes()).hexdigest()
+    ready_path = output.with_suffix(".ready.json")
+    readiness = {"schema": "astra.reviewed.video.ready.v1", "story_content_id": content_id,
+                 "video_sha256": digest, "video_bytes": output.stat().st_size,
+                 "scenes": expected, "independent_artwork_approved": True,
+                 "published": False}
+    temporary = ready_path.with_suffix(".ready.json.tmp")
+    try:
+        temporary.write_text(json.dumps(readiness, sort_keys=True) + "\\n", encoding="utf-8")
+        temporary.replace(ready_path)
+    finally:
+        temporary.unlink(missing_ok=True)
+    return {"video": str(output), "manifest": str(manifest), "readiness": str(ready_path),
+            "sha256": digest, "scenes": expected, "published": False}
 
 
 def main():
