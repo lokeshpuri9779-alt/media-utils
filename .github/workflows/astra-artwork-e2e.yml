@@ -19,6 +19,9 @@ on:
       - 'tests/test_reviewed_art_bridge_cli.py'
       - 'astra_v2/reviewed_art_preload.py'
       - 'tests/test_reviewed_manifest_metadata.py'
+      - 'astra_v2/preload_reviewed_art.py'
+      - 'tests/test_preload_reviewed_art.py'
+      - 'astra_v2/creative.py'
       - '.github/workflows/astra-artwork-e2e.yml'
 
 permissions:
@@ -49,5 +52,7 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_reviewed_art_bridge_cli.py' -v
       - name: Verify reviewed artwork manifest metadata preservation
         run: python -m unittest discover -s tests -p 'test_reviewed_manifest_metadata.py' -v
+      - name: Verify production preload opt-in reviewed artwork binding
+        run: python -m unittest discover -s tests -p 'test_preload_reviewed_art.py' -v
       - name: Print end-to-end proof
         run: python -m astra.artwork_e2e_smoke
