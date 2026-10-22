@@ -1139,7 +1139,12 @@ def render_frame(plan,t,genre,total):
         # A raw storyboard may be inspected before assets are bound. Actual
         # production scenes must never render blank after failed acquisition.
         raise CreativeReject('Scene media missing from cache: refusing overlapping/filler fallback.')
-    if layers['draw_visual']:
+    if s.get('artwork_asset_id'):
+        # Independently reviewed scene art is the primary visual, regardless of
+        # which procedural/director layer the story grammar would have chosen.
+        # draw_visual raises on missing, modified or wrong-scene artwork.
+        draw_visual(im, s, t, u, accent)
+    elif layers['draw_visual']:
         # The unified Studio fiction renderer owns all supported animal casts.
         # Unrepresentable scenes fail closed; never mask a broken story with
         # unrelated generic art or silently switch publishing engines.
@@ -1166,9 +1171,9 @@ def render_frame(plan,t,genre,total):
     if genre != 'fiction':
         transition_layer(im,s,t,u,accent)
         _micro_scene_transition(im,micro,accent)
-    if layers['draw_cached_media']:
+    if not s.get('artwork_asset_id') and layers['draw_cached_media']:
         im=composite_cached_asset(im,s.get('resolved_asset',{}),t=t,u=u,shot=s)
-    elif layers['draw_director_asset']:
+    elif not s.get('artwork_asset_id') and layers['draw_director_asset']:
         asset_layer(im,s,t,u,accent)
     d=ImageDraw.Draw(im)
     comparison_labels=s.get('comparison_labels') or []

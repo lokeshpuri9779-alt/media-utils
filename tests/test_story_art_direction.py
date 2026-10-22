@@ -115,6 +115,24 @@ class StoryArtTests(unittest.TestCase):
                 export_reviewed_render_manifest(produced, root,
                     {k: {**v, "sha256": "bad"} for k, v in decisions.items()}, manifest)
 
+    def test_render_frame_prioritizes_approved_art_over_other_layers(self):
+        tree = ast.parse(Path("studio_renderer.py").read_text())
+        render = next(node for node in tree.body
+                      if isinstance(node, ast.FunctionDef) and node.name == "render_frame")
+        branches = [node for node in ast.walk(render) if isinstance(node, ast.If)]
+        reviewed = [node for node in branches
+                    if isinstance(node.test, ast.Call)
+                    and isinstance(node.test.func, ast.Attribute)
+                    and node.test.func.attr == "get"
+                    and node.test.args and isinstance(node.test.args[0], ast.Constant)
+                    and node.test.args[0].value == "artwork_asset_id"]
+        self.assertTrue(reviewed, "Approved artwork must have a direct render branch")
+        self.assertTrue(any(isinstance(node, ast.Call)
+                            and isinstance(node.func, ast.Name)
+                            and node.func.id == "draw_visual"
+                            for node in ast.walk(reviewed[0].body[0])),
+                        "Approved artwork must be composited through Studio")
+
     def test_complete_reviewed_scene_binding_is_exact_and_atomic(self):
         with tempfile.TemporaryDirectory() as root:
             produced = preproduce(queue(story()), root, generator=lambda _: png(), limit=2)
