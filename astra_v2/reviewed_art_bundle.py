@@ -49,7 +49,15 @@ def install_bundle(archive, destination):
         manifest = stage / "art" / "manifest.json"
         if not manifest.is_file():
             raise ValueError("approved_art_manifest_missing")
+        raw = json.loads(manifest.read_text(encoding="utf-8"))
+        rows = raw.get("assets")
+        if not isinstance(rows, list) or not rows:
+            raise ValueError("approved_art_manifest_empty")
         assets = load_assets(manifest)
+        if len(assets) != len(rows):
+            raise ValueError("approved_art_manifest_contains_unverified_assets")
+        if len({(a.get("story_content_id"), a.get("scene_id")) for a in assets}) != len(assets):
+            raise ValueError("approved_art_duplicate_scene_identity")
         if not assets or not all(a.get("status") == "approved" and a.get("sha256")
                                  and a.get("story_content_id") and a.get("scene_id")
                                  for a in assets):
