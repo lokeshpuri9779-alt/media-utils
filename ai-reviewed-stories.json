@@ -4,11 +4,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-42a0c8fdf6f945b02b48",
-      "title": "The Rescuer of Frost Peak",
-      "hook": "The Hidden Signal",
-      "question": "Can a lone mountain tracker reach a trapped climber before the blizzard cuts off the descent?",
-      "answer": "Yes, by utilizing an emergency signal flare to guide the rescue helicopter through the blinding alpine snow.",
+      "content_id": "rayvan-gemini-6c15f6bd6f78b49db1c2",
+      "title": "The Comet Welder and the Iron Breach",
+      "hook": "The Warning Alarm",
+      "question": "Can two estranged mechanics seal a hull breach before the solar wind destroys their vessel?",
+      "answer": "Yes, by trusting each other's distinct repair methods and welding the primary airlock shut.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -16,62 +16,62 @@
       ],
       "story_beats": [
         {
-          "headline": "The Hidden Signal",
-          "speech": "I see the faint blinking emergency beacon through the dense whiteout up near the north ridge.",
-          "visual": "signal",
-          "label": "Emergency Spotted",
+          "headline": "The Warning Alarm",
+          "speech": "We cannot wait for the automated seals. The solar storm is tearing right through our primary bulkhead.",
+          "visual": "ship",
+          "label": "Bulkhead Breach",
           "story_beat": "reveal",
-          "visual_prompt": "Elena stands on the edge of a snowy cliffside, holding the rescue_radio in her gloved right hand, staring up at a distant blinking red signal in the dark sky.",
+          "visual_prompt": "Orion stands inside the dark-steel Airlock Bay, holding the plasma_torch in his right hand. He points toward a jagged tear in the outer hull where green starlight streams through. His face is tense under the harsh yellow hazard lights.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Ascending the Ridge",
-          "speech": "The wind is howling fiercely, but I am closing the distance to the stranded climber now.",
-          "visual": "forest",
-          "label": "The Climb",
-          "story_beat": "build",
-          "visual_prompt": "Elena battles a fierce blizzard, climbing a steep icy slope surrounded by snow-dusted pine trees, gripping her ice axe firmly with both hands.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Reaching the Shelter",
-          "speech": "Hang on just a little longer, Liam! I have reached your ledge and brought warm thermal blankets.",
+          "headline": "The Heated Debate",
+          "speech": "Your quick-patch method will melt the whole circuit board. We need to reroute power through the secondary conduits first.",
           "visual": "door",
-          "label": "The Contact",
-          "story_beat": "mechanism",
-          "visual_prompt": "Elena kneels next to Liam under a rocky overhang, wrapping a silver thermal blanket around his shoulders while holding the signal_flare in her left hand.",
+          "label": "Disagreement",
+          "story_beat": "build",
+          "visual_prompt": "Lyra gestures sharply with her bare hands toward the control panel next to the heavy bulkhead door, her expression frustrated. Orion stands a pace away, arms crossed over his teal utility jumpsuit, holding the plasma_torch loosely at his side.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Guidance Through the Storm",
-          "speech": "Igniting the emergency flare now so the rescue chopper can lock onto our exact position safely.",
-          "visual": "planet",
-          "label": "The Extraction",
+          "headline": "The Risky Compromise",
+          "speech": "Fine, weld the magnetic plate over the fracture while I manually balance the core pressure from this terminal.",
+          "visual": "robot",
+          "label": "Joint Repair",
+          "story_beat": "mechanism",
+          "visual_prompt": "Orion presses the magnetic_patch firmly against the sparking hull fracture, while Lyra rapidly taps buttons on a wall-mounted diagnostic console, her face illuminated by the blue screen glow.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Return",
+          "speech": "The seal is holding tight. Working together was the only way we survived that solar gale.",
+          "visual": "forest",
+          "label": "Sealed Hull",
           "story_beat": "payoff",
-          "visual_prompt": "Elena and Liam stand together on the snowy peak under a starry midnight sky, watching a bright crimson flare illuminate the clouds as a rescue helicopter approaches.",
+          "visual_prompt": "Orion and Lyra stand side by side in the Airlock Bay, looking out the reinforced viewport at a peaceful green nebula. Both characters smile tiredly, resting their hands on the secure magnetic_patch now locked firmly in place over the hull.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
       "visual_bible": {
-        "style": "Cinematic live-action photography with cold blue tones, visible breath vapor, and dramatic mountain lighting.",
+        "style": "Cinematic sci-fi animation, high contrast lighting, detailed metallic textures, vibrant atmospheric glows.",
         "characters": {
-          "elena": "A seasoned mountain rescue specialist in her late 30s with weathered skin, steady blue eyes, wearing a heavy crimson parka, thermal goggles resting on her forehead, and professional alpine climbing gear.",
-          "liam": "A stranded hiker in his late 20s, exhausted and shivering, wearing a torn yellow jacket dusted with fresh snow, huddled against a granite rock wall."
+          "Orion": "A tall mechanic with a scarred chin, wearing a heavy teal utility jumpsuit with reinforced magnetic boots, and a weathered brass welding visor pushed up on his forehead.",
+          "Lyra": "An agile engineer with short silver hair, wearing a slate-gray pressure vest over thermal leggings, and carrying a glowing plasma torch clipped to her belt."
         },
         "locations": {
-          "summit_ledge": "A steep, wind-scoured granite cliffside at high altitude, surrounded by jagged peaks and thick swirling mist.",
-          "valley_base": "A snowy alpine basin framed by dense pine forests and steep icy ridges."
+          "Airlock Bay": "A cavernous, dark-steel compartment with yellow hazard stripes along the floor, dangling ceiling cables, and a massive circular outer hatch displaying a distant green nebula.",
+          "Engine Core": "A cylindrical room dominated by a pulsating blue fusion reactor, crisscrossed by overhead catwalks and humming hydraulic pipes."
         },
         "objects": {
-          "signal_flare": "A heavy steel emergency flare canister emitting a bright, intense crimson beam and thick white smoke.",
-          "rescue_radio": "A rugged black military-grade handheld transceiver with a short rubber antenna and a frost-covered keypad."
+          "plasma_torch": "A handheld tool with an ergonomic black grip, a heavy titanium nozzle, and a blue energy readout flickering on the side.",
+          "magnetic_patch": "A circular hexagonal plate made of dark tungsten, pulsing with faint white alignment grids."
         }
       },
-      "plot_fingerprint": "00db06af858d00438de12af9ebdf8dbdb725d9d6d4398b85203768d20ff73ab7"
+      "plot_fingerprint": "a94aa53367cf68da606542add52c9342b6ec28edf3134160d93a51782968d538"
     }
   ]
 }
