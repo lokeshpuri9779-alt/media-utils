@@ -1,19 +1,20 @@
 {
-  "observed_at": "2026-10-22T19:21:00.277467+00:00",
-  "generated": 0,
+  "observed_at": "2026-10-22T19:25:11.924733+00:00",
+  "generated": 12,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 0,
-      "reason": "provider_http_400"
+      "index": 12,
+      "reason": "provider_http_429"
     }
   ],
-  "reviewed": null,
-  "approved": null,
+  "reviewed": 12,
+  "approved": 1,
   "review_issues": [
-    "review_not_completed"
+    "review_failed:HTTP_429",
+    "review_provider:rate_limited"
   ],
-  "approval_pair_present": false,
+  "approval_pair_present": true,
   "model_access": {
     "status": "ok",
     "models": [
