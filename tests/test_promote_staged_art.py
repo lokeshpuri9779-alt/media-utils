@@ -49,6 +49,17 @@ class PromotionTests(unittest.TestCase):
                     payload["assets"][0]["sha256"] = "0" * 64
                     decision.write_text(json.dumps({**payload, "signature": sign()}))
                     promote(manifest, semantic, decision, root / "rejected")
+            # A forged top-level semantic_pass cannot override a failed scene.
+            semantic_data = json.loads(semantic.read_text())
+            semantic_data["scenes"][0]["composition"] = False
+            semantic.write_text(json.dumps(semantic_data))
+            payload["assets"][0]["sha256"] = digest
+            decision.write_text(json.dumps({**payload, "signature": sign()}))
+            with patch.dict(os.environ, {"ASTRA_ART_APPROVAL_HMAC_KEY": key}):
+                with self.assertRaisesRegex(ValueError, "semantic_scene_quality_not_passed"):
+                    promote(manifest, semantic, decision, root / "failed-semantic")
+            semantic_data["scenes"][0]["composition"] = True
+            semantic.write_text(json.dumps(semantic_data))
             payload["assets"][0]["sha256"] = digest
             decision.write_text(json.dumps({**payload, "signature": sign()}))
             with patch.dict(os.environ, {"ASTRA_ART_APPROVAL_HMAC_KEY": key}):
