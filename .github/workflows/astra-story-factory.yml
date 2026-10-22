@@ -63,6 +63,9 @@ jobs:
             --candidates ../state/story_factory_candidates.jsonl \
             --reviews ../state/story_factory_review.jsonl \
             --output ../state/story_factory_editorial_packet.json
+      - name: Clear previous image manifest for fresh-run accounting
+        working-directory: state
+        run: rm -f story_factory_image_manifest.json
       - name: Rewrite a bounded editorial shortlist with existing Gemini
         working-directory: code
         env:
