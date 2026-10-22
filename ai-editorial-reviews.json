@@ -115,6 +115,21 @@
         "review_provider:provider_unavailable"
       ],
       "record": null
+    },
+    {
+      "content_id": "rayvan-gemini-0ae9393e9d417d22a61c",
+      "story_sha256": "80d6576fff2cde5b6be11a13f1bde6d62ef6487f48338ea9d1df2a462c66b302",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-0ae9393e9d417d22a61c",
+        "story_sha256": "80d6576fff2cde5b6be11a13f1bde6d62ef6487f48338ea9d1df2a462c66b302",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the premises or plot points of the provided list of recent publications.; The narrative demonstrates clear causal coherence, moving logically from the discovery of the heirloom to the decision to sacrifice it for the greater good.; The content is safe, suitable for a general audience, and does not violate YouTube policies.; There are no copyright or trademark concerns identified in the character names or plot structure.",
+        "reviewed_at": "2026-10-22T21:42:38.088292+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      }
     }
   ]
 }
