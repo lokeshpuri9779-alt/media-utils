@@ -46,6 +46,29 @@ jobs:
         run: |
           test -s "$APPROVAL_PATH"
           git ls-files --error-unmatch "$APPROVAL_PATH"
+      - name: Verify source run provenance before artifact download
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          gh api "repos/$REPOSITORY/actions/runs/$STAGING_RUN_ID" > /tmp/astra-source-run.json
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          run = json.loads(Path("/tmp/astra-source-run.json").read_text())
+          expected_repo = os.environ["REPOSITORY"]
+          if (run.get("repository", {}).get("full_name") != expected_repo
+                  or run.get("head_repository", {}).get("full_name") != expected_repo
+                  or run.get("path") != ".github/workflows/astra-gemini-art-staging.yml"
+                  or run.get("event") != "workflow_dispatch"
+                  or run.get("head_branch") != "main"
+                  or run.get("status") != "completed"
+                  or run.get("conclusion") != "success"):
+              raise SystemExit("untrusted_or_incomplete_art_staging_run")
+          PY
       - name: Retrieve exact staged images from GitHub Actions
         uses: actions/download-artifact@v4
         with:
