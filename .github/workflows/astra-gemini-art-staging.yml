@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: |
           git fetch origin astra-state
-          for f in astra_v2_state.json astra_story_history.json runtime-health/ai-reviewed-stories.json runtime-health/ai-reviewed-decisions.json; do
+          for f in astra_v2_state.json astra_story_history.json astra_duplicate_protection.json runtime-health/ai-reviewed-stories.json runtime-health/ai-reviewed-decisions.json; do
             mkdir -p "$(dirname "$f")"
             if git cat-file -e "origin/astra-state:$f" 2>/dev/null; then
               git show "origin/astra-state:$f" > "$f"
@@ -42,6 +42,7 @@ jobs:
         run: |
           test -s astra_v2_state.json
           test -s astra_story_history.json
+          test -s astra_duplicate_protection.json
       - name: Require complete persisted editorial review pair
         shell: bash
         run: |
