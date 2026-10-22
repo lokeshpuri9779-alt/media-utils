@@ -95,6 +95,25 @@ class GeminiRouteTests(unittest.TestCase):
                     omniroute_gemini.generate(set(), set(), premise={**base, **changes})
                 network.assert_not_called()
 
+    def test_gemini_request_constrains_visual_and_story_role_enums(self):
+        import json
+        from astra_v2.openai_creative import VISUALS, ROLES
+        requests = []
+        def capture(request, timeout):
+            requests.append(json.loads(request.data))
+            raise RuntimeError("offline request captured")
+        with patch.dict(os.environ, {"GEMINI_API_KEY": "test", "ASTRA_GEMINI_ENABLED": "1"}, clear=True), patch.object(omniroute_gemini.urllib.request, "urlopen", side_effect=capture):
+            with self.assertRaisesRegex(RuntimeError, "offline request captured"):
+                omniroute_gemini.generate(set(), set())
+        self.assertEqual(len(requests), 1)
+        config = requests[0]["generationConfig"]
+        self.assertEqual(config["responseMimeType"], "application/json")
+        schema = config["responseSchema"]
+        beat = schema["properties"]["beats"]["items"]["properties"]
+        self.assertEqual(set(beat["visual"]["enum"]), VISUALS)
+        self.assertEqual(set(beat["story_beat"]["enum"]), ROLES)
+        self.assertIn("visual_bible", schema["required"])
+
     def test_gemini_normalizes_only_known_beat_labels(self):
         import io
         import json
