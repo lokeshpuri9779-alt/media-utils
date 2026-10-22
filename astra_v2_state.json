@@ -2,20 +2,46 @@
   "version": 2,
   "day": "2026-10-23",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 0,
+  "attempts": 1,
   "confirmed_today": 0,
-  "last_attempt_at": "",
+  "last_attempt_at": "2026-10-22T23:52:30.401959+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {},
-  "pending": {},
-  "last_outcome": "reset_by_owner",
+  "pending": {
+    "AXvgtuUCgDo": {
+      "content_id": "rayvan-gemini-ed365c573c8c2d479669",
+      "title": "The Conductor of the Whispering Platform",
+      "day": "2026-10-23",
+      "uploaded_at": "2026-10-22T23:52:32.021661+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "7742b8d262e5bac5ccbcc3903c8ac5bb29e29c7d2e5e5f2fc3f320bbe3bddabd",
+      "story_beats": [
+        {
+          "speech": "Another crate missing from the platform, yet the security cameras show absolutely nothing but empty tracks and shadows moving across the cold concrete."
+        },
+        {
+          "speech": "Wait, a small tabby cat is nudging that loose floorboard near the maintenance hatch, perhaps hiding something important beneath the dusty old station floorboards today."
+        },
+        {
+          "speech": "The cat triggered a concealed lever, causing the entire wall to slide open and reveal a secret compartment used by the sneaky station baggage porters."
+        },
+        {
+          "speech": "With the mystery finally solved, the cat curls up on my desk, purring loudly as we prepare for the morning express train to arrive safely."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-22T23:43:10.317167+00:00",
+  "last_preflight_at": "2026-10-22T23:50:19.276887+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-22T23:45:11.928112+00:00",
+    "at": "2026-10-22T23:52:32.473485+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -33,9 +59,33 @@
     "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-22T21:15:09.721483+00:00",
-  "reserved": {},
+  "reserved": {
+    "rayvan-gemini-ed365c573c8c2d479669": {
+      "at": "2026-10-22T23:52:30.401944+00:00",
+      "title": "The Conductor of the Whispering Platform",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "7742b8d262e5bac5ccbcc3903c8ac5bb29e29c7d2e5e5f2fc3f320bbe3bddabd",
+      "story_beats": [
+        {
+          "speech": "Another crate missing from the platform, yet the security cameras show absolutely nothing but empty tracks and shadows moving across the cold concrete."
+        },
+        {
+          "speech": "Wait, a small tabby cat is nudging that loose floorboard near the maintenance hatch, perhaps hiding something important beneath the dusty old station floorboards today."
+        },
+        {
+          "speech": "The cat triggered a concealed lever, causing the entire wall to slide open and reveal a secret compartment used by the sneaky station baggage porters."
+        },
+        {
+          "speech": "With the mystery finally solved, the cat curls up on my desk, purring loudly as we prepare for the morning express train to arrive safely."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
+    }
+  },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-22T23:45:11.928062+00:00",
+    "at": "2026-10-22T23:52:32.473378+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -46,21 +96,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-22T23:45:11.928104+00:00",
+    "at": "2026-10-22T23:52:32.473469+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-22T23:43:40.458758+00:00",
+    "at": "2026-10-22T23:50:55.675898+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-0344d42242a5918fa5d5",
-    "video_url": "https://www.youtube.com/watch?v=ISK0JZFPkX0",
+    "content_id": "rayvan-gemini-ed365c573c8c2d479669",
+    "video_url": "https://www.youtube.com/watch?v=AXvgtuUCgDo",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-22T23:45:11.927859+00:00",
+    "at": "2026-10-22T23:52:32.473138+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -71,5 +121,45 @@
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
-  "last_story_selection_diagnostics": {}
+  "last_story_selection_diagnostics": {
+    "at": "2026-10-22T23:52:32.473373+00:00",
+    "collection_status": "collected",
+    "publish_step": "success",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 225,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3
+        },
+        "seen": 4,
+        "total": 296
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 297,
+        "fingerprint": 0,
+        "id": 0,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 297,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 297,
+        "remaining": 226
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 1,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
+    "note": "Diagnostic counts only; no approval or publishing effect"
+  }
 }

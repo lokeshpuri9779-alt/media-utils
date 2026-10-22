@@ -210,6 +210,21 @@
         "reviewed_at": "2026-10-22T23:44:14.214919+00:00",
         "review_model": "gemini-3.1-flash-lite"
       }
+    },
+    {
+      "content_id": "rayvan-gemini-ed365c573c8c2d479669",
+      "story_sha256": "b31904f080c8af1f0170d26a7cc5b62721a43a7780619ccee8a869eaa1506a3f",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-ed365c573c8c2d479669",
+        "story_sha256": "b31904f080c8af1f0170d26a7cc5b62721a43a7780619ccee8a869eaa1506a3f",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not mirror the provided publication examples.; The narrative follows a clear, logical causal structure: mystery, investigation, discovery, and resolution.; The content is suitable for a general audience and contains no unsafe, misleading, or policy-violating material.; There are no apparent copyright or trademark concerns regarding the characters or setting.; The story is well-defined with a consistent visual bible and clear plot progression.",
+        "reviewed_at": "2026-10-22T23:51:23.094361+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      }
     }
   ]
 }
