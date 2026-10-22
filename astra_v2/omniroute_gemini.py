@@ -88,9 +88,28 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
             prompt += (" Use this unapproved premise only as inspiration; independently rewrite "
                        "all dialogue, character decisions, setting details, causal mechanism and ending. "
                        "Do not copy its narration or claim approval. Premise: " + guidance)
+    # Constrain renderer-facing labels at generation time; validate again below.
+    names = {"type": "OBJECT", "additionalProperties": {"type": "STRING"}}
+    beat_schema = {"type": "OBJECT", "properties": {
+        "headline": {"type": "STRING"}, "speech": {"type": "STRING"},
+        "visual": {"type": "STRING", "enum": sorted(VISUALS)},
+        "label": {"type": "STRING"},
+        "story_beat": {"type": "STRING", "enum": sorted(ROLES)},
+        "visual_prompt": {"type": "STRING"}},
+        "required": ["headline", "speech", "visual", "label", "story_beat", "visual_prompt"]}
+    response_schema = {"type": "OBJECT", "properties": {
+        "title": {"type": "STRING"}, "question": {"type": "STRING"},
+        "answer": {"type": "STRING"},
+        "beats": {"type": "ARRAY", "items": beat_schema, "minItems": 4, "maxItems": 4},
+        "visual_bible": {"type": "OBJECT", "properties": {
+            "style": {"type": "STRING"}, "characters": names,
+            "locations": names, "objects": names},
+            "required": ["style", "characters", "locations", "objects"]}},
+        "required": ["title", "question", "answer", "beats", "visual_bible"]}
     body = json.dumps({"contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {"responseMimeType": "application/json",
-                             "temperature": 0.9, "maxOutputTokens": 1500}}).encode()
+                             "responseSchema": response_schema,
+                             "temperature": 0.9, "maxOutputTokens": 2400}}).encode()
     # A second explicitly configured free-tier model may recover from a removed
     # model (404) or transient failures. Never bypass auth, quota or policy errors.
     fallback = os.getenv("ASTRA_GEMINI_FALLBACK_MODEL", "gemini-2.5-flash-lite")
