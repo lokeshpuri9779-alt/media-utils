@@ -13,7 +13,7 @@ from astra.asset_library import load_assets
 class Store:
     def __init__(self, path):
         self.path = path
-    def verify(self, record):
+    def verify(self, record, *, refresh=False):
         return self.path
 
 

@@ -44,7 +44,10 @@ def restore_reviewed_artwork(receipt_path, decisions_path, output_root, store):
         raise ValueError("no_independently_reviewed_artwork")
     assets = []
     for row, record, digest in selected:
-        verified = Path(store.verify(record))
+        verified_path = store.verify(record, refresh=True)
+        if not verified_path:
+            raise ValueError("remote_artwork_verification_failed")
+        verified = Path(verified_path)
         raw = verified.read_bytes()
         if hashlib.sha256(raw).hexdigest() != digest:
             raise ValueError("restored_artwork_digest_mismatch")
@@ -70,3 +73,20 @@ def restore_reviewed_artwork(receipt_path, decisions_path, output_root, store):
     manifest.parent.mkdir(parents=True, exist_ok=True)
     manifest.write_text(json.dumps({"assets": assets}, indent=2) + "\n", encoding="utf-8")
     return {"manifest": str(manifest), "restored": len(assets)}
+
+def main():
+    """Explicit opt-in restoration for Studio's --reviewed-art-manifest input."""
+    import argparse
+    parser = argparse.ArgumentParser(description="Restore independently approved archived artwork")
+    parser.add_argument("--receipt", required=True)
+    parser.add_argument("--decisions", required=True)
+    parser.add_argument("--output-root", required=True)
+    args = parser.parse_args()
+    from astra_v2.adaptive_remote_store import store_from_environment
+    store = store_from_environment(Path(args.output_root) / ".artifact-cache")
+    result = restore_reviewed_artwork(args.receipt, args.decisions, args.output_root, store)
+    print(json.dumps(result, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()
