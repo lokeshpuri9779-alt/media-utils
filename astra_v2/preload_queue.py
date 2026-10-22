@@ -163,7 +163,7 @@ def package_integrity_snapshot(excluded_ids=(), max_packages=4, max_age_hours=No
     Trust the source run before downloading, and never extract ZIP members.
     Each report states its sample size and uninspected count explicitly.
     """
-    max_packages = max(0, min(int(max_packages), 12))
+    max_packages = max(0, min(int(max_packages), 24))
     preflight = inventory_eligibility_snapshot(excluded_ids, max_age_hours)
     result = {"checked": 0, "integrity_passed": 0, "integrity_failed": 0,
               "download_failed": 0, "uninspected": preflight["preflight_eligible"],
@@ -197,6 +197,10 @@ def package_integrity_snapshot(excluded_ids=(), max_packages=4, max_age_hours=No
         run = run_cache[run_id]
         if not isinstance(run, dict) or run.get("conclusion") != "success" or run.get("head_branch") != "main" or run.get("name") not in (
                 "ASTRA V2 - Preload Approved Videos", "ASTRA V2 - Long-form Preload"):
+            continue
+        # Count only relevant packages against the sampling budget. A long-form
+        # package must not crowd out a Shorts inventory check.
+        if format_filter == "short" and run.get("name") == "ASTRA V2 - Long-form Preload":
             continue
         result["checked"] += 1
         with tempfile.TemporaryDirectory(prefix="astra-inventory-") as tmp:
