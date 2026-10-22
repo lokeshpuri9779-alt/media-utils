@@ -131,6 +131,16 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
             or title.casefold().strip() in excluded_titles
             or not isinstance(beats, list) or len(beats) != 4):
         raise ValueError("Generated story title or beat count invalid")
+    # Gemini sometimes emits semantically correct but noncanonical labels.
+    # Normalize only unambiguous spelling/case variants; never invent beats.
+    for beat in beats:
+        if isinstance(beat, dict):
+            for field, allowed in (("visual", VISUALS), ("story_beat", ROLES)):
+                raw = beat.get(field)
+                if isinstance(raw, str):
+                    normalized = raw.strip().lower().replace("-", "_").replace(" ", "_")
+                    if normalized in allowed:
+                        beat[field] = normalized
     from astra_v2.omniroute import validate_beat_quality
     validate_beat_quality(beats, "Gemini")
     for beat in beats:

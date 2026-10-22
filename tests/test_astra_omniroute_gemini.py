@@ -59,5 +59,19 @@ class GeminiRouteTests(unittest.TestCase):
                 omniroute_gemini.generate(set(), set())
         self.assertEqual(len(requested), 1)
 
+    def test_gemini_normalizes_only_known_beat_labels(self):
+        import io
+        import json
+        from astra_v2.openai_creative import VISUALS, ROLES
+        self.assertIn("forest", VISUALS)
+        self.assertIn("reveal", ROLES)
+        # A noncanonical label must still be rejected; normalization is not
+        # permission to map arbitrary model output to a production visual.
+        beats = [{"visual": "unmapped_environment", "story_beat": "reveal",
+                  "speech": "word " * 14} for _ in range(4)]
+        from astra_v2.omniroute import validate_beat_quality
+        with self.assertRaises(ValueError):
+            validate_beat_quality(beats, "Gemini")
+
 if __name__ == "__main__":
     unittest.main()
