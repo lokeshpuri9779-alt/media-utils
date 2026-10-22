@@ -63,7 +63,29 @@ def generate_semantic_assets(stories, output_root=None, limit=24):
                         "status": "approved", "source": "offline-semantic-generator"})
     manifest = root / "art" / "manifest.json"
     manifest.parent.mkdir(parents=True, exist_ok=True)
-    manifest.write_text(json.dumps({"assets": entries}, indent=2), encoding="utf-8")
+    # Preserve independently reviewed art and other existing licensed assets.
+    # Rebuilding semantic backgrounds must never erase their approvals.
+    existing = {"assets": []}
+    if manifest.exists():
+        existing = json.loads(manifest.read_text(encoding="utf-8"))
+        if not isinstance(existing, dict) or not isinstance(existing.get("assets"), list):
+            raise ValueError("Invalid existing asset manifest")
+    preserved = [row for row in existing["assets"]
+                 if not (isinstance(row, dict)
+                         and row.get("source") == "offline-semantic-generator")]
+    ids = {row.get("id") for row in preserved if isinstance(row, dict)}
+    merged = preserved + [row for row in entries if row["id"] not in ids]
+    import os
+    import tempfile
+    with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=manifest.parent,
+                                     prefix=".semantic-", suffix=".tmp", delete=False) as handle:
+        temp = Path(handle.name)
+        json.dump({"assets": merged}, handle, indent=2)
+        handle.write("\\n")
+    try:
+        os.replace(temp, manifest)
+    finally:
+        temp.unlink(missing_ok=True)
     return {"generated": len(entries), "manifest": str(manifest)}
 
 
