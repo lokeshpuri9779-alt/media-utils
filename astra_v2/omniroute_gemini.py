@@ -16,7 +16,7 @@ def enabled():
 def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
     if not enabled():
         return None
-    model = os.getenv("ASTRA_GEMINI_MODEL", "gemini-3.1-flash-lite")
+    model = os.getenv("ASTRA_GEMINI_MODEL", "gemini-2.5-flash")
     if not re.fullmatch(r"[A-Za-z0-9._-]{1,80}", model):
         raise ValueError("Invalid Gemini model")
     # Rotate concrete creative constraints so consecutive requests do not collapse onto one motif.
@@ -105,7 +105,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
                         continue
                     if model_index + 1 < len(models):
                         break
-                raise RuntimeError("Gemini HTTP " + str(exc.code)) from exc
+                raise RuntimeError("Gemini HTTP " + str(exc.code) + " model=" + active_model) from exc
             except (urllib.error.URLError, TimeoutError) as exc:
                 if attempt < 2:
                     time.sleep(2 ** attempt)
@@ -118,6 +118,8 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         # A completed response ends failover; only exhausted transient errors continue.
         if result is not None:
             break
+    if result is None:
+        raise RuntimeError("Gemini exhausted configured free-tier models without a response")
     candidates = result.get("candidates") or []
     if not candidates:
         raise ValueError("Gemini returned no candidates")
