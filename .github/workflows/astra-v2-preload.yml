@@ -235,6 +235,11 @@ jobs:
             art/assets/generated/
           retention-days: 14
           if-no-files-found: warn
+      - name: Test fail-closed reviewed artwork preload contract
+        if: matrix.lane == 0 && github.event_name != 'schedule'
+        run: |
+          python -m unittest discover -s tests -p 'test_reviewed_art_bridge.py' -v
+          python -m unittest discover -s tests -p 'test_reviewed_art_preload.py' -v
       - name: Render and approve next original video
         id: render
         env:
