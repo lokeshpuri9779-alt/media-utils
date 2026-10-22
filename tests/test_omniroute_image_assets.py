@@ -58,6 +58,31 @@ class ImageAssetsTests(unittest.TestCase):
             result = generate_image("scene", requester=requester)
             self.assertTrue(result.startswith(bytes.fromhex("89504e470d0a1a0a")))
 
+    def test_cloudflare_http_error_code_is_sanitized(self):
+        import json
+        import urllib.error
+        env = {"ASTRA_OMNI_IMAGE_ENDPOINT": "https://api.cloudflare.com/client/v4/accounts/example/ai/run/@cf/black-forest-labs/flux-1-schnell",
+               "ASTRA_OMNI_IMAGE_MODEL": "@cf/black-forest-labs/flux-1-schnell",
+               "ASTRA_OMNI_IMAGE_FREE_CONFIRMED": "1"}
+        def requester(request):
+            raise urllib.error.HTTPError(request.full_url, 403, "secret should not leak", {},
+                                         io.BytesIO(json.dumps({"errors": [{"code": 10000, "message": "private"}]}).encode()))
+        with patch.dict("os.environ", env, clear=True):
+            with self.assertRaisesRegex(ValueError, "Image provider HTTP 403 Cloudflare code=10000") as raised:
+                generate_image("private prompt", requester=requester)
+            self.assertNotIn("private", str(raised.exception))
+
+    def test_preproduction_failure_detail_is_safe(self):
+        queue = {"rewrites": [{"status": "awaiting_independent_editorial_approval",
+                  "story": {"title": "New story", "content_id": "abc",
+                            "story_beats": [{"speech": "A new visual event occurs."}]}}]}
+        with tempfile.TemporaryDirectory() as root:
+            def fail(prompt):
+                raise ValueError("Image provider HTTP 403 Cloudflare code=10000")
+            result = preproduce(queue, root, generator=fail)
+            failures = [asset for asset in result["assets"] if asset["status"] == "generation_failed"]
+            self.assertEqual(failures[0]["error_detail"], "Image provider HTTP 403 Cloudflare code=10000")
+
     def test_immutable_deduplication_and_corruption(self):
         with tempfile.TemporaryDirectory() as root:
             a = store_asset(png(), root, kind="scene", prompt="first")

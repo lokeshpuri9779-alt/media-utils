@@ -134,6 +134,33 @@ jobs:
               if generated + cached == 0:
                   print("::warning::ASTRA image preproduction produced no usable illustrations")
           PY
+      - name: Archive per-run diagnostics even if state push conflicts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-story-factory-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            state/story_factory_review_summary.json
+            state/story_factory_rewrite_queue.json
+            state/story_factory_image_manifest.json
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Report safe Cloudflare failure codes
+        if: always()
+        working-directory: state
+        run: |
+          python - <<'PY'
+          import json
+          from collections import Counter
+          from pathlib import Path
+          p = Path("story_factory_image_manifest.json")
+          if p.exists():
+              manifest = json.loads(p.read_text())
+              failures = Counter(str(item.get("error_detail", item.get("error", "unknown")))[:120]
+                                 for item in manifest.get("assets", [])
+                                 if item.get("status") == "generation_failed")
+              print("ASTRA_IMAGE_FAILURE_CODES=" + json.dumps(dict(failures), sort_keys=True))
+          PY
       - name: Commit persistent cursor and latest review batch
         working-directory: state
         run: |
