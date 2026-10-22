@@ -1,6 +1,6 @@
 {
-  "observed_at": "2026-10-21T22:49:32.331390+00:00",
-  "generated": 3,
+  "observed_at": "2026-10-22T00:53:30.214956+00:00",
+  "generated": 1,
   "requested": 20,
   "generation_failures": [
     {
@@ -17,10 +17,14 @@
     },
     {
       "index": 3,
-      "reason": "ValueError"
+      "reason": "JSONDecodeError"
     },
     {
       "index": 4,
+      "reason": "ValueError"
+    },
+    {
+      "index": 5,
       "reason": "ValueError"
     },
     {
@@ -29,10 +33,6 @@
     },
     {
       "index": 7,
-      "reason": "ValueError"
-    },
-    {
-      "index": 8,
       "reason": "ValueError"
     },
     {
@@ -56,8 +56,12 @@
       "reason": "ValueError"
     },
     {
-      "index": 15,
+      "index": 14,
       "reason": "ValueError"
+    },
+    {
+      "index": 15,
+      "reason": "JSONDecodeError"
     },
     {
       "index": 16,
@@ -70,10 +74,14 @@
     {
       "index": 18,
       "reason": "ValueError"
+    },
+    {
+      "index": 19,
+      "reason": "ValueError"
     }
   ],
-  "reviewed": 3,
-  "approved": 3,
+  "reviewed": 1,
+  "approved": 1,
   "review_issues": [],
   "approval_pair_present": true,
   "model_access": {
