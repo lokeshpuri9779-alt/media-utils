@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 from PIL import Image
-from astra_v2.omniroute_image_assets import store_asset, preproduce, image_endpoint
+from astra_v2.omniroute_image_assets import store_asset, preproduce, image_endpoint, generate_image
 
 
 def png(alpha=False, portrait=True):
@@ -24,6 +24,24 @@ class ImageAssetsTests(unittest.TestCase):
     def test_unconfigured_does_not_call_paid_provider(self):
         with patch.dict("os.environ", {}, clear=True):
             self.assertIsNone(image_endpoint())
+
+    def test_direct_png_provider_response(self):
+        env = {"ASTRA_OMNI_IMAGE_ENDPOINT": "https://example.org/images",
+               "ASTRA_OMNI_IMAGE_MODEL": "free-model",
+               "ASTRA_OMNI_IMAGE_FREE_CONFIRMED": "1"}
+        with patch.dict("os.environ", env, clear=True):
+            self.assertEqual(generate_image("scene", requester=lambda req: png()), png())
+
+    def test_direct_jpeg_provider_response_is_normalized(self):
+        image = Image.new("RGB", (512, 768), (80, 120, 160))
+        buffer = io.BytesIO()
+        image.save(buffer, format="JPEG")
+        env = {"ASTRA_OMNI_IMAGE_ENDPOINT": "https://example.org/images",
+               "ASTRA_OMNI_IMAGE_MODEL": "free-model",
+               "ASTRA_OMNI_IMAGE_FREE_CONFIRMED": "1"}
+        with patch.dict("os.environ", env, clear=True):
+            output = generate_image("scene", requester=lambda req: buffer.getvalue())
+            self.assertTrue(output.startswith(b"\x89PNG\r\n\x1a\n"))
 
     def test_immutable_deduplication_and_corruption(self):
         with tempfile.TemporaryDirectory() as root:
