@@ -1837,10 +1837,22 @@ if __name__ == '__main__':
     import argparse
     parser=argparse.ArgumentParser(description='Render a Studio preview without authentication or uploads.')
     parser.add_argument('--preview',type=Path)
+    parser.add_argument('--story-json',type=Path,help='Local story JSON for offline preview')
+    parser.add_argument('--reviewed-art-manifest',type=Path,help='Approved scene-art manifest')
     parser.add_argument('--premium-preview',type=Path)
     parser.add_argument('--stills-dir',type=Path)
     args=parser.parse_args()
-    if args.premium_preview:
+    if args.story_json or args.reviewed_art_manifest:
+        if not (args.preview and args.story_json and args.reviewed_art_manifest):
+            parser.error('--story-json and --reviewed-art-manifest require --preview')
+        story = json.loads(args.story_json.read_text(encoding='utf-8'))
+        if not isinstance(story, dict):
+            parser.error('story JSON must contain an object')
+        story['reviewed_art_manifest'] = str(args.reviewed_art_manifest.resolve())
+        report = render_short(story, args.preview, still_dir=args.stills_dir)
+        args.preview.with_suffix('.json').write_text(
+            json.dumps(report, indent=2, default=str), encoding='utf-8')
+    elif args.premium_preview:
         from premium_stories import catalog as premium_catalog
         demo=premium_catalog()[0]
         report=render_short(demo,args.premium_preview,still_dir=args.stills_dir)
