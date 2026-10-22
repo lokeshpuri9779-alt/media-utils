@@ -10,6 +10,7 @@ import json
 import os
 from pathlib import Path
 import urllib.request
+import urllib.error
 
 from PIL import Image
 
@@ -46,7 +47,13 @@ def generate_image(prompt, *, requester=None):
         def requester(req):
             with urllib.request.urlopen(req, timeout=90) as response:
                 return response.read(MAX_BYTES + 1)
-    raw = requester(request)
+    try:
+        raw = requester(request)
+    except urllib.error.HTTPError as exc:
+        # Preserve safe status information without logging API keys or prompts.
+        if exc.code == 404:
+            raise ValueError("Image provider returned HTTP 404: verify configured endpoint and model") from exc
+        raise ValueError(f"Image provider returned HTTP {exc.code}") from exc
     if len(raw) > MAX_BYTES:
         raise ValueError("Image response too large")
     response = json.loads(raw)
