@@ -71,7 +71,12 @@ def restore_reviewed_artwork(receipt_path, decisions_path, output_root, store):
                        "story_content_id": row["story_content_id"], "scene_id": row["scene_id"]})
     manifest = root / "art" / "manifest.json"
     manifest.parent.mkdir(parents=True, exist_ok=True)
-    manifest.write_text(json.dumps({"assets": assets}, indent=2) + "\n", encoding="utf-8")
+    temporary_manifest = manifest.with_suffix(".json.tmp")
+    try:
+        temporary_manifest.write_text(json.dumps({"assets": assets}, indent=2) + "\n", encoding="utf-8")
+        temporary_manifest.replace(manifest)
+    finally:
+        temporary_manifest.unlink(missing_ok=True)
     return {"manifest": str(manifest), "restored": len(assets)}
 
 def main():
