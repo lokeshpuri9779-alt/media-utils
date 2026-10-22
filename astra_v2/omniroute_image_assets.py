@@ -169,8 +169,11 @@ def preproduce(queue, root, *, generator=generate_image, limit=3):
                     raw = location.read_bytes()
                     if hashlib.sha256(raw).hexdigest() != saved["sha256"]:
                         raise ValueError("Cached asset corruption")
-                    validate_png(raw, "scene")
+                    quality = image_quality_report(raw, "scene")
+                    if not quality["passed"]:
+                        raise ValueError("Cached asset failed pixel quality checks")
                     row.update(saved)
+                    row["quality"] = quality
                     # A cache entry cannot grant production approval.
                     row.update(approved=False, production_ready=False,
                                continuity_status="not_verified", status="cached_review_only")
