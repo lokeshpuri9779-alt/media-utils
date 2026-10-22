@@ -13,10 +13,12 @@ def select_premises(packet, limit=3):
     if not isinstance(candidates, list):
         raise ValueError("invalid_editorial_candidates")
     return [item for item in candidates
-            if item.get("review_status") == "awaiting_editorial_review"
+            if item.get("review_status") in ("awaiting_editorial_review", "needs_new_plot")
             and item.get("decision") == "not_approved"
             and item.get("production_ready") is False
-            and item.get("eligible_for_automatic_publishing") is False][:limit]
+            and item.get("eligible_for_automatic_publishing") is False
+            and (item.get("review_status") == "awaiting_editorial_review"
+                 or "repeated_underlying_plot_mechanism" in item.get("review_issues", []))][:limit]
 
 
 def rewrite_packet(packet, prior=(), limit=3, generator=None):
@@ -29,6 +31,12 @@ def rewrite_packet(packet, prior=(), limit=3, generator=None):
     excluded_titles = {story["title"].casefold().strip() for story in prior
                        if isinstance(story, dict) and isinstance(story.get("title"), str)}
     for premise in select_premises(packet, limit):
+        # Repeated templates are creative prompts only, never independent plot claims.
+        # Gemini must invent a new causal mechanism; all output remains unapproved.
+        if premise.get("review_status") == "needs_new_plot":
+            premise = {**premise, "required_next_action": "invent_distinct_causal_plot_mechanism",
+                       "story_beats": [], "title": "Invent a completely new causal story",
+                       "review_issues": ["repeated_underlying_plot_mechanism"]}
         try:
             story = generator(excluded_ids, excluded_titles, prior, premise=premise)
             if not isinstance(story, dict):
