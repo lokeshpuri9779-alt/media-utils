@@ -10,7 +10,8 @@ class ProducerSourceProvenanceTests(unittest.TestCase):
                   "head_repository": {"full_name": "owner/repo"},
                   "head_branch": "main", "status": "completed",
                   "conclusion": "success", "event": "workflow_dispatch",
-                  "head_sha": "a" * 40}
+                  "head_sha": "a" * 40,
+                  "path": ".github/workflows/astra-approved-art-source.yml@refs/heads/main"}
         record.update(changes)
         return record
 
@@ -29,6 +30,10 @@ class ProducerSourceProvenanceTests(unittest.TestCase):
     def test_reject_fork_source(self):
         with self.assertRaisesRegex(ValueError, "untrusted"):
             self.verify(self.run_record(head_repository={"full_name": "fork/repo"}))
+
+    def test_reject_unrelated_workflow(self):
+        with self.assertRaisesRegex(ValueError, "untrusted"):
+            self.verify(self.run_record(path=".github/workflows/astra-v2-publish.yml@refs/heads/main"))
 
     def test_reject_non_main(self):
         with self.assertRaisesRegex(ValueError, "untrusted"):

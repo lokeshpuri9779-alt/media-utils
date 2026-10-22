@@ -21,6 +21,7 @@ def verify_source_run(repository, run_id, *, runner=None):
             or run.get("status") != "completed"
             or run.get("conclusion") != "success"
             or run.get("event") not in {"workflow_dispatch", "push"}
+            or run.get("path", "").split("@")[0] != ".github/workflows/astra-approved-art-source.yml"
             or not re.fullmatch(r"[a-f0-9]{40}", str(run.get("head_sha", "")))):
         raise ValueError("untrusted_approved_art_source_run")
     return run["head_sha"]
