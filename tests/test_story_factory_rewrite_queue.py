@@ -1,3 +1,4 @@
+import copy
 import unittest
 from astra_v2.story_factory_rewrite_queue import rewrite_packet, select_premises
 
@@ -22,21 +23,56 @@ class RewriteQueueTests(unittest.TestCase):
         result = rewrite_packet(packet(), generator=lambda *a, **k: {"title": "Missing ID"})
         self.assertEqual(result["rewrites"][0]["status"], "rewrite_failed")
 
-    def test_repeated_plot_does_not_enter_rewrite_queue(self):
+    def test_repeated_plot_requests_new_mechanism_without_reusing_beats(self):
         p = packet()
-        p["candidates"][0]["review_status"] = "needs_new_plot"
-        result = rewrite_packet(p, generator=lambda *a, **k: self.fail("should not generate"))
-        self.assertEqual(result["selected_for_rewrite"], 0)
-        self.assertEqual(result["blocked_reason"], "no_unique_premises")
+        candidate = p["candidates"][0]
+        candidate.update(review_status="needs_new_plot",
+                         review_issues=["repeated_underlying_plot_mechanism"],
+                         title="Rejected old title")
+        original = copy.deepcopy(p)
+        calls = []
+        def generate(*args, premise):
+            calls.append(premise)
+            self.assertEqual(premise["story_beats"], [])
+            self.assertNotEqual(premise["title"], candidate["title"])
+            self.assertEqual(premise["required_next_action"], "invent_distinct_causal_plot_mechanism")
+            return {"content_id": "new-plot", "title": "Entirely new story", "production_ready": True}
+        result = rewrite_packet(p, generator=generate)
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(p, original)
+        self.assertEqual(result["selected_for_rewrite"], 1)
+        self.assertIsNone(result["blocked_reason"])
         self.assertEqual(result["available_premises"]["needs_new_plot"], 1)
+        self.assertFalse(result["publication_triggered"])
+        self.assertEqual(result["approved_count"], 0)
+        row = result["rewrites"][0]
+        self.assertEqual(row["status"], "awaiting_independent_editorial_approval")
+        self.assertFalse(row["approved"])
+        self.assertFalse(row["story"]["production_ready"])
 
-    def test_exhausted_premises_are_reported(self):
+    def test_new_plot_requires_repeated_mechanism_rejection_and_safe_flags(self):
+        for changes in ({"review_issues": []}, {"decision": "approved"},
+                        {"production_ready": True}, {"eligible_for_automatic_publishing": True}):
+            with self.subTest(changes=changes):
+                p = packet()
+                p["candidates"][0].update(review_status="needs_new_plot",
+                    review_issues=["repeated_underlying_plot_mechanism"])
+                p["candidates"][0].update(changes)
+                result = rewrite_packet(p, generator=lambda *a, **k: self.fail("should not generate"))
+                self.assertEqual(result["selected_for_rewrite"], 0)
+                self.assertEqual(result["blocked_reason"], "no_unique_premises")
+
+    def test_new_plot_request_cannot_reuse_prior_identity(self):
         p = packet()
-        p["candidates"][0]["review_status"] = "needs_new_plot"
-        result = rewrite_packet(p, generator=lambda *a, **k: {"title": "unused"})
-        self.assertEqual(result["selected_for_rewrite"], 0)
-        self.assertEqual(result["blocked_reason"], "no_unique_premises")
-        self.assertEqual(result["available_premises"]["needs_new_plot"], 1)
+        p["candidates"][0].update(review_status="needs_new_plot",
+            review_issues=["repeated_underlying_plot_mechanism"])
+        old = {"content_id": "published", "title": "Published story"}
+        for generated in (old, {"content_id": "new-id", "title": " PUBLISHED STORY "}):
+            with self.subTest(generated=generated):
+                result = rewrite_packet(p, prior=[old], generator=lambda *a, **k: generated)
+                self.assertEqual(result["rewrites"][0]["status"], "rewrite_failed")
+                self.assertFalse(result["rewrites"][0]["approved"])
+                self.assertFalse(result["publication_triggered"])
 
     def test_rejected_packet_fails_closed(self):
         p = packet()

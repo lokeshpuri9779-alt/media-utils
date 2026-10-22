@@ -61,6 +61,8 @@ jobs:
       - name: Run story and novelty safeguards
         run: |
           python -m unittest discover -s tests -p 'test_astra_story_*.py' -v
+          python -m unittest discover -s tests -p 'test_story_factory_rewrite_queue.py' -v
+          python -m unittest discover -s tests -p 'test_astra_omniroute_gemini.py' -v
           python -m unittest discover -s tests -p 'test_astra_durable_story_ledger.py' -v
           python -m unittest discover -s tests -p 'test_astra_shorts_novelty*.py' -v
           python -m unittest discover -s tests -p 'test_astra_autonomous_story_proposals.py' -v
