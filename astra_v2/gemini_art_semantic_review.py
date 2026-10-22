@@ -24,12 +24,17 @@ def review(story, manifest_path, *, opener=None):
     beats = story.get("story_beats")
     if not isinstance(beats, list) or len(beats) != len(technical["results"]):
         raise ValueError("story_scene_count_mismatch")
+    if any(not isinstance(beat, dict) for beat in beats):
+        raise ValueError("invalid_story_beat")
     model = os.getenv("ASTRA_GEMINI_ART_REVIEW_MODEL", "")
     key = os.getenv("GEMINI_API_KEY", "")
     if not key or not re.fullmatch(r"[A-Za-z0-9._-]{1,80}", model):
         raise ValueError("review_model_or_key_missing")
     path = Path(manifest_path)
     assets = json.loads(path.read_text())["assets"]
+    if any(a["scene_id"] != str(b.get("scene_id") or "scene-" + str(i + 1))
+           for i, (a, b) in enumerate(zip(assets, beats))):
+        raise ValueError("story_scene_order_mismatch")
     parts = [{"text": (
         "You are an independent visual quality auditor, not an artwork approver. "
         "Evaluate every image against its corresponding story scene and all other images. "
@@ -68,7 +73,8 @@ def review(story, manifest_path, *, opener=None):
     if not isinstance(scenes, list) or len(scenes) != len(assets):
         raise ValueError("invalid_semantic_review_scene_count")
     expected = {a["scene_id"] for a in assets}
-    if {s.get("scene_id") for s in scenes if isinstance(s, dict)} != expected:
+    if (len({s.get("scene_id") for s in scenes if isinstance(s, dict)}) != len(assets)
+            or {s.get("scene_id") for s in scenes if isinstance(s, dict)} != expected):
         raise ValueError("semantic_review_scene_mismatch")
     for scene in scenes:
         if any(type(scene.get(k)) is not bool for k in CRITERIA):
