@@ -34,6 +34,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_story_factory_inventory.py'
           python -m unittest discover -s tests -p 'test_production_ledger.py'
           python -m unittest discover -s tests -p 'test_asset_readiness_audit.py'
+          python -m unittest discover -s tests -p 'test_reviewed_art_bridge.py'
       - name: Check verified ready-video inventory
         id: inventory
         working-directory: code
