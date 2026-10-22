@@ -145,6 +145,17 @@
         "reviewed_at": "2026-10-22T22:20:27.336897+00:00",
         "review_model": "gemini-3.1-flash-lite"
       }
+    },
+    {
+      "content_id": "rayvan-gemini-9bd350067ca0211c0b73",
+      "story_sha256": "d3ff40663282566233b48f5bb457b2743cd34094b246817cc0ceb2cd90b0eb7b",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise of a researcher in an arctic/frozen setting choosing between data and a rescue mission is highly derivative of the provided list of recent publications, specifically 'The Icebreaker and the Broken Sledge', 'The Rescuer of Frost Peak', 'The Icebreaker's Dilemma in the White Desert', and 'The Rescuer of Frostpeak Ridge'.",
+        "The narrative structure and causal mechanism (sacrificing research for a rescue in a blizzard) are functionally identical to the themes explored in the provided recent publication examples, failing the originality requirement."
+      ],
+      "record": null
     }
   ]
 }
