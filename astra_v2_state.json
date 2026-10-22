@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-22",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 20,
+  "attempts": 21,
   "confirmed_today": 20,
-  "last_attempt_at": "2026-10-22T17:16:41.984239+00:00",
+  "last_attempt_at": "2026-10-22T17:44:52.776776+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -2509,28 +2509,55 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "ready",
-  "last_preflight_at": "2026-10-22T17:35:04.329186+00:00",
+  "pending": {
+    "a5eIC_o9WPQ": {
+      "content_id": "rayvan-gemini-0ea54aa6e7499f49089b",
+      "title": "The Icebreaker's Dilemma in the White Desert",
+      "day": "2026-10-22",
+      "uploaded_at": "2026-10-22T17:44:54.292003+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "33850d37c166aeae6044bd9e4060950a3784efc883ad5435086a8ed16aa1e246",
+      "story_beats": [
+        {
+          "speech": "Captain Vesper, our long-range scanner just picked up a distress pulse from the eastern ridge. It is Jax."
+        },
+        {
+          "speech": "If we launch the rescue sled now, the incoming whiteout could trap us in the ravine forever."
+        },
+        {
+          "speech": "Prep the rescue sled immediately. I will not leave a member of our crew behind in this frost."
+        },
+        {
+          "speech": "Grab the tow cable, Jax! We are heading back to the ship before the storm closes our path."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-22T17:43:06.332271+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-22T17:41:54.314217+00:00",
+    "at": "2026-10-22T17:44:54.688965+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
-    "job_status_before_persist": "failure",
-    "dependencies_step": "failure",
-    "publish_step": "skipped",
+    "job_status_before_persist": "success",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-22T09:01:46.086363+00:00",
   "reserved": {
@@ -6708,13 +6735,36 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-0ea54aa6e7499f49089b": {
+      "at": "2026-10-22T17:44:52.776760+00:00",
+      "title": "The Icebreaker's Dilemma in the White Desert",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "33850d37c166aeae6044bd9e4060950a3784efc883ad5435086a8ed16aa1e246",
+      "story_beats": [
+        {
+          "speech": "Captain Vesper, our long-range scanner just picked up a distress pulse from the eastern ridge. It is Jax."
+        },
+        {
+          "speech": "If we launch the rescue sled now, the incoming whiteout could trap us in the ravine forever."
+        },
+        {
+          "speech": "Prep the rescue sled immediately. I will not leave a member of our crew behind in this frost."
+        },
+        {
+          "speech": "Grab the tow cable, Jax! We are heading back to the ship before the storm closes our path."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-22T17:41:54.314168+00:00",
-    "publication_outcome": "ready",
-    "publication_reason": "ready",
-    "character_memory": "not_reported",
+    "at": "2026-10-22T17:44:54.688888+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -6722,36 +6772,70 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-22T17:41:54.314208+00:00",
+    "at": "2026-10-22T17:44:54.688951+00:00",
     "history_file_present": true,
-    "publication_outcome": "ready",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-22T17:14:54.944133+00:00",
+    "at": "2026-10-22T17:43:29.534086+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-76d4a2c07e46f21d0bb6",
-    "video_url": "https://www.youtube.com/watch?v=7AjokmvJ3Wk",
+    "content_id": "rayvan-gemini-0ea54aa6e7499f49089b",
+    "video_url": "https://www.youtube.com/watch?v=a5eIC_o9WPQ",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-22T17:41:54.314113+00:00",
+    "at": "2026-10-22T17:44:54.688640+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
-    "job_status_before_persist": "failure",
-    "outcome": "ready",
-    "reason": "ready",
-    "fresh_upload_attempted": false,
+    "publish_step": "success",
+    "job_status_before_persist": "success",
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-22T17:41:54.314166+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "counters": {},
+    "at": "2026-10-22T17:44:54.688882+00:00",
+    "collection_status": "collected",
+    "publish_step": "success",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 2,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3
+        },
+        "seen": 89,
+        "total": 158
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 158,
+        "fingerprint": 0,
+        "id": 89,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 69,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 69,
+        "remaining": 2
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 1,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
