@@ -9,6 +9,40 @@ from pathlib import Path
 from astra_v2.restore_reviewed_artwork import restore_reviewed_artwork
 
 
+def _video_sha256(path):
+    """Hash large rendered videos without loading the MP4 into memory."""
+    digest = hashlib.sha256()
+    with Path(path).open("rb") as source:
+        for chunk in iter(lambda: source.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def verify_ready_video(video_path, ready_path, *, expected_story_id=None):
+    """Fail-closed, offline pre-publication integrity gate; does not upload."""
+    video = Path(video_path)
+    receipt = json.loads(Path(ready_path).read_text(encoding="utf-8"))
+    if not isinstance(receipt, dict) or receipt.get("schema") != "astra.reviewed.video.ready.v1":
+        raise ValueError("invalid_video_readiness_schema")
+    story_id = receipt.get("story_content_id")
+    if not isinstance(story_id, str) or not story_id or (
+        expected_story_id is not None and story_id != expected_story_id
+    ):
+        raise ValueError("video_readiness_story_mismatch")
+    digest = receipt.get("video_sha256")
+    if not isinstance(digest, str) or len(digest) != 64 or any(c not in "0123456789abcdef" for c in digest):
+        raise ValueError("invalid_video_readiness_digest")
+    size = receipt.get("video_bytes")
+    if type(size) is not int or size <= 0 or type(receipt.get("scenes")) is not int or receipt["scenes"] <= 0:
+        raise ValueError("invalid_video_readiness_metadata")
+    if receipt.get("independent_artwork_approved") is not True or receipt.get("published") is not False:
+        raise ValueError("video_not_eligible_for_handoff")
+    if not video.is_file() or video.stat().st_size != size or _video_sha256(video) != digest:
+        raise ValueError("video_integrity_mismatch")
+    return {"story_content_id": story_id, "sha256": digest, "video_bytes": size,
+            "scenes": receipt["scenes"], "verified_for_handoff": True, "published": False}
+
+
 def prepare_video(story_path, receipt_path, decisions_path, output_root, output_mp4, store, *, runner=None):
     from astra_v2.reviewed_artwork_intake import validate_package
     validation = validate_package(story_path, receipt_path, decisions_path)
@@ -56,7 +90,7 @@ def prepare_video(story_path, receipt_path, decisions_path, output_root, output_
     rendered = report.get("scenes", [])
     if len(rendered) != expected or any(not isinstance(shot, dict) or not shot.get("artwork_asset_id") for shot in rendered):
         raise ValueError("studio_video_artwork_binding_failed")
-    digest = hashlib.sha256(output.read_bytes()).hexdigest()
+    digest = _video_sha256(output)
     ready_path = output.with_suffix(".ready.json")
     readiness = {"schema": "astra.reviewed.video.ready.v1", "story_content_id": content_id,
                  "video_sha256": digest, "video_bytes": output.stat().st_size,
@@ -68,6 +102,7 @@ def prepare_video(story_path, receipt_path, decisions_path, output_root, output_
         temporary.replace(ready_path)
     finally:
         temporary.unlink(missing_ok=True)
+    verify_ready_video(output, ready_path, expected_story_id=content_id)
     return {"video": str(output), "manifest": str(manifest), "readiness": str(ready_path),
             "sha256": digest, "scenes": expected, "published": False}
 
