@@ -6,7 +6,6 @@ import argparse
 import hashlib
 import json
 import shutil
-import tempfile
 from pathlib import Path
 
 from astra_v2.story_art_direction import illustration_requests
