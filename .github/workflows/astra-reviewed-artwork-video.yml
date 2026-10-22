@@ -113,6 +113,27 @@ jobs:
                                    root / "astra-reviewed-video.ready.json",
                                    expected_story_id=story["content_id"]))
           PY
+      - name: Persist verified MP4 in immutable remote storage
+        env:
+          STORY_PATH: ${{ inputs.story_path }}
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          from astra_v2.adaptive_remote_store import store_from_environment
+          from astra_v2.prepare_reviewed_video import archive_ready_video
+          root = Path(os.environ["RUNNER_TEMP"])
+          story = json.loads(Path(os.environ["STORY_PATH"]).read_text(encoding="utf-8"))
+          store = store_from_environment(root / "astra-video-archive-cache")
+          receipt = archive_ready_video(root / "astra-reviewed-video.mp4",
+                                        root / "astra-reviewed-video.ready.json",
+                                        store, expected_story_id=story["content_id"])
+          target = root / "astra-reviewed-video.archive.json"
+          temporary = root / "astra-reviewed-video.archive.json.tmp"
+          temporary.write_text(json.dumps(receipt, sort_keys=True) + "\\n", encoding="utf-8")
+          temporary.replace(target)
+          print("ASTRA_VIDEO_ARCHIVE_VERIFIED", receipt["video"]["sha256"])
+          PY
       - name: Upload review video and manifest only
         uses: actions/upload-artifact@v4
         with:
@@ -121,6 +142,7 @@ jobs:
             ${{ runner.temp }}/astra-reviewed-video.mp4
             ${{ runner.temp }}/astra-reviewed-video.json
             ${{ runner.temp }}/astra-reviewed-video.ready.json
+            ${{ runner.temp }}/astra-reviewed-video.archive.json
             ${{ runner.temp }}/astra-reviewed/art/manifest.json
           if-no-files-found: error
           retention-days: 7
