@@ -4,79 +4,6 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-c598053e1917daf7c758",
-      "title": "The Canopy Watchers and the Amber Root",
-      "hook": "The Frayed Crossing",
-      "question": "Can two wary forest dwellers trust each other to harvest the bioluminescent amber root before the midnight frost locks the deep ravine?",
-      "answer": "Through shared strength and careful coordination, they anchor the vine bridge and unearth the root, securing warmth for both their families through the harsh winter.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Frayed Crossing",
-          "speech": "The frost is coming fast, Mira. We must cross the chasm now or lose the amber root forever.",
-          "visual": "forest",
-          "label": "Beat One",
-          "story_beat": "reveal",
-          "visual_prompt": "Wide shot of the deep whispering_ravine. Toren stands on the near slate ledge wearing his heavy tan wool coat, holding the frayed hemp climbing_harness in his leather-gloved hands. Across the gap, Mira peers down anxiously from the opposite side, her woven cap dusted with early frost flakes.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Securing the Anchor",
-          "speech": "Hold the anchor steady while I wedge this timber brace into the crevice so the bridge doesn't snap.",
-          "visual": "planet",
-          "label": "Beat Two",
-          "story_beat": "build",
-          "visual_prompt": "Medium shot of Toren kneeling on the damp rock face, firmly pressing a carved wooden wedge into a slate fissure. Mira leans in from the left, gripping the climbing_harness tightly to tension the line, her olive-green tunic stained with damp moss.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Reaching the Tuber",
-          "speech": "Careful now, the soil is giving way beneath the roots. Reach down together on my three.",
-          "visual": "signal",
-          "label": "Beat Three",
-          "story_beat": "mechanism",
-          "visual_prompt": "Close-up of Mira and Toren kneeling side by side at the edge of the chasm floor. Both reach into the dark loam with gloved hands, their fingers brushing against the glowing amber_root that pulses with warm golden light.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Warm Hearth",
-          "speech": "We made it across in time. This radiant root will keep both our forest homes warm until spring arrives.",
-          "visual": "door",
-          "label": "Beat Four",
-          "story_beat": "payoff",
-          "visual_prompt": "Warm interior shot of a rustic wooden shelter at dusk. Mira and Toren sit together by a glowing hearth, smiling as they place the glowing amber_root into a stone basin, casting long, cozy amber shadows across the timber walls.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "visual_bible": {
-        "style": "Cinematic stop-motion animation aesthetic with rich mossy textures, deep emerald shadows, and warm golden bioluminescent lighting.",
-        "characters": {
-          "mira": "A nimble wood-forager with bright amber eyes, braided dark hair tucked beneath a woven cap, wearing a patched olive-green tunic, leather travel trousers, and thick-soled climbing boots.",
-          "toren": "A broad-shouldered, patient stone-carver with a kind weathered face, a neatly trimmed grey-streaked beard, wearing a heavy tan wool coat, sturdy leather gloves, and a tool belt laden with wooden wedges."
-        },
-        "locations": {
-          "whispering_ravine": "A plunging, mist-filled chasm deep within the ancient timberlands, spanned by a fraying suspension rope and walled with damp slate and creeping moss."
-        },
-        "objects": {
-          "amber_root": "A thick, knobby subterranean tuber that pulses with a warm golden luminescence, cradled in a bed of damp black soil.",
-          "climbing_harness": "A woven hemp rope harness with polished wooden carabiners, smelling faintly of pine resin.",
-          "meteorological_dial": "A circular brass and cedarwood pocket dial with etched frost markings and a spinning copper needle pointing toward a falling gradient."
-        }
-      },
-      "plot_fingerprint": "3d5e4aa00c229343a035894b95b19717bbd23421ed0ea4c21c7eadee699160df"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
       "content_id": "rayvan-gemini-eb90dcc071ac203032b0",
       "title": "The Cartographer of the Boiling Basin",
       "hook": "The Scorched Frontier",
@@ -219,6 +146,79 @@
         }
       },
       "plot_fingerprint": "aea18a281fa7f03a919f5887cf0fc159f6b34a656f2c75cca80057984ab369e5"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-388f1f9f51ce22a68f7a",
+      "title": "The Octopus and the Singing Reef",
+      "hook": "The Silent Abyss",
+      "question": "Why did the great trench suddenly fall completely silent?",
+      "answer": "A tangled net of lost musical buoys was blocking the acoustic currents.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Silent Abyss",
+          "speech": "Listen closely, my friends. The ancient songs of our coral valley have vanished entirely into the dark cold water.",
+          "visual": "signal",
+          "label": "The Silence",
+          "story_beat": "reveal",
+          "visual_prompt": "Barnaby the wise blue octopus with large yellow eyes and wearing a woven kelp scarf examines a dead underwater radio signal tower in the dark coral abyss, holding a glowing shell lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Following the Current",
+          "speech": "We must swim up toward the roaring canyon where the water flows faster and the strange heavy rope is bound.",
+          "visual": "forest",
+          "label": "The Kelp Trail",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby swims upward alongside Pip the small orange clownfish with white stripes, navigating a dense glowing kelp forest inside a sunlit underwater ravine.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Tangled Trap",
+          "speech": "Look at this massive woven barrier of metallic vines wrapping tightly around the singing stones of the reef.",
+          "visual": "ship",
+          "label": "The Obstruction",
+          "story_beat": "mechanism",
+          "visual_prompt": "Barnaby and Pip push against a giant rusted steel shipwreck net tangled across the singing pillars, while holding small stone levers to pry the heavy mesh apart.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Restoring the Melody",
+          "speech": "The harmonic currents are finally free again as the grand chorus of the deep echoes back through our home.",
+          "visual": "planet",
+          "label": "The Symphony",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby and Pip float happily inside a vibrant glowing coral metropolis as schools of colorful fish dance around them under shafts of golden sunbeams shining through the ocean surface.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "visual_bible": {
+        "style": "Vibrant and detailed 3D underwater animated film aesthetic with warm bioluminescent lighting and rich textures of coral and sand",
+        "characters": {
+          "Barnaby": "A wise old blue octopus with large expressive yellow eyes, round suction cups on his tentacles, and a neatly woven green kelp scarf around his mantle.",
+          "Pip": "A small energetic orange clownfish with crisp white stripes, sparkling black eyes, and nimble fins."
+        },
+        "locations": {
+          "The Silent Abyss": "A deep underwater trench featuring pale gray coral structures, dark shadows, and floating particles of marine snow.",
+          "The Coral Metropolis": "A bustling underwater city made of pink and purple coral towers, illuminated by glowing anemones and shafts of surface sunlight."
+        },
+        "objects": {
+          "shell_lantern": "A pearlescent nautilus shell containing a glowing blue firefly shrimp that casts soft illumination.",
+          "stone_lever": "A smooth, heavy piece of basalt carved into a tapered rod used for prying objects."
+        }
+      },
+      "plot_fingerprint": "f81568c7b81008297a81a98746241aa8d3f85bd7c30e7d33f00801ef3bde818e"
     }
   ]
 }
