@@ -180,7 +180,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
     # Generate after loading all ledgers, so model proposals see actual history.
     # OmniRoute free-tier model proposals retain every existing publication and QA gate.
     from astra_v2.omniroute import enabled as omni_enabled, generate as omni_generate
-    if omni_enabled() and not serialized_preload:
+    if omni_enabled() and not serialized_preload and not os.getenv("ASTRA_PRELOAD_REVIEWED_ART_MANIFEST"):
         # Explicit stage markers distinguish provider silence, reviewer rejection,
         # approval persistence and downstream render failures in Actions logs.
         print("ASTRA_EDITORIAL_STAGE=" + json.dumps({"stage": "generation_started"}, sort_keys=True))
@@ -233,7 +233,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 "stage": "generation_or_review_failed", "exception_type": type(exc).__name__
             }, sort_keys=True))
             print("ASTRA_OMNIROUTE_GENERATION_FAILED=" + type(exc).__name__ + ":" + str(exc)[:350])
-    if openai_enabled() and not serialized_preload:
+    if openai_enabled() and not serialized_preload and not os.getenv("ASTRA_PRELOAD_REVIEWED_ART_MANIFEST"):
         try:
             generated = openai_generate(excluded_ids, excluded_titles, history_narratives)
             if generated:
