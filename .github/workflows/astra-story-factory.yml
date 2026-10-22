@@ -144,5 +144,23 @@ jobs:
           if [ -f story_factory_image_manifest.json ]; then git add story_factory_image_manifest.json omni_assets/; fi
           if ! git diff --cached --quiet; then
             git commit -m "Replenish review-only story candidate batch"
-            git push origin HEAD:astra-state
+            # Never force-push persistent cursors: another writer may have advanced them.
+            # Retry only transient network errors; detect remote changes before each attempt.
+            baseline="$(git rev-parse HEAD^)"
+            for attempt in 1 2 3; do
+              git fetch origin astra-state
+              remote="$(git rev-parse FETCH_HEAD)"
+              if [ "$remote" != "$baseline" ]; then
+                echo "::error::ASTRA_STATE_CONFLICT: astra-state advanced during this run. Refusing to overwrite another worker's cursor or asset manifest; retry the workflow against fresh state."
+                exit 1
+              fi
+              if git push origin HEAD:refs/heads/astra-state; then
+                echo "ASTRA_STATE_PUSH=success"
+                exit 0
+              fi
+              echo "::warning::State push attempt $attempt failed; checking branch again before retry"
+              sleep "$((attempt * 2))"
+            done
+            echo "::error::ASTRA_STATE_PUSH_FAILED: persistent results were not committed to remote state"
+            exit 1
           fi
