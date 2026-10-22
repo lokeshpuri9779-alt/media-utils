@@ -14,3 +14,16 @@ def test_separate_duplicate_ledger_retains_old_publications(tmp_path, monkeypatc
     records = load_history()
     assert any(x.get("content_id") == "previously-uploaded" for x in records)
     assert any(x.get("content_id") == "historical-story" for x in records)
+
+def test_ledger_is_resolved_beside_custom_publisher_state(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    nested = tmp_path / "runtime"
+    nested.mkdir()
+    (nested / "state.json").write_text('{"published": {}, "pending": {}, "reserved": {}}')
+    (nested / "history.json").write_text('{"stories":[]}')
+    (nested / "astra_duplicate_protection.json").write_text(json.dumps({
+        "published": {"older-video": {"video_id": "abc123"}},
+        "stories": []
+    }))
+    records = load_history(nested / "state.json", nested / "history.json")
+    assert any(x["content_id"] == "older-video" for x in records)
