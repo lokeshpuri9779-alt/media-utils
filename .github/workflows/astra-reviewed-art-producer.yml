@@ -1,0 +1,69 @@
+name: ASTRA - Publish Independently Approved Artwork
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: 'Trusted GitHub Actions run ID containing independently approved art/manifest.json and art/assets/reviewed/'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+      ASTRA_ARTIFACT_S3_BUCKET: ${{ vars.ASTRA_ARTIFACT_S3_BUCKET }}
+      ASTRA_ARTIFACT_S3_ENDPOINT: ${{ vars.ASTRA_ARTIFACT_S3_ENDPOINT }}
+      ASTRA_ARTIFACT_S3_PREFIX: ${{ vars.ASTRA_ARTIFACT_S3_PREFIX }}
+      AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.ASTRA_ARTIFACT_AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.ASTRA_ARTIFACT_AWS_SECRET_ACCESS_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install validated art storage dependencies
+        run: python -m pip install --disable-pip-version-check Pillow boto3
+      - name: Retrieve independently reviewed art from pinned run
+        shell: bash
+        run: |
+          if ! [[ "$SOURCE_RUN_ID" =~ ^[0-9]{1,20}$ ]]; then
+            echo 'Invalid source run ID' >&2
+            exit 1
+          fi
+          mkdir -p reviewed-input
+          gh run download "$SOURCE_RUN_ID" --repo "$GITHUB_REPOSITORY" --name astra-approved-art --dir reviewed-input
+          test -s reviewed-input/art/manifest.json
+      - name: Validate, upload, and issue immutable index receipt
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from astra_v2.adaptive_remote_store import store_from_environment
+          from astra_v2.reviewed_art_producer import publish_approved_art
+          receipt = publish_approved_art(
+              "reviewed-input/art/manifest.json",
+              "reviewed-art-bundles",
+              store_from_environment("runtime-artifact-cache"),
+          )
+          Path("reviewed-art-index-receipt.json").write_text(
+              json.dumps(receipt, sort_keys=True, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          print("ASTRA_APPROVED_ART_INDEX_SHA256=" + receipt["index"]["sha256"])
+          PY
+      - name: Distribute immutable receipt to authorized workers
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-approved-art-index-${{ github.run_id }}
+          path: reviewed-art-index-receipt.json
+          if-no-files-found: error
+          retention-days: 30
