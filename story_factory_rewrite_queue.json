@@ -10,27 +10,27 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "4a8d4873b5286406caae5c60",
-      "source_sha256": "895261c6609aebf4c176d4cf250ca4cd7bbbbaf7409b967e992ec9b5310540a7",
+      "candidate_id": "606722a9654cb41ce39ed3d7",
+      "source_sha256": "0a4533a4e3fffead05859aab34b81e96de89f77e1edc52d85544f6a512eaf72b",
       "status": "rewrite_failed",
       "error": "RuntimeError",
-      "error_detail": "All enabled OmniRoute providers failed: gemini:Gemini HTTP 404 model=gemini-2.5-flash-lite",
+      "error_detail": "All enabled OmniRoute providers failed: gemini:Invalid beat visual or narrative role",
       "approved": false
     },
     {
-      "candidate_id": "6875cac839e3e3e830f6ba87",
-      "source_sha256": "af1403f048db7f769b718327d0ed3fc1f5b8ad6ce5212b92fb3121f38b3ce15a",
+      "candidate_id": "e3ed07ae1a3478aee0a7de94",
+      "source_sha256": "06e8ab88bd23233e741a85f9f4cc564ea77d74c92e77590bcd2c460aa2287cbd",
       "status": "rewrite_failed",
       "error": "RuntimeError",
-      "error_detail": "All enabled OmniRoute providers failed: gemini:Gemini HTTP 404 model=gemini-2.5-flash-lite",
+      "error_detail": "All enabled OmniRoute providers failed: gemini:Invalid beat visual or narrative role",
       "approved": false
     },
     {
-      "candidate_id": "289cad0405a27e2057974e13",
-      "source_sha256": "3be61ce582cf199b000b94045b7f6e6b641d82dc8696bf09ce0b45b77c36c89b",
+      "candidate_id": "fdf825396162b57617aef137",
+      "source_sha256": "c84be62744ef90ee79951157f3d23df71a907c7bd74a27f27cea58c73fd3a691",
       "status": "rewrite_failed",
       "error": "RuntimeError",
-      "error_detail": "All enabled OmniRoute providers failed: gemini:Gemini HTTP 404 model=gemini-2.5-flash-lite",
+      "error_detail": "All enabled OmniRoute providers failed: gemini:Invalid beat visual or narrative role",
       "approved": false
     }
   ]
