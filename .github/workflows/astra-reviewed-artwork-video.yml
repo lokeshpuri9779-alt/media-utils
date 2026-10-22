@@ -106,6 +106,7 @@ jobs:
           path: |
             ${{ runner.temp }}/astra-reviewed-video.mp4
             ${{ runner.temp }}/astra-reviewed-video.json
+            ${{ runner.temp }}/astra-reviewed-video.ready.json
             ${{ runner.temp }}/astra-reviewed/art/manifest.json
           if-no-files-found: error
           retention-days: 7
