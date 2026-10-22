@@ -46,6 +46,9 @@ jobs:
           ASTRA_CONTENT_ID: ${{ inputs.content_id }}
         run: |
           python -m astra_v2.stage_editorial_art --content-id "$ASTRA_CONTENT_ID" --destination runtime-art-staging
+      - name: Independently verify generated PNG integrity and geometry
+        run: |
+          python -m astra_v2.staged_art_technical_review runtime-art-staging/staging-manifest.json --output runtime-art-staging/technical-review.json
       - name: Save images for independent review only
         uses: actions/upload-artifact@v4
         with:
