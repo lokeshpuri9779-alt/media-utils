@@ -80,7 +80,13 @@ def generate_image(prompt, *, requester=None):
         encoded = data[0]["b64_json"]
     if len(encoded) > MAX_BYTES:
         raise ValueError("Encoded image too large")
-    return base64.b64decode(encoded, validate=True)
+    try:
+        decoded = base64.b64decode(encoded, validate=True)
+    except (ValueError, base64.binascii.Error) as exc:
+        raise ValueError("Provider returned invalid base64 image") from exc
+    if len(decoded) > MAX_BYTES:
+        raise ValueError("Decoded image too large")
+    return decoded
 
 
 def validate_png(image_bytes, kind):
