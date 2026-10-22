@@ -66,6 +66,9 @@ jobs:
       - name: Clear previous image manifest for fresh-run accounting
         working-directory: state
         run: rm -f story_factory_image_manifest.json
+      - name: Clear previous rewrite queue for fresh-run accounting
+        working-directory: state
+        run: rm -f story_factory_rewrite_queue.json
       - name: Rewrite a bounded editorial shortlist with existing Gemini
         working-directory: code
         env:
@@ -144,6 +147,16 @@ jobs:
             state/story_factory_rewrite_queue.json
             state/story_factory_image_manifest.json
           if-no-files-found: warn
+          retention-days: 14
+      - name: Recover generated scene assets if state push conflicts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-story-factory-scene-assets-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            state/omni_assets/sha256/
+            state/omni_assets/requests/
+          if-no-files-found: ignore
           retention-days: 14
       - name: Report safe Cloudflare failure codes
         if: always()
