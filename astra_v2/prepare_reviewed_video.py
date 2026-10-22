@@ -9,6 +9,8 @@ from astra_v2.restore_reviewed_artwork import restore_reviewed_artwork
 
 
 def prepare_video(story_path, receipt_path, decisions_path, output_root, output_mp4, store, *, runner=None):
+    from astra_v2.reviewed_artwork_intake import validate_package
+    validation = validate_package(story_path, receipt_path, decisions_path)
     root = Path(output_root).resolve()
     story = json.loads(Path(story_path).read_text(encoding="utf-8"))
     content_id = story.get("content_id")
@@ -22,6 +24,8 @@ def prepare_video(story_path, receipt_path, decisions_path, output_root, output_
                 and decisions[row["id"]].get("approved") is True]
     if not approved or any(row.get("story_content_id") != content_id for row in approved):
         raise ValueError("reviewed_artwork_story_mismatch")
+    if validation["story_content_id"] != content_id:
+        raise ValueError("validated_story_identity_mismatch")
     result = restore_reviewed_artwork(receipt_path, decisions_path, root, store)
     manifest = Path(result["manifest"])
     rows = json.loads(manifest.read_text(encoding="utf-8"))["assets"]
