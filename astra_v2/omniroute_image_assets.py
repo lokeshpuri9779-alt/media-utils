@@ -63,7 +63,7 @@ def generate_image(prompt, *, requester=None):
         raise ValueError("Image response too large")
     # Some compatible image endpoints return image bytes directly instead of JSON.
     # Accept only validated PNG/JPEG signatures; all other responses remain JSON.
-    if not native_gemini and (raw.startswith(b"\\x89PNG\\r\\n\\x1a\\n") or raw.startswith(b"\\xff\\xd8\\xff")):
+    if not native_gemini and (raw.startswith(b"\x89PNG\r\n\x1a\n") or raw.startswith(b"\xff\xd8\xff")):
         with Image.open(io.BytesIO(raw)) as source:
             source.verify()
         with Image.open(io.BytesIO(raw)) as source:
