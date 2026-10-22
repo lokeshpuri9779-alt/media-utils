@@ -44,7 +44,10 @@ def restore_reviewed_artwork(receipt_path, decisions_path, output_root, store):
         raise ValueError("no_independently_reviewed_artwork")
     assets = []
     for row, record, digest in selected:
-        verified_path = store.verify(record, refresh=True)\n        if not verified_path:\n            raise ValueError("remote_artwork_verification_failed")\n        verified = Path(verified_path)
+        verified_path = store.verify(record, refresh=True)
+        if not verified_path:
+            raise ValueError("remote_artwork_verification_failed")
+        verified = Path(verified_path)
         raw = verified.read_bytes()
         if hashlib.sha256(raw).hexdigest() != digest:
             raise ValueError("restored_artwork_digest_mismatch")
