@@ -51,6 +51,22 @@ class ReviewedArtBridgeTests(unittest.TestCase):
             self.assertTrue(draw_asset_for_scene(frame, plan[0], manifest_path=path))
             self.assertEqual(frame.getpixel((270, 480)), (90, 140, 180))
 
+    def test_incomplete_multiscene_approval_never_exports_partial_manifest(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            story = {"content_id": "two-scenes", "story_beats": [
+                {"speech": "A fox searches."}, {"speech": "The fox finds a bell."}]}
+            queue, images, decisions = [root / x for x in ("queue.json", "images.json", "decisions.json")]
+            queue.write_text(json.dumps({"rewrites": [{"status": "awaiting_independent_editorial_approval",
+                "story": story}]}))
+            images.write_text(json.dumps({"assets": []}))
+            decisions.write_text(json.dumps({"schema_version": 1, "approved_scenes": [{
+                "decision": "approved", "story_content_id": "two-scenes",
+                "scene_id": "001", "sha256": "a" * 64}]}))
+            self.assertEqual(build_approved_manifest(queue, images, decisions, root, root),
+                             {"assets": []})
+            self.assertFalse((root / "art" / "assets" / "reviewed").exists())
+
     def test_unknown_approval_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
