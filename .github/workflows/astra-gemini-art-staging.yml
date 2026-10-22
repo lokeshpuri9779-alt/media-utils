@@ -1,0 +1,55 @@
+name: ASTRA - Stage Gemini Artwork For Review
+
+on:
+  workflow_dispatch:
+    inputs:
+      content_id:
+        description: 'Exact hash-approved editorial story content ID'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  stage:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      ASTRA_GEMINI_ART_ENABLED: '1'
+      ASTRA_GEMINI_IMAGE_MODEL: ${{ vars.ASTRA_GEMINI_IMAGE_MODEL }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      ASTRA_EDITORIAL_STORIES_FILE: editorial/reviewed_stories.json
+      ASTRA_EDITORIAL_REVIEWS_FILE: editorial/reviewed_decisions.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install image validation
+        run: python -m pip install --disable-pip-version-check Pillow
+      - name: Restore persisted publication history
+        shell: bash
+        run: |
+          git fetch origin astra-state
+          for f in astra_v2_state.json astra_story_history.json; do
+            if git cat-file -e "origin/astra-state:$f" 2>/dev/null; then
+              git show "origin/astra-state:$f" > "$f"
+            fi
+          done
+      - name: Require persisted publication history
+        run: |
+          test -s astra_v2_state.json
+          test -s astra_story_history.json
+      - name: Generate unapproved scene art
+        env:
+          ASTRA_CONTENT_ID: ${{ inputs.content_id }}
+        run: |
+          python -m astra_v2.stage_editorial_art --content-id "$ASTRA_CONTENT_ID" --destination runtime-art-staging
+      - name: Save images for independent review only
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-pending-art-${{ github.run_id }}
+          path: runtime-art-staging/
+          if-no-files-found: error
+          retention-days: 7
