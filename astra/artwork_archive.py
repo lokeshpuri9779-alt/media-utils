@@ -4,6 +4,7 @@ Archives immutable PNG bytes; never marks artwork approved or publishes videos.
 """
 from __future__ import annotations
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
@@ -22,8 +23,14 @@ def archive(manifest_path, store):
         source = (root / row["path"]).resolve()
         if root not in source.parents:
             raise ValueError("unsafe_artwork_path")
+        digest = hashlib.sha256(source.read_bytes()).hexdigest()
+        if row.get("sha256") and row["sha256"] != digest:
+            raise ValueError("artwork_digest_mismatch")
         receipt = store.put(source)
-        store.verify(receipt)
+        if receipt.get("sha256") != digest:
+            raise ValueError("archive_receipt_digest_mismatch")
+        if store.verify(receipt) is False:
+            raise ValueError("archive_verification_failed")
         records.append({"id": row["id"], "status": "pending_review",
                         "category": row["category"], "tags": row.get("tags", []),
                         "artifact": receipt})
