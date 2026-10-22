@@ -1689,6 +1689,9 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
             if repair_attempts>=2: raise
             repair_attempts+=1
             plan=_repair_plan(ch,plan,repair_attempts)
+    # Reject generic Studio fallback when reviewed AI illustrations are required.
+    from astra_v2.strict_ai_visual_preflight import require_reviewed_story_art
+    require_reviewed_story_art(ch)
     # Opt-in full-story art: no partially illustrated output or silent fallback.
     if ch.get("reviewed_art_manifest"):
         from astra_v2.story_art_direction import bind_reviewed_scenes
