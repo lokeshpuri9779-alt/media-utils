@@ -1,16 +1,25 @@
-"""Fail-closed lane check for a manually pinned reviewed-art story."""
+"""Mirror the existing creative lane assignment for reviewed-art preflight."""
 import hashlib
 
 
-def validate_pinned_story_lane(content_id, lane, lane_count):
-    if not isinstance(content_id, str) or not content_id:
-        raise ValueError("reviewed_art_content_id_required")
-    try:
-        lane = int(lane)
-        lane_count = int(lane_count)
-    except (TypeError, ValueError) as exc:
-        raise ValueError("invalid_reviewed_art_lane") from exc
-    if lane_count < 1 or not 0 <= lane < lane_count:
+def story_lane(story, lane_count):
+    if not isinstance(story, dict) or not isinstance(story.get("content_id"), str):
+        raise ValueError("invalid_reviewed_art_story")
+    lane_count = int(lane_count)
+    if lane_count < 1:
+        raise ValueError("invalid_reviewed_art_lane_count")
+    if story.get("series_id"):
+        episode = int(story["episode"])
+        if episode < 1:
+            raise ValueError("invalid_reviewed_art_episode")
+        return (episode - 1) % lane_count
+    digest = hashlib.sha256(story["content_id"].encode()).digest()
+    return int.from_bytes(digest[:8], "big") % lane_count
+
+
+def validate_pinned_story_lane(story, lane, lane_count):
+    lane = int(lane)
+    lane_count = int(lane_count)
+    if not 0 <= lane < lane_count:
         raise ValueError("invalid_reviewed_art_lane")
-    expected = int(hashlib.sha256(content_id.encode("utf-8")).hexdigest(), 16) % lane_count
-    return expected == lane
+    return story_lane(story, lane_count) == lane
