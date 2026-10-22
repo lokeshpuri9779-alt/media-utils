@@ -9,7 +9,7 @@ from pathlib import Path
 from astra_v2.event_parallel_dispatch import dispatch_batch
 from astra_v2.event_story_adapter import make_story_handler
 from astra_v2.parallel_story_workers import (
-    WORKERS, STORIES_PER_RUN, combine_workers, read_worker_payload,
+    WORKERS, STORIES_PER_RUN, read_worker_payload,
 )
 
 
@@ -23,8 +23,6 @@ def run_parallel_story_stripes(ledger, *, batch_id, output_root, start_index,
     if type(total) is not int or total < 0:
         raise ValueError("invalid_story_count")
     root = Path(output_root)
-    items = {}
-    handlers = {}
     # The dispatcher accepts one handler per stage, so give each stripe a
     # separate dispatch invocation in a bounded executor.
     from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -50,7 +48,5 @@ def combine_completed_stripes(batch_id, output_root, *, workers=WORKERS,
                             batch_id=f"{batch_id}-stripe-{i}", worker_index=i)
         for i in range(workers)
     ]
-    # Existing combine_workers expects canonical batch worker checkpoint IDs.
-    # Keep this as a separate validation boundary; do not silently relabel
-    # independently produced checkpoints.
+    # All payloads remain unreviewed and require global novelty validation.
     return payloads
