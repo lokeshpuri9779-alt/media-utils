@@ -99,6 +99,20 @@ jobs:
           assert len(videos) == 1 and (videos[0]["width"], videos[0]["height"]) == (1080, 1920)
           assert any(s.get("codec_type") == "audio" for s in streams)
           PY
+      - name: Verify video integrity and independent-review readiness before handoff
+        env:
+          STORY_PATH: ${{ inputs.story_path }}
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          from astra_v2.prepare_reviewed_video import verify_ready_video
+          root = Path(os.environ["RUNNER_TEMP"])
+          story = json.loads(Path(os.environ["STORY_PATH"]).read_text(encoding="utf-8"))
+          print(verify_ready_video(root / "astra-reviewed-video.mp4",
+                                   root / "astra-reviewed-video.ready.json",
+                                   expected_story_id=story["content_id"]))
+          PY
       - name: Upload review video and manifest only
         uses: actions/upload-artifact@v4
         with:

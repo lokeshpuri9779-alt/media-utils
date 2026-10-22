@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from astra_v2.prepare_reviewed_video import prepare_video
+from astra_v2.prepare_reviewed_video import prepare_video, verify_ready_video
 
 
 class PreparationTests(unittest.TestCase):
@@ -40,6 +40,41 @@ class PreparationTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "incomplete_reviewed_artwork_package"):
                     prepare_video(story, receipt, decisions, root / "output", root / "video.mp4", None)
 
+
+    def test_verified_handoff_rejects_tampering_and_false_approval(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            video = root / "video.mp4"
+            ready = root / "video.ready.json"
+            video.write_bytes(b"sample video bytes")
+            payload = {
+                "schema": "astra.reviewed.video.ready.v1",
+                "story_content_id": "story-a",
+                "video_sha256": hashlib.sha256(video.read_bytes()).hexdigest(),
+                "video_bytes": video.stat().st_size,
+                "scenes": 2,
+                "independent_artwork_approved": True,
+                "published": False,
+            }
+            ready.write_text(json.dumps(payload))
+            result = verify_ready_video(video, ready, expected_story_id="story-a")
+            self.assertTrue(result["verified_for_handoff"])
+            with self.assertRaisesRegex(ValueError, "story_mismatch"):
+                verify_ready_video(video, ready, expected_story_id="story-b")
+            video.write_bytes(b"modified bytes")
+            with self.assertRaisesRegex(ValueError, "video_integrity_mismatch"):
+                verify_ready_video(video, ready)
+            video.write_bytes(b"sample video bytes")
+            payload["independent_artwork_approved"] = False
+            ready.write_text(json.dumps(payload))
+            with self.assertRaisesRegex(ValueError, "video_not_eligible"):
+                verify_ready_video(video, ready)
+            payload["independent_artwork_approved"] = True
+            payload["published"] = True
+            ready.write_text(json.dumps(payload))
+            with self.assertRaisesRegex(ValueError, "video_not_eligible"):
+                verify_ready_video(video, ready)
 
 if __name__ == "__main__":
     unittest.main()
