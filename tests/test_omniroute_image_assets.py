@@ -11,6 +11,10 @@ from astra_v2.omniroute_image_assets import store_asset, preproduce, image_endpo
 def png(alpha=False, portrait=True):
     image = Image.new("RGBA" if alpha else "RGB", (512, 768 if portrait else 512),
                       (50, 80, 120, 0 if alpha else 255))
+    from PIL import ImageDraw
+    draw = ImageDraw.Draw(image)
+    for y in range(image.height):
+        draw.line((0, y, image.width - 1, y), fill=(50 + y // 32, 80 + y // 16, 120 + y // 12, 0 if alpha else 255))
     buffer = io.BytesIO()
     image.save(buffer, format="PNG")
     return buffer.getvalue()

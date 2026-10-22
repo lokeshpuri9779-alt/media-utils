@@ -26,7 +26,12 @@ def queue(value):
 
 def png():
     data = io.BytesIO()
-    Image.new("RGB", (540, 960), (22, 66, 99)).save(data, format="PNG")
+    im = Image.new("RGB", (540, 960))
+    from PIL import ImageDraw
+    draw = ImageDraw.Draw(im)
+    for y in range(960):
+        draw.line((0, y, 539, y), fill=(22 + y // 32, 66 + y // 16, 99 + y // 12))
+    im.save(data, format="PNG")
     return data.getvalue()
 
 
@@ -91,7 +96,7 @@ class StoryArtTests(unittest.TestCase):
             exec(compile(ast.Module(body=[func], type_ignores=[]), 'studio_renderer.py', 'exec'), scope)
             frame = Image.new('RGB', (540, 960))
             scope['draw_visual'](frame, {**shot, 'visual': 'bell', 'artwork_manifest_path': str(manifest)}, 0, 0, (0, 0, 0))
-            self.assertEqual(frame.getpixel((200, 200)), (22, 66, 99))
+            self.assertEqual(frame.getpixel((200, 200)), (28, 78, 115))
             with self.assertRaises(RuntimeError):
                 scope['draw_visual'](frame, {**shot, 'scene_id': '002', 'visual': 'bell', 'artwork_manifest_path': str(manifest)}, 0, 0, (0, 0, 0))
 
