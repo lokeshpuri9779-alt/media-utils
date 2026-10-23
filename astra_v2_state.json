@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-23",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 2,
+  "attempts": 3,
   "confirmed_today": 2,
-  "last_attempt_at": "2026-10-23T00:00:47.640218+00:00",
+  "last_attempt_at": "2026-10-23T00:22:17.885554+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -25,28 +25,55 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-23T00:02:10.786924+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "bHkZgo89U-w": {
+      "content_id": "rayvan-gemini-48667e8cdf8d86ff06b1",
+      "title": "The Canopy Guardians and the Seed of Restoration",
+      "day": "2026-10-23",
+      "uploaded_at": "2026-10-23T00:22:19.385332+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "2e022e8aea01f24e0f629912bc84764aa5ece343ea1801c422f41b0b11fc5035",
+      "story_beats": [
+        {
+          "speech": "Look at the pulsating light dimming inside this ancient root chamber; we have only moments before the entire forest loses its vitality."
+        },
+        {
+          "speech": "You must pull the heavy stone lever while I stabilize the vibrating energy lines to prevent the floor from collapsing beneath our feet."
+        },
+        {
+          "speech": "The pressure plate is jammed by hardened vines, so we must combine our strength to clear the path before the ceiling comes crashing down."
+        },
+        {
+          "speech": "The light flows through the soil once again; our combined efforts have saved the forest, ensuring that life will flourish for future generations."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-23T00:20:15.422464+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-23T00:02:11.428499+00:00",
+    "at": "2026-10-23T00:22:19.739245+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-22T21:15:09.721483+00:00",
   "reserved": {
@@ -95,13 +122,36 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-48667e8cdf8d86ff06b1": {
+      "at": "2026-10-23T00:22:17.885538+00:00",
+      "title": "The Canopy Guardians and the Seed of Restoration",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "2e022e8aea01f24e0f629912bc84764aa5ece343ea1801c422f41b0b11fc5035",
+      "story_beats": [
+        {
+          "speech": "Look at the pulsating light dimming inside this ancient root chamber; we have only moments before the entire forest loses its vitality."
+        },
+        {
+          "speech": "You must pull the heavy stone lever while I stabilize the vibrating energy lines to prevent the floor from collapsing beneath our feet."
+        },
+        {
+          "speech": "The pressure plate is jammed by hardened vines, so we must combine our strength to clear the path before the ceiling comes crashing down."
+        },
+        {
+          "speech": "The light flows through the soil once again; our combined efforts have saved the forest, ensuring that life will flourish for future generations."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-23T00:02:11.428413+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-23T00:22:19.739143+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -109,36 +159,70 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-23T00:02:11.428484+00:00",
+    "at": "2026-10-23T00:22:19.739230+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-22T23:59:00.107718+00:00",
+    "at": "2026-10-23T00:20:48.630093+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-6d00c9884f454d7a4021",
-    "video_url": "https://www.youtube.com/watch?v=VlQkoux3_b0",
+    "content_id": "rayvan-gemini-48667e8cdf8d86ff06b1",
+    "video_url": "https://www.youtube.com/watch?v=bHkZgo89U-w",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-23T00:02:11.428336+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-23T00:22:19.738878+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-23T00:02:11.428406+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "counters": {},
+    "at": "2026-10-23T00:22:19.739136+00:00",
+    "collection_status": "collected",
+    "publish_step": "success",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 227,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3
+        },
+        "seen": 4,
+        "total": 298
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 299,
+        "fingerprint": 0,
+        "id": 0,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 299,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 299,
+        "remaining": 228
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 1,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
