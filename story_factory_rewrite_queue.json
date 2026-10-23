@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "2ed50ee36d08f5447a5bc01b",
-      "source_sha256": "2b958af166c50bc27162a1c6448815d3667a29420c738fa5629e068d9a0c1d25",
+      "candidate_id": "195bf0b1b411a1bf3b3e2c79",
+      "source_sha256": "6a58e9cd7629b31758de134b6ca5120bdabf268089e420ad901c8ae2fae7c9a9",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-f0f3f737027cc6074981",
-        "title": "The Great Cheese-Powered Whistle",
-        "hook": "Market Madness",
-        "question": "How do you stop a stampede of rogue mechanized goats in a crowded farmers market?",
-        "answer": "You build a hyper-frequency cheese whistle that plays a catchy polka melody.",
+        "content_id": "rayvan-gemini-996a6e8aaee8ec33001e",
+        "title": "The Great Turnip Copter Debacle",
+        "hook": "A Shocking Discovery",
+        "question": "How did Barnaby sell his flying root vegetables?",
+        "answer": "By attaching propellers to rutabagas, creating the world's first airborne salad bar.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,154 +29,76 @@
         ],
         "story_beats": [
           {
-            "headline": "Market Madness",
-            "speech": "Behold my latest contraption, a cheddar-driven acoustic disruptor designed to calm aggressive livestock instantly!",
+            "headline": "A Shocking Discovery",
+            "speech": "Behold the root of the future, citizens! These turnips do not merely sit in dirt; they possess aerodynamic lift!",
+            "visual": "signal",
+            "label": "The Aerial Root",
+            "story_beat": "reveal",
+            "visual_prompt": "Barnaby stands in the crowded market square holding a glowing red brass beacon, pointing proudly at a giant purple turnip hovering in mid-air above the vegetable stalls, wearing a tweed vest and a bewildered expression.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Building the Fleet",
+            "speech": "We must strap copper propellers to every single vegetable before the health inspector notices the hovering parsnips.",
             "visual": "robot",
-            "label": "The Inventor's Reveal",
-            "story_beat": "reveal",
-            "visual_prompt": "An eccentric inventor proudly holds a bizarre brass robot-shaped whistle adorned with aging Swiss cheese inside a bustling outdoor farmers market, looking nervously at approaching mechanical goats.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Mechanical Assembly",
-            "speech": "We must rapidly insert this aged Gouda wheel into the primary chamber before the brass gears overheat completely.",
-            "visual": "door",
-            "label": "Assembling the Gadget",
+            "label": "Assembly Line",
             "story_beat": "build",
-            "visual_prompt": "The inventor frantically stuffs a yellow wheel of Gouda cheese through a small trap door on the side of a large steam-powered wooden apparatus, surrounded by spilled vegetables.",
+            "visual_prompt": "Barnaby operates a clunky brass steam-powered automaton that mechanically fastens tiny wooden propellers onto long white radishes, situated in a cramped market alley filled with hanging produce.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Activating the Tone",
-            "speech": "Turn the iron crank faster and unleash the high-pitched polka melody to confuse their navigation systems!",
-            "visual": "signal",
-            "label": "The Core Mechanism",
-            "story_beat": "mechanism",
-            "visual_prompt": "Glowing musical soundwave signals blast from the brass horn of the contraption while mechanical goats stop in their tracks, twitching their robotic ears in confusion.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A Peaceful Market",
-            "speech": "It actually worked! The mechanical goats are fast asleep, and our market stalls remain completely undamaged today.",
+            "headline": "The Mechanical Flaw",
+            "speech": "Turn off the draft valves! The carrots are achieving critical velocity and heading straight for the bakery chimney!",
             "visual": "ship",
-            "label": "The Sweet Success",
-            "story_beat": "payoff",
-            "visual_prompt": "The smiling inventor relaxes next to the sleeping mechanical goats while a nearby market banner shaped like an airship flutters gently in the morning breeze.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures and whimsical character designs.",
-          "characters": {
-            "inventor": "A tall, frantic inventor with messy red hair, wearing a green tweed vest, round spectacles, and soot-stained trousers."
-          },
-          "locations": {
-            "market": "A vibrant outdoor farmers market with wooden stalls, hanging lanterns, and colorful canvas awnings."
-          },
-          "objects": {
-            "whistle": "A complex brass contraption shaped like a miniature robot with slots for holding various types of cheese.",
-            "goat": "A cute, clanking robotic goat with silver metallic fleece and glowing blue LED eyes."
-          }
-        },
-        "plot_fingerprint": "1036dfc877f8d103b89a1eaac436fad3d2baba35a1aaba24e5a581b1a56799d9"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "353e243acb15138f47ba2464",
-      "source_sha256": "43217f62b0a91af1ad755b52d5dee1c75aca4bbf1324deb8c388e89cc6f866c8",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-25656a37c2432c4e5322",
-        "title": "The Whispering Sands of Arid-4",
-        "hook": "A Desert Mirage",
-        "question": "What secret did the singing dunes conceal from the weary explorers?",
-        "answer": "An underground subterranean garden powered by ancient geothermal acoustic resonators.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "A Desert Mirage",
-            "speech": "My sensors indicate strange acoustic frequencies echoing directly from beneath this barren, unforgiving planetary surface.",
-            "visual": "planet",
-            "label": "Acoustic Anomaly",
-            "story_beat": "reveal",
-            "visual_prompt": "Explorer Kael stands on a desolate planetary dune, holding a glowing metal scanner, looking at vast rolling orange sand hills under a twin sunset.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Unearthing the Mechanism",
-            "speech": "We must activate the resonant tuning fork to align with the subterranean harmonic vibrations before sunset.",
-            "visual": "signal",
-            "label": "Tuning the Waves",
+            "label": "Propulsion Failure",
             "story_beat": "mechanism",
-            "visual_prompt": "Kael kneels in the sand, activating a pulsing blue holographic signal projected from a brass tripod device in front of him.",
+            "visual_prompt": "Barnaby desperately chases a massive swarm of flying carrots resembling a tiny airship armada as they buzz wildly around a tall brick oven chimney in the bustling outdoor marketplace.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Hidden Portal Opens",
-            "speech": "The sand is parting! A massive stone hatch is sliding open, revealing steps leading deep into the cool dark earth.",
+            "headline": "A Delicious Landing",
+            "speech": "Dinner is served directly from the stratosphere! Catch your own roast sides before they escape the county!",
             "visual": "door",
-            "label": "Subterranean Entry",
-            "story_beat": "build",
-            "visual_prompt": "A heavy circular stone door rises from the desert floor, revealing glowing green stairs leading downward into the earth as Kael watches in amazement.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "An Oasis in the Deep",
-            "speech": "Incredible! Bioluminescent flora and freshwater streams thrive down here, sustained entirely by the melodic heartbeat of the planet.",
-            "visual": "forest",
-            "label": "Living Biosphere",
+            "label": "Market Delivery",
             "story_beat": "payoff",
-            "visual_prompt": "Kael stands inside a vast underground cavern filled with glowing purple trees, crystal-clear water streams, and floating spores in the air.",
+            "visual_prompt": "Barnaby opens a wooden market stall shutter to watch astonished shoppers happily grab falling, propeller-fitted potatoes right out of the sky as sunset paints the lively town square.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Cinematic sci-fi realism with vibrant lighting and rich atmospheric dust effects.",
+          "style": "Wimsical stop-motion claymation aesthetic with rich earthy textures and vibrant market colors",
           "characters": {
-            "Kael": "A male desert botanist in his thirties, with short dark hair, wearing a weatherproof tan hooded jacket, utility trousers, and high-tech tinted goggles resting on his forehead."
+            "Barnaby": "An energetic inventor with wild gray hair, wearing a patched tweed vest, round spectacles, and muddy leather boots."
           },
           "locations": {
-            "Arid-4 Surface": "A harsh orange desert planet featuring endless rolling dunes, distant jagged mountains, and a double sun setting on the horizon.",
-            "Subterranean Cavern": "A lush underground cavern illuminated by bioluminescent flora, crystal pools, and ancient stone architecture covered in moss."
+            "market_square": "A bustling cobblestone town square packed with striped canvas awnings, wooden crates, and hanging lanterns."
           },
           "objects": {
-            "Scanner": "A compact handheld device made of brushed titanium with a glowing circular turquoise display screen.",
-            "Tuning Fork": "A large ornate brass tuning fork inscribed with glowing geometric circuit patterns along its prongs."
+            "brass_beacon": "A polished brass signaling device with a glowing red glass lens and a toggle switch.",
+            "propeller_turnip": "A large purple-and-white turnip fitted with four miniature spinning wooden blades."
           }
         },
-        "plot_fingerprint": "88b97eb7a8e44c984ab9207736a0e6955a1cad195ffc7f38c6662049ed98aba5"
+        "plot_fingerprint": "017dc7c9a533cce6063723b67b71ecda25932d8d6c5a2974efcb01b574b47b7b"
       },
       "approved": false
     },
     {
-      "candidate_id": "86b9bbbe1b8e3b0ec60b4b66",
-      "source_sha256": "199c321f005f311696bba4fb515cd4b3f1e490db6d556d13971ed0368a62520c",
+      "candidate_id": "8f29100c3c8f5789b2b31976",
+      "source_sha256": "592083b1f72426cdc27d9184d0c6913708078fcd188072997cbc507a58af67e1",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-f07c3f09a4c83680752e",
+        "content_id": "rayvan-gemini-a91fc5d1bb53c713833e",
         "title": "The Weaver's Last Thread",
-        "hook": "Discovery in the Attic",
-        "question": "What happens when a village must choose between preserving its ancient heritage and ensuring its immediate survival?",
-        "answer": "The village leaders decide to trade their last ceremonial loom tapestry for winter grain, honoring the past by feeding the future.",
+        "hook": "The Hidden Secret",
+        "question": "Can true friendship survive a choice between personal honor and community survival?",
+        "answer": "Yes, when honesty replaces hidden sacrifice.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -184,65 +106,142 @@
         ],
         "story_beats": [
           {
-            "headline": "Discovery in the Attic",
-            "speech": "Look at these intricate golden threads. They hold the history of every harvest our ancestors ever gathered.",
-            "visual": "door",
-            "label": "The Hidden Attic",
-            "story_beat": "reveal",
-            "visual_prompt": "Elder Mira standing inside the dusty wooden attic, holding a wooden storage chest open, wearing a heavy wool cloak, looking astonished at the glowing golden tapestry inside while holding a tallow candle.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Hard Choice",
-            "speech": "We cannot eat gold or memory. If we keep this tapestry, the children will not survive the coming frost.",
+            "headline": "The Hidden Secret",
+            "speech": "Marta, I found the final bundle of wool in the ruined mill. We can save the winter coats, but nobody must know.",
             "visual": "forest",
-            "label": "The Village Square",
+            "label": "The Discovery",
+            "story_beat": "reveal",
+            "visual_prompt": "A nervous young woman with auburn hair in a green wool tunic holds a damp bundle of raw gray wool in a misty pine forest near an old stone mill.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Impossible Choice",
+            "speech": "If we keep this secret fleece, the village mayor will punish your family for hoarding while others freeze tonight.",
+            "visual": "door",
+            "label": "The Dilemma",
             "story_beat": "build",
-            "visual_prompt": "Bren standing in the snowy cobblestone village square, wearing a thick fur-lined tunic, gesturing urgently toward the barren surrounding forest while holding a carved wooden ledger.",
+            "visual_prompt": "An elderly village artisan with gray hair and a blue apron stands in a heavy oak doorway, gesturing urgently toward the snowy village square outside.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Unraveling the Past",
-            "speech": "Every stitch we pull apart releases a generation of stories, trading our treasured legacy for daily bread.",
+            "headline": "The Confession",
+            "speech": "I cannot let you take the blame alone, Bram. I am bringing the hidden fleece to the council house right now.",
             "visual": "signal",
-            "label": "The Communal Workshop",
-            "story_beat": "mechanism",
-            "visual_prompt": "Mira sitting at a large wooden loom inside a warm workshop, carefully cutting a golden thread with iron shears, holding a bundle of harvested grain nearby.",
+            "label": "The Turning Point",
+            "story_beat": "twist",
+            "visual_prompt": "The young woman holds a glowing iron lantern high in the dark cobblestone street, casting a bright warning beam toward the distant town hall.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "A New Harvest",
-            "speech": "Our history lives in our hearts, not on the wall. Now we have the strength to weave a brighter tomorrow.",
+            "headline": "A New Beginning",
+            "speech": "By sharing the burden together, the elders forgave us and we wove warmth for every home in the valley.",
             "visual": "ship",
-            "label": "The River Dock",
+            "label": "The Resolution",
             "story_beat": "payoff",
-            "visual_prompt": "Bren and Mira standing smiling together at the wooden river dock, watching a merchant trading boat arrive with sacks of grain, holding a freshly baked loaf of bread between them.",
+            "visual_prompt": "Two friends stand together on a wooden balcony shaped like a river boat hull, smiling under a golden sunset above a peaceful, bustling village.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Warm historical realism with rich textures of wood, wool, and snow.",
+          "style": "warm folk-art illustration style with rich earthy tones and detailed textures",
           "characters": {
-            "Mira": "An elderly village weaver with silver hair tied in a bun, wearing a deep green wool dress and a heavy brown cloak.",
-            "Bren": "A pragmatic village council leader with a weathered face, short gray beard, and a thick fur-lined tunic."
+            "Marta": "A determined young woman with bright auburn hair tied back, wearing a sturdy green wool tunic and brown leather boots.",
+            "Bram": "A thoughtful elderly artisan with silver hair and a kind face, wearing a heavy blue apron over a homespun gray shirt."
           },
           "locations": {
-            "The Hidden Attic": "A cramped, dusty wooden attic filled with straw bundles and antique chests under a slanted timber roof.",
-            "The Village Square": "A snowy cobblestone square surrounded by timber-framed cottages and bare winter trees.",
-            "The Communal Workshop": "A cozy room dominated by a massive wooden loom and illuminated by soft hearth firelight.",
-            "The River Dock": "A sturdy wooden pier overlooking a misty river with rolling hills in the background."
+            "Forest Mill": "An overgrown, misty woodland setting with moss-covered stone walls and tall pine trees.",
+            "Village Square": "A historic cobblestone village surrounded by timber-framed houses under a soft winter twilight sky."
           },
           "objects": {
-            "golden tapestry": "An ancient, intricately woven wall hanging made of shimmering golden wool threads depicting historical village scenes.",
-            "iron shears": "A pair of heavy, hand-forged black iron scissors with worn handles used for cutting thick fabric.",
-            "wooden ledger": "A small bound book with weathered parchment pages and a leather strap closure."
+            "Fleece Bundle": "A tight roll of coarse, damp gray sheep's wool tied with rough hemp twine.",
+            "Iron Lantern": "A black wrought-iron lantern with amber glass panels casting a warm, steady glow."
           }
         },
-        "plot_fingerprint": "15edb1d52bc665b10d7e544bc5900867f7d61dab3bc77fdf00f1f4bad4e515e5"
+        "plot_fingerprint": "3a6a45fc446d5672cdd5b48c62e839915b084a2f0bef1c8fde741ff9dd3ce7f1"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "075cccac304240f34d52f276",
+      "source_sha256": "98164fd5c33ba0e8e03d1a6787f1215d26cb077444d0d1f3b5eaa837ba4cf328",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-bad023c94ba75be8f9de",
+        "title": "The Glacier's Silent Code",
+        "hook": "The Hidden Fracture",
+        "question": "Can an automated seismic drill save the team before the crevasse completely collapses?",
+        "answer": "Yes, by recalibrating the acoustic sensor to map the hidden ice fractures in real time.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Hidden Fracture",
+            "speech": "Look at the seismic readout; the main ridge is shifting faster than our models predicted.",
+            "visual": "signal",
+            "label": "Seismic Anomaly",
+            "story_beat": "reveal",
+            "visual_prompt": "Dr. Maeve Vance stands inside the glowing blue research tent, pointing her gloved hand at a flickering holographic signal display showing erratic subterranean wave patterns.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Deploying the Probe",
+            "speech": "We must lower the deep-core probe immediately to relieve the pressure buildup beneath the camp.",
+            "visual": "robot",
+            "label": "Probe Launch",
+            "story_beat": "mechanism",
+            "visual_prompt": "Mechanic Jax Thorne guides a metallic orange autonomous crawler robot out of the hatch into the howling blizzard outside the arctic base.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Critical Choice",
+            "speech": "The winch is freezing up, so I have to manually trigger the acoustic release valve right now.",
+            "visual": "ship",
+            "label": "Manual Override",
+            "story_beat": "twist",
+            "visual_prompt": "Jax Thorne clings to the icy railing of the transport sled in the blinding snowstorm, desperately pulling the heavy steel lever of the winch.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Safe Passage",
+            "speech": "The acoustic map stabilized the ice shelf just in time, securing our route back to safety.",
+            "visual": "door",
+            "label": "Secure Escape",
+            "story_beat": "payoff",
+            "visual_prompt": "Dr. Maeve Vance and Jax Thorne safely step through the heavy reinforced airlock door of the main research station as the sunrise breaks over the white tundra.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "visual_bible": {
+          "style": "Cinematic and realistic high-contrast arctic survival drama with natural lighting and vibrant gear accents.",
+          "characters": {
+            "Maeve Vance": "Lead researcher with a weathered face, intense brown eyes, wearing a heavy red arctic parka with white fur trim and high-tech polarized goggles.",
+            "Jax Thorne": "Skilled field mechanic with a short beard, rugged features, wearing a bright orange insulated jumpsuit and thick leather gloves."
+          },
+          "locations": {
+            "Research Tent": "A glowing dome-shaped fabric shelter lit from within by blue holographic displays and tactical equipment.",
+            "Ice Ridge": "A vast, windswept expanse of blinding white snow, jagged blue glacial ice, and deep shadowed crevasses under a pale grey sky."
+          },
+          "objects": {
+            "Signal Display": "A compact holographic projector casting translucent cyan waveforms and topographic contour lines into the air.",
+            "Core Probe": "A sleek, cylindrical metallic crawler robot with articulated treads and a flashing amber status light on its chassis.",
+            "Winch Lever": "A heavy, frost-covered mechanical steel handle attached to a motorized cable drum on the transport sled."
+          }
+        },
+        "plot_fingerprint": "435ac28c55a62eb2dee9d9b18a722c52ba7f2b29e001496421e33f0dea1a7ef0"
       },
       "approved": false
     }
