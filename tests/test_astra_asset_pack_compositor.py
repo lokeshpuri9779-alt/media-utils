@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from PIL import Image
-from astra_v2.visual_artifact_backdrop import apply_pack_background
+from astra_v2.visual_artifact_backdrop import apply_pack_background, _cached_pack_background
 
 
 class AssetPackCompositorTests(unittest.TestCase):
@@ -27,6 +27,11 @@ class AssetPackCompositorTests(unittest.TestCase):
                     "stable-scene",root=root,video_format=fmt)
                 self.assertEqual(result.size,size)
                 self.assertNotEqual(result.getpixel((size[0]//2,size[1]//2)),(0,0,0))
+            info_before=_cached_pack_background.cache_info()
+            apply_pack_background(Image.new("RGB",(1080,1920)),{"story_environment":"forest"},
+                                  "stable-scene",root=root,video_format="shorts")
+            info_after=_cached_pack_background.cache_info()
+            self.assertGreater(info_after.hits,info_before.hits)
             untouched=Image.new("RGB",(1080,1920),(0,0,0))
             self.assertEqual(apply_pack_background(untouched,{"story_environment":"unknown"},
                 "stable",root=root).getpixel((500,500)),(0,0,0))
