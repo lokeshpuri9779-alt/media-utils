@@ -41,7 +41,8 @@ def _enabled(name, secret):
 def enabled():
     return any((_enabled("ASTRA_GEMINI_ENABLED", "GEMINI_API_KEY"),
                 _enabled("ASTRA_GROQ_ENABLED", "GROQ_API_KEY"),
-                _enabled("ASTRA_OPENROUTER_ENABLED", "OPENROUTER_API_KEY")))
+                _enabled("ASTRA_OPENROUTER_ENABLED", "OPENROUTER_API_KEY"),
+                _enabled("ASTRA_NVIDIA_ENABLED", "NVIDIA_API_KEY") and os.getenv("ASTRA_NVIDIA_FREE_CONFIRMED") == "1"))
 
 
 def _openai_compatible(provider, base_url, model, secret, excluded_titles):
@@ -124,7 +125,7 @@ def _validate(data, provider, excluded_ids, excluded_titles, prior_stories):
 def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
     """Try enabled providers in configured order; never relax publication gates."""
     order = [x.strip().lower() for x in os.getenv(
-        "ASTRA_OMNIROUTE_ORDER", "gemini,groq,openrouter").split(",") if x.strip()]
+        "ASTRA_OMNIROUTE_ORDER", "gemini,groq,openrouter,nvidia").split(",") if x.strip()]
     if premise is not None and "gemini" not in order:
         raise ValueError("Premise-guided generation requires configured Gemini provider")
     errors = []
@@ -143,6 +144,17 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
                     os.getenv("ASTRA_GROQ_MODEL", "llama-3.3-70b-versatile"), "GROQ_API_KEY", excluded_titles)
                 story = _validate(data, "Groq", excluded_ids, excluded_titles, prior_stories)
                 print("ASTRA_OMNIROUTE_PROVIDER=groq")
+                return story
+            elif provider == "nvidia" and _enabled("ASTRA_NVIDIA_ENABLED", "NVIDIA_API_KEY"):
+                if os.getenv("ASTRA_NVIDIA_FREE_CONFIRMED") != "1":
+                    raise ValueError("NVIDIA free-tier confirmation required")
+                model = os.getenv("ASTRA_NVIDIA_MODEL", "").strip()
+                if not model or not all(c.isalnum() or c in "/._-" for c in model):
+                    raise ValueError("NVIDIA model must be explicitly configured")
+                data = _openai_compatible("NVIDIA", "https://integrate.api.nvidia.com/v1/chat/completions",
+                    model, "NVIDIA_API_KEY", excluded_titles)
+                story = _validate(data, "NVIDIA", excluded_ids, excluded_titles, prior_stories)
+                print("ASTRA_OMNIROUTE_PROVIDER=nvidia")
                 return story
             elif provider == "openrouter" and _enabled("ASTRA_OPENROUTER_ENABLED", "OPENROUTER_API_KEY"):
                 model = os.getenv("ASTRA_OPENROUTER_MODEL", "openrouter/free")
