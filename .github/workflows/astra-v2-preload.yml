@@ -117,6 +117,7 @@ jobs:
         with:
           enable-cache: true
       - name: Install rendering stack
+        timeout-minutes: 18
         run: |
           echo "ASTRA_INSTALL_STARTED=$(date -u +%FT%TZ)"
           python --version
