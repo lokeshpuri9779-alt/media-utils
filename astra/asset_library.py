@@ -60,7 +60,8 @@ def generate_semantic_assets(stories, output_root=None, limit=24):
         entries.append({"id": "semantic-" + identity,
                         "path": destination.relative_to(root).as_posix(),
                         "category": "background", "tags": tags,
-                        "status": "approved", "source": "offline-semantic-generator",\n                        "sha256": hashlib.sha256(destination.read_bytes()).hexdigest()})
+                        "status": "approved", "source": "offline-semantic-generator",
+                        "sha256": hashlib.sha256(destination.read_bytes()).hexdigest()})
     manifest = root / "art" / "manifest.json"
     manifest.parent.mkdir(parents=True, exist_ok=True)
     # Preserve independently reviewed art and other existing licensed assets.
