@@ -178,12 +178,16 @@ def configured_free_image_providers():
     return providers
 
 
-def generate_free_image_with_failover(prompt, *, requester=None):
+def generate_free_image_with_failover(prompt, *, requester=None, max_attempts=None, attempt_counter=None):
     """Attempt the next explicitly free provider only on HTTP 429."""
     providers = configured_free_image_providers()
     if not providers:
         return None
     for index, (config, key) in enumerate(providers):
+        if max_attempts is not None and index >= max_attempts:
+            raise ValueError("Image provider request budget exhausted")
+        if attempt_counter is not None:
+            attempt_counter.append(1)
         try:
             return generate_image(prompt, requester=requester, config=config, api_key=key)
         except ValueError as exc:
@@ -323,8 +327,16 @@ def preproduce(queue, root, *, generator=generate_free_image_with_failover, limi
                     row["status"] = ("provider_quota_exhausted" if provider_quota_exhausted else
                                      "provider_not_configured" if provider_missing else "pending_budget")
                 else:
-                    calls += 1
-                    image = generator(prompt)
+                    if generator is generate_free_image_with_failover:
+                        attempts = []
+                        try:
+                            image = generator(prompt, max_attempts=limit - calls,
+                                              attempt_counter=attempts)
+                        finally:
+                            calls += len(attempts)
+                    else:
+                        calls += 1
+                        image = generator(prompt)
                     if image is None:
                         provider_missing = True
                         row["status"] = "provider_not_configured"

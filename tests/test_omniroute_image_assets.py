@@ -191,6 +191,40 @@ class ImageAssetsTests(unittest.TestCase):
         with patch.dict("os.environ", env, clear=True):
             self.assertEqual(generate_free_image_with_failover("scene", requester=lambda req: png()), png())
 
+    def test_combined_provider_attempt_budget(self):
+        import urllib.error
+        env = {"ASTRA_OMNI_IMAGE_ENDPOINT": "https://primary.example/images",
+               "ASTRA_OMNI_IMAGE_MODEL": "free-primary",
+               "ASTRA_OMNI_IMAGE_FREE_CONFIRMED": "1",
+               "ASTRA_OMNI_IMAGE_FALLBACK_ENDPOINT": "https://secondary.example/images",
+               "ASTRA_OMNI_IMAGE_FALLBACK_MODEL": "free-secondary",
+               "ASTRA_OMNI_IMAGE_FALLBACK_FREE_CONFIRMED": "1"}
+        queue = {"rewrites": [{"status": "awaiting_independent_editorial_approval",
+                  "story": {"title": "Budget story", "content_id": "budget-story",
+                            "story_beats": [{"speech": "A first event occurs."},
+                                            {"speech": "A second event occurs."}]}}]}
+        attempts = []
+        def requester(request):
+            attempts.append(request.full_url)
+            if "primary" in request.full_url:
+                raise urllib.error.HTTPError(request.full_url, 429, "quota", {}, io.BytesIO(b""))
+            return png()
+        with patch.dict("os.environ", env, clear=True):
+            from astra_v2.omniroute_image_assets import generate_image
+            with patch("astra_v2.omniroute_image_assets.generate_image") as mock_generate:
+                def fake_generate(prompt, *, config, api_key, requester=None):
+                    from urllib.error import HTTPError
+                    attempts.append(config[0])
+                    if "primary" in config[0]:
+                        raise ValueError("Image provider HTTP 429")
+                    return png()
+                mock_generate.side_effect = fake_generate
+                with tempfile.TemporaryDirectory() as root:
+                    result = preproduce(queue, root, limit=1)
+        self.assertEqual(result["provider_calls"], 1)
+        self.assertEqual(attempts, ["https://primary.example/images"])
+        self.assertTrue(all(not asset["production_ready"] for asset in result["assets"]))
+
     def test_immutable_deduplication_and_corruption(self):
         with tempfile.TemporaryDirectory() as root:
             a = store_asset(png(), root, kind="scene", prompt="first")
