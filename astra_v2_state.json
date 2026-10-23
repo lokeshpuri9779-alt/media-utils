@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-23",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 30,
+  "attempts": 31,
   "confirmed_today": 30,
-  "last_attempt_at": "2026-10-23T14:07:16.033317+00:00",
+  "last_attempt_at": "2026-10-23T14:35:56.568153+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -249,29 +249,55 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "-TYggo6JyA8": {
+      "content_id": "rayvan-gemini-5b85bb2170478a58778a",
+      "title": "The Orchard Keeper and the Final Winter Harvest",
+      "day": "2026-10-23",
+      "uploaded_at": "2026-10-23T14:35:58.215929+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "eca1e9949980564d81490e76ebf815644dc0edaa785a596ee16d9521aa22c39b",
+      "story_beats": [
+        {
+          "speech": "Look closely at these ancient, frost-bitten boughs, Silas; the last golden seeds of our heritage are trapped beneath this thick, unyielding ice."
+        },
+        {
+          "speech": "We cannot open the box without destroying the locking gears, but if we do, the seeds will surely wither in this unnatural bitter cold."
+        },
+        {
+          "speech": "If I force the release, the warmth of your touch might wake the seeds, but the box itself will turn to dust forever, Silas."
+        },
+        {
+          "speech": "Let the wood perish so that our children might eat; we choose the harvest of tomorrow over the heavy, hollow anchors of our yesterday."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-23T14:11:38.255878+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_preflight_at": "2026-10-23T14:33:03.302214+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-23T14:11:38.318534+00:00",
+    "at": "2026-10-23T14:35:58.651163+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-23T09:21:49.309461+00:00",
   "reserved": {
@@ -964,13 +990,36 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-5b85bb2170478a58778a": {
+      "at": "2026-10-23T14:35:56.568142+00:00",
+      "title": "The Orchard Keeper and the Final Winter Harvest",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "eca1e9949980564d81490e76ebf815644dc0edaa785a596ee16d9521aa22c39b",
+      "story_beats": [
+        {
+          "speech": "Look closely at these ancient, frost-bitten boughs, Silas; the last golden seeds of our heritage are trapped beneath this thick, unyielding ice."
+        },
+        {
+          "speech": "We cannot open the box without destroying the locking gears, but if we do, the seeds will surely wither in this unnatural bitter cold."
+        },
+        {
+          "speech": "If I force the release, the warmth of your touch might wake the seeds, but the box itself will turn to dust forever, Silas."
+        },
+        {
+          "speech": "Let the wood perish so that our children might eat; we choose the harvest of tomorrow over the heavy, hollow anchors of our yesterday."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-23T14:11:38.318485+00:00",
-    "publication_outcome": "skipped",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-23T14:35:58.651105+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -978,36 +1027,70 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-23T14:11:38.318525+00:00",
+    "at": "2026-10-23T14:35:58.651153+00:00",
     "history_file_present": true,
-    "publication_outcome": "skipped",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-23T14:05:44.929631+00:00",
+    "at": "2026-10-23T14:34:13.813426+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-2497130d0430c7d7c1b6",
-    "video_url": "https://www.youtube.com/watch?v=j9dB5jlHiSY",
+    "content_id": "rayvan-gemini-5b85bb2170478a58778a",
+    "video_url": "https://www.youtube.com/watch?v=-TYggo6JyA8",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-23T14:11:38.318444+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-23T14:35:58.650889+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "skipped",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-23T14:11:38.318482+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "counters": {},
+    "at": "2026-10-23T14:35:58.651100+00:00",
+    "collection_status": "collected",
+    "publish_step": "success",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 246,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3
+        },
+        "seen": 9,
+        "total": 322
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 323,
+        "fingerprint": 0,
+        "id": 6,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 317,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 317,
+        "remaining": 247
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 1,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
