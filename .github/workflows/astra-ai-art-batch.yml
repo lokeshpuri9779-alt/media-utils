@@ -124,7 +124,7 @@ jobs:
                   "dimensions": dimensions,
                   "review_status": "awaiting_independent_review"})
           (root / "review_inventory.json").write_text(
-              json.dumps(report, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
+              json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
           print("ASTRA_IMAGE_ARCHIVE_VERIFIED=" + str(len(report["images"])))
           PY
       - name: Archive review-only scene images and manifest
