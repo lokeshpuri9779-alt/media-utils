@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "032ce741b6886c05209dfa77",
-      "source_sha256": "58ea0c5723c9e339c010265c2fc3fcbe7448feffebe7d624a8b4f6a67783a752",
+      "candidate_id": "4975a30580caee1f6bb696b8",
+      "source_sha256": "1ad199b3dfde1d14800275f1d570916879869cbe70bd9c96279971639408f40f",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-15144fc650ef13a2220c",
-        "title": "The Great Tomato Launchpad",
-        "hook": "A Sticky Situation",
-        "question": "How did Barnaby turn a breakfast disaster into market dominance?",
-        "answer": "He invented an automated fruit-sorting catapult that rescued his vegetable stall from ruin.",
+        "content_id": "rayvan-gemini-41bb425f1a2e8bfcdbbc",
+        "title": "The Great Cheese-Powered Broom Debacle",
+        "hook": "A Sticky Discovery",
+        "question": "Can an inventor sell a completely malfunctioning household item in a crowded medieval market?",
+        "answer": "Yes, but only if the chaos causes a happy accident that creates an entirely new product demand.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,76 +29,76 @@
         ],
         "story_beats": [
           {
-            "headline": "A Sticky Situation",
-            "speech": "My magnificent automatic fruit-sorting catapult is almost ready to revolutionize this entire crowded morning market!",
+            "headline": "A Sticky Discovery",
+            "speech": "Behold the Gouda-Sweep! It harnesses dairy elasticity to vacuum your floors while smelling faintly of a picnic.",
             "visual": "robot",
-            "label": "The Setup",
+            "label": "The Pitch",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby standing in a busy market square, pointing proudly at a large mechanical robot contraption with gears, while holding a wrench.",
+            "visual_prompt": "Inventor Barnaby stands at a crowded cobblestone market stall, gesturing proudly toward a whirring, cheese-smelling mechanical broom holding a wedge of cheese in its clamp, looking confident.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Calibrating the Chaos",
-            "speech": "We must tighten this main tension spring immediately before overripe tomatoes launch into the crowd again!",
+            "headline": "The Over-Inflation",
+            "speech": "If you simply twist the cheddar valve twice, the suction increases tenfold to tackle even the muddiest boots.",
             "visual": "signal",
-            "label": "The Tensions Rise",
+            "label": "The Adjustment",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically adjusting a flashing red signal panel on the machine while dodge-rolling to avoid a flying tomato.",
+            "visual_prompt": "Barnaby frantically twists a brass valve on the broom handle while a red hazard light flashes on its body, shooting a thin jet of melted Swiss cheese across the stall.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Mechanical Miracle",
-            "speech": "Watch as the optical sensor effortlessly sorts bruised produce from premium vegetables with pinpoint accuracy!",
+            "headline": "The Dairy Eruption",
+            "speech": "Oh dear, the pressure rating was strictly for hard Parmesan! Duck beneath the Brie blast, everyone!",
             "visual": "door",
-            "label": "The Core Action",
+            "label": "The Mishap",
             "story_beat": "mechanism",
-            "visual_prompt": "A trapdoor on the machine opens automatically, sorting a barrage of vegetables into separate wooden crates precisely as Barnaby watches.",
+            "visual_prompt": "Barnaby ducks behind his wooden stall counter as a colossal stream of assorted melted cheeses erupts from the broom, splashing against the tavern door across the busy street.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Market Day Monopoly",
-            "speech": "Look at these delighted customers cheering for our perfectly sorted produce. We finally saved the family business!",
+            "headline": "An Accidental Feast",
+            "speech": "It is not a cleaner at all! It is the finest instant fondue cannon in the entire province. Sold out!",
             "visual": "ship",
-            "label": "The Final Triumph",
+            "label": "The Success",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby holding a bag of gold coins in front of his bustling stall shaped like an old market ship, with cheering crowds all around.",
+            "visual_prompt": "Excited market customers happily scoop warm cheese off the walls with giant breadsticks while Barnaby counts a massive pile of silver coins, holding a tiny wooden spoon.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Vibrant and whimsical 3D animated comedy style with rich textures and warm morning lighting.",
+          "style": "Bright, whimsical stop-motion claymation style with rich textures and warm medieval lighting.",
           "characters": {
-            "Barnaby": "An eccentric young inventor with messy brown hair, a flour-dusted green apron, and round brass goggles pushed up on his forehead."
+            "Barnaby": "An eccentric inventor with wild ginger hair, a soot-stained waistcoat, oversized round spectacles, and an endlessly hopeful expression."
           },
           "locations": {
-            "Market Square": "A bustling, sunlit cobblestone open-air market filled with colorful awnings, wooden stalls, and eager shoppers."
+            "Market Square": "A bustling medieval marketplace featuring striped canvas awnings, cobblestone streets, and wooden merchant stalls piled high with goods."
           },
           "objects": {
-            "Catapult": "A bulky, steam-powered mechanical contraption made of polished brass pipes, wooden beams, and a flashing red signal light.",
-            "Wrench": "A heavy, grease-stained iron tool with a rusted handle."
+            "Gouda-Sweep": "A clunky mechanical broom constructed of polished oak wood, brass gears, copper tubing, and a spring-loaded cheese clamp near the bristle base.",
+            "Coin Pouch": "A well-worn leather drawstring pouch overflowing with shiny silver coins."
           }
         },
-        "plot_fingerprint": "284f980c1998bbf7bb76026113afb3609ead6076c8133da5f5569545bf610fd3"
+        "plot_fingerprint": "c1bb5ae4d82e24d1076eee3cd20045d38a9680bd3012a2ecede20e3c0ece81e0"
       },
       "approved": false
     },
     {
-      "candidate_id": "f2ad85f712dd81053d42683e",
-      "source_sha256": "e6e9e3888140d67a5291b3fc60f98306bff9c99b460a89ec49d455fdc18e74ef",
+      "candidate_id": "b8c6fad3c848338dcfd752ea",
+      "source_sha256": "8cc94eefddb157349b12c00861901bc0da2af0d9bc267a26badff7196d030e62",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-d0a83ac8d6683cda8f5b",
-        "title": "The Singing Dunes",
-        "hook": "A Desert Mystery",
-        "question": "What secret do the singing dunes of the Arid Reach hide beneath their scorching sands?",
-        "answer": "They conceal an ancient subterranean greenhouse powered entirely by concentrated sunlight.",
+        "content_id": "rayvan-gemini-d75cf172d3c69a369095",
+        "title": "The Weaver's Last Thread",
+        "hook": "The Hidden Ledger",
+        "question": "Can true friendship survive an impossible village choice?",
+        "answer": "Yes, by sacrificing personal legacy for the greater communal good.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -106,77 +106,78 @@
         ],
         "story_beats": [
           {
-            "headline": "A Desert Mystery",
-            "speech": "Look at the strange harmonic tremors in the sand. This acoustic anomaly defies every known geological rule of the desert.",
-            "visual": "signal",
-            "label": "Acoustic Anomaly",
-            "story_beat": "reveal",
-            "visual_prompt": "Dr. Aris Vance, a weathered explorer in a rugged canvas sun-cloak, kneels on golden dunes while studying a glowing seismic reader that displays sharp audio waveforms in the harsh daylight.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Excavating the Slope",
-            "speech": "We must carefully clear away this compacted silica layer before the afternoon heat destabilizes our entire excavation perimeter.",
+            "headline": "The Hidden Ledger",
+            "speech": "My oldest friend, this ancient village ledger reveals we only have enough water to save one farm.",
             "visual": "door",
-            "label": "Buried Entrance",
-            "story_beat": "build",
-            "visual_prompt": "Aris Vance uses a motorized shovel to brush away thick layers of hot sand from a massive, perfectly circular stone hatch embedded deep within the side of a dune.",
+            "label": "The Discovery",
+            "story_beat": "reveal",
+            "visual_prompt": "An elderly weaver named Bram holds an open leather ledger in a dusty timber doorway, wearing a gray woolen tunic with copper buttons, looking shocked while his friend Martha stands nearby under a cloudy morning sky.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Solar Core",
-            "speech": "Behold the primary focusing array. Intricate crystalline lenses are funneling desert sunlight down into the deep subterranean chambers below us.",
-            "visual": "planet",
-            "label": "Focusing Array",
-            "story_beat": "mechanism",
-            "visual_prompt": "Aris Vance stands atop the opened stone hatch, peering down into a vast subterranean shaft where colossal amber glass lenses rotate smoothly, focusing intense beams of light.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A Verdant Refuge",
-            "speech": "It is a thriving prehistoric botanical ecosystem preserved down here for millennia, sustained by the endless ingenuity of this ancient machine.",
+            "headline": "The Diverging Paths",
+            "speech": "You must choose whether to water my crops or irrigate the communal orchard before the drought sets in.",
             "visual": "forest",
-            "label": "Subterranean Oasis",
+            "label": "The Dilemma",
+            "story_beat": "build",
+            "visual_prompt": "Martha points a calloused hand toward the dry village orchard outside a dense green forest, wearing a green apron over a brown linen dress, with Bram looking conflicted as he grips a wooden walking stick.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Silent Signal",
+            "speech": "Instead of favoring either of us, I am redirecting the final spring toward the town square well.",
+            "visual": "signal",
+            "label": "The Pivot",
+            "story_beat": "mechanism",
+            "visual_prompt": "Bram pulls a heavy iron lever mounted on a stone wall, sending a bright flare signal into the evening air, with Martha watching in quiet realization as water begins flowing into the central plaza.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A Shared Horizon",
+            "speech": "We gave up our private harvests so every family could drink, proving our bond is stronger than soil.",
+            "visual": "ship",
+            "label": "The Resolution",
             "story_beat": "payoff",
-            "visual_prompt": "Aris Vance stands inside a lush, cavernous greenhouse filled with glowing bioluminescent ferns and towering ancient trees, illuminated by shafts of warm golden light.",
+            "visual_prompt": "Bram and Martha sit side by side on a wooden bench near a docked wooden cargo boat, smiling warmly as grateful villagers carry water jugs through the sunlit town square.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Cinematic adventure realism with warm desert tones transitioning to vibrant subterranean greens",
+          "style": "Warm and grounded historical village illustration style with rich earthy tones, soft natural lighting, and expressive character details.",
           "characters": {
-            "Aris Vance": "A seasoned desert archaeologist in his late forties with sun-weathered skin, short greying hair, wearing a rugged tan canvas sun-cloak and utility harness."
+            "Bram": "An elderly weaver with kind wrinkled eyes, short gray hair, wearing a worn gray woolen tunic with polished copper buttons.",
+            "Martha": "A practical village farmer with tied-back dark hair streaked with gray, wearing a sturdy green canvas apron over a brown linen dress."
           },
           "locations": {
-            "The Arid Reach": "Endless rolling dunes of fine golden sand under a blazing midday sun.",
-            "Subterranean Greenhouse": "A colossal underground cavern filled with prehistoric flora, illuminated by towering amber lenses."
+            "The Weaver Workshop": "A rustic timber-framed cottage with dust motes dancing in sunbeams, cluttered with spools of yarn and ancient stone walls.",
+            "The Village Square": "A cobblestone courtyard surrounded by thatched-roof houses, featuring a central stone well and a rusted iron lever mechanism."
           },
           "objects": {
-            "seismic reader": "A handheld metal device with a ruggedized rubber casing and a bright green digital oscilloscope screen displaying waveforms.",
-            "motorized shovel": "A lightweight excavation tool constructed from polished titanium with a ergonomic grip and battery pack."
+            "ledger": "A thick, leather-bound book with yellowed parchment pages and a frayed red ribbon bookmark.",
+            "lever": "A heavy, weathered iron control arm mounted to a mossy stone pillar with visible rust streaks."
           }
         },
-        "plot_fingerprint": "3c8259e83bbebc45f9c3686f7f0c710382a08aadf8b31e1aa59d87a0ae199ffe"
+        "plot_fingerprint": "b49dcd40a795f13c7b43e922557befb9d92b285dfd8d5ee445247a77298fe77a"
       },
       "approved": false
     },
     {
-      "candidate_id": "5a2ff072075b380073cbfce4",
-      "source_sha256": "d940e0107db5e5c4132b7fc5815cf1917b2cb014379765704ff34d0df0132f09",
+      "candidate_id": "9c835608567b8f0c0b74a870",
+      "source_sha256": "49c497280aec20bfb9e29b39eab2390e658bbb28b58fe8f9e6189a8456246a04",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-a6cc42bda009fef41d20",
-        "title": "The Great Saltwater Buoyancy Regatta",
-        "hook": "The Mystery Hull",
-        "question": "How can a heavy wooden galleon float on heavy salt foam?",
-        "answer": "By balancing weighted ballast chambers with internal air pockets.",
+        "content_id": "rayvan-gemini-108719fcc8335cbb9cf6",
+        "title": "The Icebreaker's Dilemma",
+        "hook": "Thermal Anomaly",
+        "question": "Can an automated research drill be overridden to save a stranded crew member?",
+        "answer": "Yes, by manually severing the primary thermal relay to melt the access hatch.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -184,60 +185,62 @@
         ],
         "story_beats": [
           {
-            "headline": "The Mystery Hull",
-            "speech": "Look closely at this peculiar hull shape! It lacks a keel entirely, relying on hollow copper cylinders instead.",
-            "visual": "ship",
-            "label": "Hull Discovery",
-            "story_beat": "reveal",
-            "visual_prompt": "Captain Barnaby stands on the wooden festival pier holding a rusted brass wrench, pointing enthusiastically at a hollow copper cylinder hull floating in turquoise seawater under bright midday sun.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Assembly of Tanks",
-            "speech": "We must secure these ballast tanks quickly before the midday tide rises and floods the sandy construction pits.",
-            "visual": "robot",
-            "label": "Tank Assembly",
-            "story_beat": "build",
-            "visual_prompt": "An assistant operates a mechanical brass crane on the bustling beach, lowering a cylindrical copper tank into the wooden ship frame while sea gulls wheel in the sky overhead.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Siphon Valve",
-            "speech": "Turning this rusted intake valve releases trapped air, letting seawater flood the lower chambers to stabilize our craft.",
+            "headline": "Thermal Anomaly",
+            "speech": "The core drill is overheating, Captain. It is about to breach the lower cryogenic containment vault.",
             "visual": "signal",
-            "label": "Valve Mechanism",
-            "story_beat": "mechanism",
-            "visual_prompt": "Captain Barnaby twists a large green-patinated copper valve on the side of the ship hull, while a jet of sparkling seawater squirts outward in the bright afternoon sunlight.",
+            "label": "Emergency Warning",
+            "story_beat": "reveal",
+            "visual_prompt": "A concerned lead researcher with frost-tipped blonde hair and a bulky blue parka stands inside a dimly lit observation station, staring intently at a glowing red emergency signal flashing on a retro-futuristic console.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Triumphant Voyage",
-            "speech": "She rides the crest perfectly! Our clever ballast design wins the golden festival trophy for finest engineering.",
+            "headline": "Frozen Conduit",
+            "speech": "We must reroute the backup power cables through the outer airlock to prevent a total structural collapse.",
             "visual": "door",
-            "label": "Victory Gate",
+            "label": "Airlock Control",
+            "story_beat": "build",
+            "visual_prompt": "The researcher in the blue parka struggles to pull a heavy frost-covered steel lever next to a massive airtight bulkhead door, wearing thick grey winter gloves.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Mechanical Override",
+            "speech": "If I cut this hydraulic line, the pressure will drop and the main vault door will finally swing open.",
+            "visual": "robot",
+            "label": "Automated Rig",
+            "story_beat": "mechanism",
+            "visual_prompt": "An industrial mechanical maintenance robot with a single glowing yellow optic lens extends a heavy steel pincer toward a leaking hydraulic tube inside the icy machinery bay.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Safe Return",
+            "speech": "The pressure is stabilizing now. Grab your gear, everyone, we are finally heading back to the main station.",
+            "visual": "ship",
+            "label": "Rescue Vessel",
             "story_beat": "payoff",
-            "visual_prompt": "Captain Barnaby and his crew cheer wildly on the deck of the floating copper-hulled ship as it crosses beneath a decorated wooden finish gate on the sparkling seaside bay.",
+            "visual_prompt": "The researcher safely boards a sturdy orange rescue hovercraft resting on the snowy tundra, holding a glowing data tablet while the bright morning sun breaks through the polar clouds.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Vibrant and detailed coastal illustration style with rich maritime colors and sunlit textures",
+          "style": "Cinematic gritty polar sci-fi with realistic textures and dramatic atmospheric lighting.",
           "characters": {
-            "Captain Barnaby": "An energetic elderly inventor with a bushy white mustache, wearing a faded blue sailor cap and a rolled-up canvas apron over a striped jersey."
+            "researcher": "Lead researcher with frost-tipped blonde hair, wearing a heavy insulated blue parka and thick grey winter gloves."
           },
           "locations": {
-            "Seaside Festival Pier": "A bustling wooden boardwalk decorated with colorful pennants, overlooking calm turquoise seawater and golden sandy beaches."
+            "station": "A cramped, metallic arctic research outpost filled with analog switches and glowing instrument panels.",
+            "tundra": "A vast, windswept sheet of white ice under a dim polar sky."
           },
           "objects": {
-            "copper_hull": "A gleaming reddish-brown copper cylinder framework designed to trap buoyant air pockets.",
-            "brass_wrench": "A heavy, tarnished golden-yellow tool used for tightening festival machine bolts."
+            "console": "A retro-futuristic steel control desk embedded with blinking red and green indicator lights.",
+            "lever": "A thick, heavy-duty industrial lever coated in a thin layer of frost.",
+            "tablet": "A rugged handheld black data pad displaying flashing green diagnostic charts."
           }
         },
-        "plot_fingerprint": "75383d7e4f068ff3fb194c5bf8df2490a52183ecb86a08f247244677e592fd1f"
+        "plot_fingerprint": "af996a3f7836856f929a121c3f5a652b87d8ef634679029616f72fb8d86cd972"
       },
       "approved": false
     }
