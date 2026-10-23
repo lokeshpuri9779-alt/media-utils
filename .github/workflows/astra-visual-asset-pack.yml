@@ -83,6 +83,23 @@ jobs:
           print('ASTRA_ASSET_PACK='+json.dumps({'verified':result['verified_files'],
               'zip_bytes':dest.stat().st_size,'formats':fmt,'shorts_dimensions':'540x960','long_dimensions':'1280x720','production_approved':False}))
           PY
+      - name: Verify compositor tests for Shorts and long videos
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_asset_video_formats.py' -v
+          python -m unittest discover -s tests -p 'test_astra_asset_pack_compositor.py' -v
+      - name: Check ZIP archive contents
+        run: |
+          python - <<'PY'
+          import zipfile
+          from pathlib import Path
+          path=Path('runtime-artifacts/astra-visual-pack.zip')
+          with zipfile.ZipFile(path) as archive:
+              bad=archive.testzip()
+              assert bad is None, f'corrupt ZIP member: {bad}'
+              files=archive.namelist()
+              assert 'art/manifest.json' in files
+              print('ASTRA_ASSET_ARCHIVE_VERIFIED='+str(len(files)-1))
+          PY
       - name: Upload reusable asset ZIP
         uses: actions/upload-artifact@v4
         with:
