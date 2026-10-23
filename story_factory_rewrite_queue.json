@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "195bf0b1b411a1bf3b3e2c79",
-      "source_sha256": "6a58e9cd7629b31758de134b6ca5120bdabf268089e420ad901c8ae2fae7c9a9",
+      "candidate_id": "fe5e9ec8800035920527c3c6",
+      "source_sha256": "ad1e1c0919819fd114edf75f630f6910f857f49809819e626a9952d4ce770cd3",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-996a6e8aaee8ec33001e",
-        "title": "The Great Turnip Copter Debacle",
-        "hook": "A Shocking Discovery",
-        "question": "How did Barnaby sell his flying root vegetables?",
-        "answer": "By attaching propellers to rutabagas, creating the world's first airborne salad bar.",
+        "content_id": "rayvan-gemini-3fa2b4eab528f566ea0c",
+        "title": "The Great Onion Goggle Fiasco of Sector Nine",
+        "hook": "A Smelly Standoff",
+        "question": "How did Barnaby clear his entire inventory of anti-tear goggles in one afternoon?",
+        "answer": "By accidentally routing the distress signal frequency directly into the vegetable chopper's ventilation system.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,76 +29,76 @@
         ],
         "story_beats": [
           {
-            "headline": "A Shocking Discovery",
-            "speech": "Behold the root of the future, citizens! These turnips do not merely sit in dirt; they possess aerodynamic lift!",
+            "headline": "A Smelly Standoff",
+            "speech": "Nobody wants my hyperspatial onion goggles! The market stalls are drowning in tear gas and angry shoppers today.",
             "visual": "signal",
-            "label": "The Aerial Root",
+            "label": "Market Chaos",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands in the crowded market square holding a glowing red brass beacon, pointing proudly at a giant purple turnip hovering in mid-air above the vegetable stalls, wearing a tweed vest and a bewildered expression.",
+            "visual_prompt": "Barnaby stands behind a wooden market stall in a crowded alien bazaar, holding a pair of clunky brass goggles with one hand while waving away green vapor with the other, wearing a stained canvas apron over a blue tunic.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Building the Fleet",
-            "speech": "We must strap copper propellers to every single vegetable before the health inspector notices the hovering parsnips.",
+            "headline": "Emergency Wiring",
+            "speech": "If I splice this rogue comms dish into the chopping mechanism, maybe the automated slicers will finally calibrate properly.",
             "visual": "robot",
-            "label": "Assembly Line",
+            "label": "Hasty Repair",
             "story_beat": "build",
-            "visual_prompt": "Barnaby operates a clunky brass steam-powered automaton that mechanically fastens tiny wooden propellers onto long white radishes, situated in a cramped market alley filled with hanging produce.",
+            "visual_prompt": "Barnaby kneels behind his stall workbench, using a heavy soldering iron to attach a glowing red radio antenna to the side of a mechanical vegetable chopper, with spare metallic gears scattered across the wooden table.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Mechanical Flaw",
-            "speech": "Turn off the draft valves! The carrots are achieving critical velocity and heading straight for the bakery chimney!",
+            "headline": "The Frequency Leap",
+            "speech": "Why is the chopper broadcasting the planetary distress anthem instead of slicing roots? That adjustment was completely backward!",
             "visual": "ship",
-            "label": "Propulsion Failure",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby desperately chases a massive swarm of flying carrots resembling a tiny airship armada as they buzz wildly around a tall brick oven chimney in the bustling outdoor marketplace.",
+            "label": "Accidental Broadcast",
+            "story_beat": "twist",
+            "visual_prompt": "Barnaby recoils in shock as bright blue holographic emergency warning symbols project upward from the mechanical vegetable chopper, while nearby alien merchants drop their baskets and stare in sheer astonishment.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "A Delicious Landing",
-            "speech": "Dinner is served directly from the stratosphere! Catch your own roast sides before they escape the county!",
+            "headline": "Instant Sellout",
+            "speech": "Brilliant! Since the sirens sound like crying, everyone rushed to buy my protective goggles to survive the noise!",
             "visual": "door",
-            "label": "Market Delivery",
+            "label": "Commercial Success",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby opens a wooden market stall shutter to watch astonished shoppers happily grab falling, propeller-fitted potatoes right out of the sky as sunset paints the lively town square.",
+            "visual_prompt": "Barnaby stands triumphantly atop his empty market stall counter, holding a heavy bag of gold coins in one hand while a long queue of eager alien customers holds out currency for his remaining anti-tear goggles.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Wimsical stop-motion claymation aesthetic with rich earthy textures and vibrant market colors",
+          "style": "Bright, colorful animated comedy style with exaggerated cartoon proportions and whimsical steampunk machinery.",
           "characters": {
-            "Barnaby": "An energetic inventor with wild gray hair, wearing a patched tweed vest, round spectacles, and muddy leather boots."
+            "Barnaby": "An energetic elderly inventor with bushy white hair, oversized round spectacles, a brown leather vest, and a perpetually soot-smudged nose."
           },
           "locations": {
-            "market_square": "A bustling cobblestone town square packed with striped canvas awnings, wooden crates, and hanging lanterns."
+            "Market Square": "A bustling, vibrant open-air alien market filled with colorful fabric awnings, hanging lanterns, and bustling crowds of multi-armed merchants."
           },
           "objects": {
-            "brass_beacon": "A polished brass signaling device with a glowing red glass lens and a toggle switch.",
-            "propeller_turnip": "A large purple-and-white turnip fitted with four miniature spinning wooden blades."
+            "Goggles": "Clunky brass eyewear fitted with thick green tinted lenses and external copper adjustment dials.",
+            "Chopper": "A heavy iron mechanical kitchen appliance featuring rotating steel blades and a rusted hand crank."
           }
         },
-        "plot_fingerprint": "017dc7c9a533cce6063723b67b71ecda25932d8d6c5a2974efcb01b574b47b7b"
+        "plot_fingerprint": "94a379b0cab4c44082db98de30db2fce51f84eee37e2d2b366d41387f9fa6eba"
       },
       "approved": false
     },
     {
-      "candidate_id": "8f29100c3c8f5789b2b31976",
-      "source_sha256": "592083b1f72426cdc27d9184d0c6913708078fcd188072997cbc507a58af67e1",
+      "candidate_id": "5c4dbc75dbdce180dabceba9",
+      "source_sha256": "4f9815f05cab4d1b15602b14171b5a376aced63e8390d085048ab97ac3ec325b",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-a91fc5d1bb53c713833e",
-        "title": "The Weaver's Last Thread",
-        "hook": "The Hidden Secret",
-        "question": "Can true friendship survive a choice between personal honor and community survival?",
-        "answer": "Yes, when honesty replaces hidden sacrifice.",
+        "content_id": "rayvan-gemini-11a4fc45ef191a8aa6b5",
+        "title": "The Icebreaker Beacon Dilemma",
+        "hook": "The Buried Signal",
+        "question": "Should Dr. Vance trigger the avalanche beacon to save his team, sacrificing the rare thermal core they spent months drilling for?",
+        "answer": "He triggers the beacon, abandoning the core to save his trapped crew, proving that human lives outweight scientific ambition.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -106,78 +106,76 @@
         ],
         "story_beats": [
           {
-            "headline": "The Hidden Secret",
-            "speech": "Marta, I found the final bundle of wool in the ruined mill. We can save the winter coats, but nobody must know.",
-            "visual": "forest",
-            "label": "The Discovery",
+            "headline": "The Buried Signal",
+            "speech": "The seismic monitor spikes dramatically, confirming the western ridge has collapsed right over the secondary drilling team.",
+            "visual": "signal",
+            "label": "Emergency Alert",
             "story_beat": "reveal",
-            "visual_prompt": "A nervous young woman with auburn hair in a green wool tunic holds a damp bundle of raw gray wool in a misty pine forest near an old stone mill.",
+            "visual_prompt": "Dr. Vance stands tense inside the glowing orange research tent, staring at a flashing red seismic monitor showing a flatline from the western ridge, holding a cracked digital tablet displaying telemetry data.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
             "headline": "The Impossible Choice",
-            "speech": "If we keep this secret fleece, the village mayor will punish your family for hoarding while others freeze tonight.",
+            "speech": "We must detonate the rescue beacon now, but the shockwave will permanently entomb the thermal core deep in the glacier.",
             "visual": "door",
-            "label": "The Dilemma",
+            "label": "Control Vault",
             "story_beat": "build",
-            "visual_prompt": "An elderly village artisan with gray hair and a blue apron stands in a heavy oak doorway, gesturing urgently toward the snowy village square outside.",
+            "visual_prompt": "Dr. Vance stares at a heavy steel blast door of the equipment vault, his gloved hand hovering over a glowing red detonation switch while frosted frost lines the metallic hinges.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Confession",
-            "speech": "I cannot let you take the blame alone, Bram. I am bringing the hidden fleece to the council house right now.",
-            "visual": "signal",
-            "label": "The Turning Point",
-            "story_beat": "twist",
-            "visual_prompt": "The young woman holds a glowing iron lantern high in the dark cobblestone street, casting a bright warning beam toward the distant town hall.",
+            "headline": "Sacrificing the Prize",
+            "speech": "Activating the emergency frequency fries our main generator, plunging the entire drilling site into sub-zero darkness immediately.",
+            "visual": "robot",
+            "label": "Power Failure",
+            "story_beat": "mechanism",
+            "visual_prompt": "An automated utility robot sparks and powers down in the center of the snowy generator yard, casting long shadows under a dying amber warning light while falling snow swirls around its treads.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "A New Beginning",
-            "speech": "By sharing the burden together, the elders forgave us and we wove warmth for every home in the valley.",
+            "headline": "Rescued Lives",
+            "speech": "The rescue chopper arrives just in time as the shivering team emerges safely from the snowbank, wrapped in thermal blankets.",
             "visual": "ship",
-            "label": "The Resolution",
+            "label": "Safe Return",
             "story_beat": "payoff",
-            "visual_prompt": "Two friends stand together on a wooden balcony shaped like a river boat hull, smiling under a golden sunset above a peaceful, bustling village.",
+            "visual_prompt": "Dr. Vance helps a cold researcher climb into the cabin of a heavy-duty orange rescue helicopter landed on the ice sheet, holding a steaming mug of emergency tea.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "warm folk-art illustration style with rich earthy tones and detailed textures",
+          "style": "Cinematic gritty realism, dramatic blue and orange lighting, hyper-detailed snow textures",
           "characters": {
-            "Marta": "A determined young woman with bright auburn hair tied back, wearing a sturdy green wool tunic and brown leather boots.",
-            "Bram": "A thoughtful elderly artisan with silver hair and a kind face, wearing a heavy blue apron over a homespun gray shirt."
+            "Dr. Vance": "A rugged middle-aged arctic researcher with a thick grey-streaked beard, wearing a heavy yellow hooded parka with frost-rimed goggles on his forehead."
           },
           "locations": {
-            "Forest Mill": "An overgrown, misty woodland setting with moss-covered stone walls and tall pine trees.",
-            "Village Square": "A historic cobblestone village surrounded by timber-framed houses under a soft winter twilight sky."
+            "Research Station": "A remote cluster of reinforced dome tents and a central metal command hub perched on a vast, windswept glacier."
           },
           "objects": {
-            "Fleece Bundle": "A tight roll of coarse, damp gray sheep's wool tied with rough hemp twine.",
-            "Iron Lantern": "A black wrought-iron lantern with amber glass panels casting a warm, steady glow."
+            "Seismic Monitor": "A ruggedized black field computer with a glowing amber screen and a cracked protective casing.",
+            "Beacon Switch": "A heavy-duty industrial toggle switch encased in a yellow protective housing with a shattered glass cover."
           }
         },
-        "plot_fingerprint": "3a6a45fc446d5672cdd5b48c62e839915b084a2f0bef1c8fde741ff9dd3ce7f1"
+        "plot_fingerprint": "7c609105b3a9708e70e39f2bf964614d2a60c04fa6abe92e34e5fdd37bbf4e67"
       },
       "approved": false
     },
     {
-      "candidate_id": "075cccac304240f34d52f276",
-      "source_sha256": "98164fd5c33ba0e8e03d1a6787f1215d26cb077444d0d1f3b5eaa837ba4cf328",
+      "candidate_id": "36836ae8c66f3bcc66893f31",
+      "source_sha256": "364ed440edea79b82d2ead52a9fa6110698d71c051813cb8b45af8edaec523cf",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-bad023c94ba75be8f9de",
-        "title": "The Glacier's Silent Code",
+        "content_id": "rayvan-gemini-e0c1d194ea81add591eb",
+        "title": "The Permafrost Resonance Protocol",
         "hook": "The Hidden Fracture",
-        "question": "Can an automated seismic drill save the team before the crevasse completely collapses?",
-        "answer": "Yes, by recalibrating the acoustic sensor to map the hidden ice fractures in real time.",
+        "question": "Can acoustic thermal shielding rescue a trapped research team before the sub-glacial shelf collapses?",
+        "answer": "Yes, by broadcasting harmonic frequencies that temporarily stabilize the ice fissures while the sleds cross.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -186,62 +184,62 @@
         "story_beats": [
           {
             "headline": "The Hidden Fracture",
-            "speech": "Look at the seismic readout; the main ridge is shifting faster than our models predicted.",
+            "speech": "Dr. Vance gasped as the seismic monitor revealed an underground cavern collapsing beneath our exact coordinates right now.",
             "visual": "signal",
-            "label": "Seismic Anomaly",
+            "label": "Seismic Alert",
             "story_beat": "reveal",
-            "visual_prompt": "Dr. Maeve Vance stands inside the glowing blue research tent, pointing her gloved hand at a flickering holographic signal display showing erratic subterranean wave patterns.",
+            "visual_prompt": "Dr. Vance stands tense inside the glowing comms tent, pointing a trembling gloved finger at a flickering holographic signal map showing deep blue ice fissures below. Her breath fogs the frigid air, illuminated by the amber glow of the console held firmly in her left hand.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Deploying the Probe",
-            "speech": "We must lower the deep-core probe immediately to relieve the pressure buildup beneath the camp.",
+            "headline": "Deploying the Resonators",
+            "speech": "We must drop sonic anchors into the crevasse instantly to freeze the shifting fracture planes before the blizzard hits.",
             "visual": "robot",
-            "label": "Probe Launch",
-            "story_beat": "mechanism",
-            "visual_prompt": "Mechanic Jax Thorne guides a metallic orange autonomous crawler robot out of the hatch into the howling blizzard outside the arctic base.",
+            "label": "Anchor Deployment",
+            "story_beat": "build",
+            "visual_prompt": "Engineer Kael maneuvers a heavy crawler robot across the snowy ridge outside the station. The robotic arm grips a heavy titanium sonic anchor, preparing to plunge it directly into the deep white snowfield while swirling snowflakes catch the yellow headlights.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Critical Choice",
-            "speech": "The winch is freezing up, so I have to manually trigger the acoustic release valve right now.",
+            "headline": "Harmonic Counter-Pressure",
+            "speech": "Initiating the frequency pulse now; if the resonance matches the ice density, the sliding shelf will lock in place.",
             "visual": "ship",
-            "label": "Manual Override",
-            "story_beat": "twist",
-            "visual_prompt": "Jax Thorne clings to the icy railing of the transport sled in the blinding snowstorm, desperately pulling the heavy steel lever of the winch.",
+            "label": "Frequency Pulse",
+            "story_beat": "mechanism",
+            "visual_prompt": "Commander Torres sits at the main control console inside the tracked command transport vehicle, pressing a large red activation button. Through the frosted front windshield, bright turquoise sound waves ripple across the glacier surface, cast from the roof-mounted emitter dish.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Safe Passage",
-            "speech": "The acoustic map stabilized the ice shelf just in time, securing our route back to safety.",
-            "visual": "door",
-            "label": "Secure Escape",
+            "headline": "Safe Passage Secured",
+            "speech": "The resonance held the crevasse steady, allowing every member of our expedition to cross safely into the valley.",
+            "visual": "forest",
+            "label": "The Valley Crossing",
             "story_beat": "payoff",
-            "visual_prompt": "Dr. Maeve Vance and Jax Thorne safely step through the heavy reinforced airlock door of the main research station as the sunrise breaks over the white tundra.",
+            "visual_prompt": "Dr. Vance and Kael lead the supply convoy safely past the snowy perimeter into the safety of an ancient pine forest nestled at the base of the mountain. Sunlight breaks through the frosty canopy, illuminating the triumphant team as they look back at the stable glacier.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Cinematic and realistic high-contrast arctic survival drama with natural lighting and vibrant gear accents.",
+          "style": "Cinematic realism with a cool blue and amber color palette, highlighting harsh arctic environments and high-tech rescue equipment.",
           "characters": {
-            "Maeve Vance": "Lead researcher with a weathered face, intense brown eyes, wearing a heavy red arctic parka with white fur trim and high-tech polarized goggles.",
-            "Jax Thorne": "Skilled field mechanic with a short beard, rugged features, wearing a bright orange insulated jumpsuit and thick leather gloves."
+            "Dr. Vance": "A resilient senior arctic researcher with a determined expression, wearing a heavily insulated crimson parka with reflective silver lining and a frost-rimmed fur hood.",
+            "Engineer Kael": "A practical technician with a focused expression, wearing a utilitarian charcoal-grey arctic suit with reinforced knee pads and yellow safety harnesses.",
+            "Commander Torres": "A calm expedition leader with steady eyes, wearing a dark navy thermal jacket featuring mission patches on the right shoulder."
           },
           "locations": {
-            "Research Tent": "A glowing dome-shaped fabric shelter lit from within by blue holographic displays and tactical equipment.",
-            "Ice Ridge": "A vast, windswept expanse of blinding white snow, jagged blue glacial ice, and deep shadowed crevasses under a pale grey sky."
+            "comm_tent": "A reinforced geodesic dome tent lit by amber interior lamps and glowing holographic display panels.",
+            "glacier_ridge": "A vast, windswept expanse of white snow and blue ice ridges stretching toward distant jagged mountains under a twilight sky."
           },
           "objects": {
-            "Signal Display": "A compact holographic projector casting translucent cyan waveforms and topographic contour lines into the air.",
-            "Core Probe": "A sleek, cylindrical metallic crawler robot with articulated treads and a flashing amber status light on its chassis.",
-            "Winch Lever": "A heavy, frost-covered mechanical steel handle attached to a motorized cable drum on the transport sled."
+            "holographic_map": "A portable amber projection device displaying glowing topographical contours and pulsing seismic warning lines.",
+            "sonic_anchor": "A heavy cylinder of brushed titanium etched with glowing blue circuit patterns and stabilization fins."
           }
         },
-        "plot_fingerprint": "435ac28c55a62eb2dee9d9b18a722c52ba7f2b29e001496421e33f0dea1a7ef0"
+        "plot_fingerprint": "530a9636f67159bf8f7396d21dfea424d5128e843a0419ef90e556664ca8a259"
       },
       "approved": false
     }
