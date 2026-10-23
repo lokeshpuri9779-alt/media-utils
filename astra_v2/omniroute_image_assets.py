@@ -356,7 +356,10 @@ def export_reviewed_render_manifest(preproduction, root, decisions, destination)
                        "category": "background", "tags": [],
                        "status": "approved", "source": row.get("source", "omniroute"),
                        "story_content_id": content_id, "scene_id": scene_id,
-                       "sha256": row["sha256"]})
+                       "sha256": row["sha256"],
+                       "review_status": "approved",
+                       "review_receipt_sha256": hashlib.sha256(json.dumps(
+                           decision, sort_keys=True).encode()).hexdigest()})
     if not assets:
         raise ValueError("No independently approved scene illustrations")
     # Studio resolves asset paths relative to the manifest's grandparent.
