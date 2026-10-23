@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-23",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 34,
+  "attempts": 35,
   "confirmed_today": 34,
-  "last_attempt_at": "2026-10-23T16:07:18.381162+00:00",
+  "last_attempt_at": "2026-10-23T16:46:40.761358+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -281,28 +281,55 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-23T16:09:52.920652+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "_VQ9PdiWwf8": {
+      "content_id": "rayvan-gemini-5f28e8a20930d73b2294",
+      "title": "The Botanist of the Scorched Basin and the Singing Spores",
+      "day": "2026-10-23",
+      "uploaded_at": "2026-10-23T16:46:42.134619+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "e62c0c20de3a763165b11fd056c6219e9346692fc515f8046464879a011e884b",
+      "story_beats": [
+        {
+          "speech": "Elara brushed away the crusted salt, revealing a pulsing, vibrant violet fungus that seemed to hum beneath her calloused fingertips today."
+        },
+        {
+          "speech": "She adjusted her acoustic tuner, mapping the vibration frequencies emitted by the spores as they responded to the intense midday desert heat."
+        },
+        {
+          "speech": "The ground began to tremble gently, and suddenly the surrounding dead terrain sprouted tiny green shoots that pushed through the cracked earth crust."
+        },
+        {
+          "speech": "She realized that her presence as a witness had unlocked a dormant cycle of restoration that would eventually turn this desert into life."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-23T16:42:03.975183+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-23T16:09:53.620691+00:00",
+    "at": "2026-10-23T16:46:42.573749+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-23T09:21:49.309461+00:00",
   "reserved": {
@@ -1087,13 +1114,36 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-5f28e8a20930d73b2294": {
+      "at": "2026-10-23T16:46:40.761345+00:00",
+      "title": "The Botanist of the Scorched Basin and the Singing Spores",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "e62c0c20de3a763165b11fd056c6219e9346692fc515f8046464879a011e884b",
+      "story_beats": [
+        {
+          "speech": "Elara brushed away the crusted salt, revealing a pulsing, vibrant violet fungus that seemed to hum beneath her calloused fingertips today."
+        },
+        {
+          "speech": "She adjusted her acoustic tuner, mapping the vibration frequencies emitted by the spores as they responded to the intense midday desert heat."
+        },
+        {
+          "speech": "The ground began to tremble gently, and suddenly the surrounding dead terrain sprouted tiny green shoots that pushed through the cracked earth crust."
+        },
+        {
+          "speech": "She realized that her presence as a witness had unlocked a dormant cycle of restoration that would eventually turn this desert into life."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-23T16:09:53.620625+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-23T16:46:42.573673+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -1101,36 +1151,70 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-23T16:09:53.620678+00:00",
+    "at": "2026-10-23T16:46:42.573735+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-23T16:05:22.210491+00:00",
+    "at": "2026-10-23T16:42:20.830533+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-60367b1fd71f9ebd309d",
-    "video_url": "https://www.youtube.com/watch?v=RoBgf_RN9b8",
+    "content_id": "rayvan-gemini-5f28e8a20930d73b2294",
+    "video_url": "https://www.youtube.com/watch?v=_VQ9PdiWwf8",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-23T16:09:53.620534+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-23T16:46:42.573380+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-23T16:09:53.620620+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "counters": {},
+    "at": "2026-10-23T16:46:42.573667+00:00",
+    "collection_status": "collected",
+    "publish_step": "success",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 244,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3
+        },
+        "seen": 9,
+        "total": 320
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 321,
+        "fingerprint": 0,
+        "id": 6,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 315,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 315,
+        "remaining": 245
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 1,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
