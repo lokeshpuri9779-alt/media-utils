@@ -127,6 +127,14 @@ jobs:
               json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
           print("ASTRA_IMAGE_ARCHIVE_VERIFIED=" + str(len(report["images"])))
           PY
+      - name: Test portable review artwork ZIP packaging
+        run: python -m unittest discover -s tests -p 'test_package_review_art.py' -v
+      - name: Package verified review-only artwork ZIP
+        if: success()
+        run: |
+          python -m astra_v2.package_review_art \
+            --root runtime-artifacts/ai-art-batch \
+            --output runtime-artifacts/ai-art-batch/astra-review-art.zip
       - name: Archive review-only scene images and manifest
         if: always()
         uses: actions/upload-artifact@v4
