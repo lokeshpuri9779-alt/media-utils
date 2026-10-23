@@ -57,6 +57,11 @@ def build_approved_manifest(queue_path, image_manifest_path, decisions_path, ass
             if len(matches) != 1:
                 raise ValueError("Approved scene must match exactly one current visual plan asset")
             asset = matches[0]
+            # Preserve AI provenance: a review-only image must not be relabelled
+            # as a non-AI source to bypass signed approval verification.
+            if str(asset.get("source") or "").lower() in {
+                    "gemini-image", "omniroute-image", "ai-generated-image", "omniroute"}:
+                raise ValueError("AI artwork requires a signed independent review receipt")
             source = asset.get("path")
             if not isinstance(source, str):
                 raise ValueError("Invalid source path")
