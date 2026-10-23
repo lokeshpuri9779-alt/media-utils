@@ -1,0 +1,73 @@
+name: ASTRA Free Image Preview (Manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_free:
+        description: 'Enter FREE to confirm provider has a verified free allowance'
+        required: true
+        type: string
+      prompt:
+        description: 'Original, family-safe story scene description'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    if: inputs.confirm_free == 'FREE'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      ASTRA_OMNI_IMAGE_ENDPOINT: ${{ vars.ASTRA_OMNI_IMAGE_ENDPOINT }}
+      ASTRA_OMNI_IMAGE_MODEL: ${{ vars.ASTRA_OMNI_IMAGE_MODEL }}
+      ASTRA_OMNI_IMAGE_API_KEY: ${{ secrets.ASTRA_OMNI_IMAGE_API_KEY }}
+      ASTRA_OMNI_IMAGE_FREE_CONFIRMED: '1'
+      ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
+      ASTRA_IMAGE_PROMPT: ${{ inputs.prompt }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install image validator
+        run: python -m pip install --disable-pip-version-check 'Pillow>=10,<12'
+      - name: Validate free-only configuration
+        run: |
+          python - <<'PY'
+          import os
+          from astra_v2.omniroute_image_assets import image_endpoint
+          endpoint = image_endpoint()
+          if endpoint is None:
+              raise SystemExit("Image endpoint/model variables missing; no provider call made")
+          if not os.getenv("ASTRA_OMNI_IMAGE_API_KEY"):
+              raise SystemExit("Image API secret missing; no provider call made")
+          print("ASTRA_IMAGE_PROVIDER_CONFIGURED=1")
+          PY
+      - name: Generate isolated preview
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          from astra_v2.omniroute_image_assets import generate_image, store_asset
+          raw = generate_image(os.environ["ASTRA_IMAGE_PROMPT"])
+          if raw is None:
+              raise SystemExit("Image provider not configured")
+          root = Path("runtime-artifacts/image-preview")
+          item = store_asset(raw, root, kind="scene",
+                             prompt=os.environ["ASTRA_IMAGE_PROMPT"])
+          assert item["approved"] is False and item["production_ready"] is False
+          (root / "review_only.json").write_text(json.dumps(item, indent=2) + "\n")
+          print("ASTRA_IMAGE_PREVIEW_GENERATED=1")
+          print("ASTRA_IMAGE_REVIEW_REQUIRED=1")
+          PY
+      - name: Archive unapproved preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-ai-image-preview-${{ github.run_id }}
+          path: runtime-artifacts/image-preview/
+          retention-days: 14
+          if-no-files-found: error
