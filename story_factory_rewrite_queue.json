@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "541b63d611f7da162c2bc002",
-      "source_sha256": "f56c6a602a6b0e10adc7dde877e920d8321b42efecbd084ba08d4a33717158bd",
+      "candidate_id": "8b25be47056727911ecb72bf",
+      "source_sha256": "9741aaedfd6a1f93ff7b089a30d060ccbe86dd33a7fda63f7bd752e615660b03",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-7c5277985f99247751d0",
-        "title": "The Great Turnip Whistle Debacle",
-        "hook": "The Secret Root",
-        "question": "How did Barnaby's revolutionary vegetable instrument cause absolute chaos at the market square?",
-        "answer": "By accidentally summoning every stray pigeon in the county with a high-pitched root vegetable tone.",
+        "content_id": "rayvan-gemini-bb1f8291c9eb7914b540",
+        "title": "The Great Tomato Launchpad",
+        "hook": "A Market Disaster",
+        "question": "How did Barnaby sell his automatic fruit picker at the crowded farmers market?",
+        "answer": "He deployed a steam-powered tomato launcher that accidentally pelted the mayor with fresh produce.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,154 +29,75 @@
         ],
         "story_beats": [
           {
-            "headline": "The Secret Root",
-            "speech": "Behold the Rutabaga-Phone! It plays a melody so sharp it will revolutionize market day music forevermore!",
-            "visual": "signal",
-            "label": "Invention Revealed",
-            "story_beat": "reveal",
-            "visual_prompt": "Barnaby standing proudly behind his wooden market stall, holding a hollowed-out glowing turnip with brass valves, with curious townsfolk staring in the background under the bright midday sun.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Constructing the Pipes",
-            "speech": "We must attach the copper funnel firmly to the turnip core to amplify the resonant frequency of the vegetable.",
+            "headline": "A Market Disaster",
+            "speech": "Behold citizens, my mechanical tomato picker will revolutionize the morning harvest without bruising a single skin!",
             "visual": "robot",
-            "label": "Assembly Phase",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby frantically using a tiny hand-cranked mechanical soldering automaton to attach a shiny copper funnel to the carved rutabaga on his messy workbench cluttered with tools.",
+            "label": "The Invention",
+            "story_beat": "reveal",
+            "visual_prompt": "Barnaby stands in a bustling sunny farmers market holding a clunky brass robot, shouting with an excited expression, surrounded by crowded fruit stalls.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Accidental Note",
-            "speech": "Oops! My thumb slipped on the brass valve and now the root is whistling a terrifyingly loud high note!",
-            "visual": "door",
-            "label": "Unexpected Mechanism",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby stumbling backward in surprise as his rutabaga instrument blasts a visible wave of sound toward the canvas-covered market stalls and the nearby wooden entrance gate.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Feathered Payoff",
-            "speech": "My glorious invention has attracted five hundred very angry pigeons, and they are demanding bread crumbs immediately!",
+            "headline": "Stoking the Boiler",
+            "speech": "Just a bit more steam pressure from this brass kettle to activate the motorized gathering arms perfectly.",
             "visual": "ship",
-            "label": "Pigeon Takeover",
-            "story_beat": "payoff",
-            "visual_prompt": "Barnaby cowering under his market canopy while a massive cloud of gray pigeons swarms around him, and a flying delivery airship hovers overhead dropping sacks of birdseed in absolute confusion.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "visual_bible": {
-          "style": "Bright, whimsical stop-motion claymation aesthetic with vibrant primary colors and highly detailed textures.",
-          "characters": {
-            "Barnaby": "An eccentric inventor with wild gray hair, round spectacles, a patched brown tweed vest, and flour-dusted trousers."
-          },
-          "locations": {
-            "Market Square": "A bustling medieval-style cobblestone plaza filled with colorful canvas awnings, wooden stalls, and crates of fresh produce."
-          },
-          "objects": {
-            "RutabagaPhone": "A hollowed-out purple and yellow root vegetable fitted with shiny brass pipes, mismatched valves, and a copper acoustic funnel.",
-            "Workbench": "A scarred oak table covered in scattered gears, screwdrivers, half-eaten apples, and blueprints drawn on parchment."
-          }
-        },
-        "plot_fingerprint": "1d758240828637e65b416e90c02f611690018ab895a9d1320e0b36a51c043826"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "678fb345ef9333626fb1bd3a",
-      "source_sha256": "6ae4823c6c045681d37fc8cab183b1c3ef4548908bdf1a7106ff3a8cd02b6aa1",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-1f4931cbf09c7020329e",
-        "title": "The Grand Tomato Slinging Chaos",
-        "hook": "A Desperate Inventor",
-        "question": "How did Silas save his failing vegetable stall?",
-        "answer": "Silas invented an automatic tomato-coring launcher that accidentally bombarded the entire village square.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "A Desperate Inventor",
-            "speech": "My vegetables are completely unsellable today, and the market rents are due in exactly ten minutes from now!",
-            "visual": "robot",
-            "label": "Stall Panic",
-            "story_beat": "reveal",
-            "visual_prompt": "Silas wearing a messy brown apron and stained cap stands inside his wooden vegetable stall holding a rotten tomato in the busy market square.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Mechanical Solution",
-            "speech": "I will assemble this brass crank and copper funnel into a high speed fruit launching sorting machine immediately!",
-            "visual": "signal",
             "label": "The Build",
             "story_beat": "build",
-            "visual_prompt": "Silas wearing his brown apron hastily twists a brass crank attached to a large copper funnel resting on his cluttered wooden market counter.",
+            "visual_prompt": "Barnaby frantically pumps a steaming brass boiler attached to the robot, while market vendors stare skeptically in the background.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Catastrophic Launch",
-            "speech": "Oh no, the tension spring is stuck at maximum power and now it is firing ripe tomatoes everywhere!",
-            "visual": "ship",
+            "headline": "The Catastrophic Jam",
+            "speech": "Oh dear, the gears are jammed tight and the pressure gauge is spinning wildly into the red danger zone!",
+            "visual": "signal",
             "label": "The Mechanism",
             "story_beat": "mechanism",
-            "visual_prompt": "Silas wearing his brown apron frantically waves his arms as red tomatoes shoot out of the copper funnel across the bustling market.",
+            "visual_prompt": "Barnaby sweatily tries to twist a stuck valve on the smoking robot, as a flashing red warning light blinks furiously near his face.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "An Unexpected Success",
-            "speech": "Every single bruised vegetable sold out instantly because everyone loves a dramatic food fight festival in town!",
+            "headline": "A Direct Hit",
+            "speech": "I am so terribly sorry Mr Mayor, but technically the machine successfully launched the prize heirloom tomato right at you!",
             "visual": "door",
-            "label": "Market Payoff",
+            "label": "The Finale",
             "story_beat": "payoff",
-            "visual_prompt": "Silas wearing his brown apron smiles widely while collecting bags of gold coins from cheering villagers covered in red tomato splatters.",
+            "visual_prompt": "Barnaby hides behind a wooden market stall door, looking sheepishly at the angry mayor who is covered in red tomato pulp.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Vibrant slapstick animation style with bright colors and exaggerated character expressions.",
+          "style": "Bright, colorful stop-motion claymation aesthetic with expressive character animations and detailed whimsical textures.",
           "characters": {
-            "Silas": "An eccentric inventor with wild gray hair, wide expressive eyes, wearing a patched brown apron and a stained green cap."
+            "Barnaby": "An eccentric inventor with wild gray hair, round spectacles, a tweed vest, and a perpetually soot-smudged face."
           },
           "locations": {
-            "Market Square": "A bustling medieval marketplace filled with wooden stalls, colorful awnings, and cobblestone ground."
+            "farmers_market": "A vibrant town square packed with striped canvas tents, wooden crates overflowing with vegetables, and bustling shoppers."
           },
           "objects": {
-            "Brass Crank": "A shiny golden metal handle with a curved wooden grip used for turning gears.",
-            "Copper Funnel": "A wide conical metal container polished to a bright orange hue for holding fruits.",
-            "Wooden Stall": "A rustic weathered timber table with crates stacked full of various vegetables."
+            "brass_robot": "A shiny, copper-plated mechanical contraption featuring multiple spindly arms, a steam whistle, and a spinning pressure gauge."
           }
         },
-        "plot_fingerprint": "616c9c4eec41d4fe302f0af14c8665802a4d8536cc5e2a13e43e106b14718d6b"
+        "plot_fingerprint": "77915eee19cefc2ae9f89c1bc717bbe26d6f30bf5f51b10e84960a7a6709ed92"
       },
       "approved": false
     },
     {
-      "candidate_id": "8f7193b0ffdbc628a0be160c",
-      "source_sha256": "3b1af4b2ba2204d334036825abdfe3c34ad76653cf514a6c3e2c35d3b7ab769f",
+      "candidate_id": "db55c6031d0db9521fd012bf",
+      "source_sha256": "83c6bfccd8ce2c3220a799f0e56636509d2e4fc95265c2eb6928dac2f3ea02dc",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-17ff1541dd199b6fc2af",
-        "title": "The Whispering Ice",
-        "hook": "A Strange Transmission",
-        "question": "How did the team locate the stranded surveyor beneath the glacier?",
-        "answer": "They followed the rhythmic seismic pulses generated by the shifting crevasse walls.",
+        "content_id": "rayvan-gemini-4787b053703651e4bcad",
+        "title": "The Coral Chamber Mystery",
+        "hook": "The Mysterious Pulse",
+        "question": "Why did the glowing bioluminescent signals from the deep trench suddenly change their repeating rhythm tonight?",
+        "answer": "The ancient migration bells were disturbed by a trapped school of hermit crabs resetting the master tide gear.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -184,64 +105,140 @@
         ],
         "story_beats": [
           {
-            "headline": "A Strange Transmission",
-            "speech": "Listen closely to that frequency. It is not the wind howling against the frozen ridge.",
+            "headline": "The Mysterious Pulse",
+            "speech": "Look at the great trench wall! The ancient signals are beating out a strange and frantic new rhythm tonight.",
             "visual": "signal",
-            "label": "Frequency Anomaly",
+            "label": "Trench Pulse",
             "story_beat": "reveal",
-            "visual_prompt": "Dr. Aris stands in a dimly lit radar tent, pointing at a glowing green oscilloscope screen while wearing a heavy orange parka, holding a metal stylus.",
+            "visual_prompt": "An anxious blue octopus named Barnaby floating near a dark underwater cliff, pointing two tentacles at a rhythmic series of glowing blue coral pulses on the wall.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Mapping the Tremors",
-            "speech": "We must deploy the seismic sensors immediately before the pressure ridges seal the main entrance.",
-            "visual": "ship",
-            "label": "Icebreaker Hull",
-            "story_beat": "build",
-            "visual_prompt": "Mechanic Vanya secures a heavy seismic probe onto the steel deck of the research vessel parked against the frozen shore, wearing a thick blue insulated jumpsuit.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Fractured Vault",
-            "speech": "The resonance matches the acoustic signature of the lower cavern where the shelter was anchored.",
-            "visual": "door",
-            "label": "Cavern Hatch",
-            "story_beat": "mechanism",
-            "visual_prompt": "Dr. Aris uses a battery-powered thermal torch to melt frost off a heavy titanium emergency hatch buried deep inside a blue glacial cave.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Safe Return",
-            "speech": "We pulled him out just as the automated stabilization beacons began signaling total structural collapse.",
+            "headline": "Following the Current",
+            "speech": "We must swim down into the whispering kelp forest before the current shifts and hides the trail completely from us.",
             "visual": "forest",
-            "label": "Tundra Outpost",
+            "label": "Kelp Search",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby swimming cautiously through a dense, glowing green kelp forest with tall swaying stalks and floating spores illuminating the murky water.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Gear Mechanism",
+            "speech": "Hold tightly to that rusted metal lever! If we turn it gently, the heavy stone door will finally swing open.",
+            "visual": "door",
+            "label": "Lever Turn",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby and a small yellow seahorse named Pip pushing together against a heavy, encrusted stone door handle attached to an ancient sunken bulkhead.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Lost Crabs",
+            "speech": "It was only a dozen lost hermit crabs rearranging the tide bells! Our reef is completely safe after all.",
+            "visual": "ship",
+            "label": "Safe Reef",
             "story_beat": "payoff",
-            "visual_prompt": "Vanya and Dr. Aris wrap a rescued surveyor in thermal blankets inside a brightly lit observation dome surrounded by snowy hills.",
+            "visual_prompt": "Barnaby smiling happily inside the wooden hull of a sunken Spanish galleon, watching a line of tiny hermit crabs happily tapping bronze ship bells with tiny pebbles.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Cinematic realism, high-contrast lighting, cold blue and warm orange color palette",
+          "style": "Vibrant cinematic underwater animation with rich bioluminescent lighting, detailed coral textures, and expressive animal characters.",
           "characters": {
-            "Dr. Aris": "A seasoned arctic geologist with a weathered face, intense focus, wearing a heavy orange parka with fur lining.",
-            "Vanya": "A pragmatic mechanical engineer with a stocky build, wearing a thick blue insulated jumpsuit and woolen cap."
+            "Barnaby": "An intelligent, gentle blue octopus with large expressive amber eyes and neat suction cups.",
+            "Pip": "A tiny, energetic yellow seahorse with bright orange fins and a curious twitchy snout."
           },
           "locations": {
-            "radar tent": "A cramped canvas tent lit by green radar screens and tangled cables.",
-            "research vessel": "A rusted red icebreaker ship docked against a towering wall of blue glacier ice.",
-            "glacial cave": "A deep subterranean cavern made of solid translucent blue ice with echoing acoustics."
+            "trench_wall": "A sheer vertical cliff of dark basalt covered in glowing neon-blue pulsing coral networks.",
+            "kelp_forest": "An expansive underwater woodland of towering emerald-green kelp stalks filtering soft sunbeams.",
+            "sunken_galleon": "A moss-covered wooden shipwreck interior filled with brass fittings, old pottery, and sea-growth."
           },
           "objects": {
-            "oscilloscope": "A bulky vintage diagnostic machine with a glowing green CRT display showing sharp waveform spikes.",
-            "seismic probe": "A cylindrical titanium rod flashing a red LED status light at its base.",
-            "thermal torch": "A handheld silver canister projecting a fierce blue propane flame."
+            "stone_door": "A heavy, weathered underwater bulkhead door carved with ancient spiral wave motifs.",
+            "ship_bell": "A polished bronze maritime bell hanging from a rusted iron bracket inside the galleon wreckage."
           }
         },
-        "plot_fingerprint": "c0739f1ca14c40f5607407ce676d0d22072d297c25efaa86ad9c6f4c3d4f38b3"
+        "plot_fingerprint": "126e08f5227a46db31c098e6d70ad45463f89ae409664bf1fb06029da616d867"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "d1b1555aef90eecaf715de46",
+      "source_sha256": "9966f825a2f8f4c8d8cfa1ed97f883c3e6e7d38f0c13f9d65d575d58258e9b1d",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-5bb6b85c69d172660d19",
+        "title": "The Whispering Sands of Arid V",
+        "hook": "The Silent Peak",
+        "question": "What secret did the howling desert winds conceal beneath the ancient dunes?",
+        "answer": "The howling winds concealed a massive, subterranean acoustic organ powered by underground thermal vents, creating the haunting melodies heard across the desert.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Silent Peak",
+            "speech": "Look closely at the shifting sand patterns ahead, because this geological anomaly defies all known natural weather formations.",
+            "visual": "planet",
+            "label": "Sand Anomaly",
+            "story_beat": "reveal",
+            "visual_prompt": "Explorer Jax kneeling on a massive orange sand dune, pointing at strange geometric ripple marks on the surface, bright midday sun, hyperrealistic cinematic style.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Excavating the Ridge",
+            "speech": "We must carefully clear this heavy sediment to inspect the metallic resonance pipes buried deep within the bedrock.",
+            "visual": "robot",
+            "label": "Clearing Sediment",
+            "story_beat": "build",
+            "visual_prompt": "Explorer Jax operating a compact automated excavator robot, sweeping away dust from a series of vertical bronze pipes embedded in sandstone, close-up shot.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Thermal Activation",
+            "speech": "As geothermal pressure rises through the primary chamber, the underground pipes begin to resonate and hum harmoniously.",
+            "visual": "signal",
+            "label": "Pressure Rise",
+            "story_beat": "mechanism",
+            "visual_prompt": "Steam venting from underground bronze pipes, Explorer Jax watching a glowing digital gauge pulse with blue light, dramatic shadows, wide angle.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Desert Symphony",
+            "speech": "The entire valley transforms into a living musical instrument, proving the haunting desert songs are born from the earth itself.",
+            "visual": "door",
+            "label": "Musical Oasis",
+            "story_beat": "payoff",
+            "visual_prompt": "Explorer Jax standing arms wide open before a cavernous stone archway where wind passes through giant metal flutes, creating visible soundwaves, sunset lighting.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "visual_bible": {
+          "style": "Cinematic sci-fi adventure, hyper-detailed textures, warm golden hour lighting contrasted with cool mechanical glows.",
+          "characters": {
+            "Jax": "A weathered explorer in a tan utility jumpsuit, protective goggles resting on their forehead, determined expression, pragmatic and curious."
+          },
+          "locations": {
+            "Arid V Dunes": "Vast undulating orange sand seas dotted with exposed ancient sandstone ridges and geothermal vents."
+          },
+          "objects": {
+            "excavator_robot": "A compact, four-legged robotic drone made of brushed steel with bright yellow warning stripes and a spinning sweep brush.",
+            "resonance_pipes": "Ancient vertical bronze cylinders of varying heights featuring intricate acoustic tuning slots along their lengths."
+          }
+        },
+        "plot_fingerprint": "624e1aed44147aee350a2c8461fb072382f3a5e1bcff7a56e79402827115b166"
       },
       "approved": false
     }
