@@ -3,7 +3,7 @@
   "day": "2026-10-23",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 32,
-  "confirmed_today": 30,
+  "confirmed_today": 32,
   "last_attempt_at": "2026-10-23T14:49:43.820631+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -247,82 +247,46 @@
       "format": "short",
       "uploaded_at": "2026-10-23T14:07:17.565728+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "-TYggo6JyA8": {
-      "content_id": "rayvan-gemini-5b85bb2170478a58778a",
+    },
+    "rayvan-gemini-5b85bb2170478a58778a": {
+      "video_id": "-TYggo6JyA8",
+      "confirmed_at": "2026-10-23T14:53:27.956779+00:00",
       "title": "The Orchard Keeper and the Final Winter Harvest",
-      "day": "2026-10-23",
-      "uploaded_at": "2026-10-23T14:35:58.215929+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "eca1e9949980564d81490e76ebf815644dc0edaa785a596ee16d9521aa22c39b",
-      "story_beats": [
-        {
-          "speech": "Look closely at these ancient, frost-bitten boughs, Silas; the last golden seeds of our heritage are trapped beneath this thick, unyielding ice."
-        },
-        {
-          "speech": "We cannot open the box without destroying the locking gears, but if we do, the seeds will surely wither in this unnatural bitter cold."
-        },
-        {
-          "speech": "If I force the release, the warmth of your touch might wake the seeds, but the box itself will turn to dust forever, Silas."
-        },
-        {
-          "speech": "Let the wood perish so that our children might eat; we choose the harvest of tomorrow over the heavy, hollow anchors of our yesterday."
-        }
-      ],
+      "uploaded_at": "2026-10-23T14:35:58.215929+00:00",
       "renderer": "studio-7.3.0"
     },
-    "gtnGwxeZJwI": {
-      "content_id": "rayvan-gemini-52b7ee8a7be0a30ea474",
+    "rayvan-gemini-52b7ee8a7be0a30ea474": {
+      "video_id": "gtnGwxeZJwI",
+      "confirmed_at": "2026-10-23T14:53:28.049573+00:00",
       "title": "The Mystery of Platform Four and the Midnight Key",
-      "day": "2026-10-23",
-      "uploaded_at": "2026-10-23T14:49:46.169651+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "9eaf54a5e955b234a2f13dc31f8df1655bfebb6d433cff0640efd570f4f53794",
-      "story_beats": [
-        {
-          "speech": "Look closely at the railway clock, detective. It halts at midnight every single evening without fail."
-        },
-        {
-          "speech": "We must follow the tiny metallic footprints left upon the dusted iron rails leading into the maintenance tunnel."
-        },
-        {
-          "speech": "Listen carefully to the gentle ticking sounds coming from inside the central brass mechanism box."
-        },
-        {
-          "speech": "It turns out our clever little metallic friend only wanted a cozy place to sleep away from the cold wind."
-        }
-      ],
+      "uploaded_at": "2026-10-23T14:49:46.169651+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-23T14:47:17.421628+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "processing",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-23T14:53:27.565836+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-23T14:49:46.643038+00:00",
+    "at": "2026-10-23T14:53:28.105984+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-23T09:21:49.309461+00:00",
   "reserved": {
@@ -1064,10 +1028,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-23T14:49:46.642925+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-23T14:53:28.105939+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -1075,9 +1039,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-23T14:49:46.643027+00:00",
+    "at": "2026-10-23T14:53:28.105975+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -1089,56 +1053,22 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-23T14:49:46.642689+00:00",
-    "preflight_due": "true",
+    "at": "2026-10-23T14:53:28.105904+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "outcome": "published",
+    "reason": "min_interval",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-23T14:49:46.642919+00:00",
-    "collection_status": "collected",
-    "publish_step": "success",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 246,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3
-        },
-        "seen": 9,
-        "total": 322
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 322,
-        "fingerprint": 0,
-        "id": 6,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 316,
-        "title": 0,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 316,
-        "remaining": 246
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 3,
-        "approved": 1,
-        "considered": 4,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 0
-      }
-    },
+    "at": "2026-10-23T14:53:28.105936+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
