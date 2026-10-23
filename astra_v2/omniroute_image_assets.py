@@ -32,8 +32,8 @@ def image_endpoint():
     return endpoint, model
 
 
-def generate_image(prompt, *, requester=None):
-    config = image_endpoint()
+def generate_image(prompt, *, requester=None, config=None, api_key=None):
+    config = image_endpoint() if config is None else config
     if config is None:
         return None
     endpoint, model = config
@@ -51,7 +51,7 @@ def generate_image(prompt, *, requester=None):
         payload = json.dumps({"model": model, "prompt": prompt, "size": "1024x1536",
                               "response_format": "b64_json"}).encode()
     headers = {"Content-Type": "application/json"}
-    key = os.getenv("ASTRA_OMNI_IMAGE_API_KEY", "")
+    key = os.getenv("ASTRA_OMNI_IMAGE_API_KEY", "") if api_key is None else api_key
     if key:
         headers["x-goog-api-key" if native_gemini else "Authorization"] = key if native_gemini else "Bearer " + key
     request = urllib.request.Request(endpoint, data=payload, headers=headers, method="POST")
@@ -159,6 +159,39 @@ def generate_image(prompt, *, requester=None):
     return decoded
 
 
+def configured_free_image_providers():
+    """Only explicitly confirmed HTTPS free providers; never auto-discover paid endpoints."""
+    providers = []
+    primary = image_endpoint()
+    if primary:
+        providers.append((primary, os.getenv("ASTRA_OMNI_IMAGE_API_KEY", "")))
+    endpoint = os.getenv("ASTRA_OMNI_IMAGE_FALLBACK_ENDPOINT", "").strip()
+    model = os.getenv("ASTRA_OMNI_IMAGE_FALLBACK_MODEL", "").strip()
+    if endpoint or model:
+        if os.getenv("ASTRA_OMNI_IMAGE_ALLOW_PAID", "0") != "0":
+            raise ValueError("Paid image generation is not permitted")
+        if os.getenv("ASTRA_OMNI_IMAGE_FALLBACK_FREE_CONFIRMED") != "1":
+            raise ValueError("Fallback free-tier confirmation required")
+        if not endpoint.startswith("https://") or not model:
+            raise ValueError("Fallback image provider requires HTTPS endpoint and model")
+        providers.append(((endpoint, model), os.getenv("ASTRA_OMNI_IMAGE_FALLBACK_API_KEY", "")))
+    return providers
+
+
+def generate_free_image_with_failover(prompt, *, requester=None):
+    """Attempt the next explicitly free provider only on HTTP 429."""
+    providers = configured_free_image_providers()
+    if not providers:
+        return None
+    for index, (config, key) in enumerate(providers):
+        try:
+            return generate_image(prompt, requester=requester, config=config, api_key=key)
+        except ValueError as exc:
+            if not str(exc).startswith("Image provider HTTP 429") or index == len(providers) - 1:
+                raise
+    return None
+
+
 def validate_png(image_bytes, kind):
     if not image_bytes:
         raise ValueError("Empty image")
@@ -232,7 +265,7 @@ def store_asset(image_bytes, root, *, kind, prompt, source="omniroute"):
             "dimensions": dimensions, "quality": quality, "approved": False, "production_ready": False}
 
 
-def preproduce(queue, root, *, generator=generate_image, limit=3):
+def preproduce(queue, root, *, generator=generate_free_image_with_failover, limit=3):
     """Bound provider calls while retaining every scene and resuming cached work.
 
     Cache keys include the full narrative, bible, scene and provider/model. This
@@ -260,8 +293,7 @@ def preproduce(queue, root, *, generator=generate_image, limit=3):
             continue
         for request in requests:
             prompt = request.pop("prompt")
-            provider = [os.getenv("ASTRA_OMNI_IMAGE_ENDPOINT", ""),
-                        os.getenv("ASTRA_OMNI_IMAGE_MODEL", "")]
+            provider = [[config[0], config[1]] for config, _ in configured_free_image_providers()]
             key = hashlib.sha256(json.dumps([provider, prompt]).encode()).hexdigest()
             record = cache / (key + ".json")
             row = {**request, "request_sha256": key,
