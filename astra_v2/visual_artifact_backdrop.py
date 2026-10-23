@@ -7,6 +7,8 @@ so no new runtime rasterization dependency is required.
 from __future__ import annotations
 import hashlib
 import re
+import os
+from pathlib import Path
 from PIL import Image, ImageDraw
 from astra_v2.visual_artifact_library import SCENES, PALETTES
 
@@ -41,6 +43,34 @@ def choose_scene(shot):
             if any(re.search(r"\b"+re.escape(term)+r"\b",text) for term in SCENE_TERMS[scene]):
                 return scene
     return None
+
+def apply_pack_background(image, shot, identity, *, root=None, video_format="shorts"):
+    """Use only validated, licensed PNGs from a locally installed asset pack.
+
+    Explicit opt-in; never fetch external files or change the default publisher.
+    """
+    from astra_v2.quality_asset_selector import select_assets
+    if video_format not in ("shorts", "long"):
+        raise ValueError("invalid video format")
+    scene = choose_scene(shot)
+    if scene is None:
+        return image
+    root = Path(root or os.getenv("ASTRA_ASSET_PACK_ROOT", "")).resolve()
+    if not (root / "art" / "manifest.json").is_file():
+        return image
+    candidates = select_assets(root, kind="background", tags=(scene,),
+                               video_format=video_format, limit=50)
+    if not candidates:
+        return image
+    seed = int.from_bytes(hashlib.sha256(str(identity).encode()).digest()[:4], "big")
+    chosen = candidates[seed % len(candidates)]
+    with Image.open(root / chosen["path"]) as source:
+        backdrop = source.convert("RGB")
+        # Cover the requested canvas without changing its aspect ratio.
+        from PIL import ImageOps
+        backdrop = ImageOps.fit(backdrop, image.size, method=Image.Resampling.LANCZOS)
+    return Image.blend(image.convert("RGB"), backdrop, 0.65)
+
 
 def apply_backdrop(image, shot, identity):
     if image.mode != "RGB" or image.size != (1080,1920):
