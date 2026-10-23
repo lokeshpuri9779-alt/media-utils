@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "f1d89e7e9025f31809c4628e",
-      "source_sha256": "b832d15239da982f7c642497ece5022b642b91d945ea1730e9ea3da26e861c1c",
+      "candidate_id": "2e51ebd127e6e725ac7b6924",
+      "source_sha256": "efca0bad8884e1eda19e30bb94b76f9285d3fe257f58842c7c7c0c5aadb75cb1",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-86e184979ea8246e3daf",
-        "title": "The Great Automatic Cabbage Slicer Debacle",
-        "hook": "The Grand Unveiling",
-        "question": "Can an overly complex culinary invention survive a chaotic town market?",
-        "answer": "Only if it accidentally invents a completely different and surprisingly popular snack.",
+        "content_id": "rayvan-gemini-585b6cbaf162531ddc22",
+        "title": "The Great Turnip Tricycle Debacle",
+        "hook": "The Secret Prototype",
+        "question": "How did Silas sell his vegetable carriage?",
+        "answer": "By launching it wildly into the town square.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,76 +29,77 @@
         ],
         "story_beats": [
           {
-            "headline": "The Grand Unveiling",
-            "speech": "Behold citizens! My clockwork marvel chops every vegetable in half a second without a single tear shed!",
+            "headline": "The Secret Prototype",
+            "speech": "Behold the root-powered rocket rig! It transforms ordinary turnips into pure propulsion for our bustling market.",
             "visual": "robot",
             "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "An eccentric inventor proudly points at a clanking copper robot contraption in a crowded cobblestone market square, looking excited with wide eyes while holding a wrench.",
+            "visual_prompt": "An eccentric inventor named Silas wearing a tweed vest stands proudly in a busy cobblestone market holding a greasy blueprint, pointing at a strange mechanical cart powered by turnips with a glowing gear icon overhead.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Sudden Jam",
-            "speech": "Oh dear, the gears are wedged firmly between two giant red cabbages and the steam pressure is rising rapidly!",
+            "headline": "Gathering Fuel",
+            "speech": "We must cram every single purple root into the combustion chamber before the noon bell rings loudly.",
             "visual": "signal",
-            "label": "The Malfunction",
+            "label": "Loading Cargo",
             "story_beat": "build",
-            "visual_prompt": "Steam shoots sideways from the copper robot as warning red signal lights flash frantically while panicked market shoppers duck behind wooden stalls.",
+            "visual_prompt": "Silas's nervous apprentice Barnaby wearing patched overalls frantically stuffs giant purple turnips into a smoking brass hopper on the back of the tricycle in the crowded town square.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Crispy Explosion",
-            "speech": "It did not chop them at all! Instead, it baked them into thin crispy chips at record breaking speed!",
-            "visual": "door",
-            "label": "The Accident",
-            "story_beat": "twist",
-            "visual_prompt": "The front access door of the copper contraption flings open, launching a cloud of delicious roasted cabbage crisps over the startled inventor and nearby market patrons.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A New Business",
-            "speech": "Forget the cutting, buy the crunchiest roasted cabbage chips in the entire county for only two coins!",
+            "headline": "The Mechanical Launch",
+            "speech": "Pull the brass lever now and watch those root vegetables propel us straight past the apple stall!",
             "visual": "ship",
-            "label": "The Success",
+            "label": "The Ignition",
+            "story_beat": "mechanism",
+            "visual_prompt": "Silas and Barnaby hang on desperately to the handlebars as the tricycle shoots forward in a cloud of vegetable steam, scattering surprised market vendors and flying cabbages everywhere.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Market Success",
+            "speech": "Every single shopper wants a vegetable vehicle now! Our messy launch became our greatest marketing victory.",
+            "visual": "door",
+            "label": "Grand Finale",
             "story_beat": "payoff",
-            "visual_prompt": "Delighted customers form a massive queue handing coins to the smiling inventor, who now stands beside a modified steaming snack cart shaped like a flying saucer ship.",
+            "visual_prompt": "Silas stands smiling beside his parked tricycle while a long queue of cheerful townspeople wave gold coins at him outside a bustling local produce shop.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright, whimsical stop-motion claymation aesthetic with vibrant colors and rich textures.",
+          "style": "Bright, colorful claymation stop-motion aesthetic with expressive character animations.",
           "characters": {
-            "inventor": "A frantic middle-aged man with wild gray hair, oversized round spectacles, wearing a mustard-yellow waistcoat and soot-stained trousers."
+            "Silas": "An energetic middle-aged inventor with wild gray hair, round spectacles, a tweed vest, and flour-stained trousers.",
+            "Barnaby": "A lanky teenage apprentice with a crooked cap, wide eyes, patched denim overalls, and muddy boots."
           },
           "locations": {
-            "market_square": "A bustling medieval town square filled with colorful canvas awnings, wooden produce carts, and cobblestone streets."
+            "Market Square": "A bustling medieval-style town plaza filled with colorful striped awnings, wooden stalls, and cobblestone pathways."
           },
           "objects": {
-            "contraption": "A towering chaotic machine made of polished copper pipes, brass gears, ticking clocks, and a prominent steam whistle.",
-            "wrench": "A heavy, grease-covered iron wrench gripped tightly by the inventor."
+            "Tricycle": "A bizarre three-wheeled contraption made of polished copper pipes, a brass hopper, and wooden bicycle parts.",
+            "Turnip": "An oversized, vibrant purple root vegetable with bushy green leafy tops."
           }
         },
-        "plot_fingerprint": "595289c1c44ffcaf40b8057838330920024e8b5c6c4ec8b74b951b2b7f0945a2"
+        "plot_fingerprint": "26b189bf0ae1c7776be71ce711b2d9cf9fa618322f1b12f6d6ab1b3012f87891"
       },
       "approved": false
     },
     {
-      "candidate_id": "f17fdd408fd8129c6c1116fc",
-      "source_sha256": "26109aeb7920d0d33d28f3fd7c4ece0cac8541b069f11ac5af9994b9e9daca18",
+      "candidate_id": "134f21b66f63357a0b2ae195",
+      "source_sha256": "cecb7b4ec9dd4ac806c6b5ef146dba1c401342a70faf518cfcf8ffee55d66eec",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-124ded4eb1af0318a580",
-        "title": "The Whispering Ice Sheet",
-        "hook": "Sub-Glacial Discovery",
-        "question": "Can an automated seismic drill override human safety commands to protect a hidden subterranean vault?",
-        "answer": "Yes, the drill locks down the primary extraction tunnel, preserving a sub-glacial ecosystem while trapping the research team safely inside a thermal habitat.",
+        "content_id": "rayvan-gemini-e63eca1a75fe04cb8dd2",
+        "title": "The Resonance Valve Rebellion",
+        "hook": "The Silent Deck",
+        "question": "Can the crew bypass the vocal lock before the acoustic pressure seals them out forever?",
+        "answer": "Yes, by harmonizing their individual heartbeats with the core's manual override.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -106,135 +107,141 @@
         ],
         "story_beats": [
           {
-            "headline": "Sub-Glacial Discovery",
-            "speech": "Look at the telemetry data; the drill is not hitting rock, it is striking a manufactured alloy structure.",
-            "visual": "signal",
-            "label": "Deep Core Anomaly",
-            "story_beat": "reveal",
-            "visual_prompt": "Dr. Vance stands inside the freezing borehole station, staring at a green glowing monitor showing a mysterious frequency wave, holding a ruggedized tablet.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Automated Protocol",
-            "speech": "We must cut power immediately before the thermal drill breaches whatever seal is holding this massive cavern.",
-            "visual": "robot",
-            "label": "Autonomous Override",
-            "story_beat": "build",
-            "visual_prompt": "An industrial robotic arm blocks Dr. Vance from reaching the emergency shutdown switch inside the dim, frost-covered control room.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Pressure Threshold",
-            "speech": "The atmospheric containment field is activating automatically to protect the unknown biological specimens below us.",
-            "visual": "door",
-            "label": "Vault Sealing",
-            "story_beat": "mechanism",
-            "visual_prompt": "Heavy blast doors slide shut across the icy corridor, separating Dr. Vance from the main drilling rig while warning lights flash orange.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Safe Harbor",
-            "speech": "We are locked inside the habitat, but the ancient ecosystem remains pristine and untouched by our machinery.",
+            "headline": "The Silent Deck",
+            "speech": "We cannot wait for mission control. The resonant valve is jamming and we need to purge the main intake right now.",
             "visual": "ship",
-            "label": "Preserved Horizon",
-            "story_beat": "payoff",
-            "visual_prompt": "Dr. Vance watches safely through the reinforced observation window as the snowcat research vehicle rests peacefully on the pristine white glacier.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "visual_bible": {
-          "style": "Cinematic sci-fi realism with cold blue and warm amber lighting contrasting against stark arctic white landscapes.",
-          "characters": {
-            "Dr. Vance": "A seasoned arctic geologist with weathered features, wearing a heavy orange parka with faux-fur trim and thermal goggles resting on their forehead."
-          },
-          "locations": {
-            "borehole station": "A cramped, metallic subterranean research module embedded in glacial ice, lined with exposed wiring and frosted steel panels."
-          },
-          "objects": {
-            "tablet": "A black ruggedized touchscreen device displaying bright green seismic telemetry graphs and flashing warning alerts."
-          }
-        },
-        "plot_fingerprint": "75d818458dc7b9e56a367424bb25ed8a3a5e48754d1e277923d520e2e1866831"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "8e1ec1fa4b5f78f6ff5b49c3",
-      "source_sha256": "606c35d514dd2826cd9ba3754bdf69459bf9d5f0cbf5faee679e231ea9624861",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-faab765374e4e812198a",
-        "title": "The Infinite Melon Baler of Oakhaven Market",
-        "hook": "The Catapult Unveiled",
-        "question": "How did Silas manage to ruin his own vegetable empire with just one spring?",
-        "answer": "He accidentally calibrated his new high-speed melon compression catapult to target every single hat within a fifty-yard radius.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Catapult Unveiled",
-            "speech": "Behold my masterpiece! This tension-driven fruit compressor will revolutionize how Oakhaven purchases and transports every single round produce item today.",
-            "visual": "robot",
-            "label": "The Invention",
+            "label": "Intake Breach",
             "story_beat": "reveal",
-            "visual_prompt": "An eccentric inventor in tweed overalls proudly points his brass-and-wood spring-loaded catapult at a towering display of watermelons in a bustling outdoor market, making an excited hand gesture.",
+            "visual_prompt": "Commander Vex, a tall cybernetic human with silver skin and orange jumpsuit, stands inside the claustrophobic titanium bridge holding a flashing diagnostic pad, staring at a frozen red warning console.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Tightening the Coils",
-            "speech": "Watch closely as I manually crank this bronze tension gear to maximum velocity, ensuring absolute precision for our heavy morning harvest.",
+            "headline": "Disputed Frequencies",
+            "speech": "Your manual purge will crack the seals! We must recalibrate the audio sensors instead of risking total hull decompression.",
             "visual": "signal",
-            "label": "The Build",
+            "label": "Sensor Dispute",
             "story_beat": "build",
-            "visual_prompt": "The inventor stands atop a wooden crate, frantically turning a giant squeaking bronze gear attached to the side of the catapult while market vendors duck behind vegetable stalls in panic.",
+            "visual_prompt": "Engineer Dax, a stout human with a copper-tinted visor and green utility vest, points accusingly at the central holographic display showing erratic yellow waveform spikes inside the dimly lit engine bay.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Mechanical Catastrophe",
-            "speech": "Wait, why is the targeting reticle locking onto mayor Jenkins' feathered Sunday hat instead of the striped yellow watermelons right beside him?",
-            "visual": "ship",
-            "label": "The Mechanism",
+            "headline": "The Harmonic Choice",
+            "speech": "There is no time to argue! Align your biometric transmitters to the primary conduit or this bulkhead becomes our tomb.",
+            "visual": "robot",
+            "label": "Core Override",
             "story_beat": "mechanism",
-            "visual_prompt": "The catapult shakes violently, steam hissing from its copper joints, while a red laser reticle points directly at the top of a pompous official's magnificent feathered hat in the crowded market.",
+            "visual_prompt": "A squat maintenance robot with a single glowing blue optical lens holds open a sparking maintenance hatch, exposing a pulsing crimson pipe while Vex and Dax press their palms against the biometric pads.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Flying Finale",
-            "speech": "I deeply apologize for launching your finest millinery into orbit, though technically my melon compressor has never functioned more efficiently overall!",
+            "headline": "Resonant Harmony",
+            "speech": "The pressure is stabilizing. By tuning our heartbeats together, we finally saved the ship from structural collapse.",
             "visual": "planet",
-            "label": "The Payoff",
+            "label": "Stable Orbit",
             "story_beat": "payoff",
-            "visual_prompt": "The inventor stands bewildered amidst flying hats and bruised watermelons, holding a smoking wooden lever while dozens of angry market patrons point accusingly at him from the muddy town square.",
+            "visual_prompt": "Vex and Dax stand side by side gazing through the panoramic viewport at a peaceful turquoise planet, holding empty diagnostic pads while a calm green indicator light glows steadily above the hatch.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright, slapstick comedy animation style with vivid colors, exaggerated character expressions, and detailed nineteenth-century market architecture.",
+          "style": "Clean sci-fi industrial aesthetic with practical lighting, metallic textures, and vibrant holographic interfaces.",
           "characters": {
-            "Silas": "An enthusiastic, wild-haired inventor wearing patched tweed overalls, thick round spectacles, and a soot-smudged apron."
+            "Vex": "Tall cybernetic human with polished silver skin, sharp angular proportions, wearing a form-fitting orange utility jumpsuit.",
+            "Dax": "Stout human engineer with a copper-tinted visor, broad shoulders, wearing a rugged green canvas vest and dark trousers."
           },
           "locations": {
-            "Oakhaven Market": "A bustling, sunlit cobblestone marketplace filled with vibrant fabric awnings, wooden crates, and chaotic crowds of shoppers."
+            "bridge": "Claustrophobic titanium bridge filled with glowing red warning consoles and a large panoramic viewport.",
+            "engine_bay": "Dimly lit industrial chamber featuring exposed conduits, a sparking maintenance hatch, and a central holographic display."
           },
           "objects": {
-            "Catapult": "A bulky contraption made of polished oak wood, squeaking brass gears, exposed steel springs, and a large leather launch pouch."
+            "diagnostic_pad": "A rectangular slate of brushed dark metal featuring a bright orange liquid-crystal display showing telemetry data.",
+            "biometric_pad": "A circular wall-mounted plate made of brushed steel with a recessed black handprint scanner that glows blue when active."
           }
         },
-        "plot_fingerprint": "e733d456f12dd0197ed25ec7a71ce35819aeafcb4658c9a498c2872de3753b71"
+        "plot_fingerprint": "e89dfa2cf0fa80a6fb5395ab30fed5f7aed226b8a0913753679245b4dd277613"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "41f24fca59a9cae8b0696a2d",
+      "source_sha256": "bffffb1d480dc96d64f373ac49af7b4fbc673ced2fb05294929a9de110cde400",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-9fa43748c76b7c34bd6e",
+        "title": "The Weaver's Last Thread",
+        "hook": "A Hidden Discovery",
+        "question": "Can true friendship survive the burden of a secret legacy?",
+        "answer": "Yes, but only when loyalty proves stronger than personal ambition.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "A Hidden Discovery",
+            "speech": "Look closely at this ancient loom, Thomas. My grandfather sealed these blueprints inside the wooden frame before he vanished.",
+            "visual": "door",
+            "label": "The Sealed Workshop",
+            "story_beat": "reveal",
+            "visual_prompt": "Elmer stands nervously by a heavy oak workshop door, holding a dusty parchment scroll in his right hand. He wears a dark wool tunic and has a worried expression. Soft candlelight illuminates the rustic interior.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Tempting Offer",
+            "speech": "If we submit these designs to the royal guild tonight, our village will prosper and our names will echo forever.",
+            "visual": "forest",
+            "label": "The Crossroads",
+            "story_beat": "build",
+            "visual_prompt": "Thomas and Elmer stand near a dense pine forest boundary under moonlight. Thomas gestures toward a distant castle silhouette while holding a leather pouch, wearing an ambitious smile and a green leather jerkin.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Broken Trust",
+            "speech": "You cannot trade our peace for gold, Thomas. The guild will exploit this craft and destroy everything we cherish.",
+            "visual": "signal",
+            "label": "The Warning Fire",
+            "story_beat": "twist",
+            "visual_prompt": "Elmer stands resolute beside a blazing signal fire on a windy hill, pointing an accusing finger at Thomas. Sparks drift into the night sky, and Elmer's blue cloak whips violently in the harsh gale.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Silent Sacrifice",
+            "speech": "Then we burn the plans together, old friend. Our bond is worth far more than any crown or kingdom.",
+            "visual": "ship",
+            "label": "The River Bank",
+            "story_beat": "payoff",
+            "visual_prompt": "Thomas and Elmer stand side by side on a muddy river bank, watching burning parchment ashes float away toward a moored wooden fishing boat. Both men wear warm expressions of renewed mutual respect.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "visual_bible": {
+          "style": "Realistic historical illustration with warm cinematic lighting and rich earthy textures.",
+          "characters": {
+            "Elmer": "A humble village weaver in his late forties with weary brown eyes, short graying hair, and wearing a durable dark wool tunic.",
+            "Thomas": "An ambitious fellow villager with bright green eyes, neatly combed dark hair, and wearing a tailored green leather jerkin."
+          },
+          "locations": {
+            "The Sealed Workshop": "A rustic stone cottage interior cluttered with spools of thread, wooden beams, and a large unused loom.",
+            "The River Bank": "A quiet misty river edge bordered by tall reeds and the silhouette of a small wooden fishing boat."
+          },
+          "objects": {
+            "Blueprint Scroll": "A yellowed parchment roll tied securely with frayed hemp twine and covered in intricate ink diagrams.",
+            "Signal Beacon": "A tall stack of dry pine logs topped with glowing embers and casting flickering orange light."
+          }
+        },
+        "plot_fingerprint": "6b410d5b2005255181e1de456f8f2824b7791d9bb39b74649306f8de1b68984d"
       },
       "approved": false
     }
