@@ -9,6 +9,7 @@ import hashlib
 import re
 import os
 from pathlib import Path
+from functools import lru_cache
 from PIL import Image, ImageDraw
 from astra_v2.visual_artifact_library import SCENES, PALETTES
 
@@ -44,31 +45,39 @@ def choose_scene(shot):
                 return scene
     return None
 
-def apply_pack_background(image, shot, identity, *, root=None, video_format="shorts"):
-    """Use only validated, licensed PNGs from a locally installed asset pack.
-
-    Explicit opt-in; never fetch external files or change the default publisher.
-    """
+@lru_cache(maxsize=16)
+def _cached_pack_background(root_path, scene, identity, video_format, size):
+    """Validate and decode once per shot, not for every rendered video frame."""
     from astra_v2.quality_asset_selector import select_assets
+    from PIL import ImageOps
+    root = Path(root_path)
+    candidates = select_assets(root, kind="background", tags=(scene,),
+                               video_format=video_format, limit=50)
+    if not candidates:
+        return None
+    seed = int.from_bytes(hashlib.sha256(str(identity).encode()).digest()[:4], "big")
+    chosen = candidates[seed % len(candidates)]
+    with Image.open(root / chosen["path"]) as source:
+        return ImageOps.fit(source.convert("RGB"), size, method=Image.Resampling.LANCZOS)
+
+
+def apply_pack_background(image, shot, identity, *, root=None, video_format="shorts"):
+    """Composite a validated local background with bounded per-shot caching."""
     if video_format not in ("shorts", "long"):
         raise ValueError("invalid video format")
     scene = choose_scene(shot)
     if scene is None:
         return image
-    root = Path(root or os.getenv("ASTRA_ASSET_PACK_ROOT", "")).resolve()
-    if not (root / "art" / "manifest.json").is_file():
+    configured = root or os.getenv("ASTRA_ASSET_PACK_ROOT")
+    if not configured:
         return image
-    candidates = select_assets(root, kind="background", tags=(scene,),
-                               video_format=video_format, limit=50)
-    if not candidates:
+    root_path = str(Path(configured).resolve())
+    if not (Path(root_path) / "art" / "manifest.json").is_file():
         return image
-    seed = int.from_bytes(hashlib.sha256(str(identity).encode()).digest()[:4], "big")
-    chosen = candidates[seed % len(candidates)]
-    with Image.open(root / chosen["path"]) as source:
-        backdrop = source.convert("RGB")
-        # Cover the requested canvas without changing its aspect ratio.
-        from PIL import ImageOps
-        backdrop = ImageOps.fit(backdrop, image.size, method=Image.Resampling.LANCZOS)
+    backdrop = _cached_pack_background(root_path, scene, str(identity),
+                                        video_format, image.size)
+    if backdrop is None:
+        return image
     return Image.blend(image.convert("RGB"), backdrop, 0.65)
 
 
