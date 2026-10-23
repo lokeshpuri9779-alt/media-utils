@@ -23,6 +23,8 @@ def package_review_art(root, destination):
     images = report.get("images")
     if not isinstance(images, list):
         raise ValueError("Invalid image inventory")
+    if not images:
+        raise ValueError("No verified AI images to package; empty batch is not a successful asset ZIP")
     source = (root / "warehouse").resolve()
     files = {}
     for row in images:

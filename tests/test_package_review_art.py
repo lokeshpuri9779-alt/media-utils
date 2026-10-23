@@ -29,6 +29,16 @@ class ReviewArtZipTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "checksum"):
                 package_review_art(root, output)
 
+    def test_rejects_empty_batch_without_creating_bundle(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            (root / "review_inventory.json").write_text(json.dumps({
+                "review_only": True, "production_ready": False, "images": []}))
+            destination = root / "bundle.zip"
+            with self.assertRaisesRegex(ValueError, "No verified AI images"):
+                package_review_art(root, destination)
+            self.assertFalse(destination.exists())
+
     def test_rejects_path_traversal_and_approved_inventory(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
