@@ -1,5 +1,9 @@
 name: ASTRA Reusable Visual Asset Pack
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/astra-visual-asset-pack.yml'
   workflow_dispatch:
     inputs:
       format:
@@ -16,6 +20,9 @@ on:
         default: '1600'
 permissions:
   contents: read
+concurrency:
+  group: astra-reusable-asset-pack
+  cancel-in-progress: false
 jobs:
   build-pack:
     runs-on: ubuntu-latest
