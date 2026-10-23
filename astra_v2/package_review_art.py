@@ -73,7 +73,7 @@ def package_review_art(root, destination):
     try:
         with zipfile.ZipFile(temporary, "w", compression=zipfile.ZIP_DEFLATED) as bundle:
             bundle.write(inventory, "review_inventory.json")
-            bundle.writestr("scene_coverage.json", json.dumps(coverage_report, indent=2) + "\\n")
+            bundle.writestr("scene_coverage.json", json.dumps(coverage_report, indent=2) + "\n")
             for name in sorted(files):
                 bundle.write(source / name.removeprefix("warehouse/"), name)
             for filename in ("queue.json", "review_only.json"):
