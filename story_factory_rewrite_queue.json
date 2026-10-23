@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "995f8b009f8fcfe7d20f442c",
-      "source_sha256": "7111a339466804348f0e991057371633fbbe6b612f80d653c5108ae0b381434f",
+      "candidate_id": "8d4ca4cbc3458868ac33309e",
+      "source_sha256": "150793d6fb83c3e614998fbf2858fad30fcc127d744b35a4daf534224d05950b",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-fc132d586accb15598ff",
-        "title": "The Great Automatic Turnip Grater Debacle",
-        "hook": "The Grand Unveiling",
-        "question": "What happens when an overly ambitious inventor tests his crazy kitchen contraption in a crowded farmers market?",
-        "answer": "He creates an absolute vegetable avalanche that accidentally wins first prize for municipal landscaping.",
+        "content_id": "rayvan-gemini-05f96e719e1c4a3a384a",
+        "title": "The Great Cheese-Powered Slicer Calamity",
+        "hook": "A Sticky Discovery",
+        "question": "How did Barnaby's automatic market stall become a flying hazard?",
+        "answer": "He wired the steam-driven cheddar wheel directly into the turnip chopper.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,221 +29,214 @@
         ],
         "story_beats": [
           {
-            "headline": "The Grand Unveiling",
-            "speech": "Behold the Mega-Macerator! It slices, it dices, it launches root vegetables with supersonic precision right into your salad bowl!",
-            "visual": "robot",
-            "label": "The Contraption",
-            "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby stands proudly next to a steaming brass-and-copper automaton in a noisy outdoor farmers market, holding a greasy wrench while pointing at a shaking wooden crate.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Assembly Phase",
-            "speech": "Quickly feed the heavy turnips into the hopper before the steam pressure reaches the red danger zone on the gauge!",
-            "visual": "signal",
-            "label": "The Loading",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby's panicked assistant Clara frantically stuffs three massive purple turnips into the funnel of the rattling robot as warning lights flash yellow.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Mechanical Malfunction",
-            "speech": "The intake valve is stuck! Tap it gently with the wooden spoon or the entire machine will sneeze raw slaw everywhere!",
-            "visual": "ship",
-            "label": "The Jam",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby leaps into the air attempting to smack a jammed brass lever on the side of the towering metal gadget while terrified market vendors duck for cover.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Delicious Payoff",
-            "speech": "Well, nobody got a salad, but look at that magnificent avant-garde turnip sculpture decorating the town square so beautifully!",
-            "visual": "door",
-            "label": "The Masterpiece",
-            "story_beat": "payoff",
-            "visual_prompt": "Barnaby and Clara stand amidst a gigantic pile of shredded root vegetables shaped remarkably like the town mayor, holding blue ribbon awards proudly.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures of wood, brass, and fresh produce.",
-          "characters": {
-            "Barnaby": "An eccentric inventor with wild gray hair, wearing a patched tweed vest, round spectacles, and soot-stained trousers.",
-            "Clara": "His practical, quick-witted assistant wearing a blue apron, yellow headscarf, and heavy work boots."
-          },
-          "locations": {
-            "Farmers Market": "A bustling cobblestone square filled with striped canvas awnings, wooden crates, and hanging lanterns."
-          },
-          "objects": {
-            "Mega-Macerator": "A towering, comical steampunk automaton made of polished copper pipes, spinning gears, and a large wooden funnel.",
-            "Turnip": "An oversized, vibrant purple and white root vegetable with long green leafy tops."
-          }
-        },
-        "plot_fingerprint": "c86e0492d33390f6c2c0dcaf81bd56dfa0ecfa883040c35e3a7a0a39004052ab"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "5f343238559a0ceb1e2f9b41",
-      "source_sha256": "feb81bbce1b5fd592b97f8fa95ff9111f506e7d211dd9cda0d8910323690ad2b",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-61aec83a402b1f2ad636",
-        "title": "The Muddy Pitch Puzzle",
-        "hook": "The Arrogant Challenge",
-        "question": "How did the underdog village football team outsmart their wealthy rivals without breaking any league rules?",
-        "answer": "They mapped the underground ancient Roman drainage tiles to redirect a gentle shower into a localized dry zone for their own passing game.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Arrogant Challenge",
-            "speech": "We own the best training grounds in the county, and your muddy little paddock will never match our pristine turf today.",
-            "visual": "forest",
-            "label": "Rivalry Challenge",
-            "story_beat": "reveal",
-            "visual_prompt": "Captain Marcus holding a golden championship cup in a dense, mossy oak forest clearing, wearing a sleek silver athletic kit with a smug expression, facing the camera with dramatic backlighting.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Uncovering the Secret Map",
-            "speech": "Look at these old parchment blueprints from the library archives. The drainage system runs directly underneath the center circle of the field.",
-            "visual": "signal",
-            "label": "The Blueprint Discovery",
-            "story_beat": "build",
-            "visual_prompt": "Librarian Clara holding an illuminated brass blueprint cylinder, standing inside a stone archives room lit by a green holographic signal device, examining architectural sketches with intense concentration.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Diverting the Waters",
-            "speech": "Turn the lever clockwise now so the gentle rain collects and bypasses our half entirely, keeping our pitch completely dry.",
-            "visual": "door",
-            "label": "The Mechanical Valve",
-            "story_beat": "mechanism",
-            "visual_prompt": "Engineer Toby holding a heavy iron wrench, turning a massive stone valve door embedded in the stadium wall, sweat on his brow, wearing rugged denim overalls.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Ingenious Victory",
-            "speech": "Our smart engineering won the match fair and square, proving that clever preparation beats expensive equipment every single time.",
-            "visual": "planet",
-            "label": "Triumphant Celebration",
-            "story_beat": "payoff",
-            "visual_prompt": "Toby and Clara holding a homemade wooden trophy shaped like a tiny globe, smiling broadly on a dry patch of grass while the rainy stadium background glows under stadium lights.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "visual_bible": {
-          "style": "Cinematic stop-motion animation with rich textures, warm lighting, and detailed miniature sets.",
-          "characters": {
-            "Marcus": "Tall, athletic build, smug facial expression, wearing a sleek silver and blue athletic kit.",
-            "Clara": "Curious and sharp, wearing a tweed vest over a white collared shirt, with round spectacles.",
-            "Toby": "Resourceful and gritty, wearing rugged denim overalls and mud-stained work boots."
-          },
-          "locations": {
-            "Forest": "Dense mossy oak forest clearing with ancient trees and dramatic sunbeams.",
-            "Archives": "Dusty stone chamber filled with towering bookshelves and glowing green artifact displays.",
-            "Stadium": "A historic village football ground surrounded by weathered brick walls and modern floodlights."
-          },
-          "objects": {
-            "Cup": "A polished golden championship cup with elaborate handle engravings.",
-            "Blueprint": "An aged yellowed parchment rolled inside an ornate brass cylinder.",
-            "Wrench": "A heavy, rusted iron plumber's wrench with a worn wooden handle."
-          }
-        },
-        "plot_fingerprint": "ba593576eaff63f9786109d0d8e355b32b6491ca62fb30bd359905e4718e6b8a"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "c5db22ef036b948b1f24484b",
-      "source_sha256": "8577a3fdef8ea2209817cb4a6aeacc10dcf6713f7f04290d1087652a96b4db1c",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-e02e12e69d9cebcb3985",
-        "title": "The Grand Steam Powered Gravy Fountain Catastrophe",
-        "hook": "The Silent Engine",
-        "question": "How did Barnaby manage to cover the entire vegetable market in hot brown sauce?",
-        "answer": "He attempted to automate the Sunday roast service using a high-pressure brass valve.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Silent Engine",
-            "speech": "Behold my magnificent mechanical gravy pump, designed to deliver savory perfection directly to every single stall in this bustling plaza.",
+            "headline": "A Sticky Discovery",
+            "speech": "Behold the cheese-driven slicer! It cuts, it grates, and it smells faintly of aged gouda.",
             "visual": "robot",
             "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly in a crowded market square, gesturing toward a gleaming copper robot butler holding an enormous gravy ladle. The market stalls are filled with vegetables under bright morning sunlight, and Barnaby wears a grease-stained waistcoat and goggles.",
+            "visual_prompt": "An eccentric inventor proudly holds a whirring metal automaton embedded with wheels of cheese in a bustling open-air market.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Pressure Mounts",
-            "speech": "We simply turn this brass valve one quarter clockwise to regulate the flow, ensuring absolutely no messy overflows occur today.",
+            "headline": "Adding Extra Steam",
+            "speech": "If we feed more pressure into the brass boilers, the velocity will surely double by noon.",
             "visual": "signal",
-            "label": "The Setup",
+            "label": "The Adjustment",
             "story_beat": "build",
-            "visual_prompt": "Close up of Barnaby twisting a large brass dial on the side of the robot while a flashing green signal light blinks frantically. His hands are covered in flour and gravy stains, and worried market vendors peer over their crates in the background.",
+            "visual_prompt": "The inventor turns a massive brass valve on a smoking copper engine, sending warning steam signals hissing into the crowded bazaar.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Sticky Torrent",
-            "speech": "Oh dear goodness me, the internal temperature has completely bypassed the safety limit and now we are facing a savory tidal wave!",
+            "headline": "Cheddar Lift-Off",
+            "speech": "Why is the contraption vibrating so violently? The wheels are spinning too fast for gravity!",
             "visual": "ship",
-            "label": "The Malfunction",
+            "label": "The Mechanism",
             "story_beat": "mechanism",
-            "visual_prompt": "The mechanical robot splutters and swells, shooting a massive arc of thick brown gravy across the market like a sinking steamship breaching water. Barnaby desperately tries to plug a leaking pipe with his bowler hat while merchants dive for cover behind potato sacks.",
+            "visual_prompt": "The market stall lifts off the cobblestone ground like a hovering airship while frightened shoppers dodge falling wedges of Swiss cheese.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Saucy Settlement",
-            "speech": "Well, on the bright side, every single carrot and turnip in the county is now pre-seasoned and ready for Sunday dinner!",
-            "visual": "door",
+            "headline": "A Cheesy Landing",
+            "speech": "Next time, we stick to hand-cranked graters. At least the rooftop birds enjoyed the falling snacks.",
+            "visual": "forest",
             "label": "The Aftermath",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby and several soggy, gravy-drenched vegetable vendors sit smiling outside a wooden market storage door, eating roasted potatoes dipped in the sauce covering the cobblestones. The robot smokes gently in the background with an empty reservoir.",
+            "visual_prompt": "The inventor sits glumly in the branches of a leafy oak tree surrounded by dangling cheese slices, looking down at the scattered market below.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright, whimsical, stop-motion claymation aesthetic with rich textures and vibrant market colors.",
+          "style": "Wimsical stop-motion claymation aesthetic with vibrant, saturated colors and detailed textures.",
           "characters": {
-            "Barnaby": "An eccentric middle-aged inventor with wild gray hair, oversized round spectacles, a grease-stained brown waistcoat, and perpetually flour-dusted cheeks.",
-            "Market Vendors": "A cheerful group of stout villagers wearing colorful aprons, straw hats, and woolen caps, bustling around wooden crates."
+            "Barnaby": "A frantic inventor with bushy orange hair, wearing a soot-stained tweed vest and oversized round spectacles."
           },
           "locations": {
-            "Market Square": "A bustling open-air cobblestone plaza surrounded by rustic timber-framed merchant stalls overflowing with fresh root vegetables and colorful fruits under striped canvas awnings."
+            "Bramble Market": "A bustling, sunlit outdoor bazaar featuring striped canvas awnings and cobblestone pathways."
           },
           "objects": {
-            "Gravy Robot": "A chunky, two-meter-tall brass and copper automaton featuring dual steam pipes, a flashing green signal light on its domed head, and an articulated mechanical arm holding a giant iron ladle.",
-            "Brass Valve": "A heavy, polished golden spigot mounted on the robot's side, etched with intricate decorative floral patterns and connected to a rubber hose."
+            "Cheese Slicer": "A chaotic amalgamation of brass pipes, copper gears, and sharp steel blades embedded with yellow cheese wheels."
           }
         },
-        "plot_fingerprint": "be9ea27c92244f23b6aaf0085de39349cd8381d7b76c89c4e5ce2a17ac95873c"
+        "plot_fingerprint": "7e5b7cdc25ba8bada55962125317b35b524125de786e3a2908965f39e1fe49ae"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "6d31c4bed5e8bba66daed7f0",
+      "source_sha256": "14b8e9dd4a486ec4ead0fd13f0164d6732a1ca7158fa1385d2f2c7d7e1aa33e0",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-9fd19c93966cb50dab3f",
+        "title": "The Infinite Sausage Extruder",
+        "hook": "The Secret Prototype",
+        "question": "How did Barnaby ruin the Tuesday farmer's market?",
+        "answer": "By inventing a fully automated pork-link cannon that targeted the mayor's hairpiece.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Secret Prototype",
+            "speech": "Behold, my magnificent meat-propulsion device, crafted to revolutionize breakfast provisioning across the entire municipal district forever!",
+            "visual": "robot",
+            "label": "Prototype Reveal",
+            "story_beat": "reveal",
+            "visual_prompt": "Barnaby stands proudly behind a wobbly wooden market stall, wearing a soot-stained tweed vest and goggles, gesturing dramatically toward a brass-plated robotic sausage launcher holding a raw pork link.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Pressure Builds",
+            "speech": "Why is the internal steam gauge rising so rapidly when I only engaged the mild-seasoning lever?",
+            "visual": "signal",
+            "label": "Pressure Spike",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby wipes sweat from his forehead with a polka-dot handkerchief while staring in panic at a glowing red warning beacon atop the brass launcher, which is vibrating intensely on the crowded marketplace table.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Mechanical Launch",
+            "speech": "Duck beneath the pastries, everyone, because the automated casing-adjustment valve has suffered a catastrophic synchronization failure!",
+            "visual": "ship",
+            "label": "Firing Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "The brass launcher abruptly pivots skyward like a naval turret, firing a high-velocity string of breakfast sausages directly over the heads of terrified shoppers scrambling past fruit crates.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Meaty Payoff",
+            "speech": "Well, on the bright side, the mayor's toupee has never looked more remarkably delicious or delightfully seasoned.",
+            "visual": "forest",
+            "label": "Market Chaos",
+            "story_beat": "payoff",
+            "visual_prompt": "Barnaby sheepishly peers out from under an overturned apple cart in a leafy town square park, pointing at a dignified mayor sitting on a bench with a string of breakfast sausages securely draped over his head.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "visual_bible": {
+          "style": "Bright, comedic animated film style with exaggerated character proportions and warm marketplace lighting.",
+          "characters": {
+            "Barnaby": "An eccentric middle-aged inventor with wild gray hair, wide expressive eyes, wearing a patched tweed vest and grease-stained trousers."
+          },
+          "locations": {
+            "Market Square": "A bustling cobblestone town square lined with striped canvas awnings, wooden produce stalls, and scattered leafy potted ferns."
+          },
+          "objects": {
+            "Sausage Launcher": "A gleaming, overly complex brass and copper mechanical cannon covered in blinking indicator lights, pressure dials, and a coiled feeding tray."
+          }
+        },
+        "plot_fingerprint": "4bef971ad16149ef2bb6f30454e166109697b6881992511666848bf97c4ab2c2"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "7531db9ce2955e9d7aa41952",
+      "source_sha256": "420cb6b732264882b9c64787cdc3600e7ac76e05e48ced3405ce85c0753a32e1",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-199976fdb413db7d6084",
+        "title": "The Resonance Valve Disagreement",
+        "hook": "A Drop in Pressure",
+        "question": "How did the crew resolve the engine pressure conflict?",
+        "answer": "They bypassed the regulator using a manual acoustic tuner.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "A Drop in Pressure",
+            "speech": "We cannot vent the primary plasma core manually, Commander! The hull integrity will shatter instantly under thermal stress.",
+            "visual": "ship",
+            "label": "Engine Room Crisis",
+            "story_beat": "reveal",
+            "visual_prompt": "Engineer Vesper stands tense in the glowing green engine room of the starship, pointing urgently at a flashing red pressure gauge while holding a rusted wrench.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Divergent Plan",
+            "speech": "If we do not purge the acoustic chamber right now, the harmonic shockwave will tear our propulsion completely apart.",
+            "visual": "signal",
+            "label": "Tension Rises",
+            "story_beat": "build",
+            "visual_prompt": "Commander Jax gestures sharply toward a wave-form monitor displaying erratic blue spikes, holding a heavy data slate displaying system diagnostics.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Manual Override",
+            "speech": "Take this acoustic tuner and strike the dampener manually to force a frequency reset before the valve locks permanently.",
+            "visual": "robot",
+            "label": "Critical Choice",
+            "story_beat": "mechanism",
+            "visual_prompt": "Maintenance droid Unit-Seven extends a metallic hand holding a vibrating tuning fork toward Vesper near the humming alloy conduit.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A Harmonious Settlement",
+            "speech": "The resonance has stabilized beautifully, proving that quick mechanical adaptation saves missions better than automated protocols ever could.",
+            "visual": "planet",
+            "label": "Stable Orbit",
+            "story_beat": "payoff",
+            "visual_prompt": "Vesper and Jax watch peacefully through the large observation window as a serene blue planet spins slowly below their stable starship.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "visual_bible": {
+          "style": "Cinematic sci-fi realism with dramatic studio lighting and detailed mechanical textures.",
+          "characters": {
+            "Vesper": "Human female engineer with cropped silver hair, wearing a utility jumpsuit stained with grease.",
+            "Jax": "Human male commander with a scarred jawline, wearing a crisp dark green command uniform.",
+            "Unit-Seven": "Bipedal maintenance droid with polished chrome plating and glowing yellow optical sensors."
+          },
+          "locations": {
+            "Engine Room": "A claustrophobic cylindrical chamber lined with exposed pipes, flickering neon indicators, and heavy blast doors."
+          },
+          "objects": {
+            "Acoustic Tuner": "A handheld metallic rod with glowing frequency notches and a heavy rubber striking head.",
+            "Data Slate": "A rectangular glass tablet displaying real-time diagnostic charts in bright blue illumination."
+          }
+        },
+        "plot_fingerprint": "4d4d6edf9fd96cc011f3adf39dd8ce5e21cbb945cde7be19b3655ecc2d271543"
       },
       "approved": false
     }
