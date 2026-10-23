@@ -3,7 +3,7 @@
   "day": "2026-10-23",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 30,
-  "confirmed_today": 29,
+  "confirmed_today": 30,
   "last_attempt_at": "2026-10-23T14:07:16.033317+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -239,57 +239,38 @@
       "format": "short",
       "uploaded_at": "2026-10-23T13:26:58.979978+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "j9dB5jlHiSY": {
-      "content_id": "rayvan-gemini-2497130d0430c7d7c1b6",
+    },
+    "rayvan-gemini-2497130d0430c7d7c1b6": {
+      "video_id": "j9dB5jlHiSY",
+      "confirmed_at": "2026-10-23T14:08:16.307539+00:00",
       "title": "The Last Ridge Echo",
-      "day": "2026-10-23",
-      "uploaded_at": "2026-10-23T14:07:17.565728+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "77cd97af1ce3c176ddd46d08260ba2dd571ccb58287ce20de9af298ee30df662",
-      "story_beats": [
-        {
-          "speech": "That pulsing red flash on the northern ridge cannot be a trick of the ice. Someone needs us out there now."
-        },
-        {
-          "speech": "We have to push through these frozen pines before the wind cuts our tracks completely away from the trail."
-        },
-        {
-          "speech": "Hold on tightly to the anchor rope. I am dropping the harness down to pull you out of the dark ice."
-        },
-        {
-          "speech": "We made it back to the warmth of the cabin just in time. Rest now, the storm cannot reach us here."
-        }
-      ],
+      "uploaded_at": "2026-10-23T14:07:17.565728+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-23T14:05:27.652498+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-23T14:08:15.849417+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-23T14:07:17.969810+00:00",
+    "at": "2026-10-23T14:08:16.399531+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-23T09:21:49.309461+00:00",
   "reserved": {
@@ -985,10 +966,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-23T14:07:17.969735+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-23T14:08:16.399440+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -996,9 +977,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-23T14:07:17.969796+00:00",
+    "at": "2026-10-23T14:08:16.399512+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -1010,56 +991,22 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-23T14:07:17.969485+00:00",
-    "preflight_due": "true",
+    "at": "2026-10-23T14:08:16.399343+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "outcome": "published",
+    "reason": "min_interval",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-23T14:07:17.969728+00:00",
-    "collection_status": "collected",
-    "publish_step": "success",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 247,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3
-        },
-        "seen": 9,
-        "total": 323
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 323,
-        "fingerprint": 0,
-        "id": 6,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 317,
-        "title": 0,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 317,
-        "remaining": 247
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 3,
-        "approved": 1,
-        "considered": 4,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 0
-      }
-    },
+    "at": "2026-10-23T14:08:16.399432+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
