@@ -132,15 +132,32 @@ jobs:
             timeout 360s python -m pip install --disable-pip-version-check -r requirements.txt
             echo 'ASTRA_INSTALL_MODE=pip-fallback'
           fi
-          # Ubuntu hosted runners normally include ffmpeg; avoid apt mirror stalls.
-          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
-            # Ubuntu mirror downloads can exceed two minutes; avoid killing
-            # apt midway through a large codec dependency download.
-            timeout 120s sudo apt-get update -qq -o Acquire::Retries=2
-            timeout 600s sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -o Acquire::Retries=3 ffmpeg
+          # Avoid apt mirror stalls: imageio-ffmpeg is already pinned in
+          # requirements.txt and supplies a bundled, executable ffmpeg.
+          # ffprobe is needed for media validation, so keep it independently
+          # checked rather than assuming the bundled ffmpeg includes it.
+          if ! command -v ffmpeg >/dev/null; then
+            python - <<'PY'
+          import imageio_ffmpeg
+          from pathlib import Path
+          import os
+          binary = Path(imageio_ffmpeg.get_ffmpeg_exe())
+          assert binary.is_file() and os.access(binary, os.X_OK)
+          target = Path(os.environ["RUNNER_TEMP"]) / "ffmpeg"
+          target.symlink_to(binary)
+          with open(os.environ["GITHUB_PATH"], "a", encoding="utf-8") as out:
+              out.write(str(target.parent) + "\\n")
+          print("ASTRA_FFMPEG_SOURCE=imageio-ffmpeg")
+          PY
           fi
-          command -v ffmpeg
+          if ! command -v ffprobe >/dev/null; then
+            echo 'ASTRA_FFPROBE_MISSING=1'
+            # Do not silently skip media verification or wait ten minutes
+            # on apt mirrors. Fail clearly and keep publication fail-closed.
+            exit 1
+          fi
           command -v ffprobe
+          python -c "import imageio_ffmpeg; print('ASTRA_BUNDLED_FFMPEG=' + imageio_ffmpeg.get_ffmpeg_exe())"
       - name: Refresh free licensed visual icon cache
         if: matrix.lane == 0
         continue-on-error: true
