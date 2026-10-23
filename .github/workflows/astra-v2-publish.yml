@@ -201,6 +201,13 @@ jobs:
           fi
           command -v ffmpeg || { echo 'ASTRA_FFMPEG_UNAVAILABLE=1'; exit 1; }
           command -v ffprobe || { echo 'ASTRA_FFPROBE_UNAVAILABLE=1'; exit 1; }
+          # Extracted ffprobe may lack its system shared libraries. Detect that
+          # before rendering instead of misclassifying a healthy MP4 as corrupt.
+          ffprobe -version >/dev/null 2>&1 || {
+            echo 'ASTRA_FFPROBE_RUNTIME_UNUSABLE=1'
+            ldd "$(command -v ffprobe)" | grep 'not found' || true
+            exit 1
+          }
 
       # Long-form cover tests execute in astra-v2-longform.yml, not the Shorts publisher.
       - name: Enforce real frame-to-frame motion
