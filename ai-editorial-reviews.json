@@ -330,6 +330,18 @@
         "reviewed_at": "2026-10-23T03:05:31.455923+00:00",
         "review_model": "gemini-3.1-flash-lite"
       }
+    },
+    {
+      "content_id": "rayvan-gemini-b11462d4c51f56561228",
+      "story_sha256": "d410fe6e28b7f997c34951ace47df1342979d89a3981aaf9b16d452b18108558",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise, setting, and character archetype (a nomad in a desert discovering a hidden, verdant, or bioluminescent heart) are highly derivative of 'The Nomad and the Verdant Heart of the Shifting Sands' and 'The Axolotl and the Bioluminescent Bloom' provided in the recent publication history.",
+        "The causal mechanism of using a specific tool (tuning fork/signal) to unlock a hidden natural sanctuary is functionally identical to the mechanisms found in 'The Conductor of the Whispering Platform' and 'The Canopy Guardians and the Seed of Restoration'.",
+        "The narrative structure and thematic resolution repeat the exact tropes found in the provided list of recent publications, failing to meet the threshold for originality."
+      ],
+      "record": null
     }
   ]
 }

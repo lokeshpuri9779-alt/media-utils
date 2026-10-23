@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-23",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 9,
-  "confirmed_today": 8,
-  "last_attempt_at": "2026-10-23T03:06:44.494251+00:00",
+  "attempts": 10,
+  "confirmed_today": 9,
+  "last_attempt_at": "2026-10-23T03:34:31.129602+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -71,30 +71,38 @@
       "format": "short",
       "uploaded_at": "2026-10-23T02:58:44.270887+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-gemini-7cd5a90811847d5b0cf6": {
+      "video_id": "4h93F6aqALk",
+      "confirmed_at": "2026-10-23T03:30:02.069651+00:00",
+      "title": "The Axolotl and the Bioluminescent Bloom",
+      "format": "short",
+      "uploaded_at": "2026-10-23T03:06:45.931227+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "4h93F6aqALk": {
-      "content_id": "rayvan-gemini-7cd5a90811847d5b0cf6",
-      "title": "The Axolotl and the Bioluminescent Bloom",
+    "Wp5fHO1YtbQ": {
+      "content_id": "rayvan-season-01-episode-02",
+      "title": "The Tomorrow Signal | S1 E02 | Mara",
       "day": "2026-10-23",
-      "uploaded_at": "2026-10-23T03:06:45.931227+00:00",
+      "uploaded_at": "2026-10-23T03:34:33.041943+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "0817a164f059ebdcfdf568044efa268c27e1490658829f229138fdeecc5f535b",
+      "plot_fingerprint": "",
       "story_beats": [
         {
-          "speech": "The glowing anemones are fading fast, leaving our home in cold darkness; I must find the source of the dying light."
+          "speech": "Mara's missing brother had just spoken through a radio that predicted tomorrow. She followed his warning and left the city dark. Beneath the observatory, the locked door began to glow, and something knocked from the other side."
         },
         {
-          "speech": "I found an ancient stone pedestal buried under this debris, vibrating with a strange, rhythmic pulse that feels like a heartbeat."
+          "speech": "She found an emergency generator, but its switch was marked with the same symbol carved into her brother's old notebook. His last entry said the door opened only when the city was fully powered. Someone had lied about the blackout."
         },
         {
-          "speech": "It is not broken, but waiting for a specific frequency; if I touch this terminal, the entire reef might wake up again."
+          "speech": "A stranger arrived carrying a photograph of Mara standing beside the door. The picture was dated next week. In it, her brother stood behind her, older than he should have been, holding a key made of blue glass."
         },
         {
-          "speech": "The light returns as the coral pulses with vibrant color once more, proving that our home is safe for every creature here."
+          "speech": "Mara refused to start the generator. The stranger smiled and pressed a hidden switch. Lights returned across the city, one block at a time. From beneath the floor, the knocking stopped. Then a voice said, 'Thank you for opening it.'"
         }
       ],
       "renderer": "studio-7.3.0"
@@ -102,11 +110,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-23T03:04:42.748668+00:00",
+  "last_preflight_at": "2026-10-23T03:30:01.424011+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-23T03:06:46.319964+00:00",
+    "at": "2026-10-23T03:34:33.473476+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -331,35 +339,58 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-season-01-episode-02": {
+      "at": "2026-10-23T03:34:31.129585+00:00",
+      "title": "The Tomorrow Signal | S1 E02 | Mara",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "",
+      "story_beats": [
+        {
+          "speech": "Mara's missing brother had just spoken through a radio that predicted tomorrow. She followed his warning and left the city dark. Beneath the observatory, the locked door began to glow, and something knocked from the other side."
+        },
+        {
+          "speech": "She found an emergency generator, but its switch was marked with the same symbol carved into her brother's old notebook. His last entry said the door opened only when the city was fully powered. Someone had lied about the blackout."
+        },
+        {
+          "speech": "A stranger arrived carrying a photograph of Mara standing beside the door. The picture was dated next week. In it, her brother stood behind her, older than he should have been, holding a key made of blue glass."
+        },
+        {
+          "speech": "Mara refused to start the generator. The stranger smiled and pressed a hidden switch. Lights returned across the city, one block at a time. From beneath the floor, the knocking stopped. Then a voice said, 'Thank you for opening it.'"
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-23T03:06:46.319889+00:00",
+    "at": "2026-10-23T03:34:33.473390+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "character_memory": "first_episode_staged",
     "character_memory_error": null,
-    "first_candidate_manifest": false,
+    "first_candidate_manifest": true,
     "existing_character_proposal": false,
     "existing_character_episode": false,
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-23T03:06:46.319951+00:00",
+    "at": "2026-10-23T03:34:33.473461+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-23T03:05:09.576462+00:00",
+    "at": "2026-10-23T03:31:04.041338+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-7cd5a90811847d5b0cf6",
-    "video_url": "https://www.youtube.com/watch?v=4h93F6aqALk",
+    "content_id": "rayvan-season-01-episode-02",
+    "video_url": "https://www.youtube.com/watch?v=Wp5fHO1YtbQ",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-23T03:06:46.319628+00:00",
+    "at": "2026-10-23T03:34:33.472980+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -371,18 +402,18 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-23T03:06:46.319882+00:00",
+    "at": "2026-10-23T03:34:33.473382+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 235,
+        "eligible": 236,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3
         },
         "seen": 4,
-        "total": 306
+        "total": 307
       },
       "ASTRA_STORY_HISTORY_FILTER": {
         "before": 307,

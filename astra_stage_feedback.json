@@ -2,28 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-17T09:50:05.081813+00:00",
-      "stage": "quality",
-      "element": "candidate_selection",
-      "outcome": "fail",
-      "evidence": {
-        "reason": "no_approved_original_story_available"
-      },
-      "proposed_action": "Diagnose story supply and creative gate failures",
-      "candidate_id": ""
-    },
-    {
-      "at": "2026-10-17T10:01:22.976705+00:00",
-      "stage": "quality",
-      "element": "candidate_selection",
-      "outcome": "fail",
-      "evidence": {
-        "reason": "no_approved_original_story_available"
-      },
-      "proposed_action": "Diagnose story supply and creative gate failures",
-      "candidate_id": ""
-    },
-    {
       "at": "2026-10-17T10:11:32.028912+00:00",
       "stage": "quality",
       "element": "creative_director",
@@ -7260,6 +7238,39 @@
       },
       "proposed_action": "",
       "candidate_id": "rayvan-gemini-7cd5a90811847d5b0cf6"
+    },
+    {
+      "at": "2026-10-23T03:34:31.010178+00:00",
+      "stage": "quality",
+      "element": "creative_director",
+      "outcome": "pass",
+      "evidence": {
+        "scores": {
+          "hook": 94.0,
+          "retention": 92.0,
+          "visual": 100.0,
+          "pacing": 100.0,
+          "audio": 98.48,
+          "captions": 99.01,
+          "novelty": 100.0,
+          "coherence": 92.0,
+          "technical": 100.0
+        }
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-season-01-episode-02"
+    },
+    {
+      "at": "2026-10-23T03:34:31.020224+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "pass",
+      "evidence": {
+        "duration": 52.1,
+        "renderer": "studio-7.3.0"
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-season-01-episode-02"
     }
   ],
   "stage_counts": {
@@ -7360,7 +7371,7 @@
       "regressed": 0
     },
     "render": {
-      "pass": 58,
+      "pass": 59,
       "fail": 2,
       "skip": 0,
       "unknown": 2,
@@ -7368,8 +7379,8 @@
       "regressed": 0
     },
     "quality": {
-      "pass": 58,
-      "fail": 464,
+      "pass": 59,
+      "fail": 462,
       "skip": 0,
       "unknown": 0,
       "improved": 0,
