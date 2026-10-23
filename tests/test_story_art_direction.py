@@ -10,6 +10,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 from PIL import Image
 from astra.asset_library import select_asset, draw_asset_for_scene
 from astra_v2.omniroute_image_assets import preproduce, export_reviewed_render_manifest
@@ -41,6 +42,15 @@ def png():
 
 
 class StoryArtTests(unittest.TestCase):
+    def setUp(self):
+        # Only fixture tests receive a deterministic review signing key.
+        # Production still requires its separately protected secret.
+        signer = patch.dict(os.environ, {
+            "ASTRA_ART_REVIEW_HMAC_KEY": "story-art-fixture-only-review-key-0123456789"
+        })
+        signer.start()
+        self.addCleanup(signer.stop)
+
     def test_all_scenes_share_bible_but_select_distinct_actions(self):
         requests = illustration_requests(story())
         self.assertEqual(len(requests), 2)
