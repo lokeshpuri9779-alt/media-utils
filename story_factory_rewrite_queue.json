@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "96557fbc1b5ee6f27abb3826",
-      "source_sha256": "e0576530c50f6743d66c740c8ff8b43390802fc9e165804ccd6429fd791f9a4f",
+      "candidate_id": "541b63d611f7da162c2bc002",
+      "source_sha256": "f56c6a602a6b0e10adc7dde877e920d8321b42efecbd084ba08d4a33717158bd",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-83492f690aea233ce2df",
-        "title": "The Great Automatic Turnip-Peeler Debacle of Sector Nine",
-        "hook": "A Grand Reveal",
-        "question": "How did Silas manage to ruin the morning market with a single turnip?",
-        "answer": "By inventing a steam-powered peeling automaton that possessed too much enthusiasm and zero depth perception.",
+        "content_id": "rayvan-gemini-7c5277985f99247751d0",
+        "title": "The Great Turnip Whistle Debacle",
+        "hook": "The Secret Root",
+        "question": "How did Barnaby's revolutionary vegetable instrument cause absolute chaos at the market square?",
+        "answer": "By accidentally summoning every stray pigeon in the county with a high-pitched root vegetable tone.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,76 +29,76 @@
         ],
         "story_beats": [
           {
-            "headline": "A Grand Reveal",
-            "speech": "Behold the root-vegetable revolution, citizens! Today our market stalls shall run completely free of clumsy kitchen knives forever!",
-            "visual": "robot",
-            "label": "The Unveiling",
-            "story_beat": "reveal",
-            "visual_prompt": "Silas enthusiastically pulls a velvet tarp off his steam-powered wooden robot in the center of a crowded dusty market square, smiling widely while pointing at its brass peeling claws.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Construction Chaos",
-            "speech": "Keep feeding it raw root vegetables faster, or the pressure valves will overheat and shake the entire fruit cart apart!",
-            "visual": "ship",
-            "label": "The Assembly",
-            "story_beat": "build",
-            "visual_prompt": "Silas and his nervous helper frantically shove giant turnips into the roaring furnace belly of the robot, which now looks like a boiler room on wheels.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Mechanical Trap",
-            "speech": "Wait, do not target the decorative pumpkin display! That is an artistic centerpiece, not a standard cylindrical root specimen!",
+            "headline": "The Secret Root",
+            "speech": "Behold the Rutabaga-Phone! It plays a melody so sharp it will revolutionize market day music forevermore!",
             "visual": "signal",
-            "label": "The Malfunction",
-            "story_beat": "mechanism",
-            "visual_prompt": "The robot's glowing optical sensor flashes red as it locks onto a massive prize-winning orange pumpkin, holding a sharp peeler dangerously close.",
+            "label": "Invention Revealed",
+            "story_beat": "reveal",
+            "visual_prompt": "Barnaby standing proudly behind his wooden market stall, holding a hollowed-out glowing turnip with brass valves, with curious townsfolk staring in the background under the bright midday sun.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Sticky Payoff",
-            "speech": "Perhaps hand-peeled turnips were never truly broken after all. Let us all pretend this absolute disaster never actually occurred.",
+            "headline": "Constructing the Pipes",
+            "speech": "We must attach the copper funnel firmly to the turnip core to amplify the resonant frequency of the vegetable.",
+            "visual": "robot",
+            "label": "Assembly Phase",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby frantically using a tiny hand-cranked mechanical soldering automaton to attach a shiny copper funnel to the carved rutabaga on his messy workbench cluttered with tools.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Accidental Note",
+            "speech": "Oops! My thumb slipped on the brass valve and now the root is whistling a terrifyingly loud high note!",
             "visual": "door",
-            "label": "The Aftermath",
+            "label": "Unexpected Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby stumbling backward in surprise as his rutabaga instrument blasts a visible wave of sound toward the canvas-covered market stalls and the nearby wooden entrance gate.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Feathered Payoff",
+            "speech": "My glorious invention has attracted five hundred very angry pigeons, and they are demanding bread crumbs immediately!",
+            "visual": "ship",
+            "label": "Pigeon Takeover",
             "story_beat": "payoff",
-            "visual_prompt": "Silas sheepishly ducks out through the swinging wooden delivery door of his shop while thick vegetable puree drips from the ceiling behind him.",
+            "visual_prompt": "Barnaby cowering under his market canopy while a massive cloud of gray pigeons swarms around him, and a flying delivery airship hovers overhead dropping sacks of birdseed in absolute confusion.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright, colorful slapstick cartoon animation style with exaggerated expressions and detailed mechanical textures.",
+          "style": "Bright, whimsical stop-motion claymation aesthetic with vibrant primary colors and highly detailed textures.",
           "characters": {
-            "Silas": "An eccentric inventor with wild grey hair, wearing a soot-stained waistcoat and goggles pushed up on his forehead.",
-            "Helper": "A nervous young apprentice in an oversized green apron carrying a basket of dusty root vegetables."
+            "Barnaby": "An eccentric inventor with wild gray hair, round spectacles, a patched brown tweed vest, and flour-dusted trousers."
           },
           "locations": {
-            "Market Square": "A bustling open-air cobblestone market filled with colorful canvas awnings, fruit carts, and curious townspeople."
+            "Market Square": "A bustling medieval-style cobblestone plaza filled with colorful canvas awnings, wooden stalls, and crates of fresh produce."
           },
           "objects": {
-            "Turnip Automaton": "A clunky, steam-powered copper and wood robot on iron wheels with spinning whisk-like peeling hands and a smoking chimney hat."
+            "RutabagaPhone": "A hollowed-out purple and yellow root vegetable fitted with shiny brass pipes, mismatched valves, and a copper acoustic funnel.",
+            "Workbench": "A scarred oak table covered in scattered gears, screwdrivers, half-eaten apples, and blueprints drawn on parchment."
           }
         },
-        "plot_fingerprint": "ec3904473b5d4f5b5a7f171a88b2b7ec801cf8f1d03dff57dec2256723ff6ee8"
+        "plot_fingerprint": "1d758240828637e65b416e90c02f611690018ab895a9d1320e0b36a51c043826"
       },
       "approved": false
     },
     {
-      "candidate_id": "c94fa471cd007276ff9d1ab9",
-      "source_sha256": "0882b73b0e704db4d1926e322e8f2c72c19f95afad021ae6f5e761528d1c9ffa",
+      "candidate_id": "678fb345ef9333626fb1bd3a",
+      "source_sha256": "6ae4823c6c045681d37fc8cab183b1c3ef4548908bdf1a7106ff3a8cd02b6aa1",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-65d9103cd3072d5841b7",
-        "title": "The Midnight Express Misplacement",
-        "hook": "The Vanishing Carriage",
-        "question": "Where did the missing cargo carriage disappear to during the thunderstorm?",
-        "answer": "It was uncoupled automatically by a stray mechanical dog to protect the platform's foundation.",
+        "content_id": "rayvan-gemini-1f4931cbf09c7020329e",
+        "title": "The Grand Tomato Slinging Chaos",
+        "hook": "A Desperate Inventor",
+        "question": "How did Silas save his failing vegetable stall?",
+        "answer": "Silas invented an automatic tomato-coring launcher that accidentally bombarded the entire village square.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -106,142 +106,142 @@
         ],
         "story_beats": [
           {
-            "headline": "The Vanishing Carriage",
-            "speech": "Look closely at platform four! The heavy mail carriage has vanished completely into the thick morning fog without a single sound.",
-            "visual": "signal",
-            "label": "Platform Mystery",
-            "story_beat": "reveal",
-            "visual_prompt": "Conductor Silas wearing a blue wool coat and brass pocket watch stands on the wet cobblestone platform staring at empty tracks while holding a blinking railway signal lamp.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Mechanical Trail",
-            "speech": "Follow these tiny metallic paw prints leading past the luggage lockers directly toward the old rusted maintenance shed behind the station.",
+            "headline": "A Desperate Inventor",
+            "speech": "My vegetables are completely unsellable today, and the market rents are due in exactly ten minutes from now!",
             "visual": "robot",
-            "label": "Unexpected Helper",
-            "story_beat": "build",
-            "visual_prompt": "A small brass cleaning robot with gears and a wagging copper tail holds a lost train ticket near the open metal door of the maintenance shed.",
+            "label": "Stall Panic",
+            "story_beat": "reveal",
+            "visual_prompt": "Silas wearing a messy brown apron and stained cap stands inside his wooden vegetable stall holding a rotten tomato in the busy market square.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Hidden Mechanism",
-            "speech": "The clever little machine pulled the emergency lever to divert the unstable carriage away from the flooded tunnel ahead.",
-            "visual": "door",
-            "label": "Secret Switch",
+            "headline": "The Mechanical Solution",
+            "speech": "I will assemble this brass crank and copper funnel into a high speed fruit launching sorting machine immediately!",
+            "visual": "signal",
+            "label": "The Build",
+            "story_beat": "build",
+            "visual_prompt": "Silas wearing his brown apron hastily twists a brass crank attached to a large copper funnel resting on his cluttered wooden market counter.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Catastrophic Launch",
+            "speech": "Oh no, the tension spring is stuck at maximum power and now it is firing ripe tomatoes everywhere!",
+            "visual": "ship",
+            "label": "The Mechanism",
             "story_beat": "mechanism",
-            "visual_prompt": "Silas examines a glowing green junction lever inside the open utility door while the friendly robot points proudly with an articulated mechanical finger.",
+            "visual_prompt": "Silas wearing his brown apron frantically waves his arms as red tomatoes shoot out of the copper funnel across the bustling market.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "An Unexpected Success",
+            "speech": "Every single bruised vegetable sold out instantly because everyone loves a dramatic food fight festival in town!",
+            "visual": "door",
+            "label": "Market Payoff",
+            "story_beat": "payoff",
+            "visual_prompt": "Silas wearing his brown apron smiles widely while collecting bags of gold coins from cheering villagers covered in red tomato splatters.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "visual_bible": {
+          "style": "Vibrant slapstick animation style with bright colors and exaggerated character expressions.",
+          "characters": {
+            "Silas": "An eccentric inventor with wild gray hair, wide expressive eyes, wearing a patched brown apron and a stained green cap."
+          },
+          "locations": {
+            "Market Square": "A bustling medieval marketplace filled with wooden stalls, colorful awnings, and cobblestone ground."
+          },
+          "objects": {
+            "Brass Crank": "A shiny golden metal handle with a curved wooden grip used for turning gears.",
+            "Copper Funnel": "A wide conical metal container polished to a bright orange hue for holding fruits.",
+            "Wooden Stall": "A rustic weathered timber table with crates stacked full of various vegetables."
+          }
+        },
+        "plot_fingerprint": "616c9c4eec41d4fe302f0af14c8665802a4d8536cc5e2a13e43e106b14718d6b"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "8f7193b0ffdbc628a0be160c",
+      "source_sha256": "3b1af4b2ba2204d334036825abdfe3c34ad76653cf514a6c3e2c35d3b7ab769f",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-17ff1541dd199b6fc2af",
+        "title": "The Whispering Ice",
+        "hook": "A Strange Transmission",
+        "question": "How did the team locate the stranded surveyor beneath the glacier?",
+        "answer": "They followed the rhythmic seismic pulses generated by the shifting crevasse walls.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "A Strange Transmission",
+            "speech": "Listen closely to that frequency. It is not the wind howling against the frozen ridge.",
+            "visual": "signal",
+            "label": "Frequency Anomaly",
+            "story_beat": "reveal",
+            "visual_prompt": "Dr. Aris stands in a dimly lit radar tent, pointing at a glowing green oscilloscope screen while wearing a heavy orange parka, holding a metal stylus.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Mapping the Tremors",
+            "speech": "We must deploy the seismic sensors immediately before the pressure ridges seal the main entrance.",
+            "visual": "ship",
+            "label": "Icebreaker Hull",
+            "story_beat": "build",
+            "visual_prompt": "Mechanic Vanya secures a heavy seismic probe onto the steel deck of the research vessel parked against the frozen shore, wearing a thick blue insulated jumpsuit.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Fractured Vault",
+            "speech": "The resonance matches the acoustic signature of the lower cavern where the shelter was anchored.",
+            "visual": "door",
+            "label": "Cavern Hatch",
+            "story_beat": "mechanism",
+            "visual_prompt": "Dr. Aris uses a battery-powered thermal torch to melt frost off a heavy titanium emergency hatch buried deep inside a blue glacial cave.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
             "headline": "Safe Return",
-            "speech": "Thanks to our tireless mechanical friend, the mail carriage is saved and every single letter will reach its destination today.",
-            "visual": "ship",
-            "label": "Happy Ending",
+            "speech": "We pulled him out just as the automated stabilization beacons began signaling total structural collapse.",
+            "visual": "forest",
+            "label": "Tundra Outpost",
             "story_beat": "payoff",
-            "visual_prompt": "Silas and the brass robot stand together smiling on the sunlit station platform as a majestic steam train painted in blue and gold pulls safely into the station.",
+            "visual_prompt": "Vanya and Dr. Aris wrap a rescued surveyor in thermal blankets inside a brightly lit observation dome surrounded by snowy hills.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright animated family-friendly cinematic illustration with rich textures and warm lighting.",
+          "style": "Cinematic realism, high-contrast lighting, cold blue and warm orange color palette",
           "characters": {
-            "Silas": "An elderly stationmaster with a thick white mustache, round spectacles, a navy blue wool coat, and a shining brass pocket watch.",
-            "Toby": "A compact, friendly utility robot made of polished brass and copper with expressive digital eyes and a copper tail."
+            "Dr. Aris": "A seasoned arctic geologist with a weathered face, intense focus, wearing a heavy orange parka with fur lining.",
+            "Vanya": "A pragmatic mechanical engineer with a stocky build, wearing a thick blue insulated jumpsuit and woolen cap."
           },
           "locations": {
-            "Grand Central Station": "A bustling Victorian railway station with arched iron ceilings, wet cobblestone platforms, and vintage wooden benches.",
-            "Maintenance Shed": "A cozy, cluttered workshop filled with spare gears, hanging lanterns, and tools."
+            "radar tent": "A cramped canvas tent lit by green radar screens and tangled cables.",
+            "research vessel": "A rusted red icebreaker ship docked against a towering wall of blue glacier ice.",
+            "glacial cave": "A deep subterranean cavern made of solid translucent blue ice with echoing acoustics."
           },
           "objects": {
-            "Signal Lamp": "A heavy black iron lantern emitting a bright yellow beam of light.",
-            "Junction Lever": "A large red iron lever connected to brass floor cables with a glowing green status bulb."
+            "oscilloscope": "A bulky vintage diagnostic machine with a glowing green CRT display showing sharp waveform spikes.",
+            "seismic probe": "A cylindrical titanium rod flashing a red LED status light at its base.",
+            "thermal torch": "A handheld silver canister projecting a fierce blue propane flame."
           }
         },
-        "plot_fingerprint": "9856f6b653067079d64289c0601f245395e0a25c5f9e44b89a7a0b43eeab105f"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "3562c508491f6fefaca97202",
-      "source_sha256": "a32b19713af6237070d4bec699a03f5b47cc2287d442c87fe613521e0237e596",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-556bc526006b003ae696",
-        "title": "The Resonance Chamber Discrepancy",
-        "hook": "A Strange Pulse",
-        "question": "How did the maintenance crew resolve the acoustic feedback crisis?",
-        "answer": "By trusting an unorthodox dampening technique over protocol.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "A Strange Pulse",
-            "speech": "Captain, the primary stabilizer is humming at a frequency that defies our current schematics completely.",
-            "visual": "signal",
-            "label": "Frequency Anomaly",
-            "story_beat": "reveal",
-            "visual_prompt": "Captain Vex, a tall human with braided grey hair wearing a utility jumpsuit, points at a pulsing holographic signal display inside the bridge. The glowing blue console projects erratic wave patterns.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Conflicting Directives",
-            "speech": "We must purge the coolant lines immediately before pressure builds up and shatters the entire propulsion housing.",
-            "visual": "ship",
-            "label": "Engine Room Debate",
-            "story_beat": "build",
-            "visual_prompt": "Chief Engineer Jax, a burly cyborg wearing a worn green tunic, stands angrily beside the massive titanium engine casing, holding a heavy diagnostic tablet.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Acoustic Shunt",
-            "speech": "If we inject harmonic dampening crystals instead of purging, we can absorb the vibration without losing warp capacity.",
-            "visual": "robot",
-            "label": "Alternative Mechanism",
-            "story_beat": "mechanism",
-            "visual_prompt": "Unit Seven, a compact maintenance robot with a gleaming white chassis, carefully inserts a glowing amber crystal into a designated port on the primary engine manifold.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Harmonic Stability",
-            "speech": "The resonance has faded away entirely. Our bold gamble saved both the engines and our mission schedule.",
-            "visual": "planet",
-            "label": "Stable Orbit",
-            "story_beat": "payoff",
-            "visual_prompt": "Captain Vex and Chief Engineer Jax smile together while watching a serene green and blue planet slowly rotate through the massive observation viewport of the ship.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "visual_bible": {
-          "style": "Clean sci-fi animation with vibrant lighting and detailed industrial textures.",
-          "characters": {
-            "Captain Vex": "Tall human with braided grey hair, wearing a utility jumpsuit with brass rank pins.",
-            "Chief Engineer Jax": "Burly cyborg with visible mechanical arms, wearing a worn green utility tunic.",
-            "Unit Seven": "Compact maintenance robot with a gleaming white spherical chassis and blue optical sensors."
-          },
-          "locations": {
-            "bridge": "Sleek command center featuring a large observation window and glowing blue holographic consoles.",
-            "engine room": "Industrial compartment filled with massive titanium housings, exposed conduits, and warning lights."
-          },
-          "objects": {
-            "diagnostic tablet": "Heavy rectangular metallic slate displaying flashing red and green error logs.",
-            "dampening crystal": "Prismatic amber mineral shard that pulses softly with internal light."
-          }
-        },
-        "plot_fingerprint": "2847811794dab6685eb350e813533ab2d4d1296206e91c4974ceaaa062cb29c3"
+        "plot_fingerprint": "c0739f1ca14c40f5607407ce676d0d22072d297c25efaa86ad9c6f4c3d4f38b3"
       },
       "approved": false
     }
