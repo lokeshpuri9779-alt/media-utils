@@ -81,7 +81,7 @@ def generate_semantic_assets(stories, output_root=None, limit=24):
                                      prefix=".semantic-", suffix=".tmp", delete=False) as handle:
         temp = Path(handle.name)
         json.dump({"assets": merged}, handle, indent=2)
-        handle.write("\\n")
+        handle.write("\n")
     try:
         os.replace(temp, manifest)
     finally:
