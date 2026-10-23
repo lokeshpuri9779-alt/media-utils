@@ -168,19 +168,39 @@ jobs:
             timeout 360s python -m pip install --disable-pip-version-check -r requirements.txt
             echo 'ASTRA_INSTALL_MODE=pip-fallback'
           fi
-          # Ubuntu hosted runners normally include ffmpeg; avoid apt mirror stalls.
-          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
-            for attempt in 1 2 3; do
-              if timeout 120s sudo apt-get update -qq -o Acquire::Retries=2 &&
-                 timeout 120s sudo DEBIAN_FRONTEND=noninteractive apt-get install -y ffmpeg; then
-                break
-              fi
-              echo "FFmpeg installation attempt ${attempt} failed"
-              sleep $((attempt * 5))
-            done
+          # Reuse the tested preload approach: avoid full apt ffmpeg install.
+          if ! command -v ffmpeg >/dev/null; then
+            python - <<'PY'
+          import imageio_ffmpeg
+          from pathlib import Path
+          import os
+          binary = Path(imageio_ffmpeg.get_ffmpeg_exe())
+          assert binary.is_file() and os.access(binary, os.X_OK)
+          target = Path(os.environ["RUNNER_TEMP"]) / "ffmpeg"
+          target.symlink_to(binary)
+          with open(os.environ["GITHUB_PATH"], "a", encoding="utf-8") as out:
+              out.write(str(target.parent) + "\n")
+          print("ASTRA_FFMPEG_SOURCE=imageio-ffmpeg")
+          PY
+            export PATH="$RUNNER_TEMP:$PATH"
           fi
-          command -v ffmpeg
-          command -v ffprobe
+          if ! command -v ffprobe >/dev/null; then
+            echo 'ASTRA_FFPROBE_MISSING=1'
+            timeout 45s sudo apt-get update -qq -o Acquire::Retries=0 || true
+            timeout 90s sudo DEBIAN_FRONTEND=noninteractive apt-get download ffmpeg || true
+            probe_package="$(find . -maxdepth 1 -name 'ffmpeg_*.deb' -print -quit)"
+            if [ -n "$probe_package" ]; then
+              mkdir -p "$RUNNER_TEMP/astra-ffmpeg"
+              dpkg-deb -x "$probe_package" "$RUNNER_TEMP/astra-ffmpeg"
+              if [ -x "$RUNNER_TEMP/astra-ffmpeg/usr/bin/ffprobe" ]; then
+                echo "$RUNNER_TEMP/astra-ffmpeg/usr/bin" >> "$GITHUB_PATH"
+                export PATH="$RUNNER_TEMP/astra-ffmpeg/usr/bin:$PATH"
+                echo 'ASTRA_FFPROBE_SOURCE=deb-extract'
+              fi
+            fi
+          fi
+          command -v ffmpeg || { echo 'ASTRA_FFMPEG_UNAVAILABLE=1'; exit 1; }
+          command -v ffprobe || { echo 'ASTRA_FFPROBE_UNAVAILABLE=1'; exit 1; }
 
       # Long-form cover tests execute in astra-v2-longform.yml, not the Shorts publisher.
       - name: Enforce real frame-to-frame motion
