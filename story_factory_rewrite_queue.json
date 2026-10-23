@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "4975a30580caee1f6bb696b8",
-      "source_sha256": "1ad199b3dfde1d14800275f1d570916879869cbe70bd9c96279971639408f40f",
+      "candidate_id": "995f8b009f8fcfe7d20f442c",
+      "source_sha256": "7111a339466804348f0e991057371633fbbe6b612f80d653c5108ae0b381434f",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-41bb425f1a2e8bfcdbbc",
-        "title": "The Great Cheese-Powered Broom Debacle",
-        "hook": "A Sticky Discovery",
-        "question": "Can an inventor sell a completely malfunctioning household item in a crowded medieval market?",
-        "answer": "Yes, but only if the chaos causes a happy accident that creates an entirely new product demand.",
+        "content_id": "rayvan-gemini-fc132d586accb15598ff",
+        "title": "The Great Automatic Turnip Grater Debacle",
+        "hook": "The Grand Unveiling",
+        "question": "What happens when an overly ambitious inventor tests his crazy kitchen contraption in a crowded farmers market?",
+        "answer": "He creates an absolute vegetable avalanche that accidentally wins first prize for municipal landscaping.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,76 +29,77 @@
         ],
         "story_beats": [
           {
-            "headline": "A Sticky Discovery",
-            "speech": "Behold the Gouda-Sweep! It harnesses dairy elasticity to vacuum your floors while smelling faintly of a picnic.",
+            "headline": "The Grand Unveiling",
+            "speech": "Behold the Mega-Macerator! It slices, it dices, it launches root vegetables with supersonic precision right into your salad bowl!",
             "visual": "robot",
-            "label": "The Pitch",
+            "label": "The Contraption",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby stands at a crowded cobblestone market stall, gesturing proudly toward a whirring, cheese-smelling mechanical broom holding a wedge of cheese in its clamp, looking confident.",
+            "visual_prompt": "Inventor Barnaby stands proudly next to a steaming brass-and-copper automaton in a noisy outdoor farmers market, holding a greasy wrench while pointing at a shaking wooden crate.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Over-Inflation",
-            "speech": "If you simply twist the cheddar valve twice, the suction increases tenfold to tackle even the muddiest boots.",
+            "headline": "The Assembly Phase",
+            "speech": "Quickly feed the heavy turnips into the hopper before the steam pressure reaches the red danger zone on the gauge!",
             "visual": "signal",
-            "label": "The Adjustment",
+            "label": "The Loading",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically twists a brass valve on the broom handle while a red hazard light flashes on its body, shooting a thin jet of melted Swiss cheese across the stall.",
+            "visual_prompt": "Barnaby's panicked assistant Clara frantically stuffs three massive purple turnips into the funnel of the rattling robot as warning lights flash yellow.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Dairy Eruption",
-            "speech": "Oh dear, the pressure rating was strictly for hard Parmesan! Duck beneath the Brie blast, everyone!",
-            "visual": "door",
-            "label": "The Mishap",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby ducks behind his wooden stall counter as a colossal stream of assorted melted cheeses erupts from the broom, splashing against the tavern door across the busy street.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "An Accidental Feast",
-            "speech": "It is not a cleaner at all! It is the finest instant fondue cannon in the entire province. Sold out!",
+            "headline": "The Mechanical Malfunction",
+            "speech": "The intake valve is stuck! Tap it gently with the wooden spoon or the entire machine will sneeze raw slaw everywhere!",
             "visual": "ship",
-            "label": "The Success",
+            "label": "The Jam",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby leaps into the air attempting to smack a jammed brass lever on the side of the towering metal gadget while terrified market vendors duck for cover.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Delicious Payoff",
+            "speech": "Well, nobody got a salad, but look at that magnificent avant-garde turnip sculpture decorating the town square so beautifully!",
+            "visual": "door",
+            "label": "The Masterpiece",
             "story_beat": "payoff",
-            "visual_prompt": "Excited market customers happily scoop warm cheese off the walls with giant breadsticks while Barnaby counts a massive pile of silver coins, holding a tiny wooden spoon.",
+            "visual_prompt": "Barnaby and Clara stand amidst a gigantic pile of shredded root vegetables shaped remarkably like the town mayor, holding blue ribbon awards proudly.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright, whimsical stop-motion claymation style with rich textures and warm medieval lighting.",
+          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures of wood, brass, and fresh produce.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild ginger hair, a soot-stained waistcoat, oversized round spectacles, and an endlessly hopeful expression."
+            "Barnaby": "An eccentric inventor with wild gray hair, wearing a patched tweed vest, round spectacles, and soot-stained trousers.",
+            "Clara": "His practical, quick-witted assistant wearing a blue apron, yellow headscarf, and heavy work boots."
           },
           "locations": {
-            "Market Square": "A bustling medieval marketplace featuring striped canvas awnings, cobblestone streets, and wooden merchant stalls piled high with goods."
+            "Farmers Market": "A bustling cobblestone square filled with striped canvas awnings, wooden crates, and hanging lanterns."
           },
           "objects": {
-            "Gouda-Sweep": "A clunky mechanical broom constructed of polished oak wood, brass gears, copper tubing, and a spring-loaded cheese clamp near the bristle base.",
-            "Coin Pouch": "A well-worn leather drawstring pouch overflowing with shiny silver coins."
+            "Mega-Macerator": "A towering, comical steampunk automaton made of polished copper pipes, spinning gears, and a large wooden funnel.",
+            "Turnip": "An oversized, vibrant purple and white root vegetable with long green leafy tops."
           }
         },
-        "plot_fingerprint": "c1bb5ae4d82e24d1076eee3cd20045d38a9680bd3012a2ecede20e3c0ece81e0"
+        "plot_fingerprint": "c86e0492d33390f6c2c0dcaf81bd56dfa0ecfa883040c35e3a7a0a39004052ab"
       },
       "approved": false
     },
     {
-      "candidate_id": "b8c6fad3c848338dcfd752ea",
-      "source_sha256": "8cc94eefddb157349b12c00861901bc0da2af0d9bc267a26badff7196d030e62",
+      "candidate_id": "5f343238559a0ceb1e2f9b41",
+      "source_sha256": "feb81bbce1b5fd592b97f8fa95ff9111f506e7d211dd9cda0d8910323690ad2b",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-d75cf172d3c69a369095",
-        "title": "The Weaver's Last Thread",
-        "hook": "The Hidden Ledger",
-        "question": "Can true friendship survive an impossible village choice?",
-        "answer": "Yes, by sacrificing personal legacy for the greater communal good.",
+        "content_id": "rayvan-gemini-61aec83a402b1f2ad636",
+        "title": "The Muddy Pitch Puzzle",
+        "hook": "The Arrogant Challenge",
+        "question": "How did the underdog village football team outsmart their wealthy rivals without breaking any league rules?",
+        "answer": "They mapped the underground ancient Roman drainage tiles to redirect a gentle shower into a localized dry zone for their own passing game.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -106,78 +107,81 @@
         ],
         "story_beats": [
           {
-            "headline": "The Hidden Ledger",
-            "speech": "My oldest friend, this ancient village ledger reveals we only have enough water to save one farm.",
-            "visual": "door",
-            "label": "The Discovery",
-            "story_beat": "reveal",
-            "visual_prompt": "An elderly weaver named Bram holds an open leather ledger in a dusty timber doorway, wearing a gray woolen tunic with copper buttons, looking shocked while his friend Martha stands nearby under a cloudy morning sky.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Diverging Paths",
-            "speech": "You must choose whether to water my crops or irrigate the communal orchard before the drought sets in.",
+            "headline": "The Arrogant Challenge",
+            "speech": "We own the best training grounds in the county, and your muddy little paddock will never match our pristine turf today.",
             "visual": "forest",
-            "label": "The Dilemma",
-            "story_beat": "build",
-            "visual_prompt": "Martha points a calloused hand toward the dry village orchard outside a dense green forest, wearing a green apron over a brown linen dress, with Bram looking conflicted as he grips a wooden walking stick.",
+            "label": "Rivalry Challenge",
+            "story_beat": "reveal",
+            "visual_prompt": "Captain Marcus holding a golden championship cup in a dense, mossy oak forest clearing, wearing a sleek silver athletic kit with a smug expression, facing the camera with dramatic backlighting.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Silent Signal",
-            "speech": "Instead of favoring either of us, I am redirecting the final spring toward the town square well.",
+            "headline": "Uncovering the Secret Map",
+            "speech": "Look at these old parchment blueprints from the library archives. The drainage system runs directly underneath the center circle of the field.",
             "visual": "signal",
-            "label": "The Pivot",
-            "story_beat": "mechanism",
-            "visual_prompt": "Bram pulls a heavy iron lever mounted on a stone wall, sending a bright flare signal into the evening air, with Martha watching in quiet realization as water begins flowing into the central plaza.",
+            "label": "The Blueprint Discovery",
+            "story_beat": "build",
+            "visual_prompt": "Librarian Clara holding an illuminated brass blueprint cylinder, standing inside a stone archives room lit by a green holographic signal device, examining architectural sketches with intense concentration.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "A Shared Horizon",
-            "speech": "We gave up our private harvests so every family could drink, proving our bond is stronger than soil.",
-            "visual": "ship",
-            "label": "The Resolution",
+            "headline": "Diverting the Waters",
+            "speech": "Turn the lever clockwise now so the gentle rain collects and bypasses our half entirely, keeping our pitch completely dry.",
+            "visual": "door",
+            "label": "The Mechanical Valve",
+            "story_beat": "mechanism",
+            "visual_prompt": "Engineer Toby holding a heavy iron wrench, turning a massive stone valve door embedded in the stadium wall, sweat on his brow, wearing rugged denim overalls.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Ingenious Victory",
+            "speech": "Our smart engineering won the match fair and square, proving that clever preparation beats expensive equipment every single time.",
+            "visual": "planet",
+            "label": "Triumphant Celebration",
             "story_beat": "payoff",
-            "visual_prompt": "Bram and Martha sit side by side on a wooden bench near a docked wooden cargo boat, smiling warmly as grateful villagers carry water jugs through the sunlit town square.",
+            "visual_prompt": "Toby and Clara holding a homemade wooden trophy shaped like a tiny globe, smiling broadly on a dry patch of grass while the rainy stadium background glows under stadium lights.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Warm and grounded historical village illustration style with rich earthy tones, soft natural lighting, and expressive character details.",
+          "style": "Cinematic stop-motion animation with rich textures, warm lighting, and detailed miniature sets.",
           "characters": {
-            "Bram": "An elderly weaver with kind wrinkled eyes, short gray hair, wearing a worn gray woolen tunic with polished copper buttons.",
-            "Martha": "A practical village farmer with tied-back dark hair streaked with gray, wearing a sturdy green canvas apron over a brown linen dress."
+            "Marcus": "Tall, athletic build, smug facial expression, wearing a sleek silver and blue athletic kit.",
+            "Clara": "Curious and sharp, wearing a tweed vest over a white collared shirt, with round spectacles.",
+            "Toby": "Resourceful and gritty, wearing rugged denim overalls and mud-stained work boots."
           },
           "locations": {
-            "The Weaver Workshop": "A rustic timber-framed cottage with dust motes dancing in sunbeams, cluttered with spools of yarn and ancient stone walls.",
-            "The Village Square": "A cobblestone courtyard surrounded by thatched-roof houses, featuring a central stone well and a rusted iron lever mechanism."
+            "Forest": "Dense mossy oak forest clearing with ancient trees and dramatic sunbeams.",
+            "Archives": "Dusty stone chamber filled with towering bookshelves and glowing green artifact displays.",
+            "Stadium": "A historic village football ground surrounded by weathered brick walls and modern floodlights."
           },
           "objects": {
-            "ledger": "A thick, leather-bound book with yellowed parchment pages and a frayed red ribbon bookmark.",
-            "lever": "A heavy, weathered iron control arm mounted to a mossy stone pillar with visible rust streaks."
+            "Cup": "A polished golden championship cup with elaborate handle engravings.",
+            "Blueprint": "An aged yellowed parchment rolled inside an ornate brass cylinder.",
+            "Wrench": "A heavy, rusted iron plumber's wrench with a worn wooden handle."
           }
         },
-        "plot_fingerprint": "b49dcd40a795f13c7b43e922557befb9d92b285dfd8d5ee445247a77298fe77a"
+        "plot_fingerprint": "ba593576eaff63f9786109d0d8e355b32b6491ca62fb30bd359905e4718e6b8a"
       },
       "approved": false
     },
     {
-      "candidate_id": "9c835608567b8f0c0b74a870",
-      "source_sha256": "49c497280aec20bfb9e29b39eab2390e658bbb28b58fe8f9e6189a8456246a04",
+      "candidate_id": "c5db22ef036b948b1f24484b",
+      "source_sha256": "8577a3fdef8ea2209817cb4a6aeacc10dcf6713f7f04290d1087652a96b4db1c",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-108719fcc8335cbb9cf6",
-        "title": "The Icebreaker's Dilemma",
-        "hook": "Thermal Anomaly",
-        "question": "Can an automated research drill be overridden to save a stranded crew member?",
-        "answer": "Yes, by manually severing the primary thermal relay to melt the access hatch.",
+        "content_id": "rayvan-gemini-e02e12e69d9cebcb3985",
+        "title": "The Grand Steam Powered Gravy Fountain Catastrophe",
+        "hook": "The Silent Engine",
+        "question": "How did Barnaby manage to cover the entire vegetable market in hot brown sauce?",
+        "answer": "He attempted to automate the Sunday roast service using a high-pressure brass valve.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -185,62 +189,61 @@
         ],
         "story_beats": [
           {
-            "headline": "Thermal Anomaly",
-            "speech": "The core drill is overheating, Captain. It is about to breach the lower cryogenic containment vault.",
-            "visual": "signal",
-            "label": "Emergency Warning",
-            "story_beat": "reveal",
-            "visual_prompt": "A concerned lead researcher with frost-tipped blonde hair and a bulky blue parka stands inside a dimly lit observation station, staring intently at a glowing red emergency signal flashing on a retro-futuristic console.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Frozen Conduit",
-            "speech": "We must reroute the backup power cables through the outer airlock to prevent a total structural collapse.",
-            "visual": "door",
-            "label": "Airlock Control",
-            "story_beat": "build",
-            "visual_prompt": "The researcher in the blue parka struggles to pull a heavy frost-covered steel lever next to a massive airtight bulkhead door, wearing thick grey winter gloves.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Mechanical Override",
-            "speech": "If I cut this hydraulic line, the pressure will drop and the main vault door will finally swing open.",
+            "headline": "The Silent Engine",
+            "speech": "Behold my magnificent mechanical gravy pump, designed to deliver savory perfection directly to every single stall in this bustling plaza.",
             "visual": "robot",
-            "label": "Automated Rig",
-            "story_beat": "mechanism",
-            "visual_prompt": "An industrial mechanical maintenance robot with a single glowing yellow optic lens extends a heavy steel pincer toward a leaking hydraulic tube inside the icy machinery bay.",
+            "label": "The Invention",
+            "story_beat": "reveal",
+            "visual_prompt": "Barnaby stands proudly in a crowded market square, gesturing toward a gleaming copper robot butler holding an enormous gravy ladle. The market stalls are filled with vegetables under bright morning sunlight, and Barnaby wears a grease-stained waistcoat and goggles.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Safe Return",
-            "speech": "The pressure is stabilizing now. Grab your gear, everyone, we are finally heading back to the main station.",
+            "headline": "The Pressure Mounts",
+            "speech": "We simply turn this brass valve one quarter clockwise to regulate the flow, ensuring absolutely no messy overflows occur today.",
+            "visual": "signal",
+            "label": "The Setup",
+            "story_beat": "build",
+            "visual_prompt": "Close up of Barnaby twisting a large brass dial on the side of the robot while a flashing green signal light blinks frantically. His hands are covered in flour and gravy stains, and worried market vendors peer over their crates in the background.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Sticky Torrent",
+            "speech": "Oh dear goodness me, the internal temperature has completely bypassed the safety limit and now we are facing a savory tidal wave!",
             "visual": "ship",
-            "label": "Rescue Vessel",
+            "label": "The Malfunction",
+            "story_beat": "mechanism",
+            "visual_prompt": "The mechanical robot splutters and swells, shooting a massive arc of thick brown gravy across the market like a sinking steamship breaching water. Barnaby desperately tries to plug a leaking pipe with his bowler hat while merchants dive for cover behind potato sacks.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Saucy Settlement",
+            "speech": "Well, on the bright side, every single carrot and turnip in the county is now pre-seasoned and ready for Sunday dinner!",
+            "visual": "door",
+            "label": "The Aftermath",
             "story_beat": "payoff",
-            "visual_prompt": "The researcher safely boards a sturdy orange rescue hovercraft resting on the snowy tundra, holding a glowing data tablet while the bright morning sun breaks through the polar clouds.",
+            "visual_prompt": "Barnaby and several soggy, gravy-drenched vegetable vendors sit smiling outside a wooden market storage door, eating roasted potatoes dipped in the sauce covering the cobblestones. The robot smokes gently in the background with an empty reservoir.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Cinematic gritty polar sci-fi with realistic textures and dramatic atmospheric lighting.",
+          "style": "Bright, whimsical, stop-motion claymation aesthetic with rich textures and vibrant market colors.",
           "characters": {
-            "researcher": "Lead researcher with frost-tipped blonde hair, wearing a heavy insulated blue parka and thick grey winter gloves."
+            "Barnaby": "An eccentric middle-aged inventor with wild gray hair, oversized round spectacles, a grease-stained brown waistcoat, and perpetually flour-dusted cheeks.",
+            "Market Vendors": "A cheerful group of stout villagers wearing colorful aprons, straw hats, and woolen caps, bustling around wooden crates."
           },
           "locations": {
-            "station": "A cramped, metallic arctic research outpost filled with analog switches and glowing instrument panels.",
-            "tundra": "A vast, windswept sheet of white ice under a dim polar sky."
+            "Market Square": "A bustling open-air cobblestone plaza surrounded by rustic timber-framed merchant stalls overflowing with fresh root vegetables and colorful fruits under striped canvas awnings."
           },
           "objects": {
-            "console": "A retro-futuristic steel control desk embedded with blinking red and green indicator lights.",
-            "lever": "A thick, heavy-duty industrial lever coated in a thin layer of frost.",
-            "tablet": "A rugged handheld black data pad displaying flashing green diagnostic charts."
+            "Gravy Robot": "A chunky, two-meter-tall brass and copper automaton featuring dual steam pipes, a flashing green signal light on its domed head, and an articulated mechanical arm holding a giant iron ladle.",
+            "Brass Valve": "A heavy, polished golden spigot mounted on the robot's side, etched with intricate decorative floral patterns and connected to a rubber hose."
           }
         },
-        "plot_fingerprint": "af996a3f7836856f929a121c3f5a652b87d8ef634679029616f72fb8d86cd972"
+        "plot_fingerprint": "be9ea27c92244f23b6aaf0085de39349cd8381d7b76c89c4e5ce2a17ac95873c"
       },
       "approved": false
     }
