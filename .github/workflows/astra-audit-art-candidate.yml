@@ -1,0 +1,29 @@
+name: ASTRA - Audit Artwork Candidate
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Restore complete publication history
+        shell: bash
+        run: |
+          git fetch origin astra-state
+          for f in astra_v2_state.json astra_story_history.json; do
+            git cat-file -e "origin/astra-state:$f"
+            git show "origin/astra-state:$f" > "$f"
+            test -s "$f"
+          done
+      - name: Audit candidate without approving or publishing
+        run: |
+          python -m astra_v2.audit_art_candidate
