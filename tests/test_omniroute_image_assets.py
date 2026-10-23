@@ -225,6 +225,36 @@ class ImageAssetsTests(unittest.TestCase):
         self.assertEqual(attempts, ["https://primary.example/images"])
         self.assertTrue(all(not asset["production_ready"] for asset in result["assets"]))
 
+    def test_failover_consumes_two_calls_and_stops_at_budget(self):
+        env = {"ASTRA_OMNI_IMAGE_ENDPOINT": "https://primary.example/images",
+               "ASTRA_OMNI_IMAGE_MODEL": "free-primary",
+               "ASTRA_OMNI_IMAGE_FREE_CONFIRMED": "1",
+               "ASTRA_OMNI_IMAGE_FALLBACK_ENDPOINT": "https://secondary.example/images",
+               "ASTRA_OMNI_IMAGE_FALLBACK_MODEL": "free-secondary",
+               "ASTRA_OMNI_IMAGE_FALLBACK_FREE_CONFIRMED": "1"}
+        queue = {"rewrites": [{"status": "awaiting_independent_editorial_approval",
+                  "story": {"title": "Budget story", "content_id": "budget-two",
+                            "story_beats": [{"speech": "A first event occurs."},
+                                            {"speech": "A second event occurs."}]}}]}
+        attempts = []
+        def fake_generate(prompt, *, config, api_key, requester=None):
+            attempts.append(config[0])
+            if "primary" in config[0]:
+                raise ValueError("Image provider HTTP 429")
+            return png()
+        with patch.dict("os.environ", env, clear=True):
+            with patch("astra_v2.omniroute_image_assets.generate_image",
+                       side_effect=fake_generate):
+                with tempfile.TemporaryDirectory() as root:
+                    result = preproduce(queue, root, limit=2)
+        self.assertEqual(result["provider_calls"], 2)
+        self.assertEqual(attempts, ["https://primary.example/images",
+                                    "https://secondary.example/images"])
+        self.assertEqual(result["assets"][0]["status"], "review_only")
+        self.assertTrue(all(asset["status"] == "pending_budget"
+                            for asset in result["assets"][1:]))
+        self.assertTrue(all(not asset["production_ready"] for asset in result["assets"]))
+
     def test_immutable_deduplication_and_corruption(self):
         with tempfile.TemporaryDirectory() as root:
             a = store_asset(png(), root, kind="scene", prompt="first")
