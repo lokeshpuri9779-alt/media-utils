@@ -39,6 +39,17 @@ jobs:
           test -s astra_duplicate_protection.json
       - name: Materialize owner-approved hash-bound artwork review
         run: python -m astra_v2.materialize_artwork_test_review
+      - name: Verify explicitly configured Gemini image model
+        shell: bash
+        run: |
+          if [ -z "$ASTRA_GEMINI_IMAGE_MODEL" ]; then
+            echo "::error::ASTRA_GEMINI_IMAGE_MODEL repository variable is missing. Configure a verified free-tier image-capable model before rerunning."
+            exit 1
+          fi
+          if [ -z "$GEMINI_API_KEY" ]; then
+            echo "::error::GEMINI_API_KEY repository secret is missing."
+            exit 1
+          fi
       - name: Stage unapproved images after live history and editorial gate
         run: python -m astra_v2.stage_editorial_art --content-id "$ASTRA_CONTENT_ID" --destination runtime-art-staging
       - name: Verify image integrity and geometry
