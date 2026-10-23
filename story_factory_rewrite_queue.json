@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "1d7eeefb4dd004e34c0e7348",
-      "source_sha256": "d1279957b9c7c405dc23c41afe13019c53a78cfeead0d6429ef262677cdd3eda",
+      "candidate_id": "a3df67f9d742a0cf41a544f7",
+      "source_sha256": "f5122988020cc0c1caea4a7ffe70145ff5c09060b9aa7c5739dc0c1b5dbe2d92",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-a7c798c9c5a71645d12f",
-        "title": "The Great Tomato Launchpad",
-        "hook": "A Chaotic Discovery",
-        "question": "How did Barnaby sell his rogue produce sorting machine at the bustling farmers market?",
-        "answer": "By showcasing its incredible tomato-peeling precision directly to terrified shoppers.",
+        "content_id": "rayvan-gemini-54aa9546786ff73226a8",
+        "title": "The Great Onion Goggle Fiasco",
+        "hook": "The Hidden Invention",
+        "question": "Can an overly enthusiastic inventor sell a pair of anti-tear goggles to hardened vegetable vendors?",
+        "answer": "He nearly blinds the market with fog instead, proving that some onions are better met with sheer grit.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,76 +29,77 @@
         ],
         "story_beats": [
           {
-            "headline": "A Chaotic Discovery",
-            "speech": "Behold the citrus cannon ninety thousand, a marvel designed to organize every single unruly fruit in this chaotic market!",
+            "headline": "The Hidden Invention",
+            "speech": "Behold my revolutionary contraption! These dual-lens onion goggles will completely eliminate your daily weeping at stall number four.",
             "visual": "robot",
-            "label": "The Invention",
+            "label": "The Reveal",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly behind a market stall holding a copper wrench, pointing at a clunky mechanical sorting robot with spinning steel arms.",
+            "visual_prompt": "Inventor Barnaby wearing his mechanical steam-powered goggles, gesturing proudly toward a nervous vegetable vendor in a chaotic bustling market.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Constructing The Fix",
-            "speech": "We must tighten these gears immediately before the angry farmers realize our automated peeler is targeting their hats!",
+            "headline": "The Construction Phase",
+            "speech": "We just need to tighten this brass valve and attach the auxiliary steam tube to guarantee absolute tearless slicing satisfaction today.",
             "visual": "signal",
-            "label": "Assembly",
+            "label": "The Build",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically adjusts a glowing green calibration dial on the robot chestplate while red warning signal lights flash brightly overhead.",
+            "visual_prompt": "Barnaby frantically tightening a noisy brass valve on his contraption while red warning lights flash wildly next to a towering stack of onions.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Mechanical Test",
-            "speech": "Watch carefully as the high velocity mechanism isolates each red sphere with absolute perfection and zero collateral damage.",
+            "headline": "The Catastrophic Mechanism",
+            "speech": "Oh dear, the pressure gauge is spinning into the red zone and the automated peeler is aggressively targeting everyone nearby now!",
             "visual": "ship",
-            "label": "Operation",
+            "label": "The Mechanism",
             "story_beat": "mechanism",
-            "visual_prompt": "The robot scoops a giant tomato and launches it through a hoop shaped like a mini airship into a neatly stacked crate.",
+            "visual_prompt": "Barnaby holding a smoking steam apparatus while confused market patrons duck away from flying vegetable peelings in a cloud of thick white vapor.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Market Triumph",
-            "speech": "Success at last! Every single merchant is cheering because our frantic contraption finally saved their entire morning harvest.",
+            "headline": "The Messy Payoff",
+            "speech": "Take these free tissues instead of my goggles, because selling tear prevention in a produce market is much harder than expected.",
             "visual": "door",
-            "label": "Resolution",
+            "label": "The Payoff",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby and smiling market vendors stand in front of a swinging wooden stall door, holding up bags of gold coins and laughing.",
+            "visual_prompt": "Barnaby standing defeated outside the market exit holding a box of paper tissues while covered in vegetable scraps under a bright sunny sky.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright stop-motion claymation with vibrant marketplace colors and whimsical steampunk machinery.",
+          "style": "Bright, colorful animated slapstick comedy with exaggerated character expressions and bustling market backgrounds.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild gray hair, wearing a patched tweed vest, round spectacles, and a stained apron."
+            "Barnaby": "An eccentric inventor with wild ginger hair, oversized round spectacles, a grease-stained lab coat, and green striped trousers.",
+            "Vendor": "A stern market merchant wearing a striped apron, a flat cap, and holding a massive carving knife with a skeptical frown."
           },
           "locations": {
-            "Market Square": "A bustling outdoor bazaar with colorful canvas awnings, wooden crates, and hanging lanterns."
+            "Market Square": "A crowded, vibrant outdoor bazaar filled with wooden produce stalls, canvas awnings, and hanging baskets of fresh vegetables."
           },
           "objects": {
-            "Sorting Robot": "A bulky brass and iron machine with three mechanical arms, glowing green sensor eyes, and a loud exhaust pipe.",
-            "Copper Wrench": "A heavy, dented tool used for fixing stubborn clockwork gears."
+            "Goggles": "A bulky brass contraption featuring dual glass lenses, protruding copper tubes, and a blinking red indicator light.",
+            "Knife": "A heavy steel kitchen knife with a worn wooden handle used for chopping massive red onions."
           }
         },
-        "plot_fingerprint": "4aa4d6e1c3a7319af7d3b56b92e5161e8480f6e5a9aa7ad7f67c45b03ff4dd83"
+        "plot_fingerprint": "4154cdeccee00c94cdbca1e57ab1a6c027454a4d84a035ea123f10407074d818"
       },
       "approved": false
     },
     {
-      "candidate_id": "b2925a1fa04a65c24f60d87e",
-      "source_sha256": "d52d2e04288471a1c9258eb6a2326210e62481201ffd09e16b754bcf5cf44452",
+      "candidate_id": "5f1c6405c8bdba974cd45a57",
+      "source_sha256": "ef85d3a023ce8952ebbcd0aa64436f6fe26579e03333657dfb1dbc5e08638cbd",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-3e53983e6be4d3a7d14b",
-        "title": "The Cabbage Cannon Catastrophe",
-        "hook": "The Market Debut",
-        "question": "Can an overzealous market inventor sell a vegetable launcher before the produce rots?",
-        "answer": "Yes, by accidentally inventing the world's first airborne salad delivery service.",
+        "content_id": "rayvan-gemini-26ac770167a6641f8987",
+        "title": "The Muddy Pitch Navigation Array",
+        "hook": "The Thick Fog Arrives",
+        "question": "How did the underdog village football team outsmart the reigning city champions using salvaged tractor parts?",
+        "answer": "They built an analog sonar projector from old oil drums to track the opponent's precise passing lanes in the dense fog.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -106,140 +107,143 @@
         ],
         "story_beats": [
           {
-            "headline": "The Market Debut",
-            "speech": "Behold the rapid-fire cabbage catapult, guaranteed to deliver fresh greens across the entire village square without any bruising!",
-            "visual": "robot",
-            "label": "The Invention",
-            "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby stands proudly next to a quirky wooden spring-loaded cannon in the crowded cobblestone marketplace, smiling widely while pointing at a loaded round cabbage.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Tension Mounts",
-            "speech": "Quickly load the heavy brass tension lever before the angry grocers notice our experimental trial run starting right now.",
-            "visual": "signal",
-            "label": "The Adjustment",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby frantically cranks a squeaky brass lever on the side of the wooden cannon, while nervous market vendor Martha glares at him with hands on her hips.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Catastrophic Launch",
-            "speech": "Oops, I accidentally set the launch angle too high, sending twenty heads of cabbage straight into the bakery chimney!",
-            "visual": "ship",
-            "label": "The Mishap",
-            "story_beat": "mechanism",
-            "visual_prompt": "The wooden cannon fires upward with a loud pop, launching a flurry of green cabbages through the air toward a smoking stone bakery chimney in the background.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Sweet Success",
-            "speech": "Customers love the pre-shredded baked coleslaw falling from the sky, making our disastrous launch a profitable culinary masterpiece today.",
-            "visual": "door",
-            "label": "The Solution",
-            "story_beat": "payoff",
-            "visual_prompt": "Astonished villagers cheer and hold out bowls as warm, perfectly shredded cooked cabbage rains down gently from above near the front door of the bakery.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures and comedic character expressions.",
-          "characters": {
-            "Barnaby": "An eccentric inventor with wild ginger hair, round wire spectacles, a patched blue vest, and grease-stained trousers.",
-            "Martha": "A stern market vendor wearing a crisp white apron, a pink headscarf, and carrying a woven wicker basket."
-          },
-          "locations": {
-            "marketplace": "A bustling medieval village square filled with wooden stalls, hanging canvas awnings, and cobblestone pathways."
-          },
-          "objects": {
-            "cannon": "A quirky spring-loaded wooden launcher painted bright red with brass rivets and a squeaky crank handle.",
-            "cabbage": "A plump, oversized round green head of cabbage with slightly frayed outer leaves."
-          }
-        },
-        "plot_fingerprint": "5f726fef436ea4bd998b16d6adfdfa6e52f243d97e1b42a02d5097f848ce4642"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "54427b52d341cae024510b96",
-      "source_sha256": "17080c05285b88aa1d5f182e443153dcb12ce0f4f06afec8da1a72757fda1ada",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-3d899d812ddf020f048c",
-        "title": "The Weaver's Last Loom",
-        "hook": "The Hidden Secret",
-        "question": "Can true friendship survive a village-wide choice between warmth and survival?",
-        "answer": "Yes, by dismantling the final loom together to build a communal hearth for the entire valley.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Hidden Secret",
-            "speech": "My oldest friend, our grandfather's secret blueprints show this ancient forest harbors enough hidden timber to save everyone.",
+            "headline": "The Thick Fog Arrives",
+            "speech": "Look at the mist rolling over the valley. We cannot see their formation or their star striker coming.",
             "visual": "forest",
-            "label": "The Discovery",
+            "label": "The Dense Fog",
             "story_beat": "reveal",
-            "visual_prompt": "An elderly village weaver in brown woolen robes stands inside a dense, misty forest holding a glowing wooden signal baton, discovering a hidden ancient door carved into a giant oak tree trunk.",
+            "visual_prompt": "Coach Bram, a burly middle-aged man in a faded green wool sweater, stares anxiously into a thick white forest fog surrounding the muddy football pitch, holding a chipped ceramic mug in his right hand with a worried expression.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Impossible Choice",
-            "speech": "If we cut down the grove for winter heat, the ancient loom that feeds our village families will never weave again.",
-            "visual": "door",
-            "label": "The Dilemma",
-            "story_beat": "build",
-            "visual_prompt": "The weaver and his carpenter friend stand in the snowy village square before a massive stone door, pointing at a wooden schematic scroll held firmly in the carpenter's calloused hands.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Shared Act",
-            "speech": "Instead of arguing, we must break apart our family heritage and forge a brand new path through unified sacrifice.",
+            "headline": "Gathering the Scrap",
+            "speech": "We will harvest the rhythmic vibrations from the turf using discarded tractor exhaust pipes and steel drums.",
             "visual": "signal",
-            "label": "The Turning Point",
-            "story_beat": "mechanism",
-            "visual_prompt": "The two friends work together at dusk in the village square, using heavy iron mallets to dismantle a towering wooden handloom while holding a bright metal signal torch aloft.",
+            "label": "Acoustic Tuning",
+            "story_beat": "build",
+            "visual_prompt": "Young inventor Maya, wearing a greasy denim jumpsuit and leather gloves, carefully welds two dented steel tractor drums together inside a drafty barn, surrounded by glowing sparks while holding a welding torch in her left hand.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Warm Valley",
-            "speech": "Look at the glowing smoke rising from the new central hearth; our difficult choice kept every single neighbor warm.",
+            "headline": "Calibrating the Array",
+            "speech": "Turn the copper dial until the metallic ping echoes clearly off the eastern goalpost.",
+            "visual": "robot",
+            "label": "Sonar Calibration",
+            "story_beat": "mechanism",
+            "visual_prompt": "Maya and Bram crouch beside a makeshift mechanical sonar tower made of pipes and wires on the damp grass of the pitch, adjusting a shiny brass dial with concentrated expressions, holding a wooden tuning mallet between them.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Winning Interception",
+            "speech": "The acoustic ping shows they are passing left! Pass the ball now and secure our historic victory!",
             "visual": "ship",
-            "label": "The Resolution",
+            "label": "The Final Play",
             "story_beat": "payoff",
-            "visual_prompt": "The weaver and carpenter smile together on a hilltop overlooking the village at sunrise, watching thin ribbons of smoke rise from communal stone houses shaped like rustic wooden ships.",
+            "visual_prompt": "Bram points triumphantly toward the foggy goal area as the village players successfully intercept the opposing team's pass, with the makeshift sonar apparatus blinking with red indicator lights in the foreground, holding a clipboard in his left hand.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Cinematic historical realism with warm, dramatic lighting, rich earth tones, and intricate hand-crafted textures.",
+          "style": "Cinematic stop-motion animation aesthetic with rich textures, earthy color palettes, and dramatic atmospheric lighting.",
           "characters": {
-            "weaver": "An elderly man with deep wrinkles, kind grey eyes, wearing patched brown wool robes and a woven linen scarf.",
-            "carpenter": "A sturdy middle-aged woman with braided dark hair, wearing a heavy leather apron over a green tunic."
+            "Coach Bram": "A burly middle-aged man with a thick grey beard, wearing a heavy green wool sweater and mud-stained trousers.",
+            "Maya": "A resourceful young mechanic with dark hair tied back in a messy bun, wearing a utility denim jumpsuit and grease-smudged cheeks."
           },
           "locations": {
-            "forest": "An ancient, misty forest filled with colossal oak trees and moss-covered forest floors.",
-            "village_square": "A rustic medieval village square paved with cobblestones, surrounded by timber-framed houses."
+            "The Village Pitch": "A rugged, uneven football field surrounded by ancient pine trees and wooden spectator benches, shrouded in thick morning fog.",
+            "The Workshop Barn": "A rustic wooden shed filled with rusted farm equipment, hanging tools, and glowing workbenches."
           },
           "objects": {
-            "blueprint_scroll": "A yellowed parchment roll tied with hemp string, showing faded ink diagrams of antique timber frames.",
-            "iron_mallet": "A heavy blacksmithing tool with a dark iron head and a polished ashwood handle."
+            "Sonar Array": "A towering contraption built from rusted tractor exhaust pipes, oil drums, copper wire, and a central brass dial.",
+            "Ceramic Mug": "A heavy, cream-colored chipped mug filled with steaming herbal tea."
           }
         },
-        "plot_fingerprint": "34871c6491c39b927b6603b9556c1c04fda9b7446dadc7e1352ce773543e4094"
+        "plot_fingerprint": "89af57bcd29ced0d80a65ecfe5a574b64074d3c6d4297625709e83423a8e4f1a"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "ccaffb2cd40e32eb3e20d8b6",
+      "source_sha256": "7bfb0d5907e6f72deeee2aee08ca739a95896842b7fe4f1b11e0303751e26b3f",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-7f9a7ca065256d075957",
+        "title": "The Great Meadow Match of Maple Creek",
+        "hook": "The Silent Challenge",
+        "question": "How did the underdog village team win the annual soccer rivalry without running?",
+        "answer": "They utilized a network of underground acoustic pipes to coordinate plays through Morse code.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Silent Challenge",
+            "speech": "Our rivals think we are too exhausted to run, but they have no idea what is ticking beneath the grass.",
+            "visual": "signal",
+            "label": "Underground Network",
+            "story_beat": "reveal",
+            "visual_prompt": "Captain Clara stands in the muddy center of Maple Creek Meadow at dusk, wearing blue athletic overalls, pointing down at a protruding brass tube in the turf with a cunning expression.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Acoustic Engineering",
+            "speech": "Every tap on the workshop pipes instantly echoes across the field, guiding our players silently into perfect formation.",
+            "visual": "door",
+            "label": "Control Valve",
+            "story_beat": "build",
+            "visual_prompt": "Mechanic Toby turns a brass valve inside a wooden shed located beside the meadow, surrounded by coiled copper piping and blueprints, looking focused and determined.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Phantom Pass",
+            "speech": "Listen closely to the rhythmic tapping sound and pass the ball exactly where the hidden signal tells you to.",
+            "visual": "forest",
+            "label": "Hidden Receiver",
+            "story_beat": "mechanism",
+            "visual_prompt": "Midfielder Leo receives a soccer ball near the edge of the dense pine forest bordering the pitch, holding a small wooden resonator to his ear while looking confused yet obedient.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Clever Victory",
+            "speech": "We never ran a single sprint all afternoon, yet our clever acoustic strategy has completely outsmarted the champions.",
+            "visual": "ship",
+            "label": "Trophy Presentation",
+            "story_beat": "payoff",
+            "visual_prompt": "The Maple Creek team joyfully lifts a silver megaphone-shaped trophy on a wooden stage shaped like an old riverboat, celebrating their surprising win in front of cheering villagers.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "visual_bible": {
+          "style": "Warm, nostalgic storybook illustration style with detailed textures and rich earthy tones.",
+          "characters": {
+            "Clara": "A determined village captain with braided brown hair, wearing blue athletic overalls and mud-spattered boots.",
+            "Toby": "A clever young mechanic with wire-rimmed glasses, wearing a leather apron over a gray woolen sweater.",
+            "Leo": "An agile midfielder with curly red hair, wearing green and yellow striped sports kit."
+          },
+          "locations": {
+            "Maple Creek Meadow": "A lush, slightly uneven village soccer pitch bordered by tall pine trees and rustic wooden fences.",
+            "Workshop Shed": "A cramped, cozy wooden shed filled with tools, copper pipes, and mechanical blueprints."
+          },
+          "objects": {
+            "brass_valve": "A shiny, ornate brass water valve bolted to a thick wooden board.",
+            "resonator": "A small, handheld wooden horn used to amplify underground acoustic vibrations.",
+            "megaphone_trophy": "A gleaming silver trophy fashioned in the shape of a vintage ship's megaphone."
+          }
+        },
+        "plot_fingerprint": "4c8a0f44989173ce7b8e5506716edcbc64322b3d107a67ce323a0f3cf026f100"
       },
       "approved": false
     }
