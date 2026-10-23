@@ -126,7 +126,7 @@ def load_assets(manifest_path: str | Path = DEFAULT_MANIFEST) -> list[dict]:
         # because a provider returned a PNG or a manifest claimed approval.
         # The independent review receipt is required for AI-generated sources.
         source = str(row.get("source") or "").lower()
-        if source in {"gemini-image", "omniroute-image", "ai-generated-image"}:
+        if source in {"gemini-image", "omniroute-image", "ai-generated-image", "omniroute"}:
             if row.get("review_status") != "approved" or not row.get("review_receipt_sha256"):
                 continue
             if not isinstance(digest, str):
