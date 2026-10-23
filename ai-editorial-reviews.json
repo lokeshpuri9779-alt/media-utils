@@ -387,6 +387,21 @@
         "reviewed_at": "2026-10-23T10:01:52.994819+00:00",
         "review_model": "gemini-3.1-flash-lite"
       }
+    },
+    {
+      "content_id": "rayvan-gemini-fd775df28232df847f91",
+      "story_sha256": "ba57dbad4f24608cadf24956c2220f90fa9b63ea9c71c8d923ac9a3004c46f97",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-fd775df28232df847f91",
+        "story_sha256": "ba57dbad4f24608cadf24956c2220f90fa9b63ea9c71c8d923ac9a3004c46f97",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the premises or characters of the provided publication history.; The narrative follows a clear causal structure: invention, malfunction, intervention, and resolution.; The content is safe, suitable for a general audience, and contains no policy-violating material.; The steampunk aesthetic and culinary theme are distinct from the provided list of recent titles.",
+        "reviewed_at": "2026-10-23T10:59:54.744033+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      }
     }
   ]
 }
