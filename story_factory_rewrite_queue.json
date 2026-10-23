@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "fe5e9ec8800035920527c3c6",
-      "source_sha256": "ad1e1c0919819fd114edf75f630f6910f857f49809819e626a9952d4ce770cd3",
+      "candidate_id": "d2bb6367febc147f6dc88a4a",
+      "source_sha256": "1c536657fb743a6628104f653adeed3076bd3e6c1dc9e783abbd77c8c7f66474",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-3fa2b4eab528f566ea0c",
-        "title": "The Great Onion Goggle Fiasco of Sector Nine",
-        "hook": "A Smelly Standoff",
-        "question": "How did Barnaby clear his entire inventory of anti-tear goggles in one afternoon?",
-        "answer": "By accidentally routing the distress signal frequency directly into the vegetable chopper's ventilation system.",
+        "content_id": "rayvan-gemini-a399f22065cbff683f9c",
+        "title": "The Great Turnip Copter Debacle",
+        "hook": "The Aerial Discovery",
+        "question": "What happens when you invent a flying vegetable in a crowded farmer market?",
+        "answer": "Complete aerial chaos and a surprisingly profitable soup stand.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,76 +29,77 @@
         ],
         "story_beats": [
           {
-            "headline": "A Smelly Standoff",
-            "speech": "Nobody wants my hyperspatial onion goggles! The market stalls are drowning in tear gas and angry shoppers today.",
+            "headline": "The Aerial Discovery",
+            "speech": "Behold my revolutionary airborne root vegetable! It defies gravity using only pure stubbornness and mounted copper propellers.",
             "visual": "signal",
-            "label": "Market Chaos",
+            "label": "The Discovery",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands behind a wooden market stall in a crowded alien bazaar, holding a pair of clunky brass goggles with one hand while waving away green vapor with the other, wearing a stained canvas apron over a blue tunic.",
+            "visual_prompt": "Inventor Barnaby stands proudly in a crowded market square holding a glowing brass-rigged turnip above his head, showing a triumphant expression, surrounded by shocked vendors.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Emergency Wiring",
-            "speech": "If I splice this rogue comms dish into the chopping mechanism, maybe the automated slicers will finally calibrate properly.",
+            "headline": "Building the Rig",
+            "speech": "We must secure the steam-powered rotary blades firmly into the purple flesh before the market inspector arrives with his clipboard.",
             "visual": "robot",
-            "label": "Hasty Repair",
+            "label": "The Assembly",
             "story_beat": "build",
-            "visual_prompt": "Barnaby kneels behind his stall workbench, using a heavy soldering iron to attach a glowing red radio antenna to the side of a mechanical vegetable chopper, with spare metallic gears scattered across the wooden table.",
+            "visual_prompt": "Inventor Barnaby frantically tightens tiny brass screws into a large purple turnip on his cluttered wooden workbench, wearing a focused expression, while his mechanical assistant holds a heavy wrench.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Frequency Leap",
-            "speech": "Why is the chopper broadcasting the planetary distress anthem instead of slicing roots? That adjustment was completely backward!",
+            "headline": "The Mechanical Launch",
+            "speech": "Pull the velvet cord now! Let the root soar above the cabbage stalls and terrorize the prize-winning melons!",
             "visual": "ship",
-            "label": "Accidental Broadcast",
-            "story_beat": "twist",
-            "visual_prompt": "Barnaby recoils in shock as bright blue holographic emergency warning symbols project upward from the mechanical vegetable chopper, while nearby alien merchants drop their baskets and stare in sheer astonishment.",
+            "label": "The Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "Inventor Barnaby pulls a red velvet cord attached to the hovering turnip device, which is currently knocking over a towering display of green melons in the busy market aisle.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Instant Sellout",
-            "speech": "Brilliant! Since the sirens sound like crying, everyone rushed to buy my protective goggles to survive the noise!",
+            "headline": "The Market Payoff",
+            "speech": "Who needs flying turnips when the crash landing makes the best pre-chopped vegetable soup in the entire county?",
             "visual": "door",
-            "label": "Commercial Success",
+            "label": "The Finale",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby stands triumphantly atop his empty market stall counter, holding a heavy bag of gold coins in one hand while a long queue of eager alien customers holds out currency for his remaining anti-tear goggles.",
+            "visual_prompt": "Inventor Barnaby smilingly ladles hot soup from a giant smashed cooking pot outside his market tent, serving delighted customers who line up with empty wooden bowls.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright, colorful animated comedy style with exaggerated cartoon proportions and whimsical steampunk machinery.",
+          "style": "Bright stop-motion animation aesthetic with detailed textures of wood, brass, and fresh vegetables.",
           "characters": {
-            "Barnaby": "An energetic elderly inventor with bushy white hair, oversized round spectacles, a brown leather vest, and a perpetually soot-smudged nose."
+            "Barnaby": "An enthusiastic inventor with wild grey hair, a soot-smudged apron, and round brass spectacles.",
+            "Assistant": "A small clanking brass automaton with a copper kettle body and glowing blue optical lenses."
           },
           "locations": {
-            "Market Square": "A bustling, vibrant open-air alien market filled with colorful fabric awnings, hanging lanterns, and bustling crowds of multi-armed merchants."
+            "MarketSquare": "A bustling cobblestone medieval market filled with colorful striped awnings, wooden crates, and hanging lanterns."
           },
           "objects": {
-            "Goggles": "Clunky brass eyewear fitted with thick green tinted lenses and external copper adjustment dials.",
-            "Chopper": "A heavy iron mechanical kitchen appliance featuring rotating steel blades and a rusted hand crank."
+            "TurnipCopter": "A giant purple root vegetable fitted with polished brass clockwork propellers and leather straps.",
+            "Workbench": "A weathered oak table covered in scattered iron gears, screwdrivers, and blueprints."
           }
         },
-        "plot_fingerprint": "94a379b0cab4c44082db98de30db2fce51f84eee37e2d2b366d41387f9fa6eba"
+        "plot_fingerprint": "852d38fed635fb5631dc2f400ddcd9db26f87a9fbe6c71202ac3b6ace0be0708"
       },
       "approved": false
     },
     {
-      "candidate_id": "5c4dbc75dbdce180dabceba9",
-      "source_sha256": "4f9815f05cab4d1b15602b14171b5a376aced63e8390d085048ab97ac3ec325b",
+      "candidate_id": "f18813a3f22e3146ae122f25",
+      "source_sha256": "0ca59023f62dc3bb0b2af80b88e963b86cc2f4bde203f01c1725106ed8e4eecc",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-11a4fc45ef191a8aa6b5",
-        "title": "The Icebreaker Beacon Dilemma",
-        "hook": "The Buried Signal",
-        "question": "Should Dr. Vance trigger the avalanche beacon to save his team, sacrificing the rare thermal core they spent months drilling for?",
-        "answer": "He triggers the beacon, abandoning the core to save his trapped crew, proving that human lives outweight scientific ambition.",
+        "content_id": "rayvan-gemini-ad6d6a446b9e07c3a463",
+        "title": "The Whispering Sands of Arid V",
+        "hook": "Unexpected Reading",
+        "question": "What secret did the shifting dunes hide from the explorers?",
+        "answer": "A subterranean ocean that brought life back to the desert.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -106,140 +107,139 @@
         ],
         "story_beats": [
           {
-            "headline": "The Buried Signal",
-            "speech": "The seismic monitor spikes dramatically, confirming the western ridge has collapsed right over the secondary drilling team.",
+            "headline": "Unexpected Reading",
+            "speech": "My scanner is going wild. This seismic anomaly beneath the dunes cannot possibly be dry rock.",
             "visual": "signal",
-            "label": "Emergency Alert",
+            "label": "Deep Scan",
             "story_beat": "reveal",
-            "visual_prompt": "Dr. Vance stands tense inside the glowing orange research tent, staring at a flashing red seismic monitor showing a flatline from the western ridge, holding a cracked digital tablet displaying telemetry data.",
+            "visual_prompt": "Explorer Elian looking at a glowing green radar device in his hands, standing on a massive yellow sand dune under a blazing sun, wearing a worn canvas jumpsuit.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Impossible Choice",
-            "speech": "We must detonate the rescue beacon now, but the shockwave will permanently entomb the thermal core deep in the glacier.",
+            "headline": "Drilling Deeper",
+            "speech": "We need to drop the thermal probe right here before the sandstorm completely buries our camp.",
+            "visual": "robot",
+            "label": "Thermal Probe",
+            "story_beat": "build",
+            "visual_prompt": "A compact metallic utility robot with a single glowing blue optical sensor plunging a glowing drill rod into the hard-packed desert floor.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Hidden Vault",
+            "speech": "Look at the rock walls eroding away. It is not stone at all; it is a giant natural cavern sealed for millennia.",
             "visual": "door",
-            "label": "Control Vault",
-            "story_beat": "build",
-            "visual_prompt": "Dr. Vance stares at a heavy steel blast door of the equipment vault, his gloved hand hovering over a glowing red detonation switch while frosted frost lines the metallic hinges.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Sacrificing the Prize",
-            "speech": "Activating the emergency frequency fries our main generator, plunging the entire drilling site into sub-zero darkness immediately.",
-            "visual": "robot",
-            "label": "Power Failure",
+            "label": "Cavern Breach",
             "story_beat": "mechanism",
-            "visual_prompt": "An automated utility robot sparks and powers down in the center of the snowy generator yard, casting long shadows under a dying amber warning light while falling snow swirls around its treads.",
+            "visual_prompt": "Elian peering into a massive natural stone fissure that has just cracked open, revealing a cool blue mist rising from the dark abyss inside.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Rescued Lives",
-            "speech": "The rescue chopper arrives just in time as the shivering team emerges safely from the snowbank, wrapped in thermal blankets.",
-            "visual": "ship",
-            "label": "Safe Return",
-            "story_beat": "payoff",
-            "visual_prompt": "Dr. Vance helps a cold researcher climb into the cabin of a heavy-duty orange rescue helicopter landed on the ice sheet, holding a steaming mug of emergency tea.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "visual_bible": {
-          "style": "Cinematic gritty realism, dramatic blue and orange lighting, hyper-detailed snow textures",
-          "characters": {
-            "Dr. Vance": "A rugged middle-aged arctic researcher with a thick grey-streaked beard, wearing a heavy yellow hooded parka with frost-rimed goggles on his forehead."
-          },
-          "locations": {
-            "Research Station": "A remote cluster of reinforced dome tents and a central metal command hub perched on a vast, windswept glacier."
-          },
-          "objects": {
-            "Seismic Monitor": "A ruggedized black field computer with a glowing amber screen and a cracked protective casing.",
-            "Beacon Switch": "A heavy-duty industrial toggle switch encased in a yellow protective housing with a shattered glass cover."
-          }
-        },
-        "plot_fingerprint": "7c609105b3a9708e70e39f2bf964614d2a60c04fa6abe92e34e5fdd37bbf4e67"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "36836ae8c66f3bcc66893f31",
-      "source_sha256": "364ed440edea79b82d2ead52a9fa6110698d71c051813cb8b45af8edaec523cf",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-e0c1d194ea81add591eb",
-        "title": "The Permafrost Resonance Protocol",
-        "hook": "The Hidden Fracture",
-        "question": "Can acoustic thermal shielding rescue a trapped research team before the sub-glacial shelf collapses?",
-        "answer": "Yes, by broadcasting harmonic frequencies that temporarily stabilize the ice fissures while the sleds cross.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Hidden Fracture",
-            "speech": "Dr. Vance gasped as the seismic monitor revealed an underground cavern collapsing beneath our exact coordinates right now.",
-            "visual": "signal",
-            "label": "Seismic Alert",
-            "story_beat": "reveal",
-            "visual_prompt": "Dr. Vance stands tense inside the glowing comms tent, pointing a trembling gloved finger at a flickering holographic signal map showing deep blue ice fissures below. Her breath fogs the frigid air, illuminated by the amber glow of the console held firmly in her left hand.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Deploying the Resonators",
-            "speech": "We must drop sonic anchors into the crevasse instantly to freeze the shifting fracture planes before the blizzard hits.",
-            "visual": "robot",
-            "label": "Anchor Deployment",
-            "story_beat": "build",
-            "visual_prompt": "Engineer Kael maneuvers a heavy crawler robot across the snowy ridge outside the station. The robotic arm grips a heavy titanium sonic anchor, preparing to plunge it directly into the deep white snowfield while swirling snowflakes catch the yellow headlights.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Harmonic Counter-Pressure",
-            "speech": "Initiating the frequency pulse now; if the resonance matches the ice density, the sliding shelf will lock in place.",
-            "visual": "ship",
-            "label": "Frequency Pulse",
-            "story_beat": "mechanism",
-            "visual_prompt": "Commander Torres sits at the main control console inside the tracked command transport vehicle, pressing a large red activation button. Through the frosted front windshield, bright turquoise sound waves ripple across the glacier surface, cast from the roof-mounted emitter dish.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Safe Passage Secured",
-            "speech": "The resonance held the crevasse steady, allowing every member of our expedition to cross safely into the valley.",
+            "headline": "The Underground Oasis",
+            "speech": "An entire underground sea! Our expedition just found the water source that will save the entire region.",
             "visual": "forest",
-            "label": "The Valley Crossing",
+            "label": "Subterranean Sea",
             "story_beat": "payoff",
-            "visual_prompt": "Dr. Vance and Kael lead the supply convoy safely past the snowy perimeter into the safety of an ancient pine forest nestled at the base of the mountain. Sunlight breaks through the frosty canopy, illuminating the triumphant team as they look back at the stable glacier.",
+            "visual_prompt": "Elian standing at the edge of a vast, glowing underground subterranean lake surrounded by bioluminescent jungle flora, smiling with arms outstretched.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Cinematic realism with a cool blue and amber color palette, highlighting harsh arctic environments and high-tech rescue equipment.",
+          "style": "Cinematic adventure realism with vibrant natural lighting and detailed textures",
           "characters": {
-            "Dr. Vance": "A resilient senior arctic researcher with a determined expression, wearing a heavily insulated crimson parka with reflective silver lining and a frost-rimmed fur hood.",
-            "Engineer Kael": "A practical technician with a focused expression, wearing a utilitarian charcoal-grey arctic suit with reinforced knee pads and yellow safety harnesses.",
-            "Commander Torres": "A calm expedition leader with steady eyes, wearing a dark navy thermal jacket featuring mission patches on the right shoulder."
+            "Elian": "A seasoned desert surveyor with sun-weathered skin, stubble, wearing a durable tan canvas expedition jumpsuit and utility belt"
           },
           "locations": {
-            "comm_tent": "A reinforced geodesic dome tent lit by amber interior lamps and glowing holographic display panels.",
-            "glacier_ridge": "A vast, windswept expanse of white snow and blue ice ridges stretching toward distant jagged mountains under a twilight sky."
+            "Arid V Dunes": "Vast, rolling golden-orange sand dunes under a bright amber alien sky",
+            "Subterranean Cavern": "A massive cool-toned underground grotto filled with glowing blue water and bioluminescent plants"
           },
           "objects": {
-            "holographic_map": "A portable amber projection device displaying glowing topographical contours and pulsing seismic warning lines.",
-            "sonic_anchor": "A heavy cylinder of brushed titanium etched with glowing blue circuit patterns and stabilization fins."
+            "Scanner": "A rectangular metallic handheld device featuring a bright green holographic tactical display screen",
+            "Thermal Probe": "A slender titanium cylinder equipped with a diamond-tipped drill head and flashing status lights"
           }
         },
-        "plot_fingerprint": "530a9636f67159bf8f7396d21dfea424d5128e843a0419ef90e556664ca8a259"
+        "plot_fingerprint": "f43d45682772c4f196444dd1d77248cc6d6c28aa07ed9bcbecb87983b9056295"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "6a423b3028b81eb01c33439c",
+      "source_sha256": "7bc73a33aa2773270d230ddeec4f32d11864579c35fc1ce07865e71844f3fad9",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-999c028c1996b3b603d0",
+        "title": "The Weaver's Last Thread",
+        "hook": "The Bitter Frost",
+        "question": "How did Elian choose between saving his ancestral loom and keeping the village warm?",
+        "answer": "He dismantled the loom's ancient timber frame to fuel the winter hearth, preserving his community at the cost of his family's craft.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Bitter Frost",
+            "speech": "The snow buries our fences, and the last of our firewood is ash. We cannot weave through this cruel night without heat.",
+            "visual": "forest",
+            "label": "The Freezing Village",
+            "story_beat": "reveal",
+            "visual_prompt": "Elian stands in the snowy forest clearing, holding a frosted iron axe, wearing a thick wool cloak, looking at the distant frozen village with worried expression.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Ancestral Heart",
+            "speech": "My grandfather built this wooden loom from the sacred oak. Its beams are seasoned dry and will burn long and bright.",
+            "visual": "door",
+            "label": "The Workshop Interior",
+            "story_beat": "build",
+            "visual_prompt": "Elian stands inside his rustic wooden workshop doorway, touching the intricate carved beams of the grand antique loom, holding a lit oil lantern.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Hard Choice",
+            "speech": "If I break the sacred frame for the hearth, the craft dies with me. If I refuse, my neighbors perish in the ice.",
+            "visual": "signal",
+            "label": "The Dilemma",
+            "story_beat": "mechanism",
+            "visual_prompt": "Elian sits on a wooden stool inside the dimly lit workshop, staring at the glowing hearth fire on one side and the towering wooden loom on the other, expression torn.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Warmth in the Ruins",
+            "speech": "The workshop is silent now, but the hearth roars with life, and every family in our valley sleeps safe from the cold.",
+            "visual": "ship",
+            "label": "The Community Survives",
+            "story_beat": "payoff",
+            "visual_prompt": "Elian stands outside his cozy timber cottage in the bright morning sunlight, sharing warm bread with smiling villagers gathered around a smoking communal chimney.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "visual_bible": {
+          "style": "Cinematic historical realism with warm candlelight and rich natural textures.",
+          "characters": {
+            "Elian": "A middle-aged village weaver with weathered hands, kind brown eyes, wearing a heavy grey wool tunic and leather boots."
+          },
+          "locations": {
+            "Village Workshop": "A rustic timber-framed building filled with yarn spools, wooden beams, and a stone hearth.",
+            "Snowy Valley": "A quiet historical mountain village surrounded by snow-draped pine trees and wooden fences."
+          },
+          "objects": {
+            "Grand Loom": "A massive, intricately carved oak wood loom with hanging threads and complex wooden pedaling mechanisms.",
+            "Iron Axe": "A heavy, dark iron-headed axe with a polished ash wood handle."
+          }
+        },
+        "plot_fingerprint": "be2295b26b54d30ea7bd39574f09ea6b3ce8297df2deaa15715dd4a2a44b6421"
       },
       "approved": false
     }
