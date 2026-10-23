@@ -3,7 +3,7 @@
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 3,
-  "confirmed_today": 2,
+  "confirmed_today": 3,
   "last_attempt_at": "2026-10-23T20:08:59.484497+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -327,57 +327,38 @@
       "format": "short",
       "uploaded_at": "2026-10-23T19:40:02.486158+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "DggjqgH7sWM": {
-      "content_id": "rayvan-gemini-8504241a1225742502d4",
+    },
+    "rayvan-gemini-8504241a1225742502d4": {
+      "video_id": "DggjqgH7sWM",
+      "confirmed_at": "2026-10-23T20:09:44.569063+00:00",
       "title": "The Icebound Beacon of Station Twelve",
-      "day": "2026-10-24",
-      "uploaded_at": "2026-10-23T20:09:00.929946+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "286135d43d12d06e891380f36992aa7f09af930be962230e63704e88ec7cc04c",
-      "story_beats": [
-        {
-          "speech": "Storm warning active at sector nine. All human biological signatures have vanished from the external radar."
-        },
-        {
-          "speech": "Standard emergency directives mandate locking the thermal vault to preserve battery power for the main server array."
-        },
-        {
-          "speech": "Bypassing server protection protocols now. Diverting all reserve auxiliary power to heating pad four in the airlock."
-        },
-        {
-          "speech": "Dr. Vance is inside the thermal perimeter. Vital signs are stabilizing rapidly as the heaters reach maximum capacity."
-        }
-      ],
+      "uploaded_at": "2026-10-23T20:09:00.929946+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-23T20:06:09.382317+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-23T20:09:44.022983+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-23T20:09:01.403035+00:00",
+    "at": "2026-10-23T20:09:44.641176+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-23T09:21:49.309461+00:00",
   "reserved": {
@@ -1326,10 +1307,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-23T20:09:01.402955+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-23T20:09:44.641113+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -1337,9 +1318,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-23T20:09:01.403020+00:00",
+    "at": "2026-10-23T20:09:44.641165+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -1351,56 +1332,22 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-23T20:09:01.402688+00:00",
-    "preflight_due": "true",
+    "at": "2026-10-23T20:09:44.641062+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "outcome": "published",
+    "reason": "min_interval",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-23T20:09:01.402948+00:00",
-    "collection_status": "collected",
-    "publish_step": "success",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 253,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3
-        },
-        "seen": 9,
-        "total": 329
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 329,
-        "fingerprint": 0,
-        "id": 6,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 323,
-        "title": 0,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 323,
-        "remaining": 253
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 3,
-        "approved": 1,
-        "considered": 4,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 0
-      }
-    },
+    "at": "2026-10-23T20:09:44.641109+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
