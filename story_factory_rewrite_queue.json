@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "8b25be47056727911ecb72bf",
-      "source_sha256": "9741aaedfd6a1f93ff7b089a30d060ccbe86dd33a7fda63f7bd752e615660b03",
+      "candidate_id": "1d7eeefb4dd004e34c0e7348",
+      "source_sha256": "d1279957b9c7c405dc23c41afe13019c53a78cfeead0d6429ef262677cdd3eda",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-bb1f8291c9eb7914b540",
+        "content_id": "rayvan-gemini-a7c798c9c5a71645d12f",
         "title": "The Great Tomato Launchpad",
-        "hook": "A Market Disaster",
-        "question": "How did Barnaby sell his automatic fruit picker at the crowded farmers market?",
-        "answer": "He deployed a steam-powered tomato launcher that accidentally pelted the mayor with fresh produce.",
+        "hook": "A Chaotic Discovery",
+        "question": "How did Barnaby sell his rogue produce sorting machine at the bustling farmers market?",
+        "answer": "By showcasing its incredible tomato-peeling precision directly to terrified shoppers.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,75 +29,76 @@
         ],
         "story_beats": [
           {
-            "headline": "A Market Disaster",
-            "speech": "Behold citizens, my mechanical tomato picker will revolutionize the morning harvest without bruising a single skin!",
+            "headline": "A Chaotic Discovery",
+            "speech": "Behold the citrus cannon ninety thousand, a marvel designed to organize every single unruly fruit in this chaotic market!",
             "visual": "robot",
             "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands in a bustling sunny farmers market holding a clunky brass robot, shouting with an excited expression, surrounded by crowded fruit stalls.",
+            "visual_prompt": "Barnaby stands proudly behind a market stall holding a copper wrench, pointing at a clunky mechanical sorting robot with spinning steel arms.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Stoking the Boiler",
-            "speech": "Just a bit more steam pressure from this brass kettle to activate the motorized gathering arms perfectly.",
-            "visual": "ship",
-            "label": "The Build",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby frantically pumps a steaming brass boiler attached to the robot, while market vendors stare skeptically in the background.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Catastrophic Jam",
-            "speech": "Oh dear, the gears are jammed tight and the pressure gauge is spinning wildly into the red danger zone!",
+            "headline": "Constructing The Fix",
+            "speech": "We must tighten these gears immediately before the angry farmers realize our automated peeler is targeting their hats!",
             "visual": "signal",
-            "label": "The Mechanism",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby sweatily tries to twist a stuck valve on the smoking robot, as a flashing red warning light blinks furiously near his face.",
+            "label": "Assembly",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby frantically adjusts a glowing green calibration dial on the robot chestplate while red warning signal lights flash brightly overhead.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "A Direct Hit",
-            "speech": "I am so terribly sorry Mr Mayor, but technically the machine successfully launched the prize heirloom tomato right at you!",
+            "headline": "The Mechanical Test",
+            "speech": "Watch carefully as the high velocity mechanism isolates each red sphere with absolute perfection and zero collateral damage.",
+            "visual": "ship",
+            "label": "Operation",
+            "story_beat": "mechanism",
+            "visual_prompt": "The robot scoops a giant tomato and launches it through a hoop shaped like a mini airship into a neatly stacked crate.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Market Triumph",
+            "speech": "Success at last! Every single merchant is cheering because our frantic contraption finally saved their entire morning harvest.",
             "visual": "door",
-            "label": "The Finale",
+            "label": "Resolution",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby hides behind a wooden market stall door, looking sheepishly at the angry mayor who is covered in red tomato pulp.",
+            "visual_prompt": "Barnaby and smiling market vendors stand in front of a swinging wooden stall door, holding up bags of gold coins and laughing.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright, colorful stop-motion claymation aesthetic with expressive character animations and detailed whimsical textures.",
+          "style": "Bright stop-motion claymation with vibrant marketplace colors and whimsical steampunk machinery.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild gray hair, round spectacles, a tweed vest, and a perpetually soot-smudged face."
+            "Barnaby": "An eccentric inventor with wild gray hair, wearing a patched tweed vest, round spectacles, and a stained apron."
           },
           "locations": {
-            "farmers_market": "A vibrant town square packed with striped canvas tents, wooden crates overflowing with vegetables, and bustling shoppers."
+            "Market Square": "A bustling outdoor bazaar with colorful canvas awnings, wooden crates, and hanging lanterns."
           },
           "objects": {
-            "brass_robot": "A shiny, copper-plated mechanical contraption featuring multiple spindly arms, a steam whistle, and a spinning pressure gauge."
+            "Sorting Robot": "A bulky brass and iron machine with three mechanical arms, glowing green sensor eyes, and a loud exhaust pipe.",
+            "Copper Wrench": "A heavy, dented tool used for fixing stubborn clockwork gears."
           }
         },
-        "plot_fingerprint": "77915eee19cefc2ae9f89c1bc717bbe26d6f30bf5f51b10e84960a7a6709ed92"
+        "plot_fingerprint": "4aa4d6e1c3a7319af7d3b56b92e5161e8480f6e5a9aa7ad7f67c45b03ff4dd83"
       },
       "approved": false
     },
     {
-      "candidate_id": "db55c6031d0db9521fd012bf",
-      "source_sha256": "83c6bfccd8ce2c3220a799f0e56636509d2e4fc95265c2eb6928dac2f3ea02dc",
+      "candidate_id": "b2925a1fa04a65c24f60d87e",
+      "source_sha256": "d52d2e04288471a1c9258eb6a2326210e62481201ffd09e16b754bcf5cf44452",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-4787b053703651e4bcad",
-        "title": "The Coral Chamber Mystery",
-        "hook": "The Mysterious Pulse",
-        "question": "Why did the glowing bioluminescent signals from the deep trench suddenly change their repeating rhythm tonight?",
-        "answer": "The ancient migration bells were disturbed by a trapped school of hermit crabs resetting the master tide gear.",
+        "content_id": "rayvan-gemini-3e53983e6be4d3a7d14b",
+        "title": "The Cabbage Cannon Catastrophe",
+        "hook": "The Market Debut",
+        "question": "Can an overzealous market inventor sell a vegetable launcher before the produce rots?",
+        "answer": "Yes, by accidentally inventing the world's first airborne salad delivery service.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -105,140 +106,140 @@
         ],
         "story_beats": [
           {
-            "headline": "The Mysterious Pulse",
-            "speech": "Look at the great trench wall! The ancient signals are beating out a strange and frantic new rhythm tonight.",
-            "visual": "signal",
-            "label": "Trench Pulse",
-            "story_beat": "reveal",
-            "visual_prompt": "An anxious blue octopus named Barnaby floating near a dark underwater cliff, pointing two tentacles at a rhythmic series of glowing blue coral pulses on the wall.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Following the Current",
-            "speech": "We must swim down into the whispering kelp forest before the current shifts and hides the trail completely from us.",
-            "visual": "forest",
-            "label": "Kelp Search",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby swimming cautiously through a dense, glowing green kelp forest with tall swaying stalks and floating spores illuminating the murky water.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Gear Mechanism",
-            "speech": "Hold tightly to that rusted metal lever! If we turn it gently, the heavy stone door will finally swing open.",
-            "visual": "door",
-            "label": "Lever Turn",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby and a small yellow seahorse named Pip pushing together against a heavy, encrusted stone door handle attached to an ancient sunken bulkhead.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Lost Crabs",
-            "speech": "It was only a dozen lost hermit crabs rearranging the tide bells! Our reef is completely safe after all.",
-            "visual": "ship",
-            "label": "Safe Reef",
-            "story_beat": "payoff",
-            "visual_prompt": "Barnaby smiling happily inside the wooden hull of a sunken Spanish galleon, watching a line of tiny hermit crabs happily tapping bronze ship bells with tiny pebbles.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "visual_bible": {
-          "style": "Vibrant cinematic underwater animation with rich bioluminescent lighting, detailed coral textures, and expressive animal characters.",
-          "characters": {
-            "Barnaby": "An intelligent, gentle blue octopus with large expressive amber eyes and neat suction cups.",
-            "Pip": "A tiny, energetic yellow seahorse with bright orange fins and a curious twitchy snout."
-          },
-          "locations": {
-            "trench_wall": "A sheer vertical cliff of dark basalt covered in glowing neon-blue pulsing coral networks.",
-            "kelp_forest": "An expansive underwater woodland of towering emerald-green kelp stalks filtering soft sunbeams.",
-            "sunken_galleon": "A moss-covered wooden shipwreck interior filled with brass fittings, old pottery, and sea-growth."
-          },
-          "objects": {
-            "stone_door": "A heavy, weathered underwater bulkhead door carved with ancient spiral wave motifs.",
-            "ship_bell": "A polished bronze maritime bell hanging from a rusted iron bracket inside the galleon wreckage."
-          }
-        },
-        "plot_fingerprint": "126e08f5227a46db31c098e6d70ad45463f89ae409664bf1fb06029da616d867"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "d1b1555aef90eecaf715de46",
-      "source_sha256": "9966f825a2f8f4c8d8cfa1ed97f883c3e6e7d38f0c13f9d65d575d58258e9b1d",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-5bb6b85c69d172660d19",
-        "title": "The Whispering Sands of Arid V",
-        "hook": "The Silent Peak",
-        "question": "What secret did the howling desert winds conceal beneath the ancient dunes?",
-        "answer": "The howling winds concealed a massive, subterranean acoustic organ powered by underground thermal vents, creating the haunting melodies heard across the desert.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Silent Peak",
-            "speech": "Look closely at the shifting sand patterns ahead, because this geological anomaly defies all known natural weather formations.",
-            "visual": "planet",
-            "label": "Sand Anomaly",
-            "story_beat": "reveal",
-            "visual_prompt": "Explorer Jax kneeling on a massive orange sand dune, pointing at strange geometric ripple marks on the surface, bright midday sun, hyperrealistic cinematic style.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Excavating the Ridge",
-            "speech": "We must carefully clear this heavy sediment to inspect the metallic resonance pipes buried deep within the bedrock.",
+            "headline": "The Market Debut",
+            "speech": "Behold the rapid-fire cabbage catapult, guaranteed to deliver fresh greens across the entire village square without any bruising!",
             "visual": "robot",
-            "label": "Clearing Sediment",
-            "story_beat": "build",
-            "visual_prompt": "Explorer Jax operating a compact automated excavator robot, sweeping away dust from a series of vertical bronze pipes embedded in sandstone, close-up shot.",
+            "label": "The Invention",
+            "story_beat": "reveal",
+            "visual_prompt": "Inventor Barnaby stands proudly next to a quirky wooden spring-loaded cannon in the crowded cobblestone marketplace, smiling widely while pointing at a loaded round cabbage.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Thermal Activation",
-            "speech": "As geothermal pressure rises through the primary chamber, the underground pipes begin to resonate and hum harmoniously.",
+            "headline": "The Tension Mounts",
+            "speech": "Quickly load the heavy brass tension lever before the angry grocers notice our experimental trial run starting right now.",
             "visual": "signal",
-            "label": "Pressure Rise",
-            "story_beat": "mechanism",
-            "visual_prompt": "Steam venting from underground bronze pipes, Explorer Jax watching a glowing digital gauge pulse with blue light, dramatic shadows, wide angle.",
+            "label": "The Adjustment",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby frantically cranks a squeaky brass lever on the side of the wooden cannon, while nervous market vendor Martha glares at him with hands on her hips.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Desert Symphony",
-            "speech": "The entire valley transforms into a living musical instrument, proving the haunting desert songs are born from the earth itself.",
+            "headline": "The Catastrophic Launch",
+            "speech": "Oops, I accidentally set the launch angle too high, sending twenty heads of cabbage straight into the bakery chimney!",
+            "visual": "ship",
+            "label": "The Mishap",
+            "story_beat": "mechanism",
+            "visual_prompt": "The wooden cannon fires upward with a loud pop, launching a flurry of green cabbages through the air toward a smoking stone bakery chimney in the background.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Sweet Success",
+            "speech": "Customers love the pre-shredded baked coleslaw falling from the sky, making our disastrous launch a profitable culinary masterpiece today.",
             "visual": "door",
-            "label": "Musical Oasis",
+            "label": "The Solution",
             "story_beat": "payoff",
-            "visual_prompt": "Explorer Jax standing arms wide open before a cavernous stone archway where wind passes through giant metal flutes, creating visible soundwaves, sunset lighting.",
+            "visual_prompt": "Astonished villagers cheer and hold out bowls as warm, perfectly shredded cooked cabbage rains down gently from above near the front door of the bakery.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Cinematic sci-fi adventure, hyper-detailed textures, warm golden hour lighting contrasted with cool mechanical glows.",
+          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures and comedic character expressions.",
           "characters": {
-            "Jax": "A weathered explorer in a tan utility jumpsuit, protective goggles resting on their forehead, determined expression, pragmatic and curious."
+            "Barnaby": "An eccentric inventor with wild ginger hair, round wire spectacles, a patched blue vest, and grease-stained trousers.",
+            "Martha": "A stern market vendor wearing a crisp white apron, a pink headscarf, and carrying a woven wicker basket."
           },
           "locations": {
-            "Arid V Dunes": "Vast undulating orange sand seas dotted with exposed ancient sandstone ridges and geothermal vents."
+            "marketplace": "A bustling medieval village square filled with wooden stalls, hanging canvas awnings, and cobblestone pathways."
           },
           "objects": {
-            "excavator_robot": "A compact, four-legged robotic drone made of brushed steel with bright yellow warning stripes and a spinning sweep brush.",
-            "resonance_pipes": "Ancient vertical bronze cylinders of varying heights featuring intricate acoustic tuning slots along their lengths."
+            "cannon": "A quirky spring-loaded wooden launcher painted bright red with brass rivets and a squeaky crank handle.",
+            "cabbage": "A plump, oversized round green head of cabbage with slightly frayed outer leaves."
           }
         },
-        "plot_fingerprint": "624e1aed44147aee350a2c8461fb072382f3a5e1bcff7a56e79402827115b166"
+        "plot_fingerprint": "5f726fef436ea4bd998b16d6adfdfa6e52f243d97e1b42a02d5097f848ce4642"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "54427b52d341cae024510b96",
+      "source_sha256": "17080c05285b88aa1d5f182e443153dcb12ce0f4f06afec8da1a72757fda1ada",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-3d899d812ddf020f048c",
+        "title": "The Weaver's Last Loom",
+        "hook": "The Hidden Secret",
+        "question": "Can true friendship survive a village-wide choice between warmth and survival?",
+        "answer": "Yes, by dismantling the final loom together to build a communal hearth for the entire valley.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Hidden Secret",
+            "speech": "My oldest friend, our grandfather's secret blueprints show this ancient forest harbors enough hidden timber to save everyone.",
+            "visual": "forest",
+            "label": "The Discovery",
+            "story_beat": "reveal",
+            "visual_prompt": "An elderly village weaver in brown woolen robes stands inside a dense, misty forest holding a glowing wooden signal baton, discovering a hidden ancient door carved into a giant oak tree trunk.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Impossible Choice",
+            "speech": "If we cut down the grove for winter heat, the ancient loom that feeds our village families will never weave again.",
+            "visual": "door",
+            "label": "The Dilemma",
+            "story_beat": "build",
+            "visual_prompt": "The weaver and his carpenter friend stand in the snowy village square before a massive stone door, pointing at a wooden schematic scroll held firmly in the carpenter's calloused hands.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Shared Act",
+            "speech": "Instead of arguing, we must break apart our family heritage and forge a brand new path through unified sacrifice.",
+            "visual": "signal",
+            "label": "The Turning Point",
+            "story_beat": "mechanism",
+            "visual_prompt": "The two friends work together at dusk in the village square, using heavy iron mallets to dismantle a towering wooden handloom while holding a bright metal signal torch aloft.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Warm Valley",
+            "speech": "Look at the glowing smoke rising from the new central hearth; our difficult choice kept every single neighbor warm.",
+            "visual": "ship",
+            "label": "The Resolution",
+            "story_beat": "payoff",
+            "visual_prompt": "The weaver and carpenter smile together on a hilltop overlooking the village at sunrise, watching thin ribbons of smoke rise from communal stone houses shaped like rustic wooden ships.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "visual_bible": {
+          "style": "Cinematic historical realism with warm, dramatic lighting, rich earth tones, and intricate hand-crafted textures.",
+          "characters": {
+            "weaver": "An elderly man with deep wrinkles, kind grey eyes, wearing patched brown wool robes and a woven linen scarf.",
+            "carpenter": "A sturdy middle-aged woman with braided dark hair, wearing a heavy leather apron over a green tunic."
+          },
+          "locations": {
+            "forest": "An ancient, misty forest filled with colossal oak trees and moss-covered forest floors.",
+            "village_square": "A rustic medieval village square paved with cobblestones, surrounded by timber-framed houses."
+          },
+          "objects": {
+            "blueprint_scroll": "A yellowed parchment roll tied with hemp string, showing faded ink diagrams of antique timber frames.",
+            "iron_mallet": "A heavy blacksmithing tool with a dark iron head and a polished ashwood handle."
+          }
+        },
+        "plot_fingerprint": "34871c6491c39b927b6603b9556c1c04fda9b7446dadc7e1352ce773543e4094"
       },
       "approved": false
     }
