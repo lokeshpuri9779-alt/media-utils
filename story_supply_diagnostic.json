@@ -8,8 +8,8 @@
   "blocked": 111,
   "eligible": 142,
   "history_records": 90,
-  "latest_production_outcome": "processing",
-  "latest_production_reason": "",
+  "latest_production_outcome": "failure",
+  "latest_production_reason": "[Errno 2] No such file or directory: 'ffprobe'",
   "read_only": true,
   "status": "approved_candidates_present",
   "structurally_eligible_not_necessarily_approved": 142

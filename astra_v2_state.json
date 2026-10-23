@@ -242,27 +242,28 @@
     }
   },
   "pending": {},
-  "last_outcome": "ready",
-  "last_preflight_at": "2026-10-23T13:46:53.356575+00:00",
+  "last_outcome": "failure",
+  "last_error": "[Errno 2] No such file or directory: 'ffprobe'",
+  "last_preflight_at": "2026-10-23T13:51:58.215590+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-23T13:49:30.163496+00:00",
+    "at": "2026-10-23T13:54:37.460251+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
     "job_status_before_persist": "failure",
-    "dependencies_step": "failure",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "failure",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-23T09:21:49.309461+00:00",
   "reserved": {
@@ -935,9 +936,9 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-23T13:49:30.163437+00:00",
-    "publication_outcome": "ready",
-    "publication_reason": "ready",
+    "at": "2026-10-23T13:54:37.460176+00:00",
+    "publication_outcome": "failure",
+    "publication_reason": "[Errno 2] No such file or directory: 'ffprobe'",
     "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
@@ -946,36 +947,70 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-23T13:49:30.163485+00:00",
+    "at": "2026-10-23T13:54:37.460239+00:00",
     "history_file_present": true,
-    "publication_outcome": "ready",
+    "publication_outcome": "failure",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-23T13:25:02.049991+00:00",
-    "outcome": "processing",
-    "reason": "",
-    "content_id": "rayvan-gemini-bfe1cda7ff09c9aa9fd9",
-    "video_url": "https://www.youtube.com/watch?v=elAKJZp6i0U",
+    "at": "2026-10-23T13:53:12.879419+00:00",
+    "outcome": "failure",
+    "reason": "[Errno 2] No such file or directory: 'ffprobe'",
+    "content_id": "",
+    "video_url": "",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-23T13:49:30.163397+00:00",
+    "at": "2026-10-23T13:54:37.459906+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "failure",
     "job_status_before_persist": "failure",
-    "outcome": "ready",
-    "reason": "ready",
+    "outcome": "failure",
+    "reason": "[Errno 2] No such file or directory: 'ffprobe'",
     "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-23T13:49:30.163434+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "counters": {},
+    "at": "2026-10-23T13:54:37.460169+00:00",
+    "collection_status": "collected",
+    "publish_step": "failure",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 247,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3
+        },
+        "seen": 9,
+        "total": 323
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 323,
+        "fingerprint": 0,
+        "id": 6,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 317,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 317,
+        "remaining": 247
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 3,
+        "approved": 1,
+        "considered": 4,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }

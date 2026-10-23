@@ -516,6 +516,18 @@
         "reviewed_at": "2026-10-23T13:26:07.337506+00:00",
         "review_model": "gemini-3.1-flash-lite"
       }
+    },
+    {
+      "content_id": "rayvan-gemini-5c2113297afb14bcc0a3",
+      "story_sha256": "cd54d430c9d031c19722fed12a5ec38d9c0500fa901c490d5d3e4dfa5a84d0d2",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The premise of a desert explorer discovering a life-giving artifact in a wasteland is highly derivative of the provided list, specifically 'The Nomad and the Verdant Heart of the Shifting Sands' and 'Kaelen and the Sun-Drenched Oasis of the Shifting Dunes'.",
+        "The narrative structure and thematic elements (moisture-farming, shifting sands, ancient seeds/artifacts, and desert-to-oasis transformation) are repetitive of multiple entries in the provided publication history.",
+        "The story lacks sufficient originality to distinguish itself from the established pattern of 'explorer finds magical object in desert' stories already present in the dataset."
+      ],
+      "record": null
     }
   ]
 }
