@@ -73,6 +73,8 @@ jobs:
       ASTRA_SERIALIZED_PRELOAD: '0' # Continue producing new original stories after Season 1
       ASTRA_PRELOAD_LANE: '${{ matrix.lane }}'
       ASTRA_LONG_ENABLED: '0'
+      ASTRA_ASSET_PACK_ENABLED: '0' # Opt in only after visual review
+      ASTRA_ASSET_PACK_ROOT: runtime-artifacts/verified-pack
       ASTRA_OPENAI_ENABLED: '0'
       ASTRA_OPENAI_ALLOW_PAID_API: '0'
       ORT_DISABLE_TELEMETRY: '1'
@@ -116,6 +118,18 @@ jobs:
         continue-on-error: true
         with:
           enable-cache: true
+      - name: Download reviewed reusable visual pack
+        if: env.ASTRA_ASSET_PACK_ENABLED == '1'
+        uses: actions/download-artifact@v4
+        with:
+          name: astra-original-visual-pack
+          run-id: 39960540392
+          github-token: ${{ github.token }}
+          path: runtime-artifacts/download
+      - name: Verify restored reusable visual pack
+        if: env.ASTRA_ASSET_PACK_ENABLED == '1'
+        run: |
+          python tools/astra_restore_visual_pack.py runtime-artifacts/download/astra-visual-pack.zip runtime-artifacts/verified-pack --expected 3200
       - name: Install rendering stack
         timeout-minutes: 18
         run: |
