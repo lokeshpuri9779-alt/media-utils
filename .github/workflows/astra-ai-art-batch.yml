@@ -83,6 +83,50 @@ jobs:
               print("ASTRA_IMAGE_BATCH=" + result["status"])
               print("ASTRA_IMAGE_PROVIDER_CALLS=" + str(result["provider_calls"]))
           PY
+      - name: Verify archived image bytes and write review inventory
+        if: success()
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          from PIL import Image
+          root = Path("runtime-artifacts/ai-art-batch")
+          manifest = root / "review_only.json"
+          if not manifest.exists():
+              raise SystemExit("Missing review-only result manifest")
+          data = json.loads(manifest.read_text(encoding="utf-8"))
+          warehouse = (root / "warehouse").resolve()
+          report = {"schema_version": 1, "provider_calls": data.get("provider_calls"),
+                    "review_only": True, "production_ready": False, "images": []}
+          for row in data.get("assets", []):
+              if row.get("status") not in ("review_only", "cached_review_only"):
+                  continue
+              rel = row.get("path")
+              digest = row.get("sha256")
+              if not isinstance(rel, str) or not isinstance(digest, str):
+                  raise SystemExit("Generated image missing path or digest")
+              path = (warehouse / rel).resolve()
+              if not path.is_relative_to(warehouse) or not path.is_file():
+                  raise SystemExit("Generated image missing or outside warehouse")
+              if hashlib.sha256(path.read_bytes()).hexdigest() != digest:
+                  raise SystemExit("Generated image checksum mismatch")
+              with Image.open(path) as image:
+                  if image.format != "PNG" or image.height <= image.width:
+                      raise SystemExit("Generated image must be portrait PNG")
+                  dimensions = [image.width, image.height]
+                  image.verify()
+              report["images"].append({
+                  "story_content_id": row.get("story_content_id"),
+                  "scene_id": row.get("scene_id"),
+                  "sha256": digest,
+                  "path": rel,
+                  "dimensions": dimensions,
+                  "review_status": "awaiting_independent_review"})
+          (root / "review_inventory.json").write_text(
+              json.dumps(report, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
+          print("ASTRA_IMAGE_ARCHIVE_VERIFIED=" + str(len(report["images"])))
+          PY
       - name: Archive review-only scene images and manifest
         if: always()
         uses: actions/upload-artifact@v4
