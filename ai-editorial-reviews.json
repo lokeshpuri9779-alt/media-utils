@@ -300,6 +300,21 @@
         "reviewed_at": "2026-10-23T02:25:49.778241+00:00",
         "review_model": "gemini-3.1-flash-lite"
       }
+    },
+    {
+      "content_id": "rayvan-gemini-90f4114aaf5cd07eff6b",
+      "story_sha256": "3de8bf7b774a3a02e0ef72b2aa040866a1048e79a2f49e7d47e8b3239496c42d",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-90f4114aaf5cd07eff6b",
+        "story_sha256": "3de8bf7b774a3a02e0ef72b2aa040866a1048e79a2f49e7d47e8b3239496c42d",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the premises or settings of the provided recent publication examples.; The narrative follows a clear, logical causal structure: observation, preparation, discovery, and resolution.; The content is safe, suitable for a general audience, and contains no policy-violating material.; The story is self-contained and avoids trademark or copyright infringement.",
+        "reviewed_at": "2026-10-23T02:57:28.368616+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      }
     }
   ]
 }
