@@ -235,6 +235,21 @@ jobs:
             art/assets/generated/
           retention-days: 14
           if-no-files-found: warn
+      - name: Validate semantic asset manifest JSON before preload
+        if: matrix.lane == 0
+        run: |
+          python -m unittest discover -s tests -p 'test_preserve_reviewed_manifest.py' -v
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path('art/manifest.json')
+          if path.exists():
+              data = json.loads(path.read_text(encoding='utf-8'))
+              assert isinstance(data, dict) and isinstance(data.get('assets'), list)
+              print('ASTRA_ASSET_MANIFEST_VALID=1 assets=' + str(len(data['assets'])))
+          else:
+              print('ASTRA_ASSET_MANIFEST_VALID=missing')
+          PY
       - name: Test fail-closed reviewed artwork preload contract
         if: matrix.lane == 0 && github.event_name != 'schedule'
         run: |
