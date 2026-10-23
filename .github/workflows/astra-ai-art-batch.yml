@@ -16,6 +16,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   preproduce:
@@ -49,6 +50,28 @@ jobs:
               raise SystemExit("AI image provider configuration unavailable; no network call made")
           print("ASTRA_IMAGE_PROVIDER_CONFIGURED=1")
           PY
+      - name: Restore previous verified artwork cache when available
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p runtime-artifacts/ai-art-batch/warehouse
+          prior_run="$(gh run list --workflow astra-ai-art-batch.yml --status success --limit 20 --json databaseId --jq '.[0].databaseId' || true)"
+          if [[ ! "$prior_run" =~ ^[0-9]+$ ]]; then
+            echo "ASTRA_IMAGE_CACHE=EMPTY"
+            exit 0
+          fi
+          mkdir -p /tmp/astra-prior-art
+          if ! gh run download "$prior_run" --name "astra-ai-art-batch-$prior_run" --dir /tmp/astra-prior-art; then
+            echo "ASTRA_IMAGE_CACHE=UNAVAILABLE"
+            exit 0
+          fi
+          if [ -d /tmp/astra-prior-art/warehouse ]; then
+            cp -a /tmp/astra-prior-art/warehouse/. runtime-artifacts/ai-art-batch/warehouse/
+            echo "ASTRA_IMAGE_CACHE=RESTORED"
+          else
+            echo "ASTRA_IMAGE_CACHE=NO_WAREHOUSE"
+          fi
       - name: Generate scene artwork for existing editorial queue
         run: |
           python - <<'PY'
