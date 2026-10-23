@@ -36,3 +36,8 @@ jobs:
           python -m unittest discover -s tests -p 'test_astra_renderer_provenance.py' -q
           python -m unittest discover -s tests -p 'test_astra_shorts_fingerprint_lifecycle.py' -q
           python -m unittest discover -s tests -p 'test_astra_production_readiness.py' -q
+      - name: Validate free image generation and portrait contracts
+        run: |
+          python -m unittest discover -s tests -p 'test_omniroute_image_assets.py' -q
+          python -m unittest discover -s tests -p 'test_omniroute_image_http_errors.py' -q
+          python -m unittest discover -s tests -p 'test_omni_image_asset_cache_integrity.py' -q
