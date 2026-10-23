@@ -152,11 +152,22 @@ jobs:
           fi
           if ! command -v ffprobe >/dev/null; then
             echo 'ASTRA_FFPROBE_MISSING=1'
-            # Do not silently skip media verification or wait ten minutes
-            # on apt mirrors. Fail clearly and keep publication fail-closed.
-            exit 1
+            # Use a small bounded package download for ffprobe only. Never
+            # retry the full ffmpeg apt dependency chain that stalled lanes.
+            timeout 45s sudo apt-get update -qq -o Acquire::Retries=0 || true
+            timeout 90s sudo DEBIAN_FRONTEND=noninteractive apt-get download ffmpeg || true
+            probe_package="$(find . -maxdepth 1 -name 'ffmpeg_*.deb' -print -quit)"
+            if [ -n "$probe_package" ]; then
+              mkdir -p "$RUNNER_TEMP/astra-ffmpeg"
+              dpkg-deb -x "$probe_package" "$RUNNER_TEMP/astra-ffmpeg"
+              if [ -x "$RUNNER_TEMP/astra-ffmpeg/usr/bin/ffprobe" ]; then
+                echo "$RUNNER_TEMP/astra-ffmpeg/usr/bin" >> "$GITHUB_PATH"
+                export PATH="$RUNNER_TEMP/astra-ffmpeg/usr/bin:$PATH"
+                echo 'ASTRA_FFPROBE_SOURCE=deb-extract'
+              fi
+            fi
           fi
-          command -v ffprobe
+          command -v ffprobe || { echo 'ASTRA_FFPROBE_UNAVAILABLE=1'; exit 1; }
           python -c "import imageio_ffmpeg; print('ASTRA_BUNDLED_FFMPEG=' + imageio_ffmpeg.get_ffmpeg_exe())"
       - name: Refresh free licensed visual icon cache
         if: matrix.lane == 0
