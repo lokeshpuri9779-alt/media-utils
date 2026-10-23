@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "a07b0736df9ce52b34c9d003",
-      "source_sha256": "ecd8ff3b34490667c32f3de85cc561a17b6e843838e6adb9d25aeb4b47779a9a",
+      "candidate_id": "42725e65167392bdb70aa736",
+      "source_sha256": "5641aedede883a91ba70104635be05b21595e49319417af63873d1fd1f9950d7",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-6ddf1f26b2fdc70a8158",
-        "title": "The Great Tomato Launchpad",
-        "hook": "A Tomato Airborne",
-        "question": "How do you stop flying produce from ruining market day?",
-        "answer": "By inventing an automated vegetable catcher that organizes the chaos.",
+        "content_id": "rayvan-gemini-7052e10bbe44158e95d9",
+        "title": "The Great Turnip Tricycle Debacle",
+        "hook": "The Grand Unveiling",
+        "question": "How did Silas manage to ruin the farmers' market while trying to save it?",
+        "answer": "He unveiled an automated vegetable chopper that launched root vegetables into the crowd.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,76 +29,75 @@
         ],
         "story_beats": [
           {
-            "headline": "A Tomato Airborne",
-            "speech": "Look out below! My new pneumatic produce launcher is malfunctioning right in the middle of the bustling farmer market!",
+            "headline": "The Grand Unveiling",
+            "speech": "Behold citizens of Oakhaven! My patented root vegetable separator will revolutionize how you harvest your turnips forevermore!",
             "visual": "robot",
-            "label": "The Mishap",
+            "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "A clumsy inventor watches in panic as a red robot arm fires a rogue tomato into the busy outdoor market, with shocked fruit vendors ducking in the background.",
+            "visual_prompt": "An inventor named Silas in a crowded medieval farmers market gesturing proudly toward a strange mechanical contraption with spinning blades and brass funnels, while market vendors watch with skeptical expressions, day lighting, medium shot.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Constructing the Net",
-            "speech": "Quickly grab those spare gears and help me assemble this collapsible safety net before the entire vegetable stall collapses entirely.",
+            "headline": "The Calibration Crisis",
+            "speech": "Just a minor adjustment to the tension springs should stop the machine from shaking quite so violently on the cobblestones.",
             "visual": "signal",
-            "label": "The Assembly",
+            "label": "The Adjustment",
             "story_beat": "build",
-            "visual_prompt": "The inventor rapidly welds glowing metal struts together to form a large trampoline frame, while flashing red warning signals blink on a nearby control panel.",
+            "visual_prompt": "Silas frantically turns a large brass dial on the side of his mechanical contraption, sparks flying slightly, surrounded by crates of purple turnips in the busy market square, close up shot.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Catapult Mechanism",
-            "speech": "Pull this heavy brass lever to activate the spring tensioner and redirect the incoming barrage of flying root vegetables safely.",
-            "visual": "door",
-            "label": "The Lever",
-            "story_beat": "mechanism",
-            "visual_prompt": "A nervous market vendor firmly yanks a large metal lever mounted beside a reinforced swinging wooden workshop door, causing gears to grind loudly.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Sweet Success",
-            "speech": "It actually worked! Every single flying vegetable is now neatly sorted into baskets, saving our stall and our reputation.",
+            "headline": "The Mechanical Catastrophe",
+            "speech": "Oh dear me, the hopper intake has reversed itself and now it is aggressively chewing through the mayor's prize pumpkins!",
             "visual": "ship",
-            "label": "The Tidy Market",
+            "label": "The Malfunction",
+            "story_beat": "mechanism",
+            "visual_prompt": "The mechanical contraption vibrates wildly, shooting a stream of sliced turnips and pumpkin chunks high into the air above the market stalls, causing panicked shoppers to duck, wide shot.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Market Mayhem",
+            "speech": "Well at least the slaw is evenly distributed across every single merchant tent from here to the clock tower!",
+            "visual": "forest",
+            "label": "The Aftermath",
             "story_beat": "payoff",
-            "visual_prompt": "The inventor and smiling vendors stand proudly beneath a canopy shaped like a flying airship hull, as neatly organized crates of vegetables sit safely stacked below.",
+            "visual_prompt": "Silas sits defeated in a wagon filled with scattered turnips, covered in vegetable pulp, while annoyed villagers wipe turnip bits off their clothes in the messy market square, medium wide shot.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures and whimsical machinery.",
+          "style": "Bright, colorful animated comedy style with exaggerated character expressions and vibrant market stalls.",
           "characters": {
-            "inventor": "A frantic middle-aged person with wild gray hair, wearing a patched tweed vest, stained apron, and round spectacles."
+            "Silas": "An eccentric inventor with unruly red hair, wearing a patched brown vest, goggles pushed up onto his forehead, and soot-stained trousers."
           },
           "locations": {
-            "market": "A crowded, vibrant outdoor farmer market filled with colorful awnings, wooden crates, and bustling townsfolk."
+            "Oakhaven Market": "A bustling medieval town square filled with striped canvas awnings, wooden crates of colorful vegetables, and cobblestone streets."
           },
           "objects": {
-            "launcher": "A clunky brass and iron machine with visible springs, pipes, and a blinking green activation button.",
-            "net": "A wide elastic fabric trampoline bordered by glowing yellow safety stripes and sturdy steel joints."
+            "Contraption": "A towering, chaotic assembly of copper pipes, spinning steel blades, wooden gears, and a large metal funnel at the top."
           }
         },
-        "plot_fingerprint": "fdc31c34d3364a42be9938a414c53a5c7590fcf6832a642efc3b78daf5ab6061"
+        "plot_fingerprint": "0ed661e62299a9ee6918ebc2f548c99759853a5b1872002aa54533ebf0945bb8"
       },
       "approved": false
     },
     {
-      "candidate_id": "390c32106d551659509dd4d3",
-      "source_sha256": "6e8d0671846955887ef1a343bcc52b288900bd3f31715657b3d8b29c80da649c",
+      "candidate_id": "7fa7f5ac052bcf4f225dcc59",
+      "source_sha256": "52ef6367f2c0b59426050e4e04829f903d8d12a4e45ac69122986c2f7779047d",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-4ad5db2a532dff7160eb",
-        "title": "The Resonance Weld",
-        "hook": "A Fractured Hull",
-        "question": "How do you repair a fractured hull when the crew disagrees on which alloy frequency to fuse?",
-        "answer": "By testing both frequencies simultaneously, creating a harmonic bridge that seals the hull without compromising structural integrity.",
+        "content_id": "rayvan-gemini-afcb03e2caa069014601",
+        "title": "The Great Salt-Tide Regatta",
+        "hook": "The Driftwood Hull",
+        "question": "Can a wooden wind-car win the seaside race?",
+        "answer": "Yes, by utilizing the coastal updrafts instead of sails.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -106,77 +105,78 @@
         ],
         "story_beats": [
           {
-            "headline": "A Fractured Hull",
-            "speech": "We cannot wait any longer! If we do not apply the lead-titanium alloy right now, decompression will take us.",
+            "headline": "The Driftwood Hull",
+            "speech": "We cannot use standard cloth sails because the harbor crosswinds will snap our mainmast in two instantly.",
             "visual": "ship",
-            "label": "The Breach",
+            "label": "Hull Construction",
             "story_beat": "reveal",
-            "visual_prompt": "Commander Vex stands inside the damp engineering bay of the cargo vessel, pointing angrily at a jagged tear in the metal wall. Vex wears a bulky charcoal-gray jumpsuit with orange safety stripes and holds a pulsing handheld diagnostic scanner. Mechanic Jax stands nearby, crossing arms and shaking his head.",
+            "visual_prompt": "A close-up of a young female builder with grease-smudged cheeks examining a carved wooden hull inside a cluttered seaside workshop filled with ropes and tools.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Competing Solution",
-            "speech": "Your lead alloy is too rigid! We need the copper-bismuth weave to absorb the cosmic ray vibration properly.",
-            "visual": "robot",
-            "label": "The Disagreement",
-            "story_beat": "build",
-            "visual_prompt": "Mechanic Jax steps forward in the cluttered engineering bay, gesturing toward a hovering maintenance robot holding a glowing spool of copper-bismuth wire. Jax wears a faded blue utility vest over a cream tunic. Vex frowns deeply, staring at the hovering machine with an expression of intense skepticism.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Harmonic Test",
-            "speech": "Listen to the resonance feedback! Neither metal alone survives the thermal shock unless they oscillate together.",
+            "headline": "The Rotor Mechanism",
+            "speech": "Instead of catching the wind directly, this spinning wooden drum will convert the gusts into forward wheel torque.",
             "visual": "signal",
-            "label": "The Mechanism",
-            "story_beat": "mechanism",
-            "visual_prompt": "Vex and Jax work side by side at the central workstation in the engineering bay. A large digital monitor displays two overlapping wave signals glowing in bright neon green and blue. Sparks fly safely from a small dual-feed welding torch held firmly in Vex's leather-gloved hands.",
+            "label": "Rotor Assembly",
+            "story_beat": "build",
+            "visual_prompt": "The builder and an elderly mechanic attaching a large vertical wooden rotor to the chassis of a three-wheeled land yacht on the sunny pebble beach.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Unified Horizons",
-            "speech": "Look at that seal hold. By blending both frequencies, we turned our disagreement into the strongest weld on board.",
-            "visual": "planet",
-            "label": "The Resolution",
+            "headline": "The Sudden Squall",
+            "speech": "The fierce coastal gale is hitting us sideways now, but the angled rotor blades are spinning faster than ever.",
+            "visual": "forest",
+            "label": "Squall Test",
+            "story_beat": "mechanism",
+            "visual_prompt": "The land yacht speeding along the wet shore past a line of wind-bent pine trees while the builder struggles to adjust the steering lever against the gale.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Victory Dash",
+            "speech": "We crossed the finish line ahead of the fleet by turning the storm's fury into pure forward momentum.",
+            "visual": "door",
+            "label": "Finish Line",
             "story_beat": "payoff",
-            "visual_prompt": "Vex and Jax stand smiling together in front of the massive reinforced observation viewport of the ship. Outside the sparkling glass window, a vibrant purple gas giant planet looms peacefully against the starry void. The repaired hull seam behind them shimmers with a steady, unbreakable dual-toned metallic glow.",
+            "visual_prompt": "The builder raising her arms in triumph as her innovative wind-car rolls past a painted wooden archway while cheering festival crowds wave banners.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Cinematic sci-fi realism with gritty, lived-in industrial textures and vibrant holographic lighting.",
+          "style": "Bright, textured stop-motion aesthetic with rich wood grains and vibrant coastal colors.",
           "characters": {
-            "Commander Vex": "A determined human commander in her late forties with short silver hair, stern green eyes, wearing a charcoal-gray jumpsuit with orange safety stripes.",
-            "Mechanic Jax": "A passionate chief mechanic in his thirties with curly brown hair, a warm expressive face, wearing a faded blue utility vest over a cream tunic."
+            "builder": "A young inventive woman with bright hazel eyes, wearing a canvas work apron over a woolen blue sweater.",
+            "mechanic": "An elderly man with a silver beard, wearing a weathered leather cap and a grease-stained canvas vest."
           },
           "locations": {
-            "Engineering Bay": "A cramped, functional room filled with exposed conduits, heavy tool racks, metallic bulkheads, and a large central diagnostic workstation."
+            "workshop": "A rustic wooden shack beside the harbor, cluttered with nautical ropes, carved pulleys, and spare timber.",
+            "beach": "A wide, windy pebble beach stretching beside deep blue ocean waves under a partly cloudy sky."
           },
           "objects": {
-            "Diagnostic Scanner": "A sleek handheld device with a triangular black grip and a glowing amber LCD screen.",
-            "Welding Torch": "A heavy industrial dual-feed torch made of brushed steel with two distinct trigger nozzles for alloy wire."
+            "chassis": "A sturdy three-wheeled frame constructed from weathered oak planks and fitted with iron-rimmed wooden wheels.",
+            "rotor": "A tall vertical assembly of curved wooden blades designed to rotate on a central brass axis."
           }
         },
-        "plot_fingerprint": "42545edcfc32c5f64707d489ac83b33510400e84b987dfb4934cfe09fd9e7359"
+        "plot_fingerprint": "530bfaa09e89d3e9009d70a218d0a0dd3b462d93bb0ef73307d1990f65e39914"
       },
       "approved": false
     },
     {
-      "candidate_id": "3e9c83f92ddd3ad962353cfb",
-      "source_sha256": "4c56934e169fd65f5e9e9df21cc439a79ea9242a58acf13214d56f1a9cf4459c",
+      "candidate_id": "a8cb1daefde42c2d588f4cc3",
+      "source_sha256": "a506adca8a92ffb60c8480d12b52b4589e049908e6b838d7170bf4157528ca7a",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-8c9266fc628600298a3f",
-        "title": "The Infinite Pickle Press of Oakhaven Square",
-        "hook": "A Sour Discovery",
-        "question": "How did Silas save his vegetable stall from total financial ruin?",
-        "answer": "By inventing a mechanical brine-injector that turned ordinary cabbage into singing brass instruments.",
+        "content_id": "rayvan-gemini-ffc9d335e0442fdfcdd7",
+        "title": "The Great Salt-Tide Regatta of Saltmarsh",
+        "hook": "The Midnight Discovery",
+        "question": "How do you win a race against the incoming tide using only wind-up crabs?",
+        "answer": "By building a spring-loaded catamaran that uses the receding surf as a mechanical launchpad.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -184,61 +184,61 @@
         ],
         "story_beats": [
           {
-            "headline": "A Sour Discovery",
-            "speech": "My traditional pickle barrels are completely empty, and the weekly market tax is due in mere minutes!",
+            "headline": "The Midnight Discovery",
+            "speech": "Look at these old mechanical blueprints! The tide chart proves we can use the undertow to launch.",
             "visual": "signal",
-            "label": "Emergency Notice",
+            "label": "The Blueprint Reveal",
             "story_beat": "reveal",
-            "visual_prompt": "Silas, a frantic inventor in a leather apron, stares at three empty wooden tubs while a glowing red tax notice hovers in the crowded, noisy marketplace.",
+            "visual_prompt": "A young inventor holding a glowing lantern inspects a weathered parchment on a wooden dock at night, surrounded by brass gears.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Valve Assembly",
-            "speech": "If I weld this brass horn valve directly into the fermentation tube, the pressure should scream a merry tune.",
-            "visual": "robot",
-            "label": "The Contraption",
-            "story_beat": "build",
-            "visual_prompt": "Silas enthusiastically solders a tarnished brass trumpet valve onto a bubbling green cabbage vat, sending colorful steam rising toward the canvas market awnings.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Musical Brine",
-            "speech": "Behold the brass-infused crunch! It plays a cheerful polka every time someone bites into a crispy head.",
-            "visual": "door",
-            "label": "Grand Demonstration",
-            "story_beat": "mechanism",
-            "visual_prompt": "Surprised market shoppers gather around the wooden stall, watching a mechanical cabbage sprout brass keys while Silas holds a wrench proudly.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A Melodious Fortune",
-            "speech": "We are entirely sold out of marching produce, and the tax collector is happily dancing away with our profits!",
+            "headline": "Constructing the Hull",
+            "speech": "We must weld these copper floats tightly so the heavy brass clockwork does not sink into the mud.",
             "visual": "ship",
-            "label": "Market Triumph",
+            "label": "Welding the Catamaran",
+            "story_beat": "build",
+            "visual_prompt": "An inventor uses a sputtering blue torch to weld copper pontoons together in a cluttered workshop filled with marine salvage.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Spring-Loaded Release",
+            "speech": "Wind the main tension spring until it clicks three times. When the wave hits, release the trigger!",
+            "visual": "robot",
+            "label": "Trigger Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "An inventor wearing leather goggles pulls a thick lever to lock a massive steel spring into place aboard a miniature vessel.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Crossing the Finish Line",
+            "speech": "The wave is lifting us over the reef! We crossed the finish line first while everyone else stuck in the sand.",
+            "visual": "door",
+            "label": "Triumphant Payoff",
             "story_beat": "payoff",
-            "visual_prompt": "Silas and his cheerful daughter count a mountain of shiny silver coins on their cart while a brass-adorned cabbage plays a farewell march in the background.",
+            "visual_prompt": "A small copper catamaran bursts over a cresting white wave toward a crowded wooden pier decorated with colorful festive banners.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Vibrant stop-motion claymation aesthetic with rich textures, warm sunlight, and detailed mechanical contraptions.",
+          "style": "Whimsical steampunk illustration with vibrant coastal colors and detailed mechanical textures.",
           "characters": {
-            "Silas": "An energetic middle-aged inventor with wild gray hair, wearing a patched brown leather apron and round spectacles.",
-            "Bessie": "Silas's clever teenage daughter wearing a bright blue tunic and carrying a clipboard of frantic calculations."
+            "inventor": "A young person with messy brown hair, wearing a soot-stained leather apron and brass goggles pushed up on their forehead."
           },
           "locations": {
-            "Oakhaven Square": "A bustling, sunlit medieval farmer's market filled with colorful canvas stalls, cobblestone paths, and curious townspeople."
+            "workshop": "A cluttered seaside shack overflowing with spare gears, blueprints, and hanging fishing nets.",
+            "dock": "A weathered wooden pier extending over turquoise ocean waters during a sunny afternoon festival."
           },
           "objects": {
-            "Tax Notice": "A stiff parchment paper glowing with a magical red warning seal.",
-            "Pickle Press": "A towering contraption made of polished copper pipes, wooden barrels, and salvaged brass musical instrument parts."
+            "catamaran": "A twin-hulled vessel made of polished copper and brass, driven by a heavy internal clockwork spring.",
+            "lantern": "An antique brass hurricane lamp casting a warm amber glow."
           }
         },
-        "plot_fingerprint": "6a91c687f8c7587381290d9054d8d05468def53631c68143e9fc06825a5c9e47"
+        "plot_fingerprint": "d3160ade216313cbce47ef7f902bdb5c3021aa2a0103cbc76af644a40648b583"
       },
       "approved": false
     }
