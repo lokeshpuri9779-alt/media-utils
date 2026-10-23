@@ -200,9 +200,18 @@ jobs:
               mkdir -p "$RUNNER_TEMP/astra-ffmpeg"
               dpkg-deb -x "$probe_package" "$RUNNER_TEMP/astra-ffmpeg"
               if [ -x "$RUNNER_TEMP/astra-ffmpeg/usr/bin/ffprobe" ]; then
-                echo "$RUNNER_TEMP/astra-ffmpeg/usr/bin" >> "$GITHUB_PATH"
-                export PATH="$RUNNER_TEMP/astra-ffmpeg/usr/bin:$PATH"
-                echo 'ASTRA_FFPROBE_SOURCE=deb-extract'
+                # The binary from the Ubuntu package may need libav* runtime
+                # dependencies absent from a minimal hosted runner.
+                # Validate before putting it on PATH; never accept an
+                # executable file as proof of a working media probe.
+                if "$RUNNER_TEMP/astra-ffmpeg/usr/bin/ffprobe" -version >/dev/null 2>&1; then
+                  echo "$RUNNER_TEMP/astra-ffmpeg/usr/bin" >> "$GITHUB_PATH"
+                  export PATH="$RUNNER_TEMP/astra-ffmpeg/usr/bin:$PATH"
+                  echo 'ASTRA_FFPROBE_SOURCE=deb-extract'
+                else
+                  echo 'ASTRA_FFPROBE_EXTRACTED_RUNTIME_MISSING=1'
+                  timeout 110s sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ffmpeg || true
+                fi
               fi
             fi
           fi
