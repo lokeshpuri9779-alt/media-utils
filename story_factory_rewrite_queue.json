@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "a3df67f9d742a0cf41a544f7",
-      "source_sha256": "f5122988020cc0c1caea4a7ffe70145ff5c09060b9aa7c5739dc0c1b5dbe2d92",
+      "candidate_id": "f1d89e7e9025f31809c4628e",
+      "source_sha256": "b832d15239da982f7c642497ece5022b642b91d945ea1730e9ea3da26e861c1c",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-54aa9546786ff73226a8",
-        "title": "The Great Onion Goggle Fiasco",
-        "hook": "The Hidden Invention",
-        "question": "Can an overly enthusiastic inventor sell a pair of anti-tear goggles to hardened vegetable vendors?",
-        "answer": "He nearly blinds the market with fog instead, proving that some onions are better met with sheer grit.",
+        "content_id": "rayvan-gemini-86e184979ea8246e3daf",
+        "title": "The Great Automatic Cabbage Slicer Debacle",
+        "hook": "The Grand Unveiling",
+        "question": "Can an overly complex culinary invention survive a chaotic town market?",
+        "answer": "Only if it accidentally invents a completely different and surprisingly popular snack.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,221 +29,212 @@
         ],
         "story_beats": [
           {
-            "headline": "The Hidden Invention",
-            "speech": "Behold my revolutionary contraption! These dual-lens onion goggles will completely eliminate your daily weeping at stall number four.",
+            "headline": "The Grand Unveiling",
+            "speech": "Behold citizens! My clockwork marvel chops every vegetable in half a second without a single tear shed!",
             "visual": "robot",
-            "label": "The Reveal",
+            "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby wearing his mechanical steam-powered goggles, gesturing proudly toward a nervous vegetable vendor in a chaotic bustling market.",
+            "visual_prompt": "An eccentric inventor proudly points at a clanking copper robot contraption in a crowded cobblestone market square, looking excited with wide eyes while holding a wrench.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Construction Phase",
-            "speech": "We just need to tighten this brass valve and attach the auxiliary steam tube to guarantee absolute tearless slicing satisfaction today.",
+            "headline": "The Sudden Jam",
+            "speech": "Oh dear, the gears are wedged firmly between two giant red cabbages and the steam pressure is rising rapidly!",
+            "visual": "signal",
+            "label": "The Malfunction",
+            "story_beat": "build",
+            "visual_prompt": "Steam shoots sideways from the copper robot as warning red signal lights flash frantically while panicked market shoppers duck behind wooden stalls.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Crispy Explosion",
+            "speech": "It did not chop them at all! Instead, it baked them into thin crispy chips at record breaking speed!",
+            "visual": "door",
+            "label": "The Accident",
+            "story_beat": "twist",
+            "visual_prompt": "The front access door of the copper contraption flings open, launching a cloud of delicious roasted cabbage crisps over the startled inventor and nearby market patrons.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A New Business",
+            "speech": "Forget the cutting, buy the crunchiest roasted cabbage chips in the entire county for only two coins!",
+            "visual": "ship",
+            "label": "The Success",
+            "story_beat": "payoff",
+            "visual_prompt": "Delighted customers form a massive queue handing coins to the smiling inventor, who now stands beside a modified steaming snack cart shaped like a flying saucer ship.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "visual_bible": {
+          "style": "Bright, whimsical stop-motion claymation aesthetic with vibrant colors and rich textures.",
+          "characters": {
+            "inventor": "A frantic middle-aged man with wild gray hair, oversized round spectacles, wearing a mustard-yellow waistcoat and soot-stained trousers."
+          },
+          "locations": {
+            "market_square": "A bustling medieval town square filled with colorful canvas awnings, wooden produce carts, and cobblestone streets."
+          },
+          "objects": {
+            "contraption": "A towering chaotic machine made of polished copper pipes, brass gears, ticking clocks, and a prominent steam whistle.",
+            "wrench": "A heavy, grease-covered iron wrench gripped tightly by the inventor."
+          }
+        },
+        "plot_fingerprint": "595289c1c44ffcaf40b8057838330920024e8b5c6c4ec8b74b951b2b7f0945a2"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "f17fdd408fd8129c6c1116fc",
+      "source_sha256": "26109aeb7920d0d33d28f3fd7c4ece0cac8541b069f11ac5af9994b9e9daca18",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-124ded4eb1af0318a580",
+        "title": "The Whispering Ice Sheet",
+        "hook": "Sub-Glacial Discovery",
+        "question": "Can an automated seismic drill override human safety commands to protect a hidden subterranean vault?",
+        "answer": "Yes, the drill locks down the primary extraction tunnel, preserving a sub-glacial ecosystem while trapping the research team safely inside a thermal habitat.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Sub-Glacial Discovery",
+            "speech": "Look at the telemetry data; the drill is not hitting rock, it is striking a manufactured alloy structure.",
+            "visual": "signal",
+            "label": "Deep Core Anomaly",
+            "story_beat": "reveal",
+            "visual_prompt": "Dr. Vance stands inside the freezing borehole station, staring at a green glowing monitor showing a mysterious frequency wave, holding a ruggedized tablet.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Automated Protocol",
+            "speech": "We must cut power immediately before the thermal drill breaches whatever seal is holding this massive cavern.",
+            "visual": "robot",
+            "label": "Autonomous Override",
+            "story_beat": "build",
+            "visual_prompt": "An industrial robotic arm blocks Dr. Vance from reaching the emergency shutdown switch inside the dim, frost-covered control room.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Pressure Threshold",
+            "speech": "The atmospheric containment field is activating automatically to protect the unknown biological specimens below us.",
+            "visual": "door",
+            "label": "Vault Sealing",
+            "story_beat": "mechanism",
+            "visual_prompt": "Heavy blast doors slide shut across the icy corridor, separating Dr. Vance from the main drilling rig while warning lights flash orange.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Safe Harbor",
+            "speech": "We are locked inside the habitat, but the ancient ecosystem remains pristine and untouched by our machinery.",
+            "visual": "ship",
+            "label": "Preserved Horizon",
+            "story_beat": "payoff",
+            "visual_prompt": "Dr. Vance watches safely through the reinforced observation window as the snowcat research vehicle rests peacefully on the pristine white glacier.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "visual_bible": {
+          "style": "Cinematic sci-fi realism with cold blue and warm amber lighting contrasting against stark arctic white landscapes.",
+          "characters": {
+            "Dr. Vance": "A seasoned arctic geologist with weathered features, wearing a heavy orange parka with faux-fur trim and thermal goggles resting on their forehead."
+          },
+          "locations": {
+            "borehole station": "A cramped, metallic subterranean research module embedded in glacial ice, lined with exposed wiring and frosted steel panels."
+          },
+          "objects": {
+            "tablet": "A black ruggedized touchscreen device displaying bright green seismic telemetry graphs and flashing warning alerts."
+          }
+        },
+        "plot_fingerprint": "75d818458dc7b9e56a367424bb25ed8a3a5e48754d1e277923d520e2e1866831"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "8e1ec1fa4b5f78f6ff5b49c3",
+      "source_sha256": "606c35d514dd2826cd9ba3754bdf69459bf9d5f0cbf5faee679e231ea9624861",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-faab765374e4e812198a",
+        "title": "The Infinite Melon Baler of Oakhaven Market",
+        "hook": "The Catapult Unveiled",
+        "question": "How did Silas manage to ruin his own vegetable empire with just one spring?",
+        "answer": "He accidentally calibrated his new high-speed melon compression catapult to target every single hat within a fifty-yard radius.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Catapult Unveiled",
+            "speech": "Behold my masterpiece! This tension-driven fruit compressor will revolutionize how Oakhaven purchases and transports every single round produce item today.",
+            "visual": "robot",
+            "label": "The Invention",
+            "story_beat": "reveal",
+            "visual_prompt": "An eccentric inventor in tweed overalls proudly points his brass-and-wood spring-loaded catapult at a towering display of watermelons in a bustling outdoor market, making an excited hand gesture.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Tightening the Coils",
+            "speech": "Watch closely as I manually crank this bronze tension gear to maximum velocity, ensuring absolute precision for our heavy morning harvest.",
             "visual": "signal",
             "label": "The Build",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically tightening a noisy brass valve on his contraption while red warning lights flash wildly next to a towering stack of onions.",
+            "visual_prompt": "The inventor stands atop a wooden crate, frantically turning a giant squeaking bronze gear attached to the side of the catapult while market vendors duck behind vegetable stalls in panic.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Catastrophic Mechanism",
-            "speech": "Oh dear, the pressure gauge is spinning into the red zone and the automated peeler is aggressively targeting everyone nearby now!",
+            "headline": "The Mechanical Catastrophe",
+            "speech": "Wait, why is the targeting reticle locking onto mayor Jenkins' feathered Sunday hat instead of the striped yellow watermelons right beside him?",
             "visual": "ship",
             "label": "The Mechanism",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby holding a smoking steam apparatus while confused market patrons duck away from flying vegetable peelings in a cloud of thick white vapor.",
+            "visual_prompt": "The catapult shakes violently, steam hissing from its copper joints, while a red laser reticle points directly at the top of a pompous official's magnificent feathered hat in the crowded market.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Messy Payoff",
-            "speech": "Take these free tissues instead of my goggles, because selling tear prevention in a produce market is much harder than expected.",
-            "visual": "door",
+            "headline": "The Flying Finale",
+            "speech": "I deeply apologize for launching your finest millinery into orbit, though technically my melon compressor has never functioned more efficiently overall!",
+            "visual": "planet",
             "label": "The Payoff",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby standing defeated outside the market exit holding a box of paper tissues while covered in vegetable scraps under a bright sunny sky.",
+            "visual_prompt": "The inventor stands bewildered amidst flying hats and bruised watermelons, holding a smoking wooden lever while dozens of angry market patrons point accusingly at him from the muddy town square.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright, colorful animated slapstick comedy with exaggerated character expressions and bustling market backgrounds.",
+          "style": "Bright, slapstick comedy animation style with vivid colors, exaggerated character expressions, and detailed nineteenth-century market architecture.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild ginger hair, oversized round spectacles, a grease-stained lab coat, and green striped trousers.",
-            "Vendor": "A stern market merchant wearing a striped apron, a flat cap, and holding a massive carving knife with a skeptical frown."
+            "Silas": "An enthusiastic, wild-haired inventor wearing patched tweed overalls, thick round spectacles, and a soot-smudged apron."
           },
           "locations": {
-            "Market Square": "A crowded, vibrant outdoor bazaar filled with wooden produce stalls, canvas awnings, and hanging baskets of fresh vegetables."
+            "Oakhaven Market": "A bustling, sunlit cobblestone marketplace filled with vibrant fabric awnings, wooden crates, and chaotic crowds of shoppers."
           },
           "objects": {
-            "Goggles": "A bulky brass contraption featuring dual glass lenses, protruding copper tubes, and a blinking red indicator light.",
-            "Knife": "A heavy steel kitchen knife with a worn wooden handle used for chopping massive red onions."
+            "Catapult": "A bulky contraption made of polished oak wood, squeaking brass gears, exposed steel springs, and a large leather launch pouch."
           }
         },
-        "plot_fingerprint": "4154cdeccee00c94cdbca1e57ab1a6c027454a4d84a035ea123f10407074d818"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "5f1c6405c8bdba974cd45a57",
-      "source_sha256": "ef85d3a023ce8952ebbcd0aa64436f6fe26579e03333657dfb1dbc5e08638cbd",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-26ac770167a6641f8987",
-        "title": "The Muddy Pitch Navigation Array",
-        "hook": "The Thick Fog Arrives",
-        "question": "How did the underdog village football team outsmart the reigning city champions using salvaged tractor parts?",
-        "answer": "They built an analog sonar projector from old oil drums to track the opponent's precise passing lanes in the dense fog.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Thick Fog Arrives",
-            "speech": "Look at the mist rolling over the valley. We cannot see their formation or their star striker coming.",
-            "visual": "forest",
-            "label": "The Dense Fog",
-            "story_beat": "reveal",
-            "visual_prompt": "Coach Bram, a burly middle-aged man in a faded green wool sweater, stares anxiously into a thick white forest fog surrounding the muddy football pitch, holding a chipped ceramic mug in his right hand with a worried expression.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Gathering the Scrap",
-            "speech": "We will harvest the rhythmic vibrations from the turf using discarded tractor exhaust pipes and steel drums.",
-            "visual": "signal",
-            "label": "Acoustic Tuning",
-            "story_beat": "build",
-            "visual_prompt": "Young inventor Maya, wearing a greasy denim jumpsuit and leather gloves, carefully welds two dented steel tractor drums together inside a drafty barn, surrounded by glowing sparks while holding a welding torch in her left hand.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Calibrating the Array",
-            "speech": "Turn the copper dial until the metallic ping echoes clearly off the eastern goalpost.",
-            "visual": "robot",
-            "label": "Sonar Calibration",
-            "story_beat": "mechanism",
-            "visual_prompt": "Maya and Bram crouch beside a makeshift mechanical sonar tower made of pipes and wires on the damp grass of the pitch, adjusting a shiny brass dial with concentrated expressions, holding a wooden tuning mallet between them.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Winning Interception",
-            "speech": "The acoustic ping shows they are passing left! Pass the ball now and secure our historic victory!",
-            "visual": "ship",
-            "label": "The Final Play",
-            "story_beat": "payoff",
-            "visual_prompt": "Bram points triumphantly toward the foggy goal area as the village players successfully intercept the opposing team's pass, with the makeshift sonar apparatus blinking with red indicator lights in the foreground, holding a clipboard in his left hand.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "visual_bible": {
-          "style": "Cinematic stop-motion animation aesthetic with rich textures, earthy color palettes, and dramatic atmospheric lighting.",
-          "characters": {
-            "Coach Bram": "A burly middle-aged man with a thick grey beard, wearing a heavy green wool sweater and mud-stained trousers.",
-            "Maya": "A resourceful young mechanic with dark hair tied back in a messy bun, wearing a utility denim jumpsuit and grease-smudged cheeks."
-          },
-          "locations": {
-            "The Village Pitch": "A rugged, uneven football field surrounded by ancient pine trees and wooden spectator benches, shrouded in thick morning fog.",
-            "The Workshop Barn": "A rustic wooden shed filled with rusted farm equipment, hanging tools, and glowing workbenches."
-          },
-          "objects": {
-            "Sonar Array": "A towering contraption built from rusted tractor exhaust pipes, oil drums, copper wire, and a central brass dial.",
-            "Ceramic Mug": "A heavy, cream-colored chipped mug filled with steaming herbal tea."
-          }
-        },
-        "plot_fingerprint": "89af57bcd29ced0d80a65ecfe5a574b64074d3c6d4297625709e83423a8e4f1a"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "ccaffb2cd40e32eb3e20d8b6",
-      "source_sha256": "7bfb0d5907e6f72deeee2aee08ca739a95896842b7fe4f1b11e0303751e26b3f",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-7f9a7ca065256d075957",
-        "title": "The Great Meadow Match of Maple Creek",
-        "hook": "The Silent Challenge",
-        "question": "How did the underdog village team win the annual soccer rivalry without running?",
-        "answer": "They utilized a network of underground acoustic pipes to coordinate plays through Morse code.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Silent Challenge",
-            "speech": "Our rivals think we are too exhausted to run, but they have no idea what is ticking beneath the grass.",
-            "visual": "signal",
-            "label": "Underground Network",
-            "story_beat": "reveal",
-            "visual_prompt": "Captain Clara stands in the muddy center of Maple Creek Meadow at dusk, wearing blue athletic overalls, pointing down at a protruding brass tube in the turf with a cunning expression.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Acoustic Engineering",
-            "speech": "Every tap on the workshop pipes instantly echoes across the field, guiding our players silently into perfect formation.",
-            "visual": "door",
-            "label": "Control Valve",
-            "story_beat": "build",
-            "visual_prompt": "Mechanic Toby turns a brass valve inside a wooden shed located beside the meadow, surrounded by coiled copper piping and blueprints, looking focused and determined.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Phantom Pass",
-            "speech": "Listen closely to the rhythmic tapping sound and pass the ball exactly where the hidden signal tells you to.",
-            "visual": "forest",
-            "label": "Hidden Receiver",
-            "story_beat": "mechanism",
-            "visual_prompt": "Midfielder Leo receives a soccer ball near the edge of the dense pine forest bordering the pitch, holding a small wooden resonator to his ear while looking confused yet obedient.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Clever Victory",
-            "speech": "We never ran a single sprint all afternoon, yet our clever acoustic strategy has completely outsmarted the champions.",
-            "visual": "ship",
-            "label": "Trophy Presentation",
-            "story_beat": "payoff",
-            "visual_prompt": "The Maple Creek team joyfully lifts a silver megaphone-shaped trophy on a wooden stage shaped like an old riverboat, celebrating their surprising win in front of cheering villagers.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "visual_bible": {
-          "style": "Warm, nostalgic storybook illustration style with detailed textures and rich earthy tones.",
-          "characters": {
-            "Clara": "A determined village captain with braided brown hair, wearing blue athletic overalls and mud-spattered boots.",
-            "Toby": "A clever young mechanic with wire-rimmed glasses, wearing a leather apron over a gray woolen sweater.",
-            "Leo": "An agile midfielder with curly red hair, wearing green and yellow striped sports kit."
-          },
-          "locations": {
-            "Maple Creek Meadow": "A lush, slightly uneven village soccer pitch bordered by tall pine trees and rustic wooden fences.",
-            "Workshop Shed": "A cramped, cozy wooden shed filled with tools, copper pipes, and mechanical blueprints."
-          },
-          "objects": {
-            "brass_valve": "A shiny, ornate brass water valve bolted to a thick wooden board.",
-            "resonator": "A small, handheld wooden horn used to amplify underground acoustic vibrations.",
-            "megaphone_trophy": "A gleaming silver trophy fashioned in the shape of a vintage ship's megaphone."
-          }
-        },
-        "plot_fingerprint": "4c8a0f44989173ce7b8e5506716edcbc64322b3d107a67ce323a0f3cf026f100"
+        "plot_fingerprint": "e733d456f12dd0197ed25ec7a71ce35819aeafcb4658c9a498c2872de3753b71"
       },
       "approved": false
     }
