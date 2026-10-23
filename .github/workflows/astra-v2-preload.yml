@@ -118,12 +118,16 @@ jobs:
           enable-cache: true
       - name: Install rendering stack
         run: |
+          echo "ASTRA_INSTALL_STARTED=$(date -u +%FT%TZ)"
+          python --version
+          df -h .
           # Exact pinned requirements; the verified legacy installer is a
           # fallback when uv or its package source becomes unavailable.
           if command -v uv >/dev/null 2>&1 && timeout 240s uv pip install --system -r requirements.txt; then
             echo 'ASTRA_INSTALL_MODE=uv'
           else
             echo 'ASTRA_UV_FALLBACK=legacy-pip'
+            echo 'ASTRA_INSTALL_FALLBACK_START=1'
             timeout 360s python -m pip install --disable-pip-version-check -r requirements.txt
             echo 'ASTRA_INSTALL_MODE=pip-fallback'
           fi
