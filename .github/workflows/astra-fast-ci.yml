@@ -46,6 +46,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_image_response_safety.py' -v
           python -m unittest discover -s tests -p 'test_gemini_jpeg_normalization.py' -v
           python -m unittest discover -s tests -p 'test_scene_artwork_manifest.py' -v
+          python -m unittest discover -s tests -p 'test_omniroute_review_render_regression.py' -v
       - name: Compile story modules
         run: python -m compileall -q astra_v2
       - name: Run adaptive warehouse contract tests
