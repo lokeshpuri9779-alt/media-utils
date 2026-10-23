@@ -1,0 +1,72 @@
+name: ASTRA Asset Pack Restore Smoke Test
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/astra-asset-pack-restore-smoke.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  restore-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install Pillow
+      - name: Restore validated asset ZIP from successful build
+        uses: actions/download-artifact@v4
+        with:
+          name: astra-original-visual-pack
+          run-id: 39960540392
+          github-token: ${{ github.token }}
+          path: runtime-artifacts/download
+      - name: Extract safely and validate both formats
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          from astra_v2.illustrated_asset_validation import validate_library
+          from astra_v2.quality_asset_selector import select_assets
+          from astra_v2.visual_artifact_backdrop import apply_pack_background
+          from PIL import Image
+          archive=Path('runtime-artifacts/download/astra-visual-pack.zip')
+          assert archive.is_file(), 'pack missing'
+          root=Path('runtime-artifacts/verified-pack').resolve()
+          root.mkdir(parents=True,exist_ok=True)
+          with ZipFile(archive) as z:
+              assert z.testzip() is None
+              for member in z.infolist():
+                  target=(root/member.filename).resolve()
+                  assert target.is_relative_to(root), 'unsafe archive path'
+                  if member.is_dir(): target.mkdir(parents=True,exist_ok=True); continue
+                  assert member.filename.startswith('art/'), 'unexpected archive member'
+                  target.parent.mkdir(parents=True,exist_ok=True)
+                  with z.open(member) as src, target.open('wb') as dest:
+                      import shutil
+                      shutil.copyfileobj(src,dest)
+          report=validate_library(root)
+          assert report['verified_files']==3200, report['verified_files']
+          for fmt, size in [('shorts',(1080,1920)),('long',(1920,1080))]:
+              matches=select_assets(root,kind='background',tags=['forest'],video_format=fmt)
+              assert matches, fmt
+              frame=Image.new('RGB',size,(0,0,0))
+              result=apply_pack_background(frame,{'story_environment':'forest'},
+                  'asset-restore-smoke',root=root,video_format=fmt)
+              assert result.size==size and result.getpixel((size[0]//2,size[1]//2))!=(0,0,0)
+              result.resize((540,960) if fmt=='shorts' else (640,360)).save('runtime-artifacts/'+fmt+'-smoke.png')
+          print('ASTRA_RESTORED_ASSET_PACK=3200 validated; shorts+long smoke previews created')
+          PY
+      - name: Upload preview images
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-asset-pack-smoke-previews
+          path: |
+            runtime-artifacts/shorts-smoke.png
+            runtime-artifacts/long-smoke.png
+          retention-days: 7
+          if-no-files-found: error
