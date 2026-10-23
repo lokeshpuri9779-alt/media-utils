@@ -6,6 +6,8 @@ assets are ignored so the existing renderer remains the safe fallback.
 from __future__ import annotations
 
 import hashlib
+import hmac
+import os
 import json
 import re
 from pathlib import Path
@@ -130,6 +132,24 @@ def load_assets(manifest_path: str | Path = DEFAULT_MANIFEST) -> list[dict]:
             if row.get("review_status") != "approved" or not row.get("review_receipt_sha256"):
                 continue
             if not isinstance(digest, str):
+                continue
+            key = os.getenv("ASTRA_ART_REVIEW_HMAC_KEY", "")
+            decision = row.get("review_decision")
+            if len(key) < 32 or not isinstance(decision, dict):
+                continue
+            if (decision.get("approved") is not True
+                    or decision.get("sha256") != digest
+                    or decision.get("semantic_match") is not True
+                    or decision.get("character_continuity") is not True):
+                continue
+            signed = {"asset_id": row.get("id"), "sha256": digest,
+                      "story_content_id": row.get("story_content_id"),
+                      "scene_id": row.get("scene_id"), "decision": decision}
+            expected = hmac.new(key.encode(), json.dumps(
+                signed, sort_keys=True, separators=(",", ":")).encode(),
+                hashlib.sha256).hexdigest()
+            if not isinstance(row["review_receipt_sha256"], str) or not hmac.compare_digest(
+                    row["review_receipt_sha256"], expected):
                 continue
         # Reject corrupt or disguised files before they enter the approved set.
         try:

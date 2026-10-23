@@ -5,6 +5,7 @@ Disabled by default. Never falls back to paid providers or marks stories approve
 import argparse
 import base64
 import hashlib
+import hmac
 import io
 import json
 import os
@@ -326,6 +327,9 @@ def export_reviewed_render_manifest(preproduction, root, decisions, destination)
     """
     if not isinstance(decisions, dict):
         raise ValueError("Review decisions must be an object")
+    signing_key = os.getenv("ASTRA_ART_REVIEW_HMAC_KEY", "")
+    if len(signing_key) < 32:
+        raise ValueError("Independent review signing key must contain at least 32 characters")
     root = Path(root).resolve()
     destination = Path(destination)
     assets = []
@@ -358,8 +362,15 @@ def export_reviewed_render_manifest(preproduction, root, decisions, destination)
                        "story_content_id": content_id, "scene_id": scene_id,
                        "sha256": row["sha256"],
                        "review_status": "approved",
-                       "review_receipt_sha256": hashlib.sha256(json.dumps(
-                           decision, sort_keys=True).encode()).hexdigest()})
+                       "review_receipt_sha256": hmac.new(signing_key.encode(),
+                           json.dumps({"asset_id": "reviewed-" + request_id,
+                                       "sha256": row["sha256"],
+                                       "story_content_id": content_id,
+                                       "scene_id": scene_id,
+                                       "decision": decision},
+                                      sort_keys=True, separators=(",", ":")).encode(),
+                           hashlib.sha256).hexdigest(),
+                       "review_decision": decision})
     if not assets:
         raise ValueError("No independently approved scene illustrations")
     # Studio resolves asset paths relative to the manifest's grandparent.
