@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-23",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 29,
+  "attempts": 30,
   "confirmed_today": 29,
-  "last_attempt_at": "2026-10-23T13:26:57.234256+00:00",
+  "last_attempt_at": "2026-10-23T14:07:16.033317+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -241,20 +241,46 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "failure",
-  "last_error": "[Errno 2] No such file or directory: 'ffprobe'",
-  "last_preflight_at": "2026-10-23T13:51:58.215590+00:00",
+  "pending": {
+    "j9dB5jlHiSY": {
+      "content_id": "rayvan-gemini-2497130d0430c7d7c1b6",
+      "title": "The Last Ridge Echo",
+      "day": "2026-10-23",
+      "uploaded_at": "2026-10-23T14:07:17.565728+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "77cd97af1ce3c176ddd46d08260ba2dd571ccb58287ce20de9af298ee30df662",
+      "story_beats": [
+        {
+          "speech": "That pulsing red flash on the northern ridge cannot be a trick of the ice. Someone needs us out there now."
+        },
+        {
+          "speech": "We have to push through these frozen pines before the wind cuts our tracks completely away from the trail."
+        },
+        {
+          "speech": "Hold on tightly to the anchor rope. I am dropping the harness down to pull you out of the dark ice."
+        },
+        {
+          "speech": "We made it back to the warmth of the cabin just in time. Rest now, the storm cannot reach us here."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-23T14:05:27.652498+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-23T13:54:37.460251+00:00",
+    "at": "2026-10-23T14:07:17.969810+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
-    "job_status_before_persist": "failure",
+    "job_status_before_persist": "success",
     "dependencies_step": "success",
-    "publish_step": "failure",
+    "publish_step": "success",
     "cover_tests": "",
     "motion_tests": "success",
     "animal_tests": "success",
@@ -933,13 +959,36 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-2497130d0430c7d7c1b6": {
+      "at": "2026-10-23T14:07:16.033302+00:00",
+      "title": "The Last Ridge Echo",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "77cd97af1ce3c176ddd46d08260ba2dd571ccb58287ce20de9af298ee30df662",
+      "story_beats": [
+        {
+          "speech": "That pulsing red flash on the northern ridge cannot be a trick of the ice. Someone needs us out there now."
+        },
+        {
+          "speech": "We have to push through these frozen pines before the wind cuts our tracks completely away from the trail."
+        },
+        {
+          "speech": "Hold on tightly to the anchor rope. I am dropping the harness down to pull you out of the dark ice."
+        },
+        {
+          "speech": "We made it back to the warmth of the cabin just in time. Rest now, the storm cannot reach us here."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-23T13:54:37.460176+00:00",
-    "publication_outcome": "failure",
-    "publication_reason": "[Errno 2] No such file or directory: 'ffprobe'",
-    "character_memory": "not_reported",
+    "at": "2026-10-23T14:07:17.969735+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -947,35 +996,35 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-23T13:54:37.460239+00:00",
+    "at": "2026-10-23T14:07:17.969796+00:00",
     "history_file_present": true,
-    "publication_outcome": "failure",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-23T13:53:12.879419+00:00",
-    "outcome": "failure",
-    "reason": "[Errno 2] No such file or directory: 'ffprobe'",
-    "content_id": "",
-    "video_url": "",
+    "at": "2026-10-23T14:05:44.929631+00:00",
+    "outcome": "processing",
+    "reason": "",
+    "content_id": "rayvan-gemini-2497130d0430c7d7c1b6",
+    "video_url": "https://www.youtube.com/watch?v=j9dB5jlHiSY",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-23T13:54:37.459906+00:00",
+    "at": "2026-10-23T14:07:17.969485+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "failure",
-    "job_status_before_persist": "failure",
-    "outcome": "failure",
-    "reason": "[Errno 2] No such file or directory: 'ffprobe'",
-    "fresh_upload_attempted": false,
+    "publish_step": "success",
+    "job_status_before_persist": "success",
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-23T13:54:37.460169+00:00",
+    "at": "2026-10-23T14:07:17.969728+00:00",
     "collection_status": "collected",
-    "publish_step": "failure",
+    "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
         "eligible": 247,
