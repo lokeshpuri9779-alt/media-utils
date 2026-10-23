@@ -8,6 +8,7 @@ import json
 import os
 import re
 import urllib.request
+import urllib.error
 from io import BytesIO
 from pathlib import Path
 
@@ -54,8 +55,13 @@ def generate_staged_art(story, destination, *, opener=None):
                 "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent",
                 data=json.dumps(body).encode(), method="POST",
                 headers={"Content-Type": "application/json", "x-goog-api-key": key})
-            with opener(request, timeout=90) as response:
-                payload = json.load(response)
+            try:
+                with opener(request, timeout=90) as response:
+                    payload = json.load(response)
+            except urllib.error.HTTPError as exc:
+                if exc.code == 429:
+                    raise ValueError('gemini_image_quota_exhausted_no_retry') from exc
+                raise ValueError('gemini_image_http_' + str(exc.code)) from exc
             parts = [p for c in payload.get("candidates", []) for p in c.get("content", {}).get("parts", [])]
             images = [p["inlineData"] for p in parts if isinstance(p, dict) and "inlineData" in p]
             if len(images) != 1 or not images[0].get("mimeType", "").startswith("image/"):
