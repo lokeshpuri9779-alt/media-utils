@@ -2,6 +2,14 @@ name: ASTRA Ten-Minute Development Checks
 
 # Frequent, read-only engineering checks. No code writes or publishing.
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'astra_v2/omniroute_image_assets.py'
+      - 'tests/test_omniroute_image_assets.py'
+      - 'tests/test_omniroute_image_http_errors.py'
+      - 'tests/test_omni_image_asset_cache_integrity.py'
+      - '.github/workflows/astra-ten-minute-development-checks.yml'
   schedule:
     - cron: '*/10 * * * *'
   workflow_dispatch:
