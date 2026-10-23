@@ -187,16 +187,11 @@ jobs:
           if ! command -v ffprobe >/dev/null; then
             echo 'ASTRA_FFPROBE_MISSING=1'
             timeout 45s sudo apt-get update -qq -o Acquire::Retries=0 || true
-            timeout 90s sudo DEBIAN_FRONTEND=noninteractive apt-get download ffmpeg || true
-            probe_package="$(find . -maxdepth 1 -name 'ffmpeg_*.deb' -print -quit)"
-            if [ -n "$probe_package" ]; then
-              mkdir -p "$RUNNER_TEMP/astra-ffmpeg"
-              dpkg-deb -x "$probe_package" "$RUNNER_TEMP/astra-ffmpeg"
-              if [ -x "$RUNNER_TEMP/astra-ffmpeg/usr/bin/ffprobe" ]; then
-                echo "$RUNNER_TEMP/astra-ffmpeg/usr/bin" >> "$GITHUB_PATH"
-                export PATH="$RUNNER_TEMP/astra-ffmpeg/usr/bin:$PATH"
-                echo 'ASTRA_FFPROBE_SOURCE=deb-extract'
-              fi
+            # Install the probe and its linked libraries together. Extracting only
+            # the ffmpeg .deb leaves ffprobe unable to load libav* at runtime.
+            timeout 120s sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ffmpeg || true
+            if command -v ffprobe >/dev/null && ffprobe -version >/dev/null 2>&1; then
+              echo 'ASTRA_FFPROBE_SOURCE=apt-with-dependencies'
             fi
           fi
           command -v ffmpeg || { echo 'ASTRA_FFMPEG_UNAVAILABLE=1'; exit 1; }
