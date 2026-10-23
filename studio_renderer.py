@@ -1111,6 +1111,9 @@ def render_frame(plan,t,genre,total):
                             str(s.get('headline') or ''))
     variant = int.from_bytes(hashlib.sha256(visual_identity.encode()).digest()[:2], 'big') % (24 if genre == 'fiction' else 6)
     im=background(genre, variant).copy()
+    if os.getenv('ASTRA_ASSET_PACK_ENABLED', '0') == '1':
+        from astra_v2.visual_artifact_backdrop import apply_pack_background
+        im = apply_pack_background(im, s, visual_identity, video_format='shorts')
     # Opt-in visual artifact backdrops: keep publisher default unchanged until
     # full-render quality validation approves the new visual treatment.
     if genre == 'fiction' and os.getenv('ASTRA_VISUAL_ARTIFACT_BACKDROPS', '0') == '1':
