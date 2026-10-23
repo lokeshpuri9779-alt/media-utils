@@ -1,0 +1,56 @@
+name: ASTRA - Approved Lantern Artwork Test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  stage:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      ASTRA_GEMINI_ART_ENABLED: '1'
+      ASTRA_GEMINI_IMAGE_MODEL: ${{ vars.ASTRA_GEMINI_IMAGE_MODEL }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      ASTRA_EDITORIAL_STORIES_FILE: runtime-artwork-test-editorial/stories.json
+      ASTRA_EDITORIAL_REVIEWS_FILE: runtime-artwork-test-editorial/decisions.json
+      ASTRA_CONTENT_ID: astra-candidate-lantern-beneath-ice-20261023
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install image validation
+        run: python -m pip install --disable-pip-version-check Pillow
+      - name: Restore complete persistent publication history
+        shell: bash
+        run: |
+          git fetch origin astra-state
+          for f in astra_v2_state.json astra_story_history.json astra_duplicate_protection.json runtime-health/ai-reviewed-stories.json runtime-health/ai-reviewed-decisions.json; do
+            mkdir -p "$(dirname "$f")"
+            if git cat-file -e "origin/astra-state:$f" 2>/dev/null; then
+              git show "origin/astra-state:$f" > "$f"
+            fi
+          done
+          test -s astra_v2_state.json
+          test -s astra_story_history.json
+          test -s astra_duplicate_protection.json
+      - name: Materialize owner-approved hash-bound artwork review
+        run: python -m astra_v2.materialize_artwork_test_review
+      - name: Stage unapproved images after live history and editorial gate
+        run: python -m astra_v2.stage_editorial_art --content-id "$ASTRA_CONTENT_ID" --destination runtime-art-staging
+      - name: Verify image integrity and geometry
+        run: python -m astra_v2.staged_art_technical_review runtime-art-staging/staging-manifest.json --output runtime-art-staging/technical-review.json
+      - name: Independent Gemini multimodal image review
+        env:
+          ASTRA_GEMINI_ART_REVIEW_MODEL: ${{ vars.ASTRA_GEMINI_ART_REVIEW_MODEL }}
+        run: python -m astra_v2.review_editorial_art --content-id "$ASTRA_CONTENT_ID" --manifest runtime-art-staging/staging-manifest.json --output runtime-art-staging/semantic-review.json
+      - name: Save artwork for independent review only
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-lantern-art-${{ github.run_id }}
+          path: runtime-art-staging/
+          if-no-files-found: error
+          retention-days: 7
