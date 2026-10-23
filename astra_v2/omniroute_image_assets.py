@@ -44,7 +44,8 @@ def generate_image(prompt, *, requester=None):
         payload = json.dumps({"prompt": prompt[:2048], "steps": 4}).encode()
     elif native_gemini:
         payload = json.dumps({"contents": [{"parts": [{"text": prompt}]}],
-                              "generationConfig": {"responseModalities": ["IMAGE"]}}).encode()
+                              "generationConfig": {"responseModalities": ["IMAGE"],
+                                                   "imageConfig": {"aspectRatio": "9:16"}}}).encode()
     else:
         payload = json.dumps({"model": model, "prompt": prompt, "size": "1024x1536",
                               "response_format": "b64_json"}).encode()
