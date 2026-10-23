@@ -101,6 +101,27 @@ class ImageAssetsTests(unittest.TestCase):
             failures = [asset for asset in result["assets"] if asset["status"] == "generation_failed"]
             self.assertEqual(failures[0]["error_detail"], "Image provider HTTP 403 Cloudflare code=10000")
 
+    def test_http_429_stops_subsequent_provider_calls(self):
+        queue = {"rewrites": [{"status": "awaiting_independent_editorial_approval",
+                  "story": {"title": "New story", "content_id": "quota-test",
+                            "story_beats": [
+                                {"speech": "A first event occurs."},
+                                {"speech": "A second event occurs."},
+                                {"speech": "A third event occurs."}]}}]}
+        calls = []
+        def quota_limited(prompt):
+            calls.append(prompt)
+            raise ValueError("Image provider HTTP 429 Cloudflare code=4006")
+        with tempfile.TemporaryDirectory() as root:
+            result = preproduce(queue, root, generator=quota_limited, limit=10)
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(result["provider_calls"], 1)
+        self.assertEqual(result["status"], "provider_quota_exhausted")
+        self.assertEqual(result["assets"][0]["status"], "generation_failed")
+        self.assertTrue(all(asset["status"] == "provider_quota_exhausted"
+                            for asset in result["assets"][1:]))
+        self.assertTrue(all(not asset["production_ready"] for asset in result["assets"]))
+
     def test_immutable_deduplication_and_corruption(self):
         with tempfile.TemporaryDirectory() as root:
             a = store_asset(png(), root, kind="scene", prompt="first")
