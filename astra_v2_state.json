@@ -3,7 +3,7 @@
   "day": "2026-10-23",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 11,
-  "confirmed_today": 10,
+  "confirmed_today": 11,
   "last_attempt_at": "2026-10-23T04:07:09.803341+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -87,57 +87,38 @@
       "format": "short",
       "uploaded_at": "2026-10-23T03:34:33.041943+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "0B6iFiIY0WY": {
-      "content_id": "moon-tidal-lock-v1",
+    },
+    "moon-tidal-lock-v1": {
+      "video_id": "0B6iFiIY0WY",
+      "confirmed_at": "2026-10-23T04:08:15.918415+00:00",
       "title": "Why We Always See the Same Side of the Moon",
-      "day": "2026-10-23",
-      "uploaded_at": "2026-10-23T04:07:11.927414+00:00",
-      "genre": "space",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "",
-      "story_beats": [
-        {
-          "speech": "The Moon rotates. You just cannot see the spin from Earth."
-        },
-        {
-          "speech": "Watch the marker. One spin takes the same time as one orbit."
-        },
-        {
-          "speech": "That is why nearly the same side always faces us."
-        },
-        {
-          "speech": "This is the far side. Spacecraft can see it. Earth cannot directly."
-        }
-      ],
+      "uploaded_at": "2026-10-23T04:07:11.927414+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-23T04:06:30.521060+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-23T04:08:15.532233+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-23T04:07:12.231901+00:00",
+    "at": "2026-10-23T04:08:15.999674+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-22T21:15:09.721483+00:00",
   "reserved": {
@@ -396,10 +377,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-23T04:07:12.231825+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-23T04:08:15.999590+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -407,9 +388,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-23T04:07:12.231887+00:00",
+    "at": "2026-10-23T04:08:15.999659+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -421,21 +402,21 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-23T04:07:12.231740+00:00",
-    "preflight_due": "true",
+    "at": "2026-10-23T04:08:15.999538+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "outcome": "published",
+    "reason": "min_interval",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-23T04:07:12.231819+00:00",
-    "collection_status": "missing_diagnostics",
-    "publish_step": "success",
+    "at": "2026-10-23T04:08:15.999585+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
     "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
