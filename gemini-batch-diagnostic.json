@@ -1,14 +1,36 @@
 {
-  "observed_at": "2026-10-23T06:51:26.511893+00:00",
-  "generated": 20,
+  "observed_at": "2026-10-23T12:50:49.260176+00:00",
+  "generated": 14,
   "requested": 20,
-  "generation_failures": [],
-  "reviewed": 20,
-  "approved": 13,
+  "generation_failures": [
+    {
+      "index": 1,
+      "reason": "ValueError"
+    },
+    {
+      "index": 2,
+      "reason": "ValueError"
+    },
+    {
+      "index": 3,
+      "reason": "ValueError"
+    },
+    {
+      "index": 4,
+      "reason": "ValueError"
+    },
+    {
+      "index": 5,
+      "reason": "ValueError"
+    },
+    {
+      "index": 9,
+      "reason": "ValueError"
+    }
+  ],
+  "reviewed": 14,
+  "approved": 7,
   "review_issues": [
-    "The causal mechanism and narrative arc are overly formulaic and derivative of standard AI-generated sci-fi shorts, raising originality concerns regarding repetition of recently published premises.",
-    "The premise, setting, and title ('The Maintenance Officer and the Nebula Rift') closely mirror the structure and motifs of recently published titles in the comparison history, such as 'The Plasma Welder's Rift on Station V-7' and various station/engineer-themed microfiction.",
-    "ai_editorial_rejection",
     "review_failed:HTTP_429",
     "review_failed:ValueError",
     "review_provider:rate_limited"
