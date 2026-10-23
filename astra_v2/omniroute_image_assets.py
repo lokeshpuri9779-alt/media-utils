@@ -41,7 +41,7 @@ def generate_image(prompt, *, requester=None):
     if cloudflare:
         if model != "@cf/black-forest-labs/flux-1-schnell" or not endpoint.endswith("/ai/run/" + model):
             raise ValueError("Cloudflare endpoint/model mismatch or unsupported model")
-        payload = json.dumps({"prompt": prompt[:2048], "steps": 4, "width": 576, "height": 1024}).encode()
+        payload = json.dumps({"prompt": prompt[:2048], "steps": 4}).encode()
     elif native_gemini:
         payload = json.dumps({"contents": [{"parts": [{"text": prompt}]}],
                               "generationConfig": {"responseModalities": ["IMAGE"],
