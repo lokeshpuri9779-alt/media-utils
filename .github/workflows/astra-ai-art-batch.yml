@@ -1,0 +1,91 @@
+name: ASTRA AI Artwork Batch (Review Only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_free:
+        description: 'Enter FREE after checking provider allowance and quota'
+        required: true
+        type: string
+      max_images:
+        description: 'Maximum provider requests this run (1-10)'
+        required: true
+        default: '3'
+        type: choice
+        options: ['1', '2', '3', '5', '10']
+
+permissions:
+  contents: read
+
+jobs:
+  preproduce:
+    if: inputs.confirm_free == 'FREE'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      ASTRA_OMNI_IMAGE_ENDPOINT: ${{ vars.ASTRA_OMNI_IMAGE_ENDPOINT }}
+      ASTRA_OMNI_IMAGE_MODEL: ${{ vars.ASTRA_OMNI_IMAGE_MODEL }}
+      ASTRA_OMNI_IMAGE_API_KEY: ${{ secrets.ASTRA_OMNI_IMAGE_API_KEY }}
+      ASTRA_OMNI_IMAGE_FREE_CONFIRMED: '1'
+      ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
+      ASTRA_IMAGE_LIMIT: ${{ inputs.max_images }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install image validator
+        run: python -m pip install --disable-pip-version-check 'Pillow>=10,<12'
+      - name: Validate provider adapter offline
+        run: python -m unittest discover -s tests -p 'test_omniroute_image_assets.py' -v
+      - name: Validate free-only provider configuration
+        run: |
+          python - <<'PY'
+          import os
+          from astra_v2.omniroute_image_assets import image_endpoint
+          if image_endpoint() is None or not os.getenv("ASTRA_OMNI_IMAGE_API_KEY"):
+              raise SystemExit("AI image provider configuration unavailable; no network call made")
+          print("ASTRA_IMAGE_PROVIDER_CONFIGURED=1")
+          PY
+      - name: Generate scene artwork for existing editorial queue
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          from astra_v2.omniroute_image_assets import preproduce
+          queue = Path("runtime-artifacts/ai-art-batch/queue.json")
+          queue.parent.mkdir(parents=True, exist_ok=True)
+          source = Path("editorial/reviewed_stories.json")
+          data = json.loads(source.read_text(encoding="utf-8"))
+          stories = data.get("stories", [])
+          if not isinstance(stories, list):
+              raise SystemExit("Editorial stories must be a list")
+          rewrites = []
+          for story in stories:
+              if not isinstance(story, dict) or not story.get("production_ready"):
+                  continue
+              if not story.get("content_id") or not story.get("story_beats"):
+                  continue
+              rewrites.append({"status": "awaiting_independent_editorial_approval",
+                               "story": story})
+          queue.write_text(json.dumps({"rewrites": rewrites}, indent=2) + "\n")
+          if not rewrites:
+              print("ASTRA_IMAGE_BATCH=NO_ELIGIBLE_STORIES")
+          else:
+              result = preproduce({"rewrites": rewrites},
+                                  Path("runtime-artifacts/ai-art-batch/warehouse"),
+                                  limit=int(os.environ["ASTRA_IMAGE_LIMIT"]))
+              (queue.parent / "review_only.json").write_text(
+                  json.dumps(result, indent=2) + "\n")
+              print("ASTRA_IMAGE_BATCH=" + result["status"])
+              print("ASTRA_IMAGE_PROVIDER_CALLS=" + str(result["provider_calls"]))
+          PY
+      - name: Archive review-only scene images and manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-ai-art-batch-${{ github.run_id }}
+          path: runtime-artifacts/ai-art-batch/
+          retention-days: 14
+          if-no-files-found: warn
