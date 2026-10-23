@@ -219,6 +219,227 @@
         }
       },
       "plot_fingerprint": "f81568c7b81008297a81a98746241aa8d3f85bd7c30e7d33f00801ef3bde818e"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-0614690453e154c48290",
+      "title": "The Drift of the Iron Nebula",
+      "hook": "Atmospheric Warning",
+      "question": "Can the crew repair the thruster before they fall into the planet's atmosphere?",
+      "answer": "Yes, by trusting the engineer's unorthodox patch under extreme pressure.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "Atmospheric Warning",
+          "speech": "We cannot wait for standard diagnostics! The hull stress is breaking our structural integrity right now.",
+          "visual": "planet",
+          "label": "The Descent",
+          "story_beat": "reveal",
+          "visual_prompt": "Commander Vex standing in the command chair, pointing toward a massive glowing red planet filling the main viewport, wearing a pressurized uniform, with sparks flying from the console.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Disagreement",
+          "speech": "If we vent the starboard coolant line manually, we risk freezing the entire propulsion matrix permanently.",
+          "visual": "ship",
+          "label": "The Valve Room",
+          "story_beat": "build",
+          "visual_prompt": "Engineer Dax standing beside a massive cracked pipe inside the narrow engine corridor, holding a wrench tightly while glaring at the overhead intercom speaker.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Emergency Override",
+          "speech": "There is no other way to stabilize the descent vector before we cross the critical thermal threshold.",
+          "visual": "robot",
+          "label": "The Core",
+          "story_beat": "mechanism",
+          "visual_prompt": "Maintenance automaton Unit Nine plunging its metallic claw into the sparking auxiliary fuse box, surrounded by swirling gray smoke inside the dimly lit propulsion chamber.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Harbor",
+          "speech": "The thrusters are firing cleanly again. We cleared the gravitational pull and secured our course.",
+          "visual": "signal",
+          "label": "The Horizon",
+          "story_beat": "payoff",
+          "visual_prompt": "Commander Vex and Engineer Dax smiling together in the quiet cockpit as a steady green navigation beacon pulses calmly on the main dashboard.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "visual_bible": {
+        "style": "Cinematic gritty science fiction with realistic textures, cinematic lighting, and detailed mechanical wear.",
+        "characters": {
+          "Commander Vex": "A determined human officer with short graying hair, wearing a dark blue utilitarian jumpsuit with bronze shoulder insignia.",
+          "Engineer Dax": "A pragmatic technician with grease smudges on her cheek, wearing a heavy canvas vest over a reinforced orange thermal undersuit.",
+          "Unit Nine": "A bipedal maintenance robot with a polished brass chassis, glowing blue optical sensors, and articulated multi-tool manipulator arms."
+        },
+        "locations": {
+          "Command Bridge": "A curved metallic room dominated by a panoramic viewport overlooking space, featuring worn leather chairs and glowing amber display panels.",
+          "Engine Corridor": "A cramped cylindrical hallway lined with exposed cables, pressurized valves, and flickering fluorescent ceiling lights."
+        },
+        "objects": {
+          "Main Console": "A large curved desk covered in tactile switches, sliding levers, and a central holographic display projecting planetary telemetry.",
+          "Thermal Wrench": "A heavy iron tool with an insulated grip and glowing digital torque indicators along its handle."
+        }
+      },
+      "plot_fingerprint": "8029511cfdcc57c25779a787e1362de889afea6c5761bb7c4d4d51ac235675a9"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-2497130d0430c7d7c1b6",
+      "title": "The Last Ridge Echo",
+      "hook": "The Distant Beacon",
+      "question": "Can a lone rescuer find a missing climber before the blizzard claims the summit?",
+      "answer": "Through unwavering determination and a glowing distress signal, she guides the lost traveler to safety.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Distant Beacon",
+          "speech": "That pulsing red flash on the northern ridge cannot be a trick of the ice. Someone needs us out there now.",
+          "visual": "signal",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Close up of Lena holding a blinking orange emergency beacon on a snowy ledge, her expression determined, wearing a heavy blue parka and snow goggles, surrounded by swirling white mist.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Ascending the Wild Woods",
+          "speech": "We have to push through these frozen pines before the wind cuts our tracks completely away from the trail.",
+          "visual": "forest",
+          "label": "The Climb",
+          "story_beat": "build",
+          "visual_prompt": "Wide shot of Lena trekking upward through a dense, snow-laden pine forest at twilight, gripping a sturdy wooden ice axe with both hands, her breath pluming in the freezing air.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Unlocking the Crevasse",
+          "speech": "Hold on tightly to the anchor rope. I am dropping the harness down to pull you out of the dark ice.",
+          "visual": "door",
+          "label": "The Rescue",
+          "story_beat": "mechanism",
+          "visual_prompt": "Medium shot of Lena kneeling at the edge of a deep blue glacial crevasse, lowering a coiled yellow rescue rope into the dark opening, wearing a red climbing helmet with a mounted headlamp.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Return",
+          "speech": "We made it back to the warmth of the cabin just in time. Rest now, the storm cannot reach us here.",
+          "visual": "signal",
+          "label": "The Sanctuary",
+          "story_beat": "payoff",
+          "visual_prompt": "Interior shot of Lena handing a steaming tin mug to a wrapped survivor inside a cozy wooden cabin, a warm yellow lantern resting on the table, both smiling with relief.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "visual_bible": {
+        "style": "Realistic cinematic winter photography with rich textures, dramatic lighting, and deep blues and warm amber accents.",
+        "characters": {
+          "Lena": "A resilient human mountain rescuer in her early thirties, with braided brown hair, sharp features, wearing a weatherproof blue parka and red climbing helmet."
+        },
+        "locations": {
+          "Summit Ridge": "A jagged, wind-swept alpine mountain ridge covered in deep snowdrifts and ice sheets.",
+          "Pine Forest": "A thick, dense woodland of towering evergreen trees heavily laden with fresh white snow.",
+          "Rescue Cabin": "A small, rustic timber shelter lit by a warm interior oil lamp, featuring a stone fireplace."
+        },
+        "objects": {
+          "Emergency Beacon": "A handheld orange electronic device with a rapidly blinking red distress light.",
+          "Ice Axe": "A sturdy black metal mountaineering axe with a curved pick and wooden grip.",
+          "Rescue Rope": "A bright yellow, heavy-duty braided nylon rope used for hauling climbers."
+        }
+      },
+      "plot_fingerprint": "77cd97af1ce3c176ddd46d08260ba2dd571ccb58287ce20de9af298ee30df662"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-52b7ee8a7be0a30ea474",
+      "title": "The Mystery of Platform Four and the Midnight Key",
+      "hook": "The Midnight Freeze",
+      "question": "Why did the brass clock stop every night at midnight precisely?",
+      "answer": "A stray mechanical fox was hiding inside the gearwork to keep warm.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Midnight Freeze",
+          "speech": "Look closely at the railway clock, detective. It halts at midnight every single evening without fail.",
+          "visual": "signal",
+          "label": "The Stalled Clock",
+          "story_beat": "reveal",
+          "visual_prompt": "A tall human detective in a wool coat pointing a brass pocket watch at a towering station clock frozen at midnight, inside a gloomy platform station, holding the watch firmly in his right hand.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Following the Tracks",
+          "speech": "We must follow the tiny metallic footprints left upon the dusted iron rails leading into the maintenance tunnel.",
+          "visual": "door",
+          "label": "Metallic Tracks",
+          "story_beat": "build",
+          "visual_prompt": "A detective and a glowing mechanical fox inspecting tiny silver paw prints on a dark railway track, standing outside a heavy iron maintenance door which is slightly ajar.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Mechanism",
+          "speech": "Listen carefully to the gentle ticking sounds coming from inside the central brass mechanism box.",
+          "visual": "robot",
+          "label": "Inside the Gearbox",
+          "story_beat": "mechanism",
+          "visual_prompt": "A curious mechanical fox peeking its glowing blue head out of an open clockwork gear assembly, with brass cogs surrounding it inside a dimly lit station workshop.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Warm Refuge",
+          "speech": "It turns out our clever little metallic friend only wanted a cozy place to sleep away from the cold wind.",
+          "visual": "ship",
+          "label": "A Cozy Rest",
+          "story_beat": "payoff",
+          "visual_prompt": "A cheerful detective smiling as he feeds a tiny mechanical fox a small metal nut, sitting on a wooden station bench next to a vintage steam locomotive.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "visual_bible": {
+        "style": "Victorian railway mystery illustration with warm amber lighting and crisp linework",
+        "characters": {
+          "detective": "A tall middle-aged man wearing a tweed trench coat, round spectacles, and a flat cap with a determined expression",
+          "fox": "A small, nimble mechanical fox made of polished brass and copper with soft glowing blue LED eyes"
+        },
+        "locations": {
+          "station": "A grand 19th-century railway station with arched iron beams, steam lingering in the air, and cobblestone platforms",
+          "workshop": "A cluttered maintenance room filled with spare gears, tools, and blueprint rolls"
+        },
+        "objects": {
+          "pocket_watch": "An antique silver pocket watch with intricate floral engravings on the casing",
+          "station_clock": "A massive circular brass wall clock with Roman numerals and thick black hands"
+        }
+      },
+      "plot_fingerprint": "9eaf54a5e955b234a2f13dc31f8df1655bfebb6d433cff0640efd570f4f53794"
     }
   ]
 }
