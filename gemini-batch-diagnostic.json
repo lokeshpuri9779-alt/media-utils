@@ -1,15 +1,15 @@
 {
-  "observed_at": "2026-10-22T19:25:11.924733+00:00",
-  "generated": 12,
+  "observed_at": "2026-10-23T00:55:36.471886+00:00",
+  "generated": 15,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 12,
+      "index": 15,
       "reason": "provider_http_429"
     }
   ],
-  "reviewed": 12,
-  "approved": 1,
+  "reviewed": 15,
+  "approved": 3,
   "review_issues": [
     "review_failed:HTTP_429",
     "review_provider:rate_limited"
