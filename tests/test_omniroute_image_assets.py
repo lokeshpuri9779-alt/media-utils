@@ -68,7 +68,8 @@ class ImageAssetsTests(unittest.TestCase):
         def requester(request):
             payload = json.loads(request.data)
             self.assertEqual(payload["steps"], 4)
-            self.assertEqual((payload["width"], payload["height"]), (576, 1024))
+            self.assertNotIn("width", payload)
+            self.assertNotIn("height", payload)
             self.assertEqual(payload["prompt"], "scene")
             return json.dumps({"success": True, "result": {"image": base64.b64encode(png()).decode()}}).encode()
         with patch.dict("os.environ", env, clear=True):
