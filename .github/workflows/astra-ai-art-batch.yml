@@ -29,6 +29,10 @@ jobs:
       ASTRA_OMNI_IMAGE_API_KEY: ${{ secrets.ASTRA_OMNI_IMAGE_API_KEY }}
       ASTRA_OMNI_IMAGE_FREE_CONFIRMED: '1'
       ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
+      ASTRA_OMNI_IMAGE_FALLBACK_ENDPOINT: ${{ vars.ASTRA_OMNI_IMAGE_FALLBACK_ENDPOINT }}
+      ASTRA_OMNI_IMAGE_FALLBACK_MODEL: ${{ vars.ASTRA_OMNI_IMAGE_FALLBACK_MODEL }}
+      ASTRA_OMNI_IMAGE_FALLBACK_API_KEY: ${{ secrets.ASTRA_OMNI_IMAGE_FALLBACK_API_KEY }}
+      ASTRA_OMNI_IMAGE_FALLBACK_FREE_CONFIRMED: ${{ vars.ASTRA_OMNI_IMAGE_FALLBACK_FREE_CONFIRMED }}
       ASTRA_IMAGE_LIMIT: ${{ inputs.max_images }}
     steps:
       - uses: actions/checkout@v4
@@ -45,10 +49,11 @@ jobs:
         run: |
           python - <<'PY'
           import os
-          from astra_v2.omniroute_image_assets import image_endpoint
-          if image_endpoint() is None or not os.getenv("ASTRA_OMNI_IMAGE_API_KEY"):
+          from astra_v2.omniroute_image_assets import configured_free_image_providers
+          providers = configured_free_image_providers()
+          if not providers or any(not key for _, key in providers):
               raise SystemExit("AI image provider configuration unavailable; no network call made")
-          print("ASTRA_IMAGE_PROVIDER_CONFIGURED=1")
+          print("ASTRA_IMAGE_PROVIDER_CONFIGURED=" + str(len(providers)))
           PY
       - name: Restore previous verified artwork cache when available
         env:
