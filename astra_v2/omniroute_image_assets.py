@@ -246,6 +246,7 @@ def preproduce(queue, root, *, generator=generate_image, limit=3):
     cache.mkdir(parents=True, exist_ok=True)
     output, calls = [], 0
     provider_missing = False
+    provider_quota_exhausted = False
     for item in queue.get("rewrites", []):
         if item.get("status") != "awaiting_independent_editorial_approval":
             continue
@@ -286,8 +287,9 @@ def preproduce(queue, root, *, generator=generate_image, limit=3):
                     # A cache entry cannot grant production approval.
                     row.update(approved=False, production_ready=False,
                                continuity_status="not_verified", status="cached_review_only")
-                elif calls >= limit or provider_missing:
-                    row["status"] = "provider_not_configured" if provider_missing else "pending_budget"
+                elif calls >= limit or provider_missing or provider_quota_exhausted:
+                    row["status"] = ("provider_quota_exhausted" if provider_quota_exhausted else
+                                     "provider_not_configured" if provider_missing else "pending_budget")
                 else:
                     calls += 1
                     image = generator(prompt)
@@ -310,10 +312,13 @@ def preproduce(queue, root, *, generator=generate_image, limit=3):
                                           "Image resolution too small",
                                           "Scenes must be portrait")):
                     diagnostic = type(exc).__name__
+                if diagnostic.startswith("Image provider HTTP 429"):
+                    provider_quota_exhausted = True
                 row.update(status="generation_failed", error=type(exc).__name__,
                            error_detail=diagnostic[:120])
             output.append(row)
-    return {"status": "provider_not_configured" if provider_missing else "review_only",
+    return {"status": ("provider_quota_exhausted" if provider_quota_exhausted else
+                       "provider_not_configured" if provider_missing else "review_only"),
             "provider_calls": calls, "assets": output,
             "production_ready": False, "continuity_status": "not_verified"}
 
