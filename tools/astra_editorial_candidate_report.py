@@ -51,8 +51,10 @@ def build_report(limit=100, rotation=0, seen=None):
             if buckets[mechanism] and len(selected) < limit:
                 selected.append(buckets[mechanism].pop(0))
     # Triage is diagnostic only: a fresh fingerprint cannot authorize publication.
+    batch_seen_mechanisms = set(seen_mechanisms)
     for item in selected:
-        repeated_premise = item["mechanism"] in seen_mechanisms
+        repeated_premise = item["mechanism"] in batch_seen_mechanisms
+        batch_seen_mechanisms.add(item["mechanism"])
         item["editorial_priority"] = "rewrite_required" if repeated_premise else "individual_review"
         item["editorial_issues"] = (
             ["reused_causal_premise_with_cosmetic_variation"] if repeated_premise else []
