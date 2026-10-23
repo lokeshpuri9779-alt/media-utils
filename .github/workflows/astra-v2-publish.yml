@@ -172,8 +172,8 @@ jobs:
             timeout 360s python -m pip install --disable-pip-version-check -r requirements.txt
             echo 'ASTRA_INSTALL_MODE=pip-fallback'
           fi
-          # Reuse the tested preload approach: avoid full apt ffmpeg install.
-          if ! command -v ffmpeg >/dev/null; then
+          # Use the wheel-bundled encoder without relying on slow Ubuntu mirrors.
+          if ! command -v ffmpeg >/dev/null 2>&1; then
             python - <<'PY'
           import imageio_ffmpeg
           from pathlib import Path
@@ -181,32 +181,24 @@ jobs:
           binary = Path(imageio_ffmpeg.get_ffmpeg_exe())
           assert binary.is_file() and os.access(binary, os.X_OK)
           target = Path(os.environ["RUNNER_TEMP"]) / "ffmpeg"
-          target.symlink_to(binary)
+          if not target.exists():
+              target.symlink_to(binary)
           with open(os.environ["GITHUB_PATH"], "a", encoding="utf-8") as out:
-              out.write(str(target.parent) + "\n")
+              out.write(str(target.parent) + "\\n")
           print("ASTRA_FFMPEG_SOURCE=imageio-ffmpeg")
           PY
             export PATH="$RUNNER_TEMP:$PATH"
           fi
-          if ! command -v ffprobe >/dev/null; then
+          # Only ffprobe is missing: fetch the system package with a strict
+          # deadline. A mirror timeout fails closed, never silently publishes.
+          if ! command -v ffprobe >/dev/null 2>&1; then
             echo 'ASTRA_FFPROBE_MISSING=1'
             timeout 45s sudo apt-get update -qq -o Acquire::Retries=0 || true
-            # Install the probe and its linked libraries together. Extracting only
-            # the ffmpeg .deb leaves ffprobe unable to load libav* at runtime.
-            timeout 120s sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ffmpeg || true
-            if command -v ffprobe >/dev/null && ffprobe -version >/dev/null 2>&1; then
-              echo 'ASTRA_FFPROBE_SOURCE=apt-with-dependencies'
-            fi
+            timeout 150s sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ffmpeg || true
           fi
           command -v ffmpeg || { echo 'ASTRA_FFMPEG_UNAVAILABLE=1'; exit 1; }
           command -v ffprobe || { echo 'ASTRA_FFPROBE_UNAVAILABLE=1'; exit 1; }
-          # Extracted ffprobe may lack its system shared libraries. Detect that
-          # before rendering instead of misclassifying a healthy MP4 as corrupt.
-          ffprobe -version >/dev/null 2>&1 || {
-            echo 'ASTRA_FFPROBE_RUNTIME_UNUSABLE=1'
-            ldd "$(command -v ffprobe)" | grep 'not found' || true
-            exit 1
-          }
+          ffprobe -version >/dev/null 2>&1 || { echo 'ASTRA_FFPROBE_RUNTIME_UNUSABLE=1'; exit 1; }
 
       # Long-form cover tests execute in astra-v2-longform.yml, not the Shorts publisher.
       - name: Enforce real frame-to-frame motion
