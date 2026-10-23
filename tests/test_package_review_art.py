@@ -29,6 +29,31 @@ class ReviewArtZipTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "checksum"):
                 package_review_art(root, output)
 
+    def test_partial_story_coverage_is_explicitly_not_complete(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            image = root / "warehouse" / "scenes" / "sample.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b"test bytes")
+            story = {"content_id": "story-1", "story_beats": [
+                {"speech": "First scene"}, {"speech": "Second scene"}]}
+            (root / "queue.json").write_text(json.dumps({
+                "rewrites": [{"status": "awaiting_independent_editorial_approval",
+                              "story": story}]}))
+            (root / "review_inventory.json").write_text(json.dumps({
+                "review_only": True, "production_ready": False,
+                "images": [{"story_content_id": "story-1", "scene_id": "001",
+                            "path": "scenes/sample.png",
+                            "sha256": hashlib.sha256(image.read_bytes()).hexdigest()}]}))
+            result = package_review_art(root, root / "bundle.zip")
+            self.assertFalse(result["all_stories_complete"])
+            with zipfile.ZipFile(root / "bundle.zip") as archive:
+                coverage = json.loads(archive.read("scene_coverage.json"))
+            self.assertFalse(coverage["all_stories_complete"])
+            self.assertEqual(coverage["stories"][0]["expected_scenes"], 2)
+            self.assertEqual(coverage["stories"][0]["generated_scenes"], 1)
+            self.assertFalse(coverage["stories"][0]["complete"])
+
     def test_rejects_empty_batch_without_creating_bundle(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
