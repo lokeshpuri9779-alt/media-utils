@@ -147,6 +147,14 @@ jobs:
               generated = sum(a.get("status") == "review_only" for a in assets)
               cached = sum(a.get("status") == "cached_review_only" for a in assets)
               failures = sum(a.get("status") == "generation_failed" for a in assets)
+              dimensions = [{"width": a["dimensions"]["width"], "height": a["dimensions"]["height"]}
+                            for a in assets if a.get("status") in ("review_only", "cached_review_only")
+                            and isinstance(a.get("dimensions"), dict)
+                            and isinstance(a["dimensions"].get("width"), int)
+                            and isinstance(a["dimensions"].get("height"), int)]
+              portrait = sum(d["height"] > d["width"] for d in dimensions)
+              print("ASTRA_IMAGE_DIMENSIONS=" + json.dumps({"verified": len(dimensions),
+                    "portrait": portrait, "sizes": dimensions[:10]}, sort_keys=True))
               print("ASTRA_IMAGE_RESULT=" + json.dumps({
                   "status": result.get("status"),
                   "provider_calls": result.get("provider_calls", 0),
