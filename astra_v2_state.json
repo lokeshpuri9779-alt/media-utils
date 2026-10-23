@@ -197,27 +197,26 @@
     }
   },
   "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-23T10:20:14.308457+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "published",
+  "last_preflight_at": "2026-10-23T10:23:57.717031+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "processing",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-23T10:23:21.224701+00:00",
+    "at": "2026-10-23T10:23:58.210516+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-23T09:21:49.309461+00:00",
   "reserved": {
@@ -706,18 +705,18 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-23T10:23:21.224660+00:00",
+    "at": "2026-10-23T10:23:58.210467+00:00",
     "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "first_episode_staged",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
-    "first_candidate_manifest": true,
+    "first_candidate_manifest": false,
     "existing_character_proposal": false,
     "existing_character_episode": false,
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-23T10:23:21.224694+00:00",
+    "at": "2026-10-23T10:23:58.210508+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
@@ -731,56 +730,22 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-23T10:23:21.224512+00:00",
-    "preflight_due": "true",
+    "at": "2026-10-23T10:23:58.210429+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
     "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "reason": "min_interval",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-23T10:23:21.224656+00:00",
-    "collection_status": "collected",
-    "publish_step": "success",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 243,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3
-        },
-        "seen": 9,
-        "total": 319
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 319,
-        "fingerprint": 0,
-        "id": 6,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 313,
-        "title": 0,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 313,
-        "remaining": 243
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "considered": 1,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 0
-      }
-    },
+    "at": "2026-10-23T10:23:58.210464+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
