@@ -167,6 +167,30 @@ class ImageAssetsTests(unittest.TestCase):
                 generate_free_image_with_failover("scene", requester=requester)
         self.assertEqual(attempts, ["https://primary.example/images"])
 
+    def test_both_free_providers_quota_exhausted(self):
+        import urllib.error
+        env = {"ASTRA_OMNI_IMAGE_ENDPOINT": "https://primary.example/images",
+               "ASTRA_OMNI_IMAGE_MODEL": "free-primary",
+               "ASTRA_OMNI_IMAGE_FREE_CONFIRMED": "1",
+               "ASTRA_OMNI_IMAGE_FALLBACK_ENDPOINT": "https://secondary.example/images",
+               "ASTRA_OMNI_IMAGE_FALLBACK_MODEL": "free-secondary",
+               "ASTRA_OMNI_IMAGE_FALLBACK_FREE_CONFIRMED": "1"}
+        attempts = []
+        def requester(request):
+            attempts.append(request.full_url)
+            raise urllib.error.HTTPError(request.full_url, 429, "quota", {}, io.BytesIO(b""))
+        with patch.dict("os.environ", env, clear=True):
+            with self.assertRaisesRegex(ValueError, "Image provider HTTP 429"):
+                generate_free_image_with_failover("scene", requester=requester)
+        self.assertEqual(attempts, ["https://primary.example/images", "https://secondary.example/images"])
+
+    def test_fallback_only_can_run_without_primary(self):
+        env = {"ASTRA_OMNI_IMAGE_FALLBACK_ENDPOINT": "https://secondary.example/images",
+               "ASTRA_OMNI_IMAGE_FALLBACK_MODEL": "free-secondary",
+               "ASTRA_OMNI_IMAGE_FALLBACK_FREE_CONFIRMED": "1"}
+        with patch.dict("os.environ", env, clear=True):
+            self.assertEqual(generate_free_image_with_failover("scene", requester=lambda req: png()), png())
+
     def test_immutable_deduplication_and_corruption(self):
         with tempfile.TemporaryDirectory() as root:
             a = store_asset(png(), root, kind="scene", prompt="first")
