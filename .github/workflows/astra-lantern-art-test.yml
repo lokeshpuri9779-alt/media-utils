@@ -52,6 +52,15 @@ jobs:
           fi
       - name: Offline Gemini quota regression tests
         run: python -m unittest discover -s tests -p test_gemini_art_quota.py -v
+      - name: Enforce explicit zero-cost image quota confirmation
+        env:
+          ASTRA_GEMINI_IMAGE_FREE_CONFIRMED: ${{ vars.ASTRA_GEMINI_IMAGE_FREE_CONFIRMED }}
+        shell: bash
+        run: |
+          if [ "$ASTRA_GEMINI_IMAGE_FREE_CONFIRMED" != "1" ]; then
+            echo "::error::Image generation disabled: free image quota not explicitly confirmed. No paid or uncertain-quota API request will be made."
+            exit 1
+          fi
       - name: Stage unapproved images after live history and editorial gate
         run: python -m astra_v2.stage_editorial_art --content-id "$ASTRA_CONTENT_ID" --destination runtime-art-staging
       - name: Verify image integrity and geometry
