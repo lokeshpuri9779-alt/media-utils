@@ -555,6 +555,21 @@
         "reviewed_at": "2026-10-23T14:35:12.808689+00:00",
         "review_model": "gemini-3.1-flash-lite"
       }
+    },
+    {
+      "content_id": "rayvan-gemini-60367b1fd71f9ebd309d",
+      "story_sha256": "d1357942dedb914ccca70cb2dd7a386657418b8e58fbb47bc25d776c1edfa653",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-60367b1fd71f9ebd309d",
+        "story_sha256": "d1357942dedb914ccca70cb2dd7a386657418b8e58fbb47bc25d776c1edfa653",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the premises or specific plot points of the provided reference list.; The narrative maintains causal coherence, moving logically from the discovery of the drought to the decision to sacrifice resources for a long-term solution.; The content is suitable for a general audience and contains no unsafe, misleading, or policy-violating material.; The story avoids common tropes found in the provided list, such as 'The Moss-Walker' or 'The Orchard Keeper', by focusing on a specific moral dilemma regarding resource management.",
+        "reviewed_at": "2026-10-23T16:05:43.195335+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      }
     }
   ]
 }
