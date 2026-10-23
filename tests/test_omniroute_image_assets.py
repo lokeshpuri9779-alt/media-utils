@@ -43,6 +43,22 @@ class ImageAssetsTests(unittest.TestCase):
             output = generate_image("scene", requester=lambda req: buffer.getvalue())
             self.assertTrue(output.startswith(b"\x89PNG\r\n\x1a\n"))
 
+    def test_native_gemini_requests_portrait_aspect_ratio(self):
+        import json
+        env = {"ASTRA_OMNI_IMAGE_ENDPOINT":
+               "https://generativelanguage.googleapis.com/v1beta/models/gemini-test:generateContent",
+               "ASTRA_OMNI_IMAGE_MODEL": "gemini-test",
+               "ASTRA_OMNI_IMAGE_FREE_CONFIRMED": "1"}
+        def requester(request):
+            payload = json.loads(request.data)
+            self.assertEqual(payload["generationConfig"]["imageConfig"]["aspectRatio"], "9:16")
+            self.assertEqual(payload["generationConfig"]["responseModalities"], ["IMAGE"])
+            return json.dumps({"candidates": [{"content": {"parts": [
+                {"inlineData": {"mimeType": "image/png",
+                                "data": base64.b64encode(png()).decode()}}]}}]}).encode()
+        with patch.dict("os.environ", env, clear=True):
+            self.assertEqual(generate_image("portrait scene", requester=requester), png())
+
     def test_cloudflare_flux_image_contract(self):
         import base64
         import json
