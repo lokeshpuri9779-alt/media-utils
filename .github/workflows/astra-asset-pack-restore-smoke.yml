@@ -25,6 +25,9 @@ jobs:
           run-id: 39960540392
           github-token: ${{ github.token }}
           path: runtime-artifacts/download
+      - name: Exercise production asset restoration command
+        run: |
+          python -m tools.astra_restore_visual_pack runtime-artifacts/download/astra-visual-pack.zip runtime-artifacts/verified-pack --expected 3200
       - name: Extract safely and validate both formats
         run: |
           python - <<'PY'
