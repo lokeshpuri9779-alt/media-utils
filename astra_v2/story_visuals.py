@@ -32,6 +32,12 @@ SUBJECTS = (
     ("clock", r"\bclock\b|\btimepiece\b|\bclocktower\b"),
     ("museum", r"\bmuseum\b|\bexhibit\b|\bartifact\b"),
     ("whale", r"\bwhale\b"),
+    ("orchard", r"\borchard\b|\bapple trees?\b"),
+    ("signal", r"\bsignal\b|\bdistress call\b|\becho(?:es|ed|ing)?\b|\bwaveform\b"),
+    ("bottle", r"\bbottle\b|\bglass vessel\b"),
+    ("shoreline", r"\bshoreline\b|\bbeach\b|\btide\b|\bcoast\b"),
+    ("bell", r"\bbell\b|\bbell tower\b"),
+    ("lantern", r"\blantern\b|\blamp\b"),
     ("tree", r"\bforest\b|\btree\b|\bseed\b"),
     ("train", r"\btrain\b|\brailway\b"),
     ("moon", r"\bmoon\b|\blunar\b"),
@@ -65,9 +71,21 @@ def select_subject(story, shot):
         if directed_characters:
             return directed_characters[0]
         return directed_matches[0][1]
+    # Prefer an explicitly named local character, then a concrete directed
+    # object/setting. An unsupported explicit visual must not silently inherit
+    # an unrelated character from the title.
+    scenery_visuals = {"forest", "tree", "woods", "landscape", "background", "nature"}
+    explicit_visual = str(shot.get("visual_prompt") or shot.get("visual") or "").strip().lower()
+    generic_visuals = {"", "story", "illustration", "fiction", "subject"}
     local_characters = [name for _, name in local_matches if name in characters]
     if local_characters:
         return local_characters[0]
+    if explicit_visual not in generic_visuals and explicit_visual not in scenery_visuals:
+        visual_matches = [(m.start(), name) for name, pattern in SUBJECTS
+                          if (m := re.search(pattern, explicit_visual))]
+        if visual_matches:
+            return min(visual_matches, key=lambda item: item[0])[1]
+        return None
     if title_subject in characters and local_matches:
         return title_subject
     if local_matches:
@@ -103,6 +121,57 @@ def draw_subject(image, subject, t, accent, action='idle'):
     # camera motion it moves limbs and facial features relative to the body.
     pose = limb_pose(action, t)
     blink_now = abs(math.sin(t * 1.65 + 0.3)) > 0.985
+    d = ImageDraw.Draw(image)
+    cx = 540 + int(16 * math.sin(t * 1.4))
+    cy = 850 + int(10 * math.sin(t * 2.0))
+    # Draw the concrete story beat rather than the first incidental noun.
+    if subject == "orchard":
+        for x, y, r in ((300, 850, 100), (540, 760, 130), (780, 865, 105)):
+            d.rectangle((x-24, y+65, x+24, y+300), fill=(111, 76, 52))
+            d.ellipse((x-r, y-r, x+r, y+r), fill=(39, 133, 91), outline=accent, width=5)
+            for dx, dy in ((-35, -20), (30, 10), (0, 48)):
+                d.ellipse((x+dx-10, y+dy-10, x+dx+10, y+dy+10), fill=(245, 172, 88))
+        for n in range(7):
+            x = 230 + n*95 + int(9*math.sin(t*2+n))
+            y = 610 + int(18*math.sin(t*2.8+n))
+            d.ellipse((x-5,y-5,x+5,y+5), fill=(245,225,147))
+        return True
+    if subject == "signal":
+        for k in range(4):
+            radius = 48 + k*48 + int(8*math.sin(t*3+k))
+            d.arc((cx-radius, cy-radius, cx+radius, cy+radius), 205, 335,
+                  fill=accent if k % 2 == 0 else (109, 188, 226), width=7+k)
+        d.ellipse((cx-24,cy-24,cx+24,cy+24),fill=(255,226,145))
+        for dx,dy in ((-220,-120),(210,-75),(-140,190),(175,165)):
+            d.ellipse((cx+dx-7,cy+dy-7,cx+dx+7,cy+dy+7),fill=(255,226,145))
+        return True
+    if subject == "bottle":
+        d.rounded_rectangle((cx-100,cy-175,cx+100,cy+220),radius=55,fill=(81,157,177),outline=accent,width=9)
+        d.rectangle((cx-42,cy-250,cx+42,cy-165),fill=(128,192,203),outline=accent,width=7)
+        d.line((cx-65,cy+85,cx-15,cy+60,cx+25,cy+95,cx+70,cy+65),fill=(230,245,244),width=8)
+        d.ellipse((cx-28,cy-65,cx+28,cy-9),fill=(255,222,133))
+        return True
+    if subject == "shoreline":
+        d.rectangle((150,950,930,1110),fill=(36,81,120))
+        d.polygon([(150,930),(360,870),(545,925),(735,860),(930,920),(930,1120),(150,1120)],fill=(219,191,140))
+        for k in range(4):
+            y=965+k*36+int(8*math.sin(t*3+k))
+            d.arc((220,y-24,860,y+24),5,175,fill=(126,207,229),width=8)
+        d.ellipse((760,610,865,715),fill=(249,220,157))
+        return True
+    if subject == "bell":
+        d.arc((cx-150,cy-190,cx+150,cy+90),180,360,fill=accent,width=12)
+        d.polygon([(cx-130,cy-90),(cx+130,cy-90),(cx+175,cy+105),(cx-175,cy+105)],fill=(203,169,93),outline=accent)
+        d.ellipse((cx-190,cy+75,cx+190,cy+145),fill=(153,117,65),outline=accent,width=7)
+        d.ellipse((cx-30,cy+115,cx+30,cy+175),fill=(240,210,139))
+        return True
+    if subject == "lantern":
+        glow=20+int(12*abs(math.sin(t*3)))
+        d.ellipse((cx-130-glow,cy-130-glow,cx+130+glow,cy+150+glow),fill=(69,61,74))
+        d.arc((cx-85,cy-250,cx+85,cy-90),180,360,fill=accent,width=12)
+        d.polygon([(cx-95,cy-120),(cx+95,cy-120),(cx+125,cy+135),(cx-125,cy+135)],fill=(69,99,117),outline=accent)
+        d.polygon([(cx-55,cy-70),(cx+55,cy-70),(cx+78,cy+95),(cx-78,cy+95)],fill=(255,213,111))
+        return True
     # Dedicated character silhouettes, not aliases of unrelated animals.
     if subject in {"fox", "otter", "owl", "duck", "firefly", "squirrel", "mouse", "crab"}:
         d = ImageDraw.Draw(image)
