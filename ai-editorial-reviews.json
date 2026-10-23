@@ -699,6 +699,18 @@
         "reviewed_at": "2026-10-23T22:16:36.211084+00:00",
         "review_model": "gemini-3.1-flash-lite"
       }
+    },
+    {
+      "content_id": "rayvan-gemini-3ec729b7395108410735",
+      "story_sha256": "0dc2317e832e7d973fb3f2c8e772d5d716a3bb4634c86bfdf53329e9a737275f",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The title and premise are derivative of the provided list of recent publications, specifically 'Finnegan's Automatic Spice-Grinder and the Bazaar Catastrophe' and 'The Stone-Carver and the Drought of Oakhaven'.",
+        "The story relies on a repetitive 'inventor causes accidental chaos in a market' trope that mirrors the structure and setting of multiple entries in the provided reference list.",
+        "The causal mechanism (a malfunctioning steam-powered device in a market setting) is functionally identical to the patterns established in the provided recent publication examples."
+      ],
+      "record": null
     }
   ]
 }
