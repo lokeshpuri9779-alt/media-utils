@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "87bb6da97a32108db1beeeba",
-      "source_sha256": "cf1f246b4e7b2ecb1d53515281187a824a90fcdc5a3aa67cced48380a6708f39",
+      "candidate_id": "032ce741b6886c05209dfa77",
+      "source_sha256": "58ea0c5723c9e339c010265c2fc3fcbe7448feffebe7d624a8b4f6a67783a752",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-97d7e59ff2b7507741a6",
-        "title": "The Great Turnip Tricycle Debacle",
-        "hook": "A Market Disaster",
-        "question": "How did Barnaby sell his invention at the crowded town market?",
-        "answer": "He attached a singing mechanical parrot to steer the vehicle away from cabbage carts.",
+        "content_id": "rayvan-gemini-15144fc650ef13a2220c",
+        "title": "The Great Tomato Launchpad",
+        "hook": "A Sticky Situation",
+        "question": "How did Barnaby turn a breakfast disaster into market dominance?",
+        "answer": "He invented an automated fruit-sorting catapult that rescued his vegetable stall from ruin.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,76 +29,76 @@
         ],
         "story_beats": [
           {
-            "headline": "A Market Disaster",
-            "speech": "Behold my magnificent produce-peddler, crafted to revolutionise the morning market rush with sheer mechanical genius!",
+            "headline": "A Sticky Situation",
+            "speech": "My magnificent automatic fruit-sorting catapult is almost ready to revolutionize this entire crowded morning market!",
             "visual": "robot",
-            "label": "The Invention",
+            "label": "The Setup",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby standing proudly in a bustling outdoor market next to a rickety wooden tricycle with oversized brass gears, holding a wrench in his left hand, looking confident with a wide smile, wearing a patched tweed vest and round spectacles, surrounded by vendors selling turnips and cabbages.",
+            "visual_prompt": "Barnaby standing in a busy market square, pointing proudly at a large mechanical robot contraption with gears, while holding a wrench.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Constructing the Steering",
-            "speech": "We must instantly bolt this brass automaton bird to the handlebars before the turnip cart stampede commences!",
+            "headline": "Calibrating the Chaos",
+            "speech": "We must tighten this main tension spring immediately before overripe tomatoes launch into the crowd again!",
             "visual": "signal",
-            "label": "The Build",
+            "label": "The Tensions Rise",
             "story_beat": "build",
-            "visual_prompt": "Barnaby in close-up tightening a bolt on the handlebars of the tricycle using a copper screwdriver held in his right hand, attaching a metallic clockwork parrot, looking focused and slightly stressed, against the backdrop of wooden market stalls under a sunny sky.",
+            "visual_prompt": "Barnaby frantically adjusting a flashing red signal panel on the machine while dodge-rolling to avoid a flying tomato.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Mechanical Flaw",
-            "speech": "Wait, the guidance gear is spinning backward into the melon stacks, creating absolute fruity chaos everywhere!",
+            "headline": "The Mechanical Miracle",
+            "speech": "Watch as the optical sensor effortlessly sorts bruised produce from premium vegetables with pinpoint accuracy!",
             "visual": "door",
-            "label": "The Mechanism",
+            "label": "The Core Action",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby leaping backward in panic while holding his copper screwdriver aloft, as the tricycle spins out of control through a wooden market gate, sending ripe watermelons rolling across the cobblestone pathway among startled marketgoers.",
+            "visual_prompt": "A trapdoor on the machine opens automatically, sorting a barrage of vegetables into separate wooden crates precisely as Barnaby watches.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Sweet Success",
-            "speech": "By singing cheerful sea shanties, the mechanical bird guides us safely past every single vegetable stall today!",
+            "headline": "Market Day Monopoly",
+            "speech": "Look at these delighted customers cheering for our perfectly sorted produce. We finally saved the family business!",
             "visual": "ship",
-            "label": "The Payoff",
+            "label": "The Final Triumph",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby riding the tricycle smoothly down the central market aisle, holding the handlebars with both hands while the mechanical parrot perched on top flaps its metal wings, grinning ear-to-ear as cheering vendors wave fresh carrots in the air.",
+            "visual_prompt": "Barnaby holding a bag of gold coins in front of his bustling stall shaped like an old market ship, with cheering crowds all around.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright, whimsical stop-motion animation aesthetic with rich textures and vibrant pastel colors.",
+          "style": "Vibrant and whimsical 3D animated comedy style with rich textures and warm morning lighting.",
           "characters": {
-            "Barnaby": "An eccentric inventor in his forties with wild gray hair, wearing a patched brown tweed vest, a striped bow tie, and round wire-rimmed spectacles."
+            "Barnaby": "An eccentric young inventor with messy brown hair, a flour-dusted green apron, and round brass goggles pushed up on his forehead."
           },
           "locations": {
-            "Town Market": "A bustling, sunlit cobblestone square filled with colorful canvas awnings, wooden fruit crates, and stacked vegetable carts."
+            "Market Square": "A bustling, sunlit cobblestone open-air market filled with colorful awnings, wooden stalls, and eager shoppers."
           },
           "objects": {
-            "Tricycle": "A heavy wooden three-wheeled cart featuring mismatched brass gears, a leather saddle seat, and oversized iron-rimmed wheels.",
-            "Mechanical Parrot": "A shiny clockwork bird made of polished brass and copper feathers with emerald glass eyes that open and close."
+            "Catapult": "A bulky, steam-powered mechanical contraption made of polished brass pipes, wooden beams, and a flashing red signal light.",
+            "Wrench": "A heavy, grease-stained iron tool with a rusted handle."
           }
         },
-        "plot_fingerprint": "a85eda49bf65691ee5b0063778085428bb456150bb9199b99540ab5c4f4857b2"
+        "plot_fingerprint": "284f980c1998bbf7bb76026113afb3609ead6076c8133da5f5569545bf610fd3"
       },
       "approved": false
     },
     {
-      "candidate_id": "7664072765ebea5f8f2bf1fe",
-      "source_sha256": "9c8a071a9ff14fb0650731654148f31f4c1baf254b9cfab5d84ac237b930eab3",
+      "candidate_id": "f2ad85f712dd81053d42683e",
+      "source_sha256": "e6e9e3888140d67a5291b3fc60f98306bff9c99b460a89ec49d455fdc18e74ef",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-f370f10cf1902a808b03",
-        "title": "The Whispering Sands of Arid V",
-        "hook": "The Hidden Cave Entrance",
-        "question": "What miracle lies hidden beneath the dry dunes of the great southern waste?",
-        "answer": "A sprawling subterranean forest fed by deep thermal springs and glowing amber moss.",
+        "content_id": "rayvan-gemini-d0a83ac8d6683cda8f5b",
+        "title": "The Singing Dunes",
+        "hook": "A Desert Mystery",
+        "question": "What secret do the singing dunes of the Arid Reach hide beneath their scorching sands?",
+        "answer": "They conceal an ancient subterranean greenhouse powered entirely by concentrated sunlight.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -106,79 +106,77 @@
         ],
         "story_beats": [
           {
-            "headline": "The Hidden Cave Entrance",
-            "speech": "Look closely at the rock formation here. My thermal scanner shows unusual warmth radiating from the deep fissure.",
-            "visual": "door",
-            "label": "Thermal Fissure",
-            "story_beat": "reveal",
-            "visual_prompt": "Explorer Dr. Aris stands before a rocky desert fissure holding a glowing handheld sensor displaying amber waveforms, wearing a tan hooded utility suit and goggles, under a bright midday sun.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Descending into the Depths",
-            "speech": "Carefully lower the automated drone into the dark shaft. We need to map this cavern before our oxygen supplies run low.",
-            "visual": "robot",
-            "label": "Drone Descent",
-            "story_beat": "build",
-            "visual_prompt": "Companion engineer Mae operates a control tablet while a small spherical metallic drone descends into a dark rocky shaft, illuminated by the drone's bright blue forward-facing beam.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Activating the Ancient Valve",
-            "speech": "Turn the brass wheel slowly to release the pressure lock. This ancient mechanism controls the water flow to the lower basin.",
+            "headline": "A Desert Mystery",
+            "speech": "Look at the strange harmonic tremors in the sand. This acoustic anomaly defies every known geological rule of the desert.",
             "visual": "signal",
-            "label": "Valve Control",
-            "story_beat": "mechanism",
-            "visual_prompt": "Dr. Aris turns a heavy tarnished brass valve wheel mounted on a stone wall, while glowing green indicator lights flash on a nearby control panel casting light on her determined face.",
+            "label": "Acoustic Anomaly",
+            "story_beat": "reveal",
+            "visual_prompt": "Dr. Aris Vance, a weathered explorer in a rugged canvas sun-cloak, kneels on golden dunes while studying a glowing seismic reader that displays sharp audio waveforms in the harsh daylight.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Glowing Subterranean Oasis",
-            "speech": "Incredible, a thriving subterranean forest sustained entirely by thermal springs! Our expedition has unlocked life in the dead desert.",
+            "headline": "Excavating the Slope",
+            "speech": "We must carefully clear away this compacted silica layer before the afternoon heat destabilizes our entire excavation perimeter.",
+            "visual": "door",
+            "label": "Buried Entrance",
+            "story_beat": "build",
+            "visual_prompt": "Aris Vance uses a motorized shovel to brush away thick layers of hot sand from a massive, perfectly circular stone hatch embedded deep within the side of a dune.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Solar Core",
+            "speech": "Behold the primary focusing array. Intricate crystalline lenses are funneling desert sunlight down into the deep subterranean chambers below us.",
+            "visual": "planet",
+            "label": "Focusing Array",
+            "story_beat": "mechanism",
+            "visual_prompt": "Aris Vance stands atop the opened stone hatch, peering down into a vast subterranean shaft where colossal amber glass lenses rotate smoothly, focusing intense beams of light.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A Verdant Refuge",
+            "speech": "It is a thriving prehistoric botanical ecosystem preserved down here for millennia, sustained by the endless ingenuity of this ancient machine.",
             "visual": "forest",
-            "label": "Subterranean Forest",
+            "label": "Subterranean Oasis",
             "story_beat": "payoff",
-            "visual_prompt": "Dr. Aris and Mae stand together gazing in awe at a vast underground cavern filled with bioluminescent giant ferns and glowing blue water pools, their faces illuminated by the magical flora.",
+            "visual_prompt": "Aris Vance stands inside a lush, cavernous greenhouse filled with glowing bioluminescent ferns and towering ancient trees, illuminated by shafts of warm golden light.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Cinematic sci-fi realism with natural lighting, vivid organic textures, and detailed desert dust atmosphere.",
+          "style": "Cinematic adventure realism with warm desert tones transitioning to vibrant subterranean greens",
           "characters": {
-            "Dr. Aris": "An experienced female desert explorer with weathered skin, practical tied-back dark hair, wearing a worn tan utility jumpsuit and protective amber-tinted goggles.",
-            "Mae": "A young tech specialist with bright curious eyes, short braided hair, wearing a reinforced grey field jacket loaded with tool pouches and a touchscreen tablet harness."
+            "Aris Vance": "A seasoned desert archaeologist in his late forties with sun-weathered skin, short greying hair, wearing a rugged tan canvas sun-cloak and utility harness."
           },
           "locations": {
-            "The Desert Surface": "A vast expanse of rolling golden sand dunes under a clear pale turquoise sky and glaring white sun.",
-            "The Subterranean Cavern": "A massive underground cave system featuring damp dark stone walls, cascading mineral deposits, and vibrant glowing flora."
+            "The Arid Reach": "Endless rolling dunes of fine golden sand under a blazing midday sun.",
+            "Subterranean Greenhouse": "A colossal underground cavern filled with prehistoric flora, illuminated by towering amber lenses."
           },
           "objects": {
-            "Thermal Sensor": "A handheld rectangular aluminum device with a digital amber screen showing shifting heat signature waveforms.",
-            "Exploration Drone": "A spherical matte-grey mechanical drone with four fold-out stabilization rotors and a central bright blue camera lens.",
-            "Brass Valve": "A heavy circular water control valve made of oxidized green and gold brass with intricate engraved geometric ridges."
+            "seismic reader": "A handheld metal device with a ruggedized rubber casing and a bright green digital oscilloscope screen displaying waveforms.",
+            "motorized shovel": "A lightweight excavation tool constructed from polished titanium with a ergonomic grip and battery pack."
           }
         },
-        "plot_fingerprint": "54ef2925483b4ff0280b7ed45edc0d5170e5d66b95e4def424f82b8808cda45b"
+        "plot_fingerprint": "3c8259e83bbebc45f9c3686f7f0c710382a08aadf8b31e1aa59d87a0ae199ffe"
       },
       "approved": false
     },
     {
-      "candidate_id": "e446373e438e1ebdbc934699",
-      "source_sha256": "d41dbf54d071ed789b58f1110517f2edf789b8ad8e8b30da156cd560b71f26b2",
+      "candidate_id": "5a2ff072075b380073cbfce4",
+      "source_sha256": "d940e0107db5e5c4132b7fc5815cf1917b2cb014379765704ff34d0df0132f09",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-f805be3c7d09e2a882c7",
-        "title": "The Silent Current of Coral Harbor",
-        "hook": "The Sudden Darkness",
-        "question": "Why did the glowing bioluminescent kelp suddenly vanish from the deep trench?",
-        "answer": "Barnaby the octopus discovered a forgotten underwater drainage valve was leaking, draining the essential mineral current.",
+        "content_id": "rayvan-gemini-a6cc42bda009fef41d20",
+        "title": "The Great Saltwater Buoyancy Regatta",
+        "hook": "The Mystery Hull",
+        "question": "How can a heavy wooden galleon float on heavy salt foam?",
+        "answer": "By balancing weighted ballast chambers with internal air pockets.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -186,61 +184,60 @@
         ],
         "story_beats": [
           {
-            "headline": "The Sudden Darkness",
-            "speech": "Look closely at the trench floor everyone, the bioluminescent kelp has completely vanished overnight without a single trace.",
-            "visual": "signal",
-            "label": "The Discovery",
+            "headline": "The Mystery Hull",
+            "speech": "Look closely at this peculiar hull shape! It lacks a keel entirely, relying on hollow copper cylinders instead.",
+            "visual": "ship",
+            "label": "Hull Discovery",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby the octopus points a tentacle at the dark ocean floor in the coral trench, looking worried with wide eyes.",
+            "visual_prompt": "Captain Barnaby stands on the wooden festival pier holding a rusted brass wrench, pointing enthusiastically at a hollow copper cylinder hull floating in turquoise seawater under bright midday sun.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Tracing the Current",
-            "speech": "Follow this strange swirling current of clear water upwards toward the old sunken stone temple ruins immediately.",
-            "visual": "door",
-            "label": "The Investigation",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby swims past a glowing jellyfish toward a heavy bronze archway holding a polished brass compass.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Hidden Leak",
-            "speech": "An ancient drainage valve left open by ancient mariners is steadily sucking away all our precious mineral nutrients.",
+            "headline": "Assembly of Tanks",
+            "speech": "We must secure these ballast tanks quickly before the midday tide rises and floods the sandy construction pits.",
             "visual": "robot",
-            "label": "The Cause",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby uses both front tentacles to tightly grip a massive metal wheel valve attached to a stone wall while bubbles escape.",
+            "label": "Tank Assembly",
+            "story_beat": "build",
+            "visual_prompt": "An assistant operates a mechanical brass crane on the bustling beach, lowering a cylindrical copper tank into the wooden ship frame while sea gulls wheel in the sky overhead.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Restoring the Glow",
-            "speech": "With the heavy valve firmly closed again, the glowing mineral current returns to make our home bright once more.",
-            "visual": "forest",
-            "label": "The Restoration",
+            "headline": "The Siphon Valve",
+            "speech": "Turning this rusted intake valve releases trapped air, letting seawater flood the lower chambers to stabilize our craft.",
+            "visual": "signal",
+            "label": "Valve Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "Captain Barnaby twists a large green-patinated copper valve on the side of the ship hull, while a jet of sparkling seawater squirts outward in the bright afternoon sunlight.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Triumphant Voyage",
+            "speech": "She rides the crest perfectly! Our clever ballast design wins the golden festival trophy for finest engineering.",
+            "visual": "door",
+            "label": "Victory Gate",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby smiles proudly while floating amidst a newly revitalized glowing purple kelp forest illuminated by soft cyan light.",
+            "visual_prompt": "Captain Barnaby and his crew cheer wildly on the deck of the floating copper-hulled ship as it crosses beneath a decorated wooden finish gate on the sparkling seaside bay.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Vibrant cinematic 3D underwater animation with rich watercolor textures and luminous lighting effects.",
+          "style": "Vibrant and detailed coastal illustration style with rich maritime colors and sunlit textures",
           "characters": {
-            "Barnaby": "A clever purple octopus with large expressive amber eyes, wearing a small navigation satchel strapped across his mantle."
+            "Captain Barnaby": "An energetic elderly inventor with a bushy white mustache, wearing a faded blue sailor cap and a rolled-up canvas apron over a striped jersey."
           },
           "locations": {
-            "Coral Harbor": "A bustling deep-sea settlement surrounded by glowing purple kelp and ancient stone ruins.",
-            "Sunken Temple": "An abandoned underwater stone structure featuring heavy bronze fixtures and mossy archways."
+            "Seaside Festival Pier": "A bustling wooden boardwalk decorated with colorful pennants, overlooking calm turquoise seawater and golden sandy beaches."
           },
           "objects": {
-            "Navigation Satchel": "A small weathered leather bag worn across the shoulder containing a brass compass.",
-            "Bronze Valve": "A heavy circular metal wheel attached to a stone conduit, used to regulate mineral water flow."
+            "copper_hull": "A gleaming reddish-brown copper cylinder framework designed to trap buoyant air pockets.",
+            "brass_wrench": "A heavy, tarnished golden-yellow tool used for tightening festival machine bolts."
           }
         },
-        "plot_fingerprint": "8878e59c600ca00d8959cd08ac521eaf2c8c49f541ab68966f25c1d5789aed38"
+        "plot_fingerprint": "75383d7e4f068ff3fb194c5bf8df2490a52183ecb86a08f247244677e592fd1f"
       },
       "approved": false
     }
