@@ -5,6 +5,10 @@ on:
     paths:
       - 'astra_v2/visual_artifact_backdrop.py'
       - 'astra_v2/visual_artifact_comparison.py'
+      - 'astra_v2/visual_layered_prototype.py'
+      - 'astra_v2/visual_layered_comparison.py'
+      - 'astra_v2/visual_hybrid_prototype.py'
+      - 'tests/test_visual_layered_prototype.py'
       - '.github/workflows/astra-artifact-comparison.yml'
 jobs:
   compare:
@@ -18,9 +22,16 @@ jobs:
         with:
           python-version: '3.11'
       - run: python -m pip install Pillow
+      - run: python -m unittest tests.test_visual_layered_prototype
       - run: python -m astra_v2.visual_artifact_comparison --output runtime-artifacts/artifact-comparison
+      - run: python -m astra_v2.visual_layered_comparison --output runtime-artifacts/layered-comparison
       - uses: actions/upload-artifact@v4
         with:
           name: astra-artifact-backdrop-comparison
           path: runtime-artifacts/artifact-comparison/
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: astra-layered-prototype-comparison
+          path: runtime-artifacts/layered-comparison/
           retention-days: 7
