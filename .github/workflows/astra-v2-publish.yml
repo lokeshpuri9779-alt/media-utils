@@ -210,7 +210,25 @@ jobs:
                   echo 'ASTRA_FFPROBE_SOURCE=deb-extract'
                 else
                   echo 'ASTRA_FFPROBE_EXTRACTED_RUNTIME_MISSING=1'
-                  timeout 110s sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ffmpeg || true
+                  echo 'ASTRA_FFPROBE_STATIC_FALLBACK=attempt'
+                  # Independently built static FFprobe avoids Ubuntu libav
+                  # shared-library dependencies and the stalled apt installer.
+                  # Never disable TLS checks or bypass the runtime probe.
+                  if timeout 65s curl --fail --location --silent --show-error \
+                    --connect-timeout 10 --max-time 60 --retry 1 \
+                    https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz \
+                    -o "$RUNNER_TEMP/astra-ffmpeg-static.tar.xz"; then
+                    mkdir -p "$RUNNER_TEMP/astra-static-probe"
+                    tar -xJf "$RUNNER_TEMP/astra-ffmpeg-static.tar.xz" \
+                      -C "$RUNNER_TEMP/astra-static-probe" \
+                      --wildcards --no-anchored --strip-components=1 '*/ffprobe' || true
+                    if [ -x "$RUNNER_TEMP/astra-static-probe/ffprobe" ] && \
+                       "$RUNNER_TEMP/astra-static-probe/ffprobe" -version >/dev/null 2>&1; then
+                      export PATH="$RUNNER_TEMP/astra-static-probe:$PATH"
+                      echo "$RUNNER_TEMP/astra-static-probe" >> "$GITHUB_PATH"
+                      echo 'ASTRA_FFPROBE_SOURCE=static'
+                    fi
+                  fi
                 fi
               fi
             fi
