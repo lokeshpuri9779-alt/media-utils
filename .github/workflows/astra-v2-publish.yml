@@ -358,7 +358,22 @@ jobs:
           ASTRA_PRELOAD_ONLY: '0' # Scan only policy-approved queued media, then allow a fresh QA-gated render
         shell: bash
         run: |
-          set -o pipefail
+          set -euo pipefail
+          # Resolve the probe in this step, not only during dependency installation.
+          # Python's media validator launches ffprobe by its executable name.
+          if ! command -v ffprobe >/dev/null 2>&1 && [ -x "$RUNNER_TEMP/astra-static-probe/ffprobe" ]; then
+            export PATH="$RUNNER_TEMP/astra-static-probe:$PATH"
+          fi
+          command -v ffprobe
+          python - <<'PY'
+          import shutil
+          import subprocess
+          probe = shutil.which("ffprobe")
+          if not probe:
+              raise SystemExit("ASTRA_FFPROBE_PUBLISHER_PATH_MISSING=1")
+          subprocess.run(["ffprobe", "-version"], check=True, stdout=subprocess.DEVNULL)
+          print("ASTRA_FFPROBE_PUBLISHER_SUBPROCESS=ready", flush=True)
+          PY
           python -m astra_v2.run 2>&1 | tee astra-story-selection.log
 
       - name: Persist verified character episode if approved manifests exist
