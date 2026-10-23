@@ -25,6 +25,33 @@ def package_review_art(root, destination):
         raise ValueError("Invalid image inventory")
     if not images:
         raise ValueError("No verified AI images to package; empty batch is not a successful asset ZIP")
+    # A bounded free-tier batch can contain fewer scenes than a whole story.
+    # Record coverage explicitly so a partial ZIP is never mistaken for a
+    # complete video-ready story.
+    queue_path = root / "queue.json"
+    coverage = []
+    if queue_path.is_file():
+        from astra_v2.story_art_direction import illustration_requests
+        queue = json.loads(queue_path.read_text(encoding="utf-8"))
+        if not isinstance(queue.get("rewrites"), list):
+            raise ValueError("Invalid story queue")
+        generated = {(row.get("story_content_id"), row.get("scene_id"))
+                     for row in images}
+        for entry in queue["rewrites"]:
+            if not isinstance(entry, dict) or not isinstance(entry.get("story"), dict):
+                raise ValueError("Invalid queued story")
+            story = entry["story"]
+            requests = illustration_requests(story)
+            expected = {(row["story_content_id"], row["scene_id"]) for row in requests}
+            completed = len(expected & generated)
+            coverage.append({"story_content_id": story["content_id"],
+                             "expected_scenes": len(expected),
+                             "generated_scenes": completed,
+                             "complete": completed == len(expected)})
+    coverage_report = {"review_only": True, "production_ready": False,
+                       "stories": coverage,
+                       "all_stories_complete": bool(coverage) and all(
+                           row["complete"] for row in coverage)}
     source = (root / "warehouse").resolve()
     files = {}
     for row in images:
@@ -46,6 +73,7 @@ def package_review_art(root, destination):
     try:
         with zipfile.ZipFile(temporary, "w", compression=zipfile.ZIP_DEFLATED) as bundle:
             bundle.write(inventory, "review_inventory.json")
+            bundle.writestr("scene_coverage.json", json.dumps(coverage_report, indent=2) + "\\n")
             for name in sorted(files):
                 bundle.write(source / name.removeprefix("warehouse/"), name)
             for filename in ("queue.json", "review_only.json"):
@@ -55,7 +83,8 @@ def package_review_art(root, destination):
         temporary.replace(destination)
     finally:
         temporary.unlink(missing_ok=True)
-    return {"images": len(images), "bundle": str(destination), "review_only": True}
+    return {"images": len(images), "bundle": str(destination), "review_only": True,
+            "all_stories_complete": coverage_report["all_stories_complete"]}
 
 
 def main():
