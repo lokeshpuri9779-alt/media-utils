@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 from PIL import Image
-from astra_v2.omniroute_image_assets import store_asset, preproduce, image_endpoint, generate_image
+from astra_v2.omniroute_image_assets import store_asset, preproduce, image_endpoint, generate_image, generate_free_image_with_failover
 
 
 def png(alpha=False, portrait=True):
@@ -121,6 +121,51 @@ class ImageAssetsTests(unittest.TestCase):
         self.assertTrue(all(asset["status"] == "provider_quota_exhausted"
                             for asset in result["assets"][1:]))
         self.assertTrue(all(not asset["production_ready"] for asset in result["assets"]))
+
+    def test_free_fallback_only_after_429(self):
+        import urllib.error
+        env = {"ASTRA_OMNI_IMAGE_ENDPOINT": "https://primary.example/images",
+               "ASTRA_OMNI_IMAGE_MODEL": "free-primary",
+               "ASTRA_OMNI_IMAGE_FREE_CONFIRMED": "1",
+               "ASTRA_OMNI_IMAGE_FALLBACK_ENDPOINT": "https://secondary.example/images",
+               "ASTRA_OMNI_IMAGE_FALLBACK_MODEL": "free-secondary",
+               "ASTRA_OMNI_IMAGE_FALLBACK_FREE_CONFIRMED": "1"}
+        attempts = []
+        def requester(request):
+            attempts.append(request.full_url)
+            if "primary" in request.full_url:
+                raise urllib.error.HTTPError(request.full_url, 429, "quota", {}, io.BytesIO(b""))
+            return png()
+        with patch.dict("os.environ", env, clear=True):
+            self.assertEqual(generate_free_image_with_failover("scene", requester=requester), png())
+        self.assertEqual(attempts, ["https://primary.example/images", "https://secondary.example/images"])
+
+    def test_fallback_requires_explicit_free_confirmation(self):
+        env = {"ASTRA_OMNI_IMAGE_ENDPOINT": "https://primary.example/images",
+               "ASTRA_OMNI_IMAGE_MODEL": "free-primary",
+               "ASTRA_OMNI_IMAGE_FREE_CONFIRMED": "1",
+               "ASTRA_OMNI_IMAGE_FALLBACK_ENDPOINT": "https://secondary.example/images",
+               "ASTRA_OMNI_IMAGE_FALLBACK_MODEL": "free-secondary"}
+        with patch.dict("os.environ", env, clear=True):
+            with self.assertRaisesRegex(ValueError, "Fallback free-tier confirmation required"):
+                generate_free_image_with_failover("scene", requester=lambda req: png())
+
+    def test_non_quota_failure_never_triggers_fallback(self):
+        import urllib.error
+        env = {"ASTRA_OMNI_IMAGE_ENDPOINT": "https://primary.example/images",
+               "ASTRA_OMNI_IMAGE_MODEL": "free-primary",
+               "ASTRA_OMNI_IMAGE_FREE_CONFIRMED": "1",
+               "ASTRA_OMNI_IMAGE_FALLBACK_ENDPOINT": "https://secondary.example/images",
+               "ASTRA_OMNI_IMAGE_FALLBACK_MODEL": "free-secondary",
+               "ASTRA_OMNI_IMAGE_FALLBACK_FREE_CONFIRMED": "1"}
+        attempts = []
+        def requester(request):
+            attempts.append(request.full_url)
+            raise urllib.error.HTTPError(request.full_url, 403, "denied", {}, io.BytesIO(b""))
+        with patch.dict("os.environ", env, clear=True):
+            with self.assertRaisesRegex(ValueError, "Image provider HTTP 403"):
+                generate_free_image_with_failover("scene", requester=requester)
+        self.assertEqual(attempts, ["https://primary.example/images"])
 
     def test_immutable_deduplication_and_corruption(self):
         with tempfile.TemporaryDirectory() as root:
