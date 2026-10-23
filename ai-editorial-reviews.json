@@ -630,6 +630,21 @@
         "reviewed_at": "2026-10-23T18:20:48.824848+00:00",
         "review_model": "gemini-3.1-flash-lite"
       }
+    },
+    {
+      "content_id": "rayvan-gemini-754ca9167e20b4b19b43",
+      "story_sha256": "da84754256990156344deee64451bbc29fab21a5cc2262cb9ef2fb3a42500028",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-754ca9167e20b4b19b43",
+        "story_sha256": "da84754256990156344deee64451bbc29fab21a5cc2262cb9ef2fb3a42500028",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the premises, characters, or settings of the provided publication history.; The causal mechanism (a manual lever system controlling bioluminescence for camouflage) is clear and internally consistent.; The content is suitable for a general audience and contains no unsafe, misleading, or policy-violating material.; There are no copyright or trademark concerns identified in the narrative.",
+        "reviewed_at": "2026-10-23T19:38:53.382516+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      }
     }
   ]
 }
