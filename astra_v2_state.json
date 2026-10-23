@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-23",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 23,
+  "attempts": 24,
   "confirmed_today": 23,
-  "last_attempt_at": "2026-10-23T11:08:48.247153+00:00",
+  "last_attempt_at": "2026-10-23T11:27:06.222729+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -193,28 +193,55 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-23T11:09:31.431161+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "MKlty0o2BaI": {
+      "content_id": "rayvan-gemini-71a222033f5816c401ce",
+      "title": "Kaelen and the Sun-Drenched Oasis of the Shifting Dunes",
+      "day": "2026-10-23",
+      "uploaded_at": "2026-10-23T11:27:08.137318+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "ec34865117f492837b46bfe32c753bde01fef77ab0d4a7dfe65a8f61962c9f12",
+      "story_beats": [
+        {
+          "speech": "My sensors indicate a strange thermal fluctuation beneath these dunes, yet the heat here is relentless and suffocatingly dry today."
+        },
+        {
+          "speech": "I never expected to find this heavy iron latch buried under layers of ancient, compacted red sand for so many centuries."
+        },
+        {
+          "speech": "The gears are still grinding with rhythmic precision, as if this sanctuary was waiting patiently for someone to finally arrive here."
+        },
+        {
+          "speech": "Life truly finds a way to flourish, even when hidden from the world, fueled by this beautiful and ancient hidden water source."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-23T11:21:26.563015+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-23T11:09:31.869773+00:00",
+    "at": "2026-10-23T11:27:08.601708+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-23T09:21:49.309461+00:00",
   "reserved": {
@@ -746,13 +773,36 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-71a222033f5816c401ce": {
+      "at": "2026-10-23T11:27:06.222715+00:00",
+      "title": "Kaelen and the Sun-Drenched Oasis of the Shifting Dunes",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "ec34865117f492837b46bfe32c753bde01fef77ab0d4a7dfe65a8f61962c9f12",
+      "story_beats": [
+        {
+          "speech": "My sensors indicate a strange thermal fluctuation beneath these dunes, yet the heat here is relentless and suffocatingly dry today."
+        },
+        {
+          "speech": "I never expected to find this heavy iron latch buried under layers of ancient, compacted red sand for so many centuries."
+        },
+        {
+          "speech": "The gears are still grinding with rhythmic precision, as if this sanctuary was waiting patiently for someone to finally arrive here."
+        },
+        {
+          "speech": "Life truly finds a way to flourish, even when hidden from the world, fueled by this beautiful and ancient hidden water source."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-23T11:09:31.869690+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-23T11:27:08.601590+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -760,36 +810,70 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-23T11:09:31.869758+00:00",
+    "at": "2026-10-23T11:27:08.601688+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-23T11:07:03.484924+00:00",
+    "at": "2026-10-23T11:24:26.147747+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-bb1aafebe7ca2c750ad2",
-    "video_url": "https://www.youtube.com/watch?v=uZz2uGMk-04",
+    "content_id": "rayvan-gemini-71a222033f5816c401ce",
+    "video_url": "https://www.youtube.com/watch?v=MKlty0o2BaI",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-23T11:09:31.869631+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-23T11:27:08.601348+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-23T11:09:31.869684+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "counters": {},
+    "at": "2026-10-23T11:27:08.601584+00:00",
+    "collection_status": "collected",
+    "publish_step": "success",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 242,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3
+        },
+        "seen": 9,
+        "total": 318
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 319,
+        "fingerprint": 0,
+        "id": 6,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 313,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 313,
+        "remaining": 243
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 1,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
