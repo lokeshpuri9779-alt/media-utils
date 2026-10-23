@@ -1,0 +1,72 @@
+name: ASTRA Reusable Visual Asset Pack
+on:
+  workflow_dispatch:
+    inputs:
+      count:
+        description: 'Number of original portrait backgrounds'
+        required: false
+        default: '1600'
+permissions:
+  contents: read
+jobs:
+  build-pack:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install free local image conversion tools
+        run: python -m pip install Pillow cairosvg
+      - name: Generate, validate and package original assets
+        env:
+          ASSET_COUNT: ${{ inputs.count || '1600' }}
+        run: |
+          python - <<'PY'
+          import io, os, json, hashlib, zipfile
+          from pathlib import Path
+          import cairosvg
+          from PIL import Image
+          from astra_v2.visual_artifact_library import artifact
+          from astra_v2.illustrated_asset_validation import validate_library
+          count=int(os.environ['ASSET_COUNT'])
+          if not 1 <= count <= 4000: raise ValueError('count must be 1..4000')
+          root=Path('runtime-artifacts/astra-pack')
+          art=root/'art'/'backgrounds'
+          art.mkdir(parents=True,exist_ok=True)
+          manifest={'assets':[]}
+          for i in range(count):
+              scene,svg=artifact(i)
+              raw=cairosvg.svg2png(bytestring=svg.encode(),output_width=540,output_height=720)
+              with Image.open(io.BytesIO(raw)) as source:
+                  # Preserve the full original illustration; extend vertically to 9:16.
+                  source=source.convert('RGB')
+                  canvas=Image.new('RGB',(540,960),source.getpixel((0,0)))
+                  canvas.paste(source,(0,120))
+                  output=io.BytesIO()
+                  canvas.save(output,format='PNG',optimize=True)
+                  png=output.getvalue()
+              rel=f'art/backgrounds/{scene}-{i:04d}.png'
+              (root/rel).write_bytes(png)
+              manifest['assets'].append({'id':f'{scene}-{i:04d}','path':rel,'kind':'background',
+                  'license':'original','source':'ASTRA visual_artifact_library procedural generator',
+                  'artist':'ASTRA original procedural generator','style':'stylized-illustration',
+                  'tags':[scene,'background','portrait','environment'],'sha256':hashlib.sha256(png).hexdigest()})
+          (root/'art'/'manifest.json').write_text(json.dumps(manifest,indent=2))
+          result=validate_library(root)
+          assert result['verified_files']==count
+          dest=Path('runtime-artifacts/astra-visual-pack.zip')
+          with zipfile.ZipFile(dest,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
+              for p in sorted((root/'art').rglob('*')):
+                  if p.is_file(): z.write(p,p.relative_to(root))
+          print('ASTRA_ASSET_PACK='+json.dumps({'verified':result['verified_files'],
+              'zip_bytes':dest.stat().st_size,'dimensions':'540x960','production_approved':False}))
+          PY
+      - name: Upload reusable asset ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-original-visual-pack
+          path: runtime-artifacts/astra-visual-pack.zip
+          retention-days: 30
+          if-no-files-found: error
