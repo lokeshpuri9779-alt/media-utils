@@ -129,7 +129,7 @@ jobs:
       - name: Verify restored reusable visual pack
         if: env.ASTRA_ASSET_PACK_ENABLED == '1'
         run: |
-          python tools/astra_restore_visual_pack.py runtime-artifacts/download/astra-visual-pack.zip runtime-artifacts/verified-pack --expected 3200
+          python -m tools.astra_restore_visual_pack runtime-artifacts/download/astra-visual-pack.zip runtime-artifacts/verified-pack --expected 3200
       - name: Install rendering stack
         timeout-minutes: 18
         run: |
