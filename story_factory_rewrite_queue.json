@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "7837ba7b837b47af246420a8",
-      "source_sha256": "743c778d8eb1ea8748f66e9c23a39d17260bf93a96545ad689d03e6c5e1d8f14",
+      "candidate_id": "2ed50ee36d08f5447a5bc01b",
+      "source_sha256": "2b958af166c50bc27162a1c6448815d3667a29420c738fa5629e068d9a0c1d25",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-222a885bde934890df39",
-        "title": "The Great Tomato Launching Debacle",
-        "hook": "The Grand Unveiling",
-        "question": "How did Barnaby's automatic tomato-slicer cause chaos at the farmers market?",
-        "answer": "His machine targeted flying prices instead of produce, turning the central square into a red-tinted war zone.",
+        "content_id": "rayvan-gemini-f0f3f737027cc6074981",
+        "title": "The Great Cheese-Powered Whistle",
+        "hook": "Market Madness",
+        "question": "How do you stop a stampede of rogue mechanized goats in a crowded farmers market?",
+        "answer": "You build a hyper-frequency cheese whistle that plays a catchy polka melody.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,75 +29,76 @@
         ],
         "story_beats": [
           {
-            "headline": "The Grand Unveiling",
-            "speech": "Behold the turbo slicer! It dices any round vegetable instantly without a single drop of messy juice.",
+            "headline": "Market Madness",
+            "speech": "Behold my latest contraption, a cheddar-driven acoustic disruptor designed to calm aggressive livestock instantly!",
             "visual": "robot",
-            "label": "The Invention",
+            "label": "The Inventor's Reveal",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby proudly stands next to his clunky brass robot-slicer in a bustling outdoor market, holding a clipboard, looking excited while a crowd watches.",
+            "visual_prompt": "An eccentric inventor proudly holds a bizarre brass robot-shaped whistle adorned with aging Swiss cheese inside a bustling outdoor farmers market, looking nervously at approaching mechanical goats.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "A Shift in Targets",
-            "speech": "Wait, why is the calibration dial spinning toward the price board instead of my juicy prize tomatoes?",
-            "visual": "signal",
-            "label": "The Glitch",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby frantically reaches out to grab a spinning dial on his brass robot-slicer as green laser signals shoot toward a large wooden price sign overhead.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Red Rain",
-            "speech": "Duck everyone! It is slicing the giant prize-winning tomatoes right off the display shelf at high velocity!",
-            "visual": "ship",
-            "label": "The Chaos",
-            "story_beat": "twist",
-            "visual_prompt": "Market vendors duck behind wooden crates as sliced tomatoes fly through the air like miniature airborne projectiles, with the robot smoking in the center.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Salad for Everyone",
-            "speech": "Well, on the bright side, we accidentally made the biggest communal salsa in the history of the town.",
+            "headline": "Mechanical Assembly",
+            "speech": "We must rapidly insert this aged Gouda wheel into the primary chamber before the brass gears overheat completely.",
             "visual": "door",
-            "label": "The Result",
+            "label": "Assembling the Gadget",
+            "story_beat": "build",
+            "visual_prompt": "The inventor frantically stuffs a yellow wheel of Gouda cheese through a small trap door on the side of a large steam-powered wooden apparatus, surrounded by spilled vegetables.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Activating the Tone",
+            "speech": "Turn the iron crank faster and unleash the high-pitched polka melody to confuse their navigation systems!",
+            "visual": "signal",
+            "label": "The Core Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "Glowing musical soundwave signals blast from the brass horn of the contraption while mechanical goats stop in their tracks, twitching their robotic ears in confusion.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A Peaceful Market",
+            "speech": "It actually worked! The mechanical goats are fast asleep, and our market stalls remain completely undamaged today.",
+            "visual": "ship",
+            "label": "The Sweet Success",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby and smiling market vendors stand ankle-deep in a giant bowl of fresh salsa outside a wooden market stall, holding tortilla chips.",
+            "visual_prompt": "The smiling inventor relaxes next to the sleeping mechanical goats while a nearby market banner shaped like an airship flutters gently in the morning breeze.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright, colorful stop-motion claymation aesthetic with expressive character animations.",
+          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures and whimsical character designs.",
           "characters": {
-            "Barnaby": "An eccentric middle-aged inventor with wild gray hair, wearing a striped green vest, oversized goggles on his forehead, and carrying a clipboard."
+            "inventor": "A tall, frantic inventor with messy red hair, wearing a green tweed vest, round spectacles, and soot-stained trousers."
           },
           "locations": {
-            "market_square": "A bustling town market filled with wooden stalls, colorful awnings, and hanging vegetable baskets under a bright sunny sky."
+            "market": "A vibrant outdoor farmers market with wooden stalls, hanging lanterns, and colorful canvas awnings."
           },
           "objects": {
-            "robot_slicer": "A bulky, whirring brass machine with multiple mechanical arms, a glowing green calibration dial, and a spinning steel blade attachment."
+            "whistle": "A complex brass contraption shaped like a miniature robot with slots for holding various types of cheese.",
+            "goat": "A cute, clanking robotic goat with silver metallic fleece and glowing blue LED eyes."
           }
         },
-        "plot_fingerprint": "a3e2b03582a7deeda58ca520b92a0f68a0b8a265ca9ee3b770e43bc93a7abbe4"
+        "plot_fingerprint": "1036dfc877f8d103b89a1eaac436fad3d2baba35a1aaba24e5a581b1a56799d9"
       },
       "approved": false
     },
     {
-      "candidate_id": "393078d3511417dcdd9ba04a",
-      "source_sha256": "03b129a8834ec8be2d98cbde198a1688575569ae63257fc49a4c6f4d0d047b5a",
+      "candidate_id": "353e243acb15138f47ba2464",
+      "source_sha256": "43217f62b0a91af1ad755b52d5dee1c75aca4bbf1324deb8c388e89cc6f866c8",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-979a0ef9ee822d62c36a",
-        "title": "The Weaver's Last Loom",
-        "hook": "Discovery of the Hidden Thread",
-        "question": "Can true friendship survive an impossible choice between personal ambition and village survival?",
-        "answer": "Yes, but only when both friends realize that their shared heritage matters more than individual legacy.",
+        "content_id": "rayvan-gemini-25656a37c2432c4e5322",
+        "title": "The Whispering Sands of Arid-4",
+        "hook": "A Desert Mirage",
+        "question": "What secret did the singing dunes conceal from the weary explorers?",
+        "answer": "An underground subterranean garden powered by ancient geothermal acoustic resonators.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -105,82 +106,77 @@
         ],
         "story_beats": [
           {
-            "headline": "Discovery of the Hidden Thread",
-            "speech": "Look closely at this ancient warp, master weaver. It holds patterns our ancestors thought were completely lost to time.",
+            "headline": "A Desert Mirage",
+            "speech": "My sensors indicate strange acoustic frequencies echoing directly from beneath this barren, unforgiving planetary surface.",
+            "visual": "planet",
+            "label": "Acoustic Anomaly",
+            "story_beat": "reveal",
+            "visual_prompt": "Explorer Kael stands on a desolate planetary dune, holding a glowing metal scanner, looking at vast rolling orange sand hills under a twin sunset.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Unearthing the Mechanism",
+            "speech": "We must activate the resonant tuning fork to align with the subterranean harmonic vibrations before sunset.",
+            "visual": "signal",
+            "label": "Tuning the Waves",
+            "story_beat": "mechanism",
+            "visual_prompt": "Kael kneels in the sand, activating a pulsing blue holographic signal projected from a brass tripod device in front of him.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Hidden Portal Opens",
+            "speech": "The sand is parting! A massive stone hatch is sliding open, revealing steps leading deep into the cool dark earth.",
+            "visual": "door",
+            "label": "Subterranean Entry",
+            "story_beat": "build",
+            "visual_prompt": "A heavy circular stone door rises from the desert floor, revealing glowing green stairs leading downward into the earth as Kael watches in amazement.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "An Oasis in the Deep",
+            "speech": "Incredible! Bioluminescent flora and freshwater streams thrive down here, sustained entirely by the melodic heartbeat of the planet.",
             "visual": "forest",
-            "label": "The Ancient Forest Cache",
-            "story_beat": "reveal",
-            "visual_prompt": "Anxious master weaver Marcus holding a decaying wooden spindle inside a shadowy oak grove, wearing rugged earth-toned wool tunics, staring in wide-eyed shock at a glowing emerald moss patch.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Impossible Mandate",
-            "speech": "We must choose right now whether to weave the royal banner for glory or keep our wool for the starving villagers.",
-            "visual": "door",
-            "label": "The Village Workshop",
-            "story_beat": "build",
-            "visual_prompt": "Resolute weaver Elian standing inside a cramped timber cottage doorway, clutching a bundle of coarse brown sheep's wool, pointing firmly toward the heavy oak threshold.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Breaking the Traditional Loom",
-            "speech": "If we destroy our only working frame today, the tax collector will punish us both severely before the winter frost arrives.",
-            "visual": "signal",
-            "label": "The Burning Yard",
-            "story_beat": "mechanism",
-            "visual_prompt": "Marcus tossing a glowing brass lantern onto a pile of carved wooden weaving shuttles in the muddy cobblestone courtyard, casting long dramatic orange flames against stone walls.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A New Foundation",
-            "speech": "We have no grand tapestries left to sell, but our people are warm, fed, and standing safely together.",
-            "visual": "ship",
-            "label": "The River Wharf",
+            "label": "Living Biosphere",
             "story_beat": "payoff",
-            "visual_prompt": "Elian and Marcus smiling shoulder to shoulder on a wooden trading barge loaded with sacks of grain, watching the village green fade away under a clear morning sky.",
+            "visual_prompt": "Kael stands inside a vast underground cavern filled with glowing purple trees, crystal-clear water streams, and floating spores in the air.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Realistic historical drama with rich textures, earthy color palettes, and cinematic natural lighting.",
+          "style": "Cinematic sci-fi realism with vibrant lighting and rich atmospheric dust effects.",
           "characters": {
-            "Marcus": "A tall, broad-shouldered weaver with weathered hands, short dark hair, deep worry lines, wearing a dark green wool tunic and leather apron.",
-            "Elian": "A nimble, sharp-eyed artisan with a braided blonde beard, wearing a russet linen shirt and trousers patched with sturdy grey denim."
+            "Kael": "A male desert botanist in his thirties, with short dark hair, wearing a weatherproof tan hooded jacket, utility trousers, and high-tech tinted goggles resting on his forehead."
           },
           "locations": {
-            "The Ancient Forest Cache": "A damp, mossy clearing surrounded by towering ancient oak trees with thick twisting roots.",
-            "The Village Workshop": "A modest stone cottage filled with dusty shelves, scattered yarn, and the wooden skeleton of a broken loom.",
-            "The Burning Yard": "A muddy cobblestone courtyard enclosed by low stone walls and timber fences.",
-            "The River Wharf": "A rustic wooden dock extending into a calm river, with moored cargo barges tied by thick hemp ropes."
+            "Arid-4 Surface": "A harsh orange desert planet featuring endless rolling dunes, distant jagged mountains, and a double sun setting on the horizon.",
+            "Subterranean Cavern": "A lush underground cavern illuminated by bioluminescent flora, crystal pools, and ancient stone architecture covered in moss."
           },
           "objects": {
-            "Spindle": "A hand-carved walnut wood spindle wrapped in shimmering golden thread that catches the ambient light.",
-            "Wool Bundle": "A thick, coarse bundle of raw, unwashed brown sheep wool tied securely with coarse twine.",
-            "Brass Lantern": "A dented, soot-stained brass oil lantern with a cracked glass chimney and a glowing wick.",
-            "Grain Sack": "A large burlap sack marked with a dark red dye stamp, overflowing slightly with pale golden wheat grains."
+            "Scanner": "A compact handheld device made of brushed titanium with a glowing circular turquoise display screen.",
+            "Tuning Fork": "A large ornate brass tuning fork inscribed with glowing geometric circuit patterns along its prongs."
           }
         },
-        "plot_fingerprint": "7b1dab5f91a49ef874975d58cc91b94f3c49c46745c25c21aa697bc8fdb134ea"
+        "plot_fingerprint": "88b97eb7a8e44c984ab9207736a0e6955a1cad195ffc7f38c6662049ed98aba5"
       },
       "approved": false
     },
     {
-      "candidate_id": "c1b14d4a7f329a365d170cb3",
-      "source_sha256": "f93179a5e76d27cec39831d02f952355d6be9ee5953fb42c63819def9d3b5dda",
+      "candidate_id": "86b9bbbe1b8e3b0ec60b4b66",
+      "source_sha256": "199c321f005f311696bba4fb515cd4b3f1e490db6d556d13971ed0368a62520c",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-d7d07add5e16009b8732",
-        "title": "The Great Saltmarsh Wind-Catcher Regatta",
-        "hook": "Tidal Discovery",
-        "question": "How do you win a seaside race without an engine?",
-        "answer": "By building a tide-powered paddle craft that uses underwater buoyancy flutes to march across the surf.",
+        "content_id": "rayvan-gemini-f07c3f09a4c83680752e",
+        "title": "The Weaver's Last Thread",
+        "hook": "Discovery in the Attic",
+        "question": "What happens when a village must choose between preserving its ancient heritage and ensuring its immediate survival?",
+        "answer": "The village leaders decide to trade their last ceremonial loom tapestry for winter grain, honoring the past by feeding the future.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -188,64 +184,65 @@
         ],
         "story_beats": [
           {
-            "headline": "Tidal Discovery",
-            "speech": "Look at how the heavy undertow rushes past the pier pilings. We can harness that steady underwater pulse directly.",
-            "visual": "signal",
-            "label": "Low Tide Secret",
-            "story_beat": "reveal",
-            "visual_prompt": "At the coastal boardwalk, Captain Bram wearing a weathered green oilskin coat points a brass spyglass toward the rushing sea channel while his apprentice Maeve stands nearby holding a carved wooden buoyancy valve.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Building the Flutes",
-            "speech": "We must fit these weighted copper chambers precisely so they compress whenever the incoming saltwater swells upward against them.",
-            "visual": "ship",
-            "label": "Workshop Assembly",
-            "story_beat": "build",
-            "visual_prompt": "Inside the boathouse workshop, Captain Bram in his green oilskin coat uses a riveting hammer to attach polished copper tubes to the wooden hull while Maeve holds a heavy leather bellows.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Mechanical Pulse",
-            "speech": "When the wave pressure triggers the release lever, the piston drives the stern paddles forward without touching the wind.",
-            "visual": "robot",
-            "label": "Valve Test",
-            "story_beat": "mechanism",
-            "visual_prompt": "At the water's edge, Maeve wearing a patchwork canvas apron pulls a braided rope lever, causing mechanical brass paddles on the underside of the vessel to snap outward rhythmically.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Victory on the Waves",
-            "speech": "Our underwater engine never relied on the breeze at all. See how it smoothly overtakes every stalled sailing boat?",
+            "headline": "Discovery in the Attic",
+            "speech": "Look at these intricate golden threads. They hold the history of every harvest our ancestors ever gathered.",
             "visual": "door",
-            "label": "Finish Line",
+            "label": "The Hidden Attic",
+            "story_beat": "reveal",
+            "visual_prompt": "Elder Mira standing inside the dusty wooden attic, holding a wooden storage chest open, wearing a heavy wool cloak, looking astonished at the glowing golden tapestry inside while holding a tallow candle.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Hard Choice",
+            "speech": "We cannot eat gold or memory. If we keep this tapestry, the children will not survive the coming frost.",
+            "visual": "forest",
+            "label": "The Village Square",
+            "story_beat": "build",
+            "visual_prompt": "Bren standing in the snowy cobblestone village square, wearing a thick fur-lined tunic, gesturing urgently toward the barren surrounding forest while holding a carved wooden ledger.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Unraveling the Past",
+            "speech": "Every stitch we pull apart releases a generation of stories, trading our treasured legacy for daily bread.",
+            "visual": "signal",
+            "label": "The Communal Workshop",
+            "story_beat": "mechanism",
+            "visual_prompt": "Mira sitting at a large wooden loom inside a warm workshop, carefully cutting a golden thread with iron shears, holding a bundle of harvested grain nearby.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A New Harvest",
+            "speech": "Our history lives in our hearts, not on the wall. Now we have the strength to weave a brighter tomorrow.",
+            "visual": "ship",
+            "label": "The River Dock",
             "story_beat": "payoff",
-            "visual_prompt": "On the sunlit festival bay, Captain Bram and Maeve stand proudly aboard their humming paddle vessel as it crosses beneath the beribboned judges pavilion, leaving traditional sailboats behind.",
+            "visual_prompt": "Bren and Mira standing smiling together at the wooden river dock, watching a merchant trading boat arrive with sacks of grain, holding a freshly baked loaf of bread between them.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright coastal illustration with rich textures, warm sunlight, and detailed Victorian engineering elements.",
+          "style": "Warm historical realism with rich textures of wood, wool, and snow.",
           "characters": {
-            "Captain Bram": "An elderly salt-of-the-earth shipwright with a bushy white beard, deep laugh lines, wearing a weathered dark green oilskin coat and a woolen cap.",
-            "Maeve": "A sharp-eyed young apprentice with auburn hair tied in a practical braid, wearing a durable patchwork canvas apron over a blue linen shirt."
+            "Mira": "An elderly village weaver with silver hair tied in a bun, wearing a deep green wool dress and a heavy brown cloak.",
+            "Bren": "A pragmatic village council leader with a weathered face, short gray beard, and a thick fur-lined tunic."
           },
           "locations": {
-            "Boardwalk Pier": "A weathered timber pier extending over choppy green seawater, lined with colorful festival banners and brass railings.",
-            "Boathouse Workshop": "A cluttered maritime workshop filled with hanging ropes, wooden planks, brass fittings, and shelves of spare tools."
+            "The Hidden Attic": "A cramped, dusty wooden attic filled with straw bundles and antique chests under a slanted timber roof.",
+            "The Village Square": "A snowy cobblestone square surrounded by timber-framed cottages and bare winter trees.",
+            "The Communal Workshop": "A cozy room dominated by a massive wooden loom and illuminated by soft hearth firelight.",
+            "The River Dock": "A sturdy wooden pier overlooking a misty river with rolling hills in the background."
           },
           "objects": {
-            "spyglass": "A tarnished brass extending telescope with leather grip rings.",
-            "buoyancy valve": "A carved cedar wood cylinder with adjustable interior copper flaps.",
-            "riveting hammer": "A heavy steel mallet with a polished hickory wood handle.",
-            "paddle vessel": "A flat-bottomed oak craft fitted with interconnected brass pistons and underwater paddle wheels."
+            "golden tapestry": "An ancient, intricately woven wall hanging made of shimmering golden wool threads depicting historical village scenes.",
+            "iron shears": "A pair of heavy, hand-forged black iron scissors with worn handles used for cutting thick fabric.",
+            "wooden ledger": "A small bound book with weathered parchment pages and a leather strap closure."
           }
         },
-        "plot_fingerprint": "00d0b6412c6c4511cffa8a64256bca9c8dc4cad8cabe943f4d3ac50e4c239adb"
+        "plot_fingerprint": "15edb1d52bc665b10d7e544bc5900867f7d61dab3bc77fdf00f1f4bad4e515e5"
       },
       "approved": false
     }
