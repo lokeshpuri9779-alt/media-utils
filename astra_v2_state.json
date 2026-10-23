@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-23",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 22,
-  "confirmed_today": 21,
-  "last_attempt_at": "2026-10-23T11:01:15.114856+00:00",
+  "attempts": 23,
+  "confirmed_today": 22,
+  "last_attempt_at": "2026-10-23T11:08:48.247153+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -175,30 +175,38 @@
       "format": "short",
       "uploaded_at": "2026-10-23T10:23:20.793504+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-gemini-fd775df28232df847f91": {
+      "video_id": "DNIj7s09Utk",
+      "confirmed_at": "2026-10-23T11:06:25.306862+00:00",
+      "title": "Finnegan's Automatic Spice-Grinder and the Bazaar Catastrophe",
+      "format": "short",
+      "uploaded_at": "2026-10-23T11:01:16.731715+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "DNIj7s09Utk": {
-      "content_id": "rayvan-gemini-fd775df28232df847f91",
-      "title": "Finnegan's Automatic Spice-Grinder and the Bazaar Catastrophe",
+    "uZz2uGMk-04": {
+      "content_id": "rayvan-gemini-bb1aafebe7ca2c750ad2",
+      "title": "The Root-Bound Travelers of Echoing Glade",
       "day": "2026-10-23",
-      "uploaded_at": "2026-10-23T11:01:16.731715+00:00",
+      "uploaded_at": "2026-10-23T11:08:49.950769+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "7a6ecef68dd5ad1c51c5799555d214a22a7bbc60879d6552ee449dc0e27b9a27",
+      "plot_fingerprint": "60ab6627c2bafc872a5b39f61a2f1c8eb2f82ddfb17986ea3440c70758be5925",
       "story_beats": [
         {
-          "speech": "Behold citizens of the bazaar, my automatic spice-grinder will revolutionize your curries by pulverizing every single peppercorn with industrial precision."
+          "speech": "Look Kael, the heart of the forest is fading rapidly, we must act now before the frost seals this ancient entrance shut forever."
         },
         {
-          "speech": "My gears are grinding too fast because the tension spring snapped during the demonstration, causing the machine to vibrate uncontrollably across the table."
+          "speech": "Place your hands upon the stone altar while I synchronize my heartbeat to the flow of the glowing veins within the wood."
         },
         {
-          "speech": "I must reroute the power to the secondary intake valve before this whirling metallic beast scatters my entire inventory across the market square."
+          "speech": "The stone is shifting, we need to exert equal pressure on both sides to align the gears of the earth and bloom."
         },
         {
-          "speech": "Although the market is coated in seasoning, the resulting blend on the floor is actually quite delicious and requested by every passing chef."
+          "speech": "The frost is retreating and the grove is waking up, our cooperation saved the forest from the eternal cold of the winter."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -206,11 +214,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-23T10:58:53.704384+00:00",
+  "last_preflight_at": "2026-10-23T11:06:24.814418+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-23T11:01:17.149478+00:00",
+    "at": "2026-10-23T11:08:50.325372+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -734,10 +742,33 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-bb1aafebe7ca2c750ad2": {
+      "at": "2026-10-23T11:08:48.247139+00:00",
+      "title": "The Root-Bound Travelers of Echoing Glade",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "60ab6627c2bafc872a5b39f61a2f1c8eb2f82ddfb17986ea3440c70758be5925",
+      "story_beats": [
+        {
+          "speech": "Look Kael, the heart of the forest is fading rapidly, we must act now before the frost seals this ancient entrance shut forever."
+        },
+        {
+          "speech": "Place your hands upon the stone altar while I synchronize my heartbeat to the flow of the glowing veins within the wood."
+        },
+        {
+          "speech": "The stone is shifting, we need to exert equal pressure on both sides to align the gears of the earth and bloom."
+        },
+        {
+          "speech": "The frost is retreating and the grove is waking up, our cooperation saved the forest from the eternal cold of the winter."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-23T11:01:17.149401+00:00",
+    "at": "2026-10-23T11:08:50.325290+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -748,21 +779,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-23T11:01:17.149463+00:00",
+    "at": "2026-10-23T11:08:50.325354+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-23T10:59:22.657425+00:00",
+    "at": "2026-10-23T11:07:03.484924+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-fd775df28232df847f91",
-    "video_url": "https://www.youtube.com/watch?v=DNIj7s09Utk",
+    "content_id": "rayvan-gemini-bb1aafebe7ca2c750ad2",
+    "video_url": "https://www.youtube.com/watch?v=uZz2uGMk-04",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-23T11:01:17.149157+00:00",
+    "at": "2026-10-23T11:08:50.325047+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -774,7 +805,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-23T11:01:17.149394+00:00",
+    "at": "2026-10-23T11:08:50.325283+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
