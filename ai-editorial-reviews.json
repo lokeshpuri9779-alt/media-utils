@@ -832,6 +832,18 @@
         "review_provider:provider_unavailable"
       ],
       "record": null
+    },
+    {
+      "content_id": "rayvan-gemini-40ec4ae767bdb0a54bec",
+      "story_sha256": "e112cb18e25bef692ef3550ec620340c7252d68d5c01641c981ac7bb66afda21",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise and character archetype (a crab using specialized tools to solve environmental/mechanical crises in an underwater setting) are highly derivative of the provided list of recent publications, specifically 'Barnaby's Brass Banana Bonanza' and 'The Coral Scribe and the Echoing Trench'.",
+        "The narrative structure and character name 'Barnaby' overlap significantly with existing titles in the provided dataset, suggesting a lack of sufficient originality.",
+        "The plot relies on repetitive tropes found in the provided list, such as 'The Coral Cartographer', 'The Tide-Turner's Clockwork Pier', and 'The Glimmer-Shell Guardian', failing to distinguish itself from the established content pool."
+      ],
+      "record": null
     }
   ]
 }
