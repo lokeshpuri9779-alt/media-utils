@@ -1364,6 +1364,18 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-eae13dc3334d44a69c56",
+      "story_sha256": "e33fd081c69de46831de63ce47e66aaeae7b7cd6baa97e5b36b5bd0c05524664",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise, central conflict, and resolution are substantially similar to 'The Mud-Skipper's Gambit at Salt-Flat Speedway' provided in the reference data. Both stories feature an underdog protagonist using engineering ingenuity to overcome a sabotaged or difficult terrain (mud/sludge) created by rivals to win a race.",
+        "The causal mechanism of using a vehicle modification to gain traction or speed over a surface that traps opponents is a repetitive trope within the provided dataset."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
