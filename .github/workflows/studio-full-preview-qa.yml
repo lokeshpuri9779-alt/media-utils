@@ -1,5 +1,9 @@
 name: ASTRA Full Studio Preview QA
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/studio-full-preview-qa.yml'
   workflow_dispatch:
   pull_request:
     paths:
@@ -21,12 +25,13 @@ jobs:
       - run: python -m pip install pillow imageio-ffmpeg
       - run: python -m unittest tests.test_studio_audio_gate -v
   full-studio-preview:
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     runs-on: ubuntu-24.04
     timeout-minutes: 40
     env:
       ORT_DISABLE_TELEMETRY: '1'
       ASTRA_ASSET_PACK_ENABLED: '1'
+      ASTRA_ASSET_PACK_AUDIT: '1'
       ASTRA_ASSET_PACK_ROOT: runtime-artifacts/verified-pack
     steps:
       - uses: actions/checkout@v4
