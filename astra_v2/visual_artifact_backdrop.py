@@ -42,7 +42,7 @@ def analyze_story_scene(shot):
     Explicit storyboard locations outrank narration. Unknown environments stay
     unresolved rather than silently selecting unrelated artwork.
     """
-    for key in ("story_environment", "visual_prompt", "visual", "speech", "headline"):
+    for key in ("story_environment", "scene_environment", "scene_location", "setting", "visual_prompt", "visual_intent", "visual", "speech", "headline"):
         value = shot.get(key)
         if not isinstance(value, str) or not value.strip():
             continue
