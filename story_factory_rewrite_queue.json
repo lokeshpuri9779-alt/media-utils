@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "c9867b5de05a0f805f2dba20",
-      "source_sha256": "8e62bbc926fa7bfa8d66152020c11753c709f53debc9695c3109fa9b0a843f7f",
+      "candidate_id": "50eac03d3f816c85577f9d14",
+      "source_sha256": "c189bfef03b52029eb8d817130b734fb0801d5ba8bcfb498f483179995caa6fb",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-571da0615ff631cb0957",
-        "title": "The Great Turnip Horn Controversy",
-        "hook": "The Unexpected Blast",
-        "question": "Can Barnaby's automatic root vegetable brass instrument survive opening day at the vegetable market?",
-        "answer": "Yes, by blasting a synchronized vegetable medley that clears the stalls and delights the hungry crowd.",
+        "content_id": "rayvan-gemini-3ef99e20d1ade1e45f15",
+        "title": "The Automatic Onion-Chopper Calamity",
+        "hook": "The Demonstration Begins",
+        "question": "Can an inventor stop his rogue culinary machine before it pickles the entire farmers market?",
+        "answer": "He programs a counter-burst of sweet syrup to instantly candy and neutralize every onion tear.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,79 +29,78 @@
         ],
         "story_beats": [
           {
-            "headline": "The Unexpected Blast",
-            "speech": "Behold my magnificent root-powered musical horn, engineered to serenade every single shopper in this bustling square!",
+            "headline": "The Demonstration Begins",
+            "speech": "Behold the turbo slicer, guaranteed to chop fifty onions a minute without a single bitter tear dropped!",
             "visual": "robot",
-            "label": "The Invention Unveiled",
+            "label": "The Contraption",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly next to a large brass machine fitted with raw turnips, pointing excitedly as a loud discordant honk echoes across the busy market.",
+            "visual_prompt": "Inventor Barnaby stands proudly next to a whirring brass and copper robot slicer in a bustling open-air market stall filled with purple onions, wearing a stained apron and a wide nervous smile.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Modifying the Mechanism",
-            "speech": "The raw turnips are too dense for smooth melodies. I must rapidly swap them out for hollowed-out orange carrots right now!",
+            "headline": "Blades Go Wild",
+            "speech": "Oh dear, the gear ratio slipped on the high-speed setting and now it is targeting everyone's hats!",
             "visual": "signal",
-            "label": "Emergency Adjustments",
+            "label": "The Malfunction",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby frantically waves his hands at the smoking robot controller panel while wild spinning blades shoot onion rings through the air toward startled vegetable vendors.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Emergency Override",
+            "speech": "Quickly grab the emergency caramel reservoir lever before the entire morning produce inventory is permanently ruined!",
+            "visual": "door",
+            "label": "The Hatch",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby frantically reaches into the brass apparatus with a wrench, replacing lumpy purple turnips with neatly carved carrots while market vendors cover their ears.",
+            "visual_prompt": "Barnaby pulls hard on a heavy iron hatch door attached to the side of the machine, releasing thick amber steam that billows across the crowded market square.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "A Surprising Twist",
-            "speech": "Wait, the hot steam is cooking the carrots inside the tubes, turning my brass horn into an outdoor soup kitchen!",
+            "headline": "Sweet Success",
+            "speech": "Who would have thought that candied crunch makes these flying rings taste like an absolute carnival treat?",
             "visual": "ship",
-            "label": "The Vegetable Stew",
-            "story_beat": "twist",
-            "visual_prompt": "Steam billows from the brass instrument's bell, sending cooked carrot slices floating into the air while astonished shoppers point and laugh at Barnaby.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Sweet Payoff",
-            "speech": "Listen to that delightful whistling melody! Our market symphony is an absolute triumph for inventors everywhere!",
-            "visual": "forest",
-            "label": "Grand Finale",
+            "label": "The Feast",
             "story_beat": "payoff",
-            "visual_prompt": "The brass horn plays a gentle harmonic tune while smiling market patrons clap rhythmically, holding paper bowls of warm carrot soup handed out by Barnaby.",
+            "visual_prompt": "Smiling market shoppers hold up wooden plates piled high with glossy glazed onion rings while Barnaby wipes his brow in relief next to his smoking machine.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby's automatic turnip horn scares customers away with discordant honks during the morning market rush.",
-        "decisive_choice": "Barnaby tweaks the internal steam valves to route airflow through hollow carrots instead of raw turnips.",
-        "resolution": "The modified instrument plays a sweet harmonic tune that draws a massive cheering crowd and record sales.",
+        "central_conflict": "A hyper-speed vegetable chopper loses control and pelts furious shoppers with sliced red onions.",
+        "decisive_choice": "Override the main control panel to vent boiling caramel directly into the slicing blades.",
+        "resolution": "The market crowd happily eats candied onion rings while cheering the bizarre invention.",
         "visual_bible": {
-          "style": "Vibrant stop-motion animation aesthetic with rich textures, warm lighting, and a handcrafted folk-art look.",
+          "style": "vibrant stop-motion claymation aesthetic with rich copper tones and detailed miniature market props",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild gray hair, a patched brown tweed waistcoat, brass goggles pushed onto his forehead, and an enthusiastic expression."
+            "Barnaby": "An energetic inventor with frizzy orange hair, smudged round spectacles, a patched canvas apron, and striped trousers."
           },
           "locations": {
-            "Market Square": "A bustling cobblestone marketplace filled with striped canvas awnings, wooden crates overflowing with colorful vegetables, and cheerful townspeople."
+            "MarketSquare": "A sunlit cobblestone town square packed with striped canvas awnings, wooden crates, and bustling townsfolk."
           },
           "objects": {
-            "Turnip Horn": "A complex contraption made of polished brass tubing, leather bellows, pressure gauges, and metal clamps designed to hold root vegetables.",
-            "Wrench": "A heavy iron tool with a rusted handle and grease stains, used by Barnaby for quick mechanical adjustments."
+            "SlicerBot": "A clunky brass and iron machine featuring three rotating steel blades, a steam whistle, and a prominent red hazard dial."
           }
         },
-        "plot_fingerprint": "46a0f243ba6abeadd95b0462cc81df8e9b1366a428f44cb92df66ef026bf46c3"
+        "plot_fingerprint": "e628d12e20923481b29097a7b73781b7795013939e9f05ec9768b833035ef02a"
       },
       "approved": false
     },
     {
-      "candidate_id": "ccb1293dcfc7fb986266b0b2",
-      "source_sha256": "ec6ee4bea231e55825474b0d22b5648d02647d35bdc3d82e007229b6a94b3691",
+      "candidate_id": "c73d811673d23b472575c109",
+      "source_sha256": "29d0964e1c30505a464b99ae51d0c517a9477395d3d31ed39b51b7e19cab52ff",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-766c47e5c139c60c3dab",
-        "title": "The Coral Whisperer's Chorus",
-        "hook": "The Silent Chime",
-        "question": "Why has the great singing reef fallen completely silent?",
-        "answer": "A tangled mass of deep-sea kelp is choking the acoustic resonator stones.",
+        "content_id": "rayvan-gemini-1fbd7418b239f33110a5",
+        "title": "The Weaver's Last Loom",
+        "hook": "Discovery at the Edge",
+        "question": "Can lifelong friends survive a devastating choice between community survival and personal integrity?",
+        "answer": "True friendship withstands the heaviest burdens when honesty replaces protective deception.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -109,80 +108,81 @@
         ],
         "story_beats": [
           {
-            "headline": "The Silent Chime",
-            "speech": "Listen closely, my young apprentice, for the ancient resonator stones do not sing their morning melody today.",
-            "visual": "signal",
-            "label": "The Silent Stone",
-            "story_beat": "reveal",
-            "visual_prompt": "An elderly sea otter wearing a kelp-woven tunic points his paw at a dark, lifeless stone pillar inside a luminous coral cave.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Root and Resonance",
-            "speech": "These invasive vines have wrapped tightly around the acoustic chambers, completely blocking the vital harmonic vibrations from traveling.",
+            "headline": "Discovery at the Edge",
+            "speech": "Look closely at the cracked wooden frame. We cannot weave another blanket while this vital cornerstone remains severely broken.",
             "visual": "forest",
-            "label": "The Tangle",
+            "label": "The Hidden Flaw",
+            "story_beat": "reveal",
+            "visual_prompt": "Marta and Silas stand inside the dense winter forest clearing next to a snow-covered wooden shed. Marta wears a heavy green wool cloak and holds a splintered wooden beam, looking fearfully at Silas who wears a brown tunic and points at the structural damage.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Gathering the Threads",
+            "speech": "We must collect every remaining bundle of dyed yarn across the frozen valley before the harsh blizzard completely blocks our mountain paths.",
+            "visual": "door",
+            "label": "Gathering Supplies",
             "story_beat": "build",
-            "visual_prompt": "A young clownfish wearing a polished pearl monocle uses its fin to trace thick, overgrown black vines choking a glowing underwater archway.",
+            "visual_prompt": "Silas and Marta stand outside the heavy oak workshop door during a snowstorm. Silas carries a large woven basket filled with colorful yarn bundles, while Marta pulls the sturdy iron door handle to secure the warm interior against the freezing wind.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Sharp Cut",
-            "speech": "We must sever these stubborn roots immediately, even if the strong current threatens to sweep us out of the canyon.",
-            "visual": "ship",
-            "label": "The Rescue",
+            "headline": "The Council's Demand",
+            "speech": "The village elders demand an immediate confession about the structural failure before they distribute the emergency winter grain rations to our families.",
+            "visual": "signal",
+            "label": "The Ultimatum",
             "story_beat": "mechanism",
-            "visual_prompt": "The sea otter holds a sharp jagged clam-shell blade, sawing vigorously through a thick vine while bubbles stream past in the dark water.",
+            "visual_prompt": "Marta and Silas stand inside the crowded village hall lit by a towering stone fireplace. An elder holds a glowing signal lantern aloft, casting harsh shadows across Marta's distressed face as she steps forward to speak her truth.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "A New Harmony",
-            "speech": "Hear the wonderful song return to our home at last, proving that courage can always mend a broken world.",
-            "visual": "planet",
-            "label": "The Awakening",
+            "headline": "A New Foundation",
+            "speech": "Our shared honesty has forged a stronger bond than any ancient tradition, proving that true community survives through mutual trust always.",
+            "visual": "forest",
+            "label": "Renewed Friendship",
             "story_beat": "payoff",
-            "visual_prompt": "Both the sea otter and clownfish float happily together as vibrant blue and gold light pulses outward from the singing coral pillars.",
+            "visual_prompt": "Marta and Silas sit together on a sunlit wooden bench outside the restored village workshop. Both wear bright woolen shawls, smiling warmly at each other while holding a newly woven multi-colored tapestry between their hands under the clear spring sky.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Blocked acoustic resonator stones silencing the reef",
-        "decisive_choice": "Cutting the ancient kelp roots instead of waiting for the tide",
-        "resolution": "The reef awakens with a renewed and harmonious melody",
+        "central_conflict": "A severe winter threatens the village, and a faulty heirloom loom must be traded for food, but the trade requires exposing a hidden past.",
+        "decisive_choice": "Marta chooses to confess her accidental damage to the sacred loom rather than let her dearest friend Silas take the historic blame.",
+        "resolution": "Silas forgives Marta, and the villagers pool their remaining wool to help them craft a brand new cooperative tapestry style.",
         "visual_bible": {
-          "style": "Vibrant and detailed marine animation style with glowing bioluminescent lighting and rich watercolor textures.",
+          "style": "Warm historical realism with rich textures, earthy color palettes, and dramatic cinematic lighting inspired by traditional oil paintings.",
           "characters": {
-            "sea_otter": "An elderly sea otter with silver-tipped fur, expressive whiskers, wearing a braided kelp tunic and holding a clam-shell blade.",
-            "clownfish": "A bright orange and white clownfish with large curious eyes, wearing a tiny polished pearl monocle over its right eye."
+            "Marta": "A middle-aged woman with braided silver-streaked dark hair, determined green eyes, wearing a heavy forest-green wool cloak over a cream linen tunic.",
+            "Silas": "A thoughtful middle-aged man with short curly brown hair, kind hazel eyes, wearing a sturdy leather vest over a rustic brown homespun shirt."
           },
           "locations": {
-            "coral_cave": "A vast underwater cavern made of pink and purple coral, featuring natural acoustic resonator stone pillars that glow faintly."
+            "Village Workshop": "A rustic timber-framed building with a stone foundation, frosted glass windows, and a large brick chimney emitting gentle smoke.",
+            "Winter Forest": "A dense grove of snow-laden pine trees with soft white drifts covering the uneven forest floor under an overcast gray sky."
           },
           "objects": {
-            "resonator_stone": "A tall, faceted pillar of crystalline basalt that naturally vibrates and produces musical tones when clear of debris.",
-            "clam_shell_blade": "A sharp, pearlescent bivalve shell securely lashed to a sturdy driftwood handle with strong spider-silk thread."
+            "heirloom_loom": "A massive hand-crafted oak loom featuring intricate carved vine patterns along its upright beams and intricate brass tension levers.",
+            "yarn_basket": "A deep circular wicker basket filled tightly with vibrant red, blue, and gold dyed wool threads."
           }
         },
-        "plot_fingerprint": "07253b57b86c115dcbe2edcad398fa5bab910b2cb18846293389ce6be5a3a92b"
+        "plot_fingerprint": "c29b171b5758f712de6bf9a7057d19ecfe7fd41d5a2092e57266fb292275f36f"
       },
       "approved": false
     },
     {
-      "candidate_id": "86ec6192b70911562bda59ef",
-      "source_sha256": "dae5d58a74cb771e275e8732ee8035f7d3eaa28f16bb751bc7af8bd611823d20",
+      "candidate_id": "3253c657f77649539fde2bae",
+      "source_sha256": "fda327c97a97716068f2cc9b721de597de74361c96e83e0f1d08c6afa23e2e53",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-15a4f6140b42416b808f",
-        "title": "The Magnetic Drift of Sector Nine",
-        "hook": "Core Overload Detected",
-        "question": "Can Chief Engineer Vane bypass the magnetic stabilizer before the hull shatters?",
-        "answer": "Yes, by manually overriding the core manifold using the emergency pressure release valve.",
+        "content_id": "rayvan-gemini-1bca8c3299e08147f72e",
+        "title": "The Icebreaker's Final Core",
+        "hook": "The Signal of Distress",
+        "question": "Can the lead engineer sacrifice the station's automated thermal heater to melt the glacier pass and save the trapped scouting rover?",
+        "answer": "Yes, by manually rerouting the geothermal reactor, she trades the station's warmth to open a safe passage for the rover.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -190,65 +190,64 @@
         ],
         "story_beats": [
           {
-            "headline": "Core Overload Detected",
-            "speech": "Listen to me, Jax. If we purge the coolant now, we will be stranded in this sector forever.",
-            "visual": "ship",
-            "label": "Reactor Deck",
-            "story_beat": "reveal",
-            "visual_prompt": "Chief Engineer Vane stands in the cramped engineering bay holding a glowing diagnostic pad, staring at the flashing red manifold control console while Pilot Jax gestures urgently from the doorway.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Divergent Plan",
-            "speech": "We have no other choice, Vane. The magnetic pressure is climbing past critical thresholds every single second.",
-            "visual": "robot",
-            "label": "Maintenance Terminal",
-            "story_beat": "build",
-            "visual_prompt": "Pilot Jax points at a maintenance robot displaying warning graphs, while Vane firmly blocks access to the automated coolant purge lever with his left hand.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Manual Override Engagement",
-            "speech": "Hold the stabilizing brace steady while I force open this stubborn manual pressure release valve right now.",
+            "headline": "The Signal of Distress",
+            "speech": "Attention base, the eastern glacier is collapsing around the rover. We are losing thermal connection and structural integrity fast.",
             "visual": "signal",
-            "label": "Control Array",
-            "story_beat": "mechanism",
-            "visual_prompt": "Vane strains with both hands against a heavy brass valve wheel on the bulkhead, as a pulsing blue warning signal flashes across the overhead monitors.",
+            "label": "Beacon Alert",
+            "story_beat": "reveal",
+            "visual_prompt": "Dr. Vance stands inside the frosty research control room, her breath forming mist in the air, staring at a red blinking distress signal on the central holographic console while holding a heavy insulated wrench.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Stabilized Drift",
-            "speech": "The pressure is dropping back to normal levels. We saved the hull and kept our remaining fuel reserves intact.",
-            "visual": "planet",
-            "label": "Observation Deck",
+            "headline": "Constructing the Bypass",
+            "speech": "I must splice the auxiliary power cables directly into the seismic drill to break through the frozen debris wall.",
+            "visual": "robot",
+            "label": "Rerouting Power",
+            "story_beat": "build",
+            "visual_prompt": "Dr. Vance works frantically inside the icy mechanical bay, wearing a heavy parka with fur lining, using soldering tools to connect glowing orange cables to the dormant robotic drill arm.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Freezing Choice",
+            "speech": "If I divert the station's core heat to the drill, the interior will freeze, but the rover will finally have a clear path.",
+            "visual": "door",
+            "label": "Thermal Divert",
+            "story_beat": "mechanism",
+            "visual_prompt": "Dr. Vance pulls a heavy brass emergency lever marked with frost, her face lit by the amber glow of the reactor status panel while heavy steel bulkhead doors seal behind her.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Safe Return",
+            "speech": "The pass is open at last. The rover is crossing the ridge safely into the hangar bay just in time.",
+            "visual": "ship",
+            "label": "Rover Rescue",
             "story_beat": "payoff",
-            "visual_prompt": "Vane and Jax stand side by side looking out the main viewport at a calm blue planet, watching the glowing green system status indicators on the console between them.",
+            "visual_prompt": "Dr. Vance watches through the frosted observation window as the scarred armored scouting rover rolls safely into the brightly lit garage, illuminated by amber searchlights against the white snow.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Disagreement between Vane and pilot Jax on whether to vent the primary reactor coolant or risk magnetic overload.",
-        "decisive_choice": "Vane decides to crack the manifold manually instead of executing Jax's automated coolant purge command.",
-        "resolution": "The reactor stabilizes just in time, saving the hull while preserving the remaining fuel reserves.",
+        "central_conflict": "A sudden glacial shift traps the automated scouting rover beyond the ridge while draining the main research station's backup thermal core.",
+        "decisive_choice": "Dr. Vance manually disables the station's primary heating loops to power the seismic drill and shatter the ice bridge.",
+        "resolution": "The rover successfully crosses the cleared crevasse into the safety hangar as the interior temperature drops to near freezing.",
         "visual_bible": {
-          "style": "Gritty, lived-in industrial sci-fi with practical lighting, muted metallic tones, and high-contrast warning indicators.",
+          "style": "Cinematic gritty sci-fi realism with realistic cold-weather lighting, visible breath vapor, frost-covered metallic textures, and an amber-and-ice-blue color palette.",
           "characters": {
-            "Vane": "Chief Engineer Vane is a weathered human in his late forties with a scarred jawline, wearing a grease-stained canvas utility jacket over a dark grey jumpsuit, with short iron-grey hair.",
-            "Jax": "Pilot Jax is a sharp-eyed human in her early thirties with braided blonde hair, wearing a sleek navy flight suit featuring reinforced knee pads and silver rank stripes."
+            "Dr. Vance": "A resilient arctic engineer in her late thirties with weathered skin, piercing blue eyes, wearing a heavy olive-green parka with a thick faux-fur hood and utility harness."
           },
           "locations": {
-            "engineering_bay": "A cramped, cylindrical compartment lined with exposed wiring conduits, heavy steel bulkheads, and flickering overhead fluorescent tubes.",
-            "observation_deck": "A spacious forward room dominated by a massive curved viewport looking out into deep space, featuring brushed aluminum consoles."
+            "Research Station Interior": "A cramped, utilitarian facility featuring exposed steel pipes, frosted glass windows, blinking indicator lights, and exposed wiring ducts.",
+            "Glacier Ridge": "A vast, desolate expanse of jagged blue-white ice under a twilight polar sky with deep chasms and blowing snow."
           },
           "objects": {
-            "diagnostic_pad": "A battered rectangular slate with cracked polymer casing and a bright orange liquid-crystal screen displaying telemetry data.",
-            "manual_valve_wheel": "A heavy, rust-spotted brass control wheel etched with worn warning labels and secured by a thick steel locking pin."
+            "Holographic Console": "A glowing cyan display table showing topographic elevation maps and blinking telemetry readouts.",
+            "Seismic Drill": "A heavy, industrial robotic rig constructed of yellow-painted steel with diamond-tipped carbide teeth and hydraulic pistons."
           }
         },
-        "plot_fingerprint": "601214b1d56bf9228ee060e69e3a5c9858ef79712cef32083df046e61a4ec948"
+        "plot_fingerprint": "fbca5ebac60325e59a24744053f34cb0ea8db712efcceab49767afd1dbba9486"
       },
       "approved": false
     }
