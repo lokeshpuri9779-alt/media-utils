@@ -1113,7 +1113,13 @@ def render_frame(plan,t,genre,total):
     im=background(genre, variant).copy()
     if os.getenv('ASTRA_ASSET_PACK_ENABLED', '0') == '1':
         from astra_v2.visual_artifact_backdrop import apply_pack_background
-        im = apply_pack_background(im, s, visual_identity, video_format='shorts')
+        # Studio's space demo has abstract shot text; use its known genre only
+        # when no authored environment or scene can be inferred from the shot.
+        pack_shot = s
+        from astra_v2.visual_artifact_backdrop import choose_scene
+        if choose_scene(s) is None and genre == 'space':
+            pack_shot = dict(s, story_environment='space')
+        im = apply_pack_background(im, pack_shot, visual_identity, video_format='shorts')
     # Opt-in visual artifact backdrops: keep publisher default unchanged until
     # full-render quality validation approves the new visual treatment.
     if genre == 'fiction' and os.getenv('ASTRA_VISUAL_ARTIFACT_BACKDROPS', '0') == '1':
