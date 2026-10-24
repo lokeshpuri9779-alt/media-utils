@@ -23,6 +23,28 @@ class IllustratedStoryboardTests(unittest.TestCase):
         self.assertEqual(apply_story_art(self.frame,shot),1)
         self.assertEqual(self.frame.getpixel((150,250)),(240,40,20))
 
+    def test_auto_art_reuses_local_verified_asset_without_provider(self):
+        from unittest.mock import patch
+        from astra_v2.quality_asset_selector import select_or_request_generation
+        # Transparent foreground art, valid for portrait and landscape scenes.
+        with Image.open(self.root / "art" / "signal.png") as source:
+            art = source.convert("RGBA")
+        art.putpixel((0, 0), (240, 40, 20, 0))
+        art.save(self.root / "art" / "signal.png")
+        for dimensions in ((1080, 1920), (1920, 1080)):
+            frame = Image.new("RGB", dimensions, (0, 0, 0))
+            shot = {"illustrated_asset_root": str(self.root),
+                    "auto_illustrated_art": True,
+                    "auto_art_kind": "prop",
+                    "auto_art_tags": [],
+                    "auto_art_box": [100, 200, 128, 128]}
+            with patch("astra_v2.quality_asset_selector.select_or_request_generation",
+                       wraps=select_or_request_generation) as selection:
+                self.assertEqual(apply_story_art(frame, shot), 1)
+                self.assertEqual(selection.call_args.kwargs["video_format"],
+                                 "shorts" if dimensions[1] > dimensions[0] else "long")
+            self.assertEqual(frame.getpixel((150, 250)), (240, 40, 20))
+
     def test_unknown_art_fails_closed(self):
         with self.assertRaisesRegex(ValueError,"not verified"):
             apply_story_art(self.frame,{"illustrated_asset_root":str(self.root),
