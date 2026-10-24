@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 50,
-  "confirmed_today": 49,
-  "last_attempt_at": "2026-10-24T14:36:07.831389+00:00",
+  "attempts": 51,
+  "confirmed_today": 50,
+  "last_attempt_at": "2026-10-24T14:51:01.687787+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -970,16 +970,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "9k56MF9o-og": {
-      "content_id": "rayvan-gemini-608cd643ed6f0a0efe6c",
+    },
+    "rayvan-gemini-608cd643ed6f0a0efe6c": {
+      "video_id": "9k56MF9o-og",
+      "confirmed_at": "2026-10-24T14:48:47.091932+00:00",
       "title": "The Forest Rangers and the Canopy Bridge",
-      "day": "2026-10-24",
-      "uploaded_at": "2026-10-24T14:36:09.820566+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-24T14:36:09.820566+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "b0143b9bd8f7fd8c2880e30b074b9bb26ecd8505b19b75129b37b9f350f464d8",
       "story_beats": [
@@ -996,16 +994,46 @@
           "speech": "The bridge holds firm at last. Now we can cross safely and restore the water flow to the grove."
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "z-1oXcz_Czw": {
+      "content_id": "rayvan-gemini-8a052e2d5dee72adadff",
+      "title": "The Trench Weaver and the Silent Current",
+      "day": "2026-10-24",
+      "uploaded_at": "2026-10-24T14:51:04.416030+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "d116b8a3f5fd6a579c09d184f66c08ef1d899671df3a06d676d7a325a9a27b25",
+      "story_beats": [
+        {
+          "speech": "Look at these ghostly stalks, Pip. The mineral current from the lower trench has completely stopped flowing through here."
+        },
+        {
+          "speech": "Heavy basalt boulders have fallen right over the primary fissure, cutting off the warm mineral spring entirely from us."
+        },
+        {
+          "speech": "We must rig this sturdy titanium cable to the winch and lever the largest boulder away from the opening now."
+        },
+        {
+          "speech": "Feel that warmth! The mineral current is surging back, bringing brilliant emerald green and life to our home."
+        }
+      ],
+      "central_conflict": "Mineral starvation from a blocked thermal vent",
+      "decisive_choice": "Clearing the debris blocking the main thermal fissure",
+      "resolution": "Mineral-rich waters restored the vibrant kelp forest ecosystem",
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-24T14:34:12.789239+00:00",
+  "last_preflight_at": "2026-10-24T14:48:46.691911+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T14:36:10.241865+00:00",
+    "at": "2026-10-24T14:51:04.813405+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -3059,10 +3087,36 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-8a052e2d5dee72adadff": {
+      "at": "2026-10-24T14:51:01.687769+00:00",
+      "title": "The Trench Weaver and the Silent Current",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "d116b8a3f5fd6a579c09d184f66c08ef1d899671df3a06d676d7a325a9a27b25",
+      "story_beats": [
+        {
+          "speech": "Look at these ghostly stalks, Pip. The mineral current from the lower trench has completely stopped flowing through here."
+        },
+        {
+          "speech": "Heavy basalt boulders have fallen right over the primary fissure, cutting off the warm mineral spring entirely from us."
+        },
+        {
+          "speech": "We must rig this sturdy titanium cable to the winch and lever the largest boulder away from the opening now."
+        },
+        {
+          "speech": "Feel that warmth! The mineral current is surging back, bringing brilliant emerald green and life to our home."
+        }
+      ],
+      "central_conflict": "Mineral starvation from a blocked thermal vent",
+      "decisive_choice": "Clearing the debris blocking the main thermal fissure",
+      "resolution": "Mineral-rich waters restored the vibrant kelp forest ecosystem",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T14:36:10.241815+00:00",
+    "at": "2026-10-24T14:51:04.813347+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -3073,21 +3127,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T14:36:10.241857+00:00",
+    "at": "2026-10-24T14:51:04.813396+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-24T14:34:41.955718+00:00",
+    "at": "2026-10-24T14:49:34.455414+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-608cd643ed6f0a0efe6c",
-    "video_url": "https://www.youtube.com/watch?v=9k56MF9o-og",
+    "content_id": "rayvan-gemini-8a052e2d5dee72adadff",
+    "video_url": "https://www.youtube.com/watch?v=z-1oXcz_Czw",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T14:36:10.241600+00:00",
+    "at": "2026-10-24T14:51:04.813086+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -3099,18 +3153,18 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T14:36:10.241812+00:00",
+    "at": "2026-10-24T14:51:04.813341+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 265,
+        "eligible": 264,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3
         },
         "seen": 6,
-        "total": 338
+        "total": 337
       },
       "ASTRA_STORY_HISTORY_FILTER": {
         "before": 338,
@@ -3129,12 +3183,12 @@
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
         "approved": 1,
-        "considered": 21,
+        "considered": 30,
         "duration_rejected": 0,
         "not_ready": 0,
         "policy_rejected": {},
         "render_exception": {
-          "CreativeReject": 20
+          "CreativeReject": 29
         },
         "render_qa_rejected": 0
       }
