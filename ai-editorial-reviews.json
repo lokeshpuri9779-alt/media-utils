@@ -1648,6 +1648,18 @@
         "review_model": "gemini-3.1-flash-lite"
       },
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-e38594ab5c2254a0875a",
+      "story_sha256": "1fba6d02b74aacabc01f8abcbdedc29abca6aff6db516e76674b4d3186e84034",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story's central conflict (a blight/rot threatening a vital life-source) and the resolution (sacrificing personal energy to heal the source) are structurally and thematically identical to 'The Amber Pathfinders and the Whispering Root' and 'Unit 734 and the Dying Solar Grove' provided in the reference list.",
+        "The narrative relies on a repetitive 'sacrifice-to-save-the-environment' trope that has been featured in multiple recent publications within the provided dataset, lacking sufficient original causal mechanisms to distinguish it from existing entries."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
