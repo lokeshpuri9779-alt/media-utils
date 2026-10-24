@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-25",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 3,
-  "confirmed_today": 2,
-  "last_attempt_at": "2026-10-24T19:15:15.420374+00:00",
+  "attempts": 4,
+  "confirmed_today": 3,
+  "last_attempt_at": "2026-10-24T19:32:21.266978+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1457,16 +1457,14 @@
       "decisive_choice": "Tansy throws her only remaining secure anchor across the widening chasm to catch leaping Bram instead of saving her own climb.",
       "resolution": "Bram catches the anchor, secures the rope, and safely hauls Tansy across so they can harvest the sap together.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "eiSKagsPhzI": {
-      "content_id": "rayvan-forge-a3355ad3f793bce8",
+    },
+    "rayvan-forge-a3355ad3f793bce8": {
+      "video_id": "eiSKagsPhzI",
+      "confirmed_at": "2026-10-24T19:30:25.623162+00:00",
       "title": "The Rabbit and the Quiet Waterwheel",
-      "day": "2026-10-25",
-      "uploaded_at": "2026-10-24T19:15:17.990959+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-24T19:15:17.990959+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "515f5a22a6bdce753988a3ab1c75dcfd5cb48a0ff0685a3e2dd2dab7812ede46",
       "story_beats": [
@@ -1483,16 +1481,43 @@
           "speech": "The rabbit reset the peg with the gardener, tested the wheel from a safe distance, and watered the seedlings."
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "1vSaz2I5TQA": {
+      "content_id": "rayvan-forge-3c021a05b631edc5",
+      "title": "The Rabbit and the Orchard Map",
+      "day": "2026-10-25",
+      "uploaded_at": "2026-10-24T19:32:22.786605+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "c1f1e9d67bdd703ce7cd31ad0bd38dd42bef8eb6996df2f0af880e194ad0fc43",
+      "story_beats": [
+        {
+          "speech": "A rabbit received an orchard map showing a spring where the ground had been dry for years."
+        },
+        {
+          "speech": "He dug beside the marked tree, but his shovel struck stone and the other gardeners lost hope."
+        },
+        {
+          "speech": "He compared the map's old fence line with today's path and found the spring beneath a moved gate."
+        },
+        {
+          "speech": "The gardeners uncovered the water channel and planted new trees while preserving the original stone marker."
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-24T19:13:09.735548+00:00",
+  "last_preflight_at": "2026-10-24T19:30:25.336182+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T19:15:18.412951+00:00",
+    "at": "2026-10-24T19:32:23.137120+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -3995,10 +4020,33 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-3c021a05b631edc5": {
+      "at": "2026-10-24T19:32:21.266959+00:00",
+      "title": "The Rabbit and the Orchard Map",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "c1f1e9d67bdd703ce7cd31ad0bd38dd42bef8eb6996df2f0af880e194ad0fc43",
+      "story_beats": [
+        {
+          "speech": "A rabbit received an orchard map showing a spring where the ground had been dry for years."
+        },
+        {
+          "speech": "He dug beside the marked tree, but his shovel struck stone and the other gardeners lost hope."
+        },
+        {
+          "speech": "He compared the map's old fence line with today's path and found the spring beneath a moved gate."
+        },
+        {
+          "speech": "The gardeners uncovered the water channel and planted new trees while preserving the original stone marker."
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T19:15:18.412895+00:00",
+    "at": "2026-10-24T19:32:23.137028+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -4009,21 +4057,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T19:15:18.412942+00:00",
+    "at": "2026-10-24T19:32:23.137106+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-24T19:14:06.997928+00:00",
+    "at": "2026-10-24T19:30:49.455582+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-a3355ad3f793bce8",
-    "video_url": "https://www.youtube.com/watch?v=eiSKagsPhzI",
+    "content_id": "rayvan-forge-3c021a05b631edc5",
+    "video_url": "https://www.youtube.com/watch?v=1vSaz2I5TQA",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T19:15:18.412608+00:00",
+    "at": "2026-10-24T19:32:23.136659+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -4035,18 +4083,18 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T19:15:18.412888+00:00",
+    "at": "2026-10-24T19:32:23.137020+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 255,
+        "eligible": 254,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3
         },
         "seen": 6,
-        "total": 328
+        "total": 327
       },
       "ASTRA_STORY_HISTORY_FILTER": {
         "before": 328,
@@ -4065,12 +4113,12 @@
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
         "approved": 1,
-        "considered": 60,
+        "considered": 68,
         "duration_rejected": 0,
         "not_ready": 0,
         "policy_rejected": {},
         "render_exception": {
-          "CreativeReject": 59
+          "CreativeReject": 67
         },
         "render_qa_rejected": 0
       }

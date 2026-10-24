@@ -1473,6 +1473,22 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-c245f541813ef2a516d0",
+      "story_sha256": "c4ceeddb39bce639c3cc063f30928acc064a098830fb62e3da36f761613e1432",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-c245f541813ef2a516d0",
+        "story_sha256": "c4ceeddb39bce639c3cc063f30928acc064a098830fb62e3da36f761613e1432",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the premises, characters, or specific causal mechanisms of the provided reference list.; The narrative demonstrates clear causal coherence, with a logical progression from the dilemma to the decisive choice and resolution.; The content is suitable for a general audience and does not contain unsafe, misleading, or policy-violating material.; There are no apparent copyright or trademark concerns; the story uses standard tropes of survival fiction in a unique configuration.",
+        "reviewed_at": "2026-10-24T19:31:17.888624+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }
