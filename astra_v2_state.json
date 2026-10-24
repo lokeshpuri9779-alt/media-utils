@@ -3,7 +3,7 @@
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 16,
-  "confirmed_today": 15,
+  "confirmed_today": 16,
   "last_attempt_at": "2026-10-24T02:52:55.828110+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -431,57 +431,38 @@
       "format": "short",
       "uploaded_at": "2026-10-24T02:24:24.039967+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "CNdIlCbF3UA": {
-      "content_id": "rayvan-gemini-74800f20a6da66a2fdd0",
+    },
+    "rayvan-gemini-74800f20a6da66a2fdd0": {
+      "video_id": "CNdIlCbF3UA",
+      "confirmed_at": "2026-10-24T02:54:48.044673+00:00",
       "title": "Percival's Pneumatic Produce-Plunger and the Bazaar Bloom",
-      "day": "2026-10-24",
-      "uploaded_at": "2026-10-24T02:52:57.313489+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "ef871b34f2a4d912d9145c7e870dfb69e37e2dc7d18ba3b7f8e4320b3501a086",
-      "story_beats": [
-        {
-          "speech": "Behold the pneumatic fruit-plunger, designed to deliver crisp, delicious apples directly into your waiting hands from across this bustling market square today!"
-        },
-        {
-          "speech": "I must tighten this pressure valve slightly to ensure the trajectory is perfect, otherwise my precious apples might fly straight into the clouds."
-        },
-        {
-          "speech": "Oh dear, the internal spring mechanism is vibrating far too violently, and I fear the entire contraption is about to lose all structural integrity!"
-        },
-        {
-          "speech": "I apologize to everyone for this messy affair, but at least the mayor looks quite surprised by the sudden rainfall of fresh Gala apples!"
-        }
-      ],
+      "uploaded_at": "2026-10-24T02:52:57.313489+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-24T02:50:46.553044+00:00",
-  "last_preflight_reason": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-24T02:54:47.639408+00:00",
+  "last_preflight_reason": "min_interval",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T02:52:57.688861+00:00",
+    "at": "2026-10-24T02:54:48.128321+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-23T21:48:24.435872+00:00",
   "reserved": {
@@ -1729,10 +1710,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T02:52:57.688760+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-24T02:54:48.128238+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -1740,9 +1721,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T02:52:57.688820+00:00",
+    "at": "2026-10-24T02:54:48.128307+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -1754,56 +1735,22 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T02:52:57.688487+00:00",
-    "preflight_due": "true",
+    "at": "2026-10-24T02:54:48.128183+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "outcome": "published",
+    "reason": "min_interval",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T02:52:57.688753+00:00",
-    "collection_status": "collected",
-    "publish_step": "success",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 254,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3
-        },
-        "seen": 6,
-        "total": 327
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 328,
-        "fingerprint": 0,
-        "id": 6,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 322,
-        "title": 0,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 322,
-        "remaining": 255
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "considered": 1,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 0
-      }
-    },
+    "at": "2026-10-24T02:54:48.128232+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
