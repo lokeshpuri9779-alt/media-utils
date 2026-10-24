@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "7162caaa1e798b6c44ef812b",
-      "source_sha256": "10cd6f0ee036f43976bd4d532a7f524d5f422599b62bb69027f9a8a4b39cdb13",
+      "candidate_id": "c9867b5de05a0f805f2dba20",
+      "source_sha256": "8e62bbc926fa7bfa8d66152020c11753c709f53debc9695c3109fa9b0a843f7f",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-ecde60ddc8e0a285f408",
-        "title": "The Great Tomato Launch Fiasco",
-        "hook": "The Malfunction Begins",
-        "question": "Can an automated fruit-sorting cart survive a chaotic morning market without exploding?",
-        "answer": "Yes, by adapting its internal targeting system to toss organic snacks directly into eager shoppers' grocery bags.",
+        "content_id": "rayvan-gemini-571da0615ff631cb0957",
+        "title": "The Great Turnip Horn Controversy",
+        "hook": "The Unexpected Blast",
+        "question": "Can Barnaby's automatic root vegetable brass instrument survive opening day at the vegetable market?",
+        "answer": "Yes, by blasting a synchronized vegetable medley that clears the stalls and delights the hungry crowd.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,227 +29,226 @@
         ],
         "story_beats": [
           {
-            "headline": "The Malfunction Begins",
-            "speech": "Attention shoppers, our newly automated cart is fully operational and guaranteed to revolutionize your vegetable shopping experience today.",
+            "headline": "The Unexpected Blast",
+            "speech": "Behold my magnificent root-powered musical horn, engineered to serenade every single shopper in this bustling square!",
             "visual": "robot",
-            "label": "Activation",
+            "label": "The Invention Unveiled",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby stands proudly next to a squeaky metal cart with robotic arms in a crowded market square.",
+            "visual_prompt": "Barnaby stands proudly next to a large brass machine fitted with raw turnips, pointing excitedly as a loud discordant honk echoes across the busy market.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Wild Delivery",
-            "speech": "Please duck everyone, because this helpful mechanical assistant has suddenly decided that everyone needs a free ripe tomato immediately.",
+            "headline": "Modifying the Mechanism",
+            "speech": "The raw turnips are too dense for smooth melodies. I must rapidly swap them out for hollowed-out orange carrots right now!",
             "visual": "signal",
-            "label": "Escalation",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby frantically chases the speeding cart as mechanical arms hurl red tomatoes across busy market stalls.",
+            "label": "Emergency Adjustments",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby frantically reaches into the brass apparatus with a wrench, replacing lumpy purple turnips with neatly carved carrots while market vendors cover their ears.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Quick Adjustment",
-            "speech": "If I simply rewire this yellow control panel right now, I can redirect the flying produce straight into open tote bags.",
+            "headline": "A Surprising Twist",
+            "speech": "Wait, the hot steam is cooking the carrots inside the tubes, turning my brass horn into an outdoor soup kitchen!",
             "visual": "ship",
-            "label": "Intervention",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby adjusts glowing wires inside the cart control console while dodging flying vegetables in the crowded aisle.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Market Success",
-            "speech": "Look at that brilliant transformation, as delighted customers catch fresh ingredients right in their own reusable grocery bags effortlessly.",
-            "visual": "door",
-            "label": "Triumph",
-            "story_beat": "payoff",
-            "visual_prompt": "Smiling market customers hold caught tomatoes while Barnaby poses proudly next to his resting, empty delivery cart.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "A malfunctioning produce-sorting cart targeting premium tomatoes at innocent bystanders.",
-        "decisive_choice": "Re-calibrating the throwing arm to prioritize hungry shoppers rather than avoiding them.",
-        "resolution": "The inventor sells out of tomatoes in minutes and wins the daily merchant award.",
-        "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures and comedic slapstick expressions.",
-          "characters": {
-            "Barnaby": "An eccentric inventor with wild gray hair, wearing a green tweed vest, oversized goggles on his forehead, and carrying a wrench."
-          },
-          "locations": {
-            "Market Square": "A bustling outdoor farmers market filled with wooden fruit stalls, colorful awnings, and canvas tents under a bright sunny sky."
-          },
-          "objects": {
-            "Cart": "A rusty metal utility cart fitted with two mechanical orange manipulator arms, glowing green sensor lights, and a wooden cargo bed.",
-            "Control Panel": "A metallic box attached to the cart handle featuring blinking yellow indicator lights and a tangle of exposed red and blue wires."
-          }
-        },
-        "plot_fingerprint": "031711351cf8f2e166053ea6d1568db8061e02148ab5631adac1a3489a3517e6"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "0049b2aee7f74ac6e4afb5ce",
-      "source_sha256": "65c3c8008352b74458e051f9752041af4f1a547e634ad19d964ec651b12d4716",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-54b06346cf52d2ec2b8d",
-        "title": "The Canopy Relay",
-        "hook": "Discovery of the Blocked Beacon",
-        "question": "Can a cautious botanist and a bold climber restore the dying valley beacon together?",
-        "answer": "Yes, by combining their unique skills to align the sunlight reflectors before nightfall.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "Discovery of the Blocked Beacon",
-            "speech": "Look at the thick spore infestation choking the lens. We must clear this immediately or the valley freezes.",
-            "visual": "forest",
-            "label": "Overgrown Tower",
-            "story_beat": "reveal",
-            "visual_prompt": "Botanist Wren, wearing a hooded canvas jacket and carrying a bronze toolkit, points up at a massive tree-wrapped relay tower in a dense emerald forest at twilight while holding a glowing spore scanner.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Ascending the Slippery Vines",
-            "speech": "Grab my extended pole and anchor your boots into the thick bark while I secure our safety line.",
-            "visual": "signal",
-            "label": "The Ascent",
-            "story_beat": "build",
-            "visual_prompt": "Climber Kael, dressed in reinforced leather climbing gear, reaches down from a mossy wooden branch to pull Wren upward, gripping a glowing yellow transmission cable that hums with faint energy.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Aligning the Ancient Mirrors",
-            "speech": "Hold the directional crank steady while I knock this hardened resin crust away from the primary mirror.",
-            "visual": "door",
-            "label": "Mechanism Hatch",
-            "story_beat": "mechanism",
-            "visual_prompt": "Wren and Kael work together inside a circular stone maintenance alcove, both wearing mud-stained clothing as they push against a jammed bronze gear hatch holding a cracked glass sun-reflector.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Beacon Ignition",
-            "speech": "The circuit is complete and the light is spreading across the valley. We actually saved our home.",
-            "visual": "planet",
-            "label": "Valley Sunrise",
-            "story_beat": "payoff",
-            "visual_prompt": "Wren and Kael stand side by side on the high tower platform, smiling broadly in the brilliant amber glow of a powerful light beam shooting up into the stratosphere above a vast green forest canopy.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "A thick fungal spore cloud is blocking the solar relay towers, threatening the valley settlement.",
-        "decisive_choice": "To climb the unstable ancient tower instead of waiting out the multi-day storm.",
-        "resolution": "The beacon activates successfully, dispersing the spores and securing warmth for the settlement.",
-        "visual_bible": {
-          "style": "Cinematic animated film aesthetic with vibrant rich colors, detailed natural textures, and dramatic lighting.",
-          "characters": {
-            "Wren": "A thoughtful botanist with curly dark hair, wearing a forest-green canvas jacket with many pocket pouches, and round brass spectacles.",
-            "Kael": "An athletic climber with a shaved head, wearing sturdy brown leather straps, a weatherproof orange tunic, and climbing gloves."
-          },
-          "locations": {
-            "The Canopy Relay": "An ancient stone and wood communication tower overgrown with thick moss, glowing vines, and towering ancient pine trees."
-          },
-          "objects": {
-            "spore_scanner": "A handheld brass device with a circular glass lens that pulses with a soft turquoise light.",
-            "transmission_cable": "A thick, flexible yellow fiber-optic rope that glows faintly when energy flows through it.",
-            "toolkit": "A small weathered leather pouch containing steel scrapers, wrenches, and spare copper wiring."
-          }
-        },
-        "plot_fingerprint": "640ebd86c12f919f86f267446cb26d6058ebc5bdf1e0708abc0bf19469309276"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "ba3596ea23e9839836ca813b",
-      "source_sha256": "2f5a26e0050202ca097f0143c6d65d424661745139d558eae2b0cd363818c7f1",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-a08772ccccda50f9225e",
-        "title": "The Coral Whisperer",
-        "hook": "The Murky Discovery",
-        "question": "Can Finn save the reef before the silt tide buries the remaining luminescence?",
-        "answer": "Yes, Finn redirects the ancient acoustic valve to flush the silt away.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Murky Discovery",
-            "speech": "Look at the dark sediment creeping into our nursery! The coral nodes are already losing their steady pulse.",
-            "visual": "signal",
-            "label": "The Silt Advance",
-            "story_beat": "reveal",
-            "visual_prompt": "Finn the small blue octopus standing in a sunken stone ruin, pointing a tentacle at a glowing amber signal beacon choked by gray mud.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Hidden Mechanism",
-            "speech": "We must unlock the deep acoustic valve beneath the current to redirect this toxic tide away from the valley.",
-            "visual": "door",
-            "label": "The Valve Chamber",
-            "story_beat": "mechanism",
-            "visual_prompt": "Finn turning a heavy rusted iron wheel set into a massive carved stone door, bubbles escaping as the metal seal breaks.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Pressure Test",
-            "speech": "Hold fast against the backwash! If this coral pillar snaps under the surge, the chamber will flood completely.",
-            "visual": "forest",
-            "label": "The Kelp Barrage",
+            "label": "The Vegetable Stew",
             "story_beat": "twist",
-            "visual_prompt": "Finn anchoring himself to a dense glowing kelp forest stalk with three tentacles while using the other two to brace a falling stone pillar.",
+            "visual_prompt": "Steam billows from the brass instrument's bell, sending cooked carrot slices floating into the air while astonished shoppers point and laugh at Barnaby.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Luminous Return",
-            "speech": "The channel is clear at last! The brilliant blue resonance flows freely through every single living branch.",
-            "visual": "planet",
-            "label": "The Reawakened Reef",
+            "headline": "The Sweet Payoff",
+            "speech": "Listen to that delightful whistling melody! Our market symphony is an absolute triumph for inventors everywhere!",
+            "visual": "forest",
+            "label": "Grand Finale",
             "story_beat": "payoff",
-            "visual_prompt": "Finn floating peacefully in the center of a vast, glowing coral metropolis shaped like a miniature aquatic world, surrounded by brilliant blue light.",
+            "visual_prompt": "The brass horn plays a gentle harmonic tune while smiling market patrons clap rhythmically, holding paper bowls of warm carrot soup handed out by Barnaby.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Silt tide suffocating the luminescence",
-        "decisive_choice": "Releasing the acoustic valve against the current",
-        "resolution": "The reef reawakens in vibrant blue light",
+        "central_conflict": "Barnaby's automatic turnip horn scares customers away with discordant honks during the morning market rush.",
+        "decisive_choice": "Barnaby tweaks the internal steam valves to route airflow through hollow carrots instead of raw turnips.",
+        "resolution": "The modified instrument plays a sweet harmonic tune that draws a massive cheering crowd and record sales.",
         "visual_bible": {
-          "style": "Cinematic underwater animation with rich bioluminescent lighting and detailed coral textures.",
+          "style": "Vibrant stop-motion animation aesthetic with rich textures, warm lighting, and a handcrafted folk-art look.",
           "characters": {
-            "Finn": "A small, clever blue octopus with expressive large amber eyes and suction cups that glow softly when he is focused."
+            "Barnaby": "An eccentric inventor with wild gray hair, a patched brown tweed waistcoat, brass goggles pushed onto his forehead, and an enthusiastic expression."
           },
           "locations": {
-            "Sunken Ruin": "An ancient underwater amphitheater made of white weathered limestone, overgrown with bioluminescent moss.",
-            "Valve Chamber": "A tight alcove behind the amphitheater featuring heavy brass and iron machinery encrusted with pink barnacles."
+            "Market Square": "A bustling cobblestone marketplace filled with striped canvas awnings, wooden crates overflowing with colorful vegetables, and cheerful townspeople."
           },
           "objects": {
-            "signal_beacon": "A cracked spherical glass orb containing a pulsing amber light source, coated in fine gray silt.",
-            "acoustic_valve": "A large, six-spoked bronze steering wheel mechanism embedded deeply into the stone wall.",
-            "stone_pillar": "A weathered cylindrical column of white limestone covered in delicate blue sea-fern fronds."
+            "Turnip Horn": "A complex contraption made of polished brass tubing, leather bellows, pressure gauges, and metal clamps designed to hold root vegetables.",
+            "Wrench": "A heavy iron tool with a rusted handle and grease stains, used by Barnaby for quick mechanical adjustments."
           }
         },
-        "plot_fingerprint": "17f32fe2f9a524274f02a92971dfce9877039e425ac968a7e1a4338f6911ea47"
+        "plot_fingerprint": "46a0f243ba6abeadd95b0462cc81df8e9b1366a428f44cb92df66ef026bf46c3"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "ccb1293dcfc7fb986266b0b2",
+      "source_sha256": "ec6ee4bea231e55825474b0d22b5648d02647d35bdc3d82e007229b6a94b3691",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-766c47e5c139c60c3dab",
+        "title": "The Coral Whisperer's Chorus",
+        "hook": "The Silent Chime",
+        "question": "Why has the great singing reef fallen completely silent?",
+        "answer": "A tangled mass of deep-sea kelp is choking the acoustic resonator stones.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Silent Chime",
+            "speech": "Listen closely, my young apprentice, for the ancient resonator stones do not sing their morning melody today.",
+            "visual": "signal",
+            "label": "The Silent Stone",
+            "story_beat": "reveal",
+            "visual_prompt": "An elderly sea otter wearing a kelp-woven tunic points his paw at a dark, lifeless stone pillar inside a luminous coral cave.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Root and Resonance",
+            "speech": "These invasive vines have wrapped tightly around the acoustic chambers, completely blocking the vital harmonic vibrations from traveling.",
+            "visual": "forest",
+            "label": "The Tangle",
+            "story_beat": "build",
+            "visual_prompt": "A young clownfish wearing a polished pearl monocle uses its fin to trace thick, overgrown black vines choking a glowing underwater archway.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Sharp Cut",
+            "speech": "We must sever these stubborn roots immediately, even if the strong current threatens to sweep us out of the canyon.",
+            "visual": "ship",
+            "label": "The Rescue",
+            "story_beat": "mechanism",
+            "visual_prompt": "The sea otter holds a sharp jagged clam-shell blade, sawing vigorously through a thick vine while bubbles stream past in the dark water.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A New Harmony",
+            "speech": "Hear the wonderful song return to our home at last, proving that courage can always mend a broken world.",
+            "visual": "planet",
+            "label": "The Awakening",
+            "story_beat": "payoff",
+            "visual_prompt": "Both the sea otter and clownfish float happily together as vibrant blue and gold light pulses outward from the singing coral pillars.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Blocked acoustic resonator stones silencing the reef",
+        "decisive_choice": "Cutting the ancient kelp roots instead of waiting for the tide",
+        "resolution": "The reef awakens with a renewed and harmonious melody",
+        "visual_bible": {
+          "style": "Vibrant and detailed marine animation style with glowing bioluminescent lighting and rich watercolor textures.",
+          "characters": {
+            "sea_otter": "An elderly sea otter with silver-tipped fur, expressive whiskers, wearing a braided kelp tunic and holding a clam-shell blade.",
+            "clownfish": "A bright orange and white clownfish with large curious eyes, wearing a tiny polished pearl monocle over its right eye."
+          },
+          "locations": {
+            "coral_cave": "A vast underwater cavern made of pink and purple coral, featuring natural acoustic resonator stone pillars that glow faintly."
+          },
+          "objects": {
+            "resonator_stone": "A tall, faceted pillar of crystalline basalt that naturally vibrates and produces musical tones when clear of debris.",
+            "clam_shell_blade": "A sharp, pearlescent bivalve shell securely lashed to a sturdy driftwood handle with strong spider-silk thread."
+          }
+        },
+        "plot_fingerprint": "07253b57b86c115dcbe2edcad398fa5bab910b2cb18846293389ce6be5a3a92b"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "86ec6192b70911562bda59ef",
+      "source_sha256": "dae5d58a74cb771e275e8732ee8035f7d3eaa28f16bb751bc7af8bd611823d20",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-15a4f6140b42416b808f",
+        "title": "The Magnetic Drift of Sector Nine",
+        "hook": "Core Overload Detected",
+        "question": "Can Chief Engineer Vane bypass the magnetic stabilizer before the hull shatters?",
+        "answer": "Yes, by manually overriding the core manifold using the emergency pressure release valve.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Core Overload Detected",
+            "speech": "Listen to me, Jax. If we purge the coolant now, we will be stranded in this sector forever.",
+            "visual": "ship",
+            "label": "Reactor Deck",
+            "story_beat": "reveal",
+            "visual_prompt": "Chief Engineer Vane stands in the cramped engineering bay holding a glowing diagnostic pad, staring at the flashing red manifold control console while Pilot Jax gestures urgently from the doorway.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Divergent Plan",
+            "speech": "We have no other choice, Vane. The magnetic pressure is climbing past critical thresholds every single second.",
+            "visual": "robot",
+            "label": "Maintenance Terminal",
+            "story_beat": "build",
+            "visual_prompt": "Pilot Jax points at a maintenance robot displaying warning graphs, while Vane firmly blocks access to the automated coolant purge lever with his left hand.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Manual Override Engagement",
+            "speech": "Hold the stabilizing brace steady while I force open this stubborn manual pressure release valve right now.",
+            "visual": "signal",
+            "label": "Control Array",
+            "story_beat": "mechanism",
+            "visual_prompt": "Vane strains with both hands against a heavy brass valve wheel on the bulkhead, as a pulsing blue warning signal flashes across the overhead monitors.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Stabilized Drift",
+            "speech": "The pressure is dropping back to normal levels. We saved the hull and kept our remaining fuel reserves intact.",
+            "visual": "planet",
+            "label": "Observation Deck",
+            "story_beat": "payoff",
+            "visual_prompt": "Vane and Jax stand side by side looking out the main viewport at a calm blue planet, watching the glowing green system status indicators on the console between them.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Disagreement between Vane and pilot Jax on whether to vent the primary reactor coolant or risk magnetic overload.",
+        "decisive_choice": "Vane decides to crack the manifold manually instead of executing Jax's automated coolant purge command.",
+        "resolution": "The reactor stabilizes just in time, saving the hull while preserving the remaining fuel reserves.",
+        "visual_bible": {
+          "style": "Gritty, lived-in industrial sci-fi with practical lighting, muted metallic tones, and high-contrast warning indicators.",
+          "characters": {
+            "Vane": "Chief Engineer Vane is a weathered human in his late forties with a scarred jawline, wearing a grease-stained canvas utility jacket over a dark grey jumpsuit, with short iron-grey hair.",
+            "Jax": "Pilot Jax is a sharp-eyed human in her early thirties with braided blonde hair, wearing a sleek navy flight suit featuring reinforced knee pads and silver rank stripes."
+          },
+          "locations": {
+            "engineering_bay": "A cramped, cylindrical compartment lined with exposed wiring conduits, heavy steel bulkheads, and flickering overhead fluorescent tubes.",
+            "observation_deck": "A spacious forward room dominated by a massive curved viewport looking out into deep space, featuring brushed aluminum consoles."
+          },
+          "objects": {
+            "diagnostic_pad": "A battered rectangular slate with cracked polymer casing and a bright orange liquid-crystal screen displaying telemetry data.",
+            "manual_valve_wheel": "A heavy, rust-spotted brass control wheel etched with worn warning labels and secured by a thick steel locking pin."
+          }
+        },
+        "plot_fingerprint": "601214b1d56bf9228ee060e69e3a5c9858ef79712cef32083df046e61a4ec948"
       },
       "approved": false
     }
