@@ -88,8 +88,9 @@ def apply_pack_background(image, shot, identity, *, root=None, video_format="sho
     """Composite a validated local background with bounded per-shot caching."""
     if video_format not in ("shorts", "long"):
         raise ValueError("invalid video format")
-    scene = choose_scene(shot)
-    if scene is None:
+    analysis = analyze_story_scene(shot)
+    scene = analysis["scene"]
+    if analysis["needs_background"]:
         return image
     configured = root or os.getenv("ASTRA_ASSET_PACK_ROOT")
     if not configured:
