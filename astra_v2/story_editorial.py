@@ -94,6 +94,10 @@ def editorial_issues(story, history=(), novelty_index=None, semantic_previous=No
                           else is_semantic_near_duplicate(story, history))
     if duplicate or semantic_duplicate:
         issues.append("narrative_duplicate")
+    # Explicitly matching complete causal arcs require a new editorial revision.
+    # Missing annotations never become guessed evidence.
+    if causal_premise_match(story, history) is not None:
+        issues.append("repeated_causal_premise")
     if story.get("kind") == "unreviewed_causal_draft":
         issues.append("human_or_model_editorial_review_required")
     return sorted(set(issues))
