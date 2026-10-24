@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "a0bbad52f595d6ce9c46cdae",
-      "source_sha256": "16ba32c5261d1f7cccf81a967a3b0ee49c3a78f3e54671864ece9b03fbb59900",
+      "candidate_id": "4278d2dbce678e75f147c0dc",
+      "source_sha256": "6224ff8c830d812661a9750c60d91b4d31b67db5e8466eb4a5ae8c54b29f5e4c",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-5a38dfb9e36dbaa33d84",
-        "title": "The Grand Pan-Galactic Pancake Flapper",
-        "hook": "The Unauthorized Demonstration",
-        "question": "What happens when an ambitious inventor markets a gravity-defying breakfast gadget at a crowded bazaar?",
-        "answer": "Chaos erupts, the crowds cheer, and breakfast is served directly to the ceiling.",
+        "content_id": "rayvan-gemini-f91417484774af26bb16",
+        "title": "The Great Clockwork Cabbage Caper",
+        "hook": "A Crunchy Discovery",
+        "question": "How did Barnaby accidentally corner the city soup market?",
+        "answer": "He invented an automatic vegetable chopper that seasoned every turnip with stubborn enthusiasm.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,77 +29,77 @@
         ],
         "story_beats": [
           {
-            "headline": "The Unauthorized Demonstration",
-            "speech": "Gather round good citizens, behold my greatest culinary achievement, the anti-gravity flapjack flapper designed for busy morning rushes!",
+            "headline": "A Crunchy Discovery",
+            "speech": "Behold my magnificent mechanized vegetable slicer, designed to revolutionize the way this bustling market prepares dinner tonight!",
             "visual": "robot",
-            "label": "The Inventor's Pitch",
+            "label": "The Contraption",
             "story_beat": "reveal",
-            "visual_prompt": "An eccentric inventor holding a brass spatula stands in a crowded, bustling outdoor market square, surrounded by floating pancake batter while a curious mechanical serving robot looks on with blinking digital eyes.",
+            "visual_prompt": "An eccentric inventor named Barnaby proudly points at a rickety brass-and-wood automaton holding a giant kitchen knife, set against a crowded medieval vegetable market filled with stunned shoppers.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Calibrating the Chaos",
-            "speech": "Oops, I may have accidentally set the repulsion dial far too high, but please remain calm and hold your plates upward!",
-            "visual": "signal",
-            "label": "Spiraling Control",
-            "story_beat": "build",
-            "visual_prompt": "The frantic inventor struggles with a smoking brass control panel that flashes a bright red warning signal, while hovering golden pancakes scatter wildly over panicked market shoppers.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A Sticky Situation",
-            "speech": "Duck everyone, because the syrup canister has just engaged maximum velocity and there is maple syrup raining down everywhere!",
+            "headline": "Furious Assembly",
+            "speech": "We must tighten every single copper bolt immediately before the rival cabbage vendors notice our sudden surge in productivity!",
             "visual": "ship",
-            "label": "Mid-Air Crisis",
-            "story_beat": "mechanism",
-            "visual_prompt": "Market patrons duck beneath colorful awnings as an experimental wooden delivery device shaped like a small airship drops sticky streams of amber syrup across the crowded stalls.",
+            "label": "Rapid Construction",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby's eager apprentice Pippin frantically turns a giant wrench on a flying metallic delivery cart, while fresh carrots bounce wildly across the wooden merchant stall floor.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Breakfast on the Ceiling",
-            "speech": "Well, nobody got any breakfast on the ground, but look up because the entire ceiling canopy is now a delicious buffet!",
+            "headline": "Spicy Overload",
+            "speech": "Wait, do not touch that decorative pepper lever or the entire batch of turnips will achieve supersonic velocity instantly!",
+            "visual": "signal",
+            "label": "The Malfunction",
+            "story_beat": "mechanism",
+            "visual_prompt": "Pippin accidentally yanks a glowing red lever on the automaton, causing sparks to fly and a plume of blue smoke to shoot upward into the sunny market sky.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Soup Supreme",
+            "speech": "Our runaway appliance accidentally fed the entire town delicious stew, proving chaotic engineering always beats quiet planning.",
             "visual": "door",
-            "label": "The Unexpected Success",
+            "label": "Market Triumph",
             "story_beat": "payoff",
-            "visual_prompt": "The inventor and smiling market patrons stand in the cleared square, looking up through an open wooden doorway archway at hundreds of perfectly cooked pancakes stuck safely to the ceiling.",
+            "visual_prompt": "Barnaby and Pippin stand proudly behind a massive wooden tavern doorway, serving steaming bowls of golden soup to a cheerful line of hungry townspeople.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Whimsical, colorful steampunk comedy animation with bright market lighting and expressive character designs.",
+          "style": "Bright, whimsical stop-motion claymation aesthetic with vibrant textures and exaggerated proportions.",
           "characters": {
-            "inventor": "A tall, energetic man with wild gray hair, wearing a patched tweed vest, soot-stained trousers, and round brass goggles pushed up on his forehead.",
-            "robot": "A compact, copper-plated assistant robot with glowing blue optical sensors and spindly articulated arms."
+            "Barnaby": "An energetic middle-aged inventor with wild gray hair, round spectacles, a tweed vest covered in pockets, and grease-smudged cheeks.",
+            "Pippin": "A lively young apprentice with a striped cap, overly large leather boots, and an apron stuffed with spare metal gears."
           },
           "locations": {
-            "market_square": "A bustling, sunlit open-air bazaar filled with vibrant canvas awnings, wooden merchant stalls, and cobblestone pathways."
+            "Market Square": "A bustling cobblestone plaza crammed with colorful striped canvas tents, wooden crates overflowing with vegetables, and fluttering banners."
           },
           "objects": {
-            "spatula": "An ornate brass cooking spatula engraved with intricate mechanical gears.",
-            "control_panel": "A heavy iron box covered in glowing toggle switches, brass dials, and blinking indicator lights."
+            "Automaton Slicer": "A towering contraption made of polished brass, ticking clock gears, wooden paddles, and a ridiculously large steel chopping blade.",
+            "Pepper Lever": "A glowing red brass handle mounted on a spring-loaded bracket attached directly to the main steam valve."
           }
         },
-        "plot_fingerprint": "5c73a94995c6db66c98d03484d7de389c56dd3d208dea6a4f2d2607d9ba51e46"
+        "plot_fingerprint": "c1193e7c7770653ef7a3e31625e952037543a581a56bec0a9d611984914be977"
       },
       "approved": false
     },
     {
-      "candidate_id": "01d29face095c841ae31f5a1",
-      "source_sha256": "40d5eb906465017fdef8d687d73bdc1ac56fbb595d572ef98d33bb868cb287ff",
+      "candidate_id": "537db076c838f11f65b61d6a",
+      "source_sha256": "67925279e6474bffdfcc903d30847d5813093fd4649aa87da4e6eb0f96b0b62c",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-1acfef050e41488e5e92",
-        "title": "The Icebound Beacon's Last Call",
+        "content_id": "rayvan-gemini-4961265b962b8fb6ea38",
+        "title": "The Last Ridge Beacon",
         "hook": "The Silent Storm",
-        "question": "How did the solitary researcher save the lost cargo during the blizzard?",
-        "answer": "By activating the directional seismic pulse to guide the relief sled safely past the hidden crevasse.",
+        "question": "How did Leo guide the lost climbers safely through the blizzard?",
+        "answer": "Leo used an old acoustic horn to bounce sound waves off the hidden valley walls, creating a navigational echo.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -108,74 +108,76 @@
         "story_beats": [
           {
             "headline": "The Silent Storm",
-            "speech": "The whiteout is blinding our sensors, and the main generator is failing fast. We must act now.",
+            "speech": "The tracking signal is entirely dead out here. We have to rely on the ancient resonance horn.",
             "visual": "signal",
-            "label": "Storm Warning",
+            "label": "The Signal Loss",
             "story_beat": "reveal",
-            "visual_prompt": "Dr. Aris Vance, wearing a weathered orange parkas, stares intently at a blinking red radio console inside the research station. Outside the frosted double-pane window, swirling snow completely obscures the bleak tundra landscape.",
+            "visual_prompt": "Close-up of rescue worker Leo, rugged face with frost on his dark beard, wearing a heavy orange parka, holding a static-filled hand radio inside a freezing alpine tent.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Hidden Fault",
-            "speech": "Our scanners detect an unstable snow bridge forming right over the deep glacial crack near ridge three.",
+            "headline": "Testing the Echo",
+            "speech": "Listen closely to the mountain wall. When I blow the horn, the second bounce will point us home.",
             "visual": "forest",
-            "label": "Crevasse Map",
+            "label": "The Pine Valley",
             "story_beat": "build",
-            "visual_prompt": "Dr. Aris Vance holds a glowing holographic topographical scanner displaying green contour lines over a white terrain model. The glowing light reflects off Aris's focused, tired face inside the warm command room.",
+            "visual_prompt": "Medium shot of Leo standing amidst snow-dusted pine trees at dusk, blowing into a large brass acoustic horn, his breath forming white clouds in the freezing air.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Seismic Pulse",
-            "speech": "I am firing the directional sonic beacon to ping the bedrock and carve a safer bypass route.",
-            "visual": "robot",
-            "label": "Pulse Activation",
+            "headline": "The Hidden Path",
+            "speech": "That sharp double echo means the gorge is right ahead. Follow my footsteps in the fresh snow.",
+            "visual": "door",
+            "label": "The Ravine Entrance",
             "story_beat": "mechanism",
-            "visual_prompt": "Dr. Aris Vance firmly presses a heavy brass activation lever on the automated sonar tower console. A brilliant blue acoustic wave emanates from the metal device, cutting cleanly through the howling arctic gale.",
+            "visual_prompt": "Wide shot of Leo holding a glowing red flare, leading two tired hikers toward a natural stone archway that acts like a door into a sheltered mountain pass.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Safe Passage",
-            "speech": "The cargo sled has successfully cleared the fracture zone and is now approaching our reinforced perimeter.",
+            "headline": "Safe at Base",
+            "speech": "We made it through the worst of it. Grab a warm cup of tea and rest by the heater.",
             "visual": "ship",
-            "label": "Relief Arrival",
+            "label": "The Rescue Cabin",
             "story_beat": "payoff",
-            "visual_prompt": "Dr. Aris Vance smiles broadly, holding a warm mug of steaming tea while watching a tracked supply vehicle roll safely into the illuminated loading bay through the open hangar doors.",
+            "visual_prompt": "Interior shot of a warm wooden rescue cabin looking like a cozy ship interior, Leo handing a steaming mug to a smiling hiker sitting on a bunk bed.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Cinematic realism with a muted blue and orange color palette, emphasizing cold textures and warm interior lighting.",
+          "style": "Cinematic realism with warm lighting contrasting against cold blue alpine environments.",
           "characters": {
-            "Dr. Aris Vance": "A resilient arctic researcher in their late forties with sharp features, weary green eyes, and wearing a heavy, fur-lined bright orange parka."
+            "Leo": "A middle-aged mountain rescue leader with a weathered face, kind eyes, a dark thick beard, wearing a heavy waterproof orange parka and insulated snow pants."
           },
           "locations": {
-            "Research Station Command Room": "A compact, circular interior filled with analog dials, glowing monitors, and reinforced steel walls covered in frost."
+            "Base Camp": "A rugged snow-covered ledge featuring a weather-beaten wooden cabin with glowing yellow windows.",
+            "Pine Valley": "A steep mountain slope filled with tall, snow-laden evergreen trees and dramatic cliff faces."
           },
           "objects": {
-            "Sonator Console": "A bulky, industrial control panel featuring heavy brass levers, blinking amber indicator lights, and a scratched metal casing."
+            "Acoustic Horn": "A vintage, tarnished brass cone-shaped horn with leather straps for carrying.",
+            "Rescue Flare": "A metal cylinder emitting a bright, steady red flame and thick red smoke."
           }
         },
-        "plot_fingerprint": "4ea7bbd28810a17e71520ecc8d421bd9b4f0e6cecab97064964c5c93b8f5d389"
+        "plot_fingerprint": "08b66ffbf9e8ead0e2b9ce5f0b5eafc350ae4a2c4ef5a975c93573e4f819e44b"
       },
       "approved": false
     },
     {
-      "candidate_id": "f5181a66137634f411bd702d",
-      "source_sha256": "7b03ee3dae8f5e8ca98ad28cb1db5cf1bc6577ef6dcec0975b6c990a3641d846",
+      "candidate_id": "cc1e996f7244b013e9faef13",
+      "source_sha256": "cc27d7b0b8d8c32595f11ad2235b5f36965af3cdcc1f9550c087e6dfe8ac4477",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-71842e9d189b61b273cd",
-        "title": "The Great Bakery Pitch Rivalry",
-        "hook": "The Divided Kitchens",
-        "question": "How did two competing neighborhood bakers resolve their decades-old rivalry over the annual harvest festival?",
-        "answer": "By inventing a giant edible megaphone system that broadcast their combined pastry aromas directly into the town square, turning competition into a shared feast.",
+        "content_id": "rayvan-gemini-95c6711f0a5fc66825aa",
+        "title": "The Muddy Pitch Playbook",
+        "hook": "The Hidden Threat",
+        "question": "How did the underdog village football team outsmart their giant rivals?",
+        "answer": "They utilized a network of hidden acoustic resonators beneath the field to coordinate silent passing maneuvers.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -183,62 +185,63 @@
         ],
         "story_beats": [
           {
-            "headline": "The Divided Kitchens",
-            "speech": "For forty years, our baking families argued over who made the finest morning rolls in the entire valley.",
-            "visual": "forest",
-            "label": "The Feud",
-            "story_beat": "reveal",
-            "visual_prompt": "A wide shot of two opposing rustic bakeries separated by an overgrown pine forest, with baker Martha standing angrily on the left porch holding a rolling pin.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Gathering the Ingredients",
-            "speech": "Instead of fighting over flour supplies, we decided to construct a massive botanical signaling tower in the center.",
+            "headline": "The Hidden Threat",
+            "speech": "Listen closely, team. The Oakfield giants think their sheer size will crush us on the muddy pitch today.",
             "visual": "signal",
-            "label": "The Plan",
+            "label": "The Discovery",
+            "story_beat": "reveal",
+            "visual_prompt": "Coach Elena wearing a worn blue tracksuit stands inside a damp locker room pointing at a glowing holographic tactical map resting on a wooden bench.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Constructing the Array",
+            "speech": "We will bury these brass acoustic pipes beneath the turf to transmit our silent signals across the entire field.",
+            "visual": "forest",
+            "label": "The Preparation",
             "story_beat": "build",
-            "visual_prompt": "Medium shot of rival bakers Martha and Thomas working together in the misty clearing, assembling a tall wooden framework holding glowing herbal spice bundles.",
+            "visual_prompt": "Young player Toby in a green jersey kneels beside a muddy field edge, carefully burying a polished brass pipe into the damp soil under the watchful eyes of teammates.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Scent Mechanism",
-            "speech": "We pulled the heavy brass levers simultaneously, releasing a warm cinnamon cloud that drifted across the sleepy village.",
+            "headline": "The Secret Frequency",
+            "speech": "Tap your boots twice on the hidden nodes to launch our secret synchronized passing formation right past them.",
             "visual": "robot",
-            "label": "The Launch",
+            "label": "The Operation",
             "story_beat": "mechanism",
-            "visual_prompt": "Close up of Thomas and Martha pulling dual brass levers on an intricate mechanical spice spreader shaped like a friendly copper automaton.",
+            "visual_prompt": "Midfielder Maya wearing muddy cleats taps her foot purposefully onto a disguised metal plate embedded in the grass while holding a leather football tightly under one arm.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "A Sweet Settlement",
-            "speech": "The whole town cheered as delicious pastry aromas filled the air, proving cooperation tastes much better than rivalry.",
-            "visual": "planet",
-            "label": "The Feast",
+            "headline": "The Ultimate Victory",
+            "speech": "Our silent rhythm won the match and proved that clever teamwork always overcomes brute strength in the end.",
+            "visual": "ship",
+            "label": "The Celebration",
             "story_beat": "payoff",
-            "visual_prompt": "Wide overhead shot of the town square packed with smiling villagers sharing giant braided pastries under a warm sunset sky.",
+            "visual_prompt": "The entire underdog team wearing mud-splattered green and blue kits cheers triumphantly under a golden afternoon sun, hoisting a gleaming silver trophy above their heads in the center of the pitch.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Whimsical storybook illustration with warm pastel tones, rich textures, and cozy cinematic lighting.",
+          "style": "Cinematic stop-motion animation with rich textures, warm lighting, and detailed physical sets.",
           "characters": {
-            "Martha": "An energetic elderly baker with curly silver hair, wearing a flour-dusted green apron and round spectacles.",
-            "Thomas": "A tall, cheerful baker with a warm smile, wearing a plaid vest and carrying a wooden mixing spoon."
+            "Elena": "An experienced middle-aged coach with a determined expression, wearing a sturdy blue waterproof tracksuit and silver whistle.",
+            "Toby": "An enthusiastic young player with freckles and messy brown hair, wearing a patched green jersey and muddy boots.",
+            "Maya": "A sharp-eyed midfielder with her dark hair in a tight braid, wearing captain's armbands and a green-and-blue kit."
           },
           "locations": {
-            "Village Square": "A cobblestone courtyard surrounded by colorful timber-framed houses and flower boxes.",
-            "Pine Forest Edge": "A dense grove of tall green pines bordering the cobblestone square."
+            "locker_room": "A cramped, rustic wooden shelter filled with old benches, hanging jerseys, and tactical chalkboards.",
+            "valley_pitch": "A sprawling outdoor community football field surrounded by ancient oak trees, bordered by rolling green hills under a bright sky."
           },
           "objects": {
-            "Brass Lever": "A heavy, polished brass lever mounted on a carved wooden base with ornate gear engravings.",
-            "Spice Tower": "A ten-foot tall wooden lattice structure adorned with bundles of fragrant dried herbs and copper piping."
+            "brass_pipe": "A gleaming, hollow cylindrical acoustic tube made of polished brass with small sound apertures.",
+            "silver_trophy": "A tall, handcrafted silver cup featuring engraved oak leaf patterns along the handles and base."
           }
         },
-        "plot_fingerprint": "33101f5dce6a18d1602a085f678e377995c948fdf8302c6d939db348c4746b0e"
+        "plot_fingerprint": "acb790637dac8ddfdc68f7bb54ca6f37ac42b911609af5acd41bd0d647c3fc38"
       },
       "approved": false
     }
