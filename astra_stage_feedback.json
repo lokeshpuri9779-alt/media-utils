@@ -2,28 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-17T23:30:26.139069+00:00",
-      "stage": "quality",
-      "element": "candidate_selection",
-      "outcome": "fail",
-      "evidence": {
-        "reason": "no_approved_original_story_available"
-      },
-      "proposed_action": "Diagnose story supply and creative gate failures",
-      "candidate_id": ""
-    },
-    {
-      "at": "2026-10-17T23:42:40.685139+00:00",
-      "stage": "quality",
-      "element": "candidate_selection",
-      "outcome": "fail",
-      "evidence": {
-        "reason": "no_approved_original_story_available"
-      },
-      "proposed_action": "Diagnose story supply and creative gate failures",
-      "candidate_id": ""
-    },
-    {
       "at": "2026-10-17T23:53:34.873923+00:00",
       "stage": "quality",
       "element": "candidate_selection",
@@ -7612,6 +7590,39 @@
       },
       "proposed_action": "",
       "candidate_id": "rayvan-gemini-7ff9c03a7fdeed1c8788"
+    },
+    {
+      "at": "2026-10-24T00:10:00.952329+00:00",
+      "stage": "quality",
+      "element": "creative_director",
+      "outcome": "pass",
+      "evidence": {
+        "scores": {
+          "hook": 94.0,
+          "retention": 92.0,
+          "visual": 98.0,
+          "pacing": 100.0,
+          "audio": 98.79,
+          "captions": 100.0,
+          "novelty": 100.0,
+          "coherence": 92.0,
+          "technical": 100.0
+        }
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-gemini-388f1f9f51ce22a68f7a"
+    },
+    {
+      "at": "2026-10-24T00:10:00.962425+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "pass",
+      "evidence": {
+        "duration": 25.867,
+        "renderer": "studio-7.3.0"
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-gemini-388f1f9f51ce22a68f7a"
     }
   ],
   "stage_counts": {
@@ -7712,7 +7723,7 @@
       "regressed": 0
     },
     "render": {
-      "pass": 90,
+      "pass": 91,
       "fail": 2,
       "skip": 0,
       "unknown": 2,
@@ -7720,8 +7731,8 @@
       "regressed": 0
     },
     "quality": {
-      "pass": 90,
-      "fail": 400,
+      "pass": 91,
+      "fail": 398,
       "skip": 0,
       "unknown": 0,
       "improved": 0,

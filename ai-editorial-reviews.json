@@ -741,6 +741,18 @@
         "reviewed_at": "2026-10-23T23:46:57.549516+00:00",
         "review_model": "gemini-3.1-flash-lite"
       }
+    },
+    {
+      "content_id": "rayvan-gemini-f775585c31b5cf4db58f",
+      "story_sha256": "ff3b6c04667bded1a5207851e3743fe83722dd027f9cc972411c4b2e5858fed2",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise of a robot sacrificing itself to save a child on a desolate planet is a highly saturated trope in science fiction, lacking sufficient unique narrative elements to distinguish it from the provided list of similar 'Unit' and 'Rescuer' themed stories.",
+        "The plot follows a predictable, derivative structure that mirrors the 'Unit 9 and the Last Seedling of Sector Four' and 'Unit 44's Final Protocol' examples provided in the reference data.",
+        "The narrative relies on common sci-fi tropes (dying robot, last child, rescue beacon) without introducing a novel causal mechanism or original thematic twist."
+      ],
+      "record": null
     }
   ]
 }
