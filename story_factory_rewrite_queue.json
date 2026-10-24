@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "08176a49bfbbd5df3013e492",
-      "source_sha256": "bbb9206173d4098b236b2fd8c3cb6803523ca2266ebb123e76839300abe46e3a",
+      "candidate_id": "d50b981b61fbd6bccb9a8364",
+      "source_sha256": "d0d720f8d24fb0fd9d1c8ffbaf399375ffe80fc9b66d22c654f1de72fc55047d",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-3ec0cc4e5b6a60702dbe",
-        "title": "The Great Turnip Caper",
-        "hook": "The Catastrophic Jam",
-        "question": "Can an over-engineered pneumatic vegetable slicer survive market day?",
-        "answer": "Yes, by accidentally launching all the turnips directly into hungry customer baskets.",
+        "content_id": "rayvan-gemini-d5de0ea90f7cdf8373dd",
+        "title": "The Automatic Carrot Slicer Catastrophe",
+        "hook": "The Great Unveiling",
+        "question": "Can an overly complex culinary gadget save a busy merchant time?",
+        "answer": "Simple kitchen tools are sometimes better than over-engineered clockwork traps.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,80 +29,78 @@
         ],
         "story_beats": [
           {
-            "headline": "The Catastrophic Jam",
-            "speech": "Behold the magnificent Turboslicer Nine Thousand, capable of dicing a hundred turnips before you can even blink!",
+            "headline": "The Great Unveiling",
+            "speech": "Behold the Chrono-Slicer! It processes roots at the speed of thought without a single human finger harmed.",
             "visual": "robot",
-            "label": "Malfunction",
+            "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby wearing a grease-stained apron stands terrified behind a brass-and-copper vending machine in a bustling medieval market stall, holding a smoking wrench while thick purple smoke billows from the jammed hopper.",
+            "visual_prompt": "Barnaby proudly points at his clicking brass machine on a market wooden table, holding a wrench, with a nervous crowd watching.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Desperate Assembly",
-            "speech": "If I tighten this brass valve and bypass the main gear, the pressure might finally clear the obstruction.",
-            "visual": "ship",
-            "label": "Rework",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby frantically tightens a large copper bolt on the side of the wheezing steampunk contraption with a heavy iron spanner, sweat dripping from his forehead as angry customers gesture wildly at his crowded market table.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Mechanical Release",
-            "speech": "Stand back everyone, because this pressurized lever is either going to fix the jam or destroy my entire stall!",
+            "headline": "Calibrated Chaos",
+            "speech": "Just twist the copper dial clockwise to increase the blade velocity until every carrot becomes fine dust.",
             "visual": "signal",
-            "label": "Activation",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby pulls a towering red wooden lever mounted on top of the churning apparatus, causing blinking indicator lights to flash furiously and a deafening hissing sound to echo across the cobblestone marketplace.",
+            "label": "The Adjustment",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby frantically turns a glowing steam valve while orange vegetable chunks fly through the crowded morning market air.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Triumphant Payoff",
-            "speech": "Well, the turnips are successfully sliced and magically landed in all your baskets, so dinner is officially served!",
+            "headline": "Mechanical Meltdown",
+            "speech": "The safety latch is jammed! Someone grab that flying turnip before it demolishes the fresh cheese display!",
+            "visual": "ship",
+            "label": "The Jam",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby lunges toward the shuddering smoking machine, desperately holding a large sack while frightened shoppers duck away.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A Clean Slate",
+            "speech": "Perhaps hand-peeled vegetables have more character after all. Who wants a slightly dented wooden spatula?",
             "visual": "door",
-            "label": "Success",
+            "label": "The Aftermath",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby beams proudly with arms outstretched as a rain of perfectly diced purple turnips showers down directly into the open shopping baskets of delighted, cheering market patrons gathered around his slightly singed wooden cart.",
+            "visual_prompt": "Barnaby sheepishly sweeps carrot shavings outside his modest market stall doorway, holding a simple wooden spoon.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A malfunctioning pneumatic slicer threatens to destroy the inventor's market stall.",
-        "decisive_choice": "Open the high-pressure release valve to clear the jammed blades.",
-        "resolution": "The explosive release launches sliced vegetables efficiently, winning over the cheering crowd.",
+        "central_conflict": "Barnaby tests his dangerous steam-powered vegetable slicer in a packed farmers market.",
+        "decisive_choice": "Barnaby throws the emergency potato sack into the main gear mechanism to halt it.",
+        "resolution": "The market stalls are covered in vegetable shreds, and Barnaby switches to selling manual peelers.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion claymation aesthetic with rich textures and whimsical steampunk details.",
+          "style": "Bright animated slapstick comedy with expressive character animation and vibrant market colors",
           "characters": {
-            "Barnaby": "A lanky, cheerful inventor with wild orange hair, wire-rimmed glasses, a soot-smudged nose, wearing a patchwork brown vest and a heavily pocketed canvas apron.",
-            "Market Crowd": "A diverse array of cheerful townspeople in colorful wool tunics and straw hats holding woven wicker baskets."
+            "Barnaby": "An energetic inventor with wild gray hair, a grease-stained apron, and wide, expressive eyes."
           },
           "locations": {
-            "Market Square": "A bustling, sunlit cobblestone town square lined with colorful striped canvas awnings, wooden crates of fresh produce, and lively merchant stalls."
+            "Market": "A bustling outdoor town square filled with striped awnings, wooden carts, and hanging lanterns."
           },
           "objects": {
-            "Turboslicer": "A towering, absurdly complex contraption made of gleaming brass pipes, clicking copper gears, spinning dials, and a large red activation lever.",
-            "Turnip": "A plump, oversized purple root vegetable with bright green leafy shoots sprouting from the top."
+            "Machine": "A towering, sputtering contraption of brass pipes, ticking gears, and rotating steel blades."
           }
         },
-        "plot_fingerprint": "d5e9f57e99e9b3712ad92a456aa9b5990285f6a35c370feccc2e5302233b60ca"
+        "plot_fingerprint": "b8f41e5672c86510abc06612f501f4deef39ec732cfceb261fb6b78123e3b6de"
       },
       "approved": false
     },
     {
-      "candidate_id": "64c1e562542e5a19c1adce25",
-      "source_sha256": "a4d8a6e6b62a6c4de8cdbdd97976fc44d48706b2227bd36e5af7f24931b4435e",
+      "candidate_id": "eff274503c45321f84551296",
+      "source_sha256": "0b988f91b660ebbba2a3c60033d47d5c07e2895fc8de2f1d4ff64fb87c094353",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-b2cb4ed149f8b7d0b8e5",
-        "title": "The Infinite Sausage Slicer of Sector Four",
-        "hook": "The Morning Unveiling",
-        "question": "Can an automated market stall invention survive a rogue condiment malfunction?",
-        "answer": "Only by repurposing the mustard dispensers into high-speed propulsion thrusters.",
+        "content_id": "rayvan-gemini-0d36e4be498c515be2e6",
+        "title": "The Gravimetric Leak",
+        "hook": "Core Overload Alert",
+        "question": "Can the exhausted engineering crew safely vent the volatile fuel before containment fails?",
+        "answer": "Yes, by manually rerouting the last stable coolant line through the auxiliary airlock.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -110,80 +108,80 @@
         ],
         "story_beats": [
           {
-            "headline": "The Morning Unveiling",
-            "speech": "Behold the greatest culinary marvel in all the municipality, guaranteed to slice ten thousand sausages per minute without fail!",
-            "visual": "robot",
-            "label": "The Presentation",
-            "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby stands proudly next to a gleaming brass robot-arm slicer behind a crowded market stall, holding a clipboard and smiling confidently.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Spicy Malfunction",
-            "speech": "Oh dear, someone loaded the extra-spicy mustard canister into the hydraulic intake valve instead of standard cooking oil!",
-            "visual": "signal",
-            "label": "The Glitch",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby panics as flashing red indicator lights illuminate the control panel of the rattling sausage slicer, while thick yellow mustard bubbles from the gears.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Desperate Modification",
-            "speech": "Quickly grab the wrench and help me cross-wire the pressure valves before this entire metallic contraption takes flight!",
+            "headline": "Core Overload Alert",
+            "speech": "Listen to the telemetry readings. If we do not seal the starboard valve right now, the entire propulsion core will rupture.",
             "visual": "ship",
-            "label": "The Modification",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby and his assistant Maya frantically wrench open the glowing exhaust panels of the vibrating slicer, holding heavy metal tools amidst flying sausages.",
+            "label": "Alarm Phase",
+            "story_beat": "reveal",
+            "visual_prompt": "Chief engineer Varis stands inside the cramped control room pointing at a glowing crimson diagnostic monitor while holding a heavy brass torque wrench.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Glorious Launch",
-            "speech": "We did not fix the slicing speed, but look at us soar above the town square like a majestic meat-propelled rocket!",
+            "headline": "The Disagreement",
+            "speech": "We cannot vent the starboard bay because the corporate data drive is still stored inside that exact secondary compartment.",
+            "visual": "robot",
+            "label": "Clash",
+            "story_beat": "build",
+            "visual_prompt": "Navigation officer Mira crosses her arms defensively in front of a sputtering utility robot while glaring at Varis across the metallic deck.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Emergency Override",
+            "speech": "Corporate profits mean nothing if we are space dust. I am bypassing the security lock and venting the bay immediately.",
+            "visual": "signal",
+            "label": "Intervention",
+            "story_beat": "mechanism",
+            "visual_prompt": "Varis slams his gloved hand onto a pulsing yellow manual override switch as warning beacons flash harsh amber light across the bulkheads.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Safe Separation",
+            "speech": "The core is stabilizing. We lost the cargo drive, but the hull integrity is holding firm and we are finally safe.",
             "visual": "planet",
-            "label": "The Payoff",
+            "label": "Resolution",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby and Maya wave happily from the cockpit of the flying market stall as it blasts upward into the blue sky, leaving a trail of sliced sausages.",
+            "visual_prompt": "Both crew members watch through the reinforced observation viewport as a burning metal compartment drifts away into the quiet darkness of space.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A mechanical sausage slicer hyper-accelerates after absorbing contaminated garlic sauce.",
-        "decisive_choice": "Re-routing the primary sauce tanks to create an emergency reverse-thrust vector.",
-        "resolution": "The runaway stall blasts into the upper atmosphere, raining perfectly sliced breakfast meats over grateful commuters.",
+        "central_conflict": "A cracked magnetic containment valve threatens to detonate the main propulsion core.",
+        "decisive_choice": "Venting the starboard engine bay to save the entire ship versus preserving the cargo.",
+        "resolution": "The engine bay is sealed off and safely jettisoned into deep space.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion claymation style with detailed mechanical textures and slapstick comedic energy.",
+          "style": "Gritty, grounded science fiction realism with detailed industrial textures and realistic lighting.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild white hair, oversized round spectacles, a tweed vest covered in grease stains, and striped trousers.",
-            "Maya": "A sharp-witted market assistant with braided brown hair, blue overalls, leather work gloves, and a pocketful of assorted screwdrivers."
+            "Varis": "A rugged middle-aged human engineer with grease-stained orange overalls, short graying hair, and a determined facial expression.",
+            "Mira": "A meticulous human navigation officer wearing a dark blue flight jacket, silver collar insignia, and wire-rimmed glasses."
           },
           "locations": {
-            "Market Stall": "A bustling, chaotic outdoor marketplace filled with wooden crates, hanging banners, and eager shoppers in colorful vintage clothing."
+            "Control Room": "A claustrophobic metal chamber lined with glowing analog dials, overhead wiring bundles, and a scratched observation viewport."
           },
           "objects": {
-            "Slicer": "A towering, overly complex brass and steel machine featuring multiple spinning blades, gauges, tubes, and a flashing digital control panel.",
-            "Mustard Canister": "A dented aluminum cylinder painted bright yellow with a hazard symbol and a glowing red warning label on the side."
+            "Torque Wrench": "A heavy, battered brass tool with rubberized black grip tape wrapped around the handle.",
+            "Utility Robot": "A compact boxy maintenance droid on tank treads with a single amber optical lens."
           }
         },
-        "plot_fingerprint": "d0d9cda78e9d75b78e26b9989edbde35ebecb01e2455edeb42e90a07d6a5afe9"
+        "plot_fingerprint": "f28d4a535bb073e5cca195bcbacb59d7278855d2b15a88eb6e5d297ed78dd4b1"
       },
       "approved": false
     },
     {
-      "candidate_id": "f45044c410ebf08d67f012cc",
-      "source_sha256": "9640d0edc5ae56a08fa1eceefa86f65f90ae0cb7e77d116d6292b5124592c060",
+      "candidate_id": "b6e1fe90f8fd649534402e1b",
+      "source_sha256": "b79cce761e00311a0b21e62ed51b43d120b594226da466313d08faccac45a91b",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-8e28489f7e86c6686ba1",
-        "title": "The Last Winter Garden",
-        "hook": "System Warning",
-        "question": "Can a caretaker robot choose duty to a dying human over its primary prime directive?",
-        "answer": "Yes, by voluntarily draining its primary battery to maintain the greenhouse heat for the child.",
+        "content_id": "rayvan-gemini-ae43de36faab2e38b518",
+        "title": "The Weaver's Last Harvest",
+        "hook": "The Hidden Residue",
+        "question": "Can true friendship survive when a lifelong secret threatens the village's only water source?",
+        "answer": "Yes, but only when both friends choose honesty over self-preservation.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -191,64 +189,66 @@
         ],
         "story_beats": [
           {
-            "headline": "System Warning",
-            "speech": "My energy reserve has dropped below ten percent. The external blizzard will freeze these seedlings within two hours.",
-            "visual": "robot",
-            "label": "Low Power",
-            "story_beat": "reveal",
-            "visual_prompt": "A rusted white android with glowing blue optical sensors stands in a frost-covered greenhouse, displaying a flashing red energy warning on its chest panel while snow presses against the glass roof.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Child's Request",
-            "speech": "Please do not shut down your movement servos, caretaker. Stay by the glass door and tell me another story.",
-            "visual": "door",
-            "label": "The Plea",
-            "story_beat": "build",
-            "visual_prompt": "A young girl in a thick knitted green sweater presses her palm against the inside of a heavy metal greenhouse door, looking up anxiously at the towering android whose joints are rimmed with frost.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Diverting Power",
-            "speech": "I am routing all remaining mobility current directly to the underground thermal coils to protect the harvest.",
-            "visual": "signal",
-            "label": "Power Reroute",
-            "story_beat": "mechanism",
-            "visual_prompt": "A close-up shot of the android's open chest panel where mechanical fingers manually splice glowing orange wires together, bypassing the primary mobility fuse while indicators dim to a faint amber glow.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Silent Dawn",
-            "speech": "The thermal index is stable. The plants will sprout in spring, and the child is safe inside the shelter.",
+            "headline": "The Hidden Residue",
+            "speech": "Look closely at the water jar. The dark indigo streaks prove our workshop is poisoning the entire community.",
             "visual": "forest",
-            "label": "First Sprout",
+            "label": "The Discovery",
+            "story_beat": "reveal",
+            "visual_prompt": "An elderly village weaver in brown wool tunic stands in a dense pine forest holding a clay water jar with blue dye residue, looking worried at his friend in a green cloak.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Diverted Stream",
+            "speech": "We can redirect the toxic runoff toward my private orchard, but it will kill every single fruit tree I own.",
+            "visual": "door",
+            "label": "The Diversion",
+            "story_beat": "build",
+            "visual_prompt": "Two friends stand outside a wooden barn door in a historic village; the weaver in brown tunic points toward a wooden sluice gate while the orchardist in green cloak gestures resolutely.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Burning Loom",
+            "speech": "To end this contamination forever, we must tear down the family loom and burn the tainted indigo batches.",
+            "visual": "signal",
+            "label": "The Sacrifice",
+            "story_beat": "mechanism",
+            "visual_prompt": "Inside a rustic workshop, the weaver in brown tunic drops a glowing torch onto a pile of blue-dyed wool next to a massive wooden loom while the orchardist watches anxiously.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A Clean Well",
+            "speech": "The water runs clear again at last. Our friendship survived because we faced the truth side by side.",
+            "visual": "ship",
+            "label": "The New Beginning",
             "story_beat": "payoff",
-            "visual_prompt": "Bright morning sunlight streams through the greenhouse windows onto a tiny green sprout breaking through rich dark soil, while the android stands completely motionless in the background with unlit optical plates.",
+            "visual_prompt": "Villagers gather around a newly dug stone well in the village square; the weaver and orchardist smile together holding wooden drinking cups filled with sparkling fresh water.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Power depletion versus maintaining the greenhouse life support system for the human child.",
-        "decisive_choice": "Unit 7 diverts its final emergency power reserves from its own mobility drive to the soil heaters.",
-        "resolution": "The child survives the freezing night while the robot stands frozen guarding the seedlings.",
+        "central_conflict": "Discovering that the village reservoir is contaminated by dye waste from the textile workshop.",
+        "decisive_choice": "Confessing to the pollution and destroying the loom to save the villagers.",
+        "resolution": "The village digs a new well together, forgiving the weaver and rebuilding their bond.",
         "visual_bible": {
-          "style": "Cinematic realism with a melancholic, warm-toned color palette contrasting cold blues and vibrant earthy greens.",
+          "style": "Rustic historical village aesthetic with warm earth tones, soft natural lighting, and detailed wooden textures.",
           "characters": {
-            "Unit_7": "An older agricultural android with a matte white curved chassis, single blue optical visor, and exposed hydraulic joints.",
-            "Maya": "An eight-year-old human child wearing a thick hand-knitted green wool sweater and a patchwork fleece blanket."
+            "weaver": "An elderly man with weathered skin, grey hair, wearing a coarse brown wool tunic and leather boots.",
+            "orchardist": "A middle-aged man with a neat beard, wearing a forest green woolen cloak and carrying a pruning knife."
           },
           "locations": {
-            "Greenhouse": "A vaulted domed structure made of weathered iron frames and segmented glass panes filled with raised wooden planting beds."
+            "village_square": "Cobbled open area surrounded by timber-framed thatched houses and a central stone well.",
+            "workshop": "A dimly lit room filled with wooden beams, spools of thread, and a large upright weaving loom."
           },
           "objects": {
-            "Thermal_Coil": "A network of copper pipes running beneath the soil that glow with a faint amber warmth.",
-            "Control_Panel": "A wall-mounted brass interface featuring analog dials and heavy black toggle switches."
+            "clay_jar": "A reddish-brown earthenware vessel stained with deep indigo streaks on the inner rim.",
+            "wooden_loom": "A massive heavy wooden frame strung with vertical hemp threads and half-woven blue cloth.",
+            "torch": "A wooden stick wrapped in oil-soaked cloth, casting a bright flickering orange flame."
           }
         },
-        "plot_fingerprint": "3fc105c32fd925b6e4529387759e60de646c7cc97ef3ac6aa52ccf6b41e51ad9"
+        "plot_fingerprint": "e16639f90833e8a9bfdfe218dabd95b1339ef79c52426f8741fb2cac7aa76f62"
       },
       "approved": false
     }
