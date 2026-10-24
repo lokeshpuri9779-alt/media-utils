@@ -942,6 +942,18 @@
         "reviewed_at": "2026-10-24T07:20:10.684978+00:00",
         "review_model": "gemini-3.1-flash-lite"
       }
+    },
+    {
+      "content_id": "rayvan-gemini-f71308955b44bc1e10e5",
+      "story_sha256": "a6171b970edaea3a205b1cfef5345e1faee1804a032249e1042332e96193752e",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story relies on a premise and setting (a rescuer navigating a frozen mountain pass to find a signal) that is highly derivative of multiple provided examples, specifically 'The Rescuer of Peak Serenity', 'The Frostbound Pilot and the Crag of Silence', and 'The Rescuer of Borealis Ridge and the Final Ice-Bound Signal'.",
+        "The narrative structure and thematic elements are indistinguishable from the pattern of 'rescuer finds object/person in extreme weather' established in the provided publication history.",
+        "The story lacks sufficient unique causal mechanisms to differentiate it from the repetitive 'rescue in a frozen landscape' trope present in the provided list."
+      ],
+      "record": null
     }
   ]
 }
