@@ -58,7 +58,17 @@ jobs:
       - name: Render real Studio narration preview (no YouTube upload)
         run: |
           mkdir -p /tmp/astra-studio-review
-          python studio_renderer.py --preview /tmp/astra-studio-review/studio-preview.mp4 --stills-dir /tmp/astra-studio-review/stills
+          python studio_renderer.py --preview /tmp/astra-studio-review/studio-preview.mp4 --stills-dir /tmp/astra-studio-review/stills 2>&1 | tee /tmp/astra-studio-review/render.log
+      - name: Require confirmed asset-pack use in narrated render
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          log = Path('/tmp/astra-studio-review/render.log').read_text()
+          selected = [line for line in log.splitlines() if 'ASTRA_PACK_BACKGROUND_SELECTED=' in line]
+          print(f'ASTRA_PACK_SELECTED_UNIQUE={len(selected)}')
+          if not selected:
+              raise SystemExit('FAIL: Studio preview restored the asset pack but used zero verified backgrounds')
+          PY
       - name: Verify completed MP4 and audio
         run: python -m tests.verify_studio_preview /tmp/astra-studio-review/studio-preview.mp4
       - name: Upload preview and review frames
