@@ -1461,6 +1461,18 @@
         "review_model": "gemini-3.1-flash-lite"
       },
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-84ea4b13f54386d0fa56",
+      "story_sha256": "3ab187714e36f17e0535518b4aa71a8e2bf53f2607bd3c060dcef67af5628dbf",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise is highly derivative of the provided example 'Barnaby's Self-Stirring Soup Spoon and the Market Mishap', sharing the same protagonist name, setting (market), and core conflict structure (an inventor's device malfunctioning in a public space).",
+        "The narrative structure and resolution are formulaic and closely mirror the 'inventor's device malfunction' trope found in the provided list of recent publications."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
