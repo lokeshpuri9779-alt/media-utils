@@ -1433,6 +1433,18 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-777f1c0005bc6b3a3f95",
+      "story_sha256": "ac6f2e46232a315aec4b12330b9beaec6a87976ed21cb2c164c80a76c3ae75ff",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story is derivative of the provided example 'The Stationmaster and the Missing Midnight Courier'. Both stories feature a stationmaster named Elias, a midnight train departure, a station setting, and a central conflict involving a mechanical/technical obstruction preventing the train from leaving.",
+        "The causal mechanism (investigating a sound/issue to allow the train to depart) is functionally identical to the provided example, making the narrative premise repetitive."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
