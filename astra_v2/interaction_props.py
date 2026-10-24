@@ -14,10 +14,10 @@ def prop_for_shot(shot):
                     ("visual_intent", "visual_prompt", "speech", "action")).lower()
     action = shot.get("story_action", "idle")
     if action in ("carry", "pick", "push", "pull") and re.search(
-            r"\\b(?:box|boxes|parcel|parcels|crate|crates|package|packages|cart|carts)\\b", text):
+            r"\b(?:box|boxes|parcel|parcels|crate|crates|package|packages|cart|carts)\b", text):
         return "parcel"
     if action == "repair" and re.search(
-            r"\\b(?:tool|tools|hammer|wrench|repair|repairs|repaired|fix|fixes|fixed)\\b", text):
+            r"\b(?:tool|tools|hammer|wrench|repair|repairs|repaired|fix|fixes|fixed)\b", text):
         return "tool"
     return None
 
