@@ -51,6 +51,7 @@ def reconcile(youtube, state):
                                         "plot_key": item.get("plot_key", ""),
                                         "plot_fingerprint": item.get("plot_fingerprint", ""),
                                         "story_beats": item.get("story_beats") or [],
+                                        **{key: item[key] for key in ("central_conflict", "decisive_choice", "resolution") if item.get(key)},
                                         "renderer": item.get("renderer") or "unknown"}
             # Record only API-confirmed public, processed uploads. A failed
             # history write must not misclassify an already-published video.
@@ -292,6 +293,7 @@ def run():
                     "plot_key": candidate.get("plot_key", ""),
                     "plot_fingerprint": candidate.get("plot_fingerprint", ""),
                     "story_beats": candidate.get("story_beats") or [],
+                    **{key: candidate[key] for key in ("central_conflict", "decisive_choice", "resolution") if candidate.get(key)},
                     "renderer": candidate.get("renderer") or "unknown",
                     "result": "transfer_pending",
                 }
@@ -309,6 +311,7 @@ def run():
                     "plot_key": candidate.get("plot_key", ""),
                     "plot_fingerprint": candidate.get("plot_fingerprint", ""),
                     "story_beats": candidate.get("story_beats") or [],
+                    **{key: candidate[key] for key in ("central_conflict", "decisive_choice", "resolution") if candidate.get(key)},
                     "renderer": candidate.get("renderer") or "unknown",
                 }
                 write_json(STATE_FILE, state)
