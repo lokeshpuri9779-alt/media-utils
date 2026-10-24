@@ -1100,6 +1100,21 @@
         "The content relies on repetitive 'ship-in-peril' tropes that have been heavily saturated in the provided dataset."
       ],
       "record": null
+    },
+    {
+      "content_id": "rayvan-gemini-e2f09c4ee8925da721b9",
+      "story_sha256": "22764927ca6749343c3bd87453652b73665039a546bbf55fc47cc4f28d1988fd",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-e2f09c4ee8925da721b9",
+        "story_sha256": "22764927ca6749343c3bd87453652b73665039a546bbf55fc47cc4f28d1988fd",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the specific premises, characters, or settings of the provided list of recent publications.; The narrative demonstrates clear causal coherence, moving logically from discovery to dilemma to resolution.; The content is suitable for a general audience and does not contain unsafe, misleading, or policy-violating material.; The plot structure is distinct from the provided examples, avoiding the specific tropes of 'Oakhaven' or 'Sunken' themes found in the reference list.",
+        "reviewed_at": "2026-10-24T11:23:12.650254+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      }
     }
   ]
 }
