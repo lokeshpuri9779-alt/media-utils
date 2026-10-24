@@ -43,6 +43,7 @@ jobs:
       - name: Validate encoded video and audit receipt
         run: |
           python - <<'PY'
+          import hashlib
           import json
           from pathlib import Path
           import subprocess
@@ -51,9 +52,19 @@ jobs:
           subprocess.run(['ffprobe','-v','error','-show_entries','format=duration','-of','default=noprint_wrappers=1',str(video)],check=True)
           receipts = list(Path('runtime-health/asset-usage').glob('*.json'))
           assert receipts, 'No asset usage receipt from actual render'
+          video_hash = hashlib.sha256(video.read_bytes()).hexdigest()
+          matching = []
           for path in receipts:
               data=json.loads(path.read_text())
               print('ASSET_USAGE_RECEIPT',path,json.dumps(data,sort_keys=True)[:4000])
+              if data.get('video_sha256') == video_hash:
+                  matching.append(data)
+          assert matching, 'No audit receipt matches the actual encoded MP4 SHA-256'
+          assert any(data.get('composited_shots', 0) > 0 and any(
+              shot.get('status') == 'composited' and shot.get('pixel_changed') is True and shot.get('asset', {}).get('sha256')
+              for shot in data.get('shots', [])
+          ) for data in matching), 'No proven restored asset composited into encoded MP4'
+          print('ASSET_PROOF_VERIFIED', video_hash)
           PY
       - name: Upload offline video and proof
         if: always()
