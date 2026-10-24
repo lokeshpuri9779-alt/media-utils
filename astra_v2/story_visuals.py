@@ -180,7 +180,10 @@ def draw_subject(image, subject, t, accent, action='idle'):
             d.ellipse((x-110-glow,y-35-glow,x+110+glow,y+220+glow),fill=(108,120,69))
             for side in (-1,1):
                 dx=side*110
-                d.ellipse((x+dx-95,y-130,x+dx+95,y+90),fill=(147,213,217))
+                # Preserve flutter at rest; animate wings with the action pose.
+                wing_lift = (pose["left_hand_y"] if side == -1 else pose["right_hand_y"])
+                d.ellipse((x+dx-95,y-130+wing_lift,x+dx+95,y+90+wing_lift),
+                          fill=(147,213,217))
             d.ellipse((x-65,y-125,x+65,y+95),fill=(62,76,67))
             d.ellipse((x-78,y+85,x+78,y+240),fill=(251,221,95))
             for dx in (-28,28):
@@ -194,8 +197,9 @@ def draw_subject(image, subject, t, accent, action='idle'):
                 for i in range(3):
                     dx=side*(145+i*35)
                     d.line((x+side*100,y+80+i*24,x+dx,y+205+i*38),fill=shell,width=16)
-                d.line((x+side*140,y+15,x+side*235,y-90),fill=shell,width=19)
-                d.ellipse((x+side*235-48,y-155,x+side*235+48,y-65),fill=shell)
+                claw_lift = (pose["left_hand_y"] if side == -1 else pose["right_hand_y"])
+                d.line((x+side*140,y+15,x+side*235,y-90+claw_lift),fill=shell,width=19)
+                d.ellipse((x+side*235-48,y-155+claw_lift,x+side*235+48,y-65+claw_lift),fill=shell)
             for dx in (-60,60):
                 d.line((x+dx,y-30,x+dx,y-115),fill=shell,width=13)
                 d.ellipse((x+dx-23,y-143,x+dx+23,y-100),fill=(247,241,226))
