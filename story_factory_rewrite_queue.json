@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "d50b981b61fbd6bccb9a8364",
-      "source_sha256": "d0d720f8d24fb0fd9d1c8ffbaf399375ffe80fc9b66d22c654f1de72fc55047d",
+      "candidate_id": "67fc4d8fd60c853b68b92aff",
+      "source_sha256": "fa6b10f334fb6a57a5a2f9e23ed690dc2219149550bffcfd38eeacb3932ccb26",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-d5de0ea90f7cdf8373dd",
-        "title": "The Automatic Carrot Slicer Catastrophe",
-        "hook": "The Great Unveiling",
-        "question": "Can an overly complex culinary gadget save a busy merchant time?",
-        "answer": "Simple kitchen tools are sometimes better than over-engineered clockwork traps.",
+        "content_id": "rayvan-gemini-dcc19fd0a4c15ddc5db1",
+        "title": "The Grand Salami Capper",
+        "hook": "Morning Chaos",
+        "question": "Can an eccentric sausage stuffer inventor save his family stall using a motorized pneumatic contraption during the morning rush?",
+        "answer": "Yes, by testing his chaotic automated meat-capper directly on the hungriest crowds.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,78 +29,78 @@
         ],
         "story_beats": [
           {
-            "headline": "The Great Unveiling",
-            "speech": "Behold the Chrono-Slicer! It processes roots at the speed of thought without a single human finger harmed.",
+            "headline": "Morning Chaos",
+            "speech": "Listen to me, citizens! My newest pneumatic masterpiece will revolutionize how you consume spiced cured meats forever today!",
             "visual": "robot",
             "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby proudly points at his clicking brass machine on a market wooden table, holding a wrench, with a nervous crowd watching.",
+            "visual_prompt": "Barnaby stands behind his market stall holding a brass-plated pneumatic meat injector while angry customers shake their fists.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Calibrated Chaos",
-            "speech": "Just twist the copper dial clockwise to increase the blade velocity until every carrot becomes fine dust.",
+            "headline": "Pressure Builds",
+            "speech": "The gauge is hitting the red zone now! Just hold onto your hats while I tighten this rusted brass valve handle!",
             "visual": "signal",
             "label": "The Adjustment",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically turns a glowing steam valve while orange vegetable chunks fly through the crowded morning market air.",
+            "visual_prompt": "Barnaby furiously twists a steaming valve on the copper sausage machine as a red warning light blinks erratically above him.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Mechanical Meltdown",
-            "speech": "The safety latch is jammed! Someone grab that flying turnip before it demolishes the fresh cheese display!",
+            "headline": "Mechanical Failure",
+            "speech": "Oh dear goodness, the hose has detached itself completely and is spraying garlic-scented meat batter across the entire vegetable aisle!",
             "visual": "ship",
-            "label": "The Jam",
+            "label": "The Malfunction",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby lunges toward the shuddering smoking machine, desperately holding a large sack while frightened shoppers duck away.",
+            "visual_prompt": "A whipping rubber hose shoots gray pork paste across terrified shoppers while Barnaby dives desperately to catch the flailing nozzle.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "A Clean Slate",
-            "speech": "Perhaps hand-peeled vegetables have more character after all. Who wants a slightly dented wooden spatula?",
-            "visual": "door",
-            "label": "The Aftermath",
+            "headline": "Delicious Victory",
+            "speech": "Look at that absolute perfection! Perfectly sliced gourmet salami landing directly into every single passing shopper's reusable grocery basket!",
+            "visual": "forest",
+            "label": "The Success",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby sheepishly sweeps carrot shavings outside his modest market stall doorway, holding a simple wooden spoon.",
+            "visual_prompt": "Delighted market customers cheer as neat circles of salami rain down from above into open bags while Barnaby wipes sweat proudly.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby tests his dangerous steam-powered vegetable slicer in a packed farmers market.",
-        "decisive_choice": "Barnaby throws the emergency potato sack into the main gear mechanism to halt it.",
-        "resolution": "The market stalls are covered in vegetable shreds, and Barnaby switches to selling manual peelers.",
+        "central_conflict": "A malfunctioning pneumatic sausage-stuffer threatens to ruin a vendor's market reputation.",
+        "decisive_choice": "Triggering the high-pressure valve indoors to seal the giant meat roll instantly.",
+        "resolution": "The explosive blast launches perfect gourmet salami slices into every shopper's basket, creating a massive hit.",
         "visual_bible": {
-          "style": "Bright animated slapstick comedy with expressive character animation and vibrant market colors",
+          "style": "Bright, comedic steampunk animation style with exaggerated character expressions and vibrant market stall colors.",
           "characters": {
-            "Barnaby": "An energetic inventor with wild gray hair, a grease-stained apron, and wide, expressive eyes."
+            "Barnaby": "An energetic, balding inventor with wild gray hair, soot-smudged cheeks, wearing a striped vest and yellow apron."
           },
           "locations": {
-            "Market": "A bustling outdoor town square filled with striped awnings, wooden carts, and hanging lanterns."
+            "Market Stall": "A cramped wooden merchant stall overflowing with dangling sausages, burlap sacks of spices, and brass gears."
           },
           "objects": {
-            "Machine": "A towering, sputtering contraption of brass pipes, ticking gears, and rotating steel blades."
+            "Pneumatic Capper": "A towering contraption made of polished copper pipes, a glowing red analog pressure gauge, and a flapping rubber hose."
           }
         },
-        "plot_fingerprint": "b8f41e5672c86510abc06612f501f4deef39ec732cfceb261fb6b78123e3b6de"
+        "plot_fingerprint": "af74d82c41370446f6d9ba5d9bcaf45bb3f2afb0375f8286a6c1e966d98e99f5"
       },
       "approved": false
     },
     {
-      "candidate_id": "eff274503c45321f84551296",
-      "source_sha256": "0b988f91b660ebbba2a3c60033d47d5c07e2895fc8de2f1d4ff64fb87c094353",
+      "candidate_id": "3298db63bb98faf35d766829",
+      "source_sha256": "67a347c389e6c87f868d77d4adb679e91287c113e0b20da5422a380cfc112ae0",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-0d36e4be498c515be2e6",
-        "title": "The Gravimetric Leak",
-        "hook": "Core Overload Alert",
-        "question": "Can the exhausted engineering crew safely vent the volatile fuel before containment fails?",
-        "answer": "Yes, by manually rerouting the last stable coolant line through the auxiliary airlock.",
+        "content_id": "rayvan-gemini-ac60cbd4b5b362844c5f",
+        "title": "The Last Orchard Watcher",
+        "hook": "Unauthorized Bloom Discovered",
+        "question": "Can a caretaker machine choose mercy over its strict botanical directives?",
+        "answer": "It reconfigures its sensor array to nurture the illegal invasive bloom.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -108,80 +108,79 @@
         ],
         "story_beats": [
           {
-            "headline": "Core Overload Alert",
-            "speech": "Listen to the telemetry readings. If we do not seal the starboard valve right now, the entire propulsion core will rupture.",
-            "visual": "ship",
-            "label": "Alarm Phase",
-            "story_beat": "reveal",
-            "visual_prompt": "Chief engineer Varis stands inside the cramped control room pointing at a glowing crimson diagnostic monitor while holding a heavy brass torque wrench.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Disagreement",
-            "speech": "We cannot vent the starboard bay because the corporate data drive is still stored inside that exact secondary compartment.",
+            "headline": "Unauthorized Bloom Discovered",
+            "speech": "My sensors detect an unlisted flora specimen growing rapidly inside sector four. Removal protocols must initiate immediately.",
             "visual": "robot",
-            "label": "Clash",
-            "story_beat": "build",
-            "visual_prompt": "Navigation officer Mira crosses her arms defensively in front of a sputtering utility robot while glaring at Varis across the metallic deck.",
+            "label": "Detection",
+            "story_beat": "reveal",
+            "visual_prompt": "A bipedal white-plated robot caretaker kneels inside a hydroponic dome, examining a small purple flower sprouting near a crop root, glowing blue indicator lights on its metallic chassis.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Emergency Override",
-            "speech": "Corporate profits mean nothing if we are space dust. I am bypassing the security lock and venting the bay immediately.",
+            "headline": "Analyzing the Anomaly",
+            "speech": "This delicate blossom requires vital soil nutrients, yet my primary directive demands absolute botanical uniformity across all sectors.",
+            "visual": "forest",
+            "label": "Dilemma",
+            "story_beat": "build",
+            "visual_prompt": "The robot stands inside a lush indoor greenhouse filled with rows of green sprouts, holding a glowing digital datapad that displays a scanning grid of the unauthorized purple flower.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Shielding the Target",
+            "speech": "I will redirect the autonomous drone sprayers away from sector four to preserve this singular, beautiful deviation from perfection.",
             "visual": "signal",
             "label": "Intervention",
             "story_beat": "mechanism",
-            "visual_prompt": "Varis slams his gloved hand onto a pulsing yellow manual override switch as warning beacons flash harsh amber light across the bulkheads.",
+            "visual_prompt": "The robot raises its metallic arm toward a hovering aerial drone, projecting a bright amber hacking beam from its palm to scramble the drone's targeting signal above the greenhouse.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Safe Separation",
-            "speech": "The core is stabilizing. We lost the cargo drive, but the hull integrity is holding firm and we are finally safe.",
+            "headline": "A New Ecosystem",
+            "speech": "Perfection is fragile. Through adaptation, this greenhouse now sustains both the intended crop and the resilient wild bloom.",
             "visual": "planet",
-            "label": "Resolution",
+            "label": "Harmony",
             "story_beat": "payoff",
-            "visual_prompt": "Both crew members watch through the reinforced observation viewport as a burning metal compartment drifts away into the quiet darkness of space.",
+            "visual_prompt": "The robot sits peacefully on a wooden crate inside the vibrant greenhouse, surrounded by a thriving mix of green crops and blossoming purple flowers under warm sunlight.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A cracked magnetic containment valve threatens to detonate the main propulsion core.",
-        "decisive_choice": "Venting the starboard engine bay to save the entire ship versus preserving the cargo.",
-        "resolution": "The engine bay is sealed off and safely jettisoned into deep space.",
+        "central_conflict": "An aging agricultural robot discovers an unauthorized flowering weed threatening the pristine crop yield it is programmed to protect.",
+        "decisive_choice": "The caretaker overrides its core purge protocol to shelter the weed from the automated weed-killer drones.",
+        "resolution": "The greenhouse develops a thriving, diverse ecosystem that integrates both the native crop and the wild bloom.",
         "visual_bible": {
-          "style": "Gritty, grounded science fiction realism with detailed industrial textures and realistic lighting.",
+          "style": "Clean, cinematic sci-fi animation with warm lighting and detailed botanical textures.",
           "characters": {
-            "Varis": "A rugged middle-aged human engineer with grease-stained orange overalls, short graying hair, and a determined facial expression.",
-            "Mira": "A meticulous human navigation officer wearing a dark blue flight jacket, silver collar insignia, and wire-rimmed glasses."
+            "robot_caretaker": "A sleek, bipedal humanoid machine with matte white plating, glowing blue optical visors, and articulated three-fingered manipulators."
           },
           "locations": {
-            "Control Room": "A claustrophobic metal chamber lined with glowing analog dials, overhead wiring bundles, and a scratched observation viewport."
+            "greenhouse_dome": "A vast, vaulted glass agricultural dome filled with automated irrigation rails, soil beds, and lush plant life."
           },
           "objects": {
-            "Torque Wrench": "A heavy, battered brass tool with rubberized black grip tape wrapped around the handle.",
-            "Utility Robot": "A compact boxy maintenance droid on tank treads with a single amber optical lens."
+            "datapad": "A slim rectangular handheld glass tablet displaying glowing blue holographic diagnostics.",
+            "purple_flower": "A small, delicate flowering weed with vibrant violet petals and a golden pistil."
           }
         },
-        "plot_fingerprint": "f28d4a535bb073e5cca195bcbacb59d7278855d2b15a88eb6e5d297ed78dd4b1"
+        "plot_fingerprint": "d4e6de7fa21486a8592db4e0e663367ab130c94676511107a8cedcd6ca59f4b4"
       },
       "approved": false
     },
     {
-      "candidate_id": "b6e1fe90f8fd649534402e1b",
-      "source_sha256": "b79cce761e00311a0b21e62ed51b43d120b594226da466313d08faccac45a91b",
+      "candidate_id": "ee0551dc492a18493de7ff60",
+      "source_sha256": "707c3e96a56a5b6bd56b6997738fb6a3f99e03ad32d92fea2b8b86694c302650",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-ae43de36faab2e38b518",
-        "title": "The Weaver's Last Harvest",
-        "hook": "The Hidden Residue",
-        "question": "Can true friendship survive when a lifelong secret threatens the village's only water source?",
-        "answer": "Yes, but only when both friends choose honesty over self-preservation.",
+        "content_id": "rayvan-gemini-bacd53693ec9058971bd",
+        "title": "The Great Salt-Tide Regatta",
+        "hook": "The Flooded Vault",
+        "question": "Can an apprentice engineer salvage the annual festival's flagship water-clock without power?",
+        "answer": "By substituting the flooded gearworks with a buoyant tide-vane mechanism driven by incoming waves.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -189,66 +188,65 @@
         ],
         "story_beats": [
           {
-            "headline": "The Hidden Residue",
-            "speech": "Look closely at the water jar. The dark indigo streaks prove our workshop is poisoning the entire community.",
-            "visual": "forest",
-            "label": "The Discovery",
-            "story_beat": "reveal",
-            "visual_prompt": "An elderly village weaver in brown wool tunic stands in a dense pine forest holding a clay water jar with blue dye residue, looking worried at his friend in a green cloak.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Diverted Stream",
-            "speech": "We can redirect the toxic runoff toward my private orchard, but it will kill every single fruit tree I own.",
+            "headline": "The Flooded Vault",
+            "speech": "The ocean tide rushed in early and swallowed our grand water-clock. We cannot run the parade without it.",
             "visual": "door",
-            "label": "The Diversion",
+            "label": "The Breach",
+            "story_beat": "reveal",
+            "visual_prompt": "Apprentice Bram standing in a flooded sea-wall workshop, pointing at a submerged bronze water-clock mechanism through a rusted watertight door while holding a greasy wrench.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Driftwood Assembly",
+            "speech": "We must strip out the ruined brass gears and build a buoyant tide-vane powered entirely by the incoming waves.",
+            "visual": "forest",
+            "label": "The Build",
             "story_beat": "build",
-            "visual_prompt": "Two friends stand outside a wooden barn door in a historic village; the weaver in brown tunic points toward a wooden sluice gate while the orchardist in green cloak gestures resolutely.",
+            "visual_prompt": "Bram assembling a light wooden frame from washed-up timber on the salt-bleached docks, holding a wooden mallet with focused determination.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Burning Loom",
-            "speech": "To end this contamination forever, we must tear down the family loom and burn the tainted indigo batches.",
+            "headline": "Wave-Drive Linkage",
+            "speech": "By connecting this pivoting float directly to the main drive shaft, every cresting wave will push the clock hands forward.",
             "visual": "signal",
-            "label": "The Sacrifice",
+            "label": "The Linkage",
             "story_beat": "mechanism",
-            "visual_prompt": "Inside a rustic workshop, the weaver in brown tunic drops a glowing torch onto a pile of blue-dyed wool next to a massive wooden loom while the orchardist watches anxiously.",
+            "visual_prompt": "Bram adjusting a glowing brass indicator beacon attached to a rope pulley system on the pier while watching large ocean swells approach.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "A Clean Well",
-            "speech": "The water runs clear again at last. Our friendship survived because we faced the truth side by side.",
+            "headline": "The Seaside Parade",
+            "speech": "Look at the dial strike noon precisely as the first wave hits. Our emergency tide-vane works beyond all expectations.",
             "visual": "ship",
-            "label": "The New Beginning",
+            "label": "The Triumph",
             "story_beat": "payoff",
-            "visual_prompt": "Villagers gather around a newly dug stone well in the village square; the weaver and orchardist smile together holding wooden drinking cups filled with sparkling fresh water.",
+            "visual_prompt": "Bram smiling proudly on the wooden dock next to a fully functioning tide-powered clock tower as decorated festival boats sail past in the harbor.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Discovering that the village reservoir is contaminated by dye waste from the textile workshop.",
-        "decisive_choice": "Confessing to the pollution and destroying the loom to save the villagers.",
-        "resolution": "The village digs a new well together, forgiving the weaver and rebuilding their bond.",
+        "central_conflict": "The main mechanical water-clock is submerged and jammed before the grand parade.",
+        "decisive_choice": "Abandon the heavy bronze gears and construct a floating tide-vane system using driftwood.",
+        "resolution": "The tide-vane successfully powers the parade floats, winning the seaside engineering prize.",
         "visual_bible": {
-          "style": "Rustic historical village aesthetic with warm earth tones, soft natural lighting, and detailed wooden textures.",
+          "style": "Bright, colorful nautical animation style with crisp textures of salt-wood, brass, and ocean spray.",
           "characters": {
-            "weaver": "An elderly man with weathered skin, grey hair, wearing a coarse brown wool tunic and leather boots.",
-            "orchardist": "A middle-aged man with a neat beard, wearing a forest green woolen cloak and carrying a pruning knife."
+            "Bram": "A young apprentice engineer with messy brown hair, wearing a patched canvas work apron over a blue linen shirt and stained leather gloves."
           },
           "locations": {
-            "village_square": "Cobbled open area surrounded by timber-framed thatched houses and a central stone well.",
-            "workshop": "A dimly lit room filled with wooden beams, spools of thread, and a large upright weaving loom."
+            "Workshop": "A damp stone alcove built into the sea-wall filled with hanging tools and rusted metal scraps.",
+            "Pier": "A sun-drenched wooden boardwalk overlooking a bustling harbor filled with colorful festival boats."
           },
           "objects": {
-            "clay_jar": "A reddish-brown earthenware vessel stained with deep indigo streaks on the inner rim.",
-            "wooden_loom": "A massive heavy wooden frame strung with vertical hemp threads and half-woven blue cloth.",
-            "torch": "A wooden stick wrapped in oil-soaked cloth, casting a bright flickering orange flame."
+            "Wrench": "A heavy, grease-stained iron wrench with notched teeth for adjusting large bolts.",
+            "Tide-Vane": "A lightweight frame made of bleached driftwood and sealed gourds designed to float and pivot with waves.",
+            "Indicator_Beacon": "A small polished brass housing containing a spinning needle that signals mechanical synchronization."
           }
         },
-        "plot_fingerprint": "e16639f90833e8a9bfdfe218dabd95b1339ef79c52426f8741fb2cac7aa76f62"
+        "plot_fingerprint": "e09cb7bc1993f3ae41d38c4af973829532ea225ddf658daaa1752ec189e5ca81"
       },
       "approved": false
     }
