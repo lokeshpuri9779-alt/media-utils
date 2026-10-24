@@ -1692,6 +1692,22 @@
         "review_model": "gemini-3.1-flash-lite"
       },
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-28f21227baecb9160bbc",
+      "story_sha256": "58c026f8df522068bbd7bf11549c87577dfdc8a52f8151cfed06a5cd70d70105",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-28f21227baecb9160bbc",
+        "story_sha256": "58c026f8df522068bbd7bf11549c87577dfdc8a52f8151cfed06a5cd70d70105",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the specific premises, characters, or causal mechanisms of the provided comparison list.; The narrative follows a clear, logical causal chain: signal detection leads to tracking, which leads to excavation and rescue.; The content is suitable for a general audience and contains no unsafe, misleading, or policy-violating material.; The story structure is coherent and provides a satisfying resolution to the central conflict.",
+        "reviewed_at": "2026-10-24T23:03:28.763669+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }
