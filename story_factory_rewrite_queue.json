@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "2f80e0c0f5b745bebb8d59cc",
-      "source_sha256": "80d27f6d25fff269dfc49aeed76518812d8f274e656bcda3299de581b39ddc5c",
+      "candidate_id": "737742b164d9bb7e48b8820b",
+      "source_sha256": "f2093a153deccbdae718964e583875283c2ca14a0a9968d0d9a49ee859ec5f99",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-e8800b4b6aba77cfff34",
-        "title": "The Self-Flipping Pancake Spatula Catastrophe",
-        "hook": "The Grand Launch",
-        "question": "Can an automated breakfast flipper survive the chaos of a crowded farmers market?",
-        "answer": "Yes, by transforming from a kitchen disaster into a legendary aerial acrobatic show.",
+        "content_id": "rayvan-gemini-8ec2e21626bd7cf60d4d",
+        "title": "The Grand Pickle Press Disaster",
+        "hook": "The Mechanical Menace",
+        "question": "Can an overzealous inventor save his failing market stall before noon?",
+        "answer": "He abandons complex machinery to master the art of hand-sliced pickles.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,225 +29,226 @@
         ],
         "story_beats": [
           {
-            "headline": "The Grand Launch",
-            "speech": "Behold the greatest invention since sliced bread, ladies and gentlemen! Watch it flip with absolute robotic precision!",
+            "headline": "The Mechanical Menace",
+            "speech": "Behold the greatest culinary marvel of our century, capable of slicing ten thousand cucumbers in under sixty seconds!",
             "visual": "robot",
-            "label": "Automatic Flipper",
+            "label": "The Contraption",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly behind his wooden market stall, holding a smoking brass mechanical spatula while a blob of pancake batter shoots directly toward a terrified vendor.",
+            "visual_prompt": "Inventor Barnaby stands behind a wooden market stall, nervously pressing a glowing red button on a steaming brass robot-like slicer while angry green cucumbers spray into the crowd.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Wild Trajectory",
-            "speech": "Stop the gears! It is aiming straight for the organic honey display and the mayor's expensive new hat!",
+            "headline": "Vegetable Chaos",
+            "speech": "Stop the machine immediately, Barnaby, because my prized heirloom tomatoes are flying directly into the angry mayor's hat!",
             "visual": "signal",
-            "label": "Erratic Radar",
+            "label": "The Panic",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically chases his spinning mechanical spatula across the crowded market square, waving his arms as a pancake hovers mid-air near a blinking red warning sign.",
+            "visual_prompt": "Market vendor Clara waves her hands frantically at Barnaby, pointing to a blinking yellow hazard light atop the chaotic slicing machine as vegetables launch everywhere.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Desperate Reverse",
-            "speech": "If I cannot stop the motor, I will just have to crank the tension knob all the way up!",
+            "headline": "The Desperate Smash",
+            "speech": "There is only one definitive way to end this madness before the health inspector arrives with his official citation clipboard.",
             "visual": "ship",
-            "label": "Control Wheel",
+            "label": "The Intervention",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby stands atop a wooden crate, straining with both hands to turn a massive brass steering wheel attached to his backpack engine while pancakes rain down around him.",
+            "visual_prompt": "Barnaby grips a heavy wooden mallet with both hands, lunging forward with a determined expression to strike the roaring brass slicing machine parked beside his rustic vegetable crates.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Sweet Success",
-            "speech": "Catch your breakfast fresh from the clouds! Who wants maple syrup and berries on their airborne stack?",
-            "visual": "forest",
-            "label": "Market Canopy",
-            "story_beat": "payoff",
-            "visual_prompt": "Barnaby smiles broadly amidst falling pancakes while laughing market shoppers hold out wicker baskets beneath leafy overhead market canopies to catch the falling food.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "A malfunctioning spring-loaded spatula flings batter uncontrollably across the artisanal jam stalls.",
-        "decisive_choice": "Barnaby reverses the gear ratio to launch every stray pancake skyward into waiting pastry baskets.",
-        "resolution": "Shoppers catch the flying breakfast treats, turning a messy market panic into a profitable pancake feast.",
-        "visual_bible": {
-          "style": "vibrant slapstick cartoon comedy with rich textures and warm sunlit lighting",
-          "characters": {
-            "Barnaby": "An eccentric inventor with wild ginger hair, soot-stained cheeks, wearing a plaid vest and oversized brass goggles."
-          },
-          "locations": {
-            "MarketSquare": "A bustling cobblestone farmers market filled with striped canvas awnings, wooden crates, and hanging lanterns."
-          },
-          "objects": {
-            "Spatula": "A shiny brass mechanical spatula with exposed silver gears, a smoking exhaust pipe, and a red coiled spring."
-          }
-        },
-        "plot_fingerprint": "0e54232ad582e1088f062ee86472b5e4bd30da1d6fd390cc701d895019e37dbc"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "751cd5dab863aa49951af886",
-      "source_sha256": "1de81cac972c1c62450aa32d75e1f85bc25c6925cb2977758979c679aacb4ad1",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-b405387145c6bfe75a85",
-        "title": "The Canopy Conductor",
-        "hook": "Discovery in the Deep Woods",
-        "question": "How do two rival naturalists survive a massive storm in the whispering redwoods?",
-        "answer": "By harmonizing their unique tracking methods to guide lost migratory birds to safety.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "Discovery in the Deep Woods",
-            "speech": "Look at the strange atmospheric ripples above the high canopy. The migratory warblers are flying directly into a lethal vortex.",
-            "visual": "forest",
-            "label": "The Discovery",
-            "story_beat": "reveal",
-            "visual_prompt": "An elderly naturalist with a gray beard wearing a green canvas jacket points upward in a dense, mossy redwood forest, holding a carved wooden flute while looking alarmed at a swirling sky.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Constructing the Beacon",
-            "speech": "We must anchor my mechanical wind-vane network to this massive trunk before the wind shear tears our equipment apart completely.",
-            "visual": "robot",
-            "label": "The Mechanism",
-            "story_beat": "build",
-            "visual_prompt": "A young apprentice in a leather apron tightens brass gears on a mechanical tripod device resting against a giant redwood bark surface, with the elder handing her a heavy wrench.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Sending the Guidance Signal",
-            "speech": "Play your flute notes in exact sync with the rotating brass dials so the frequency matches their flock song.",
-            "visual": "signal",
-            "label": "The Coordination",
-            "story_beat": "mechanism",
-            "visual_prompt": "Both naturalists stand side by side under a massive redwood branch; the elder plays a glowing wooden flute while the apprentice spins the brass dials of the whirring wind-vane machine which casts blue light.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Safe Passage Through the Storm",
-            "speech": "Our combined signal cuts through the howling gale. Look, the entire flock is now following our acoustic pathway to safety.",
-            "visual": "ship",
-            "label": "The Triumph",
-            "story_beat": "payoff",
-            "visual_prompt": "The elder and apprentice smile triumphantly as hundreds of glowing amber-winged warblers fly in a structured formation past their tree platform, guiding a large airship-shaped seed pod safely through the canopy.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "A sudden superstorm threatens to crush a rare flock of amber-winged warblers trapped in a deep canyon.",
-        "decisive_choice": "Combine the elder's acoustic wooden flute signals with the apprentice's mechanical wind-vane grid to cut through the gale.",
-        "resolution": "The birds successfully navigate the canyon, bonding the two naturalists into a lifelong partnership.",
-        "visual_bible": {
-          "style": "Cinematic warm-toned animation with rich textures of moss, weathered brass, and glowing bioluminescence.",
-          "characters": {
-            "Elder Bram": "An older man with a weathered face, kind amber eyes, long gray hair, wearing a patched green canvas jacket and leather trousers.",
-            "Apprentice Lyra": "A young woman with sharp features, dark braided hair, amber goggles on her forehead, wearing a utilitarian brown leather apron and sturdy boots."
-          },
-          "locations": {
-            "Whispering Redwoods": "An ancient, towering forest with massive cinnamon-colored tree trunks, glowing blue moss, and thick overhead canopies."
-          },
-          "objects": {
-            "acoustic_flute": "A hand-carved cedarwood flute adorned with silver runes that emit a soft amber glow when played.",
-            "wind_vane_grid": "A complex apparatus of polished brass cups, rotating copper rings, and interlocking mechanical gears mounted on a sturdy oak tripod."
-          }
-        },
-        "plot_fingerprint": "bbc038d5efa54adb8343c97308dba2362276db4ef834ceeb56f46b1fcd6723cd"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "abdfa43e3827fa38c90f1860",
-      "source_sha256": "f86226e4d7db1d0f7a61b70c5b936f3d6beeab22beb3a3ae3df24ac47e4177f8",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-fb84efdbdd01f48458b8",
-        "title": "The Grand Pickle-Press Panic of Marketplace Square",
-        "hook": "The Overheating Contraption",
-        "question": "Can an over-engineered automatic dill slicer survive a bustling morning market?",
-        "answer": "Only when the inventor stops chasing speed and embraces simple mechanical reliability.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Overheating Contraption",
-            "speech": "Behold the glorious future of cucumber processing! No, wait, do not press the red turbo button!",
-            "visual": "robot",
-            "label": "The Discovery",
-            "story_beat": "reveal",
-            "visual_prompt": "Barnaby frantically waving his hands in alarm next to a smoking metal slicing machine mounted on a wooden pushcart in a crowded outdoor market square.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A Cascade of Cucumbers",
-            "speech": "Quickly grab that stray wooden lever before the entire contraption launches green vegetables into Mayor Higgins tea!",
+            "headline": "A Crunch Success",
+            "speech": "Turns out handcrafted simplicity beats noisy automation every single time, especially when paired with extra garlic and fresh dill.",
             "visual": "door",
-            "label": "The Escalation",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby lunging forward to catch a flying wooden lever while Mayor Higgins sits at a nearby folding table dodging airborne pickle slices.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Mechanical Pivot",
-            "speech": "We must instantly disconnect the steam boiler and engage the backup manual hand crank for safety.",
-            "visual": "signal",
-            "label": "The Adjustment",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby gripping a brass hand crank on the side of the machine, turning it steadily while looking with intense concentration at the gear assembly.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Perfect Slice",
-            "speech": "See? Slow and steady wins the market. Perfectly uniform dill slices for everyone, completely free of explosions.",
-            "visual": "ship",
             "label": "The Triumph",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby smiling proudly while handing a neat ceramic jar of sliced cucumbers to a cheerful market customer across the wooden pushcart counter.",
+            "visual_prompt": "Barnaby smilingly hands a paper cone of neatly hand-sliced pickles to a delighted customer across his tidy wooden counter, while the broken brass machine smokes quietly in the background.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A chaotic morning crowd overwhelms Barnaby's vibrating automatic dill-slicing cart.",
-        "decisive_choice": "Barnaby disables the hyper-speed motor to rely on hand-cranked precision.",
-        "resolution": "The calmer slicing rhythm delights the market stalls and wins over the grumpy health inspector.",
+        "central_conflict": "A malfunctioning automatic pickle slicer threatens to destroy the vendor's vegetable cart.",
+        "decisive_choice": "Smashes the automated contraption with a mallet and uses a simple kitchen knife.",
+        "resolution": "Customers applaud the authentic handmade texture, creating a profitable morning surge.",
         "visual_bible": {
-          "style": "Bright, colorful slapstick comedy animation style with expressive character designs and detailed bustling market props.",
+          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures and comedic physical comedy.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild gray hair, wearing a patched tweed vest, soot-stained trousers, and round wire-rimmed spectacles.",
-            "Mayor Higgins": "A pompous local official wearing a formal blue velvet coat, a tall top hat, and an impeccably groomed white mustache."
+            "Barnaby": "An energetic inventor with wild grey hair, wearing a flour-dusted canvas apron over a striped vest.",
+            "Clara": "A stern produce seller wearing a blue linen headscarf and holding a wooden clipboard."
           },
           "locations": {
-            "Marketplace Square": "A bustling cobblestone town square filled with colorful canvas awnings, wooden market stalls, and curious onlookers."
+            "Market Stall": "A bustling cobblestone farmers market filled with wooden crates, colorful vegetables, and canvas awnings."
           },
           "objects": {
-            "Pickle Press Cart": "A large wooden pushcart fitted with brass steam pipes, spinning iron gears, and a copper hopper for holding cucumbers.",
-            "Hand Crank": "A polished brass crank handle attached to the main axle of the slicing machine.",
-            "Ceramic Jar": "A small white ceramic jar with a blue painted rim used for storing finished pickles."
+            "Pickle Slicer": "A complicated, smoking brass contraption covered in gears, tubes, and a blinking red activation button.",
+            "Mallet": "A heavy wooden mallet with a worn handle and scuffed striking face."
           }
         },
-        "plot_fingerprint": "13d4b837ce0e242a33cf93a653a9d524188f86bb02124ce86ab5c31a572a2442"
+        "plot_fingerprint": "070994db4a63c4b3313a3da2598bcc06c50a6b18c70d88c2ae4bdb24bbb96573"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "235109e49987bc330d67f329",
+      "source_sha256": "381553159a0eb9934df9f2328e5d32ac8a9757ac8d6c371380f45642c65c09af",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-1f627f9161994b742e28",
+        "title": "The Resonance Valve Replacement",
+        "hook": "Pressure Spike Detected",
+        "question": "Can the engineering crew stabilize the plasma manifold before the hull integrity fails?",
+        "answer": "Yes, by manually bypassing the primary coolant loop and venting excess charge into the thermal ballast.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Pressure Spike Detected",
+            "speech": "We cannot wait for automated diagnostics. The manifold is overheating and we must act immediately.",
+            "visual": "ship",
+            "label": "Alarm State",
+            "story_beat": "reveal",
+            "visual_prompt": "Engineering officer Lyra, a human woman with tied-back auburn hair wearing a weathered grey jumpsuit, stands inside the cramped control room pointing at a glowing amber diagnostic console while warning lights flash orange.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Routing the Bypass",
+            "speech": "If we force fluid through the secondary conduit, the extreme pressure might fracture our reserve seals.",
+            "visual": "robot",
+            "label": "Manual Override",
+            "story_beat": "build",
+            "visual_prompt": "Maintenance technician Orson, a tall cyborg with a polished chrome chassis and blue optical sensors, firmly grasps a heavy manual valve wheel on a large insulated pipe, straining against the locked locking mechanism.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Venting the Ballast",
+            "speech": "There is no other option left. Open the thermal ballast valve now before the pressure threshold hits critical.",
+            "visual": "signal",
+            "label": "Energy Discharge",
+            "story_beat": "mechanism",
+            "visual_prompt": "Lyra inputs a rapid sequence into a handheld diagnostic pad while watching a jagged green telemetry spike crawl across the screen, her face illuminated by the bright display.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Core Stabilization",
+            "speech": "The core temperature is finally dropping. We saved the ship, but our secondary thrusters are completely dead.",
+            "visual": "planet",
+            "label": "Safe Harbor",
+            "story_beat": "payoff",
+            "visual_prompt": "Orson and Lyra stand side-by-side inside the observation dome, looking out through the reinforced viewport at a calm blue planet hanging against the deep blackness of space.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A clogged plasma manifold threatens to rupture the main propulsion bay.",
+        "decisive_choice": "Venting the core coolant through the emergency thermal ballast instead of sealing the bulkhead.",
+        "resolution": "The hull remains intact, though the ship loses secondary thruster power for the remainder of the journey.",
+        "visual_bible": {
+          "style": "Gritty science fiction realism with detailed industrial textures and practical lighting.",
+          "characters": {
+            "Lyra": "A human woman in her early thirties with tied-back auburn hair, wearing a worn grey technical jumpsuit with orange safety stripes.",
+            "Orson": "A tall cyborg with a polished chrome chassis, exposed internal wiring at the shoulder joints, and glowing blue optical sensors."
+          },
+          "locations": {
+            "Engineering Bay": "A cramped, utilitarian compartment filled with overhead conduits, exposed pipes, and flickering amber diagnostic panels.",
+            "Observation Dome": "A serene viewing area with a curved glass viewport overlooking distant planetary horizons and star fields."
+          },
+          "objects": {
+            "Diagnostic Pad": "A handheld rectangular tablet with a scratched metal casing and a luminous green display screen.",
+            "Manual Valve Wheel": "A heavy cast-iron handwheel painted industrial yellow, mounted onto a thick insulated coolant pipe."
+          }
+        },
+        "plot_fingerprint": "b92e3a99eb33ea869db5ba2620c4fc209920463b292268ef9134c9ae524783a6"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "4a271f926c7029534e9f20bc",
+      "source_sha256": "c5821fab41d9386feb6b3df5334f8923671a09b9aeb4376788851125de8f378e",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-3437652e17e0d3009dd4",
+        "title": "The Beacon Ridge Avalanche",
+        "hook": "Signal Detected",
+        "question": "Can the veteran climber breach the freezing snowpack before the injured team loses consciousness?",
+        "answer": "Yes, by utilizing the emergency acoustic locator to pinpoint the buried transceiver.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Signal Detected",
+            "speech": "My rescue receiver is picking up two faint pulse beacons buried deep underneath the eastern ridge overhang.",
+            "visual": "signal",
+            "label": "Beacon Search",
+            "story_beat": "reveal",
+            "visual_prompt": "A close-up shot of a veteran climber named Liam holding a blinking orange emergency receiver in a swirling snowstorm at the base of a jagged mountain peak.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Unstable Ascent",
+            "speech": "We must scale the fractured ice wall immediately because waiting another hour will mean fatal hypothermia.",
+            "visual": "forest",
+            "label": "Ice Wall Climb",
+            "story_beat": "build",
+            "visual_prompt": "Liam driving steel ice axes into a vertical blue glacier wall surrounded by snow-dusted pine trees while wearing a red insulated parka and crampons.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Probing Grid",
+            "speech": "Drop the heavy gear bags right here and sweep the snowpack with aluminum probes in a tight grid pattern.",
+            "visual": "door",
+            "label": "Grid Excavation",
+            "story_beat": "mechanism",
+            "visual_prompt": "Liam kneeling in deep powder snow, frantically thrusting a yellow collapsible metal probe into a packed white drift resembling a blocked cave entrance.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Safe Extraction",
+            "speech": "I found the second backpack handle, so pull together and lift them out before the wind blinds us completely.",
+            "visual": "ship",
+            "label": "Extraction",
+            "story_beat": "payoff",
+            "visual_prompt": "A rescue helicopter with spinning overhead rotors hovering above a snow plateau as Liam helps two shivering climbers wearing silver thermal blankets board the cabin door.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Buried climbers trapped beneath an unstable snow shelf with rapidly dropping body temperatures.",
+        "decisive_choice": "Abandoning the heavy excavation kit to dig manually with avalanche probes.",
+        "resolution": "The trapped climbers are successfully uncovered and stabilized just as a secondary blizzard strikes.",
+        "visual_bible": {
+          "style": "Cinematic realism with cold blue lighting, swirling powder snow effects, and high contrast against rugged mountain terrain.",
+          "characters": {
+            "Liam": "A veteran mountain rescue leader with a weathered face, thick dark beard, wearing a weatherproof red parka and polarized ski goggles."
+          },
+          "locations": {
+            "PeakRidge": "A treacherous alpine mountain ridge covered in deep snowdrifts, jagged grey rocks, and sparse frozen pine trees."
+          },
+          "objects": {
+            "receiver": "A handheld orange electronic acoustic locator with a small green LCD screen and flashing LED tracking lights.",
+            "probe": "A lightweight yellow aluminum collapsible avalanche probe with black depth measurement markings."
+          }
+        },
+        "plot_fingerprint": "8c594084afe03038cee5cf37d3a55bda027b6ba953357a43081cd22f853096ed"
       },
       "approved": false
     }
