@@ -1,0 +1,57 @@
+name: ASTRA Production Story Asset Coverage
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install Pillow
+      - name: Restore production asset archive
+        uses: actions/download-artifact@v4
+        with:
+          name: astra-original-visual-pack
+          run-id: 39960540392
+          github-token: ${{ github.token }}
+          path: runtime-artifacts/download
+      - name: Validate archive and extract safely
+        run: |
+          python -m tools.astra_restore_visual_pack runtime-artifacts/download/astra-visual-pack.zip runtime-artifacts/verified-pack --expected 3200
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          from astra_v2.illustrated_asset_validation import validate_library
+          import shutil
+          archive=Path('runtime-artifacts/download/astra-visual-pack.zip')
+          root=Path('runtime-artifacts/verified-pack').resolve()
+          with ZipFile(archive) as z:
+              assert z.testzip() is None
+              for item in z.infolist():
+                  dest=(root/item.filename).resolve()
+                  assert dest.is_relative_to(root) and item.filename.startswith('art/')
+                  if item.is_dir():
+                      dest.mkdir(parents=True,exist_ok=True)
+                      continue
+                  dest.parent.mkdir(parents=True,exist_ok=True)
+                  with z.open(item) as src, dest.open('wb') as dst:
+                      shutil.copyfileobj(src,dst)
+          assert validate_library(root)['verified_files']==3200
+          PY
+      - name: Measure actual Shorts story coverage
+        run: |
+          python -m scripts.benchmark_story_assets --asset-root runtime-artifacts/verified-pack --output runtime-artifacts/story-coverage.json --count 24
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-story-asset-coverage
+          path: runtime-artifacts/story-coverage.json
+          if-no-files-found: warn
+          retention-days: 7
