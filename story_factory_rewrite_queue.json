@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "dce4abd1d9880354ec4bca9c",
-      "source_sha256": "c1051877d382d62d57698db71e77871247b518fa0b4dd193fed71831826e2881",
+      "candidate_id": "a3f6e5c7e9b15e22cbbada86",
+      "source_sha256": "4d93f64355c8cb158664efd99c7af128305bf5011a9c2dc81aac1fc29eb45d6c",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-fb83e5a74bd8624d4d8d",
-        "title": "The Great Turnip Tricycle Debacle",
-        "hook": "The Hidden Hazard",
-        "question": "How did Silas sell his vegetable vehicle?",
-        "answer": "By hiding the beets until the buyers tested the steering.",
+        "content_id": "rayvan-gemini-58340af386fabccec020",
+        "title": "The Great Automatic Cabbage Slicer Fiasco",
+        "hook": "The Grand Unveiling",
+        "question": "How did Barnaby ruin the morning market?",
+        "answer": "He deployed an over-engineered cabbage slicer that turned every vegetable into confetti.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,77 +29,77 @@
         ],
         "story_beats": [
           {
-            "headline": "The Hidden Hazard",
-            "speech": "Behold the rotating root carriage! It holds twenty pounds of parsnips without tipping over, mostly.",
+            "headline": "The Grand Unveiling",
+            "speech": "Behold citizens, my magnificent culinary automaton, designed to chop a thousand cabbages per second with absolute precision!",
             "visual": "robot",
-            "label": "The Invention",
+            "label": "Market Square",
             "story_beat": "reveal",
-            "visual_prompt": "Silas proudly gesturing toward his wooden tricycle with an attached mechanized turnip basket in a crowded market square, wearing a canvas apron and smiling nervously.",
+            "visual_prompt": "Barnaby stands proudly in a bustling outdoor market next to a steampunk robot shaped like a giant metal goose, holding a shiny brass lever.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Market Chaos",
-            "speech": "Step back everyone! The steering column requires a firm left yank to avoid the cabbage crates!",
+            "headline": "The Furious Assembly",
+            "speech": "Quickly load the massive green cabbages into the intake hopper before the steam pressure reaches maximum capacity!",
             "visual": "signal",
-            "label": "The Test Run",
+            "label": "The Loading Zone",
             "story_beat": "build",
-            "visual_prompt": "Silas pedaling frantically past stacked wooden crates of cabbages while onlookers point and laugh, with a flashing red warning lamp mounted on the handlebars.",
+            "visual_prompt": "Barnaby frantically shovels giant cabbages into a glowing red hopper attached to the robot while steam whistles loudly.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Unexpected Cargo",
-            "speech": "Wait, those are not turnips tumbling onto the cobblestones, those are escaped racing ferrets!",
+            "headline": "The Mechanical Catastrophe",
+            "speech": "Wait, do not pull that secondary emergency cord, it overrides the centrifugal dampening gears completely!",
             "visual": "door",
-            "label": "The Mishap",
-            "story_beat": "twist",
-            "visual_prompt": "Silas staring in sheer disbelief at the open rear compartment of the tricycle, from which a dozen furry white ferrets are spilling out onto the busy street.",
+            "label": "Control Panel",
+            "story_beat": "mechanism",
+            "visual_prompt": "A market vendor named Clara accidentally pulls a large iron lever on the machine, causing sparks to fly from a small access hatch.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Rodent Ruckus",
-            "speech": "Turns out ferrets clear out pests better than turnips, and the grain merchant bought the whole machine!",
+            "headline": "The Confetti Payoff",
+            "speech": "Well, technically every single customer now has enough fine green confetti to celebrate a lifelong parade.",
             "visual": "ship",
-            "label": "The Sale",
+            "label": "The Aftermath",
             "story_beat": "payoff",
-            "visual_prompt": "Silas happily counting heavy gold coins handed over by a wealthy grain merchant, while the tricycle is now safely packed with cheering shoppers holding ferrets.",
+            "visual_prompt": "Barnaby and Clara are covered entirely in green shreds while a miniature airship floats overhead dropping more chopped vegetables.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright, colorful slapstick cartoon animation style with exaggerated expressions and lively market backgrounds.",
+          "style": "Bright stop-motion claymation aesthetic with rich earthy tones and detailed mechanical textures.",
           "characters": {
-            "Silas": "An enthusiastic, lanky inventor with wild red hair, round spectacles, wearing a patched canvas apron and a striped shirt.",
-            "Grain Merchant": "A stout, well-dressed buyer with a magnificent handlebar mustache and a fancy green velvet vest."
+            "Barnaby": "An eccentric inventor with wild white hair, goggles pushed up on his forehead, wearing a patched tweed vest and striped trousers.",
+            "Clara": "A practical market vendor with a red headscarf, a blue apron, and an expression of constant skepticism."
           },
           "locations": {
-            "Market Square": "A bustling, sunlit cobblestone marketplace filled with colorful striped awnings, wooden crates, and busy shoppers."
+            "Market Square": "A crowded cobblestone marketplace filled with wooden stalls, colorful awnings, and hanging lanterns."
           },
           "objects": {
-            "tricycle": "A heavy wooden three-wheeled cart with bicycle pedals, a front brass steering horn, and a large metal basket on the back.",
-            "warning_lamp": "A bright red mechanical brass lantern mounted on the handlebars with a spinning glass lens."
+            "hopper": "A large conical brass funnel covered in dents and glowing pressure gauges.",
+            "lever": "A polished mahogany handle attached to a heavy iron rod that controls the main gear."
           }
         },
-        "plot_fingerprint": "2126c6c4b8c7d124fefa5358c2998c08c1cde2b999f9e5a96a27a990346f8ec8"
+        "plot_fingerprint": "4bc6ea116ed9759c7d01eafff5298ff443a3c15356f4866085a243d42555fee2"
       },
       "approved": false
     },
     {
-      "candidate_id": "cba4d4059a78347eed650367",
-      "source_sha256": "41dc4f29124f3da1385badf39df23fae1acf73422853a55a3118dd1986843c17",
+      "candidate_id": "d0b4db8328fd8b98b658a44e",
+      "source_sha256": "72fe57d63f6e9263caf2cdaeabc2bbef13e5ce0fb57a0e319a7b08611ced6131",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-ebe95f90387bfdd03cd5",
-        "title": "The Great Muddy Creek Bridge-Building Championship",
-        "hook": "The Annual Gridlock",
-        "question": "How did two rival neighborhood towns finally settle their forty-year bridge rivalry without spending a fortune?",
-        "answer": "By recycling old playground slides and bicycle chains into a synchronized drawbridge that worked on water pressure.",
+        "content_id": "rayvan-gemini-1b5d8590fd4e31859b67",
+        "title": "The Infinite Soup Spoon Debacle",
+        "hook": "The Spark of Genius",
+        "question": "What happens when an inventor brings a self-heating soup spoon to a chaotic food market?",
+        "answer": "It boils the entire soup stall dry and launches a potato into the mayor's hat.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -107,74 +107,141 @@
         ],
         "story_beats": [
           {
-            "headline": "The Annual Gridlock",
-            "speech": "Every single year our towns argue over who gets to cross Muddy Creek first during the harvest festival.",
-            "visual": "forest",
-            "label": "The River Divide",
+            "headline": "The Spark of Genius",
+            "speech": "Behold the Thermal Spoon! Never eat cold broth again while browsing the noisy town vegetable carts.",
+            "visual": "robot",
+            "label": "Thermal Spoon Prototype",
             "story_beat": "reveal",
-            "visual_prompt": "Mayor Clara stands by the dense pine forest edge, pointing angrily across the muddy river bank at the rival town, wearing a green wool vest and holding a rolled-up blueprint.",
+            "visual_prompt": "Inventor Barnaby holding a glowing metal spoon in a bustling outdoor market, looking proud with wide eyes.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Junk Yard Engineering",
-            "speech": "Instead of fighting, we scavenged discarded bicycle frames and rusted playground slides from the abandoned community park behind us.",
+            "headline": "A Heated Demonstration",
+            "speech": "Just dial the core temperature up to maximum output and watch the onion stew bubble instantly.",
             "visual": "signal",
-            "label": "Gathering Parts",
+            "label": "Temperature Dial",
             "story_beat": "build",
-            "visual_prompt": "Toby and Maya weld discarded bicycle chains together inside a glowing signal tower workshop, wearing protective goggles and heavy denim aprons, surrounded by metal scraps.",
+            "visual_prompt": "Barnaby turning a brass dial on the spoon handle, emitting a bright red signal flare into the crowded market sky.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Hydraulic Secret",
-            "speech": "We hooked up heavy rainwater collection barrels to act as a natural counterweight lifting the central span smoothly.",
+            "headline": "The Overload",
+            "speech": "Oh no, the thermal feedback loop is too strong for the copper wiring inside this handle!",
             "visual": "door",
-            "label": "The Mechanism",
+            "label": "Melting Stall Gate",
             "story_beat": "mechanism",
-            "visual_prompt": "Maya turns a large wooden valve next to a heavy steel bulkhead door, causing water to rush into the hanging barrels and tilt the makeshift bridge upward.",
+            "visual_prompt": "Barnaby dropping the red-hot spoon near a wooden vegetable stall door, surrounded by steam and flying cabbages.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "A United Crossing",
-            "speech": "Both towns finally crossed the creek together at the exact same moment, proving teamwork beats stubborn pride forever.",
-            "visual": "ship",
-            "label": "The Grand Opening",
+            "headline": "Mayorial Landing",
+            "speech": "Well, at least the town mayor finally has a hot potato resting securely upon his very expensive silk hat.",
+            "visual": "planet",
+            "label": "Baked Potato Impact",
             "story_beat": "payoff",
-            "visual_prompt": "Clara and Toby wave cheerfully from the center of the newly raised bridge as a small wooden fishing boat safely passes underneath through the canal.",
+            "visual_prompt": "Mayor Pumpernickel standing in the market square with a steaming baked potato on his top hat while Barnaby whistles innocently.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Stop-motion felt and claymation hybrid aesthetic with warm earthy color grading and detailed handcrafted textures.",
+          "style": "Bright, whimsical claymation style with vibrant saturated colors and detailed slapstick character expressions.",
           "characters": {
-            "Clara": "An elderly female mayor with round spectacles, grey hair tied in a bun, wearing a thick green wool vest and brown trousers.",
-            "Toby": "A young inventive teenager with bright orange hair, dirt smudges on his cheeks, wearing a blue plaid shirt and heavy denim work aprons.",
-            "Maya": "A sharp-witted local mechanic with curly dark hair, wearing safety goggles pushed up on her forehead and a red canvas utility jacket."
+            "Barnaby": "A frantic inventor with wild orange hair, oversized round spectacles, and a stained beige workshop apron.",
+            "Mayor Pumpernickel": "A pompous official with a curled mustache, fine purple velvet coat, and a very tall black top hat."
           },
           "locations": {
-            "Muddy Creek": "A wide, slow-moving riverbank surrounded by dense pine trees and rolling green hills under a bright afternoon sky.",
-            "Signal Tower Workshop": "A cluttered, cozy two-story wooden workshop filled with hanging tools, glowing amber warning lamps, and heaps of recycled metal parts.",
-            "The Bridge Site": "A freshly constructed modular crossing made of painted playground metal and bicycle components stretching over the muddy water."
+            "Market Square": "A crowded cobblestone plaza filled with colorful striped awnings, wooden crates of vegetables, and bustling citizens."
           },
           "objects": {
-            "blueprint": "A large rolled-up paper sheet with hand-drawn charcoal sketches of interlocking gears and counterweight systems.",
-            "bicycle_chain": "A heavy, rusted steel chain salvaged from dozens of old multi-speed bicycles, cleaned and oiled for high tension use.",
-            "water_barrel": "A massive wooden rain barrel reinforced with iron hoops, fitted with a brass spigot at the bottom base."
+            "Thermal Spoon": "A bulky silver spoon with a glowing red brass dial and smoking copper wires trailing from the handle.",
+            "Top Hat": "A pristine black silk hat with a wide brim, currently serving as a landing pad for stray root vegetables."
           }
         },
-        "plot_fingerprint": "ffab7884a85e87961b7498ab38b606149a2e709c739768c3fdffc39f71cf0876"
+        "plot_fingerprint": "a5eb8ff675e3cb83fbafa13fca2dd6c0cb83d85c151bcf263ac521e6eb740fb8"
       },
       "approved": false
     },
     {
-      "candidate_id": "609a71d16a92174f1a318289",
-      "source_sha256": "4f4b8fe346d513184fce7b56528577b14c5ce8a58a89dade82986c10d8daed4d",
-      "status": "rewrite_failed",
-      "error": "RuntimeError",
-      "error_detail": "All enabled OmniRoute providers failed: gemini:Generated story title or beat count invalid",
+      "candidate_id": "2f189e5fcbc1367d9952141c",
+      "source_sha256": "96b848776c1329928ca4b7db66a31a952465ab68fb23e064418a2695dab90dd8",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-f47ba159733ff0e7ee48",
+        "title": "The Whispering Ice",
+        "hook": "The Hidden Fracture",
+        "question": "Can an automated sonar buoy deployment save the trapped research team before the blizzard collapses the ridge?",
+        "answer": "Yes, by programming the automated crawler to navigate the crevasse using acoustic reflection.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Hidden Fracture",
+            "speech": "Look at the seismic telemetry. The glacier shelf is not shifting naturally; something underneath is vibrating.",
+            "visual": "signal",
+            "label": "Deep Subsurface Anomaly",
+            "story_beat": "reveal",
+            "visual_prompt": "Dr. Vance in heavy orange parka and goggles points at a glowing green holographic seismic monitor inside the glowing blue research tent, holding a metal stylus.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Deploying the Crawler",
+            "speech": "We must launch the tracked sonar robot immediately to map the unstable tunnel network before the storm hits.",
+            "visual": "robot",
+            "label": "Autonomous Reconnaissance",
+            "story_beat": "build",
+            "visual_prompt": "Engineer Miller kneeling in the blowing white snow outside the base camp, carefully setting a small orange-and-black tracked robot onto the icy surface.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Navigating the Crevasse",
+            "speech": "The crawler is locked onto the acoustic beacon, tracing the safe path through the collapsing ice labyrinth.",
+            "visual": "ship",
+            "label": "Acoustic Pathfinding",
+            "story_beat": "mechanism",
+            "visual_prompt": "A close-up of the rugged crawler robot driving across a narrow snow bridge over a deep dark blue crevasse, its twin headlights cutting through swirling snowflakes.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Safe Return",
+            "speech": "Data received and verified. The escape route is mapped, and the entire team can now evacuate safely.",
+            "visual": "door",
+            "label": "Successful Evacuation",
+            "story_beat": "payoff",
+            "visual_prompt": "Dr. Vance and Engineer Miller standing together inside the steel airlock of the main base facility, smiling as they watch the rescue transport vehicle arrive through the reinforced glass.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "visual_bible": {
+          "style": "Cinematic realism with high-contrast cold lighting, hyper-detailed snow particles, and atmospheric industrial arctic design.",
+          "characters": {
+            "Dr. Vance": "A seasoned arctic geologist with weathered features, wearing a heavy safety-orange hooded parka with reflective silver striping and frost-rimmed protective goggles.",
+            "Engineer Miller": "A meticulous technical specialist in a dark navy blue polar expedition suit with reinforced yellow knee pads and a digital datapad strapped to their forearm."
+          },
+          "locations": {
+            "Research Tent": "A reinforced geodesic dome tent glowing with interior blue LED work lights against a vast expanse of jagged white glacier ice.",
+            "Base Camp Ridge": "A windswept arctic plateau surrounded by towering blue glacial ice walls under a twilight sky filled with blowing snow."
+          },
+          "objects": {
+            "Seismic Stylus": "A sleek silver handheld stylus with a blinking red LED indicator tip used for interacting with holographic displays.",
+            "Sonar Crawler": "A robust, low-profile tracked robotic drone painted international orange with dual high-intensity LED headlights and a top-mounted acoustic sonar dish."
+          }
+        },
+        "plot_fingerprint": "36bc757287256c5bd9807ea0195e036cded68f4c3f06d262da2307476091a310"
+      },
       "approved": false
     }
   ]
