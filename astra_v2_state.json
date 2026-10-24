@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-25",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 13,
-  "confirmed_today": 12,
-  "last_attempt_at": "2026-10-24T21:31:06.691093+00:00",
+  "attempts": 14,
+  "confirmed_today": 13,
+  "last_attempt_at": "2026-10-24T21:42:47.544801+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1710,16 +1710,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "1mUw5zhLLas": {
-      "content_id": "rayvan-forge-e6f17a8f0e28d9b7",
+    },
+    "rayvan-forge-e6f17a8f0e28d9b7": {
+      "video_id": "1mUw5zhLLas",
+      "confirmed_at": "2026-10-24T21:41:28.492824+00:00",
       "title": "The Tapir and the Mangrove Bell",
-      "day": "2026-10-25",
-      "uploaded_at": "2026-10-24T21:31:07.839586+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-24T21:31:07.839586+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "a42c7e5e0c04aaca05e438a8a27955d707c49a6b8414f1934de0d56c7539cca3",
       "story_beats": [
@@ -1736,16 +1734,43 @@
           "speech": "The school boat followed his coconut markers safely and the villagers later cleared the blocked channel."
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "2sHrn7slVII": {
+      "content_id": "rayvan-forge-de49d08927c67c6e",
+      "title": "The Pangolin and the River Lanterns",
+      "day": "2026-10-25",
+      "uploaded_at": "2026-10-24T21:42:49.474433+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "31d166d9f92a423d76ac2aba81e2a0268f4ab2a2283645cf707ce7cef8a05ea8",
+      "story_beats": [
+        {
+          "speech": "A pangolin discovered the river bridge lanterns had gone out before the night market opened."
+        },
+        {
+          "speech": "He replaced every lantern wick but river spray extinguished the little flames again and again."
+        },
+        {
+          "speech": "He noticed empty river shells shielding a fisherman's stove and fitted protective covers around the lanterns."
+        },
+        {
+          "speech": "The protected lanterns illuminated the crossing and the traders opened the evening market safely."
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-24T21:29:19.551722+00:00",
+  "last_preflight_at": "2026-10-24T21:41:28.040113+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T21:31:08.173168+00:00",
+    "at": "2026-10-24T21:42:49.939801+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -4481,10 +4506,33 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-de49d08927c67c6e": {
+      "at": "2026-10-24T21:42:47.544787+00:00",
+      "title": "The Pangolin and the River Lanterns",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "31d166d9f92a423d76ac2aba81e2a0268f4ab2a2283645cf707ce7cef8a05ea8",
+      "story_beats": [
+        {
+          "speech": "A pangolin discovered the river bridge lanterns had gone out before the night market opened."
+        },
+        {
+          "speech": "He replaced every lantern wick but river spray extinguished the little flames again and again."
+        },
+        {
+          "speech": "He noticed empty river shells shielding a fisherman's stove and fitted protective covers around the lanterns."
+        },
+        {
+          "speech": "The protected lanterns illuminated the crossing and the traders opened the evening market safely."
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T21:31:08.173090+00:00",
+    "at": "2026-10-24T21:42:49.939756+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -4495,21 +4543,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T21:31:08.173154+00:00",
+    "at": "2026-10-24T21:42:49.939793+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-24T21:29:41.166044+00:00",
+    "at": "2026-10-24T21:41:50.705558+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-e6f17a8f0e28d9b7",
-    "video_url": "https://www.youtube.com/watch?v=1mUw5zhLLas",
+    "content_id": "rayvan-forge-de49d08927c67c6e",
+    "video_url": "https://www.youtube.com/watch?v=2sHrn7slVII",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T21:31:08.172726+00:00",
+    "at": "2026-10-24T21:42:49.939499+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -4521,32 +4569,32 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T21:31:08.173083+00:00",
+    "at": "2026-10-24T21:42:49.939752+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 246,
+        "eligible": 245,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3
         },
         "seen": 6,
-        "total": 319
+        "total": 318
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 320,
+        "before": 318,
         "fingerprint": 0,
         "id": 6,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 314,
+        "remaining": 312,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 314,
-        "remaining": 247
+        "pool": 312,
+        "remaining": 245
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,

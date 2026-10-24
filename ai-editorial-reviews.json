@@ -1619,6 +1619,19 @@
         "review_model": "gemini-3.1-flash-lite"
       },
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-3108930e597a33e82b12",
+      "story_sha256": "1e0d4b593936750a49f623be2cda6b2b748e88ebdc543bf3de43788537bb398a",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story is a near-identical thematic and narrative duplicate of the previously published 'Unit 734 and the Dying Solar Grove'.",
+        "Both stories feature the same protagonist ('Unit 734'), the same central conflict (a binary choice between a life-support system and a human life), and the same resolution (the robot sacrifices its own functionality to save the human).",
+        "The repetition of the character name and the specific causal mechanism makes this an unoriginal iteration rather than a distinct work."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
