@@ -1763,8 +1763,6 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
     duration=voice_plan(plan,genre,
                         voice_name=str(ch.get('voice_profile') or 'af_heart'),
                         voice_speed=float(ch.get('voice_speed') or 1.09))
-    from astra_v2.asset_usage_audit import begin as begin_asset_audit
-    begin_asset_audit(ch, len(plan))
     # Reject the actual rendered golden-guide and edge-flash signatures
     # BEFORE FFmpeg or automatic publication. This samples the same final
     # Studio compositor that public videos use, not isolated preview code.
@@ -1772,6 +1770,10 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
         from astra_v2.fiction_visual_guard import validate_fiction_frames
         creative_report['fiction_visual_guard']=validate_fiction_frames(
             plan,render_frame,duration)
+    # Begin only after preview/preflight sampling: receipts must originate from
+    # the actual FFmpeg frame stream, not QA previews or test renders.
+    from astra_v2.asset_usage_audit import begin as begin_asset_audit
+    begin_asset_audit(ch, len(plan))
     out=Path(out);out.parent.mkdir(parents=True,exist_ok=True)
     # Keep intermediate audio and encoder logs in RAM when enough tmpfs
     # capacity is available; preserve disk fallback for reliability.
