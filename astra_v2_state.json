@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 44,
+  "attempts": 45,
   "confirmed_today": 44,
-  "last_attempt_at": "2026-10-24T13:02:52.252996+00:00",
+  "last_attempt_at": "2026-10-24T13:20:01.071662+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -847,28 +847,55 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-24T13:05:53.899627+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "5osqnZv7yp8": {
+      "content_id": "rayvan-gemini-b5839896abec181d9500",
+      "title": "The Alpine Rescuer and the Summit Flare",
+      "day": "2026-10-24",
+      "uploaded_at": "2026-10-24T13:20:02.793637+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "898226b0139de16dbf47ed5123bf6955196a3cfa18873d715e50b82b70f4b81f",
+      "story_beats": [
+        {
+          "speech": "An emergency distress signal flickers across my rescue monitor, pulling me away from the warm safety of the cabin."
+        },
+        {
+          "speech": "I strap on my snowshoes and plunge into the dense, snow-heavy forest where the storm hides all familiar landmarks."
+        },
+        {
+          "speech": "A massive glacial fracture blocks my direct path, forcing me to secure the rescue line across the icy abyss."
+        },
+        {
+          "speech": "I finally spot the glowing emergency flare glowing through the drifting snow, guiding us safely back home."
+        }
+      ],
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-24T13:17:42.330025+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T13:05:54.401973+00:00",
+    "at": "2026-10-24T13:20:03.259373+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-24T09:50:10.178955+00:00",
   "reserved": {
@@ -2769,13 +2796,36 @@
       "resolution": "Kaelen earns enough by recording and trading the crystal harmonies without harming their physical integrity, saving his home and the basin.",
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-b5839896abec181d9500": {
+      "at": "2026-10-24T13:20:01.071643+00:00",
+      "title": "The Alpine Rescuer and the Summit Flare",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "898226b0139de16dbf47ed5123bf6955196a3cfa18873d715e50b82b70f4b81f",
+      "story_beats": [
+        {
+          "speech": "An emergency distress signal flickers across my rescue monitor, pulling me away from the warm safety of the cabin."
+        },
+        {
+          "speech": "I strap on my snowshoes and plunge into the dense, snow-heavy forest where the storm hides all familiar landmarks."
+        },
+        {
+          "speech": "A massive glacial fracture blocks my direct path, forcing me to secure the rescue line across the icy abyss."
+        },
+        {
+          "speech": "I finally spot the glowing emergency flare glowing through the drifting snow, guiding us safely back home."
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T13:05:54.401891+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-24T13:20:03.259294+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -2783,36 +2833,72 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T13:05:54.401958+00:00",
+    "at": "2026-10-24T13:20:03.259359+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-24T13:00:58.919632+00:00",
+    "at": "2026-10-24T13:18:04.473484+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-9394f3fa8b626d624fc5",
-    "video_url": "https://www.youtube.com/watch?v=pxynr6GGG1Y",
+    "content_id": "rayvan-gemini-b5839896abec181d9500",
+    "video_url": "https://www.youtube.com/watch?v=5osqnZv7yp8",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T13:05:54.401838+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-24T13:20:03.259007+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T13:05:54.401885+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "counters": {},
+    "at": "2026-10-24T13:20:03.259288+00:00",
+    "collection_status": "collected",
+    "publish_step": "success",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 270,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3
+        },
+        "seen": 6,
+        "total": 343
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 343,
+        "fingerprint": 0,
+        "id": 6,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 337,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 337,
+        "remaining": 270
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 6,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {
+          "CreativeReject": 5
+        },
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
