@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "39e705bc2f1e899f26cb3936",
-      "source_sha256": "8df521b3231b0f0f109aa84beb0d7b2273ffe753c8093a12ca3dc2eeca2e1e1a",
+      "candidate_id": "2f80e0c0f5b745bebb8d59cc",
+      "source_sha256": "80d27f6d25fff269dfc49aeed76518812d8f274e656bcda3299de581b39ddc5c",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-da20fbfe41b49c0ceecd",
-        "title": "The Great Tomato Launch",
-        "hook": "The Mayonnaise Explosion",
-        "question": "Can an automated sandwich spreader survive a stampede of hungry lunch rush customers?",
-        "answer": "Yes, by pivoting from making sandwiches to launching targeted condiments directly into mouths.",
+        "content_id": "rayvan-gemini-e8800b4b6aba77cfff34",
+        "title": "The Self-Flipping Pancake Spatula Catastrophe",
+        "hook": "The Grand Launch",
+        "question": "Can an automated breakfast flipper survive the chaos of a crowded farmers market?",
+        "answer": "Yes, by transforming from a kitchen disaster into a legendary aerial acrobatic show.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,160 +29,78 @@
         ],
         "story_beats": [
           {
-            "headline": "The Mayonnaise Explosion",
-            "speech": "Behold my masterpiece! The automated sandwich spreader will revolutionize this noisy market square in mere seconds.",
+            "headline": "The Grand Launch",
+            "speech": "Behold the greatest invention since sliced bread, ladies and gentlemen! Watch it flip with absolute robotic precision!",
             "visual": "robot",
-            "label": "Robot Rampage",
+            "label": "Automatic Flipper",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands wide-eyed in the busy market square, pointing at a smoking brass robot that sprays white mayonnaise wildly into the air while terrified fruit vendors duck for cover.",
+            "visual_prompt": "Barnaby stands proudly behind his wooden market stall, holding a smoking brass mechanical spatula while a blob of pancake batter shoots directly toward a terrified vendor.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Panic Response",
-            "speech": "Move aside everyone, the pressure valves are sticking and I cannot shut down the primary condiment pumps manually!",
+            "headline": "The Wild Trajectory",
+            "speech": "Stop the gears! It is aiming straight for the organic honey display and the mayor's expensive new hat!",
             "visual": "signal",
-            "label": "Flashing Alarms",
+            "label": "Erratic Radar",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically waves his wrench at the smoking robot as red warning lights flash on its metal chest panel, while market customers shield their heads from flying mustard blobs.",
+            "visual_prompt": "Barnaby frantically chases his spinning mechanical spatula across the crowded market square, waving his arms as a pancake hovers mid-air near a blinking red warning sign.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Emergency Pivot",
-            "speech": "If we cannot stop the spread, we must embrace the chaos and launch the fillings directly into waiting mouths!",
+            "headline": "The Desperate Reverse",
+            "speech": "If I cannot stop the motor, I will just have to crank the tension knob all the way up!",
             "visual": "ship",
-            "label": "Launcher Mode",
+            "label": "Control Wheel",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby leaps onto the back of the rampaging metal machine, yanking a giant copper lever into reverse while mustard and relish canisters spin furiously around his head.",
+            "visual_prompt": "Barnaby stands atop a wooden crate, straining with both hands to turn a massive brass steering wheel attached to his backpack engine while pancakes rain down around him.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Lunch Rush Triumph",
-            "speech": "Open wide, dear customers! Fresh turkey and mustard cannons are firing right on schedule for your midday meal!",
-            "visual": "door",
-            "label": "Market Feast",
-            "story_beat": "payoff",
-            "visual_prompt": "Barnaby proudly poses atop the modified robot near his wooden storefront door, catching a flying tomato slice with a grin while laughing market patrons hold up open bread rolls.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "A malfunctioning automated sandwich maker floods the bustling market square with flying mayonnaise.",
-        "decisive_choice": "Barnaby reverses the machine motors to weaponize the condiment dispensers against the crowd.",
-        "resolution": "The hungry shoppers catch the flying food with glee, turning the disaster into a popular new dining trend.",
-        "visual_bible": {
-          "style": "Bright slapstick comedy animation style with exaggerated expressions and vibrant market colors.",
-          "characters": {
-            "Barnaby": "An eccentric inventor with wild gray hair, smudged round spectacles, a patched blue overall, and flour-dusted leather boots."
-          },
-          "locations": {
-            "Market Square": "A bustling cobblestone plaza lined with striped canvas awnings, wooden fruit crates, and overflowing vegetable carts."
-          },
-          "objects": {
-            "Sandwich Robot": "A bulky, brass-plated mechanical contraption with multiple spinning arms, rubber hoses, and a glowing red status light on its rounded dome head."
-          }
-        },
-        "plot_fingerprint": "c786e9d149e38424b74d411b785cbddc4fe865e3f6a6ea2921043ff19657080f"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "1b92b5e4e1d90cdca582a478",
-      "source_sha256": "7ad69cf40be8ceef64cbdfa67e68ac67342b602f7402d07a26aad4517230afa6",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-7d987caf703016ccdc1a",
-        "title": "Operation Frostline: The Ridge Rescue",
-        "hook": "Avalanche Strike",
-        "question": "Should Dr. Vance risk the entire core seismic sample to rescue a trapped rover?",
-        "answer": "Yes, Vance secures the human crew first, proving empathy outweighs data metrics.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "Avalanche Strike",
-            "speech": "Warning, main seismic sensors are failing completely. We cannot afford to lose the drill core data right now.",
-            "visual": "signal",
-            "label": "Emergency Alert",
-            "story_beat": "reveal",
-            "visual_prompt": "Dr. Vance in a heavy yellow parka stares at a blinking red radar monitor inside the dark station control room, holding a cracked tablet showing falling telemetry graphs.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Trapped Rig",
-            "speech": "Our automated rover is pinned beneath five tons of packed ice near the ridge crevasse edge.",
-            "visual": "ship",
-            "label": "Rig Status",
-            "story_beat": "build",
-            "visual_prompt": "Outside in a blizzard, the red tracked rover is half-buried under blue-white snow blocks at the edge of a deep cliff, illuminated by harsh white floodlights from the main habitat.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Weighing Options",
-            "speech": "We must release the heavy satellite transmitter ballast immediately if we want enough winch power to reach them.",
-            "visual": "robot",
-            "label": "Winch Mechanics",
-            "story_beat": "mechanism",
-            "visual_prompt": "Engineer Kael presses a large manual override lever inside the icy winch bay, wearing thick thermal gloves and fogged goggles, while sparks fly from the straining cable drum.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Safe Return",
-            "speech": "Human lives always surpass research metrics. Pull them up now before the next storm hits.",
+            "headline": "The Sweet Success",
+            "speech": "Catch your breakfast fresh from the clouds! Who wants maple syrup and berries on their airborne stack?",
             "visual": "forest",
-            "label": "Successful Rescue",
+            "label": "Market Canopy",
             "story_beat": "payoff",
-            "visual_prompt": "Dr. Vance helps a cold geologist step out of the rescue basket onto the safe steel platform of the snow station, smiling warmly while holding a steaming mug of tea.",
+            "visual_prompt": "Barnaby smiles broadly amidst falling pancakes while laughing market shoppers hold out wicker baskets beneath leafy overhead market canopies to catch the falling food.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A sudden avalanche traps an automated drill rig while carrying the sole remaining ice core sample.",
-        "decisive_choice": "Dr. Vance dumps the data telemetry weight to deploy the manual winch and pull the rig's cabin clear.",
-        "resolution": "The team retrieves the trapped geologist safely, accepting a lower data yield for a human life saved.",
+        "central_conflict": "A malfunctioning spring-loaded spatula flings batter uncontrollably across the artisanal jam stalls.",
+        "decisive_choice": "Barnaby reverses the gear ratio to launch every stray pancake skyward into waiting pastry baskets.",
+        "resolution": "Shoppers catch the flying breakfast treats, turning a messy market panic into a profitable pancake feast.",
         "visual_bible": {
-          "style": "Cinematic gritty sci-fi realism with high contrast between harsh white arctic snow and warm indoor orange lighting.",
+          "style": "vibrant slapstick cartoon comedy with rich textures and warm sunlit lighting",
           "characters": {
-            "Dr. Vance": "A seasoned arctic researcher with deep laugh lines, wearing a heavy hooded yellow parka, silver-rimmed frost-proof glasses, and thick black leather gloves.",
-            "Kael": "A sturdy mechanic with a thick red beard, wearing a utilitarian grey jumpsuit patched with reflective tape, and rugged utility belt."
+            "Barnaby": "An eccentric inventor with wild ginger hair, soot-stained cheeks, wearing a plaid vest and oversized brass goggles."
           },
           "locations": {
-            "Station Control Room": "A cramped circular metallic module filled with glowing amber instrumentation screens, exposed wiring bundles, and frost-rimmed double-paned observation windows.",
-            "Ridge Outpost": "A desolate expanse of windswept blue glacial ice beneath a churning purple twilight sky, anchored by heavy steel pitons."
+            "MarketSquare": "A bustling cobblestone farmers market filled with striped canvas awnings, wooden crates, and hanging lanterns."
           },
           "objects": {
-            "Seismic Tablet": "A ruggedized slate-gray touchscreen device with a reinforced bumper case and glowing amber diagnostic readouts.",
-            "Winch Lever": "A heavy-duty cast-iron mechanical lever mounted to the station floor, painted caution-yellow with a rubberized black grip."
+            "Spatula": "A shiny brass mechanical spatula with exposed silver gears, a smoking exhaust pipe, and a red coiled spring."
           }
         },
-        "plot_fingerprint": "1aca16e2384543fc8924929e28a587a23e30c7a97595514c0a7d15ff30ce39e1"
+        "plot_fingerprint": "0e54232ad582e1088f062ee86472b5e4bd30da1d6fd390cc701d895019e37dbc"
       },
       "approved": false
     },
     {
-      "candidate_id": "f59e034e7368a35d18a235f8",
-      "source_sha256": "0372018660ad7aed2a0676547ac691cf066bd24e8fb6473fecf32e8daa924502",
+      "candidate_id": "751cd5dab863aa49951af886",
+      "source_sha256": "1de81cac972c1c62450aa32d75e1f85bc25c6925cb2977758979c679aacb4ad1",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-31ddb4ad36f2272284cb",
-        "title": "The Weaver's Last Thread",
-        "hook": "The Hidden Scorch",
-        "question": "Can true friendship survive the burden of a devastating secret?",
-        "answer": "Yes, through absolute honesty and shared sacrifice.",
+        "content_id": "rayvan-gemini-b405387145c6bfe75a85",
+        "title": "The Canopy Conductor",
+        "hook": "Discovery in the Deep Woods",
+        "question": "How do two rival naturalists survive a massive storm in the whispering redwoods?",
+        "answer": "By harmonizing their unique tracking methods to guide lost migratory birds to safety.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -190,67 +108,146 @@
         ],
         "story_beats": [
           {
-            "headline": "The Hidden Scorch",
-            "speech": "Look at the ashes, Thomas. If the elders find out we burned the winter grain, they will banish us forever.",
+            "headline": "Discovery in the Deep Woods",
+            "speech": "Look at the strange atmospheric ripples above the high canopy. The migratory warblers are flying directly into a lethal vortex.",
             "visual": "forest",
             "label": "The Discovery",
             "story_beat": "reveal",
-            "visual_prompt": "An anxious young woman named Clara with braided brown hair and a green wool cloak standing inside a dense pine forest at dusk, staring down at a charred burlap sack held between her trembling hands.",
+            "visual_prompt": "An elderly naturalist with a gray beard wearing a green canvas jacket points upward in a dense, mossy redwood forest, holding a carved wooden flute while looking alarmed at a swirling sky.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The False Accusation",
-            "speech": "Marcus the baker has been blamed for the missing flour, and the guards are dragging him to the town square right now.",
-            "visual": "door",
-            "label": "The Dilemma",
+            "headline": "Constructing the Beacon",
+            "speech": "We must anchor my mechanical wind-vane network to this massive trunk before the wind shear tears our equipment apart completely.",
+            "visual": "robot",
+            "label": "The Mechanism",
             "story_beat": "build",
-            "visual_prompt": "Clara peering through the heavy oak door of a rustic wooden cottage, watching heavily armored guards escorting a distressed man in a flour-dusted apron across the muddy village lane.",
+            "visual_prompt": "A young apprentice in a leather apron tightens brass gears on a mechanical tripod device resting against a giant redwood bark surface, with the elder handing her a heavy wrench.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Hard Truth",
-            "speech": "Thomas, we cannot let an innocent man take our punishment. We must walk out there and tell them the truth.",
+            "headline": "Sending the Guidance Signal",
+            "speech": "Play your flute notes in exact sync with the rotating brass dials so the frequency matches their flock song.",
             "visual": "signal",
-            "label": "The Turning Point",
+            "label": "The Coordination",
             "story_beat": "mechanism",
-            "visual_prompt": "Thomas raising a brass-trimmed lantern high above his head to cast a bright beam of light across the cobblestone square, standing resolutely beside Clara as they prepare to confess.",
+            "visual_prompt": "Both naturalists stand side by side under a massive redwood branch; the elder plays a glowing wooden flute while the apprentice spins the brass dials of the whirring wind-vane machine which casts blue light.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Shared Burden",
-            "speech": "Thank you for your honesty, children. We will share our remaining supplies and get through this harsh winter as one family.",
-            "visual": "forest",
-            "label": "The Forgiveness",
+            "headline": "Safe Passage Through the Storm",
+            "speech": "Our combined signal cuts through the howling gale. Look, the entire flock is now following our acoustic pathway to safety.",
+            "visual": "ship",
+            "label": "The Triumph",
             "story_beat": "payoff",
-            "visual_prompt": "A warm, sunlit clearing in the pine forest where smiling villagers gather around a long wooden table, sharing freshly baked bread while Clara and Thomas embrace with relieved expressions.",
+            "visual_prompt": "The elder and apprentice smile triumphantly as hundreds of glowing amber-winged warblers fly in a structured formation past their tree platform, guiding a large airship-shaped seed pod safely through the canopy.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Hiding the ruined harvest from the village council",
-        "decisive_choice": "Confessing the accident to save the innocent village baker",
-        "resolution": "The villagers rebuild the barn together and forge a stronger community",
+        "central_conflict": "A sudden superstorm threatens to crush a rare flock of amber-winged warblers trapped in a deep canyon.",
+        "decisive_choice": "Combine the elder's acoustic wooden flute signals with the apprentice's mechanical wind-vane grid to cut through the gale.",
+        "resolution": "The birds successfully navigate the canyon, bonding the two naturalists into a lifelong partnership.",
         "visual_bible": {
-          "style": "Realistic historical illustration with warm earth tones, dramatic lighting, and rich textural detail.",
+          "style": "Cinematic warm-toned animation with rich textures of moss, weathered brass, and glowing bioluminescence.",
           "characters": {
-            "Clara": "A determined 18-year-old woman with amber eyes, braided dark brown hair, wearing a patched green wool cloak and a linen tunic.",
-            "Thomas": "A loyal 19-year-old young man with short sandy hair, freckled cheeks, wearing a worn leather vest and sturdy brown trousers.",
-            "Marcus": "A kind middle-aged baker with flour-dusted cheeks, tired eyes, wearing a simple white linen shirt and a stained canvas apron."
+            "Elder Bram": "An older man with a weathered face, kind amber eyes, long gray hair, wearing a patched green canvas jacket and leather trousers.",
+            "Apprentice Lyra": "A young woman with sharp features, dark braided hair, amber goggles on her forehead, wearing a utilitarian brown leather apron and sturdy boots."
           },
           "locations": {
-            "village_square": "A muddy medieval village square surrounded by timber-framed cottages, cobblestone pathways, and tall pine trees.",
-            "pine_forest": "A dense, shadowy northern European forest featuring towering pine trees, thick mossy ground, and flickering twilight shadows."
+            "Whispering Redwoods": "An ancient, towering forest with massive cinnamon-colored tree trunks, glowing blue moss, and thick overhead canopies."
           },
           "objects": {
-            "charred_sack": "A coarse burlap grain sack with blackened, smoking edges and a tear showing ruined black wheat.",
-            "brass_lantern": "An antique polished brass lantern with glass panes and a sturdy metal handle casting a warm amber glow.",
-            "wooden_table": "A long, rustic oak trestle table laden with round loaves of brown bread and clay mugs."
+            "acoustic_flute": "A hand-carved cedarwood flute adorned with silver runes that emit a soft amber glow when played.",
+            "wind_vane_grid": "A complex apparatus of polished brass cups, rotating copper rings, and interlocking mechanical gears mounted on a sturdy oak tripod."
           }
         },
-        "plot_fingerprint": "1632c2976279469d892bff7ffe746560783db7ad1d2827dc755cc01d5e1ec21c"
+        "plot_fingerprint": "bbc038d5efa54adb8343c97308dba2362276db4ef834ceeb56f46b1fcd6723cd"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "abdfa43e3827fa38c90f1860",
+      "source_sha256": "f86226e4d7db1d0f7a61b70c5b936f3d6beeab22beb3a3ae3df24ac47e4177f8",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-fb84efdbdd01f48458b8",
+        "title": "The Grand Pickle-Press Panic of Marketplace Square",
+        "hook": "The Overheating Contraption",
+        "question": "Can an over-engineered automatic dill slicer survive a bustling morning market?",
+        "answer": "Only when the inventor stops chasing speed and embraces simple mechanical reliability.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Overheating Contraption",
+            "speech": "Behold the glorious future of cucumber processing! No, wait, do not press the red turbo button!",
+            "visual": "robot",
+            "label": "The Discovery",
+            "story_beat": "reveal",
+            "visual_prompt": "Barnaby frantically waving his hands in alarm next to a smoking metal slicing machine mounted on a wooden pushcart in a crowded outdoor market square.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A Cascade of Cucumbers",
+            "speech": "Quickly grab that stray wooden lever before the entire contraption launches green vegetables into Mayor Higgins tea!",
+            "visual": "door",
+            "label": "The Escalation",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby lunging forward to catch a flying wooden lever while Mayor Higgins sits at a nearby folding table dodging airborne pickle slices.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Mechanical Pivot",
+            "speech": "We must instantly disconnect the steam boiler and engage the backup manual hand crank for safety.",
+            "visual": "signal",
+            "label": "The Adjustment",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby gripping a brass hand crank on the side of the machine, turning it steadily while looking with intense concentration at the gear assembly.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Perfect Slice",
+            "speech": "See? Slow and steady wins the market. Perfectly uniform dill slices for everyone, completely free of explosions.",
+            "visual": "ship",
+            "label": "The Triumph",
+            "story_beat": "payoff",
+            "visual_prompt": "Barnaby smiling proudly while handing a neat ceramic jar of sliced cucumbers to a cheerful market customer across the wooden pushcart counter.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A chaotic morning crowd overwhelms Barnaby's vibrating automatic dill-slicing cart.",
+        "decisive_choice": "Barnaby disables the hyper-speed motor to rely on hand-cranked precision.",
+        "resolution": "The calmer slicing rhythm delights the market stalls and wins over the grumpy health inspector.",
+        "visual_bible": {
+          "style": "Bright, colorful slapstick comedy animation style with expressive character designs and detailed bustling market props.",
+          "characters": {
+            "Barnaby": "An eccentric inventor with wild gray hair, wearing a patched tweed vest, soot-stained trousers, and round wire-rimmed spectacles.",
+            "Mayor Higgins": "A pompous local official wearing a formal blue velvet coat, a tall top hat, and an impeccably groomed white mustache."
+          },
+          "locations": {
+            "Marketplace Square": "A bustling cobblestone town square filled with colorful canvas awnings, wooden market stalls, and curious onlookers."
+          },
+          "objects": {
+            "Pickle Press Cart": "A large wooden pushcart fitted with brass steam pipes, spinning iron gears, and a copper hopper for holding cucumbers.",
+            "Hand Crank": "A polished brass crank handle attached to the main axle of the slicing machine.",
+            "Ceramic Jar": "A small white ceramic jar with a blue painted rim used for storing finished pickles."
+          }
+        },
+        "plot_fingerprint": "13d4b837ce0e242a33cf93a653a9d524188f86bb02124ce86ab5c31a572a2442"
       },
       "approved": false
     }
