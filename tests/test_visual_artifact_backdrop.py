@@ -16,6 +16,23 @@ class ArtifactBackdropTests(unittest.TestCase):
             with self.subTest(term=term):
                 self.assertEqual(choose_scene({"speech": term}), expected)
 
+    def test_storyboard_visual_terms_match_space_artwork(self):
+        for visual in ("orbit", "galaxy", "cosmos", "astronaut", "planet"):
+            with self.subTest(visual=visual):
+                self.assertEqual(choose_scene({"visual": visual}), "space")
+
+    def test_explicit_scene_beats_storyboard_and_narration(self):
+        shot = {
+            "story_environment": "forest",
+            "visual_prompt": "planet",
+            "visual": "orbit",
+            "speech": "The astronaut visits a city",
+        }
+        self.assertEqual(choose_scene(shot), "forest")
+
+    def test_unknown_storyboard_visual_does_not_guess(self):
+        self.assertIsNone(choose_scene({"visual": "an unexpected discovery"}))
+
     def test_unknown_scene_does_not_add_unrelated_art(self):
         image = Image.new("RGB", (1080, 1920), (10, 20, 30))
         self.assertIs(apply_backdrop(image, {"speech": "A surprising discovery"}, "story"), image)

@@ -12,6 +12,7 @@ on:
     paths:
       - 'tests/verify_studio_preview.py'
       - 'tests/test_studio_audio_gate.py'
+      - 'tests/test_visual_artifact_backdrop.py'
       - '.github/workflows/studio-full-preview-qa.yml'
 permissions:
   contents: read
@@ -26,7 +27,7 @@ jobs:
           python-version: '3.12'
       - run: python -m py_compile tests/verify_studio_preview.py studio_renderer.py
       - run: python -m pip install pillow imageio-ffmpeg
-      - run: python -m unittest tests.test_studio_audio_gate -v
+      - run: python -m unittest tests.test_studio_audio_gate tests.test_visual_artifact_backdrop -v
   full-studio-preview:
     if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     runs-on: ubuntu-24.04
