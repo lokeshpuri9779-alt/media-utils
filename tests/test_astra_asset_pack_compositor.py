@@ -4,10 +4,22 @@ import tempfile
 import unittest
 from pathlib import Path
 from PIL import Image
-from astra_v2.visual_artifact_backdrop import apply_pack_background, _cached_pack_background
+from astra_v2.visual_artifact_backdrop import apply_pack_background, _cached_pack_background, analyze_story_scene
 
 
 class AssetPackCompositorTests(unittest.TestCase):
+    def test_explicit_scene_context_precedes_narration(self):
+        for field in ("scene_environment", "scene_location", "setting", "visual_intent"):
+            decision = analyze_story_scene({field: "A forest clearing", "speech": "The train arrived."})
+            self.assertEqual(decision["scene"], "forest")
+            self.assertEqual(decision["source_field"], field)
+
+    def test_unknown_context_does_not_force_unrelated_art(self):
+        decision = analyze_story_scene({"setting": "An unspecified place",
+                                        "speech": "The otter found three rocks."})
+        self.assertIsNone(decision["scene"])
+        self.assertTrue(decision["needs_background"])
+
     def test_short_and_long_keep_output_dimensions(self):
         with tempfile.TemporaryDirectory() as temp:
             root=Path(temp)
