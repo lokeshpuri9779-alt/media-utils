@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "737742b164d9bb7e48b8820b",
-      "source_sha256": "f2093a153deccbdae718964e583875283c2ca14a0a9968d0d9a49ee859ec5f99",
+      "candidate_id": "77933fadf9dc48bf316fd25d",
+      "source_sha256": "26b13d9f2580fa2becba0ce03aa68318afc75748fdc414c28989c3164d900d29",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-8ec2e21626bd7cf60d4d",
-        "title": "The Grand Pickle Press Disaster",
-        "hook": "The Mechanical Menace",
-        "question": "Can an overzealous inventor save his failing market stall before noon?",
-        "answer": "He abandons complex machinery to master the art of hand-sliced pickles.",
+        "content_id": "rayvan-gemini-60d1044dd16fa2aa38c0",
+        "title": "The Great Onion Chopping Machine Debacle",
+        "hook": "The Grand Unveiling",
+        "question": "Can an overly complicated spring-loaded vegetable slicer survive the morning rush at the farmer's market?",
+        "answer": "Yes, by abandoning mechanical precision and leaning into chaotic explosive chopping.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,80 +29,78 @@
         ],
         "story_beats": [
           {
-            "headline": "The Mechanical Menace",
-            "speech": "Behold the greatest culinary marvel of our century, capable of slicing ten thousand cucumbers in under sixty seconds!",
+            "headline": "The Grand Unveiling",
+            "speech": "Behold the Chrono-Slicer nine thousand! It guarantees absolute culinary perfection through twelve interlocking brass gear assemblies.",
             "visual": "robot",
-            "label": "The Contraption",
+            "label": "Prototype Reveal",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby stands behind a wooden market stall, nervously pressing a glowing red button on a steaming brass robot-like slicer while angry green cucumbers spray into the crowd.",
+            "visual_prompt": "Inventor Barnaby stands proudly behind a brass-and-wood machine in a bustling market stall, holding a wrench while shoppers stare in confusion.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Vegetable Chaos",
-            "speech": "Stop the machine immediately, Barnaby, because my prized heirloom tomatoes are flying directly into the angry mayor's hat!",
+            "headline": "The Jamming Hazard",
+            "speech": "Oh dear, the main drive shaft is completely bound up with onion skins. I simply must tighten the tension springs.",
             "visual": "signal",
-            "label": "The Panic",
+            "label": "Mechanical Flaw",
             "story_beat": "build",
-            "visual_prompt": "Market vendor Clara waves her hands frantically at Barnaby, pointing to a blinking yellow hazard light atop the chaotic slicing machine as vegetables launch everywhere.",
+            "visual_prompt": "Barnaby sweats nervously, frantically trying to unjam locked gears with a screwdriver as a long queue of angry customers glares.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Desperate Smash",
-            "speech": "There is only one definitive way to end this madness before the health inspector arrives with his official citation clipboard.",
-            "visual": "ship",
-            "label": "The Intervention",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby grips a heavy wooden mallet with both hands, lunging forward with a determined expression to strike the roaring brass slicing machine parked beside his rustic vegetable crates.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A Crunch Success",
-            "speech": "Turns out handcrafted simplicity beats noisy automation every single time, especially when paired with extra garlic and fresh dill.",
+            "headline": "The Desperate Adjustment",
+            "speech": "If delicate gears refuse to cooperate, we shall simply discard restraint and let pure kinetic energy take over completely!",
             "visual": "door",
-            "label": "The Triumph",
+            "label": "Radical Modification",
+            "story_beat": "twist",
+            "visual_prompt": "Barnaby yanks out the central brass gear box with both hands, leaving the exposed steel spring vibrating violently on the wooden table.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Vegetable Rain",
+            "speech": "Step right up and catch your freshly diced onions! Fast, furious, and entirely accidental culinary mastery!",
+            "visual": "ship",
+            "label": "Market Triumph",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby smilingly hands a paper cone of neatly hand-sliced pickles to a delighted customer across his tidy wooden counter, while the broken brass machine smokes quietly in the background.",
+            "visual_prompt": "Onions fly everywhere in a comedic whirlwind of blades, filling up bags held by cheering customers while Barnaby ducks for cover.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A malfunctioning automatic pickle slicer threatens to destroy the vendor's vegetable cart.",
-        "decisive_choice": "Smashes the automated contraption with a mallet and uses a simple kitchen knife.",
-        "resolution": "Customers applaud the authentic handmade texture, creating a profitable morning surge.",
+        "central_conflict": "Barnaby's elaborate gear-driven vegetable chopper jams continuously while competing stalls sell out.",
+        "decisive_choice": "Barnaby removes the regulator gears entirely, unleashing raw, unbridled spring tension onto the onions.",
+        "resolution": "A massive flurry of perfectly diced vegetables rains over the market, instantly satisfying every customer.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures and comedic physical comedy.",
+          "style": "Bright, colorful stop-motion claymation style with exaggerated character proportions and whimsical mechanical details.",
           "characters": {
-            "Barnaby": "An energetic inventor with wild grey hair, wearing a flour-dusted canvas apron over a striped vest.",
-            "Clara": "A stern produce seller wearing a blue linen headscarf and holding a wooden clipboard."
+            "Barnaby": "An eccentric inventor with wild orange hair, oversized round spectacles, a tweed vest covered in grease stains, and green trousers."
           },
           "locations": {
-            "Market Stall": "A bustling cobblestone farmers market filled with wooden crates, colorful vegetables, and canvas awnings."
+            "Market Stall": "A lively outdoor farmer's market draped in colorful striped awnings, wooden crates filled with vegetables, and hand-painted signs."
           },
           "objects": {
-            "Pickle Slicer": "A complicated, smoking brass contraption covered in gears, tubes, and a blinking red activation button.",
-            "Mallet": "A heavy wooden mallet with a worn handle and scuffed striking face."
+            "Chrono-Slicer": "A towering contraption made of shiny brass cogs, wooden levers, exposed steel springs, and a funnel at the top."
           }
         },
-        "plot_fingerprint": "070994db4a63c4b3313a3da2598bcc06c50a6b18c70d88c2ae4bdb24bbb96573"
+        "plot_fingerprint": "ed70944ea53af1e860153ed5d0c621a8ebd390209a26e1b3481a83bfcfcb0503"
       },
       "approved": false
     },
     {
-      "candidate_id": "235109e49987bc330d67f329",
-      "source_sha256": "381553159a0eb9934df9f2328e5d32ac8a9757ac8d6c371380f45642c65c09af",
+      "candidate_id": "d67eb06861e4cae57bb35881",
+      "source_sha256": "d65627d5c266401d6d02df947cb1439c1d83866b59b13c6f3224ba9cb86c83a6",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-1f627f9161994b742e28",
-        "title": "The Resonance Valve Replacement",
-        "hook": "Pressure Spike Detected",
-        "question": "Can the engineering crew stabilize the plasma manifold before the hull integrity fails?",
-        "answer": "Yes, by manually bypassing the primary coolant loop and venting excess charge into the thermal ballast.",
+        "content_id": "rayvan-gemini-1e08e5064ff379975dd7",
+        "title": "The Quantum Thruster Alignment Crisis",
+        "hook": "Warning Alarms",
+        "question": "Should the crew manually adjust the quantum core during a solar storm to save fuel?",
+        "answer": "Yes, by trusting the junior engineer's calculation over the automated manual.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -110,81 +108,81 @@
         ],
         "story_beats": [
           {
-            "headline": "Pressure Spike Detected",
-            "speech": "We cannot wait for automated diagnostics. The manifold is overheating and we must act immediately.",
+            "headline": "Warning Alarms",
+            "speech": "Captain, the automated guidance system is failing. We must fire the thrusters manually right now.",
             "visual": "ship",
-            "label": "Alarm State",
+            "label": "Engine Room",
             "story_beat": "reveal",
-            "visual_prompt": "Engineering officer Lyra, a human woman with tied-back auburn hair wearing a weathered grey jumpsuit, stands inside the cramped control room pointing at a glowing amber diagnostic console while warning lights flash orange.",
+            "visual_prompt": "First engineer holding a flashing diagnostic pad inside a glowing blue engine room with blinking red warning lights.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Routing the Bypass",
-            "speech": "If we force fluid through the secondary conduit, the extreme pressure might fracture our reserve seals.",
-            "visual": "robot",
-            "label": "Manual Override",
-            "story_beat": "build",
-            "visual_prompt": "Maintenance technician Orson, a tall cyborg with a polished chrome chassis and blue optical sensors, firmly grasps a heavy manual valve wheel on a large insulated pipe, straining against the locked locking mechanism.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Venting the Ballast",
-            "speech": "There is no other option left. Open the thermal ballast valve now before the pressure threshold hits critical.",
+            "headline": "Dangerous Trajectory",
+            "speech": "If we override the computer now, the radiation surge could overload our primary propulsion coils.",
             "visual": "signal",
-            "label": "Energy Discharge",
-            "story_beat": "mechanism",
-            "visual_prompt": "Lyra inputs a rapid sequence into a handheld diagnostic pad while watching a jagged green telemetry spike crawl across the screen, her face illuminated by the bright display.",
+            "label": "Navigation",
+            "story_beat": "build",
+            "visual_prompt": "Captain standing at the main navigation console pointing at a holographic radiation map showing a dense asteroid field.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Core Stabilization",
-            "speech": "The core temperature is finally dropping. We saved the ship, but our secondary thrusters are completely dead.",
+            "headline": "Manual Override",
+            "speech": "Trust my mathematical calculation. The radiation shielding will hold if we tilt the exhaust vent five degrees.",
+            "visual": "robot",
+            "label": "Control Core",
+            "story_beat": "mechanism",
+            "visual_prompt": "Junior engineer typing rapidly on a mechanical keyboard with a hovering utility robot assisting by holding a fusion torch.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Safe Passage",
+            "speech": "We made it through the storm with fuel to spare. Excellent calculation, engineer.",
             "visual": "planet",
-            "label": "Safe Harbor",
+            "label": "Observatory",
             "story_beat": "payoff",
-            "visual_prompt": "Orson and Lyra stand side-by-side inside the observation dome, looking out through the reinforced viewport at a calm blue planet hanging against the deep blackness of space.",
+            "visual_prompt": "Crew smiling together in the observation dome looking out at a peaceful green planet against a star-filled background.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A clogged plasma manifold threatens to rupture the main propulsion bay.",
-        "decisive_choice": "Venting the core coolant through the emergency thermal ballast instead of sealing the bulkhead.",
-        "resolution": "The hull remains intact, though the ship loses secondary thruster power for the remainder of the journey.",
+        "central_conflict": "Disagreement between safe automated procedures and risky manual thruster calibration.",
+        "decisive_choice": "Override the ship computer and fire manual thrusters at exact solar alignment.",
+        "resolution": "The ship clears the asteroid belt safely, preserving fuel and securing the cargo delivery.",
         "visual_bible": {
-          "style": "Gritty science fiction realism with detailed industrial textures and practical lighting.",
+          "style": "Cinematic sci-fi realism with vibrant lighting and detailed mechanical textures",
           "characters": {
-            "Lyra": "A human woman in her early thirties with tied-back auburn hair, wearing a worn grey technical jumpsuit with orange safety stripes.",
-            "Orson": "A tall cyborg with a polished chrome chassis, exposed internal wiring at the shoulder joints, and glowing blue optical sensors."
+            "Captain": "A tall human with short gray hair, wearing a dark blue commander uniform with gold insignia.",
+            "Engineer": "A young woman with curly brown hair tied back, wearing a grease-stained orange jumpsuit."
           },
           "locations": {
-            "Engineering Bay": "A cramped, utilitarian compartment filled with overhead conduits, exposed pipes, and flickering amber diagnostic panels.",
-            "Observation Dome": "A serene viewing area with a curved glass viewport overlooking distant planetary horizons and star fields."
+            "Engine Room": "A metallic chamber filled with glowing blue plasma conduits and humming machinery.",
+            "Navigation": "A circular command center featuring large holographic display tables and leather chairs."
           },
           "objects": {
-            "Diagnostic Pad": "A handheld rectangular tablet with a scratched metal casing and a luminous green display screen.",
-            "Manual Valve Wheel": "A heavy cast-iron handwheel painted industrial yellow, mounted onto a thick insulated coolant pipe."
+            "Diagnostic Pad": "A rectangular metallic tablet displaying scrolling green telemetry data.",
+            "Fusion Torch": "A handheld silver welding device emitting a bright blue plasma flame."
           }
         },
-        "plot_fingerprint": "b92e3a99eb33ea869db5ba2620c4fc209920463b292268ef9134c9ae524783a6"
+        "plot_fingerprint": "7926a77f2646f274636575f092a6e3bc5aa306b267a91362b513e2ad24bad225"
       },
       "approved": false
     },
     {
-      "candidate_id": "4a271f926c7029534e9f20bc",
-      "source_sha256": "c5821fab41d9386feb6b3df5334f8923671a09b9aeb4376788851125de8f378e",
+      "candidate_id": "c038f7ef67ef127a385e9808",
+      "source_sha256": "8f4b11acb8c703ed13bce29a8e678cf54b8eda2d654a274a4b43865d5705f506",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-3437652e17e0d3009dd4",
-        "title": "The Beacon Ridge Avalanche",
-        "hook": "Signal Detected",
-        "question": "Can the veteran climber breach the freezing snowpack before the injured team loses consciousness?",
-        "answer": "Yes, by utilizing the emergency acoustic locator to pinpoint the buried transceiver.",
+        "content_id": "rayvan-gemini-42c53d5be217fa035c8e",
+        "title": "The Resonance Valve Disagreement",
+        "hook": "Thermal Alarm",
+        "question": "Should the crew purge the primary heat sink or vent the auxiliary coolant to save the reactor?",
+        "answer": "They vent the auxiliary coolant, safely preserving the structural integrity of the main propulsion system.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -192,63 +190,66 @@
         ],
         "story_beats": [
           {
-            "headline": "Signal Detected",
-            "speech": "My rescue receiver is picking up two faint pulse beacons buried deep underneath the eastern ridge overhang.",
-            "visual": "signal",
-            "label": "Beacon Search",
-            "story_beat": "reveal",
-            "visual_prompt": "A close-up shot of a veteran climber named Liam holding a blinking orange emergency receiver in a swirling snowstorm at the base of a jagged mountain peak.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Unstable Ascent",
-            "speech": "We must scale the fractured ice wall immediately because waiting another hour will mean fatal hypothermia.",
-            "visual": "forest",
-            "label": "Ice Wall Climb",
-            "story_beat": "build",
-            "visual_prompt": "Liam driving steel ice axes into a vertical blue glacier wall surrounded by snow-dusted pine trees while wearing a red insulated parka and crampons.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Probing Grid",
-            "speech": "Drop the heavy gear bags right here and sweep the snowpack with aluminum probes in a tight grid pattern.",
-            "visual": "door",
-            "label": "Grid Excavation",
-            "story_beat": "mechanism",
-            "visual_prompt": "Liam kneeling in deep powder snow, frantically thrusting a yellow collapsible metal probe into a packed white drift resembling a blocked cave entrance.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Safe Extraction",
-            "speech": "I found the second backpack handle, so pull together and lift them out before the wind blinds us completely.",
+            "headline": "Thermal Alarm",
+            "speech": "Warning, the reactor core temperature is rising past safe operating limits, and we must act immediately.",
             "visual": "ship",
-            "label": "Extraction",
+            "label": "Reactor Alert",
+            "story_beat": "reveal",
+            "visual_prompt": "Captain Vance standing in the dimly lit command bridge of the exploration ship, pointing at a glowing red console displaying rising temperature graphs, wearing a pressurized uniform, holding a diagnostic datapad.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Heated Debate",
+            "speech": "If we purge the main heat sink now, we will lose propulsion entirely and drift in deep space forever.",
+            "visual": "robot",
+            "label": "Crew Clash",
+            "story_beat": "build",
+            "visual_prompt": "Chief Engineer Miri arguing next to a towering maintenance robot with glowing blue optical sensors, gesturing emphatically toward the reactor status panel inside the humming engineering bay.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Manual Override",
+            "speech": "We must trust the auxiliary coolant manifold, even if the pressure spikes during the emergency manual valve turn.",
+            "visual": "signal",
+            "label": "Manual Action",
+            "story_beat": "mechanism",
+            "visual_prompt": "Chief Engineer Miri reaching out to grasp a heavy manual valve wheel on a massive pipe, while an intermittent diagnostic signal flashes amber on the nearby bulkhead screen.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Stabilized Orbit",
+            "speech": "The temperature is dropping steadily, and the propulsion systems are holding stable thanks to our quick choice.",
+            "visual": "planet",
+            "label": "Safe Arrival",
             "story_beat": "payoff",
-            "visual_prompt": "A rescue helicopter with spinning overhead rotors hovering above a snow plateau as Liam helps two shivering climbers wearing silver thermal blankets board the cabin door.",
+            "visual_prompt": "Captain Vance and Chief Engineer Miri smiling together on the bridge, watching a serene blue planet loom large through the main viewport window as the ship glides smoothly into orbit.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Buried climbers trapped beneath an unstable snow shelf with rapidly dropping body temperatures.",
-        "decisive_choice": "Abandoning the heavy excavation kit to dig manually with avalanche probes.",
-        "resolution": "The trapped climbers are successfully uncovered and stabilized just as a secondary blizzard strikes.",
+        "central_conflict": "Dispute over whether to purge the primary heat sink or vent the auxiliary coolant during a reactor overload.",
+        "decisive_choice": "Choosing to override the automated purge sequence and manually vent the auxiliary coolant tanks.",
+        "resolution": "The reactor stabilizes without structural damage, allowing the vessel to resume its journey safely.",
         "visual_bible": {
-          "style": "Cinematic realism with cold blue lighting, swirling powder snow effects, and high contrast against rugged mountain terrain.",
+          "style": "Clean sci-fi realism with cinematic lighting, practical mechanical textures, and a cool color palette of steel grays contrasted with warm orange emergency lights.",
           "characters": {
-            "Liam": "A veteran mountain rescue leader with a weathered face, thick dark beard, wearing a weatherproof red parka and polarized ski goggles."
+            "Captain Vance": "A determined human commander with short dark hair, wearing a dark blue utilitarian jumpsuit with silver command insignia.",
+            "Chief Engineer Miri": "A pragmatic technician with braided copper hair and protective goggles resting on her forehead, wearing a heavy-duty yellow engineering vest over a grey tunic."
           },
           "locations": {
-            "PeakRidge": "A treacherous alpine mountain ridge covered in deep snowdrifts, jagged grey rocks, and sparse frozen pine trees."
+            "command bridge": "A spacious circular room featuring curved holographic displays, metallic bulkheads, and a massive panoramic viewport facing the stars.",
+            "engineering bay": "A cluttered, high-ceilinged compartment filled with exposed conduits, heavy pipes, and steam valves."
           },
           "objects": {
-            "receiver": "A handheld orange electronic acoustic locator with a small green LCD screen and flashing LED tracking lights.",
-            "probe": "A lightweight yellow aluminum collapsible avalanche probe with black depth measurement markings."
+            "diagnostic datapad": "A sleek rectangular handheld tablet displaying glowing blue diagnostic charts.",
+            "maintenance robot": "A bipedal utility droid with a matte white chassis, articulated metallic arms, and a single revolving blue optical sensor.",
+            "manual valve wheel": "A heavy industrial steel wheel with six spokes attached to a thick coolant pipeline."
           }
         },
-        "plot_fingerprint": "8c594084afe03038cee5cf37d3a55bda027b6ba953357a43081cd22f853096ed"
+        "plot_fingerprint": "c0f527869e782114db98020b1277829df57326733fdc27fa93428720fa2e4965"
       },
       "approved": false
     }
