@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 35,
+  "attempts": 36,
   "confirmed_today": 35,
-  "last_attempt_at": "2026-10-24T10:26:40.952994+00:00",
+  "last_attempt_at": "2026-10-24T10:38:51.502354+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -610,29 +610,55 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "bjWomHn1K2E": {
+      "content_id": "rayvan-gemini-ecb1cea03ea48b9a46e0",
+      "title": "The Thruster Valve Dispute on Vessel Orion",
+      "day": "2026-10-24",
+      "uploaded_at": "2026-10-24T10:38:54.411633+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "798fb23185ed7a0853fef4096c571c93e477184269333bdf88ad41af4839f001",
+      "story_beats": [
+        {
+          "speech": "We cannot risk a complete engine failure over a minor pressure spike in sector four."
+        },
+        {
+          "speech": "Waiting will drain our reserve power completely before we even reach the outer asteroid belt."
+        },
+        {
+          "speech": "Let us run the secondary diagnostic sequence to isolate the exact pressure fault safely."
+        },
+        {
+          "speech": "The valve is secured at last, and our main engines are running at optimal stability."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-24T10:28:10.403148+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_preflight_at": "2026-10-24T10:36:54.703944+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T10:28:10.472709+00:00",
+    "at": "2026-10-24T10:38:54.790016+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-24T09:50:10.178955+00:00",
   "reserved": {
@@ -2314,13 +2340,36 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-ecb1cea03ea48b9a46e0": {
+      "at": "2026-10-24T10:38:51.502339+00:00",
+      "title": "The Thruster Valve Dispute on Vessel Orion",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "798fb23185ed7a0853fef4096c571c93e477184269333bdf88ad41af4839f001",
+      "story_beats": [
+        {
+          "speech": "We cannot risk a complete engine failure over a minor pressure spike in sector four."
+        },
+        {
+          "speech": "Waiting will drain our reserve power completely before we even reach the outer asteroid belt."
+        },
+        {
+          "speech": "Let us run the secondary diagnostic sequence to isolate the exact pressure fault safely."
+        },
+        {
+          "speech": "The valve is secured at last, and our main engines are running at optimal stability."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T10:28:10.472650+00:00",
-    "publication_outcome": "skipped",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-24T10:38:54.789955+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -2328,36 +2377,72 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T10:28:10.472699+00:00",
+    "at": "2026-10-24T10:38:54.790006+00:00",
     "history_file_present": true,
-    "publication_outcome": "skipped",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-24T10:24:25.203282+00:00",
+    "at": "2026-10-24T10:37:11.619770+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-f2e205a51c3761591095",
-    "video_url": "https://www.youtube.com/watch?v=vl06hc5Fw8A",
+    "content_id": "rayvan-gemini-ecb1cea03ea48b9a46e0",
+    "video_url": "https://www.youtube.com/watch?v=bjWomHn1K2E",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T10:28:10.472606+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-24T10:38:54.789706+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "skipped",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T10:28:10.472647+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "counters": {},
+    "at": "2026-10-24T10:38:54.789950+00:00",
+    "collection_status": "collected",
+    "publish_step": "success",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 258,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3
+        },
+        "seen": 6,
+        "total": 331
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 331,
+        "fingerprint": 0,
+        "id": 6,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 325,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 325,
+        "remaining": 258
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 2,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {
+          "NameError": 1
+        },
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }

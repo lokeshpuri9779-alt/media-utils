@@ -1065,6 +1065,17 @@
         "reviewed_at": "2026-10-24T10:24:52.594448+00:00",
         "review_model": "gemini-3.1-flash-lite"
       }
+    },
+    {
+      "content_id": "rayvan-gemini-008b77b9852bc65ae39b",
+      "story_sha256": "cdd92bc49d2ad4e8548e970a480316e2ac5ca2c8ad35757bf16eb1d74095f9fd",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise, setting, and thematic elements (deep-sea guardians, bioluminescent trenches, and rhythmic pulses) are highly derivative of multiple recently published titles in the provided list, specifically 'The Coral Scribe and the Echoing Trench', 'The Octopus Cartographer and the Choral Trench', and 'The Nautilus Warden and the Sinking Chord'.",
+        "The narrative structure follows a repetitive pattern of 'guardian restores environment via sacrifice' seen in several other provided examples like 'The Rescuer of Borealis Ridge' and 'The Caretaker's Last Choice', lacking sufficient unique causal mechanisms to distinguish it from the existing corpus."
+      ],
+      "record": null
     }
   ]
 }
