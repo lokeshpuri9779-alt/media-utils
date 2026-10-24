@@ -1120,7 +1120,8 @@ def render_frame(plan,t,genre,total):
         from astra_v2.visual_artifact_backdrop import choose_scene
         if choose_scene(s) is None and genre == 'space':
             pack_shot = dict(s, story_environment='space')
-        im = apply_pack_background(im, pack_shot, visual_identity, video_format='shorts')
+        im = apply_pack_background(im, pack_shot, visual_identity,
+                                   video_format='shorts', shot_number=index + 1)
     # Opt-in visual artifact backdrops: keep publisher default unchanged until
     # full-render quality validation approves the new visual treatment.
     if genre == 'fiction' and os.getenv('ASTRA_VISUAL_ARTIFACT_BACKDROPS', '0') == '1':
@@ -1769,6 +1770,10 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
         from astra_v2.fiction_visual_guard import validate_fiction_frames
         creative_report['fiction_visual_guard']=validate_fiction_frames(
             plan,render_frame,duration)
+    # Begin only after preview/preflight sampling: receipts must originate from
+    # the actual FFmpeg frame stream, not QA previews or test renders.
+    from astra_v2.asset_usage_audit import begin as begin_asset_audit
+    begin_asset_audit(ch, len(plan))
     out=Path(out);out.parent.mkdir(parents=True,exist_ok=True)
     # Keep intermediate audio and encoder logs in RAM when enough tmpfs
     # capacity is available; preserve disk fallback for reliability.
@@ -1830,8 +1835,11 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
                  else 0)
     micro_count=(math.ceil(actual_duration / NEWS_MICRO_SCENE_SECONDS) if genre=='current' else len(plan))
     visual_rate=(micro_count / actual_duration) if actual_duration > 0 else 0.0
+    from astra_v2.asset_usage_audit import finish as finish_asset_audit
+    pack_receipt = finish_asset_audit(out, renderer=VERSION, expected_shots=len(plan))
     report={'cover_path':str(cover_path) if cover_candidates else None,'renderer':VERSION,'genre':genre,'frames':count,'duration':round(actual_duration,3),
             'resolution':[W,H],'fps':FPS,'audio':audio_info,'creative_quality':creative_report,'layer_qa':layer_report,
+            'asset_pack_usage':pack_receipt,
             'visual_edit':{
                 'narration_beat_count':len(plan),
                 'pillow_duo_scenes':duo_count,

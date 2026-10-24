@@ -61,7 +61,7 @@ def choose_scene(shot):
 
 @lru_cache(maxsize=16)
 def _cached_pack_background(root_path, scene, identity, video_format, size):
-    """Validate and decode once per shot, not for every rendered video frame."""
+    """Return both decoded art and its verified provenance, cached per shot."""
     from astra_v2.quality_asset_selector import select_assets
     from PIL import ImageOps
     root = Path(root_path)
@@ -71,39 +71,41 @@ def _cached_pack_background(root_path, scene, identity, video_format, size):
         return None
     seed = int.from_bytes(hashlib.sha256(str(identity).encode()).digest()[:4], "big")
     chosen = candidates[seed % len(candidates)]
-    if os.getenv("ASTRA_ASSET_PACK_AUDIT", "0") == "1":
-        import json
-        print("ASTRA_PACK_BACKGROUND_SELECTED=" + json.dumps({
-            "asset_id": chosen.get("id"),
-            "path": chosen["path"],
-            "scene": scene,
-            "format": video_format,
-            "identity_sha256": hashlib.sha256(str(identity).encode()).hexdigest()[:12],
-        }, sort_keys=True), flush=True)
     with Image.open(root / chosen["path"]) as source:
-        return ImageOps.fit(source.convert("RGB"), size, method=Image.Resampling.LANCZOS)
+        backdrop = ImageOps.fit(source.convert("RGB"), size,
+                                method=Image.Resampling.LANCZOS)
+    return backdrop, chosen
 
 
-def apply_pack_background(image, shot, identity, *, root=None, video_format="shorts"):
-    """Composite a validated local background with bounded per-shot caching."""
+def apply_pack_background(image, shot, identity, *, root=None, video_format="shorts",
+                          shot_number=None):
+    """Apply a validated background and audit what the compositor really used."""
+    from astra_v2.asset_usage_audit import observe
     if video_format not in ("shorts", "long"):
         raise ValueError("invalid video format")
     analysis = analyze_story_scene(shot)
     scene = analysis["scene"]
     if analysis["needs_background"]:
+        observe(shot_number, analysis, "scene_unresolved", identity)
         return image
     configured = root or os.getenv("ASTRA_ASSET_PACK_ROOT")
     if not configured:
+        observe(shot_number, analysis, "root_unconfigured", identity)
         return image
     root_path = str(Path(configured).resolve())
     if not (Path(root_path) / "art" / "manifest.json").is_file():
+        observe(shot_number, analysis, "manifest_missing", identity)
         return image
-    backdrop = _cached_pack_background(root_path, scene, str(identity),
+    selection = _cached_pack_background(root_path, scene, str(identity),
                                         video_format, image.size)
-    if backdrop is None:
+    if selection is None:
+        observe(shot_number, analysis, "no_matching_background", identity)
         return image
-    return Image.blend(image.convert("RGB"), backdrop, 0.65)
-
+    backdrop, chosen = selection
+    rendered = Image.blend(image.convert("RGB"), backdrop, 0.65)
+    observe(shot_number, analysis, "selected", identity,
+            asset=chosen, before=image, after=rendered)
+    return rendered
 
 def apply_backdrop(image, shot, identity):
     if image.mode != "RGB" or image.size != (1080,1920):

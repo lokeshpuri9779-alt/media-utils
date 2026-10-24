@@ -50,6 +50,7 @@ def select_assets(root, *, kind, tags=(), style=None, min_size=128, limit=5,
         ranked.append((score,entry["id"],entry))
     ranked.sort(key=lambda row:(-row[0],row[1]))
     return [{"id":entry["id"],"path":entry["path"],"score":score,
+             "sha256":verified[entry["id"]]["sha256"],
              "license":entry["license"],"source":entry["source"],
              "artist":entry["artist"]} for score,_,entry in ranked[:max(0,limit)]]
 

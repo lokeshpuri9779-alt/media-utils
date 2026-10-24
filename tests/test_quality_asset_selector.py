@@ -12,8 +12,9 @@ class QualityAssetSelectorTests(unittest.TestCase):
         self.root=Path(self.temp.name)
         (self.root/"art").mkdir()
         assets=[]
-        for name,license,kind in [("fox","CC0-1.0","character"),("owl","CC-BY-4.0","character"),("tree","CC0-1.0","background")]:
-            Image.new("RGBA",(256,256),(90,100,150,0)).save(self.root/"art"/(name+".png"))
+        for index,(name,license,kind) in enumerate([("fox","CC0-1.0","character"),("owl","CC-BY-4.0","character"),("tree","CC0-1.0","background")]):
+            # The pack validator correctly rejects duplicate PNG bytes.
+            Image.new("RGBA",(256,256),(90+index,100,150,0)).save(self.root/"art"/(name+".png"))
             assets.append({"id":name,"path":"art/"+name+".png","kind":kind,
                            "license":license,"source":"https://example.org/"+name,
                            "artist":"Test artist","tags":[name],"style":"storybook"})

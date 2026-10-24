@@ -375,6 +375,7 @@ jobs:
           ASTRA_ASSET_PACK_ENABLED: '1'
           ASTRA_ASSET_PACK_ROOT: runtime-artifacts/verified-pack
           ASTRA_ASSET_PACK_AUDIT: '1'
+          ASTRA_ASSET_AUDIT_DIR: runtime-health/asset-usage
         shell: bash
         run: |
           set -euo pipefail
@@ -674,6 +675,15 @@ jobs:
           )
           git worktree remove --force "$WORKTREE"
 
+      - name: Publish actual asset usage evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-asset-usage-${{ github.run_id }}
+          path: runtime-health/asset-usage/*.json
+          retention-days: 14
+          if-no-files-found: ignore
+
       - name: Publish machine-readable report
         if: always()
         uses: actions/upload-artifact@v4
@@ -700,6 +710,19 @@ jobs:
               summary.write('**Verified public video: ' + ('YES' if verified else 'NO') + '**\n\n')
               if not verified:
                   summary.write('A green GitHub Actions check is NOT proof of a new upload.\n\n')
+              receipts = sorted(Path('runtime-health/asset-usage').glob('*.json'))
+              summary.write('**Audited render receipts: ' + str(len(receipts)) + '**\n\n')
+              for receipt in receipts:
+                  evidence = json.loads(receipt.read_text(encoding='utf-8'))
+                  summary.write('- asset evidence for ' + str(evidence.get('content_id'))
+                                + ': ' + str(evidence.get('composited_shots', 0))
+                                + '/' + str(evidence.get('shot_count', 0))
+                                + ' shots composited; original MP4 SHA-256: '
+                                + str(evidence.get('video_sha256')) + '\n')
+              if not receipts:
+                  summary.write('No candidate render usage evidence produced; '
+                                'asset restoration does not prove asset usage.\n')
+              summary.write('\n')
               for key in ('outcome','video_url','reason','character_memory','character_memory_error','queue_error_type','attempts_today','confirmed_today','pending','blocked_until'):
                   summary.write(f'- {key}: {data.get(key)}\n')
               snapshot=Path('character-continuity.json')
