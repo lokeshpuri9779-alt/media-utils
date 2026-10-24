@@ -1,0 +1,67 @@
+name: ASTRA Offline Asset Render Proof
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  render-proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      ASTRA_ASSET_PACK_ENABLED: '1'
+      ASTRA_ASSET_PACK_ROOT: runtime-artifacts/verified-pack
+      ASTRA_ASSET_PACK_AUDIT: '1'
+      ASTRA_ASSET_AUDIT_DIR: runtime-health/asset-usage
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install free offline renderer dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg fonts-dejavu-core
+          python -m pip install --upgrade pip
+          python -m pip install pillow numpy
+      - name: Download verified visual pack
+        uses: actions/download-artifact@v4
+        with:
+          name: astra-original-visual-pack
+          run-id: 39960540392
+          github-token: ${{ github.token }}
+          path: runtime-artifacts/download
+      - name: Validate 3200 source assets
+        run: python -m tools.astra_restore_visual_pack runtime-artifacts/download/astra-visual-pack.zip runtime-artifacts/verified-pack --expected 3200
+      - name: Render offline sample without publishing
+        run: |
+          mkdir -p runtime-health/asset-usage runtime-artifacts/offline-proof
+          python studio_renderer.py --preview runtime-artifacts/offline-proof/sample.mp4
+      - name: Validate encoded video and audit receipt
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import subprocess
+          video = Path('runtime-artifacts/offline-proof/sample.mp4')
+          assert video.is_file() and video.stat().st_size > 0, 'Missing encoded MP4'
+          subprocess.run(['ffprobe','-v','error','-show_entries','format=duration','-of','default=noprint_wrappers=1',str(video)],check=True)
+          receipts = list(Path('runtime-health/asset-usage').glob('*.json'))
+          assert receipts, 'No asset usage receipt from actual render'
+          for path in receipts:
+              data=json.loads(path.read_text())
+              print('ASSET_USAGE_RECEIPT',path,json.dumps(data,sort_keys=True)[:4000])
+          PY
+      - name: Upload offline video and proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-offline-render-proof-${{ github.run_id }}
+          path: |
+            runtime-artifacts/offline-proof/
+            runtime-health/asset-usage/
+          retention-days: 7
+          if-no-files-found: warn
