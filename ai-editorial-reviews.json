@@ -1660,6 +1660,22 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-00b2d07f914055de2c69",
+      "story_sha256": "77606491175577d22c358f0ad424aea56a68fe2e1554e967503c87e8cc4703da",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-00b2d07f914055de2c69",
+        "story_sha256": "77606491175577d22c358f0ad424aea56a68fe2e1554e967503c87e8cc4703da",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the premises, characters, or settings of the provided recent publication examples.; The causal mechanism is clear: the protagonist faces a binary choice between mission success (data) and human life (rescue), with a logical resolution.; The content is suitable for a general audience and does not contain unsafe, misleading, or policy-violating material.; The narrative structure is coherent and follows a standard dramatic arc appropriate for short-form storytelling.",
+        "reviewed_at": "2026-10-24T22:38:07.019852+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }

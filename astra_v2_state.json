@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-25",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 17,
-  "confirmed_today": 16,
-  "last_attempt_at": "2026-10-24T22:27:20.586740+00:00",
+  "attempts": 18,
+  "confirmed_today": 17,
+  "last_attempt_at": "2026-10-24T22:39:14.990316+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1810,16 +1810,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "meEbvivTgHs": {
-      "content_id": "rayvan-forge-9597014499522a3b",
+    },
+    "rayvan-forge-9597014499522a3b": {
+      "video_id": "meEbvivTgHs",
+      "confirmed_at": "2026-10-24T22:36:55.481217+00:00",
       "title": "The Lynx and the Snowglass Markers",
-      "day": "2026-10-25",
-      "uploaded_at": "2026-10-24T22:27:22.280779+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-24T22:27:22.280779+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "d2b78f7cd5557e9854c1852e8265017b73df1cfe9bde250bb2a93d0b136c578e",
       "story_beats": [
@@ -1836,16 +1834,43 @@
           "speech": "She followed the reflections to the shelter and helped its keeper raise taller markers for future travelers."
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "8-cQaBvuEIw": {
+      "content_id": "rayvan-forge-9cae721e0174be45",
+      "title": "The Rabbit and the Paper Telescope",
+      "day": "2026-10-25",
+      "uploaded_at": "2026-10-24T22:39:16.600484+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "c78ac8004ac665f2de854e62df2b1dcc80d2c6f4fc5a259af4609a088f33fbb5",
+      "story_beats": [
+        {
+          "speech": "A rabbit arrived at the observatory and found thick clouds hiding the annual meteor shower."
+        },
+        {
+          "speech": "She built a cardboard telescope but discovered it could only magnify raindrops on the window."
+        },
+        {
+          "speech": "She noticed the clouds opening above the distant hill and used the pond reflection to locate a clear viewpoint."
+        },
+        {
+          "speech": "She led her friends uphill and they counted bright meteors together before the clouds returned."
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-24T22:25:38.380437+00:00",
+  "last_preflight_at": "2026-10-24T22:36:54.960434+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T22:27:22.695174+00:00",
+    "at": "2026-10-24T22:39:17.034012+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -4673,10 +4698,33 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-9cae721e0174be45": {
+      "at": "2026-10-24T22:39:14.990299+00:00",
+      "title": "The Rabbit and the Paper Telescope",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "c78ac8004ac665f2de854e62df2b1dcc80d2c6f4fc5a259af4609a088f33fbb5",
+      "story_beats": [
+        {
+          "speech": "A rabbit arrived at the observatory and found thick clouds hiding the annual meteor shower."
+        },
+        {
+          "speech": "She built a cardboard telescope but discovered it could only magnify raindrops on the window."
+        },
+        {
+          "speech": "She noticed the clouds opening above the distant hill and used the pond reflection to locate a clear viewpoint."
+        },
+        {
+          "speech": "She led her friends uphill and they counted bright meteors together before the clouds returned."
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T22:27:22.695118+00:00",
+    "at": "2026-10-24T22:39:17.033929+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -4687,21 +4735,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T22:27:22.695164+00:00",
+    "at": "2026-10-24T22:39:17.033997+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-24T22:26:13.535838+00:00",
+    "at": "2026-10-24T22:37:21.662668+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-9597014499522a3b",
-    "video_url": "https://www.youtube.com/watch?v=meEbvivTgHs",
+    "content_id": "rayvan-forge-9cae721e0174be45",
+    "video_url": "https://www.youtube.com/watch?v=8-cQaBvuEIw",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T22:27:22.694794+00:00",
+    "at": "2026-10-24T22:39:17.033538+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -4713,18 +4761,18 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T22:27:22.695113+00:00",
+    "at": "2026-10-24T22:39:17.033921+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 242,
+        "eligible": 241,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3
         },
         "seen": 6,
-        "total": 315
+        "total": 314
       },
       "ASTRA_STORY_HISTORY_FILTER": {
         "before": 315,
@@ -4743,12 +4791,12 @@
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
         "approved": 1,
-        "considered": 74,
+        "considered": 75,
         "duration_rejected": 0,
         "not_ready": 0,
         "policy_rejected": {},
         "render_exception": {
-          "CreativeReject": 73
+          "CreativeReject": 74
         },
         "render_qa_rejected": 0
       }
