@@ -59,7 +59,7 @@ jobs:
           path: runtime-artifacts/download
       - name: Validate local visual assets before Studio preview
         run: python -m tools.astra_restore_visual_pack runtime-artifacts/download/astra-visual-pack.zip runtime-artifacts/verified-pack --expected 3200
-      - name: Verify non-space backgrounds in actual compositor
+      - name: Verify all scenes in Shorts and landscape compositor
         run: |
           python - <<'PY'
           from PIL import Image
@@ -67,14 +67,21 @@ jobs:
           import os
           root = os.environ['ASTRA_ASSET_PACK_ROOT']
           from astra_v2.visual_artifact_library import SCENES
+          passed = 0
           for scene in SCENES:
               shot = {'visual': scene}
               assert choose_scene(shot) == scene, scene
-              base = Image.new('RGB', (540, 960), (11, 22, 33))
-              result = apply_pack_background(base, shot, 'qa-' + scene,
-                                             root=root, video_format='shorts')
-              assert result.tobytes() != base.tobytes(), scene + ': unchanged pixels'
-              print('ASTRA_NONSPACE_BACKGROUND_OK=' + scene, flush=True)
+              for video_format, size in (('shorts', (540, 960)), ('long', (960, 540))):
+                  base = Image.new('RGB', size, (11, 22, 33))
+                  result = apply_pack_background(base, shot, 'qa-' + scene,
+                                                 root=root, video_format=video_format)
+                  assert result.tobytes() != base.tobytes(), (
+                      scene + '/' + video_format + ': unchanged pixels'
+                  )
+                  passed += 1
+                  print('ASTRA_BACKGROUND_FORMAT_OK=' + scene + '/' + video_format, flush=True)
+          print('ASTRA_BACKGROUND_FORMAT_TOTAL=' + str(passed), flush=True)
+          assert passed == len(SCENES) * 2
           PY
       - name: Render real Studio narration preview (no YouTube upload)
         run: |
