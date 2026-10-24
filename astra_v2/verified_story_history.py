@@ -20,7 +20,8 @@ def record_confirmed(history_path, content_id, publication):
         return False
     entry = {"content_id": content_id, "video_id": publication["video_id"],
              "confirmed_at": publication["confirmed_at"]}
-    for key in ("title", "plot_key", "plot_fingerprint", "story_beats"):
+    for key in ("title", "plot_key", "plot_fingerprint", "story_beats",
+                "central_conflict", "decisive_choice", "resolution"):
         if publication.get(key):
             entry[key] = publication[key]
     records.append(entry)
