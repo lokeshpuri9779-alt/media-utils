@@ -4,6 +4,9 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/studio-full-preview-qa.yml'
+      - 'studio_renderer.py'
+      - 'astra_v2/visual_artifact_backdrop.py'
+      - 'astra_v2/quality_asset_selector.py'
   workflow_dispatch:
   pull_request:
     paths:
