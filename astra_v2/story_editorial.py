@@ -2,6 +2,7 @@
 
 This module never authorizes publication or changes production_ready.
 """
+from astra_v2.causal_premise_review import causal_premise_match
 from astra_v2.story_planning import planning_issues
 from astra_v2.shorts_novelty import is_near_duplicate
 from astra_v2.publication_quality import publication_rejection
@@ -125,6 +126,11 @@ def triage(stories, history=(), use_semantic_index=False):
                 "publication_blocked": bool(publication_rejection(story))}
         if "narrative_duplicate" in issues:
             item["novelty_evidence"] = semantic_evidence
+        # Independent editorial triage only: explicit causal repetition needs
+        # review, but this advisory signal cannot approve or publish a story.
+        causal_evidence = causal_premise_match(story, seen)
+        if causal_evidence is not None:
+            item["causal_repeat_review"] = causal_evidence
         # Requiring a human/model editorial decision is a workflow state,
         # not itself a structural defect. Keep the proposal publication-blocked,
         # but make structurally sound drafts visible in the review queue.
