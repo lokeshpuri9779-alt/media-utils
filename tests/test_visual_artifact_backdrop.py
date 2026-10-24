@@ -22,6 +22,25 @@ class ArtifactBackdropTests(unittest.TestCase):
         self.assertEqual(analyze_story_scene({"visual": ["forest"],
                                                "speech": "museum"})["scene"], "museum")
 
+    def test_scene_asset_plan_reports_missing_without_pack(self):
+        from astra_v2.visual_artifact_backdrop import plan_scene_assets
+        result = plan_scene_assets({"visual": "rainforest"}, root="/nonexistent/astra-pack")
+        self.assertEqual(result["scene"], "forest")
+        self.assertEqual(result["video_format"], "shorts")
+        self.assertIsNone(result["background"])
+        self.assertTrue(result["needs_generation"])
+
+    def test_scene_asset_plan_unknown_scene_fails_closed(self):
+        from astra_v2.visual_artifact_backdrop import plan_scene_assets
+        result = plan_scene_assets({"visual": "unfamiliar imaginary location"})
+        self.assertIsNone(result["scene"])
+        self.assertTrue(result["needs_generation"])
+
+    def test_scene_asset_plan_rejects_invalid_format(self):
+        from astra_v2.visual_artifact_backdrop import plan_scene_assets
+        with self.assertRaises(ValueError):
+            plan_scene_assets({"visual": "forest"}, video_format="square")
+
     def test_known_story_locations(self):
         for term, expected in (
             ("The lighthouse keeper", "lighthouse"),
