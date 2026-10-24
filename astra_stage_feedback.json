@@ -2,39 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-18T01:24:37.264921+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 97.78,
-          "captions": 98.65,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-forge-45d117afccb689d3"
-    },
-    {
-      "at": "2026-10-18T01:24:37.274714+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 21.833,
-        "renderer": "studio-7.3.0"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-forge-45d117afccb689d3"
-    },
-    {
       "at": "2026-10-18T03:06:15.845523+00:00",
       "stage": "quality",
       "element": "candidate_selection",
@@ -7656,6 +7623,39 @@
       },
       "proposed_action": "",
       "candidate_id": "rayvan-gemini-3d97b02eb30dfa6126bd"
+    },
+    {
+      "at": "2026-10-24T02:24:21.573965+00:00",
+      "stage": "quality",
+      "element": "creative_director",
+      "outcome": "pass",
+      "evidence": {
+        "scores": {
+          "hook": 94.0,
+          "retention": 92.0,
+          "visual": 100.0,
+          "pacing": 100.0,
+          "audio": 96.13,
+          "captions": 97.36,
+          "novelty": 100.0,
+          "coherence": 92.0,
+          "technical": 100.0
+        }
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-gemini-5805198ebcacdec11204"
+    },
+    {
+      "at": "2026-10-24T02:24:21.579699+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "pass",
+      "evidence": {
+        "duration": 23.7,
+        "renderer": "studio-7.3.0"
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-gemini-5805198ebcacdec11204"
     }
   ],
   "stage_counts": {
