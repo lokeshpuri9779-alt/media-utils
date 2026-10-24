@@ -3,7 +3,7 @@
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 46,
-  "confirmed_today": 45,
+  "confirmed_today": 46,
   "last_attempt_at": "2026-10-24T13:37:46.312568+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -870,16 +870,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "ICV-YvMTask": {
-      "content_id": "rayvan-gemini-2b0aef58c900b1a49c88",
+    },
+    "rayvan-gemini-2b0aef58c900b1a49c88": {
+      "video_id": "ICV-YvMTask",
+      "confirmed_at": "2026-10-24T13:39:59.225496+00:00",
       "title": "The Caretaker's Secret Flower",
-      "day": "2026-10-24",
-      "uploaded_at": "2026-10-24T13:37:47.855164+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-24T13:37:47.855164+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "08f7f3e94b496097ced5ba75b5d2fc74371266f3089aa8bf6fc0528b38589712",
       "story_beats": [
@@ -896,31 +894,31 @@
           "speech": "My systems are shutting down now, but the seed remains alive in the dark, waiting for a better tomorrow."
         }
       ],
-      "renderer": "studio-7.3.1"
+      "genre": "fiction"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-24T13:36:08.174302+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-24T13:39:58.808377+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T13:37:48.268638+00:00",
+    "at": "2026-10-24T13:39:59.285139+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-24T09:50:10.178955+00:00",
   "reserved": {
@@ -2870,10 +2868,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T13:37:48.268559+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-24T13:39:59.285090+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -2881,9 +2879,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T13:37:48.268623+00:00",
+    "at": "2026-10-24T13:39:59.285131+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -2895,58 +2893,22 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T13:37:48.268291+00:00",
-    "preflight_due": "true",
+    "at": "2026-10-24T13:39:59.285053+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "outcome": "published",
+    "reason": "min_interval",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T13:37:48.268553+00:00",
-    "collection_status": "collected",
-    "publish_step": "success",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 269,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3
-        },
-        "seen": 6,
-        "total": 342
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 342,
-        "fingerprint": 0,
-        "id": 6,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 336,
-        "title": 0,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 336,
-        "remaining": 269
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "considered": 6,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {
-          "CreativeReject": 5
-        },
-        "render_qa_rejected": 0
-      }
-    },
+    "at": "2026-10-24T13:39:59.285087+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
