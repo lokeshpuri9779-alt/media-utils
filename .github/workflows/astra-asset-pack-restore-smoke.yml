@@ -73,3 +73,37 @@ jobs:
             runtime-artifacts/long-smoke.png
           retention-days: 7
           if-no-files-found: error
+
+      - name: Render offline Shorts and long-video MP4 proofs from restored assets
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          from astra_v2.visual_artifact_backdrop import apply_pack_background
+          root=Path('runtime-artifacts/verified-pack').resolve()
+          for fmt,size in [('shorts',(540,960)),('long',(1280,720))]:
+              frames=Path('runtime-artifacts')/(fmt+'-frames')
+              frames.mkdir(parents=True,exist_ok=True)
+              for index,scene in enumerate(('forest','harbor','mountain','garden')):
+                  image=Image.new('RGB',size,(0,0,0))
+                  result=apply_pack_background(image,{'story_environment':scene},
+                      f'pack-proof-{fmt}-{index}',root=root,video_format=fmt)
+                  if result.getbbox() is None:
+                      raise ValueError('empty artwork frame')
+                  for repeat in range(4):
+                      result.save(frames/f'{index*4+repeat:04d}.png')
+          PY
+          for fmt in shorts long; do
+            ffmpeg -hide_banner -loglevel error -y -framerate 8 -i "runtime-artifacts/${fmt}-frames/%04d.png" -c:v libx264 -pix_fmt yuv420p -movflags +faststart "runtime-artifacts/${fmt}-asset-proof.mp4"
+            test -s "runtime-artifacts/${fmt}-asset-proof.mp4"
+            ffprobe -v error -select_streams v:0 -show_entries stream=width,height,nb_frames -of default=noprint_wrappers=1 "runtime-artifacts/${fmt}-asset-proof.mp4"
+          done
+      - name: Upload restored asset video proofs
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-restored-pack-video-proofs
+          path: |
+            runtime-artifacts/shorts-asset-proof.mp4
+            runtime-artifacts/long-asset-proof.mp4
+          retention-days: 7
+          if-no-files-found: error
