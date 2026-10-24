@@ -1408,6 +1408,19 @@
         "review_model": "gemini-3.1-flash-lite"
       },
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-a048ec404a60c61a83ea",
+      "story_sha256": "8e72c6f212deee460ab3fea18c2445cbe88e3ba3dc2960dfde7f60283847f1fb",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story relies on a repetitive premise and character archetype ('Elias' in an arctic/glacier setting) that mirrors multiple previously provided examples, specifically 'The Rescuer of Iron-Peak and the Fractured Ascent' and 'The Alpine Rescuer and the Summit Flare'.",
+        "The causal mechanism (choosing between a mission objective and a rescue) is functionally identical to the conflict resolution patterns found in the provided dataset, lacking sufficient narrative differentiation to be considered original.",
+        "The character 'Elias' appears as a recurring protagonist across multiple distinct story titles in the provided history, suggesting a lack of creative variety in the author's output."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
