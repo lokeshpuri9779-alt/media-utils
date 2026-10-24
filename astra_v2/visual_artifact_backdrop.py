@@ -36,14 +36,28 @@ SCENE_TERMS = {
     "museum": ("museum", "exhibition hall", "art gallery"),
 }
 
-def choose_scene(shot):
-    # Authored setting wins over incidental location words in narration.
+def analyze_story_scene(shot):
+    """One deterministic, side-effect-free scene decision for the full pipeline.
+
+    Explicit storyboard locations outrank narration. Unknown environments stay
+    unresolved rather than silently selecting unrelated artwork.
+    """
     for key in ("story_environment", "visual_prompt", "visual", "speech", "headline"):
-        text = str(shot.get(key) or "").lower()
+        value = shot.get(key)
+        if not isinstance(value, str) or not value.strip():
+            continue
+        text = value.lower()
         for scene in SCENES:
-            if any(re.search(r"\b"+re.escape(term)+r"\b",text) for term in SCENE_TERMS[scene]):
-                return scene
-    return None
+            for term in SCENE_TERMS[scene]:
+                if re.search(r"\b" + re.escape(term) + r"\b", text):
+                    return {"scene": scene, "source_field": key,
+                            "matched_term": term, "needs_background": False}
+    return {"scene": None, "source_field": None,
+            "matched_term": None, "needs_background": True}
+
+
+def choose_scene(shot):
+    return analyze_story_scene(shot)["scene"]
 
 @lru_cache(maxsize=16)
 def _cached_pack_background(root_path, scene, identity, video_format, size):
