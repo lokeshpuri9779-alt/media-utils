@@ -27,6 +27,7 @@ jobs:
     env:
       ORT_DISABLE_TELEMETRY: '1'
       ASTRA_ASSET_PACK_ENABLED: '1'
+      ASTRA_ASSET_PACK_AUDIT: '1'
       ASTRA_ASSET_PACK_ROOT: runtime-artifacts/verified-pack
     steps:
       - uses: actions/checkout@v4
