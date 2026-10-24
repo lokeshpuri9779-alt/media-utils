@@ -1376,6 +1376,22 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-ca3c2713e3c89943e962",
+      "story_sha256": "0ae442bf3e902c64a941d0488b860a8052ec7ec94b1f3a2434bd2aa76867407d",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-ca3c2713e3c89943e962",
+        "story_sha256": "0ae442bf3e902c64a941d0488b860a8052ec7ec94b1f3a2434bd2aa76867407d",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the premises, characters, or specific causal mechanisms of the provided publication history.; The narrative demonstrates clear causal coherence, with a logical progression from the conflict (debt) to the decisive choice (sacrifice) and the resulting resolution.; The content is suitable for a general audience and contains no unsafe, misleading, or policy-violating material.; The story structure is well-defined and adheres to the requested format.",
+        "reviewed_at": "2026-10-24T17:32:24.529322+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }

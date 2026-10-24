@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 61,
-  "confirmed_today": 60,
-  "last_attempt_at": "2026-10-24T17:16:46.290849+00:00",
+  "attempts": 62,
+  "confirmed_today": 61,
+  "last_attempt_at": "2026-10-24T17:33:41.863829+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1251,16 +1251,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "EdGZl0ciefo": {
-      "content_id": "rayvan-forge-c700b865946a10d9",
+    },
+    "rayvan-forge-c700b865946a10d9": {
+      "video_id": "EdGZl0ciefo",
+      "confirmed_at": "2026-10-24T17:31:41.639295+00:00",
       "title": "The Owl and the Dim Lighthouse",
-      "day": "2026-10-24",
-      "uploaded_at": "2026-10-24T17:16:47.867762+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-24T17:16:47.867762+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "60431a46ba7245ea8876a76dfd6f7bd738ec05a433d57dbb49b7dee50b5b952f",
       "story_beats": [
@@ -1277,16 +1275,46 @@
           "speech": "The keeper realigned the prism, checked the beam from shore, and guided the waiting boats home."
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "7QwiX9FbzC8": {
+      "content_id": "rayvan-gemini-ca3c2713e3c89943e962",
+      "title": "The Weaver of Woven Wheat and the Drought Debt",
+      "day": "2026-10-24",
+      "uploaded_at": "2026-10-24T17:33:43.453988+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "40668d8781bd0a720e9b30f8173b21376e29a123455531df9eeb7c2afd76f06c",
+      "story_beats": [
+        {
+          "speech": "Elara, these numbers do not lie; if the harvest tax is not paid by sunset, they will take my home away."
+        },
+        {
+          "speech": "I have spent years weaving wheat into this secret floorboard cache, waiting for the winter to feed my aging father and me."
+        },
+        {
+          "speech": "Take this grain to the council, Silas, but know that this is every single scrap we had for the coming winter months ahead."
+        },
+        {
+          "speech": "We have nothing left but our hands, yet we are still here together, and that must be enough to carry us through today."
+        }
+      ],
+      "central_conflict": "A severe drought threatens to bankrupt Silas, leading to his exile if his taxes remain unpaid.",
+      "decisive_choice": "Elara chooses to surrender her family's secret cache of reserve grain to cover Silas's tax obligations.",
+      "resolution": "Silas remains in the village as a free man, and the pair begin a difficult winter working together to survive.",
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-24T17:14:55.603421+00:00",
+  "last_preflight_at": "2026-10-24T17:31:41.288118+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T17:16:48.303143+00:00",
+    "at": "2026-10-24T17:33:43.883584+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -3599,10 +3627,36 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-ca3c2713e3c89943e962": {
+      "at": "2026-10-24T17:33:41.863814+00:00",
+      "title": "The Weaver of Woven Wheat and the Drought Debt",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "40668d8781bd0a720e9b30f8173b21376e29a123455531df9eeb7c2afd76f06c",
+      "story_beats": [
+        {
+          "speech": "Elara, these numbers do not lie; if the harvest tax is not paid by sunset, they will take my home away."
+        },
+        {
+          "speech": "I have spent years weaving wheat into this secret floorboard cache, waiting for the winter to feed my aging father and me."
+        },
+        {
+          "speech": "Take this grain to the council, Silas, but know that this is every single scrap we had for the coming winter months ahead."
+        },
+        {
+          "speech": "We have nothing left but our hands, yet we are still here together, and that must be enough to carry us through today."
+        }
+      ],
+      "central_conflict": "A severe drought threatens to bankrupt Silas, leading to his exile if his taxes remain unpaid.",
+      "decisive_choice": "Elara chooses to surrender her family's secret cache of reserve grain to cover Silas's tax obligations.",
+      "resolution": "Silas remains in the village as a free man, and the pair begin a difficult winter working together to survive.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T17:16:48.303038+00:00",
+    "at": "2026-10-24T17:33:43.883504+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -3613,21 +3667,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T17:16:48.303127+00:00",
+    "at": "2026-10-24T17:33:43.883570+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-24T17:15:17.379240+00:00",
+    "at": "2026-10-24T17:32:01.680114+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-c700b865946a10d9",
-    "video_url": "https://www.youtube.com/watch?v=EdGZl0ciefo",
+    "content_id": "rayvan-gemini-ca3c2713e3c89943e962",
+    "video_url": "https://www.youtube.com/watch?v=7QwiX9FbzC8",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T17:16:48.302708+00:00",
+    "at": "2026-10-24T17:33:43.883200+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -3639,18 +3693,18 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T17:16:48.303031+00:00",
+    "at": "2026-10-24T17:33:43.883496+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 255,
+        "eligible": 254,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3
         },
         "seen": 6,
-        "total": 328
+        "total": 327
       },
       "ASTRA_STORY_HISTORY_FILTER": {
         "before": 328,
@@ -3669,13 +3723,11 @@
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
         "approved": 1,
-        "considered": 48,
+        "considered": 1,
         "duration_rejected": 0,
         "not_ready": 0,
         "policy_rejected": {},
-        "render_exception": {
-          "CreativeReject": 47
-        },
+        "render_exception": {},
         "render_qa_rejected": 0
       }
     },
