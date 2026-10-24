@@ -20,6 +20,20 @@ class AssetPackCompositorTests(unittest.TestCase):
         self.assertIsNone(decision["scene"])
         self.assertTrue(decision["needs_background"])
 
+    def test_title_location_used_only_when_shot_has_no_location(self):
+        decision = analyze_story_scene({"story_title": "The Midnight Railway Courier",
+                                        "speech": "The envelope was missing."})
+        self.assertEqual(decision["scene"], "railway")
+        self.assertEqual(decision["source_field"], "story_title")
+        priority = analyze_story_scene({"story_title": "The Midnight Railway Courier",
+                                        "visual": "A forest clearing"})
+        self.assertEqual(priority["scene"], "forest")
+
+    def test_abstract_title_remains_unresolved(self):
+        decision = analyze_story_scene({"story_title": "The Rabbit and the Missing Finale",
+                                        "speech": "The rabbit waited."})
+        self.assertIsNone(decision["scene"])
+
     def test_short_and_long_keep_output_dimensions(self):
         with tempfile.TemporaryDirectory() as temp:
             root=Path(temp)
