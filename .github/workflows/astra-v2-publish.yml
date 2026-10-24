@@ -711,18 +711,18 @@ jobs:
               if not verified:
                   summary.write('A green GitHub Actions check is NOT proof of a new upload.\n\n')
               receipts = sorted(Path('runtime-health/asset-usage').glob('*.json'))
-              summary.write('**Audited render receipts: ' + str(len(receipts)) + '**\\n\\n')
+              summary.write('**Audited render receipts: ' + str(len(receipts)) + '**\n\n')
               for receipt in receipts:
                   evidence = json.loads(receipt.read_text(encoding='utf-8'))
                   summary.write('- asset evidence for ' + str(evidence.get('content_id'))
                                 + ': ' + str(evidence.get('composited_shots', 0))
                                 + '/' + str(evidence.get('shot_count', 0))
                                 + ' shots composited; original MP4 SHA-256: '
-                                + str(evidence.get('video_sha256')) + '\\n')
+                                + str(evidence.get('video_sha256')) + '\n')
               if not receipts:
                   summary.write('No candidate render usage evidence produced; '
-                                'asset restoration does not prove asset usage.\\n')
-              summary.write('\\n')
+                                'asset restoration does not prove asset usage.\n')
+              summary.write('\n')
               for key in ('outcome','video_url','reason','character_memory','character_memory_error','queue_error_type','attempts_today','confirmed_today','pending','blocked_until'):
                   summary.write(f'- {key}: {data.get(key)}\n')
               snapshot=Path('character-continuity.json')
