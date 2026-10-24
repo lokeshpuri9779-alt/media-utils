@@ -3,7 +3,7 @@
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 39,
-  "confirmed_today": 38,
+  "confirmed_today": 39,
   "last_attempt_at": "2026-10-24T11:24:40.384082+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -683,16 +683,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "q33-OOFnNZk": {
-      "content_id": "rayvan-gemini-e2f09c4ee8925da721b9",
+    },
+    "rayvan-gemini-e2f09c4ee8925da721b9": {
+      "video_id": "q33-OOFnNZk",
+      "confirmed_at": "2026-10-24T11:25:30.716530+00:00",
       "title": "The Fossilized Chorus of the Obsidian Basin",
-      "day": "2026-10-24",
-      "uploaded_at": "2026-10-24T11:24:42.270062+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-24T11:24:42.270062+00:00",
+      "renderer": "studio-7.3.0",
       "plot_key": "",
       "plot_fingerprint": "551c6709dc9f7f2e4a889f8c85b5ad3996dbe461850948dc7019697174c84ce3",
       "story_beats": [
@@ -709,31 +707,31 @@
           "speech": "Rest well in the shadows, for I will ensure that your ancient song remains a secret shared only by the deep, dark earth below."
         }
       ],
-      "renderer": "studio-7.3.0"
+      "genre": "fiction"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-24T11:22:24.101897+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-24T11:25:30.408974+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T11:24:42.745353+00:00",
+    "at": "2026-10-24T11:25:30.800825+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-24T09:50:10.178955+00:00",
   "reserved": {
@@ -2510,10 +2508,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T11:24:42.745273+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-24T11:25:30.800743+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -2521,9 +2519,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T11:24:42.745339+00:00",
+    "at": "2026-10-24T11:25:30.800811+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -2535,56 +2533,22 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T11:24:42.744977+00:00",
-    "preflight_due": "true",
+    "at": "2026-10-24T11:25:30.800688+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "outcome": "published",
+    "reason": "min_interval",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T11:24:42.745258+00:00",
-    "collection_status": "collected",
-    "publish_step": "success",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 259,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3
-        },
-        "seen": 6,
-        "total": 332
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 333,
-        "fingerprint": 0,
-        "id": 6,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 327,
-        "title": 0,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 327,
-        "remaining": 260
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "considered": 1,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 0
-      }
-    },
+    "at": "2026-10-24T11:25:30.800737+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
