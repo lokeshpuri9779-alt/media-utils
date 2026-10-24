@@ -36,6 +36,12 @@ def choose_action(shot):
             return name
     return "idle"
 
+def _ease_progress(t, duration=1.2):
+    """Clamped cubic ease-in/out for one-shot displacement."""
+    u = min(1.0, max(0.0, t / duration))
+    return u * u * (3.0 - 2.0 * u)
+
+
 def offset(action,t,scale=1.0):
     if not math.isfinite(t) or not math.isfinite(scale) or scale<0:
         raise ValueError("invalid motion parameters")
@@ -43,9 +49,9 @@ def offset(action,t,scale=1.0):
     if action=="open":
         return 0,round(4*math.sin(t*2)*scale)
     if action=="push":
-        return round(36*min(1,max(0,t)/1.2)*scale),0
+        return round(36*_ease_progress(t)*scale),0
     if action=="pull":
-        return round(-36*min(1,max(0,t)/1.2)*scale),0
+        return round(-36*_ease_progress(t)*scale),0
     if action=="point":
         return round(7*math.sin(t*1.5)*scale),round(-8*scale)
     if action=="hug":
@@ -63,7 +69,7 @@ def offset(action,t,scale=1.0):
     if action=="wave":
         return round(17*math.sin(phase*1.8)*scale),round(-14*abs(math.sin(phase*1.8))*scale)
     if action=="catch":
-        return round(13*math.sin(t*2.7)*scale),round(-19*min(1,max(0,t)/.9)*scale)
+        return round(13*math.sin(t*2.7)*scale),round(-19*_ease_progress(t,.9)*scale)
     if action=="chase":
         return round(68*math.sin(t*3.4)*scale),round(21*abs(math.sin(phase*3.1))*scale)
     if action=="swim":
