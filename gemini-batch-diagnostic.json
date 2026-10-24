@@ -1,16 +1,21 @@
 {
-  "observed_at": "2026-10-24T00:57:46.369721+00:00",
-  "generated": 16,
+  "observed_at": "2026-10-24T06:48:17.971834+00:00",
+  "generated": 17,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 16,
+      "index": 17,
       "reason": "provider_http_429"
     }
   ],
-  "reviewed": 16,
-  "approved": 4,
+  "reviewed": 17,
+  "approved": 13,
   "review_issues": [
+    "The candidate story premise and narrative arc about a machine breaking its core programming to save a human child closely mirrors existing recently published titles such as Unit 44's Final Protocol and Unit 9 and the Last Seedling of Sector Four.",
+    "The candidate story title 'The Canopy Keepers and the Amber Root' is extremely similar to the recently published premise 'The Canopy Watchers and the Amber Root', violating originality guidelines regarding recently published premises and titles.",
+    "The causal mechanism of an automated caretaker overriding its directives lacks sufficient narrative depth to ensure complete originality against recent sci-fi trope patterns.",
+    "The title 'The Rescuer of Summit Ridge and the Last Snow Fall' heavily mimics recently published premises and titles in the comparison history, such as 'The Rescuer of Peak Serenity' and 'The Last Seedling of Sector Four'.",
+    "ai_editorial_rejection",
     "review_failed:HTTP_429",
     "review_provider:rate_limited"
   ],
