@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 31,
-  "confirmed_today": 30,
-  "last_attempt_at": "2026-10-24T09:24:40.286445+00:00",
+  "attempts": 32,
+  "confirmed_today": 31,
+  "last_attempt_at": "2026-10-24T09:37:09.028863+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -551,30 +551,38 @@
       "format": "short",
       "uploaded_at": "2026-10-24T09:06:39.461929+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-gemini-3e6d6e82c234379efba7": {
+      "video_id": "xz4UZc3vAaQ",
+      "confirmed_at": "2026-10-24T09:34:53.651430+00:00",
+      "title": "Kaelen and Mira: The Verdant Spire Rescue",
+      "format": "short",
+      "uploaded_at": "2026-10-24T09:24:42.094445+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "xz4UZc3vAaQ": {
-      "content_id": "rayvan-gemini-3e6d6e82c234379efba7",
-      "title": "Kaelen and Mira: The Verdant Spire Rescue",
+    "V0UZlddPkIg": {
+      "content_id": "rayvan-gemini-d4d39a5ea4d618cd2716",
+      "title": "The Sand-Walker and the Whispering Oasis of Kaelith",
       "day": "2026-10-24",
-      "uploaded_at": "2026-10-24T09:24:42.094445+00:00",
+      "uploaded_at": "2026-10-24T09:37:10.614109+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "f0581b6577774e77e5c54a402c57fbd7124879e2fc25301818e1639ac6ed1b7e",
+      "plot_fingerprint": "934738f4b8cec11b9c23365d1da9bca026986eba3926f9abfa4be2813c13c377",
       "story_beats": [
         {
-          "speech": "Listen Kaelen, the storm knocked the nest from the high branch, we must climb quickly to reach the frightened fledgling before dusk falls."
+          "speech": "My sensors indicate a massive subsurface biological signature beneath these dunes, yet the heat readings suggest nothing could possibly survive here."
         },
         {
-          "speech": "Hold the vine tight Mira, I will use this sturdy root to pull myself upward and secure our climbing harness to the giant trunk."
+          "speech": "If I retract the stabilizer bolts on this metallic hatch, the entire shifting dune surface might collapse into a deep, hidden cavern below."
         },
         {
-          "speech": "The winch is jammed by these thick brambles, we must sync our efforts to rotate the gear simultaneously to reach the higher canopy level."
+          "speech": "I never expected to find a lush forest thriving inside this hollow planet, feeding off the heat of the core's deep magnetic pulse."
         },
         {
-          "speech": "We finally reached the branch and tucked the fledgling back inside, together we ensure the survival of the forest denizens for another season."
+          "speech": "By documenting this sanctuary, I ensure its protection, proving that life finds a way to flourish even in the darkest, deepest places."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -582,11 +590,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-24T09:22:54.300558+00:00",
+  "last_preflight_at": "2026-10-24T09:34:53.315470+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T09:24:42.519021+00:00",
+    "at": "2026-10-24T09:37:11.065065+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2191,10 +2199,33 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-d4d39a5ea4d618cd2716": {
+      "at": "2026-10-24T09:37:09.028851+00:00",
+      "title": "The Sand-Walker and the Whispering Oasis of Kaelith",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "934738f4b8cec11b9c23365d1da9bca026986eba3926f9abfa4be2813c13c377",
+      "story_beats": [
+        {
+          "speech": "My sensors indicate a massive subsurface biological signature beneath these dunes, yet the heat readings suggest nothing could possibly survive here."
+        },
+        {
+          "speech": "If I retract the stabilizer bolts on this metallic hatch, the entire shifting dune surface might collapse into a deep, hidden cavern below."
+        },
+        {
+          "speech": "I never expected to find a lush forest thriving inside this hollow planet, feeding off the heat of the core's deep magnetic pulse."
+        },
+        {
+          "speech": "By documenting this sanctuary, I ensure its protection, proving that life finds a way to flourish even in the darkest, deepest places."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T09:24:42.518922+00:00",
+    "at": "2026-10-24T09:37:11.065018+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -2205,21 +2236,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T09:24:42.518983+00:00",
+    "at": "2026-10-24T09:37:11.065058+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-24T09:23:14.525497+00:00",
+    "at": "2026-10-24T09:35:17.521024+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-3e6d6e82c234379efba7",
-    "video_url": "https://www.youtube.com/watch?v=xz4UZc3vAaQ",
+    "content_id": "rayvan-gemini-d4d39a5ea4d618cd2716",
+    "video_url": "https://www.youtube.com/watch?v=V0UZlddPkIg",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T09:24:42.518656+00:00",
+    "at": "2026-10-24T09:37:11.064827+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -2231,7 +2262,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T09:24:42.518915+00:00",
+    "at": "2026-10-24T09:37:11.065014+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
