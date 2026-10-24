@@ -299,6 +299,10 @@ class PreflightTests(unittest.TestCase):
                 state["pending"]["video123"] = {
                     "content_id": "original-story-one", "title": "The Last Lightkeeper",
                     "format": "short", "genre": "fiction", "day": state["day"],
+                    "plot_key": "lightkeeper-rescue",
+                    "plot_fingerprint": "fingerprint-lightkeeper-001",
+                    "story_beats": ["signal", "rescue", "safe_return"],
+                    "renderer": "studio-7.3.0",
                 }
                 youtube = Mock()
                 youtube.status.return_value = {
@@ -308,6 +312,12 @@ class PreflightTests(unittest.TestCase):
                 self.assertEqual((confirmed, pending, review), (["video123"], [], []))
                 self.assertEqual(state["confirmed_today"], 1)
                 self.assertIn("original-story-one", state["published"])
+                published = state["published"]["original-story-one"]
+                self.assertEqual(published["plot_key"], "lightkeeper-rescue")
+                self.assertEqual(published["plot_fingerprint"], "fingerprint-lightkeeper-001")
+                self.assertEqual(published["story_beats"], ["signal", "rescue", "safe_return"])
+                self.assertEqual(published["renderer"], "studio-7.3.0")
+                self.assertEqual(published["genre"], "fiction")
                 saved = read_json("performance.json")
                 self.assertTrue(saved["strategy"]["retain"])
                 self.assertEqual(saved["videos"]["video123"]["visibility"], "public")
