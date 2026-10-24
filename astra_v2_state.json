@@ -3,7 +3,7 @@
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 17,
-  "confirmed_today": 16,
+  "confirmed_today": 17,
   "last_attempt_at": "2026-10-24T03:19:28.505506+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -439,57 +439,38 @@
       "format": "short",
       "uploaded_at": "2026-10-24T02:52:57.313489+00:00",
       "renderer": "studio-7.3.0"
-    }
-  },
-  "pending": {
-    "lIAbiRa5vTY": {
-      "content_id": "rayvan-gemini-3a07781c920239ab512e",
+    },
+    "rayvan-gemini-3a07781c920239ab512e": {
+      "video_id": "lIAbiRa5vTY",
+      "confirmed_at": "2026-10-24T03:22:45.589953+00:00",
       "title": "The Coral Scribe and the Echoing Trench",
-      "day": "2026-10-24",
-      "uploaded_at": "2026-10-24T03:19:30.074052+00:00",
-      "genre": "fiction",
       "format": "short",
-      "plot_key": "",
-      "plot_fingerprint": "4446927a5d696aa552d4cd365312c5842e1ab665cf6ebc000b47ecfd297c12e5",
-      "story_beats": [
-        {
-          "speech": "Listen closely, young fry, for the melody of the western reefs has completely vanished into the deep abyss."
-        },
-        {
-          "speech": "We must follow these fading acoustic pulses down the sheer limestone cliffs before the entire ocean loses its voice."
-        },
-        {
-          "speech": "It is not destroying our songs at all; it is recording every lost harmony to save them from eternal oblivion."
-        },
-        {
-          "speech": "By feeding our newest rhythm into the pillar, we wake the dormant reef and let the whole ocean sing again."
-        }
-      ],
+      "uploaded_at": "2026-10-24T03:19:30.074052+00:00",
       "renderer": "studio-7.3.0"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-24T03:17:39.568658+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-24T03:22:45.193166+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T03:19:30.407316+00:00",
+    "at": "2026-10-24T03:22:45.655887+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-23T21:48:24.435872+00:00",
   "reserved": {
@@ -1760,10 +1741,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T03:19:30.407240+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-24T03:22:45.655840+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -1771,9 +1752,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T03:19:30.407301+00:00",
+    "at": "2026-10-24T03:22:45.655878+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -1785,58 +1766,22 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T03:19:30.406971+00:00",
-    "preflight_due": "true",
+    "at": "2026-10-24T03:22:45.655790+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "outcome": "published",
+    "reason": "min_interval",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T03:19:30.407234+00:00",
-    "collection_status": "collected",
-    "publish_step": "success",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 254,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3
-        },
-        "seen": 6,
-        "total": 327
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 327,
-        "fingerprint": 0,
-        "id": 6,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 321,
-        "title": 0,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 321,
-        "remaining": 254
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "considered": 2,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {
-          "NameError": 1
-        },
-        "render_qa_rejected": 0
-      }
-    },
+    "at": "2026-10-24T03:22:45.655837+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
