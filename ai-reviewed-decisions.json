@@ -1,66 +1,12 @@
 {
   "reviews": [
     {
-      "content_id": "rayvan-gemini-3d97b02eb30dfa6126bd",
-      "story_sha256": "fca09536d6b50bc0ad564876bcd4471ed12bb2a7ceaf2deafc253dc123dcb8f0",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is completely original and does not duplicate any premises, characters, or plots from the provided comparison history.; The narrative demonstrates strong causal coherence, moving logically from discovery to dilemma, action, and resolution.; There are no copyright, trademark, safety, or policy risks present.; The content is suitable for general audiences and ready for production.",
-      "reviewed_at": "2026-10-23T06:51:14.216231+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
-      "content_id": "rayvan-gemini-5805198ebcacdec11204",
-      "story_sha256": "18c02bf90fac9209424cfb2569bbe7766ad962b9a9da1b9ceb4da9fb819ba675",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is original and does not duplicate the premises or plots of recently published examples.; Causal coherence is clear, showing how the team solves a lack of traditional ingredients using river silt and pneumatic launchers.; No copyright, trademark, safety, or YouTube policy violations were found.; The content is suitable for general audiences.",
-      "reviewed_at": "2026-10-23T06:51:15.007644+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
       "content_id": "rayvan-gemini-4b361405d8312def324e",
       "story_sha256": "0cadce863e6e74a953f1b74acc0a81d75d1b1ba93c74070022d4d0864fc96f09",
       "decision": "approve",
       "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
       "review_notes": "The story is original, self-contained, and presents a clear, coherent narrative arc.; There are no trademark, copyright, safety, or policy violations present in the text.; The plot and premise do not excessively duplicate recent publication examples provided in the comparison history.",
       "reviewed_at": "2026-10-23T06:51:15.767576+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
-      "content_id": "rayvan-gemini-3a07781c920239ab512e",
-      "story_sha256": "15549eae5307ba0c22267b616a0ccaa0e7b1e2060d9ffef5487d25a8d9e02126",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is fully original with no overlapping premises or endings compared to the provided publication history.; Causal coherence is strong, moving logically from the problem of missing melodies to the discovery and restoration of the singing monolith.; Content is clean, safe, suitable for all audiences, and presents no YouTube policy risks.",
-      "reviewed_at": "2026-10-23T06:51:16.591700+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
-      "content_id": "rayvan-gemini-64d27ea52d6d8643b2f0",
-      "story_sha256": "aa1e2e4549107507681c654f899824b1d79977a2c26aa0f93bbeac82cdfe70c5",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is original and does not closely mirror any recently published premises or titles in the provided history.; Causal coherence is maintained throughout the narrative beats.; Content is clean, safe, and suitable for general audiences without policy violations.",
-      "reviewed_at": "2026-10-23T06:51:17.384039+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
-      "content_id": "rayvan-gemini-3b5dda925a1bc1ea677c",
-      "story_sha256": "481b3667c0b9eccaf181d1ac4f01b2bd82c0be74d04a93007074edd2b3555895",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is fully original, clear, and demonstrates good causal coherence.; There are no copyright or trademark violations.; Content is safe, appropriate for general audiences, and complies with all policy guidelines.; No significant conceptual overlap with recent publication examples.",
-      "reviewed_at": "2026-10-23T06:51:18.103492+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
-      "content_id": "rayvan-gemini-e905d4c492e568ab1db2",
-      "story_sha256": "7156d7e8b1bdfdded9765c542bf309c12127bbadadbbb49d68aa8492a566f5d5",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is original and does not duplicate recently published premises in the provided history.; Causal coherence is clear, showing a direct logical progression from a storm warning to making a difficult choice, executing it, and reaching safety.; No copyright or trademark violations detected.; Content is safe, suitable for all audiences, and follows YouTube safety guidelines.",
-      "reviewed_at": "2026-10-23T06:51:20.717555+00:00",
       "review_model": "gemini-3.5-flash-lite"
     },
     {
@@ -277,6 +223,123 @@
       "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
       "review_notes": "The story is original and does not duplicate premises, characters, or endings from the provided comparison history.; Causal coherence is sound, following a clear progression from invention demonstration to mechanical failure, chaos, and a successful creative pivot.; The content is entirely safe, suitable for all audiences, and presents no copyright or trademark concerns.; There are no YouTube policy violations present in the text or structured beat data.",
       "reviewed_at": "2026-10-24T00:57:43.837321+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-db352bf961fd81823637",
+      "story_sha256": "bfa28292cbbd7897c453a65f79373997ffb97df7a9d63b3659b259bb4a31f1b7",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and does not duplicate any premises, characters, or plots from the provided comparison history.; Causal coherence is maintained through clear logical beats from the dry sluice dilemma to the cooperative resolution.; The content is safe, suitable for a general audience, and carries no copyright or YouTube policy risks.",
+      "reviewed_at": "2026-10-24T06:47:55.926013+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-80605de33480a22e81d2",
+      "story_sha256": "691850c2b1f94b6a885ec7f158424f94fc59cb9e0389c629c80fa75eb04383fe",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is coherent, original, and fits all platform and safety guidelines.; No copyright or trademark infringements detected.; The causal mechanism and narrative progression are clear and suitable for the intended audience.",
+      "reviewed_at": "2026-10-24T06:47:56.753839+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-12e3050392459322c4a4",
+      "story_sha256": "59f84a345cd44e652c50ade55e31466b2a81092d3b97c9e41d1443501db70103",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is coherent, original, and properly structured.; No copyright or trademark violations detected against the provided history or general standards.; Content is safe, appropriate for general audiences, and adheres to YouTube policies.",
+      "reviewed_at": "2026-10-24T06:47:59.268902+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-34974ca9582121555239",
+      "story_sha256": "fa288e1780392b23558be8c262f841e3ea27bb4e6c68a3777f8f5c05fe221345",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story exhibits clear causal coherence, following a logical progression from the initial directive challenge to the sacrifice mechanism and resolution.; There are no copyright or trademark violations, and the content is safe and suitable for general audiences.; While featuring a robotic caretaker theme, it is distinct enough from the provided comparison history to avoid direct duplication of recently published premises.",
+      "reviewed_at": "2026-10-24T06:48:00.136004+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-33a7505191fb4e0b7178",
+      "story_sha256": "483ada61f675ca96f9eceeb1da070f0e61b8b2b7c01378fc45615e14bec9494e",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is causally coherent and clear.; It does not infringe on any known copyrights or trademarks.; There are no unsafe, misleading, or policy-violating elements for YouTube.; The narrative and premise are sufficiently distinct from the provided comparison list.",
+      "reviewed_at": "2026-10-24T06:48:01.764356+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-50dd3f1d3c3cf777ce60",
+      "story_sha256": "c15e8cd71a4e330cdee46899508be49beafff7efff891cadf813bc1518cfeb58",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and does not repeat recently published premises, characters, or settings from the comparison history.; The narrative exhibits strong causal coherence, clear character interactions, and a logical progression from conflict to resolution.; The content is safe, appropriate for a general audience, and complies with all standard YouTube policy guidelines without containing misleading elements.",
+      "reviewed_at": "2026-10-24T06:48:02.785625+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-8ebf162a8ea86e1873f2",
+      "story_sha256": "9df27705873d2794c2f950a8bc44d1e97a56c519b081cbaa75f6a11988b51a42",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and does not duplicate any premises, characters, settings, or endings from the provided comparison history.; Causal coherence is maintained logically from the initial drilling operation to the emergency distress call, the tough decision to abandon the drill, and the successful rescue.; The content is clear, well-structured, and appropriate for general audiences without any unsafe or misleading elements.; There are no apparent copyright, trademark, or YouTube policy risks present in the text.",
+      "reviewed_at": "2026-10-24T06:48:06.898907+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-9000f8ecb59431ffc050",
+      "story_sha256": "376b713ac81d57cd35855b811aca4ab06bff58307e09bceca9ba33f152bdb8a8",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is fully coherent with a clear emotional arc and well-defined narrative beats.; No copyright or trademark concerns identified; it is an original fictional work.; Content is safe, family-friendly, and contains no misleading elements or policy violations.; The premise, characters, and settings do not infringe upon or excessively repeat the provided recently published comparison titles.",
+      "reviewed_at": "2026-10-24T06:48:08.030562+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-d07e12d27687c6f5afd4",
+      "story_sha256": "22285d017bbe2294eab95f6143b0623ae5e75c5ba717c744d3c0af04c363abb3",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is coherent, original, and well-structured with clear causal progression.; No copyright or trademark infringements detected.; Content is safe, suitable for a general audience, and complies with YouTube guidelines.; Does not substantially duplicate recently published premises in the provided comparison list.",
+      "reviewed_at": "2026-10-24T06:48:09.202296+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-608cd643ed6f0a0efe6c",
+      "story_sha256": "7221ecc1e1af3c05e80787d649c8decbfd58bff2027e54c54ec545509eaf3004",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is coherent, original, and properly structured.; It avoids overlap with the provided comparison history of recently published premises.; No trademark, copyright, safety, or policy issues detected for general audiences and YouTube suitability.",
+      "reviewed_at": "2026-10-24T06:48:10.588404+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-93b06c8328a10c0dedea",
+      "story_sha256": "067147fd3099efeff05b903131481665b6800eca4db43dbc54abdcf841b1f623",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story maintains causal coherence with a clear dilemma, logical choice, and resolution.; No copyright or trademark violations detected.; Content is safe, suitable for a general audience, and adheres to platform policies.; No significant overlap with the provided comparison history of recently published premises.",
+      "reviewed_at": "2026-10-24T06:48:11.529029+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-1bca63178af66803c99d",
+      "story_sha256": "dac2bc125e6ab58f1f1ec9d677ce7177acc348f6dfbe98ddab54d73ce0780358",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original, coherent, and clear.; No copyright or trademark concerns detected.; Content is safe, appropriate for general audiences, and complies with YouTube policies.; While it shares a glaciological theme with 'The Glaciologist of Whiteout Ridge' and 'The Glaciologist's Dilemma at Crevasse Seven', the specific plot, characters, and narrative structure (focusing on an emergency rescue and sacrificing ice cores) are distinct and do not repeat premises or endings.",
+      "reviewed_at": "2026-10-24T06:48:13.524531+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-984fe7dac7f33c6fc7d9",
+      "story_sha256": "9567bf7b832f38ea157e9b8501a6b0cd584d3b2acb006ef78a6bb9a68b00e393",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and does not duplicate any premises, characters, settings, or causal mechanisms from the provided comparison history.; Causal coherence is strong: the blockage of the acoustic relay explains the cessation of the deep-sea currents, and freeing it restores them.; The content is safe, appropriate for all audiences, and presents no YouTube policy risks.; The narrative is clear, concise, and well-structured for short-form production.",
+      "reviewed_at": "2026-10-24T06:48:14.797114+00:00",
       "review_model": "gemini-3.5-flash-lite"
     }
   ]
