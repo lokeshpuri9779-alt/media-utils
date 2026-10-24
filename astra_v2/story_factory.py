@@ -65,6 +65,11 @@ def candidate_at(index):
     return {"plot_signature":plot_signature,"candidate_id":hashlib.sha256(identity.encode()).hexdigest()[:24],
             "slot":index,"premise_key":key,"title":title,
             "setting":setting,"context":context[0],"characters":[a,b],
+            # Authored mechanism fields are deterministic source annotations,
+            # not inferred claims that the candidate is independently original.
+            "central_conflict":problem,
+            "decisive_choice":clue,
+            "resolution":resolution,
             "story_beats":beats,"kind":"unreviewed_causal_draft",
             "production_ready":False,"editorial_review_required":True,
             "generation_method":"deterministic_composition",
