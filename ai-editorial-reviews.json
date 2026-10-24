@@ -1563,6 +1563,18 @@
         "review_model": "gemini-3.1-flash-lite"
       },
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-18ec735f0c5a1de6df2e",
+      "story_sha256": "3a664ae5a9a773b0b40bfabc857f216174c9fd3b1fa19519b87ab3e45c521e85",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story is derivative of the previously published 'The Crab Archivist and the Calcified Echo'. Both stories feature an 'archivist' character in a reef setting, a central conflict involving a structural threat to the reef (calcification/seismic pulse), and a decisive choice where the protagonist must sacrifice a unique, calcified object (shell/fossil) to wedge into a mechanical/mineral vent to stabilize the environment.",
+        "The causal mechanism and resolution are nearly identical to the provided example, failing the originality requirement for this assessment."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
