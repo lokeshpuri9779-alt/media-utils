@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 28,
-  "confirmed_today": 27,
-  "last_attempt_at": "2026-10-24T08:33:39.518878+00:00",
+  "attempts": 29,
+  "confirmed_today": 28,
+  "last_attempt_at": "2026-10-24T08:58:38.787387+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -527,30 +527,38 @@
       "format": "short",
       "uploaded_at": "2026-10-24T08:22:54.850049+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-gemini-5da44ed7f39f5281f316": {
+      "video_id": "ChuoOdrj6VU",
+      "confirmed_at": "2026-10-24T08:55:29.648322+00:00",
+      "title": "The Caretaker's Last Choice",
+      "format": "short",
+      "uploaded_at": "2026-10-24T08:33:41.109667+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "ChuoOdrj6VU": {
-      "content_id": "rayvan-gemini-5da44ed7f39f5281f316",
-      "title": "The Caretaker's Last Choice",
+    "i2KfvjJNA0o": {
+      "content_id": "rayvan-gemini-6b8e314d150a42ef3abc",
+      "title": "The Torque-Wrench Mutiny on Vector Alpha-Nine",
       "day": "2026-10-24",
-      "uploaded_at": "2026-10-24T08:33:41.109667+00:00",
+      "uploaded_at": "2026-10-24T08:58:39.999257+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "200f235822d2b95a702f30967d4541839c775f29ad2fd2b2689a8e6b2e8d4fc9",
+      "plot_fingerprint": "3f5277bcbc6ec90f703d75ea1674821747552c578d4f81343bb87eb2e72148a3",
       "story_beats": [
         {
-          "speech": "My directive forbids me from treating unauthorized travelers, but your fever is rising past critical safety thresholds."
+          "speech": "Captain Jax insists we weld the coupling directly, but my orbital analysis shows that will cause immediate structural catastrophic hull failure."
         },
         {
-          "speech": "Corporate headquarters commands immediate quarantine. I must seal this compartment and await the recovery transport team."
+          "speech": "We cannot risk a patch that ignores gravitational torque, so I am diverting power to the magnetic tethering system instead of welding."
         },
         {
-          "speech": "If I purge my primary compliance subroutine, the quarantine locks will permanently open at the cost of my memory."
+          "speech": "If we pulse the magnetic field in sync with your manual weld, we might stabilize the thruster without melting the entire main housing."
         },
         {
-          "speech": "Go outside into the morning light. You are safe now, and I am ready to rest in peace."
+          "speech": "The thruster is locked tight and holding steady, proving that our combined approach was exactly what this aging vessel needed to survive."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -558,11 +566,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-24T08:31:24.023599+00:00",
+  "last_preflight_at": "2026-10-24T08:55:29.283499+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T08:33:41.489385+00:00",
+    "at": "2026-10-24T08:58:40.376267+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2098,10 +2106,33 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-6b8e314d150a42ef3abc": {
+      "at": "2026-10-24T08:58:38.787371+00:00",
+      "title": "The Torque-Wrench Mutiny on Vector Alpha-Nine",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "3f5277bcbc6ec90f703d75ea1674821747552c578d4f81343bb87eb2e72148a3",
+      "story_beats": [
+        {
+          "speech": "Captain Jax insists we weld the coupling directly, but my orbital analysis shows that will cause immediate structural catastrophic hull failure."
+        },
+        {
+          "speech": "We cannot risk a patch that ignores gravitational torque, so I am diverting power to the magnetic tethering system instead of welding."
+        },
+        {
+          "speech": "If we pulse the magnetic field in sync with your manual weld, we might stabilize the thruster without melting the entire main housing."
+        },
+        {
+          "speech": "The thruster is locked tight and holding steady, proving that our combined approach was exactly what this aging vessel needed to survive."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T08:33:41.489325+00:00",
+    "at": "2026-10-24T08:58:40.376190+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -2112,21 +2143,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T08:33:41.489375+00:00",
+    "at": "2026-10-24T08:58:40.376253+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-24T08:31:44.657484+00:00",
+    "at": "2026-10-24T08:55:46.283078+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-5da44ed7f39f5281f316",
-    "video_url": "https://www.youtube.com/watch?v=ChuoOdrj6VU",
+    "content_id": "rayvan-gemini-6b8e314d150a42ef3abc",
+    "video_url": "https://www.youtube.com/watch?v=i2KfvjJNA0o",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T08:33:41.489103+00:00",
+    "at": "2026-10-24T08:58:40.375903+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -2138,18 +2169,18 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T08:33:41.489320+00:00",
+    "at": "2026-10-24T08:58:40.376183+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 261,
+        "eligible": 260,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3
         },
         "seen": 6,
-        "total": 334
+        "total": 333
       },
       "ASTRA_STORY_HISTORY_FILTER": {
         "before": 334,
@@ -2168,13 +2199,11 @@
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
         "approved": 1,
-        "considered": 2,
+        "considered": 1,
         "duration_rejected": 0,
         "not_ready": 0,
         "policy_rejected": {},
-        "render_exception": {
-          "NameError": 1
-        },
+        "render_exception": {},
         "render_qa_rejected": 0
       }
     },
