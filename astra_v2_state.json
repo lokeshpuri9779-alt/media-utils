@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 22,
+  "attempts": 23,
   "confirmed_today": 22,
-  "last_attempt_at": "2026-10-24T06:02:47.474660+00:00",
+  "last_attempt_at": "2026-10-24T06:37:52.577340+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -489,28 +489,55 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-24T06:06:35.230761+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "p3Gg6oO804g": {
+      "content_id": "rayvan-gemini-c2d598d7f885b1cec634",
+      "title": "The Frostbound Pilot and the Crag of Silence",
+      "day": "2026-10-24",
+      "uploaded_at": "2026-10-24T06:37:54.994031+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "64ff2e1bdb4cc14f43fd0244d56d95a69d05949211d408c4f6481b2500a7868d",
+      "story_beats": [
+        {
+          "speech": "The emergency beacon is pinging from the North Ridge, but our atmospheric sensors are failing in this brutal, blinding arctic storm."
+        },
+        {
+          "speech": "If I divert power to the rescue thrusters, we will lose the primary data stream, but Kaelen will surely freeze to death tonight."
+        },
+        {
+          "speech": "The ship is shuddering violently against the gale, but we are descending toward the crag to reach the landing site right now."
+        },
+        {
+          "speech": "I have lost all the geologic telemetry, but Kaelen is breathing and safe, which is the only victory that matters to me."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-24T06:36:23.800124+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T06:06:35.678625+00:00",
+    "at": "2026-10-24T06:37:55.396047+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-23T21:48:24.435872+00:00",
   "reserved": {
@@ -1893,13 +1920,36 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-c2d598d7f885b1cec634": {
+      "at": "2026-10-24T06:37:52.577319+00:00",
+      "title": "The Frostbound Pilot and the Crag of Silence",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "64ff2e1bdb4cc14f43fd0244d56d95a69d05949211d408c4f6481b2500a7868d",
+      "story_beats": [
+        {
+          "speech": "The emergency beacon is pinging from the North Ridge, but our atmospheric sensors are failing in this brutal, blinding arctic storm."
+        },
+        {
+          "speech": "If I divert power to the rescue thrusters, we will lose the primary data stream, but Kaelen will surely freeze to death tonight."
+        },
+        {
+          "speech": "The ship is shuddering violently against the gale, but we are descending toward the crag to reach the landing site right now."
+        },
+        {
+          "speech": "I have lost all the geologic telemetry, but Kaelen is breathing and safe, which is the only victory that matters to me."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T06:06:35.678547+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-24T06:37:55.396002+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -1907,36 +1957,70 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T06:06:35.678611+00:00",
+    "at": "2026-10-24T06:37:55.396039+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-24T06:00:56.722227+00:00",
+    "at": "2026-10-24T06:36:44.144895+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-8e368a3d9286a48e63d8",
-    "video_url": "https://www.youtube.com/watch?v=J4HnPcJnemk",
+    "content_id": "rayvan-gemini-c2d598d7f885b1cec634",
+    "video_url": "https://www.youtube.com/watch?v=p3Gg6oO804g",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T06:06:35.678471+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-24T06:37:55.395831+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T06:06:35.678541+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "counters": {},
+    "at": "2026-10-24T06:37:55.395999+00:00",
+    "collection_status": "collected",
+    "publish_step": "success",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 251,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3
+        },
+        "seen": 6,
+        "total": 324
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 325,
+        "fingerprint": 0,
+        "id": 6,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 319,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 319,
+        "remaining": 252
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 1,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
