@@ -3,7 +3,7 @@
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 44,
-  "confirmed_today": 43,
+  "confirmed_today": 44,
   "last_attempt_at": "2026-10-24T13:02:52.252996+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -817,16 +817,14 @@
       "decisive_choice": "Elias decides to trust an unauthorized utility drone to enter the restricted tunnel network.",
       "resolution": "The drone successfully retrieves the manifest and Elias returns it just as the whistle blows.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "pxynr6GGG1Y": {
-      "content_id": "rayvan-gemini-9394f3fa8b626d624fc5",
+    },
+    "rayvan-gemini-9394f3fa8b626d624fc5": {
+      "video_id": "pxynr6GGG1Y",
+      "confirmed_at": "2026-10-24T13:05:54.317939+00:00",
       "title": "Kaelen and the Singing Crystals of the Sun-Scorched Basin",
-      "day": "2026-10-24",
-      "uploaded_at": "2026-10-24T13:02:54.427802+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-24T13:02:54.427802+00:00",
+      "renderer": "studio-7.3.0",
       "plot_key": "",
       "plot_fingerprint": "ee5a78f173c5aa7bc2d2fffd18eb1cd1f583a597c6019f053f9f5d5c533add9e",
       "story_beats": [
@@ -846,31 +844,31 @@
       "central_conflict": "Conflict between immediate financial desperation and long-term ecological preservation of a hidden singing crystal cave.",
       "decisive_choice": "Kaelen chooses to seal the entrance to prevent mining instead of selling the crystal nodes for a fortune.",
       "resolution": "Kaelen earns enough by recording and trading the crystal harmonies without harming their physical integrity, saving his home and the basin.",
-      "renderer": "studio-7.3.0"
+      "genre": "fiction"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-24T13:00:38.695461+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-24T13:05:53.899627+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T13:02:54.783110+00:00",
+    "at": "2026-10-24T13:05:54.401973+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-24T09:50:10.178955+00:00",
   "reserved": {
@@ -2774,10 +2772,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T13:02:54.783055+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-24T13:05:54.401891+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -2785,9 +2783,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T13:02:54.783101+00:00",
+    "at": "2026-10-24T13:05:54.401958+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -2799,56 +2797,22 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T13:02:54.782855+00:00",
-    "preflight_due": "true",
+    "at": "2026-10-24T13:05:54.401838+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "outcome": "published",
+    "reason": "min_interval",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T13:02:54.783051+00:00",
-    "collection_status": "collected",
-    "publish_step": "success",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 270,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3
-        },
-        "seen": 6,
-        "total": 343
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 344,
-        "fingerprint": 0,
-        "id": 6,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 338,
-        "title": 0,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 338,
-        "remaining": 271
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "considered": 1,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 0
-      }
-    },
+    "at": "2026-10-24T13:05:54.401885+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
