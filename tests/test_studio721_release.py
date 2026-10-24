@@ -8,9 +8,9 @@ class Studio721ReleaseTests(unittest.TestCase):
     def test_main_renderer_and_publisher_floor_are_consistent(self):
         self.assertEqual(VERSION,"studio-7.3.1")
         workflow=Path(".github/workflows/astra-v2-publish.yml").read_text()
-        self.assertIn("ASTRA_MIN_STUDIO_VERSION: '7.3.0'",workflow)
-        self.assertFalse(_studio_meets_floor("studio-7.2.1","7.3.0"))
-        self.assertTrue(_studio_meets_floor(VERSION,"7.3.0"))
+        self.assertIn("ASTRA_MIN_STUDIO_VERSION: '7.3.1'",workflow)
+        self.assertFalse(_studio_meets_floor("studio-7.2.1","7.3.1"))
+        self.assertTrue(_studio_meets_floor(VERSION,"7.3.1"))
 
     def test_actual_pillow_source_edits_trigger_the_parallel_preloader(self):
         workflow=Path(".github/workflows/astra-v2-preload.yml").read_text()
