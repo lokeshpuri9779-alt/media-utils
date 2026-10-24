@@ -59,6 +59,22 @@ jobs:
           path: runtime-artifacts/download
       - name: Validate local visual assets before Studio preview
         run: python -m tools.astra_restore_visual_pack runtime-artifacts/download/astra-visual-pack.zip runtime-artifacts/verified-pack --expected 3200
+      - name: Verify non-space backgrounds in actual compositor
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          from astra_v2.visual_artifact_backdrop import apply_pack_background, choose_scene
+          import os
+          root = os.environ['ASTRA_ASSET_PACK_ROOT']
+          for scene in ('forest', 'city', 'underwater'):
+              shot = {'visual': scene}
+              assert choose_scene(shot) == scene, scene
+              base = Image.new('RGB', (540, 960), (11, 22, 33))
+              result = apply_pack_background(base, shot, 'qa-' + scene,
+                                             root=root, video_format='shorts')
+              assert result.tobytes() != base.tobytes(), scene + ': unchanged pixels'
+              print('ASTRA_NONSPACE_BACKGROUND_OK=' + scene, flush=True)
+          PY
       - name: Render real Studio narration preview (no YouTube upload)
         run: |
           mkdir -p /tmp/astra-studio-review
