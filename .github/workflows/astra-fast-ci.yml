@@ -47,6 +47,11 @@ jobs:
           python -m unittest discover -s tests -p 'test_gemini_jpeg_normalization.py' -v
           python -m unittest discover -s tests -p 'test_scene_artwork_manifest.py' -v
           python -m unittest discover -s tests -p 'test_omniroute_review_render_regression.py' -v
+      - name: Verify per-shot production asset usage evidence
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_asset_usage_evidence.py' -v
+          python -m unittest discover -s tests -p 'test_astra_asset_pack_compositor.py' -v
+          python -m unittest discover -s tests -p 'test_quality_asset_selector.py' -v
       - name: Compile story modules
         run: python -m compileall -q astra_v2
       - name: Run adaptive warehouse contract tests
