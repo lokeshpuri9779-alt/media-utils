@@ -47,6 +47,27 @@ class ArtifactBackdropTests(unittest.TestCase):
             "visual": "underwater", "speech": "city"
         }), "underwater")
 
+    def test_expanded_environment_synonyms(self):
+        examples = {
+            "rainforest": "forest", "jungle": "forest",
+            "marina": "harbor", "seaport": "harbor",
+            "skyscraper": "city", "metropolis": "city",
+            "reef": "underwater", "seabed": "underwater",
+            "glacier": "snowfield", "blizzard": "snowfield",
+            "fortress": "castle", "citadel": "castle",
+            "planetarium": "observatory", "grotto": "cave",
+            "botanical garden": "garden", "archipelago": "island",
+            "exhibition hall": "museum", "repair shop": "workshop",
+            "railroad": "railway", "hamlet": "village",
+        }
+        for phrase, expected in examples.items():
+            with self.subTest(phrase=phrase):
+                self.assertEqual(choose_scene({"visual": phrase}), expected)
+
+    def test_scene_words_require_word_boundaries(self):
+        self.assertIsNone(choose_scene({"visual": "the stationmaster"}))
+        self.assertIsNone(choose_scene({"visual": "the icebreaker" }))
+
     def test_unknown_scene_does_not_add_unrelated_art(self):
         image = Image.new("RGB", (1080, 1920), (10, 20, 30))
         self.assertIs(apply_backdrop(image, {"speech": "A surprising discovery"}, "story"), image)
