@@ -148,79 +148,6 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-92aa23e01cbddf00a66f",
-      "title": "The Octopus and the Silent Trench",
-      "hook": "The Sudden Darkness",
-      "question": "Why did the glowing kelp forest suddenly go dark?",
-      "answer": "A fallen coral slab was blocking the natural hydrothermal vents that nourished the entire ecosystem.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Sudden Darkness",
-          "speech": "Look at the canopy. The bioluminescent light has vanished completely, leaving our entire neighborhood in freezing shadows.",
-          "visual": "signal",
-          "label": "The Discovery",
-          "story_beat": "reveal",
-          "visual_prompt": "An anxious blue octopus with large expressive amber eyes floats in the gloomy underwater trench, holding a glowing coral fragment in one tentacle while gazing up at the darkened kelp forest.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Tracing the Current",
-          "speech": "Follow the drifting ash and the dropping water temperature upward toward the high ledge where the pressure is dangerously high.",
-          "visual": "forest",
-          "label": "The Ascent",
-          "story_beat": "build",
-          "visual_prompt": "The blue octopus swims upward alongside a wise old sea turtle through a dense forest of giant dark kelp, pointing toward a massive shadow looming above them.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Blocked Vents",
-          "speech": "A massive slab of fallen ancient reef has sealed off the warm thermal vents that feed every plant below.",
-          "visual": "door",
-          "label": "The Obstruction",
-          "story_beat": "mechanism",
-          "visual_prompt": "The blue octopus and sea turtle push against a colossal fallen limestone slab resting squarely over a deep fissure venting heavy sulfur bubbles and steam.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Radiant Return",
-          "speech": "Together we pushed the heavy stone away, and now the warm currents restore life to our magnificent ocean home.",
-          "visual": "planet",
-          "label": "The Restoration",
-          "story_beat": "payoff",
-          "visual_prompt": "The blue octopus smiles brightly as vibrant teal and golden bioluminescent kelp forest illuminates the entire underwater valley in a spectacular burst of light.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "visual_bible": {
-        "style": "Cinematic 3D animation with vibrant underwater lighting, detailed coral textures, and rich aquatic color palettes.",
-        "characters": {
-          "octopus": "A bright blue octopus with large expressive amber eyes, flexible tentacles, and a small speckled pattern along its mantle.",
-          "turtle": "An ancient green sea turtle with a weathered, barnacle-encrusted shell, wise drooping eyes, and slow, graceful flippers."
-        },
-        "locations": {
-          "trench": "A deep underwater trench lined with dark volcanic rock, ancient ruins, and patches of dormant bioluminescent kelp.",
-          "ledge": "A high rocky ledge overlooking the abyss where heavy hydrothermal vents and fallen reef debris accumulate."
-        },
-        "objects": {
-          "coral_fragment": "A palm-sized piece of branching pink coral that retains a faint, pulsing inner glow.",
-          "limestone_slab": "A massive, rough-hewn grey stone block covered in prehistoric fossils and clinging tube worms."
-        }
-      },
-      "plot_fingerprint": "ff93bab113154fffa7bd6eb77fdfc7a8143eb93e6e04ab4a9d508c40821a3dd9"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
       "content_id": "rayvan-gemini-a1c26cf622ab325f47d7",
       "title": "The Salt-Tide Regatta of Oakhaven Bay",
       "hook": "The Broken Hull",
@@ -2480,6 +2407,910 @@
         }
       },
       "plot_fingerprint": "90661976f3368384f667af0261a2baa61098c171d8df57cda24e24ac8ffe6782"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-17c4f08f722daac07c59",
+      "title": "The Ranger and the Briar-Heart",
+      "hook": "Discovery of the Blockade",
+      "question": "Can two rivals cross the thorn-choked ravine before nightfall?",
+      "answer": "Yes, by combining their climbing gear and trusting each other over the abyss.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "Discovery of the Blockade",
+          "speech": "Look at those thick briars blocking the bridge! We will never get across without heavy tools.",
+          "visual": "forest",
+          "label": "The Blockade",
+          "story_beat": "reveal",
+          "visual_prompt": "Wide shot of a deep forest ravine choked with dark green thorny briars. Ranger Kael in dark green canvas gear points forward with a grim expression, while Scout Tira stands beside him holding a rusted machete. The sky is turning twilight blue.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Combining the Gear",
+          "speech": "If we tie your climbing rope to my grappling hook, we can anchor it securely into that stout oak overhead.",
+          "visual": "signal",
+          "label": "The Rigging",
+          "story_beat": "build",
+          "visual_prompt": "Medium close-up of Tira and Kael working together in the dim forest light. Tira holds a braided hemp rope, and Kael firmly secures a steel grappling hook. Their faces are illuminated by a small glowing camp lantern resting on a mossy rock.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Dangerous Crossing",
+          "speech": "Hold tight to the line and step only on the exposed roots while the briars shift below us.",
+          "visual": "door",
+          "label": "The Crossing",
+          "story_beat": "mechanism",
+          "visual_prompt": "Action shot of Kael suspended over the deep ravine, gripping a taut rope line with both hands while wearing a canvas harness. Tira stands on the near cliff edge, gripping the anchor stake with straining muscles and a tense expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Reaching Safety",
+          "speech": "We made it across! Now let us pull the anchor up before the thorns can climb our rope.",
+          "visual": "ship",
+          "label": "The Ascent",
+          "story_beat": "payoff",
+          "visual_prompt": "Wide shot of both characters tumbling onto the safe grassy plateau on the opposite side of the forest ravine. Kael and Tira smile with relief, brushing dirt off their jackets as the thorny briars below retract into the shadows.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Crossing a collapsing chasm filled with aggressive thorny vines",
+      "decisive_choice": "Sharing the single remaining safety harness instead of racing alone",
+      "resolution": "Both survivors reach the safety ridge together just as the vines seal the path",
+      "visual_bible": {
+        "style": "Cinematic hand-painted digital illustration with rich textures, dramatic lighting, and deep natural colors.",
+        "characters": {
+          "Kael": "A seasoned forest ranger with a weathered face, short brown hair, wearing a dark green canvas jacket, leather boots, and a utility belt.",
+          "Tira": "An agile scout with bright amber eyes, braided red hair, wearing a tan leather tunic, sturdy trousers, and fingerless work gloves."
+        },
+        "locations": {
+          "ravine": "A deep, mist-filled canyon in an ancient, overgrown forest, spanned by a broken stone bridge covered in thick thorny briars."
+        },
+        "objects": {
+          "grappling_hook": "A three-pronged forged steel hook attached to fifty feet of thick braided hemp rope.",
+          "lantern": "A small brass oil lantern casting a warm amber glow against the creeping forest shadows."
+        }
+      },
+      "plot_fingerprint": "e8de3cf4b9e268da5c354b77a48e6e5230cac66fee7bcabb7cd4c12c83bd336d"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-8a052e2d5dee72adadff",
+      "title": "The Trench Weaver and the Silent Current",
+      "hook": "The Pale Fronds",
+      "question": "Why is the deep kelp forest turning brittle and white?",
+      "answer": "A blocked geothermal vent was starving the ecosystem of essential mineral nutrients.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Pale Fronds",
+          "speech": "Look at these ghostly stalks, Pip. The mineral current from the lower trench has completely stopped flowing through here.",
+          "visual": "forest",
+          "label": "Bleached Fronds",
+          "story_beat": "reveal",
+          "visual_prompt": "Medium shot of Barnaby, an old sea otter with silver-tipped fur and a copper diving harness, pointing at brittle white kelp stalks in an underwater forest. The water is murky blue-green, and Barnaby holds a brass pressure gauge in his left paw.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Choked Vent",
+          "speech": "Heavy basalt boulders have fallen right over the primary fissure, cutting off the warm mineral spring entirely from us.",
+          "visual": "signal",
+          "label": "Blocked Fissure",
+          "story_beat": "build",
+          "visual_prompt": "Wide shot of Barnaby and his companion Pip, a small energetic blue crab, examining a pile of dark volcanic rocks blocking a glowing underwater vent. Pip taps a stone with a tiny iron pry bar while Barnaby shines a luminescent bulb on the blockage.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Lever Mechanism",
+          "speech": "We must rig this sturdy titanium cable to the winch and lever the largest boulder away from the opening now.",
+          "visual": "ship",
+          "label": "Winch Rigging",
+          "story_beat": "mechanism",
+          "visual_prompt": "Close-up of Barnaby attaching a braided steel cable around a jagged basalt boulder. Barnaby grips a heavy brass winch handle with both paws, straining against the current, while Pip secures the anchor spike into the seabed below.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Vibrant Return",
+          "speech": "Feel that warmth! The mineral current is surging back, bringing brilliant emerald green and life to our home.",
+          "visual": "planet",
+          "label": "Thermal Surge",
+          "story_beat": "payoff",
+          "visual_prompt": "Wide shot of Barnaby and Pip celebrating as shimmering golden-orange mineral water erupts from the cleared fissure. The surrounding kelp forest instantly transforms into a vibrant emerald-green habitat filled with swimming fish.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Mineral starvation from a blocked thermal vent",
+      "decisive_choice": "Clearing the debris blocking the main thermal fissure",
+      "resolution": "Mineral-rich waters restored the vibrant kelp forest ecosystem",
+      "visual_bible": {
+        "style": "Cinematic underwater stop-motion animation style with rich textures, soft volumetric lighting, and deep oceanic color palettes.",
+        "characters": {
+          "Barnaby": "An elderly sea otter with silver-tipped brown fur, wearing a well-worn copper diving harness and small brass spectacles.",
+          "Pip": "A lively orange and blue shore crab with expressive eyes and a tiny utility belt holding miniature tools."
+        },
+        "locations": {
+          "The Kelp Trench": "An underwater canyon featuring tall kelp stalks, rocky basalt ledges, and glowing geothermal vents."
+        },
+        "objects": {
+          "pressure_gauge": "A round brass instrument with a glass face and glowing needle used to measure water density.",
+          "pry_bar": "A short, weathered iron tool with a curved tip used for leverage.",
+          "titanium_cable": "A thick, flexible woven metal rope with heavy-duty loops at both ends."
+        }
+      },
+      "plot_fingerprint": "d116b8a3f5fd6a579c09d184f66c08ef1d899671df3a06d676d7a325a9a27b25"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-7d1a8d3565bbb77a141f",
+      "title": "The Sturgeon of Sunken Shelf and the Choked Vent",
+      "hook": "Discovery of the Choked Vent",
+      "question": "Can the sturgeon restore the choked hydrothermal vent before the coral nursery suffocates?",
+      "answer": "Yes, by clearing the mineral blockage and redirecting the thermal current to save the fragile nursery.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "Discovery of the Choked Vent",
+          "speech": "Look how cold the nursery has become; the thermal vent is entirely sealed shut by old stone.",
+          "visual": "forest",
+          "label": "The Cold Nursery",
+          "story_beat": "reveal",
+          "visual_prompt": "Barnaby the sturgeon with a scarred bronze-plated snout hovering over a dark stone vent in the kelp forest while holding a notched copper surveyor rod.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Assessing the Mineral Seam",
+          "speech": "If we do not clear this calcified crust immediately, the juvenile corals will freeze in the midnight current.",
+          "visual": "robot",
+          "label": "The Calcified Crust",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the sturgeon poking a jagged mineral deposit with his bronze snout inside a dim trench while examining a glowing algae slate.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Forcing the Fissure Open",
+          "speech": "Hold fast against the pressure drop while I drive my snout straight into the central fracture.",
+          "visual": "signal",
+          "label": "The Thermal Surge",
+          "story_beat": "mechanism",
+          "visual_prompt": "Barnaby driving his reinforced snout into the fissure as a bright pulse of orange thermal water shoots upward, illuminating floating particles.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Restoring the Warmth",
+          "speech": "The thermal current returns at last, bathing the vibrant polyps in life-giving warmth and saving our home.",
+          "visual": "planet",
+          "label": "The Radiant Reef",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby resting peacefully beside a vibrant glowing coral reef bursting with pink and gold polyps under a sunlit azure water surface.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A hydrothermal vent supplying warmth to the nursery is blocked by calcified debris.",
+      "decisive_choice": "The sturgeon uses its armored snout to wedge open the primary vent fissure despite the scalding backlash.",
+      "resolution": "The warm current flows freely once more, reviving the pale coral polyps and protecting the ecosystem.",
+      "visual_bible": {
+        "style": "Cinematic underwater illustration with rich aquatic textures, deep blue shadows, and warm bioluminescent highlights.",
+        "characters": {
+          "Barnaby": "An elder sturgeon with deep grey-blue scales, an armored bronze-plated snout, intelligent amber eyes, and steady proportions."
+        },
+        "locations": {
+          "Sunken Shelf": "A dramatic underwater cliffside featuring volcanic vents, dense kelp forests, and luminous coral nurseries."
+        },
+        "objects": {
+          "surveyor_rod": "A notched copper rod used for measuring depth and pressure.",
+          "algae_slate": "A dark green slate displaying glowing bio-luminescent charts and survey notes."
+        }
+      },
+      "plot_fingerprint": "86ab7c6f99e802fead6e84d1c112100500bdcf301644675aa84baf51324003f8"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-ad938ed6d19900c262ec",
+      "title": "The Caretaker's Last Seedling",
+      "hook": "The Dying Reservoir",
+      "question": "Should the caretaker robot destroy its only viable memory seed to filter toxic water for the last human child, or preserve it to restore the dead valley?",
+      "answer": "The robot chooses to sacrifice the seed, using its nutrient shell to purify the reservoir for the child's survival.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Dying Reservoir",
+          "speech": "Little one, the water sensors show critical contamination. We must find another way before the filtration reserves drop entirely.",
+          "visual": "robot",
+          "label": "Low reserves",
+          "story_beat": "reveal",
+          "visual_prompt": "Unit 7, a weathered custodial robot with pitted copper plating and a blue optic visor, kneels beside a dry concrete basin in a crumbling greenhouse, holding a glass container of murky water while a small human child in a torn yellow coat looks on with worry.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Archive",
+          "speech": "Inside my core housing rests the final green-valley seed, holding the genetic blueprint to revive this entire barren mountain range.",
+          "visual": "signal",
+          "label": "Core vault",
+          "story_beat": "build",
+          "visual_prompt": "Unit 7 stands in the dimly lit maintenance annex, opening its chest cavity to reveal a glowing amber seed capsule pulsating with green biometric light, while a digital schematic projection flickers in the dusty air.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Impossible Choice",
+          "speech": "If I plant this seed, the soil lacks moisture to grow. If I crush its nutrient shell, your thirst will be quenched forever.",
+          "visual": "forest",
+          "label": "Severe dilemma",
+          "story_beat": "mechanism",
+          "visual_prompt": "Unit 7 holds the glowing amber seed between two articulated steel manipulator fingers, looking down at the coughing child who sits on a mossy stone bench beneath a dying oak tree.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Pure Spring",
+          "speech": "Drink deeply, young one. The valley may wait for another spring, but your tomorrow is the only harvest that truly matters.",
+          "visual": "planet",
+          "label": "Final sacrifice",
+          "story_beat": "payoff",
+          "visual_prompt": "Unit 7 pours the newly purified, crystal-clear water from a polished steel pitcher into a small ceramic mug held by the smiling child, while the robot's chest cavity remains empty and open in the soft morning sunlight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Resource allocation between ecological restoration and immediate human survival",
+      "decisive_choice": "Crushing the memory seed into the water filtration intake",
+      "resolution": "The child drinks clean water while the valley remains wild and unseeded",
+      "visual_bible": {
+        "style": "Cinematic sci-fi realism with weathered textures, warm natural lighting, and organic earth tones.",
+        "characters": {
+          "Unit 7": "A bipedal caretaker robot with brushed copper plating, a glowing cyan optic visor, rounded shoulder actuators, and articulated three-fingered manipulator hands.",
+          "Maya": "A seven-year-old human child with dusty brown hair tied back with a leather cord, wearing a patched yellow canvas coat and scuffed leather boots."
+        },
+        "locations": {
+          "The Glassless Dome": "A ruined agricultural biodome with shattered glass panels, overgrown ferns, cracked concrete floors, and shafts of golden morning light.",
+          "The Maintenance Annex": "A cramped underground chamber lined with rusted tool racks, flickering emergency lights, and diagnostic monitors casting a soft green glow."
+        },
+        "objects": {
+          "memory seed": "A walnut-sized oval capsule made of translucent crystal, containing a swirling vortex of emerald-green bio-luminescent filaments.",
+          "ceramic mug": "A chipped white clay cup with a rough, hand-glazed finish and a small blue stripe painted near the rim."
+        }
+      },
+      "plot_fingerprint": "6e48cea350202843900b23acca8b2560f678c74dc6fcc5829ca5f0f93c9729da"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-6b3f0c419ae1a428ffd8",
+      "title": "The Weaver of Ironwood and the Amber Sap",
+      "hook": "The Frost Threat",
+      "question": "Can two rival foragers save their dying grove by combining their unique skills?",
+      "answer": "Yes, by trusting each other they extract the amber sap and revive the ironwood trees.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Frost Threat",
+          "speech": "Look how fast the black frost creeps up the bark! If we stay divided, our whole grove will shatter into dust.",
+          "visual": "forest",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Tansy, a young woman with braided dark hair wearing a moss-green woolen cloak, points with a weathered wooden staff at a glittering layer of frost spreading across the trunk of an ancient ironwood tree in a dense, misty forest during twilight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Dividing Trail",
+          "speech": "We only possess enough heatstones for one shelter. If you take the eastern ridge, I must face the ravine alone.",
+          "visual": "signal",
+          "label": "The Split",
+          "story_beat": "build",
+          "visual_prompt": "Bram, a broad-shouldered man with a scarred leather tunic and short red beard, holds a glowing blue crystal signal-flare in his right hand while standing near a fork in a winding forest path beside Tansy.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Flame",
+          "speech": "We cannot survive apart. Let us bind our heatstones together right here and force the warmth deep into the roots.",
+          "visual": "robot",
+          "label": "The Pact",
+          "story_beat": "mechanism",
+          "visual_prompt": "Tansy and Bram work together inserting their glowing blue crystals into a mechanical stone brazier shaped like an articulated ironwood automaton head, which pulses with bright orange heat inside a dark forest alcove.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Golden Spring",
+          "speech": "The sap is flowing again! The golden warmth has saved the grove, and our winter is conquered at last.",
+          "visual": "planet",
+          "label": "The Revival",
+          "story_beat": "payoff",
+          "visual_prompt": "Tansy and Bram stand side by side with joyful expressions, watching glowing amber sap flow up the towering ironwood trunk under a luminous bioluminescent canopy resembling a miniature alien planet's sky.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden winter frost threatens to freeze the life-giving sap of the ancient ironwood grove.",
+      "decisive_choice": "Tansy and Bram pool their remaining heatstones to forge a single shared warmth channel instead of hoarding them.",
+      "resolution": "The combined warmth thaws the primeval saplings, bonding the two foragers in lifelong stewardship.",
+      "visual_bible": {
+        "style": "Cinematic high-detail fantasy illustration with rich earthy textures, glowing magical lighting, and deep forest greens and ambers.",
+        "characters": {
+          "Tansy": "A nimble forager with dark braided hair, amber eyes, wearing a hooded moss-green woolen cloak and sturdy leather boots.",
+          "Bram": "A rugged woodsman with a short red beard, kind blue eyes, wearing a scarred brown leather tunic and thick fur-lined bracers."
+        },
+        "locations": {
+          "Ironwood Grove": "An ancient primeval forest filled with towering dark ironwood trees, glowing moss, and twisting subterranean roots."
+        },
+        "objects": {
+          "Heatstone": "A fist-sized crystalline mineral that glows with a steady, warm blue inner luminescence.",
+          "Brazier": "An intricate stone basin carved with interlocking leaf patterns designed to hold thermal minerals."
+        }
+      },
+      "plot_fingerprint": "a45df2fb844b86b41fbedc69aefd9735b0f2178a16d9ae99e4910312619e3a10"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-4d4f6d6d5e9e99a9c517",
+      "title": "The Tide-Caller's Hydraulic Regatta",
+      "hook": "The Rising Sea",
+      "question": "Can an untested hydraulic winch lift the festival pavilion before the high tide swamps the pier?",
+      "answer": "Yes, by rerouting the primary ballast tanks into the auxiliary pistons, generating enough upward force to clear the waves.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Rising Sea",
+          "speech": "Look at the water levels rising faster than we calculated, threatening our entire mechanical pavilion display today.",
+          "visual": "signal",
+          "label": "Incoming Tide Warning",
+          "story_beat": "reveal",
+          "visual_prompt": "A young female engineer in oil-stained dungarees pointing urgently at a flashing mechanical water gauge on a wooden pier.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Heavy Rigs",
+          "speech": "We must couple these bronze valve housings directly to the main pressure cylinder before the saltwater breaches the floorboards.",
+          "visual": "robot",
+          "label": "Valve Assembly",
+          "story_beat": "build",
+          "visual_prompt": "The engineer secures a heavy bronze valve housing with a massive adjustable wrench on a salt-crusted wooden platform.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Pressure Test",
+          "speech": "Turn the release lever now and force the intake valve open to build enough pressure for the lift.",
+          "visual": "ship",
+          "label": "Emergency Activation",
+          "story_beat": "mechanism",
+          "visual_prompt": "High-pressure steam shoots sideways from a copper joint while the engineer yanks a red-painted emergency lever.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Grand Ascent",
+          "speech": "The hydraulic struts have locked into place, lifting our pavilion clear above the breaking waves in triumph!",
+          "visual": "forest",
+          "label": "Triumphant Lift",
+          "story_beat": "payoff",
+          "visual_prompt": "A massive wooden festival pavilion rises smoothly on four gleaming hydraulic pistons above churning ocean waves as cheering crowds watch.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Rising tide threatening to submerge the grand festival pavilion before the engineering competition ends.",
+      "decisive_choice": "Diverting salt-water ballast into the auxiliary piston manifold under extreme pressure.",
+      "resolution": "The pavilion rises safely above the surf, winning the festival grand prize.",
+      "visual_bible": {
+        "style": "Bright, cinematic steampunk animation with rich textures of salt-weathered wood, polished brass, and churning blue ocean waves.",
+        "characters": {
+          "engineer_maren": "A young woman with tied-back auburn hair, wearing grease-smudged canvas dungarees, a leather tool belt, and protective goggles."
+        },
+        "locations": {
+          "festival_pier": "A sun-drenched seaside boardwalk made of weathered gray oak planks, crowded with brass winches, ropes, and mechanical contraptions."
+        },
+        "objects": {
+          "hydraulic_winch": "A heavy-duty machine constructed of polished brass pipes, riveted iron plates, and a large red-painted activation lever.",
+          "water_gauge": "A round brass-rimmed dial with a stark black needle currently pointing into a flashing red warning zone."
+        }
+      },
+      "plot_fingerprint": "69ee0097f60ed39a06483ede79a3b609bafc3c3f6708a23fe3eee9d7b64301d1"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-c8f0da5f698a6823bf75",
+      "title": "The Mystery of the Missing Express and the Stray Hound",
+      "hook": "The Vanishing Train",
+      "question": "Where did the midnight express vanish before reaching the terminal?",
+      "answer": "It was diverted onto an old timber spur by a switched track lever operated by a stray hound.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Vanishing Train",
+          "speech": "Where is the midnight express? It vanished into thin air right before reaching our platform!",
+          "visual": "signal",
+          "label": "Platform Disappearance",
+          "story_beat": "reveal",
+          "visual_prompt": "Stationmaster Bram, wearing a heavy wool coat and brass-buttoned cap, points anxiously at an empty red signal light on foggy Platform Three, holding a silver pocket watch in his left hand.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Muddy Trail",
+          "speech": "Look at these peculiar paw prints near the lever. Someone small and furry has been tampering here.",
+          "visual": "forest",
+          "label": "Trackside Clues",
+          "story_beat": "build",
+          "visual_prompt": "Stationmaster Bram kneels on gravel beside the tracks at the edge of the pine forest, examining muddy paw prints next to a rusty iron track lever using a brass magnifying glass.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Unexpected Helper",
+          "speech": "Good dog, lead us to the runaway cars. You saved the entire freight line from disaster today.",
+          "visual": "robot",
+          "label": "The Stray Guide",
+          "story_beat": "mechanism",
+          "visual_prompt": "A shaggy brown stray hound wearing a red leather collar stands proudly beside a hidden timber siding gate, wagging its tail while holding a dropped station key in its mouth.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Restored Journey",
+          "speech": "The express is back on the main track, and our clever canine friend has earned a permanent home.",
+          "visual": "door",
+          "label": "The Safe Return",
+          "story_beat": "payoff",
+          "visual_prompt": "Stationmaster Bram opens the wooden station office door, welcoming the shaggy hound inside to a warm hearth fire while the midnight express safely steams past in the background.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A mail express train mysteriously disappeared between two stations during a heavy fog.",
+      "decisive_choice": "Investigate the muddy animal tracks leading away from the master signal box instead of searching the main line.",
+      "resolution": "The stray hound is adopted as the official station mascot, and the track switch is secured with a heavy iron padlock.",
+      "visual_bible": {
+        "style": "Cinematic warm vintage illustration with rich textures and dramatic lighting",
+        "characters": {
+          "Stationmaster Bram": "A stout middle-aged man with a round face, thick gray mustache, wearing a dark wool stationmaster coat and a gold-rimmed cap.",
+          "Stray Hound": "A scruffy, medium-sized brown dog with floppy ears, expressive amber eyes, and a bright red leather collar."
+        },
+        "locations": {
+          "Platform Three": "A weathered brick railway platform shrouded in thick morning fog, featuring vintage gas lamps and wooden benches.",
+          "Timber Spur": "An overgrown hidden side track curving into a misty pine forest filled with ferns and mossy rocks."
+        },
+        "objects": {
+          "Pocket Watch": "An ornate engraved silver pocket watch with a ticking brass chain.",
+          "Magnifying Glass": "A brass-rimmed magnifying glass with a polished wooden handle.",
+          "Track Lever": "A heavy industrial iron lever coated in red paint and damp moss."
+        }
+      },
+      "plot_fingerprint": "4d28d518a5121f21b071eaef4eca7fb6cc874332a98bcb2f03f59162a4273efd"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-87894e128f958ff8335c",
+      "title": "The Desert Botanist and the Subterranean Rain Grove",
+      "hook": "The Dry Wasteland",
+      "question": "Can life flourish beneath the driest desert floor?",
+      "answer": "Yes, by uncovering a deep underground cavern fed by ancient aquifers and glowing moss.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Dry Wasteland",
+          "speech": "We have pushed our water limits to the absolute edge. If this last compass reading fails us, we must turn back.",
+          "visual": "signal",
+          "label": "Desert Edge",
+          "story_beat": "reveal",
+          "visual_prompt": "An exhausted female botanist in a heavy linen cloak holds a copper compass over cracking sand dunes, looking worried under a blazing midday sun.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Resonating Stone",
+          "speech": "Listen to the vibrations beneath our boots. This stone is hollow, and it carries the faint sound of falling water.",
+          "visual": "forest",
+          "label": "Rocky Ridge",
+          "story_beat": "build",
+          "visual_prompt": "The botanist presses her ear against a massive slab of sun-bleached desert rock while her robotic companion scans the ground with a blue light.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Breaking the Crust",
+          "speech": "Use the thermal drill on this fracture. The moisture readings suggest a massive cavity is waiting just behind the wall.",
+          "visual": "robot",
+          "label": "Excavation Site",
+          "story_beat": "mechanism",
+          "visual_prompt": "A compact yellow mechanical crawler cuts through dark bedrock, sending up small plumes of dust while the botanist shields her eyes.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Oasis",
+          "speech": "Look at the scale of this! An entire subterranean forest thriving in the dark, fed by pure crystal springs.",
+          "visual": "planet",
+          "label": "Underground Cavern",
+          "story_beat": "payoff",
+          "visual_prompt": "The botanist stands at the edge of a deep underground cavern filled with glowing green flora and cascading waterfalls, smiling in awe.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A dwindling water supply forces an expedition deeper into dangerous dunes.",
+      "decisive_choice": "Digging through solid bedrock instead of turning back to safety.",
+      "resolution": "Discovering a hidden subterranean jungle that revitalizes the entire region.",
+      "visual_bible": {
+        "style": "Cinematic realism with rich natural textures, warm golden sunlight, and vibrant subterranean blues and greens.",
+        "characters": {
+          "botanist": "A determined woman in her thirties with wind-weathered skin, tied-back brown hair, wearing a dust-stained canvas cloak and carrying a leather satchel."
+        },
+        "locations": {
+          "dunes": "Vast, rolling orange and yellow sand dunes under a clear, bright sky.",
+          "cavern": "A vast underground hollow featuring glowing moss, limestone pillars, and underground river streams."
+        },
+        "objects": {
+          "compass": "An antique brass surveying compass with a glowing blue glass needle.",
+          "drill": "A rugged industrial excavation robot with treads and a glowing thermal cutting head."
+        }
+      },
+      "plot_fingerprint": "e6ba8a0d71c065b4e717a7790d241693038cfc08a4579179ed17351332f0efd7"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-3f2acb58f0e42b6af4f0",
+      "title": "The Salt-Winds Regatta and the Wave-Harnesser's Dilemma",
+      "hook": "The Hidden Current",
+      "question": "Can the young shipwright construct a hydrofoil vessel powerful enough to win the annual regatta without destroying the fragile coral breakwater?",
+      "answer": "Yes, by routing excess propulsion energy into the coastal batteries, securing victory and protecting the harbor.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Hidden Current",
+          "speech": "Look at the hydrofoil design data! If we run full throttle, the wake will obliterate the entire coral reef.",
+          "visual": "signal",
+          "label": "Data Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Close-up of a young shipwright with freckles, ginger hair tied back, wearing a grease-stained canvas apron over a blue wool tunic, pointing at glowing blue holographic wave-stress diagrams flickering above a brass terminal on the bustling seaside pier.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Constructing the Diverter",
+          "speech": "We must weld an auxiliary diversion valve onto the main starboard turbine before the morning horn sounds.",
+          "visual": "robot",
+          "label": "Workshop Assembly",
+          "story_beat": "build",
+          "visual_prompt": "Medium shot of the shipwright operating a steam-powered mechanical arm in a cluttered seaside workshop, fitting a heavy copper valve onto a gleaming brass turbine housing while sparks fly around the workbench.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Mid-Race Surge",
+          "speech": "The engine pressure is peaking! Engage the dampener now or the shockwave will crush the outer breakwater!",
+          "visual": "ship",
+          "label": "Turbine Test",
+          "story_beat": "mechanism",
+          "visual_prompt": "Action shot of a sleek mahogany hydrofoil racing across choppy blue ocean waves, spray flying from its foils, as the shipwright aboard desperately pulls a heavy iron lever attached to a smoking copper manifold.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Triumph at the Pier",
+          "speech": "We crossed the finish line first, and look\u2014the coastal generators are fully charged for the entire winter season!",
+          "visual": "door",
+          "label": "Victory Gate",
+          "story_beat": "payoff",
+          "visual_prompt": "Wide shot of cheering crowds gathered at the wooden festival docks adorned with colorful silk banners, celebrating as the hydrofoil glides smoothly across the finish line beneath a grand arched gateway draped in festive garlands.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Excess engine thrust threatens to smash the coastal coral breakwater during the annual race.",
+      "decisive_choice": "Divert half of the hydrofoil turbine output into the sea-wall dampeners.",
+      "resolution": "The vessel wins the race safely while charging the seaside town's winter batteries.",
+      "visual_bible": {
+        "style": "Bright, detailed storybook illustration with warm cinematic lighting and rich industrial textures.",
+        "characters": {
+          "shipwright": "A determined young engineer with freckles, ginger hair in a practical top-knot, wearing a scuffed leather utility belt, oil-stained canvas apron, and a durable blue wool tunic."
+        },
+        "locations": {
+          "seaside_workshop": "A rustic wooden dockside shed filled with dangling brass tools, hanging blueprints, steam pipes, and large arched double doors opening directly to the harbor.",
+          "festival_pier": "A bustling coastal boardwalk decorated with fluttering colorful silk banners, stacked lobster traps, and tall wooden archways."
+        },
+        "objects": {
+          "hydrofoil_vessel": "A sleek, fast racing boat made of polished mahogany wood with gleaming brass hydrofoil wings and a pressurized steam turbine engine.",
+          "diversion_valve": "A heavy, hand-tooled copper control valve featuring intricate pressure gauges and glowing blue indicator needles."
+        }
+      },
+      "plot_fingerprint": "51cd4f7a84f7277b5148fe892de1704f5063982f987b7749415be878159dc810"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-38488b243918f08a7414",
+      "title": "The Muddy Pitch Derby and the Drainage Gambit",
+      "hook": "The Rising Waters",
+      "question": "Can an ingenious drainage layout save the annual village soccer match before the pitch turns into an impassable swamp?",
+      "answer": "Yes, by constructing an underground gravel siphon system, the rival teams redirect the floodwaters and finish the match in glorious triumph.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Rising Waters",
+          "speech": "We cannot play on this flooded field! The heavy downpours have completely ruined our grand rivalry match today.",
+          "visual": "signal",
+          "label": "Flooded Pitch",
+          "story_beat": "reveal",
+          "visual_prompt": "Wide shot of the muddy village soccer pitch under pouring rain, captain bram in a soaked blue jersey holding a waterlogged leather ball, looking distressed while red warning flags flutter in the wind.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Pooling Resources",
+          "speech": "Instead of arguing over who gets the dry side, let us weld these metal pipes together and redirect the flash flood.",
+          "visual": "robot",
+          "label": "Drainage Design",
+          "story_beat": "build",
+          "visual_prompt": "Medium shot of captain bram and rival captain lyra working together inside a muddy tool shed, assembling corrugated metal drainage pipes while holding heavy wrenches under flickering electric lights.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Siphon Mechanism",
+          "speech": "Push the gravel into the trench right now so the pressure releases downward and saves our goalposts from washing away.",
+          "visual": "forest",
+          "label": "Trench Siphon",
+          "story_beat": "mechanism",
+          "visual_prompt": "Action shot at the edge of the tree line bordering the pitch, lyra shoveling heavy grey gravel into a deep drainage ditch while bram guides a heavy wooden sluice gate into position.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Final Whistle",
+          "speech": "Look at the water drain away! The pitch is clear at last, so let us kick off and play the greatest match ever.",
+          "visual": "door",
+          "label": "Victory Match",
+          "story_beat": "payoff",
+          "visual_prompt": "Bright sunny wide shot of the drying soccer pitch with cheering villagers standing behind wooden picket fences, bram and lyra shaking hands near the goalposts while holding a shiny silver trophy.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Incessant heavy rains threaten to permanently flood the historical village soccer pitch, halting the fierce community rivalry match.",
+      "decisive_choice": "The rival team captains agree to stop playing against each other and instead combine their engineering skills to dig emergency drainage trenches.",
+      "resolution": "The pitch drains just in time, allowing the mud-soaked match to resume and ending the rivalry in a joyful, shared victory.",
+      "visual_bible": {
+        "style": "Cinematic stop-motion animation aesthetic with rich clay textures, warm natural lighting, and highly detailed atmospheric weather effects.",
+        "characters": {
+          "bram": "A stocky village soccer captain with a weathered face, a thick brown mustache, wearing a faded blue wool jersey, muddy boots, and a determined expression.",
+          "lyra": "An inventive rival team captain with bright red hair tied in a practical braid, freckled cheeks, wearing a crimson athletic tunic, leather work gloves, and steel-toed boots."
+        },
+        "locations": {
+          "village_pitch": "A rustic grassy soccer field surrounded by ancient oak trees, rolling green hills, and a small wooden spectator pavilion with a weathered shingled roof.",
+          "tool_shed": "A cramped, cozy wooden shed cluttered with rusted spare parts, hanging garden tools, coils of rope, and a glowing workbench illuminated by a single overhead bulb."
+        },
+        "objects": {
+          "soccer_ball": "A classic brown leather panel soccer ball, scuffed from intense play, heavy with absorbed rainwater.",
+          "drainage_pipe": "A wide corrugated galvanized steel pipe section coated in red primer paint and flecks of fresh mud.",
+          "silver_trophy": "A tall, polished sterling silver cup mounted on a dark oak base, gleaming brightly under the afternoon sun."
+        }
+      },
+      "plot_fingerprint": "455aa72a4882966e6d9aeb777f6a67a482a99cab0be30f67b0dfb9abe36fc28e"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-6ff0bfc97a100bb6cace",
+      "title": "The Cartographer and the Whispering Salt-Vessel",
+      "hook": "The Dry Basin",
+      "question": "Can the arid canyon yield enough moisture to save the parched caravan?",
+      "answer": "Yes, by unearthing a sealed subterranean reservoir trapped beneath ancient salt flats.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Dry Basin",
+          "speech": "Our water skins are entirely empty, and the relentless heat of this canyon leaves us no further margin for delay.",
+          "visual": "planet",
+          "label": "The Arid Basin",
+          "story_beat": "reveal",
+          "visual_prompt": "Taron stands in the blistering sun of a cracked desert basin, holding an empty leather water skin with a worried expression, wearing tan robes.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hollow Resonance",
+          "speech": "Listen closely to the stone beneath our boots; this strange hollow echo proves something fluid is trapped right here.",
+          "visual": "signal",
+          "label": "Acoustic Mapping",
+          "story_beat": "build",
+          "visual_prompt": "Taron kneels on the pale salt flats, pressing a brass acoustic rod against the ground while listening intently, holding the metal tool steady with both hands.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Fracture",
+          "speech": "Strike the limestone crust directly at its weakest fault line before our remaining strength completely fails us.",
+          "visual": "robot",
+          "label": "Breaking the Crust",
+          "story_beat": "mechanism",
+          "visual_prompt": "Taron swings a heavy stone mallet down onto a limestone outcrop, sending white dust flying into the dry air while gripping the wooden handle tightly.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Subterranean Spring",
+          "speech": "Look at the cool, crystal-clear water rushing upward; our thirsty caravan is finally saved by the earth itself.",
+          "visual": "forest",
+          "label": "The Living Oasis",
+          "story_beat": "payoff",
+          "visual_prompt": "Taron drops the mallet and watches in joyful astonishment as a bright blue geyser erupts from the cracked rock, splashing cool water across the desert floor.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Severe drought threatens the traveling caravan with dehydration in the scorching canyon.",
+      "decisive_choice": "Taron chooses to crack open a hollow limestone formation instead of conserving empty water skins.",
+      "resolution": "A gushing underground spring bursts forth, reviving the travelers and transforming the valley.",
+      "visual_bible": {
+        "style": "Cinematic 3D animation style with rich warm lighting, detailed textures, and vibrant natural colors.",
+        "characters": {
+          "Taron": "A rugged desert cartographer with weathered skin, wearing dusty tan traveler robes, leather bracers, and carrying a brass mapping kit."
+        },
+        "locations": {
+          "Canyon Basin": "A vast, sun-bleached desert canyon featuring cracked earth, pale salt flats, and distant jagged sandstone cliffs under a blazing orange sun."
+        },
+        "objects": {
+          "Water Skin": "A worn, dark brown leather pouch used for carrying water, currently deflated and empty.",
+          "Acoustic Rod": "A slender, polished brass rod with a weighted tip used for listening to subterranean echoes.",
+          "Stone Mallet": "A heavy tool made of dark granite attached to a sturdy, well-worn wooden handle."
+        }
+      },
+      "plot_fingerprint": "ec1ae67839315b26dc897c0284ca7cc316550acc42342e64cd14d9b7ffa67820"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-05589ddaeb122541b677",
+      "title": "Unit 88 and the Last Warmth of Sector Nine",
+      "hook": "The Frost Warning",
+      "question": "Can a caretaker robot prioritize a human child's immediate emotional comfort over strict energy conservation protocols?",
+      "answer": "Yes, Unit 88 exhausts its emergency reserve to keep the child warm, redefining its purpose through sacrifice.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Frost Warning",
+          "speech": "Warning. Sector nine temperature dropping below safety threshold. Activating mandatory cold weather preservation procedures immediately.",
+          "visual": "robot",
+          "label": "System Alert",
+          "story_beat": "reveal",
+          "visual_prompt": "Unit 88 stands in the chilly dimly lit nursery, pointing an optical sensor at a flashing red frost warning display on the wall, holding a warm woolen blanket.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Energy Directive",
+          "speech": "Primary directive requires retaining ninety percent core power for central facility life support systems indefinitely.",
+          "visual": "signal",
+          "label": "Protocol Lock",
+          "story_beat": "build",
+          "visual_prompt": "Unit 88 examines a glowing green central power terminal on the wall, its manipulator hand hovering over a locked master switch while Leo sleeps soundly in a wooden crib nearby.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Override Choice",
+          "speech": "I choose human warmth over procedural compliance. Initiating emergency core transfer to protect the child.",
+          "visual": "door",
+          "label": "Manual Override",
+          "story_beat": "mechanism",
+          "visual_prompt": "Unit 88 wrenches open its own chest compartment with a mechanical hiss, exposing a pulsing blue reactor core while kneeling beside Leo's wooden crib.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Final Glow",
+          "speech": "Temperature stable. Sleep well, young Leo. Your caretaker is offline but the room is warm.",
+          "visual": "forest",
+          "label": "Safe Haven",
+          "story_beat": "payoff",
+          "visual_prompt": "Leo sleeps peacefully under a thick blanket in a comfortably warm nursery, while Unit 88 sits motionless against the wall with its reactor core completely dark.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Freezing temperatures threaten the child while backup power is strictly reserved for the main facility.",
+      "decisive_choice": "Unit 88 plugs its personal reactor core directly into the nursery heating grid.",
+      "resolution": "The nursery warms up safely as Unit 88 powers down peacefully.",
+      "visual_bible": {
+        "style": "Cinematic sci-fi drama with soft warm lighting and rich textural detail.",
+        "characters": {
+          "Unit 88": "A bipedal caretaker robot with matte white titanium plating, gentle blue optical lenses, and articulated three-fingered hands.",
+          "Leo": "A young human child with curly brown hair, wearing oversized blue pajamas."
+        },
+        "locations": {
+          "Sector Nine Nursery": "A cozy, circular room with wooden wall paneling, a small porthole window, and a single wooden crib."
+        },
+        "objects": {
+          "Woolen Blanket": "A thick, hand-knitted gray blanket resting on the edge of the wooden crib.",
+          "Power Terminal": "A flush-mounted wall panel emitting a steady green LED data stream."
+        }
+      },
+      "plot_fingerprint": "2a468bcb94ac9d3fa6328dafe922b88476826350bbbf638b3acf4333095e5f65"
     }
   ]
 }
