@@ -1255,6 +1255,18 @@
         "review_model": "gemini-3.1-flash-lite"
       },
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-4b0f31f567221552114e",
+      "story_sha256": "4aa6770a34596c9be4334a101b024eca48629e2a16cf41f03d64dea677fa5a1e",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story relies on the 'Oakhaven' setting and naming convention, which has been used in multiple recently published stories provided in the reference list (e.g., 'The Miller's Last Flour and the Oath of Oakhaven', 'The Stone-Mason of Oakhaven and the Pact of the Sunken Well', 'The Miller's Last Grinding and the Vow of Oakhaven').",
+        "The narrative structure and thematic focus on a 'last heirloom' being sacrificed for village survival closely mirrors the repetitive tropes found in the provided list of recent publications, failing to offer sufficient originality in premise or setting."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
