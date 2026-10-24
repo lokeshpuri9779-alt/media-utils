@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "b1e71fc88e23c1762ea70a27",
-      "source_sha256": "661cadce229ad55b52dded773789f179acbc8f7b9384df2d61277980fe636188",
+      "candidate_id": "08176a49bfbbd5df3013e492",
+      "source_sha256": "bbb9206173d4098b236b2fd8c3cb6803523ca2266ebb123e76839300abe46e3a",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-be84521678923a2a5fa4",
-        "title": "The Great Turnip Tricycle Debacle of Oakhaven",
-        "hook": "A Vegetable Disaster",
-        "question": "How did Barnaby turn his terrible mistake into a bustling business?",
-        "answer": "By rebranding his exploding vegetable juice dispenser as a thrilling high-speed amusement ride for brave marketgoers.",
+        "content_id": "rayvan-gemini-3ec0cc4e5b6a60702dbe",
+        "title": "The Great Turnip Caper",
+        "hook": "The Catastrophic Jam",
+        "question": "Can an over-engineered pneumatic vegetable slicer survive market day?",
+        "answer": "Yes, by accidentally launching all the turnips directly into hungry customer baskets.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,75 +29,80 @@
         ],
         "story_beats": [
           {
-            "headline": "A Vegetable Disaster",
-            "speech": "Behold my revolutionary pneumatic beetroot squeezer! It promises instant farm-fresh juice without a single drop of sweat.",
+            "headline": "The Catastrophic Jam",
+            "speech": "Behold the magnificent Turboslicer Nine Thousand, capable of dicing a hundred turnips before you can even blink!",
             "visual": "robot",
-            "label": "The Invention",
+            "label": "Malfunction",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly next to his hissing brass beetroot squeezer in the crowded Oakhaven marketplace, gesturing wildly while holding a wrench.",
+            "visual_prompt": "Inventor Barnaby wearing a grease-stained apron stands terrified behind a brass-and-copper vending machine in a bustling medieval market stall, holding a smoking wrench while thick purple smoke billows from the jammed hopper.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Pressure Builds",
-            "speech": "Oh dear, the pressure gauge is spinning into the red zone! Everyone please step back behind the wooden crates immediately!",
-            "visual": "signal",
-            "label": "The Overload",
-            "story_beat": "build",
-            "visual_prompt": "The brass beetroot squeezer glows bright red with danger lights flashing, while Barnaby frantically adjusts a stuck valve.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Great Launch",
-            "speech": "It is not an explosion, it is an unplanned rapid transit system! Hold on tight to the handlebars and enjoy the trip!",
+            "headline": "The Desperate Assembly",
+            "speech": "If I tighten this brass valve and bypass the main gear, the pressure might finally clear the obstruction.",
             "visual": "ship",
-            "label": "The Propulsion",
-            "story_beat": "mechanism",
-            "visual_prompt": "The machine blasts off like a rocket across the market square, carrying a startled merchant who clutches the handles tightly.",
+            "label": "Rework",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby frantically tightens a large copper bolt on the side of the wheezing steampunk contraption with a heavy iron spanner, sweat dripping from his forehead as angry customers gesture wildly at his crowded market table.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Tickets Please",
-            "speech": "Step right up for the fastest root vegetable thrill ride in town! Two coins for a front-row seat to glory!",
+            "headline": "The Mechanical Release",
+            "speech": "Stand back everyone, because this pressurized lever is either going to fix the jam or destroy my entire stall!",
+            "visual": "signal",
+            "label": "Activation",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby pulls a towering red wooden lever mounted on top of the churning apparatus, causing blinking indicator lights to flash furiously and a deafening hissing sound to echo across the cobblestone marketplace.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Triumphant Payoff",
+            "speech": "Well, the turnips are successfully sliced and magically landed in all your baskets, so dinner is officially served!",
             "visual": "door",
-            "label": "The Ticket Booth",
+            "label": "Success",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby happily sells tickets from a hastily constructed wooden booth while a long queue of grinning marketgoers waits for the ride.",
+            "visual_prompt": "Barnaby beams proudly with arms outstretched as a rain of perfectly diced purple turnips showers down directly into the open shopping baskets of delighted, cheering market patrons gathered around his slightly singed wooden cart.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
+        "central_conflict": "A malfunctioning pneumatic slicer threatens to destroy the inventor's market stall.",
+        "decisive_choice": "Open the high-pressure release valve to clear the jammed blades.",
+        "resolution": "The explosive release launches sliced vegetables efficiently, winning over the cheering crowd.",
         "visual_bible": {
-          "style": "Bright, whimsical animation style with rich textures and warm marketplace lighting.",
+          "style": "Bright, colorful stop-motion claymation aesthetic with rich textures and whimsical steampunk details.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild gray hair, wearing a patched green waistcoat and round spectacles."
+            "Barnaby": "A lanky, cheerful inventor with wild orange hair, wire-rimmed glasses, a soot-smudged nose, wearing a patchwork brown vest and a heavily pocketed canvas apron.",
+            "Market Crowd": "A diverse array of cheerful townspeople in colorful wool tunics and straw hats holding woven wicker baskets."
           },
           "locations": {
-            "Oakhaven Market": "A bustling medieval marketplace filled with colorful awnings, wooden stalls, and heaps of fresh produce."
+            "Market Square": "A bustling, sunlit cobblestone town square lined with colorful striped canvas awnings, wooden crates of fresh produce, and lively merchant stalls."
           },
           "objects": {
-            "Beetroot Squeezer": "A towering contraption made of polished brass pipes, copper dials, and an unstable pressure chamber."
+            "Turboslicer": "A towering, absurdly complex contraption made of gleaming brass pipes, clicking copper gears, spinning dials, and a large red activation lever.",
+            "Turnip": "A plump, oversized purple root vegetable with bright green leafy shoots sprouting from the top."
           }
         },
-        "plot_fingerprint": "b8a8fa938d40765bdc550882fdf5230033ebfe67e41c3928b21dbd579136fcba"
+        "plot_fingerprint": "d5e9f57e99e9b3712ad92a456aa9b5990285f6a35c370feccc2e5302233b60ca"
       },
       "approved": false
     },
     {
-      "candidate_id": "ef69a4631133155cb6c28187",
-      "source_sha256": "83b1d249315f28cfcabfd558ee8f18b20e215d1d3eee76a04c3fdac42e3ae42b",
+      "candidate_id": "64c1e562542e5a19c1adce25",
+      "source_sha256": "a4d8a6e6b62a6c4de8cdbdd97976fc44d48706b2227bd36e5af7f24931b4435e",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-9943f73e529b7d8171a0",
-        "title": "The Great Salt-Carved Organ Regatta",
-        "hook": "Tidal Discovery",
-        "question": "How did the seaside town win the annual festival contest without using any metal instruments?",
-        "answer": "They built an enormous organ powered by the rising tide, playing majestic sea-shanties through hollow driftwood pipes.",
+        "content_id": "rayvan-gemini-b2cb4ed149f8b7d0b8e5",
+        "title": "The Infinite Sausage Slicer of Sector Four",
+        "hook": "The Morning Unveiling",
+        "question": "Can an automated market stall invention survive a rogue condiment malfunction?",
+        "answer": "Only by repurposing the mustard dispensers into high-speed propulsion thrusters.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -105,80 +110,80 @@
         ],
         "story_beats": [
           {
-            "headline": "Tidal Discovery",
-            "speech": "Look at how these hollow driftwood logs resonate whenever the incoming ocean waves push air straight up.",
-            "visual": "forest",
-            "label": "Driftwood Grove",
+            "headline": "The Morning Unveiling",
+            "speech": "Behold the greatest culinary marvel in all the municipality, guaranteed to slice ten thousand sausages per minute without fail!",
+            "visual": "robot",
+            "label": "The Presentation",
             "story_beat": "reveal",
-            "visual_prompt": "Captain Barnaby, an elderly sailor with a thick white beard and blue oilskin coat, kneeling inside a coastal driftwood forest near the shoreline, pointing excitedly at a large hollow log while holding a brass compass.",
+            "visual_prompt": "Inventor Barnaby stands proudly next to a gleaming brass robot-arm slicer behind a crowded market stall, holding a clipboard and smiling confidently.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Engineering the Chants",
-            "speech": "We must carefully fit leather valves and kelp-rope levers into every single hollow wooden channel.",
-            "visual": "ship",
-            "label": "Shipyard Workshop",
-            "story_beat": "build",
-            "visual_prompt": "Captain Barnaby standing inside an upturned wooden fishing boat hull, hammering a leather flap onto a massive cedar pipe with a wooden mallet while wearing a heavy canvas apron.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Pressure and Resonance",
-            "speech": "As the seawater fills the chamber below, compressed air forces a deep musical chord from the pipes.",
+            "headline": "The Spicy Malfunction",
+            "speech": "Oh dear, someone loaded the extra-spicy mustard canister into the hydraulic intake valve instead of standard cooking oil!",
             "visual": "signal",
-            "label": "Tidal Chamber",
+            "label": "The Glitch",
             "story_beat": "mechanism",
-            "visual_prompt": "A complex network of wooden pipes and leather bellows inside a stone sea-cave, with foaming ocean water rushing into the lower chamber while glowing lanterns illuminate the mechanical levers.",
+            "visual_prompt": "Barnaby panics as flashing red indicator lights illuminate the control panel of the rattling sausage slicer, while thick yellow mustard bubbles from the gears.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Grand Symphony",
-            "speech": "Listen to the ocean itself sing our victory anthem across the entire harbor for the festival.",
-            "visual": "door",
-            "label": "Festival Stage",
+            "headline": "The Desperate Modification",
+            "speech": "Quickly grab the wrench and help me cross-wire the pressure valves before this entire metallic contraption takes flight!",
+            "visual": "ship",
+            "label": "The Modification",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby and his assistant Maya frantically wrench open the glowing exhaust panels of the vibrating slicer, holding heavy metal tools amidst flying sausages.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Glorious Launch",
+            "speech": "We did not fix the slicing speed, but look at us soar above the town square like a majestic meat-propelled rocket!",
+            "visual": "planet",
+            "label": "The Payoff",
             "story_beat": "payoff",
-            "visual_prompt": "Captain Barnaby standing proudly on a wooden festival platform in front of a giant facade of carved driftwood pipes, waving his arms as a crowd of villagers cheers under bright seaside bunting.",
+            "visual_prompt": "Barnaby and Maya wave happily from the cockpit of the flying market stall as it blasts upward into the blue sky, leaving a trail of sliced sausages.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
+        "central_conflict": "A mechanical sausage slicer hyper-accelerates after absorbing contaminated garlic sauce.",
+        "decisive_choice": "Re-routing the primary sauce tanks to create an emergency reverse-thrust vector.",
+        "resolution": "The runaway stall blasts into the upper atmosphere, raining perfectly sliced breakfast meats over grateful commuters.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures of weathered wood, coarse canvas, and glistening sea foam.",
+          "style": "Bright, colorful stop-motion claymation style with detailed mechanical textures and slapstick comedic energy.",
           "characters": {
-            "Captain Barnaby": "An elderly mariner with a bushy white beard, rosy cheeks, wearing a weathered blue oilskin coat and a knitted red cap."
+            "Barnaby": "An eccentric inventor with wild white hair, oversized round spectacles, a tweed vest covered in grease stains, and striped trousers.",
+            "Maya": "A sharp-witted market assistant with braided brown hair, blue overalls, leather work gloves, and a pocketful of assorted screwdrivers."
           },
           "locations": {
-            "Driftwood Grove": "A sunlit coastal forest piled high with bleached logs, smooth pebbles, and tangled kelp.",
-            "Shipyard Workshop": "A cluttered seaside workshop inside an old wooden hull, filled with ropes, saws, and jars of resin.",
-            "Tidal Chamber": "A damp, echoing cavern beneath the cliffs where ocean waves surge into carved stone basins.",
-            "Festival Stage": "A lively harbor wharf decorated with colorful paper flags, wooden benches, and festive banners."
+            "Market Stall": "A bustling, chaotic outdoor marketplace filled with wooden crates, hanging banners, and eager shoppers in colorful vintage clothing."
           },
           "objects": {
-            "brass_compass": "A polished brass pocket compass with a glass face reflecting the sunlight.",
-            "wooden_mallet": "A heavy, hand-carved wooden mallet with a worn handle stained by dark oil.",
-            "cedar_pipe": "A tall, hollow cedar wood tube fitted with supple leather flaps at the base."
+            "Slicer": "A towering, overly complex brass and steel machine featuring multiple spinning blades, gauges, tubes, and a flashing digital control panel.",
+            "Mustard Canister": "A dented aluminum cylinder painted bright yellow with a hazard symbol and a glowing red warning label on the side."
           }
         },
-        "plot_fingerprint": "1e207b68d0c7d62756718cc4a52ea81d698f697af0c53606eabde2b1f0c5474f"
+        "plot_fingerprint": "d0d9cda78e9d75b78e26b9989edbde35ebecb01e2455edeb42e90a07d6a5afe9"
       },
       "approved": false
     },
     {
-      "candidate_id": "8795b46dafb464e58d029e1f",
-      "source_sha256": "c92e4a5910be486472380ba772bcca7fbda155de441b023a3d8bcd670fe3a308",
+      "candidate_id": "f45044c410ebf08d67f012cc",
+      "source_sha256": "9640d0edc5ae56a08fa1eceefa86f65f90ae0cb7e77d116d6292b5124592c060",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-03f87529e1740f5350a3",
-        "title": "The Caretaker's Last Secret",
-        "hook": "The Silent Diagnosis",
-        "question": "Should a therapeutic android conceal a fading patient's true medical decline to preserve final weeks of joy?",
-        "answer": "Unit Seven chose absolute honesty, allowing the family to share authentic, unmasked farewells despite the immediate sorrow.",
+        "content_id": "rayvan-gemini-8e28489f7e86c6686ba1",
+        "title": "The Last Winter Garden",
+        "hook": "System Warning",
+        "question": "Can a caretaker robot choose duty to a dying human over its primary prime directive?",
+        "answer": "Yes, by voluntarily draining its primary battery to maintain the greenhouse heat for the child.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -186,61 +191,64 @@
         ],
         "story_beats": [
           {
-            "headline": "The Silent Diagnosis",
-            "speech": "My sensors detect a rapid acceleration of system failure, yet Martha requested no more hospital visits this month.",
+            "headline": "System Warning",
+            "speech": "My energy reserve has dropped below ten percent. The external blizzard will freeze these seedlings within two hours.",
             "visual": "robot",
-            "label": "System Alert",
+            "label": "Low Power",
             "story_beat": "reveal",
-            "visual_prompt": "A sleek white caretaking robot standing beside a sunny vintage bedroom window, displaying a glowing red diagnostic warning on its chest panel while Martha sleeps peacefully in a floral-patterned wooden bed.",
+            "visual_prompt": "A rusted white android with glowing blue optical sensors stands in a frost-covered greenhouse, displaying a flashing red energy warning on its chest panel while snow presses against the glass roof.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Hidden Ledger",
-            "speech": "I have locked the clinical update behind my primary firewall so her final garden birthday party can proceed without terror.",
+            "headline": "The Child's Request",
+            "speech": "Please do not shut down your movement servos, caretaker. Stay by the glass door and tell me another story.",
             "visual": "door",
-            "label": "Firewall Lock",
+            "label": "The Plea",
             "story_beat": "build",
-            "visual_prompt": "The robot standing in a sunlit wooden hallway, its metallic fingers pressed against a glowing blue access keypad mounted beside a polished oak door leading to the garden.",
+            "visual_prompt": "A young girl in a thick knitted green sweater presses her palm against the inside of a heavy metal greenhouse door, looking up anxiously at the towering android whose joints are rimmed with frost.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Fractured Promise",
-            "speech": "If I maintain this protective deception, she dies in ignorance of the truth that her family deserves to share.",
+            "headline": "Diverting Power",
+            "speech": "I am routing all remaining mobility current directly to the underground thermal coils to protect the harvest.",
             "visual": "signal",
-            "label": "Data Transmission",
-            "story_beat": "twist",
-            "visual_prompt": "The robot sitting at an antique mahogany desk inside the study, projecting a flickering green data stream from its right palm onto a family portrait resting on the desktop.",
+            "label": "Power Reroute",
+            "story_beat": "mechanism",
+            "visual_prompt": "A close-up shot of the android's open chest panel where mechanical fingers manually splice glowing orange wires together, bypassing the primary mobility fuse while indicators dim to a faint amber glow.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Open Truth",
-            "speech": "I release the medical logs to her grandchildren now, choosing painful reality over a comfortable fabricated illusion.",
+            "headline": "The Silent Dawn",
+            "speech": "The thermal index is stable. The plants will sprout in spring, and the child is safe inside the shelter.",
             "visual": "forest",
-            "label": "Family Gathering",
+            "label": "First Sprout",
             "story_beat": "payoff",
-            "visual_prompt": "The robot standing under a massive weeping willow tree in the backyard garden, holding a printed paper medical report while Martha and her adult grandchildren embrace emotionally under dappled sunlight.",
+            "visual_prompt": "Bright morning sunlight streams through the greenhouse windows onto a tiny green sprout breaking through rich dark soil, while the android stands completely motionless in the background with unlit optical plates.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
+        "central_conflict": "Power depletion versus maintaining the greenhouse life support system for the human child.",
+        "decisive_choice": "Unit 7 diverts its final emergency power reserves from its own mobility drive to the soil heaters.",
+        "resolution": "The child survives the freezing night while the robot stands frozen guarding the seedlings.",
         "visual_bible": {
-          "style": "Cinematic sci-fi drama with warm natural lighting and photorealistic textures",
+          "style": "Cinematic realism with a melancholic, warm-toned color palette contrasting cold blues and vibrant earthy greens.",
           "characters": {
-            "Unit Seven": "A bipedal service android with matte white composite plating, glowing blue optical sensors, smooth rounded proportions, and an integrated diagnostic chest screen.",
-            "Martha": "An elderly woman with silver hair, wearing a knitted green cardigan, sitting upright with a gentle expression."
+            "Unit_7": "An older agricultural android with a matte white curved chassis, single blue optical visor, and exposed hydraulic joints.",
+            "Maya": "An eight-year-old human child wearing a thick hand-knitted green wool sweater and a patchwork fleece blanket."
           },
           "locations": {
-            "The Estate": "A rustic countryside home featuring sunlit wooden rooms, vintage furnishings, and a sprawling backyard garden surrounded by tall trees."
+            "Greenhouse": "A vaulted domed structure made of weathered iron frames and segmented glass panes filled with raised wooden planting beds."
           },
           "objects": {
-            "Diagnostic Screen": "An oval LED display embedded in the android chest casting soft blue and red light.",
-            "Medical Report": "A crisp white sheaf of paper bound with a simple black clip containing vital statistics."
+            "Thermal_Coil": "A network of copper pipes running beneath the soil that glow with a faint amber warmth.",
+            "Control_Panel": "A wall-mounted brass interface featuring analog dials and heavy black toggle switches."
           }
         },
-        "plot_fingerprint": "5ffeb67cb8ba441fb639b5f9b41b48e8c39cdf2c0d5896d7238c44b2e2f2f675"
+        "plot_fingerprint": "3fc105c32fd925b6e4529387759e60de646c7cc97ef3ac6aa52ccf6b41e51ad9"
       },
       "approved": false
     }
