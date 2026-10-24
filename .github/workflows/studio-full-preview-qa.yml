@@ -66,7 +66,8 @@ jobs:
           from astra_v2.visual_artifact_backdrop import apply_pack_background, choose_scene
           import os
           root = os.environ['ASTRA_ASSET_PACK_ROOT']
-          for scene in ('forest', 'city', 'underwater'):
+          from astra_v2.visual_artifact_library import SCENES
+          for scene in SCENES:
               shot = {'visual': scene}
               assert choose_scene(shot) == scene, scene
               base = Image.new('RGB', (540, 960), (11, 22, 33))
