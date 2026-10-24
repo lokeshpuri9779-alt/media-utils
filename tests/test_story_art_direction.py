@@ -116,7 +116,7 @@ class StoryArtTests(unittest.TestCase):
                                     "-of", "json", str(output)],
                                    check=True, capture_output=True, text=True, timeout=30)
             stream = json.loads(probe.stdout)["streams"][0]
-            self.assertEqual((stream["width"], stream["height"]), (540, 960))
+            self.assertEqual((stream["width"], stream["height"]), (1080, 1920))
 
     def test_reviewed_image_exports_and_renders_exact_scene(self):
         with tempfile.TemporaryDirectory() as root:
