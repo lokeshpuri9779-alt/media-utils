@@ -5,6 +5,23 @@ from astra_v2.visual_artifact_backdrop import choose_scene, apply_backdrop
 
 
 class ArtifactBackdropTests(unittest.TestCase):
+    def test_unified_scene_analysis_reports_source_and_gaps(self):
+        from astra_v2.visual_artifact_backdrop import analyze_story_scene
+        result = analyze_story_scene({"story_environment": "rainforest",
+                                      "visual": "city", "speech": "ocean"})
+        self.assertEqual(result, {"scene": "forest",
+                                  "source_field": "story_environment",
+                                  "matched_term": "rainforest",
+                                  "needs_background": False})
+        missing = analyze_story_scene({"visual": "an unknown dimension"})
+        self.assertEqual(missing["scene"], None)
+        self.assertTrue(missing["needs_background"])
+
+    def test_unified_analysis_ignores_nontext_fields(self):
+        from astra_v2.visual_artifact_backdrop import analyze_story_scene
+        self.assertEqual(analyze_story_scene({"visual": ["forest"],
+                                               "speech": "museum"})["scene"], "museum")
+
     def test_known_story_locations(self):
         for term, expected in (
             ("The lighthouse keeper", "lighthouse"),
