@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "dc01415081a05a3099d6106a",
-      "source_sha256": "eec0bf9b68babf82cf5ef77bc07198670aff56c3c830618015edf734df37f8c2",
+      "candidate_id": "dce4abd1d9880354ec4bca9c",
+      "source_sha256": "c1051877d382d62d57698db71e77871247b518fa0b4dd193fed71831826e2881",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-db7caf05b9d13769b440",
-        "title": "The Great Tomato Launchpad",
-        "hook": "Tomato Trouble",
-        "question": "How do you stop a catapult from launching fruit at the local butcher?",
-        "answer": "By inventing a gravity-reversing umbrella.",
+        "content_id": "rayvan-gemini-fb83e5a74bd8624d4d8d",
+        "title": "The Great Turnip Tricycle Debacle",
+        "hook": "The Hidden Hazard",
+        "question": "How did Silas sell his vegetable vehicle?",
+        "answer": "By hiding the beets until the buyers tested the steering.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,220 +29,152 @@
         ],
         "story_beats": [
           {
-            "headline": "Tomato Trouble",
-            "speech": "Behold my magnificent breakfast launcher! It feeds the entire village in seconds, provided we duck swiftly.",
+            "headline": "The Hidden Hazard",
+            "speech": "Behold the rotating root carriage! It holds twenty pounds of parsnips without tipping over, mostly.",
             "visual": "robot",
             "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "An eccentric inventor in a crowded medieval market proudly stands next to a wooden catapult holding a giant red tomato. The inventor wears oversized brass goggles and gestures dramatically at the sky. A local butcher ducks behind a striped market stall in the background.",
+            "visual_prompt": "Silas proudly gesturing toward his wooden tricycle with an attached mechanized turnip basket in a crowded market square, wearing a canvas apron and smiling nervously.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Mechanical Malfunction",
-            "speech": "The tension springs are entirely uncooperative today. If we release this lever, chaos descends upon the poultry.",
+            "headline": "The Market Chaos",
+            "speech": "Step back everyone! The steering column requires a firm left yank to avoid the cabbage crates!",
             "visual": "signal",
-            "label": "The Build",
+            "label": "The Test Run",
             "story_beat": "build",
-            "visual_prompt": "The same inventor frantically adjusts a tangled web of ropes and squeaky wooden gears on the marketplace catapult. Sparks fly from a misaligned iron cog. The butcher points angrily with a cleaver while clutching a ruffled white goose.",
+            "visual_prompt": "Silas pedaling frantically past stacked wooden crates of cabbages while onlookers point and laugh, with a flashing red warning lamp mounted on the handlebars.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Reversal",
-            "speech": "Quickly open the umbrella before the ripe projectiles achieve orbit and destroy the town hall weather vane!",
+            "headline": "The Unexpected Cargo",
+            "speech": "Wait, those are not turnips tumbling onto the cobblestones, those are escaped racing ferrets!",
+            "visual": "door",
+            "label": "The Mishap",
+            "story_beat": "twist",
+            "visual_prompt": "Silas staring in sheer disbelief at the open rear compartment of the tricycle, from which a dozen furry white ferrets are spilling out onto the busy street.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Rodent Ruckus",
+            "speech": "Turns out ferrets clear out pests better than turnips, and the grain merchant bought the whole machine!",
+            "visual": "ship",
+            "label": "The Sale",
+            "story_beat": "payoff",
+            "visual_prompt": "Silas happily counting heavy gold coins handed over by a wealthy grain merchant, while the tricycle is now safely packed with cheering shoppers holding ferrets.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "visual_bible": {
+          "style": "Bright, colorful slapstick cartoon animation style with exaggerated expressions and lively market backgrounds.",
+          "characters": {
+            "Silas": "An enthusiastic, lanky inventor with wild red hair, round spectacles, wearing a patched canvas apron and a striped shirt.",
+            "Grain Merchant": "A stout, well-dressed buyer with a magnificent handlebar mustache and a fancy green velvet vest."
+          },
+          "locations": {
+            "Market Square": "A bustling, sunlit cobblestone marketplace filled with colorful striped awnings, wooden crates, and busy shoppers."
+          },
+          "objects": {
+            "tricycle": "A heavy wooden three-wheeled cart with bicycle pedals, a front brass steering horn, and a large metal basket on the back.",
+            "warning_lamp": "A bright red mechanical brass lantern mounted on the handlebars with a spinning glass lens."
+          }
+        },
+        "plot_fingerprint": "2126c6c4b8c7d124fefa5358c2998c08c1cde2b999f9e5a96a27a990346f8ec8"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "cba4d4059a78347eed650367",
+      "source_sha256": "41dc4f29124f3da1385badf39df23fae1acf73422853a55a3118dd1986843c17",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-ebe95f90387bfdd03cd5",
+        "title": "The Great Muddy Creek Bridge-Building Championship",
+        "hook": "The Annual Gridlock",
+        "question": "How did two rival neighborhood towns finally settle their forty-year bridge rivalry without spending a fortune?",
+        "answer": "By recycling old playground slides and bicycle chains into a synchronized drawbridge that worked on water pressure.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Annual Gridlock",
+            "speech": "Every single year our towns argue over who gets to cross Muddy Creek first during the harvest festival.",
+            "visual": "forest",
+            "label": "The River Divide",
+            "story_beat": "reveal",
+            "visual_prompt": "Mayor Clara stands by the dense pine forest edge, pointing angrily across the muddy river bank at the rival town, wearing a green wool vest and holding a rolled-up blueprint.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Junk Yard Engineering",
+            "speech": "Instead of fighting, we scavenged discarded bicycle frames and rusted playground slides from the abandoned community park behind us.",
+            "visual": "signal",
+            "label": "Gathering Parts",
+            "story_beat": "build",
+            "visual_prompt": "Toby and Maya weld discarded bicycle chains together inside a glowing signal tower workshop, wearing protective goggles and heavy denim aprons, surrounded by metal scraps.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Hydraulic Secret",
+            "speech": "We hooked up heavy rainwater collection barrels to act as a natural counterweight lifting the central span smoothly.",
             "visual": "door",
             "label": "The Mechanism",
             "story_beat": "mechanism",
-            "visual_prompt": "The inventor snaps open a polka-dot umbrella that glows with swirling blue reverse-gravity energy. A volley of flying red tomatoes halts mid-air above the bustling vegetable stalls, reversing trajectory back down toward the launcher.",
+            "visual_prompt": "Maya turns a large wooden valve next to a heavy steel bulkhead door, causing water to rush into the hanging barrels and tilt the makeshift bridge upward.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Breakfast Served",
-            "speech": "A complete tactical breakfast delivered safely to our plates without a single casualty or bruised melon.",
+            "headline": "A United Crossing",
+            "speech": "Both towns finally crossed the creek together at the exact same moment, proving teamwork beats stubborn pride forever.",
             "visual": "ship",
-            "label": "The Success",
+            "label": "The Grand Opening",
             "story_beat": "payoff",
-            "visual_prompt": "The marketplace is peaceful again. The inventor and the butcher sit calmly at a wooden table beneath the glowing umbrella, eating sliced tomatoes off toast. The catapult rests quietly in the corner covered in flour.",
+            "visual_prompt": "Clara and Toby wave cheerfully from the center of the newly raised bridge as a small wooden fishing boat safely passes underneath through the canal.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Whimsical stop-motion claymation aesthetic with rich earthy tones, detailed textures, and cinematic warm lighting.",
+          "style": "Stop-motion felt and claymation hybrid aesthetic with warm earthy color grading and detailed handcrafted textures.",
           "characters": {
-            "inventor": "Barnaby, a tall lanky man with wild grey hair, a patched tweed vest, round spectacles, and an expression of eternal optimism.",
-            "butcher": "Gus, a stout, red-faced man wearing a bloodstained white apron and a flat cap, carrying a shiny steel meat cleaver."
+            "Clara": "An elderly female mayor with round spectacles, grey hair tied in a bun, wearing a thick green wool vest and brown trousers.",
+            "Toby": "A young inventive teenager with bright orange hair, dirt smudges on his cheeks, wearing a blue plaid shirt and heavy denim work aprons.",
+            "Maya": "A sharp-witted local mechanic with curly dark hair, wearing safety goggles pushed up on her forehead and a red canvas utility jacket."
           },
           "locations": {
-            "market_square": "A bustling cobblestone medieval town square filled with striped canopies, wooden carts, dangling sausages, and baskets of fresh produce."
+            "Muddy Creek": "A wide, slow-moving riverbank surrounded by dense pine trees and rolling green hills under a bright afternoon sky.",
+            "Signal Tower Workshop": "A cluttered, cozy two-story wooden workshop filled with hanging tools, glowing amber warning lamps, and heaps of recycled metal parts.",
+            "The Bridge Site": "A freshly constructed modular crossing made of painted playground metal and bicycle components stretching over the muddy water."
           },
           "objects": {
-            "catapult": "A rickety wooden siege engine modified with bicycle chains, copper funnels, and a velvet-lined spoon bucket.",
-            "umbrella": "A vintage black umbrella retrofitted with brass dials, glowing blue vacuum tubes, and a curved mahogany handle."
+            "blueprint": "A large rolled-up paper sheet with hand-drawn charcoal sketches of interlocking gears and counterweight systems.",
+            "bicycle_chain": "A heavy, rusted steel chain salvaged from dozens of old multi-speed bicycles, cleaned and oiled for high tension use.",
+            "water_barrel": "A massive wooden rain barrel reinforced with iron hoops, fitted with a brass spigot at the bottom base."
           }
         },
-        "plot_fingerprint": "5f8d28a526181f71b5a36855bd83293d9aaf5841155a2942af12a3c5e07fe3a3"
+        "plot_fingerprint": "ffab7884a85e87961b7498ab38b606149a2e709c739768c3fdffc39f71cf0876"
       },
       "approved": false
     },
     {
-      "candidate_id": "5f0ebc53fd369a9de6e74385",
-      "source_sha256": "2491b1850b142ae8616b96a1eefd1cf045c3636db83ac7384cefd94d23a0c8bb",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-5e58c7a78b3b1027847b",
-        "title": "The Weaver's Last Thread",
-        "hook": "The Hidden Loom",
-        "question": "Can true friendship survive the burden of a secret that protects the village?",
-        "answer": "Yes, but only when the friends choose honesty over a comforting deception.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Hidden Loom",
-            "speech": "Look closely at the ancient wooden frame, Silas. The warp threads are singing with a dangerous, forbidden resonance.",
-            "visual": "forest",
-            "label": "The Discovery",
-            "story_beat": "reveal",
-            "visual_prompt": "A close-up action shot inside a dense forest clearing. Silas holds a glowing wooden shuttle near a moss-covered loom, looking shocked. Bram stands beside him, pointing at the vibrating threads with a worried expression.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Loom's Demand",
-            "speech": "Every single cloth we weave steals color from the valley's soil, starving the crops to keep our homes warm.",
-            "visual": "door",
-            "label": "The Growing Cost",
-            "story_beat": "build",
-            "visual_prompt": "Medium shot of Silas and Bram standing before an old timber cellar door in the forest. The door is slightly ajar, casting a magical amber light onto Bram's fearful face. Silas grips the door handle tightly, hesitating.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Breaking the Mechanism",
-            "speech": "If we smash the primary gear tonight, the village will freeze, but the valley will finally heal and grow.",
-            "visual": "signal",
-            "label": "The Difficult Choice",
-            "story_beat": "mechanism",
-            "visual_prompt": "A wide angle shot of Silas raising a heavy iron mallet above a magical stone gear box that emits pulsing blue signals. Bram watches anxiously from the background, his hands clasped together in nervous anticipation.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A New Dawn",
-            "speech": "The frost is melting away from the fields, and for the first time in years, the morning earth smells alive.",
-            "visual": "planet",
-            "label": "The True Return",
-            "story_beat": "payoff",
-            "visual_prompt": "An expansive outdoor landscape view at dawn. Silas and Bram sit side by side on a green hill, watching vibrant green sprouts push through the soil under a bright sky.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "visual_bible": {
-          "style": "Cinematic historical fantasy with earthy tones, realistic textures, and magical glowing elements.",
-          "characters": {
-            "Silas": "A young weaver with unruly dark hair, wearing a patched brown tunic and leather vest.",
-            "Bram": "A tall villager with a neatly trimmed beard, wearing a woolen gray cloak over a green shirt."
-          },
-          "locations": {
-            "forest": "An ancient, misty woodland filled with giant mossy oaks and hidden stone structures.",
-            "cellar": "A rustic underground storage room lit by magical artifacts and dusty wooden beams."
-          },
-          "objects": {
-            "shuttle": "A hand-carved wooden weaving shuttle inlaid with glowing blue runes.",
-            "mallet": "A heavy iron-headed hammer with a sturdy ash wood handle wrapped in leather."
-          }
-        },
-        "plot_fingerprint": "7e0aa694ed5136d2e6740c0800502a93fa64747db39cab1f099aba44aacc2f58"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "05db1fbe03c4392911925c08",
-      "source_sha256": "558a712fca8cfbbb885aae373688e3670a6c60bd57f480abc95a9b8474db8bed",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-493b2f448330255e5ed9",
-        "title": "The Coral Symphony",
-        "hook": "Sudden Silence",
-        "question": "Why did the great reef go completely silent overnight?",
-        "answer": "The resident manta ray discovered that a shifting current had sealed the ancient sound-vent, which they quickly reopened together.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "Sudden Silence",
-            "speech": "Listen closely everyone. The singing corals have stopped completely, leaving only a chilling and eerie emptiness behind us.",
-            "visual": "signal",
-            "label": "The Quiet Reef",
-            "story_beat": "reveal",
-            "visual_prompt": "An anxious blue-ringed octopus points a tentacle toward a dark, silent coral structure in a glowing bioluminescent grotto. The octopus wears a tiny kelp scarf and looks extremely worried. No other characters present.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Following the Current",
-            "speech": "We must swim deep into the trench where the water pressure changes and find the blockage causing this terrible disaster.",
-            "visual": "forest",
-            "label": "Kelp Trench",
-            "story_beat": "build",
-            "visual_prompt": "The blue-ringed octopus swims alongside a cautious sea turtle through a dense, glowing kelp forest. The turtle has a weathered, speckled shell and holds a polished nautilus shell map in its flipper.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Blocked Vent",
-            "speech": "Look right there! A massive heavy boulder has rolled over the resonance vent, trapping all the beautiful melody inside.",
-            "visual": "door",
-            "label": "Stone Barrier",
-            "story_beat": "mechanism",
-            "visual_prompt": "The sea turtle uses its flippers to push against a massive grey round stone resting over a glowing underwater crevice. The octopus is floating nearby, directing the push with excited hand gestures.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Melody Restored",
-            "speech": "Push together now with all our might so the vibrant songs can finally return to our beloved ocean home.",
-            "visual": "ship",
-            "label": "Resonant Waters",
-            "story_beat": "payoff",
-            "visual_prompt": "The sea turtle and octopus successfully roll the boulder away, releasing a bright burst of colorful musical sound waves that ripple through the vibrant coral city. Both characters smile happily.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "visual_bible": {
-          "style": "Lush, vibrant underwater animation style with bright bioluminescent colors, soft glowing lighting, and rich aquatic textures.",
-          "characters": {
-            "octopus": "A small, bright blue octopus with glowing yellow rings, large expressive eyes, wearing a neatly tied green kelp scarf.",
-            "turtle": "An elder green sea turtle with a deeply textured, speckled brown shell, wise gentle eyes, and scarred flippers."
-          },
-          "locations": {
-            "grotto": "A deep sea cavern decorated with pulsating neon-pink and purple corals that light up the dark water.",
-            "trench": "A narrow underwater canyon filled with towering golden kelp stalks and floating sparkling particulate matter."
-          },
-          "objects": {
-            "map": "A pearlescent nautilus shell with glowing engraved star charts etched across its natural spiral surface.",
-            "boulder": "A heavy, grey, moss-covered round stone resting tightly over a thermal crack in the ocean floor."
-          }
-        },
-        "plot_fingerprint": "1b3c19b0fd746b72f96c20858ccd7882fdb2a149da67699d408ef6a0cdf97642"
-      },
+      "candidate_id": "609a71d16a92174f1a318289",
+      "source_sha256": "4f4b8fe346d513184fce7b56528577b14c5ce8a58a89dade82986c10d8daed4d",
+      "status": "rewrite_failed",
+      "error": "RuntimeError",
+      "error_detail": "All enabled OmniRoute providers failed: gemini:Generated story title or beat count invalid",
       "approved": false
     }
   ]
