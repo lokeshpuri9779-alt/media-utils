@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 34,
-  "confirmed_today": 33,
-  "last_attempt_at": "2026-10-24T10:08:13.614961+00:00",
+  "attempts": 35,
+  "confirmed_today": 34,
+  "last_attempt_at": "2026-10-24T10:26:40.952994+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -575,30 +575,38 @@
       "format": "short",
       "uploaded_at": "2026-10-24T09:51:26.238614+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-gemini-96ef72ff00c426306ed7": {
+      "video_id": "NYHxj_OPiH4",
+      "confirmed_at": "2026-10-24T10:24:02.723854+00:00",
+      "title": "The Miller's Last Flour and the Oath of Oakhaven",
+      "format": "short",
+      "uploaded_at": "2026-10-24T10:08:15.358275+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "NYHxj_OPiH4": {
-      "content_id": "rayvan-gemini-96ef72ff00c426306ed7",
-      "title": "The Miller's Last Flour and the Oath of Oakhaven",
+    "vl06hc5Fw8A": {
+      "content_id": "rayvan-gemini-f2e205a51c3761591095",
+      "title": "The Stone-Mason of Oakhaven and the Pact of the Sunken Well",
       "day": "2026-10-24",
-      "uploaded_at": "2026-10-24T10:08:15.358275+00:00",
+      "uploaded_at": "2026-10-24T10:26:42.719347+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "007c58deb6a10ced0a71d8b4ee8313b2bfde0edc58207b05a165c26adaf3c5fe",
+      "plot_fingerprint": "38348dc79256ab11ae74bb553cf14a38f51c044331a30115ed150df3b2f11484",
       "story_beats": [
         {
-          "speech": "Look at the cracked riverbed, Thomas. We have only one bag of grain left for the entire winter."
+          "speech": "Look closely at the foundation stones, Elara, the earth is shifting beneath our feet and the main well is bleeding away."
         },
         {
-          "speech": "If we divide this flour now, neither family will survive the cold months ahead without making a terrible sacrifice."
+          "speech": "If we do not seal this chamber now, the entire village will sink into the abyss by tomorrow's first golden dawn light."
         },
         {
-          "speech": "Take your half of the flour to your children, Matthew. True friendship means bearing the hunger together."
+          "speech": "We have shared every secret here for twenty years, but today we must break our sanctuary to protect the lives of others."
         },
         {
-          "speech": "We survived the bitter winter because we stood as one. Our friendship is richer than any harvest."
+          "speech": "The dust has finally settled, our water is gone, but the village stands firm and the people are safe for another hundred years."
         }
       ],
       "renderer": "studio-7.3.0"
@@ -606,11 +614,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-24T10:06:38.454926+00:00",
+  "last_preflight_at": "2026-10-24T10:24:02.202603+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T10:08:15.737254+00:00",
+    "at": "2026-10-24T10:26:43.173498+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2284,10 +2292,33 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-f2e205a51c3761591095": {
+      "at": "2026-10-24T10:26:40.952978+00:00",
+      "title": "The Stone-Mason of Oakhaven and the Pact of the Sunken Well",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "38348dc79256ab11ae74bb553cf14a38f51c044331a30115ed150df3b2f11484",
+      "story_beats": [
+        {
+          "speech": "Look closely at the foundation stones, Elara, the earth is shifting beneath our feet and the main well is bleeding away."
+        },
+        {
+          "speech": "If we do not seal this chamber now, the entire village will sink into the abyss by tomorrow's first golden dawn light."
+        },
+        {
+          "speech": "We have shared every secret here for twenty years, but today we must break our sanctuary to protect the lives of others."
+        },
+        {
+          "speech": "The dust has finally settled, our water is gone, but the village stands firm and the people are safe for another hundred years."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T10:08:15.737177+00:00",
+    "at": "2026-10-24T10:26:43.173422+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -2298,21 +2329,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T10:08:15.737240+00:00",
+    "at": "2026-10-24T10:26:43.173485+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-24T10:06:55.369722+00:00",
+    "at": "2026-10-24T10:24:25.203282+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-96ef72ff00c426306ed7",
-    "video_url": "https://www.youtube.com/watch?v=NYHxj_OPiH4",
+    "content_id": "rayvan-gemini-f2e205a51c3761591095",
+    "video_url": "https://www.youtube.com/watch?v=vl06hc5Fw8A",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T10:08:15.736905+00:00",
+    "at": "2026-10-24T10:26:43.173162+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -2324,18 +2355,18 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T10:08:15.737171+00:00",
+    "at": "2026-10-24T10:26:43.173416+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 259,
+        "eligible": 258,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3
         },
         "seen": 6,
-        "total": 332
+        "total": 331
       },
       "ASTRA_STORY_HISTORY_FILTER": {
         "before": 332,
@@ -2354,13 +2385,11 @@
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
         "approved": 1,
-        "considered": 2,
+        "considered": 1,
         "duration_rejected": 0,
         "not_ready": 0,
         "policy_rejected": {},
-        "render_exception": {
-          "NameError": 1
-        },
+        "render_exception": {},
         "render_qa_rejected": 0
       }
     },
