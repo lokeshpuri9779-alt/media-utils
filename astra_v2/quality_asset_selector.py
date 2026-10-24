@@ -52,3 +52,21 @@ def select_assets(root, *, kind, tags=(), style=None, min_size=128, limit=5,
     return [{"id":entry["id"],"path":entry["path"],"score":score,
              "license":entry["license"],"source":entry["source"],
              "artist":entry["artist"]} for score,_,entry in ranked[:max(0,limit)]]
+
+
+def select_or_request_generation(root, *, kind, tags=(), video_format=None,
+                                 style=None, min_size=128, allow_attribution=False):
+    """Use verified existing artwork first; report a generation gap only if none fits.
+
+    This is a pure planning step: never calls an external provider or approves art.
+    The caller may generate only when needs_generation is true.
+    """
+    matches = select_assets(root, kind=kind, tags=tags, style=style,
+                            min_size=min_size, limit=1,
+                            allow_attribution=allow_attribution,
+                            video_format=video_format)
+    if matches:
+        return {"source": "existing_asset", "asset": matches[0],
+                "needs_generation": False}
+    return {"source": "missing_asset", "asset": None,
+            "needs_generation": True}
