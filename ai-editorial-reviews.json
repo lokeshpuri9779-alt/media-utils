@@ -859,6 +859,17 @@
         "reviewed_at": "2026-10-24T04:25:59.708299+00:00",
         "review_model": "gemini-3.1-flash-lite"
       }
+    },
+    {
+      "content_id": "rayvan-gemini-8ecd4f8a560222a8a48e",
+      "story_sha256": "e660cf68e0f32034241e9f7792417de0ecc0fc3932a3f4e8dcc43838085f23e7",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise, involving a robot in a forest environment making a choice between ecological directives and the preservation of a single life form, is highly derivative of the provided list of recent publications, specifically 'Unit 9 and the Last Seedling of Sector Four' and 'Unit 44's Final Protocol and the Sanctuary of the Withered Grove'.",
+        "The narrative structure and character archetype (a numbered unit robot in a nature-focused setting) repeat the thematic and causal mechanisms found in multiple examples provided in the reference list, failing the originality requirement."
+      ],
+      "record": null
     }
   ]
 }
