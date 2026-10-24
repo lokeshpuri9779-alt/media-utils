@@ -1,29 +1,19 @@
 {
-  "observed_at": "2026-10-24T11:11:49.176458+00:00",
-  "generated": 12,
+  "observed_at": "2026-10-24T12:48:58.446839+00:00",
+  "generated": 20,
   "requested": 20,
-  "generation_failures": [
-    {
-      "index": 0,
-      "reason": "ValueError"
-    },
-    {
-      "index": 10,
-      "reason": "ValueError"
-    },
-    {
-      "index": 11,
-      "reason": "ValueError"
-    },
-    {
-      "index": 15,
-      "reason": "provider_http_429"
-    }
-  ],
-  "reviewed": 12,
-  "approved": 4,
+  "generation_failures": [],
+  "reviewed": 20,
+  "approved": 12,
   "review_issues": [
-    "The candidate story's premise, setting, and causal mechanisms heavily overlap with recently published works in the comparison history, specifically 'The Thruster Valve Dispute on Vessel Orion' and related mechanical dispute tropes.",
+    "Fails the originality check due to repeating a very similar desert explorer / hidden oasis formula.",
+    "The candidate story 'The Rescuer of Frost Peak and the Shattered Ascent' repeats the exact premise, causal mechanism, and setting of the recently published comparison 'The Rescuer of Iron-Peak and the Fractured Ascent' involving an isolated climber on an icy vertical ledge saved via a risky crevasse/bridge crossing under storm threat.",
+    "The central conflict, decisive choice, and resolution closely duplicate the recently published comparison story 'The Ranger and the Briar-Heart', which features a collapsing chasm, crossing via a shared safety/harness line instead of racing alone, and reaching safety just as the obstacle seals or the storm breaks.",
+    "The premise, causal mechanism, and resolution ('The Trench Weaver and the Silent Current' involving a blocked thermal vent, clearing debris/valves, and restoring warm/mineral-rich water) closely duplicate a recently published entry in the comparison history.",
+    "The story premise, setting, and causal mechanisms heavily overlap with recently published works such as 'The Sand-Walker and the Verdant Pulse of the Red Wastes' and 'The Sand-Walker and the Whispering Oasis of Kaelith'.",
+    "The story repeats the premise, conflict, and causal mechanism of recently published works in the comparison history, specifically 'The Sturgeon of Sunken Shelf and the Choked Vent' and 'The Trench Weaver and the Silent Current', which both deal with clearing calcified debris/mineral scale from blocked thermal vents to restore warm water flow to marine nurseries.",
+    "The title and core premise ('The Weaver of Ironwood and the Canopy Bridge') directly mirrors and repeats the recently published premise 'The Weaver of Ironwood and the Amber Sap' in style, character naming tropes, and thematic elements.",
+    "The title and narrative premise strongly overlap with the recently published comparison history, specifically sharing tropes, settings, and naming patterns with 'The Rescuer of Borealis Ridge and the Final Ice-Bound Signal' and 'The Rescuer of Iron-Peak and the Fractured Ascent'.",
     "ai_editorial_rejection",
     "review_failed:HTTP_429",
     "review_provider:rate_limited"
