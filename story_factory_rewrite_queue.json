@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "a3f6e5c7e9b15e22cbbada86",
-      "source_sha256": "4d93f64355c8cb158664efd99c7af128305bf5011a9c2dc81aac1fc29eb45d6c",
+      "candidate_id": "eaeedaa8075c83dd4eecb0c4",
+      "source_sha256": "01c2d5431533660da1c447d31715f48dba2487078f4855bfada3a537cea09d84",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-58340af386fabccec020",
-        "title": "The Great Automatic Cabbage Slicer Fiasco",
-        "hook": "The Grand Unveiling",
-        "question": "How did Barnaby ruin the morning market?",
-        "answer": "He deployed an over-engineered cabbage slicer that turned every vegetable into confetti.",
+        "content_id": "rayvan-gemini-d2c997a3144b321741e8",
+        "title": "The Great Tomato Launchpad",
+        "hook": "The Splash",
+        "question": "How did Silas sell his exploding produce?",
+        "answer": "He marketed the mess as a thrilling harvest experience.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,77 +29,77 @@
         ],
         "story_beats": [
           {
-            "headline": "The Grand Unveiling",
-            "speech": "Behold citizens, my magnificent culinary automaton, designed to chop a thousand cabbages per second with absolute precision!",
-            "visual": "robot",
-            "label": "Market Square",
-            "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly in a bustling outdoor market next to a steampunk robot shaped like a giant metal goose, holding a shiny brass lever.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Furious Assembly",
-            "speech": "Quickly load the massive green cabbages into the intake hopper before the steam pressure reaches maximum capacity!",
+            "headline": "The Splash",
+            "speech": "Behold the turbo squash! It flies straight into the air before delivering a magnificent fruity payload everywhere.",
             "visual": "signal",
-            "label": "The Loading Zone",
+            "label": "The Revelation",
+            "story_beat": "reveal",
+            "visual_prompt": "An eccentric inventor named Silas wearing a stained apron stands in a bustling chaotic farmers market holding a glowing yellow squash under a vibrant red canopy.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Assembly",
+            "speech": "We insert pressurized yeast into the hollow stem, seal it tight with beeswax, and watch the anticipation grow.",
+            "visual": "robot",
+            "label": "The Construction",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically shovels giant cabbages into a glowing red hopper attached to the robot while steam whistles loudly.",
+            "visual_prompt": "Silas uses a small brass funnel to pour bubbling green yeast into a hollow gourd while curious market vendors watch closely with skeptical expressions.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Mechanical Catastrophe",
-            "speech": "Wait, do not pull that secondary emergency cord, it overrides the centrifugal dampening gears completely!",
+            "headline": "The Trigger",
+            "speech": "Pull the tiny copper lever right now, but do not stand directly underneath unless you love sticky shoes.",
             "visual": "door",
-            "label": "Control Panel",
+            "label": "The Mechanism",
             "story_beat": "mechanism",
-            "visual_prompt": "A market vendor named Clara accidentally pulls a large iron lever on the machine, causing sparks to fly from a small access hatch.",
+            "visual_prompt": "A nervous elderly customer holding a wooden timer nervously reaches out a trembling finger toward a tiny gleaming copper lever mounted on a melon.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Confetti Payoff",
-            "speech": "Well, technically every single customer now has enough fine green confetti to celebrate a lifelong parade.",
+            "headline": "The Success",
+            "speech": "Every single stall is covered in delicious pulp, proving that messy chaotic shopping is the absolute future.",
             "visual": "ship",
-            "label": "The Aftermath",
+            "label": "The Payoff",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby and Clara are covered entirely in green shreds while a miniature airship floats overhead dropping more chopped vegetables.",
+            "visual_prompt": "Silas happily opens a massive bulging money pouch while cheering market crowds wearing fruit splattered hats celebrate underneath a rain of falling seeds.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright stop-motion claymation aesthetic with rich earthy tones and detailed mechanical textures.",
+          "style": "Vibrant and humorous animated comedy style with rich textures and exaggerated expressions.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild white hair, goggles pushed up on his forehead, wearing a patched tweed vest and striped trousers.",
-            "Clara": "A practical market vendor with a red headscarf, a blue apron, and an expression of constant skepticism."
+            "Silas": "An enthusiastic middle-aged inventor with wild gray hair, messy goggles pushed up on his forehead, and a flour-dusted green apron.",
+            "Vendor": "A stern market inspector with a curled mustache, a clipboard, and a very neat blue striped vest."
           },
           "locations": {
-            "Market Square": "A crowded cobblestone marketplace filled with wooden stalls, colorful awnings, and hanging lanterns."
+            "Market": "A bustling cobblestone farmers market filled with colorful awnings, wooden crates, and hanging lanterns."
           },
           "objects": {
-            "hopper": "A large conical brass funnel covered in dents and glowing pressure gauges.",
-            "lever": "A polished mahogany handle attached to a heavy iron rod that controls the main gear."
+            "TurboSquash": "A bright yellow elongated squash with a glowing copper nozzle and a tiny mechanical timer strapped to its side.",
+            "MoneyPouch": "A bulging brown leather sack tied with a golden string overflowing with shiny silver coins."
           }
         },
-        "plot_fingerprint": "4bc6ea116ed9759c7d01eafff5298ff443a3c15356f4866085a243d42555fee2"
+        "plot_fingerprint": "91c631073dfd4cd613acc4cc747b0272e88669d51c4c9e30f8afb56aa3c33595"
       },
       "approved": false
     },
     {
-      "candidate_id": "d0b4db8328fd8b98b658a44e",
-      "source_sha256": "72fe57d63f6e9263caf2cdaeabc2bbef13e5ce0fb57a0e319a7b08611ced6131",
+      "candidate_id": "faa2ed4264f1447cac92710a",
+      "source_sha256": "a70214304519a131531fba815e60cc2e020bd82d37317862c18c4afc0bf1e74e",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-1b5d8590fd4e31859b67",
-        "title": "The Infinite Soup Spoon Debacle",
-        "hook": "The Spark of Genius",
-        "question": "What happens when an inventor brings a self-heating soup spoon to a chaotic food market?",
-        "answer": "It boils the entire soup stall dry and launches a potato into the mayor's hat.",
+        "content_id": "rayvan-gemini-fe2438f64df64d653bee",
+        "title": "The Whispering Canopy Protocol",
+        "hook": "The Hidden Archive",
+        "question": "How did Elian and Miri navigate the sentient canopy without awakening the dormant root-guardians?",
+        "answer": "They synchronized their breathing with the bio-luminescent pulse of the ancient moss, rendering their footfalls invisible to the root-guardians.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -107,77 +107,77 @@
         ],
         "story_beats": [
           {
-            "headline": "The Spark of Genius",
-            "speech": "Behold the Thermal Spoon! Never eat cold broth again while browsing the noisy town vegetable carts.",
-            "visual": "robot",
-            "label": "Thermal Spoon Prototype",
+            "headline": "The Hidden Archive",
+            "speech": "We must match our footsteps to the blue moss pulse, Elian, or the roots will awaken.",
+            "visual": "forest",
+            "label": "Canopy Discovery",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby holding a glowing metal spoon in a bustling outdoor market, looking proud with wide eyes.",
+            "visual_prompt": "Wide shot of Elian in tan explorer gear holding a glowing amber compass and Miri in green moss-woven armor pressing against a colossal glowing tree trunk in a twilight forest.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "A Heated Demonstration",
-            "speech": "Just dial the core temperature up to maximum output and watch the onion stew bubble instantly.",
+            "headline": "Harmonic Resonance",
+            "speech": "Hold the amber prism steady against the bark while I tune the frequency of our resonance.",
             "visual": "signal",
-            "label": "Temperature Dial",
+            "label": "Acoustic Tuning",
             "story_beat": "build",
-            "visual_prompt": "Barnaby turning a brass dial on the spoon handle, emitting a bright red signal flare into the crowded market sky.",
+            "visual_prompt": "Medium closeup of Miri holding a pulsing blue crystal signal emitter toward a ribbed tree trunk while Elian watches anxiously, shadows dancing on their faces.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Overload",
-            "speech": "Oh no, the thermal feedback loop is too strong for the copper wiring inside this handle!",
+            "headline": "The Divergent Path",
+            "speech": "The signal is splitting into three resonance lanes. Choose the center current or we drop into the abyss.",
             "visual": "door",
-            "label": "Melting Stall Gate",
+            "label": "The Root Junction",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby dropping the red-hot spoon near a wooden vegetable stall door, surrounded by steam and flying cabbages.",
+            "visual_prompt": "Low angle shot of Elian and Miri standing before three massive arched openings formed by intertwined roots, with Miri pointing at the glowing center opening.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Mayorial Landing",
-            "speech": "Well, at least the town mayor finally has a hot potato resting securely upon his very expensive silk hat.",
+            "headline": "Safe Passage",
+            "speech": "We crossed the threshold together, proving that human breath and forest pulse can finally beat as one.",
             "visual": "planet",
-            "label": "Baked Potato Impact",
+            "label": "Summit Ascent",
             "story_beat": "payoff",
-            "visual_prompt": "Mayor Pumpernickel standing in the market square with a steaming baked potato on his top hat while Barnaby whistles innocently.",
+            "visual_prompt": "Wide shot of Elian and Miri standing atop the giant canopy overlooking a mist-filled alien planet at dawn, holding hands with their equipment glowing softly.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright, whimsical claymation style with vibrant saturated colors and detailed slapstick character expressions.",
+          "style": "Cinematic sci-fi fantasy illustration with rich bioluminescent lighting and detailed textures.",
           "characters": {
-            "Barnaby": "A frantic inventor with wild orange hair, oversized round spectacles, and a stained beige workshop apron.",
-            "Mayor Pumpernickel": "A pompous official with a curled mustache, fine purple velvet coat, and a very tall black top hat."
+            "Elian": "A young male explorer with short dark hair, wearing durable tan explorer gear and a utility belt.",
+            "Miri": "A female botanist with braided auburn hair, wearing green moss-woven adventure armor and carrying a signal emitter."
           },
           "locations": {
-            "Market Square": "A crowded cobblestone plaza filled with colorful striped awnings, wooden crates of vegetables, and bustling citizens."
+            "forest": "An ancient alien twilight forest featuring towering bioluminescent trees, floating spores, and intricate root networks."
           },
           "objects": {
-            "Thermal Spoon": "A bulky silver spoon with a glowing red brass dial and smoking copper wires trailing from the handle.",
-            "Top Hat": "A pristine black silk hat with a wide brim, currently serving as a landing pad for stray root vegetables."
+            "amber_compass": "A palm-sized brass compass with a glowing amber core that detects bio-electrical currents.",
+            "signal_emitter": "A sleek metallic rod with a blue crystalline tip used for broadcasting acoustic resonance frequencies."
           }
         },
-        "plot_fingerprint": "a5eb8ff675e3cb83fbafa13fca2dd6c0cb83d85c151bcf263ac521e6eb740fb8"
+        "plot_fingerprint": "183b14c9cf22bb990cf49c39fc130a8f694ea045bbf15d25357422ce51e717e2"
       },
       "approved": false
     },
     {
-      "candidate_id": "2f189e5fcbc1367d9952141c",
-      "source_sha256": "96b848776c1329928ca4b7db66a31a952465ab68fb23e064418a2695dab90dd8",
+      "candidate_id": "4f9dad1a4149ac68a053552f",
+      "source_sha256": "e870a97c3db76ee72df2a8ece4774c802c2e77e47a4dd34a63738bb8e4d7f8b9",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-f47ba159733ff0e7ee48",
-        "title": "The Whispering Ice",
-        "hook": "The Hidden Fracture",
-        "question": "Can an automated sonar buoy deployment save the trapped research team before the blizzard collapses the ridge?",
-        "answer": "Yes, by programming the automated crawler to navigate the crevasse using acoustic reflection.",
+        "content_id": "rayvan-gemini-cb8be6646ed9c790abcc",
+        "title": "The Coral Cartographer",
+        "hook": "The Midnight Drift",
+        "question": "Why did the glowing kelp maps shift their routes overnight?",
+        "answer": "A juvenile sea turtle discovered that shifting underwater currents were caused by a hidden subterranean geyser system.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -185,62 +185,62 @@
         ],
         "story_beats": [
           {
-            "headline": "The Hidden Fracture",
-            "speech": "Look at the seismic telemetry. The glacier shelf is not shifting naturally; something underneath is vibrating.",
+            "headline": "The Midnight Drift",
+            "speech": "Look closely at the bioluminescent trenches; the ancient navigational vines have completely rearranged themselves during the high tide.",
             "visual": "signal",
-            "label": "Deep Subsurface Anomaly",
+            "label": "Trench Discovery",
             "story_beat": "reveal",
-            "visual_prompt": "Dr. Vance in heavy orange parka and goggles points at a glowing green holographic seismic monitor inside the glowing blue research tent, holding a metal stylus.",
+            "visual_prompt": "A young sea turtle with iridescent shell markings points a fin at glowing green kelp lines pulsing against a dark, rocky seabed trench.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Deploying the Crawler",
-            "speech": "We must launch the tracked sonar robot immediately to map the unstable tunnel network before the storm hits.",
-            "visual": "robot",
-            "label": "Autonomous Reconnaissance",
+            "headline": "Following the Current",
+            "speech": "We must swim deeper into the pressurized canyon before the thermal vents seal off our only viable passage forward.",
+            "visual": "forest",
+            "label": "Canyon Descent",
             "story_beat": "build",
-            "visual_prompt": "Engineer Miller kneeling in the blowing white snow outside the base camp, carefully setting a small orange-and-black tracked robot onto the icy surface.",
+            "visual_prompt": "The sea turtle swims cautiously through a dense forest of giant blue sea ferns, holding a polished mother-of-pearl compass that glows warmly.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Navigating the Crevasse",
-            "speech": "The crawler is locked onto the acoustic beacon, tracing the safe path through the collapsing ice labyrinth.",
-            "visual": "ship",
-            "label": "Acoustic Pathfinding",
-            "story_beat": "mechanism",
-            "visual_prompt": "A close-up of the rugged crawler robot driving across a narrow snow bridge over a deep dark blue crevasse, its twin headlights cutting through swirling snowflakes.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Safe Return",
-            "speech": "Data received and verified. The escape route is mapped, and the entire team can now evacuate safely.",
+            "headline": "The Hidden Valve",
+            "speech": "If I wedge this heavy volcanic stone into the primary fissure, the entire valley's underwater currents will finally stabilize.",
             "visual": "door",
-            "label": "Successful Evacuation",
+            "label": "Stone Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "An octopus companion pushes a large basalt stone into a circular stone aperture set into the ocean floor, releasing bubbles of trapped gas.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A Harmonious Sea",
+            "speech": "The glowing maps are steady at last, proving our careful adjustment brought permanent peace to the winding coral pathways.",
+            "visual": "ship",
+            "label": "Stable Currents",
             "story_beat": "payoff",
-            "visual_prompt": "Dr. Vance and Engineer Miller standing together inside the steel airlock of the main base facility, smiling as they watch the rescue transport vehicle arrive through the reinforced glass.",
+            "visual_prompt": "The sea turtle and the octopus float peacefully near a sunlit coral reef as calm, orderly streams of blue water flow past them.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Cinematic realism with high-contrast cold lighting, hyper-detailed snow particles, and atmospheric industrial arctic design.",
+          "style": "Vibrant and luminous underwater animation style with rich bioluminescent lighting and detailed coral textures.",
           "characters": {
-            "Dr. Vance": "A seasoned arctic geologist with weathered features, wearing a heavy safety-orange hooded parka with reflective silver striping and frost-rimmed protective goggles.",
-            "Engineer Miller": "A meticulous technical specialist in a dark navy blue polar expedition suit with reinforced yellow knee pads and a digital datapad strapped to their forearm."
+            "turtle": "A cheerful juvenile sea turtle with shimmering emerald-green shell patterns, large expressive eyes, and nimble flippers.",
+            "octopus": "A clever, small purple octopus with flexible tentacles and bright yellow suction cups, wearing a tiny explorer satchel."
           },
           "locations": {
-            "Research Tent": "A reinforced geodesic dome tent glowing with interior blue LED work lights against a vast expanse of jagged white glacier ice.",
-            "Base Camp Ridge": "A windswept arctic plateau surrounded by towering blue glacial ice walls under a twilight sky filled with blowing snow."
+            "trench": "A deep underwater canyon lined with glowing green kelp and dark basalt rock formations.",
+            "reef": "A sunny, colorful coral reef populated by small schooling fish and soft pastel anemones."
           },
           "objects": {
-            "Seismic Stylus": "A sleek silver handheld stylus with a blinking red LED indicator tip used for interacting with holographic displays.",
-            "Sonar Crawler": "A robust, low-profile tracked robotic drone painted international orange with dual high-intensity LED headlights and a top-mounted acoustic sonar dish."
+            "compass": "A polished mother-of-pearl casing housing a spinning needle made of crystallized sea glass.",
+            "stone": "A heavy, dark basalt rock with natural carved grooves designed to fit underwater valves."
           }
         },
-        "plot_fingerprint": "36bc757287256c5bd9807ea0195e036cded68f4c3f06d262da2307476091a310"
+        "plot_fingerprint": "96ab46079596e7e170b8389a40a710f9bc7e8c8cb91aded9228661d75021eca6"
       },
       "approved": false
     }
