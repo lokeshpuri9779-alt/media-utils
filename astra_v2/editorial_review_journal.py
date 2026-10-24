@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 
 from astra_v2.editorial_approval_manifest import story_digest, review_decision
+from astra_v2.causal_premise_review import causal_premise_match
 
 
 def record_review(story, verdict, destination, history=()):
@@ -29,6 +30,7 @@ def record_review(story, verdict, destination, history=()):
         "approved": verdict.get("approved") is True,
         "issues": verdict.get("issues") or [],
         "record": verdict.get("record"),
+        "causal_repeat_evidence": causal_premise_match(story, history),
     }
     if entry["approved"]:
         if not isinstance(entry["record"], dict) or review_decision(story, entry["record"], history):
