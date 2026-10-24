@@ -1227,6 +1227,18 @@
         "review_model": "gemini-3.1-flash-lite"
       },
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-0c028480be8481d7c6d6",
+      "story_sha256": "acdaec5f6ca957ef56ac99a67bcb0a0dfa3aa2676d87131532ba9bf64661d13b",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise, character name (Elias), and central conflict (a retired rescuer performing a high-stakes mountain rescue during a storm) are highly repetitive of previously published content in the provided dataset, specifically 'The Rescuer of Iron-Peak and the Fractured Ascent' and 'The Alpine Rescuer and the Summit Flare'.",
+        "The narrative structure and character archetype follow a pattern already established in multiple entries within the provided history, failing to offer a sufficiently original contribution to the series."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }

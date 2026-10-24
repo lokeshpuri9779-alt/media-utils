@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 48,
-  "confirmed_today": 47,
-  "last_attempt_at": "2026-10-24T14:06:09.367750+00:00",
+  "attempts": 49,
+  "confirmed_today": 48,
+  "last_attempt_at": "2026-10-24T14:17:40.803541+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -920,16 +920,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "Q7LHxYL8TF4": {
-      "content_id": "rayvan-gemini-12e3050392459322c4a4",
+    },
+    "rayvan-gemini-12e3050392459322c4a4": {
+      "video_id": "Q7LHxYL8TF4",
+      "confirmed_at": "2026-10-24T14:15:23.520593+00:00",
       "title": "The Caretaker's Choice at Ironwood Cottage",
-      "day": "2026-10-24",
-      "uploaded_at": "2026-10-24T14:06:10.960792+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-24T14:06:10.960792+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "00814a1acaade34303d8d1d035adfe60d365cd9cd5f9edcef5b2bcb44aef6b71",
       "story_beats": [
@@ -946,16 +944,43 @@
           "speech": "We step across the threshold together into the golden twilight, embracing a fleeting moment of freedom that no algorithm could calculate."
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "LCDIBZAW1qY": {
+      "content_id": "rayvan-gemini-50dd3f1d3c3cf777ce60",
+      "title": "The Engineer's Disagreement at Hull Sector Seven",
+      "day": "2026-10-24",
+      "uploaded_at": "2026-10-24T14:17:42.556750+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "0028d69c3e328521729f4b9a403ac3f34be0d6b14ecd8623a20727868ac4814c",
+      "story_beats": [
+        {
+          "speech": "We cannot vent the main manifold now, Jax! It will freeze the secondary thruster valves completely solid."
+        },
+        {
+          "speech": "If we isolate the pressure chamber first, we can run the flush safely without risking the entire propulsion system."
+        },
+        {
+          "speech": "Watch the temperature gauge closely as the secondary valve cycles. If it spikes, shut it down immediately."
+        },
+        {
+          "speech": "Your isolation method worked perfectly. The pressure is stable, and our navigation vector is completely secure."
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-24T14:04:11.046657+00:00",
+  "last_preflight_at": "2026-10-24T14:15:23.170470+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T14:06:11.393807+00:00",
+    "at": "2026-10-24T14:17:42.946469+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2963,10 +2988,33 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-50dd3f1d3c3cf777ce60": {
+      "at": "2026-10-24T14:17:40.803523+00:00",
+      "title": "The Engineer's Disagreement at Hull Sector Seven",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "0028d69c3e328521729f4b9a403ac3f34be0d6b14ecd8623a20727868ac4814c",
+      "story_beats": [
+        {
+          "speech": "We cannot vent the main manifold now, Jax! It will freeze the secondary thruster valves completely solid."
+        },
+        {
+          "speech": "If we isolate the pressure chamber first, we can run the flush safely without risking the entire propulsion system."
+        },
+        {
+          "speech": "Watch the temperature gauge closely as the secondary valve cycles. If it spikes, shut it down immediately."
+        },
+        {
+          "speech": "Your isolation method worked perfectly. The pressure is stable, and our navigation vector is completely secure."
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T14:06:11.393726+00:00",
+    "at": "2026-10-24T14:17:42.946392+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -2977,21 +3025,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T14:06:11.393792+00:00",
+    "at": "2026-10-24T14:17:42.946455+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-24T14:04:33.461077+00:00",
+    "at": "2026-10-24T14:15:44.111396+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-12e3050392459322c4a4",
-    "video_url": "https://www.youtube.com/watch?v=Q7LHxYL8TF4",
+    "content_id": "rayvan-gemini-50dd3f1d3c3cf777ce60",
+    "video_url": "https://www.youtube.com/watch?v=LCDIBZAW1qY",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T14:06:11.393406+00:00",
+    "at": "2026-10-24T14:17:42.946112+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -3003,42 +3051,42 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T14:06:11.393718+00:00",
+    "at": "2026-10-24T14:17:42.946385+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 267,
+        "eligible": 266,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3
         },
         "seen": 6,
-        "total": 340
+        "total": 339
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 341,
+        "before": 339,
         "fingerprint": 0,
         "id": 6,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 335,
+        "remaining": 333,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 335,
-        "remaining": 268
+        "pool": 333,
+        "remaining": 266
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
         "approved": 1,
-        "considered": 17,
+        "considered": 18,
         "duration_rejected": 0,
         "not_ready": 0,
         "policy_rejected": {},
         "render_exception": {
-          "CreativeReject": 16
+          "CreativeReject": 17
         },
         "render_qa_rejected": 0
       }
