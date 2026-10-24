@@ -157,7 +157,14 @@ def draw_subject(image, subject, t, accent, action='idle'):
             d.ellipse((x-145,y-145,x+145,y+260),fill=color)
             for side in (-1,1):
                 dx=side*120
-                d.ellipse((x+dx-60,y+15,x+dx+60,y+180+int(25*math.sin(t*5+side))),fill=color)
+                if action in {"wave", "point", "hug", "clap", "carry", "repair", "pick", "throw"}:
+                    # Use the same action-aware limb cues as mammal characters.
+                    wing_lift = pose["left_hand_y"] if side == -1 else pose["right_hand_y"]
+                    wing_swing = round(wing_lift * 0.55)
+                    d.ellipse((x+dx-60+wing_swing,y+15+wing_lift,
+                               x+dx+60+wing_swing,y+180+wing_lift),fill=color)
+                else:
+                    d.ellipse((x+dx-60,y+15,x+dx+60,y+180+int(25*math.sin(t*5+side))),fill=color)
             if subject == "owl":
                 d.polygon([(x-145,y-65),(x-120,y-240),(x-20,y-130)],fill=color)
                 d.polygon([(x+145,y-65),(x+120,y-240),(x+20,y-130)],fill=color)
