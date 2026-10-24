@@ -42,6 +42,18 @@ def limb_pose(action, t):
         return {"left_foot_x": 0, "right_foot_x": 0,
                 "left_hand_y": 0,
                 "right_hand_y": -round(lift * (0.65 + .35 * math.sin(phase)))}
+    if action == "hug":
+        # Both arms rise together, with a gentle settling motion.
+        reach = 54 + 8 * math.sin(phase * 0.5)
+        return {"left_foot_x": 0, "right_foot_x": 0,
+                "left_hand_y": -round(reach),
+                "right_hand_y": -round(reach)}
+    if action == "clap":
+        # Hands approach symmetrically on each beat, without leg motion.
+        beat = 0.5 + 0.5 * math.cos(phase * 1.7)
+        lift = round(24 + 22 * beat)
+        return {"left_foot_x": 0, "right_foot_x": 0,
+                "left_hand_y": -lift, "right_hand_y": -lift}
     if action in ("repair", "pick", "carry", "push", "pull", "open"):
         reach = {"repair": 38, "pick": 65, "carry": 38,
                  "push": 22, "pull": 22, "open": 30}[action]
