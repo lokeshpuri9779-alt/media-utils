@@ -19,6 +19,7 @@ def validate(path):
     seen_ids = set()
     seen_titles = set()
     settings = collections.Counter()
+    structures = collections.Counter()
     failures = []
     count = 0
     with Path(path).open(encoding="utf-8") as stream:
@@ -56,9 +57,13 @@ def validate(path):
                     if beat.get("story_environment") not in SUPPORTED:
                         raise ValueError("beat missing supported setting")
                 settings[env] += 1
+                structures[tuple((str(beat.get("story_beat") or ""), str(beat.get("action") or "")) for beat in beats)] += 1
             except (ValueError, TypeError, json.JSONDecodeError) as exc:
                 failures.append({"line": line_no, "error": str(exc)})
     return {"records": count, "valid": count - len(failures),
+            "unique_beat_action_structures": len(structures),
+            "largest_structure_group": max(structures.values(), default=0),
+            "structure_diversity_warning": count >= 20 and len(structures) < max(2, count // 100),
             "invalid": len(failures), "settings": dict(sorted(settings.items())),
             "failures": failures[:25], "approved_for_publication": False}
 
