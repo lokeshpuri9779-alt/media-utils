@@ -20,17 +20,19 @@ def apply_story_art(image, shot):
     """Composite explicitly requested verified art; do nothing if none requested."""
     requested=shot.get("illustrated_assets")
     if requested is None and shot.get("auto_illustrated_art"):
-        from astra_v2.quality_asset_selector import select_assets
+        from astra_v2.quality_asset_selector import select_or_request_generation
         root = Path(shot.get("illustrated_asset_root") or ".").resolve()
         tags = shot.get("auto_art_tags", [])
         if not isinstance(tags, list) or not all(isinstance(t, str) for t in tags):
             raise ValueError("auto_art_tags must be a list of strings")
-        candidates = select_assets(root, kind=shot.get("auto_art_kind", "prop"),
-                                   tags=tags, style=shot.get("auto_art_style"),
-                                   limit=1, allow_attribution=False)
-        if not candidates:
+        video_format = "shorts" if image.height > image.width else "long"
+        choice = select_or_request_generation(
+            root, kind=shot.get("auto_art_kind", "prop"), tags=tags,
+            style=shot.get("auto_art_style"), video_format=video_format,
+            allow_attribution=False)
+        if choice["needs_generation"]:
             return 0
-        requested = [{"id": candidates[0]["id"], "box": shot.get("auto_art_box")}]
+        requested = [{"id": choice["asset"]["id"], "box": shot.get("auto_art_box")}]
     if requested is None:
         return 0
     if not isinstance(requested,list) or len(requested)>8:
