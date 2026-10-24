@@ -23,7 +23,7 @@ SCENE_TERMS = {
     "mountain": ("mountain", "summit"),
     "desert": ("desert", "dune"),
     "underwater": ("underwater", "ocean", "coral"),
-    "space": ("space", "orbital", "planet"),
+    "space": ("space", "orbital", "orbit", "planet", "galaxy", "cosmos", "astronaut"),
     "laboratory": ("laboratory", "lab"),
     "garden": ("garden", "greenhouse"),
     "lighthouse": ("lighthouse",),
