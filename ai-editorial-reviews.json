@@ -1140,6 +1140,22 @@
         "review_provider:provider_unavailable"
       ],
       "record": null
+    },
+    {
+      "content_id": "rayvan-gemini-7008c30e97bebd3667be",
+      "story_sha256": "d5d0b63605029db4a276099ce70bf85cb870ceb1bbcf280e8a4827e50e79bdf4",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-7008c30e97bebd3667be",
+        "story_sha256": "d5d0b63605029db4a276099ce70bf85cb870ceb1bbcf280e8a4827e50e79bdf4",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the specific plot points, characters, or settings of the provided comparison list.; The narrative demonstrates clear causal coherence, with a logical progression from the discovery of the distress signal to the sacrifice and final rescue.; The content is suitable for a general audience and does not contain unsafe, misleading, or policy-violating material.; The story avoids common tropes found in the provided list, such as the 'Oakhaven' or 'Salt-Flat' settings, and maintains a distinct identity.",
+        "reviewed_at": "2026-10-24T12:23:55.598335+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }
