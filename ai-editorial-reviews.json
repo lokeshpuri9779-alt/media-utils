@@ -1326,6 +1326,19 @@
         "review_model": "gemini-3.1-flash-lite"
       },
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-76aefeb474126badbdf3",
+      "story_sha256": "5b3b4dd2e59545fba511bdbfd1c91bc5f1fc23f083028444da87b5ba4437c982",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise, conflict, and resolution are nearly identical to the previously published 'The Stationmaster and the Missing Midnight Courier' in the provided dataset.",
+        "Both stories feature a protagonist named Elias, a station setting, a missing document/manifest/logbook, a locked office/terminal, and the use of an unauthorized/utility drone or robot to bypass security to ensure a train's departure.",
+        "The causal mechanism (using a secondary device to bypass a lock to retrieve data) is a direct repetition of the provided example, failing the originality requirement."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
