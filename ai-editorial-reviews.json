@@ -1211,6 +1211,22 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-06eea36c00e64cac6671",
+      "story_sha256": "5dda9f21770e829693fa2c4776c3ed2296e33b1a9acd57095a55e71bfb303380",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-06eea36c00e64cac6671",
+        "story_sha256": "5dda9f21770e829693fa2c4776c3ed2296e33b1a9acd57095a55e71bfb303380",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is causally coherent and follows a clear narrative arc.; The premise of a subterranean fungal ecosystem providing water in an arid environment is distinct from the provided list of recent publications.; The content is suitable for a general audience and does not contain unsafe or misleading information.; There are no apparent copyright or trademark concerns.; The story meets the criteria for originality and does not repeat the specific plot points or resolutions of the provided examples.",
+        "reviewed_at": "2026-10-24T14:05:00.845389+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }

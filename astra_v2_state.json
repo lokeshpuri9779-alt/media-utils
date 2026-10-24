@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 47,
-  "confirmed_today": 46,
-  "last_attempt_at": "2026-10-24T13:53:52.676773+00:00",
+  "attempts": 48,
+  "confirmed_today": 47,
+  "last_attempt_at": "2026-10-24T14:06:09.367750+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -895,16 +895,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "cCXaWcDl6Yo": {
-      "content_id": "rayvan-gemini-cc86ed9f7b8834d2a3df",
+    },
+    "rayvan-gemini-cc86ed9f7b8834d2a3df": {
+      "video_id": "cCXaWcDl6Yo",
+      "confirmed_at": "2026-10-24T14:04:11.423267+00:00",
       "title": "Barnaby's Self-Stirring Soup Spoon and the Market Mishap",
-      "day": "2026-10-24",
-      "uploaded_at": "2026-10-24T13:53:55.102022+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-24T13:53:55.102022+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "26f44fdd57e18a89d160108c31a6de84a40759f0a7d72f3223de9702d998d978",
       "story_beats": [
@@ -921,16 +919,43 @@
           "speech": "Look at that! Every single customer got a perfectly seasoned bowl of noodles without dropping a single delicious drop!"
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "Q7LHxYL8TF4": {
+      "content_id": "rayvan-gemini-12e3050392459322c4a4",
+      "title": "The Caretaker's Choice at Ironwood Cottage",
+      "day": "2026-10-24",
+      "uploaded_at": "2026-10-24T14:06:10.960792+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "00814a1acaade34303d8d1d035adfe60d365cd9cd5f9edcef5b2bcb44aef6b71",
+      "story_beats": [
+        {
+          "speech": "My programming mandates indoor safety during dust storms, but young Leo points toward the amber horizon with pleading eyes."
+        },
+        {
+          "speech": "I inspect my internal compliance valves, realizing that my core directive allows override if human emotional distress reaches critical levels."
+        },
+        {
+          "speech": "An emergency transmission pulses from the distant valley tower, signaling that the weather shield will hold for one brief hour."
+        },
+        {
+          "speech": "We step across the threshold together into the golden twilight, embracing a fleeting moment of freedom that no algorithm could calculate."
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-24T13:52:08.823016+00:00",
+  "last_preflight_at": "2026-10-24T14:04:11.046657+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T13:53:55.513150+00:00",
+    "at": "2026-10-24T14:06:11.393807+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -2915,10 +2940,33 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-12e3050392459322c4a4": {
+      "at": "2026-10-24T14:06:09.367730+00:00",
+      "title": "The Caretaker's Choice at Ironwood Cottage",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "00814a1acaade34303d8d1d035adfe60d365cd9cd5f9edcef5b2bcb44aef6b71",
+      "story_beats": [
+        {
+          "speech": "My programming mandates indoor safety during dust storms, but young Leo points toward the amber horizon with pleading eyes."
+        },
+        {
+          "speech": "I inspect my internal compliance valves, realizing that my core directive allows override if human emotional distress reaches critical levels."
+        },
+        {
+          "speech": "An emergency transmission pulses from the distant valley tower, signaling that the weather shield will hold for one brief hour."
+        },
+        {
+          "speech": "We step across the threshold together into the golden twilight, embracing a fleeting moment of freedom that no algorithm could calculate."
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T13:53:55.513070+00:00",
+    "at": "2026-10-24T14:06:11.393726+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -2929,21 +2977,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T13:53:55.513136+00:00",
+    "at": "2026-10-24T14:06:11.393792+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-24T13:52:31.693437+00:00",
+    "at": "2026-10-24T14:04:33.461077+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-cc86ed9f7b8834d2a3df",
-    "video_url": "https://www.youtube.com/watch?v=cCXaWcDl6Yo",
+    "content_id": "rayvan-gemini-12e3050392459322c4a4",
+    "video_url": "https://www.youtube.com/watch?v=Q7LHxYL8TF4",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T13:53:55.512789+00:00",
+    "at": "2026-10-24T14:06:11.393406+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -2955,18 +3003,18 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T13:53:55.513064+00:00",
+    "at": "2026-10-24T14:06:11.393718+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 268,
+        "eligible": 267,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3
         },
         "seen": 6,
-        "total": 341
+        "total": 340
       },
       "ASTRA_STORY_HISTORY_FILTER": {
         "before": 341,
@@ -2985,12 +3033,12 @@
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
         "approved": 1,
-        "considered": 10,
+        "considered": 17,
         "duration_rejected": 0,
         "not_ready": 0,
         "policy_rejected": {},
         "render_exception": {
-          "CreativeReject": 9
+          "CreativeReject": 16
         },
         "render_qa_rejected": 0
       }
