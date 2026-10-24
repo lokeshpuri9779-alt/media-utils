@@ -1603,6 +1603,22 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-f4a35d30496ec59f7315",
+      "story_sha256": "9ccbd35fa676b491728018847b84f70a96e9b5820614c72d18998fd5498a94cf",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-f4a35d30496ec59f7315",
+        "story_sha256": "9ccbd35fa676b491728018847b84f70a96e9b5820614c72d18998fd5498a94cf",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the specific premises, characters, or settings of the provided comparison list.; The causal chain is clear: the invention malfunctions, creates a threat, and the protagonist makes a decisive sacrifice to resolve the conflict.; The content is suitable for a general audience and contains no unsafe, misleading, or policy-violating material.; The narrative structure is coherent and follows a logical progression from setup to resolution.",
+        "reviewed_at": "2026-10-24T21:30:04.690190+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }
