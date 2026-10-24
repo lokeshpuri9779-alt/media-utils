@@ -1591,6 +1591,18 @@
         "review_model": "gemini-3.1-flash-lite"
       },
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-8a7ece1f3a73c390a6ed",
+      "story_sha256": "ed7e443598f0f711bb42be76d034d36b9125fe7424eca718f9b418476ce3c939",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story shares a highly similar causal mechanism and thematic structure with 'The Crab Archivist and the Calcified Echo' provided in the reference list. Both stories feature a protagonist (a small sea creature) acting as an 'archivist' or 'guardian' who must sacrifice their safety or stability (releasing an anchor/fusing to a wall) to interact with a central, failing geological structure (a spire/a mineral vent) to save a nursery reef/nursery from a catastrophic environmental event (tidal surges/calcification).",
+        "The narrative arc, specifically the 'decisive choice' involving a physical sacrifice to stabilize a failing environmental core, is too closely aligned with the provided examples of recently published premises."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
