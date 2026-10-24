@@ -8,6 +8,7 @@ on:
       - '.github/workflows/studio-full-preview-qa.yml'
 permissions:
   contents: read
+  actions: read
 jobs:
   syntax-check:
     runs-on: ubuntu-latest
@@ -25,6 +26,8 @@ jobs:
     timeout-minutes: 40
     env:
       ORT_DISABLE_TELEMETRY: '1'
+      ASTRA_ASSET_PACK_ENABLED: '1'
+      ASTRA_ASSET_PACK_ROOT: runtime-artifacts/verified-pack
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -38,6 +41,15 @@ jobs:
         with:
           path: ~/.cache/astra-voice
           key: astra-kokoro-v1-beb0d184
+      - name: Restore verified existing visual asset pack
+        uses: actions/download-artifact@v4
+        with:
+          name: astra-original-visual-pack
+          run-id: 39960540392
+          github-token: ${{ github.token }}
+          path: runtime-artifacts/download
+      - name: Validate local visual assets before Studio preview
+        run: python -m tools.astra_restore_visual_pack runtime-artifacts/download/astra-visual-pack.zip runtime-artifacts/verified-pack --expected 3200
       - name: Render real Studio narration preview (no YouTube upload)
         run: |
           mkdir -p /tmp/astra-studio-review
