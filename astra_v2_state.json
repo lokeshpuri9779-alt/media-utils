@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 64,
-  "confirmed_today": 63,
-  "last_attempt_at": "2026-10-24T18:00:23.238114+00:00",
+  "attempts": 65,
+  "confirmed_today": 64,
+  "last_attempt_at": "2026-10-24T18:10:41.186213+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -1329,16 +1329,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "JdOTHukfQK8": {
-      "content_id": "rayvan-forge-f105a1704c26058b",
+    },
+    "rayvan-forge-f105a1704c26058b": {
+      "video_id": "JdOTHukfQK8",
+      "confirmed_at": "2026-10-24T18:08:58.787382+00:00",
       "title": "The Heron and the Broken Bridge",
-      "day": "2026-10-24",
-      "uploaded_at": "2026-10-24T18:00:24.693026+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-24T18:00:24.693026+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "3227064425e3d75fa150e2275d7bbd38b033284d4b55a8133e9b56ba9b9e2dcc",
       "story_beats": [
@@ -1355,16 +1353,43 @@
           "speech": "The heron freed the rope from shore, tested the empty bridge, and reopened it only after the counterweight balanced."
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "-2LDq3ALzvg": {
+      "content_id": "rayvan-forge-42ff731d8970abaa",
+      "title": "The Mole and the Silent Bakery",
+      "day": "2026-10-24",
+      "uploaded_at": "2026-10-24T18:10:42.557932+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "35b73dd382ec51258ca4b7c2d81c275ad2ebf2c66f5ed8505b8c8c084cc8f7c1",
+      "story_beats": [
+        {
+          "speech": "A mole found the bakery oven cold just before the town's annual harvest breakfast was supposed to begin."
+        },
+        {
+          "speech": "He piled on extra firewood, but smoke spilled through the bakery door and forced everyone outside."
+        },
+        {
+          "speech": "From the roof ladder, the mole noticed a loose metal cap had slipped sideways over the chimney opening."
+        },
+        {
+          "speech": "After the oven cooled, the baker secured the cap, checked the draft, and baked the morning loaves safely."
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-24T17:58:31.152999+00:00",
+  "last_preflight_at": "2026-10-24T18:08:58.455055+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T18:00:25.097014+00:00",
+    "at": "2026-10-24T18:10:42.961886+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -3749,10 +3774,33 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-42ff731d8970abaa": {
+      "at": "2026-10-24T18:10:41.186196+00:00",
+      "title": "The Mole and the Silent Bakery",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "35b73dd382ec51258ca4b7c2d81c275ad2ebf2c66f5ed8505b8c8c084cc8f7c1",
+      "story_beats": [
+        {
+          "speech": "A mole found the bakery oven cold just before the town's annual harvest breakfast was supposed to begin."
+        },
+        {
+          "speech": "He piled on extra firewood, but smoke spilled through the bakery door and forced everyone outside."
+        },
+        {
+          "speech": "From the roof ladder, the mole noticed a loose metal cap had slipped sideways over the chimney opening."
+        },
+        {
+          "speech": "After the oven cooled, the baker secured the cap, checked the draft, and baked the morning loaves safely."
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T18:00:25.096898+00:00",
+    "at": "2026-10-24T18:10:42.961808+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -3763,21 +3811,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T18:00:25.096998+00:00",
+    "at": "2026-10-24T18:10:42.961872+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-24T17:59:02.731097+00:00",
+    "at": "2026-10-24T18:09:19.458431+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-f105a1704c26058b",
-    "video_url": "https://www.youtube.com/watch?v=JdOTHukfQK8",
+    "content_id": "rayvan-forge-42ff731d8970abaa",
+    "video_url": "https://www.youtube.com/watch?v=-2LDq3ALzvg",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T18:00:25.096561+00:00",
+    "at": "2026-10-24T18:10:42.961446+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -3789,32 +3837,32 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T18:00:25.096891+00:00",
+    "at": "2026-10-24T18:10:42.961800+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 253,
+        "eligible": 252,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3
         },
         "seen": 6,
-        "total": 326
+        "total": 325
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 326,
+        "before": 325,
         "fingerprint": 0,
         "id": 6,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 320,
+        "remaining": 319,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 320,
-        "remaining": 253
+        "pool": 319,
+        "remaining": 252
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
