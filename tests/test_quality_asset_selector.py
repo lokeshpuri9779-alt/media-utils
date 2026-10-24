@@ -24,5 +24,18 @@ class QualityAssetSelectorTests(unittest.TestCase):
         self.assertEqual(select_assets(self.root,kind="character",tags=["owl"]),[])
         self.assertEqual([a["id"] for a in select_assets(self.root,kind="character",tags=["owl"],allow_attribution=True)],["owl"])
 
+    def test_generation_gap_is_reported_without_generating(self):
+        from astra_v2.quality_asset_selector import select_or_request_generation
+        result = select_or_request_generation(self.root, kind="prop", tags=("missing-key",))
+        self.assertEqual(result, {"source": "missing_asset", "asset": None,
+                                  "needs_generation": True})
+
+    def test_verified_existing_asset_preferred_over_generation(self):
+        from astra_v2.quality_asset_selector import select_or_request_generation
+        result = select_or_request_generation(self.root, kind="character", tags=("fox",))
+        self.assertEqual(result["source"], "existing_asset")
+        self.assertFalse(result["needs_generation"])
+        self.assertEqual(result["asset"]["id"], "fox")
+
     def test_no_fallback_when_no_match(self):
         self.assertEqual(select_assets(self.root,kind="prop",tags=["moon"]),[])
