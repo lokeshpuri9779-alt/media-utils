@@ -915,6 +915,18 @@
         "reviewed_at": "2026-10-24T06:37:20.967402+00:00",
         "review_model": "gemini-3.1-flash-lite"
       }
+    },
+    {
+      "content_id": "rayvan-gemini-bd1c1b48d23fa7b6c472",
+      "story_sha256": "0990ed8a9dbd40f4b6b8e4acaa1792de5fa724f325f6e5db6af6dcbfe9d318b5",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise, setting, and causal mechanism are highly derivative of the provided list of recent publications, specifically 'The Octopus and the Singing Reef', 'The Coral Scribe and the Echoing Trench', and 'The Octopus Cartographer and the Choral Trench'.",
+        "The narrative structure—a protagonist discovering a mechanical obstruction causing environmental decay in a bioluminescent underwater setting—is a recurring trope within the provided dataset, failing the originality requirement.",
+        "The character archetype (a small creature acting as a chronicler/observer in a reef) and the specific plot beat of reversing a mechanical flow to restore light are too similar to the established patterns in the provided publication history."
+      ],
+      "record": null
     }
   ]
 }
