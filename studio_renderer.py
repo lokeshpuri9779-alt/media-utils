@@ -30,7 +30,7 @@ from astra_v2.story_action_motion import choose_action
 from astra_v2.interaction_props import draw_interaction_prop
 from astra.asset_library import draw_asset_for_scene
 
-VERSION = "studio-7.3.0"
+VERSION = "studio-7.3.1"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
 NEWS_MICRO_SCENE_SECONDS = 0.67
 NEWS_MICRO_TRANSITION_SECONDS = 0.10
@@ -443,6 +443,7 @@ def make_plan(ch):
             from astra_v2.pillow_duo_scene import infer_story_prop
             story_prop = infer_story_prop(ch)
         for shot in formatted:
+            shot['story_title'] = str(ch.get('title') or '')
             if story_prop is not None:
                 shot.setdefault('story_prop', story_prop)
             if ch.get('story_prop_id') is not None:

@@ -31,7 +31,7 @@ jobs:
       ASTRA_LONG_ENABLED: '0' # Shorts-first recovery: long-form remains isolated in its own workflow
       ASTRA_PRELOAD_ENABLED: '1'
       ASTRA_REQUIRE_STUDIO_PRELOAD: '1' # Prefer verified Studio artifacts; retain fresh-render fallback
-      ASTRA_MIN_STUDIO_VERSION: '7.3.0' # Reject older Shorts preloads; keep fresh-render fallback
+      ASTRA_MIN_STUDIO_VERSION: '7.3.1' # Reject older Shorts preloads; keep fresh-render fallback
       ASTRA_PRELOAD_MAX_AGE_HOURS: '48' # Skip old rendered visuals; render fresh when queue is stale
       ASTRA_PRELOAD_ONLY: '0'
       ASTRA_SERIES_PUBLICATION: '0' # Allow new approved originals after completed Season 1
@@ -242,6 +242,9 @@ jobs:
         id: motion_tests
         if: steps.preflight.outputs.render_due == 'true'
         run: python -m unittest discover -s tests -p 'test_astra_motion_gate.py' -v
+      - name: Reject unsupported directed story scenes
+        if: steps.preflight.outputs.render_due == 'true'
+        run: python -m unittest discover -s tests -p 'test_directed_scene_contract.py' -v
       - name: Verify animated animal scenes
         id: animal_tests
         if: steps.preflight.outputs.render_due == 'true'
