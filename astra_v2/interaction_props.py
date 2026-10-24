@@ -4,6 +4,7 @@ Draw only when the action and narration explicitly support the prop.
 Coordinates follow the existing 1080x1920 character focal area.
 """
 import math
+import re
 from PIL import ImageDraw
 from astra_v2.story_action_motion import offset
 
@@ -12,11 +13,11 @@ def prop_for_shot(shot):
     text = " ".join(str(shot.get(k) or "") for k in
                     ("visual_intent", "visual_prompt", "speech", "action")).lower()
     action = shot.get("story_action", "idle")
-    if action in ("carry", "pick", "push", "pull") and any(
-            word in text for word in ("box", "parcel", "crate", "package", "cart")):
+    if action in ("carry", "pick", "push", "pull") and re.search(
+            r"\\b(?:box|boxes|parcel|parcels|crate|crates|package|packages|cart|carts)\\b", text):
         return "parcel"
-    if action == "repair" and any(
-            word in text for word in ("tool", "hammer", "wrench", "repair", "fix")):
+    if action == "repair" and re.search(
+            r"\\b(?:tool|tools|hammer|wrench|repair|repairs|repaired|fix|fixes|fixed)\\b", text):
         return "tool"
     return None
 
@@ -37,6 +38,7 @@ def draw_interaction_prop(image, shot, t):
             x, y = 745 + dx, 1050
         elif action == "pick":
             progress = max(0.0, min(1.0, t / 1.0))
+            progress = progress * progress * (3.0 - 2.0 * progress)
             x, y = 665 + dx, round(1060 - 200 * progress)
         else:
             x, y = 665 + dx, 860 + dy
