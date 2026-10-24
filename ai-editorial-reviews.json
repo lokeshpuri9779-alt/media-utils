@@ -1267,6 +1267,22 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-ba357354edc61f99a0c0",
+      "story_sha256": "2a3823f113381c51a60b0d32f81683277ad8595f81e04faade499fbbba619b56",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-ba357354edc61f99a0c0",
+        "story_sha256": "2a3823f113381c51a60b0d32f81683277ad8595f81e04faade499fbbba619b56",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story presents a distinct narrative premise involving an underwater setting and a character-driven sacrifice that does not mirror the specific plot points or character archetypes of the provided comparison list.; The causal mechanism (using a dredge to clear a vent) is logically sound within the established fictional context.; The story is clear, follows a standard narrative arc, and contains no unsafe, misleading, or policy-violating content.; The theme of choosing community survival over personal historical preservation is a common literary trope but is executed here with sufficient originality in setting and characterization to avoid being a derivative work.",
+        "reviewed_at": "2026-10-24T15:14:15.354032+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }
