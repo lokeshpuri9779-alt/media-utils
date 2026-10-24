@@ -63,9 +63,8 @@ def validate_story_shot(shot):
     """Return a deliberate scene grammar or reject an incompatible cast."""
     cast = _resolved_cast(shot)
     if not cast:
-        # Non-animal fiction uses Studio's existing subject-specific scene
-        # grammar, as a first-class route, not a failed-duo generic fallback.
-        # The production creative gate still judges the final visual.
+        from astra_v2.directed_scene_contract import validate_directed_scene
+        validate_directed_scene(shot)
         return "directed"
     if len(cast) == 1:
         return "solo"

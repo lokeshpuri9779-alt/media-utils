@@ -40,7 +40,7 @@ jobs:
           path=Path("preview/cat-bakery-directed.mp4")
           result=render_short(s,path)
           decision=evaluate_studio_render(s,result,video_path=path)
-          assert result['renderer']=='studio-7.3.0'
+          assert result['renderer']=='studio-7.3.1'
           assert decision['pass'],decision
           assert path.stat().st_size>30000
           print("ASTRA_CROSSGENRE_REAL_MP4_PASS",path.stat().st_size)
