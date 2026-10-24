@@ -1,27 +1,16 @@
 {
-  "observed_at": "2026-10-23T18:48:34.459703+00:00",
-  "generated": 18,
+  "observed_at": "2026-10-24T00:57:46.369721+00:00",
+  "generated": 16,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 18,
-      "reason": "ValueError"
-    },
-    {
-      "index": 19,
-      "reason": "ValueError"
+      "index": 16,
+      "reason": "provider_http_429"
     }
   ],
-  "reviewed": 18,
-  "approved": 10,
+  "reviewed": 16,
+  "approved": 4,
   "review_issues": [
-    "The candidate story title 'The Salt-Spray Catapult of Oakhaven Pier' shares the setting 'Oakhaven' and thematic naming conventions with recently published works such as 'The Stone-Carver and the Drought of Oakhaven' and 'The Salt-Tide Regatta of Oakhaven Bay', violating the uniqueness constraints regarding recent premises, settings, and naming patterns.",
-    "The causal mechanism and framing share strong thematic overlap with agricultural and community problem-solving tropes frequently rejected for lack of distinctive originality against recent outputs.",
-    "The narrative relies on predictable tropes regarding water rights during a drought without bringing sufficient originality to distinguish it from existing catalog items.",
-    "The story premise heavily replicates recently published premises involving Oakhaven, the winter harvest, and village preservation, specifically sharing thematic and setting elements with titles like 'The Orchard Keeper and the Final Winter Harvest' and 'The Stone-Carver and the Drought of Oakhaven'.",
-    "The title 'The Muddy Pitch and the Clever Drainage of Oakhaven' closely mirrors several recently published premises and naming conventions in the comparison history, particularly 'The Stone-Carver and the Drought of Oakhaven', 'The Salt-Tide Regatta of Oakhaven Bay', and various localized trade/fix-it stories.",
-    "The title and premise ('The miller's hard choice at Oakhaven mill') heavily overlap in setting and theme with recently published examples like 'The Stone-Carver and the Drought of Oakhaven' and 'The Weaver's Choice at Willow Creek'.",
-    "ai_editorial_rejection",
     "review_failed:HTTP_429",
     "review_provider:rate_limited"
   ],
