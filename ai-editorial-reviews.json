@@ -783,6 +783,18 @@
         "reviewed_at": "2026-10-24T01:40:49.990158+00:00",
         "review_model": "gemini-3.1-flash-lite"
       }
+    },
+    {
+      "content_id": "rayvan-gemini-345c96b824dd896768e7",
+      "story_sha256": "be0f87b4d3a3c66ef3baff2041b9ec72cdfd4205c6e4250d2eaff6578cbbe321",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise, setting, and character archetypes (a stationmaster, a lost item, and a mechanical companion in a Victorian-style railway terminal) are highly derivative of the provided list of recent publications, specifically 'The Stationmaster and the Lost Pocket Watch of Platform Four' and 'The Mystery of Platform Four and the Midnight Key'.",
+        "The narrative structure follows a repetitive pattern found in the provided dataset, lacking sufficient original causal mechanisms to distinguish it from the existing library of 'station-based' mystery stories.",
+        "The plot relies on highly predictable tropes that mirror the themes of the provided examples, failing to offer a unique creative contribution."
+      ],
+      "record": null
     }
   ]
 }
