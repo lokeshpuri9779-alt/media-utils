@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 32,
-  "confirmed_today": 31,
-  "last_attempt_at": "2026-10-24T09:37:09.028863+00:00",
+  "attempts": 33,
+  "confirmed_today": 32,
+  "last_attempt_at": "2026-10-24T09:51:24.899263+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -559,30 +559,38 @@
       "format": "short",
       "uploaded_at": "2026-10-24T09:24:42.094445+00:00",
       "renderer": "studio-7.3.0"
+    },
+    "rayvan-gemini-d4d39a5ea4d618cd2716": {
+      "video_id": "V0UZlddPkIg",
+      "confirmed_at": "2026-10-24T09:49:51.516975+00:00",
+      "title": "The Sand-Walker and the Whispering Oasis of Kaelith",
+      "format": "short",
+      "uploaded_at": "2026-10-24T09:37:10.614109+00:00",
+      "renderer": "studio-7.3.0"
     }
   },
   "pending": {
-    "V0UZlddPkIg": {
-      "content_id": "rayvan-gemini-d4d39a5ea4d618cd2716",
-      "title": "The Sand-Walker and the Whispering Oasis of Kaelith",
+    "Y2PB5YjMD4M": {
+      "content_id": "rayvan-gemini-6ae14038bb037b05ad73",
+      "title": "Silas and the Perpetual Pickle-Press",
       "day": "2026-10-24",
-      "uploaded_at": "2026-10-24T09:37:10.614109+00:00",
+      "uploaded_at": "2026-10-24T09:51:26.238614+00:00",
       "genre": "fiction",
       "format": "short",
       "plot_key": "",
-      "plot_fingerprint": "934738f4b8cec11b9c23365d1da9bca026986eba3926f9abfa4be2813c13c377",
+      "plot_fingerprint": "c25b0a1b066fc3b2590f14a2e3496cec2c1def88d3d5403fa7f15e28bac3c333",
       "story_beats": [
         {
-          "speech": "My sensors indicate a massive subsurface biological signature beneath these dunes, yet the heat readings suggest nothing could possibly survive here."
+          "speech": "Behold the brass-plated marvel, citizens! My new contraption will pickle a cucumber in less than three seconds flat!"
         },
         {
-          "speech": "If I retract the stabilizer bolts on this metallic hatch, the entire shifting dune surface might collapse into a deep, hidden cavern below."
+          "speech": "Just feed the brine into the upper hopper, pull this heavy iron lever down firmly, and watch the magic happen right now."
         },
         {
-          "speech": "I never expected to find a lush forest thriving inside this hollow planet, feeding off the heat of the core's deep magnetic pulse."
+          "speech": "Oh dear, the pressure gauge is spinning wildly out of control, and it is launching hot pickles directly at the mayor!"
         },
         {
-          "speech": "By documenting this sanctuary, I ensure its protection, proving that life finds a way to flourish even in the darkest, deepest places."
+          "speech": "Well, nobody wanted traditional pickles anyway, but everyone is fighting over these delicious flying crispy snacks today!"
         }
       ],
       "renderer": "studio-7.3.0"
@@ -590,11 +598,11 @@
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-24T09:34:53.315470+00:00",
+  "last_preflight_at": "2026-10-24T09:49:51.122140+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T09:37:11.065065+00:00",
+    "at": "2026-10-24T09:51:26.587570+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -611,7 +619,7 @@
     "oauth_tests": "success",
     "layer_tests": "success"
   },
-  "last_feedback_attempt_at": "2026-10-23T21:48:24.435872+00:00",
+  "last_feedback_attempt_at": "2026-10-24T09:50:10.178955+00:00",
   "reserved": {
     "rayvan-gemini-ed365c573c8c2d479669": {
       "at": "2026-10-22T23:52:30.401944+00:00",
@@ -2222,10 +2230,33 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-6ae14038bb037b05ad73": {
+      "at": "2026-10-24T09:51:24.899251+00:00",
+      "title": "Silas and the Perpetual Pickle-Press",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "c25b0a1b066fc3b2590f14a2e3496cec2c1def88d3d5403fa7f15e28bac3c333",
+      "story_beats": [
+        {
+          "speech": "Behold the brass-plated marvel, citizens! My new contraption will pickle a cucumber in less than three seconds flat!"
+        },
+        {
+          "speech": "Just feed the brine into the upper hopper, pull this heavy iron lever down firmly, and watch the magic happen right now."
+        },
+        {
+          "speech": "Oh dear, the pressure gauge is spinning wildly out of control, and it is launching hot pickles directly at the mayor!"
+        },
+        {
+          "speech": "Well, nobody wanted traditional pickles anyway, but everyone is fighting over these delicious flying crispy snacks today!"
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T09:37:11.065018+00:00",
+    "at": "2026-10-24T09:51:26.587531+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -2236,21 +2267,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T09:37:11.065058+00:00",
+    "at": "2026-10-24T09:51:26.587564+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-24T09:35:17.521024+00:00",
+    "at": "2026-10-24T09:50:09.907342+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-d4d39a5ea4d618cd2716",
-    "video_url": "https://www.youtube.com/watch?v=V0UZlddPkIg",
+    "content_id": "rayvan-gemini-6ae14038bb037b05ad73",
+    "video_url": "https://www.youtube.com/watch?v=Y2PB5YjMD4M",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T09:37:11.064827+00:00",
+    "at": "2026-10-24T09:51:26.587356+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -2262,7 +2293,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T09:37:11.065014+00:00",
+    "at": "2026-10-24T09:51:26.587527+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
@@ -2276,27 +2307,29 @@
         "total": 333
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 334,
+        "before": 333,
         "fingerprint": 0,
         "id": 6,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 328,
+        "remaining": 327,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 328,
-        "remaining": 261
+        "pool": 327,
+        "remaining": 260
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
         "approved": 1,
-        "considered": 1,
+        "considered": 2,
         "duration_rejected": 0,
         "not_ready": 0,
         "policy_rejected": {},
-        "render_exception": {},
+        "render_exception": {
+          "NameError": 1
+        },
         "render_qa_rejected": 0
       }
     },

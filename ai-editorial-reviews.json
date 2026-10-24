@@ -1026,6 +1026,18 @@
         "reviewed_at": "2026-10-24T09:35:48.336544+00:00",
         "review_model": "gemini-3.1-flash-lite"
       }
+    },
+    {
+      "content_id": "rayvan-gemini-95e9467df21ffd964bee",
+      "story_sha256": "23d4c6bbe95c0347533256f759e1a9cf2d2224b2c9fcb1c3666cb9c955be2564",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise, setting, and thematic resolution are highly derivative of the provided list of recent publications, specifically 'The Rescuer of Borealis Ridge and the Final Ice-Bound Signal' and 'The Frozen Bearing of Station Delta'.",
+        "The narrative structure follows a repetitive pattern of 'lone researcher in a frozen environment choosing between data and rescue' that has appeared multiple times in the provided dataset.",
+        "The plot lacks sufficient unique causal mechanisms to distinguish it from the established 'arctic research station' trope present in the provided examples."
+      ],
+      "record": null
     }
   ]
 }
