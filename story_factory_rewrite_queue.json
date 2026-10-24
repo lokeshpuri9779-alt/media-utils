@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "4278d2dbce678e75f147c0dc",
-      "source_sha256": "6224ff8c830d812661a9750c60d91b4d31b67db5e8466eb4a5ae8c54b29f5e4c",
+      "candidate_id": "dc01415081a05a3099d6106a",
+      "source_sha256": "eec0bf9b68babf82cf5ef77bc07198670aff56c3c830618015edf734df37f8c2",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-f91417484774af26bb16",
-        "title": "The Great Clockwork Cabbage Caper",
-        "hook": "A Crunchy Discovery",
-        "question": "How did Barnaby accidentally corner the city soup market?",
-        "answer": "He invented an automatic vegetable chopper that seasoned every turnip with stubborn enthusiasm.",
+        "content_id": "rayvan-gemini-db7caf05b9d13769b440",
+        "title": "The Great Tomato Launchpad",
+        "hook": "Tomato Trouble",
+        "question": "How do you stop a catapult from launching fruit at the local butcher?",
+        "answer": "By inventing a gravity-reversing umbrella.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,77 +29,77 @@
         ],
         "story_beats": [
           {
-            "headline": "A Crunchy Discovery",
-            "speech": "Behold my magnificent mechanized vegetable slicer, designed to revolutionize the way this bustling market prepares dinner tonight!",
+            "headline": "Tomato Trouble",
+            "speech": "Behold my magnificent breakfast launcher! It feeds the entire village in seconds, provided we duck swiftly.",
             "visual": "robot",
-            "label": "The Contraption",
+            "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "An eccentric inventor named Barnaby proudly points at a rickety brass-and-wood automaton holding a giant kitchen knife, set against a crowded medieval vegetable market filled with stunned shoppers.",
+            "visual_prompt": "An eccentric inventor in a crowded medieval market proudly stands next to a wooden catapult holding a giant red tomato. The inventor wears oversized brass goggles and gestures dramatically at the sky. A local butcher ducks behind a striped market stall in the background.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Furious Assembly",
-            "speech": "We must tighten every single copper bolt immediately before the rival cabbage vendors notice our sudden surge in productivity!",
-            "visual": "ship",
-            "label": "Rapid Construction",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby's eager apprentice Pippin frantically turns a giant wrench on a flying metallic delivery cart, while fresh carrots bounce wildly across the wooden merchant stall floor.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Spicy Overload",
-            "speech": "Wait, do not touch that decorative pepper lever or the entire batch of turnips will achieve supersonic velocity instantly!",
+            "headline": "Mechanical Malfunction",
+            "speech": "The tension springs are entirely uncooperative today. If we release this lever, chaos descends upon the poultry.",
             "visual": "signal",
-            "label": "The Malfunction",
-            "story_beat": "mechanism",
-            "visual_prompt": "Pippin accidentally yanks a glowing red lever on the automaton, causing sparks to fly and a plume of blue smoke to shoot upward into the sunny market sky.",
+            "label": "The Build",
+            "story_beat": "build",
+            "visual_prompt": "The same inventor frantically adjusts a tangled web of ropes and squeaky wooden gears on the marketplace catapult. Sparks fly from a misaligned iron cog. The butcher points angrily with a cleaver while clutching a ruffled white goose.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Soup Supreme",
-            "speech": "Our runaway appliance accidentally fed the entire town delicious stew, proving chaotic engineering always beats quiet planning.",
+            "headline": "The Reversal",
+            "speech": "Quickly open the umbrella before the ripe projectiles achieve orbit and destroy the town hall weather vane!",
             "visual": "door",
-            "label": "Market Triumph",
+            "label": "The Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "The inventor snaps open a polka-dot umbrella that glows with swirling blue reverse-gravity energy. A volley of flying red tomatoes halts mid-air above the bustling vegetable stalls, reversing trajectory back down toward the launcher.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Breakfast Served",
+            "speech": "A complete tactical breakfast delivered safely to our plates without a single casualty or bruised melon.",
+            "visual": "ship",
+            "label": "The Success",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby and Pippin stand proudly behind a massive wooden tavern doorway, serving steaming bowls of golden soup to a cheerful line of hungry townspeople.",
+            "visual_prompt": "The marketplace is peaceful again. The inventor and the butcher sit calmly at a wooden table beneath the glowing umbrella, eating sliced tomatoes off toast. The catapult rests quietly in the corner covered in flour.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Bright, whimsical stop-motion claymation aesthetic with vibrant textures and exaggerated proportions.",
+          "style": "Whimsical stop-motion claymation aesthetic with rich earthy tones, detailed textures, and cinematic warm lighting.",
           "characters": {
-            "Barnaby": "An energetic middle-aged inventor with wild gray hair, round spectacles, a tweed vest covered in pockets, and grease-smudged cheeks.",
-            "Pippin": "A lively young apprentice with a striped cap, overly large leather boots, and an apron stuffed with spare metal gears."
+            "inventor": "Barnaby, a tall lanky man with wild grey hair, a patched tweed vest, round spectacles, and an expression of eternal optimism.",
+            "butcher": "Gus, a stout, red-faced man wearing a bloodstained white apron and a flat cap, carrying a shiny steel meat cleaver."
           },
           "locations": {
-            "Market Square": "A bustling cobblestone plaza crammed with colorful striped canvas tents, wooden crates overflowing with vegetables, and fluttering banners."
+            "market_square": "A bustling cobblestone medieval town square filled with striped canopies, wooden carts, dangling sausages, and baskets of fresh produce."
           },
           "objects": {
-            "Automaton Slicer": "A towering contraption made of polished brass, ticking clock gears, wooden paddles, and a ridiculously large steel chopping blade.",
-            "Pepper Lever": "A glowing red brass handle mounted on a spring-loaded bracket attached directly to the main steam valve."
+            "catapult": "A rickety wooden siege engine modified with bicycle chains, copper funnels, and a velvet-lined spoon bucket.",
+            "umbrella": "A vintage black umbrella retrofitted with brass dials, glowing blue vacuum tubes, and a curved mahogany handle."
           }
         },
-        "plot_fingerprint": "c1193e7c7770653ef7a3e31625e952037543a581a56bec0a9d611984914be977"
+        "plot_fingerprint": "5f8d28a526181f71b5a36855bd83293d9aaf5841155a2942af12a3c5e07fe3a3"
       },
       "approved": false
     },
     {
-      "candidate_id": "537db076c838f11f65b61d6a",
-      "source_sha256": "67925279e6474bffdfcc903d30847d5813093fd4649aa87da4e6eb0f96b0b62c",
+      "candidate_id": "5f0ebc53fd369a9de6e74385",
+      "source_sha256": "2491b1850b142ae8616b96a1eefd1cf045c3636db83ac7384cefd94d23a0c8bb",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-4961265b962b8fb6ea38",
-        "title": "The Last Ridge Beacon",
-        "hook": "The Silent Storm",
-        "question": "How did Leo guide the lost climbers safely through the blizzard?",
-        "answer": "Leo used an old acoustic horn to bounce sound waves off the hidden valley walls, creating a navigational echo.",
+        "content_id": "rayvan-gemini-5e58c7a78b3b1027847b",
+        "title": "The Weaver's Last Thread",
+        "hook": "The Hidden Loom",
+        "question": "Can true friendship survive the burden of a secret that protects the village?",
+        "answer": "Yes, but only when the friends choose honesty over a comforting deception.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -107,141 +107,141 @@
         ],
         "story_beats": [
           {
-            "headline": "The Silent Storm",
-            "speech": "The tracking signal is entirely dead out here. We have to rely on the ancient resonance horn.",
-            "visual": "signal",
-            "label": "The Signal Loss",
-            "story_beat": "reveal",
-            "visual_prompt": "Close-up of rescue worker Leo, rugged face with frost on his dark beard, wearing a heavy orange parka, holding a static-filled hand radio inside a freezing alpine tent.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Testing the Echo",
-            "speech": "Listen closely to the mountain wall. When I blow the horn, the second bounce will point us home.",
+            "headline": "The Hidden Loom",
+            "speech": "Look closely at the ancient wooden frame, Silas. The warp threads are singing with a dangerous, forbidden resonance.",
             "visual": "forest",
-            "label": "The Pine Valley",
-            "story_beat": "build",
-            "visual_prompt": "Medium shot of Leo standing amidst snow-dusted pine trees at dusk, blowing into a large brass acoustic horn, his breath forming white clouds in the freezing air.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Hidden Path",
-            "speech": "That sharp double echo means the gorge is right ahead. Follow my footsteps in the fresh snow.",
-            "visual": "door",
-            "label": "The Ravine Entrance",
-            "story_beat": "mechanism",
-            "visual_prompt": "Wide shot of Leo holding a glowing red flare, leading two tired hikers toward a natural stone archway that acts like a door into a sheltered mountain pass.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Safe at Base",
-            "speech": "We made it through the worst of it. Grab a warm cup of tea and rest by the heater.",
-            "visual": "ship",
-            "label": "The Rescue Cabin",
-            "story_beat": "payoff",
-            "visual_prompt": "Interior shot of a warm wooden rescue cabin looking like a cozy ship interior, Leo handing a steaming mug to a smiling hiker sitting on a bunk bed.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "visual_bible": {
-          "style": "Cinematic realism with warm lighting contrasting against cold blue alpine environments.",
-          "characters": {
-            "Leo": "A middle-aged mountain rescue leader with a weathered face, kind eyes, a dark thick beard, wearing a heavy waterproof orange parka and insulated snow pants."
-          },
-          "locations": {
-            "Base Camp": "A rugged snow-covered ledge featuring a weather-beaten wooden cabin with glowing yellow windows.",
-            "Pine Valley": "A steep mountain slope filled with tall, snow-laden evergreen trees and dramatic cliff faces."
-          },
-          "objects": {
-            "Acoustic Horn": "A vintage, tarnished brass cone-shaped horn with leather straps for carrying.",
-            "Rescue Flare": "A metal cylinder emitting a bright, steady red flame and thick red smoke."
-          }
-        },
-        "plot_fingerprint": "08b66ffbf9e8ead0e2b9ce5f0b5eafc350ae4a2c4ef5a975c93573e4f819e44b"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "cc1e996f7244b013e9faef13",
-      "source_sha256": "cc27d7b0b8d8c32595f11ad2235b5f36965af3cdcc1f9550c087e6dfe8ac4477",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-95c6711f0a5fc66825aa",
-        "title": "The Muddy Pitch Playbook",
-        "hook": "The Hidden Threat",
-        "question": "How did the underdog village football team outsmart their giant rivals?",
-        "answer": "They utilized a network of hidden acoustic resonators beneath the field to coordinate silent passing maneuvers.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Hidden Threat",
-            "speech": "Listen closely, team. The Oakfield giants think their sheer size will crush us on the muddy pitch today.",
-            "visual": "signal",
             "label": "The Discovery",
             "story_beat": "reveal",
-            "visual_prompt": "Coach Elena wearing a worn blue tracksuit stands inside a damp locker room pointing at a glowing holographic tactical map resting on a wooden bench.",
+            "visual_prompt": "A close-up action shot inside a dense forest clearing. Silas holds a glowing wooden shuttle near a moss-covered loom, looking shocked. Bram stands beside him, pointing at the vibrating threads with a worried expression.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Constructing the Array",
-            "speech": "We will bury these brass acoustic pipes beneath the turf to transmit our silent signals across the entire field.",
-            "visual": "forest",
-            "label": "The Preparation",
+            "headline": "The Loom's Demand",
+            "speech": "Every single cloth we weave steals color from the valley's soil, starving the crops to keep our homes warm.",
+            "visual": "door",
+            "label": "The Growing Cost",
             "story_beat": "build",
-            "visual_prompt": "Young player Toby in a green jersey kneels beside a muddy field edge, carefully burying a polished brass pipe into the damp soil under the watchful eyes of teammates.",
+            "visual_prompt": "Medium shot of Silas and Bram standing before an old timber cellar door in the forest. The door is slightly ajar, casting a magical amber light onto Bram's fearful face. Silas grips the door handle tightly, hesitating.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Secret Frequency",
-            "speech": "Tap your boots twice on the hidden nodes to launch our secret synchronized passing formation right past them.",
-            "visual": "robot",
-            "label": "The Operation",
+            "headline": "Breaking the Mechanism",
+            "speech": "If we smash the primary gear tonight, the village will freeze, but the valley will finally heal and grow.",
+            "visual": "signal",
+            "label": "The Difficult Choice",
             "story_beat": "mechanism",
-            "visual_prompt": "Midfielder Maya wearing muddy cleats taps her foot purposefully onto a disguised metal plate embedded in the grass while holding a leather football tightly under one arm.",
+            "visual_prompt": "A wide angle shot of Silas raising a heavy iron mallet above a magical stone gear box that emits pulsing blue signals. Bram watches anxiously from the background, his hands clasped together in nervous anticipation.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Ultimate Victory",
-            "speech": "Our silent rhythm won the match and proved that clever teamwork always overcomes brute strength in the end.",
-            "visual": "ship",
-            "label": "The Celebration",
+            "headline": "A New Dawn",
+            "speech": "The frost is melting away from the fields, and for the first time in years, the morning earth smells alive.",
+            "visual": "planet",
+            "label": "The True Return",
             "story_beat": "payoff",
-            "visual_prompt": "The entire underdog team wearing mud-splattered green and blue kits cheers triumphantly under a golden afternoon sun, hoisting a gleaming silver trophy above their heads in the center of the pitch.",
+            "visual_prompt": "An expansive outdoor landscape view at dawn. Silas and Bram sit side by side on a green hill, watching vibrant green sprouts push through the soil under a bright sky.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Cinematic stop-motion animation with rich textures, warm lighting, and detailed physical sets.",
+          "style": "Cinematic historical fantasy with earthy tones, realistic textures, and magical glowing elements.",
           "characters": {
-            "Elena": "An experienced middle-aged coach with a determined expression, wearing a sturdy blue waterproof tracksuit and silver whistle.",
-            "Toby": "An enthusiastic young player with freckles and messy brown hair, wearing a patched green jersey and muddy boots.",
-            "Maya": "A sharp-eyed midfielder with her dark hair in a tight braid, wearing captain's armbands and a green-and-blue kit."
+            "Silas": "A young weaver with unruly dark hair, wearing a patched brown tunic and leather vest.",
+            "Bram": "A tall villager with a neatly trimmed beard, wearing a woolen gray cloak over a green shirt."
           },
           "locations": {
-            "locker_room": "A cramped, rustic wooden shelter filled with old benches, hanging jerseys, and tactical chalkboards.",
-            "valley_pitch": "A sprawling outdoor community football field surrounded by ancient oak trees, bordered by rolling green hills under a bright sky."
+            "forest": "An ancient, misty woodland filled with giant mossy oaks and hidden stone structures.",
+            "cellar": "A rustic underground storage room lit by magical artifacts and dusty wooden beams."
           },
           "objects": {
-            "brass_pipe": "A gleaming, hollow cylindrical acoustic tube made of polished brass with small sound apertures.",
-            "silver_trophy": "A tall, handcrafted silver cup featuring engraved oak leaf patterns along the handles and base."
+            "shuttle": "A hand-carved wooden weaving shuttle inlaid with glowing blue runes.",
+            "mallet": "A heavy iron-headed hammer with a sturdy ash wood handle wrapped in leather."
           }
         },
-        "plot_fingerprint": "acb790637dac8ddfdc68f7bb54ca6f37ac42b911609af5acd41bd0d647c3fc38"
+        "plot_fingerprint": "7e0aa694ed5136d2e6740c0800502a93fa64747db39cab1f099aba44aacc2f58"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "05db1fbe03c4392911925c08",
+      "source_sha256": "558a712fca8cfbbb885aae373688e3670a6c60bd57f480abc95a9b8474db8bed",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-493b2f448330255e5ed9",
+        "title": "The Coral Symphony",
+        "hook": "Sudden Silence",
+        "question": "Why did the great reef go completely silent overnight?",
+        "answer": "The resident manta ray discovered that a shifting current had sealed the ancient sound-vent, which they quickly reopened together.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Sudden Silence",
+            "speech": "Listen closely everyone. The singing corals have stopped completely, leaving only a chilling and eerie emptiness behind us.",
+            "visual": "signal",
+            "label": "The Quiet Reef",
+            "story_beat": "reveal",
+            "visual_prompt": "An anxious blue-ringed octopus points a tentacle toward a dark, silent coral structure in a glowing bioluminescent grotto. The octopus wears a tiny kelp scarf and looks extremely worried. No other characters present.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Following the Current",
+            "speech": "We must swim deep into the trench where the water pressure changes and find the blockage causing this terrible disaster.",
+            "visual": "forest",
+            "label": "Kelp Trench",
+            "story_beat": "build",
+            "visual_prompt": "The blue-ringed octopus swims alongside a cautious sea turtle through a dense, glowing kelp forest. The turtle has a weathered, speckled shell and holds a polished nautilus shell map in its flipper.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Blocked Vent",
+            "speech": "Look right there! A massive heavy boulder has rolled over the resonance vent, trapping all the beautiful melody inside.",
+            "visual": "door",
+            "label": "Stone Barrier",
+            "story_beat": "mechanism",
+            "visual_prompt": "The sea turtle uses its flippers to push against a massive grey round stone resting over a glowing underwater crevice. The octopus is floating nearby, directing the push with excited hand gestures.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Melody Restored",
+            "speech": "Push together now with all our might so the vibrant songs can finally return to our beloved ocean home.",
+            "visual": "ship",
+            "label": "Resonant Waters",
+            "story_beat": "payoff",
+            "visual_prompt": "The sea turtle and octopus successfully roll the boulder away, releasing a bright burst of colorful musical sound waves that ripple through the vibrant coral city. Both characters smile happily.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "visual_bible": {
+          "style": "Lush, vibrant underwater animation style with bright bioluminescent colors, soft glowing lighting, and rich aquatic textures.",
+          "characters": {
+            "octopus": "A small, bright blue octopus with glowing yellow rings, large expressive eyes, wearing a neatly tied green kelp scarf.",
+            "turtle": "An elder green sea turtle with a deeply textured, speckled brown shell, wise gentle eyes, and scarred flippers."
+          },
+          "locations": {
+            "grotto": "A deep sea cavern decorated with pulsating neon-pink and purple corals that light up the dark water.",
+            "trench": "A narrow underwater canyon filled with towering golden kelp stalks and floating sparkling particulate matter."
+          },
+          "objects": {
+            "map": "A pearlescent nautilus shell with glowing engraved star charts etched across its natural spiral surface.",
+            "boulder": "A heavy, grey, moss-covered round stone resting tightly over a thermal crack in the ocean floor."
+          }
+        },
+        "plot_fingerprint": "1b3c19b0fd746b72f96c20858ccd7882fdb2a149da67699d408ef6a0cdf97642"
       },
       "approved": false
     }
