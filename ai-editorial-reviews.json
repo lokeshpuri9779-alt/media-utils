@@ -1339,6 +1339,19 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-b4d0a38bf2a1d420e333",
+      "story_sha256": "c4bdf406c27d9f403fa35c4541b5a18902b1284e04045bfd9f3695c9573ad07b",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise, conflict, and resolution are functionally identical to 'The Trench Weaver and the Silent Current' provided in the reference list.",
+        "Both stories involve a protagonist clearing a blockage in a thermal vent to restore mineral or thermal flow to a dying underwater ecosystem.",
+        "The causal mechanism (clearing a vent to save a reef) is a direct repetition of a recently published premise, failing the originality requirement."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
