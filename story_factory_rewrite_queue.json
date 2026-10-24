@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "b6bb042da54128b39ea83b1b",
-      "source_sha256": "80d6b86059289d73bea5b46952b5cee7cbfdc010bcdba54aaff5a68df9fb7076",
+      "candidate_id": "97277b53114f52335a88789a",
+      "source_sha256": "6f7bef022aff9dfc880c077fafdedc5d65ed9b77820cde56c8a783c56c47dcd1",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-ea3a78cf89725f822fc5",
-        "title": "The Great Squeak-O-Matic Disaster",
-        "hook": "The Secret Invention",
-        "question": "How did Barnaby clear his entire vegetable stall in under ten seconds?",
-        "answer": "He deployed a malfunctioning automatic turnip polisher that sneezed aggressively.",
+        "content_id": "rayvan-gemini-e08f2eed2b276b459a8a",
+        "title": "The Great Automatic Turnip Discombobulator",
+        "hook": "The Secret Delivery",
+        "question": "How did Barnaby clear the bustling vegetable market?",
+        "answer": "By launching a supersonic root vegetable launcher that targeted overripe rutabagas.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,220 +29,216 @@
         ],
         "story_beats": [
           {
-            "headline": "The Secret Invention",
-            "speech": "Behold the greatest marvel in the market! It polishes turnips until they gleam brighter than the morning sun itself!",
+            "headline": "The Secret Delivery",
+            "speech": "Behold my latest masterpiece, folks! It sorts veggies with supersonic precision and zero mercy!",
             "visual": "robot",
-            "label": "Prototype Reveal",
+            "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands in a crowded medieval market square, proudly holding a steampunk brass polishing robot with glowing red eyes, surrounded by fresh vegetable stalls.",
+            "visual_prompt": "Barnaby stands proudly next to a quirky steampunk robot in a crowded, noisy open-air vegetable market, pointing at a shiny brass lever while startled merchants watch.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Cogs Begin to Turn",
-            "speech": "Just a turn of this brass crank and a pinch of pepper powder will activate the turbo cleaning cycle immediately.",
+            "headline": "Construction Phase",
+            "speech": "I just need to attach this extra gear to the primary potato hopper to stabilize the launch angle.",
             "visual": "signal",
-            "label": "Assembly Phase",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby's wrinkled hands insert a pouch of fiery spice powder into a hopper on the back of the ticking brass automaton while market customers watch curiously.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Mechanical Catastrophe",
-            "speech": "Oh dear me, the gears are jamming and it is inhaling all the paprika instead of polishing the root vegetables!",
-            "visual": "ship",
-            "label": "Internal Gears",
-            "story_beat": "mechanism",
-            "visual_prompt": "The robot bulges alarmingly, spinning wildly on a wooden crate as a massive cloud of red pepper smoke billows from its exhaust pipe toward the sky.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Grand Finale",
-            "speech": "Achoo! The mighty sneeze cleared every single vegetable off my cart and launched them straight into the bakery next door!",
-            "visual": "door",
-            "label": "Final Outcome",
-            "story_beat": "payoff",
-            "visual_prompt": "Barnaby sits bewildered amidst an empty vegetable cart, covered in soot, looking toward an open bakery doorway where hundreds of turnips rain down.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures.",
-          "characters": {
-            "Barnaby": "An elderly inventor with bushy white eyebrows, wearing a patched green apron and spectacles."
-          },
-          "locations": {
-            "Market Square": "A bustling cobblestone plaza lined with striped canvas awnings, wooden carts, and hanging lanterns."
-          },
-          "objects": {
-            "Robot": "A compact steampunk automaton made of polished brass, featuring three mechanical arms and a glowing red status light."
-          }
-        },
-        "plot_fingerprint": "be9c1b870a9aaada374c3d170b4d0fc963619653b4b1c938d388a35cd1a862b6"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "053416c333f848695ed9ed95",
-      "source_sha256": "a68382ab99cb8163661fe45198bdc4f6dcd21b3c42471a888ac406bf83e12be5",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-ff06685e0289ad146fff",
-        "title": "The Permafrost Echo",
-        "hook": "The Hidden Cave",
-        "question": "Can an automated sonar probe guide an isolated rescue team through a collapsing ice cave?",
-        "answer": "Yes, by mapping the resonant frequency of shifting glaciers before the final exit seals.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Hidden Cave",
-            "speech": "Our sonar scan reveals a subterranean cavern directly beneath the glacier, holding the missing survey team.",
-            "visual": "signal",
-            "label": "Sonar Detection",
-            "story_beat": "reveal",
-            "visual_prompt": "Dr. Maeve Vance stands inside the glowing command tent, pointing at a digital radar tablet showing a glowing subterranean pocket. Outside, a heavy blizzard rages against the orange canvas walls. Maeve wears a heavy parka with fur lining and holds the tablet securely in both hands.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Descending the Ice Shaft",
-            "speech": "We must lower the autonomous winch system immediately to bridge the chasm before the walls collapse further.",
-            "visual": "robot",
-            "label": "Winch Deployment",
-            "story_beat": "build",
-            "visual_prompt": "Mechanic Jax Thorne operates a rugged robotic winch mounted on the snowcat bumper at the edge of a massive ice fissure. Jax wears insulated yellow gear and goggles, gripping the metal control levers while staring intently down into the dark abyss.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Resonant Frequency",
-            "speech": "By tuning the acoustic beacon to match the glacier's ice density, we stabilize the collapsing tunnel walls.",
-            "visual": "door",
-            "label": "Acoustic Seal",
-            "story_beat": "mechanism",
-            "visual_prompt": "Dr. Maeve Vance stands inside the ice cavern entrance holding a pulsing handheld acoustic resonator that emits blue light waves against the freezing blue walls. The trapped researchers wait safely behind her, wearing winter survival gear.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Safe Return",
-            "speech": "The resonant frequency held long enough for everyone to cross safely into the rescue transport.",
-            "visual": "ship",
-            "label": "Successful Evacuation",
-            "story_beat": "payoff",
-            "visual_prompt": "The tracked rescue snowcat moves across the flat white tundra under the pale morning sun. Dr. Maeve Vance and Jax Thorne sit inside the cabin through the windshield, looking relieved as they hold warm mugs of tea.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "visual_bible": {
-          "style": "Cinematic realism with crisp arctic lighting, deep blues and whites contrasting with vibrant high-visibility safety orange and yellow gear.",
-          "characters": {
-            "Dr. Maeve Vance": "A resilient arctic researcher in her late thirties with weathered skin, intelligent hazel eyes, tied-back brown hair, wearing a thick down parka with orange accents.",
-            "Jax Thorne": "A pragmatic mechanical engineer in his forties with a trimmed red beard, focused blue eyes, wearing high-visibility yellow thermal overalls and heavy leather gloves."
-          },
-          "locations": {
-            "Command Tent": "An illuminated orange geodesic tent set up on the snowy tundra, filled with glowing electronics and mapping equipment.",
-            "Ice Cavern": "A breathtaking underground cave featuring ancient crystalline blue ice formations, echoing chambers, and natural frost pillars."
-          },
-          "objects": {
-            "radar tablet": "A ruggedized black tablet with a reinforced rubber bumper, displaying a bright green holographic sonar grid.",
-            "robotic winch": "A heavy-duty steel automated winch mechanism with glowing status indicator lights and reinforced synthetic cabling.",
-            "acoustic resonator": "A sleek handheld cylindrical device with silver grip rings and a transparent core emitting steady blue light waves."
-          }
-        },
-        "plot_fingerprint": "7c60f50e72bfdadaa9895bb44a82fa8b4733bb1e3e4dfd7542517ef53dcca605"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "c32eced68c20da118df7dcbc",
-      "source_sha256": "6abb2942127fbfd543b18e3938542df4fbb238dd861108099fd591ac8a6d1771",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-a4029a6c09e3b6768561",
-        "title": "The Great Asphalt Derby Code",
-        "hook": "The Humiliation at the Starting Line",
-        "question": "How did the Oakridge rollerskaters finally win the annual pushcart derby against the sleek Pinehill speed-racers?",
-        "answer": "By substituting heavy steel chassis with hollow, acoustic-tuned bamboo tubes that resonated with the cheering crowd's rhythmic clapping, generating harmonic propulsion.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Humiliation at the Starting Line",
-            "speech": "Look at their aerodynamic carbon-fiber rocket carts! We are hopelessly outmatched by their high-tech engineering.",
-            "visual": "signal",
-            "label": "The Discovery",
-            "story_beat": "reveal",
-            "visual_prompt": "Wide shot of a crowded dusty racetrack in Oakridge. Teenager Leo, wearing a faded orange jersey and a worn leather helmet, points at the sleek silver Pinehill carts emitting blue diagnostic lights. The crowd watches anxiously. Leo holds a cracked metal clipboard.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Harvesting the Hollow Groves",
-            "speech": "We cannot buy speed, but we can capture resonance. Help me cut these thick, resonating bamboo stalks tonight.",
-            "visual": "forest",
             "label": "The Assembly",
             "story_beat": "build",
-            "visual_prompt": "Medium shot inside a dimly lit bamboo grove near the edge of town. Leo and his teammate Maya, wearing muddy denim overalls and dirty headlamps, carefully saw down wide golden bamboo tubes. Maya holds a gleaming silver handsaw while steadying a fresh stalk.",
+            "visual_prompt": "Barnaby frantically tightens a large copper bolt on the side of the robot's mechanical torso inside a busy produce stall, holding a wrench while turnips bounce nearby.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Tuning the Acoustic Chassis",
-            "speech": "When the crowd claps in unison on turn four, these hollow tubes will amplify every single vibration forward.",
-            "visual": "robot",
-            "label": "The Mechanism",
-            "story_beat": "mechanism",
-            "visual_prompt": "Close-up in a cluttered garage workshop. Leo fits custom acoustic dampeners into a lightweight bamboo cart frame. He wears grease-stained work gloves and holds a small digital tuning fork against the frame while examining digital frequency meters on a workbench.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Resonant Victory Dash",
-            "speech": "Listen to the crowd roar! Our bamboo chassis is surfing the exact sound waves of their cheers straight to first place!",
+            "headline": "The Mechanical Flaw",
+            "speech": "Wait, why is the calibration dial spinning backward into the red zone of catastrophe?",
             "visual": "ship",
-            "label": "The Triumph",
+            "label": "The Malfunction",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby stares in wide-eyed panic at a smoking dashboard as a bizarre flying vessel shape on top of the machine begins to whir wildly, scattering carrots.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Market Mayhem",
+            "speech": "Duck everyone! The automated turnip launcher has decided to target my own lunchbox!",
+            "visual": "door",
+            "label": "The Grand Finale",
             "story_beat": "payoff",
-            "visual_prompt": "Action shot on the steep downhill stretch of the derby track. Maya steers the golden-brown bamboo cart as it surges past the stunned Pinehill racers. Spectators along the wooden barriers clap rhythmically, and the cart vibrates with a visible golden aura. Maya wears goggles and a triumphant smile.",
+            "visual_prompt": "Barnaby dives behind a swinging wooden market stall door as a giant golden turnip shoots out from the machine, sailing directly toward a towering stack of cabbages.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
         "visual_bible": {
-          "style": "Vibrant, cinematic illustration style with rich textures, warm lighting, and detailed environmental storytelling.",
+          "style": "Bright, colorful slapstick comedy animation style with exaggerated expressions and detailed mechanical contraptions.",
           "characters": {
-            "Leo": "A determined 15-year-old boy with messy brown hair, freckles, wearing a faded orange jersey, mud-splattered denim jeans, and a worn leather bicycle helmet.",
-            "Maya": "A sharp-witted 15-year-old girl with braided dark hair, wearing muddy denim overalls, thick work gloves, and a yellow headlamp strapped across her forehead."
+            "Barnaby": "An eccentric inventor with wild gray hair, wearing a patched tweed vest, goggles pushed up on his forehead, and grease-smudged cheeks."
           },
           "locations": {
-            "racetrack": "A sun-baked asphalt community derby track lined with wooden safety barriers and cheering spectators under bright afternoon skies.",
-            "workshop": "A cluttered suburban garage filled with spare metal parts, hand tools, wooden workbenches, and glowing diagnostic screens.",
-            "bamboo_grove": "A dense, misty forest of towering golden bamboo stalks swaying gently under the moonlight."
+            "Busy Market": "A bustling, sunlit cobblestone town square packed with colorful canvas awnings, wooden crates of vegetables, and lively shoppers."
           },
           "objects": {
-            "bamboo_cart": "A lightweight, custom-built racing cart constructed from golden-brown hollow bamboo tubes held together by heavy-duty nylon straps.",
-            "tuning_fork": "A polished steel acoustic tuning fork used to measure frequency vibrations in structural frames.",
-            "pinehill_cart": "An ultra-sleek, aerodynamic silver racing cart featuring sharp carbon-fiber fins and flashing blue LED status lights."
+            "Turnip Launcher": "A clunky, copper-plated robotic contraption adorned with flashing lights, protruding pipes, and a large red panic button."
           }
         },
-        "plot_fingerprint": "4cdfda0740c69663cadafc29a60814d73c9d1278aa9d9937039b1d92aeb67230"
+        "plot_fingerprint": "b4a6830aedadc630f3f8f861ccfa2c0924e7db8537a6a6f3164af05618cd6708"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "7f277ae0666f52ebf5fdfb78",
+      "source_sha256": "f171e8f3aa433bbb55cf18c23a1dfc9ed875c873645f721adf7ed71646894426",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-b1c68397d6afacd945f5",
+        "title": "The Infinite Melon Baler",
+        "hook": "A Strange Contraption",
+        "question": "Can an overzealous inventor automate a fruit market?",
+        "answer": "Only if he wants sticky chaos and a very squashed finale.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "A Strange Contraption",
+            "speech": "Behold the Melon Baler Ninety-Thousand! It wraps, it squeezes, and it launches melons into the stratosphere instantly!",
+            "visual": "robot",
+            "label": "The Invention",
+            "story_beat": "reveal",
+            "visual_prompt": "Inventor Barnaby wearing stained plaid overalls excitedly gestures toward a towering steam-powered metal robot in a crowded market square, holding a clipboard in his left hand.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Loading the Machine",
+            "speech": "Just feed the heavy produce into the primary intake hopper and watch the precision gears engage without any trouble.",
+            "visual": "ship",
+            "label": "The Loading",
+            "story_beat": "build",
+            "visual_prompt": "Market vendor Mrs. Gable wearing a polka-dot apron angrily hoists a massive green watermelon over the wide iron funnel of the robot, while Barnaby frantically adjusts a brass valve.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Internal Jamming",
+            "speech": "Wait, the pressure gauge is spinning wildly out of control! Stop cranking the accelerator lever before everything bursts apart!",
+            "visual": "signal",
+            "label": "The Malfunction",
+            "story_beat": "twist",
+            "visual_prompt": "Barnaby and Mrs. Gable shield their faces as a flashing red beacon spins atop the smoking metal robot, while sticky fruit juice splashes across the cobblestone pathway.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Sticky Consequences",
+            "speech": "Well, the melons are neatly baled, but I think we owe every single shopper a very dry umbrella and an apology.",
+            "visual": "forest",
+            "label": "The Clean Up",
+            "story_beat": "payoff",
+            "visual_prompt": "Barnaby and Mrs. Gable covered entirely in pink melon pulp sit defeated amidst scattered leafy vines in the bustling market, holding tiny wet paper towels.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "visual_bible": {
+          "style": "Bright, quirky stop-motion claymation aesthetic with rich textures and vibrant pastel color palettes.",
+          "characters": {
+            "Barnaby": "An enthusiastic young inventor with unruly orange hair, thick round spectacles, and heavily stained plaid overalls.",
+            "Mrs. Gable": "A stern market vendor with gray hair in a tight bun, wearing a classic blue polka-dot apron over a brown dress."
+          },
+          "locations": {
+            "market_square": "A bustling, sunlit outdoor cobblestone marketplace filled with colorful striped awnings, wooden crates, and busy shoppers."
+          },
+          "objects": {
+            "melon_baler": "A towering, clunky steampunk-style robot made of riveted brass plates, smoking pipes, and a flashing red warning light on top.",
+            "watermelon": "A large, perfectly oval green watermelon with dark striped patterns and a glossy rind."
+          }
+        },
+        "plot_fingerprint": "baccbc37159e61b7ae81813f6176852bb3b8d90c088d81f941d33597902f2b54"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "56109583e9dd2c10fbaf1937",
+      "source_sha256": "18c85f57b37975c7bbd72c9a91f8a02c70d6c60d7932583c6845fefc890c00c2",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-adc61681b5414820b8c2",
+        "title": "The Resonance of Sector Nine",
+        "hook": "The Silent Vent",
+        "question": "Can the crew bypass the vocal lock before the life support vent seals permanently?",
+        "answer": "Yes, by harmonizing their distinct deck tools into a single resonant frequency.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Silent Vent",
+            "speech": "We cannot force this bulkhead open with brute torque. The thermal seal requires a specific acoustic pitch.",
+            "visual": "ship",
+            "label": "Acoustic Lock",
+            "story_beat": "reveal",
+            "visual_prompt": "Engineer Mira and Pilot Jax stand inside a cramped spacecraft maintenance bay, staring at a massive circular door with glowing blue runes. Mira holds a glowing diagnostic tablet showing flatlining soundwaves, looking anxious.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Disagreement in the Hull",
+            "speech": "You want to play music to a machine? We need to weld it shut right now before pressure drops further!",
+            "visual": "robot",
+            "label": "Tension Rises",
+            "story_beat": "build",
+            "visual_prompt": "Pilot Jax gestures angrily toward a floating maintenance robot holding a heavy plasma torch. Mira holds her ground defensively, clutching her acoustic wrench tightly in the narrow metallic corridor.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Sympathetic Vibration",
+            "speech": "Listen closely to the hull hum. If we strike the conduits in sequence, the locking mechanism will recognize the chord.",
+            "visual": "signal",
+            "label": "Harmonic Code",
+            "story_beat": "mechanism",
+            "visual_prompt": "Mira taps three distinct copper conduits with her wrench, causing the floating robot to display glowing green frequency waves on its central screen. Jax watches in reluctant amazement as the air clears.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Breathing Room",
+            "speech": "The pressure equalized instantly. Next time, I will trust your musical instincts over my heavy wrenches.",
+            "visual": "planet",
+            "label": "Safe Descent",
+            "story_beat": "payoff",
+            "visual_prompt": "Mira and Jax stand side by side looking through the large observation viewport of the spacecraft bridge. A tranquil blue planet fills the window, and the heavy bulkhead door in the background is fully open and glowing green.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "visual_bible": {
+          "style": "Clean sci-fi animation style with soft lighting, rich teal and copper color palettes, and detailed metallic textures.",
+          "characters": {
+            "Mira": "A young female engineer with short dark hair, wearing a utility vest over a charcoal jumpsuit with teal trim and grease smudges on her cheek.",
+            "Jax": "A tall male pilot with silver-streaked hair, wearing a stiff crimson flight jacket and sturdy leather boots."
+          },
+          "locations": {
+            "maintenance_bay": "A cramped circular compartment lined with exposed copper wiring, hydraulic lines, and glowing indicator panels."
+          },
+          "objects": {
+            "acoustic_wrench": "A heavy steel tool with an integrated digital frequency display glowing in soft blue.",
+            "diagnostic_tablet": "A sleek rectangular slate displaying undulating green audio waveforms.",
+            "plasma_torch": "A bulky handheld welding device with an amber safety nozzle and heavy power cables."
+          }
+        },
+        "plot_fingerprint": "37a5ed8775d214d63f68579587672fdf0d7b5d6ba9e692c26930a1837a047bcd"
       },
       "approved": false
     }
