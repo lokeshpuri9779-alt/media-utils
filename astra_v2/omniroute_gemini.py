@@ -46,7 +46,10 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         "Vary genres and premises; avoid repeating cosmic archives, simulations or "
         "corrupted-code revelations. Use four cinematic story beats with causal "
         "progression and a meaningful ending. "
-        "Return only JSON keys title, question, answer, visual_bible, beats.         "
+        "Return only JSON keys title, question, answer, visual_bible, beats, "
+        "central_conflict, decisive_choice, resolution. "
+        "Describe the concrete causal conflict, decisive choice and resulting "
+        "outcome as short factual phrases; avoid generic themes. "
         "visual_bible must contain style (string), characters, locations and objects         "
         "(objects mapping stable names to detailed appearance strings). Define faces,         "
         "clothing, colours, proportions, setting layout and important prop designs once.         "
@@ -100,6 +103,9 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
     response_schema = {"type": "object", "properties": {
         "title": {"type": "string"}, "question": {"type": "string"},
         "answer": {"type": "string"},
+        "central_conflict": {"type": "string"},
+        "decisive_choice": {"type": "string"},
+        "resolution": {"type": "string"},
         "beats": {"type": "array", "items": beat_schema, "minItems": 4, "maxItems": 4},
         "visual_bible": {"type": "object", "properties": {
             "style": {"type": "string"}, "characters": names,
@@ -208,6 +214,12 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
             for beat in beats
         ],
     }
+    # Optional during rollout: never synthesize causal claims from narration.
+    # Only retain complete, bounded, explicit model annotations.
+    causal_fields = ("central_conflict", "decisive_choice", "resolution")
+    if all(isinstance(data.get(field), str)
+           and 8 <= len(data[field].strip()) <= 240 for field in causal_fields):
+        story.update({field: data[field].strip() for field in causal_fields})
     if "visual_bible" in data:
         bible = data["visual_bible"]
         if (not isinstance(bible, dict) or not isinstance(bible.get("style"), str)
