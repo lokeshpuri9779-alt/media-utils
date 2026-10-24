@@ -74,6 +74,12 @@ jobs:
           retention-days: 7
           if-no-files-found: error
 
+      - name: Install FFmpeg encoder and probe
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+          ffmpeg -version | head -n 1
+          ffprobe -version | head -n 1
       - name: Render offline Shorts and long-video MP4 proofs from restored assets
         run: |
           python - <<'PY'
