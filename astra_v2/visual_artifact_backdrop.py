@@ -38,7 +38,7 @@ SCENE_TERMS = {
 
 def choose_scene(shot):
     # Authored setting wins over incidental location words in narration.
-    for key in ("story_environment", "visual_prompt", "speech", "headline"):
+    for key in ("story_environment", "visual_prompt", "visual", "speech", "headline"):
         text = str(shot.get(key) or "").lower()
         for scene in SCENES:
             if any(re.search(r"\b"+re.escape(term)+r"\b",text) for term in SCENE_TERMS[scene]):
