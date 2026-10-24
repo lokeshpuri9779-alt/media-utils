@@ -1752,6 +1752,22 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-9e37af3008d34bfaaa08",
+      "story_sha256": "34850b04197df565dbf925d1691a9e3974a5c16ade86f3addcd247dcace73053",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-9e37af3008d34bfaaa08",
+        "story_sha256": "34850b04197df565dbf925d1691a9e3974a5c16ade86f3addcd247dcace73053",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the specific premises, characters, or settings of the provided comparison list.; The causal mechanism (collapsing the cavern to protect the plant) is clear and logically follows the established conflict.; The narrative is suitable for a general audience and contains no unsafe, misleading, or policy-violating content.; The story structure is coherent, providing a clear setup, conflict, decisive choice, and resolution.",
+        "reviewed_at": "2026-10-24T23:53:32.156260+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }
