@@ -33,6 +33,20 @@ class ArtifactBackdropTests(unittest.TestCase):
     def test_unknown_storyboard_visual_does_not_guess(self):
         self.assertIsNone(choose_scene({"visual": "an unexpected discovery"}))
 
+    def test_all_supported_environments_resolve_from_visual(self):
+        from astra_v2.visual_artifact_library import SCENES
+        for scene in SCENES:
+            with self.subTest(scene=scene):
+                self.assertEqual(choose_scene({"visual": scene}), scene)
+
+    def test_visual_prompt_and_visual_field_priority(self):
+        self.assertEqual(choose_scene({
+            "visual_prompt": "forest", "visual": "space", "speech": "city"
+        }), "forest")
+        self.assertEqual(choose_scene({
+            "visual": "underwater", "speech": "city"
+        }), "underwater")
+
     def test_unknown_scene_does_not_add_unrelated_art(self):
         image = Image.new("RGB", (1080, 1920), (10, 20, 30))
         self.assertIs(apply_backdrop(image, {"speech": "A surprising discovery"}, "story"), image)
