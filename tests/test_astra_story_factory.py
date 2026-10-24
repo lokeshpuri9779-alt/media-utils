@@ -17,6 +17,23 @@ class StoryFactoryTests(unittest.TestCase):
             self.assertFalse(row["production_ready"])
             self.assertEqual(row["kind"],"unreviewed_causal_draft")
             self.assertEqual(len(row["story_beats"]),4)
+    def test_causal_annotations_survive_cosmetic_variants(self):
+        from astra_v2.causal_premise_review import causal_premise_match
+        first = candidate_at(0)
+        variant = candidate_at(len(MECHANISMS))
+        for field in ("central_conflict", "decisive_choice", "resolution"):
+            self.assertTrue(first[field])
+            self.assertEqual(first[field], variant[field])
+        self.assertIsNotNone(causal_premise_match(variant, [first]))
+        self.assertFalse(variant["production_ready"])
+        self.assertTrue(variant["editorial_review_required"])
+
+    def test_different_mechanism_is_not_assumed_duplicate(self):
+        from astra_v2.causal_premise_review import causal_premise_match
+        first = candidate_at(0)
+        second = candidate_at(1)
+        self.assertIsNone(causal_premise_match(second, [first]))
+
     def test_repeated_premise_is_not_approved(self):
         item = candidate_at(0)
         self.assertEqual(screen_candidate(item, [])["status"], "awaiting_editorial_review")
