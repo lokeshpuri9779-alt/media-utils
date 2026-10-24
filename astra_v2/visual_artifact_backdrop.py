@@ -57,6 +57,15 @@ def _cached_pack_background(root_path, scene, identity, video_format, size):
         return None
     seed = int.from_bytes(hashlib.sha256(str(identity).encode()).digest()[:4], "big")
     chosen = candidates[seed % len(candidates)]
+    if os.getenv("ASTRA_ASSET_PACK_AUDIT", "0") == "1":
+        import json
+        print("ASTRA_PACK_BACKGROUND_SELECTED=" + json.dumps({
+            "asset_id": chosen.get("id"),
+            "path": chosen["path"],
+            "scene": scene,
+            "format": video_format,
+            "identity_sha256": hashlib.sha256(str(identity).encode()).hexdigest()[:12],
+        }, sort_keys=True), flush=True)
     with Image.open(root / chosen["path"]) as source:
         return ImageOps.fit(source.convert("RGB"), size, method=Image.Resampling.LANCZOS)
 
