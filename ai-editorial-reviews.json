@@ -1531,6 +1531,22 @@
         "review_model": "gemini-3.1-flash-lite"
       },
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-f3aec1a593e71f7dd2f7",
+      "story_sha256": "e414b807fda541f6d1f6642c51f2b797ac4c4af01a3b9c427748e6a7af81bc3d",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-f3aec1a593e71f7dd2f7",
+        "story_sha256": "e414b807fda541f6d1f6642c51f2b797ac4c4af01a3b9c427748e6a7af81bc3d",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not repeat the premises, characters, or specific causal mechanisms of the provided comparison history.; The narrative follows a clear causal structure: a malfunction occurs, a decisive choice is made to resolve it, and a logical resolution follows.; The content is suitable for a general audience and contains no unsafe, misleading, or policy-violating material.; The story is distinct from the provided list of recent publications, which focus on different themes such as mineral starvation, calcification, or drought.",
+        "reviewed_at": "2026-10-24T20:19:53.193797+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }

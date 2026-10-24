@@ -2,38 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-19T10:20:56.574653+00:00",
-      "stage": "quality",
-      "element": "candidate_selection",
-      "outcome": "fail",
-      "evidence": {
-        "reason": "no_approved_original_story_available"
-      },
-      "proposed_action": "Diagnose story supply and creative gate failures",
-      "candidate_id": ""
-    },
-    {
-      "at": "2026-10-19T10:23:01.034183+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 94.03,
-          "captions": 94.55,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-forge-c700b865946a10d9"
-    },
-    {
       "at": "2026-10-19T10:23:01.044262+00:00",
       "stage": "render",
       "element": "studio_render",
@@ -8272,6 +8240,39 @@
       },
       "proposed_action": "",
       "candidate_id": "rayvan-forge-33980efb0c8dfcd7"
+    },
+    {
+      "at": "2026-10-24T20:20:40.835916+00:00",
+      "stage": "quality",
+      "element": "creative_director",
+      "outcome": "pass",
+      "evidence": {
+        "scores": {
+          "hook": 94.0,
+          "retention": 92.0,
+          "visual": 100.0,
+          "pacing": 100.0,
+          "audio": 97.16,
+          "captions": 97.65,
+          "novelty": 100.0,
+          "coherence": 92.0,
+          "technical": 100.0
+        }
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-forge-f117ff59af74412d"
+    },
+    {
+      "at": "2026-10-24T20:20:40.844488+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "pass",
+      "evidence": {
+        "duration": 22.133,
+        "renderer": "studio-7.3.1"
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-forge-f117ff59af74412d"
     }
   ],
   "stage_counts": {
@@ -8372,7 +8373,7 @@
       "regressed": 0
     },
     "render": {
-      "pass": 150,
+      "pass": 151,
       "fail": 2,
       "skip": 0,
       "unknown": 2,
@@ -8381,7 +8382,7 @@
     },
     "quality": {
       "pass": 150,
-      "fail": 280,
+      "fail": 279,
       "skip": 0,
       "unknown": 0,
       "improved": 0,
