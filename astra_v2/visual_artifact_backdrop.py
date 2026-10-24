@@ -49,7 +49,7 @@ def analyze_story_scene(shot):
         text = value.lower()
         for scene in SCENES:
             for term in SCENE_TERMS[scene]:
-                if re.search(r"\\b" + re.escape(term) + r"\\b", text):
+                if re.search(r"\b" + re.escape(term) + r"\b", text):
                     return {"scene": scene, "source_field": key,
                             "matched_term": term, "needs_background": False}
     return {"scene": None, "source_field": None,
