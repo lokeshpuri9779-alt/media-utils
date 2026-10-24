@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 43,
+  "attempts": 44,
   "confirmed_today": 43,
-  "last_attempt_at": "2026-10-24T12:42:14.061339+00:00",
+  "last_attempt_at": "2026-10-24T13:02:52.252996+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -819,28 +819,58 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-24T12:43:01.528854+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "pxynr6GGG1Y": {
+      "content_id": "rayvan-gemini-9394f3fa8b626d624fc5",
+      "title": "Kaelen and the Singing Crystals of the Sun-Scorched Basin",
+      "day": "2026-10-24",
+      "uploaded_at": "2026-10-24T13:02:54.427802+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "ee5a78f173c5aa7bc2d2fffd18eb1cd1f583a597c6019f053f9f5d5c533add9e",
+      "story_beats": [
+        {
+          "speech": "Deep beneath the shifting dunes, I found a chamber vibrating with pure sound, humming with the power of ancient, resonating desert stones."
+        },
+        {
+          "speech": "My family needs this fortune to settle our debts, but striking these crystals might silence the valley and wither all the nearby life."
+        },
+        {
+          "speech": "Wait, the crystals respond to the pitch of my tool, creating a harmless, beautiful acoustic signal that I could capture without mining them."
+        },
+        {
+          "speech": "By harvesting only the echo of these stones, I can provide for my people while keeping the desert heart beating for generations ahead."
+        }
+      ],
+      "central_conflict": "Conflict between immediate financial desperation and long-term ecological preservation of a hidden singing crystal cave.",
+      "decisive_choice": "Kaelen chooses to seal the entrance to prevent mining instead of selling the crystal nodes for a fortune.",
+      "resolution": "Kaelen earns enough by recording and trading the crystal harmonies without harming their physical integrity, saving his home and the basin.",
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-24T13:00:38.695461+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T12:43:01.995410+00:00",
+    "at": "2026-10-24T13:02:54.783110+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-24T09:50:10.178955+00:00",
   "reserved": {
@@ -2715,13 +2745,39 @@
       "resolution": "The drone successfully retrieves the manifest and Elias returns it just as the whistle blows.",
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-9394f3fa8b626d624fc5": {
+      "at": "2026-10-24T13:02:52.252982+00:00",
+      "title": "Kaelen and the Singing Crystals of the Sun-Scorched Basin",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "ee5a78f173c5aa7bc2d2fffd18eb1cd1f583a597c6019f053f9f5d5c533add9e",
+      "story_beats": [
+        {
+          "speech": "Deep beneath the shifting dunes, I found a chamber vibrating with pure sound, humming with the power of ancient, resonating desert stones."
+        },
+        {
+          "speech": "My family needs this fortune to settle our debts, but striking these crystals might silence the valley and wither all the nearby life."
+        },
+        {
+          "speech": "Wait, the crystals respond to the pitch of my tool, creating a harmless, beautiful acoustic signal that I could capture without mining them."
+        },
+        {
+          "speech": "By harvesting only the echo of these stones, I can provide for my people while keeping the desert heart beating for generations ahead."
+        }
+      ],
+      "central_conflict": "Conflict between immediate financial desperation and long-term ecological preservation of a hidden singing crystal cave.",
+      "decisive_choice": "Kaelen chooses to seal the entrance to prevent mining instead of selling the crystal nodes for a fortune.",
+      "resolution": "Kaelen earns enough by recording and trading the crystal harmonies without harming their physical integrity, saving his home and the basin.",
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T12:43:01.995348+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-24T13:02:54.783055+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -2729,36 +2785,70 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T12:43:01.995399+00:00",
+    "at": "2026-10-24T13:02:54.783101+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-24T12:41:19.047140+00:00",
+    "at": "2026-10-24T13:00:58.919632+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-6174946c8baf64306c5b",
-    "video_url": "https://www.youtube.com/watch?v=X_0t3a8jHfc",
+    "content_id": "rayvan-gemini-9394f3fa8b626d624fc5",
+    "video_url": "https://www.youtube.com/watch?v=pxynr6GGG1Y",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T12:43:01.995292+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-24T13:02:54.782855+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T12:43:01.995343+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "counters": {},
+    "at": "2026-10-24T13:02:54.783051+00:00",
+    "collection_status": "collected",
+    "publish_step": "success",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 270,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3
+        },
+        "seen": 6,
+        "total": 343
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 344,
+        "fingerprint": 0,
+        "id": 6,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 338,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 338,
+        "remaining": 271
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 1,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
