@@ -1130,6 +1130,16 @@
         "reviewed_at": "2026-10-24T11:31:44.525880+00:00",
         "review_model": "gemini-3.1-flash-lite"
       }
+    },
+    {
+      "content_id": "rayvan-gemini-ff0a4749635135bbaa00",
+      "story_sha256": "09faa5e678ba68218b05d138af8a4183acd03e11c4589fcd816349c090fc41bf",
+      "approved": false,
+      "issues": [
+        "review_failed:HTTP_503",
+        "review_provider:provider_unavailable"
+      ],
+      "record": null
     }
   ]
 }

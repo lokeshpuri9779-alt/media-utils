@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 40,
+  "attempts": 41,
   "confirmed_today": 40,
-  "last_attempt_at": "2026-10-24T11:32:31.669160+00:00",
+  "last_attempt_at": "2026-10-24T11:56:16.093941+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -738,28 +738,55 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-24T11:37:08.915276+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "cEy54CYG80I": {
+      "content_id": "rayvan-gemini-92aa23e01cbddf00a66f",
+      "title": "The Octopus and the Silent Trench",
+      "day": "2026-10-24",
+      "uploaded_at": "2026-10-24T11:56:18.809322+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "ff93bab113154fffa7bd6eb77fdfc7a8143eb93e6e04ab4a9d508c40821a3dd9",
+      "story_beats": [
+        {
+          "speech": "Look at the canopy. The bioluminescent light has vanished completely, leaving our entire neighborhood in freezing shadows."
+        },
+        {
+          "speech": "Follow the drifting ash and the dropping water temperature upward toward the high ledge where the pressure is dangerously high."
+        },
+        {
+          "speech": "A massive slab of fallen ancient reef has sealed off the warm thermal vents that feed every plant below."
+        },
+        {
+          "speech": "Together we pushed the heavy stone away, and now the warm currents restore life to our magnificent ocean home."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-24T11:54:09.975059+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T11:37:09.379898+00:00",
+    "at": "2026-10-24T11:56:19.198368+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-24T09:50:10.178955+00:00",
   "reserved": {
@@ -2559,13 +2586,36 @@
       "resolution": "The sled gains instant traction on the hardened track, allowing Elias to overtake Jax at the finish line.",
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-92aa23e01cbddf00a66f": {
+      "at": "2026-10-24T11:56:16.093923+00:00",
+      "title": "The Octopus and the Silent Trench",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "ff93bab113154fffa7bd6eb77fdfc7a8143eb93e6e04ab4a9d508c40821a3dd9",
+      "story_beats": [
+        {
+          "speech": "Look at the canopy. The bioluminescent light has vanished completely, leaving our entire neighborhood in freezing shadows."
+        },
+        {
+          "speech": "Follow the drifting ash and the dropping water temperature upward toward the high ledge where the pressure is dangerously high."
+        },
+        {
+          "speech": "A massive slab of fallen ancient reef has sealed off the warm thermal vents that feed every plant below."
+        },
+        {
+          "speech": "Together we pushed the heavy stone away, and now the warm currents restore life to our magnificent ocean home."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T11:37:09.379837+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-24T11:56:19.198313+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -2573,36 +2623,63 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T11:37:09.379887+00:00",
+    "at": "2026-10-24T11:56:19.198359+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-24T11:31:15.858416+00:00",
+    "at": "2026-10-24T11:54:32.178559+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-d376feb6fe26c2f68142",
-    "video_url": "https://www.youtube.com/watch?v=qxzJrQAGl68",
+    "content_id": "rayvan-gemini-92aa23e01cbddf00a66f",
+    "video_url": "https://www.youtube.com/watch?v=cEy54CYG80I",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T11:37:09.379783+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-24T11:56:19.198085+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T11:37:09.379832+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "counters": {},
+    "at": "2026-10-24T11:56:19.198309+00:00",
+    "collection_status": "collected",
+    "publish_step": "success",
+    "counters": {
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 332,
+        "fingerprint": 0,
+        "id": 6,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 326,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 326,
+        "remaining": 259
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 3,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {
+          "NameError": 2
+        },
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
