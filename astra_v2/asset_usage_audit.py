@@ -103,6 +103,8 @@ def finish(video_path, *, renderer, expected_shots=None):
         "created_at": datetime.now(timezone.utc).isoformat(),
         "shot_count": count,
         "composited_shots": counts.get("composited", 0),
+        "asset_coverage_ratio": round(counts.get("composited", 0) / count, 4) if count else 0.0,
+        "asset_coverage_status": "none" if not counts.get("composited", 0) else ("full" if counts.get("composited", 0) == count else "partial"),
         "statuses": counts,
         "video_sha256": h.hexdigest(),
         "video_bytes": path.stat().st_size,
@@ -113,6 +115,8 @@ def finish(video_path, *, renderer, expected_shots=None):
         ),
         "shots": shots,
     }
+    if result["asset_coverage_status"] == "none":
+        print("ASTRA_ASSET_COVERAGE_WARNING=zero_verified_backgrounds_composited", flush=True)
     directory = Path(os.getenv("ASTRA_ASSET_AUDIT_DIR", "runtime-health/asset-usage"))
     directory.mkdir(parents=True, exist_ok=True)
     safe = re.sub(r"[^A-Za-z0-9._-]", "-", state["content_id"])[:72] or "untitled"
@@ -126,4 +130,6 @@ def finish(video_path, *, renderer, expected_shots=None):
     }, sort_keys=True), flush=True)
     return {"path": str(receipt), "shot_count": count,
             "composited_shots": result["composited_shots"],
-            "video_sha256": result["video_sha256"], "statuses": counts}
+            "video_sha256": result["video_sha256"], "statuses": counts,
+            "asset_coverage_ratio": result["asset_coverage_ratio"],
+            "asset_coverage_status": result["asset_coverage_status"]}
