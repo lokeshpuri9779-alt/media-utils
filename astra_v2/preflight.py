@@ -72,6 +72,7 @@ def reconcile_pending(youtube: Youtube, state: dict, channel_name: str):
                 "plot_key": entry.get("plot_key", ""),
                 "plot_fingerprint": entry.get("plot_fingerprint", ""),
                 "story_beats": entry.get("story_beats") or [],
+                **{key: entry[key] for key in ("central_conflict", "decisive_choice", "resolution") if entry.get(key)},
                 "genre": entry.get("genre", ""),
             }
             if entry.get("day") == state.get("day"):
