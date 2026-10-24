@@ -1038,6 +1038,18 @@
         "The plot lacks sufficient unique causal mechanisms to distinguish it from the established 'arctic research station' trope present in the provided examples."
       ],
       "record": null
+    },
+    {
+      "content_id": "rayvan-gemini-430ec1c1506ef8f36bcc",
+      "story_sha256": "a0b6cfc954c6d25214ed9c81296bda92f3ad8892f1c505d0e5a494ee75724739",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise and setting (an underwater creature saving a reef from an environmental threat) are highly derivative of the provided list of recent publications, specifically 'The Octopus and the Singing Reef' and 'The Coral Scribe and the Echoing Trench'.",
+        "The narrative structure follows a repetitive 'small creature saves the day' trope that is overrepresented in the provided dataset.",
+        "The causal mechanism (using a glowing object to signal migration) is functionally identical to the 'signal' tropes found in 'The Rescuer of Borealis Ridge' and 'The Octopus Cartographer'."
+      ],
+      "record": null
     }
   ]
 }

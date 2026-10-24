@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 33,
+  "attempts": 34,
   "confirmed_today": 33,
-  "last_attempt_at": "2026-10-24T09:51:24.899263+00:00",
+  "last_attempt_at": "2026-10-24T10:08:13.614961+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -577,28 +577,55 @@
       "renderer": "studio-7.3.0"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-24T09:56:20.417913+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "NYHxj_OPiH4": {
+      "content_id": "rayvan-gemini-96ef72ff00c426306ed7",
+      "title": "The Miller's Last Flour and the Oath of Oakhaven",
+      "day": "2026-10-24",
+      "uploaded_at": "2026-10-24T10:08:15.358275+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "007c58deb6a10ced0a71d8b4ee8313b2bfde0edc58207b05a165c26adaf3c5fe",
+      "story_beats": [
+        {
+          "speech": "Look at the cracked riverbed, Thomas. We have only one bag of grain left for the entire winter."
+        },
+        {
+          "speech": "If we divide this flour now, neither family will survive the cold months ahead without making a terrible sacrifice."
+        },
+        {
+          "speech": "Take your half of the flour to your children, Matthew. True friendship means bearing the hunger together."
+        },
+        {
+          "speech": "We survived the bitter winter because we stood as one. Our friendship is richer than any harvest."
+        }
+      ],
+      "renderer": "studio-7.3.0"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-24T10:06:38.454926+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-24T09:56:20.867064+00:00",
+    "at": "2026-10-24T10:08:15.737254+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-24T09:50:10.178955+00:00",
   "reserved": {
@@ -2234,13 +2261,36 @@
       ],
       "renderer": "studio-7.3.0",
       "result": "accepted"
+    },
+    "rayvan-gemini-96ef72ff00c426306ed7": {
+      "at": "2026-10-24T10:08:13.614949+00:00",
+      "title": "The Miller's Last Flour and the Oath of Oakhaven",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "007c58deb6a10ced0a71d8b4ee8313b2bfde0edc58207b05a165c26adaf3c5fe",
+      "story_beats": [
+        {
+          "speech": "Look at the cracked riverbed, Thomas. We have only one bag of grain left for the entire winter."
+        },
+        {
+          "speech": "If we divide this flour now, neither family will survive the cold months ahead without making a terrible sacrifice."
+        },
+        {
+          "speech": "Take your half of the flour to your children, Matthew. True friendship means bearing the hunger together."
+        },
+        {
+          "speech": "We survived the bitter winter because we stood as one. Our friendship is richer than any harvest."
+        }
+      ],
+      "renderer": "studio-7.3.0",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-24T09:56:20.867019+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-24T10:08:15.737177+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -2248,36 +2298,72 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-24T09:56:20.867057+00:00",
+    "at": "2026-10-24T10:08:15.737240+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-24T09:50:09.907342+00:00",
+    "at": "2026-10-24T10:06:55.369722+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-6ae14038bb037b05ad73",
-    "video_url": "https://www.youtube.com/watch?v=Y2PB5YjMD4M",
+    "content_id": "rayvan-gemini-96ef72ff00c426306ed7",
+    "video_url": "https://www.youtube.com/watch?v=NYHxj_OPiH4",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-24T09:56:20.866982+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-24T10:08:15.736905+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-24T09:56:20.867016+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "counters": {},
+    "at": "2026-10-24T10:08:15.737171+00:00",
+    "collection_status": "collected",
+    "publish_step": "success",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 259,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3
+        },
+        "seen": 6,
+        "total": 332
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 332,
+        "fingerprint": 0,
+        "id": 6,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 326,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 326,
+        "remaining": 259
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 2,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {
+          "NameError": 1
+        },
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
