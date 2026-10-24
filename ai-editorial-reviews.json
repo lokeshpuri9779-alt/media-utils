@@ -1199,6 +1199,18 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-0a592cfa3d94b187f498",
+      "story_sha256": "2829639663afd29dc423274f7d5ce4e914b6eae7f02936aa62414a0cd135d911",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise, conflict, and resolution are nearly identical to the previously published 'The Mud-Skipper's Gambit at Salt-Flat Speedway'. Both stories feature a protagonist (Jax) in a racing hover-sled/sled, a rival who sabotages the track/vehicle with mud/sludge, and a resolution where the protagonist uses a mechanical modification (dumping ballast/rerouting exhaust) to manipulate the mud/friction to win the race.",
+        "The causal mechanism of using a substance (mud/water) to alter friction for a last-second victory is a direct repetition of the established 'Mud-Skipper's Gambit' narrative pattern."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
