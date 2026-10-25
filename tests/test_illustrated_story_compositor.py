@@ -57,3 +57,38 @@ class IllustratedStoryboardTests(unittest.TestCase):
 
     def test_legacy_story_without_assets_unchanged(self):
         self.assertEqual(apply_story_art(self.frame,{"speech":"A fox arrives"}),0)
+
+    def test_unified_renderer_applies_auto_foreground_art(self):
+        from astra_v2.unified_story_engine import draw_story_frame
+        with Image.open(self.root / "art" / "signal.png") as source:
+            art = source.convert("RGBA")
+        art.putpixel((0, 0), (0, 0, 0, 0))
+        art.save(self.root / "art" / "signal.png")
+        shot = {"speech": "A signal glows.", "visual": "signal",
+                "illustrated_asset_root": str(self.root),
+                "auto_illustrated_art": True, "auto_art_kind": "prop",
+                "auto_art_tags": ["signal"],
+                "auto_art_box": [100, 200, 128, 128]}
+        for dimensions in ((1080, 1920), (1920, 1080)):
+            with self.subTest(dimensions=dimensions):
+                frame = Image.new("RGB", dimensions)
+                draw_story_frame(frame, shot, .5,
+                                 draw_directed=lambda *args: None,
+                                 global_time=.5, accent=(255, 255, 255))
+                self.assertEqual(frame.getpixel((150, 250)), (240, 40, 20))
+        # An explicit empty placement list deliberately overrides auto selection.
+        draw_story_frame(self.frame, {**shot, "illustrated_assets": []}, .5,
+                         draw_directed=lambda *args: None,
+                         global_time=.5, accent=(255, 255, 255))
+        self.assertEqual(self.frame.getpixel((150, 250)), (0, 0, 0))
+
+    def test_unified_renderer_rejects_invalid_auto_placement(self):
+        from astra_errors import CreativeReject
+        from astra_v2.unified_story_engine import draw_story_frame
+        with self.assertRaisesRegex(CreativeReject, "auto_art_tags"):
+            draw_story_frame(self.frame, {
+                "speech": "A signal glows.", "visual": "signal",
+                "illustrated_asset_root": str(self.root),
+                "auto_illustrated_art": True, "auto_art_tags": "signal"},
+                .5, draw_directed=lambda *args: None,
+                global_time=.5, accent=(255, 255, 255))

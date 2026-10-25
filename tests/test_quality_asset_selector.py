@@ -40,3 +40,13 @@ class QualityAssetSelectorTests(unittest.TestCase):
 
     def test_no_fallback_when_no_match(self):
         self.assertEqual(select_assets(self.root,kind="prop",tags=["moon"]),[])
+
+    def test_square_cutout_works_in_both_formats_but_background_does_not(self):
+        for video_format in ("shorts", "long"):
+            with self.subTest(video_format=video_format):
+                self.assertEqual([a["id"] for a in select_assets(
+                    self.root, kind="character", tags=["fox"],
+                    video_format=video_format)], ["fox"])
+                self.assertEqual(select_assets(
+                    self.root, kind="background", tags=["tree"],
+                    video_format=video_format), [])

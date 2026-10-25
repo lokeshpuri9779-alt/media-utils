@@ -30,9 +30,11 @@ def select_assets(root, *, kind, tags=(), style=None, min_size=128, limit=5,
             continue
         art=verified[entry["id"]]
         width,height=art["dimensions"]
-        if video_format == "shorts" and width >= height:
+        # Only full-frame backgrounds must match the output orientation.
+        # Foreground cutouts are placed into explicit boxes by the compositor.
+        if kind == "background" and video_format == "shorts" and width >= height:
             continue
-        if video_format == "long" and width <= height:
+        if kind == "background" and video_format == "long" and width <= height:
             continue
         if min(width,height)<min_size:
             continue
