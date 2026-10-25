@@ -38,3 +38,11 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_astra_story_inventory.py' -v
           python -m tools.astra_story_eligibility_report
+      - name: Preserve renderer artwork-gap evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-renderer-artwork-gaps
+          path: runtime-health/renderer-artwork-gaps.json
+          if-no-files-found: warn
+          retention-days: 14
