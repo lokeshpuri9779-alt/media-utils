@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-25",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 27,
-  "confirmed_today": 26,
-  "last_attempt_at": "2026-10-25T00:43:03.414954+00:00",
+  "attempts": 28,
+  "confirmed_today": 27,
+  "last_attempt_at": "2026-10-25T01:03:02.351784+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -2063,16 +2063,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "KHRCRlXmoSc": {
-      "content_id": "rayvan-forge-d2eefb776ff9e2db",
+    },
+    "rayvan-forge-d2eefb776ff9e2db": {
+      "video_id": "KHRCRlXmoSc",
+      "confirmed_at": "2026-10-25T01:01:24.592993+00:00",
       "title": "The Koala and the Last Night Train",
-      "day": "2026-10-25",
-      "uploaded_at": "2026-10-25T00:43:05.261460+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-25T00:43:05.261460+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "f077ffb5285b42b25ef95c27bb37fe11568163830e4cea629ec880043767d840",
       "story_beats": [
@@ -2089,16 +2087,43 @@
           "speech": "The conductor stopped at the next platform and brought the parcel back before sunrise."
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "mr5zM0mFSB4": {
+      "content_id": "rayvan-forge-5d76315ca1a9fa4b",
+      "title": "The Rabbit and the Borrowed Lantern",
+      "day": "2026-10-25",
+      "uploaded_at": "2026-10-25T01:03:04.766811+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "1afd443a6a5e3059c31469091867b8dd979bf9b1268370ff825a0b4c41db2f42",
+      "story_beats": [
+        {
+          "speech": "A rabbit hung festival lanterns, but every flame glowed blue when the music began."
+        },
+        {
+          "speech": "She checked the glass and the candles, yet nothing explained the strange color."
+        },
+        {
+          "speech": "She discovered a blue paper banner reflecting its color onto every white lantern."
+        },
+        {
+          "speech": "The villagers hung banners in different colors and made the brightest festival yet."
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-25T00:41:50.703336+00:00",
+  "last_preflight_at": "2026-10-25T01:01:24.156998+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-25T00:43:05.670474+00:00",
+    "at": "2026-10-25T01:03:05.210231+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -5159,10 +5184,33 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-5d76315ca1a9fa4b": {
+      "at": "2026-10-25T01:03:02.351766+00:00",
+      "title": "The Rabbit and the Borrowed Lantern",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "1afd443a6a5e3059c31469091867b8dd979bf9b1268370ff825a0b4c41db2f42",
+      "story_beats": [
+        {
+          "speech": "A rabbit hung festival lanterns, but every flame glowed blue when the music began."
+        },
+        {
+          "speech": "She checked the glass and the candles, yet nothing explained the strange color."
+        },
+        {
+          "speech": "She discovered a blue paper banner reflecting its color onto every white lantern."
+        },
+        {
+          "speech": "The villagers hung banners in different colors and made the brightest festival yet."
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-25T00:43:05.670433+00:00",
+    "at": "2026-10-25T01:03:05.210167+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -5173,21 +5221,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-25T00:43:05.670467+00:00",
+    "at": "2026-10-25T01:03:05.210220+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-25T00:42:13.321983+00:00",
+    "at": "2026-10-25T01:01:49.899098+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-d2eefb776ff9e2db",
-    "video_url": "https://www.youtube.com/watch?v=KHRCRlXmoSc",
+    "content_id": "rayvan-forge-5d76315ca1a9fa4b",
+    "video_url": "https://www.youtube.com/watch?v=mr5zM0mFSB4",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-25T00:43:05.670206+00:00",
+    "at": "2026-10-25T01:03:05.209830+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -5199,42 +5247,42 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-25T00:43:05.670429+00:00",
+    "at": "2026-10-25T01:03:05.210160+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 233,
+        "eligible": 235,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3
         },
         "seen": 6,
-        "total": 306
+        "total": 308
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 306,
+        "before": 309,
         "fingerprint": 0,
         "id": 6,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 300,
+        "remaining": 303,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 300,
-        "remaining": 233
+        "pool": 303,
+        "remaining": 236
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
         "approved": 1,
-        "considered": 77,
+        "considered": 81,
         "duration_rejected": 0,
         "not_ready": 0,
         "policy_rejected": {},
         "render_exception": {
-          "CreativeReject": 76
+          "CreativeReject": 80
         },
         "render_qa_rejected": 0
       }
