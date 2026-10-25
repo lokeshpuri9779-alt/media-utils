@@ -28,6 +28,9 @@ on:
       - 'tests/test_astra_character_art.py'
       - 'astra_v2/creative.py'
       - 'astra_v2/preload_worker.py'
+      - 'astra_v2/preload_queue.py'
+      - 'astra_v2/preload_saturation.py'
+      - 'tests/test_astra_preload_saturation.py'
       - 'astra_v2/free_story_engine.py'
       - 'astra_v2/story_forge.py'
       - 'astra_v2/omniroute_local.py'
@@ -72,6 +75,11 @@ jobs:
       YOUTUBE_COMMUNITY_CLIENT_SECRET: ${{ secrets.YOUTUBE_COMMUNITY_CLIENT_SECRET }}
       YOUTUBE_COMMUNITY_REFRESH_TOKEN: ${{ secrets.YOUTUBE_COMMUNITY_REFRESH_TOKEN }}
       ASTRA_PRELOAD_BUFFER: '24'
+      # A scheduled lane skips ONLY when recent approved archives are trusted,
+      # integrity-checked, and sampled against current publication policy.
+      # Lane zero always generates fresh stories; dispatch/push always render.
+      ASTRA_PRELOAD_SATURATION_HOURS: '4'
+      ASTRA_PRELOAD_FORCE_RENDER: ${{ vars.ASTRA_PRELOAD_FORCE_RENDER || '0' }}
       ASTRA_PRELOAD_LANES: '4'
       ASTRA_SERIALIZED_PRELOAD: '0' # Continue producing new original stories after Season 1
       ASTRA_PRELOAD_LANE: '${{ matrix.lane }}'
