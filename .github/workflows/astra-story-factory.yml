@@ -230,7 +230,12 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add story_factory_state.json story_factory_candidates.jsonl story_factory_review.jsonl story_factory_review_summary.json story_factory_editorial_packet.json
           if [ -f story_factory_rewrite_queue.json ]; then git add story_factory_rewrite_queue.json; fi
-          if [ -f story_factory_image_manifest.json ]; then git add story_factory_image_manifest.json omni_assets/; fi
+          if [ -f story_factory_image_manifest.json ]; then
+            git add story_factory_image_manifest.json
+            # Image generation can legitimately yield zero files; never fail
+            # persistence of the editorial cursor on a missing asset folder.
+            if [ -d omni_assets ]; then git add omni_assets/; fi
+          fi
           if ! git diff --cached --quiet; then
             git commit -m "Replenish review-only story candidate batch"
             # Never force-push persistent cursors: another writer may have advanced them.
