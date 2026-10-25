@@ -96,8 +96,12 @@ def apply_pack_background(image, shot, identity, *, root=None, video_format="sho
     if not (Path(root_path) / "art" / "manifest.json").is_file():
         observe(shot_number, analysis, "manifest_missing", identity)
         return image
-    selection = _cached_pack_background(root_path, scene, str(identity),
-                                        video_format, image.size)
+    # Avoid reusing decoded artwork across calls unless the restored pack is
+    # explicitly immutable. Otherwise selection must revalidate changed files.
+    cache_allowed = (os.getenv("ASTRA_ASSET_PACK_ENABLED") == "1" and
+                     os.getenv("ASTRA_ASSET_PACK_IMMUTABLE") == "1")
+    loader = _cached_pack_background if cache_allowed else _cached_pack_background.__wrapped__
+    selection = loader(root_path, scene, str(identity), video_format, image.size)
     if selection is None:
         observe(shot_number, analysis, "no_matching_background", identity)
         return image
