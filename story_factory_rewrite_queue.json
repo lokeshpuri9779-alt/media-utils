@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "d9fc503f95e5ea25c423588d",
-      "source_sha256": "463ce7fbc367351b97f67a726efc8f8de5cffd41282312271b769a93f77969a0",
+      "candidate_id": "a5f9d8ff8c765137c15742bb",
+      "source_sha256": "e864b0b9d50793453b0a2f45110d3aa71961554363eb05f271d2b3cbe00c71d3",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-a37de872768446c98fed",
-        "title": "The Great Turnip Dispenser Disaster",
-        "hook": "The Morning Reveal",
-        "question": "Can an automated root vegetable vendor survive market day without launching a root-based bombardment?",
-        "answer": "Only if calibrated properly before the mayor walks by for his morning snack.",
+        "content_id": "rayvan-gemini-44252b61a3e2dee83991",
+        "title": "The Great Tomato Launch Fiasco",
+        "hook": "The Grand Unveiling",
+        "question": "Can an over-engineered vegetable chopper survive a crowded morning market?",
+        "answer": "Yes, by pivoting from a kitchen disaster into an accidental crowd-pleasing entertainment act.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,79 +29,78 @@
         ],
         "story_beats": [
           {
-            "headline": "The Morning Reveal",
-            "speech": "Behold citizens, my mechanical marvel will feed the entire town within seconds, completely revolutionizing how we consume root vegetables today!",
+            "headline": "The Grand Unveiling",
+            "speech": "Behold the Turbo-Chopper Three Thousand! It slices, it dices, and it completely dominates your kitchen prep time effortlessly!",
             "visual": "robot",
-            "label": "Prototype Unveiled",
+            "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby standing proudly next to his brass automaton in a bustling market square, pointing at a glowing control panel with a confident grin.",
+            "visual_prompt": "Inventor Barnaby stands proudly behind a wooden market stall, gesturing toward a brass and copper mechanical contraption with spinning steel blades, wearing a green apron and safety goggles, while morning market shoppers watch curiously.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Clogging Mechanism",
-            "speech": "Oh dear, the chute is jamming on a giant parsnip, causing the internal pressure gauges to climb dangerously high into the red zone!",
+            "headline": "The Mechanical Malfunction",
+            "speech": "Wait, do not pull that emergency lever yet! The calibration spring is slightly loose and now everything is spinning uncontrollably!",
             "visual": "signal",
-            "label": "Pressure Spike",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby sweating profusely while frantically twisting a copper valve on the side of the shaking automaton as steam hisses from a brass pipe.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Desperate Build",
-            "speech": "Quickly grab that wrench and help me redirect this pneumatic hose before the entire contraption explodes across the fruit stalls!",
-            "visual": "ship",
-            "label": "Emergency Reroute",
+            "label": "The Glitch",
             "story_beat": "build",
-            "visual_prompt": "Barnaby and his assistant Maya holding a heavy rubber hose together, straining against a powerful blast of air inside a chaotic tent filled with flying cabbages.",
+            "visual_prompt": "Barnaby frantically waves his hands in the air, shouting at a copper-plated machine that is vibrating violently on the wooden table, sending a red warning flag up from a spring-loaded antenna while market vendors duck behind baskets.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Clean Payoff",
-            "speech": "Well at least the fountain makes exceptionally nutritious broth now, even if nobody asked for a public vegetable bath this morning.",
-            "visual": "forest",
-            "label": "Broth Fountain",
+            "headline": "The Desperate Intervention",
+            "speech": "Take this oversized red cabbage and jam it straight into the main intake gear before the whole stall blows up!",
+            "visual": "ship",
+            "label": "The Jam",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby lunges forward holding a giant round purple cabbage in both hands, aggressively shoving it into the churning metal gears of the smoky copper machine while a crowd of surprised onlookers gasps.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Triumphant Payoff",
+            "speech": "Look at those perfectly shredded toppings! That will be five coins for the best vegetable show in the entire city!",
+            "visual": "door",
+            "label": "The Success",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby and Maya smiling tiredly while sitting on a dry stone bench next to a splashing stone fountain filled with steaming turnip soup.",
+            "visual_prompt": "Barnaby smiles widely, holding out a wooden bowl overflowing with finely shredded cabbage to a cheering line of market customers, with the smoking copper machine resting quietly behind him near a slatted wooden storefront.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A malfunctioning vegetable cannon threatens to bury the busiest merchant plaza in turnips.",
-        "decisive_choice": "Re-routing the pneumatic feed into the town fountain instead of the clock tower.",
-        "resolution": "The plaza gets a refreshing root vegetable soup and the inventor receives a medal.",
+        "central_conflict": "A chaotic fruit and vegetable market testing an unstable mechanized chopper.",
+        "decisive_choice": "To throw a whole cabbage directly into the runaway gearing system to jam it safely.",
+        "resolution": "Winning over roaring crowds who mistake the mechanical explosion for performance art.",
         "visual_bible": {
-          "style": "Bright stop-motion claymation aesthetic with rich earthy textures and warm sunlight.",
+          "style": "Bright, colorful 3D animated family comedy style with rich textures and dynamic lighting.",
           "characters": {
-            "Barnaby": "A frantic inventor with wild orange hair, wearing a grease-stained tweed vest and oversized round goggles perched on his forehead.",
-            "Maya": "A pragmatic assistant with dark braided hair, wearing a blue canvas apron and sturdy leather boots."
+            "Barnaby": "An energetic young inventor with messy brown hair, wearing a stained green apron, round brass safety goggles pushed onto his forehead, and an enthusiastic expression."
           },
           "locations": {
-            "Market Square": "A crowded cobblestone plaza featuring striped canvas awnings, wooden fruit crates, and a central stone water fountain."
+            "Market Square": "A bustling outdoor town market filled with wooden vendor stalls, hanging canvas awnings, and cobblestone pathways."
           },
           "objects": {
-            "Automaton": "A towering copper and brass dispenser shaped like a giant mechanical owl with pneumatic tubes and a glowing amber pressure dial."
+            "Turbo_Chopper": "A noisy, over-engineered brass and copper mechanical contraption featuring exposed spinning steel gears, a spring-loaded red warning flag, and a large central intake funnel."
           }
         },
-        "plot_fingerprint": "8f5245d4972cd0eae4d766602626a8fee15fe15bb1e7d2e1a8825d0aac770315"
+        "plot_fingerprint": "2a6df2a6d575696d04173bb754fcd162cf719c0ad629d0f6aba638548432cd53"
       },
       "approved": false
     },
     {
-      "candidate_id": "8b98ed1090a803381ab45f17",
-      "source_sha256": "f9eecf8c806a67a2f65e710842dc8b668e512a5bb19cb8848654d5af9cc82432",
+      "candidate_id": "79fb9a17868b5704c8953a2e",
+      "source_sha256": "02c35a3cd6e5ef887f4961b0d39795bee064a8c8af2ba41c0ff094e38a6f6d43",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-98c1c0e53f207aeba7c3",
-        "title": "The Whispering Dunes of Oakhaven",
-        "hook": "The Singing Sands",
-        "question": "Can a dying desert oasis be saved by uncovering an ancient buried seed vault?",
-        "answer": "Yes, by unearthing a dormant subterranean greenhouse powered by morning mist.",
+        "content_id": "rayvan-gemini-3373dce7496e475ee00d",
+        "title": "The Quantum Steering Rebuild",
+        "hook": "Navigation Warning",
+        "question": "Can the crew repair the gravity well steering drive before entering the asteroid belt?",
+        "answer": "Yes, by trusting the cadet's unorthodox magnetic balancing method.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -109,82 +108,81 @@
         ],
         "story_beats": [
           {
-            "headline": "The Singing Sands",
-            "speech": "Listen closely to the low rumbling beneath our boots. The dunes are trying to tell us something very important about water.",
-            "visual": "signal",
-            "label": "Seismic Hum",
+            "headline": "Navigation Warning",
+            "speech": "Automated diagnostics failed! We cannot enter the asteroid belt without the primary gravity steering drive fully functioning right now.",
+            "visual": "ship",
+            "label": "System Failure",
             "story_beat": "reveal",
-            "visual_prompt": "Evelyn kneels on a vast orange desert dune, pressing her ear to the warm sand while holding a bronze tuning rod, looking surprised as glowing blue vibration waves ripple across the ground.",
+            "visual_prompt": "Captain Vance with a worried expression stands inside the main bridge of the starship pointing at a flashing red diagnostic console while Cadet Finn holds a heavy copper calibration wrench.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Unearthing the Hatch",
-            "speech": "Help me brush away this thick layer of compacted dust so we can pry open the heavy iron maintenance seal.",
-            "visual": "door",
-            "label": "Subterranean Entry",
-            "story_beat": "build",
-            "visual_prompt": "Evelyn and her companion Tariq pull on a rusted iron ring set into a massive stone slab embedded in the desert floor, clearing away loose gravel with small hand brushes in the bright daylight.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Mist Collector",
-            "speech": "Behold the intricate copper vanes and brass gears capturing the very last droplets of night desert fog to nourish the roots.",
+            "headline": "Conflicting Methods",
+            "speech": "We must scrap the automated recalibration protocol and manually realign the magnetic coils using my field density formula.",
             "visual": "robot",
-            "label": "Ancient Mechanism",
-            "story_beat": "mechanism",
-            "visual_prompt": "An automated mechanical brass automaton with glowing amber optical lenses tends to rows of green fern sprouts inside a sunlit underground stone chamber, gently misting them with water.",
+            "label": "Cadet Proposal",
+            "story_beat": "build",
+            "visual_prompt": "Cadet Finn wearing a stained utility jumpsuit holds up a glowing holographic tablet displaying a magnetic field equation while Maintenance Droid Unit-7 whirs anxiously nearby in the engine room.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Blooming Valley",
-            "speech": "Look at the vibrant green vines spilling over the dunes now. Our dry village is finally saved forever by ancient ingenuity.",
-            "visual": "forest",
-            "label": "Botanical Revival",
+            "headline": "Emergency Override",
+            "speech": "Time is running out! I am locking out the main bridge terminal to let Finn execute the manual magnetic balance sequence.",
+            "visual": "signal",
+            "label": "Manual Override",
+            "story_beat": "mechanism",
+            "visual_prompt": "Captain Vance slams a heavy brass emergency override lever on the auxiliary control panel while warning data streams rapidly across a large overhead navigation display screen.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Safe Passage",
+            "speech": "Look at the telemetry gauges! The steering drive is fully stable and we are successfully gliding past the asteroid field.",
+            "visual": "planet",
+            "label": "Successful Navigation",
             "story_beat": "payoff",
-            "visual_prompt": "Evelyn and Tariq stand smiling on a high ridge overlooking a flourishing green oasis filled with tall palm trees and blooming flowers, holding wooden canteens overflowing with fresh crystal water.",
+            "visual_prompt": "Captain Vance and Cadet Finn smile together inside the observation dome looking out at a vibrant blue gas giant planet framed by a smooth field of distant grey asteroids.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A severe drought threatens to destroy the last remaining desert village crops.",
-        "decisive_choice": "Evelyn decides to dig directly beneath the singing sand dune despite local superstitions.",
-        "resolution": "A massive underground botanical sanctuary awakens, providing endless water and shade to the valley.",
+        "central_conflict": "Disagreement between manual calibration and automated diagnostics for steering repair.",
+        "decisive_choice": "Override the main computer and execute the cadet's manual magnetic balance.",
+        "resolution": "The steering drive stabilizes smoothly, allowing the ship to navigate the asteroid belt safely.",
         "visual_bible": {
-          "style": "Cinematic animation with warm golden hour lighting and rich desert textures.",
+          "style": "Cinematic retro-futuristic science fiction with practical industrial textures and vibrant holographic accents.",
           "characters": {
-            "Evelyn": "A resourceful botanist with braided brown hair, wearing a worn leather travel vest and canvas trousers, carrying a bronze tuning rod.",
-            "Tariq": "A sturdy desert guide with a indigo headwrap, wearing a durable tan tunic and carrying a heavy canvas tool satchel."
+            "Captain Vance": "A seasoned commander with silver-streaked hair, wearing a dark navy utility jacket with brass clasps and determined facial features.",
+            "Cadet Finn": "A young ambitious engineer with messy brown hair, wearing a mustard-yellow jumpsuit covered in small tool pockets."
           },
           "locations": {
-            "The Whispering Dunes": "A vast expanse of rolling orange sand dunes hiding ancient subterranean structures.",
-            "The Subterranean Vault": "A cool stone chamber featuring intricate brass mechanisms and thriving green vegetation under natural sunlight shafts."
+            "Main Bridge": "A cramped circular control room lined with analog switches, glowing amber monitors, and a large central viewport.",
+            "Engine Room": "A cavernous industrial chamber filled with exposed copper pipes, pulsing magnetic coils, and overhead gantry cranes."
           },
           "objects": {
-            "Bronze Tuning Rod": "A slender metal rod etched with geometric wave patterns used for detecting seismic vibrations in the sand.",
-            "Iron Hatch": "A heavy circular metal seal embedded in stone, covered in intricate mechanical engravings and rusted hinges.",
-            "Brass Automaton": "A friendly mechanical caretaker robot with polished copper joints, glowing amber optical sensors, and articulated hands."
+            "Calibration Wrench": "A heavy matte-black steel tool with adjustable copper jaws and a digital torque read-out screen on the handle.",
+            "Emergency Lever": "A thick mechanical lever made of polished brass attached to a heavy-duty hydraulic baseplate on the control console."
           }
         },
-        "plot_fingerprint": "37f04f9be1f24ddfbf6cb65116eb2ea0c8642db3fe7078df45e9881a19bc0d50"
+        "plot_fingerprint": "8ea5c959edbf540c41fbee75bc8add0fb93711ba4655af7169e7a1bdda6fbe06"
       },
       "approved": false
     },
     {
-      "candidate_id": "28b61a89262eb0465a7edec8",
-      "source_sha256": "2351d72ceb142ccb12014be014ab9cf5d01053d82c375ac00cdd47d3f1fc8d37",
+      "candidate_id": "9e77a02c07de0b049db28ca9",
+      "source_sha256": "9975f3829c38128036cfd48ff137e73cd48ab0dd998891e84ed5cddb522edc1c",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-0cb8d901466bf2923322",
-        "title": "The Last Signal on Black Peak",
-        "hook": "The Silent Screen",
-        "question": "Can a veteran tracker bypass an unyielding storm to locate his missing teammate?",
-        "answer": "Yes, by trusting his old avalanche beacon over automated sensors.",
+        "content_id": "rayvan-gemini-17e9b546c4fdce67d69e",
+        "title": "The Tide-Clock Regatta",
+        "hook": "The Seized Rudder",
+        "question": "Can a student engineer redesign a malfunctioning wave-powered steering fin before the high-tide festival parade?",
+        "answer": "By substituting the jammed gear with a buoyant cork pendulum, she aligns the flagship just in time.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -192,64 +190,63 @@
         ],
         "story_beats": [
           {
-            "headline": "The Silent Screen",
-            "speech": "The digital grid just went dark. All our smart tracking beacons are showing a flatline across the entire sector.",
-            "visual": "signal",
-            "label": "Dead Network",
-            "story_beat": "reveal",
-            "visual_prompt": "A rugged mountain rescue worker standing inside a frosted weather station looking at a completely dead holographic console displaying flatline signals, holding a cracked electronic tablet, wearing a heavy orange parka, soft cinematic lighting reflecting off frost.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Manual Frequency",
-            "speech": "We cannot rely on satellites right now. Switch your gear to analog mode and listen for the heartbeat pulse.",
-            "visual": "forest",
-            "label": "Analog Search",
-            "story_beat": "build",
-            "visual_prompt": "The rescue worker kneeling beside a snow-covered pine tree in a dense alpine forest, adjusting an old-fashioned metal radio dial, breath frosting in the freezing air, wearing thermal goggles and heavy leather gloves.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Ridge Ascent",
-            "speech": "I am picking up a faint rhythm beneath the ice wall. Keep moving forward through this howling gale.",
-            "visual": "door",
-            "label": "Ice Barrier",
-            "story_beat": "mechanism",
-            "visual_prompt": "The rescue worker using a steel ice axe to clear heavy snow from a frozen mountain alcove door, searching intensely, wearing a bright yellow helmet with a headlamp cutting through thick swirling blizzard snow.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Beacon Found",
-            "speech": "Hold on tight, I found your manual beacon. You are coming home with me right now through this storm.",
+            "headline": "The Seized Rudder",
+            "speech": "Look at this gear! The saltwater corrosion completely fused the bronze teeth together before the launch.",
             "visual": "ship",
-            "label": "Safe Extraction",
+            "label": "Damage Revealed",
+            "story_beat": "reveal",
+            "visual_prompt": "Engineer Maya inspects a rusted metal gear on the wooden deck of her festival ship, holding a greasy wrench with a worried expression under bright afternoon sun.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Mechanical Pivot",
+            "speech": "We need an alternate motion converter that uses the natural rhythm of the incoming coastal waves.",
+            "visual": "signal",
+            "label": "Engineering Build",
+            "story_beat": "build",
+            "visual_prompt": "Maya welds a series of brass linkages to a hollow copper cylinder on her workbench, sparks flying as she secures the new pivot arm.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Buoyant Counterweight",
+            "speech": "This sealed cork cylinder will catch the tidal surge and push the rudder without needing gears.",
+            "visual": "forest",
+            "label": "System Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "Maya attaches a large carved cork float to the steering linkage near the wooden dock, testing its vertical movement against the splashing water.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Triumphant Voyage",
+            "speech": "The pendulum swings with every wave, steering our vessel cleanly past the pier and winning the prize.",
+            "visual": "robot",
+            "label": "Final Payoff",
             "story_beat": "payoff",
-            "visual_prompt": "The rescue worker hauling a shivering partner into the orange emergency rescue pod shelter, holding a blinking analog radio device in one hand and pulling a heavy thermal blanket with the other, warm interior glow contrasting against the freezing exterior.",
+            "visual_prompt": "Maya smiles proudly from the deck of her moving wooden ship as the cork pendulum bobs rhythmically, cheered on by festival crowds on the shore.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A blizzard traps the rescue lead's partner near the summit while local automated relay towers fail.",
-        "decisive_choice": "Abandoning the unreliable digital grid to follow a primitive audio frequency.",
-        "resolution": "The partner is pulled from the snowdrift safely before hypothermia sets in.",
+        "central_conflict": "A seized bronze steering gear threatens to crash the flagship into the festival pier.",
+        "decisive_choice": "She replaces the heavy broken metal cog with a floating cork pendulum tuned to the ocean swells.",
+        "resolution": "The flagship glides smoothly past the judges' stand, winning the grand engineering ribbon.",
         "visual_bible": {
-          "style": "Realistic cinematic winter survival drama with gritty textures and high contrast lighting",
+          "style": "Bright coastal animation style with vibrant blues and warm amber sunlight.",
           "characters": {
-            "protagonist": "A weathered rescue worker in his late forties with a trimmed gray beard, intense focused eyes, wearing a durable bright orange parka and a yellow safety helmet."
+            "Maya": "A young female engineer with curly dark hair tied back, wearing a grease-stained canvas apron and heavy leather work boots."
           },
           "locations": {
-            "weather_station": "A cramped, high-altitude outpost filled with monitors, maps, and frost-covered metal walls.",
-            "alpine_slope": "A steep, snowy mountain slope surrounded by pine trees and jagged ice formations under a dark stormy sky."
+            "festival_pier": "A bustling wooden seaside pier decorated with colorful paper banners and brass railings under a clear blue sky."
           },
           "objects": {
-            "analog_beacon": "A vintage metal handheld emergency transmitter with an extendable antenna and a spinning physical dial.",
-            "ice_axe": "A professional-grade carbon-steel climbing axe with a rubber-grip handle and a sharp pick."
+            "wrench": "A heavy steel adjustable wrench with grease smudges on the handle.",
+            "cork_pendulum": "A large cylindrical carved cork float attached to a shiny brass linkage rod."
           }
         },
-        "plot_fingerprint": "32f6e3ba0ed5fe76274d1f7646b071eecde7082f916e75eab6bbec386dc738a8"
+        "plot_fingerprint": "37edcec228ad017fc712f564a7a2bdee29b1741c8c5e5b5ab9b3b379d728c2ab"
       },
       "approved": false
     }
