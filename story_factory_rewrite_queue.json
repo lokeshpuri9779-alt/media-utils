@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "fa3996cd6cd08dbaa9d3f688",
-      "source_sha256": "5c1ae49257d25cac898a368d909396d870804e0324d6837b448066e87097e553",
+      "candidate_id": "d3860e09a4da1d1301a6eeb4",
+      "source_sha256": "405ecf1c1b8c6bba6fb9a30ca2241708dbe1d33e82c155f635a2c97e979c1ea4",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-e4c4a47055d2987cec18",
-        "title": "The Great Turnip Caper",
-        "hook": "The Mechanical Menace",
-        "question": "Can an overly complex vegetable slicer survive a chaotic marketplace?",
-        "answer": "Simple reliability always wins over automated chaos.",
+        "content_id": "rayvan-gemini-b51bcf5adcb2f81c9725",
+        "title": "The Automatic Onion Slicer Disaster",
+        "hook": "The Steaming Setup",
+        "question": "Can Barnaby build a steam-powered onion slicer without crying or ruining the market?",
+        "answer": "He invents goggles with wiper blades, saving both his eyes and the vegetable stall.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,79 +29,79 @@
         ],
         "story_beats": [
           {
-            "headline": "The Mechanical Menace",
-            "speech": "Behold the glorious automated rutabaga separator, constructed with four hundred gears and three spinning brass blades!",
+            "headline": "The Steaming Setup",
+            "speech": "Behold my magnificent onion-slicing automaton, designed to chop fifty roots a minute without a single tear falling!",
             "visual": "robot",
-            "label": "Automated Chaos",
+            "label": "The Contraption",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly next to a complex, smoking brass machine in a busy outdoor market, holding a wooden lever.",
+            "visual_prompt": "Barnaby stands proudly in a bustling outdoor market next to a clunky brass steam-robot holding massive kitchen knives.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Great Vegetable Jam",
-            "speech": "Oh dear, the tension spring has snapped, and now thirty turnips are flying wildly across the fruit stands!",
+            "headline": "The Fume Attack",
+            "speech": "Oh dear goodness me, the vapor is too potent! I cannot see the blades or my own workshop table!",
             "visual": "signal",
-            "label": "System Failure",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby frantically waves his hands in front of his smoking machine while frightened shoppers duck from flying root vegetables.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Stripped Gear",
-            "speech": "If I remove the unnecessary pendulum and the steam valve, this machine might actually slice a single potato safely.",
-            "visual": "door",
-            "label": "Emergency Redesign",
+            "label": "The Blind Panic",
             "story_beat": "build",
-            "visual_prompt": "Barnaby sits on a wooden crate behind his stall, using a small wrench to quickly strip useless gears from his brass contraption.",
+            "visual_prompt": "Barnaby waves his hands frantically in front of his face while green onion fumes swirl thickly around the crowded market stall.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Simple Slice",
-            "speech": "No complicated steam or gears needed, just a sturdy wooden lever that gives everyone a clean slice instantly!",
+            "headline": "The Mechanical Fix",
+            "speech": "Quickly attach the clockwork springs and tiny leather wipers to the glass lenses before the rush begins!",
+            "visual": "door",
+            "label": "The Modification",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby uses a tiny screwdriver to attach miniature leather wiper blades to the front of his shiny brass spectacles.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Triumphant Sale",
+            "speech": "Step right up and buy perfectly sliced onions! Not a single drop of crying in this entire basket!",
             "visual": "ship",
-            "label": "Market Triumph",
+            "label": "The Market Success",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby smilingly operates a simple hand-cranked wooden slicer as cheerful market customers happily line up to buy vegetables.",
+            "visual_prompt": "Barnaby stands smiling brightly behind his wooden counter, wearing his wiper-glasses while customers happily purchase bags of onions.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby tests his chaotic clockwork vegetable slicer against fierce market demands.",
-        "decisive_choice": "Barnaby decides to strip away the gears and embrace manual simplicity.",
-        "resolution": "The crowd buys the simplified manual slicer, bringing instant commercial success.",
+        "central_conflict": "Barnaby needs to slice onions fast for the morning rush, but the stinging fumes blind him completely.",
+        "decisive_choice": "He straps spring-loaded wiper blades directly onto his brass spectacles to clear the onion juice instantly.",
+        "resolution": "The market stall becomes a roaring success, selling sliced onions safely while Barnaby remains tear-free.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures and comedic physical expressions.",
+          "style": "Bright, colorful stop-motion claymation style with detailed brass textures and busy market backgrounds.",
           "characters": {
-            "Barnaby": "A frantic inventor with wild grey hair, wearing a patched green vest, striped trousers, and soot-smudged cheeks."
+            "Barnaby": "An eccentric inventor with wild white hair, a green tweed waistcoat, and a perpetually soot-smudged nose."
           },
           "locations": {
-            "Busy Market": "A bustling cobblestone town square lined with striped canvas awnings, wooden crates, and hanging lanterns."
+            "Market Stall": "A rustic wooden booth overflowing with sacks of potatoes, carrots, and massive yellow onions under a striped canopy."
           },
           "objects": {
-            "Brass Machine": "A towering contraption made of clanking brass pipes, loose leather belts, and erratic steam valves.",
-            "Wooden Slicer": "A compact, hand-operated wooden box with a single sharp steel blade and a comfortable grip handle."
+            "Onion Slicer": "A towering copper and brass contraption with spinning steel blades and a small puffing steam chimney.",
+            "Wiper Spectacles": "A pair of oversized brass goggles fitted with miniature clockwork wiper blades that sweep across the glass lenses."
           }
         },
-        "plot_fingerprint": "fe51992c6ed280412d1f699fcf048cb6c3339b2481f5650e8adbd9997981d96f"
+        "plot_fingerprint": "d288ec91a34d5a843425db4750a9ba68a36477d57137ccdb740d7c40bab14305"
       },
       "approved": false
     },
     {
-      "candidate_id": "aee562f5f099aa2789283c3e",
-      "source_sha256": "de8555e0d36a3556be90cfc4185d5e700ff89f0c1dd1282b91034ef209bce497",
+      "candidate_id": "9c12a1be028cd2d0d517c450",
+      "source_sha256": "df22a78d661ce5e9341e04d0180af26de9fdead4a6afad569bb637c66d27b6dd",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-5b60d7c7a509a6d337c4",
-        "title": "The Muddy Pitch Protocol",
-        "hook": "The Midnight Notice",
-        "question": "How can the local football club save their historic home pitch from being paved over by a rival team's parking lot expansion?",
-        "answer": "By engineering a subterranean drainage network that harnesses heavy rainfall to flood the rival's construction zone.",
+        "content_id": "rayvan-gemini-d7dc685939b5b1b44786",
+        "title": "The Coral Chamber of Echoes",
+        "hook": "The Silent Nursery",
+        "question": "Can the young ray repair the broken current stone before the tide fails?",
+        "answer": "By singing the old harmonic frequency into the stone, she restores the flow and saves the reef.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -109,83 +109,80 @@
         ],
         "story_beats": [
           {
-            "headline": "The Midnight Notice",
-            "speech": "Look at these survey markers, team. They plan to pour concrete over our heritage pitch by dawn tomorrow.",
+            "headline": "The Silent Nursery",
+            "speech": "Look closely at the deep fissure in the current stone, my little one. The water has completely stopped moving.",
             "visual": "signal",
-            "label": "Notice",
+            "label": "The Fracture",
             "story_beat": "reveal",
-            "visual_prompt": "Captain Maya holds a flashing digital survey beacon in the dark, pointing angrily at yellow boundary stakes on the soggy football pitch while Coach Vance watches anxiously nearby.",
+            "visual_prompt": "An anxious young spotted stingray swims near a glowing blue crystal pillar with a jagged crack running down its center inside a dark blue coral grotto, casting faint purple pulses of dying light.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Mapping the Pipes",
-            "speech": "We must tap into the old municipal storm drain and redirect the upcoming rainstorm right beneath their construction zone.",
+            "headline": "Gathering Resonance",
+            "speech": "We must collect the resonant pearl from the singing kelp forest before the oxygen levels drop too low.",
             "visual": "forest",
-            "label": "Drainage",
+            "label": "The Kelp Grove",
             "story_beat": "build",
-            "visual_prompt": "Maya and her teammate Leo crouch inside a overgrown drainage culvert near the treeline, unrolling a blue schematic blueprint illuminated by a heavy-duty battery-powered work lamp.",
+            "visual_prompt": "The young spotted stingray uses her fin to gently pluck a glowing golden pearl from the base of tall emerald green singing kelp stalks in a sun-dappled underwater valley.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Opening the Valve",
-            "speech": "Turn the wheel now before their heavy rollers arrive and lock the permanent foundations into place forever.",
-            "visual": "door",
-            "label": "Valve",
+            "headline": "The Harmonic Alignment",
+            "speech": "Hold the pearl firmly against the upper crack and let your steady voice vibrate through the mineral core.",
+            "visual": "robot",
+            "label": "The Mechanism",
             "story_beat": "mechanism",
-            "visual_prompt": "Leo strains with both hands to turn a massive rusty red sluice gate wheel inside a concrete utility vault, while muddy water surges around his rubber boots.",
+            "visual_prompt": "The spotted stingray presses a glowing golden pearl into the jagged crack of the massive blue crystal pillar, her mouth open in song as tiny geometric bioluminescent patterns ripple across the stone.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Great Sinking",
-            "speech": "Our pitch is safe and their bulldozers are completely stuck in the reclaimed swamp we just created.",
+            "headline": "Restored Tides",
+            "speech": "Feel the fresh current rush back through the valley. The nursery is safe and the reef breathes again.",
             "visual": "planet",
-            "label": "Victory",
+            "label": "The Flow",
             "story_beat": "payoff",
-            "visual_prompt": "Maya and the cheering community team stand on the dry historic football pitch at sunrise, watching heavy construction steamrollers trapped hub-deep in thick brown mud.",
+            "visual_prompt": "A vibrant school of tiny orange fish swims joyfully in strong, clear blue currents swirling around a fully healed, brilliantly glowing blue crystal pillar in the sunlit coral nursery.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "The rival Thunderbolts attempt to illegally pave over the community club's historical turf.",
-        "decisive_choice": "Captain Maya reroutes the neighborhood drainage system directly under the disputed pitch.",
-        "resolution": "The resulting controlled flood halts the paving equipment, exposing the illegal grading and preserving the turf.",
+        "central_conflict": "The central current stone cracked, stopping the water flow to the nursery.",
+        "decisive_choice": "She chooses to channel her own voice through the fractured quartz instead of fleeing.",
+        "resolution": "The current stabilizes, protecting the newborn hatchlings and reviving the kelp gardens.",
         "visual_bible": {
-          "style": "Vibrant, grounded cinematic sports drama with expressive character animations and rich, earthy textures.",
+          "style": "Cinematic 3D animation, vibrant ocean colors, bioluminescent highlights, highly detailed aquatic textures.",
           "characters": {
-            "Maya": "A determined twenty-year-old team captain with curly dark hair tied back, wearing a mud-splattered green athletic jersey and sturdy waterproof work boots.",
-            "Leo": "An enthusiastic nineteen-year-old teammate with thick glasses, a bright yellow raincoat, and a smudge of grease on his cheek.",
-            "Coach Vance": "A weathered fifty-year-old coach in a faded navy windbreaker, sporting a graying beard and worried expression."
+            "Pippa": "A young spotted stingray with wide expressive amber eyes, lavender wing-fins, and silver speckles along her back."
           },
           "locations": {
-            "The Historic Pitch": "A worn, natural grass football pitch surrounded by tall oak trees, marked by weathered wooden goalposts and old spectator benches.",
-            "The Utility Vault": "A damp underground concrete chamber housing old iron pipes, rusty valves, and dripping moisture from the ceiling."
+            "Coral Grotto": "A cavern made of pink and purple brain coral with hanging tendrils of phosphorescent algae.",
+            "Kelp Valley": "A sunlit underwater forest with towering emerald green stalks that vibrate when sound is applied."
           },
           "objects": {
-            "Survey Beacon": "A tall metal pole topped with a pulsing amber light and digital coordinate readout screen.",
-            "Blueprints": "Large rolled paper sheets covered in detailed ink schematics of municipal water pipes and elevation lines.",
-            "Sluice Valve": "A heavy cast-iron wheel painted red, connected to a massive underground water pipe."
+            "Current Stone": "A massive upright quartz pillar that normally pulses with blue energy to push water through the reef.",
+            "Resonant Pearl": "A golf-ball-sized golden sphere that stores acoustic frequencies and glows warmly."
           }
         },
-        "plot_fingerprint": "4953ba39364f8c02df3f7ed6ab6b976f42ed7050e192cd355ad24f071694dac9"
+        "plot_fingerprint": "378e5227b445a34f38b5d000ed20df639735dd7e398b4d7beaaaee757c096f9a"
       },
       "approved": false
     },
     {
-      "candidate_id": "b41431dbab01d8e8634a2591",
-      "source_sha256": "e9d365d26e8409cce654411827dad5a5aba95ca8f6fc5468db3ace583aafba7d",
+      "candidate_id": "0f9e12c3b3dd923e0d6d8893",
+      "source_sha256": "6ca10c861185404116b6223e040ae58e0f8313f8e2dc7ffbc72e1d222c99214f",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-9c1ec0253e77346380cf",
-        "title": "The Great Bakery Derby Bakeoff",
-        "hook": "The Challenge Accepted",
-        "question": "Can two rival village cycling clubs win the charity race using unconventional delivery methods?",
-        "answer": "Yes, by combining tandem bicycles with portable ovens to bake the finish-line pastry on the move.",
+        "content_id": "rayvan-gemini-3638c4d28da107d1fb84",
+        "title": "The Gyroscope Breach",
+        "hook": "Plasma Warning",
+        "question": "Can the engineering officer override the captain to save the ship?",
+        "answer": "Yes, by venting the starboard radiator to freeze the leaking plasma stream.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -193,69 +190,68 @@
         ],
         "story_beats": [
           {
-            "headline": "The Challenge Accepted",
-            "speech": "We must prove our pastries are faster than their pedals by baking the ultimate victory pie during the race.",
-            "visual": "forest",
-            "label": "The Forest Trail",
-            "story_beat": "reveal",
-            "visual_prompt": "Captain Miller stands in the misty forest trail, holding a wooden rolling pin with an intense expression, wearing a flour-dusted green jersey, while pointing at a rusty bicycle.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Engineering the Ovens",
-            "speech": "By rigging these cast-iron burners to our gear chains, the pedaling motion will power the baking process seamlessly.",
-            "visual": "robot",
-            "label": "The Workshop",
-            "story_beat": "build",
-            "visual_prompt": "Mechanic Jenkins welds a miniature metal oven onto the handlebars of a tandem bicycle inside a cluttered garage, wearing protective goggles and a leather apron.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Mid-Race Combustion",
-            "speech": "Pedal faster to keep the temperature gauge steady or our apple filling will turn into a sticky disaster.",
-            "visual": "signal",
-            "label": "The Hilltop",
-            "story_beat": "twist",
-            "visual_prompt": "Rider Miller struggles to steer the smoking tandem bicycle up a steep grassy hill while watching a glowing red pressure dial attached to the front basket.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Sweet Victory",
-            "speech": "Look at that golden crust rise just as we cross the banner, proving ingenuity beats raw speed every time.",
+            "headline": "Plasma Warning",
+            "speech": "Captain, the primary gyroscope is overheating rapidly because of a severe coolant leak in the main intake valve.",
             "visual": "ship",
-            "label": "The Finish Line",
+            "label": "Engine Room",
+            "story_beat": "reveal",
+            "visual_prompt": "Engineer Vesper stands inside the dimly lit engine room wearing a bulky blue utility jumpsuit, pointing urgently at a flashing amber diagnostic console while holding a heavy metal wrench.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Disagreement",
+            "speech": "We cannot vent the starboard radiator now, or we will lose our propulsion alignment before reaching the mining outpost.",
+            "visual": "signal",
+            "label": "Bridge",
+            "story_beat": "build",
+            "visual_prompt": "Captain Vance stands on the metal bridge deck wearing a pristine grey command uniform with gold trim, frowning at a glowing green navigation map while crossing both arms.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Emergency Override",
+            "speech": "Alignment does not matter if the reactor explodes, so I am initiating the emergency coolant purge sequence immediately.",
+            "visual": "robot",
+            "label": "Control Core",
+            "story_beat": "mechanism",
+            "visual_prompt": "Engineer Vesper rapidly punches override codes into a wall-mounted terminal while an automated maintenance droid flashes red warning lights beside a steel bulkhead door.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Safe Harbor",
+            "speech": "The core temperature is dropping safely back to nominal levels, proving that emergency venting was the correct choice.",
+            "visual": "planet",
+            "label": "Observation Deck",
             "story_beat": "payoff",
-            "visual_prompt": "Riders Miller and Jenkins proudly hold a steaming hot, perfectly baked cherry pie aloft beneath a red finish line banner in the village square.",
+            "visual_prompt": "Engineer Vesper and Captain Vance stand side by side gazing through a large circular viewport at a blue crescent planet while holding steaming mugs of synthetic coffee.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Rival cycling clubs fighting over the annual community pie delivery trophy.",
-        "decisive_choice": "Strap commercial ovens directly onto the tandem bike frames.",
-        "resolution": "Both clubs cross the finish line together, baking a giant collaborative pie that feeds the whole village.",
+        "central_conflict": "Plasma leaking from the primary gyroscope threatens to hull the vessel.",
+        "decisive_choice": "Venting the starboard radiator before the core achieves critical meltdown.",
+        "resolution": "The hull remains intact while the crew drifts safely on emergency battery power.",
         "visual_bible": {
-          "style": "Bright, charming stop-motion animation aesthetic with detailed textures and warm cinematic lighting.",
+          "style": "Clean sci-fi industrial aesthetic with practical lighting and weathered metallic textures.",
           "characters": {
-            "Miller": "An energetic village baker with a flour-stained green cap, expressive eyes, and a determined posture.",
-            "Jenkins": "A clever mechanic wearing round spectacles, a tweed vest, and constantly carrying a wrench."
+            "Vesper": "A determined female engineer with short silver hair, wearing a scuffed blue utility jumpsuit and magnetic boots.",
+            "Vance": "A pragmatic male captain with a neat dark beard, wearing a structured grey command jacket with gold rank pins."
           },
           "locations": {
-            "The Forest Trail": "A sun-dappled winding dirt path surrounded by tall pine trees and mossy boulders.",
-            "The Workshop": "A cozy, cluttered shed filled with bicycle parts, gears, and hanging baking utensils.",
-            "The Hilltop": "A breezy, steep green incline overlooking a picturesque rural farming valley.",
-            "The Finish Line": "A festive village square decorated with colorful banners, cheering crowds, and wooden tables."
+            "Engine Room": "A claustrophobic chamber filled with humming cylindrical power conduits and dangling overhead cables.",
+            "Bridge": "An open command center dominated by curved holographic displays and polished steel floor panels.",
+            "Control Core": "A narrow service corridor lined with blinking fuse boxes and heavy pneumatic bulkhead doors.",
+            "Observation Deck": "A spacious panoramic lounge featuring brushed aluminum walls and comfortable padded observation seats."
           },
           "objects": {
-            "Tandem Bike": "A sturdy red two-seater bicycle fitted with custom steel racks and chain-driven attachments.",
-            "Portable Oven": "A shiny brass-plated miniature convection oven with a visible glass viewing window and pressure dial.",
-            "Rolling Pin": "An aged oak rolling pin with carved floral patterns along the handle.",
-            "Victory Pie": "A massive, golden-brown lattice-crust cherry pie radiating visible steam."
+            "Wrench": "A heavy 30-centimeter titanium wrench with a worn rubberized black grip handle.",
+            "Diagnostic Console": "A wall-embedded touch terminal glowing with bright amber diagnostic charts and warning graphs.",
+            "Coffee Mug": "A thermal stainless steel mug with the ship insignia printed in faded white letters."
           }
         },
-        "plot_fingerprint": "5c778c632ea5c82e3992bcfb6fa59b765a3be4171ccccc38bdfcfc7819898e64"
+        "plot_fingerprint": "ae848ae1abb2f0283251527b5b5644b5a7ec232e82ab5345c3914680664b8b7d"
       },
       "approved": false
     }
