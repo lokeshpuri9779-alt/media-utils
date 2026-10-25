@@ -1,438 +1,68 @@
 {
   "schema_version": 1,
-  "count": 24,
-  "issue_counts": {},
+  "count": 3,
+  "issue_counts": {
+    "repeated_underlying_plot_mechanism": 3
+  },
   "approved_count": 0,
   "publication_triggered": false,
   "candidates": [
     {
-      "candidate_id": "305ec7564250dca398525642",
-      "source_sha256": "5f487c88055976c31635c489caa443e49f41361d680150645766c499d362cc46",
-      "title": "The Jelly That Would Not Set",
-      "premise_key": "jelly-enzyme",
+      "candidate_id": "b273138036b989bd819a6329",
+      "source_sha256": "7177c900e377cdcd4cbf44f63b23f07415a9f11ec2b3424934ae4cc9b8613492",
+      "title": "The Dome That Would Not Follow the Stars",
+      "premise_key": "observatory-dome",
       "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the festival fruit jelly stayed liquid even after a cold night before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they added more gelatin but the dessert still flowed off every plate; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized fresh kiwi contained an enzyme that prevented the gelatin from setting; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they heated the kiwi before mixing a new batch and served firm jelly, then explained the clue so their neighbors could prevent the problem next time."
+        "At the library courtyard, fox and rabbit discovered the observatory dome stopped rotating during a night survey during a power outage, leaving the community helpers waiting.",
+        "Rabbit tried to isolate the problem first, but they restarted the motor but the dome stalled at the same point; fox stopped the attempt before further damage.",
+        "Fox compared the failed attempt with the evidence and realized a bent guide wheel caught on a damaged section of track; they planned a safer joint response.",
+        "With the community helpers watching, they replaced the wheel and tested a complete dome rotation, then explained the clue so their neighbors could prevent the problem next time."
       ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
+      "review_status": "needs_new_plot",
+      "review_issues": [
+        "repeated_underlying_plot_mechanism"
+      ],
+      "required_next_action": "rewrite_with_new_plot",
       "production_ready": false,
       "decision": "not_approved",
       "eligible_for_automatic_publishing": false
     },
     {
-      "candidate_id": "13735fc876f7b504cd100966",
-      "source_sha256": "8328e383668f9f4a0d6cb6fd171ebbe8c110eee9ad7120298fd703c578a89add",
-      "title": "The Choir That Sang Behind the Beat",
-      "premise_key": "choir-latency",
+      "candidate_id": "904a58a2e30e4f6caad5a701",
+      "source_sha256": "e36fbd14f3ffcbae8d74398812766407507a232b045342f9ebe6308614ac34e8",
+      "title": "The Crates That Arrived Empty",
+      "premise_key": "harvest-crates",
       "story_beats": [
-        "At the woodland trail, fox and rabbit discovered every singer at the concert followed the conductor a beat too late before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they asked everyone to sing faster but the voices fell further apart; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized the new wireless rehearsal monitors were delaying what singers heard; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they switched to a direct monitor feed and rehearsed the opening together, then explained the clue so their neighbors could prevent the problem next time."
+        "At the library courtyard, fox and rabbit discovered harvest crates reached the barn with their lids closed but fruit missing during a power outage, leaving the community helpers waiting.",
+        "Rabbit tried to isolate the problem first, but they tightened the lids but the losses continued; fox stopped the attempt before further damage.",
+        "Fox compared the failed attempt with the evidence and realized a loose panel in the cart floor let fruit roll out along the road; they planned a safer joint response.",
+        "With the community helpers watching, they repaired the cart floor and collected the fallen fruit, then explained the clue so their neighbors could prevent the problem next time."
       ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
+      "review_status": "needs_new_plot",
+      "review_issues": [
+        "repeated_underlying_plot_mechanism"
+      ],
+      "required_next_action": "rewrite_with_new_plot",
       "production_ready": false,
       "decision": "not_approved",
       "eligible_for_automatic_publishing": false
     },
     {
-      "candidate_id": "9246fa185b5f339b37b74e9e",
-      "source_sha256": "f23d2b08f1d2787b57b67e4a3fd00d4fc96053fbfeb43ae773ff95d4afb3d74b",
-      "title": "The Auction With Two Winners",
-      "premise_key": "auction-paddles",
+      "candidate_id": "88d91499fb21c3be6c59a873",
+      "source_sha256": "517454360fffcf1e3172481371fb2cac9edfb3c3d272a7f53317a8364c2192ed",
+      "title": "The Letter That Appeared Blank",
+      "premise_key": "archive-ink",
       "story_beats": [
-        "At the woodland trail, fox and rabbit discovered two neighbors both believed they had won the same charity auction before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they counted the raised paddles again but the disagreement grew; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized a numbered paddle looked like six from one side and nine from the other; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they replaced the ambiguous paddle and repeated the bidding fairly, then explained the clue so their neighbors could prevent the problem next time."
+        "At the library courtyard, fox and rabbit discovered the archive's emergency instructions looked blank under ordinary lamps during a power outage, leaving the community helpers waiting.",
+        "Rabbit tried to isolate the problem first, but they copied the page onto fresh paper but no words appeared; fox stopped the attempt before further damage.",
+        "Fox compared the failed attempt with the evidence and realized the archivist discovered that the writing used a pigment visible under angled blue light; they planned a safer joint response.",
+        "With the community helpers watching, they photographed the recovered text and made accessible permanent copies, then explained the clue so their neighbors could prevent the problem next time."
       ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "a5c5978b96badd5dca662a63",
-      "source_sha256": "7ab0d4dd48829c271e269a420e1eec7832cabd842934aac48a998cd8b32fc9de",
-      "title": "The Bubble Parade Without Bubbles",
-      "premise_key": "bubble-hard-water",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the parade's giant bubble wands made only cloudy drops before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they poured in more soap but the mixture produced even less foam; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized minerals in the well water were reacting with the bubble solution; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they mixed a small test batch with soft water and restored the bubbles, then explained the clue so their neighbors could prevent the problem next time."
+      "review_status": "needs_new_plot",
+      "review_issues": [
+        "repeated_underlying_plot_mechanism"
       ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "9c2231e1f2eea604aa84283e",
-      "source_sha256": "31782a75ad691974fc2957dcbc4f28eb9cd0ae4358ee5eb8f33e052dd981c20c",
-      "title": "The Confetti That Rose Into the Sky",
-      "premise_key": "parade-updraft",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the parade confetti floated upward instead of falling around the performers before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they switched to heavier paper but it still drifted above the roofs; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized warm air rising from the bakery chimneys lifted everything in that lane; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they moved the confetti display away from the chimneys and caught the paper for reuse, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "e658726411f1fe83ac5bc0be",
-      "source_sha256": "405d67aa8abae9320a7fd0afcafb4b2b894b2cb8cc9af331a69baeb9a10b6b9f",
-      "title": "The Violin That Lost Its Voice",
-      "premise_key": "violin-rosin",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the lead violin barely made a sound during the dress rehearsal before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they tightened every string but the bow still slid silently across them; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized oil from a spilled costume bottle had coated the bow hair and removed its grip; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they cleaned the affected equipment safely and restored the bow's rosin, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "9ea4b36fc572d209f2e5ea7a",
-      "source_sha256": "fee0de5b6df6521dd756fc9ac6f86f8e93a2c45262d8ae048679d9e58b2a1f8b",
-      "title": "The Harvest Count That Doubled",
-      "premise_key": "ledger-carbon-copies",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the farmers' ledger showed twice as many crates as the barn could hold before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they searched the road for missing deliveries but found none; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized the clerk had entered both the original receipt and its carbon copy as separate loads; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they matched receipt numbers to real crates and corrected the public tally, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "2242a07e82bfa5d901d03c56",
-      "source_sha256": "5661f607e0afeb4a56f61a0de25660501242c7690e647d98cfbfbfef19b252a1",
-      "title": "The Puppet That Refused to Bow",
-      "premise_key": "dancing-marionette",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the wooden puppet leaned backward whenever the finale called for a bow before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they shortened its strings but it tipped backward even faster; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized a heavy replacement hat moved the puppet's balance behind its shoulders; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they lightened the hat and adjusted the strings until the puppet bowed, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "d395c75e1c04ad23bdde70cd",
-      "source_sha256": "b3749d5618c87cb6b85480e58a3b8d8e244e4e2d1231d7f67a27df8c9161f15e",
-      "title": "The Costumes That Changed Color",
-      "premise_key": "costume-stage-light",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the theater troupe arrived wearing costumes that seemed to be the wrong colors before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they swapped costumes backstage but the colors changed again on stage; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized the new colored stage lights were hiding the dyes' appearance under white light; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they checked every outfit in neutral lighting and relabeled the costume rack, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "45921225f3939432b8c27f2d",
-      "source_sha256": "bb65d7d49b6616a7d51c082b31308640122f7845e4700966d4e9e19098194ee5",
-      "title": "The Pots That Cracked Before the Fair",
-      "premise_key": "pottery-trapped-moisture",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the pottery stall's newest bowls cracked during their first firing before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they lowered the furnace temperature but the next bowls still split; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized the thick clay bases had retained moisture that expanded as steam; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they dried a test batch thoroughly before firing and remade the damaged bowls, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "53572dbb11436d313f1584de",
-      "source_sha256": "03c17f833d92422d51fac728fd99fc3f9deb7e90705133fc90671bde025c6b31",
-      "title": "The Delivery Robot That Kept Coming Back",
-      "premise_key": "robot-route-loop",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered a small delivery robot returned to the same doorstep with every parcel before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they cleaned its wheels but it completed the same mistaken route; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized two destinations had been assigned one identical route identifier; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they gave each destination a distinct identifier and checked the full delivery route, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "5782959bbb1c22249d9f899b",
-      "source_sha256": "f620f6d80941b38dcf9f0b35fc8708c712f4f45bcbec43c7b6f8698456b872f2",
-      "title": "The Tickets Nobody Could Read",
-      "premise_key": "prize-ticket-light",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the school fair's winning ticket numbers vanished under the festival lights before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they printed darker tickets but the letters still seemed to disappear; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized a colored filter over the stage lamps made the ticket ink blend into the paper; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they read the originals under neutral lamps and printed high-contrast replacements, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "48a42fc6436ec2481972ea44",
-      "source_sha256": "ab6cb4f5d03f48314adc839196290e9d3159ebb0fb3846166d6f71bdbed792a5",
-      "title": "The Concert Hall That Swallowed Music",
-      "premise_key": "concert-drapes",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the new concert hall sounded strangely quiet even with a full orchestra before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but the players performed louder but listeners at the back still heard almost nothing; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized temporary sound-absorbing rehearsal curtains covered the reflective wall panels; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they repositioned the curtains with the hall crew and checked sound from every row, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "67de4046257617605cbae50d",
-      "source_sha256": "e1ccde20c569847e92d6e536c05988f50aa755edfd5802006db042bbfcdffda8",
-      "title": "The Fish That Missed Every Meal",
-      "premise_key": "lunch-clock",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the pond fish gathered for food long after the automatic feeder had stopped before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they filled the feeder again but it still released food at the wrong hour; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized its display used twelve-hour time and the feeding cycle had been set to midnight; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they corrected the clock setting and observed a safe daytime feeding, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "ef607ce7b5222dd74bf0a4b5",
-      "source_sha256": "a73e388b19b34d8a9f37fb0628fe7ba1e8502fa9ecd788a7e12e434a9f6fc355",
-      "title": "The Race That Never Reached the Finish",
-      "premise_key": "race-turnaround",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the charity runners kept arriving at the same water station twice before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they painted larger finish arrows but the returning runners stayed confused; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized the loop's turnaround point had been put beyond the crossing instead of before it; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they moved the checkpoint and had volunteers walk the full course before restarting, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "5fa45f839c4567c64adc996e",
-      "source_sha256": "ee57939fb4a0dfaeb28db834b9278cd6cc07f5313ff10b08891bf8b1c8fa189d",
-      "title": "The Seed Swap With Missing Names",
-      "premise_key": "seed-swap-receipts",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered gardeners brought home seed packets belonging to entirely different families before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they sorted the packets by color but the owners were still mismatched; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized the registration team had switched the detachable claim slips between neighboring trays; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they matched signed receipts to tray numbers and returned each packet to its owner, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "a693402192a5e9ff8f2e70ed",
-      "source_sha256": "e79912a7ae91396c6577b4c97fed19db6beaf6a8e4ec52a706ecde080ae6a97a",
-      "title": "The Picnic Cakes That Tasted of Salt",
-      "premise_key": "picnic-salt-sugar",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered every cake baked for the picnic tasted salty despite following the recipe before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they added extra honey but the next cake tasted even worse; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized two identical unmarked tins held salt and sugar on the same shelf; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they tested and labeled the ingredients before making a fresh small batch, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "32944dda1eadccb86911898b",
-      "source_sha256": "6cf7160cba715cbf46cfc5ae5d2e1e8356949b3dabde5d491367f964742f4aac",
-      "title": "The Books Returned Before They Were Borrowed",
-      "premise_key": "library-timezone",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the library kiosk printed return times earlier than the books' checkout times before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they replaced the printer ribbon but every receipt showed the same contradiction; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized the kiosk used a different time zone from the library's checkout register; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they synchronized both systems and corrected the affected borrowing records, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "37efd4ca843cf8d0f08dcfc1",
-      "source_sha256": "b70f362df0c0079c3d703e980ae68c37b0521b5f0db754df381013e416447840",
-      "title": "The Costume Contest With Too Many Votes",
-      "premise_key": "voting-two-boxes",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the judges counted more costume-contest votes than there were visitors before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they recounted each colored bead but the total remained too high; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized a second ballot box had collected practice ballots along with the live votes; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they separated the practice ballots using the entry record and counted votes transparently, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "87429a35f2d8e43a6a3eacf6",
-      "source_sha256": "2eac48fc976b32fd59c20a47a3f2c89f9b043422ef327a6f17c08fc048845bbe",
-      "title": "The Ice Cream That Melted Only on One Side",
-      "premise_key": "cooler-air-gap",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered one row of festival ice cream melted while the neighboring tubs stayed frozen before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they turned down the cooler thermostat but the same row kept softening; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized the cooler lid had a warped seal that let warm air enter one corner; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they replaced the seal and checked every tub before serving, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "651eaaefe958902141c2602a",
-      "source_sha256": "ce2a7fa6dc949e48f7a326ec83b4f281216ff8303e95097dd84069cd740301fa",
-      "title": "The Orchard With No Visitors",
-      "premise_key": "garden-pollinator-mesh",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the orchard flowers bloomed but the pollinating insects never arrived before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they planted brighter flowers nearby but the orchard remained empty; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized a protective mesh installed during the winter still blocked insects from entering; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they opened the appropriate mesh panels and restored safe access for pollinators, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "49f1c62f1a7a76d91bde218d",
-      "source_sha256": "6cffcb8c79d9d429588d3da4e5921c2154bb57c3ac785d7032791b5849da4515",
-      "title": "The Song Nobody Could Finish",
-      "premise_key": "chorus-transposed-sheet",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the school band and choir kept landing on different notes at the finale before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they rehearsed each section separately but the final chord still clashed; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized the brass players had been given a score transposed for a different instrument; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they printed the correct parts and rehearsed the ending with everyone together, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "8a8870e6c315c2219f2f1a88",
-      "source_sha256": "7d585ea38bba529b255e01fae0f2c049d076bf359e4731f00bc6a87983180d78",
-      "title": "The Celebration Held on the Wrong Day",
-      "premise_key": "town-date-format",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered half the town arrived for a holiday feast while the tables were still being built before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they reread the invitations but each group insisted its date was correct; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized the invitation printer had mixed day-month and month-day date formats; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they sent corrected invitations with the month written out and held one shared feast, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "9e94fed999b532b6fea8f80b",
-      "source_sha256": "f02a704dc253505b958ba1b42aaec86741926993a745c24c2933abe38e8d1e4d",
-      "title": "The Stage That Leaned During the Dance",
-      "premise_key": "floating-stage-ballast",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the floating festival stage tilted whenever the performers gathered before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but they tightened the stage ropes but it leaned further with every dancer; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized the equipment and audience had all been placed on the same side of the pontoons; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they closed the stage for a balanced-load inspection and reopened after a safe test, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
+      "required_next_action": "rewrite_with_new_plot",
       "production_ready": false,
       "decision": "not_approved",
       "eligible_for_automatic_publishing": false
