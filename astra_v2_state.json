@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 5,
+  "attempts": 6,
   "confirmed_today": 5,
-  "last_attempt_at": "2026-10-25T19:32:53.863267+00:00",
+  "last_attempt_at": "2026-10-25T19:56:34.114147+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -3194,28 +3194,79 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-25T19:34:02.644845+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "pBXAXJs_eXU": {
+      "content_id": "rayvan-forge-faca2e67f7477e9a",
+      "title": "The Ferret and the Missing Bell",
+      "day": "2026-10-26",
+      "uploaded_at": "2026-10-25T19:56:35.511301+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "5c34f73ab114f1e5549b71b03eb7b9ff228e0b0035a0ad65e83b9aee8e62f6bb",
+      "story_beats": [
+        {
+          "headline": "SILENT MORNING",
+          "speech": "The town bell disappeared before the harvest ceremony, leaving a ferret caretaker staring at the empty wooden tower.",
+          "visual": "door",
+          "label": "BELL GONE",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A MISLEADING SOUND",
+          "speech": "He chased a ringing noise toward the market, but it came from a peddler's basket of tiny handbells.",
+          "visual": "forest",
+          "label": "FALSE ALARM",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE BRASS TRAIL",
+          "speech": "A trail of brass filings led behind the blacksmith's shed, where workers had moved the bell for emergency repairs.",
+          "visual": "book",
+          "label": "MYSTERY SOLVED",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE FIRST CHIME",
+          "speech": "The repaired bell returned to its tower just as the crowd assembled, and its bright chime opened the celebration.",
+          "visual": "forest",
+          "label": "CEREMONY SAVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-25T19:56:03.398965+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-25T19:34:03.294513+00:00",
+    "at": "2026-10-25T19:56:35.862010+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-25T13:27:21.316903+00:00",
   "reserved": {
@@ -7319,13 +7370,60 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-faca2e67f7477e9a": {
+      "at": "2026-10-25T19:56:34.114131+00:00",
+      "title": "The Ferret and the Missing Bell",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "5c34f73ab114f1e5549b71b03eb7b9ff228e0b0035a0ad65e83b9aee8e62f6bb",
+      "story_beats": [
+        {
+          "headline": "SILENT MORNING",
+          "speech": "The town bell disappeared before the harvest ceremony, leaving a ferret caretaker staring at the empty wooden tower.",
+          "visual": "door",
+          "label": "BELL GONE",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A MISLEADING SOUND",
+          "speech": "He chased a ringing noise toward the market, but it came from a peddler's basket of tiny handbells.",
+          "visual": "forest",
+          "label": "FALSE ALARM",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE BRASS TRAIL",
+          "speech": "A trail of brass filings led behind the blacksmith's shed, where workers had moved the bell for emergency repairs.",
+          "visual": "book",
+          "label": "MYSTERY SOLVED",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE FIRST CHIME",
+          "speech": "The repaired bell returned to its tower just as the crowd assembled, and its bright chime opened the celebration.",
+          "visual": "forest",
+          "label": "CEREMONY SAVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-25T19:34:03.294430+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-25T19:56:35.861936+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -7333,35 +7431,35 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-25T19:34:03.294498+00:00",
+    "at": "2026-10-25T19:56:35.861997+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-25T19:32:36.276843+00:00",
+    "at": "2026-10-25T19:56:22.455828+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-anthology-2d367521db3c2a50",
-    "video_url": "https://www.youtube.com/watch?v=j2VDFw-uM84",
+    "content_id": "rayvan-forge-faca2e67f7477e9a",
+    "video_url": "https://www.youtube.com/watch?v=pBXAXJs_eXU",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-25T19:34:03.294374+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-25T19:56:35.861848+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-25T19:34:03.294425+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
+    "at": "2026-10-25T19:56:35.861930+00:00",
+    "collection_status": "missing_diagnostics",
+    "publish_step": "success",
     "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
