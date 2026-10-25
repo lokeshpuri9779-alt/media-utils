@@ -134,7 +134,9 @@ def catalog(excluded_ids=(), max_candidates=12, excluded_titles=()):
             # correctly rejects a signal icon without a narrated signal.
             episode_one_visuals = ('signal', 'signal', 'door', 'door')
             episode_two_visuals = ('door', 'door', 'door', 'door')
-            directed_visuals = {1: episode_one_visuals, 2: episode_two_visuals}
+            episode_three_visuals = ('door', 'door', 'door', 'door')
+            directed_visuals = {1: episode_one_visuals, 2: episode_two_visuals,
+                                3: episode_three_visuals}
             beats = [(headline, speeches[i],
                       directed_visuals[episode][i] if episode in directed_visuals else visual_id,
                       label, role)
@@ -158,7 +160,7 @@ def catalog(excluded_ids=(), max_candidates=12, excluded_titles=()):
             ],
         }
         story_record["protagonist_name"] = name
-        if episode in (1, 2):
+        if episode in (1, 2, 3):
             # Explicit actions keep the same actor design across episodes.
             # Future installments without authored action choreography fail
             # the directed scene quality gate rather than acquiring fake acting.
