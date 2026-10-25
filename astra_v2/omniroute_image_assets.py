@@ -349,6 +349,14 @@ def preproduce(queue, root, *, generator=generate_free_image_with_failover, limi
             except (ValueError, OSError, RuntimeError, KeyError, TypeError) as exc:
                 # Whitelist only provider codes, never arbitrary exception text.
                 diagnostic = str(exc) if isinstance(exc, ValueError) else ""
+                if diagnostic == "Scenes must be portrait":
+                    # Preserve rejection; report provider output shape without
+                    # retaining prompts, credentials, or unapproved image bytes.
+                    try:
+                        with Image.open(io.BytesIO(image)) as rejected:
+                            row["rejected_dimensions"] = {"width": rejected.width, "height": rejected.height}
+                    except (UnboundLocalError, OSError, TypeError, ValueError):
+                        pass
                 if not (diagnostic.startswith("Image provider HTTP ")
                         or diagnostic.startswith("Cloudflare image generation unsuccessful")
                         or diagnostic in ("Cloudflare did not return base64 image",
