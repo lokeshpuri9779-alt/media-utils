@@ -2,3 +2,5 @@ One-time OpenVINO CPU portrait benchmark on standard GitHub runner.
 No publishing, no API keys, no paid provider.
 
 Retry 2: diagnostic exception frame names only; no credentials or prompt text.
+
+Retry 3: Transformers 4.x compatibility pin for CLIPFeatureExtractor.
