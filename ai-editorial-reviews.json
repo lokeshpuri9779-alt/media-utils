@@ -1823,6 +1823,22 @@
         "review_model": "gemini-3.1-flash-lite"
       },
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-3781ba2ff2886910571e",
+      "story_sha256": "59b4e07481066173f6a5a7f7e5d73ee76bff8e3b121a4700c5d4802b2970d535",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-3781ba2ff2886910571e",
+        "story_sha256": "59b4e07481066173f6a5a7f7e5d73ee76bff8e3b121a4700c5d4802b2970d535",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the premises, characters, or specific causal mechanisms of the provided recent publication list.; The narrative structure is causally coherent, following a clear progression from the inciting incident to the resolution.; The content is suitable for a general audience and contains no unsafe, misleading, or policy-violating material.; The aesthetic and plot elements are distinct from the 'Animal + Object' trope prevalent in the provided comparison list.",
+        "reviewed_at": "2026-10-25T01:21:11.123426+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }
