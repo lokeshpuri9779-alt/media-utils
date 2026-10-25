@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "363e0eba90fb36f945483350",
-      "source_sha256": "6b00320b745f40ec3ebb572e0386ffd32a02863c4c017c1df5c0168bca320946",
+      "candidate_id": "f8a1aa6477e237b6d7f33341",
+      "source_sha256": "6f588aa358ce12404391412d4542b2e00d44d1e3f8c91dec83da2ba4303f504d",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-c447b3a9428e3413a2cd",
-        "title": "The Great Turnip Caper",
-        "hook": "The Automated Disaster",
-        "question": "Can an over-engineered pneumatic vegetable slicer survive the morning rush at the central farmers market?",
-        "answer": "Yes, by abandoning speed entirely and converting into an accidental butter churn.",
+        "content_id": "rayvan-gemini-e8668d254544d2607d37",
+        "title": "The Great Tomato Launch",
+        "hook": "Tomato Catastrophe",
+        "question": "Can an overly enthusiastic inventor sell his automatic vegetable launcher at a busy morning market?",
+        "answer": "Yes, by pivoting from a salad delivery device to an extremely loud morning wake-up service.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,80 +29,79 @@
         ],
         "story_beats": [
           {
-            "headline": "The Automated Disaster",
-            "speech": "Behold the MegaSlicer ninety-thousand! It chops fifty turnips a second with absolute mechanical perfection and zero effort!",
-            "visual": "robot",
-            "label": "The Machine",
-            "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby stands proudly pointing at a steaming brass robot contraption while flying turnip chunks fill the crowded marketplace air.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Carrot Crisis",
-            "speech": "Stop the gears right now! The carrot intake valve is jammed solid and the pressure gauge is glowing bright red!",
+            "headline": "Tomato Catastrophe",
+            "speech": "Behold the glorious speed-peeler ninety-thousand! Watch as it expertly hurls a perfectly ripe red tomato across the crowded square.",
             "visual": "signal",
-            "label": "The Warning",
+            "label": "The Launcher",
+            "story_beat": "reveal",
+            "visual_prompt": "Barnaby stands behind a wooden cart in a sunlit outdoor market, holding a smoking metal lever with an excited expression while a flying tomato heads toward a merchant.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Angry Vendor",
+            "speech": "Your wonderful invention just smashed my entire pyramid of imported cheese! You must stop this madness before the health inspector arrives.",
+            "visual": "robot",
+            "label": "The Stall",
             "story_beat": "build",
-            "visual_prompt": "Market vendor Clara frantically waves a flashing red warning beacon at Barnaby as thick green steam erupts from the machine's exhaust vent.",
+            "visual_prompt": "Madame Dupuis stands with hands on hips, yelling angrily at Barnaby across a messy cheese stall smeared with red tomato pulp under a blue canopy.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Desperate Swap",
-            "speech": "There is no time to fix the blades! Dump the leftover heavy cream into the intake hopper before it explodes!",
+            "headline": "Quick Adjustment",
+            "speech": "Do not despair my frustrated friend! With a simple twist of this brass dial, we transform from messy lunch to punctual wake-up call.",
             "visual": "ship",
-            "label": "The Pivot",
+            "label": "The Adjustment",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby frantically pours a massive metal jug of cream into the top funnel while Clara spins a large iron steering wheel lever backward.",
+            "visual_prompt": "Barnaby frantically turns a large brass gear on the side of his mechanical device, adjusting the angle upward with a focused and determined smile.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Sweet Reward",
-            "speech": "Who could have predicted this? We are no longer vegetable farmers, we are the wealthiest dairy moguls in the entire county!",
-            "visual": "forest",
+            "headline": "Morning Glory",
+            "speech": "Rise and shine dear neighbors! Never sleep through dawn again when you have the loudest, freshest vegetable alarm clock in the district.",
+            "visual": "door",
             "label": "The Success",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby and Clara happily serve golden butter tubs to a massive line of cheering customers against a backdrop of sunlit wooden market stalls.",
+            "visual_prompt": "Multiple market vendors cheer happily as a single tomato launches straight up into the air over the crowded market stalls, ringing a tiny brass bell at the apex.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Pneumatic slicer destroys every vegetable in stall",
-        "decisive_choice": "Reversal of the intake turbine to whip cream",
-        "resolution": "Instant sell-out of gourmet churned butter",
+        "central_conflict": "Market stalls are being ruined by flying vine-ripe tomatoes.",
+        "decisive_choice": "Repurposing the spring-loaded catapult into a dawn alarm clock.",
+        "resolution": "Every vendor pre-orders the launcher to start their stalls on time.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion puppet animation aesthetic with highly detailed mechanical props and bustling crowded backgrounds.",
+          "style": "Bright, colorful stop-motion puppet animation aesthetic with detailed textures and whimsical proportions.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild orange hair, wearing a grease-stained tweed vest and oversized round safety goggles.",
-            "Clara": "A practical market vendor wearing a crisp green apron, a wide-brimmed straw hat, and holding a wooden clipboard."
+            "Barnaby": "An eccentric inventor with wild ginger hair, round wire-rimmed glasses, a patched green vest, and oil-stained trousers.",
+            "Madame Dupuis": "A stern market vendor wearing a tall white chef hat, a blue apron, and an expression of constant disapproval."
           },
           "locations": {
-            "Market Stall": "A rustic wooden canopy booth cluttered with crates of colorful vegetables, chalk price signs, and dangling copper pots."
+            "Market Square": "A bustling cobblestone town square lined with wooden stalls, colorful striped awnings, and woven baskets filled with fresh produce."
           },
           "objects": {
-            "MegaSlicer": "A towering contraption of polished brass pipes, ticking analog dials, whirring steel gears, and a large copper funnel top.",
-            "Cream Jug": "A heavy galvanized steel bucket with a side pouring spout and a braided wire handle."
+            "Tomato Launcher": "A complex brass and wooden contraption featuring large steel springs, leather straps, a spinning gear assembly, and a polished metal launching spoon."
           }
         },
-        "plot_fingerprint": "0d7965da364c79b23705222d627832d59515f5be2e4eb1b968f0ff96750e1c76"
+        "plot_fingerprint": "9451e489c0e76d88690b290adc536f5bc16f0bde2f5b43bee45271522bb44ad8"
       },
       "approved": false
     },
     {
-      "candidate_id": "a8c50c2a6154b76dff319b2f",
-      "source_sha256": "74035b3d792db5786c6b140474418c9f8454f46409033b7cb17bae3da47991ee",
+      "candidate_id": "4095ee654d7e35c7462c525f",
+      "source_sha256": "51af3ce157a76cfdae735f03852800f2bc6f633acd37fc4e26593ba1c5ce98dc",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-ecd808b139ffb156a6bd",
-        "title": "The Resonance Valve Crisis",
-        "hook": "Plasma Pressure Spikes",
-        "question": "Can the crew vent the hyper-dense plasma before the reactor core seals permanently?",
-        "answer": "By rerouting the backup coolant through the primary conduit, they stabilize the core just in time.",
+        "content_id": "rayvan-gemini-e887d5ecff7330ef40a8",
+        "title": "Frostline Breach",
+        "hook": "The Overheating Core",
+        "question": "Should Dr. Vance abandon the automated weather core to save the trapped supply sled?",
+        "answer": "Dr. Vance abandons the core, deploying the thermal beacons to rescue the crew and securing the vital medical supplies.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -110,83 +109,79 @@
         ],
         "story_beats": [
           {
-            "headline": "Plasma Pressure Spikes",
-            "speech": "Warning sector seven is overheating fast. If we do not vent this plasma immediately, the whole hull will tear apart.",
+            "headline": "The Overheating Core",
+            "speech": "The thermal arrays are failing fast. If we do not vent the reactor core right now, the whole station will melt.",
+            "visual": "signal",
+            "label": "Thermal Warning",
+            "story_beat": "reveal",
+            "visual_prompt": "Dr. Vance stands inside the glowing red control room, pointing a trembling gloved finger at the flashing amber radar signal on the central console.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Sled in Peril",
+            "speech": "Listen to that distress frequency! The crevasse is opening up beneath the transport sled and the cargo is sliding.",
             "visual": "ship",
-            "label": "Overheating Chamber",
-            "story_beat": "reveal",
-            "visual_prompt": "Engineer Vesper stands inside the cramped engine room of the star freighter, pointing a glowing multi-tool at a vibrating alloy pipe while sweat beads on her forehead.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Stubborn Intake",
-            "speech": "The automated release mechanism is totally jammed. We have to override the system manually right now before it explodes.",
-            "visual": "robot",
-            "label": "Jammed Valve",
+            "label": "Distress Call",
             "story_beat": "build",
-            "visual_prompt": "Maintenance droid Unit Seven grips a rusted titanium valve handle with its heavy metal claws, sparks flying against the dark bulkhead in the cramped engine bay.",
+            "visual_prompt": "Dr. Vance gazes through the frost-rimed window at the distant red tracked transport vehicle teetering precariously on the edge of a deep blue ice chasm.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Manual Override Risk",
-            "speech": "If I pull this manual release lever without the stabilizer, the blowback will fry every electrical system on this deck.",
-            "visual": "signal",
-            "label": "Danger Alarm",
+            "headline": "The Hard Choice",
+            "speech": "We cannot save both the station data and our friends. I am cutting power to the core to run the heavy winch.",
+            "visual": "robot",
+            "label": "Winch Activation",
             "story_beat": "mechanism",
-            "visual_prompt": "Pilot Jax holds a flashing red diagnostic tablet in the dimly lit control corridor, looking worriedly at Vesper across the pulsing orange warning lights.",
+            "visual_prompt": "Dr. Vance slams down a heavy brass lever on the steel control panel, watching the automated mechanical winch arm swing outward into the blinding blizzard.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Core Stabilized",
-            "speech": "We did it. The pressure is dropping back to normal levels and the main reactor drive is finally secure.",
-            "visual": "planet",
-            "label": "Safe Horizon",
+            "headline": "Safe Haven",
+            "speech": "The sled is aboard the safe ridge! We lost the research, but everyone is alive and warm tonight.",
+            "visual": "forest",
+            "label": "Successful Rescue",
             "story_beat": "payoff",
-            "visual_prompt": "Vesper and Jax smile side by side in the quiet cockpit, watching a calm green planet slowly rotate through the large main viewport window.",
+            "visual_prompt": "Dr. Vance and two rescued researchers smile tiredly inside the brightly lit emergency shelter, holding steaming metal mugs of hot tea while the storm howls outside.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A stuck intake valve traps high-pressure plasma in the main chamber, threatening an explosive hull breach.",
-        "decisive_choice": "Override the automated safety protocols to manually purge the burning plasma into space.",
-        "resolution": "The core cools down safely, saving the ship and teaching the crew the value of decisive teamwork.",
+        "central_conflict": "A sudden glacial fissure threatens to swallow the expedition supply sled while the main research core is overheating.",
+        "decisive_choice": "Dr. Vance switches off the core cooling system to divert emergency power into the rescue winch.",
+        "resolution": "The crew and supplies are hauled to safety just as the automated core goes offline permanently.",
         "visual_bible": {
-          "style": "Clean sci-fi anime style with vibrant neon accents and realistic mechanical textures.",
+          "style": "Cinematic gritty realism, cold blue and amber lighting, high contrast, detailed textures of frost, steel, and heavy winter gear.",
           "characters": {
-            "Vesper": "A human engineer with sharp blue eyes, tied-back brown hair, wearing a utility jumpsuit covered in pockets and grease smudges.",
-            "Jax": "A cautious pilot with short blonde hair, wearing a dark blue flight jacket with silver mission patches on the shoulders.",
-            "Unit Seven": "A squat, bipedal maintenance robot made of brushed steel with a single glowing yellow optical lens on its dome head."
+            "Dr. Vance": "A seasoned arctic researcher with deep weathering on her cheeks, wearing a heavy orange parka with faux-fur hood and thick black thermal gloves."
           },
           "locations": {
-            "Engine Room": "A claustrophobic compartment lined with exposed wiring, heavy hydraulic pistons, and massive coolant tanks.",
-            "Cockpit": "A sleek command center featuring curved holographic displays, padded pilot seats, and a sweeping panoramic window."
+            "control_room": "A cramped, utilitarian research outpost interior packed with blinking analog gauges, copper wiring, and frosted observation windows."
           },
           "objects": {
-            "Multi-tool": "A handheld metallic device with an extensible laser tip that glows cyan when activated.",
-            "Diagnostic Tablet": "A thin slate of black glass displaying moving red warning graphs and telemetry data.",
-            "Valve Handle": "A heavy hexagonal wheel made of scored industrial steel bolted directly to the main fuel line."
+            "brass_lever": "A heavy, cold-to-the-touch brass switch mounted on a riveted steel plate connected to the station's main power grid.",
+            "emergency_winch": "A rugged, yellow-painted mechanical winch system rigged with thick steel cables and flashing safety strobes."
           }
         },
-        "plot_fingerprint": "335049575f7310a034bdfa4276a957a29432339d79b0a8e50b1f3855d6868278"
+        "plot_fingerprint": "c90893f5aaeb42090c43bd0825a6edb41c8806636ea531f612d03e9907f6df40"
       },
       "approved": false
     },
     {
-      "candidate_id": "f6766aaca6f26a51b1129422",
-      "source_sha256": "d5ea9e4be1a484dcedae2b1cbea5775990c42450bd9dd8ba1ddb1f46d7fa4930",
+      "candidate_id": "0570d8cf56a0e29cb00b5581",
+      "source_sha256": "2be7be2513728b35edc826d37dafd0559024b0115db7b8fc298ff1403fd94d9e",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-9237bad5a3ec2b74f68d",
-        "title": "The Stationmaster's Last Telegram",
-        "hook": "The Midnight Halt",
-        "question": "Who keeps resetting the platform signal to stop the midnight mail train?",
-        "answer": "An escaped carrier pigeon wearing a customized ankle tracker that trips the mechanical lever.",
+        "content_id": "rayvan-gemini-f4a6d6fd35ff76051f52",
+        "title": "The Midnight Express Misplacement",
+        "hook": "The Disappearance",
+        "question": "Where did the missing cargo wagon of the 11:45 departure vanish?",
+        "answer": "It was shunted onto an abandoned spur by an overly eager automated maintenance robot.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -194,66 +189,65 @@
         ],
         "story_beats": [
           {
-            "headline": "The Midnight Halt",
-            "speech": "Another unauthorized stop on track four! We must find who is tampering with the semaphore levers before morning arrives.",
+            "headline": "The Disappearance",
+            "speech": "Station master Clara stared at the empty tracks in absolute disbelief, wondering how an entire wagon vanished instantly.",
             "visual": "signal",
-            "label": "Semaphore Red",
+            "label": "The Mystery",
             "story_beat": "reveal",
-            "visual_prompt": "Stationmaster Arthur stands on platform two at night, holding a brass lantern, staring up at a flashing red railway signal.",
+            "visual_prompt": "Station master Clara in a navy blue uniform stands on Platform Four under a flickering overhead light, staring at empty rails where a cargo wagon should be, holding a brass clipboard in her left hand.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Following the Feathers",
-            "speech": "Look closely at the mechanism base. There are tiny claw marks and lost grey feathers scattered across the iron counterweight.",
-            "visual": "forest",
-            "label": "Feather Clues",
-            "story_beat": "build",
-            "visual_prompt": "Arthur kneels beside the heavy iron lever base, pointing his flashlight at small grey feathers caught in the rusty gears.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Unexpected Culprit",
-            "speech": "Well, would you look at this clever little bird pulling the heavy brass wire with its custom leather ankle harness.",
+            "headline": "The Mechanical Helper",
+            "speech": "A rusty maintenance robot rolled into view, holding a missing manifest scroll and beeping cheerfully to gain attention.",
             "visual": "robot",
-            "label": "Avian Saboteur",
-            "story_beat": "twist",
-            "visual_prompt": "A plump carrier pigeon perched atop the lever mechanism uses its beak to tug a leather strap connected to the counterweight.",
+            "label": "The Clue",
+            "story_beat": "build",
+            "visual_prompt": "A compact, brass-plated maintenance robot with a single glowing blue optical lens rolls onto the wooden platform, holding a rolled parchment manifest in its mechanical gripper claw.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Corrective Grain",
-            "speech": "If we scatter the feed over here by the telegraph desk, the train will pass safely and our feathered friend stays happy.",
+            "headline": "The Hidden Spur",
+            "speech": "Following the robot down into the dark tunnel, Clara discovered the missing wagon tucked safely on an overgrown side track.",
             "visual": "door",
-            "label": "Clear Track",
+            "label": "The Discovery",
+            "story_beat": "mechanism",
+            "visual_prompt": "Clara and the maintenance robot stand before a heavy iron maintenance door inside a damp brick tunnel, pointing a lantern toward the forgotten spur track where the missing wooden wagon rests.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Departure",
+            "speech": "With the tracks finally cleared by her unexpected helper, the midnight express whistled loudly and rolled out smoothly.",
+            "visual": "ship",
+            "label": "The Success",
             "story_beat": "payoff",
-            "visual_prompt": "Arthur smiles warmly inside the station office, tossing wheat seeds into a wooden basket while the pigeon eats safely away from the tracks.",
+            "visual_prompt": "Clara waves a green signal lantern on Platform Four as a steam locomotive with polished brass fittings pulls away into the night, while the small maintenance robot waves a metallic hand goodbye.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A mysterious saboteur halts the midnight mail train, delaying vital medical supplies.",
-        "decisive_choice": "The stationmaster sets a trail of grain to guide the pigeon away from the lever instead of trapping it.",
-        "resolution": "The mail train arrives on time with the medicine, and the pigeon is officially adopted as the station mascot.",
+        "central_conflict": "A misplaced cargo wagon blocks the express departure track.",
+        "decisive_choice": "Reprogram the rogue maintenance automaton to clear the track.",
+        "resolution": "The express departs safely with all cargo intact.",
         "visual_bible": {
-          "style": "Victorian railway illustration style with warm sepia tones, detailed brass textures, and crisp ink lines.",
+          "style": "Cinematic Victorian railway mystery with warm golden lighting and moody shadows",
           "characters": {
-            "Arthur": "An elderly stationmaster with round spectacles, a tweed uniform, a silver pocket watch, and a kind expression.",
-            "Pip": "A sturdy grey homing pigeon with a shiny brass ankle ring and a leather telemetry strap."
+            "Clara": "A meticulous station master with graying hair tied in a neat bun, wearing a tailored navy blue uniform with brass buttons and round spectacles.",
+            "Unit-Seven": "A squat, bipedal maintenance automaton constructed from riveted copper plates, featuring a single vibrant blue optical lens for an eye and jointed mechanical claws."
           },
           "locations": {
-            "PlatformFour": "A historic cobblestone railway platform lit by flickering gas lamps under a wrought-iron glass canopy.",
-            "StationOffice": "A cozy room filled with ticking clocks, telegraph equipment, wooden filing cabinets, and steaming tea."
+            "Platform_Four": "A bustling nineteenth-century railway platform featuring polished dark wood flooring, wrought-iron support pillars, and arched glass roofing panels.",
+            "Tunnel_Spur": "A damp, curved subterranean brick tunnel lit by flickering gas lamps, housing overgrown tracks and heavy cast-iron maintenance doors."
           },
           "objects": {
-            "BrassLantern": "A heavy polished brass hurricane lamp casting a warm amber glow.",
-            "TelegraphKey": "An antique black cast-iron telegraph transmitter with a shiny brass knob.",
-            "RailwayLever": "A tall painted red iron lever with a wooden handle used to control track signals."
+            "Brass_Clipboard": "A rectangular polished brass board holding a thick stack of railway departure schedules and white parchment notes.",
+            "Signal_Lantern": "A handheld black iron lantern with thick glass panes emitting a bright emerald-green glow when activated."
           }
         },
-        "plot_fingerprint": "2a940e941b236aa346b9bf008810c359b46afd480bd3e93ab7047a727d7d963d"
+        "plot_fingerprint": "b3ddbb754e0dc2126b75601b3545c5a68c84defb1c5e8cc39dfa3a780b0f8fe6"
       },
       "approved": false
     }
