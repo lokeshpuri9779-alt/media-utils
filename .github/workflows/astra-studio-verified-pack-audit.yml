@@ -1,0 +1,90 @@
+name: ASTRA Full Studio Verified Pack Audit
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/astra-studio-verified-pack-audit.yml'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/astra-studio-verified-pack-audit.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  render-verified-pack:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      ASTRA_ASSET_PACK_ENABLED: '1'
+      ASTRA_ASSET_PACK_AUDIT: '1'
+      ASTRA_ASSET_PACK_IMMUTABLE: '1'
+      ASTRA_ASSET_PACK_ROOT: runtime-artifacts/verified-pack
+      ASTRA_ASSET_AUDIT_DIR: runtime-artifacts/pack-studio/receipts
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Studio and verification dependencies
+        run: |
+          python -m pip install -r requirements.txt
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+      - name: Download original background pack
+        uses: actions/download-artifact@v4
+        with:
+          name: astra-original-visual-pack
+          run-id: 39960540392
+          github-token: ${{ github.token }}
+          path: runtime-artifacts/download
+      - name: Restore and verify 3200 original backgrounds
+        run: |
+          python -m tools.astra_restore_visual_pack runtime-artifacts/download/astra-visual-pack.zip runtime-artifacts/verified-pack --expected 3200
+      - name: Render complete Studio video using verified pack
+        run: |
+          mkdir -p runtime-artifacts/pack-studio
+          python studio_renderer.py --preview runtime-artifacts/pack-studio/studio-with-pack.mp4
+      - name: Verify encoded video, audio and asset-use receipt
+        run: |
+          ffprobe -v error -show_entries format=duration:stream=codec_type,codec_name,width,height -of json runtime-artifacts/pack-studio/studio-with-pack.mp4 > runtime-artifacts/pack-studio/ffprobe.json
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root = Path('runtime-artifacts/pack-studio')
+          video = root / 'studio-with-pack.mp4'
+          assert video.is_file() and video.stat().st_size > 10000, 'Full Studio MP4 missing'
+          probe = json.loads((root / 'ffprobe.json').read_text())
+          streams = probe['streams']
+          vs = [s for s in streams if s['codec_type'] == 'video']
+          aud = [s for s in streams if s['codec_type'] == 'audio']
+          assert len(vs) == 1 and vs[0]['codec_name'] == 'h264', 'Expected H264'
+          assert (vs[0]['width'], vs[0]['height']) == (1080, 1920), 'Invalid frame size'
+          assert aud and any(s['codec_name'] == 'aac' for s in aud), 'AAC audio missing'
+          assert float(probe['format']['duration']) > 0, 'Invalid duration'
+          receipts = list((root / 'receipts').glob('*.json'))
+          assert len(receipts) == 1, f'Expected one full render receipt, got {len(receipts)}'
+          receipt = json.loads(receipts[0].read_text())
+          actual_hash = hashlib.sha256(video.read_bytes()).hexdigest()
+          assert receipt['video_sha256'] == actual_hash, 'Receipt MP4 hash mismatch'
+          assert receipt['asset_coverage_status'] == 'full', f"Asset coverage incomplete: {receipt['statuses']}"
+          assert receipt['composited_shots'] == receipt['shot_count'] > 0, 'Not every shot composited'
+          assert all(x['asset'] and x['pixel_changed'] for x in receipt['shots'])
+          print('FULL_STUDIO_VERIFIED_PACK_OK=' + json.dumps({
+            'shots': receipt['shot_count'],
+            'composited': receipt['composited_shots'],
+            'sha256': actual_hash,
+            'duration': probe['format']['duration'],
+          }))
+          PY
+      - name: Preserve full-video and source-use evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-studio-verified-pack-full-render
+          path: runtime-artifacts/pack-studio/
+          if-no-files-found: warn
+          retention-days: 7
