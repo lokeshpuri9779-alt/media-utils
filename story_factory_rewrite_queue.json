@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "d3860e09a4da1d1301a6eeb4",
-      "source_sha256": "405ecf1c1b8c6bba6fb9a30ca2241708dbe1d33e82c155f635a2c97e979c1ea4",
+      "candidate_id": "58fbb77474165a20dddcdd15",
+      "source_sha256": "f5181b022e1e58227dcec98e752c77a5d0a49a543ed3305c3a57d66f9b80483b",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-b51bcf5adcb2f81c9725",
-        "title": "The Automatic Onion Slicer Disaster",
-        "hook": "The Steaming Setup",
-        "question": "Can Barnaby build a steam-powered onion slicer without crying or ruining the market?",
-        "answer": "He invents goggles with wiper blades, saving both his eyes and the vegetable stall.",
+        "content_id": "rayvan-gemini-365d3a28ea07c16bca07",
+        "title": "The Great Onion Chopper Debacle",
+        "hook": "The Prototype Reveal",
+        "question": "Can Barnaby's motorized onion goggles survive a public demonstration at the morning vegetable market?",
+        "answer": "Yes, but only after causing a localized weeping epidemic that permanently changes local soup recipes.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,160 +29,79 @@
         ],
         "story_beats": [
           {
-            "headline": "The Steaming Setup",
-            "speech": "Behold my magnificent onion-slicing automaton, designed to chop fifty roots a minute without a single tear falling!",
+            "headline": "The Prototype Reveal",
+            "speech": "Behold the tear-stopper ninety-thousand! It dices bulb onions in milliseconds without a single drop of watery sadness leaking.",
             "visual": "robot",
-            "label": "The Contraption",
+            "label": "The Reveal",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly in a bustling outdoor market next to a clunky brass steam-robot holding massive kitchen knives.",
+            "visual_prompt": "Barnaby proudly stands at his wooden market stall, wearing bulky brass goggles with spinning twin blades, pointing to a bewildered elderly melon vendor.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Fume Attack",
-            "speech": "Oh dear goodness me, the vapor is too potent! I cannot see the blades or my own workshop table!",
-            "visual": "signal",
-            "label": "The Blind Panic",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby waves his hands frantically in front of his face while green onion fumes swirl thickly around the crowded market stall.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Mechanical Fix",
-            "speech": "Quickly attach the clockwork springs and tiny leather wipers to the glass lenses before the rush begins!",
+            "headline": "Constructing the Rig",
+            "speech": "I must secure the dual-gear piston safely onto my temple before tightening the titanium adjustment screws for stability.",
             "visual": "door",
-            "label": "The Modification",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby uses a tiny screwdriver to attach miniature leather wiper blades to the front of his shiny brass spectacles.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Triumphant Sale",
-            "speech": "Step right up and buy perfectly sliced onions! Not a single drop of crying in this entire basket!",
-            "visual": "ship",
-            "label": "The Market Success",
-            "story_beat": "payoff",
-            "visual_prompt": "Barnaby stands smiling brightly behind his wooden counter, wearing his wiper-glasses while customers happily purchase bags of onions.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Barnaby needs to slice onions fast for the morning rush, but the stinging fumes blind him completely.",
-        "decisive_choice": "He straps spring-loaded wiper blades directly onto his brass spectacles to clear the onion juice instantly.",
-        "resolution": "The market stall becomes a roaring success, selling sliced onions safely while Barnaby remains tear-free.",
-        "visual_bible": {
-          "style": "Bright, colorful stop-motion claymation style with detailed brass textures and busy market backgrounds.",
-          "characters": {
-            "Barnaby": "An eccentric inventor with wild white hair, a green tweed waistcoat, and a perpetually soot-smudged nose."
-          },
-          "locations": {
-            "Market Stall": "A rustic wooden booth overflowing with sacks of potatoes, carrots, and massive yellow onions under a striped canopy."
-          },
-          "objects": {
-            "Onion Slicer": "A towering copper and brass contraption with spinning steel blades and a small puffing steam chimney.",
-            "Wiper Spectacles": "A pair of oversized brass goggles fitted with miniature clockwork wiper blades that sweep across the glass lenses."
-          }
-        },
-        "plot_fingerprint": "d288ec91a34d5a843425db4750a9ba68a36477d57137ccdb740d7c40bab14305"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "9c12a1be028cd2d0d517c450",
-      "source_sha256": "df22a78d661ce5e9341e04d0180af26de9fdead4a6afad569bb637c66d27b6dd",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-d7dc685939b5b1b44786",
-        "title": "The Coral Chamber of Echoes",
-        "hook": "The Silent Nursery",
-        "question": "Can the young ray repair the broken current stone before the tide fails?",
-        "answer": "By singing the old harmonic frequency into the stone, she restores the flow and saves the reef.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Silent Nursery",
-            "speech": "Look closely at the deep fissure in the current stone, my little one. The water has completely stopped moving.",
-            "visual": "signal",
-            "label": "The Fracture",
-            "story_beat": "reveal",
-            "visual_prompt": "An anxious young spotted stingray swims near a glowing blue crystal pillar with a jagged crack running down its center inside a dark blue coral grotto, casting faint purple pulses of dying light.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Gathering Resonance",
-            "speech": "We must collect the resonant pearl from the singing kelp forest before the oxygen levels drop too low.",
-            "visual": "forest",
-            "label": "The Kelp Grove",
+            "label": "The Build",
             "story_beat": "build",
-            "visual_prompt": "The young spotted stingray uses her fin to gently pluck a glowing golden pearl from the base of tall emerald green singing kelp stalks in a sun-dappled underwater valley.",
+            "visual_prompt": "Barnaby tightly grips a miniature iron wrench in his right hand, frantically adjusting the side gears of his goggles while standing behind a pyramid of purple onions.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Harmonic Alignment",
-            "speech": "Hold the pearl firmly against the upper crack and let your steady voice vibrate through the mineral core.",
-            "visual": "robot",
+            "headline": "Turbo Mechanism Engaged",
+            "speech": "Activating the high-velocity gearbox now will surely demonstrate our unmatched culinary engineering superiority to every skeptical onlooker.",
+            "visual": "signal",
             "label": "The Mechanism",
             "story_beat": "mechanism",
-            "visual_prompt": "The spotted stingray presses a glowing golden pearl into the jagged crack of the massive blue crystal pillar, her mouth open in song as tiny geometric bioluminescent patterns ripple across the stone.",
+            "visual_prompt": "Barnaby aggressively yanks a glowing red lever on his belt pack, causing green warning lights to flash rapidly on his spinning goggle lenses.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Restored Tides",
-            "speech": "Feel the fresh current rush back through the valley. The nursery is safe and the reef breathes again.",
-            "visual": "planet",
-            "label": "The Flow",
+            "headline": "The Onion Payoff",
+            "speech": "Success at last! Every single onion in the entire marketplace is perfectly sliced and seasoned to absolute perfection.",
+            "visual": "forest",
+            "label": "The Payoff",
             "story_beat": "payoff",
-            "visual_prompt": "A vibrant school of tiny orange fish swims joyfully in strong, clear blue currents swirling around a fully healed, brilliantly glowing blue crystal pillar in the sunlit coral nursery.",
+            "visual_prompt": "Barnaby stands victorious amid a gentle fog of mild onion mist, holding a golden trophy while cheering market shoppers wipe happy tears.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "The central current stone cracked, stopping the water flow to the nursery.",
-        "decisive_choice": "She chooses to channel her own voice through the fractured quartz instead of fleeing.",
-        "resolution": "The current stabilizes, protecting the newborn hatchlings and reviving the kelp gardens.",
+        "central_conflict": "Barnaby tests his untested automatic onion-slicing goggles in front of the entire morning market.",
+        "decisive_choice": "Barnaby flips the turbo-speed lever to impress the picky produce guild master.",
+        "resolution": "The goggles shred onions at supersonic speeds, blanketing the square in harmless vapor and winning first prize.",
         "visual_bible": {
-          "style": "Cinematic 3D animation, vibrant ocean colors, bioluminescent highlights, highly detailed aquatic textures.",
+          "style": "Bright, colorful stop-motion claymation aesthetic with expressive character animations and detailed prop textures.",
           "characters": {
-            "Pippa": "A young spotted stingray with wide expressive amber eyes, lavender wing-fins, and silver speckles along her back."
+            "Barnaby": "An eccentric inventor with wild orange hair, a green tweed vest, oversized round spectacles, and smudge marks on his cheeks."
           },
           "locations": {
-            "Coral Grotto": "A cavern made of pink and purple brain coral with hanging tendrils of phosphorescent algae.",
-            "Kelp Valley": "A sunlit underwater forest with towering emerald green stalks that vibrate when sound is applied."
+            "Market Square": "A bustling cobblestone town square lined with striped canvas awnings, wooden crates, and hanging lanterns."
           },
           "objects": {
-            "Current Stone": "A massive upright quartz pillar that normally pulses with blue energy to push water through the reef.",
-            "Resonant Pearl": "A golf-ball-sized golden sphere that stores acoustic frequencies and glows warmly."
+            "Goggles": "Bulky brass eyewear featuring motorized spinning steel blades, blinking indicator lights, and a leather head strap.",
+            "Lever": "A polished copper activation switch mounted on a heavy leather belt pack with connected rubber tubing."
           }
         },
-        "plot_fingerprint": "378e5227b445a34f38b5d000ed20df639735dd7e398b4d7beaaaee757c096f9a"
+        "plot_fingerprint": "d37e9d1b6818ade97eb4de9ec58e5abc633f8284aa19947ab679fa50abd71938"
       },
       "approved": false
     },
     {
-      "candidate_id": "0f9e12c3b3dd923e0d6d8893",
-      "source_sha256": "6ca10c861185404116b6223e040ae58e0f8313f8e2dc7ffbc72e1d222c99214f",
+      "candidate_id": "730567608e29b8a3e11384ba",
+      "source_sha256": "39be11ef84bb1ac2486add3878700549b251dfb6d004e3542d6e19a42ca536ce",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-3638c4d28da107d1fb84",
-        "title": "The Gyroscope Breach",
-        "hook": "Plasma Warning",
-        "question": "Can the engineering officer override the captain to save the ship?",
-        "answer": "Yes, by venting the starboard radiator to freeze the leaking plasma stream.",
+        "content_id": "rayvan-gemini-f7f2525e93634bee83e7",
+        "title": "The Midnight Express Misdirection",
+        "hook": "The Missing Heirloom",
+        "question": "Can a stray platform cat expose a stolen pocket watch before the morning train departs?",
+        "answer": "Yes, by leading the stationmaster directly to the clever pickpocket hiding inside the old luggage locker.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -190,68 +109,147 @@
         ],
         "story_beats": [
           {
-            "headline": "Plasma Warning",
-            "speech": "Captain, the primary gyroscope is overheating rapidly because of a severe coolant leak in the main intake valve.",
-            "visual": "ship",
-            "label": "Engine Room",
-            "story_beat": "reveal",
-            "visual_prompt": "Engineer Vesper stands inside the dimly lit engine room wearing a bulky blue utility jumpsuit, pointing urgently at a flashing amber diagnostic console while holding a heavy metal wrench.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Disagreement",
-            "speech": "We cannot vent the starboard radiator now, or we will lose our propulsion alignment before reaching the mining outpost.",
+            "headline": "The Missing Heirloom",
+            "speech": "My grandfather's engraved timepiece is gone from my pocket, stolen right here on the crowded platform during the rush.",
             "visual": "signal",
-            "label": "Bridge",
-            "story_beat": "build",
-            "visual_prompt": "Captain Vance stands on the metal bridge deck wearing a pristine grey command uniform with gold trim, frowning at a glowing green navigation map while crossing both arms.",
+            "label": "Platform Theft",
+            "story_beat": "reveal",
+            "visual_prompt": "A distraught passenger in a tweed suit gestures toward the ticking platform clock while the stationmaster listens intently under the flashing departure signal.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Emergency Override",
-            "speech": "Alignment does not matter if the reactor explodes, so I am initiating the emergency coolant purge sequence immediately.",
+            "headline": "The Unexpected Guide",
+            "speech": "Look at Barnaby, our stray station cat. He is pawing insistently at the rusted ventilation grate of locker forty-two.",
             "visual": "robot",
-            "label": "Control Core",
-            "story_beat": "mechanism",
-            "visual_prompt": "Engineer Vesper rapidly punches override codes into a wall-mounted terminal while an automated maintenance droid flashes red warning lights beside a steel bulkhead door.",
+            "label": "Feline Clue",
+            "story_beat": "build",
+            "visual_prompt": "The stationmaster kneels beside a fluffy calico cat that swats at the metal door of a numbered luggage locker in the dim concourse.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Safe Harbor",
-            "speech": "The core temperature is dropping safely back to nominal levels, proving that emergency venting was the correct choice.",
-            "visual": "planet",
-            "label": "Observation Deck",
+            "headline": "The Lock Mechanism",
+            "speech": "We must use the master key to open this jammed compartment before the suspect boards the southbound express train.",
+            "visual": "door",
+            "label": "Locker Entry",
+            "story_beat": "mechanism",
+            "visual_prompt": "The stationmaster inserts a heavy brass key into the stubborn padlock of the luggage locker while the cat watches closely from a nearby wooden bench.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Apprehension",
+            "speech": "Here is the stolen silver watch, tucked safely inside the suspect's travel bag right beside the ticket puncher.",
+            "visual": "ship",
+            "label": "Stolen Recovery",
             "story_beat": "payoff",
-            "visual_prompt": "Engineer Vesper and Captain Vance stand side by side gazing through a large circular viewport at a blue crescent planet while holding steaming mugs of synthetic coffee.",
+            "visual_prompt": "The stationmaster holds up the gleaming silver pocket watch triumphantly as the guilty traveler is escorted away by railway security toward the boarding gates.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Plasma leaking from the primary gyroscope threatens to hull the vessel.",
-        "decisive_choice": "Venting the starboard radiator before the core achieves critical meltdown.",
-        "resolution": "The hull remains intact while the crew drifts safely on emergency battery power.",
+        "central_conflict": "A stolen silver pocket watch hidden in a locked station locker",
+        "decisive_choice": "Following the stray calico cat into the dark service corridor",
+        "resolution": "The watch is recovered and returned just as the express whistles",
         "visual_bible": {
-          "style": "Clean sci-fi industrial aesthetic with practical lighting and weathered metallic textures.",
+          "style": "Detailed Victorian railway aesthetic with warm amber lighting and rich textures of polished brass and weathered wood.",
           "characters": {
-            "Vesper": "A determined female engineer with short silver hair, wearing a scuffed blue utility jumpsuit and magnetic boots.",
-            "Vance": "A pragmatic male captain with a neat dark beard, wearing a structured grey command jacket with gold rank pins."
+            "passenger": "An anxious traveler wearing a brown tweed suit, round spectacles, and carrying a leather suitcase.",
+            "stationmaster": "A stern yet kind railway official in a crisp navy uniform with gold brass buttons and a peaked cap.",
+            "cat": "Barnaby, a fluffy calico cat with distinct orange and black patches and bright green eyes."
           },
           "locations": {
-            "Engine Room": "A claustrophobic chamber filled with humming cylindrical power conduits and dangling overhead cables.",
-            "Bridge": "An open command center dominated by curved holographic displays and polished steel floor panels.",
-            "Control Core": "A narrow service corridor lined with blinking fuse boxes and heavy pneumatic bulkhead doors.",
-            "Observation Deck": "A spacious panoramic lounge featuring brushed aluminum walls and comfortable padded observation seats."
+            "platform": "A bustling Victorian railway platform with arched iron girders, steam billowing from locomotives, and wooden benches.",
+            "concourse": "A dimly lit station concourse lined with rows of numbered iron luggage lockers and fading travel posters."
           },
           "objects": {
-            "Wrench": "A heavy 30-centimeter titanium wrench with a worn rubberized black grip handle.",
-            "Diagnostic Console": "A wall-embedded touch terminal glowing with bright amber diagnostic charts and warning graphs.",
-            "Coffee Mug": "A thermal stainless steel mug with the ship insignia printed in faded white letters."
+            "pocket_watch": "An antique engraved silver pocket watch attached to a braided silver chain.",
+            "master_key": "A large, ornate brass key with a heavy circular handle.",
+            "locker_forty_two": "A dark green metal locker door with a rusted latch and bold white numbers."
           }
         },
-        "plot_fingerprint": "ae848ae1abb2f0283251527b5b5644b5a7ec232e82ab5345c3914680664b8b7d"
+        "plot_fingerprint": "b39d9b91a2323dd3b7e1eb7cbc05234aab0c6175c4dc024ba646c9c6c35b1e58"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "18a9e187f965accd140aa8e2",
+      "source_sha256": "355d352036c867f162fb4ab65b7c5e51a2c22a26da7ffe8694aa1c1bde16d49b",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-b5c031e09e46ba16e26f",
+        "title": "The Ridge Where the Storm Breaks",
+        "hook": "The Hidden Signal",
+        "question": "Can the veteran climber reach the stranded avalanche survivor before nightfall?",
+        "answer": "Yes, by trusting his old compass through the whiteout.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Hidden Signal",
+            "speech": "Look closely at the blinking amber light piercing through the heavy swirling snow right across the jagged gorge.",
+            "visual": "signal",
+            "label": "Beacon in the Mist",
+            "story_beat": "reveal",
+            "visual_prompt": "A lone rescuer stands on a rocky outcrop holding an emergency radio, looking across a wide chasm at a faint blinking amber light in the distant blizzard.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Crossing the Slab",
+            "speech": "We cannot wait for the backup team. Step lightly across this frozen crust before the entire shelf gives way completely.",
+            "visual": "forest",
+            "label": "The Snow Bridge",
+            "story_beat": "build",
+            "visual_prompt": "The protagonist carefully tiptoes across a narrow, snow-covered rock bridge flanked by pine trees, holding a gripped ice axe tightly in his right hand with intense concentration.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Mechanical Pivot",
+            "speech": "Turn the emergency winch drum clockwise until the cable locks firmly against the granite anchor to hold our weight.",
+            "visual": "robot",
+            "label": "Anchor Winch",
+            "story_beat": "mechanism",
+            "visual_prompt": "The protagonist operates a mechanical hand-cranked winch bolted into the frozen cliffside, his face lit by a headlamp while heavy snow falls around him.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Safe Haven",
+            "speech": "Grab my insulated jacket and drink this warm tea. We made it off the ridge before the storm locked us in.",
+            "visual": "door",
+            "label": "Rescue Shelter",
+            "story_beat": "payoff",
+            "visual_prompt": "The rescuer and the survivor sit inside a glowing emergency metal shelter cabin, holding steel mugs of hot tea as the heavy metal door stands half-open against the blizzard outside.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A sudden blizzard cuts off the descent route for a stranded hiker while daylight fades.",
+        "decisive_choice": "Abandoning the primary marked trail to cross the unstable wind-slab bridge directly.",
+        "resolution": "The rescuer reaches the shelter cave just in time, guiding the survivor down safely.",
+        "visual_bible": {
+          "style": "Realistic cinematic mountain documentary aesthetic with cold blue and stark white color palettes, dramatic lighting, and gritty textural details.",
+          "characters": {
+            "protagonist": "Liam, a seasoned fifty-year-old mountain rescue leader with weathered skin, wearing a heavy orange parka, black reinforced mountaineering trousers, and a grey wool beanie."
+          },
+          "locations": {
+            "ridge": "A steep, windswept alpine ridge featuring exposed granite rock, deep snowdrifts, and scattered frost-bitten pine trees under an overcast grey sky."
+          },
+          "objects": {
+            "ice_axe": "A standard steel-headed mountaineering ice axe with a rubber-wrapped blue handle and a woven wrist leash.",
+            "emergency_radio": "A rugged olive-green two-way radio with a short flexible antenna and a small glowing amber LED screen."
+          }
+        },
+        "plot_fingerprint": "508a511287a156575a09c27fabef88312178a938a1d837b51b704f1ad12364fc"
       },
       "approved": false
     }
