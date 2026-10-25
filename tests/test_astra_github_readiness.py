@@ -7,6 +7,9 @@ from __future__ import annotations
 
 import re
 import unittest
+from datetime import datetime, timedelta, timezone
+
+from tools.astra_asset_pack_watch import inspect_artifacts, pinned_run_id
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -58,6 +61,19 @@ class GithubReadinessTests(unittest.TestCase):
             self.assertIn("astra-original-visual-pack", source)
         self.assertIn("ASTRA_ASSET_PACK_ENABLED: ${{ vars.ASTRA_ASSET_PACK_ENABLED || '1' }}", preload)
         self.assertIn("ASTRA_ASSET_PACK_ENABLED: '1'", publisher)
+
+    def test_visual_pack_expiry_and_missing_artifacts_fail_closed(self):
+        now = datetime(2026, 10, 25, tzinfo=timezone.utc)
+        def item(days):
+            return {"artifacts": [{"name": "astra-original-visual-pack",
+                                   "id": 123, "size_in_bytes": 1024,
+                                   "expired": False,
+                                   "expires_at": (now + timedelta(days=days)).isoformat()}]}
+        self.assertEqual(inspect_artifacts(item(15), now=now)["status"], "ok")
+        self.assertEqual(inspect_artifacts(item(5), now=now)["status"], "renewal_required")
+        self.assertEqual(inspect_artifacts(item(-1), now=now)["status"], "expired")
+        self.assertEqual(inspect_artifacts({"artifacts": []}, now=now)["status"], "missing_or_duplicate")
+        self.assertGreater(pinned_run_id(ROOT), 0)
 
     def test_longform_stays_isolated_until_publishing_proof(self):
         publisher, longform = read(PUBLISH), read(LONGFORM)
