@@ -189,14 +189,49 @@ jobs:
             if [ -n "$probe_package" ]; then
               mkdir -p "$RUNNER_TEMP/astra-ffmpeg"
               dpkg-deb -x "$probe_package" "$RUNNER_TEMP/astra-ffmpeg"
-              if [ -x "$RUNNER_TEMP/astra-ffmpeg/usr/bin/ffprobe" ]; then
+              # Debian package extraction alone does not install required
+              # shared libav* dependencies. Validate execution, not just -x.
+              if [ -x "$RUNNER_TEMP/astra-ffmpeg/usr/bin/ffprobe" ] && \
+                 "$RUNNER_TEMP/astra-ffmpeg/usr/bin/ffprobe" -version >/dev/null 2>&1; then
                 echo "$RUNNER_TEMP/astra-ffmpeg/usr/bin" >> "$GITHUB_PATH"
                 export PATH="$RUNNER_TEMP/astra-ffmpeg/usr/bin:$PATH"
-                echo 'ASTRA_FFPROBE_SOURCE=deb-extract'
+                echo 'ASTRA_FFPROBE_SOURCE=deb-extract-verified'
+              else
+                echo 'ASTRA_FFPROBE_EXTRACTED_RUNTIME_UNAVAILABLE=1'
               fi
             fi
           fi
-          command -v ffprobe || { echo 'ASTRA_FFPROBE_UNAVAILABLE=1'; exit 1; }
+          if ! command -v ffprobe >/dev/null 2>&1 || ! ffprobe -version >/dev/null 2>&1; then
+            # Install native Ubuntu dependency chain with strict time budget.
+            # Never substitute a file-existence check for a working media probe.
+            echo 'ASTRA_FFPROBE_NATIVE_INSTALL=attempt'
+            timeout 150s sudo env DEBIAN_FRONTEND=noninteractive \
+              apt-get install -y --no-install-recommends ffmpeg
+            command -v ffprobe
+            ffprobe -version >/dev/null 2>&1
+            echo 'ASTRA_FFPROBE_SOURCE=native-verified'
+          fi
+          # Reject probes that start but cannot decode an actual MP4 header.
+          # Encoder is the pinned imageio-ffmpeg binary already installed.
+          python - <<'PY'
+          import json
+          import subprocess
+          import tempfile
+          from pathlib import Path
+          from imageio_ffmpeg import get_ffmpeg_exe
+          with tempfile.TemporaryDirectory(prefix="astra-ffprobe-smoke-") as tmp:
+              clip = Path(tmp) / "codec-check.mp4"
+              subprocess.run([get_ffmpeg_exe(), "-hide_banner", "-loglevel", "error",
+                  "-y", "-f", "lavfi", "-i", "color=c=black:s=160x288:r=2",
+                  "-t", "1", "-c:v", "libx264", "-pix_fmt", "yuv420p",
+                  str(clip)], check=True, timeout=30)
+              checked = subprocess.run(["ffprobe", "-v", "error", "-show_streams",
+                  "-show_format", "-of", "json", str(clip)],
+                  capture_output=True, text=True, timeout=30, check=True)
+              payload = json.loads(checked.stdout)
+              assert any(s.get("codec_type") == "video" for s in payload.get("streams", []))
+          print("ASTRA_FFPROBE_REAL_MP4_SMOKE=passed")
+          PY
           python -c "import imageio_ffmpeg; print('ASTRA_BUNDLED_FFMPEG=' + imageio_ffmpeg.get_ffmpeg_exe())"
       - name: Refresh free licensed visual icon cache
         if: matrix.lane == 0

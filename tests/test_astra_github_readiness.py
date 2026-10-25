@@ -78,6 +78,17 @@ class GithubReadinessTests(unittest.TestCase):
                 self.assertIn("Pillow==11.3.0", source)
                 self.assertIn("ASTRA_ASSET_VALIDATION_IMPORT=ready", source)
 
+    def test_preload_probe_must_decode_real_mp4(self):
+        preload = read(PRELOAD)
+        self.assertIn("ASTRA_FFPROBE_EXTRACTED_RUNTIME_UNAVAILABLE=1", preload)
+        self.assertIn("ASTRA_FFPROBE_REAL_MP4_SMOKE=passed", preload)
+        self.assertIn("ffprobe -version >/dev/null 2>&1", preload)
+        self.assertIn("apt-get install -y --no-install-recommends ffmpeg", preload)
+        self.assertIn("color=c=black:s=160x288:r=2", preload)
+        self.assertIn('"codec_type") == "video"', preload)
+        self.assertLess(preload.index("ASTRA_FFPROBE_REAL_MP4_SMOKE=passed"),
+                        preload.index("- name: Refresh free licensed visual icon cache"))
+
     def test_visual_pack_expiry_and_missing_artifacts_fail_closed(self):
         now = datetime(2026, 10, 25, tzinfo=timezone.utc)
         def item(days):
