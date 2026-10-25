@@ -28,7 +28,12 @@ class RendererProvenanceTests(unittest.TestCase):
                          "description": "Test", "genre": "fiction",
                          "format": "short", "synthetic": True,
                          "renderer": "unknown"}
-            with patch("astra_v2.creative.inspect_video", return_value={"seconds": 30}):
+            # This synthetic test is only for renderer provenance. The fake
+            # candidate has no scene plan, question or approved artwork and
+            # must not be evaluated as a real publishable story.
+            # Real publication checks remain unchanged and fail closed.
+            with patch("astra_v2.creative.inspect_video", return_value={"seconds": 30}), \
+                 patch("astra_v2.publication_quality.publication_rejection", return_value=None):
                 with self.assertRaisesRegex(ValueError, "renderer provenance"):
                     prepare(video, candidate)
             self.assertFalse((Path(folder) / "preload-package").exists())
