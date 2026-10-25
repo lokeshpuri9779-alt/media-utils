@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "e96f8be0e93c9c7550b37302",
-      "source_sha256": "0ffca3405170bb559aff24c20f2ed9e5b05e87975c866498af148cc025629d13",
+      "candidate_id": "b4820d3c170d5425ef1f6fb5",
+      "source_sha256": "9b9ecbb68b280e9b4eddf77bc833515e9d5521781f7e5c16d2ca203ca79d48c2",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-6e43ad19ff05e0bd09b8",
-        "title": "The Great Cheese Pulley Catastrophe of Sector Nine",
-        "hook": "The Over-Engineered Stall",
-        "question": "Can an overly ambitious market inventor automate cheese rolling without destroying his stall?",
-        "answer": "He creates a chaotic mechanical ramp that launches aged cheddar directly into the mayor's visiting carriage.",
+        "content_id": "rayvan-gemini-7354998a7117c032a11c",
+        "title": "The Great Onion Chopper Debacle",
+        "hook": "The Catastrophic Market Demonstration",
+        "question": "Can Barnaby sell his automated tear-free vegetable slicer before the morning rush ends?",
+        "answer": "He convinces the vegetable vendor to adopt the machine by demonstrating it safely chops onions.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,162 +29,79 @@
         ],
         "story_beats": [
           {
-            "headline": "The Over-Engineered Stall",
-            "speech": "Behold citizens, my glorious motorized cheddar dispenser will revolutionize market breakfast service forever today!",
+            "headline": "The Catastrophic Market Demonstration",
+            "speech": "Behold the marvellous vegetable slicer, designed to end morning weeping and slice onions without a single fallen tear today!",
             "visual": "robot",
-            "label": "The Contraption",
+            "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby gestures proudly next to a chaotic wooden cart filled with ticking brass gears, spinning wooden wheels, and a large wedge of yellow cheese resting on a launch pad, set in a bustling sunny cobblestone market square.",
+            "visual_prompt": "Barnaby stands behind a wooden stall in a sunlit outdoor market, holding up a brass-and-copper onion chopper with a mechanical faceplate, while nearby shoppers recoil in mock terror from scattered green onions.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Jammed Gear",
-            "speech": "Oh dear, the main copper sprocket is stuck firmly on a rogue loaf of stale rye bread!",
+            "headline": "The Jammed Spring Mechanism",
+            "speech": "Step closer, dear patrons, and observe how easily this lever activates the precision blades for rapid food preparation.",
             "visual": "signal",
-            "label": "The Jam",
+            "label": "The Malfunction",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby stands on a wooden stool frantically jiggling a smoking brass crank handle attached to the side of his cart, while a loaf of dark rye bread is visibly wedged between two spinning metal cogs inside the mechanism.",
+            "visual_prompt": "Barnaby frantically pulls a stuck red lever on the copper chopper at his stall, sweating profusely, while a grumpy vegetable vendor crosses his arms and stares judgmentally at the sputtering machine.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Emergency Release",
-            "speech": "Quickly grab the emergency tension release cable before the entire contraption explodes into crumbs!",
-            "visual": "ship",
-            "label": "The Launch",
+            "headline": "The Risky Test of Faith",
+            "speech": "Watch carefully as I insert my bare thumb directly into the moving chamber to prove the safety catch holds.",
+            "visual": "door",
+            "label": "The Risk",
             "story_beat": "twist",
-            "visual_prompt": "Barnaby's assistant Pip leaps through the air with outstretched hands, grabbing a frayed red rope dangling from the top of the towering wooden cheese cart as a massive bronze spring snaps backward with visible force.",
+            "visual_prompt": "Barnaby grimaces as he cautiously slides his thumb into the metal slot of the copper chopper resting on the wooden table, while wide-eyed market shoppers lean in closely to watch.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Cheesy Landing",
-            "speech": "Well at least the mayor's official carriage is now thoroughly seasoned with our finest aged sharp cheddar!",
-            "visual": "door",
-            "label": "The Aftermath",
-            "story_beat": "payoff",
-            "visual_prompt": "Barnaby and Pip stand frozen with wide grobs in front of a shattered wooden market stall, staring in horror as a giant wedge of yellow cheese sits squarely on the velvet roof of the passing mayor's gilded carriage.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Integrating too many gears into a fragile wooden display cart during peak morning trading hours.",
-        "decisive_choice": "Pulling the emergency release lever while the spring tension is at maximum capacity.",
-        "resolution": "The inventor is fined heavily in gouda but gains a massive queue of thrill-seeking snack buyers.",
-        "visual_bible": {
-          "style": "A vibrant, slapstick animated style with exaggerated expressions and warm, sunny marketplace lighting.",
-          "characters": {
-            "Barnaby": "An enthusiastic middle-aged inventor with wild grey hair, soot-smudged cheeks, wearing a patched green vest and oversized protective brass goggles pushed up on his forehead.",
-            "Pip": "A nimble teenage apprentice wearing a striped cap, canvas trousers, and carrying a leather tool belt jingling with wrenches."
-          },
-          "locations": {
-            "market_square": "A crowded medieval cobblestone marketplace filled with striped canvas awnings, wooden fruit crates, and bustling shoppers."
-          },
-          "objects": {
-            "cheese_cart": "A tall, rickety wooden cart fitted with twenty distinct brass cogs, spinning leather belts, a vertical launch spring, and a large metal resting tray.",
-            "mayor_carriage": "A polished dark wood carriage with gold trim, plush crimson velvet seating, and a large flat roof currently covered in yellow cheddar."
-          }
-        },
-        "plot_fingerprint": "af616c5ab62f618a9533785239f8a483f5901caca44a435ea77ed9f7fa04523d"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "0b4b447e9eff621a3fe86611",
-      "source_sha256": "82cff8146c69b20adad3d5f4110be609bd17fcb5afbb449080b954fb271f976e",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-aea0375ef2439b4d8ff0",
-        "title": "The Resonance Valve Disagreement",
-        "hook": "Clogged Vent Found",
-        "question": "Will Chief Engineer Vane vent the primary atmospheric thruster to purge the calcified salt crystals?",
-        "answer": "Yes, Vane vents the thruster, sacrificing the last fresh water reserve to prevent catastrophic hull failure.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "Clogged Vent Found",
-            "speech": "Look at this thick white crust choking the thermal valve! If we do not blast it out now, the core will melt down.",
+            "headline": "The Profitable Market Victory",
+            "speech": "Safety certified by my own digit! You see, perfection arrives exactly when properly engineered mechanics meet demanding customers.",
             "visual": "ship",
-            "label": "Inspection",
-            "story_beat": "reveal",
-            "visual_prompt": "Chief Engineer Vane points a gloved hand at a encrusted metal pipe inside the cramped engineering bay of the cargo vessel, wearing a stained yellow utility jumpsuit, looking worried.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Heated Debate",
-            "speech": "We cannot waste our precious emergency water reserve on a pipe flush! There has to be a mechanical way to scrape it clear.",
-            "visual": "robot",
-            "label": "Disagreement",
-            "story_beat": "build",
-            "visual_prompt": "Pilot Jax stands with arms crossed next to a hovering utility robot in the metallic corridor, glaring sternly at Vane while holding a digital clipboard.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Emergency Flush",
-            "speech": "There is no time for scraping tools! Stand back and brace yourselves while I route the final coolant line straight into the intake.",
-            "visual": "signal",
-            "label": "Override",
-            "story_beat": "mechanism",
-            "visual_prompt": "Vane rapidly punches override codes onto a flashing red terminal console that displays erratic warning signals, while Jax ducks behind a reinforced steel pillar.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Safe Passage",
-            "speech": "The pressure is dropping back to normal levels. We survived the solar storm, though our water tanks are completely empty now.",
-            "visual": "planet",
-            "label": "Relief",
+            "label": "The Sale",
             "story_beat": "payoff",
-            "visual_prompt": "Vane and Jax sit side by side in the brightly lit cockpit, looking out the massive viewport at a serene blue and green planet spinning slowly in the distance.",
+            "visual_prompt": "Barnaby smiles triumphantly, counting a massive stack of gold coins handed over by the smiling vegetable vendor, who now proudly holds the copper chopper aloft like a trophy.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "calcified salt crystals blocking the primary atmospheric thruster during a solar storm",
-        "decisive_choice": "vent the thruster using the emergency water coolant tank",
-        "resolution": "the ship stabilizes its trajectory safely, but the crew must ration remaining moisture",
+        "central_conflict": "Barnaby needs to prove his chaotic spring-loaded chopper is safe in a crowded market.",
+        "decisive_choice": "He places his own thumb inside the blade guard to prove the auto-stop sensor works.",
+        "resolution": "The vendor buys twenty units and hires him as the market's official head engineer.",
         "visual_bible": {
-          "style": "Clean animated sci-fi realism with industrial textures and vivid cinematic lighting",
+          "style": "Bright, comedic animated film style with exaggerated character expressions and rich textures.",
           "characters": {
-            "Vane": "Chief Engineer with short gray hair, rugged features, wearing a scuffed yellow utility jumpsuit with numerous tool pockets.",
-            "Jax": "Pilot with neat dark hair, sharp blue eyes, wearing a sleek navy-blue flight jacket over gray trousers."
+            "Barnaby": "An eccentric inventor with wild ginger hair, smudged round spectacles, a tweed vest over a white shirt, and grease-stained trousers.",
+            "Vendor": "A grumpy, stout merchant with a thick mustache, a striped apron, and a stern expression."
           },
           "locations": {
-            "engineering_bay": "A narrow, metallic compartment filled with exposed copper wiring, pulsing control panels, and heavy pipes.",
-            "cockpit": "A spacious room dominated by a wide curved glass viewport overlooking the stars, featuring twin pilot chairs and glowing consoles."
+            "Market": "A bustling, sun-drenched town square filled with wooden stalls, hanging baskets of produce, and canvas awnings."
           },
           "objects": {
-            "utility_robot": "A compact floating maintenance drone with a single glowing blue optical sensor and two articulated manipulator arms.",
-            "coolant_tank": "A heavy cylindrical canister made of brushed aluminum with digital pressure gauges mounted on top."
+            "Chopper": "A brass-and-copper spring-loaded onion chopping machine featuring a small mechanical faceplate and a glowing green safety sensor light."
           }
         },
-        "plot_fingerprint": "d72d30659fc12b07d9dceb563a7bf773dffade3cca975230c3a38101efdca3c3"
+        "plot_fingerprint": "1dd8957dae6962aefb5ebd64022b0a2ab1f334dee517382cbe55821e90218fdb"
       },
       "approved": false
     },
     {
-      "candidate_id": "61eb31d74a72a9f6aa73345e",
-      "source_sha256": "87b913130b16804d7964b76250593b7a4b7c488f33f30c7a683bef71c45c20d7",
+      "candidate_id": "3708820c5d36c13f602271e5",
+      "source_sha256": "974f98076d1255e0ee4ccdc3dd3ce2be56d811c74256636c6587d7e4a0265b85",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-4588c4e316f22e00817b",
-        "title": "The Great Muddy Creek Turf War",
-        "hook": "Discovering the Anomaly",
-        "question": "Can an underdog lawn bowl team defeat the reigning champions using a vintage acoustic level?",
-        "answer": "Yes, by discovering a hidden subterranean limestone ridge that alters the turf's natural bias.",
+        "content_id": "rayvan-gemini-5debfd4b2920521fe761",
+        "title": "The Icebreaker's Heavy Toll",
+        "hook": "The Hidden Fault",
+        "question": "Can the lead surveyor sacrifice the final seismic core sample to power the rescue beacon for the lost sledge team?",
+        "answer": "Yes, by draining the main thermal drill battery, the team signals the outpost and saves the survivors despite losing a year of research.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -192,65 +109,144 @@
         ],
         "story_beats": [
           {
-            "headline": "Discovering the Anomaly",
-            "speech": "Look at this damp patch on the green. The turf is bowing outward because of an old hidden foundation.",
-            "visual": "forest",
-            "label": "The Discovery",
-            "story_beat": "reveal",
-            "visual_prompt": "An elderly bowler in a green cardigan inspects a sunken patch of grass in an overgrown park, holding a rusted surveyor's level.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Engineering the Solution",
-            "speech": "We must adjust our delivery weights by precisely three grams to compensate for the limestone ridge underneath.",
-            "visual": "robot",
-            "label": "The Adjustment",
-            "story_beat": "build",
-            "visual_prompt": "Two focused teammates in white uniforms carefully drill minute lead weights into the core of wooden bowls inside a rustic garden shed.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Executing the Strategy",
-            "speech": "Release the bowl along the outer edge now and let the hidden slope carry it directly toward the jack.",
+            "headline": "The Hidden Fault",
+            "speech": "Look at these thermal readings. The seismic core is freezing inside the drill shaft right now, threatening our entire expedition.",
             "visual": "signal",
-            "label": "The Execution",
-            "story_beat": "mechanism",
-            "visual_prompt": "A tense competitor kneels on dew-covered grass, gently rolling a modified wooden bowl while a vintage pendulum clock ticks nearby.",
+            "label": "Seismic Fault",
+            "story_beat": "reveal",
+            "visual_prompt": "Dr. Vance wearing an orange polar parka examining a flashing green radar signal on a metal console inside a dimly lit research tent.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Claiming Victory",
-            "speech": "Our unorthodox measurements proved correct, winning us the championship shield and restoring village harmony.",
+            "headline": "The Sledge Emergency",
+            "speech": "We just received a weak radio transmission from the eastern ridge. Their snowcat battery failed in the whiteout storm.",
+            "visual": "ship",
+            "label": "Distress Call",
+            "story_beat": "build",
+            "visual_prompt": "Dr. Vance pointing at a static-filled radio receiver on a wooden workbench inside the frosty outpost, holding a red thermos.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Power Junction",
+            "speech": "If we route the thermal grid to the rescue beacon instead of the drill heater, the ice core will be lost forever.",
+            "visual": "robot",
+            "label": "Grid Switch",
+            "story_beat": "mechanism",
+            "visual_prompt": "Dr. Vance flipping a heavy brass master circuit switch on a frosted steel control panel inside the humming generator shed.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Rescued Crew",
+            "speech": "The rescue helicopter landed safely at ridge camp. We lost the core sample, but our colleagues are coming home warm.",
             "visual": "door",
-            "label": "The Triumph",
+            "label": "Outpost Door",
             "story_beat": "payoff",
-            "visual_prompt": "Smiling villagers hoist a tarnished silver shield outside the rustic clubhouse doorway under the warm afternoon sun.",
+            "visual_prompt": "Dr. Vance opening the heavy insulated outer research station door, greeting shivering researchers in snow gear under a twilight arctic sky.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Dispute over municipal bowling green maintenance priorities between rival village clubs.",
-        "decisive_choice": "Calibrating the antique surveyor's level to map underground moisture channels.",
-        "resolution": "Winning the annual district shield and sharing club facilities for mutual benefit.",
+        "central_conflict": "Powering the distress beacon drains the last core sample thermal drill",
+        "decisive_choice": "Diverting primary reactor power from core preservation to the rescue flare",
+        "resolution": "The sledge team is safely airlifted while the unextracted seismic sample freezes solid",
         "visual_bible": {
-          "style": "Cinematic realism with a warm, nostalgic rural color palette of deep greens, polished wood browns, and brass accents.",
+          "style": "Gritty cinematic realism with cold blue and white tones contrasted against warm interior orange lighting",
           "characters": {
-            "arthur": "An eighty-year-old retired surveyor with deep smile lines, wearing a knitted green cardigan and tweed trousers.",
-            "martha": "A sharp-witted septuagenarian team captain with silver hair tied back, wearing a crisp white bowling blazer."
+            "Dr. Vance": "A middle-aged lead surveyor with weathered skin, wearing a heavy orange polar parka with a fur-lined hood and round wire-rimmed glasses"
           },
           "locations": {
-            "clubhouse": "A weathered timber pavilion with peeling white paint, surrounded by neatly manicured flower beds.",
-            "bowling_green": "A slightly uneven grass pitch bordered by ancient oak trees and a low stone wall."
+            "Research Station": "A compact, modular arctic research outpost made of corrugated white panels and reinforced steel framing set against endless snowdrifts"
           },
           "objects": {
-            "surveyor_level": "A vintage brass and mahogany optical leveling instrument with intricate engraved dials.",
-            "wooden_bowls": "Dark Lignum vitae lawn bowls with inlaid ivory circles, showing minor surface scuffs."
+            "Radio Receiver": "A vintage grey metal shortwave radio with dual glowing vacuum tubes and a tangled black antenna wire",
+            "Master Switch": "A heavy-duty brass lever mounted on a gray steel junction box with yellow hazard stripes"
           }
         },
-        "plot_fingerprint": "d67e97a6e110220aba73b895e6c708c96b1fe31b53577bc3ff2569509a04fbb9"
+        "plot_fingerprint": "232b7bf544ccb4faed72c281549efb4a04b936fcc9ec7b9ba15975c3769a91ee"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "a3f15ca2f6d68dc4bd86d2ce",
+      "source_sha256": "6a9b145086015694be936b9a9a2380e2ce2548b0fe86ae58a19af13b79446cf0",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-a4cf46aa4edcbf63907c",
+        "title": "The Singing Dunes of Oakhaven",
+        "hook": "A Strange Hum in the Sand",
+        "question": "What caused the mysterious acoustic resonance echoing deep within the arid expanse of the Salt Sea Basin?",
+        "answer": "An underground subterranean river rushing through massive hollow crystal tubes carved by ancient wind erosion.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "A Strange Hum in the Sand",
+            "speech": "Listen closely to the ground! The seismic sensors are picking up a rhythmic melody coming from underneath.",
+            "visual": "signal",
+            "label": "Acoustic Anomaly",
+            "story_beat": "reveal",
+            "visual_prompt": "A rugged female explorer kneels on cracked desert earth, holding a glowing digital seismograph displaying jagged wave patterns, surrounded by towering dunes under a pale yellow sky.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Descent into the Chasm",
+            "speech": "We must anchor the winch and lower ourselves into this fissure before the approaching storm buries the entrance.",
+            "visual": "door",
+            "label": "Fissure Entry",
+            "story_beat": "build",
+            "visual_prompt": "The explorer anchors a heavy steel tripod over a narrow rocky crevice in the canyon floor, illuminated by the beam of a headlamp as swirling dust approaches from the horizon.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Resonant Pipes",
+            "speech": "Look at these colossal stone formations! They act like gigantic musical instruments when the subterranean gusts rush past.",
+            "visual": "forest",
+            "label": "Crystal Cavern",
+            "story_beat": "mechanism",
+            "visual_prompt": "Inside a dimly lit cavern, the explorer shines a flashlight across a forest of massive, hollow stalactites shaped like organ pipes while fine white sand trickles from the ceiling.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Hidden Subterranean Oasis",
+            "speech": "It is not an echo at all. The acoustics guided us straight to a lush underground river and thriving subterranean ecosystem.",
+            "visual": "planet",
+            "label": "Underground Oasis",
+            "story_beat": "payoff",
+            "visual_prompt": "The explorer stands at the edge of a crystal-clear subterranean river lined with glowing bioluminescent moss and emerald ferns, smiling in wonder as sunlight filters down through a distant sinkhole.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Navigating a deafening acoustic canyon during a blinding sandstorm without a functional compass.",
+        "decisive_choice": "Following the subterranean harmonic vibrations instead of retreating to the surface basecamp.",
+        "resolution": "Discovering an uncharted subterranean freshwater oasis flourishing beneath the howling desert.",
+        "visual_bible": {
+          "style": "Cinematic realism with rich natural textures, warm golden hour desert tones contrasting with cool subterranean blues and greens.",
+          "characters": {
+            "Explorer": "A woman in her early thirties with weathered skin, practical tied-back brown hair, wearing a canvas desert utility jacket with numerous pockets and sturdy leather boots."
+          },
+          "locations": {
+            "Salt Sea Basin": "A vast, cracked white salt flat bordered by towering amber sand dunes and distant jagged mountain peaks.",
+            "Subterranean Cavern": "A deep limestone chamber featuring smooth wind-carved pillars and a subterranean river bank glowing softly."
+          },
+          "objects": {
+            "Seismograph": "A rugged rectangular handheld device with a dark rubberized casing and a bright green digital oscilloscope screen.",
+            "Steel Tripod": "A collapsible three-legged mounting bracket made of brushed metal with heavy-duty locking screws and attached nylon climbing rope."
+          }
+        },
+        "plot_fingerprint": "928bdb249bae57b694f78e0f5f5db0ab5f11dd0b67246031e117a710973a5a1a"
       },
       "approved": false
     }
