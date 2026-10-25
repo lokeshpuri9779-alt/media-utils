@@ -12,6 +12,7 @@ on:
       - 'tests/test_astra_github_readiness.py'
       - 'tests/test_astra_renderer_provenance.py'
       - 'tests/test_astra_story_handoff.py'
+      - 'tests/test_astra_longform_provenance.py'
       - 'astra_v2/story_handoff.py'
       - 'astra_v2/creative.py'
       - 'astra_v2/preload_queue.py'
@@ -45,6 +46,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_astra_preload_artifact_pagination.py' -v
           python -m unittest discover -s tests -p 'test_astra_renderer_provenance.py' -v
           python -m unittest discover -s tests -p 'test_astra_story_handoff.py' -v
+          python -m unittest discover -s tests -p 'test_astra_longform_provenance.py' -v
           python -m tools.astra_story_eligibility_report
       - name: Preserve renderer artwork-gap evidence
         if: always()

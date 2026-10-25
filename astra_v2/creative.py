@@ -510,7 +510,14 @@ def make_long_candidate(path, excluded_ids, excluded_titles):
     verdict = enforce(title, desc, meta, legacy.load_performance())
     if verdict.get("pass") is False:
         raise CreativeSkip("longform_safety_rejected")
+    # cloud_once.make_long already carries the real renderer from the
+    # longform render report in CONTENT_META. It must survive into the
+    # approved candidate and artifact; never invent a default identity.
+    renderer = meta.get("renderer")
+    if not isinstance(renderer, str) or not renderer.strip() or renderer.strip() == "unknown":
+        raise CreativeSkip("longform_missing_verified_renderer_provenance")
     return {"title": title, "description": desc, "content_id": cid,
             "media": inspect_video(path, fmt="long"),
             "synthetic": bool(verdict.get("ai_disclosure_required")),
-            "genre": str(meta.get("genre") or "educational"), "format": "long"}
+            "genre": str(meta.get("genre") or "educational"), "format": "long",
+            "renderer": renderer.strip()}
