@@ -1,0 +1,71 @@
+"""Static guardrails for ASTRA's zero-cost GitHub production workflows.
+
+These tests use only the Python standard library and run without API secrets.
+They intentionally do not claim end-to-end render or upload success.
+"""
+from __future__ import annotations
+
+import re
+import unittest
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+PUBLISH = ROOT / ".github/workflows/astra-v2-publish.yml"
+PRELOAD = ROOT / ".github/workflows/astra-v2-preload.yml"
+LONGFORM = ROOT / ".github/workflows/astra-v2-longform.yml"
+REQUIREMENTS = ROOT / "requirements.txt"
+
+
+def read(path: Path) -> str:
+    return path.read_text(encoding="utf-8")
+
+
+def visual_pack_run_id(source: str) -> str:
+    match = re.search(r"(?m)^\s+run-id:\s*(\d+)\s*$", source)
+    if not match:
+        raise AssertionError("pinned visual-pack artifact run ID missing")
+    return match.group(1)
+
+
+class GithubReadinessTests(unittest.TestCase):
+    def test_diagnostic_import_dependencies_precede_publisher_early_tests(self):
+        publisher = read(PUBLISH)
+        installer = publisher.index("- name: Install lightweight publisher diagnostic dependencies")
+        tests = publisher.index("- name: Test queue and OAuth diagnostics")
+        preflight = publisher.index("- name: Reconcile pending uploads and check schedule")
+        self.assertLess(installer, tests)
+        self.assertLess(tests, preflight)
+        self.assertIn("ASTRA_EARLY_IMPORTS=ready", publisher)
+        requirements = read(REQUIREMENTS)
+        for pinned in ("httpx==0.28.1", "Pillow==11.3.0",
+                       "numpy==2.2.6", "imageio-ffmpeg==0.6.0"):
+            self.assertIn(pinned, requirements)
+            self.assertIn(pinned, publisher)
+
+    def test_four_lane_schedule_is_bounded(self):
+        preload = read(PRELOAD)
+        self.assertIn("- cron: '*/30 * * * *'", preload)
+        self.assertNotIn("- cron: '*/5 * * * *'", preload)
+        self.assertIn("lane: [0, 1, 2, 3]", preload)
+        self.assertIn("cancel-in-progress: false", preload)
+
+    def test_all_production_paths_pin_the_same_artwork_pack(self):
+        publisher, preload, longform = map(read, (PUBLISH, PRELOAD, LONGFORM))
+        self.assertEqual(len({visual_pack_run_id(s) for s in
+                              (publisher, preload, longform)}), 1)
+        for source in (publisher, preload, longform):
+            self.assertIn("--expected 3200", source)
+            self.assertIn("astra-original-visual-pack", source)
+        self.assertIn("ASTRA_ASSET_PACK_ENABLED: ${{ vars.ASTRA_ASSET_PACK_ENABLED || '1' }}", preload)
+        self.assertIn("ASTRA_ASSET_PACK_ENABLED: '1'", publisher)
+
+    def test_longform_stays_isolated_until_publishing_proof(self):
+        publisher, longform = read(PUBLISH), read(LONGFORM)
+        self.assertIn("ASTRA_LONG_ENABLED: '0'", publisher)
+        self.assertIn("ASTRA_LONG_ONLY: '1'", longform)
+        self.assertIn("ASTRA_OPENAI_ALLOW_PAID_API: '0'", publisher)
+        self.assertIn("ASTRA_OPENAI_ALLOW_PAID_API: '0'", longform)
+
+
+if __name__ == "__main__":
+    unittest.main()
