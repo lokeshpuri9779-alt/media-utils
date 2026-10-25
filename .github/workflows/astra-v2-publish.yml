@@ -135,8 +135,16 @@ jobs:
           key: astra-v2-media-cache-v1
           restore-keys: astra-v2-media-cache-
 
-      - name: Install lightweight YouTube status client
-        run: python -m pip install --disable-pip-version-check 'httpx==0.28.1'
+      - name: Install lightweight publisher diagnostic dependencies
+        # The early inventory tests import Studio's renderer eligibility path,
+        # including Pillow, NumPy and imageio-ffmpeg. Install the minimal pinned
+        # subset BEFORE those tests, even when no video render is due.
+        # The full rendering stack is still installed only after preflight.
+        run: |
+          python -m pip install --disable-pip-version-check \
+            'httpx==0.28.1' 'Pillow==11.3.0' \
+            'numpy==2.2.6' 'imageio-ffmpeg==0.6.0'
+          python -c "import httpx, PIL, numpy, imageio_ffmpeg; print('ASTRA_EARLY_IMPORTS=ready')"
 
       - name: Test queue and OAuth diagnostics
         id: early_tests
