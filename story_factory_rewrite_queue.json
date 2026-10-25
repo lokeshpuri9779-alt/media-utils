@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "5df1c7454823cd461faef56f",
-      "source_sha256": "6cec7ce063eab1618c85defa51a76addf2049a8185526b8e6affe32202e854fa",
+      "candidate_id": "29782a6b8e30b8dd9b9c4148",
+      "source_sha256": "0faec0c41ecb13eea6eca5329bf9834684ac857812d235a6b1f6e5383941333b",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-a7f89b60f83e6f2bf7ae",
-        "title": "The Great Tomato Launch",
-        "hook": "The Grand Unveiling",
-        "question": "Can an overly enthusiastic inventor sell his automatic fruit-slicing hat at the morning market?",
-        "answer": "Yes, but only after his rival's flying gadget accidentally shreds his entire inventory.",
+        "content_id": "rayvan-gemini-e7b88077d951184c3833",
+        "title": "The Great Cheese-Powered Clockwork Copter Caper",
+        "hook": "The Pungent Prototype",
+        "question": "Can Barnaby sell his smelly cheese-powered flying machine before the health inspector shuts down his bustling market stall?",
+        "answer": "Barnaby tests his airborne dairy invention right into the mayor's tea party, winning a royal supply contract instead of a fine.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,78 +29,81 @@
         ],
         "story_beats": [
           {
-            "headline": "The Grand Unveiling",
-            "speech": "Behold the magnificent culinary hat! It slices juicy tomatoes instantly without dirtying a single kitchen knife.",
+            "headline": "The Pungent Prototype",
+            "speech": "Behold the sky-soaring wonder! Powered entirely by aged Gorgonzola, it guarantees a fragrant and unforgettable flight across the crowded marketplace today.",
             "visual": "robot",
-            "label": "The Presentation",
+            "label": "Market Stall",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby wearing a mechanical top hat with metallic blades, standing in a busy market stall while holding a red tomato.",
+            "visual_prompt": "Barnaby stands proudly behind a cluttered wooden stall holding a brass-plated flying machine, pointing enthusiastically at a glowing dial while a frowning health inspector waves a clipboard in a bustling open-air vegetable market.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Assembly Phase",
-            "speech": "Watch carefully as I attach the spring-loaded slicing gears right beside the brass steam valve.",
+            "headline": "Stoking the Engine",
+            "speech": "We just need a bit more pressure! Shove that extra sharp cheddar into the burner before the inspector brings the padlock down now.",
             "visual": "ship",
-            "label": "The Build",
+            "label": "Engine Hatch",
             "story_beat": "build",
-            "visual_prompt": "Barnaby meticulously screwing tiny brass gears onto the brim of his invention in a cluttered market stall.",
+            "visual_prompt": "Barnaby frantically crams a large block of yellow cheese into a smoking copper boiler attached to the belly of the flying machine, while his assistant Toby holds open a leather toolbox filled with wrenches.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Mechanical Chaos",
-            "speech": "Oh dear, the steam pressure is rising too fast, and now the entire contraption is hovering!",
+            "headline": "Sudden Lift-Off",
+            "speech": "Hold onto your cabbages! The thrust is way too high and the steering valve is completely jammed right now, oh dear!",
             "visual": "signal",
-            "label": "The Malfunction",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby chasing his hovering metallic hat as glowing red warning lights blink rapidly on the brass chassis.",
+            "label": "Flight Path",
+            "story_beat": "twist",
+            "visual_prompt": "The cheese-powered copter bursts upward from the market table trailing a plume of yellow smoke and flying cabbage leaves, while Barnaby dangles desperately from the landing skid by his fingertips.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Sweet Payoff",
-            "speech": "Grab your plates everyone because fresh tomato slices are raining straight down from the clouds!",
+            "headline": "A Royal Landing",
+            "speech": "Splendid aerial delivery of fine dairy! I officially commission your marvelous flying cheese engines for the entire royal postal service immediately.",
             "visual": "door",
-            "label": "The Success",
+            "label": "Grand Canopy",
             "story_beat": "payoff",
-            "visual_prompt": "Smiling market customers holding wooden bowls under a shower of neatly sliced tomatoes falling from Barnaby's airborne hat.",
+            "visual_prompt": "The flying machine gently lands on a velvet-draped dining table scattering teacups, where a startled mayor in a red velvet coat applauds heartily while Barnaby dusts off his checkered waistcoat with a relieved grin.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby needs to prove his wearable tomato-slicer works before the morning market closes.",
-        "decisive_choice": "Barnaby pulls the manual override cord on his competitor's malfunctioning drone.",
-        "resolution": "Flying slices land neatly in hungry customer bowls, creating an instant culinary success.",
+        "central_conflict": "Barnaby must sell his smelly cheese-powered flying machine before the health inspector condemns his bustling market stall.",
+        "decisive_choice": "Barnaby loads an extra wedge of pungent Gorgonzola into the combustion chamber to boost thrust over the crowded stalls.",
+        "resolution": "The soaring cheese-copter impresses the visiting mayor, securing a lucrative municipal contract that pays all fines.",
         "visual_bible": {
-          "style": "Bright stop-motion animation aesthetic with detailed textures of brass, felt, and ripe red produce.",
+          "style": "Vibrant stop-motion claymation aesthetic with rich textures, warm lighting, and detailed mechanical props.",
           "characters": {
-            "Barnaby": "An energetic inventor with wild gray hair, round spectacles, a brown waistcoat, and flour-dusted trousers."
+            "Barnaby": "An energetic inventor with unruly gray hair, round spectacles, a tweed vest, and flour-dusted trousers.",
+            "Toby": "Barnaby's lanky apprentice wearing a striped cap and an oversized leather apron with deep pockets.",
+            "Inspector Grump": "A stern municipal official with a sweeping mustache, a stiff blue uniform, and an enormous metal clipboard."
           },
           "locations": {
-            "Market Square": "A bustling cobblestone plaza filled with striped canvas awnings, wooden crates, and bustling townsfolk."
+            "Market Square": "A bustling medieval-style town square filled with colorful awnings, stacked crates of produce, and milling townspeople."
           },
           "objects": {
-            "Slicing Hat": "A tall brass top hat fitted with spring-loaded steel blades, a steam pressure gauge, and small leather straps."
+            "Cheese-Copter": "A whimsical flying machine constructed from copper tubing, bicycle gears, propeller blades, and a central cheese-combustion boiler.",
+            "Clipboard": "A heavy steel clipboard with a loudly clanking spring clip and official parchment notices attached."
           }
         },
-        "plot_fingerprint": "36b6478a560f8d1763df5ead82dd74d2bd99ac7155153487f0a522bb18932e07"
+        "plot_fingerprint": "64c4f653688d61ae6b9dac0bcb11da3d373455716c4da5993dc764eae1d8cbfa"
       },
       "approved": false
     },
     {
-      "candidate_id": "4a397a374a9057b67666a64b",
-      "source_sha256": "8cfcd7a7aafc28bb09224f48e0b13b4b58f70b9be5a3625a9b2bb0b1b7195f7f",
+      "candidate_id": "7eebc2fce4a5bab86ae99767",
+      "source_sha256": "78ba01db14f8a50a0482027737c5f6159e36d54580ce90229e2e3b5497d19e8a",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-5680a3a6281e8634402f",
-        "title": "The Beacon of Frozen Crag",
-        "hook": "The Hidden Crevasse",
-        "question": "Can the exhausted rescue leader guide his trapped team down before the blizzard destroys their shelter?",
-        "answer": "He uses the emergency pulse signal to bounce a navigation arc off the canyon walls, saving them all.",
+        "content_id": "rayvan-gemini-dc23cd915c29f40f5996",
+        "title": "Frostline Echo",
+        "hook": "The Hidden Fault",
+        "question": "Can the automated ice-core drill be salvaged before the deep crevasse collapses?",
+        "answer": "Yes, by manually overriding the winch release and sacrificing the lead sled.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -108,143 +111,147 @@
         ],
         "story_beats": [
           {
-            "headline": "The Hidden Crevasse",
-            "speech": "We cannot wait for the morning light. The eastern shelf is breaking away from the main granite face right now.",
+            "headline": "The Hidden Fault",
+            "speech": "Look at these telemetry spikes. The entire glacier floor is splitting right underneath our research rig.",
             "visual": "signal",
-            "label": "Storm Warning",
+            "label": "Sensor Alert",
             "story_beat": "reveal",
-            "visual_prompt": "A weary human protagonist in a red parka stands on a snowy mountain ridge holding a flashing handheld signal beacon, while dark blizzard clouds churn in the background.",
+            "visual_prompt": "Dr. Maeve stands inside a glowing orange tent, pointing a gloved finger at a flashing holographic radar console displaying underground fractures. She wears a thick navy parka with faux-fur lining and yellow snow goggles pushed up on her forehead. Outside the clear vinyl window, a fierce white blizzard whirls.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Shelter Doors",
-            "speech": "Stack the emergency crates tightly against the outer rock to block the howling wind before it freezes our batteries.",
-            "visual": "door",
-            "label": "Securing Shelter",
+            "headline": "Weight of the Rig",
+            "speech": "We cannot pull both the drill unit and the supply sled up this steep slope in time.",
+            "visual": "robot",
+            "label": "Heavy Load",
             "story_beat": "build",
-            "visual_prompt": "The protagonist pushes a heavy steel equipment door shut against blowing snow at the entrance of a stone alcove, while a teammate grips the frame.",
+            "visual_prompt": "Mechanic Jax operates a battered yellow automated winch system built into a heavy tracked crawler vehicle. Snow blows across the frozen plateau. Jax wears a padded crimson jumpsuit with reflective silver stripes and a heavy woolen beanie, his face smeared with black diesel grease.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Crystalline Forest",
-            "speech": "If we wire the capacitor to the pine transmitter array, we can bounce the frequency off the lower valley timber.",
+            "headline": "The Severing Cut",
+            "speech": "Grab the core cylinder case now! I am cutting the main winch cable before the crevasse swallows us.",
+            "visual": "ship",
+            "label": "Emergency Cut",
+            "story_beat": "mechanism",
+            "visual_prompt": "Maeve grips a bright orange metal container holding cylindrical ice core samples on a tilted steel sled. Jax holds a heavy-duty thermal cutting torch, aiming a blinding blue plasma flame directly at a thick steel cable under extreme tension. Shards of blue ice spray into the air.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Safe Ground",
+            "speech": "We lost the heavy equipment, but the ancient climate data is safe in our hands.",
+            "visual": "door",
+            "label": "Survival",
+            "story_beat": "payoff",
+            "visual_prompt": "Maeve and Jax stand safely inside the reinforced steel airlock doorway of the main research station, peering out at a massive newly formed chasm in the ice field. They both hold the orange sample container between them, exhaling visible puffs of warm breath into the freezing air.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "The research drill is wedged inside a shifting crevasse while a blizzard approaches.",
+        "decisive_choice": "Cut the primary tether to save the core samples instead of rescuing the heavy winch.",
+        "resolution": "The team secures the priceless ice samples just as the ice bridge completely fractures.",
+        "visual_bible": {
+          "style": "Realistic cinematic winter photography with high contrast, crisp cold blue tones and vibrant orange safety gear highlights.",
+          "characters": {
+            "Maeve": "A determined female scientist in her late thirties with sharp green eyes, freckled cheeks, short dark brown hair, wearing a navy-blue heavy down parka and yellow tinted snow goggles.",
+            "Jax": "A sturdy mechanic in his forties with a thick red beard, weathered skin, wearing a crimson insulated jumpsuit with silver reflective stripes and a grey woolen beanie."
+          },
+          "locations": {
+            "ResearchStation": "A modular red and white metal habitat complex anchored into the arctic ice shelf with reinforced steel airlock doors.",
+            "IceCrevasse": "A deep, jagged chasm in the blue glacial ice sheet surrounded by blowing snow and frozen ridges."
+          },
+          "objects": {
+            "SampleContainer": "A rugged, waterproof bright orange cylindrical case made of high-density polymer with heavy metal latches.",
+            "ThermalTorch": "A handheld industrial plasma cutting tool with a scarred black metal body and a glowing blue nozzle."
+          }
+        },
+        "plot_fingerprint": "1cf74e8bd7844eb337a280789e33e23c4c17a7d30e770659f97884bff7d17b13"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "feaaac2a619be774aa4757c3",
+      "source_sha256": "8fe92ebf22e1f49b570d125d741ded2dd2a67083a7ff931e78f0e768cc765def",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-004a39930646ae40c1f4",
+        "title": "The Canopy Conduit",
+        "hook": "Discovering the Chasm",
+        "question": "Can a cautious botanist and an impulsive scout bridge a mile-wide chasm using only bioluminescent spores?",
+        "answer": "By weaving the glowing vines together, they successfully span the gap and reach the hidden ridge.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Discovering the Chasm",
+            "speech": "We must anchor the spore vines directly into the ancient canopy trunk before the fog rolls in.",
             "visual": "forest",
-            "label": "Circuit Assembly",
-            "story_beat": "mechanism",
-            "visual_prompt": "The protagonist sits inside a dimly lit ice cave, soldering wires onto a glowing circuit board with frozen pine branches visible through the entrance.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Rescue Ship",
-            "speech": "Look at the monitor! The pulse locked onto the rescue chopper's radar. They found our exact frequency.",
-            "visual": "ship",
-            "label": "Safe Extraction",
-            "story_beat": "payoff",
-            "visual_prompt": "An orange rescue helicopter shines a bright spotlight down on the snow-covered ledge where the protagonist waves triumphantly next to a glowing radio beacon.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "A sudden whiteout buries the lower descent trail, trapping the team on a collapsing ledge.",
-        "decisive_choice": "Abandon the heavy equipment sled to build a high-frequency directional beacon from remaining radio parts.",
-        "resolution": "The signal cuts through the storm, guiding the rescue chopper safely to their exact coordinates.",
-        "visual_bible": {
-          "style": "Cinematic live-action survival drama with crisp winter lighting and high contrast snow textures.",
-          "characters": {
-            "Protagonist": "A determined human rescue leader in his late thirties with a weathered face, stubble, wearing a bright red mountaineering parka and thermal goggles."
-          },
-          "locations": {
-            "Frozen Crag": "A steep, rocky alpine ridge covered in deep drifts of blue-white snow and jagged granite cliffs."
-          },
-          "objects": {
-            "Handheld Beacon": "A rugged orange electronic cylinder with a pulsing amber LED lens and an extendable steel antenna."
-          }
-        },
-        "plot_fingerprint": "a1c64876203f2cabdc1a19dce055383eaad7428d855e45a8a13190f0c27c90e4"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "f0cad3a1e98c59e49b4ce969",
-      "source_sha256": "524ddac467ea650326aab986483e5f0865a338ce0915761e2791e5a053a375a1",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-708ed07e73c366f15ed9",
-        "title": "The Infinite Pancake Flipper Catastrophe",
-        "hook": "Morning Chaos",
-        "question": "Can an automated breakfast maker survive a rowdy farmers market?",
-        "answer": "Only if its hyperspeed spatula is aimed directly at the mayor's face.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "Morning Chaos",
-            "speech": "Behold my magnificent breakfast bot! It whips up golden flapjacks faster than any sleepy vendor in this bustling square.",
-            "visual": "robot",
-            "label": "The Invention",
+            "label": "The Chasm Edge",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby wearing a grease-stained apron stands proudly beside a tall copper machine in a busy market stall while holding a wrench.",
+            "visual_prompt": "A cautious female botanist in leather gear points across a misty ravine while holding a glowing spore pod, standing next to a weathered male scout with a climbing pack in an emerald forest.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Batter Overflow",
-            "speech": "Oh no, the temperature dials are melting! Sweet sticky batter is spraying wildly across every single cucumber and tomato crate!",
+            "headline": "Weaving the Bridge",
+            "speech": "Hold the tension steady while I wrap these bioluminescent tendrils around the sturdy branch.",
             "visual": "signal",
-            "label": "System Failure",
+            "label": "Spore String",
             "story_beat": "build",
-            "visual_prompt": "Inventor Barnaby frantically points at blinking red warning lights on the copper machine while angry vegetable vendors shake their fists nearby.",
+            "visual_prompt": "The male scout pulls a taut glowing vine across the air gap, signaling his partner with a bright handheld beacon while neon green spores illuminate the dense woodland.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Emergency Override",
-            "speech": "I must reroute the main pressure valve immediately before the entire central pavilion collapses under ten tons of dough!",
+            "headline": "The Mid-Air Test",
+            "speech": "Step carefully on the center node now, because the light is fading faster than expected.",
             "visual": "door",
-            "label": "The Fix",
+            "label": "Crossing Over",
             "story_beat": "mechanism",
-            "visual_prompt": "Inventor Barnaby dives headfirst into the open maintenance hatch of the rumbling copper machine with tools flying everywhere around him.",
+            "visual_prompt": "The female botanist cautiously steps onto a trembling bridge of woven glowing vines, balancing above a deep abyss with her canvas satchel swinging at her side.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Sweet Victory",
-            "speech": "Look up everyone! Thousands of fluffy pancakes are floating through the sunny air right into our breakfast plates!",
-            "visual": "ship",
-            "label": "The Payoff",
+            "headline": "Reaching Safety",
+            "speech": "We made it across the divide together, and the radiant orchids are blooming all around us.",
+            "visual": "planet",
+            "label": "The Safe Ridge",
             "story_beat": "payoff",
-            "visual_prompt": "Market shoppers wearing wide grins hold up empty plates toward the sky as golden pancakes rain down gently from a hovering copper contraption.",
+            "visual_prompt": "Both characters stand triumphantly on the opposite mossy cliff under a twilight sky, holding glowing seed pods aloft as rare orchids bloom around their boots.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A malfunctioning batter cannon threatens to bury the entire vegetable district under sticky syrup.",
-        "decisive_choice": "Reverse the gear ratio to launch pancakes upward instead of outward.",
-        "resolution": "The market crowd catches a floating canopy of breakfast treats, saving the stalls and winning first prize.",
+        "central_conflict": "Navigating a massive, fog-choked ravine to reach endangered medicinal orchids before nightfall.",
+        "decisive_choice": "Risking all remaining spore pods to anchor a fragile suspension vine in mid-air.",
+        "resolution": "The bridge holds firm under their combined weight, allowing safe passage to the sacred grove.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures and comedic physical acting.",
+          "style": "Cinematic animated fantasy with rich saturated colors, dramatic rim lighting, and highly detailed natural textures.",
           "characters": {
-            "Barnaby": "An eccentric young inventor with unruly orange hair, smudged goggles, a heavily patched blue apron, and an endlessly hopeful expression."
+            "botanist": "A woman in her late twenties with braided auburn hair, wearing practical earth-toned leather traveling gear, brass-rimmed goggles on her forehead, and a canvas utility satchel.",
+            "scout": "A rugged man in his early thirties with short dark hair, wearing a weather-resistant hooded canvas cloak, climbing harness, and carrying a metal beacon cylinder."
           },
           "locations": {
-            "Market Square": "A bustling, sunlit cobblestone plaza packed with striped awnings, wooden crates overflowing with vegetables, and chattering townsfolk."
+            "forest": "An ancient, towering woodland filled with massive gnarled trees, hanging moss, and bioluminescent flora emitting a soft emerald glow.",
+            "ravine": "A dramatic mile-wide chasm choked with rolling white mist and sheer moss-covered rock walls."
           },
           "objects": {
-            "copper_machine": "A towering contraption made of gleaming brass pipes, spinning gears, a steam whistle on top, and a large flour hopper.",
-            "wrench": "A heavy, grease-covered iron tool with a slightly bent handle.",
-            "pancake": "A perfectly golden-brown, steaming hot circular treat dripping with golden butter."
+            "spore_pod": "A pearlescent, orb-shaped seed vessel that pulses with bright green biological light when squeezed.",
+            "beacon": "A cylindrical metal signaling device with a glass lens projecting a focused beam of amber light."
           }
         },
-        "plot_fingerprint": "24d421f8b33a333ec7423755dde1b3748cfe8470d9d8d96262eb6143fff22c09"
+        "plot_fingerprint": "0731ac6553fcf9b018a89cbc69ee18fcab5362a8518eab43a15690bb4145b748"
       },
       "approved": false
     }
