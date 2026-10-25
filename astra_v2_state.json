@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-25",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 32,
-  "confirmed_today": 31,
-  "last_attempt_at": "2026-10-25T15:37:26.201656+00:00",
+  "attempts": 33,
+  "confirmed_today": 32,
+  "last_attempt_at": "2026-10-25T15:50:36.923240+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -2247,16 +2247,14 @@
       "decisive_choice": "Cut the supply sled tether to distribute body weight safely and pull the hauling rope alone.",
       "resolution": "The partner is rescued onto solid ice, while the supply sled slips irretrievably into the frozen abyss.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "fAIO6smqGKM": {
-      "content_id": "rayvan-gemini-07d4b45040d86e19419f",
+    },
+    "rayvan-gemini-07d4b45040d86e19419f": {
+      "video_id": "fAIO6smqGKM",
+      "confirmed_at": "2026-10-25T15:42:55.676656+00:00",
       "title": "The Ranger and the Summit Flares",
-      "day": "2026-10-25",
-      "uploaded_at": "2026-10-25T15:37:28.120052+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-25T15:37:28.120052+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "c30451f2c6dff4bdddfac0495c0b00fc66b9e0246428a7ac9a3a09fffce324d6",
       "story_beats": [
@@ -2304,16 +2302,74 @@
       "central_conflict": "A sudden winter blizzard traps an injured climber on an isolated mountain ledge while night approaches.",
       "decisive_choice": "Lyra chooses to deploy her experimental rescue beacon rocket across the deep crevasse instead of waiting for morning backup.",
       "resolution": "The beacon successfully anchors a rescue line, allowing Lyra to haul the climber to safety moments before the ridge collapses.",
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "lAObNcoAmw8": {
+      "content_id": "rayvan-gemini-14366e610c83091b2255",
+      "title": "The Mystery of Platform Nine and the Missing Luggage",
+      "day": "2026-10-25",
+      "uploaded_at": "2026-10-25T15:50:38.671446+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "86aee25b1161f9493b2234793d77ac1ac0702ad7774bfc71f7c86081cc3df087",
+      "story_beats": [
+        {
+          "headline": "Missing Ledger Panic",
+          "speech": "Pardon me, Inspector, but the master logbook has vanished completely from the ticket counter right before departure.",
+          "visual": "signal",
+          "label": "Platform Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Stationmaster Bramble with round brass spectacles and a navy uniform holding an empty wooden clipboard on the bustling platform while a stray ginger cat named Pip sits nearby licking its paw.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Cat's Clue",
+          "speech": "Look closely at how Pip keeps scratching the brass handle of your old leather lunch tin, master Bramble.",
+          "visual": "robot",
+          "label": "Feline Discovery",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the ginger cat nudges a battered green tin lunchbox resting on a wooden bench while Bramble looks down in absolute astonishment with wide eyes.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Unlocking the Tin",
+          "speech": "Good heavens, I packed my midday sandwiches right on top of the confidential station registry this morning!",
+          "visual": "door",
+          "label": "Tin Inspection",
+          "story_beat": "twist",
+          "visual_prompt": "Bramble carefully opens the green metal lunch tin on the station bench, revealing parchment pages wedged beside a wrapped cheese sandwich while curious passengers watch.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Express Departures Resume",
+          "speech": "All tickets are accounted for and the morning express is finally cleared to depart down the southern line.",
+          "visual": "ship",
+          "label": "Safe Departure",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramble waves a green signal flag proudly beside the steaming black locomotive engine while Pip rests contentedly on the stationmaster's booted foot.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "The station ledger went missing during the 8:00 express boarding.",
+      "decisive_choice": "Search the stationmaster's own misplaced meal tin instead of locking down the trains.",
+      "resolution": "The ledger is recovered safely, and the morning departures resume without further delay.",
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-25T15:29:51.829752+00:00",
+  "last_preflight_at": "2026-10-25T15:42:55.268244+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-25T15:37:28.464847+00:00",
+    "at": "2026-10-25T15:50:39.095567+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -5579,10 +5635,64 @@
       "resolution": "The beacon successfully anchors a rescue line, allowing Lyra to haul the climber to safety moments before the ridge collapses.",
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-14366e610c83091b2255": {
+      "at": "2026-10-25T15:50:36.923227+00:00",
+      "title": "The Mystery of Platform Nine and the Missing Luggage",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "86aee25b1161f9493b2234793d77ac1ac0702ad7774bfc71f7c86081cc3df087",
+      "story_beats": [
+        {
+          "headline": "Missing Ledger Panic",
+          "speech": "Pardon me, Inspector, but the master logbook has vanished completely from the ticket counter right before departure.",
+          "visual": "signal",
+          "label": "Platform Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Stationmaster Bramble with round brass spectacles and a navy uniform holding an empty wooden clipboard on the bustling platform while a stray ginger cat named Pip sits nearby licking its paw.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Cat's Clue",
+          "speech": "Look closely at how Pip keeps scratching the brass handle of your old leather lunch tin, master Bramble.",
+          "visual": "robot",
+          "label": "Feline Discovery",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the ginger cat nudges a battered green tin lunchbox resting on a wooden bench while Bramble looks down in absolute astonishment with wide eyes.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Unlocking the Tin",
+          "speech": "Good heavens, I packed my midday sandwiches right on top of the confidential station registry this morning!",
+          "visual": "door",
+          "label": "Tin Inspection",
+          "story_beat": "twist",
+          "visual_prompt": "Bramble carefully opens the green metal lunch tin on the station bench, revealing parchment pages wedged beside a wrapped cheese sandwich while curious passengers watch.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Express Departures Resume",
+          "speech": "All tickets are accounted for and the morning express is finally cleared to depart down the southern line.",
+          "visual": "ship",
+          "label": "Safe Departure",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramble waves a green signal flag proudly beside the steaming black locomotive engine while Pip rests contentedly on the stationmaster's booted foot.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "The station ledger went missing during the 8:00 express boarding.",
+      "decisive_choice": "Search the stationmaster's own misplaced meal tin instead of locking down the trains.",
+      "resolution": "The ledger is recovered safely, and the morning departures resume without further delay.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-25T15:37:28.464807+00:00",
+    "at": "2026-10-25T15:50:39.095489+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -5593,21 +5703,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-25T15:37:28.464840+00:00",
+    "at": "2026-10-25T15:50:39.095553+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-25T15:30:13.196128+00:00",
+    "at": "2026-10-25T15:43:17.422725+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-07d4b45040d86e19419f",
-    "video_url": "https://www.youtube.com/watch?v=fAIO6smqGKM",
+    "content_id": "rayvan-gemini-14366e610c83091b2255",
+    "video_url": "https://www.youtube.com/watch?v=lAObNcoAmw8",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-25T15:37:28.464663+00:00",
+    "at": "2026-10-25T15:50:39.095206+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -5619,12 +5729,12 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-25T15:37:28.464804+00:00",
+    "at": "2026-10-25T15:50:39.095482+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 86,
+        "eligible": 85,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3,
@@ -5638,21 +5748,21 @@
           "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
         },
         "seen": 6,
-        "total": 214
+        "total": 213
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 214,
+        "before": 213,
         "fingerprint": 0,
         "id": 6,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 208,
+        "remaining": 207,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 208,
-        "remaining": 86
+        "pool": 207,
+        "remaining": 85
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,

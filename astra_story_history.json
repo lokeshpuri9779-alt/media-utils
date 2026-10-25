@@ -1859,6 +1859,58 @@
       "central_conflict": "Hauling a heavy rescue load out of an unstable glacial crevasse while losing grip on the main supply sled.",
       "decisive_choice": "Cut the supply sled tether to distribute body weight safely and pull the hauling rope alone.",
       "resolution": "The partner is rescued onto solid ice, while the supply sled slips irretrievably into the frozen abyss."
+    },
+    {
+      "content_id": "rayvan-gemini-07d4b45040d86e19419f",
+      "video_id": "fAIO6smqGKM",
+      "confirmed_at": "2026-10-25T15:42:55.676656+00:00",
+      "title": "The Ranger and the Summit Flares",
+      "plot_fingerprint": "c30451f2c6dff4bdddfac0495c0b00fc66b9e0246428a7ac9a3a09fffce324d6",
+      "story_beats": [
+        {
+          "headline": "Discovery at Dawn",
+          "speech": "Look through the freezing binoculars now! I see a bright orange signal flare burning near the frozen crag.",
+          "visual": "signal",
+          "label": "Beacon Spotted",
+          "story_beat": "reveal",
+          "visual_prompt": "Lyra holding brass binoculars, wearing a heavy red parka and snow goggles, standing at the icy edge of pine ridge as a distant orange signal flare sparks against grey snow clouds.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Crossing the Chasm",
+          "speech": "Hold tight to that anchor stake while I string the heavy titanium cable across this freezing mountain gorge.",
+          "visual": "door",
+          "label": "The Crossing",
+          "story_beat": "build",
+          "visual_prompt": "Lyra securing a heavy steel pulley system to a frozen rock gate on a cliffside, wearing thick thermal gloves and red parka while heavy wind blows white snow.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Reaching the Ledge",
+          "speech": "Take my hand carefully! We must cross back over this terrifying drop before the storm shatters the ledge.",
+          "visual": "forest",
+          "label": "The Rescue",
+          "story_beat": "mechanism",
+          "visual_prompt": "Lyra pulling an exhausted climber in a blue jacket onto a safe snowy ledge surrounded by frost-covered pine trees, holding a climbing axe in her right hand.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Return",
+          "speech": "We made it back to the warmth of the cabin just in time. Pour us both a hot cup of tea.",
+          "visual": "ship",
+          "label": "Safe Arrival",
+          "story_beat": "payoff",
+          "visual_prompt": "Lyra and the rescued climber sitting inside a warm wooden rescue cabin, holding steaming mugs, looking out a frosted window at the stormy mountain peak.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden winter blizzard traps an injured climber on an isolated mountain ledge while night approaches.",
+      "decisive_choice": "Lyra chooses to deploy her experimental rescue beacon rocket across the deep crevasse instead of waiting for morning backup.",
+      "resolution": "The beacon successfully anchors a rescue line, allowing Lyra to haul the climber to safety moments before the ridge collapses."
     }
   ]
 }
