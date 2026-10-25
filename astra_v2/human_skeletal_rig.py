@@ -19,8 +19,11 @@ HIP_L=(-37,195)
 HIP_R=(38,195)
 UPPER_ARM=105.0
 FOREARM=105.0
-THIGH=91.0
-CALF=154.0
+# Physically proportioned near-straight standing legs. The previous
+# 91/154 pair forced huge side-bent knees ("frog squat") even at rest:
+# the body anchor-to-ankle distance is only ~145 px.
+THIGH=81.0
+CALF=86.0
 FRAME_RATE=30
 
 
