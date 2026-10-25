@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-25",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 29,
+  "attempts": 30,
   "confirmed_today": 29,
-  "last_attempt_at": "2026-10-25T01:22:24.634880+00:00",
+  "last_attempt_at": "2026-10-25T14:51:54.134704+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -2140,19 +2140,74 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "ready",
-  "last_preflight_at": "2026-10-25T14:24:32.243686+00:00",
+  "pending": {
+    "9F5jmZ9AIVw": {
+      "content_id": "rayvan-gemini-d07e12d27687c6f5afd4",
+      "title": "The Rivet-Master's Argument at Dock Twelve",
+      "day": "2026-10-25",
+      "uploaded_at": "2026-10-25T14:51:56.308908+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "2bdf40cc173ee670a07bbaa4be3033efcf08588b73f2a1f7bdbee1999bf74805",
+      "story_beats": [
+        {
+          "headline": "The Hull Breach Discovery",
+          "speech": "We cannot patch this pressure fracture with standard sealant alone; the stress load is far too high for our current orbit.",
+          "visual": "ship",
+          "label": "The Breach",
+          "story_beat": "reveal",
+          "visual_prompt": "Medium shot of Lyra pointing at a glowing crimson crack in the bulkhead of the engine bay, holding a magnetic diagnostic scanner in her right hand, wearing a stained blue jumpsuit and worried expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Heated Disagreement",
+          "speech": "Your heavy reinforcement plan will freeze the exhaust valves completely and leave us stranded in deep space forever.",
+          "visual": "robot",
+          "label": "The Debate",
+          "story_beat": "build",
+          "visual_prompt": "Close-up of Jax gesturing angrily with a silver torque wrench toward the maintenance droid, which blinks a warning yellow light while standing between the two arguing crewmates inside the cramped metallic workshop.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Compromise Fix",
+          "speech": "Listen to me now, use the flexible thermal membrane over the weld point and we might survive the upcoming gravitational push.",
+          "visual": "signal",
+          "label": "The Alignment",
+          "story_beat": "mechanism",
+          "visual_prompt": "Wide shot of both mechanics working in unison, Lyra holding the flashing green alignment beacon while Jax tightly fastens the thermal plate over the smoking hull breach under harsh white emergency lights.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Through the Jump",
+          "speech": "The thrusters are holding steady and our orbital trajectory is fully secure. Excellent teamwork under pressure, partner.",
+          "visual": "planet",
+          "label": "The Safe Harbor",
+          "story_beat": "payoff",
+          "visual_prompt": "Medium wide shot of Lyra and Jax smiling side by side through the large observation viewport, watching a glowing blue gas giant planet fill the window as the ship cruises smoothly into stable orbit.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-25T14:40:20.480238+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-25T14:39:17.287794+00:00",
+    "at": "2026-10-25T14:51:56.759545+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
-    "job_status_before_persist": "cancelled",
+    "job_status_before_persist": "success",
     "dependencies_step": "success",
-    "publish_step": "cancelled",
+    "publish_step": "success",
     "cover_tests": "",
     "motion_tests": "success",
     "animal_tests": "success",
@@ -5253,13 +5308,64 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-d07e12d27687c6f5afd4": {
+      "at": "2026-10-25T14:51:54.134691+00:00",
+      "title": "The Rivet-Master's Argument at Dock Twelve",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "2bdf40cc173ee670a07bbaa4be3033efcf08588b73f2a1f7bdbee1999bf74805",
+      "story_beats": [
+        {
+          "headline": "The Hull Breach Discovery",
+          "speech": "We cannot patch this pressure fracture with standard sealant alone; the stress load is far too high for our current orbit.",
+          "visual": "ship",
+          "label": "The Breach",
+          "story_beat": "reveal",
+          "visual_prompt": "Medium shot of Lyra pointing at a glowing crimson crack in the bulkhead of the engine bay, holding a magnetic diagnostic scanner in her right hand, wearing a stained blue jumpsuit and worried expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Heated Disagreement",
+          "speech": "Your heavy reinforcement plan will freeze the exhaust valves completely and leave us stranded in deep space forever.",
+          "visual": "robot",
+          "label": "The Debate",
+          "story_beat": "build",
+          "visual_prompt": "Close-up of Jax gesturing angrily with a silver torque wrench toward the maintenance droid, which blinks a warning yellow light while standing between the two arguing crewmates inside the cramped metallic workshop.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Compromise Fix",
+          "speech": "Listen to me now, use the flexible thermal membrane over the weld point and we might survive the upcoming gravitational push.",
+          "visual": "signal",
+          "label": "The Alignment",
+          "story_beat": "mechanism",
+          "visual_prompt": "Wide shot of both mechanics working in unison, Lyra holding the flashing green alignment beacon while Jax tightly fastens the thermal plate over the smoking hull breach under harsh white emergency lights.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Through the Jump",
+          "speech": "The thrusters are holding steady and our orbital trajectory is fully secure. Excellent teamwork under pressure, partner.",
+          "visual": "planet",
+          "label": "The Safe Harbor",
+          "story_beat": "payoff",
+          "visual_prompt": "Medium wide shot of Lyra and Jax smiling side by side through the large observation viewport, watching a glowing blue gas giant planet fill the window as the ship cruises smoothly into stable orbit.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-25T14:39:17.287671+00:00",
-    "publication_outcome": "ready",
-    "publication_reason": "ready",
-    "character_memory": "not_reported",
+    "at": "2026-10-25T14:51:56.759490+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -5267,35 +5373,35 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-25T14:39:17.287778+00:00",
+    "at": "2026-10-25T14:51:56.759536+00:00",
     "history_file_present": true,
-    "publication_outcome": "ready",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-25T13:27:21.049360+00:00",
-    "outcome": "quality_skip",
-    "reason": "renderer_incompatible: Authored story beat requires speech and visual",
-    "content_id": "",
-    "video_url": "",
+    "at": "2026-10-25T14:40:49.480879+00:00",
+    "outcome": "processing",
+    "reason": "",
+    "content_id": "rayvan-gemini-d07e12d27687c6f5afd4",
+    "video_url": "https://www.youtube.com/watch?v=9F5jmZ9AIVw",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-25T14:39:17.287430+00:00",
+    "at": "2026-10-25T14:51:56.759289+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "cancelled",
-    "job_status_before_persist": "cancelled",
-    "outcome": "ready",
-    "reason": "ready",
-    "fresh_upload_attempted": false,
+    "publish_step": "success",
+    "job_status_before_persist": "success",
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-25T14:39:17.287664+00:00",
+    "at": "2026-10-25T14:51:56.759486+00:00",
     "collection_status": "collected",
-    "publish_step": "cancelled",
+    "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
         "eligible": 88,
@@ -5327,6 +5433,16 @@
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
         "pool": 210,
         "remaining": 88
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 1,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
       }
     },
     "note": "Diagnostic counts only; no approval or publishing effect"
