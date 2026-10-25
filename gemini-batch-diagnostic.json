@@ -1,25 +1,25 @@
 {
-  "observed_at": "2026-10-25T06:48:49.274762+00:00",
-  "generated": 15,
+  "observed_at": "2026-10-25T12:46:35.657569+00:00",
+  "generated": 13,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 15,
+      "index": 9,
+      "reason": "ValueError"
+    },
+    {
+      "index": 14,
       "reason": "provider_http_429"
     }
   ],
-  "reviewed": 15,
-  "approved": 9,
+  "reviewed": 13,
+  "approved": 2,
   "review_issues": [
-    "The candidate story 'The Moss-Walker and the Iron Root Bridge' shares an identical central conflict, decisive choice, and resolution structure with the recently published comparison story 'The Arborist and the Root-Bound Bridge' (where a natural obstacle at a ravine/bridge strands foragers who must use a makeshift wooden span/lever to cross safely).",
-    "The candidate story 'The Ranger and the Frost-Locked Gorge' shares an extremely similar premise, causal conflict, decisive choice, and resolution with the recently published example 'Elias and the Avalanche Beacon of Needle Peak' and 'The Arctic Rescuer and the Crevasse Beacon', involving a lone rescuer performing a high-risk maneuver to extract a survivor from a freezing crevasse or avalanche zone.",
-    "The candidate story 'The Weaver Bird and the Bramble Ravine' features a structural causal mechanism\u2014two characters using natural materials to bridge a ravine/chasm to reunite or cross over\u2014that closely mirrors recently published premises in the comparison history, specifically 'The Arborist and the Root-Bound Bridge' where characters construct a span over a deep ravine with rising waters. Although characters and specific dialogue differ, the core motif of overcoming a ravine barrier via cooperative bridge-building presents a repetitive premise relative to the provided dataset.",
-    "The central conflict, decisive choice, and resolution heavily overlap with the recently published 'Elias and the Avalanche Beacon of Needle Peak' regarding a lone mountain rescuer racing against time and weather to extract a survivor from a high-altitude hazard.",
-    "The central conflict, decisive choice, and resolution of a lone mountain rescuer retrieving a survivor from an avalanche or crevasse heavily overlap with the previously published 'Elias and the Avalanche Beacon of Needle Peak'.",
-    "The narrative structure and causal mechanisms closely mirror existing mountain rescue tropes already logged in the comparison history, lacking sufficient distinctiveness in originality.",
-    "The story duplicates the central conflict, decisive choice, and resolution of 'Unit 734 and the Dying Solar Grove' and 'The Caretaker's Directive and the Last Seedling' from the provided comparison history, wherein a robot sacrifices its remaining power or battery to sustain an organic plant or seedling at the cost of its own existence.",
-    "While featuring anthropomorphic animal characters, the causal mechanism and thematic resolution too closely mirror existing comparison data points in the history.",
-    "ai_editorial_rejection"
+    "The central conflict and resolution heavily mimic the structural and thematic pattern of 'Unit 734 and the Dying Solar Grove' in the comparison history, substituting plant life and a pilot with a greenhouse specimen and children, failing the originality threshold for recent publication premises.",
+    "The story shares a nearly identical central conflict, setting, character name (Lyra), and premise ('The Ranger and the Summit Flares') with a recently published example in the comparison history, failing the originality requirement.",
+    "ai_editorial_rejection",
+    "review_failed:HTTP_429",
+    "review_provider:rate_limited"
   ],
   "approval_pair_present": true,
   "model_access": {
