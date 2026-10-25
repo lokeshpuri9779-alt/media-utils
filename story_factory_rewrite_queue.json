@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "f8a1aa6477e237b6d7f33341",
-      "source_sha256": "6f588aa358ce12404391412d4542b2e00d44d1e3f8c91dec83da2ba4303f504d",
+      "candidate_id": "e96f8be0e93c9c7550b37302",
+      "source_sha256": "0ffca3405170bb559aff24c20f2ed9e5b05e87975c866498af148cc025629d13",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-e8668d254544d2607d37",
-        "title": "The Great Tomato Launch",
-        "hook": "Tomato Catastrophe",
-        "question": "Can an overly enthusiastic inventor sell his automatic vegetable launcher at a busy morning market?",
-        "answer": "Yes, by pivoting from a salad delivery device to an extremely loud morning wake-up service.",
+        "content_id": "rayvan-gemini-6e43ad19ff05e0bd09b8",
+        "title": "The Great Cheese Pulley Catastrophe of Sector Nine",
+        "hook": "The Over-Engineered Stall",
+        "question": "Can an overly ambitious market inventor automate cheese rolling without destroying his stall?",
+        "answer": "He creates a chaotic mechanical ramp that launches aged cheddar directly into the mayor's visiting carriage.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,79 +29,80 @@
         ],
         "story_beats": [
           {
-            "headline": "Tomato Catastrophe",
-            "speech": "Behold the glorious speed-peeler ninety-thousand! Watch as it expertly hurls a perfectly ripe red tomato across the crowded square.",
-            "visual": "signal",
-            "label": "The Launcher",
-            "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands behind a wooden cart in a sunlit outdoor market, holding a smoking metal lever with an excited expression while a flying tomato heads toward a merchant.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Angry Vendor",
-            "speech": "Your wonderful invention just smashed my entire pyramid of imported cheese! You must stop this madness before the health inspector arrives.",
+            "headline": "The Over-Engineered Stall",
+            "speech": "Behold citizens, my glorious motorized cheddar dispenser will revolutionize market breakfast service forever today!",
             "visual": "robot",
-            "label": "The Stall",
-            "story_beat": "build",
-            "visual_prompt": "Madame Dupuis stands with hands on hips, yelling angrily at Barnaby across a messy cheese stall smeared with red tomato pulp under a blue canopy.",
+            "label": "The Contraption",
+            "story_beat": "reveal",
+            "visual_prompt": "Inventor Barnaby gestures proudly next to a chaotic wooden cart filled with ticking brass gears, spinning wooden wheels, and a large wedge of yellow cheese resting on a launch pad, set in a bustling sunny cobblestone market square.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Quick Adjustment",
-            "speech": "Do not despair my frustrated friend! With a simple twist of this brass dial, we transform from messy lunch to punctual wake-up call.",
-            "visual": "ship",
-            "label": "The Adjustment",
+            "headline": "The Jammed Gear",
+            "speech": "Oh dear, the main copper sprocket is stuck firmly on a rogue loaf of stale rye bread!",
+            "visual": "signal",
+            "label": "The Jam",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby frantically turns a large brass gear on the side of his mechanical device, adjusting the angle upward with a focused and determined smile.",
+            "visual_prompt": "Barnaby stands on a wooden stool frantically jiggling a smoking brass crank handle attached to the side of his cart, while a loaf of dark rye bread is visibly wedged between two spinning metal cogs inside the mechanism.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Morning Glory",
-            "speech": "Rise and shine dear neighbors! Never sleep through dawn again when you have the loudest, freshest vegetable alarm clock in the district.",
+            "headline": "The Emergency Release",
+            "speech": "Quickly grab the emergency tension release cable before the entire contraption explodes into crumbs!",
+            "visual": "ship",
+            "label": "The Launch",
+            "story_beat": "twist",
+            "visual_prompt": "Barnaby's assistant Pip leaps through the air with outstretched hands, grabbing a frayed red rope dangling from the top of the towering wooden cheese cart as a massive bronze spring snaps backward with visible force.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Cheesy Landing",
+            "speech": "Well at least the mayor's official carriage is now thoroughly seasoned with our finest aged sharp cheddar!",
             "visual": "door",
-            "label": "The Success",
+            "label": "The Aftermath",
             "story_beat": "payoff",
-            "visual_prompt": "Multiple market vendors cheer happily as a single tomato launches straight up into the air over the crowded market stalls, ringing a tiny brass bell at the apex.",
+            "visual_prompt": "Barnaby and Pip stand frozen with wide grobs in front of a shattered wooden market stall, staring in horror as a giant wedge of yellow cheese sits squarely on the velvet roof of the passing mayor's gilded carriage.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Market stalls are being ruined by flying vine-ripe tomatoes.",
-        "decisive_choice": "Repurposing the spring-loaded catapult into a dawn alarm clock.",
-        "resolution": "Every vendor pre-orders the launcher to start their stalls on time.",
+        "central_conflict": "Integrating too many gears into a fragile wooden display cart during peak morning trading hours.",
+        "decisive_choice": "Pulling the emergency release lever while the spring tension is at maximum capacity.",
+        "resolution": "The inventor is fined heavily in gouda but gains a massive queue of thrill-seeking snack buyers.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion puppet animation aesthetic with detailed textures and whimsical proportions.",
+          "style": "A vibrant, slapstick animated style with exaggerated expressions and warm, sunny marketplace lighting.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild ginger hair, round wire-rimmed glasses, a patched green vest, and oil-stained trousers.",
-            "Madame Dupuis": "A stern market vendor wearing a tall white chef hat, a blue apron, and an expression of constant disapproval."
+            "Barnaby": "An enthusiastic middle-aged inventor with wild grey hair, soot-smudged cheeks, wearing a patched green vest and oversized protective brass goggles pushed up on his forehead.",
+            "Pip": "A nimble teenage apprentice wearing a striped cap, canvas trousers, and carrying a leather tool belt jingling with wrenches."
           },
           "locations": {
-            "Market Square": "A bustling cobblestone town square lined with wooden stalls, colorful striped awnings, and woven baskets filled with fresh produce."
+            "market_square": "A crowded medieval cobblestone marketplace filled with striped canvas awnings, wooden fruit crates, and bustling shoppers."
           },
           "objects": {
-            "Tomato Launcher": "A complex brass and wooden contraption featuring large steel springs, leather straps, a spinning gear assembly, and a polished metal launching spoon."
+            "cheese_cart": "A tall, rickety wooden cart fitted with twenty distinct brass cogs, spinning leather belts, a vertical launch spring, and a large metal resting tray.",
+            "mayor_carriage": "A polished dark wood carriage with gold trim, plush crimson velvet seating, and a large flat roof currently covered in yellow cheddar."
           }
         },
-        "plot_fingerprint": "9451e489c0e76d88690b290adc536f5bc16f0bde2f5b43bee45271522bb44ad8"
+        "plot_fingerprint": "af616c5ab62f618a9533785239f8a483f5901caca44a435ea77ed9f7fa04523d"
       },
       "approved": false
     },
     {
-      "candidate_id": "4095ee654d7e35c7462c525f",
-      "source_sha256": "51af3ce157a76cfdae735f03852800f2bc6f633acd37fc4e26593ba1c5ce98dc",
+      "candidate_id": "0b4b447e9eff621a3fe86611",
+      "source_sha256": "82cff8146c69b20adad3d5f4110be609bd17fcb5afbb449080b954fb271f976e",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-e887d5ecff7330ef40a8",
-        "title": "Frostline Breach",
-        "hook": "The Overheating Core",
-        "question": "Should Dr. Vance abandon the automated weather core to save the trapped supply sled?",
-        "answer": "Dr. Vance abandons the core, deploying the thermal beacons to rescue the crew and securing the vital medical supplies.",
+        "content_id": "rayvan-gemini-aea0375ef2439b4d8ff0",
+        "title": "The Resonance Valve Disagreement",
+        "hook": "Clogged Vent Found",
+        "question": "Will Chief Engineer Vane vent the primary atmospheric thruster to purge the calcified salt crystals?",
+        "answer": "Yes, Vane vents the thruster, sacrificing the last fresh water reserve to prevent catastrophic hull failure.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -109,145 +110,147 @@
         ],
         "story_beats": [
           {
-            "headline": "The Overheating Core",
-            "speech": "The thermal arrays are failing fast. If we do not vent the reactor core right now, the whole station will melt.",
-            "visual": "signal",
-            "label": "Thermal Warning",
-            "story_beat": "reveal",
-            "visual_prompt": "Dr. Vance stands inside the glowing red control room, pointing a trembling gloved finger at the flashing amber radar signal on the central console.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Sled in Peril",
-            "speech": "Listen to that distress frequency! The crevasse is opening up beneath the transport sled and the cargo is sliding.",
+            "headline": "Clogged Vent Found",
+            "speech": "Look at this thick white crust choking the thermal valve! If we do not blast it out now, the core will melt down.",
             "visual": "ship",
-            "label": "Distress Call",
-            "story_beat": "build",
-            "visual_prompt": "Dr. Vance gazes through the frost-rimed window at the distant red tracked transport vehicle teetering precariously on the edge of a deep blue ice chasm.",
+            "label": "Inspection",
+            "story_beat": "reveal",
+            "visual_prompt": "Chief Engineer Vane points a gloved hand at a encrusted metal pipe inside the cramped engineering bay of the cargo vessel, wearing a stained yellow utility jumpsuit, looking worried.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Hard Choice",
-            "speech": "We cannot save both the station data and our friends. I am cutting power to the core to run the heavy winch.",
+            "headline": "The Heated Debate",
+            "speech": "We cannot waste our precious emergency water reserve on a pipe flush! There has to be a mechanical way to scrape it clear.",
             "visual": "robot",
-            "label": "Winch Activation",
-            "story_beat": "mechanism",
-            "visual_prompt": "Dr. Vance slams down a heavy brass lever on the steel control panel, watching the automated mechanical winch arm swing outward into the blinding blizzard.",
+            "label": "Disagreement",
+            "story_beat": "build",
+            "visual_prompt": "Pilot Jax stands with arms crossed next to a hovering utility robot in the metallic corridor, glaring sternly at Vane while holding a digital clipboard.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Safe Haven",
-            "speech": "The sled is aboard the safe ridge! We lost the research, but everyone is alive and warm tonight.",
+            "headline": "The Emergency Flush",
+            "speech": "There is no time for scraping tools! Stand back and brace yourselves while I route the final coolant line straight into the intake.",
+            "visual": "signal",
+            "label": "Override",
+            "story_beat": "mechanism",
+            "visual_prompt": "Vane rapidly punches override codes onto a flashing red terminal console that displays erratic warning signals, while Jax ducks behind a reinforced steel pillar.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Safe Passage",
+            "speech": "The pressure is dropping back to normal levels. We survived the solar storm, though our water tanks are completely empty now.",
+            "visual": "planet",
+            "label": "Relief",
+            "story_beat": "payoff",
+            "visual_prompt": "Vane and Jax sit side by side in the brightly lit cockpit, looking out the massive viewport at a serene blue and green planet spinning slowly in the distance.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "calcified salt crystals blocking the primary atmospheric thruster during a solar storm",
+        "decisive_choice": "vent the thruster using the emergency water coolant tank",
+        "resolution": "the ship stabilizes its trajectory safely, but the crew must ration remaining moisture",
+        "visual_bible": {
+          "style": "Clean animated sci-fi realism with industrial textures and vivid cinematic lighting",
+          "characters": {
+            "Vane": "Chief Engineer with short gray hair, rugged features, wearing a scuffed yellow utility jumpsuit with numerous tool pockets.",
+            "Jax": "Pilot with neat dark hair, sharp blue eyes, wearing a sleek navy-blue flight jacket over gray trousers."
+          },
+          "locations": {
+            "engineering_bay": "A narrow, metallic compartment filled with exposed copper wiring, pulsing control panels, and heavy pipes.",
+            "cockpit": "A spacious room dominated by a wide curved glass viewport overlooking the stars, featuring twin pilot chairs and glowing consoles."
+          },
+          "objects": {
+            "utility_robot": "A compact floating maintenance drone with a single glowing blue optical sensor and two articulated manipulator arms.",
+            "coolant_tank": "A heavy cylindrical canister made of brushed aluminum with digital pressure gauges mounted on top."
+          }
+        },
+        "plot_fingerprint": "d72d30659fc12b07d9dceb563a7bf773dffade3cca975230c3a38101efdca3c3"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "61eb31d74a72a9f6aa73345e",
+      "source_sha256": "87b913130b16804d7964b76250593b7a4b7c488f33f30c7a683bef71c45c20d7",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-4588c4e316f22e00817b",
+        "title": "The Great Muddy Creek Turf War",
+        "hook": "Discovering the Anomaly",
+        "question": "Can an underdog lawn bowl team defeat the reigning champions using a vintage acoustic level?",
+        "answer": "Yes, by discovering a hidden subterranean limestone ridge that alters the turf's natural bias.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Discovering the Anomaly",
+            "speech": "Look at this damp patch on the green. The turf is bowing outward because of an old hidden foundation.",
             "visual": "forest",
-            "label": "Successful Rescue",
-            "story_beat": "payoff",
-            "visual_prompt": "Dr. Vance and two rescued researchers smile tiredly inside the brightly lit emergency shelter, holding steaming metal mugs of hot tea while the storm howls outside.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "A sudden glacial fissure threatens to swallow the expedition supply sled while the main research core is overheating.",
-        "decisive_choice": "Dr. Vance switches off the core cooling system to divert emergency power into the rescue winch.",
-        "resolution": "The crew and supplies are hauled to safety just as the automated core goes offline permanently.",
-        "visual_bible": {
-          "style": "Cinematic gritty realism, cold blue and amber lighting, high contrast, detailed textures of frost, steel, and heavy winter gear.",
-          "characters": {
-            "Dr. Vance": "A seasoned arctic researcher with deep weathering on her cheeks, wearing a heavy orange parka with faux-fur hood and thick black thermal gloves."
-          },
-          "locations": {
-            "control_room": "A cramped, utilitarian research outpost interior packed with blinking analog gauges, copper wiring, and frosted observation windows."
-          },
-          "objects": {
-            "brass_lever": "A heavy, cold-to-the-touch brass switch mounted on a riveted steel plate connected to the station's main power grid.",
-            "emergency_winch": "A rugged, yellow-painted mechanical winch system rigged with thick steel cables and flashing safety strobes."
-          }
-        },
-        "plot_fingerprint": "c90893f5aaeb42090c43bd0825a6edb41c8806636ea531f612d03e9907f6df40"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "0570d8cf56a0e29cb00b5581",
-      "source_sha256": "2be7be2513728b35edc826d37dafd0559024b0115db7b8fc298ff1403fd94d9e",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-f4a6d6fd35ff76051f52",
-        "title": "The Midnight Express Misplacement",
-        "hook": "The Disappearance",
-        "question": "Where did the missing cargo wagon of the 11:45 departure vanish?",
-        "answer": "It was shunted onto an abandoned spur by an overly eager automated maintenance robot.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Disappearance",
-            "speech": "Station master Clara stared at the empty tracks in absolute disbelief, wondering how an entire wagon vanished instantly.",
-            "visual": "signal",
-            "label": "The Mystery",
-            "story_beat": "reveal",
-            "visual_prompt": "Station master Clara in a navy blue uniform stands on Platform Four under a flickering overhead light, staring at empty rails where a cargo wagon should be, holding a brass clipboard in her left hand.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Mechanical Helper",
-            "speech": "A rusty maintenance robot rolled into view, holding a missing manifest scroll and beeping cheerfully to gain attention.",
-            "visual": "robot",
-            "label": "The Clue",
-            "story_beat": "build",
-            "visual_prompt": "A compact, brass-plated maintenance robot with a single glowing blue optical lens rolls onto the wooden platform, holding a rolled parchment manifest in its mechanical gripper claw.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Hidden Spur",
-            "speech": "Following the robot down into the dark tunnel, Clara discovered the missing wagon tucked safely on an overgrown side track.",
-            "visual": "door",
             "label": "The Discovery",
-            "story_beat": "mechanism",
-            "visual_prompt": "Clara and the maintenance robot stand before a heavy iron maintenance door inside a damp brick tunnel, pointing a lantern toward the forgotten spur track where the missing wooden wagon rests.",
+            "story_beat": "reveal",
+            "visual_prompt": "An elderly bowler in a green cardigan inspects a sunken patch of grass in an overgrown park, holding a rusted surveyor's level.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Departure",
-            "speech": "With the tracks finally cleared by her unexpected helper, the midnight express whistled loudly and rolled out smoothly.",
-            "visual": "ship",
-            "label": "The Success",
+            "headline": "Engineering the Solution",
+            "speech": "We must adjust our delivery weights by precisely three grams to compensate for the limestone ridge underneath.",
+            "visual": "robot",
+            "label": "The Adjustment",
+            "story_beat": "build",
+            "visual_prompt": "Two focused teammates in white uniforms carefully drill minute lead weights into the core of wooden bowls inside a rustic garden shed.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Executing the Strategy",
+            "speech": "Release the bowl along the outer edge now and let the hidden slope carry it directly toward the jack.",
+            "visual": "signal",
+            "label": "The Execution",
+            "story_beat": "mechanism",
+            "visual_prompt": "A tense competitor kneels on dew-covered grass, gently rolling a modified wooden bowl while a vintage pendulum clock ticks nearby.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Claiming Victory",
+            "speech": "Our unorthodox measurements proved correct, winning us the championship shield and restoring village harmony.",
+            "visual": "door",
+            "label": "The Triumph",
             "story_beat": "payoff",
-            "visual_prompt": "Clara waves a green signal lantern on Platform Four as a steam locomotive with polished brass fittings pulls away into the night, while the small maintenance robot waves a metallic hand goodbye.",
+            "visual_prompt": "Smiling villagers hoist a tarnished silver shield outside the rustic clubhouse doorway under the warm afternoon sun.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A misplaced cargo wagon blocks the express departure track.",
-        "decisive_choice": "Reprogram the rogue maintenance automaton to clear the track.",
-        "resolution": "The express departs safely with all cargo intact.",
+        "central_conflict": "Dispute over municipal bowling green maintenance priorities between rival village clubs.",
+        "decisive_choice": "Calibrating the antique surveyor's level to map underground moisture channels.",
+        "resolution": "Winning the annual district shield and sharing club facilities for mutual benefit.",
         "visual_bible": {
-          "style": "Cinematic Victorian railway mystery with warm golden lighting and moody shadows",
+          "style": "Cinematic realism with a warm, nostalgic rural color palette of deep greens, polished wood browns, and brass accents.",
           "characters": {
-            "Clara": "A meticulous station master with graying hair tied in a neat bun, wearing a tailored navy blue uniform with brass buttons and round spectacles.",
-            "Unit-Seven": "A squat, bipedal maintenance automaton constructed from riveted copper plates, featuring a single vibrant blue optical lens for an eye and jointed mechanical claws."
+            "arthur": "An eighty-year-old retired surveyor with deep smile lines, wearing a knitted green cardigan and tweed trousers.",
+            "martha": "A sharp-witted septuagenarian team captain with silver hair tied back, wearing a crisp white bowling blazer."
           },
           "locations": {
-            "Platform_Four": "A bustling nineteenth-century railway platform featuring polished dark wood flooring, wrought-iron support pillars, and arched glass roofing panels.",
-            "Tunnel_Spur": "A damp, curved subterranean brick tunnel lit by flickering gas lamps, housing overgrown tracks and heavy cast-iron maintenance doors."
+            "clubhouse": "A weathered timber pavilion with peeling white paint, surrounded by neatly manicured flower beds.",
+            "bowling_green": "A slightly uneven grass pitch bordered by ancient oak trees and a low stone wall."
           },
           "objects": {
-            "Brass_Clipboard": "A rectangular polished brass board holding a thick stack of railway departure schedules and white parchment notes.",
-            "Signal_Lantern": "A handheld black iron lantern with thick glass panes emitting a bright emerald-green glow when activated."
+            "surveyor_level": "A vintage brass and mahogany optical leveling instrument with intricate engraved dials.",
+            "wooden_bowls": "Dark Lignum vitae lawn bowls with inlaid ivory circles, showing minor surface scuffs."
           }
         },
-        "plot_fingerprint": "b3ddbb754e0dc2126b75601b3545c5a68c84defb1c5e8cc39dfa3a780b0f8fe6"
+        "plot_fingerprint": "d67e97a6e110220aba73b895e6c708c96b1fe31b53577bc3ff2569509a04fbb9"
       },
       "approved": false
     }
