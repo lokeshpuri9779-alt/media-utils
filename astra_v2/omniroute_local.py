@@ -133,8 +133,10 @@ def catalog(excluded_ids=(), max_candidates=12, excluded_titles=()):
             # or planet graphic: the unified directed-scene quality guard
             # correctly rejects a signal icon without a narrated signal.
             episode_one_visuals = ('signal', 'signal', 'door', 'door')
+            episode_two_visuals = ('door', 'door', 'door', 'door')
+            directed_visuals = {1: episode_one_visuals, 2: episode_two_visuals}
             beats = [(headline, speeches[i],
-                      episode_one_visuals[i] if episode == 1 else visual_id,
+                      directed_visuals[episode][i] if episode in directed_visuals else visual_id,
                       label, role)
                      for i, (headline, _speech, visual_id, label, role) in enumerate(beats)]
         from astra_v2.series_character_approval import approved_character_metadata
@@ -156,10 +158,13 @@ def catalog(excluded_ids=(), max_candidates=12, excluded_titles=()):
             ],
         }
         story_record["protagonist_name"] = name
-        if episode == 1:
-            # Story-specific human puppet: explicitly directed actions, no
-            # generic fallback and no inference for the other episodes.
-            actions = ("discover_radio", "trace_cable", "hear_warning", "flee_door")
+        if episode in (1, 2):
+            # Explicit actions keep the same actor design across episodes.
+            # Future installments without authored action choreography fail
+            # the directed scene quality gate rather than acquiring fake acting.
+            from astra_v2.human_story_performance import EPISODE_ACTIONS
+            actions = EPISODE_ACTIONS[cid]
+            assert len(actions) == len(story_record["story_beats"])
             for beat, action in zip(story_record["story_beats"], actions):
                 beat["story_human_actor"] = "mara"
                 beat["story_human_action"] = action
