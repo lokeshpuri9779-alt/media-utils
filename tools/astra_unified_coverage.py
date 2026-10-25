@@ -21,7 +21,10 @@ def audit():
     try:
         for story in catalog(limit=256):
             inspected += 1
-            if not story.get("production_ready") or publication_rejection(story):
+            if not story.get("production_ready"):
+                continue
+            rejection = publication_rejection(story)
+            if rejection and not rejection.startswith("renderer_incompatible:"):
                 continue
             eligible, reason, scene_modes = check_renderer_eligibility(story)
             if not eligible:
