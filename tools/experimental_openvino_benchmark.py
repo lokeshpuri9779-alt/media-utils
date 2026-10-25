@@ -4,6 +4,7 @@ import json
 import os
 import resource
 import time
+import traceback
 from pathlib import Path
 
 APPROVED_MODELS = {
@@ -49,6 +50,12 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
     except Exception as exc:
         # No prompt, credentials, provider bodies or exception text in diagnostics.
         report["error_type"] = type(exc).__name__
+        frames = traceback.extract_tb(exc.__traceback__)
+        report["error_frames"] = [{"module_file": Path(frame.filename).name,
+                                  "function": frame.name, "line": frame.lineno}
+                                 for frame in frames[-5:]]
+        if isinstance(exc, AttributeError):
+            report["missing_attribute"] = getattr(exc, "name", None)
     finally:
         report["elapsed_seconds"] = round(time.monotonic() - started, 2)
         report["peak_rss_kib"] = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
