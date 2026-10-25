@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-25",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 25,
-  "confirmed_today": 24,
-  "last_attempt_at": "2026-10-25T00:04:13.924772+00:00",
+  "attempts": 26,
+  "confirmed_today": 25,
+  "last_attempt_at": "2026-10-25T00:17:22.470299+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -2013,16 +2013,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "cpApPvOHLco": {
-      "content_id": "rayvan-forge-a66e3cc9db5a1900",
+    },
+    "rayvan-forge-a66e3cc9db5a1900": {
+      "video_id": "cpApPvOHLco",
+      "confirmed_at": "2026-10-25T00:15:38.207937+00:00",
       "title": "The Duck and the Lost Postcard",
-      "day": "2026-10-25",
-      "uploaded_at": "2026-10-25T00:04:15.628625+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-25T00:04:15.628625+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "2e0508d74b641f4305bc8df7767cebd52c155d4eca3a471d326ac48a4cdaa49d",
       "story_beats": [
@@ -2039,16 +2037,43 @@
           "speech": "She delivered the card to a traveling goose who had finally returned home."
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "4atCi1_89ws": {
+      "content_id": "rayvan-forge-c6e1febf4b55e972",
+      "title": "The Penguin and the Runaway Sled",
+      "day": "2026-10-25",
+      "uploaded_at": "2026-10-25T00:17:24.407589+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "55a6c055f70882b3b56ec5281b74d0b4c962029c98c8699fe56678eb4308dd25",
+      "story_beats": [
+        {
+          "speech": "A penguin's delivery sled slipped downhill with all the festival cakes aboard."
+        },
+        {
+          "speech": "He piled snow in its path, but the sled burst straight through the soft mound."
+        },
+        {
+          "speech": "He tied his long scarf between two poles and steered the sled into the wind."
+        },
+        {
+          "speech": "The sled stopped beside the festival table, and not one cake had fallen."
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-25T00:02:47.544843+00:00",
+  "last_preflight_at": "2026-10-25T00:15:37.853064+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-25T00:04:15.979397+00:00",
+    "at": "2026-10-25T00:17:24.829277+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -5063,10 +5088,33 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-c6e1febf4b55e972": {
+      "at": "2026-10-25T00:17:22.470281+00:00",
+      "title": "The Penguin and the Runaway Sled",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "55a6c055f70882b3b56ec5281b74d0b4c962029c98c8699fe56678eb4308dd25",
+      "story_beats": [
+        {
+          "speech": "A penguin's delivery sled slipped downhill with all the festival cakes aboard."
+        },
+        {
+          "speech": "He piled snow in its path, but the sled burst straight through the soft mound."
+        },
+        {
+          "speech": "He tied his long scarf between two poles and steered the sled into the wind."
+        },
+        {
+          "speech": "The sled stopped beside the festival table, and not one cake had fallen."
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-25T00:04:15.979341+00:00",
+    "at": "2026-10-25T00:17:24.829196+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -5077,21 +5125,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-25T00:04:15.979387+00:00",
+    "at": "2026-10-25T00:17:24.829262+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-25T00:03:13.318182+00:00",
+    "at": "2026-10-25T00:15:58.592927+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-a66e3cc9db5a1900",
-    "video_url": "https://www.youtube.com/watch?v=cpApPvOHLco",
+    "content_id": "rayvan-forge-c6e1febf4b55e972",
+    "video_url": "https://www.youtube.com/watch?v=4atCi1_89ws",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-25T00:04:15.979046+00:00",
+    "at": "2026-10-25T00:17:24.828802+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -5103,18 +5151,18 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-25T00:04:15.979335+00:00",
+    "at": "2026-10-25T00:17:24.829189+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 235,
+        "eligible": 234,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3
         },
         "seen": 6,
-        "total": 308
+        "total": 307
       },
       "ASTRA_STORY_HISTORY_FILTER": {
         "before": 308,
@@ -5133,12 +5181,12 @@
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
         "approved": 1,
-        "considered": 77,
+        "considered": 78,
         "duration_rejected": 0,
         "not_ready": 0,
         "policy_rejected": {},
         "render_exception": {
-          "CreativeReject": 76
+          "CreativeReject": 77
         },
         "render_qa_rejected": 0
       }

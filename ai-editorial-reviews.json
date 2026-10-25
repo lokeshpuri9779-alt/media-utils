@@ -1779,6 +1779,22 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-a234c313c8a7293d1e5f",
+      "story_sha256": "1866a04d71abca48afbb4f86ac6e8fc234cceaee64f47e8898beaec8c7b6bfd6",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-a234c313c8a7293d1e5f",
+        "story_sha256": "1866a04d71abca48afbb4f86ac6e8fc234cceaee64f47e8898beaec8c7b6bfd6",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story presents a clear, self-contained moral dilemma with a logical causal chain.; The narrative structure is distinct from the provided list of recent publications, focusing on social/communal conflict rather than survival against environmental hazards or mechanical failure.; The content is suitable for a general audience and does not violate safety or YouTube policy guidelines.; The premise of a water-sharing pact and the resulting exile is a classic trope but is executed here with sufficient originality in the character motivations and setting.",
+        "reviewed_at": "2026-10-25T00:16:27.019296+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }
