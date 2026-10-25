@@ -283,9 +283,13 @@ def prepare(path, candidate):
         raise ValueError("Approved preload is missing verified renderer provenance")
     payload["renderer"] = renderer.strip()
     if fmt == "short":
+        from astra_v2.story_handoff import approved_story_context
         payload["plot_fingerprint"] = str(candidate.get("plot_fingerprint") or "")
         payload["plot_key"] = str(candidate.get("plot_key") or "")
-        payload["story_beats"] = candidate.get("story_beats") or []
+        # Publisher rechecks the serialized candidate, not a pointer to the
+        # producer's transient memory. Carry the exact approved storyboard,
+        # cast and context through the artifact; never manufacture visuals.
+        payload.update(approved_story_context(candidate))
     video_bytes = video.read_bytes()
     payload["sha256"] = hashlib.sha256(video_bytes).hexdigest()
     payload["media"] = media

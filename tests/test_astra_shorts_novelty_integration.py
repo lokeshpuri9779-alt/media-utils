@@ -19,7 +19,14 @@ class NoveltyIntegrationTests(unittest.TestCase):
     def test_runtime_handoffs_preserve_narration(self):
         creative = Path("astra_v2/creative.py").read_text()
         publisher = Path("astra_v2/run.py").read_text()
-        self.assertIn('"story_beats": meta.get("story_beats") or []', creative)
+        queue = Path("astra_v2/preload_queue.py").read_text()
+        # The previous narration-only handoff discarded approved visuals and
+        # made every queued fiction story fail the publisher's scene checker.
+        # The allowlisted story context now preserves both original narration
+        # and exact per-beat visual semantics through the artifact boundary.
+        self.assertIn('"story_context": approved_story_context(story)', creative)
+        self.assertIn('**(meta.get("story_context") or {})', creative)
+        self.assertIn('payload.update(approved_story_context(candidate))', queue)
         self.assertIn('history_narratives.append(record)', creative)
         self.assertIn('not is_near_duplicate(story, history_narratives)', creative)
         self.assertGreaterEqual(publisher.count('"story_beats":'), 3)

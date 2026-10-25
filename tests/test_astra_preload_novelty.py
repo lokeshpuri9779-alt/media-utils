@@ -10,7 +10,7 @@ class PreloadNoveltyTests(unittest.TestCase):
         for required in (
             'payload["plot_fingerprint"]',
             'payload["plot_key"]',
-            'payload["story_beats"]',
+            'payload.update(approved_story_context(candidate))',
             'publisher_history_ids(journal)',
             'is_near_duplicate(candidate, prior)',
         ):
