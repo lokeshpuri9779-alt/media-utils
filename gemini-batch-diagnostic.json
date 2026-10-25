@@ -1,6 +1,6 @@
 {
-  "observed_at": "2026-10-24T18:42:35.996212+00:00",
-  "generated": 15,
+  "observed_at": "2026-10-25T00:49:00.762075+00:00",
+  "generated": 12,
   "requested": 20,
   "generation_failures": [
     {
@@ -8,34 +8,19 @@
       "reason": "ValueError"
     },
     {
+      "index": 12,
+      "reason": "ValueError"
+    },
+    {
       "index": 14,
-      "reason": "ValueError"
-    },
-    {
-      "index": 16,
-      "reason": "ValueError"
-    },
-    {
-      "index": 17,
-      "reason": "ValueError"
-    },
-    {
-      "index": 18,
-      "reason": "ValueError"
+      "reason": "provider_http_429"
     }
   ],
-  "reviewed": 15,
-  "approved": 7,
+  "reviewed": 12,
+  "approved": 3,
   "review_issues": [
-    "The candidate story directly duplicates the premise, central conflict, decisive choice, and resolution of the recently published comparison example 'the salt-carver's tide-clock and the harbor regatta' (using almost identical titles, themes, and specific mechanical elements like salt/abalone/tide-clocks and harbor regattas).",
-    "The candidate story structurally and causally mirrors previously published premises and resolutions in the comparison history, specifically matching the pattern of clearing a blockage in a kelp/nursery ecosystem as seen in 'The Trench Weaver and the Silent Current'.",
-    "The central premise, conflict, and resolution ('The Muddy Derby of Copper Creek') are nearly identical to the recently published example 'The Muddy Derby of Oak Creek' in both narrative structure and thematic elements.",
-    "The story premise, title ('the tide-carver's regatta rudder and the salt-spray squall'), and central conflict closely mirror the recently published example 'the salt-carver's tide-clock and the harbor regatta', violating originality guidelines regarding recently published premises and titles.",
-    "The story premises, characters (station worker/guard dealing with a missing item before a midnight express departure), and causal mechanisms closely mirror recently published works in the comparison history such as 'The Stationmaster and the Missing Midnight Courier'.",
-    "The story shares a character archetype, setting, and causal structure (\"The Otter and the Three Hidden Rocks\" / marine environmental rescue) as well as heavily borrowing the thermal vent clearing premise and character names/motifs from \"The Trench Weaver and the Silent Current\" (clearing/redirecting a thermal vent to save a kelp forest ecosystem).",
-    "The title and premise 'barnaby's bouncing beet-blaster and the market mayhem' closely echo the structural pattern and character naming convention of 'Barnaby's Self-Stirring Soup Spoon and the Market Mishap' from the comparative publication history.",
-    "ai_editorial_rejection",
-    "review_failed:JSONDecodeError"
+    "review_failed:HTTP_429",
+    "review_provider:rate_limited"
   ],
   "approval_pair_present": true,
   "model_access": {
