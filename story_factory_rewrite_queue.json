@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "50eac03d3f816c85577f9d14",
-      "source_sha256": "c189bfef03b52029eb8d817130b734fb0801d5ba8bcfb498f483179995caa6fb",
+      "candidate_id": "5df1c7454823cd461faef56f",
+      "source_sha256": "6cec7ce063eab1618c85defa51a76addf2049a8185526b8e6affe32202e854fa",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-3ef99e20d1ade1e45f15",
-        "title": "The Automatic Onion-Chopper Calamity",
-        "hook": "The Demonstration Begins",
-        "question": "Can an inventor stop his rogue culinary machine before it pickles the entire farmers market?",
-        "answer": "He programs a counter-burst of sweet syrup to instantly candy and neutralize every onion tear.",
+        "content_id": "rayvan-gemini-a7f89b60f83e6f2bf7ae",
+        "title": "The Great Tomato Launch",
+        "hook": "The Grand Unveiling",
+        "question": "Can an overly enthusiastic inventor sell his automatic fruit-slicing hat at the morning market?",
+        "answer": "Yes, but only after his rival's flying gadget accidentally shreds his entire inventory.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,225 +29,222 @@
         ],
         "story_beats": [
           {
-            "headline": "The Demonstration Begins",
-            "speech": "Behold the turbo slicer, guaranteed to chop fifty onions a minute without a single bitter tear dropped!",
+            "headline": "The Grand Unveiling",
+            "speech": "Behold the magnificent culinary hat! It slices juicy tomatoes instantly without dirtying a single kitchen knife.",
             "visual": "robot",
-            "label": "The Contraption",
+            "label": "The Presentation",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby stands proudly next to a whirring brass and copper robot slicer in a bustling open-air market stall filled with purple onions, wearing a stained apron and a wide nervous smile.",
+            "visual_prompt": "Inventor Barnaby wearing a mechanical top hat with metallic blades, standing in a busy market stall while holding a red tomato.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Blades Go Wild",
-            "speech": "Oh dear, the gear ratio slipped on the high-speed setting and now it is targeting everyone's hats!",
+            "headline": "The Assembly Phase",
+            "speech": "Watch carefully as I attach the spring-loaded slicing gears right beside the brass steam valve.",
+            "visual": "ship",
+            "label": "The Build",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby meticulously screwing tiny brass gears onto the brim of his invention in a cluttered market stall.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Mechanical Chaos",
+            "speech": "Oh dear, the steam pressure is rising too fast, and now the entire contraption is hovering!",
             "visual": "signal",
             "label": "The Malfunction",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby chasing his hovering metallic hat as glowing red warning lights blink rapidly on the brass chassis.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Sweet Payoff",
+            "speech": "Grab your plates everyone because fresh tomato slices are raining straight down from the clouds!",
+            "visual": "door",
+            "label": "The Success",
+            "story_beat": "payoff",
+            "visual_prompt": "Smiling market customers holding wooden bowls under a shower of neatly sliced tomatoes falling from Barnaby's airborne hat.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Barnaby needs to prove his wearable tomato-slicer works before the morning market closes.",
+        "decisive_choice": "Barnaby pulls the manual override cord on his competitor's malfunctioning drone.",
+        "resolution": "Flying slices land neatly in hungry customer bowls, creating an instant culinary success.",
+        "visual_bible": {
+          "style": "Bright stop-motion animation aesthetic with detailed textures of brass, felt, and ripe red produce.",
+          "characters": {
+            "Barnaby": "An energetic inventor with wild gray hair, round spectacles, a brown waistcoat, and flour-dusted trousers."
+          },
+          "locations": {
+            "Market Square": "A bustling cobblestone plaza filled with striped canvas awnings, wooden crates, and bustling townsfolk."
+          },
+          "objects": {
+            "Slicing Hat": "A tall brass top hat fitted with spring-loaded steel blades, a steam pressure gauge, and small leather straps."
+          }
+        },
+        "plot_fingerprint": "36b6478a560f8d1763df5ead82dd74d2bd99ac7155153487f0a522bb18932e07"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "4a397a374a9057b67666a64b",
+      "source_sha256": "8cfcd7a7aafc28bb09224f48e0b13b4b58f70b9be5a3625a9b2bb0b1b7195f7f",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-5680a3a6281e8634402f",
+        "title": "The Beacon of Frozen Crag",
+        "hook": "The Hidden Crevasse",
+        "question": "Can the exhausted rescue leader guide his trapped team down before the blizzard destroys their shelter?",
+        "answer": "He uses the emergency pulse signal to bounce a navigation arc off the canyon walls, saving them all.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Hidden Crevasse",
+            "speech": "We cannot wait for the morning light. The eastern shelf is breaking away from the main granite face right now.",
+            "visual": "signal",
+            "label": "Storm Warning",
+            "story_beat": "reveal",
+            "visual_prompt": "A weary human protagonist in a red parka stands on a snowy mountain ridge holding a flashing handheld signal beacon, while dark blizzard clouds churn in the background.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Shelter Doors",
+            "speech": "Stack the emergency crates tightly against the outer rock to block the howling wind before it freezes our batteries.",
+            "visual": "door",
+            "label": "Securing Shelter",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically waves his hands at the smoking robot controller panel while wild spinning blades shoot onion rings through the air toward startled vegetable vendors.",
+            "visual_prompt": "The protagonist pushes a heavy steel equipment door shut against blowing snow at the entrance of a stone alcove, while a teammate grips the frame.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Crystalline Forest",
+            "speech": "If we wire the capacitor to the pine transmitter array, we can bounce the frequency off the lower valley timber.",
+            "visual": "forest",
+            "label": "Circuit Assembly",
+            "story_beat": "mechanism",
+            "visual_prompt": "The protagonist sits inside a dimly lit ice cave, soldering wires onto a glowing circuit board with frozen pine branches visible through the entrance.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Rescue Ship",
+            "speech": "Look at the monitor! The pulse locked onto the rescue chopper's radar. They found our exact frequency.",
+            "visual": "ship",
+            "label": "Safe Extraction",
+            "story_beat": "payoff",
+            "visual_prompt": "An orange rescue helicopter shines a bright spotlight down on the snow-covered ledge where the protagonist waves triumphantly next to a glowing radio beacon.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A sudden whiteout buries the lower descent trail, trapping the team on a collapsing ledge.",
+        "decisive_choice": "Abandon the heavy equipment sled to build a high-frequency directional beacon from remaining radio parts.",
+        "resolution": "The signal cuts through the storm, guiding the rescue chopper safely to their exact coordinates.",
+        "visual_bible": {
+          "style": "Cinematic live-action survival drama with crisp winter lighting and high contrast snow textures.",
+          "characters": {
+            "Protagonist": "A determined human rescue leader in his late thirties with a weathered face, stubble, wearing a bright red mountaineering parka and thermal goggles."
+          },
+          "locations": {
+            "Frozen Crag": "A steep, rocky alpine ridge covered in deep drifts of blue-white snow and jagged granite cliffs."
+          },
+          "objects": {
+            "Handheld Beacon": "A rugged orange electronic cylinder with a pulsing amber LED lens and an extendable steel antenna."
+          }
+        },
+        "plot_fingerprint": "a1c64876203f2cabdc1a19dce055383eaad7428d855e45a8a13190f0c27c90e4"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "f0cad3a1e98c59e49b4ce969",
+      "source_sha256": "524ddac467ea650326aab986483e5f0865a338ce0915761e2791e5a053a375a1",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-708ed07e73c366f15ed9",
+        "title": "The Infinite Pancake Flipper Catastrophe",
+        "hook": "Morning Chaos",
+        "question": "Can an automated breakfast maker survive a rowdy farmers market?",
+        "answer": "Only if its hyperspeed spatula is aimed directly at the mayor's face.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Morning Chaos",
+            "speech": "Behold my magnificent breakfast bot! It whips up golden flapjacks faster than any sleepy vendor in this bustling square.",
+            "visual": "robot",
+            "label": "The Invention",
+            "story_beat": "reveal",
+            "visual_prompt": "Inventor Barnaby wearing a grease-stained apron stands proudly beside a tall copper machine in a busy market stall while holding a wrench.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Batter Overflow",
+            "speech": "Oh no, the temperature dials are melting! Sweet sticky batter is spraying wildly across every single cucumber and tomato crate!",
+            "visual": "signal",
+            "label": "System Failure",
+            "story_beat": "build",
+            "visual_prompt": "Inventor Barnaby frantically points at blinking red warning lights on the copper machine while angry vegetable vendors shake their fists nearby.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
             "headline": "Emergency Override",
-            "speech": "Quickly grab the emergency caramel reservoir lever before the entire morning produce inventory is permanently ruined!",
+            "speech": "I must reroute the main pressure valve immediately before the entire central pavilion collapses under ten tons of dough!",
             "visual": "door",
-            "label": "The Hatch",
+            "label": "The Fix",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby pulls hard on a heavy iron hatch door attached to the side of the machine, releasing thick amber steam that billows across the crowded market square.",
+            "visual_prompt": "Inventor Barnaby dives headfirst into the open maintenance hatch of the rumbling copper machine with tools flying everywhere around him.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Sweet Success",
-            "speech": "Who would have thought that candied crunch makes these flying rings taste like an absolute carnival treat?",
+            "headline": "Sweet Victory",
+            "speech": "Look up everyone! Thousands of fluffy pancakes are floating through the sunny air right into our breakfast plates!",
             "visual": "ship",
-            "label": "The Feast",
+            "label": "The Payoff",
             "story_beat": "payoff",
-            "visual_prompt": "Smiling market shoppers hold up wooden plates piled high with glossy glazed onion rings while Barnaby wipes his brow in relief next to his smoking machine.",
+            "visual_prompt": "Market shoppers wearing wide grins hold up empty plates toward the sky as golden pancakes rain down gently from a hovering copper contraption.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A hyper-speed vegetable chopper loses control and pelts furious shoppers with sliced red onions.",
-        "decisive_choice": "Override the main control panel to vent boiling caramel directly into the slicing blades.",
-        "resolution": "The market crowd happily eats candied onion rings while cheering the bizarre invention.",
+        "central_conflict": "A malfunctioning batter cannon threatens to bury the entire vegetable district under sticky syrup.",
+        "decisive_choice": "Reverse the gear ratio to launch pancakes upward instead of outward.",
+        "resolution": "The market crowd catches a floating canopy of breakfast treats, saving the stalls and winning first prize.",
         "visual_bible": {
-          "style": "vibrant stop-motion claymation aesthetic with rich copper tones and detailed miniature market props",
+          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures and comedic physical acting.",
           "characters": {
-            "Barnaby": "An energetic inventor with frizzy orange hair, smudged round spectacles, a patched canvas apron, and striped trousers."
+            "Barnaby": "An eccentric young inventor with unruly orange hair, smudged goggles, a heavily patched blue apron, and an endlessly hopeful expression."
           },
           "locations": {
-            "MarketSquare": "A sunlit cobblestone town square packed with striped canvas awnings, wooden crates, and bustling townsfolk."
+            "Market Square": "A bustling, sunlit cobblestone plaza packed with striped awnings, wooden crates overflowing with vegetables, and chattering townsfolk."
           },
           "objects": {
-            "SlicerBot": "A clunky brass and iron machine featuring three rotating steel blades, a steam whistle, and a prominent red hazard dial."
+            "copper_machine": "A towering contraption made of gleaming brass pipes, spinning gears, a steam whistle on top, and a large flour hopper.",
+            "wrench": "A heavy, grease-covered iron tool with a slightly bent handle.",
+            "pancake": "A perfectly golden-brown, steaming hot circular treat dripping with golden butter."
           }
         },
-        "plot_fingerprint": "e628d12e20923481b29097a7b73781b7795013939e9f05ec9768b833035ef02a"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "c73d811673d23b472575c109",
-      "source_sha256": "29d0964e1c30505a464b99ae51d0c517a9477395d3d31ed39b51b7e19cab52ff",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-1fbd7418b239f33110a5",
-        "title": "The Weaver's Last Loom",
-        "hook": "Discovery at the Edge",
-        "question": "Can lifelong friends survive a devastating choice between community survival and personal integrity?",
-        "answer": "True friendship withstands the heaviest burdens when honesty replaces protective deception.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "Discovery at the Edge",
-            "speech": "Look closely at the cracked wooden frame. We cannot weave another blanket while this vital cornerstone remains severely broken.",
-            "visual": "forest",
-            "label": "The Hidden Flaw",
-            "story_beat": "reveal",
-            "visual_prompt": "Marta and Silas stand inside the dense winter forest clearing next to a snow-covered wooden shed. Marta wears a heavy green wool cloak and holds a splintered wooden beam, looking fearfully at Silas who wears a brown tunic and points at the structural damage.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Gathering the Threads",
-            "speech": "We must collect every remaining bundle of dyed yarn across the frozen valley before the harsh blizzard completely blocks our mountain paths.",
-            "visual": "door",
-            "label": "Gathering Supplies",
-            "story_beat": "build",
-            "visual_prompt": "Silas and Marta stand outside the heavy oak workshop door during a snowstorm. Silas carries a large woven basket filled with colorful yarn bundles, while Marta pulls the sturdy iron door handle to secure the warm interior against the freezing wind.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Council's Demand",
-            "speech": "The village elders demand an immediate confession about the structural failure before they distribute the emergency winter grain rations to our families.",
-            "visual": "signal",
-            "label": "The Ultimatum",
-            "story_beat": "mechanism",
-            "visual_prompt": "Marta and Silas stand inside the crowded village hall lit by a towering stone fireplace. An elder holds a glowing signal lantern aloft, casting harsh shadows across Marta's distressed face as she steps forward to speak her truth.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A New Foundation",
-            "speech": "Our shared honesty has forged a stronger bond than any ancient tradition, proving that true community survives through mutual trust always.",
-            "visual": "forest",
-            "label": "Renewed Friendship",
-            "story_beat": "payoff",
-            "visual_prompt": "Marta and Silas sit together on a sunlit wooden bench outside the restored village workshop. Both wear bright woolen shawls, smiling warmly at each other while holding a newly woven multi-colored tapestry between their hands under the clear spring sky.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "A severe winter threatens the village, and a faulty heirloom loom must be traded for food, but the trade requires exposing a hidden past.",
-        "decisive_choice": "Marta chooses to confess her accidental damage to the sacred loom rather than let her dearest friend Silas take the historic blame.",
-        "resolution": "Silas forgives Marta, and the villagers pool their remaining wool to help them craft a brand new cooperative tapestry style.",
-        "visual_bible": {
-          "style": "Warm historical realism with rich textures, earthy color palettes, and dramatic cinematic lighting inspired by traditional oil paintings.",
-          "characters": {
-            "Marta": "A middle-aged woman with braided silver-streaked dark hair, determined green eyes, wearing a heavy forest-green wool cloak over a cream linen tunic.",
-            "Silas": "A thoughtful middle-aged man with short curly brown hair, kind hazel eyes, wearing a sturdy leather vest over a rustic brown homespun shirt."
-          },
-          "locations": {
-            "Village Workshop": "A rustic timber-framed building with a stone foundation, frosted glass windows, and a large brick chimney emitting gentle smoke.",
-            "Winter Forest": "A dense grove of snow-laden pine trees with soft white drifts covering the uneven forest floor under an overcast gray sky."
-          },
-          "objects": {
-            "heirloom_loom": "A massive hand-crafted oak loom featuring intricate carved vine patterns along its upright beams and intricate brass tension levers.",
-            "yarn_basket": "A deep circular wicker basket filled tightly with vibrant red, blue, and gold dyed wool threads."
-          }
-        },
-        "plot_fingerprint": "c29b171b5758f712de6bf9a7057d19ecfe7fd41d5a2092e57266fb292275f36f"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "3253c657f77649539fde2bae",
-      "source_sha256": "fda327c97a97716068f2cc9b721de597de74361c96e83e0f1d08c6afa23e2e53",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-1bca8c3299e08147f72e",
-        "title": "The Icebreaker's Final Core",
-        "hook": "The Signal of Distress",
-        "question": "Can the lead engineer sacrifice the station's automated thermal heater to melt the glacier pass and save the trapped scouting rover?",
-        "answer": "Yes, by manually rerouting the geothermal reactor, she trades the station's warmth to open a safe passage for the rover.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Signal of Distress",
-            "speech": "Attention base, the eastern glacier is collapsing around the rover. We are losing thermal connection and structural integrity fast.",
-            "visual": "signal",
-            "label": "Beacon Alert",
-            "story_beat": "reveal",
-            "visual_prompt": "Dr. Vance stands inside the frosty research control room, her breath forming mist in the air, staring at a red blinking distress signal on the central holographic console while holding a heavy insulated wrench.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Constructing the Bypass",
-            "speech": "I must splice the auxiliary power cables directly into the seismic drill to break through the frozen debris wall.",
-            "visual": "robot",
-            "label": "Rerouting Power",
-            "story_beat": "build",
-            "visual_prompt": "Dr. Vance works frantically inside the icy mechanical bay, wearing a heavy parka with fur lining, using soldering tools to connect glowing orange cables to the dormant robotic drill arm.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Freezing Choice",
-            "speech": "If I divert the station's core heat to the drill, the interior will freeze, but the rover will finally have a clear path.",
-            "visual": "door",
-            "label": "Thermal Divert",
-            "story_beat": "mechanism",
-            "visual_prompt": "Dr. Vance pulls a heavy brass emergency lever marked with frost, her face lit by the amber glow of the reactor status panel while heavy steel bulkhead doors seal behind her.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Safe Return",
-            "speech": "The pass is open at last. The rover is crossing the ridge safely into the hangar bay just in time.",
-            "visual": "ship",
-            "label": "Rover Rescue",
-            "story_beat": "payoff",
-            "visual_prompt": "Dr. Vance watches through the frosted observation window as the scarred armored scouting rover rolls safely into the brightly lit garage, illuminated by amber searchlights against the white snow.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "A sudden glacial shift traps the automated scouting rover beyond the ridge while draining the main research station's backup thermal core.",
-        "decisive_choice": "Dr. Vance manually disables the station's primary heating loops to power the seismic drill and shatter the ice bridge.",
-        "resolution": "The rover successfully crosses the cleared crevasse into the safety hangar as the interior temperature drops to near freezing.",
-        "visual_bible": {
-          "style": "Cinematic gritty sci-fi realism with realistic cold-weather lighting, visible breath vapor, frost-covered metallic textures, and an amber-and-ice-blue color palette.",
-          "characters": {
-            "Dr. Vance": "A resilient arctic engineer in her late thirties with weathered skin, piercing blue eyes, wearing a heavy olive-green parka with a thick faux-fur hood and utility harness."
-          },
-          "locations": {
-            "Research Station Interior": "A cramped, utilitarian facility featuring exposed steel pipes, frosted glass windows, blinking indicator lights, and exposed wiring ducts.",
-            "Glacier Ridge": "A vast, desolate expanse of jagged blue-white ice under a twilight polar sky with deep chasms and blowing snow."
-          },
-          "objects": {
-            "Holographic Console": "A glowing cyan display table showing topographic elevation maps and blinking telemetry readouts.",
-            "Seismic Drill": "A heavy, industrial robotic rig constructed of yellow-painted steel with diamond-tipped carbide teeth and hydraulic pistons."
-          }
-        },
-        "plot_fingerprint": "fbca5ebac60325e59a24744053f34cb0ea8db712efcceab49767afd1dbba9486"
+        "plot_fingerprint": "24d421f8b33a333ec7423755dde1b3748cfe8470d9d8d96262eb6143fff22c09"
       },
       "approved": false
     }
