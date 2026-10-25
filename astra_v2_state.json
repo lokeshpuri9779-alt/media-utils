@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 4,
-  "confirmed_today": 3,
-  "last_attempt_at": "2026-10-25T19:17:52.997433+00:00",
+  "attempts": 5,
+  "confirmed_today": 4,
+  "last_attempt_at": "2026-10-25T19:32:53.863267+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -3094,16 +3094,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "Zz2pnXgnqhE": {
-      "content_id": "rayvan-forge-f8d1e9d3d604d196",
+    },
+    "rayvan-forge-f8d1e9d3d604d196": {
+      "video_id": "Zz2pnXgnqhE",
+      "confirmed_at": "2026-10-25T19:31:33.706100+00:00",
       "title": "The Panda and the Missing Ingredient",
-      "day": "2026-10-26",
-      "uploaded_at": "2026-10-25T19:17:55.127529+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-25T19:17:55.127529+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "a3cf60699bf393a21d2eaed3f10847e68420b1a36db4ebb58ac5d49218a29d3f",
       "story_beats": [
@@ -3144,16 +3142,67 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "j2VDFw-uM84": {
+      "content_id": "rayvan-anthology-2d367521db3c2a50",
+      "title": "The Otter's Floating Library",
+      "day": "2026-10-26",
+      "uploaded_at": "2026-10-25T19:32:56.302395+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "",
+      "story_beats": [
+        {
+          "headline": "THE LIBRARY DRIFTED",
+          "speech": "An otter saw the village library floating away on a wooden raft.",
+          "visual": "forest",
+          "label": "RIVER TROUBLE",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A TURTLE BRIDGE",
+          "speech": "The otter asked turtles to make a path across the river.",
+          "visual": "forest",
+          "label": "TEAMWORK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "BOOKS IN LANTERNS",
+          "speech": "The librarian had protected every book inside sealed lantern boxes.",
+          "visual": "signal",
+          "label": "SAFE BOOKS",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A FLOATING FESTIVAL",
+          "speech": "The raft became a reading room and the village celebrated.",
+          "visual": "ship",
+          "label": "STORY TIME",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-25T19:17:11.278251+00:00",
+  "last_preflight_at": "2026-10-25T19:31:33.249688+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-25T19:17:55.437694+00:00",
+    "at": "2026-10-25T19:32:56.590354+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -7225,10 +7274,57 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-anthology-2d367521db3c2a50": {
+      "at": "2026-10-25T19:32:53.863252+00:00",
+      "title": "The Otter's Floating Library",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "",
+      "story_beats": [
+        {
+          "headline": "THE LIBRARY DRIFTED",
+          "speech": "An otter saw the village library floating away on a wooden raft.",
+          "visual": "forest",
+          "label": "RIVER TROUBLE",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A TURTLE BRIDGE",
+          "speech": "The otter asked turtles to make a path across the river.",
+          "visual": "forest",
+          "label": "TEAMWORK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "BOOKS IN LANTERNS",
+          "speech": "The librarian had protected every book inside sealed lantern boxes.",
+          "visual": "signal",
+          "label": "SAFE BOOKS",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A FLOATING FESTIVAL",
+          "speech": "The raft became a reading room and the village celebrated.",
+          "visual": "ship",
+          "label": "STORY TIME",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-25T19:17:55.437640+00:00",
+    "at": "2026-10-25T19:32:56.590295+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -7239,21 +7335,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-25T19:17:55.437685+00:00",
+    "at": "2026-10-25T19:32:56.590344+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-25T19:17:36.229348+00:00",
+    "at": "2026-10-25T19:32:36.276843+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-f8d1e9d3d604d196",
-    "video_url": "https://www.youtube.com/watch?v=Zz2pnXgnqhE",
+    "content_id": "rayvan-anthology-2d367521db3c2a50",
+    "video_url": "https://www.youtube.com/watch?v=j2VDFw-uM84",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-25T19:17:55.437566+00:00",
+    "at": "2026-10-25T19:32:56.590220+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -7265,7 +7361,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-25T19:17:55.437636+00:00",
+    "at": "2026-10-25T19:32:56.590291+00:00",
     "collection_status": "missing_diagnostics",
     "publish_step": "success",
     "counters": {},
