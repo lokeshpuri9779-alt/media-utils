@@ -1,0 +1,26 @@
+name: ASTRA Visual Pack Expiry Watch
+
+# Read-only; fails before the pinned artifact expires. No paid storage,
+# workflow mutation, media publishing, or secret exposure.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 3 * * *'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check pinned production artwork expiration
+        run: python tools/astra_asset_pack_watch.py
