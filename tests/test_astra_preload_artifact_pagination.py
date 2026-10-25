@@ -82,9 +82,14 @@ class QueueFreshnessTests(unittest.TestCase):
         self.assertFalse(preload_queue._artifact_fresh({"created_at": "invalid"}, 48, now))
 
 
-@patch.dict(os.environ, {"ASTRA_MIN_STUDIO_VERSION": "", "ASTRA_REQUIRE_STUDIO_PRELOAD": "0"})
+@patch.dict(os.environ, {"ASTRA_MIN_STUDIO_VERSION": "", "ASTRA_REQUIRE_STUDIO_PRELOAD": "0",
+                         "ASTRA_UNIFIED_STORY_ENGINE": "0"})
 class QueueFormatSelectionTests(unittest.TestCase):
-    """Shorts win during cooldown; long-form wins when its cadence is due."""
+    """Mock-archive queue selection only; real Studio eligibility is tested elsewhere.
+
+    These synthetic candidates are deliberately not real renderable stories.
+    Never disable the unified Studio production gate outside this test fixture.
+    """
 
     @patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/repo", "ASTRA_SERIES_PUBLICATION": "0", "ASTRA_PRELOAD_MAX_AGE_HOURS": "0"})
     def test_cooling_long_is_skipped_and_short_is_selected(self):
