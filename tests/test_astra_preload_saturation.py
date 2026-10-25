@@ -75,6 +75,19 @@ class SaturationPolicyTests(unittest.TestCase):
         self.assertFalse(decision["skip"])
         self.assertIn("TimeoutError", decision["reason"])
 
+    def test_saturation_audits_queue_before_render_excludes_queued_ids(self):
+        # A real scheduled run previously logged preflight_eligible=0 with
+        # 189 available artifacts: queued IDs were prematurely excluded.
+        source = (Path(__file__).resolve().parents[1] /
+                  "astra_v2" / "preload_worker.py").read_text(encoding="utf-8")
+        audit = source.index("saturation = scheduled_shorts_skip(excluded_ids=excluded)")
+        skip = source.index('if saturation["skip"]:')
+        dedup = source.index('excluded.update(str(item["name"])')
+        renderer = source.index('candidate = make_candidate(video, excluded, set())')
+        self.assertLess(audit, skip)
+        self.assertLess(skip, dedup)
+        self.assertLess(dedup, renderer)
+
     def test_sampled_video_is_still_not_called_publisher_verified(self):
         decision = self.decide()
         self.assertIn("not_publisher_confirmation", decision["evidence"])

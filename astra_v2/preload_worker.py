@@ -73,16 +73,6 @@ def main():
     except Exception as exc:
         # Publisher still enforces the authoritative live duplicate check.
         print("ASTRA_PRELOAD_LIVE_YOUTUBE_UNAVAILABLE=" + type(exc).__name__)
-    # Reuse the already-fetched artifact listing: avoid a second GitHub API call.
-    excluded.update(str(item["name"])[len("astra-preloaded-"):] for item in usable)
-    if serialized:
-        for number in range(1, 5):
-            cid = f"rayvan-season-01-episode-{number:02d}"
-            queued = any(str(a["name"]) == "astra-preloaded-" + cid for a in queue)
-            print("ASTRA_SERIES_ELIGIBILITY=" + json.dumps({
-                "episode": number, "published": cid in state.get("published", {}),
-                "queued_artifact": queued, "excluded": cid in excluded,
-            }))
     # Only *scheduled* non-canary Shorts lanes can skip an expensive render
     # when the recent buffer meets the target and a bounded sample passes
     # ZIP hash and current independent publication policy. A raw artifact
@@ -97,6 +87,21 @@ def main():
             "publisher_approval": False,
         }, sort_keys=True))
         return
+
+    # Exclude queued content only AFTER evaluating the still-usable buffer.
+    # Previously this exclusion happened before the saturation audit, making
+    # every existing artifact disappear from its candidate set and returning
+    # preflight_eligible=0 even for healthy recent packages.
+    # The render itself still excludes every queued ID: no duplicate episodes.
+    excluded.update(str(item["name"])[len("astra-preloaded-"):] for item in usable)
+    if serialized:
+        for number in range(1, 5):
+            cid = f"rayvan-season-01-episode-{number:02d}"
+            queued = any(str(a["name"]) == "astra-preloaded-" + cid for a in queue)
+            print("ASTRA_SERIES_ELIGIBILITY=" + json.dumps({
+                "episode": number, "published": cid in state.get("published", {}),
+                "queued_artifact": queued, "excluded": cid in excluded,
+            }))
 
     # Optional immutable reviewed-art handoff; never enables publishing or
     # chooses/approves stories. Missing or corrupted receipts fail closed.
