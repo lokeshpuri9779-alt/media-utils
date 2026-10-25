@@ -174,7 +174,7 @@ def _door(draw, open_amount):
 
 
 def _draw_mara_face(draw, x, y, t, *, emotion="curious", gaze=0,
-                    expression_strength=1.0):
+                    expression_strength=1.0, head_yaw=0.0):
     """Readable brows, eyes and mouth without changing Mara's head design.
 
     Emotions are author-selected for each narrated action; animation is
@@ -198,50 +198,69 @@ def _draw_mara_face(draw, x, y, t, *, emotion="curious", gaze=0,
         raise CreativeReject("Unsupported authored Mara emotion or gaze")
     if not isinstance(expression_strength,(int,float)) or not math.isfinite(expression_strength) or not 0<=expression_strength<=1:
         raise CreativeReject("Unsupported facial expression intensity")
+    if not isinstance(head_yaw,(int,float)) or not math.isfinite(head_yaw) or abs(head_yaw)>.75:
+        raise CreativeReject("Unreviewed human face orientation")
     raise_brow, slope, mouth = moods[emotion]
+    # A quarter-turn compresses the visible eye spacing and moves the facial
+    # center toward the silhouette's near cheek, without changing identity.
+    face_x = x+round(18*head_yaw)
+    compression = 1-.53*abs(head_yaw)
     raise_brow=round(raise_brow*expression_strength)
     slope=round(slope*expression_strength)
     eye_y = y - 170
     blink = (t % 3.4) < .105
     eye_shift = int(gaze * 5 + 2 * math.sin(t * .68))
     for dx in (-28, 30):
-        ex=x+dx
+        ex=face_x+round(dx*compression)
         if blink:
             _line(draw, ((ex-12, eye_y), (ex+11, eye_y)), INK, 4)
         else:
-            draw.ellipse((ex-12, eye_y-12, ex+12, eye_y+11),
+            eye_radius=round(12-5*abs(head_yaw)*(1 if dx*head_yaw<0 else .25))
+            draw.ellipse((ex-eye_radius, eye_y-12, ex+eye_radius, eye_y+11),
                          fill=(245, 244, 239), outline=HAIR, width=2)
-            px=ex+eye_shift
+            px=ex+round(eye_shift*compression)
             draw.ellipse((px-6, eye_y-8, px+6, eye_y+8), fill=INK)
             draw.ellipse((px-3, eye_y-6, px, eye_y-3), fill=(235, 235, 226))
         # Brow angles read at normal 1080x1920 viewing resolution.
         offset=raise_brow+(3 if dx<0 and emotion=="suspicious" else 0)
         draw.line(((ex-15, eye_y-24-offset-slope),
                    (ex+15, eye_y-24-offset+slope)), fill=HAIR, width=7)
+    # The off-center nose/cheek gives a legible three-quarter view at mobile
+    # resolution. In the front view these extra strokes are absent.
+    if abs(head_yaw)>.18:
+        nx=face_x+round(14*head_yaw)
+        draw.line(((nx,y-158),(nx+round(12*head_yaw),y-139),
+                   (nx-3,y-136)),fill=(161,91,91),width=4,joint="curve")
+        cheek_x=face_x-round(31*head_yaw)
+        draw.arc((cheek_x-9,y-138,cheek_x+13,y-121),10,95,
+                 fill=(209,132,112),width=3)
+    mx=face_x+round(5*head_yaw)
     if mouth=="open":
         opening=round(3+6*expression_strength+2*math.sin(t*2.4)*expression_strength)
-        draw.ellipse((x-12, y-123-opening, x+12, y-109+opening),
+        draw.ellipse((mx-12, y-123-opening, mx+12, y-109+opening),
                      fill=(75, 40, 54), outline=(145, 80, 87), width=2)
     elif mouth=="frown":
-        draw.arc((x-24,y-116,x+25,y-85),178,354,fill=(111,62,70),width=6)
+        draw.arc((mx-24,y-116,mx+25,y-85),178,354,fill=(111,62,70),width=6)
     elif mouth in ("flat", "line"):
-        _line(draw, ((x-18,y-109),(x+18,y-109+(3 if mouth=="flat" else 0))),
+        _line(draw, ((mx-18,y-109),(mx+18,y-109+(3 if mouth=="flat" else 0))),
               (111,62,70), 5)
     elif mouth in ("wry","smirk"):
-        _line(draw, ((x-18,y-117),(x+18,y-109 if mouth=="smirk" else y-115)),
+        _line(draw, ((mx-18,y-117),(mx+18,y-109 if mouth=="smirk" else y-115)),
               (111,62,70), 5)
     else:
-        draw.arc((x-25,y-139,x+28,y-106),0,178,fill=(111,62,70),width=6)
+        draw.arc((mx-25,y-139,mx+28,y-106),0,178,fill=(111,62,70),width=6)
 
 
 def _mara(draw, x, y, t, *, reaching=False, alarm=False, running=False,
           carrying=False, emotion="curious", gaze=0, gesture="consider",
-          lean=0.0, expression_strength=1.0):
+          lean=0.0, expression_strength=1.0, head_yaw=0.0):
     """Persistent character with two-joint limbs and authored facial acting."""
     if not math.isfinite(t):
         raise CreativeReject("Actor animation time must be finite")
     if not isinstance(lean,(int,float)) or not math.isfinite(lean) or abs(lean)>24:
         raise CreativeReject("Unsupported torso lean")
+    if not isinstance(head_yaw,(int,float)) or not math.isfinite(head_yaw) or abs(head_yaw)>.75:
+        raise CreativeReject("Unsupported head direction")
     if gesture not in ("consider", "protect", "open"):
         raise CreativeReject("Unsupported actor hand gesture")
     from astra_v2.human_skeletal_rig import solve_mara_pose, HIP_L, HIP_R
@@ -279,13 +298,23 @@ def _mara(draw, x, y, t, *, reaching=False, alarm=False, running=False,
     # Fixed outfit and hairstyle preserve serialized Mara continuity.
     draw.ellipse((head_x-113,y-220,head_x-39,y-85),fill=HAIR)
     draw.ellipse((head_x-87,y-282,head_x+91,y-71),fill=HAIR,outline=INK,width=8)
-    draw.ellipse((head_x-66,y-253,head_x+70,y-94),fill=SKIN,outline=INK,width=6)
+    # Turn toward the prop: visible skin narrows and shifts under unchanged
+    # hair volume, allowing quarter-profile looks without a 3D head mesh.
+    face_narrow=round(11*abs(head_yaw))
+    face_shift=round(7*head_yaw)
+    draw.ellipse((head_x-66+face_narrow+face_shift,y-253,
+                  head_x+70-face_narrow+face_shift,y-94),
+                 fill=SKIN,outline=INK,width=6)
+    if abs(head_yaw)>.18:
+        ear_x=head_x+round(62*(1 if head_yaw>0 else -1))
+        draw.ellipse((ear_x-10,y-177,ear_x+10,y-146),
+                     fill=SKIN,outline=(145,83,89),width=3)
     draw.polygon(((head_x-75,y-251),(head_x-11,y-279),(head_x+89,y-218),(head_x+57,y-248),
                   (head_x+19,y-228),(head_x-72,y-208)), fill=HAIR)
     draw.arc((head_x-74,y-271,head_x+79,y-130),204,295,fill=(91,75,96),width=5)
     draw.arc((head_x-56,y-246,head_x+57,y-112),180,242,fill=(232,174,140),width=4)
     _draw_mara_face(draw,head_x,y,t,emotion=emotion,gaze=gaze,
-                    expression_strength=expression_strength)
+                    expression_strength=expression_strength,head_yaw=head_yaw)
     draw.polygon(((shoulder_x-51,y-80),(shoulder_x+49,y-80),
                   (x+86,y+210),(x-91,y+210)),
                  fill=JACKET,outline=INK,width=8)
@@ -556,6 +585,11 @@ def draw_human_scene(image, shot, t):
         cue = acting_cue(action,t,float(shot.get("duration") or 12),double=is_double)
         opts["lean"]=cue.lean
         opts["expression_strength"]=cue.expression_strength
+        # Story-directed quarter-profile viewing is driven by narration time,
+        # not the short local reach-motion clock.
+        from astra_v2.human_story_composition import view_yaw
+        opts["head_yaw"]=view_yaw(action,t,float(shot.get("duration") or 12),
+                                  double=is_double)
         walking_offset=round(35*state.movement)
         if opts.get("reaching"):
             opts["reaching"] = state.attention > .14 and state.aftermath < .95
