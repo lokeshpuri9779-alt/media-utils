@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-25",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 37,
-  "confirmed_today": 36,
-  "last_attempt_at": "2026-10-25T16:44:52.445998+00:00",
+  "attempts": 38,
+  "confirmed_today": 37,
+  "last_attempt_at": "2026-10-25T16:55:46.952780+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -2506,16 +2506,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "tCvpKS5CxWM": {
-      "content_id": "rayvan-forge-3def7e22c2ebe437",
+    },
+    "rayvan-forge-3def7e22c2ebe437": {
+      "video_id": "tCvpKS5CxWM",
+      "confirmed_at": "2026-10-25T16:55:04.691125+00:00",
       "title": "The Deer and the Glass Lantern",
-      "day": "2026-10-25",
-      "uploaded_at": "2026-10-25T16:44:53.872125+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-25T16:44:53.872125+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "b33ade0594efa400041d1426add315f275a6fe8d9ea72159c0436243183a57bd",
       "story_beats": [
@@ -2556,16 +2554,67 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "9kr_GWhtHMk": {
+      "content_id": "rayvan-forge-105631468ff5afac",
+      "title": "The Lynx and the Garden Thief",
+      "day": "2026-10-25",
+      "uploaded_at": "2026-10-25T16:55:49.051207+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "17c718ae4b5b1205a0d209d24ff3e1c472cf13e91b218d3b85913edf63794533",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "A lynx found rows of carrots missing from the school garden each morning.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "She watched for thieves all night but saw only shadows moving near the fence.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "At sunrise she discovered rabbits entering through a gap behind the compost heap.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "The students built a rabbit-safe barrier and planted a separate patch for wildlife.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-25T16:44:15.418251+00:00",
+  "last_preflight_at": "2026-10-25T16:55:04.229362+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-25T16:44:54.058674+00:00",
+    "at": "2026-10-25T16:55:49.397929+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -6073,10 +6122,57 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-105631468ff5afac": {
+      "at": "2026-10-25T16:55:46.952763+00:00",
+      "title": "The Lynx and the Garden Thief",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "17c718ae4b5b1205a0d209d24ff3e1c472cf13e91b218d3b85913edf63794533",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "A lynx found rows of carrots missing from the school garden each morning.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "She watched for thieves all night but saw only shadows moving near the fence.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "At sunrise she discovered rabbits entering through a gap behind the compost heap.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "The students built a rabbit-safe barrier and planted a separate patch for wildlife.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-25T16:44:54.058636+00:00",
+    "at": "2026-10-25T16:55:49.397871+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -6087,21 +6183,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-25T16:44:54.058668+00:00",
+    "at": "2026-10-25T16:55:49.397919+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-25T16:44:39.319370+00:00",
+    "at": "2026-10-25T16:55:28.139217+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-3def7e22c2ebe437",
-    "video_url": "https://www.youtube.com/watch?v=tCvpKS5CxWM",
+    "content_id": "rayvan-forge-105631468ff5afac",
+    "video_url": "https://www.youtube.com/watch?v=9kr_GWhtHMk",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-25T16:44:54.058588+00:00",
+    "at": "2026-10-25T16:55:49.397799+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -6113,7 +6209,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-25T16:44:54.058634+00:00",
+    "at": "2026-10-25T16:55:49.397867+00:00",
     "collection_status": "missing_diagnostics",
     "publish_step": "success",
     "counters": {},
