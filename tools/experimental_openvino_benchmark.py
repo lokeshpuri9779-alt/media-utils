@@ -56,6 +56,14 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
                                  for frame in frames[-5:]]
         if isinstance(exc, AttributeError):
             report["missing_attribute"] = getattr(exc, "name", None)
+        if isinstance(exc, ValueError):
+            # This isolated job passes no credentials to model loading; preserve a
+            # bounded diagnostic without URLs, home paths or multiline content.
+            import re
+            message = str(exc).splitlines()[0][:350]
+            message = re.sub(r"https?://\\S+", "[url]", message)
+            message = re.sub(r"/(?:home|tmp|opt)/\\S+", "[path]", message)
+            report["value_error_detail"] = message
     finally:
         report["elapsed_seconds"] = round(time.monotonic() - started, 2)
         report["peak_rss_kib"] = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
