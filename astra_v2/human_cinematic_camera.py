@@ -34,6 +34,35 @@ FOCUS = {
 }
 FRAME = (1080,1920)
 
+# Directorial shot language, not another generic push applied identically.
+# Wide establishes geography, two-shot holds both versions of Mara, and
+# insert/reaction profiles deliberately favor scene objects or expressions.
+SHOT_STYLES = {
+    "discover_radio": "establishing",
+    "trace_cable": "detail",
+    "hear_warning": "reaction",
+    "flee_door": "tracking",
+    "guard_knocking_door": "reaction",
+    "inspect_generator_clue": "detail",
+    "inspect_future_photograph": "detail",
+    "stop_stranger_switch": "tracking",
+    "survey_dead_city": "establishing",
+    "inspect_reverse_clock": "detail",
+    "study_altered_photographs": "detail",
+    "confront_mara_double": "two_shot",
+    "face_duplicate_at_countdown": "two_shot",
+    "warn_parallel_cities": "two_shot",
+    "split_glass_key": "detail",
+    "seal_and_reveal_sea_door": "establishing",
+}
+LENSES = {
+    "establishing": (1.009,1.046),
+    "detail": (1.048,1.135),
+    "reaction": (1.032,1.105),
+    "tracking": (1.016,1.074),
+    "two_shot": (1.008,1.052),
+}
+
 
 def _ease(progress):
     x = max(0.0,min(1.0,float(progress)))
@@ -47,15 +76,25 @@ def camera_box(action, t, duration):
     if not all(math.isfinite(v) for v in (t,duration)) or t < 0 or duration <= 0:
         raise ValueError("Invalid human camera clock")
     progress = _ease(t/duration)
-    # Slow deliberate push rather than global pulsating zoom.
-    zoom = 1.017 + .071*progress
+    # Style-specific but continuous focus language. Slightly stronger detail
+    # shots contrast with wide/two-character compositions, with no cut that
+    # could appear as a flash in narration-driven Shorts.
+    style = SHOT_STYLES[action]
+    start_zoom,end_zoom = LENSES[style]
+    zoom = start_zoom + (end_zoom-start_zoom)*progress
     cropw = round(FRAME[0]/zoom)
     croph = round(FRAME[1]/zoom)
     fx,fy = FOCUS[action]
     # A gentler pan starts near the original center and favors scene objects
     # later in the shot. Fixed profiles are frame-stable and reproducible.
-    center_x = FRAME[0]//2 + round((fx-FRAME[0]//2)*(.42+.58*progress))
-    center_y = FRAME[1]//2 + round((fy-FRAME[1]//2)*(.42+.58*progress))
+    # Keep wide/two-shots centered so neither participant is cropped.
+    # Detail/reaction profiles deliberately move attention toward key props.
+    focus_weight = {"establishing":.28,"two_shot":.38,
+                    "tracking":.56,"reaction":.83,"detail":1.0}[style]
+    center_x = FRAME[0]//2 + round((fx-FRAME[0]//2)*
+                                focus_weight*(.42+.58*progress))
+    center_y = FRAME[1]//2 + round((fy-FRAME[1]//2)*
+                                focus_weight*(.42+.58*progress))
     left = min(FRAME[0]-cropw,max(0,round(center_x-cropw/2)))
     top = min(FRAME[1]-croph,max(0,round(center_y-croph/2)))
     return (left,top,left+cropw,top+croph)
