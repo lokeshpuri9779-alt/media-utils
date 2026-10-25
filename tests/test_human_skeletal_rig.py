@@ -45,6 +45,18 @@ class KinematicMaraRigTests(unittest.TestCase):
                         self.assertAlmostEqual(math.dist(start,mid),l1,delta=.1)
                         self.assertAlmostEqual(math.dist(mid,end),l2,delta=.8)
 
+    def test_standing_knees_remain_proportioned_near_the_ankle_line(self):
+        # Regression for the first full-render prototype: overly long calf
+        # bones forced extreme horizontal knee bowing on a stationary actor.
+        for t in (.0,.7,1.5,3.2):
+            standing=solve_mara_pose(t,gesture="consider")
+            for hip,knee in ((HIP_L,standing.left_knee),
+                             (HIP_R,standing.right_knee)):
+                self.assertLess(abs(knee[0]-hip[0]),62,
+                                "Standing knee bows outward unnaturally")
+                self.assertGreater(knee[1],hip[1]+25)
+                self.assertLess(knee[1],338)
+
     def test_rig_uses_continuous_adjacent_30fps_joint_positions(self):
         for opts in (
             {"reaching":True},
