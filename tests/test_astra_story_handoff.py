@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import importlib.util
 import os
 import tempfile
 import unittest
@@ -12,6 +13,13 @@ from astra_v2.anthology_stories import catalog as anthology_catalog
 from astra_v2.publication_quality import publication_rejection
 from astra_v2.story_handoff import approved_story_context
 from astra_v2.preload_queue import prepare
+
+
+# Fast CI intentionally runs without the media runtime; the dedicated
+# readiness workflow installs these pinned dependencies and executes both
+# publication-gate tests against the real Studio renderer.
+STUDIO_DEPS_AVAILABLE = all(importlib.util.find_spec(name) is not None
+                            for name in ("PIL", "numpy", "httpx", "imageio_ffmpeg"))
 
 
 class StoryHandoffTests(unittest.TestCase):
@@ -30,6 +38,7 @@ class StoryHandoffTests(unittest.TestCase):
         self.assertTrue(source["story_beats"][0]["visual"],
                         "Handoff should never mutate the approved source")
 
+    @unittest.skipUnless(STUDIO_DEPS_AVAILABLE, "Studio dependencies checked in readiness CI")
     @patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"})
     def test_real_story_survives_serialized_archive_and_publisher_gate(self):
         source = self._story()
