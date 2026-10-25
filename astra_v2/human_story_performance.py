@@ -1,4 +1,4 @@
-"""Story-specific CPU-animated human actor for The Tomorrow Signal pilot.
+"""Story-specific CPU-animated human performances for The Tomorrow Signal.
 
 This is a bounded, original 2D character performance, not generic clipart,
 real-person imagery, neural video, or proof of general-purpose human animation.
@@ -13,12 +13,20 @@ from PIL import ImageDraw
 from astra_errors import CreativeReject
 
 PILOT_ID = "rayvan-season-01-episode-01"
+EPISODE_TWO_ID = "rayvan-season-01-episode-02"
 ACTIONS = (
     "discover_radio",
     "trace_cable",
     "hear_warning",
     "flee_door",
 )
+EPISODE_TWO_ACTIONS = (
+    "guard_knocking_door",
+    "inspect_generator_clue",
+    "inspect_future_photograph",
+    "stop_stranger_switch",
+)
+EPISODE_ACTIONS = {PILOT_ID: ACTIONS, EPISODE_TWO_ID: EPISODE_TWO_ACTIONS}
 INK = (24, 34, 49)
 SKIN = (198, 142, 111)
 HAIR = (42, 37, 51)
@@ -29,31 +37,42 @@ GOLD = (249, 190, 92)
 
 
 def validate_human_scene(shot):
-    """Only authored pilot beats can use this exact four-action character grammar."""
-    if shot.get("story_visual_seed") != PILOT_ID:
+    """Permit only explicitly storyboarded actions in two known serialized episodes."""
+    story_id = shot.get("story_visual_seed")
+    allowed = EPISODE_ACTIONS.get(story_id)
+    if allowed is None:
         raise CreativeReject("Human performer not approved for this story identity")
     if shot.get("story_human_actor") != "mara":
         raise CreativeReject("Unknown human actor; no procedural fallback")
     action = shot.get("story_human_action")
-    if action not in ACTIONS:
-        raise CreativeReject("Unrenderable human action: " + str(action))
+    if action not in allowed:
+        raise CreativeReject("Unrenderable human action for this episode: " + str(action))
     if shot.get("story_cast"):
-        raise CreativeReject("Human pilot does not support an animal cast")
+        raise CreativeReject("Human episode does not support an animal cast")
     narration = str(shot.get("speech") or "").lower()
     if not narration.strip():
         raise CreativeReject("Missing narrated human action")
-    if action in ("discover_radio", "trace_cable") and "radio" not in narration:
-        raise CreativeReject("Radio action lacks a narrated radio")
-    if action == "hear_warning" and not any(word in narration for word in ("voice", "countdown", "blackout")):
-        raise CreativeReject("Warning scene lacks a narrated warning")
-    if action == "flee_door" and not any(word in narration for word in ("door", "stairs")):
-        raise CreativeReject("Escape scene has no door or stairs")
-    visual = str(shot.get("visual") or "").lower()
-    expected = "signal" if action in ("discover_radio", "trace_cable") else "door"
-    if visual != expected:
-        raise CreativeReject("Pilot action requires authored " + expected + " scene")
+    if story_id == PILOT_ID:
+        if action in ("discover_radio", "trace_cable") and "radio" not in narration:
+            raise CreativeReject("Radio action lacks a narrated radio")
+        if action == "hear_warning" and not any(word in narration for word in ("voice", "countdown", "blackout")):
+            raise CreativeReject("Warning scene lacks a narrated warning")
+        if action == "flee_door" and not any(word in narration for word in ("door", "stairs")):
+            raise CreativeReject("Escape scene has no door or stairs")
+        expected = "signal" if action in ("discover_radio", "trace_cable") else "door"
+    else:
+        required_terms = {
+            "guard_knocking_door": ("knocked", "door"),
+            "inspect_generator_clue": ("generator", "notebook"),
+            "inspect_future_photograph": ("photograph", "stranger", "key"),
+            "stop_stranger_switch": ("stranger", "switch", "lights"),
+        }
+        if not all(term in narration for term in required_terms[action]):
+            raise CreativeReject("Episode 2 actor action does not match narrated event")
+        expected = "door"
+    if str(shot.get("visual") or "").lower() != expected:
+        raise CreativeReject("Human action requires authored " + expected + " visual")
     return "human"
-
 
 def _line(draw, coordinates, color=INK, width=12):
     draw.line(coordinates, fill=color, width=width, joint="curve")
@@ -144,6 +163,81 @@ def _mara(draw, x, y, t, *, reaching=False, alarm=False, running=False, carrying
         draw.ellipse((hx-17,hy-17,hx+17,hy+17),fill=SKIN,outline=INK,width=3)
 
 
+def _generator(draw, t):
+    """Stationary emergency generator; toggling switch is a separate later event."""
+    draw.rounded_rectangle((650,945,973,1159),radius=25,
+                           fill=(81,91,103),outline=(204,181,130),width=9)
+    draw.rectangle((710,986,891,1046),fill=(20,37,54),outline=(119,167,179),width=5)
+    for k in range(5):
+        x=729+k*30
+        draw.line(((x,999),(x,1035)),fill=(77,204,191),width=5)
+    draw.ellipse((711,1103,752,1141),fill=(193,164,114))
+    draw.ellipse((858,1103,899,1141),fill=(193,164,114))
+    draw.line(((918,971),(935,925)),fill=(205,201,191),width=12)
+    draw.ellipse((924,914,946,936),fill=(238,190,92))
+
+
+def _notebook(draw, t):
+    """Close foreground notebook, carrying the repeated mark."""
+    x=280+int(4*math.sin(t*2.3))
+    y=1080
+    draw.polygon(((x,y),(x+230,y-14),(x+248,y+106),(x+10,y+128)),
+                 fill=(188,161,118),outline=INK,width=7)
+    draw.polygon(((x+20,y+15),(x+218,y+2),(x+230,y+85),(x+30,y+105)),
+                 fill=(230,222,194))
+    # Shared glyph from the generator switch, a diamond with a divider.
+    draw.polygon(((x+125,y+32),(x+151,y+59),(x+125,y+86),(x+99,y+59)),
+                 outline=(65,109,131),width=6)
+    _line(draw,((x+102,y+60),(x+148,y+60)),(65,109,131),4)
+
+
+def _stranger(draw, x, y, t, *, touching_switch=False):
+    """Distinct stranger silhouette; do not invent the missing brother's appearance."""
+    bob=int(5*math.sin(t*1.9))
+    y+=bob
+    draw.ellipse((x-77,y-208,x+77,y-66),fill=(85,86,114),outline=INK,width=7)
+    draw.ellipse((x-62,y-179,x+62,y-83),fill=(68,63,89))
+    draw.polygon(((x-77,y-79),(x+75,y-79),(x+107,y+226),(x-110,y+226)),
+                 fill=(93,75,114),outline=INK,width=8)
+    draw.polygon(((x-81,y-95),(x+81,y-95),(x+59,y-235),(x-62,y-235)),
+                 fill=(48,44,69),outline=INK,width=5)
+    _line(draw,((x-74,y-40),(x-131,y+155)),(93,75,114),35)
+    hand=(x+156,y-3) if touching_switch else (x+125,y+112)
+    _line(draw,((x+73,y-38),hand),(93,75,114),34)
+    draw.ellipse((hand[0]-15,hand[1]-15,hand[0]+15,hand[1]+15),
+                 fill=(159,121,118),outline=INK,width=3)
+    _line(draw,((x-43,y+215),(x-59,y+346)),PANTS,35)
+    _line(draw,((x+42,y+215),(x+64,y+346)),PANTS,35)
+
+
+def _future_photograph(draw):
+    """The future, Mara and her brother are depicted only *inside* a dated photo."""
+    draw.rounded_rectangle((530,780,944,1130),radius=14,
+                           fill=(219,212,191),outline=INK,width=10)
+    draw.rectangle((563,816,914,1067),fill=(86,113,131))
+    # Silhouettes within the picture, not extra live actors.
+    for x,shade in ((650,(63,57,69)),(807,(86,73,94))):
+        draw.ellipse((x-33,855,x+33,921),fill=shade)
+        draw.polygon(((x-53,916),(x+53,916),(x+69,1025),(x-67,1025)),fill=shade)
+    draw.polygon(((749,937),(765,920),(781,937),(765,957)),
+                 fill=(72,171,230),outline=(208,239,255),width=4)
+    draw.rectangle((626,1080,852,1094),fill=(119,102,97))
+
+
+def _city_power(draw, t):
+    """Exterior lighting progressively returns while the stranger flips a switch."""
+    for j in range(6):
+        x=108+j*133
+        height=110+(j%3)*42
+        draw.rectangle((x,1015-height,x+84,1015),fill=(44,58,78))
+        for k in range(2):
+            for m in range(3):
+                lit=t>=.55+j*.32
+                col=(245,196,107) if lit else (40,47,63)
+                draw.rectangle((x+15+k*34,1015-height+15+m*29,
+                                x+27+k*34,1015-height+27+m*29),fill=col)
+
+
 def draw_human_scene(image, shot, t):
     """Draw only authenticated pilot action geometry in the 1080x1920 scene stage."""
     validate_human_scene(shot)
@@ -186,6 +280,34 @@ def draw_human_scene(image, shot, t):
         _mara(d,420-int(min(140,t*29)),881,t,running=True,carrying=True,alarm=True)
         # The radio is visibly carried while Mara runs.
         _radio(d,525-int(min(140,t*29)),979+int(13*math.sin(t*11)),t,portable=True)
+    elif action == "guard_knocking_door":
+        _door(d,.22+.045*math.sin(t*3.2))
+        # An actual physical knock: repeated displacement at the door panel.
+        for phase in range(3):
+            x=886+phase*12
+            radius=9+phase*10+int(abs(math.sin(t*3.2))*8)
+            d.arc((x-radius,872-radius,x+radius,872+radius),
+                  -85,85,fill=(130,187,222),width=4)
+        _radio(d,350,1111,t,portable=True)
+        _mara(d,368,857,t,alarm=True)
+    elif action == "inspect_generator_clue":
+        _generator(d,t)
+        _notebook(d,t)
+        _mara(d,375,865,t,reaching=True)
+    elif action == "inspect_future_photograph":
+        _future_photograph(d)
+        _stranger(d,795,770,t)
+        _mara(d,327,875,t,reaching=True,alarm=True)
+    elif action == "stop_stranger_switch":
+        _city_power(d,t)
+        _door(d,min(.9,.25+max(0,t-.9)*.1))
+        # The stranger actuates a dedicated wall switch; Mara reacts, not assists.
+        d.rounded_rectangle((797,724,888,830),radius=12,
+                            fill=(117,130,143),outline=INK,width=6)
+        d.line(((838,771),(838,738 if t>1.1 else 804)),
+               fill=(248,191,103),width=11)
+        _stranger(d,675,856,t,touching_switch=True)
+        _mara(d,279,870,t,reaching=True,alarm=True)
     else:
         raise CreativeReject("Unknown human action")
     return True
