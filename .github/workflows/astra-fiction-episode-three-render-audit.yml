@@ -1,0 +1,142 @@
+name: ASTRA Fiction Episode Three Visual Audit
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/astra-fiction-episode-three-render-audit.yml'
+      - 'astra_v2/human_story_performance.py'
+      - 'astra_v2/unified_story_engine.py'
+      - 'astra_v2/omniroute_local.py'
+      - 'tests/test_episode_three_human_performance.py'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  episode-three:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      ASTRA_CHANNEL: rayvan
+      ASTRA_UNIFIED_STORY_ENGINE: '1'
+      ASTRA_FICTION_VISUAL_GUARD: '1'
+      ASTRA_ASSET_PACK_ENABLED: '1'
+      ASTRA_ASSET_PACK_AUDIT: '1'
+      ASTRA_ASSET_PACK_IMMUTABLE: '1'
+      ASTRA_ASSET_PACK_ROOT: runtime-artifacts/verified-pack
+      ASTRA_ASSET_AUDIT_DIR: runtime-artifacts/episode-three/receipts
+      ASTRA_OPENAI_ENABLED: '0'
+      ASTRA_OPENAI_ALLOW_PAID_API: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned Studio and local video verifier
+        run: |
+          python -m pip install -r requirements.txt
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+      - name: Verify serialized acting and pilot compatibility
+        run: |
+          python -m unittest discover -s tests -p 'test_episode_three_human_performance.py' -v
+          python -m unittest discover -s tests -p 'test_season_mara_continuity.py' -v
+          python -m unittest discover -s tests -p 'test_pilot_human_performance.py' -v
+          python -m unittest discover -s tests -p 'test_omniroute_local.py' -v
+      - name: Restore verified original background pack
+        uses: actions/download-artifact@v4
+        with:
+          name: astra-original-visual-pack
+          run-id: 39960540392
+          github-token: ${{ github.token }}
+          path: runtime-artifacts/download
+      - name: Validate 3200 background files before rendering
+        run: python -m tools.astra_restore_visual_pack runtime-artifacts/download/astra-visual-pack.zip runtime-artifacts/verified-pack --expected 3200
+      - name: Full original Episode 3 Studio render, no publishing
+        run: |
+          mkdir -p runtime-artifacts/episode-three
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from astra_v2.omniroute_local import catalog
+          from studio_renderer import render_short
+          record=next(s for s in catalog() if s['content_id']=='rayvan-season-01-episode-03')
+          assert record['production_ready'] and len(record['story_beats'])==4
+          assert [s.get('story_human_action') for s in record['story_beats']]==[
+            'survey_dead_city','inspect_reverse_clock',
+            'study_altered_photographs','confront_mara_double']
+          root=Path('runtime-artifacts/episode-three')
+          (root/'story.json').write_text(json.dumps(record,indent=2))
+          result=render_short(record,root/'episode-03.mp4',still_dir=root/'scene-stills')
+          (root/'studio-report.json').write_text(json.dumps(result,indent=2,default=str))
+          PY
+      - name: Decode actual encoded frames, audio and per-shot artwork evidence
+        run: |
+          ffprobe -v error -show_entries format=duration:stream=codec_type,codec_name,width,height -of json runtime-artifacts/episode-three/episode-03.mp4 > runtime-artifacts/episode-three/ffprobe.json
+          python - <<'PY'
+          import hashlib,json,subprocess
+          from pathlib import Path
+          from PIL import Image
+          root=Path('runtime-artifacts/episode-three')
+          video=root/'episode-03.mp4'
+          assert video.stat().st_size>10000
+          report=json.loads((root/'studio-report.json').read_text())
+          streams=json.loads((root/'ffprobe.json').read_text())
+          scenes=report['scenes']
+          assert report['genre']=='fiction' and len(scenes)==4
+          expected=['survey_dead_city','inspect_reverse_clock',
+                    'study_altered_photographs','confront_mara_double']
+          assert [s.get('story_human_action') for s in scenes]==expected
+          assert all(s.get('story_human_actor')=='mara' for s in scenes)
+          v=[s for s in streams['streams'] if s.get('codec_type')=='video']
+          a=[s for s in streams['streams'] if s.get('codec_type')=='audio']
+          assert len(v)==1 and v[0]['codec_name']=='h264'
+          assert (v[0]['width'],v[0]['height'])==(1080,1920)
+          assert any(s.get('codec_name')=='aac' for s in a)
+          assert float(streams['format']['duration'])>0
+          receipts=list((root/'receipts').glob('*.json'))
+          assert len(receipts)==1
+          receipt=json.loads(receipts[0].read_text())
+          digest=hashlib.sha256(video.read_bytes()).hexdigest()
+          assert receipt['content_id']=='rayvan-season-01-episode-03'
+          assert receipt['video_sha256']==digest
+          assert receipt['asset_coverage_status']=='full'
+          assert receipt['shot_count']==receipt['composited_shots']==4
+          art=[s['asset']['id'] for s in receipt['shots']]
+          assert len(set(art))==4, 'Four scenes repeated background source: '+str(art)
+          assert all(s['pixel_changed'] for s in receipt['shots'])
+          thumbs=[]
+          for idx,scene in enumerate(scenes,1):
+              at=float(scene['start'])+float(scene['duration'])*.5
+              dest=root/f'decoded-beat-{idx:02d}.png'
+              subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y',
+                              '-ss',f'{at:.3f}','-i',str(video),'-frames:v','1',str(dest)],
+                             check=True,timeout=50)
+              with Image.open(dest) as im:
+                  thumbs.append(im.convert('RGB').resize((270,480),Image.Resampling.LANCZOS))
+          sheet=Image.new('RGB',(540,960),(15,16,22))
+          for index,thumb in enumerate(thumbs):
+              sheet.paste(thumb,((index%2)*270,(index//2)*480))
+          sheet.save(root/'decoded-video-contact-sheet.jpg',quality=91)
+          (root/'verification.json').write_text(json.dumps({
+              'story_id':receipt['content_id'],
+              'duration':streams['format']['duration'],
+              'asset_id_by_scene':art,
+              'video_sha256':digest,
+              'scenes':expected,
+              'visual_quality_approved':False,
+              'manual_visual_review_required':True,
+              'youtube_uploaded':False
+          },indent=2))
+          print('ASTRA_EPISODE_THREE_FULL_VIDEO_VERIFIED='+str(root/'verification.json'))
+          PY
+      - name: Upload nonpublishing evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-season-one-episode-three-visual-review
+          path: runtime-artifacts/episode-three/
+          if-no-files-found: warn
+          retention-days: 7
