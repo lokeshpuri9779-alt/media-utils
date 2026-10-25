@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "52f051d9a833ddb3a0ac6edc",
-      "source_sha256": "b42b433886eaf80cd67cc294049d2a591e23addefc2c16c8ef4b4dc1dc5d0991",
+      "candidate_id": "003a469b5e4f9e0c5006de08",
+      "source_sha256": "2e7960bd441a5442dea179ed1c60f06f79fb2554c1c38ec180306a83333a598f",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-8164a13a67ba22eee3fd",
-        "title": "The Great Automatic Cabbage Slicer Debacle",
-        "hook": "The Grand Unveiling",
-        "question": "Can an overly complex mechanical invention survive a bustling morning market?",
-        "answer": "Simple reliability always wins over excessive automated complexity.",
+        "content_id": "rayvan-gemini-3dcccf2c0830ec58e6ec",
+        "title": "The Great Turnip Grater Debacle of Market Square",
+        "hook": "The Catastrophic First Demonstration",
+        "question": "Can Barnaby sell his chaotic multi-bladed vegetable invention before the health inspector shuts down his noisy stall?",
+        "answer": "Yes, by pivoting the disastrous grater into a novelty confetti cannon that delights the entire plaza.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,79 +29,80 @@
         ],
         "story_beats": [
           {
-            "headline": "The Grand Unveiling",
-            "speech": "Behold citizens! My magnificent brass contraption transforms whole cabbages into ribbons before you can even blink your eyes!",
+            "headline": "The Catastrophic First Demonstration",
+            "speech": "Behold the marvel of modern produce science! One turn of the crank shreds a whole root instantly!",
             "visual": "robot",
-            "label": "The Contraption",
+            "label": "The Grater Malfunction",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby proudly points at his steam-powered brass cabbage slicer on a messy wooden market table, wearing a soot-stained apron with a confident smile.",
+            "visual_prompt": "Barnaby pulls a brass lever on his whirring mechanical contraption while panicked market shoppers duck flying purple turnip shreds in the busy square.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Building Tension",
-            "speech": "Quickly feed the green cabbages into the rotating hopper while I tighten this loose steam valve with my wrench.",
+            "headline": "The Rising Purple Tide",
+            "speech": "Stop that flying root machine! It has completely ruined my imported saffron display with purple debris!",
             "visual": "signal",
-            "label": "The Hopper",
+            "label": "The Angry Merchant",
             "story_beat": "build",
-            "visual_prompt": "Barnaby nervously sweats as he turns a brass valve on the vibrating machine, while a large stack of cabbages sits precariously on the edge of the stall.",
+            "visual_prompt": "Madame Vane gestures angrily at a cloud of shredded turnips hovering over her wooden spice cart while Barnaby frantically tries to catch the escaping machine.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Mechanical Chaos",
-            "speech": "Stop the steam pressure! The gears are jammed with leafy greens and now flying vegetable shreds are hitting everyone!",
+            "headline": "The Desperate Adaptation",
+            "speech": "If I reverse the exhaust funnel and add more tension springs, we can launch this mess into art!",
             "visual": "ship",
-            "label": "The Jam",
+            "label": "The Mid-Air Pivot",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby ducks behind his market stall as green cabbage leaves explode violently from the shaking machine, spraying shocked market shoppers.",
+            "visual_prompt": "Barnaby straps a large leather bellows to the back of his brass grater, adjusting a copper valve while standing atop a wooden merchant crate.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Simple Payoff",
-            "speech": "Take this reliable wooden blade instead of the noisy machine, and enjoy your perfectly sliced salad without any flying debris.",
+            "headline": "The Grand Festive Finale",
+            "speech": "Step right up for the finest celebratory vegetable confetti in the entire kingdom! Guaranteed fresh and loud!",
             "visual": "door",
-            "label": "The Wooden Blade",
+            "label": "The Confetti Triumph",
             "story_beat": "payoff",
-            "visual_prompt": "A smiling Barnaby hands a simple carved wooden slicer across the clean counter to a cheerful customer, with the smoking brass machine resting quietly in the background.",
+            "visual_prompt": "Delighted market children laugh and catch colorful turnip ribbons falling through the sunny air as Barnaby bows proudly in front of his smoking contraption.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby tests his chaotic ten-blade automatic cabbage slicer against the harsh demands of the weekend farmers market.",
-        "decisive_choice": "Barnaby chooses to dismantle the exploding gear assembly and hand a customer a simple wooden knife instead.",
-        "resolution": "Barnaby abandons hyper-automation, opens a handcrafted kitchen tool stall, and enjoys steady, peaceful sales.",
+        "central_conflict": "Barnaby's automatic turnip grater spews shredded purple vegetable all over the rival spice merchant.",
+        "decisive_choice": "Barnaby hooks the vegetable hopper directly to the manual hand-crank air bellows to launch purple shreds skyward.",
+        "resolution": "The explosive veggie confetti wins the best novelty prize and clears his inventory in seconds.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures and comedic slapstick staging.",
+          "style": "Bright, colorful stop-motion animation aesthetic with detailed clay textures and humorous slapstick framing.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild gray hair, round spectacles, a patched brown vest, and an enthusiastic expression."
+            "Barnaby": "An eccentric inventor with wild ginger hair, oversized round spectacles, and a soot-stained yellow vest over a striped shirt.",
+            "Madame Vane": "A stern market spice merchant wearing an elaborate purple turban and a scowl, draped in heavy velvet robes."
           },
           "locations": {
-            "market_square": "A bustling, sunlit cobblestone town square filled with striped canvas awnings, wooden stalls, and eager shoppers."
+            "Market Square": "A bustling cobblestone plaza lined with striped canvas awnings, wooden crates, and hanging lanterns under a bright blue sky."
           },
           "objects": {
-            "cabbage_slicer": "A towering, overly complicated contraption made of polished brass pipes, ticking clocks, and whirring leather belts.",
-            "wooden_knife": "A smooth, hand-carved oak kitchen knife with a simple ergonomic handle."
+            "Turnip Grater": "A contraption of polished brass pipes, steel gears, a wooden hand crank, and a large metal funnel.",
+            "Spice Cart": "A heavy oak cart piled high with small burlap sacks of colorful powders and glass jars."
           }
         },
-        "plot_fingerprint": "d88a2f9532150d61b79bd5a3b4845fc0d453970f55575e126dbba326dd30b800"
+        "plot_fingerprint": "3079fc53bf67bcda9fee8e7e0c5025f01975291f6e843885a40ed7959efc4b15"
       },
       "approved": false
     },
     {
-      "candidate_id": "9bb854209937e4d33e1c0567",
-      "source_sha256": "096bc78e5ff275f3b53d3da0844de3460b7e1568dfdf29cad27b9b661dc5c008",
+      "candidate_id": "03420b2291c8921ff57f0cca",
+      "source_sha256": "5c0880e12128b18346042b14fabcbcb3bae52639a8ec70b5ab1cfec3d4b60500",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-62ef002a4896d0bcc60d",
-        "title": "The Glacier Signal",
-        "hook": "The Warning Beacon",
-        "question": "Can the automated ice-core drill be halted before it breaches the subglacial lake?",
-        "answer": "Yes, by manually overriding the thermal lance, preserving the pristine aquatic ecosystem.",
+        "content_id": "rayvan-gemini-8c6b8648e1001e57ae8e",
+        "title": "The Canopy Cartographers",
+        "hook": "A Shifting Horizon",
+        "question": "How do two rival foragers map a shifting bioluminescent forest?",
+        "answer": "By trading their separate navigational tallies to discover a hidden migratory path.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -109,80 +110,81 @@
         ],
         "story_beats": [
           {
-            "headline": "The Warning Beacon",
-            "speech": "Look at the telemetry data on the monitor. The thermal lance is descending much faster than our scheduled timeline.",
-            "visual": "signal",
-            "label": "Automated Warning",
-            "story_beat": "reveal",
-            "visual_prompt": "Dr. Vance stares at a glowing red signal monitor inside a dimly lit arctic research tent, holding a digital tablet showing descent graphs.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Frozen Mechanism",
-            "speech": "We have to disable the primary valve now, even if the sudden pressure drop shatters the exterior housing entirely.",
-            "visual": "robot",
-            "label": "Emergency Valve",
-            "story_beat": "mechanism",
-            "visual_prompt": "Dr. Vance reaches inside a frost-covered automated drill rig, grasping a frozen yellow lever with thick insulated gloves.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Structural Twist",
-            "speech": "The pressure release didn't work as planned. The backup generator is overloading the main power distribution line directly.",
-            "visual": "ship",
-            "label": "Power Overload",
-            "story_beat": "twist",
-            "visual_prompt": "Sparks fly from a rugged steel power console inside the snowy mobile research vehicle as Dr. Vance shields her face.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Final Payoff",
-            "speech": "The thermal lance has finally stopped moving. The subglacial lake remains completely sealed and safe from our surface contamination.",
+            "headline": "A Shifting Horizon",
+            "speech": "Look closely at the glowing vines ahead; the entire woodland layout alters itself every single hour without exception.",
             "visual": "forest",
-            "label": "Pristine Ice",
+            "label": "The Moving Grove",
+            "story_beat": "reveal",
+            "visual_prompt": "Elira and Bram stand inside a dense bioluminescent forest gazing at glowing purple vines moving across tree trunks. Elira holds a notched wooden compass in her left hand, wearing a teal canvas tunic with brass buttons. Bram wears a leather vest over a wool sweater and points forward with an alarmed expression.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Constructing the Grid",
+            "speech": "If we combine our measured paces and elevation marks now, we might just outsmart this botanical maze together.",
+            "visual": "signal",
+            "label": "Shared Measurements",
+            "story_beat": "build",
+            "visual_prompt": "Bram kneels on a mossy boulder inside the glowing forest, sketching a map onto birchbark with a charcoal stick. Elira stands beside him holding a brass measuring chain taut between both hands, focusing intently on the glowing canopy overhead.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Hidden Mechanism",
+            "speech": "These glowing roots are not random obstacles at all; they act like gears turning beneath the soil to open our exit path.",
+            "visual": "door",
+            "label": "Subterranean Gears",
+            "story_beat": "mechanism",
+            "visual_prompt": "Elira and Bram crouch near a massive stone archway embedded in giant tree roots inside the forest. Elira uses a iron lever to pry open a stone hatch, while Bram holds a glowing amber lantern illuminating ancient carved runes on the doorway frame.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Safe Pathway",
+            "speech": "Our combined charts revealed the true doorway just in time, proving cooperation is far better than competing alone.",
+            "visual": "ship",
+            "label": "Unified Journey",
             "story_beat": "payoff",
-            "visual_prompt": "Dr. Vance stands peacefully outside on the white glacier beneath a clear arctic sky, holding a steaming mug and looking down at the silent drill site.",
+            "visual_prompt": "Elira and Bram walk side by side through an open wooden gateway leading out of the glowing forest into a sunlit meadow. Bram carries a large rolled parchment map under his arm, and Elira holds the brass compass happily, both smiling warmly in the bright daylight.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "The autonomous deep-ice drill is malfunctioning and threatening to contaminate an ancient subglacial lake.",
-        "decisive_choice": "Dr. Vance chooses to sacrifice her primary research samples to drain the coolant system and shut down the drill.",
-        "resolution": "The drill freezes harmlessly above the lake, saving the pristine water source for future study.",
+        "central_conflict": "Mapping a moving grove before total canopy closure traps them both.",
+        "decisive_choice": "Merging competing handwritten trail charts into a single unified grid.",
+        "resolution": "They escape safely and establish the forest's first permanent shared trail system.",
         "visual_bible": {
-          "style": "Cinematic realism, high-contrast arctic lighting, desaturated blue tones with bright emergency orange accents.",
+          "style": "Hand-painted cinematic illustration with rich textures, warm ambient lighting, and detailed environmental flora.",
           "characters": {
-            "Dr. Vance": "A resilient arctic researcher in her late 30s with short dark hair, wearing a heavy down-filled red parka and thermal goggles."
+            "Elira": "A young female explorer with braided brown hair, wearing a teal canvas utility tunic, brass buttons, leather boots, and carrying a notched wooden compass.",
+            "Bram": "A tall male botanist with curly dark hair, wearing a heavy leather vest over a beige wool sweater, sturdy trousers, and carrying an amber lantern."
           },
           "locations": {
-            "Research Tent": "A reinforced geodesic canvas tent interior crowded with blinking diagnostic panels and tangled cables.",
-            "Glacier Surface": "A vast expanse of white snow and jagged blue ice under a crisp daylight sky."
+            "The Shifting Grove": "A dense, magical woodland filled with giant bioluminescent purple vines, glowing moss, ancient stone arches, and moving root systems."
           },
           "objects": {
-            "Digital Tablet": "A ruggedized black slate with glowing green diagnostic readouts.",
-            "Thermal Lance": "A massive steel cylinder tipped with glowing copper heating elements."
+            "wooden_compass": "A polished mahogany pocket compass featuring intricate brass dials and a faint blue magnetic needle.",
+            "amber_lantern": "A sturdy iron-framed lantern enclosing a glowing golden amber stone that casts warm light.",
+            "measuring_chain": "A ten-foot articulated brass surveyor chain made of linked metal ovals."
           }
         },
-        "plot_fingerprint": "da1560a0ec81451f2d077a7a4217a20d7e5407598c4fd39541a9a0d9ff40fc45"
+        "plot_fingerprint": "abdd689cd148b7c1e97dd067226f00488a8dbe63690fdaaebca71b2c33b38679"
       },
       "approved": false
     },
     {
-      "candidate_id": "175531820eccaf82195d244a",
-      "source_sha256": "e8d0110b5c2600fd5831abad71055783df0127b72d657d20ba629c6b696f5d85",
+      "candidate_id": "8a73001b34668d5610059ca8",
+      "source_sha256": "b2226989ea884c51d378b7787ca538881abec684878be245ec87bd6271e3d432",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-39a429222ee997dd6b62",
-        "title": "The Last Acoustic Beacon",
-        "hook": "Underground Entrapment",
-        "question": "Can low-frequency soundwaves guide a rescue drone through shifting ice?",
-        "answer": "Yes, by matching the resonant frequency of an underwater vent, the team clears the blocked crevasse.",
+        "content_id": "rayvan-gemini-af20b26ae093b49dbeff",
+        "title": "The Drift of the Rusting Hull",
+        "hook": "A Critical Warning",
+        "question": "How can the crew stabilize the leaking coolant without losing propulsion?",
+        "answer": "They bypass the primary valve and manually reroute coolant through the auxiliary life-support heat exchangers.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -190,64 +192,65 @@
         ],
         "story_beats": [
           {
-            "headline": "Underground Entrapment",
-            "speech": "Listen closely to the wall. The ice is singing under immense pressure, and our thermal battery is nearly depleted.",
-            "visual": "signal",
-            "label": "Frequency Anomaly",
-            "story_beat": "reveal",
-            "visual_prompt": "Dr. Vance, wearing a heavy orange parka and fogged goggles, holds a flashing sonar tablet inside a dark, glowing blue ice cave.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Acoustic Calibration",
-            "speech": "We must match the resonant frequency of the seismic vent below us to break this crystalline wall without causing a total collapse.",
-            "visual": "robot",
-            "label": "Resonance Match",
-            "story_beat": "build",
-            "visual_prompt": "Dr. Vance adjusts dials on a battered titanium acoustic transmitter, while engineer Kael secures cables to a frozen mechanical sledge.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Seismic Discharge",
-            "speech": "Initiating the pulse sequence now. Hold onto the anchor line and cover your ears as the shockwave travels downward.",
+            "headline": "A Critical Warning",
+            "speech": "Captain, if we do not purge the primary coolant lines right now, the entire reactor core will melt down.",
             "visual": "ship",
-            "label": "Frequency Pulse",
-            "story_beat": "mechanism",
-            "visual_prompt": "Kael grips a steel support beam inside the trembling ice cavern as a bright blue pulse beam shoots directly into the glacial floor.",
+            "label": "Reactor Alert",
+            "story_beat": "reveal",
+            "visual_prompt": "Engineer Valeri stands inside the cramped control room of the rusty cargo ship, pointing urgently at a flashing red diagnostic screen while Captain Vance watches skeptically from the pilot chair.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Surface Breakthrough",
-            "speech": "The fracture opened perfectly. Look up, the rescue transport is descending through the clearing to pull us out.",
-            "visual": "door",
-            "label": "Open Hatch",
+            "headline": "The Hard Choice",
+            "speech": "Rerouting through life support will freeze the crew quarters, and we cannot survive those freezing temperatures for long.",
+            "visual": "robot",
+            "label": "System Override",
+            "story_beat": "build",
+            "visual_prompt": "Captain Vance firmly holds the manual override lever in the ship's cramped control room, refusing to pull it while Valeri steps forward with a handheld diagnostic tool.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Manual Intervention",
+            "speech": "I am taking the risk and engaging the bypass valve manually to keep our propulsion engine from exploding.",
+            "visual": "signal",
+            "label": "Valeri's Action",
+            "story_beat": "mechanism",
+            "visual_prompt": "Valeri thrusts a heavy wrench into the emergency access panel of the ship, causing glowing blue sparks to illuminate the metallic walls around them.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Safe Harbor",
+            "speech": "The engine temperature is dropping into the safe zone, and the emergency heaters are slowly bringing our rooms back to warmth.",
+            "visual": "planet",
+            "label": "Stable Orbit",
             "story_beat": "payoff",
-            "visual_prompt": "Dr. Vance and Kael stand beneath a newly opened shaft of daylight, waving upward as a white rescue vehicle hovers above.",
+            "visual_prompt": "Captain Vance and Valeri stand side by side in the ship's cockpit, looking through the main window at a calm blue planet filling the view as green indicator lights glow.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A research team is trapped beneath a collapsing shelf of blue ice.",
-        "decisive_choice": "Dr. Vance fires the experimental low-frequency acoustic beacon into the crevasse.",
-        "resolution": "The acoustic vibration shatters the ice blockage, allowing the rescue drone to reach the team.",
+        "central_conflict": "Disagreement over shutting down life support to save the engine.",
+        "decisive_choice": "Engineer Valeri overrides the captain and reroutes the remaining coolant.",
+        "resolution": "The engine is saved and atmospheric pressure drops temporarily before stabilizing.",
         "visual_bible": {
-          "style": "Cinematic realism with a gritty, cold aesthetic, emphasizing freezing breath, high-contrast polar lighting, and detailed textures of blue ice and weathered expedition gear.",
+          "style": "Gritty, grounded sci-fi animation with industrial textures and warm lighting.",
           "characters": {
-            "Dr. Vance": "A seasoned arctic researcher with a determined expression, wearing a faded orange winter parka, tinted goggles, and a heavy knitted beanie.",
-            "Kael": "A pragmatic mechanical engineer with a scarred face, wearing a charcoal-gray thermal jumpsuit and a reinforced leather utility belt."
+            "Valeri": "An industrious engineer wearing a scuffed blue jumpsuit and grease smudges on her cheek.",
+            "Captain Vance": "A cautious commander with a trimmed gray beard, wearing a utilitarian green flight jacket."
           },
           "locations": {
-            "ice_cave": "A claustrophobic cavern deep beneath an arctic glacier, featuring translucent blue ice walls, jagged stalactites, and glowing scientific instruments."
+            "control room": "A cramped, metallic spaceship bridge lined with analog dials, blinking indicator lights, and exposed piping."
           },
           "objects": {
-            "sonar_tablet": "A ruggedized handheld device with a cracked glass screen and a flickering green waveform display.",
-            "acoustic_transmitter": "A heavy titanium box covered in frost, featuring large analog dials and a thick copper antenna."
+            "diagnostic screen": "A rectangular glowing orange monitor displaying jagged warning waveforms.",
+            "override lever": "A heavy steel mechanical handle capped with a yellow rubber grip.",
+            "wrench": "A thick, heavy-duty silver metal tool with tool wear scratches."
           }
         },
-        "plot_fingerprint": "21acd321439a382c6d17bd20d24a8ba2791bd23bb4fe2f7a44013b507265604e"
+        "plot_fingerprint": "217bc48b7b3721186d18485fa5e00fc4108446fdb7244ac05525b061f51b9d47"
       },
       "approved": false
     }
