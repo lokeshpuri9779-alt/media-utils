@@ -2,6 +2,9 @@ name: ASTRA Studio Real MP4 Smoke
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/astra-studio-real-mp4-smoke.yml'
   push:
     branches: [main]
     paths:
@@ -29,6 +32,10 @@ jobs:
         run: |
           mkdir -p runtime-artifacts/studio-smoke
           python studio_renderer.py --preview runtime-artifacts/studio-smoke/studio.mp4
+      - name: Install FFprobe for output verification
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
       - name: Verify encoded video and report
         run: |
           ffprobe -v error -show_entries format=duration:stream=index,codec_type,codec_name,width,height,sample_rate -of json runtime-artifacts/studio-smoke/studio.mp4 > runtime-artifacts/studio-smoke/ffprobe.json
