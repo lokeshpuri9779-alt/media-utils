@@ -1,0 +1,63 @@
+name: ASTRA Isolated Asset Pack Render Audit
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  verify-pack-compositor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      ASTRA_ASSET_PACK_ENABLED: '1'
+      ASTRA_ASSET_PACK_AUDIT: '1'
+      ASTRA_ASSET_PACK_ROOT: runtime-artifacts/verified-pack
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install image dependency
+        run: python -m pip install 'Pillow>=10,<12'
+      - name: Download existing reviewed background artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: astra-original-visual-pack
+          run-id: 39960540392
+          github-token: ${{ github.token }}
+          path: runtime-artifacts/download
+      - name: Restore and verify 3200 backgrounds
+        run: python -m tools.astra_restore_visual_pack runtime-artifacts/download/astra-visual-pack.zip runtime-artifacts/verified-pack --expected 3200
+      - name: Verify actual compositor changes pixels
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from PIL import Image, ImageChops
+          from astra_v2.visual_artifact_backdrop import apply_pack_background
+          root = Path('runtime-artifacts/verified-pack')
+          image = Image.new('RGB', (540, 960), (35, 45, 65))
+          shot = {'scene_environment': 'railway station', 'visual_intent': 'railway platform'}
+          output = apply_pack_background(image, shot, 'astra-asset-smoke-railway', root=root, shot_number=1)
+          assert ImageChops.difference(image, output).getbbox() is not None, 'background not composited'
+          Path('runtime-artifacts/audit').mkdir(parents=True, exist_ok=True)
+          output.save('runtime-artifacts/audit/railway-compositor.png')
+          Path('runtime-artifacts/audit/result.json').write_text(json.dumps({
+              'test': 'isolated nonpublishing production compositor',
+              'scene': 'railway',
+              'pixel_changed': True,
+              'asset_pack_enabled': True,
+              'youtube_uploaded': False,
+              'full_mp4_render': False
+          }, indent=2))
+          PY
+      - name: Preserve evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-isolated-asset-pack-audit
+          path: runtime-artifacts/audit/
+          if-no-files-found: warn
