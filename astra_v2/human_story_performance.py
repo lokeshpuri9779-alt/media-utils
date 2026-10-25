@@ -236,16 +236,35 @@ def _mara(draw, x, y, t, *, reaching=False, alarm=False, running=False,
         raise CreativeReject("Actor animation time must be finite")
     if gesture not in ("consider", "protect", "open"):
         raise CreativeReject("Unsupported actor hand gesture")
+    from astra_v2.human_skeletal_rig import solve_mara_pose, HIP_L, HIP_R
+    pose=solve_mara_pose(t,reaching=reaching,running=running,
+                         carrying=carrying,gesture=gesture)
     bounce=int(6*math.sin(t*2.8))
     if running:
         bounce=int(15*math.sin(t*11))
+    x+=round(pose.torso_offset*.45)
     y+=bounce
-    limb=int(28*math.sin(t*10)) if running else int(7*math.sin(t*2))
-    # Keep the shoes in the scene at every pose.
-    _line(draw, ((x-37,y+200),(x-55-limb,y+340)), PANTS, 39)
-    _line(draw, ((x+39,y+200),(x+56+limb,y+340)), PANTS, 39)
-    _line(draw, ((x-56-limb,y+339),(x-106-limb,y+339)), INK, 28)
-    _line(draw, ((x+56+limb,y+339),(x+106+limb,y+339)), INK, 28)
+    # Forward-kinematic painted thigh/shin segments follow the real two-bone
+    # knee solution. Opposed ankle strides distinguish walking/running from
+    # a stationary upper-body wiggle.
+    for hip,knee,ankle in (
+        (HIP_L,pose.left_knee,pose.left_ankle),
+        (HIP_R,pose.right_knee,pose.right_ankle),
+    ):
+        _line(draw,((x+round(hip[0]),y+round(hip[1])),
+                    (x+round(knee[0]),y+round(knee[1])),
+                    (x+round(ankle[0]),y+round(ankle[1]))),PANTS,36)
+        draw.ellipse((x+round(knee[0])-18,y+round(knee[1])-18,
+                      x+round(knee[0])+18,y+round(knee[1])+18),
+                     fill=(54,67,90),outline=INK,width=4)
+    for ankle,side in ((pose.left_ankle,-1),(pose.right_ankle,1)):
+        foot_x=x+round(ankle[0])
+        foot_y=y+round(ankle[1])
+        draw.rounded_rectangle((foot_x-38 if side<0 else foot_x-20,
+                                foot_y-12,
+                                foot_x+22 if side<0 else foot_x+40,
+                                foot_y+16),radius=10,fill=INK,
+                               outline=(85,102,116),width=3)
     # Fixed outfit and hairstyle preserve serialized Mara continuity.
     draw.ellipse((x-113,y-220,x-39,y-85),fill=HAIR)
     draw.ellipse((x-87,y-282,x+91,y-71),fill=HAIR,outline=INK,width=8)
@@ -275,30 +294,20 @@ def _mara(draw, x, y, t, *, reaching=False, alarm=False, running=False,
     # rather than regenerating a different costume for every scene.
     from astra_v2.human_illustrated_materials import draw_character_materials
     draw_character_materials(draw,x,y,t)
-    progress=max(0.0,min(1.0,t/1.15))
-    progress=progress*progress*(3-2*progress)
-    if gesture=="protect":
-        left_hand=(x-20,y+50+int(7*math.sin(t*2)))
-    elif gesture=="open":
-        left_hand=(x-161,y+35-int(8*math.sin(t*1.5)))
-    else:
-        left_hand=(x-40,y-42+int(5*math.sin(t*.8)))
-    if reaching:
-        right_hand=(x+round(113+32*progress),y+round(155-193*progress))
-    else:
-        right_hand=(x+144,y+10) if carrying else (x+113+limb,y+155)
-    if running:
-        left_hand=(x-149,y+50-limb)
-        right_hand=(x+133,y+55+limb)
-    # Bent elbows create a clear two-segment gesture, not a straight fixed bar.
-    left_elbow=(x-105,y+28+round((left_hand[1]-y)*.25))
-    right_elbow=(x+112,y+30+round((right_hand[1]-y)*.21))
-    for shoulder, elbow, hand in (
-        ((x-58,y-40),left_elbow,left_hand),
-        ((x+54,y-40),right_elbow,right_hand),
+    # Articulated shoulder -> elbow -> wrist bones solve every frame.
+    # Previously elbow points were just arbitrary fractions along one
+    # immovable-looking sleeve, with no true joint-length constraints.
+    for shoulder,elbow,hand in (
+        ((-58,-40),pose.left_elbow,pose.left_hand),
+        ((54,-40),pose.right_elbow,pose.right_hand),
     ):
-        _line(draw,(shoulder,elbow,hand),JACKET,32)
-        draw.ellipse((hand[0]-17,hand[1]-17,hand[0]+17,hand[1]+17),
+        points=[(x+round(px),y+round(py)) for px,py in (shoulder,elbow,hand)]
+        _line(draw,points,JACKET,32)
+        ex,ey=points[1]
+        draw.ellipse((ex-17,ey-17,ex+17,ey+17),
+                     fill=(67,137,150),outline=INK,width=3)
+        hx,hy=points[2]
+        draw.ellipse((hx-17,hy-17,hx+17,hy+17),
                      fill=SKIN,outline=INK,width=3)
 
 
