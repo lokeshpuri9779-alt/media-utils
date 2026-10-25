@@ -5,10 +5,6 @@ This is renderer eligibility, not publication approval.
 from __future__ import annotations
 
 from astra_errors import CreativeReject
-from astra_v2.layer_contract import scene_layers
-from astra_v2.unified_story_engine import validate_story_shot
-from studio_renderer import make_plan
-
 
 def publication_renderer_rejection(story):
     """Recheck queued fiction at the publication boundary when unified Studio is enabled."""
@@ -24,6 +20,9 @@ def publication_renderer_rejection(story):
 def check_renderer_eligibility(story):
     """Return (eligible, reason, scene modes) without changing the candidate."""
     try:
+        from astra_v2.layer_contract import scene_layers
+        from astra_v2.unified_story_engine import validate_story_shot
+        from studio_renderer import make_plan
         plan = make_plan(dict(story))
         if not plan:
             raise CreativeReject("Empty directed plan")
