@@ -35,6 +35,10 @@ jobs:
           python -m pip install -r requirements.txt
           sudo apt-get update -qq
           sudo apt-get install -y -qq ffmpeg
+      - name: Check visual direction and per-shot asset-selection regressions
+        run: |
+          python -m unittest discover -s tests -p 'test_omniroute_local.py' -v
+          python -m unittest discover -s tests -p 'test_astra_asset_pack_compositor.py' -v
       - name: Restore original verified artwork
         uses: actions/download-artifact@v4
         with:
@@ -90,6 +94,8 @@ jobs:
           assert receipt['shot_count']==len(report['scenes'])==4
           assert receipt['asset_coverage_status']=='full', receipt['statuses']
           assert all(s['status']=='composited' and s['pixel_changed'] and s['asset'] for s in receipt['shots'])
+          art_ids=[s['asset']['id'] for s in receipt['shots']]
+          assert len(set(art_ids))==len(art_ids), f'Background reused across distinct episode shots: {art_ids}'
           thumbs=[]
           for index,scene in enumerate(report['scenes'],1):
               at=float(scene['start'])+float(scene['duration'])*.5
