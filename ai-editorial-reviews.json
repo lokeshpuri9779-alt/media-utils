@@ -1795,6 +1795,18 @@
         "review_model": "gemini-3.1-flash-lite"
       },
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-5a63507e355bf6ab045d",
+      "story_sha256": "ecfc5cea9ba93edae8235d126a987c6d5e7ad6d95f1f881003eb6434664737e3",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story is substantially similar to the recently published 'Elias and the Avalanche Beacon of Needle Peak'. Both stories feature a protagonist named Elias, a high-altitude/tundra setting, a life-or-death rescue mission, and a decisive choice involving the prioritization of a survivor over personal safety/equipment.",
+        "The causal mechanism and narrative arc are derivative of the provided comparison history, failing to meet the threshold for originality."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
