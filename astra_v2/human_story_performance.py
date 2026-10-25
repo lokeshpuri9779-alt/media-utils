@@ -361,7 +361,7 @@ def _city_power(draw, t):
                                 x+27+k*34,1015-height+27+m*29),fill=col)
 
 
-def _alternate_city(draw, t):
+def _alternate_city(draw, t, *, progress=1.0):
     """Vacant, starless skyline through the open observatory doorway."""
     draw.polygon(((680,695),(955,695),(981,1164),(667,1164)),
                  fill=(9,17,33),outline=(142,170,186),width=5)
@@ -373,7 +373,7 @@ def _alternate_city(draw, t):
         for j in range(3):
             draw.rectangle((x+8,y+23+j*40,x+19,y+38+j*40),fill=(13,24,41))
     # Floor footprints advance toward the camera in alternating steps.
-    for i in range(4):
+    for i in range(min(4,max(0,round(progress*4)))):
         x=715+(i%2)*58+int(6*math.sin(t*.8))
         y=1028+i*44
         draw.ellipse((x,y,x+28,y+16),fill=(144,150,154))
@@ -498,11 +498,20 @@ def draw_human_scene(image, shot, t):
     if image.mode != "RGB" or image.size != (1080, 1920):
         raise CreativeReject("Human episode requires RGB 1080x1920 Studio frame")
     action=shot["story_human_action"]
+    from astra_v2.human_action_choreography import action_state
+    state = action_state(action, t, float(shot.get("duration") or 12))
     mood, look, gesture = PERFORMANCE[action]
     def performer(draw, x, y, time, **overrides):
         opts = {"emotion": mood, "gaze": look, "gesture": gesture}
         opts.update(overrides)
-        return _mara(draw, x, y, time, **opts)
+        # One-way approach and return-to-observation occur over the shot's
+        # actual narrative duration, not in a frozen opening 1.15 seconds.
+        # The second actor keeps their authored independent emotion.
+        walking_offset=round(35*state.movement)
+        if opts.get("reaching"):
+            opts["reaching"] = state.attention > .14 and state.aftermath < .95
+            time = 1.15*state.attention
+        return _mara(draw, x+walking_offset, y, time, **opts)
     d=ImageDraw.Draw(image)
     # Stage framing and a persistent observatory silhouette.
     d.rounded_rectangle((80,555,1000,1235),radius=28,
@@ -514,13 +523,16 @@ def draw_human_scene(image, shot, t):
     d.polygon(((83,1190),(1000,1190),(1000,1260),(83,1260)),
               fill=(58,64,80))
     if action == "discover_radio":
-        _radio(d,750,995,t,glow=True)
+        _radio(d,750,995,t,glow=state.event > .15)
         _line(d,((750,1080),(750,1195)),(134,112,84),16)
         performer(d,365+int(18*math.sin(t*.5)),885,t,reaching=True)
     elif action == "trace_cable":
         _radio(d,757,945,t)
         # Distinct floor cable connecting radios, read as a traceable object.
-        _line(d,((751,1039),(718,1158),(540,1185),(373,1108)),GOLD,10)
+        # Light travels along the cable; the discovery is not present at frame one.
+        path=((751,1039),(718,1158),(540,1185),(373,1108))
+        shown=max(1,round(1+2*state.event))
+        _line(d,path[:shown+1],GOLD,10)
         _radio(d,342,1109,t,glow=False,portable=True)
         performer(d,605,873,t,reaching=True)
     elif action == "hear_warning":
@@ -530,19 +542,19 @@ def draw_human_scene(image, shot, t):
         for j in range(5):
             cx=688+j*57
             d.rectangle((cx,710,cx+31,812), fill=(27,36,57))
-            if t<1.2+(j*.22):
+            if state.event < (j+1)/5:
                 d.rectangle((cx+7,736,cx+21,755),fill=GOLD)
         performer(d,350,872,t,reaching=True,alarm=True)
     elif action == "flee_door":
-        openness=max(.08,.76-min(1,t/5)*.63)
+        openness=max(.08,.76-state.progress*.63)
         _door(d,openness)
-        performer(d,420-int(min(140,t*29)),881,t,running=True,carrying=True,alarm=True)
+        performer(d,420-round(140*state.attention),881,t,running=True,carrying=True,alarm=True)
         # The radio is visibly carried while Mara runs.
-        _radio(d,525-int(min(140,t*29)),979+int(13*math.sin(t*11)),t,portable=True)
+        _radio(d,525-round(140*state.attention),979+int(13*math.sin(t*11)),t,portable=True)
     elif action == "guard_knocking_door":
         _door(d,.22+.045*math.sin(t*3.2))
         # An actual physical knock: repeated displacement at the door panel.
-        for phase in range(3):
+        for phase in range(3 if state.event > .08 else 0):
             x=886+phase*12
             radius=9+phase*10+int(abs(math.sin(t*3.2))*8)
             d.arc((x-radius,872-radius,x+radius,872+radius),
@@ -551,41 +563,46 @@ def draw_human_scene(image, shot, t):
         performer(d,368,857,t,alarm=True)
     elif action == "inspect_generator_clue":
         _generator(d,t)
-        _notebook(d,t)
+        if state.attention > .18:
+            _notebook(d,t)
         performer(d,375,865,t,reaching=True)
     elif action == "inspect_future_photograph":
-        _future_photograph(d)
+        if state.event > .12:
+            _future_photograph(d)
         _stranger(d,795,770,t)
         performer(d,327,875,t,reaching=True,alarm=True)
     elif action == "stop_stranger_switch":
-        _city_power(d,t)
-        _door(d,min(.9,.25+max(0,t-.9)*.1))
+        _city_power(d,state.event*3.4)
+        _door(d,min(.9,.25+state.event*.65))
         # The stranger actuates a dedicated wall switch; Mara reacts, not assists.
         d.rounded_rectangle((797,724,888,830),radius=12,
                             fill=(117,130,143),outline=INK,width=6)
-        d.line(((838,771),(838,738 if t>1.1 else 804)),
+        d.line(((838,771),(838,738 if state.event > .18 else 804)),
                fill=(248,191,103),width=11)
         _stranger(d,675,856,t,touching_switch=True)
         performer(d,279,870,t,reaching=True,alarm=True)
     elif action == "survey_dead_city":
         _door(d,.82)
-        _alternate_city(d,t)
+        _alternate_city(d,t,progress=state.attention)
         performer(d,337,864,t,reaching=True,alarm=True)
     elif action == "inspect_reverse_clock":
         _door(d,.42)
         _reverse_clock(d,t)
         performer(d,346,865,t,reaching=True,alarm=True)
     elif action == "study_altered_photographs":
-        _photo_wall(d,t)
+        if state.attention > .15:
+            _photo_wall(d,t)
         performer(d,343,868,t,reaching=True,alarm=True)
     elif action == "confront_mara_double":
         _door(d,.73)
         # An independently moving matching human puppet, not a stranger/animal.
         # The double wears Mara's same palette and silhouette for continuity.
         performer(d,307,865,t,reaching=True,alarm=True)
-        performer(d,748+int(10*math.sin(t*.85)),865,t,reaching=True,alarm=True,
+        if state.attention > .40:
+            performer(d,748+int(10*math.sin(t*.85)),865,t,reaching=True,alarm=True,
                   emotion="knowing",gaze=-1)
-        _blue_glass_key(d,866,969+int(6*math.sin(t*1.6)))
+        if state.event > .10:
+            _blue_glass_key(d,866,969+int(6*math.sin(t*1.6)))
         _radio(d,255,1131,t,portable=True)
         _radio(d,865,1131,t,portable=True)
     elif action == "face_duplicate_at_countdown":
@@ -597,7 +614,7 @@ def draw_human_scene(image, shot, t):
         _radio(d,254,1123,t,portable=True)
         _radio(d,868,1123,t,portable=True)
     elif action == "warn_parallel_cities":
-        _dual_city_futures(d,t)
+        _dual_city_futures(d,state.event*3.1)
         performer(d,309,862,t,alarm=True)
         performer(d,515,866,t,reaching=True,alarm=True)
     elif action == "split_glass_key":
@@ -605,13 +622,17 @@ def draw_human_scene(image, shot, t):
         performer(d,280,867,t,reaching=True,alarm=True)
         performer(d,769,866,t,reaching=True,alarm=True,
                   emotion="knowing",gaze=-1)
-        _key_halves(d,t)
+        if state.event < .04:
+            _blue_glass_key(d,540,930)
+        else:
+            _key_halves(d,.38+state.event*1.9)
         _radio(d,248,1145,t,portable=True)
         _radio(d,849,1145,t,portable=True)
     elif action == "seal_and_reveal_sea_door":
-        _sealed_door_stars(d,t)
+        _sealed_door_stars(d,state.attention*2.3)
         performer(d,298,868,t,reaching=True)
-        _notebook_sea_ending(d,t)
+        if state.aftermath > .10:
+            _notebook_sea_ending(d,t)
     else:
         raise CreativeReject("Unknown human action")
     return True
