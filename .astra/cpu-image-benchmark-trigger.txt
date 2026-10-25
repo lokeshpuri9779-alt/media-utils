@@ -6,3 +6,5 @@ Retry 2: diagnostic exception frame names only; no credentials or prompt text.
 Retry 3: Transformers 4.x compatibility pin for CLIPFeatureExtractor.
 
 Retry 4: record bounded model constructor ValueError details.
+
+Retry 5: alternate public OpenVINO SD1.5 checkpoint with UNet config.
