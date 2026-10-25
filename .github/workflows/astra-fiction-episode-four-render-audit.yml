@@ -6,6 +6,8 @@ on:
     paths:
       - '.github/workflows/astra-fiction-episode-four-render-audit.yml'
       - 'astra_v2/human_story_performance.py'
+      - 'astra_v2/human_story_composition.py'
+      - 'tests/test_human_story_composition.py'
       - 'astra_v2/human_performance_cues.py'
       - 'tests/test_human_physical_acting.py'
       - 'astra_v2/human_prop_interaction.py'
@@ -69,6 +71,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_human_skeletal_rig.py' -v
           python -m unittest discover -s tests -p 'test_human_prop_interaction.py' -v
           python -m unittest discover -s tests -p 'test_human_physical_acting.py' -v
+          python -m unittest discover -s tests -p 'test_human_story_composition.py' -v
           python -m unittest discover -s tests -p 'test_human_cinematic_staging.py' -v
           python -m unittest discover -s tests -p 'test_omniroute_local.py' -v
       - name: Restore verified original background pack

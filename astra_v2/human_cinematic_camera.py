@@ -108,9 +108,11 @@ def apply_human_camera(frame, shot, t):
         raise CreativeReject("Cinematic human camera requires a reviewed character")
     from astra_v2.human_story_performance import validate_human_scene
     validate_human_scene(shot)
-    box = camera_box(
-        shot["story_human_action"],
-        float(t),
+    # The legacy whole-frame micro-push is retained as a compatibility
+    # geometry helper, but the reviewed output uses mid-stage editorial
+    # compositions. This permits real close-ups without losing subtitles.
+    from astra_v2.human_story_composition import compose_story_stage
+    return compose_story_stage(
+        frame, shot["story_human_action"], float(t),
         float(shot.get("duration") or 0),
     )
-    return frame.crop(box).resize(FRAME,Image.Resampling.BILINEAR)

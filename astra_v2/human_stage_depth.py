@@ -81,7 +81,10 @@ def draw_observatory_stage(image: Image.Image, action: str, t: float,
 
     # Tall glazed view: architecture overlays but does not replace background.
     d.arc((145,614,940,1260),183,358,fill=(115,145,169),width=11)
-    d.arc((166,634,918,1231),184,357,fill=COPPER,width=3)
+    # Cool, architectural metal rather than the previous long amber arch.
+    # Once genuinely close-up shots enlarged the arch, its golden stroke
+    # resembled the known unwanted stage-guide graphic in final videos.
+    d.arc((166,634,918,1231),184,357,fill=(133,166,177),width=3)
     for x in (426,710):
         d.line(((x,637),(x,1159)),fill=(57,83,105),width=13)
         d.line(((x+4,648),(x+4,1150)),fill=(161,170,158),width=3)
