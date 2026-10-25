@@ -42,7 +42,8 @@ class IllustratedSetContinuityTests(unittest.TestCase):
     def test_six_styles_are_visibly_distinct_not_palette_only_metadata(self):
         signatures={}
         for action in SET_PROFILES:
-            frame,report=preview(action)
+            frame=Image.new("RGB",FRAME,BACKGROUND)
+            report=draw_environment_art(frame,action,.64*12,12)
             profile=report['profile']
             self.assertEqual(report['source'],'original-cpu-art-library')
             self.assertEqual(report['asset_count'],6)
@@ -106,7 +107,7 @@ class IllustratedSetContinuityTests(unittest.TestCase):
         self.assertEqual(scenes,16)
 
     def test_chapter_location_has_time_specific_visible_readout(self):
-        a,_=preview('radio_workshop' if False else 'discover_radio',.03)
+        a,_=preview('discover_radio',.03)
         b,_=preview('discover_radio',.89)
         target=(747,660,979,715)
         self.assertIsNotNone(ImageChops.difference(
