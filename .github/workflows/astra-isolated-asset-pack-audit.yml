@@ -89,7 +89,7 @@ jobs:
       - name: Encode isolated compositor MP4 and finalize evidence
         run: |
           ffmpeg -hide_banner -loglevel error -y -loop 1 -framerate 24 -i runtime-artifacts/audit/railway-compositor.png -t 1 -c:v libx264 -pix_fmt yuv420p -movflags +faststart runtime-artifacts/audit/railway-compositor-smoke.mp4
-          ffprobe -v error -select_streams v:0 -show_entries stream=codec_name,width,height -of json runtime-artifacts/audit/railway-compositor-smoke.mp4 > runtime-artifacts/audit/video-probe.json
+          ffprobe -v error -select_streams v:0 -show_entries stream=codec_name,width,height,duration,nb_frames -of json runtime-artifacts/audit/railway-compositor-smoke.mp4 > runtime-artifacts/audit/video-probe.json
           python - <<'PY'
           import json
           from pathlib import Path
@@ -97,6 +97,9 @@ jobs:
           streams = probe.get('streams', [])
           assert len(streams) == 1 and streams[0]['codec_name'] == 'h264'
           assert (streams[0]['width'], streams[0]['height']) == (540, 960)
+          assert float(streams[0]['duration']) >= 0.9, 'MP4 duration too short'
+          assert int(streams[0]['nb_frames']) >= 20, 'MP4 has too few frames'
+          assert Path('runtime-artifacts/audit/railway-compositor-smoke.mp4').stat().st_size > 1000
           report = json.loads(Path('runtime-artifacts/audit/result.json').read_text())
           report.update({'isolated_encoded_mp4': True, 'full_mp4_render': False,
                          'video_kind': 'one-second compositor-frame smoke, not full Studio output'})
