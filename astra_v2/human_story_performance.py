@@ -309,6 +309,12 @@ def _mara(draw, x, y, t, *, reaching=False, alarm=False, running=False,
         hx,hy=points[2]
         draw.ellipse((hx-17,hy-17,hx+17,hy+17),
                      fill=SKIN,outline=INK,width=3)
+    # The exact wrist pixels used above are exported to author attached props.
+    # This prevents another renderer inventing independent sinusoidal paths.
+    return {
+        "left_hand": (x+round(pose.left_hand[0]),y+round(pose.left_hand[1])),
+        "right_hand": (x+round(pose.right_hand[0]),y+round(pose.right_hand[1])),
+    }
 
 
 def _generator(draw, t):
@@ -574,9 +580,12 @@ def draw_human_scene(image, shot, t):
     elif action == "flee_door":
         openness=max(.08,.76-state.progress*.63)
         _door(d,openness)
-        performer(d,420-round(140*state.attention),881,t,running=True,carrying=True,alarm=True)
-        # The radio is visibly carried while Mara runs.
-        _radio(d,525-round(140*state.attention),979+int(13*math.sin(t*11)),t,portable=True)
+        actor=performer(d,420-round(140*state.attention),881,t,
+                        running=True,carrying=True,alarm=True)
+        # Receiver and gripping fingers follow the *same* IK wrist coordinates,
+        # even when Mara moves left, changes stride or the camera reframes.
+        from astra_v2.human_prop_interaction import draw_radio_in_hand
+        draw_radio_in_hand(d,actor["right_hand"],t,_radio)
     elif action == "guard_knocking_door":
         _door(d,.22+.045*math.sin(t*3.2))
         # An actual physical knock: repeated displacement at the door panel.
@@ -645,13 +654,17 @@ def draw_human_scene(image, shot, t):
         performer(d,515,866,t,reaching=True,alarm=True)
     elif action == "split_glass_key":
         _door(d,.57)
-        performer(d,280,867,t,reaching=True,alarm=True)
-        performer(d,769,866,t,reaching=True,alarm=True,
-                  emotion="knowing",gaze=-1)
+        mara=performer(d,280,867,t,reaching=True,alarm=True)
+        double=performer(d,769,866,t,reaching=True,alarm=True,
+                         emotion="knowing",gaze=-1)
         if state.event < .04:
             _blue_glass_key(d,540,930)
         else:
-            _key_halves(d,.38+state.event*1.9)
+            # Separate the key, then transfer its two physical fragments
+            # into Mara's right hand and the double's left hand.
+            from astra_v2.human_prop_interaction import draw_split_key_in_hands
+            draw_split_key_in_hands(d,state.event,
+                                    mara["right_hand"],double["left_hand"])
         _radio(d,248,1145,t,portable=True)
         _radio(d,849,1145,t,portable=True)
     elif action == "seal_and_reveal_sea_door":
