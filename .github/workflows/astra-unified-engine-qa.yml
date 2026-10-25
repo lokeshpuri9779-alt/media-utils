@@ -11,6 +11,9 @@ on:
       - 'experimental/motion_profiles.py'
       - 'tools/astra_unified_preview.py'
       - 'tools/astra_unified_coverage.py'
+      - 'astra_v2/renderer_eligibility.py'
+      - 'astra_v2/publication_quality.py'
+      - 'tests/test_renderer_eligibility.py'
       - 'tests/test_unified_story_engine.py'
       - '.github/workflows/astra-unified-engine-qa.yml'
   workflow_dispatch:
@@ -37,11 +40,18 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_astra_animal_scenes.py' -v
       - name: Validate grounding, contacts, and camera continuity
         run: python -m unittest discover -s tests -p 'test_ensemble_physical_motion.py' -v
+      - name: Test shared renderer eligibility and publication recheck
+        run: python -m unittest discover -s tests -p 'test_renderer_eligibility.py' -v
       - name: Audit all currently production-eligible stories
+        id: coverage
         run: python -m tools.astra_unified_coverage
       - name: Render four scene families through one engine
+        id: preview
+        # Retain review evidence without suppressing a failed coverage gate.
+        if: ${{ !cancelled() && (steps.coverage.outcome == 'success' || steps.coverage.outcome == 'failure') }}
         run: python -m tools.astra_unified_preview
       - name: Decode and verify animation preview
+        if: ${{ !cancelled() && steps.preview.outcome == 'success' }}
         run: |
           python - <<'PY'
           import json, subprocess
@@ -58,6 +68,7 @@ jobs:
           print("ASTRA_UNIFIED_MP4_DECODE_OK")
           PY
       - name: Save unified story preview for human visual review
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: astra-unified-four-grammar-preview
