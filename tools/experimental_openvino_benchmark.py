@@ -8,7 +8,7 @@ import traceback
 from pathlib import Path
 
 APPROVED_MODELS = {
-    "preconverted": "echarlaix/stable-diffusion-v1-5-openvino",
+    "preconverted": "piimaila/stable-diffusion-v1-5-openvino",
     "export": "stable-diffusion-v1-5/stable-diffusion-v1-5",
 }
 PROMPT = ("original cinematic animated-film illustration, a small copper robot holding "
