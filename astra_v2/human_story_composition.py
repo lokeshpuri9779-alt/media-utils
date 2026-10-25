@@ -19,23 +19,50 @@ STAGE_SIZE=(1080,890)
 # style, start zoom, end zoom, x focus, y focus; grounded in the current
 # already-modeled objects and people of The Tomorrow Signal.
 DIRECTED_SHOTS={
-    "discover_radio": ("portrait",1.31,1.44,400,868),
-    "trace_cable": ("object",1.30,1.48,715,994),
+    "discover_radio": ("portrait",1.31,1.44,518,868),
+    "trace_cable": ("object",1.30,1.48,626,975),
     "hear_warning": ("portrait",1.39,1.55,374,854),
     "flee_door": ("tracking",1.16,1.32,492,914),
     "guard_knocking_door": ("tracking",1.18,1.34,615,883),
-    "inspect_generator_clue": ("object",1.28,1.49,707,976),
-    "inspect_future_photograph": ("object",1.30,1.49,733,935),
-    "stop_stranger_switch": ("tracking",1.16,1.34,643,898),
+    "inspect_generator_clue": ("object",1.28,1.49,613,938),
+    "inspect_future_photograph": ("object",1.23,1.34,569,923),
+    "stop_stranger_switch": ("tracking",1.16,1.34,573,898),
     "survey_dead_city": ("wide",1.01,1.09,539,922),
-    "inspect_reverse_clock": ("object",1.28,1.46,745,878),
-    "study_altered_photographs": ("object",1.28,1.48,746,936),
+    "inspect_reverse_clock": ("object",1.28,1.46,608,878),
+    "study_altered_photographs": ("object",1.28,1.48,597,913),
     "confront_mara_double": ("duo",1.04,1.14,539,910),
     "face_duplicate_at_countdown": ("duo",1.05,1.14,540,918),
     "warn_parallel_cities": ("duo",1.02,1.13,543,923),
     "split_glass_key": ("duo",1.06,1.18,545,964),
-    "seal_and_reveal_sea_door": ("reveal",1.10,1.40,667,1035),
+    "seal_and_reveal_sea_door": ("reveal",1.10,1.40,591,1035),
 }
+# Keep the story's essential on-screen people and their narrated props
+# within the source crop. A technically valid 1.5x shot previously removed
+# Mara's face from the future-photograph scene; geometry is now editorially
+# constrained before final encoding.
+CRITICAL_HORIZONTAL_SPANS={
+    "discover_radio": (275,880),
+    "trace_cable": (490,919),
+    "hear_warning": (260,450),
+    "flee_door": (190,510),
+    "guard_knocking_door": (275,938),
+    "inspect_generator_clue": (282,973),
+    "inspect_future_photograph": (237,905),
+    "stop_stranger_switch": (188,820),
+    "survey_dead_city": (245,945),
+    "inspect_reverse_clock": (255,903),
+    "study_altered_photographs": (245,905),
+    "confront_mara_double": (210,850),
+    "face_duplicate_at_countdown": (217,870),
+    "warn_parallel_cities": (215,610),
+    "split_glass_key": (184,866),
+    "seal_and_reveal_sea_door": (205,954),
+}
+# For scenes retaining a living character, show the top of their head and
+# eyes instead of magnifying the torso into a faceless shot. The final
+# notebook reveal may intentionally leave Mara partially offscreen.
+MAX_ACTOR_CROP_TOP=603
+
 # Identical character identity, but original facing direction changes by
 # each actual physical encounter. Left/right double actors look toward each
 # other, not both straight ahead with an identical frozen front-facing head.
@@ -97,7 +124,15 @@ def stage_crop_box(action,t,duration):
     cx=round(540+(x_focus-540)*(.55+.45*p))
     cy=round(925+(y_focus-925)*(.55+.45*p))
     left=min(1080-cw,max(0,round(cx-cw/2)))
+    needed_left,needed_right=CRITICAL_HORIZONTAL_SPANS[action]
+    minimum_left=max(0,needed_right-cw)
+    maximum_left=min(1080-cw,needed_left)
+    if minimum_left>maximum_left:
+        raise CreativeReject("Authored crop cannot contain required story performers")
+    left=max(minimum_left,min(maximum_left,left))
     top=min(STAGE[3]-ch,max(STAGE[1],round(cy-ch/2)))
+    if action!="seal_and_reveal_sea_door":
+        top=min(top,MAX_ACTOR_CROP_TOP)
     return (left,top,left+cw,top+ch)
 
 
