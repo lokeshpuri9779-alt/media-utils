@@ -1,17 +1,28 @@
 {
-  "approved_production_candidates_before_history": 142,
+  "approved_production_candidates_before_history": 95,
   "authored_candidates": 253,
   "block_reasons": {
     "insufficient_narrative_detail": 22,
     "insufficient_visual_variety": 91,
-    "narrative_duplicate": 39
+    "narrative_duplicate": 39,
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 8,
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 8,
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 2,
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 9,
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 2,
+    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 13,
+    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+    "publication_renderer_incompatible: shot 4: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 3,
+    "publication_renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 23,
+    "publication_renderer_incompatible: shot 4: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1
   },
-  "blocked": 150,
-  "eligible": 103,
+  "blocked": 197,
+  "eligible": 56,
   "history_records": 401,
   "latest_production_outcome": "processing",
   "latest_production_reason": "",
   "read_only": true,
   "status": "approved_candidates_present",
-  "structurally_eligible_not_necessarily_approved": 103
+  "structurally_eligible_not_necessarily_approved": 56
 }
