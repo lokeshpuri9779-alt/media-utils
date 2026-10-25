@@ -1186,6 +1186,14 @@ def render_frame(plan,t,genre,total):
         im=composite_cached_asset(im,s.get('resolved_asset',{}),t=t,u=u,shot=s)
     elif not s.get('artwork_asset_id') and layers['draw_director_asset']:
         asset_layer(im,s,t,u,accent)
+    # Optional action-directed story camera runs AFTER foreground animation
+    # but BEFORE title/caption layers; text stays crisp and safely positioned.
+    # Never change production videos unless this experimental quality option
+    # is explicitly enabled for reviewed ASTRA human fiction.
+    if (genre == 'fiction' and s.get('story_human_actor') == 'mara'
+            and os.environ.get('ASTRA_HUMAN_CINEMATIC_CAMERA', '0') == '1'):
+        from astra_v2.human_cinematic_camera import apply_human_camera
+        im = apply_human_camera(im, s, u)
     d=ImageDraw.Draw(im)
     comparison_labels=s.get('comparison_labels') or []
     if len(comparison_labels)==2:

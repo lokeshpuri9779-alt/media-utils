@@ -190,9 +190,16 @@ def _mara(draw, x, y, t, *, reaching=False, alarm=False, running=False, carrying
                  fill=(215, 224, 216))
     draw.line(((x,y-64),(x,y+188)),fill=(20,65,85),width=6)
     draw.ellipse((x-8,y+125,x+8,y+141),fill=GOLD)
-    # Two separately posed arms, with a clear target-reaching gesture.
+    # A reach is a timed shoulder-to-hand motion, not a frozen raised arm
+    # for the entire 12-second narration beat. Gesture eases toward the prop.
+    progress=max(0.0,min(1.0,t/1.15))
+    progress=progress*progress*(3-2*progress)
     left_hand=(x-124,y+128)
-    right_hand=(x+145,y-38) if reaching else ((x+144,y+10) if carrying else (x+113+limb,y+155))
+    if reaching:
+        right_hand=(x+round(113+32*progress),
+                    y+round(155-193*progress))
+    else:
+        right_hand=(x+144,y+10) if carrying else (x+113+limb,y+155)
     if running:
         left_hand=(x-149,y+50-limb)
         right_hand=(x+133,y+55+limb)
