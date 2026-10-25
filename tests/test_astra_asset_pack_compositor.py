@@ -1,7 +1,9 @@
 """Tests for the opt-in local visual asset compositor."""
 import json
+import os
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 from PIL import Image
 from astra_v2.visual_artifact_backdrop import apply_pack_background, _cached_pack_background, analyze_story_scene
@@ -34,6 +36,29 @@ class AssetPackCompositorTests(unittest.TestCase):
                                         "speech": "The rabbit waited."})
         self.assertIsNone(decision["scene"])
 
+    def test_story_shots_use_distinct_but_stable_verified_backgrounds(self):
+        from astra_v2.visual_artifact_backdrop import _cached_pack_background
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp)
+            (root/"art").mkdir()
+            (root/"art"/"manifest.json").write_text('{"assets":[]}')
+            candidates=[]
+            for number in range(8):
+                name=f"observatory-{number}.png"
+                Image.new("RGB",(100,180),(number*25,60,105)).save(root/"art"/name)
+                candidates.append({"id":str(number),"path":"art/"+name})
+            with (patch("astra_v2.quality_asset_selector.select_assets", return_value=candidates),
+                 patch.dict(os.environ, {"ASTRA_ASSET_PACK_ENABLED":"1",
+                                        "ASTRA_ASSET_PACK_IMMUTABLE":"1"})):
+                _cached_pack_background.cache_clear()
+                def selected(shot_number):
+                    return _cached_pack_background(str(root),"observatory","season-1",
+                                                   "shorts",(100,180),shot_number)[1]["id"]
+                picks=[selected(i) for i in range(1,5)]
+                self.assertEqual(len(set(picks)),4,
+                                 "Consecutive story shots reused one background")
+                self.assertEqual(picks,[selected(i) for i in range(1,5)])
+
     def test_short_and_long_keep_output_dimensions(self):
         with tempfile.TemporaryDirectory() as temp:
             root=Path(temp)
@@ -54,8 +79,11 @@ class AssetPackCompositorTests(unittest.TestCase):
                 self.assertEqual(result.size,size)
                 self.assertNotEqual(result.getpixel((size[0]//2,size[1]//2)),(0,0,0))
             info_before=_cached_pack_background.cache_info()
-            apply_pack_background(Image.new("RGB",(1080,1920)),{"story_environment":"forest"},
-                                  "stable-scene",root=root,video_format="shorts")
+            # This assertion tests mutable-pack cache bypass. Pin its mode
+            # explicitly even when the containing workflow audits immutable packs.
+            with patch.dict(os.environ, {"ASTRA_ASSET_PACK_IMMUTABLE":"0"}):
+                apply_pack_background(Image.new("RGB",(1080,1920)),{"story_environment":"forest"},
+                                      "stable-scene",root=root,video_format="shorts")
             info_after=_cached_pack_background.cache_info()
             # Mutable packs deliberately bypass decoded-image caching.
             self.assertEqual(info_after.hits,info_before.hits)

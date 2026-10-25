@@ -8,6 +8,7 @@ from __future__ import annotations
 import hashlib
 import re
 import os
+import math
 from pathlib import Path
 from functools import lru_cache
 from PIL import Image, ImageDraw
@@ -59,8 +60,8 @@ def analyze_story_scene(shot):
 def choose_scene(shot):
     return analyze_story_scene(shot)["scene"]
 
-@lru_cache(maxsize=16)
-def _cached_pack_background(root_path, scene, identity, video_format, size):
+@lru_cache(maxsize=64)
+def _cached_pack_background(root_path, scene, identity, video_format, size, shot_number=None):
     """Return both decoded art and its verified provenance, cached per shot."""
     from astra_v2.quality_asset_selector import select_assets
     from PIL import ImageOps
@@ -70,7 +71,15 @@ def _cached_pack_background(root_path, scene, identity, video_format, size):
     if not candidates:
         return None
     seed = int.from_bytes(hashlib.sha256(str(identity).encode()).digest()[:4], "big")
-    chosen = candidates[seed % len(candidates)]
+    # Reuse an environment's style but vary the actual artwork viewpoint by
+    # authored shot. A story-stable identity alone previously reused ONE PNG
+    # for every beat, even when 50 verified alternatives were available.
+    count = len(candidates)
+    stride = max(1, count // 4)
+    while math.gcd(stride, count) != 1:
+        stride += 1
+    offset = (int(shot_number) - 1) if shot_number is not None else 0
+    chosen = candidates[(seed + offset * stride) % count]
     with Image.open(root / chosen["path"]) as source:
         backdrop = ImageOps.fit(source.convert("RGB"), size,
                                 method=Image.Resampling.LANCZOS)
@@ -83,6 +92,8 @@ def apply_pack_background(image, shot, identity, *, root=None, video_format="sho
     from astra_v2.asset_usage_audit import observe
     if video_format not in ("shorts", "long"):
         raise ValueError("invalid video format")
+    if shot_number is not None and (not isinstance(shot_number, int) or shot_number < 1):
+        raise ValueError("shot_number must be a positive integer")
     analysis = analyze_story_scene(shot)
     scene = analysis["scene"]
     if analysis["needs_background"]:
@@ -101,7 +112,7 @@ def apply_pack_background(image, shot, identity, *, root=None, video_format="sho
     cache_allowed = (os.getenv("ASTRA_ASSET_PACK_ENABLED") == "1" and
                      os.getenv("ASTRA_ASSET_PACK_IMMUTABLE") == "1")
     loader = _cached_pack_background if cache_allowed else _cached_pack_background.__wrapped__
-    selection = loader(root_path, scene, str(identity), video_format, image.size)
+    selection = loader(root_path, scene, str(identity), video_format, image.size, shot_number)
     if selection is None:
         observe(shot_number, analysis, "no_matching_background", identity)
         return image

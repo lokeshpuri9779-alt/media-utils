@@ -1,0 +1,130 @@
+name: ASTRA Fiction Episode Full Render Audit
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/astra-fiction-episode-render-audit.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  fiction-episode:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      ASTRA_CHANNEL: rayvan
+      ASTRA_UNIFIED_STORY_ENGINE: '1'
+      ASTRA_FICTION_VISUAL_GUARD: '1'
+      ASTRA_ASSET_PACK_ENABLED: '1'
+      ASTRA_ASSET_PACK_AUDIT: '1'
+      ASTRA_ASSET_PACK_IMMUTABLE: '1'
+      ASTRA_ASSET_PACK_ROOT: runtime-artifacts/verified-pack
+      ASTRA_ASSET_AUDIT_DIR: runtime-artifacts/fiction-episode/receipts
+      ASTRA_OPENAI_ENABLED: '0'
+      ASTRA_OPENAI_ALLOW_PAID_API: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned Studio stack and ffprobe
+        run: |
+          python -m pip install -r requirements.txt
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+      - name: Check visual direction and per-shot asset-selection regressions
+        run: |
+          python -m unittest discover -s tests -p 'test_omniroute_local.py' -v
+          python -m unittest discover -s tests -p 'test_astra_asset_pack_compositor.py' -v
+      - name: Restore original verified artwork
+        uses: actions/download-artifact@v4
+        with:
+          name: astra-original-visual-pack
+          run-id: 39960540392
+          github-token: ${{ github.token }}
+          path: runtime-artifacts/download
+      - name: Verify source artwork integrity
+        run: python -m tools.astra_restore_visual_pack runtime-artifacts/download/astra-visual-pack.zip runtime-artifacts/verified-pack --expected 3200
+      - name: Render actual existing Season 1 Episode 1 with Studio
+        run: |
+          mkdir -p runtime-artifacts/fiction-episode
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from astra_v2.omniroute_local import catalog
+          from studio_renderer import render_short
+          stories = catalog()
+          matches = [s for s in stories if s.get('content_id') == 'rayvan-season-01-episode-01']
+          assert len(matches) == 1, 'Expected existing canonical episode 1'
+          episode = matches[0]
+          assert episode['genre'] == 'fiction' and episode['production_ready']
+          assert len(episode['story_beats']) == 4
+          root = Path('runtime-artifacts/fiction-episode')
+          (root/'story.json').write_text(json.dumps(episode, indent=2, default=str))
+          report = render_short(episode, root/'episode-01.mp4', still_dir=root/'scene-stills')
+          (root/'studio-report.json').write_text(json.dumps(report, indent=2, default=str))
+          PY
+      - name: Decode actual MP4 and build storyboard review sheet
+        run: |
+          ffprobe -v error -show_entries format=duration:stream=codec_type,codec_name,width,height -of json runtime-artifacts/fiction-episode/episode-01.mp4 > runtime-artifacts/fiction-episode/ffprobe.json
+          python - <<'PY'
+          import hashlib, json, subprocess
+          from pathlib import Path
+          from PIL import Image, ImageDraw
+          root=Path('runtime-artifacts/fiction-episode')
+          video=root/'episode-01.mp4'
+          report=json.loads((root/'studio-report.json').read_text())
+          probe=json.loads((root/'ffprobe.json').read_text())
+          assert report['genre']=='fiction' and len(report['scenes'])==4
+          v=[s for s in probe['streams'] if s.get('codec_type')=='video']
+          a=[s for s in probe['streams'] if s.get('codec_type')=='audio']
+          assert len(v)==1 and v[0]['codec_name']=='h264'
+          assert (v[0]['width'],v[0]['height'])==(1080,1920)
+          assert a and any(s['codec_name']=='aac' for s in a)
+          assert float(probe['format']['duration'])>0
+          receipts=list((root/'receipts').glob('*.json'))
+          assert len(receipts)==1, 'Missing full Studio asset receipt'
+          receipt=json.loads(receipts[0].read_text())
+          sha=hashlib.sha256(video.read_bytes()).hexdigest()
+          assert receipt['video_sha256']==sha
+          assert receipt['content_id']=='rayvan-season-01-episode-01'
+          assert receipt['shot_count']==len(report['scenes'])==4
+          assert receipt['asset_coverage_status']=='full', receipt['statuses']
+          assert all(s['status']=='composited' and s['pixel_changed'] and s['asset'] for s in receipt['shots'])
+          art_ids=[s['asset']['id'] for s in receipt['shots']]
+          assert len(set(art_ids))==len(art_ids), f'Background reused across distinct episode shots: {art_ids}'
+          thumbs=[]
+          for index,scene in enumerate(report['scenes'],1):
+              at=float(scene['start'])+float(scene['duration'])*.5
+              output=root/f'decoded-beat-{index:02d}.png'
+              subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y',
+                              '-ss',f'{at:.3f}','-i',str(video),'-frames:v','1',str(output)],
+                             check=True,timeout=45)
+              with Image.open(output) as frame:
+                  thumbs.append(frame.convert('RGB').resize((270,480),Image.Resampling.LANCZOS))
+          sheet=Image.new('RGB',(540,960),(15,16,22))
+          for i,im in enumerate(thumbs):
+              sheet.paste(im,((i%2)*270,(i//2)*480))
+          sheet.save(root/'decoded-video-contact-sheet.jpg',quality=90)
+          (root/'render-verification.json').write_text(json.dumps({
+              'content_id':receipt['content_id'],
+              'genre':'fiction','verified_shots':receipt['composited_shots'],
+              'artifact_scope':'Full encoded episode, not evidence of story-semantic fidelity',
+              'video_sha256':sha,'duration':probe['format']['duration'],
+              'decoded_preview_frames':len(thumbs),
+              'manual_visual_review_required':True,
+              'youtube_uploaded':False
+          },indent=2))
+          print('ASTRA_FICTION_EPISODE_VERIFIED='+str(root/'render-verification.json'))
+          PY
+      - name: Preserve full fiction episode, samples and receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-season-one-episode-one-visual-review
+          path: runtime-artifacts/fiction-episode/
+          if-no-files-found: warn
+          retention-days: 7

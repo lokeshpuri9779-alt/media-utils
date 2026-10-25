@@ -9,6 +9,16 @@ class LocalOmniRouteTests(unittest.TestCase):
         self.assertEqual(len({s["content_id"] for s in stories}), 4)
         self.assertTrue(all(len(s["story_beats"]) == 4 for s in stories))
 
+    def test_season_one_pilot_visuals_match_narrated_objects(self):
+        from astra_v2.directed_scene_contract import directed_scene_issue
+        pilot = next(story for story in catalog() if story["episode"] == 1)
+        self.assertEqual([beat["visual"] for beat in pilot["story_beats"]],
+                         ["signal", "signal", "door", "door"])
+        for number, beat in enumerate(pilot["story_beats"], 1):
+            self.assertIsNone(directed_scene_issue({
+                **beat, "story_title": pilot["title"],
+            }), f"Episode 1 beat {number} has a mismatched visual")
+
     def test_exclusions_do_not_block_future_rendering(self):
         first_id = "rayvan-season-01-episode-01"
         stories = catalog(excluded_ids={first_id}, max_candidates=30)

@@ -128,7 +128,14 @@ def catalog(excluded_ids=(), max_candidates=12, excluded_titles=()):
         }
         if episode in episode_arcs:
             speeches = episode_arcs[episode]
-            beats = [(headline, speeches[i], visual_id, label, role)
+            # The Season 1 opening describes two radios followed by a hidden
+            # door. Do not illustrate the door events with an unrelated signal
+            # or planet graphic: the unified directed-scene quality guard
+            # correctly rejects a signal icon without a narrated signal.
+            episode_one_visuals = ('signal', 'signal', 'door', 'door')
+            beats = [(headline, speeches[i],
+                      episode_one_visuals[i] if episode == 1 else visual_id,
+                      label, role)
                      for i, (headline, _speech, visual_id, label, role) in enumerate(beats)]
         from astra_v2.series_character_approval import approved_character_metadata
         story_record = {
