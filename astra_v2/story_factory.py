@@ -6,7 +6,8 @@ import json
 from pathlib import Path
 from astra_v2.story_expansion_2000 import MECHANISMS as BASE_MECHANISMS, ANIMAL_PAIRS, SETTINGS
 from astra_v2.story_factory_premises import NEW_MECHANISMS
-MECHANISMS = BASE_MECHANISMS + NEW_MECHANISMS
+from astra_v2.story_factory_fresh_premises import FRESH_MECHANISMS
+MECHANISMS = BASE_MECHANISMS + NEW_MECHANISMS + FRESH_MECHANISMS
 
 TARGET = 196000
 CONTEXTS = (
@@ -95,13 +96,19 @@ def generate(state_path, output_path, batch_size=500):
     state=json.loads(state_file.read_text()) if state_file.exists() else {}
     cursor=int(state.get("next_slot",0))
     if not 0 <= cursor <= TARGET: raise ValueError("invalid cursor")
-    end=min(cursor+batch_size,TARGET)
-    rows=[candidate_at(i) for i in range(cursor,end)]
     seen=set(state.get("seen_premise_keys", []))
-    # Prioritize newly authored mechanisms without resetting the persistent cursor.
-    # Preserve the slot and derive a new identity to avoid recycling early IDs.
+    # Count genuinely unseen authored causal arcs, not superficial variants.
     unseen=[i for i, mechanism in enumerate(MECHANISMS)
             if mechanism[0] not in seen]
+    requested=min(batch_size, TARGET-cursor)
+    # A spent finite premise library must not produce 500 near-identical drafts
+    # every hour. Three rejected seeds are enough for the bounded AI rewrite
+    # queue to request a NEW plot, without claiming those seeds are original.
+    emitted=min(requested, len(unseen)) if unseen else min(requested, 3)
+    end=cursor+emitted
+    rows=[candidate_at(i) for i in range(cursor,end)]
+    # Prioritize newly authored mechanisms without resetting the persistent cursor.
+    # Preserve the slot and derive a new identity to avoid recycling early IDs.
     for position, mechanism_index in enumerate(unseen[:len(rows)]):
         original=rows[position]
         replacement=candidate_at(mechanism_index)
