@@ -22,7 +22,12 @@ def _verified_inventory(root):
 def select_assets(root, *, kind, tags=(), style=None, min_size=128, limit=5,
                   allow_attribution=False, video_format=None):
     root=Path(root).resolve()
-    # The production pack is restored once and immutable during a worker run.\n    # Outside that explicit mode, retain fail-closed per-call verification.\n    if os.getenv('ASTRA_ASSET_PACK_ENABLED') == '1' and os.getenv('ASTRA_ASSET_PACK_IMMUTABLE') == '1':\n        report, manifest = _verified_inventory(root)\n    else:\n        report = validate_library(root)\n        manifest = json.loads((root / 'art' / 'manifest.json').read_text())
+    # Only cache an explicitly immutable, previously restored asset pack.
+    if os.getenv('ASTRA_ASSET_PACK_ENABLED') == '1' and os.getenv('ASTRA_ASSET_PACK_IMMUTABLE') == '1':
+        report, manifest = _verified_inventory(root)
+    else:
+        report = validate_library(root)
+        manifest = json.loads((root / 'art' / 'manifest.json').read_text())
     if not report["verified_files"]:
         return []
     verified={a["id"]:a for a in report["assets"]}
