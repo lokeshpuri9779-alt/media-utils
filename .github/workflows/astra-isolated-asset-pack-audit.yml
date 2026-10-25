@@ -14,6 +14,7 @@ jobs:
     env:
       ASTRA_ASSET_PACK_ENABLED: '1'
       ASTRA_ASSET_PACK_AUDIT: '1'
+      ASTRA_ASSET_PACK_IMMUTABLE: '1'
       ASTRA_ASSET_PACK_ROOT: runtime-artifacts/verified-pack
     steps:
       - uses: actions/checkout@v4
@@ -31,6 +32,28 @@ jobs:
           path: runtime-artifacts/download
       - name: Restore and verify 3200 backgrounds
         run: python -m tools.astra_restore_visual_pack runtime-artifacts/download/astra-visual-pack.zip runtime-artifacts/verified-pack --expected 3200
+      - name: Benchmark verified inventory cache
+        run: |
+          python - <<'PY'
+          import json, time
+          from pathlib import Path
+          from astra_v2.quality_asset_selector import select_assets, _verified_inventory
+          root = Path('runtime-artifacts/verified-pack')
+          _verified_inventory.cache_clear()
+          start = time.perf_counter()
+          first = select_assets(root, kind='background', tags=('railway',), video_format='shorts', limit=50)
+          cold_seconds = time.perf_counter() - start
+          start = time.perf_counter()
+          second = select_assets(root, kind='background', tags=('railway',), video_format='shorts', limit=50)
+          warm_seconds = time.perf_counter() - start
+          info = _verified_inventory.cache_info()
+          assert first and first == second, 'asset selection mismatch'
+          assert info.misses == 1 and info.hits >= 1, f'cache not reused: {info}'
+          output = Path('runtime-artifacts/audit')
+          output.mkdir(parents=True, exist_ok=True)
+          (output / 'cache-benchmark.json').write_text(json.dumps({'cold_seconds': round(cold_seconds, 4), 'warm_seconds': round(warm_seconds, 4), 'verified_assets': 3200, 'cache_hits': info.hits, 'cache_misses': info.misses, 'selection_count': len(first)}, indent=2))
+          print(f'Cold {cold_seconds:.3f}s; warm {warm_seconds:.3f}s; cache hits {info.hits}')
+          PY
       - name: Verify actual compositor changes pixels
         run: |
           python - <<'PY'
