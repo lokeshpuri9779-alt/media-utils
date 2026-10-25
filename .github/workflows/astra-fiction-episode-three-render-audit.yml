@@ -41,7 +41,8 @@ jobs:
           sudo apt-get install -y -qq ffmpeg
       - name: Verify serialized acting and pilot compatibility
         run: |
-          python -m unittest discover -s tests -p 'test_episode_three_human_performance.py' -v\n          python -m unittest discover -s tests -p 'test_season_mara_continuity.py' -v
+          python -m unittest discover -s tests -p 'test_episode_three_human_performance.py' -v
+          python -m unittest discover -s tests -p 'test_season_mara_continuity.py' -v
           python -m unittest discover -s tests -p 'test_pilot_human_performance.py' -v
           python -m unittest discover -s tests -p 'test_omniroute_local.py' -v
       - name: Restore verified original background pack
