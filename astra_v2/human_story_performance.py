@@ -42,10 +42,16 @@ def validate_human_scene(shot):
     narration = str(shot.get("speech") or "").lower()
     if not narration.strip():
         raise CreativeReject("Missing narrated human action")
-    if action in ("discover_radio", "trace_cable", "hear_warning") and "radio" not in narration:
-        raise CreativeReject("Human scene action lacks its required radio")
+    if action in ("discover_radio", "trace_cable") and "radio" not in narration:
+        raise CreativeReject("Radio action lacks a narrated radio")
+    if action == "hear_warning" and not any(word in narration for word in ("voice", "countdown", "blackout")):
+        raise CreativeReject("Warning scene lacks a narrated warning")
     if action == "flee_door" and not any(word in narration for word in ("door", "stairs")):
         raise CreativeReject("Escape scene has no door or stairs")
+    visual = str(shot.get("visual") or "").lower()
+    expected = "signal" if action in ("discover_radio", "trace_cable") else "door"
+    if visual != expected:
+        raise CreativeReject("Pilot action requires authored " + expected + " scene")
     return "human"
 
 
