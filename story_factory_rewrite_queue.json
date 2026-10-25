@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "58fbb77474165a20dddcdd15",
-      "source_sha256": "f5181b022e1e58227dcec98e752c77a5d0a49a543ed3305c3a57d66f9b80483b",
+      "candidate_id": "3d4035f02e39f21953b9ae19",
+      "source_sha256": "f526c288d55952fbfc46222e0e1f58589859f11cce02bd6d188126994e3a90a8",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-365d3a28ea07c16bca07",
-        "title": "The Great Onion Chopper Debacle",
-        "hook": "The Prototype Reveal",
-        "question": "Can Barnaby's motorized onion goggles survive a public demonstration at the morning vegetable market?",
-        "answer": "Yes, but only after causing a localized weeping epidemic that permanently changes local soup recipes.",
+        "content_id": "rayvan-gemini-722748c2b96e7b029f4a",
+        "title": "The Great Turnip Caper",
+        "hook": "The Copper Contraption",
+        "question": "Can an over-engineered vegetable slicer survive the morning rush at the root vegetable stall?",
+        "answer": "Yes, once the inventor learns to value raw speed over complex mechanical gymnastics.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,163 +29,79 @@
         ],
         "story_beats": [
           {
-            "headline": "The Prototype Reveal",
-            "speech": "Behold the tear-stopper ninety-thousand! It dices bulb onions in milliseconds without a single drop of watery sadness leaking.",
+            "headline": "The Copper Contraption",
+            "speech": "Behold the brass marvel, citizens! It slices twelve root vegetables simultaneously without a single drop of rogue juice!",
             "visual": "robot",
-            "label": "The Reveal",
+            "label": "The Presentation",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby proudly stands at his wooden market stall, wearing bulky brass goggles with spinning twin blades, pointing to a bewildered elderly melon vendor.",
+            "visual_prompt": "Barnaby points proudly at his elaborate brass steam-slicer on his cluttered market table while confused shoppers stare.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Constructing the Rig",
-            "speech": "I must secure the dual-gear piston safely onto my temple before tightening the titanium adjustment screws for stability.",
-            "visual": "door",
-            "label": "The Build",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby tightly grips a miniature iron wrench in his right hand, frantically adjusting the side gears of his goggles while standing behind a pyramid of purple onions.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Turbo Mechanism Engaged",
-            "speech": "Activating the high-velocity gearbox now will surely demonstrate our unmatched culinary engineering superiority to every skeptical onlooker.",
+            "headline": "The Clogging Crisis",
+            "speech": "Wait, do not push the giant purple swedes into the feeder chute so fast or the cogs will jam completely!",
             "visual": "signal",
-            "label": "The Mechanism",
+            "label": "The Jam",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby aggressively yanks a glowing red lever on his belt pack, causing green warning lights to flash rapidly on his spinning goggle lenses.",
+            "visual_prompt": "Barnaby frantically waves his hands in alarm as steam hisses from the jammed brass machine and massive purple swedes wedge tightly in the metal hopper.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Onion Payoff",
-            "speech": "Success at last! Every single onion in the entire marketplace is perfectly sliced and seasoned to absolute perfection.",
-            "visual": "forest",
-            "label": "The Payoff",
-            "story_beat": "payoff",
-            "visual_prompt": "Barnaby stands victorious amid a gentle fog of mild onion mist, holding a golden trophy while cheering market shoppers wipe happy tears.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Barnaby tests his untested automatic onion-slicing goggles in front of the entire morning market.",
-        "decisive_choice": "Barnaby flips the turbo-speed lever to impress the picky produce guild master.",
-        "resolution": "The goggles shred onions at supersonic speeds, blanketing the square in harmless vapor and winning first prize.",
-        "visual_bible": {
-          "style": "Bright, colorful stop-motion claymation aesthetic with expressive character animations and detailed prop textures.",
-          "characters": {
-            "Barnaby": "An eccentric inventor with wild orange hair, a green tweed vest, oversized round spectacles, and smudge marks on his cheeks."
-          },
-          "locations": {
-            "Market Square": "A bustling cobblestone town square lined with striped canvas awnings, wooden crates, and hanging lanterns."
-          },
-          "objects": {
-            "Goggles": "Bulky brass eyewear featuring motorized spinning steel blades, blinking indicator lights, and a leather head strap.",
-            "Lever": "A polished copper activation switch mounted on a heavy leather belt pack with connected rubber tubing."
-          }
-        },
-        "plot_fingerprint": "d37e9d1b6818ade97eb4de9ec58e5abc633f8284aa19947ab679fa50abd71938"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "730567608e29b8a3e11384ba",
-      "source_sha256": "39be11ef84bb1ac2486add3878700549b251dfb6d004e3542d6e19a42ca536ce",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-f7f2525e93634bee83e7",
-        "title": "The Midnight Express Misdirection",
-        "hook": "The Missing Heirloom",
-        "question": "Can a stray platform cat expose a stolen pocket watch before the morning train departs?",
-        "answer": "Yes, by leading the stationmaster directly to the clever pickpocket hiding inside the old luggage locker.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Missing Heirloom",
-            "speech": "My grandfather's engraved timepiece is gone from my pocket, stolen right here on the crowded platform during the rush.",
-            "visual": "signal",
-            "label": "Platform Theft",
-            "story_beat": "reveal",
-            "visual_prompt": "A distraught passenger in a tweed suit gestures toward the ticking platform clock while the stationmaster listens intently under the flashing departure signal.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Unexpected Guide",
-            "speech": "Look at Barnaby, our stray station cat. He is pawing insistently at the rusted ventilation grate of locker forty-two.",
-            "visual": "robot",
-            "label": "Feline Clue",
-            "story_beat": "build",
-            "visual_prompt": "The stationmaster kneels beside a fluffy calico cat that swats at the metal door of a numbered luggage locker in the dim concourse.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Lock Mechanism",
-            "speech": "We must use the master key to open this jammed compartment before the suspect boards the southbound express train.",
+            "headline": "The Manual Override",
+            "speech": "Forget the steam pistons! We are switching directly to brute-force manual cranking before the angry mob demands refunds!",
             "visual": "door",
-            "label": "Locker Entry",
-            "story_beat": "mechanism",
-            "visual_prompt": "The stationmaster inserts a heavy brass key into the stubborn padlock of the luggage locker while the cat watches closely from a nearby wooden bench.",
+            "label": "The Pivot",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby firmly yanks a heavy iron lever on the side of the machine, disconnecting the steaming boiler and exposing a rugged hand crank.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Apprehension",
-            "speech": "Here is the stolen silver watch, tucked safely inside the suspect's travel bag right beside the ticket puncher.",
+            "headline": "Root Vegetable Rain",
+            "speech": "Step right up and catch your perfectly diced turnips, sliced faster than a startled badger running from a hound!",
             "visual": "ship",
-            "label": "Stolen Recovery",
+            "label": "The Triumph",
             "story_beat": "payoff",
-            "visual_prompt": "The stationmaster holds up the gleaming silver pocket watch triumphantly as the guilty traveler is escorted away by railway security toward the boarding gates.",
+            "visual_prompt": "Barnaby spins the heavy iron hand crank with a triumphant grin while perfectly sliced turnips fly neatly into customers wooden baskets.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A stolen silver pocket watch hidden in a locked station locker",
-        "decisive_choice": "Following the stray calico cat into the dark service corridor",
-        "resolution": "The watch is recovered and returned just as the express whistles",
+        "central_conflict": "Barnaby's complex steam-powered slicer stalls during the peak market rush.",
+        "decisive_choice": "Barnaby abandons the delicate gear assembly and engages the emergency hand crank.",
+        "resolution": "The stall successfully clears the massive turnip queue, earning enough coin to pay the market rent.",
         "visual_bible": {
-          "style": "Detailed Victorian railway aesthetic with warm amber lighting and rich textures of polished brass and weathered wood.",
+          "style": "Bright, quirky stop-motion animation style with vibrant pastel market awnings and detailed mechanical textures.",
           "characters": {
-            "passenger": "An anxious traveler wearing a brown tweed suit, round spectacles, and carrying a leather suitcase.",
-            "stationmaster": "A stern yet kind railway official in a crisp navy uniform with gold brass buttons and a peaked cap.",
-            "cat": "Barnaby, a fluffy calico cat with distinct orange and black patches and bright green eyes."
+            "Barnaby": "An eccentric inventor with wild gray hair, soot-stained cheeks, wearing a striped yellow vest and a patched brown apron."
           },
           "locations": {
-            "platform": "A bustling Victorian railway platform with arched iron girders, steam billowing from locomotives, and wooden benches.",
-            "concourse": "A dimly lit station concourse lined with rows of numbered iron luggage lockers and fading travel posters."
+            "Market Square": "A bustling cobblestone plaza filled with striped canvas stalls, hanging lanterns, and wooden crates of vegetables."
           },
           "objects": {
-            "pocket_watch": "An antique engraved silver pocket watch attached to a braided silver chain.",
-            "master_key": "A large, ornate brass key with a heavy circular handle.",
-            "locker_forty_two": "A dark green metal locker door with a rusted latch and bold white numbers."
+            "Steam Slicer": "A complicated contraption made of polished brass pipes, ticking pressure gauges, and a massive iron hand crank.",
+            "Wooden Basket": "A sturdy woven wicker basket filled to the brim with oversized purple swedes and round white turnips."
           }
         },
-        "plot_fingerprint": "b39d9b91a2323dd3b7e1eb7cbc05234aab0c6175c4dc024ba646c9c6c35b1e58"
+        "plot_fingerprint": "bf76b1911cb2d570fbe79ccc012e863c1231e22d36b89b419889c3baafdd460c"
       },
       "approved": false
     },
     {
-      "candidate_id": "18a9e187f965accd140aa8e2",
-      "source_sha256": "355d352036c867f162fb4ab65b7c5e51a2c22a26da7ffe8694aa1c1bde16d49b",
+      "candidate_id": "ebec44537a2d07a6b0c75e10",
+      "source_sha256": "8f40a82e40155590802ab288b1d975f76c4e3782136fa6aa3992d90df0b3597c",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-b5c031e09e46ba16e26f",
-        "title": "The Ridge Where the Storm Breaks",
-        "hook": "The Hidden Signal",
-        "question": "Can the veteran climber reach the stranded avalanche survivor before nightfall?",
-        "answer": "Yes, by trusting his old compass through the whiteout.",
+        "content_id": "rayvan-gemini-090b9cb0cea97b13018a",
+        "title": "The Muddy Pitch Protocol",
+        "hook": "The Downpour Inspection",
+        "question": "How can the underdog amateur football club defeat the reigning town champions on a waterlogged field?",
+        "answer": "By engineering floating drainage tiles that absorb standing water and redirect it into a massive pitch-watering fountain.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -193,63 +109,145 @@
         ],
         "story_beats": [
           {
-            "headline": "The Hidden Signal",
-            "speech": "Look closely at the blinking amber light piercing through the heavy swirling snow right across the jagged gorge.",
-            "visual": "signal",
-            "label": "Beacon in the Mist",
-            "story_beat": "reveal",
-            "visual_prompt": "A lone rescuer stands on a rocky outcrop holding an emergency radio, looking across a wide chasm at a faint blinking amber light in the distant blizzard.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Crossing the Slab",
-            "speech": "We cannot wait for the backup team. Step lightly across this frozen crust before the entire shelf gives way completely.",
+            "headline": "The Downpour Inspection",
+            "speech": "Look at this pitch! If we play normal football today, the heavy champions will crush us into the mud completely.",
             "visual": "forest",
-            "label": "The Snow Bridge",
-            "story_beat": "build",
-            "visual_prompt": "The protagonist carefully tiptoes across a narrow, snow-covered rock bridge flanked by pine trees, holding a gripped ice axe tightly in his right hand with intense concentration.",
+            "label": "The Flooded Field",
+            "story_beat": "reveal",
+            "visual_prompt": "Captain Toby standing on a waterlogged grass football pitch surrounded by mud, holding a soggy clipboard, looking distressed under a gray rainy sky.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Mechanical Pivot",
-            "speech": "Turn the emergency winch drum clockwise until the cable locks firmly against the granite anchor to hold our weight.",
+            "headline": "The Sponge Tile Assembly",
+            "speech": "We must piece together these porous rubber mats right now to channel the standing water away from the goal.",
             "visual": "robot",
-            "label": "Anchor Winch",
-            "story_beat": "mechanism",
-            "visual_prompt": "The protagonist operates a mechanical hand-cranked winch bolted into the frozen cliffside, his face lit by a headlamp while heavy snow falls around him.",
+            "label": "Engineering the Fix",
+            "story_beat": "build",
+            "visual_prompt": "Toby and his teammate assembling interlocking black porous rubber drainage tiles in the muddy dugout, holding wrenches and securing fasteners.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Safe Haven",
-            "speech": "Grab my insulated jacket and drink this warm tea. We made it off the ridge before the storm locked us in.",
+            "headline": "The Drainage Mechanism",
+            "speech": "Once the pressure builds up beneath the turf, watch the valve release all the excess water directly into the ornamental fountain.",
+            "visual": "signal",
+            "label": "Activating the System",
+            "story_beat": "mechanism",
+            "visual_prompt": "Toby pulling a rusted metal lever near the sideline while muddy water shoots through a clear plastic hose into the central stone fountain.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Dry Pitch Victory",
+            "speech": "The field is completely dry and firm! Our speed will easily beat their exhausted legs to win the trophy.",
             "visual": "door",
-            "label": "Rescue Shelter",
+            "label": "Lifting the Trophy",
             "story_beat": "payoff",
-            "visual_prompt": "The rescuer and the survivor sit inside a glowing emergency metal shelter cabin, holding steel mugs of hot tea as the heavy metal door stands half-open against the blizzard outside.",
+            "visual_prompt": "Toby lifting a gleaming silver cup above his head on a dry, green football pitch, smiling triumphantly as cheering teammates surround him.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A sudden blizzard cuts off the descent route for a stranded hiker while daylight fades.",
-        "decisive_choice": "Abandoning the primary marked trail to cross the unstable wind-slab bridge directly.",
-        "resolution": "The rescuer reaches the shelter cave just in time, guiding the survivor down safely.",
+        "central_conflict": "Torrential rain threatens to ruin the annual parish football derby, favoring the heavy, physical playing style of the defending champions over the agile underdogs.",
+        "decisive_choice": "Captain Toby decides to abandon traditional passing tactics and instead installs a network of modular sponge tiles beneath the turf.",
+        "resolution": "The pitch drains instantly during halftime, allowing Toby's agile team to outmaneuver the exhausted champions and claim the victory trophy.",
         "visual_bible": {
-          "style": "Realistic cinematic mountain documentary aesthetic with cold blue and stark white color palettes, dramatic lighting, and gritty textural details.",
+          "style": "Bright, vibrant animation style with detailed textures for mud, turf, and metallic engineering tools.",
           "characters": {
-            "protagonist": "Liam, a seasoned fifty-year-old mountain rescue leader with weathered skin, wearing a heavy orange parka, black reinforced mountaineering trousers, and a grey wool beanie."
+            "Toby": "A determined amateur football captain with messy brown hair, wearing a green jersey, muddy shorts, and athletic cleats."
           },
           "locations": {
-            "ridge": "A steep, windswept alpine ridge featuring exposed granite rock, deep snowdrifts, and scattered frost-bitten pine trees under an overcast grey sky."
+            "Parish Pitch": "A community sports ground featuring grass fields, white goalposts, a stone central fountain, and a wooden dugout."
           },
           "objects": {
-            "ice_axe": "A standard steel-headed mountaineering ice axe with a rubber-wrapped blue handle and a woven wrist leash.",
-            "emergency_radio": "A rugged olive-green two-way radio with a short flexible antenna and a small glowing amber LED screen."
+            "Drainage Tile": "A black, highly porous modular rubber square designed to absorb standing water quickly.",
+            "Trophy": "A gleaming silver cup with twin handles and an engraved wooden base celebrating the annual parish derby."
           }
         },
-        "plot_fingerprint": "508a511287a156575a09c27fabef88312178a938a1d837b51b704f1ad12364fc"
+        "plot_fingerprint": "5d300c696b912c69588278fd7a0b8312ce8329c5ef6c2683d20b421dd50412da"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "2e8f8cd7f3ea0834ae10bafb",
+      "source_sha256": "1793ac2abc1cfa6f3fa2633bd7bd4fd824932e754b33fcf158f2700cca55eaa0",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-27747139fdb7f9d61b6e",
+        "title": "The Coral Spine Conundrum",
+        "hook": "The Fading Glow",
+        "question": "Why is the bioluminescent reef network fading away into total darkness?",
+        "answer": "A blocked thermal vent has starved the primary algae feed.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Fading Glow",
+            "speech": "Look closely at the coral branches. Their inner light is completely gone, replaced by a cold grey ash.",
+            "visual": "forest",
+            "label": "Dying Reef",
+            "story_beat": "reveal",
+            "visual_prompt": "An underwater shot of a dying bioluminescent kelp forest where Barnaby the sea otter stands on a grey coral outcrop, pointing at darkened fronds with a worried expression.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Tracing the Current",
+            "speech": "The thermal current stopped right here at this massive rubble pile blocking the main cavern entrance.",
+            "visual": "door",
+            "label": "Blocked Passage",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby examining a massive stone blockage inside a dark undersea trench, holding a glowing shell lantern while sediment slowly drifts around him.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Seismic Lever",
+            "speech": "If we wedge this heavy basalt slab into the fissure, we can redirect the magma flow around the blockage.",
+            "visual": "signal",
+            "label": "Pressure Point",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby and Finn the octopus using a sturdy wooden lever to pry open a glowing basalt fissure, sending bright orange magma pulses toward the blocked vent.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Great Surge",
+            "speech": "The thermal current is back! The entire reef is waking up with brilliant turquoise and gold light.",
+            "visual": "planet",
+            "label": "Restored Ecosystem",
+            "story_beat": "payoff",
+            "visual_prompt": "A wide underwater panorama of a fully restored, brightly glowing coral reef bursting with vivid turquoise and gold colors as Barnaby cheers happily in the foreground.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A blocked thermal vent starving the primary algae feed.",
+        "decisive_choice": "Re-routing an active seismic fault to clear the vent passage.",
+        "resolution": "The thermal current resumes and restores vibrant reef luminescence.",
+        "visual_bible": {
+          "style": "Cinematic 3D animation with vibrant underwater lighting, rich textures of moss and stone, and deep blue ocean gradients.",
+          "characters": {
+            "Barnaby": "A clever sea otter with brown fur, wearing a utility belt made of woven kelp fibers, sporting an adventurous and expressive face.",
+            "Finn": "A wise octopus with purple skin, wearing a small brass monocle over one eye and holding tools with his tentacles."
+          },
+          "locations": {
+            "kelp_forest": "An underwater forest of towering bioluminescent fronds swaying gently in deep ocean currents.",
+            "thermal_trench": "A dark, rocky underwater canyon featuring glowing magma veins and dense piles of grey basalt rubble."
+          },
+          "objects": {
+            "shell_lantern": "A small nautilus shell containing a captured glowing jellyfish, emitting a warm golden beam of light.",
+            "basalt_lever": "A heavy, weathered stone bar with etched ancient markings used for mechanical leverage underwater."
+          }
+        },
+        "plot_fingerprint": "bb81cd70a35084491c92210db03107822cf2bb582507ecef9e8a8d7c45a9d88f"
       },
       "approved": false
     }
