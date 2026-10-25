@@ -107,6 +107,19 @@ class DirectedPortraitAndStageTests(unittest.TestCase):
             self.assertIsNotNone(ImageChops.difference(
                 result.crop(STAGE),scene.crop(STAGE)).getbbox())
 
+    def test_stage_closeups_do_not_magnify_rejected_amber_guide_arcs(self):
+        # A genuine full-frame QA regression was caught on the first trial:
+        # the old copper observatory trim looked like an artificial sky guide
+        # when magnified by the new shot lens in Episode 2 / beat 4.
+        from astra_v2.fiction_visual_guard import long_amber_guide_arc
+        for shot in shots():
+            for time in (.04,.29):
+                image=Image.new("RGB",FRAME,BACKGROUND)
+                draw_human_scene(image,shot,time)
+                composite=apply_human_camera(image,shot,time)
+                with self.subTest(action=shot["story_human_action"],t=time):
+                    self.assertFalse(long_amber_guide_arc(composite))
+
     def test_characters_turn_heads_but_outfit_and_footprint_stay_on_model(self):
         for yaw in (-.72,-.40,0,.40,.72):
             image=Image.new("RGB",FRAME,BACKGROUND)
