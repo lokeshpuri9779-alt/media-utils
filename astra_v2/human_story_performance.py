@@ -15,6 +15,7 @@ from astra_errors import CreativeReject
 PILOT_ID = "rayvan-season-01-episode-01"
 EPISODE_TWO_ID = "rayvan-season-01-episode-02"
 EPISODE_THREE_ID = "rayvan-season-01-episode-03"
+EPISODE_FOUR_ID = "rayvan-season-01-episode-04"
 ACTIONS = (
     "discover_radio",
     "trace_cable",
@@ -33,10 +34,17 @@ EPISODE_THREE_ACTIONS = (
     "study_altered_photographs",
     "confront_mara_double",
 )
+EPISODE_FOUR_ACTIONS = (
+    "face_duplicate_at_countdown",
+    "warn_parallel_cities",
+    "split_glass_key",
+    "seal_and_reveal_sea_door",
+)
 EPISODE_ACTIONS = {
     PILOT_ID: ACTIONS,
     EPISODE_TWO_ID: EPISODE_TWO_ACTIONS,
     EPISODE_THREE_ID: EPISODE_THREE_ACTIONS,
+    EPISODE_FOUR_ID: EPISODE_FOUR_ACTIONS,
 }
 INK = (24, 34, 49)
 SKIN = (198, 142, 111)
@@ -81,7 +89,7 @@ def validate_human_scene(shot):
         if not all(term in narration for term in required_terms[action]):
             raise CreativeReject("Episode 2 actor action does not match narrated event")
         expected = "door"
-    else:
+    elif story_id == EPISODE_THREE_ID:
         required_terms = {
             "survey_dead_city": ("city", "door", "footprints"),
             "inspect_reverse_clock": ("clock", "threshold", "radio"),
@@ -90,6 +98,16 @@ def validate_human_scene(shot):
         }
         if not all(term in narration for term in required_terms[action]):
             raise CreativeReject("Episode 3 actor action does not match narrated event")
+        expected = "door"
+    else:
+        required_terms = {
+            "face_duplicate_at_countdown": ("two versions", "key", "radios"),
+            "warn_parallel_cities": ("other mara", "erased", "passage"),
+            "split_glass_key": ("broke", "key", "countdown"),
+            "seal_and_reveal_sea_door": ("door sealed", "stars", "notebook"),
+        }
+        if not all(term in narration for term in required_terms[action]):
+            raise CreativeReject("Episode 4 actor action does not match narrated event")
         expected = "door"
     if str(shot.get("visual") or "").lower() != expected:
         raise CreativeReject("Human action requires authored " + expected + " visual")
@@ -325,6 +343,71 @@ def _blue_glass_key(draw,x,y):
     _line(draw,((x+8,y+103),(x+31,y+103)),color,10)
 
 
+def _dual_city_futures(draw,t):
+    """Two incompatible futures, one lit and one starless, without invented people."""
+    draw.rectangle((665,682,812,1080),fill=(39,55,74),outline=(154,165,181),width=4)
+    draw.rectangle((824,682,969,1080),fill=(14,20,40),outline=(111,119,144),width=4)
+    for side,lit in ((680,True),(840,False)):
+        for k in range(3):
+            x=side+k*38
+            height=128+(k%2)*76
+            draw.rectangle((x,1046-height,x+31,1046),fill=(61,82,99))
+            for j in range(3):
+                draw.rectangle((x+10,1046-height+15+j*30,x+19,1046-height+25+j*30),
+                               fill=(245,194,112) if lit and t<2.7 else (21,30,48))
+    _line(draw,((813,693),(813,1080)),(178,159,194),7)
+
+
+def _key_halves(draw,t):
+    """Two physical broken key pieces separate and transfer to the double."""
+    separation=int(8+min(1,max(0,t-.38)/1.3)*103)
+    cx,cy=540,932
+    color=(65,162,232)
+    draw.ellipse((cx-52-separation,cy-27,cx-4-separation,cy+27),
+                 fill=color,outline=(191,238,255),width=6)
+    draw.ellipse((cx-36-separation,cy-9,cx-22-separation,cy+10),fill=(20,63,116))
+    _line(draw,((cx-8-separation,cy+14),(cx-8-separation,cy+105)),color,14)
+    draw.polygon(((cx+4+separation,cy-25),(cx+52+separation,cy-25),
+                  (cx+31+separation,cy+28),(cx+10+separation,cy+28)),
+                 fill=color,outline=(191,238,255),width=6)
+    _line(draw,((cx+30+separation,cy+21),(cx+30+separation,cy+104)),color,14)
+    _line(draw,((cx+30+separation,cy+73),(cx+59+separation,cy+73)),color,12)
+    if .42<t<1.15:
+        for k in range(5):
+            alpha=1+((k*17+int(t*57))%28)
+            draw.ellipse((cx-10+k*9,cy-35-alpha,cx-5+k*9,cy-30-alpha),
+                         fill=(141,221,250))
+
+
+def _sealed_door_stars(draw,t):
+    """The door visibly closes; new stars appear only after the seal is made."""
+    seal=min(1,max(0,t)/2.3)
+    _door(draw,.72*(1-seal))
+    if seal>.5:
+        for i in range(13):
+            x=654+(i*37)%310
+            y=637+(i*79)%375
+            r=2+(i%3)
+            draw.ellipse((x-r,y-r,x+r,y+r),fill=(235,223,184))
+
+
+def _notebook_sea_ending(draw,t):
+    """Page depicts a submerged SECOND door rather than fabricating a new scene."""
+    draw.polygon(((607,1000),(952,979),(963,1235),(610,1258)),
+                 fill=(224,208,173),outline=INK,width=10)
+    draw.polygon(((655,1033),(923,1026),(919,1220),(658,1230)),
+                 fill=(105,173,195),outline=(64,111,132),width=4)
+    for k in range(4):
+        yy=1087+k*34
+        draw.arc((669,yy,902,yy+55),0,170,fill=(188,224,225),width=6)
+    draw.rectangle((749,1084,845,1214),fill=(42,78,100),outline=(228,236,213),width=8)
+    draw.ellipse((819,1140,834,1156),fill=GOLD)
+    draw.polygon(((750,1041),(769,1067),(786,1042)),fill=(242,218,157))
+    # Page turns very slightly so the reveal is a motion event, not a static card.
+    offset=int(5*math.sin(t*1.1))
+    draw.line(((626,1006+offset),(620,1232)),fill=(161,138,115),width=8)
+
+
 def draw_human_scene(image, shot, t):
     """Draw only authenticated pilot action geometry in the 1080x1920 scene stage."""
     validate_human_scene(shot)
@@ -415,6 +498,28 @@ def draw_human_scene(image, shot, t):
         _blue_glass_key(d,866,969+int(6*math.sin(t*1.6)))
         _radio(d,255,1131,t,portable=True)
         _radio(d,865,1131,t,portable=True)
+    elif action == "face_duplicate_at_countdown":
+        _door(d,.68)
+        _mara(d,312,861,t,reaching=True,alarm=True)
+        _mara(d,775,861,t,reaching=True,alarm=True)
+        _blue_glass_key(d,890,956+int(5*math.sin(t*1.2)))
+        _radio(d,254,1123,t,portable=True)
+        _radio(d,868,1123,t,portable=True)
+    elif action == "warn_parallel_cities":
+        _dual_city_futures(d,t)
+        _mara(d,309,862,t,alarm=True)
+        _mara(d,515,866,t,reaching=True,alarm=True)
+    elif action == "split_glass_key":
+        _door(d,.57)
+        _mara(d,280,867,t,reaching=True,alarm=True)
+        _mara(d,769,866,t,reaching=True,alarm=True)
+        _key_halves(d,t)
+        _radio(d,248,1145,t,portable=True)
+        _radio(d,849,1145,t,portable=True)
+    elif action == "seal_and_reveal_sea_door":
+        _sealed_door_stars(d,t)
+        _mara(d,298,868,t,reaching=True)
+        _notebook_sea_ending(d,t)
     else:
         raise CreativeReject("Unknown human action")
     return True
