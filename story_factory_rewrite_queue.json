@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "cf346ff9afd3834d66440fad",
-      "source_sha256": "0cea613fb1e52493991e9afea5552e05d73dfad379c931d7d10a8635db7b39ca",
+      "candidate_id": "2ef788f51e4e2125983050f3",
+      "source_sha256": "4719e372405f5bac4d846bd94f041e4f9b701cc73cf131b9cffb68792aea742f",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-4591ab90635973908b11",
-        "title": "The Automatic Onion Slicer Disaster",
-        "hook": "The Grand Unveiling",
-        "question": "Can a mechanized vegetable chopper save a busy spice market stall?",
-        "answer": "Only if it does not launch onions into the mayor's tea.",
+        "content_id": "rayvan-gemini-b5f7b4f1e0ddd4583b23",
+        "title": "The Great Tomato Launch Fiasco",
+        "hook": "The Launch Event",
+        "question": "Can an automated sauce-stirrer save a market stall?",
+        "answer": "Yes, by targeting rogue vegetables precisely.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,227 +29,225 @@
         ],
         "story_beats": [
           {
-            "headline": "The Grand Unveiling",
-            "speech": "Behold citizens, the finest brass chopping engine ever conceived in this province of spices!",
+            "headline": "The Launch Event",
+            "speech": "Behold the marvellous whirling slicer! It chops your produce before you even finish blinking your eyes.",
             "visual": "robot",
             "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly next to a steaming brass automaton in a busy spice market stall, holding a wrench while gesturing to a crowd.",
+            "visual_prompt": "Inventor Barnaby stands proudly beside a brass-plated robotic arm in a bustling market square, holding a wrench while pointing at a giant spinning titanium blade.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Gear Jam",
-            "speech": "Wait, why are the secondary cogs spinning backward? Grab that sack before it tears open!",
-            "visual": "ship",
+            "headline": "The Jamming Gear",
+            "speech": "Oh dear, a rogue turnip has jammed the primary sprocket, causing the targeting system to spin wildly around.",
+            "visual": "signal",
             "label": "The Malfunction",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby frantically tries to catch tumbling red onions falling from a tilted hopper while smoke billows from the brass automaton.",
+            "visual_prompt": "Barnaby frantically reaches for a blinking red control panel on the robot while a massive red turnip wedged inside the titanium blade emits warning sparks.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Market Chaos",
-            "speech": "Duck everyone! The vegetable shrapnel is heading straight toward the silk merchant's pavilion!",
-            "visual": "signal",
-            "label": "The Spread",
-            "story_beat": "twist",
-            "visual_prompt": "Shoppers scatter in all directions as raw onion slices fly through the air, illuminated by a flashing warning beacon atop the market stall.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Perfect Slice",
-            "speech": "Look at that precision! Every single ring is identical, and absolutely nobody is crying today.",
-            "visual": "door",
-            "label": "The Success",
-            "story_beat": "payoff",
-            "visual_prompt": "Barnaby and the mayor smile proudly beside the tamed brass machine, which now neatly dispenses perfect onion rings into a wooden basket.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Barnaby tests his chaotic steam-powered vegetable slicer in a crowded bazaar.",
-        "decisive_choice": "Barnaby pulls the emergency lever to reverse the gears instead of fleeing.",
-        "resolution": "The machine compresses the flying onions into neat, weeping-free rings.",
-        "visual_bible": {
-          "style": "vibrant slapstick animation style with rich textures",
-          "characters": {
-            "barnaby": "an enthusiastic inventor with wild grey hair, wearing a grease-stained leather apron over a striped shirt",
-            "mayor": "a stout official wearing a velvet coat and a very tall feathered hat"
-          },
-          "locations": {
-            "market": "a bustling outdoor bazaar filled with colorful awnings, spice sacks, and stone paving stones"
-          },
-          "objects": {
-            "automaton": "a towering brass and iron chopping engine with exposed rotating gears, smoking pipes, and a flashing red warning beacon",
-            "basket": "a woven wicker container filled with neatly stacked onion rings"
-          }
-        },
-        "plot_fingerprint": "c62cb9cef053994e9f48e90434562967657d8c61b7972c7d0305f1a7f79a1ac0"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "72b470c4049bfcbdb6bd5e0b",
-      "source_sha256": "a65ec1f103e9b24aff9cddf32d1ee7fd7df9806abad1114763fff07d012e8e3f",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-337eb44ac5d5af48bd43",
-        "title": "The Whispering Canopy and the Amber Sap",
-        "hook": "Discovery in the Mists",
-        "question": "Can two rivals combine their unique skills to extract heavy restorative resin before the nocturnal freeze?",
-        "answer": "Yes, by weaving their flexible wooden frames together into a single bridge to cross the bottomless root canyon.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "Discovery in the Mists",
-            "speech": "Look up through the heavy emerald leaves! The great mother trunk is leaking the pure golden life sap we need.",
-            "visual": "forest",
-            "label": "The Canopy Leak",
-            "story_beat": "reveal",
-            "visual_prompt": "Mira pointing up at a glowing amber resin leak on a massive mossy tree trunk in a dense emerald forest, wearing leaf-woven armor.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Constructing the Bridge",
-            "speech": "We must twist our thickest climbing vines together right now to reach the higher branches before the frost arrives.",
-            "visual": "signal",
-            "label": "Vine Weaving",
-            "story_beat": "build",
-            "visual_prompt": "Kiran tying glowing blue bioluminescent signaling fibers around thick green jungle vines to create a sturdy suspension bridge.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Crossing the Abyss",
-            "speech": "Hold tightly onto my harness as we step across this windy chasm because one slip means losing all our harvest.",
-            "visual": "door",
-            "label": "The Chasm Crossing",
-            "story_beat": "mechanism",
-            "visual_prompt": "Mira and Kiran stepping carefully across the vine bridge spanning a dark canyon framed by two ancient stone archway roots.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Saving the Grove",
-            "speech": "Pour the warm amber sap into the root core quickly while the liquid is still glowing bright and flowing freely.",
-            "visual": "robot",
-            "label": "The Curing Act",
-            "story_beat": "payoff",
-            "visual_prompt": "Kiran pouring glowing amber sap into a mechanical stone automaton pump embedded in the tree base, watched by Mira.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "A sudden temperature drop threatens to freeze the restorative amber sap inside the canopy before it can be harvested.",
-        "decisive_choice": "They choose to abandon individual gathering sacks and build a joint suspension bridge across the ravine.",
-        "resolution": "They successfully harvest the golden sap together and cure the ailing mother tree before nightfall.",
-        "visual_bible": {
-          "style": "Cinematic animated fantasy with vibrant natural colors, detailed foliage textures, and soft magical lighting.",
-          "characters": {
-            "Mira": "An agile female scout with wild copper hair, wearing emerald leaf armor and carrying a woven gathering sack.",
-            "Kiran": "A sturdy male botanist with braided dark hair, wearing bark-plate gear and holding a blue signal torch."
-          },
-          "locations": {
-            "forest": "An ancient glowing woodland filled with towering moss-covered trees, hanging vines, and a deep root canyon."
-          },
-          "objects": {
-            "amber_sap": "A glowing golden viscous liquid contained within natural tree vessels that hardens when cold.",
-            "signal_torch": "A carved wooden rod tipped with a glowing blue bioluminescent moss cluster."
-          }
-        },
-        "plot_fingerprint": "dcd1c84c225479e7c572815cd42726fac826588af86f17c7d94fd5fe005b5965"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "3a2bc0aa33854049720d78f1",
-      "source_sha256": "b35501636c64e33a99a7288b974d9d2be70955586861c01a58612b8845c95a36",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-6cd3a68c32f2c569caac",
-        "title": "The Ridge Where the Storm Stopped",
-        "hook": "The Hidden Signal",
-        "question": "Can a veteran tracker bypass an unstable avalanche ledge to reach a lost hiker before hypothermia sets in?",
-        "answer": "Yes, by utilizing a discarded structural support cable as a makeshift winch to cross the chasm safely.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Hidden Signal",
-            "speech": "My radio receiver is picking up a weak pulsing beacon from deep inside the Deadfall Ridge ravine.",
-            "visual": "signal",
-            "label": "Beacon Discovery",
-            "story_beat": "reveal",
-            "visual_prompt": "A weathered rescue worker wearing an orange jacket and a woolen beanie stands in a snow-covered pine forest at dusk, holding a glowing handheld radio transceiver that displays a flashing green signal wave.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Fractured Trail",
-            "speech": "The regular suspension bridge is completely sheared off, leaving us no direct path to cross the freezing gorge.",
-            "visual": "forest",
-            "label": "Broken Bridge",
-            "story_beat": "build",
-            "visual_prompt": "The rescue worker stands at the edge of a deep snowy chasm in the alpine forest, looking across at snapped wooden planks and dangling iron chains, holding a heavy steel climbing axe in his right hand.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Cable Winch",
-            "speech": "If I anchor this heavy logging winch to the granite boulder, we can pull ourselves across the open air.",
-            "visual": "door",
-            "label": "Engineering Crossing",
-            "story_beat": "mechanism",
-            "visual_prompt": "The rescue worker kneels beside a massive frost-covered granite boulder in the snowy forest, securing a thick rusted metal cable around a mechanical pulley system with both bare gloved hands.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Safe Return",
-            "speech": "We made it across just in time before the entire cliff face gave way into the valley below.",
+            "headline": "The Unexpected Volley",
+            "speech": "Duck and cover everyone! The machine has locked onto the mayor's magnificent silk hat with alarming speed.",
             "visual": "ship",
-            "label": "Successful Evacuation",
+            "label": "The Chaos",
+            "story_beat": "twist",
+            "visual_prompt": "Mayor Pumpernickel ducks behind a wooden vegetable cart as a barrage of overripe tomatoes flies toward him from the erratic robot arm.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Clean Sweep",
+            "speech": "Reversing polarity now! Let us launch soapy sponges instead of vegetables to polish our distinguished leader right up.",
+            "visual": "door",
+            "label": "The Redemption",
             "story_beat": "payoff",
-            "visual_prompt": "The rescue worker and a shivering hiker wrapped in a silver thermal blanket sit safely inside the bright cabin of a rescue helicopter as it ascends above the snowy mountain forest, looking down at the receding peaks.",
+            "visual_prompt": "Barnaby pulls a giant wooden lever on the back of the machine, causing soft soapy sponges to fly out and gently clean the mayor's silk hat.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A sudden blizzard traps a lone tourist across a treacherous cliff fracture.",
-        "decisive_choice": "Risking an untested descent using an old logging cable instead of waiting for the grounded helicopter.",
-        "resolution": "The rescuer successfully hauls the hiker across just as the main snow bridge collapses.",
+        "central_conflict": "A mechanical tomato-corer malfunctions during the morning rush and pelts the mayor.",
+        "decisive_choice": "Reboot the machine in reverse to fling cleaning cloths instead.",
+        "resolution": "The mayor is cleaned, amused, and buys three dozen units.",
         "visual_bible": {
-          "style": "Cinematic realism, high-contrast winter lighting, sharp focus on outdoor gear and snowy textures.",
+          "style": "Bright stop-motion animation aesthetic with detailed textures of wood, brass, and fresh market produce.",
           "characters": {
-            "Rescue Worker": "A middle-aged man with a weathered face, a thick brown beard, wearing a bright orange heavy-duty parka, dark snow pants, and a woolen navy blue beanie.",
-            "Lost Hiker": "A young woman wearing a torn teal winter jacket, black thermal trousers, and wrapped tightly in a shiny reflective emergency foil blanket."
+            "Barnaby": "An eccentric inventor with wild ginger hair, round spectacles, a tweed vest covered in grease stains, and an enthusiastic grin.",
+            "Mayor Pumpernickel": "A plump official wearing a tall silk top hat, a formal blue sash, gold pince-nez glasses, and an expression of constant surprise."
           },
           "locations": {
-            "Deadfall Ridge": "A dense, snow-heavy pine forest bordered by steep jagged cliffs and a deep icy gorge in the high mountains."
+            "Market Square": "A bustling cobblestone plaza lined with striped canvas awnings, wooden fruit crates, and hanging lanterns."
           },
           "objects": {
-            "Radio Transceiver": "A rugged black handheld electronic device with a flexible rubber antenna and a small rectangular monochrome LCD screen glowing green.",
-            "Logging Cable": "A thick, rusted multi-strand steel wire rope coiled on the snowy ground, frayed at one end.",
-            "Climbing Axe": "A steel mountaineering tool with a curved pick head and an insulated composite shaft."
+            "Sauce-Stirrer 3000": "A mechanical contraption made of polished brass pipes, a titanium cutting blade, a blinking red status light, and a massive wooden control lever."
           }
         },
-        "plot_fingerprint": "2ee09d66017fb6a370c52c0483a205fc10a828c9a70bd5f6e545cb1ab249a7e3"
+        "plot_fingerprint": "78abedfdcde93ff751d8b8596788fe52e102b722856a30534f88a758d09f50cc"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "28f45f19c8d894aba71d8880",
+      "source_sha256": "d106b588633b75401e9af580bcde22d54ee9a6c184dd169efa637245c89bcf60",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-21f6b6adfdf8d3cfce0e",
+        "title": "The Soup-Squirting Sock of Sector Seven",
+        "hook": "The Broth Disaster",
+        "question": "Can an overzealous inventor save his failing soup stall using a motorized hose?",
+        "answer": "Yes, by inventing a turbulent condiment launcher that impresses hungry villagers.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Broth Disaster",
+            "speech": "Behold my magnificent mechanized ladle, designed to serve hot soup without spilling a single precious drop of broth!",
+            "visual": "robot",
+            "label": "Defective Gadget",
+            "story_beat": "reveal",
+            "visual_prompt": "Bartholomew stands behind his chaotic wooden stall in the market square, holding a smoking mechanical ladle that sprays red soup onto his apron, looking panicked.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Engineering the Fix",
+            "speech": "We must instantly attach this vibrating piston pump to the main cauldron to increase our operational liquid velocity.",
+            "visual": "signal",
+            "label": "The Upgrade",
+            "story_beat": "build",
+            "visual_prompt": "Bartholomew frantically fastens a clicking brass piston onto a steaming metal cauldron at his market stall, using a wrench while sparks fly around him.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Velocity Test",
+            "speech": "Duck and cover, citizens, because this high-pressure tube is about to deliver lunch at supersonic speed!",
+            "visual": "ship",
+            "label": "Blast Off",
+            "story_beat": "mechanism",
+            "visual_prompt": "Bartholomew aims a sputtering leather hose at a terrified customer holding an empty bowl, while thick vegetable soup shoots horizontally across the narrow market alley.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Market Triumph",
+            "speech": "Who knew that aggressive soup delivery would become the most popular dining experience in our entire village?",
+            "visual": "door",
+            "label": "Grand Success",
+            "story_beat": "payoff",
+            "visual_prompt": "A huge line of cheerful villagers holds out bowls toward Bartholomew, who proudly fires clean streams of delicious soup from his wrist-mounted apparatus.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Bartholomew's broth stall has zero customers due to a broken ladle mechanism.",
+        "decisive_choice": "He straps a mechanical soup-hose to his sleeve to blast broth directly into bowls.",
+        "resolution": "The messy culinary device wins the town festival and creates massive demand.",
+        "visual_bible": {
+          "style": "Bright, comedic animated cartoon style with vibrant colors and expressive character animations.",
+          "characters": {
+            "Bartholomew": "An energetic inventor with wild brown hair, soot-stained cheeks, wearing a striped blue tunic and a heavily stained leather apron."
+          },
+          "locations": {
+            "Market Square": "A bustling medieval village market featuring colourful canvas awnings, wooden merchant stalls, and cobblestone pathways."
+          },
+          "objects": {
+            "Cauldron": "A heavy cast-iron cooking pot bubbling with thick orange vegetable soup.",
+            "Soup Hose": "A flexible leather tube connected to a brass pump with glowing pressure gauges."
+          }
+        },
+        "plot_fingerprint": "b9fbe3a1fd9b4abf613cbd633c6bdceb59012489f2bc2acc2f196c3d761798a3"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "03d12042a294fab8001facfb",
+      "source_sha256": "c01977a80b9c6672a865eea16e029782e60eebc66fa8cb56bd04eec4d0831d89",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-fee4e73f53c42f24eae0",
+        "title": "The Baker and the Miller: A Wheat Crisis",
+        "hook": "Discovering the Final Sack",
+        "question": "Can lifelong friends survive a famine when only enough grain remains for one trade?",
+        "answer": "They divide the remaining seed equally, preserving both their bakery and mill through mutual sacrifice.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Discovering the Final Sack",
+            "speech": "Look closely at this final heavy sack. Our village storehouse is completely empty except for this lone grain.",
+            "visual": "forest",
+            "label": "Storehouse Discovery",
+            "story_beat": "reveal",
+            "visual_prompt": "Elian opens the heavy wooden door of the shadowy village storehouse, revealing a single burlap sack of grain resting on the stone floor, dusty sunlight streaming through the cracks.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Millers Dilemma",
+            "speech": "If I grind this entirely into flour, my heavy millstones will finally turn, but the bakery will have no seed to grow next year.",
+            "visual": "door",
+            "label": "The Millstone Choice",
+            "story_beat": "build",
+            "visual_prompt": "Garreth stands beside the massive wooden mill door with a furrowed brow, resting his calloused hand on the cold stone of the idle watermill wheel.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Dividing Act",
+            "speech": "We must not fight over scraps of bread. Let us measure this grain down to the very last handful today.",
+            "visual": "signal",
+            "label": "Equal Division",
+            "story_beat": "mechanism",
+            "visual_prompt": "Elian and Garreth hold up a glowing copper balancing scale in the courtyard, carefully pouring golden wheat kernels from one side into two equal leather pouches.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Shared Harvest",
+            "speech": "Because we trusted each other through the dry season, our village now has fresh flour and growing fields once more.",
+            "visual": "forest",
+            "label": "Renewed Fields",
+            "story_beat": "payoff",
+            "visual_prompt": "Elian and Garreth stand side by side smiling in a lush green valley beside the newly flowing river, holding fresh loaves of bread and a sprouting wheat stalk.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A severe drought leaves only one sack of viable wheat in the entire village.",
+        "decisive_choice": "They decide to split the remaining seed instead of giving it entirely to the bakery or the mill.",
+        "resolution": "Both crafts survive the drought on reduced output, cementing their friendship permanently.",
+        "visual_bible": {
+          "style": "Warm historical realism with rich earth tones, detailed wooden textures, and soft natural lighting.",
+          "characters": {
+            "Elian": "A tall, broad-shouldered village baker with flour-dusted curly brown hair, wearing a patched linen shirt and a leather apron.",
+            "Garreth": "A sturdy miller with short red hair, wearing a heavy wool tunic stained with wheat dust and leather boots."
+          },
+          "locations": {
+            "storehouse": "A dark, stone-walled medieval grain cellar with heavy timber beams and small dust-filled light shafts.",
+            "courtyard": "An open cobblestone village square surrounded by timber-framed houses and a trickling stone fountain."
+          },
+          "objects": {
+            "grain_sack": "A rough, coarse burlap sack tied tightly at the top with thick hemp rope, showing signs of wear and age.",
+            "copper_scale": "An antique balancing scale made of tarnished copper with two small hanging brass bowls held by delicate chains."
+          }
+        },
+        "plot_fingerprint": "8fda1f3e90c25281c1660a60d4fed114804d3f2fcb7fca98c90404c17c5b4eef"
       },
       "approved": false
     }
