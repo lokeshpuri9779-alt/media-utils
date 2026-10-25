@@ -5,6 +5,10 @@ on:
   pull_request:
     paths:
       - '.github/workflows/astra-fiction-episode-render-audit.yml'
+      - 'astra_v2/human_story_performance.py'
+      - 'astra_v2/unified_story_engine.py'
+      - 'astra_v2/omniroute_local.py'
+      - 'tests/test_pilot_human_performance.py'
 
 permissions:
   contents: read
@@ -39,6 +43,7 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_omniroute_local.py' -v
           python -m unittest discover -s tests -p 'test_astra_asset_pack_compositor.py' -v
+          python -m unittest discover -s tests -p 'test_pilot_human_performance.py' -v
       - name: Restore original verified artwork
         uses: actions/download-artifact@v4
         with:
@@ -79,6 +84,9 @@ jobs:
           report=json.loads((root/'studio-report.json').read_text())
           probe=json.loads((root/'ffprobe.json').read_text())
           assert report['genre']=='fiction' and len(report['scenes'])==4
+          assert all(scene.get('story_human_actor')=='mara' for scene in report['scenes']), 'No Mara performance in report'
+          assert [scene.get('story_human_action') for scene in report['scenes']] == [
+              'discover_radio','trace_cable','hear_warning','flee_door'], 'Human story actions missing'
           v=[s for s in probe['streams'] if s.get('codec_type')=='video']
           a=[s for s in probe['streams'] if s.get('codec_type')=='audio']
           assert len(v)==1 and v[0]['codec_name']=='h264'

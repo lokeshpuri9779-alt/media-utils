@@ -61,6 +61,9 @@ def _resolved_cast(shot):
 
 def validate_story_shot(shot):
     """Return a deliberate scene grammar or reject an incompatible cast."""
+    if shot.get("story_human_actor") is not None:
+        from astra_v2.human_story_performance import validate_human_scene
+        return validate_human_scene(shot)
     cast = _resolved_cast(shot)
     if not cast:
         from astra_v2.directed_scene_contract import validate_directed_scene
@@ -114,7 +117,10 @@ def draw_story_frame(image, shot, t, *, draw_directed=None,
     mode = validate_story_shot(shot)
     cast = _resolved_cast(shot)
     stable_shot = {**shot, "story_cast": cast}
-    if mode == "ensemble":
+    if mode == "human":
+        from astra_v2.human_story_performance import draw_human_scene
+        success = draw_human_scene(image, stable_shot, t)
+    elif mode == "ensemble":
         stable_shot["experimental_ensemble"] = True
         success = ensemble_frame(image, stable_shot, t)
     elif mode == "duo":
