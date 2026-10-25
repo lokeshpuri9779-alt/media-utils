@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "5b366d43797c138e9d27df2b",
-      "source_sha256": "69dd4bee2e0d7ff3104cebf8c10927dae89068b9e01327db090c1df3211e7855",
+      "candidate_id": "449b3982bd2d26465cc319e4",
+      "source_sha256": "049fa9911dd1cd53d9e347f22c01f6c9460d80372c4bc737e0557a06428066a1",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-1616368b1e19c000d4c8",
-        "title": "The Great Turnip Dispenser Debacle",
-        "hook": "The Grand Unveiling",
-        "question": "Can Barnaby's automated root-vegetable launcher pass the rigorous market safety inspection?",
-        "answer": "Yes, once he redirects the rogue turnip trajectories away from the mayor's visiting carriage.",
+        "content_id": "rayvan-gemini-fe44b6db48010a8008be",
+        "title": "The Great Squeak-Free Cheese Crate Calamity",
+        "hook": "The Screaming Dairy",
+        "question": "How can a market inventor stop his anti-theft cheese crates from scaring every customer away?",
+        "answer": "He replaces the shrieking security sirens with a cheerful musical accordion loop that delights rather than terrifies.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,80 +29,81 @@
         ],
         "story_beats": [
           {
-            "headline": "The Grand Unveiling",
-            "speech": "Behold the glorious automated root-vegetable dispenser! It feeds the entire town with absolute mechanical precision and speed.",
+            "headline": "The Screaming Dairy",
+            "speech": "Step right up and witness ultimate safety! My titanium cheese crates scream louder than a startled flock of angry seagulls!",
             "visual": "robot",
-            "label": "The Invention",
+            "label": "The Alarm Debut",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly next to a large brass automaton vendor in a busy outdoor market, holding a wrench while shoppers watch nervously.",
+            "visual_prompt": "Inventor Barnaby stands at a crowded cobblestone market stall holding a shaking metal cheese crate that emits a blinding red warning light while shoppers cover their ears.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Overclocking",
-            "speech": "We must increase the internal pressure gear right now, or the morning rush will overwhelm our delivery capacity entirely.",
+            "headline": "The Noise Rebellion",
+            "speech": "Your contraptions are terrifying our toddlers and curdling the fresh milk! Fix this ear-splitting racket immediately or leave the market square!",
             "visual": "signal",
-            "label": "The Adjustment",
+            "label": "Market Backlash",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically turns a large valve on the side of the brass automaton while gauge needles spike violently into the red zone.",
+            "visual_prompt": "Furious market vendor Matilda points angrily at Barnaby across a cluttered wooden table while flashing red alarm beacons pulse wildly on the disputed cheese crates.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Veggie Barrage",
-            "speech": "Duck and cover everyone! The calibration springs have slipped and the machine is firing raw turnips at high velocity!",
-            "visual": "ship",
-            "label": "The Malfunction",
-            "story_beat": "twist",
-            "visual_prompt": "Market patrons duck behind wooden fruit crates as giant turnips fly through the air, launched aggressively from the mechanical vendor.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Clean Catch",
-            "speech": "Observe the gentle landing! Perfectly aimed, safely caught, and entirely free of hazardous airborne root vegetables from now on.",
+            "headline": "The Gear Retrofit",
+            "speech": "Instead of blasting sirens, I shall redirect the internal spring tension to drive a miniature brass accordion mechanism playing cheerful folk tunes.",
             "visual": "door",
-            "label": "The Success",
+            "label": "The Mechanical Fix",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby sits inside his chaotic backyard workshop using tiny tweezers to insert a brass music cylinder into the open lid of a green painted cheese crate.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Dancing Bazaar",
+            "speech": "Security has never sounded so delightful! Not a single wheel of cheddar was stolen, and everyone is waltzing down the aisle!",
+            "visual": "ship",
+            "label": "Harmonious Commerce",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby catches a single neatly packaged turnip in an open shopping basket while smiling relieved citizens applaud his successful repair.",
+            "visual_prompt": "Delighted market customers smile and dance around Barnaby's stall as his modified cheese crates spin gently, projecting soft amber light and playing pleasant accordion melodies.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby's high-speed turnip vending machine targets innocent market patrons instead of customers.",
-        "decisive_choice": "Barnaby recalibrates the pneumatic launch pressure using a discarded brass cooking pot.",
-        "resolution": "The machine safely dispenses root vegetables into shopping baskets without launching anyone into the fountain.",
+        "central_conflict": "Overly loud mechanical security sirens on inventor cheese crates causing market panic.",
+        "decisive_choice": "Swap out the high-decibel alarm mechanism for a gentle folk-tune music box gear system.",
+        "resolution": "Shoppers eagerly dance around the crates, buying more cheese while keeping thieves completely at bay.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed clay textures and whimsical steampunk mechanics.",
+          "style": "Bright, whimsical stop-motion claymation aesthetic with rich textures, warm lighting, and expressive character designs.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild ginger hair, a striped canvas apron, round spectacles, and soot-smudged cheeks.",
-            "Mayor Pimm": "A pompous local official wearing a tall top hat, a velvet purple tailcoat, and carrying a gold-knobbed walking cane."
+            "Barnaby": "An eccentric inventor with wild ginger hair, oversized brass goggles on his forehead, wearing a grease-stained tweed vest and striped trousers.",
+            "Matilda": "A stern market inspector with her grey hair in a tight bun, wearing a durable blue apron over a floral dress, perpetually holding a wooden clipboard."
           },
           "locations": {
-            "Market Square": "A bustling cobblestone plaza filled with colorful striped awnings, wooden merchant stalls, and a central stone fountain."
+            "Market Square": "A bustling cobblestone plaza lined with striped canvas awnings, wooden carts piled high with produce, and colorful hanging lanterns.",
+            "Workshop": "A cluttered garage filled with hanging gears, ticking clocks, blueprints taped to brick walls, and shelves overflowing with metal scraps."
           },
           "objects": {
-            "Turnip Dispenser": "A towering copper and brass vending apparatus featuring spinning cogs, glowing pressure gauges, and a wide delivery chute.",
-            "Shopping Basket": "A tightly woven wicker basket with sturdy double handles, currently holding three round red apples."
+            "Cheese Crate": "A heavy-duty reinforced steel container painted bright forest green with heavy brass latches and a prominent mechanical speaker grill on the front.",
+            "Accordion Gearbox": "A compact brass cylinder featuring tiny metal teeth and miniature bellows designed to fit snugly inside the security lid of the crate."
           }
         },
-        "plot_fingerprint": "fe704dfeb39dfa64537a85ff973c390e211dea73e7b36f842fa9189d381bcaba"
+        "plot_fingerprint": "07ababa12ef36a881f962e0de457a292f5d0c0fe8bf10d53d567753b1ad638b7"
       },
       "approved": false
     },
     {
-      "candidate_id": "80bcb9006240a54a4dd9f678",
-      "source_sha256": "52bbcd338bdee0ce93b16136c15f3657da34dfcc23eca9a57f236e8240990067",
+      "candidate_id": "600589120f1f045a43ac8a28",
+      "source_sha256": "794255b2a7f1cec375e0b850b8e8752d2915cf550c712e6483d6f6232e8e8c5a",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-5b88a3dba104913f56e3",
-        "title": "The Weaver's Last Loom",
-        "hook": "The Bitter Frost Warning",
-        "question": "Can a master weaver sacrifice her life's masterpiece to save her oldest friend's dying orchard from frost?",
-        "answer": "Yes, by burning her intricately dyed wool tapestries in iron heaters, she provides enough localized warmth to save the apple blossoms.",
+        "content_id": "rayvan-gemini-cf9d0a2b60df480592d2",
+        "title": "The Midnight Express Mystery",
+        "hook": "The Frozen Hands",
+        "question": "Who tampered with the terminal clock before the midnight departure?",
+        "answer": "A runaway carrier pigeon trapped inside the brass bell housing caused the clock hands to freeze.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -110,81 +111,81 @@
         ],
         "story_beats": [
           {
-            "headline": "The Bitter Frost Warning",
-            "speech": "Look at the thermometer dropping rapidly tonight, old friend. If we do not act immediately, every single bud will perish before dawn.",
-            "visual": "forest",
-            "label": "The Orchard Threat",
-            "story_beat": "reveal",
-            "visual_prompt": "An elderly village woman in a heavy wool shawl pointing at frost-covered apple trees in a misty medieval village orchard, morning light breaking, holding a silver thermometer.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Gathering the Tapestries",
-            "speech": "These threads hold fifty winters of my memories and hard labor, yet your trees are the lifeblood of this entire community.",
-            "visual": "door",
-            "label": "The Difficult Choice",
-            "story_beat": "build",
-            "visual_prompt": "The master weaver standing inside a dimly lit wooden cottage doorway, hauling massive rolls of richly dyed wool tapestries out into the cold cobblestone courtyard.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Igniting the Heaters",
-            "speech": "We must feed the iron orchard heaters continuously with the heavy woolen rolls until the hazardous temperature inversion finally breaks at sunrise.",
+            "headline": "The Frozen Hands",
+            "speech": "Look at the station master panel. The master clock is completely stuck at eleven fifty-nine, endangering the express train.",
             "visual": "signal",
-            "label": "The Thermal Mechanism",
-            "story_beat": "mechanism",
-            "visual_prompt": "Two friends working together in the dark orchard, stuffing heavy multi-colored wool tapestries into glowing cast-iron orchard heaters sending thick smoke signals upward.",
+            "label": "Clock Tower",
+            "story_beat": "reveal",
+            "visual_prompt": "Detective Miller pointing at a large glowing digital signal board in the grand railway station lobby, expressing intense concern with worried facial expression, wearing a tweed overcoat, holding a brass pocket watch in his left hand.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Blooming Harvest",
-            "speech": "The smoke has cleared away, revealing thousands of healthy pink apple blossoms safe and vibrant under the warm morning sun.",
-            "visual": "forest",
-            "label": "The Saved Orchard",
+            "headline": "The Mechanical Obstruction",
+            "speech": "We must climb the spiral staircase to the belfry immediately to inspect the heavy internal gears before it is too late.",
+            "visual": "door",
+            "label": "Belfry Entrance",
+            "story_beat": "build",
+            "visual_prompt": "Detective Miller pushing open a heavy oak maintenance door at the top of a stone spiral staircase inside the clock tower, holding a flickering brass lantern, showing a determined expression in the dusty, cobblestone-walled interior.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Feathered Culprit",
+            "speech": "There is no sabotage here at all. A bewildered carrier pigeon is simply wedged firmly between the massive bronze striking hammers.",
+            "visual": "robot",
+            "label": "Clock Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "Detective Miller gently lifting a fluttering grey carrier pigeon out from between giant interconnected bronze clock gears, smiling warmly, holding the small bird with both gloved hands inside the dimly lit clockwork chamber.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Timely Departure",
+            "speech": "The gears are finally turning smoothly once more, and the midnight express departs safely down the track without any further delays.",
+            "visual": "ship",
+            "label": "Platform View",
             "story_beat": "payoff",
-            "visual_prompt": "The weaver and her orchardist friend smiling broadly among fully rescued, blossoming apple trees in bright sunlight, holding wicker baskets ready for the harvest.",
+            "visual_prompt": "Detective Miller standing proudly on the busy railway platform waving goodbye to a majestic steam locomotive shaped like an ocean liner, holding the freed carrier pigeon on his shoulder under the glowing amber station lights.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A sudden late spring frost threatens the village's entire apple harvest, requiring massive thermal heat that only burning the village weaver's prize winter tapestries can provide.",
-        "decisive_choice": "Choose to surrender and burn fifty years of artistic heritage instead of keeping the wool to preserve her own legacy.",
-        "resolution": "The orchard blossoms survive the bitter night, bearing a record harvest that feeds the village through the following winter.",
+        "central_conflict": "A frozen station clock threatens to cause a catastrophic train collision.",
+        "decisive_choice": "Climb the clock tower to investigate the chiming mechanism instead of delaying the train.",
+        "resolution": "The trapped bird is freed safely, allowing the station master to reset the clock just in time.",
         "visual_bible": {
-          "style": "Cinematic historical realism with rich natural textures, warm golden hour lighting, and detailed period-accurate clothing.",
+          "style": "Cinematic Victorian steampunk mystery with rich warm lighting and sharp textures",
           "characters": {
-            "weaver": "An elderly woman with silver hair tied in a bun, wearing a durable indigo tunic, leather boots, and a thick knitted wool shawl.",
-            "orchardist": "A weathered man in his sixties with a graying beard, wearing a canvas work jacket, sturdy trousers, and a flat wool cap."
+            "Detective Miller": "A meticulous investigator with wire-rimmed glasses, a neatly trimmed mustache, wearing a charcoal wool tweed overcoat and a flat cap.",
+            "Station Master": "An elderly gentleman with a sweeping white handlebar mustache, wearing a navy blue uniform jacket with brass buttons and a red pocket watch chain."
           },
           "locations": {
-            "village_orchard": "A rolling rural hillside filled with ancient gnarled apple trees, stone boundary walls, and rustic wooden sheds.",
-            "weaver_cottage": "A cozy stone-and-timber cottage interior crowded with wooden spinning wheels, dye pots, and hanging yarn."
+            "Station Lobby": "A grand Victorian transit hall featuring high arched iron-and-glass ceilings, polished stone flooring, and vintage wooden ticket booths.",
+            "Clock Tower Belfry": "A cramped circular chamber dominated by gigantic interconnected bronze gears, ticking pendulums, and thick dust motes floating in shafts of moonlight."
           },
           "objects": {
-            "tapestries": "Large rectangular woven wall hangings featuring rich indigo, madder red, and golden yellow geometric wool patterns.",
-            "iron_heaters": "Heavy black cast-iron cylindrical stoves equipped with adjustable ventilation dampers and smokestacks."
+            "Pocket Watch": "An antique gold pocket watch with intricate engraved scrollwork along the casing and a white enamel dial.",
+            "Brass Lantern": "A vintage handheld brass oil lantern with ribbed glass panels casting a warm amber glow."
           }
         },
-        "plot_fingerprint": "af9ce1fd7f2b6cd3673929244a705e1ea662ef23cd8d4906f7e44370552c84e3"
+        "plot_fingerprint": "c5cc02ef41a509df48e5a5f5b1f6bd6cdc180d4521a056c0459e3582b13d5bfb"
       },
       "approved": false
     },
     {
-      "candidate_id": "58c0bfd4fc916585292ee77f",
-      "source_sha256": "b51785082dbef3a7d8c11bed917872c3cef6c4da55d6fcebb5eabda3e8a9bc91",
+      "candidate_id": "ea7debbce3cd1ba2711934a3",
+      "source_sha256": "5344f7d866096d38fab3387a061c99f6fd9678fd553b6a026b91804ddf1565d8",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-fca150d54073531bb3e3",
-        "title": "Frostline Breach",
-        "hook": "Seismic Warning",
-        "question": "Can the heavy cargo sledge cross the thawing sea ice before the crevasse swallows the prototype drill?",
-        "answer": "Yes, by uncoupling the lead battery sled to bridge the crack, Dr. Vane saves the core research data.",
+        "content_id": "rayvan-gemini-ab4a0c7d1e7cd0ece4d3",
+        "title": "The Coral Cartographer's Silent Reef",
+        "hook": "The Frozen Nursery",
+        "question": "Why are the bioluminescent polyp nodes across the trench freezing into inert white stone?",
+        "answer": "An industrious kelp-weaver family is unknowingly damming the thermal current with an expanding woven dam of discarded deep-sea cables.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -192,66 +193,65 @@
         ],
         "story_beats": [
           {
-            "headline": "Seismic Warning",
-            "speech": "Listen to that low frequency hum. The entire northern shelf is fracturing faster than our thermal models predicted.",
+            "headline": "The Frozen Nursery",
+            "speech": "Look closely at the polyp clusters, my dear. Their inner lights have turned to solid, unyielding frost within a single tide.",
             "visual": "signal",
-            "label": "Frequency Spike",
+            "label": "Freezing Depths",
             "story_beat": "reveal",
-            "visual_prompt": "Dr. Vane stands inside a glowing research tent, pointing at a flickering amber seismic monitor displaying jagged wave spikes, holding a steel tablet.",
+            "visual_prompt": "An elderly sea otter wearing a brass monocle examines glowing white frost-covered polyp nodes in a dark underwater canyon, holding a glowing data slate displaying erratic temperature graphs.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Fractured Route",
-            "speech": "We cannot detour around the crevasse without running straight into the blinding whiteout of the outer storm.",
+            "headline": "Tracing the Current",
+            "speech": "The temperature drop originates upstream where the shadows grow thick and unnatural with heavy, tangled black vegetation.",
             "visual": "forest",
-            "label": "Blocked Pass",
+            "label": "The Kelp Wall",
             "story_beat": "build",
-            "visual_prompt": "Dr. Vane and Scout Lin stare at a massive jagged fissure splitting the snowy expanse, holding yellow emergency flares illuminating dark blue ice walls.",
+            "visual_prompt": "A young beaver wearing a utility harness swims against a sluggish current toward a dense, shadowy forest of giant kelp stems choking the narrow canyon passage.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Uncoupling the Weight",
-            "speech": "Quickly drop the heavy battery sled across the gap. It is the only way to bear the weight of the drill.",
+            "headline": "Uncovering the Dam",
+            "speech": "It is not kelp at all, but thousands of coiled copper cables woven tightly together into a massive, heat-trapping barrier.",
             "visual": "ship",
-            "label": "Bridge Protocol",
+            "label": "The Cable Dam",
             "story_beat": "mechanism",
-            "visual_prompt": "Scout Lin uses a heavy wrench to release the mechanical hitch connecting the battery sled to the main cargo transport on the snow-covered ridge.",
+            "visual_prompt": "The beaver and otter float before an enormous wall made of braided submarine telecommunication cables and rusted iron framing, holding a heavy titanium cutting shear.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Safe Passage",
-            "speech": "The drill has crossed safely to the stable shelf, leaving the empty chassis behind in the deep abyss.",
-            "visual": "door",
-            "label": "Successful Crossing",
+            "headline": "Restoring the Flow",
+            "speech": "We must cut the center anchors now so the trapped thermal current can burst through and heal the whole reef.",
+            "visual": "planet",
+            "label": "Thermal Restoration",
             "story_beat": "payoff",
-            "visual_prompt": "Dr. Vane watches from the safe southern ridge as the motorized cargo drill rolls onto solid blue ice, holding a smoking red emergency flare.",
+            "visual_prompt": "Bright turquoise thermal water surges through a wide breach in the cable wall, illuminating vibrant pink and purple coral polyps as the otter and beaver watch joyfully from a safe distance.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Thawing polar ice shelf threatening to destroy the station's primary seismic survey equipment during a blizzard.",
-        "decisive_choice": "Sacrificing the primary battery sled to bridge a growing ice fracture.",
-        "resolution": "The core drill crosses safely, though the battery is lost to the freezing abyss below.",
+        "central_conflict": "A dam of tangled communication cables blocking the thermal current",
+        "decisive_choice": "Sever the ancestral weaving dam to restore warmth to the freezing nursery nodes",
+        "resolution": "The current thaws the nodes, replacing the woven dam with a suspension bridge of shimmering fiber optics",
         "visual_bible": {
-          "style": "Cinematic realistic polar documentary style, high-contrast snow and ice textures, practical cold-weather lighting.",
+          "style": "Detailed underwater painterly realism with vibrant bioluminescent lighting and rich deep-sea textures",
           "characters": {
-            "Dr. Vane": "A weathered Arctic researcher in her late forties, wearing a heavy orange parka with faux-fur hood and thick titanium snow goggles.",
-            "Scout Lin": "A nimble field technician in his thirties, wearing a navy-blue polar jumpsuit and a woolen knit cap."
+            "Barnaby": "An elderly sea otter with silver-tipped fur, wearing a polished brass monocle over his left eye and a waterproof leather harness",
+            "Pip": "A clever young beaver with sleek brown fur, wearing a fabric utility belt filled with metallic tools and glass floats"
           },
           "locations": {
-            "Research Tent": "A reinforced geodesic dome tent lit by amber interior emergency lamps against a dark twilight polar background.",
-            "Glacial Shelf": "A vast white expanse of wind-scoured ice sheets split by deep azure crevasses under a swirling grey blizzard sky."
+            "Canyon Nursery": "A steep underwater trench lined with delicate polyp gardens and pale mineral pillars",
+            "Cable Gorge": "A constricted seabed corridor choked with dark, synthetic debris and towering giant kelp stalks"
           },
           "objects": {
-            "Seismic Monitor": "A ruggedized black field computer with an amber CRT screen displaying pulsing geological waveforms.",
-            "Battery Sled": "A low-profile aluminum cargo sled loaded with glowing green lithium-ion power cells and heavy towing cables.",
-            "Emergency Flare": "A metal cylinder emitting bright crimson sparks and thick white smoke."
+            "cutting_shear": "A heavy-duty pair of dual-bladed titanium shears with a buoyant yellow handle",
+            "data_slate": "A slate-blue stone tablet displaying glowing cyan luminescent navigational charts and thermal wave readings"
           }
         },
-        "plot_fingerprint": "28b181042e5d52d589215540954bf1300f2f1cfe8509cee3d034881996b76b8d"
+        "plot_fingerprint": "bdcab10384c272619bd6aae1dfee661926c18543820ce075d6be33ec50a173b3"
       },
       "approved": false
     }
