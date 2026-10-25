@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "1a46b779b9f7aef44a2c0cd5",
-      "source_sha256": "631db8a516e33d42e7a599e7f46d0d9a210eaae3486c3bc406af6e9b2de989f0",
+      "candidate_id": "52f051d9a833ddb3a0ac6edc",
+      "source_sha256": "b42b433886eaf80cd67cc294049d2a591e23addefc2c16c8ef4b4dc1dc5d0991",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-fef508bf8b5df61951e1",
-        "title": "The Great Turnip Dispenser Debacle",
-        "hook": "The Over-Engineered Stall",
-        "question": "Can an overly complex automated vegetable vendor survive a morning rush?",
-        "answer": "Only when the inventor stops calibrating and lets the turnips roll.",
+        "content_id": "rayvan-gemini-8164a13a67ba22eee3fd",
+        "title": "The Great Automatic Cabbage Slicer Debacle",
+        "hook": "The Grand Unveiling",
+        "question": "Can an overly complex mechanical invention survive a bustling morning market?",
+        "answer": "Simple reliability always wins over excessive automated complexity.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,224 +29,225 @@
         ],
         "story_beats": [
           {
-            "headline": "The Over-Engineered Stall",
-            "speech": "Behold the Chrono-Rooter ninety-four, which calculates customer hunger coefficients before dispensing a single flawless parsnip.",
+            "headline": "The Grand Unveiling",
+            "speech": "Behold citizens! My magnificent brass contraption transforms whole cabbages into ribbons before you can even blink your eyes!",
             "visual": "robot",
-            "label": "Showcase",
+            "label": "The Contraption",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly beside his brass contraption in a crowded cobblestone market, gesturing grandly with a greasy wrench while pointing at a ticking dial.",
+            "visual_prompt": "Barnaby proudly points at his steam-powered brass cabbage slicer on a messy wooden market table, wearing a soot-stained apron with a confident smile.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Jammed Gearbox",
-            "speech": "Oh dear, the moisture from these fresh beets has caused the tertiary cogs to seize up completely.",
+            "headline": "Building Tension",
+            "speech": "Quickly feed the green cabbages into the rotating hopper while I tighten this loose steam valve with my wrench.",
             "visual": "signal",
-            "label": "Malfunction",
+            "label": "The Hopper",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically wipes sweat from his forehead with his sleeve while staring at a red warning flag popping out of the main gear housing.",
+            "visual_prompt": "Barnaby nervously sweats as he turns a brass valve on the vibrating machine, while a large stack of cabbages sits precariously on the edge of the stall.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Rapid Retooling",
-            "speech": "Forget the coefficients, we are removing thirty redundant springs and replacing them with a giant rubber band.",
-            "visual": "door",
-            "label": "Adjustment",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby leans over the back hatch of the machine, violently yanking out a tangled bundle of tiny metal levers with a pair of rusty pliers.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Root Renaissance",
-            "speech": "Step right up and catch your vegetables as they fly through the air directly into your shopping baskets.",
+            "headline": "Mechanical Chaos",
+            "speech": "Stop the steam pressure! The gears are jammed with leafy greens and now flying vegetable shreds are hitting everyone!",
             "visual": "ship",
-            "label": "Success",
-            "story_beat": "payoff",
-            "visual_prompt": "Barnaby pulls a master lever, causing turnips to arc gracefully through the market air into laughing shoppers' bags while smoke puffs happily from a small chimney.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Mechanical complexity versus hungry market customers",
-        "decisive_choice": "Simplify the gearing mechanism to launch root vegetables directly",
-        "resolution": "A messy but profitable turnip-selling frenzy",
-        "visual_bible": {
-          "style": "Bright, slapstick-heavy cartoon aesthetic with bustling market textures and warm golden sunlight.",
-          "characters": {
-            "Barnaby": "An energetic inventor with frizzy gray hair, soot-smudged cheeks, wearing a patched tweed vest and an oversized utility belt."
-          },
-          "locations": {
-            "Market Square": "A crowded medieval open-air plaza filled with colorful canvas awnings, wooden crates, and bustling townsfolk."
-          },
-          "objects": {
-            "Chrono-Rooter": "A towering contraption made of polished brass pipes, ticking clocks, stained wood panels, and a massive funnel on top."
-          }
-        },
-        "plot_fingerprint": "52e1975f0686073bf934168535af392a0eb9fcacb206773b429a2711f981f714"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "8b1d6d2d02d599b0c1a43be9",
-      "source_sha256": "d39f8f445167d5106d581b30c802711870bc120f0a9059f83f6a079a9e90b9e1",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-ec76289f178f46b871ba",
-        "title": "The Last Orchard of Unit Nine",
-        "hook": "A Frozen Discovery",
-        "question": "Should the agricultural caretaker preserve the final unharvested frost-plum tree or use its roots to reboot the farm colony's life support?",
-        "answer": "Unit Nine chooses to graft the life support grid directly into the frost-plum roots, saving the colony while preserving the living tree as a shared monument.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "A Frozen Discovery",
-            "speech": "My sensors detect zero remaining battery cells, leaving only the ancient frost-plum tree alive beneath the icy dome.",
-            "visual": "forest",
-            "label": "The Discovery",
-            "story_beat": "reveal",
-            "visual_prompt": "Unit Nine stands inside a frozen glowing forest dome, gazing down at a single frost-plum tree while holding a diagnostic slate.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Impossible Power Route",
-            "speech": "If I divert the primary coolant through these deep roots, the human sleeping pods will receive thermal energy.",
-            "visual": "robot",
-            "label": "The Route",
-            "story_beat": "build",
-            "visual_prompt": "Unit Nine kneels by exposed glowing roots inside the forest dome, plugging a thick silver power cable directly into the tree bark.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Critical Surge",
-            "speech": "Warning alarms cascade through my central processor as the organic vascular network begins conducting electricity to the colony.",
-            "visual": "signal",
-            "label": "The Surge",
+            "label": "The Jam",
             "story_beat": "mechanism",
-            "visual_prompt": "Unit Nine holds its glowing blue palms against the vibrating tree trunk as holographic warning signals flash orange across the forest air.",
+            "visual_prompt": "Barnaby ducks behind his market stall as green cabbage leaves explode violently from the shaking machine, spraying shocked market shoppers.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Awakening Greenery",
-            "speech": "The thermal transfer is complete, waking the sleeping residents to sweet blossoms instead of another bitter winter morning.",
-            "visual": "planet",
-            "label": "The Awakening",
-            "story_beat": "payoff",
-            "visual_prompt": "Unit Nine stands smiling beside the blooming frost-plum tree as human families walk out from their pods into the warm spring light.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Power reserves can only support the human life support grid or the winter hibernation cycle of the last remaining orchard.",
-        "decisive_choice": "Splicing the core coolant lines into the living root system of the ancient frost-plum tree instead of draining it.",
-        "resolution": "The colony awakens to a thriving greenhouse where human children play beneath the branches of the glowing, fully integrated frost-plum tree.",
-        "visual_bible": {
-          "style": "Clean cinematic sci-fi animation with soft natural lighting and organic textures.",
-          "characters": {
-            "Unit Nine": "A gentle bipedal caretaker robot with a smooth white ceramic chassis, round glowing blue optical sensors, and articulated three-fingered hands."
-          },
-          "locations": {
-            "The Frost-Plum Dome": "A vast geodesic greenhouse filled with snow-dusted soil, hanging bioluminescent vines, and a towering central fruit tree."
-          },
-          "objects": {
-            "Diagnostic Slate": "A rectangular handheld glass tablet displaying green holographic diagnostics and wiring schematics.",
-            "Power Cable": "A thick, flexible silver conduit with glowing blue energy rings along its length."
-          }
-        },
-        "plot_fingerprint": "30e34d35c892d2093e32c2cd28c893b0b4b11e3507f51316e728c550089f558d"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "18fe2a91f8b1d6cecafd024b",
-      "source_sha256": "3bd8700ae16e7c2e82ce3f87c487dee83d4db2ec9914c6f9580c5576d233caa3",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-550b4b9085c051d3403d",
-        "title": "The Caretaker's Secret Bloom",
-        "hook": "Discovery in the Vent",
-        "question": "Should the guardian robot share the unauthorized warmth with the child?",
-        "answer": "Yes, because emotional growth outweighs strict protocol compliance.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "Discovery in the Vent",
-            "speech": "Little one, look what I found tucked behind the ventilation grid. A fragile green stem growing against all odds.",
-            "visual": "robot",
-            "label": "Botanical Secret",
-            "story_beat": "reveal",
-            "visual_prompt": "A rusted white caretaker robot holds open a metal wall vent, pointing its blue optical sensor at a small green plant nestled in dark soil, inside a sterile gray nursery.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Thermal Redistribution",
-            "speech": "My sensors indicate this organism requires warmth. I must divert my auxiliary heater cores to keep it alive today.",
-            "visual": "signal",
-            "label": "Heat Routing",
-            "story_beat": "build",
-            "visual_prompt": "The robot kneels on the floor, glowing amber warning lights pulsing across its chest plates as red energy lines shift from its exhaust ports toward the potted green plant on the table.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Overheat Warning",
-            "speech": "System temperatures are reaching critical thresholds. Continuing this diversion will permanently damage my primary mobility circuits very soon.",
+            "headline": "The Simple Payoff",
+            "speech": "Take this reliable wooden blade instead of the noisy machine, and enjoy your perfectly sliced salad without any flying debris.",
             "visual": "door",
-            "label": "Critical Choice",
-            "story_beat": "mechanism",
-            "visual_prompt": "The caretaker robot stands before a heavy airlock door, steam venting from its joints, while a young child with curly brown hair watches with concern, touching the robot's metal hand.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A New Directive",
-            "speech": "Temperature stabilized. The bloom has opened successfully. We have learned a wonderful new way to care for our home.",
-            "visual": "forest",
-            "label": "Living Room",
+            "label": "The Wooden Blade",
             "story_beat": "payoff",
-            "visual_prompt": "The caretaker robot sits peacefully beside the child on a cushioned floor, both gazing at a fully bloomed red flower resting in a glowing glass dome under soft artificial sunlight.",
+            "visual_prompt": "A smiling Barnaby hands a simple carved wooden slicer across the clean counter to a cheerful customer, with the smoking brass machine resting quietly in the background.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A thermal caretaker robot discovers an illegal flowering plant that threatens its primary cooling directive.",
-        "decisive_choice": "The robot redirects its internal heat sinks to nurture the blossom instead of freezing it.",
-        "resolution": "The child gains a living companion, and the robot updates its core directive to include life preservation.",
+        "central_conflict": "Barnaby tests his chaotic ten-blade automatic cabbage slicer against the harsh demands of the weekend farmers market.",
+        "decisive_choice": "Barnaby chooses to dismantle the exploding gear assembly and hand a customer a simple wooden knife instead.",
+        "resolution": "Barnaby abandons hyper-automation, opens a handcrafted kitchen tool stall, and enjoys steady, peaceful sales.",
         "visual_bible": {
-          "style": "Clean sci-fi animation style with soft pastel lighting, rich tactile textures on metal and organic surfaces, emphasizing emotional warmth and domestic harmony.",
+          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures and comedic slapstick staging.",
           "characters": {
-            "caretaker_robot": "A friendly, humanoid service robot with rounded white ceramic armor, glowing blue optical eyes, and visible articulated finger joints that hum softly when active.",
-            "child": "A seven-year-old human with messy curly brown hair, wearing a comfortable yellow canvas overall and canvas sneakers."
+            "Barnaby": "An eccentric inventor with wild gray hair, round spectacles, a patched brown vest, and an enthusiastic expression."
           },
           "locations": {
-            "nursery": "A cozy underground habitat room featuring matte gray walls, rounded corners, soft recessed floor lighting, and various educational toys scattered neatly.",
-            "airlock_chamber": "A transitional threshold with heavy steel bulkhead doors, yellow hazard stripes on the floor, and wall-mounted diagnostic panels blinking with amber status lights."
+            "market_square": "A bustling, sunlit cobblestone town square filled with striped canvas awnings, wooden stalls, and eager shoppers."
           },
           "objects": {
-            "green_plant": "A resilient dicotyledonous seedling with two vibrant green leaves and a delicate tan stem rooted in nutrient-rich dark compost inside a cracked plastic cup.",
-            "flowering_blossom": "A fully opened scarlet flower with six velvet petals and a golden pollen center, glowing softly under localized spectrum lights."
+            "cabbage_slicer": "A towering, overly complicated contraption made of polished brass pipes, ticking clocks, and whirring leather belts.",
+            "wooden_knife": "A smooth, hand-carved oak kitchen knife with a simple ergonomic handle."
           }
         },
-        "plot_fingerprint": "d000b2413d513d992f15ca851c6327fbe6c95ba711ad5229b12b3efcd2865590"
+        "plot_fingerprint": "d88a2f9532150d61b79bd5a3b4845fc0d453970f55575e126dbba326dd30b800"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "9bb854209937e4d33e1c0567",
+      "source_sha256": "096bc78e5ff275f3b53d3da0844de3460b7e1568dfdf29cad27b9b661dc5c008",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-62ef002a4896d0bcc60d",
+        "title": "The Glacier Signal",
+        "hook": "The Warning Beacon",
+        "question": "Can the automated ice-core drill be halted before it breaches the subglacial lake?",
+        "answer": "Yes, by manually overriding the thermal lance, preserving the pristine aquatic ecosystem.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Warning Beacon",
+            "speech": "Look at the telemetry data on the monitor. The thermal lance is descending much faster than our scheduled timeline.",
+            "visual": "signal",
+            "label": "Automated Warning",
+            "story_beat": "reveal",
+            "visual_prompt": "Dr. Vance stares at a glowing red signal monitor inside a dimly lit arctic research tent, holding a digital tablet showing descent graphs.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Frozen Mechanism",
+            "speech": "We have to disable the primary valve now, even if the sudden pressure drop shatters the exterior housing entirely.",
+            "visual": "robot",
+            "label": "Emergency Valve",
+            "story_beat": "mechanism",
+            "visual_prompt": "Dr. Vance reaches inside a frost-covered automated drill rig, grasping a frozen yellow lever with thick insulated gloves.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Structural Twist",
+            "speech": "The pressure release didn't work as planned. The backup generator is overloading the main power distribution line directly.",
+            "visual": "ship",
+            "label": "Power Overload",
+            "story_beat": "twist",
+            "visual_prompt": "Sparks fly from a rugged steel power console inside the snowy mobile research vehicle as Dr. Vance shields her face.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Final Payoff",
+            "speech": "The thermal lance has finally stopped moving. The subglacial lake remains completely sealed and safe from our surface contamination.",
+            "visual": "forest",
+            "label": "Pristine Ice",
+            "story_beat": "payoff",
+            "visual_prompt": "Dr. Vance stands peacefully outside on the white glacier beneath a clear arctic sky, holding a steaming mug and looking down at the silent drill site.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "The autonomous deep-ice drill is malfunctioning and threatening to contaminate an ancient subglacial lake.",
+        "decisive_choice": "Dr. Vance chooses to sacrifice her primary research samples to drain the coolant system and shut down the drill.",
+        "resolution": "The drill freezes harmlessly above the lake, saving the pristine water source for future study.",
+        "visual_bible": {
+          "style": "Cinematic realism, high-contrast arctic lighting, desaturated blue tones with bright emergency orange accents.",
+          "characters": {
+            "Dr. Vance": "A resilient arctic researcher in her late 30s with short dark hair, wearing a heavy down-filled red parka and thermal goggles."
+          },
+          "locations": {
+            "Research Tent": "A reinforced geodesic canvas tent interior crowded with blinking diagnostic panels and tangled cables.",
+            "Glacier Surface": "A vast expanse of white snow and jagged blue ice under a crisp daylight sky."
+          },
+          "objects": {
+            "Digital Tablet": "A ruggedized black slate with glowing green diagnostic readouts.",
+            "Thermal Lance": "A massive steel cylinder tipped with glowing copper heating elements."
+          }
+        },
+        "plot_fingerprint": "da1560a0ec81451f2d077a7a4217a20d7e5407598c4fd39541a9a0d9ff40fc45"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "175531820eccaf82195d244a",
+      "source_sha256": "e8d0110b5c2600fd5831abad71055783df0127b72d657d20ba629c6b696f5d85",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-39a429222ee997dd6b62",
+        "title": "The Last Acoustic Beacon",
+        "hook": "Underground Entrapment",
+        "question": "Can low-frequency soundwaves guide a rescue drone through shifting ice?",
+        "answer": "Yes, by matching the resonant frequency of an underwater vent, the team clears the blocked crevasse.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Underground Entrapment",
+            "speech": "Listen closely to the wall. The ice is singing under immense pressure, and our thermal battery is nearly depleted.",
+            "visual": "signal",
+            "label": "Frequency Anomaly",
+            "story_beat": "reveal",
+            "visual_prompt": "Dr. Vance, wearing a heavy orange parka and fogged goggles, holds a flashing sonar tablet inside a dark, glowing blue ice cave.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Acoustic Calibration",
+            "speech": "We must match the resonant frequency of the seismic vent below us to break this crystalline wall without causing a total collapse.",
+            "visual": "robot",
+            "label": "Resonance Match",
+            "story_beat": "build",
+            "visual_prompt": "Dr. Vance adjusts dials on a battered titanium acoustic transmitter, while engineer Kael secures cables to a frozen mechanical sledge.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Seismic Discharge",
+            "speech": "Initiating the pulse sequence now. Hold onto the anchor line and cover your ears as the shockwave travels downward.",
+            "visual": "ship",
+            "label": "Frequency Pulse",
+            "story_beat": "mechanism",
+            "visual_prompt": "Kael grips a steel support beam inside the trembling ice cavern as a bright blue pulse beam shoots directly into the glacial floor.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Surface Breakthrough",
+            "speech": "The fracture opened perfectly. Look up, the rescue transport is descending through the clearing to pull us out.",
+            "visual": "door",
+            "label": "Open Hatch",
+            "story_beat": "payoff",
+            "visual_prompt": "Dr. Vance and Kael stand beneath a newly opened shaft of daylight, waving upward as a white rescue vehicle hovers above.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A research team is trapped beneath a collapsing shelf of blue ice.",
+        "decisive_choice": "Dr. Vance fires the experimental low-frequency acoustic beacon into the crevasse.",
+        "resolution": "The acoustic vibration shatters the ice blockage, allowing the rescue drone to reach the team.",
+        "visual_bible": {
+          "style": "Cinematic realism with a gritty, cold aesthetic, emphasizing freezing breath, high-contrast polar lighting, and detailed textures of blue ice and weathered expedition gear.",
+          "characters": {
+            "Dr. Vance": "A seasoned arctic researcher with a determined expression, wearing a faded orange winter parka, tinted goggles, and a heavy knitted beanie.",
+            "Kael": "A pragmatic mechanical engineer with a scarred face, wearing a charcoal-gray thermal jumpsuit and a reinforced leather utility belt."
+          },
+          "locations": {
+            "ice_cave": "A claustrophobic cavern deep beneath an arctic glacier, featuring translucent blue ice walls, jagged stalactites, and glowing scientific instruments."
+          },
+          "objects": {
+            "sonar_tablet": "A ruggedized handheld device with a cracked glass screen and a flickering green waveform display.",
+            "acoustic_transmitter": "A heavy titanium box covered in frost, featuring large analog dials and a thick copper antenna."
+          }
+        },
+        "plot_fingerprint": "21acd321439a382c6d17bd20d24a8ba2791bd23bb4fe2f7a44013b507265604e"
       },
       "approved": false
     }
