@@ -1,10 +1,10 @@
 {
-  "observed_at": "2026-10-25T12:46:35.657569+00:00",
+  "observed_at": "2026-10-25T18:42:16.628387+00:00",
   "generated": 13,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 9,
+      "index": 7,
       "reason": "ValueError"
     },
     {
@@ -13,11 +13,8 @@
     }
   ],
   "reviewed": 13,
-  "approved": 2,
+  "approved": 3,
   "review_issues": [
-    "The central conflict and resolution heavily mimic the structural and thematic pattern of 'Unit 734 and the Dying Solar Grove' in the comparison history, substituting plant life and a pilot with a greenhouse specimen and children, failing the originality threshold for recent publication premises.",
-    "The story shares a nearly identical central conflict, setting, character name (Lyra), and premise ('The Ranger and the Summit Flares') with a recently published example in the comparison history, failing the originality requirement.",
-    "ai_editorial_rejection",
     "review_failed:HTTP_429",
     "review_provider:rate_limited"
   ],
