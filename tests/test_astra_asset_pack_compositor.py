@@ -47,9 +47,9 @@ class AssetPackCompositorTests(unittest.TestCase):
                 name=f"observatory-{number}.png"
                 Image.new("RGB",(100,180),(number*25,60,105)).save(root/"art"/name)
                 candidates.append({"id":str(number),"path":"art/"+name})
-            with patch("astra_v2.quality_asset_selector.select_assets", return_value=candidates), \\
+            with (patch("astra_v2.quality_asset_selector.select_assets", return_value=candidates),
                  patch.dict(os.environ, {"ASTRA_ASSET_PACK_ENABLED":"1",
-                                        "ASTRA_ASSET_PACK_IMMUTABLE":"1"}):
+                                        "ASTRA_ASSET_PACK_IMMUTABLE":"1"})):
                 _cached_pack_background.cache_clear()
                 def selected(shot_number):
                     return _cached_pack_background(str(root),"observatory","season-1",
