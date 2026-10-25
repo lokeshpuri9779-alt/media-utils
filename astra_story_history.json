@@ -1963,6 +1963,51 @@
       "central_conflict": "The station ledger went missing during the 8:00 express boarding.",
       "decisive_choice": "Search the stationmaster's own misplaced meal tin instead of locking down the trains.",
       "resolution": "The ledger is recovered safely, and the morning departures resume without further delay."
+    },
+    {
+      "content_id": "rayvan-forge-f8a3582867926d4d",
+      "video_id": "1xL-wwoxzWE",
+      "confirmed_at": "2026-10-25T16:13:35.161069+00:00",
+      "title": "The Hare and the Missing Invitation",
+      "plot_fingerprint": "fbdbb255c3f815bf02cbb04f4120fd8de630ff26d9bf1f1e0e9791913032333e",
+      "story_beats": [
+        {
+          "headline": "THE ROYAL PICNIC",
+          "speech": "A hare was responsible for delivering the royal picnic invitations, until a sudden gust scattered them into the forest.",
+          "visual": "forest",
+          "label": "INVITES LOST",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "WRONG ADDRESSES",
+          "speech": "He chased one letter through the rain, only to discover its ink had blurred into unreadable streaks.",
+          "visual": "door",
+          "label": "OH NO",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE WAX SEALS",
+          "speech": "He noticed each envelope carried a different animal crest, and matched those crests to the houses along the trail.",
+          "visual": "book",
+          "label": "SMART CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "EVERYONE ARRIVED",
+          "speech": "The hare delivered the final invitation just before noon, and the picnic guests surprised him with the biggest carrot cake.",
+          "visual": "forest",
+          "label": "PICNIC SAVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
