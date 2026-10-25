@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "003a469b5e4f9e0c5006de08",
-      "source_sha256": "2e7960bd441a5442dea179ed1c60f06f79fb2554c1c38ec180306a83333a598f",
+      "candidate_id": "cf346ff9afd3834d66440fad",
+      "source_sha256": "0cea613fb1e52493991e9afea5552e05d73dfad379c931d7d10a8635db7b39ca",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-3dcccf2c0830ec58e6ec",
-        "title": "The Great Turnip Grater Debacle of Market Square",
-        "hook": "The Catastrophic First Demonstration",
-        "question": "Can Barnaby sell his chaotic multi-bladed vegetable invention before the health inspector shuts down his noisy stall?",
-        "answer": "Yes, by pivoting the disastrous grater into a novelty confetti cannon that delights the entire plaza.",
+        "content_id": "rayvan-gemini-4591ab90635973908b11",
+        "title": "The Automatic Onion Slicer Disaster",
+        "hook": "The Grand Unveiling",
+        "question": "Can a mechanized vegetable chopper save a busy spice market stall?",
+        "answer": "Only if it does not launch onions into the mayor's tea.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,80 +29,80 @@
         ],
         "story_beats": [
           {
-            "headline": "The Catastrophic First Demonstration",
-            "speech": "Behold the marvel of modern produce science! One turn of the crank shreds a whole root instantly!",
+            "headline": "The Grand Unveiling",
+            "speech": "Behold citizens, the finest brass chopping engine ever conceived in this province of spices!",
             "visual": "robot",
-            "label": "The Grater Malfunction",
+            "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby pulls a brass lever on his whirring mechanical contraption while panicked market shoppers duck flying purple turnip shreds in the busy square.",
+            "visual_prompt": "Barnaby stands proudly next to a steaming brass automaton in a busy spice market stall, holding a wrench while gesturing to a crowd.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Rising Purple Tide",
-            "speech": "Stop that flying root machine! It has completely ruined my imported saffron display with purple debris!",
-            "visual": "signal",
-            "label": "The Angry Merchant",
-            "story_beat": "build",
-            "visual_prompt": "Madame Vane gestures angrily at a cloud of shredded turnips hovering over her wooden spice cart while Barnaby frantically tries to catch the escaping machine.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Desperate Adaptation",
-            "speech": "If I reverse the exhaust funnel and add more tension springs, we can launch this mess into art!",
+            "headline": "The Gear Jam",
+            "speech": "Wait, why are the secondary cogs spinning backward? Grab that sack before it tears open!",
             "visual": "ship",
-            "label": "The Mid-Air Pivot",
+            "label": "The Malfunction",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby straps a large leather bellows to the back of his brass grater, adjusting a copper valve while standing atop a wooden merchant crate.",
+            "visual_prompt": "Barnaby frantically tries to catch tumbling red onions falling from a tilted hopper while smoke billows from the brass automaton.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Grand Festive Finale",
-            "speech": "Step right up for the finest celebratory vegetable confetti in the entire kingdom! Guaranteed fresh and loud!",
+            "headline": "The Market Chaos",
+            "speech": "Duck everyone! The vegetable shrapnel is heading straight toward the silk merchant's pavilion!",
+            "visual": "signal",
+            "label": "The Spread",
+            "story_beat": "twist",
+            "visual_prompt": "Shoppers scatter in all directions as raw onion slices fly through the air, illuminated by a flashing warning beacon atop the market stall.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Perfect Slice",
+            "speech": "Look at that precision! Every single ring is identical, and absolutely nobody is crying today.",
             "visual": "door",
-            "label": "The Confetti Triumph",
+            "label": "The Success",
             "story_beat": "payoff",
-            "visual_prompt": "Delighted market children laugh and catch colorful turnip ribbons falling through the sunny air as Barnaby bows proudly in front of his smoking contraption.",
+            "visual_prompt": "Barnaby and the mayor smile proudly beside the tamed brass machine, which now neatly dispenses perfect onion rings into a wooden basket.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby's automatic turnip grater spews shredded purple vegetable all over the rival spice merchant.",
-        "decisive_choice": "Barnaby hooks the vegetable hopper directly to the manual hand-crank air bellows to launch purple shreds skyward.",
-        "resolution": "The explosive veggie confetti wins the best novelty prize and clears his inventory in seconds.",
+        "central_conflict": "Barnaby tests his chaotic steam-powered vegetable slicer in a crowded bazaar.",
+        "decisive_choice": "Barnaby pulls the emergency lever to reverse the gears instead of fleeing.",
+        "resolution": "The machine compresses the flying onions into neat, weeping-free rings.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed clay textures and humorous slapstick framing.",
+          "style": "vibrant slapstick animation style with rich textures",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild ginger hair, oversized round spectacles, and a soot-stained yellow vest over a striped shirt.",
-            "Madame Vane": "A stern market spice merchant wearing an elaborate purple turban and a scowl, draped in heavy velvet robes."
+            "barnaby": "an enthusiastic inventor with wild grey hair, wearing a grease-stained leather apron over a striped shirt",
+            "mayor": "a stout official wearing a velvet coat and a very tall feathered hat"
           },
           "locations": {
-            "Market Square": "A bustling cobblestone plaza lined with striped canvas awnings, wooden crates, and hanging lanterns under a bright blue sky."
+            "market": "a bustling outdoor bazaar filled with colorful awnings, spice sacks, and stone paving stones"
           },
           "objects": {
-            "Turnip Grater": "A contraption of polished brass pipes, steel gears, a wooden hand crank, and a large metal funnel.",
-            "Spice Cart": "A heavy oak cart piled high with small burlap sacks of colorful powders and glass jars."
+            "automaton": "a towering brass and iron chopping engine with exposed rotating gears, smoking pipes, and a flashing red warning beacon",
+            "basket": "a woven wicker container filled with neatly stacked onion rings"
           }
         },
-        "plot_fingerprint": "3079fc53bf67bcda9fee8e7e0c5025f01975291f6e843885a40ed7959efc4b15"
+        "plot_fingerprint": "c62cb9cef053994e9f48e90434562967657d8c61b7972c7d0305f1a7f79a1ac0"
       },
       "approved": false
     },
     {
-      "candidate_id": "03420b2291c8921ff57f0cca",
-      "source_sha256": "5c0880e12128b18346042b14fabcbcb3bae52639a8ec70b5ab1cfec3d4b60500",
+      "candidate_id": "72b470c4049bfcbdb6bd5e0b",
+      "source_sha256": "a65ec1f103e9b24aff9cddf32d1ee7fd7df9806abad1114763fff07d012e8e3f",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-8c6b8648e1001e57ae8e",
-        "title": "The Canopy Cartographers",
-        "hook": "A Shifting Horizon",
-        "question": "How do two rival foragers map a shifting bioluminescent forest?",
-        "answer": "By trading their separate navigational tallies to discover a hidden migratory path.",
+        "content_id": "rayvan-gemini-337eb44ac5d5af48bd43",
+        "title": "The Whispering Canopy and the Amber Sap",
+        "hook": "Discovery in the Mists",
+        "question": "Can two rivals combine their unique skills to extract heavy restorative resin before the nocturnal freeze?",
+        "answer": "Yes, by weaving their flexible wooden frames together into a single bridge to cross the bottomless root canyon.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -110,81 +110,80 @@
         ],
         "story_beats": [
           {
-            "headline": "A Shifting Horizon",
-            "speech": "Look closely at the glowing vines ahead; the entire woodland layout alters itself every single hour without exception.",
+            "headline": "Discovery in the Mists",
+            "speech": "Look up through the heavy emerald leaves! The great mother trunk is leaking the pure golden life sap we need.",
             "visual": "forest",
-            "label": "The Moving Grove",
+            "label": "The Canopy Leak",
             "story_beat": "reveal",
-            "visual_prompt": "Elira and Bram stand inside a dense bioluminescent forest gazing at glowing purple vines moving across tree trunks. Elira holds a notched wooden compass in her left hand, wearing a teal canvas tunic with brass buttons. Bram wears a leather vest over a wool sweater and points forward with an alarmed expression.",
+            "visual_prompt": "Mira pointing up at a glowing amber resin leak on a massive mossy tree trunk in a dense emerald forest, wearing leaf-woven armor.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Constructing the Grid",
-            "speech": "If we combine our measured paces and elevation marks now, we might just outsmart this botanical maze together.",
+            "headline": "Constructing the Bridge",
+            "speech": "We must twist our thickest climbing vines together right now to reach the higher branches before the frost arrives.",
             "visual": "signal",
-            "label": "Shared Measurements",
+            "label": "Vine Weaving",
             "story_beat": "build",
-            "visual_prompt": "Bram kneels on a mossy boulder inside the glowing forest, sketching a map onto birchbark with a charcoal stick. Elira stands beside him holding a brass measuring chain taut between both hands, focusing intently on the glowing canopy overhead.",
+            "visual_prompt": "Kiran tying glowing blue bioluminescent signaling fibers around thick green jungle vines to create a sturdy suspension bridge.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Hidden Mechanism",
-            "speech": "These glowing roots are not random obstacles at all; they act like gears turning beneath the soil to open our exit path.",
+            "headline": "Crossing the Abyss",
+            "speech": "Hold tightly onto my harness as we step across this windy chasm because one slip means losing all our harvest.",
             "visual": "door",
-            "label": "Subterranean Gears",
+            "label": "The Chasm Crossing",
             "story_beat": "mechanism",
-            "visual_prompt": "Elira and Bram crouch near a massive stone archway embedded in giant tree roots inside the forest. Elira uses a iron lever to pry open a stone hatch, while Bram holds a glowing amber lantern illuminating ancient carved runes on the doorway frame.",
+            "visual_prompt": "Mira and Kiran stepping carefully across the vine bridge spanning a dark canyon framed by two ancient stone archway roots.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Safe Pathway",
-            "speech": "Our combined charts revealed the true doorway just in time, proving cooperation is far better than competing alone.",
-            "visual": "ship",
-            "label": "Unified Journey",
+            "headline": "Saving the Grove",
+            "speech": "Pour the warm amber sap into the root core quickly while the liquid is still glowing bright and flowing freely.",
+            "visual": "robot",
+            "label": "The Curing Act",
             "story_beat": "payoff",
-            "visual_prompt": "Elira and Bram walk side by side through an open wooden gateway leading out of the glowing forest into a sunlit meadow. Bram carries a large rolled parchment map under his arm, and Elira holds the brass compass happily, both smiling warmly in the bright daylight.",
+            "visual_prompt": "Kiran pouring glowing amber sap into a mechanical stone automaton pump embedded in the tree base, watched by Mira.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Mapping a moving grove before total canopy closure traps them both.",
-        "decisive_choice": "Merging competing handwritten trail charts into a single unified grid.",
-        "resolution": "They escape safely and establish the forest's first permanent shared trail system.",
+        "central_conflict": "A sudden temperature drop threatens to freeze the restorative amber sap inside the canopy before it can be harvested.",
+        "decisive_choice": "They choose to abandon individual gathering sacks and build a joint suspension bridge across the ravine.",
+        "resolution": "They successfully harvest the golden sap together and cure the ailing mother tree before nightfall.",
         "visual_bible": {
-          "style": "Hand-painted cinematic illustration with rich textures, warm ambient lighting, and detailed environmental flora.",
+          "style": "Cinematic animated fantasy with vibrant natural colors, detailed foliage textures, and soft magical lighting.",
           "characters": {
-            "Elira": "A young female explorer with braided brown hair, wearing a teal canvas utility tunic, brass buttons, leather boots, and carrying a notched wooden compass.",
-            "Bram": "A tall male botanist with curly dark hair, wearing a heavy leather vest over a beige wool sweater, sturdy trousers, and carrying an amber lantern."
+            "Mira": "An agile female scout with wild copper hair, wearing emerald leaf armor and carrying a woven gathering sack.",
+            "Kiran": "A sturdy male botanist with braided dark hair, wearing bark-plate gear and holding a blue signal torch."
           },
           "locations": {
-            "The Shifting Grove": "A dense, magical woodland filled with giant bioluminescent purple vines, glowing moss, ancient stone arches, and moving root systems."
+            "forest": "An ancient glowing woodland filled with towering moss-covered trees, hanging vines, and a deep root canyon."
           },
           "objects": {
-            "wooden_compass": "A polished mahogany pocket compass featuring intricate brass dials and a faint blue magnetic needle.",
-            "amber_lantern": "A sturdy iron-framed lantern enclosing a glowing golden amber stone that casts warm light.",
-            "measuring_chain": "A ten-foot articulated brass surveyor chain made of linked metal ovals."
+            "amber_sap": "A glowing golden viscous liquid contained within natural tree vessels that hardens when cold.",
+            "signal_torch": "A carved wooden rod tipped with a glowing blue bioluminescent moss cluster."
           }
         },
-        "plot_fingerprint": "abdd689cd148b7c1e97dd067226f00488a8dbe63690fdaaebca71b2c33b38679"
+        "plot_fingerprint": "dcd1c84c225479e7c572815cd42726fac826588af86f17c7d94fd5fe005b5965"
       },
       "approved": false
     },
     {
-      "candidate_id": "8a73001b34668d5610059ca8",
-      "source_sha256": "b2226989ea884c51d378b7787ca538881abec684878be245ec87bd6271e3d432",
+      "candidate_id": "3a2bc0aa33854049720d78f1",
+      "source_sha256": "b35501636c64e33a99a7288b974d9d2be70955586861c01a58612b8845c95a36",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-af20b26ae093b49dbeff",
-        "title": "The Drift of the Rusting Hull",
-        "hook": "A Critical Warning",
-        "question": "How can the crew stabilize the leaking coolant without losing propulsion?",
-        "answer": "They bypass the primary valve and manually reroute coolant through the auxiliary life-support heat exchangers.",
+        "content_id": "rayvan-gemini-6cd3a68c32f2c569caac",
+        "title": "The Ridge Where the Storm Stopped",
+        "hook": "The Hidden Signal",
+        "question": "Can a veteran tracker bypass an unstable avalanche ledge to reach a lost hiker before hypothermia sets in?",
+        "answer": "Yes, by utilizing a discarded structural support cable as a makeshift winch to cross the chasm safely.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -192,65 +191,65 @@
         ],
         "story_beats": [
           {
-            "headline": "A Critical Warning",
-            "speech": "Captain, if we do not purge the primary coolant lines right now, the entire reactor core will melt down.",
-            "visual": "ship",
-            "label": "Reactor Alert",
-            "story_beat": "reveal",
-            "visual_prompt": "Engineer Valeri stands inside the cramped control room of the rusty cargo ship, pointing urgently at a flashing red diagnostic screen while Captain Vance watches skeptically from the pilot chair.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Hard Choice",
-            "speech": "Rerouting through life support will freeze the crew quarters, and we cannot survive those freezing temperatures for long.",
-            "visual": "robot",
-            "label": "System Override",
-            "story_beat": "build",
-            "visual_prompt": "Captain Vance firmly holds the manual override lever in the ship's cramped control room, refusing to pull it while Valeri steps forward with a handheld diagnostic tool.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Manual Intervention",
-            "speech": "I am taking the risk and engaging the bypass valve manually to keep our propulsion engine from exploding.",
+            "headline": "The Hidden Signal",
+            "speech": "My radio receiver is picking up a weak pulsing beacon from deep inside the Deadfall Ridge ravine.",
             "visual": "signal",
-            "label": "Valeri's Action",
-            "story_beat": "mechanism",
-            "visual_prompt": "Valeri thrusts a heavy wrench into the emergency access panel of the ship, causing glowing blue sparks to illuminate the metallic walls around them.",
+            "label": "Beacon Discovery",
+            "story_beat": "reveal",
+            "visual_prompt": "A weathered rescue worker wearing an orange jacket and a woolen beanie stands in a snow-covered pine forest at dusk, holding a glowing handheld radio transceiver that displays a flashing green signal wave.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Safe Harbor",
-            "speech": "The engine temperature is dropping into the safe zone, and the emergency heaters are slowly bringing our rooms back to warmth.",
-            "visual": "planet",
-            "label": "Stable Orbit",
+            "headline": "The Fractured Trail",
+            "speech": "The regular suspension bridge is completely sheared off, leaving us no direct path to cross the freezing gorge.",
+            "visual": "forest",
+            "label": "Broken Bridge",
+            "story_beat": "build",
+            "visual_prompt": "The rescue worker stands at the edge of a deep snowy chasm in the alpine forest, looking across at snapped wooden planks and dangling iron chains, holding a heavy steel climbing axe in his right hand.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Cable Winch",
+            "speech": "If I anchor this heavy logging winch to the granite boulder, we can pull ourselves across the open air.",
+            "visual": "door",
+            "label": "Engineering Crossing",
+            "story_beat": "mechanism",
+            "visual_prompt": "The rescue worker kneels beside a massive frost-covered granite boulder in the snowy forest, securing a thick rusted metal cable around a mechanical pulley system with both bare gloved hands.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Safe Return",
+            "speech": "We made it across just in time before the entire cliff face gave way into the valley below.",
+            "visual": "ship",
+            "label": "Successful Evacuation",
             "story_beat": "payoff",
-            "visual_prompt": "Captain Vance and Valeri stand side by side in the ship's cockpit, looking through the main window at a calm blue planet filling the view as green indicator lights glow.",
+            "visual_prompt": "The rescue worker and a shivering hiker wrapped in a silver thermal blanket sit safely inside the bright cabin of a rescue helicopter as it ascends above the snowy mountain forest, looking down at the receding peaks.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Disagreement over shutting down life support to save the engine.",
-        "decisive_choice": "Engineer Valeri overrides the captain and reroutes the remaining coolant.",
-        "resolution": "The engine is saved and atmospheric pressure drops temporarily before stabilizing.",
+        "central_conflict": "A sudden blizzard traps a lone tourist across a treacherous cliff fracture.",
+        "decisive_choice": "Risking an untested descent using an old logging cable instead of waiting for the grounded helicopter.",
+        "resolution": "The rescuer successfully hauls the hiker across just as the main snow bridge collapses.",
         "visual_bible": {
-          "style": "Gritty, grounded sci-fi animation with industrial textures and warm lighting.",
+          "style": "Cinematic realism, high-contrast winter lighting, sharp focus on outdoor gear and snowy textures.",
           "characters": {
-            "Valeri": "An industrious engineer wearing a scuffed blue jumpsuit and grease smudges on her cheek.",
-            "Captain Vance": "A cautious commander with a trimmed gray beard, wearing a utilitarian green flight jacket."
+            "Rescue Worker": "A middle-aged man with a weathered face, a thick brown beard, wearing a bright orange heavy-duty parka, dark snow pants, and a woolen navy blue beanie.",
+            "Lost Hiker": "A young woman wearing a torn teal winter jacket, black thermal trousers, and wrapped tightly in a shiny reflective emergency foil blanket."
           },
           "locations": {
-            "control room": "A cramped, metallic spaceship bridge lined with analog dials, blinking indicator lights, and exposed piping."
+            "Deadfall Ridge": "A dense, snow-heavy pine forest bordered by steep jagged cliffs and a deep icy gorge in the high mountains."
           },
           "objects": {
-            "diagnostic screen": "A rectangular glowing orange monitor displaying jagged warning waveforms.",
-            "override lever": "A heavy steel mechanical handle capped with a yellow rubber grip.",
-            "wrench": "A thick, heavy-duty silver metal tool with tool wear scratches."
+            "Radio Transceiver": "A rugged black handheld electronic device with a flexible rubber antenna and a small rectangular monochrome LCD screen glowing green.",
+            "Logging Cable": "A thick, rusted multi-strand steel wire rope coiled on the snowy ground, frayed at one end.",
+            "Climbing Axe": "A steel mountaineering tool with a curved pick head and an insulated composite shaft."
           }
         },
-        "plot_fingerprint": "217bc48b7b3721186d18485fa5e00fc4108446fdb7244ac05525b061f51b9d47"
+        "plot_fingerprint": "2ee09d66017fb6a370c52c0483a205fc10a828c9a70bd5f6e545cb1ab249a7e3"
       },
       "approved": false
     }
