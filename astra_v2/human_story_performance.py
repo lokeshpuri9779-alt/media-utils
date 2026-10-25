@@ -271,6 +271,10 @@ def _mara(draw, x, y, t, *, reaching=False, alarm=False, running=False,
                  fill=(198,212,205))
     draw.line(((x,y-64),(x,y+188)),fill=(20,65,85),width=6)
     draw.ellipse((x-8,y+125,x+8,y+141),fill=GOLD)
+    # Reusable authored clothing details are shared by Mara and her double,
+    # rather than regenerating a different costume for every scene.
+    from astra_v2.human_illustrated_materials import draw_character_materials
+    draw_character_materials(draw,x,y,t)
     progress=max(0.0,min(1.0,t/1.15))
     progress=progress*progress*(3-2*progress)
     if gesture=="protect":
@@ -530,6 +534,10 @@ def draw_human_scene(image, shot, t):
         return _mara(draw, x+walking_offset, y, time, **opts)
     # Keep verified environment imagery visible through the open window.
     draw_observatory_stage(image,action,t,float(shot.get("duration") or 12))
+    # Chapter-specific reusable art lives BEHIND the hand-acted character and
+    # story object layers. The original verified backdrop remains exposed.
+    from astra_v2.human_illustrated_materials import draw_environment_art
+    draw_environment_art(image,action,t,float(shot.get("duration") or 12))
     d=ImageDraw.Draw(image)
     if action == "discover_radio":
         _radio(d,750,995,t,glow=state.event > .15)
