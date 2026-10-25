@@ -61,14 +61,19 @@ jobs:
           from pathlib import Path
           from PIL import Image, ImageChops
           from astra_v2.visual_artifact_backdrop import apply_pack_background
+          from astra_v2.asset_usage_audit import begin, observing
           root = Path('runtime-artifacts/verified-pack')
           image = Image.new('RGB', (540, 960), (35, 45, 65))
           shot = {'scene_environment': 'railway station', 'visual_intent': 'railway platform'}
+          assert begin({'content_id': 'isolated-railway-smoke', 'title': 'Isolated railway compositor audit'}, 1)
+          assert observing(1)
           output = apply_pack_background(image, shot, 'astra-asset-smoke-railway', root=root, shot_number=1)
+          assert not observing(1), 'compositor did not record per-shot evidence'
           assert ImageChops.difference(image, output).getbbox() is not None, 'background not composited'
           Path('runtime-artifacts/audit').mkdir(parents=True, exist_ok=True)
           output.save('runtime-artifacts/audit/railway-compositor.png')
           Path('runtime-artifacts/audit/result.json').write_text(json.dumps({
+              'evidence': 'in-process compositor observation, not MP4 audit receipt',
               'test': 'isolated nonpublishing production compositor',
               'scene': 'railway',
               'pixel_changed': True,
