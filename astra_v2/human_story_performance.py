@@ -173,7 +173,8 @@ def _door(draw, open_amount):
         _line(draw, ((xx,695),(xx,1115)), (70+k*25, 112+k*19, 157+k*14), 5)
 
 
-def _draw_mara_face(draw, x, y, t, *, emotion="curious", gaze=0):
+def _draw_mara_face(draw, x, y, t, *, emotion="curious", gaze=0,
+                    expression_strength=1.0):
     """Readable brows, eyes and mouth without changing Mara's head design.
 
     Emotions are author-selected for each narrated action; animation is
@@ -195,7 +196,11 @@ def _draw_mara_face(draw, x, y, t, *, emotion="curious", gaze=0):
     }
     if emotion not in moods or gaze not in (-1, 0, 1):
         raise CreativeReject("Unsupported authored Mara emotion or gaze")
+    if not isinstance(expression_strength,(int,float)) or not math.isfinite(expression_strength) or not 0<=expression_strength<=1:
+        raise CreativeReject("Unsupported facial expression intensity")
     raise_brow, slope, mouth = moods[emotion]
+    raise_brow=round(raise_brow*expression_strength)
+    slope=round(slope*expression_strength)
     eye_y = y - 170
     blink = (t % 3.4) < .105
     eye_shift = int(gaze * 5 + 2 * math.sin(t * .68))
@@ -214,7 +219,7 @@ def _draw_mara_face(draw, x, y, t, *, emotion="curious", gaze=0):
         draw.line(((ex-15, eye_y-24-offset-slope),
                    (ex+15, eye_y-24-offset+slope)), fill=HAIR, width=7)
     if mouth=="open":
-        opening=7+int(2*math.sin(t*2.4))
+        opening=round(3+6*expression_strength+2*math.sin(t*2.4)*expression_strength)
         draw.ellipse((x-12, y-123-opening, x+12, y-109+opening),
                      fill=(75, 40, 54), outline=(145, 80, 87), width=2)
     elif mouth=="frown":
@@ -230,10 +235,13 @@ def _draw_mara_face(draw, x, y, t, *, emotion="curious", gaze=0):
 
 
 def _mara(draw, x, y, t, *, reaching=False, alarm=False, running=False,
-          carrying=False, emotion="curious", gaze=0, gesture="consider"):
+          carrying=False, emotion="curious", gaze=0, gesture="consider",
+          lean=0.0, expression_strength=1.0):
     """Persistent character with two-joint limbs and authored facial acting."""
     if not math.isfinite(t):
         raise CreativeReject("Actor animation time must be finite")
+    if not isinstance(lean,(int,float)) or not math.isfinite(lean) or abs(lean)>24:
+        raise CreativeReject("Unsupported torso lean")
     if gesture not in ("consider", "protect", "open"):
         raise CreativeReject("Unsupported actor hand gesture")
     from astra_v2.human_skeletal_rig import solve_mara_pose, HIP_L, HIP_R
@@ -265,16 +273,21 @@ def _mara(draw, x, y, t, *, reaching=False, alarm=False, running=False,
                                 foot_x+22 if side<0 else foot_x+40,
                                 foot_y+16),radius=10,fill=INK,
                                outline=(85,102,116),width=3)
+    # Shoulder-led head turn and body lean: lower leg anchor remains planted.
+    head_x=x+round(1.15*lean)
+    shoulder_x=x+round(lean)
     # Fixed outfit and hairstyle preserve serialized Mara continuity.
-    draw.ellipse((x-113,y-220,x-39,y-85),fill=HAIR)
-    draw.ellipse((x-87,y-282,x+91,y-71),fill=HAIR,outline=INK,width=8)
-    draw.ellipse((x-66,y-253,x+70,y-94),fill=SKIN,outline=INK,width=6)
-    draw.polygon(((x-75,y-251),(x-11,y-279),(x+89,y-218),(x+57,y-248),
-                  (x+19,y-228),(x-72,y-208)), fill=HAIR)
-    draw.arc((x-74,y-271,x+79,y-130),204,295,fill=(91,75,96),width=5)
-    draw.arc((x-56,y-246,x+57,y-112),180,242,fill=(232,174,140),width=4)
-    _draw_mara_face(draw,x,y,t,emotion=emotion,gaze=gaze)
-    draw.polygon(((x-51,y-80),(x+49,y-80),(x+86,y+210),(x-91,y+210)),
+    draw.ellipse((head_x-113,y-220,head_x-39,y-85),fill=HAIR)
+    draw.ellipse((head_x-87,y-282,head_x+91,y-71),fill=HAIR,outline=INK,width=8)
+    draw.ellipse((head_x-66,y-253,head_x+70,y-94),fill=SKIN,outline=INK,width=6)
+    draw.polygon(((head_x-75,y-251),(head_x-11,y-279),(head_x+89,y-218),(head_x+57,y-248),
+                  (head_x+19,y-228),(head_x-72,y-208)), fill=HAIR)
+    draw.arc((head_x-74,y-271,head_x+79,y-130),204,295,fill=(91,75,96),width=5)
+    draw.arc((head_x-56,y-246,head_x+57,y-112),180,242,fill=(232,174,140),width=4)
+    _draw_mara_face(draw,head_x,y,t,emotion=emotion,gaze=gaze,
+                    expression_strength=expression_strength)
+    draw.polygon(((shoulder_x-51,y-80),(shoulder_x+49,y-80),
+                  (x+86,y+210),(x-91,y+210)),
                  fill=JACKET,outline=INK,width=8)
     # Layered costume shading: avoid one uniform flat teal slab. Panels follow
     # the same character identity in all four episodes and both timelines.
@@ -301,7 +314,7 @@ def _mara(draw, x, y, t, *, reaching=False, alarm=False, running=False,
         ((-58,-40),pose.left_elbow,pose.left_hand),
         ((54,-40),pose.right_elbow,pose.right_hand),
     ):
-        points=[(x+round(px),y+round(py)) for px,py in (shoulder,elbow,hand)]
+        points=[(shoulder_x+round(px),y+round(py)) for px,py in (shoulder,elbow,hand)]
         _line(draw,points,JACKET,32)
         ex,ey=points[1]
         draw.ellipse((ex-17,ey-17,ex+17,ey+17),
@@ -312,8 +325,8 @@ def _mara(draw, x, y, t, *, reaching=False, alarm=False, running=False,
     # The exact wrist pixels used above are exported to author attached props.
     # This prevents another renderer inventing independent sinusoidal paths.
     return {
-        "left_hand": (x+round(pose.left_hand[0]),y+round(pose.left_hand[1])),
-        "right_hand": (x+round(pose.right_hand[0]),y+round(pose.right_hand[1])),
+        "left_hand": (shoulder_x+round(pose.left_hand[0]),y+round(pose.left_hand[1])),
+        "right_hand": (shoulder_x+round(pose.right_hand[0]),y+round(pose.right_hand[1])),
     }
 
 
@@ -532,17 +545,22 @@ def draw_human_scene(image, shot, t):
     from astra_v2.human_action_choreography import action_state
     state = action_state(action, t, float(shot.get("duration") or 12))
     mood, look, gesture = PERFORMANCE[action]
+    from astra_v2.human_performance_cues import acting_cue
     from astra_v2.human_stage_depth import draw_actor_shadow, draw_observatory_stage
     def performer(draw, x, y, time, **overrides):
         opts = {"emotion": mood, "gaze": look, "gesture": gesture}
         opts.update(overrides)
+        # The double gets a separate mirrored posture, not the protagonist's
+        # same facing/lean. Both figures use the same original IK skeleton.
+        is_double = opts.get("emotion") == "knowing"
+        cue = acting_cue(action,t,float(shot.get("duration") or 12),double=is_double)
+        opts["lean"]=cue.lean
+        opts["expression_strength"]=cue.expression_strength
         walking_offset=round(35*state.movement)
         if opts.get("reaching"):
             opts["reaching"] = state.attention > .14 and state.aftermath < .95
             time = 1.15*state.attention
-        # A physically grounded shadow is underneath each separately animated
-        # performer, including the double, instead of both figures floating
-        # over a dark filled rectangle.
+        # The shadow anchors to the legs rather than following upper-body lean.
         draw_actor_shadow(draw,x+walking_offset,y,
                           running=bool(opts.get("running")),
                           progress=state.progress)
