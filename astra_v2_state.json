@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 17,
+  "attempts": 18,
   "confirmed_today": 17,
-  "last_attempt_at": "2026-10-25T23:14:07.567256+00:00",
+  "last_attempt_at": "2026-10-25T23:22:53.549274+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -3782,28 +3782,79 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-25T23:15:25.106351+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "BAawMzec_CY": {
+      "content_id": "rayvan-anthology-9a64aa9a339d5857",
+      "title": "The Mouse and the Giant Bell",
+      "day": "2026-10-26",
+      "uploaded_at": "2026-10-25T23:22:55.324773+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "",
+      "story_beats": [
+        {
+          "headline": "A SILENT MORNING",
+          "speech": "A mouse discovered the town's morning bell had stopped ringing.",
+          "visual": "door",
+          "label": "SLEEPY TOWN",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "TOO SMALL TO PULL",
+          "speech": "The heavy bell rope lifted the mouse into the air.",
+          "visual": "robot",
+          "label": "UP WE GO",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE WIND HELPED",
+          "speech": "The mouse attached the rope to a swinging gate in the wind.",
+          "visual": "signal",
+          "label": "SMART IDEA",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE TOWN AWOKE",
+          "speech": "The bell rang and everyone cheered for the little mouse.",
+          "visual": "forest",
+          "label": "RING RING",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-25T23:22:16.985717+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-25T23:15:26.288763+00:00",
+    "at": "2026-10-25T23:22:55.666787+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-25T13:27:21.316903+00:00",
   "reserved": {
@@ -8471,13 +8522,60 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-anthology-9a64aa9a339d5857": {
+      "at": "2026-10-25T23:22:53.549258+00:00",
+      "title": "The Mouse and the Giant Bell",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "",
+      "story_beats": [
+        {
+          "headline": "A SILENT MORNING",
+          "speech": "A mouse discovered the town's morning bell had stopped ringing.",
+          "visual": "door",
+          "label": "SLEEPY TOWN",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "TOO SMALL TO PULL",
+          "speech": "The heavy bell rope lifted the mouse into the air.",
+          "visual": "robot",
+          "label": "UP WE GO",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE WIND HELPED",
+          "speech": "The mouse attached the rope to a swinging gate in the wind.",
+          "visual": "signal",
+          "label": "SMART IDEA",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE TOWN AWOKE",
+          "speech": "The bell rang and everyone cheered for the little mouse.",
+          "visual": "forest",
+          "label": "RING RING",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-25T23:15:26.288700+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-25T23:22:55.666727+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -8485,35 +8583,35 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-25T23:15:26.288752+00:00",
+    "at": "2026-10-25T23:22:55.666767+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-25T23:00:03.682623+00:00",
+    "at": "2026-10-25T23:22:38.357269+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-2576b852a831a137",
-    "video_url": "https://www.youtube.com/watch?v=muyPQeNpbd4",
+    "content_id": "rayvan-anthology-9a64aa9a339d5857",
+    "video_url": "https://www.youtube.com/watch?v=BAawMzec_CY",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-25T23:15:26.288649+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-25T23:22:55.666563+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-25T23:15:26.288695+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
+    "at": "2026-10-25T23:22:55.666724+00:00",
+    "collection_status": "missing_diagnostics",
+    "publish_step": "success",
     "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
