@@ -63,6 +63,7 @@ class StoryHandoffTests(unittest.TestCase):
             self.assertIsNone(publication_rejection(restored),
                               "Publisher should revalidate the exact original scenes")
 
+    @unittest.skipUnless(STUDIO_DEPS_AVAILABLE, "Studio dependencies checked in readiness CI")
     @patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"})
     def test_dropped_visual_stays_rejected(self):
         source = self._story()
