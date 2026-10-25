@@ -23,7 +23,7 @@ jobs:
     timeout-minutes: 25
     env:
       HF_HUB_DISABLE_TELEMETRY: '1'
-      HF_HOME: ${{ runner.temp }}/astra-hf
+      HF_HOME: /tmp/astra-hf
       ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
     steps:
       - uses: actions/checkout@v4
