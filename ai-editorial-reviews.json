@@ -1768,6 +1768,17 @@
         "review_model": "gemini-3.1-flash-lite"
       },
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-119f055c10de773cda6d",
+      "story_sha256": "b703739d840b2dde49d9fd0dda9d0236a430ead4fa1a9b58d643513d02047e70",
+      "approved": false,
+      "issues": [
+        "review_failed:HTTP_503",
+        "review_provider:provider_unavailable"
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
