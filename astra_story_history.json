@@ -1758,6 +1758,55 @@
           "speech": "The captains followed the steady flashes between the rocks, and every boat entered the harbor safely."
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-d07e12d27687c6f5afd4",
+      "video_id": "9F5jmZ9AIVw",
+      "confirmed_at": "2026-10-25T14:52:52.324713+00:00",
+      "title": "The Rivet-Master's Argument at Dock Twelve",
+      "plot_fingerprint": "2bdf40cc173ee670a07bbaa4be3033efcf08588b73f2a1f7bdbee1999bf74805",
+      "story_beats": [
+        {
+          "headline": "The Hull Breach Discovery",
+          "speech": "We cannot patch this pressure fracture with standard sealant alone; the stress load is far too high for our current orbit.",
+          "visual": "ship",
+          "label": "The Breach",
+          "story_beat": "reveal",
+          "visual_prompt": "Medium shot of Lyra pointing at a glowing crimson crack in the bulkhead of the engine bay, holding a magnetic diagnostic scanner in her right hand, wearing a stained blue jumpsuit and worried expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Heated Disagreement",
+          "speech": "Your heavy reinforcement plan will freeze the exhaust valves completely and leave us stranded in deep space forever.",
+          "visual": "robot",
+          "label": "The Debate",
+          "story_beat": "build",
+          "visual_prompt": "Close-up of Jax gesturing angrily with a silver torque wrench toward the maintenance droid, which blinks a warning yellow light while standing between the two arguing crewmates inside the cramped metallic workshop.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Compromise Fix",
+          "speech": "Listen to me now, use the flexible thermal membrane over the weld point and we might survive the upcoming gravitational push.",
+          "visual": "signal",
+          "label": "The Alignment",
+          "story_beat": "mechanism",
+          "visual_prompt": "Wide shot of both mechanics working in unison, Lyra holding the flashing green alignment beacon while Jax tightly fastens the thermal plate over the smoking hull breach under harsh white emergency lights.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Through the Jump",
+          "speech": "The thrusters are holding steady and our orbital trajectory is fully secure. Excellent teamwork under pressure, partner.",
+          "visual": "planet",
+          "label": "The Safe Harbor",
+          "story_beat": "payoff",
+          "visual_prompt": "Medium wide shot of Lyra and Jax smiling side by side through the large observation viewport, watching a glowing blue gas giant planet fill the window as the ship cruises smoothly into stable orbit.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
