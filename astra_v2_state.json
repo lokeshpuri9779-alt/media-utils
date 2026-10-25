@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 9,
-  "confirmed_today": 8,
-  "last_attempt_at": "2026-10-25T20:27:51.122961+00:00",
+  "attempts": 10,
+  "confirmed_today": 9,
+  "last_attempt_at": "2026-10-25T20:50:37.251089+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -3339,16 +3339,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "DbCfLzPdweQ": {
-      "content_id": "rayvan-forge-2a576ed51c8d70cb",
+    },
+    "rayvan-forge-2a576ed51c8d70cb": {
+      "video_id": "DbCfLzPdweQ",
+      "confirmed_at": "2026-10-25T20:49:35.480855+00:00",
       "title": "The Beaver and the River Compass",
-      "day": "2026-10-26",
-      "uploaded_at": "2026-10-25T20:27:52.493297+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-25T20:27:52.493297+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "0ddb8a88b168db3a59b3bf42793cf3e08d326d0521095ea4e0051b3d8cb35a4c",
       "story_beats": [
@@ -3389,16 +3387,67 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "3FlZPy8YSbE": {
+      "content_id": "rayvan-forge-a6fc5f97569d7746",
+      "title": "The Fox and the Buried Gate",
+      "day": "2026-10-26",
+      "uploaded_at": "2026-10-25T20:50:39.376543+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "2037934009e9289935fa362cf824dd8f40806cda187508a6e71f624e8a98b8d3",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "The reservoir rose too high after a storm and the outlet gate would not open.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "The fox pushed the gate wheel until its wooden handle splintered.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "He found mud packed inside the drainage grate and called the maintenance team.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "The crew cleared the grate and opened the gate gradually to lower the water.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-25T20:27:20.895514+00:00",
+  "last_preflight_at": "2026-10-25T20:49:35.116868+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-25T20:27:52.812382+00:00",
+    "at": "2026-10-25T20:50:39.622177+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -7705,10 +7754,57 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-a6fc5f97569d7746": {
+      "at": "2026-10-25T20:50:37.251071+00:00",
+      "title": "The Fox and the Buried Gate",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "2037934009e9289935fa362cf824dd8f40806cda187508a6e71f624e8a98b8d3",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "The reservoir rose too high after a storm and the outlet gate would not open.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "The fox pushed the gate wheel until its wooden handle splintered.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "He found mud packed inside the drainage grate and called the maintenance team.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "The crew cleared the grate and opened the gate gradually to lower the water.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-25T20:27:52.812297+00:00",
+    "at": "2026-10-25T20:50:39.622126+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -7719,21 +7815,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-25T20:27:52.812369+00:00",
+    "at": "2026-10-25T20:50:39.622170+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-25T20:27:40.517485+00:00",
+    "at": "2026-10-25T20:50:19.481719+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-2a576ed51c8d70cb",
-    "video_url": "https://www.youtube.com/watch?v=DbCfLzPdweQ",
+    "content_id": "rayvan-forge-a6fc5f97569d7746",
+    "video_url": "https://www.youtube.com/watch?v=3FlZPy8YSbE",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-25T20:27:52.812212+00:00",
+    "at": "2026-10-25T20:50:39.622072+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -7745,7 +7841,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-25T20:27:52.812292+00:00",
+    "at": "2026-10-25T20:50:39.622124+00:00",
     "collection_status": "missing_diagnostics",
     "publish_step": "success",
     "counters": {},
