@@ -59,8 +59,7 @@ class SerializedMaraContinuityTests(unittest.TestCase):
                 validate_story_shot({**shot,**update})
 
     def test_other_episodes_do_not_inherit_unreviewed_acted_human_grammar(self):
-        for number in (4,):
-            self.assertTrue(all('story_human_actor' not in s for s in episode_shots(number)))
+        self.assertEqual([s['story_human_actor'] for s in episode_shots(4)],['mara']*4)
         with self.assertRaises(CreativeReject):
             draw_human_scene(Image.new('RGB',(1080,1920)),{
                 **episode_shots(2)[0],
