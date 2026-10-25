@@ -172,15 +172,6 @@
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-d07e12d27687c6f5afd4",
-      "story_sha256": "22285d017bbe2294eab95f6143b0623ae5e75c5ba717c744d3c0af04c363abb3",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is coherent, original, and well-structured with clear causal progression.; No copyright or trademark infringements detected.; Content is safe, suitable for a general audience, and complies with YouTube guidelines.; Does not substantially duplicate recently published premises in the provided comparison list.",
-      "reviewed_at": "2026-10-24T06:48:09.202296+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
       "content_id": "rayvan-gemini-93b06c8328a10c0dedea",
       "story_sha256": "067147fd3099efeff05b903131481665b6800eca4db43dbc54abdcf841b1f623",
       "decision": "approve",
@@ -478,15 +469,6 @@
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-a5f0d0f62b5c66c530fd",
-      "story_sha256": "5ea62973774e4a0fcfeda86407ef1dd15e89f763f61355ce5a44dfdf3f896106",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is original and presents a distinct narrative involving a glacial crevasse rescue.; Causal coherence is strong, with clear logical progression from distress signal to the sacrifice of the supply sled for a human life.; No copyright or trademark concerns identified.; Content is safe, G-rated, and suitable for general audiences without policy risks.",
-      "reviewed_at": "2026-10-25T06:48:40.803745+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
       "content_id": "rayvan-gemini-60a0b7dcf757aaac4e74",
       "story_sha256": "13825a9ec3cbd10a5b46af1f98701e9bd77a6e8480ae32443514476869ce6135",
       "decision": "approve",
@@ -505,21 +487,30 @@
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-07d4b45040d86e19419f",
-      "story_sha256": "33742da5b535cd586b32f0866ab8c35d328e23b3414d2efa669d4d83314d60e4",
+      "content_id": "rayvan-gemini-d7c2fcbd8caf9d3cf3aa",
+      "story_sha256": "c3dbaffd16c3f19e9838e41168947583011584098f099fb0bc9f29ee90213b1f",
       "decision": "approve",
       "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is causally coherent and clear, with a distinct plot progression from discovery to rescue and safe return.; There are no copyright or trademark violations, nor any unsafe or misleading content.; Audience suitability is appropriate for general viewers, and there are no identifiable YouTube policy risks.; While sharing an alpine rescue theme with one example in the comparison history, the specific character names, dialogue, setting details, and narrative mechanics are distinct and do not repeat recently published premises.",
-      "reviewed_at": "2026-10-25T12:46:28.951180+00:00",
+      "review_notes": "The story is original and does not duplicate the premises, characters, or causal mechanisms of the provided comparison history.; Causal coherence is strong, featuring a clear progression from the landslide hazard to pooling resources, the balancing act, and a logical resolution.; There are no copyright, trademark, unsafe content, or YouTube policy violations present in the text.",
+      "reviewed_at": "2026-10-25T18:42:09.390134+00:00",
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-14366e610c83091b2255",
-      "story_sha256": "8647f5e0cb790de8421d1beb3db0896318df31339b03ef0ef2a09ffd69a5c902",
+      "content_id": "rayvan-gemini-02a4355f913a9a2a4640",
+      "story_sha256": "1f0c60594d32a5585829ea678032e19241dc61c7887a4eebd212c443570e2fab",
       "decision": "approve",
       "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is causally coherent with a clear beginning, middle, and resolution focused on a localized railway mystery.; No copyright or trademark violations detected; the title nods to railway tropes but the plot and characters (Stationmaster Bramble and Pip) are original.; Content is completely safe, family-friendly, and contains no misleading or harmful elements.; No policy violations or resemblance to the provided comparison history.",
-      "reviewed_at": "2026-10-25T12:46:30.005108+00:00",
+      "review_notes": "The story exhibits strong internal causal coherence, moving logically from the scarcity revelation to the discovery of hidden grain, the weighing mechanism, and the cooperative resolution.; There are no significant overlaps in plot premise, characters, settings, or causal mechanics with the provided recent publication history.; The content is safe, appropriate for general audiences, and carries no copyright violations or YouTube policy risks.",
+      "reviewed_at": "2026-10-25T18:42:10.805799+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-48f769b0e7c0aef92330",
+      "story_sha256": "07c66820f8a3dad8973b62f275f6ab14c641ff5a51c22e363b980279163feab6",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is causally coherent and clear, featuring a distinct narrative arc with a clear conflict, decision, and resolution.; There are no copyright or trademark violations; the characters, plot, and setting are original.; The content is safe, suitable for a general audience, and adheres to YouTube policies.; While sharing an arctic survival theme with 'The Arctic Rescuer and the Crevasse Beacon', the central premise (jettisoning a valuable core-sample archive to power a ship's winch versus cutting a sled tether) and the specific narrative beats are sufficiently distinct to avoid unauthorized repetition.",
+      "reviewed_at": "2026-10-25T18:42:12.341481+00:00",
       "review_model": "gemini-3.5-flash-lite"
     }
   ]

@@ -1383,81 +1383,6 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-d07e12d27687c6f5afd4",
-      "title": "The Rivet-Master's Argument at Dock Twelve",
-      "hook": "The Hull Breach Discovery",
-      "question": "Can two stubborn mechanics save their drifting ship before it misses the orbital jump?",
-      "answer": "Yes, by trusting each other's instincts and sealing the primary thruster hull together in the nick of time.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Hull Breach Discovery",
-          "speech": "We cannot patch this pressure fracture with standard sealant alone; the stress load is far too high for our current orbit.",
-          "visual": "ship",
-          "label": "The Breach",
-          "story_beat": "reveal",
-          "visual_prompt": "Medium shot of Lyra pointing at a glowing crimson crack in the bulkhead of the engine bay, holding a magnetic diagnostic scanner in her right hand, wearing a stained blue jumpsuit and worried expression.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Heated Disagreement",
-          "speech": "Your heavy reinforcement plan will freeze the exhaust valves completely and leave us stranded in deep space forever.",
-          "visual": "robot",
-          "label": "The Debate",
-          "story_beat": "build",
-          "visual_prompt": "Close-up of Jax gesturing angrily with a silver torque wrench toward the maintenance droid, which blinks a warning yellow light while standing between the two arguing crewmates inside the cramped metallic workshop.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Compromise Fix",
-          "speech": "Listen to me now, use the flexible thermal membrane over the weld point and we might survive the upcoming gravitational push.",
-          "visual": "signal",
-          "label": "The Alignment",
-          "story_beat": "mechanism",
-          "visual_prompt": "Wide shot of both mechanics working in unison, Lyra holding the flashing green alignment beacon while Jax tightly fastens the thermal plate over the smoking hull breach under harsh white emergency lights.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Safe Through the Jump",
-          "speech": "The thrusters are holding steady and our orbital trajectory is fully secure. Excellent teamwork under pressure, partner.",
-          "visual": "planet",
-          "label": "The Safe Harbor",
-          "story_beat": "payoff",
-          "visual_prompt": "Medium wide shot of Lyra and Jax smiling side by side through the large observation viewport, watching a glowing blue gas giant planet fill the window as the ship cruises smoothly into stable orbit.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "visual_bible": {
-        "style": "Cinematic sci-fi realism with gritty, lived-in industrial textures, practical lighting, and rich cobalt and amber color palettes.",
-        "characters": {
-          "Lyra": "A pragmatic lead engineer with short dark hair, wearing a worn cobalt-blue jumpsuit with grease smudges on her cheeks and a focused expression.",
-          "Jax": "A stubborn junior mechanic with blonde hair tied back, wearing a reinforced utility vest over a grey shirt and protective goggles pushed onto his forehead.",
-          "Maintenance Droid": "A bipedal utility robot with a domed white chassis, three optical lenses, and articulated manipulator arms."
-        },
-        "locations": {
-          "engine bay": "A cramped, cylindrical compartment filled with exposed copper wiring, diagnostic panels, hydraulic lines, and a large circular bulkhead door.",
-          "observation deck": "A spacious curved room with metallic flooring, overhead ambient strip lighting, and a panoramic reinforced window overlooking space."
-        },
-        "objects": {
-          "diagnostic scanner": "A rectangular handheld device with a black grip and a bright triangular LED display projecting holographic data.",
-          "torque wrench": "A heavy-duty chrome tool with an adjustable digital readout panel and a glowing green power ring near the head.",
-          "thermal membrane": "A flexible, shimmering silver sheet of high-density alloy mesh designed to withstand extreme thermal expansion."
-        }
-      },
-      "plot_fingerprint": "2bdf40cc173ee670a07bbaa4be3033efcf08588b73f2a1f7bdbee1999bf74805"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
       "content_id": "rayvan-gemini-93b06c8328a10c0dedea",
       "title": "The Glaciologist's Dilemma at Crevasse Seven",
       "hook": "The Whiteout Warning",
@@ -3939,83 +3864,6 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-a5f0d0f62b5c66c530fd",
-      "title": "The Arctic Rescuer and the Crevasse Beacon",
-      "hook": "Distress Signal Received",
-      "question": "Can the researcher abandon her sole supply sled to haul an injured colleague out of a collapsing ice crevasse?",
-      "answer": "Yes, by dropping the equipment to lighten the harness, she hoists her partner to safety just before the bridge collapses entirely.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "Distress Signal Received",
-          "speech": "Dr. Vance, do you read me? My anchor gave way, and I am dangling blind in the western crevasse!",
-          "visual": "signal",
-          "label": "Distress Call",
-          "story_beat": "reveal",
-          "visual_prompt": "Dr. Clara Sterling, wearing a red parka and frost-rimed goggles, holding a blinking orange emergency radio inside a dimly lit snow shelter, with blowing white snow outside the entrance flap.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Fractured Bridge",
-          "speech": "The ice walls are splintering under the cable strain! If I pull the sled and the winch together, we both drop.",
-          "visual": "ship",
-          "label": "Weight Crisis",
-          "story_beat": "build",
-          "visual_prompt": "Clara kneeling at the snowy lip of a deep blue glacial crevasse, clutching a tense nylon winch cable that leads over the frozen edge, her heavy supply sled parked dangerously close to a cracking fissure.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Dropping the Cargo",
-          "speech": "I am cutting the sled tether right now! Hold fast to the main line, Marcus, I am hauling you up!",
-          "visual": "door",
-          "label": "The Severing",
-          "story_beat": "mechanism",
-          "visual_prompt": "Clara using a serrated multi-tool to slice through the thick yellow nylon tether of the supply sled, her face strained with exertion as the sled slides backward toward the abyss.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Frozen Rescue",
-          "speech": "We lost the supplies, but you are breathing. Grab my hand, Marcus, we are walking back together.",
-          "visual": "forest",
-          "label": "Safe Return",
-          "story_beat": "payoff",
-          "visual_prompt": "Clara pulling Marcus, who wears a torn blue parka and a frost-dusted wool cap, over the lip of the crevasse onto flat white snow, with the distant silhouette of the research station under a pale twilight sky.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "central_conflict": "Hauling a heavy rescue load out of an unstable glacial crevasse while losing grip on the main supply sled.",
-      "decisive_choice": "Cut the supply sled tether to distribute body weight safely and pull the hauling rope alone.",
-      "resolution": "The partner is rescued onto solid ice, while the supply sled slips irretrievably into the frozen abyss.",
-      "visual_bible": {
-        "style": "Cinematic realism, high-contrast polar photography, natural cold daylight with blue shadows and warm amber emergency light accents.",
-        "characters": {
-          "Clara Sterling": "A thirty-year-old arctic researcher with a determined jaw, weathered pale skin, ice-blue eyes, and wind-chapped cheeks. Wears a heavy-duty red polar parka with white faux-fur trim, black snow pants, amber snow goggles pushed onto her forehead, and thick black thermal gloves.",
-          "Marcus Thorne": "A tall researcher in his late thirties with dark stubble, tired brown eyes, wearing a torn blue expedition parka over a grey wool sweater, dark insulated trousers, and a dark grey fleece beanie."
-        },
-        "locations": {
-          "Snow Shelter": "A cramped, domed nylon tent interior illuminated by a small amber battery lantern, showing scattered maps and radio gear.",
-          "Glacial Crevasse": "A massive fissure of deep indigo and turquoise glacial ice with jagged, crystalline walls, surrounded by pristine wind-swept snowfields under an overcast twilight sky."
-        },
-        "objects": {
-          "Emergency Radio": "A ruggedized, military-grade handheld transceiver in matte black plastic with a prominent orange antenna and a blinking green signal diode.",
-          "Supply Sled": "A heavy-duty green plastic toboggan loaded with aluminum storage cases, rolled blue sleeping pads, and coiled yellow climbing ropes secured by black bungee cords.",
-          "Winch Cable": "A thick, braided steel wire cable pulled taut across a heavy metal anchor stake driven firmly into hard-packed snow."
-        }
-      },
-      "plot_fingerprint": "4138128311a8eea9d3a3d2413e07d3407d2d985fe264df1236ff9de8cf18e76b"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
       "content_id": "rayvan-gemini-60a0b7dcf757aaac4e74",
       "title": "The Muddy Derby of Willow Creek Basin",
       "hook": "The Hidden Weight",
@@ -4168,11 +4016,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-07d4b45040d86e19419f",
-      "title": "The Ranger and the Summit Flares",
-      "hook": "Discovery at Dawn",
-      "question": "Can Lyra complete the perilous alpine rescue before the blizzard fully traps the injured climber on the cliff?",
-      "answer": "Lyra expertly fires the emergency ascent rocket to bridge the gap and safely evacuates the stranded climber.",
+      "content_id": "rayvan-gemini-d7c2fcbd8caf9d3cf3aa",
+      "title": "The Root-Weaver and the Sinking Ravine",
+      "hook": "The Sudden Chasm",
+      "question": "Can two rival foragers bridge a collapsing gorge before nightfall?",
+      "answer": "By weaving their harvesting ropes into a single suspension bridge, they save the harvest and each other.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -4180,76 +4028,76 @@
       ],
       "story_beats": [
         {
-          "headline": "Discovery at Dawn",
-          "speech": "Look through the freezing binoculars now! I see a bright orange signal flare burning near the frozen crag.",
-          "visual": "signal",
-          "label": "Beacon Spotted",
-          "story_beat": "reveal",
-          "visual_prompt": "Lyra holding brass binoculars, wearing a heavy red parka and snow goggles, standing at the icy edge of pine ridge as a distant orange signal flare sparks against grey snow clouds.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Crossing the Chasm",
-          "speech": "Hold tight to that anchor stake while I string the heavy titanium cable across this freezing mountain gorge.",
-          "visual": "door",
-          "label": "The Crossing",
-          "story_beat": "build",
-          "visual_prompt": "Lyra securing a heavy steel pulley system to a frozen rock gate on a cliffside, wearing thick thermal gloves and red parka while heavy wind blows white snow.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Reaching the Ledge",
-          "speech": "Take my hand carefully! We must cross back over this terrifying drop before the storm shatters the ledge.",
+          "headline": "The Sudden Chasm",
+          "speech": "Look out, the earth is giving way beneath our feet! We are completely cut off from the grove and each other.",
           "visual": "forest",
-          "label": "The Rescue",
-          "story_beat": "mechanism",
-          "visual_prompt": "Lyra pulling an exhausted climber in a blue jacket onto a safe snowy ledge surrounded by frost-covered pine trees, holding a climbing axe in her right hand.",
+          "label": "Landslide Hazard",
+          "story_beat": "reveal",
+          "visual_prompt": "Medium shot of Rowan standing on a collapsing ledge of dark soil, pointing in shock across a wide muddy fissure toward Kestrel on the opposite side, clutching a woven hemp basket filled with glowing yellow star-fruit.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Safe Return",
-          "speech": "We made it back to the warmth of the cabin just in time. Pour us both a hot cup of tea.",
+          "headline": "Pooling Resources",
+          "speech": "We cannot jump this gap alone. If we tie our climbing ropes together, we might just have enough length to span the gorge.",
+          "visual": "signal",
+          "label": "Rope Connection",
+          "story_beat": "build",
+          "visual_prompt": "Close-up of Rowan's weathered hands knotting two frayed hemp ropes together tightly, while Kestrel holds up a heavy iron piton in the background against a backdrop of towering pine trees.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Balancing Act",
+          "speech": "Hold the anchor steady while I walk across the line. Keep your weight low and do not let the fruit basket drag us down.",
+          "visual": "door",
+          "label": "Crossing the Span",
+          "story_beat": "mechanism",
+          "visual_prompt": "Wide angle shot of Kestrel gripping a taut rope bridge stretched across a steep misty canyon, carefully stepping forward with arms outstretched while Rowan braces their boots against a massive oak root on the near side.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Haven",
+          "speech": "We did it together. The fruit is safe, and we have a warm fire waiting for us in the upper hollow.",
           "visual": "ship",
-          "label": "Safe Arrival",
+          "label": "Shared Success",
           "story_beat": "payoff",
-          "visual_prompt": "Lyra and the rescued climber sitting inside a warm wooden rescue cabin, holding steaming mugs, looking out a frosted window at the stormy mountain peak.",
+          "visual_prompt": "Medium shot of Rowan and Kestrel sitting together on a mossy log inside a safe forest shelter, smiling as they share a glowing star-fruit next to a small crackling campfire under the twilight canopy.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "A sudden winter blizzard traps an injured climber on an isolated mountain ledge while night approaches.",
-      "decisive_choice": "Lyra chooses to deploy her experimental rescue beacon rocket across the deep crevasse instead of waiting for morning backup.",
-      "resolution": "The beacon successfully anchors a rescue line, allowing Lyra to haul the climber to safety moments before the ridge collapses.",
+      "central_conflict": "A sudden landslide traps both foragers on opposite sides of a widening ravine with a heavy basket of star-fruit.",
+      "decisive_choice": "Instead of racing alone for the single remaining foot-log, they tie their climbing tethers together to span the chasm.",
+      "resolution": "Both foragers successfully haul the star-fruit across the improvised bridge and share the shelter of the grove.",
       "visual_bible": {
-        "style": "Cinematic stop-motion stop-motion puppet animation style with rich textures and dramatic lighting",
+        "style": "Warm-toned cinematic storybook illustration with rich textural details and natural lighting",
         "characters": {
-          "Lyra": "A female mountain ranger with braided brown hair, wearing a weatherproof red parka with fur lining, yellow climbing trousers, and silver snow goggles.",
-          "Climber": "An adventurous hiker wearing a torn blue puffer jacket, dark snow pants, and a green beanie covered in light frost."
+          "Rowan": "An agile forager with curly brown hair, wearing a patched green canvas tunic and leather boots, holding a sturdy iron climbing piton.",
+          "Kestrel": "A determined scout with braided auburn hair, wearing a dark teal weather-cloak and sturdy hiking trousers, carrying a large woven harvest basket."
         },
         "locations": {
-          "pine ridge": "A jagged, snow-covered mountain cliffside populated by sparse, frost-laden evergreen trees under a stormy grey sky.",
-          "rescue cabin": "A cozy, log-built shelter with glowing yellow windows, a stone fireplace, and a heavy wooden door."
+          "Ravine": "A deep, mist-filled forest gorge bordered by ancient moss-covered pines and damp soil.",
+          "Shelter": "A cozy woodland hollow sheltered by massive tree roots and glowing with campfire light."
         },
         "objects": {
-          "signal flare": "A bright metallic cylinder emitting a blazing orange distress flare and thick white smoke.",
-          "climbing axe": "A sturdy tool with a polished steel pick head and a textured black rubber grip.",
-          "hot mug": "A chipped ceramic blue mug filled with steaming herbal tea."
+          "basket": "A hand-woven circular hemp basket filled with glowing yellow star-fruit.",
+          "rope": "Frayed natural fiber climbing ropes tied with heavy reef knots.",
+          "piton": "A dark forged iron stake used for anchoring climbing lines into the earth."
         }
       },
-      "plot_fingerprint": "c30451f2c6dff4bdddfac0495c0b00fc66b9e0246428a7ac9a3a09fffce324d6"
+      "plot_fingerprint": "e25150cb8e7b03c486ba6937347800035c5fe7d79f1d97eafde257c5955771fb"
     },
     {
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-14366e610c83091b2255",
-      "title": "The Mystery of Platform Nine and the Missing Luggage",
-      "hook": "Missing Ledger Panic",
-      "question": "Where did the missing master ledger vanish during the express departure?",
-      "answer": "The master ledger was tucked inside the stationmaster's forgotten lunchbox on the express.",
+      "content_id": "rayvan-gemini-02a4355f913a9a2a4640",
+      "title": "The Millers Oath at Oakhaven",
+      "hook": "The Empty Bin",
+      "question": "Can lifelong friends preserve their bond when the only surviving winter grain belongs to just one family?",
+      "answer": "They choose to divide the meager harvest equally, sacrificing their individual comfort to survive the frost together.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -4257,65 +4105,141 @@
       ],
       "story_beats": [
         {
-          "headline": "Missing Ledger Panic",
-          "speech": "Pardon me, Inspector, but the master logbook has vanished completely from the ticket counter right before departure.",
-          "visual": "signal",
-          "label": "Platform Discovery",
+          "headline": "The Empty Bin",
+          "speech": "Look at this wooden bin, my old friend; there is barely enough flour left in the bottom to bake a single loaf for my children.",
+          "visual": "forest",
+          "label": "Empty Bin",
           "story_beat": "reveal",
-          "visual_prompt": "Stationmaster Bramble with round brass spectacles and a navy uniform holding an empty wooden clipboard on the bustling platform while a stray ginger cat named Pip sits nearby licking its paw.",
+          "visual_prompt": "Wide shot of a rustic 18th-century stone mill interior covered in faint dust. Silas stands on the left wearing a patched wool tunic, gazing down with a sorrowful expression into an open oak grain bin held in his calloused hands. In the background, winter snow falls past a tall open barn door.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Cat's Clue",
-          "speech": "Look closely at how Pip keeps scratching the brass handle of your old leather lunch tin, master Bramble.",
-          "visual": "robot",
-          "label": "Feline Discovery",
-          "story_beat": "mechanism",
-          "visual_prompt": "Pip the ginger cat nudges a battered green tin lunchbox resting on a wooden bench while Bramble looks down in absolute astonishment with wide eyes.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Unlocking the Tin",
-          "speech": "Good heavens, I packed my midday sandwiches right on top of the confidential station registry this morning!",
+          "headline": "The Hidden Reserve",
+          "speech": "I found this hidden sack buried beneath the floorboards behind the heavy millstone; it is enough to keep my family fed until spring.",
           "visual": "door",
-          "label": "Tin Inspection",
-          "story_beat": "twist",
-          "visual_prompt": "Bramble carefully opens the green metal lunch tin on the station bench, revealing parchment pages wedged beside a wrapped cheese sandwich while curious passengers watch.",
+          "label": "Hidden Reserve",
+          "story_beat": "build",
+          "visual_prompt": "Medium shot inside the damp cellar of the mill. Bram crouches beside a rotting wooden trapdoor, pulling a heavy burlap sack marked with a faded flour stamp. He looks up guiltily at Silas, holding the neck of the sack tightly with both hands, while faint torchlight flickers on the damp stone walls.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Express Departures Resume",
-          "speech": "All tickets are accounted for and the morning express is finally cleared to depart down the southern line.",
+          "headline": "The Heavy Weighing",
+          "speech": "We cannot let hunger turn us against each other; we must divide these final kernels evenly on the brass scale right now.",
+          "visual": "signal",
+          "label": "Heavy Weighing",
+          "story_beat": "mechanism",
+          "visual_prompt": "Close-up shot of a heavy tarnished brass balancing scale resting on a rough wooden table. Silas and Bram each place measuring scoops of golden rye grain onto opposite pans. Both men have determined expressions, their weathered hands steadying the swaying scale arm as the pointer rests precisely in the middle.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Hearth",
+          "speech": "Take this warm loaf of bread back to your home, because true friendship is worth far more than a full stomach alone.",
           "visual": "ship",
-          "label": "Safe Departure",
+          "label": "Shared Hearth",
           "story_beat": "payoff",
-          "visual_prompt": "Bramble waves a green signal flag proudly beside the steaming black locomotive engine while Pip rests contentedly on the stationmaster's booted foot.",
+          "visual_prompt": "Warm interior shot of a cozy village cottage kitchen. Bram hands a golden-brown baked loaf of bread to Silas across a crackling stone hearth. Both men smile warmly at each other, their children playing happily in the background near a glowing fireplace.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "The station ledger went missing during the 8:00 express boarding.",
-      "decisive_choice": "Search the stationmaster's own misplaced meal tin instead of locking down the trains.",
-      "resolution": "The ledger is recovered safely, and the morning departures resume without further delay.",
+      "central_conflict": "A severe winter scarcity threatening starvation in a isolated village.",
+      "decisive_choice": "Splitting the last sack of rye flour instead of hoarding it for one household.",
+      "resolution": "Both families endure the harsh winter through mutual support and emerge with an unbreakable friendship.",
       "visual_bible": {
-        "style": "Warm vintage storybook illustration with rich watercolor textures and detailed brass accents",
+        "style": "Cinematic historical realism with warm, earthy tones, dramatic hearth lighting, and rich textural detail on wood, stone, and wool fabrics.",
         "characters": {
-          "Bramble": "An elderly stationmaster with a bushy white mustache, round brass spectacles, wearing a crisp navy-blue wool uniform with brass buttons and a peaked cap.",
-          "Pip": "A clever, plump ginger tabby cat with emerald-green eyes and a white patch on its chest."
+          "Silas": "A middle-aged miller with deep laugh lines, kind hazel eyes, unkempt brown hair streaked with grey, wearing a dark green wool tunic, canvas trousers, and sturdy leather boots.",
+          "Bram": "A sturdy village baker with broad shoulders, a thick reddish-brown beard, observant blue eyes, wearing a cream-colored linen shirt with rolled-up sleeves, a leather apron, and dark breeches."
         },
         "locations": {
-          "Grand Central Station": "A bustling Victorian railway station featuring arched wrought-iron roof girders, polished cobblestone platforms, and hanging gas-lamp fixtures."
+          "Oakhaven Mill": "An ancient stone watermill featuring weathered timber beams, moss-covered exterior walls, a large rusting water wheel outside, and a dusty interior filled with milling machinery."
         },
         "objects": {
-          "Clipboard": "A polished dark oak clipboard with a heavy brass spring clip.",
-          "Lunch Tin": "A dented, sage-green metal lunch box with a tarnished brass latch and wire handle.",
-          "Signal Flag": "A bright emerald-green cloth flag mounted on a dark wooden dowel."
+          "Grain Bin": "A large, rectangular oak container with iron corner brackets, showing deep scoring and coated inside with a fine layer of white flour dust.",
+          "Brass Scale": "An antique countertop weighing scale made of polished brass with dual hanging pans and delicate engraved tick marks along its central arc."
         }
       },
-      "plot_fingerprint": "86aee25b1161f9493b2234793d77ac1ac0702ad7774bfc71f7c86081cc3df087"
+      "plot_fingerprint": "eee97a08e85d96ae3cd5c881e62d0b26b022acf8e297619c5200390144ddbbc9"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-48f769b0e7c0aef92330",
+      "title": "The Icebreaker Captain and the Frozen Hull",
+      "hook": "The Distress Signal",
+      "question": "Can the captain abandon the frozen cargo bay to save the trapped researcher before the blizzard collapses the ridge?",
+      "answer": "Yes, by jettisoning the heavy core samples to lighten the vessel and reach the crevasse.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Distress Signal",
+          "speech": "Captain, sensor array four is failing fast. Dr. Vance is pinned under three tons of blue ice at ridge-line twelve.",
+          "visual": "signal",
+          "label": "Incoming Distress",
+          "story_beat": "reveal",
+          "visual_prompt": "Close-up of a blinking orange emergency beacon on a metallic dashboard in an arctic research vessel, while Captain Miller looks out the frosted window with a grave expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Heavy Weight",
+          "speech": "We are carrying the complete core-sample archive from the deep trench. If we climb now, the engine will overheat and blow.",
+          "visual": "ship",
+          "label": "Overloaded Engines",
+          "story_beat": "build",
+          "visual_prompt": "Medium shot of Captain Miller standing in front of heavy steel storage crates labeled core-samples inside the dim cargo hold of the icebreaker, illuminated by flickering red warning lights.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hard Choice",
+          "speech": "Drop the entire archive into the snowpack immediately. Give the winch every ounce of power we have left to pull her up.",
+          "visual": "robot",
+          "label": "Jettison Cargo",
+          "story_beat": "mechanism",
+          "visual_prompt": "Wide action shot of an automated robotic crane arm releasing heavy steel cargo containers down a snowy slope, while Captain Miller slams a heavy red emergency lever on the control console.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Aboard",
+          "speech": "She is in the airlock now. The hull held together, and Dr. Vance is breathing on her own. Good work, team.",
+          "visual": "door",
+          "label": "Rescue Complete",
+          "story_beat": "payoff",
+          "visual_prompt": "Medium shot of Dr. Vance wrapped in a thermal blanket stepping through the heavy steel airlock door of the research ship, greeted by a relieved Captain Miller holding a steaming mug.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Choosing between saving valuable geological samples and rescuing a trapped colleague in a collapsing ice shelf.",
+      "decisive_choice": "Jettisoning the secured research cargo to gain the necessary speed and torque for the rescue winch.",
+      "resolution": "The researcher is pulled to safety just as the ice shelf gives way, leaving the cargo behind.",
+      "visual_bible": {
+        "style": "Cinematic gritty arctic drama, high contrast, cool blue tones contrasted with warm interior amber lights, highly detailed mechanical textures.",
+        "characters": {
+          "Captain Miller": "A weathered commander in his fifties with a thick gray beard, wearing a heavy orange-and-navy winter parka with frost on the collar.",
+          "Dr. Vance": "A resilient geologist in her thirties with short dark hair, wearing a torn thermal undersuit and a silver emergency foil blanket."
+        },
+        "locations": {
+          "Command Bridge": "A cramped, glowing steel room filled with analog dials, radar screens, and thick triple-paned windows frosted at the edges.",
+          "Cargo Hold": "A cavernous industrial space with rows of heavy hydraulic clamps, stacked metal crates, and frost-covered bulkheads."
+        },
+        "objects": {
+          "Emergency Beacon": "A cylindrical orange metal canister with a flashing high-intensity LED lens on top.",
+          "Winch Control Lever": "A massive, industrial red-painted iron lever mounted on a brushed steel control housing.",
+          "Thermal Blanket": "A shiny, crinkled silver mylar sheet reflecting warm emergency lighting."
+        }
+      },
+      "plot_fingerprint": "cd0ef646150009f0fa9f3aafd873f577fee9d31c7ab8e90ed40e74bb567e8125"
     }
   ]
 }
