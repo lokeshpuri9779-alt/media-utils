@@ -213,8 +213,14 @@ jobs:
             # Install native Ubuntu dependency chain with strict time budget.
             # Never substitute a file-existence check for a working media probe.
             echo 'ASTRA_FFPROBE_NATIVE_INSTALL=attempt'
-            timeout 150s sudo env DEBIAN_FRONTEND=noninteractive \
-              apt-get install -y --no-install-recommends ffmpeg
+            # Prevent interactive apt locks and slow mirrors from exhausting
+            # the entire preload job; fail closed if the probe is unavailable.
+            timeout 120s sudo env DEBIAN_FRONTEND=noninteractive \
+              apt-get install -y --no-install-recommends \
+              -o Acquire::Retries=0 \
+              -o Acquire::http::Timeout=15 \
+              -o Acquire::https::Timeout=15 \
+              -o DPkg::Lock::Timeout=10 ffmpeg
             command -v ffprobe
             ffprobe -version >/dev/null 2>&1
             echo 'ASTRA_FFPROBE_SOURCE=native-verified'
