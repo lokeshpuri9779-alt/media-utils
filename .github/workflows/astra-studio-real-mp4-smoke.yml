@@ -1,0 +1,53 @@
+name: ASTRA Studio Real MP4 Smoke
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/astra-studio-real-mp4-smoke.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ASTRA_ASSET_PACK_ENABLED: '0'
+      ASTRA_ASSET_PACK_AUDIT: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Studio dependencies
+        run: |
+          python -m pip install -r requirements.txt
+      - name: Render real Studio pipeline without publication
+        run: |
+          mkdir -p runtime-artifacts/studio-smoke
+          python studio_renderer.py --preview runtime-artifacts/studio-smoke/studio.mp4
+      - name: Verify encoded video and report
+        run: |
+          ffprobe -v error -show_entries stream=codec_name,width,height -select_streams v:0 -of json runtime-artifacts/studio-smoke/studio.mp4 > runtime-artifacts/studio-smoke/ffprobe.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('runtime-artifacts/studio-smoke')
+          video=root/'studio.mp4'
+          assert video.is_file() and video.stat().st_size > 10000, 'Studio MP4 missing or empty'
+          probe=json.loads((root/'ffprobe.json').read_text())
+          stream=probe['streams'][0]
+          assert stream['codec_name']=='h264'
+          assert (stream['width'],stream['height'])==(1080,1920)
+          PY
+      - name: Upload rendered evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-studio-real-mp4-smoke
+          path: runtime-artifacts/studio-smoke/
+          if-no-files-found: warn
+          retention-days: 7
