@@ -45,6 +45,13 @@ class GithubReadinessTests(unittest.TestCase):
             self.assertIn(pinned, requirements)
             self.assertIn(pinned, publisher)
 
+    def test_preload_asset_validator_installs_pillow_first(self):
+        preload = read(PRELOAD)
+        installer = preload.index("- name: Install pinned asset verifier dependency before restoration")
+        verifier = preload.index("- name: Verify restored reusable visual pack")
+        self.assertLess(installer, verifier)
+        self.assertIn("Pillow==11.3.0", preload)
+
     def test_four_lane_schedule_is_bounded(self):
         preload = read(PRELOAD)
         self.assertIn("- cron: '*/30 * * * *'", preload)
