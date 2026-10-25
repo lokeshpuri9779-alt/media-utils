@@ -1,0 +1,48 @@
+name: ASTRA GitHub Free-Tier Readiness
+
+# Read-only workflow contract tests: no provider keys, no rendering or upload.
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/astra-v2-publish.yml'
+      - '.github/workflows/astra-v2-preload.yml'
+      - '.github/workflows/astra-v2-longform.yml'
+      - '.github/workflows/astra-github-readiness.yml'
+      - 'tests/test_astra_github_readiness.py'
+      - 'requirements.txt'
+
+permissions:
+  contents: read
+
+jobs:
+  readiness:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify free GitHub production contract
+        run: python -m unittest discover -s tests -p 'test_astra_github_readiness.py' -v
+      - name: Install real publisher early-test dependencies
+        run: |
+          python -m pip install --disable-pip-version-check \
+            'httpx==0.28.1' 'Pillow==11.3.0' \
+            'numpy==2.2.6' 'imageio-ffmpeg==0.6.0'
+      - name: Reproduce real unified-renderer inventory test
+        env:
+          ASTRA_UNIFIED_STORY_ENGINE: '1'
+          ASTRA_REQUIRE_STUDIO_PRELOAD: '0'
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_story_inventory.py' -v
+          python -m tools.astra_story_eligibility_report
+      - name: Preserve renderer artwork-gap evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-renderer-artwork-gaps
+          path: runtime-health/renderer-artwork-gaps.json
+          if-no-files-found: warn
+          retention-days: 14

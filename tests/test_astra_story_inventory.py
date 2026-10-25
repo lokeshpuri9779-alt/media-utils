@@ -6,24 +6,48 @@ from astra_v2.publication_quality import publication_rejection
 
 
 class StoryInventoryTests(unittest.TestCase):
-    def test_latest_authored_batch_passes_actual_production_gate(self):
+    def test_latest_authored_batch_has_explicit_renderer_decisions(self):
         from astra_v2.production_story_gate import candidate_issues
         latest_titles = {row[1] for row in AUTHORED_BATCH_473}
         records = [story for story in catalog(limit=2000)
                    if story["title"] in latest_titles]
         self.assertEqual(len(records), len(latest_titles))
+        missing_scene_art = {"The Heron and the Ferry Bell"}
         for story in records:
             with self.subTest(title=story["title"]):
-                self.assertEqual(candidate_issues(story), [])
+                issues = candidate_issues(story)
+                if story["title"] in missing_scene_art:
+                    # Do not claim a generic signal graphic depicts the bell.
+                    # A future approved, semantic artwork integration may clear
+                    # the blocker; other failures still fail this regression.
+                    self.assertTrue(not issues or (
+                        len(issues) == 1 and
+                        issues[0].startswith("publication_renderer_incompatible:") and
+                        "signal_graphic_does_not_depict_narrated_event" in issues[0]
+                    ), issues)
+                else:
+                    self.assertEqual(issues, [])
 
-    def test_batch_526_passes_actual_production_gate(self):
+    def test_batch_526_has_explicit_renderer_decisions(self):
         from astra_v2.production_story_gate import candidate_issues
         titles = {row[1] for row in AUTHORED_BATCH_526}
-        records = [story for story in catalog(limit=2000) if story['title'] in titles]
+        records = [story for story in catalog(limit=2000) if story["title"] in titles]
         self.assertEqual(len(records), 3)
+        missing_scene_art = {
+            "The Hedgehog and the Clocktower Echo",
+            "The Beaver and the Bridge Lanterns",
+        }
         for story in records:
-            with self.subTest(title=story['title']):
-                self.assertEqual(candidate_issues(story), [])
+            with self.subTest(title=story["title"]):
+                issues = candidate_issues(story)
+                if story["title"] in missing_scene_art:
+                    self.assertTrue(not issues or (
+                        len(issues) == 1 and
+                        issues[0].startswith("publication_renderer_incompatible:") and
+                        "signal_graphic_does_not_depict_narrated_event" in issues[0]
+                    ), issues)
+                else:
+                    self.assertEqual(issues, [])
 
     def test_authored_inventory_has_distinct_ids(self):
         self.assertEqual(len(PLOTS), 24)
@@ -128,7 +152,13 @@ class StoryInventoryTests(unittest.TestCase):
         self.assertTrue(all(publication_rejection(item) == "unreviewed_causal_draft"
                             for item in drafts))
         ready = [item for item in catalog(limit=2000) if item["production_ready"]]
-        self.assertTrue(all(publication_rejection(item) is None for item in ready))
+        # Authored/editorial readiness is not verified visual readiness.
+        # Some scenes correctly fail closed until scene-matched artwork is
+        # approved. Never require the gate to accept unsuitable visuals.
+        reasons = [publication_rejection(item) for item in ready]
+        self.assertTrue(any(reason is None for reason in reasons))
+        self.assertTrue(all(reason is None or reason.startswith(
+            "renderer_incompatible:") for reason in reasons), reasons)
 
     def test_history_excludes_draft(self):
         first = catalog(limit=2000, include_drafts=True)[-1]

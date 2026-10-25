@@ -38,7 +38,10 @@ on:
       - 'astra_v2/publication_quality.py'
       - 'astra_v2/preflight.py'
   schedule:
-    - cron: '*/5 * * * *'
+    # Four lanes every 30 minutes is enough capacity for staged production
+    # without launching a 4-job matrix every five minutes.
+    # Push and manual triggers still start fresh production immediately.
+    - cron: '*/30 * * * *'
 
 # Keep one coherent four-lane render batch active at a time.
 # Scheduled triggers that arrive during a batch must not cancel its jobs.
@@ -73,7 +76,11 @@ jobs:
       ASTRA_SERIALIZED_PRELOAD: '0' # Continue producing new original stories after Season 1
       ASTRA_PRELOAD_LANE: '${{ matrix.lane }}'
       ASTRA_LONG_ENABLED: '0'
-      ASTRA_ASSET_PACK_ENABLED: ${{ vars.ASTRA_ASSET_PACK_ENABLED || '0' }} # Explicit opt-in; disabled by default until story-render QA
+      # Verified artwork pack must be restored in preloads as well as
+      # publisher renders; a bad/missing pack fails closed instead of
+      # creating misleading scene proofs. Set repository var to '0' only
+      # for an explicit diagnostic fallback.
+      ASTRA_ASSET_PACK_ENABLED: ${{ vars.ASTRA_ASSET_PACK_ENABLED || '1' }}
       ASTRA_ASSET_PACK_ROOT: runtime-artifacts/verified-pack
       ASTRA_OPENAI_ENABLED: '0'
       ASTRA_OPENAI_ALLOW_PAID_API: '0'
