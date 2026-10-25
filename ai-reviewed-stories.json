@@ -4163,6 +4163,159 @@
         }
       },
       "plot_fingerprint": "87c665d6f6f414e463dbe1101bdca52e525823f6a30b825af242085c0078af14"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-07d4b45040d86e19419f",
+      "title": "The Ranger and the Summit Flares",
+      "hook": "Discovery at Dawn",
+      "question": "Can Lyra complete the perilous alpine rescue before the blizzard fully traps the injured climber on the cliff?",
+      "answer": "Lyra expertly fires the emergency ascent rocket to bridge the gap and safely evacuates the stranded climber.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "Discovery at Dawn",
+          "speech": "Look through the freezing binoculars now! I see a bright orange signal flare burning near the frozen crag.",
+          "visual": "signal",
+          "label": "Beacon Spotted",
+          "story_beat": "reveal",
+          "visual_prompt": "Lyra holding brass binoculars, wearing a heavy red parka and snow goggles, standing at the icy edge of pine ridge as a distant orange signal flare sparks against grey snow clouds.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Crossing the Chasm",
+          "speech": "Hold tight to that anchor stake while I string the heavy titanium cable across this freezing mountain gorge.",
+          "visual": "door",
+          "label": "The Crossing",
+          "story_beat": "build",
+          "visual_prompt": "Lyra securing a heavy steel pulley system to a frozen rock gate on a cliffside, wearing thick thermal gloves and red parka while heavy wind blows white snow.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Reaching the Ledge",
+          "speech": "Take my hand carefully! We must cross back over this terrifying drop before the storm shatters the ledge.",
+          "visual": "forest",
+          "label": "The Rescue",
+          "story_beat": "mechanism",
+          "visual_prompt": "Lyra pulling an exhausted climber in a blue jacket onto a safe snowy ledge surrounded by frost-covered pine trees, holding a climbing axe in her right hand.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Return",
+          "speech": "We made it back to the warmth of the cabin just in time. Pour us both a hot cup of tea.",
+          "visual": "ship",
+          "label": "Safe Arrival",
+          "story_beat": "payoff",
+          "visual_prompt": "Lyra and the rescued climber sitting inside a warm wooden rescue cabin, holding steaming mugs, looking out a frosted window at the stormy mountain peak.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden winter blizzard traps an injured climber on an isolated mountain ledge while night approaches.",
+      "decisive_choice": "Lyra chooses to deploy her experimental rescue beacon rocket across the deep crevasse instead of waiting for morning backup.",
+      "resolution": "The beacon successfully anchors a rescue line, allowing Lyra to haul the climber to safety moments before the ridge collapses.",
+      "visual_bible": {
+        "style": "Cinematic stop-motion stop-motion puppet animation style with rich textures and dramatic lighting",
+        "characters": {
+          "Lyra": "A female mountain ranger with braided brown hair, wearing a weatherproof red parka with fur lining, yellow climbing trousers, and silver snow goggles.",
+          "Climber": "An adventurous hiker wearing a torn blue puffer jacket, dark snow pants, and a green beanie covered in light frost."
+        },
+        "locations": {
+          "pine ridge": "A jagged, snow-covered mountain cliffside populated by sparse, frost-laden evergreen trees under a stormy grey sky.",
+          "rescue cabin": "A cozy, log-built shelter with glowing yellow windows, a stone fireplace, and a heavy wooden door."
+        },
+        "objects": {
+          "signal flare": "A bright metallic cylinder emitting a blazing orange distress flare and thick white smoke.",
+          "climbing axe": "A sturdy tool with a polished steel pick head and a textured black rubber grip.",
+          "hot mug": "A chipped ceramic blue mug filled with steaming herbal tea."
+        }
+      },
+      "plot_fingerprint": "c30451f2c6dff4bdddfac0495c0b00fc66b9e0246428a7ac9a3a09fffce324d6"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-14366e610c83091b2255",
+      "title": "The Mystery of Platform Nine and the Missing Luggage",
+      "hook": "Missing Ledger Panic",
+      "question": "Where did the missing master ledger vanish during the express departure?",
+      "answer": "The master ledger was tucked inside the stationmaster's forgotten lunchbox on the express.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "Missing Ledger Panic",
+          "speech": "Pardon me, Inspector, but the master logbook has vanished completely from the ticket counter right before departure.",
+          "visual": "signal",
+          "label": "Platform Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Stationmaster Bramble with round brass spectacles and a navy uniform holding an empty wooden clipboard on the bustling platform while a stray ginger cat named Pip sits nearby licking its paw.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Cat's Clue",
+          "speech": "Look closely at how Pip keeps scratching the brass handle of your old leather lunch tin, master Bramble.",
+          "visual": "robot",
+          "label": "Feline Discovery",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the ginger cat nudges a battered green tin lunchbox resting on a wooden bench while Bramble looks down in absolute astonishment with wide eyes.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Unlocking the Tin",
+          "speech": "Good heavens, I packed my midday sandwiches right on top of the confidential station registry this morning!",
+          "visual": "door",
+          "label": "Tin Inspection",
+          "story_beat": "twist",
+          "visual_prompt": "Bramble carefully opens the green metal lunch tin on the station bench, revealing parchment pages wedged beside a wrapped cheese sandwich while curious passengers watch.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Express Departures Resume",
+          "speech": "All tickets are accounted for and the morning express is finally cleared to depart down the southern line.",
+          "visual": "ship",
+          "label": "Safe Departure",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramble waves a green signal flag proudly beside the steaming black locomotive engine while Pip rests contentedly on the stationmaster's booted foot.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "The station ledger went missing during the 8:00 express boarding.",
+      "decisive_choice": "Search the stationmaster's own misplaced meal tin instead of locking down the trains.",
+      "resolution": "The ledger is recovered safely, and the morning departures resume without further delay.",
+      "visual_bible": {
+        "style": "Warm vintage storybook illustration with rich watercolor textures and detailed brass accents",
+        "characters": {
+          "Bramble": "An elderly stationmaster with a bushy white mustache, round brass spectacles, wearing a crisp navy-blue wool uniform with brass buttons and a peaked cap.",
+          "Pip": "A clever, plump ginger tabby cat with emerald-green eyes and a white patch on its chest."
+        },
+        "locations": {
+          "Grand Central Station": "A bustling Victorian railway station featuring arched wrought-iron roof girders, polished cobblestone platforms, and hanging gas-lamp fixtures."
+        },
+        "objects": {
+          "Clipboard": "A polished dark oak clipboard with a heavy brass spring clip.",
+          "Lunch Tin": "A dented, sage-green metal lunch box with a tarnished brass latch and wire handle.",
+          "Signal Flag": "A bright emerald-green cloth flag mounted on a dark wooden dowel."
+        }
+      },
+      "plot_fingerprint": "86aee25b1161f9493b2234793d77ac1ac0702ad7774bfc71f7c86081cc3df087"
     }
   ]
 }
