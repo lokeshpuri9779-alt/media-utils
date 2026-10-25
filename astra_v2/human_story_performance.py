@@ -14,6 +14,7 @@ from astra_errors import CreativeReject
 
 PILOT_ID = "rayvan-season-01-episode-01"
 EPISODE_TWO_ID = "rayvan-season-01-episode-02"
+EPISODE_THREE_ID = "rayvan-season-01-episode-03"
 ACTIONS = (
     "discover_radio",
     "trace_cable",
@@ -26,7 +27,17 @@ EPISODE_TWO_ACTIONS = (
     "inspect_future_photograph",
     "stop_stranger_switch",
 )
-EPISODE_ACTIONS = {PILOT_ID: ACTIONS, EPISODE_TWO_ID: EPISODE_TWO_ACTIONS}
+EPISODE_THREE_ACTIONS = (
+    "survey_dead_city",
+    "inspect_reverse_clock",
+    "study_altered_photographs",
+    "confront_mara_double",
+)
+EPISODE_ACTIONS = {
+    PILOT_ID: ACTIONS,
+    EPISODE_TWO_ID: EPISODE_TWO_ACTIONS,
+    EPISODE_THREE_ID: EPISODE_THREE_ACTIONS,
+}
 INK = (24, 34, 49)
 SKIN = (198, 142, 111)
 HAIR = (42, 37, 51)
@@ -60,7 +71,7 @@ def validate_human_scene(shot):
         if action == "flee_door" and not any(word in narration for word in ("door", "stairs")):
             raise CreativeReject("Escape scene has no door or stairs")
         expected = "signal" if action in ("discover_radio", "trace_cable") else "door"
-    else:
+    elif story_id == EPISODE_TWO_ID:
         required_terms = {
             "guard_knocking_door": ("knocked", "door"),
             "inspect_generator_clue": ("generator", "notebook"),
@@ -69,6 +80,16 @@ def validate_human_scene(shot):
         }
         if not all(term in narration for term in required_terms[action]):
             raise CreativeReject("Episode 2 actor action does not match narrated event")
+        expected = "door"
+    else:
+        required_terms = {
+            "survey_dead_city": ("city", "door", "footprints"),
+            "inspect_reverse_clock": ("clock", "threshold", "radio"),
+            "study_altered_photographs": ("jacket", "photographs", "stranger"),
+            "confront_mara_double": ("another mara", "key", "radios"),
+        }
+        if not all(term in narration for term in required_terms[action]):
+            raise CreativeReject("Episode 3 actor action does not match narrated event")
         expected = "door"
     if str(shot.get("visual") or "").lower() != expected:
         raise CreativeReject("Human action requires authored " + expected + " visual")
@@ -238,6 +259,72 @@ def _city_power(draw, t):
                                 x+27+k*34,1015-height+27+m*29),fill=col)
 
 
+def _alternate_city(draw, t):
+    """Vacant, starless skyline through the open observatory doorway."""
+    draw.polygon(((680,695),(955,695),(981,1164),(667,1164)),
+                 fill=(9,17,33),outline=(142,170,186),width=5)
+    # Perspective city remains abandoned: dark windows, no living silhouettes.
+    for index in range(5):
+        x=683+index*52
+        y=839-(index%3)*42
+        draw.rectangle((x,y,x+44,1137),fill=(38,59,77))
+        for j in range(3):
+            draw.rectangle((x+8,y+23+j*40,x+19,y+38+j*40),fill=(13,24,41))
+    # Floor footprints advance toward the camera in alternating steps.
+    for i in range(4):
+        x=715+(i%2)*58+int(6*math.sin(t*.8))
+        y=1028+i*44
+        draw.ellipse((x,y,x+28,y+16),fill=(144,150,154))
+
+
+def _reverse_clock(draw,t):
+    """Clock's single moving hand unmistakably runs counter-clockwise."""
+    x,y,r=748,876,154
+    draw.ellipse((x-r,y-r,x+r,y+r),fill=(216,208,176),outline=INK,width=11)
+    for hour in range(12):
+        a=hour*math.tau/12-math.pi/2
+        _line(draw,((int(x+126*math.cos(a)),int(y+126*math.sin(a))),
+                    (int(x+141*math.cos(a)),int(y+141*math.sin(a)))),INK,6)
+    angle=-math.pi/2-t*.95
+    _line(draw,((x,y),(int(x+104*math.cos(angle)),int(y+104*math.sin(angle)))),INK,12)
+    _line(draw,((x,y),(int(x+65*math.cos(angle*.35)),int(y+65*math.sin(angle*.35)))),(89,110,119),8)
+    draw.ellipse((x-11,y-11,x+11,y+11),fill=INK)
+    # Physical radio provides the second narrated story object.
+    _radio(draw,736,1113,t,portable=True)
+
+
+def _photo_wall(draw,t):
+    """Readable photographic montage; the same Mara appears in divergent outcomes."""
+    for col in range(3):
+        x=615+col*109
+        y=686+(col%2)*42
+        draw.rounded_rectangle((x,y,x+92,y+165),radius=5,
+                               fill=(222,212,188),outline=INK,width=5)
+        draw.rectangle((x+12,y+12,x+80,y+133),fill=(91+col*7,106,123))
+        draw.ellipse((x+28,y+39,x+65,y+83),fill=SKIN)
+        draw.polygon(((x+22,y+82),(x+70,y+82),(x+79,y+124),(x+13,y+124)),
+                     fill=JACKET if col!=1 else (132,90,104))
+    # Brother's abandoned jacket and changed label beside the photographs.
+    draw.polygon(((707,1020),(746,992),(769,1013),(795,994),(841,1032),
+                  (882,1124),(835,1141),(819,1093),(811,1191),
+                  (712,1191),(704,1093),(680,1139),(645,1115)),
+                 fill=(114,100,86),outline=INK,width=7)
+    draw.rectangle((754,1045,806,1068),fill=(222,210,176),outline=INK,width=3)
+    # Pinwheel marks imply alternate choices without false full-motion claims.
+    q=4*math.sin(t*2)
+    draw.line(((570,830+q),(593,849+q)),fill=GOLD,width=7)
+
+
+def _blue_glass_key(draw,x,y):
+    """Recurring unique blue-glass prop, recognizable across this episode."""
+    color=(72,171,233)
+    draw.ellipse((x-28,y-26,x+27,y+26),fill=(42,108,178),outline=(198,236,255),width=7)
+    draw.ellipse((x-11,y-10,x+10,y+11),fill=(17,48,94))
+    _line(draw,((x+7,y+16),(x+8,y+108)),color,16)
+    _line(draw,((x+8,y+78),(x+40,y+78)),color,12)
+    _line(draw,((x+8,y+103),(x+31,y+103)),color,10)
+
+
 def draw_human_scene(image, shot, t):
     """Draw only authenticated pilot action geometry in the 1080x1920 scene stage."""
     validate_human_scene(shot)
@@ -308,6 +395,26 @@ def draw_human_scene(image, shot, t):
                fill=(248,191,103),width=11)
         _stranger(d,675,856,t,touching_switch=True)
         _mara(d,279,870,t,reaching=True,alarm=True)
+    elif action == "survey_dead_city":
+        _door(d,.82)
+        _alternate_city(d,t)
+        _mara(d,337,864,t,reaching=True,alarm=True)
+    elif action == "inspect_reverse_clock":
+        _door(d,.42)
+        _reverse_clock(d,t)
+        _mara(d,346,865,t,reaching=True,alarm=True)
+    elif action == "study_altered_photographs":
+        _photo_wall(d,t)
+        _mara(d,343,868,t,reaching=True,alarm=True)
+    elif action == "confront_mara_double":
+        _door(d,.73)
+        # An independently moving matching human puppet, not a stranger/animal.
+        # The double wears Mara's same palette and silhouette for continuity.
+        _mara(d,307,865,t,reaching=True,alarm=True)
+        _mara(d,748+int(10*math.sin(t*.85)),865,t,reaching=True,alarm=True)
+        _blue_glass_key(d,866,969+int(6*math.sin(t*1.6)))
+        _radio(d,255,1131,t,portable=True)
+        _radio(d,865,1131,t,portable=True)
     else:
         raise CreativeReject("Unknown human action")
     return True
