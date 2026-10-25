@@ -3,25 +3,25 @@
   "publication_triggered": false,
   "approved_count": 0,
   "available_premises": {
-    "awaiting_editorial_review": 0,
-    "needs_new_plot": 500
+    "awaiting_editorial_review": 24,
+    "needs_new_plot": 0
   },
   "selected_for_rewrite": 3,
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "3d4035f02e39f21953b9ae19",
-      "source_sha256": "f526c288d55952fbfc46222e0e1f58589859f11cce02bd6d188126994e3a90a8",
+      "candidate_id": "305ec7564250dca398525642",
+      "source_sha256": "5f487c88055976c31635c489caa443e49f41361d680150645766c499d362cc46",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-722748c2b96e7b029f4a",
-        "title": "The Great Turnip Caper",
-        "hook": "The Copper Contraption",
-        "question": "Can an over-engineered vegetable slicer survive the morning rush at the root vegetable stall?",
-        "answer": "Yes, once the inventor learns to value raw speed over complex mechanical gymnastics.",
+        "content_id": "rayvan-gemini-fa6c7b485a6d3ed9cda8",
+        "title": "The Great Citrus Siphon Debacle",
+        "hook": "A Sticky Discovery",
+        "question": "Can an exhausted inventor fix his exploding machine before the morning market opens?",
+        "answer": "He re-routes the pressure valve into a nearby tea kettle, saving the stall and delighting the crowd.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,79 +29,81 @@
         ],
         "story_beats": [
           {
-            "headline": "The Copper Contraption",
-            "speech": "Behold the brass marvel, citizens! It slices twelve root vegetables simultaneously without a single drop of rogue juice!",
+            "headline": "A Sticky Discovery",
+            "speech": "Look at this mess! The new citrus extractor is backing up every single morning before the grand market opening.",
             "visual": "robot",
-            "label": "The Presentation",
+            "label": "The Clog",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby points proudly at his elaborate brass steam-slicer on his cluttered market table while confused shoppers stare.",
+            "visual_prompt": "Inventor Barnaby, wearing yellow goggles and a stained apron, stares in frustration at his vibrating brass juicer inside a chaotic open-air market stall, holding a monkey wrench in his right hand.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Clogging Crisis",
-            "speech": "Wait, do not push the giant purple swedes into the feeder chute so fast or the cogs will jam completely!",
+            "headline": "Frantic Assembly",
+            "speech": "We must tighten the intake gasket immediately or the entire housing will crack wide open right now.",
+            "visual": "ship",
+            "label": "The Build",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby frantically twists a rusted bolt on the juicer's copper hull with his wrench while his assistant Maya hands him a copper pipe, both standing behind a wooden counter piled with bruised lemons.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Pressure Mechanics",
+            "speech": "The steam valve is jammed shut! If we do not release the heat, this contraption is going to blow.",
             "visual": "signal",
             "label": "The Jam",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby frantically waves his hands in alarm as steam hisses from the jammed brass machine and massive purple swedes wedge tightly in the metal hopper.",
+            "visual_prompt": "Barnaby points frantically at a shaking red pressure gauge glowing on the side of the juicer, while Maya covers her ears with both hands as hissing steam shoots toward the market canopy.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Manual Override",
-            "speech": "Forget the steam pistons! We are switching directly to brute-force manual cranking before the angry mob demands refunds!",
+            "headline": "Sweet Success",
+            "speech": "Brilliant maneuver! Routing the excess spray into the tea kettle saved our stall and brewed us breakfast.",
             "visual": "door",
-            "label": "The Pivot",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby firmly yanks a heavy iron lever on the side of the machine, disconnecting the steaming boiler and exposing a rugged hand crank.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Root Vegetable Rain",
-            "speech": "Step right up and catch your perfectly diced turnips, sliced faster than a startled badger running from a hound!",
-            "visual": "ship",
-            "label": "The Triumph",
+            "label": "The Save",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby spins the heavy iron hand crank with a triumphant grin while perfectly sliced turnips fly neatly into customers wooden baskets.",
+            "visual_prompt": "Barnaby and Maya proudly smile at a long line of cheerful market customers holding mugs of steaming lemonade, with the repaired brass juicer resting safely beside a whistling copper tea kettle.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby's complex steam-powered slicer stalls during the peak market rush.",
-        "decisive_choice": "Barnaby abandons the delicate gear assembly and engages the emergency hand crank.",
-        "resolution": "The stall successfully clears the massive turnip queue, earning enough coin to pay the market rent.",
+        "central_conflict": "The motorized lemon-juicer is building dangerous internal pressure due to a clogged nozzle.",
+        "decisive_choice": "Directing the boiling citrus spray into the vendor's whistling copper tea kettle.",
+        "resolution": "The machine stabilizes, producing perfect warm lemonade while charming the waiting market patrons.",
         "visual_bible": {
-          "style": "Bright, quirky stop-motion animation style with vibrant pastel market awnings and detailed mechanical textures.",
+          "style": "Bright, colorful stop-motion animation aesthetic with detailed mechanical props and warm lighting.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild gray hair, soot-stained cheeks, wearing a striped yellow vest and a patched brown apron."
+            "Barnaby": "An eccentric inventor with wild gray hair, round spectacles, a grease-stained white apron, and blue trousers.",
+            "Maya": "A sharp-witted assistant wearing a green utility vest, safety goggles pushed up on her forehead, and brown leather boots."
           },
           "locations": {
-            "Market Square": "A bustling cobblestone plaza filled with striped canvas stalls, hanging lanterns, and wooden crates of vegetables."
+            "market_stall": "A bustling outdoor town market filled with wooden crates, striped canvas awnings, and hanging lanterns."
           },
           "objects": {
-            "Steam Slicer": "A complicated contraption made of polished brass pipes, ticking pressure gauges, and a massive iron hand crank.",
-            "Wooden Basket": "A sturdy woven wicker basket filled to the brim with oversized purple swedes and round white turnips."
+            "juicer": "A large, clunky brass and copper citrus-extracting machine with numerous gauges, pipes, and a shaking needle.",
+            "wrench": "A heavy, oil-smeared iron wrench with a notched jaw.",
+            "tea_kettle": "A shiny, bulbous copper tea kettle with a curved spout that whistles when steam passes through it."
           }
         },
-        "plot_fingerprint": "bf76b1911cb2d570fbe79ccc012e863c1231e22d36b89b419889c3baafdd460c"
+        "plot_fingerprint": "10278ad947e6895af7a23a6c7c3f798f76659d233b5c229daab9b49dea66a31f"
       },
       "approved": false
     },
     {
-      "candidate_id": "ebec44537a2d07a6b0c75e10",
-      "source_sha256": "8f40a82e40155590802ab288b1d975f76c4e3782136fa6aa3992d90df0b3597c",
+      "candidate_id": "13735fc876f7b504cd100966",
+      "source_sha256": "8328e383668f9f4a0d6cb6fd171ebbe8c110eee9ad7120298fd703c578a89add",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-090b9cb0cea97b13018a",
-        "title": "The Muddy Pitch Protocol",
-        "hook": "The Downpour Inspection",
-        "question": "How can the underdog amateur football club defeat the reigning town champions on a waterlogged field?",
-        "answer": "By engineering floating drainage tiles that absorb standing water and redirect it into a massive pitch-watering fountain.",
+        "content_id": "rayvan-gemini-5a4aab0cd7779d89f00f",
+        "title": "The Great Neighborhood Relay Ruckus",
+        "hook": "The Hidden Fault",
+        "question": "How can two rival street relay teams win the championship without breaking the rules?",
+        "answer": "They combine their unique training methods to bypass a faulty obstacle course.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -109,79 +111,81 @@
         ],
         "story_beats": [
           {
-            "headline": "The Downpour Inspection",
-            "speech": "Look at this pitch! If we play normal football today, the heavy champions will crush us into the mud completely.",
+            "headline": "The Hidden Fault",
+            "speech": "Look closely at the sensor pad. The timing gate is completely jammed by yesterday's sudden storm debris.",
             "visual": "forest",
-            "label": "The Flooded Field",
+            "label": "Disaster Reveal",
             "story_beat": "reveal",
-            "visual_prompt": "Captain Toby standing on a waterlogged grass football pitch surrounded by mud, holding a soggy clipboard, looking distressed under a gray rainy sky.",
+            "visual_prompt": "Maya and her rival Leo kneel in a dense neighborhood park forest, examining a broken electronic timing gate covered in moss, while holding glowing diagnostic tablets.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Sponge Tile Assembly",
-            "speech": "We must piece together these porous rubber mats right now to channel the standing water away from the goal.",
+            "headline": "Constructing a Bypass",
+            "speech": "We need to build a manual pulley system right now before the judges notice the delayed starting signal.",
             "visual": "robot",
-            "label": "Engineering the Fix",
+            "label": "Emergency Build",
             "story_beat": "build",
-            "visual_prompt": "Toby and his teammate assembling interlocking black porous rubber drainage tiles in the muddy dugout, holding wrenches and securing fasteners.",
+            "visual_prompt": "Maya and Leo assemble a makeshift mechanical robot arm from spare bicycle parts and wire in a sunlit garage workshop.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Drainage Mechanism",
-            "speech": "Once the pressure builds up beneath the turf, watch the valve release all the excess water directly into the ornamental fountain.",
+            "headline": "The Trigger Mechanism",
+            "speech": "Pull that lever when the second countdown hits zero to release the spring-loaded baton instantly.",
             "visual": "signal",
-            "label": "Activating the System",
+            "label": "Trigger Mechanism",
             "story_beat": "mechanism",
-            "visual_prompt": "Toby pulling a rusted metal lever near the sideline while muddy water shoots through a clear plastic hose into the central stone fountain.",
+            "visual_prompt": "Leo stands on a wooden platform outdoors, pulling a heavy brass lever connected to a flashing red radio signal tower while Maya watches anxiously.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Dry Pitch Victory",
-            "speech": "The field is completely dry and firm! Our speed will easily beat their exhausted legs to win the trophy.",
+            "headline": "Shared Victory",
+            "speech": "By working together instead of fighting, we finally crossed the finish line and claimed our rightful prize.",
             "visual": "door",
-            "label": "Lifting the Trophy",
+            "label": "Triumphant Payoff",
             "story_beat": "payoff",
-            "visual_prompt": "Toby lifting a gleaming silver cup above his head on a dry, green football pitch, smiling triumphantly as cheering teammates surround him.",
+            "visual_prompt": "Maya and Leo stand side by side holding a golden trophy in front of the open community center clubhouse wooden double doors, smiling broadly at the cheering crowd.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Torrential rain threatens to ruin the annual parish football derby, favoring the heavy, physical playing style of the defending champions over the agile underdogs.",
-        "decisive_choice": "Captain Toby decides to abandon traditional passing tactics and instead installs a network of modular sponge tiles beneath the turf.",
-        "resolution": "The pitch drains instantly during halftime, allowing Toby's agile team to outmaneuver the exhausted champions and claim the victory trophy.",
+        "central_conflict": "A broken timing gate stalls the neighborhood baton race.",
+        "decisive_choice": "Captain Maya shares her secret shortcut design with her rival.",
+        "resolution": "Both teams cross the finish line together to claim the shared trophy.",
         "visual_bible": {
-          "style": "Bright, vibrant animation style with detailed textures for mud, turf, and metallic engineering tools.",
+          "style": "Colorful 3D animated film aesthetic with vibrant lighting and expressive character designs.",
           "characters": {
-            "Toby": "A determined amateur football captain with messy brown hair, wearing a green jersey, muddy shorts, and athletic cleats."
+            "Maya": "A teenage girl with curly brown hair tied back in a blue bandana, wearing an orange athletic jersey and sturdy running shoes.",
+            "Leo": "A tall teenage boy with short blonde hair, wearing a green track jacket and silver stopwatch necklace."
           },
           "locations": {
-            "Parish Pitch": "A community sports ground featuring grass fields, white goalposts, a stone central fountain, and a wooden dugout."
+            "park_forest": "A lush neighborhood park featuring tall oak trees, winding dirt paths, and high-tech racing gear.",
+            "garage_workshop": "A cluttered suburban garage filled with bicycle parts, toolboxes, and glowing circuit boards."
           },
           "objects": {
-            "Drainage Tile": "A black, highly porous modular rubber square designed to absorb standing water quickly.",
-            "Trophy": "A gleaming silver cup with twin handles and an engraved wooden base celebrating the annual parish derby."
+            "timing_gate": "A rectangular metal archway fitted with flickering blue LED sensor strips.",
+            "brass_lever": "A heavy mechanical switch mounted on a sturdy oak post with visible steel gears."
           }
         },
-        "plot_fingerprint": "5d300c696b912c69588278fd7a0b8312ce8329c5ef6c2683d20b421dd50412da"
+        "plot_fingerprint": "3488813830ff5a975d63ddd1e94b09146d18e57cd7c9e90d62d0c38d52fc9ba8"
       },
       "approved": false
     },
     {
-      "candidate_id": "2e8f8cd7f3ea0834ae10bafb",
-      "source_sha256": "1793ac2abc1cfa6f3fa2633bd7bd4fd824932e754b33fcf158f2700cca55eaa0",
+      "candidate_id": "9246fa185b5f339b37b74e9e",
+      "source_sha256": "f23d2b08f1d2787b57b67e4a3fd00d4fc96053fbfeb43ae773ff95d4afb3d74b",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-27747139fdb7f9d61b6e",
-        "title": "The Coral Spine Conundrum",
-        "hook": "The Fading Glow",
-        "question": "Why is the bioluminescent reef network fading away into total darkness?",
-        "answer": "A blocked thermal vent has starved the primary algae feed.",
+        "content_id": "rayvan-gemini-6ea4e22ee531e3dee843",
+        "title": "The Great Market Gadget Gaffe",
+        "hook": "Morning Chaos at the Stall",
+        "question": "How can two rival inventors settle a dispute over a stolen morning market pitch?",
+        "answer": "By testing both contraptions simultaneously in front of an impatient crowd.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -189,65 +193,64 @@
         ],
         "story_beats": [
           {
-            "headline": "The Fading Glow",
-            "speech": "Look closely at the coral branches. Their inner light is completely gone, replaced by a cold grey ash.",
-            "visual": "forest",
-            "label": "Dying Reef",
+            "headline": "Morning Chaos at the Stall",
+            "speech": "Step aside, Barnaby! My automated pancake flipper is about to revolutionize breakfast across the entire central square right now.",
+            "visual": "robot",
+            "label": "The Rivalry Begins",
             "story_beat": "reveal",
-            "visual_prompt": "An underwater shot of a dying bioluminescent kelp forest where Barnaby the sea otter stands on a grey coral outcrop, pointing at darkened fronds with a worried expression.",
+            "visual_prompt": "Barnaby standing in a crowded morning market, gesturing angrily at a mechanical steam-powered robot holding a spatula, wearing a tweed vest and oversized goggles, brightly lit by early dawn sun.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Tracing the Current",
-            "speech": "The thermal current stopped right here at this massive rubble pile blocking the main cavern entrance.",
-            "visual": "door",
-            "label": "Blocked Passage",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby examining a massive stone blockage inside a dark undersea trench, holding a glowing shell lantern while sediment slowly drifts around him.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Seismic Lever",
-            "speech": "If we wedge this heavy basalt slab into the fissure, we can redirect the magma flow around the blockage.",
+            "headline": "The Gear Grind",
+            "speech": "Your clumsy tin can lacks finesse, Silas! Watch how a real clockwork apparatus handles high-speed waffle production without bursting into flames.",
             "visual": "signal",
-            "label": "Pressure Point",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby and Finn the octopus using a sturdy wooden lever to pry open a glowing basalt fissure, sending bright orange magma pulses toward the blocked vent.",
+            "label": "Escalating Tensions",
+            "story_beat": "build",
+            "visual_prompt": "Silas adjusting a flashing brass signal contraption mounted on a wooden cart, smoke puffing from copper pipes, surrounded by confused market vendors holding empty plates.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Great Surge",
-            "speech": "The thermal current is back! The entire reef is waking up with brilliant turquoise and gold light.",
-            "visual": "planet",
-            "label": "Restored Ecosystem",
+            "headline": "The Interlocking Clashes",
+            "speech": "Oh no, our interlocking drive belts are caught together in a massive knot of spinning iron gears and flying batter!",
+            "visual": "door",
+            "label": "The Mechanical Mishap",
+            "story_beat": "mechanism",
+            "visual_prompt": "Both inventors wrestling with tangled brass gears near a wooden market stall gate, batter splattering everywhere, panicked expressions on their faces under harsh overhead lanterns.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Sweet Harmony",
+            "speech": "Look at that, we accidentally invented the ultimate breakfast machine together, serving delicious stuffed pastries to every single waiting customer.",
+            "visual": "ship",
+            "label": "Delicious Success",
             "story_beat": "payoff",
-            "visual_prompt": "A wide underwater panorama of a fully restored, brightly glowing coral reef bursting with vivid turquoise and gold colors as Barnaby cheers happily in the foreground.",
+            "visual_prompt": "Silas and Barnaby smiling proudly next to a massive, airship-sized bakery contraption hovering above the market square, handing out golden pastries to cheering townsfolk.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A blocked thermal vent starving the primary algae feed.",
-        "decisive_choice": "Re-routing an active seismic fault to clear the vent passage.",
-        "resolution": "The thermal current resumes and restores vibrant reef luminescence.",
+        "central_conflict": "Rival inventors compete for the prime market stall position with overlapping contraptions.",
+        "decisive_choice": "Triggering both devices at once to let the market patrons choose the winner.",
+        "resolution": "The machines combine into a chaotic noodle dispenser, pleasing the crowd and uniting the inventors.",
         "visual_bible": {
-          "style": "Cinematic 3D animation with vibrant underwater lighting, rich textures of moss and stone, and deep blue ocean gradients.",
+          "style": "Bright, colorful stop-motion claymation aesthetic with rich textures, warm lighting, and slapstick visual gags.",
           "characters": {
-            "Barnaby": "A clever sea otter with brown fur, wearing a utility belt made of woven kelp fibers, sporting an adventurous and expressive face.",
-            "Finn": "A wise octopus with purple skin, wearing a small brass monocle over one eye and holding tools with his tentacles."
+            "Silas": "A tall, frantic inventor with wild grey hair, wearing a green tweed waistcoat, smudged round spectacles, and carrying a wrench.",
+            "Barnaby": "A stout, theatrical inventor with a waxed handlebar mustache, wearing a red velvet coat, striped trousers, and a tool belt."
           },
           "locations": {
-            "kelp_forest": "An underwater forest of towering bioluminescent fronds swaying gently in deep ocean currents.",
-            "thermal_trench": "A dark, rocky underwater canyon featuring glowing magma veins and dense piles of grey basalt rubble."
+            "Market Square": "A bustling cobblestone marketplace filled with striped canvas awnings, wooden carts, and hungry villagers."
           },
           "objects": {
-            "shell_lantern": "A small nautilus shell containing a captured glowing jellyfish, emitting a warm golden beam of light.",
-            "basalt_lever": "A heavy, weathered stone bar with etched ancient markings used for mechanical leverage underwater."
+            "Pancake Robot": "A clumsy copper automaton with four arms holding spatulas and a glowing pressure gauge on its chest.",
+            "Brass Contraption": "An intricate tower of spinning cogs, dials, and a red warning beacon that flashes whenever batter overheats."
           }
         },
-        "plot_fingerprint": "bb81cd70a35084491c92210db03107822cf2bb582507ecef9e8a8d7c45a9d88f"
+        "plot_fingerprint": "35722ad637b17467feed0bd13ad88a7c5a37d76e2a1298d8a583b72a0c572fd5"
       },
       "approved": false
     }
