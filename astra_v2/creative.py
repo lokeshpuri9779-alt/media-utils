@@ -85,6 +85,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
     from astra_v2.free_story_engine import catalog as free_catalog
     from astra_v2.story_forge import catalog as forge_catalog
     from astra_v2.production_story_gate import approved_authored_candidates
+    from astra_v2.story_handoff import approved_story_context
     from astra_v2.omniroute_local import catalog as routed_catalog
     from studio_renderer import render_short
     from quality_lab import evaluate_studio_render
@@ -378,7 +379,10 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 "genre": story["genre"], "content_id": story["content_id"],
                 "source": story.get("source"), "plot_key": story.get("plot_key", ""),
                 "plot_fingerprint": story.get("plot_fingerprint", ""),
-                "story_beats": [{"speech": str(beat.get("speech") or "")} for beat in story.get("story_beats", [])],
+                # Keep the verified four-beat storyboard intact. Saving only
+                # narration strips "visual" and breaks the publisher's
+                # independent renderer-eligibility check after a valid render.
+                "story_context": approved_story_context(story),
                 **{key: story[key] for key in ("central_conflict", "decisive_choice", "resolution") if story.get(key)},
                 # Preserve explicit, reviewed character records for later
                 # post-publication continuity; never infer them from narration.
@@ -461,7 +465,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
             "genre": str(meta.get("genre") or ""), "format": "short",
             "plot_key": str(meta.get("plot_key") or ""),
             "plot_fingerprint": str(meta.get("plot_fingerprint") or ""),
-            "story_beats": meta.get("story_beats") or [],
+            **(meta.get("story_context") or {}),
             **{key: meta[key] for key in ("central_conflict", "decisive_choice", "resolution") if meta.get(key)},
             "character_id": meta.get("character_id"),
             "character_name": meta.get("character_name"),
