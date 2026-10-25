@@ -54,6 +54,28 @@ PANTS = (42, 55, 79)
 RADIO = (62, 73, 93)
 GOLD = (249, 190, 92)
 
+# Every approved beat gets an authored performance intent, instead of the
+# same facial expression and raised arm throughout the full story. The double
+# can override the protagonist's mood in explicitly choreographed scenes.
+PERFORMANCE = {
+    "discover_radio": ("curious", 1, "consider"),
+    "trace_cable": ("focused", -1, "consider"),
+    "hear_warning": ("afraid", 1, "protect"),
+    "flee_door": ("afraid", -1, "protect"),
+    "guard_knocking_door": ("suspicious", 1, "protect"),
+    "inspect_generator_clue": ("focused", 1, "consider"),
+    "inspect_future_photograph": ("startled", 1, "protect"),
+    "stop_stranger_switch": ("defiant", 1, "open"),
+    "survey_dead_city": ("afraid", 1, "protect"),
+    "inspect_reverse_clock": ("puzzled", 1, "consider"),
+    "study_altered_photographs": ("grieving", 1, "consider"),
+    "confront_mara_double": ("startled", 1, "open"),
+    "face_duplicate_at_countdown": ("suspicious", 1, "open"),
+    "warn_parallel_cities": ("urgent", 1, "open"),
+    "split_glass_key": ("determined", 1, "open"),
+    "seal_and_reveal_sea_door": ("hopeful", 1, "consider"),
+}
+
 
 def validate_human_scene(shot):
     """Permit only explicitly storyboarded actions in two known serialized episodes."""
@@ -151,62 +173,117 @@ def _door(draw, open_amount):
         _line(draw, ((xx,695),(xx,1115)), (70+k*25, 112+k*19, 157+k*14), 5)
 
 
-def _mara(draw, x, y, t, *, reaching=False, alarm=False, running=False, carrying=False):
-    """Persistent cel-shaded silhouette with articulated arms/legs and expression."""
+def _draw_mara_face(draw, x, y, t, *, emotion="curious", gaze=0):
+    """Readable brows, eyes and mouth without changing Mara's head design.
+
+    Emotions are author-selected for each narrated action; animation is
+    deterministic and deliberately NOT a false claim of phoneme lip-sync.
+    """
+    moods = {
+        "curious": (5, -1, "smile"),
+        "focused": (0, -6, "line"),
+        "afraid": (12, -10, "open"),
+        "suspicious": (3, 6, "flat"),
+        "startled": (15, -8, "open"),
+        "defiant": (-5, 9, "flat"),
+        "puzzled": (4, 4, "wry"),
+        "grieving": (-4, -1, "frown"),
+        "urgent": (9, 1, "open"),
+        "determined": (-7, 8, "line"),
+        "hopeful": (6, -5, "smile"),
+        "knowing": (0, 4, "smirk"),
+    }
+    if emotion not in moods or gaze not in (-1, 0, 1):
+        raise CreativeReject("Unsupported authored Mara emotion or gaze")
+    raise_brow, slope, mouth = moods[emotion]
+    eye_y = y - 170
+    blink = (t % 3.4) < .105
+    eye_shift = int(gaze * 5 + 2 * math.sin(t * .68))
+    for dx in (-28, 30):
+        ex=x+dx
+        if blink:
+            _line(draw, ((ex-12, eye_y), (ex+11, eye_y)), INK, 4)
+        else:
+            draw.ellipse((ex-12, eye_y-12, ex+12, eye_y+11),
+                         fill=(245, 244, 239), outline=HAIR, width=2)
+            px=ex+eye_shift
+            draw.ellipse((px-6, eye_y-8, px+6, eye_y+8), fill=INK)
+            draw.ellipse((px-3, eye_y-6, px, eye_y-3), fill=(235, 235, 226))
+        # Brow angles read at normal 1080x1920 viewing resolution.
+        offset=raise_brow+(3 if dx<0 and emotion=="suspicious" else 0)
+        draw.line(((ex-15, eye_y-24-offset-slope),
+                   (ex+15, eye_y-24-offset+slope)), fill=HAIR, width=7)
+    if mouth=="open":
+        opening=7+int(2*math.sin(t*2.4))
+        draw.ellipse((x-12, y-123-opening, x+12, y-109+opening),
+                     fill=(75, 40, 54), outline=(145, 80, 87), width=2)
+    elif mouth=="frown":
+        draw.arc((x-24,y-116,x+25,y-85),178,354,fill=(111,62,70),width=6)
+    elif mouth in ("flat", "line"):
+        _line(draw, ((x-18,y-109),(x+18,y-109+(3 if mouth=="flat" else 0))),
+              (111,62,70), 5)
+    elif mouth in ("wry","smirk"):
+        _line(draw, ((x-18,y-117),(x+18,y-109 if mouth=="smirk" else y-115)),
+              (111,62,70), 5)
+    else:
+        draw.arc((x-25,y-139,x+28,y-106),0,178,fill=(111,62,70),width=6)
+
+
+def _mara(draw, x, y, t, *, reaching=False, alarm=False, running=False,
+          carrying=False, emotion="curious", gaze=0, gesture="consider"):
+    """Persistent character with two-joint limbs and authored facial acting."""
+    if not math.isfinite(t):
+        raise CreativeReject("Actor animation time must be finite")
+    if gesture not in ("consider", "protect", "open"):
+        raise CreativeReject("Unsupported actor hand gesture")
     bounce=int(6*math.sin(t*2.8))
     if running:
         bounce=int(15*math.sin(t*11))
     y+=bounce
     limb=int(28*math.sin(t*10)) if running else int(7*math.sin(t*2))
-    # Legs and shoes behind the body.
+    # Keep the shoes in the scene at every pose.
     _line(draw, ((x-37,y+200),(x-55-limb,y+340)), PANTS, 39)
     _line(draw, ((x+39,y+200),(x+56+limb,y+340)), PANTS, 39)
     _line(draw, ((x-56-limb,y+339),(x-106-limb,y+339)), INK, 28)
     _line(draw, ((x+56+limb,y+339),(x+106+limb,y+339)), INK, 28)
-    # Back ponytail behind head makes Mara recognisable across shots.
+    # Fixed outfit and hairstyle preserve serialized Mara continuity.
     draw.ellipse((x-113,y-220,x-39,y-85),fill=HAIR)
     draw.ellipse((x-87,y-282,x+91,y-71),fill=HAIR,outline=INK,width=8)
     draw.ellipse((x-66,y-253,x+70,y-94),fill=SKIN,outline=INK,width=6)
     draw.polygon(((x-75,y-251),(x-11,y-279),(x+89,y-218),(x+57,y-248),
                   (x+19,y-228),(x-72,y-208)), fill=HAIR)
-    # Eyes and animated blink; eyebrows convey alarm at the warning.
-    blink=abs(math.sin(t*1.55))>.991
-    for dx in (-28,30):
-        eye_y=y-170
-        if blink:
-            _line(draw,((x+dx-10,eye_y),(x+dx+10,eye_y)), INK, 4)
-        else:
-            draw.ellipse((x+dx-9,eye_y-10,x+dx+9,eye_y+9),fill=(247,247,242))
-            draw.ellipse((x+dx-3,eye_y-7,x+dx+5,eye_y+7),fill=INK)
-        offset=-13 if alarm else -22
-        _line(draw,((x+dx-12,eye_y+offset),(x+dx+11,eye_y+offset+(4 if alarm else 0))),HAIR,5)
-    if alarm:
-        draw.ellipse((x-11,y-122,x+11,y-92),fill=(74,40,53))
-    else:
-        draw.arc((x-26,y-135,x+29,y-105),0,175,fill=(111,62,70),width=5)
+    _draw_mara_face(draw,x,y,t,emotion=emotion,gaze=gaze)
     draw.polygon(((x-51,y-80),(x+49,y-80),(x+86,y+210),(x-91,y+210)),
                  fill=JACKET,outline=INK,width=8)
     draw.polygon(((x-23,y-76),(x+23,y-76),(x+11,y+180),(x-14,y+180)),
                  fill=(215, 224, 216))
     draw.line(((x,y-64),(x,y+188)),fill=(20,65,85),width=6)
     draw.ellipse((x-8,y+125,x+8,y+141),fill=GOLD)
-    # A reach is a timed shoulder-to-hand motion, not a frozen raised arm
-    # for the entire 12-second narration beat. Gesture eases toward the prop.
     progress=max(0.0,min(1.0,t/1.15))
     progress=progress*progress*(3-2*progress)
-    left_hand=(x-124,y+128)
+    if gesture=="protect":
+        left_hand=(x-20,y+50+int(7*math.sin(t*2)))
+    elif gesture=="open":
+        left_hand=(x-161,y+35-int(8*math.sin(t*1.5)))
+    else:
+        left_hand=(x-40,y-42+int(5*math.sin(t*.8)))
     if reaching:
-        right_hand=(x+round(113+32*progress),
-                    y+round(155-193*progress))
+        right_hand=(x+round(113+32*progress),y+round(155-193*progress))
     else:
         right_hand=(x+144,y+10) if carrying else (x+113+limb,y+155)
     if running:
         left_hand=(x-149,y+50-limb)
         right_hand=(x+133,y+55+limb)
-    _line(draw, ((x-58,y-40),left_hand), JACKET, 35)
-    _line(draw, ((x+54,y-40),right_hand), JACKET, 35)
-    for hx,hy in (left_hand,right_hand):
-        draw.ellipse((hx-17,hy-17,hx+17,hy+17),fill=SKIN,outline=INK,width=3)
+    # Bent elbows create a clear two-segment gesture, not a straight fixed bar.
+    left_elbow=(x-105,y+28+round((left_hand[1]-y)*.25))
+    right_elbow=(x+112,y+30+round((right_hand[1]-y)*.21))
+    for shoulder, elbow, hand in (
+        ((x-58,y-40),left_elbow,left_hand),
+        ((x+54,y-40),right_elbow,right_hand),
+    ):
+        _line(draw,(shoulder,elbow,hand),JACKET,32)
+        draw.ellipse((hand[0]-17,hand[1]-17,hand[0]+17,hand[1]+17),
+                     fill=SKIN,outline=INK,width=3)
 
 
 def _generator(draw, t):
@@ -421,6 +498,11 @@ def draw_human_scene(image, shot, t):
     if image.mode != "RGB" or image.size != (1080, 1920):
         raise CreativeReject("Human episode requires RGB 1080x1920 Studio frame")
     action=shot["story_human_action"]
+    mood, look, gesture = PERFORMANCE[action]
+    def performer(draw, x, y, time, **overrides):
+        opts = {"emotion": mood, "gaze": look, "gesture": gesture}
+        opts.update(overrides)
+        return _mara(draw, x, y, time, **opts)
     d=ImageDraw.Draw(image)
     # Stage framing and a persistent observatory silhouette.
     d.rounded_rectangle((80,555,1000,1235),radius=28,
@@ -434,13 +516,13 @@ def draw_human_scene(image, shot, t):
     if action == "discover_radio":
         _radio(d,750,995,t,glow=True)
         _line(d,((750,1080),(750,1195)),(134,112,84),16)
-        _mara(d,365+int(18*math.sin(t*.5)),885,t,reaching=True)
+        performer(d,365+int(18*math.sin(t*.5)),885,t,reaching=True)
     elif action == "trace_cable":
         _radio(d,757,945,t)
         # Distinct floor cable connecting radios, read as a traceable object.
         _line(d,((751,1039),(718,1158),(540,1185),(373,1108)),GOLD,10)
         _radio(d,342,1109,t,glow=False,portable=True)
-        _mara(d,605,873,t,reaching=True)
+        performer(d,605,873,t,reaching=True)
     elif action == "hear_warning":
         _door(d,0.32+0.08*math.sin(t))
         _radio(d,748,1065,t,glow=True,portable=True)
@@ -450,11 +532,11 @@ def draw_human_scene(image, shot, t):
             d.rectangle((cx,710,cx+31,812), fill=(27,36,57))
             if t<1.2+(j*.22):
                 d.rectangle((cx+7,736,cx+21,755),fill=GOLD)
-        _mara(d,350,872,t,reaching=True,alarm=True)
+        performer(d,350,872,t,reaching=True,alarm=True)
     elif action == "flee_door":
         openness=max(.08,.76-min(1,t/5)*.63)
         _door(d,openness)
-        _mara(d,420-int(min(140,t*29)),881,t,running=True,carrying=True,alarm=True)
+        performer(d,420-int(min(140,t*29)),881,t,running=True,carrying=True,alarm=True)
         # The radio is visibly carried while Mara runs.
         _radio(d,525-int(min(140,t*29)),979+int(13*math.sin(t*11)),t,portable=True)
     elif action == "guard_knocking_door":
@@ -466,15 +548,15 @@ def draw_human_scene(image, shot, t):
             d.arc((x-radius,872-radius,x+radius,872+radius),
                   -85,85,fill=(130,187,222),width=4)
         _radio(d,350,1111,t,portable=True)
-        _mara(d,368,857,t,alarm=True)
+        performer(d,368,857,t,alarm=True)
     elif action == "inspect_generator_clue":
         _generator(d,t)
         _notebook(d,t)
-        _mara(d,375,865,t,reaching=True)
+        performer(d,375,865,t,reaching=True)
     elif action == "inspect_future_photograph":
         _future_photograph(d)
         _stranger(d,795,770,t)
-        _mara(d,327,875,t,reaching=True,alarm=True)
+        performer(d,327,875,t,reaching=True,alarm=True)
     elif action == "stop_stranger_switch":
         _city_power(d,t)
         _door(d,min(.9,.25+max(0,t-.9)*.1))
@@ -484,48 +566,51 @@ def draw_human_scene(image, shot, t):
         d.line(((838,771),(838,738 if t>1.1 else 804)),
                fill=(248,191,103),width=11)
         _stranger(d,675,856,t,touching_switch=True)
-        _mara(d,279,870,t,reaching=True,alarm=True)
+        performer(d,279,870,t,reaching=True,alarm=True)
     elif action == "survey_dead_city":
         _door(d,.82)
         _alternate_city(d,t)
-        _mara(d,337,864,t,reaching=True,alarm=True)
+        performer(d,337,864,t,reaching=True,alarm=True)
     elif action == "inspect_reverse_clock":
         _door(d,.42)
         _reverse_clock(d,t)
-        _mara(d,346,865,t,reaching=True,alarm=True)
+        performer(d,346,865,t,reaching=True,alarm=True)
     elif action == "study_altered_photographs":
         _photo_wall(d,t)
-        _mara(d,343,868,t,reaching=True,alarm=True)
+        performer(d,343,868,t,reaching=True,alarm=True)
     elif action == "confront_mara_double":
         _door(d,.73)
         # An independently moving matching human puppet, not a stranger/animal.
         # The double wears Mara's same palette and silhouette for continuity.
-        _mara(d,307,865,t,reaching=True,alarm=True)
-        _mara(d,748+int(10*math.sin(t*.85)),865,t,reaching=True,alarm=True)
+        performer(d,307,865,t,reaching=True,alarm=True)
+        performer(d,748+int(10*math.sin(t*.85)),865,t,reaching=True,alarm=True,
+                  emotion="knowing",gaze=-1)
         _blue_glass_key(d,866,969+int(6*math.sin(t*1.6)))
         _radio(d,255,1131,t,portable=True)
         _radio(d,865,1131,t,portable=True)
     elif action == "face_duplicate_at_countdown":
         _door(d,.68)
-        _mara(d,312,861,t,reaching=True,alarm=True)
-        _mara(d,775,861,t,reaching=True,alarm=True)
+        performer(d,312,861,t,reaching=True,alarm=True)
+        performer(d,775,861,t,reaching=True,alarm=True,
+                  emotion="knowing",gaze=-1)
         _blue_glass_key(d,890,956+int(5*math.sin(t*1.2)))
         _radio(d,254,1123,t,portable=True)
         _radio(d,868,1123,t,portable=True)
     elif action == "warn_parallel_cities":
         _dual_city_futures(d,t)
-        _mara(d,309,862,t,alarm=True)
-        _mara(d,515,866,t,reaching=True,alarm=True)
+        performer(d,309,862,t,alarm=True)
+        performer(d,515,866,t,reaching=True,alarm=True)
     elif action == "split_glass_key":
         _door(d,.57)
-        _mara(d,280,867,t,reaching=True,alarm=True)
-        _mara(d,769,866,t,reaching=True,alarm=True)
+        performer(d,280,867,t,reaching=True,alarm=True)
+        performer(d,769,866,t,reaching=True,alarm=True,
+                  emotion="knowing",gaze=-1)
         _key_halves(d,t)
         _radio(d,248,1145,t,portable=True)
         _radio(d,849,1145,t,portable=True)
     elif action == "seal_and_reveal_sea_door":
         _sealed_door_stars(d,t)
-        _mara(d,298,868,t,reaching=True)
+        performer(d,298,868,t,reaching=True)
         _notebook_sea_ending(d,t)
     else:
         raise CreativeReject("Unknown human action")
