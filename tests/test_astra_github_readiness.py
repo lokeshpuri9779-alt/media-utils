@@ -83,7 +83,9 @@ class GithubReadinessTests(unittest.TestCase):
         self.assertIn("ASTRA_FFPROBE_EXTRACTED_RUNTIME_UNAVAILABLE=1", preload)
         self.assertIn("ASTRA_FFPROBE_REAL_MP4_SMOKE=passed", preload)
         self.assertIn("ffprobe -version >/dev/null 2>&1", preload)
-        self.assertIn("apt-get install -y --no-install-recommends ffmpeg", preload)
+        self.assertIn("apt-get install -y --no-install-recommends", preload)
+        self.assertIn("-o Acquire::Retries=0", preload)
+        self.assertIn("-o DPkg::Lock::Timeout=10 ffmpeg", preload)
         self.assertIn("color=c=black:s=160x288:r=2", preload)
         self.assertIn('"codec_type") == "video"', preload)
         self.assertLess(preload.index("ASTRA_FFPROBE_REAL_MP4_SMOKE=passed"),
