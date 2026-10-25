@@ -79,8 +79,11 @@ class AssetPackCompositorTests(unittest.TestCase):
                 self.assertEqual(result.size,size)
                 self.assertNotEqual(result.getpixel((size[0]//2,size[1]//2)),(0,0,0))
             info_before=_cached_pack_background.cache_info()
-            apply_pack_background(Image.new("RGB",(1080,1920)),{"story_environment":"forest"},
-                                  "stable-scene",root=root,video_format="shorts")
+            # This assertion tests mutable-pack cache bypass. Pin its mode
+            # explicitly even when the containing workflow audits immutable packs.
+            with patch.dict(os.environ, {"ASTRA_ASSET_PACK_IMMUTABLE":"0"}):
+                apply_pack_background(Image.new("RGB",(1080,1920)),{"story_environment":"forest"},
+                                      "stable-scene",root=root,video_format="shorts")
             info_after=_cached_pack_background.cache_info()
             # Mutable packs deliberately bypass decoded-image caching.
             self.assertEqual(info_after.hits,info_before.hits)
