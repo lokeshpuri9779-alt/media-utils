@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "b273138036b989bd819a6329",
-      "source_sha256": "7177c900e377cdcd4cbf44f63b23f07415a9f11ec2b3424934ae4cc9b8613492",
+      "candidate_id": "7ef24ac2931dd8a5e2b8d743",
+      "source_sha256": "97c35c18a94a5aa4051f5fafd21ce00bc1b69b849b9cc8410898744e17c258f4",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-7ef41017b423e9d733d5",
-        "title": "The Great Turnip Toaster Fiasco",
-        "hook": "The Smokey Demonstration",
-        "question": "Can Barnaby sell his vegetable appliance before it explodes?",
-        "answer": "Yes, by rebranding the shrapnel hazard as avant-garde art.",
+        "content_id": "rayvan-gemini-da28510e3dd1bd532258",
+        "title": "The Great Tomato Launch",
+        "hook": "The Mechanical Menace",
+        "question": "Can a chaotic automated peeler save a failing vegetable stall?",
+        "answer": "Yes, by pivoting into a hyper-speed slicing spectacle.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,161 +29,161 @@
         ],
         "story_beats": [
           {
-            "headline": "The Smokey Demonstration",
-            "speech": "Gather round good citizens because this magnificent steam-powered brass device will revolutionize your breakfast turnips forever and ever.",
+            "headline": "The Mechanical Menace",
+            "speech": "Watch out everybody, this titanium marvel will skin your potatoes before you even pull them from the sack!",
             "visual": "robot",
-            "label": "The Invention",
+            "label": "Robot Peeler",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly behind a wooden market stall, wearing a soot-stained waistcoat and goggles, pointing proudly at a hissing, clanking brass turnip toaster while thick grey smoke billows from its top funnel.",
+            "visual_prompt": "Inventor Barnaby stands in a crowded market stall, holding a smoking mechanical peeler while frightened shoppers duck from flying vegetable peelings.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Overheating Danger",
-            "speech": "Oh dear me the pressure gauges are spinning dangerously fast and now it is vibrating so loudly the cabbages are rattling.",
+            "headline": "The Desperate Modification",
+            "speech": "If it refuses to peel politely, we will just turn the dial up until it shoots the vegetables across the square.",
+            "visual": "ship",
+            "label": "Control Panel",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby adjusts glowing copper levers on a makeshift control console bolted to his wooden vegetable cart while wearing protective goggles.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Salad Barrage",
+            "speech": "Duck and catch your dinner customers, because these perfectly sliced tomatoes are coming in hot and fast!",
+            "visual": "signal",
+            "label": "Launch Indicator",
+            "story_beat": "mechanism",
+            "visual_prompt": "A flashing neon signal beacon atop the stall pulses rapidly as bright red tomato slices launch through the air toward eager customers with bowls.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Market Triumph",
+            "speech": "Who needs quiet cooking when you can have the fastest flying produce delivery service in the entire city?",
+            "visual": "door",
+            "label": "Stall Entrance",
+            "story_beat": "payoff",
+            "visual_prompt": "Barnaby smiles proudly behind his overflowing stall entrance while cheering customers hold out plates to catch incoming vegetable slices.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A malfunctioning vegetable peeler causes market chaos instead of helping sales.",
+        "decisive_choice": "Repurposing the spinning blades to launch sliced tomatoes directly into salads.",
+        "resolution": "The automated launcher creates the busiest and most entertaining stall in the market.",
+        "visual_bible": {
+          "style": "Bright, comedic animated film aesthetic with vibrant saturated colors and expressive character animations.",
+          "characters": {
+            "Barnaby": "An energetic inventor with unruly red hair, wearing a grease-stained yellow apron and oversized round spectacles."
+          },
+          "locations": {
+            "Market Square": "A bustling cobblestone outdoor market filled with striped canvas awnings and wooden merchant stalls."
+          },
+          "objects": {
+            "Peeler Contraption": "A sprawling contraption of shiny steel gears, copper tubes, and erratic mechanical arms.",
+            "Control Console": "A heavy wooden box mounted with blinking green indicator lamps and thick brass toggle switches."
+          }
+        },
+        "plot_fingerprint": "7ec048e3a67cf1d1e047b5704247951caa9e10bf1ea9950700c9a0f7f6db783c"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "e9bd45056cc45397f6187ca6",
+      "source_sha256": "945a235d8098719f29ac5e7cd82f8ed2df0835651e054ea81240532f1e230bfe",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-cc083f2dd31a9df2b15a",
+        "title": "The Midnight Express Mystery",
+        "hook": "The Warning Signal",
+        "question": "Can a runaway freight train be safely diverted before it hits the central terminal?",
+        "answer": "Yes, by manually overriding the rusted mechanical junction lever in the signal tower.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Warning Signal",
+            "speech": "Look at the master tracking board! That heavy cargo transport just lost its primary magnetic brakes entirely.",
             "visual": "signal",
             "label": "The Warning",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby frantically waves his hands in alarm while staring at the brass toaster, whose red warning lights are flashing wildly as raw turnip slices begin to shoot out sideways like tiny missiles.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Desperate Sacrifice",
-            "speech": "Take this giant orange sphere instead you hungry mechanical beast and spare the innocent fruit stands from total destruction.",
-            "visual": "door",
-            "label": "The Choice",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby uses both arms to shove a massive, round prize pumpkin directly into the front loading hatch of the violently shaking, steam-hissing brass toaster.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Spectacular Triumph",
-            "speech": "Behold the ultimate culinary masterpiece created entirely by modern technology and priced to sell before sunset today.",
-            "visual": "ship",
-            "label": "The Success",
-            "story_beat": "payoff",
-            "visual_prompt": "Barnaby beams happily next to the quieted brass toaster, holding up a perfectly carved, smiling jack-o-lantern shaped turnip sculpture while amazed market shoppers cheer and hold out bags of gold coins.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Barnaby's automatic turnip toaster overheats and threatens to blast the farmers market stalls.",
-        "decisive_choice": "Barnaby feeds the roaring machine the market mayor's prize-winning pumpkin.",
-        "resolution": "The machine carves a giant smiling pumpkin face, winning first prize and instant market-wide fame.",
-        "visual_bible": {
-          "style": "Bright, charming stop-motion animation aesthetic with rich textures and vibrant market colors.",
-          "characters": {
-            "Barnaby": "An eccentric inventor in his forties with wild grey hair, wire-rimmed spectacles, a stained tweed waistcoat, and permanently smudged cheeks."
-          },
-          "locations": {
-            "Farmers Market": "A bustling cobblestone square lined with striped canvas awnings, wooden crates overflowing with fresh vegetables, and fluttering colorful flags."
-          },
-          "objects": {
-            "Turnip Toaster": "A towering contraption made of polished brass pipes, copper dials, exposed pressure gauges, and a smoking top funnel."
-          }
-        },
-        "plot_fingerprint": "7e195288d8b178f9557a31fd8086c575f093b422920f3512574eb47846bb83b0"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "904a58a2e30e4f6caad5a701",
-      "source_sha256": "e36fbd14f3ffcbae8d74398812766407507a232b045342f9ebe6308614ac34e8",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-136ecbc2efa16c5a2463",
-        "title": "The Weaver's Last Loom",
-        "hook": "The Hidden Thread",
-        "question": "Can true friendship survive the burden of a devastating secret?",
-        "answer": "Yes, through complete honesty and shared sacrifice.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Hidden Thread",
-            "speech": "I accidentally dropped the lantern and burned the royal indigo silk while you were fetching the spring water.",
-            "visual": "forest",
-            "label": "The Discovery",
             "story_beat": "reveal",
-            "visual_prompt": "Eliza standing inside the dark village workshop holding a charred indigo silk cloth, looking terrified at Julian who enters through the wooden door holding a clay water pitcher.",
+            "visual_prompt": "Station master Clara points frantically at the glowing red terminal board inside the control office, wearing a navy wool coat and brass lapel pin, while sparks fly from the master dispatch panel.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Silent Pact",
-            "speech": "We cannot let the master take the blame for this terrible accident; we must fix it before sunrise.",
-            "visual": "door",
-            "label": "The Choice",
-            "story_beat": "build",
-            "visual_prompt": "Julian and Eliza standing close together inside the workshop at night, clasping hands firmly with determined expressions, illuminated by a single glowing oil lamp on the oak table.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Desperate Trade",
-            "speech": "Take my family silver brooch to the market trader to buy replacement threads of the exact same dye.",
-            "visual": "ship",
-            "label": "The Sacrifice",
-            "story_beat": "mechanism",
-            "visual_prompt": "Julian handing a tarnished silver heirloom brooch to Eliza across a wooden merchant counter, while cargo boats sway gently on the misty river outside the open window.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A New Dawn",
-            "speech": "We faced the elder together, accepted our punishment, and wove a stronger bond than any loom could ever hold.",
+            "headline": "The Unexpected Helper",
+            "speech": "Take this heavy iron master key and follow my tracks through the service tunnel right away.",
             "visual": "robot",
-            "label": "The Redemption",
+            "label": "The Guide",
+            "story_beat": "build",
+            "visual_prompt": "An eccentric maintenance automaton in a patched copper vest hands a heavy iron key to Clara inside the dim subterranean station corridor, illuminated by flickering overhead bulbs.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Junction Switch",
+            "speech": "We must heave this frozen lever together before the runaway freight reaches the main platform junction.",
+            "visual": "door",
+            "label": "The Choice",
+            "story_beat": "mechanism",
+            "visual_prompt": "Clara and the copper automaton heave with all their might against a frozen iron track lever inside the drafty signal tower, with rain lashing against the tall glass window panes.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Safe Arrival",
+            "speech": "The heavy cargo cars have safely rolled onto the empty siding, preventing a catastrophic collision.",
+            "visual": "ship",
+            "label": "The Rescue",
             "story_beat": "payoff",
-            "visual_prompt": "Eliza and Julian smiling brightly while sitting side by side at a large restored wooden loom in the sunlit village square, weaving a vibrant new tapestry together.",
+            "visual_prompt": "Clara smiles with relief on the station platform as the massive freight train rumbles safely past on the alternate track under the bright morning sun.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Sharing the blame for a ruined royal harvest tapestry",
-        "decisive_choice": "Confessing to the village elder together",
-        "resolution": "Working side by side to replace the tapestry",
+        "central_conflict": "A rogue freight train rolling without brakes threatens the crowded terminal.",
+        "decisive_choice": "Climbing the old signal tower to manually throw the heavy mechanical switch.",
+        "resolution": "The train safely diverts onto an empty siding, avoiding disaster.",
         "visual_bible": {
-          "style": "Cinematic historical realism with warm, natural lighting and rich earthy textures.",
+          "style": "Cinematic Victorian industrial realism with warm brass and cool blue lighting accents.",
           "characters": {
-            "Eliza": "A young apprentice weaver with braided brown hair, wearing a green wool tunic and linen apron.",
-            "Julian": "A skilled village woodworker with curly dark hair, wearing a patched leather vest and sturdy canvas trousers."
+            "Clara": "A determined station master with amber hair tied back in a bun, wearing a practical navy wool coat and silver pocket watch.",
+            "Pip": "A retrofitted maintenance automaton with a polished copper chassis, glowing green optical sensors, and a patched canvas vest."
           },
           "locations": {
-            "workshop": "A rustic stone cottage filled with wooden looms, spools of colorful yarn, and large shuttered windows.",
-            "village_square": "A cobblestone courtyard surrounded by thatched-roof houses and blooming apple trees."
+            "Terminal": "A grand 19th-century railway station featuring arched steel roofs, soot-stained brick walls, and brass clock towers.",
+            "SignalTower": "A dusty multi-level wooden control room packed with mechanical levers, ticker tape machines, and tall arched windows."
           },
           "objects": {
-            "silk_cloth": "A large bolt of deep indigo silk fabric with a scorched and blackened corner.",
-            "silver_brooch": "An antique circular silver brooch engraved with oak leaf patterns and a tarnished finish.",
-            "oil_lamp": "A heavy iron-cast oil lamp with a flickering amber flame casting long shadows."
+            "master_key": "A heavy wrought-iron key with an ornate clover-shaped handle, tarnished from decades of use.",
+            "dispatch_panel": "A massive oak-framed control board embedded with brass toggle switches, copper wiring, and glowing vacuum tubes."
           }
         },
-        "plot_fingerprint": "ad7a44fd62019aafa9747ab235d9f228c5b9412bd44329bd1468a4c74a3ad91b"
+        "plot_fingerprint": "743725d384b3669cd16c4938b01d1545044c3a38b447ca3efc2298a6f5bfa898"
       },
       "approved": false
     },
     {
-      "candidate_id": "88d91499fb21c3be6c59a873",
-      "source_sha256": "517454360fffcf1e3172481371fb2cac9edfb3c3d272a7f53317a8364c2192ed",
+      "candidate_id": "3d38b9776e3cdf9834e9665b",
+      "source_sha256": "8593c74dcd0eccc35558bc592d5231178b364595114e3015ebc1ed3983e2e579",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-7298910bc8d0f4bd6caa",
-        "title": "The Coral Symphony of Echo Reef",
-        "hook": "The Fractured Melody",
-        "question": "Can Finny the sea turtle convince the singing corals to stop before the sonic shockwave shatters their underwater sanctuary?",
-        "answer": "Finny uses a rhythmic clicking melody to synchronize the erratic singing corals, restoring harmonic balance to the reef.",
+        "content_id": "rayvan-gemini-78648f804f42c49f6e34",
+        "title": "Frostline Echo",
+        "hook": "Glacial Distress",
+        "question": "Will Dr. Aris risk the final snowcat fuel reserve to rescue a stranded seismic team before the blizzard collapses the crevasse?",
+        "answer": "Yes, Aris drains the primary heating matrix to power the winch, saving the team while securing the seismic data.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -191,63 +191,63 @@
         ],
         "story_beats": [
           {
-            "headline": "The Fractured Melody",
-            "speech": "Listen closely to the jagged pitch, my friends! If this discordant rhythm continues another hour, our fragile nursery caves will collapse completely.",
+            "headline": "Glacial Distress",
+            "speech": "We have twenty minutes before the southern ridge collapses entirely into the ice shelf. Send the heavy winch immediately!",
             "visual": "signal",
-            "label": "Abnormal Vibrations",
+            "label": "Emergency Beacon",
             "story_beat": "reveal",
-            "visual_prompt": "Finny the green sea turtle with wide anxious eyes and a scuffed jade shell floating inside a glowing blue coral grotto, examining jagged purple soundwave ripples glowing in the water with nobody holding props.",
+            "visual_prompt": "Dr. Aris stands inside the dimly lit communications room staring at a flashing red telemetry screen, wearing a heavy orange parka with frost-rimed fur, holding a crackling satellite radio.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Gathering the Resonance Shells",
-            "speech": "We must collect these scattered resonance pearls from the deep trench to build a proper acoustic dampener before the next shockwave strikes.",
-            "visual": "forest",
-            "label": "Collection Quest",
+            "headline": "The Power Dilemma",
+            "speech": "If I divert the primary habitat manifold to run the winch motor, the station interior will freeze solid within the hour.",
+            "visual": "robot",
+            "label": "Thermal Control",
             "story_beat": "build",
-            "visual_prompt": "Finny with a determined expression swimming through a dense underwater kelp forest, using his flippers to carefully gather glowing golden pearl shells into a woven sea-grass basket he holds in his mouth.",
+            "visual_prompt": "Dr. Aris stands in the station utility corridor wearing a heavy orange parka, flipping a large steel circuit breaker lever, while automated diagnostic lights flicker red against the frost-covered metal walls.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Calibrating the Tuning Stones",
-            "speech": "Place the heavy amber tuning stones precisely along the main fissure to redirect the destructive acoustic waves safely away from the eggs.",
-            "visual": "door",
-            "label": "Acoustic Barrier",
+            "headline": "The Ascent",
+            "speech": "Hold onto the harness! The cable is taking the full strain of the ice slide now, keep your balance steady!",
+            "visual": "ship",
+            "label": "Winch Mechanism",
             "story_beat": "mechanism",
-            "visual_prompt": "Finny with a focused expression hovering before a natural stone archway in a sunken temple, carefully positioning glowing amber stones into the cracked bedrock with his front flippers while holding no other props.",
+            "visual_prompt": "Dr. Aris operates the exterior crane controls on the icy observation deck wearing heavy leather-palmed mittens, watching a steel cable pull a rescue cage up through the dark frozen crevasse.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Harmonious Finale",
-            "speech": "By matching their chaotic tempo with our synchronized clicks, we have finally guided the coral singers back into a peaceful, unbroken harmony.",
-            "visual": "planet",
-            "label": "Restored Equilibrium",
+            "headline": "Safe Return",
+            "speech": "We made it. The seismic data is secure in the vault, and every single researcher is wrapped in thermal blankets.",
+            "visual": "forest",
+            "label": "Safe Haven",
             "story_beat": "payoff",
-            "visual_prompt": "Finny with a joyful, relieved smile resting peacefully in the center of the luminous blue coral grotto, surrounded by calm turquoise water and soft pastel pink light patterns, holding a polished tuning stone in his flippers.",
+            "visual_prompt": "Dr. Aris and three rescued geologists sit inside the glowing mess hall wearing insulated thermal liners, holding steaming mugs of tea while the blizzard howls harmlessly against the reinforced triple-pane windows.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Erratic seismic singing from the ancient reef corals threatens to collapse the underwater nursery caves.",
-        "decisive_choice": "Finny chooses to mimic the dangerous rapid tempo instead of fleeing, risking his shell's vibration tolerance to connect with them.",
-        "resolution": "The corals harmonize into a gentle lullaby, stabilizing the cavern walls and protecting all the young sea hatchlings.",
+        "central_conflict": "A massive polar blizzard traps three geologists inside a shifting glacier crevasse while the research station's heating fuel reserves run critically low.",
+        "decisive_choice": "Dr. Aris disconnects the habitat main heating manifold to redirect full electrical current into the heavy-duty rescue winch.",
+        "resolution": "All geologists are hoisted safely to the surface just as the research station loses core power, preserving the vital seismic fault-line discoveries.",
         "visual_bible": {
-          "style": "Vibrant, bioluminescent underwater animation style with rich aquatic textures, soft glowing light shafts, and detailed marine flora.",
+          "style": "Cinematic realism with cold, desaturated blue tones contrasting against vivid safety orange gear.",
           "characters": {
-            "Finny": "A youthful green sea turtle with large expressive amber eyes, a scuffed jade-green shell with spiral patterns, and nimble flippers."
+            "Dr. Aris": "A determined senior arctic researcher with weathered skin, intelligent hazel eyes, wearing a heavy hooded safety-orange parka with reflective stripes."
           },
           "locations": {
-            "Echo_Reef": "A sprawling underwater cave system featuring massive glowing blue and purple corals, ancient stone arches, and dense kelp forests."
+            "Research Station": "A modular red-and-white corrugated steel compound anchored deep into the frozen arctic permafrost, surrounded by endless white snow drifts."
           },
           "objects": {
-            "resonance_pearl": "A glowing golden spherical pearl that pulsates with warm light and absorbs chaotic sound vibrations.",
-            "tuning_stone": "A heavy, translucent amber block carved with natural spiral grooves that refract underwater light."
+            "satellite radio": "A battered military-grade transceiver made of olive-drab plastic with a bent antenna and a glowing green LED frequency display.",
+            "winch control console": "A heavy industrial steel panel featuring large rubber-capped toggle switches and dual analog pressure gauges glowing in amber light."
           }
         },
-        "plot_fingerprint": "b7daf68802ad3461ff8ea26f2643b7eb57e145415d07f8de268695a7a84bb5ab"
+        "plot_fingerprint": "163a6f285466567e838ccfd81f42a301d148c5287dd7f114054b1c8321ea7177"
       },
       "approved": false
     }
