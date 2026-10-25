@@ -10,6 +10,17 @@ from astra_v2.unified_story_engine import validate_story_shot
 from studio_renderer import make_plan
 
 
+def publication_renderer_rejection(story):
+    """Recheck queued fiction at the publication boundary when unified Studio is enabled."""
+    import os
+    if os.environ.get("ASTRA_UNIFIED_STORY_ENGINE") != "1":
+        return None
+    if story.get("genre") != "fiction":
+        return None
+    eligible, reason, _ = check_renderer_eligibility(story)
+    return None if eligible else "renderer_incompatible: " + str(reason)
+
+
 def check_renderer_eligibility(story):
     """Return (eligible, reason, scene modes) without changing the candidate."""
     try:
