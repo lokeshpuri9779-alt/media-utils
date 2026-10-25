@@ -83,6 +83,21 @@ def main():
                 "episode": number, "published": cid in state.get("published", {}),
                 "queued_artifact": queued, "excluded": cid in excluded,
             }))
+    # Only *scheduled* non-canary Shorts lanes can skip an expensive render
+    # when the recent buffer meets the target and a bounded sample passes
+    # ZIP hash and current independent publication policy. A raw artifact
+    # count alone is never sufficient. On any uncertainty, render as before.
+    from astra_v2.preload_saturation import scheduled_shorts_skip, print_decision
+    saturation = scheduled_shorts_skip(excluded_ids=excluded)
+    print_decision(saturation)
+    if saturation["skip"]:
+        print("ASTRA_PRELOAD=" + json.dumps({
+            "outcome": "skipped_verified_saturation",
+            "reason": saturation["reason"],
+            "publisher_approval": False,
+        }, sort_keys=True))
+        return
+
     # Optional immutable reviewed-art handoff; never enables publishing or
     # chooses/approves stories. Missing or corrupted receipts fail closed.
     from astra_v2.preload_art_receipt import restore_for_preload

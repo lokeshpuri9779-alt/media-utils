@@ -103,7 +103,7 @@ def inventory_snapshot(max_age_hours=None, now=None):
 
 
 
-def inventory_eligibility_snapshot(excluded_ids=(), max_age_hours=None, now=None):
+def inventory_eligibility_snapshot(excluded_ids=(), max_age_hours=None, now=None, min_required=None):
     """Bounded, non-downloading eligibility preflight; NOT package validation.
 
     Excludes consumed IDs and untrusted workflow runs. ZIP contents, editorial
@@ -149,6 +149,10 @@ def inventory_eligibility_snapshot(excluded_ids=(), max_age_hours=None, now=None
             counts["untrusted_run"] += 1
         else:
             counts["preflight_eligible"] += 1
+            # Stop early only for the optional bounded saturation check;
+            # diagnostic inventory callers still scan the full queue.
+            if min_required is not None and counts["preflight_eligible"] >= max(1, int(min_required)):
+                break
     return {
         **counts,
         "target_buffer": max(0, int(os.getenv("ASTRA_PRELOAD_BUFFER", "24"))),
@@ -157,18 +161,22 @@ def inventory_eligibility_snapshot(excluded_ids=(), max_age_hours=None, now=None
 
 
 
-def package_integrity_snapshot(excluded_ids=(), max_packages=4, max_age_hours=None, format_filter=None):
+def package_integrity_snapshot(excluded_ids=(), max_packages=4, max_age_hours=None, format_filter=None, verify_publication_policy=False, preflight=None, download_timeout_seconds=90):
     """Bounded read-only ZIP/hash audit; does not certify publishability.
 
     Trust the source run before downloading, and never extract ZIP members.
     Each report states its sample size and uninspected count explicitly.
     """
     max_packages = max(0, min(int(max_packages), 24))
-    preflight = inventory_eligibility_snapshot(excluded_ids, max_age_hours)
+    if preflight is None:
+        preflight = inventory_eligibility_snapshot(excluded_ids, max_age_hours)
     result = {"checked": 0, "integrity_passed": 0, "integrity_failed": 0,
-              "download_failed": 0, "uninspected": preflight["preflight_eligible"],
+              "download_failed": 0, "policy_passed": 0, "policy_rejected": 0,
+              "uninspected": preflight["preflight_eligible"],
               "sample_limit": max_packages,
-              "verification": "bounded_zip_hash_only_not_publishable_count"}
+              "verification": ("bounded_zip_hash_and_publication_policy_sample"
+                               if verify_publication_policy
+                               else "bounded_zip_hash_only_not_publishable_count")}
     if not max_packages:
         return result
     repo = os.environ.get("GITHUB_REPOSITORY", "").strip()
@@ -209,7 +217,9 @@ def package_integrity_snapshot(excluded_ids=(), max_packages=4, max_age_hours=No
                 with archive.open("wb") as dest:
                     download = subprocess.run(
                         ["gh", "api", f"repos/{repo}/actions/artifacts/{entry['id']}/zip"],
-                        stdout=dest, stderr=subprocess.PIPE, timeout=90, check=False)
+                        stdout=dest, stderr=subprocess.PIPE,
+                        timeout=max(1, min(90, int(download_timeout_seconds))),
+                        check=False)
                 if download.returncode or archive.stat().st_size > MAX_BYTES:
                     result["download_failed"] += 1
                     continue
@@ -243,6 +253,16 @@ def package_integrity_snapshot(excluded_ids=(), max_packages=4, max_age_hours=No
                         result["integrity_failed"] += 1
                         continue
                     result["integrity_passed"] += 1
+                    if verify_publication_policy:
+                        # After the real Studio runtime is installed, verify
+                        # that a sampled package still passes the current
+                        # editorial and renderer gates. This never authorizes
+                        # publishing: the publisher rechecks video and policy.
+                        from astra_v2.publication_quality import publication_rejection
+                        if publication_rejection(candidate) is None:
+                            result["policy_passed"] += 1
+                        else:
+                            result["policy_rejected"] += 1
             except (OSError, ValueError, KeyError, zipfile.BadZipFile,
                     json.JSONDecodeError, subprocess.TimeoutExpired):
                 result["integrity_failed"] += 1
