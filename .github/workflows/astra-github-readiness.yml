@@ -1,0 +1,28 @@
+name: ASTRA GitHub Free-Tier Readiness
+
+# Read-only workflow contract tests: no provider keys, no rendering or upload.
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/astra-v2-publish.yml'
+      - '.github/workflows/astra-v2-preload.yml'
+      - '.github/workflows/astra-v2-longform.yml'
+      - '.github/workflows/astra-github-readiness.yml'
+      - 'tests/test_astra_github_readiness.py'
+      - 'requirements.txt'
+
+permissions:
+  contents: read
+
+jobs:
+  readiness:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify free GitHub production contract
+        run: python -m unittest discover -s tests -p 'test_astra_github_readiness.py' -v
