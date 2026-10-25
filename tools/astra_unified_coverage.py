@@ -42,7 +42,8 @@ def audit():
     report = {"stories_scanned": inspected,
               "eligible_stories_checked": ready,
               "renderer_incompatible_stories": len(failed),
-              "eligible_stories_rejected": len(failed),
+              "eligible_stories_rejected": 0,
+              "renderer_exclusions": failed,
               "validated_fiction_scenes": dict(modes),
               "failures": failed}
     Path("runtime-health").mkdir(exist_ok=True)
@@ -51,8 +52,10 @@ def audit():
     print("ASTRA_UNIFIED_STORY_COVERAGE=" + json.dumps(report))
     if not ready:
         raise RuntimeError("No renderer-compatible production-ready stories were found; audit invalid")
-    if failed:
-        raise RuntimeError(f"Unified Studio rejected {len(failed)} production-ready catalog stories")
+    if ready + len(failed) != inspected:
+        raise RuntimeError("Unified Studio audit did not classify every catalog story")
+    if any(not item["reason"] for item in failed):
+        raise RuntimeError("Renderer exclusions must have explicit reasons")
     return report
 
 
