@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "b4820d3c170d5425ef1f6fb5",
-      "source_sha256": "9b9ecbb68b280e9b4eddf77bc833515e9d5521781f7e5c16d2ca203ca79d48c2",
+      "candidate_id": "698eb6335360ec569f22b69e",
+      "source_sha256": "4214e48bc3a48bee505f1fb00120270e46e558a859b944679a1cd0c4a1adb396",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-7354998a7117c032a11c",
-        "title": "The Great Onion Chopper Debacle",
-        "hook": "The Catastrophic Market Demonstration",
-        "question": "Can Barnaby sell his automated tear-free vegetable slicer before the morning rush ends?",
-        "answer": "He convinces the vegetable vendor to adopt the machine by demonstrating it safely chops onions.",
+        "content_id": "rayvan-gemini-3cf7c435f466e5838e57",
+        "title": "The Great Tomato Launch Fiasco",
+        "hook": "The Unauthorized Test",
+        "question": "Can an automated sauce launcher survive a chaotic farmers market?",
+        "answer": "Only if calibrated for distance instead of raw speed.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,79 +29,80 @@
         ],
         "story_beats": [
           {
-            "headline": "The Catastrophic Market Demonstration",
-            "speech": "Behold the marvellous vegetable slicer, designed to end morning weeping and slice onions without a single fallen tear today!",
+            "headline": "The Unauthorized Test",
+            "speech": "Behold the Tomato-matic nine thousand! One touch delivers fresh marinara directly into your favorite mason jar instantly.",
             "visual": "robot",
-            "label": "The Invention",
+            "label": "The Launch",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands behind a wooden stall in a sunlit outdoor market, holding up a brass-and-copper onion chopper with a mechanical faceplate, while nearby shoppers recoil in mock terror from scattered green onions.",
+            "visual_prompt": "Inventor Barnaby stands in a bustling outdoor farmers market holding a polished brass lever, pointing toward a sputtering mechanical dispenser covered in shiny copper pipes, while local shoppers duck in alarm.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Jammed Spring Mechanism",
-            "speech": "Step closer, dear patrons, and observe how easily this lever activates the precision blades for rapid food preparation.",
+            "headline": "A Tidal Wave of Red",
+            "speech": "Wait, do not pull that secondary emergency valve! The pressure calibration is completely untested at maximum velocity right now!",
             "visual": "signal",
-            "label": "The Malfunction",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby frantically pulls a stuck red lever on the copper chopper at his stall, sweating profusely, while a grumpy vegetable vendor crosses his arms and stares judgmentally at the sputtering machine.",
+            "label": "The Surge",
+            "story_beat": "build",
+            "visual_prompt": "Assistant Maya frantically waves her arms beside a blinking red control panel, as a thick stream of bright red tomato sauce blasts horizontally across the crowded market stalls.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Risky Test of Faith",
-            "speech": "Watch carefully as I insert my bare thumb directly into the moving chamber to prove the safety catch holds.",
-            "visual": "door",
-            "label": "The Risk",
-            "story_beat": "twist",
-            "visual_prompt": "Barnaby grimaces as he cautiously slides his thumb into the metal slot of the copper chopper resting on the wooden table, while wide-eyed market shoppers lean in closely to watch.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Profitable Market Victory",
-            "speech": "Safety certified by my own digit! You see, perfection arrives exactly when properly engineered mechanics meet demanding customers.",
+            "headline": "Emergency Valve Jam",
+            "speech": "Grab the garden hose adapter from the toolbox before the entire main boiler explodes under this ridiculous pressure!",
             "visual": "ship",
-            "label": "The Sale",
+            "label": "The Fix",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby stands on a wooden stool holding a rusted wrench, desperately tightening a heavy rubber hose onto the smoking copper nozzle of the vibrating sauce machine.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Sweet Success",
+            "speech": "There we go! Perfectly portioned marinara for everyone without a single drop wasted on angry vegetable vendors.",
+            "visual": "door",
+            "label": "The Result",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby smiles triumphantly, counting a massive stack of gold coins handed over by the smiling vegetable vendor, who now proudly holds the copper chopper aloft like a trophy.",
+            "visual_prompt": "Maya and Barnaby proudly smile behind their repaired brass machine, as delighted market customers cheerfully line up holding clean glass jars waiting to be filled.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby needs to prove his chaotic spring-loaded chopper is safe in a crowded market.",
-        "decisive_choice": "He places his own thumb inside the blade guard to prove the auto-stop sensor works.",
-        "resolution": "The vendor buys twenty units and hires him as the market's official head engineer.",
+        "central_conflict": "A hyper-accelerated sauce cannon overshoots customer jars and coats the entire marketplace.",
+        "decisive_choice": "Re-routing the primary nozzle pressure valve through a garden hose restrictor.",
+        "resolution": "The dispenser fills jars accurately, turning market chaos into orderly, profitable business.",
         "visual_bible": {
-          "style": "Bright, comedic animated film style with exaggerated character expressions and rich textures.",
+          "style": "Bright, colorful stop-motion claymation aesthetic with expressive character animations and detailed mechanical textures.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild ginger hair, smudged round spectacles, a tweed vest over a white shirt, and grease-stained trousers.",
-            "Vendor": "A grumpy, stout merchant with a thick mustache, a striped apron, and a stern expression."
+            "Barnaby": "An eccentric inventor with wild gray hair, oversized round spectacles, a tweed vest covered in grease stains, and a perpetually determined grin.",
+            "Maya": "A sharp-witted apprentice wearing a bright yellow utility apron, sturdy leather boots, and a red bandana keeping her curly brown hair tied back."
           },
           "locations": {
-            "Market": "A bustling, sun-drenched town square filled with wooden stalls, hanging baskets of produce, and canvas awnings."
+            "Market Square": "A bustling cobblestone farmers market filled with striped canvas awnings, wooden fruit crates, and hanging lanterns."
           },
           "objects": {
-            "Chopper": "A brass-and-copper spring-loaded onion chopping machine featuring a small mechanical faceplate and a glowing green safety sensor light."
+            "Tomato-matic Machine": "A towering contraption made of polished copper pipes, a steam pressure gauge, a brass funnel, and a rubber dispensing nozzle.",
+            "Mason Jar": "A clear, thick glass jar with a metal screw-on lid held by market customers."
           }
         },
-        "plot_fingerprint": "1dd8957dae6962aefb5ebd64022b0a2ab1f334dee517382cbe55821e90218fdb"
+        "plot_fingerprint": "f941f931a865cf43df37e18386e679d0b33856ccdc5a18ee101d02fe1a81870d"
       },
       "approved": false
     },
     {
-      "candidate_id": "3708820c5d36c13f602271e5",
-      "source_sha256": "974f98076d1255e0ee4ccdc3dd3ce2be56d811c74256636c6587d7e4a0265b85",
+      "candidate_id": "527fd41d7a6bd0c1f21f54eb",
+      "source_sha256": "159c4b55f7725bad05d6eb906bd8d14c2176ba264a6633a799eb7f68a13d1119",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-5debfd4b2920521fe761",
-        "title": "The Icebreaker's Heavy Toll",
-        "hook": "The Hidden Fault",
-        "question": "Can the lead surveyor sacrifice the final seismic core sample to power the rescue beacon for the lost sledge team?",
-        "answer": "Yes, by draining the main thermal drill battery, the team signals the outpost and saves the survivors despite losing a year of research.",
+        "content_id": "rayvan-gemini-5ef5340e38091a4f1dba",
+        "title": "The Great Roller Derby Acoustic Equalizer",
+        "hook": "The Deafening Challenge",
+        "question": "How can the underdog brass band defeat the roaring motor-scooter drill team in the annual stadium rivalry?",
+        "answer": "By acoustically weaponizing their instruments to vibrate the roller-skate bearings of their opponents.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -109,144 +110,148 @@
         ],
         "story_beats": [
           {
-            "headline": "The Hidden Fault",
-            "speech": "Look at these thermal readings. The seismic core is freezing inside the drill shaft right now, threatening our entire expedition.",
+            "headline": "The Deafening Challenge",
+            "speech": "Listen to those roaring engines! They think their two-stroke motors will drown out our brass forever, but we will find a way.",
             "visual": "signal",
-            "label": "Seismic Fault",
+            "label": "Sound Wave",
             "story_beat": "reveal",
-            "visual_prompt": "Dr. Vance wearing an orange polar parka examining a flashing green radar signal on a metal console inside a dimly lit research tent.",
+            "visual_prompt": "Bandleader Maya in a green wool cap and brass-buttoned jacket stares across the concrete rink, holding a battered French horn while jagged red sound waves ripple from a rival motor scooter in the background.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Sledge Emergency",
-            "speech": "We just received a weak radio transmission from the eastern ridge. Their snowcat battery failed in the whiteout storm.",
-            "visual": "ship",
-            "label": "Distress Call",
-            "story_beat": "build",
-            "visual_prompt": "Dr. Vance pointing at a static-filled radio receiver on a wooden workbench inside the frosty outpost, holding a red thermos.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Power Junction",
-            "speech": "If we route the thermal grid to the rescue beacon instead of the drill heater, the ice core will be lost forever.",
+            "headline": "Constructing the Trap",
+            "speech": "We must weld these copper extension tubes onto the bell of each horn to capture the exact frequency of their wheels.",
             "visual": "robot",
-            "label": "Grid Switch",
-            "story_beat": "mechanism",
-            "visual_prompt": "Dr. Vance flipping a heavy brass master circuit switch on a frosted steel control panel inside the humming generator shed.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Rescued Crew",
-            "speech": "The rescue helicopter landed safely at ridge camp. We lost the core sample, but our colleagues are coming home warm.",
-            "visual": "door",
-            "label": "Outpost Door",
-            "story_beat": "payoff",
-            "visual_prompt": "Dr. Vance opening the heavy insulated outer research station door, greeting shivering researchers in snow gear under a twilight arctic sky.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Powering the distress beacon drains the last core sample thermal drill",
-        "decisive_choice": "Diverting primary reactor power from core preservation to the rescue flare",
-        "resolution": "The sledge team is safely airlifted while the unextracted seismic sample freezes solid",
-        "visual_bible": {
-          "style": "Gritty cinematic realism with cold blue and white tones contrasted against warm interior orange lighting",
-          "characters": {
-            "Dr. Vance": "A middle-aged lead surveyor with weathered skin, wearing a heavy orange polar parka with a fur-lined hood and round wire-rimmed glasses"
-          },
-          "locations": {
-            "Research Station": "A compact, modular arctic research outpost made of corrugated white panels and reinforced steel framing set against endless snowdrifts"
-          },
-          "objects": {
-            "Radio Receiver": "A vintage grey metal shortwave radio with dual glowing vacuum tubes and a tangled black antenna wire",
-            "Master Switch": "A heavy-duty brass lever mounted on a gray steel junction box with yellow hazard stripes"
-          }
-        },
-        "plot_fingerprint": "232b7bf544ccb4faed72c281549efb4a04b936fcc9ec7b9ba15975c3769a91ee"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "a3f15ca2f6d68dc4bd86d2ce",
-      "source_sha256": "6a9b145086015694be936b9a9a2380e2ce2548b0fe86ae58a19af13b79446cf0",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-a4cf46aa4edcbf63907c",
-        "title": "The Singing Dunes of Oakhaven",
-        "hook": "A Strange Hum in the Sand",
-        "question": "What caused the mysterious acoustic resonance echoing deep within the arid expanse of the Salt Sea Basin?",
-        "answer": "An underground subterranean river rushing through massive hollow crystal tubes carved by ancient wind erosion.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "A Strange Hum in the Sand",
-            "speech": "Listen closely to the ground! The seismic sensors are picking up a rhythmic melody coming from underneath.",
-            "visual": "signal",
-            "label": "Acoustic Anomaly",
-            "story_beat": "reveal",
-            "visual_prompt": "A rugged female explorer kneels on cracked desert earth, holding a glowing digital seismograph displaying jagged wave patterns, surrounded by towering dunes under a pale yellow sky.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Descent into the Chasm",
-            "speech": "We must anchor the winch and lower ourselves into this fissure before the approaching storm buries the entrance.",
-            "visual": "door",
-            "label": "Fissure Entry",
+            "label": "Frequency Rig",
             "story_beat": "build",
-            "visual_prompt": "The explorer anchors a heavy steel tripod over a narrow rocky crevice in the canyon floor, illuminated by the beam of a headlamp as swirling dust approaches from the horizon.",
+            "visual_prompt": "Maya and her friend Leo wearing leather aprons and safety goggles inside a dim locker room, soldering long copper pipes onto a gleaming brass trombone while sparks fly downward.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Resonant Pipes",
-            "speech": "Look at these colossal stone formations! They act like gigantic musical instruments when the subterranean gusts rush past.",
+            "headline": "Resonant Backfire",
+            "speech": "Hold your notes steady! If we hit the middle C harmonic, their skate bearings will lock up solid on the varnish.",
+            "visual": "door",
+            "label": "Roller Gate",
+            "story_beat": "mechanism",
+            "visual_prompt": "Maya stands before the swinging double doors of the stadium floor, blowing furiously into her modified French horn while helmeted scooter riders skid to a chaotic halt in front of her.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Silent Victory",
+            "speech": "Look at them coasting to a stop! Without their engines, our sweet harmony wins the championship trophy fair and square.",
             "visual": "forest",
-            "label": "Crystal Cavern",
-            "story_beat": "mechanism",
-            "visual_prompt": "Inside a dimly lit cavern, the explorer shines a flashlight across a forest of massive, hollow stalactites shaped like organ pipes while fine white sand trickles from the ceiling.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Hidden Subterranean Oasis",
-            "speech": "It is not an echo at all. The acoustics guided us straight to a lush underground river and thriving subterranean ecosystem.",
-            "visual": "planet",
-            "label": "Underground Oasis",
+            "label": "Victory Arch",
             "story_beat": "payoff",
-            "visual_prompt": "The explorer stands at the edge of a crystal-clear subterranean river lined with glowing bioluminescent moss and emerald ferns, smiling in wonder as sunlight filters down through a distant sinkhole.",
+            "visual_prompt": "Maya holds a gleaming golden trophy high above her head in the sunlit stadium courtyard, surrounded by cheering bandmates and silent, stranded scooters decorated with leafy vines.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Navigating a deafening acoustic canyon during a blinding sandstorm without a functional compass.",
-        "decisive_choice": "Following the subterranean harmonic vibrations instead of retreating to the surface basecamp.",
-        "resolution": "Discovering an uncharted subterranean freshwater oasis flourishing beneath the howling desert.",
+        "central_conflict": "A stadium noise-volume dominance battle between a loud motor-scooter drill team and a quiet brass band.",
+        "decisive_choice": "Tuning every tuba and trombone to precisely match the resonant frequency of roller-bearing steel.",
+        "resolution": "The scooters coast to an instant halt, allowing the brass band to march to a peaceful victory.",
         "visual_bible": {
-          "style": "Cinematic realism with rich natural textures, warm golden hour desert tones contrasting with cool subterranean blues and greens.",
+          "style": "Vibrant cinematic animation with rich textures, warm lighting, and detailed mechanical props.",
           "characters": {
-            "Explorer": "A woman in her early thirties with weathered skin, practical tied-back brown hair, wearing a canvas desert utility jacket with numerous pockets and sturdy leather boots."
+            "Maya": "A determined young bandleader with curly dark hair, wearing a green wool cap, a heavy canvas vest over a striped jersey, and expressive, focused eyes.",
+            "Leo": "A tall, bespectacled brass player wearing an ink-stained leather apron and a welcoming smile."
           },
           "locations": {
-            "Salt Sea Basin": "A vast, cracked white salt flat bordered by towering amber sand dunes and distant jagged mountain peaks.",
-            "Subterranean Cavern": "A deep limestone chamber featuring smooth wind-carved pillars and a subterranean river bank glowing softly."
+            "stadium": "A weathered concrete roller-derby arena with faded painted lines, steel railings, and high chain-link fences.",
+            "locker_room": "A cramped, warm-toned subterranean room filled with wooden benches, toolboxes, and polished instruments."
           },
           "objects": {
-            "Seismograph": "A rugged rectangular handheld device with a dark rubberized casing and a bright green digital oscilloscope screen.",
-            "Steel Tripod": "A collapsible three-legged mounting bracket made of brushed metal with heavy-duty locking screws and attached nylon climbing rope."
+            "French_horn": "A gleaming brass French horn with an extended copper acoustic tube bolted to its bell.",
+            "trophy": "A towering golden trophy shaped like an antique phonograph horn atop a polished oak base."
           }
         },
-        "plot_fingerprint": "928bdb249bae57b694f78e0f5f5db0ab5f11dd0b67246031e117a710973a5a1a"
+        "plot_fingerprint": "cbc4004e3b8601f47f1f8926fffb5dbb06f697aeffff6e6f859f8b404b8cd5b9"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "be5cc9c836855275799f0616",
+      "source_sha256": "e77037432fa4b50b7891cf36a982d4e6946121efd8cab484cb296c5ee9e581db",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-d0064edf50894dd9e8cc",
+        "title": "The Whispering Dunes of Obsidian Ridge",
+        "hook": "The Strange Tremor",
+        "question": "Can a drought-stricken caravan find water deep within the forbidden singing dunes?",
+        "answer": "Yes, by discovering a subterranean acoustic chamber that condenses desert mist into fresh springs.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Strange Tremor",
+            "speech": "Listen closely to the ground! The sand is vibrating with a rhythmic hum we have never heard before.",
+            "visual": "signal",
+            "label": "Seismic Hum",
+            "story_beat": "reveal",
+            "visual_prompt": "Kael kneeling on cracked desert sand, pressing his ear to the ground, holding a brass compass in his right hand, worried expression under the midday sun at Obsidian Ridge.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Descending the Shaft",
+            "speech": "We must anchor the rope securely to this stone pillar before sliding down into the dark cavern.",
+            "visual": "door",
+            "label": "Hidden Entrance",
+            "story_beat": "build",
+            "visual_prompt": "Mara tying a heavy hemp rope around a basalt monolith, looking down a dark stone staircase entrance leading into the dunes, determined expression, wearing a leather expedition vest.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Resonance Chamber",
+            "speech": "Look at these carved pillars! They are trapping the desert wind and turning moisture into pure water droplets.",
+            "visual": "forest",
+            "label": "Stone Pillars",
+            "story_beat": "mechanism",
+            "visual_prompt": "Kael and Mara standing inside a vast subterranean cavern filled with tall carved stone columns, watching water drip into a pool, amazed expressions, illuminated by a handheld lantern held by Kael.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Flowing Spring",
+            "speech": "We have found it! Fill every leather skin we brought because this spring will save our entire caravan.",
+            "visual": "planet",
+            "label": "Abundant Oasis",
+            "story_beat": "payoff",
+            "visual_prompt": "Mara filling a leather water skin from a clear underground stream flowing between ancient stone blocks, smiling joyfully, with Kael smiling beside her in the subterranean cavern.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Navigating the dangerous singing dunes while desperately searching for hidden water sources.",
+        "decisive_choice": "Following the low-frequency hum beneath the shifting sands instead of turning back.",
+        "resolution": "Uncovering an ancient stone cistern filled with clean, life-saving condensation water.",
+        "visual_bible": {
+          "style": "Cinematic realism with warm desert lighting, detailed textures of stone and sand, and vibrant earthy color palettes.",
+          "characters": {
+            "Kael": "A seasoned desert tracker with weathered skin, short brown hair, wearing a worn canvas tunic and leather trousers.",
+            "Mara": "A sharp-witted botanist with braided dark hair, wearing protective goggles on her forehead and a utility vest filled with specimen pouches."
+          },
+          "locations": {
+            "Obsidian Ridge": "An expanse of towering dark sand dunes dotted with jagged basalt rock formations.",
+            "Subterranean Chamber": "An ancient underground stone hall featuring acoustic resonance pillars and a natural freshwater pool."
+          },
+          "objects": {
+            "brass_compass": "A tarnished brass navigation tool with a cracked glass cover and a swinging needle.",
+            "hemp_rope": "A thick, durable three-strand rope used for rappelling into deep shafts.",
+            "expedition_lantern": "A portable iron-framed lantern casting a warm yellow glow fueled by oil."
+          }
+        },
+        "plot_fingerprint": "d40402073ec4c0d6d88a15ffc1a47c929a3dd0dadab933ce5e9c36196d791d00"
       },
       "approved": false
     }
