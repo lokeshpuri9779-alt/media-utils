@@ -422,6 +422,87 @@
       "review_notes": "The story is coherent, original, and free of copyright or trademark violations.; No unsafe, misleading, or policy-violating content is present.; The narrative structure and causal mechanisms are distinct from the provided comparison history.",
       "reviewed_at": "2026-10-25T00:48:56.373205+00:00",
       "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-2f4922bfd649664a1b93",
+      "story_sha256": "7a7837eeae3c0d5d67aef454b29ca1d342a17837c4767f70af035026ec18f7e9",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is structurally complete, clear, and causally coherent.; It features an original narrative arc distinct from the provided comparison history.; There are no copyright, trademark, safety, or policy violations present.",
+      "reviewed_at": "2026-10-25T06:48:31.683192+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-94e8f9d76999c6512edb",
+      "story_sha256": "396e90c0e98cc22aea20e43a1d547bd774862d55d8e0a1ecf95f2b55c8110160",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story demonstrates high originality with no overlapping premises or plots compared to the provided history.; Causal coherence is strong, flowing logically from the discovery of the contaminated dye to the moral choice and cooperative resolution.; Content is entirely safe, suitable for a general audience, and carries no copyright or YouTube policy risks.",
+      "reviewed_at": "2026-10-25T06:48:34.301882+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-9ba88941aee90e8072b1",
+      "story_sha256": "7bc8a362d234fcaad322470b133447dd44a3fd39ae5872dfa3b481dd6125e469",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and does not duplicate any recently published premises, characters, or causal mechanisms from the comparison history.; Causal coherence and clarity are strong, with a clear problem, decisive choice, and resolution.; No copyright or trademark issues, unsafe content, misleading elements, or YouTube policy risks were identified.; Audience suitability is appropriate for general viewers.",
+      "reviewed_at": "2026-10-25T06:48:35.100352+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-1e08ced3a1a58d713705",
+      "story_sha256": "114970a173c5dbeb31290047825bfa49960ee02772289f08f1b0e62cfbcccf61",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and does not duplicate the premises, characters, settings, or causal mechanisms of the recently published comparison examples.; The causal chain is coherent, clear, and logically follows the prompt's structural beats.; There are no copyright or trademark violations, unsafe/misleading elements, or policy risks for YouTube.; The content is suitable for a general audience and fulfills all formatting and quality requirements.",
+      "reviewed_at": "2026-10-25T06:48:35.969816+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-278fe2f5308281e56dd2",
+      "story_sha256": "b0f04a8396e6f0c98dfd34bb260531eef2bb85252336bbe7651986899b900788",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and does not replicate the plots, characters, or causal mechanisms of the provided comparison examples.; Causal coherence is strong, with a clear problem (landslide breaking the bridge), a decisive action (pooling rope and tethering a pine trunk), and a logical resolution.; There are no copyright, trademark, safety, misleading content, or YouTube policy violations.",
+      "reviewed_at": "2026-10-25T06:48:36.672024+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-3ca4eacc5ab470588e09",
+      "story_sha256": "83e7162a03720eab5112fa28c86ac45094a7e78b395520d1c73fcf9e5a303f3b",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original, coherent, and features clear narrative progression from conflict to resolution.; There are no copyright or trademark violations, unsafe/misleading content, or YouTube policy risks.; The plot and premise are distinct from the provided comparison history.",
+      "reviewed_at": "2026-10-25T06:48:38.563342+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-a5f0d0f62b5c66c530fd",
+      "story_sha256": "5ea62973774e4a0fcfeda86407ef1dd15e89f763f61355ce5a44dfdf3f896106",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and presents a distinct narrative involving a glacial crevasse rescue.; Causal coherence is strong, with clear logical progression from distress signal to the sacrifice of the supply sled for a human life.; No copyright or trademark concerns identified.; Content is safe, G-rated, and suitable for general audiences without policy risks.",
+      "reviewed_at": "2026-10-25T06:48:40.803745+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-60a0b7dcf757aaac4e74",
+      "story_sha256": "13825a9ec3cbd10a5b46af1f98701e9bd77a6e8480ae32443514476869ce6135",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is coherent, original, and follows a clear narrative arc from conflict to resolution.; No copyright or trademark violations detected.; Content is safe, family-friendly, and adheres to platform policies.",
+      "reviewed_at": "2026-10-25T06:48:41.769485+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-7527ff3d7df74f7311df",
+      "story_sha256": "f93a9bc4238796f766276113b005d018fbe4e2769c8be1aa51a85080defa4709",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story presents a unique narrative about moral dilemma during a village famine, distinct in plot and conflict from the provided comparison examples.; Causal coherence is strong: the discovery of hidden grain leads to guilt, resulting in a confession and communal sharing, satisfying a logical narrative arc.; The content is safe, appropriate for all audiences, and presents no YouTube policy violations or copyright/trademark issues.",
+      "reviewed_at": "2026-10-25T06:48:44.722606+00:00",
+      "review_model": "gemini-3.5-flash-lite"
     }
   ]
 }
