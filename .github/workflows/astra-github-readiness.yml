@@ -37,6 +37,7 @@ jobs:
           ASTRA_REQUIRE_STUDIO_PRELOAD: '0'
         run: |
           python -m unittest discover -s tests -p 'test_astra_story_inventory.py' -v
+          python -m unittest discover -s tests -p 'test_astra_preload_artifact_pagination.py' -v
           python -m tools.astra_story_eligibility_report
       - name: Preserve renderer artwork-gap evidence
         if: always()
