@@ -42,6 +42,27 @@ class SaturationPolicyTests(unittest.TestCase):
         self.assertEqual(outcome["sample_checked"], 4)
         self.assertEqual(outcome["reason"], "bounded_verified_buffer_saturated")
 
+    def test_production_default_uses_12_hour_lookback_not_four(self):
+        calls = []
+        def inventory(excluded, **kwargs):
+            calls.append(("inventory", kwargs["max_age_hours"]))
+            return FULL
+        def sample(excluded, **kwargs):
+            calls.append(("sample", kwargs["max_age_hours"]))
+            return PROOF
+        outcome = scheduled_shorts_skip(
+            excluded_ids={"published-x"}, env=BASE,
+            inventory=inventory, sample=sample)
+        self.assertEqual(outcome["recent_hours"], 12)
+        self.assertEqual(calls, [("inventory", 12), ("sample", 12)])
+        self.assertTrue(outcome["skip"])
+
+    def test_custom_short_window_is_respected_but_cannot_exceed_twelve(self):
+        shorter = self.decide(env={**BASE, "ASTRA_PRELOAD_SATURATION_HOURS": "4"})
+        excessive = self.decide(env={**BASE, "ASTRA_PRELOAD_SATURATION_HOURS": "96"})
+        self.assertEqual(shorter["recent_hours"], 4)
+        self.assertEqual(excessive["recent_hours"], 12)
+
     def test_one_canary_lane_always_renders_and_manual_and_push_always_render(self):
         for edits in ({"ASTRA_PRELOAD_LANE": "0"}, {"GITHUB_EVENT_NAME": "push"},
                       {"GITHUB_EVENT_NAME": "workflow_dispatch"},
