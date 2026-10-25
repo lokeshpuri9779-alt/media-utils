@@ -78,16 +78,20 @@ class StoryFactoryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             state=Path(tmp)/"state.json"
             output=Path(tmp)/"candidates.jsonl"
-            self.assertEqual(generate(state,output,batch_size=500),500)
+            self.assertEqual(generate(state,output,batch_size=500),len(MECHANISMS))
             first=json.loads(state.read_text())
-            self.assertEqual(first["next_slot"],500)
-            self.assertEqual(len(output.read_text().splitlines()),500)
+            self.assertEqual(first["next_slot"],len(MECHANISMS))
+            self.assertEqual(len(output.read_text().splitlines()),len(MECHANISMS))
             self.assertEqual(first["last_awaiting_review"],len(MECHANISMS))
-            self.assertEqual(generate(state,output,batch_size=500),500)
+            # Once all authored mechanisms are used, keep only the three
+            # review-rejected seeds that the rewrite queue can consume.
+            self.assertEqual(generate(state,output,batch_size=500),3)
             second=json.loads(state.read_text())
-            self.assertEqual(second["next_slot"],1000)
+            self.assertEqual(second["next_slot"],len(MECHANISMS)+3)
             self.assertEqual(second["last_awaiting_review"],0)
-            self.assertEqual(len(output.read_text().splitlines()),500)
+            self.assertEqual(len(output.read_text().splitlines()),3)
+            reviews=[json.loads(x) for x in output.with_name("story_factory_review.jsonl").read_text().splitlines()]
+            self.assertTrue(all(r["status"]=="needs_new_plot" for r in reviews))
     def test_new_mechanisms_enter_after_cursor_advanced(self):
         with tempfile.TemporaryDirectory() as tmp:
             state=Path(tmp)/"state.json"
@@ -96,14 +100,48 @@ class StoryFactoryTests(unittest.TestCase):
             state.write_text(json.dumps({"next_slot": 10000,
                                          "seen_premise_keys": old_keys,
                                          "seen_plot_signatures": []}))
-            self.assertEqual(generate(state, output, batch_size=12),12)
+            self.assertEqual(generate(state, output, batch_size=12),8)
             rows=[json.loads(line) for line in output.read_text().splitlines()]
             reviews=[json.loads(line) for line in output.with_name("story_factory_review.jsonl").read_text().splitlines()]
             self.assertEqual({row["premise_key"] for row in rows[:8]},
                              {row[0] for row in MECHANISMS[-8:]})
             self.assertTrue(all(r["status"]=="awaiting_editorial_review" for r in reviews[:8]))
-            self.assertEqual(json.loads(state.read_text())["next_slot"],10012)
-            self.assertEqual(len({r["candidate_id"] for r in rows}),12)
+            self.assertEqual(json.loads(state.read_text())["next_slot"],10008)
+            self.assertEqual(len({r["candidate_id"] for r in rows}),8)
+
+    def test_fresh_authored_mechanisms_are_distinct_and_review_only(self):
+        from astra_v2.story_factory_fresh_premises import FRESH_MECHANISMS
+        self.assertEqual(len(FRESH_MECHANISMS),24)
+        self.assertEqual(len({m[0] for m in MECHANISMS}),len(MECHANISMS))
+        self.assertTrue(all(len(m)==6 and all(isinstance(x,str) and len(x)>7 for x in m)
+                            for m in FRESH_MECHANISMS))
+        with tempfile.TemporaryDirectory() as tmp:
+            state=Path(tmp)/"state.json"
+            output=Path(tmp)/"candidates.jsonl"
+            # Production state has used every older premise: a fresh source
+            # extension must still be discovered at an advanced cursor.
+            prior=[m[0] for m in MECHANISMS[:-len(FRESH_MECHANISMS)]]
+            state.write_text(json.dumps({"next_slot":43500, "seen_premise_keys":prior}))
+            self.assertEqual(generate(state,output,batch_size=500),len(FRESH_MECHANISMS))
+            rows=[json.loads(x) for x in output.read_text().splitlines()]
+            reviews=[json.loads(x) for x in output.with_name("story_factory_review.jsonl").read_text().splitlines()]
+            self.assertEqual({r["premise_key"] for r in rows},
+                             {m[0] for m in FRESH_MECHANISMS})
+            self.assertTrue(all(r["status"]=="awaiting_editorial_review" and not r["production_ready"]
+                                for r in reviews))
+            self.assertEqual(json.loads(state.read_text())["next_slot"],43500+len(FRESH_MECHANISMS))
+
+    def test_exhausted_premises_do_not_flood_repeated_500_story_batch(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            state=Path(tmp)/"state.json"
+            output=Path(tmp)/"candidates.jsonl"
+            state.write_text(json.dumps({"next_slot":43500,
+                                         "seen_premise_keys":[m[0] for m in MECHANISMS]}))
+            self.assertEqual(generate(state,output,batch_size=500),3)
+            reviews=[json.loads(x) for x in output.with_name("story_factory_review.jsonl").read_text().splitlines()]
+            self.assertTrue(all(r["issues"]==["repeated_underlying_plot_mechanism"]
+                                and not r["production_ready"] for r in reviews))
+            self.assertEqual(json.loads(state.read_text())["last_batch"],3)
 
     def test_sample_unique_ids(self):
         self.assertEqual(len({candidate_at(i)["candidate_id"] for i in range(1000)}),1000)
