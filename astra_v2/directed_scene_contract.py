@@ -15,7 +15,7 @@ _INTERACTION = re.compile(
     r"enters?|entering|retrieves?|retrieving|returns?|returning|"
     r"drops?|dropping|hands?|handing|grabs?|grabbing|"
     r"intercepts?|intercepting|hiding|chases?|chasing)\b", re.I)
-_SIGNAL = re.compile(r"\b(?:signal|transmission|radio|frequency|waveform|broadcast)\b", re.I)
+_SIGNAL = re.compile(r"\b(?:signal|transmission|radio|frequency|waveform|broadcast|beacon)\b", re.I)
 
 
 def directed_scene_issue(shot):
