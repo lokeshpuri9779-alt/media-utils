@@ -42,6 +42,7 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_story_art_direction.py' -v
           python -m unittest discover -s tests -p 'test_omniroute_image_assets.py' -v
+          python -m unittest discover -s tests -p 'test_image_provider_cooldown.py' -v
           python -m unittest discover -s tests -p 'test_native_gemini_image_contract.py' -v
           python -m unittest discover -s tests -p 'test_image_response_safety.py' -v
           python -m unittest discover -s tests -p 'test_gemini_jpeg_normalization.py' -v
