@@ -36,8 +36,8 @@ class LongformProvenanceTests(unittest.TestCase):
             "ypp_safety": fake_module("ypp_safety", enforce=lambda *a, **k: {"pass": True}),
             "astra_v2.cover_frames": fake_module("astra_v2.cover_frames", extract_long_cover=lambda *a: None),
         }
-        with patch.dict(sys.modules, modules), \\
-             patch.dict(os.environ, {"ASTRA_LONG_ENABLED": "1"}), \\
+        with patch.dict(sys.modules, modules), \
+             patch.dict(os.environ, {"ASTRA_LONG_ENABLED": "1"}), \
              patch("astra_v2.creative.inspect_video", return_value={
                  "seconds": 96.55, "width": 1920, "height": 1080, "size": 50000,
              }):
