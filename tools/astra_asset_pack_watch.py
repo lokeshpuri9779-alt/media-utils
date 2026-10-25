@@ -90,7 +90,7 @@ def main() -> int:
         with open(summary, "a", encoding="utf-8") as out:
             out.write("## ASTRA verified artwork pack\n\n")
             out.write(f"Status: **{result['status']}**\n\n")
-            out.write(f"Details: \`{json.dumps(result, sort_keys=True)}\`\n")
+            out.write(f"Details: `{json.dumps(result, sort_keys=True)}`\n")
     if result["status"] != "ok":
         print("ASTRA_PACK_ACTION=restore approved pack to durable, licensed storage "
               "and update all pinned workflow references BEFORE expiry")
