@@ -38,10 +38,15 @@ jobs:
       - name: Validate grounding, contacts, and camera continuity
         run: python -m unittest discover -s tests -p 'test_ensemble_physical_motion.py' -v
       - name: Audit all currently production-eligible stories
+        id: coverage
         run: python -m tools.astra_unified_coverage
       - name: Render four scene families through one engine
+        id: preview
+        # Retain review evidence without suppressing a failed coverage gate.
+        if: ${{ !cancelled() && (steps.coverage.outcome == 'success' || steps.coverage.outcome == 'failure') }}
         run: python -m tools.astra_unified_preview
       - name: Decode and verify animation preview
+        if: ${{ !cancelled() && steps.preview.outcome == 'success' }}
         run: |
           python - <<'PY'
           import json, subprocess
@@ -58,6 +63,7 @@ jobs:
           print("ASTRA_UNIFIED_MP4_DECODE_OK")
           PY
       - name: Save unified story preview for human visual review
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: astra-unified-four-grammar-preview
