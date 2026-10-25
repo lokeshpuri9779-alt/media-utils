@@ -75,7 +75,7 @@ class EpisodeThreeHumanPerformanceTests(unittest.TestCase):
         for change in cases:
             with self.subTest(change=change),self.assertRaises(CreativeReject):
                 validate_story_shot({**third,**change})
-        self.assertTrue(all('story_human_actor' not in beat for beat in beats(4)))
+        self.assertEqual({beat['story_human_actor'] for beat in beats(4)}, {'mara'})
 
 
 if __name__=='__main__':
