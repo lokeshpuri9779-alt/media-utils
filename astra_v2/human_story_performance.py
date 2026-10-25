@@ -252,11 +252,23 @@ def _mara(draw, x, y, t, *, reaching=False, alarm=False, running=False,
     draw.ellipse((x-66,y-253,x+70,y-94),fill=SKIN,outline=INK,width=6)
     draw.polygon(((x-75,y-251),(x-11,y-279),(x+89,y-218),(x+57,y-248),
                   (x+19,y-228),(x-72,y-208)), fill=HAIR)
+    draw.arc((x-74,y-271,x+79,y-130),204,295,fill=(91,75,96),width=5)
+    draw.arc((x-56,y-246,x+57,y-112),180,242,fill=(232,174,140),width=4)
     _draw_mara_face(draw,x,y,t,emotion=emotion,gaze=gaze)
     draw.polygon(((x-51,y-80),(x+49,y-80),(x+86,y+210),(x-91,y+210)),
                  fill=JACKET,outline=INK,width=8)
+    # Layered costume shading: avoid one uniform flat teal slab. Panels follow
+    # the same character identity in all four episodes and both timelines.
+    draw.polygon(((x-47,y-64),(x-18,y-80),(x-34,y+155),(x-78,y+181)),
+                 fill=(36,91,113))
+    draw.polygon(((x+48,y-68),(x+68,y+147),(x+36,y+176),(x+23,y-61)),
+                 fill=(75,151,161))
     draw.polygon(((x-23,y-76),(x+23,y-76),(x+11,y+180),(x-14,y+180)),
                  fill=(215, 224, 216))
+    draw.line(((x-42,y-67),(x-20,y+107)),fill=(111,181,186),width=5)
+    draw.line(((x+45,y-62),(x+28,y+121)),fill=(119,191,191),width=4)
+    draw.polygon(((x+27,y-38),(x+47,y-18),(x+13,y+13)),
+                 fill=(198,212,205))
     draw.line(((x,y-64),(x,y+188)),fill=(20,65,85),width=6)
     draw.ellipse((x-8,y+125,x+8,y+141),fill=GOLD)
     progress=max(0.0,min(1.0,t/1.15))
@@ -501,27 +513,24 @@ def draw_human_scene(image, shot, t):
     from astra_v2.human_action_choreography import action_state
     state = action_state(action, t, float(shot.get("duration") or 12))
     mood, look, gesture = PERFORMANCE[action]
+    from astra_v2.human_stage_depth import draw_actor_shadow, draw_observatory_stage
     def performer(draw, x, y, time, **overrides):
         opts = {"emotion": mood, "gaze": look, "gesture": gesture}
         opts.update(overrides)
-        # One-way approach and return-to-observation occur over the shot's
-        # actual narrative duration, not in a frozen opening 1.15 seconds.
-        # The second actor keeps their authored independent emotion.
         walking_offset=round(35*state.movement)
         if opts.get("reaching"):
             opts["reaching"] = state.attention > .14 and state.aftermath < .95
             time = 1.15*state.attention
+        # A physically grounded shadow is underneath each separately animated
+        # performer, including the double, instead of both figures floating
+        # over a dark filled rectangle.
+        draw_actor_shadow(draw,x+walking_offset,y,
+                          running=bool(opts.get("running")),
+                          progress=state.progress)
         return _mara(draw, x+walking_offset, y, time, **opts)
+    # Keep verified environment imagery visible through the open window.
+    draw_observatory_stage(image,action,t,float(shot.get("duration") or 12))
     d=ImageDraw.Draw(image)
-    # Stage framing and a persistent observatory silhouette.
-    d.rounded_rectangle((80,555,1000,1235),radius=28,
-                        fill=(27,43,64),outline=(88,108,127),width=7)
-    d.ellipse((545,620,930,1005),fill=(36,62,87),outline=(145,160,166),width=12)
-    d.ellipse((620,685,850,916),outline=(177,167,143),width=7)
-    for xx in (145,245,345):
-        d.rectangle((xx,1060,xx+19,1210),fill=(73,93,109))
-    d.polygon(((83,1190),(1000,1190),(1000,1260),(83,1260)),
-              fill=(58,64,80))
     if action == "discover_radio":
         _radio(d,750,995,t,glow=state.event > .15)
         _line(d,((750,1080),(750,1195)),(134,112,84),16)
