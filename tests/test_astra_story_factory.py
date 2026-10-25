@@ -143,6 +143,39 @@ class StoryFactoryTests(unittest.TestCase):
                                 and not r["production_ready"] for r in reviews))
             self.assertEqual(json.loads(state.read_text())["last_batch"],3)
 
+    def test_fresh_premises_are_distinct_from_historical_82(self):
+        from astra_v2.story_factory_fresh_premises import FRESH_MECHANISMS
+        from astra_v2.story_expansion_2000 import MECHANISMS as BASE
+        from astra_v2.story_factory_premises import NEW_MECHANISMS
+        old_keys = {row[0] for row in BASE + NEW_MECHANISMS}
+        self.assertEqual(len(old_keys), 82)
+        self.assertEqual(len(FRESH_MECHANISMS), 24)
+        self.assertEqual(len({row[0] for row in FRESH_MECHANISMS}), 24)
+        self.assertFalse(old_keys.intersection(row[0] for row in FRESH_MECHANISMS))
+        self.assertTrue(all(len(row) == 6 and all(isinstance(v, str) and v.strip() for v in row)
+                            for row in FRESH_MECHANISMS))
+
+    def test_exhausted_history_replenishes_only_new_plot_mechanisms(self):
+        from astra_v2.story_expansion_2000 import MECHANISMS as BASE
+        from astra_v2.story_factory_premises import NEW_MECHANISMS
+        from astra_v2.story_factory_fresh_premises import FRESH_MECHANISMS
+        old_keys = [row[0] for row in BASE + NEW_MECHANISMS]
+        with tempfile.TemporaryDirectory() as tmp:
+            state = Path(tmp) / "state.json"
+            output = Path(tmp) / "candidates.jsonl"
+            state.write_text(json.dumps({"next_slot": 43500,
+                                         "seen_premise_keys": old_keys,
+                                         "seen_plot_signatures": []}))
+            self.assertEqual(generate(state, output, batch_size=500), 500)
+            rows = [json.loads(line) for line in output.read_text().splitlines()]
+            reviews = [json.loads(line) for line in output.with_name("story_factory_review.jsonl").read_text().splitlines()]
+            awaiting = [r for r in reviews if r["status"] == "awaiting_editorial_review"]
+            self.assertEqual(len(awaiting), len(FRESH_MECHANISMS))
+            self.assertEqual({r["premise_key"] for r in awaiting},
+                             {row[0] for row in FRESH_MECHANISMS})
+            self.assertTrue(all(not r["production_ready"] for r in reviews))
+            self.assertEqual(json.loads(state.read_text())["last_awaiting_review"], 24)
+
     def test_sample_unique_ids(self):
         self.assertEqual(len({candidate_at(i)["candidate_id"] for i in range(1000)}),1000)
 if __name__=="__main__": unittest.main()
