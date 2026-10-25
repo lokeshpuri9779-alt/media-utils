@@ -1807,6 +1807,58 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-a5f0d0f62b5c66c530fd",
+      "video_id": "CnjR5GyF-PQ",
+      "confirmed_at": "2026-10-25T15:13:46.427315+00:00",
+      "title": "The Arctic Rescuer and the Crevasse Beacon",
+      "plot_fingerprint": "4138128311a8eea9d3a3d2413e07d3407d2d985fe264df1236ff9de8cf18e76b",
+      "story_beats": [
+        {
+          "headline": "Distress Signal Received",
+          "speech": "Dr. Vance, do you read me? My anchor gave way, and I am dangling blind in the western crevasse!",
+          "visual": "signal",
+          "label": "Distress Call",
+          "story_beat": "reveal",
+          "visual_prompt": "Dr. Clara Sterling, wearing a red parka and frost-rimed goggles, holding a blinking orange emergency radio inside a dimly lit snow shelter, with blowing white snow outside the entrance flap.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Fractured Bridge",
+          "speech": "The ice walls are splintering under the cable strain! If I pull the sled and the winch together, we both drop.",
+          "visual": "ship",
+          "label": "Weight Crisis",
+          "story_beat": "build",
+          "visual_prompt": "Clara kneeling at the snowy lip of a deep blue glacial crevasse, clutching a tense nylon winch cable that leads over the frozen edge, her heavy supply sled parked dangerously close to a cracking fissure.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Dropping the Cargo",
+          "speech": "I am cutting the sled tether right now! Hold fast to the main line, Marcus, I am hauling you up!",
+          "visual": "door",
+          "label": "The Severing",
+          "story_beat": "mechanism",
+          "visual_prompt": "Clara using a serrated multi-tool to slice through the thick yellow nylon tether of the supply sled, her face strained with exertion as the sled slides backward toward the abyss.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Frozen Rescue",
+          "speech": "We lost the supplies, but you are breathing. Grab my hand, Marcus, we are walking back together.",
+          "visual": "forest",
+          "label": "Safe Return",
+          "story_beat": "payoff",
+          "visual_prompt": "Clara pulling Marcus, who wears a torn blue parka and a frost-dusted wool cap, over the lip of the crevasse onto flat white snow, with the distant silhouette of the research station under a pale twilight sky.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Hauling a heavy rescue load out of an unstable glacial crevasse while losing grip on the main supply sled.",
+      "decisive_choice": "Cut the supply sled tether to distribute body weight safely and pull the hauling rope alone.",
+      "resolution": "The partner is rescued onto solid ice, while the supply sled slips irretrievably into the frozen abyss."
     }
   ]
 }
