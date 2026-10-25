@@ -3181,82 +3181,6 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-2f8eb857c935a4bdf605",
-      "title": "The Amber Pathfinders and the Whispering Root",
-      "hook": "The Snap",
-      "question": "Can two rival foragers cross a collapsing ravine to save their grove?",
-      "answer": "Yes, by combining their climbing gear and trusting each other over the chasm.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Snap",
-          "speech": "Look out! The main root is snapping under the weight of the flash flood water!",
-          "visual": "forest",
-          "label": "Ravine Break",
-          "story_beat": "reveal",
-          "visual_prompt": "Tansy and Bram stand on opposite sides of a fracturing mossy root bridge inside a dense green forest, holding wooden harvesting baskets while rushing muddy water surges below.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Toss",
-          "speech": "Catch this rope anchor! It is our only chance to bridge the gap together now!",
-          "visual": "signal",
-          "label": "Anchor Throw",
-          "story_beat": "build",
-          "visual_prompt": "Tansy stands on the eastern rocky ledge in a forest, throwing a glowing brass-tipped rescue signal flare and rope across the chasm toward Bram who reaches out.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Leap",
-          "speech": "I have got you! Hold tight to the line and jump across the open air!",
-          "visual": "door",
-          "label": "The Jump",
-          "story_beat": "mechanism",
-          "visual_prompt": "Bram catches the heavy rope line anchored into a stubborn stone doorway frame embedded in the forest wall, bracing his boots against the slick mud to pull.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Harvest",
-          "speech": "We made it across safely. Let us harvest the amber sap for our village.",
-          "visual": "ship",
-          "label": "Safe Harbor",
-          "story_beat": "payoff",
-          "visual_prompt": "Tansy and Bram stand side by side on the safe western forest cliff, holding a glowing amber sap vial shaped like a tiny vessel while smiling at each other.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "central_conflict": "A massive root bridge snaps during a flash flood, separating two foragers from the medicinal amber sap needed to heal their village elder.",
-      "decisive_choice": "Tansy throws her only remaining secure anchor across the widening chasm to catch leaping Bram instead of saving her own climb.",
-      "resolution": "Bram catches the anchor, secures the rope, and safely hauls Tansy across so they can harvest the sap together.",
-      "visual_bible": {
-        "style": "Cinematic 3D animation style with rich forest textures, warm golden lighting, and detailed natural elements.",
-        "characters": {
-          "Tansy": "A nimble young forager with braided auburn hair, wearing a forest-green canvas tunic, sturdy leather boots, and a utility belt.",
-          "Bram": "A tall, sturdy forager with curly dark hair, wearing a weathered tan jacket, woolen trousers, and fingerless leather gloves."
-        },
-        "locations": {
-          "Whispering Ravine": "A deep, mist-filled canyon in an ancient forest, crossed by giant glowing roots and slick stone ledges."
-        },
-        "objects": {
-          "Amber Sap Vial": "A small, teardrop-shaped glass flask glowing with a warm orange light.",
-          "Rescue Anchor": "A heavy iron hook attached to a durable hemp climbing rope.",
-          "Harvesting Baskets": "Woven willow baskets strapped to the foragers' backs containing pruning tools."
-        }
-      },
-      "plot_fingerprint": "f86eb9d72feeb92bc5190a54db8365221f7f0081f2014eda9028c536dc949408"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
       "content_id": "rayvan-gemini-014ee380b8ecfb9321dd",
       "title": "the salt-carver's tide-clock and the harbor regatta",
       "hook": "the salt-clock reveals a fatal flaw",
@@ -3328,6 +3252,235 @@
         }
       },
       "plot_fingerprint": "a55bad64f0ffd3956a9d198d02d2f21a7ff6c87bf8c0bf0fbcff76fb9a230c8c"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-20ba6afa3ad75624f1bd",
+      "title": "The Stationmaster's Ledger and the Midnight Express",
+      "hook": "The Missing Manifest",
+      "question": "Can the missing express manifest be found before the midnight train departs?",
+      "answer": "Yes, by discovering it hidden inside the mechanical ticker box with a stray cat's help.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Missing Manifest",
+          "speech": "Oh dear me, the express manifest has completely vanished from my desk, and the midnight train leaves very soon!",
+          "visual": "signal",
+          "label": "Scene One",
+          "story_beat": "reveal",
+          "visual_prompt": "An elderly stationmaster in a navy blue uniform stands in a cluttered ticket office holding his head in panic, while a railway signal light glows green outside the dusty window.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Unexpected Helper",
+          "speech": "Look at this fluffy stray cat tapping its paw insistently against the brass ticker machine right over there.",
+          "visual": "robot",
+          "label": "Scene Two",
+          "story_beat": "build",
+          "visual_prompt": "A ginger tabby cat with bright green eyes sits on a wooden counter next to a clicking brass telegraph machine, pawing at a jammed slot while the stationmaster watches in surprise.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Ticker Discovery",
+          "speech": "Could the missing document actually be jammed right inside the gears of this noisy little contraption all along?",
+          "visual": "door",
+          "label": "Scene Three",
+          "story_beat": "mechanism",
+          "visual_prompt": "The stationmaster uses a small brass key to open the side panel of the ticker machine, revealing a folded paper document wedged between two spinning copper cogs.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Timely Departure",
+          "speech": "Thank goodness for your sharp eyes, little feline friend; the express can now safely leave the platform on schedule!",
+          "visual": "ship",
+          "label": "Scene Four",
+          "story_beat": "payoff",
+          "visual_prompt": "The stationmaster waves a green lantern on a busy railway platform as a steam locomotive pulls away into the night, while the ginger cat sits proudly beside him.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A critical freight manifest vanishes from the locked station office right before the midnight departure.",
+      "decisive_choice": "Search inside the whirring telegraph ticker machine instead of looking through the lost-and-found bins.",
+      "resolution": "The manifest is recovered just in time, allowing the midnight express to depart safely.",
+      "visual_bible": {
+        "style": "Classic vintage railway illustration style with warm lighting and rich textures",
+        "characters": {
+          "stationmaster": "An elderly man with a round face, white mustache, wearing a navy blue wool uniform, brass buttons, and a peaked cap.",
+          "cat": "A chubby ginger tabby cat with bright green eyes and a white chest patch."
+        },
+        "locations": {
+          "office": "A cozy, cluttered railway office filled with paper stacks, brass clocks, and a large arched window overlooking the tracks.",
+          "platform": "A historic brick station platform lit by glowing gas lamps under a wrought-iron canopy."
+        },
+        "objects": {
+          "ticker_machine": "A polished brass telegraph ticker with spinning copper cogs and a paper output slot.",
+          "lantern": "A heavy iron railway lantern with thick green glass panes and a wire handle."
+        }
+      },
+      "plot_fingerprint": "d0c5348f39fb194b851c757fc3eb680dab65fcd839267e5817af536bb1d2e4b8"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-402efe0010f3dfe2334d",
+      "title": "The Glaciologist and the Crevasse Beacon",
+      "hook": "The Hidden Fault",
+      "question": "Can the researcher abandon her lifelong ice-core sample to save her trapped colleague?",
+      "answer": "Yes, she discards the precious sample to deploy the heavy rescue winch.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Hidden Fault",
+          "speech": "Dr. Vance gasped as the white snow beneath her research station suddenly gave way into a bottomless dark void.",
+          "visual": "signal",
+          "label": "The Collapse",
+          "story_beat": "reveal",
+          "visual_prompt": "Dr. Vance stands near a large orange tripod on a snowy plain, watching in horror as a deep crevasse splits open. She wears a heavy red parka with fur trim, white snow goggles pushed up on her forehead, and holds a blinking rescue beacon that casts a red glow over her terrified expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Heavy Burden",
+          "speech": "She stared at the priceless ice core cylinder inside the drilling rig while distant cries echoed from below.",
+          "visual": "ship",
+          "label": "The Dilemma",
+          "story_beat": "build",
+          "visual_prompt": "Dr. Vance grips the metal frame of a motorized winch sled parked on blue glacial ice. She looks down into the dark abyss with furrowed brows. A glowing cyan ice core tube rests securely in the payload tray, while a dangling steel cable descends into the darkness.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Critical Shift",
+          "speech": "With trembling gloves, she pulled the emergency release lever to sacrifice centuries of climate history for a single human life.",
+          "visual": "robot",
+          "label": "The Release",
+          "story_beat": "mechanism",
+          "visual_prompt": "Close-up shot of Dr. Vance's thick black-gloved hands forcefully slamming down a bright yellow mechanical lever on the winch console. Sparks fly from the metal gears as the heavy ice core container slides off the edge into the chasm.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Ascent from the Abyss",
+          "speech": "Her teammate broke through the surface ice into the blinding sunlight, clutching the rescue harness with immense relief.",
+          "visual": "door",
+          "label": "The Rescue",
+          "story_beat": "payoff",
+          "visual_prompt": "Dr. Vance and a fellow researcher wrapped in a thermal blanket embrace near the snowy lip of the crevasse. The motorized winch hums loudly in the background under a bright arctic sun, reeling in an empty steel cable as golden light illuminates the scene.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Choosing between recovering a unique multi-century ice core and hoisting a teammate from an unstable glacier crevasse.",
+      "decisive_choice": "Releasing the winch locking mechanism to drop the core container and redirect maximum cable tension toward the rescue harness.",
+      "resolution": "The colleague is successfully hauled to safety just as the ice shelf gives way, preserving lives over scientific data.",
+      "visual_bible": {
+        "style": "Cinematic 3D animation, crisp arctic lighting, highly detailed textures of snow, ice, and heavy expedition gear.",
+        "characters": {
+          "Dr. Vance": "A determined glaciologist in her late thirties with sharp features, tied-back brown hair, wearing a thick red weather-proof parka with a fur-lined hood and yellow snow pants."
+        },
+        "locations": {
+          "Glacial Research Station": "A remote arctic field camp featuring flat white snowfields, deep blue glacial crevasses, metallic scientific tripods, and heavy motorized winch sleds."
+        },
+        "objects": {
+          "Rescue Beacon": "A handheld orange electronic device with a rapidly blinking red LED light and a rubberized grip.",
+          "Ice Core Cylinder": "A translucent cyan glass-like ice tube measuring one meter in length, glowing faintly under direct sunlight.",
+          "Winch Console": "A heavy-duty steel control panel painted industrial yellow with thick levers, analog gauges, and a motorized cable spool."
+        }
+      },
+      "plot_fingerprint": "a2e43eaf2e0d9c89fd3c548c9594336e5ca9657e41b07ea95370ddb470b21f3c"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-629453126ade2a3ee866",
+      "title": "The Miller's Oath and the Last Harvest",
+      "hook": "The Empty Bins",
+      "question": "Can lifelong friends save their village granary without sacrificing their community's trust?",
+      "answer": "They pool their remaining private grain to bake the winter bread, forging a new bond of collective survival.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Empty Bins",
+          "speech": "Look at these empty storage bins, Thomas. The frost took everything before we could grind the final autumn wheat.",
+          "visual": "forest",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Brendan and Thomas standing inside a dimly lit wooden village granary, staring at completely empty sacks of flour with expressions of shock and worry, holding a rusty iron lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Reserve",
+          "speech": "We kept this small private sack hidden beneath the floorboards for emergencies, but our neighbors need it more than us.",
+          "visual": "door",
+          "label": "The Dilemma",
+          "story_beat": "build",
+          "visual_prompt": "Thomas lifting a heavy wooden floorboard in a rustic cottage interior to reveal a burlap sack of golden wheat grain while Brendan watches with an anxious, conflicted expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Joint Decision",
+          "speech": "If we divide this flour among all the freezing families, our own pantry will remain empty until spring arrives.",
+          "visual": "signal",
+          "label": "The Choice",
+          "story_beat": "mechanism",
+          "visual_prompt": "Brendan and Thomas clasping hands over the rustic wooden table in the cottage kitchen, lit by the warm glow of a flickering candle, resolute and determined.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Hearth",
+          "speech": "Because we shared our last grain, every hearth in the village burns bright tonight and no family goes hungry.",
+          "visual": "ship",
+          "label": "The Renewal",
+          "story_beat": "payoff",
+          "visual_prompt": "Villagers gathered together around a large stone hearth in the snowy village square, smiling and sharing freshly baked loaves of bread under a starry night sky.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden winter freeze threatens the village's communal winter flour supply, pitting private survival against community solidarity.",
+      "decisive_choice": "Brendan and Thomas choose to open their personal hidden granary reserves to feed the starving village instead of keeping it secret.",
+      "resolution": "The village survives the harsh frost and establishes a permanent cooperative food reserve.",
+      "visual_bible": {
+        "style": "Warm, rustic folk-art illustration style with rich earthy tones, textured brushstrokes, and cozy atmospheric lighting.",
+        "characters": {
+          "Brendan": "An older village miller with deep wrinkles, silver-streaked brown hair, wearing a patched wool tunic, heavy leather apron, and sturdy boots.",
+          "Thomas": "Brendan's lifelong friend and co-miller, balding with a thick white beard, wearing a knitted green sweater and dark trousers."
+        },
+        "locations": {
+          "village granary": "A weathered timber building with high vaulted wooden beams, stacked empty burlap sacks, and small frosty window panes.",
+          "cottage kitchen": "A cozy room with exposed stone walls, a large baking hearth, a sturdy oak table, and dried herbs hanging from the ceiling.",
+          "village square": "An open snowy gathering space surrounded by timber-framed thatched-roof houses and a central stone fireplace."
+        },
+        "objects": {
+          "iron lantern": "A tarnished, blackened iron hand lantern casting a warm, flickering yellow glow.",
+          "burlap sack": "A coarse, hand-stitched jute sack tied securely at the top with thick hemp twine.",
+          "baking bread": "Golden-brown, crusty round loaves of artisan bread resting on a wooden cooling paddle."
+        }
+      },
+      "plot_fingerprint": "c09ecae4f9a7766a66f15d5999f6c0d53611c114b0cb34aea04fd62503de5f19"
     }
   ]
 }
