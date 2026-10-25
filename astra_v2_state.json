@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 7,
-  "confirmed_today": 6,
-  "last_attempt_at": "2026-10-25T20:05:00.134469+00:00",
+  "attempts": 8,
+  "confirmed_today": 7,
+  "last_attempt_at": "2026-10-25T20:15:02.153297+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -3241,16 +3241,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "xspQMWA-wVE": {
-      "content_id": "rayvan-forge-24c94d45a89801bc",
+    },
+    "rayvan-forge-24c94d45a89801bc": {
+      "video_id": "xspQMWA-wVE",
+      "confirmed_at": "2026-10-25T20:14:31.785626+00:00",
       "title": "The Beaver and the Paper Lantern",
-      "day": "2026-10-26",
-      "uploaded_at": "2026-10-25T20:05:01.897501+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-25T20:05:01.897501+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "4c96a368aee93b597d19627aa374c104caacf370a5b854f9f599d88af940e24d",
       "story_beats": [
@@ -3291,16 +3289,67 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "EcM6hKpnyy4": {
+      "content_id": "rayvan-forge-603117eacb21c2ba",
+      "title": "The Goat and the Lighthouse Shadow",
+      "day": "2026-10-26",
+      "uploaded_at": "2026-10-25T20:15:03.945476+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "9f93ae5c6c6feed9d97518965253bc54d6216f3691ba2942439404e19b07b051",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "Ships mistook a strange shadow for the harbor entrance during heavy fog.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "The goat lit extra lamps, but their reflections confused the approaching captains.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "He discovered a torn sail covering the lighthouse lens and removed it.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "The clear beam guided the ships between the rocks and into harbor.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-25T20:03:51.340873+00:00",
+  "last_preflight_at": "2026-10-25T20:14:31.423084+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-25T20:05:02.279343+00:00",
+    "at": "2026-10-25T20:15:04.320439+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -7513,10 +7562,57 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-603117eacb21c2ba": {
+      "at": "2026-10-25T20:15:02.153280+00:00",
+      "title": "The Goat and the Lighthouse Shadow",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "9f93ae5c6c6feed9d97518965253bc54d6216f3691ba2942439404e19b07b051",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "Ships mistook a strange shadow for the harbor entrance during heavy fog.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "The goat lit extra lamps, but their reflections confused the approaching captains.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "He discovered a torn sail covering the lighthouse lens and removed it.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "The clear beam guided the ships between the rocks and into harbor.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-25T20:05:02.279285+00:00",
+    "at": "2026-10-25T20:15:04.320362+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -7527,21 +7623,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-25T20:05:02.279334+00:00",
+    "at": "2026-10-25T20:15:04.320425+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-25T20:04:43.228667+00:00",
+    "at": "2026-10-25T20:14:50.819837+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-24c94d45a89801bc",
-    "video_url": "https://www.youtube.com/watch?v=xspQMWA-wVE",
+    "content_id": "rayvan-forge-603117eacb21c2ba",
+    "video_url": "https://www.youtube.com/watch?v=EcM6hKpnyy4",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-25T20:05:02.279212+00:00",
+    "at": "2026-10-25T20:15:04.320272+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -7553,7 +7649,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-25T20:05:02.279282+00:00",
+    "at": "2026-10-25T20:15:04.320356+00:00",
     "collection_status": "missing_diagnostics",
     "publish_step": "success",
     "counters": {},
