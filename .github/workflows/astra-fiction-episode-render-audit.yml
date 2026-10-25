@@ -6,6 +6,8 @@ on:
     paths:
       - '.github/workflows/astra-fiction-episode-render-audit.yml'
       - 'astra_v2/human_story_performance.py'
+      - 'astra_v2/human_stage_depth.py'
+      - 'tests/test_human_stage_depth.py'
       - 'astra_v2/human_action_choreography.py'
       - 'tests/test_human_story_choreography.py'
       - 'tests/test_expressive_mara_performance.py'
@@ -53,6 +55,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_pilot_human_performance.py' -v
           python -m unittest discover -s tests -p 'test_expressive_mara_performance.py' -v
           python -m unittest discover -s tests -p 'test_human_story_choreography.py' -v
+          python -m unittest discover -s tests -p 'test_human_stage_depth.py' -v
           python -m unittest discover -s tests -p 'test_human_cinematic_staging.py' -v
       - name: Restore original verified artwork
         uses: actions/download-artifact@v4
