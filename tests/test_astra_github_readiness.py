@@ -62,6 +62,22 @@ class GithubReadinessTests(unittest.TestCase):
         self.assertIn("ASTRA_ASSET_PACK_ENABLED: ${{ vars.ASTRA_ASSET_PACK_ENABLED || '1' }}", preload)
         self.assertIn("ASTRA_ASSET_PACK_ENABLED: '1'", publisher)
 
+    def test_image_validation_import_precedes_artifact_restoration(self):
+        # Both media preload lanes download and validate the pinned pack
+        # before their full renderer dependencies, so Pillow is not optional.
+        for workflow in (PRELOAD, LONGFORM):
+            with self.subTest(workflow=workflow.name):
+                source = read(workflow)
+                minimal = source.index("- name: Install pinned asset validation dependency")
+                download = source.index("- name: Download reviewed reusable visual pack")
+                restore = source.index("- name: Verify restored reusable visual pack")
+                full = source.index("- name: Install rendering stack") if workflow == PRELOAD else source.index("- name: Install free rendering dependencies")
+                self.assertLess(minimal, download)
+                self.assertLess(download, restore)
+                self.assertLess(restore, full)
+                self.assertIn("Pillow==11.3.0", source)
+                self.assertIn("ASTRA_ASSET_VALIDATION_IMPORT=ready", source)
+
     def test_visual_pack_expiry_and_missing_artifacts_fail_closed(self):
         now = datetime(2026, 10, 25, tzinfo=timezone.utc)
         def item(days):

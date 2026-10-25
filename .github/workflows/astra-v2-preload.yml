@@ -125,6 +125,14 @@ jobs:
         continue-on-error: true
         with:
           enable-cache: true
+      - name: Install pinned asset validation dependency
+        # The safe restore command opens and verifies all approved PNGs.
+        # It runs before the full renderer installation and therefore needs
+        # Pillow in this step, even when the wheel cache is cold.
+        if: env.ASTRA_ASSET_PACK_ENABLED == '1'
+        run: |
+          python -m pip install --disable-pip-version-check 'Pillow==11.3.0'
+          python -c "from PIL import Image; print('ASTRA_ASSET_VALIDATION_IMPORT=ready')"
       - name: Download reviewed reusable visual pack
         if: env.ASTRA_ASSET_PACK_ENABLED == '1'
         uses: actions/download-artifact@v4

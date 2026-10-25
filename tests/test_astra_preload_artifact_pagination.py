@@ -132,7 +132,11 @@ class QueueFormatSelectionTests(unittest.TestCase):
             with patch.object(preload_queue, "artifacts", return_value=entries), \
                  patch.object(preload_queue, "_api", return_value=trusted_run), \
                  patch.object(preload_queue.subprocess, "run", side_effect=download), \
-                 patch("astra_v2.creative.inspect_video", return_value={"seconds": 35}):
+                 patch("astra_v2.creative.inspect_video", return_value={"seconds": 35}), \
+                 patch("astra_v2.publication_quality.publication_rejection", return_value=None):
+                # This test isolates Shorts-vs-long queue selection. Its tiny
+                # synthetic metadata has no verified story scenes and must
+                # not be mistaken for a real publication-approved candidate.
                 short = preload_queue.take(set(), set(), out, allow_long=False)
                 self.assertEqual(short["content_id"], "short-next")
                 self.assertEqual(short["format"], "short")
