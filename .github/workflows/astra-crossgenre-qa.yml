@@ -26,7 +26,7 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_crossgenre_directed_24.py' -v
           python -m unittest discover -s tests -p 'test_astra_story_inventory.py' -v
-      - name: Compose 48 genuine Studio scenes for visual inspection
+      - name: Render compatible Studio shots and label blocked scene slots
         run: python -m tools.astra_crossgenre_preview
       - name: Render real voiced Studio sample with Creative Director gates
         run: |
