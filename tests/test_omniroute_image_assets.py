@@ -265,6 +265,21 @@ class ImageAssetsTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 store_asset(png(), root, kind="scene", prompt="first")
 
+    def test_rejected_square_provider_image_reports_dimensions_without_approval(self):
+        queue = {"rewrites": [{"status": "awaiting_independent_editorial_approval",
+                              "story": {"title": "New story", "content_id": "square-diagnostic",
+                                        "story_beats": [{"speech": "A new visual event occurs."}]}}]}
+        with tempfile.TemporaryDirectory() as root:
+            result = preproduce(queue, root, generator=lambda prompt: png(portrait=False), limit=1)
+            rejected = [asset for asset in result["assets"]
+                        if asset.get("error_detail") == "Scenes must be portrait"]
+            self.assertTrue(rejected, result)
+            self.assertEqual(rejected[0]["rejected_dimensions"], {"width": 512, "height": 512})
+            self.assertFalse(rejected[0]["approved"])
+            self.assertFalse(rejected[0]["production_ready"])
+            self.assertNotIn("path", rejected[0])
+            self.assertEqual(result["provider_calls"], 1)
+
     def test_transparency_and_portrait_rules(self):
         with tempfile.TemporaryDirectory() as root:
             with self.assertRaises(ValueError):
