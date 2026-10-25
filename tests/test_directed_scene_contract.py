@@ -42,6 +42,22 @@ class DirectedSceneContractTests(unittest.TestCase):
             self.assertEqual(validate_story_shot(shot), "directed")
         self.assertEqual(validate_story_shot({"speech": "The owl grabbed the lantern."}), "solo")
 
+    def test_beacon_is_valid_signal_but_ordinary_light_is_not(self):
+        self.assertEqual(validate_story_shot({
+            "visual": "signal",
+            "speech": "She repaired the beacon so nobody would be forgotten again.",
+        }), "directed")
+        with self.assertRaises(CreativeReject):
+            validate_story_shot({
+                "visual": "signal",
+                "speech": "She lit a lantern so nobody would be forgotten again.",
+            })
+        from astra.artwork_story_bridge import build_story
+        review = build_story("astra/fixtures/artwork_storyboard_review.json")
+        for beat in review["story_beats"]:
+            with self.subTest(beat=beat["headline"]):
+                self.assertEqual(validate_story_shot(beat), "directed")
+
     def test_manifest_path_and_foreground_props_do_not_override_check(self):
         shot = {"speech": "The thief grabs the papers.", "visual": "robot",
                 "artwork_manifest_path": "/missing/manifest.json"}
