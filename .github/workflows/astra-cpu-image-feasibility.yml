@@ -1,0 +1,51 @@
+name: ASTRA CPU Image Feasibility (Manual)
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_cpu_benchmark:
+        description: 'Enter BENCHMARK; uses available GitHub Actions minutes, never a paid API'
+        required: true
+        type: string
+      model_profile:
+        description: 'Preconverted OpenVINO model recommended; export uses more memory/time'
+        type: choice
+        required: true
+        default: preconverted
+        options:
+          - preconverted
+          - export
+permissions:
+  contents: read
+jobs:
+  benchmark:
+    if: inputs.confirm_cpu_benchmark == 'BENCHMARK'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      HF_HOME: /tmp/astra-hf
+      ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install CPU-only benchmark dependencies
+        run: |
+          python -m pip install --disable-pip-version-check 'Pillow>=10,<12' 'optimum[openvino]' diffusers
+      - name: Log runner limits
+        run: |
+          nproc
+          free -h
+          df -h .
+      - name: Produce isolated portrait keyframe
+        run: |
+          python -m tools.experimental_openvino_benchmark --profile "${{ inputs.model_profile }}" --steps 8
+      - name: Retain review-only benchmark evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-openvino-cpu-${{ github.run_id }}
+          path: artifacts/experimental-openvino/
+          if-no-files-found: warn
+          retention-days: 7

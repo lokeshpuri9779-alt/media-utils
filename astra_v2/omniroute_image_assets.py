@@ -9,6 +9,7 @@ import hmac
 import io
 import json
 import os
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import urllib.request
 import urllib.error
@@ -178,6 +179,74 @@ def configured_free_image_providers():
     return providers
 
 
+
+def _cooldown_path(root):
+    return Path(root) / "requests" / "provider_cooldowns.json"
+
+
+def _provider_cooldown_key(config):
+    # Store only hashed provider identity, never credentials or prompts.
+    return hashlib.sha256(json.dumps(list(config), separators=(",", ":")).encode()).hexdigest()
+
+
+def _load_cooldowns(root, *, now=None):
+    now = now or datetime.now(timezone.utc)
+    path = _cooldown_path(root)
+    try:
+        data = json.loads(path.read_text())
+        if not isinstance(data, dict):
+            return {}
+        return {key: until for key, until in data.items()
+                if isinstance(key, str) and isinstance(until, str)
+                and _valid_future_cooldown(until, now)}
+    except (OSError, ValueError, TypeError):
+        return {}
+
+
+def _valid_future_cooldown(until, now):
+    try:
+        expiry = datetime.fromisoformat(until)
+        return expiry.tzinfo is not None and now < expiry <= now + timedelta(days=2)
+    except (ValueError, TypeError):
+        return False
+
+
+def _save_cooldowns(root, data):
+    path = _cooldown_path(root)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(".tmp")
+    try:
+        temporary.write_text(json.dumps(data, sort_keys=True))
+        temporary.replace(path)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def _free_image_with_cooldown(prompt, root, *, max_attempts, attempt_counter):
+    """Fail closed on quota exhaustion; cooldown survives runs if root is persisted."""
+    providers = configured_free_image_providers()
+    if not providers:
+        return None
+    cooldowns = _load_cooldowns(root)
+    remaining = 0
+    for config, key in providers:
+        identity = _provider_cooldown_key(config)
+        if identity in cooldowns:
+            continue
+        if remaining >= max_attempts:
+            raise ValueError("Image provider request budget exhausted")
+        remaining += 1
+        attempt_counter.append(1)
+        try:
+            return generate_image(prompt, config=config, api_key=key)
+        except ValueError as exc:
+            if not str(exc).startswith("Image provider HTTP 429"):
+                raise
+            cooldowns[identity] = (datetime.now(timezone.utc) + timedelta(hours=24)).isoformat()
+            _save_cooldowns(root, cooldowns)
+    raise ValueError("Image provider HTTP 429 (all configured free providers in cooldown)")
+
+
 def generate_free_image_with_failover(prompt, *, requester=None, max_attempts=None, attempt_counter=None):
     """Attempt the next explicitly free provider only on HTTP 429."""
     providers = configured_free_image_providers()
@@ -330,8 +399,8 @@ def preproduce(queue, root, *, generator=generate_free_image_with_failover, limi
                     if generator is generate_free_image_with_failover:
                         attempts = []
                         try:
-                            image = generator(prompt, max_attempts=limit - calls,
-                                              attempt_counter=attempts)
+                            image = _free_image_with_cooldown(prompt, root, max_attempts=limit - calls,
+                                                          attempt_counter=attempts)
                         finally:
                             calls += len(attempts)
                     else:
