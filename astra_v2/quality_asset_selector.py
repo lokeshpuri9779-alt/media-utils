@@ -5,17 +5,31 @@ requested scene and meet licensing, resolution and style constraints.
 """
 from __future__ import annotations
 import json
+import os
+from functools import lru_cache
 from pathlib import Path
 from PIL import Image
 from astra_v2.illustrated_asset_validation import validate_library
 
+@lru_cache(maxsize=8)
+def _verified_inventory(root):
+    """Verify each immutable restored pack once per worker process."""
+    report = validate_library(root)
+    manifest = json.loads((root / 'art' / 'manifest.json').read_text())
+    return report, manifest
+
+
 def select_assets(root, *, kind, tags=(), style=None, min_size=128, limit=5,
                   allow_attribution=False, video_format=None):
     root=Path(root).resolve()
-    report=validate_library(root)
+    # Only cache an explicitly immutable, previously restored asset pack.
+    if os.getenv('ASTRA_ASSET_PACK_ENABLED') == '1' and os.getenv('ASTRA_ASSET_PACK_IMMUTABLE') == '1':
+        report, manifest = _verified_inventory(root)
+    else:
+        report = validate_library(root)
+        manifest = json.loads((root / 'art' / 'manifest.json').read_text())
     if not report["verified_files"]:
         return []
-    manifest=json.loads((root/"art"/"manifest.json").read_text())
     verified={a["id"]:a for a in report["assets"]}
     if video_format not in (None, "shorts", "long"):
         raise ValueError("invalid video format")
