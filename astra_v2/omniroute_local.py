@@ -156,6 +156,13 @@ def catalog(excluded_ids=(), max_candidates=12, excluded_titles=()):
             ],
         }
         story_record["protagonist_name"] = name
+        if episode == 1:
+            # Story-specific human puppet: explicitly directed actions, no
+            # generic fallback and no inference for the other episodes.
+            actions = ("discover_radio", "trace_cable", "hear_warning", "flee_door")
+            for beat, action in zip(story_record["story_beats"], actions):
+                beat["story_human_actor"] = "mara"
+                beat["story_human_action"] = action
         story_record.update(approved_character_metadata(story_record))
         proposals.append(story_record)
         if len(proposals) >= max_candidates:
