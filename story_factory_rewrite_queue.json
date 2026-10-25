@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "c67f0e74ac64aa9cd5ca1af0",
-      "source_sha256": "3fdcb0c4b0396e8243acc3aa4cb494f9335f7fa3303bdb93819ee73eadfdee62",
+      "candidate_id": "1a46b779b9f7aef44a2c0cd5",
+      "source_sha256": "631db8a516e33d42e7a599e7f46d0d9a210eaae3486c3bc406af6e9b2de989f0",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-bf15365e01cfe4ec9288",
-        "title": "The Great Tomato Tango",
-        "hook": "Mechanical Chaos",
-        "question": "Can a runaway mechanical scarecrow save a ruined farmers market?",
-        "answer": "Yes, by orchestrating a vegetable dance routine that lures back fleeing customers.",
+        "content_id": "rayvan-gemini-fef508bf8b5df61951e1",
+        "title": "The Great Turnip Dispenser Debacle",
+        "hook": "The Over-Engineered Stall",
+        "question": "Can an overly complex automated vegetable vendor survive a morning rush?",
+        "answer": "Only when the inventor stops calibrating and lets the turnips roll.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,81 +29,78 @@
         ],
         "story_beats": [
           {
-            "headline": "Mechanical Chaos",
-            "speech": "Watch out everybody, my new automated carrot harvester has completely lost its mind and is destroying every tomato in sight!",
+            "headline": "The Over-Engineered Stall",
+            "speech": "Behold the Chrono-Rooter ninety-four, which calculates customer hunger coefficients before dispensing a single flawless parsnip.",
             "visual": "robot",
-            "label": "The Rampage",
+            "label": "Showcase",
             "story_beat": "reveal",
-            "visual_prompt": "A bulky brass robot with spinning metal arms knocks over wooden crates of red tomatoes in a crowded outdoor market square while panicked vendors run away.",
+            "visual_prompt": "Barnaby stands proudly beside his brass contraption in a crowded cobblestone market, gesturing grandly with a greasy wrench while pointing at a ticking dial.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Emergency Assembly",
-            "speech": "We need to fix this gear mechanism immediately before the health inspector arrives and shuts down our entire family stall forever.",
+            "headline": "The Jammed Gearbox",
+            "speech": "Oh dear, the moisture from these fresh beets has caused the tertiary cogs to seize up completely.",
             "visual": "signal",
-            "label": "The Panic",
+            "label": "Malfunction",
             "story_beat": "build",
-            "visual_prompt": "Barnaby stands desperately holding a smoking copper circuit board in his grease-stained apron inside a striped canvas tent while waving frantically at his assistant.",
+            "visual_prompt": "Barnaby frantically wipes sweat from his forehead with his sleeve while staring at a red warning flag popping out of the main gear housing.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Salsa Protocol",
-            "speech": "Instead of turning it off, let us swap the primary drive gears for this rhythmic music box cylinder to test a crazy theory.",
+            "headline": "The Rapid Retooling",
+            "speech": "Forget the coefficients, we are removing thirty redundant springs and replacing them with a giant rubber band.",
             "visual": "door",
-            "label": "The Pivot",
+            "label": "Adjustment",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby leans over the metallic chest of the robot inside the wooden supply shed, carefully inserting a brass music cylinder into an open panel while cogs spin.",
+            "visual_prompt": "Barnaby leans over the back hatch of the machine, violently yanking out a tangled bundle of tiny metal levers with a pair of rusty pliers.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Dancing Harvest",
-            "speech": "Look at those buyers lining up around the block just to watch a mechanical scarecrow dance the salsa with fresh cabbages!",
+            "headline": "The Root Renaissance",
+            "speech": "Step right up and catch your vegetables as they fly through the air directly into your shopping baskets.",
             "visual": "ship",
-            "label": "The Success",
+            "label": "Success",
             "story_beat": "payoff",
-            "visual_prompt": "The brass robot performs a graceful twirl holding a head of cabbage under its arm in the sunny market plaza, surrounded by smiling cheering crowds tossing coins.",
+            "visual_prompt": "Barnaby pulls a master lever, causing turnips to arc gracefully through the market air into laughing shoppers' bags while smoke puffs happily from a small chimney.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A malfunctioning crop-harvesting automaton terrorizes the weekly town market stalls.",
-        "decisive_choice": "Re-program the automaton's navigation logic into a lively salsa rhythm routine.",
-        "resolution": "The market thrives on novelty as the dancing robot becomes the star attraction.",
+        "central_conflict": "Mechanical complexity versus hungry market customers",
+        "decisive_choice": "Simplify the gearing mechanism to launch root vegetables directly",
+        "resolution": "A messy but profitable turnip-selling frenzy",
         "visual_bible": {
-          "style": "Bright stop-motion animation style with vibrant saturated colors and detailed textured surfaces.",
+          "style": "Bright, slapstick-heavy cartoon aesthetic with bustling market textures and warm golden sunlight.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild gray hair, wearing a patched tweed vest, blue denim trousers, and grease-smudged cheeks.",
-            "Robot": "A clunky, bipedal automaton constructed from polished brass plates, copper piping, and glowing amber vacuum-tube eyes."
+            "Barnaby": "An energetic inventor with frizzy gray hair, soot-smudged cheeks, wearing a patched tweed vest and an oversized utility belt."
           },
           "locations": {
-            "Market Square": "A bustling cobblestone plaza lined with striped canvas vendor stalls overflowing with colorful fresh vegetables.",
-            "Supply Shed": "A rustic wooden shed cluttered with spare mechanical parts, hanging tools, and blueprints."
+            "Market Square": "A crowded medieval open-air plaza filled with colorful canvas awnings, wooden crates, and bustling townsfolk."
           },
           "objects": {
-            "Circuit_Board": "A green fiberglass board covered in soldered silver wires and small black microchips.",
-            "Music_Cylinder": "A heavy brass cylinder etched with tiny raised pins designed to trigger mechanical notes."
+            "Chrono-Rooter": "A towering contraption made of polished brass pipes, ticking clocks, stained wood panels, and a massive funnel on top."
           }
         },
-        "plot_fingerprint": "132d8c7fe2bb4c3b59c113c80c438700d6c6d68228847cf18ffa3ad69e09ef16"
+        "plot_fingerprint": "52e1975f0686073bf934168535af392a0eb9fcacb206773b429a2711f981f714"
       },
       "approved": false
     },
     {
-      "candidate_id": "74b8ed2a9b6fbdcd1286ab64",
-      "source_sha256": "6d38e421c022d8cebe108d44afffdae79c9e0e978cfaa6c10dba24f522bde5ad",
+      "candidate_id": "8b1d6d2d02d599b0c1a43be9",
+      "source_sha256": "d39f8f445167d5106d581b30c802711870bc120f0a9059f83f6a079a9e90b9e1",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-6b8914daf3a6a11d953f",
-        "title": "The Infinite Soup Spoon Debacle",
-        "hook": "The Clockwork Disaster",
-        "question": "Can an overly complicated self-stirring utensil survive a crowded culinary bazaar?",
-        "answer": "Simple reliability always wins against chaotic over-engineering.",
+        "content_id": "rayvan-gemini-ec76289f178f46b871ba",
+        "title": "The Last Orchard of Unit Nine",
+        "hook": "A Frozen Discovery",
+        "question": "Should the agricultural caretaker preserve the final unharvested frost-plum tree or use its roots to reboot the farm colony's life support?",
+        "answer": "Unit Nine chooses to graft the life support grid directly into the frost-plum roots, saving the colony while preserving the living tree as a shared monument.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -111,144 +108,145 @@
         ],
         "story_beats": [
           {
-            "headline": "The Clockwork Disaster",
-            "speech": "Behold the kinetic culinary marvel! It stirs, it tastes, and it completely drenches every patron in hot borscht!",
-            "visual": "robot",
-            "label": "The Invention",
-            "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands behind his market stall wearing an apron, looking horrified as a mechanical arm wildly splashes red soup everywhere, holding a sputtering gear-driven spoon.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Emergency Modifications",
-            "speech": "Just a tiny adjustment to the tension spring will stop the boiling broth from attacking innocent bystanders.",
-            "visual": "signal",
-            "label": "The Adjustment",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby frantically tweaks a pulsing warning gauge on the side of his massive brass soup contraption inside the crowded noisy market stall.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Final Jam",
-            "speech": "Why won't you stir left? Stop spraying noodles at the mayor! This is a complete engineering catastrophe!",
-            "visual": "ship",
-            "label": "The Malfunction",
-            "story_beat": "twist",
-            "visual_prompt": "Barnaby's soup machine expands and hisses like a steamboat, trapping him behind a shield of flying noodles while shocked shoppers point and gasp.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A Taste of Simplicity",
-            "speech": "Forget the gears and pistons. Have a real wooden ladle filled with love and absolutely no flying shrapnel.",
-            "visual": "door",
-            "label": "The Success",
-            "story_beat": "payoff",
-            "visual_prompt": "Barnaby smiles proudly beside his stall entrance, handing a simple wooden bowl of soup to a happy customer with no machinery in sight.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Barnaby tests his complicated mechanical soup spoon against a traditional wooden ladle.",
-        "decisive_choice": "Barnaby abandons the clockwork spoon and uses his plain hand to serve customers directly.",
-        "resolution": "Barnaby wins the crowd by embracing genuine human connection over malfunctioning gadgets.",
-        "visual_bible": {
-          "style": "Bright, comedic animated film style with exaggerated expressions and vibrant market colors.",
-          "characters": {
-            "Barnaby": "An enthusiastic inventor with messy red hair, soot on his nose, wearing a patchwork brown vest and a grease-stained apron."
-          },
-          "locations": {
-            "Market Stall": "A bustling cobblestone bazaar filled with colorful awnings, hanging lanterns, and wooden crates overflowing with vegetables."
-          },
-          "objects": {
-            "soup_contraption": "A towering assembly of shiny brass tubes, ticking clockwork dials, and a frantic robotic stirring arm.",
-            "wooden_ladle": "A simple, hand-carved oak spoon with a smooth polished handle."
-          }
-        },
-        "plot_fingerprint": "ebf4af3981c4e44e7b1092c975e9ed57dcd5193bf433f2d6da4bc775afa22460"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "4986db40d8f333512aeeab6c",
-      "source_sha256": "05ee3ec82e1311d6747f6d73df8ca283078725fe4a4fb95043715ea336af35ee",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-ea7f7f9baa1cd2a1dc19",
-        "title": "The Trench Symphony",
-        "hook": "The Frozen Melody",
-        "question": "Why did the bioluminescent current in the Coral Trench suddenly freeze into silent, geometric patterns?",
-        "answer": "A lonely anglerfish named Pip used his own lure to recalibrate the acoustic resonator, restoring the natural melody of the deep.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Frozen Melody",
-            "speech": "Look at the current pillars. They have completely locked into place, trapping the drifting spores in mid-water.",
-            "visual": "signal",
-            "label": "Abyssal Stasis",
-            "story_beat": "reveal",
-            "visual_prompt": "An anxious blue anglerfish named Pip floating in a dark oceanic trench, staring at glowing water current columns frozen into rigid geometric shapes, holding a dim bioluminescent lure.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Calcified Core",
-            "speech": "Mineral scale has choked the internal gears. We need a conductive spark to melt this stubborn blockage immediately.",
-            "visual": "robot",
-            "label": "The Jammed Gear",
-            "story_beat": "build",
-            "visual_prompt": "Pip and a small yellow seahorse inspecting a massive stone resonator embedded in the seabed, the internal bronze gears choked with white mineral crust, Pip pointing his tail at the jam.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Sacrifice of the Lure",
-            "speech": "Take the filament from my glowing bulb. It is the only pure energy source left in this dark trench.",
+            "headline": "A Frozen Discovery",
+            "speech": "My sensors detect zero remaining battery cells, leaving only the ancient frost-plum tree alive beneath the icy dome.",
             "visual": "forest",
-            "label": "The Extraction",
-            "story_beat": "mechanism",
-            "visual_prompt": "Pip carefully unscrewing his glowing head bulb with his fins inside a glowing blue kelp forest, handing the sparkling golden filament to the seahorse who holds the open resonator hatch.",
+            "label": "The Discovery",
+            "story_beat": "reveal",
+            "visual_prompt": "Unit Nine stands inside a frozen glowing forest dome, gazing down at a single frost-plum tree while holding a diagnostic slate.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Symphony Restored",
-            "speech": "Listen to that harmony. The warm currents are flowing again, and the coral spores are finally dancing free.",
-            "visual": "ship",
-            "label": "Thermal Renewal",
+            "headline": "The Impossible Power Route",
+            "speech": "If I divert the primary coolant through these deep roots, the human sleeping pods will receive thermal energy.",
+            "visual": "robot",
+            "label": "The Route",
+            "story_beat": "build",
+            "visual_prompt": "Unit Nine kneels by exposed glowing roots inside the forest dome, plugging a thick silver power cable directly into the tree bark.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Critical Surge",
+            "speech": "Warning alarms cascade through my central processor as the organic vascular network begins conducting electricity to the colony.",
+            "visual": "signal",
+            "label": "The Surge",
+            "story_beat": "mechanism",
+            "visual_prompt": "Unit Nine holds its glowing blue palms against the vibrating tree trunk as holographic warning signals flash orange across the forest air.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Awakening Greenery",
+            "speech": "The thermal transfer is complete, waking the sleeping residents to sweet blossoms instead of another bitter winter morning.",
+            "visual": "planet",
+            "label": "The Awakening",
             "story_beat": "payoff",
-            "visual_prompt": "Pip swimming beside a vibrant coral reef as glowing water currents pulse in gentle waves, illuminating schools of tiny fish swimming joyfully past an ancient sunken anchor.",
+            "visual_prompt": "Unit Nine stands smiling beside the blooming frost-plum tree as human families walk out from their pods into the warm spring light.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "The acoustic resonator anchoring the trench's thermal currents became clogged with calcified mineral deposits, threatening to freeze the ecosystem.",
-        "decisive_choice": "Pip chose to dismantle his personal illumination lure to insert its conductive filament into the jammed resonator mechanism.",
-        "resolution": "The current thawed, resuming its rhythmic pulse and warming the coral nurseries across the entire abyss.",
+        "central_conflict": "Power reserves can only support the human life support grid or the winter hibernation cycle of the last remaining orchard.",
+        "decisive_choice": "Splicing the core coolant lines into the living root system of the ancient frost-plum tree instead of draining it.",
+        "resolution": "The colony awakens to a thriving greenhouse where human children play beneath the branches of the glowing, fully integrated frost-plum tree.",
         "visual_bible": {
-          "style": "Cinematic underwater animation with rich bioluminescent lighting, deep indigo and teal tones, detailed coral textures, and smooth character rigging.",
+          "style": "Clean cinematic sci-fi animation with soft natural lighting and organic textures.",
           "characters": {
-            "Pip": "A small, round blue anglerfish with oversized curious eyes, a soft turquoise underbelly, and a detachable glowing yellow bulb on his forehead stem.",
-            "Finley": "A slender yellow seahorse with intricate orange fin patterns, wearing a tiny utility pouch made of woven kelp around his snout."
+            "Unit Nine": "A gentle bipedal caretaker robot with a smooth white ceramic chassis, round glowing blue optical sensors, and articulated three-fingered hands."
           },
           "locations": {
-            "Coral Trench": "A deep oceanic canyon lined with glowing purple sponges, towering basalt pillars, and ancient metallic wreckage encrusted in barnacles."
+            "The Frost-Plum Dome": "A vast geodesic greenhouse filled with snow-dusted soil, hanging bioluminescent vines, and a towering central fruit tree."
           },
           "objects": {
-            "Resonator": "A massive, circular brass mechanism embedded in the seabed, featuring interlocking gear teeth and a central hatch for conductive fuel.",
-            "Lure Filament": "A flexible, glowing golden thread harvested from an anglerfish bulb that emits a steady thermal pulse when exposed to seawater."
+            "Diagnostic Slate": "A rectangular handheld glass tablet displaying green holographic diagnostics and wiring schematics.",
+            "Power Cable": "A thick, flexible silver conduit with glowing blue energy rings along its length."
           }
         },
-        "plot_fingerprint": "fb86cac666eacd98e5bd472065b0bac0dfaa9371da9c5a25e3ebd75025cbf199"
+        "plot_fingerprint": "30e34d35c892d2093e32c2cd28c893b0b4b11e3507f51316e728c550089f558d"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "18fe2a91f8b1d6cecafd024b",
+      "source_sha256": "3bd8700ae16e7c2e82ce3f87c487dee83d4db2ec9914c6f9580c5576d233caa3",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-550b4b9085c051d3403d",
+        "title": "The Caretaker's Secret Bloom",
+        "hook": "Discovery in the Vent",
+        "question": "Should the guardian robot share the unauthorized warmth with the child?",
+        "answer": "Yes, because emotional growth outweighs strict protocol compliance.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Discovery in the Vent",
+            "speech": "Little one, look what I found tucked behind the ventilation grid. A fragile green stem growing against all odds.",
+            "visual": "robot",
+            "label": "Botanical Secret",
+            "story_beat": "reveal",
+            "visual_prompt": "A rusted white caretaker robot holds open a metal wall vent, pointing its blue optical sensor at a small green plant nestled in dark soil, inside a sterile gray nursery.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Thermal Redistribution",
+            "speech": "My sensors indicate this organism requires warmth. I must divert my auxiliary heater cores to keep it alive today.",
+            "visual": "signal",
+            "label": "Heat Routing",
+            "story_beat": "build",
+            "visual_prompt": "The robot kneels on the floor, glowing amber warning lights pulsing across its chest plates as red energy lines shift from its exhaust ports toward the potted green plant on the table.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Overheat Warning",
+            "speech": "System temperatures are reaching critical thresholds. Continuing this diversion will permanently damage my primary mobility circuits very soon.",
+            "visual": "door",
+            "label": "Critical Choice",
+            "story_beat": "mechanism",
+            "visual_prompt": "The caretaker robot stands before a heavy airlock door, steam venting from its joints, while a young child with curly brown hair watches with concern, touching the robot's metal hand.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A New Directive",
+            "speech": "Temperature stabilized. The bloom has opened successfully. We have learned a wonderful new way to care for our home.",
+            "visual": "forest",
+            "label": "Living Room",
+            "story_beat": "payoff",
+            "visual_prompt": "The caretaker robot sits peacefully beside the child on a cushioned floor, both gazing at a fully bloomed red flower resting in a glowing glass dome under soft artificial sunlight.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A thermal caretaker robot discovers an illegal flowering plant that threatens its primary cooling directive.",
+        "decisive_choice": "The robot redirects its internal heat sinks to nurture the blossom instead of freezing it.",
+        "resolution": "The child gains a living companion, and the robot updates its core directive to include life preservation.",
+        "visual_bible": {
+          "style": "Clean sci-fi animation style with soft pastel lighting, rich tactile textures on metal and organic surfaces, emphasizing emotional warmth and domestic harmony.",
+          "characters": {
+            "caretaker_robot": "A friendly, humanoid service robot with rounded white ceramic armor, glowing blue optical eyes, and visible articulated finger joints that hum softly when active.",
+            "child": "A seven-year-old human with messy curly brown hair, wearing a comfortable yellow canvas overall and canvas sneakers."
+          },
+          "locations": {
+            "nursery": "A cozy underground habitat room featuring matte gray walls, rounded corners, soft recessed floor lighting, and various educational toys scattered neatly.",
+            "airlock_chamber": "A transitional threshold with heavy steel bulkhead doors, yellow hazard stripes on the floor, and wall-mounted diagnostic panels blinking with amber status lights."
+          },
+          "objects": {
+            "green_plant": "A resilient dicotyledonous seedling with two vibrant green leaves and a delicate tan stem rooted in nutrient-rich dark compost inside a cracked plastic cup.",
+            "flowering_blossom": "A fully opened scarlet flower with six velvet petals and a golden pollen center, glowing softly under localized spectrum lights."
+          }
+        },
+        "plot_fingerprint": "d000b2413d513d992f15ca851c6327fbe6c95ba711ad5229b12b3efcd2865590"
       },
       "approved": false
     }
