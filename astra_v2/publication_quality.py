@@ -27,4 +27,5 @@ def publication_rejection(candidate: dict) -> str | None:
         return "unreviewed_template_procedural_story"
     if _ARTICLE_COLLISION.search(title):
         return "malformed_title_article_collision"
-    return None
+    from astra_v2.renderer_eligibility import publication_renderer_rejection
+    return publication_renderer_rejection(candidate)
