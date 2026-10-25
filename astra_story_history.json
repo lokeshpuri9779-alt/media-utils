@@ -1911,6 +1911,58 @@
       "central_conflict": "A sudden winter blizzard traps an injured climber on an isolated mountain ledge while night approaches.",
       "decisive_choice": "Lyra chooses to deploy her experimental rescue beacon rocket across the deep crevasse instead of waiting for morning backup.",
       "resolution": "The beacon successfully anchors a rescue line, allowing Lyra to haul the climber to safety moments before the ridge collapses."
+    },
+    {
+      "content_id": "rayvan-gemini-14366e610c83091b2255",
+      "video_id": "lAObNcoAmw8",
+      "confirmed_at": "2026-10-25T15:51:35.946217+00:00",
+      "title": "The Mystery of Platform Nine and the Missing Luggage",
+      "plot_fingerprint": "86aee25b1161f9493b2234793d77ac1ac0702ad7774bfc71f7c86081cc3df087",
+      "story_beats": [
+        {
+          "headline": "Missing Ledger Panic",
+          "speech": "Pardon me, Inspector, but the master logbook has vanished completely from the ticket counter right before departure.",
+          "visual": "signal",
+          "label": "Platform Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Stationmaster Bramble with round brass spectacles and a navy uniform holding an empty wooden clipboard on the bustling platform while a stray ginger cat named Pip sits nearby licking its paw.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Cat's Clue",
+          "speech": "Look closely at how Pip keeps scratching the brass handle of your old leather lunch tin, master Bramble.",
+          "visual": "robot",
+          "label": "Feline Discovery",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the ginger cat nudges a battered green tin lunchbox resting on a wooden bench while Bramble looks down in absolute astonishment with wide eyes.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Unlocking the Tin",
+          "speech": "Good heavens, I packed my midday sandwiches right on top of the confidential station registry this morning!",
+          "visual": "door",
+          "label": "Tin Inspection",
+          "story_beat": "twist",
+          "visual_prompt": "Bramble carefully opens the green metal lunch tin on the station bench, revealing parchment pages wedged beside a wrapped cheese sandwich while curious passengers watch.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Express Departures Resume",
+          "speech": "All tickets are accounted for and the morning express is finally cleared to depart down the southern line.",
+          "visual": "ship",
+          "label": "Safe Departure",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramble waves a green signal flag proudly beside the steaming black locomotive engine while Pip rests contentedly on the stationmaster's booted foot.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "The station ledger went missing during the 8:00 express boarding.",
+      "decisive_choice": "Search the stationmaster's own misplaced meal tin instead of locking down the trains.",
+      "resolution": "The ledger is recovered safely, and the morning departures resume without further delay."
     }
   ]
 }
