@@ -31,7 +31,7 @@ jobs:
           python studio_renderer.py --preview runtime-artifacts/studio-smoke/studio.mp4
       - name: Verify encoded video and report
         run: |
-          ffprobe -v error -show_entries stream=codec_name,width,height -select_streams v:0 -of json runtime-artifacts/studio-smoke/studio.mp4 > runtime-artifacts/studio-smoke/ffprobe.json
+          ffprobe -v error -show_entries format=duration:stream=index,codec_type,codec_name,width,height,sample_rate -of json runtime-artifacts/studio-smoke/studio.mp4 > runtime-artifacts/studio-smoke/ffprobe.json
           python - <<'PY'
           import json
           from pathlib import Path
@@ -39,9 +39,12 @@ jobs:
           video=root/'studio.mp4'
           assert video.is_file() and video.stat().st_size > 10000, 'Studio MP4 missing or empty'
           probe=json.loads((root/'ffprobe.json').read_text())
-          stream=probe['streams'][0]
-          assert stream['codec_name']=='h264'
-          assert (stream['width'],stream['height'])==(1080,1920)
+          video_streams=[x for x in probe['streams'] if x['codec_type']=='video']
+          audio_streams=[x for x in probe['streams'] if x['codec_type']=='audio']
+          assert len(video_streams)==1 and video_streams[0]['codec_name']=='h264'
+          assert (video_streams[0]['width'],video_streams[0]['height'])==(1080,1920)
+          assert audio_streams and any(x['codec_name']=='aac' for x in audio_streams), 'AAC narration track missing'
+          assert float(probe['format']['duration']) > 0, 'Invalid encoded duration'
           PY
       - name: Upload rendered evidence
         if: always()
