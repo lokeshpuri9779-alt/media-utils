@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 16,
-  "confirmed_today": 15,
-  "last_attempt_at": "2026-10-25T22:43:27.326067+00:00",
+  "attempts": 17,
+  "confirmed_today": 16,
+  "last_attempt_at": "2026-10-25T23:14:07.567256+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -3682,16 +3682,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "kJdosB6EFuc": {
-      "content_id": "rayvan-forge-68dc3522eacae4ca",
+    },
+    "rayvan-forge-68dc3522eacae4ca": {
+      "video_id": "kJdosB6EFuc",
+      "confirmed_at": "2026-10-25T22:59:34.685832+00:00",
       "title": "The Raccoon and the Vanished Painting",
-      "day": "2026-10-26",
-      "uploaded_at": "2026-10-25T22:43:29.495853+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-25T22:43:29.495853+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "7f55ed33da77c760557f78459e8ff753ca157f036fae8ad1a6f8e42f96e000f1",
       "story_beats": [
@@ -3732,22 +3730,73 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "muyPQeNpbd4": {
+      "content_id": "rayvan-forge-2576b852a831a137",
+      "title": "The Panda and the Stubborn Windmill",
+      "day": "2026-10-26",
+      "uploaded_at": "2026-10-25T23:14:09.756262+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "dc31d39a8f65ce36895f3504e7307438f8e4409d1e65dd3e1dc6c7dd01efc018",
+      "story_beats": [
+        {
+          "headline": "NO FLOUR TODAY",
+          "speech": "The village windmill stopped spinning on baking day, leaving the panda baker with sacks of unground wheat.",
+          "visual": "forest",
+          "label": "MILL STOPPED",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A LOUD CREAK",
+          "speech": "He pushed a sail with a long pole, but a tangled rope tightened around the axle and stopped it again.",
+          "visual": "door",
+          "label": "STUCK AGAIN",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SAFETY KNOT",
+          "speech": "After securing the sails, he climbed the maintenance ladder and untied the knot using a small wooden lever.",
+          "visual": "book",
+          "label": "ROPE RELEASED",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "BREAD FOR EVERYONE",
+          "speech": "The windmill turned freely once more, and the baker shared fresh warm loaves with the helpers who held the ladder.",
+          "visual": "forest",
+          "label": "FRESH BREAD",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-25T22:35:57.268273+00:00",
+  "last_preflight_at": "2026-10-25T22:59:34.003484+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-25T22:43:29.885320+00:00",
+    "at": "2026-10-25T23:14:10.240220+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
-    "job_status_before_persist": "success",
+    "job_status_before_persist": "cancelled",
     "dependencies_step": "success",
-    "publish_step": "success",
+    "publish_step": "cancelled",
     "cover_tests": "",
     "motion_tests": "success",
     "animal_tests": "success",
@@ -8377,10 +8426,57 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-2576b852a831a137": {
+      "at": "2026-10-25T23:14:07.567238+00:00",
+      "title": "The Panda and the Stubborn Windmill",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "dc31d39a8f65ce36895f3504e7307438f8e4409d1e65dd3e1dc6c7dd01efc018",
+      "story_beats": [
+        {
+          "headline": "NO FLOUR TODAY",
+          "speech": "The village windmill stopped spinning on baking day, leaving the panda baker with sacks of unground wheat.",
+          "visual": "forest",
+          "label": "MILL STOPPED",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A LOUD CREAK",
+          "speech": "He pushed a sail with a long pole, but a tangled rope tightened around the axle and stopped it again.",
+          "visual": "door",
+          "label": "STUCK AGAIN",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SAFETY KNOT",
+          "speech": "After securing the sails, he climbed the maintenance ladder and untied the knot using a small wooden lever.",
+          "visual": "book",
+          "label": "ROPE RELEASED",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "BREAD FOR EVERYONE",
+          "speech": "The windmill turned freely once more, and the baker shared fresh warm loaves with the helpers who held the ladder.",
+          "visual": "forest",
+          "label": "FRESH BREAD",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-25T22:43:29.885278+00:00",
+    "at": "2026-10-25T23:14:10.240114+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -8391,38 +8487,38 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-25T22:43:29.885314+00:00",
+    "at": "2026-10-25T23:14:10.240204+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-25T22:36:16.889904+00:00",
+    "at": "2026-10-25T23:00:03.682623+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-68dc3522eacae4ca",
-    "video_url": "https://www.youtube.com/watch?v=kJdosB6EFuc",
+    "content_id": "rayvan-forge-2576b852a831a137",
+    "video_url": "https://www.youtube.com/watch?v=muyPQeNpbd4",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-25T22:43:29.885119+00:00",
+    "at": "2026-10-25T23:14:10.239833+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "success",
-    "job_status_before_persist": "success",
+    "publish_step": "cancelled",
+    "job_status_before_persist": "cancelled",
     "outcome": "processing",
     "reason": "",
-    "fresh_upload_attempted": true,
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-25T22:43:29.885276+00:00",
+    "at": "2026-10-25T23:14:10.240106+00:00",
     "collection_status": "collected",
-    "publish_step": "success",
+    "publish_step": "cancelled",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 57,
+        "eligible": 56,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3,
@@ -8436,21 +8532,21 @@
           "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
         },
         "seen": 8,
-        "total": 187
+        "total": 186
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 187,
+        "before": 186,
         "fingerprint": 0,
         "id": 8,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 179,
+        "remaining": 178,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 179,
-        "remaining": 57
+        "pool": 178,
+        "remaining": 56
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,

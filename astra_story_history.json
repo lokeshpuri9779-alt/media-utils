@@ -3176,6 +3176,51 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-forge-68dc3522eacae4ca",
+      "video_id": "kJdosB6EFuc",
+      "confirmed_at": "2026-10-25T22:59:34.685832+00:00",
+      "title": "The Raccoon and the Vanished Painting",
+      "plot_fingerprint": "7f55ed33da77c760557f78459e8ff753ca157f036fae8ad1a6f8e42f96e000f1",
+      "story_beats": [
+        {
+          "headline": "EMPTY FRAME",
+          "speech": "The gallery's prize painting disappeared an hour before opening, leaving a clean rectangle on the dusty wall.",
+          "visual": "door",
+          "label": "MISSING ART",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A FALSE TRAIL",
+          "speech": "A raccoon followed muddy pawprints outside, but they led only to the gardener's abandoned boots.",
+          "visual": "forest",
+          "label": "WRONG CLUE",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE BLUE STREAK",
+          "speech": "A fresh blue paint streak on a delivery cart matched the frame, so she checked beneath its folded blankets.",
+          "visual": "book",
+          "label": "FOUND IT",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE EXHIBITION OPENS",
+          "speech": "The painting had slipped behind the cart during unloading; the raccoon rehung it as the first visitors arrived.",
+          "visual": "door",
+          "label": "CASE CLOSED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
