@@ -12,6 +12,7 @@ from PIL import Image, ImageChops, ImageDraw
 from astra_errors import CreativeReject
 from astra_v2.human_story_composition import (
     STAGE,STAGE_SIZE,DIRECTED_SHOTS,DIRECTED_VIEWS,
+    CRITICAL_HORIZONTAL_SPANS,MAX_ACTOR_CROP_TOP,
     stage_crop_box,compose_story_stage,view_yaw,
 )
 from astra_v2.human_story_performance import (
@@ -60,6 +61,25 @@ class DirectedPortraitAndStageTests(unittest.TestCase):
             "warn_parallel_cities","split_glass_key")))
         self.assertGreater(sizes["hear_warning"]-sizes["survey_dead_city"],.35)
         self.assertGreater(sizes["inspect_reverse_clock"]-sizes["survey_dead_city"],.30)
+
+    def test_every_reframe_keeps_required_people_and_story_props_visible(self):
+        self.assertEqual(set(CRITICAL_HORIZONTAL_SPANS),set(DIRECTED_SHOTS))
+        for action,span in CRITICAL_HORIZONTAL_SPANS.items():
+            for t in (.0,6.0,12.0):
+                box=stage_crop_box(action,t,12)
+                self.assertLessEqual(box[0],span[0],
+                    f"Actor is cropped off left of {action}")
+                self.assertGreaterEqual(box[2],span[1],
+                    f"Plot prop or second actor is cropped off right of {action}")
+                if action != "seal_and_reveal_sea_door":
+                    self.assertLessEqual(box[1],MAX_ACTOR_CROP_TOP,
+                        f"Camera cut actor face out of {action}")
+        # The first valid draft had 1.49x centered on the stranger at x=733,
+        # clipping Mara's head completely from the future photograph shot.
+        photograph=stage_crop_box("inspect_future_photograph",12,12)
+        self.assertLessEqual(photograph[0],237)
+        self.assertGreaterEqual(photograph[2],905)
+        self.assertLessEqual(photograph[1],603)
 
     def test_no_single_frame_jumps_in_30fps_stage_camera_or_head(self):
         for action in DIRECTED_SHOTS:
