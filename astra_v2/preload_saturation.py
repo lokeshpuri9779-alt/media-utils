@@ -22,7 +22,11 @@ def scheduled_shorts_skip(*, excluded_ids=(), env=None, inventory=None, sample=N
         lane = int(config.get("ASTRA_PRELOAD_LANE", "0"))
         lanes = int(config.get("ASTRA_PRELOAD_LANES", "1"))
         target = max(1, min(24, int(config.get("ASTRA_PRELOAD_BUFFER", "6"))))
-        recent_hours = max(1, min(12, int(config.get("ASTRA_PRELOAD_SATURATION_HOURS", "4"))))
+        # Match a day's conservative rolling production buffer rather than
+        # requiring all 24 validated Shorts to have been generated in only
+        # four hours. The hard 12h cap, trust checks and four real package
+        # policy/hash samples remain mandatory before skipping any lane.
+        recent_hours = max(1, min(12, int(config.get("ASTRA_PRELOAD_SATURATION_HOURS", "12"))))
         sample_count = min(4, target)
         if config.get("GITHUB_EVENT_NAME") != "schedule":
             return decision
