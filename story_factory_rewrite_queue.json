@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "a5f9d8ff8c765137c15742bb",
-      "source_sha256": "e864b0b9d50793453b0a2f45110d3aa71961554363eb05f271d2b3cbe00c71d3",
+      "candidate_id": "363e0eba90fb36f945483350",
+      "source_sha256": "6b00320b745f40ec3ebb572e0386ffd32a02863c4c017c1df5c0168bca320946",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-44252b61a3e2dee83991",
-        "title": "The Great Tomato Launch Fiasco",
-        "hook": "The Grand Unveiling",
-        "question": "Can an over-engineered vegetable chopper survive a crowded morning market?",
-        "answer": "Yes, by pivoting from a kitchen disaster into an accidental crowd-pleasing entertainment act.",
+        "content_id": "rayvan-gemini-c447b3a9428e3413a2cd",
+        "title": "The Great Turnip Caper",
+        "hook": "The Automated Disaster",
+        "question": "Can an over-engineered pneumatic vegetable slicer survive the morning rush at the central farmers market?",
+        "answer": "Yes, by abandoning speed entirely and converting into an accidental butter churn.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,78 +29,80 @@
         ],
         "story_beats": [
           {
-            "headline": "The Grand Unveiling",
-            "speech": "Behold the Turbo-Chopper Three Thousand! It slices, it dices, and it completely dominates your kitchen prep time effortlessly!",
+            "headline": "The Automated Disaster",
+            "speech": "Behold the MegaSlicer ninety-thousand! It chops fifty turnips a second with absolute mechanical perfection and zero effort!",
             "visual": "robot",
-            "label": "The Invention",
+            "label": "The Machine",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby stands proudly behind a wooden market stall, gesturing toward a brass and copper mechanical contraption with spinning steel blades, wearing a green apron and safety goggles, while morning market shoppers watch curiously.",
+            "visual_prompt": "Inventor Barnaby stands proudly pointing at a steaming brass robot contraption while flying turnip chunks fill the crowded marketplace air.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Mechanical Malfunction",
-            "speech": "Wait, do not pull that emergency lever yet! The calibration spring is slightly loose and now everything is spinning uncontrollably!",
+            "headline": "The Carrot Crisis",
+            "speech": "Stop the gears right now! The carrot intake valve is jammed solid and the pressure gauge is glowing bright red!",
             "visual": "signal",
-            "label": "The Glitch",
+            "label": "The Warning",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically waves his hands in the air, shouting at a copper-plated machine that is vibrating violently on the wooden table, sending a red warning flag up from a spring-loaded antenna while market vendors duck behind baskets.",
+            "visual_prompt": "Market vendor Clara frantically waves a flashing red warning beacon at Barnaby as thick green steam erupts from the machine's exhaust vent.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Desperate Intervention",
-            "speech": "Take this oversized red cabbage and jam it straight into the main intake gear before the whole stall blows up!",
+            "headline": "The Desperate Swap",
+            "speech": "There is no time to fix the blades! Dump the leftover heavy cream into the intake hopper before it explodes!",
             "visual": "ship",
-            "label": "The Jam",
+            "label": "The Pivot",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby lunges forward holding a giant round purple cabbage in both hands, aggressively shoving it into the churning metal gears of the smoky copper machine while a crowd of surprised onlookers gasps.",
+            "visual_prompt": "Barnaby frantically pours a massive metal jug of cream into the top funnel while Clara spins a large iron steering wheel lever backward.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Triumphant Payoff",
-            "speech": "Look at those perfectly shredded toppings! That will be five coins for the best vegetable show in the entire city!",
-            "visual": "door",
+            "headline": "The Sweet Reward",
+            "speech": "Who could have predicted this? We are no longer vegetable farmers, we are the wealthiest dairy moguls in the entire county!",
+            "visual": "forest",
             "label": "The Success",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby smiles widely, holding out a wooden bowl overflowing with finely shredded cabbage to a cheering line of market customers, with the smoking copper machine resting quietly behind him near a slatted wooden storefront.",
+            "visual_prompt": "Barnaby and Clara happily serve golden butter tubs to a massive line of cheering customers against a backdrop of sunlit wooden market stalls.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A chaotic fruit and vegetable market testing an unstable mechanized chopper.",
-        "decisive_choice": "To throw a whole cabbage directly into the runaway gearing system to jam it safely.",
-        "resolution": "Winning over roaring crowds who mistake the mechanical explosion for performance art.",
+        "central_conflict": "Pneumatic slicer destroys every vegetable in stall",
+        "decisive_choice": "Reversal of the intake turbine to whip cream",
+        "resolution": "Instant sell-out of gourmet churned butter",
         "visual_bible": {
-          "style": "Bright, colorful 3D animated family comedy style with rich textures and dynamic lighting.",
+          "style": "Bright, colorful stop-motion puppet animation aesthetic with highly detailed mechanical props and bustling crowded backgrounds.",
           "characters": {
-            "Barnaby": "An energetic young inventor with messy brown hair, wearing a stained green apron, round brass safety goggles pushed onto his forehead, and an enthusiastic expression."
+            "Barnaby": "An eccentric inventor with wild orange hair, wearing a grease-stained tweed vest and oversized round safety goggles.",
+            "Clara": "A practical market vendor wearing a crisp green apron, a wide-brimmed straw hat, and holding a wooden clipboard."
           },
           "locations": {
-            "Market Square": "A bustling outdoor town market filled with wooden vendor stalls, hanging canvas awnings, and cobblestone pathways."
+            "Market Stall": "A rustic wooden canopy booth cluttered with crates of colorful vegetables, chalk price signs, and dangling copper pots."
           },
           "objects": {
-            "Turbo_Chopper": "A noisy, over-engineered brass and copper mechanical contraption featuring exposed spinning steel gears, a spring-loaded red warning flag, and a large central intake funnel."
+            "MegaSlicer": "A towering contraption of polished brass pipes, ticking analog dials, whirring steel gears, and a large copper funnel top.",
+            "Cream Jug": "A heavy galvanized steel bucket with a side pouring spout and a braided wire handle."
           }
         },
-        "plot_fingerprint": "2a6df2a6d575696d04173bb754fcd162cf719c0ad629d0f6aba638548432cd53"
+        "plot_fingerprint": "0d7965da364c79b23705222d627832d59515f5be2e4eb1b968f0ff96750e1c76"
       },
       "approved": false
     },
     {
-      "candidate_id": "79fb9a17868b5704c8953a2e",
-      "source_sha256": "02c35a3cd6e5ef887f4961b0d39795bee064a8c8af2ba41c0ff094e38a6f6d43",
+      "candidate_id": "a8c50c2a6154b76dff319b2f",
+      "source_sha256": "74035b3d792db5786c6b140474418c9f8454f46409033b7cb17bae3da47991ee",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-3373dce7496e475ee00d",
-        "title": "The Quantum Steering Rebuild",
-        "hook": "Navigation Warning",
-        "question": "Can the crew repair the gravity well steering drive before entering the asteroid belt?",
-        "answer": "Yes, by trusting the cadet's unorthodox magnetic balancing method.",
+        "content_id": "rayvan-gemini-ecd808b139ffb156a6bd",
+        "title": "The Resonance Valve Crisis",
+        "hook": "Plasma Pressure Spikes",
+        "question": "Can the crew vent the hyper-dense plasma before the reactor core seals permanently?",
+        "answer": "By rerouting the backup coolant through the primary conduit, they stabilize the core just in time.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -108,81 +110,83 @@
         ],
         "story_beats": [
           {
-            "headline": "Navigation Warning",
-            "speech": "Automated diagnostics failed! We cannot enter the asteroid belt without the primary gravity steering drive fully functioning right now.",
+            "headline": "Plasma Pressure Spikes",
+            "speech": "Warning sector seven is overheating fast. If we do not vent this plasma immediately, the whole hull will tear apart.",
             "visual": "ship",
-            "label": "System Failure",
+            "label": "Overheating Chamber",
             "story_beat": "reveal",
-            "visual_prompt": "Captain Vance with a worried expression stands inside the main bridge of the starship pointing at a flashing red diagnostic console while Cadet Finn holds a heavy copper calibration wrench.",
+            "visual_prompt": "Engineer Vesper stands inside the cramped engine room of the star freighter, pointing a glowing multi-tool at a vibrating alloy pipe while sweat beads on her forehead.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Conflicting Methods",
-            "speech": "We must scrap the automated recalibration protocol and manually realign the magnetic coils using my field density formula.",
+            "headline": "The Stubborn Intake",
+            "speech": "The automated release mechanism is totally jammed. We have to override the system manually right now before it explodes.",
             "visual": "robot",
-            "label": "Cadet Proposal",
+            "label": "Jammed Valve",
             "story_beat": "build",
-            "visual_prompt": "Cadet Finn wearing a stained utility jumpsuit holds up a glowing holographic tablet displaying a magnetic field equation while Maintenance Droid Unit-7 whirs anxiously nearby in the engine room.",
+            "visual_prompt": "Maintenance droid Unit Seven grips a rusted titanium valve handle with its heavy metal claws, sparks flying against the dark bulkhead in the cramped engine bay.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Emergency Override",
-            "speech": "Time is running out! I am locking out the main bridge terminal to let Finn execute the manual magnetic balance sequence.",
+            "headline": "Manual Override Risk",
+            "speech": "If I pull this manual release lever without the stabilizer, the blowback will fry every electrical system on this deck.",
             "visual": "signal",
-            "label": "Manual Override",
+            "label": "Danger Alarm",
             "story_beat": "mechanism",
-            "visual_prompt": "Captain Vance slams a heavy brass emergency override lever on the auxiliary control panel while warning data streams rapidly across a large overhead navigation display screen.",
+            "visual_prompt": "Pilot Jax holds a flashing red diagnostic tablet in the dimly lit control corridor, looking worriedly at Vesper across the pulsing orange warning lights.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Safe Passage",
-            "speech": "Look at the telemetry gauges! The steering drive is fully stable and we are successfully gliding past the asteroid field.",
+            "headline": "Core Stabilized",
+            "speech": "We did it. The pressure is dropping back to normal levels and the main reactor drive is finally secure.",
             "visual": "planet",
-            "label": "Successful Navigation",
+            "label": "Safe Horizon",
             "story_beat": "payoff",
-            "visual_prompt": "Captain Vance and Cadet Finn smile together inside the observation dome looking out at a vibrant blue gas giant planet framed by a smooth field of distant grey asteroids.",
+            "visual_prompt": "Vesper and Jax smile side by side in the quiet cockpit, watching a calm green planet slowly rotate through the large main viewport window.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Disagreement between manual calibration and automated diagnostics for steering repair.",
-        "decisive_choice": "Override the main computer and execute the cadet's manual magnetic balance.",
-        "resolution": "The steering drive stabilizes smoothly, allowing the ship to navigate the asteroid belt safely.",
+        "central_conflict": "A stuck intake valve traps high-pressure plasma in the main chamber, threatening an explosive hull breach.",
+        "decisive_choice": "Override the automated safety protocols to manually purge the burning plasma into space.",
+        "resolution": "The core cools down safely, saving the ship and teaching the crew the value of decisive teamwork.",
         "visual_bible": {
-          "style": "Cinematic retro-futuristic science fiction with practical industrial textures and vibrant holographic accents.",
+          "style": "Clean sci-fi anime style with vibrant neon accents and realistic mechanical textures.",
           "characters": {
-            "Captain Vance": "A seasoned commander with silver-streaked hair, wearing a dark navy utility jacket with brass clasps and determined facial features.",
-            "Cadet Finn": "A young ambitious engineer with messy brown hair, wearing a mustard-yellow jumpsuit covered in small tool pockets."
+            "Vesper": "A human engineer with sharp blue eyes, tied-back brown hair, wearing a utility jumpsuit covered in pockets and grease smudges.",
+            "Jax": "A cautious pilot with short blonde hair, wearing a dark blue flight jacket with silver mission patches on the shoulders.",
+            "Unit Seven": "A squat, bipedal maintenance robot made of brushed steel with a single glowing yellow optical lens on its dome head."
           },
           "locations": {
-            "Main Bridge": "A cramped circular control room lined with analog switches, glowing amber monitors, and a large central viewport.",
-            "Engine Room": "A cavernous industrial chamber filled with exposed copper pipes, pulsing magnetic coils, and overhead gantry cranes."
+            "Engine Room": "A claustrophobic compartment lined with exposed wiring, heavy hydraulic pistons, and massive coolant tanks.",
+            "Cockpit": "A sleek command center featuring curved holographic displays, padded pilot seats, and a sweeping panoramic window."
           },
           "objects": {
-            "Calibration Wrench": "A heavy matte-black steel tool with adjustable copper jaws and a digital torque read-out screen on the handle.",
-            "Emergency Lever": "A thick mechanical lever made of polished brass attached to a heavy-duty hydraulic baseplate on the control console."
+            "Multi-tool": "A handheld metallic device with an extensible laser tip that glows cyan when activated.",
+            "Diagnostic Tablet": "A thin slate of black glass displaying moving red warning graphs and telemetry data.",
+            "Valve Handle": "A heavy hexagonal wheel made of scored industrial steel bolted directly to the main fuel line."
           }
         },
-        "plot_fingerprint": "8ea5c959edbf540c41fbee75bc8add0fb93711ba4655af7169e7a1bdda6fbe06"
+        "plot_fingerprint": "335049575f7310a034bdfa4276a957a29432339d79b0a8e50b1f3855d6868278"
       },
       "approved": false
     },
     {
-      "candidate_id": "9e77a02c07de0b049db28ca9",
-      "source_sha256": "9975f3829c38128036cfd48ff137e73cd48ab0dd998891e84ed5cddb522edc1c",
+      "candidate_id": "f6766aaca6f26a51b1129422",
+      "source_sha256": "d5ea9e4be1a484dcedae2b1cbea5775990c42450bd9dd8ba1ddb1f46d7fa4930",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-17e9b546c4fdce67d69e",
-        "title": "The Tide-Clock Regatta",
-        "hook": "The Seized Rudder",
-        "question": "Can a student engineer redesign a malfunctioning wave-powered steering fin before the high-tide festival parade?",
-        "answer": "By substituting the jammed gear with a buoyant cork pendulum, she aligns the flagship just in time.",
+        "content_id": "rayvan-gemini-9237bad5a3ec2b74f68d",
+        "title": "The Stationmaster's Last Telegram",
+        "hook": "The Midnight Halt",
+        "question": "Who keeps resetting the platform signal to stop the midnight mail train?",
+        "answer": "An escaped carrier pigeon wearing a customized ankle tracker that trips the mechanical lever.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -190,63 +194,66 @@
         ],
         "story_beats": [
           {
-            "headline": "The Seized Rudder",
-            "speech": "Look at this gear! The saltwater corrosion completely fused the bronze teeth together before the launch.",
-            "visual": "ship",
-            "label": "Damage Revealed",
-            "story_beat": "reveal",
-            "visual_prompt": "Engineer Maya inspects a rusted metal gear on the wooden deck of her festival ship, holding a greasy wrench with a worried expression under bright afternoon sun.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Mechanical Pivot",
-            "speech": "We need an alternate motion converter that uses the natural rhythm of the incoming coastal waves.",
+            "headline": "The Midnight Halt",
+            "speech": "Another unauthorized stop on track four! We must find who is tampering with the semaphore levers before morning arrives.",
             "visual": "signal",
-            "label": "Engineering Build",
-            "story_beat": "build",
-            "visual_prompt": "Maya welds a series of brass linkages to a hollow copper cylinder on her workbench, sparks flying as she secures the new pivot arm.",
+            "label": "Semaphore Red",
+            "story_beat": "reveal",
+            "visual_prompt": "Stationmaster Arthur stands on platform two at night, holding a brass lantern, staring up at a flashing red railway signal.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Buoyant Counterweight",
-            "speech": "This sealed cork cylinder will catch the tidal surge and push the rudder without needing gears.",
+            "headline": "Following the Feathers",
+            "speech": "Look closely at the mechanism base. There are tiny claw marks and lost grey feathers scattered across the iron counterweight.",
             "visual": "forest",
-            "label": "System Mechanism",
-            "story_beat": "mechanism",
-            "visual_prompt": "Maya attaches a large carved cork float to the steering linkage near the wooden dock, testing its vertical movement against the splashing water.",
+            "label": "Feather Clues",
+            "story_beat": "build",
+            "visual_prompt": "Arthur kneels beside the heavy iron lever base, pointing his flashlight at small grey feathers caught in the rusty gears.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Triumphant Voyage",
-            "speech": "The pendulum swings with every wave, steering our vessel cleanly past the pier and winning the prize.",
+            "headline": "The Unexpected Culprit",
+            "speech": "Well, would you look at this clever little bird pulling the heavy brass wire with its custom leather ankle harness.",
             "visual": "robot",
-            "label": "Final Payoff",
+            "label": "Avian Saboteur",
+            "story_beat": "twist",
+            "visual_prompt": "A plump carrier pigeon perched atop the lever mechanism uses its beak to tug a leather strap connected to the counterweight.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Corrective Grain",
+            "speech": "If we scatter the feed over here by the telegraph desk, the train will pass safely and our feathered friend stays happy.",
+            "visual": "door",
+            "label": "Clear Track",
             "story_beat": "payoff",
-            "visual_prompt": "Maya smiles proudly from the deck of her moving wooden ship as the cork pendulum bobs rhythmically, cheered on by festival crowds on the shore.",
+            "visual_prompt": "Arthur smiles warmly inside the station office, tossing wheat seeds into a wooden basket while the pigeon eats safely away from the tracks.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A seized bronze steering gear threatens to crash the flagship into the festival pier.",
-        "decisive_choice": "She replaces the heavy broken metal cog with a floating cork pendulum tuned to the ocean swells.",
-        "resolution": "The flagship glides smoothly past the judges' stand, winning the grand engineering ribbon.",
+        "central_conflict": "A mysterious saboteur halts the midnight mail train, delaying vital medical supplies.",
+        "decisive_choice": "The stationmaster sets a trail of grain to guide the pigeon away from the lever instead of trapping it.",
+        "resolution": "The mail train arrives on time with the medicine, and the pigeon is officially adopted as the station mascot.",
         "visual_bible": {
-          "style": "Bright coastal animation style with vibrant blues and warm amber sunlight.",
+          "style": "Victorian railway illustration style with warm sepia tones, detailed brass textures, and crisp ink lines.",
           "characters": {
-            "Maya": "A young female engineer with curly dark hair tied back, wearing a grease-stained canvas apron and heavy leather work boots."
+            "Arthur": "An elderly stationmaster with round spectacles, a tweed uniform, a silver pocket watch, and a kind expression.",
+            "Pip": "A sturdy grey homing pigeon with a shiny brass ankle ring and a leather telemetry strap."
           },
           "locations": {
-            "festival_pier": "A bustling wooden seaside pier decorated with colorful paper banners and brass railings under a clear blue sky."
+            "PlatformFour": "A historic cobblestone railway platform lit by flickering gas lamps under a wrought-iron glass canopy.",
+            "StationOffice": "A cozy room filled with ticking clocks, telegraph equipment, wooden filing cabinets, and steaming tea."
           },
           "objects": {
-            "wrench": "A heavy steel adjustable wrench with grease smudges on the handle.",
-            "cork_pendulum": "A large cylindrical carved cork float attached to a shiny brass linkage rod."
+            "BrassLantern": "A heavy polished brass hurricane lamp casting a warm amber glow.",
+            "TelegraphKey": "An antique black cast-iron telegraph transmitter with a shiny brass knob.",
+            "RailwayLever": "A tall painted red iron lever with a wooden handle used to control track signals."
           }
         },
-        "plot_fingerprint": "37edcec228ad017fc712f564a7a2bdee29b1741c8c5e5b5ab9b3b379d728c2ab"
+        "plot_fingerprint": "2a940e941b236aa346b9bf008810c359b46afd480bd3e93ab7047a727d7d963d"
       },
       "approved": false
     }
