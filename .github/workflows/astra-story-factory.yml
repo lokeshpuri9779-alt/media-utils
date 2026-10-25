@@ -152,6 +152,14 @@ jobs:
                             and isinstance(a.get("dimensions"), dict)
                             and isinstance(a["dimensions"].get("width"), int)
                             and isinstance(a["dimensions"].get("height"), int)]
+              rejected = [{"width": a["rejected_dimensions"]["width"],
+                           "height": a["rejected_dimensions"]["height"]}
+                          for a in assets if a.get("error_detail") == "Scenes must be portrait"
+                          and isinstance(a.get("rejected_dimensions"), dict)
+                          and isinstance(a["rejected_dimensions"].get("width"), int)
+                          and isinstance(a["rejected_dimensions"].get("height"), int)]
+              print("ASTRA_IMAGE_REJECTED_DIMENSIONS=" + json.dumps({
+                  "count": len(rejected), "sizes": rejected[:10]}, sort_keys=True))
               portrait = sum(d["height"] > d["width"] for d in dimensions)
               print("ASTRA_IMAGE_DIMENSIONS=" + json.dumps({"verified": len(dimensions),
                     "portrait": portrait, "sizes": dimensions[:10]}, sort_keys=True))
