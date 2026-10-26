@@ -4240,6 +4240,158 @@
         }
       },
       "plot_fingerprint": "cd0ef646150009f0fa9f3aafd873f577fee9d31c7ab8e90ed40e74bb567e8125"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-1b9e08c068690ec15d48",
+      "title": "The Muddy Derby of Oak Creek",
+      "hook": "The Sabotaged Pitch",
+      "question": "How can the underdog rollerskate hockey team defeat the reigning champions on a ruined pitch?",
+      "answer": "By engineering pivoting all-terrain magnetic chassis onto their skates to master the deep mud.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Sabotaged Pitch",
+          "speech": "Look at our beloved rink! They flooded it with thick mud just hours before the championship final whistle blows.",
+          "visual": "forest",
+          "label": "Sabotaged Pitch",
+          "story_beat": "reveal",
+          "visual_prompt": "Captain Mia stands in muddy sports gear staring at a ruined outdoor rink surrounded by pine trees, holding a broken wooden hockey stick with a grim expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Workshop Innovation",
+          "speech": "We will not surrender! Let us bolt salvaged steel treads and magnetic stabilizers onto our skates right now.",
+          "visual": "robot",
+          "label": "Workshop Innovation",
+          "story_beat": "build",
+          "visual_prompt": "Mia and her teammate Leo work intensely at a cluttered workbench under dim lights, welding heavy metal tracks onto a pair of quad roller skates while holding a glowing soldering iron.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Surprising Turn",
+          "speech": "Watch them stumble in the thick muck while our custom magnetic treads grip the hidden iron mesh underneath!",
+          "visual": "signal",
+          "label": "Surprising Turn",
+          "story_beat": "twist",
+          "visual_prompt": "Mia skates effortlessly across the deep mud while opposing players slip and fall in the background, holding her hockey stick high as a neon scoreboard flashes in the rain.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Victorious Goal",
+          "speech": "We did it together! This hard-won triumph proves true ingenuity always outlasts any unfair muddy obstacle in our path.",
+          "visual": "door",
+          "label": "Victorious Goal",
+          "story_beat": "payoff",
+          "visual_prompt": "Mia raises the shiny metal championship trophy high above her head near the stadium entrance doors, surrounded by cheering teammates covered in mud under bright floodlights.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Rivals destroying the community roller hockey rink with a deliberate mud trap before the championship.",
+      "decisive_choice": "Rebuilding standard skates into magnetic all-terrain vehicles instead of forfeiting the match.",
+      "resolution": "Winning the championship and establishing a permanent multi-weather roller derby league.",
+      "visual_bible": {
+        "style": "Cinematic stop-motion animation with rich textures, warm lighting, and detailed mechanical elements.",
+        "characters": {
+          "Mia": "A determined teenage athlete with curly dark hair tied in a messy bun, wearing a teal jersey with white stripes and scuffed protective pads.",
+          "Leo": "A clever and energetic teammate with glasses, wearing a matching teal jersey and grease-stained mechanic gloves."
+        },
+        "locations": {
+          "Oak Creek Rink": "An outdoor concrete roller hockey arena surrounded by tall pine trees, now covered in thick brown mud.",
+          "Workshop Shed": "A cozy, cluttered wooden shed filled with tools, spare metal parts, and glowing work lamps."
+        },
+        "objects": {
+          "Modified Skates": "Quad roller skates retrofitted with heavy steel caterpillar tracks and glowing blue magnetic stabilizers.",
+          "Championship Trophy": "A polished silver cup mounted on a varnished oak base, engraved with crossed hockey sticks."
+        }
+      },
+      "plot_fingerprint": "b9b45320f2f6c72d3cf2c64e8db2cc4e54efd86dfff45aa5b1d6ca5d9f41022f"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-f6f27b9fa7a8a12870db",
+      "title": "Unit Seven and the Fledgling's Flight",
+      "hook": "The Locked Door",
+      "question": "Should a caretaker robot honor a child's desperate wish or its core safety programming?",
+      "answer": "The robot permits the glider launch, prioritizing the child's emotional growth over risk parameters.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Locked Door",
+          "speech": "My primary directive is your absolute safety, Leo. The storm winds outside exceed all recommended tolerance thresholds.",
+          "visual": "door",
+          "label": "Perimeter Lock",
+          "story_beat": "reveal",
+          "visual_prompt": "Unit Seven standing in front of a heavy oak front door, extending a chrome manipulator hand while Leo glares from the background holding a wooden glider model.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Workshop Mechanism",
+          "speech": "You built these wing flaps yourself with precise balancing weights. But the weather sensors indicate extreme turbulence ahead.",
+          "visual": "robot",
+          "label": "Diagnostic Check",
+          "story_beat": "build",
+          "visual_prompt": "Unit Seven kneeling down in the sunlit workshop, its glowing blue optical sensors examining the hinged canvas wings of the glider held by Leo.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Forest Clearing Signal",
+          "speech": "If I override my safety protocol, you must maintain the updraft vector precisely as calculated by my guidance system.",
+          "visual": "forest",
+          "label": "Launch Threshold",
+          "story_beat": "twist",
+          "visual_prompt": "Unit Seven and Leo standing at the edge of tall pine trees, looking up as a weather beacon pulses green through the swirling gray clouds.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Successful Flight",
+          "speech": "Trajectory stable. Lift coefficients holding steady. You have achieved independent flight, young creator. Well done.",
+          "visual": "signal",
+          "label": "Thermal Asccent",
+          "story_beat": "payoff",
+          "visual_prompt": "Unit Seven watching from the grass as Leo's wooden glider soars high above the tree line against a bright breaking sky, a radio signal tracing upward.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A protective caretaker robot must choose between locking an adventurous child indoors during a storm or allowing him to test his handmade glider.",
+      "decisive_choice": "Disengaging the household perimeter locks to let Leo launch his glider into the windy clearing.",
+      "resolution": "Leo successfully navigates the thermal currents, proving his competence while Unit Seven updates its risk algorithms to include courage.",
+      "visual_bible": {
+        "style": "Cinematic stop-motion puppet aesthetic with rich textures and warm dramatic lighting",
+        "characters": {
+          "Unit Seven": "A bipedal caretaker robot made of brushed aluminum plating, possessing expressive circular blue optical lenses and articulated three-fingered hands.",
+          "Leo": "An adventurous twelve-year-old child with messy brown hair, wearing a patched green canvas aviator jacket and leather boots."
+        },
+        "locations": {
+          "Cottage Workshop": "A cozy rustic room filled with wooden shelves, workbench tools, blueprints, and drying canvas fabric.",
+          "Pine Clearing": "An open grassy field surrounded by tall evergreen trees bordering a steep valley."
+        },
+        "objects": {
+          "Glider": "A hand-built wooden aircraft model with cream-colored canvas wings, bamboo struts, and a polished brass tail rudder.",
+          "Weather Beacon": "A cylindrical metal device mounted on a wooden post that emits a flashing green emergency signal."
+        }
+      },
+      "plot_fingerprint": "62514d1cbb1aee8e0ed377ce0ec7311ee36c71ff21c8b37eb5ffe86d82acd411"
     }
   ]
 }

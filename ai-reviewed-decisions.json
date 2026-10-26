@@ -512,6 +512,24 @@
       "review_notes": "The story is causally coherent and clear, featuring a distinct narrative arc with a clear conflict, decision, and resolution.; There are no copyright or trademark violations; the characters, plot, and setting are original.; The content is safe, suitable for a general audience, and adheres to YouTube policies.; While sharing an arctic survival theme with 'The Arctic Rescuer and the Crevasse Beacon', the central premise (jettisoning a valuable core-sample archive to power a ship's winch versus cutting a sled tether) and the specific narrative beats are sufficiently distinct to avoid unauthorized repetition.",
       "reviewed_at": "2026-10-25T18:42:12.341481+00:00",
       "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-1b9e08c068690ec15d48",
+      "story_sha256": "eb6bb6c3212c960d8a6358de19b30c2ff96db510458f720e37cf4c3e3bf3e2a0",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and does not closely match the premises, characters, settings, or endings of the provided recent publication examples.; Causal coherence is maintained through a clear problem, technical intervention, turning point, and resolution.; The content is safe, appropriate for general audiences, and presents no YouTube policy violations or copyright issues.",
+      "reviewed_at": "2026-10-26T01:03:42.338929+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-f6f27b9fa7a8a12870db",
+      "story_sha256": "0092385e7b04bb917d9bb43de0ef85fbd79ba0657cb98d2939c9aee63ac1fd8c",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and does not duplicate any recently published premises, characters, or causal mechanisms in the comparison history.; Causal coherence is strong, with a clear dilemma, choice, and logical resolution.; Content is safe, family-friendly, and complies with standard content policies.; Clarity and narrative structure are well-maintained throughout the beats.",
+      "reviewed_at": "2026-10-26T01:03:43.408998+00:00",
+      "review_model": "gemini-3.5-flash-lite"
     }
   ]
 }
