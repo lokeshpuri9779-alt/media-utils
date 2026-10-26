@@ -2129,6 +2129,22 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-c1420b70a463e790c7c8",
+      "story_sha256": "6197446e059f1cb70750f6a4ce62a56b85854fd49a7857d4bae2d3ef0490d02c",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-c1420b70a463e790c7c8",
+        "story_sha256": "6197446e059f1cb70750f6a4ce62a56b85854fd49a7857d4bae2d3ef0490d02c",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the specific characters, settings, or plot points of the provided reference list.; The narrative follows a clear causal structure: the problem (darkness) is linked to a specific mechanism (anchor root), which the protagonist resolves through a decisive action.; The content is suitable for a general audience and contains no unsafe, misleading, or policy-violating material.; The story is distinct from the provided examples, which focus on different themes such as robotics, alpine rescue, and terrestrial animal fables.",
+        "reviewed_at": "2026-10-26T17:11:32.620284+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }

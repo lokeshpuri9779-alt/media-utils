@@ -4331,6 +4331,58 @@
       "central_conflict": "A stranded climber is trapped on a freezing ledge while an aggressive blizzard rapidly approaches.",
       "decisive_choice": "The rescuer chooses to fire his final long-range distress flare into the heavy whiteout instead of descending for reinforcement.",
       "resolution": "The bright amber flare guides a rescue helicopter directly to the hidden crag, saving both mountaineers."
+    },
+    {
+      "content_id": "rayvan-gemini-fd2e364edce915b66f5b",
+      "video_id": "J7lM1hajkaw",
+      "confirmed_at": "2026-10-26T17:09:33.042292+00:00",
+      "title": "the winter patrol and the hidden pass",
+      "plot_fingerprint": "3ff8134c9275ddf1b8c92439e708365b46e6fb65818f69fd754d9d6d6685d4da",
+      "story_beats": [
+        {
+          "headline": "The Lost Signal",
+          "speech": "Listen closely to the static hiss on the radio receiver, because that faint frequency reveals their exact coordinates.",
+          "visual": "signal",
+          "label": "Incoming Distress",
+          "story_beat": "reveal",
+          "visual_prompt": "Veteran rescuer Mara wearing a heavy red parka, standing inside a dimly lit wooden cabin at night, holding a crackling black emergency radio close to her ear with a tense expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Frozen Forest Climb",
+          "speech": "We must press forward through the dense pine trees before the drifting snow completely buries our safety ropes.",
+          "visual": "forest",
+          "label": "Navigating Woods",
+          "story_beat": "build",
+          "visual_prompt": "Mara wearing a red parka and snowshoes, pushing through a dense thicket of snow-laden pine trees during a heavy nighttime snowfall, holding a wooden trekking pole in her right hand.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Mountain Gateway",
+          "speech": "This narrow rock opening is the only shortcut through the jagged ridge wall to reach the lower ravine.",
+          "visual": "door",
+          "label": "Narrow Pass",
+          "story_beat": "mechanism",
+          "visual_prompt": "Mara wearing her red parka, standing in front of a narrow stone crevice passage carved into a massive icy cliff face, holding a glowing yellow handheld LED lantern in her left hand.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Descent",
+          "speech": "Hold onto this sturdy tether and follow my footsteps carefully down the slope, for we have finally won our way back home.",
+          "visual": "ship",
+          "label": "Successful Rescue",
+          "story_beat": "payoff",
+          "visual_prompt": "Mara wearing a red parka, walking alongside a shivering young snowboarder in a blue jacket down a safe snowy trail, both holding onto a shared orange rescue rope under clearing dawn skies.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden blizzard traps a lost snowboarder near an unmapped vertical cliff.",
+      "decisive_choice": "Risking an immediate night ascent through the active gale instead of waiting for morning.",
+      "resolution": "The rescuer reaches the sheltered ledge just in time, guiding the survivor down safely."
     }
   ]
 }

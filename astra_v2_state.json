@@ -3,7 +3,7 @@
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 43,
-  "confirmed_today": 42,
+  "confirmed_today": 43,
   "last_attempt_at": "2026-10-26T16:53:17.876195+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -4952,16 +4952,14 @@
       "decisive_choice": "The rescuer chooses to fire his final long-range distress flare into the heavy whiteout instead of descending for reinforcement.",
       "resolution": "The bright amber flare guides a rescue helicopter directly to the hidden crag, saving both mountaineers.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "J7lM1hajkaw": {
-      "content_id": "rayvan-gemini-fd2e364edce915b66f5b",
+    },
+    "rayvan-gemini-fd2e364edce915b66f5b": {
+      "video_id": "J7lM1hajkaw",
+      "confirmed_at": "2026-10-26T17:09:33.042292+00:00",
       "title": "the winter patrol and the hidden pass",
-      "day": "2026-10-26",
-      "uploaded_at": "2026-10-26T16:53:19.283997+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-26T16:53:19.283997+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "3ff8134c9275ddf1b8c92439e708365b46e6fb65818f69fd754d9d6d6685d4da",
       "story_beats": [
@@ -5009,22 +5007,22 @@
       "central_conflict": "A sudden blizzard traps a lost snowboarder near an unmapped vertical cliff.",
       "decisive_choice": "Risking an immediate night ascent through the active gale instead of waiting for morning.",
       "resolution": "The rescuer reaches the sheltered ledge just in time, guiding the survivor down safely.",
-      "renderer": "studio-7.3.1"
+      "genre": "fiction"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-26T16:45:27.579528+00:00",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-26T17:09:32.397185+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-26T16:53:19.685403+00:00",
+    "at": "2026-10-26T17:24:16.875497+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
-    "job_status_before_persist": "success",
+    "job_status_before_persist": "cancelled",
     "dependencies_step": "success",
-    "publish_step": "success",
+    "publish_step": "cancelled",
     "cover_tests": "",
     "motion_tests": "success",
     "animal_tests": "success",
@@ -10880,10 +10878,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-26T16:53:19.685322+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-26T17:24:16.875375+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "ready",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -10891,9 +10889,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-26T16:53:19.685388+00:00",
+    "at": "2026-10-26T17:24:16.875479+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -10905,24 +10903,24 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-26T16:53:19.685028+00:00",
+    "at": "2026-10-26T17:24:16.875148+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "success",
-    "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "publish_step": "cancelled",
+    "job_status_before_persist": "cancelled",
+    "outcome": "published",
+    "reason": "ready",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-26T16:53:19.685314+00:00",
+    "at": "2026-10-26T17:24:16.875368+00:00",
     "collection_status": "collected",
-    "publish_step": "success",
+    "publish_step": "cancelled",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 37,
+        "eligible": 36,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3,
@@ -10936,7 +10934,7 @@
           "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
         },
         "seen": 11,
-        "total": 170
+        "total": 169
       },
       "ASTRA_STORY_HISTORY_FILTER": {
         "before": 170,
@@ -10951,16 +10949,6 @@
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
         "pool": 159,
         "remaining": 37
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "considered": 1,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 0
       }
     },
     "note": "Diagnostic counts only; no approval or publishing effect"
