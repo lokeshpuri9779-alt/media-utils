@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 27,
-  "confirmed_today": 26,
-  "last_attempt_at": "2026-10-26T04:42:22.252702+00:00",
+  "attempts": 28,
+  "confirmed_today": 27,
+  "last_attempt_at": "2026-10-26T05:26:27.364613+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -4191,16 +4191,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "aczZ4fP3_70": {
-      "content_id": "rayvan-forge-2584ba24e621f504",
+    },
+    "rayvan-forge-2584ba24e621f504": {
+      "video_id": "aczZ4fP3_70",
+      "confirmed_at": "2026-10-26T05:11:31.827342+00:00",
       "title": "The Squirrel and the Stolen Recipe",
-      "day": "2026-10-26",
-      "uploaded_at": "2026-10-26T04:42:23.814495+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-26T04:42:23.814495+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "9d0f9c9561117c3e1640a5846e7efb0dc48788b09860f58384d6d890b5d86f5c",
       "story_beats": [
@@ -4241,12 +4239,63 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "4UtD1Sh_pRI": {
+      "content_id": "rayvan-forge-66fa1ca9575bce76",
+      "title": "The Raccoon and the Silent Orchestra",
+      "day": "2026-10-26",
+      "uploaded_at": "2026-10-26T05:26:29.024314+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "5cfd989fc54d5e1bd223587f332c0e976b8e69ed090ec6fa64c7903c57f89b99",
+      "story_beats": [
+        {
+          "headline": "THE QUIET CONCERT",
+          "speech": "A raccoon conductor raised his baton at the village concert, but the audience could barely hear a single instrument.",
+          "visual": "door",
+          "label": "TOO QUIET",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "LOUDER DIDN'T HELP",
+          "speech": "He ordered the musicians to play harder, until a drumstick snapped and the exhausted players stopped altogether.",
+          "visual": "forest",
+          "label": "PLAN FAILED",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE HIDDEN CURTAIN",
+          "speech": "From the balcony he noticed a thick rehearsal curtain hanging between the stage and audience, swallowing every note.",
+          "visual": "book",
+          "label": "CURTAIN FOUND",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "MUSIC AT LAST",
+          "speech": "The stage crew lifted the curtain, and the orchestra played softly enough to hear every melody across the hall.",
+          "visual": "door",
+          "label": "BRAVO",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-26T04:34:03.219840+00:00",
+  "last_preflight_at": "2026-10-26T05:11:31.479607+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
@@ -9373,6 +9422,53 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-66fa1ca9575bce76": {
+      "at": "2026-10-26T05:26:27.364594+00:00",
+      "title": "The Raccoon and the Silent Orchestra",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "5cfd989fc54d5e1bd223587f332c0e976b8e69ed090ec6fa64c7903c57f89b99",
+      "story_beats": [
+        {
+          "headline": "THE QUIET CONCERT",
+          "speech": "A raccoon conductor raised his baton at the village concert, but the audience could barely hear a single instrument.",
+          "visual": "door",
+          "label": "TOO QUIET",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "LOUDER DIDN'T HELP",
+          "speech": "He ordered the musicians to play harder, until a drumstick snapped and the exhausted players stopped altogether.",
+          "visual": "forest",
+          "label": "PLAN FAILED",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE HIDDEN CURTAIN",
+          "speech": "From the balcony he noticed a thick rehearsal curtain hanging between the stage and audience, swallowing every note.",
+          "visual": "book",
+          "label": "CURTAIN FOUND",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "MUSIC AT LAST",
+          "speech": "The stage crew lifted the curtain, and the orchestra played softly enough to hear every melody across the hall.",
+          "visual": "door",
+          "label": "BRAVO",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
@@ -9393,11 +9489,11 @@
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-26T04:34:23.054650+00:00",
+    "at": "2026-10-26T05:11:51.552573+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-2584ba24e621f504",
-    "video_url": "https://www.youtube.com/watch?v=aczZ4fP3_70",
+    "content_id": "rayvan-forge-66fa1ca9575bce76",
+    "video_url": "https://www.youtube.com/watch?v=4UtD1Sh_pRI",
     "story_selection": {}
   },
   "last_workflow_result": {
