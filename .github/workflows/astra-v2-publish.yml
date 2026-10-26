@@ -23,7 +23,9 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    # Allow dependency fallback, verified render and YouTube upload to finish.
+    # No extra runs are scheduled; concurrency remains unchanged.
+    timeout-minutes: 30
     env:
       ASTRA_CHANNEL: rayvan
       ASTRA_UNIFIED_STORY_ENGINE: '1' # One Studio renderer for directed, solo, duo and ensemble scenes; fail closed
