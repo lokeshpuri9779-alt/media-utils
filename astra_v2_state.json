@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 21,
-  "confirmed_today": 20,
-  "last_attempt_at": "2026-10-26T00:42:45.239308+00:00",
+  "attempts": 22,
+  "confirmed_today": 21,
+  "last_attempt_at": "2026-10-26T01:24:15.312996+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -3927,16 +3927,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "vmyECeaWnPM": {
-      "content_id": "rayvan-anthology-b86ab6cf110d01bd",
+    },
+    "rayvan-anthology-b86ab6cf110d01bd": {
+      "video_id": "vmyECeaWnPM",
+      "confirmed_at": "2026-10-26T01:17:20.779565+00:00",
       "title": "The Rabbit's Lost Shadow",
-      "day": "2026-10-26",
-      "uploaded_at": "2026-10-26T00:42:47.228483+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-26T00:42:47.228483+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "",
       "story_beats": [
@@ -3977,16 +3975,74 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "IapwUOIzGAw": {
+      "content_id": "rayvan-gemini-f6f27b9fa7a8a12870db",
+      "title": "Unit Seven and the Fledgling's Flight",
+      "day": "2026-10-26",
+      "uploaded_at": "2026-10-26T01:24:17.474703+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "62514d1cbb1aee8e0ed377ce0ec7311ee36c71ff21c8b37eb5ffe86d82acd411",
+      "story_beats": [
+        {
+          "headline": "The Locked Door",
+          "speech": "My primary directive is your absolute safety, Leo. The storm winds outside exceed all recommended tolerance thresholds.",
+          "visual": "door",
+          "label": "Perimeter Lock",
+          "story_beat": "reveal",
+          "visual_prompt": "Unit Seven standing in front of a heavy oak front door, extending a chrome manipulator hand while Leo glares from the background holding a wooden glider model.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Workshop Mechanism",
+          "speech": "You built these wing flaps yourself with precise balancing weights. But the weather sensors indicate extreme turbulence ahead.",
+          "visual": "robot",
+          "label": "Diagnostic Check",
+          "story_beat": "build",
+          "visual_prompt": "Unit Seven kneeling down in the sunlit workshop, its glowing blue optical sensors examining the hinged canvas wings of the glider held by Leo.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Forest Clearing Signal",
+          "speech": "If I override my safety protocol, you must maintain the updraft vector precisely as calculated by my guidance system.",
+          "visual": "forest",
+          "label": "Launch Threshold",
+          "story_beat": "twist",
+          "visual_prompt": "Unit Seven and Leo standing at the edge of tall pine trees, looking up as a weather beacon pulses green through the swirling gray clouds.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Successful Flight",
+          "speech": "Trajectory stable. Lift coefficients holding steady. You have achieved independent flight, young creator. Well done.",
+          "visual": "signal",
+          "label": "Thermal Asccent",
+          "story_beat": "payoff",
+          "visual_prompt": "Unit Seven watching from the grass as Leo's wooden glider soars high above the tree line against a bright breaking sky, a radio signal tracing upward.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A protective caretaker robot must choose between locking an adventurous child indoors during a storm or allowing him to test his handmade glider.",
+      "decisive_choice": "Disengaging the household perimeter locks to let Leo launch his glider into the windy clearing.",
+      "resolution": "Leo successfully navigates the thermal currents, proving his competence while Unit Seven updates its risk algorithms to include courage.",
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-26T00:42:05.030659+00:00",
+  "last_preflight_at": "2026-10-26T01:17:20.362569+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-26T00:42:47.478846+00:00",
+    "at": "2026-10-26T01:24:17.917259+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -8857,10 +8913,64 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-f6f27b9fa7a8a12870db": {
+      "at": "2026-10-26T01:24:15.312978+00:00",
+      "title": "Unit Seven and the Fledgling's Flight",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "62514d1cbb1aee8e0ed377ce0ec7311ee36c71ff21c8b37eb5ffe86d82acd411",
+      "story_beats": [
+        {
+          "headline": "The Locked Door",
+          "speech": "My primary directive is your absolute safety, Leo. The storm winds outside exceed all recommended tolerance thresholds.",
+          "visual": "door",
+          "label": "Perimeter Lock",
+          "story_beat": "reveal",
+          "visual_prompt": "Unit Seven standing in front of a heavy oak front door, extending a chrome manipulator hand while Leo glares from the background holding a wooden glider model.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Workshop Mechanism",
+          "speech": "You built these wing flaps yourself with precise balancing weights. But the weather sensors indicate extreme turbulence ahead.",
+          "visual": "robot",
+          "label": "Diagnostic Check",
+          "story_beat": "build",
+          "visual_prompt": "Unit Seven kneeling down in the sunlit workshop, its glowing blue optical sensors examining the hinged canvas wings of the glider held by Leo.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Forest Clearing Signal",
+          "speech": "If I override my safety protocol, you must maintain the updraft vector precisely as calculated by my guidance system.",
+          "visual": "forest",
+          "label": "Launch Threshold",
+          "story_beat": "twist",
+          "visual_prompt": "Unit Seven and Leo standing at the edge of tall pine trees, looking up as a weather beacon pulses green through the swirling gray clouds.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Successful Flight",
+          "speech": "Trajectory stable. Lift coefficients holding steady. You have achieved independent flight, young creator. Well done.",
+          "visual": "signal",
+          "label": "Thermal Asccent",
+          "story_beat": "payoff",
+          "visual_prompt": "Unit Seven watching from the grass as Leo's wooden glider soars high above the tree line against a bright breaking sky, a radio signal tracing upward.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A protective caretaker robot must choose between locking an adventurous child indoors during a storm or allowing him to test his handmade glider.",
+      "decisive_choice": "Disengaging the household perimeter locks to let Leo launch his glider into the windy clearing.",
+      "resolution": "Leo successfully navigates the thermal currents, proving his competence while Unit Seven updates its risk algorithms to include courage.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-26T00:42:47.478806+00:00",
+    "at": "2026-10-26T01:24:17.917201+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -8871,21 +8981,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-26T00:42:47.478839+00:00",
+    "at": "2026-10-26T01:24:17.917249+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-26T00:42:30.830041+00:00",
+    "at": "2026-10-26T01:17:59.626872+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-anthology-b86ab6cf110d01bd",
-    "video_url": "https://www.youtube.com/watch?v=vmyECeaWnPM",
+    "content_id": "rayvan-gemini-f6f27b9fa7a8a12870db",
+    "video_url": "https://www.youtube.com/watch?v=IapwUOIzGAw",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-26T00:42:47.478754+00:00",
+    "at": "2026-10-26T01:24:17.916970+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -8897,10 +9007,52 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-26T00:42:47.478803+00:00",
-    "collection_status": "missing_diagnostics",
+    "at": "2026-10-26T01:24:17.917196+00:00",
+    "collection_status": "collected",
     "publish_step": "success",
-    "counters": {},
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 52,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
+          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
+        },
+        "seen": 11,
+        "total": 185
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 185,
+        "fingerprint": 0,
+        "id": 11,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 174,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 174,
+        "remaining": 52
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 1,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
