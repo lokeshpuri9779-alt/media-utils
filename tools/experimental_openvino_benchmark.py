@@ -11,9 +11,11 @@ APPROVED_MODELS = {
     "preconverted": "piimaila/stable-diffusion-v1-5-openvino",
     "export": "stable-diffusion-v1-5/stable-diffusion-v1-5",
 }
-PROMPT = ("family-friendly illustration of a bright red toy fire truck parked beside "
-          "a yellow school building on a sunny day, blue sky, green trees, "
-          "clear colorful detailed shapes, portrait composition, no people, no text")
+PROMPT = ("one single bright red toy fire truck, viewed from the side, parked on a "
+          "simple sunlit road, one green tree and blue sky in the background, "
+          "clean children\u0027s picture-book illustration, crisp shapes, full vehicle in frame")
+NEGATIVE_PROMPT = ("multiple trucks, extra vehicles, floating objects, duplicate wheels, "
+                   "deformed vehicle, distorted shapes, crowded composition, text, watermark")
 
 
 def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-openvino/keyframe.png")):
@@ -45,8 +47,10 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
         pipe.compile()
         report["guidance_scale"] = 8.0
         report["seed"] = 42
-        image = pipe(PROMPT, height=768, width=512,
-                     num_inference_steps=steps, guidance_scale=8.0,
+        report["negative_prompt_enabled"] = True
+        image = pipe(PROMPT, negative_prompt=NEGATIVE_PROMPT,
+                     height=768, width=512, num_inference_steps=steps,
+                     guidance_scale=8.0,
                      generator=torch.Generator(device="cpu").manual_seed(42)).images[0]
         if not isinstance(image, Image.Image):
             raise ValueError("No PIL image returned")
