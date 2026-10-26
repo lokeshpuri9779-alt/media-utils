@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 30,
-  "confirmed_today": 29,
-  "last_attempt_at": "2026-10-26T06:38:50.115457+00:00",
+  "attempts": 31,
+  "confirmed_today": 30,
+  "last_attempt_at": "2026-10-26T07:33:28.695315+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -4338,16 +4338,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "2NRSxNcKhbo": {
-      "content_id": "rayvan-forge-538f0d4a65b0c538",
+    },
+    "rayvan-forge-538f0d4a65b0c538": {
+      "video_id": "2NRSxNcKhbo",
+      "confirmed_at": "2026-10-26T07:29:08.805508+00:00",
       "title": "The Beaver and the Wet Painting",
-      "day": "2026-10-26",
-      "uploaded_at": "2026-10-26T06:38:52.070957+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-26T06:38:52.070957+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "47ff1c026dfdfdaaff5fb4251f054a1b87a15a3fda90dcf4e2d1592f53399b2b",
       "story_beats": [
@@ -4388,16 +4386,67 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "tl-6II28Ots": {
+      "content_id": "rayvan-forge-023c7788559ac04c",
+      "title": "The Deer and the Paper Bridge",
+      "day": "2026-10-26",
+      "uploaded_at": "2026-10-26T07:33:30.807240+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "ac3df13a5ede0078fcb6094e36cb629511b17360949de7f187bab59deac4e597",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "A deer found the footbridge broken while a school parade waited across the stream.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "She tried balancing planks on stones, but the first plank slid into the water.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "She spotted the old footpath upstream and marked its shallow stepping stones.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "The parade crossed with adult guides and reached the school without a fall.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-26T06:33:18.694594+00:00",
+  "last_preflight_at": "2026-10-26T07:29:08.420087+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-26T06:38:52.414787+00:00",
+    "at": "2026-10-26T07:33:31.180497+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -9661,10 +9710,57 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-023c7788559ac04c": {
+      "at": "2026-10-26T07:33:28.695303+00:00",
+      "title": "The Deer and the Paper Bridge",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "ac3df13a5ede0078fcb6094e36cb629511b17360949de7f187bab59deac4e597",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "A deer found the footbridge broken while a school parade waited across the stream.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "She tried balancing planks on stones, but the first plank slid into the water.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "She spotted the old footpath upstream and marked its shallow stepping stones.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "The parade crossed with adult guides and reached the school without a fall.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-26T06:38:52.414748+00:00",
+    "at": "2026-10-26T07:33:31.180437+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -9675,21 +9771,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-26T06:38:52.414781+00:00",
+    "at": "2026-10-26T07:33:31.180486+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-26T06:33:43.428530+00:00",
+    "at": "2026-10-26T07:29:32.381031+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-538f0d4a65b0c538",
-    "video_url": "https://www.youtube.com/watch?v=2NRSxNcKhbo",
+    "content_id": "rayvan-forge-023c7788559ac04c",
+    "video_url": "https://www.youtube.com/watch?v=tl-6II28Ots",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-26T06:38:52.414592+00:00",
+    "at": "2026-10-26T07:33:31.180230+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -9701,12 +9797,12 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-26T06:38:52.414745+00:00",
+    "at": "2026-10-26T07:33:31.180432+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 45,
+        "eligible": 44,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3,
@@ -9720,21 +9816,21 @@
           "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
         },
         "seen": 11,
-        "total": 178
+        "total": 177
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 178,
+        "before": 177,
         "fingerprint": 0,
         "id": 11,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 167,
+        "remaining": 166,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 167,
-        "remaining": 45
+        "pool": 166,
+        "remaining": 44
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
