@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 26,
-  "confirmed_today": 25,
-  "last_attempt_at": "2026-10-26T04:25:39.438444+00:00",
+  "attempts": 27,
+  "confirmed_today": 26,
+  "last_attempt_at": "2026-10-26T04:42:22.252702+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -4142,16 +4142,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "SzBEV9e_ziM": {
-      "content_id": "rayvan-forge-b4bae1f7ca5266ac",
+    },
+    "rayvan-forge-b4bae1f7ca5266ac": {
+      "video_id": "SzBEV9e_ziM",
+      "confirmed_at": "2026-10-26T04:34:03.684779+00:00",
       "title": "The Deer and the Hidden Passage",
-      "day": "2026-10-26",
-      "uploaded_at": "2026-10-26T04:25:40.792322+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-26T04:25:40.792322+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "2b8c134012cf197a705d16e35dd32d3b45f1adf2ed432a5e93a2a8fa5f729842",
       "story_beats": [
@@ -4192,16 +4190,67 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "aczZ4fP3_70": {
+      "content_id": "rayvan-forge-2584ba24e621f504",
+      "title": "The Squirrel and the Stolen Recipe",
+      "day": "2026-10-26",
+      "uploaded_at": "2026-10-26T04:42:23.814495+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "9d0f9c9561117c3e1640a5846e7efb0dc48788b09860f58384d6d890b5d86f5c",
+      "story_beats": [
+        {
+          "headline": "THE FESTIVAL DISASTER",
+          "speech": "A squirrel baker opened her recipe box before the autumn festival and found the prize-winning pie instructions missing.",
+          "visual": "door",
+          "label": "RECIPE GONE",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE WRONG SUSPECT",
+          "speech": "She followed floury footprints into the courtyard, but the tracks belonged to her apprentice carrying fresh bread.",
+          "visual": "forest",
+          "label": "FALSE LEAD",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE CELLAR CLUE",
+          "speech": "A torn recipe corner clung to a flour sack beside the cellar stairs, where a draft had scattered loose papers.",
+          "visual": "book",
+          "label": "PAPER TRAIL",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PIE RETURNS",
+          "speech": "She recovered the recipe beneath the cellar shelf and baked the festival pie while her apprentice secured the box.",
+          "visual": "door",
+          "label": "FESTIVAL SAVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-26T04:13:30.842020+00:00",
+  "last_preflight_at": "2026-10-26T04:34:03.219840+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-26T04:25:41.337516+00:00",
+    "at": "2026-10-26T04:42:24.128989+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -9277,10 +9326,57 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-2584ba24e621f504": {
+      "at": "2026-10-26T04:42:22.252686+00:00",
+      "title": "The Squirrel and the Stolen Recipe",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "9d0f9c9561117c3e1640a5846e7efb0dc48788b09860f58384d6d890b5d86f5c",
+      "story_beats": [
+        {
+          "headline": "THE FESTIVAL DISASTER",
+          "speech": "A squirrel baker opened her recipe box before the autumn festival and found the prize-winning pie instructions missing.",
+          "visual": "door",
+          "label": "RECIPE GONE",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE WRONG SUSPECT",
+          "speech": "She followed floury footprints into the courtyard, but the tracks belonged to her apprentice carrying fresh bread.",
+          "visual": "forest",
+          "label": "FALSE LEAD",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE CELLAR CLUE",
+          "speech": "A torn recipe corner clung to a flour sack beside the cellar stairs, where a draft had scattered loose papers.",
+          "visual": "book",
+          "label": "PAPER TRAIL",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PIE RETURNS",
+          "speech": "She recovered the recipe beneath the cellar shelf and baked the festival pie while her apprentice secured the box.",
+          "visual": "door",
+          "label": "FESTIVAL SAVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-26T04:25:41.337438+00:00",
+    "at": "2026-10-26T04:42:24.128949+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -9291,21 +9387,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-26T04:25:41.337502+00:00",
+    "at": "2026-10-26T04:42:24.128982+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-26T04:13:56.298125+00:00",
+    "at": "2026-10-26T04:34:23.054650+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-b4bae1f7ca5266ac",
-    "video_url": "https://www.youtube.com/watch?v=SzBEV9e_ziM",
+    "content_id": "rayvan-forge-2584ba24e621f504",
+    "video_url": "https://www.youtube.com/watch?v=aczZ4fP3_70",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-26T04:25:41.337152+00:00",
+    "at": "2026-10-26T04:42:24.128803+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -9317,12 +9413,12 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-26T04:25:41.337431+00:00",
+    "at": "2026-10-26T04:42:24.128946+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 49,
+        "eligible": 48,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3,
@@ -9336,21 +9432,21 @@
           "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
         },
         "seen": 11,
-        "total": 182
+        "total": 181
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 182,
+        "before": 181,
         "fingerprint": 0,
         "id": 11,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 171,
+        "remaining": 170,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 171,
-        "remaining": 49
+        "pool": 170,
+        "remaining": 48
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
