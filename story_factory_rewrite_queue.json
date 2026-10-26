@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "70da7845bcb68ddc0f6460e1",
-      "source_sha256": "3b38e9b2738af90940c12ad9216aab294f3e8fce5063517f47a462dad9d25197",
+      "candidate_id": "725cfeb9417d92b2154402d3",
+      "source_sha256": "2f606aa13fba7acd7856aa2ba61ab6ab50033c25e49e406a708f9e5024b2ca7e",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-e03f2b2dea94a5d100c2",
-        "title": "The Grand Panini Contraption",
-        "hook": "The Morning Rush Begins",
-        "question": "Can an automated sandwich press survive a morning rush?",
-        "answer": "Yes, by inventing a new tactical flipper module.",
+        "content_id": "rayvan-gemini-31ae5fbcb1f938f0d97a",
+        "title": "The Great Onion Chopping Contraption Catastrophe",
+        "hook": "The Steam Whistle Erupts",
+        "question": "Can Barnaby sell his automated onion chopper before it pickles the whole farmer market?",
+        "answer": "He successfully demonstrates it by frying an enormous batch of onion rings just in time.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,79 +29,78 @@
         ],
         "story_beats": [
           {
-            "headline": "The Morning Rush Begins",
-            "speech": "Behold my magnificent breakfast-making machine, engineered to feed this entire bustling bazaar in mere seconds!",
+            "headline": "The Steam Whistle Erupts",
+            "speech": "Behold my magnificent mechanized vegetable slicer, engineered to chop ten onions per second without a single tear shed!",
             "visual": "robot",
-            "label": "The Contraption",
+            "label": "The Invention Unveiled",
             "story_beat": "reveal",
-            "visual_prompt": "Arthur stands proudly next to a complex brass robot-press in a crowded sunlit marketplace, pointing a wrench with an excited expression.",
+            "visual_prompt": "Barnaby standing proudly next to a brass mechanical robot contraption with spinning blades in a crowded outdoor market square during daytime.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Jamming Gear",
-            "speech": "Oh no, the cheddar cheese is fusing with the main drive sprocket and causing an unexpected thermal stall!",
+            "headline": "A Flurry of Flying Alliums",
+            "speech": "Oh dear goodness, the gear ratio slipped and now the velocity knob is completely stuck on maximum overdrive mode!",
             "visual": "signal",
-            "label": "The Malfunction",
-            "story_beat": "build",
-            "visual_prompt": "Arthur frantically inspects the steaming robot-press while flashing warning lights illuminate his worried face in the busy market.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Emergency Inverter",
-            "speech": "Quickly now, we must activate the experimental gravity-reversal switch before the dough burns into charcoal!",
-            "visual": "door",
-            "label": "The Control Panel",
+            "label": "Gears Run Wild",
             "story_beat": "mechanism",
-            "visual_prompt": "Arthur reaches inside an open metal maintenance door on the side of the robot-press, pulling a glowing lever with determined focus.",
+            "visual_prompt": "Barnaby frantically waving his arms while clouds of sliced white onions fly through the air towards startled market vendors.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Perfect Delivery",
-            "speech": "Huzzah, piping hot gourmet paninis are successfully soaring through the air right into eager customer hands!",
+            "headline": "Emergency Frying Pan Protocol",
+            "speech": "Quickly grab that giant iron skillet and fire up the portable stove before these vegetable shards bury us alive!",
+            "visual": "door",
+            "label": "The Desperate Pivot",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby and his assistant tossing a massive iron frying pan onto a sizzling propane burner right in front of a market stall doorway.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Golden Ring Bonanza",
+            "speech": "Step right up and taste the crunchiest, fastest-sliced onion rings in the entire county, perfectly browned and ready now!",
             "visual": "ship",
-            "label": "The Success",
+            "label": "Market Day Saved",
             "story_beat": "payoff",
-            "visual_prompt": "Arthur wipes his brow with a smile as golden paninis float gracefully like mini spaceships across the crowded market square.",
+            "visual_prompt": "Barnaby serving huge wooden boats piled high with golden fried onion rings to an enthusiastic line of cheering market customers.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A malfunctioning spring-loaded spatula threatens to ruin the breakfast sandwich stall.",
-        "decisive_choice": "Arthur programs the emergency gravity inverter instead of fixing the manual hinge.",
-        "resolution": "The contraption successfully launches golden paninis directly into waiting customer bags.",
+        "central_conflict": "A malfunctioning vegetable slicing machine threatens to ruin the busiest market day.",
+        "decisive_choice": "Re-routing the turbine power into a portable frying vat instead of shutting down.",
+        "resolution": "A massive crowd of hungry shoppers buys every single fried onion ring instantly.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion claymation aesthetic with detailed mechanical contraptions.",
+          "style": "Slapstick animated comedy style with bright saturated colors and exaggerated expressive character proportions.",
           "characters": {
-            "Arthur": "An eccentric inventor with wild white hair, wearing a green apron stained with flour and goggles on his forehead."
+            "Barnaby": "A frantic inventor with wild grey hair, wearing a soot-stained tweed vest and goggles pushed up on his forehead."
           },
           "locations": {
-            "Marketplace": "A bustling cobblestone square filled with striped awnings, wooden carts, and cheerful morning shoppers."
+            "market": "A bustling cobblestone town square packed with striped canvas vendor tents and wooden display crates."
           },
           "objects": {
-            "RobotPress": "A towering copper and brass machine with multiple folding arms, steaming vents, and a blinking control panel.",
-            "Spatula": "A polished wooden spatula with scorch marks on the handle."
+            "contraption": "A towering copper contraption fitted with noisy gears, funnels, and razor-sharp steel chopping blades."
           }
         },
-        "plot_fingerprint": "c9c02593e4dee013a0d117b9dcf16eb41caa181f0aa394474884873b1b1b6af7"
+        "plot_fingerprint": "392f27cb5ac381ed791cc88de726891d6bd3aa1c0b37d2d177e48d66514805a5"
       },
       "approved": false
     },
     {
-      "candidate_id": "1fdc2df64396bdf2b4ca9d13",
-      "source_sha256": "1e04fe037ae1f3ee0a74db50e47b0e3a3af8620807c3f0d38dc4fa443a58ebb2",
+      "candidate_id": "2b14b74a2e91912d0f558de2",
+      "source_sha256": "c0e95c1ad5c3f548ba297507b2375ee25ef7d6707ba1f12e7a01b61ff30ab731",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-bcbeab4ffbd7cae9913b",
-        "title": "The Great Salt-Carved Organ",
-        "hook": "The Silent Pipes",
-        "question": "Can a tide-powered musical instrument survive a gale?",
-        "answer": "Yes, by routing the storm pressure through underwater resonance chambers.",
+        "content_id": "rayvan-gemini-d1939239eb0047bb3bb2",
+        "title": "The Last Millstone",
+        "hook": "The Dry Basin",
+        "question": "Can two lifelong millers preserve their village bond when a drought forces them to choose between grinding the final shared grain for flour or saving the stone?",
+        "answer": "They break the ancient millstone into hand-querns, sharing the last harvest to feed the village together.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -109,81 +108,81 @@
         ],
         "story_beats": [
           {
-            "headline": "The Silent Pipes",
-            "speech": "Look at the massive sea tubes! If the gale hits tonight without our tuning, the whole festival site will wash away.",
-            "visual": "signal",
-            "label": "Tide Station",
-            "story_beat": "reveal",
-            "visual_prompt": "Master engineer Jora points at towering bronze pipes on a coastal cliff. Jora wears oilskin gear with a brass chronometer. The sky is turning dark purple as storm clouds gather overhead. Jora holds a heavy wrench.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Emergency Siphons",
-            "speech": "We must disconnect the upper whistle array and bolt down the lower bypass valves before the first surge crashes.",
-            "visual": "door",
-            "label": "Control Vault",
-            "story_beat": "build",
-            "visual_prompt": "Jora and apprentice Toby crank massive iron bulkhead wheels inside a damp stone vault. Toby wears a canvas apron. Water drips from the ceiling. Toby holds a greasy ledger while Jora operates the starboard valve.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Rogue Wave",
-            "speech": "Here comes the water! Brace the main manifold now or the entire acoustic chamber will shatter into pieces!",
-            "visual": "ship",
-            "label": "Breakwater",
-            "story_beat": "mechanism",
-            "visual_prompt": "A foaming wall of seawater slams against the concrete apron of the seaside stage. Jora stands firm against the spray, clutching a steel lever that controls the emergency intake floodgates. Toby holds onto a safety rope.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Resonance Chord",
-            "speech": "Listen to that! The storm pressure is forcing a gorgeous deep harmony through every single carved salt pipe!",
+            "headline": "The Dry Basin",
+            "speech": "Our water channel is completely bone dry, Thomas. We can never turn the great wheel again to feed everyone.",
             "visual": "forest",
-            "label": "Festival Plaza",
+            "label": "The Dry Riverbed",
+            "story_beat": "reveal",
+            "visual_prompt": "An aged miller with a weathered linen tunic standing in a cracked, dry riverbed next to a silent wooden mill wheel under a pale sun.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Final Sack",
+            "speech": "This last sack of golden wheat is all that remains in the valley for the entire winter.",
+            "visual": "door",
+            "label": "The Granary Threshold",
+            "story_beat": "build",
+            "visual_prompt": "Two millers in wool vests standing inside a dark wooden barn doorway, holding a heavy burlap sack of wheat together in the fading afternoon light.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Iron Wedge",
+            "speech": "If we strike the master stone right down the center, we can each take a half and survive.",
+            "visual": "signal",
+            "label": "The Workshop Anvil",
+            "story_beat": "mechanism",
+            "visual_prompt": "A miller raising a heavy iron mallet above a wedge resting on a massive stone millstone inside a dusty, sunlit stone workshop.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Shared Querns",
+            "speech": "We will grind our daily bread side by side until the rains finally return to our valley.",
+            "visual": "forest",
+            "label": "The Village Square",
             "story_beat": "payoff",
-            "visual_prompt": "Crowds of festival-goers cheer as golden soundwaves ripple from the seaside organ towers across the beach. Jora and Toby smile, watching the sunset break through the clouds. Jora holds an unlit celebratory flare.",
+            "visual_prompt": "Two smiling millers working separate hand-querns outdoors in a bustling village square, surrounded by grateful townspeople sharing freshly baked loaves.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A giant storm threatens the annual seaside wind-chime festival before the tide organ debuts.",
-        "decisive_choice": "Redirect the incoming rogue wave into the emergency siphon pipes instead of reinforcing the outer walls.",
-        "resolution": "The organ harnesses the gale to play a booming, harmonious chord that clears the festival grounds.",
+        "central_conflict": "A severe drought leaves only enough water in the mill stream to grind one final sack of wheat, threatening the friendship of the village millers.",
+        "decisive_choice": "Shattering the master grinding stone to create two portable querns so both families can share the remaining labor and grain.",
+        "resolution": "The village survives the winter famine through cooperative hand-milling, cementing a legacy of shared endurance.",
         "visual_bible": {
-          "style": "Cinematic stop-motion puppet animation with rich textures of weathered wood, salt-crusted metal, and churning ocean water.",
+          "style": "Rich, textured historical realism with earthy tones and dramatic natural lighting",
           "characters": {
-            "Jora": "A seasoned master engineer with salt-and-pepper hair, wearing a thick emerald-green oilskin coat and leather boots.",
-            "Toby": "An eager young apprentice with freckles, wearing a practical brown canvas apron over a blue wool sweater."
+            "Thomas": "An elderly miller with deep laugh lines, wearing a patched wool vest, linen shirt, and leather boots.",
+            "Garret": "A sturdy middle-aged miller with broad shoulders, wearing a dark brown tunic and a leather work apron."
           },
           "locations": {
-            "Coastal Cliff": "A rugged grey stone precipice overlooking a turbulent green ocean, dotted with brass pipes and wooden scaffolding.",
-            "Control Vault": "A cramped, subterranean chamber carved into sea rock, filled with heavy iron gears, pressure gauges, and flickering lanterns."
+            "Riverbed": "A cracked, sun-baked clay basin with dry brush and a silent, moss-covered wooden water wheel.",
+            "Workshop": "A cluttered stone room filled with timber beams, iron tools, and stone dust hanging in the air."
           },
           "objects": {
-            "Wrench": "A heavy, rust-resistant forged iron tool with a notched grip.",
-            "Ledger": "A waterproof calfskin-bound notebook with handwritten engineering schematics and tide tables."
+            "Millstone": "A massive, two-ton circular grey granite stone with intricate concentric grinding grooves.",
+            "Quern": "A pair of portable, hand-cranked flat stone disks used for grinding grain manually."
           }
         },
-        "plot_fingerprint": "716c9e4a31793959857ba122c8a8352c74fb740b10cb67d63d8a0a5ef28ad547"
+        "plot_fingerprint": "d284bf47a976589d36b7ece0a1f8954d22772b792905657c8d2834a012268c7e"
       },
       "approved": false
     },
     {
-      "candidate_id": "020299c03b6ecc0189cb16bc",
-      "source_sha256": "080c7118d923dd26f76d6a4d5fcec9518fcf9c1f4d011fe25ccca8a6bbc4ebc0",
+      "candidate_id": "71dd66a3d411d951d3d6b3e7",
+      "source_sha256": "5b17a27eae22281b2bc4cfa649c07949292b9925fc91942fc5843d874b142dc6",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-f49762ae8f591eeec99f",
-        "title": "The Canopy Cartographers",
-        "hook": "The Hidden Trail",
-        "question": "Can two estranged siblings map a shifting, bioluminescent forest before nightfall?",
-        "answer": "Yes, by combining their unique tracking skills and trusting the forest's glowing migration patterns.",
+        "content_id": "rayvan-gemini-3bfdf490b9f3ab13c39e",
+        "title": "The Muddy Pitch Navigation Device",
+        "hook": "Torrential Downpour",
+        "question": "How can the underdog neighborhood football squad beat the defending champions without a regulation field?",
+        "answer": "By engineering a water-sensing laser projection system that plots invisible dry turf routes through the downpour.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -191,64 +190,65 @@
         ],
         "story_beats": [
           {
-            "headline": "The Hidden Trail",
-            "speech": "Look closely at how the moss breathes, Lyra. The glowing spores are showing us a path we missed entirely.",
-            "visual": "forest",
-            "label": "Discovery",
-            "story_beat": "reveal",
-            "visual_prompt": "An elder brother kneeling by a glowing tree trunk points to floating spores while his younger sister watches in amazement inside a dense magical forest.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Constructing the Beacon",
-            "speech": "We must lash these resonant wood pieces together tightly so the sonic pulse reaches the valley rim.",
+            "headline": "Torrential Downpour",
+            "speech": "Look at this muddy swamp. Our rivals say we forfeit because our side of town cannot afford drainage systems.",
             "visual": "signal",
-            "label": "Assembly",
+            "label": "The Discovery",
+            "story_beat": "reveal",
+            "visual_prompt": "Captain Maya stands in the pouring rain looking at the flooded community football pitch while holding a broken analog stopwatch.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Engineering the Beacon",
+            "speech": "We will map the high ground ourselves using bicycle dynamos, spare lenses, and this flickering green laser pointer.",
+            "visual": "robot",
+            "label": "The Invention",
             "story_beat": "build",
-            "visual_prompt": "Two siblings hurriedly binding glowing branches and crystal shards together to create a crude signal tower in a deep forest clearing.",
+            "visual_prompt": "Maya and her teammate Leo assemble a makeshift laser guidance drone in a cluttered garage workbench using bicycle parts.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Diverging Roots",
-            "speech": "My map says we go left toward the canyon, but the pulsing signal clearly demands we climb right.",
-            "visual": "door",
-            "label": "Dilemma",
-            "story_beat": "twist",
-            "visual_prompt": "The brother and sister standing at a natural archway made of living vines, arguing over two contrasting glowing pathways ahead of them.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Unified Path",
-            "speech": "Let go of your old parchment maps. Together, our footsteps create the only true compass we will ever need.",
+            "headline": "Guiding the Path",
+            "speech": "Stay inside the green beam projected onto the puddles. It marks the solid gravel beneath the standing water.",
             "visual": "ship",
-            "label": "Triumph",
+            "label": "The Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "Maya operating a handheld remote while the overhead drone sweeps a bright green path across the muddy field during the match.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Winning Goal",
+            "speech": "We proved that clever engineering beats deep pockets every single time on this muddy neighborhood pitch.",
+            "visual": "door",
+            "label": "The Triumph",
             "story_beat": "payoff",
-            "visual_prompt": "The siblings standing triumphantly atop a high canopy ridge overlooking a sweeping bioluminescent valley as a glowing airship arrives overhead.",
+            "visual_prompt": "Maya kicking the winning ball through the goalposts as cheering community members rush onto the field holding glowing LED lanterns.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Navigating a rapidly twisting woodland maze where traditional compasses fail completely.",
-        "decisive_choice": "Abandoning their separate maps to follow a single, shared root-signal together.",
-        "resolution": "They successfully chart the safe migration route and forge a lasting bond.",
+        "central_conflict": "The annual community cup match faces cancellation due to a flooded pitch and arrogant opponents.",
+        "decisive_choice": "Captain Maya builds a luminous guidance drone using discarded bicycle parts and waterproof LED modules.",
+        "resolution": "The team navigates the flooded pitch flawlessly, securing an unexpected victory and uniting the neighborhood.",
         "visual_bible": {
-          "style": "Cinematic fantasy illustration with rich emerald greens, vibrant cyan bioluminescence, and warm amber lighting.",
+          "style": "Vibrant cinematic animation with detailed textures and dramatic lighting",
           "characters": {
-            "brother": "Kaelen, a weathered tracker in his late twenties, wearing a dark leather jacket with utility pouches and holding a brass surveying tool.",
-            "sister": "Lyra, a nimble cartographer in her early twenties, wearing a teal hooded cloak and carrying a leather-bound journal."
+            "Maya": "A determined 14-year-old girl with dark curly hair tied in a messy bun, wearing a faded orange football jersey and muddy sneakers.",
+            "Leo": "An enthusiastic 14-year-old boy wearing thick round glasses, a blue utility vest, and grease-stained gloves."
           },
           "locations": {
-            "forest": "The Whispering Woods, featuring colossal glowing trees, hanging moss vines, and luminous ground ferns."
+            "Garage": "A cluttered suburban garage filled with bicycle frames, spare batteries, and soldering tools.",
+            "Pitch": "A worn-out neighborhood football field surrounded by chain-link fences and deep muddy puddles."
           },
           "objects": {
-            "journal": "A thick, leather-bound book filled with intricate hand-drawn maps and glowing ink notes.",
-            "signal_tower": "A makeshift wooden frame embedded with pulsing cyan crystals that emit vertical beams of light."
+            "Drone": "A makeshift quadcopter built from old aluminum spokes, waterproof tape, and a high-intensity green diode.",
+            "Stopwatch": "A scratched silver metal mechanical stopwatch with a dangling leather cord held by Maya."
           }
         },
-        "plot_fingerprint": "419c9f59b33b47100c34ca31d2521d40ca3a5aa3c37c1d4dbabf90955d3cd469"
+        "plot_fingerprint": "3892c1df0dfdfdaae3fc9218f47670e82adb7fe7018df005f46e59c251257575"
       },
       "approved": false
     }
