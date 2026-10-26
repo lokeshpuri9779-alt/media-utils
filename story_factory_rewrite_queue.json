@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "b8bf03f4b6d8dfb9827d5c6a",
-      "source_sha256": "1efb04a1f31211488f2da81a448e6ee55e43966205c661492f9bae4a49ac4be4",
+      "candidate_id": "f2d8dbbf510445291fbd5eab",
+      "source_sha256": "ad55a4ec2c24aa93d35fb9a0806311e7c025acbbd5e1ee9f01578839b5aa6344",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-aeeaafa4df4e0886151a",
-        "title": "The Great Tomato Tango",
-        "hook": "The Slicer Breakdown",
-        "question": "Can a runaway mechanical scarecrow save Barnaby's produce stand from ruin?",
-        "answer": "Yes, by performing an absurdly energetic salsa dance that mesmerizes every customer in the bustling bazaar.",
+        "content_id": "rayvan-gemini-054af3495ee334cb58e6",
+        "title": "The Great Squeak-Free Cheese Wheel Catapult Fiasco",
+        "hook": "The Catapult Prototype Unveiled",
+        "question": "Can an overly enthusiastic inventor successfully launch aged cheddar across a bustling farmers market without destroying the artisan jam stall?",
+        "answer": "Yes, by utilizing an acoustic resonance dampener and a very well-timed feather tickle.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,78 +29,80 @@
         ],
         "story_beats": [
           {
-            "headline": "The Slicer Breakdown",
-            "speech": "My magnificent mechanical slicer has gone completely haywire, spraying fresh tomato juice all over my prized customer melon displays!",
+            "headline": "The Catapult Prototype Unveiled",
+            "speech": "Behold citizens, my magnificent pneumatic cheddar launcher will revolutionize grocery delivery across this entire noisy town today!",
             "visual": "robot",
-            "label": "The Malfunction",
+            "label": "Prototype Reveal",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby wearing his green apron points frantically at a sputtering metal robot-slicer that is spinning wildly and spraying red juice across wooden market crates inside the busy outdoor bazaar.",
+            "visual_prompt": "Inventor Barnaby pulling the velvet tarp off a towering wooden catapult in the center of the bustling market, smiling widely while pointing at a rusty metal gear.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Gears of Rhythm",
-            "speech": "If I simply reroute the primary steam valves into the oscillation drums, this stubborn metal contraption might just start moving to a beat.",
+            "headline": "Calibrating the Tension Springs",
+            "speech": "We must tighten these heavy steel cables carefully so the sharp wheels do not shatter upon impact.",
             "visual": "signal",
-            "label": "The Quick Fix",
+            "label": "Spring Calibration",
             "story_beat": "build",
-            "visual_prompt": "Barnaby wearing his green apron holds a glowing copper wrench while furiously adjusting steam pipes on the back of the robot-slicer inside the noisy market square.",
+            "visual_prompt": "Barnaby's mechanical assistant Pip turning a large brass crank connected to vibrating copper tuning forks, sweating profusely under the midday sun.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Salsa Protocol",
-            "speech": "Watch closely as my clever invention executes a flawless Latin rhythm while perfectly slicing every single ripe red tomato in sight.",
+            "headline": "Emergency Acoustic Dampener",
+            "speech": "Quickly flip that fuzzy velvet switch before the loud whistling shatters Mrs. Higgins delicate strawberry preserves!",
+            "visual": "door",
+            "label": "Dampener Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "Pip frantically slamming a tiny padded hatch shut on the side of the wooden launching arm while glowing neon green indicator lights flash rapidly.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Perfect Soft Landing",
+            "speech": "Amazing, our perfectly aimed snack arrived right into the customer shopping basket without spilling a single drop!",
             "visual": "ship",
-            "label": "The Performance",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby wearing his green apron stands proudly beside the robot-slicer which is now rhythmically swinging its metallic arms and slicing tomatoes into bowls while shoppers gather around in the bustling bazaar.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Bazaar Sensation",
-            "speech": "We have officially sold out of every last vegetable we own thanks to our mechanical dancing sensation and his wonderful rhythm.",
-            "visual": "door",
-            "label": "The Triumph",
+            "label": "Successful Delivery",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby wearing his green apron counts a large stack of gold coins while the robot-slicer rests peacefully beside empty wooden crates outside the crowded market entrance.",
+            "visual_prompt": "A massive wheel of aged cheddar resting softly inside a woven shopping cart, surrounded by cheering market vendors clapping for a relieved Barnaby and Pip.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby's automatic tomato-slicer machine breaks down during the busiest morning market hour.",
-        "decisive_choice": "Barnaby reprograms the slicing gears into a rhythmic dance module instead of throwing the machine away.",
-        "resolution": "The dancing vegetable-chopper attracts massive crowds, transforming the struggling stand into the most popular attraction in town.",
+        "central_conflict": "Launching giant cheese wheels over a crowded produce market threatens fragile preserves.",
+        "decisive_choice": "Activating the acoustic resonance dampener mid-flight to mute the loud whistling mechanism.",
+        "resolution": "The cheddar lands safely on the buyer's cart while the jam remains completely undisturbed.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures and whimsical character designs.",
+          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures of wood, brass, and fabric.",
           "characters": {
-            "Barnaby": "An enthusiastic elderly inventor with bushy white hair, a round belly, round spectacles, wearing a patched green apron over a yellow shirt."
+            "Barnaby": "An eccentric inventor with wild gray hair, wearing a patched green tweed vest, round spectacles, and soot-stained trousers.",
+            "Pip": "A short, energetic assistant wearing a tight canvas apron, a bright red cap, and carrying a wrench in his back pocket."
           },
           "locations": {
-            "Bustling Bazaar": "A lively outdoor market filled with colorful awnings, wooden fruit stalls, cobblestone paths, and curious townspeople."
+            "market": "A bustling, sunlit cobblestone town square packed with striped canvas awnings, fruit crates, and chattering crowds."
           },
           "objects": {
-            "Robot Slicer": "A clunky, copper-plated mechanical contraption with multiple spinning blades, glowing indicator lights, and steam pipes protruding from its back."
+            "catapult": "A towering wooden lever system constructed from polished oak beams, brass pneumatic pistons, and heavy steel tension springs.",
+            "cheddar_wheel": "A massive, bright yellow cylinder of aged cheese with a visible waxy rind and a faint golden glow."
           }
         },
-        "plot_fingerprint": "dd898415f1ac0383d31932a6f04704cbf32ad1fe7f5409f2c693d374452e91f7"
+        "plot_fingerprint": "480829425ad9fe01eccc1769fc9bc922f80d269eed907d2f4037f07aad73054c"
       },
       "approved": false
     },
     {
-      "candidate_id": "7d74ca4039b952da17e574f8",
-      "source_sha256": "de824ad1905b47ad02ba9aba7e43a411186cd280473d786071443763c4f3a5b3",
+      "candidate_id": "e078b29dee918e2722c39af5",
+      "source_sha256": "a19b3c145faf0973bd72eb6a10e7dcd549603cf76ad8a249187a6b54bf113e2f",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-1a87c7c6b0ad8043609a",
-        "title": "The Automatic Onion Slicer Disaster",
-        "hook": "The Grand Unveiling",
-        "question": "Can an over-engineered kitchen gadget survive a bustling farmers market?",
-        "answer": "Simple mechanical reliability always triumphs over chaotic gadgetry.",
+        "content_id": "rayvan-gemini-57ddb37ce47ea9dc808e",
+        "title": "The Automatic Noodle-Kneading Contraption",
+        "hook": "The Unexpected Eruption",
+        "question": "Can Barnaby sell his chaotic steam-powered noodle machine without destroying the morning market?",
+        "answer": "He successfully modifies the exhaust valve to vent upward, turning disaster into a delicious savory success.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -108,147 +110,150 @@
         ],
         "story_beats": [
           {
-            "headline": "The Grand Unveiling",
-            "speech": "Behold the chrono-slicer! It dices fifty onions a second using pure steam power!",
+            "headline": "The Unexpected Eruption",
+            "speech": "Behold the marvel of culinary science! This marvelous copper beast shall knead your noodles faster than a galloping pony!",
             "visual": "robot",
-            "label": "First Invention Reveal",
+            "label": "The Presentation",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly next to a steaming brass automaton slicer at his crowded wooden market stall, wearing a stained apron and pointing excitedly at the erratic machine while confused shoppers watch.",
+            "visual_prompt": "Barnaby stands proudly beside his steaming copper brass contraption in the bustling cobblestone market, gesturing wildly while flustered shoppers duck behind wooden fruit crates to avoid stray flour dust.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Gear Jam",
-            "speech": "Wait, do not add the extra large root vegetable into the main hopper right now!",
-            "visual": "door",
-            "label": "Mechanism Jammed",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby desperately tries to push the jammed brass door of the machine shut as thick white steam hisses out from the side vents while startled market patrons lean back in alarm.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Produce Explosion",
-            "speech": "Duck everyone! The internal spring tension release just triggered a massive vegetable launch sequence!",
+            "headline": "Building the Pressure",
+            "speech": "Oh dear me, the gauge is climbing rapidly into the red zone! Quick, somebody fetch me a larger wooden spoon!",
             "visual": "signal",
-            "label": "Unexpected Twist",
-            "story_beat": "twist",
-            "visual_prompt": "Raw onion slices fly wildly through the air across the busy outdoor market square while a flashing red warning light spins frantically on top of the smoking mechanical contraption.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Humble Payoff",
-            "speech": "Nothing beats a trusty chef knife and a steady hand for getting the job done right.",
-            "visual": "forest",
-            "label": "Final Success",
-            "story_beat": "payoff",
-            "visual_prompt": "Barnaby calmly slices onions by hand on a wooden cutting board with a cheerful smile as a long line of happy market customers patiently waits to buy his neatly chopped vegetables.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Barnaby tests his chaotic motorized onion slicer in front of a demanding morning crowd.",
-        "decisive_choice": "Barnaby abandons his complex gears and manually chops the remaining onions.",
-        "resolution": "Customers applaud the authentic handmade technique, turning the invention into a simple manual chopper.",
-        "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures and comedic physical comedy elements.",
-          "characters": {
-            "Barnaby": "An enthusiastic inventor with wild grey hair, wearing a striped vest over a white shirt and a heavily stained leather apron.",
-            "Mayor Higgins": "A stern municipal official wearing a tall top hat, fine wool suit, and holding a clipboard."
-          },
-          "locations": {
-            "Market Square": "A bustling cobblestone town square filled with wooden awnings, colorful fruit crates, and eager shoppers."
-          },
-          "objects": {
-            "Automaton Slicer": "A towering contraption made of shiny brass gears, copper pipes, and a smoking miniature steam boiler.",
-            "Chef Knife": "A gleaming steel kitchen knife with a worn wooden handle used for manual vegetable chopping."
-          }
-        },
-        "plot_fingerprint": "ba16f0ab4f55c0daf632929539731b5fc92f1c9bb4896bc183ac4dcb24aaf2b7"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "73f3e74dda6482ac4ea6d8c4",
-      "source_sha256": "1840f4d87cb6ab71e4cb402eae46b43acf240076b76f805692449123050ce6b2",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-0c6c20e705e4e702bacf",
-        "title": "The Weaver's Last Loom",
-        "hook": "The Hidden Rot",
-        "question": "Can true friendship survive when one must destroy their life's work to save the village?",
-        "answer": "Yes, by choosing community over personal legacy, the weavers rebuild together.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Hidden Rot",
-            "speech": "Look closely at the grain, old friend. The fungus has reached the main beam of every loom in our valley.",
-            "visual": "forest",
-            "label": "The Discovery",
-            "story_beat": "reveal",
-            "visual_prompt": "Milo points at a dark fungus spreading across a wooden loom inside a dimly lit workshop, holding a flickering oil lamp in his right hand with a grim expression.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Impossible Choice",
-            "speech": "We cannot weave the winter cloaks without destroying the damp timber, yet our children will freeze without the fire.",
-            "visual": "door",
-            "label": "The Dilemma",
+            "label": "The Escalation",
             "story_beat": "build",
-            "visual_prompt": "Milo stands near the open wooden workshop door, looking out at shivering children huddled by a cold fountain while his partner Aaron places a comforting hand on his shoulder.",
+            "visual_prompt": "Barnaby frantically tightens brass valves with a greasy wrench while his assistant Pip desperately tries to hold down a vibrating hopper that is threatening to detach from the main iron frame.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Sacred Sacrifice",
-            "speech": "My master loom was built by my grandfather, but your children are the future of this valley, not my memories.",
-            "visual": "signal",
-            "label": "The Act",
-            "story_beat": "mechanism",
-            "visual_prompt": "Milo drops a burning wooden brand onto the base of his ornate master loom inside the crowded workshop as bright orange flames begin to climb the carved posts.",
+            "headline": "The Diverting Twist",
+            "speech": "We cannot let the dough hit the ground! I must redirect the entire exhaust pipe straight up toward the fabric canopy!",
+            "visual": "ship",
+            "label": "The Pivot",
+            "story_beat": "twist",
+            "visual_prompt": "Barnaby leaps onto a sturdy wooden crate, stretching his arms high to wrench the main brass elbow joint upward, aiming a churning column of elastic noodle strands directly toward the colorful striped market awning.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The New Foundation",
-            "speech": "The fire kept us warm through the dark night, and now we shall build your new workshop from the stone up.",
-            "visual": "robot",
-            "label": "The Renewal",
+            "headline": "The Savory Shower",
+            "speech": "Taste the triumph of modern invention! Perfectly seasoned noodles raining softly down upon your waiting bowls for everyone!",
+            "visual": "door",
+            "label": "The Grand Finale",
             "story_beat": "payoff",
-            "visual_prompt": "Milo and Aaron smile warmly together in the sunlight outside the rebuilt stone workshop, holding a newly forged iron shuttle between them while villagers cheer in the background.",
+            "visual_prompt": "Barnaby and Pip stand smiling amidst a gentle flurry of cooked noodles gracefully descending from the frayed awning, while delighted townspeople hold out wooden bowls to catch the falling feast.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A rare timber rot infects the village communal looms just as a harsh winter approaches.",
-        "decisive_choice": "Milo chooses to burn his own master loom to provide emergency heat for the freezing village children.",
-        "resolution": "The villagers survive the freeze and unite to carve Milo a new loom from stone and iron.",
+        "central_conflict": "Steam pressure overload threatens to launch raw dough across the entire town square.",
+        "decisive_choice": "Redirect the excessive boiler pressure upward into the decorative awning.",
+        "resolution": "A gentle cloud of perfectly floured noodles drifts down, delighting the hungry market crowd.",
         "visual_bible": {
-          "style": "Warm historical realism with rich earth tones, textured wood grain, and soft cinematic lighting.",
+          "style": "Bright, colorful stop-motion animation aesthetic with warm lighting, tactile textures, and expressive character designs.",
           "characters": {
-            "Milo": "An aging master weaver with silver hair, weary deep-set eyes, wearing a patched wool tunic and a leather apron.",
-            "Aaron": "A rugged village carpenter with a thick dark beard, wearing a heavy tweed vest and sturdy canvas trousers."
+            "Barnaby": "An eccentric inventor with wild white hair, soot-smudged cheeks, round brass spectacles, wearing a patched tweed vest and rolled-up striped trousers.",
+            "Pip": "Barnaby's young, nimble apprentice wearing an oversized leather cap, a denim apron filled with loose bolts, and bright orange boots."
           },
           "locations": {
-            "workshop": "A rustic timber-framed village workshop filled with hanging yarn bundles, wooden beams, and dust motes dancing in sunbeams.",
-            "village_square": "An open cobblestone courtyard featuring a central stone water fountain surrounded by modest timber cottages."
+            "The Bustling Market": "A sunlit cobblestone town square packed with wooden merchant stalls, hanging canvas awnings, and woven baskets overflowing with colorful vegetables."
           },
           "objects": {
-            "master_loom": "An intricate, large wooden loom adorned with hand-carved leaf motifs and threaded with unfinished indigo wool.",
-            "oil_lamp": "A tarnished brass handheld oil lamp casting a warm, flickering amber glow.",
-            "iron_shuttle": "A sleek, heavy forged iron weaving shuttle with smooth polished edges."
+            "The Contraption": "A towering, whimsical brass and cast-iron machine adorned with sputtering pressure gauges, spinning cogwheels, and a roaring miniature coal furnace at its base.",
+            "Market Awning": "A large, sturdy canvas canopy striped in bright yellow and deep crimson, stretched tightly over heavy wooden support poles."
           }
         },
-        "plot_fingerprint": "b92b50f939fcb1e2c651b12f2fcabe094cce5a796e45b242ca6d83c4d42fd0c5"
+        "plot_fingerprint": "efeab0260a2a6f5d3e75435be17a820f388520fbdfa97238c0d1dfc777890cde"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "d33aa4ab53b99815eb04f1d2",
+      "source_sha256": "d9680161c559308b36d6f215e926cca15ba201d841d15d33bddba01d02ed13c0",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-10b76357981cbcbd4aeb",
+        "title": "The Weaver's Loom",
+        "hook": "A Guilty Discovery",
+        "question": "Can true friendship survive the burden of a shared secret?",
+        "answer": "Yes, when honesty replaces hidden guilt.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "A Guilty Discovery",
+            "speech": "Look closely at the hidden bundle beneath the floorboards. We took it to survive the bitter winter.",
+            "visual": "door",
+            "label": "Hidden Secret",
+            "story_beat": "reveal",
+            "visual_prompt": "Eliza kneels on the wooden floorboards inside the rustic cottage, lifting a loose plank to reveal a hidden wool bundle. She wears a faded brown tunic. Thomas stands beside her, looking anxious in a dark green vest. Soft candlelight illuminates the dusty room.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Planning the Return",
+            "speech": "We must carry this back to the workshop before the morning bell rings and our neighbors wake up.",
+            "visual": "forest",
+            "label": "The Path Ahead",
+            "story_beat": "build",
+            "visual_prompt": "Eliza and Thomas walk together along a misty forest path at dawn, carrying the heavy wool bundle wrapped in burlap between them. Tall pine trees surround them in the dim morning light, creating long shadows on the damp earth.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Facing the Elder",
+            "speech": "Here is the missing material we took from your workshop. We offer our labor to make amends.",
+            "visual": "ship",
+            "label": "Confession",
+            "story_beat": "mechanism",
+            "visual_prompt": "Eliza and Thomas stand inside the village timber hall before Master Gareth, who sits at a large oak desk shaped like a hull. Eliza holds the unwrapped wool bundle forward with both hands. Gareth looks sternly at them under hanging lanterns.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A New Partnership",
+            "speech": "Your honesty earns our trust today. Let us mend the loom together and build a stronger community.",
+            "visual": "signal",
+            "label": "Forgiveness",
+            "story_beat": "payoff",
+            "visual_prompt": "Master Gareth shakes hands with Eliza inside the sunlit village square, while Thomas smiles warmly nearby. A bright brass signal bell hangs from a wooden post behind them, glowing in the midday sun. All characters wear clean, repaired clothing.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Hiding a stolen thread spool to protect a struggling family.",
+        "decisive_choice": "Returning the stolen spool to the village elder.",
+        "resolution": "Earning forgiveness and working together to repay the debt.",
+        "visual_bible": {
+          "style": "Warm historical realism with rich earth tones and cinematic lighting.",
+          "characters": {
+            "Eliza": "A young village weaver with dark braided hair, wearing a patched brown tunic and sturdy leather boots.",
+            "Thomas": "Eliza's loyal friend with curly brown hair, wearing a dark green wool vest and coarse trousers.",
+            "Master Gareth": "A stern village elder with a graying beard, wearing a heavy blue wool coat and silver clasp."
+          },
+          "locations": {
+            "Cottage": "A cozy, rustic room with exposed oak beams, rough plaster walls, and a stone hearth.",
+            "Forest Path": "A damp dirt trail winding through dense pine trees under a gray morning fog.",
+            "Timber Hall": "A spacious community building featuring sturdy wooden architecture and hanging oil lanterns.",
+            "Village Square": "An open cobblestone courtyard surrounded by thatched-roof houses and a central bell post."
+          },
+          "objects": {
+            "Wool Bundle": "A thick package of undyed raw wool wrapped in coarse brown burlap and tied with hemp twine.",
+            "Oak Desk": "A large, dark wooden desk carved with nautical motifs resembling a ship hull.",
+            "Brass Bell": "A polished brass hand-bell mounted on a carved wooden post used to signal community gatherings."
+          }
+        },
+        "plot_fingerprint": "44f9375ce85d10863a3e47c172a4c71f3d7c6b82bd9fa0bc5745586418dc1719"
       },
       "approved": false
     }
