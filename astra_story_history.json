@@ -4840,6 +4840,58 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-7dfd1f99bfa1d383eeec",
+      "video_id": "8_7K2cIgAtA",
+      "confirmed_at": "2026-10-26T23:07:50.628051+00:00",
+      "title": "Kaelen and the Bloom of the Sun-Scorched Basin",
+      "plot_fingerprint": "131b6937474f1990698d8bfffa5f9dca71a6cacc2e3b6b93002a8a840ea477fb",
+      "story_beats": [
+        {
+          "headline": "A Hidden Opening",
+          "speech": "My sensors show an anomaly beneath these shifting sands; a cooling breeze emanates from this dark, narrow crevice in the canyon wall.",
+          "visual": "door",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Kaelen, a young explorer with sun-bleached hair and tan utility gear, stands before a jagged stone door-like fissure in a towering orange desert cliff.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Verdant Secret",
+          "speech": "Incredible, a thriving subterranean garden fed by deep aquifers, pulsing with a rhythmic, soft violet light deep within this dry, dead desert.",
+          "visual": "forest",
+          "label": "The Ecosystem",
+          "story_beat": "build",
+          "visual_prompt": "Kaelen kneels inside a cavern, illuminated by glowing blue and violet moss-like plants, his face reflecting pure wonder as he inspects the lush floor.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Failing Seal",
+          "speech": "The structural integrity of this cavern is failing, and if I do not act now, the desert wind will destroy this precious life.",
+          "visual": "robot",
+          "label": "The Crisis",
+          "story_beat": "mechanism",
+          "visual_prompt": "Kaelen's small, rusted robotic scout drone floats nearby, its red optical sensor flickering as Kaelen frantically adjusts a heavy stone block to seal the cave.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Living Result",
+          "speech": "By sacrificing my supplies, I have ensured these ancient plants will thrive for another century, even if my own journey ends right here.",
+          "visual": "signal",
+          "label": "The Sacrifice",
+          "story_beat": "payoff",
+          "visual_prompt": "Kaelen sits leaning against the sealed cave wall as a faint, glowing green signal flare ignites in the sky above the vast, silent desert landscape.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Kaelen discovers a hidden, water-rich cave habitat that is threatened by the collapse of his own shelter's ventilation.",
+      "decisive_choice": "Kaelen elects to use his limited emergency water supply to stabilize the cave's humidity rather than refueling his own canteen.",
+      "resolution": "The flora survives, and Kaelen discovers a natural condensate drip that sustains him until his rescue signals are spotted."
     }
   ]
 }
