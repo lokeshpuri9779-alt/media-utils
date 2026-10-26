@@ -18,3 +18,5 @@ Retry 8: FP32 precision hint and automatic 8-bit compression disabled for source
 Retry 8: benign toy fire truck prompt; retain NSFW safety checker and image gate.
 
 Retry 9: export FP32 with 12 steps, guidance 8.0, deterministic seed 42; safety gate unchanged.
+
+Retry 10: single fire truck composition; negative prompt; FP32 16 steps; safety checks unchanged.
