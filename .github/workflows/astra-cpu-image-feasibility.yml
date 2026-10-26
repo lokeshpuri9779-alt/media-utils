@@ -10,7 +10,7 @@ on:
         description: 'Preconverted OpenVINO model recommended; export uses more memory/time'
         type: choice
         required: true
-        default: preconverted
+        default: export
         options:
           - preconverted
           - export
@@ -32,7 +32,7 @@ jobs:
           python-version: '3.11'
       - name: Install CPU-only benchmark dependencies
         run: |
-          python -m pip install --disable-pip-version-check 'Pillow>=10,<12' 'optimum[openvino]' diffusers
+          python -m pip install --disable-pip-version-check 'Pillow>=10,<12' 'optimum[openvino]' diffusers 'transformers>=4.46,<5'
       - name: Log runner limits
         run: |
           nproc
@@ -41,6 +41,11 @@ jobs:
       - name: Produce isolated portrait keyframe
         run: |
           python -m tools.experimental_openvino_benchmark --profile "${{ inputs.model_profile }}" --steps 8
+      - name: Explain benchmark scope
+        if: always()
+        run: |
+          echo 'Pixel-quality pass is NOT semantic fidelity, character continuity, or approval.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Benchmark artifacts require human visual review. Production/publishing remain disabled.' >> "$GITHUB_STEP_SUMMARY"
       - name: Retain review-only benchmark evidence
         if: always()
         uses: actions/upload-artifact@v4
