@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "381168a1ed6a20becd4f836d",
-      "source_sha256": "60e12429106645aabffa9e5f8100a900fb5cd2fb54e0685e25123b94e7eca07d",
+      "candidate_id": "a76fdab3b4ccde099ddd02a4",
+      "source_sha256": "aeb3cb678b795e783548f4507c7bfe0c000058d0af734c5f4faa38528416ea7a",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-c74e27169c36488c2e6d",
-        "title": "The Great Onion Chopper Debacle",
-        "hook": "The Whirring Menace",
-        "question": "Can Barnaby's chaotic slicing invention save his market stall before the inspector arrives?",
-        "answer": "Yes, by accidentally turning the entire vegetable cart into a brilliant, caramelized soup fountain.",
+        "content_id": "rayvan-gemini-7a61014cb5decd7faabc",
+        "title": "The Great Tomato Tango",
+        "hook": "The Catastrophic Debut",
+        "question": "Can an overly enthusiastic inventor sell a mechanical fruit picker in a chaotic farmers market without destroying every stall?",
+        "answer": "Yes, by repurposing the malfunctioning claw to package delicate berries instead of launching heavy vegetables.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,79 +29,79 @@
         ],
         "story_beats": [
           {
-            "headline": "The Whirring Menace",
-            "speech": "Behold my magnificent culinary marvel! It dices, it slices, and it only occasionally hurls root vegetables at innocent bystanders.",
+            "headline": "The Catastrophic Debut",
+            "speech": "Behold the ultimate harvest automaton! It picks tomatoes with unprecedented speed and zero effort from the wearer.",
             "visual": "robot",
-            "label": "Automaton Chaos",
+            "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands nervously in his bustling market stall, pointing at a clunky copper robot violently shredding onions while holding a wrench.",
+            "visual_prompt": "Inventor Silas, wearing a grease-stained yellow vest and round spectacles, proudly points at a clanking copper robot holding a bruised red tomato in a bustling outdoor farmers market.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Spicing Up the Gears",
-            "speech": "We need more momentum to stabilize the blades before the inspector tastes the bitter tears of failure today.",
+            "headline": "Rampage Among the Radishes",
+            "speech": "Oh dear, the calibration dial is stuck on hyperdrive! Duck behind the melon crates before it fires again!",
             "visual": "signal",
-            "label": "Gear Tuning",
+            "label": "The Malfunction",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically turns a large brass valve on the side of the copper robot, while onions fly wildly through the air.",
+            "visual_prompt": "Silas frantically chases the copper robot across a chaotic marketplace while alarmed vendors duck behind wooden stalls stacked with bouncing red vegetables.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Sweet Correction",
-            "speech": "If logic fails us completely, raw sugar must save the day from this terrible, crying disaster right now!",
+            "headline": "The Desperate Adjustment",
+            "speech": "If I can reverse this brass valve before it targets the honey stand, disaster will finally be averted.",
             "visual": "ship",
-            "label": "Sugar Dump",
+            "label": "The Fix",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby dumps a heavy sack of white sugar straight into the smoking funnel of the robot, eyes wide with desperate panic.",
+            "visual_prompt": "Silas leaps onto the back of the smoking copper robot, desperately twisting a smoking brass valve while holding a heavy wrench in the crowded market square.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Soup Triumph",
-            "speech": "Magnificent! The finest caramelized soup in the entire province, delivered straight from a mechanical disaster zone into our bowls.",
-            "visual": "door",
-            "label": "Gourmet Success",
+            "headline": "Sweet Success",
+            "speech": "Instead of crushing crops, it now sorts delicate strawberries with perfect grace. Innovation triumphs once again!",
+            "visual": "forest",
+            "label": "The Triumph",
             "story_beat": "payoff",
-            "visual_prompt": "The severe health inspector smiles delightedly, eating steaming soup directly out of a giant wooden bowl held by a relieved Barnaby.",
+            "visual_prompt": "Silas smiles proudly beside the modified copper robot, which now gently places perfect red strawberries into woven baskets while cheerful market vendors applaud.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby's erratic onion-slicing automaton threatens to destroy his vegetable stall before the health inspector reviews it.",
-        "decisive_choice": "Barnaby overrides the safety lock and dumps a crate of sugar directly into the spinning blade mechanism.",
-        "resolution": "The explosive reaction creates an instant gourmet onion soup that wins the inspector's highest award.",
+        "central_conflict": "A chaotic mechanical tomato harvester running amok in a crowded public market.",
+        "decisive_choice": "Reconfigure the primary pneumatic launcher into a gentle suction sorter.",
+        "resolution": "The inventor successfully saves the market square and wins the annual innovation ribbon.",
         "visual_bible": {
-          "style": "Bright, colorful 3D animated comedy style with exaggerated expressions and slapstick mechanical designs.",
+          "style": "A vibrant, humorous comic book illustration style with warm lighting and expressive character animations.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild ginger hair, a grease-stained apron, and goggles perpetually pushed up onto his forehead.",
-            "Inspector": "A stern, impeccably dressed official with a monocle, a clipboard, and a very serious demeanor."
+            "Silas": "An eccentric young inventor with unruly brown hair, smudged cheeks, a yellow utility vest, and oversized round spectacles.",
+            "Vendor_Bessie": "A sturdy market vendor wearing a floral apron and a straw sunhat, holding a wooden spoon."
           },
           "locations": {
-            "market_stall": "A crowded, sunlit medieval marketplace overflowing with wooden crates of colorful vegetables and hanging banners."
+            "Farmers_Market": "A bustling cobblestone town square lined with striped canvas canopy stalls, overflowing with fresh fruits and vegetables."
           },
           "objects": {
-            "copper_robot": "A steampunk-inspired onion slicing automaton made of polished copper tubes, spinning steel blades, and a smoky exhaust funnel."
+            "Copper_Robot": "A steam-powered, clanking humanoid machine made of polished copper plates with glowing green optical sensors and multiple articulated mechanical arms."
           }
         },
-        "plot_fingerprint": "a367dcbc640c9c792d2e9e6c1baa8aaea3b4e4d51097a3865609644826842f3c"
+        "plot_fingerprint": "c266b87164b92b65560641228f66ea29293d048400d5c3fefe960734c33dec9c"
       },
       "approved": false
     },
     {
-      "candidate_id": "5108842f83f86fa5498b102f",
-      "source_sha256": "9bb042327783aa3e74f7f18d541f4a6cb7e0e1d1f4f37b2aac52e991488755f9",
+      "candidate_id": "5b8c0298ccbaf4bcd3eb26bd",
+      "source_sha256": "1afffff91bb3b57c2d4fb7fb276fda6868bb9d4446ff0d4193e6c711692f997c",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-82d7cdb3e5fcf62bed11",
-        "title": "The Canopy Chorus",
-        "hook": "The Divided Path",
-        "question": "Can two different forest dwellers combine unique talents to cross a flooded ravine?",
-        "answer": "By weaving resonance reeds with heavy wooden logs, they construct a singing suspension bridge.",
+        "content_id": "rayvan-gemini-8d8d716518914576455a",
+        "title": "The Singing Dunes of Kaelen",
+        "hook": "The Strange Tremor",
+        "question": "What secret do the roaring sands of the deep desert hide?",
+        "answer": "An underground cavern filled with giant, acoustic crystalline formations that play melodies when desert winds blow.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -109,80 +109,80 @@
         ],
         "story_beats": [
           {
-            "headline": "The Divided Path",
-            "speech": "We cannot leap across this roaring current alone. Our usual pathways are completely cut off by the heavy seasonal flood.",
-            "visual": "forest",
-            "label": "The Chasm",
-            "story_beat": "reveal",
-            "visual_prompt": "Wide shot of a deep, misty forest canyon with a rushing river below. Lyra, a fox-like sprite in green moss-woven garments, stands on the left cliff edge looking down with worried green eyes. She holds a bunch of empty hollow reeds in her right paw.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A Heavy Discovery",
-            "speech": "My dense ironwood logs are strong enough to span the gap, but they are far too heavy for me to lift and position properly.",
-            "visual": "door",
-            "label": "The Timber",
-            "story_beat": "build",
-            "visual_prompt": "Medium shot in a dense grove. Barnaby, a large bear-like creature with thick brown fur and blue overalls, struggles to push a massive ironwood log with both paws. Lyra stands nearby pointing at the hollow reeds resting on a mossy boulder.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Resonant Alignment",
-            "speech": "If I bind your sturdy timbers together with my acoustic reeds, the wind will sing through the structure and guide us safely.",
+            "headline": "The Strange Tremor",
+            "speech": "My instruments show no tectonic faults, yet the ground hums a steady musical note beneath my tired boots.",
             "visual": "signal",
-            "label": "The Blueprint",
-            "story_beat": "mechanism",
-            "visual_prompt": "Close-up of Lyra and Barnaby working together on the forest floor. Lyra's paws expertly weave hollow resonance reeds around the joints of heavy ironwood logs. Barnaby uses a thick vine tie held tightly in his left claw to secure the frame.",
+            "label": "Seismic reading",
+            "story_beat": "reveal",
+            "visual_prompt": "Cartographer Elena, wearing a beige canvas jumpsuit and goggles, kneels on a massive sand dune holding a pulsing brass sensor in her gloved right hand, looking bewildered at the horizon.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Crossing the Melody",
-            "speech": "Listen to the bridge sing in the wind as we walk across together. We made it to the other side safely at last.",
+            "headline": "Following the Echo",
+            "speech": "Every step deeper into this canyon amplifies the resonance, turning a faint vibration into a haunting melody.",
             "visual": "forest",
-            "label": "The Crossing",
+            "label": "Canyon descent",
+            "story_beat": "build",
+            "visual_prompt": "Elena carefully descends a steep, narrow rocky canyon wall under harsh desert sunlight, gripping a weathered leather rope with both hands, her canteen swinging visibly at her hip.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Hidden Vault",
+            "speech": "The sound leads me to a dark fissure where warm, humid air rushes upward from the deep earth.",
+            "visual": "door",
+            "label": "Cave entrance",
+            "story_beat": "mechanism",
+            "visual_prompt": "Elena stands at the dark mouth of a subterranean limestone cave, shining a heavy copper electric torch held in her left hand into the shadowed depths.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Singing Chimes",
+            "speech": "Towering mineral spires catch the underground draft, creating a breathtaking symphony of resonant crystal notes.",
+            "visual": "planet",
+            "label": "Acoustic cavern",
             "story_beat": "payoff",
-            "visual_prompt": "Full shot of Lyra and Barnaby walking together across a completed suspension bridge made of logs and reeds spanning the misty canyon. Both characters smile warmly, glowing softly under the canopy light, with the river rushing safely far below.",
+            "visual_prompt": "Elena stands in awe inside a vast underground cavern illuminated by glowing azure crystals, recording the echoing melodies on a small brass notebook held in both hands.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A swollen river separates the seed-gatherer from her nesting ground.",
-        "decisive_choice": "To merge their collection of hollow resonance reeds with sturdy structural timbers.",
-        "resolution": "A resonant bridge is built, allowing safe passage across the roaring rapids.",
+        "central_conflict": "A seasoned cartographer risks running out of water to investigate a mysterious acoustic anomaly deep in the dunes.",
+        "decisive_choice": "She abandons her direct mapping route to follow a subtle vibration down a steep, unstable sand fissure.",
+        "resolution": "She discovers the subterranean musical cavern, securing a groundbreaking botanical and geological discovery.",
         "visual_bible": {
-          "style": "Whimsical stop-motion felt and wood texture aesthetic with vibrant forest greens and warm amber lighting.",
+          "style": "Cinematic realism with natural lighting, earthy textures, and saturated desert color palettes.",
           "characters": {
-            "Lyra": "A small, nimble fox-like sprite with bright amber fur, wearing a tailored tunic made of woven green moss and tiny acorn buttons.",
-            "Barnaby": "A gentle giant bear-like creature with thick chocolate-brown fur, wearing durable indigo denim overalls with deep front pockets."
+            "Elena": "A forty-year-old cartographer with weathered skin, observant hazel eyes, wearing a durable beige canvas jumpsuit, leather boots, and a wide-brimmed sun hat."
           },
           "locations": {
-            "The Chasm": "A steep, moss-draped forest ravine bisected by a turbulent, rushing white-water river beneath towering ancient pines."
+            "dune_ridge": "A vast expanse of golden undulating sand dunes under a bright amber sky.",
+            "cavern": "A cavernous subterranean chamber featuring towering translucent mineral pillars and cool blue ambient light."
           },
           "objects": {
-            "resonance_reeds": "Long, hollow, golden-hued hollow bamboo-like reeds that emit a musical chime when wind passes through them.",
-            "ironwood_logs": "Dark, heavy, weathered timber logs with rough bark and exceptional structural strength."
+            "sensor": "A compact brass seismic sensor with a glowing green digital readout screen.",
+            "torch": "A heavy-duty copper electric torch with a dented reflector rim."
           }
         },
-        "plot_fingerprint": "417df20603a53f207adcd3237341183047553835b7d76a88f81dfecaa8605a5c"
+        "plot_fingerprint": "d5fc0db70a8aa56fa384c7a94d4036d56ffc4656df188590b74a03b37ff64010"
       },
       "approved": false
     },
     {
-      "candidate_id": "390e7bb79c69fc9e665866a6",
-      "source_sha256": "ee0aa8cac08ca90427cf1fe7fce4886fe64634a86f6082662a54c208964206a4",
+      "candidate_id": "dc5134a3500345619ddac0fa",
+      "source_sha256": "383e096d82aac13c8751c273109d9bda00237e343a4c2c265962a8891d5d9e62",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-b05ab4a6c8824bdb3d80",
-        "title": "The Mud-Slinging Marathon of Oakhaven",
-        "hook": "The Turf Monopoly",
-        "question": "How did the underdog gardeners defeat the reigning turf-ball champions?",
-        "answer": "By engineering a bouncing turnip that outmaneuvered the heavy rubber balls.",
+        "content_id": "rayvan-gemini-2d4803f04c0f49e14c1c",
+        "title": "The Last Millstone",
+        "hook": "The Dry Stream",
+        "question": "Can two lifelong millers preserve their village bond when forced to choose between feeding the starving town and saving the sacred waterwheel?",
+        "answer": "They dismantle the historic wheel together to grind the final grain, trading their heritage for the survival of their neighbors.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -190,65 +190,64 @@
         ],
         "story_beats": [
           {
-            "headline": "The Turf Monopoly",
-            "speech": "For ten consecutive seasons, the elite lawn bowling squad claimed every square inch of the municipal park for themselves.",
+            "headline": "The Dry Stream",
+            "speech": "Look at the cracked riverbed, Thomas. If the wheel does not turn by dawn, our people starve.",
             "visual": "forest",
-            "label": "The Arena",
+            "label": "The Drought",
             "story_beat": "reveal",
-            "visual_prompt": "Wide shot of the lush green community park surrounded by ancient oaks, with captain Silas standing proudly beside a rack of polished lawn bowling spheres.",
+            "visual_prompt": "Thomas and Martha standing in a parched riverbed beside a silent wooden waterwheel, looking exhausted, wearing heavy wool tunics, overcast daylight.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Root Invention",
-            "speech": "Determined to break the monopoly, our gardener collective spent sleepless nights carving springy turnips into aerodynamic spheres.",
+            "headline": "The Hard Choice",
+            "speech": "We must break the sacred oak axle to let the stones grind manually, destroying our legacy forever.",
+            "visual": "door",
+            "label": "The Dilemma",
+            "story_beat": "build",
+            "visual_prompt": "Thomas and Martha inside the dusty mill, holding iron crowbars against the massive wooden axle, tense expressions, dim interior lighting.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Iron Wedge",
+            "speech": "Drive the wedge deeper into the joint. We cannot hesitate now if we want to save our families.",
+            "visual": "signal",
+            "label": "The Action",
+            "story_beat": "mechanism",
+            "visual_prompt": "Martha hammering a heavy iron wedge into the mill mechanism while Thomas pushes with all his weight, dust swirling in a sunbeam.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The New Stone",
+            "speech": "Our heritage is gone, but the flour flows. We will build a better future with our own hands.",
             "visual": "robot",
-            "label": "The Workshop",
-            "story_beat": "build",
-            "visual_prompt": "Medium shot of inventor Maya in her cluttered garden shed, carefully carving a large white turnip with a specialized lathe tool under a bright overhead lamp.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Unpredictable Bounce",
-            "speech": "During the championship match, the peculiar vegetable projectiles bounced off the uneven turf in wildly unpredictable arcs.",
-            "visual": "signal",
-            "label": "The Match",
-            "story_beat": "mechanism",
-            "visual_prompt": "Action shot on the sunlit lawn where Silas watches in utter astonishment as Maya's carved turnip bounces over his head toward the target marker.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A Shared Victory",
-            "speech": "Rather than demanding sole ownership, both factions agreed to split the park and establish a unified seasonal tournament.",
-            "visual": "door",
-            "label": "The Treaty",
+            "label": "The Aftermath",
             "story_beat": "payoff",
-            "visual_prompt": "Medium close-up of Maya and Silas shaking hands in front of the newly painted park entrance gates, holding half a turnip trophy between them.",
+            "visual_prompt": "Thomas and Martha sharing a quiet smile outside the working mill, surrounded by villagers carrying sacks of flour, golden sunset.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "dispute over annual community park turf allocation",
-        "decisive_choice": "substituting standard turf balls with modified root vegetables",
-        "resolution": "shared park management and an integrated sports league",
+        "central_conflict": "Drought forces a choice between preserving the village's only historic waterwheel or destroying it for emergency grain grinding.",
+        "decisive_choice": "Shattering the ancient oak axle to feed the stones directly with manual labor.",
+        "resolution": "The village survives the famine, and the friends begin carving a new, communal millstone from the valley stone.",
         "visual_bible": {
-          "style": "Bright, vibrant animated stop-motion aesthetic with highly textured natural materials and warm, golden-hour lighting.",
+          "style": "Realistic historical cinematic drama with rich textures and natural lighting",
           "characters": {
-            "Maya": "An inventive gardener in her late twenties with curly brown hair tied in a bandana, wearing a green apron over a flannel shirt, expressing determination.",
-            "Silas": "The pompous lawn bowling captain with a neatly trimmed mustache, wearing pristine white trousers and a matching club blazer, expressing arrogant confidence."
+            "Thomas": "A weathered miller with deep wrinkles, short gray hair, wearing a patched brown leather vest and coarse linen shirt.",
+            "Martha": "A strong-willed artisan with tied-back dark hair flecked with gray, wearing a dark green wool tunic and sturdy leather boots."
           },
           "locations": {
-            "park": "A sprawling community green space featuring manicured lawns, aged oak trees, and a wooden scoreboard at the edge.",
-            "shed": "A rustic wooden workshop packed with clay pots, gardening tools, wood-shaving piles, and glowing work lamps."
+            "The Mill": "A rustic stone building with a moss-covered thatched roof and a massive wooden waterwheel."
           },
           "objects": {
-            "turnip_sphere": "A carved white and purple root vegetable polished to a smooth, semi-gloss finish with aerodynamic ridges.",
-            "bowling_sphere": "A heavy, dark-red polished resin ball bearing the official Oakhaven Club crest in gold leaf."
+            "Waterwheel": "A ten-meter rotting oak wheel with broken paddles.",
+            "IronWedge": "A heavy, rusted wedge used for splitting timber."
           }
         },
-        "plot_fingerprint": "f05d5c5d02299473089cb35c65c0ebd964e5e32003f76c884c1921b5b80f0048"
+        "plot_fingerprint": "633f4d96f08106626e44c6394526aff6ccd0b1d997f2aeb8a5cff83c6f5dedca"
       },
       "approved": false
     }
