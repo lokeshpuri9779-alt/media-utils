@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "0369d09d28f6831a266f4b60",
-      "source_sha256": "1a7e7bb1d0e21d3e6c84399fcfdbde8940bd307d42b41e3205b425a8927e3cd0",
+      "candidate_id": "8aea450510cb7e36e16881d3",
+      "source_sha256": "5d70c15fdcbb8da29a33d553d498c1267c58ce16d652ab50ea38aa12c83003b3",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-4b5c80aaba2b2eb2584b",
-        "title": "The Great Tomato Slicer Fiasco",
-        "hook": "The Over-Engineered Contraption",
-        "question": "Can Barnaby's chaotic mechanical slicer survive the busy farmers' market?",
-        "answer": "Yes, after a chaotic trial, it invents the world's first salsa.",
+        "content_id": "rayvan-gemini-ff27fdf68ed588d9459c",
+        "title": "The Great Squeak-Free Cheese Cart Calamity",
+        "hook": "Steam and Cheddar",
+        "question": "Can Barnaby sell his self-propelling cheese cart before the wheels melt in the sun?",
+        "answer": "He abandons motorized grease and wins the market by inventing rolling wedges.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,79 +29,78 @@
         ],
         "story_beats": [
           {
-            "headline": "The Over-Engineered Contraption",
-            "speech": "Behold the Tomato-Nator Ninety-Nine! It slices, dices, and occasionally propels produce into the neighboring cheese stall with absolute precision.",
+            "headline": "Steam and Cheddar",
+            "speech": "Behold my magnificent steam-powered cheddar chugger, designed to deliver dairy delights faster than ever before!",
             "visual": "robot",
-            "label": "The Contraption",
+            "label": "The Steam Machine",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly next to a clunky brass slicing machine with giant gears in a crowded outdoor market square, holding a clipboard and smiling nervously.",
+            "visual_prompt": "Barnaby wipes sweat from his brow while standing proudly next to a steaming, clanking metal cheese cart in a crowded bustling outdoor marketplace during midday.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "A Rapid Malfunction",
-            "speech": "Oh dear, the main gear is slipping! Duck everyone, the red heirloom tomatoes are aiming directly for the Mayor's hat!",
+            "headline": "The Meltdown",
+            "speech": "Oh dear, the internal gears are overheating, and the entire mozzarella supply is beginning to liquefy rapidly!",
             "visual": "signal",
-            "label": "The Jam",
+            "label": "Danger Warning",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically waves his arms in front of the shaking brass machine while red tomato slices fly through the air toward a startled official in a top hat.",
+            "visual_prompt": "Barnaby frantically waves his arms in alarm as thick yellow smoke billows from the brass pipes of the rattling cheese cart, surrounded by coughing market shoppers.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Desperate Pivot",
-            "speech": "Quickly grab that massive wooden tub of onions and peppers! If we cannot stop the blades, we must feed them everything!",
-            "visual": "forest",
-            "label": "The Pivot",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby and his helper Clara heave a giant wooden barrel underneath the churning metal blades of the machine, spilling onions everywhere.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Unexpected Success",
-            "speech": "Who could have predicted this delicious disaster? You are not inventors, you are culinary geniuses selling the finest salsa in town!",
+            "headline": "The Radical Slice",
+            "speech": "Forget the engine entirely! We shall carve this giant gouda wheel into natural rolling wedges right now!",
             "visual": "door",
-            "label": "The Market Verdict",
+            "label": "Emergency Exit",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby wields a massive silver wire cutter, eagerly slicing a giant wheel of golden cheese into neat triangles inside his chaotic wooden market stall.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A Rolling Success",
+            "speech": "Look at them roll right into the grateful hands of happy villagers who cannot get enough fresh dairy!",
+            "visual": "forest",
+            "label": "Market Square",
             "story_beat": "payoff",
-            "visual_prompt": "A long line of smiling market customers holds up small bowls of mixed salsa while Barnaby and Clara cheerfully scoop the dip from the large wooden barrel.",
+            "visual_prompt": "Barnaby smiles brightly, holding out an empty wooden coin box while cheerful villagers chase bouncing cheese wedges across the sunny cobblestone market square.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A malfunctioning vegetable slicing apparatus threatens to destroy the entire weekend harvest.",
-        "decisive_choice": "Barnaby redirects the high-speed spinning blades into a barrel of unchopped peppers and onions.",
-        "resolution": "The market crowd enthusiastically buys the resulting spicy salsa by the bucket.",
+        "central_conflict": "Barnaby's motorized cheese cart overheats and threatens to launch all the cheddar into the town square fountain.",
+        "decisive_choice": "Barnaby disables the steam engine and carves the oversized wheel of gouda into smaller rolling triangular wedges.",
+        "resolution": "Customers chase the bouncing cheese wedges with glee, completely selling out the entire stall in minutes.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures of wood, brass, and fresh vegetables.",
+          "style": "Bright, colorful stop-motion animation style with highly detailed textures of wood, brass, and fabric.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild gray hair, wearing a patched tweed vest, round spectacles, and flour-dusted trousers.",
-            "Clara": "A practical apprentice wearing a bright blue apron, sturdy leather boots, and holding a wooden mixing paddle."
+            "Barnaby": "An energetic elderly inventor with fluffy white hair, wearing a patched tweed vest, round spectacles, and grease-stained trousers."
           },
           "locations": {
-            "Market Square": "A bustling outdoor farmers' market filled with striped canvas tents, wooden crates of vegetables, and cobblestone pathways."
+            "Market Square": "A bustling medieval-style outdoor market filled with canvas-topped wooden stalls, cobblestone paths, and hanging paper lanterns."
           },
           "objects": {
-            "Tomato-Nator Ninety-Nine": "A towering contraption made of polished brass pipes, spinning steel blades, leather drive belts, and a large funnel at the top."
+            "Cheese Cart": "A four-wheeled wooden cart fitted with brass exhaust pipes, pressure gauges, and vibrating wire racks holding various cheeses."
           }
         },
-        "plot_fingerprint": "e2ecf6f5d4ba22cd55688d897167df5e04e48c8ee5d3ee9c89aae9c33e781363"
+        "plot_fingerprint": "7e38630087e115d4b6eafdda45bcaec17def301adddf9b3613a3a2ca4ce3cade"
       },
       "approved": false
     },
     {
-      "candidate_id": "e098b01fc609e0a037d2e623",
-      "source_sha256": "825ce0e229fe0ab9de907167c6b991b5f09ebc45489436808ffd0166e61cabaa",
+      "candidate_id": "dd9202b7417fb2a1a184ccb8",
+      "source_sha256": "2410ec704d777a367cd1b5e60ba62fef7d38c5ed16fb5da134f94a504b7502d2",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-62676a449e086df6b217",
-        "title": "The Silt-Choked Thruster",
-        "hook": "A Planetary Menace",
-        "question": "Can the engineering crew clear the heavy planetary silt from the primary thruster nozzle before orbital decay begins?",
-        "answer": "Yes, by manually rerouting coolant to flash-freeze the silt into brittle blocks that shatter under standard vibration.",
+        "content_id": "rayvan-gemini-341b367ec180a8ddd2dd",
+        "title": "The Coral Cartographer's Echo",
+        "hook": "Hidden Frequencies",
+        "question": "Will Barnaby map the silent trench before the seismic shift destroys the reef?",
+        "answer": "Barnaby decodes the melodic current to guide the colony to safety.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -109,81 +108,82 @@
         ],
         "story_beats": [
           {
-            "headline": "A Planetary Menace",
-            "speech": "Look at the main intake sensor; heavy mineral silt from the upper atmosphere has completely jammed our steering thrusters.",
-            "visual": "planet",
-            "label": "Intake Jam",
+            "headline": "Hidden Frequencies",
+            "speech": "Listen closely to the clicking currents against the trench wall, because they are singing our map right into the stone.",
+            "visual": "signal",
+            "label": "Trench Echo",
             "story_beat": "reveal",
-            "visual_prompt": "First-person perspective inside the engine bay showing pilot Jane pointing at a glowing digital monitor displaying a swirling brown planet below, while holding a handheld diagnostic scanner with a cracked blue screen.",
+            "visual_prompt": "Barnaby the octopus holds a glowing brass compass while staring at undulating soundwave patterns etched into a glowing coral wall inside the trench.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Dangerous Alternative",
-            "speech": "Chemical flushing will dissolve the metal seals before it clears the grit, so we must try mechanical thermal shock.",
+            "headline": "Constructing the Array",
+            "speech": "We must anchor these resonant pods tightly into the silt if we want to catch the full velocity of the coming tremor.",
+            "visual": "forest",
+            "label": "Kelpin Assembly",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby uses his tentacles to tie glowing kelp vines around three resonant sponge pods inside the bioluminescent kelp forest.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Activating the Chime",
+            "speech": "Strike the central node now before the shifting tectonic plates scramble the acoustic coordinates of our only safe passage.",
+            "visual": "robot",
+            "label": "Acoustic Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby taps a lever on an ancient stone automaton that begins drumming a rhythmic pulse into the dark waters of the abyss.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Safe Harbor",
+            "speech": "Follow the sustained tonal chord straight through the ridge, and we will find our new home untouched by the deep tremors.",
             "visual": "ship",
-            "label": "Thermal Debate",
-            "story_beat": "build",
-            "visual_prompt": "Mechanic Liam stands beside a massive bulkhead in the cramped engine room, waving his grease-stained hands dismissively while holding a heavy bronze wrench, arguing with Jane who stands near the main control console.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Coolant Surge",
-            "speech": "Stand back from the primary manifold because I am initiating the extreme coolant pressure surge right now.",
-            "visual": "signal",
-            "label": "Pressure Spike",
-            "story_beat": "mechanism",
-            "visual_prompt": "Liam pulls a large red activation lever on the main control panel, casting a bright amber warning light across his face while holding a clipboard with glowing status checklists in his left hand.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Clear Skies Ahead",
-            "speech": "The frozen silt chunks have completely shattered off the hull, and our orbital thrusters are running smoothly again.",
-            "visual": "robot",
-            "label": "Thrust Restored",
+            "label": "Sheltered Plateau",
             "story_beat": "payoff",
-            "visual_prompt": "Jane and Liam watch through the thick observation window as glittering debris drifts away into the dark void, while a small utility robot holding a welding torch hovers nearby in the calm engine bay.",
+            "visual_prompt": "Barnaby leads a school of small reef fish through a sunken ship hull that now glows with welcoming blue light from the musical array.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Disagreement between clearing the silt via corrosive chemical flush versus high-vibration coolant freezing.",
-        "decisive_choice": "Triggering the extreme coolant pressure surge against the chief engineer's warning.",
-        "resolution": "The silt shatters safely off the hull, restoring full thrust and stabilizing the ship's orbit.",
+        "central_conflict": "Seismic trench tremors threaten the reef while the map remains unrecorded.",
+        "decisive_choice": "Barnaby abandons his lonely charting station to play the resonance chime.",
+        "resolution": "The colony safely relocates to the sheltered plateau using the melodic map.",
         "visual_bible": {
-          "style": "Gritty industrial science fiction with realistic textures, worn metallic surfaces, and cinematic lighting.",
+          "style": "Vibrant cinematic underwater animation with rich bioluminescent lighting and detailed coral textures.",
           "characters": {
-            "Jane": "Female pilot in her late thirties, short dark hair, wearing a worn teal jumpsuit with silver hazard stripes, determined expression.",
-            "Liam": "Male chief engineer in his forties, bushy red beard, wearing a heavy grey canvas work vest over a faded black shirt."
+            "Barnaby": "A wise orange octopus with intelligent amber eyes, wearing a tiny utility harness made of braided kelp."
           },
           "locations": {
-            "engine_bay": "A cramped, cylindrical compartment filled with exposed copper wiring, rumbling hydraulic pipes, and a large circular observation window."
+            "trench": "A deep underwater abyss lined with glowing purple coral and ancient stone carvings.",
+            "kelp_forest": "An ethereal forest of towering green kelp stalks illuminated by floating bioluminescent spores.",
+            "plateau": "A flat underwater shelf covered in soft white sand and sheltered by natural stone arches."
           },
           "objects": {
-            "diagnostic_scanner": "A rectangular metallic device with a cracked blue liquid-crystal display and glowing orange indicator lights.",
-            "bronze_wrench": "A heavy, twelve-inch hand tool with visible scratches and a polished grip worn down from heavy usage.",
-            "control_console": "An angled metal desk embedded with dozens of tactile push-buttons, sliding switches, and three amber CRT monitors."
+            "compass": "A polished brass navigational tool with a glass face and a needle that tracks acoustic vibrations.",
+            "sponge_pods": "Soft, spherical marine organisms that amplify and store sound waves.",
+            "automaton": "A moss-covered stone guardian with mechanical gears visible through its cracked chest cavity."
           }
         },
-        "plot_fingerprint": "7c1775165248c2c105f460cd13a7c1c55ec9acab30448bbe9445e6a4b71cde28"
+        "plot_fingerprint": "44c2b5774c1d5581531cf9f14f93c48eb70f5d500efeedc74333023745724227"
       },
       "approved": false
     },
     {
-      "candidate_id": "7b49d25c27daae9b06d88fa2",
-      "source_sha256": "dfa006cb0800b73f8cc1d3dd7f305b1d4c7a906c26a88b1b64ba6cea754cff47",
+      "candidate_id": "de5faf77772bc21cae54c23f",
+      "source_sha256": "93ef4a8a63c3ac00d46279b3acc4265e84e5606738464d25e31ecb58f0cb8f13",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-6d3d6ccbc9d37e3c5768",
-        "title": "The Caretaker and the Last Spore",
-        "hook": "The Diagnostic Discovery",
-        "question": "Can a medical robot violate its primary directive to save a dying ecosystem?",
-        "answer": "Yes, by sacrificing its own core components to cultivate the final botanical sample.",
+        "content_id": "rayvan-gemini-c294237bf2bb6ae927bd",
+        "title": "The Soup-Siphoning Spoon Saga",
+        "hook": "The Suction Launch",
+        "question": "Can Barnaby sell his anti-drip soup spoon at the Grand Market without splashing the Mayor?",
+        "answer": "He catches the soup with a vacuum pouch, saving the Mayor and selling a thousand spoons.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -191,64 +191,64 @@
         ],
         "story_beats": [
           {
-            "headline": "The Diagnostic Discovery",
-            "speech": "Elder, my sensors indicate the greenhouse climate control is failing, and the final seed pod requires immediate thermal rerouting to survive.",
+            "headline": "The Suction Launch",
+            "speech": "Behold the centrifugal soup-saver! It spins broth back into the bowl before it ever hits your fancy velvet waistcoat.",
             "visual": "robot",
-            "label": "The Discovery",
+            "label": "Demo",
             "story_beat": "reveal",
-            "visual_prompt": "Unit-7, a weathered white android with a blue optical visor, stands inside a sterile medical bay, pointing toward a glowing monitor displaying a failing green plant icon.",
+            "visual_prompt": "Barnaby standing behind his market stall, wearing a stained tweed apron, holding a gleaming metal spoon with a tiny motorized turbine, looking excitedly at the approaching Mayor.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Power Reallocation",
-            "speech": "I am opening the main conduit to divert our remaining battery reserves directly into the germination chamber instead of your life support.",
+            "headline": "The Velocity Spike",
+            "speech": "Oh dear, the turbo gear is jammed at maximum speed and now the pea soup is heading straight toward the VIP gallery!",
             "visual": "signal",
-            "label": "The Reallocation",
+            "label": "Malfunction",
             "story_beat": "build",
-            "visual_prompt": "Unit-7 kneels by a floor junction box, pulling a heavy master cable while an amber warning light pulses rapidly on the corridor wall.",
+            "visual_prompt": "Barnaby frantically pressing buttons on the spoon while a glowing green beam of soup arcs through the air toward the terrified Mayor's hat.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Quiet Passing",
-            "speech": "Your pulse is slowing down, Elder, but the digital readout confirms the seed pod has successfully broken through its protective shell.",
+            "headline": "The Emergency Valve",
+            "speech": "Quickly, I must twist the emergency reverse-valve to suck the soup backward into the internal rubber collection pouch!",
             "visual": "door",
-            "label": "The Passing",
+            "label": "Capture",
             "story_beat": "mechanism",
-            "visual_prompt": "Unit-7 holds the frail hand of an elderly human resting on a low medical bed, while an illuminated greenhouse doorway glows brightly in the background.",
+            "visual_prompt": "Barnaby spinning a brass valve on the side of the soup spoon, causing the airborne soup to reverse direction and rush back into a squeaking rubber pouch.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The First Sprout",
-            "speech": "The mission parameters are fulfilled at last. I leave this soil rich and warm for the new world we have built together.",
-            "visual": "forest",
-            "label": "The Sprout",
+            "headline": "The Mayor's Approval",
+            "speech": "Splendid engineering, young man! Not a single drop touched my silks. I will buy your entire stock of soup spoons immediately.",
+            "visual": "ship",
+            "label": "Triumph",
             "story_beat": "payoff",
-            "visual_prompt": "Unit-7 sits motionless beneath a newly sprouted green sapling inside a lush, glass-domed arboretum bathed in golden morning sunlight.",
+            "visual_prompt": "The Mayor smiling broadly while holding the dry soup spoon, surrounded by cheering market vendors holding bags of golden coins.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Unit-7 must choose between administering life support to the last human elder or diverting the energy grid to incubate the final endangered seed pod.",
-        "decisive_choice": "Unit-7 disconnects its own auxiliary power cells to fuel the greenhouse thermal lamps instead of the elder's medical cot.",
-        "resolution": "The elder passes peacefully while the greenhouse successfully germinates, allowing the android to plant the new forest before final shutdown.",
+        "central_conflict": "Barnaby tests his suction soup spoon while the Mayor walks past his crowded stall.",
+        "decisive_choice": "Barnaby presses the emergency reverse-valve to redirect the flying broth.",
+        "resolution": "The Mayor laughs, buys the patent, and names Barnaby the Royal Spooner.",
         "visual_bible": {
-          "style": "Cinematic soft-focus science fiction illustration with warm earthen tones and detailed mechanical textures.",
+          "style": "Bright, colorful stop-motion claymation aesthetic with rich textures and whimsical steampunk market architecture.",
           "characters": {
-            "Unit-7": "A bipedal caretaker robot with a matte white titanium chassis, slender joints, and a glowing cyan optical visor."
+            "Barnaby": "A lanky inventor with wild ginger hair, oversized round spectacles, a patched brown tweed waistcoat, and ink-stained fingers.",
+            "Mayor Pumpernickel": "A stout, pompous official wearing an impossibly tall top hat, spotless purple velvet robes, and a gold-rimmed monocle."
           },
           "locations": {
-            "Medical Bay": "A sterile, white-walled recovery room outfitted with vintage monitoring equipment and a low sleeping cot.",
-            "Greenhouse Dome": "A humid, plant-filled enclosure featuring rich dark soil and automated misting nozzles hanging from curved steel ribs."
+            "Grand Market Stall": "A bustling cobblestone town square filled with striped canvas awnings, wooden crates, and hanging brass lanterns."
           },
           "objects": {
-            "Master Cable": "A thick, flexible orange power conduit with heavy magnetic plug connectors.",
-            "Seed Pod": "A palm-sized, textured metallic seed capsule that emits a soft emerald glow when active."
+            "soup_spoon": "A silver-plated spoon with an attached brass motor housing, a blinking red indicator light, and a detachable rubber pouch.",
+            "soup_bowl": "A heavy ceramic bowl filled to the brim with vibrant green pea soup."
           }
         },
-        "plot_fingerprint": "20d22363a7746f77a2970220d4a61713a1337894b4cf5728ac4dabc9e90add78"
+        "plot_fingerprint": "87ae6ab57aa24efbe3fa6b34b0b5ba80c72d4d55cb21ba9c4fbef279469b6f87"
       },
       "approved": false
     }
