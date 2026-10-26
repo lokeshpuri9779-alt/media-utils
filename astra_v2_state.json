@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-27",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 8,
-  "confirmed_today": 7,
-  "last_attempt_at": "2026-10-26T22:39:35.609186+00:00",
+  "attempts": 9,
+  "confirmed_today": 8,
+  "last_attempt_at": "2026-10-26T23:06:52.066630+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -5456,16 +5456,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "5blIGZ_4QMU": {
-      "content_id": "rayvan-forge-6bb686a2e2df0f2a",
+    },
+    "rayvan-forge-6bb686a2e2df0f2a": {
+      "video_id": "5blIGZ_4QMU",
+      "confirmed_at": "2026-10-26T22:53:03.168379+00:00",
       "title": "The Heron and the Missing Moon",
-      "day": "2026-10-27",
-      "uploaded_at": "2026-10-26T22:39:37.576112+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-26T22:39:37.576112+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "d5f36e65f3601e7c152e739f3dad8bff7fd67a3959cca8dd1f44c31bb54469b4",
       "story_beats": [
@@ -5506,16 +5504,74 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "8_7K2cIgAtA": {
+      "content_id": "rayvan-gemini-7dfd1f99bfa1d383eeec",
+      "title": "Kaelen and the Bloom of the Sun-Scorched Basin",
+      "day": "2026-10-27",
+      "uploaded_at": "2026-10-26T23:06:54.057750+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "131b6937474f1990698d8bfffa5f9dca71a6cacc2e3b6b93002a8a840ea477fb",
+      "story_beats": [
+        {
+          "headline": "A Hidden Opening",
+          "speech": "My sensors show an anomaly beneath these shifting sands; a cooling breeze emanates from this dark, narrow crevice in the canyon wall.",
+          "visual": "door",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Kaelen, a young explorer with sun-bleached hair and tan utility gear, stands before a jagged stone door-like fissure in a towering orange desert cliff.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Verdant Secret",
+          "speech": "Incredible, a thriving subterranean garden fed by deep aquifers, pulsing with a rhythmic, soft violet light deep within this dry, dead desert.",
+          "visual": "forest",
+          "label": "The Ecosystem",
+          "story_beat": "build",
+          "visual_prompt": "Kaelen kneels inside a cavern, illuminated by glowing blue and violet moss-like plants, his face reflecting pure wonder as he inspects the lush floor.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Failing Seal",
+          "speech": "The structural integrity of this cavern is failing, and if I do not act now, the desert wind will destroy this precious life.",
+          "visual": "robot",
+          "label": "The Crisis",
+          "story_beat": "mechanism",
+          "visual_prompt": "Kaelen's small, rusted robotic scout drone floats nearby, its red optical sensor flickering as Kaelen frantically adjusts a heavy stone block to seal the cave.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Living Result",
+          "speech": "By sacrificing my supplies, I have ensured these ancient plants will thrive for another century, even if my own journey ends right here.",
+          "visual": "signal",
+          "label": "The Sacrifice",
+          "story_beat": "payoff",
+          "visual_prompt": "Kaelen sits leaning against the sealed cave wall as a faint, glowing green signal flare ignites in the sky above the vast, silent desert landscape.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Kaelen discovers a hidden, water-rich cave habitat that is threatened by the collapse of his own shelter's ventilation.",
+      "decisive_choice": "Kaelen elects to use his limited emergency water supply to stabilize the cave's humidity rather than refueling his own canteen.",
+      "resolution": "The flora survives, and Kaelen discovers a natural condensate drip that sustains him until his rescue signals are spotted.",
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-26T22:38:14.938749+00:00",
+  "last_preflight_at": "2026-10-26T22:53:02.789530+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-26T22:39:37.900230+00:00",
+    "at": "2026-10-26T23:06:54.431878+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -11851,10 +11907,64 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-7dfd1f99bfa1d383eeec": {
+      "at": "2026-10-26T23:06:52.066615+00:00",
+      "title": "Kaelen and the Bloom of the Sun-Scorched Basin",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "131b6937474f1990698d8bfffa5f9dca71a6cacc2e3b6b93002a8a840ea477fb",
+      "story_beats": [
+        {
+          "headline": "A Hidden Opening",
+          "speech": "My sensors show an anomaly beneath these shifting sands; a cooling breeze emanates from this dark, narrow crevice in the canyon wall.",
+          "visual": "door",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Kaelen, a young explorer with sun-bleached hair and tan utility gear, stands before a jagged stone door-like fissure in a towering orange desert cliff.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Verdant Secret",
+          "speech": "Incredible, a thriving subterranean garden fed by deep aquifers, pulsing with a rhythmic, soft violet light deep within this dry, dead desert.",
+          "visual": "forest",
+          "label": "The Ecosystem",
+          "story_beat": "build",
+          "visual_prompt": "Kaelen kneels inside a cavern, illuminated by glowing blue and violet moss-like plants, his face reflecting pure wonder as he inspects the lush floor.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Failing Seal",
+          "speech": "The structural integrity of this cavern is failing, and if I do not act now, the desert wind will destroy this precious life.",
+          "visual": "robot",
+          "label": "The Crisis",
+          "story_beat": "mechanism",
+          "visual_prompt": "Kaelen's small, rusted robotic scout drone floats nearby, its red optical sensor flickering as Kaelen frantically adjusts a heavy stone block to seal the cave.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Living Result",
+          "speech": "By sacrificing my supplies, I have ensured these ancient plants will thrive for another century, even if my own journey ends right here.",
+          "visual": "signal",
+          "label": "The Sacrifice",
+          "story_beat": "payoff",
+          "visual_prompt": "Kaelen sits leaning against the sealed cave wall as a faint, glowing green signal flare ignites in the sky above the vast, silent desert landscape.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Kaelen discovers a hidden, water-rich cave habitat that is threatened by the collapse of his own shelter's ventilation.",
+      "decisive_choice": "Kaelen elects to use his limited emergency water supply to stabilize the cave's humidity rather than refueling his own canteen.",
+      "resolution": "The flora survives, and Kaelen discovers a natural condensate drip that sustains him until his rescue signals are spotted.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-26T22:39:37.900167+00:00",
+    "at": "2026-10-26T23:06:54.431818+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -11865,21 +11975,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-26T22:39:37.900218+00:00",
+    "at": "2026-10-26T23:06:54.431868+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-26T22:39:17.361258+00:00",
+    "at": "2026-10-26T22:54:10.492440+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-6bb686a2e2df0f2a",
-    "video_url": "https://www.youtube.com/watch?v=5blIGZ_4QMU",
+    "content_id": "rayvan-gemini-7dfd1f99bfa1d383eeec",
+    "video_url": "https://www.youtube.com/watch?v=8_7K2cIgAtA",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-26T22:39:37.900091+00:00",
+    "at": "2026-10-26T23:06:54.431618+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -11891,10 +12001,52 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-26T22:39:37.900163+00:00",
-    "collection_status": "missing_diagnostics",
+    "at": "2026-10-26T23:06:54.431814+00:00",
+    "collection_status": "collected",
     "publish_step": "success",
-    "counters": {},
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 26,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
+          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
+        },
+        "seen": 11,
+        "total": 159
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 160,
+        "fingerprint": 0,
+        "id": 11,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 149,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 149,
+        "remaining": 27
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 1,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
