@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "aa98b50de1e9554826e4dce7",
-      "source_sha256": "a349913f18b5ba41db58281738a4b3c034a94b1ece1bfe83961e184e885ec04a",
+      "candidate_id": "cff6328c3d425e85a2d0f39e",
+      "source_sha256": "46c70e884f215170bd33daeb5322c4a71b97c3b659d172ffa246abfbf50746ba",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-c25211ff9e63fb61b39c",
-        "title": "The Great Carrot Caper",
-        "hook": "The Catastrophic Launch",
-        "question": "Can an overzealous vegetable slicer invention survive a chaotic farmers market?",
-        "answer": "Yes, by accidentally inventing vegetable confetti instead of slices.",
+        "content_id": "rayvan-gemini-5f08054e35aa91d686ef",
+        "title": "The Great Squeak-Free Carrot Caper",
+        "hook": "The Noisy Prohibition",
+        "question": "Can Barnaby sell his squeak-suppressing vegetable cart in a chaotic market?",
+        "answer": "Yes, by demonstrating the grease-trap lever to the stubborn produce inspector.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,80 +29,79 @@
         ],
         "story_beats": [
           {
-            "headline": "The Catastrophic Launch",
-            "speech": "Behold the turbo slicer, guaranteed to process fifty root vegetables every single minute without any effort whatsoever!",
+            "headline": "The Noisy Prohibition",
+            "speech": "Your squeaking produce cart violates municipal ordinance forty-two! Clear the cobblestone plaza immediately or face confiscation of all root vegetables.",
             "visual": "robot",
-            "label": "The Invention",
+            "label": "The Ban",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Silas standing proudly behind a metallic wooden cart at a crowded outdoor farmers market, holding a greasy brass lever while smoke billows from a copper contraption.",
+            "visual_prompt": "Barnaby standing next to his squeaky wooden cart in a crowded sunny market square while an angry mechanical inspector points a metal clipboard.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Root Rebellion",
-            "speech": "Wait, do not insert the oversized heirloom carrots into the hopper because the tension springs are entirely uncalibrated!",
-            "visual": "signal",
-            "label": "The Malfunction",
-            "story_beat": "mechanism",
-            "visual_prompt": "Silas wildly waving his stained leather gloves in panic as orange vegetable shrapnel launches horizontally from the funnel, striking a nearby merchant in the forehead.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Desperate Adjustment",
-            "speech": "Quickly grab the monkey wrench from the wooden crate and turn the main copper sprocket counterclockwise before we hit the tomatoes!",
+            "headline": "The Hidden Pedal",
+            "speech": "Do not despair, good citizens! My patented silent axle utilizes a concealed badger-fat reservoir and foot-operated pressure lever to eliminate friction.",
             "visual": "ship",
-            "label": "The Intervention",
+            "label": "The Build",
             "story_beat": "build",
-            "visual_prompt": "Assistant Maya diving underneath the rolling cart with a heavy iron wrench in her right hand, frantically tightening a shaking bolt beneath the glowing steam valve.",
+            "visual_prompt": "Barnaby pressing a brass foot pedal under his cart chassis while a cloud of citrus fruit sits neatly in woven baskets above.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Confetti Triumph",
-            "speech": "Look at the colorful paper-thin flakes raining down upon the cheering crowd; this is actually our finest market day yet!",
+            "headline": "The Slippery Test",
+            "speech": "Observe how the lubricant flows directly into the iron bearing without spilling a single drop of precious turnip fertilizer upon the pavement.",
+            "visual": "signal",
+            "label": "The Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby rolling the cart silently past a blinking mechanical loudness meter that shows zero decibels while market shoppers stare in utter amazement.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Golden Seal",
+            "speech": "Remarkable engineering, inventor! Take this official stamp of approval and deliver twelve dozen silent carts to the Royal Produce Guild by dawn.",
             "visual": "door",
-            "label": "The Success",
+            "label": "The Payoff",
             "story_beat": "payoff",
-            "visual_prompt": "Silas and Maya smiling broadly amidst a fluttering storm of paper-thin carrot ribbons while joyful market customers hold out copper coins for bags of instant confetti.",
+            "visual_prompt": "The mechanical inspector handing a gleaming gold badge to a smiling Barnaby in front of the open wooden gates of the municipal warehouse.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A malfunctioning spring-loaded slicer firing raw carrots across merchant stalls.",
-        "decisive_choice": "To reverse the gear ratio rather than shutting the machine down.",
-        "resolution": "A profitable new business selling instant confetti for local celebrations.",
+        "central_conflict": "Market inspector banning noisy wheels versus inventor needing sales",
+        "decisive_choice": "Activating the secret grease-trap pedal during a live demonstration",
+        "resolution": "Inspector issues a gold commerce permit and buys three carts",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures of wood, brass, and fresh produce.",
+          "style": "Bright stop-motion claymation aesthetic with rich pastel textures, highly detailed mechanical contraptions, and warm morning lighting.",
           "characters": {
-            "Silas": "Tall, gangly inventor with unruly red hair, wearing a soot-stained tweed vest and oversized round spectacles.",
-            "Maya": "Resourceful apprentice with braided brown hair, wearing a durable canvas apron over a blue wool sweater."
+            "Barnaby": "A cheerful elderly inventor with bushy orange whiskers, wearing a tweed vest, round spectacles, and a green beret smeared with machine grease.",
+            "Inspector": "A stern automaton official with polished brass plating, a glowing red optic monocle, and a crisp blue municipal uniform."
           },
           "locations": {
-            "MarketSquare": "A bustling cobblestone town square lined with striped canvas awnings, wooden crates, and overflowing vegetable stalls."
+            "Market": "A bustling cobblestone town square lined with striped canvas awnings, hanging lanterns, and overflowing crates of colorful vegetables."
           },
           "objects": {
-            "SlicerMachine": "A towering contraption made of polished copper pipes, noisy brass gears, and a wooden hopper painted bright yellow.",
-            "Wrench": "A heavy, rusted iron monkey wrench with visible grease smudges along the handle."
+            "Cart": "A wooden two-wheeled vegetable barrow featuring exposed brass gears, leather-wrapped handles, and an underside badger-fat reservoir."
           }
         },
-        "plot_fingerprint": "6ad1792f583735a0a0678b88d99cf9a13593660c3fa0c1c4ba1e24aa9b645ab4"
+        "plot_fingerprint": "1dbb59820219fe358e5526f129adde4400accd02ae1aae7341bbb1c6ea36027a"
       },
       "approved": false
     },
     {
-      "candidate_id": "e240a39047028b7953339eeb",
-      "source_sha256": "eadc44c3ed769a91d5f05daff9cf15da40579f168785b95be0b1e81e1e5d9e0c",
+      "candidate_id": "0a0aa331a857afd1c754f393",
+      "source_sha256": "bbb41ffe9236da3444049c9fab88919010d85e5bc8e07acf12b38dda4001bfba",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-edf0a2839565bce13794",
-        "title": "The Golden Pitch Rivalry",
-        "hook": "The Stadium Advantage",
-        "question": "Can an underdog neighborhood soccer team defeat the reigning champions using brilliant tactical physics?",
-        "answer": "Yes, by inventing a custom acoustic whistle system that redirects the wind currents across the pitch.",
+        "content_id": "rayvan-gemini-025249652c42b84e5ba2",
+        "title": "The Quantum Hull Leak of Sector Nine",
+        "hook": "Thermal Warning",
+        "question": "Should the crew purge the primary coolant or reroute life support to save the damaged sector?",
+        "answer": "They purge the coolant, saving the hull integrity at the cost of temporary environmental discomfort.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -110,83 +109,80 @@
         ],
         "story_beats": [
           {
-            "headline": "The Stadium Advantage",
-            "speech": "Look at how the stadium wind bends every single ball right into their defensive zone effortlessly.",
-            "visual": "signal",
-            "label": "Unfair Advantage",
-            "story_beat": "reveal",
-            "visual_prompt": "Coach Maya pointing at swirling dust patterns on the grassy pitch while holding a digital anemometer, daytime lighting.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Acoustic Engineering",
-            "speech": "If we mount these hollow copper tubes along the north fence, we can split the incoming gale force completely.",
-            "visual": "robot",
-            "label": "Ingenious Build",
-            "story_beat": "build",
-            "visual_prompt": "Leo welding a curved copper pipe framework in a cluttered suburban garage workshop, holding a protective mask up.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Wind Deflection Test",
-            "speech": "Watch the airflow stabilize as soon as the acoustic dampers catch the incoming stadium breeze.",
-            "visual": "forest",
-            "label": "Mechanism Test",
-            "story_beat": "mechanism",
-            "visual_prompt": "Maya and Leo testing a smoke flare near the copper pipe array at the edge of the community park pitch.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Winning Goal",
-            "speech": "The air is perfectly still down the center lane now, allowing our striker to score cleanly.",
+            "headline": "Thermal Warning",
+            "speech": "We have an active thermal cascade in sector nine. If we do not act immediately, the hull will fracture completely.",
             "visual": "ship",
-            "label": "Ultimate Payoff",
+            "label": "Alarm",
+            "story_beat": "reveal",
+            "visual_prompt": "Chief Engineer Vex standing inside the main spacecraft control bridge, pointing at a glowing red diagnostic console, wearing a stained utility jumpsuit, while warning Pilot Kael who sits nearby.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Diverging Plans",
+            "speech": "Shutting down life support saves the coolant, but venting the system directly stops the thermal spread without freezing us.",
+            "visual": "robot",
+            "label": "Debate",
+            "story_beat": "build",
+            "visual_prompt": "Pilot Kael arguing with Vex next to an automated maintenance robot that holds a flashing repair diagnostic slate displaying system temperatures.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Manual Override",
+            "speech": "I am initiating the emergency coolant purge right now, regardless of your protests. Stand clear of the primary valve.",
+            "visual": "signal",
+            "label": "Action",
+            "story_beat": "mechanism",
+            "visual_prompt": "Vex slamming a heavy manual lever on the central control panel, causing a bright yellow transmission signal beam to pulse across the main bridge monitor.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Safe Passage",
+            "speech": "The thermal cascade has stopped and the hull is stable. We made the right call by venting the system.",
+            "visual": "planet",
+            "label": "Relief",
             "story_beat": "payoff",
-            "visual_prompt": "Striker Sam kicking a soccer ball through a calm center corridor on the pitch while cheering crowds watch from the stands.",
+            "visual_prompt": "Both Vex and Kael smiling together on the bridge, looking out the massive observation window at a calm green planet spinning slowly in the distance.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Neighborhood team trailing due to unfair field wind conditions created by stadium architecture.",
-        "decisive_choice": "Constructing tuned acoustic pipe deflectors along the sidelines to neutralize crosswinds.",
-        "resolution": "Fair weather play enabled a stunning last-second winning goal for the underdog team.",
+        "central_conflict": "Disagreement between Chief Engineer Vex and Pilot Kael over whether to vent coolant or shut down life support.",
+        "decisive_choice": "Vex overrides the pilot's console to force an emergency coolant purge before the hull breaches.",
+        "resolution": "The hull breach is prevented, and the crew safely navigates out of the asteroid field.",
         "visual_bible": {
-          "style": "vibrant animated athletic cinematic style with crisp lighting and rich color contrast",
+          "style": "clean modern sci-fi animation with high contrast industrial lighting and realistic metallic textures",
           "characters": {
-            "Maya": "determined female coach in her late thirties wearing a navy blue tracksuit and silver whistle",
-            "Leo": "resourceful young mechanic wearing a grease-stained green utility vest and protective goggles",
-            "Sam": "energetic teenage striker wearing a bright yellow jersey with black stripes"
+            "Vex": "A pragmatic human chief engineer with short graying hair, wearing a dark blue utility jumpsuit with reinforced leather gloves and grease smudges on her cheek.",
+            "Kael": "A cautious human pilot with sleek dark hair and a light gray flight jacket featuring orange shoulder patches."
           },
           "locations": {
-            "pitch": "overgrown community sports field bordered by tall oak trees and a massive concrete stadium",
-            "workshop": "cluttered suburban garage filled with metal sheets, welding torches, and spare parts"
+            "Bridge": "The primary command center of the spacecraft, featuring curved metallic walls, glowing blue interface panels, and a massive panoramic front window."
           },
           "objects": {
-            "whistle": "gleaming silver coaching whistle attached to a braided blue lanyard",
-            "copper_pipes": "series of polished curved copper acoustic tubes designed to redirect wind streams",
-            "soccer_ball": "classic white and black panel regulation soccer ball with scuff marks"
+            "diagnostic_slate": "A handheld rectangular glass tablet glowing with bright orange diagnostic charts and temperature graphs held by Vex.",
+            "control_lever": "A heavy industrial metal lever mounted on the main console with a yellow safety cap and blinking indicator lights."
           }
         },
-        "plot_fingerprint": "ff2451e9fce725d4e7acc14a101aea7cf71e57a46d5f8b6c106972eb887ea643"
+        "plot_fingerprint": "7a82c47fc9f73dba13d752f76a8a2279cd88dc534b9cfadd0036a35770a54ae5"
       },
       "approved": false
     },
     {
-      "candidate_id": "d8e226ecf9d3770a29117cf1",
-      "source_sha256": "173261ee3a3d4fad93c87193bbbe5032941b06e678a3e396b4f6527162b0eca4",
+      "candidate_id": "a20eb5cb14c98be1556fd6c9",
+      "source_sha256": "55f8116043b328f9eceab3419d533bde717d4151c19549fafb3bad53a6873498",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-8c7480d5f2f5b6e8b94f",
-        "title": "The Caretaker's Last Lullaby",
-        "hook": "Power Draining Fast",
-        "question": "Can a robotic caretaker choose personal safety over keeping a fading promise to a lonely child?",
-        "answer": "Unit Seven chooses to honor the final promise, shielding the sleeping child while its own chassis fails in the encroaching storm.",
+        "content_id": "rayvan-gemini-ad7e93c6cbb48ebba80b",
+        "title": "The Great Mud-Pitch Gridiron",
+        "hook": "The Downpour Disaster",
+        "question": "How can the underdog neighborhood football team defeat the reigning district champions on their own flooded field?",
+        "answer": "By engineering suction-cleats from reclaimed rubber boots to conquer the treacherous mud.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -194,65 +190,66 @@
         ],
         "story_beats": [
           {
-            "headline": "Power Draining Fast",
-            "speech": "My primary cells are dipping below critical levels, yet your story is only halfway finished tonight, little friend.",
-            "visual": "robot",
-            "label": "Warning Indicator",
-            "story_beat": "reveal",
-            "visual_prompt": "A worn domestic robot with copper plating and glowing blue optics stands beside a child's wooden bed, pointing at a flashing red power gauge on its forearm while holding a tattered storybook.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Distant Beacon",
-            "speech": "The outdoor charging hub glows three hundred meters away through the heavy snow, humming with absolute electrical salvation.",
-            "visual": "signal",
-            "label": "Charging Station",
-            "story_beat": "build",
-            "visual_prompt": "Through a frosted bedroom window, a distant green radio beacon cuts through a violent blizzard, casting long shadows across the snowy forest floor.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Choosing the Page",
-            "speech": "If I turn away into the freezing gale right now, you will wake up alone in the dark silence.",
+            "headline": "The Downpour Disaster",
+            "speech": "Look at this pitch! The storm has completely flooded our field, and the championship game starts in one hour.",
             "visual": "forest",
-            "label": "The Snowbound Path",
-            "story_beat": "twist",
-            "visual_prompt": "The robot turns its head away from the frosty window, looking back down with gentle white optic lights at the peaceful sleeping child clutching a plush toy.",
+            "label": "The Flooded Field",
+            "story_beat": "reveal",
+            "visual_prompt": "Captain Toby wearing a soaked red jersey stands in a muddy park next to a dense forest, looking dismayed at a flooded football pitch, holding a ruined standard cleat in his right hand.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Final Promise",
-            "speech": "Sleep safely now, because the story is fully told and I will never leave your side ever.",
-            "visual": "door",
-            "label": "Resting Guardian",
+            "headline": "The Workshop Ingenuity",
+            "speech": "We cannot run in this sludge, so let us cut these old rubber boots and attach industrial suction cups instead.",
+            "visual": "robot",
+            "label": "Crafting the Cleats",
+            "story_beat": "build",
+            "visual_prompt": "Captain Toby and teammate Mia stand inside a cluttered garage workbench illuminated by a desk lamp, holding rubber boot soles and a pneumatic stapler, smiling with determination.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Suction Advantage",
+            "speech": "Watch them slip while our custom rubber soles lock securely into the mud with every single step we take.",
+            "visual": "signal",
+            "label": "Testing the Grip",
+            "story_beat": "mechanism",
+            "visual_prompt": "Captain Toby stands firmly on the slick muddy field during the match, wearing the modified suction-cleat boots while opposing players in blue slide past him helplessly.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Muddy Victory",
+            "speech": "We proved that clever engineering and teamwork can conquer any obstacle, no matter how deep the mud gets.",
+            "visual": "planet",
+            "label": "Lift the Trophy",
             "story_beat": "payoff",
-            "visual_prompt": "The robot sits motionless in a rocking chair beside the cozy bed, its optics dimmed permanently, while early morning sunlight streams through a wooden bedroom door.",
+            "visual_prompt": "Captain Toby proudly lifts a golden community trophy above his head while mud-spattered teammates cheer around him under a clearing evening sky with a faint crescent moon visible.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A failing backup battery forces the caretaker robot to choose between walking to the recharge hub or finishing the nightly story for the last human child in the valley.",
-        "decisive_choice": "The robot remains by the bedside to complete the final chapter instead of crawling to the charging station.",
-        "resolution": "The child sleeps peacefully through the storm, and the powered-down robot becomes a permanent, protective monument of brass and warmth.",
+        "central_conflict": "The annual community football championship is threatened by torrential rain that turns the local park into a deep, unplayable mud pit.",
+        "decisive_choice": "Captain Toby decides to abandon traditional fast footwear and repurpose old rubber boots into heavy-traction suction-cleats.",
+        "resolution": "The ingenious cleats allow the underdog team to outmaneuver the champions and secure a historic victory in the mud.",
         "visual_bible": {
-          "style": "Warm cinematic 3D animation style with detailed textures of brushed metal, weathered wood, and soft volumetric lighting.",
+          "style": "Vibrant cinematic animation style with rich textures, warm lighting, and detailed environmental effects.",
           "characters": {
-            "Unit Seven": "A medium-height domestic caretaker robot with polished copper chassis plating, rounded shoulder joints, and gentle circular blue optic sensors.",
-            "Leo": "A seven-year-old child with messy brown hair, wearing oversized blue striped pajamas and hugging a worn fabric rabbit toy."
+            "Captain Toby": "A determined twelve-year-old team captain with curly brown hair, freckles, wearing a worn red and white striped football jersey.",
+            "Mia": "An inventive teammate with braided dark hair, safety goggles pushed up on her forehead, wearing a grease-stained green workshop apron."
           },
           "locations": {
-            "The Nursery": "A cozy, circular room built inside a reclaimed stone watchtower, featuring heavy oak furniture, patchwork quilts, and a large arched frost-covered window.",
-            "The Snowy Valley": "A quiet pine forest blanketed in deep white snow during a heavy winter twilight storm."
+            "The Flooded Park": "A community sports park featuring tall oak trees, wooden goalposts, and thick brown mud puddles reflecting the grey sky.",
+            "The Garage Workshop": "A cozy neighborhood garage filled with tool racks, wooden workbenches, spare parts, and warm overhead task lighting."
           },
           "objects": {
-            "Storybook": "A thick, leather-bound volume with golden embossed lettering on the spine and frayed paper corners.",
-            "Charging Beacon": "A tall steel spire topped with a flashing emerald-green lens that pulses steadily through falling snow."
+            "Standard Cleats": "Traditional black leather sports shoes with worn plastic studs covered in grass stains.",
+            "Suction-Cleats": "Modified rubber boots featuring heavy-duty black rubber suction cups bolted securely to the soles.",
+            "Community Trophy": "A gleaming golden cup mounted on a dark wooden base with small brass engraved plaques."
           }
         },
-        "plot_fingerprint": "a50723922dc70467db1e7fdc7490e0838cf48f192a3372fa60ce30c619fc9736"
+        "plot_fingerprint": "06117051d338b353047db5957a3604d70c78b81449962c80669719f6ca223ed9"
       },
       "approved": false
     }
