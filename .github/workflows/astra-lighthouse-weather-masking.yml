@@ -1,0 +1,40 @@
+name: ASTRA Lighthouse Masked Weather (CPU-only)
+on:
+  push:
+    branches:
+      - benchmark/lighthouse-weather-masking
+    paths:
+      - .astra/weather-mask-trigger.txt
+permissions:
+  contents: read
+  actions: read
+jobs:
+  weather-scenes:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Retrieve verified reference from earlier storyboard
+        uses: actions/download-artifact@v4
+        with:
+          name: astra-lighthouse-three-scenes-40371027354
+          run-id: 40371027354
+          github-token: ${{ github.token }}
+          path: artifacts/anchor-input/
+      - name: Install lightweight local dependencies
+        run: python -m pip install --disable-pip-version-check 'Pillow>=10,<12' 'numpy>=1.26,<3'
+      - name: Generate subject-preserving weather variations
+        run: python -u -m tools.experimental_lighthouse_weather_mask
+      - name: Preserve evidence and comparison
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-lighthouse-weather-masking-${{ github.run_id }}
+          path: artifacts/experimental-openvino/weather-masking/
+          if-no-files-found: warn
+          retention-days: 7
