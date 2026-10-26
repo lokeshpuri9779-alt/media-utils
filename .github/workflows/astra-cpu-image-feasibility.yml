@@ -6,6 +6,10 @@ on:
         description: 'Enter BENCHMARK; uses available GitHub Actions minutes, never a paid API'
         required: true
         type: string
+      comparison:
+        description: 'Four review-only images: two seeds at 8 and 20 steps'
+        type: boolean
+        default: false
       model_profile:
         description: 'Preconverted OpenVINO model recommended; export uses more memory/time'
         type: choice
@@ -39,8 +43,12 @@ jobs:
           free -h
           df -h .
       - name: Produce isolated portrait keyframe
+        if: ${{ !inputs.comparison }}
         run: |
           python -m tools.experimental_openvino_benchmark --profile "${{ inputs.model_profile }}" --steps 8
+      - name: Produce controlled four-image comparison
+        if: ${{ inputs.comparison }}
+        run: python -m tools.experimental_openvino_comparison
       - name: Explain benchmark scope
         if: always()
         run: |
