@@ -11,9 +11,9 @@ APPROVED_MODELS = {
     "preconverted": "piimaila/stable-diffusion-v1-5-openvino",
     "export": "stable-diffusion-v1-5/stable-diffusion-v1-5",
 }
-PROMPT = ("original cinematic animated-film illustration, a small copper robot holding "
-          "a glowing star in a magical forest, dramatic lighting, detailed background, "
-          "no text, portrait composition")
+PROMPT = ("family-friendly illustration of a bright red toy fire truck parked beside "
+          "a yellow school building on a sunny day, blue sky, green trees, "
+          "clear colorful detailed shapes, portrait composition, no people, no text")
 
 
 def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-openvino/keyframe.png")):
