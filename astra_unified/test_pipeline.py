@@ -10,7 +10,7 @@ from pathlib import Path
 SCRIPT=Path(__file__).with_name("pipeline.py")
 STAGES=("STORY","IMAGES","CONSISTENCY","ANIMATION","NARRATION","EDIT","QUALITY","PUBLISH")
 class PipelineTests(unittest.TestCase):
-    def invoke(self, env_overrides=None, publish=False, dry=False):
+    def invoke(self, env_overrides=None, publish=False, dry=False, production=False):
         with tempfile.TemporaryDirectory() as directory:
             env=os.environ.copy()
             for stage in STAGES: env.pop("ASTRA_"+stage+"_CMD",None)
@@ -18,6 +18,7 @@ class PipelineTests(unittest.TestCase):
             args=[sys.executable,str(SCRIPT),"--output",directory]
             if publish: args.append("--publish")
             if dry: args.append("--dry-run")
+            if production: args.append("--production")
             result=subprocess.run(args,env=env,capture_output=True,text=True)
             report=json.loads((Path(directory)/"run_report.json").read_text())
             return result,report
@@ -50,6 +51,23 @@ class PipelineTests(unittest.TestCase):
             r,p=self.invoke({"ASTRA_"+s+"_CMD":command for s in STAGES},dry=True)
             self.assertEqual(r.returncode,0)
             self.assertFalse(marker.exists())
+    def test_production_blocks_placeholder_smoke(self):
+        commands={"ASTRA_"+s+"_CMD":"true" for s in STAGES}
+        r,p=self.invoke(commands,production=True)
+        self.assertNotEqual(r.returncode,0)
+        self.assertEqual(p["status"],"blocked")
+        self.assertEqual(p["production_gate"]["status"],"blocked")
+        self.assertIn("valid production_evidence.json",p["production_gate"]["missing"])
+    def test_production_and_publish_rejected(self):
+        commands={"ASTRA_"+s+"_CMD":"true" for s in STAGES}
+        with tempfile.TemporaryDirectory() as directory:
+            env=os.environ.copy()
+            env.update(commands)
+            r=subprocess.run([sys.executable,str(SCRIPT),"--output",directory,
+                              "--production","--publish"],env=env,capture_output=True,text=True)
+            self.assertNotEqual(r.returncode,0)
+            self.assertIn("cannot be combined",r.stderr)
+            self.assertFalse((Path(directory)/"run_report.json").exists())
     def test_publish_explicit_opt_in(self):
         commands={"ASTRA_"+s+"_CMD":"true" for s in STAGES}
         r,p=self.invoke(commands,publish=True)
