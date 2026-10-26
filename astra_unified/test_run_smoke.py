@@ -18,7 +18,7 @@ class SmokeLauncherTests(unittest.TestCase):
             root=Path(d)
             result=self.invoke(root,root/"output")
             self.assertNotEqual(result.returncode,0)
-            self.assertIn("eight scene_",result.stderr)
+            self.assertIn("At least eight scene_",result.stderr)
             self.assertFalse((root/"output").exists())
 
     def test_empty_narration_script_rejected(self):
