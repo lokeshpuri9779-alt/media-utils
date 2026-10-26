@@ -24,3 +24,5 @@ Retry 10: single fire truck composition; negative prompt; FP32 16 steps; safety 
 Retry 11: 12-step centered full truck storybook composition; same safety and pixel gates.
 
 Retry 12: independent lighthouse single-subject composition, 12 steps, existing safety and pixel gates.
+
+Retry 13: lighthouse stability across seeds; compare seed 123 against successful 42, same safety and quality gates.
