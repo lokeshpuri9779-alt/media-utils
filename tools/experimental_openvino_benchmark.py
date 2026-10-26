@@ -31,6 +31,7 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
     try:
         from optimum.intel import OVStableDiffusionPipeline
         from PIL import Image
+        import torch
         load_options = {"export": profile == "export", "compile": False,
                         "device": "CPU",
                         "ov_config": {"INFERENCE_PRECISION_HINT": "f32"}}
@@ -42,8 +43,11 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
         pipe = OVStableDiffusionPipeline.from_pretrained(model, **load_options)
         pipe.reshape(batch_size=1, height=768, width=512, num_images_per_prompt=1)
         pipe.compile()
+        report["guidance_scale"] = 8.0
+        report["seed"] = 42
         image = pipe(PROMPT, height=768, width=512,
-                     num_inference_steps=steps).images[0]
+                     num_inference_steps=steps, guidance_scale=8.0,
+                     generator=torch.Generator(device="cpu").manual_seed(42)).images[0]
         if not isinstance(image, Image.Image):
             raise ValueError("No PIL image returned")
         image.save(output, format="PNG")
