@@ -4660,6 +4660,51 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-forge-0b38b9527f9be7d9",
+      "video_id": "J17ubWNHBUE",
+      "confirmed_at": "2026-10-26T21:22:04.634351+00:00",
+      "title": "The Otter and the Tide Clock",
+      "plot_fingerprint": "7b35dfb5f028eff6bacda3aba4f4f719a58e4e106d02e356f79210e408b2e369",
+      "story_beats": [
+        {
+          "headline": "THE CLOCK RAN BACKWARD",
+          "speech": "An otter noticed the harbor clock ticking backward just before the fishing boats were due to return.",
+          "visual": "clock",
+          "label": "WRONG WAY",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE KEEPER WAS MISSING",
+          "speech": "She searched the empty clock tower while the rising tide covered the steps to the dock.",
+          "visual": "door",
+          "label": "TIME RUNNING OUT",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A ROPE ON THE GEAR",
+          "speech": "She found a wet mooring rope wrapped around the clock's exposed drive wheel and called the keeper for help.",
+          "visual": "robot",
+          "label": "HIDDEN SNAG",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE HARBOR BELLS RANG",
+          "speech": "The keeper freed the rope and restored the clock, while the otter guided the returning boats with the harbor bell.",
+          "visual": "signal",
+          "label": "SAFE RETURN",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
