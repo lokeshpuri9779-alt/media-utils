@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 34,
-  "confirmed_today": 33,
-  "last_attempt_at": "2026-10-26T10:07:08.685251+00:00",
+  "attempts": 35,
+  "confirmed_today": 34,
+  "last_attempt_at": "2026-10-26T10:30:22.173962+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -4534,16 +4534,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "wVjBD_N1rOA": {
-      "content_id": "rayvan-forge-eda099d0da7e7cb2",
+    },
+    "rayvan-forge-eda099d0da7e7cb2": {
+      "video_id": "wVjBD_N1rOA",
+      "confirmed_at": "2026-10-26T10:28:53.646440+00:00",
       "title": "The Hare and the Pepper Pie",
-      "day": "2026-10-26",
-      "uploaded_at": "2026-10-26T10:07:10.063651+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-26T10:07:10.063651+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "676c928904f39e4b990dbd8f3d394c942ff2413710ec2d82106b8548ff16bed9",
       "story_beats": [
@@ -4584,16 +4582,67 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "hn4_CSKVhxI": {
+      "content_id": "rayvan-forge-6479b1d3f728940f",
+      "title": "The Fox and the Festival of Shadows",
+      "day": "2026-10-26",
+      "uploaded_at": "2026-10-26T10:30:24.807848+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "1021263dda4eb6c1937c9065cab27eaaf8b4610ca572118cb6949796f17805e1",
+      "story_beats": [
+        {
+          "headline": "THE LIGHTS WENT OUT",
+          "speech": "A fox arrived at the lantern festival just as the village square lost its electricity.",
+          "visual": "door",
+          "label": "DARK FESTIVAL",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A BRIGHT IDEA FAILED",
+          "speech": "She placed one lantern on the stage, but its tiny glow could not reach the crowd.",
+          "visual": "signal",
+          "label": "NOT ENOUGH",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE MIRROR CIRCLE",
+          "speech": "She arranged the festival's polished mirrors around several battery lanterns to spread their light.",
+          "visual": "robot",
+          "label": "REFLECT THE GLOW",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "SHADOWS STARTED DANCING",
+          "speech": "The villagers used the gentle reflections to perform shadow puppets until the power returned.",
+          "visual": "forest",
+          "label": "SHOWTIME",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-26T09:56:58.017719+00:00",
+  "last_preflight_at": "2026-10-26T10:28:53.065222+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-26T10:07:10.486273+00:00",
+    "at": "2026-10-26T10:30:25.180151+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -10045,10 +10094,57 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-6479b1d3f728940f": {
+      "at": "2026-10-26T10:30:22.173945+00:00",
+      "title": "The Fox and the Festival of Shadows",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "1021263dda4eb6c1937c9065cab27eaaf8b4610ca572118cb6949796f17805e1",
+      "story_beats": [
+        {
+          "headline": "THE LIGHTS WENT OUT",
+          "speech": "A fox arrived at the lantern festival just as the village square lost its electricity.",
+          "visual": "door",
+          "label": "DARK FESTIVAL",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A BRIGHT IDEA FAILED",
+          "speech": "She placed one lantern on the stage, but its tiny glow could not reach the crowd.",
+          "visual": "signal",
+          "label": "NOT ENOUGH",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE MIRROR CIRCLE",
+          "speech": "She arranged the festival's polished mirrors around several battery lanterns to spread their light.",
+          "visual": "robot",
+          "label": "REFLECT THE GLOW",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "SHADOWS STARTED DANCING",
+          "speech": "The villagers used the gentle reflections to perform shadow puppets until the power returned.",
+          "visual": "forest",
+          "label": "SHOWTIME",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-26T10:07:10.486191+00:00",
+    "at": "2026-10-26T10:30:25.180097+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -10059,21 +10155,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-26T10:07:10.486259+00:00",
+    "at": "2026-10-26T10:30:25.180142+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-26T09:57:17.563138+00:00",
+    "at": "2026-10-26T10:30:05.058434+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-eda099d0da7e7cb2",
-    "video_url": "https://www.youtube.com/watch?v=wVjBD_N1rOA",
+    "content_id": "rayvan-forge-6479b1d3f728940f",
+    "video_url": "https://www.youtube.com/watch?v=hn4_CSKVhxI",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-26T10:07:10.485933+00:00",
+    "at": "2026-10-26T10:30:25.180031+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -10085,52 +10181,10 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-26T10:07:10.486183+00:00",
-    "collection_status": "collected",
+    "at": "2026-10-26T10:30:25.180093+00:00",
+    "collection_status": "missing_diagnostics",
     "publish_step": "success",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 41,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3,
-          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
-          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
-          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
-          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
-          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
-        },
-        "seen": 11,
-        "total": 174
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 174,
-        "fingerprint": 0,
-        "id": 11,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 163,
-        "title": 0,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 163,
-        "remaining": 41
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "considered": 1,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 0
-      }
-    },
+    "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
