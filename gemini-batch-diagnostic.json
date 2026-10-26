@@ -1,66 +1,23 @@
 {
-  "observed_at": "2026-10-26T06:55:26.573280+00:00",
-  "generated": 3,
+  "observed_at": "2026-10-26T15:07:50.913931+00:00",
+  "generated": 20,
   "requested": 20,
-  "generation_failures": [
-    {
-      "index": 1,
-      "reason": "ValueError"
-    },
-    {
-      "index": 2,
-      "reason": "ValueError"
-    },
-    {
-      "index": 3,
-      "reason": "ValueError"
-    },
-    {
-      "index": 4,
-      "reason": "ValueError"
-    },
-    {
-      "index": 5,
-      "reason": "ValueError"
-    },
-    {
-      "index": 7,
-      "reason": "ValueError"
-    },
-    {
-      "index": 9,
-      "reason": "ValueError"
-    },
-    {
-      "index": 10,
-      "reason": "ValueError"
-    },
-    {
-      "index": 11,
-      "reason": "ValueError"
-    },
-    {
-      "index": 12,
-      "reason": "ValueError"
-    },
-    {
-      "index": 13,
-      "reason": "ValueError"
-    },
-    {
-      "index": 14,
-      "reason": "ValueError"
-    },
-    {
-      "index": 15,
-      "reason": "provider_http_429"
-    }
-  ],
-  "reviewed": 3,
-  "approved": 2,
+  "generation_failures": [],
+  "reviewed": 20,
+  "approved": 10,
   "review_issues": [
-    "review_failed:HTTP_429",
-    "review_provider:rate_limited"
+    "The causal mechanics and overarching premise lack sufficient differentiation from established catalog items regarding weather-disrupted local sports matches.",
+    "The central conflict, character name (Tarek), and setting closely mirror the recently published comparison example 'Tarek and the Hidden Fern of Kasaar', indicating a repetitive formula and derivative premise.",
+    "The central conflict, decisive choice, and resolution directly echo the recently published comparison example 'The Muddy Pitch Penalty and the Rubber Cleat Rig', substituting drainage pipes for rubber cleats to solve a waterlogged sports field dilemma.",
+    "The central conflict, decisive choice, and resolution heavily overlap with the recently published comparison entry 'The Alpine Rescuer and the Hidden Crag', featuring a trapped climber in a blizzard, a rescuer making a high-risk choice regarding flares/visibility, and a helicopter rescue.",
+    "The premise and causal mechanism lack sufficient differentiation from existing published stories in the comparison dataset.",
+    "The premise, character (Barnaby), and conflict structure heavily mirror the previously published story 'Barnaby's Turbo-Tater and the Market Stampede', repeating a very similar mechanical mishap involving an over-pressurized root vegetable machine in a market setting.",
+    "The story premise centers on a soapbox derby race involving a local cart dispute and custom wheel modifications, which directly repeats the core premise and causal mechanism of the recently published comparison item 'the acorn cup derby and the rolling ravine'.",
+    "The thematic elements of overcoming a track or component monopoly through an engineering modification in a downhill cart race are overly derivative of existing catalog entries.",
+    "ai_editorial_rejection",
+    "review_failed:HTTP_503",
+    "review_failed:TimeoutError",
+    "review_provider:provider_unavailable"
   ],
   "approval_pair_present": true,
   "model_access": {
