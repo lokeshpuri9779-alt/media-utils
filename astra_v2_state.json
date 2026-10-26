@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 37,
+  "attempts": 38,
   "confirmed_today": 37,
-  "last_attempt_at": "2026-10-26T11:24:42.809419+00:00",
+  "last_attempt_at": "2026-10-26T13:49:25.527580+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -4732,30 +4732,81 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-26T11:25:56.175574+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "B16EZZ5Gc7U": {
+      "content_id": "rayvan-forge-07d119ca4da54d9e",
+      "title": "The Owl and the Moonlit Dam",
+      "day": "2026-10-26",
+      "uploaded_at": "2026-10-26T13:49:27.250795+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "cc66e81803a21b8bcc940ae96dcde1846dec07aa0abf6f62b64e6e2ab7e0571a",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "An owl noticed the pond dropping each night despite a freshly repaired dam.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "He searched for cracks in daylight and found the wall apparently sound.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "At moonrise he spotted water slipping beneath a fallen log beside the bank.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "The beavers moved the log and sealed the channel before the pond emptied.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-26T13:43:05.216144+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-26T11:25:56.781710+00:00",
+    "at": "2026-10-26T13:49:27.735170+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
-  "last_feedback_attempt_at": "2026-10-26T01:43:23.821557+00:00",
+  "last_feedback_attempt_at": "2026-10-26T13:43:25.050844+00:00",
   "reserved": {
     "rayvan-gemini-ed365c573c8c2d479669": {
       "at": "2026-10-22T23:52:30.401944+00:00",
@@ -10331,13 +10382,60 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-07d119ca4da54d9e": {
+      "at": "2026-10-26T13:49:25.527565+00:00",
+      "title": "The Owl and the Moonlit Dam",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "cc66e81803a21b8bcc940ae96dcde1846dec07aa0abf6f62b64e6e2ab7e0571a",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "An owl noticed the pond dropping each night despite a freshly repaired dam.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "He searched for cracks in daylight and found the wall apparently sound.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "At moonrise he spotted water slipping beneath a fallen log beside the bank.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "The beavers moved the log and sealed the channel before the pond emptied.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-26T11:25:56.781653+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-26T13:49:27.735094+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -10345,36 +10443,78 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-26T11:25:56.781700+00:00",
+    "at": "2026-10-26T13:49:27.735157+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-26T11:13:43.812403+00:00",
+    "at": "2026-10-26T13:43:24.780589+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-4d93b316157ea313",
-    "video_url": "https://www.youtube.com/watch?v=AyfsVKoSk_0",
+    "content_id": "rayvan-forge-07d119ca4da54d9e",
+    "video_url": "https://www.youtube.com/watch?v=B16EZZ5Gc7U",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-26T11:25:56.781598+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-26T13:49:27.734841+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-26T11:25:56.781648+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "counters": {},
+    "at": "2026-10-26T13:49:27.735088+00:00",
+    "collection_status": "collected",
+    "publish_step": "success",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 37,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
+          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
+        },
+        "seen": 11,
+        "total": 170
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 170,
+        "fingerprint": 0,
+        "id": 11,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 159,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 159,
+        "remaining": 37
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 1,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
