@@ -16,3 +16,5 @@ Retry 7: independent original SD1.5 OpenVINO export, 8 steps, no quality relaxat
 Retry 8: FP32 precision hint and automatic 8-bit compression disabled for source export.
 
 Retry 8: benign toy fire truck prompt; retain NSFW safety checker and image gate.
+
+Retry 9: export FP32 with 12 steps, guidance 8.0, deterministic seed 42; safety gate unchanged.
