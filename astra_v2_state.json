@@ -3,7 +3,7 @@
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 25,
-  "confirmed_today": 24,
+  "confirmed_today": 25,
   "last_attempt_at": "2026-10-26T03:27:26.191920+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -4093,16 +4093,14 @@
       "plot_fingerprint": "",
       "story_beats": [],
       "genre": "current"
-    }
-  },
-  "pending": {
-    "pwPUrbuFFjs": {
-      "content_id": "rayvan-forge-5c3c9970e0205042",
+    },
+    "rayvan-forge-5c3c9970e0205042": {
+      "video_id": "pwPUrbuFFjs",
+      "confirmed_at": "2026-10-26T03:28:30.447345+00:00",
       "title": "The Lynx and the Eclipse",
-      "day": "2026-10-26",
-      "uploaded_at": "2026-10-26T03:27:27.555558+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-26T03:27:27.555558+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "c50aaff034817c6dd37a0a2888eb7fc0a2f9ae36d5f24fbe8357cb7a6f26c9f8",
       "story_beats": [
@@ -4143,16 +4141,16 @@
           "duration": 2.1
         }
       ],
-      "renderer": "studio-7.3.1"
+      "genre": "fiction"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-26T03:12:33.719058+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-26T03:28:29.951239+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-26T02:36:35.209440+00:00",
+    "at": "2026-10-26T03:28:30.540607+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "false",
@@ -9184,8 +9182,8 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-26T02:36:35.209393+00:00",
-    "publication_outcome": "skipped",
+    "at": "2026-10-26T03:28:30.540524+00:00",
+    "publication_outcome": "published",
     "publication_reason": "min_interval",
     "character_memory": "not_reported",
     "character_memory_error": null,
@@ -9195,9 +9193,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-26T02:36:35.209431+00:00",
+    "at": "2026-10-26T03:28:30.540592+00:00",
     "history_file_present": true,
-    "publication_outcome": "skipped",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -9209,19 +9207,19 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-26T02:36:35.209355+00:00",
+    "at": "2026-10-26T03:28:30.540469+00:00",
     "preflight_due": "false",
     "preflight_step": "success",
     "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "skipped",
+    "outcome": "published",
     "reason": "min_interval",
     "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-26T02:36:35.209390+00:00",
+    "at": "2026-10-26T03:28:30.540519+00:00",
     "collection_status": "not_applicable_publisher_skipped",
     "publish_step": "skipped",
     "counters": {},
