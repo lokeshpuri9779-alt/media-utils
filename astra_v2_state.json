@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-27",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 2,
-  "confirmed_today": 1,
-  "last_attempt_at": "2026-10-26T19:24:35.495252+00:00",
+  "attempts": 3,
+  "confirmed_today": 2,
+  "last_attempt_at": "2026-10-26T19:52:50.343487+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -5162,16 +5162,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "YO6mtGd6Kh8": {
-      "content_id": "rayvan-forge-026fd31a092d6c8e",
+    },
+    "rayvan-forge-026fd31a092d6c8e": {
+      "video_id": "YO6mtGd6Kh8",
+      "confirmed_at": "2026-10-26T19:42:23.986535+00:00",
       "title": "The Otter and the Underwater Bell",
-      "day": "2026-10-27",
-      "uploaded_at": "2026-10-26T19:24:36.777708+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-26T19:24:36.777708+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "7e838a80b3107fc058a8f4d0e4ebdca74b2ad6cfefef6014c61f2405cd4aad2b",
       "story_beats": [
@@ -5212,16 +5210,67 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "OI-M2x9AdQM": {
+      "content_id": "rayvan-forge-3a5d637611083237",
+      "title": "The Squirrel and the Well Bucket",
+      "day": "2026-10-27",
+      "uploaded_at": "2026-10-26T19:52:51.916484+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "3e5a6cc49c51e7b37e3fe5172af54899e0eea3feffee86e3d69600420c25d8d9",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "The well bucket disappeared and the village could not collect water for breakfast.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "The squirrel tied a basket to the rope, but its wide gaps spilled every drop.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "She found the missing bucket lodged beneath a low stone ledge inside the well.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "The mason lifted it with a hook and replaced the worn rope.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-26T19:15:38.021011+00:00",
+  "last_preflight_at": "2026-10-26T19:42:23.618457+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-26T19:24:37.261077+00:00",
+    "at": "2026-10-26T19:52:52.359272+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -11275,10 +11324,57 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-3a5d637611083237": {
+      "at": "2026-10-26T19:52:50.343471+00:00",
+      "title": "The Squirrel and the Well Bucket",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "3e5a6cc49c51e7b37e3fe5172af54899e0eea3feffee86e3d69600420c25d8d9",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "The well bucket disappeared and the village could not collect water for breakfast.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "The squirrel tied a basket to the rope, but its wide gaps spilled every drop.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "She found the missing bucket lodged beneath a low stone ledge inside the well.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "The mason lifted it with a hook and replaced the worn rope.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-26T19:24:37.261012+00:00",
+    "at": "2026-10-26T19:52:52.359193+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -11289,21 +11385,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-26T19:24:37.261066+00:00",
+    "at": "2026-10-26T19:52:52.359257+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-26T19:16:04.517643+00:00",
+    "at": "2026-10-26T19:42:48.296140+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-026fd31a092d6c8e",
-    "video_url": "https://www.youtube.com/watch?v=YO6mtGd6Kh8",
+    "content_id": "rayvan-forge-3a5d637611083237",
+    "video_url": "https://www.youtube.com/watch?v=OI-M2x9AdQM",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-26T19:24:37.260775+00:00",
+    "at": "2026-10-26T19:52:52.358937+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -11315,12 +11411,12 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-26T19:24:37.261006+00:00",
+    "at": "2026-10-26T19:52:52.359186+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 33,
+        "eligible": 32,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3,
@@ -11334,21 +11430,21 @@
           "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
         },
         "seen": 11,
-        "total": 166
+        "total": 165
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 166,
+        "before": 165,
         "fingerprint": 0,
         "id": 11,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 155,
+        "remaining": 154,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 155,
-        "remaining": 33
+        "pool": 154,
+        "remaining": 32
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
