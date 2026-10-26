@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "deff29443eacfd6cea21fce9",
-      "source_sha256": "309475a79ff46d1b86743234e0b70707c6a0036a906f48719b44f29b93598319",
+      "candidate_id": "15a78e5868e70c105f90e991",
+      "source_sha256": "fc8bda5de3694aba72e64246c8f0448bb02c965266ca496956f963abe2e60025",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-c8e7451d56c069685c08",
-        "title": "The Grand Pickle Pulverizer",
-        "hook": "The Copper Contraption",
-        "question": "Will Barnaby's automated dill-chopper save his failing vegetable stall?",
-        "answer": "Yes, but only after coating the entire farmers market in aggressive brine.",
+        "content_id": "rayvan-gemini-961fef8b903d30fc695f",
+        "title": "The Automatic Onion-Crying Goggles",
+        "hook": "The Cabbage Attack",
+        "question": "Can Silas sell his erratic vegetable-slicing helmets before the market health inspector shuts down his stall?",
+        "answer": "Silas reconfigures the steam-powered blades to chop singing melons, charming the inspector into awarding a safety grant.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,228 +29,225 @@
         ],
         "story_beats": [
           {
-            "headline": "The Copper Contraption",
-            "speech": "Behold the greatest marvel in culinary history, guaranteed to slice ten thousand cucumbers before breakfast!",
+            "headline": "The Cabbage Attack",
+            "speech": "Stand back everyone, because my pneumatic onion-chopping helmet is about to revolutionize dinner preparation across the entire province!",
             "visual": "robot",
-            "label": "The Invention",
+            "label": "The Invention Unveiled",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby proudly points at a rickety brass machine with spinning blades inside a bustling outdoor market, holding a wrench in his left hand.",
+            "visual_prompt": "Silas wearing a bubbling copper helmet with waving mechanical arms, standing in a crowded vegetable market stall, holding a giant dripping onion while terrified customers duck away.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Madness in the Market",
-            "speech": "Why is it vibrating so violently? Quick, fetch the thick wooden mallet before the gears explode into space!",
-            "visual": "ship",
-            "label": "The Jam",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby and Mayor Higgins struggle to hold down a shaking brass machine leaking green juice, while market stalls wobble in the background.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Salty Surge",
-            "speech": "Hold fast everyone, we are experiencing an unprecedented cascade of pickled shrapnel across the entire vegetable aisle!",
+            "headline": "Stuck in Reverse",
+            "speech": "Why is the steam pressure increasing so rapidly, and why are the stainless steel blades spinning toward the turnips?",
             "visual": "signal",
-            "label": "The Crisis",
-            "story_beat": "twist",
-            "visual_prompt": "A massive wave of sliced cucumbers and green liquid erupts from the machine hopper, splashing startled vendors clutching empty baskets.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A Relish Renaissance",
-            "speech": "Look at these long lines of hungry customers eager to purchase our certified high-speed market relish!",
-            "visual": "forest",
-            "label": "The Success",
-            "story_beat": "payoff",
-            "visual_prompt": "Barnaby and Mayor Higgins smile widely while handing out jars of bright green relish to a massive crowd of smiling shoppers in the sunlit square.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "A malfunctioning mechanical dicer threatens to ruin the morning market trade.",
-        "decisive_choice": "Barnaby overrides the safety valve to increase the chopping speed threefold.",
-        "resolution": "The explosive pickle output instantly creates the town's first accidental relish district.",
-        "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures of wood, brass, and fresh vegetables.",
-          "characters": {
-            "Barnaby": "A frantic inventor with wild grey hair, wearing a patched tweed vest and soot-stained trousers.",
-            "Mayor Higgins": "A portly town official with a shiny top hat, round spectacles, and a very stiff blue coat."
-          },
-          "locations": {
-            "Market Square": "A bustling cobblestone plaza lined with striped canvas awnings, wooden crates, and vegetable stalls."
-          },
-          "objects": {
-            "Brass Dicer": "A towering machine made of polished copper tubes, erratic gears, and a large funnel on top.",
-            "Wooden Mallet": "A heavy oak mallet with a scuffed handle used for tapping stubborn machinery."
-          }
-        },
-        "plot_fingerprint": "71f5de72f564c1456aa8876e5b9767950dda5cbbac006ffe2eb570b054eac38f"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "ad5190e05bb792c67ec1d613",
-      "source_sha256": "99e2f213a4fe143978d3136ae8c063fb3428e517a2200bd41892dacf7cc7adc0",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-fd5cd5a8e24060d52e80",
-        "title": "The Quantum Hull Leak of Sector Seven",
-        "hook": "The Critical Breach",
-        "question": "Should the crew purge the atmospheric reserve to freeze the hull fracture?",
-        "answer": "They vent the oxygen into space, instantly freezing the breach and saving the ship.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Critical Breach",
-            "speech": "Listen to the sensor logs, we are losing cabin pressure fast and patching it manually is completely impossible.",
-            "visual": "ship",
-            "label": "Sensor Alert",
-            "story_beat": "reveal",
-            "visual_prompt": "Engineer Varis pointing at a glowing red bulkhead crack inside the dimly lit cargo bay, wearing a bulky grey jumpsuit with orange stripes, holding a digital tablet displaying pressure drops.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Dangerous Proposal",
-            "speech": "If we vent the entire atmospheric reserve right now, the sudden sub-zero vacuum will freeze the fracture solid.",
-            "visual": "signal",
-            "label": "Strategy Plan",
+            "label": "Building Chaos",
             "story_beat": "build",
-            "visual_prompt": "Captain Mira standing by the main navigation console projecting a holographic blueprint of the hull, wearing a dark blue commander uniform, gesturing firmly toward Varis.",
+            "visual_prompt": "Silas frantically turning a stuck brass wheel on his chest harness, while two mechanical spatulas wildly fling purple turnips across the messy market aisle.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Hard Choice",
-            "speech": "We will survive in emergency suit hibernation pods, but our air supply will be gone for the rest of the journey.",
-            "visual": "robot",
-            "label": "System Override",
-            "story_beat": "mechanism",
-            "visual_prompt": "Maintenance droid Unit Seven pulling a heavy yellow manual lever on the central life support bulkhead, Sparks flying around its metallic chassis in the narrow corridor.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Frozen Seal",
-            "speech": "The pressure stabilized instantly and the exterior fracture is locked tight in space ice. We made it.",
-            "visual": "planet",
-            "label": "Safe Harbor",
-            "story_beat": "payoff",
-            "visual_prompt": "Varis and Mira looking through the reinforced bridge viewport at a bright blue planet ahead, both wearing relaxed expressions while holding steaming mugs of water.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Disagreement between sealing the primary hull breach versus conserving emergency oxygen reserves",
-        "decisive_choice": "Venting the main oxygen reserve to instantly freeze the growing micro-fracture",
-        "resolution": "The hull breach is permanently frozen and sealed, preserving the ship and its crew",
-        "visual_bible": {
-          "style": "Cinematic sci-fi realism with gritty industrial textures, dramatic lighting, and high contrast.",
-          "characters": {
-            "Varis": "Lead engineer with a rugged build, short dark hair, wearing a worn grey utility jumpsuit with high-visibility orange safety stripes.",
-            "Captain Mira": "Vigilant ship commander with sharp features, neat blonde hair tied back, wearing a structured dark blue uniform with silver command insignia.",
-            "Unit Seven": "Bipedal maintenance droid with a bulky rectangular orange torso, dual optical lenses, and articulated metallic manipulator arms."
-          },
-          "locations": {
-            "cargo_bay": "Spacious industrial room lined with metallic storage crates, exposed overhead wiring, and large structural support beams.",
-            "bridge": "Curved command deck featuring large transparent viewports looking out into deep space, surrounded by glowing tactical display panels."
-          },
-          "objects": {
-            "tablet": "Rugged black handheld computer with a cracked protective corner casing and a glowing blue screen showing diagnostic charts.",
-            "lever": "Heavy industrial override lever painted in hazard yellow and black stripes, mounted securely onto a steel bulkhead plate."
-          }
-        },
-        "plot_fingerprint": "13a358400c8d9e8c71929e65625f7e1607bec785c4d84f19f4044886c91a7fb7"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "6b4e6fc06b58ff63d2704521",
-      "source_sha256": "924c83d60034eb62362ac9ebcdafe291c4107b5cf29149095674da821c701920",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-2f5248aef3ff6eb0fa53",
-        "title": "The Valley of Echoing Stone",
-        "hook": "The Silent Trench",
-        "question": "What secret lies beneath the singing dunes of the southern wastes?",
-        "answer": "A subterranean aquifer activated by acoustic resonance, blooming a prehistoric garden.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Silent Trench",
-            "speech": "Our instruments show zero moisture for fifty miles, yet these strange stone monoliths are humming with a deep musical frequency.",
-            "visual": "signal",
-            "label": "Acoustic Anomaly",
-            "story_beat": "reveal",
-            "visual_prompt": "Dr. Aris stands in a sun-bleached desert canyon at midday, holding a glowing seismic scanner while staring at towering monoliths of black basalt that emit visible blue sound waves.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Resonant Fault",
-            "speech": "If we strike this central limestone arch with our pneumatic hammer at the exact pitch, it might fracture the sealed subterranean basin.",
-            "visual": "robot",
-            "label": "Seismic Hammer",
-            "story_beat": "build",
-            "visual_prompt": "An autonomous crawler robot extends a heavy mechanical pneumatic hammer toward a cracked limestone pillar inside a narrow cavern, while Aris calibrates the striking frequency on a handheld console.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Vibrating Vault",
-            "speech": "The bedrock is fracturing faster than anticipated! We must hold our ground and let the shockwave reach the deepest water pocket.",
+            "headline": "The Emergency Switch",
+            "speech": "If I reroute the steam through the whistling flute valve right now, we might avoid a complete culinary disaster.",
             "visual": "door",
-            "label": "Limestone Gate",
+            "label": "The Mechanism Shift",
             "story_beat": "mechanism",
-            "visual_prompt": "Aris braces against a shaking stone wall inside the cavern as massive fissures crack across a massive natural limestone gate, sending dust and glowing mineral sparks into the air.",
+            "visual_prompt": "A close-up of Silas's soot-smudged hands slamming a heavy iron lever sideways into a side port shaped like a tiny cellar door, venting blue steam.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Hidden Spring",
-            "speech": "Look at the canyon floor! The ancient aquifer has breached, and prehistoric seeds are already sprouting beneath the desert sun.",
-            "visual": "forest",
-            "label": "Subterranean Oasis",
+            "headline": "Melon Symphony",
+            "speech": "Behold the world's first musical melon slicer, playing delightful folk tunes while perfectly dicing your morning breakfast fruit safely.",
+            "visual": "ship",
+            "label": "Market Payoff",
             "story_beat": "payoff",
-            "visual_prompt": "Aris kneels on damp, fertile soil in the newly flooded canyon floor, watching bright green prehistoric ferns rapidly unfurl beneath cascading freshwater streams.",
+            "visual_prompt": "Silas bowing proudly beside his steaming contraption as it neatly slices a large green melon into musical notes, while the smiling health inspector claps in approval.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Water shortage during a desert mapping expedition versus unstable acoustic canyon walls.",
-        "decisive_choice": "Shatter the resonant limestone archway to trigger the buried spring.",
-        "resolution": "The dry basin transforms into a lush oasis, saving the expedition and reviving an ancient ecosystem.",
+        "central_conflict": "Silas's experimental weeping-onion helmet malfunctions and attacks the neighbouring stall's prize cabbages.",
+        "decisive_choice": "Silas throws the master gear into reverse to turn the weeping action into a melodic melon-slicer.",
+        "resolution": "The inspector buys the melon-slicer and awards Silas the town market innovation badge.",
         "visual_bible": {
-          "style": "Cinematic realism with warm amber lighting, dusty atmospheric haze, and vibrant green contrast for biological elements.",
+          "style": "Bright stop-motion claymation aesthetic with rich earthy textures and bustling market background details.",
           "characters": {
-            "Dr. Aris": "A seasoned cartographer in her late thirties with wind-weathered skin, practical tan canvas expedition gear, amber tinted goggles resting on her forehead, and a determined expression."
+            "Silas": "A lanky inventor with wild ginger hair, round brass spectacles, wearing a patched tweed vest and soot-stained trousers.",
+            "Inspector Briggs": "A stout, stern official with a waxed moustache, wearing a sharp navy wool coat and carrying a leather clipboard."
           },
           "locations": {
-            "Singing Canyon": "A narrow desert gorge flanked by smooth black basalt monoliths and ancient pale limestone deposits under a blazing white sun."
+            "Market Square": "A sunlit cobblestone marketplace draped in colourful canvas awnings, overflowing with wooden crates of fresh produce."
           },
           "objects": {
-            "Seismic Scanner": "A rugged rectangular metal device with a glowing cyan digital display and a toggle antenna.",
-            "Pneumatic Hammer": "A heavy industrial excavation tool made of brushed steel with yellow hazard stripes and a hydraulic piston tip.",
-            "Field Journal": "A worn leather-bound notebook filled with handwritten topographical maps and charcoal sketches."
+            "Onion Helmet": "A complex copper headpiece covered in pressure gauges, brass tubes, and two erratic steel chopping blades.",
+            "Melon Slicer": "A modified brass contraption featuring a steam whistle, rotating paddles, and a polished mahogany base."
           }
         },
-        "plot_fingerprint": "b0a003047eedde6b8a17ea1f0f6791b6f3b064c2f4893af90ed99e1543ca5530"
+        "plot_fingerprint": "19421d8427b0af529cedcb174977949994aae122a89ac2f42f76e3f14b70b36d"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "f8277b7f5530ca5292d39e2c",
+      "source_sha256": "bf48acc4a52e365f04b4b0e0ddccce9a36032bd6e027ae6ec24605d2230e3e0e",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-7fb97dff491e158f0578",
+        "title": "The Singing Sands of Kora",
+        "hook": "The Silent Ridge",
+        "question": "What caused the dry desert dunes to emit a melodic, harmonious chord every evening?",
+        "answer": "A vast underground labyrinth of ancient acoustic pipes carved into bedrock that naturally resonate as cooling evening winds sweep across the surface.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Silent Ridge",
+            "speech": "Listen closely to the evening wind. The great desert chords are completely missing tonight, and the nesting storm-birds are restless.",
+            "visual": "signal",
+            "label": "The Silence",
+            "story_beat": "reveal",
+            "visual_prompt": "Explorer Tarek stands on a high sand dune at dusk, holding a brass sonic sensor that displays a flatline. He wears a heavy canvas expedition coat and goggles. In the background, confused storm-birds circle silently in an amber sky.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Hidden Flute",
+            "speech": "We must dig beneath the fractured limestone shelf. These geometric shafts were clearly carved by ancient hands to catch the wind.",
+            "visual": "door",
+            "label": "The Discovery",
+            "story_beat": "build",
+            "visual_prompt": "Tarek and his companion Sira use small hand shovels to clear fine red sand from a massive carved stone slab set into the desert floor. The slab reveals intricate flute-like apertures.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Clearing the Vent",
+            "speech": "Clear away this compacted silt quickly before nightfall or the airflow through the main chamber will remain completely blocked.",
+            "visual": "robot",
+            "label": "The Clearing",
+            "story_beat": "mechanism",
+            "visual_prompt": "Sira operates a mechanical pneumatic vacuum device attached to a copper hose, sucking thick packed silt out of a deep subterranean limestone pipe. Tarek holds a steady work-lamp illuminating the dark shaft.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Evening Chord",
+            "speech": "The deep acoustic resonance has returned at last, and the storm-birds have finally found their way safely home.",
+            "visual": "forest",
+            "label": "The Harmony",
+            "story_beat": "payoff",
+            "visual_prompt": "Tarek and Sira smile triumphantly as glowing blue resonance waves ripple visibly across the desert floor. Overhead, a flock of illuminated storm-birds dives gracefully down toward the singing dunes.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A prolonged silence from the resonant dunes threatening the survival of nomadic storm-birds that navigate by the evening chord.",
+        "decisive_choice": "Excavating the main subterranean resonance chamber to clear centuries of packed dune silt instead of abandoning the traditional migration route.",
+        "resolution": "The restored underground pipes resume their resonant hum, guiding the storm-birds safely to their nocturnal nesting grounds.",
+        "visual_bible": {
+          "style": "Cinematic realism with warm desert color palettes, rich amber lighting, and detailed tactile textures.",
+          "characters": {
+            "Tarek": "A weathered desert cartographer in his late thirties with a neatly trimmed beard, wearing a tan canvas expedition coat, leather boots, and brass-rimmed goggles pushed up on his forehead.",
+            "Sira": "An agile acoustic researcher in her early thirties with dark hair tied back in a utility braid, wearing a durable slate-grey utility vest and reinforced climbing trousers."
+          },
+          "locations": {
+            "Kora Basin": "A vast, rolling desert expanse featuring towering copper-colored sand dunes, exposed limestone shelves, and ancient stone ruins."
+          },
+          "objects": {
+            "Sonic Sensor": "A handheld rectangular brass device featuring a glowing green frequency screen and an external directional antenna.",
+            "Pneumatic Vacuum": "A heavy iron-and-copper mechanical pump connected to a flexible black rubber intake hose used for clearing dense silt.",
+            "Work-Lamp": "A portable tripod-mounted lantern casting a bright, warm amber beam into dark underground shafts."
+          }
+        },
+        "plot_fingerprint": "efba0953217bc80518dc62e7ef398bbbfcd546a79de94a3f5aaa4a07dbfb445d"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "d0fcbbd52e4ce949868b331a",
+      "source_sha256": "cf606ed8e67f72630cb87801fe6190c25d65666dc6cdf6fabd822569a8db7790",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-2dcdc21736ed1c973eec",
+        "title": "The Infinite Pancake-Flipper Panic",
+        "hook": "The Batter Catastrophe",
+        "question": "Can Barnaby save his bustling breakfast stall before the mayor bans automated spatulas forever?",
+        "answer": "Barnaby reprograms the flipper to catch dropped pancakes in mid-air, winning the mayor's endorsement.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Batter Catastrophe",
+            "speech": "Look out below! My glorious breakfast automaton has officially gone rogue and is launching sticky pancakes everywhere!",
+            "visual": "robot",
+            "label": "Robot Chaos",
+            "story_beat": "reveal",
+            "visual_prompt": "Barnaby with messy brown hair and a stained white apron stands in a crowded marketplace dodging a flying pancake, next to a sputtering mechanical robot-arm covered in batter.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Emergency Calibrations",
+            "speech": "If I tighten this brass valve right now, we might stop the supply line before the entire square is buried.",
+            "visual": "signal",
+            "label": "Manual Tweak",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby frantically wrenching a smoking brass valve on his metal contraption while red warning lights flash across the busy market stalls.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Gyroscopic Shift",
+            "speech": "By redirecting the steam through the dual-port nozzle, every single pastry will loop right back to the griddle.",
+            "visual": "ship",
+            "label": "Airborne Loop",
+            "story_beat": "mechanism",
+            "visual_prompt": "Pancakes flying in an aerodynamic arc like tiny silver ships over astonished market vendors while Barnaby holds a smoking control lever.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A Perfect Breakfast",
+            "speech": "Step right up and catch your golden flapjack, delivered with absolute precision and zero collateral damage today!",
+            "visual": "door",
+            "label": "Grand Delivery",
+            "story_beat": "payoff",
+            "visual_prompt": "Barnaby smiling proudly beside his neatly operating machine as smiling customers catch falling pancakes right onto their plates outside a wooden stall.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A mechanical pancake-flipper flings batter wildly across the crowded town market.",
+        "decisive_choice": "Barnaby adjusts the gear ratio instead of turning off the machine.",
+        "resolution": "The stall serves the fastest, perfectly flipped breakfast in the entire district.",
+        "visual_bible": {
+          "style": "Bright, colorful 3D animated family comedy aesthetic with expressive character animations and slapstick energy.",
+          "characters": {
+            "Barnaby": "An energetic inventor with unruly brown hair, smudged goggles on his forehead, wearing a heavily pocketed white apron over a striped shirt."
+          },
+          "locations": {
+            "Market Square": "A bustling cobblestone marketplace filled with striped awnings, wooden carts, and curious townspeople."
+          },
+          "objects": {
+            "Pancake Machine": "A complex copper and brass contraption with spinning gears, smoking funnels, and a mechanical flipper arm."
+          }
+        },
+        "plot_fingerprint": "80760b05ceb3d25b9b653ca8a61ec75dcef2713bc4100f0b14ad1444f434885c"
       },
       "approved": false
     }
