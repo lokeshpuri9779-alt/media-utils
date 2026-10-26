@@ -2,39 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-20T08:24:21.054670+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 100.0,
-          "pacing": 100.0,
-          "audio": 99.47,
-          "captions": 100.0,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-forge-ac47de3e1b9f3b49"
-    },
-    {
-      "at": "2026-10-20T08:24:21.063936+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 20.967,
-        "renderer": "studio-7.3.0"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-forge-ac47de3e1b9f3b49"
-    },
-    {
       "at": "2026-10-20T08:30:31.775352+00:00",
       "stage": "quality",
       "element": "creative_director",
@@ -8712,6 +8679,39 @@
       },
       "proposed_action": "",
       "candidate_id": "rayvan-forge-50dcebe9375b07e0"
+    },
+    {
+      "at": "2026-10-26T10:07:08.628382+00:00",
+      "stage": "quality",
+      "element": "creative_director",
+      "outcome": "pass",
+      "evidence": {
+        "scores": {
+          "hook": 94.0,
+          "retention": 92.0,
+          "visual": 100.0,
+          "pacing": 100.0,
+          "audio": 97.74,
+          "captions": 98.23,
+          "novelty": 100.0,
+          "coherence": 92.0,
+          "technical": 100.0
+        }
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-forge-eda099d0da7e7cb2"
+    },
+    {
+      "at": "2026-10-26T10:07:08.639972+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "pass",
+      "evidence": {
+        "duration": 17.333,
+        "renderer": "studio-7.3.1"
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-forge-eda099d0da7e7cb2"
     }
   ],
   "stage_counts": {
