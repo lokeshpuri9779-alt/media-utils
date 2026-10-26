@@ -63,7 +63,9 @@ jobs:
       matrix:
         lane: [0, 1, 2, 3]
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    # Dependency fallback and media verification can exceed the old 15-minute job cap.
+    # Preserve existing four-lane schedule and concurrency; no extra runs.
+    timeout-minutes: 30
     env:
       GH_TOKEN: ${{ github.token }}
       ASTRA_CHANNEL: rayvan
