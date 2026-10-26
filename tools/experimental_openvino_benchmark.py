@@ -31,8 +31,15 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
     try:
         from optimum.intel import OVStableDiffusionPipeline
         from PIL import Image
-        pipe = OVStableDiffusionPipeline.from_pretrained(
-            model, export=profile == "export", compile=False, device="CPU")
+        load_options = {"export": profile == "export", "compile": False,
+                        "device": "CPU",
+                        "ov_config": {"INFERENCE_PRECISION_HINT": "f32"}}
+        if profile == "export":
+            # Avoid implicit large-model 8-bit weight compression in this diagnostic.
+            load_options["load_in_8bit"] = False
+        report["precision_hint"] = "f32"
+        report["disable_auto_8bit"] = profile == "export"
+        pipe = OVStableDiffusionPipeline.from_pretrained(model, **load_options)
         pipe.reshape(batch_size=1, height=768, width=512, num_images_per_prompt=1)
         pipe.compile()
         image = pipe(PROMPT, height=768, width=512,
