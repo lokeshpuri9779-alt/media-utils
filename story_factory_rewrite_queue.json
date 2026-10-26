@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "54305750306c4b2e7a693880",
-      "source_sha256": "52557d4231081fffd4a762c50c27b61b00b6489b9b04cc29788e346d06a432d2",
+      "candidate_id": "374091b599410f6a3ebe4dbf",
+      "source_sha256": "a6dcb5993dd1c14c69b214ef3db0f4823b04af89f51270bc840ef9ebb5c60dee",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-529cfd3591af635cbc53",
-        "title": "The Great Turnip Whistle Debacle",
-        "hook": "The Noisy Prototype",
-        "question": "Can an inventor save her failing vegetable stall with a noisy novelty?",
-        "answer": "By tuning the whistle to attract local goats, creating an unexpected new livestock market.",
+        "content_id": "rayvan-gemini-5a8fcd035e68785716ea",
+        "title": "The Grand Pickle Pulverizer Debacle",
+        "hook": "The Great Reveal",
+        "question": "Can an overly complex invention save a failing pickle stall?",
+        "answer": "No, because automated violence only yields very sad relish.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,79 +29,78 @@
         ],
         "story_beats": [
           {
-            "headline": "The Noisy Prototype",
-            "speech": "Behold the root-trumpet! It turns every ordinary turnip into a musical marvel for passing shoppers to hear.",
+            "headline": "The Great Reveal",
+            "speech": "Behold the Cucumberator three thousand! It slices, dices, and emulsifies your favorite fermented gourds in mere milliseconds!",
             "visual": "robot",
-            "label": "The Loud Reveal",
+            "label": "First Prototype",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Martha holding a sputtering brass-fitted turnip in a crowded market square, looking stressed.",
+            "visual_prompt": "Barnaby stands proudly beside his whirring brass robot in a sunny outdoor market square, holding a wooden clipboard and smiling.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Constructing the Valves",
-            "speech": "We must add triple-layered reed valves inside the hollow bulb so the tone stays sharp and very loud.",
+            "headline": "The Mechanical Nightmare",
+            "speech": "Oh dear, the intake gears are jammed with dill sprigs and now it is vibrating at an alarming frequency!",
             "visual": "signal",
-            "label": "Building the Fix",
+            "label": "Malfunction",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby frantically waves his hands at the smoking brass robot while red warning lights flash rapidly above the market stall.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Desperate Build",
+            "speech": "Quickly hand me that oversized monkey wrench before the containment valve completely explodes from excessive internal pressure!",
+            "visual": "ship",
+            "label": "Emergency Repair",
             "story_beat": "build",
-            "visual_prompt": "Martha sitting at her wooden market bench, screwing tiny metal reeds into a carved purple turnip.",
+            "visual_prompt": "Barnaby stands on a wooden stool, holding a heavy wrench, trying to tighten a large bolt on top of the rumbling machine.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Unexpected Stampede",
-            "speech": "Why are fifty horned goats running through the fruit displays and heading directly toward our turnip stand?",
+            "headline": "The Salty Payoff",
+            "speech": "Well, on the bright side, we certainly have enough crushed pickle paste to pave the entire town square twice over.",
             "visual": "forest",
-            "label": "The Goat Twist",
-            "story_beat": "twist",
-            "visual_prompt": "Martha and her assistant dodging a herd of curious goats stampeding past stacked wooden crates of apples.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Shepherd's Market",
-            "speech": "They love the tone! We are no longer selling vegetables; we are running the finest livestock accessory shop.",
-            "visual": "door",
-            "label": "The Grand Payoff",
+            "label": "The Aftermath",
             "story_beat": "payoff",
-            "visual_prompt": "Martha smiling brightly behind a banner reading Goat-Tone Turnips, handing whistles to smiling shepherds.",
+            "visual_prompt": "Barnaby sits miserably on an empty crate, covered in green relish, looking out over a messy market flooded with bright green brine.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Inventing a noisy turnip whistle to boost sales while annoying the local merchants.",
-        "decisive_choice": "Re-routing the whistle's air flow to mimic the mating call of a mountain goat.",
-        "resolution": "Her stall becomes the exclusive trading post for local shepherd buyers and prize goats.",
+        "central_conflict": "Barnaby tests his dangerous mechanical slicer in a crowded farmers market.",
+        "decisive_choice": "Barnaby pulls the emergency lever to dump ten gallons of brine.",
+        "resolution": "The market is flooded with salty sludge, ending his career as an engineer.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures and comedic expressions.",
+          "style": "Bright, colorful stop-motion claymation aesthetic with expressive, humorous character designs.",
           "characters": {
-            "Martha": "A determined middle-aged inventor with wild gray hair, wearing a green apron smeared with dirt.",
-            "Assistant": "A tall, nervous young man wearing a striped vest and oversized brass safety goggles."
+            "Barnaby": "A frantic middle-aged inventor with wild ginger hair, oversized round spectacles, a grease-stained lab coat, and striped trousers."
           },
           "locations": {
-            "Market Square": "A bustling, sunlit outdoor market filled with canvas-topped wooden stalls and woven baskets."
+            "Market Square": "A bustling outdoor farmers market with striped canvas awnings, wooden fruit crates, and cobblestone pathways."
           },
           "objects": {
-            "Turnip Whistle": "A large purple rutabaga fitted with a shiny brass mouthpiece and three copper tuning screws."
+            "The Cucumberator": "A towering, clumsy contraption made of mismatched brass pipes, ticking clocks, funnel attachments, and blinking red indicator lamps."
           }
         },
-        "plot_fingerprint": "6f4f7611ae0dee84020d6adf4526c91793167811046349a17edd197e12dbacac"
+        "plot_fingerprint": "fcaaf85e811c202507e074cdc7fe20073e91e65ad286f5e0ac1f9bb2eec2a290"
       },
       "approved": false
     },
     {
-      "candidate_id": "09776180df1305381db0463b",
-      "source_sha256": "48ab56e0ddb0490514d6243291f2a016414f6d4e8986ade9a2a850bb94f8e6d8",
+      "candidate_id": "b23cda3dad71db2378b9492d",
+      "source_sha256": "fbaac591658ec9851c57b6667506056d8704ce0063d9723d89ee7b36cd320ce5",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-1d552f72a1d126e6d19c",
-        "title": "The Midnight Ticket Mismatch",
-        "hook": "The Dropped Ticket",
-        "question": "Can a misplaced train ticket and a stray railway dog prevent a historic steam locomotive from departing down the wrong line?",
-        "answer": "By deciphering the conductor's dropped punch card and following the stray dog, the young traveler switches the manual track lever just in time.",
+        "content_id": "rayvan-gemini-6666499275998ef2f3d2",
+        "title": "The Great Bakery Baseball Derby",
+        "hook": "The Blocked Path",
+        "question": "Can an ingenious pastry delivery pulley save the neighborhood softball championship?",
+        "answer": "Yes, by rigging a motorized flour chute to bypass the steep ravine.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -109,81 +108,81 @@
         ],
         "story_beats": [
           {
-            "headline": "The Dropped Ticket",
-            "speech": "Look closely at this punched ticket! The platform stamp shows the midnight express is heading straight into the quarry line.",
-            "visual": "signal",
-            "label": "Clue Discovery",
-            "story_beat": "reveal",
-            "visual_prompt": "A young traveler in a tweed coat kneels under a blinking railway signal, examining a dropped red ticket with worried expression.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Stray Guide",
-            "speech": "Stay back, little dog! You cannot cross these tracks unless you know a shortcut to the central lever house.",
+            "headline": "The Blocked Path",
+            "speech": "Mud has completely sealed off the canyon bridge, trapping our softball gear on the far side of the valley.",
             "visual": "forest",
-            "label": "Furry Assistant",
+            "label": "Blocked Bridge",
+            "story_beat": "reveal",
+            "visual_prompt": "Marcus stands in a dense muddy forest staring at a collapsed wooden bridge with a disappointed expression, holding a dented catcher's mitt in his left hand.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Bakery Blueprint",
+            "speech": "We can repurpose this baker's flour transport winch to shoot our equipment baskets safely across the deep ravine.",
+            "visual": "robot",
+            "label": "Winch Setup",
             "story_beat": "build",
-            "visual_prompt": "A scruffy terrier wearing a torn stationmaster scarf barks near the edge of the overgrown railway forest, beckoning the traveler forward.",
+            "visual_prompt": "Marcus and Elena assemble a mechanical pulley and steel cable inside a dusty rustic bakery kitchen, wearing flour-dusted aprons while clutching iron wrenches.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Heavy Iron",
-            "speech": "Push with all your weight against the frozen iron gear before the steam whistle blows its final warning.",
-            "visual": "door",
-            "label": "Manual Override",
+            "headline": "High Tension Launch",
+            "speech": "Pull the safety release lever now before the opposing team forfeits the game and claims our championship trophy.",
+            "visual": "signal",
+            "label": "Launch Signal",
             "story_beat": "mechanism",
-            "visual_prompt": "The traveler struggles to push a heavy wooden and iron access door open inside the dusty lever house, sweating under yellow lantern light.",
+            "visual_prompt": "Elena waves a bright red checkered flag outdoors near a high-tension cable stretching across the canyon while Marcus firmly yanks a heavy brass lever.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Correct Track",
-            "speech": "We did it! The heavy rails have shifted, and the grand locomotive is safely rolling toward the coastal valley.",
-            "visual": "ship",
-            "label": "Safe Departure",
+            "headline": "Play Ball",
+            "speech": "The cargo baskets have landed right on home plate, meaning the big rivalry match can finally begin without delay.",
+            "visual": "door",
+            "label": "Home Plate",
             "story_beat": "payoff",
-            "visual_prompt": "The massive steam locomotive rumbles past a distant harbor ship on the correct tracks while the traveler and dog cheer on the platform.",
+            "visual_prompt": "Cheering townspeople gather around home plate on a green baseball diamond holding open wicker baskets filled with sports equipment under bright afternoon sunlight.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A misprinted schedule points the express train toward an active maintenance zone.",
-        "decisive_choice": "Climb into the rusty signal box to manually override the track switch.",
-        "resolution": "The train safely diverts to the scenic coastal loop while the loyal dog is adopted as station mascot.",
+        "central_conflict": "The rival softball teams cannot reach the neutral field on time because a mudslide blocked the only bridge.",
+        "decisive_choice": "Marcus attaches the game balls to a conveyor belt system originally designed for heavy baguettes.",
+        "resolution": "The sports gear arrives safely across the canyon just in time for the opening pitch.",
         "visual_bible": {
-          "style": "Vintage cinematic railway aesthetic with warm amber lighting and rich textured fabrics.",
+          "style": "Animated family-friendly cinematic style with warm lighting and rich textures",
           "characters": {
-            "Traveler": "A curious teenager wearing a herringbone tweed coat, round spectacles, and a knitted blue scarf.",
-            "StationDog": "A scruffy terrier with golden-brown fur and a tattered red stationmaster scarf tied around its neck."
+            "Marcus": "A determined teenager with curly brown hair, wearing a blue baseball jersey and a flour-dusted apron.",
+            "Elena": "A resourceful young baker with braided dark hair, wearing a green checkered vest and rugged work gloves."
           },
           "locations": {
-            "Platform": "A bustling 1950s railway station with arched iron beams, steam clouds, and vintage clock faces.",
-            "LeverHouse": "A cramped, dusty mechanical cabin filled with brass gears, levers, and glowing oil lanterns."
+            "forest": "A lush, dense valley forest featuring muddy paths and a collapsed wooden bridge crossing a wide river.",
+            "bakery": "A rustic, stone-walled bakery filled with wooden countertops, sacks of flour, and complex mechanical winches."
           },
           "objects": {
-            "RedTicket": "A stiff cardboard railway ticket stamped with faded purple ink and a jagged corner.",
-            "TrackLever": "A heavy cast-iron lever with a polished brass ball handle and grease-stained base."
+            "conveyor_belt": "A long motorized rubber belt system fitted with sturdy steel hooks designed for carrying heavy sacks.",
+            "catcher_mitt": "A heavily worn, dark brown leather baseball mitt with visible scuffs and mended stitching."
           }
         },
-        "plot_fingerprint": "c34f544842c96d9f41aaf7e50aa9a914e072175549e48825c4b1d80a95f27ee2"
+        "plot_fingerprint": "9a143c65176bb3ece5b834b03df7c19b519c37bd527a03ed5f0c22c0607eb537"
       },
       "approved": false
     },
     {
-      "candidate_id": "18dbb0203a07fc175a11e619",
-      "source_sha256": "179d90b2f267955e345485a41b2af101d912a0a92417010f9d42ed4629a3a067",
+      "candidate_id": "1f19327a2775e931de5c83a9",
+      "source_sha256": "f61b1f8e700b80b35d29ceeee960762b69acdcecd25c70d8e714181a77befc6c",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-38c44f1a5abe905f240e",
-        "title": "The Resonance Weld",
-        "hook": "The Warning Alarm",
-        "question": "Can the crew repair the hull breach using harmonic resonance before atmospheric pressure fails?",
-        "answer": "Yes, by synchronizing their pulses to the engine's vibration.",
+        "content_id": "rayvan-gemini-10406732b4447f5050b2",
+        "title": "The Midnight Express Misdirection",
+        "hook": "The Locked Luggage",
+        "question": "Can a misplaced trunk reveal a secret train schedule before midnight?",
+        "answer": "Yes, by discovering the hidden lever inside the stationmasters desk.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -191,64 +190,65 @@
         ],
         "story_beats": [
           {
-            "headline": "The Warning Alarm",
-            "speech": "We cannot wait for the automated drone! If we do not manually tune the dampener now, the whole bulkhead collapses.",
-            "visual": "ship",
-            "label": "Breach Detected",
+            "headline": "The Locked Luggage",
+            "speech": "Look closely at this strange metal container resting right on platform four, because nobody owns the combination.",
+            "visual": "door",
+            "label": "The Discovery",
             "story_beat": "reveal",
-            "visual_prompt": "Commander Vesper stands inside the cramped maintenance bay of the starship, pointing a glowing diagnostic tool at a fractured metal bulkhead while warning lights flash orange across the steel walls.",
+            "visual_prompt": "Arthur stands in a Victorian railway station staring at a heavy iron door embedded in a vintage trunk, wearing a grey wool coat and round spectacles, holding a glowing lantern.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Divergent Plan",
-            "speech": "The manual method is far too risky without a secondary seal. We must run the secondary diagnostic sequence instead.",
+            "headline": "The Unexpected Ally",
+            "speech": "That clever stray feline wearing the tiny brass collar knows every hidden mechanism beneath these wooden floorboards.",
             "visual": "robot",
-            "label": "Protocol Dispute",
+            "label": "The Helper",
             "story_beat": "build",
-            "visual_prompt": "Chief engineer Jax gestures angrily toward a hovering utility robot with a cracked optic sensor, holding a bulky circuit pad while standing near a smoking primary power conduit.",
+            "visual_prompt": "A mechanical stray cat with copper gears and glowing blue optical lenses sits atop a wooden bench in the station waiting room, looking directly at Arthur while holding a brass key in its paw.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Critical Synchronization",
-            "speech": "Hold the stabilizer steady while I match this frequency to the hull vibration. Do not let go of the grip.",
+            "headline": "The Hidden Switch",
+            "speech": "Pulling this lever shifts the entire track alignment away from the blocked northern tunnel instantly.",
             "visual": "signal",
-            "label": "Frequency Match",
+            "label": "The Mechanism",
             "story_beat": "mechanism",
-            "visual_prompt": "Commander Vesper and Jax both grip opposite sides of a vibrating plasma torch that emits a pulsing green frequency wave against the torn metal seam of the spacecraft hull.",
+            "visual_prompt": "Arthur pulls a massive brass lever inside the dusty stationmaster office, while flashing semaphore signals outside cast green light through the tall grimy windows.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Seal Holds",
-            "speech": "Look at that pressure gauge climb back to normal. We actually pulled it off together just in time.",
-            "visual": "planet",
-            "label": "Atmosphere Restored",
+            "headline": "The Safe Departure",
+            "speech": "The express train rolls safely past the platform at last, thanking our brave little feline friend for saving the night.",
+            "visual": "ship",
+            "label": "The Triumph",
             "story_beat": "payoff",
-            "visual_prompt": "Commander Vesper and Jax stand side by side smiling in the repaired maintenance bay, looking through a reinforced viewport at a bright blue planet shining peacefully against the black void of space.",
+            "visual_prompt": "A steam locomotive styled like an antique airship floats smoothly above the railway tracks, passing a joyful Arthur and the mechanical cat cheering on platform one.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Disagreement between manual override and automated repair protocols during a hull breach",
-        "decisive_choice": "Manual calibration of the resonance dampener under extreme vibration",
-        "resolution": "The hull seals securely, restoring stable atmospheric pressure to the sector",
+        "central_conflict": "A locked luggage trunk blocking the dispatch tracks threatens to derail the midnight express.",
+        "decisive_choice": "Arthur trades his prized pocket watch with a stray station cat for the forgotten vault key.",
+        "resolution": "The tracks are cleared in time, earning Arthur the honorary title of chief conductor.",
         "visual_bible": {
-          "style": "Cinematic sci-fi realism with gritty industrial textures and high-contrast atmospheric lighting",
+          "style": "Cinematic Victorian steampunk illustration with rich textures, moody lighting, and warm amber tones.",
           "characters": {
-            "Commander Vesper": "A determined human woman in her late thirties with braided dark hair, wearing a scuffed charcoal-gray jumpsuit with yellow safety stripes and heavy magnetic boots.",
-            "Chief engineer Jax": "A pragmatic humanoid mechanic with short silver hair, wearing an oil-stained navy-blue utility vest over a thermal undershirt and thick protective gloves."
+            "Arthur": "An elderly railway clerk with a white mustache, wearing a tailored charcoal wool waistcoat, a bowler hat, and round brass spectacles.",
+            "Claws": "A sleek feline automaton constructed from polished copper and brass, featuring glowing teal optical sensors and a leather collar."
           },
           "locations": {
-            "starship maintenance bay": "A cramped, utilitarian compartment lined with exposed wiring, steel storage lockers, and a circular airlock door leading to the exterior hull."
+            "Grand Station": "A cavernous Victorian railway terminal featuring arched iron girders, slate-tiled floors, and billowing steam from locomotive vents."
           },
           "objects": {
-            "diagnostic tool": "A handheld metallic cylinder with a glowing blue digital screen and a triangular emitter tip.",
-            "plasma torch": "A heavy industrial welding device made of matte black steel with dual handgrips and a glowing green plasma nozzle."
+            "lantern": "A heavy brass hurricane lantern casting a warm amber glow.",
+            "lever": "A tall cast-iron control lever topped with a polished red porcelain sphere.",
+            "trunk": "A reinforced leather-bound travel trunk featuring brass corner brackets and an unnumbered combination lock."
           }
         },
-        "plot_fingerprint": "85eb4372d792afe53a35d8db9dbbe93eb0a14752b1e7d16e66adf249e17497eb"
+        "plot_fingerprint": "d369c5cb8c7c45a88ea6a43d1dba8497bbc0335ae916a297006942c4c44a3e1b"
       },
       "approved": false
     }
