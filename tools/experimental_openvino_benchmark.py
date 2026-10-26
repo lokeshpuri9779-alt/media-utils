@@ -11,11 +11,13 @@ APPROVED_MODELS = {
     "preconverted": "piimaila/stable-diffusion-v1-5-openvino",
     "export": "stable-diffusion-v1-5/stable-diffusion-v1-5",
 }
-PROMPT = ("one single bright red toy fire truck, viewed from the side, parked on a "
-          "simple sunlit road, one green tree and blue sky in the background, "
-          "clean children\u0027s picture-book illustration, crisp shapes, full vehicle in frame")
+PROMPT = ("a single small red toy fire truck in a children\u0027s storybook illustration, "
+          "wide view of the ENTIRE fire truck with all wheels fully visible and plenty of "
+          "empty space around it, centered in the lower half of a portrait composition, "
+          "a simple quiet road, one green tree, clear blue sky, bright clean colors")
 NEGATIVE_PROMPT = ("multiple trucks, extra vehicles, floating objects, duplicate wheels, "
-                   "deformed vehicle, distorted shapes, crowded composition, text, watermark")
+                   "deformed vehicle, distorted shapes, crowded composition, cropped truck, "
+                   "vehicle cut off by frame, photorealistic, text, watermark")
 
 
 def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-openvino/keyframe.png")):
