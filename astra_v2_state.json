@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 39,
-  "confirmed_today": 38,
-  "last_attempt_at": "2026-10-26T14:07:28.394620+00:00",
+  "attempts": 40,
+  "confirmed_today": 39,
+  "last_attempt_at": "2026-10-26T15:31:36.181786+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -4779,16 +4779,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "mjtNyzdp3sE": {
-      "content_id": "rayvan-forge-f5cc3884e184c3ce",
+    },
+    "rayvan-forge-f5cc3884e184c3ce": {
+      "video_id": "mjtNyzdp3sE",
+      "confirmed_at": "2026-10-26T15:23:23.316816+00:00",
       "title": "The Fox and the Missing Star",
-      "day": "2026-10-26",
-      "uploaded_at": "2026-10-26T14:07:30.138623+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-26T14:07:30.138623+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "db22f5644a653a735e1d614ac78ce4df064fb31317c59ce4501bd43eb0e3bc14",
       "story_beats": [
@@ -4829,16 +4827,74 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "LcKV_XPu8iQ": {
+      "content_id": "rayvan-gemini-9ea5e45ecc01266dc10a",
+      "title": "The Badger and the Amber Spore",
+      "day": "2026-10-26",
+      "uploaded_at": "2026-10-26T15:31:37.738762+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "cb037021d39c22c7fa4affa4697a74f755582ea2079cd7d2061a6bc79c378bd4",
+      "story_beats": [
+        {
+          "headline": "Discovery of the Chasm",
+          "speech": "Look across the deep ravine, Bramble! The amber spores are fading fast in the freezing shadow of the ridge.",
+          "visual": "forest",
+          "label": "The Chasm Edge",
+          "story_beat": "reveal",
+          "visual_prompt": "Felix the red fox points his paw across a misty pine forest gorge toward a glowing amber spore, standing beside Bramble the stout badger holding a wooden walking stick.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Root Mechanism",
+          "speech": "We must anchor this heavy ancient root firmly into the stone crevice before the evening frost sets in.",
+          "visual": "door",
+          "label": "Bridging the Gap",
+          "story_beat": "build",
+          "visual_prompt": "Bramble the badger wedges a thick pine root into a rocky threshold while Felix the fox pulls a woven hemp rope tied securely around the center.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Dangerous Crossing",
+          "speech": "Hold fast to the anchor, my friend! I am stepping onto the swinging bridge now to reach the soil.",
+          "visual": "signal",
+          "label": "Crossing the Gorge",
+          "story_beat": "twist",
+          "visual_prompt": "Felix the fox carefully balances on the swaying root bridge over the dark chasm, looking back at Bramble who flashes a glowing firefly signal lamp in his teeth.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Planting the Spore",
+          "speech": "We did it together, Bramble! The amber spore is safe in the dark earth, and our valley will bloom.",
+          "visual": "forest",
+          "label": "The Safe Valley",
+          "story_beat": "payoff",
+          "visual_prompt": "Felix and Bramble stand side by side in a lush forest clearing, watching a brilliant amber spore sprout bright golden leaves from the rich soil.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A deep seasonal chasm blocks access to the fertile valley, threatening the extinction of the luminescent amber spores.",
+      "decisive_choice": "Bramble the badger chooses to anchor a heavy root bridge with his own body while Felix the fox sprints across.",
+      "resolution": "Felix successfully crosses the trembling root, plants the amber spore in the rich soil, and pulls Bramble across to safety.",
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-26T13:56:29.696724+00:00",
+  "last_preflight_at": "2026-10-26T15:23:23.012725+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-26T14:07:30.607497+00:00",
+    "at": "2026-10-26T15:31:38.183642+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -10525,10 +10581,64 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-9ea5e45ecc01266dc10a": {
+      "at": "2026-10-26T15:31:36.181768+00:00",
+      "title": "The Badger and the Amber Spore",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "cb037021d39c22c7fa4affa4697a74f755582ea2079cd7d2061a6bc79c378bd4",
+      "story_beats": [
+        {
+          "headline": "Discovery of the Chasm",
+          "speech": "Look across the deep ravine, Bramble! The amber spores are fading fast in the freezing shadow of the ridge.",
+          "visual": "forest",
+          "label": "The Chasm Edge",
+          "story_beat": "reveal",
+          "visual_prompt": "Felix the red fox points his paw across a misty pine forest gorge toward a glowing amber spore, standing beside Bramble the stout badger holding a wooden walking stick.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Root Mechanism",
+          "speech": "We must anchor this heavy ancient root firmly into the stone crevice before the evening frost sets in.",
+          "visual": "door",
+          "label": "Bridging the Gap",
+          "story_beat": "build",
+          "visual_prompt": "Bramble the badger wedges a thick pine root into a rocky threshold while Felix the fox pulls a woven hemp rope tied securely around the center.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Dangerous Crossing",
+          "speech": "Hold fast to the anchor, my friend! I am stepping onto the swinging bridge now to reach the soil.",
+          "visual": "signal",
+          "label": "Crossing the Gorge",
+          "story_beat": "twist",
+          "visual_prompt": "Felix the fox carefully balances on the swaying root bridge over the dark chasm, looking back at Bramble who flashes a glowing firefly signal lamp in his teeth.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Planting the Spore",
+          "speech": "We did it together, Bramble! The amber spore is safe in the dark earth, and our valley will bloom.",
+          "visual": "forest",
+          "label": "The Safe Valley",
+          "story_beat": "payoff",
+          "visual_prompt": "Felix and Bramble stand side by side in a lush forest clearing, watching a brilliant amber spore sprout bright golden leaves from the rich soil.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A deep seasonal chasm blocks access to the fertile valley, threatening the extinction of the luminescent amber spores.",
+      "decisive_choice": "Bramble the badger chooses to anchor a heavy root bridge with his own body while Felix the fox sprints across.",
+      "resolution": "Felix successfully crosses the trembling root, plants the amber spore in the rich soil, and pulls Bramble across to safety.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-26T14:07:30.607420+00:00",
+    "at": "2026-10-26T15:31:38.183561+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -10539,21 +10649,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-26T14:07:30.607483+00:00",
+    "at": "2026-10-26T15:31:38.183627+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-26T13:56:52.334581+00:00",
+    "at": "2026-10-26T15:23:47.251811+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-f5cc3884e184c3ce",
-    "video_url": "https://www.youtube.com/watch?v=mjtNyzdp3sE",
+    "content_id": "rayvan-gemini-9ea5e45ecc01266dc10a",
+    "video_url": "https://www.youtube.com/watch?v=LcKV_XPu8iQ",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-26T14:07:30.607162+00:00",
+    "at": "2026-10-26T15:31:38.183295+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -10565,12 +10675,12 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-26T14:07:30.607412+00:00",
+    "at": "2026-10-26T15:31:38.183553+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 36,
+        "eligible": 39,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3,
@@ -10584,21 +10694,21 @@
           "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
         },
         "seen": 11,
-        "total": 169
+        "total": 172
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 169,
+        "before": 172,
         "fingerprint": 0,
         "id": 11,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 158,
+        "remaining": 161,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 158,
-        "remaining": 36
+        "pool": 161,
+        "remaining": 39
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
