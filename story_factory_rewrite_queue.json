@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "374091b599410f6a3ebe4dbf",
-      "source_sha256": "a6dcb5993dd1c14c69b214ef3db0f4823b04af89f51270bc840ef9ebb5c60dee",
+      "candidate_id": "381168a1ed6a20becd4f836d",
+      "source_sha256": "60e12429106645aabffa9e5f8100a900fb5cd2fb54e0685e25123b94e7eca07d",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-5a8fcd035e68785716ea",
-        "title": "The Grand Pickle Pulverizer Debacle",
-        "hook": "The Great Reveal",
-        "question": "Can an overly complex invention save a failing pickle stall?",
-        "answer": "No, because automated violence only yields very sad relish.",
+        "content_id": "rayvan-gemini-c74e27169c36488c2e6d",
+        "title": "The Great Onion Chopper Debacle",
+        "hook": "The Whirring Menace",
+        "question": "Can Barnaby's chaotic slicing invention save his market stall before the inspector arrives?",
+        "answer": "Yes, by accidentally turning the entire vegetable cart into a brilliant, caramelized soup fountain.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,78 +29,79 @@
         ],
         "story_beats": [
           {
-            "headline": "The Great Reveal",
-            "speech": "Behold the Cucumberator three thousand! It slices, dices, and emulsifies your favorite fermented gourds in mere milliseconds!",
+            "headline": "The Whirring Menace",
+            "speech": "Behold my magnificent culinary marvel! It dices, it slices, and it only occasionally hurls root vegetables at innocent bystanders.",
             "visual": "robot",
-            "label": "First Prototype",
+            "label": "Automaton Chaos",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly beside his whirring brass robot in a sunny outdoor market square, holding a wooden clipboard and smiling.",
+            "visual_prompt": "Barnaby stands nervously in his bustling market stall, pointing at a clunky copper robot violently shredding onions while holding a wrench.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Mechanical Nightmare",
-            "speech": "Oh dear, the intake gears are jammed with dill sprigs and now it is vibrating at an alarming frequency!",
+            "headline": "Spicing Up the Gears",
+            "speech": "We need more momentum to stabilize the blades before the inspector tastes the bitter tears of failure today.",
             "visual": "signal",
-            "label": "Malfunction",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby frantically waves his hands at the smoking brass robot while red warning lights flash rapidly above the market stall.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Desperate Build",
-            "speech": "Quickly hand me that oversized monkey wrench before the containment valve completely explodes from excessive internal pressure!",
-            "visual": "ship",
-            "label": "Emergency Repair",
+            "label": "Gear Tuning",
             "story_beat": "build",
-            "visual_prompt": "Barnaby stands on a wooden stool, holding a heavy wrench, trying to tighten a large bolt on top of the rumbling machine.",
+            "visual_prompt": "Barnaby frantically turns a large brass valve on the side of the copper robot, while onions fly wildly through the air.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Salty Payoff",
-            "speech": "Well, on the bright side, we certainly have enough crushed pickle paste to pave the entire town square twice over.",
-            "visual": "forest",
-            "label": "The Aftermath",
+            "headline": "The Sweet Correction",
+            "speech": "If logic fails us completely, raw sugar must save the day from this terrible, crying disaster right now!",
+            "visual": "ship",
+            "label": "Sugar Dump",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby dumps a heavy sack of white sugar straight into the smoking funnel of the robot, eyes wide with desperate panic.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Soup Triumph",
+            "speech": "Magnificent! The finest caramelized soup in the entire province, delivered straight from a mechanical disaster zone into our bowls.",
+            "visual": "door",
+            "label": "Gourmet Success",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby sits miserably on an empty crate, covered in green relish, looking out over a messy market flooded with bright green brine.",
+            "visual_prompt": "The severe health inspector smiles delightedly, eating steaming soup directly out of a giant wooden bowl held by a relieved Barnaby.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby tests his dangerous mechanical slicer in a crowded farmers market.",
-        "decisive_choice": "Barnaby pulls the emergency lever to dump ten gallons of brine.",
-        "resolution": "The market is flooded with salty sludge, ending his career as an engineer.",
+        "central_conflict": "Barnaby's erratic onion-slicing automaton threatens to destroy his vegetable stall before the health inspector reviews it.",
+        "decisive_choice": "Barnaby overrides the safety lock and dumps a crate of sugar directly into the spinning blade mechanism.",
+        "resolution": "The explosive reaction creates an instant gourmet onion soup that wins the inspector's highest award.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion claymation aesthetic with expressive, humorous character designs.",
+          "style": "Bright, colorful 3D animated comedy style with exaggerated expressions and slapstick mechanical designs.",
           "characters": {
-            "Barnaby": "A frantic middle-aged inventor with wild ginger hair, oversized round spectacles, a grease-stained lab coat, and striped trousers."
+            "Barnaby": "An eccentric inventor with wild ginger hair, a grease-stained apron, and goggles perpetually pushed up onto his forehead.",
+            "Inspector": "A stern, impeccably dressed official with a monocle, a clipboard, and a very serious demeanor."
           },
           "locations": {
-            "Market Square": "A bustling outdoor farmers market with striped canvas awnings, wooden fruit crates, and cobblestone pathways."
+            "market_stall": "A crowded, sunlit medieval marketplace overflowing with wooden crates of colorful vegetables and hanging banners."
           },
           "objects": {
-            "The Cucumberator": "A towering, clumsy contraption made of mismatched brass pipes, ticking clocks, funnel attachments, and blinking red indicator lamps."
+            "copper_robot": "A steampunk-inspired onion slicing automaton made of polished copper tubes, spinning steel blades, and a smoky exhaust funnel."
           }
         },
-        "plot_fingerprint": "fcaaf85e811c202507e074cdc7fe20073e91e65ad286f5e0ac1f9bb2eec2a290"
+        "plot_fingerprint": "a367dcbc640c9c792d2e9e6c1baa8aaea3b4e4d51097a3865609644826842f3c"
       },
       "approved": false
     },
     {
-      "candidate_id": "b23cda3dad71db2378b9492d",
-      "source_sha256": "fbaac591658ec9851c57b6667506056d8704ce0063d9723d89ee7b36cd320ce5",
+      "candidate_id": "5108842f83f86fa5498b102f",
+      "source_sha256": "9bb042327783aa3e74f7f18d541f4a6cb7e0e1d1f4f37b2aac52e991488755f9",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-6666499275998ef2f3d2",
-        "title": "The Great Bakery Baseball Derby",
-        "hook": "The Blocked Path",
-        "question": "Can an ingenious pastry delivery pulley save the neighborhood softball championship?",
-        "answer": "Yes, by rigging a motorized flour chute to bypass the steep ravine.",
+        "content_id": "rayvan-gemini-82d7cdb3e5fcf62bed11",
+        "title": "The Canopy Chorus",
+        "hook": "The Divided Path",
+        "question": "Can two different forest dwellers combine unique talents to cross a flooded ravine?",
+        "answer": "By weaving resonance reeds with heavy wooden logs, they construct a singing suspension bridge.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -108,81 +109,80 @@
         ],
         "story_beats": [
           {
-            "headline": "The Blocked Path",
-            "speech": "Mud has completely sealed off the canyon bridge, trapping our softball gear on the far side of the valley.",
+            "headline": "The Divided Path",
+            "speech": "We cannot leap across this roaring current alone. Our usual pathways are completely cut off by the heavy seasonal flood.",
             "visual": "forest",
-            "label": "Blocked Bridge",
+            "label": "The Chasm",
             "story_beat": "reveal",
-            "visual_prompt": "Marcus stands in a dense muddy forest staring at a collapsed wooden bridge with a disappointed expression, holding a dented catcher's mitt in his left hand.",
+            "visual_prompt": "Wide shot of a deep, misty forest canyon with a rushing river below. Lyra, a fox-like sprite in green moss-woven garments, stands on the left cliff edge looking down with worried green eyes. She holds a bunch of empty hollow reeds in her right paw.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Bakery Blueprint",
-            "speech": "We can repurpose this baker's flour transport winch to shoot our equipment baskets safely across the deep ravine.",
-            "visual": "robot",
-            "label": "Winch Setup",
-            "story_beat": "build",
-            "visual_prompt": "Marcus and Elena assemble a mechanical pulley and steel cable inside a dusty rustic bakery kitchen, wearing flour-dusted aprons while clutching iron wrenches.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "High Tension Launch",
-            "speech": "Pull the safety release lever now before the opposing team forfeits the game and claims our championship trophy.",
-            "visual": "signal",
-            "label": "Launch Signal",
-            "story_beat": "mechanism",
-            "visual_prompt": "Elena waves a bright red checkered flag outdoors near a high-tension cable stretching across the canyon while Marcus firmly yanks a heavy brass lever.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Play Ball",
-            "speech": "The cargo baskets have landed right on home plate, meaning the big rivalry match can finally begin without delay.",
+            "headline": "A Heavy Discovery",
+            "speech": "My dense ironwood logs are strong enough to span the gap, but they are far too heavy for me to lift and position properly.",
             "visual": "door",
-            "label": "Home Plate",
+            "label": "The Timber",
+            "story_beat": "build",
+            "visual_prompt": "Medium shot in a dense grove. Barnaby, a large bear-like creature with thick brown fur and blue overalls, struggles to push a massive ironwood log with both paws. Lyra stands nearby pointing at the hollow reeds resting on a mossy boulder.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Resonant Alignment",
+            "speech": "If I bind your sturdy timbers together with my acoustic reeds, the wind will sing through the structure and guide us safely.",
+            "visual": "signal",
+            "label": "The Blueprint",
+            "story_beat": "mechanism",
+            "visual_prompt": "Close-up of Lyra and Barnaby working together on the forest floor. Lyra's paws expertly weave hollow resonance reeds around the joints of heavy ironwood logs. Barnaby uses a thick vine tie held tightly in his left claw to secure the frame.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Crossing the Melody",
+            "speech": "Listen to the bridge sing in the wind as we walk across together. We made it to the other side safely at last.",
+            "visual": "forest",
+            "label": "The Crossing",
             "story_beat": "payoff",
-            "visual_prompt": "Cheering townspeople gather around home plate on a green baseball diamond holding open wicker baskets filled with sports equipment under bright afternoon sunlight.",
+            "visual_prompt": "Full shot of Lyra and Barnaby walking together across a completed suspension bridge made of logs and reeds spanning the misty canyon. Both characters smile warmly, glowing softly under the canopy light, with the river rushing safely far below.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "The rival softball teams cannot reach the neutral field on time because a mudslide blocked the only bridge.",
-        "decisive_choice": "Marcus attaches the game balls to a conveyor belt system originally designed for heavy baguettes.",
-        "resolution": "The sports gear arrives safely across the canyon just in time for the opening pitch.",
+        "central_conflict": "A swollen river separates the seed-gatherer from her nesting ground.",
+        "decisive_choice": "To merge their collection of hollow resonance reeds with sturdy structural timbers.",
+        "resolution": "A resonant bridge is built, allowing safe passage across the roaring rapids.",
         "visual_bible": {
-          "style": "Animated family-friendly cinematic style with warm lighting and rich textures",
+          "style": "Whimsical stop-motion felt and wood texture aesthetic with vibrant forest greens and warm amber lighting.",
           "characters": {
-            "Marcus": "A determined teenager with curly brown hair, wearing a blue baseball jersey and a flour-dusted apron.",
-            "Elena": "A resourceful young baker with braided dark hair, wearing a green checkered vest and rugged work gloves."
+            "Lyra": "A small, nimble fox-like sprite with bright amber fur, wearing a tailored tunic made of woven green moss and tiny acorn buttons.",
+            "Barnaby": "A gentle giant bear-like creature with thick chocolate-brown fur, wearing durable indigo denim overalls with deep front pockets."
           },
           "locations": {
-            "forest": "A lush, dense valley forest featuring muddy paths and a collapsed wooden bridge crossing a wide river.",
-            "bakery": "A rustic, stone-walled bakery filled with wooden countertops, sacks of flour, and complex mechanical winches."
+            "The Chasm": "A steep, moss-draped forest ravine bisected by a turbulent, rushing white-water river beneath towering ancient pines."
           },
           "objects": {
-            "conveyor_belt": "A long motorized rubber belt system fitted with sturdy steel hooks designed for carrying heavy sacks.",
-            "catcher_mitt": "A heavily worn, dark brown leather baseball mitt with visible scuffs and mended stitching."
+            "resonance_reeds": "Long, hollow, golden-hued hollow bamboo-like reeds that emit a musical chime when wind passes through them.",
+            "ironwood_logs": "Dark, heavy, weathered timber logs with rough bark and exceptional structural strength."
           }
         },
-        "plot_fingerprint": "9a143c65176bb3ece5b834b03df7c19b519c37bd527a03ed5f0c22c0607eb537"
+        "plot_fingerprint": "417df20603a53f207adcd3237341183047553835b7d76a88f81dfecaa8605a5c"
       },
       "approved": false
     },
     {
-      "candidate_id": "1f19327a2775e931de5c83a9",
-      "source_sha256": "f61b1f8e700b80b35d29ceeee960762b69acdcecd25c70d8e714181a77befc6c",
+      "candidate_id": "390e7bb79c69fc9e665866a6",
+      "source_sha256": "ee0aa8cac08ca90427cf1fe7fce4886fe64634a86f6082662a54c208964206a4",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-10406732b4447f5050b2",
-        "title": "The Midnight Express Misdirection",
-        "hook": "The Locked Luggage",
-        "question": "Can a misplaced trunk reveal a secret train schedule before midnight?",
-        "answer": "Yes, by discovering the hidden lever inside the stationmasters desk.",
+        "content_id": "rayvan-gemini-b05ab4a6c8824bdb3d80",
+        "title": "The Mud-Slinging Marathon of Oakhaven",
+        "hook": "The Turf Monopoly",
+        "question": "How did the underdog gardeners defeat the reigning turf-ball champions?",
+        "answer": "By engineering a bouncing turnip that outmaneuvered the heavy rubber balls.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -190,65 +190,65 @@
         ],
         "story_beats": [
           {
-            "headline": "The Locked Luggage",
-            "speech": "Look closely at this strange metal container resting right on platform four, because nobody owns the combination.",
-            "visual": "door",
-            "label": "The Discovery",
+            "headline": "The Turf Monopoly",
+            "speech": "For ten consecutive seasons, the elite lawn bowling squad claimed every square inch of the municipal park for themselves.",
+            "visual": "forest",
+            "label": "The Arena",
             "story_beat": "reveal",
-            "visual_prompt": "Arthur stands in a Victorian railway station staring at a heavy iron door embedded in a vintage trunk, wearing a grey wool coat and round spectacles, holding a glowing lantern.",
+            "visual_prompt": "Wide shot of the lush green community park surrounded by ancient oaks, with captain Silas standing proudly beside a rack of polished lawn bowling spheres.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Unexpected Ally",
-            "speech": "That clever stray feline wearing the tiny brass collar knows every hidden mechanism beneath these wooden floorboards.",
+            "headline": "The Root Invention",
+            "speech": "Determined to break the monopoly, our gardener collective spent sleepless nights carving springy turnips into aerodynamic spheres.",
             "visual": "robot",
-            "label": "The Helper",
+            "label": "The Workshop",
             "story_beat": "build",
-            "visual_prompt": "A mechanical stray cat with copper gears and glowing blue optical lenses sits atop a wooden bench in the station waiting room, looking directly at Arthur while holding a brass key in its paw.",
+            "visual_prompt": "Medium shot of inventor Maya in her cluttered garden shed, carefully carving a large white turnip with a specialized lathe tool under a bright overhead lamp.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Hidden Switch",
-            "speech": "Pulling this lever shifts the entire track alignment away from the blocked northern tunnel instantly.",
+            "headline": "The Unpredictable Bounce",
+            "speech": "During the championship match, the peculiar vegetable projectiles bounced off the uneven turf in wildly unpredictable arcs.",
             "visual": "signal",
-            "label": "The Mechanism",
+            "label": "The Match",
             "story_beat": "mechanism",
-            "visual_prompt": "Arthur pulls a massive brass lever inside the dusty stationmaster office, while flashing semaphore signals outside cast green light through the tall grimy windows.",
+            "visual_prompt": "Action shot on the sunlit lawn where Silas watches in utter astonishment as Maya's carved turnip bounces over his head toward the target marker.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Safe Departure",
-            "speech": "The express train rolls safely past the platform at last, thanking our brave little feline friend for saving the night.",
-            "visual": "ship",
-            "label": "The Triumph",
+            "headline": "A Shared Victory",
+            "speech": "Rather than demanding sole ownership, both factions agreed to split the park and establish a unified seasonal tournament.",
+            "visual": "door",
+            "label": "The Treaty",
             "story_beat": "payoff",
-            "visual_prompt": "A steam locomotive styled like an antique airship floats smoothly above the railway tracks, passing a joyful Arthur and the mechanical cat cheering on platform one.",
+            "visual_prompt": "Medium close-up of Maya and Silas shaking hands in front of the newly painted park entrance gates, holding half a turnip trophy between them.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A locked luggage trunk blocking the dispatch tracks threatens to derail the midnight express.",
-        "decisive_choice": "Arthur trades his prized pocket watch with a stray station cat for the forgotten vault key.",
-        "resolution": "The tracks are cleared in time, earning Arthur the honorary title of chief conductor.",
+        "central_conflict": "dispute over annual community park turf allocation",
+        "decisive_choice": "substituting standard turf balls with modified root vegetables",
+        "resolution": "shared park management and an integrated sports league",
         "visual_bible": {
-          "style": "Cinematic Victorian steampunk illustration with rich textures, moody lighting, and warm amber tones.",
+          "style": "Bright, vibrant animated stop-motion aesthetic with highly textured natural materials and warm, golden-hour lighting.",
           "characters": {
-            "Arthur": "An elderly railway clerk with a white mustache, wearing a tailored charcoal wool waistcoat, a bowler hat, and round brass spectacles.",
-            "Claws": "A sleek feline automaton constructed from polished copper and brass, featuring glowing teal optical sensors and a leather collar."
+            "Maya": "An inventive gardener in her late twenties with curly brown hair tied in a bandana, wearing a green apron over a flannel shirt, expressing determination.",
+            "Silas": "The pompous lawn bowling captain with a neatly trimmed mustache, wearing pristine white trousers and a matching club blazer, expressing arrogant confidence."
           },
           "locations": {
-            "Grand Station": "A cavernous Victorian railway terminal featuring arched iron girders, slate-tiled floors, and billowing steam from locomotive vents."
+            "park": "A sprawling community green space featuring manicured lawns, aged oak trees, and a wooden scoreboard at the edge.",
+            "shed": "A rustic wooden workshop packed with clay pots, gardening tools, wood-shaving piles, and glowing work lamps."
           },
           "objects": {
-            "lantern": "A heavy brass hurricane lantern casting a warm amber glow.",
-            "lever": "A tall cast-iron control lever topped with a polished red porcelain sphere.",
-            "trunk": "A reinforced leather-bound travel trunk featuring brass corner brackets and an unnumbered combination lock."
+            "turnip_sphere": "A carved white and purple root vegetable polished to a smooth, semi-gloss finish with aerodynamic ridges.",
+            "bowling_sphere": "A heavy, dark-red polished resin ball bearing the official Oakhaven Club crest in gold leaf."
           }
         },
-        "plot_fingerprint": "d369c5cb8c7c45a88ea6a43d1dba8497bbc0335ae916a297006942c4c44a3e1b"
+        "plot_fingerprint": "f05d5c5d02299473089cb35c65c0ebd964e5e32003f76c884c1921b5b80f0048"
       },
       "approved": false
     }
