@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "faa286d803fa111dcdbc7024",
-      "source_sha256": "e81150a76986e93cb5ca8d6d9d623ee185abedca443d6550f68ed3e3e17a4337",
+      "candidate_id": "54305750306c4b2e7a693880",
+      "source_sha256": "52557d4231081fffd4a762c50c27b61b00b6489b9b04cc29788e346d06a432d2",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-cf6f642fdab15cf5e1a2",
-        "title": "The Great Tomato Launch Fiasco",
-        "hook": "The Catastrophic Inspection",
-        "question": "Can an over-engineered pneumatic fruit launcher survive Saturday market peak hours?",
-        "answer": "Yes, by pivoting from vegetable propulsion to instant artisanal salsa delivery.",
+        "content_id": "rayvan-gemini-529cfd3591af635cbc53",
+        "title": "The Great Turnip Whistle Debacle",
+        "hook": "The Noisy Prototype",
+        "question": "Can an inventor save her failing vegetable stall with a noisy novelty?",
+        "answer": "By tuning the whistle to attract local goats, creating an unexpected new livestock market.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,162 +29,79 @@
         ],
         "story_beats": [
           {
-            "headline": "The Catastrophic Inspection",
-            "speech": "Look closely at this pressure gauge before the entire stall collapses under a wave of flying red debris today.",
+            "headline": "The Noisy Prototype",
+            "speech": "Behold the root-trumpet! It turns every ordinary turnip into a musical marvel for passing shoppers to hear.",
             "visual": "robot",
-            "label": "The Setup",
+            "label": "The Loud Reveal",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby points nervously at a sparking metal automaton in a bustling dusty market square while holding a smoking wrench.",
+            "visual_prompt": "Inventor Martha holding a sputtering brass-fitted turnip in a crowded market square, looking stressed.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Rapid Calibration",
-            "speech": "Hold this copper release valve tightly while I adjust the primary piston to prevent another vegetable explosion across town.",
+            "headline": "Constructing the Valves",
+            "speech": "We must add triple-layered reed valves inside the hollow bulb so the tone stays sharp and very loud.",
             "visual": "signal",
-            "label": "The Tuning",
+            "label": "Building the Fix",
             "story_beat": "build",
-            "visual_prompt": "Barnaby and his assistant frantically twist flashing dials on a large copper device while red tomatoes bounce off nearby canvas awnings.",
+            "visual_prompt": "Martha sitting at her wooden market bench, screwing tiny metal reeds into a carved purple turnip.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Mechanical Pivot",
-            "speech": "Redirect the auxiliary blades downward so the pressure mashes everything into rich paste instead of launching whole fruit blindly.",
-            "visual": "door",
-            "label": "The Shift",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby slams a heavy wooden hatch shut on the pneumatic launcher, trapping a flurry of spinning blades inside the brass chamber.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Salsa Success",
-            "speech": "Step right up and taste the finest fresh market salsa delivered instantly through our high-speed culinary pressure cannon.",
-            "visual": "ship",
-            "label": "The Triumph",
-            "story_beat": "payoff",
-            "visual_prompt": "Happy market customers hold up empty tortilla chips while Barnaby happily serves thick red salsa straight from the polished brass spout.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Barnaby's chaotic pneumatic tomato launcher is terrorizing the vegetable stalls instead of efficiently sorting ripe produce.",
-        "decisive_choice": "Re-routing the high-pressure air valves from heavy launching to direct high-velocity mashing.",
-        "resolution": "A massive crowd of hungry shoppers instantly tastes the freshly pulverized salsa and buys every jar in stock.",
-        "visual_bible": {
-          "style": "Bright stop-motion claymation aesthetic with rich textures and vibrant primary colors",
-          "characters": {
-            "Barnaby": "A frantic inventor with wild gray hair, round brass goggles pushed up on his forehead, wearing a patched tweed vest and soot-stained trousers.",
-            "Assistant_Pip": "A short, cheerful helper wearing a striped blue apron and a cap perpetually tipped backward."
-          },
-          "locations": {
-            "Market_Square": "A sunlit cobblestone plaza crowded with striped market stalls, wooden crates of vegetables, and fluttering canvas awnings."
-          },
-          "objects": {
-            "Pneumatic_Launcher": "A towering contraption made of gleaming copper pipes, brass pressure gauges, ticking clockwork gears, and a large funnel on top."
-          }
-        },
-        "plot_fingerprint": "cfc02b7a0b54e067610c0278bded35690de5b87351d057a859cbdfe9dafad963"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "cec092ab29b5a37b587c8691",
-      "source_sha256": "bcc85fe1ebe9af695a5290b2af085ef87e9c58cbfc1116c933a459f6ea618352",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-0d0be5c843a025cd8fd2",
-        "title": "The Canopy Relay",
-        "hook": "Silent Spires",
-        "question": "How can two different creatures restore the deep woods' communication web before darkness falls completely?",
-        "answer": "By sharing their unique strengths, a swift glider and a cautious burrower rebuild the acoustic beacons together.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "Silent Spires",
-            "speech": "Listen closely, friend. Without our warning signals active tonight, the valley will remain entirely unprotected from the shadow hawks.",
+            "headline": "The Unexpected Stampede",
+            "speech": "Why are fifty horned goats running through the fruit displays and heading directly toward our turnip stand?",
             "visual": "forest",
-            "label": "The Silent Peaks",
-            "story_beat": "reveal",
-            "visual_prompt": "A wide shot of ancient towering pine trees in twilight. Bramble the hedgehog and Kip the flying squirrel stand near a cracked stone post. Bramble points upward with a paw, looking serious, while Kip holds a silent copper tuning fork.",
+            "label": "The Goat Twist",
+            "story_beat": "twist",
+            "visual_prompt": "Martha and her assistant dodging a herd of curious goats stampeding past stacked wooden crates of apples.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Ascending the Ridge",
-            "speech": "I can catch the upward thermal drafts if you hold my tail steady against this fierce highland wind.",
-            "visual": "signal",
-            "label": "Windy Ascent",
-            "story_beat": "build",
-            "visual_prompt": "A medium shot on a high rocky ledge. Kip the flying squirrel is about to leap into the misty air, wearing a leaf-woven leather harness. Bramble the hedgehog firmly grips the anchor rope attached to Kip's waist.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Reconnecting the Wire",
-            "speech": "Twist the copper coil gently while I secure the resonating stone into the mossy socket.",
+            "headline": "The Shepherd's Market",
+            "speech": "They love the tone! We are no longer selling vegetables; we are running the finest livestock accessory shop.",
             "visual": "door",
-            "label": "The Relay Hatch",
-            "story_beat": "mechanism",
-            "visual_prompt": "A close-up of a hollow tree trunk acting as an old relay station. Bramble uses small claw tools to adjust a glowing blue wire, while Kip stabilizes an embedded glowing crystal with both paws.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Harmonic Dawn",
-            "speech": "We did it together. Hear how the entire canopy responds to our restored network signal now.",
-            "visual": "planet",
-            "label": "Canopy Broadcast",
+            "label": "The Grand Payoff",
             "story_beat": "payoff",
-            "visual_prompt": "A wide cinematic view from above the forest canopy at dusk. Golden light pulses through the massive trees as glowing acoustic rings emanate outward. Bramble and Kip sit side by side on a branch, smiling victoriously.",
+            "visual_prompt": "Martha smiling brightly behind a banner reading Goat-Tone Turnips, handing whistles to smiling shepherds.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Broken acoustic relay poles leaving the valley in silence before the night predators emerge.",
-        "decisive_choice": "Trading specialized roles to scale the tallest storm-shattered trunk and reconnect the main terminal.",
-        "resolution": "The restored resonant network echoes safely across the canopy, reuniting the separated forest clans.",
+        "central_conflict": "Inventing a noisy turnip whistle to boost sales while annoying the local merchants.",
+        "decisive_choice": "Re-routing the whistle's air flow to mimic the mating call of a mountain goat.",
+        "resolution": "Her stall becomes the exclusive trading post for local shepherd buyers and prize goats.",
         "visual_bible": {
-          "style": "Warm, painterly digital illustration with rich emerald greens, amber highlights, and soft storybook textures.",
+          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures and comedic expressions.",
           "characters": {
-            "Bramble": "A cautious, stout hedgehog with warm brown quills, wearing a tiny utility vest made of woven bark.",
-            "Kip": "An energetic flying squirrel with soft grey fur, large amber eyes, and a lightweight leather gliding harness."
+            "Martha": "A determined middle-aged inventor with wild gray hair, wearing a green apron smeared with dirt.",
+            "Assistant": "A tall, nervous young man wearing a striped vest and oversized brass safety goggles."
           },
           "locations": {
-            "The Silent Peaks": "A high-altitude forest ridge featuring ancient gnarled pines and smooth granite boulders covered in glowing moss.",
-            "The Relay Hatch": "An old hollow tree trunk fitted with ancient brass wiring, stone dials, and glowing crystal sockets."
+            "Market Square": "A bustling, sunlit outdoor market filled with canvas-topped wooden stalls and woven baskets."
           },
           "objects": {
-            "copper_tuning_fork": "A polished, hand-forged copper fork that vibrates with soft blue light when active.",
-            "leaf_harness": "A sturdy strap system crafted from cured oak leaves and tough vine fiber.",
-            "anchor_rope": "A long, braided hemp rope tied securely around sturdy roots."
+            "Turnip Whistle": "A large purple rutabaga fitted with a shiny brass mouthpiece and three copper tuning screws."
           }
         },
-        "plot_fingerprint": "0ef46a91e51d7364c96604694325e0e7b4fe522efe38590197746c056ba1b43e"
+        "plot_fingerprint": "6f4f7611ae0dee84020d6adf4526c91793167811046349a17edd197e12dbacac"
       },
       "approved": false
     },
     {
-      "candidate_id": "3637434150a14fa61ddec9aa",
-      "source_sha256": "7c8e92c1c0592c6acdd9bc97bb482bab8a1c3d8027f4d66817fa7acca85609fd",
+      "candidate_id": "09776180df1305381db0463b",
+      "source_sha256": "48ab56e0ddb0490514d6243291f2a016414f6d4e8986ade9a2a850bb94f8e6d8",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-70308fbda9a273c2379d",
-        "title": "The Tide-Clock Regatta",
-        "hook": "The Silent Mechanism",
-        "question": "Can a student engineer build a pneumatic music box that survives the salty surf to win the seaside festival's grand trophy?",
-        "answer": "Yes, by adapting the salinity-proof reed valves into a copper chime tower, she outlasts the rushing tide and secures the victory.",
+        "content_id": "rayvan-gemini-1d552f72a1d126e6d19c",
+        "title": "The Midnight Ticket Mismatch",
+        "hook": "The Dropped Ticket",
+        "question": "Can a misplaced train ticket and a stray railway dog prevent a historic steam locomotive from departing down the wrong line?",
+        "answer": "By deciphering the conductor's dropped punch card and following the stray dog, the young traveler switches the manual track lever just in time.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -192,65 +109,146 @@
         ],
         "story_beats": [
           {
-            "headline": "The Silent Mechanism",
-            "speech": "If my pneumatic copper pipes leak even one drop of saltwater during the performance, our entire three-month project completely sinks.",
-            "visual": "ship",
-            "label": "The Discovery",
-            "story_beat": "reveal",
-            "visual_prompt": "MIRA, a young engineer with braided dark hair wearing a grease-stained canvas apron, stands on a wooden pier next to a large brass music box. She holds a corroded copper valve in her left hand, her face displaying anxious concentration under bright afternoon coastal sunlight.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Assembling the Anodes",
-            "speech": "We have precisely twenty minutes before the high tide hits the festival pavilion, so help me fit these zinc scraps immediately.",
-            "visual": "robot",
-            "label": "Constructing the Fix",
-            "story_beat": "build",
-            "visual_prompt": "MIRA and her helper ORION, a lean apprentice with silver goggles pushed up on his forehead, frantically bolt small zinc plates onto the base of the brass music box on the sandy festival shoreline. Both characters have determined expressions, working with scattered tools surrounding them on a weathered wooden workbench.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Testing the Tides",
-            "speech": "The first wave is crashing against the lower chambers now, but look! The zinc is taking the corrosion instead of our pipes!",
+            "headline": "The Dropped Ticket",
+            "speech": "Look closely at this punched ticket! The platform stamp shows the midnight express is heading straight into the quarry line.",
             "visual": "signal",
-            "label": "The Test",
-            "story_beat": "mechanism",
-            "visual_prompt": "MIRA kneels on wet shoreline sand as foamy seawater washes around the base of the large brass music box. She points a triumphant finger at the fizzing zinc anodes while holding a leather tuning wrench in her right hand, her face lit with sudden relieved optimism.",
+            "label": "Clue Discovery",
+            "story_beat": "reveal",
+            "visual_prompt": "A young traveler in a tweed coat kneels under a blinking railway signal, examining a dropped red ticket with worried expression.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Victory Chimes",
-            "speech": "Hear that clear, ringing melody carry across the harbour? Our tide-clock survived the storm and won the grand seaside trophy!",
+            "headline": "The Stray Guide",
+            "speech": "Stay back, little dog! You cannot cross these tracks unless you know a shortcut to the central lever house.",
+            "visual": "forest",
+            "label": "Furry Assistant",
+            "story_beat": "build",
+            "visual_prompt": "A scruffy terrier wearing a torn stationmaster scarf barks near the edge of the overgrown railway forest, beckoning the traveler forward.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Heavy Iron",
+            "speech": "Push with all your weight against the frozen iron gear before the steam whistle blows its final warning.",
             "visual": "door",
-            "label": "The Triumph",
+            "label": "Manual Override",
+            "story_beat": "mechanism",
+            "visual_prompt": "The traveler struggles to push a heavy wooden and iron access door open inside the dusty lever house, sweating under yellow lantern light.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Correct Track",
+            "speech": "We did it! The heavy rails have shifted, and the grand locomotive is safely rolling toward the coastal valley.",
+            "visual": "ship",
+            "label": "Safe Departure",
             "story_beat": "payoff",
-            "visual_prompt": "MIRA stands proudly on the wooden festival stage holding a gleaming silver trophy cup. Behind her, the brass music box rotates slowly, spinning polished copper horns that reflect the golden sunset over the bustling seaside crowd.",
+            "visual_prompt": "The massive steam locomotive rumbles past a distant harbor ship on the correct tracks while the traveler and dog cheer on the platform.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Saltwater corrosion threatening to jam the pneumatic brass reeds before the festival judging commences.",
-        "decisive_choice": "Sacrificing her own decorative brass wings to forge sacrificial zinc anodes that absorb the corrosive brine.",
-        "resolution": "The music box plays a flawless sea-shanty while enduring the incoming waves, earning the top prize from the harbour master.",
+        "central_conflict": "A misprinted schedule points the express train toward an active maintenance zone.",
+        "decisive_choice": "Climb into the rusty signal box to manually override the track switch.",
+        "resolution": "The train safely diverts to the scenic coastal loop while the loyal dog is adopted as station mascot.",
         "visual_bible": {
-          "style": "Bright, cinematic steampunk illustration with vibrant coastal lighting, detailed brass and copper textures, and rich atmospheric spray effects.",
+          "style": "Vintage cinematic railway aesthetic with warm amber lighting and rich textured fabrics.",
           "characters": {
-            "MIRA": "A determined twenty-year-old inventor with tied-back dark hair, wearing a worn teal canvas apron over a linen shirt, smudged with soot and grease on her left cheek.",
-            "ORION": "A lanky nineteen-year-old apprentice with messy sandy-blonde hair, wearing a striped wool jersey and brass-rimmed protective goggles."
+            "Traveler": "A curious teenager wearing a herringbone tweed coat, round spectacles, and a knitted blue scarf.",
+            "StationDog": "A scruffy terrier with golden-brown fur and a tattered red stationmaster scarf tied around its neck."
           },
           "locations": {
-            "harbour_pier": "A sun-bleached wooden pier extending into choppy blue-green ocean waters, cluttered with mechanical parts and festive yellow paper banners.",
-            "festival_shoreline": "A sloping golden sand beach near the seaside village, featuring wooden viewing bleachers and colourful market tents in the background."
+            "Platform": "A bustling 1950s railway station with arched iron beams, steam clouds, and vintage clock faces.",
+            "LeverHouse": "A cramped, dusty mechanical cabin filled with brass gears, levers, and glowing oil lanterns."
           },
           "objects": {
-            "brass_music_box": "A large, intricate mechanical sculpture made of polished brass and copper tubes, standing four feet tall with spinning conical horns.",
-            "zinc_anodes": "Small, dull grey rectangular metal plates used to prevent galvanic corrosion in saltwater environments."
+            "RedTicket": "A stiff cardboard railway ticket stamped with faded purple ink and a jagged corner.",
+            "TrackLever": "A heavy cast-iron lever with a polished brass ball handle and grease-stained base."
           }
         },
-        "plot_fingerprint": "37e7de8b02ba6fe090326ff74fe9ddd030bccd092a5a5c25baee9623c2383af3"
+        "plot_fingerprint": "c34f544842c96d9f41aaf7e50aa9a914e072175549e48825c4b1d80a95f27ee2"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "18dbb0203a07fc175a11e619",
+      "source_sha256": "179d90b2f267955e345485a41b2af101d912a0a92417010f9d42ed4629a3a067",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-38c44f1a5abe905f240e",
+        "title": "The Resonance Weld",
+        "hook": "The Warning Alarm",
+        "question": "Can the crew repair the hull breach using harmonic resonance before atmospheric pressure fails?",
+        "answer": "Yes, by synchronizing their pulses to the engine's vibration.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Warning Alarm",
+            "speech": "We cannot wait for the automated drone! If we do not manually tune the dampener now, the whole bulkhead collapses.",
+            "visual": "ship",
+            "label": "Breach Detected",
+            "story_beat": "reveal",
+            "visual_prompt": "Commander Vesper stands inside the cramped maintenance bay of the starship, pointing a glowing diagnostic tool at a fractured metal bulkhead while warning lights flash orange across the steel walls.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Divergent Plan",
+            "speech": "The manual method is far too risky without a secondary seal. We must run the secondary diagnostic sequence instead.",
+            "visual": "robot",
+            "label": "Protocol Dispute",
+            "story_beat": "build",
+            "visual_prompt": "Chief engineer Jax gestures angrily toward a hovering utility robot with a cracked optic sensor, holding a bulky circuit pad while standing near a smoking primary power conduit.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Critical Synchronization",
+            "speech": "Hold the stabilizer steady while I match this frequency to the hull vibration. Do not let go of the grip.",
+            "visual": "signal",
+            "label": "Frequency Match",
+            "story_beat": "mechanism",
+            "visual_prompt": "Commander Vesper and Jax both grip opposite sides of a vibrating plasma torch that emits a pulsing green frequency wave against the torn metal seam of the spacecraft hull.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Seal Holds",
+            "speech": "Look at that pressure gauge climb back to normal. We actually pulled it off together just in time.",
+            "visual": "planet",
+            "label": "Atmosphere Restored",
+            "story_beat": "payoff",
+            "visual_prompt": "Commander Vesper and Jax stand side by side smiling in the repaired maintenance bay, looking through a reinforced viewport at a bright blue planet shining peacefully against the black void of space.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Disagreement between manual override and automated repair protocols during a hull breach",
+        "decisive_choice": "Manual calibration of the resonance dampener under extreme vibration",
+        "resolution": "The hull seals securely, restoring stable atmospheric pressure to the sector",
+        "visual_bible": {
+          "style": "Cinematic sci-fi realism with gritty industrial textures and high-contrast atmospheric lighting",
+          "characters": {
+            "Commander Vesper": "A determined human woman in her late thirties with braided dark hair, wearing a scuffed charcoal-gray jumpsuit with yellow safety stripes and heavy magnetic boots.",
+            "Chief engineer Jax": "A pragmatic humanoid mechanic with short silver hair, wearing an oil-stained navy-blue utility vest over a thermal undershirt and thick protective gloves."
+          },
+          "locations": {
+            "starship maintenance bay": "A cramped, utilitarian compartment lined with exposed wiring, steel storage lockers, and a circular airlock door leading to the exterior hull."
+          },
+          "objects": {
+            "diagnostic tool": "A handheld metallic cylinder with a glowing blue digital screen and a triangular emitter tip.",
+            "plasma torch": "A heavy industrial welding device made of matte black steel with dual handgrips and a glowing green plasma nozzle."
+          }
+        },
+        "plot_fingerprint": "85eb4372d792afe53a35d8db9dbbe93eb0a14752b1e7d16e66adf249e17497eb"
       },
       "approved": false
     }
