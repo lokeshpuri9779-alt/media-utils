@@ -36,6 +36,8 @@ def main():
     parser.add_argument("--publish", action="store_true")
     parser.add_argument("--production", action="store_true", help="Require evidence of real AI generation, character consistency, and narration")
     args=parser.parse_args()
+    if args.production and args.publish:
+        parser.error("--production and --publish cannot be combined until the quality gate runs before publishing")
     out=Path(args.output).resolve()
     out.mkdir(parents=True,exist_ok=True)
     report={"pipeline":"astra-unified-v1", "dry_run":args.dry_run,
