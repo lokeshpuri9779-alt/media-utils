@@ -1,0 +1,40 @@
+name: ASTRA Three-Scene CPU Storyboard (Isolated)
+on:
+  push:
+    branches:
+      - benchmark/lighthouse-story-three-scenes
+    paths:
+      - .astra/story-sequence-trigger.txt
+permissions:
+  contents: read
+jobs:
+  storyboard:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      HF_HOME: /tmp/astra-hf
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Inspect free runner
+        run: |
+          free -h
+          df -h .
+          nproc
+      - name: Install CPU-only inference dependencies
+        run: python -m pip install --disable-pip-version-check 'Pillow>=10,<12' 'optimum[openvino]' diffusers 'transformers>=4.46,<5'
+      - name: Generate three review-only lighthouse scenes
+        run: |
+          timeout --signal=TERM --kill-after=15s 27m python -u -m tools.experimental_openvino_story_sequence
+      - name: Save images and continuity review report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-lighthouse-three-scenes-${{ github.run_id }}
+          path: artifacts/experimental-openvino/story/
+          if-no-files-found: warn
+          retention-days: 7
