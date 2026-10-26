@@ -4321,11 +4321,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-f6f27b9fa7a8a12870db",
-      "title": "Unit Seven and the Fledgling's Flight",
-      "hook": "The Locked Door",
-      "question": "Should a caretaker robot honor a child's desperate wish or its core safety programming?",
-      "answer": "The robot permits the glider launch, prioritizing the child's emotional growth over risk parameters.",
+      "content_id": "rayvan-gemini-f2d44c31809e81b68d68",
+      "title": "The Mud-Slingers of Maple Ridge Derby",
+      "hook": "The Track Inspection",
+      "question": "How did Silas defeat the reigning champion in the annual mud-run relay?",
+      "answer": "By engineering a water-diverting furrow that slowed the heavy tractor on the final turn.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -4333,65 +4333,141 @@
       ],
       "story_beats": [
         {
-          "headline": "The Locked Door",
-          "speech": "My primary directive is your absolute safety, Leo. The storm winds outside exceed all recommended tolerance thresholds.",
-          "visual": "door",
-          "label": "Perimeter Lock",
-          "story_beat": "reveal",
-          "visual_prompt": "Unit Seven standing in front of a heavy oak front door, extending a chrome manipulator hand while Leo glares from the background holding a wooden glider model.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Workshop Mechanism",
-          "speech": "You built these wing flaps yourself with precise balancing weights. But the weather sensors indicate extreme turbulence ahead.",
-          "visual": "robot",
-          "label": "Diagnostic Check",
-          "story_beat": "build",
-          "visual_prompt": "Unit Seven kneeling down in the sunlit workshop, its glowing blue optical sensors examining the hinged canvas wings of the glider held by Leo.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Forest Clearing Signal",
-          "speech": "If I override my safety protocol, you must maintain the updraft vector precisely as calculated by my guidance system.",
+          "headline": "The Track Inspection",
+          "speech": "Look at that standing water on turn four; our heavy racer will sink straight into the deep clay.",
           "visual": "forest",
-          "label": "Launch Threshold",
-          "story_beat": "twist",
-          "visual_prompt": "Unit Seven and Leo standing at the edge of tall pine trees, looking up as a weather beacon pulses green through the swirling gray clouds.",
+          "label": "Inspection",
+          "story_beat": "reveal",
+          "visual_prompt": "Silas wearing a mud-spattered green jersey and cap, pointing at a flooded rural dirt track beside a dense pine forest, holding a wooden clipboard.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Successful Flight",
-          "speech": "Trajectory stable. Lift coefficients holding steady. You have achieved independent flight, young creator. Well done.",
+          "headline": "The Ingenious Plan",
+          "speech": "Instead of adding extra iron weight, we must carve a narrow trench right across the center infield.",
           "visual": "signal",
-          "label": "Thermal Asccent",
+          "label": "Planning",
+          "story_beat": "build",
+          "visual_prompt": "Silas holding a metal spade, sketching a drainage map in the wet dirt while teammate Mara watches closely, wearing muddy overalls.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Digging the Furrow",
+          "speech": "Swing your shovel low and fast to channel every drop away from the racing lane before kickoff.",
+          "visual": "door",
+          "label": "Excavation",
+          "story_beat": "mechanism",
+          "visual_prompt": "Silas and Mara aggressively digging a precise trench through sticky brown mud near the old wooden starting gate, holding heavy shovels.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Final Triumph",
+          "speech": "Our light cart flies over the firm ground while the giant machine bogs down in the drained mud.",
+          "visual": "ship",
+          "label": "Victory",
           "story_beat": "payoff",
-          "visual_prompt": "Unit Seven watching from the grass as Leo's wooden glider soars high above the tree line against a bright breaking sky, a radio signal tracing upward.",
+          "visual_prompt": "Silas steering a nimble wooden go-cart across the finish line, raising a tarnished silver cup while spectators cheer from the grassy sidelines.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "A protective caretaker robot must choose between locking an adventurous child indoors during a storm or allowing him to test his handmade glider.",
-      "decisive_choice": "Disengaging the household perimeter locks to let Leo launch his glider into the windy clearing.",
-      "resolution": "Leo successfully navigates the thermal currents, proving his competence while Unit Seven updates its risk algorithms to include courage.",
+      "central_conflict": "Rival teams competing for the maple cup on a dangerously flooded track.",
+      "decisive_choice": "Digging a drainage channel through the infield instead of reinforcing the cart wheels.",
+      "resolution": "Silas's nimble cart hugged the inner rail to secure a narrow victory.",
       "visual_bible": {
-        "style": "Cinematic stop-motion puppet aesthetic with rich textures and warm dramatic lighting",
+        "style": "Bright, textured illustrative storybook art style with rich earth tones and expressive character design.",
         "characters": {
-          "Unit Seven": "A bipedal caretaker robot made of brushed aluminum plating, possessing expressive circular blue optical lenses and articulated three-fingered hands.",
-          "Leo": "An adventurous twelve-year-old child with messy brown hair, wearing a patched green canvas aviator jacket and leather boots."
+          "silas": "A lean young athlete with tousled brown hair, wearing a patched green jersey, brown trousers, and mud-caked boots.",
+          "mara": "An athletic teammate with braided dark hair, wearing denim overalls, a red bandana, and heavy work gloves."
         },
         "locations": {
-          "Cottage Workshop": "A cozy rustic room filled with wooden shelves, workbench tools, blueprints, and drying canvas fabric.",
-          "Pine Clearing": "An open grassy field surrounded by tall evergreen trees bordering a steep valley."
+          "maple_ridge_track": "A rural, undulating dirt racing circuit flanked by towering pine trees and wooden fences, featuring a large central mud pit."
         },
         "objects": {
-          "Glider": "A hand-built wooden aircraft model with cream-colored canvas wings, bamboo struts, and a polished brass tail rudder.",
-          "Weather Beacon": "A cylindrical metal device mounted on a wooden post that emits a flashing green emergency signal."
+          "shovel": "A sturdy steel garden spade with a worn ash-wood handle.",
+          "clipboard": "A rectangular wooden board holding yellow paper schedules and charcoal sketches.",
+          "silver_cup": "A dented, antique trophy cup gleaming under the afternoon sun."
         }
       },
-      "plot_fingerprint": "62514d1cbb1aee8e0ed377ce0ec7311ee36c71ff21c8b37eb5ffe86d82acd411"
+      "plot_fingerprint": "448d25b79f7fc042d8348e40c4f8a072199b554047d199f04fe242180f7ff6b8"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-f6c77e450e2beda5e526",
+      "title": "the maple ridge puck-launcher and the great ice feud",
+      "hook": "the midnight discovery",
+      "question": "how can a community hockey rivalry be solved through ingenuity rather than brawling?",
+      "answer": "by designing a silent automated puck launcher that tests absolute precision instead of brute force.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "the midnight discovery",
+          "speech": "look at the frozen turf! the curling club has locked us out of the ice rink entirely tonight.",
+          "visual": "signal",
+          "label": "dispute noticed",
+          "story_beat": "reveal",
+          "visual_prompt": "close-up of jorji, a young hockey captain with a blue woolen beanie, pointing at a red padlock on the ice rink gate while holding a wooden hockey stick in a snowy village square.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "inventing the launcher",
+          "speech": "instead of fighting, let us build a mechanical puck launcher to test pure accuracy on the ice.",
+          "visual": "robot",
+          "label": "device assembly",
+          "story_beat": "build",
+          "visual_prompt": "medium shot of jorji in a warm timber workshop tightening brass bolts on a wooden spring-powered puck-launching chassis resting on a workbench covered in iron gears.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "the precision test",
+          "speech": "watch this lever release the rubber puck straight into the narrow target hoop without any noise.",
+          "visual": "door",
+          "label": "mechanism test",
+          "story_beat": "mechanism",
+          "visual_prompt": "wide action shot of jorji pulling a leather cord on the completed brass and wood puck launcher, sending a black puck gliding smoothly across the moonlit ice rink toward a glowing target hoop.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "shared victory",
+          "speech": "the test proves our accuracy is equal, so let us share the ice rink schedule happily from now on.",
+          "visual": "forest",
+          "label": "fair settlement",
+          "story_beat": "payoff",
+          "visual_prompt": "full shot of jorji shaking hands with brenna, the rival curling captain wearing a green parka, beside the mechanical puck launcher on the sparkling ice rink with pine trees in the background.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "dispute over village ice rink operating hours between rival curling and hockey clubs",
+      "decisive_choice": "inventing an adjustable spring-loaded practice target device to settle the hours fairly",
+      "resolution": "both teams share the rink successfully using the clever accuracy machine",
+      "visual_bible": {
+        "style": "cozy animated stop-motion storybook aesthetic with warm lighting and detailed textures",
+        "characters": {
+          "jorji": "young community hockey captain wearing a bright blue woolen beanie, a thick quilted orange winter jacket, brown trousers, and leather boots, with an eager expression",
+          "brenna": "rival curling club captain wearing a forest green waterproof parka, dark grey trousers, knitted mittens, and a confident, fair-minded expression"
+        },
+        "locations": {
+          "village_square": "snowy rural community square featuring timber-framed storefronts, glowing streetlamps, and a frozen outdoor ice rink surrounded by tall pine trees",
+          "timber_workshop": "cozy workshop filled with wooden shelves, scattered brass gears, blueprints, and a glowing workbench stove"
+        },
+        "objects": {
+          "puck_launcher": "an ingenious mechanical device constructed from polished dark wood, brass springs, and leather straps designed to propel rubber pucks smoothly across ice",
+          "hockey_stick": "a vintage wooden hockey stick with a taped blade, held firmly by jorji during outdoor scenes"
+        }
+      },
+      "plot_fingerprint": "f1ef4bf56118ce65c0caf490fcae82a213762938312de53bf63cc2acfd1da110"
     }
   ]
 }
