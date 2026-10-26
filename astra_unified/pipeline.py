@@ -34,6 +34,7 @@ def main():
     parser.add_argument("--output", default="astra_unified_output")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--publish", action="store_true")
+    parser.add_argument("--production", action="store_true", help="Require evidence of real AI generation, character consistency, and narration")
     args=parser.parse_args()
     out=Path(args.output).resolve()
     out.mkdir(parents=True,exist_ok=True)
@@ -50,6 +51,19 @@ def main():
             break
     else:
         report["status"]="planned" if args.dry_run else "completed"
+    if args.production and not args.dry_run and report["status"]=="completed":
+        evidence_path=out/"production_evidence.json"
+        try:
+            evidence=json.loads(evidence_path.read_text())
+            required=("ai_images_generated","character_consistency_verified","narration_generated","video_quality_verified")
+            missing=[key for key in required if evidence.get(key) is not True]
+        except (OSError, ValueError, TypeError):
+            missing=["valid production_evidence.json"]
+        if missing:
+            report["status"]="blocked"
+            report["production_gate"]={"status":"blocked","missing":missing}
+        else:
+            report["production_gate"]={"status":"passed"}
     (out/"run_report.json").write_text(json.dumps(report,indent=2))
     print(json.dumps(report,indent=2))
     return 0 if report["status"] in ("planned","completed") else 1
