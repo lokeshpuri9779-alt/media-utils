@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 18,
+  "attempts": 19,
   "confirmed_today": 18,
-  "last_attempt_at": "2026-10-25T23:22:53.549274+00:00",
+  "last_attempt_at": "2026-10-26T00:06:37.893655+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -3831,11 +3831,62 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-25T23:26:03.342999+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "hTg4ZgtpGFw": {
+      "content_id": "rayvan-forge-a3ecbebc8306a927",
+      "title": "The Owl and the Station Clock",
+      "day": "2026-10-26",
+      "uploaded_at": "2026-10-26T00:06:39.763763+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "db2be745dcccb947a7668be0a5f7acc8b0b4a864c443c5ef12e35a49f6ea08e3",
+      "story_beats": [
+        {
+          "headline": "THE CLOCK STOPPED",
+          "speech": "At dawn the station clock froze at midnight, and the passengers began missing their trains despite arriving early.",
+          "visual": "door",
+          "label": "WRONG TIME",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A RISKY SHORTCUT",
+          "speech": "An owl tried pushing the clock hands forward, but the gears jammed and the minute hand slipped loose.",
+          "visual": "door",
+          "label": "GEARS JAMMED",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE TINY SCREW",
+          "speech": "Looking behind the dial, she spotted a fallen screw wedged between two gears and removed it with careful tweezers.",
+          "visual": "book",
+          "label": "SMALL CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "BACK ON TRACK",
+          "speech": "After resetting the mechanism against the conductor's watch, she heard the clock chime as the next train arrived.",
+          "visual": "forest",
+          "label": "ON TIME",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-25T23:51:50.794935+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
     "at": "2026-10-25T23:26:03.889183+00:00",
     "early_tests": "success",
@@ -8567,6 +8618,53 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-a3ecbebc8306a927": {
+      "at": "2026-10-26T00:06:37.893638+00:00",
+      "title": "The Owl and the Station Clock",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "db2be745dcccb947a7668be0a5f7acc8b0b4a864c443c5ef12e35a49f6ea08e3",
+      "story_beats": [
+        {
+          "headline": "THE CLOCK STOPPED",
+          "speech": "At dawn the station clock froze at midnight, and the passengers began missing their trains despite arriving early.",
+          "visual": "door",
+          "label": "WRONG TIME",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A RISKY SHORTCUT",
+          "speech": "An owl tried pushing the clock hands forward, but the gears jammed and the minute hand slipped loose.",
+          "visual": "door",
+          "label": "GEARS JAMMED",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE TINY SCREW",
+          "speech": "Looking behind the dial, she spotted a fallen screw wedged between two gears and removed it with careful tweezers.",
+          "visual": "book",
+          "label": "SMALL CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "BACK ON TRACK",
+          "speech": "After resetting the mechanism against the conductor's watch, she heard the clock chime as the next train arrived.",
+          "visual": "forest",
+          "label": "ON TIME",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
@@ -8587,11 +8685,11 @@
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-25T23:22:38.357269+00:00",
+    "at": "2026-10-25T23:52:13.572951+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-anthology-9a64aa9a339d5857",
-    "video_url": "https://www.youtube.com/watch?v=BAawMzec_CY",
+    "content_id": "rayvan-forge-a3ecbebc8306a927",
+    "video_url": "https://www.youtube.com/watch?v=hTg4ZgtpGFw",
     "story_selection": {}
   },
   "last_workflow_result": {
