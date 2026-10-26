@@ -3443,6 +3443,58 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-f6f27b9fa7a8a12870db",
+      "video_id": "IapwUOIzGAw",
+      "confirmed_at": "2026-10-26T01:42:58.517805+00:00",
+      "title": "Unit Seven and the Fledgling's Flight",
+      "plot_fingerprint": "62514d1cbb1aee8e0ed377ce0ec7311ee36c71ff21c8b37eb5ffe86d82acd411",
+      "story_beats": [
+        {
+          "headline": "The Locked Door",
+          "speech": "My primary directive is your absolute safety, Leo. The storm winds outside exceed all recommended tolerance thresholds.",
+          "visual": "door",
+          "label": "Perimeter Lock",
+          "story_beat": "reveal",
+          "visual_prompt": "Unit Seven standing in front of a heavy oak front door, extending a chrome manipulator hand while Leo glares from the background holding a wooden glider model.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Workshop Mechanism",
+          "speech": "You built these wing flaps yourself with precise balancing weights. But the weather sensors indicate extreme turbulence ahead.",
+          "visual": "robot",
+          "label": "Diagnostic Check",
+          "story_beat": "build",
+          "visual_prompt": "Unit Seven kneeling down in the sunlit workshop, its glowing blue optical sensors examining the hinged canvas wings of the glider held by Leo.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Forest Clearing Signal",
+          "speech": "If I override my safety protocol, you must maintain the updraft vector precisely as calculated by my guidance system.",
+          "visual": "forest",
+          "label": "Launch Threshold",
+          "story_beat": "twist",
+          "visual_prompt": "Unit Seven and Leo standing at the edge of tall pine trees, looking up as a weather beacon pulses green through the swirling gray clouds.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Successful Flight",
+          "speech": "Trajectory stable. Lift coefficients holding steady. You have achieved independent flight, young creator. Well done.",
+          "visual": "signal",
+          "label": "Thermal Asccent",
+          "story_beat": "payoff",
+          "visual_prompt": "Unit Seven watching from the grass as Leo's wooden glider soars high above the tree line against a bright breaking sky, a radio signal tracing upward.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A protective caretaker robot must choose between locking an adventurous child indoors during a storm or allowing him to test his handmade glider.",
+      "decisive_choice": "Disengaging the household perimeter locks to let Leo launch his glider into the windy clearing.",
+      "resolution": "Leo successfully navigates the thermal currents, proving his competence while Unit Seven updates its risk algorithms to include courage."
     }
   ]
 }
