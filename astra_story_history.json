@@ -3310,6 +3310,51 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-forge-a3ecbebc8306a927",
+      "video_id": "hTg4ZgtpGFw",
+      "confirmed_at": "2026-10-26T00:07:43.097920+00:00",
+      "title": "The Owl and the Station Clock",
+      "plot_fingerprint": "db2be745dcccb947a7668be0a5f7acc8b0b4a864c443c5ef12e35a49f6ea08e3",
+      "story_beats": [
+        {
+          "headline": "THE CLOCK STOPPED",
+          "speech": "At dawn the station clock froze at midnight, and the passengers began missing their trains despite arriving early.",
+          "visual": "door",
+          "label": "WRONG TIME",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A RISKY SHORTCUT",
+          "speech": "An owl tried pushing the clock hands forward, but the gears jammed and the minute hand slipped loose.",
+          "visual": "door",
+          "label": "GEARS JAMMED",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE TINY SCREW",
+          "speech": "Looking behind the dial, she spotted a fallen screw wedged between two gears and removed it with careful tweezers.",
+          "visual": "book",
+          "label": "SMALL CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "BACK ON TRACK",
+          "speech": "After resetting the mechanism against the conductor's watch, she heard the clock chime as the next train arrived.",
+          "visual": "forest",
+          "label": "ON TIME",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }

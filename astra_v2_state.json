@@ -3,7 +3,7 @@
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 19,
-  "confirmed_today": 18,
+  "confirmed_today": 19,
   "last_attempt_at": "2026-10-26T00:06:37.893655+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -3829,16 +3829,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "hTg4ZgtpGFw": {
-      "content_id": "rayvan-forge-a3ecbebc8306a927",
+    },
+    "rayvan-forge-a3ecbebc8306a927": {
+      "video_id": "hTg4ZgtpGFw",
+      "confirmed_at": "2026-10-26T00:07:43.097920+00:00",
       "title": "The Owl and the Station Clock",
-      "day": "2026-10-26",
-      "uploaded_at": "2026-10-26T00:06:39.763763+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-26T00:06:39.763763+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "db2be745dcccb947a7668be0a5f7acc8b0b4a864c443c5ef12e35a49f6ea08e3",
       "story_beats": [
@@ -3879,16 +3877,16 @@
           "duration": 2.1
         }
       ],
-      "renderer": "studio-7.3.1"
+      "genre": "fiction"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-25T23:51:50.794935+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-26T00:07:42.658997+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-25T23:26:03.889183+00:00",
+    "at": "2026-10-26T00:07:43.273355+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "false",
@@ -8668,7 +8666,7 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-25T23:26:03.889140+00:00",
+    "at": "2026-10-26T00:07:43.273290+00:00",
     "publication_outcome": "published",
     "publication_reason": "min_interval",
     "character_memory": "not_reported",
@@ -8679,7 +8677,7 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-25T23:26:03.889176+00:00",
+    "at": "2026-10-26T00:07:43.273341+00:00",
     "history_file_present": true,
     "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
@@ -8693,7 +8691,7 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-25T23:26:03.889105+00:00",
+    "at": "2026-10-26T00:07:43.273231+00:00",
     "preflight_due": "false",
     "preflight_step": "success",
     "publish_step": "skipped",
@@ -8705,7 +8703,7 @@
     "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-25T23:26:03.889137+00:00",
+    "at": "2026-10-26T00:07:43.273286+00:00",
     "collection_status": "not_applicable_publisher_skipped",
     "publish_step": "skipped",
     "counters": {},
