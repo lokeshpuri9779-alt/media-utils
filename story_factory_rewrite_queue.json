@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "a76fdab3b4ccde099ddd02a4",
-      "source_sha256": "aeb3cb678b795e783548f4507c7bfe0c000058d0af734c5f4faa38528416ea7a",
+      "candidate_id": "5e8d2113720373a8b85d67b3",
+      "source_sha256": "fa0202747d2964e78167b0c306f08df3a82be582069c534b08bc84bf97b1c897",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-7a61014cb5decd7faabc",
-        "title": "The Great Tomato Tango",
-        "hook": "The Catastrophic Debut",
-        "question": "Can an overly enthusiastic inventor sell a mechanical fruit picker in a chaotic farmers market without destroying every stall?",
-        "answer": "Yes, by repurposing the malfunctioning claw to package delicate berries instead of launching heavy vegetables.",
+        "content_id": "rayvan-gemini-e64c48b92b5f244fa256",
+        "title": "The Automatic Onion-Crying Goggles",
+        "hook": "The Sizzling Invention",
+        "question": "Can an overly emotional kitchen gadget save a failing vegetable stall?",
+        "answer": "Yes, by generating synthetic tears that keep onions hydrated and fresh all day long.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,79 +29,80 @@
         ],
         "story_beats": [
           {
-            "headline": "The Catastrophic Debut",
-            "speech": "Behold the ultimate harvest automaton! It picks tomatoes with unprecedented speed and zero effort from the wearer.",
+            "headline": "The Sizzling Invention",
+            "speech": "Behold the tear-duct regulator! It senses vegetable melancholy and soothes them with pure hydration instantly.",
             "visual": "robot",
-            "label": "The Invention",
+            "label": "The Contraption Reveal",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Silas, wearing a grease-stained yellow vest and round spectacles, proudly points at a clanking copper robot holding a bruised red tomato in a bustling outdoor farmers market.",
+            "visual_prompt": "Barnaby stands proudly behind his wooden market stall, holding a clunky copper robot-goggle device dripping with salty water, surrounded by confused vegetable vendors.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Rampage Among the Radishes",
-            "speech": "Oh dear, the calibration dial is stuck on hyperdrive! Duck behind the melon crates before it fires again!",
+            "headline": "The Flooding Market",
+            "speech": "Oh dear, the sensitivity dial is stuck on maximum! The entire carrot section is completely underwater now!",
             "visual": "signal",
-            "label": "The Malfunction",
-            "story_beat": "build",
-            "visual_prompt": "Silas frantically chases the copper robot across a chaotic marketplace while alarmed vendors duck behind wooden stalls stacked with bouncing red vegetables.",
+            "label": "The Mechanism Spikes",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby frantically twists a glowing red dial on the copper goggles while rushing through a knee-high wave of vegetable rinse water inside the crowded market square.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Desperate Adjustment",
-            "speech": "If I can reverse this brass valve before it targets the honey stand, disaster will finally be averted.",
+            "headline": "The Desperate Adaptation",
+            "speech": "Quickly grab the spare copper tubing! We must channel this salty overflow directly onto the parsnips!",
             "visual": "ship",
-            "label": "The Fix",
-            "story_beat": "mechanism",
-            "visual_prompt": "Silas leaps onto the back of the smoking copper robot, desperately twisting a smoking brass valve while holding a heavy wrench in the crowded market square.",
+            "label": "The Emergency Build",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby and his niece rapidly solder a network of curved copper tubes resembling ship rigging above the root vegetable crates to drain the excess liquid.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Sweet Success",
-            "speech": "Instead of crushing crops, it now sorts delicate strawberries with perfect grace. Innovation triumphs once again!",
+            "headline": "The Crisp Victory",
+            "speech": "Look at those shiny, perfectly misted turnips! The tourists are buying every single vegetable we own today!",
             "visual": "forest",
-            "label": "The Triumph",
+            "label": "The Market Payoff",
             "story_beat": "payoff",
-            "visual_prompt": "Silas smiles proudly beside the modified copper robot, which now gently places perfect red strawberries into woven baskets while cheerful market vendors applaud.",
+            "visual_prompt": "Barnaby smiles broadly as a line of cheerful tourists eagerly buy glowing, perfectly misted root vegetables from his dry, bustling market stall decorated with green leafy garlands.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A chaotic mechanical tomato harvester running amok in a crowded public market.",
-        "decisive_choice": "Reconfigure the primary pneumatic launcher into a gentle suction sorter.",
-        "resolution": "The inventor successfully saves the market square and wins the annual innovation ribbon.",
+        "central_conflict": "Barnaby invention creates too many fake tears, flooding the bustling morning market stalls.",
+        "decisive_choice": "Barnaby diverts the excess salty moisture into small misting tubes above the root vegetable crates.",
+        "resolution": "The root vegetables remain remarkably crisp, attracting double the usual weekend tourist crowd.",
         "visual_bible": {
-          "style": "A vibrant, humorous comic book illustration style with warm lighting and expressive character animations.",
+          "style": "vibrant, whimsical stop-motion animation aesthetic with warm lighting and detailed textures",
           "characters": {
-            "Silas": "An eccentric young inventor with unruly brown hair, smudged cheeks, a yellow utility vest, and oversized round spectacles.",
-            "Vendor_Bessie": "A sturdy market vendor wearing a floral apron and a straw sunhat, holding a wooden spoon."
+            "Barnaby": "An elderly inventor with wild grey hair, round brass spectacles, a stained green apron, and ink-stained fingers.",
+            "Niece": "A resourceful teenager with braided brown hair, denim overalls, and a tool belt filled with tiny spanners."
           },
           "locations": {
-            "Farmers_Market": "A bustling cobblestone town square lined with striped canvas canopy stalls, overflowing with fresh fruits and vegetables."
+            "Market Square": "A bustling, sunlit cobblestone marketplace filled with striped awnings, wooden crates, and shouting vendors."
           },
           "objects": {
-            "Copper_Robot": "A steam-powered, clanking humanoid machine made of polished copper plates with glowing green optical sensors and multiple articulated mechanical arms."
+            "Goggles": "A bulky copper contraption with glass lenses, glowing red indicator lights, and a dripping rubber nozzle.",
+            "Copper Tubing": "Shiny, flexible metal pipes used to redirect liquids around the busy market stall."
           }
         },
-        "plot_fingerprint": "c266b87164b92b65560641228f66ea29293d048400d5c3fefe960734c33dec9c"
+        "plot_fingerprint": "820e10f2f2c86395f84d708f3f7ce11441e265d47f9291d634fd88128d0a406e"
       },
       "approved": false
     },
     {
-      "candidate_id": "5b8c0298ccbaf4bcd3eb26bd",
-      "source_sha256": "1afffff91bb3b57c2d4fb7fb276fda6868bb9d4446ff0d4193e6c711692f997c",
+      "candidate_id": "86e76da5a039def84fecb1b7",
+      "source_sha256": "7d52b4456bf39466ae60edae51aa7558fe529a570b561becec118df14fc995c0",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-8d8d716518914576455a",
-        "title": "The Singing Dunes of Kaelen",
-        "hook": "The Strange Tremor",
-        "question": "What secret do the roaring sands of the deep desert hide?",
-        "answer": "An underground cavern filled with giant, acoustic crystalline formations that play melodies when desert winds blow.",
+        "content_id": "rayvan-gemini-9e54a2cdabb43eab3757",
+        "title": "The Drift Engine Disagreement",
+        "hook": "Overheat Warning",
+        "question": "Should the crew purge the primary coolant to outrun a solar flare?",
+        "answer": "They bypassed the manual purge and rerouted excess heat through the ballast tanks instead.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -109,145 +110,150 @@
         ],
         "story_beats": [
           {
-            "headline": "The Strange Tremor",
-            "speech": "My instruments show no tectonic faults, yet the ground hums a steady musical note beneath my tired boots.",
-            "visual": "signal",
-            "label": "Seismic reading",
+            "headline": "Overheat Warning",
+            "speech": "Captain Vane, we must purge the primary coolant now or the main reactor will melt down completely.",
+            "visual": "ship",
+            "label": "Reactor Core",
             "story_beat": "reveal",
-            "visual_prompt": "Cartographer Elena, wearing a beige canvas jumpsuit and goggles, kneels on a massive sand dune holding a pulsing brass sensor in her gloved right hand, looking bewildered at the horizon.",
+            "visual_prompt": "Chief engineer Jax points at a flashing red diagnostic console inside the vibrating bridge, wearing grease-stained overalls and a worried expression.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Following the Echo",
-            "speech": "Every step deeper into this canyon amplifies the resonance, turning a faint vibration into a haunting melody.",
-            "visual": "forest",
-            "label": "Canyon descent",
-            "story_beat": "build",
-            "visual_prompt": "Elena carefully descends a steep, narrow rocky canyon wall under harsh desert sunlight, gripping a weathered leather rope with both hands, her canteen swinging visibly at her hip.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Hidden Vault",
-            "speech": "The sound leads me to a dark fissure where warm, humid air rushes upward from the deep earth.",
-            "visual": "door",
-            "label": "Cave entrance",
-            "story_beat": "mechanism",
-            "visual_prompt": "Elena stands at the dark mouth of a subterranean limestone cave, shining a heavy copper electric torch held in her left hand into the shadowed depths.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Singing Chimes",
-            "speech": "Towering mineral spires catch the underground draft, creating a breathtaking symphony of resonant crystal notes.",
-            "visual": "planet",
-            "label": "Acoustic cavern",
-            "story_beat": "payoff",
-            "visual_prompt": "Elena stands in awe inside a vast underground cavern illuminated by glowing azure crystals, recording the echoing melodies on a small brass notebook held in both hands.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "A seasoned cartographer risks running out of water to investigate a mysterious acoustic anomaly deep in the dunes.",
-        "decisive_choice": "She abandons her direct mapping route to follow a subtle vibration down a steep, unstable sand fissure.",
-        "resolution": "She discovers the subterranean musical cavern, securing a groundbreaking botanical and geological discovery.",
-        "visual_bible": {
-          "style": "Cinematic realism with natural lighting, earthy textures, and saturated desert color palettes.",
-          "characters": {
-            "Elena": "A forty-year-old cartographer with weathered skin, observant hazel eyes, wearing a durable beige canvas jumpsuit, leather boots, and a wide-brimmed sun hat."
-          },
-          "locations": {
-            "dune_ridge": "A vast expanse of golden undulating sand dunes under a bright amber sky.",
-            "cavern": "A cavernous subterranean chamber featuring towering translucent mineral pillars and cool blue ambient light."
-          },
-          "objects": {
-            "sensor": "A compact brass seismic sensor with a glowing green digital readout screen.",
-            "torch": "A heavy-duty copper electric torch with a dented reflector rim."
-          }
-        },
-        "plot_fingerprint": "d5fc0db70a8aa56fa384c7a94d4036d56ffc4656df188590b74a03b37ff64010"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "dc5134a3500345619ddac0fa",
-      "source_sha256": "383e096d82aac13c8751c273109d9bda00237e343a4c2c265962a8891d5d9e62",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-2d4803f04c0f49e14c1c",
-        "title": "The Last Millstone",
-        "hook": "The Dry Stream",
-        "question": "Can two lifelong millers preserve their village bond when forced to choose between feeding the starving town and saving the sacred waterwheel?",
-        "answer": "They dismantle the historic wheel together to grind the final grain, trading their heritage for the survival of their neighbors.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Dry Stream",
-            "speech": "Look at the cracked riverbed, Thomas. If the wheel does not turn by dawn, our people starve.",
-            "visual": "forest",
-            "label": "The Drought",
-            "story_beat": "reveal",
-            "visual_prompt": "Thomas and Martha standing in a parched riverbed beside a silent wooden waterwheel, looking exhausted, wearing heavy wool tunics, overcast daylight.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Hard Choice",
-            "speech": "We must break the sacred oak axle to let the stones grind manually, destroying our legacy forever.",
-            "visual": "door",
-            "label": "The Dilemma",
-            "story_beat": "build",
-            "visual_prompt": "Thomas and Martha inside the dusty mill, holding iron crowbars against the massive wooden axle, tense expressions, dim interior lighting.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Iron Wedge",
-            "speech": "Drive the wedge deeper into the joint. We cannot hesitate now if we want to save our families.",
+            "headline": "The Cargo Risk",
+            "speech": "If we purge the coolant, our delicate biological cargo will perish before we reach the outer colony.",
             "visual": "signal",
-            "label": "The Action",
-            "story_beat": "mechanism",
-            "visual_prompt": "Martha hammering a heavy iron wedge into the mill mechanism while Thomas pushes with all his weight, dust swirling in a sunbeam.",
+            "label": "Cargo Bay",
+            "story_beat": "build",
+            "visual_prompt": "First officer Lyra stands inside the dimly lit cargo bay, holding a glowing biometric datapad while shaking her head firmly at Jax.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The New Stone",
-            "speech": "Our heritage is gone, but the flour flows. We will build a better future with our own hands.",
+            "headline": "Alternative Routing",
+            "speech": "We can siphon the thermal overload into the empty water ballast tanks without losing our precious cargo.",
             "visual": "robot",
-            "label": "The Aftermath",
+            "label": "Maintenance Deck",
+            "story_beat": "mechanism",
+            "visual_prompt": "Jax activates a utility robot in the metallic maintenance deck, programming a secondary valve diversion on a holographic touchscreen.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Safe Escape",
+            "speech": "The ballast tanks absorbed the excess heat safely, and we are now accelerating clear of the solar flare.",
+            "visual": "planet",
+            "label": "Observation Dome",
             "story_beat": "payoff",
-            "visual_prompt": "Thomas and Martha sharing a quiet smile outside the working mill, surrounded by villagers carrying sacks of flour, golden sunset.",
+            "visual_prompt": "Vane and Lyra smile together inside the sunlit observation dome, watching a distant green planet as the ship cruises through calm space.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Drought forces a choice between preserving the village's only historic waterwheel or destroying it for emergency grain grinding.",
-        "decisive_choice": "Shattering the ancient oak axle to feed the stones directly with manual labor.",
-        "resolution": "The village survives the famine, and the friends begin carving a new, communal millstone from the valley stone.",
+        "central_conflict": "Disagreement over purging coolant",
+        "decisive_choice": "Rerouting heat through ballast tanks",
+        "resolution": "Safe escape from the solar flare",
         "visual_bible": {
-          "style": "Realistic historical cinematic drama with rich textures and natural lighting",
+          "style": "Clean, colorful sci-fi animation with high contrast and detailed mechanical textures.",
           "characters": {
-            "Thomas": "A weathered miller with deep wrinkles, short gray hair, wearing a patched brown leather vest and coarse linen shirt.",
-            "Martha": "A strong-willed artisan with tied-back dark hair flecked with gray, wearing a dark green wool tunic and sturdy leather boots."
+            "Vane": "A tall captain with a neat gray beard, wearing a crisp dark blue uniform jacket with brass rank pins.",
+            "Jax": "A sturdy engineer with a leather tool belt, wearing smudged orange overalls and protective goggles pushed up on a curly brown forehead.",
+            "Lyra": "An observant officer with silver-streaked dark hair tied back tightly, wearing a teal utility vest over a gray jumpsuit."
           },
           "locations": {
-            "The Mill": "A rustic stone building with a moss-covered thatched roof and a massive wooden waterwheel."
+            "Bridge": "A curved chamber featuring glowing amber instrument panels, overhead steel girders, and panoramic windows facing open space.",
+            "Cargo Bay": "A vast, chilly compartment lined with stacked stasis pods glowing in soft blue hues.",
+            "Maintenance Deck": "A cramped, utilitarian space filled with exposed copper pipes, blinking circuit panels, and heavy tool racks.",
+            "Observation Dome": "A spacious half-sphere room with polished metallic flooring and comfortable padded seating benches."
           },
           "objects": {
-            "Waterwheel": "A ten-meter rotting oak wheel with broken paddles.",
-            "IronWedge": "A heavy, rusted wedge used for splitting timber."
+            "Biometric Datapad": "A thin rectangular glass slate displaying moving green heartbeat waveforms and inventory numbers.",
+            "Utility Robot": "A compact rolling cylinder with three articulated mechanical arms and a single rotating blue optical sensor.",
+            "Diagnostic Console": "A sunken terminal set into the bulkhead with tactile black buttons and an oversized red warning beacon."
           }
         },
-        "plot_fingerprint": "633f4d96f08106626e44c6394526aff6ccd0b1d997f2aeb8a5cff83c6f5dedca"
+        "plot_fingerprint": "573d3e82bec1df7b4ba390ee26b31ea03b7056e4e6d596220133884802b5afdc"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "ebac1c381ebb14e7718abf43",
+      "source_sha256": "3b319bcdda10f4ea9f6287a10991e31f0c1131dda6263bed68b929bb954573c9",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-f4616578d58bcca28bfc",
+        "title": "The Infinite Pancake-Flidder Debacle",
+        "hook": "The Morning Inspection",
+        "question": "Can Barnaby sell his hyper-kinetic batter launcher before the morning market inspector condemns his stall?",
+        "answer": "Yes, by accidentally launching breakfast directly into the inspector's mouth, winning a culinary medal instead of a fine.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Morning Inspection",
+            "speech": "Behold the marvellous mechanical pancake flipper, designed to feed this entire bustling market in under four seconds flat!",
+            "visual": "robot",
+            "label": "The Flidder Reveal",
+            "story_beat": "reveal",
+            "visual_prompt": "Barnaby stands proudly inside his cluttered market stall, pointing at a metallic spring-loaded pancake flipper while the stern inspector writes on a clipboard.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Fermented Fury",
+            "speech": "Oh dear, the batter has fermented faster than anticipated, expanding inside the titanium chamber with alarming rhythmic ticking noises.",
+            "visual": "signal",
+            "label": "Pressure Build",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby frantically twists a brass valve on the vibrating machine as angry green bubbles swell and steam hisses from the silver canister.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Breakfast Barrage",
+            "speech": "Duck and cover, everyone, because the automated mechanism has decided to distribute breakfast across every single vegetable cart!",
+            "visual": "forest",
+            "label": "Kinetic Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "Golden pancakes fly wildly through the crowded market air, striking market umbrellas and landing neatly atop stacks of fresh cabbages.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A Sweet Victory",
+            "speech": "Well, I must admit this unconventional delivery method is surprisingly delicious, so I hereby award your stall first prize!",
+            "visual": "door",
+            "label": "Pancake Payoff",
+            "story_beat": "payoff",
+            "visual_prompt": "The inspector happily catches a falling pancake in his open mouth while Barnaby wipes flour from his brow and smiles in relief.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Barnaby tests a high-speed spring-loaded pancake flipper inside a cramped, crowded public market stall.",
+        "decisive_choice": "Barnaby pulls the emergency maximum-velocity lever to clear a backlog of fermented dough.",
+        "resolution": "The airborne pancakes form a delicious canopy over the market, delighting the inspector and saving the business.",
+        "visual_bible": {
+          "style": "Bright, whimsical stop-motion claymation aesthetic with vibrant primary colors and highly detailed textures.",
+          "characters": {
+            "Barnaby": "An eager inventor with wild ginger hair, smudged round spectacles, a flour-dusted green apron, and a perpetually surprised expression.",
+            "Inspector": "A stern municipal official with a waxed handlebar mustache, a stiff blue uniform, and a severe scowl."
+          },
+          "locations": {
+            "MarketStall": "A crowded wooden booth overflowing with sacks of flour, copper pots, and hanging ladles in the center of a busy cobblestone town square."
+          },
+          "objects": {
+            "PancakeFlidder": "A contraption made of shiny brass gears, a red rubber squeeze bulb, and a spring-loaded steel spatula arm.",
+            "Clipboard": "A wooden board holding a crisp white paper filled with red warning checkmarks."
+          }
+        },
+        "plot_fingerprint": "4413e84ce38cb38989da94b41d2f92a0911b3dbf854b3f7043d043e6da186c2e"
       },
       "approved": false
     }
