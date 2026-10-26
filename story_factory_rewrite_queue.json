@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "5e8d2113720373a8b85d67b3",
-      "source_sha256": "fa0202747d2964e78167b0c306f08df3a82be582069c534b08bc84bf97b1c897",
+      "candidate_id": "f93bc925f5fc32799e4f8241",
+      "source_sha256": "609616b2edc329b83c5d315de1b4310f9e1ec980b32abbf8295d69aa1abb1089",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-e64c48b92b5f244fa256",
-        "title": "The Automatic Onion-Crying Goggles",
-        "hook": "The Sizzling Invention",
-        "question": "Can an overly emotional kitchen gadget save a failing vegetable stall?",
-        "answer": "Yes, by generating synthetic tears that keep onions hydrated and fresh all day long.",
+        "content_id": "rayvan-gemini-658a153f95a88b11dfa5",
+        "title": "The Great Onion Chopper Debacle",
+        "hook": "The Catastrophic Reveal",
+        "question": "Can Barnaby sell his chaotic onion chopping helmet before it explodes?",
+        "answer": "Barnaby tests it on a cabbage instead, saving his market stall from total disaster.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,80 +29,79 @@
         ],
         "story_beats": [
           {
-            "headline": "The Sizzling Invention",
-            "speech": "Behold the tear-duct regulator! It senses vegetable melancholy and soothes them with pure hydration instantly.",
+            "headline": "The Catastrophic Reveal",
+            "speech": "Behold the tearless chopping wonder! No more crying over slicing onions in the bustling town square market.",
             "visual": "robot",
-            "label": "The Contraption Reveal",
+            "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly behind his wooden market stall, holding a clunky copper robot-goggle device dripping with salty water, surrounded by confused vegetable vendors.",
+            "visual_prompt": "Barnaby stands at his messy market stall wearing a bizarre metal helmet with twitching mechanical arms, holding a bruised red onion while nervous townspeople watch.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Flooding Market",
-            "speech": "Oh dear, the sensitivity dial is stuck on maximum! The entire carrot section is completely underwater now!",
+            "headline": "The Jammed Mechanism",
+            "speech": "Oh dear, the gears are locking up tight! The spring tension is increasing rapidly inside this contraption.",
             "visual": "signal",
-            "label": "The Mechanism Spikes",
+            "label": "The Malfunction",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby frantically twists a glowing red dial on the copper goggles while rushing through a knee-high wave of vegetable rinse water inside the crowded market square.",
+            "visual_prompt": "Barnaby frantically taps the side of his helmet with a small wrench while small puffs of smoke hiss from the brass hinges, making the villagers step back.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Desperate Adaptation",
-            "speech": "Quickly grab the spare copper tubing! We must channel this salty overflow directly onto the parsnips!",
+            "headline": "The Desperate Build",
+            "speech": "Quickly grab that stray cabbage from the crate before the main spring snaps completely out of control!",
             "visual": "ship",
-            "label": "The Emergency Build",
+            "label": "The Substitute",
             "story_beat": "build",
-            "visual_prompt": "Barnaby and his niece rapidly solder a network of curved copper tubes resembling ship rigging above the root vegetable crates to drain the excess liquid.",
+            "visual_prompt": "Barnaby holds out his hands while his young apprentice toss a round green cabbage directly toward the twitching mechanical blades mounted on the helmet.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Crisp Victory",
-            "speech": "Look at those shiny, perfectly misted turnips! The tourists are buying every single vegetable we own today!",
+            "headline": "The Messy Payoff",
+            "speech": "Well, that certainly chopped the cabbage into fine coleslaw, though my dignity is completely ruined forever.",
             "visual": "forest",
-            "label": "The Market Payoff",
+            "label": "The Aftermath",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby smiles broadly as a line of cheerful tourists eagerly buy glowing, perfectly misted root vegetables from his dry, bustling market stall decorated with green leafy garlands.",
+            "visual_prompt": "Barnaby stands covered in a green mist of shredded cabbage leaves and vegetable bits, smiling sheepishly at the amused and clapping crowd around his stall.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby invention creates too many fake tears, flooding the bustling morning market stalls.",
-        "decisive_choice": "Barnaby diverts the excess salty moisture into small misting tubes above the root vegetable crates.",
-        "resolution": "The root vegetables remain remarkably crisp, attracting double the usual weekend tourist crowd.",
+        "central_conflict": "Barnaby invented a spring-loaded onion helmet that mashes vegetables instead of slicing them neatly.",
+        "decisive_choice": "Barnaby pulls the emergency release lever to sacrifice his own invention rather than the customer's stall.",
+        "resolution": "The helmet explodes in a cloud of mist, leaving Barnaby with clean spectacles and a happy audience.",
         "visual_bible": {
-          "style": "vibrant, whimsical stop-motion animation aesthetic with warm lighting and detailed textures",
+          "style": "Slapstick animated comedy with bright primary colors and exaggerated character expressions.",
           "characters": {
-            "Barnaby": "An elderly inventor with wild grey hair, round brass spectacles, a stained green apron, and ink-stained fingers.",
-            "Niece": "A resourceful teenager with braided brown hair, denim overalls, and a tool belt filled with tiny spanners."
+            "Barnaby": "An eccentric inventor with wild gray hair, a stained yellow apron, and round spectacles.",
+            "Apprentice": "A cheerful teenager in a blue vest carrying wooden crates."
           },
           "locations": {
-            "Market Square": "A bustling, sunlit cobblestone marketplace filled with striped awnings, wooden crates, and shouting vendors."
+            "Market Square": "A bustling medieval marketplace filled with colorful awnings, wooden carts, and vegetable stalls."
           },
           "objects": {
-            "Goggles": "A bulky copper contraption with glass lenses, glowing red indicator lights, and a dripping rubber nozzle.",
-            "Copper Tubing": "Shiny, flexible metal pipes used to redirect liquids around the busy market stall."
+            "Onion Helmet": "A copper helmet featuring spring-loaded steel blades, brass gears, and a red emergency lever."
           }
         },
-        "plot_fingerprint": "820e10f2f2c86395f84d708f3f7ce11441e265d47f9291d634fd88128d0a406e"
+        "plot_fingerprint": "5725f207d25d598734a616d4fc3828b8b3ea9318566e9639224d969450af9f80"
       },
       "approved": false
     },
     {
-      "candidate_id": "86e76da5a039def84fecb1b7",
-      "source_sha256": "7d52b4456bf39466ae60edae51aa7558fe529a570b561becec118df14fc995c0",
+      "candidate_id": "42041f4ec98578b1714504c5",
+      "source_sha256": "204a0655824e57d013fc3707ec9728ac08cc5bcb6ce9d85d91d318c183195c22",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-9e54a2cdabb43eab3757",
-        "title": "The Drift Engine Disagreement",
-        "hook": "Overheat Warning",
-        "question": "Should the crew purge the primary coolant to outrun a solar flare?",
-        "answer": "They bypassed the manual purge and rerouted excess heat through the ballast tanks instead.",
+        "content_id": "rayvan-gemini-2960b564cca6f3dc6387",
+        "title": "The Midnight Express Baggage Mystery",
+        "hook": "The Missing Timepiece",
+        "question": "Who unlocked the conductor's missing antique pocket watch before platform departure?",
+        "answer": "An intelligent station pigeon trained by the retired stationmaster to deliver lost items.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -110,150 +109,148 @@
         ],
         "story_beats": [
           {
-            "headline": "Overheat Warning",
-            "speech": "Captain Vane, we must purge the primary coolant now or the main reactor will melt down completely.",
-            "visual": "ship",
-            "label": "Reactor Core",
-            "story_beat": "reveal",
-            "visual_prompt": "Chief engineer Jax points at a flashing red diagnostic console inside the vibrating bridge, wearing grease-stained overalls and a worried expression.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Cargo Risk",
-            "speech": "If we purge the coolant, our delicate biological cargo will perish before we reach the outer colony.",
+            "headline": "The Missing Timepiece",
+            "speech": "Where has the old conductor placed his golden pocket watch? The express departs in exactly five minutes.",
             "visual": "signal",
-            "label": "Cargo Bay",
-            "story_beat": "build",
-            "visual_prompt": "First officer Lyra stands inside the dimly lit cargo bay, holding a glowing biometric datapad while shaking her head firmly at Jax.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Alternative Routing",
-            "speech": "We can siphon the thermal overload into the empty water ballast tanks without losing our precious cargo.",
-            "visual": "robot",
-            "label": "Maintenance Deck",
-            "story_beat": "mechanism",
-            "visual_prompt": "Jax activates a utility robot in the metallic maintenance deck, programming a secondary valve diversion on a holographic touchscreen.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Safe Escape",
-            "speech": "The ballast tanks absorbed the excess heat safely, and we are now accelerating clear of the solar flare.",
-            "visual": "planet",
-            "label": "Observation Dome",
-            "story_beat": "payoff",
-            "visual_prompt": "Vane and Lyra smile together inside the sunlit observation dome, watching a distant green planet as the ship cruises through calm space.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Disagreement over purging coolant",
-        "decisive_choice": "Rerouting heat through ballast tanks",
-        "resolution": "Safe escape from the solar flare",
-        "visual_bible": {
-          "style": "Clean, colorful sci-fi animation with high contrast and detailed mechanical textures.",
-          "characters": {
-            "Vane": "A tall captain with a neat gray beard, wearing a crisp dark blue uniform jacket with brass rank pins.",
-            "Jax": "A sturdy engineer with a leather tool belt, wearing smudged orange overalls and protective goggles pushed up on a curly brown forehead.",
-            "Lyra": "An observant officer with silver-streaked dark hair tied back tightly, wearing a teal utility vest over a gray jumpsuit."
-          },
-          "locations": {
-            "Bridge": "A curved chamber featuring glowing amber instrument panels, overhead steel girders, and panoramic windows facing open space.",
-            "Cargo Bay": "A vast, chilly compartment lined with stacked stasis pods glowing in soft blue hues.",
-            "Maintenance Deck": "A cramped, utilitarian space filled with exposed copper pipes, blinking circuit panels, and heavy tool racks.",
-            "Observation Dome": "A spacious half-sphere room with polished metallic flooring and comfortable padded seating benches."
-          },
-          "objects": {
-            "Biometric Datapad": "A thin rectangular glass slate displaying moving green heartbeat waveforms and inventory numbers.",
-            "Utility Robot": "A compact rolling cylinder with three articulated mechanical arms and a single rotating blue optical sensor.",
-            "Diagnostic Console": "A sunken terminal set into the bulkhead with tactile black buttons and an oversized red warning beacon."
-          }
-        },
-        "plot_fingerprint": "573d3e82bec1df7b4ba390ee26b31ea03b7056e4e6d596220133884802b5afdc"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "ebac1c381ebb14e7718abf43",
-      "source_sha256": "3b319bcdda10f4ea9f6287a10991e31f0c1131dda6263bed68b929bb954573c9",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-f4616578d58bcca28bfc",
-        "title": "The Infinite Pancake-Flidder Debacle",
-        "hook": "The Morning Inspection",
-        "question": "Can Barnaby sell his hyper-kinetic batter launcher before the morning market inspector condemns his stall?",
-        "answer": "Yes, by accidentally launching breakfast directly into the inspector's mouth, winning a culinary medal instead of a fine.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Morning Inspection",
-            "speech": "Behold the marvellous mechanical pancake flipper, designed to feed this entire bustling market in under four seconds flat!",
-            "visual": "robot",
-            "label": "The Flidder Reveal",
+            "label": "Platform Panic",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly inside his cluttered market stall, pointing at a metallic spring-loaded pancake flipper while the stern inspector writes on a clipboard.",
+            "visual_prompt": "An anxious conductor in a navy uniform looks at a glowing red departure signal inside a crowded Victorian railway station.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Fermented Fury",
-            "speech": "Oh dear, the batter has fermented faster than anticipated, expanding inside the titanium chamber with alarming rhythmic ticking noises.",
-            "visual": "signal",
-            "label": "Pressure Build",
+            "headline": "The Feathered Sleuth",
+            "speech": "Look up at the iron rafters! That peculiar pigeon is holding something gleaming brightly in its beak.",
+            "visual": "robot",
+            "label": "Unexpected Ally",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically twists a brass valve on the vibrating machine as angry green bubbles swell and steam hisses from the silver canister.",
+            "visual_prompt": "A clever grey pigeon wearing a tiny brass mechanical courier harness stands on a high steel girder inside the grand station roof.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Breakfast Barrage",
-            "speech": "Duck and cover, everyone, because the automated mechanism has decided to distribute breakfast across every single vegetable cart!",
-            "visual": "forest",
-            "label": "Kinetic Mechanism",
-            "story_beat": "mechanism",
-            "visual_prompt": "Golden pancakes fly wildly through the crowded market air, striking market umbrellas and landing neatly atop stacks of fresh cabbages.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A Sweet Victory",
-            "speech": "Well, I must admit this unconventional delivery method is surprisingly delicious, so I hereby award your stall first prize!",
+            "headline": "The Clanking Mechanism",
+            "speech": "Pull the lever on the telegraph pole to lower the maintenance ladder and reach the clever bird.",
             "visual": "door",
-            "label": "Pancake Payoff",
+            "label": "The Ascent",
+            "story_beat": "mechanism",
+            "visual_prompt": "The stationmaster pulls a heavy brass lever beside a wooden maintenance door attached to a brick pillar on the bustling platform.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Departing on Time",
+            "speech": "The precious watch is back in safe hands, proving that even the smallest helpers can save the day.",
+            "visual": "ship",
+            "label": "All Aboard",
             "story_beat": "payoff",
-            "visual_prompt": "The inspector happily catches a falling pancake in his open mouth while Barnaby wipes flour from his brow and smiles in relief.",
+            "visual_prompt": "The glowing steam locomotive resembling a majestic land ship puffs white smoke as it rolls smoothly away from the joyful platform crowd.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby tests a high-speed spring-loaded pancake flipper inside a cramped, crowded public market stall.",
-        "decisive_choice": "Barnaby pulls the emergency maximum-velocity lever to clear a backlog of fermented dough.",
-        "resolution": "The airborne pancakes form a delicious canopy over the market, delighting the inspector and saving the business.",
+        "central_conflict": "The express train is about to depart without the vital timetable pocket watch.",
+        "decisive_choice": "Follow the trained bird up the iron rafters instead of searching the lost property office.",
+        "resolution": "The pocket watch is safely returned to the conductor just as the whistle blows.",
         "visual_bible": {
-          "style": "Bright, whimsical stop-motion claymation aesthetic with vibrant primary colors and highly detailed textures.",
+          "style": "Cinematic steampunk illustration with warm lantern lighting and rich Victorian textures.",
           "characters": {
-            "Barnaby": "An eager inventor with wild ginger hair, smudged round spectacles, a flour-dusted green apron, and a perpetually surprised expression.",
-            "Inspector": "A stern municipal official with a waxed handlebar mustache, a stiff blue uniform, and a severe scowl."
+            "conductor": "A tall, elderly man with a sweeping grey mustache, wearing a dark navy wool uniform and brass buttons.",
+            "stationmaster": "A stout, cheerful woman wearing a tweed waistcoat, round spectacles, and a pocket watch chain.",
+            "pigeon": "An exceptionally smart grey homing pigeon wearing a custom-fitted miniature leather backpack."
           },
           "locations": {
-            "MarketStall": "A crowded wooden booth overflowing with sacks of flour, copper pots, and hanging ladles in the center of a busy cobblestone town square."
+            "platform": "Grand Victorian railway station with arched iron and glass ceilings, cobblestone floors, and warm gas lamps.",
+            "rafters": "High structural steel beams dusted with soot, overlooking the bustling steam trains below."
           },
           "objects": {
-            "PancakeFlidder": "A contraption made of shiny brass gears, a red rubber squeeze bulb, and a spring-loaded steel spatula arm.",
-            "Clipboard": "A wooden board holding a crisp white paper filled with red warning checkmarks."
+            "pocket_watch": "An antique engraved gold pocket watch attached to a sturdy braided chain.",
+            "signal_lamp": "A heavy cast iron railway signal post featuring a glowing red mechanical semaphore arm."
           }
         },
-        "plot_fingerprint": "4413e84ce38cb38989da94b41d2f92a0911b3dbf854b3f7043d043e6da186c2e"
+        "plot_fingerprint": "e05a7db2772a5600772154f4c36e7206ed0504c9e8448eed61aa2cf762a8dc47"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "84ac251fc367f4802e4d6ee5",
+      "source_sha256": "f222db1aeadd46fee956acf0a01b1c08e0c7b1250c6949b6aa73c20cb2d65228",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-10edbf4f4a30f55e003b",
+        "title": "The Frozen Bearing",
+        "hook": "Warning Alarm Activated",
+        "question": "Can the thermal core be salvaged in time to save the stranded weather station?",
+        "answer": "Yes, by manually diverting emergency generator fuel through the exterior cooling conduits.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Warning Alarm Activated",
+            "speech": "The primary heating grid has dropped below freezing, and the automated fuel pump is completely frozen solid.",
+            "visual": "signal",
+            "label": "System Failure",
+            "story_beat": "reveal",
+            "visual_prompt": "Dr. Maeve Vance staring at a blinking red console inside the dimly lit metal research hub, clutching a heavy wool clipboard.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Evaluating the Options",
+            "speech": "We cannot wait for the airlift. We must drain the transport snowcat reserve immediately to save the base.",
+            "visual": "ship",
+            "label": "The Dilemma",
+            "story_beat": "build",
+            "visual_prompt": "Dr. Maeve Vance pointing a gloved finger at a blue schematic blueprint spread across a metal table, looking intently at Engineer Jiao.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Manual Override Engaged",
+            "speech": "Hold the conduit steady while I attach the manual siphon line to bypass the frozen intake valve.",
+            "visual": "robot",
+            "label": "The Action",
+            "story_beat": "mechanism",
+            "visual_prompt": "Engineer Jiao steadying a humming mechanical pump outside in the swirling white snowstorm, wearing an orange heavy-duty parka.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Thermal Recovery Confirmed",
+            "speech": "The temperature gauges are finally rising into the green zone. We made the right call to save the crew.",
+            "visual": "door",
+            "label": "Safe Harbor",
+            "story_beat": "payoff",
+            "visual_prompt": "Dr. Maeve Vance and Engineer Jiao smiling warmly inside the bright, heated airlock corridor, holding steaming mugs of tea.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Freezing temperatures threatening life support systems during a severe blizzard.",
+        "decisive_choice": "Sacrificing the primary transport snowcat fuel reserve to power the emergency heat lines.",
+        "resolution": "The station maintains safe internal temperatures until the relief team arrives.",
+        "visual_bible": {
+          "style": "Realistic gritty cinematic style with cold blue and warm orange contrast lighting.",
+          "characters": {
+            "Dr. Maeve Vance": "A resilient arctic researcher with short dark hair, wearing a fur-lined teal parka and rugged snow goggles.",
+            "Engineer Jiao": "A practical mechanic with a stubbled beard, wearing an orange high-visibility parka and heavy insulated gloves."
+          },
+          "locations": {
+            "Research Hub": "A cramped, metallic modular building interior packed with glowing scientific monitors and exposed wiring.",
+            "Outer Snow Platform": "A freezing outdoor metal deck surrounded by endless white arctic plains and heavy falling snow."
+          },
+          "objects": {
+            "Thermal Core": "A cylindrical titanium engine part glowing with a faint blue operational light.",
+            "Manual Siphon": "A heavy rubberized hose fitted with brass valves and a mechanical hand-crank."
+          }
+        },
+        "plot_fingerprint": "7fcd728b93f343108bb2bdde42209f5f21c0191099ff78b9b68337e819ffb9dd"
       },
       "approved": false
     }
