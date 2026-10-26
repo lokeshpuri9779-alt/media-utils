@@ -1,9 +1,21 @@
-# Offline smoke-test adapter (non-generative)
+# Offline smoke test — unified ASTRA
 
-The unified orchestrator can run a deterministic offline smoke test against **eight existing scene JPGs**. This does not install or benchmark Stable Diffusion, prove character consistency, provide speech synthesis, or publish.
+This is a **non-generative** technical pipeline check using eight existing storyboard JPG files. It does not prove AI generation, consistent characters, narration, or YouTube publishing.
 
-Prerequisites: Python, numpy, opencv-python, ffmpeg; place scene_01.jpg through scene_08.jpg in a local folder.
+Prerequisites: Python, numpy, opencv-python, ffmpeg, and eight scene images named `scene_01.jpg` through `scene_08.jpg` in an asset folder.
 
-The adapter is in `astra_unified/demo_stage.py`. From an empty output directory, configure each ASTRA_*_CMD stage to call `python /absolute/path/to/astra_unified/demo_stage.py <stage> --asset-dir /absolute/path/to/scenes`. Then run `python /absolute/path/to/astra_unified/pipeline.py --output /absolute/path/to/output`. Leave ASTRA_PUBLISH_CMD unset; publishing remains disabled.
+From the repository root:
 
-The adapter validates images technically, creates an eight-second motion slideshow, generates a quiet synthetic ambient tone, muxes audio, and checks 96 decoded frames at 12 fps. These tests are a transport/encoding proof only. The main ASTRA pipeline remains unchanged.
+```bash
+export REPO_ROOT="$PWD"
+export ASSET_DIR="/absolute/path/to/scene_images"
+export OUT_DIR="/absolute/path/to/smoke_output"
+for stage in STORY IMAGES CONSISTENCY ANIMATION NARRATION EDIT QUALITY; do
+  export "ASTRA_${stage}_CMD=python $REPO_ROOT/astra_unified/demo_stage.py ${stage,,} $ASSET_DIR"
+done
+python astra_unified/pipeline.py --output "$OUT_DIR"
+```
+
+The adapter runs seven stages, checks that all eight JPGs decode, creates an 8-second 360×640 slideshow at 12 fps, adds a **silent placeholder audio track**, and verifies 96 decoded video frames. It intentionally does not perform speech synthesis or real character animation. Publishing remains disabled unless explicitly opted in and configured.
+
+Run unit tests with `python -m unittest discover -s astra_unified -p 'test_*.py'`. GitHub Actions CI is not enabled by this change. Main ASTRA is unchanged.
