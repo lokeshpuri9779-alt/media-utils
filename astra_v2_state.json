@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 36,
-  "confirmed_today": 35,
-  "last_attempt_at": "2026-10-26T10:42:32.904452+00:00",
+  "attempts": 37,
+  "confirmed_today": 36,
+  "last_attempt_at": "2026-10-26T11:24:42.809419+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -4632,16 +4632,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "ZOi_CZ5Jd8s": {
-      "content_id": "rayvan-forge-175e1f39b5d0e2f0",
+    },
+    "rayvan-forge-175e1f39b5d0e2f0": {
+      "video_id": "ZOi_CZ5Jd8s",
+      "confirmed_at": "2026-10-26T11:12:58.710446+00:00",
       "title": "The Otter and the Echoing Well",
-      "day": "2026-10-26",
-      "uploaded_at": "2026-10-26T10:42:34.462293+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-26T10:42:34.462293+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "e9d106286e629e5b159c4d85eda69784cfa5ce754b1e1ac62aa3ed3b060a8727",
       "story_beats": [
@@ -4682,16 +4680,67 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "AyfsVKoSk_0": {
+      "content_id": "rayvan-forge-4d93b316157ea313",
+      "title": "The Squirrel and the Wrong Invitation",
+      "day": "2026-10-26",
+      "uploaded_at": "2026-10-26T11:24:44.736915+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "a1e1269a48b8f0fc1483173077bf0869a8dd9c38543dc0350ef5c6b3ba2559ec",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "A squirrel delivered wedding invitations to the wrong houses before the ceremony.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "She retraced the route, but the wind scattered her address list.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "A ribbon color on each envelope matched the decorations outside each guest's home.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "She corrected the deliveries and the guests arrived just before the vows.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-26T10:37:13.781269+00:00",
+  "last_preflight_at": "2026-10-26T11:12:58.181352+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-26T10:42:34.926555+00:00",
+    "at": "2026-10-26T11:24:45.152263+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -10237,10 +10286,57 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-4d93b316157ea313": {
+      "at": "2026-10-26T11:24:42.809403+00:00",
+      "title": "The Squirrel and the Wrong Invitation",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "a1e1269a48b8f0fc1483173077bf0869a8dd9c38543dc0350ef5c6b3ba2559ec",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "A squirrel delivered wedding invitations to the wrong houses before the ceremony.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "She retraced the route, but the wind scattered her address list.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "A ribbon color on each envelope matched the decorations outside each guest's home.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "She corrected the deliveries and the guests arrived just before the vows.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-26T10:42:34.926513+00:00",
+    "at": "2026-10-26T11:24:45.152181+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -10251,21 +10347,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-26T10:42:34.926549+00:00",
+    "at": "2026-10-26T11:24:45.152248+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-26T10:37:36.558056+00:00",
+    "at": "2026-10-26T11:13:43.812403+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-175e1f39b5d0e2f0",
-    "video_url": "https://www.youtube.com/watch?v=ZOi_CZ5Jd8s",
+    "content_id": "rayvan-forge-4d93b316157ea313",
+    "video_url": "https://www.youtube.com/watch?v=AyfsVKoSk_0",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-26T10:42:34.926360+00:00",
+    "at": "2026-10-26T11:24:45.151897+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -10277,12 +10373,12 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-26T10:42:34.926510+00:00",
+    "at": "2026-10-26T11:24:45.152173+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 39,
+        "eligible": 38,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3,
@@ -10296,21 +10392,21 @@
           "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
         },
         "seen": 11,
-        "total": 172
+        "total": 171
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 172,
+        "before": 171,
         "fingerprint": 0,
         "id": 11,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 161,
+        "remaining": 160,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 161,
-        "remaining": 39
+        "pool": 160,
+        "remaining": 38
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
