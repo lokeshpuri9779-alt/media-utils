@@ -4279,6 +4279,58 @@
       "video_id": "cbFOjlCiULw",
       "confirmed_at": "2026-10-26T16:21:42.697923+00:00",
       "title": "Why isl match today Is Getting Attention Now | RAYVAN"
+    },
+    {
+      "content_id": "rayvan-gemini-7ed1c9e86a9f9338eae3",
+      "video_id": "oZyUhhuhZGo",
+      "confirmed_at": "2026-10-26T16:45:27.996132+00:00",
+      "title": "The Alpine Rescuer and the Hidden Crag",
+      "plot_fingerprint": "9ddf751eb8a9d7c73d6712e3fe5994df0b2f184baf08d97282cc511fe5ca7c68",
+      "story_beats": [
+        {
+          "headline": "The Hidden Crevasse",
+          "speech": "Listen closely to the howling wind and watch the drifting snow erase our only footprints back.",
+          "visual": "forest",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "An exhausted mountain rescuer in a red parka stands at the edge of a deep snowy forest bordering a steep cliff, holding an ice axe with a grim expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Frozen Signal",
+          "speech": "We have very little battery left in this emergency radio, so our timing must be absolutely flawless.",
+          "visual": "signal",
+          "label": "The Transmission",
+          "story_beat": "build",
+          "visual_prompt": "The rescuer kneels beside a rocky outcrop, holding a blinking orange emergency rescue beacon that emits faint pulsing light into the falling snow.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Mechanical Lift",
+          "speech": "Pull the winch cable firmly now while I secure the heavy climbing harness around the icy boulder.",
+          "visual": "robot",
+          "label": "The Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "A mechanical winch device mounted on a tripod is operated by the rescuer, with metal gears turning smoothly against the freezing wind.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Return",
+          "speech": "We made it through the storm just in time, proving that courage always finds a way home.",
+          "visual": "ship",
+          "label": "The Rescue",
+          "story_beat": "payoff",
+          "visual_prompt": "A rescue helicopter hovers above a snowy mountain ridge, its bright landing lights cutting through the whiteout while the rescuer waves cheerfully.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A stranded climber is trapped on a freezing ledge while an aggressive blizzard rapidly approaches.",
+      "decisive_choice": "The rescuer chooses to fire his final long-range distress flare into the heavy whiteout instead of descending for reinforcement.",
+      "resolution": "The bright amber flare guides a rescue helicopter directly to the hidden crag, saving both mountaineers."
     }
   ]
 }
