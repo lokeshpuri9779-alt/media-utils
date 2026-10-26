@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "e0629828939ee34b4b2545e7",
-      "source_sha256": "3a6c0d71306ec29aa777f4c2a5a4e8e639dd0104dd86616065a3a0c72654abc4",
+      "candidate_id": "40d31f11e83de8f83055d760",
+      "source_sha256": "b19f2b23b91194fcd244ea38704f87013a84b5729e03951ecfeff85236021355",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-a9a585fedaa641eb0b2d",
-        "title": "The Great Saffron Soup Spout Disaster",
-        "hook": "A Pressure Problem",
-        "question": "Can Barnaby sell his chaotic soup-launching ladle before the municipal health inspector shuts down his noisy market stall?",
-        "answer": "Barnaby rigs the ladle to launch bread rolls instead, winning over the inspector with instant soup-and-sandwich delivery.",
+        "content_id": "rayvan-gemini-c34301c213160bfd2ee7",
+        "title": "The Great Onion Chopping Contraption Catastrophe",
+        "hook": "The Cabbage Overload",
+        "question": "Can Barnaby sell his automatic vegetable slicer before it covers the entire market in rogue cabbage?",
+        "answer": "Barnaby successfully reconfigures his invention into a confetti cannon, turning a culinary disaster into a festive market celebration.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,79 +29,78 @@
         ],
         "story_beats": [
           {
-            "headline": "A Pressure Problem",
-            "speech": "Behold the magnificent saffron soup spout, engineered for maximum velocity and zero waiting time in this crowded market square!",
+            "headline": "The Cabbage Overload",
+            "speech": "Behold the magnificent automatic slicer! It processes forty heads of cabbage every minute without a single human pause.",
             "visual": "robot",
-            "label": "The Invention",
+            "label": "The Invention Unveiled",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly behind a brass market stall holding a clanking metallic soup ladle while hot yellow broth sprays sideways onto a startled shopper in the sunny outdoor bazaar.",
+            "visual_prompt": "Barnaby stands proudly next to a steaming, copper-plated robotic vegetable slicer in a crowded market square, gesturing wildly with a wooden pointer while holding a clipboard in his left hand.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Emergency Adjustments",
-            "speech": "Hold your horses, inspector! I am merely optimizing the pressure regulator to ensure piping hot delivery for every single hungry customer.",
+            "headline": "The Gear Jam",
+            "speech": "Oh dear, the hopper is jammed with red cabbages! Quick, hand me the heavy wrench before the pressure valve explodes!",
             "visual": "signal",
-            "label": "The Fix",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby frantically tightens a large red valve on the side of his steaming metal soup tank while a stern health inspector in a blue uniform taps his clipboard disapprovingly.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Crouton Cannon",
-            "speech": "Who needs spoons when you can fire toasted bread cubes right into the broth with pinpoint accuracy and absolute flair?",
-            "visual": "ship",
-            "label": "The Pivot",
+            "label": "Mechanical Malfunction",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby pulls a wooden lever on his brass contraption, shooting a dozen golden croutons through the air that land perfectly splashing into bowls of soup lined up on the counter.",
+            "visual_prompt": "Barnaby frantically tries to unclog the vibrating robotic slicer in the busy market, holding a heavy iron wrench in his right hand while a blinking red warning signal flashes on the machine panel.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Market Approval",
-            "speech": "This is unorthodox engineering, but honestly, the crunch factor makes it the finest lunch in the entire district. Permit approved!",
+            "headline": "The Confetti Conversion",
+            "speech": "If I reverse the polarity of this steam valve, we might just salvage this mess into something wonderfully festive instead!",
+            "visual": "ship",
+            "label": "The Desperate Pivot",
+            "story_beat": "twist",
+            "visual_prompt": "Barnaby adjusts a series of brass pipes resembling a ship's boiler attached to the slicing machine, holding a pair of pliers in his left hand with a determined expression on his soot-smudged face.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Grand Celebration",
+            "speech": "It worked! Instead of shredded vegetables, we are now the premier party supply vendors in the entire province!",
             "visual": "door",
-            "label": "The Success",
+            "label": "Market Triumph",
             "story_beat": "payoff",
-            "visual_prompt": "The health inspector smilingly hands a golden permit scroll to a relieved Barnaby across the bustling market counter while cheerful shoppers happily eat their launched soup.",
+            "visual_prompt": "Barnaby stands smiling in front of his wooden market stall door, holding a bag of gold coins in his right hand while colorful paper confetti rains down over cheering market customers.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby's erratic pressurized soup ladle keeps splashing patrons while the inspector approaches.",
-        "decisive_choice": "Reconfigure the pneumatic valve to project dry croutons directly into the soup bowls.",
-        "resolution": "The market crowd cheers the innovative soup-and-crouton delivery system, securing the vendor license.",
+        "central_conflict": "A malfunctioning vegetable slicing machine threatens to bury the bustling farmer's market in mountains of unwanted shredded cabbage.",
+        "decisive_choice": "Barnaby rewires the primary gear assembly to reverse the blade rotation instead of shutting down the power source.",
+        "resolution": "The modified machine showers the delighted marketgoers in colorful paper confetti, earning Barnaby instant fame and massive profits.",
         "visual_bible": {
-          "style": "Bright, colorful animated comedy style with exaggerated character expressions and rich market textures.",
+          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures and whimsical steampunk elements.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild ginger hair, round spectacles, a flour-dusted green vest, and ink-stained fingers.",
-            "Inspector Vance": "A tall, rigid municipal inspector wearing a crisp blue uniform, a polished badge, and a permanent frown."
+            "Barnaby": "An enthusiastic young inventor with messy brown hair, round brass spectacles, a plaid vest over a white linen shirt, and soot smudges on his left cheek."
           },
           "locations": {
-            "Market Square": "A bustling outdoor bazaar filled with striped canvas awnings, wooden crates of vegetables, and hanging lanterns."
+            "Market Square": "A bustling medieval outdoor marketplace featuring wooden merchant stalls with striped canvas awnings, cobblestone pavement, and vegetable baskets lining the pathways."
           },
           "objects": {
-            "Soup Ladle Contraption": "A towering brass and copper apparatus with pressure gauges, tubes, a hopper for croutons, and a long mechanical arm."
+            "Slicing Machine": "A towering contraption made of gleaming copper pipes, spinning steel blades, a brass pressure gauge, and a large funnel-shaped hopper on top."
           }
         },
-        "plot_fingerprint": "a5c52e6b803f9972c7ec59b1143013c337847243af3aa777186971ff7159030a"
+        "plot_fingerprint": "08c029aa7d2cebe070a010a4497fd80d700a8fe94810d667e8bfd27521b51404"
       },
       "approved": false
     },
     {
-      "candidate_id": "4bf4b861f8f4c6973772c45e",
-      "source_sha256": "18c151ce6560f0b836a8cc0de70873e915900e2befc3076e560dcc48f21dbf9c",
+      "candidate_id": "b676c4f7b751d7c8019b262f",
+      "source_sha256": "1a9a08949e75d515260ce9137bd0ecbb2f8bf3838f459f01589194b8d4774f04",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-74d670ab07b08407efbf",
-        "title": "The Automatic Tortilla Turner Fiasco",
-        "hook": "The Morning Unveiling",
-        "question": "Can Barnaby's motorized tortilla flipper survive the morning market rush?",
-        "answer": "Yes, after a chaotic upgrade that leaves the entire stall coated in spicy salsa.",
+        "content_id": "rayvan-gemini-6f88c2e1a5220215df88",
+        "title": "Operation Frostline: The Sledge Collapse",
+        "hook": "The Crevasse Fracture",
+        "question": "Can the engineering team rescue their trapped lead researcher before the incoming blizzard freezes the crevasse?",
+        "answer": "Yes, by utilizing the motorized winch system to pull her up just in time.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -109,80 +108,82 @@
         ],
         "story_beats": [
           {
-            "headline": "The Morning Unveiling",
-            "speech": "Behold my magnificent breakfast marvel, engineered to flip every single tortilla to golden perfection without burning a single edge!",
-            "visual": "robot",
-            "label": "The Contraption",
-            "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly pointing at a noisy brass automaton fitted with a mechanical spatula, set upon a wooden market table stacked with raw corn dough.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Speed Adjustment",
-            "speech": "It is moving entirely too slow today, so I must tighten this brass valve to triple the hydraulic pressure immediately.",
+            "headline": "The Crevasse Fracture",
+            "speech": "Dr. Vance is trapped twenty meters down the ice fissure, and the blizzard winds are already destroying our camp perimeter.",
             "visual": "signal",
-            "label": "The Adjustment",
+            "label": "Emergency Beacon",
+            "story_beat": "reveal",
+            "visual_prompt": "Dr. Vance trapped in an icy blue crevasse, looking up in alarm while holding a flashing orange emergency beacon.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Powering the Winch",
+            "speech": "We must divert all reserve battery cells to the heavy motorized winch right now to get enough pulling torque.",
+            "visual": "robot",
+            "label": "Winch Console",
             "story_beat": "build",
-            "visual_prompt": "Barnaby adjusts a steaming copper gauge with a wrench while his worried assistant, Milo, ducks behind a crate of avocados to avoid flying masa.",
+            "visual_prompt": "Engineer Marcus frantically flipping glowing switches on a metallic winch control console inside a frosted research tent.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Flapping Chaos",
-            "speech": "Duck under the counter right now because the titanium paddle has just entered supersonic mode across the entire plaza!",
+            "headline": "The Heavy Lift",
+            "speech": "Hold on tight, Doctor Vance! The steel cable is straining under the ice pressure, but the motor is finally turning.",
             "visual": "ship",
-            "label": "The Launch",
+            "label": "Transport Sledge",
             "story_beat": "mechanism",
-            "visual_prompt": "Hot tortillas soar through the air like spinning frisbees past startled market customers while Barnaby desperately tries to pull the emergency steam cord.",
+            "visual_prompt": "Marcus operating the roaring steel winch outside near the ledge, spooling a thick metallic cable disappearing straight down.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Crispy Victory",
-            "speech": "Look closely at the judges smiling through the hot sauce, because our chaotic invention has officially won the gold ribbon!",
+            "headline": "Safe Return",
+            "speech": "We made it! Pulling her onto the reinforced sledge saved her life right before the storm completely blinded the station.",
             "visual": "door",
-            "label": "The Award",
+            "label": "Station Airlock",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby and Milo stand covered in green salsa and corn flour, proudly holding a giant golden ribbon in front of their battered invention.",
+            "visual_prompt": "Dr. Vance wrapped in thermal blankets stepping safely through the heavy insulated airlock door alongside Marcus.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "motorized flipper launching corn tortillas into shoppers",
-        "decisive_choice": "overclocking the pneumatic lever with extra jalapeño juice",
-        "resolution": "earning first prize in the market utility fair",
+        "central_conflict": "A sudden ice shelf fracture drops the lead researcher into a deep crevasse while a massive blizzard approaches.",
+        "decisive_choice": "Sacrificing the primary generator fuel to power the heavy winch for an immediate vertical lift.",
+        "resolution": "The researcher is successfully hauled to safety and the team evacuates to the base camp before the storm hits.",
         "visual_bible": {
-          "style": "Bright stop-motion animation style with vibrant clay textures and detailed steampunk props",
+          "style": "Realistic cinematic winter survival documentary style with crisp textures, cold blue lighting, and swirling snow effects.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild white hair, wire-rimmed spectacles, a stained blue apron, and an enthusiastic expression.",
-            "Milo": "A cautious young assistant wearing a striped cap, a green vest, and constantly ducking for cover."
+            "Dr. Vance": "A seasoned arctic researcher with blonde hair tucked into a blue parka hood, wearing frost-dusted orange snow goggles and thermal gear.",
+            "Engineer Marcus": "A sturdy mechanic with a thick brown beard, wearing a heavy yellow expedition parka and black insulated gloves."
           },
           "locations": {
-            "market_square": "A bustling outdoor town plaza filled with wooden stalls, hanging canvas awnings, and colorful vegetable crates."
+            "Ice Shelf Base": "A remote arctic research station surrounded by towering white snowdrifts and deep blue glacial ice crevices.",
+            "Control Tent": "A glowing orange canvas tent interior packed with blinking electronic telemetry equipment and battery banks."
           },
           "objects": {
-            "automaton": "A clanky brass and copper machine with spinning gears, a pneumatic arm, and a glowing green pressure dial.",
-            "wrench": "A heavy iron tool covered in grease spots used for tightening leaky steam valves."
+            "Emergency Beacon": "A handheld metallic cylinder emitting a pulsed orange distress light.",
+            "Winch Console": "A heavy-duty steel control box featuring analog gauges and glowing green push buttons.",
+            "Transport Sledge": "A low-profile aluminum cargo sled rigged with high-tensile towing ropes."
           }
         },
-        "plot_fingerprint": "92a8a6ee44b103aab4d382dd21bbc879b203d12e04e598e8bb38b50a5f502f6b"
+        "plot_fingerprint": "0c38db667a4b3f50aaa15e55c26b7cdc2f7305ed059f203906b75afc6eec9ae4"
       },
       "approved": false
     },
     {
-      "candidate_id": "7319fd8b9473fc366986db7c",
-      "source_sha256": "466107317c155bbb0662145c6684da5e9c28179aee5d5022bf87c7608611c3d1",
+      "candidate_id": "fb8722cfc3fe981bbfdc5601",
+      "source_sha256": "4da413686fd460d9ec4ad90ff63ed4ab777df3c5aa29483af443ef98831c8d1e",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-157b097066b577163695",
-        "title": "The Canopy Chorus",
-        "hook": "The Fog Descends",
-        "question": "How can two estranged siblings survive a toxic spore fog in the Whispering Woods?",
-        "answer": "By harmonizing their unique wooden flutes to activate an ancient spore-filtering monolith.",
+        "content_id": "rayvan-gemini-d04768f89eebbee413d5",
+        "title": "The Whispering Canopy and the Amber Resin",
+        "hook": "The Hidden Sap",
+        "question": "How can two rivals cross the chasm of thorns without losing their harvest?",
+        "answer": "By pooling their warm resin caches to waterproof a vine bridge.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -190,64 +191,64 @@
         ],
         "story_beats": [
           {
-            "headline": "The Fog Descends",
-            "speech": "We cannot wait for rescue now, sister. The glowing spores are rising fast and choking the lower valley paths.",
+            "headline": "The Hidden Sap",
+            "speech": "Look up through the boughs, Kora. The glowing amber sap is leaking right above the thorny abyss.",
             "visual": "forest",
-            "label": "Spore Inundation",
+            "label": "Discovery",
             "story_beat": "reveal",
-            "visual_prompt": "An eerie emerald fog rolls through ancient mossy trees while two siblings stand on a stone ledge holding carved wooden flutes, expressions tense and alert, illuminated by bioluminescent fungi.",
+            "visual_prompt": "Wide angle of Kora and Bram pointing up at a glowing amber resin pocket high in the gnarled canopy, morning light filtering through emerald leaves, realistic style.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Silent Mechanism",
-            "speech": "This towering stone pillar needs two distinct notes at once to open its internal air filtration valves.",
-            "visual": "door",
-            "label": "Monolith Activation",
-            "story_beat": "build",
-            "visual_prompt": "Brother and sister stand before a towering moss-covered stone door carved with hollow pipes, inserting their wooden flutes into matching geometric slots on the ancient basalt surface.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Dual Resonance",
-            "speech": "Breathe deeply and match my rhythm. If our timing falters by even a second, the stone will seal forever.",
+            "headline": "The Binding Vines",
+            "speech": "We must weave these thick aerial roots together quickly before the forest winds start to howl around us.",
             "visual": "signal",
-            "label": "Harmonic Pulse",
-            "story_beat": "mechanism",
-            "visual_prompt": "Bright blue pulses of light cascade up the stone monolith as the siblings play their flutes side by side, their faces illuminated by the magical sound waves rippling through the dark trees.",
+            "label": "Cooperation",
+            "story_beat": "build",
+            "visual_prompt": "Close up of Kora and Bram working side by side, braiding thick green aerial roots together, holding wooden mallets, determined expressions, canopy background.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Cleared Horizon",
-            "speech": "Listen to the wind change direction. The fog is finally retreating back into the soil and we are safe.",
-            "visual": "planet",
-            "label": "Valley Restoration",
+            "headline": "The Dual Weight",
+            "speech": "Pour your resin across the center joint now, or the snapping tension will tear our bridge apart.",
+            "visual": "robot",
+            "label": "Action",
+            "story_beat": "mechanism",
+            "visual_prompt": "Medium shot of Bram pouring golden glowing resin from a clay jar onto the braided root bridge while Kora uses a mechanical clamp to hold it steady.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Across the Threshold",
+            "speech": "Our combined harvest saved us both. Let us build our treehouse pathways together from this day forward.",
+            "visual": "door",
+            "label": "Victory",
             "story_beat": "payoff",
-            "visual_prompt": "The toxic fog vanishes, revealing a sunlit forest valley below while the siblings lower their flutes and smile at each other with deep relief under the golden morning light.",
+            "visual_prompt": "Kora and Bram standing together on the newly secured wooden platform before the open doorway of a twin treehouse, smiling, golden sunset lighting.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A toxic spore fog traps siblings beneath the canopy, threatening to overwhelm their breathing filters.",
-        "decisive_choice": "Play the dual ancestral melody simultaneously despite the risk of drawing predatory canopy beasts.",
-        "resolution": "The monolith purifies the dense fog, creating a safe passage out of the deep forest.",
+        "central_conflict": "Competing for the rare amber resin to save their respective family treehouses",
+        "decisive_choice": "Merging their resin supplies instead of building a single narrow plank",
+        "resolution": "Both families cross safely and form a permanent canopy alliance",
         "visual_bible": {
-          "style": "Cinematic animated fantasy adventure with lush foliage, vibrant bioluminescent lighting, and rich textural detail.",
+          "style": "Cinematic animated film style with rich textures, vibrant forest greens, and glowing amber highlights.",
           "characters": {
-            "brother": "A determined young explorer with messy brown hair, wearing a patched leather tunic, heavy canvas trousers, and holding a dark carved wooden flute.",
-            "sister": "A sharp-eyed young tracker with braided blonde hair, wearing a green hooded cloak, sturdy boots, and holding a pale polished wooden flute."
+            "Kora": "A nimble forest explorer with braided dark hair, wearing a patched leather tunic and carrying a heavy wooden clamp.",
+            "Bram": "A sturdy canopy harvester with curly red hair, wearing a moss-green canvas vest and carrying clay resin jars."
           },
           "locations": {
-            "whispering_woods": "An ancient, dense forest filled with giant gnarled trees, hanging moss, and glowing blue mushrooms on the damp forest floor."
+            "Canopy Abyss": "A dizzying chasm high above the forest floor, spanned by thick ancient trees and dangerous thorn vines."
           },
           "objects": {
-            "monolithic_door": "A massive, twenty-foot-tall basalt structure embedded with ancient stone pipes and glowing rune slots.",
-            "wooden_flutes": "Hand-crafted wooden instruments etched with spiral patterns that glow faintly when exposed to magical resonance."
+            "Amber Resin": "A thick, glowing golden-orange liquid stored in terracotta jars that hardens into a waterproof seal.",
+            "Aerial Roots": "Flexible, emerald-green vines hanging from giant branch networks, used for weaving structural bridges."
           }
         },
-        "plot_fingerprint": "844f41c6ee757f8b80df3594aa1733ffac848a09ab6259edcd9e5d9d185a94ed"
+        "plot_fingerprint": "9a43654eca13f7db83f96cadd6a7bd0111ac92a8363c458916dafdd06770d10d"
       },
       "approved": false
     }
