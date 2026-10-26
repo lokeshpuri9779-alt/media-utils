@@ -4221,6 +4221,58 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-9ea5e45ecc01266dc10a",
+      "video_id": "LcKV_XPu8iQ",
+      "confirmed_at": "2026-10-26T15:33:20.431528+00:00",
+      "title": "The Badger and the Amber Spore",
+      "plot_fingerprint": "cb037021d39c22c7fa4affa4697a74f755582ea2079cd7d2061a6bc79c378bd4",
+      "story_beats": [
+        {
+          "headline": "Discovery of the Chasm",
+          "speech": "Look across the deep ravine, Bramble! The amber spores are fading fast in the freezing shadow of the ridge.",
+          "visual": "forest",
+          "label": "The Chasm Edge",
+          "story_beat": "reveal",
+          "visual_prompt": "Felix the red fox points his paw across a misty pine forest gorge toward a glowing amber spore, standing beside Bramble the stout badger holding a wooden walking stick.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Root Mechanism",
+          "speech": "We must anchor this heavy ancient root firmly into the stone crevice before the evening frost sets in.",
+          "visual": "door",
+          "label": "Bridging the Gap",
+          "story_beat": "build",
+          "visual_prompt": "Bramble the badger wedges a thick pine root into a rocky threshold while Felix the fox pulls a woven hemp rope tied securely around the center.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Dangerous Crossing",
+          "speech": "Hold fast to the anchor, my friend! I am stepping onto the swinging bridge now to reach the soil.",
+          "visual": "signal",
+          "label": "Crossing the Gorge",
+          "story_beat": "twist",
+          "visual_prompt": "Felix the fox carefully balances on the swaying root bridge over the dark chasm, looking back at Bramble who flashes a glowing firefly signal lamp in his teeth.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Planting the Spore",
+          "speech": "We did it together, Bramble! The amber spore is safe in the dark earth, and our valley will bloom.",
+          "visual": "forest",
+          "label": "The Safe Valley",
+          "story_beat": "payoff",
+          "visual_prompt": "Felix and Bramble stand side by side in a lush forest clearing, watching a brilliant amber spore sprout bright golden leaves from the rich soil.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A deep seasonal chasm blocks access to the fertile valley, threatening the extinction of the luminescent amber spores.",
+      "decisive_choice": "Bramble the badger chooses to anchor a heavy root bridge with his own body while Felix the fox sprints across.",
+      "resolution": "Felix successfully crosses the trembling root, plants the amber spore in the rich soil, and pulls Bramble across to safety."
     }
   ]
 }
