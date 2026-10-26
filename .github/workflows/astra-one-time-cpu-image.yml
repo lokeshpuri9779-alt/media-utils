@@ -28,7 +28,7 @@ jobs:
       - name: Install CPU inference libraries
         run: python -m pip install --disable-pip-version-check 'Pillow>=10,<12' 'optimum[openvino]' diffusers 'transformers>=4.46,<5'
       - name: Generate one review-only portrait
-        run: python -m tools.experimental_openvino_benchmark --profile export --steps 12
+        run: python -m tools.experimental_openvino_benchmark --profile export --steps 16
       - name: Upload report and optional portrait
         if: always()
         uses: actions/upload-artifact@v4
