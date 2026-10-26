@@ -31,6 +31,7 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
               "success": False, "published": False, "approved": False,
               "production_ready": False, "still_image_only": True}
     started = time.monotonic()
+    stage = "initialize"
     try:
         from optimum.intel import OVStableDiffusionPipeline
         from PIL import Image
@@ -43,18 +44,26 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
             load_options["load_in_8bit"] = False
         report["precision_hint"] = "f32"
         report["disable_auto_8bit"] = profile == "export"
+        stage = "model_loading_or_export"
+        print("ASTRA_CPU_STAGE: model_loading_or_export", flush=True)
         pipe = OVStableDiffusionPipeline.from_pretrained(model, **load_options)
+        stage = "model_reshape_compile"
+        print("ASTRA_CPU_STAGE: model_reshape_compile", flush=True)
         pipe.reshape(batch_size=1, height=768, width=512, num_images_per_prompt=1)
         pipe.compile()
         report["guidance_scale"] = 8.0
         report["seed"] = 42
         report["negative_prompt_enabled"] = True
+        stage = "inference_and_safety_checker"
+        print("ASTRA_CPU_STAGE: inference_and_safety_checker", flush=True)
         image = pipe(PROMPT, negative_prompt=NEGATIVE_PROMPT,
                      height=768, width=512, num_inference_steps=steps,
                      guidance_scale=8.0,
                      generator=torch.Generator(device="cpu").manual_seed(42)).images[0]
         if not isinstance(image, Image.Image):
             raise ValueError("No PIL image returned")
+        stage = "image_quality"
+        print("ASTRA_CPU_STAGE: image_quality", flush=True)
         image.save(output, format="PNG")
         from astra_v2.omniroute_image_assets import image_quality_report
         quality = image_quality_report(output.read_bytes(), "scene")
@@ -64,6 +73,7 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
         report["success"] = bool(quality["passed"])
         report["output"] = str(output)
     except Exception as exc:
+        report["failed_stage"] = stage
         # No prompt, credentials, provider bodies or exception text in diagnostics.
         report["error_type"] = type(exc).__name__
         frames = traceback.extract_tb(exc.__traceback__)
