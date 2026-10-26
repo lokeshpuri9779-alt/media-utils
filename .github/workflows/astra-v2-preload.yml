@@ -189,40 +189,33 @@ jobs:
           print("ASTRA_FFMPEG_SOURCE=imageio-ffmpeg")
           PY
           fi
-          if ! command -v ffprobe >/dev/null; then
-            echo 'ASTRA_FFPROBE_MISSING=1'
-            # Use a small bounded package download for ffprobe only. Never
-            # retry the full ffmpeg apt dependency chain that stalled lanes.
-            timeout 45s sudo apt-get update -qq -o Acquire::Retries=0 || true
-            timeout 90s sudo DEBIAN_FRONTEND=noninteractive apt-get download ffmpeg || true
-            probe_package="$(find . -maxdepth 1 -name 'ffmpeg_*.deb' -print -quit)"
-            if [ -n "$probe_package" ]; then
-              mkdir -p "$RUNNER_TEMP/astra-ffmpeg"
-              dpkg-deb -x "$probe_package" "$RUNNER_TEMP/astra-ffmpeg"
-              # Debian package extraction alone does not install required
-              # shared libav* dependencies. Validate execution, not just -x.
-              if [ -x "$RUNNER_TEMP/astra-ffmpeg/usr/bin/ffprobe" ] && \
-                 "$RUNNER_TEMP/astra-ffmpeg/usr/bin/ffprobe" -version >/dev/null 2>&1; then
-                echo "$RUNNER_TEMP/astra-ffmpeg/usr/bin" >> "$GITHUB_PATH"
-                export PATH="$RUNNER_TEMP/astra-ffmpeg/usr/bin:$PATH"
-                echo 'ASTRA_FFPROBE_SOURCE=deb-extract-verified'
-              else
-                echo 'ASTRA_FFPROBE_EXTRACTED_RUNTIME_UNAVAILABLE=1'
-              fi
-            fi
-          fi
           if ! command -v ffprobe >/dev/null 2>&1 || ! ffprobe -version >/dev/null 2>&1; then
-            # Install native Ubuntu dependency chain with strict time budget.
-            # Never substitute a file-existence check for a working media probe.
-            echo 'ASTRA_FFPROBE_NATIVE_INSTALL=attempt'
-            # Prevent interactive apt locks and slow mirrors from exhausting
-            # the entire preload job; fail closed if the probe is unavailable.
-            timeout 120s sudo env DEBIAN_FRONTEND=noninteractive \
-              apt-get install -y --no-install-recommends \
-              -o Acquire::Retries=0 \
-              -o Acquire::http::Timeout=15 \
-              -o Acquire::https::Timeout=15 \
-              -o DPkg::Lock::Timeout=10 ffmpeg
+            # Use signed Ubuntu archives directly. The runner's Azure mirror
+            # stalled on libcodec2 in three lanes of run 40369697329.
+            # Keep these sources/lists private to this ASTRA installation.
+            # Extracting ffmpeg.deb alone cannot supply ffprobe's shared libs.
+            echo 'ASTRA_FFPROBE_NATIVE_INSTALL=official-archive'
+            apt_root="$RUNNER_TEMP/astra-apt"
+            mkdir -p "$apt_root/lists/partial"
+            chmod 755 "$apt_root" "$apt_root/lists" "$apt_root/lists/partial"
+            cat > "$apt_root/sources.list" <<'SOURCES'
+          deb [signed-by=/usr/share/keyrings/ubuntu-archive-keyring.gpg] https://archive.ubuntu.com/ubuntu noble main universe
+          deb [signed-by=/usr/share/keyrings/ubuntu-archive-keyring.gpg] https://archive.ubuntu.com/ubuntu noble-updates main universe
+          deb [signed-by=/usr/share/keyrings/ubuntu-archive-keyring.gpg] https://security.ubuntu.com/ubuntu noble-security main universe
+          SOURCES
+            apt_options=(
+              -o "Dir::Etc::sourcelist=$apt_root/sources.list"
+              -o "Dir::Etc::sourceparts=-"
+              -o "Dir::State::lists=$apt_root/lists"
+              -o Acquire::Retries=1
+              -o Acquire::http::Timeout=15
+              -o Acquire::https::Timeout=15
+              -o DPkg::Lock::Timeout=10
+            )
+            timeout 90s sudo apt-get "${apt_options[@]}" update -qq \
+              -o APT::Update::Error-Mode=any
+            timeout 240s sudo env DEBIAN_FRONTEND=noninteractive \
+              apt-get "${apt_options[@]}" install -y --no-install-recommends ffmpeg
             command -v ffprobe
             ffprobe -version >/dev/null 2>&1
             echo 'ASTRA_FFPROBE_SOURCE=native-verified'
