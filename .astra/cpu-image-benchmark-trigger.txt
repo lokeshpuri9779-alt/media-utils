@@ -8,3 +8,5 @@ Retry 3: Transformers 4.x compatibility pin for CLIPFeatureExtractor.
 Retry 4: record bounded model constructor ValueError details.
 
 Retry 5: alternate public OpenVINO SD1.5 checkpoint with UNet config.
+
+Retry 6: controlled 16-step comparison; retain quality gate.
