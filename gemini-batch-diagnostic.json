@@ -1,23 +1,22 @@
 {
-  "observed_at": "2026-10-26T15:07:50.913931+00:00",
-  "generated": 20,
+  "observed_at": "2026-10-26T18:58:19.511824+00:00",
+  "generated": 19,
   "requested": 20,
-  "generation_failures": [],
-  "reviewed": 20,
-  "approved": 10,
+  "generation_failures": [
+    {
+      "index": 13,
+      "reason": "ValueError"
+    }
+  ],
+  "reviewed": 19,
+  "approved": 13,
   "review_issues": [
-    "The causal mechanics and overarching premise lack sufficient differentiation from established catalog items regarding weather-disrupted local sports matches.",
-    "The central conflict, character name (Tarek), and setting closely mirror the recently published comparison example 'Tarek and the Hidden Fern of Kasaar', indicating a repetitive formula and derivative premise.",
-    "The central conflict, decisive choice, and resolution directly echo the recently published comparison example 'The Muddy Pitch Penalty and the Rubber Cleat Rig', substituting drainage pipes for rubber cleats to solve a waterlogged sports field dilemma.",
-    "The central conflict, decisive choice, and resolution heavily overlap with the recently published comparison entry 'The Alpine Rescuer and the Hidden Crag', featuring a trapped climber in a blizzard, a rescuer making a high-risk choice regarding flares/visibility, and a helicopter rescue.",
-    "The premise and causal mechanism lack sufficient differentiation from existing published stories in the comparison dataset.",
-    "The premise, character (Barnaby), and conflict structure heavily mirror the previously published story 'Barnaby's Turbo-Tater and the Market Stampede', repeating a very similar mechanical mishap involving an over-pressurized root vegetable machine in a market setting.",
-    "The story premise centers on a soapbox derby race involving a local cart dispute and custom wheel modifications, which directly repeats the core premise and causal mechanism of the recently published comparison item 'the acorn cup derby and the rolling ravine'.",
-    "The thematic elements of overcoming a track or component monopoly through an engineering modification in a downhill cart race are overly derivative of existing catalog entries.",
+    "The central conflict, decisive choice, and resolution of the candidate story closely mirror the recently published premise in the comparison history ('the miller's grain and the divided harvest': scarce winter grain supply for two families, pooling the final sacks, equal village flour distribution securing collective survival).",
+    "The story 'the otter and the silver reef mystery' closely mirrors recently published premises and titles in the comparison history, specifically featuring a similar animal protagonist and structural pattern found in 'The Otter and the Echoing Well'.",
+    "The story premise, central conflict, and resolution closely mirror recent published premises in the comparison history, specifically 'The Alpine Rescuer and the Hidden Crag' and 'the winter patrol and the hidden pass', involving a blizzard trapping individuals and a risky vehicle/ascent decision to rescue them.",
     "ai_editorial_rejection",
-    "review_failed:HTTP_503",
-    "review_failed:TimeoutError",
-    "review_provider:provider_unavailable"
+    "review_failed:HTTP_429",
+    "review_provider:rate_limited"
   ],
   "approval_pair_present": true,
   "model_access": {
