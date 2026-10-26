@@ -27,7 +27,9 @@ def main():
     except ImportError as e:
         p.error("Install CPU torch + diffusers + transformers + safetensors: "+str(e))
     pipe=StableDiffusionPipeline.from_pretrained(str(model),local_files_only=True,
-        safety_checker=None,torch_dtype=torch.float32).to("cpu")
+        torch_dtype=torch.float32).to("cpu")
+    if pipe.safety_checker is None:
+        raise RuntimeError("Local model has no safety checker; refusing unreviewed generation")
     pipe.enable_attention_slicing()
     out=Path(a.output).resolve();out.mkdir(parents=True,exist_ok=True)
     details=[]
@@ -36,7 +38,9 @@ def main():
         generator=torch.Generator(device="cpu").manual_seed(a.seed+i-1)
         result=pipe(prompt,num_inference_steps=a.steps,generator=generator,
                     height=512,width=512)
-        if result.nsfw_content_detected and any(result.nsfw_content_detected):
+        if result.nsfw_content_detected is None:
+            raise RuntimeError("Safety result unavailable; refusing to save image")
+        if any(result.nsfw_content_detected):
             raise RuntimeError("Model reported unsafe content")
         filename=out/f"scene_{i:02d}.png"
         result.images[0].save(filename)
