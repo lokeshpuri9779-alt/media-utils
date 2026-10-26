@@ -19,11 +19,13 @@ NEGATIVE_PROMPT = ("multiple lighthouses, duplicate buildings, floating objects,
                    "cropped tower, tower cut off by image border, extra towers, "
                    "abstract distortions, disjointed architecture, text, watermark")
 
-def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-openvino/keyframe.png")):
+def run(*, profile="preconverted", steps=8, seed=42, output=Path("artifacts/experimental-openvino/keyframe.png")):
     if profile not in APPROVED_MODELS:
         raise ValueError("Unapproved model profile")
     if not isinstance(steps, int) or not 1 <= steps <= 20:
         raise ValueError("steps must be 1..20")
+    if not isinstance(seed, int) or not 0 <= seed <= 2147483647:
+        raise ValueError("seed must be a nonnegative 32-bit signed integer")
     output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     model = APPROVED_MODELS[profile]
@@ -52,14 +54,14 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
         pipe.reshape(batch_size=1, height=768, width=512, num_images_per_prompt=1)
         pipe.compile()
         report["guidance_scale"] = 8.0
-        report["seed"] = 42
+        report["seed"] = seed
         report["negative_prompt_enabled"] = True
         stage = "inference_and_safety_checker"
         print("ASTRA_CPU_STAGE: inference_and_safety_checker", flush=True)
         image = pipe(PROMPT, negative_prompt=NEGATIVE_PROMPT,
                      height=768, width=512, num_inference_steps=steps,
                      guidance_scale=8.0,
-                     generator=torch.Generator(device="cpu").manual_seed(42)).images[0]
+                     generator=torch.Generator(device="cpu").manual_seed(seed)).images[0]
         if not isinstance(image, Image.Image):
             raise ValueError("No PIL image returned")
         stage = "image_quality"
@@ -102,9 +104,10 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--profile", choices=sorted(APPROVED_MODELS), default="preconverted")
     parser.add_argument("--steps", type=int, default=8)
+    parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--output", type=Path, default=Path("artifacts/experimental-openvino/keyframe.png"))
     args = parser.parse_args()
-    if not run(profile=args.profile, steps=args.steps, output=args.output)["success"]:
+    if not run(profile=args.profile, steps=args.steps, seed=args.seed, output=args.output)["success"]:
         raise SystemExit(1)
 
 
