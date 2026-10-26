@@ -1,21 +1,25 @@
-# Offline smoke test — unified ASTRA
+# ASTRA offline smoke test
 
-This is a **non-generative** technical pipeline check using eight existing storyboard JPG files. It does not prove AI generation, consistent characters, narration, or YouTube publishing.
+This test checks the seven-stage video transport pipeline. It **reuses eight existing storyboard images**, creates a simple slideshow and silent audio, and does **not** establish AI image generation, speech synthesis, or character consistency.
 
-Prerequisites: Python, numpy, opencv-python, ffmpeg, and eight scene images named `scene_01.jpg` through `scene_08.jpg` in an asset folder.
+## Single-command run
 
-From the repository root:
+Requirements: Python with numpy and opencv-python, and FFmpeg installed.
 
 ```bash
-export REPO_ROOT="$PWD"
-export ASSET_DIR="/absolute/path/to/scene_images"
-export OUT_DIR="/absolute/path/to/smoke_output"
-for stage in STORY IMAGES CONSISTENCY ANIMATION NARRATION EDIT QUALITY; do
-  export "ASTRA_${stage}_CMD=python $REPO_ROOT/astra_unified/demo_stage.py ${stage,,} $ASSET_DIR"
-done
-python astra_unified/pipeline.py --output "$OUT_DIR"
+python astra_unified/run_smoke.py \
+  --assets /absolute/path/to/eight_scene_jpgs \
+  --output /absolute/path/to/smoke_output
 ```
 
-The adapter runs seven stages, checks that all eight JPGs decode, creates an 8-second 360×640 slideshow at 12 fps, adds a **silent placeholder audio track**, and verifies 96 decoded video frames. It intentionally does not perform speech synthesis or real character animation. Publishing remains disabled unless explicitly opted in and configured.
+The assets directory must contain `scene_01.jpg` through `scene_08.jpg`. The launcher configures all seven stage commands internally, runs `pipeline.py`, and does not enable publishing.
 
-Run unit tests with `python -m unittest discover -s astra_unified -p 'test_*.py'`. GitHub Actions CI is not enabled by this change. Main ASTRA is unchanged.
+Expected outputs: `pilot.mp4`, `qa.json`, `run_report.json`, plus intermediate files. Check `run_report.json` and verify all seven stages passed, publishing was skipped, and `qa.json` reports 96 decoded frames.
+
+## Production distinction
+
+The smoke launcher intentionally does not use `--production`. A passed smoke test must never be interpreted as proof that real AI models ran. The separate `offline_sd15.py` adapter requires local model weights and dependencies; `offline_tts.py` requires an installed speech engine. Neither is automatically invoked by the smoke launcher.
+
+Unit tests: `python -m unittest discover -s astra_unified -p 'test_*.py'`.
+
+No GitHub Actions CI is enabled by this change, and main ASTRA remains unchanged.
