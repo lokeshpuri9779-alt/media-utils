@@ -30,7 +30,7 @@ jobs:
       - name: Generate one review-only portrait (12-minute bound)
         run: |
           set -o pipefail
-          timeout --signal=TERM --kill-after=15s 12m python -u -m tools.experimental_openvino_benchmark --profile export --steps 12
+          timeout --signal=TERM --kill-after=15s 12m python -u -m tools.experimental_openvino_benchmark --profile export --steps 12 --seed 123
       - name: Upload report and optional portrait
         if: always()
         uses: actions/upload-artifact@v4
