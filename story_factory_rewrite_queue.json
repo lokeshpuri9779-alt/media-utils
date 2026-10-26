@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "40d31f11e83de8f83055d760",
-      "source_sha256": "b19f2b23b91194fcd244ea38704f87013a84b5729e03951ecfeff85236021355",
+      "candidate_id": "deff29443eacfd6cea21fce9",
+      "source_sha256": "309475a79ff46d1b86743234e0b70707c6a0036a906f48719b44f29b93598319",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-c34301c213160bfd2ee7",
-        "title": "The Great Onion Chopping Contraption Catastrophe",
-        "hook": "The Cabbage Overload",
-        "question": "Can Barnaby sell his automatic vegetable slicer before it covers the entire market in rogue cabbage?",
-        "answer": "Barnaby successfully reconfigures his invention into a confetti cannon, turning a culinary disaster into a festive market celebration.",
+        "content_id": "rayvan-gemini-c8e7451d56c069685c08",
+        "title": "The Grand Pickle Pulverizer",
+        "hook": "The Copper Contraption",
+        "question": "Will Barnaby's automated dill-chopper save his failing vegetable stall?",
+        "answer": "Yes, but only after coating the entire farmers market in aggressive brine.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,226 +29,228 @@
         ],
         "story_beats": [
           {
-            "headline": "The Cabbage Overload",
-            "speech": "Behold the magnificent automatic slicer! It processes forty heads of cabbage every minute without a single human pause.",
+            "headline": "The Copper Contraption",
+            "speech": "Behold the greatest marvel in culinary history, guaranteed to slice ten thousand cucumbers before breakfast!",
             "visual": "robot",
-            "label": "The Invention Unveiled",
+            "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly next to a steaming, copper-plated robotic vegetable slicer in a crowded market square, gesturing wildly with a wooden pointer while holding a clipboard in his left hand.",
+            "visual_prompt": "Barnaby proudly points at a rickety brass machine with spinning blades inside a bustling outdoor market, holding a wrench in his left hand.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Gear Jam",
-            "speech": "Oh dear, the hopper is jammed with red cabbages! Quick, hand me the heavy wrench before the pressure valve explodes!",
-            "visual": "signal",
-            "label": "Mechanical Malfunction",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby frantically tries to unclog the vibrating robotic slicer in the busy market, holding a heavy iron wrench in his right hand while a blinking red warning signal flashes on the machine panel.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Confetti Conversion",
-            "speech": "If I reverse the polarity of this steam valve, we might just salvage this mess into something wonderfully festive instead!",
+            "headline": "Madness in the Market",
+            "speech": "Why is it vibrating so violently? Quick, fetch the thick wooden mallet before the gears explode into space!",
             "visual": "ship",
-            "label": "The Desperate Pivot",
+            "label": "The Jam",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby and Mayor Higgins struggle to hold down a shaking brass machine leaking green juice, while market stalls wobble in the background.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Salty Surge",
+            "speech": "Hold fast everyone, we are experiencing an unprecedented cascade of pickled shrapnel across the entire vegetable aisle!",
+            "visual": "signal",
+            "label": "The Crisis",
             "story_beat": "twist",
-            "visual_prompt": "Barnaby adjusts a series of brass pipes resembling a ship's boiler attached to the slicing machine, holding a pair of pliers in his left hand with a determined expression on his soot-smudged face.",
+            "visual_prompt": "A massive wave of sliced cucumbers and green liquid erupts from the machine hopper, splashing startled vendors clutching empty baskets.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Grand Celebration",
-            "speech": "It worked! Instead of shredded vegetables, we are now the premier party supply vendors in the entire province!",
-            "visual": "door",
-            "label": "Market Triumph",
-            "story_beat": "payoff",
-            "visual_prompt": "Barnaby stands smiling in front of his wooden market stall door, holding a bag of gold coins in his right hand while colorful paper confetti rains down over cheering market customers.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "A malfunctioning vegetable slicing machine threatens to bury the bustling farmer's market in mountains of unwanted shredded cabbage.",
-        "decisive_choice": "Barnaby rewires the primary gear assembly to reverse the blade rotation instead of shutting down the power source.",
-        "resolution": "The modified machine showers the delighted marketgoers in colorful paper confetti, earning Barnaby instant fame and massive profits.",
-        "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures and whimsical steampunk elements.",
-          "characters": {
-            "Barnaby": "An enthusiastic young inventor with messy brown hair, round brass spectacles, a plaid vest over a white linen shirt, and soot smudges on his left cheek."
-          },
-          "locations": {
-            "Market Square": "A bustling medieval outdoor marketplace featuring wooden merchant stalls with striped canvas awnings, cobblestone pavement, and vegetable baskets lining the pathways."
-          },
-          "objects": {
-            "Slicing Machine": "A towering contraption made of gleaming copper pipes, spinning steel blades, a brass pressure gauge, and a large funnel-shaped hopper on top."
-          }
-        },
-        "plot_fingerprint": "08c029aa7d2cebe070a010a4497fd80d700a8fe94810d667e8bfd27521b51404"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "b676c4f7b751d7c8019b262f",
-      "source_sha256": "1a9a08949e75d515260ce9137bd0ecbb2f8bf3838f459f01589194b8d4774f04",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-6f88c2e1a5220215df88",
-        "title": "Operation Frostline: The Sledge Collapse",
-        "hook": "The Crevasse Fracture",
-        "question": "Can the engineering team rescue their trapped lead researcher before the incoming blizzard freezes the crevasse?",
-        "answer": "Yes, by utilizing the motorized winch system to pull her up just in time.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Crevasse Fracture",
-            "speech": "Dr. Vance is trapped twenty meters down the ice fissure, and the blizzard winds are already destroying our camp perimeter.",
-            "visual": "signal",
-            "label": "Emergency Beacon",
-            "story_beat": "reveal",
-            "visual_prompt": "Dr. Vance trapped in an icy blue crevasse, looking up in alarm while holding a flashing orange emergency beacon.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Powering the Winch",
-            "speech": "We must divert all reserve battery cells to the heavy motorized winch right now to get enough pulling torque.",
-            "visual": "robot",
-            "label": "Winch Console",
-            "story_beat": "build",
-            "visual_prompt": "Engineer Marcus frantically flipping glowing switches on a metallic winch control console inside a frosted research tent.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Heavy Lift",
-            "speech": "Hold on tight, Doctor Vance! The steel cable is straining under the ice pressure, but the motor is finally turning.",
-            "visual": "ship",
-            "label": "Transport Sledge",
-            "story_beat": "mechanism",
-            "visual_prompt": "Marcus operating the roaring steel winch outside near the ledge, spooling a thick metallic cable disappearing straight down.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Safe Return",
-            "speech": "We made it! Pulling her onto the reinforced sledge saved her life right before the storm completely blinded the station.",
-            "visual": "door",
-            "label": "Station Airlock",
-            "story_beat": "payoff",
-            "visual_prompt": "Dr. Vance wrapped in thermal blankets stepping safely through the heavy insulated airlock door alongside Marcus.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "A sudden ice shelf fracture drops the lead researcher into a deep crevasse while a massive blizzard approaches.",
-        "decisive_choice": "Sacrificing the primary generator fuel to power the heavy winch for an immediate vertical lift.",
-        "resolution": "The researcher is successfully hauled to safety and the team evacuates to the base camp before the storm hits.",
-        "visual_bible": {
-          "style": "Realistic cinematic winter survival documentary style with crisp textures, cold blue lighting, and swirling snow effects.",
-          "characters": {
-            "Dr. Vance": "A seasoned arctic researcher with blonde hair tucked into a blue parka hood, wearing frost-dusted orange snow goggles and thermal gear.",
-            "Engineer Marcus": "A sturdy mechanic with a thick brown beard, wearing a heavy yellow expedition parka and black insulated gloves."
-          },
-          "locations": {
-            "Ice Shelf Base": "A remote arctic research station surrounded by towering white snowdrifts and deep blue glacial ice crevices.",
-            "Control Tent": "A glowing orange canvas tent interior packed with blinking electronic telemetry equipment and battery banks."
-          },
-          "objects": {
-            "Emergency Beacon": "A handheld metallic cylinder emitting a pulsed orange distress light.",
-            "Winch Console": "A heavy-duty steel control box featuring analog gauges and glowing green push buttons.",
-            "Transport Sledge": "A low-profile aluminum cargo sled rigged with high-tensile towing ropes."
-          }
-        },
-        "plot_fingerprint": "0c38db667a4b3f50aaa15e55c26b7cdc2f7305ed059f203906b75afc6eec9ae4"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "fb8722cfc3fe981bbfdc5601",
-      "source_sha256": "4da413686fd460d9ec4ad90ff63ed4ab777df3c5aa29483af443ef98831c8d1e",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-d04768f89eebbee413d5",
-        "title": "The Whispering Canopy and the Amber Resin",
-        "hook": "The Hidden Sap",
-        "question": "How can two rivals cross the chasm of thorns without losing their harvest?",
-        "answer": "By pooling their warm resin caches to waterproof a vine bridge.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Hidden Sap",
-            "speech": "Look up through the boughs, Kora. The glowing amber sap is leaking right above the thorny abyss.",
+            "headline": "A Relish Renaissance",
+            "speech": "Look at these long lines of hungry customers eager to purchase our certified high-speed market relish!",
             "visual": "forest",
-            "label": "Discovery",
-            "story_beat": "reveal",
-            "visual_prompt": "Wide angle of Kora and Bram pointing up at a glowing amber resin pocket high in the gnarled canopy, morning light filtering through emerald leaves, realistic style.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Binding Vines",
-            "speech": "We must weave these thick aerial roots together quickly before the forest winds start to howl around us.",
-            "visual": "signal",
-            "label": "Cooperation",
-            "story_beat": "build",
-            "visual_prompt": "Close up of Kora and Bram working side by side, braiding thick green aerial roots together, holding wooden mallets, determined expressions, canopy background.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Dual Weight",
-            "speech": "Pour your resin across the center joint now, or the snapping tension will tear our bridge apart.",
-            "visual": "robot",
-            "label": "Action",
-            "story_beat": "mechanism",
-            "visual_prompt": "Medium shot of Bram pouring golden glowing resin from a clay jar onto the braided root bridge while Kora uses a mechanical clamp to hold it steady.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Across the Threshold",
-            "speech": "Our combined harvest saved us both. Let us build our treehouse pathways together from this day forward.",
-            "visual": "door",
-            "label": "Victory",
+            "label": "The Success",
             "story_beat": "payoff",
-            "visual_prompt": "Kora and Bram standing together on the newly secured wooden platform before the open doorway of a twin treehouse, smiling, golden sunset lighting.",
+            "visual_prompt": "Barnaby and Mayor Higgins smile widely while handing out jars of bright green relish to a massive crowd of smiling shoppers in the sunlit square.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Competing for the rare amber resin to save their respective family treehouses",
-        "decisive_choice": "Merging their resin supplies instead of building a single narrow plank",
-        "resolution": "Both families cross safely and form a permanent canopy alliance",
+        "central_conflict": "A malfunctioning mechanical dicer threatens to ruin the morning market trade.",
+        "decisive_choice": "Barnaby overrides the safety valve to increase the chopping speed threefold.",
+        "resolution": "The explosive pickle output instantly creates the town's first accidental relish district.",
         "visual_bible": {
-          "style": "Cinematic animated film style with rich textures, vibrant forest greens, and glowing amber highlights.",
+          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures of wood, brass, and fresh vegetables.",
           "characters": {
-            "Kora": "A nimble forest explorer with braided dark hair, wearing a patched leather tunic and carrying a heavy wooden clamp.",
-            "Bram": "A sturdy canopy harvester with curly red hair, wearing a moss-green canvas vest and carrying clay resin jars."
+            "Barnaby": "A frantic inventor with wild grey hair, wearing a patched tweed vest and soot-stained trousers.",
+            "Mayor Higgins": "A portly town official with a shiny top hat, round spectacles, and a very stiff blue coat."
           },
           "locations": {
-            "Canopy Abyss": "A dizzying chasm high above the forest floor, spanned by thick ancient trees and dangerous thorn vines."
+            "Market Square": "A bustling cobblestone plaza lined with striped canvas awnings, wooden crates, and vegetable stalls."
           },
           "objects": {
-            "Amber Resin": "A thick, glowing golden-orange liquid stored in terracotta jars that hardens into a waterproof seal.",
-            "Aerial Roots": "Flexible, emerald-green vines hanging from giant branch networks, used for weaving structural bridges."
+            "Brass Dicer": "A towering machine made of polished copper tubes, erratic gears, and a large funnel on top.",
+            "Wooden Mallet": "A heavy oak mallet with a scuffed handle used for tapping stubborn machinery."
           }
         },
-        "plot_fingerprint": "9a43654eca13f7db83f96cadd6a7bd0111ac92a8363c458916dafdd06770d10d"
+        "plot_fingerprint": "71f5de72f564c1456aa8876e5b9767950dda5cbbac006ffe2eb570b054eac38f"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "ad5190e05bb792c67ec1d613",
+      "source_sha256": "99e2f213a4fe143978d3136ae8c063fb3428e517a2200bd41892dacf7cc7adc0",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-fd5cd5a8e24060d52e80",
+        "title": "The Quantum Hull Leak of Sector Seven",
+        "hook": "The Critical Breach",
+        "question": "Should the crew purge the atmospheric reserve to freeze the hull fracture?",
+        "answer": "They vent the oxygen into space, instantly freezing the breach and saving the ship.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Critical Breach",
+            "speech": "Listen to the sensor logs, we are losing cabin pressure fast and patching it manually is completely impossible.",
+            "visual": "ship",
+            "label": "Sensor Alert",
+            "story_beat": "reveal",
+            "visual_prompt": "Engineer Varis pointing at a glowing red bulkhead crack inside the dimly lit cargo bay, wearing a bulky grey jumpsuit with orange stripes, holding a digital tablet displaying pressure drops.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Dangerous Proposal",
+            "speech": "If we vent the entire atmospheric reserve right now, the sudden sub-zero vacuum will freeze the fracture solid.",
+            "visual": "signal",
+            "label": "Strategy Plan",
+            "story_beat": "build",
+            "visual_prompt": "Captain Mira standing by the main navigation console projecting a holographic blueprint of the hull, wearing a dark blue commander uniform, gesturing firmly toward Varis.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Hard Choice",
+            "speech": "We will survive in emergency suit hibernation pods, but our air supply will be gone for the rest of the journey.",
+            "visual": "robot",
+            "label": "System Override",
+            "story_beat": "mechanism",
+            "visual_prompt": "Maintenance droid Unit Seven pulling a heavy yellow manual lever on the central life support bulkhead, Sparks flying around its metallic chassis in the narrow corridor.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Frozen Seal",
+            "speech": "The pressure stabilized instantly and the exterior fracture is locked tight in space ice. We made it.",
+            "visual": "planet",
+            "label": "Safe Harbor",
+            "story_beat": "payoff",
+            "visual_prompt": "Varis and Mira looking through the reinforced bridge viewport at a bright blue planet ahead, both wearing relaxed expressions while holding steaming mugs of water.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Disagreement between sealing the primary hull breach versus conserving emergency oxygen reserves",
+        "decisive_choice": "Venting the main oxygen reserve to instantly freeze the growing micro-fracture",
+        "resolution": "The hull breach is permanently frozen and sealed, preserving the ship and its crew",
+        "visual_bible": {
+          "style": "Cinematic sci-fi realism with gritty industrial textures, dramatic lighting, and high contrast.",
+          "characters": {
+            "Varis": "Lead engineer with a rugged build, short dark hair, wearing a worn grey utility jumpsuit with high-visibility orange safety stripes.",
+            "Captain Mira": "Vigilant ship commander with sharp features, neat blonde hair tied back, wearing a structured dark blue uniform with silver command insignia.",
+            "Unit Seven": "Bipedal maintenance droid with a bulky rectangular orange torso, dual optical lenses, and articulated metallic manipulator arms."
+          },
+          "locations": {
+            "cargo_bay": "Spacious industrial room lined with metallic storage crates, exposed overhead wiring, and large structural support beams.",
+            "bridge": "Curved command deck featuring large transparent viewports looking out into deep space, surrounded by glowing tactical display panels."
+          },
+          "objects": {
+            "tablet": "Rugged black handheld computer with a cracked protective corner casing and a glowing blue screen showing diagnostic charts.",
+            "lever": "Heavy industrial override lever painted in hazard yellow and black stripes, mounted securely onto a steel bulkhead plate."
+          }
+        },
+        "plot_fingerprint": "13a358400c8d9e8c71929e65625f7e1607bec785c4d84f19f4044886c91a7fb7"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "6b4e6fc06b58ff63d2704521",
+      "source_sha256": "924c83d60034eb62362ac9ebcdafe291c4107b5cf29149095674da821c701920",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-2f5248aef3ff6eb0fa53",
+        "title": "The Valley of Echoing Stone",
+        "hook": "The Silent Trench",
+        "question": "What secret lies beneath the singing dunes of the southern wastes?",
+        "answer": "A subterranean aquifer activated by acoustic resonance, blooming a prehistoric garden.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Silent Trench",
+            "speech": "Our instruments show zero moisture for fifty miles, yet these strange stone monoliths are humming with a deep musical frequency.",
+            "visual": "signal",
+            "label": "Acoustic Anomaly",
+            "story_beat": "reveal",
+            "visual_prompt": "Dr. Aris stands in a sun-bleached desert canyon at midday, holding a glowing seismic scanner while staring at towering monoliths of black basalt that emit visible blue sound waves.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Resonant Fault",
+            "speech": "If we strike this central limestone arch with our pneumatic hammer at the exact pitch, it might fracture the sealed subterranean basin.",
+            "visual": "robot",
+            "label": "Seismic Hammer",
+            "story_beat": "build",
+            "visual_prompt": "An autonomous crawler robot extends a heavy mechanical pneumatic hammer toward a cracked limestone pillar inside a narrow cavern, while Aris calibrates the striking frequency on a handheld console.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Vibrating Vault",
+            "speech": "The bedrock is fracturing faster than anticipated! We must hold our ground and let the shockwave reach the deepest water pocket.",
+            "visual": "door",
+            "label": "Limestone Gate",
+            "story_beat": "mechanism",
+            "visual_prompt": "Aris braces against a shaking stone wall inside the cavern as massive fissures crack across a massive natural limestone gate, sending dust and glowing mineral sparks into the air.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Hidden Spring",
+            "speech": "Look at the canyon floor! The ancient aquifer has breached, and prehistoric seeds are already sprouting beneath the desert sun.",
+            "visual": "forest",
+            "label": "Subterranean Oasis",
+            "story_beat": "payoff",
+            "visual_prompt": "Aris kneels on damp, fertile soil in the newly flooded canyon floor, watching bright green prehistoric ferns rapidly unfurl beneath cascading freshwater streams.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Water shortage during a desert mapping expedition versus unstable acoustic canyon walls.",
+        "decisive_choice": "Shatter the resonant limestone archway to trigger the buried spring.",
+        "resolution": "The dry basin transforms into a lush oasis, saving the expedition and reviving an ancient ecosystem.",
+        "visual_bible": {
+          "style": "Cinematic realism with warm amber lighting, dusty atmospheric haze, and vibrant green contrast for biological elements.",
+          "characters": {
+            "Dr. Aris": "A seasoned cartographer in her late thirties with wind-weathered skin, practical tan canvas expedition gear, amber tinted goggles resting on her forehead, and a determined expression."
+          },
+          "locations": {
+            "Singing Canyon": "A narrow desert gorge flanked by smooth black basalt monoliths and ancient pale limestone deposits under a blazing white sun."
+          },
+          "objects": {
+            "Seismic Scanner": "A rugged rectangular metal device with a glowing cyan digital display and a toggle antenna.",
+            "Pneumatic Hammer": "A heavy industrial excavation tool made of brushed steel with yellow hazard stripes and a hydraulic piston tip.",
+            "Field Journal": "A worn leather-bound notebook filled with handwritten topographical maps and charcoal sketches."
+          }
+        },
+        "plot_fingerprint": "b0a003047eedde6b8a17ea1f0f6791b6f3b064c2f4893af90ed99e1543ca5530"
       },
       "approved": false
     }
