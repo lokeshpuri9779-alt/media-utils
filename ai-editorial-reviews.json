@@ -1946,6 +1946,22 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-0740db8fe5b7f37d11b0",
+      "story_sha256": "5f432e1912e685b8a0937dd9cca0a146698709118b83ebe27bda9c2dc6839570",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-0740db8fe5b7f37d11b0",
+        "story_sha256": "5f432e1912e685b8a0937dd9cca0a146698709118b83ebe27bda9c2dc6839570",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the premises, characters, or settings of the provided publication history.; The narrative demonstrates clear causal coherence, with the protagonist's actions directly influencing the outcome of the rescue.; The content is suitable for a general audience and does not contain unsafe, misleading, or policy-violating material.; The story structure is well-defined, following a logical progression from discovery to resolution.",
+        "reviewed_at": "2026-10-26T03:58:43.905083+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }
