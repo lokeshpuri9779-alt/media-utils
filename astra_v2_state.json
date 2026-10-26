@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 32,
+  "attempts": 33,
   "confirmed_today": 32,
-  "last_attempt_at": "2026-10-26T08:26:53.891925+00:00",
+  "last_attempt_at": "2026-10-26T09:37:02.164597+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -4487,19 +4487,70 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "ready",
-  "last_preflight_at": "2026-10-26T09:10:36.878534+00:00",
+  "pending": {
+    "7K-khBqZLpA": {
+      "content_id": "rayvan-forge-50dcebe9375b07e0",
+      "title": "The Ferret and the Midnight Garden",
+      "day": "2026-10-26",
+      "uploaded_at": "2026-10-26T09:37:03.868623+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "a44544cdc07a733212e5ee5f58da4c40b1b985737ba8d6580f4af98b97b3a1c7",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "The community garden was flooded each morning despite clear overnight skies.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "The ferret blamed rain clouds and built a roof that trapped the heat.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "He traced bubbling soil to a cracked irrigation pipe beneath the vegetable beds.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "The gardeners repaired the pipe and planted the rescued seedlings in fresh soil.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-26T09:26:24.016955+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-26T09:25:24.344352+00:00",
+    "at": "2026-10-26T09:37:04.283455+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
-    "job_status_before_persist": "cancelled",
+    "job_status_before_persist": "success",
     "dependencies_step": "success",
-    "publish_step": "cancelled",
+    "publish_step": "success",
     "cover_tests": "",
     "motion_tests": "success",
     "animal_tests": "success",
@@ -9851,13 +9902,60 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-50dcebe9375b07e0": {
+      "at": "2026-10-26T09:37:02.164581+00:00",
+      "title": "The Ferret and the Midnight Garden",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "a44544cdc07a733212e5ee5f58da4c40b1b985737ba8d6580f4af98b97b3a1c7",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "The community garden was flooded each morning despite clear overnight skies.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "The ferret blamed rain clouds and built a roof that trapped the heat.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "He traced bubbling soil to a cracked irrigation pipe beneath the vegetable beds.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "The gardeners repaired the pipe and planted the rescued seedlings in fresh soil.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-26T09:25:24.344260+00:00",
-    "publication_outcome": "ready",
-    "publication_reason": "ready",
-    "character_memory": "not_reported",
+    "at": "2026-10-26T09:37:04.283378+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -9865,35 +9963,35 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-26T09:25:24.344338+00:00",
+    "at": "2026-10-26T09:37:04.283441+00:00",
     "history_file_present": true,
-    "publication_outcome": "ready",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-26T08:22:07.439085+00:00",
+    "at": "2026-10-26T09:26:43.968093+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-3a1d07540353f2ca",
-    "video_url": "https://www.youtube.com/watch?v=eCCnU7rL1Lk",
+    "content_id": "rayvan-forge-50dcebe9375b07e0",
+    "video_url": "https://www.youtube.com/watch?v=7K-khBqZLpA",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-26T09:25:24.344034+00:00",
+    "at": "2026-10-26T09:37:04.283120+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "cancelled",
-    "job_status_before_persist": "cancelled",
-    "outcome": "ready",
-    "reason": "ready",
-    "fresh_upload_attempted": false,
+    "publish_step": "success",
+    "job_status_before_persist": "success",
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-26T09:25:24.344254+00:00",
+    "at": "2026-10-26T09:37:04.283371+00:00",
     "collection_status": "collected",
-    "publish_step": "cancelled",
+    "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
         "eligible": 42,
@@ -9913,18 +10011,28 @@
         "total": 175
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 176,
+        "before": 175,
         "fingerprint": 0,
         "id": 11,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 165,
+        "remaining": 164,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 165,
-        "remaining": 43
+        "pool": 164,
+        "remaining": 42
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 1,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
       }
     },
     "note": "Diagnostic counts only; no approval or publishing effect"
