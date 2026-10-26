@@ -8,6 +8,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument("--assets",type=Path,required=True)
     p.add_argument("--output",type=Path,required=True)
+    p.add_argument("--script",type=Path,help="Optional real offline narration script (requires espeak)")
     a=p.parse_args()
     base=Path(__file__).resolve().parent
     pipeline=base/"pipeline.py"
@@ -21,6 +22,12 @@ def main():
     for stage in STAGES:
         env["ASTRA_"+stage.upper()+"_CMD"]=shlex.join(
             (sys.executable,str(adapter),stage,str(assets)))
+    if a.script:
+        script=a.script.expanduser().resolve()
+        if not script.is_file() or not script.read_text(encoding="utf-8").strip():
+            p.error("Narration script missing or empty")
+        env["ASTRA_NARRATION_CMD"]=shlex.join((sys.executable,str(base/"offline_tts.py"),
+                                                "--script",str(script),"--output","audio.wav"))
     env.pop("ASTRA_PUBLISH_CMD",None)
     return subprocess.run((sys.executable,str(pipeline),"--output",
                            str(a.output.expanduser().resolve())),
