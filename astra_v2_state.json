@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 41,
-  "confirmed_today": 40,
-  "last_attempt_at": "2026-10-26T15:38:52.500950+00:00",
+  "attempts": 42,
+  "confirmed_today": 41,
+  "last_attempt_at": "2026-10-26T16:32:46.702755+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -4884,29 +4884,85 @@
       "decisive_choice": "Bramble the badger chooses to anchor a heavy root bridge with his own body while Felix the fox sprints across.",
       "resolution": "Felix successfully crosses the trembling root, plants the amber spore in the rich soil, and pulls Bramble across to safety.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "cbFOjlCiULw": {
-      "content_id": "trend-brief-2026-10-26-pm",
+    },
+    "trend-brief-2026-10-26-pm": {
+      "video_id": "cbFOjlCiULw",
+      "confirmed_at": "2026-10-26T16:21:42.697923+00:00",
       "title": "Why isl match today Is Getting Attention Now | RAYVAN",
-      "day": "2026-10-26",
-      "uploaded_at": "2026-10-26T15:38:54.540095+00:00",
-      "genre": "current",
       "format": "long",
+      "uploaded_at": "2026-10-26T15:38:54.540095+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "",
       "story_beats": [],
+      "genre": "current"
+    }
+  },
+  "pending": {
+    "oZyUhhuhZGo": {
+      "content_id": "rayvan-gemini-7ed1c9e86a9f9338eae3",
+      "title": "The Alpine Rescuer and the Hidden Crag",
+      "day": "2026-10-26",
+      "uploaded_at": "2026-10-26T16:32:48.809454+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "9ddf751eb8a9d7c73d6712e3fe5994df0b2f184baf08d97282cc511fe5ca7c68",
+      "story_beats": [
+        {
+          "headline": "The Hidden Crevasse",
+          "speech": "Listen closely to the howling wind and watch the drifting snow erase our only footprints back.",
+          "visual": "forest",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "An exhausted mountain rescuer in a red parka stands at the edge of a deep snowy forest bordering a steep cliff, holding an ice axe with a grim expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Frozen Signal",
+          "speech": "We have very little battery left in this emergency radio, so our timing must be absolutely flawless.",
+          "visual": "signal",
+          "label": "The Transmission",
+          "story_beat": "build",
+          "visual_prompt": "The rescuer kneels beside a rocky outcrop, holding a blinking orange emergency rescue beacon that emits faint pulsing light into the falling snow.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Mechanical Lift",
+          "speech": "Pull the winch cable firmly now while I secure the heavy climbing harness around the icy boulder.",
+          "visual": "robot",
+          "label": "The Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "A mechanical winch device mounted on a tripod is operated by the rescuer, with metal gears turning smoothly against the freezing wind.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Return",
+          "speech": "We made it through the storm just in time, proving that courage always finds a way home.",
+          "visual": "ship",
+          "label": "The Rescue",
+          "story_beat": "payoff",
+          "visual_prompt": "A rescue helicopter hovers above a snowy mountain ridge, its bright landing lights cutting through the whiteout while the rescuer waves cheerfully.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A stranded climber is trapped on a freezing ledge while an aggressive blizzard rapidly approaches.",
+      "decisive_choice": "The rescuer chooses to fire his final long-range distress flare into the heavy whiteout instead of descending for reinforcement.",
+      "resolution": "The bright amber flare guides a rescue helicopter directly to the hidden crag, saving both mountaineers.",
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-26T15:38:04.504929+00:00",
+  "last_preflight_at": "2026-10-26T16:21:42.286948+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-26T15:38:57.288257+00:00",
+    "at": "2026-10-26T16:32:49.296034+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -10657,10 +10713,64 @@
       "story_beats": [],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-7ed1c9e86a9f9338eae3": {
+      "at": "2026-10-26T16:32:46.702735+00:00",
+      "title": "The Alpine Rescuer and the Hidden Crag",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "9ddf751eb8a9d7c73d6712e3fe5994df0b2f184baf08d97282cc511fe5ca7c68",
+      "story_beats": [
+        {
+          "headline": "The Hidden Crevasse",
+          "speech": "Listen closely to the howling wind and watch the drifting snow erase our only footprints back.",
+          "visual": "forest",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "An exhausted mountain rescuer in a red parka stands at the edge of a deep snowy forest bordering a steep cliff, holding an ice axe with a grim expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Frozen Signal",
+          "speech": "We have very little battery left in this emergency radio, so our timing must be absolutely flawless.",
+          "visual": "signal",
+          "label": "The Transmission",
+          "story_beat": "build",
+          "visual_prompt": "The rescuer kneels beside a rocky outcrop, holding a blinking orange emergency rescue beacon that emits faint pulsing light into the falling snow.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Mechanical Lift",
+          "speech": "Pull the winch cable firmly now while I secure the heavy climbing harness around the icy boulder.",
+          "visual": "robot",
+          "label": "The Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "A mechanical winch device mounted on a tripod is operated by the rescuer, with metal gears turning smoothly against the freezing wind.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Return",
+          "speech": "We made it through the storm just in time, proving that courage always finds a way home.",
+          "visual": "ship",
+          "label": "The Rescue",
+          "story_beat": "payoff",
+          "visual_prompt": "A rescue helicopter hovers above a snowy mountain ridge, its bright landing lights cutting through the whiteout while the rescuer waves cheerfully.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A stranded climber is trapped on a freezing ledge while an aggressive blizzard rapidly approaches.",
+      "decisive_choice": "The rescuer chooses to fire his final long-range distress flare into the heavy whiteout instead of descending for reinforcement.",
+      "resolution": "The bright amber flare guides a rescue helicopter directly to the hidden crag, saving both mountaineers.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-26T15:38:57.288216+00:00",
+    "at": "2026-10-26T16:32:49.295957+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -10671,21 +10781,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-26T15:38:57.288250+00:00",
+    "at": "2026-10-26T16:32:49.296020+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-26T15:38:36.530645+00:00",
+    "at": "2026-10-26T16:22:45.710690+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "trend-brief-2026-10-26-pm",
-    "video_url": "https://www.youtube.com/watch?v=cbFOjlCiULw",
+    "content_id": "rayvan-gemini-7ed1c9e86a9f9338eae3",
+    "video_url": "https://www.youtube.com/watch?v=oZyUhhuhZGo",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-26T15:38:57.288158+00:00",
+    "at": "2026-10-26T16:32:49.295705+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -10697,10 +10807,52 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-26T15:38:57.288214+00:00",
-    "collection_status": "missing_diagnostics",
+    "at": "2026-10-26T16:32:49.295951+00:00",
+    "collection_status": "collected",
     "publish_step": "success",
-    "counters": {},
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 38,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
+          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
+        },
+        "seen": 11,
+        "total": 171
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 171,
+        "fingerprint": 0,
+        "id": 11,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 160,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 160,
+        "remaining": 38
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 1,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
