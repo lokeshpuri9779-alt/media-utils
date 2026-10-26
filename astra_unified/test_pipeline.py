@@ -43,6 +43,13 @@ class PipelineTests(unittest.TestCase):
         r,p=self.invoke(commands)
         self.assertEqual(r.returncode,0)
         self.assertEqual(p["stages"]["publish"]["status"],"skipped")
+    def test_dry_run_never_executes_commands(self):
+        with tempfile.TemporaryDirectory() as directory:
+            marker=Path(directory)/"executed"
+            command=f"{sys.executable} -c 'from pathlib import Path; Path({str(marker)!r}).touch()'"
+            r,p=self.invoke({"ASTRA_"+s+"_CMD":command for s in STAGES},dry=True)
+            self.assertEqual(r.returncode,0)
+            self.assertFalse(marker.exists())
     def test_publish_explicit_opt_in(self):
         commands={"ASTRA_"+s+"_CMD":"true" for s in STAGES}
         r,p=self.invoke(commands,publish=True)
