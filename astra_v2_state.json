@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 44,
+  "attempts": 45,
   "confirmed_today": 44,
-  "last_attempt_at": "2026-10-26T17:52:00.531400+00:00",
+  "last_attempt_at": "2026-10-26T18:31:09.709890+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -5066,28 +5066,79 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-26T17:53:04.355185+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "x81wRBRCXEc": {
+      "content_id": "rayvan-forge-72e96fa0c2106f0c",
+      "title": "The Ferret and the Rope Crossing",
+      "day": "2026-10-26",
+      "uploaded_at": "2026-10-26T18:31:10.970536+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "a6cadf8ec8dccf804d9204fd786fa3e31e7a6afc7ab3c2ac7c7655af59ea53fa",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "A ferret needed to cross a creek to return a lost puppy before sunset.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "He tested a rotten rope bridge and one of its boards cracked beneath him.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "He spotted a fallen tree farther upstream and checked it with the forest ranger.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "The ranger guided them across the stable trunk and reunited the puppy with its family.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-26T18:23:12.626313+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-26T17:53:04.813447+00:00",
+    "at": "2026-10-26T18:31:11.358300+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-26T13:43:25.050844+00:00",
   "reserved": {
@@ -10985,13 +11036,60 @@
       "resolution": "the flexible cart navigated the steep switchbacks smoothly to capture the rolling cup.",
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-72e96fa0c2106f0c": {
+      "at": "2026-10-26T18:31:09.709875+00:00",
+      "title": "The Ferret and the Rope Crossing",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "a6cadf8ec8dccf804d9204fd786fa3e31e7a6afc7ab3c2ac7c7655af59ea53fa",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "A ferret needed to cross a creek to return a lost puppy before sunset.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "He tested a rotten rope bridge and one of its boards cracked beneath him.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "He spotted a fallen tree farther upstream and checked it with the forest ranger.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "The ranger guided them across the stable trunk and reunited the puppy with its family.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-26T17:53:04.813403+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-26T18:31:11.358224+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -10999,36 +11097,78 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-26T17:53:04.813439+00:00",
+    "at": "2026-10-26T18:31:11.358287+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-26T17:40:31.588170+00:00",
+    "at": "2026-10-26T18:23:33.511502+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-77c2b3094d87e40536d3",
-    "video_url": "https://www.youtube.com/watch?v=pAL9MhMrp_M",
+    "content_id": "rayvan-forge-72e96fa0c2106f0c",
+    "video_url": "https://www.youtube.com/watch?v=x81wRBRCXEc",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-26T17:53:04.813366+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-26T18:31:11.357951+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-26T17:53:04.813400+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "counters": {},
+    "at": "2026-10-26T18:31:11.358218+00:00",
+    "collection_status": "collected",
+    "publish_step": "success",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 35,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
+          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
+        },
+        "seen": 11,
+        "total": 168
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 168,
+        "fingerprint": 0,
+        "id": 11,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 157,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 157,
+        "remaining": 35
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 1,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
