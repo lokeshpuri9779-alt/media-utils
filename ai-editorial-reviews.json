@@ -2165,6 +2165,17 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-5d43a4a47101e1e8acdf",
+      "story_sha256": "295b61970715b1cc658c1b17038ec2e4485d299734d74971ed3e34ade1bbfdfe",
+      "approved": false,
+      "issues": [
+        "review_failed:HTTP_503",
+        "review_provider:provider_unavailable"
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }

@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-27",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 3,
+  "attempts": 4,
   "confirmed_today": 3,
-  "last_attempt_at": "2026-10-26T19:52:50.343487+00:00",
+  "last_attempt_at": "2026-10-26T20:37:52.555145+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -5262,28 +5262,79 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-26T19:56:50.897922+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "sgPnZHRetAc": {
+      "content_id": "rayvan-forge-e8f81e24489fc2d9",
+      "title": "The Goat and the Clockwork Parade",
+      "day": "2026-10-27",
+      "uploaded_at": "2026-10-26T20:37:53.947637+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "cb5958b59d85860c25ba7d9b1360a7dad3f8072e55d4e59322ebb225ad635a34",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "A clockwork parade float stopped moving halfway through the town square.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "The goat wound its spring harder, but the wheels refused to turn.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "He found a ribbon caught between the rear gears and switched off the mechanism.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "After removing the ribbon safely, the float rolled through the cheering crowd.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-26T20:29:12.621611+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-26T19:56:51.488320+00:00",
+    "at": "2026-10-26T20:37:54.396089+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-26T13:43:25.050844+00:00",
   "reserved": {
@@ -11369,13 +11420,60 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-e8f81e24489fc2d9": {
+      "at": "2026-10-26T20:37:52.555127+00:00",
+      "title": "The Goat and the Clockwork Parade",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "cb5958b59d85860c25ba7d9b1360a7dad3f8072e55d4e59322ebb225ad635a34",
+      "story_beats": [
+        {
+          "headline": "THE PROBLEM",
+          "speech": "A clockwork parade float stopped moving halfway through the town square.",
+          "visual": "forest",
+          "label": "THE PROBLEM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SETBACK",
+          "speech": "The goat wound its spring harder, but the wheels refused to turn.",
+          "visual": "door",
+          "label": "SETBACK",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE DISCOVERY",
+          "speech": "He found a ribbon caught between the rear gears and switched off the mechanism.",
+          "visual": "book",
+          "label": "NEW CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE PAYOFF",
+          "speech": "After removing the ribbon safely, the float rolled through the cheering crowd.",
+          "visual": "forest",
+          "label": "RESOLVED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-26T19:56:51.488239+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-26T20:37:54.395996+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -11383,36 +11481,78 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-26T19:56:51.488305+00:00",
+    "at": "2026-10-26T20:37:54.396076+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-26T19:42:48.296140+00:00",
+    "at": "2026-10-26T20:29:34.300518+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-3a5d637611083237",
-    "video_url": "https://www.youtube.com/watch?v=OI-M2x9AdQM",
+    "content_id": "rayvan-forge-e8f81e24489fc2d9",
+    "video_url": "https://www.youtube.com/watch?v=sgPnZHRetAc",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-26T19:56:51.488184+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-26T20:37:54.395735+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-26T19:56:51.488233+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "counters": {},
+    "at": "2026-10-26T20:37:54.395991+00:00",
+    "collection_status": "collected",
+    "publish_step": "success",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 31,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
+          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
+        },
+        "seen": 11,
+        "total": 164
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 164,
+        "fingerprint": 0,
+        "id": 11,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 153,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 153,
+        "remaining": 31
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 1,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
