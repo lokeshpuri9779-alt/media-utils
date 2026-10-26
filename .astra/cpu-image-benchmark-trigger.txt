@@ -12,3 +12,5 @@ Retry 5: alternate public OpenVINO SD1.5 checkpoint with UNet config.
 Retry 6: controlled 16-step comparison; retain quality gate.
 
 Retry 7: independent original SD1.5 OpenVINO export, 8 steps, no quality relaxation.
+
+Retry 8: FP32 precision hint and automatic 8-bit compression disabled for source export.
