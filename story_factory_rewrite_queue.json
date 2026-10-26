@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "15a78e5868e70c105f90e991",
-      "source_sha256": "fc8bda5de3694aba72e64246c8f0448bb02c965266ca496956f963abe2e60025",
+      "candidate_id": "aa98b50de1e9554826e4dce7",
+      "source_sha256": "a349913f18b5ba41db58281738a4b3c034a94b1ece1bfe83961e184e885ec04a",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-961fef8b903d30fc695f",
-        "title": "The Automatic Onion-Crying Goggles",
-        "hook": "The Cabbage Attack",
-        "question": "Can Silas sell his erratic vegetable-slicing helmets before the market health inspector shuts down his stall?",
-        "answer": "Silas reconfigures the steam-powered blades to chop singing melons, charming the inspector into awarding a safety grant.",
+        "content_id": "rayvan-gemini-c25211ff9e63fb61b39c",
+        "title": "The Great Carrot Caper",
+        "hook": "The Catastrophic Launch",
+        "question": "Can an overzealous vegetable slicer invention survive a chaotic farmers market?",
+        "answer": "Yes, by accidentally inventing vegetable confetti instead of slices.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,80 +29,80 @@
         ],
         "story_beats": [
           {
-            "headline": "The Cabbage Attack",
-            "speech": "Stand back everyone, because my pneumatic onion-chopping helmet is about to revolutionize dinner preparation across the entire province!",
+            "headline": "The Catastrophic Launch",
+            "speech": "Behold the turbo slicer, guaranteed to process fifty root vegetables every single minute without any effort whatsoever!",
             "visual": "robot",
-            "label": "The Invention Unveiled",
+            "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "Silas wearing a bubbling copper helmet with waving mechanical arms, standing in a crowded vegetable market stall, holding a giant dripping onion while terrified customers duck away.",
+            "visual_prompt": "Inventor Silas standing proudly behind a metallic wooden cart at a crowded outdoor farmers market, holding a greasy brass lever while smoke billows from a copper contraption.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Stuck in Reverse",
-            "speech": "Why is the steam pressure increasing so rapidly, and why are the stainless steel blades spinning toward the turnips?",
+            "headline": "The Root Rebellion",
+            "speech": "Wait, do not insert the oversized heirloom carrots into the hopper because the tension springs are entirely uncalibrated!",
             "visual": "signal",
-            "label": "Building Chaos",
-            "story_beat": "build",
-            "visual_prompt": "Silas frantically turning a stuck brass wheel on his chest harness, while two mechanical spatulas wildly fling purple turnips across the messy market aisle.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Emergency Switch",
-            "speech": "If I reroute the steam through the whistling flute valve right now, we might avoid a complete culinary disaster.",
-            "visual": "door",
-            "label": "The Mechanism Shift",
+            "label": "The Malfunction",
             "story_beat": "mechanism",
-            "visual_prompt": "A close-up of Silas's soot-smudged hands slamming a heavy iron lever sideways into a side port shaped like a tiny cellar door, venting blue steam.",
+            "visual_prompt": "Silas wildly waving his stained leather gloves in panic as orange vegetable shrapnel launches horizontally from the funnel, striking a nearby merchant in the forehead.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Melon Symphony",
-            "speech": "Behold the world's first musical melon slicer, playing delightful folk tunes while perfectly dicing your morning breakfast fruit safely.",
+            "headline": "The Desperate Adjustment",
+            "speech": "Quickly grab the monkey wrench from the wooden crate and turn the main copper sprocket counterclockwise before we hit the tomatoes!",
             "visual": "ship",
-            "label": "Market Payoff",
+            "label": "The Intervention",
+            "story_beat": "build",
+            "visual_prompt": "Assistant Maya diving underneath the rolling cart with a heavy iron wrench in her right hand, frantically tightening a shaking bolt beneath the glowing steam valve.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Confetti Triumph",
+            "speech": "Look at the colorful paper-thin flakes raining down upon the cheering crowd; this is actually our finest market day yet!",
+            "visual": "door",
+            "label": "The Success",
             "story_beat": "payoff",
-            "visual_prompt": "Silas bowing proudly beside his steaming contraption as it neatly slices a large green melon into musical notes, while the smiling health inspector claps in approval.",
+            "visual_prompt": "Silas and Maya smiling broadly amidst a fluttering storm of paper-thin carrot ribbons while joyful market customers hold out copper coins for bags of instant confetti.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Silas's experimental weeping-onion helmet malfunctions and attacks the neighbouring stall's prize cabbages.",
-        "decisive_choice": "Silas throws the master gear into reverse to turn the weeping action into a melodic melon-slicer.",
-        "resolution": "The inspector buys the melon-slicer and awards Silas the town market innovation badge.",
+        "central_conflict": "A malfunctioning spring-loaded slicer firing raw carrots across merchant stalls.",
+        "decisive_choice": "To reverse the gear ratio rather than shutting the machine down.",
+        "resolution": "A profitable new business selling instant confetti for local celebrations.",
         "visual_bible": {
-          "style": "Bright stop-motion claymation aesthetic with rich earthy textures and bustling market background details.",
+          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures of wood, brass, and fresh produce.",
           "characters": {
-            "Silas": "A lanky inventor with wild ginger hair, round brass spectacles, wearing a patched tweed vest and soot-stained trousers.",
-            "Inspector Briggs": "A stout, stern official with a waxed moustache, wearing a sharp navy wool coat and carrying a leather clipboard."
+            "Silas": "Tall, gangly inventor with unruly red hair, wearing a soot-stained tweed vest and oversized round spectacles.",
+            "Maya": "Resourceful apprentice with braided brown hair, wearing a durable canvas apron over a blue wool sweater."
           },
           "locations": {
-            "Market Square": "A sunlit cobblestone marketplace draped in colourful canvas awnings, overflowing with wooden crates of fresh produce."
+            "MarketSquare": "A bustling cobblestone town square lined with striped canvas awnings, wooden crates, and overflowing vegetable stalls."
           },
           "objects": {
-            "Onion Helmet": "A complex copper headpiece covered in pressure gauges, brass tubes, and two erratic steel chopping blades.",
-            "Melon Slicer": "A modified brass contraption featuring a steam whistle, rotating paddles, and a polished mahogany base."
+            "SlicerMachine": "A towering contraption made of polished copper pipes, noisy brass gears, and a wooden hopper painted bright yellow.",
+            "Wrench": "A heavy, rusted iron monkey wrench with visible grease smudges along the handle."
           }
         },
-        "plot_fingerprint": "19421d8427b0af529cedcb174977949994aae122a89ac2f42f76e3f14b70b36d"
+        "plot_fingerprint": "6ad1792f583735a0a0678b88d99cf9a13593660c3fa0c1c4ba1e24aa9b645ab4"
       },
       "approved": false
     },
     {
-      "candidate_id": "f8277b7f5530ca5292d39e2c",
-      "source_sha256": "bf48acc4a52e365f04b4b0e0ddccce9a36032bd6e027ae6ec24605d2230e3e0e",
+      "candidate_id": "e240a39047028b7953339eeb",
+      "source_sha256": "eadc44c3ed769a91d5f05daff9cf15da40579f168785b95be0b1e81e1e5d9e0c",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-7fb97dff491e158f0578",
-        "title": "The Singing Sands of Kora",
-        "hook": "The Silent Ridge",
-        "question": "What caused the dry desert dunes to emit a melodic, harmonious chord every evening?",
-        "answer": "A vast underground labyrinth of ancient acoustic pipes carved into bedrock that naturally resonate as cooling evening winds sweep across the surface.",
+        "content_id": "rayvan-gemini-edf0a2839565bce13794",
+        "title": "The Golden Pitch Rivalry",
+        "hook": "The Stadium Advantage",
+        "question": "Can an underdog neighborhood soccer team defeat the reigning champions using brilliant tactical physics?",
+        "answer": "Yes, by inventing a custom acoustic whistle system that redirects the wind currents across the pitch.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -110,81 +110,83 @@
         ],
         "story_beats": [
           {
-            "headline": "The Silent Ridge",
-            "speech": "Listen closely to the evening wind. The great desert chords are completely missing tonight, and the nesting storm-birds are restless.",
+            "headline": "The Stadium Advantage",
+            "speech": "Look at how the stadium wind bends every single ball right into their defensive zone effortlessly.",
             "visual": "signal",
-            "label": "The Silence",
+            "label": "Unfair Advantage",
             "story_beat": "reveal",
-            "visual_prompt": "Explorer Tarek stands on a high sand dune at dusk, holding a brass sonic sensor that displays a flatline. He wears a heavy canvas expedition coat and goggles. In the background, confused storm-birds circle silently in an amber sky.",
+            "visual_prompt": "Coach Maya pointing at swirling dust patterns on the grassy pitch while holding a digital anemometer, daytime lighting.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Hidden Flute",
-            "speech": "We must dig beneath the fractured limestone shelf. These geometric shafts were clearly carved by ancient hands to catch the wind.",
-            "visual": "door",
-            "label": "The Discovery",
-            "story_beat": "build",
-            "visual_prompt": "Tarek and his companion Sira use small hand shovels to clear fine red sand from a massive carved stone slab set into the desert floor. The slab reveals intricate flute-like apertures.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Clearing the Vent",
-            "speech": "Clear away this compacted silt quickly before nightfall or the airflow through the main chamber will remain completely blocked.",
+            "headline": "Acoustic Engineering",
+            "speech": "If we mount these hollow copper tubes along the north fence, we can split the incoming gale force completely.",
             "visual": "robot",
-            "label": "The Clearing",
-            "story_beat": "mechanism",
-            "visual_prompt": "Sira operates a mechanical pneumatic vacuum device attached to a copper hose, sucking thick packed silt out of a deep subterranean limestone pipe. Tarek holds a steady work-lamp illuminating the dark shaft.",
+            "label": "Ingenious Build",
+            "story_beat": "build",
+            "visual_prompt": "Leo welding a curved copper pipe framework in a cluttered suburban garage workshop, holding a protective mask up.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Evening Chord",
-            "speech": "The deep acoustic resonance has returned at last, and the storm-birds have finally found their way safely home.",
+            "headline": "Wind Deflection Test",
+            "speech": "Watch the airflow stabilize as soon as the acoustic dampers catch the incoming stadium breeze.",
             "visual": "forest",
-            "label": "The Harmony",
+            "label": "Mechanism Test",
+            "story_beat": "mechanism",
+            "visual_prompt": "Maya and Leo testing a smoke flare near the copper pipe array at the edge of the community park pitch.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Winning Goal",
+            "speech": "The air is perfectly still down the center lane now, allowing our striker to score cleanly.",
+            "visual": "ship",
+            "label": "Ultimate Payoff",
             "story_beat": "payoff",
-            "visual_prompt": "Tarek and Sira smile triumphantly as glowing blue resonance waves ripple visibly across the desert floor. Overhead, a flock of illuminated storm-birds dives gracefully down toward the singing dunes.",
+            "visual_prompt": "Striker Sam kicking a soccer ball through a calm center corridor on the pitch while cheering crowds watch from the stands.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A prolonged silence from the resonant dunes threatening the survival of nomadic storm-birds that navigate by the evening chord.",
-        "decisive_choice": "Excavating the main subterranean resonance chamber to clear centuries of packed dune silt instead of abandoning the traditional migration route.",
-        "resolution": "The restored underground pipes resume their resonant hum, guiding the storm-birds safely to their nocturnal nesting grounds.",
+        "central_conflict": "Neighborhood team trailing due to unfair field wind conditions created by stadium architecture.",
+        "decisive_choice": "Constructing tuned acoustic pipe deflectors along the sidelines to neutralize crosswinds.",
+        "resolution": "Fair weather play enabled a stunning last-second winning goal for the underdog team.",
         "visual_bible": {
-          "style": "Cinematic realism with warm desert color palettes, rich amber lighting, and detailed tactile textures.",
+          "style": "vibrant animated athletic cinematic style with crisp lighting and rich color contrast",
           "characters": {
-            "Tarek": "A weathered desert cartographer in his late thirties with a neatly trimmed beard, wearing a tan canvas expedition coat, leather boots, and brass-rimmed goggles pushed up on his forehead.",
-            "Sira": "An agile acoustic researcher in her early thirties with dark hair tied back in a utility braid, wearing a durable slate-grey utility vest and reinforced climbing trousers."
+            "Maya": "determined female coach in her late thirties wearing a navy blue tracksuit and silver whistle",
+            "Leo": "resourceful young mechanic wearing a grease-stained green utility vest and protective goggles",
+            "Sam": "energetic teenage striker wearing a bright yellow jersey with black stripes"
           },
           "locations": {
-            "Kora Basin": "A vast, rolling desert expanse featuring towering copper-colored sand dunes, exposed limestone shelves, and ancient stone ruins."
+            "pitch": "overgrown community sports field bordered by tall oak trees and a massive concrete stadium",
+            "workshop": "cluttered suburban garage filled with metal sheets, welding torches, and spare parts"
           },
           "objects": {
-            "Sonic Sensor": "A handheld rectangular brass device featuring a glowing green frequency screen and an external directional antenna.",
-            "Pneumatic Vacuum": "A heavy iron-and-copper mechanical pump connected to a flexible black rubber intake hose used for clearing dense silt.",
-            "Work-Lamp": "A portable tripod-mounted lantern casting a bright, warm amber beam into dark underground shafts."
+            "whistle": "gleaming silver coaching whistle attached to a braided blue lanyard",
+            "copper_pipes": "series of polished curved copper acoustic tubes designed to redirect wind streams",
+            "soccer_ball": "classic white and black panel regulation soccer ball with scuff marks"
           }
         },
-        "plot_fingerprint": "efba0953217bc80518dc62e7ef398bbbfcd546a79de94a3f5aaa4a07dbfb445d"
+        "plot_fingerprint": "ff2451e9fce725d4e7acc14a101aea7cf71e57a46d5f8b6c106972eb887ea643"
       },
       "approved": false
     },
     {
-      "candidate_id": "d0fcbbd52e4ce949868b331a",
-      "source_sha256": "cf606ed8e67f72630cb87801fe6190c25d65666dc6cdf6fabd822569a8db7790",
+      "candidate_id": "d8e226ecf9d3770a29117cf1",
+      "source_sha256": "173261ee3a3d4fad93c87193bbbe5032941b06e678a3e396b4f6527162b0eca4",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-2dcdc21736ed1c973eec",
-        "title": "The Infinite Pancake-Flipper Panic",
-        "hook": "The Batter Catastrophe",
-        "question": "Can Barnaby save his bustling breakfast stall before the mayor bans automated spatulas forever?",
-        "answer": "Barnaby reprograms the flipper to catch dropped pancakes in mid-air, winning the mayor's endorsement.",
+        "content_id": "rayvan-gemini-8c7480d5f2f5b6e8b94f",
+        "title": "The Caretaker's Last Lullaby",
+        "hook": "Power Draining Fast",
+        "question": "Can a robotic caretaker choose personal safety over keeping a fading promise to a lonely child?",
+        "answer": "Unit Seven chooses to honor the final promise, shielding the sleeping child while its own chassis fails in the encroaching storm.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -192,62 +194,65 @@
         ],
         "story_beats": [
           {
-            "headline": "The Batter Catastrophe",
-            "speech": "Look out below! My glorious breakfast automaton has officially gone rogue and is launching sticky pancakes everywhere!",
+            "headline": "Power Draining Fast",
+            "speech": "My primary cells are dipping below critical levels, yet your story is only halfway finished tonight, little friend.",
             "visual": "robot",
-            "label": "Robot Chaos",
+            "label": "Warning Indicator",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby with messy brown hair and a stained white apron stands in a crowded marketplace dodging a flying pancake, next to a sputtering mechanical robot-arm covered in batter.",
+            "visual_prompt": "A worn domestic robot with copper plating and glowing blue optics stands beside a child's wooden bed, pointing at a flashing red power gauge on its forearm while holding a tattered storybook.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Emergency Calibrations",
-            "speech": "If I tighten this brass valve right now, we might stop the supply line before the entire square is buried.",
+            "headline": "The Distant Beacon",
+            "speech": "The outdoor charging hub glows three hundred meters away through the heavy snow, humming with absolute electrical salvation.",
             "visual": "signal",
-            "label": "Manual Tweak",
+            "label": "Charging Station",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically wrenching a smoking brass valve on his metal contraption while red warning lights flash across the busy market stalls.",
+            "visual_prompt": "Through a frosted bedroom window, a distant green radio beacon cuts through a violent blizzard, casting long shadows across the snowy forest floor.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Gyroscopic Shift",
-            "speech": "By redirecting the steam through the dual-port nozzle, every single pastry will loop right back to the griddle.",
-            "visual": "ship",
-            "label": "Airborne Loop",
-            "story_beat": "mechanism",
-            "visual_prompt": "Pancakes flying in an aerodynamic arc like tiny silver ships over astonished market vendors while Barnaby holds a smoking control lever.",
+            "headline": "Choosing the Page",
+            "speech": "If I turn away into the freezing gale right now, you will wake up alone in the dark silence.",
+            "visual": "forest",
+            "label": "The Snowbound Path",
+            "story_beat": "twist",
+            "visual_prompt": "The robot turns its head away from the frosty window, looking back down with gentle white optic lights at the peaceful sleeping child clutching a plush toy.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "A Perfect Breakfast",
-            "speech": "Step right up and catch your golden flapjack, delivered with absolute precision and zero collateral damage today!",
+            "headline": "The Final Promise",
+            "speech": "Sleep safely now, because the story is fully told and I will never leave your side ever.",
             "visual": "door",
-            "label": "Grand Delivery",
+            "label": "Resting Guardian",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby smiling proudly beside his neatly operating machine as smiling customers catch falling pancakes right onto their plates outside a wooden stall.",
+            "visual_prompt": "The robot sits motionless in a rocking chair beside the cozy bed, its optics dimmed permanently, while early morning sunlight streams through a wooden bedroom door.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A mechanical pancake-flipper flings batter wildly across the crowded town market.",
-        "decisive_choice": "Barnaby adjusts the gear ratio instead of turning off the machine.",
-        "resolution": "The stall serves the fastest, perfectly flipped breakfast in the entire district.",
+        "central_conflict": "A failing backup battery forces the caretaker robot to choose between walking to the recharge hub or finishing the nightly story for the last human child in the valley.",
+        "decisive_choice": "The robot remains by the bedside to complete the final chapter instead of crawling to the charging station.",
+        "resolution": "The child sleeps peacefully through the storm, and the powered-down robot becomes a permanent, protective monument of brass and warmth.",
         "visual_bible": {
-          "style": "Bright, colorful 3D animated family comedy aesthetic with expressive character animations and slapstick energy.",
+          "style": "Warm cinematic 3D animation style with detailed textures of brushed metal, weathered wood, and soft volumetric lighting.",
           "characters": {
-            "Barnaby": "An energetic inventor with unruly brown hair, smudged goggles on his forehead, wearing a heavily pocketed white apron over a striped shirt."
+            "Unit Seven": "A medium-height domestic caretaker robot with polished copper chassis plating, rounded shoulder joints, and gentle circular blue optic sensors.",
+            "Leo": "A seven-year-old child with messy brown hair, wearing oversized blue striped pajamas and hugging a worn fabric rabbit toy."
           },
           "locations": {
-            "Market Square": "A bustling cobblestone marketplace filled with striped awnings, wooden carts, and curious townspeople."
+            "The Nursery": "A cozy, circular room built inside a reclaimed stone watchtower, featuring heavy oak furniture, patchwork quilts, and a large arched frost-covered window.",
+            "The Snowy Valley": "A quiet pine forest blanketed in deep white snow during a heavy winter twilight storm."
           },
           "objects": {
-            "Pancake Machine": "A complex copper and brass contraption with spinning gears, smoking funnels, and a mechanical flipper arm."
+            "Storybook": "A thick, leather-bound volume with golden embossed lettering on the spine and frayed paper corners.",
+            "Charging Beacon": "A tall steel spire topped with a flashing emerald-green lens that pulses steadily through falling snow."
           }
         },
-        "plot_fingerprint": "80760b05ceb3d25b9b653ca8a61ec75dcef2713bc4100f0b14ad1444f434885c"
+        "plot_fingerprint": "a50723922dc70467db1e7fdc7490e0838cf48f192a3372fa60ce30c619fc9736"
       },
       "approved": false
     }
