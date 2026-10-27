@@ -5636,6 +5636,58 @@
       "central_conflict": "A stranded climber is trapped in a collapsing ice cave during an unexpected whiteout.",
       "decisive_choice": "Abandon the safe established trail to descend directly into the unstable blue crevasse.",
       "resolution": "The climber is hauled up safely just as the main ridge snowpack collapses."
+    },
+    {
+      "content_id": "rayvan-gemini-90b6216af373fcb2abe2",
+      "video_id": "5f0nIGEL2rk",
+      "confirmed_at": "2026-10-27T07:48:12.702961+00:00",
+      "title": "Percival's Polka-Dot Produce-Polisher and the Bazaar Blooper",
+      "plot_fingerprint": "c0fb35d43ffb8ce9cf11370b92abd69c7560a8deeb7dd8ba472fe292052856c6",
+      "story_beats": [
+        {
+          "headline": "A Sticky Situation",
+          "speech": "Behold my magnificent produce polisher! It will turn every bruised apple in this market into a shimmering masterpiece of natural, shiny beauty.",
+          "visual": "robot",
+          "label": "The Presentation",
+          "story_beat": "reveal",
+          "visual_prompt": "Percival, a scrawny inventor with goggles and a grease-stained apron, stands next to a clunky, steam-powered robot made of brass piping in the busy market.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Polishing Panic",
+          "speech": "Oh no, the pressure gauge is fluctuating wildly! The machine is vibrating and spitting out apples like a cannon at the startled crowd.",
+          "visual": "signal",
+          "label": "The Malfunction",
+          "story_beat": "mechanism",
+          "visual_prompt": "Percival frantically adjusts red levers on the brass robot as apples fly out of a metallic chute, creating a dangerous signal of flying fruit.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Mechanical Pivot",
+          "speech": "I cannot stop the flow, so I must redirect the trajectory upward! It is better to have a fountain than a chaotic fruit barrage.",
+          "visual": "ship",
+          "label": "The Adjustment",
+          "story_beat": "twist",
+          "visual_prompt": "Percival climbs onto the frame of the robot, wrenching a heavy gear while the machine tilts its output chute toward the sky like a launching ship.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Fruity Finale",
+          "speech": "Look at the colors dancing in the air! My invention has turned this chaotic disaster into the most wonderful fruit display of all time.",
+          "visual": "forest",
+          "label": "The Success",
+          "story_beat": "payoff",
+          "visual_prompt": "Apples arc gracefully through the air like a fountain, landing in baskets as the market crowd cheers, with Percival wiping grease from his forehead.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Percival's experimental fruit-polishing machine begins launching polished produce at high speeds into the crowded marketplace stalls.",
+      "decisive_choice": "Percival intentionally jams the machine's primary stabilizer to turn the high-speed output into a decorative fruit fountain rather than a projectile weapon.",
+      "resolution": "The market crowd applauds the unexpected fruit display and Percival earns enough coins from sales to repair his workshop roof."
     }
   ]
 }

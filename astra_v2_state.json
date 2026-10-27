@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-27",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 27,
-  "confirmed_today": 26,
-  "last_attempt_at": "2026-10-27T07:42:45.518280+00:00",
+  "attempts": 28,
+  "confirmed_today": 27,
+  "last_attempt_at": "2026-10-27T07:56:08.139772+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -6383,16 +6383,14 @@
       "decisive_choice": "Abandon the safe established trail to descend directly into the unstable blue crevasse.",
       "resolution": "The climber is hauled up safely just as the main ridge snowpack collapses.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "5f0nIGEL2rk": {
-      "content_id": "rayvan-gemini-90b6216af373fcb2abe2",
+    },
+    "rayvan-gemini-90b6216af373fcb2abe2": {
+      "video_id": "5f0nIGEL2rk",
+      "confirmed_at": "2026-10-27T07:48:12.702961+00:00",
       "title": "Percival's Polka-Dot Produce-Polisher and the Bazaar Blooper",
-      "day": "2026-10-27",
-      "uploaded_at": "2026-10-27T07:42:47.121565+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-27T07:42:47.121565+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "c0fb35d43ffb8ce9cf11370b92abd69c7560a8deeb7dd8ba472fe292052856c6",
       "story_beats": [
@@ -6440,16 +6438,74 @@
       "central_conflict": "Percival's experimental fruit-polishing machine begins launching polished produce at high speeds into the crowded marketplace stalls.",
       "decisive_choice": "Percival intentionally jams the machine's primary stabilizer to turn the high-speed output into a decorative fruit fountain rather than a projectile weapon.",
       "resolution": "The market crowd applauds the unexpected fruit display and Percival earns enough coins from sales to repair his workshop roof.",
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "4qvbV7gW2Zo": {
+      "content_id": "rayvan-gemini-a73b30f45d38cc1b41f0",
+      "title": "The Conductor's Lost Pocket Watch at Terminus Nine",
+      "day": "2026-10-27",
+      "uploaded_at": "2026-10-27T07:56:10.320114+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "656e461796b85d1d21de724cf55624c4c4c9fb6b90d6a5f7cc3fba80811ba601",
+      "story_beats": [
+        {
+          "headline": "The Missing Heirloom",
+          "speech": "That gold watch was my grandfather's pride and joy, and now it has vanished into thin air.",
+          "visual": "signal",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Station master Barnaby looking distressed at the wooden ticket desk, holding an empty velvet box, under a glowing green railway signal light.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "An Unexpected Ally",
+          "speech": "Look at those muddy tracks leading straight toward the dark cargo carriages parked on track four.",
+          "visual": "door",
+          "label": "The Trail",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby pointing down at muddy footprints next to a heavy sliding metal station door, while a clever red fox sits nearby watching attentively.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Inside the Cargo Hold",
+          "speech": "Quiet now, my furry friend, we must check behind these stacked crates before the engine starts moving.",
+          "visual": "ship",
+          "label": "The Search",
+          "story_beat": "mechanism",
+          "visual_prompt": "Barnaby holding a brass lantern inside a dimly lit freight car filled with wooden crates and mail sacks, searching cautiously.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Returned to Safety",
+          "speech": "You actually found it tucked inside that mail sack! You are truly the finest assistant in this station.",
+          "visual": "robot",
+          "label": "The Recovery",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby smiling warmly while the red fox gently drops the gleaming gold pocket watch onto the wooden ticket counter beside a ticking brass clock.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A priceless gold pocket watch vanished from the station master desk right before the final train departure.",
+      "decisive_choice": "Follow the muddy paw prints toward the cargo carriages instead of waiting for the city guards.",
+      "resolution": "The stray fox drops the ticking watch onto the ticket counter, saving the station master's reputation.",
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-27T07:24:16.932685+00:00",
+  "last_preflight_at": "2026-10-27T07:48:12.293643+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-27T07:42:47.519393+00:00",
+    "at": "2026-10-27T07:56:10.710156+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -13681,10 +13737,64 @@
       "resolution": "The market crowd applauds the unexpected fruit display and Percival earns enough coins from sales to repair his workshop roof.",
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-a73b30f45d38cc1b41f0": {
+      "at": "2026-10-27T07:56:08.139756+00:00",
+      "title": "The Conductor's Lost Pocket Watch at Terminus Nine",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "656e461796b85d1d21de724cf55624c4c4c9fb6b90d6a5f7cc3fba80811ba601",
+      "story_beats": [
+        {
+          "headline": "The Missing Heirloom",
+          "speech": "That gold watch was my grandfather's pride and joy, and now it has vanished into thin air.",
+          "visual": "signal",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Station master Barnaby looking distressed at the wooden ticket desk, holding an empty velvet box, under a glowing green railway signal light.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "An Unexpected Ally",
+          "speech": "Look at those muddy tracks leading straight toward the dark cargo carriages parked on track four.",
+          "visual": "door",
+          "label": "The Trail",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby pointing down at muddy footprints next to a heavy sliding metal station door, while a clever red fox sits nearby watching attentively.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Inside the Cargo Hold",
+          "speech": "Quiet now, my furry friend, we must check behind these stacked crates before the engine starts moving.",
+          "visual": "ship",
+          "label": "The Search",
+          "story_beat": "mechanism",
+          "visual_prompt": "Barnaby holding a brass lantern inside a dimly lit freight car filled with wooden crates and mail sacks, searching cautiously.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Returned to Safety",
+          "speech": "You actually found it tucked inside that mail sack! You are truly the finest assistant in this station.",
+          "visual": "robot",
+          "label": "The Recovery",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby smiling warmly while the red fox gently drops the gleaming gold pocket watch onto the wooden ticket counter beside a ticking brass clock.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A priceless gold pocket watch vanished from the station master desk right before the final train departure.",
+      "decisive_choice": "Follow the muddy paw prints toward the cargo carriages instead of waiting for the city guards.",
+      "resolution": "The stray fox drops the ticking watch onto the ticket counter, saving the station master's reputation.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-27T07:42:47.519313+00:00",
+    "at": "2026-10-27T07:56:10.710099+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -13695,21 +13805,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-27T07:42:47.519378+00:00",
+    "at": "2026-10-27T07:56:10.710147+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-27T07:24:43.771997+00:00",
+    "at": "2026-10-27T07:49:14.264682+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-90b6216af373fcb2abe2",
-    "video_url": "https://www.youtube.com/watch?v=5f0nIGEL2rk",
+    "content_id": "rayvan-gemini-a73b30f45d38cc1b41f0",
+    "video_url": "https://www.youtube.com/watch?v=4qvbV7gW2Zo",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-27T07:42:47.519020+00:00",
+    "at": "2026-10-27T07:56:10.709879+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -13721,23 +13831,23 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-27T07:42:47.519306+00:00",
+    "at": "2026-10-27T07:56:10.710094+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 159,
+        "before": 158,
         "fingerprint": 0,
         "id": 24,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 135,
+        "remaining": 134,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 135,
-        "remaining": 13
+        "pool": 134,
+        "remaining": 12
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
