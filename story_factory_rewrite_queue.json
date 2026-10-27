@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "f64ff8715d7389627a3b5451",
-      "source_sha256": "2cc63fb9d3c777311bc61a93bdbb8a8294e96b92b7b20b346825183a59352a77",
+      "candidate_id": "3103cb984a61705beaa9f716",
+      "source_sha256": "eb472f6beb20c37f93efe8049856f1da2de3ab2ad2a28cb31bbc2f9e82a1d093",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-8a35e6830b1bf100738b",
-        "title": "The Mechanical Dumpling Disaster",
-        "hook": "Morning Chaos",
-        "question": "Can the market's fastest folding machine pass the early morning noodle test?",
-        "answer": "Yes, by adjusting the pressure valves to handle sticky dough.",
+        "content_id": "rayvan-gemini-abad28100e9eea3d8c6d",
+        "title": "The Great Turnip Launcher Disaster",
+        "hook": "The Mechanical Menace",
+        "question": "Can an overzealous market inventor automate vegetable stacking without destroying the entire bazaar?",
+        "answer": "Yes, by trading high-speed springs for a gentle gravity slide that pleases both customers and merchants.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,78 +29,80 @@
         ],
         "story_beats": [
           {
-            "headline": "Morning Chaos",
-            "speech": "Look at this sticky mess! The dough is jamming every single gear before the market bell even rings.",
+            "headline": "The Mechanical Menace",
+            "speech": "Behold the rapid root-vegetable launcher, firing fresh turnips directly into your shopping bags at incredible speeds!",
             "visual": "robot",
-            "label": "Jamming Gears",
+            "label": "The Launcher Reveal",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stares in horror at a smoking brass-plated robot appliance stuffed with white dough, standing in a crowded cobblestone market stall at dawn.",
+            "visual_prompt": "Barnaby stands proudly beside a twitching metal contraption in a crowded cobblestone market, holding a greasy wrench, while frightened shoppers dodge flying purple turnips.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Hasty Repairs",
-            "speech": "Hold on, let us tighten the tension springs right now before the angry noodle vendors gather around our stall.",
-            "visual": "ship",
-            "label": "Tightening Springs",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby frantically twists a brass valve on the side of the steampunk machine while holding a heavy iron wrench, surrounded by hanging wooden crates of flour.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Sudden Realization",
-            "speech": "Wait, the steam is melting the flour! We need to channel hot air outward instead of trapping it inside.",
+            "headline": "Constructing the Chaos",
+            "speech": "We must tighten the tension bolts immediately before the cabbage compartment shakes the entire merchant tent apart!",
             "visual": "signal",
-            "label": "Exhaust Redirect",
+            "label": "The Build Phase",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby frantically cranks a glowing red lever on the brass framework, surrounded by rolling vegetables, while his assistant ducks behind a wooden fruit crate.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Catastrophic Climax",
+            "speech": "Stop the gears! The brass spring is winding too tightly and it is about to launch every single potato skyward!",
+            "visual": "ship",
+            "label": "The Mechanism Twist",
             "story_beat": "twist",
-            "visual_prompt": "Barnaby points excitedly at a rising puff of steam escaping from the top pipe of the machine, while a curious baker watches from an adjacent wooden stall.",
+            "visual_prompt": "The giant metal apparatus bows outward under immense pressure, steam hissing from copper valves, as Barnaby dives defensively toward the main control valve.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Flawless Output",
-            "speech": "Smell those fresh dumplings! Our redesigned ventilation system finally delivers piping hot food for every hungry customer.",
+            "headline": "The Gentle Slide",
+            "speech": "Instead of blasting produce through the air, this simple slanted ramp lets gravity do all the hard work safely.",
             "visual": "door",
-            "label": "Market Success",
+            "label": "The Market Payoff",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby smiles proudly beside the humming brass machine as rows of perfectly formed dumplings slide down a polished wooden chute into a woven basket.",
+            "visual_prompt": "Barnaby and the market vendor smile warmly as clean purple turnips roll gently down a smooth wooden trough directly into an orderly wicker basket.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "The automatic dumpling folder clogs because the market humidity softens the flour paste too quickly.",
-        "decisive_choice": "Barnaby reroutes the steam exhaust directly into the mixing paddle to dry the dough mid-spin.",
-        "resolution": "The machine produces perfectly sealed dumplings just as the morning breakfast rush arrives.",
+        "central_conflict": "Barnaby tests a spring-loaded turnip launcher that terrorizes the morning vegetable market.",
+        "decisive_choice": "Barnaby abandons the mechanical catapult to build a slow wooden slide.",
+        "resolution": "Turnips roll smoothly into baskets, earning praise from the market vendor.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion puppet animation aesthetic with rich textures and warm lighting.",
+          "style": "Bright, colorful stop-motion claymation aesthetic with expressive character animation and detailed rustic props.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild gray hair, wire-rimmed glasses, a green tweed vest, and flour-dusted fingers."
+            "Barnaby": "A short, frantic inventor with round spectacles, a grease-stained yellow vest, and wild tufts of orange hair.",
+            "Vendor": "A stern market merchant wearing a striped apron, a flat cap, and holding a wooden clipboard."
           },
           "locations": {
-            "market_stall": "A bustling, sunlit outdoor medieval market square filled with wooden crates, colorful canvas awnings, and cobblestone ground."
+            "Market Square": "A bustling outdoor bazaar featuring canvas-roofed wooden stalls, cobblestone paths, and stacked crates of colorful produce."
           },
           "objects": {
-            "dumpling_machine": "A complex contraption made of polished brass, copper tubing, mechanical gears, and a wooden hopper at the top."
+            "Launcher": "A towering contraption of squeaking brass gears, rusted iron springs, and smoking copper pipes.",
+            "Slide": "A polished wooden ramp constructed from smooth pine planks with a soft wicker landing basket."
           }
         },
-        "plot_fingerprint": "6f618e7a5df086e67dbfc8a344964f20215f989888bf67195425cd21cd5eb810"
+        "plot_fingerprint": "5339e6b58adbcf2e3cec373db724ef92799d49ddd1c0c5236a68e186d8fea84d"
       },
       "approved": false
     },
     {
-      "candidate_id": "c56a74c0f39b063601b9f3f0",
-      "source_sha256": "b965122ecaddc330d03127708faa2ab145e9484bb4796d29548587bf4cce8708",
+      "candidate_id": "7de88ba01aa2130503015e7c",
+      "source_sha256": "f722c6eefb3a8a9fb6b2cbe1a771dfba2156709a3fd4697ca0dc699ff3336b85",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-6b706e113a690ea94fdf",
-        "title": "The Great Muddy Pitch Mystery",
-        "hook": "The Flooded Pitch",
-        "question": "How did the rival soccer teams fix the flooded community pitch without postponing the charity match?",
-        "answer": "They constructed a gravity-fed drainage trench using discarded PVC pipes.",
+        "content_id": "rayvan-gemini-08cec13eaecdf86de027",
+        "title": "The Mystery of Platform Four",
+        "hook": "The Missing Train",
+        "question": "Why did the morning express leave the station empty while passengers waited?",
+        "answer": "A stray signal switch was jammed by a nesting pigeon carrying a brass railway key.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -108,149 +110,146 @@
         ],
         "story_beats": [
           {
-            "headline": "The Flooded Pitch",
-            "speech": "Look at this disaster! How are we supposed to play our big charity match with a massive lake in the middle?",
-            "visual": "forest",
-            "label": "The Discovery",
-            "story_beat": "reveal",
-            "visual_prompt": "Captain Toby pointing at a deeply flooded community grass pitch surrounded by pine trees, wearing blue sports gear with worried expression, while holding a muddy soccer ball.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Blocked Culvert",
-            "speech": "The old drainage pipe is completely clogged with autumn leaves and thick mud, trapping all the rainwater here.",
+            "headline": "The Missing Train",
+            "speech": "Look at the departure board, Arthur! The express vanished down the wrong track without a single passenger aboard.",
             "visual": "signal",
-            "label": "The Investigation",
-            "story_beat": "build",
-            "visual_prompt": "Maya shining a red waterproof flashlight directly into a rusty metal drainage culvert entrance, wearing orange athletic jersey, showing a determined expression.",
+            "label": "Platform Paradox",
+            "story_beat": "reveal",
+            "visual_prompt": "Station master Arthur staring at a blank departure board on the foggy platform, holding a pocket watch while steam billows.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Ingenious Siphon",
-            "speech": "We do not need heavy machinery. If we link these scrap irrigation tubes together, gravity will pull the water out.",
-            "visual": "door",
-            "label": "The Mechanism",
-            "story_beat": "mechanism",
-            "visual_prompt": "Toby and Maya working together near a wooden equipment shed doorway, connecting blue flexible PVC pipes to create a makeshift siphon system, both smiling.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Whistle Blows",
-            "speech": "The field is completely dry just in time. Let us finally settle this rivalry on fair ground!",
+            "headline": "The Strange Clue",
+            "speech": "This stray terrier found a shiny brass key wedged deep inside the mechanical signal lever over there.",
             "visual": "robot",
-            "label": "The Triumph",
-            "story_beat": "payoff",
-            "visual_prompt": "Toby and Maya standing side by side on a pristine green soccer pitch holding a shiny silver trophy, wearing opposing team jerseys, surrounded by cheering neighbors.",
+            "label": "The Canine Helper",
+            "story_beat": "build",
+            "visual_prompt": "Arthur kneeling by a scruffy terrier holding a brass railway key in its jaws next to a massive iron lever.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
-          }
-        ],
-        "central_conflict": "A massive storm flooded the town's shared soccer pitch right before the annual neighborhood rivalry match, threatening cancellation.",
-        "decisive_choice": "Captain Toby chose to collaborate with his fiercest rival, Maya, instead of arguing over who was responsible for clearing the water.",
-        "resolution": "Both teams successfully drained the pitch together, played an incredible match, and established a permanent joint maintenance committee.",
-        "visual_bible": {
-          "style": "vibrant, cinematic 3D animation style with detailed textures, realistic lighting, and cheerful color palettes",
-          "characters": {
-            "Toby": "A teenage boy with messy brown hair, freckles, wearing a blue athletic jersey, black shorts, and worn running shoes.",
-            "Maya": "A teenage girl with curly black hair tied in a ponytail, wearing an orange athletic jersey, white shorts, and bright yellow cleats."
           },
-          "locations": {
-            "community_pitch": "A lush neighborhood soccer field surrounded by pine trees, featuring white goalposts and a wooden equipment shed.",
-            "drainage_culvert": "A rusty corrugated metal pipe opening set into a sloping grassy embankment beside the pitch."
-          },
-          "objects": {
-            "soccer_ball": "A classic black and white paneled leather soccer ball with visible mud splashes.",
-            "pvc_pipe": "A length of flexible blue corrugated plastic tubing used for irrigation and drainage.",
-            "trophy": "A gleaming silver cup trophy mounted on a polished dark wooden base with an engraved plaque."
-          }
-        },
-        "plot_fingerprint": "0ceebe6ac1f85a1370647421780045c4f1a74fa8a2724504ea388a820314d9ad"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "bf268b6d407e51f24b956e33",
-      "source_sha256": "b02470f546db19ec21f6443f0916ddfe11b1e0bd86ae87d8162366ac51942e56",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-ae6aa51024d254851658",
-        "title": "The Resonance Leak on Deck Seven",
-        "hook": "Alarms Blare Across the Bridge",
-        "question": "Can the engineering crew patch the plasma manifold before the hull loses structural integrity?",
-        "answer": "They bypass the primary intake and safely vent the excess ion charge into the void.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
           {
-            "headline": "Alarms Blare Across the Bridge",
-            "speech": "Captain, the primary plasma manifold is fracturing from extreme thermal expansion, threatening our entire propulsion system.",
+            "headline": "The Mechanism Jam",
+            "speech": "A clever bird built its nest inside the gear box, locking the switch points in the wrong direction.",
+            "visual": "door",
+            "label": "Nest in the Works",
+            "story_beat": "mechanism",
+            "visual_prompt": "Arthur shining a lantern into an open maintenance hatch revealing twigs and feathers tangled in large brass gears.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Corrected Route",
+            "speech": "With the blockage cleared and the switches aligned, the morning express rolls smoothly back to the platform.",
             "visual": "ship",
-            "label": "Thermal Alert",
-            "story_beat": "reveal",
-            "visual_prompt": "First officer Vane stands before the glowing amber main console inside the bridge, pointing a gloved finger at flashing red warning diagnostics while wearing a heavy charcoal jumpsuit with orange safety stripes.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A Disagreement in Engineering",
-            "speech": "We must cut power to the port nacelle immediately, or the overload will melt straight through the secondary bulkheads.",
-            "visual": "robot",
-            "label": "Emergency Override",
-            "story_beat": "build",
-            "visual_prompt": "Maintenance android Unit-Seven holds a sparking diagnostic stylus in its right manipulator while arguing with Chief Engineer Kael inside the narrow, copper-piped engine room.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Diverting the Coolant",
-            "speech": "Stand back and let me purge the auxiliary reserves into the manifold before the thermal seals completely fail.",
-            "visual": "signal",
-            "label": "Coolant Purge",
-            "story_beat": "mechanism",
-            "visual_prompt": "Chief Engineer Kael slams a heavy brass lever down on the central control panel, causing a wave of blue cryogenic mist to vent upward past his soot-stained face.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "System Recovery",
-            "speech": "Pressure gauges are returning to nominal levels across all decks. Excellent judgment under pressure, team.",
-            "visual": "planet",
-            "label": "Safe Harbor",
+            "label": "The On-Time Departure",
             "story_beat": "payoff",
-            "visual_prompt": "Captain Vane and Chief Engineer Kael watch through the massive forward viewport as a tranquil blue ocean planet fills the screen, their expressions relieved and exhausted.",
+            "visual_prompt": "Arthur waving a green flag as a classic steam locomotive pulls into the sunlit station filled smiling travelers.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A cracked plasma manifold threatening bulkhead collapse during warp transit.",
-        "decisive_choice": "Diverting reactor coolant away from the life support reserves to cool the seal instantly.",
-        "resolution": "The hull pressure stabilizes completely, saving the vessel and crew from disaster.",
+        "central_conflict": "A blocked switch diverts trains onto a decommissioned siding before the morning rush.",
+        "decisive_choice": "Arthur enlists a wandering station dog to retrieve the key from beneath the tracks.",
+        "resolution": "The express is rerouted correctly and departs on time with all passengers aboard.",
         "visual_bible": {
-          "style": "Cinematic sci-fi realism with gritty, industrial textures, warm tungsten interior lighting, and cool blue holographic interface displays.",
+          "style": "Vintage railway mystery illustration with rich textures and dramatic lighting",
           "characters": {
-            "Vane": "Human female in her late thirties with braided dark hair, wearing a charcoal grey command jumpsuit with prominent orange utility stripes and brass rank pins.",
-            "Kael": "Human male in his mid-forties with a short grey beard, wearing a grease-stained leather utility apron over a navy blue engineering tunic.",
-            "Unit-Seven": "Bipedal maintenance android with a polished chrome chassis, glowing cyan optical sensors, and dual articulated manipulator hands."
+            "Arthur": "An elderly station master with a thick gray mustache, round spectacles, a navy blue uniform, and a gold pocket watch.",
+            "Barnaby": "A scruffy, energetic brown terrier with floppy ears and a red leather collar."
           },
           "locations": {
-            "bridge": "A spacious command deck featuring curved glass viewports, leather-upholstered pilot chairs, and recessed amber console panels.",
-            "engine_room": "A cramped, vertical chamber lined with exposed copper coolant pipes, vibrating turbine housings, and flickering diagnostic terminals."
+            "Grand_Terminus": "A Victorian railway station with arched iron roofs, brick platforms, and thick morning fog."
           },
           "objects": {
-            "diagnostic_stylus": "A slender titanium cylinder with a glowing violet tip used for reading system data.",
-            "coolant_lever": "A heavy, mechanical brass lever mounted on a steel pedestal with embossed emergency warning glyphs."
+            "brass_key": "An antique, heavy brass skeleton key engraved with the railway company crest.",
+            "signal_lever": "A tall, painted red and black iron lever connected to underground track switches."
           }
         },
-        "plot_fingerprint": "b1f115abb4b89949f8747599e0de77468dbf014c0aba201b5316657a0bc9e10d"
+        "plot_fingerprint": "3c6182474dfede131646af95927cbcb817acf24147833810ed07649b5fcf77bd"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "ffed548387dde2904de2b803",
+      "source_sha256": "3f812320c2944ecdd5be27e7629851eb67756dac584672ce11f764c36baf549e",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-b83e330695cf442e1c38",
+        "title": "The Singing Dunes of Oakhaven",
+        "hook": "A Desert Resonance",
+        "question": "What causes the mysterious musical hum echoing across the arid Oakhaven basin each afternoon?",
+        "answer": "An underground cavern system filled with hollow crystal formations that resonate when heated desert winds pass through ancient limestone shafts.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "A Desert Resonance",
+            "speech": "Listen closely to that rising acoustic pressure. The entire valley floor is vibrating at a frequency that defies normal geology.",
+            "visual": "signal",
+            "label": "Seismic Hum",
+            "story_beat": "reveal",
+            "visual_prompt": "Kaelen, a weathered explorer in tan linen robes, kneels on the cracked earth of the Oakhaven basin, holding a brass acoustic meter that displays erratic seismic waves, while shimmering heat haze blurs the distant limestone ridges.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Descending the Chasm",
+            "speech": "We must anchor this heavy winch system immediately before the updraft expands the fracture in the canyon wall.",
+            "visual": "door",
+            "label": "Shaft Entry",
+            "story_beat": "build",
+            "visual_prompt": "Kaelen and his companion Mira, wearing goggles and tool harnesses, secure a thick hemp rope to a rusted iron anchor stake driven into the rocky ground beside a gaping vertical sinkhole leading into darkness.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Crystal Chambers",
+            "speech": "Look at these magnificent hollow formations glowing in the lantern light. They act as natural organ pipes when the air rushes past.",
+            "visual": "forest",
+            "label": "Resonant Cavity",
+            "story_beat": "mechanism",
+            "visual_prompt": "Kaelen stands inside a vast underground cavern illuminated by a handheld brass lantern, gazing in wonder at towering amber-colored crystal pillars branching upward like petrified trees while warm wind currents swirl dust motes.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Harmonic Balance",
+            "speech": "By shifting this single limestone wedge into position, we preserve the music of the canyon without risking a structural collapse.",
+            "visual": "planet",
+            "label": "Stable Basin",
+            "story_beat": "payoff",
+            "visual_prompt": "Kaelen smiles in triumph as he wedges a heavy grey rock into a narrow fissure at the base of a glowing crystal formation, while tranquil sunlight streams down from the surface opening onto the peaceful desert floor.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Wind entering the hidden cavern system triggers a deafening harmonic vibration that threatens to destabilize the delicate sandstone cliffs above.",
+        "decisive_choice": "Kaelen chooses to descend into the perilous sinkhole alone to seal the primary airflow vent rather than waiting for the regional engineering caravan.",
+        "resolution": "He successfully positions a natural limestone boulder to divert the draft, preserving the subterranean melody while securing the surrounding bluffs.",
+        "visual_bible": {
+          "style": "Cinematic adventure realism with warm golden hour lighting, rich earth tones, and highly detailed natural textures.",
+          "characters": {
+            "Kaelen": "A seasoned desert explorer with sun-bronzed skin, short dark hair, wearing a worn tan linen tunic, leather utility belt, and protective goggles pushed up on his forehead.",
+            "Mira": "A pragmatic engineer with braided auburn hair, practical canvas trousers, a brass surveyor's kit, and a steadfast expression."
+          },
+          "locations": {
+            "Oakhaven Basin": "A vast, sun-baked desert valley marked by cracked clay flats, sparse scrub brush, and towering weathered limestone cliffs.",
+            "Crystal Chasm": "A subterranean limestone cavern featuring massive, translucent amber crystal pillars and smooth wind-carved tunnels."
+          },
+          "objects": {
+            "Acoustic Meter": "A handheld brass instrument with a glass viewing dial and a trembling black needle measuring sonic vibrations.",
+            "Exploration Winch": "A sturdy wooden tripod frame rigged with thick hemp rope and a rusted iron hand crank."
+          }
+        },
+        "plot_fingerprint": "490dce53a8678845da10f6a789489894b2db9e062a25037a2b55ab251efb92e3"
       },
       "approved": false
     }
