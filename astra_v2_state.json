@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-27",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 26,
-  "confirmed_today": 25,
-  "last_attempt_at": "2026-10-27T07:12:34.383583+00:00",
+  "attempts": 27,
+  "confirmed_today": 26,
+  "last_attempt_at": "2026-10-27T07:42:45.518280+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -6327,16 +6327,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "HvuU1MVJ4Fw": {
-      "content_id": "rayvan-gemini-f1045b51c0ccd6eb179a",
+    },
+    "rayvan-gemini-f1045b51c0ccd6eb179a": {
+      "video_id": "HvuU1MVJ4Fw",
+      "confirmed_at": "2026-10-27T07:24:17.311682+00:00",
       "title": "The Ranger and the Frostbound Crevasse",
-      "day": "2026-10-27",
-      "uploaded_at": "2026-10-27T07:12:35.905995+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-27T07:12:35.905995+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "0864d4359221d92c96b3a336e7f7e2cd84f5f6ff71d74b327a268a2604e57a47",
       "story_beats": [
@@ -6384,16 +6382,74 @@
       "central_conflict": "A stranded climber is trapped in a collapsing ice cave during an unexpected whiteout.",
       "decisive_choice": "Abandon the safe established trail to descend directly into the unstable blue crevasse.",
       "resolution": "The climber is hauled up safely just as the main ridge snowpack collapses.",
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "5f0nIGEL2rk": {
+      "content_id": "rayvan-gemini-90b6216af373fcb2abe2",
+      "title": "Percival's Polka-Dot Produce-Polisher and the Bazaar Blooper",
+      "day": "2026-10-27",
+      "uploaded_at": "2026-10-27T07:42:47.121565+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "c0fb35d43ffb8ce9cf11370b92abd69c7560a8deeb7dd8ba472fe292052856c6",
+      "story_beats": [
+        {
+          "headline": "A Sticky Situation",
+          "speech": "Behold my magnificent produce polisher! It will turn every bruised apple in this market into a shimmering masterpiece of natural, shiny beauty.",
+          "visual": "robot",
+          "label": "The Presentation",
+          "story_beat": "reveal",
+          "visual_prompt": "Percival, a scrawny inventor with goggles and a grease-stained apron, stands next to a clunky, steam-powered robot made of brass piping in the busy market.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Polishing Panic",
+          "speech": "Oh no, the pressure gauge is fluctuating wildly! The machine is vibrating and spitting out apples like a cannon at the startled crowd.",
+          "visual": "signal",
+          "label": "The Malfunction",
+          "story_beat": "mechanism",
+          "visual_prompt": "Percival frantically adjusts red levers on the brass robot as apples fly out of a metallic chute, creating a dangerous signal of flying fruit.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Mechanical Pivot",
+          "speech": "I cannot stop the flow, so I must redirect the trajectory upward! It is better to have a fountain than a chaotic fruit barrage.",
+          "visual": "ship",
+          "label": "The Adjustment",
+          "story_beat": "twist",
+          "visual_prompt": "Percival climbs onto the frame of the robot, wrenching a heavy gear while the machine tilts its output chute toward the sky like a launching ship.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Fruity Finale",
+          "speech": "Look at the colors dancing in the air! My invention has turned this chaotic disaster into the most wonderful fruit display of all time.",
+          "visual": "forest",
+          "label": "The Success",
+          "story_beat": "payoff",
+          "visual_prompt": "Apples arc gracefully through the air like a fountain, landing in baskets as the market crowd cheers, with Percival wiping grease from his forehead.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Percival's experimental fruit-polishing machine begins launching polished produce at high speeds into the crowded marketplace stalls.",
+      "decisive_choice": "Percival intentionally jams the machine's primary stabilizer to turn the high-speed output into a decorative fruit fountain rather than a projectile weapon.",
+      "resolution": "The market crowd applauds the unexpected fruit display and Percival earns enough coins from sales to repair his workshop roof.",
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-27T07:00:49.833920+00:00",
+  "last_preflight_at": "2026-10-27T07:24:16.932685+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-27T07:12:36.352077+00:00",
+    "at": "2026-10-27T07:42:47.519393+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -13571,10 +13627,64 @@
       "resolution": "The climber is hauled up safely just as the main ridge snowpack collapses.",
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-90b6216af373fcb2abe2": {
+      "at": "2026-10-27T07:42:45.518264+00:00",
+      "title": "Percival's Polka-Dot Produce-Polisher and the Bazaar Blooper",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "c0fb35d43ffb8ce9cf11370b92abd69c7560a8deeb7dd8ba472fe292052856c6",
+      "story_beats": [
+        {
+          "headline": "A Sticky Situation",
+          "speech": "Behold my magnificent produce polisher! It will turn every bruised apple in this market into a shimmering masterpiece of natural, shiny beauty.",
+          "visual": "robot",
+          "label": "The Presentation",
+          "story_beat": "reveal",
+          "visual_prompt": "Percival, a scrawny inventor with goggles and a grease-stained apron, stands next to a clunky, steam-powered robot made of brass piping in the busy market.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Polishing Panic",
+          "speech": "Oh no, the pressure gauge is fluctuating wildly! The machine is vibrating and spitting out apples like a cannon at the startled crowd.",
+          "visual": "signal",
+          "label": "The Malfunction",
+          "story_beat": "mechanism",
+          "visual_prompt": "Percival frantically adjusts red levers on the brass robot as apples fly out of a metallic chute, creating a dangerous signal of flying fruit.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Mechanical Pivot",
+          "speech": "I cannot stop the flow, so I must redirect the trajectory upward! It is better to have a fountain than a chaotic fruit barrage.",
+          "visual": "ship",
+          "label": "The Adjustment",
+          "story_beat": "twist",
+          "visual_prompt": "Percival climbs onto the frame of the robot, wrenching a heavy gear while the machine tilts its output chute toward the sky like a launching ship.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Fruity Finale",
+          "speech": "Look at the colors dancing in the air! My invention has turned this chaotic disaster into the most wonderful fruit display of all time.",
+          "visual": "forest",
+          "label": "The Success",
+          "story_beat": "payoff",
+          "visual_prompt": "Apples arc gracefully through the air like a fountain, landing in baskets as the market crowd cheers, with Percival wiping grease from his forehead.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Percival's experimental fruit-polishing machine begins launching polished produce at high speeds into the crowded marketplace stalls.",
+      "decisive_choice": "Percival intentionally jams the machine's primary stabilizer to turn the high-speed output into a decorative fruit fountain rather than a projectile weapon.",
+      "resolution": "The market crowd applauds the unexpected fruit display and Percival earns enough coins from sales to repair his workshop roof.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-27T07:12:36.351993+00:00",
+    "at": "2026-10-27T07:42:47.519313+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -13585,21 +13695,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-27T07:12:36.352062+00:00",
+    "at": "2026-10-27T07:42:47.519378+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-27T07:01:16.915521+00:00",
+    "at": "2026-10-27T07:24:43.771997+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-f1045b51c0ccd6eb179a",
-    "video_url": "https://www.youtube.com/watch?v=HvuU1MVJ4Fw",
+    "content_id": "rayvan-gemini-90b6216af373fcb2abe2",
+    "video_url": "https://www.youtube.com/watch?v=5f0nIGEL2rk",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-27T07:12:36.351725+00:00",
+    "at": "2026-10-27T07:42:47.519020+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -13611,7 +13721,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-27T07:12:36.351987+00:00",
+    "at": "2026-10-27T07:42:47.519306+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {

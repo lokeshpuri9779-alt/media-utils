@@ -2334,6 +2334,22 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-90b6216af373fcb2abe2",
+      "story_sha256": "3f083c8db74e695f7dcaf21abc896801fd53a5c1c81c349a218ddbe6e558f179",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-90b6216af373fcb2abe2",
+        "story_sha256": "3f083c8db74e695f7dcaf21abc896801fd53a5c1c81c349a218ddbe6e558f179",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the premises, characters, or settings of the provided comparison list.; The causal chain is clear: the machine malfunctions, the protagonist makes a decisive choice to redirect the energy, and the resolution follows logically from that action.; The content is suitable for a general audience and contains no unsafe, misleading, or policy-violating material.; There are no copyright or trademark concerns identified in the narrative.",
+        "reviewed_at": "2026-10-27T07:25:07.355437+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }

@@ -2,30 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-20T22:33:21.891956+00:00",
-      "stage": "script",
-      "element": "coherence",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 92.0,
-        "candidate": "astra-proposal-ac1ccc08d50e6c5a574e"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "astra-proposal-ac1ccc08d50e6c5a574e"
-    },
-    {
-      "at": "2026-10-20T22:33:21.896992+00:00",
-      "stage": "render",
-      "element": "technical",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 100.0,
-        "candidate": "astra-proposal-ac1ccc08d50e6c5a574e"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "astra-proposal-ac1ccc08d50e6c5a574e"
-    },
-    {
       "at": "2026-10-20T22:33:21.902193+00:00",
       "stage": "render",
       "element": "studio_render",
@@ -9024,6 +9000,39 @@
       },
       "proposed_action": "",
       "candidate_id": "rayvan-gemini-f1045b51c0ccd6eb179a"
+    },
+    {
+      "at": "2026-10-27T07:42:45.458380+00:00",
+      "stage": "quality",
+      "element": "creative_director",
+      "outcome": "pass",
+      "evidence": {
+        "scores": {
+          "hook": 94.0,
+          "retention": 92.0,
+          "visual": 100.0,
+          "pacing": 100.0,
+          "audio": 99.38,
+          "captions": 100.0,
+          "novelty": 100.0,
+          "coherence": 92.0,
+          "technical": 100.0
+        }
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-gemini-90b6216af373fcb2abe2"
+    },
+    {
+      "at": "2026-10-27T07:42:45.470441+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "pass",
+      "evidence": {
+        "duration": 32.933,
+        "renderer": "studio-7.3.1"
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-gemini-90b6216af373fcb2abe2"
     }
   ],
   "stage_counts": {
@@ -9047,7 +9056,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 1,
+      "unknown": 0,
       "improved": 0,
       "regressed": 0
     },
@@ -9124,15 +9133,15 @@
       "regressed": 0
     },
     "render": {
-      "pass": 220,
+      "pass": 221,
       "fail": 1,
       "skip": 0,
-      "unknown": 1,
+      "unknown": 0,
       "improved": 0,
       "regressed": 0
     },
     "quality": {
-      "pass": 220,
+      "pass": 221,
       "fail": 157,
       "skip": 0,
       "unknown": 0,
