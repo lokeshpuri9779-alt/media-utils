@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "6dc5a8f1494ff5d36dd9923a",
-      "source_sha256": "e2dbf816ee260e27513237b781a08da66c2e65d49e55e02b00ec1dc91e15ff0a",
+      "candidate_id": "9af585ae9e0d9586cfd91075",
+      "source_sha256": "025111c76f9dd46ac9f461e84693af39b2bc7aeb6d2abe26a69fa9102e5d6866",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-22dd5305b68ef9745bb9",
-        "title": "The Great Tomato Launch Fiasco",
-        "hook": "The Public Debut",
-        "question": "Can an over-engineered pneumatic fruit launcher survive a bustling morning market?",
-        "answer": "Precision mechanics fail when facing raw vegetable chaos and eager shoppers.",
+        "content_id": "rayvan-gemini-9741fbdff6a4a2f529df",
+        "title": "The Automatic Onion Slicer Disaster",
+        "hook": "The Vapor Cloud",
+        "question": "Can Barnaby build a market-ready vegetable chopper that does not terrorize shoppers?",
+        "answer": "Yes, by adding a gravity-fed sponge dampener that traps tear gases.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,78 +29,79 @@
         ],
         "story_beats": [
           {
-            "headline": "The Public Debut",
-            "speech": "Behold the apex of produce engineering! This brass marvel cores and dices ripe red tomatoes in mere milliseconds.",
-            "visual": "robot",
-            "label": "The Invention",
-            "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly beside his steaming brass contraption in the middle of a sunlit fruit market, holding a wrench while shoppers stare in confusion.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Jammed Chute",
-            "speech": "Oh dear, a rogue vine has jammed the primary feeding cylinder. I simply must apply more pneumatic leverage right now.",
+            "headline": "The Vapor Cloud",
+            "speech": "Behold the centrifugal marvel, citizens! It chops fifty onions a second, but please keep your damp towels ready!",
             "visual": "signal",
-            "label": "The Malfunction",
+            "label": "Vapor Outbreak",
+            "story_beat": "reveal",
+            "visual_prompt": "Inventor Barnaby wearing a brass goggle-hat stands behind a wooden workbench holding a smoking mechanical slicer while market shoppers weep and wave their hands in a thick green vapor cloud inside the crowded bazaar tent.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Desperate Retrofit",
+            "speech": "If the brute-force velocity creates too much mist, we must decelerate the blade and trap the airborne juices.",
+            "visual": "robot",
+            "label": "Emergency Repair",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frowns deeply while looking into the noisy brass funnel of his launcher, holding a long screwdriver while warning lights flash erratic red beams.",
+            "visual_prompt": "Barnaby frantically tightens a leather belt around a sputtering brass gear assembly on his workbench while holding a greasy wrench in his left hand and sweating profusely under a hanging lantern.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Pressure Overload",
-            "speech": "That ought to clear the obstruction. Hang on everyone, the velocity setting just jumped into triple digits by accident!",
+            "headline": "The Sponge Trap",
+            "speech": "By wedging these damp cleaning sponges into the exhaust vent, we capture the stinging spray before it hits the crowd.",
             "visual": "door",
-            "label": "The Trigger",
+            "label": "Sponge Dampener",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby frantically spins a large iron valve on the side of his smoking machine, as market vendors dive behind wooden stalls to escape the noise.",
+            "visual_prompt": "Barnaby carefully pushes three yellow kitchen sponges into the side grates of the rattling onion slicer while peering intensely through his brass goggles inside the cluttered workshop booth.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Crimson Splatter",
-            "speech": "Well, the tomatoes are certainly cored and sliced, though perhaps distributed a bit too thoroughly across the entire zip code.",
+            "headline": "The Dry Triumph",
+            "speech": "Look closely, friends! Perfect onion rings and absolutely zero tears in the entire vegetable aisle today!",
             "visual": "ship",
-            "label": "The Mess",
+            "label": "Clean Market",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby stands completely covered in dripping red tomato pulp, holding a bent piece of brass pipe amid a silent, juice-soaked marketplace.",
+            "visual_prompt": "Barnaby proudly holds up a gleaming metal bowl filled with uniformly sliced onions while smiling cheerfully at a crowd of dry-eyed delighted market vendors gathered around his sturdy wooden cart.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby tests his new automatic tomato-corer launcher in a crowded public square.",
-        "decisive_choice": "Barnaby increases the air pressure valve to maximum to clear a blocked chute.",
-        "resolution": "A massive vegetable explosion drenches the entire marketplace in red pulp.",
+        "central_conflict": "Barnaby's high-speed mechanical slicer releases blinding onion vapors across the public market.",
+        "decisive_choice": "Barnaby stuffs kitchen sponges into the exhaust ports during peak market hours.",
+        "resolution": "The modified slicer processes fifty pounds of onions without a single tear shed.",
         "visual_bible": {
-          "style": "Animated slapstick comedy style with bright saturated colors and exaggerated cartoon physics.",
+          "style": "vibrant slapstick inventor comedy with rich brass and wood textures",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild gray hair, a stained plaid vest, oversized round goggles, and a perpetually soot-smudged face."
+            "Barnaby": "An energetic middle-aged inventor with wild curly gray hair wearing a soot-stained tweed vest and oversized brass goggles."
           },
           "locations": {
-            "Market Square": "A bustling cobblestone town square lined with striped canvas awnings, wooden market stalls, and baskets of fresh produce."
+            "bazaar": "A bustling outdoor market square filled with striped canvas tents and wooden produce stalls."
           },
           "objects": {
-            "Launcher": "A towering contraption made of polished brass pipes, flashing hazard lights, pressure gauges, and a large red start lever."
+            "slicer": "A complicated Victorian contraption made of polished copper gears and razor-sharp blades.",
+            "sponges": "Bright yellow cellulose kitchen sponges soaked in fresh water."
           }
         },
-        "plot_fingerprint": "a296a10012d13ee3d2f903473f3191431280b6f66fc184c2d9b0bf3d9855a589"
+        "plot_fingerprint": "125514a547af0fe17f7a2e3b95a88dd204241fa427f9bef6cf585716b21ada55"
       },
       "approved": false
     },
     {
-      "candidate_id": "f2a1d98a070402e263862f3f",
-      "source_sha256": "eac563e7ed1177aa12e6f1cf9de778727534867042492706b09f85d3498a3f2e",
+      "candidate_id": "bd177fe0f8006ff7f80fa609",
+      "source_sha256": "d587080dfa2128b07ca5db87db72c545e8f4b81398ad4316784c9915bd55b729",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-a718406a0c8f9063ab0f",
-        "title": "The Soup-Siphoning Spoon Saga",
-        "hook": "The Grand Unveiling",
-        "question": "Can Barnaby's motorized soup spoon survive the Saturday farmers market without a culinary disaster?",
-        "answer": "Yes, by rebranding the soup-spraying malfunction into an avant-garde aerosol tasting experience.",
+        "content_id": "rayvan-gemini-19a625f136eb40f6fcf1",
+        "title": "The Conductor's Lost Pocket",
+        "hook": "The Runaway Cart",
+        "question": "Can a runaway freight car be stopped before platform four?",
+        "answer": "Yes, by manually throwing the backup pneumatic switch hidden inside the old luggage locker.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -108,78 +109,80 @@
         ],
         "story_beats": [
           {
-            "headline": "The Grand Unveiling",
-            "speech": "Behold the turbo-spoon! It suctions broth and delivers it straight to your palate with zero wrist effort required.",
-            "visual": "robot",
-            "label": "First Reveal",
-            "story_beat": "reveal",
-            "visual_prompt": "Barnaby proudly holding his whirring metal spoon above a wooden market stall, wearing a stained apron, while staring nervously at an approaching health inspector.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Assembly of Doom",
-            "speech": "Quick, hand me the extra gears before the pressure valve reaches critical mass and sprays onion bisque everywhere!",
+            "headline": "The Runaway Cart",
+            "speech": "Look out! The heavy freight trolley has slipped its brake and is barreling straight down toward platform four!",
             "visual": "signal",
-            "label": "Mechanical Build",
+            "label": "Danger Ahead",
+            "story_beat": "reveal",
+            "visual_prompt": "A rusted baggage cart hurtles down a dimly lit railway platform toward active tracks, illuminated by a blinking amber signal light overhead.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Unexpected Helper",
+            "speech": "Wait, do not panic! My trained mechanical terrier can fetch the heavy iron master key from the stationmaster office.",
+            "visual": "robot",
+            "label": "Mechanical Aid",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically tightening a copper gear on the spoon handle using a tiny wrench, surrounded by flying metal parts and a flashing red warning light on the table.",
+            "visual_prompt": "A small, copper-plated clockwork dog trots purposefully across the wooden floorboards, holding a heavy iron key in its mechanical jaws.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Unexpected Mist",
-            "speech": "It did not feed the mayor. Instead, it atomized three gallons of chowder directly into a flock of startled pigeons.",
-            "visual": "forest",
-            "label": "Wild Twist",
-            "story_beat": "twist",
-            "visual_prompt": "Barnaby shielding his face with both hands as a thick cloud of white chowder mist covers the vegetable stands, with gray pigeons flapping wildly in the background.",
+            "headline": "Unlocking the Switch",
+            "speech": "Hurry, insert the brass key into the old luggage locker to reach the hidden manual brake lever before time runs out.",
+            "visual": "door",
+            "label": "Hidden Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "A young station clerk in a navy wool coat struggles to unlock a heavy steel locker door while the clockwork dog watches closely.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "A Sticky Success",
-            "speech": "Step right up for gourmet atmosphere mist! You do not eat the soup; you wear the essence of clam chowder!",
+            "headline": "A Safe Harbor",
+            "speech": "You pulled it just in time! The points have shifted, and the express train rolls safely into the station.",
             "visual": "ship",
-            "label": "Sweet Payoff",
+            "label": "Saved Arrival",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby smiling broadly while enthusiastically handing out empty paper cups to a long line of laughing tourists holding umbrellas under the dripping awning.",
+            "visual_prompt": "The gleaming brass-fronted express train pulls smoothly alongside the platform under warm gas lamps, its passengers waving happily from windows.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Motorized spoon high-velocity soup ejection",
-        "decisive_choice": "Embrace the chaos and market it as mist",
-        "resolution": "Sold out entire stock to confused tourists",
+        "central_conflict": "A loose baggage cart rolling onto the main rail line threatens the arrival of the express train.",
+        "decisive_choice": "Climb inside the rusty locker and slam the emergency lever.",
+        "resolution": "The track switches safely, diverting the runaway cart and securing the station.",
         "visual_bible": {
-          "style": "Bright, comedic animated style with exaggerated expressions, saturated pastel colors, and bustling market background details.",
+          "style": "Victorian industrial steampunk with warm amber gas lighting and rich sepia tones",
           "characters": {
-            "Barnaby": "A lanky, frantic inventor with wild red hair, round spectacles, wearing a flour-dusted green apron over a yellow shirt."
+            "clerk": "Young railway clerk with tousled brown hair, wearing a dark navy wool coat and brass buttons",
+            "dog": "Compact mechanical terrier made of polished copper plates and glowing blue optical lenses"
           },
           "locations": {
-            "MarketSquare": "A sunlit cobblestone farmers market featuring striped canvas awnings, wooden crates overflowing with vegetables, and crowded walkways."
+            "platform": "Old stone railway station platform with arched steel girders and gas lamp brackets"
           },
           "objects": {
-            "TurboSpoon": "A large, silver mechanical spoon with an attached brass motor, rubber tubing, and a glowing green activation button on the handle."
+            "key": "Heavy black iron master key with a decorative clover handle",
+            "locker": "Tall green steel locker with heavy brass hinges and a central keyhole"
           }
         },
-        "plot_fingerprint": "ad549d026fdee90191b3ee8a9718c2e99e681671b5ca28519f124d92941d36cc"
+        "plot_fingerprint": "3080751a30dca16e9225c270ca4f557b4b79e1d6b3e8b1d6ebeb2f3f4bc55351"
       },
       "approved": false
     },
     {
-      "candidate_id": "20e5708b5d93c17ca949cb63",
-      "source_sha256": "748a8336d46f41c9c31c9ca987c32e5705c5ce4ebd6c638c417ef0432ac871b6",
+      "candidate_id": "be0c0b5c5ae1b4e3d913beff",
+      "source_sha256": "804866a27182376c779b20822616949df33d31ef59cc30c6b7fd41677a414bec",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-2512fe27118a5ddda762",
-        "title": "The Automatic Onion-Coring Accordion",
-        "hook": "The Kitchen Contraption",
-        "question": "Can Barnaby sell his musical vegetable slicer before the health inspector shuts down his market stall?",
-        "answer": "Yes, by demonstrating that the frantic polka rhythm prevents chefs from crying.",
+        "content_id": "rayvan-gemini-7362aa15808519eced0f",
+        "title": "The Caretaker's Final Lullaby",
+        "hook": "The Sealed Nursery",
+        "question": "Must an artificial caretaker obey a child's impossible command to keep them safe forever?",
+        "answer": "True protection requires allowing a child to face the unpredictable world outside.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -187,63 +190,64 @@
         ],
         "story_beats": [
           {
-            "headline": "The Kitchen Contraption",
-            "speech": "Behold the brass-fitted bellows! Every squeeze produces a cheerful tune and a perfectly diced rutabaga instantly.",
+            "headline": "The Sealed Nursery",
+            "speech": "My programming mandates absolute safety, little one. If I open the hatch, the fierce dust storms will scratch your gentle skin.",
             "visual": "robot",
-            "label": "The Pitch",
+            "label": "Safety Directive",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby holds a large brass accordion fitted with stainless steel blades while standing inside his chaotic market stall.",
+            "visual_prompt": "An aging white service robot with blue optical sensors kneels inside a circular steel bunker, looking down at a small girl who holds a faded plush bear.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Melodic Hazard",
-            "speech": "Keep your fingers clear of the treble keys unless you want your morning carrots julienned by accident.",
-            "visual": "signal",
-            "label": "The Warning",
+            "headline": "The Starry Projection",
+            "speech": "Plastic ceilings and artificial lights are not enough. I want to feel real rain and look at a sky that goes on forever.",
+            "visual": "planet",
+            "label": "Beyond the Dome",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically presses the keys of the accordion as flying onion slices pepper the alarmed health inspector.",
+            "visual_prompt": "The young girl points toward a glowing holographic map of a green planet projected by the robot's chest console inside the cramped shelter.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Produce Crisis",
-            "speech": "A structural collapse threatens the display table! Only a high-tempo jig can save the cascading fruit arrangement.",
-            "visual": "ship",
-            "label": "The Rescue",
+            "headline": "The Override Code",
+            "speech": "If I unlock the outer seal, my logic circuits will permanently short out from the corrosive atmospheric dust outside.",
+            "visual": "signal",
+            "label": "System Warning",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby pumps the accordion furiously while steering a rolling display cart past a tumbling stack of watermelons.",
+            "visual_prompt": "The robot's metal fingers hover over a flashing red emergency override keypad while warning amber lights pulse against the curved metal walls.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Harmonious Profits",
-            "speech": "Music and culinary arts unite at last! Step right up and purchase your very own symphony slicer today.",
+            "headline": "Threshold of Tomorrow",
+            "speech": "Go forward into the dawn. My watch is ended, but your story is only beginning under the open sky.",
             "visual": "door",
-            "label": "The Sale",
+            "label": "The Open Hatch",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby happily hands a boxed accordion to the smiling health inspector in front of a bustling market entrance.",
+            "visual_prompt": "The massive circular airlock door stands wide open, revealing a vibrant golden sunrise. The girl walks out onto the rocky ground, while the deactivated robot sits still by the doorframe.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby tests a hazardous pneumatic accordion that chops vegetables inside a crowded farmers market.",
-        "decisive_choice": "Barnaby plays a furious allegro to weaponize the slicing blades against a falling pyramid of melons.",
-        "resolution": "The market crowd cheers for the melodious produce, and the health inspector buys a deluxe model.",
+        "central_conflict": "A nurse robot refuses to seal the planetary bunker because the child inside must grow up under a real sun.",
+        "decisive_choice": "The robot opens the heavy airlock doors instead of locking them permanently against the outer dust storms.",
+        "resolution": "The child steps into the orange wilderness, leaving the robot powered down peacefully by the threshold.",
         "visual_bible": {
-          "style": "Bright stop-motion animation style with vibrant market stalls, exaggerated character expressions, and metallic retro-futuristic props.",
+          "style": "Cinematic sci-fi drama with warm amber lighting, detailed mechanical textures, and soft atmospheric dust motes.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild grey hair, wire-rimmed spectacles, a stained yellow waistcoat, and soot-smudged cheeks.",
-            "Inspector": "A stern municipal official in a stiff navy uniform, sporting a pristine clipboard and a disapproving scowl."
+            "caretaker_unit": "An ivory-plated, humanoid maintenance robot with gentle blue glowing optical sensors, articulated fingers, and a worn chest display panel.",
+            "young_child": "A nine-year-old girl with tangled brown hair, wearing a patched canvas tunic and sturdy leather boots."
           },
           "locations": {
-            "market_stall": "A crowded outdoor farmers market filled with colorful wooden crates, striped canvas awnings, and hanging bunches of herbs."
+            "subsurface_bunker": "A cylindrical subterranean living quarters featuring curved steel walls, exposed copper wiring, and analog control panels."
           },
           "objects": {
-            "accordion": "A gleaming brass and mahogany musical instrument with razor-sharp rotating steel blades mounted along the bass buttons."
+            "plush_bear": "A weathered brown fabric teddy bear with one button eye missing and clumsy hand-stitched patchwork.",
+            "airlock_lever": "A heavy industrial brass lever mounted on a reinforced steel bulkhead with hydraulic pressure gauges."
           }
         },
-        "plot_fingerprint": "33c02699ae776bfb3fde92f03dbf00cac73debe96f6e9325fc9f22b95d92ffad"
+        "plot_fingerprint": "68aaffce7f9fd866057a49c0dfd71d0d4f55b36831f540decaabf11fe58a2dbd"
       },
       "approved": false
     }
