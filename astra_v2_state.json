@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-27",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 12,
-  "confirmed_today": 11,
-  "last_attempt_at": "2026-10-27T00:02:38.219546+00:00",
+  "attempts": 13,
+  "confirmed_today": 12,
+  "last_attempt_at": "2026-10-27T00:28:34.030458+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -5659,16 +5659,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "VhE9vQVl4Ew": {
-      "content_id": "rayvan-forge-8b83fb4ca0758311",
+    },
+    "rayvan-forge-8b83fb4ca0758311": {
+      "video_id": "VhE9vQVl4Ew",
+      "confirmed_at": "2026-10-27T00:23:11.893724+00:00",
       "title": "The Dog and the Forgotten Bell",
-      "day": "2026-10-27",
-      "uploaded_at": "2026-10-27T00:02:39.926577+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-27T00:02:39.926577+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "80c31063c8b619357fd0e3cb2dee3064c0497bfefd9c4811f91765cbffa618fd",
       "story_beats": [
@@ -5709,16 +5707,67 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "W8kwd3AGuhc": {
+      "content_id": "rayvan-anthology-672972bb35f02622",
+      "title": "The Robot Who Collected Laughter",
+      "day": "2026-10-27",
+      "uploaded_at": "2026-10-27T00:28:35.839639+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "",
+      "story_beats": [
+        {
+          "headline": "A ROBOT TOLD A JOKE",
+          "speech": "Its first joke was so bad that the whole workshop went silent.",
+          "visual": "robot",
+          "label": "THE JOKE",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "IT TRIED AGAIN",
+          "speech": "The robot practiced funny faces in every mirror it could find.",
+          "visual": "robot",
+          "label": "THE PRACTICE",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE ACCIDENT",
+          "speech": "It slipped on a paintbrush and landed inside a bucket of glitter.",
+          "visual": "robot",
+          "label": "THE SURPRISE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "EVERYONE LAUGHED",
+          "speech": "The robot finally understood that joy did not require perfection.",
+          "visual": "robot",
+          "label": "THE PAYOFF",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-27T00:00:29.977505+00:00",
+  "last_preflight_at": "2026-10-27T00:23:11.396918+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-27T00:02:40.363636+00:00",
+    "at": "2026-10-27T00:28:36.136035+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -12249,10 +12298,57 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-anthology-672972bb35f02622": {
+      "at": "2026-10-27T00:28:34.030445+00:00",
+      "title": "The Robot Who Collected Laughter",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "",
+      "story_beats": [
+        {
+          "headline": "A ROBOT TOLD A JOKE",
+          "speech": "Its first joke was so bad that the whole workshop went silent.",
+          "visual": "robot",
+          "label": "THE JOKE",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "IT TRIED AGAIN",
+          "speech": "The robot practiced funny faces in every mirror it could find.",
+          "visual": "robot",
+          "label": "THE PRACTICE",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE ACCIDENT",
+          "speech": "It slipped on a paintbrush and landed inside a bucket of glitter.",
+          "visual": "robot",
+          "label": "THE SURPRISE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "EVERYONE LAUGHED",
+          "speech": "The robot finally understood that joy did not require perfection.",
+          "visual": "robot",
+          "label": "THE PAYOFF",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-27T00:02:40.363596+00:00",
+    "at": "2026-10-27T00:28:36.135996+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -12263,21 +12359,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-27T00:02:40.363629+00:00",
+    "at": "2026-10-27T00:28:36.136028+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-27T00:01:00.938873+00:00",
+    "at": "2026-10-27T00:23:40.195800+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-8b83fb4ca0758311",
-    "video_url": "https://www.youtube.com/watch?v=VhE9vQVl4Ew",
+    "content_id": "rayvan-anthology-672972bb35f02622",
+    "video_url": "https://www.youtube.com/watch?v=W8kwd3AGuhc",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-27T00:02:40.363440+00:00",
+    "at": "2026-10-27T00:28:36.135838+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -12289,31 +12385,33 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-27T00:02:40.363593+00:00",
+    "at": "2026-10-27T00:28:36.135993+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 157,
+        "before": 156,
         "fingerprint": 0,
         "id": 11,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 146,
+        "remaining": 145,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 146,
-        "remaining": 24
+        "pool": 145,
+        "remaining": 23
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
         "approved": 1,
-        "considered": 1,
+        "considered": 2,
         "duration_rejected": 0,
         "not_ready": 0,
-        "policy_rejected": {},
+        "policy_rejected": {
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 1
+        },
         "render_exception": {},
         "render_qa_rejected": 0
       }
