@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "9af585ae9e0d9586cfd91075",
-      "source_sha256": "025111c76f9dd46ac9f461e84693af39b2bc7aeb6d2abe26a69fa9102e5d6866",
+      "candidate_id": "0a8f9a87eaf5d1267318d6be",
+      "source_sha256": "fc20c6774172cc66ab6c3393a8d088831c35ddf0cbc332755cef95a37e2d9810",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-9741fbdff6a4a2f529df",
-        "title": "The Automatic Onion Slicer Disaster",
-        "hook": "The Vapor Cloud",
-        "question": "Can Barnaby build a market-ready vegetable chopper that does not terrorize shoppers?",
-        "answer": "Yes, by adding a gravity-fed sponge dampener that traps tear gases.",
+        "content_id": "rayvan-gemini-21164ab197474405e7e9",
+        "title": "The Great Turnip Launch Disaster",
+        "hook": "The Cabbage Calamity",
+        "question": "Can an overly ambitious market inventor automate produce vending without destroying town hall?",
+        "answer": "He streamlines his mechanical launcher to fling fresh root vegetables precisely into kitchen windows.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,79 +29,78 @@
         ],
         "story_beats": [
           {
-            "headline": "The Vapor Cloud",
-            "speech": "Behold the centrifugal marvel, citizens! It chops fifty onions a second, but please keep your damp towels ready!",
-            "visual": "signal",
-            "label": "Vapor Outbreak",
-            "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby wearing a brass goggle-hat stands behind a wooden workbench holding a smoking mechanical slicer while market shoppers weep and wave their hands in a thick green vapor cloud inside the crowded bazaar tent.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Desperate Retrofit",
-            "speech": "If the brute-force velocity creates too much mist, we must decelerate the blade and trap the airborne juices.",
+            "headline": "The Cabbage Calamity",
+            "speech": "Behold the pneumatic produce propulsion engine! It feeds this bustling town without wasting a single precious second of your morning.",
             "visual": "robot",
-            "label": "Emergency Repair",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby frantically tightens a leather belt around a sputtering brass gear assembly on his workbench while holding a greasy wrench in his left hand and sweating profusely under a hanging lantern.",
+            "label": "Market Chaos",
+            "story_beat": "reveal",
+            "visual_prompt": "Barnaby stands proudly beside his steaming brass contraption in a busy cobblestone market square, pointing at a giant brass cannon while angry merchants dodge flying cabbages.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Sponge Trap",
-            "speech": "By wedging these damp cleaning sponges into the exhaust vent, we capture the stinging spray before it hits the crowd.",
-            "visual": "door",
-            "label": "Sponge Dampener",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby carefully pushes three yellow kitchen sponges into the side grates of the rattling onion slicer while peering intensely through his brass goggles inside the cluttered workshop booth.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Dry Triumph",
-            "speech": "Look closely, friends! Perfect onion rings and absolutely zero tears in the entire vegetable aisle today!",
+            "headline": "Mechanical Tuning",
+            "speech": "If I tighten this brass pressure valve just three rotations, we will eliminate the excessive horizontal velocity entirely.",
             "visual": "ship",
-            "label": "Clean Market",
+            "label": "Valve Adjustment",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby crouches down next to the roaring steam engine, using a heavy wrench to tighten a brass valve while holding a greasy schematic map with soot on his cheek.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Aerial Pivot",
+            "speech": "Now watch closely as the adjustable launch angle transforms a chaotic street hazard into a graceful delivery arc.",
+            "visual": "signal",
+            "label": "Trajectory Test",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby pulls a wooden trigger lever on the side of the engine, watching a single round turnip soar high into the air against a bright blue market sky.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Precision Delivery",
+            "speech": "Fantastic success! Every household gets breakfast delivered directly to their sill without a single bruised tomato on the street.",
+            "visual": "door",
+            "label": "Window Landing",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby proudly holds up a gleaming metal bowl filled with uniformly sliced onions while smiling cheerfully at a crowd of dry-eyed delighted market vendors gathered around his sturdy wooden cart.",
+            "visual_prompt": "Barnaby and smiling market vendors cheer as a turnip neatly plops onto a rustic wooden windowsill, while laughing townsfolk hold up copper coins to pay for the service.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby's high-speed mechanical slicer releases blinding onion vapors across the public market.",
-        "decisive_choice": "Barnaby stuffs kitchen sponges into the exhaust ports during peak market hours.",
-        "resolution": "The modified slicer processes fifty pounds of onions without a single tear shed.",
+        "central_conflict": "Barnaby tests his rapid-fire vegetable delivery cannon in a crowded medieval farmers market, threatening local stall security.",
+        "decisive_choice": "He recalibrates the pneumatic tension spring to fire turnips in a high arc instead of a flat horizontal trajectory.",
+        "resolution": "The vegetables safely land on kitchen windowsills, turning a chaotic market hazard into a beloved neighborhood delivery service.",
         "visual_bible": {
-          "style": "vibrant slapstick inventor comedy with rich brass and wood textures",
+          "style": "Bright, colorful animated film aesthetic with warm lighting, detailed brass machinery, and whimsical slapstick character designs.",
           "characters": {
-            "Barnaby": "An energetic middle-aged inventor with wild curly gray hair wearing a soot-stained tweed vest and oversized brass goggles."
+            "Barnaby": "An eccentric inventor in his thirties with unruly red hair, grease smudges on his forehead, wearing a patched tweed vest, rolled-up white shirtsleeves, and round spectacles."
           },
           "locations": {
-            "bazaar": "A bustling outdoor market square filled with striped canvas tents and wooden produce stalls."
+            "Market Square": "A bustling medieval town plaza filled with colorful striped canvas awnings, wooden produce carts piled high with vegetables, and cobblestone pavement."
           },
           "objects": {
-            "slicer": "A complicated Victorian contraption made of polished copper gears and razor-sharp blades.",
-            "sponges": "Bright yellow cellulose kitchen sponges soaked in fresh water."
+            "Pneumatic Produce Engine": "A towering contraption made of polished brass pipes, ticking pressure gauges, leather bellows, and a large iron launch barrel fitted with a wooden trigger."
           }
         },
-        "plot_fingerprint": "125514a547af0fe17f7a2e3b95a88dd204241fa427f9bef6cf585716b21ada55"
+        "plot_fingerprint": "fceb93aea049a29ff54094a6e6aec7f768396592b5c4532ea5ca0965cb55d57e"
       },
       "approved": false
     },
     {
-      "candidate_id": "bd177fe0f8006ff7f80fa609",
-      "source_sha256": "d587080dfa2128b07ca5db87db72c545e8f4b81398ad4316784c9915bd55b729",
+      "candidate_id": "0db3d282f30ebb002f4dc66a",
+      "source_sha256": "0586df1c03ce00e999b37ae227dbd009b67935256a02cb0912d463bd6de96326",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-19a625f136eb40f6fcf1",
-        "title": "The Conductor's Lost Pocket",
-        "hook": "The Runaway Cart",
-        "question": "Can a runaway freight car be stopped before platform four?",
-        "answer": "Yes, by manually throwing the backup pneumatic switch hidden inside the old luggage locker.",
+        "content_id": "rayvan-gemini-317838f75771f8ceef23",
+        "title": "The Whispering Roots of Bramble Hollow",
+        "hook": "The Hidden Path Emerges",
+        "question": "Can two rival foragers bridge their distrust to navigate a shifting woodland maze?",
+        "answer": "Yes, by synchronizing their moss-lanterns to calm the sentient roots and map the true exit.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -109,80 +108,80 @@
         ],
         "story_beats": [
           {
-            "headline": "The Runaway Cart",
-            "speech": "Look out! The heavy freight trolley has slipped its brake and is barreling straight down toward platform four!",
-            "visual": "signal",
-            "label": "Danger Ahead",
+            "headline": "The Hidden Path Emerges",
+            "speech": "Look closely at the glowing moss patterns; they are shifting in unison with the underground tremoring heartbeat.",
+            "visual": "forest",
+            "label": "The Discovery",
             "story_beat": "reveal",
-            "visual_prompt": "A rusted baggage cart hurtles down a dimly lit railway platform toward active tracks, illuminated by a blinking amber signal light overhead.",
+            "visual_prompt": "Miri stands in the dark forest pointing at glowing bioluminescent roots while holding a brass lantern in her right hand.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Unexpected Helper",
-            "speech": "Wait, do not panic! My trained mechanical terrier can fetch the heavy iron master key from the stationmaster office.",
-            "visual": "robot",
-            "label": "Mechanical Aid",
+            "headline": "Constructing the Bridge",
+            "speech": "We must lash these sturdy fallen branches together quickly before the trembling roots close off our gap completely.",
+            "visual": "signal",
+            "label": "The Preparation",
             "story_beat": "build",
-            "visual_prompt": "A small, copper-plated clockwork dog trots purposefully across the wooden floorboards, holding a heavy iron key in its mechanical jaws.",
+            "visual_prompt": "Jax and Miri work together in the dense woods tying thick vines around heavy wooden logs while holding hemp rope.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Unlocking the Switch",
-            "speech": "Hurry, insert the brass key into the old luggage locker to reach the hidden manual brake lever before time runs out.",
+            "headline": "Activating the Canopy",
+            "speech": "Hold your lantern steady against the north branch so the reflected beacon opens the ancient stone gateway ahead.",
             "visual": "door",
-            "label": "Hidden Mechanism",
+            "label": "The Mechanism",
             "story_beat": "mechanism",
-            "visual_prompt": "A young station clerk in a navy wool coat struggles to unlock a heavy steel locker door while the clockwork dog watches closely.",
+            "visual_prompt": "Jax holds a lit glass lantern up toward a massive stone door embedded in an ancient oak tree within the forest.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "A Safe Harbor",
-            "speech": "You pulled it just in time! The points have shifted, and the express train rolls safely into the station.",
+            "headline": "Crossing to Safety",
+            "speech": "We finally made it across the treacherous ravine together by trusting each other in the deep wilderness.",
             "visual": "ship",
-            "label": "Saved Arrival",
+            "label": "The Triumph",
             "story_beat": "payoff",
-            "visual_prompt": "The gleaming brass-fronted express train pulls smoothly alongside the platform under warm gas lamps, its passengers waving happily from windows.",
+            "visual_prompt": "Miri and Jax stand side by side on a safe high cliff overlooking the forest at sunrise carrying empty backpacks.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A loose baggage cart rolling onto the main rail line threatens the arrival of the express train.",
-        "decisive_choice": "Climb inside the rusty locker and slam the emergency lever.",
-        "resolution": "The track switches safely, diverting the runaway cart and securing the station.",
+        "central_conflict": "A sudden subterranean tremor misaligns the natural pathways, trapping Miri and Jax in opposing thickets.",
+        "decisive_choice": "Miri tosses her only emergency rope across the chasm instead of securing her own immediate escape.",
+        "resolution": "Together they unlock the safe ridge trail, forging a permanent alliance between their clans.",
         "visual_bible": {
-          "style": "Victorian industrial steampunk with warm amber gas lighting and rich sepia tones",
+          "style": "Cinematic animated film style with warm lighting and detailed natural textures",
           "characters": {
-            "clerk": "Young railway clerk with tousled brown hair, wearing a dark navy wool coat and brass buttons",
-            "dog": "Compact mechanical terrier made of polished copper plates and glowing blue optical lenses"
+            "Miri": "A nimble young forager with braided brown hair, wearing a green canvas tunic and leather boots.",
+            "Jax": "A cautious explorer with short dark hair, wearing a rugged grey utility vest and brown trousers."
           },
           "locations": {
-            "platform": "Old stone railway station platform with arched steel girders and gas lamp brackets"
+            "forest": "An enchanted deep forest filled with towering ancient trees, glowing moss, and misty ravines."
           },
           "objects": {
-            "key": "Heavy black iron master key with a decorative clover handle",
-            "locker": "Tall green steel locker with heavy brass hinges and a central keyhole"
+            "brass_lantern": "A polished brass lantern with warm amber glass emitting a steady glowing light.",
+            "hemp_rope": "A thick, frayed hemp rope used for climbing and tying heavy wooden logs."
           }
         },
-        "plot_fingerprint": "3080751a30dca16e9225c270ca4f557b4b79e1d6b3e8b1d6ebeb2f3f4bc55351"
+        "plot_fingerprint": "dfaf599b787b0d9ff38b349865fa9762dbaf62fc07ab1907302bb49c17fde8ca"
       },
       "approved": false
     },
     {
-      "candidate_id": "be0c0b5c5ae1b4e3d913beff",
-      "source_sha256": "804866a27182376c779b20822616949df33d31ef59cc30c6b7fd41677a414bec",
+      "candidate_id": "152717a76a9312e2a1dc8ab5",
+      "source_sha256": "1d817c90a1cd7123c0552c35e240e566ab28edd89260805521babc85a8c67420",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-7362aa15808519eced0f",
-        "title": "The Caretaker's Final Lullaby",
-        "hook": "The Sealed Nursery",
-        "question": "Must an artificial caretaker obey a child's impossible command to keep them safe forever?",
-        "answer": "True protection requires allowing a child to face the unpredictable world outside.",
+        "content_id": "rayvan-gemini-b9b373e50311e2709d93",
+        "title": "The Tide-Clock Regatta",
+        "hook": "The Early Current",
+        "question": "Can a wooden spring-gear drive a floating stage against the incoming rip tide?",
+        "answer": "By substituting copper torsion coils for kelp rubber, the stage anchors safely.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -190,64 +189,66 @@
         ],
         "story_beats": [
           {
-            "headline": "The Sealed Nursery",
-            "speech": "My programming mandates absolute safety, little one. If I open the hatch, the fierce dust storms will scratch your gentle skin.",
-            "visual": "robot",
-            "label": "Safety Directive",
-            "story_beat": "reveal",
-            "visual_prompt": "An aging white service robot with blue optical sensors kneels inside a circular steel bunker, looking down at a small girl who holds a faded plush bear.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Starry Projection",
-            "speech": "Plastic ceilings and artificial lights are not enough. I want to feel real rain and look at a sky that goes on forever.",
-            "visual": "planet",
-            "label": "Beyond the Dome",
-            "story_beat": "build",
-            "visual_prompt": "The young girl points toward a glowing holographic map of a green planet projected by the robot's chest console inside the cramped shelter.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Override Code",
-            "speech": "If I unlock the outer seal, my logic circuits will permanently short out from the corrosive atmospheric dust outside.",
+            "headline": "The Early Current",
+            "speech": "Look at the whitecaps hitting the marsh pylons! The tide is rushing in an hour ahead of schedule, threatening our grand performance.",
             "visual": "signal",
-            "label": "System Warning",
-            "story_beat": "mechanism",
-            "visual_prompt": "The robot's metal fingers hover over a flashing red emergency override keypad while warning amber lights pulse against the curved metal walls.",
+            "label": "The Discovery",
+            "story_beat": "reveal",
+            "visual_prompt": "Maren stands on the creaking wooden pier, pointing a brass spyglass at the churning white water while wearing a blue canvas apron, holding a grease-stained notebook.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Threshold of Tomorrow",
-            "speech": "Go forward into the dawn. My watch is ended, but your story is only beginning under the open sky.",
+            "headline": "Torsion Modification",
+            "speech": "We must replace the organic kelp bands with hammered copper coils right now to hold the heavy brass gear assembly in place.",
+            "visual": "robot",
+            "label": "The Build",
+            "story_beat": "build",
+            "visual_prompt": "Maren welds glowing copper wire inside the central brass music box while her assistant Kian holds a heavy iron mallet in the salt-air workshop.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Mechanical Jam",
+            "speech": "The main drive cylinder is binding up against the salt crust! Grab the release lever before the central spring snaps completely apart.",
+            "visual": "ship",
+            "label": "The Crisis",
+            "story_beat": "mechanism",
+            "visual_prompt": "Kian pushes hard against a jammed steel lever on the floating barge while sea spray splashes over the vibrating copper gears.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Symphony Afloat",
+            "speech": "Listen to those clean wooden tones resonate across the harbor as the anchored stage holds firm against the racing tide.",
             "visual": "door",
-            "label": "The Open Hatch",
+            "label": "The Finale",
             "story_beat": "payoff",
-            "visual_prompt": "The massive circular airlock door stands wide open, revealing a vibrant golden sunrise. The girl walks out onto the rocky ground, while the deactivated robot sits still by the doorframe.",
+            "visual_prompt": "Maren and Kian stand smiling on the stable wooden barge as the evening lanterns ignite and music fills the quiet harbor bay.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A nurse robot refuses to seal the planetary bunker because the child inside must grow up under a real sun.",
-        "decisive_choice": "The robot opens the heavy airlock doors instead of locking them permanently against the outer dust storms.",
-        "resolution": "The child steps into the orange wilderness, leaving the robot powered down peacefully by the threshold.",
+        "central_conflict": "A floating mechanical orchestra threatens to capsize when the salt-marsh rip tide hits early.",
+        "decisive_choice": "Maren yanks the emergency salvage pin, sacrificing her steering rudder to lock the main spring tension.",
+        "resolution": "The orchestra locks into a stable cove, delivering a flawless evening symphony.",
         "visual_bible": {
-          "style": "Cinematic sci-fi drama with warm amber lighting, detailed mechanical textures, and soft atmospheric dust motes.",
+          "style": "Cinematic stop-motion puppet aesthetic with rich wooden textures, detailed brass mechanics, and atmospheric coastal lighting.",
           "characters": {
-            "caretaker_unit": "An ivory-plated, humanoid maintenance robot with gentle blue glowing optical sensors, articulated fingers, and a worn chest display panel.",
-            "young_child": "A nine-year-old girl with tangled brown hair, wearing a patched canvas tunic and sturdy leather boots."
+            "Maren": "A resourceful young engineer with braided dark hair, wearing a blue canvas apron and sturdy leather boots.",
+            "Kian": "A focused assistant with bright orange coveralls, protective goggles pushed onto his forehead, and calloused hands."
           },
           "locations": {
-            "subsurface_bunker": "A cylindrical subterranean living quarters featuring curved steel walls, exposed copper wiring, and analog control panels."
+            "workshop": "A weathered wooden wharf filled with hanging tools, copper rolls, and scattered gear parts.",
+            "harbor": "A calm seaside festival inlet surrounded by jagged stone jetties and bobbing paper lanterns."
           },
           "objects": {
-            "plush_bear": "A weathered brown fabric teddy bear with one button eye missing and clumsy hand-stitched patchwork.",
-            "airlock_lever": "A heavy industrial brass lever mounted on a reinforced steel bulkhead with hydraulic pressure gauges."
+            "spyglass": "A scratched brass telescope with sliding focus rings and a worn leather grip.",
+            "copper_coil": "A gleaming, tightly wound band of orange-gold metal used for high-tension spring drives.",
+            "barge": "A large flat-bottomed wooden platform holding an elaborate orchestra of wooden pipes and drums."
           }
         },
-        "plot_fingerprint": "68aaffce7f9fd866057a49c0dfd71d0d4f55b36831f540decaabf11fe58a2dbd"
+        "plot_fingerprint": "59470a40feb4f5fb5e2f08319b1797bf56733801e1af1d615a739426757c2ef8"
       },
       "approved": false
     }
