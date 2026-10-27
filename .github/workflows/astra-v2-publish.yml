@@ -199,8 +199,9 @@ jobs:
           PY
             export PATH="$RUNNER_TEMP:$PATH"
           fi
-          # Only ffprobe is missing: fetch the system package with a strict
-          # deadline. A mirror timeout fails closed, never silently publishes.
+          # Only ffprobe is missing. A partial apt download must not abort
+          # the step before the already-configured static fallback can run.
+          # Every candidate probe is runtime-checked before being used.
           if ! command -v ffprobe >/dev/null 2>&1; then
             echo 'ASTRA_FFPROBE_MISSING=1'
             timeout 45s sudo apt-get update -qq -o Acquire::Retries=0 || true
@@ -208,37 +209,32 @@ jobs:
             probe_package="$(find . -maxdepth 1 -name 'ffmpeg_*.deb' -print -quit)"
             if [ -n "$probe_package" ]; then
               mkdir -p "$RUNNER_TEMP/astra-ffmpeg"
-              dpkg-deb -x "$probe_package" "$RUNNER_TEMP/astra-ffmpeg"
-              if [ -x "$RUNNER_TEMP/astra-ffmpeg/usr/bin/ffprobe" ]; then
-                # The binary from the Ubuntu package may need libav* runtime
-                # dependencies absent from a minimal hosted runner.
-                # Validate before putting it on PATH; never accept an
-                # executable file as proof of a working media probe.
-                if "$RUNNER_TEMP/astra-ffmpeg/usr/bin/ffprobe" -version >/dev/null 2>&1; then
-                  echo "$RUNNER_TEMP/astra-ffmpeg/usr/bin" >> "$GITHUB_PATH"
-                  export PATH="$RUNNER_TEMP/astra-ffmpeg/usr/bin:$PATH"
-                  echo 'ASTRA_FFPROBE_SOURCE=deb-extract'
-                else
-                  echo 'ASTRA_FFPROBE_EXTRACTED_RUNTIME_MISSING=1'
-                  echo 'ASTRA_FFPROBE_STATIC_FALLBACK=attempt'
-                  # Independently built static FFprobe avoids Ubuntu libav
-                  # shared-library dependencies and the stalled apt installer.
-                  # Never disable TLS checks or bypass the runtime probe.
-                  if timeout 65s curl --fail --location --silent --show-error \
-                    --connect-timeout 10 --max-time 60 --retry 1 \
-                    https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz \
-                    -o "$RUNNER_TEMP/astra-ffmpeg-static.tar.xz"; then
-                    mkdir -p "$RUNNER_TEMP/astra-static-probe"
-                    tar -xJf "$RUNNER_TEMP/astra-ffmpeg-static.tar.xz" \
-                      -C "$RUNNER_TEMP/astra-static-probe" \
-                      --wildcards --no-anchored --strip-components=1 '*/ffprobe' || true
-                    if [ -x "$RUNNER_TEMP/astra-static-probe/ffprobe" ] && \
-                       "$RUNNER_TEMP/astra-static-probe/ffprobe" -version >/dev/null 2>&1; then
-                      export PATH="$RUNNER_TEMP/astra-static-probe:$PATH"
-                      echo "$RUNNER_TEMP/astra-static-probe" >> "$GITHUB_PATH"
-                      echo 'ASTRA_FFPROBE_SOURCE=static'
-                    fi
-                  fi
+              if ! dpkg-deb -x "$probe_package" "$RUNNER_TEMP/astra-ffmpeg"; then
+                echo 'ASTRA_FFPROBE_DEB_EXTRACT_FAILED=1'
+              fi
+            fi
+            if [ -x "$RUNNER_TEMP/astra-ffmpeg/usr/bin/ffprobe" ] && \
+               "$RUNNER_TEMP/astra-ffmpeg/usr/bin/ffprobe" -version >/dev/null 2>&1; then
+              echo "$RUNNER_TEMP/astra-ffmpeg/usr/bin" >> "$GITHUB_PATH"
+              export PATH="$RUNNER_TEMP/astra-ffmpeg/usr/bin:$PATH"
+              echo 'ASTRA_FFPROBE_SOURCE=deb-extract'
+            else
+              echo 'ASTRA_FFPROBE_STATIC_FALLBACK=attempt'
+              # This pre-existing static fallback avoids Ubuntu libav dependencies.
+              # Keep TLS and the final executable/runtime checks mandatory.
+              if timeout 65s curl --fail --location --silent --show-error \
+                --connect-timeout 10 --max-time 60 --retry 1 \
+                https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz \
+                -o "$RUNNER_TEMP/astra-ffmpeg-static.tar.xz"; then
+                mkdir -p "$RUNNER_TEMP/astra-static-probe"
+                tar -xJf "$RUNNER_TEMP/astra-ffmpeg-static.tar.xz" \
+                  -C "$RUNNER_TEMP/astra-static-probe" \
+                  --wildcards --no-anchored --strip-components=1 '*/ffprobe' || true
+                if [ -x "$RUNNER_TEMP/astra-static-probe/ffprobe" ] && \
+                   "$RUNNER_TEMP/astra-static-probe/ffprobe" -version >/dev/null 2>&1; then
+                  export PATH="$RUNNER_TEMP/astra-static-probe:$PATH"
+                  echo "$RUNNER_TEMP/astra-static-probe" >> "$GITHUB_PATH"
+                  echo 'ASTRA_FFPROBE_SOURCE=static'
                 fi
               fi
             fi

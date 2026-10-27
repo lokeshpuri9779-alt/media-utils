@@ -134,6 +134,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_preload_queue.py' -v
           python -m unittest discover -s tests -p 'test_astra_preload_covers.py' -v
           python -m unittest discover -s tests -p 'test_astra_production_readiness.py' -v
+          python -m unittest discover -s tests -p 'test_astra_publisher_ffprobe_fallback.py' -v
   editorial:
     name: Editorial shortlist intake
     runs-on: ubuntu-24.04
