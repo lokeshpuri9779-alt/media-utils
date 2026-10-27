@@ -13,6 +13,10 @@ on:
       - tests/test_pillow_duo_story_supply.py
       - tests/test_studio721_release.py
       - studio_renderer.py
+      - astra_v2/directed_scene_contract.py
+      - astra_v2/renderer_eligibility.py
+      - tests/test_directed_scene_contract.py
+      - tests/test_renderer_eligibility.py
       - .github/workflows/astra-v2-preload.yml
       - .github/workflows/astra-v2-publish.yml
       - astra_v2/pillow_duo_scene.py
@@ -53,6 +57,8 @@ jobs:
           ASTRA_REQUIRE_STUDIO_PRELOAD: '1'
         run: |
           python -m unittest discover -s tests -p 'test_studio721_release.py' -v
+          python -m unittest discover -s tests -p 'test_directed_scene_contract.py' -v
+          python -m unittest discover -s tests -p 'test_renderer_eligibility.py' -v
           python -m unittest discover -s tests -p 'test_astra_preload_artifact_pagination.py' -v
       - name: Render one complete voiced two-character Short
         run: |
