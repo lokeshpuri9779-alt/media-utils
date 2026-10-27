@@ -19,9 +19,9 @@ _SIGNAL = re.compile(r"\b(?:signal|transmission|radio|frequency|waveform|broadca
 
 
 _BIOLOGICAL_HUMAN = re.compile(
-    r"\\b(?:human|person|child|boy|girl|man|woman|teenager|adult|male|female|"
-    r"student|pilot|officer|engineer|botanist)\\b", re.I)
-_MECHANICAL_CHARACTER = re.compile(r"\\b(?:robot|android|automaton|drone|machine)\\b", re.I)
+    r"\b(?:human|person|child|boy|girl|man|woman|teenager|adult|male|female|"
+    r"student|pilot|officer|engineer|botanist)\b", re.I)
+_MECHANICAL_CHARACTER = re.compile(r"\b(?:robot|android|automaton|drone|machine)\b", re.I)
 
 
 def named_human_characters(visual_bible):
@@ -39,7 +39,7 @@ def named_human_characters(visual_bible):
             continue
         # A female robot or humanoid machine is not automatically a human.
         if (_MECHANICAL_CHARACTER.search(description)
-                and not re.search(r"\\bhuman\\b", description, re.I)):
+                and not re.search(r"\bhuman\b", description, re.I)):
             continue
         names.append(name.strip())
     return tuple(names)
@@ -53,7 +53,7 @@ def directed_scene_issue(shot):
     # exception remains available through validate_directed_scene.
     for name in (shot.get("story_named_humans") or ()):
         if (isinstance(name, str) and name.strip()
-                and re.search(r"(?<!\\w)" + re.escape(name.strip()) + r"(?!\\w)", text, re.I)):
+                and re.search(r"(?<!\w)" + re.escape(name.strip()) + r"(?!\w)", text, re.I)):
             return "human_actor_not_supported_by_directed_icons"
     # Include the story title so first-person/pronoun beats don't erase humans.
     if _HUMAN.search(text + " " + str(shot.get("story_title") or "")):
