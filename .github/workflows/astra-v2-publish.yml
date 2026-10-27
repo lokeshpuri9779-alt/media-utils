@@ -194,7 +194,7 @@ jobs:
           if not target.exists():
               target.symlink_to(binary)
           with open(os.environ["GITHUB_PATH"], "a", encoding="utf-8") as out:
-              out.write(str(target.parent) + "\\n")
+              out.write(str(target.parent) + "\n")
           print("ASTRA_FFMPEG_SOURCE=imageio-ffmpeg")
           PY
             export PATH="$RUNNER_TEMP:$PATH"
