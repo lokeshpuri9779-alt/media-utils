@@ -5535,6 +5535,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-original-submarinestar-v1",
+      "video_id": "YYr6JarQAT8",
+      "confirmed_at": "2026-10-27T06:11:17.845348+00:00",
+      "title": "The Star Beneath the Sea",
+      "plot_fingerprint": "ab67a41b22d1edbc412cb084bfb34c3d18f23c0cf9c1c60d172db438778dd9a2",
+      "story_beats": [
+        {
+          "headline": "A STAR UNDERWATER",
+          "speech": "A submarine crew spotted a tiny star shining on the ocean floor.",
+          "visual": "planet",
+          "visual_intent": "A submarine crew spotted a tiny star shining on the ocean floor.",
+          "label": "DEEP SIGNAL",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "reveal",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE LIGHT MOVED",
+          "speech": "The star drifted toward a canyon where their instruments stopped working.",
+          "visual": "ship",
+          "visual_intent": "The star drifted toward a canyon where their instruments stopped working.",
+          "label": "SIGNAL LOST",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "build",
+          "duration": 2.1
+        },
+        {
+          "headline": "AN OLD BEACON",
+          "speech": "Inside its glow they found a beacon from a ship lost decades earlier.",
+          "visual": "signal",
+          "visual_intent": "Inside its glow they found a beacon from a ship lost decades earlier.",
+          "label": "IDENTIFIED",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "twist",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE WAY BACK",
+          "speech": "They followed its light through the canyon and guided another lost vessel home.",
+          "visual": "ship",
+          "visual_intent": "They followed its light through the canyon and guided another lost vessel home.",
+          "label": "SAFE PASSAGE",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "payoff",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
