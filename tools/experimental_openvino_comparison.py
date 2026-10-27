@@ -12,8 +12,18 @@ from tools.experimental_openvino_benchmark import APPROVED_MODELS, PROMPT
 CASES = ((42, 8), (42, 20), (123, 8), (123, 20))
 
 
-def run(output=Path("artifacts/experimental-openvino"), *, square=False):
+def run(output=Path("artifacts/experimental-openvino"), *, square=False, objects=False):
+    square = square or objects
     cases = ((42, 20), (123, 20)) if square else CASES
+    prompts = [PROMPT] * len(cases)
+    labels = [f"seed-{seed}-steps-{steps}" for seed, steps in cases]
+    if objects:
+        cases = ((42, 20), (42, 20))
+        labels = ["truck-only", "school-only"]
+        prompts = [
+            "family-friendly illustration of a single bright red toy fire truck, side view, fully visible, on a plain white background, clear colorful detailed shapes, no people, no text",
+            "family-friendly illustration of a single yellow school building, front view, fully visible, on a plain white background, clear colorful detailed shapes, no people, no text",
+        ]
     height = 512 if square else 768
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
@@ -21,7 +31,7 @@ def run(output=Path("artifacts/experimental-openvino"), *, square=False):
     report = dict(approved=False, production_ready=False, published=False,
                   semantic_quality="not_verified", character_continuity="not_verified",
                   manual_visual_review_required=True, still_image_only=True,
-                  diagnostic_only=True, square_resolution_test=square,
+                  diagnostic_only=True, square_resolution_test=square, object_isolation_test=objects,
                   prompt=PROMPT, model=APPROVED_MODELS["export"],
                   code_revision=os.getenv("GITHUB_SHA", "local"), cases=[])
     try:
@@ -49,8 +59,8 @@ def run(output=Path("artifacts/experimental-openvino"), *, square=False):
         report["scheduler_config"] = dict(pipe.scheduler.config)
         report["precision_hint"] = "f32"
         report["disable_auto_8bit"] = True
-        for seed, steps in cases:
-            row = dict(seed=seed, steps=steps, approved=False, published=False,
+        for (seed, steps), prompt, label in zip(cases, prompts, labels):
+            row = dict(case_id=label, prompt=prompt, seed=seed, steps=steps, approved=False, published=False,
                        production_ready=False, semantic_quality="not_verified",
                        manual_visual_review_required=True, render_completed=False,
                        pixel_quality_passed=False)
@@ -58,11 +68,11 @@ def run(output=Path("artifacts/experimental-openvino"), *, square=False):
             case_started = time.monotonic()
             try:
                 # Fresh RNG gives each step-count comparison the same initial seed.
-                image = pipe(PROMPT, height=height, width=512,
+                image = pipe(prompt, height=height, width=512,
                              num_inference_steps=steps, guidance_scale=7.5,
                              generator=np.random.RandomState(seed)).images[0]
                 row["inference_seconds"] = round(time.monotonic() - case_started, 2)
-                target = output / f"seed-{seed}-steps-{steps}.png"
+                target = output / f"{label}.png"
                 image.save(target, format="PNG")
                 raw = target.read_bytes()
                 quality = image_quality_report(raw, "background" if square else "scene")
@@ -77,7 +87,7 @@ def run(output=Path("artifacts/experimental-openvino"), *, square=False):
             finally:
                 row["elapsed_seconds"] = round(time.monotonic() - case_started, 2)
                 row["process_peak_rss_kib"] = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-                (output / f"seed-{seed}-steps-{steps}.json").write_text(json.dumps(row, indent=2))
+                (output / f"{label}.json").write_text(json.dumps(row, indent=2))
                 (output / "comparison.json").write_text(json.dumps(report, indent=2, default=str))
     except Exception as exc:
         report["error_type"] = type(exc).__name__
@@ -95,5 +105,6 @@ if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--square", action="store_true")
+    parser.add_argument("--objects", action="store_true")
     args = parser.parse_args()
-    raise SystemExit(0 if run(square=args.square)["technical_comparison_completed"] else 1)
+    raise SystemExit(0 if run(square=args.square, objects=args.objects)["technical_comparison_completed"] else 1)
