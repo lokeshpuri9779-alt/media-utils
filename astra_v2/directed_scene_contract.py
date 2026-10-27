@@ -51,7 +51,8 @@ def directed_scene_issue(shot):
     # A named child/person in the authored visual bible must not disappear
     # into a generic tree, door or signal icon. The existing verified-scene-art
     # exception remains available through validate_directed_scene.
-    for name in (shot.get("story_named_humans") or ()):
+    named_humans = shot.get("story_named_humans")
+    for name in (named_humans if isinstance(named_humans, (tuple, list)) else ()):
         if (isinstance(name, str) and name.strip()
                 and re.search(r"(?<!\w)" + re.escape(name.strip()) + r"(?!\w)", text, re.I)):
             return "human_actor_not_supported_by_directed_icons"
