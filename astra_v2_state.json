@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-27",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 35,
+  "attempts": 36,
   "confirmed_today": 35,
-  "last_attempt_at": "2026-10-27T10:38:50.004498+00:00",
+  "last_attempt_at": "2026-10-27T11:19:41.153280+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -6878,28 +6878,79 @@
       "genre": "space"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-27T10:40:13.061624+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "JPP2Ouh4O-0": {
+      "content_id": "iss-orbital-speed-v1",
+      "title": "How Fast the Space Station Really Travels",
+      "day": "2026-10-27",
+      "uploaded_at": "2026-10-27T11:19:42.682069+00:00",
+      "genre": "space",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "",
+      "story_beats": [
+        {
+          "headline": "28,000 KM/H",
+          "speech": "The space station races around Earth at roughly twenty-eight thousand kilometers an hour.",
+          "visual": "media",
+          "story_beat": "reveal",
+          "media_query": "ISS sunrise from orbit",
+          "media_file": "File:ISS-43 Sunrise from orbit.jpg",
+          "media_fit": "wide",
+          "media_motion": "push"
+        },
+        {
+          "headline": "IT NEVER STOPS",
+          "speech": "That sideways speed keeps it falling around Earth instead of straight down.",
+          "visual": "iss_orbit",
+          "story_beat": "mechanism"
+        },
+        {
+          "headline": "90 MINUTES PER LAP",
+          "speech": "It completes one entire orbit in about ninety minutes.",
+          "visual": "media",
+          "story_beat": "evidence",
+          "media_query": "ISS sunrise solar arrays",
+          "media_file": "File:ISS. Sunrise Through the Solar Arrays.jpg",
+          "media_fit": "wide",
+          "media_motion": "track"
+        },
+        {
+          "headline": "16 ORBITS PER DAY",
+          "speech": "That's about sixteen trips around our planet every day.",
+          "visual": "media",
+          "story_beat": "payoff",
+          "media_query": "ISS sunrise Earth horizon",
+          "media_file": "File:ISS-64 Sunrise through Earth's horizon.jpg",
+          "media_fit": "wide",
+          "media_motion": "push"
+        }
+      ],
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-27T11:12:15.642550+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-27T10:40:13.574998+00:00",
+    "at": "2026-10-27T11:19:43.171978+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-27T02:00:07.031481+00:00",
   "reserved": {
@@ -14537,13 +14588,60 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "iss-orbital-speed-v1": {
+      "at": "2026-10-27T11:19:41.153230+00:00",
+      "title": "How Fast the Space Station Really Travels",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "",
+      "story_beats": [
+        {
+          "headline": "28,000 KM/H",
+          "speech": "The space station races around Earth at roughly twenty-eight thousand kilometers an hour.",
+          "visual": "media",
+          "story_beat": "reveal",
+          "media_query": "ISS sunrise from orbit",
+          "media_file": "File:ISS-43 Sunrise from orbit.jpg",
+          "media_fit": "wide",
+          "media_motion": "push"
+        },
+        {
+          "headline": "IT NEVER STOPS",
+          "speech": "That sideways speed keeps it falling around Earth instead of straight down.",
+          "visual": "iss_orbit",
+          "story_beat": "mechanism"
+        },
+        {
+          "headline": "90 MINUTES PER LAP",
+          "speech": "It completes one entire orbit in about ninety minutes.",
+          "visual": "media",
+          "story_beat": "evidence",
+          "media_query": "ISS sunrise solar arrays",
+          "media_file": "File:ISS. Sunrise Through the Solar Arrays.jpg",
+          "media_fit": "wide",
+          "media_motion": "track"
+        },
+        {
+          "headline": "16 ORBITS PER DAY",
+          "speech": "That's about sixteen trips around our planet every day.",
+          "visual": "media",
+          "story_beat": "payoff",
+          "media_query": "ISS sunrise Earth horizon",
+          "media_file": "File:ISS-64 Sunrise through Earth's horizon.jpg",
+          "media_fit": "wide",
+          "media_motion": "push"
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-27T10:40:13.574938+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-27T11:19:43.171917+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -14551,36 +14649,88 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-27T10:40:13.574987+00:00",
+    "at": "2026-10-27T11:19:43.171969+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-27T10:29:32.636646+00:00",
+    "at": "2026-10-27T11:12:35.982367+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "iss-sixteen-sunrises-v1",
-    "video_url": "https://www.youtube.com/watch?v=5cjq4LotZhA",
+    "content_id": "iss-orbital-speed-v1",
+    "video_url": "https://www.youtube.com/watch?v=JPP2Ouh4O-0",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-27T10:40:13.574885+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-27T11:19:43.171643+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-27T10:40:13.574932+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "counters": {},
+    "at": "2026-10-27T11:19:43.171913+00:00",
+    "collection_status": "collected",
+    "publish_step": "success",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 1,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
+          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
+        },
+        "seen": 33,
+        "total": 156
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 156,
+        "fingerprint": 0,
+        "id": 33,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 123,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 123,
+        "remaining": 1
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 57,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {
+          "not_production_ready": 1,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
+          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
+        },
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
