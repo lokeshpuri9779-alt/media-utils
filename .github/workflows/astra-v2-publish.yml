@@ -386,6 +386,8 @@ jobs:
           ASTRA_ASSET_PACK_ROOT: runtime-artifacts/verified-pack
           ASTRA_ASSET_PACK_AUDIT: '1'
           ASTRA_ASSET_AUDIT_DIR: runtime-health/asset-usage
+          ASTRA_VISUAL_REVIEW_SHEET: '1'
+          ASTRA_VISUAL_REVIEW_DIR: runtime-health/visual-review
         shell: bash
         run: |
           set -euo pipefail
@@ -684,6 +686,16 @@ jobs:
             fi
           )
           git worktree remove --force "$WORKTREE"
+
+      - name: Archive sampled MP4 frames for manual visual review
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-visual-review-${{ github.run_id }}
+          path: runtime-health/visual-review/
+          retention-days: 3
+          if-no-files-found: ignore
 
       - name: Publish actual asset usage evidence
         if: always()
