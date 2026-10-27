@@ -129,7 +129,7 @@ def main():
                                       reuse_pending=args.reuse_pending)
     print("ASTRA_REWRITE_QUEUE=" + json.dumps({"attempted": 0 if reused else len(result["rewrites"]),
         "reused_pending": len(result["rewrites"]) if reused else 0,
-        "generated_review_only": sum(r["status"] == "awaiting_independent_editorial_approval" for r in result["rewrites"]),
+        "pending_review_only": sum(r["status"] == "awaiting_independent_editorial_approval" for r in result["rewrites"]),
         "approved": 0, "available_premises": result["available_premises"],
         "blocked_reason": result["blocked_reason"],
         "failures": [r.get("error_detail", r.get("error")) for r in result["rewrites"] if r["status"] == "rewrite_failed"]}))
