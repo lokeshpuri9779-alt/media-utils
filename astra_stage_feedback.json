@@ -2,30 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-20T22:31:03.495601+00:00",
-      "stage": "story",
-      "element": "novelty",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 100.0,
-        "candidate": "astra-proposal-ac1ccc08d50e6c5a574e"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "astra-proposal-ac1ccc08d50e6c5a574e"
-    },
-    {
-      "at": "2026-10-20T22:31:03.501198+00:00",
-      "stage": "script",
-      "element": "coherence",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 92.0,
-        "candidate": "astra-proposal-ac1ccc08d50e6c5a574e"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "astra-proposal-ac1ccc08d50e6c5a574e"
-    },
-    {
       "at": "2026-10-20T22:31:03.506825+00:00",
       "stage": "render",
       "element": "technical",
@@ -8970,6 +8946,39 @@
       },
       "proposed_action": "",
       "candidate_id": "rayvan-anthology-7c9413360cfe156f"
+    },
+    {
+      "at": "2026-10-27T03:53:58.141716+00:00",
+      "stage": "quality",
+      "element": "creative_director",
+      "outcome": "pass",
+      "evidence": {
+        "scores": {
+          "hook": 94.0,
+          "retention": 92.0,
+          "visual": 100.0,
+          "pacing": 100.0,
+          "audio": 99.33,
+          "captions": 100.0,
+          "novelty": 100.0,
+          "coherence": 92.0,
+          "technical": 100.0
+        }
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-anthology-c959d422921b404b"
+    },
+    {
+      "at": "2026-10-27T03:53:58.151295+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "pass",
+      "evidence": {
+        "duration": 16.533,
+        "renderer": "studio-7.3.1"
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-anthology-c959d422921b404b"
     }
   ],
   "stage_counts": {
@@ -8985,7 +8994,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 2,
+      "unknown": 1,
       "improved": 0,
       "regressed": 0
     },
@@ -8993,7 +9002,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 2,
+      "unknown": 1,
       "improved": 0,
       "regressed": 0
     },
@@ -9070,7 +9079,7 @@
       "regressed": 0
     },
     "render": {
-      "pass": 214,
+      "pass": 215,
       "fail": 2,
       "skip": 0,
       "unknown": 2,
@@ -9078,7 +9087,7 @@
       "regressed": 0
     },
     "quality": {
-      "pass": 214,
+      "pass": 215,
       "fail": 158,
       "skip": 0,
       "unknown": 0,
