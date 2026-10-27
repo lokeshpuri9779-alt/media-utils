@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-27",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 14,
-  "confirmed_today": 13,
-  "last_attempt_at": "2026-10-27T00:50:52.638615+00:00",
+  "attempts": 15,
+  "confirmed_today": 14,
+  "last_attempt_at": "2026-10-27T01:26:48.651997+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -5757,16 +5757,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "UakP___JhKc": {
-      "content_id": "rayvan-anthology-2d0e491203919c7a",
+    },
+    "rayvan-anthology-2d0e491203919c7a": {
+      "video_id": "UakP___JhKc",
+      "confirmed_at": "2026-10-27T01:16:31.498136+00:00",
       "title": "The Garden on the Moon",
-      "day": "2026-10-27",
-      "uploaded_at": "2026-10-27T00:50:54.437094+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-27T00:50:54.437094+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "",
       "story_beats": [
@@ -5807,16 +5805,74 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "wUhRCbw0OlA": {
+      "content_id": "rayvan-gemini-57cff6050b703e4eb923",
+      "title": "The Badger and the Amber Bridge",
+      "day": "2026-10-27",
+      "uploaded_at": "2026-10-27T01:26:50.144734+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "309e0e45d145755a0914307966123c5b4cf70407eac1ac504154a25f73199604",
+      "story_beats": [
+        {
+          "headline": "Blocked by the Chasm",
+          "speech": "We cannot jump across this deep water, Barnaby. The bridge collapsed completely during the heavy autumn storm yesterday.",
+          "visual": "forest",
+          "label": "Ravine Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Barnaby the badger and Bramble the fox stand at the edge of a rocky ravine in a dense green forest, looking down at rushing water below, both wearing knitted vests, holding nothing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Gathering Vines and Branches",
+          "speech": "Hold this heavy woven vine firmly while I drag the long oak branch into position across the rocky gap.",
+          "visual": "signal",
+          "label": "Material Collection",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the badger holds a thick twisted vine bundle in the forest while Bramble the fox drags a heavy oak branch toward the ravine edge.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Lashing the Timber Span",
+          "speech": "Tie the knots tightly around both logs so the structure holds our combined weight without shifting in the wind.",
+          "visual": "robot",
+          "label": "Structural Assembly",
+          "story_beat": "mechanism",
+          "visual_prompt": "Barnaby the badger and Bramble the fox work closely together in the forest, tying thick green vines around crossed timber logs to form a bridge.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Crossing Achieved",
+          "speech": "We made it across just as the sun sets behind the tall pines. Our teamwork saved the journey home.",
+          "visual": "door",
+          "label": "Successful Journey",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby the badger and Bramble the fox stand safely together on the opposite side of the forest ravine, smiling as twilight falls near a wooden den entrance.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A deep rushing ravine blocks the only safe path home before nightfall.",
+      "decisive_choice": "Combine their limited building materials instead of searching for a longer detour.",
+      "resolution": "They successfully cross the chasm together and reach the safety of their den.",
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-27T00:40:59.181150+00:00",
+  "last_preflight_at": "2026-10-27T01:16:31.164329+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-27T00:50:54.864264+00:00",
+    "at": "2026-10-27T01:26:50.550433+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -12441,10 +12497,64 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-57cff6050b703e4eb923": {
+      "at": "2026-10-27T01:26:48.651982+00:00",
+      "title": "The Badger and the Amber Bridge",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "309e0e45d145755a0914307966123c5b4cf70407eac1ac504154a25f73199604",
+      "story_beats": [
+        {
+          "headline": "Blocked by the Chasm",
+          "speech": "We cannot jump across this deep water, Barnaby. The bridge collapsed completely during the heavy autumn storm yesterday.",
+          "visual": "forest",
+          "label": "Ravine Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Barnaby the badger and Bramble the fox stand at the edge of a rocky ravine in a dense green forest, looking down at rushing water below, both wearing knitted vests, holding nothing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Gathering Vines and Branches",
+          "speech": "Hold this heavy woven vine firmly while I drag the long oak branch into position across the rocky gap.",
+          "visual": "signal",
+          "label": "Material Collection",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the badger holds a thick twisted vine bundle in the forest while Bramble the fox drags a heavy oak branch toward the ravine edge.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Lashing the Timber Span",
+          "speech": "Tie the knots tightly around both logs so the structure holds our combined weight without shifting in the wind.",
+          "visual": "robot",
+          "label": "Structural Assembly",
+          "story_beat": "mechanism",
+          "visual_prompt": "Barnaby the badger and Bramble the fox work closely together in the forest, tying thick green vines around crossed timber logs to form a bridge.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Crossing Achieved",
+          "speech": "We made it across just as the sun sets behind the tall pines. Our teamwork saved the journey home.",
+          "visual": "door",
+          "label": "Successful Journey",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby the badger and Bramble the fox stand safely together on the opposite side of the forest ravine, smiling as twilight falls near a wooden den entrance.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A deep rushing ravine blocks the only safe path home before nightfall.",
+      "decisive_choice": "Combine their limited building materials instead of searching for a longer detour.",
+      "resolution": "They successfully cross the chasm together and reach the safety of their den.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-27T00:50:54.864185+00:00",
+    "at": "2026-10-27T01:26:50.550373+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -12455,21 +12565,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-27T00:50:54.864250+00:00",
+    "at": "2026-10-27T01:26:50.550423+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-27T00:41:25.681065+00:00",
+    "at": "2026-10-27T01:16:53.717097+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-anthology-2d0e491203919c7a",
-    "video_url": "https://www.youtube.com/watch?v=UakP___JhKc",
+    "content_id": "rayvan-gemini-57cff6050b703e4eb923",
+    "video_url": "https://www.youtube.com/watch?v=wUhRCbw0OlA",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-27T00:50:54.863901+00:00",
+    "at": "2026-10-27T01:26:50.550153+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -12481,14 +12591,14 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-27T00:50:54.864178+00:00",
+    "at": "2026-10-27T01:26:50.550367+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 156,
+        "before": 157,
         "fingerprint": 0,
-        "id": 12,
+        "id": 13,
         "near_duplicate": 0,
         "plot_key": 0,
         "remaining": 144,
@@ -12502,14 +12612,10 @@
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
         "approved": 1,
-        "considered": 4,
+        "considered": 1,
         "duration_rejected": 0,
         "not_ready": 0,
-        "policy_rejected": {
-          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 1
-        },
+        "policy_rejected": {},
         "render_exception": {},
         "render_qa_rejected": 0
       }
