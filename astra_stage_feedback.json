@@ -2,17 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-21T06:46:13.515939+00:00",
-      "stage": "quality",
-      "element": "candidate_selection",
-      "outcome": "fail",
-      "evidence": {
-        "reason": "no_approved_original_story_available"
-      },
-      "proposed_action": "Diagnose story supply and creative gate failures",
-      "candidate_id": ""
-    },
-    {
       "at": "2026-10-21T06:50:02.778823+00:00",
       "stage": "quality",
       "element": "candidate_selection",
@@ -9141,6 +9130,17 @@
       },
       "proposed_action": "",
       "candidate_id": "rayvan-gemini-fa6958b8ce77eddd2379"
+    },
+    {
+      "at": "2026-10-27T19:46:51.440744+00:00",
+      "stage": "quality",
+      "element": "candidate_selection",
+      "outcome": "fail",
+      "evidence": {
+        "reason": "no_approved_original_story_available"
+      },
+      "proposed_action": "Diagnose story supply and creative gate failures",
+      "candidate_id": ""
     }
   ],
   "stage_counts": {

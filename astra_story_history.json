@@ -6393,6 +6393,55 @@
       "central_conflict": "The robot must choose between its programming to protect a unique bloom and saving a dying arctic fox.",
       "decisive_choice": "Unit 734 uses the energy from the solar-powered glass dome protecting the flower to heat the fox's shelter.",
       "resolution": "The fox survives, and the robot accepts the deactivation of the garden to preserve living life."
+    },
+    {
+      "content_id": "rayvan-gemini-9bca0928566629e1db29",
+      "video_id": "LnKNRkyciwU",
+      "confirmed_at": "2026-10-27T19:44:15.301004+00:00",
+      "title": "The Octopus Cartographer and the Choking Reef",
+      "plot_fingerprint": "ee32e0294f0ea62d6465233bddd0e984354a046eaf4bdbc9d95e343317c854d9",
+      "story_beats": [
+        {
+          "headline": "The Dying Coral",
+          "speech": "Look closely at the pale polyps, young apprentice. Without heat from the deep vent, our entire nursery will freeze by nightfall.",
+          "visual": "signal",
+          "label": "Failing Nursery",
+          "story_beat": "reveal",
+          "visual_prompt": "An elderly purple octopus with spectacles points one tentacle at a pale, dying coral reef in an underwater trench, while a smaller blue crab watches anxiously, holding a glowing crustacean shell signal lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Mapping the Rift",
+          "speech": "We must wedge this heavy stone slab into the fault line before the pressure locks the fissure shut forever.",
+          "visual": "door",
+          "label": "The Fault",
+          "story_beat": "build",
+          "visual_prompt": "The purple octopus and the blue crab push a massive carved stone gate underwater against a rushing current of dark volcanic silt, their expressions strained with physical effort.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Heavy Sacrifice",
+          "speech": "Drop the heirloom pearl archive into the gap! It is the only weight dense enough to hold the stone door open against the tectonic pull.",
+          "visual": "ship",
+          "label": "The Archive",
+          "story_beat": "mechanism",
+          "visual_prompt": "The blue crab uses its claws to release a heavy wooden chest filled with glowing white pearls down into a jagged underwater crevice near a rusty sunken shipwreck hull.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Waters Restored",
+          "speech": "The thermal current is surging back through the trench. Our home is saved, and the coral polyps are glowing once more.",
+          "visual": "planet",
+          "label": "Reef Renewal",
+          "story_beat": "payoff",
+          "visual_prompt": "Vibrant neon-pink and emerald-green coral gardens bloom brightly under a stream of warm, rising bubbles, with the purple octopus and blue crab cheering happily together.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
