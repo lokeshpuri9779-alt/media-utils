@@ -5740,6 +5740,58 @@
       "central_conflict": "A priceless gold pocket watch vanished from the station master desk right before the final train departure.",
       "decisive_choice": "Follow the muddy paw prints toward the cargo carriages instead of waiting for the city guards.",
       "resolution": "The stray fox drops the ticking watch onto the ticket counter, saving the station master's reputation."
+    },
+    {
+      "content_id": "rayvan-gemini-2ffa6e91767ef624e730",
+      "video_id": "vdleQM74cJM",
+      "confirmed_at": "2026-10-27T08:27:09.540366+00:00",
+      "title": "The Glaciologist and the Crevasse Beacon",
+      "plot_fingerprint": "55b04739ff45b81e13e81c1c01a789bea94a4d968b94894409169f1b77d8ee36",
+      "story_beats": [
+        {
+          "headline": "The Hidden Crevasse",
+          "speech": "Look at this deep fracture! The seismic sensors indicate an unstable overhang directly above our rescue path.",
+          "visual": "signal",
+          "label": "Fracture Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Dr. Vance stands on a vast blue glacier holding a blinking orange radar beacon in a gloved hand, looking down into a deep crack while blowing snow swirls around her insulated parka.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Heavy Load",
+          "speech": "My foot is trapped beneath the frozen rockfall, and this drill rig is dragging us both down.",
+          "visual": "ship",
+          "label": "Trapped Partner",
+          "story_beat": "build",
+          "visual_prompt": "Marcus lies pinned underneath a heavy steel sled loaded with dark ice-core cylinders inside a snowy gully, gesturing frantically upward toward Vance.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hard Choice",
+          "speech": "If I cut the core samples loose now, we lose months of data, but I can finally pull you free.",
+          "visual": "door",
+          "label": "Cutting the Rig",
+          "story_beat": "mechanism",
+          "visual_prompt": "Dr. Vance uses a heavy titanium utility knife to slice through the thick yellow nylon tow-strap of the sled, her face strained with intense concentration against the freezing wind.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Ascent",
+          "speech": "We made it inside the storm shelter just in time. Our data is gone, but we are both alive.",
+          "visual": "robot",
+          "label": "Shelter Recovery",
+          "story_beat": "payoff",
+          "visual_prompt": "Dr. Vance and Marcus sit side by side inside a glowing orange emergency dome tent, sharing a hot steel thermos while heavy snow completely buries the exterior entrance.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Weighing precious research core samples against a partner's survival during a sudden blizzard.",
+      "decisive_choice": "Releasing the sled harness containing the drill cores to secure the rescue hoist.",
+      "resolution": "Both researchers reach shelter safely, carrying only their survival gear."
     }
   ]
 }
