@@ -11,13 +11,31 @@
       "request_sha256": "3ea828120a450f1443a38be6bb6056b0e483ed06273a528ac1740e30e57cc505",
       "approved": false,
       "production_ready": false,
-      "rejected_dimensions": {
+      "sha256": "e45a3000170d57e5247772db614aea7863fcfa12f624ade509a9c0602304e0e9",
+      "path": "sha256/e4/e45a3000170d57e5247772db614aea7863fcfa12f624ade509a9c0602304e0e9.png",
+      "kind": "scene",
+      "source": "omniroute",
+      "prompt_sha256": "e3ca2ffa27ed8029acea583bd3d9ac97d9cb8103f6017c19866c6e446e6ddf98",
+      "dimensions": {
+        "width": 1024,
+        "height": 1824
+      },
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "average_brightness": 133.05,
+        "luminance_variance": 1652.92,
+        "semantic_match": "not_verified",
+        "character_continuity": "not_verified"
+      },
+      "adaptation": "square_to_portrait_review_padding_v1",
+      "source_sha256": "b90955ded4b0ffadcdb36646ac3afe02c778a235a28c9a3b98dcd011df35db5e",
+      "source_path": "requests/square_sources/b90955ded4b0ffadcdb36646ac3afe02c778a235a28c9a3b98dcd011df35db5e.png",
+      "source_dimensions": {
         "width": 1024,
         "height": 1024
       },
-      "status": "generation_failed",
-      "error": "ValueError",
-      "error_detail": "Scenes must be portrait"
+      "status": "review_only"
     },
     {
       "story_content_id": "rayvan-gemini-21164ab197474405e7e9",
@@ -28,13 +46,31 @@
       "request_sha256": "9cc67aec132c994f1f275f1440a5e77d3919be33eeb0564f3103035388d296ed",
       "approved": false,
       "production_ready": false,
-      "rejected_dimensions": {
+      "sha256": "f42467c38327055918a8a06628e081886317061906cc95523fc0c5379e750414",
+      "path": "sha256/f4/f42467c38327055918a8a06628e081886317061906cc95523fc0c5379e750414.png",
+      "kind": "scene",
+      "source": "omniroute",
+      "prompt_sha256": "4500562a14b163f0114caad39d445e12fd93966648869069e3d343ed8705657f",
+      "dimensions": {
+        "width": 1024,
+        "height": 1824
+      },
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "average_brightness": 104.75,
+        "luminance_variance": 1416.55,
+        "semantic_match": "not_verified",
+        "character_continuity": "not_verified"
+      },
+      "adaptation": "square_to_portrait_review_padding_v1",
+      "source_sha256": "541ae33d3f93c4198f6c3d4e40f3ba939d6576e9d46bcaa70b4f0b2dfdd173d9",
+      "source_path": "requests/square_sources/541ae33d3f93c4198f6c3d4e40f3ba939d6576e9d46bcaa70b4f0b2dfdd173d9.png",
+      "source_dimensions": {
         "width": 1024,
         "height": 1024
       },
-      "status": "generation_failed",
-      "error": "ValueError",
-      "error_detail": "Scenes must be portrait"
+      "status": "review_only"
     },
     {
       "story_content_id": "rayvan-gemini-21164ab197474405e7e9",
@@ -45,13 +81,31 @@
       "request_sha256": "77cbc46b0b3ce32e4ce98c851575814ac6d3deb5d192f8f2ed791d7652a1b870",
       "approved": false,
       "production_ready": false,
-      "rejected_dimensions": {
+      "sha256": "6ba09696b73d46d269a076910d716fa629886238201351c19ddc94d9630787dd",
+      "path": "sha256/6b/6ba09696b73d46d269a076910d716fa629886238201351c19ddc94d9630787dd.png",
+      "kind": "scene",
+      "source": "omniroute",
+      "prompt_sha256": "dfd12db412d47ad7bff5981d137f9d06aed5946800e497bf94ecde0ad42f4f49",
+      "dimensions": {
+        "width": 1024,
+        "height": 1824
+      },
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "average_brightness": 99.45,
+        "luminance_variance": 1927.99,
+        "semantic_match": "not_verified",
+        "character_continuity": "not_verified"
+      },
+      "adaptation": "square_to_portrait_review_padding_v1",
+      "source_sha256": "aff646b5c5e468a2784a6339ebb8ec971ce9bc4ae1dbc9a4501089603ce769bb",
+      "source_path": "requests/square_sources/aff646b5c5e468a2784a6339ebb8ec971ce9bc4ae1dbc9a4501089603ce769bb.png",
+      "source_dimensions": {
         "width": 1024,
         "height": 1024
       },
-      "status": "generation_failed",
-      "error": "ValueError",
-      "error_detail": "Scenes must be portrait"
+      "status": "review_only"
     },
     {
       "story_content_id": "rayvan-gemini-21164ab197474405e7e9",
