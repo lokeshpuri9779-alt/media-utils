@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-27",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 39,
+  "attempts": 40,
   "confirmed_today": 39,
-  "last_attempt_at": "2026-10-27T14:25:03.345094+00:00",
+  "last_attempt_at": "2026-10-27T14:32:37.428386+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -7089,29 +7089,83 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "NrAWAtJg3BQ": {
+      "content_id": "rayvan-gemini-097bc00151cea74a6327",
+      "title": "The Badger And The Weeping Root",
+      "day": "2026-10-27",
+      "uploaded_at": "2026-10-27T14:32:39.924636+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "c64b749bba61b4f49160647b2d1d2ec8beee22678d084ee08191a770c3bd4dce",
+      "story_beats": [
+        {
+          "headline": "The Blocked Ravine",
+          "speech": "Look across the deep chasm, Pip! The landslide took our only bridge, and the winter orchard is totally cut off.",
+          "visual": "forest",
+          "label": "Ravine Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Bramble the badger and Pip the squirrel stand at the edge of a deep, misty forest ravine, staring down at broken logs where a bridge used to be, illuminated by afternoon sunlight filtering through emerald canopy leaves, holding nothing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Sharing The Anchor",
+          "speech": "Take my heavy wooden anchor, my friend! We must secure it tightly to this ancient oak stump to hold the vine line.",
+          "visual": "signal",
+          "label": "Anchor Setup",
+          "story_beat": "build",
+          "visual_prompt": "Bramble the badger pushes a heavy carved wooden anchor forward across mossy ground toward Pip the squirrel, who grips the braided rope with both paws near the base of a gnarled oak tree.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Weaving The Vines",
+          "speech": "Pull the flexible willow runners fast and weave them crosswise so the span can support our heavy cartloads safely.",
+          "visual": "robot",
+          "label": "Vine Weaving",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the squirrel actively weaves supple green willow vines together in a tight lattice pattern while standing on a fallen log, with Bramble kneeling beside her holding the taut rope steady.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Crossing To Safety",
+          "speech": "We made it across the roaring chasm together! Now the winter apples are safe in our cozy valley home.",
+          "visual": "door",
+          "label": "Safe Crossing",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramble and Pip walk side by side across a newly constructed rustic wooden suspension bridge, pulling a small cart piled high with red apples toward a warm, open forest burrow entrance in the twilight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-27T14:29:06.450414+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_preflight_at": "2026-10-27T14:31:04.618732+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-27T14:29:06.512598+00:00",
+    "at": "2026-10-27T14:32:40.316509+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-27T14:24:39.797719+00:00",
   "reserved": {
@@ -14952,13 +15006,64 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-097bc00151cea74a6327": {
+      "at": "2026-10-27T14:32:37.428369+00:00",
+      "title": "The Badger And The Weeping Root",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "c64b749bba61b4f49160647b2d1d2ec8beee22678d084ee08191a770c3bd4dce",
+      "story_beats": [
+        {
+          "headline": "The Blocked Ravine",
+          "speech": "Look across the deep chasm, Pip! The landslide took our only bridge, and the winter orchard is totally cut off.",
+          "visual": "forest",
+          "label": "Ravine Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Bramble the badger and Pip the squirrel stand at the edge of a deep, misty forest ravine, staring down at broken logs where a bridge used to be, illuminated by afternoon sunlight filtering through emerald canopy leaves, holding nothing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Sharing The Anchor",
+          "speech": "Take my heavy wooden anchor, my friend! We must secure it tightly to this ancient oak stump to hold the vine line.",
+          "visual": "signal",
+          "label": "Anchor Setup",
+          "story_beat": "build",
+          "visual_prompt": "Bramble the badger pushes a heavy carved wooden anchor forward across mossy ground toward Pip the squirrel, who grips the braided rope with both paws near the base of a gnarled oak tree.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Weaving The Vines",
+          "speech": "Pull the flexible willow runners fast and weave them crosswise so the span can support our heavy cartloads safely.",
+          "visual": "robot",
+          "label": "Vine Weaving",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the squirrel actively weaves supple green willow vines together in a tight lattice pattern while standing on a fallen log, with Bramble kneeling beside her holding the taut rope steady.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Crossing To Safety",
+          "speech": "We made it across the roaring chasm together! Now the winter apples are safe in our cozy valley home.",
+          "visual": "door",
+          "label": "Safe Crossing",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramble and Pip walk side by side across a newly constructed rustic wooden suspension bridge, pulling a small cart piled high with red apples toward a warm, open forest burrow entrance in the twilight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-27T14:29:06.512554+00:00",
-    "publication_outcome": "skipped",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-27T14:32:40.316429+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -14966,35 +15071,35 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-27T14:29:06.512591+00:00",
+    "at": "2026-10-27T14:32:40.316494+00:00",
     "history_file_present": true,
-    "publication_outcome": "skipped",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-27T14:24:39.474614+00:00",
+    "at": "2026-10-27T14:32:16.581943+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-87f9d3a29c51ec2fb7d0",
-    "video_url": "https://www.youtube.com/watch?v=nSfqi_Z-WsA",
+    "content_id": "rayvan-gemini-097bc00151cea74a6327",
+    "video_url": "https://www.youtube.com/watch?v=NrAWAtJg3BQ",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-27T14:29:06.512512+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-27T14:32:40.316338+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "skipped",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-27T14:29:06.512551+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
+    "at": "2026-10-27T14:32:40.316423+00:00",
+    "collection_status": "missing_diagnostics",
+    "publish_step": "success",
     "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
