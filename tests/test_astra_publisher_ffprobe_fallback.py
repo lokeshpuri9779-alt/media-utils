@@ -45,7 +45,7 @@ class PublisherFfprobeRecoveryTests(unittest.TestCase):
             write_script(bin_dir / "sudo", 'exit 0\n')
             write_script(
                 bin_dir / "apt-get",
-                ("if [ \"\${1:-}\" = download ]; then\n"
+                ("if [ \"${1:-}\" = download ]; then\n"
                  + ("  printf truncated > ffmpeg_7_test.deb\n" if create_corrupt_deb else "")
                  + "fi\n"))
             write_script(bin_dir / "dpkg-deb", "exit 2\n")
