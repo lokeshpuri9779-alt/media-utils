@@ -2,30 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-20T22:31:03.484219+00:00",
-      "stage": "audio",
-      "element": "audio",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 99.55,
-        "candidate": "astra-proposal-ac1ccc08d50e6c5a574e"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "astra-proposal-ac1ccc08d50e6c5a574e"
-    },
-    {
-      "at": "2026-10-20T22:31:03.489959+00:00",
-      "stage": "captions",
-      "element": "captions",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 100.0,
-        "candidate": "astra-proposal-ac1ccc08d50e6c5a574e"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "astra-proposal-ac1ccc08d50e6c5a574e"
-    },
-    {
       "at": "2026-10-20T22:31:03.495601+00:00",
       "stage": "story",
       "element": "novelty",
@@ -8961,6 +8937,39 @@
       },
       "proposed_action": "",
       "candidate_id": "rayvan-anthology-6a4266fc010c04c6"
+    },
+    {
+      "at": "2026-10-27T03:16:31.423761+00:00",
+      "stage": "quality",
+      "element": "creative_director",
+      "outcome": "pass",
+      "evidence": {
+        "scores": {
+          "hook": 94.0,
+          "retention": 92.0,
+          "visual": 100.0,
+          "pacing": 100.0,
+          "audio": 97.95,
+          "captions": 98.33,
+          "novelty": 100.0,
+          "coherence": 92.0,
+          "technical": 100.0
+        }
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-anthology-7c9413360cfe156f"
+    },
+    {
+      "at": "2026-10-27T03:16:31.435444+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "pass",
+      "evidence": {
+        "duration": 17.333,
+        "renderer": "studio-7.3.1"
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-anthology-7c9413360cfe156f"
     }
   ],
   "stage_counts": {
@@ -9040,7 +9049,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 2,
+      "unknown": 1,
       "improved": 0,
       "regressed": 0
     },
@@ -9048,7 +9057,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 2,
+      "unknown": 1,
       "improved": 0,
       "regressed": 0
     },
@@ -9061,7 +9070,7 @@
       "regressed": 0
     },
     "render": {
-      "pass": 213,
+      "pass": 214,
       "fail": 2,
       "skip": 0,
       "unknown": 2,
@@ -9069,7 +9078,7 @@
       "regressed": 0
     },
     "quality": {
-      "pass": 213,
+      "pass": 214,
       "fail": 158,
       "skip": 0,
       "unknown": 0,
