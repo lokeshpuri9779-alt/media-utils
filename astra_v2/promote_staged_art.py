@@ -13,6 +13,7 @@ import shutil
 from pathlib import Path
 
 from astra_v2.staged_art_technical_review import audit_staged_art
+from astra_v2.gemini_art_semantic_review import CRITERIA
 
 
 def promote(manifest_path, semantic_path, decision_path, destination):
@@ -46,6 +47,12 @@ def promote(manifest_path, semantic_path, decision_path, destination):
     scenes = semantic.get("scenes")
     if not isinstance(scenes, list) or len(scenes) != len(rows) or {s.get("scene_id") for s in scenes if isinstance(s, dict)} != scene_ids:
         raise ValueError("semantic_qa_scene_mismatch")
+    # Never accept a top-level pass if an individual scene failed or has issues.
+    for scene in scenes:
+        if (not isinstance(scene, dict)
+                or any(scene.get(criterion) is not True for criterion in CRITERIA)
+                or scene.get("issues") != []):
+            raise ValueError("semantic_scene_quality_not_passed")
     if (decision.get("schema") != "astra.art.external-approval.v1"
             or decision.get("story_content_id") != cid
             or decision.get("decision") != "approved"
