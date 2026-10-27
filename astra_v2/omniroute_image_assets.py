@@ -14,7 +14,7 @@ from pathlib import Path
 import urllib.request
 import urllib.error
 
-from PIL import Image
+from PIL import Image, ImageFilter, ImageOps
 
 MAX_BYTES = 12 * 1024 * 1024
 
@@ -312,6 +312,59 @@ def image_quality_report(image_bytes, kind):
             "character_continuity": "not_verified"}
 
 
+
+def pad_square_scene_for_review(image_bytes, root):
+    """Opt-in, lossless-center portrait framing of a square provider scene.
+
+    Keep the exact source PNG in a separate review-only request directory.
+    The original subject is neither cropped nor stretched; a heavily blurred
+    copy fills the surrounding canvas. This is NOT semantic approval.
+    """
+    with Image.open(io.BytesIO(image_bytes)) as probe:
+        probe.verify()
+    with Image.open(io.BytesIO(image_bytes)) as source:
+        if source.format != "PNG":
+            raise ValueError("Square scene source must be PNG")
+        width, height = source.size
+        if width != height:
+            return image_bytes, {}
+        if width < 512 or width > 2048:
+            raise ValueError("Square scene dimensions unsupported")
+        original = source.convert("RGB")
+    root = Path(root)
+    digest = hashlib.sha256(image_bytes).hexdigest()
+    source_dir = root / "requests" / "square_sources"
+    source_dir.mkdir(parents=True, exist_ok=True)
+    source_path = source_dir / (digest + ".png")
+    if source_path.exists():
+        if hashlib.sha256(source_path.read_bytes()).hexdigest() != digest:
+            raise ValueError("Stored square scene source corruption")
+    else:
+        temporary = source_path.with_suffix(".tmp")
+        try:
+            temporary.write_bytes(image_bytes)
+            temporary.replace(source_path)
+        finally:
+            temporary.unlink(missing_ok=True)
+    # Keep the original 1:1 scene fully visible, with no interpolation.
+    canvas_height = max(width + 16, round(width * 16 / 9 / 16) * 16)
+    backdrop = ImageOps.fit(original, (width, canvas_height),
+                            method=Image.Resampling.BICUBIC)
+    backdrop = backdrop.filter(ImageFilter.GaussianBlur(radius=max(24, width // 12)))
+    backdrop.paste(original, (0, (canvas_height - height) // 2))
+    buffer = io.BytesIO()
+    backdrop.save(buffer, format="PNG")
+    framed = buffer.getvalue()
+    if len(framed) > MAX_BYTES:
+        raise ValueError("Portrait review frame too large")
+    validate_png(framed, "scene")
+    return framed, {"adaptation": "square_to_portrait_review_padding_v1",
+                    "source_sha256": digest,
+                    "source_path": str(source_path.relative_to(root)),
+                    "source_dimensions": {"width": width, "height": height}}
+
+
+
 def store_asset(image_bytes, root, *, kind, prompt, source="omniroute"):
     if kind not in ("scene", "character", "prop", "background", "thumbnail"):
         raise ValueError("Unsupported asset kind")
@@ -387,7 +440,21 @@ def preproduce(queue, root, *, generator=generate_free_image_with_failover, limi
                         raise ValueError("Cached asset prompt mismatch")
                     if saved.get("kind") != "scene":
                         raise ValueError("Cached asset kind mismatch")
-                    row.update({k: saved[k] for k in ("sha256", "path", "kind", "source", "prompt_sha256", "dimensions") if k in saved})
+                    if saved.get("adaptation"):
+                        if saved["adaptation"] != "square_to_portrait_review_padding_v1":
+                            raise ValueError("Unknown cached scene adaptation")
+                        source_path = (root / saved["source_path"]).resolve()
+                        if not source_path.is_relative_to((root / "requests" / "square_sources").resolve()):
+                            raise ValueError("Unsafe cached square source path")
+                        if hashlib.sha256(source_path.read_bytes()).hexdigest() != saved["source_sha256"]:
+                            raise ValueError("Cached square source corruption")
+                        with Image.open(source_path) as original:
+                            if original.format != "PNG" or original.width != original.height or original.width < 512:
+                                raise ValueError("Cached square source dimensions invalid")
+                            if saved.get("source_dimensions") != {"width": original.width, "height": original.height}:
+                                raise ValueError("Cached square source metadata mismatch")
+                    row.update({k: saved[k] for k in ("sha256", "path", "kind", "source", "prompt_sha256", "dimensions",
+                                                      "adaptation", "source_sha256", "source_path", "source_dimensions") if k in saved})
                     row["quality"] = quality
                     # A cache entry cannot grant production approval.
                     row.update(approved=False, production_ready=False,
@@ -410,7 +477,11 @@ def preproduce(queue, root, *, generator=generate_free_image_with_failover, limi
                         provider_missing = True
                         row["status"] = "provider_not_configured"
                     else:
+                        adaptation = {}
+                        if os.getenv("ASTRA_OMNI_IMAGE_SQUARE_REVIEW_PAD", "0") == "1":
+                            image, adaptation = pad_square_scene_for_review(image, root)
                         asset = store_asset(image, root, kind="scene", prompt=prompt)
+                        asset.update(adaptation)
                         row.update(asset, status="review_only")
                         temporary = record.with_suffix(".tmp")
                         temporary.write_text(json.dumps(asset, sort_keys=True))

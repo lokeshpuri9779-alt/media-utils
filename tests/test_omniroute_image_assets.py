@@ -269,8 +269,9 @@ class ImageAssetsTests(unittest.TestCase):
         queue = {"rewrites": [{"status": "awaiting_independent_editorial_approval",
                               "story": {"title": "New story", "content_id": "square-diagnostic",
                                         "story_beats": [{"speech": "A new visual event occurs."}]}}]}
-        with tempfile.TemporaryDirectory() as root:
-            result = preproduce(queue, root, generator=lambda prompt: png(portrait=False), limit=1)
+        with patch.dict("os.environ", {"ASTRA_OMNI_IMAGE_SQUARE_REVIEW_PAD": "0"}):
+            with tempfile.TemporaryDirectory() as root:
+                result = preproduce(queue, root, generator=lambda prompt: png(portrait=False), limit=1)
             rejected = [asset for asset in result["assets"]
                         if asset.get("error_detail") == "Scenes must be portrait"]
             self.assertTrue(rejected, result)
@@ -279,6 +280,72 @@ class ImageAssetsTests(unittest.TestCase):
             self.assertFalse(rejected[0]["production_ready"])
             self.assertNotIn("path", rejected[0])
             self.assertEqual(result["provider_calls"], 1)
+
+    def test_square_scene_is_padded_for_review_without_cropping_or_approval(self):
+        import hashlib
+        queue = {"rewrites": [{"status": "awaiting_independent_editorial_approval",
+                  "story": {"title": "Square scene", "content_id": "square-adapt",
+                            "story_beats": [{"speech": "A new visual event occurs."}]}}]}
+        source = png(portrait=False)
+        calls = []
+        def generate(prompt):
+            calls.append(prompt)
+            return source
+        with patch.dict("os.environ", {"ASTRA_OMNI_IMAGE_SQUARE_REVIEW_PAD": "1"}):
+            with tempfile.TemporaryDirectory() as root:
+                result = preproduce(queue, root, generator=generate, limit=1)
+                self.assertEqual(len(calls), 1)
+                self.assertEqual(result["provider_calls"], 1)
+                asset = result["assets"][0]
+                self.assertEqual(asset["status"], "review_only")
+                self.assertFalse(asset["approved"])
+                self.assertFalse(asset["production_ready"])
+                self.assertEqual(asset["adaptation"], "square_to_portrait_review_padding_v1")
+                self.assertEqual(asset["source_sha256"], hashlib.sha256(source).hexdigest())
+                self.assertEqual(asset["source_dimensions"], {"width": 512, "height": 512})
+                self.assertEqual((Path(root) / asset["source_path"]).read_bytes(), source)
+                with Image.open(Path(root) / asset["path"]) as framed:
+                    self.assertEqual(framed.width, 512)
+                    self.assertGreater(framed.height, framed.width)
+                    offset = (framed.height - 512) // 2
+                    with Image.open(io.BytesIO(source)) as original:
+                        self.assertEqual(framed.crop((0, offset, 512, offset + 512)).convert("RGB").tobytes(),
+                                         original.convert("RGB").tobytes())
+                cached = preproduce(queue, root, generator=generate, limit=1)
+                self.assertEqual(len(calls), 1, "Cached adaptation must not call the provider")
+                self.assertEqual(cached["provider_calls"], 0)
+                self.assertEqual(cached["assets"][0]["status"], "cached_review_only")
+                self.assertEqual(cached["assets"][0]["source_sha256"], asset["source_sha256"])
+                self.assertFalse(cached["assets"][0]["production_ready"])
+
+    def test_corrupt_cached_square_source_fails_closed(self):
+        queue = {"rewrites": [{"status": "awaiting_independent_editorial_approval",
+                  "story": {"title": "Square source", "content_id": "source-corrupt",
+                            "story_beats": [{"speech": "A new visual event occurs."}]}}]}
+        with patch.dict("os.environ", {"ASTRA_OMNI_IMAGE_SQUARE_REVIEW_PAD": "1"}):
+            with tempfile.TemporaryDirectory() as root:
+                first = preproduce(queue, root, generator=lambda prompt: png(portrait=False), limit=1)
+                source = Path(root) / first["assets"][0]["source_path"]
+                source.write_bytes(b"tampered")
+                def no_provider_calls(prompt):
+                    self.fail("Corrupt cached square source must not trigger a provider call")
+                second = preproduce(queue, root, generator=no_provider_calls, limit=1)
+                self.assertEqual(second["provider_calls"], 0)
+                self.assertEqual(second["assets"][0]["status"], "generation_failed")
+                self.assertFalse(second["assets"][0]["production_ready"])
+
+    def test_square_review_padding_does_not_adapt_landscape_images(self):
+        queue = {"rewrites": [{"status": "awaiting_independent_editorial_approval",
+                  "story": {"title": "Landscape scene", "content_id": "landscape-reject",
+                            "story_beats": [{"speech": "A new visual event occurs."}]}}]}
+        image = Image.new("RGB", (768, 512), (30, 80, 160))
+        buffer = io.BytesIO()
+        image.save(buffer, format="PNG")
+        with patch.dict("os.environ", {"ASTRA_OMNI_IMAGE_SQUARE_REVIEW_PAD": "1"}):
+            with tempfile.TemporaryDirectory() as root:
+                result = preproduce(queue, root, generator=lambda prompt: buffer.getvalue(), limit=1)
+                self.assertEqual(result["assets"][0]["error_detail"], "Scenes must be portrait")
+                self.assertFalse(result["assets"][0]["production_ready"])
 
     def test_transparency_and_portrait_rules(self):
         with tempfile.TemporaryDirectory() as root:
