@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-28",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 1,
+  "attempts": 2,
   "confirmed_today": 1,
-  "last_attempt_at": "2026-10-27T19:17:22.055387+00:00",
+  "last_attempt_at": "2026-10-27T19:36:11.668467+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -7210,28 +7210,83 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-27T19:21:57.844181+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "LnKNRkyciwU": {
+      "content_id": "rayvan-gemini-9bca0928566629e1db29",
+      "title": "The Octopus Cartographer and the Choking Reef",
+      "day": "2026-10-28",
+      "uploaded_at": "2026-10-27T19:36:13.633253+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "ee32e0294f0ea62d6465233bddd0e984354a046eaf4bdbc9d95e343317c854d9",
+      "story_beats": [
+        {
+          "headline": "The Dying Coral",
+          "speech": "Look closely at the pale polyps, young apprentice. Without heat from the deep vent, our entire nursery will freeze by nightfall.",
+          "visual": "signal",
+          "label": "Failing Nursery",
+          "story_beat": "reveal",
+          "visual_prompt": "An elderly purple octopus with spectacles points one tentacle at a pale, dying coral reef in an underwater trench, while a smaller blue crab watches anxiously, holding a glowing crustacean shell signal lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Mapping the Rift",
+          "speech": "We must wedge this heavy stone slab into the fault line before the pressure locks the fissure shut forever.",
+          "visual": "door",
+          "label": "The Fault",
+          "story_beat": "build",
+          "visual_prompt": "The purple octopus and the blue crab push a massive carved stone gate underwater against a rushing current of dark volcanic silt, their expressions strained with physical effort.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Heavy Sacrifice",
+          "speech": "Drop the heirloom pearl archive into the gap! It is the only weight dense enough to hold the stone door open against the tectonic pull.",
+          "visual": "ship",
+          "label": "The Archive",
+          "story_beat": "mechanism",
+          "visual_prompt": "The blue crab uses its claws to release a heavy wooden chest filled with glowing white pearls down into a jagged underwater crevice near a rusty sunken shipwreck hull.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Waters Restored",
+          "speech": "The thermal current is surging back through the trench. Our home is saved, and the coral polyps are glowing once more.",
+          "visual": "planet",
+          "label": "Reef Renewal",
+          "story_beat": "payoff",
+          "visual_prompt": "Vibrant neon-pink and emerald-green coral gardens bloom brightly under a stream of warm, rising bubbles, with the purple octopus and blue crab cheering happily together.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-27T19:35:34.280628+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-27T19:21:58.336556+00:00",
+    "at": "2026-10-27T19:36:14.009759+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-27T14:24:39.797719+00:00",
   "reserved": {
@@ -15187,13 +15242,64 @@
       "resolution": "The fox survives, and the robot accepts the deactivation of the garden to preserve living life.",
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-9bca0928566629e1db29": {
+      "at": "2026-10-27T19:36:11.668448+00:00",
+      "title": "The Octopus Cartographer and the Choking Reef",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "ee32e0294f0ea62d6465233bddd0e984354a046eaf4bdbc9d95e343317c854d9",
+      "story_beats": [
+        {
+          "headline": "The Dying Coral",
+          "speech": "Look closely at the pale polyps, young apprentice. Without heat from the deep vent, our entire nursery will freeze by nightfall.",
+          "visual": "signal",
+          "label": "Failing Nursery",
+          "story_beat": "reveal",
+          "visual_prompt": "An elderly purple octopus with spectacles points one tentacle at a pale, dying coral reef in an underwater trench, while a smaller blue crab watches anxiously, holding a glowing crustacean shell signal lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Mapping the Rift",
+          "speech": "We must wedge this heavy stone slab into the fault line before the pressure locks the fissure shut forever.",
+          "visual": "door",
+          "label": "The Fault",
+          "story_beat": "build",
+          "visual_prompt": "The purple octopus and the blue crab push a massive carved stone gate underwater against a rushing current of dark volcanic silt, their expressions strained with physical effort.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Heavy Sacrifice",
+          "speech": "Drop the heirloom pearl archive into the gap! It is the only weight dense enough to hold the stone door open against the tectonic pull.",
+          "visual": "ship",
+          "label": "The Archive",
+          "story_beat": "mechanism",
+          "visual_prompt": "The blue crab uses its claws to release a heavy wooden chest filled with glowing white pearls down into a jagged underwater crevice near a rusty sunken shipwreck hull.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Waters Restored",
+          "speech": "The thermal current is surging back through the trench. Our home is saved, and the coral polyps are glowing once more.",
+          "visual": "planet",
+          "label": "Reef Renewal",
+          "story_beat": "payoff",
+          "visual_prompt": "Vibrant neon-pink and emerald-green coral gardens bloom brightly under a stream of warm, rising bubbles, with the purple octopus and blue crab cheering happily together.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-27T19:21:58.336492+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-27T19:36:14.009683+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -15201,35 +15307,35 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-27T19:21:58.336544+00:00",
+    "at": "2026-10-27T19:36:14.009745+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-27T19:05:42.050377+00:00",
+    "at": "2026-10-27T19:35:57.872687+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-fa6958b8ce77eddd2379",
-    "video_url": "https://www.youtube.com/watch?v=gsUFqSaLS8E",
+    "content_id": "rayvan-gemini-9bca0928566629e1db29",
+    "video_url": "https://www.youtube.com/watch?v=LnKNRkyciwU",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-27T19:21:58.336438+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-27T19:36:14.009592+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-27T19:21:58.336487+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
+    "at": "2026-10-27T19:36:14.009677+00:00",
+    "collection_status": "missing_diagnostics",
+    "publish_step": "success",
     "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
