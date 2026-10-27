@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "67bb9c64a4cb785855bf85b4",
-      "source_sha256": "3ae7ed1d6648a49f59cfe011a89e9ba2678ed33f97e3bebd3ee43340bcd8b865",
+      "candidate_id": "85ff6d965685dec65fa5e21c",
+      "source_sha256": "988ce8f02d466e1c370c5fb8d41c9ae9e4f0c95e09179eb0c2d0fdeb2d11794d",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-7a995581b27d0375b6ea",
-        "title": "The Great Squeak-Free Carrot Caper of Cobblestone Square",
-        "hook": "The Grand Unveiling",
-        "question": "Can an overly enthusiastic inventor sell his self-polishing turnip sprayer to a stubborn produce market without destroying every vegetable stall in sight?",
-        "answer": "He abandons the high-pressure pump in favor of a gentle feathered dusting brush, saving the market and earning his first actual profit.",
+        "content_id": "rayvan-gemini-067eb8982b5a59d78f23",
+        "title": "The Great Gyro-Spud Fiasco",
+        "hook": "The Steam Engine Unveiled",
+        "question": "Can an ambitious street inventor automate peeling potatoes without ruining the entire market stall?",
+        "answer": "Yes, by accepting manual help and modifying the steam pressure valve just in time.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,79 +29,160 @@
         ],
         "story_beats": [
           {
-            "headline": "The Grand Unveiling",
-            "speech": "Behold the magnificent pneumatic produce polisher! Watch it blast away stubborn morning mud in less than three seconds flat!",
+            "headline": "The Steam Engine Unveiled",
+            "speech": "Behold the glorious Auto-Spud Nine Thousand, designed to peel a bushel of tubers in mere seconds flat!",
             "visual": "robot",
-            "label": "The Invention",
+            "label": "The Reveal",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly beside his steaming brass contraption in the busy outdoor market, holding a greasy wrench while grinning widely.",
+            "visual_prompt": "Inventor Silas standing proudly beside a clanking brass automaton in a busy outdoor market, holding a wrench, expression confident.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Mechanical Malfunction",
-            "speech": "Oh dear me, the pressure gauge is sticking in the red zone! Duck your heads and protect your lovely cabbages right now!",
+            "headline": "Building Pressure",
+            "speech": "Feed more raw tubers into the top hopper quickly before the main boiler gauge enters the red warning zone!",
             "visual": "signal",
-            "label": "The Overload",
+            "label": "The Mechanism",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby frantically waves his hands at the sputtering brass machine while red steam whistles wildly and carrots fly through the air.",
+            "visual_prompt": "Silas frantically tossing potatoes into the brass hopper while a blinking red signal light flashes on the control panel.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Desperate Modification",
-            "speech": "I must swap this terrifying steam valve for something infinitely gentler before Granny Higgins hits me with her giant wooden spoon!",
+            "headline": "A Sticky Twist",
+            "speech": "The peeling blades are spinning backwards and now raw potato skins are sticking to every single customer's face!",
+            "visual": "forest",
+            "label": "The Twist",
+            "story_beat": "twist",
+            "visual_prompt": "Shocked market shoppers covered in wet potato peels ducking as flying vegetable debris creates a chaotic leafy storm in the square.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Savory Payoff",
+            "speech": "Pull the safety lever down right now so we can serve perfectly peeled fries to our very relieved patrons.",
+            "visual": "ship",
+            "label": "The Payoff",
+            "story_beat": "payoff",
+            "visual_prompt": "Silas and his assistant pulling a massive steering-wheel lever together, venting gentle steam as cheerful customers applaud holding hot fries.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A malfunctioning potato-peeling steam gadget threatens to bury the busiest vegetable stall in the bazaar in flying starch.",
+        "decisive_choice": "To manually engage the emergency pressure release instead of trusting the experimental auto-clutch.",
+        "resolution": "The potatoes are peeled safely, delighting the hungry shoppers and saving the family business.",
+        "visual_bible": {
+          "style": "Bright, whimsical stop-motion animation aesthetic with rich brass, copper, and earthy marketplace tones.",
+          "characters": {
+            "Silas": "An eccentric young inventor with unruly brown hair, smudged cheeks, wearing a striped vest and leather tool apron.",
+            "Marta": "A pragmatic market assistant with braided hair, a green apron, and a perpetually unimpressed expression."
+          },
+          "locations": {
+            "MarketSquare": "A bustling cobblestone outdoor bazaar lined with colorful awnings, wooden crates, and hanging vegetable displays."
+          },
+          "objects": {
+            "AutoSpudMachine": "A towering contraption made of polished copper tubing, erratic pressure gauges, rotating steel blades, and a large feeding hopper."
+          }
+        },
+        "plot_fingerprint": "88e1c5a8d9c5b2694e8d36eb205373c8f223c5646ab06e69fda83da5307dc246"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "745bf44d9ebccaa5091c57af",
+      "source_sha256": "00aeadaad13b48a76b72bc16a1d5f83513118bb71718c0a821ea4381dcc6dab6",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-c9f07ac933d42f1309e5",
+        "title": "The Great Tidal Organ Regatta",
+        "hook": "The Silent Pipes",
+        "question": "Can a malfunctioning wave-powered pipe organ be tuned before the high tide gala?",
+        "answer": "Yes, by redirecting the rogue surge through auxiliary wooden flutes using counterweight levers.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Silent Pipes",
+            "speech": "Listen closely, everyone! The main pressure chamber is completely silent, and the festival's opening anthem begins in ten minutes.",
+            "visual": "signal",
+            "label": "The Discovery",
+            "story_beat": "reveal",
+            "visual_prompt": "Maren points at the rusted gauge dial on the brass pipe organ, looking worried while standing on the wooden festival pier during sunset.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Rerouting the Surge",
+            "speech": "We must unlock the secondary teakwood channels immediately to bleed off the excess seawater before the pressure bursts our joints.",
             "visual": "door",
             "label": "The Adjustment",
             "story_beat": "build",
-            "visual_prompt": "Barnaby crouches behind his shaking brass contraption inside his wooden market booth, quickly unscrewing a smoking pipe with a greasy screwdriver.",
+            "visual_prompt": "Maren pulls hard on a heavy bronze lever attached to a damp wooden bulkhead, sweat glistening on her forehead.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Sweet Success",
-            "speech": "There we are! Clean, beautifully polished turnips without a single dent or explosion. Who would like to buy the very first one?",
+            "headline": "The Mechanical Pivot",
+            "speech": "Wedge that iron gear tight into the counterweight sprocket now, or the incoming wave will tear our hand-carved flutes apart!",
+            "visual": "robot",
+            "label": "The Jam",
+            "story_beat": "mechanism",
+            "visual_prompt": "Maren wedges a notched iron wrench into a spinning brass gear-assembly inside the wave chamber, spray splashing around her boots.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Tidal Symphony",
+            "speech": "Hear that magnificent chord echo across the bay! Our frantic repairs actually improved the entire acoustic resonance of the coast.",
             "visual": "ship",
-            "label": "The Victory",
+            "label": "The Finale",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby beams happily as smiling market vendors eagerly hand him shiny silver coins in exchange for feather dusters attached to small metal scrubbers.",
+            "visual_prompt": "Maren smiles brightly, holding a brass tuning fork aloft as festive sailboats glide past the roaring sea-organ under twilight fireworks.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby tests his chaotic high-pressure turnip sprayer in the crowded morning market, threatening to blast every merchant's produce into mush.",
-        "decisive_choice": "Barnaby shuts off the pressurized steam valve and trades the heavy metal nozzle for a soft goose-feather duster.",
-        "resolution": "The merchants happily purchase the gentle vegetable dusters, and Barnaby's chaotic invention becomes the market's favorite new tool.",
+        "central_conflict": "A blocked sea-vent threatens to rupture the brass horns of the village tidal organ minutes before the festival.",
+        "decisive_choice": "Maren jams her heavy anchor-wrench into the primary sluice valve instead of fleeing the rising tide.",
+        "resolution": "The organ unleashes a resonant, harmonic chord that welcomes the armada and seals the sea-wall permanently.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion puppet animation aesthetic with rich textures of polished brass, weathered wood, and vibrant felt vegetables.",
+          "style": "Cinematic stop-motion animation aesthetic with rich textures of weathered wood, polished brass, and churning seafoam.",
           "characters": {
-            "Barnaby": "A tall, frantic inventor with wild ginger hair, oversized round spectacles, a grease-stained yellow vest, and striped trousers.",
-            "Granny Higgins": "A stern elderly vegetable merchant wearing a checkered apron, wire-rimmed glasses, and a blue floral headscarf."
+            "Maren": "A resourceful young seaside engineer with freckled cheeks, messy dark curls tied in a red bandana, wearing a grease-stained canvas utility apron over a wool sweater."
           },
           "locations": {
-            "Cobblestone Square": "A bustling open-air market packed with wooden stalls, striped canvas awnings, and crates overflowing with colorful vegetables."
+            "festival_pier": "A sprawling seaside boardwalk made of salted pine planks adorned with colorful paper lanterns and brass wind-chimes.",
+            "wave_chamber": "An echoing stone cavern beneath the pier where rushing ocean tides compress air into massive musical pipes."
           },
           "objects": {
-            "Turnip Sprayer": "A towering contraption made of gleaming polished brass pipes, a large pressure dial with a red needle, and attached rubber hoses."
+            "anchor_wrench": "A heavy, rust-resistant iron tool with a hooked end and a worn leather-wrapped grip.",
+            "brass_organ": "An enormous mechanical instrument built from gleaming copper horns, teakwood flutes, and intricate pressure-gauge dials."
           }
         },
-        "plot_fingerprint": "1434fd74f1980a0c03be426f8978bc24881839018f5d429d180a6e8c0f057861"
+        "plot_fingerprint": "9404f7c41c7228fe97ea43c8b07f409993e76bc25e0e93a161929984e7907377"
       },
       "approved": false
     },
     {
-      "candidate_id": "2b804ac72ad8ca435257450f",
-      "source_sha256": "b895af40625a2586abdf43ee6042d0300c82d58b8df48aa87f5d05695acbc1c5",
+      "candidate_id": "5a8f37e8137cb77be986561c",
+      "source_sha256": "fc84f7ebb939091bad229d9fb2d3be0a6d0811a1c6ae3402ca64aad56b3c384a",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-84bdd5f929524b7f78a1",
-        "title": "The Great Soapbox Derby Gearbox Mystery",
-        "hook": "Sabotaged Steerage",
-        "question": "How did the underdog team win the annual gravity derby without an engine?",
-        "answer": "They utilized a pulley-driven differential steering mechanism crafted entirely from reclaimed bicycle chains.",
+        "content_id": "rayvan-gemini-124594be64e10d078d32",
+        "title": "The Great Rooftop Squash Derby",
+        "hook": "The Rival Challenge",
+        "question": "Can an underdog neighborhood squash club defeat the reigning town champions using only recycled bicycle gears?",
+        "answer": "Yes, by engineering a gravity-fed propulsion launcher that outscores the rival team's heavy brass racket.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -109,147 +190,65 @@
         ],
         "story_beats": [
           {
-            "headline": "Sabotaged Steerage",
-            "speech": "Look closely at the snapped cable. Someone deliberately cut our primary steering line right before the race begins.",
-            "visual": "robot",
-            "label": "The Sabotage",
-            "story_beat": "reveal",
-            "visual_prompt": "Close-up of mechanic character examining a frayed metal cable inside a wooden soapbox car interior, worried facial expression, dim garage lighting, holding a small flashlight.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Inventive Repair",
-            "speech": "We do not need standard cables when we have spare gears and bicycle chains to construct an entirely new linkage.",
-            "visual": "ship",
-            "label": "The Fix",
-            "story_beat": "build",
-            "visual_prompt": "Medium shot of two young engineers working frantically inside a sunlit workshop, fitting interlocked bicycle gears into the dashboard of a sleek red soapbox racer.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Hairpin Turn",
-            "speech": "Hold steady through the curve and let the chain differential shift our weight automatically as we corner.",
-            "visual": "forest",
-            "label": "The Corner",
-            "story_beat": "mechanism",
-            "visual_prompt": "Action shot of the red soapbox racer banking sharply around a steep asphalt curve flanked by green pine trees, driver focused intently on the steering wheel.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Triumphant Finish",
-            "speech": "By keeping our momentum through ingenuity rather than speed alone, we crossed the finish line as champions.",
-            "visual": "signal",
-            "label": "The Victory",
-            "story_beat": "payoff",
-            "visual_prompt": "Wide angle of the soapbox car crossing a checkered finish line banner under bright afternoon sunlight, cheering crowd in the background blurred with motion.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Rival team leader sabotaged the steering cables right before the final heat.",
-        "decisive_choice": "Replaced the snapped cable with a bicycle chain tensioner.",
-        "resolution": "Secured first place by navigating the hairpin turn smoothly while the rival slid out.",
-        "visual_bible": {
-          "style": "Bright, high-contrast animated cinematic style with rich textures and expressive character animation.",
-          "characters": {
-            "mechanic_lead": "A determined teenager wearing a smudge-stained denim jumpsuit, safety goggles pushed up on messy brown hair, and bright canvas sneakers.",
-            "rival_captain": "An arrogant competitor wearing a pristine racing jacket with golden embroidered stripes, slicked-back hair, and a confident smirk."
-          },
-          "locations": {
-            "workshop": "A cluttered suburban garage filled with wooden planks, hanging tools, half-built bicycle frames, and warm overhead pendant lighting.",
-            "racetrack": "A steep paved suburban hill winding past tall pine trees, culminating in a wide finish line marked with bright checkered banners."
-          },
-          "objects": {
-            "soapbox_car": "A low-profile wooden racer painted vibrant red, featuring oversized rubber wheels and an exposed steering column made of salvaged metal pipes.",
-            "bicycle_chain": "A greasy, interlocking silver chain typically used for multi-speed bicycles, repurposed here as a flexible mechanical linkage."
-          }
-        },
-        "plot_fingerprint": "ab442cb2f53c4b8dea452d8a0f2631c8211ca443fdf1964e607d2bc3cc6f7248"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "ed240651370fcda2be9daeac",
-      "source_sha256": "9ac7543bfa149fcd57beed2a6fbf8afab6b35ab095e857beeef4ed1a84e455a2",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-3e0c047c1fae4afb4ded",
-        "title": "The Muddy Pitch Playbook",
-        "hook": "The Flooded Field",
-        "question": "Can an underdog neighborhood football team defeat the reigning champions using physics instead of muscle?",
-        "answer": "Yes, by engineering a clever redirection system that turns the field's worst puddle into a scoring advantage.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Flooded Field",
-            "speech": "Look at this massive water hazard right in our box! The Bulldogs are going to slide right past us every single time.",
-            "visual": "forest",
-            "label": "The Swampy Pitch",
-            "story_beat": "reveal",
-            "visual_prompt": "Coach Kip standing in knee-deep muddy grass on the community pitch, pointing angrily at a wide, stagnant puddle while holding a soggy clipboard under his arm.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Underground Engineering",
-            "speech": "We will bury corrugated plastic channels beneath the turf to redirect every drop of this troublesome water straight downfield.",
-            "visual": "robot",
-            "label": "The Drainage Rig",
-            "story_beat": "build",
-            "visual_prompt": "Milo kneeling in the damp soil wearing a neon orange utility vest, assembling a grid of blue plastic pipes while holding a heavy-duty adjustable wrench.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Secret Valve",
-            "speech": "When I twist this brass lever during kickoff, the buried siphon will instantly flood the left wing.",
-            "visual": "signal",
-            "label": "The Control Lever",
-            "story_beat": "mechanism",
-            "visual_prompt": "Milo crouching near the sideline bench, his hand gripping an antique brass valve protruding from the turf as a blinking red indicator light blinks rapidly on his wrist.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Slippery Victory",
-            "speech": "It worked perfectly! The champions are stuck spinning their wheels in the mud while our winger crosses it home!",
+            "headline": "The Rival Challenge",
+            "speech": "Our golden squash rackets have ruled this rooftop court for ten generations, and your broken bicycle parts will never match our gleaming brass pedigree.",
             "visual": "door",
-            "label": "The Winning Goal",
+            "label": "The Challenge Issued",
+            "story_beat": "reveal",
+            "visual_prompt": "Captain Vance standing beside a heavy brass door on the rooftop court, holding a polished golden squash racket with a mocking expression.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Engineering the Gearbox",
+            "speech": "If we cannot buy expensive gear, we will build a precision tension spring using discarded bicycle chains and rusted handlebar levers.",
+            "visual": "robot",
+            "label": "Assembling the Machine",
+            "story_beat": "build",
+            "visual_prompt": "Milo in a cluttered garage workshop welding rusted bicycle sprockets together into a mechanical launcher frame while wearing safety goggles.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Mechanical Release",
+            "speech": "Pull the cable release now so the tension springs launch our squash ball higher and faster than any human arm could ever swing.",
+            "visual": "signal",
+            "label": "Triggering the Launch",
+            "story_beat": "mechanism",
+            "visual_prompt": "Milo yanking a frayed brake cable on the rooftop court, sending a yellow squash ball rocketing upward as a glowing red indicator light blinks.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Championship Victory",
+            "speech": "Our clever bicycle gear mechanism successfully returned every single volley, proving that mechanical ingenuity easily defeats mere expensive tradition.",
+            "visual": "ship",
+            "label": "Trophy Presentation",
             "story_beat": "payoff",
-            "visual_prompt": "Bulldog defenders sliding comically on their backs in a sudden gush of water while Milo and Coach Kip cheer victoriously by the wooden goalposts, holding a glittering silver community shield.",
+            "visual_prompt": "Milo and his cheering teammates holding a silver trophy on the rooftop court while Captain Vance looks on in absolute astonishment.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A drainage failure on the community pitch threatens to hand the seasonal trophy to the heavy-footed Bulldogs.",
-        "decisive_choice": "Building a hidden gravity funnel under the turf to channel standing water directly into the rival's primary running lane.",
-        "resolution": "The Bulldogs slip out of contention while the clever underdogs glide past to claim the community shield.",
+        "central_conflict": "The neighborhood squash clubs compete for the community center trophy using mismatched athletic equipment.",
+        "decisive_choice": "Milo chooses to dismantle his delivery bicycle to construct a mechanical squash ball launcher.",
+        "resolution": "The ingenious bicycle-gear launcher accurately returns every shot, securing a decisive community victory.",
         "visual_bible": {
-          "style": "Bright, high-contrast animated sports comedy with vivid turf textures and expressive character designs.",
+          "style": "Animated graphic novel style with vibrant saturated colors and distinct mechanical outlines.",
           "characters": {
-            "Coach Kip": "A stocky middle-aged coach with a thick gray mustache, wearing a faded green windbreaker and mud-stained trousers.",
-            "Milo": "A resourceful twelve-year-old inventor with messy red hair, oversized safety goggles pushed up on his forehead, and a utility belt."
+            "Milo": "A determined teenager with messy brown hair, wearing a grease-stained gray hoodie and protective safety goggles.",
+            "Captain Vance": "An arrogant rival captain with slicked-back blond hair, wearing a spotless white athletic vest and blue shorts."
           },
           "locations": {
-            "community_pitch": "A slightly unkempt neighborhood soccer field surrounded by chain-link fences and tall oak trees under an overcast sky."
+            "Rooftop Court": "A sunlit concrete sports court perched high above the city, enclosed by a chain-link fence.",
+            "Workshop Garage": "A cramped basement filled with stacked bicycle tires, metal shelving, and scattered tools."
           },
           "objects": {
-            "brass_lever": "A heavy, tarnished brass valve handle mounted on a concrete block near the team bench.",
-            "utility_wrench": "A heavy silver metal wrench with blue rubber grips.",
-            "community_shield": "A polished silver plaque mounted on an ornate dark wood backing."
+            "Bicycle Gear Launcher": "A complex contraption made of rusted bicycle chains, metal pedals, and a powerful steel tension spring.",
+            "Golden Squash Racket": "An excessively ornate, heavy brass racket engraved with ornate family crests along the handle."
           }
         },
-        "plot_fingerprint": "0e784fc25cd87b851cb9a5c44524cbbd1eab1007af1aae5797b452d3b6668339"
+        "plot_fingerprint": "0004918c128a4d9ba5a66563c9bc6fcecd775aaef5be2a70ce54364276938381"
       },
       "approved": false
     }
