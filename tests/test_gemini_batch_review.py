@@ -45,6 +45,12 @@ class ReviewBatchTests(unittest.TestCase):
                         "imageio-ffmpeg==0.6.0", "numpy==2.2.6"):
             self.assertIn(package, dependencies)
         self.assertIn("ASTRA_UNIFIED_STORY_ENGINE: '1'", preload)
+        restore = preload.split("      - name: Restore published and reserved IDs", 1)[1].split(
+            "      - name:", 1)[0]
+        self.assertIn("for f in ai-reviewed-stories.json ai-reviewed-decisions.json", restore)
+        self.assertIn('git show "origin/astra-state:$f" > "runtime-health/$f"', restore)
+        self.assertIn("Incomplete persistent editorial approval pair", restore)
+        self.assertIn("exit 1", restore)
         review_step = gemini.split("      - name: Independently review generated proposals", 1)[1].split(
             "      - name: Persist approved batch to shared ASTRA state", 1)[0]
         self.assertIn("ASTRA_UNIFIED_STORY_ENGINE: '1'", review_step)
