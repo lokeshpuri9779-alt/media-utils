@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "1d299233b301bcebd2bb08bb",
-      "source_sha256": "184bbd9a73fd825b574bfe72457b63689a85414cf0239440282a6c860b3155d6",
+      "candidate_id": "5030e64680d8d8f6dfffdad0",
+      "source_sha256": "9f59a3d78dcbefdbadfad185c007e3c45d91cadd0ec6b181b06851f24ad4b700",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-ac22accfd5c1a9e72aef",
-        "title": "The Great Turnip Telegraph Fiasco",
-        "hook": "The Noisy Launch",
-        "question": "Can an inventor automate a vegetable market with noisy root crops?",
-        "answer": "He realizes market gossip travels faster than any automated pulley.",
+        "content_id": "rayvan-gemini-364741655cb99b5816dc",
+        "title": "The Great Tomato Launch Fiasco",
+        "hook": "The Catastrophic Test",
+        "question": "Can an over-engineered pneumatic produce dispenser survive market day?",
+        "answer": "Yes, by finally prioritizing crowd aiming over aerial velocity.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,80 +29,78 @@
         ],
         "story_beats": [
           {
-            "headline": "The Noisy Launch",
-            "speech": "Behold the automated turnip launcher, designed to hurl your favorite root vegetables directly into waiting stalls without any human error!",
+            "headline": "The Catastrophic Test",
+            "speech": "Behold my masterpiece of engineering, the turbo tomato tosser, guaranteed to deliver fresh produce instantly across the bustling marketplace!",
             "visual": "robot",
-            "label": "Launch",
+            "label": "First Prototype",
             "story_beat": "reveal",
-            "visual_prompt": "An inventor in a tweed vest pulls a lever next to a brass mechanical arm, launching a heavy purple turnip across a bustling open-air market while bewildered fruit sellers duck.",
+            "visual_prompt": "Barnaby stands proudly next to a sputtering mechanical contraption in a crowded market stall, holding a wrench while shoppers duck.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Cabbage Jam",
-            "speech": "Watch closely as the sorting cogs grip each stubborn vegetable, though they might occasionally mistake a squash for a potato.",
+            "headline": "Ramping Up Pressure",
+            "speech": "The pressure gauges are climbing dangerously high, but we simply cannot afford to stop this glorious public demonstration now!",
             "visual": "signal",
-            "label": "Sorting",
-            "story_beat": "mechanism",
-            "visual_prompt": "The inventor frantically adjusts a spinning wooden dial while heavy brass gears grind together, spitting out dozens of angry red turnips onto the muddy cobblestone path.",
+            "label": "System Overload",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby frantically twists a brass valve on the smoking machine as blinking warning lights flash red in the bustling bazaar.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Flying Produce",
-            "speech": "Do not panic when the velocity regulator engages, because speed is simply the friendly companion of fresh market delivery efficiency today!",
-            "visual": "ship",
-            "label": "Velocity",
-            "story_beat": "twist",
-            "visual_prompt": "A massive wooden catapult arm swings wildly across the crowded spice stalls, sending a basket of bruised parsnips flying directly into the town mayor's fancy hat.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Honest Shout",
-            "speech": "Perhaps shouting our daily prices loudly across the sunny square is significantly more reliable than complex mechanical gears and levers.",
+            "headline": "The Mayor Incident",
+            "speech": "Duck your heads and hold onto your hats because the crimson missile is locked directly onto the unsuspecting town mayor!",
             "visual": "door",
-            "label": "Bargain",
+            "label": "Direct Fire",
+            "story_beat": "twist",
+            "visual_prompt": "Barnaby gasps in sheer horror as a giant ripe tomato launches through the open doorway of a nearby bakery toward the mayor.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Sweet Redemption",
+            "speech": "Taste the delicious fruits of accidental innovation, perfectly seasoned and served piping hot straight from our heated launch chamber!",
+            "visual": "ship",
+            "label": "Soup Delivery",
             "story_beat": "payoff",
-            "visual_prompt": "The tired inventor sits on an upturned wooden crate outside his workshop door, smiling broadly while happily waving a single unlaunched turnip at a laughing customer.",
+            "visual_prompt": "Barnaby and smiling market patrons hold out bowls catching a gentle rain of warm soup from the modified launcher hovering overhead.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Root vegetable delivery pulley system jams up the central square.",
-        "decisive_choice": "Abandoning the brass mechanism to shout prices directly.",
-        "resolution": "Traders return to friendly face-to-face bargaining.",
+        "central_conflict": "A malfunctioning vegetable launcher bombarding shoppers at the farmers market.",
+        "decisive_choice": "Calibrating the pressure valve to target the compost bin instead of the town mayor.",
+        "resolution": "A perfectly cooked tomato soup rains down safely into bowls for everyone.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion puppet animation aesthetic with tactile textures, warm morning lighting, and whimsical mechanical details.",
+          "style": "Bright, colorful stop-motion claymation style with exaggerated character expressions and charming, rustic props.",
           "characters": {
-            "inventor": "A cheerful middle-aged man with unruly brown hair, large round spectacles, a tweed vest covered in chalk dust, and rolled-up sleeves.",
-            "mayor": "A pompous official wearing an oversized feathered top hat, a stiff blue velvet coat, and carrying a golden pocket watch."
+            "Barnaby": "An eccentric inventor with wild gray hair, wearing a patched tweed vest, oversized goggles on his forehead, and carrying a grease-stained canvas tool belt."
           },
           "locations": {
-            "market_square": "A vibrant cobblestone village square packed with colorful striped canvas awnings, wooden crates, and hanging vegetable scales."
+            "Market Square": "A lively open-air town marketplace filled with wooden fruit crates, colorful striped awnings, cobblestone pathways, and bustling townspeople."
           },
           "objects": {
-            "brass_launcher": "A complex contraption of polished brass pipes, leather straps, large wooden gears, and a spring-loaded wooden throwing spoon.",
-            "purple_turnip": "An oversized, dusty purple root vegetable with thick green leafy stems protruding from the top."
+            "TomatoLauncher": "A towering contraption made of gleaming copper pipes, ticking analog gauges, smoking exhaust vents, and a large metal hopper filled with heirloom tomatoes."
           }
         },
-        "plot_fingerprint": "319b0200ba99f5dfc2e798c90b72e58d76e9ed9a1dbeda2b93b404429260a35a"
+        "plot_fingerprint": "e98152541ce16f11e6feaad45d3a38e62fa414b4fe2a80bc09738f4ca42e6217"
       },
       "approved": false
     },
     {
-      "candidate_id": "36511109c485a379236ee83f",
-      "source_sha256": "ceb35920f25962a51eb88f31bf03232f28cc5b322d922e3232d86be449249e6d",
+      "candidate_id": "7eb9e33b6645aaa2327c49ac",
+      "source_sha256": "ef9cfc630c22ef428f0a8e5aa73d5c236181ed9d047a8789f5fc0ffff1e72217",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-1fc4c8e23149615256be",
-        "title": "The Last Ridge Beacon",
-        "hook": "The Silent Signal",
-        "question": "Can a stranded climber bypass a dying automated relay to warn the valley?",
-        "answer": "Yes, by manually routing the radio frequency through an old avalanche geophone.",
+        "content_id": "rayvan-gemini-d8e7f6dde37af6839892",
+        "title": "The Midnight Express Misplacement",
+        "hook": "The Disappearance",
+        "question": "Where did the missing antique pocket watch vanish before the final train departure?",
+        "answer": "A clever stray terrier swallowed the ticking heirloom when it rolled beneath the platform bench.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -110,81 +108,80 @@
         ],
         "story_beats": [
           {
-            "headline": "The Silent Signal",
-            "speech": "The main transmitter is completely dead, and the storm is moving in much faster than we anticipated.",
+            "headline": "The Disappearance",
+            "speech": "Attention passengers, my grandfather's golden heirloom watch has vanished right off the mahogany ticket counter!",
             "visual": "signal",
-            "label": "Beacon Failure",
+            "label": "Missing Heirloom",
             "story_beat": "reveal",
-            "visual_prompt": "Climber Elena kneeling inside a rocky alpine alcove, holding a sparking radio unit with a grim expression, illuminated by red emergency warning lights.",
+            "visual_prompt": "Stationmaster Thomas stands distraught at the ticket counter in the grand Victorian station, holding an empty brass chain while the station signal blinks red outside.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Constructing the Link",
-            "speech": "We need to strip the copper wiring from the backup battery and connect it directly to the ground sensor.",
+            "headline": "The Unexpected Witness",
+            "speech": "Look at Barnaby wagging his tail by the iron bench, acting extremely suspicious after chewing something shiny.",
             "visual": "robot",
-            "label": "Reworking Hardware",
+            "label": "Clever Terrier",
             "story_beat": "build",
-            "visual_prompt": "Climber Elena using metal pliers to strip insulation from a thick wire, working intently inside a cold stone shelter with frost coating her red jacket.",
+            "visual_prompt": "A fluffy tan terrier named Barnaby sits near an ornate iron bench inside the bustling station, wearing a red leather collar and tilting its head curiously.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Final Frequency",
-            "speech": "Hold the manual crank steady while I tune the seismic dial to match the emergency broadcast frequency.",
+            "headline": "The Discovery",
+            "speech": "Listen closely to the gentle rhythmic ticking coming directly from inside this adorable little dog's fluffy stomach.",
             "visual": "door",
-            "label": "Manual Override",
+            "label": "Ticking Tummy",
             "story_beat": "mechanism",
-            "visual_prompt": "Climber Elena turning a heavy metal dial on a rusted wall-mounted seismic hatch, her breath pluming in the freezing air while snow whips past the open doorway.",
+            "visual_prompt": "Stationmaster Thomas kneels down beside the wooden luggage doors, pressing his ear gently against the terrier's soft belly to hear the muffled ticking sound.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Valley Responds",
-            "speech": "Look at the indicator light turning solid green. They heard our signal, and the rescue chopper is launching now.",
-            "visual": "forest",
-            "label": "Successful Rescue",
+            "headline": "The Safe Return",
+            "speech": "Good boy Barnaby, you saved the day by returning our precious family timepiece just before departure time!",
+            "visual": "ship",
+            "label": "Timepiece Recovered",
             "story_beat": "payoff",
-            "visual_prompt": "Climber Elena smiling with relief as a bright green indicator lamp glows on the makeshift control box, looking out toward the distant valley pine forest.",
+            "visual_prompt": "Thomas proudly holds up the recovered golden pocket watch next to the steam train boarding gate, while Barnaby happily receives a dog biscuit reward.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A broken transmitter leaves a trapped hiker unable to call down before an impending ice slide.",
-        "decisive_choice": "Splicing the core radio wire into the seismic sensor cable.",
-        "resolution": "The signal successfully triggers the valley rescue klaxon just as the ridge collapses.",
+        "central_conflict": "A priceless pocket watch disappears on Platform 4 minutes before the midnight train departs.",
+        "decisive_choice": "The frantic stationmaster examines the terrier instead of searching the empty luggage carts.",
+        "resolution": "The ticking heirloom is safely recovered from the clever pup, ensuring the train leaves on time.",
         "visual_bible": {
-          "style": "Realistic gritty survival drama with crisp mountain lighting and deep snow textures",
+          "style": "Cinematic warm vintage animation with rich mahogany tones and detailed Victorian architecture.",
           "characters": {
-            "Elena": "A determined female mountain rescue specialist in her thirties with a weathered face, dirt smudges on her cheeks, wearing a heavy insulated red parka and waterproof climbing trousers."
+            "Thomas": "An elderly stationmaster with a bushy grey mustache, round spectacles, a navy blue wool uniform, and a gold pocket watch chain.",
+            "Barnaby": "A plump, energetic tan terrier with floppy ears, expressive brown eyes, and a bright red leather collar."
           },
           "locations": {
-            "alpine_alcove": "A narrow stone shelter carved into a steep granite cliff, filled with frost, loose shale, and emergency equipment.",
-            "valley_edge": "A sweeping mountain pass overlooking dense pine forests and distant snowy peaks under an overcast sky."
+            "Station": "Grand Victorian railway station featuring arched iron ceilings, dark mahogany ticket counters, and cobblestone platforms."
           },
           "objects": {
-            "radio_unit": "A heavy, military-grade green transceiver with a cracked glass display and a bent antenna.",
-            "seismic_hatch": "A round industrial steel door with a mechanical wheel lock and rusted hinges.",
-            "copper_wire": "A bright orange-insulated electrical cable stripped at both ends to reveal shiny copper strands."
+            "pocket_watch": "An antique solid gold pocket watch engraved with intricate floral patterns and fitted with a sturdy brass chain.",
+            "ticket_counter": "A polished dark mahogany counter cluttered with paper timetables, brass bell, and brass lanterns."
           }
         },
-        "plot_fingerprint": "17c6132f95aed28d258642b518b225603682922217f1a31635f7aa2eb519be22"
+        "plot_fingerprint": "7aeada2258751bd6509fe787f5dcf7a0b412c91b70e6ed858305ab165bb697c0"
       },
       "approved": false
     },
     {
-      "candidate_id": "ccd81a39fde7d3135f067129",
-      "source_sha256": "00a76e89f9a099b50028b7c34076a3755096e65c40e7766586100cedac12905a",
+      "candidate_id": "d465a8fe85989d978baf64da",
+      "source_sha256": "5725fa5c1bf929e087b496a8d2f3be6c08e2e63e1ee6ab205ddd7d3e145fdd57",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-946bd1401521c16f76ea",
-        "title": "The Salty Gearbox Regatta",
-        "hook": "Dockside Inspection",
-        "question": "Can a rusted paddlewheel drive a craft across the harbour?",
-        "answer": "Yes, by locking the differential to the primary salt-mill axle.",
+        "content_id": "rayvan-gemini-f3a98dce38ed5b9c9b16",
+        "title": "The Singing Dunes of Oakhaven",
+        "hook": "A Desert Discovery",
+        "question": "What is causing the strange acoustic vibrations deep within the arid salt flats?",
+        "answer": "A massive subterranean cavern filled with wind-activated crystalline chimes.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -192,65 +189,65 @@
         ],
         "story_beats": [
           {
-            "headline": "Dockside Inspection",
-            "speech": "Look at this rusted gear box! If we cannot clear the seaweed jam by noon, our entire race is ruined.",
-            "visual": "ship",
-            "label": "Engine Check",
-            "story_beat": "reveal",
-            "visual_prompt": "A tall engineer with curly brown hair wearing a blue canvas apron points a copper wrench at a rusted paddle-wheel boat moored at the wooden pier while holding a greasy clipboard.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Emergency Assembly",
-            "speech": "We must mount the spare bronze turbine right now before the tide turns completely against our harbour dock.",
-            "visual": "robot",
-            "label": "Gear Assembly",
-            "story_beat": "build",
-            "visual_prompt": "The engineer and a stout assistant in striped trousers lift a heavy bronze turbine onto the deck of the wooden ship while holding leather-gloved hands firmly against the iron casing.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Linkage Crisis",
-            "speech": "The primary steering cable just snapped under the immense strain of the surging waves and incoming tide.",
+            "headline": "A Desert Discovery",
+            "speech": "Look at these seismic wave readings on the tracker. The vibrations are originating from beneath this dead riverbed.",
             "visual": "signal",
-            "label": "Cable Break",
-            "story_beat": "twist",
-            "visual_prompt": "The assistant waves a red warning flag wildly on the rocking wooden ship deck while the engineer frantically ties a knotted hemp rope around the thrashing steering arm.",
+            "label": "The Anomaly",
+            "story_beat": "reveal",
+            "visual_prompt": "Dr. Clara wearing tan expedition gear holding a glowing handheld digital scanner, standing on cracked desert salt flats under a scorching sun, looking shocked at a spiking green digital signal.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Victory Surge",
-            "speech": "We successfully chained the rudder lock! Watch our paddle-wheel catch the current and cross the finish line.",
+            "headline": "Descent into Darkness",
+            "speech": "We must secure the descent winch quickly before the midday thermal winds trigger a full surface sand collapse.",
+            "visual": "door",
+            "label": "The Chasm",
+            "story_beat": "build",
+            "visual_prompt": "Dr. Clara wearing a heavy canvas pack, operating a steel hand-cranked winch mounted near a dark, gaping sinkhole in the desert floor, surrounded by blowing dust.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Hidden Oasis",
+            "speech": "These towering mineral formations are vibrating in harmony with the surface winds to create a profound chord.",
             "visual": "forest",
-            "label": "Finish Line",
+            "label": "Crystal Grove",
+            "story_beat": "mechanism",
+            "visual_prompt": "Dr. Clara standing inside a massive underground cavern, holding a high-beam flashlight upward to illuminate towering, translucent amber crystal pillars shaped like petrified trees.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A Timeless Melody",
+            "speech": "This subterranean archive proves this arid wasteland was once a roaring inland sea filled with singing life.",
+            "visual": "planet",
+            "label": "Echoes of the Past",
             "story_beat": "payoff",
-            "visual_prompt": "The engineer and assistant cheer triumphantly on the moving wooden ship deck, holding a raised brass trophy aloft while passing green pine-forested headlands under a bright noon sun.",
+            "visual_prompt": "Dr. Clara kneeling gently on the cavern floor, holding a small brass tuning fork near a glowing blue crystal cluster while soft melodic light ripples across the cave walls.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A stuck steering linkage during the annual coastal craft race.",
-        "decisive_choice": "Welding the spare anchor chain directly to the rudder quadrant.",
-        "resolution": "The paddle-craft steers safely across the finish line to win the trophy.",
+        "central_conflict": "Navigating a collapsing dune tunnel to reach an undocumented underground acoustic phenomenon.",
+        "decisive_choice": "Risking a final structural cave-in by anchoring the resonance meter to the central chime pillar.",
+        "resolution": "Mapping a miraculous subterranean musical ecosystem that proves the desert was once a lush inland sea.",
         "visual_bible": {
-          "style": "Bright, textured coastal stop-motion animation aesthetic with detailed mechanical components and maritime textures.",
+          "style": "Cinematic realism with warm golden hour lighting and rich desert earth tones.",
           "characters": {
-            "engineer": "A tall woman with curly brown hair, wearing a practical blue canvas apron over a wool sweater, sporting smudge marks of grease on her cheek.",
-            "assistant": "A stout man with a ginger beard, wearing striped trousers and a heavy canvas cap."
+            "Dr. Clara": "A determined geologist in her early forties with wind-weathered skin, practical tied-back brown hair, wearing a worn tan canvas utility jacket and cargo trousers."
           },
           "locations": {
-            "harbour": "A bustling coastal seaside festival dock made of weathered wooden planks with colourful bunting flying overhead."
+            "Salt Flats": "An endless expanse of cracked, pale white earth under a blinding sun.",
+            "Subterranean Cavern": "A vast, damp underground space filled with glowing amber and blue mineral pillars."
           },
           "objects": {
-            "wrench": "A heavy, tarnished 12-inch copper wrench with etched grip lines.",
-            "turbine": "A gleaming multi-bladed bronze turbine with interlocking gear teeth.",
-            "trophy": "A polished brass cup mounted on a piece of polished driftwood."
+            "scanner": "A rugged handheld aluminum device with a vibrant green LED waveform screen.",
+            "winch": "A heavy-duty steel hand-cranked mechanical winch bolted to weathered wooden stakes.",
+            "tuning fork": "A polished brass acoustic instrument that resonates when struck against mineral surfaces."
           }
         },
-        "plot_fingerprint": "1df2a9dd42f6723dc17e2d50ed09cb8b8f3aafc7b76cfd3e03696b3e25aef878"
+        "plot_fingerprint": "42ecf4e9cc95ffadd69fde04e91d16745d93c104eb630202fc0471bac3da1519"
       },
       "approved": false
     }
