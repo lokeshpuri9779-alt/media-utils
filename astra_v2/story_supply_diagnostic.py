@@ -27,7 +27,7 @@ def diagnose(publisher_path="astra_v2_state.json",
     approved = approved_authored_candidates(candidates)
     ready = len(approved)
     return {
-        "status": "supply_exhausted" if ready == 0 else "approved_candidates_present",
+        # Only post-history, post-editorial candidates can replenish production.\n        # A nonzero pre-history pool may already be exhausted by published plots.\n        "status": ("supply_exhausted" if result["eligible_after_history_and_editorial"] == 0\n                   else "approved_candidates_present"),
         "approved_production_candidates_before_history": ready,
         "structurally_eligible_not_necessarily_approved": result["eligible_after_history_and_editorial"],
         "latest_production_outcome": production.get("outcome", ""),
