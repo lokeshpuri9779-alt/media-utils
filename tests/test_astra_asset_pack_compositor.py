@@ -16,6 +16,28 @@ class AssetPackCompositorTests(unittest.TestCase):
             self.assertEqual(decision["scene"], "forest")
             self.assertEqual(decision["source_field"], field)
 
+    def test_space_station_narration_does_not_select_railway_art(self):
+        # Both published ISS videos used railway backdrops when speech said
+        # "station" even though the story was about orbital flight.
+        decision = analyze_story_scene({
+            "speech": "The station circles Earth every ninety minutes.",
+            "story_title": "ISS Orbital Speed",
+        })
+        self.assertEqual(decision["scene"], "space")
+        self.assertEqual(decision["source_field"], "story_title")
+        self.assertEqual(decision["matched_term"], "iss")
+
+        space = analyze_story_scene({"speech": "The International Space Station orbits Earth."})
+        self.assertEqual(space["scene"], "space")
+
+    def test_rail_station_keeps_railway_and_ambiguous_station_stays_unresolved(self):
+        for speech in ("The train station was crowded.", "A railway station opened."):
+            with self.subTest(speech=speech):
+                self.assertEqual(analyze_story_scene({"speech": speech})["scene"], "railway")
+        ambiguous = analyze_story_scene({"speech": "The station clock was broken."})
+        self.assertIsNone(ambiguous["scene"])
+        self.assertTrue(ambiguous["needs_background"])
+
     def test_unknown_context_does_not_force_unrelated_art(self):
         decision = analyze_story_scene({"setting": "An unspecified place",
                                         "speech": "The otter found three rocks."})
