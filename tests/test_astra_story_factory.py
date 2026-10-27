@@ -111,7 +111,7 @@ class StoryFactoryTests(unittest.TestCase):
 
     def test_fresh_authored_mechanisms_are_distinct_and_review_only(self):
         from astra_v2.story_factory_fresh_premises import FRESH_MECHANISMS
-        self.assertEqual(len(FRESH_MECHANISMS),24)
+        self.assertEqual(len(FRESH_MECHANISMS),32)
         self.assertEqual(len({m[0] for m in MECHANISMS}),len(MECHANISMS))
         self.assertTrue(all(len(m)==6 and all(isinstance(x,str) and len(x)>7 for x in m)
                             for m in FRESH_MECHANISMS))
