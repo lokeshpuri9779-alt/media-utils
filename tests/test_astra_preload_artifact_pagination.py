@@ -20,6 +20,44 @@ class QueueDiscoveryTests(unittest.TestCase):
 
     @patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/repo"})
     @patch.object(preload_queue, "_api")
+    def test_later_page_api_failure_keeps_prior_untrusted_metadata_only(self, api):
+        import io
+        import json
+        import subprocess
+        from contextlib import redirect_stdout
+
+        first = [{"id": 1, "name": "astra-preloaded-verified-later",
+                  "expired": False, "created_at": "2026-10-27T14:00:00Z",
+                  "workflow_run": {"head_branch": "main", "id": 1001}}]
+        first.extend({"id": i + 2, "name": "unrelated-" + str(i)}
+                     for i in range(99))
+        api.side_effect = [
+            {"artifacts": first},
+            subprocess.CalledProcessError(1, ["gh", "api", "private"]),
+        ]
+        with redirect_stdout(io.StringIO()) as output:
+            result = preload_queue.artifacts()
+        self.assertEqual([item["name"] for item in result],
+                         ["astra-preloaded-verified-later"])
+        self.assertEqual(api.call_count, 2)
+        self.assertIn("ASTRA_ARTIFACT_DISCOVERY_INCOMPLETE=", output.getvalue())
+        self.assertNotIn("private", output.getvalue())
+        summary = next(line.split("=", 1)[1] for line in output.getvalue().splitlines()
+                       if line.startswith("ASTRA_ARTIFACT_DISCOVERY="))
+        self.assertEqual(json.loads(summary)["pages_scanned"], 1)
+        self.assertFalse(json.loads(summary)["complete"])
+
+    @patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/repo"})
+    @patch.object(preload_queue, "_api")
+    def test_first_page_api_failure_remains_fail_closed(self, api):
+        import subprocess
+        api.side_effect = subprocess.CalledProcessError(1, ["gh", "api", "private"])
+        with self.assertRaises(subprocess.CalledProcessError):
+            preload_queue.artifacts()
+        api.assert_called_once()
+
+    @patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/repo"})
+    @patch.object(preload_queue, "_api")
     def test_malformed_workflow_metadata_does_not_block_valid_artifacts(self, api):
         api.return_value = {"artifacts": [
             {"name": "astra-preloaded-malformed", "expired": False,
