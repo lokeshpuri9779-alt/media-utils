@@ -5841,6 +5841,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-original-rainclock-v1",
+      "video_id": "dyCjXzAV7hs",
+      "confirmed_at": "2026-10-27T09:18:41.438550+00:00",
+      "title": "The Clock That Borrowed Rain",
+      "plot_fingerprint": "57c1692af65cb5df45b4a18fcd23d41062036324ad50db4409e5b494f1f6ea26",
+      "story_beats": [
+        {
+          "headline": "THE DRY STORM",
+          "speech": "Clouds gathered over the town, but not a single drop reached the streets.",
+          "visual": "planet",
+          "visual_intent": "Clouds gathered over the town, but not a single drop reached the streets.",
+          "label": "NO RAIN",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "reveal",
+          "duration": 2.1
+        },
+        {
+          "headline": "WATER IN THE GEARS",
+          "speech": "The clockmaker heard tiny splashes inside the clock whenever its hands moved.",
+          "visual": "clock",
+          "visual_intent": "The clockmaker heard tiny splashes inside the clock whenever its hands moved.",
+          "label": "HIDDEN WATER",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "build",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE LAST TURN",
+          "speech": "She opened the gears and found a reservoir filling while the fields cracked.",
+          "visual": "door",
+          "visual_intent": "She opened the gears and found a reservoir filling while the fields cracked.",
+          "label": "DROUGHT REVEALED",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "twist",
+          "duration": 2.1
+        },
+        {
+          "headline": "RAIN FOR EVERYONE",
+          "speech": "She reset the clock to release the stored rain across the thirsty valley.",
+          "visual": "forest",
+          "visual_intent": "She reset the clock to release the stored rain across the thirsty valley.",
+          "label": "RAIN RETURNS",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "payoff",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
