@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "3c1748b6386a5a8d27b9a19f",
-      "source_sha256": "bf92e76d19aa258fb594fe4254c74545ca99d3b415540b1fb4faf8453d83ab54",
+      "candidate_id": "7f7206c0d1a367ff53d6ffbe",
+      "source_sha256": "15193f0c92290e89901b5f026d873f1ad4e82691c417a1cef7df26cbc46cdd0d",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-1a3a74704fbd0c2e40d5",
-        "title": "The Great Turnip Flap",
-        "hook": "The Initial Ignition",
-        "question": "Can an automated turnip peeler survive the city market?",
-        "answer": "Only if it learns to dodge angry vendors.",
+        "content_id": "rayvan-gemini-641defb4b1dc7deb496c",
+        "title": "The Great Turnip Whistle Debacle",
+        "hook": "A Sour Start",
+        "question": "Can an inventor save her failing vegetable stall by automating it with turnips?",
+        "answer": "Yes, by inventing a root-vegetable sorting contraption that accidentally plays folk tunes.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,78 +29,78 @@
         ],
         "story_beats": [
           {
-            "headline": "The Initial Ignition",
-            "speech": "Behold the brass potato slicer, crafted with absolute precision to peel a thousand turnips in mere seconds!",
+            "headline": "A Sour Start",
+            "speech": "My prized purple turnips are sitting here completely unappreciated by anyone in this miserable, noisy marketplace.",
             "visual": "robot",
-            "label": "Activation",
+            "label": "Turnip Stand",
             "story_beat": "reveal",
-            "visual_prompt": "Arthur stands in a busy market square activating a noisy brass robot while terrified vendors watch.",
+            "visual_prompt": "Barnaby stands behind a wooden market stall in a busy town square, looking glumly at a pile of large purple turnips while holding a wrench.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Mechanical Mayhem",
-            "speech": "Stop the spinning blades right now! It is launching raw root vegetables directly at my finest cabbages!",
-            "visual": "ship",
-            "label": "Escalation",
-            "story_beat": "build",
-            "visual_prompt": "The brass robot spins wildly on a market cart, firing raw turnips across the crowded street.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Emergency Recalibration",
-            "speech": "I must swap the internal gears instantly before the entire vegetable district is flattened by flying produce.",
+            "headline": "Mechanical Tuning",
+            "speech": "If I link these hollow rutabagas to the steam kettle, we might actually generate a catchy rhythm.",
             "visual": "signal",
-            "label": "Adjustment",
-            "story_beat": "mechanism",
-            "visual_prompt": "Arthur frantically adjusts glowing dials on the side of the robot while dodging a flying carrot.",
+            "label": "Steam Contraption",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby frantically wires copper tubing and hollowed-out root vegetables to a steaming brass kettle atop the wooden table.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Sweet Success",
-            "speech": "Look at the marvelous melon slices! Our mechanical terror is now the finest dessert vendor in town.",
+            "headline": "The Loud Melody",
+            "speech": "Look at them dance to the screeching vegetables! The steam pressure is hitting the high notes perfectly now.",
             "visual": "door",
-            "label": "Resolution",
+            "label": "Market Crowd",
+            "story_beat": "mechanism",
+            "visual_prompt": "Confused market shoppers in medieval hats dance around the stall as jets of steam shoot out of giant turnips, holding their ears.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Root Success",
+            "speech": "We sold every single vegetable in ten minutes flat, and all it cost was my neighbor's sanity.",
+            "visual": "ship",
+            "label": "Sold Out",
             "story_beat": "payoff",
-            "visual_prompt": "Happy market customers line up to buy perfectly sliced melons from the newly tamed brass machine.",
+            "visual_prompt": "Barnaby counts heavy coin purses triumphantly atop an empty table while his smoking vegetable contraption plays a cheerful whistle.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A malfunctioning vegetable peeling contraption terrifies the market stalls.",
-        "decisive_choice": "Arthur programs the machine to peel fruit instead of root vegetables.",
-        "resolution": "The invention becomes the hit of the morning fruit salad festival.",
+        "central_conflict": "Barnaby wants to sell his oversized turnips before they rot, but customers demand musical entertainment.",
+        "decisive_choice": "Barnaby attaches panpipes to his steam-powered turnip peeler to entertain the crowd.",
+        "resolution": "The noisy turnip machine becomes the most popular attraction in the noisy market.",
         "visual_bible": {
-          "style": "Bright comedic animation style with vibrant colors and expressive character movements",
+          "style": "Slapstick stop-motion animation aesthetic with warm earthy tones, wooden textures, and whimsical brass accents.",
           "characters": {
-            "Arthur": "A frantic inventor with wild hair, wearing a soot-stained apron and oversized goggles."
+            "Barnaby": "An eccentric inventor with wild gray hair, a stained green apron, round spectacles, and a perpetually hopeful grin."
           },
           "locations": {
-            "Market Square": "A bustling outdoor bazaar filled with colorful awnings, wooden carts, and hanging lanterns."
+            "Market Square": "A bustling cobblestone medieval plaza filled with wooden stalls, colorful awnings, and curious townsfolk."
           },
           "objects": {
-            "Brass Robot": "A quirky mechanical contraption made of polished brass, featuring multiple spinning arms and a glowing red dial."
+            "Turnip Cannon": "A contraption made of polished brass pipes, copper funnels, and hollowed-out purple root vegetables."
           }
         },
-        "plot_fingerprint": "1b04adf818532bf783c659558e4e9a31db2bd035ef8e9d2df0af0adb934425c9"
+        "plot_fingerprint": "6fd4d74dcd8889bd70615b99c466fd6851ec10cf52ae2b13e3da094553ca7097"
       },
       "approved": false
     },
     {
-      "candidate_id": "6892c1708e211f6b3a14939b",
-      "source_sha256": "6b0e8bd355f5aa3f7ec7f1d46231bdc78c26aa5a839fa3563f17b549e2303937",
+      "candidate_id": "b0461b5c3128162100864ba5",
+      "source_sha256": "8bd2dfdba1d219124dadd7a3d8ea8c0ca6f3496e774332f5a9f24f9771943c0e",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-9f59cd5f61e5ef772270",
-        "title": "The Muddy Pitch Playbook",
-        "hook": "The Flooded Field",
-        "question": "How can the underdog neighborhood soccer team win the championship on a ruined waterlogged field?",
-        "answer": "By building a complex system of underground sponge-drains that redirects the standing water into the community garden.",
+        "content_id": "rayvan-gemini-5775e6fa99af6e1d055b",
+        "title": "The Last Sledge Transmission",
+        "hook": "Thermal Overload Warning",
+        "question": "Can the engineering lead abandon her prototype drill to save her freezing team?",
+        "answer": "Yes, by sacrificing the device to anchor a lifeline, ensuring everyone survives the whiteout.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -108,80 +108,82 @@
         ],
         "story_beats": [
           {
-            "headline": "The Flooded Field",
-            "speech": "Look at this disaster! The championship is in three hours, and our home pitch is completely submerged under a lake of mud.",
+            "headline": "Thermal Overload Warning",
+            "speech": "The core is melting through the ice shelf, and the storm is tearing down our exterior communications mast.",
             "visual": "signal",
-            "label": "Storm Damage",
+            "label": "Beacon Failure",
             "story_beat": "reveal",
-            "visual_prompt": "Maya stands knee-deep in a flooded muddy soccer field holding a dripping red captain's armband, staring in disbelief at the rain-soaked goalposts under a dark overcast sky.",
+            "visual_prompt": "Dr. Elena Vance stands inside a glowing orange research tent, looking at a cracked monitor showing a blinking red signal beacon, holding a heavy wrench in her right hand.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Trench Network",
-            "speech": "We cannot play normally, so we will dig drainage trenches across the turf and channel the water straight into the vegetable garden.",
-            "visual": "forest",
-            "label": "Drainage Build",
+            "headline": "The Fracturing Shelf",
+            "speech": "We cannot haul both the prototype machinery and ourselves against these fifty-knot winds before the crevasse widens.",
+            "visual": "ship",
+            "label": "Transport Sledge",
             "story_beat": "build",
-            "visual_prompt": "Maya and her teammate Leo shovel mud rapidly in the rain, carving precise trenches across the soccer pitch while holding wooden drainage pipes and muddy shovels.",
+            "visual_prompt": "Engineer Marcus Thorne struggles to secure the metal transport sledge against the howling wind on the white snowfield, wearing a thick parka with his gloved hands gripping the tow rope.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Siphon Mechanism",
-            "speech": "Now we prime the heavy duty garden pumps to suck the standing water out through our underground pipe system before kickoff.",
+            "headline": "Severing the Lifeline",
+            "speech": "Cut the primary winch cable immediately. We use the heavy mount as our anchor or nobody makes it back.",
             "visual": "robot",
-            "label": "Pump System",
+            "label": "Automated Winch",
             "story_beat": "mechanism",
-            "visual_prompt": "Leo frantically operates a noisy gasoline-powered water pump connected to a network of corrugated black hoses that snake across the soggy grass.",
+            "visual_prompt": "Dr. Elena Vance lunges toward the sparking automated winch mechanism mounted on the snow tractor, using wire cutters held firmly in both hands to snip the steel cable.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Winning Goal",
-            "speech": "The field is firm enough! Let us execute our tactical passing game and take home the neighborhood championship trophy today.",
+            "headline": "Shelter in the Whiteout",
+            "speech": "Grab the tether line tightly. The anchor is holding firm against the gale, and the main station hatch is right ahead.",
             "visual": "door",
-            "label": "Final Victory",
+            "label": "Station Hatch",
             "story_beat": "payoff",
-            "visual_prompt": "Maya kicks a muddy leather soccer ball past the opposing goalkeeper into the net, celebrating wildly on a now-drained pitch while holding a shiny silver trophy.",
+            "visual_prompt": "Marcus Thorne and Dr. Elena Vance pull themselves hand-over-hand along a yellow safety rope toward a heavily insulated metal airlock door set into a snowy embankment.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A massive storm floods the community soccer pitch just hours before the championship match against the arrogant reigning champions.",
-        "decisive_choice": "Captain Maya decides to abandon traditional gameplay and instead uses the team's engineering skills to build an improvised drainage network.",
-        "resolution": "The pitch drains just in time, neutralizing the opponent's speed advantage and leading to a triumphant victory through smart team coordination.",
+        "central_conflict": "A sudden blizzard threatens the research team while the prototype drill's thermal core is destabilizing.",
+        "decisive_choice": "Dr. Vance chooses to sever the automated winch from the thermal core to use its heavy mount as a deadman anchor.",
+        "resolution": "The team safely secures their tether to the anchor and reaches shelter before the storm buries the outpost.",
         "visual_bible": {
-          "style": "Bright, energetic animated film aesthetic with vibrant colors, expressive character animations, and detailed muddy textures.",
+          "style": "Cinematic realism with a high-contrast winter palette of deep blues, stark whites, and piercing emergency orange lighting.",
           "characters": {
-            "Maya": "A teenage girl with curly dark hair tied back in a messy ponytail, wearing a faded blue soccer jersey with the number 10, muddy canvas cleats, and a determined facial expression.",
-            "Leo": "A tall teenage boy with short blonde hair, wearing a green goalkeeper jersey with grass stains, mud-splattered shorts, and heavy work gloves."
+            "Dr. Elena Vance": "A determined arctic researcher in her late forties with wind-roughened skin, wearing a heavy-duty weatherized red parka with reflective safety stripes.",
+            "Marcus Thorne": "A practical field engineer in his thirties with a thick dark beard dusted with frost, wearing a navy blue expedition suit with reinforced knee pads."
           },
           "locations": {
-            "Community Pitch": "A worn neighborhood soccer field surrounded by chain-link fences, old oak trees, and a wooden community garden shed."
+            "Snowfield Research Outpost": "A desolate expanse of blue-white glacial ice swept by swirling snow and dotted with modular silver research trailers."
           },
           "objects": {
-            "Soccer Ball": "A classic black-and-white leather soccer ball covered in splatters of mud and wet grass clippings.",
-            "Water Pump": "A heavy red portable gasoline-powered water pump with attached black corrugated drainage hoses."
+            "Heavy Wrench": "A massive 18-inch forged steel adjustable wrench with a worn rubber grip and frost crystals along the handle.",
+            "Transport Sledge": "A low-profile aluminum cargo sled fitted with high-density polyethylene runners and a tangled web of black nylon bungee cords.",
+            "Automated Winch": "An industrial motorized cable drum finished in safety yellow paint, featuring exposed copper relays and a flashing green status light.",
+            "Safety Rope": "A bright braided yellow polypropylene lifeline marked with reflective interwoven threads for night visibility."
           }
         },
-        "plot_fingerprint": "344bbc62fdc95c2073b5a4cf9f5d247139db730f949d6bc788523fadd1e74b01"
+        "plot_fingerprint": "cef25240ff19c2bc1d4dd5086adee3519c882db62c2fd7cd548d1634d7e627ad"
       },
       "approved": false
     },
     {
-      "candidate_id": "bd5c07a8d18eaa164a12d281",
-      "source_sha256": "5564b22e40af982719222e6a8181ed51b2c2c21b003c09deb4b2115d36da0407",
+      "candidate_id": "84156bc0b98deec18af53cbd",
+      "source_sha256": "3c0d85e64d2a81039a9b4e34f031de4359bfb025a4e5c3761e952d60b55c1081",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-31f855385ea6b7400e10",
-        "title": "The Frostbound Signal",
-        "hook": "Storm Warning",
-        "question": "Can the isolated meteorology team survive the sudden blizzard to save the stranded rover?",
-        "answer": "Yes, by utilizing the automated beacon to guide the rover back before power fails completely.",
+        "content_id": "rayvan-gemini-0db756440510e07bcd18",
+        "title": "The Titanium Core Replacement",
+        "hook": "Hull Breach Warning",
+        "question": "Should the crew purge the primary manifold or bypass the thruster banks during a hull breach?",
+        "answer": "They bypassed the thruster banks to vent pressure safely, sacrificing propulsion for crew survival.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -189,64 +191,65 @@
         ],
         "story_beats": [
           {
-            "headline": "Storm Warning",
-            "speech": "Sensors indicate an aggressive whiteout is descending rapidly upon our position, threatening the autonomous rover stationed outside.",
-            "visual": "signal",
-            "label": "Incoming Threat",
-            "story_beat": "reveal",
-            "visual_prompt": "Dr. Vance stands inside the glowing arctic research hub, pointing at a flickering amber console displaying a harsh weather wave, wearing a heavy orange parka and fleece hat.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "System Failure",
-            "speech": "We are losing telemetry fast as the icy winds interfere with the primary navigation frequencies of the surface vehicle.",
-            "visual": "robot",
-            "label": "Signal Lost",
-            "story_beat": "build",
-            "visual_prompt": "An autonomous tracked weather rover sits stranded outside in heavy swirling snow, its headlights dimming while thick frost covers its mechanical sensor array.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Daring Venture",
-            "speech": "I must step out into the freezing gales right now to manually deploy the secondary emergency booster beacon.",
-            "visual": "door",
-            "label": "Stepping Out",
-            "story_beat": "mechanism",
-            "visual_prompt": "Dr. Vance grips the heavy insulated steel handle of the airlock inner hatch, wearing reflective goggles and holding a glowing blue metal beacon rod.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Safe Return",
-            "speech": "The connection is fully restored and our rover has successfully navigated through the storm back to the shelter.",
+            "headline": "Hull Breach Warning",
+            "speech": "Warning sector four has lost structural integrity. We must purge the primary manifold right now before it explodes.",
             "visual": "ship",
-            "label": "Mission Success",
+            "label": "Breach Alert",
+            "story_beat": "reveal",
+            "visual_prompt": "Captain Vane standing inside the metallic bridge of the ship, pointing firmly at a glowing red bulkhead door with a severe expression, wearing a dark blue flight suit, while holding a heavy steel maintenance tablet.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Dissent",
+            "speech": "If we purge the manifold, we lose all forward steering permanently. We have to bypass the thruster banks instead.",
+            "visual": "robot",
+            "label": "Protocol Debate",
+            "story_beat": "build",
+            "visual_prompt": "Mechanic droid Unit Seven gesturing with metallic arms toward a holographic star chart inside the dimly lit engine room, sporting a yellow safety stripe across its polished chrome chassis, holding a diagnostic cable.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Critical Override",
+            "speech": "There is no time for hesitation. Disconnect the thruster feed immediately and accept the loss of our propulsion.",
+            "visual": "signal",
+            "label": "Manual Override",
+            "story_beat": "mechanism",
+            "visual_prompt": "Captain Vane pressing a large amber emergency button on the main console, bathed in harsh orange alarm lights, wearing a tense expression, holding a smoking circuit breaker in her left hand.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Safe Harbor",
+            "speech": "The pressure drop has stopped completely. We are drifting without engines, but everyone is alive and breathing.",
+            "visual": "planet",
+            "label": "System Stabilized",
             "story_beat": "payoff",
-            "visual_prompt": "The automated rover safely rolls through the open bay doors of the research station, with Dr. Vance watching happily while holding a steaming mug inside the warm facility.",
+            "visual_prompt": "Crew members looking through the massive observation viewport at a calm blue planet filling the background, smiling with relief, wearing pressurized jumpsuits without helmets, while holding steaming mugs of water.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A sudden whiteout storm threatens the remaining battery power of the exterior automated survey rover.",
-        "decisive_choice": "Dr. Vance decides to manually carry the high-gain directional beacon outside into the freezing gale.",
-        "resolution": "The rover locks onto the signal and safely docks at the research station airlock just in time.",
+        "central_conflict": "Disagreement between venting propulsion or purging the manifold during hull stress",
+        "decisive_choice": "Choosing to bypass the thruster banks instead of risking the manifold",
+        "resolution": "The ship stabilizes with damaged engines while the crew remains safe inside",
         "visual_bible": {
-          "style": "Cinematic 3D animation, crisp winter lighting, detailed textures of frost and metal, high contrast between warm indoor lights and cold exterior blue tones.",
+          "style": "Cinematic gritty science fiction with realistic lighting and detailed mechanical textures",
           "characters": {
-            "Dr. Vance": "A seasoned arctic researcher with short gray hair, determined expression, wearing a bright orange heavy-duty parka, dark wool mittens, and protective snow goggles."
+            "Captain Vane": "A human female in her forties with short grey hair, wearing a dark blue utilitarian flight suit with reinforced leather patches on the elbows.",
+            "Unit Seven": "A tall bipedal maintenance droid made of polished chrome with a bright yellow safety stripe across its domed head and glowing blue optical sensors."
           },
           "locations": {
-            "Research Hub": "A cylindrical modular arctic base featuring glowing digital control panels, reinforced steel walls, and large observation windows facing the snowy wasteland.",
-            "Exterior Tundra": "A vast, desolate frozen landscape covered in deep snowdrifts under a dark, swirling winter storm sky."
+            "Bridge": "A cramped circular control room lined with analog switches, CRT monitors, and a central navigation table displaying holographic vectors.",
+            "Engine Room": "A cavernous industrial space filled with towering pistons, overhead catwalks, and exposed hydraulic pipes glowing with amber coolant fluid."
           },
           "objects": {
-            "Emergency Beacon": "A portable metallic cylinder with a glowing blue LED tip used for long-range frequency boosting in remote terrain.",
-            "Survey Rover": "A six-wheeled robotic exploration vehicle made of brushed titanium with dual articulated camera masts and orange hazard markings."
+            "Maintenance Tablet": "A rectangular slab of brushed titanium with physical rubber bumpers and a cracked green LCD display.",
+            "Diagnostic Cable": "A thick braided black fiber-optic cord with glowing green status nodes every six inches."
           }
         },
-        "plot_fingerprint": "a1a6174f373cbabaea56e0e362757d463397d868852c2363d81dade1e34c7d1e"
+        "plot_fingerprint": "c9bea532e3f579dc61ef161fb353aab752b6c447c32f3f6f881916156361a3dd"
       },
       "approved": false
     }
