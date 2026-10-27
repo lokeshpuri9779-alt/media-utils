@@ -36,7 +36,7 @@ def comparable_scheduler_config(config):
     return normalized
 
 
-def worker(backend, output):
+def worker(backend, output, *, prompt=PROMPT, negative_prompt=""):
     import numpy as np
     import torch
     from diffusers import PNDMScheduler, StableDiffusionPipeline
@@ -44,7 +44,7 @@ def worker(backend, output):
 
     started = time.monotonic()
     row = dict(GATES, backend=backend, render_completed=False, model=MODEL,
-               model_revision=REVISION, prompt=PROMPT, negative_prompt="",
+               model_revision=REVISION, prompt=prompt, negative_prompt=negative_prompt,
                width=512, height=512, steps=20, guidance_scale=7.5,
                precision="float32", code_revision=os.getenv("GITHUB_SHA", "local"))
     try:
@@ -73,7 +73,7 @@ def worker(backend, output):
         row["setup_seconds"] = round(time.monotonic() - started, 2)
         inference = time.monotonic()
         with torch.inference_mode():
-            result = pipe(PROMPT, negative_prompt="", height=512, width=512,
+            result = pipe(prompt, negative_prompt=negative_prompt, height=512, width=512,
                           num_inference_steps=20, guidance_scale=7.5,
                           latents=torch.from_numpy(arr.copy()),
                           generator=torch.Generator(device="cpu").manual_seed(42))
