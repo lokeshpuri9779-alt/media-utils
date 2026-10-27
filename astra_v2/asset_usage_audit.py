@@ -123,6 +123,21 @@ def finish(video_path, *, renderer, expected_shots=None):
     suffix = hashlib.sha256(state["content_id"].encode("utf-8")).hexdigest()[:12]
     receipt = directory / f"{safe}-{suffix}.json"
     receipt.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    # Review-only decoded MP4 samples. Never treat pixel evidence as semantic
+    # approval or let a diagnostic failure alter publication eligibility.
+    if os.getenv("ASTRA_VISUAL_REVIEW_SHEET") == "1":
+        try:
+            from astra_v2.render_contact_sheet import create_contact_sheet
+            review_dir = Path(os.getenv(
+                "ASTRA_VISUAL_REVIEW_DIR", "runtime-health/visual-review"))
+            evidence = create_contact_sheet(path, review_dir / f"{safe}-{suffix}.jpg")
+            if evidence["source_mp4_sha256"] != result["video_sha256"]:
+                raise RuntimeError("review_frame_source_hash_mismatch")
+            print("ASTRA_VISUAL_REVIEW_SHEET=" + json.dumps(
+                evidence, sort_keys=True), flush=True)
+        except Exception as exc:
+            print("ASTRA_VISUAL_REVIEW_SHEET=unavailable_" +
+                  type(exc).__name__, flush=True)
     print("ASTRA_ASSET_USAGE_RECEIPT=" + json.dumps({
         "path": str(receipt), "content_id": result["content_id"],
         "shot_count": count, "composited_shots": result["composited_shots"],
