@@ -3,25 +3,25 @@
   "publication_triggered": false,
   "approved_count": 0,
   "available_premises": {
-    "awaiting_editorial_review": 8,
-    "needs_new_plot": 0
+    "awaiting_editorial_review": 0,
+    "needs_new_plot": 3
   },
   "selected_for_rewrite": 3,
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "3103cb984a61705beaa9f716",
-      "source_sha256": "eb472f6beb20c37f93efe8049856f1da2de3ab2ad2a28cb31bbc2f9e82a1d093",
+      "candidate_id": "980aa9a801024198baf34da0",
+      "source_sha256": "591f209072249ab121854d80c453269c202cc357f3c77606e7074bcf173d36da",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-abad28100e9eea3d8c6d",
-        "title": "The Great Turnip Launcher Disaster",
-        "hook": "The Mechanical Menace",
-        "question": "Can an overzealous market inventor automate vegetable stacking without destroying the entire bazaar?",
-        "answer": "Yes, by trading high-speed springs for a gentle gravity slide that pleases both customers and merchants.",
+        "content_id": "rayvan-gemini-b79eb4accb16162b56de",
+        "title": "The Great Onion Chopper Debacle",
+        "hook": "The Grand Unveiling",
+        "question": "Can Barnaby's motorized onion-slicer win over the grumpy vegetable merchants?",
+        "answer": "No, because the high-speed blades turn every onion into an explosive vegetable fog.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,80 +29,78 @@
         ],
         "story_beats": [
           {
-            "headline": "The Mechanical Menace",
-            "speech": "Behold the rapid root-vegetable launcher, firing fresh turnips directly into your shopping bags at incredible speeds!",
+            "headline": "The Grand Unveiling",
+            "speech": "Behold the future of cooking! This glorious contraption will slice a hundred onions in mere seconds flat!",
             "visual": "robot",
-            "label": "The Launcher Reveal",
+            "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly beside a twitching metal contraption in a crowded cobblestone market, holding a greasy wrench, while frightened shoppers dodge flying purple turnips.",
+            "visual_prompt": "Barnaby stands proudly behind a brass and wood machine in the bustling market square, holding a wooden spoon while pointing at the device.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Constructing the Chaos",
-            "speech": "We must tighten the tension bolts immediately before the cabbage compartment shakes the entire merchant tent apart!",
+            "headline": "Powering Up",
+            "speech": "Watch as I engage the heavy titanium gears, perfectly calibrated to handle the toughest root vegetables with ease.",
             "visual": "signal",
-            "label": "The Build Phase",
+            "label": "The Mechanism",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically cranks a glowing red lever on the brass framework, surrounded by rolling vegetables, while his assistant ducks behind a wooden fruit crate.",
+            "visual_prompt": "Barnaby pulls a large red lever on the side of the machine, causing the internal brass gears to spin rapidly while yellow indicator lights blink.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Catastrophic Climax",
-            "speech": "Stop the gears! The brass spring is winding too tightly and it is about to launch every single potato skyward!",
+            "headline": "The Turbo Mist",
+            "speech": "Just a tiny push on the turbo lever now, and we shall see truly miraculous culinary speed!",
             "visual": "ship",
-            "label": "The Mechanism Twist",
+            "label": "The Overload",
             "story_beat": "twist",
-            "visual_prompt": "The giant metal apparatus bows outward under immense pressure, steam hissing from copper valves, as Barnaby dives defensively toward the main control valve.",
+            "visual_prompt": "Barnaby slams his palm onto the top turbo button as onions fly wildly inside the glass dome, creating a massive spinning vortex of vegetable matter.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Gentle Slide",
-            "speech": "Instead of blasting produce through the air, this simple slanted ramp lets gravity do all the hard work safely.",
+            "headline": "The Crying Market",
+            "speech": "I am terribly sorry about the stinging fog, everyone! Please stop sobbing and look at the sleek efficiency!",
             "visual": "door",
-            "label": "The Market Payoff",
+            "label": "The Aftermath",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby and the market vendor smile warmly as clean purple turnips roll gently down a smooth wooden trough directly into an orderly wicker basket.",
+            "visual_prompt": "Barnaby stands covered in onion shreds and vegetable juice inside a dense green mist, holding a soaked handkerchief while angry merchants cough around him.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby tests a spring-loaded turnip launcher that terrorizes the morning vegetable market.",
-        "decisive_choice": "Barnaby abandons the mechanical catapult to build a slow wooden slide.",
-        "resolution": "Turnips roll smoothly into baskets, earning praise from the market vendor.",
+        "central_conflict": "Barnaby tests his new automatic onion-slicer in a crowded public market against the skepticism of veteran grocers.",
+        "decisive_choice": "Barnaby pushes the turbo lever to maximum speed to impress the market crowd instantly.",
+        "resolution": "The machine obliterates the onions, coating the entire market in a stinging green mist and ending his sales career.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion claymation aesthetic with expressive character animation and detailed rustic props.",
+          "style": "Bright, colorful slapstick cartoon comedy with exaggerated character expressions and bustling market backgrounds.",
           "characters": {
-            "Barnaby": "A short, frantic inventor with round spectacles, a grease-stained yellow vest, and wild tufts of orange hair.",
-            "Vendor": "A stern market merchant wearing a striped apron, a flat cap, and holding a wooden clipboard."
+            "Barnaby": "An enthusiastic young inventor with unruly orange hair, wearing a patched brown waistcoat, grease-stained trousers, and round brass spectacles."
           },
           "locations": {
-            "Market Square": "A bustling outdoor bazaar featuring canvas-roofed wooden stalls, cobblestone paths, and stacked crates of colorful produce."
+            "Market Square": "A crowded medieval open-air market filled with wooden stalls, hanging canvas awnings, and woven baskets of fresh produce."
           },
           "objects": {
-            "Launcher": "A towering contraption of squeaking brass gears, rusted iron springs, and smoking copper pipes.",
-            "Slide": "A polished wooden ramp constructed from smooth pine planks with a soft wicker landing basket."
+            "Onion Slicer": "A complicated mechanical device constructed from polished brass tubes, wooden panels, a spinning steel blade assembly, and a large red turbo button on top."
           }
         },
-        "plot_fingerprint": "5339e6b58adbcf2e3cec373db724ef92799d49ddd1c0c5236a68e186d8fea84d"
+        "plot_fingerprint": "ebba2a4fb45917153ecbae17fb155ad626f0d2a6e89ad8052209a9ca73ac705a"
       },
       "approved": false
     },
     {
-      "candidate_id": "7de88ba01aa2130503015e7c",
-      "source_sha256": "f722c6eefb3a8a9fb6b2cbe1a771dfba2156709a3fd4697ca0dc699ff3336b85",
+      "candidate_id": "aa06335054887a9d4304c4a3",
+      "source_sha256": "4a886534a54a2c5653eeca12140396ca69da09450b24dccdaff8105f7dfeb1fb",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-08cec13eaecdf86de027",
-        "title": "The Mystery of Platform Four",
-        "hook": "The Missing Train",
-        "question": "Why did the morning express leave the station empty while passengers waited?",
-        "answer": "A stray signal switch was jammed by a nesting pigeon carrying a brass railway key.",
+        "content_id": "rayvan-gemini-42118f5b26fc29dd8c05",
+        "title": "The Great Tidal Organ Regatta",
+        "hook": "The Silent Pipe",
+        "question": "Can a malfunctioning sea-pipe assembly be tuned using acoustic seaweed before the high tide swamps the pier?",
+        "answer": "Yes, by routing resonant kelp strands through the brass reed box, the tone stabilizes and saves the pavilion.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -110,80 +108,81 @@
         ],
         "story_beats": [
           {
-            "headline": "The Missing Train",
-            "speech": "Look at the departure board, Arthur! The express vanished down the wrong track without a single passenger aboard.",
+            "headline": "The Silent Pipe",
+            "speech": "Listen closely, everyone! The main bass pipe is completely choked with salt and seaweed, ruining our grand seaside festival.",
             "visual": "signal",
-            "label": "Platform Paradox",
+            "label": "Blocked Pipe",
             "story_beat": "reveal",
-            "visual_prompt": "Station master Arthur staring at a blank departure board on the foggy platform, holding a pocket watch while steam billows.",
+            "visual_prompt": "Master engineer Pip, a short person with curly red hair wearing a blue canvas apron, stands on the wooden pier pointing at a massive brass organ pipe sputtering gray foam, holding a damp blueprint in their left hand.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Strange Clue",
-            "speech": "This stray terrier found a shiny brass key wedged deep inside the mechanical signal lever over there.",
+            "headline": "Acoustic Assembly",
+            "speech": "We must quickly weave these elastic kelp tendrils into the secondary air chambers to restore proper melodic pressure.",
             "visual": "robot",
-            "label": "The Canine Helper",
+            "label": "Kelp Weaving",
             "story_beat": "build",
-            "visual_prompt": "Arthur kneeling by a scruffy terrier holding a brass railway key in its jaws next to a massive iron lever.",
+            "visual_prompt": "Pip and their assistant Nola, a tall youth with braided dark hair wearing a yellow oilskin coat, work furiously inside the open mechanical housing of the tidal organ, tying green ribbon-like kelp around copper valves.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Mechanism Jam",
-            "speech": "A clever bird built its nest inside the gear box, locking the switch points in the wrong direction.",
-            "visual": "door",
-            "label": "Nest in the Works",
-            "story_beat": "mechanism",
-            "visual_prompt": "Arthur shining a lantern into an open maintenance hatch revealing twigs and feathers tangled in large brass gears.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Corrected Route",
-            "speech": "With the blockage cleared and the switches aligned, the morning express rolls smoothly back to the platform.",
+            "headline": "Pressure Surge",
+            "speech": "Hold the main lever steady while I release the water lock before the rising wave overtakes our workshop platform!",
             "visual": "ship",
-            "label": "The On-Time Departure",
+            "label": "Water Lock",
+            "story_beat": "mechanism",
+            "visual_prompt": "Nola strains to push a heavy wooden wheel on the side of the pier machine while churning white sea foam laps against the wooden pylons just beneath their boots, holding the wheel with both gloved hands.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Tidal Symphony",
+            "speech": "It works! The organ is projecting a magnificent harmony across the entire bay, saving our beloved festival celebration.",
+            "visual": "door",
+            "label": "Grand Finale",
             "story_beat": "payoff",
-            "visual_prompt": "Arthur waving a green flag as a classic steam locomotive pulls into the sunlit station filled smiling travelers.",
+            "visual_prompt": "Pip and Nola stand side by side on the sunlit pier waving at a cheering crowd of festival-goers while golden music notes seem to ripple from the gleaming brass pipes of the fully operational tidal organ.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A blocked switch diverts trains onto a decommissioned siding before the morning rush.",
-        "decisive_choice": "Arthur enlists a wandering station dog to retrieve the key from beneath the tracks.",
-        "resolution": "The express is rerouted correctly and departs on time with all passengers aboard.",
+        "central_conflict": "rising tide threatening to silence the festival's grand tidal organ before the opening performance",
+        "decisive_choice": "threading rare resonant kelp strands directly into the pressurized brass reed valves",
+        "resolution": "the instrument plays a triumphant chord that clears the coastal mist and delights the gathered crowd",
         "visual_bible": {
-          "style": "Vintage railway mystery illustration with rich textures and dramatic lighting",
+          "style": "Bright, charming animated illustration with rich coastal textures and warm cinematic lighting.",
           "characters": {
-            "Arthur": "An elderly station master with a thick gray mustache, round spectacles, a navy blue uniform, and a gold pocket watch.",
-            "Barnaby": "A scruffy, energetic brown terrier with floppy ears and a red leather collar."
+            "Pip": "A short, energetic master engineer with curly red hair, freckles, and a faded blue canvas work apron over a linen shirt.",
+            "Nola": "A tall, focused apprentice with braided dark hair, expressive eyes, and a bright yellow oilskin coat."
           },
           "locations": {
-            "Grand_Terminus": "A Victorian railway station with arched iron roofs, brick platforms, and thick morning fog."
+            "pier": "An old wooden seaside festival pier lined with colorful bunting flags, weathered planks, and brass machinery housings."
           },
           "objects": {
-            "brass_key": "An antique, heavy brass skeleton key engraved with the railway company crest.",
-            "signal_lever": "A tall, painted red and black iron lever connected to underground track switches."
+            "tidal_organ": "A massive mechanical musical instrument made of polished brass pipes, copper valves, and wooden bellows powered by ocean waves.",
+            "blueprint": "A rolled paper sheet covered in dark ink sketches of gears, pipes, and water flow arrows.",
+            "kelp": "Long, iridescent green sea strands that shimmer with natural acoustic properties."
           }
         },
-        "plot_fingerprint": "3c6182474dfede131646af95927cbcb817acf24147833810ed07649b5fcf77bd"
+        "plot_fingerprint": "df2f989aea930f4a1df6337b19a91105584341ef7ffbf1a0c6ce35f5d968e9af"
       },
       "approved": false
     },
     {
-      "candidate_id": "ffed548387dde2904de2b803",
-      "source_sha256": "3f812320c2944ecdd5be27e7629851eb67756dac584672ce11f764c36baf549e",
+      "candidate_id": "25a0a71e574a0ad71086b9b6",
+      "source_sha256": "c481c0363fc5377a66af1c2811ccc11d7f6e6f2b7f5311f9f288e8b12dfee6dd",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-b83e330695cf442e1c38",
-        "title": "The Singing Dunes of Oakhaven",
-        "hook": "A Desert Resonance",
-        "question": "What causes the mysterious musical hum echoing across the arid Oakhaven basin each afternoon?",
-        "answer": "An underground cavern system filled with hollow crystal formations that resonate when heated desert winds pass through ancient limestone shafts.",
+        "content_id": "rayvan-gemini-8f14368d84f649ba09ef",
+        "title": "The Midnight Express Mishap",
+        "hook": "The Desperate Plea",
+        "question": "Will the lost silver pocket watch be found before the express departs?",
+        "answer": "Yes, a stray station cat leads the conductor straight to the mislaid heirloom.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -191,65 +190,67 @@
         ],
         "story_beats": [
           {
-            "headline": "A Desert Resonance",
-            "speech": "Listen closely to that rising acoustic pressure. The entire valley floor is vibrating at a frequency that defies normal geology.",
+            "headline": "The Desperate Plea",
+            "speech": "My grandfather's silver watch is missing! If we do not find it right now, my journey is completely ruined.",
             "visual": "signal",
-            "label": "Seismic Hum",
+            "label": "Missing Heirloom",
             "story_beat": "reveal",
-            "visual_prompt": "Kaelen, a weathered explorer in tan linen robes, kneels on the cracked earth of the Oakhaven basin, holding a brass acoustic meter that displays erratic seismic waves, while shimmering heat haze blurs the distant limestone ridges.",
+            "visual_prompt": "A distressed traveler in a heavy woolen coat gestures wildly near a blinking platform signal while holding an empty velvet box.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Descending the Chasm",
-            "speech": "We must anchor this heavy winch system immediately before the updraft expands the fracture in the canyon wall.",
-            "visual": "door",
-            "label": "Shaft Entry",
+            "headline": "The Unexpected Ally",
+            "speech": "Look at this clever creature sitting by the ticket booth. It is batting at something shiny in the shadows.",
+            "visual": "robot",
+            "label": "The Discovery",
             "story_beat": "build",
-            "visual_prompt": "Kaelen and his companion Mira, wearing goggles and tool harnesses, secure a thick hemp rope to a rusted iron anchor stake driven into the rocky ground beside a gaping vertical sinkhole leading into darkness.",
+            "visual_prompt": "A mechanical station porter points its glowing optical sensor toward a ginger cat pawing at a dark recess near the automated ticket kiosks.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Crystal Chambers",
-            "speech": "Look at these magnificent hollow formations glowing in the lantern light. They act as natural organ pipes when the air rushes past.",
-            "visual": "forest",
-            "label": "Resonant Cavity",
+            "headline": "The Narrow Chase",
+            "speech": "Stay right there, little friend! Do not let it slide any further down that metal drainage grate.",
+            "visual": "door",
+            "label": "The Pursuit",
             "story_beat": "mechanism",
-            "visual_prompt": "Kaelen stands inside a vast underground cavern illuminated by a handheld brass lantern, gazing in wonder at towering amber-colored crystal pillars branching upward like petrified trees while warm wind currents swirl dust motes.",
+            "visual_prompt": "The head conductor bends down near a heavy maintenance door, reaching out cautiously while the ginger cat trots away with a small ticking object in its mouth.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Harmonic Balance",
-            "speech": "By shifting this single limestone wedge into position, we preserve the music of the canyon without risking a structural collapse.",
-            "visual": "planet",
-            "label": "Stable Basin",
+            "headline": "The Timely Return",
+            "speech": "You saved the day! Here is your reward, and thank goodness we made it aboard the train just in time.",
+            "visual": "ship",
+            "label": "Safe Departure",
             "story_beat": "payoff",
-            "visual_prompt": "Kaelen smiles in triumph as he wedges a heavy grey rock into a narrow fissure at the base of a glowing crystal formation, while tranquil sunlight streams down from the surface opening onto the peaceful desert floor.",
+            "visual_prompt": "The smiling traveler holds up the recovered silver watch inside a softly lit railway carriage as the steam-powered locomotive slowly pulls away past a framed wall mural of an ocean liner.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Wind entering the hidden cavern system triggers a deafening harmonic vibration that threatens to destabilize the delicate sandstone cliffs above.",
-        "decisive_choice": "Kaelen chooses to descend into the perilous sinkhole alone to seal the primary airflow vent rather than waiting for the regional engineering caravan.",
-        "resolution": "He successfully positions a natural limestone boulder to divert the draft, preserving the subterranean melody while securing the surrounding bluffs.",
+        "central_conflict": "A frantic passenger loses a priceless family pocket watch inside a crowded railway terminus minutes before the midnight express leaves.",
+        "decisive_choice": "The chief conductor abandons his platform duties to follow an unusually persistent stray cat weaving through the luggage carts.",
+        "resolution": "The cat unearths the glittering watch from beneath a discarded newspaper bundle, saving the passenger's journey.",
         "visual_bible": {
-          "style": "Cinematic adventure realism with warm golden hour lighting, rich earth tones, and highly detailed natural textures.",
+          "style": "A warm, richly detailed 2D animated storybook aesthetic with soft painterly textures and expressive lighting.",
           "characters": {
-            "Kaelen": "A seasoned desert explorer with sun-bronzed skin, short dark hair, wearing a worn tan linen tunic, leather utility belt, and protective goggles pushed up on his forehead.",
-            "Mira": "A pragmatic engineer with braided auburn hair, practical canvas trousers, a brass surveyor's kit, and a steadfast expression."
+            "traveler": "An anxious middle-aged person wearing a thick houndstooth coat, round spectacles, and carrying a worn leather suitcase.",
+            "conductor": "A tall, stern-looking station master with a bristling mustache, polished brass buttons on a navy uniform, and a cap tilted slightly.",
+            "cat": "A clever ginger tabby with bright green eyes and a small notch in its left ear."
           },
           "locations": {
-            "Oakhaven Basin": "A vast, sun-baked desert valley marked by cracked clay flats, sparse scrub brush, and towering weathered limestone cliffs.",
-            "Crystal Chasm": "A subterranean limestone cavern featuring massive, translucent amber crystal pillars and smooth wind-carved tunnels."
+            "terminus": "A grand Victorian railway station featuring arched wrought-iron ceilings, billowing steam clouds, and warm amber gas lamps.",
+            "platform": "A bustling wooden-planked platform lined with stacked steamer trunks and glowing red departure indicators."
           },
           "objects": {
-            "Acoustic Meter": "A handheld brass instrument with a glass viewing dial and a trembling black needle measuring sonic vibrations.",
-            "Exploration Winch": "A sturdy wooden tripod frame rigged with thick hemp rope and a rusted iron hand crank."
+            "pocket_watch": "An antique sterling silver pocket watch intricately engraved with oak leaves and ticking loudly.",
+            "velvet_box": "A royal blue velvet presentation box with a broken clasp.",
+            "ticket_booth": "A dark mahogany ticket kiosk with brass grillwork and handwritten timetable boards."
           }
         },
-        "plot_fingerprint": "490dce53a8678845da10f6a789489894b2db9e062a25037a2b55ab251efb92e3"
+        "plot_fingerprint": "2da0f98494d448fa754521c7402a1a8d0b0e9a0c1003d41765a0dcb1cbe607ac"
       },
       "approved": false
     }

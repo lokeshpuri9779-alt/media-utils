@@ -1,150 +1,68 @@
 {
   "schema_version": 1,
-  "count": 8,
-  "issue_counts": {},
+  "count": 3,
+  "issue_counts": {
+    "repeated_underlying_plot_mechanism": 3
+  },
   "approved_count": 0,
   "publication_triggered": false,
   "candidates": [
     {
-      "candidate_id": "3103cb984a61705beaa9f716",
-      "source_sha256": "eb472f6beb20c37f93efe8049856f1da2de3ab2ad2a28cb31bbc2f9e82a1d093",
-      "title": "The Bell That Rang With No Boat",
-      "premise_key": "harbor-fog-bell",
+      "candidate_id": "980aa9a801024198baf34da0",
+      "source_sha256": "591f209072249ab121854d80c453269c202cc357f3c77606e7074bcf173d36da",
+      "title": "The Song Nobody Could Finish",
+      "premise_key": "chorus-transposed-sheet",
       "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the harbor bell rang every night although no boat approached the pier before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but the watchkeeper replaced the bell rope but the sound returned at the next tide; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized a floating marker struck a loose metal bracket only when the tide reached its highest point; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they secured the bracket and marked the high-water hazard for the harbor crew, then explained the clue so their neighbors could prevent the problem next time."
+        "At the snowy meadow, fox and rabbit discovered the school band and choir kept landing on different notes at the finale before the library opened, leaving the visiting readers waiting.",
+        "Fox attempted an immediate fix, but they rehearsed each section separately but the final chord still clashed; rabbit stopped the attempt before the situation worsened.",
+        "Rabbit examined the evidence and realized the brass players had been given a score transposed for a different instrument; together they revised their plan rather than repeating the mistake.",
+        "With the visiting readers watching, they printed the correct parts and rehearsed the ending with everyone together, then explained the clue so their neighbors could prevent the problem next time."
       ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
+      "review_status": "needs_new_plot",
+      "review_issues": [
+        "repeated_underlying_plot_mechanism"
+      ],
+      "required_next_action": "rewrite_with_new_plot",
       "production_ready": false,
       "decision": "not_approved",
       "eligible_for_automatic_publishing": false
     },
     {
-      "candidate_id": "7de88ba01aa2130503015e7c",
-      "source_sha256": "f722c6eefb3a8a9fb6b2cbe1a771dfba2156709a3fd4697ca0dc699ff3336b85",
-      "title": "The Clock That Cast Two Shadows",
-      "premise_key": "shadow-clock-mirror",
+      "candidate_id": "aa06335054887a9d4304c4a3",
+      "source_sha256": "4a886534a54a2c5653eeca12140396ca69da09450b24dccdaff8105f7dfeb1fb",
+      "title": "The Celebration Held on the Wrong Day",
+      "premise_key": "town-date-format",
       "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the town square sundial appeared to point to two different hours before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but the caretakers repainted the hour markings but the conflicting shadows remained; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized a new mirrored shop window reflected sunlight onto the dial from the opposite direction; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they shielded the reflected beam and checked the dial against the actual sun, then explained the clue so their neighbors could prevent the problem next time."
+        "At the snowy meadow, fox and rabbit discovered half the town arrived for a holiday feast while the tables were still being built before the library opened, leaving the visiting readers waiting.",
+        "Fox attempted an immediate fix, but they reread the invitations but each group insisted its date was correct; rabbit stopped the attempt before the situation worsened.",
+        "Rabbit examined the evidence and realized the invitation printer had mixed day-month and month-day date formats; together they revised their plan rather than repeating the mistake.",
+        "With the visiting readers watching, they sent corrected invitations with the month written out and held one shared feast, then explained the clue so their neighbors could prevent the problem next time."
       ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
+      "review_status": "needs_new_plot",
+      "review_issues": [
+        "repeated_underlying_plot_mechanism"
+      ],
+      "required_next_action": "rewrite_with_new_plot",
       "production_ready": false,
       "decision": "not_approved",
       "eligible_for_automatic_publishing": false
     },
     {
-      "candidate_id": "ffed548387dde2904de2b803",
-      "source_sha256": "3f812320c2944ecdd5be27e7629851eb67756dac584672ce11f764c36baf549e",
-      "title": "The Hive That Hummed at Midnight",
-      "premise_key": "beehive-hum-frequency",
+      "candidate_id": "25a0a71e574a0ad71086b9b6",
+      "source_sha256": "c481c0363fc5377a66af1c2811ccc11d7f6e6f2b7f5311f9f288e8b12dfee6dd",
+      "title": "The Stage That Leaned During the Dance",
+      "premise_key": "floating-stage-ballast",
       "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the empty exhibition beehive hummed every night after the museum closed before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but the curator sealed the display case but the humming grew louder; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized a ventilation fan below the exhibit vibrated a loose wooden panel at one particular speed; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they secured the panel and tested the ventilation before reopening the exhibit, then explained the clue so their neighbors could prevent the problem next time."
+        "At the snowy meadow, fox and rabbit discovered the floating festival stage tilted whenever the performers gathered before the library opened, leaving the visiting readers waiting.",
+        "Fox attempted an immediate fix, but they tightened the stage ropes but it leaned further with every dancer; rabbit stopped the attempt before the situation worsened.",
+        "Rabbit examined the evidence and realized the equipment and audience had all been placed on the same side of the pontoons; together they revised their plan rather than repeating the mistake.",
+        "With the visiting readers watching, they closed the stage for a balanced-load inspection and reopened after a safe test, then explained the clue so their neighbors could prevent the problem next time."
       ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "ff30082e2414d9d17bcbfce5",
-      "source_sha256": "5da832462783b68fd446dc9ba4d8b187256036dd3f2e798a199649d7d2fd35a4",
-      "title": "The Ferry That Drifted Sideways",
-      "premise_key": "ferry-rope-tension",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the small demonstration ferry slid sideways despite its guide rope being taut before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but the crew pulled the rope tighter but the ferry moved further off course; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized the guide pulley had rotated out of alignment and was pulling at an angle; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they stopped the demonstration and realigned the pulley under a supervised safety check, then explained the clue so their neighbors could prevent the problem next time."
+      "review_status": "needs_new_plot",
+      "review_issues": [
+        "repeated_underlying_plot_mechanism"
       ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "0ac17972bcf687897263ad7c",
-      "source_sha256": "6673af9c4354739725418361b0e7ca0808248bbd66d38cc28b3566b8cdf77d43",
-      "title": "The Lanterns That Would Not Rise",
-      "premise_key": "lantern-paper-heat",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the festival's paper lantern models stayed on the ground despite warm air inside before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but the builders added heavier lamps but the models sank even faster; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized a recent coating had made the paper too heavy for the small warm-air lift; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they replaced the coating with lighter safe display material and tested stationary models, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "611b4bedec35b4fd450c5361",
-      "source_sha256": "b3559faaeda7d705c80105eca9be6d31d068b869a30e0db05a1c8ac2c4eecee6",
-      "title": "The Compass That Pointed to the Wall",
-      "premise_key": "museum-magnet-compass",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the museum's navigation compass pointed at a wall instead of north before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but the guide moved the compass to a different table but it still pointed sideways; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized a powerful magnetic display mount was hidden inside the nearby exhibit wall; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they moved the compass outside the magnetic field and demonstrated the difference, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "5814d5ebc7be28f5a3fdc798",
-      "source_sha256": "3307504121dc9854dfc899657960f352f6be1a1d054d597e7e184799662df37d",
-      "title": "The Wheel That Turned Backward",
-      "premise_key": "waterwheel-backflow",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the garden waterwheel spun backward after the irrigation channel was repaired before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but the gardeners increased the water flow but the wheel spun backward even faster; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized the repaired channel discharged water on the opposite side of the wheel; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they redirected the flow through the intended chute and checked the wheel safely, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
-      "production_ready": false,
-      "decision": "not_approved",
-      "eligible_for_automatic_publishing": false
-    },
-    {
-      "candidate_id": "cc4fb2fbd4b34ad3598fef8c",
-      "source_sha256": "3ee4001c617a92ab72b13920cd664899d060297e94f8d5588db6d92c26fb4957",
-      "title": "The Kite That Shook in a Clear Sky",
-      "premise_key": "kite-tail-resonance",
-      "story_beats": [
-        "At the woodland trail, fox and rabbit discovered the festival kite vibrated violently despite a steady breeze before sunrise, leaving the first delivery of the day waiting.",
-        "Fox attempted an immediate fix, but the flyers shortened the main string but the shaking did not stop; rabbit stopped the attempt before the situation worsened.",
-        "Rabbit examined the evidence and realized a newly attached decorative tail oscillated at the same rhythm as the kite frame; together they revised their plan rather than repeating the mistake.",
-        "With the first delivery of the day watching, they replaced the tail with a balanced design and tested the kite in a clear area, then explained the clue so their neighbors could prevent the problem next time."
-      ],
-      "review_status": "awaiting_editorial_review",
-      "review_issues": [],
-      "required_next_action": "creative_editorial_revision",
+      "required_next_action": "rewrite_with_new_plot",
       "production_ready": false,
       "decision": "not_approved",
       "eligible_for_automatic_publishing": false
