@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "219c5901dac53f3ee3cd1b1e",
-      "source_sha256": "7af28d5be499714deb6b5e949e3401b282842b0fcd90b3fb58a1507de02aa9ee",
+      "candidate_id": "3c1748b6386a5a8d27b9a19f",
+      "source_sha256": "bf92e76d19aa258fb594fe4254c74545ca99d3b415540b1fb4faf8453d83ab54",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-e626d286953d7950dd3b",
-        "title": "The Great Squeak-Free Cheese Caddy Calamity",
-        "hook": "Unveiling the Clattering Caddy",
-        "question": "Can an overly enthusiastic inventor sell his squeak-free cheese caddy without collapsing the farmers market?",
-        "answer": "Yes, by pivoting the noisy invention into a wildly popular percussion instrument stall.",
+        "content_id": "rayvan-gemini-1a3a74704fbd0c2e40d5",
+        "title": "The Great Turnip Flap",
+        "hook": "The Initial Ignition",
+        "question": "Can an automated turnip peeler survive the city market?",
+        "answer": "Only if it learns to dodge angry vendors.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,78 +29,78 @@
         ],
         "story_beats": [
           {
-            "headline": "Unveiling the Clattering Caddy",
-            "speech": "Behold my revolutionary silent cheese caddy, guaranteed to preserve your cheddar without a single unwanted peep or squeak!",
+            "headline": "The Initial Ignition",
+            "speech": "Behold the brass potato slicer, crafted with absolute precision to peel a thousand turnips in mere seconds!",
             "visual": "robot",
-            "label": "The Reveal",
+            "label": "Activation",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby wearing a yellow vest pulls a copper lever on his wooden stall table, revealing a shaking metal caddy while startled market shoppers cover their ears.",
+            "visual_prompt": "Arthur stands in a busy market square activating a noisy brass robot while terrified vendors watch.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Tightening the Screws",
-            "speech": "If I simply adjust this titanium tension spring, the violent rattling should transform into a soothing, gentle hum.",
-            "visual": "signal",
-            "label": "The Mechanism",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby with a smudge of grease on his nose frantically turns a tiny brass screw with a silver wrench, while the metal caddy violently bounces across the cluttered table.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A Sudden Percussive Twist",
-            "speech": "Oh dear, tightening the spring did not stop the noise; it merely tuned the clatter into a rhythmic polka beat!",
-            "visual": "door",
-            "label": "The Twist",
-            "story_beat": "twist",
-            "visual_prompt": "Barnaby drops his wrench in absolute shock as market customers outside a woven tent stall start dancing wildly to the chaotic rhythmic clatter of the bouncing cheese caddy.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Grand Market Payoff",
-            "speech": "Who needs silent cheese storage when we have the finest rhythm machine in the entire county keeping everyone dancing?",
+            "headline": "The Mechanical Mayhem",
+            "speech": "Stop the spinning blades right now! It is launching raw root vegetables directly at my finest cabbages!",
             "visual": "ship",
-            "label": "The Payoff",
+            "label": "Escalation",
+            "story_beat": "build",
+            "visual_prompt": "The brass robot spins wildly on a market cart, firing raw turnips across the crowded street.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Emergency Recalibration",
+            "speech": "I must swap the internal gears instantly before the entire vegetable district is flattened by flying produce.",
+            "visual": "signal",
+            "label": "Adjustment",
+            "story_beat": "mechanism",
+            "visual_prompt": "Arthur frantically adjusts glowing dials on the side of the robot while dodging a flying carrot.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Sweet Success",
+            "speech": "Look at the marvelous melon slices! Our mechanical terror is now the finest dessert vendor in town.",
+            "visual": "door",
+            "label": "Resolution",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby cheerfully banging a wooden spoon against the dancing cheese caddy while joyful marketgoers cheer and throw gold coins into his open tip bucket.",
+            "visual_prompt": "Happy market customers line up to buy perfectly sliced melons from the newly tamed brass machine.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Inventing a noiseless cheese caddy that instead generates deafening, rhythmic clatter.",
-        "decisive_choice": "Embracing the cacophony as musical novelty rather than hiding the defective prototype.",
-        "resolution": "The inventor wins over the market crowd by launching a street-band rhythm section.",
+        "central_conflict": "A malfunctioning vegetable peeling contraption terrifies the market stalls.",
+        "decisive_choice": "Arthur programs the machine to peel fruit instead of root vegetables.",
+        "resolution": "The invention becomes the hit of the morning fruit salad festival.",
         "visual_bible": {
-          "style": "Vibrant and whimsical slapstick animation style with rich textures and warm lighting.",
+          "style": "Bright comedic animation style with vibrant colors and expressive character movements",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild ginger hair, round spectacles, a mustard-yellow vest, and endless optimism."
+            "Arthur": "A frantic inventor with wild hair, wearing a soot-stained apron and oversized goggles."
           },
           "locations": {
-            "Market Square": "A bustling, sunlit outdoor farmers market filled with colorful awnings, wooden carts, and hanging produce."
+            "Market Square": "A bustling outdoor bazaar filled with colorful awnings, wooden carts, and hanging lanterns."
           },
           "objects": {
-            "Cheese Caddy": "A polished copper container fitted with complicated steel gears, squeaky springs, and a large brass latch on top."
+            "Brass Robot": "A quirky mechanical contraption made of polished brass, featuring multiple spinning arms and a glowing red dial."
           }
         },
-        "plot_fingerprint": "7b25fe5efd81a1d71b1188858e35700d725df9084a8aeb3dde4b0487fd29acb8"
+        "plot_fingerprint": "1b04adf818532bf783c659558e4e9a31db2bd035ef8e9d2df0af0adb934425c9"
       },
       "approved": false
     },
     {
-      "candidate_id": "e1c15c3c1044a34f54f7116f",
-      "source_sha256": "ff79449f8c77c6f65da8796b38543071aeeb52d48a24c00880b94b2d0bde1464",
+      "candidate_id": "6892c1708e211f6b3a14939b",
+      "source_sha256": "6b0e8bd355f5aa3f7ec7f1d46231bdc78c26aa5a839fa3563f17b549e2303937",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-07af9bba1f0b45a3cd72",
-        "title": "The Weaver's Last Loom",
-        "hook": "The Frost Approaches",
-        "question": "Can an aging village weaver destroy his masterwork loom to save the communal forest from a devastating winter freeze?",
-        "answer": "He breaks the sacred timber frame to feed the village hearths, choosing survival over his life's artistic legacy.",
+        "content_id": "rayvan-gemini-9f59cd5f61e5ef772270",
+        "title": "The Muddy Pitch Playbook",
+        "hook": "The Flooded Field",
+        "question": "How can the underdog neighborhood soccer team win the championship on a ruined waterlogged field?",
+        "answer": "By building a complex system of underground sponge-drains that redirects the standing water into the community garden.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -108,81 +108,80 @@
         ],
         "story_beats": [
           {
-            "headline": "The Frost Approaches",
-            "speech": "Winter has come early to our valley, and the snow piles higher than our fences every single night.",
-            "visual": "forest",
-            "label": "The Frozen Woods",
-            "story_beat": "reveal",
-            "visual_prompt": "An elderly weaver standing outside his wooden cottage in a snow-covered forest, looking worriedly at bare trees, wearing heavy wool clothing, holding a carved wooden walking stick in his right hand.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Empty Woodpile",
-            "speech": "Every log is gone from the shed, and the biting wind threatens to freeze our children in their beds.",
-            "visual": "door",
-            "label": "The Empty Shed",
-            "story_beat": "build",
-            "visual_prompt": "The weaver opening the heavy oak door of his snow-dusted woodshed, revealing completely empty shelves inside, while holding a dim iron lantern in his left hand with a troubled facial expression.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Masterpiece",
-            "speech": "My magnificent loom holds enough dry seasoned oak to warm every hearth in this entire valley.",
-            "visual": "robot",
-            "label": "The Ancient Loom",
-            "story_beat": "mechanism",
-            "visual_prompt": "The weaver standing inside his workshop before a towering, intricate wooden loom with complex mechanical wooden gears, gently touching the carved upright posts with both hands, looking conflicted.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A New Beginning",
-            "speech": "Wood can always be replanted and shaped anew, but human lives lost to the frost can never return.",
+            "headline": "The Flooded Field",
+            "speech": "Look at this disaster! The championship is in three hours, and our home pitch is completely submerged under a lake of mud.",
             "visual": "signal",
-            "label": "The Warm Hearth",
+            "label": "Storm Damage",
+            "story_beat": "reveal",
+            "visual_prompt": "Maya stands knee-deep in a flooded muddy soccer field holding a dripping red captain's armband, staring in disbelief at the rain-soaked goalposts under a dark overcast sky.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Trench Network",
+            "speech": "We cannot play normally, so we will dig drainage trenches across the turf and channel the water straight into the vegetable garden.",
+            "visual": "forest",
+            "label": "Drainage Build",
+            "story_beat": "build",
+            "visual_prompt": "Maya and her teammate Leo shovel mud rapidly in the rain, carving precise trenches across the soccer pitch while holding wooden drainage pipes and muddy shovels.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Siphon Mechanism",
+            "speech": "Now we prime the heavy duty garden pumps to suck the standing water out through our underground pipe system before kickoff.",
+            "visual": "robot",
+            "label": "Pump System",
+            "story_beat": "mechanism",
+            "visual_prompt": "Leo frantically operates a noisy gasoline-powered water pump connected to a network of corrugated black hoses that snake across the soggy grass.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Winning Goal",
+            "speech": "The field is firm enough! Let us execute our tactical passing game and take home the neighborhood championship trophy today.",
+            "visual": "door",
+            "label": "Final Victory",
             "story_beat": "payoff",
-            "visual_prompt": "The weaver sitting by a bright stone fireplace inside his cozy cottage, smiling warmly as orange flames cast a cheerful signal light across the room, holding a small fresh sapling in his lap.",
+            "visual_prompt": "Maya kicks a muddy leather soccer ball past the opposing goalkeeper into the net, celebrating wildly on a now-drained pitch while holding a shiny silver trophy.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Choosing between burning the masterwork loom and letting the villagers freeze",
-        "decisive_choice": "Shattering the ancient oak frame for firewood",
-        "resolution": "The village survives the winter, and the weaver begins carving a new loom from living saplings.",
+        "central_conflict": "A massive storm floods the community soccer pitch just hours before the championship match against the arrogant reigning champions.",
+        "decisive_choice": "Captain Maya decides to abandon traditional gameplay and instead uses the team's engineering skills to build an improvised drainage network.",
+        "resolution": "The pitch drains just in time, neutralizing the opponent's speed advantage and leading to a triumphant victory through smart team coordination.",
         "visual_bible": {
-          "style": "Warm historical folk-art illustration style with rich earthy tones, detailed textures, and dramatic lighting.",
+          "style": "Bright, energetic animated film aesthetic with vibrant colors, expressive character animations, and detailed muddy textures.",
           "characters": {
-            "weaver": "An elderly man with deep wrinkles, kind hazel eyes, a long white beard, wearing a thick wool tunic and leather boots."
+            "Maya": "A teenage girl with curly dark hair tied back in a messy ponytail, wearing a faded blue soccer jersey with the number 10, muddy canvas cleats, and a determined facial expression.",
+            "Leo": "A tall teenage boy with short blonde hair, wearing a green goalkeeper jersey with grass stains, mud-splattered shorts, and heavy work gloves."
           },
           "locations": {
-            "cottage": "A cozy stone-and-timber cottage with a large stone hearth and wooden interior walls.",
-            "forest": "A dense, snowy mountain forest filled with tall pine and oak trees under a grey winter sky."
+            "Community Pitch": "A worn neighborhood soccer field surrounded by chain-link fences, old oak trees, and a wooden community garden shed."
           },
           "objects": {
-            "loom": "A massive, complex mechanical wooden loom made of ancient, polished oak with intricate carved gears.",
-            "lantern": "A rustic iron hand-lantern containing a flickering beeswax candle.",
-            "sapling": "A young, flexible green oak sapling with fresh spring leaves sprouting from the top."
+            "Soccer Ball": "A classic black-and-white leather soccer ball covered in splatters of mud and wet grass clippings.",
+            "Water Pump": "A heavy red portable gasoline-powered water pump with attached black corrugated drainage hoses."
           }
         },
-        "plot_fingerprint": "9ebd3a50eb1b39f47db0195150f9ccdfa5af5a7da1d6179e1f2b5c470f18b0dd"
+        "plot_fingerprint": "344bbc62fdc95c2073b5a4cf9f5d247139db730f949d6bc788523fadd1e74b01"
       },
       "approved": false
     },
     {
-      "candidate_id": "1736599332f942e7c2d69f58",
-      "source_sha256": "47a5c917f62f03d7dad2ff2a30baba29422b50d7ab81759deecd9de37abfdeba",
+      "candidate_id": "bd5c07a8d18eaa164a12d281",
+      "source_sha256": "5564b22e40af982719222e6a8181ed51b2c2c21b003c09deb4b2115d36da0407",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-75a4707a8e0c210d0ab5",
-        "title": "The Coral Cartographer's Echo",
-        "hook": "The Silent Trench",
-        "question": "Why is the great barrier reef falling silent?",
-        "answer": "A blocked thermal vent has muted the ancestral resonance stones.",
+        "content_id": "rayvan-gemini-31f855385ea6b7400e10",
+        "title": "The Frostbound Signal",
+        "hook": "Storm Warning",
+        "question": "Can the isolated meteorology team survive the sudden blizzard to save the stranded rover?",
+        "answer": "Yes, by utilizing the automated beacon to guide the rover back before power fails completely.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -190,65 +189,64 @@
         ],
         "story_beats": [
           {
-            "headline": "The Silent Trench",
-            "speech": "Listen closely, young apprentice. The reef has lost its rhythm, and we must find the root of this terrible silence before night falls.",
+            "headline": "Storm Warning",
+            "speech": "Sensors indicate an aggressive whiteout is descending rapidly upon our position, threatening the autonomous rover stationed outside.",
             "visual": "signal",
-            "label": "The Silent Trench",
+            "label": "Incoming Threat",
             "story_beat": "reveal",
-            "visual_prompt": "Finn the deep-sea otter holding a tarnished brass hydrophone while peering into a dark, pulsing oceanic trench glowing with faint red warning light.",
+            "visual_prompt": "Dr. Vance stands inside the glowing arctic research hub, pointing at a flickering amber console displaying a harsh weather wave, wearing a heavy orange parka and fleece hat.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Choked Vent",
-            "speech": "Look at this massive calcified blockage choking the thermal vent. It is deflecting all the acoustic currents away from our coral city.",
-            "visual": "ship",
-            "label": "The Choked Vent",
-            "story_beat": "build",
-            "visual_prompt": "Finn maneuvers his compact rusted submersible close to a colossal grey mineral deposit blocking a steaming underwater fissure while holding a heavy iron pry bar.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Desperate Lever",
-            "speech": "If I wedge this heavy ballast lever against the obstruction, the pressure burst might clear the path, but my ship could take the blast.",
+            "headline": "System Failure",
+            "speech": "We are losing telemetry fast as the icy winds interfere with the primary navigation frequencies of the surface vehicle.",
             "visual": "robot",
-            "label": "The Desperate Lever",
-            "story_beat": "mechanism",
-            "visual_prompt": "Finn inside the cramped cockpit of his submersible, frantically pulling a rusty copper control lever as bright sapphire bubbles erupt outside the reinforced viewport.",
+            "label": "Signal Lost",
+            "story_beat": "build",
+            "visual_prompt": "An autonomous tracked weather rover sits stranded outside in heavy swirling snow, its headlights dimming while thick frost covers its mechanical sensor array.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Resonating Bloom",
-            "speech": "The thermal current has broken free at last. Hear the resonance stones awaken as the vibrant migration song guides our family home.",
-            "visual": "forest",
-            "label": "The Resonating Bloom",
+            "headline": "Daring Venture",
+            "speech": "I must step out into the freezing gales right now to manually deploy the secondary emergency booster beacon.",
+            "visual": "door",
+            "label": "Stepping Out",
+            "story_beat": "mechanism",
+            "visual_prompt": "Dr. Vance grips the heavy insulated steel handle of the airlock inner hatch, wearing reflective goggles and holding a glowing blue metal beacon rod.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Safe Return",
+            "speech": "The connection is fully restored and our rover has successfully navigated through the storm back to the shelter.",
+            "visual": "ship",
+            "label": "Mission Success",
             "story_beat": "payoff",
-            "visual_prompt": "Finn floating peacefully outside his submersible among glowing turquoise coral pillars as schools of shimmering fish swim in unison toward the bright surface.",
+            "visual_prompt": "The automated rover safely rolls through the open bay doors of the research station, with Dr. Vance watching happily while holding a steaming mug inside the warm facility.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A blocked thermal vent prevents the resonance stones from broadcasting the annual migration route.",
-        "decisive_choice": "Finn clears the obstruction despite risking a collapse of his underwater survey vessel.",
-        "resolution": "The revived resonance stones restore song to the reef, guiding the migration safely home.",
+        "central_conflict": "A sudden whiteout storm threatens the remaining battery power of the exterior automated survey rover.",
+        "decisive_choice": "Dr. Vance decides to manually carry the high-gain directional beacon outside into the freezing gale.",
+        "resolution": "The rover locks onto the signal and safely docks at the research station airlock just in time.",
         "visual_bible": {
-          "style": "Cinematic animated underwater adventure with rich bioluminescent lighting, detailed marine flora, and warm expressive character animations.",
+          "style": "Cinematic 3D animation, crisp winter lighting, detailed textures of frost and metal, high contrast between warm indoor lights and cold exterior blue tones.",
           "characters": {
-            "Finn": "An adventurous sea otter with sleek brown fur, wearing a waterproof aviator cap and a utility belt packed with brass instruments."
+            "Dr. Vance": "A seasoned arctic researcher with short gray hair, determined expression, wearing a bright orange heavy-duty parka, dark wool mittens, and protective snow goggles."
           },
           "locations": {
-            "Coral City": "A sprawling subterranean settlement built from iridescent pastel corals and glowing anemones.",
-            "Thermal Trench": "A steep volcanic canyon filled with rising bubbles, dark rock formations, and vents of superheated water."
+            "Research Hub": "A cylindrical modular arctic base featuring glowing digital control panels, reinforced steel walls, and large observation windows facing the snowy wasteland.",
+            "Exterior Tundra": "A vast, desolate frozen landscape covered in deep snowdrifts under a dark, swirling winter storm sky."
           },
           "objects": {
-            "hydrophone": "A tarnished brass listening cone with etched wave patterns along the rim.",
-            "submersible": "A compact, round one-otter submarine made of patched green iron with a thick glass viewport.",
-            "pry bar": "A heavy, barnacle-encrusted iron crowbar with a glowing grip."
+            "Emergency Beacon": "A portable metallic cylinder with a glowing blue LED tip used for long-range frequency boosting in remote terrain.",
+            "Survey Rover": "A six-wheeled robotic exploration vehicle made of brushed titanium with dual articulated camera masts and orange hazard markings."
           }
         },
-        "plot_fingerprint": "a4315854b093639b8c46fc8f1fc01cadc5e27d21048a306f55c3f7f11c8868b6"
+        "plot_fingerprint": "a1a6174f373cbabaea56e0e362757d463397d868852c2363d81dade1e34c7d1e"
       },
       "approved": false
     }
