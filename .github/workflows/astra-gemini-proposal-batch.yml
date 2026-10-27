@@ -71,16 +71,28 @@ jobs:
           ASTRA_GEMINI_MODEL: 'gemini-3.5-flash-lite'
           ASTRA_GEMINI_FALLBACK_MODEL: 'gemini-3.1-flash-lite'
         run: python -m astra_v2.gemini_batch --count "$BATCH_COUNT"
+      - name: Install CPU-only renderer eligibility dependencies
+        if: success()
+        # Studio's make_plan imports these modules even for pre-render checks.
+        # Do not install full video, GPU, or paid-provider stacks.
+        run: |
+          python -m pip install --disable-pip-version-check \
+            'httpx==0.28.1' 'Pillow==11.3.0' 'imageio-ffmpeg==0.6.0' 'numpy==2.2.6'
       - name: Independently review generated proposals
         if: success()
         env:
+          # Match publisher/preload eligibility before spending reviewer tokens.
+          ASTRA_UNIFIED_STORY_ENGINE: '1'
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           ASTRA_EDITORIAL_REVIEW_MODEL: 'gemini-3.5-flash-lite'
         run: python -m astra_v2.gemini_batch_review
       - name: Persist approved batch to shared ASTRA state
         if: success()
         run: |
-          python - <<'PY'
+          # Fail closed on the same renderer compatibility rules as publishing.
+          # Scope this to new-batch validation; preserve existing signed history
+          # in the inventory merger for future compatible renderer versions.
+          ASTRA_UNIFIED_STORY_ENGINE=1 python - <<'PY'
           import json
           from pathlib import Path
           from astra_v2.editorial_approved_intake import approved_intake
