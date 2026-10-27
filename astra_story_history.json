@@ -5115,6 +5115,58 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-57cff6050b703e4eb923",
+      "video_id": "wUhRCbw0OlA",
+      "confirmed_at": "2026-10-27T01:40:25.997861+00:00",
+      "title": "The Badger and the Amber Bridge",
+      "plot_fingerprint": "309e0e45d145755a0914307966123c5b4cf70407eac1ac504154a25f73199604",
+      "story_beats": [
+        {
+          "headline": "Blocked by the Chasm",
+          "speech": "We cannot jump across this deep water, Barnaby. The bridge collapsed completely during the heavy autumn storm yesterday.",
+          "visual": "forest",
+          "label": "Ravine Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Barnaby the badger and Bramble the fox stand at the edge of a rocky ravine in a dense green forest, looking down at rushing water below, both wearing knitted vests, holding nothing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Gathering Vines and Branches",
+          "speech": "Hold this heavy woven vine firmly while I drag the long oak branch into position across the rocky gap.",
+          "visual": "signal",
+          "label": "Material Collection",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the badger holds a thick twisted vine bundle in the forest while Bramble the fox drags a heavy oak branch toward the ravine edge.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Lashing the Timber Span",
+          "speech": "Tie the knots tightly around both logs so the structure holds our combined weight without shifting in the wind.",
+          "visual": "robot",
+          "label": "Structural Assembly",
+          "story_beat": "mechanism",
+          "visual_prompt": "Barnaby the badger and Bramble the fox work closely together in the forest, tying thick green vines around crossed timber logs to form a bridge.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Crossing Achieved",
+          "speech": "We made it across just as the sun sets behind the tall pines. Our teamwork saved the journey home.",
+          "visual": "door",
+          "label": "Successful Journey",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby the badger and Bramble the fox stand safely together on the opposite side of the forest ravine, smiling as twilight falls near a wooden den entrance.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A deep rushing ravine blocks the only safe path home before nightfall.",
+      "decisive_choice": "Combine their limited building materials instead of searching for a longer detour.",
+      "resolution": "They successfully cross the chasm together and reach the safety of their den."
     }
   ]
 }
