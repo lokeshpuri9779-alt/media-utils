@@ -2527,6 +2527,22 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-fa6958b8ce77eddd2379",
+      "story_sha256": "ad1030b9591bce477b9c47a09bab5ed4e6235a03ef0cbff9aafdf906a7fabd2f",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-fa6958b8ce77eddd2379",
+        "story_sha256": "ad1030b9591bce477b9c47a09bab5ed4e6235a03ef0cbff9aafdf906a7fabd2f",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story presents a clear, self-contained moral dilemma with a logical causal progression.; The narrative structure is distinct from the provided examples, focusing on a unique conflict between botanical preservation and biological life-saving.; The content is suitable for a general audience and does not violate safety or policy guidelines.; The story avoids derivative tropes found in the provided list, maintaining originality in its specific character dynamics and setting.",
+        "reviewed_at": "2026-10-27T19:07:06.895552+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }
