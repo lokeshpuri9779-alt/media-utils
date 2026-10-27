@@ -37,6 +37,13 @@ class ReviewBatchTests(unittest.TestCase):
         publisher = (root / ".github/workflows/astra-v2-publish.yml").read_text()
         preload = (root / ".github/workflows/astra-v2-preload.yml").read_text()
         self.assertIn("ASTRA_UNIFIED_STORY_ENGINE: '1'", publisher)
+        dependency_step = gemini.index("      - name: Install CPU-only renderer eligibility dependencies")
+        review_start = gemini.index("      - name: Independently review generated proposals")
+        self.assertLess(dependency_step, review_start)
+        dependencies = gemini[dependency_step:review_start]
+        for package in ("httpx==0.28.1", "Pillow==11.3.0",
+                        "imageio-ffmpeg==0.6.0", "numpy==2.2.6"):
+            self.assertIn(package, dependencies)
         self.assertIn("ASTRA_UNIFIED_STORY_ENGINE: '1'", preload)
         review_step = gemini.split("      - name: Independently review generated proposals", 1)[1].split(
             "      - name: Persist approved batch to shared ASTRA state", 1)[0]
