@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-27",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 37,
+  "attempts": 38,
   "confirmed_today": 37,
-  "last_attempt_at": "2026-10-27T13:36:54.990154+00:00",
+  "last_attempt_at": "2026-10-27T13:56:52.950725+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -6983,28 +6983,83 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-27T13:38:10.244363+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "rSPOXEidyPM": {
+      "content_id": "rayvan-gemini-6fadb5ee3f453215759e",
+      "title": "The Octopus and the Faded Reef",
+      "day": "2026-10-27",
+      "uploaded_at": "2026-10-27T13:56:55.597379+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "5980dc5aa880b90dc2979bdc80287d645ded2f80d5725dc8799abf681283c228",
+      "story_beats": [
+        {
+          "headline": "The Pale Reef",
+          "speech": "Look at the gray branches. If we do not find the hidden nursery soon, the entire valley will turn to dust.",
+          "visual": "signal",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Orlo the clever brown octopus with large expressive amber eyes and suction cups holding a pulsing yellow signal shell, looking worried inside the pale gray canyon location.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Digging the Trench",
+          "speech": "Hold fast to the rock wall while I shift this heavy sand away from the hidden valve mechanism.",
+          "visual": "forest",
+          "label": "Clearing the Path",
+          "story_beat": "build",
+          "visual_prompt": "Orlo using three tentacles to push away heavy purple sand while holding a pointed coral digging tool in another tentacle, inside the dense kelp forest location.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Unlocking the Flow",
+          "speech": "Turn the stone dial three clicks counterclockwise to release the stored nutrients into the current.",
+          "visual": "door",
+          "label": "Opening the Vault",
+          "story_beat": "mechanism",
+          "visual_prompt": "Orlo turning a massive round stone door valve covered in glowing green moss, with bubbles rising in the deep underwater trench location.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Restoring the Colors",
+          "speech": "The bright pinks and blues are returning. Our home is saved and the reef breathes once more.",
+          "visual": "planet",
+          "label": "The Rebirth",
+          "story_beat": "payoff",
+          "visual_prompt": "Orlo smiling with wide eyes floating above a brilliantly glowing multicolored coral reef that resembles a miniature vibrant planet under the sea.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-27T13:55:48.966814+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-27T13:38:11.180623+00:00",
+    "at": "2026-10-27T13:56:55.963516+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-27T02:00:07.031481+00:00",
   "reserved": {
@@ -14743,13 +14798,64 @@
       "resolution": "The child stays at Cedar Grove while the robot accepts permanent reformatting.",
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-6fadb5ee3f453215759e": {
+      "at": "2026-10-27T13:56:52.950707+00:00",
+      "title": "The Octopus and the Faded Reef",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "5980dc5aa880b90dc2979bdc80287d645ded2f80d5725dc8799abf681283c228",
+      "story_beats": [
+        {
+          "headline": "The Pale Reef",
+          "speech": "Look at the gray branches. If we do not find the hidden nursery soon, the entire valley will turn to dust.",
+          "visual": "signal",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Orlo the clever brown octopus with large expressive amber eyes and suction cups holding a pulsing yellow signal shell, looking worried inside the pale gray canyon location.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Digging the Trench",
+          "speech": "Hold fast to the rock wall while I shift this heavy sand away from the hidden valve mechanism.",
+          "visual": "forest",
+          "label": "Clearing the Path",
+          "story_beat": "build",
+          "visual_prompt": "Orlo using three tentacles to push away heavy purple sand while holding a pointed coral digging tool in another tentacle, inside the dense kelp forest location.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Unlocking the Flow",
+          "speech": "Turn the stone dial three clicks counterclockwise to release the stored nutrients into the current.",
+          "visual": "door",
+          "label": "Opening the Vault",
+          "story_beat": "mechanism",
+          "visual_prompt": "Orlo turning a massive round stone door valve covered in glowing green moss, with bubbles rising in the deep underwater trench location.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Restoring the Colors",
+          "speech": "The bright pinks and blues are returning. Our home is saved and the reef breathes once more.",
+          "visual": "planet",
+          "label": "The Rebirth",
+          "story_beat": "payoff",
+          "visual_prompt": "Orlo smiling with wide eyes floating above a brilliantly glowing multicolored coral reef that resembles a miniature vibrant planet under the sea.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-27T13:38:11.180560+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-27T13:56:55.963451+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -14757,35 +14863,35 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-27T13:38:11.180612+00:00",
+    "at": "2026-10-27T13:56:55.963506+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-27T13:27:02.631586+00:00",
+    "at": "2026-10-27T13:56:33.603233+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-da488b9a04886fe9b44a",
-    "video_url": "https://www.youtube.com/watch?v=LbpwAtpvX2E",
+    "content_id": "rayvan-gemini-6fadb5ee3f453215759e",
+    "video_url": "https://www.youtube.com/watch?v=rSPOXEidyPM",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-27T13:38:11.180508+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-27T13:56:55.963370+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-27T13:38:11.180556+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
+    "at": "2026-10-27T13:56:55.963447+00:00",
+    "collection_status": "missing_diagnostics",
+    "publish_step": "success",
     "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
