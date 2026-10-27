@@ -2411,6 +2411,22 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-eb3ded6f431d7d26bfcd",
+      "story_sha256": "ca56c06f9e5120d95c1708827d19dfd5e68ca7065af0bc0b10a9c73698471488",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-eb3ded6f431d7d26bfcd",
+        "story_sha256": "ca56c06f9e5120d95c1708827d19dfd5e68ca7065af0bc0b10a9c73698471488",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the premises or plot points of the provided comparison history.; The causal chain is clear: the blockage causes the malfunction, the risky bypass provides the solution, and the resolution follows logically.; The content is suitable for a general audience and contains no unsafe or misleading information.; There are no copyright or trademark concerns identified in the narrative.; The story adheres to YouTube policy guidelines, as it is a self-contained, non-harmful fictional narrative.",
+        "reviewed_at": "2026-10-27T10:13:32.619505+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }

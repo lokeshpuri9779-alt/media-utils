@@ -5939,6 +5939,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-original-moonbridge-v1",
+      "video_id": "96Mj958JcUs",
+      "confirmed_at": "2026-10-27T10:12:48.587299+00:00",
+      "title": "The Bridge to the Sleeping Moon",
+      "plot_fingerprint": "1e1e18cca81f0871962f8edcde8ad4be8362c015e9eb159bde671a1fb42ba380",
+      "story_beats": [
+        {
+          "headline": "THE MOON STOOD STILL",
+          "speech": "Two siblings watched the moon hover above the mountain night after night.",
+          "visual": "planet",
+          "visual_intent": "Two siblings watched the moon hover above the mountain night after night.",
+          "label": "NO MOONRISE",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "reveal",
+          "duration": 2.1
+        },
+        {
+          "headline": "A MISSING SPAN",
+          "speech": "They discovered a gap in the silver bridge that carried moonlight over the ridge.",
+          "visual": "door",
+          "visual_intent": "They discovered a gap in the silver bridge that carried moonlight over the ridge.",
+          "label": "GAP IN LIGHT",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "build",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SHATTERED LANTERN",
+          "speech": "Their grandmother's lantern held the final piece of moonlight needed to mend it.",
+          "visual": "lantern",
+          "visual_intent": "Their grandmother's lantern held the final piece of moonlight needed to mend it.",
+          "label": "LAST SPARK",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "twist",
+          "duration": 2.1
+        },
+        {
+          "headline": "NIGHT MOVED AGAIN",
+          "speech": "They placed the spark in the gap and the moon rose, bathing the village in silver.",
+          "visual": "planet",
+          "visual_intent": "They placed the spark in the gap and the moon rose, bathing the village in silver.",
+          "label": "MOONRISE",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "payoff",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
