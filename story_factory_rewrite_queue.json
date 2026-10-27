@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "5030e64680d8d8f6dfffdad0",
-      "source_sha256": "9f59a3d78dcbefdbadfad185c007e3c45d91cadd0ec6b181b06851f24ad4b700",
+      "candidate_id": "037e45a0f58ef38737aaff0c",
+      "source_sha256": "9567d90550057238fdfbff0539f8ede662515b5a29e69a6880801840c1b625a2",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-364741655cb99b5816dc",
-        "title": "The Great Tomato Launch Fiasco",
-        "hook": "The Catastrophic Test",
-        "question": "Can an over-engineered pneumatic produce dispenser survive market day?",
-        "answer": "Yes, by finally prioritizing crowd aiming over aerial velocity.",
+        "content_id": "rayvan-gemini-25530293c9a80d625c15",
+        "title": "The Great Saffron Sifter Calamity",
+        "hook": "The Copper Contraption Awakens",
+        "question": "Can an overly complex culinary gadget survive a bustling spice bazaar?",
+        "answer": "Only when its creator realizes manual simplicity beats erratic automation.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,78 +29,80 @@
         ],
         "story_beats": [
           {
-            "headline": "The Catastrophic Test",
-            "speech": "Behold my masterpiece of engineering, the turbo tomato tosser, guaranteed to deliver fresh produce instantly across the bustling marketplace!",
+            "headline": "The Copper Contraption Awakens",
+            "speech": "Behold the magnificent automated saffron sifter, engineered to revolutionize our vibrant market square forever with absolute mechanical perfection!",
             "visual": "robot",
-            "label": "First Prototype",
+            "label": "The Contraption",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly next to a sputtering mechanical contraption in a crowded market stall, holding a wrench while shoppers duck.",
+            "visual_prompt": "Balthazar stands proudly next to a sputtering brass automaton in a sunlit spice market, holding a wrench while the machine puffs golden dust.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Ramping Up Pressure",
-            "speech": "The pressure gauges are climbing dangerously high, but we simply cannot afford to stop this glorious public demonstration now!",
-            "visual": "signal",
-            "label": "System Overload",
+            "headline": "A Tempest of Golden Dust",
+            "speech": "Oh dear heavens, the primary gear train is jammed tight, causing the hopper to violently sneeze orange powder everywhere!",
+            "visual": "ship",
+            "label": "Spiced Chaos",
             "story_beat": "build",
-            "visual_prompt": "Barnaby frantically twists a brass valve on the smoking machine as blinking warning lights flash red in the bustling bazaar.",
+            "visual_prompt": "Balthazar frantically scrambles around the steaming brass automaton, trying to catch flying saffron threads while angry market shoppers cough in golden clouds.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Mayor Incident",
-            "speech": "Duck your heads and hold onto your hats because the crimson missile is locked directly onto the unsuspecting town mayor!",
+            "headline": "The Desperate Wrench Strike",
+            "speech": "This overcomplicated monstrosity is ruining my entire family's reputation; I must smash the primary flywheel right now!",
             "visual": "door",
-            "label": "Direct Fire",
+            "label": "The Decision",
             "story_beat": "twist",
-            "visual_prompt": "Barnaby gasps in sheer horror as a giant ripe tomato launches through the open doorway of a nearby bakery toward the mayor.",
+            "visual_prompt": "Balthazar raises his heavy iron wrench with a determined expression, poised directly above the rattling brass gears of the sputtering machine.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Sweet Redemption",
-            "speech": "Taste the delicious fruits of accidental innovation, perfectly seasoned and served piping hot straight from our heated launch chamber!",
-            "visual": "ship",
-            "label": "Soup Delivery",
+            "headline": "Simplicity Restored at Last",
+            "speech": "Nothing truly matches the delicate touch of a simple hand-woven sieve for separating the finest threads.",
+            "visual": "signal",
+            "label": "Pure Success",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby and smiling market patrons hold out bowls catching a gentle rain of warm soup from the modified launcher hovering overhead.",
+            "visual_prompt": "Balthazar calmly smiles behind a wooden stall, holding a simple woven sieve filled with clean saffron while delighted customers form a long queue.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A malfunctioning vegetable launcher bombarding shoppers at the farmers market.",
-        "decisive_choice": "Calibrating the pressure valve to target the compost bin instead of the town mayor.",
-        "resolution": "A perfectly cooked tomato soup rains down safely into bowls for everyone.",
+        "central_conflict": "Balthazar built a mechanical saffron sifter that sneezes spices onto customers instead of sorting them.",
+        "decisive_choice": "Balthazar smashes the erratic gear-box with his wrench and returns to hand-sorting.",
+        "resolution": "Customers applaud the pure spice quality and line up to buy his traditional hand-held sieves.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion claymation style with exaggerated character expressions and charming, rustic props.",
+          "style": "Bright, colourful stop-motion aesthetic with detailed textures of wood, brass, and vibrant spices.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild gray hair, wearing a patched tweed vest, oversized goggles on his forehead, and carrying a grease-stained canvas tool belt."
+            "Balthazar": "A stout, cheerful inventor with bushy grey eyebrows, wearing a soot-stained leather apron over a blue linen tunic."
           },
           "locations": {
-            "Market Square": "A lively open-air town marketplace filled with wooden fruit crates, colorful striped awnings, cobblestone pathways, and bustling townspeople."
+            "Spice Market": "A bustling, sun-drenched outdoor bazaar filled with colourful fabric awnings, wooden crates, and sacks of red and yellow spices."
           },
           "objects": {
-            "TomatoLauncher": "A towering contraption made of gleaming copper pipes, ticking analog gauges, smoking exhaust vents, and a large metal hopper filled with heirloom tomatoes."
+            "Automaton": "A towering, clanking contraption made of polished brass pipes, glass gauges, and erratic spinning cogs.",
+            "Wrench": "A heavy, dark-iron tool with a worn wooden handle used for tightening and smashing machine parts.",
+            "Sieve": "A lightweight round wooden frame fitted with a tightly woven natural fiber mesh for sifting delicate spices."
           }
         },
-        "plot_fingerprint": "e98152541ce16f11e6feaad45d3a38e62fa414b4fe2a80bc09738f4ca42e6217"
+        "plot_fingerprint": "fae7a6fe760aa79c38e2faba6379d36ce2d67123be5e11bc54a144eb7beb85fa"
       },
       "approved": false
     },
     {
-      "candidate_id": "7eb9e33b6645aaa2327c49ac",
-      "source_sha256": "ef9cfc630c22ef428f0a8e5aa73d5c236181ed9d047a8789f5fc0ffff1e72217",
+      "candidate_id": "39be3aa3826d4b00973156d3",
+      "source_sha256": "e9fdb484792570125870f22beb6643b81a0cb23d095c9f79bfd06d9c842b9b8a",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-d8e7f6dde37af6839892",
-        "title": "The Midnight Express Misplacement",
-        "hook": "The Disappearance",
-        "question": "Where did the missing antique pocket watch vanish before the final train departure?",
-        "answer": "A clever stray terrier swallowed the ticking heirloom when it rolled beneath the platform bench.",
+        "content_id": "rayvan-gemini-a24e074fdf3885b607e3",
+        "title": "The Whispering Sands of Arid-4",
+        "hook": "The Dry Wasteland",
+        "question": "Can a desert cartographer find water in the dead salt plains?",
+        "answer": "Yes, by following the rhythmic vibrations of ancient subterranean plant roots.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -108,146 +110,146 @@
         ],
         "story_beats": [
           {
-            "headline": "The Disappearance",
-            "speech": "Attention passengers, my grandfather's golden heirloom watch has vanished right off the mahogany ticket counter!",
-            "visual": "signal",
-            "label": "Missing Heirloom",
-            "story_beat": "reveal",
-            "visual_prompt": "Stationmaster Thomas stands distraught at the ticket counter in the grand Victorian station, holding an empty brass chain while the station signal blinks red outside.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Unexpected Witness",
-            "speech": "Look at Barnaby wagging his tail by the iron bench, acting extremely suspicious after chewing something shiny.",
-            "visual": "robot",
-            "label": "Clever Terrier",
-            "story_beat": "build",
-            "visual_prompt": "A fluffy tan terrier named Barnaby sits near an ornate iron bench inside the bustling station, wearing a red leather collar and tilting its head curiously.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Discovery",
-            "speech": "Listen closely to the gentle rhythmic ticking coming directly from inside this adorable little dog's fluffy stomach.",
-            "visual": "door",
-            "label": "Ticking Tummy",
-            "story_beat": "mechanism",
-            "visual_prompt": "Stationmaster Thomas kneels down beside the wooden luggage doors, pressing his ear gently against the terrier's soft belly to hear the muffled ticking sound.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Safe Return",
-            "speech": "Good boy Barnaby, you saved the day by returning our precious family timepiece just before departure time!",
-            "visual": "ship",
-            "label": "Timepiece Recovered",
-            "story_beat": "payoff",
-            "visual_prompt": "Thomas proudly holds up the recovered golden pocket watch next to the steam train boarding gate, while Barnaby happily receives a dog biscuit reward.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "A priceless pocket watch disappears on Platform 4 minutes before the midnight train departs.",
-        "decisive_choice": "The frantic stationmaster examines the terrier instead of searching the empty luggage carts.",
-        "resolution": "The ticking heirloom is safely recovered from the clever pup, ensuring the train leaves on time.",
-        "visual_bible": {
-          "style": "Cinematic warm vintage animation with rich mahogany tones and detailed Victorian architecture.",
-          "characters": {
-            "Thomas": "An elderly stationmaster with a bushy grey mustache, round spectacles, a navy blue wool uniform, and a gold pocket watch chain.",
-            "Barnaby": "A plump, energetic tan terrier with floppy ears, expressive brown eyes, and a bright red leather collar."
-          },
-          "locations": {
-            "Station": "Grand Victorian railway station featuring arched iron ceilings, dark mahogany ticket counters, and cobblestone platforms."
-          },
-          "objects": {
-            "pocket_watch": "An antique solid gold pocket watch engraved with intricate floral patterns and fitted with a sturdy brass chain.",
-            "ticket_counter": "A polished dark mahogany counter cluttered with paper timetables, brass bell, and brass lanterns."
-          }
-        },
-        "plot_fingerprint": "7aeada2258751bd6509fe787f5dcf7a0b412c91b70e6ed858305ab165bb697c0"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "d465a8fe85989d978baf64da",
-      "source_sha256": "5725fa5c1bf929e087b496a8d2f3be6c08e2e63e1ee6ab205ddd7d3e145fdd57",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-f3a98dce38ed5b9c9b16",
-        "title": "The Singing Dunes of Oakhaven",
-        "hook": "A Desert Discovery",
-        "question": "What is causing the strange acoustic vibrations deep within the arid salt flats?",
-        "answer": "A massive subterranean cavern filled with wind-activated crystalline chimes.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "A Desert Discovery",
-            "speech": "Look at these seismic wave readings on the tracker. The vibrations are originating from beneath this dead riverbed.",
-            "visual": "signal",
-            "label": "The Anomaly",
-            "story_beat": "reveal",
-            "visual_prompt": "Dr. Clara wearing tan expedition gear holding a glowing handheld digital scanner, standing on cracked desert salt flats under a scorching sun, looking shocked at a spiking green digital signal.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Descent into Darkness",
-            "speech": "We must secure the descent winch quickly before the midday thermal winds trigger a full surface sand collapse.",
-            "visual": "door",
-            "label": "The Chasm",
-            "story_beat": "build",
-            "visual_prompt": "Dr. Clara wearing a heavy canvas pack, operating a steel hand-cranked winch mounted near a dark, gaping sinkhole in the desert floor, surrounded by blowing dust.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Hidden Oasis",
-            "speech": "These towering mineral formations are vibrating in harmony with the surface winds to create a profound chord.",
-            "visual": "forest",
-            "label": "Crystal Grove",
-            "story_beat": "mechanism",
-            "visual_prompt": "Dr. Clara standing inside a massive underground cavern, holding a high-beam flashlight upward to illuminate towering, translucent amber crystal pillars shaped like petrified trees.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A Timeless Melody",
-            "speech": "This subterranean archive proves this arid wasteland was once a roaring inland sea filled with singing life.",
+            "headline": "The Dry Wasteland",
+            "speech": "My moisture meters are reading zero percent humidity. We must find the seismic anomaly before our filters fail completely today.",
             "visual": "planet",
-            "label": "Echoes of the Past",
+            "label": "The Salt Plain",
+            "story_beat": "reveal",
+            "visual_prompt": "A lone female explorer in a weathered canvas suit stands on a vast cracked salt desert, holding a glowing digital tracker while looking at a distant orange horizon under a twin-sun sky.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Mechanical Pulse",
+            "speech": "Listen to the ground sensors clicking. This rhythm is not tectonic; it has a deliberate biological cadence guiding us north.",
+            "visual": "robot",
+            "label": "Seismic Probe",
+            "story_beat": "build",
+            "visual_prompt": "The explorer kneels beside a metallic probe drilled into the salt crust, pointing at a flickering amber LED display while tiny mechanical legs adjust the sensor depth.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Hidden Breach",
+            "speech": "Weigh your options carefully. If I pry open this limestone seal, the trapped pressure might collapse our entire excavation trench.",
+            "visual": "door",
+            "label": "Limestone Seal",
+            "story_beat": "mechanism",
+            "visual_prompt": "The explorer uses a heavy pneumatic crowbar to lift a massive circular stone slab embedded in the desert floor, revealing a deep shaft emitting cool, humid air and faint green light.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Subterranean Oasis",
+            "speech": "Look at these colossal glowing fronds! Pure liquid water is pulsing through every leaf in this magnificent hidden cavern.",
+            "visual": "forest",
+            "label": "Underground Grove",
             "story_beat": "payoff",
-            "visual_prompt": "Dr. Clara kneeling gently on the cavern floor, holding a small brass tuning fork near a glowing blue crystal cluster while soft melodic light ripples across the cave walls.",
+            "visual_prompt": "The explorer stands inside a sunlit subterranean cavern filled with towering emerald ferns and cascading waterfalls, smiling as she dips a glass flask into a crystal-clear stream.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Navigating a collapsing dune tunnel to reach an undocumented underground acoustic phenomenon.",
-        "decisive_choice": "Risking a final structural cave-in by anchoring the resonance meter to the central chime pillar.",
-        "resolution": "Mapping a miraculous subterranean musical ecosystem that proves the desert was once a lush inland sea.",
+        "central_conflict": "Mapping the toxic salt pan before hydration failure",
+        "decisive_choice": "Abandoning the compass to trust geological vibrations",
+        "resolution": "Discovering an underground oasis of bioluminescent ferns",
         "visual_bible": {
-          "style": "Cinematic realism with warm golden hour lighting and rich desert earth tones.",
+          "style": "Cinematic realism with saturated earth tones and vivid natural luminescence",
           "characters": {
-            "Dr. Clara": "A determined geologist in her early forties with wind-weathered skin, practical tied-back brown hair, wearing a worn tan canvas utility jacket and cargo trousers."
+            "explorer": "A weathered woman in her late thirties with rugged features, tied-back brown hair, wearing a patched tan canvas expedition jumpsuit and utility belt."
           },
           "locations": {
-            "Salt Flats": "An endless expanse of cracked, pale white earth under a blinding sun.",
-            "Subterranean Cavern": "A vast, damp underground space filled with glowing amber and blue mineral pillars."
+            "salt_plain": "A blindingly white, cracked desert flat stretching to distant rusty mountain ridges under a harsh dual-sun sky.",
+            "subterranean_cavern": "A lush, humid underground grotto illuminated by glowing turquoise and emerald flora surrounding freshwater pools."
           },
           "objects": {
-            "scanner": "A rugged handheld aluminum device with a vibrant green LED waveform screen.",
-            "winch": "A heavy-duty steel hand-cranked mechanical winch bolted to weathered wooden stakes.",
-            "tuning fork": "A polished brass acoustic instrument that resonates when struck against mineral surfaces."
+            "digital_tracker": "A ruggedized handheld metallic slate with a cracked glass screen displaying amber telemetry readouts.",
+            "seismic_probe": "A tripod-mounted brass cylinder with three articulating mechanical legs and blinking LED status indicators.",
+            "pneumatic_crowbar": "A heavy steel lever tool with a pressurized gas canister strapped along its spine."
           }
         },
-        "plot_fingerprint": "42ecf4e9cc95ffadd69fde04e91d16745d93c104eb630202fc0471bac3da1519"
+        "plot_fingerprint": "6baa15f7431c9651d6ccb217ced0e1dfe1bbc0bb085990bfaa31ac866dd71820"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "1096fe4f807d5f2a277efcf9",
+      "source_sha256": "3971d6eb8084215612646cd97b725532cff8c430d7be391a1c7bcbeaf171d472",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-7904d42d657444ba3524",
+        "title": "The Deepwater Harmonic Resonance",
+        "hook": "The Silent Freeze",
+        "question": "Why did the great trench currents suddenly freeze into rigid crystal pillars?",
+        "answer": "An isolated hermit crab accidentally jammed the subterranean pressure valve with its acoustic shell chime.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Silent Freeze",
+            "speech": "Look at the glowing thermal vents! The warm currents are instantly turning into freezing solid crystal pillars all around us.",
+            "visual": "forest",
+            "label": "Vent Alarm",
+            "story_beat": "reveal",
+            "visual_prompt": "Barnaby the small blue hermit crab stares in terror at massive glowing hydrothermal vents crystallizing into solid blue ice inside a dark underwater kelp forest.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Jammed Valve",
+            "speech": "The main brass pressure valve is completely stuck because my heavy acoustic shell chime rolled right inside the gear mechanism.",
+            "visual": "signal",
+            "label": "Locked Gear",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby floats close to a massive rusted brass valve wheel in an underwater trench, his striped shell chime wedged firmly between the interlocking teeth.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Hard Choice",
+            "speech": "If I wedge my favorite musical chime deeper into the sprocket teeth, it will shatter completely to release the pressure.",
+            "visual": "robot",
+            "label": "Sprocket Jam",
+            "story_beat": "mechanism",
+            "visual_prompt": "Barnaby grips his ornate mother-of-pearl acoustic chime with both claws, pressing it directly against the sharp iron gears of the sub-sea pressure regulator.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Currents Restored",
+            "speech": "The valve is spinning freely again! Warm healing currents are rushing back through the coral gardens and saving our home.",
+            "visual": "ship",
+            "label": "Flow Restored",
+            "story_beat": "payoff",
+            "visual_prompt": "Barnaby watches cheerful pink fish swim through clouds of warm, glowing bubbles billowing from the fully reopened brass pressure valve near a sunlit coral reef.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "The hydrothermal thermal vent pressure valve jammed shut, threatening to freeze the entire coral reef ecosystem.",
+        "decisive_choice": "Barnaby the hermit crab chose to sacrifice his ancestral acoustic chime to force the stuck pressure valve open.",
+        "resolution": "The warm thermal currents returned, restoring the vibrant coral ecosystem and saving the marine inhabitants.",
+        "visual_bible": {
+          "style": "vibrant 3d animated underwater film aesthetic with rich bioluminescent lighting and detailed marine textures",
+          "characters": {
+            "barnaby": "a small nimble blue hermit crab with expressive yellow eyes and a slightly cracked striped shell"
+          },
+          "locations": {
+            "trench": "a deep underwater trench lined with glowing hydrothermal vents and dense purple kelp forests",
+            "coral_reef": "a vibrant sunlit coral reef bustling with tiny colorful fish and glowing anemones"
+          },
+          "objects": {
+            "chime": "an ornate mother-of-pearl acoustic shell chime that produces a resonant musical tone when struck",
+            "valve": "a massive rusted brass pressure valve embedded in the ocean floor with intricate interlocking iron gears"
+          }
+        },
+        "plot_fingerprint": "418eb7888f25eca9b17120cf17441d313516bf896f31530eaf42c063ba3845ae"
       },
       "approved": false
     }
