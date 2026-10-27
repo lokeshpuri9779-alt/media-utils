@@ -17,7 +17,7 @@ WORKFLOW = ROOT / ".github" / "workflows" / "astra-v2-publish.yml"
 def install_fragment():
     workflow = WORKFLOW.read_text(encoding="utf-8")
     start = workflow.index("          # Only ffprobe is missing.")
-    end = workflow.index("          # Long-form cover tests", start)
+    end = workflow.index("      # Long-form cover tests", start)
     fragment = workflow[start:end]
     # Stop at the end of this run: block; don't execute later workflow steps.
     return textwrap.dedent(fragment)
