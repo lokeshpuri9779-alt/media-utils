@@ -1,24 +1,45 @@
 {
-  "observed_at": "2026-10-27T06:51:44.550761+00:00",
-  "generated": 19,
+  "observed_at": "2026-10-27T12:57:18.831815+00:00",
+  "generated": 13,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 17,
+      "index": 4,
+      "reason": "ValueError"
+    },
+    {
+      "index": 5,
+      "reason": "ValueError"
+    },
+    {
+      "index": 6,
+      "reason": "ValueError"
+    },
+    {
+      "index": 7,
+      "reason": "ValueError"
+    },
+    {
+      "index": 8,
+      "reason": "ValueError"
+    },
+    {
+      "index": 9,
+      "reason": "ValueError"
+    },
+    {
+      "index": 16,
       "reason": "ValueError"
     }
   ],
-  "reviewed": 19,
-  "approved": 9,
+  "reviewed": 13,
+  "approved": 10,
   "review_issues": [
-    "The candidate story closely mirrors the published premise and conflict of 'Kaelen and the Bloom of the Sun-Scorched Basin', involving a protagonist in a sun-scorched/arid basin who discovers a hidden, water-rich subterranean habitat/cave beneath a dry environment to resolve a severe dehydration or resource crisis.",
-    "The candidate story features a near-identical premise, conflict, and resolution to a recently published example in the comparison history ('The Conductor's Lost Pocket Watch at Terminus Nine', which also involves a lost gold pocket watch at a railway station, tracking muddy paw prints, and a stray animal returning a missing timepiece to save a railway worker's reputation).",
-    "The central conflict, decisive choice, and resolution closely mirror 'The Ranger and the Frostbound Crevasse' and 'The Glaciologist and the Crevasse Beacon' from the comparison history, involving a researcher choosing between equipment/data recovery and team survival during a sudden polar/glacier emergency.",
-    "The central conflict, setting, and narrative structure involving rival local teams (Oak Creek vs. another group) competing over a physical contest and resolving it through a mechanical vehicle/equipment innovation closely mimics recently published premises in the comparison history such as 'The Golden Goal Post of Oak Creek' and 'The Muddy Pitch Rivalry of Maple Creek'.",
-    "The premise, character dynamic (an octopus protagonist saving a fading marine ecosystem), and plot structure closely mirror the recently published comparison example 'The Octopus and the Fading Reef Symphony'.",
-    "ai_editorial_rejection",
-    "review_failed:HTTP_429",
-    "review_provider:rate_limited"
+    "The causal mechanism and narrative structure (investigating a missing railway item by following animal tracks to recover it just in time) duplicate a recently published premise.",
+    "The central conflict, decisive choice, and resolution closely mirror the previously published story 'The Conductor's Lost Pocket Watch at Terminus Nine', substituting a missing ledger and a terrier for a missing watch and a fox.",
+    "The central conflict, decisive choice, and resolution heavily overlap with existing published stories in the comparison history, specifically 'The Ranger and the Frostbound Crevasse' and 'The Glaciologist and the Crevasse Beacon', which feature a trapped researcher/climber in an ice cave/crevasse, sacrificing heavy equipment/payload, and a successful hoist rescue.",
+    "The story structure, character (Percival), setting (market square/bazaar), and naming convention ('Percival's [Adjective] [Noun]-[Noun] and the [Noun] [Noun]') are virtually identical to the previously published comparison example 'Percival's Polka-Dot Produce-Polisher and the Bazaar Blooper', representing a direct repeat of recent premises, characters, and stylistic patterns.",
+    "ai_editorial_rejection"
   ],
   "approval_pair_present": true,
   "model_access": {
