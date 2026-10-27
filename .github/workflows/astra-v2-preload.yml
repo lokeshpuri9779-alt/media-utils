@@ -113,6 +113,26 @@ jobs:
               echo "ASTRA_STATE_RESTORE=$f:missing"
             fi
           done
+          # Match publisher intake: restore the immutable Gemini approval pair
+          # from the same durable state, never infer approval from a proposal.
+          mkdir -p runtime-health
+          for f in ai-reviewed-stories.json ai-reviewed-decisions.json; do
+            if git cat-file -e "origin/astra-state:$f" 2>/dev/null; then
+              git show "origin/astra-state:$f" > "runtime-health/$f"
+              echo "ASTRA_PRELOAD_EDITORIAL_RESTORE=$f:restored"
+            else
+              rm -f "runtime-health/$f"
+              echo "ASTRA_PRELOAD_EDITORIAL_RESTORE=$f:missing"
+            fi
+          done
+          if test -f runtime-health/ai-reviewed-stories.json && ! test -f runtime-health/ai-reviewed-decisions.json; then
+            echo "::error::Incomplete persistent editorial approval pair"
+            exit 1
+          fi
+          if test -f runtime-health/ai-reviewed-decisions.json && ! test -f runtime-health/ai-reviewed-stories.json; then
+            echo "::error::Incomplete persistent editorial approval pair"
+            exit 1
+          fi
           if test -s astra_v2_state.json && test -s astra_story_history.json; then
             echo "ASTRA_EDITORIAL_HISTORY_READY=1"
           else
