@@ -689,6 +689,7 @@ jobs:
 
       - name: Archive sampled MP4 frames for manual visual review
         if: always()
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: astra-visual-review-${{ github.run_id }}
