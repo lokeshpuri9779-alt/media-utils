@@ -111,7 +111,7 @@ class StoryFactoryTests(unittest.TestCase):
 
     def test_fresh_authored_mechanisms_are_distinct_and_review_only(self):
         from astra_v2.story_factory_fresh_premises import FRESH_MECHANISMS
-        self.assertEqual(len(FRESH_MECHANISMS),32)
+        self.assertEqual(len(FRESH_MECHANISMS),40)
         self.assertEqual(len({m[0] for m in MECHANISMS}),len(MECHANISMS))
         self.assertTrue(all(len(m)==6 and all(isinstance(x,str) and len(x)>7 for x in m)
                             for m in FRESH_MECHANISMS))
@@ -134,10 +134,10 @@ class StoryFactoryTests(unittest.TestCase):
     def test_new_eight_premises_reopen_review_queue_without_publication(self):
         from astra_v2.story_factory_fresh_premises import FRESH_MECHANISMS
         expected = {
-            "observatory-heat-haze", "race-rfid-banner",
-            "market-bag-score", "library-return-flap",
-            "garden-robot-nozzle", "festival-ribbon-static",
-            "stage-speaker-vibration", "rain-gauge-roof-splash",
+            "harbor-fog-bell", "shadow-clock-mirror",
+            "beehive-hum-frequency", "ferry-rope-tension",
+            "lantern-paper-heat", "museum-magnet-compass",
+            "waterwheel-backflow", "kite-tail-resonance",
         }
         self.assertEqual({row[0] for row in FRESH_MECHANISMS[-8:]}, expected)
         with tempfile.TemporaryDirectory() as tmp:
