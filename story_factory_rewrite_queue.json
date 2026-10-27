@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "76384d03d2749d09d76936a7",
-      "source_sha256": "68f42792b50e6ae29db53a2ec6a5d031024349ca57c6c6d7e75b268fed4045cd",
+      "candidate_id": "3d9e86f82696aa1f98c7a47d",
+      "source_sha256": "96c9298049f6d1b127f7836deb56babec38c8adbdc1b4e2f33c580279b31c972",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-36dc2c0d4ad336db3c8a",
-        "title": "The Great Automatic Onion Peeler Disaster",
-        "hook": "The Demonstration Begins",
-        "question": "Can Barnaby sell his chaotic vegetable-peeling invention before market closes?",
-        "answer": "He abandons the machine and invents instant onion rings.",
+        "content_id": "rayvan-gemini-bfacaf9ad6c9f4f19a44",
+        "title": "The Great Automatic Cabbage Slicer Debacle",
+        "hook": "The Grand Unveiling",
+        "question": "Can Barnaby's motorized vegetable chopper survive its public debut at the market?",
+        "answer": "Yes, by instantly pivoting from slicing cabbages to shredding cheese for the local bakers.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,159 +29,81 @@
         ],
         "story_beats": [
           {
-            "headline": "The Demonstration Begins",
-            "speech": "Step right up good citizens and witness the fastest vegetable skin removal ever conceived in human history!",
+            "headline": "The Grand Unveiling",
+            "speech": "Behold the magnificent brass automatic cabbage slicer, guaranteed to revolutionize every single stall in this bustling town square!",
             "visual": "robot",
             "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby with ginger hair and yellow apron proudly pointing at a brass peeling machine on a wooden cart in a sunny market square.",
+            "visual_prompt": "Barnaby wearing a tweed vest and goggles stands next to a whirring brass contraption on a wooden market table, looking proudly at a crowd.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Machine Accelerates",
-            "speech": "Oh dear goodness the gears are jamming because somebody fed it twenty extra pounds of oversized red onions!",
-            "visual": "signal",
+            "headline": "The Rampant Error",
+            "speech": "Oh dear me, the calibration dial has slipped completely, and now it is shredding Mayor Higgins' prized prize-winning melons into slaw!",
+            "visual": "ship",
             "label": "The Malfunction",
             "story_beat": "build",
-            "visual_prompt": "Barnaby panicking while frantically twisting a stuck copper lever on the vibrating brass peeling machine surrounded by flying vegetable skins.",
+            "visual_prompt": "Mayor Higgins wearing a blue sash yells angrily at Barnaby while holding half a destroyed melon next to the smoking brass contraption.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Market Chaos",
-            "speech": "Duck everyone because sticky onion layers are covering the vegetable stalls and blocking all the narrow walkways!",
-            "visual": "door",
-            "label": "The Spread",
-            "story_beat": "twist",
-            "visual_prompt": "Shocked market vendors dodging airborne red onion strips outside wooden fruit stalls under a cloud of flying vegetable peelings.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Crispy Salvage",
-            "speech": "Quickly ignite the heating coil underneath so every single flying onion slice instantly transforms into a delicious snack!",
-            "visual": "ship",
-            "label": "The Solution",
-            "story_beat": "payoff",
-            "visual_prompt": "Barnaby smiling broadly as he scoops golden fried onion rings from a steaming metal basin into paper cones for hungry customers.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Barnaby's rogue vegetable-peeling machine covers the entire market in sticky onion layers.",
-        "decisive_choice": "Barnaby reverses the blade motor to deep-fry the flying rings.",
-        "resolution": "Shoppers eagerly purchase every fried ring, making him a wealthy inventor.",
-        "visual_bible": {
-          "style": "Bright cheerful stop-motion claymation aesthetic with vibrant primary colors and tactile textures",
-          "characters": {
-            "Barnaby": "An eccentric inventor with wild ginger hair, round wire spectacles, a yellow canvas apron, and striped trousers."
-          },
-          "locations": {
-            "market_square": "A bustling outdoor marketplace with striped canvas awnings, wooden produce crates, and cobblestone pavement."
-          },
-          "objects": {
-            "peeling_machine": "A contraption made of polished brass pipes, steel gears, a copper control lever, and a smoking heating element at the base."
-          }
-        },
-        "plot_fingerprint": "1b30bd1783bade200ab896de2e5ac3290979240b6b0d2dd3624999e73bc8df6a"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "24ddcaea4fc80f45db7d9908",
-      "source_sha256": "8d692e9d48f0a94955d9fba7c13998b26288fbd5977b28bb798a1a537302fcdf",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-2e98dd1e9856cbd827de",
-        "title": "The Singing Dunes of Oakhaven",
-        "hook": "The Acoustic Mystery",
-        "question": "Can a desert expedition uncover the source of an acoustic anomaly before a sandstorm buries the canyon forever?",
-        "answer": "Yes, by discovering a massive underground forest of resonance-tuned petrified trees that amplify the wind into a melodic chorus.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Acoustic Mystery",
-            "speech": "Listen closely to that deep, humming resonance echoing through the sandstone walls. It is unlike any natural desert wind I have ever recorded.",
+            "headline": "The Desperate Pivot",
+            "speech": "Quickly grab those massive blocks of sharp yellow cheddar and dump them directly into the loading chute before the guards arrive!",
             "visual": "signal",
-            "label": "Audio Anomaly",
-            "story_beat": "reveal",
-            "visual_prompt": "Dr. Aris Vance, a seasoned desert geologist with a worn canvas safari hat and leather satchel, stands on a rocky outcrop holding an active sound-frequency monitor displaying spiking green waveforms, set against a vast sun-baked canyon under a hazy yellow sky.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Descent into the Fissure",
-            "speech": "We must leave the heavy crawler behind and squeeze through this narrow crack if we want to find where the vibration originates.",
-            "visual": "door",
-            "label": "Narrow Passage",
-            "story_beat": "build",
-            "visual_prompt": "Dr. Aris Vance, wearing protective goggles and holding a glowing metal-handled utility torch, carefully steps past a towering stone archway leading into a dark, descending underground crevice within the sunlit canyon.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Petrified Grove",
-            "speech": "Look at these colossal stone trunks. They are hollow crystalline spires acting as giant natural organ pipes for the rushing subterranean drafts.",
-            "visual": "forest",
-            "label": "Hidden Forest",
+            "label": "The Modification",
             "story_beat": "mechanism",
-            "visual_prompt": "Dr. Aris Vance stands in awe inside a vast subterranean cavern illuminated by shafts of golden light piercing through ceiling cracks, surrounded by towering, hollow petrified trees with smooth glassy ridges, examining a glowing geological sample in his right hand.",
+            "visual_prompt": "Barnaby's assistant Martha wearing a canvas apron desperately heaves a heavy block of yellow cheddar cheese into the open hopper of the brass machine.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Symphony of the Sands",
-            "speech": "The wind passing through the ancient grove creates a perpetual chord. We have just discovered the world's oldest natural instrument.",
-            "visual": "planet",
-            "label": "Resonant Oasis",
+            "headline": "The Cheesy Triumph",
+            "speech": "Look at that glorious mountain of fluffy grated cheese raining down, saving our business and feeding the entire morning market queue!",
+            "visual": "door",
+            "label": "The Success",
             "story_beat": "payoff",
-            "visual_prompt": "Dr. Aris Vance smiles joyfully while holding a field audio recorder, standing on a natural stone balcony overlooking an immense, glowing underground forest of crystalline trees that vibrate gently in the subterranean breeze.",
+            "visual_prompt": "Delighted market customers holding empty plates catch a steady stream of grated yellow cheese pouring from the modified brass machine spout.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Navigating a shifting canyon while tracing a mysterious acoustic signal against an incoming tempest.",
-        "decisive_choice": "Abandoning heavy excavation gear to venture alone into a narrow, echoing fissure.",
-        "resolution": "Mapping the prehistoric acoustic cavern and preserving its musical wonder for future science.",
+        "central_conflict": "Barnaby unveils an automated cabbage slicer that aggressively targets competitor's melons instead of greens.",
+        "decisive_choice": "Barnaby dumps a crate of sharp cheddar into the hopper to test alternative textures.",
+        "resolution": "The machine successfully transforms into a bustling market cheese-grating station.",
         "visual_bible": {
-          "style": "Cinematic realism with warm desert tones, dramatic natural lighting, and crisp textural detail.",
+          "style": "Bright, colorful stop-motion animation aesthetic with detailed textures of brass, wood, and woven fabrics.",
           "characters": {
-            "Dr. Aris Vance": "A dedicated geologist in his late forties with weathered skin, intelligent hazel eyes, short greying hair, wearing a rugged tan canvas safari jacket, dark cargo trousers, and sturdy hiking boots."
+            "Barnaby": "An enthusiastic inventor with unruly gray hair, wearing a green tweed vest, round spectacles, and soot-smudged cheeks.",
+            "Martha": "A pragmatic assistant with a braided red ponytail, wearing a heavy-duty blue canvas apron and sturdy leather boots.",
+            "Mayor Higgins": "A pompous local official with a round belly, wearing a formal red tailcoat and a silk top hat."
           },
           "locations": {
-            "The Red Canyon": "A vast, sun-drenched desert gorge with layered terracotta sandstone cliffs, dusty trails, and shifting sand dunes under a bright amber sky.",
-            "The Resonance Cavern": "A massive underground chamber featuring towering hollow petrified trees with smooth, glass-like mineral ridges and glowing shafts of overhead daylight."
+            "Market Square": "A crowded cobblestone plaza filled with colorful striped vendor tents, wooden crates of produce, and bustling townsfolk."
           },
           "objects": {
-            "sound_monitor": "A rugged rectangular handheld device with a dark rubberized casing and a glowing green LCD screen displaying audio wave frequencies.",
-            "utility_torch": "A compact, heavy-duty metallic flashlight with a brushed steel finish and a warm amber LED beam."
+            "Brass Contraption": "A towering, whirring mechanical device made of polished brass pipes, spinning steel blades, and a large wooden funnel hopper.",
+            "Cheddar Block": "A massive, bright yellow rectangular block of aged cheese with a visible waxy rind."
           }
         },
-        "plot_fingerprint": "0c2cc26323c1e9afada0d4b3b69e67ae74e6561ab39a2ecea3ae05d9e1027ba3"
+        "plot_fingerprint": "9758ed440c8df67d7c1097e04f67190790cb61d296f33aee3ce8a5547be59342"
       },
       "approved": false
     },
     {
-      "candidate_id": "e6ad8b86b0754d03550609ff",
-      "source_sha256": "7b72701eaf079fedf58d5e45f155db83628492d597afd77edc29747600ece953",
+      "candidate_id": "c3815e8dbb0ad0d11095ad98",
+      "source_sha256": "83402828df944d7f705ae1286e0f7faa443b8461e9c5a2ad1ccc0f323d831ad8",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-f063314d262cf42feb1a",
-        "title": "The Midnight Express and the Mechanical Stoker",
-        "hook": "The Bolt from the Dark",
-        "question": "Can a runaway steam locomotive be halted before it breaches the old drawbridge?",
-        "answer": "A clever stationmaster and an autonomous maintenance automaton reroute the engine onto an abandoned spur.",
+        "content_id": "rayvan-gemini-4f233babf7df62c3bcbe",
+        "title": "The Infinite Pancake Flipper Catastrophe",
+        "hook": "The Grand Unveiling",
+        "question": "Can an over-engineered breakfast gadget survive the local morning rush?",
+        "answer": "Yes, by accepting that simple manual flipping beats hypersonic metal arms.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -189,63 +111,143 @@
         ],
         "story_beats": [
           {
-            "headline": "The Bolt from the Dark",
-            "speech": "Look at the pressure gauge! The throttle valve is jammed wide open and nobody is in the cab!",
-            "visual": "signal",
-            "label": "Runaway Alarm",
-            "story_beat": "reveal",
-            "visual_prompt": "Stationmaster Clara points frantically at the flashing red signal light on the dark platform as a massive locomotive roars past at high speed.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Silent Ally",
-            "speech": "Do not despair, human supervisor. My magnetic grip can safely engage the high-tension bypass lever for you.",
+            "headline": "The Grand Unveiling",
+            "speech": "Behold the Chrono-Flap! It delivers piping hot flapjacks across the entire marketplace in under three seconds flat!",
             "visual": "robot",
-            "label": "The Automaton",
+            "label": "Machine Reveal",
+            "story_beat": "reveal",
+            "visual_prompt": "Inventor Barnaby, a round man in a greasy vest, stands proudly next to a steaming brass automaton with metallic arms inside the bustling cobblestone market.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Calibration Chaos",
+            "speech": "Why is the pressure gauge climbing so fast? Someone please hold the intake valve before it overheats entirely!",
+            "visual": "signal",
+            "label": "Building Speed",
             "story_beat": "build",
-            "visual_prompt": "Bolt, a brass-plated maintenance automaton with glowing blue optical sensors, steps forward on the platform and extends a metallic hand toward the control panel.",
+            "visual_prompt": "Barnaby frantically struggles with a vibrating brass lever on the automaton while warning a panicked baker holding a tray of sticky batter.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Junction Gamble",
-            "speech": "Hold fast! If we pull this secondary lever too early, the carriage will derail entirely onto the gravel.",
-            "visual": "door",
-            "label": "Switch Control",
-            "story_beat": "mechanism",
-            "visual_prompt": "Clara and Bolt lean heavily against the heavy iron maintenance door housing the main track-switch levers while sparks fly from the grinding wheels outside.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Safe Haven",
-            "speech": "We redirected the momentum just in time. The old engine rests peacefully on the quiet spur line.",
+            "headline": "Batter Barrage",
+            "speech": "Duck! The mechanical arms have gone rogue and are launching buttery projectiles directly at the mayor's new hat!",
             "visual": "ship",
-            "label": "The Safe Spur",
+            "label": "Unexpected Twist",
+            "story_beat": "twist",
+            "visual_prompt": "Flying pancakes soar through the crowded market air, narrowly missing a ducking official while Barnaby chases the flailing robotic arm.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Manual Mastery",
+            "speech": "Nothing beats old-fashioned wrist action and a trusty iron skillet to keep everyone happy and fed today.",
+            "visual": "door",
+            "label": "Sweet Payoff",
             "story_beat": "payoff",
-            "visual_prompt": "Clara and Bolt stand together on the tranquil ballast of the side spur, watching steam safely vent from the smokestack of the halted locomotive.",
+            "visual_prompt": "Barnaby smiles warmly behind his wooden market stall, flipping a single golden pancake with a simple iron spatula while cheerful villagers line up.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Runaway engine rushing toward an open drawbridge",
-        "decisive_choice": "Throwing the manual divergence switch while entangled in rigging",
-        "resolution": "The train safely idles on the dead-end spur without injury",
+        "central_conflict": "Barnaby tests his hyper-velocity pneumatic pancake flipper at the crowded square, threatening to bury hungry patrons in hot batter.",
+        "decisive_choice": "Barnaby shuts off the high-pressure steam valve and returns to using a standard handheld spatula.",
+        "resolution": "The market crowd enjoys perfectly cooked pancakes, and Barnaby earns steady breakfast customers.",
         "visual_bible": {
-          "style": "Cinematic steampunk illustration with rich Victorian textures and warm amber lighting",
+          "style": "Bright, whimsical stop-motion claymation aesthetic with vibrant primary colors and warm lighting.",
           "characters": {
-            "Clara": "A determined stationmaster in her forties with a braided grey bun, wearing a dark navy wool coat with brass buttons and carrying a heavy iron master key.",
-            "Bolt": "A sturdy, bipedal maintenance automaton constructed from riveted brass plates with articulating finger joints and bright sapphire-glow optical lenses."
+            "Barnaby": "A stout, cheerful inventor with bushy gray eyebrows, wearing a soot-stained blue apron and round spectacles.",
+            "Mayor Higgins": "A pompous local official wearing a tall burgundy top hat and a very stiff ruffled collar."
           },
           "locations": {
-            "Grand Central Terminal": "A cavernous Victorian railway station featuring arched iron girder ceilings, gaslamp sconces, and worn cobblestone platforms."
+            "market_square": "A bustling medieval town square paved with gray cobblestones, lined with striped canvas awnings and wooden vendor stalls."
           },
           "objects": {
-            "Master Switch Lever": "A waist-high cast iron lever with a wooden spherical handle, mounted on a stone pedestal and connected to heavy steel cables."
+            "chrono_flap": "A massive, clanking brass automaton covered in glowing pressure gauges, spinning gears, and four jointed metal spatula arms.",
+            "iron_spatula": "A simple, well-seasoned black iron spatula with a curved wooden handle."
           }
         },
-        "plot_fingerprint": "f57616df129c6a2e5de0db70133c3293ecc71c19b3c29e382e14c6fe2024d1a8"
+        "plot_fingerprint": "6ba390da775ff5956fa192449334c50c3101b83d82b2f2b53db391091e0497c6"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "39d475cff61b1d1759560344",
+      "source_sha256": "337b8fb4f5d33dad73027d1dd15cbab04ee1b519f99214a0888199abb17fe2cb",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-6cf44b3334881337b655",
+        "title": "The Tide-Clock Regatta",
+        "hook": "The Rusting Horn",
+        "question": "Can a student engineer build a pneumatic wave-organ that survives the annual Salt-Gale Festival?",
+        "answer": "Yes, by routing the harbor swells through organ pipes made of cured kelp, she generates a harmonic foghorn symphony that guides the fishing fleet safely home.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Rusting Horn",
+            "speech": "Our town festival starts at dusk, yet the primary brass navigation horn is completely jammed with barnacles and salt.",
+            "visual": "ship",
+            "label": "Corroded Beacon",
+            "story_beat": "reveal",
+            "visual_prompt": "A close-up of young female engineer Miri wearing a canvas apron, staring defeatedly at a massive rusted brass horn bolted to a wooden harbor ship deck, holding a wrench in her right hand.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Gathering Kelp",
+            "speech": "We need resilient acoustic chambers immediately, so let us harvest thick giant kelp bulbs and splice them into flexible manifolds.",
+            "visual": "forest",
+            "label": "Kelp Harvest",
+            "story_beat": "build",
+            "visual_prompt": "Miri wading knee-deep in a coastal kelp forest at sunset, holding a razor-sharp pruning knife in her left hand, cutting a bulbous green kelp stalk.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Pneumatic Pressure",
+            "speech": "By pumping incoming tidal water into these organic bladders, we create a continuous pneumatic airflow for the makeshift organ pipes.",
+            "visual": "robot",
+            "label": "Tidal Pump",
+            "story_beat": "mechanism",
+            "visual_prompt": "Miri working furiously in her seaside workshop booth, adjusting a wooden lever that pumps sea water into suspended green kelp bulbs, while a small mechanical brass pressure gauge sits on the workbench.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Harmonic Gale",
+            "speech": "Listen to the deep, resonant chord echoing across the waves, guiding every returning fishing vessel safely into our harbor.",
+            "visual": "signal",
+            "label": "Safe Harbor",
+            "story_beat": "payoff",
+            "visual_prompt": "Miri standing proudly on the wooden pier at night, pointing up toward a glowing green signal flare overhead as bright acoustic waves ripple from her mounted kelp-horn assembly.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "The annual pier race requires a working acoustic beacon to warn ships of hidden reefs, but the main brass horn has rusted solid.",
+        "decisive_choice": "Reconfigure the workshop bellows to pump pressurized seafoam through flexible bladder-tubes instead of rigid metal.",
+        "resolution": "The organic organ emits a resonant chord that clears the fog and wins the festival's grand prize.",
+        "visual_bible": {
+          "style": "Hand-painted cinematic illustration with rich teal ocean tones and warm amber lantern lighting.",
+          "characters": {
+            "Miri": "A determined nineteen-year-old female engineer with dirt-smudged cheeks, tied-back brown hair, wearing a patched canvas work apron over a blue wool sweater."
+          },
+          "locations": {
+            "Harbor_Pier": "A weathered wooden wharf lined with rusted iron bollards, hanging lanterns, and salt-bleached planks overlooking a choppy sea."
+          },
+          "objects": {
+            "Kelp_Horn": "An improvised musical instrument crafted from bulbous giant kelp stalks and copper wire, wet and glistening under the harbor lights."
+          }
+        },
+        "plot_fingerprint": "5316012abd9c95c8e4e044a06952556ae10ec85f3e070a785b4d95313aece9c5"
       },
       "approved": false
     }
