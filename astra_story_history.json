@@ -5486,6 +5486,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-original-clockseed-v1",
+      "video_id": "ZCzJXG9P9HA",
+      "confirmed_at": "2026-10-27T06:05:46.951918+00:00",
+      "title": "The Seed Inside the Clock",
+      "plot_fingerprint": "e512e71df41320f4ac156a42362d11c2a2db8e50039d24b4b0a996a484639ec6",
+      "story_beats": [
+        {
+          "headline": "THE CLOCK SPROUTED",
+          "speech": "A watchmaker found a green shoot growing through the hands of his oldest clock.",
+          "visual": "clock",
+          "visual_intent": "A watchmaker found a green shoot growing through the hands of his oldest clock.",
+          "label": "TIME STOPPED",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "reveal",
+          "duration": 2.1
+        },
+        {
+          "headline": "EVERY TICK A LEAF",
+          "speech": "Whenever he wound the clock, another leaf opened.",
+          "visual": "forest",
+          "visual_intent": "Whenever he wound the clock, another leaf opened.",
+          "label": "GROWING FAST",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "build",
+          "duration": 2.1
+        },
+        {
+          "headline": "A GARDEN IN TIME",
+          "speech": "The leaves showed a forgotten garden buried beneath the town square.",
+          "visual": "door",
+          "visual_intent": "The leaves showed a forgotten garden buried beneath the town square.",
+          "label": "SECRET FOUND",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "twist",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE BELLS RETURNED",
+          "speech": "He uncovered the garden, and the town clock began to ring again.",
+          "visual": "clock",
+          "visual_intent": "He uncovered the garden, and the town clock began to ring again.",
+          "label": "NEW BEGINNING",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "payoff",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }

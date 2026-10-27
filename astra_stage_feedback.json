@@ -2,30 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-20T22:33:21.871899+00:00",
-      "stage": "pacing",
-      "element": "pacing",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 15.0,
-        "candidate": "astra-proposal-ac1ccc08d50e6c5a574e"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "astra-proposal-ac1ccc08d50e6c5a574e"
-    },
-    {
-      "at": "2026-10-20T22:33:21.876919+00:00",
-      "stage": "audio",
-      "element": "audio",
-      "outcome": "unknown",
-      "evidence": {
-        "score": 99.58,
-        "candidate": "astra-proposal-ac1ccc08d50e6c5a574e"
-      },
-      "proposed_action": "Compare score to component threshold before classifying failure",
-      "candidate_id": "astra-proposal-ac1ccc08d50e6c5a574e"
-    },
-    {
       "at": "2026-10-20T22:33:21.881930+00:00",
       "stage": "captions",
       "element": "captions",
@@ -9006,6 +8982,39 @@
       },
       "proposed_action": "",
       "candidate_id": "rayvan-original-clockseed-v1"
+    },
+    {
+      "at": "2026-10-27T06:09:31.586543+00:00",
+      "stage": "quality",
+      "element": "creative_director",
+      "outcome": "pass",
+      "evidence": {
+        "scores": {
+          "hook": 94.0,
+          "retention": 92.0,
+          "visual": 100.0,
+          "pacing": 100.0,
+          "audio": 99.44,
+          "captions": 100.0,
+          "novelty": 100.0,
+          "coherence": 92.0,
+          "technical": 100.0
+        }
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-original-submarinestar-v1"
+    },
+    {
+      "at": "2026-10-27T06:09:31.598860+00:00",
+      "stage": "render",
+      "element": "studio_render",
+      "outcome": "pass",
+      "evidence": {
+        "duration": 17.0,
+        "renderer": "studio-7.3.1"
+      },
+      "proposed_action": "",
+      "candidate_id": "rayvan-original-submarinestar-v1"
     }
   ],
   "stage_counts": {
@@ -9085,7 +9094,7 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 1,
+      "unknown": 0,
       "improved": 0,
       "regressed": 0
     },
@@ -9101,12 +9110,12 @@
       "pass": 0,
       "fail": 0,
       "skip": 0,
-      "unknown": 1,
+      "unknown": 0,
       "improved": 0,
       "regressed": 0
     },
     "render": {
-      "pass": 218,
+      "pass": 219,
       "fail": 1,
       "skip": 0,
       "unknown": 1,
@@ -9114,7 +9123,7 @@
       "regressed": 0
     },
     "quality": {
-      "pass": 218,
+      "pass": 219,
       "fail": 157,
       "skip": 0,
       "unknown": 0,
