@@ -6,6 +6,10 @@ on:
         description: 'Enter BENCHMARK; uses available GitHub Actions minutes, never a paid API'
         required: true
         type: string
+      square_diagnostic:
+        description: 'Two 512x512 diagnostic images at 20 steps; not portrait assets'
+        type: boolean
+        default: false
       comparison:
         description: 'Four review-only images: two seeds at 8 and 20 steps'
         type: boolean
@@ -37,18 +41,24 @@ jobs:
       - name: Install CPU-only benchmark dependencies
         run: |
           python -m pip install --disable-pip-version-check 'Pillow>=10,<12' 'optimum[openvino]' diffusers 'transformers>=4.46,<5'
+      - name: Match recorded core versions for resolution diagnostic
+        if: ${{ inputs.square_diagnostic }}
+        run: python -m pip install pillow==11.3.0 optimum==2.3.0 optimum-intel==2.2.0 openvino==2026.4.1 openvino-tokenizers==2026.4.1.0 diffusers==0.39.0 transformers==4.57.6 numpy==2.4.6 huggingface_hub==0.36.2 torch==2.14.1 torchvision==0.29.1
       - name: Log runner limits
         run: |
           nproc
           free -h
           df -h .
       - name: Produce isolated portrait keyframe
-        if: ${{ !inputs.comparison }}
+        if: ${{ !inputs.comparison && !inputs.square_diagnostic }}
         run: |
           python -m tools.experimental_openvino_benchmark --profile "${{ inputs.model_profile }}" --steps 8
       - name: Produce controlled four-image comparison
-        if: ${{ inputs.comparison }}
+        if: ${{ inputs.comparison && !inputs.square_diagnostic }}
         run: python -m tools.experimental_openvino_comparison
+      - name: Produce square resolution diagnostic
+        if: ${{ inputs.square_diagnostic }}
+        run: python -m tools.experimental_openvino_comparison --square
       - name: Explain benchmark scope
         if: always()
         run: |
