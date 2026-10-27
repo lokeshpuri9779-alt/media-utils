@@ -2603,6 +2603,22 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-f8e736bd064b08534c7e",
+      "story_sha256": "b1e4d60176684a6bfd436da2024ae53cae3fea18227e72460cc51f43e77f69dd",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-f8e736bd064b08534c7e",
+        "story_sha256": "b1e4d60176684a6bfd436da2024ae53cae3fea18227e72460cc51f43e77f69dd",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is causally coherent, featuring a clear problem, a difficult sacrifice, and a logical resolution.; The narrative is original and does not replicate the premises or plot points of the provided comparison history.; The content is suitable for a general audience and contains no unsafe or misleading information.; There are no apparent copyright or trademark concerns, as the characters and setting are original creations.; The story structure is well-suited for a short-form video format and adheres to standard storytelling conventions.",
+        "reviewed_at": "2026-10-27T22:07:14.727261+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }
