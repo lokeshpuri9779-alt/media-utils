@@ -2427,6 +2427,16 @@
         "review_model": "gemini-3.1-flash-lite"
       },
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-1d45f1a4509a37567351",
+      "story_sha256": "2221c478217bc37aabda611028f1bd4eedce849b3226b9bdf366ff68909f7f50",
+      "approved": false,
+      "issues": [
+        "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons"
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }

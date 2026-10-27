@@ -5988,6 +5988,58 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-eb3ded6f431d7d26bfcd",
+      "video_id": "R4rA6_leuxU",
+      "confirmed_at": "2026-10-27T10:29:04.518395+00:00",
+      "title": "The Tidal Weaver and the Salt-Crusted Spire",
+      "plot_fingerprint": "af0b15f6791f5e608a2c77d55f7735c3485d447f3637b74d3e287028a1a9b54f",
+      "story_beats": [
+        {
+          "headline": "A Shrill Awakening",
+          "speech": "The festival music has turned into a painful screeching sound, ruining the atmosphere of our beautiful seaside celebration today.",
+          "visual": "ship",
+          "label": "The discovery of the failing tide-organ.",
+          "story_beat": "reveal",
+          "visual_prompt": "Elara stands before a massive wooden pipe organ built into a shipwreck frame, looking distressed as salt-encrusted pipes rattle violently.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Internal Obstruction",
+          "speech": "I see the problem now, a thick layer of calcified sea salts has completely blocked the main primary harmonic intake valve.",
+          "visual": "robot",
+          "label": "Identifying the mechanical blockage.",
+          "story_beat": "mechanism",
+          "visual_prompt": "Elara uses a brass-plated maintenance drone to inspect the internal gears of the organ, revealing jagged salt deposits clogging the pipes.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Dangerous Bypass",
+          "speech": "If I divert the pressure now, the system might shatter, but it is the only way to clear this thick blockage.",
+          "visual": "signal",
+          "label": "Making a risky repair decision.",
+          "story_beat": "twist",
+          "visual_prompt": "Elara manually adjusts a glowing pressure gauge while a signal light flashes bright red, warning of structural fatigue in the wooden frame.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Tidal Harmony",
+          "speech": "The organ is finally playing the beautiful, deep, resonant melody that will make our seaside festival a truly memorable event today.",
+          "visual": "forest",
+          "label": "The successful repair and festival commencement.",
+          "story_beat": "payoff",
+          "visual_prompt": "Elara smiles as the organ emits harmonious, low-frequency notes that vibrate the air near a nearby driftwood forest, delighting the gathered crowd.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "The tide-organ's main intake pipe is clogged with calcified crust, causing the music to shriek instead of harmonize.",
+      "decisive_choice": "Elara chooses to manually bypass the safety pressure release, risking the organ structure to clear the blockage.",
+      "resolution": "The organ produces a perfect, resonant melody that draws the festival attendees to the shore in celebration."
     }
   ]
 }
