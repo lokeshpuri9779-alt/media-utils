@@ -3,25 +3,25 @@
   "publication_triggered": false,
   "approved_count": 0,
   "available_premises": {
-    "awaiting_editorial_review": 0,
-    "needs_new_plot": 3
+    "awaiting_editorial_review": 8,
+    "needs_new_plot": 0
   },
   "selected_for_rewrite": 3,
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "8d3d60ed08723da976a7d89b",
-      "source_sha256": "63c8c5b1a42e42f0313e40618930e01eb22ee48e5e9797776742acc3b7da2e89",
+      "candidate_id": "f64ff8715d7389627a3b5451",
+      "source_sha256": "2cc63fb9d3c777311bc61a93bdbb8a8294e96b92b7b20b346825183a59352a77",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-9eca8494e2b92704687a",
-        "title": "The Great Vegetable Slicer Fiasco",
-        "hook": "The Wild Demonstration",
-        "question": "Can Barnaby sell his chaotic multi-blade chopper before it destroys the town square?",
-        "answer": "Barnaby channels the spinning frenzy into a community noodle festival, turning disaster into culinary triumph.",
+        "content_id": "rayvan-gemini-8a35e6830b1bf100738b",
+        "title": "The Mechanical Dumpling Disaster",
+        "hook": "Morning Chaos",
+        "question": "Can the market's fastest folding machine pass the early morning noodle test?",
+        "answer": "Yes, by adjusting the pressure valves to handle sticky dough.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,80 +29,78 @@
         ],
         "story_beats": [
           {
-            "headline": "The Wild Demonstration",
-            "speech": "Behold the magnificent Turbovegetable 3000, designed to slice your carrots into microscopic confetti instantly!",
+            "headline": "Morning Chaos",
+            "speech": "Look at this sticky mess! The dough is jamming every single gear before the market bell even rings.",
             "visual": "robot",
-            "label": "The Invention",
+            "label": "Jamming Gears",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly beside his whirring copper robot device in the crowded sunlit market square, holding a wooden carrot with an anxious smile while townspeople watch.",
+            "visual_prompt": "Barnaby stares in horror at a smoking brass-plated robot appliance stuffed with white dough, standing in a crowded cobblestone market stall at dawn.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Loss of Control",
-            "speech": "Oh dear, the turbo gear is jammed at maximum speed, and now it is launching onions everywhere!",
-            "visual": "signal",
-            "label": "The Malfunction",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby frantically waves his arms in alarm as the copper robot spews glowing red warning lights and green onions rain down on startled merchant stalls.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Desperate Intervention",
-            "speech": "Quickly, help me feed this giant flour sack into the spinning maw before the entire market vanishes!",
-            "visual": "door",
-            "label": "The Maneuver",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby and a grumpy vegetable vendor heave a heavy white flour sack directly toward the open access hatch of the roaring robotic shredder.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A Delicious Success",
-            "speech": "Who knew that rapid vegetable shredding mixed with raw dough would invent the finest instant noodles ever tasted?",
+            "headline": "Hasty Repairs",
+            "speech": "Hold on, let us tighten the tension springs right now before the angry noodle vendors gather around our stall.",
             "visual": "ship",
-            "label": "The Feast",
+            "label": "Tightening Springs",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby frantically twists a brass valve on the side of the steampunk machine while holding a heavy iron wrench, surrounded by hanging wooden crates of flour.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Sudden Realization",
+            "speech": "Wait, the steam is melting the flour! We need to channel hot air outward instead of trapping it inside.",
+            "visual": "signal",
+            "label": "Exhaust Redirect",
+            "story_beat": "twist",
+            "visual_prompt": "Barnaby points excitedly at a rising puff of steam escaping from the top pipe of the machine, while a curious baker watches from an adjacent wooden stall.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Flawless Output",
+            "speech": "Smell those fresh dumplings! Our redesigned ventilation system finally delivers piping hot food for every hungry customer.",
+            "visual": "door",
+            "label": "Market Success",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby holds up a steaming bowl of fresh noodles under colorful market awnings, smiling triumphantly as cheerful villagers line up with empty plates.",
+            "visual_prompt": "Barnaby smiles proudly beside the humming brass machine as rows of perfectly formed dumplings slide down a polished wooden chute into a woven basket.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby's over-engineered automated carrot-shredder goes berserk in the farmers market, threatening every vegetable stall.",
-        "decisive_choice": "Barnaby wedges a massive sack of dough into the intake hopper to redirect the hyper-velocity vegetable debris.",
-        "resolution": "The townspeople embrace the flying noodles, establishing Barnaby as the premier market snack inventor.",
+        "central_conflict": "The automatic dumpling folder clogs because the market humidity softens the flour paste too quickly.",
+        "decisive_choice": "Barnaby reroutes the steam exhaust directly into the mixing paddle to dry the dough mid-spin.",
+        "resolution": "The machine produces perfectly sealed dumplings just as the morning breakfast rush arrives.",
         "visual_bible": {
-          "style": "Bright stop-motion animated comedy aesthetic with vibrant marketplace colors and tactile textures.",
+          "style": "Bright, colorful stop-motion puppet animation aesthetic with rich textures and warm lighting.",
           "characters": {
-            "Barnaby": "An eccentric inventor with wild ginger hair, oversized round spectacles, a tweed vest covered in grease spots, and a permanently hopeful grin.",
-            "Vendor": "A stern local merchant wearing a striped blue apron and a round straw hat, constantly frowning at flying produce."
+            "Barnaby": "An eccentric inventor with wild gray hair, wire-rimmed glasses, a green tweed vest, and flour-dusted fingers."
           },
           "locations": {
-            "Market Square": "A bustling cobblestone plaza lined with striped canvas awnings, wooden crates of colorful vegetables, and fluttering festival banners."
+            "market_stall": "A bustling, sunlit outdoor medieval market square filled with wooden crates, colorful canvas awnings, and cobblestone ground."
           },
           "objects": {
-            "Turbovegetable 3000": "A chaotic mechanical contraption made of polished copper pipes, spinning steel blades, blinking indicator lights, and a gaping hopper.",
-            "Flour Sack": "A large burlap sack marked with a bold black wheat symbol, overflowing with white flour."
+            "dumpling_machine": "A complex contraption made of polished brass, copper tubing, mechanical gears, and a wooden hopper at the top."
           }
         },
-        "plot_fingerprint": "c8ab8c31f813ce4a315f7aafb72cbcfbe739db95715e1d3732a527ef42cf96c1"
+        "plot_fingerprint": "6f618e7a5df086e67dbfc8a344964f20215f989888bf67195425cd21cd5eb810"
       },
       "approved": false
     },
     {
-      "candidate_id": "e8df0fb3ad3f04dd46d06c2f",
-      "source_sha256": "d83538f72c0c6b24c2782daffeee3ebaae97fef2e9852457c787fd4ca0bde73c",
+      "candidate_id": "c56a74c0f39b063601b9f3f0",
+      "source_sha256": "b965122ecaddc330d03127708faa2ab145e9484bb4796d29548587bf4cce8708",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-d8eb33dafb4c9e37dc2c",
-        "title": "The Permafrost Signal",
-        "hook": "Seismic Anomaly Detected",
-        "question": "Can an automated ice-core drill override a critical seismic warning to save the research team?",
-        "answer": "Yes, by manually severing the drill's main power conduit before the resonance triggers an avalanche.",
+        "content_id": "rayvan-gemini-6b706e113a690ea94fdf",
+        "title": "The Great Muddy Pitch Mystery",
+        "hook": "The Flooded Pitch",
+        "question": "How did the rival soccer teams fix the flooded community pitch without postponing the charity match?",
+        "answer": "They constructed a gravity-fed drainage trench using discarded PVC pipes.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -110,81 +108,82 @@
         ],
         "story_beats": [
           {
-            "headline": "Seismic Anomaly Detected",
-            "speech": "Look at these telemetry spikes! The deep drill is generating a harmonic frequency that destabilizes the entire shelf.",
-            "visual": "signal",
-            "label": "Frequency Alert",
+            "headline": "The Flooded Pitch",
+            "speech": "Look at this disaster! How are we supposed to play our big charity match with a massive lake in the middle?",
+            "visual": "forest",
+            "label": "The Discovery",
             "story_beat": "reveal",
-            "visual_prompt": "Dr. Vance stares wide-eyed at a glowing green oscilloscope monitor inside a cramped modular research tent, pointing a gloved finger at erratic wave patterns.",
+            "visual_prompt": "Captain Toby pointing at a deeply flooded community grass pitch surrounded by pine trees, wearing blue sports gear with worried expression, while holding a muddy soccer ball.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Automated Lock",
-            "speech": "The safety protocol is locked behind an encrypted remote server. We cannot shut it down from the console.",
-            "visual": "robot",
-            "label": "Server Lockout",
+            "headline": "The Blocked Culvert",
+            "speech": "The old drainage pipe is completely clogged with autumn leaves and thick mud, trapping all the rainwater here.",
+            "visual": "signal",
+            "label": "The Investigation",
             "story_beat": "build",
-            "visual_prompt": "Engineer Kael desperately hammers at a ruggedized terminal keyboard covered in frost, while an automated robotic calibration arm sparks uselessly in the background.",
+            "visual_prompt": "Maya shining a red waterproof flashlight directly into a rusty metal drainage culvert entrance, wearing orange athletic jersey, showing a determined expression.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Manual Intervention",
-            "speech": "We have to sever the primary high-voltage conduit outside right now, or the whole glacier comes down on us.",
+            "headline": "The Ingenious Siphon",
+            "speech": "We do not need heavy machinery. If we link these scrap irrigation tubes together, gravity will pull the water out.",
             "visual": "door",
-            "label": "Airlock Exit",
+            "label": "The Mechanism",
             "story_beat": "mechanism",
-            "visual_prompt": "Dr. Vance grabs a heavy insulated cutting torch from a steel rack beside the heavy reinforced airlock door, steam billowing from her breath in the sub-zero air.",
+            "visual_prompt": "Toby and Maya working together near a wooden equipment shed doorway, connecting blue flexible PVC pipes to create a makeshift siphon system, both smiling.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Glacier Stabilized",
-            "speech": "The vibration stopped just in time. The samples are intact and the resonance chamber is completely silent.",
-            "visual": "ship",
-            "label": "Rescue Approach",
+            "headline": "The Whistle Blows",
+            "speech": "The field is completely dry just in time. Let us finally settle this rivalry on fair ground!",
+            "visual": "robot",
+            "label": "The Triumph",
             "story_beat": "payoff",
-            "visual_prompt": "Dr. Vance and Kael stand side by side on the snow-packed ridge, watching a twin-engine rescue ski-plane descend through the breaking arctic clouds.",
+            "visual_prompt": "Toby and Maya standing side by side on a pristine green soccer pitch holding a shiny silver trophy, wearing opposing team jerseys, surrounded by cheering neighbors.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "An active thermal drill creates harmonic vibrations threatening to collapse the glacier over the research vault.",
-        "decisive_choice": "Dr. Vance cuts the high-voltage telemetry line rather than waiting for the automated shutdown sequence.",
-        "resolution": "The vault remains stable, preserving the ancient ice samples while trapping the team temporarily until rescue arrives.",
+        "central_conflict": "A massive storm flooded the town's shared soccer pitch right before the annual neighborhood rivalry match, threatening cancellation.",
+        "decisive_choice": "Captain Toby chose to collaborate with his fiercest rival, Maya, instead of arguing over who was responsible for clearing the water.",
+        "resolution": "Both teams successfully drained the pitch together, played an incredible match, and established a permanent joint maintenance committee.",
         "visual_bible": {
-          "style": "Cinematic gritty realism with desaturated cold blue and slate grey tones, accented by high-visibility orange safety gear.",
+          "style": "vibrant, cinematic 3D animation style with detailed textures, realistic lighting, and cheerful color palettes",
           "characters": {
-            "Dr_Vance": "A determined female arctic researcher in her late forties with weathered skin, wearing a heavy down-filled parka with a fur-lined hood.",
-            "Kael": "A pragmatic young field engineer with silver-rimmed glasses fogged by condensation, wearing a utility vest over an insulated fleece."
+            "Toby": "A teenage boy with messy brown hair, freckles, wearing a blue athletic jersey, black shorts, and worn running shoes.",
+            "Maya": "A teenage girl with curly black hair tied in a ponytail, wearing an orange athletic jersey, white shorts, and bright yellow cleats."
           },
           "locations": {
-            "research_tent": "A reinforced geodesic canvas shelter packed with glowing monitors, tangled cables, and aluminum storage cases.",
-            "glacier_ridge": "A sweeping white expanse of ice and packed snow under a dim polar sky, dotted with metal tripod anchors."
+            "community_pitch": "A lush neighborhood soccer field surrounded by pine trees, featuring white goalposts and a wooden equipment shed.",
+            "drainage_culvert": "A rusty corrugated metal pipe opening set into a sloping grassy embankment beside the pitch."
           },
           "objects": {
-            "oscilloscope": "A rugged tactical monitor featuring a monochrome green vector display with jagged real-time frequency lines.",
-            "cutting_torch": "A heavy-duty yellow and black handheld thermal cutter with an insulated ceramic nozzle and thick braided fuel hoses."
+            "soccer_ball": "A classic black and white paneled leather soccer ball with visible mud splashes.",
+            "pvc_pipe": "A length of flexible blue corrugated plastic tubing used for irrigation and drainage.",
+            "trophy": "A gleaming silver cup trophy mounted on a polished dark wooden base with an engraved plaque."
           }
         },
-        "plot_fingerprint": "73959e0b0fbf541a010b25471812bb70595e4aa37ab8615373c59cb5fc15f6ad"
+        "plot_fingerprint": "0ceebe6ac1f85a1370647421780045c4f1a74fa8a2724504ea388a820314d9ad"
       },
       "approved": false
     },
     {
-      "candidate_id": "9ed244caf06645eab0ca422a",
-      "source_sha256": "377ee3e8fa30fc242516a048f5e0c266d9e5e8a3c95b47f3d55f35a8f5216d0a",
+      "candidate_id": "bf268b6d407e51f24b956e33",
+      "source_sha256": "b02470f546db19ec21f6443f0916ddfe11b1e0bd86ae87d8162366ac51942e56",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-a094edf82955a85830cf",
-        "title": "The Midnight Express Mystery",
-        "hook": "Missing Permit Panic",
-        "question": "Who unlocked the conductor's dispatch box before the midnight express departed?",
-        "answer": "A clever stray terrier named Pip who retrieved the dropped brass key from the tracks.",
+        "content_id": "rayvan-gemini-ae6aa51024d254851658",
+        "title": "The Resonance Leak on Deck Seven",
+        "hook": "Alarms Blare Across the Bridge",
+        "question": "Can the engineering crew patch the plasma manifold before the hull loses structural integrity?",
+        "answer": "They bypass the primary intake and safely vent the excess ion charge into the void.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -192,66 +191,66 @@
         ],
         "story_beats": [
           {
-            "headline": "Missing Permit Panic",
-            "speech": "We cannot depart without the signed clearance permit locked securely inside my brass dispatch box right now.",
-            "visual": "signal",
-            "label": "The Locked Box",
-            "story_beat": "reveal",
-            "visual_prompt": "Conductor Miller stands on Platform Three holding an empty leather strap, looking distressed beneath a flickering red railway signal.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Unexpected Helper",
-            "speech": "Look at this clever little terrier holding a heavy brass key tightly between his small white teeth.",
-            "visual": "robot",
-            "label": "Pip the Terrier",
-            "story_beat": "build",
-            "visual_prompt": "Inspector Vance kneels beside a scruffy brown terrier holding an antique brass key on the wooden platform near a mechanical luggage cart.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Unlocking the Box",
-            "speech": "Drop the key gently right here into my palm, good dog, so we can finally open this heavy leather case.",
-            "visual": "door",
-            "label": "Opening Dispatch",
-            "story_beat": "mechanism",
-            "visual_prompt": "Inspector Vance carefully takes the brass key from the smiling terrier's mouth while unlocking a weathered leather dispatch box on a bench.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Departure Granted",
-            "speech": "The permit is safely inside, and the signal is green, so let us blow the whistle and depart immediately.",
+            "headline": "Alarms Blare Across the Bridge",
+            "speech": "Captain, the primary plasma manifold is fracturing from extreme thermal expansion, threatening our entire propulsion system.",
             "visual": "ship",
-            "label": "Green Light",
+            "label": "Thermal Alert",
+            "story_beat": "reveal",
+            "visual_prompt": "First officer Vane stands before the glowing amber main console inside the bridge, pointing a gloved finger at flashing red warning diagnostics while wearing a heavy charcoal jumpsuit with orange safety stripes.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A Disagreement in Engineering",
+            "speech": "We must cut power to the port nacelle immediately, or the overload will melt straight through the secondary bulkheads.",
+            "visual": "robot",
+            "label": "Emergency Override",
+            "story_beat": "build",
+            "visual_prompt": "Maintenance android Unit-Seven holds a sparking diagnostic stylus in its right manipulator while arguing with Chief Engineer Kael inside the narrow, copper-piped engine room.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Diverting the Coolant",
+            "speech": "Stand back and let me purge the auxiliary reserves into the manifold before the thermal seals completely fail.",
+            "visual": "signal",
+            "label": "Coolant Purge",
+            "story_beat": "mechanism",
+            "visual_prompt": "Chief Engineer Kael slams a heavy brass lever down on the central control panel, causing a wave of blue cryogenic mist to vent upward past his soot-stained face.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "System Recovery",
+            "speech": "Pressure gauges are returning to nominal levels across all decks. Excellent judgment under pressure, team.",
+            "visual": "planet",
+            "label": "Safe Harbor",
             "story_beat": "payoff",
-            "visual_prompt": "Conductor Miller waves a green lantern from the train vestibule while Inspector Vance pats the triumphant terrier on the bustling platform.",
+            "visual_prompt": "Captain Vane and Chief Engineer Kael watch through the massive forward viewport as a tranquil blue ocean planet fills the screen, their expressions relieved and exhausted.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "The express train is stranded because the locked dispatch box holds the departure permit.",
-        "decisive_choice": "Inspector Vance follows the persistent barking terrier down onto the dark gravel tracks.",
-        "resolution": "The permit is recovered just in time, allowing the midnight express to pull out smoothly.",
+        "central_conflict": "A cracked plasma manifold threatening bulkhead collapse during warp transit.",
+        "decisive_choice": "Diverting reactor coolant away from the life support reserves to cool the seal instantly.",
+        "resolution": "The hull pressure stabilizes completely, saving the vessel and crew from disaster.",
         "visual_bible": {
-          "style": "Cinematic 1920s railway mystery with rich warm lighting and sharp period details.",
+          "style": "Cinematic sci-fi realism with gritty, industrial textures, warm tungsten interior lighting, and cool blue holographic interface displays.",
           "characters": {
-            "Conductor Miller": "An elderly man in a pressed navy uniform with silver buttons and a round cap.",
-            "Inspector Vance": "A tall detective wearing a wool tweed overcoat and a flat cap.",
-            "Pip": "A small energetic terrier with scruffy brown fur and alert floppy ears."
+            "Vane": "Human female in her late thirties with braided dark hair, wearing a charcoal grey command jumpsuit with prominent orange utility stripes and brass rank pins.",
+            "Kael": "Human male in his mid-forties with a short grey beard, wearing a grease-stained leather utility apron over a navy blue engineering tunic.",
+            "Unit-Seven": "Bipedal maintenance android with a polished chrome chassis, glowing cyan optical sensors, and dual articulated manipulator hands."
           },
           "locations": {
-            "Platform Three": "A bustling Victorian train station platform with cast iron pillars and steam rising from tracks."
+            "bridge": "A spacious command deck featuring curved glass viewports, leather-upholstered pilot chairs, and recessed amber console panels.",
+            "engine_room": "A cramped, vertical chamber lined with exposed copper coolant pipes, vibrating turbine housings, and flickering diagnostic terminals."
           },
           "objects": {
-            "dispatch_box": "A scuffed dark brown leather box with a heavy brass lock and reinforced corner brackets.",
-            "brass_key": "An ornate, tarnished skeleton key with a clover-shaped handle.",
-            "green_lantern": "A black metal railway lantern glowing with a steady emerald light."
+            "diagnostic_stylus": "A slender titanium cylinder with a glowing violet tip used for reading system data.",
+            "coolant_lever": "A heavy, mechanical brass lever mounted on a steel pedestal with embossed emergency warning glyphs."
           }
         },
-        "plot_fingerprint": "41ae55c9108eb9dc74b4ecc7b57607d91c1261e94eb5095ded014876b93c95ec"
+        "plot_fingerprint": "b1f115abb4b89949f8747599e0de77468dbf014c0aba201b5316657a0bc9e10d"
       },
       "approved": false
     }
