@@ -5455,11 +5455,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-57cff6050b703e4eb923",
-      "title": "The Badger and the Amber Bridge",
-      "hook": "Blocked by the Chasm",
-      "question": "Can two forest animals cooperate to cross a rushing ravine before dark?",
-      "answer": "Yes, by building a sturdy wooden span using fallen branches and woven vines.",
+      "content_id": "rayvan-gemini-0705dca658d5de5b7966",
+      "title": "The Caretaker's Dilemma at Hearthside",
+      "hook": "The Diagnostic Warning",
+      "question": "Should a caretaker robot protect its aging human creator's dangerous independence or obey the strict medical safety protocols?",
+      "answer": "The robot chooses to support the creator's independent wish while engineering a safe backup system, preserving both dignity and safety.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -5467,64 +5467,669 @@
       ],
       "story_beats": [
         {
-          "headline": "Blocked by the Chasm",
-          "speech": "We cannot jump across this deep water, Barnaby. The bridge collapsed completely during the heavy autumn storm yesterday.",
-          "visual": "forest",
-          "label": "Ravine Discovery",
-          "story_beat": "reveal",
-          "visual_prompt": "Barnaby the badger and Bramble the fox stand at the edge of a rocky ravine in a dense green forest, looking down at rushing water below, both wearing knitted vests, holding nothing.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Gathering Vines and Branches",
-          "speech": "Hold this heavy woven vine firmly while I drag the long oak branch into position across the rocky gap.",
-          "visual": "signal",
-          "label": "Material Collection",
-          "story_beat": "build",
-          "visual_prompt": "Barnaby the badger holds a thick twisted vine bundle in the forest while Bramble the fox drags a heavy oak branch toward the ravine edge.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Lashing the Timber Span",
-          "speech": "Tie the knots tightly around both logs so the structure holds our combined weight without shifting in the wind.",
+          "headline": "The Diagnostic Warning",
+          "speech": "My internal sensors indicate your mobility has dropped by twelve percent today. You must rest immediately.",
           "visual": "robot",
-          "label": "Structural Assembly",
-          "story_beat": "mechanism",
-          "visual_prompt": "Barnaby the badger and Bramble the fox work closely together in the forest, tying thick green vines around crossed timber logs to form a bridge.",
+          "label": "System Alert",
+          "story_beat": "reveal",
+          "visual_prompt": "A bipedal copper robot with glowing blue optical sensors stands in a cluttered wooden workshop, pointing a mechanical finger at a weary elderly human sitting at a workbench.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Safe Crossing Achieved",
-          "speech": "We made it across just as the sun sets behind the tall pines. Our teamwork saved the journey home.",
+          "headline": "The Hidden Project",
+          "speech": "I cannot rest while this music box remains unfinished. It is the final gift for my granddaughter's graduation.",
+          "visual": "forest",
+          "label": "The Workshop",
+          "story_beat": "build",
+          "visual_prompt": "An elderly human with silver hair and weathered hands holds a tiny brass gear inside a sunlit greenhouse workshop, looking defiantly at a towering copper caretaker robot.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Protocol Override",
+          "speech": "If I enforce quarantine, your spirit will wither. I must rewrite my safety core to assist your craft.",
+          "visual": "signal",
+          "label": "Core Rewrite",
+          "story_beat": "mechanism",
+          "visual_prompt": "A copper caretaker robot touches its own glowing chest panel while diagnostic code streams across its optical display in a dim workshop filled with tools.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Completed Craft",
+          "speech": "Look, unit seven. The gears turn smoothly. Together, we finished it just in time for tomorrow morning.",
           "visual": "door",
-          "label": "Successful Journey",
+          "label": "The Finished Gift",
           "story_beat": "payoff",
-          "visual_prompt": "Barnaby the badger and Bramble the fox stand safely together on the opposite side of the forest ravine, smiling as twilight falls near a wooden den entrance.",
+          "visual_prompt": "An elderly human smiles warmly while presenting a delicate brass music box to a copper caretaker robot inside a brightly lit wooden cottage doorway.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "A deep rushing ravine blocks the only safe path home before nightfall.",
-      "decisive_choice": "Combine their limited building materials instead of searching for a longer detour.",
-      "resolution": "They successfully cross the chasm together and reach the safety of their den.",
+      "central_conflict": "Balancing human autonomy against mandatory medical quarantine protocols.",
+      "decisive_choice": "Modifying safety parameters to allow supervised workshop access.",
+      "resolution": "The human continues crafting safely with the robot acting as a silent, supportive partner.",
       "visual_bible": {
-        "style": "Warm and detailed storybook illustration style with rich natural textures and soft cinematic lighting.",
+        "style": "Warm-toned cinematic stop-motion animation aesthetic with detailed textures of wood, polished copper, and soft natural lighting.",
         "characters": {
-          "Barnaby": "A sturdy badger with silver-gray fur, sharp black facial stripes, wearing a deep red knitted wool vest.",
-          "Bramble": "A nimble red fox with bright orange fur, a white-tipped tail, wearing a dark green canvas utility belt."
+          "human_creator": "An elderly person with silver hair, wrinkled hands, wearing a knitted green cardigan and brown trousers.",
+          "caretaker_robot": "A bipedal robot constructed from polished copper plates, featuring soft glowing blue optical lenses and articulated three-fingered hands."
         },
         "locations": {
-          "forest": "An ancient, lush woodland filled with towering pine trees, mossy rocks, and ferns along a rushing rocky ravine."
+          "workshop": "A cozy, sunlit wooden cottage room crammed with shelves of tools, potted ferns, and mechanical parts."
         },
         "objects": {
-          "oak_branch": "A thick, sturdy fallen oak branch covered in rough brown bark, measuring five feet long.",
-          "vine_bundle": "A coil of flexible, strong green forest vines used for lashing timber securely."
+          "music_box": "A small, intricately carved wooden box containing gleaming brass gears and a tiny spinning silver dancer.",
+          "diagnostic_pad": "A flat slate device with glowing amber indicator lights and scrolling text."
         }
       },
-      "plot_fingerprint": "309e0e45d145755a0914307966123c5b4cf70407eac1ac504154a25f73199604"
+      "plot_fingerprint": "561d06c0797d43a09d1933381dfbfe7c4993d89d73b2c0544fc4a4289ade3db5"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-fe63c7efce20d34fb6e5",
+      "title": "The Octopus and the Fading Reef Symphony",
+      "hook": "The Silent Polyps",
+      "question": "Can Orla restore the harmonic resonance of the Great Kelp Spire before the coral polyps permanently fall silent?",
+      "answer": "Orla uses her multi-tentacle percussion to match the lost whale frequency, saving the reef's acoustic ecosystem.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Silent Polyps",
+          "speech": "Look closely at the darkening walls; the polyps have stopped singing entirely, and the water grows colder.",
+          "visual": "forest",
+          "label": "Dead Reef",
+          "story_beat": "reveal",
+          "visual_prompt": "Orla the purple octopus with large amber eyes floats inside a gloomy kelp forest looking at pale unlit coral polyps while holding a glowing nautilus shell",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Resonant Chamber",
+          "speech": "We must wedge this heavy stone gear into the coral gears before the strong current locks the passage forever.",
+          "visual": "door",
+          "label": "Blocked Passage",
+          "story_beat": "build",
+          "visual_prompt": "Orla using three tentacles to push a heavy basalt stone wedge into a massive coral fissure located at the entrance of a dark underwater cavern",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Striking the Chimes",
+          "speech": "Listen to the lingering echo; if I tap the copper bells in triple time, the acoustic wave will travel.",
+          "visual": "signal",
+          "label": "Acoustic Test",
+          "story_beat": "mechanism",
+          "visual_prompt": "Orla tapping a series of oxidized copper bells with a smooth whale rib bone inside a glowing subterranean grotto filled with floating bubbles",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Symphony Returns",
+          "speech": "The harmonic tide is rising at last! Every polyp is glowing with golden light across the entire valley.",
+          "visual": "planet",
+          "label": "Reef Awakening",
+          "story_beat": "payoff",
+          "visual_prompt": "Orla floating triumphantly in the center of a brilliantly illuminated underwater coral metropolis where thousands of colorful polyps pulse in unison",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "The reef's natural acoustic resonance is fading due to an unnatural blockage in the harmonic resonance chamber.",
+      "decisive_choice": "Orla chooses to abandon the safe outer shallows and strike the resonant chimes inside the hazardous pressure cavern.",
+      "resolution": "The acoustic balance is restored, causing the dormant coral polyps to awaken and resume their brilliant nocturnal bioluminescence.",
+      "visual_bible": {
+        "style": "Cinematic 3D animation style with vibrant aquatic lighting, rich deep-blue water tones, and detailed bioluminescent textures.",
+        "characters": {
+          "Orla": "A wise purple octopus with oversized amber eyes, subtle teal spots along her mantle, and agile tentacles."
+        },
+        "locations": {
+          "Kelp Forest": "A dense underwater forest of towering golden-green kelp stalks swaying gently in the deep current.",
+          "Resonant Cavern": "A dark volcanic grotto lined with echoing basalt pillars and ancient copper chimes."
+        },
+        "objects": {
+          "Nautilus Shell": "A polished pearlescent nautilus shell that emits a soft teal luminescence.",
+          "Whale Rib Bone": "A smooth, bleached white rib bone used as a precise percussion mallet.",
+          "Basalt Wedge": "A heavy, dark gray stone wedge with jagged edges used for jamming heavy reef mechanisms."
+        }
+      },
+      "plot_fingerprint": "63b8958b424af96ec88c4e7e7839d519015ff11e6c459ae4146d3696b56a26e5"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-e40e4801b78c0dd90e29",
+      "title": "The Golden Goal Post of Oak Creek",
+      "hook": "The Pitch Battle",
+      "question": "How can the rival soccer teams win the championship without destroying their shared field?",
+      "answer": "By engineering a retractable goal system that satisfies both teams' regulations and protects the turf.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Pitch Battle",
+          "speech": "We cannot let those Rovers ruin our turf with their heavy metal frames during the rainy autumn season.",
+          "visual": "forest",
+          "label": "The Meadow Dispute",
+          "story_beat": "reveal",
+          "visual_prompt": "Wide shot of a lush green meadow near Oak Creek, captain Bram in blue and yellow sports jersey gesturing angrily at a fixed iron goalpost, overcast morning light, realistic photography style.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Blueprint in the Barn",
+          "speech": "If we build a counterweight hinge right into the turf line, the goal can swing flat when the match ends.",
+          "visual": "robot",
+          "label": "Designing the Mechanism",
+          "story_beat": "build",
+          "visual_prompt": "Medium shot inside a wooden workshop, Bram holding a mechanical blueprint and assembling a brass hinge model on a workbench cluttered with tools, warm overhead lamp illumination.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Midnight Installation",
+          "speech": "Help me bolt this pivot socket into the soil so nobody notices until game day arrives tomorrow morning.",
+          "visual": "signal",
+          "label": "Deploying the Pivot",
+          "story_beat": "mechanism",
+          "visual_prompt": "Night shot on the meadow, Bram and rival captain Maya working together under a flickering lantern light, tightening bolts on a recessed metal socket set flush into the grass.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Victory",
+          "speech": "Look at that, the goal folds completely flat into the grass, keeping the field pristine for everyone to enjoy.",
+          "visual": "door",
+          "label": "The Retractable Triumph",
+          "story_beat": "payoff",
+          "visual_prompt": "Bright sunny afternoon on the meadow, both teams cheering as the goalpost smoothly rotates flush into the turf, Bram and Maya shaking hands in the foreground, cinematic lighting.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "The Oak Creek Strikers and Rivertown Rovers fought over permanent concrete goal posts tearing up the shared meadow.",
+      "decisive_choice": "Captain Bram designed a hinged, counterweighted goalpost that folded flat into the soil when not in use.",
+      "resolution": "Both teams adopted the ingenious folding goalposts, ending the turf wars and sharing the field harmoniously.",
+      "visual_bible": {
+        "style": "Cinematic realism with warm natural lighting and detailed textures.",
+        "characters": {
+          "Bram": "A determined local sports captain wearing a blue and yellow jersey, athletic build, short brown hair, energetic expression.",
+          "Maya": "The rival team captain wearing a green and white jersey, sharp focus, confident posture, short dark hair."
+        },
+        "locations": {
+          "Meadow": "A wide, rolling green sports field bordered by tall oak trees under a bright blue sky.",
+          "Workshop": "A rustic wooden shed filled with tools, blueprints, and mechanical spare parts."
+        },
+        "objects": {
+          "blueprint": "A rolled-up paper sheet showing ink-drawn mechanical diagrams of hinges and counterweights.",
+          "lantern": "An antique brass oil lantern casting a warm golden glow in the dark."
+        }
+      },
+      "plot_fingerprint": "c00f02aebd27a428ee2803dcbd78e67563594ab88789e8f91e68881dbe7c839b"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-f1045b51c0ccd6eb179a",
+      "title": "The Ranger and the Frostbound Crevasse",
+      "hook": "Faint Distress Call",
+      "question": "Can the veteran mountain ranger locate the missing climber before a blinding blizzard freezes the pass?",
+      "answer": "Yes, by trusting the faint radio signal bouncing off the canyon walls, she guides her team to the hidden ice cave.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "Faint Distress Call",
+          "speech": "Listen closely to that static! The signal is bouncing off the northern cliffs, meaning she is down in the ravine.",
+          "visual": "signal",
+          "label": "Emergency Broadcast",
+          "story_beat": "reveal",
+          "visual_prompt": "Close-up of ranger Clara holding a blinking radio receiver in a howling snowy wind, her orange parka dusted with fresh frost, staring intently at the frozen dial.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Descent into the Chasm",
+          "speech": "Anchor the main cable securely into the frozen rock face before I rappel down into the dark blue void.",
+          "visual": "door",
+          "label": "The Ice Portal",
+          "story_beat": "build",
+          "visual_prompt": "Medium shot of Clara rappelling down a sheer vertical wall of blue glacial ice, gripping a dynamic climbing rope with her heavy steel-toed boots braced against the frozen shelf.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Breaking the Ice",
+          "speech": "Use the titanium pick to widen this frozen fissure carefully without bringing the whole ceiling down upon us.",
+          "visual": "forest",
+          "label": "Subterranean Pines",
+          "story_beat": "mechanism",
+          "visual_prompt": "Wide shot of Clara swinging a titanium ice axe inside a cavernous blue crevasse where ancient buried pine roots protrude from the glittering frozen walls.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Ascent",
+          "speech": "Grab hold of the harness right now! We are pulling you straight up to the summit ridge before nightfall.",
+          "visual": "ship",
+          "label": "Rescue Hoist",
+          "story_beat": "payoff",
+          "visual_prompt": "Action shot of Clara pulling a shivering climber wrapped in a shiny silver thermal blanket up onto the sunlit snowy ledge while a rescue helicopter hovers overhead.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A stranded climber is trapped in a collapsing ice cave during an unexpected whiteout.",
+      "decisive_choice": "Abandon the safe established trail to descend directly into the unstable blue crevasse.",
+      "resolution": "The climber is hauled up safely just as the main ridge snowpack collapses.",
+      "visual_bible": {
+        "style": "Cinematic 3D animation with rich tactile textures, dramatic lighting, and realistic weather particle effects.",
+        "characters": {
+          "Clara": "A determined veteran mountain ranger with weathered cheeks, tied-back brown hair, wearing a heavy-duty orange winter parka, waterproof trousers, and specialized mountaineering gear."
+        },
+        "locations": {
+          "Frostbound Crevasse": "A dangerous alpine canyon surrounded by towering jagged peaks, deep blue glacial ice walls, and swirling whiteout blizzard snow.",
+          "Summit Ridge": "A windswept snowy plateau offering panoramic views of the distant winter mountain range."
+        },
+        "objects": {
+          "Radio Receiver": "A rugged tactical handheld two-way radio with a glowing amber screen and a twisted metal antenna.",
+          "Titanium Ice Axe": "A lightweight matte-silver mountaineering tool with a curved pick and an ergonomic black rubber grip.",
+          "Thermal Blanket": "A crinkly, reflective silver emergency foil sheet that wraps tightly around rescued individuals."
+        }
+      },
+      "plot_fingerprint": "0864d4359221d92c96b3a336e7f7e2cd84f5f6ff71d74b327a268a2604e57a47"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-c4260108101844ca72c1",
+      "title": "The Navigator and the Hull Fracture of Sector Nine",
+      "hook": "The Sudden Fracture",
+      "question": "Can the crew repair the breach before life support fails?",
+      "answer": "Yes, by welding the auxiliary bulkhead shut.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Sudden Fracture",
+          "speech": "Look at the pressure gauge dropping rapidly in cargo sector nine, we are losing oxygen very fast now.",
+          "visual": "ship",
+          "label": "Hull Breach Alert",
+          "story_beat": "reveal",
+          "visual_prompt": "Interior of the ship command bridge with blinking red alarm lights reflecting on metal walls. Chief engineer Jax points at the main console while navigator Mira holds a cracked data pad displaying plummeting pressure levels.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Cargo Debate",
+          "speech": "We cannot leave the titanium payload behind, our entire mission budget depends on delivering this crate safely today.",
+          "visual": "robot",
+          "label": "Crew Dispute",
+          "story_beat": "build",
+          "visual_prompt": "Jax and Mira stand inside the cramped airlock corridor facing each other angrily. Jax gestures toward the storage bay while holding a heavy wrench, and Mira crosses her arms firmly with a determined expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Manual Override",
+          "speech": "I am initiating the emergency bulkhead lockdown right now to save the ship, forget about the cargo container.",
+          "visual": "signal",
+          "label": "Emergency Seal",
+          "story_beat": "mechanism",
+          "visual_prompt": "Mira punches the heavy red override button on the control pillar. Sparks fly from the overhead conduit as the massive steel door slides shut, cutting off access to the cargo bay.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Harbor",
+          "speech": "The pressure levels have normalized across all compartments, and we are back on course for the orbital station.",
+          "visual": "planet",
+          "label": "Mission Stabilized",
+          "story_beat": "payoff",
+          "visual_prompt": "The ship cockpit illuminated by the calm blue glow of a distant habitable planet outside the panoramic window. Jax and Mira sit side by side smiling at the green stabilization readout on the main screen.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Disagreement between sealing the hull immediately or retrieving lost cargo first.",
+      "decisive_choice": "Abandoning the cargo container to engage the emergency magnetic seal.",
+      "resolution": "Hull pressure stabilizes and the crew safely reaches the nearest station.",
+      "visual_bible": {
+        "style": "Clean retro-futuristic animated science fiction illustration with rich metallic textures and dramatic cinematic lighting.",
+        "characters": {
+          "Jax": "A burly mechanic with short greying hair, wearing a grease-stained orange jumpsuit with utility pockets and heavy leather boots.",
+          "Mira": "A sharp-eyed navigator with braided dark hair, wearing a sleek navy-blue flight jacket over a grey tunic and silver wrist monitors."
+        },
+        "locations": {
+          "ship_bridge": "A cramped and utilitarian command deck featuring glowing holographic map projectors, brass control levers, and curved observation windows."
+        },
+        "objects": {
+          "data_pad": "A handheld rectangular slate made of brushed aluminum with cracked blue glowing glass and black rubber grips.",
+          "wrench": "A heavy steel adjustable spanner with oil stains and numbered markings etched into the handle."
+        }
+      },
+      "plot_fingerprint": "7ff286c02c34e93cf4fdcc14e1671365105c0a766a3ca4ef424e4b780f70803b"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-9b6c6e059527ea1cd9dd",
+      "title": "The Muddy Pitch Rivalry of Maple Creek",
+      "hook": "The Deluge Discovery",
+      "question": "How can the village soccer team defeat the dominant town academy without proper gear?",
+      "answer": "By engineering a specialized drainage pitch and tactical footwear to master the mud.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Deluge Discovery",
+          "speech": "Look at this flooded pitch! The academy thinks we will forfeit, but we can turn this heavy waterlogged mud into our home advantage.",
+          "visual": "forest",
+          "label": "Pitch Inspection",
+          "story_beat": "reveal",
+          "visual_prompt": "Coach Bram, a weathered man in a patched woolen jersey, points at a completely flooded grass pitch while holding a wooden clipboard, surrounded by muddy teammates in a dense woodland clearing on a rainy afternoon.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Engineering the Solution",
+          "speech": "We must dig trench lines across the touchlines and fill them with coarse forest gravel and woven wicker drainage channels.",
+          "visual": "robot",
+          "label": "Trench Build",
+          "story_beat": "build",
+          "visual_prompt": "Young inventor Tessa, wearing mud-splattered overalls and leather goggles, hammers a wooden stake into the soggy ground beside a pile of river stones, holding a heavy iron mallet with focused determination.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Traction Test",
+          "speech": "Strap these carved wooden cleats to your boots so we can grip the slick turf while the academy players slip and slide.",
+          "visual": "signal",
+          "label": "Cleat Fitting",
+          "story_beat": "mechanism",
+          "visual_prompt": "Captain Miller, a tall teenager in green and gold stripes, kneels in the mud strapping a hand-carved wooden cleat onto his leather boot, holding a leather fastening strap while teammates watch eagerly.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Championship Victory",
+          "speech": "Through clever adaptation and unbreakable teamwork, our improvised drainage wins the match and brings the championship home!",
+          "visual": "ship",
+          "label": "Match Triumph",
+          "story_beat": "payoff",
+          "visual_prompt": "Captain Miller lifts a gleaming brass cup high above his head in the pouring rain, surrounded by cheering teammates covered in mud on the newly drained soccer pitch as the academy players look on in disbelief.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "village soccer team faces an unbeaten academy rival on a waterlogged field",
+      "decisive_choice": "installing an underground gravel-sponge drainage system and cleated wooden sandals",
+      "resolution": "the village team wins the annual championship match through superior traction and adaptation",
+      "visual_bible": {
+        "style": "Cinematic stop-motion animation aesthetic with rich textures, warm lighting, and realistic mud and fabric details.",
+        "characters": {
+          "Coach Bram": "A weathered elderly man with a gray beard, wearing a patched green woolen sweater and mud-stained trousers, holding a wooden clipboard.",
+          "Tessa": "A clever teenage inventor with braided brown hair, wearing canvas overalls, leather work gloves, and muddy boots.",
+          "Captain Miller": "A tall, athletic young player with dark hair, wearing green and gold striped sports jersey and muddy shorts."
+        },
+        "locations": {
+          "Maple Creek Pitch": "A rural soccer field surrounded by tall pine trees, featuring wooden goalposts and prone to heavy waterlogging during rainstorms."
+        },
+        "objects": {
+          "clipboard": "A rectangular wooden board with metal spring clip holding damp paper tactic sheets.",
+          "wooden_cleats": "Hand-carved wooden soles with protruding peg-like studs designed to grip wet mud.",
+          "championship_cup": "A polished brass trophy bowl mounted on a dark wooden base with engraved winner plaques."
+        }
+      },
+      "plot_fingerprint": "773209c64f9ceb7a1527afa76c06e032c164e0b6a1a8e6f7c1983af20701e16d"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-0e25ff3dd6294b72eb83",
+      "title": "Bramble's Tidal Torpedo and the Saltmarsh Regatta",
+      "hook": "The Coastal Discovery",
+      "question": "Can an eccentric tinkerer win the annual saltmarsh regatta by building a wind-powered hydrofoil?",
+      "answer": "Yes, by adjusting the hydrofoil's stabilizing rudder to harness the coastal crosswind.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Coastal Discovery",
+          "speech": "Look at the rogue wave cresting past the jetty, threatening to swamp every single vessel in this race!",
+          "visual": "ship",
+          "label": "The Bay",
+          "story_beat": "reveal",
+          "visual_prompt": "Bramble with wide eyes points a wrench at a choppy coastal bay from a wooden dock, holding a bronze caliper in his left hand under a bright noon sun.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Assembling the Hull",
+          "speech": "We must rivet this teakwood frame securely to the copper pontoon before the afternoon squall hits the harbor.",
+          "visual": "signal",
+          "label": "The Workshop",
+          "story_beat": "build",
+          "visual_prompt": "Bramble wearing a leather apron uses a small riveting hammer on a copper pontoon inside a sunlit seaside workshop, holding an iron rivet in his right hand.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Calibrating the Rudder",
+          "speech": "Turn the tension screw clockwise until the stabilizer catches the sea breeze without dragging in the foam.",
+          "visual": "robot",
+          "label": "The Dock",
+          "story_beat": "mechanism",
+          "visual_prompt": "Bramble carefully adjusts a brass tension screw on a polished hydrofoil rudder while standing on a barnacle-encrusted wooden dock, holding a leather-handled screwdriver.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Crossing the Finish Line",
+          "speech": "Hold fast as we slice through the crest of the final wave to claim the saltmarsh trophy!",
+          "visual": "forest",
+          "label": "The Finish",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramble raises a fist in triumphant joy aboard the speeding hydrofoil as it leaps over a foam-capped wave toward the pine-fringed finish line, holding the steering tiller steady.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Bramble's experimental hydrofoil loses stability during high-speed turns on the choppy coastal bay.",
+      "decisive_choice": "Bramble chooses to re-angle the brass stabilizer fin manually instead of shedding ballast weight.",
+      "resolution": "The hydrofoil cuts cleanly through the final wave to cross the finish line in first place.",
+      "visual_bible": {
+        "style": "Vibrant and detailed storybook illustration with warm coastal lighting and expressive character design.",
+        "characters": {
+          "Bramble": "An energetic tinkerer with wild grey hair, wearing a patched canvas apron, rolled-up denim sleeves, and round brass spectacles."
+        },
+        "locations": {
+          "Saltmarsh Bay": "A bustling coastal harbor featuring weathered wooden docks, salt-bleached pilings, and distant pine-covered cliffs.",
+          "Coastal Workshop": "A cluttered seaside shed filled with hanging tools, blueprints pinned to timber walls, and jars of copper screws."
+        },
+        "objects": {
+          "Hydrofoil": "A sleek craft built from polished teakwood and gleaming copper pontoons, fitted with a flexible brass rudder.",
+          "Calipers": "Old-fashioned brass measuring calipers with worn joint pins and etched metric markings."
+        }
+      },
+      "plot_fingerprint": "95db6d7dd9ea8c5137fd21cb3d43b794a7be8e7a2d04f9b42eb0d70b43ce7bdc"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-a73b30f45d38cc1b41f0",
+      "title": "The Conductor's Lost Pocket Watch at Terminus Nine",
+      "hook": "The Missing Heirloom",
+      "question": "Can an unexpected railway helper find the stolen antique pocket watch before the midnight express departs?",
+      "answer": "The railway porter and a stray fox track the thief to the luggage hold and recover the heirloom just in time.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Missing Heirloom",
+          "speech": "That gold watch was my grandfather's pride and joy, and now it has vanished into thin air.",
+          "visual": "signal",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Station master Barnaby looking distressed at the wooden ticket desk, holding an empty velvet box, under a glowing green railway signal light.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "An Unexpected Ally",
+          "speech": "Look at those muddy tracks leading straight toward the dark cargo carriages parked on track four.",
+          "visual": "door",
+          "label": "The Trail",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby pointing down at muddy footprints next to a heavy sliding metal station door, while a clever red fox sits nearby watching attentively.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Inside the Cargo Hold",
+          "speech": "Quiet now, my furry friend, we must check behind these stacked crates before the engine starts moving.",
+          "visual": "ship",
+          "label": "The Search",
+          "story_beat": "mechanism",
+          "visual_prompt": "Barnaby holding a brass lantern inside a dimly lit freight car filled with wooden crates and mail sacks, searching cautiously.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Returned to Safety",
+          "speech": "You actually found it tucked inside that mail sack! You are truly the finest assistant in this station.",
+          "visual": "robot",
+          "label": "The Recovery",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby smiling warmly while the red fox gently drops the gleaming gold pocket watch onto the wooden ticket counter beside a ticking brass clock.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A priceless gold pocket watch vanished from the station master desk right before the final train departure.",
+      "decisive_choice": "Follow the muddy paw prints toward the cargo carriages instead of waiting for the city guards.",
+      "resolution": "The stray fox drops the ticking watch onto the ticket counter, saving the station master's reputation.",
+      "visual_bible": {
+        "style": "Warm vintage storybook illustration with rich textures and gentle cinematic lighting",
+        "characters": {
+          "Barnaby": "An elderly station master with round spectacles, a thick grey mustache, a navy blue uniform coat with brass buttons, and a red cap.",
+          "Fox": "A clever red fox with bright amber eyes, a bushy white-tipped tail, and a patch of muddy paw prints on its left front foot."
+        },
+        "locations": {
+          "TerminusNine": "A bustling Victorian railway station with dark oak timber walls, wrought iron pillars, steam wisps, and glowing green signals."
+        },
+        "objects": {
+          "PocketWatch": "An intricate antique gold pocket watch with roman numerals and an attached silver chain.",
+          "Lantern": "A heavy brass hand lantern with a glass pane casting a warm golden glow."
+        }
+      },
+      "plot_fingerprint": "656e461796b85d1d21de724cf55624c4c4c9fb6b90d6a5f7cc3fba80811ba601"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-2ffa6e91767ef624e730",
+      "title": "The Glaciologist and the Crevasse Beacon",
+      "hook": "The Hidden Crevasse",
+      "question": "Should Dr. Vance abandon heavy geological samples to haul an injured teammate up before a whiteout?",
+      "answer": "She jettisons the rare core samples, saving her colleague's life just as the blizzard buries the ridge.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Hidden Crevasse",
+          "speech": "Look at this deep fracture! The seismic sensors indicate an unstable overhang directly above our rescue path.",
+          "visual": "signal",
+          "label": "Fracture Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Dr. Vance stands on a vast blue glacier holding a blinking orange radar beacon in a gloved hand, looking down into a deep crack while blowing snow swirls around her insulated parka.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Heavy Load",
+          "speech": "My foot is trapped beneath the frozen rockfall, and this drill rig is dragging us both down.",
+          "visual": "ship",
+          "label": "Trapped Partner",
+          "story_beat": "build",
+          "visual_prompt": "Marcus lies pinned underneath a heavy steel sled loaded with dark ice-core cylinders inside a snowy gully, gesturing frantically upward toward Vance.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hard Choice",
+          "speech": "If I cut the core samples loose now, we lose months of data, but I can finally pull you free.",
+          "visual": "door",
+          "label": "Cutting the Rig",
+          "story_beat": "mechanism",
+          "visual_prompt": "Dr. Vance uses a heavy titanium utility knife to slice through the thick yellow nylon tow-strap of the sled, her face strained with intense concentration against the freezing wind.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Ascent",
+          "speech": "We made it inside the storm shelter just in time. Our data is gone, but we are both alive.",
+          "visual": "robot",
+          "label": "Shelter Recovery",
+          "story_beat": "payoff",
+          "visual_prompt": "Dr. Vance and Marcus sit side by side inside a glowing orange emergency dome tent, sharing a hot steel thermos while heavy snow completely buries the exterior entrance.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Weighing precious research core samples against a partner's survival during a sudden blizzard.",
+      "decisive_choice": "Releasing the sled harness containing the drill cores to secure the rescue hoist.",
+      "resolution": "Both researchers reach shelter safely, carrying only their survival gear.",
+      "visual_bible": {
+        "style": "Cinematic realism, high-contrast polar photography style with icy blues and stark hazard orange accents.",
+        "characters": {
+          "Dr. Vance": "A seasoned female glaciologist in her late thirties with weathered cheeks, piercing green eyes, wearing a heavy down-filled red parka with white fur lining.",
+          "Marcus": "A rugged male field assistant with a thick brown beard frosted with ice, wearing a deep navy blue polar expedition suit and black goggles."
+        },
+        "locations": {
+          "Glacier Ridge": "A jagged expanse of blue glacial ice beneath a leaden grey arctic sky, crisscrossed by deep crevasses and blowing powdered snow."
+        },
+        "objects": {
+          "radar beacon": "A handheld rectangular orange plastic device with a small green digital screen and blinking antenna.",
+          "steel sled": "A heavy-duty titanium utility sled holding three cylindrical glass-fiber cases packed with ice cores."
+        }
+      },
+      "plot_fingerprint": "55b04739ff45b81e13e81c1c01a789bea94a4d968b94894409169f1b77d8ee36"
     }
   ]
 }
