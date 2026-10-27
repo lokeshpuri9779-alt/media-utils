@@ -5688,6 +5688,58 @@
       "central_conflict": "Percival's experimental fruit-polishing machine begins launching polished produce at high speeds into the crowded marketplace stalls.",
       "decisive_choice": "Percival intentionally jams the machine's primary stabilizer to turn the high-speed output into a decorative fruit fountain rather than a projectile weapon.",
       "resolution": "The market crowd applauds the unexpected fruit display and Percival earns enough coins from sales to repair his workshop roof."
+    },
+    {
+      "content_id": "rayvan-gemini-a73b30f45d38cc1b41f0",
+      "video_id": "4qvbV7gW2Zo",
+      "confirmed_at": "2026-10-27T08:16:02.572201+00:00",
+      "title": "The Conductor's Lost Pocket Watch at Terminus Nine",
+      "plot_fingerprint": "656e461796b85d1d21de724cf55624c4c4c9fb6b90d6a5f7cc3fba80811ba601",
+      "story_beats": [
+        {
+          "headline": "The Missing Heirloom",
+          "speech": "That gold watch was my grandfather's pride and joy, and now it has vanished into thin air.",
+          "visual": "signal",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Station master Barnaby looking distressed at the wooden ticket desk, holding an empty velvet box, under a glowing green railway signal light.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "An Unexpected Ally",
+          "speech": "Look at those muddy tracks leading straight toward the dark cargo carriages parked on track four.",
+          "visual": "door",
+          "label": "The Trail",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby pointing down at muddy footprints next to a heavy sliding metal station door, while a clever red fox sits nearby watching attentively.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Inside the Cargo Hold",
+          "speech": "Quiet now, my furry friend, we must check behind these stacked crates before the engine starts moving.",
+          "visual": "ship",
+          "label": "The Search",
+          "story_beat": "mechanism",
+          "visual_prompt": "Barnaby holding a brass lantern inside a dimly lit freight car filled with wooden crates and mail sacks, searching cautiously.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Returned to Safety",
+          "speech": "You actually found it tucked inside that mail sack! You are truly the finest assistant in this station.",
+          "visual": "robot",
+          "label": "The Recovery",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby smiling warmly while the red fox gently drops the gleaming gold pocket watch onto the wooden ticket counter beside a ticking brass clock.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A priceless gold pocket watch vanished from the station master desk right before the final train departure.",
+      "decisive_choice": "Follow the muddy paw prints toward the cargo carriages instead of waiting for the city guards.",
+      "resolution": "The stray fox drops the ticking watch onto the ticket counter, saving the station master's reputation."
     }
   ]
 }
