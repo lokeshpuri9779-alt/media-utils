@@ -6,6 +6,10 @@ on:
         description: 'Enter BENCHMARK; uses available GitHub Actions minutes, never a paid API'
         required: true
         type: string
+      sdxl_preflight:
+        description: 'Metadata-only SDXL RAM/disk gate; no weight download or rendering'
+        type: boolean
+        default: false
       prompt_diagnostic:
         description: 'One fixed-noise prompt intervention; review only'
         type: boolean
@@ -37,8 +41,26 @@ on:
 permissions:
   contents: read
 jobs:
+  sdxl-resource-preflight:
+    if: inputs.confirm_cpu_benchmark == 'BENCHMARK' && inputs.sdxl_preflight
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    env:
+      ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Screen pinned SDXL FP32 resources without downloading weights
+        run: python3 -m tools.experimental_sdxl_preflight
+      - name: Retain review-only resource report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-sdxl-resource-${{ github.run_id }}
+          path: artifacts/experimental-openvino/sdxl-preflight.json
+          if-no-files-found: error
+          retention-days: 7
   benchmark:
-    if: inputs.confirm_cpu_benchmark == 'BENCHMARK'
+    if: inputs.confirm_cpu_benchmark == 'BENCHMARK' && !inputs.sdxl_preflight
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
