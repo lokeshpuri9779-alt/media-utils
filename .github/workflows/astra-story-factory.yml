@@ -35,6 +35,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_production_ledger.py'
           python -m unittest discover -s tests -p 'test_asset_readiness_audit.py'
           python -m unittest discover -s tests -p 'test_reviewed_art_bridge.py'
+          python -m unittest discover -s tests -p 'test_story_factory_rewrite_queue.py'
       - name: Check verified ready-video inventory
         id: inventory
         working-directory: code
@@ -84,10 +85,8 @@ jobs:
         if: steps.inventory.outputs.replenish == 'true'
         working-directory: state
         run: rm -f story_factory_image_manifest.json
-      - name: Clear previous rewrite queue for fresh-run accounting
-        if: steps.inventory.outputs.replenish == 'true'
-        working-directory: state
-        run: rm -f story_factory_rewrite_queue.json
+      # Keep complete, unapproved rewrites while image-provider quota is exhausted.
+      # The rewrite CLI validates the saved queue before reusing it; never auto-approves.
       - name: Rewrite a bounded editorial shortlist with existing Gemini
         if: steps.inventory.outputs.replenish == 'true'
         working-directory: code
@@ -98,7 +97,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           if [ "$ASTRA_GEMINI_ENABLED" != "1" ]; then echo "Gemini not configured; skipping rewrite"; exit 0; fi
-          python -m astra_v2.story_factory_rewrite_queue --packet ../state/story_factory_editorial_packet.json --output ../state/story_factory_rewrite_queue.json --limit 3
+          python -m astra_v2.story_factory_rewrite_queue --packet ../state/story_factory_editorial_packet.json --output ../state/story_factory_rewrite_queue.json --limit 3 --reuse-pending
       - name: Preproduce review-only images via configured free OmniRoute provider
         if: steps.inventory.outputs.replenish == 'true'
         working-directory: code

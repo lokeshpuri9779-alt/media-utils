@@ -1,6 +1,10 @@
 import copy
+import json
+import tempfile
 import unittest
-from astra_v2.story_factory_rewrite_queue import rewrite_packet, select_premises
+from pathlib import Path
+from astra_v2.story_factory_rewrite_queue import (rewrite_packet, select_premises,
+    reusable_pending_queue, rewrite_or_reuse)
 
 
 def packet():
@@ -13,6 +17,53 @@ def packet():
 
 
 class RewriteQueueTests(unittest.TestCase):
+    def test_pending_unapproved_rewrites_survive_image_quota_retry(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            packet_file = Path(tmp) / "packet.json"
+            queue_file = Path(tmp) / "queue.json"
+            packet_file.write_text(json.dumps(packet()), encoding="utf-8")
+            first, reused = rewrite_or_reuse(packet_file, queue_file, generator=lambda *a, **k: {
+                "content_id": "new-story", "title": "New story", "production_ready": True})
+            self.assertFalse(reused)
+            self.assertTrue(reusable_pending_queue(first))
+            original_bytes = queue_file.read_bytes()
+            second, reused = rewrite_or_reuse(packet_file, queue_file,
+                generator=lambda *a, **k: self.fail("must not consume another Gemini call"),
+                reuse_pending=True)
+            self.assertTrue(reused)
+            self.assertEqual(first, second)
+            self.assertEqual(queue_file.read_bytes(), original_bytes)
+            self.assertFalse(second["publication_triggered"])
+            self.assertEqual(second["approved_count"], 0)
+
+    def test_unsafe_or_failed_queue_is_never_reused(self):
+        safe = rewrite_packet(packet(), generator=lambda *a, **k: {
+            "content_id": "new-story", "title": "New story", "production_ready": True})
+        for mutation in (
+            lambda q: q.update(approved_count=1),
+            lambda q: q.update(publication_triggered=True),
+            lambda q: q["rewrites"][0].update(approved=True),
+            lambda q: q["rewrites"][0]["story"].update(production_ready=True),
+            lambda q: q["rewrites"][0].update(status="rewrite_failed"),
+        ):
+            with self.subTest(mutation=mutation):
+                invalid = copy.deepcopy(safe)
+                mutation(invalid)
+                self.assertFalse(reusable_pending_queue(invalid))
+        with tempfile.TemporaryDirectory() as tmp:
+            packet_file = Path(tmp) / "packet.json"
+            queue_file = Path(tmp) / "queue.json"
+            packet_file.write_text(json.dumps(packet()), encoding="utf-8")
+            invalid = copy.deepcopy(safe)
+            invalid["rewrites"][0]["story"]["production_ready"] = True
+            queue_file.write_text(json.dumps(invalid), encoding="utf-8")
+            result, reused = rewrite_or_reuse(packet_file, queue_file,
+                generator=lambda *a, **k: {"content_id": "replacement", "title": "Safe replacement"},
+                reuse_pending=True)
+            self.assertFalse(reused)
+            self.assertFalse(result["rewrites"][0]["story"]["production_ready"])
+            self.assertEqual(result["rewrites"][0]["story"]["content_id"], "replacement")
+
     def test_rewrite_is_not_approved_or_production_ready(self):
         result = rewrite_packet(packet(), generator=lambda *a, **k: {"content_id": "new-1", "title": "New story", "production_ready": True})
         self.assertEqual(result["approved_count"], 0)

@@ -21,6 +21,53 @@ def select_premises(packet, limit=3):
                  or "repeated_underlying_plot_mechanism" in item.get("review_issues", []))][:limit]
 
 
+def reusable_pending_queue(queue):
+    """Only retain complete, explicitly unapproved rewrites between image retries."""
+    if not isinstance(queue, dict) or queue.get("schema_version") != 1:
+        return False
+    if queue.get("publication_triggered") is not False or queue.get("approved_count") != 0:
+        return False
+    rows = queue.get("rewrites")
+    if not isinstance(rows, list) or not 1 <= len(rows) <= 3:
+        return False
+    identities = set()
+    for row in rows:
+        if not isinstance(row, dict) or row.get("status") != "awaiting_independent_editorial_approval":
+            return False
+        if row.get("approved") is not False or not isinstance(row.get("candidate_id"), str):
+            return False
+        source_hash = row.get("source_sha256")
+        if not isinstance(source_hash, str) or len(source_hash) != 64:
+            return False
+        story = row.get("story")
+        if not isinstance(story, dict) or story.get("production_ready") is not False:
+            return False
+        content_id, title = story.get("content_id"), story.get("title")
+        if not isinstance(content_id, str) or not content_id.strip() or content_id in identities:
+            return False
+        if not isinstance(title, str) or not title.strip():
+            return False
+        identities.add(content_id)
+    return True
+
+
+def rewrite_or_reuse(packet_path, output_path, limit=3, generator=None, reuse_pending=False):
+    """Keep existing review-only drafts when image quota blocks their artwork."""
+    packet = json.loads(Path(packet_path).read_text(encoding="utf-8"))
+    select_premises(packet, limit=limit)  # Fail closed on unsafe editorial packets.
+    output = Path(output_path)
+    if reuse_pending and output.exists():
+        try:
+            previous = json.loads(output.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            previous = None
+        if reusable_pending_queue(previous):
+            return previous, True
+    result = rewrite_packet(packet, limit=limit, generator=generator)
+    output.write_text(json.dumps(result, indent=2, ensure_ascii=False) + chr(10), encoding="utf-8")
+    return result, False
+
+
 def rewrite_packet(packet, prior=(), limit=3, generator=None):
     from astra_v2.omniroute import generate
     generator = generator or generate
@@ -76,11 +123,16 @@ def main():
     parser.add_argument("--packet", required=True)
     parser.add_argument("--output", required=True)
     parser.add_argument("--limit", type=int, default=3)
+    parser.add_argument("--reuse-pending", action="store_true", help="Retain complete unapproved rewrites across image-provider cooldowns")
     args = parser.parse_args()
-    packet = json.loads(Path(args.packet).read_text(encoding="utf-8"))
-    result = rewrite_packet(packet, limit=args.limit)
-    Path(args.output).write_text(json.dumps(result, indent=2, ensure_ascii=False) + chr(10), encoding="utf-8")
-    print("ASTRA_REWRITE_QUEUE=" + json.dumps({"attempted": len(result["rewrites"]), "approved": 0, "available_premises": result["available_premises"], "blocked_reason": result["blocked_reason"], "failures": [r.get("error_detail", r.get("error")) for r in result["rewrites"] if r["status"] == "rewrite_failed"]}))
+    result, reused = rewrite_or_reuse(args.packet, args.output, limit=args.limit,
+                                      reuse_pending=args.reuse_pending)
+    print("ASTRA_REWRITE_QUEUE=" + json.dumps({"attempted": 0 if reused else len(result["rewrites"]),
+        "reused_pending": len(result["rewrites"]) if reused else 0,
+        "pending_review_only": sum(r["status"] == "awaiting_independent_editorial_approval" for r in result["rewrites"]),
+        "approved": 0, "available_premises": result["available_premises"],
+        "blocked_reason": result["blocked_reason"],
+        "failures": [r.get("error_detail", r.get("error")) for r in result["rewrites"] if r["status"] == "rewrite_failed"]}))
 
 
 if __name__ == "__main__":
