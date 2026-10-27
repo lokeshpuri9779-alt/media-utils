@@ -111,7 +111,7 @@ class StoryFactoryTests(unittest.TestCase):
 
     def test_fresh_authored_mechanisms_are_distinct_and_review_only(self):
         from astra_v2.story_factory_fresh_premises import FRESH_MECHANISMS
-        self.assertEqual(len(FRESH_MECHANISMS),32)
+        self.assertEqual(len(FRESH_MECHANISMS),40)
         self.assertEqual(len({m[0] for m in MECHANISMS}),len(MECHANISMS))
         self.assertTrue(all(len(m)==6 and all(isinstance(x,str) and len(x)>7 for x in m)
                             for m in FRESH_MECHANISMS))
@@ -130,6 +130,42 @@ class StoryFactoryTests(unittest.TestCase):
             self.assertTrue(all(r["status"]=="awaiting_editorial_review" and not r["production_ready"]
                                 for r in reviews))
             self.assertEqual(json.loads(state.read_text())["next_slot"],43500+len(FRESH_MECHANISMS))
+
+    def test_new_eight_premises_reopen_review_queue_without_publication(self):
+        from astra_v2.story_factory_fresh_premises import FRESH_MECHANISMS
+        expected = {
+            "observatory-heat-haze", "race-rfid-banner",
+            "market-bag-score", "library-return-flap",
+            "garden-robot-nozzle", "festival-ribbon-static",
+            "stage-speaker-vibration", "rain-gauge-roof-splash",
+        }
+        self.assertEqual({row[0] for row in FRESH_MECHANISMS[-8:]}, expected)
+        with tempfile.TemporaryDirectory() as tmp:
+            state = Path(tmp) / "state.json"
+            output = Path(tmp) / "candidates.jsonl"
+            # Reproduce an exhausted persistent state from before these seeds.
+            state.write_text(json.dumps({
+                "next_slot": 43500,
+                "seen_premise_keys": [m[0] for m in MECHANISMS[:-8]],
+            }))
+            self.assertEqual(generate(state, output, batch_size=500), 8)
+            candidates = [json.loads(row) for row in output.read_text().splitlines()]
+            reviews = [json.loads(row) for row in output.with_name(
+                "story_factory_review.jsonl").read_text().splitlines()]
+            self.assertEqual({row["premise_key"] for row in candidates}, expected)
+            self.assertTrue(all(row["production_ready"] is False
+                                and row["editorial_review_required"] is True
+                                and row["independent_plot_claim"] is False
+                                for row in candidates))
+            self.assertTrue(all(row["status"] == "awaiting_editorial_review"
+                                and row["production_ready"] is False
+                                for row in reviews))
+            # Once the eight are seen, no cosmetic variants are approved.
+            self.assertEqual(generate(state, output, batch_size=500), 3)
+            rejected = [json.loads(row) for row in output.with_name(
+                "story_factory_review.jsonl").read_text().splitlines()]
+            self.assertTrue(all(row["status"] == "needs_new_plot"
+                                for row in rejected))
 
     def test_exhausted_premises_do_not_flood_repeated_500_story_batch(self):
         with tempfile.TemporaryDirectory() as tmp:
