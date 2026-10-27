@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-27",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 25,
+  "attempts": 26,
   "confirmed_today": 25,
-  "last_attempt_at": "2026-10-27T06:09:31.644783+00:00",
+  "last_attempt_at": "2026-10-27T07:12:34.383583+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -6329,28 +6329,86 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-10-27T06:11:17.344078+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "HvuU1MVJ4Fw": {
+      "content_id": "rayvan-gemini-f1045b51c0ccd6eb179a",
+      "title": "The Ranger and the Frostbound Crevasse",
+      "day": "2026-10-27",
+      "uploaded_at": "2026-10-27T07:12:35.905995+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "0864d4359221d92c96b3a336e7f7e2cd84f5f6ff71d74b327a268a2604e57a47",
+      "story_beats": [
+        {
+          "headline": "Faint Distress Call",
+          "speech": "Listen closely to that static! The signal is bouncing off the northern cliffs, meaning she is down in the ravine.",
+          "visual": "signal",
+          "label": "Emergency Broadcast",
+          "story_beat": "reveal",
+          "visual_prompt": "Close-up of ranger Clara holding a blinking radio receiver in a howling snowy wind, her orange parka dusted with fresh frost, staring intently at the frozen dial.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Descent into the Chasm",
+          "speech": "Anchor the main cable securely into the frozen rock face before I rappel down into the dark blue void.",
+          "visual": "door",
+          "label": "The Ice Portal",
+          "story_beat": "build",
+          "visual_prompt": "Medium shot of Clara rappelling down a sheer vertical wall of blue glacial ice, gripping a dynamic climbing rope with her heavy steel-toed boots braced against the frozen shelf.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Breaking the Ice",
+          "speech": "Use the titanium pick to widen this frozen fissure carefully without bringing the whole ceiling down upon us.",
+          "visual": "forest",
+          "label": "Subterranean Pines",
+          "story_beat": "mechanism",
+          "visual_prompt": "Wide shot of Clara swinging a titanium ice axe inside a cavernous blue crevasse where ancient buried pine roots protrude from the glittering frozen walls.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Ascent",
+          "speech": "Grab hold of the harness right now! We are pulling you straight up to the summit ridge before nightfall.",
+          "visual": "ship",
+          "label": "Rescue Hoist",
+          "story_beat": "payoff",
+          "visual_prompt": "Action shot of Clara pulling a shivering climber wrapped in a shiny silver thermal blanket up onto the sunlit snowy ledge while a rescue helicopter hovers overhead.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A stranded climber is trapped in a collapsing ice cave during an unexpected whiteout.",
+      "decisive_choice": "Abandon the safe established trail to descend directly into the unstable blue crevasse.",
+      "resolution": "The climber is hauled up safely just as the main ridge snowpack collapses.",
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-10-27T07:00:49.833920+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-27T06:11:18.126311+00:00",
+    "at": "2026-10-27T07:12:36.352077+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-10-27T02:00:07.031481+00:00",
   "reserved": {
@@ -13459,13 +13517,67 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-f1045b51c0ccd6eb179a": {
+      "at": "2026-10-27T07:12:34.383565+00:00",
+      "title": "The Ranger and the Frostbound Crevasse",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "0864d4359221d92c96b3a336e7f7e2cd84f5f6ff71d74b327a268a2604e57a47",
+      "story_beats": [
+        {
+          "headline": "Faint Distress Call",
+          "speech": "Listen closely to that static! The signal is bouncing off the northern cliffs, meaning she is down in the ravine.",
+          "visual": "signal",
+          "label": "Emergency Broadcast",
+          "story_beat": "reveal",
+          "visual_prompt": "Close-up of ranger Clara holding a blinking radio receiver in a howling snowy wind, her orange parka dusted with fresh frost, staring intently at the frozen dial.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Descent into the Chasm",
+          "speech": "Anchor the main cable securely into the frozen rock face before I rappel down into the dark blue void.",
+          "visual": "door",
+          "label": "The Ice Portal",
+          "story_beat": "build",
+          "visual_prompt": "Medium shot of Clara rappelling down a sheer vertical wall of blue glacial ice, gripping a dynamic climbing rope with her heavy steel-toed boots braced against the frozen shelf.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Breaking the Ice",
+          "speech": "Use the titanium pick to widen this frozen fissure carefully without bringing the whole ceiling down upon us.",
+          "visual": "forest",
+          "label": "Subterranean Pines",
+          "story_beat": "mechanism",
+          "visual_prompt": "Wide shot of Clara swinging a titanium ice axe inside a cavernous blue crevasse where ancient buried pine roots protrude from the glittering frozen walls.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Ascent",
+          "speech": "Grab hold of the harness right now! We are pulling you straight up to the summit ridge before nightfall.",
+          "visual": "ship",
+          "label": "Rescue Hoist",
+          "story_beat": "payoff",
+          "visual_prompt": "Action shot of Clara pulling a shivering climber wrapped in a shiny silver thermal blanket up onto the sunlit snowy ledge while a rescue helicopter hovers overhead.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A stranded climber is trapped in a collapsing ice cave during an unexpected whiteout.",
+      "decisive_choice": "Abandon the safe established trail to descend directly into the unstable blue crevasse.",
+      "resolution": "The climber is hauled up safely just as the main ridge snowpack collapses.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-27T06:11:18.126247+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-10-27T07:12:36.351993+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -13473,36 +13585,61 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-27T06:11:18.126299+00:00",
+    "at": "2026-10-27T07:12:36.352062+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-27T06:06:11.038858+00:00",
+    "at": "2026-10-27T07:01:16.915521+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-original-submarinestar-v1",
-    "video_url": "https://www.youtube.com/watch?v=YYr6JarQAT8",
+    "content_id": "rayvan-gemini-f1045b51c0ccd6eb179a",
+    "video_url": "https://www.youtube.com/watch?v=HvuU1MVJ4Fw",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-27T06:11:18.126192+00:00",
-    "preflight_due": "false",
+    "at": "2026-10-27T07:12:36.351725+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-27T06:11:18.126243+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "counters": {},
+    "at": "2026-10-27T07:12:36.351987+00:00",
+    "collection_status": "collected",
+    "publish_step": "success",
+    "counters": {
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 159,
+        "fingerprint": 0,
+        "id": 24,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 135,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 135,
+        "remaining": 13
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 1,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
