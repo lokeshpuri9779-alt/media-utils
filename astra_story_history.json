@@ -6040,6 +6040,58 @@
       "central_conflict": "The tide-organ's main intake pipe is clogged with calcified crust, causing the music to shriek instead of harmonize.",
       "decisive_choice": "Elara chooses to manually bypass the safety pressure release, risking the organ structure to clear the blockage.",
       "resolution": "The organ produces a perfect, resonant melody that draws the festival attendees to the shore in celebration."
+    },
+    {
+      "content_id": "iss-sixteen-sunrises-v1",
+      "video_id": "5cjq4LotZhA",
+      "confirmed_at": "2026-10-27T10:40:13.485719+00:00",
+      "title": "Why Astronauts See About 16 Sunrises a Day",
+      "story_beats": [
+        {
+          "headline": "16 SUNRISES A DAY",
+          "speech": "Astronauts can see about sixteen sunrises in one Earth day.",
+          "visual": "media",
+          "label": "",
+          "sub": "",
+          "story_beat": "reveal",
+          "media_query": "ISS sunrise from orbit",
+          "media_file": "File:ISS-43 Sunrise from orbit.jpg",
+          "media_fit": "wide",
+          "media_motion": "push"
+        },
+        {
+          "headline": "ONE ORBIT: ABOUT 90 MINUTES",
+          "speech": "The station circles Earth roughly every ninety minutes.",
+          "visual": "iss_orbit",
+          "label": "",
+          "sub": "",
+          "story_beat": "mechanism"
+        },
+        {
+          "headline": "DAYLIGHT COMES BACK FAST",
+          "speech": "That means day and night keep repeating around the crew.",
+          "visual": "media",
+          "label": "",
+          "sub": "",
+          "story_beat": "evidence",
+          "media_query": "ISS sunrise solar arrays",
+          "media_file": "File:ISS. Sunrise Through the Solar Arrays.jpg",
+          "media_fit": "wide",
+          "media_motion": "push"
+        },
+        {
+          "headline": "AROUND EARTH. AGAIN.",
+          "speech": "Sixteen trips around Earth means roughly sixteen sunrises and sunsets.",
+          "visual": "media",
+          "label": "",
+          "sub": "",
+          "story_beat": "payoff",
+          "media_query": "ISS sunrise Earth horizon",
+          "media_file": "File:ISS-64 Sunrise through Earth's horizon.jpg",
+          "media_fit": "wide",
+          "media_motion": "push"
+        }
+      ]
     }
   ]
 }
