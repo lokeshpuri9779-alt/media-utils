@@ -6286,6 +6286,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-097bc00151cea74a6327",
+      "video_id": "NrAWAtJg3BQ",
+      "confirmed_at": "2026-10-27T14:33:50.382216+00:00",
+      "title": "The Badger And The Weeping Root",
+      "plot_fingerprint": "c64b749bba61b4f49160647b2d1d2ec8beee22678d084ee08191a770c3bd4dce",
+      "story_beats": [
+        {
+          "headline": "The Blocked Ravine",
+          "speech": "Look across the deep chasm, Pip! The landslide took our only bridge, and the winter orchard is totally cut off.",
+          "visual": "forest",
+          "label": "Ravine Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Bramble the badger and Pip the squirrel stand at the edge of a deep, misty forest ravine, staring down at broken logs where a bridge used to be, illuminated by afternoon sunlight filtering through emerald canopy leaves, holding nothing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Sharing The Anchor",
+          "speech": "Take my heavy wooden anchor, my friend! We must secure it tightly to this ancient oak stump to hold the vine line.",
+          "visual": "signal",
+          "label": "Anchor Setup",
+          "story_beat": "build",
+          "visual_prompt": "Bramble the badger pushes a heavy carved wooden anchor forward across mossy ground toward Pip the squirrel, who grips the braided rope with both paws near the base of a gnarled oak tree.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Weaving The Vines",
+          "speech": "Pull the flexible willow runners fast and weave them crosswise so the span can support our heavy cartloads safely.",
+          "visual": "robot",
+          "label": "Vine Weaving",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the squirrel actively weaves supple green willow vines together in a tight lattice pattern while standing on a fallen log, with Bramble kneeling beside her holding the taut rope steady.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Crossing To Safety",
+          "speech": "We made it across the roaring chasm together! Now the winter apples are safe in our cozy valley home.",
+          "visual": "door",
+          "label": "Safe Crossing",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramble and Pip walk side by side across a newly constructed rustic wooden suspension bridge, pulling a small cart piled high with red apples toward a warm, open forest burrow entrance in the twilight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
