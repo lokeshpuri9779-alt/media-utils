@@ -111,6 +111,9 @@ jobs:
           ASTRA_OMNI_IMAGE_FALLBACK_FREE_CONFIRMED: ${{ vars.ASTRA_OMNI_IMAGE_FALLBACK_FREE_CONFIRMED }}
           ASTRA_OMNI_IMAGE_FALLBACK_API_KEY: ${{ secrets.ASTRA_OMNI_IMAGE_FALLBACK_API_KEY }}
           ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
+          # The Cloudflare FLUX schema does not expose portrait dimensions.
+          # Pad square scenes for human review only; never grant visual approval.
+          ASTRA_OMNI_IMAGE_SQUARE_REVIEW_PAD: '1'
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python -m unittest discover -s tests -p 'test_omniroute_image_assets.py'
@@ -150,6 +153,8 @@ jobs:
               generated = sum(a.get("status") == "review_only" for a in assets)
               cached = sum(a.get("status") == "cached_review_only" for a in assets)
               failures = sum(a.get("status") == "generation_failed" for a in assets)
+              adapted = sum(a.get("adaptation") == "square_to_portrait_review_padding_v1"
+                            and a.get("status") in ("review_only", "cached_review_only") for a in assets)
               dimensions = [{"width": a["dimensions"]["width"], "height": a["dimensions"]["height"]}
                             for a in assets if a.get("status") in ("review_only", "cached_review_only")
                             and isinstance(a.get("dimensions"), dict)
@@ -171,6 +176,7 @@ jobs:
                   "provider_calls": result.get("provider_calls", 0),
                   "new_images": generated,
                   "cached_images": cached,
+                  "square_review_padded": adapted,
                   "generation_failures": failures,
                   "production_ready": False
               }, sort_keys=True))
