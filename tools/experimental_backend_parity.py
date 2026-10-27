@@ -27,6 +27,15 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
+def comparable_scheduler_config(config):
+    """Normalize only unordered provenance metadata; retain every actual setting."""
+    normalized = dict(config)
+    defaults = normalized.get("_use_default_values")
+    if isinstance(defaults, (list, tuple)) and all(isinstance(v, str) for v in defaults):
+        normalized["_use_default_values"] = sorted(defaults)
+    return normalized
+
+
 def worker(backend, output):
     import numpy as np
     import torch
@@ -122,7 +131,8 @@ def run(output):
             len(rows) == 2
             and all(c.get("exit_code") == 0 for c in report["cases"])
             and all(r.get("render_completed") and r.get("latent_sha256") == report["latent_sha256"] for r in rows)
-            and rows[0].get("scheduler_config") == rows[1].get("scheduler_config"))
+            and comparable_scheduler_config(rows[0].get("scheduler_config", {}))
+            == comparable_scheduler_config(rows[1].get("scheduler_config", {})))
     finally:
         save(output / "parity.json", report)
     return report["technical_pair_completed"]
