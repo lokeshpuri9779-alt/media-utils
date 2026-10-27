@@ -6442,6 +6442,58 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-f8e736bd064b08534c7e",
+      "video_id": "h_GwUh7QoE0",
+      "confirmed_at": "2026-10-27T22:14:25.785194+00:00",
+      "title": "Juno's Tidal Turbine and the Saltwater Surge",
+      "plot_fingerprint": "2674117478c456c62ab5f1172ac0eae45a779c084b37f7b79c21e325aa775f5e",
+      "story_beats": [
+        {
+          "headline": "The Power Warning",
+          "speech": "The battery monitors are flashing crimson because the tide is rising much faster than our historical data suggested for tonight's celebration.",
+          "visual": "signal",
+          "label": "The flickering control panel",
+          "story_beat": "reveal",
+          "visual_prompt": "Juno, a teenager with messy auburn hair in a blue jumpsuit, points anxiously at a sparking signal console while waves crash nearby.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hard Decision",
+          "speech": "If I strip the copper coils from my kinetic sculpture, I can build an emergency turbine but the sculpture will never spin.",
+          "visual": "robot",
+          "label": "Juno's workshop bench",
+          "story_beat": "mechanism",
+          "visual_prompt": "Juno stands at her workbench holding a heavy wire cutter, looking down at a complex clockwork sculpture of a metallic seabird.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Rapid Construction",
+          "speech": "Keep the turbine steady against the pier pilings while I tighten these primary connections to ensure we do not lose the charge.",
+          "visual": "ship",
+          "label": "The edge of the pier",
+          "story_beat": "build",
+          "visual_prompt": "Juno is knee-deep in water near a weathered wooden ship dock, frantically wrapping copper wires around a spinning makeshift turbine shaft.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Festival Glows",
+          "speech": "The turbines are humming perfectly and the lights are brighter than ever, proving that the ocean is our most reliable power source.",
+          "visual": "forest",
+          "label": "The decorated seaside promenade",
+          "story_beat": "payoff",
+          "visual_prompt": "Juno wipes salt from her face, smiling as the entire coastal park lights up with warm amber bulbs suspended between coastal pine trees.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "The festival's battery reserves are depleted by an unexpected early high tide, threatening to extinguish all decorative lighting.",
+      "decisive_choice": "Juno chooses to dismantle her prototype kinetic sculpture to repurpose its copper coils for an emergency makeshift turbine.",
+      "resolution": "The turbine generates sufficient current to power the lanterns, saving the festival from total darkness."
     }
   ]
 }
