@@ -136,8 +136,18 @@ def finish(video_path, *, renderer, expected_shots=None):
             print("ASTRA_VISUAL_REVIEW_SHEET=" + json.dumps(
                 evidence, sort_keys=True), flush=True)
         except Exception as exc:
-            print("ASTRA_VISUAL_REVIEW_SHEET=unavailable_" +
-                  type(exc).__name__, flush=True)
+            # Log only fixed diagnostic codes: never echo exception text, paths,
+            # subprocess stderr, credentials, or other potentially private data.
+            known_reasons = {
+                "ffprobe_unavailable", "ffmpeg_unavailable",
+                "missing_decoded_frame", "unexpected_sample_size",
+                "review_frame_source_hash_mismatch",
+            }
+            reason = str(exc) if type(exc) is RuntimeError and str(exc) in known_reasons else "unspecified"
+            print("ASTRA_VISUAL_REVIEW_SHEET=" + json.dumps({
+                "status": "unavailable", "exception_type": type(exc).__name__,
+                "reason": reason, "semantic_quality": "not_verified",
+            }, sort_keys=True), flush=True)
     print("ASTRA_ASSET_USAGE_RECEIPT=" + json.dumps({
         "path": str(receipt), "content_id": result["content_id"],
         "shot_count": count, "composited_shots": result["composited_shots"],
