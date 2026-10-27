@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "4abf2c07fb68929f7560e466",
-      "source_sha256": "452a6791eb81ff113daefc543b5780ce52e4640f5d8e9c62e0279c36d3eb4949",
+      "candidate_id": "1d299233b301bcebd2bb08bb",
+      "source_sha256": "184bbd9a73fd825b574bfe72457b63689a85414cf0239440282a6c860b3155d6",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-75fc7656333fde3d8599",
-        "title": "The Great Borscht Boiler Blunder",
-        "hook": "The Mechanical Menacing Ladle",
-        "question": "Can an overly complex automated soup stirrer survive the chaos of Saturday market day?",
-        "answer": "Simple mechanical reliability triumphs over elaborate automated gadgets every single time.",
+        "content_id": "rayvan-gemini-ac22accfd5c1a9e72aef",
+        "title": "The Great Turnip Telegraph Fiasco",
+        "hook": "The Noisy Launch",
+        "question": "Can an inventor automate a vegetable market with noisy root crops?",
+        "answer": "He realizes market gossip travels faster than any automated pulley.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,79 +29,80 @@
         ],
         "story_beats": [
           {
-            "headline": "The Mechanical Menacing Ladle",
-            "speech": "Behold the self-stirring borschtomatic twenty-two! It guarantees zero lumps and maximum flavor extraction without human strain!",
+            "headline": "The Noisy Launch",
+            "speech": "Behold the automated turnip launcher, designed to hurl your favorite root vegetables directly into waiting stalls without any human error!",
             "visual": "robot",
-            "label": "The Invention Unveiled",
+            "label": "Launch",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Barnaby stands proudly behind a wooden stall in a crowded sunny market, gesturing enthusiastically toward a bizarre, gear-heavy metal ladle thrashing wildly inside a giant brass soup pot, while confused shoppers shield their faces.",
+            "visual_prompt": "An inventor in a tweed vest pulls a lever next to a brass mechanical arm, launching a heavy purple turnip across a bustling open-air market while bewildered fruit sellers duck.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Soup Eruption",
-            "speech": "Wait, do not accelerate the gear ratio! The cabbage is jamming the secondary sprocket mechanism completely!",
+            "headline": "The Cabbage Jam",
+            "speech": "Watch closely as the sorting cogs grip each stubborn vegetable, though they might occasionally mistake a squash for a potato.",
             "visual": "signal",
-            "label": "The Build-Up of Chaos",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby frantically waves his hands in alarm, sweat pouring down his forehead, as red borscht splashes high into the air from the violently vibrating brass pot while flashing warning lights click on the mechanical housing.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Catastrophic Jam",
-            "speech": "The drive belt has snapped and sprayed red vegetable chunks across the entire merchant union awning!",
-            "visual": "ship",
-            "label": "The Mechanism Breakdown",
+            "label": "Sorting",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby holds a broken rubber belt in his soot-stained hands, staring in horrified disbelief at the smoking, motionless metal contraption slumped sideways into the dented brass soup pot.",
+            "visual_prompt": "The inventor frantically adjusts a spinning wooden dial while heavy brass gears grind together, spitting out dozens of angry red turnips onto the muddy cobblestone path.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Wooden Spoon Redemption",
-            "speech": "Forget the gears! Good old-fashioned wrist power and a wooden paddle make the finest borscht in town!",
+            "headline": "The Flying Produce",
+            "speech": "Do not panic when the velocity regulator engages, because speed is simply the friendly companion of fresh market delivery efficiency today!",
+            "visual": "ship",
+            "label": "Velocity",
+            "story_beat": "twist",
+            "visual_prompt": "A massive wooden catapult arm swings wildly across the crowded spice stalls, sending a basket of bruised parsnips flying directly into the town mayor's fancy hat.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Honest Shout",
+            "speech": "Perhaps shouting our daily prices loudly across the sunny square is significantly more reliable than complex mechanical gears and levers.",
             "visual": "door",
-            "label": "The Ultimate Payoff",
+            "label": "Bargain",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby smiles warmly as he cheerfully stirs the steaming borscht in the cleaned brass pot using a simple carved wooden spoon, while a delighted line of smiling market customers holds out bowls for serving.",
+            "visual_prompt": "The tired inventor sits on an upturned wooden crate outside his workshop door, smiling broadly while happily waving a single unlaunched turnip at a laughing customer.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "An eccentric inventor tries to sell a hyper-automated motorized soup ladle in a crowded public square.",
-        "decisive_choice": "The inventor abandons the twitching gears and stirs the borscht manually with a wooden spoon.",
-        "resolution": "Customers taste the savory borscht and happily buy out the entire inventory.",
+        "central_conflict": "Root vegetable delivery pulley system jams up the central square.",
+        "decisive_choice": "Abandoning the brass mechanism to shout prices directly.",
+        "resolution": "Traders return to friendly face-to-face bargaining.",
         "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed clay textures and cozy rustic charm.",
+          "style": "Bright, colorful stop-motion puppet animation aesthetic with tactile textures, warm morning lighting, and whimsical mechanical details.",
           "characters": {
-            "Barnaby": "An energetic inventor with frizzy gray hair, round wire-rimmed spectacles, a blue striped apron, and flour-smudged cheeks."
+            "inventor": "A cheerful middle-aged man with unruly brown hair, large round spectacles, a tweed vest covered in chalk dust, and rolled-up sleeves.",
+            "mayor": "A pompous official wearing an oversized feathered top hat, a stiff blue velvet coat, and carrying a golden pocket watch."
           },
           "locations": {
-            "MarketSquare": "A bustling, sun-drenched cobblestone town square filled with colorful striped vendor awnings, wooden crates of vegetables, and curious local shoppers."
+            "market_square": "A vibrant cobblestone village square packed with colorful striped canvas awnings, wooden crates, and hanging vegetable scales."
           },
           "objects": {
-            "BrassPot": "A massive, polished round brass cooking cauldron with sturdy iron handles and a slight dent on the left side rim.",
-            "WoodenSpoon": "A smooth, hand-carved oak cooking paddle with a worn handle stained dark from years of rich broths."
+            "brass_launcher": "A complex contraption of polished brass pipes, leather straps, large wooden gears, and a spring-loaded wooden throwing spoon.",
+            "purple_turnip": "An oversized, dusty purple root vegetable with thick green leafy stems protruding from the top."
           }
         },
-        "plot_fingerprint": "dea4f53ba9cf901ec7e2d8a3a4a6b68fa24341e2873b23d1237063fd91a8a126"
+        "plot_fingerprint": "319b0200ba99f5dfc2e798c90b72e58d76e9ed9a1dbeda2b93b404429260a35a"
       },
       "approved": false
     },
     {
-      "candidate_id": "e2be86e4c320bdd87cd6dbd6",
-      "source_sha256": "75feb83db6827d1a2becc1ceae1067bc595f0ea3085a3b25ac97a83b9df485cd",
+      "candidate_id": "36511109c485a379236ee83f",
+      "source_sha256": "ceb35920f25962a51eb88f31bf03232f28cc5b322d922e3232d86be449249e6d",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-f9d7b7d5e2473e46972c",
-        "title": "The Quantum Valve Leak",
-        "hook": "A Dangerous Drop",
-        "question": "Should the crew vent the portside fuel manifold to save the hull from a coolant freeze?",
-        "answer": "They override the automated valve, venting the reserve fuel and manually welding the cracked pipe.",
+        "content_id": "rayvan-gemini-1fc4c8e23149615256be",
+        "title": "The Last Ridge Beacon",
+        "hook": "The Silent Signal",
+        "question": "Can a stranded climber bypass a dying automated relay to warn the valley?",
+        "answer": "Yes, by manually routing the radio frequency through an old avalanche geophone.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -109,81 +110,81 @@
         ],
         "story_beats": [
           {
-            "headline": "A Dangerous Drop",
-            "speech": "Chief, our temperature gauges are plunging rapidly! The coolant has frozen solid inside the primary thruster housing right now.",
-            "visual": "ship",
-            "label": "Engineering Alert",
-            "story_beat": "reveal",
-            "visual_prompt": "Chief engineer Jax, a stocky human with a scarred cheek and orange jumpsuit, stares in horror at a glowing red diagnostic monitor inside the cramped engine bay of the rust-colored freighter. The heavy steel bulkhead behind him is iced over with frost.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Disagreement in the Bay",
-            "speech": "We must vent the reserve fuel immediately to clear the blockage, or the entire engine core will rupture within minutes.",
-            "visual": "robot",
-            "label": "The Protocol Debate",
-            "story_beat": "build",
-            "visual_prompt": "Jax stands face-to-face with Pip, a bipedal maintenance robot with a polished chrome dome and yellow optical sensors, inside the frosty engine bay. Jax holds a glowing handheld diagnostic tablet while Pip points a metallic manipulator arm toward the main fuel valve.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Manual Override",
-            "speech": "Stand back and hold this heavy plasma torch steady while I bypass the safety interlocks on the main pressure line.",
+            "headline": "The Silent Signal",
+            "speech": "The main transmitter is completely dead, and the storm is moving in much faster than we anticipated.",
             "visual": "signal",
-            "label": "Emergency Repair",
-            "story_beat": "mechanism",
-            "visual_prompt": "Pip holds a buzzing blue plasma torch steady, directing its beam onto a leaking copper pipe, while Jax reaches into an open electrical panel with sparks flying around his gloved hands inside the dim engine room.",
+            "label": "Beacon Failure",
+            "story_beat": "reveal",
+            "visual_prompt": "Climber Elena kneeling inside a rocky alpine alcove, holding a sparking radio unit with a grim expression, illuminated by red emergency warning lights.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Safely Docked",
-            "speech": "We did it team. The temperature is stabilizing nicely, and our reserve fuel got us safely into the station dock.",
-            "visual": "planet",
-            "label": "Mission Accomplished",
+            "headline": "Constructing the Link",
+            "speech": "We need to strip the copper wiring from the backup battery and connect it directly to the ground sensor.",
+            "visual": "robot",
+            "label": "Reworking Hardware",
+            "story_beat": "build",
+            "visual_prompt": "Climber Elena using metal pliers to strip insulation from a thick wire, working intently inside a cold stone shelter with frost coating her red jacket.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Final Frequency",
+            "speech": "Hold the manual crank steady while I tune the seismic dial to match the emergency broadcast frequency.",
+            "visual": "door",
+            "label": "Manual Override",
+            "story_beat": "mechanism",
+            "visual_prompt": "Climber Elena turning a heavy metal dial on a rusted wall-mounted seismic hatch, her breath pluming in the freezing air while snow whips past the open doorway.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Valley Responds",
+            "speech": "Look at the indicator light turning solid green. They heard our signal, and the rescue chopper is launching now.",
+            "visual": "forest",
+            "label": "Successful Rescue",
             "story_beat": "payoff",
-            "visual_prompt": "Jax and Pip stand side-by-side inside the observation deck of the freighter, smiling as they look out a large circular window at a vibrant green and blue rocky planet looming outside against the starry black void.",
+            "visual_prompt": "Climber Elena smiling with relief as a bright green indicator lamp glows on the makeshift control box, looking out toward the distant valley pine forest.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Coolant leak freezing the starboard thruster manifold during a deep space transit",
-        "decisive_choice": "Venting the backup fuel supply to purge the frozen coolant before structural failure",
-        "resolution": "The thruster is saved, the hull remains intact, and the ship safely reaches the outer station",
+        "central_conflict": "A broken transmitter leaves a trapped hiker unable to call down before an impending ice slide.",
+        "decisive_choice": "Splicing the core radio wire into the seismic sensor cable.",
+        "resolution": "The signal successfully triggers the valley rescue klaxon just as the ridge collapses.",
         "visual_bible": {
-          "style": "Gritty science fiction animation with realistic mechanical textures and cinematic lighting",
+          "style": "Realistic gritty survival drama with crisp mountain lighting and deep snow textures",
           "characters": {
-            "Jax": "Stocky human male with short dark hair, a scarred left cheek, wearing a worn orange maintenance jumpsuit with heavy utility pouches.",
-            "Pip": "Bipedal maintenance robot with a polished chrome dome head, glowing yellow optical sensors, and modular grey titanium limbs."
+            "Elena": "A determined female mountain rescue specialist in her thirties with a weathered face, dirt smudges on her cheeks, wearing a heavy insulated red parka and waterproof climbing trousers."
           },
           "locations": {
-            "engine_bay": "Cramped industrial interior filled with exposed copper pipes, blinking diagnostic panels, and frosted steel bulkheads.",
-            "observation_deck": "Spacious metallic room featuring a massive circular viewport overlooking deep space and planetary bodies."
+            "alpine_alcove": "A narrow stone shelter carved into a steep granite cliff, filled with frost, loose shale, and emergency equipment.",
+            "valley_edge": "A sweeping mountain pass overlooking dense pine forests and distant snowy peaks under an overcast sky."
           },
           "objects": {
-            "diagnostic_tablet": "A rectangular handheld glass tablet displaying flashing red and blue holographic system data.",
-            "plasma_torch": "A heavy handheld industrial tool that emits a steady, bright blue cutting flame from its ceramic nozzle."
+            "radio_unit": "A heavy, military-grade green transceiver with a cracked glass display and a bent antenna.",
+            "seismic_hatch": "A round industrial steel door with a mechanical wheel lock and rusted hinges.",
+            "copper_wire": "A bright orange-insulated electrical cable stripped at both ends to reveal shiny copper strands."
           }
         },
-        "plot_fingerprint": "222d3106deffd62f2ede4ac468101ac45ced40b5e6666b9d75ad1e8dc39ad148"
+        "plot_fingerprint": "17c6132f95aed28d258642b518b225603682922217f1a31635f7aa2eb519be22"
       },
       "approved": false
     },
     {
-      "candidate_id": "0d03ae3b68b0de0ea11e491c",
-      "source_sha256": "2f111a729d80afdee34174e228969479ed61cd0345fd397020043da2601f9793",
+      "candidate_id": "ccd81a39fde7d3135f067129",
+      "source_sha256": "00a76e89f9a099b50028b7c34076a3755096e65c40e7766586100cedac12905a",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-f719208ee562eb42469d",
-        "title": "The Weaver's Last Thread",
-        "hook": "Discovery at the Well",
-        "question": "Can true friendship survive when a lifelong secret threatens the village's only water source?",
-        "answer": "Yes, by choosing radical honesty over a comforting lie, preserving the bonds of trust above all else.",
+        "content_id": "rayvan-gemini-946bd1401521c16f76ea",
+        "title": "The Salty Gearbox Regatta",
+        "hook": "Dockside Inspection",
+        "question": "Can a rusted paddlewheel drive a craft across the harbour?",
+        "answer": "Yes, by locking the differential to the primary salt-mill axle.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -191,65 +192,65 @@
         ],
         "story_beats": [
           {
-            "headline": "Discovery at the Well",
-            "speech": "Look closely at these ancient stone foundations. The fracture runs deep into the water chamber, and only our secret looms here.",
-            "visual": "door",
-            "label": "The Hidden Vault",
+            "headline": "Dockside Inspection",
+            "speech": "Look at this rusted gear box! If we cannot clear the seaweed jam by noon, our entire race is ruined.",
+            "visual": "ship",
+            "label": "Engine Check",
             "story_beat": "reveal",
-            "visual_prompt": "An aging weaver in a blue wool tunic points at a cracked stone wall inside a dark underground chamber, holding a flickering oil lantern while his friend watches with a guilty expression.",
+            "visual_prompt": "A tall engineer with curly brown hair wearing a blue canvas apron points a copper wrench at a rusted paddle-wheel boat moored at the wooden pier while holding a greasy clipboard.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Heavy Burden",
-            "speech": "If the elders find out about this fracture, they will banish my family forever. We must keep this quiet.",
-            "visual": "forest",
-            "label": "The Whispering Woods",
+            "headline": "Emergency Assembly",
+            "speech": "We must mount the spare bronze turbine right now before the tide turns completely against our harbour dock.",
+            "visual": "robot",
+            "label": "Gear Assembly",
             "story_beat": "build",
-            "visual_prompt": "Two friends stand among towering pine trees at dusk, whispering urgently; one holds a weathered wooden carving while gesturing defensively toward the distant village.",
+            "visual_prompt": "The engineer and a stout assistant in striped trousers lift a heavy bronze turbine onto the deck of the wooden ship while holding leather-gloved hands firmly against the iron casing.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Turning Point",
-            "speech": "Water belongs to everyone in this valley. I cannot let the well run dry just to protect our past mistakes.",
+            "headline": "Linkage Crisis",
+            "speech": "The primary steering cable just snapped under the immense strain of the surging waves and incoming tide.",
             "visual": "signal",
-            "label": "The Village Square",
-            "story_beat": "mechanism",
-            "visual_prompt": "The weaver stands atop a stone platform in a bustling medieval square at noon, holding a brass warning bell aloft as villagers gather around in confusion.",
+            "label": "Cable Break",
+            "story_beat": "twist",
+            "visual_prompt": "The assistant waves a red warning flag wildly on the rocking wooden ship deck while the engineer frantically ties a knotted hemp rope around the thrashing steering arm.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Restored Trust",
-            "speech": "Thank you for having the courage to tell the truth. Together, we will rebuild these ancient stones stronger than before.",
+            "headline": "Victory Surge",
+            "speech": "We successfully chained the rudder lock! Watch our paddle-wheel catch the current and cross the finish line.",
             "visual": "forest",
-            "label": "The Rebuilt Aqueduct",
+            "label": "Finish Line",
             "story_beat": "payoff",
-            "visual_prompt": "Multiple villagers work side by side laying fresh mortar on a repaired stone aqueduct in a sunny forest clearing, smiling warmly at each other while holding mason trowels.",
+            "visual_prompt": "The engineer and assistant cheer triumphantly on the moving wooden ship deck, holding a raised brass trophy aloft while passing green pine-forested headlands under a bright noon sun.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A cracked subterranean aqueduct threatens the village well, and the master weaver discovers his lifelong friend caused the structural damage.",
-        "decisive_choice": "Confess the truth to the village elders immediately instead of helping cover up the accidental structural damage.",
-        "resolution": "The villagers work together to repair the aqueduct before the dry season, forging a stronger community through accountability.",
+        "central_conflict": "A stuck steering linkage during the annual coastal craft race.",
+        "decisive_choice": "Welding the spare anchor chain directly to the rudder quadrant.",
+        "resolution": "The paddle-craft steers safely across the finish line to win the trophy.",
         "visual_bible": {
-          "style": "Cinematic historical realism with warm earthy tones, dramatic natural lighting, and rich texture details.",
+          "style": "Bright, textured coastal stop-motion animation aesthetic with detailed mechanical components and maritime textures.",
           "characters": {
-            "weaver": "A middle-aged man with weathered features, kind brown eyes, graying hair, wearing a patched blue wool tunic and sturdy leather boots.",
-            "friend": "A stout artisan with a thick dark beard, nervous darting eyes, wearing a dark green linen shirt and a heavy canvas apron."
+            "engineer": "A tall woman with curly brown hair, wearing a practical blue canvas apron over a wool sweater, sporting smudge marks of grease on her cheek.",
+            "assistant": "A stout man with a ginger beard, wearing striped trousers and a heavy canvas cap."
           },
           "locations": {
-            "underground_chamber": "A damp medieval stone cellar with moss-covered walls, pooling water on the floor, and a heavy wooden arched door.",
-            "village_square": "A sunlit cobblestone courtyard surrounded by timber-framed thatched-roof houses, featuring a central stone well."
+            "harbour": "A bustling coastal seaside festival dock made of weathered wooden planks with colourful bunting flying overhead."
           },
           "objects": {
-            "oil_lantern": "A tarnished brass oil lantern casting a warm, flickering yellow glow with intricate handle etchings.",
-            "warning_bell": "A heavy cast-iron handbell with a thick braided leather strap attached to the top handle."
+            "wrench": "A heavy, tarnished 12-inch copper wrench with etched grip lines.",
+            "turbine": "A gleaming multi-bladed bronze turbine with interlocking gear teeth.",
+            "trophy": "A polished brass cup mounted on a piece of polished driftwood."
           }
         },
-        "plot_fingerprint": "5d40988dcad4ae9eb47d87262eb4f75fe1d38d32269a2f15e25cd6aaf8698f96"
+        "plot_fingerprint": "1df2a9dd42f6723dc17e2d50ed09cb8b8f3aafc7b76cfd3e03696b3e25aef878"
       },
       "approved": false
     }
