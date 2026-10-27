@@ -3,7 +3,7 @@
   "day": "2026-10-27",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 19,
-  "confirmed_today": 18,
+  "confirmed_today": 19,
   "last_attempt_at": "2026-10-27T03:16:31.474428+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -6009,16 +6009,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "RGN_l3W7wGI": {
-      "content_id": "rayvan-anthology-7c9413360cfe156f",
+    },
+    "rayvan-anthology-7c9413360cfe156f": {
+      "video_id": "RGN_l3W7wGI",
+      "confirmed_at": "2026-10-27T03:17:44.435726+00:00",
       "title": "The Monkey and the Missing Banana",
-      "day": "2026-10-27",
-      "uploaded_at": "2026-10-27T03:16:33.618844+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-10-27T03:16:33.618844+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "",
       "story_beats": [
@@ -6059,31 +6057,31 @@
           "duration": 2.1
         }
       ],
-      "renderer": "studio-7.3.1"
+      "genre": "fiction"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-10-27T03:09:17.365404+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-10-27T03:17:44.046283+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-27T03:16:34.154523+00:00",
+    "at": "2026-10-27T03:17:44.529096+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-10-27T02:00:07.031481+00:00",
   "reserved": {
@@ -12938,10 +12936,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-27T03:16:34.154461+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-10-27T03:17:44.529019+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -12949,9 +12947,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-27T03:16:34.154512+00:00",
+    "at": "2026-10-27T03:17:44.529081+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -12963,52 +12961,22 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-27T03:16:34.154237+00:00",
-    "preflight_due": "true",
+    "at": "2026-10-27T03:17:44.528970+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "outcome": "published",
+    "reason": "min_interval",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-27T03:16:34.154456+00:00",
-    "collection_status": "collected",
-    "publish_step": "success",
-    "counters": {
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 156,
-        "fingerprint": 0,
-        "id": 16,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 140,
-        "title": 0,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 140,
-        "remaining": 18
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "considered": 6,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {
-          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 2,
-          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 1
-        },
-        "render_exception": {},
-        "render_qa_rejected": 0
-      }
-    },
+    "at": "2026-10-27T03:17:44.529014+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
