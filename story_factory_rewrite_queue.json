@@ -10,181 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "0873817d94c080b01ff3ca4c",
-      "source_sha256": "d4b15de7254c388ce8cc5e76bb683c1637b726b635d2ad63bcfbbf6ac95d27c1",
+      "candidate_id": "67bb9c64a4cb785855bf85b4",
+      "source_sha256": "3ae7ed1d6648a49f59cfe011a89e9ba2678ed33f97e3bebd3ee43340bcd8b865",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-96613021e408216285b6",
-        "title": "The Great Squeak-Off at Sector Nine",
-        "hook": "The Noise Notice",
-        "question": "Can Barnaby fix his rubber-chicken vending cart before the mayor bans all novelty noisemakers?",
-        "answer": "Yes, by designing a dampening muffler that turns honks into soothing jazz riffs.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Noise Notice",
-            "speech": "Attention citizens, all loud toys are hereby outlawed! One more squeak and your entire cart gets impounded forever.",
-            "visual": "signal",
-            "label": "Warning",
-            "story_beat": "reveal",
-            "visual_prompt": "Mayor Vance standing by a fruit stall reading a glowing holographic notice, wearing a red sash, pointing at a nervous Barnaby.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Valve Assembly",
-            "speech": "If I twist this copper nozzle tighter, the air pressure might just bypass the main chamber without popping.",
-            "visual": "robot",
-            "label": "Crafting",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby wearing a grease-stained apron, holding a tiny wrench, tightening a squeaky rubber chicken on his messy workbench.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Unexpected Melody",
-            "speech": "Wait a minute, that is not a shriek at all. It actually sounds like a smooth saxophone solo in minor key.",
-            "visual": "door",
-            "label": "Discovery",
-            "story_beat": "twist",
-            "visual_prompt": "Barnaby staring wide-eyed at the rubber chicken as colorful musical notes drift out of its beak inside the crowded market alley.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Jazz Approval",
-            "speech": "I must admit, your new rhythmic honker is quite delightful. You may keep selling your toys in the square today.",
-            "visual": "ship",
-            "label": "Success",
-            "story_beat": "payoff",
-            "visual_prompt": "Mayor Vance smiling and tapping his foot to the music while Barnaby proudly plays a melody on a modified novelty chicken.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Market noise ban vs. inventing a silent noisemaker",
-        "decisive_choice": "Re-routing the air valve through a sponge before final calibration",
-        "resolution": "The mayor grants a permanent permit for musical comedy carts",
-        "visual_bible": {
-          "style": "Bright, colorful stop-motion animation aesthetic with detailed clay textures and bustling market backgrounds.",
-          "characters": {
-            "Barnaby": "A cheerful inventor with wild orange hair, wearing a green patched jumpsuit and oversized goggles pushed up on his forehead.",
-            "Mayor Vance": "A stern official with a tall top hat, impeccably pressed purple suit, and a very shiny golden pocket watch."
-          },
-          "locations": {
-            "Market Square": "A crowded outdoor plaza filled with colorful awnings, stacked crates of vegetables, and hanging lanterns."
-          },
-          "objects": {
-            "Rubber Chicken": "A bright yellow latex fowl with a comical expression and an adjustable copper valve screwed into its tail feathers.",
-            "Workbench": "A scarred wooden table piled high with screwdrivers, springs, spare gears, and half-empty mugs of lukewarm tea."
-          }
-        },
-        "plot_fingerprint": "6381970e8b7cdf4fee10deb9ac86d694dfe1c58bba63d159f8dc589c3c133790"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "ed5f1ba432ff10ed161820a3",
-      "source_sha256": "027da352e55f607761e9043ec51bf13ca9efcb18b777775ddeb9de339a14199a",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-42e9019fb5353e5f81a6",
-        "title": "The Great Salt-Tide Bridge Race",
-        "hook": "The Warning Siren",
-        "question": "Can a master carpenter build a functional wave-powered bridge before the equinox tide floods the festival square?",
-        "answer": "Yes, by utilizing modular cork floats and counterweights, saving the celebration and securing the engineering prize.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Warning Siren",
-            "speech": "Look at the receding tide line! The high equinox water is rushing in three hours faster than predicted this year.",
-            "visual": "signal",
-            "label": "Tidal Alert",
-            "story_beat": "reveal",
-            "visual_prompt": "A weathered seaside village square under a stormy sky, where a brass warning beacon flashes an orange signal light, while an anxious carpenter points at the advancing water.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Fast Assembly",
-            "speech": "We must abandon the stone pillars immediately and lash these hollow cedar barrels together to create a floating foundation.",
-            "visual": "ship",
-            "label": "Hull Framing",
-            "story_beat": "build",
-            "visual_prompt": "The carpenter and a young apprentice hurriedly tie ropes around giant cedar barrels on a wooden dock, holding heavy mallets and shouting over the roaring wind.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Spring-Lock Release",
-            "speech": "Drive the bronze locking pins into the central joints right now so the spans can flex upward instead of snapping under pressure.",
-            "visual": "robot",
-            "label": "Joint Mechanism",
-            "story_beat": "mechanism",
-            "visual_prompt": "A close-up of the carpenter hammering a heavy bronze gear mechanism into a wooden bridge joint, salt spray splashing against the gleaming metal levers.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Safe Crossing",
-            "speech": "Step right across the floating span everyone! The tide has risen to its peak, and our flexible bridge holds firm and dry.",
-            "visual": "forest",
-            "label": "Triumphant Crossing",
-            "story_beat": "payoff",
-            "visual_prompt": "A jubilant crowd of villagers carrying colourful festival banners walking safely across a rolling wooden bridge that floats atop the high tide against a backdrop of coastal pines.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "A rapidly advancing equinox tide threatens to submerge the coastal festival square before the final bridge spans are secured.",
-        "decisive_choice": "Abandoning the traditional heavy stone anchoring in favor of an untested, buoyant spring-hinged timber design.",
-        "resolution": "The flexible wooden span rises safely with the incoming tide, allowing festival-goers to cross effortlessly while winning the grand prize.",
-        "visual_bible": {
-          "style": "Bright, textured stop-motion stop-motion puppet animation style with rich maritime details and warm lighting.",
-          "characters": {
-            "carpenter": "An elderly man with a braided white beard, wearing a weathered leather apron over a thick blue woolen tunic, holding a brass hammer.",
-            "apprentice": "A young teenager with curly brown hair, wearing a patched green canvas vest and muddy leather boots."
-          },
-          "locations": {
-            "festival_square": "A cobblestone coastal plaza surrounded by colorful wooden market stalls and decorated with paper lanterns."
-          },
-          "objects": {
-            "cedar_barrels": "Large, waterproofed wooden casks banded with dark iron hoops used for buoyancy.",
-            "bronze_locking_pin": "A polished, heavy metal bolt engraved with spiral wave patterns.",
-            "warning_beacon": "A tripod-mounted brass lamp housing a flickering orange glass lens."
-          }
-        },
-        "plot_fingerprint": "35c0da8cfddfe9f571b9c870c3dfa5a6cb8dc41e8c26407ebe5846d1e976ffa5"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "4b507167eee46fdfb0d24a60",
-      "source_sha256": "2f18c31939562e80cd6e3a64221e0d073989f61389efec2fc97d0d016ff357e0",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-466bfcba5c4437390765",
-        "title": "The Great Automatic Turnip Grater Debacle",
+        "content_id": "rayvan-gemini-7a995581b27d0375b6ea",
+        "title": "The Great Squeak-Free Carrot Caper of Cobblestone Square",
         "hook": "The Grand Unveiling",
-        "question": "Can an overly complex culinary invention survive a chaotic morning market?",
-        "answer": "Simple reliability triumphs over automated complexity when dealing with stubborn root vegetables.",
+        "question": "Can an overly enthusiastic inventor sell his self-polishing turnip sprayer to a stubborn produce market without destroying every vegetable stall in sight?",
+        "answer": "He abandons the high-pressure pump in favor of a gentle feathered dusting brush, saving the market and earning his first actual profit.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -193,62 +30,226 @@
         "story_beats": [
           {
             "headline": "The Grand Unveiling",
-            "speech": "Behold the magnificent brass turnip grater three thousand, engineered to feed this entire bustling market instantly!",
+            "speech": "Behold the magnificent pneumatic produce polisher! Watch it blast away stubborn morning mud in less than three seconds flat!",
             "visual": "robot",
-            "label": "The Presentation",
+            "label": "The Invention",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly next to a massive, clanking brass machine in a crowded outdoor market square, holding a wooden clipboard and smiling wildly.",
+            "visual_prompt": "Barnaby stands proudly beside his steaming brass contraption in the busy outdoor market, holding a greasy wrench while grinning widely.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Construction Chaos",
-            "speech": "Quickly feed more giant purple turnips into the upper hopper before the steam pressure drops completely away!",
+            "headline": "The Mechanical Malfunction",
+            "speech": "Oh dear me, the pressure gauge is sticking in the red zone! Duck your heads and protect your lovely cabbages right now!",
             "visual": "signal",
-            "label": "The Assembly",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby frantically shovels enormous purple turnips into a smoking metal funnel while steam hisses from copper pipes in the noisy market stall.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Mechanical Flaw",
-            "speech": "The internal gears are jamming on a particularly tough root, and now the entire contraption is shaking violently!",
-            "visual": "ship",
-            "label": "The Breakdown",
+            "label": "The Overload",
             "story_beat": "mechanism",
-            "visual_prompt": "Barnaby stretches his arms out to grab a vibrating, smoke-belching metal apparatus while startled market customers duck behind wooden crates.",
+            "visual_prompt": "Barnaby frantically waves his hands at the sputtering brass machine while red steam whistles wildly and carrots fly through the air.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Messy Payoff",
-            "speech": "Perhaps hand-grating root vegetables is safer after all, once you clean up this giant mountain of shredded purple pulp.",
+            "headline": "The Desperate Modification",
+            "speech": "I must swap this terrifying steam valve for something infinitely gentler before Granny Higgins hits me with her giant wooden spoon!",
             "visual": "door",
-            "label": "The Aftermath",
+            "label": "The Adjustment",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby crouches behind his shaking brass contraption inside his wooden market booth, quickly unscrewing a smoking pipe with a greasy screwdriver.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Sweet Success",
+            "speech": "There we are! Clean, beautifully polished turnips without a single dent or explosion. Who would like to buy the very first one?",
+            "visual": "ship",
+            "label": "The Victory",
             "story_beat": "payoff",
-            "visual_prompt": "Barnaby sits exhausted on a wooden stool amidst piles of shredded purple turnip pulp, holding a simple hand grater while market vendors laugh.",
+            "visual_prompt": "Barnaby beams happily as smiling market vendors eagerly hand him shiny silver coins in exchange for feather dusters attached to small metal scrubbers.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Barnaby tests his chaotic, gear-heavy automatic turnip grater against angry vegetable vendors.",
-        "decisive_choice": "Barnaby pulls the main emergency release lever to dismantle the malfunctioning machine.",
-        "resolution": "The machine collapses into a pile of harmless parts, leaving Barnaby to grate turnips by hand.",
+        "central_conflict": "Barnaby tests his chaotic high-pressure turnip sprayer in the crowded morning market, threatening to blast every merchant's produce into mush.",
+        "decisive_choice": "Barnaby shuts off the pressurized steam valve and trades the heavy metal nozzle for a soft goose-feather duster.",
+        "resolution": "The merchants happily purchase the gentle vegetable dusters, and Barnaby's chaotic invention becomes the market's favorite new tool.",
         "visual_bible": {
-          "style": "Bright, whimsical stop-motion animation aesthetic with rich textures and warm lighting.",
+          "style": "Bright, colorful stop-motion puppet animation aesthetic with rich textures of polished brass, weathered wood, and vibrant felt vegetables.",
           "characters": {
-            "Barnaby": "An eccentric middle-aged inventor with wild grey hair, wearing a soot-stained tweed vest and oversized round spectacles."
+            "Barnaby": "A tall, frantic inventor with wild ginger hair, oversized round spectacles, a grease-stained yellow vest, and striped trousers.",
+            "Granny Higgins": "A stern elderly vegetable merchant wearing a checkered apron, wire-rimmed glasses, and a blue floral headscarf."
           },
           "locations": {
-            "Market Square": "A bustling, sunlit cobblestone marketplace filled with colorful canvas awnings, wooden stalls, and vegetable crates."
+            "Cobblestone Square": "A bustling open-air market packed with wooden stalls, striped canvas awnings, and crates overflowing with colorful vegetables."
           },
           "objects": {
-            "Brass Machine": "A towering, overly complicated contraption made of polished brass pipes, spinning cogs, and smoking funnels.",
-            "Hand Grater": "A small, dented tin hand-grater covered in faint scratches and vegetable residue."
+            "Turnip Sprayer": "A towering contraption made of gleaming polished brass pipes, a large pressure dial with a red needle, and attached rubber hoses."
           }
         },
-        "plot_fingerprint": "9c5da8096678630c03e9ec7f0fcac813da6aae504271b9e64270008c01796341"
+        "plot_fingerprint": "1434fd74f1980a0c03be426f8978bc24881839018f5d429d180a6e8c0f057861"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "2b804ac72ad8ca435257450f",
+      "source_sha256": "b895af40625a2586abdf43ee6042d0300c82d58b8df48aa87f5d05695acbc1c5",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-84bdd5f929524b7f78a1",
+        "title": "The Great Soapbox Derby Gearbox Mystery",
+        "hook": "Sabotaged Steerage",
+        "question": "How did the underdog team win the annual gravity derby without an engine?",
+        "answer": "They utilized a pulley-driven differential steering mechanism crafted entirely from reclaimed bicycle chains.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Sabotaged Steerage",
+            "speech": "Look closely at the snapped cable. Someone deliberately cut our primary steering line right before the race begins.",
+            "visual": "robot",
+            "label": "The Sabotage",
+            "story_beat": "reveal",
+            "visual_prompt": "Close-up of mechanic character examining a frayed metal cable inside a wooden soapbox car interior, worried facial expression, dim garage lighting, holding a small flashlight.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Inventive Repair",
+            "speech": "We do not need standard cables when we have spare gears and bicycle chains to construct an entirely new linkage.",
+            "visual": "ship",
+            "label": "The Fix",
+            "story_beat": "build",
+            "visual_prompt": "Medium shot of two young engineers working frantically inside a sunlit workshop, fitting interlocked bicycle gears into the dashboard of a sleek red soapbox racer.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Hairpin Turn",
+            "speech": "Hold steady through the curve and let the chain differential shift our weight automatically as we corner.",
+            "visual": "forest",
+            "label": "The Corner",
+            "story_beat": "mechanism",
+            "visual_prompt": "Action shot of the red soapbox racer banking sharply around a steep asphalt curve flanked by green pine trees, driver focused intently on the steering wheel.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Triumphant Finish",
+            "speech": "By keeping our momentum through ingenuity rather than speed alone, we crossed the finish line as champions.",
+            "visual": "signal",
+            "label": "The Victory",
+            "story_beat": "payoff",
+            "visual_prompt": "Wide angle of the soapbox car crossing a checkered finish line banner under bright afternoon sunlight, cheering crowd in the background blurred with motion.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Rival team leader sabotaged the steering cables right before the final heat.",
+        "decisive_choice": "Replaced the snapped cable with a bicycle chain tensioner.",
+        "resolution": "Secured first place by navigating the hairpin turn smoothly while the rival slid out.",
+        "visual_bible": {
+          "style": "Bright, high-contrast animated cinematic style with rich textures and expressive character animation.",
+          "characters": {
+            "mechanic_lead": "A determined teenager wearing a smudge-stained denim jumpsuit, safety goggles pushed up on messy brown hair, and bright canvas sneakers.",
+            "rival_captain": "An arrogant competitor wearing a pristine racing jacket with golden embroidered stripes, slicked-back hair, and a confident smirk."
+          },
+          "locations": {
+            "workshop": "A cluttered suburban garage filled with wooden planks, hanging tools, half-built bicycle frames, and warm overhead pendant lighting.",
+            "racetrack": "A steep paved suburban hill winding past tall pine trees, culminating in a wide finish line marked with bright checkered banners."
+          },
+          "objects": {
+            "soapbox_car": "A low-profile wooden racer painted vibrant red, featuring oversized rubber wheels and an exposed steering column made of salvaged metal pipes.",
+            "bicycle_chain": "A greasy, interlocking silver chain typically used for multi-speed bicycles, repurposed here as a flexible mechanical linkage."
+          }
+        },
+        "plot_fingerprint": "ab442cb2f53c4b8dea452d8a0f2631c8211ca443fdf1964e607d2bc3cc6f7248"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "ed240651370fcda2be9daeac",
+      "source_sha256": "9ac7543bfa149fcd57beed2a6fbf8afab6b35ab095e857beeef4ed1a84e455a2",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-3e0c047c1fae4afb4ded",
+        "title": "The Muddy Pitch Playbook",
+        "hook": "The Flooded Field",
+        "question": "Can an underdog neighborhood football team defeat the reigning champions using physics instead of muscle?",
+        "answer": "Yes, by engineering a clever redirection system that turns the field's worst puddle into a scoring advantage.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Flooded Field",
+            "speech": "Look at this massive water hazard right in our box! The Bulldogs are going to slide right past us every single time.",
+            "visual": "forest",
+            "label": "The Swampy Pitch",
+            "story_beat": "reveal",
+            "visual_prompt": "Coach Kip standing in knee-deep muddy grass on the community pitch, pointing angrily at a wide, stagnant puddle while holding a soggy clipboard under his arm.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Underground Engineering",
+            "speech": "We will bury corrugated plastic channels beneath the turf to redirect every drop of this troublesome water straight downfield.",
+            "visual": "robot",
+            "label": "The Drainage Rig",
+            "story_beat": "build",
+            "visual_prompt": "Milo kneeling in the damp soil wearing a neon orange utility vest, assembling a grid of blue plastic pipes while holding a heavy-duty adjustable wrench.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Secret Valve",
+            "speech": "When I twist this brass lever during kickoff, the buried siphon will instantly flood the left wing.",
+            "visual": "signal",
+            "label": "The Control Lever",
+            "story_beat": "mechanism",
+            "visual_prompt": "Milo crouching near the sideline bench, his hand gripping an antique brass valve protruding from the turf as a blinking red indicator light blinks rapidly on his wrist.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Slippery Victory",
+            "speech": "It worked perfectly! The champions are stuck spinning their wheels in the mud while our winger crosses it home!",
+            "visual": "door",
+            "label": "The Winning Goal",
+            "story_beat": "payoff",
+            "visual_prompt": "Bulldog defenders sliding comically on their backs in a sudden gush of water while Milo and Coach Kip cheer victoriously by the wooden goalposts, holding a glittering silver community shield.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A drainage failure on the community pitch threatens to hand the seasonal trophy to the heavy-footed Bulldogs.",
+        "decisive_choice": "Building a hidden gravity funnel under the turf to channel standing water directly into the rival's primary running lane.",
+        "resolution": "The Bulldogs slip out of contention while the clever underdogs glide past to claim the community shield.",
+        "visual_bible": {
+          "style": "Bright, high-contrast animated sports comedy with vivid turf textures and expressive character designs.",
+          "characters": {
+            "Coach Kip": "A stocky middle-aged coach with a thick gray mustache, wearing a faded green windbreaker and mud-stained trousers.",
+            "Milo": "A resourceful twelve-year-old inventor with messy red hair, oversized safety goggles pushed up on his forehead, and a utility belt."
+          },
+          "locations": {
+            "community_pitch": "A slightly unkempt neighborhood soccer field surrounded by chain-link fences and tall oak trees under an overcast sky."
+          },
+          "objects": {
+            "brass_lever": "A heavy, tarnished brass valve handle mounted on a concrete block near the team bench.",
+            "utility_wrench": "A heavy silver metal wrench with blue rubber grips.",
+            "community_shield": "A polished silver plaque mounted on an ornate dark wood backing."
+          }
+        },
+        "plot_fingerprint": "0e784fc25cd87b851cb9a5c44524cbbd1eab1007af1aae5797b452d3b6668339"
       },
       "approved": false
     }
