@@ -1,21 +1,30 @@
 {
-  "observed_at": "2026-10-27T13:44:07.219249+00:00",
-  "generated": 20,
+  "observed_at": "2026-10-27T18:53:03.787160+00:00",
+  "generated": 18,
   "requested": 20,
-  "generation_failures": [],
-  "reviewed": 20,
-  "approved": 0,
+  "generation_failures": [
+    {
+      "index": 6,
+      "reason": "ValueError"
+    },
+    {
+      "index": 15,
+      "reason": "ValueError"
+    }
+  ],
+  "reviewed": 18,
+  "approved": 1,
   "review_issues": [
-    "The story premise of a rescuer abandoning the established trail during a blizzard to save a stranded climber closely mirrors recent published works such as 'The Ranger and the Frostbound Crevasse'.",
-    "The story premise of an inventor's mechanical produce-sorting/launching machine malfunctioning and causing chaotic havoc in a crowded marketplace closely mirrors the recently published comparison example 'Percival's Polka-Dot Produce-Polisher and the Bazaar Blooper'.",
+    "The candidate story features a stranded climber trapped in a mountain environment, a rescue mission involving a rope descent down a cliff face, and a rescue hoist resolution, which closely duplicates the causal mechanisms, setting, and resolution of 'The Ranger and the Frostbound Crevasse' in the comparison history.",
+    "The plot fingerprint and central conflict lack sufficient originality when compared to recently published premises within the provided dataset.",
     "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction",
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction",
     "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
-    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction"
+    "publication_renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event"
   ],
   "approval_pair_present": true,
   "model_access": {
