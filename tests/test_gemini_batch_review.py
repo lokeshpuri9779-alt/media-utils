@@ -23,7 +23,7 @@ class ReviewBatchTests(unittest.TestCase):
         self.assertEqual(story["kind"], "microfiction")
 
     def test_mismatched_digest_never_exports(self):
-        story = {"content_id": "s1"}
+        story = {"content_id": "s1", "kind": "microfiction"}
         stories, reviews, audit = review_batch({"status": "unreviewed", "stories": [story]}, [],
             reviewer=lambda s, h: {"approved": True, "record": {"story_sha256": "bad"}, "issues": []})
         self.assertEqual(stories["stories"], [])
