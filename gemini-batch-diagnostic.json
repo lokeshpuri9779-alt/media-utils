@@ -1,45 +1,21 @@
 {
-  "observed_at": "2026-10-27T12:57:18.831815+00:00",
-  "generated": 13,
+  "observed_at": "2026-10-27T13:44:07.219249+00:00",
+  "generated": 20,
   "requested": 20,
-  "generation_failures": [
-    {
-      "index": 4,
-      "reason": "ValueError"
-    },
-    {
-      "index": 5,
-      "reason": "ValueError"
-    },
-    {
-      "index": 6,
-      "reason": "ValueError"
-    },
-    {
-      "index": 7,
-      "reason": "ValueError"
-    },
-    {
-      "index": 8,
-      "reason": "ValueError"
-    },
-    {
-      "index": 9,
-      "reason": "ValueError"
-    },
-    {
-      "index": 16,
-      "reason": "ValueError"
-    }
-  ],
-  "reviewed": 13,
-  "approved": 10,
+  "generation_failures": [],
+  "reviewed": 20,
+  "approved": 0,
   "review_issues": [
-    "The causal mechanism and narrative structure (investigating a missing railway item by following animal tracks to recover it just in time) duplicate a recently published premise.",
-    "The central conflict, decisive choice, and resolution closely mirror the previously published story 'The Conductor's Lost Pocket Watch at Terminus Nine', substituting a missing ledger and a terrier for a missing watch and a fox.",
-    "The central conflict, decisive choice, and resolution heavily overlap with existing published stories in the comparison history, specifically 'The Ranger and the Frostbound Crevasse' and 'The Glaciologist and the Crevasse Beacon', which feature a trapped researcher/climber in an ice cave/crevasse, sacrificing heavy equipment/payload, and a successful hoist rescue.",
-    "The story structure, character (Percival), setting (market square/bazaar), and naming convention ('Percival's [Adjective] [Noun]-[Noun] and the [Noun] [Noun]') are virtually identical to the previously published comparison example 'Percival's Polka-Dot Produce-Polisher and the Bazaar Blooper', representing a direct repeat of recent premises, characters, and stylistic patterns.",
-    "ai_editorial_rejection"
+    "The story premise of a rescuer abandoning the established trail during a blizzard to save a stranded climber closely mirrors recent published works such as 'The Ranger and the Frostbound Crevasse'.",
+    "The story premise of an inventor's mechanical produce-sorting/launching machine malfunctioning and causing chaotic havoc in a crowded marketplace closely mirrors the recently published comparison example 'Percival's Polka-Dot Produce-Polisher and the Bazaar Blooper'.",
+    "ai_editorial_rejection",
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction",
+    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction"
   ],
   "approval_pair_present": true,
   "model_access": {
