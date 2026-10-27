@@ -1,29 +1,21 @@
 {
-  "observed_at": "2026-10-27T00:55:34.167544+00:00",
-  "generated": 18,
+  "observed_at": "2026-10-27T06:51:44.550761+00:00",
+  "generated": 19,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 4,
-      "reason": "ValueError"
-    },
-    {
-      "index": 13,
+      "index": 17,
       "reason": "ValueError"
     }
   ],
-  "reviewed": 18,
-  "approved": 8,
+  "reviewed": 19,
+  "approved": 9,
   "review_issues": [
-    "The candidate story 'The Stationmaster and the Lost Timepiece' shares an identical premise, central conflict, character role, and resolution mechanism with the recently published comparison example 'The Stationmaster and the Lost Pocket Watch' (misplaced heirloom pocket watch threatening train schedule, resolved by tracking down the item in an unusual spot just in time).",
-    "The causal mechanism and narrative structure heavily duplicate existing titles in the reference list, failing the originality and non-duplication criteria.",
-    "The causal mechanism involving abandoning valuable equipment or data to save a person is a recurring premise that lacks sufficient differentiation from prior historical examples provided.",
-    "The central conflict, decisive choice, and resolution closely mirror the previously published story 'The Engineer's Dilemma at Hull Sector Nine' in both thematic structure and causal mechanism (choosing rapid manual action over slow diagnostics/automation during a critical hull emergency).",
-    "The central conflict, decisive choice, and resolution closely mirror the style, structure, and thematic elements of several recently published adventure and rescue narratives in the comparison history, such as 'The Alpine Rescuer and the Hidden Crag' and 'the winter patrol and the hidden pass', involving a life-or-death choice during an extreme cold-weather environmental crisis.",
-    "The story 'The Badger and the Amber Root' closely repeats the premise, characters, settings, and causal mechanisms of the recently published comparison story 'The Badger and the Amber Bridge' (where a badger and another forest animal face a deep rushing ravine/river blocking their path home, choose to combine building materials/resources instead of searching for a detour, and successfully cross the chasm/river together to reach safety).",
-    "The story 'The Otter and the Coral Chord' closely parallels the established animal-protagonist and object-retrieval formula seen in recent titles such as 'The Otter and the Underwater Bell' and 'The Otter and the Tide Clock', and introduces a premise involving a muffled natural phenomenon and a mechanical/acoustic resolution that heavily overlaps with 'The Salt-Carver's Kinetic Tide-Bell and the Pier Regatta'.",
-    "The story 'The Otter and the Silent Reef' closely replicates the premises, character archetypes, and narrative structures of recently published works in the comparison history, specifically matching the pattern of 'The [Animal] and the [Object/Event]' (e.g., 'The Badger and the Amber Spore', 'The Otter and the Tide Clock', 'The Ferret and the Rope Crossing'). Furthermore, the causal mechanism of using a heavy natural anchor to plug a threatening environmental hazard mirrors existing published entries.",
-    "The story follows the exact same premise and structural trope as the previously published 'The Muddy Pitch Trophy and the Great Drainage Dilemma', centering on a competitive sports match hindered by muddy/defensive field conditions solved through clever infrastructure improvisation.",
+    "The candidate story closely mirrors the published premise and conflict of 'Kaelen and the Bloom of the Sun-Scorched Basin', involving a protagonist in a sun-scorched/arid basin who discovers a hidden, water-rich subterranean habitat/cave beneath a dry environment to resolve a severe dehydration or resource crisis.",
+    "The candidate story features a near-identical premise, conflict, and resolution to a recently published example in the comparison history ('The Conductor's Lost Pocket Watch at Terminus Nine', which also involves a lost gold pocket watch at a railway station, tracking muddy paw prints, and a stray animal returning a missing timepiece to save a railway worker's reputation).",
+    "The central conflict, decisive choice, and resolution closely mirror 'The Ranger and the Frostbound Crevasse' and 'The Glaciologist and the Crevasse Beacon' from the comparison history, involving a researcher choosing between equipment/data recovery and team survival during a sudden polar/glacier emergency.",
+    "The central conflict, setting, and narrative structure involving rival local teams (Oak Creek vs. another group) competing over a physical contest and resolving it through a mechanical vehicle/equipment innovation closely mimics recently published premises in the comparison history such as 'The Golden Goal Post of Oak Creek' and 'The Muddy Pitch Rivalry of Maple Creek'.",
+    "The premise, character dynamic (an octopus protagonist saving a fading marine ecosystem), and plot structure closely mirror the recently published comparison example 'The Octopus and the Fading Reef Symphony'.",
     "ai_editorial_rejection",
     "review_failed:HTTP_429",
     "review_provider:rate_limited"
