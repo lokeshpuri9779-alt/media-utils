@@ -2302,6 +2302,18 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-082fcf7105784a35048c",
+      "story_sha256": "16f371d5a8233b26a07cae23d0b559ab29b01cfa48473c95368ff7c8504c65a7",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise is substantially similar to 'The winter patrol and the hidden pass' provided in the reference list, which also features a rescuer navigating a dangerous mountain environment during a blizzard to save a stranded individual.",
+        "The causal mechanism and resolution (a high-stakes rescue on a crumbling ledge/cliff) mirror the structure and conflict of the aforementioned reference story, failing to provide sufficient originality in the narrative arc."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
