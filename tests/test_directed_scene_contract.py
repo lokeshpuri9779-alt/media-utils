@@ -58,6 +58,44 @@ class DirectedSceneContractTests(unittest.TestCase):
             with self.subTest(beat=beat["headline"]):
                 self.assertEqual(validate_story_shot(beat), "directed")
 
+    def test_named_child_from_visual_bible_cannot_be_replaced_by_forest_icon(self):
+        from astra_v2.directed_scene_contract import named_human_characters
+        from astra_v2.renderer_eligibility import check_renderer_eligibility
+        bible = {"characters": {
+            "Leo": "A seven-year-old child with messy brown hair and a green sweater.",
+            "Unit 7G": "A gentle female caretaker robot with copper plating.",
+        }}
+        self.assertEqual(named_human_characters(bible), ("Leo",))
+        self.assertEqual(named_human_characters({"characters": {
+            "Unit 7G": "A female robot with a blue visor."}}), ())
+        with self.assertRaisesRegex(CreativeReject, "human_actor_not_supported"):
+            validate_story_shot({"visual": "forest",
+                                 "visual_prompt": "Leo chases butterflies across the meadow.",
+                                 "story_named_humans": ("Leo",)})
+        story = {
+            "genre": "fiction", "content_id": "named-child-fidelity",
+            "title": "The Caretaker's Last Secret at Cedar Grove",
+            "visual_bible": bible,
+            "story_beats": [
+                {"headline": "The Hidden Diagnosis", "visual": "robot",
+                 "speech": "Unit 7G hides the medical log for young Leo.",
+                 "visual_prompt": "Unit 7G holds a tablet beside Leo's bed."},
+                {"headline": "The Inspection", "visual": "signal",
+                 "speech": "The auditors transmit a warning signal.",
+                 "visual_prompt": "A radio terminal broadcasts a warning."},
+                {"headline": "The Override", "visual": "door",
+                 "speech": "The caretaker opens the cabin door.",
+                 "visual_prompt": "Unit 7G opens the cabin door."},
+                {"headline": "The Meadow", "visual": "forest",
+                 "speech": "Leo chases butterflies across the meadow.",
+                 "visual_prompt": "Leo runs through bright grass with a paper pinwheel."},
+            ],
+        }
+        with patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"}):
+            eligible, reason, _ = check_renderer_eligibility(story)
+        self.assertFalse(eligible)
+        self.assertIn("human_actor_not_supported_by_directed_icons", reason)
+
     def test_manifest_path_and_foreground_props_do_not_override_check(self):
         shot = {"speech": "The thief grabs the papers.", "visual": "robot",
                 "artwork_manifest_path": "/missing/manifest.json"}

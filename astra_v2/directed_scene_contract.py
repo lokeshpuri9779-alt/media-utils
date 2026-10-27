@@ -18,9 +18,44 @@ _INTERACTION = re.compile(
 _SIGNAL = re.compile(r"\b(?:signal|transmission|radio|frequency|waveform|broadcast|beacon)\b", re.I)
 
 
+_BIOLOGICAL_HUMAN = re.compile(
+    r"\b(?:human|person|child|boy|girl|man|woman|teenager|adult|male|female|"
+    r"student|pilot|officer|engineer|botanist)\b", re.I)
+_MECHANICAL_CHARACTER = re.compile(r"\b(?:robot|android|automaton|drone|machine)\b", re.I)
+
+
+def named_human_characters(visual_bible):
+    """Identify explicit named people; never guess human identity from a name."""
+    if not isinstance(visual_bible, dict):
+        return ()
+    characters = visual_bible.get("characters")
+    if not isinstance(characters, dict):
+        return ()
+    names = []
+    for name, description in characters.items():
+        if not isinstance(name, str) or not name.strip() or not isinstance(description, str):
+            continue
+        if not _BIOLOGICAL_HUMAN.search(description):
+            continue
+        # A female robot or humanoid machine is not automatically a human.
+        if (_MECHANICAL_CHARACTER.search(description)
+                and not re.search(r"\bhuman\b", description, re.I)):
+            continue
+        names.append(name.strip())
+    return tuple(names)
+
+
 def directed_scene_issue(shot):
     text = " ".join(str(shot.get(k) or "") for k in
                     ("speech", "visual_prompt", "visual_intent", "action"))
+    # A named child/person in the authored visual bible must not disappear
+    # into a generic tree, door or signal icon. The existing verified-scene-art
+    # exception remains available through validate_directed_scene.
+    named_humans = shot.get("story_named_humans")
+    for name in (named_humans if isinstance(named_humans, (tuple, list)) else ()):
+        if (isinstance(name, str) and name.strip()
+                and re.search(r"(?<!\w)" + re.escape(name.strip()) + r"(?!\w)", text, re.I)):
+            return "human_actor_not_supported_by_directed_icons"
     # Include the story title so first-person/pronoun beats don't erase humans.
     if _HUMAN.search(text + " " + str(shot.get("story_title") or "")):
         return "human_actor_not_supported_by_directed_icons"

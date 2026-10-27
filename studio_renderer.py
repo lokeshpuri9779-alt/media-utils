@@ -418,6 +418,8 @@ def make_plan(ch):
         story_location = story_setting({'speech': str(first_beat.get('speech') or ''),
                                         'visual_prompt': str(first_beat.get('visual') or ''),
                                         'story_environment': str(ch.get('story_environment') or '')})
+        from astra_v2.directed_scene_contract import named_human_characters
+        named_humans = named_human_characters(ch.get("visual_bible"))
         unified_mode = os.environ.get("ASTRA_UNIFIED_STORY_ENGINE", "0") == "1"
         if unified_mode:
             from astra_v2.unified_story_engine import cast_from_title
@@ -444,6 +446,8 @@ def make_plan(ch):
             story_prop = infer_story_prop(ch)
         for shot in formatted:
             shot['story_title'] = str(ch.get('title') or '')
+            if named_humans:
+                shot['story_named_humans'] = named_humans
             if story_prop is not None:
                 shot.setdefault('story_prop', story_prop)
             if ch.get('story_prop_id') is not None:
