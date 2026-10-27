@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "433549a69c6579e505ccd730",
-      "source_sha256": "da37c5001826e0bb50fe2f7d482b28533505f497984df8932d11df42ef7a94ab",
+      "candidate_id": "6c427a3f67d04f24422c83f1",
+      "source_sha256": "02a1e8845b00c88c90dd7c2490950a98be7b125488455cf72bef77f18faf741a",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-d49b0b3bd214816d61e9",
-        "title": "The Grand Squeak Protocol",
-        "hook": "A Fraudulent Claim",
-        "question": "Can an inventor stop a rival from patenting a squeaky radish whistle before the noon market bell?",
-        "answer": "By building an automatic rhythm machine that proves the radish whistle causes instant neighborhood dancing.",
+        "content_id": "rayvan-gemini-f9ddec8aa131b895a185",
+        "title": "The Great Gravy Gatling Fiasco",
+        "hook": "The Slow Ladle Crisis",
+        "question": "Can an overzealous sauce inventor save his noodle stall from ruin using a chaotic mechanical ladle?",
+        "answer": "He automates the entire lunch rush, but floods the central pavilion with savory gravy.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,80 +29,79 @@
         ],
         "story_beats": [
           {
-            "headline": "A Fraudulent Claim",
-            "speech": "Behold the royal patent papers! My screeching vegetable flute holds the exclusive rights to every market sound today!",
-            "visual": "signal",
-            "label": "The Patent Reveal",
-            "story_beat": "reveal",
-            "visual_prompt": "Barnaby waves official glowing patent papers in the bustling crowded market square, standing on a wooden crate with a smug expression.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Assembling the Contraption",
-            "speech": "We need more brass levers, tighter springs, and exactly twelve pickled beets to calibrate this emergency acoustic counter-device immediately.",
+            "headline": "The Slow Ladle Crisis",
+            "speech": "Behold the tragic reality of our morning rush! Customers starve while my poor wooden spoon stirs this endless ocean of noodles.",
             "visual": "robot",
-            "label": "The Counter Build",
-            "story_beat": "build",
-            "visual_prompt": "Milo frantically welds copper tubes and gears onto a robotic frame at his messy wooden market stall surrounded by brass parts.",
+            "label": "The Sluggish Kitchen",
+            "story_beat": "reveal",
+            "visual_prompt": "An exhausted inventor with wild hair stands at a wooden noodle stall holding a heavy brass spoon, surrounded by waiting customers looking angry, inside a bustling open-air market stall filled with steam.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Mechanical Rhythm",
-            "speech": "Watch the pistons pump the juice and generate a harmonized frequency that forces every rival radish to sing back!",
+            "headline": "Constructing the Saucy Engine",
+            "speech": "We shall harness pure pressurized steam! This copper piston and valve assembly will multiply our pouring speed by a thousandfold.",
             "visual": "ship",
-            "label": "The Contraption Mechanism",
-            "story_beat": "mechanism",
-            "visual_prompt": "The complex brass-and-wood machine hums loudly, expelling steam shaped like musical notes while Milo pulls a giant iron lever.",
+            "label": "Workshop Assembly",
+            "story_beat": "build",
+            "visual_prompt": "The inventor stands proudly inside his cluttered stall, welding a brass pipe onto a massive soup cauldron using a handheld blowtorch, wearing soot-stained overalls and safety goggles.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Market Dance",
-            "speech": "No monopoly can withstand pure groove power! Look at the judges salsa dancing right into the municipal fountain!",
-            "visual": "forest",
-            "label": "The Grand Payoff",
+            "headline": "Unleashing the Mechanical Torrent",
+            "speech": "Brace yourselves for glory! Pull the primary brass lever now and watch the piping hot chicken stock fly across the market square.",
+            "visual": "signal",
+            "label": "Maximum Pressure",
+            "story_beat": "mechanism",
+            "visual_prompt": "The inventor frantically yanks a glowing red iron lever attached to the bubbling cauldron, causing a thick stream of brown gravy to erupt violently upward toward the canvas awning.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Gravy Deluge Payoff",
+            "speech": "Well, nobody can complain about slow service anymore! Grab your floating noodles and enjoy the savory indoor storm.",
+            "visual": "door",
+            "label": "Saucy Aftermath",
             "story_beat": "payoff",
-            "visual_prompt": "Market patrons and stern judges dance uncontrollably in circles through overflowing vegetable baskets while Barnaby drops his fake papers in shock.",
+            "visual_prompt": "Drenched market patrons laugh joyfully while floating past on wooden benches through a knee-deep wave of brown gravy, as the inventor waves happily from his elevated counter.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Rival vendor tries to monopolize the vegetable instrument market using a fraudulent patent.",
-        "decisive_choice": "Deploying the synchronized brass turnip orchestra instead of fighting with raw vegetables.",
-        "resolution": "The crowd dances in unison, breaking the monopoly and crowning the true inventor.",
+        "central_conflict": "A struggling noodle vendor faces bankruptcy due to slow manual broth-ladling against fast competitors.",
+        "decisive_choice": "He straps a volatile steam-powered propulsion turbine directly to the main soup vat.",
+        "resolution": "His restaurant gains legendary status as the city's premier soup waterpark.",
         "visual_bible": {
-          "style": "Bright stop-motion comedy animation aesthetic with detailed textures, warm lighting, and exaggerated slapstick character proportions.",
+          "style": "Slapstick comedic animation style with exaggerated expressions, vibrant marketplace colors, and chaotic mechanical contraptions.",
           "characters": {
-            "Milo": "An optimistic inventor with messy orange hair, round brass goggles pushed up on his forehead, wearing a grease-stained canvas apron over a striped shirt.",
-            "Barnaby": "A pompous rival merchant with a twirled mustache, purple velvet vest, and an excessively tall top hat."
+            "inventor": "A frantic noodle chef with wide blue eyes, messy brown hair, wearing grease-stained white chef jacket and orange trousers."
           },
           "locations": {
-            "Market Square": "A bustling cobblestone plaza filled with colorful striped awnings, wooden carts piled high with fresh produce, and swinging hanging lanterns."
+            "market_stall": "A cramped wooden food kiosk packed with hanging noodle racks, bubbling pots, and canvas awnings in a crowded city square."
           },
           "objects": {
-            "Brass Turnip Organ": "A massive, steampunk-inspired contraption made of polished brass pipes, wooden cogs, rubber tubing, and glowing pressure gauges.",
-            "Radish Whistle": "A tiny, hollowed-out red root vegetable fitted with a shiny silver mouthpiece."
+            "soup_cauldron": "A massive, dented copper cooking pot engraved with spiral patterns and fitted with mismatched brass pressure valves.",
+            "propulsion_turbine": "A smoky, rumbling iron cylinder bolted to the side of the pot with a prominent red activation lever."
           }
         },
-        "plot_fingerprint": "71817f540929bec2a65e574744075f4eaf548e703d83b00b857033d2375d15ff"
+        "plot_fingerprint": "aef78fcbc8dafa621ec06fc7798c1f17f680be538afa2c5b8e5f7021abbd878c"
       },
       "approved": false
     },
     {
-      "candidate_id": "5054ad2e9c2e2f3b93effe44",
-      "source_sha256": "7b4b75ace5c2023484b9ac0b1066bb8c582c596697a866e271713e7225e72005",
+      "candidate_id": "53ce7b6d2f6861c978c4459c",
+      "source_sha256": "eba60f86ff31d3e55576dc353a3a6cd5536220fdb155e218b911be56378f0191",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-13147d03b2dad3a0abe9",
-        "title": "The Coral Keeper's Silent Tide",
-        "hook": "The Silt Threat",
-        "question": "Can Finn preserve the ancient reef's heartbeat before the sediment avalanche permanently seals the sanctuary?",
-        "answer": "Yes, Finn redirects the subterranean current to sweep away the debris and safeguard the nursery.",
+        "content_id": "rayvan-gemini-cc6cfdd5a8e8f64b9e48",
+        "title": "The Quantum Thruster Alignment Protocol",
+        "hook": "Overheated Core Warning",
+        "question": "Should the engineering crew jettison the primary stabilization ring or manually recalibrate the thermal relays?",
+        "answer": "They manually recalibrate the thermal relays, saving the stabilization ring and stabilizing the vessel.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -110,82 +109,81 @@
         ],
         "story_beats": [
           {
-            "headline": "The Silt Threat",
-            "speech": "Look at the dark clouds rolling down the canyon. If this sediment settles, our entire nursery will suffocate forever.",
-            "visual": "signal",
-            "label": "Warning Pulse",
+            "headline": "Overheated Core Warning",
+            "speech": "Warning, port thruster thermal overload is reaching critical capacity. We must act immediately before the entire casing melts down completely.",
+            "visual": "ship",
+            "label": "Overload",
             "story_beat": "reveal",
-            "visual_prompt": "Finn the adventurous young blue-ringed octopus stands on a craggy coral shelf, pointing anxiously with one tentacle toward dark grey sediment clouds rolling down the underwater canyon, holding a glowing amber pulse-shell.",
+            "visual_prompt": "Chief Engineer Vex stands inside the cramped engine room pointing at a glowing red control console displaying warning indicators while holding a heavy wrench.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Diverter Mechanism",
-            "speech": "We must anchor this heavy stone lever into the trench floor to force the thermal current upward against the debris.",
-            "visual": "forest",
-            "label": "Kelpin Trench",
+            "headline": "The Jettison Debate",
+            "speech": "If we do not jettison the stabilization ring right now, the containment field will breach and destroy our main propulsion system.",
+            "visual": "signal",
+            "label": "Dispute",
             "story_beat": "build",
-            "visual_prompt": "Finn and Barnaby the wise sea turtle heave a heavy carved basalt lever into the sandy bottom of a dense kelp forest, while schools of silver fish dart away from the swirling silt.",
+            "visual_prompt": "Pilot Kael gestures toward a pulsing tactical display projecting flashing warning signals across the metallic flight deck bulkhead.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Crystal Break",
-            "speech": "There is no other way to clear the blockage. I have to shatter the resonance crystal to amplify the water pressure.",
-            "visual": "door",
-            "label": "Resonance Vault",
+            "headline": "Manual Override Action",
+            "speech": "Hold off on the jettison command. I can manually purge the coolant lines if you maintain stabilization from the cockpit console.",
+            "visual": "robot",
+            "label": "Override",
             "story_beat": "mechanism",
-            "visual_prompt": "Finn grips a gleaming azure resonance crystal inside a submerged stone archway, his tentacles trembling as he prepares to smash it against the threshold to release trapped water pressure.",
+            "visual_prompt": "An autonomous maintenance droid assists Chief Engineer Vex in prying open a smoking electrical panel filled with sparking copper wires.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Cleared Sanctuary",
-            "speech": "The current is holding the silt back. The nursery is safe, and the coral is finally glowing again.",
+            "headline": "Thrusters Stabilized",
+            "speech": "Thermal levels are dropping back into the safe operating zone. We saved the ring and our trajectory remains completely secure.",
             "visual": "planet",
-            "label": "Neon Bloom",
+            "label": "Success",
             "story_beat": "payoff",
-            "visual_prompt": "Finn and Barnaby float peacefully above a vibrant neon-pink coral reef bathed in clean, crystalline blue water, watching tiny newborn fish swim happily through the thriving sanctuary.",
+            "visual_prompt": "Chief Engineer Vex and Pilot Kael watch through the main viewport as a vibrant blue planet fills the screen while the ship engines hum quietly.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A massive sediment avalanche threatens to suffocate the glowing coral nursery.",
-        "decisive_choice": "Finn chooses to shatter the resonance crystal to divert the underwater current through the trench.",
-        "resolution": "The diverted current clears the suffocating silt, saving the young coral and restoring the reef's bioluminescent glow.",
+        "central_conflict": "Disagreement between Chief Engineer Vex and Pilot Kael over whether to jettison or repair the failing thermal relays.",
+        "decisive_choice": "Kael overrides the auto-jettison sequence and allows Vex to manually adjust the hyper-coolant valves.",
+        "resolution": "The thrusters regain stable output, avoiding the loss of critical navigation hardware.",
         "visual_bible": {
-          "style": "Cinematic 3D animation style with rich underwater lighting, bioluminescent glow effects, and hyper-detailed marine textures.",
+          "style": "Clean cinematic science fiction with practical industrial textures and vibrant blue and orange lighting highlights.",
           "characters": {
-            "Finn": "A small, nimble blue-ringed octopus with bright turquoise skin, electric blue rings that pulse with his emotions, and large curious amber eyes.",
-            "Barnaby": "An ancient, weathered green sea turtle with moss-tinted shell patterns, wise drooping eyes, and a calm, steady demeanor."
+            "Vex": "A rugged human engineer with grease-smudged cheeks, wearing a utility jumpsuit reinforced with leather patches.",
+            "Kael": "A focused pilot with short dark hair, wearing a sleek grey flight jacket with embroidered mission insignia."
           },
           "locations": {
-            "Coral Nursery": "A sheltered oceanic bowl filled with glowing pastel corals, soft sea sponges, and pearlescent sand.",
-            "Kelpin Trench": "A deep underwater ravine lined with towering golden kelp stalks and jagged basalt rock formations."
+            "engine_room": "A cramped industrial compartment lined with heavy pipes, wiring harnesses, and glowing diagnostic panels.",
+            "flight_deck": "A spacious command center featuring curved holographic displays and ergonomic pilot seating."
           },
           "objects": {
-            "Pulse-shell": "A fist-sized nautilus shell that emits a steady warm amber warning light when danger approaches.",
-            "Basalt Lever": "A heavy, dark gray carved stone rod etched with ancient glyphs used to redirect underwater currents.",
-            "Resonance Crystal": "A faceted, glowing azure crystal that hums with trapped vibrational energy and shatters under intense pressure."
+            "heavy_wrench": "A matte-black titanium tool with an integrated digital torque readout near the handle.",
+            "stabilization_ring": "A massive circular metallic halo bolted to the exterior hull frame glowing with faint blue energy."
           }
         },
-        "plot_fingerprint": "d284d3273e4cafaa64eb611104c074bc2d8448b4c4b99aa18e3d75c470603b1b"
+        "plot_fingerprint": "12741a6e251c661c99051fd843bb16a75b3d3e7e9d3b5599ba92d7771e95dd27"
       },
       "approved": false
     },
     {
-      "candidate_id": "688c7e44d0c379b2c1184900",
-      "source_sha256": "5a7bef04aa2530b479cc41f7ec87dd96d34745e29fbb2369626ccb8a2e8695b3",
+      "candidate_id": "8f50ac9dcebaa17ce92fecd8",
+      "source_sha256": "8df75606cc97fc3414f02d6d5f83b03acffcc38d50dee45ac0fc2129f07a98c9",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-53eaaebfde826e7eabd3",
-        "title": "The Whispering Dunes of Oakhaven",
-        "hook": "The Silent Horizon",
-        "question": "Can a desert cartographer save his family's legacy by uncovering a hidden subterranean oasis?",
-        "answer": "Yes, by trusting the ancient acoustic resonance of the dunes rather than conventional maps.",
+        "content_id": "rayvan-gemini-bfb6871117c8b8c19d88",
+        "title": "The Muddy Pitch Penalty Protocol",
+        "hook": "The Dry Advantage",
+        "question": "How can the underdog neighborhood football squad beat the defending champions without any money?",
+        "answer": "By engineering an acoustic decoy to trick the opposing coach into defending an empty sideline.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -193,65 +191,65 @@
         ],
         "story_beats": [
           {
-            "headline": "The Silent Horizon",
-            "speech": "My father spent his entire life searching for this ridge, yet every single map shows only barren sand and stone.",
+            "headline": "The Dry Advantage",
+            "speech": "They get the pristine turf every Saturday while our pitch turns into a swamp of despair.",
             "visual": "planet",
-            "label": "The Ridge",
+            "label": "The Swamp",
             "story_beat": "reveal",
-            "visual_prompt": "A weary explorer wearing a canvas coat and wide-brimmed hat stands on a vast orange desert dune, holding a brass compass in his right hand, looking at a distant rocky outcrop under a pale blue sky.",
+            "visual_prompt": "Captain Maya stands muddy on the waterlogged community football pitch, pointing angrily at the manicured rival stadium on the hill, holding a rusted whistle.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Acoustic Shift",
-            "speech": "Listen closely to the wind whistling through the canyon. It is not random weather; it is a mechanical tone vibrating from deep below.",
-            "visual": "signal",
-            "label": "The Tone",
+            "headline": "Acoustic Engineering",
+            "speech": "If we cannot outrun them on the mud, we will outsmart their ears using directional audio cones.",
+            "visual": "robot",
+            "label": "The Speakers",
             "story_beat": "build",
-            "visual_prompt": "The explorer kneels beside a weathered stone marker in a rocky canyon, pressing his ear against the warm rock surface while holding a mechanical acoustic meter that displays a rising green wave.",
+            "visual_prompt": "Maya and her teammate assemble makeshift parabolic speakers from old satellite dishes inside a crowded garage workshop.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Hidden Mechanism",
-            "speech": "By turning this heavy stone lever in rhythm with the acoustic pulse, the bedrock slowly grinds open to reveal a descending stair.",
-            "visual": "door",
-            "label": "The Descent",
+            "headline": "The Phantom Whistle",
+            "speech": "Wait for the exact moment of the corner kick, then trigger the frequency shift on my mark.",
+            "visual": "signal",
+            "label": "The Trap",
             "story_beat": "mechanism",
-            "visual_prompt": "The explorer uses both hands to push a massive carved sandstone dial set into a cliffside, while a dark vertical gap begins to split open, emitting a cool subterranean breeze.",
+            "visual_prompt": "Maya presses a modified handheld radio transmitter in the dugout while a soundwave visualizer glows green on her workbench.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Emerald Depths",
-            "speech": "We are standing inside a thriving underground forest nourished by geothermal heat, proving my family's greatest dream was entirely real.",
+            "headline": "The Empty Defense",
+            "speech": "They are chasing ghosts on the sideline while our striker walks the ball straight into the net.",
             "visual": "forest",
-            "label": "The Oasis",
+            "label": "Victory",
             "story_beat": "payoff",
-            "visual_prompt": "The explorer stands at the edge of a subterranean cavern filled with glowing green bioluminescent ferns and tall stone pillars, holding a glowing lantern high with his left hand and smiling in awe.",
+            "visual_prompt": "The rival team and coach frantically look toward the empty sideline bushes while Maya's teammate calmly kicks the winning goal into the unguarded net.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Mapping a treacherous desert region while racing against a encroaching sandstorm.",
-        "decisive_choice": "Abandoning standard survey instruments to follow a strange underground acoustic hum.",
-        "resolution": "Discovering a massive subterranean forest sustained by ancient thermal currents.",
+        "central_conflict": "The rival town team monopolized the only professional drainage turf, threatening to evict the community club from the annual district cup.",
+        "decisive_choice": "Captain Maya built a synchronized speaker array to mimic referee whistles, drawing the rival defense out of position.",
+        "resolution": "The community club scored the winning goal during the confusion and permanently shared the drainage turf rights.",
         "visual_bible": {
-          "style": "Cinematic realism with warm amber and gold desert tones transitioning to cool emerald greens underground.",
+          "style": "vibrant indie cinematic animation with gritty textures and warm natural lighting",
           "characters": {
-            "Explorer": "A rugged middle-aged man with short brown hair, a weather-beaten face, wearing a tan canvas expedition coat, leather boots, and a utility belt."
+            "Maya": "determined 17-year-old team captain with curly dark hair tied in a messy bun, wearing a patched green jersey and muddy cleats",
+            "Coach Vance": "stern rival coach in a crisp gray tracksuit with a silver stopwatch around his neck"
           },
           "locations": {
-            "Desert Ridge": "An expansive arid landscape featuring towering orange sand dunes and weathered sandstone rock formations under clear daylight.",
-            "Subterranean Cavern": "A vast underground cavern lit by bioluminescent moss, featuring ancient stone architecture and lush green prehistoric flora."
+            "community_pitch": "a waterlogged and uneven grass field with makeshift wooden goalposts and puddles reflecting the cloudy sky",
+            "garage_workshop": "a cluttered neighborhood garage filled with discarded electronics, copper wire coils, and greasy toolboxes"
           },
           "objects": {
-            "Brass Compass": "An antique pocket compass with a tarnished brass casing and a glowing blue glass needle.",
-            "Acoustic Meter": "A handheld iron device with a small circular glass screen and an internal copper spring mechanism.",
-            "Exploration Lantern": "A cylindrical steel lantern with ribbed glass panels casting a warm yellow flame."
+            "satellite_dish_speaker": "a rusted silver satellite dish retrofitted with a megaphone horn and thick black audio cables",
+            "radio_transmitter": "a heavy black metal box with two toggle switches and a flickering red LED indicator light"
           }
         },
-        "plot_fingerprint": "342017809c09628366820f6cd4616524bb52dc7ef15716d957a6632a5f61aecc"
+        "plot_fingerprint": "318ed85d29e5c157de396fecdf2e2070355f3db8280a458be6675835a764ac25"
       },
       "approved": false
     }
