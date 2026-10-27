@@ -1,19 +1,29 @@
 {
-  "observed_at": "2026-10-26T18:58:19.511824+00:00",
-  "generated": 19,
+  "observed_at": "2026-10-27T00:55:34.167544+00:00",
+  "generated": 18,
   "requested": 20,
   "generation_failures": [
+    {
+      "index": 4,
+      "reason": "ValueError"
+    },
     {
       "index": 13,
       "reason": "ValueError"
     }
   ],
-  "reviewed": 19,
-  "approved": 13,
+  "reviewed": 18,
+  "approved": 8,
   "review_issues": [
-    "The central conflict, decisive choice, and resolution of the candidate story closely mirror the recently published premise in the comparison history ('the miller's grain and the divided harvest': scarce winter grain supply for two families, pooling the final sacks, equal village flour distribution securing collective survival).",
-    "The story 'the otter and the silver reef mystery' closely mirrors recently published premises and titles in the comparison history, specifically featuring a similar animal protagonist and structural pattern found in 'The Otter and the Echoing Well'.",
-    "The story premise, central conflict, and resolution closely mirror recent published premises in the comparison history, specifically 'The Alpine Rescuer and the Hidden Crag' and 'the winter patrol and the hidden pass', involving a blizzard trapping individuals and a risky vehicle/ascent decision to rescue them.",
+    "The candidate story 'The Stationmaster and the Lost Timepiece' shares an identical premise, central conflict, character role, and resolution mechanism with the recently published comparison example 'The Stationmaster and the Lost Pocket Watch' (misplaced heirloom pocket watch threatening train schedule, resolved by tracking down the item in an unusual spot just in time).",
+    "The causal mechanism and narrative structure heavily duplicate existing titles in the reference list, failing the originality and non-duplication criteria.",
+    "The causal mechanism involving abandoning valuable equipment or data to save a person is a recurring premise that lacks sufficient differentiation from prior historical examples provided.",
+    "The central conflict, decisive choice, and resolution closely mirror the previously published story 'The Engineer's Dilemma at Hull Sector Nine' in both thematic structure and causal mechanism (choosing rapid manual action over slow diagnostics/automation during a critical hull emergency).",
+    "The central conflict, decisive choice, and resolution closely mirror the style, structure, and thematic elements of several recently published adventure and rescue narratives in the comparison history, such as 'The Alpine Rescuer and the Hidden Crag' and 'the winter patrol and the hidden pass', involving a life-or-death choice during an extreme cold-weather environmental crisis.",
+    "The story 'The Badger and the Amber Root' closely repeats the premise, characters, settings, and causal mechanisms of the recently published comparison story 'The Badger and the Amber Bridge' (where a badger and another forest animal face a deep rushing ravine/river blocking their path home, choose to combine building materials/resources instead of searching for a detour, and successfully cross the chasm/river together to reach safety).",
+    "The story 'The Otter and the Coral Chord' closely parallels the established animal-protagonist and object-retrieval formula seen in recent titles such as 'The Otter and the Underwater Bell' and 'The Otter and the Tide Clock', and introduces a premise involving a muffled natural phenomenon and a mechanical/acoustic resolution that heavily overlaps with 'The Salt-Carver's Kinetic Tide-Bell and the Pier Regatta'.",
+    "The story 'The Otter and the Silent Reef' closely replicates the premises, character archetypes, and narrative structures of recently published works in the comparison history, specifically matching the pattern of 'The [Animal] and the [Object/Event]' (e.g., 'The Badger and the Amber Spore', 'The Otter and the Tide Clock', 'The Ferret and the Rope Crossing'). Furthermore, the causal mechanism of using a heavy natural anchor to plug a threatening environmental hazard mirrors existing published entries.",
+    "The story follows the exact same premise and structural trope as the previously published 'The Muddy Pitch Trophy and the Great Drainage Dilemma', centering on a competitive sports match hindered by muddy/defensive field conditions solved through clever infrastructure improvisation.",
     "ai_editorial_rejection",
     "review_failed:HTTP_429",
     "review_provider:rate_limited"
