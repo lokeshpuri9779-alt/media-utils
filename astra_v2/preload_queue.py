@@ -50,12 +50,31 @@ def artifacts():
         return []
     matched = []
     seen = set()
+    pages_scanned = 0
+    complete = True
     # GitHub's artifact listing is paginated. Keep a bounded scan, but
     # prioritize fresh renders even if older artifacts dominate the listing.
     for page in range(1, 31):
-        data = _api(f"repos/{repo}/actions/artifacts?per_page=100&page={page}")
+        try:
+            data = _api(f"repos/{repo}/actions/artifacts?per_page=100&page={page}")
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired,
+                OSError, ValueError) as exc:
+            # A later API page can fail transiently (observed on page 10).
+            # Retain previously fetched metadata, but never invent entries.
+            # The publisher still independently validates each package,
+            # source workflow, media hash, and publication policy.
+            if page == 1:
+                raise
+            complete = False
+            print("ASTRA_ARTIFACT_DISCOVERY_INCOMPLETE=" + json.dumps({
+                "failed_page": page, "usable_pages": pages_scanned,
+                "reason": type(exc).__name__,
+            }, sort_keys=True), flush=True)
+            break
+        pages_scanned = page
         batch = data.get("artifacts") if isinstance(data, dict) else None
         if not isinstance(batch, list):
+            complete = False
             print("ASTRA_ARTIFACT_INVALID_PAGE=" + str(page))
             break
         for item in batch:
@@ -77,7 +96,10 @@ def artifacts():
         if len(batch) < 100:
             break
     matched.sort(key=_artifact_created_timestamp, reverse=True)
-    print("ASTRA_ARTIFACT_DISCOVERY=" + json.dumps({"approved_artifacts": len(matched), "pages_scanned": page}))
+    print("ASTRA_ARTIFACT_DISCOVERY=" + json.dumps({
+        "approved_artifacts": len(matched), "pages_scanned": pages_scanned,
+        "complete": complete,
+    }, sort_keys=True))
     return matched
 
 
