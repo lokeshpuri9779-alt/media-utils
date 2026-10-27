@@ -2400,6 +2400,17 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-b1110b51c02e331fdfe3",
+      "story_sha256": "ebea905c32bb7066e1c49eef92c988babc58421bb320ff8de2f46b90baa5309d",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story features a character named 'Kaelen' and a central conflict involving a mechanical failure and a resource-based improvisation, which closely mirrors the premise and character name of 'Kaelen and the Bloom of the Sun-Scorched Basin' provided in the recent publication examples. This repetition of character name and thematic structure suggests a lack of originality relative to the provided dataset."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }

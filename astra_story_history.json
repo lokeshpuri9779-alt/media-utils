@@ -5890,6 +5890,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-original-lighthousefox-v1",
+      "video_id": "HYjWkguE0RQ",
+      "confirmed_at": "2026-10-27T09:58:31.936145+00:00",
+      "title": "The Fox at the Lighthouse",
+      "plot_fingerprint": "302a5a571a56882d97b3d7609e30e090c9ed75a221986cd9bbdc924777675248",
+      "story_beats": [
+        {
+          "headline": "THE DARK BEAM",
+          "speech": "A fox on the cliffs noticed the lighthouse beam had vanished in a storm.",
+          "visual": "signal",
+          "visual_intent": "A fox on the cliffs noticed the lighthouse beam had vanished in a storm.",
+          "label": "LIGHT OUT",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "reveal",
+          "duration": 2.1
+        },
+        {
+          "headline": "SHELLS IN THE RAIN",
+          "speech": "Blue shells glowed along a path leading beneath the lighthouse.",
+          "visual": "forest",
+          "visual_intent": "Blue shells glowed along a path leading beneath the lighthouse.",
+          "label": "FOLLOW THE GLOW",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "build",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE JAMMED LENS",
+          "speech": "Inside, the fox found a fallen bell rope wedged against the turning lens.",
+          "visual": "clock",
+          "visual_intent": "Inside, the fox found a fallen bell rope wedged against the turning lens.",
+          "label": "BLOCKED",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "twist",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE COAST SHONE",
+          "speech": "The fox pulled the rope free and the lighthouse guided every ship past the rocks.",
+          "visual": "ship",
+          "visual_intent": "The fox pulled the rope free and the lighthouse guided every ship past the rocks.",
+          "label": "SHIPS SAFE",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "story_beat": "payoff",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
