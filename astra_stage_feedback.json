@@ -2,17 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-21T10:01:22.490751+00:00",
-      "stage": "quality",
-      "element": "candidate_selection",
-      "outcome": "fail",
-      "evidence": {
-        "reason": "no_approved_original_story_available"
-      },
-      "proposed_action": "Diagnose story supply and creative gate failures",
-      "candidate_id": ""
-    },
-    {
       "at": "2026-10-21T10:02:52.881967+00:00",
       "stage": "quality",
       "element": "candidate_selection",
@@ -9144,6 +9133,17 @@
     },
     {
       "at": "2026-10-27T23:54:31.513788+00:00",
+      "stage": "quality",
+      "element": "candidate_selection",
+      "outcome": "fail",
+      "evidence": {
+        "reason": "no_approved_original_story_available"
+      },
+      "proposed_action": "Diagnose story supply and creative gate failures",
+      "candidate_id": ""
+    },
+    {
+      "at": "2026-10-28T00:01:28.829696+00:00",
       "stage": "quality",
       "element": "candidate_selection",
       "outcome": "fail",
