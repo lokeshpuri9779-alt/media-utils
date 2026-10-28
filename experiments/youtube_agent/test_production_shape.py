@@ -15,6 +15,7 @@ class ProductionShapeTests(unittest.TestCase):
         self.assertEqual(out["entries_checked"],3)
         self.assertFalse(out["publication_triggered"])
         for row in out["results"]:
+            self.assertEqual(row["hook_score_applicability"], "limited_short_fiction_label")
             self.assertTrue(row["has_hook"])
             self.assertTrue(row["has_title"])
             self.assertFalse(row["has_thumbnail"])
