@@ -1,23 +1,25 @@
 {
-  "observed_at": "2026-10-28T01:07:18.944375+00:00",
-  "generated": 20,
+  "observed_at": "2026-10-28T07:01:23.077474+00:00",
+  "generated": 14,
   "requested": 20,
-  "generation_failures": [],
-  "reviewed": 20,
-  "approved": 1,
+  "generation_failures": [
+    {
+      "index": 9,
+      "reason": "ValueError"
+    },
+    {
+      "index": 15,
+      "reason": "provider_http_429"
+    }
+  ],
+  "reviewed": 14,
+  "approved": 0,
   "review_issues": [
-    "The candidate story 'Orla's Tidal Organ and the Seaside Symphony' shares an identical narrative structure, central conflict, and thematic premise with recently published works in the comparison history, specifically 'The Tidal Weaver and the Salt-Crusted Spire' and 'Juno's Tidal Turbine and the Saltwater Surge'.",
-    "The candidate story heavily replicates the premise, central conflict, and resolution of the recently published comparison story 'The Ranger and the Frostbound Crevasse'. Both involve a stranded climber/individual trapped in an ice cave or crevasse during a severe mountain storm/blizzard, resolved by a rescue from the hazardous drop.",
-    "The causal mechanism and decisive choice closely mirror prior submissions in tone and structural pattern, failing the originality threshold for distinct storytelling elements.",
-    "The central conflict, decisive choice, and resolution closely duplicate a recently published premise in the comparison history ('The Glaciologist and the Crevasse Beacon', which involves weighing precious research core samples against survival during a sudden blizzard by releasing a sled harness/drill cores to secure a rescue hoist).",
-    "The premise of a coastal technician improvising with organic or makeshift marine materials (kelp valves, water pressure) to save a community festival event from an imminent tidal threat is overly repetitive and lacks sufficient originality when compared to the existing database of stories.",
-    "The premise, character dynamic of an animal pair overcoming a natural barrier via a sacrifice/improvised bridge, and resolution heavily overlap with recent publication examples such as 'The Badger And The Weeping Root' and similar animal-survival microfictions.",
+    "The central conflict, setting, and resolution closely duplicate the previously published story 'The Ranger and the Frostbound Crevasse', involving a stranded climber in an ice/snow hazard, a decisive choice regarding rescue gear/routes, and a final rescue just as the infrastructure collapses.",
     "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
-    "publication_renderer_incompatible: shot 4: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction"
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event"
   ],
   "approval_pair_present": true,
   "model_access": {
