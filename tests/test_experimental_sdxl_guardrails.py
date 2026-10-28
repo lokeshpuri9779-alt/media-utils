@@ -12,10 +12,17 @@ class SDXLOneImageGuardrailTests(unittest.TestCase):
 
     def test_single_fixed_image_configuration(self):
         self.assertEqual(sdxl.ONE_IMAGE_SEED, 42)
-        self.assertEqual(sdxl.ONE_IMAGE_STEPS, 20)
+        self.assertEqual(sdxl.ONE_IMAGE_STEPS, 8)
         self.assertIn("toy fire truck", sdxl.ONE_IMAGE_PROMPT)
         self.assertIn("no text", sdxl.ONE_IMAGE_PROMPT)
         self.assertEqual(sdxl.MODEL, "OpenVINO/stable-diffusion-xl-base-1.0-int8-ov")
+
+    def test_cpu_probe_is_small_and_review_only(self):
+        source = inspect.getsource(sdxl.worker)
+        self.assertIn("height=512, width=512, num_inference_steps=ONE_IMAGE_STEPS", source)
+        self.assertIn("torch.randn((1, 4, 64, 64)", source)
+        self.assertIn("height=512 if one_image else 1024", source)
+        self.assertIn("Expected exactly one 512x512 diagnostic image", source)
 
     def test_existing_memory_and_time_limits_remain(self):
         gib = sdxl.GIB
