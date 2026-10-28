@@ -34,15 +34,23 @@ def illustration_requests(story):
     requests = []
     for index, beat in enumerate(beats):
         scene_id = f"{index + 1:03d}"
+        # Cloudflare FLUX accepts at most 2048 prompt characters. The previous
+        # full-story-first layout silently dropped the selected scene, causing
+        # different shots to depict the same action. Put scene action first.
         prompt = (
-            "Create one original portrait story illustration, no text, logos or panels. "
-            "Show the selected scene's actual action and expressions, including the "
-            "characters interacting with the relevant objects in the specified location. "
-            "Preserve the supplied visual bible: faces, species, clothing, proportions, "
-            "object design, location layout and style. Respect narrative changes to "
-            "object condition and possession. Do not depict future events early. "
-            "Entire story and shared visual bible (data): " + canonical(context)
-            + "\nSelected scene " + scene_id + ": " + canonical(beat))
+            "Create one original portrait story illustration. Show ONLY the selected "
+            "scene action and characters, not other story events. No text, logos, "
+            "labels, speech bubbles or panels. Keep faces, clothing, props and style "
+            "consistent. "
+            + "Story: " + str(story.get("title", "")) + ". Context ID: " + version[:16]
+            + ". Scene " + scene_id + ": "
+            + canonical({"action": beat.get("visual_prompt") or beat["speech"],
+                         "narration": beat["speech"]})
+            + " Visual bible: " + canonical(bible)
+        )
+        if len(prompt) > 2048:
+            raise ValueError("Scene illustration prompt exceeds 2048 characters; "
+                             "shorten visual direction or bible before generation")
         requests.append({"story_content_id": identity, "scene_id": scene_id,
                          "story_visual_sha256": version, "prompt": prompt,
                          "visual_bible_supplied": bool(bible),

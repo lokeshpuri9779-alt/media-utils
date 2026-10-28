@@ -76,6 +76,16 @@ class ImageAssetsTests(unittest.TestCase):
             result = generate_image("scene", requester=requester)
             self.assertTrue(result.startswith(bytes.fromhex("89504e470d0a1a0a")))
 
+    def test_cloudflare_rejects_oversized_prompt_without_request(self):
+        env = {"ASTRA_OMNI_IMAGE_ENDPOINT":
+               "https://api.cloudflare.com/client/v4/accounts/example/ai/run/@cf/black-forest-labs/flux-1-schnell",
+               "ASTRA_OMNI_IMAGE_MODEL": "@cf/black-forest-labs/flux-1-schnell",
+               "ASTRA_OMNI_IMAGE_FREE_CONFIRMED": "1"}
+        with patch.dict("os.environ", env, clear=True):
+            with self.assertRaisesRegex(ValueError, "refusing silent truncation"):
+                generate_image("x" * 2049,
+                               requester=lambda req: self.fail("provider must not be called"))
+
     def test_cloudflare_http_error_code_is_sanitized(self):
         import json
         import urllib.error
