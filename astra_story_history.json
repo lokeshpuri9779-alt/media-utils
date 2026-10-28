@@ -6552,6 +6552,58 @@
       "video_id": "uthrBCC5_Q0",
       "confirmed_at": "2026-10-28T06:42:21.651930+00:00",
       "title": "Why brice turang Is Getting Attention Now | RAYVAN"
+    },
+    {
+      "content_id": "rayvan-gemini-2b8651e182f8b44a94f2",
+      "video_id": "Qkn0iyAcYIs",
+      "confirmed_at": "2026-10-28T13:54:36.063299+00:00",
+      "title": "The Ranger and the Amber Spore",
+      "plot_fingerprint": "9f12c9f92aba27b9dfcc6b419522ef2ffab645bea2a79ab7b22576d14f6cea9a",
+      "story_beats": [
+        {
+          "headline": "The Hidden Spore",
+          "speech": "We cannot cross this broken ravine alone without waking the sleeping guardians of the dark forest.",
+          "visual": "forest",
+          "label": "Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Tansy stands in a gloomy forest clearing holding a glowing amber spore in her trembling hands, illuminated by soft green moss, wearing a heavy leather traveler cloak with brass clasps, looking worried at the chasm.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Broken Mechanism",
+          "speech": "Hold this rope taut while I fix the rusted winch before the root bridge snaps completely.",
+          "visual": "signal",
+          "label": "Tension",
+          "story_beat": "build",
+          "visual_prompt": "Bram grips a frayed hemp rope near a mossy cliff edge, sending a distress signal flare into the misty sky, wearing a sturdy green tunic and leather boots, while metal gears click behind him.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Risky Leap",
+          "speech": "Catch this iron spike right now if you want us both to reach the other side safely.",
+          "visual": "door",
+          "label": "Leap",
+          "story_beat": "twist",
+          "visual_prompt": "Tansy mid-air throws a heavy iron climbing spike across a deep stone doorway archway in the cliff face toward Bram, her face determined, wearing a travel pack and mud-stained trousers.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Harbor",
+          "speech": "We made it across together, proving that teamwork is stronger than any ancient forest trial.",
+          "visual": "robot",
+          "label": "Success",
+          "story_beat": "payoff",
+          "visual_prompt": "Bram and Tansy stand smiling together next to a dormant stone forest guardian automaton, holding the amber spore high as golden sunlight breaks through the canopy above.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A falling branch trap blocks the only rope bridge across the deep ravine.",
+      "decisive_choice": "Tansy throws her last anchor spike to Bram instead of saving herself.",
+      "resolution": "Both successfully cross the chasm and restore the ancient seed vault."
     }
   ]
 }
