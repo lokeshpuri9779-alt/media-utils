@@ -6604,6 +6604,58 @@
       "central_conflict": "A falling branch trap blocks the only rope bridge across the deep ravine.",
       "decisive_choice": "Tansy throws her last anchor spike to Bram instead of saving herself.",
       "resolution": "Both successfully cross the chasm and restore the ancient seed vault."
+    },
+    {
+      "content_id": "rayvan-gemini-09519e08d5675aa7ad69",
+      "video_id": "Ifv8wuEmB6U",
+      "confirmed_at": "2026-10-28T18:38:07.776397+00:00",
+      "title": "The Velocity Vanes of Copper Creek",
+      "plot_fingerprint": "1d38b5dad89f21990e830db7af54605595edaab950fe9eec3482ca9127b1bfc3",
+      "story_beats": [
+        {
+          "headline": "The Hidden Weakness",
+          "speech": "Look closely at the rival kites; they are too stiff to handle the unpredictable gusts at the canyon's edge today, my friend.",
+          "visual": "signal",
+          "label": "Analysis",
+          "story_beat": "reveal",
+          "visual_prompt": "Elias, a teenager with messy hair and goggles, points to a flickering wind-sock signal on a hill, watching the rival kite struggle.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Engineering Shift",
+          "speech": "We must scrap the old wooden frame and build something that bends like a willow branch when the wind hits hard.",
+          "visual": "robot",
+          "label": "Construction",
+          "story_beat": "build",
+          "visual_prompt": "Elias uses an old mechanical assembly arm to rivet flexible copper strips onto a frame, sweat dripping from his focused, determined face.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Articulated Mechanism",
+          "speech": "The tension cables must remain slack until the very last second, allowing the tail to whip around and catch the air.",
+          "visual": "door",
+          "label": "Calibration",
+          "story_beat": "mechanism",
+          "visual_prompt": "Elias stands in his workshop doorway holding a kite, adjusting a complex series of pulleys that control the kite's flexible copper wings.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Victory Glide",
+          "speech": "The wind is turning against them, but my kite finds the current and dances right through the gap to win today.",
+          "visual": "forest",
+          "label": "Triumph",
+          "story_beat": "payoff",
+          "visual_prompt": "Elias stands on a cliff overlooking a pine forest, his copper-winged kite soaring gracefully while the rival kite crashes into the trees below.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Elias faces a consistent losing streak in the annual kite-racing competition due to his rival's rigid, high-tension frames.",
+      "decisive_choice": "Elias decides to abandon traditional rigid kite designs in favor of a flexible, articulated frame made from salvaged windmill blades.",
+      "resolution": "His flexible kite catches a sudden crosswind gust, maneuvers around the rival kite's tangle, and crosses the finish line first."
     }
   ]
 }
