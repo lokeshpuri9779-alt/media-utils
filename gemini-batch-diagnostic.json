@@ -1,25 +1,26 @@
 {
-  "observed_at": "2026-10-28T07:01:23.077474+00:00",
-  "generated": 14,
+  "observed_at": "2026-10-28T13:06:55.042382+00:00",
+  "generated": 18,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 9,
+      "index": 10,
       "reason": "ValueError"
     },
     {
-      "index": 15,
-      "reason": "provider_http_429"
+      "index": 11,
+      "reason": "ValueError"
     }
   ],
-  "reviewed": 14,
-  "approved": 0,
+  "reviewed": 18,
+  "approved": 1,
   "review_issues": [
-    "The central conflict, setting, and resolution closely duplicate the previously published story 'The Ranger and the Frostbound Crevasse', involving a stranded climber in an ice/snow hazard, a decisive choice regarding rescue gear/routes, and a final rescue just as the infrastructure collapses.",
+    "The central conflict, decisive choice, and resolution closely mimic the structural pattern, comedic tone, and specific narrative beats of the previously published 'Percival's Polka-Dot Produce-Polisher and the Bazaar Blooper', substituting only a malfunctioning pickle-press for a fruit-polishing machine.",
     "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event"
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event"
   ],
   "approval_pair_present": true,
   "model_access": {
