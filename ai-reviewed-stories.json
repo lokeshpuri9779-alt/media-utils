@@ -6365,11 +6365,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-9bca0928566629e1db29",
-      "title": "The Octopus Cartographer and the Choking Reef",
-      "hook": "The Dying Coral",
-      "question": "Can the reef be saved before the thermal vent closes permanently?",
-      "answer": "By rerouting the underground current, the vent remains open and the reef recovers.",
+      "content_id": "rayvan-gemini-9524a07e23865f5dd048",
+      "title": "The Canopy Pathfinders and the Root of Whispers",
+      "hook": "Discovery of the Chasm",
+      "question": "Can two different woodland guides safely bridge a massive chasm using only their combined botanical knowledge?",
+      "answer": "Yes, by weaving flexible willow vines with rigid oak branches, they successfully span the gorge and save stranded travelers.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -6377,65 +6377,66 @@
       ],
       "story_beats": [
         {
-          "headline": "The Dying Coral",
-          "speech": "Look closely at the pale polyps, young apprentice. Without heat from the deep vent, our entire nursery will freeze by nightfall.",
-          "visual": "signal",
-          "label": "Failing Nursery",
+          "headline": "Discovery of the Chasm",
+          "speech": "Look closely at the fractured earth. Our usual path has vanished into this deep, yawning ravine overnight.",
+          "visual": "forest",
+          "label": "Ravine Discovery",
           "story_beat": "reveal",
-          "visual_prompt": "An elderly purple octopus with spectacles points one tentacle at a pale, dying coral reef in an underwater trench, while a smaller blue crab watches anxiously, holding a glowing crustacean shell signal lantern.",
+          "visual_prompt": "Bramble points forward with a weathered walking stick at a wide, freshly torn chasm in a dense, mossy forest. Fern stands beside him, wearing a dark green hooded cloak and a worried expression, looking down into the shadowy depths where broken roots dangle.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Mapping the Rift",
-          "speech": "We must wedge this heavy stone slab into the fault line before the pressure locks the fissure shut forever.",
-          "visual": "door",
-          "label": "The Fault",
+          "headline": "Gathering Materials",
+          "speech": "We must collect long willow shoots for flexibility and sturdy oak branches to bear the heavy weight safely.",
+          "visual": "forest",
+          "label": "Material Collection",
           "story_beat": "build",
-          "visual_prompt": "The purple octopus and the blue crab push a massive carved stone gate underwater against a rushing current of dark volcanic silt, their expressions strained with physical effort.",
+          "visual_prompt": "Bramble and Fern work together in a sunlit grove, pulling flexible green willow vines from a damp bank while holding heavy brown oak logs. Both characters wear leather aprons, their faces focused and determined under the emerald canopy.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Heavy Sacrifice",
-          "speech": "Drop the heirloom pearl archive into the gap! It is the only weight dense enough to hold the stone door open against the tectonic pull.",
-          "visual": "ship",
-          "label": "The Archive",
+          "headline": "Weaving the Span",
+          "speech": "Interlace the green shoots tightly around the oak beams to create a strong, flexible suspension line.",
+          "visual": "door",
+          "label": "Bridge Construction",
           "story_beat": "mechanism",
-          "visual_prompt": "The blue crab uses its claws to release a heavy wooden chest filled with glowing white pearls down into a jagged underwater crevice near a rusty sunken shipwreck hull.",
+          "visual_prompt": "Fern expertly ties glowing green willow vines around a massive horizontal oak beam suspended over the chasm edge. Bramble holds the opposing end firmly, sweat on his brow, working amidst swirling autumn leaves and hanging moss.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Waters Restored",
-          "speech": "The thermal current is surging back through the trench. Our home is saved, and the coral polyps are glowing once more.",
-          "visual": "planet",
-          "label": "Reef Renewal",
+          "headline": "Safe Crossing",
+          "speech": "The bridge holds firm against the wind. Step carefully across together, and you will reach the sanctuary.",
+          "visual": "signal",
+          "label": "Successful Crossing",
           "story_beat": "payoff",
-          "visual_prompt": "Vibrant neon-pink and emerald-green coral gardens bloom brightly under a stream of warm, rising bubbles, with the purple octopus and blue crab cheering happily together.",
+          "visual_prompt": "Bramble raises a polished brass signal lantern high in his left hand, casting a warm golden glow across the completed wooden bridge. Fern guides smiling travelers safely across the span while green vines glow softly in the evening twilight.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "A shifting tectonic plate is sealing the primary warm-water thermal vent, threatening the nursery grounds.",
-      "decisive_choice": "Sacrifice the royal pearl archive to wedge open the collapsing fissure.",
-      "resolution": "The warm water flows again, restoring color and life to the coral gardens.",
+      "central_conflict": "A sudden ravine split the old migration trail, trapping travelers on the unstable western ledge.",
+      "decisive_choice": "Combine flexible willow vines with heavy oak beams instead of waiting days for structural timber.",
+      "resolution": "The newly forged bridge securely holds the travelers, restoring the vital passage through the ancient timberlands.",
       "visual_bible": {
-        "style": "Lush, cinematic underwater animation style with rich bioluminescent lighting and detailed marine textures.",
+        "style": "Detailed cinematic storybook illustration with rich natural textures, warm lighting, and a grounded, tactile aesthetic.",
         "characters": {
-          "octopus": "An elderly purple octopus wearing brass spectacles on one tentacle, possessing wise eyes and gentle features.",
-          "crab": "A small, energetic blue crab with expressive claws and a bright yellow shell marking on its back."
+          "Bramble": "An elderly woodland guide with a braided white beard, wearing a weathered brown leather vest, canvas trousers, and sturdy walking boots.",
+          "Fern": "A nimble young tracker with sharp hazel eyes, wearing a dark green hooded linen cloak, leather utility belt, and knee-high boots."
         },
         "locations": {
-          "trench": "A deep underwater canyon featuring dark volcanic rock, ancient ruins, and struggling coral ecosystems."
+          "Whispering Woods": "An ancient, misty forest filled with colossal oak trees, hanging moss, glowing ferns, and a deep rocky chasm."
         },
         "objects": {
-          "signal_lantern": "A small glowing crustacean shell emitting a warm amber beam.",
-          "stone_gate": "A heavy, weathered basalt slab covered in ancient carved marine glyphs.",
-          "pearl_archive": "An ornate waterlogged wooden chest containing large luminescent white pearls."
+          "walking_stick": "A polished dark wood staff notched with traveler's runes and topped with a small copper cap.",
+          "signal_lantern": "A heavy brass lantern with curved glass panes and a flickering oil flame inside.",
+          "oak_beams": "Rough-hewn, thick brown logs with visible grain and stubborn knots.",
+          "willow_vines": "Flexible, emerald-green vines with small oval leaves that emit a faint natural luminescence."
         }
       },
-      "plot_fingerprint": "ee32e0294f0ea62d6465233bddd0e984354a046eaf4bdbc9d95e343317c854d9"
+      "plot_fingerprint": "fa598932e6c6e75d04b89596658bea095586233767476bec29da25afb9689397"
     }
   ]
 }
