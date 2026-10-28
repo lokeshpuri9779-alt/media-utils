@@ -17,6 +17,10 @@ def inspect_queue(payload):
             continue
         fields = from_story(story)
         hook_words = len(fields["hook"].split()) if fields["hook"] else 0
+        diagnostics = analyze(fields)
+        if 0 < hook_words < 9 and "hook" in diagnostics:
+            diagnostics["hook"]["interpretation"] = "short_label_not_spoken_hook"
+            diagnostics["hook"]["quality_decision_allowed"] = False
         results.append({
             "index": idx,
             "hook_score_applicability": "limited_short_fiction_label" if 0 < hook_words < 9 else ("not_available" if hook_words == 0 else "heuristic_only"),
@@ -24,7 +28,7 @@ def inspect_queue(payload):
             "has_hook": bool(fields["hook"]),
             "has_title": bool(fields["title"]),
             "has_thumbnail": bool(fields["thumbnail"]),
-            "diagnostics": analyze(fields),
+            "diagnostics": diagnostics,
         })
     return {
         "schema_version": 1,
