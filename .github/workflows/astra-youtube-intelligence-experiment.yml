@@ -52,11 +52,11 @@ jobs:
           assert 'MIT License' in (root/'LICENSE').read_text()
           print('PASS: hook formulas and license')
           PY
-      - name: Analyze original Story Factory artifact (manual dispatch only)
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.artifact_id != '' }}
+      - name: Analyze original Story Factory artifact (PR regression and manual dispatch)
+        if: ${{ github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && inputs.artifact_id != '') }}
         env:
           GH_TOKEN: ${{ github.token }}
-          ARTIFACT_ID: ${{ inputs.artifact_id }}
+          ARTIFACT_ID: ${{ inputs.artifact_id || '12614902384' }}
         run: |
           set -euo pipefail
           [[ "$ARTIFACT_ID" =~ ^[0-9]+$ ]] || { echo "Artifact ID must be numeric"; exit 1; }
