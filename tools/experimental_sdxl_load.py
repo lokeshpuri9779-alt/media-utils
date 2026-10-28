@@ -16,7 +16,7 @@ OUT = Path('artifacts/experimental-openvino/sdxl-load')
 ROOT = Path('/tmp/astra-sdxl-int8')
 GIB = 1024 ** 3
 ONE_IMAGE_SEED = 42
-ONE_IMAGE_STEPS = 20
+ONE_IMAGE_STEPS = 8
 ONE_IMAGE_PROMPT = ('family-friendly illustration of a single bright red toy fire truck, '
     'side view, fully visible, on a plain white background, clear colorful detailed '
     'shapes, no people, no text')
@@ -93,7 +93,7 @@ def worker(one_image=False):
     save('timings.json', timings)
     stage('compile')
     started = time.monotonic()
-    pipe.reshape(batch_size=1, height=1024, width=1024, num_images_per_prompt=1)
+    pipe.reshape(batch_size=1, height=512 if one_image else 1024, width=512 if one_image else 1024, num_images_per_prompt=1)
     pipe.compile()
     timings['compile_seconds'] = time.monotonic() - started
     save('timings.json', timings)
@@ -104,25 +104,25 @@ def worker(one_image=False):
         started = time.monotonic()
         import torch
         import numpy as np
-        noise = torch.randn((1, 4, 128, 128),
+        noise = torch.randn((1, 4, 64, 64),
             generator=torch.Generator(device='cpu').manual_seed(ONE_IMAGE_SEED),
             dtype=torch.float32)
         np.save(OUT / 'initial-latents.npy', noise.numpy(), allow_pickle=False)
         save('scheduler.json', dict(pipe.scheduler.config))
         save('request.json', {'seed': ONE_IMAGE_SEED, 'steps': ONE_IMAGE_STEPS,
             'prompt': ONE_IMAGE_PROMPT, 'negative_prompt': ONE_IMAGE_NEGATIVE_PROMPT,
-            'guidance_scale': 7.5, 'width': 1024, 'height': 1024,
+            'guidance_scale': 7.5, 'width': 512, 'height': 512,
             'scheduler': type(pipe.scheduler).__name__,
             'latent_sha256': hashlib.sha256(noise.numpy().tobytes()).hexdigest(),
             'approved': False, 'production_ready': False, 'published': False,
             'manual_visual_review_required': True})
         generated = pipe(
             ONE_IMAGE_PROMPT, negative_prompt=ONE_IMAGE_NEGATIVE_PROMPT,
-            height=1024, width=1024, num_inference_steps=ONE_IMAGE_STEPS,
+            height=512, width=512, num_inference_steps=ONE_IMAGE_STEPS,
             guidance_scale=7.5,
             latents=noise, output_type='pil')
-        if len(generated.images) != 1 or generated.images[0].size != (1024, 1024):
-            raise ValueError('Expected exactly one 1024x1024 diagnostic image')
+        if len(generated.images) != 1 or generated.images[0].size != (512, 512):
+            raise ValueError('Expected exactly one 512x512 diagnostic image')
         location = OUT / 'sdxl-fixed-seed-42.png'
         generated.images[0].save(location, format='PNG')
         timings['inference_seconds'] = time.monotonic() - started
@@ -131,7 +131,7 @@ def worker(one_image=False):
             'model': MODEL, 'revision': REVISION, 'seed': ONE_IMAGE_SEED,
             'steps': ONE_IMAGE_STEPS, 'prompt': ONE_IMAGE_PROMPT,
             'negative_prompt': ONE_IMAGE_NEGATIVE_PROMPT,
-            'width': 1024, 'height': 1024,
+            'width': 512, 'height': 512,
             'sha256': hashlib.sha256(location.read_bytes()).hexdigest(),
             'file': location.name, 'approved': False, 'production_ready': False,
             'published': False, 'semantic_quality': 'not_verified',
@@ -140,7 +140,7 @@ def worker(one_image=False):
         result_status = 'image_generated_review_only'
         images_generated = 1
     save('worker-result.json', {'status': result_status, 'ov_config': config,
-        'shape': {'batch': 1, 'height': 1024, 'width': 1024},
+        'shape': {'batch': 1, 'height': 512 if one_image else 1024, 'width': 512 if one_image else 1024},
         'packages': {p: importlib.metadata.version(p) for p in ('openvino', 'optimum-intel', 'diffusers', 'transformers', 'torch', 'psutil')},
         'images_generated': images_generated})
 
