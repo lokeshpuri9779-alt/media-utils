@@ -37,16 +37,25 @@ def illustration_requests(story):
         # Cloudflare FLUX accepts at most 2048 prompt characters. The previous
         # full-story-first layout silently dropped the selected scene, causing
         # different shots to depict the same action. Put scene action first.
+        # Experimental action-first direction: a compact imperative before
+        # narrative context makes the physical event the dominant instruction.
+        # Retain the original visual bible verbatim; never invent appearance.
+        action = str(beat.get("visual_prompt") or beat["speech"]).strip()
+        narration = str(beat["speech"]).strip()
         prompt = (
-            "Create one original portrait story illustration. Show ONLY the selected "
-            "scene action and characters, not other story events. No text, logos, "
-            "labels, speech bubbles or panels. Keep faces, clothing, props and style "
-            "consistent. Never duplicate a named character or add a title card. "
-            + "Context ID: " + version[:16]
-            + ". Scene " + scene_id + ": "
-            + canonical({"action": beat.get("visual_prompt") or beat["speech"],
-                         "narration": beat["speech"]})
-            + " Visual bible: " + canonical(bible)
+            "Create one original portrait story illustration. "
+            "MAIN VISIBLE ACTION (must be clearly recognizable): " + action
+            + " Show the named subject performing that exact action, including "
+            "the relevant object and visible result when specified. "
+            "Do not replace the action with a generic portrait, landscape, "
+            "diagram, icon or symbolic graphic. Show ONLY the selected scene "
+            "action and characters, not other story events. "
+            "No text, logos, labels, speech bubbles or panels. "
+            "Keep faces, clothing, props and style consistent. "
+            "Never duplicate a named character or add a title card. "
+            + "Context ID: " + version[:16] + ". Scene " + scene_id
+            + ". Visual bible: " + canonical(bible)
+            + " Narration context (not additional visual events): " + narration
         )
         if len(prompt) > 2048:
             raise ValueError("Scene illustration prompt exceeds 2048 characters; "
