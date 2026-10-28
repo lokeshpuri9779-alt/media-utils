@@ -33,3 +33,8 @@ and **not** a predictor of viewer retention or a story-quality gate.
 ## Exclusions
 No live Story Factory invocation, retention analytics API connection, auto-rewrite,
 automatic upload, or merge is included in this experiment.
+
+## Production artifact evidence (2026-10-25)
+GitHub Actions run 40236568415 produced `astra-story-factory-diagnostics-40236568415-1` (artifact ID 12614902384). Its rewrite queue contains three `rewrites[].story` objects with top-level `hook` and `title` and no thumbnail text. A schema-shaped regression test exists; it does **not** replace running the analyzer against the original ZIP artifact. Short fiction labels below nine words are marked `limited_short_fiction_label`, with `quality_decision_allowed=false`.
+
+The imported score should not be wired into editorial gates. The next meaningful validation is a reproducible artifact-consumption test, not additional synthetic score thresholds.
