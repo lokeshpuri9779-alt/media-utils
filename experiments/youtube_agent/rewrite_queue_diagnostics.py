@@ -16,8 +16,10 @@ def inspect_queue(payload):
             results.append({"index": idx, "error": "missing story object"})
             continue
         fields = from_story(story)
+        hook_words = len(fields["hook"].split()) if fields["hook"] else 0
         results.append({
             "index": idx,
+            "hook_score_applicability": "limited_short_fiction_label" if 0 < hook_words < 9 else ("not_available" if hook_words == 0 else "heuristic_only"),
             "content_id": story.get("content_id"),
             "has_hook": bool(fields["hook"]),
             "has_title": bool(fields["title"]),
