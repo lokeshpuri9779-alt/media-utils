@@ -31,6 +31,8 @@ jobs:
           assert len(skill_docs)==11, f'Expected eleven skills, found {len(skill_docs)}'
           print('PASS: 11 skill docs')
           PY
+      - name: Run offline CLI smoke probes
+        run: python experiments/youtube_agent/test_import_smoke.py
       - name: Validate hook formula data and MIT license
         run: |
           python - <<'PY'
