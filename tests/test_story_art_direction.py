@@ -61,6 +61,29 @@ class StoryArtTests(unittest.TestCase):
             self.assertIn("small brass bell", row["prompt"])
             self.assertEqual(row["continuity_status"], "not_verified")
 
+    def test_selected_scene_is_not_lost_to_cloudflare_prompt_truncation(self):
+        item = story()
+        item["story_beats"] = [
+            {"speech": "First action.", "visual_prompt": "Red fox lifts a brass bell."},
+            {"speech": "Second action.", "visual_prompt": "Blue otter ties a rope."},
+        ]
+        # Large context must not push the selected action past 2048 characters.
+        item["story_environment"] = "Ancient woodland " * 200
+        prompts = [row["prompt"] for row in illustration_requests(item)]
+        self.assertTrue(all(len(prompt) <= 2048 for prompt in prompts))
+        self.assertIn("Red fox lifts a brass bell.", prompts[0])
+        self.assertNotIn("Blue otter ties a rope.", prompts[0])
+        self.assertIn("Blue otter ties a rope.", prompts[1])
+        self.assertNotIn("Red fox lifts a brass bell.", prompts[1])
+        self.assertIn("blue scarf", prompts[1])
+        self.assertIn("no text", prompts[0].lower())
+
+    def test_oversized_scene_direction_fails_before_provider_request(self):
+        item = story()
+        item["story_beats"][0]["visual_prompt"] = "Detailed action " * 250
+        with self.assertRaisesRegex(ValueError, "exceeds 2048 characters"):
+            illustration_requests(item)
+
     def test_budget_resumes_second_scene_and_invalidates_changed_story(self):
         calls = []
         def generate(prompt):
