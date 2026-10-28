@@ -78,6 +78,24 @@ class StoryArtTests(unittest.TestCase):
         self.assertIn("blue scarf", prompts[1])
         self.assertIn("no text", prompts[0].lower())
 
+    def test_story_title_is_never_sent_to_image_provider(self):
+        item = story()
+        item["title"] = "GIANT PRINTED HEADLINE"
+        prompts = [row["prompt"] for row in illustration_requests(item)]
+        self.assertTrue(prompts)
+        for prompt in prompts:
+            self.assertNotIn("GIANT PRINTED HEADLINE", prompt)
+            self.assertNotIn("Story: ", prompt)
+            self.assertIn("Never duplicate a named character", prompt)
+            self.assertIn("No text, logos", prompt)
+            self.assertIn("blue scarf", prompt)
+            self.assertLessEqual(len(prompt), 2048)
+        # The title remains part of story identity and cache invalidation.
+        changed = copy.deepcopy(item)
+        changed["title"] = "A DIFFERENT HEADLINE"
+        self.assertNotEqual(illustration_requests(item)[0]["story_visual_sha256"],
+                            illustration_requests(changed)[0]["story_visual_sha256"])
+
     def test_oversized_scene_direction_fails_before_provider_request(self):
         item = story()
         item["story_beats"][0]["visual_prompt"] = "Detailed action " * 250
