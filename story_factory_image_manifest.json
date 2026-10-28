@@ -17,8 +17,15 @@
       "source": "omniroute",
       "prompt_sha256": "adaa28bd768b2c3550dd41874ce04139cf1622d1b7521599ee1680ac7894f94c",
       "dimensions": {
-        "width": 1024,
-        "height": 1824
+        "height": 1824,
+        "width": 1024
+      },
+      "adaptation": "square_to_portrait_review_padding_v1",
+      "source_sha256": "ac0230d0740414029e4f4e485c7e362a9ff13be733f6879a4a2bf98c55650506",
+      "source_path": "requests/square_sources/ac0230d0740414029e4f4e485c7e362a9ff13be733f6879a4a2bf98c55650506.png",
+      "source_dimensions": {
+        "height": 1024,
+        "width": 1024
       },
       "quality": {
         "passed": true,
@@ -28,14 +35,7 @@
         "semantic_match": "not_verified",
         "character_continuity": "not_verified"
       },
-      "adaptation": "square_to_portrait_review_padding_v1",
-      "source_sha256": "ac0230d0740414029e4f4e485c7e362a9ff13be733f6879a4a2bf98c55650506",
-      "source_path": "requests/square_sources/ac0230d0740414029e4f4e485c7e362a9ff13be733f6879a4a2bf98c55650506.png",
-      "source_dimensions": {
-        "width": 1024,
-        "height": 1024
-      },
-      "status": "review_only"
+      "status": "cached_review_only"
     },
     {
       "story_content_id": "rayvan-gemini-21164ab197474405e7e9",
@@ -52,8 +52,15 @@
       "source": "omniroute",
       "prompt_sha256": "eb50536bd90a95a5f18cb21a8023d374f741da9c0746ec97fcac598016a6e55d",
       "dimensions": {
-        "width": 1024,
-        "height": 1824
+        "height": 1824,
+        "width": 1024
+      },
+      "adaptation": "square_to_portrait_review_padding_v1",
+      "source_sha256": "6bbb1d428b4cb0fa813bcc172d7d2eadf7430128cfd42ecc4ba962bdf4988cbd",
+      "source_path": "requests/square_sources/6bbb1d428b4cb0fa813bcc172d7d2eadf7430128cfd42ecc4ba962bdf4988cbd.png",
+      "source_dimensions": {
+        "height": 1024,
+        "width": 1024
       },
       "quality": {
         "passed": true,
@@ -63,14 +70,7 @@
         "semantic_match": "not_verified",
         "character_continuity": "not_verified"
       },
-      "adaptation": "square_to_portrait_review_padding_v1",
-      "source_sha256": "6bbb1d428b4cb0fa813bcc172d7d2eadf7430128cfd42ecc4ba962bdf4988cbd",
-      "source_path": "requests/square_sources/6bbb1d428b4cb0fa813bcc172d7d2eadf7430128cfd42ecc4ba962bdf4988cbd.png",
-      "source_dimensions": {
-        "width": 1024,
-        "height": 1024
-      },
-      "status": "review_only"
+      "status": "cached_review_only"
     },
     {
       "story_content_id": "rayvan-gemini-21164ab197474405e7e9",
@@ -87,8 +87,15 @@
       "source": "omniroute",
       "prompt_sha256": "6a1b31a77fb9a6f7507e4b7ecaebab3268413d75b0bddbda7116028603b75c9c",
       "dimensions": {
-        "width": 1024,
-        "height": 1824
+        "height": 1824,
+        "width": 1024
+      },
+      "adaptation": "square_to_portrait_review_padding_v1",
+      "source_sha256": "2fd9d968175fc94c851dd29ba6d83a02acc81a6b0276b6d0e3743ff6b6624ba1",
+      "source_path": "requests/square_sources/2fd9d968175fc94c851dd29ba6d83a02acc81a6b0276b6d0e3743ff6b6624ba1.png",
+      "source_dimensions": {
+        "height": 1024,
+        "width": 1024
       },
       "quality": {
         "passed": true,
@@ -98,14 +105,7 @@
         "semantic_match": "not_verified",
         "character_continuity": "not_verified"
       },
-      "adaptation": "square_to_portrait_review_padding_v1",
-      "source_sha256": "2fd9d968175fc94c851dd29ba6d83a02acc81a6b0276b6d0e3743ff6b6624ba1",
-      "source_path": "requests/square_sources/2fd9d968175fc94c851dd29ba6d83a02acc81a6b0276b6d0e3743ff6b6624ba1.png",
-      "source_dimensions": {
-        "width": 1024,
-        "height": 1024
-      },
-      "status": "review_only"
+      "status": "cached_review_only"
     },
     {
       "story_content_id": "rayvan-gemini-21164ab197474405e7e9",
@@ -116,7 +116,31 @@
       "request_sha256": "58b54e614e18b5e9baea9c37bbc9dedc8c8cad61d6df094498eeffc089c125f4",
       "approved": false,
       "production_ready": false,
-      "status": "pending_budget"
+      "sha256": "c56a3cd6f3a7c68f2f6d76e1c29c9adf5ce1b3b55e2c6899548e8efd6f85cd47",
+      "path": "sha256/c5/c56a3cd6f3a7c68f2f6d76e1c29c9adf5ce1b3b55e2c6899548e8efd6f85cd47.png",
+      "kind": "scene",
+      "source": "omniroute",
+      "prompt_sha256": "470fde43f916463ee5a5453fb01dc34a312ddb235547b401041e30af7d8eebf5",
+      "dimensions": {
+        "width": 1024,
+        "height": 1824
+      },
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "average_brightness": 120.83,
+        "luminance_variance": 3201.39,
+        "semantic_match": "not_verified",
+        "character_continuity": "not_verified"
+      },
+      "adaptation": "square_to_portrait_review_padding_v1",
+      "source_sha256": "4143c4ad455dbbc3cfbbbec23ea12c56ad10611cf68e5a470bb4758a8b8afd75",
+      "source_path": "requests/square_sources/4143c4ad455dbbc3cfbbbec23ea12c56ad10611cf68e5a470bb4758a8b8afd75.png",
+      "source_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "status": "review_only"
     },
     {
       "story_content_id": "rayvan-gemini-317838f75771f8ceef23",
@@ -127,7 +151,31 @@
       "request_sha256": "e28dcf0ddfdc0ab2503bce4b49e08a095fe95f25400c431d570d619df9f263a2",
       "approved": false,
       "production_ready": false,
-      "status": "pending_budget"
+      "sha256": "a366db8147020f5f323db16a87089b84896adac6c682fe0e6d2a28442783fa06",
+      "path": "sha256/a3/a366db8147020f5f323db16a87089b84896adac6c682fe0e6d2a28442783fa06.png",
+      "kind": "scene",
+      "source": "omniroute",
+      "prompt_sha256": "4cb5cac1f29e6a27320e9aee5b93622b8edfeafbb9b18d3bd3c9ecc7beec6111",
+      "dimensions": {
+        "width": 1024,
+        "height": 1824
+      },
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "average_brightness": 31.47,
+        "luminance_variance": 424.18,
+        "semantic_match": "not_verified",
+        "character_continuity": "not_verified"
+      },
+      "adaptation": "square_to_portrait_review_padding_v1",
+      "source_sha256": "2a719e0844a10d25a0ae1f49aaf5d6b94ea00d98dd05a86fc09c2e030a842f04",
+      "source_path": "requests/square_sources/2a719e0844a10d25a0ae1f49aaf5d6b94ea00d98dd05a86fc09c2e030a842f04.png",
+      "source_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "status": "review_only"
     },
     {
       "story_content_id": "rayvan-gemini-317838f75771f8ceef23",
@@ -138,7 +186,31 @@
       "request_sha256": "a9a079bb2761728b74fd031febc38de214cffbb9bbba6565ec103a117015af6c",
       "approved": false,
       "production_ready": false,
-      "status": "pending_budget"
+      "sha256": "fcb26c7c72c35054d0ccd6cf68451222b4477e6e2f9c0d85b99bbc69c36b4642",
+      "path": "sha256/fc/fcb26c7c72c35054d0ccd6cf68451222b4477e6e2f9c0d85b99bbc69c36b4642.png",
+      "kind": "scene",
+      "source": "omniroute",
+      "prompt_sha256": "23aed913bd7afe3ee132082825305324472972c17b9bed5136e3239d3d107b65",
+      "dimensions": {
+        "width": 1024,
+        "height": 1824
+      },
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "average_brightness": 62.66,
+        "luminance_variance": 857.6,
+        "semantic_match": "not_verified",
+        "character_continuity": "not_verified"
+      },
+      "adaptation": "square_to_portrait_review_padding_v1",
+      "source_sha256": "4660257993e2e9d3e3a4a478b453807eb965e5e85b922800c04a13579669e119",
+      "source_path": "requests/square_sources/4660257993e2e9d3e3a4a478b453807eb965e5e85b922800c04a13579669e119.png",
+      "source_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "status": "review_only"
     },
     {
       "story_content_id": "rayvan-gemini-317838f75771f8ceef23",
