@@ -5,8 +5,14 @@ on:
       - 'experiments/youtube_agent/**'
       - '.github/workflows/astra-youtube-intelligence-experiment.yml'
   workflow_dispatch:
+    inputs:
+      artifact_id:
+        description: 'Existing same-repository Story Factory diagnostics artifact ID (read-only)'
+        required: false
+        type: string
 permissions:
   contents: read
+  actions: read
 jobs:
   smoke:
     runs-on: ubuntu-latest
@@ -45,4 +51,34 @@ jobs:
           assert isinstance(hooks.get('hooks'),list) and len(hooks['hooks'])>0
           assert 'MIT License' in (root/'LICENSE').read_text()
           print('PASS: hook formulas and license')
+          PY
+      - name: Analyze original Story Factory artifact (manual dispatch only)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.artifact_id != '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_ID: ${{ inputs.artifact_id }}
+        run: |
+          set -euo pipefail
+          [[ "$ARTIFACT_ID" =~ ^[0-9]+$ ]] || { echo "Artifact ID must be numeric"; exit 1; }
+          gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${ARTIFACT_ID}/zip" > /tmp/astra-story-artifact.zip
+          python - <<'PY'
+          import io, json, os, subprocess, sys, zipfile
+          from pathlib import Path
+          z = zipfile.ZipFile('/tmp/astra-story-artifact.zip')
+          name = 'story_factory_rewrite_queue.json'
+          if name not in z.namelist():
+              raise SystemExit('Expected Story Factory rewrite queue missing from artifact')
+          source = z.read(name)
+          queue = json.loads(source)
+          assert isinstance(queue.get('rewrites'), list)
+          target = Path('/tmp/astra-original-rewrite-queue.json')
+          target.write_bytes(source)
+          cmd = [sys.executable, 'experiments/youtube_agent/rewrite_queue_diagnostics.py', str(target)]
+          result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+          report = json.loads(result.stdout)
+          assert report['entries_checked'] == len(queue['rewrites'])
+          assert report['advisory_only'] is True and report['publication_triggered'] is False
+          assert all(row.get('diagnostics', {}).get('production_ready') is False for row in report['results'])
+          print('PASS: original artifact analyzed read-only; entries:', report['entries_checked'])
+          print('Limited-applicability labels:', sum(row.get('hook_score_applicability') == 'limited_short_fiction_label' for row in report['results']))
           PY
