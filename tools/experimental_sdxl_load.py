@@ -103,12 +103,24 @@ def worker(one_image=False):
         stage('inference')
         started = time.monotonic()
         import torch
+        import numpy as np
+        noise = torch.randn((1, 4, 128, 128),
+            generator=torch.Generator(device='cpu').manual_seed(ONE_IMAGE_SEED),
+            dtype=torch.float32)
+        np.save(OUT / 'initial-latents.npy', noise.numpy(), allow_pickle=False)
+        save('scheduler.json', dict(pipe.scheduler.config))
+        save('request.json', {'seed': ONE_IMAGE_SEED, 'steps': ONE_IMAGE_STEPS,
+            'prompt': ONE_IMAGE_PROMPT, 'negative_prompt': ONE_IMAGE_NEGATIVE_PROMPT,
+            'guidance_scale': 7.5, 'width': 1024, 'height': 1024,
+            'scheduler': type(pipe.scheduler).__name__,
+            'latent_sha256': hashlib.sha256(noise.numpy().tobytes()).hexdigest(),
+            'approved': False, 'production_ready': False, 'published': False,
+            'manual_visual_review_required': True})
         generated = pipe(
             ONE_IMAGE_PROMPT, negative_prompt=ONE_IMAGE_NEGATIVE_PROMPT,
             height=1024, width=1024, num_inference_steps=ONE_IMAGE_STEPS,
             guidance_scale=7.5,
-            generator=torch.Generator(device='cpu').manual_seed(ONE_IMAGE_SEED),
-            output_type='pil')
+            latents=noise, output_type='pil')
         if len(generated.images) != 1 or generated.images[0].size != (1024, 1024):
             raise ValueError('Expected exactly one 1024x1024 diagnostic image')
         location = OUT / 'sdxl-fixed-seed-42.png'
