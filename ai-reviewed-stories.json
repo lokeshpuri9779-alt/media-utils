@@ -6365,11 +6365,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-9524a07e23865f5dd048",
-      "title": "The Canopy Pathfinders and the Root of Whispers",
-      "hook": "Discovery of the Chasm",
-      "question": "Can two different woodland guides safely bridge a massive chasm using only their combined botanical knowledge?",
-      "answer": "Yes, by weaving flexible willow vines with rigid oak branches, they successfully span the gorge and save stranded travelers.",
+      "content_id": "rayvan-gemini-2b8651e182f8b44a94f2",
+      "title": "The Ranger and the Amber Spore",
+      "hook": "The Hidden Spore",
+      "question": "Can two rivals cross the chasm before the canopy collapses?",
+      "answer": "Yes, by combining their climbing gear and trusting each other's weight.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -6377,66 +6377,66 @@
       ],
       "story_beats": [
         {
-          "headline": "Discovery of the Chasm",
-          "speech": "Look closely at the fractured earth. Our usual path has vanished into this deep, yawning ravine overnight.",
+          "headline": "The Hidden Spore",
+          "speech": "We cannot cross this broken ravine alone without waking the sleeping guardians of the dark forest.",
           "visual": "forest",
-          "label": "Ravine Discovery",
+          "label": "Discovery",
           "story_beat": "reveal",
-          "visual_prompt": "Bramble points forward with a weathered walking stick at a wide, freshly torn chasm in a dense, mossy forest. Fern stands beside him, wearing a dark green hooded cloak and a worried expression, looking down into the shadowy depths where broken roots dangle.",
+          "visual_prompt": "Tansy stands in a gloomy forest clearing holding a glowing amber spore in her trembling hands, illuminated by soft green moss, wearing a heavy leather traveler cloak with brass clasps, looking worried at the chasm.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Gathering Materials",
-          "speech": "We must collect long willow shoots for flexibility and sturdy oak branches to bear the heavy weight safely.",
-          "visual": "forest",
-          "label": "Material Collection",
-          "story_beat": "build",
-          "visual_prompt": "Bramble and Fern work together in a sunlit grove, pulling flexible green willow vines from a damp bank while holding heavy brown oak logs. Both characters wear leather aprons, their faces focused and determined under the emerald canopy.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Weaving the Span",
-          "speech": "Interlace the green shoots tightly around the oak beams to create a strong, flexible suspension line.",
-          "visual": "door",
-          "label": "Bridge Construction",
-          "story_beat": "mechanism",
-          "visual_prompt": "Fern expertly ties glowing green willow vines around a massive horizontal oak beam suspended over the chasm edge. Bramble holds the opposing end firmly, sweat on his brow, working amidst swirling autumn leaves and hanging moss.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Safe Crossing",
-          "speech": "The bridge holds firm against the wind. Step carefully across together, and you will reach the sanctuary.",
+          "headline": "The Broken Mechanism",
+          "speech": "Hold this rope taut while I fix the rusted winch before the root bridge snaps completely.",
           "visual": "signal",
-          "label": "Successful Crossing",
+          "label": "Tension",
+          "story_beat": "build",
+          "visual_prompt": "Bram grips a frayed hemp rope near a mossy cliff edge, sending a distress signal flare into the misty sky, wearing a sturdy green tunic and leather boots, while metal gears click behind him.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Risky Leap",
+          "speech": "Catch this iron spike right now if you want us both to reach the other side safely.",
+          "visual": "door",
+          "label": "Leap",
+          "story_beat": "twist",
+          "visual_prompt": "Tansy mid-air throws a heavy iron climbing spike across a deep stone doorway archway in the cliff face toward Bram, her face determined, wearing a travel pack and mud-stained trousers.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Harbor",
+          "speech": "We made it across together, proving that teamwork is stronger than any ancient forest trial.",
+          "visual": "robot",
+          "label": "Success",
           "story_beat": "payoff",
-          "visual_prompt": "Bramble raises a polished brass signal lantern high in his left hand, casting a warm golden glow across the completed wooden bridge. Fern guides smiling travelers safely across the span while green vines glow softly in the evening twilight.",
+          "visual_prompt": "Bram and Tansy stand smiling together next to a dormant stone forest guardian automaton, holding the amber spore high as golden sunlight breaks through the canopy above.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "A sudden ravine split the old migration trail, trapping travelers on the unstable western ledge.",
-      "decisive_choice": "Combine flexible willow vines with heavy oak beams instead of waiting days for structural timber.",
-      "resolution": "The newly forged bridge securely holds the travelers, restoring the vital passage through the ancient timberlands.",
+      "central_conflict": "A falling branch trap blocks the only rope bridge across the deep ravine.",
+      "decisive_choice": "Tansy throws her last anchor spike to Bram instead of saving herself.",
+      "resolution": "Both successfully cross the chasm and restore the ancient seed vault.",
       "visual_bible": {
-        "style": "Detailed cinematic storybook illustration with rich natural textures, warm lighting, and a grounded, tactile aesthetic.",
+        "style": "Cinematic hand-painted digital illustration with rich emerald greens and warm golden lighting.",
         "characters": {
-          "Bramble": "An elderly woodland guide with a braided white beard, wearing a weathered brown leather vest, canvas trousers, and sturdy walking boots.",
-          "Fern": "A nimble young tracker with sharp hazel eyes, wearing a dark green hooded linen cloak, leather utility belt, and knee-high boots."
+          "Tansy": "A nimble young forest ranger with messy auburn hair tied in a braid, wearing a dark green canvas cloak, leather wrist guards, and muddy boots.",
+          "Bram": "A practical scout with short dark hair, wearing a patched brown tunic, a utility belt filled with iron spikes, and steel-toed boots."
         },
         "locations": {
-          "Whispering Woods": "An ancient, misty forest filled with colossal oak trees, hanging moss, glowing ferns, and a deep rocky chasm."
+          "The Whispering Ravine": "A deep moss-covered gorge bridged by ancient woven tree roots and damp stone arches.",
+          "The Seed Vault": "A hidden stone alcove carved into the cliffside, illuminated by bioluminescent fungi."
         },
         "objects": {
-          "walking_stick": "A polished dark wood staff notched with traveler's runes and topped with a small copper cap.",
-          "signal_lantern": "A heavy brass lantern with curved glass panes and a flickering oil flame inside.",
-          "oak_beams": "Rough-hewn, thick brown logs with visible grain and stubborn knots.",
-          "willow_vines": "Flexible, emerald-green vines with small oval leaves that emit a faint natural luminescence."
+          "Amber Spore": "A glowing orange crystalline pod pulsing with soft warm light.",
+          "Iron Anchor Spike": "A heavy, rust-resistant steel climbing spike with a looped end for thick ropes.",
+          "Distress Signal Flare": "A slender brass tube that emits a bright emerald-green smoke trail when ignited."
         }
       },
-      "plot_fingerprint": "fa598932e6c6e75d04b89596658bea095586233767476bec29da25afb9689397"
+      "plot_fingerprint": "9f12c9f92aba27b9dfcc6b419522ef2ffab645bea2a79ab7b22576d14f6cea9a"
     }
   ]
 }
