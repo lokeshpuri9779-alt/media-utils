@@ -117,8 +117,8 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
                              "responseJsonSchema": response_schema,
                              "temperature": 0.9, "maxOutputTokens": 2400}}).encode()
     # A second explicitly configured free-tier model may recover from a removed
-    # model (404) or transient failures. Never bypass auth, quota or policy errors.
-    fallback = os.getenv("ASTRA_GEMINI_FALLBACK_MODEL", "gemini-2.5-flash-lite")
+    # model (404) or transient failures. Default to the current documented\n    # Flash-Lite model; legacy 2.5 access may be restricted per project.\n    # Never bypass auth, quota or policy errors.
+    fallback = os.getenv("ASTRA_GEMINI_FALLBACK_MODEL", "gemini-3.5-flash-lite")
     if not re.fullmatch(r"[A-Za-z0-9._-]{1,80}", fallback):
         raise ValueError("Invalid Gemini fallback model")
     models = [model] + ([fallback] if fallback != model else [])
