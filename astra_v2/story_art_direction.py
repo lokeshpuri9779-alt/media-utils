@@ -41,8 +41,8 @@ def illustration_requests(story):
             "Create one original portrait story illustration. Show ONLY the selected "
             "scene action and characters, not other story events. No text, logos, "
             "labels, speech bubbles or panels. Keep faces, clothing, props and style "
-            "consistent. "
-            + "Story: " + str(story.get("title", "")) + ". Context ID: " + version[:16]
+            "consistent. Never duplicate a named character or add a title card. "
+            + "Context ID: " + version[:16]
             + ". Scene " + scene_id + ": "
             + canonical({"action": beat.get("visual_prompt") or beat["speech"],
                          "narration": beat["speech"]})
