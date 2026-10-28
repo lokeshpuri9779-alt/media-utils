@@ -33,6 +33,8 @@ jobs:
           PY
       - name: Run offline CLI smoke probes
         run: python experiments/youtube_agent/test_import_smoke.py
+      - name: Test read-only advisory adapter
+        run: python -m unittest discover -s experiments/youtube_agent -p 'test_advisory_adapter.py' -v
       - name: Validate hook formula data and MIT license
         run: |
           python - <<'PY'
