@@ -7446,11 +7446,11 @@
   "pending": {},
   "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-10-28T13:54:35.567800+00:00",
+  "last_preflight_at": "2026-10-28T14:25:59.618442+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "published",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-28T13:55:43.795878+00:00",
+    "at": "2026-10-28T14:27:01.479644+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -15647,7 +15647,7 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-28T13:55:43.795796+00:00",
+    "at": "2026-10-28T14:27:01.479596+00:00",
     "publication_outcome": "quality_skip",
     "publication_reason": "no_approved_original_story_available",
     "character_memory": "not_reported",
@@ -15658,13 +15658,13 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-28T13:55:43.795863+00:00",
+    "at": "2026-10-28T14:27:01.479636+00:00",
     "history_file_present": true,
     "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-28T13:55:00.462074+00:00",
+    "at": "2026-10-28T14:26:20.068768+00:00",
     "outcome": "quality_skip",
     "reason": "no_approved_original_story_available",
     "content_id": "",
@@ -15694,7 +15694,7 @@
     }
   },
   "last_workflow_result": {
-    "at": "2026-10-28T13:55:43.795512+00:00",
+    "at": "2026-10-28T14:27:01.479399+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -15706,7 +15706,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-28T13:55:43.795789+00:00",
+    "at": "2026-10-28T14:27:01.479591+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
