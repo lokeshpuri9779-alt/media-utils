@@ -22,6 +22,8 @@ class ProductionShapeTests(unittest.TestCase):
             self.assertTrue(row["diagnostics"]["advisory_only"])
             self.assertFalse(row["diagnostics"]["production_ready"])
             self.assertIn("hook",row["diagnostics"])
+            self.assertFalse(row["diagnostics"]["hook"]["quality_decision_allowed"])
+            self.assertEqual(row["diagnostics"]["hook"]["interpretation"], "short_label_not_spoken_hook")
             self.assertIn("package",row["diagnostics"])
 
 if __name__ == "__main__":
