@@ -6494,6 +6494,58 @@
       "central_conflict": "The festival's battery reserves are depleted by an unexpected early high tide, threatening to extinguish all decorative lighting.",
       "decisive_choice": "Juno chooses to dismantle her prototype kinetic sculpture to repurpose its copper coils for an emergency makeshift turbine.",
       "resolution": "The turbine generates sufficient current to power the lanterns, saving the festival from total darkness."
+    },
+    {
+      "content_id": "rayvan-gemini-9524a07e23865f5dd048",
+      "video_id": "JboHttDz0p4",
+      "confirmed_at": "2026-10-28T01:51:48.092575+00:00",
+      "title": "The Canopy Pathfinders and the Root of Whispers",
+      "plot_fingerprint": "fa598932e6c6e75d04b89596658bea095586233767476bec29da25afb9689397",
+      "story_beats": [
+        {
+          "headline": "Discovery of the Chasm",
+          "speech": "Look closely at the fractured earth. Our usual path has vanished into this deep, yawning ravine overnight.",
+          "visual": "forest",
+          "label": "Ravine Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Bramble points forward with a weathered walking stick at a wide, freshly torn chasm in a dense, mossy forest. Fern stands beside him, wearing a dark green hooded cloak and a worried expression, looking down into the shadowy depths where broken roots dangle.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Gathering Materials",
+          "speech": "We must collect long willow shoots for flexibility and sturdy oak branches to bear the heavy weight safely.",
+          "visual": "forest",
+          "label": "Material Collection",
+          "story_beat": "build",
+          "visual_prompt": "Bramble and Fern work together in a sunlit grove, pulling flexible green willow vines from a damp bank while holding heavy brown oak logs. Both characters wear leather aprons, their faces focused and determined under the emerald canopy.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Weaving the Span",
+          "speech": "Interlace the green shoots tightly around the oak beams to create a strong, flexible suspension line.",
+          "visual": "door",
+          "label": "Bridge Construction",
+          "story_beat": "mechanism",
+          "visual_prompt": "Fern expertly ties glowing green willow vines around a massive horizontal oak beam suspended over the chasm edge. Bramble holds the opposing end firmly, sweat on his brow, working amidst swirling autumn leaves and hanging moss.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Crossing",
+          "speech": "The bridge holds firm against the wind. Step carefully across together, and you will reach the sanctuary.",
+          "visual": "signal",
+          "label": "Successful Crossing",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramble raises a polished brass signal lantern high in his left hand, casting a warm golden glow across the completed wooden bridge. Fern guides smiling travelers safely across the span while green vines glow softly in the evening twilight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden ravine split the old migration trail, trapping travelers on the unstable western ledge.",
+      "decisive_choice": "Combine flexible willow vines with heavy oak beams instead of waiting days for structural timber.",
+      "resolution": "The newly forged bridge securely holds the travelers, restoring the vital passage through the ancient timberlands."
     }
   ]
 }
