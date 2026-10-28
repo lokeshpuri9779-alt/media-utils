@@ -1,4 +1,4 @@
-"""One supervised, review-only SDXL download/load/compile; never infer."""
+"""Supervised review-only SDXL load/compile; optional one-image diagnostic."""
 import hashlib
 import importlib.metadata
 import json
@@ -15,6 +15,12 @@ REVISION = 'd54e5b43fcb6b4b358f3a134269115d3fcb3eb25'
 OUT = Path('artifacts/experimental-openvino/sdxl-load')
 ROOT = Path('/tmp/astra-sdxl-int8')
 GIB = 1024 ** 3
+ONE_IMAGE_SEED = 42
+ONE_IMAGE_STEPS = 20
+ONE_IMAGE_PROMPT = ('family-friendly illustration of a single bright red toy fire truck, '
+    'side view, fully visible, on a plain white background, clear colorful detailed '
+    'shapes, no people, no text')
+ONE_IMAGE_NEGATIVE_PROMPT = 'people, text, words, watermark, logo, blurry, deformed wheels, missing ladder'
 
 def save(name, data):
     OUT.mkdir(parents=True, exist_ok=True)
@@ -37,7 +43,7 @@ def selected(name):
     return group in ('tokenizer', 'tokenizer_2') and file in (
         'merges.txt', 'vocab.json', 'tokenizer_config.json', 'special_tokens_map.json')
 
-def worker():
+def worker(one_image=False):
     stage('download')
     started = time.monotonic()
     url = f'https://huggingface.co/api/models/{MODEL}/revision/{REVISION}?blobs=true'
@@ -80,7 +86,7 @@ def worker():
     from optimum.intel import OVStableDiffusionXLPipeline
     config = {'INFERENCE_PRECISION_HINT': 'f32', 'PERFORMANCE_HINT': 'LATENCY', 'NUM_STREAMS': '1'}
     pipe = OVStableDiffusionXLPipeline.from_pretrained(
-        ROOT, export=False, compile=False, device='CPU', local_files_only=True,
+        str(ROOT), export=False, compile=False, device='CPU', local_files_only=True,
         trust_remote_code=False, load_in_8bit=False, ov_config=config,
     )
     timings['load_seconds'] = time.monotonic() - started
@@ -91,10 +97,40 @@ def worker():
     pipe.compile()
     timings['compile_seconds'] = time.monotonic() - started
     save('timings.json', timings)
-    save('worker-result.json', {'status': 'loaded_and_compiled', 'ov_config': config,
+    result_status = 'loaded_and_compiled'
+    images_generated = 0
+    if one_image:
+        stage('inference')
+        started = time.monotonic()
+        import torch
+        generated = pipe(
+            ONE_IMAGE_PROMPT, negative_prompt=ONE_IMAGE_NEGATIVE_PROMPT,
+            height=1024, width=1024, num_inference_steps=ONE_IMAGE_STEPS,
+            guidance_scale=7.5,
+            generator=torch.Generator(device='cpu').manual_seed(ONE_IMAGE_SEED),
+            output_type='pil')
+        if len(generated.images) != 1 or generated.images[0].size != (1024, 1024):
+            raise ValueError('Expected exactly one 1024x1024 diagnostic image')
+        location = OUT / 'sdxl-fixed-seed-42.png'
+        generated.images[0].save(location, format='PNG')
+        timings['inference_seconds'] = time.monotonic() - started
+        save('timings.json', timings)
+        save('image-review.json', {
+            'model': MODEL, 'revision': REVISION, 'seed': ONE_IMAGE_SEED,
+            'steps': ONE_IMAGE_STEPS, 'prompt': ONE_IMAGE_PROMPT,
+            'negative_prompt': ONE_IMAGE_NEGATIVE_PROMPT,
+            'width': 1024, 'height': 1024,
+            'sha256': hashlib.sha256(location.read_bytes()).hexdigest(),
+            'file': location.name, 'approved': False, 'production_ready': False,
+            'published': False, 'semantic_quality': 'not_verified',
+            'character_consistency': 'not_verified',
+            'manual_visual_review_required': True})
+        result_status = 'image_generated_review_only'
+        images_generated = 1
+    save('worker-result.json', {'status': result_status, 'ov_config': config,
         'shape': {'batch': 1, 'height': 1024, 'width': 1024},
         'packages': {p: importlib.metadata.version(p) for p in ('openvino', 'optimum-intel', 'diffusers', 'transformers', 'torch', 'psutil')},
-        'images_generated': 0})
+        'images_generated': images_generated})
 
 def available_memory():
     import psutil
@@ -106,18 +142,20 @@ def available_memory():
             available = min(available, max(0, int(maximum) - int((root / 'memory.current').read_text())))
     return available
 
-def limit_reason(rss, available, elapsed, load_elapsed):
+def limit_reason(rss, available, elapsed, load_elapsed, inference_elapsed=None):
     if rss >= 12 * GIB:
         return 'rss_limit'
     if available < 2 * GIB:
         return 'available_ram_limit'
     if load_elapsed is not None and load_elapsed >= 600:
         return 'load_compile_timeout'
+    if inference_elapsed is not None and inference_elapsed >= 600:
+        return 'inference_timeout'
     if elapsed >= 1200:
         return 'overall_timeout'
     return None
 
-def supervise():
+def supervise(one_image=False):
     import psutil
     import shutil
     OUT.mkdir(parents=True, exist_ok=True)
@@ -127,16 +165,22 @@ def supervise():
     report = {'model': MODEL, 'revision': REVISION, 'approved': False,
         'production_ready': False, 'published': False, 'manual_visual_review_required': True,
         'semantic_quality': 'not_verified', 'character_consistency': 'not_verified',
-        'images_generated': 0, 'run_id': os.getenv('GITHUB_RUN_ID'), 'commit': os.getenv('GITHUB_SHA'),
+        'images_generated': 0, 'mode': 'single_image' if one_image else 'load_only',
+        'run_id': os.getenv('GITHUB_RUN_ID'), 'commit': os.getenv('GITHUB_SHA'),
         'initial_available_ram_bytes': available_memory(), 'initial_disk_free_bytes': shutil.disk_usage('/tmp').free,
-        'limits': {'rss_bytes': 12 * GIB, 'minimum_available_ram_bytes': 2 * GIB, 'load_compile_seconds': 600, 'overall_seconds': 1200},
+        'limits': {'rss_bytes': 12 * GIB, 'minimum_available_ram_bytes': 2 * GIB,
+                   'load_compile_seconds': 600, 'inference_seconds': 600, 'overall_seconds': 1200},
         'peak_rss_bytes_by_stage': {}, 'rss_measurement': 'sampled process-tree RSS every 0.2 seconds; shared pages may be counted more than once'}
     save('report.json', {**report, 'status': 'started'})
     started = time.monotonic()
     load_started = None
+    inference_started = None
     reason = None
     with (OUT / 'worker.log').open('w') as log:
-        process = subprocess.Popen([sys.executable, '-m', 'tools.experimental_sdxl_load', '--worker'], stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
+        command = [sys.executable, '-m', 'tools.experimental_sdxl_load', '--worker']
+        if one_image:
+            command.append('--one-image')
+        process = subprocess.Popen(command, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
         while process.poll() is None:
             try:
                 current = json.loads((OUT / 'stage.json').read_text())['stage']
@@ -144,25 +188,36 @@ def supervise():
                 current = 'startup'
             if current in ('load', 'compile') and load_started is None:
                 load_started = time.monotonic()
+            if current == 'inference' and inference_started is None:
+                inference_started = time.monotonic()
             try:
                 root = psutil.Process(process.pid)
                 rss = sum(p.memory_info().rss for p in [root] + root.children(recursive=True) if p.is_running())
             except psutil.NoSuchProcess:
                 rss = 0
             report['peak_rss_bytes_by_stage'][current] = max(report['peak_rss_bytes_by_stage'].get(current, 0), rss)
-            reason = limit_reason(rss, available_memory(), time.monotonic() - started, None if load_started is None else time.monotonic() - load_started)
+            now = time.monotonic()
+            reason = limit_reason(rss, available_memory(), now - started,
+                now - load_started if current in ('load', 'compile') and load_started is not None else None,
+                now - inference_started if current == 'inference' and inference_started is not None else None)
             if reason:
                 os.killpg(process.pid, signal.SIGKILL)
                 break
             time.sleep(0.2)
         code = process.wait()
-    report.update(status=reason or ('loaded_and_compiled' if code == 0 and (OUT / 'worker-result.json').exists() else 'worker_failed'), worker_exit_code=code, elapsed_seconds=time.monotonic() - started)
+    expected = 'image_generated_review_only' if one_image else 'loaded_and_compiled'
+    result = json.loads((OUT / 'worker-result.json').read_text()) if (OUT / 'worker-result.json').exists() else {}
+    success = code == 0 and result.get('status') == expected and (
+        not one_image or ((OUT / 'image-review.json').exists() and (OUT / 'sdxl-fixed-seed-42.png').exists()))
+    report.update(status=reason or (expected if success else 'worker_failed'),
+                  images_generated=result.get('images_generated', 0) if success else 0,
+                  worker_exit_code=code, elapsed_seconds=time.monotonic() - started)
     save('report.json', report)
     print(json.dumps(report, indent=2))
-    return 0 if report['status'] == 'loaded_and_compiled' else 1
+    return 0 if report['status'] == expected else 1
 
 if __name__ == '__main__':
     if '--worker' in sys.argv:
-        worker()
+        worker(one_image='--one-image' in sys.argv)
     else:
-        raise SystemExit(supervise())
+        raise SystemExit(supervise(one_image='--one-image' in sys.argv))
