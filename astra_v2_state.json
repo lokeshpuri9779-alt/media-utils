@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-28",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 3,
+  "attempts": 4,
   "confirmed_today": 3,
-  "last_attempt_at": "2026-10-27T22:13:19.690521+00:00",
+  "last_attempt_at": "2026-10-28T01:44:03.786256+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -7319,14 +7319,71 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "quality_skip",
+  "pending": {
+    "JboHttDz0p4": {
+      "content_id": "rayvan-gemini-9524a07e23865f5dd048",
+      "title": "The Canopy Pathfinders and the Root of Whispers",
+      "day": "2026-10-28",
+      "uploaded_at": "2026-10-28T01:44:05.198656+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "fa598932e6c6e75d04b89596658bea095586233767476bec29da25afb9689397",
+      "story_beats": [
+        {
+          "headline": "Discovery of the Chasm",
+          "speech": "Look closely at the fractured earth. Our usual path has vanished into this deep, yawning ravine overnight.",
+          "visual": "forest",
+          "label": "Ravine Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Bramble points forward with a weathered walking stick at a wide, freshly torn chasm in a dense, mossy forest. Fern stands beside him, wearing a dark green hooded cloak and a worried expression, looking down into the shadowy depths where broken roots dangle.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Gathering Materials",
+          "speech": "We must collect long willow shoots for flexibility and sturdy oak branches to bear the heavy weight safely.",
+          "visual": "forest",
+          "label": "Material Collection",
+          "story_beat": "build",
+          "visual_prompt": "Bramble and Fern work together in a sunlit grove, pulling flexible green willow vines from a damp bank while holding heavy brown oak logs. Both characters wear leather aprons, their faces focused and determined under the emerald canopy.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Weaving the Span",
+          "speech": "Interlace the green shoots tightly around the oak beams to create a strong, flexible suspension line.",
+          "visual": "door",
+          "label": "Bridge Construction",
+          "story_beat": "mechanism",
+          "visual_prompt": "Fern expertly ties glowing green willow vines around a massive horizontal oak beam suspended over the chasm edge. Bramble holds the opposing end firmly, sweat on his brow, working amidst swirling autumn leaves and hanging moss.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Crossing",
+          "speech": "The bridge holds firm against the wind. Step carefully across together, and you will reach the sanctuary.",
+          "visual": "signal",
+          "label": "Successful Crossing",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramble raises a polished brass signal lantern high in his left hand, casting a warm golden glow across the completed wooden bridge. Fern guides smiling travelers safely across the span while green vines glow softly in the evening twilight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden ravine split the old migration trail, trapping travelers on the unstable western ledge.",
+      "decisive_choice": "Combine flexible willow vines with heavy oak beams instead of waiting days for structural timber.",
+      "resolution": "The newly forged bridge securely holds the travelers, restoring the vital passage through the ancient timberlands.",
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-28T00:51:58.267243+00:00",
+  "last_preflight_at": "2026-10-28T01:33:57.173831+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-28T00:53:17.702367+00:00",
+    "at": "2026-10-28T01:44:05.666437+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -15402,13 +15459,67 @@
       "resolution": "The turbine generates sufficient current to power the lanterns, saving the festival from total darkness.",
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-9524a07e23865f5dd048": {
+      "at": "2026-10-28T01:44:03.786238+00:00",
+      "title": "The Canopy Pathfinders and the Root of Whispers",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "fa598932e6c6e75d04b89596658bea095586233767476bec29da25afb9689397",
+      "story_beats": [
+        {
+          "headline": "Discovery of the Chasm",
+          "speech": "Look closely at the fractured earth. Our usual path has vanished into this deep, yawning ravine overnight.",
+          "visual": "forest",
+          "label": "Ravine Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Bramble points forward with a weathered walking stick at a wide, freshly torn chasm in a dense, mossy forest. Fern stands beside him, wearing a dark green hooded cloak and a worried expression, looking down into the shadowy depths where broken roots dangle.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Gathering Materials",
+          "speech": "We must collect long willow shoots for flexibility and sturdy oak branches to bear the heavy weight safely.",
+          "visual": "forest",
+          "label": "Material Collection",
+          "story_beat": "build",
+          "visual_prompt": "Bramble and Fern work together in a sunlit grove, pulling flexible green willow vines from a damp bank while holding heavy brown oak logs. Both characters wear leather aprons, their faces focused and determined under the emerald canopy.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Weaving the Span",
+          "speech": "Interlace the green shoots tightly around the oak beams to create a strong, flexible suspension line.",
+          "visual": "door",
+          "label": "Bridge Construction",
+          "story_beat": "mechanism",
+          "visual_prompt": "Fern expertly ties glowing green willow vines around a massive horizontal oak beam suspended over the chasm edge. Bramble holds the opposing end firmly, sweat on his brow, working amidst swirling autumn leaves and hanging moss.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Crossing",
+          "speech": "The bridge holds firm against the wind. Step carefully across together, and you will reach the sanctuary.",
+          "visual": "signal",
+          "label": "Successful Crossing",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramble raises a polished brass signal lantern high in his left hand, casting a warm golden glow across the completed wooden bridge. Fern guides smiling travelers safely across the span while green vines glow softly in the evening twilight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden ravine split the old migration trail, trapping travelers on the unstable western ledge.",
+      "decisive_choice": "Combine flexible willow vines with heavy oak beams instead of waiting days for structural timber.",
+      "resolution": "The newly forged bridge securely holds the travelers, restoring the vital passage through the ancient timberlands.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-28T00:53:17.702302+00:00",
-    "publication_outcome": "quality_skip",
-    "publication_reason": "no_approved_original_story_available",
-    "character_memory": "not_reported",
+    "at": "2026-10-28T01:44:05.666374+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -15416,106 +15527,57 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-28T00:53:17.702357+00:00",
+    "at": "2026-10-28T01:44:05.666427+00:00",
     "history_file_present": true,
-    "publication_outcome": "quality_skip",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-28T00:52:24.404215+00:00",
-    "outcome": "quality_skip",
-    "reason": "no_approved_original_story_available",
-    "content_id": "",
-    "video_url": "",
-    "story_selection": {
-      "considered": 122,
-      "not_ready": 64,
-      "policy_rejected": {
-        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
-        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
-        "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
-        "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
-        "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
-        "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
-        "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6,
-        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
-        "not_production_ready": 3
-      },
-      "already_seen": 0,
-      "duration_rejected": 0,
-      "render_qa_rejected": 0,
-      "render_exception": {},
-      "approved": 0,
-      "exhausted": true,
-      "rejection_total": 122,
-      "next_action": "replenish_approved_story_supply"
-    }
+    "at": "2026-10-28T01:34:24.339961+00:00",
+    "outcome": "processing",
+    "reason": "",
+    "content_id": "rayvan-gemini-9524a07e23865f5dd048",
+    "video_url": "https://www.youtube.com/watch?v=JboHttDz0p4",
+    "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-28T00:53:17.702058+00:00",
+    "at": "2026-10-28T01:44:05.666150+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "quality_skip",
-    "reason": "no_approved_original_story_available",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-28T00:53:17.702296+00:00",
+    "at": "2026-10-28T01:44:05.666368+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 0,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3,
-          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
-          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
-          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
-          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
-          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
-        },
-        "seen": 34,
-        "total": 156
-      },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 156,
+        "before": 157,
         "fingerprint": 0,
         "id": 34,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 122,
+        "remaining": 123,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 122,
-        "remaining": 0
+        "pool": 123,
+        "remaining": 1
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
-        "approved": 0,
-        "considered": 122,
+        "approved": 1,
+        "considered": 1,
         "duration_rejected": 0,
-        "not_ready": 64,
-        "policy_rejected": {
-          "not_production_ready": 3,
-          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
-          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
-          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
-          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
-          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
-        },
+        "not_ready": 0,
+        "policy_rejected": {},
         "render_exception": {},
         "render_qa_rejected": 0
       }
