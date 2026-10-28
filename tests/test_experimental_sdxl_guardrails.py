@@ -29,9 +29,9 @@ class SDXLOneImageGuardrailTests(unittest.TestCase):
         self.assertEqual(sdxl.limit_reason(12 * gib, 5 * gib, 1, 1), "rss_limit")
         self.assertEqual(sdxl.limit_reason(1 * gib, 1 * gib, 1, 1), "available_ram_limit")
         self.assertEqual(sdxl.limit_reason(1 * gib, 5 * gib, 1, 600), "load_compile_timeout")
-        self.assertEqual(sdxl.limit_reason(1 * gib, 5 * gib, 1, None, 900), "inference_timeout")
+        self.assertEqual(sdxl.limit_reason(1 * gib, 5 * gib, 1, None, 600), "inference_timeout")
         self.assertEqual(sdxl.limit_reason(1 * gib, 5 * gib, 1200, None, None), "overall_timeout")
-        self.assertIsNone(sdxl.limit_reason(1 * gib, 5 * gib, 899, None, 899))
+        self.assertIsNone(sdxl.limit_reason(1 * gib, 5 * gib, 599, None, 599))
 
     def test_review_metadata_never_implies_approval(self):
         source = inspect.getsource(sdxl.worker)
