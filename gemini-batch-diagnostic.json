@@ -1,25 +1,26 @@
 {
-  "observed_at": "2026-10-28T13:06:55.042382+00:00",
-  "generated": 18,
+  "observed_at": "2026-10-28T18:58:00.673428+00:00",
+  "generated": 19,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 10,
-      "reason": "ValueError"
-    },
-    {
-      "index": 11,
+      "index": 13,
       "reason": "ValueError"
     }
   ],
-  "reviewed": 18,
-  "approved": 1,
+  "reviewed": 19,
+  "approved": 0,
   "review_issues": [
-    "The central conflict, decisive choice, and resolution closely mimic the structural pattern, comedic tone, and specific narrative beats of the previously published 'Percival's Polka-Dot Produce-Polisher and the Bazaar Blooper', substituting only a malfunctioning pickle-press for a fruit-polishing machine.",
+    "The candidate story 'The Otter and the Fading Trench' shares a very similar structural and thematic premise with 'The Octopus Cartographer and /maren and the brass buoy of whispering waves' and other aquatic environmental problem-solving stories in the comparison history, focusing on an animal protagonist repairing a failing underwater natural system (reef/coral/trench) through a mechanical intervention (valve/stream/current redirection).",
+    "Uncertainty regarding absolute uniqueness of the narrative pattern within the comparison dataset.",
     "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction",
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction",
+    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event"
   ],
   "approval_pair_present": true,
