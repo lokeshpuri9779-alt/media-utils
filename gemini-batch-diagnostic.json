@@ -1,30 +1,23 @@
 {
-  "observed_at": "2026-10-27T18:53:03.787160+00:00",
-  "generated": 18,
+  "observed_at": "2026-10-28T01:07:18.944375+00:00",
+  "generated": 20,
   "requested": 20,
-  "generation_failures": [
-    {
-      "index": 6,
-      "reason": "ValueError"
-    },
-    {
-      "index": 15,
-      "reason": "ValueError"
-    }
-  ],
-  "reviewed": 18,
+  "generation_failures": [],
+  "reviewed": 20,
   "approved": 1,
   "review_issues": [
-    "The candidate story features a stranded climber trapped in a mountain environment, a rescue mission involving a rope descent down a cliff face, and a rescue hoist resolution, which closely duplicates the causal mechanisms, setting, and resolution of 'The Ranger and the Frostbound Crevasse' in the comparison history.",
-    "The plot fingerprint and central conflict lack sufficient originality when compared to recently published premises within the provided dataset.",
+    "The candidate story 'Orla's Tidal Organ and the Seaside Symphony' shares an identical narrative structure, central conflict, and thematic premise with recently published works in the comparison history, specifically 'The Tidal Weaver and the Salt-Crusted Spire' and 'Juno's Tidal Turbine and the Saltwater Surge'.",
+    "The candidate story heavily replicates the premise, central conflict, and resolution of the recently published comparison story 'The Ranger and the Frostbound Crevasse'. Both involve a stranded climber/individual trapped in an ice cave or crevasse during a severe mountain storm/blizzard, resolved by a rescue from the hazardous drop.",
+    "The causal mechanism and decisive choice closely mirror prior submissions in tone and structural pattern, failing the originality threshold for distinct storytelling elements.",
+    "The central conflict, decisive choice, and resolution closely duplicate a recently published premise in the comparison history ('The Glaciologist and the Crevasse Beacon', which involves weighing precious research core samples against survival during a sudden blizzard by releasing a sled harness/drill cores to secure a rescue hoist).",
+    "The premise of a coastal technician improvising with organic or makeshift marine materials (kelp valves, water pressure) to save a community festival event from an imminent tidal threat is overly repetitive and lacks sufficient originality when compared to the existing database of stories.",
+    "The premise, character dynamic of an animal pair overcoming a natural barrier via a sacrifice/improvised bridge, and resolution heavily overlap with recent publication examples such as 'The Badger And The Weeping Root' and similar animal-survival microfictions.",
     "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
-    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event"
+    "publication_renderer_incompatible: shot 4: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction"
   ],
   "approval_pair_present": true,
   "model_access": {
