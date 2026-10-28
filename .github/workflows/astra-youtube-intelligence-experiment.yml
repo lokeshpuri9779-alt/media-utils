@@ -1,0 +1,44 @@
+name: ASTRA YouTube Intelligence Experiment
+on:
+  pull_request:
+    paths:
+      - 'experiments/youtube_agent/**'
+      - '.github/workflows/astra-youtube-intelligence-experiment.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile imported utilities
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          root=Path('experiments/youtube_agent/skills')
+          files=sorted(root.glob('*/*.py'))
+          assert len(files)==6, f'Expected six utilities, found {len(files)}'
+          for p in files:
+              ast.parse(p.read_text(encoding='utf-8'), filename=str(p))
+              print('PASS', p)
+          skill_docs=sorted(root.glob('*/SKILL.md'))
+          assert len(skill_docs)==11, f'Expected eleven skills, found {len(skill_docs)}'
+          print('PASS: 11 skill docs')
+          PY
+      - name: Validate hook formula data and MIT license
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('experiments/youtube_agent')
+          hooks=json.loads((root/'skills/yt-script/hooks.json').read_text())
+          assert isinstance(hooks.get('hooks'),list) and len(hooks['hooks'])>0
+          assert 'MIT License' in (root/'LICENSE').read_text()
+          print('PASS: hook formulas and license')
+          PY
