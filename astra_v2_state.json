@@ -7514,11 +7514,11 @@
   "pending": {},
   "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-10-28T22:35:06.480742+00:00",
+  "last_preflight_at": "2026-10-28T22:59:16.953578+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-28T22:35:47.250130+00:00",
+    "at": "2026-10-28T23:00:16.587781+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -15779,7 +15779,7 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-28T22:35:47.250086+00:00",
+    "at": "2026-10-28T23:00:16.587704+00:00",
     "publication_outcome": "quality_skip",
     "publication_reason": "no_approved_original_story_available",
     "character_memory": "not_reported",
@@ -15790,13 +15790,13 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-28T22:35:47.250123+00:00",
+    "at": "2026-10-28T23:00:16.587767+00:00",
     "history_file_present": true,
     "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-28T22:35:23.421214+00:00",
+    "at": "2026-10-28T22:59:37.988225+00:00",
     "outcome": "quality_skip",
     "reason": "no_approved_original_story_available",
     "content_id": "",
@@ -15826,7 +15826,7 @@
     }
   },
   "last_workflow_result": {
-    "at": "2026-10-28T22:35:47.249888+00:00",
+    "at": "2026-10-28T23:00:16.587418+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -15838,7 +15838,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-28T22:35:47.250082+00:00",
+    "at": "2026-10-28T23:00:16.587697+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
