@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-28",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 5,
+  "attempts": 6,
   "confirmed_today": 5,
-  "last_attempt_at": "2026-10-28T06:02:47.914616+00:00",
+  "last_attempt_at": "2026-10-28T13:39:26.742037+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -7387,14 +7387,71 @@
       "genre": "current"
     }
   },
-  "pending": {},
-  "last_outcome": "quality_skip",
+  "pending": {
+    "Qkn0iyAcYIs": {
+      "content_id": "rayvan-gemini-2b8651e182f8b44a94f2",
+      "title": "The Ranger and the Amber Spore",
+      "day": "2026-10-28",
+      "uploaded_at": "2026-10-28T13:39:29.131055+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "9f12c9f92aba27b9dfcc6b419522ef2ffab645bea2a79ab7b22576d14f6cea9a",
+      "story_beats": [
+        {
+          "headline": "The Hidden Spore",
+          "speech": "We cannot cross this broken ravine alone without waking the sleeping guardians of the dark forest.",
+          "visual": "forest",
+          "label": "Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Tansy stands in a gloomy forest clearing holding a glowing amber spore in her trembling hands, illuminated by soft green moss, wearing a heavy leather traveler cloak with brass clasps, looking worried at the chasm.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Broken Mechanism",
+          "speech": "Hold this rope taut while I fix the rusted winch before the root bridge snaps completely.",
+          "visual": "signal",
+          "label": "Tension",
+          "story_beat": "build",
+          "visual_prompt": "Bram grips a frayed hemp rope near a mossy cliff edge, sending a distress signal flare into the misty sky, wearing a sturdy green tunic and leather boots, while metal gears click behind him.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Risky Leap",
+          "speech": "Catch this iron spike right now if you want us both to reach the other side safely.",
+          "visual": "door",
+          "label": "Leap",
+          "story_beat": "twist",
+          "visual_prompt": "Tansy mid-air throws a heavy iron climbing spike across a deep stone doorway archway in the cliff face toward Bram, her face determined, wearing a travel pack and mud-stained trousers.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Harbor",
+          "speech": "We made it across together, proving that teamwork is stronger than any ancient forest trial.",
+          "visual": "robot",
+          "label": "Success",
+          "story_beat": "payoff",
+          "visual_prompt": "Bram and Tansy stand smiling together next to a dormant stone forest guardian automaton, holding the amber spore high as golden sunlight breaks through the canopy above.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A falling branch trap blocks the only rope bridge across the deep ravine.",
+      "decisive_choice": "Tansy throws her last anchor spike to Bram instead of saving herself.",
+      "resolution": "Both successfully cross the chasm and restore the ancient seed vault.",
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-28T12:43:40.144445+00:00",
+  "last_preflight_at": "2026-10-28T13:30:24.113465+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-28T12:44:44.528784+00:00",
+    "at": "2026-10-28T13:39:29.623744+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -15534,13 +15591,67 @@
       "story_beats": [],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-2b8651e182f8b44a94f2": {
+      "at": "2026-10-28T13:39:26.742023+00:00",
+      "title": "The Ranger and the Amber Spore",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "9f12c9f92aba27b9dfcc6b419522ef2ffab645bea2a79ab7b22576d14f6cea9a",
+      "story_beats": [
+        {
+          "headline": "The Hidden Spore",
+          "speech": "We cannot cross this broken ravine alone without waking the sleeping guardians of the dark forest.",
+          "visual": "forest",
+          "label": "Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Tansy stands in a gloomy forest clearing holding a glowing amber spore in her trembling hands, illuminated by soft green moss, wearing a heavy leather traveler cloak with brass clasps, looking worried at the chasm.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Broken Mechanism",
+          "speech": "Hold this rope taut while I fix the rusted winch before the root bridge snaps completely.",
+          "visual": "signal",
+          "label": "Tension",
+          "story_beat": "build",
+          "visual_prompt": "Bram grips a frayed hemp rope near a mossy cliff edge, sending a distress signal flare into the misty sky, wearing a sturdy green tunic and leather boots, while metal gears click behind him.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Risky Leap",
+          "speech": "Catch this iron spike right now if you want us both to reach the other side safely.",
+          "visual": "door",
+          "label": "Leap",
+          "story_beat": "twist",
+          "visual_prompt": "Tansy mid-air throws a heavy iron climbing spike across a deep stone doorway archway in the cliff face toward Bram, her face determined, wearing a travel pack and mud-stained trousers.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Harbor",
+          "speech": "We made it across together, proving that teamwork is stronger than any ancient forest trial.",
+          "visual": "robot",
+          "label": "Success",
+          "story_beat": "payoff",
+          "visual_prompt": "Bram and Tansy stand smiling together next to a dormant stone forest guardian automaton, holding the amber spore high as golden sunlight breaks through the canopy above.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A falling branch trap blocks the only rope bridge across the deep ravine.",
+      "decisive_choice": "Tansy throws her last anchor spike to Bram instead of saving herself.",
+      "resolution": "Both successfully cross the chasm and restore the ancient seed vault.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-28T12:44:44.528698+00:00",
-    "publication_outcome": "quality_skip",
-    "publication_reason": "no_approved_original_story_available",
-    "character_memory": "not_reported",
+    "at": "2026-10-28T13:39:29.623680+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -15548,60 +15659,38 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-28T12:44:44.528769+00:00",
+    "at": "2026-10-28T13:39:29.623733+00:00",
     "history_file_present": true,
-    "publication_outcome": "quality_skip",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-28T12:44:05.883614+00:00",
-    "outcome": "quality_skip",
-    "reason": "no_approved_original_story_available",
-    "content_id": "",
-    "video_url": "",
-    "story_selection": {
-      "considered": 122,
-      "not_ready": 64,
-      "policy_rejected": {
-        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
-        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
-        "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
-        "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
-        "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
-        "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
-        "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6,
-        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
-        "not_production_ready": 3
-      },
-      "already_seen": 0,
-      "duration_rejected": 0,
-      "render_qa_rejected": 0,
-      "render_exception": {},
-      "approved": 0,
-      "exhausted": true,
-      "rejection_total": 122,
-      "next_action": "replenish_approved_story_supply"
-    }
+    "at": "2026-10-28T13:30:47.727234+00:00",
+    "outcome": "processing",
+    "reason": "",
+    "content_id": "rayvan-gemini-2b8651e182f8b44a94f2",
+    "video_url": "https://www.youtube.com/watch?v=Qkn0iyAcYIs",
+    "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-28T12:44:44.528403+00:00",
+    "at": "2026-10-28T13:39:29.623464+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "quality_skip",
-    "reason": "no_approved_original_story_available",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-28T12:44:44.528690+00:00",
+    "at": "2026-10-28T13:39:29.623674+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 0,
+        "eligible": 1,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3,
@@ -15615,39 +15704,29 @@
           "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
         },
         "seen": 34,
-        "total": 156
+        "total": 157
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 156,
+        "before": 157,
         "fingerprint": 0,
         "id": 34,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 122,
+        "remaining": 123,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 122,
-        "remaining": 0
+        "pool": 123,
+        "remaining": 1
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
-        "approved": 0,
-        "considered": 122,
+        "approved": 1,
+        "considered": 1,
         "duration_rejected": 0,
-        "not_ready": 64,
-        "policy_rejected": {
-          "not_production_ready": 3,
-          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
-          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
-          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
-          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
-          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
-        },
+        "not_ready": 0,
+        "policy_rejected": {},
         "render_exception": {},
         "render_qa_rejected": 0
       }
