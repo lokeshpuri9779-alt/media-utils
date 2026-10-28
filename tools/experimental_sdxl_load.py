@@ -161,7 +161,7 @@ def limit_reason(rss, available, elapsed, load_elapsed, inference_elapsed=None):
         return 'available_ram_limit'
     if load_elapsed is not None and load_elapsed >= 600:
         return 'load_compile_timeout'
-    if inference_elapsed is not None and inference_elapsed >= 900:
+    if inference_elapsed is not None and inference_elapsed >= 600:
         return 'inference_timeout'
     if elapsed >= 1200:
         return 'overall_timeout'
@@ -181,7 +181,7 @@ def supervise(one_image=False):
         'run_id': os.getenv('GITHUB_RUN_ID'), 'commit': os.getenv('GITHUB_SHA'),
         'initial_available_ram_bytes': available_memory(), 'initial_disk_free_bytes': shutil.disk_usage('/tmp').free,
         'limits': {'rss_bytes': 12 * GIB, 'minimum_available_ram_bytes': 2 * GIB,
-                   'load_compile_seconds': 600, 'inference_seconds': 900, 'overall_seconds': 1200},
+                   'load_compile_seconds': 600, 'inference_seconds': 600, 'overall_seconds': 1200},
         'peak_rss_bytes_by_stage': {}, 'rss_measurement': 'sampled process-tree RSS every 0.2 seconds; shared pages may be counted more than once'}
     save('report.json', {**report, 'status': 'started'})
     started = time.monotonic()
