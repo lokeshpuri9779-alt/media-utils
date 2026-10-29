@@ -21,8 +21,9 @@ def changed_files(start, end):
 
 def reconcile(baseline, remote):
     """Return new safe baseline; raise before rebase if histories or paths overlap."""
-    if git("status", "--porcelain"):
-        raise UnsafeStateAdvance("dirty_state_worktree")
+    if subprocess.run(["git", "diff", "--quiet"]).returncode or subprocess.run(
+            ["git", "diff", "--cached", "--quiet"]).returncode:
+        raise UnsafeStateAdvance("dirty_tracked_state_worktree")
     if subprocess.run(["git", "merge-base", "--is-ancestor", baseline, "HEAD"]).returncode:
         raise UnsafeStateAdvance("local_commit_not_based_on_baseline")
     if subprocess.run(["git", "merge-base", "--is-ancestor", baseline, remote]).returncode:
