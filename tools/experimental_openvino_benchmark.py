@@ -69,6 +69,8 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
     except Exception as exc:
         # No prompt, credentials, provider bodies or exception text in diagnostics.
         report["error_type"] = type(exc).__name__
+        if isinstance(exc, ValueError):
+            report["error_message"] = str(exc)[:500]
         report["error_stage"] = stage
         if isinstance(exc, AttributeError):
             report["missing_attribute"] = getattr(exc, "name", None)
