@@ -93,7 +93,7 @@ def worker(one_image=False):
     save('timings.json', timings)
     stage('compile')
     started = time.monotonic()
-    pipe.reshape(batch_size=1, height=512 if one_image else 1024, width=512 if one_image else 1024, num_images_per_prompt=1)
+    pipe.reshape(batch_size=1, height=1024, width=1024, num_images_per_prompt=1)
     pipe.compile()
     timings['compile_seconds'] = time.monotonic() - started
     save('timings.json', timings)
@@ -104,25 +104,45 @@ def worker(one_image=False):
         started = time.monotonic()
         import torch
         import numpy as np
-        noise = torch.randn((1, 4, 64, 64),
+        noise = torch.randn((1, 4, 128, 128),
             generator=torch.Generator(device='cpu').manual_seed(ONE_IMAGE_SEED),
             dtype=torch.float32)
+        size = (1024, 1024)
+        crop = (0, 0)
+        time_ids = pipe._get_add_time_ids(size, crop, size, dtype=torch.float32)
+        save('conditioning.json', {
+            'original_size': list(size), 'target_size': list(size),
+            'crops_coords_top_left': list(crop),
+            'time_ids': time_ids.tolist(),
+            'negative_time_ids': time_ids.tolist(),
+            'vae_scale_factor': pipe.vae_scale_factor,
+            'vae_scaling_factor': pipe.vae.config.scaling_factor,
+            'unet_sample_size': pipe.unet.config.sample_size,
+            'latent_shape': list(noise.shape),
+            'scheduler_init_noise_sigma': float(pipe.scheduler.init_noise_sigma),
+            'approved': False, 'production_ready': False, 'published': False,
+            'manual_visual_review_required': True})
+        if pipe.vae_scale_factor != 8 or time_ids.tolist() != [[1024, 1024, 0, 0, 1024, 1024]]:
+            raise ValueError('Unexpected SDXL spatial conditioning')
         np.save(OUT / 'initial-latents.npy', noise.numpy(), allow_pickle=False)
         save('scheduler.json', dict(pipe.scheduler.config))
         save('request.json', {'seed': ONE_IMAGE_SEED, 'steps': ONE_IMAGE_STEPS,
             'prompt': ONE_IMAGE_PROMPT, 'negative_prompt': ONE_IMAGE_NEGATIVE_PROMPT,
-            'guidance_scale': 7.5, 'width': 512, 'height': 512,
+            'guidance_scale': 7.5, 'width': 1024, 'height': 1024,
             'scheduler': type(pipe.scheduler).__name__,
             'latent_sha256': hashlib.sha256(noise.numpy().tobytes()).hexdigest(),
             'approved': False, 'production_ready': False, 'published': False,
             'manual_visual_review_required': True})
         generated = pipe(
             ONE_IMAGE_PROMPT, negative_prompt=ONE_IMAGE_NEGATIVE_PROMPT,
-            height=512, width=512, num_inference_steps=ONE_IMAGE_STEPS,
+            height=1024, width=1024, num_inference_steps=ONE_IMAGE_STEPS,
             guidance_scale=7.5,
+            original_size=size, target_size=size, crops_coords_top_left=crop,
+            negative_original_size=size, negative_target_size=size,
+            negative_crops_coords_top_left=crop,
             latents=noise, output_type='pil')
-        if len(generated.images) != 1 or generated.images[0].size != (512, 512):
-            raise ValueError('Expected exactly one 512x512 diagnostic image')
+        if len(generated.images) != 1 or generated.images[0].size != (1024, 1024):
+            raise ValueError('Expected exactly one 1024x1024 diagnostic image')
         location = OUT / 'sdxl-fixed-seed-42.png'
         generated.images[0].save(location, format='PNG')
         timings['inference_seconds'] = time.monotonic() - started
@@ -131,7 +151,7 @@ def worker(one_image=False):
             'model': MODEL, 'revision': REVISION, 'seed': ONE_IMAGE_SEED,
             'steps': ONE_IMAGE_STEPS, 'prompt': ONE_IMAGE_PROMPT,
             'negative_prompt': ONE_IMAGE_NEGATIVE_PROMPT,
-            'width': 512, 'height': 512,
+            'width': 1024, 'height': 1024,
             'sha256': hashlib.sha256(location.read_bytes()).hexdigest(),
             'file': location.name, 'approved': False, 'production_ready': False,
             'published': False, 'semantic_quality': 'not_verified',
@@ -140,7 +160,7 @@ def worker(one_image=False):
         result_status = 'image_generated_review_only'
         images_generated = 1
     save('worker-result.json', {'status': result_status, 'ov_config': config,
-        'shape': {'batch': 1, 'height': 512 if one_image else 1024, 'width': 512 if one_image else 1024},
+        'shape': {'batch': 1, 'height': 1024, 'width': 1024},
         'packages': {p: importlib.metadata.version(p) for p in ('openvino', 'optimum-intel', 'diffusers', 'transformers', 'torch', 'psutil')},
         'images_generated': images_generated})
 
@@ -161,7 +181,7 @@ def limit_reason(rss, available, elapsed, load_elapsed, inference_elapsed=None):
         return 'available_ram_limit'
     if load_elapsed is not None and load_elapsed >= 600:
         return 'load_compile_timeout'
-    if inference_elapsed is not None and inference_elapsed >= 600:
+    if inference_elapsed is not None and inference_elapsed >= 900:
         return 'inference_timeout'
     if elapsed >= 1200:
         return 'overall_timeout'
@@ -181,7 +201,7 @@ def supervise(one_image=False):
         'run_id': os.getenv('GITHUB_RUN_ID'), 'commit': os.getenv('GITHUB_SHA'),
         'initial_available_ram_bytes': available_memory(), 'initial_disk_free_bytes': shutil.disk_usage('/tmp').free,
         'limits': {'rss_bytes': 12 * GIB, 'minimum_available_ram_bytes': 2 * GIB,
-                   'load_compile_seconds': 600, 'inference_seconds': 600, 'overall_seconds': 1200},
+                   'load_compile_seconds': 600, 'inference_seconds': 900, 'overall_seconds': 1200},
         'peak_rss_bytes_by_stage': {}, 'rss_measurement': 'sampled process-tree RSS every 0.2 seconds; shared pages may be counted more than once'}
     save('report.json', {**report, 'status': 'started'})
     started = time.monotonic()

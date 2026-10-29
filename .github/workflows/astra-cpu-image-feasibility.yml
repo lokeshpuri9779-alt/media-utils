@@ -7,7 +7,7 @@ on:
         required: true
         type: string
       sdxl_one_image:
-        description: 'One 512x512 fixed-seed 20-step SDXL INT8 CPU diagnostic; review only, not production quality'
+        description: 'One 1024x1024 fixed-seed 20-step SDXL INT8 CPU diagnostic; review only, not production quality'
         type: boolean
         default: false
       sdxl_load:
@@ -78,7 +78,7 @@ jobs:
   sdxl-one-image:
     if: inputs.confirm_cpu_benchmark == 'BENCHMARK' && inputs.sdxl_one_image
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 40
     env:
       ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
       HF_HUB_DISABLE_TELEMETRY: '1'
@@ -88,6 +88,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install pinned CPU runtime
+        timeout-minutes: 15
         run: |
           python -m pip install torch==2.14.1 torchvision==0.29.1 --index-url https://download.pytorch.org/whl/cpu
           python -m pip install pillow==11.3.0 optimum==2.3.0 optimum-intel==2.2.0 openvino==2026.4.1 openvino-tokenizers==2026.4.1.0 diffusers==0.39.0 transformers==4.57.6 numpy==2.4.6 huggingface_hub==0.36.2 psutil==7.0.0
