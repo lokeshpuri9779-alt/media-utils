@@ -34,6 +34,8 @@ def analyze(payload):
         if not isinstance(thumbnail, str):
             thumbnail = None
         result["package"] = module.check(title, thumbnail)
+        result["package"]["quality_decision_allowed"] = False
+        result["package"]["interpretation"] = "unvalidated_heuristic_not_quality_gate"
     return result
 
 def main():
