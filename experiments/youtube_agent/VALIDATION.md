@@ -23,10 +23,11 @@ and **not** a predictor of viewer retention or a story-quality gate.
 1. Six upstream tools parse and complete basic CLI probes.
 2. Eleven skill instruction files, hook formulas and MIT license are present.
 3. Adapter tests cover missing/invalid data and representative story metadata.
-4. A separate future fixture-based test must confirm compatibility with real ASTRA
-   Story Factory output; these illustrative fields are not yet a confirmed schema.
-5. Only after real metadata compatibility is demonstrated may an optional diagnostic
-   workflow consume *copies* of story JSON, without writing back or influencing approval.
+4. The durable, non-sensitive production-shape fixture must pass regression tests.
+   Original Story Factory rewrite-queue compatibility was separately confirmed in
+   experimental CI run 40755343885 (3 records); this is not semantic validation.
+5. Optional manual artifact analysis may consume *copies* of story JSON only,
+   without writing back or influencing approval.
 6. Production integration requires explicit review of quality, privacy, cost and
    publisher boundaries; merging this experiment alone does not authorize it.
 
@@ -35,14 +36,14 @@ No live Story Factory invocation, retention analytics API connection, auto-rewri
 automatic upload, or merge is included in this experiment.
 
 ## Production artifact evidence (2026-10-25)
-GitHub Actions run 40236568415 produced `astra-story-factory-diagnostics-40236568415-1` (artifact ID 12614902384). Its rewrite queue contains three `rewrites[].story` objects with top-level `hook` and `title` and no thumbnail text. A schema-shaped regression test exists; it does **not** replace running the analyzer against the original ZIP artifact. Short fiction labels below nine words are marked `limited_short_fiction_label`, with `quality_decision_allowed=false`.
+GitHub Actions run 40236568415 produced `astra-story-factory-diagnostics-40236568415-1` (artifact ID 12614902384). Its rewrite queue contains three `rewrites[].story` objects with top-level `hook` and `title` and no thumbnail text. A schema-shaped regression test runs on every PR. The original ZIP was separately analyzed successfully in experimental CI run 40755343885; this does not validate visual or semantic quality. Short fiction labels below nine words are marked `limited_short_fiction_label`, with `quality_decision_allowed=false`.
 
-The imported score should not be wired into editorial gates. The next meaningful validation is a reproducible artifact-consumption test, not additional synthetic score thresholds.
+The imported score should not be wired into editorial gates. The original-artifact consumption test has passed; subsequent work should focus on human review and evidence-based applicability, not additional synthetic score thresholds.
 
 ## Security and scope review (2026-10-29)
 - Imported utilities run under an isolated `experiments/youtube_agent/` path; they are **not** connected to publishing, renderer, or production editorial gates.
 - The experimental Actions job uses `contents: read` and `actions: read`. The latter is necessary to retrieve the original same-repository Story Factory artifact. No write permissions, credentials for external providers, or paid APIs are required.
-- The original-artifact regression test uses a pinned artifact ID (`12614902384`), which is time-limited by GitHub artifact retention. Once expired, the test will fail; replace it with a reproducible non-sensitive fixture or a deliberately selected retained artifact before merging. Do not silently skip validation.
+- Routine PR regression now uses a durable non-sensitive production-shape fixture. The time-limited original artifact (`12614902384`) is accessed only on explicit workflow dispatch with an artifact ID; an expired or unavailable artifact causes that optional manual run to fail transparently, without breaking routine PR CI.
 - The analyzer is not a semantic quality validator. In particular, short fiction labels must not be interpreted as spoken 9–24-word hooks, and score bands must never control publishing.
 - Imported utility CLI tools should be treated as experimental; the ASTRA wrapper uses their functions without granting them side-effectful production access.
 - PR review and merge are separate decisions; green CI does not substitute for reviewer approval.
