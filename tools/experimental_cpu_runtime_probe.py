@@ -24,6 +24,22 @@ def cpu_model():
     return platform.processor() or "unknown"
 
 
+
+def effective_cpu_quota(v2, v1_quota, v1_period):
+    """Return a numeric CPU ceiling, or None when unlimited/unavailable."""
+    try:
+        if v2:
+            quota, period = v2.split()
+            if quota == "max":
+                return None
+            quota, period = int(quota), int(period)
+        else:
+            quota, period = int(v1_quota), int(v1_period)
+        return round(quota / period, 3) if quota > 0 and period > 0 else None
+    except (ValueError, TypeError):
+        return None
+
+
 def collect():
     affinity = sorted(os.sched_getaffinity(0)) if hasattr(os, "sched_getaffinity") else None
     quota = read("/sys/fs/cgroup/cpu.max")
@@ -43,6 +59,7 @@ def collect():
         "cgroup_v2_cpu_max": quota,
         "cgroup_v1_cpu_quota_us": cpu_quota,
         "cgroup_v1_cpu_period_us": cpu_period,
+        "effective_cgroup_cpu_quota": effective_cpu_quota(quota, cpu_quota, cpu_period),
         "openvino_env": {k: v for k, v in os.environ.items()
                          if k in ("OMP_NUM_THREADS", "OPENVINO_NUM_THREADS", "OV_NUM_THREADS",
                                   "KMP_AFFINITY", "KMP_BLOCKTIME", "OMP_PROC_BIND")},
