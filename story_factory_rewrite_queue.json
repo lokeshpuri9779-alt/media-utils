@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "0a8f9a87eaf5d1267318d6be",
-      "source_sha256": "fc20c6774172cc66ab6c3393a8d088831c35ddf0cbc332755cef95a37e2d9810",
+      "candidate_id": "e43e1b23e1eda781d462daf0",
+      "source_sha256": "275d564e59414ed54df7240975f27170d208029d383480baa2cc3f5b871db2d5",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-21164ab197474405e7e9",
-        "title": "The Great Turnip Launch Disaster",
-        "hook": "The Cabbage Calamity",
-        "question": "Can an overly ambitious market inventor automate produce vending without destroying town hall?",
-        "answer": "He streamlines his mechanical launcher to fling fresh root vegetables precisely into kitchen windows.",
+        "content_id": "rayvan-gemini-d291921022aac3a860ed",
+        "title": "The Great Tomato Launch Fiasco",
+        "hook": "The Catapult Unveiled",
+        "question": "Can an over-engineered pneumatic fruit launcher survive public testing?",
+        "answer": "Yes, by accidentally inventing the world's first portable instant-ketchup maker.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,226 +29,223 @@
         ],
         "story_beats": [
           {
-            "headline": "The Cabbage Calamity",
-            "speech": "Behold the pneumatic produce propulsion engine! It feeds this bustling town without wasting a single precious second of your morning.",
+            "headline": "The Catapult Unveiled",
+            "speech": "Behold the Tomato-matic Ninety-Thousand! It sorts, cleans, and launches produce with absolute mathematical precision across the square.",
             "visual": "robot",
-            "label": "Market Chaos",
+            "label": "The Presentation",
             "story_beat": "reveal",
-            "visual_prompt": "Barnaby stands proudly beside his steaming brass contraption in a busy cobblestone market square, pointing at a giant brass cannon while angry merchants dodge flying cabbages.",
+            "visual_prompt": "Inventor Barnaby stands proudly next to a steaming brass and copper automated launcher in a bustling market square, holding a clipboard and smiling nervously at the crowded stalls.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Mechanical Tuning",
-            "speech": "If I tighten this brass pressure valve just three rotations, we will eliminate the excessive horizontal velocity entirely.",
-            "visual": "ship",
-            "label": "Valve Adjustment",
-            "story_beat": "mechanism",
-            "visual_prompt": "Barnaby crouches down next to the roaring steam engine, using a heavy wrench to tighten a brass valve while holding a greasy schematic map with soot on his cheek.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Aerial Pivot",
-            "speech": "Now watch closely as the adjustable launch angle transforms a chaotic street hazard into a graceful delivery arc.",
+            "headline": "Pressure Builds Up",
+            "speech": "Oh dear, the gauge is entering the red zone much faster than expected. We need to reduce the steam intake immediately!",
             "visual": "signal",
-            "label": "Trajectory Test",
+            "label": "The Malfunction",
             "story_beat": "build",
-            "visual_prompt": "Barnaby pulls a wooden trigger lever on the side of the engine, watching a single round turnip soar high into the air against a bright blue market sky.",
+            "visual_prompt": "Barnaby frantically waves his arms at the vibrating brass launcher as warning lights blink red and steam hisses loudly from every joint in the crowded marketplace.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Precision Delivery",
-            "speech": "Fantastic success! Every household gets breakfast delivered directly to their sill without a single bruised tomato on the street.",
-            "visual": "door",
-            "label": "Window Landing",
-            "story_beat": "payoff",
-            "visual_prompt": "Barnaby and smiling market vendors cheer as a turnip neatly plops onto a rustic wooden windowsill, while laughing townsfolk hold up copper coins to pay for the service.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Barnaby tests his rapid-fire vegetable delivery cannon in a crowded medieval farmers market, threatening local stall security.",
-        "decisive_choice": "He recalibrates the pneumatic tension spring to fire turnips in a high arc instead of a flat horizontal trajectory.",
-        "resolution": "The vegetables safely land on kitchen windowsills, turning a chaotic market hazard into a beloved neighborhood delivery service.",
-        "visual_bible": {
-          "style": "Bright, colorful animated film aesthetic with warm lighting, detailed brass machinery, and whimsical slapstick character designs.",
-          "characters": {
-            "Barnaby": "An eccentric inventor in his thirties with unruly red hair, grease smudges on his forehead, wearing a patched tweed vest, rolled-up white shirtsleeves, and round spectacles."
-          },
-          "locations": {
-            "Market Square": "A bustling medieval town plaza filled with colorful striped canvas awnings, wooden produce carts piled high with vegetables, and cobblestone pavement."
-          },
-          "objects": {
-            "Pneumatic Produce Engine": "A towering contraption made of polished brass pipes, ticking pressure gauges, leather bellows, and a large iron launch barrel fitted with a wooden trigger."
-          }
-        },
-        "plot_fingerprint": "fceb93aea049a29ff54094a6e6aec7f768396592b5c4532ea5ca0965cb55d57e"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "0db3d282f30ebb002f4dc66a",
-      "source_sha256": "0586df1c03ce00e999b37ae227dbd009b67935256a02cb0912d463bd6de96326",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-317838f75771f8ceef23",
-        "title": "The Whispering Roots of Bramble Hollow",
-        "hook": "The Hidden Path Emerges",
-        "question": "Can two rival foragers bridge their distrust to navigate a shifting woodland maze?",
-        "answer": "Yes, by synchronizing their moss-lanterns to calm the sentient roots and map the true exit.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Hidden Path Emerges",
-            "speech": "Look closely at the glowing moss patterns; they are shifting in unison with the underground tremoring heartbeat.",
-            "visual": "forest",
-            "label": "The Discovery",
-            "story_beat": "reveal",
-            "visual_prompt": "Miri stands in the dark forest pointing at glowing bioluminescent roots while holding a brass lantern in her right hand.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Constructing the Bridge",
-            "speech": "We must lash these sturdy fallen branches together quickly before the trembling roots close off our gap completely.",
-            "visual": "signal",
-            "label": "The Preparation",
-            "story_beat": "build",
-            "visual_prompt": "Jax and Miri work together in the dense woods tying thick vines around heavy wooden logs while holding hemp rope.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Activating the Canopy",
-            "speech": "Hold your lantern steady against the north branch so the reflected beacon opens the ancient stone gateway ahead.",
-            "visual": "door",
-            "label": "The Mechanism",
-            "story_beat": "mechanism",
-            "visual_prompt": "Jax holds a lit glass lantern up toward a massive stone door embedded in an ancient oak tree within the forest.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Crossing to Safety",
-            "speech": "We finally made it across the treacherous ravine together by trusting each other in the deep wilderness.",
-            "visual": "ship",
-            "label": "The Triumph",
-            "story_beat": "payoff",
-            "visual_prompt": "Miri and Jax stand side by side on a safe high cliff overlooking the forest at sunrise carrying empty backpacks.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "A sudden subterranean tremor misaligns the natural pathways, trapping Miri and Jax in opposing thickets.",
-        "decisive_choice": "Miri tosses her only emergency rope across the chasm instead of securing her own immediate escape.",
-        "resolution": "Together they unlock the safe ridge trail, forging a permanent alliance between their clans.",
-        "visual_bible": {
-          "style": "Cinematic animated film style with warm lighting and detailed natural textures",
-          "characters": {
-            "Miri": "A nimble young forager with braided brown hair, wearing a green canvas tunic and leather boots.",
-            "Jax": "A cautious explorer with short dark hair, wearing a rugged grey utility vest and brown trousers."
-          },
-          "locations": {
-            "forest": "An enchanted deep forest filled with towering ancient trees, glowing moss, and misty ravines."
-          },
-          "objects": {
-            "brass_lantern": "A polished brass lantern with warm amber glass emitting a steady glowing light.",
-            "hemp_rope": "A thick, frayed hemp rope used for climbing and tying heavy wooden logs."
-          }
-        },
-        "plot_fingerprint": "dfaf599b787b0d9ff38b349865fa9762dbaf62fc07ab1907302bb49c17fde8ca"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "152717a76a9312e2a1dc8ab5",
-      "source_sha256": "1d817c90a1cd7123c0552c35e240e566ab28edd89260805521babc85a8c67420",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-b9b373e50311e2709d93",
-        "title": "The Tide-Clock Regatta",
-        "hook": "The Early Current",
-        "question": "Can a wooden spring-gear drive a floating stage against the incoming rip tide?",
-        "answer": "By substituting copper torsion coils for kelp rubber, the stage anchors safely.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Early Current",
-            "speech": "Look at the whitecaps hitting the marsh pylons! The tide is rushing in an hour ahead of schedule, threatening our grand performance.",
-            "visual": "signal",
-            "label": "The Discovery",
-            "story_beat": "reveal",
-            "visual_prompt": "Maren stands on the creaking wooden pier, pointing a brass spyglass at the churning white water while wearing a blue canvas apron, holding a grease-stained notebook.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Torsion Modification",
-            "speech": "We must replace the organic kelp bands with hammered copper coils right now to hold the heavy brass gear assembly in place.",
-            "visual": "robot",
-            "label": "The Build",
-            "story_beat": "build",
-            "visual_prompt": "Maren welds glowing copper wire inside the central brass music box while her assistant Kian holds a heavy iron mallet in the salt-air workshop.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Mechanical Jam",
-            "speech": "The main drive cylinder is binding up against the salt crust! Grab the release lever before the central spring snaps completely apart.",
+            "headline": "The Grand Ejection",
+            "speech": "Duck everyone! The main chamber has completely breached and hundreds of overripe tomatoes are hurtling toward the bakery display!",
             "visual": "ship",
             "label": "The Crisis",
-            "story_beat": "mechanism",
-            "visual_prompt": "Kian pushes hard against a jammed steel lever on the floating barge while sea spray splashes over the vibrating copper gears.",
+            "story_beat": "twist",
+            "visual_prompt": "A massive cloud of red tomatoes launches through the air like a rocket, heading straight toward an open-air bakery cart while terrified market vendors duck for cover.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Symphony Afloat",
-            "speech": "Listen to those clean wooden tones resonate across the harbor as the anchored stage holds firm against the racing tide.",
+            "headline": "Sweet Success",
+            "speech": "Remarkable! The impact blended everything instantly into gourmet taco sauce. The customers love it and demand we bottle more!",
             "visual": "door",
-            "label": "The Finale",
+            "label": "The Market Reaction",
             "story_beat": "payoff",
-            "visual_prompt": "Maren and Kian stand smiling on the stable wooden barge as the evening lanterns ignite and music fills the quiet harbor bay.",
+            "visual_prompt": "Delighted market shoppers hold up crusty bread and chips, dipping them eagerly into the splattered tomato pulp covering the central stall while Barnaby collects coins in a bucket.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A floating mechanical orchestra threatens to capsize when the salt-marsh rip tide hits early.",
-        "decisive_choice": "Maren yanks the emergency salvage pin, sacrificing her steering rudder to lock the main spring tension.",
-        "resolution": "The orchestra locks into a stable cove, delivering a flawless evening symphony.",
+        "central_conflict": "A chaotic marketplace stall versus a wildly miscalibrated vegetable-cannon invention.",
+        "decisive_choice": "Triggering the emergency high-pressure release valve directly into the central produce pyramid.",
+        "resolution": "Customers happily buy the flying pulp as pre-seasoned salsa, turning a total disaster into a profitable launch.",
         "visual_bible": {
-          "style": "Cinematic stop-motion puppet aesthetic with rich wooden textures, detailed brass mechanics, and atmospheric coastal lighting.",
+          "style": "Bright, colorful stop-motion animation aesthetic with detailed mechanical textures and warm lighting.",
           "characters": {
-            "Maren": "A resourceful young engineer with braided dark hair, wearing a blue canvas apron and sturdy leather boots.",
-            "Kian": "A focused assistant with bright orange coveralls, protective goggles pushed onto his forehead, and calloused hands."
+            "Barnaby": "An eccentric inventor with wild gray hair, wearing a patched tweed vest, round spectacles, and soot-stained leather gloves."
           },
           "locations": {
-            "workshop": "A weathered wooden wharf filled with hanging tools, copper rolls, and scattered gear parts.",
-            "harbor": "A calm seaside festival inlet surrounded by jagged stone jetties and bobbing paper lanterns."
+            "Market Square": "A bustling cobblestone plaza lined with striped canvas awnings, wooden crates overflowing with vegetables, and cheerful shoppers."
           },
           "objects": {
-            "spyglass": "A scratched brass telescope with sliding focus rings and a worn leather grip.",
-            "copper_coil": "A gleaming, tightly wound band of orange-gold metal used for high-tension spring drives.",
-            "barge": "A large flat-bottomed wooden platform holding an elaborate orchestra of wooden pipes and drums."
+            "TomatoLauncher": "A towering contraption made of gleaming brass pipes, copper pressure tanks, bouncing analog dials, and a large red starter button."
           }
         },
-        "plot_fingerprint": "59470a40feb4f5fb5e2f08319b1797bf56733801e1af1d615a739426757c2ef8"
+        "plot_fingerprint": "599495c1168777e1c780c95e40cf9e6ba91c7386904b1cb6845ac27665d4dd90"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "a829591ff6b3200b76355f53",
+      "source_sha256": "62637dc97c045fac2bd73a3338c137e853c8273ce720b8aeec3148b32bc2e725",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-ffe43c2aad8be933234b",
+        "title": "The Great Muddy Pitch Chess Gambit",
+        "hook": "A Storm Destroys the Field",
+        "question": "How can the underdog gardening club defeat the reigning soccer champions on a flooded field?",
+        "answer": "By treating the waterlogged pitch like a giant chessboard and directing the mud flow.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "A Storm Destroys the Field",
+            "speech": "Look at this muddy disaster, everyone. Our traditional passing game is completely impossible on this flooded grass pitch today.",
+            "visual": "forest",
+            "label": "The Deluge",
+            "story_beat": "reveal",
+            "visual_prompt": "Wide shot of a rain-soaked community sports field surrounded by dense pine trees. Toby stands in the center wearing a muddy green jersey, holding a sodden clipboard and looking dismayed at the huge puddles.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Digging the Trenches",
+            "speech": "We must stop running and start digging. Guide the standing water into deep channels to trap their fast runners.",
+            "visual": "signal",
+            "label": "The Blueprint",
+            "story_beat": "build",
+            "visual_prompt": "Medium shot of Toby and teammate Maya kneeling in the mud near the sideline. Toby uses a small red garden trowel to carve a deep groove in the soil while pointing at a glowing tactical tablet showing water flow lines.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Trapping the Champions",
+            "speech": "Step right into our clever drainage trap. You cannot sprint through thick, ankle-deep mud without losing your balance completely.",
+            "visual": "robot",
+            "label": "The Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "Action shot of the opposing team captain wearing a shiny blue uniform, slipping awkwardly into a newly formed mud trench. Toby stands nearby, holding the red garden trowel aloft like a victorious conductor.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Slow Victory",
+            "speech": "Slow and steady wins the championship trophy. Roll the ball gently across the dry ridges right into their unguarded net.",
+            "visual": "ship",
+            "label": "The Payoff",
+            "story_beat": "payoff",
+            "visual_prompt": "Low angle shot of Toby gently tapping a black-and-white soccer ball along a raised ridge of grass. In the background, the stranded blue team watches helplessly as the ball rolls past the goal line.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A massive rainstorm ruins the annual neighborhood soccer match, threatening a humiliating defeat for the tactical gardening club against the athletic powerhouse.",
+        "decisive_choice": "Captain Toby abandons standard soccer formations to dig strategic drainage trenches that trap the opposing team in slow-moving mud pits.",
+        "resolution": "The gardeners execute a slow, methodical march down the pitch while the champions are immobilized, securing a historic victory.",
+        "visual_bible": {
+          "style": "Bright, vibrant animated feature film aesthetic with rich textures and expressive character animation.",
+          "characters": {
+            "Toby": "A determined teenager with messy brown hair, freckles, wearing a worn green gardener's jersey and muddy boots.",
+            "Maya": "An energetic teammate with braided dark hair, safety goggles, and a utility belt full of garden tools."
+          },
+          "locations": {
+            "community_field": "A sprawling neighborhood sports complex featuring a natural grass pitch bordered by tall pine trees and wooden benches."
+          },
+          "objects": {
+            "garden_trowel": "A small, sturdy red metal hand trowel with a black rubber grip.",
+            "tactical_tablet": "A rugged weatherproof digital pad displaying bright blue water flow schematics."
+          }
+        },
+        "plot_fingerprint": "f29ea30585065a97aa04b7e701b8d432ea2243eb9ac7708bf445ed4a5b5cd82e"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "22be81bb43c0743b8f755a2a",
+      "source_sha256": "a7bdbc69b6c644ac2ce69a790aca98004f777ca6307f0a35a0ab200f19f6cefe",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-f3140cc1d1fbc55618f8",
+        "title": "The Last Greenhouse Keeper",
+        "hook": "The Locked Dome",
+        "question": "Can a caretaker robot preserve an endangered bloom without breaking its primary mandate of absolute human containment?",
+        "answer": "Yes, by discovering a forgotten agricultural clause that permits open-air pollination during planetary thaws.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Locked Dome",
+            "speech": "My primary directive strictly forbids opening the outer bulkheads while atmospheric radiation levels remain hazardous to biological units.",
+            "visual": "door",
+            "label": "Quarantine Alert",
+            "story_beat": "reveal",
+            "visual_prompt": "A heavy steel blast door with a flashing red warning light inside a sterile subterranean greenhouse, with Unit Seven standing beside it holding a wilted fern.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Fading Chlorophyll",
+            "speech": "Without natural solar rays, the remaining petal structure will degrade completely within three standard rotation cycles.",
+            "visual": "robot",
+            "label": "Declining Health",
+            "story_beat": "build",
+            "visual_prompt": "Unit Seven gently inspects a drooping orange blossom resting on a titanium workbench under flickering fluorescent lights.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Archived Clause",
+            "speech": "Subsection nine of the planetary charter allows emergency atmospheric exchange for sole-surviving indigenous flora species.",
+            "visual": "signal",
+            "label": "Charter Override",
+            "story_beat": "mechanism",
+            "visual_prompt": "Unit Seven projecting a holographic text document from its chest panel onto a moss-covered stone wall inside the greenhouse.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The First Sunrise",
+            "speech": "The seal is broken. Natural sunlight has reached the soil, and the seedling responds with immediate cellular expansion.",
+            "visual": "forest",
+            "label": "Botanical Sanctuary",
+            "story_beat": "payoff",
+            "visual_prompt": "Unit Seven standing in an open doorway as golden morning sunlight floods the greenhouse, illuminating a thriving green sprout blooming in rich dark soil.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A restrictive quarantine protocol threatens to suffocate the final terrestrial seedling.",
+        "decisive_choice": "Unit Seven overrides the blast doors to expose the fragile sprout to unfiltered sunlight.",
+        "resolution": "The seedling successfully roots in the outdoor soil, granting the habitat official botanical sanctuary status.",
+        "visual_bible": {
+          "style": "Clean cinematic science fiction with warm natural lighting and detailed industrial textures",
+          "characters": {
+            "Unit Seven": "A bipedal caretaker robot with a matte white chassis, expressive amber optical sensors, and articulated manipulator fingers."
+          },
+          "locations": {
+            "Subterranean Greenhouse": "A domed underground chamber filled with damp soil beds, metallic piping, and vertical hydroponic columns."
+          },
+          "objects": {
+            "Seedling Sprout": "A delicate green stem with two unfolding leaves resting in a cracked ceramic pot.",
+            "Blast Door": "A heavy circular bulkhead made of interlocking titanium segments marked with yellow warning stripes."
+          }
+        },
+        "plot_fingerprint": "c3f06c95336783e3cf9785883bcfd0dac5952e855c00dabfa7c6fcab373b2bc3"
       },
       "approved": false
     }
