@@ -78,6 +78,25 @@ class StoryArtTests(unittest.TestCase):
         self.assertIn("blue scarf", prompts[1])
         self.assertIn("no text", prompts[0].lower())
 
+    def test_action_first_prompt_rejects_generic_scene_substitution(self):
+        item = story()
+        item["story_beats"] = [
+            {"speech": "The otter tightens a brass bolt.",
+             "visual_prompt": "Otter turns a wrench on the brass bolt."},
+            {"speech": "The otter rings the bell.",
+             "visual_prompt": "Otter pulls the rope and the brass bell rings."},
+        ]
+        prompts = [row["prompt"] for row in illustration_requests(item)]
+        for prompt, action in zip(prompts, [
+                "Otter turns a wrench on the brass bolt.",
+                "Otter pulls the rope and the brass bell rings."]):
+            self.assertIn("MAIN VISIBLE ACTION (must be clearly recognizable): " + action, prompt)
+            self.assertIn("Do not replace the action with a generic portrait", prompt)
+            self.assertIn("blue scarf", prompt)
+            self.assertLessEqual(len(prompt), 2048)
+        self.assertNotIn("pulls the rope", prompts[0])
+        self.assertNotIn("turns a wrench", prompts[1])
+
     def test_story_title_is_never_sent_to_image_provider(self):
         item = story()
         item["title"] = "GIANT PRINTED HEADLINE"

@@ -1,0 +1,39 @@
+name: ASTRA Offline Scene Prompt Preflight
+on:
+  pull_request:
+    paths:
+      - 'astra_v2/story_art_direction.py'
+      - 'astra_v2/scene_prompt_preflight.py'
+      - 'tests/test_scene_prompt_preflight.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: code
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: astra-state
+          path: state
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run offline prompt preflight tests
+        working-directory: code
+        run: python -m unittest discover -s tests -p test_scene_prompt_preflight.py -v
+      - name: Preflight pending scene prompts without image calls
+        working-directory: code
+        run: python -m astra_v2.scene_prompt_preflight --queue ../state/story_factory_rewrite_queue.json --output ../prompt-preflight.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: astra-offline-prompt-preflight
+          path: prompt-preflight.json
+          retention-days: 14
+          if-no-files-found: error
