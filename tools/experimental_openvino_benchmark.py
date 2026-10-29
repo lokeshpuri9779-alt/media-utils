@@ -30,26 +30,34 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
               "semantic_quality": "not_verified",
               "manual_visual_review_required": True}
     started = time.monotonic()
+    stage = "import_pipeline"
     try:
         from optimum.intel import OVStableDiffusionPipeline
+        stage = "import_pillow"
         from PIL import Image
+        stage = "model_load"
         load_started = time.monotonic()
         pipe = OVStableDiffusionPipeline.from_pretrained(
             model, export=profile == "export", compile=False, device="CPU")
         report["model_load_seconds"] = round(time.monotonic() - load_started, 2)
+        stage = "reshape_compile"
         compile_started = time.monotonic()
         pipe.reshape(batch_size=1, height=768, width=512, num_images_per_prompt=1)
         pipe.compile()
         report["reshape_compile_seconds"] = round(time.monotonic() - compile_started, 2)
+        stage = "inference"
         inference_started = time.monotonic()
         try:
             image = pipe(PROMPT, height=768, width=512,
                          num_inference_steps=steps).images[0]
         finally:
             report["inference_seconds"] = round(time.monotonic() - inference_started, 2)
+        stage = "validate_image"
         if not isinstance(image, Image.Image):
             raise ValueError("No PIL image returned")
+        stage = "save_image"
         image.save(output, format="PNG")
+        stage = "pixel_quality"
         from astra_v2.omniroute_image_assets import image_quality_report
         quality = image_quality_report(output.read_bytes(), "scene")
         report["quality"] = quality
@@ -61,6 +69,16 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
     except Exception as exc:
         # No prompt, credentials, provider bodies or exception text in diagnostics.
         report["error_type"] = type(exc).__name__
+        report["error_stage"] = stage
+        if isinstance(exc, AttributeError):
+            report["missing_attribute"] = getattr(exc, "name", None)
+        import traceback
+        frames = traceback.extract_tb(exc.__traceback__)
+        report["error_frames"] = [
+            {"module_file": Path(frame.filename).name,
+             "function": frame.name, "line": frame.lineno}
+            for frame in frames[-4:]
+        ]
     finally:
         report["elapsed_seconds"] = round(time.monotonic() - started, 2)
         report["peak_rss_kib"] = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
