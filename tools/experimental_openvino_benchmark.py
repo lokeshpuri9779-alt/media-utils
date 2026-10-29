@@ -43,11 +43,19 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
             load_options["load_in_8bit"] = False
         report["precision_hint"] = "f32"
         report["disable_auto_8bit"] = profile == "export"
+        load_started = time.monotonic()
         pipe = OVStableDiffusionPipeline.from_pretrained(model, **load_options)
+        report["model_load_seconds"] = round(time.monotonic() - load_started, 2)
+        compile_started = time.monotonic()
         pipe.reshape(batch_size=1, height=768, width=512, num_images_per_prompt=1)
         pipe.compile()
-        image = pipe(PROMPT, height=768, width=512,
-                     num_inference_steps=steps).images[0]
+        report["reshape_compile_seconds"] = round(time.monotonic() - compile_started, 2)
+        inference_started = time.monotonic()
+        try:
+            image = pipe(PROMPT, height=768, width=512,
+                         num_inference_steps=steps).images[0]
+        finally:
+            report["inference_seconds"] = round(time.monotonic() - inference_started, 2)
         if not isinstance(image, Image.Image):
             raise ValueError("No PIL image returned")
         image.save(output, format="PNG")
