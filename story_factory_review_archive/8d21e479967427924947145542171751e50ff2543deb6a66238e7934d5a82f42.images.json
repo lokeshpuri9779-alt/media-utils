@@ -1,0 +1,212 @@
+{
+  "status": "review_only",
+  "provider_calls": 3,
+  "assets": [
+    {
+      "story_content_id": "rayvan-gemini-d291921022aac3a860ed",
+      "scene_id": "001",
+      "story_visual_sha256": "60eef79e346ecdd200bc99a90989b650b91753f214dab40226f45345d274e07d",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "a8954286d61b14bcd252fdadf169ba25b8c3823ff15e540e6ebae8fd23818e33",
+      "approved": false,
+      "production_ready": false,
+      "sha256": "9ea000243a7d9626d944de742ff7bfc754069b8dac20e9c8e7fe5fcdfc2f0f10",
+      "path": "sha256/9e/9ea000243a7d9626d944de742ff7bfc754069b8dac20e9c8e7fe5fcdfc2f0f10.png",
+      "kind": "scene",
+      "source": "omniroute",
+      "prompt_sha256": "ab334b200a91574295d54c0bfe4ab8042647fc26cd2ef832f234c4a33d148112",
+      "dimensions": {
+        "width": 1024,
+        "height": 1824
+      },
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "average_brightness": 140.8,
+        "luminance_variance": 2563.3,
+        "semantic_match": "not_verified",
+        "character_continuity": "not_verified"
+      },
+      "adaptation": "square_to_portrait_review_padding_v1",
+      "source_sha256": "08bb63482e3af18dacb470a7ff5e9c80f85855f67338c392e194e3cb72b64591",
+      "source_path": "requests/square_sources/08bb63482e3af18dacb470a7ff5e9c80f85855f67338c392e194e3cb72b64591.png",
+      "source_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "status": "review_only"
+    },
+    {
+      "story_content_id": "rayvan-gemini-d291921022aac3a860ed",
+      "scene_id": "002",
+      "story_visual_sha256": "60eef79e346ecdd200bc99a90989b650b91753f214dab40226f45345d274e07d",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "f5a934d2dd17eb8217f36349a88b70bd514f6e0f651752691d22c2ab42dc2b1f",
+      "approved": false,
+      "production_ready": false,
+      "sha256": "1823e6356f28acecd64b8a6372097e7dd6232cc006b8d73c85c0d7764b6c7471",
+      "path": "sha256/18/1823e6356f28acecd64b8a6372097e7dd6232cc006b8d73c85c0d7764b6c7471.png",
+      "kind": "scene",
+      "source": "omniroute",
+      "prompt_sha256": "f9f969f4f89e9c5c214107575cc4007553a4a11956b4096c21e01e6cd435bea6",
+      "dimensions": {
+        "width": 1024,
+        "height": 1824
+      },
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "average_brightness": 135.14,
+        "luminance_variance": 3566.31,
+        "semantic_match": "not_verified",
+        "character_continuity": "not_verified"
+      },
+      "adaptation": "square_to_portrait_review_padding_v1",
+      "source_sha256": "54f3e407aa0f305396dfd2ce154f22e135245344d3802a9eda8754c671558a7e",
+      "source_path": "requests/square_sources/54f3e407aa0f305396dfd2ce154f22e135245344d3802a9eda8754c671558a7e.png",
+      "source_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "status": "review_only"
+    },
+    {
+      "story_content_id": "rayvan-gemini-d291921022aac3a860ed",
+      "scene_id": "003",
+      "story_visual_sha256": "60eef79e346ecdd200bc99a90989b650b91753f214dab40226f45345d274e07d",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "e570957aeb78b448a3800dbf61a069acb49d18b6a41cda90cef778b5ecbe1f92",
+      "approved": false,
+      "production_ready": false,
+      "sha256": "b6e06efb77f9ec1eff386894d9cc918d32ecdcc32521269867a0bcacc016074f",
+      "path": "sha256/b6/b6e06efb77f9ec1eff386894d9cc918d32ecdcc32521269867a0bcacc016074f.png",
+      "kind": "scene",
+      "source": "omniroute",
+      "prompt_sha256": "ecb73edf2db2891f344e40069e9c1bc5662d87eec7f26363521c67d48a28088a",
+      "dimensions": {
+        "width": 1024,
+        "height": 1824
+      },
+      "quality": {
+        "passed": true,
+        "issues": [],
+        "average_brightness": 126.24,
+        "luminance_variance": 1938.28,
+        "semantic_match": "not_verified",
+        "character_continuity": "not_verified"
+      },
+      "adaptation": "square_to_portrait_review_padding_v1",
+      "source_sha256": "8487d91a168ca6c3535af6ce84200158a06b1528eb546eff6fd5f5a19042fd2f",
+      "source_path": "requests/square_sources/8487d91a168ca6c3535af6ce84200158a06b1528eb546eff6fd5f5a19042fd2f.png",
+      "source_dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "status": "review_only"
+    },
+    {
+      "story_content_id": "rayvan-gemini-d291921022aac3a860ed",
+      "scene_id": "004",
+      "story_visual_sha256": "60eef79e346ecdd200bc99a90989b650b91753f214dab40226f45345d274e07d",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "a63a4c5049e1e3ad476d44f4572f6b20bde5d5b546e5917f6271aaeb9135544c",
+      "approved": false,
+      "production_ready": false,
+      "status": "pending_budget"
+    },
+    {
+      "story_content_id": "rayvan-gemini-ffe43c2aad8be933234b",
+      "scene_id": "001",
+      "story_visual_sha256": "9de2bb859a990d3dae34b4317803dc5f9bf215444eae2ec91e9e032ced316c19",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "1d3ae5ca8e0abf92a7e0ec48762305a8c161fe9e6c99c29b5ab9658309144351",
+      "approved": false,
+      "production_ready": false,
+      "status": "pending_budget"
+    },
+    {
+      "story_content_id": "rayvan-gemini-ffe43c2aad8be933234b",
+      "scene_id": "002",
+      "story_visual_sha256": "9de2bb859a990d3dae34b4317803dc5f9bf215444eae2ec91e9e032ced316c19",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "b9d2d9a8be331628fc2042a774b4056f3878bc9494aff3663d2de2baab4ddcf1",
+      "approved": false,
+      "production_ready": false,
+      "status": "pending_budget"
+    },
+    {
+      "story_content_id": "rayvan-gemini-ffe43c2aad8be933234b",
+      "scene_id": "003",
+      "story_visual_sha256": "9de2bb859a990d3dae34b4317803dc5f9bf215444eae2ec91e9e032ced316c19",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "60325ccdfffa254db7e969c8fa07b1528ecc3a10c53f49a487b3748f0bf83e55",
+      "approved": false,
+      "production_ready": false,
+      "status": "pending_budget"
+    },
+    {
+      "story_content_id": "rayvan-gemini-ffe43c2aad8be933234b",
+      "scene_id": "004",
+      "story_visual_sha256": "9de2bb859a990d3dae34b4317803dc5f9bf215444eae2ec91e9e032ced316c19",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "e1ff5f02b4797a38f1593d8a34cd9832257e7b64a398adc73302ea02de899f1f",
+      "approved": false,
+      "production_ready": false,
+      "status": "pending_budget"
+    },
+    {
+      "story_content_id": "rayvan-gemini-f3140cc1d1fbc55618f8",
+      "scene_id": "001",
+      "story_visual_sha256": "e9dbe183af9e5c530ba6caf239bb1cb87db47b5aac29621de23daf3d4caf5f92",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "1da277ebf177faa296a13b270a4ddf6dcfa6e9f72e40cfc559a6786107d46e71",
+      "approved": false,
+      "production_ready": false,
+      "status": "pending_budget"
+    },
+    {
+      "story_content_id": "rayvan-gemini-f3140cc1d1fbc55618f8",
+      "scene_id": "002",
+      "story_visual_sha256": "e9dbe183af9e5c530ba6caf239bb1cb87db47b5aac29621de23daf3d4caf5f92",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "fe149c39a7fed8a1e7745d3701d3d787244b08fab8e609da23a34e89749736f1",
+      "approved": false,
+      "production_ready": false,
+      "status": "pending_budget"
+    },
+    {
+      "story_content_id": "rayvan-gemini-f3140cc1d1fbc55618f8",
+      "scene_id": "003",
+      "story_visual_sha256": "e9dbe183af9e5c530ba6caf239bb1cb87db47b5aac29621de23daf3d4caf5f92",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "a97c9db57983a073d27a17dede4282e5ca28982b917bbfb6a2ae5e1cf53d2fb9",
+      "approved": false,
+      "production_ready": false,
+      "status": "pending_budget"
+    },
+    {
+      "story_content_id": "rayvan-gemini-f3140cc1d1fbc55618f8",
+      "scene_id": "004",
+      "story_visual_sha256": "e9dbe183af9e5c530ba6caf239bb1cb87db47b5aac29621de23daf3d4caf5f92",
+      "visual_bible_supplied": true,
+      "continuity_status": "not_verified",
+      "request_sha256": "508e833f411be167b750ebdb9696597e0aa7b4a490126659885b64bbc0cbdbfc",
+      "approved": false,
+      "production_ready": false,
+      "status": "pending_budget"
+    }
+  ],
+  "production_ready": false,
+  "continuity_status": "not_verified"
+}

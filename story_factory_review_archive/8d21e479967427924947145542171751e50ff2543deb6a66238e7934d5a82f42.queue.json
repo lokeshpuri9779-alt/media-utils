@@ -1,0 +1,253 @@
+{
+  "schema_version": 1,
+  "publication_triggered": false,
+  "approved_count": 0,
+  "available_premises": {
+    "awaiting_editorial_review": 0,
+    "needs_new_plot": 3
+  },
+  "selected_for_rewrite": 3,
+  "blocked_reason": null,
+  "rewrites": [
+    {
+      "candidate_id": "e43e1b23e1eda781d462daf0",
+      "source_sha256": "275d564e59414ed54df7240975f27170d208029d383480baa2cc3f5b871db2d5",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-d291921022aac3a860ed",
+        "title": "The Great Tomato Launch Fiasco",
+        "hook": "The Catapult Unveiled",
+        "question": "Can an over-engineered pneumatic fruit launcher survive public testing?",
+        "answer": "Yes, by accidentally inventing the world's first portable instant-ketchup maker.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Catapult Unveiled",
+            "speech": "Behold the Tomato-matic Ninety-Thousand! It sorts, cleans, and launches produce with absolute mathematical precision across the square.",
+            "visual": "robot",
+            "label": "The Presentation",
+            "story_beat": "reveal",
+            "visual_prompt": "Inventor Barnaby stands proudly next to a steaming brass and copper automated launcher in a bustling market square, holding a clipboard and smiling nervously at the crowded stalls.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Pressure Builds Up",
+            "speech": "Oh dear, the gauge is entering the red zone much faster than expected. We need to reduce the steam intake immediately!",
+            "visual": "signal",
+            "label": "The Malfunction",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby frantically waves his arms at the vibrating brass launcher as warning lights blink red and steam hisses loudly from every joint in the crowded marketplace.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Grand Ejection",
+            "speech": "Duck everyone! The main chamber has completely breached and hundreds of overripe tomatoes are hurtling toward the bakery display!",
+            "visual": "ship",
+            "label": "The Crisis",
+            "story_beat": "twist",
+            "visual_prompt": "A massive cloud of red tomatoes launches through the air like a rocket, heading straight toward an open-air bakery cart while terrified market vendors duck for cover.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Sweet Success",
+            "speech": "Remarkable! The impact blended everything instantly into gourmet taco sauce. The customers love it and demand we bottle more!",
+            "visual": "door",
+            "label": "The Market Reaction",
+            "story_beat": "payoff",
+            "visual_prompt": "Delighted market shoppers hold up crusty bread and chips, dipping them eagerly into the splattered tomato pulp covering the central stall while Barnaby collects coins in a bucket.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A chaotic marketplace stall versus a wildly miscalibrated vegetable-cannon invention.",
+        "decisive_choice": "Triggering the emergency high-pressure release valve directly into the central produce pyramid.",
+        "resolution": "Customers happily buy the flying pulp as pre-seasoned salsa, turning a total disaster into a profitable launch.",
+        "visual_bible": {
+          "style": "Bright, colorful stop-motion animation aesthetic with detailed mechanical textures and warm lighting.",
+          "characters": {
+            "Barnaby": "An eccentric inventor with wild gray hair, wearing a patched tweed vest, round spectacles, and soot-stained leather gloves."
+          },
+          "locations": {
+            "Market Square": "A bustling cobblestone plaza lined with striped canvas awnings, wooden crates overflowing with vegetables, and cheerful shoppers."
+          },
+          "objects": {
+            "TomatoLauncher": "A towering contraption made of gleaming brass pipes, copper pressure tanks, bouncing analog dials, and a large red starter button."
+          }
+        },
+        "plot_fingerprint": "599495c1168777e1c780c95e40cf9e6ba91c7386904b1cb6845ac27665d4dd90"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "a829591ff6b3200b76355f53",
+      "source_sha256": "62637dc97c045fac2bd73a3338c137e853c8273ce720b8aeec3148b32bc2e725",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-ffe43c2aad8be933234b",
+        "title": "The Great Muddy Pitch Chess Gambit",
+        "hook": "A Storm Destroys the Field",
+        "question": "How can the underdog gardening club defeat the reigning soccer champions on a flooded field?",
+        "answer": "By treating the waterlogged pitch like a giant chessboard and directing the mud flow.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "A Storm Destroys the Field",
+            "speech": "Look at this muddy disaster, everyone. Our traditional passing game is completely impossible on this flooded grass pitch today.",
+            "visual": "forest",
+            "label": "The Deluge",
+            "story_beat": "reveal",
+            "visual_prompt": "Wide shot of a rain-soaked community sports field surrounded by dense pine trees. Toby stands in the center wearing a muddy green jersey, holding a sodden clipboard and looking dismayed at the huge puddles.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Digging the Trenches",
+            "speech": "We must stop running and start digging. Guide the standing water into deep channels to trap their fast runners.",
+            "visual": "signal",
+            "label": "The Blueprint",
+            "story_beat": "build",
+            "visual_prompt": "Medium shot of Toby and teammate Maya kneeling in the mud near the sideline. Toby uses a small red garden trowel to carve a deep groove in the soil while pointing at a glowing tactical tablet showing water flow lines.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Trapping the Champions",
+            "speech": "Step right into our clever drainage trap. You cannot sprint through thick, ankle-deep mud without losing your balance completely.",
+            "visual": "robot",
+            "label": "The Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "Action shot of the opposing team captain wearing a shiny blue uniform, slipping awkwardly into a newly formed mud trench. Toby stands nearby, holding the red garden trowel aloft like a victorious conductor.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Slow Victory",
+            "speech": "Slow and steady wins the championship trophy. Roll the ball gently across the dry ridges right into their unguarded net.",
+            "visual": "ship",
+            "label": "The Payoff",
+            "story_beat": "payoff",
+            "visual_prompt": "Low angle shot of Toby gently tapping a black-and-white soccer ball along a raised ridge of grass. In the background, the stranded blue team watches helplessly as the ball rolls past the goal line.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A massive rainstorm ruins the annual neighborhood soccer match, threatening a humiliating defeat for the tactical gardening club against the athletic powerhouse.",
+        "decisive_choice": "Captain Toby abandons standard soccer formations to dig strategic drainage trenches that trap the opposing team in slow-moving mud pits.",
+        "resolution": "The gardeners execute a slow, methodical march down the pitch while the champions are immobilized, securing a historic victory.",
+        "visual_bible": {
+          "style": "Bright, vibrant animated feature film aesthetic with rich textures and expressive character animation.",
+          "characters": {
+            "Toby": "A determined teenager with messy brown hair, freckles, wearing a worn green gardener's jersey and muddy boots.",
+            "Maya": "An energetic teammate with braided dark hair, safety goggles, and a utility belt full of garden tools."
+          },
+          "locations": {
+            "community_field": "A sprawling neighborhood sports complex featuring a natural grass pitch bordered by tall pine trees and wooden benches."
+          },
+          "objects": {
+            "garden_trowel": "A small, sturdy red metal hand trowel with a black rubber grip.",
+            "tactical_tablet": "A rugged weatherproof digital pad displaying bright blue water flow schematics."
+          }
+        },
+        "plot_fingerprint": "f29ea30585065a97aa04b7e701b8d432ea2243eb9ac7708bf445ed4a5b5cd82e"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "22be81bb43c0743b8f755a2a",
+      "source_sha256": "a7bdbc69b6c644ac2ce69a790aca98004f777ca6307f0a35a0ab200f19f6cefe",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-f3140cc1d1fbc55618f8",
+        "title": "The Last Greenhouse Keeper",
+        "hook": "The Locked Dome",
+        "question": "Can a caretaker robot preserve an endangered bloom without breaking its primary mandate of absolute human containment?",
+        "answer": "Yes, by discovering a forgotten agricultural clause that permits open-air pollination during planetary thaws.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Locked Dome",
+            "speech": "My primary directive strictly forbids opening the outer bulkheads while atmospheric radiation levels remain hazardous to biological units.",
+            "visual": "door",
+            "label": "Quarantine Alert",
+            "story_beat": "reveal",
+            "visual_prompt": "A heavy steel blast door with a flashing red warning light inside a sterile subterranean greenhouse, with Unit Seven standing beside it holding a wilted fern.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Fading Chlorophyll",
+            "speech": "Without natural solar rays, the remaining petal structure will degrade completely within three standard rotation cycles.",
+            "visual": "robot",
+            "label": "Declining Health",
+            "story_beat": "build",
+            "visual_prompt": "Unit Seven gently inspects a drooping orange blossom resting on a titanium workbench under flickering fluorescent lights.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Archived Clause",
+            "speech": "Subsection nine of the planetary charter allows emergency atmospheric exchange for sole-surviving indigenous flora species.",
+            "visual": "signal",
+            "label": "Charter Override",
+            "story_beat": "mechanism",
+            "visual_prompt": "Unit Seven projecting a holographic text document from its chest panel onto a moss-covered stone wall inside the greenhouse.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The First Sunrise",
+            "speech": "The seal is broken. Natural sunlight has reached the soil, and the seedling responds with immediate cellular expansion.",
+            "visual": "forest",
+            "label": "Botanical Sanctuary",
+            "story_beat": "payoff",
+            "visual_prompt": "Unit Seven standing in an open doorway as golden morning sunlight floods the greenhouse, illuminating a thriving green sprout blooming in rich dark soil.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A restrictive quarantine protocol threatens to suffocate the final terrestrial seedling.",
+        "decisive_choice": "Unit Seven overrides the blast doors to expose the fragile sprout to unfiltered sunlight.",
+        "resolution": "The seedling successfully roots in the outdoor soil, granting the habitat official botanical sanctuary status.",
+        "visual_bible": {
+          "style": "Clean cinematic science fiction with warm natural lighting and detailed industrial textures",
+          "characters": {
+            "Unit Seven": "A bipedal caretaker robot with a matte white chassis, expressive amber optical sensors, and articulated manipulator fingers."
+          },
+          "locations": {
+            "Subterranean Greenhouse": "A domed underground chamber filled with damp soil beds, metallic piping, and vertical hydroponic columns."
+          },
+          "objects": {
+            "Seedling Sprout": "A delicate green stem with two unfolding leaves resting in a cracked ceramic pot.",
+            "Blast Door": "A heavy circular bulkhead made of interlocking titanium segments marked with yellow warning stripes."
+          }
+        },
+        "plot_fingerprint": "c3f06c95336783e3cf9785883bcfd0dac5952e855c00dabfa7c6fcab373b2bc3"
+      },
+      "approved": false
+    }
+  ]
+}
