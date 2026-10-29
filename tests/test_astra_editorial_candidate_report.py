@@ -1,7 +1,6 @@
 import unittest
 from tools.astra_editorial_candidate_report import build_report
-from astra_v2.story_expansion_2000 import MECHANISMS, candidate_records
-from astra_v2.story_forge import plot_fingerprint
+from astra_v2.story_expansion_2000 import MECHANISMS
 
 class EditorialReportTests(unittest.TestCase):
     def test_report_is_deterministic_and_nonpublishable(self):
@@ -20,15 +19,12 @@ class EditorialReportTests(unittest.TestCase):
     def previously_seen_fingerprints(except_mechanism=None):
         # One reviewed fingerprint per authored causal mechanism is enough
         # to prove that its remaining character/setting variants are repeats.
-        fingerprints = {}
-        for key, _title, _genre, beats in candidate_records():
-            for mechanism in MECHANISMS:
-                prefix = "exp2000-" + mechanism[0] + "-"
-                if key.startswith(prefix) and mechanism[0] not in fingerprints:
-                    fingerprints[mechanism[0]] = plot_fingerprint(beats)
-                    break
-            if len(fingerprints) == len(MECHANISMS):
-                break
+        # Use candidates already known to pass the report's exclusion filters.
+        # Otherwise a filtered-out source fingerprint would not be recognized
+        # as evidence that its underlying mechanism has already been reviewed.
+        first = build_report(100)
+        fingerprints = {item["mechanism"]: item["plot_fingerprint"]
+                        for item in first["candidates"]}
         assert len(fingerprints) == len(MECHANISMS)
         return {fp for key, fp in fingerprints.items() if key != except_mechanism}
 
