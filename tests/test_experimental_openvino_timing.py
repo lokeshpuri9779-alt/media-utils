@@ -77,9 +77,42 @@ class CpuBenchmarkTimingTests(unittest.TestCase):
         ):
             report = benchmark.run(output=Path(tmp) / "keyframe.png")
             self.assertEqual(report["error_type"], "RuntimeError")
+            self.assertEqual(report["error_stage"], "inference")
+            self.assertTrue(report["error_frames"])
+            self.assertTrue(all(set(frame) == {"module_file", "function", "line"} for frame in report["error_frames"]))
+            self.assertEqual(report["error_frames"], json.loads((Path(tmp) / "keyframe.json").read_text())["error_frames"])
             self.assertIn("inference_seconds", report)
             self.assertFalse(report["success"])
             self.assertFalse(report["production_ready"])
+
+
+    def test_model_load_attribute_error_reports_stage_and_name(self):
+        class BrokenLoad(FakePipeline):
+            @classmethod
+            def from_pretrained(cls, *args, **kwargs):
+                obj = types.SimpleNamespace()
+                return obj.nonexistent_component
+
+        optimum = types.ModuleType("optimum")
+        optimum.__path__ = []
+        intel = types.ModuleType("optimum.intel")
+        intel.OVStableDiffusionPipeline = BrokenLoad
+        pillow = types.ModuleType("PIL")
+        pillow.Image = types.SimpleNamespace(Image=FakeImage)
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(
+            sys.modules, {"optimum": optimum, "optimum.intel": intel, "PIL": pillow}
+        ):
+            output = Path(tmp) / "keyframe.png"
+            report = benchmark.run(output=output)
+            self.assertEqual(report["error_type"], "AttributeError")
+            self.assertEqual(report["error_stage"], "model_load")
+            self.assertEqual(report["missing_attribute"], "nonexistent_component")
+            self.assertTrue(report["error_frames"])
+            self.assertFalse(report["render_completed"])
+            self.assertFalse(report["approved"])
+            self.assertFalse(report["production_ready"])
+            self.assertFalse(report["published"])
+            self.assertEqual(report["error_stage"], json.loads(output.with_suffix(".json").read_text())["error_stage"])
 
 
 if __name__ == "__main__":
