@@ -36,6 +36,83 @@ class RewriteQueueTests(unittest.TestCase):
             self.assertFalse(second["publication_triggered"])
             self.assertEqual(second["approved_count"], 0)
 
+    def test_new_editorial_packet_rotates_queue_with_immutable_image_archive(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            packet_file, queue_file = root / "packet.json", root / "queue.json"
+            manifest_file, archive = root / "images.json", root / "archive"
+            packet_file.write_text(json.dumps(packet()), encoding="utf-8")
+            original, reused = rewrite_or_reuse(packet_file, queue_file,
+                generator=lambda *a, **k: {"content_id": "old-story", "title": "Old story"})
+            self.assertFalse(reused)
+            original_queue_bytes = queue_file.read_bytes()
+            manifest_file.write_text(json.dumps({
+                "production_ready": False, "assets": [{
+                    "story_content_id": "old-story", "path": "sha256/aa/old.png",
+                    "approved": False, "production_ready": False}]}), encoding="utf-8")
+            original_image_bytes = manifest_file.read_bytes()
+            updated = packet()
+            updated["candidates"][0]["candidate_id"] = "c2"
+            updated["candidates"][0]["source_sha256"] = "b" * 64
+            packet_file.write_text(json.dumps(updated), encoding="utf-8")
+            replacement, reused = rewrite_or_reuse(packet_file, queue_file,
+                generator=lambda *a, **k: {"content_id": "new-story", "title": "New story"},
+                reuse_pending=True, archive_dir=archive, image_manifest_path=manifest_file)
+            self.assertFalse(reused)
+            self.assertEqual(replacement["rewrites"][0]["candidate_id"], "c2")
+            self.assertEqual(replacement["rewrites"][0]["story"]["content_id"], "new-story")
+            self.assertFalse(replacement["rewrites"][0]["approved"])
+            self.assertFalse(replacement["rewrites"][0]["story"]["production_ready"])
+            self.assertFalse(replacement["publication_triggered"])
+            self.assertEqual(manifest_file.read_bytes(), original_image_bytes)
+            archived = list(archive.iterdir())
+            self.assertEqual(len(archived), 2)
+            self.assertEqual(next(x for x in archived if x.name.endswith(".queue.json")).read_bytes(),
+                             original_queue_bytes)
+            self.assertEqual(next(x for x in archived if x.name.endswith(".images.json")).read_bytes(),
+                             original_image_bytes)
+
+    def test_stale_queue_never_overwritten_without_archive_or_image_manifest(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            packet_file, queue_file = root / "packet.json", root / "queue.json"
+            packet_file.write_text(json.dumps(packet()), encoding="utf-8")
+            rewrite_or_reuse(packet_file, queue_file,
+                generator=lambda *a, **k: {"content_id": "old-story", "title": "Old story"})
+            old_bytes = queue_file.read_bytes()
+            changed = packet()
+            changed["candidates"][0]["source_sha256"] = "b" * 64
+            packet_file.write_text(json.dumps(changed), encoding="utf-8")
+            for archive_dir, image_manifest_path in ((None, None),
+                                                      (root / "archive", root / "missing.json")):
+                with self.subTest(archive_dir=archive_dir):
+                    with self.assertRaises(ValueError):
+                        rewrite_or_reuse(packet_file, queue_file,
+                            generator=lambda *a, **k: self.fail("no calls without safe archive"),
+                            reuse_pending=True, archive_dir=archive_dir,
+                            image_manifest_path=image_manifest_path)
+                    self.assertEqual(queue_file.read_bytes(), old_bytes)
+
+    def test_stale_queue_refuses_unsafe_image_index(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            packet_file, queue_file = root / "packet.json", root / "queue.json"
+            manifest_file = root / "images.json"
+            packet_file.write_text(json.dumps(packet()), encoding="utf-8")
+            rewrite_or_reuse(packet_file, queue_file,
+                generator=lambda *a, **k: {"content_id": "old-story", "title": "Old story"})
+            old_bytes = queue_file.read_bytes()
+            changed = packet()
+            changed["candidates"][0]["candidate_id"] = "c2"
+            packet_file.write_text(json.dumps(changed), encoding="utf-8")
+            manifest_file.write_text(json.dumps({"production_ready": True, "assets": []}))
+            with self.assertRaisesRegex(ValueError, "unsafe_image_manifest"):
+                rewrite_or_reuse(packet_file, queue_file,
+                    generator=lambda *a, **k: self.fail("must not generate"),
+                    reuse_pending=True, archive_dir=root / "archive",
+                    image_manifest_path=manifest_file)
+            self.assertEqual(queue_file.read_bytes(), old_bytes)
+
     def test_unsafe_or_failed_queue_is_never_reused(self):
         safe = rewrite_packet(packet(), generator=lambda *a, **k: {
             "content_id": "new-story", "title": "New story", "production_ready": True})
