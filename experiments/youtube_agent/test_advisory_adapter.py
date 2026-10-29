@@ -11,6 +11,8 @@ class AdvisoryTests(unittest.TestCase):
         self.assertIn("hook", result)
         self.assertIn("package", result)
         self.assertIsInstance(result["hook"]["score"], int)
+        self.assertFalse(result["package"]["quality_decision_allowed"])
+        self.assertEqual(result["package"]["interpretation"], "unvalidated_heuristic_not_quality_gate")
     def test_empty(self):
         result = analyze({})
         self.assertNotIn("hook", result)
