@@ -4,15 +4,16 @@ import json
 import os
 import resource
 import time
+import traceback
 from pathlib import Path
 
 APPROVED_MODELS = {
-    "preconverted": "echarlaix/stable-diffusion-v1-5-openvino",
+    "preconverted": "piimaila/stable-diffusion-v1-5-openvino",
     "export": "stable-diffusion-v1-5/stable-diffusion-v1-5",
 }
-PROMPT = ("original cinematic animated-film illustration, a small copper robot holding "
-          "a glowing star in a magical forest, dramatic lighting, detailed background, "
-          "no text, portrait composition")
+PROMPT = ("family-friendly illustration of a bright red toy fire truck parked beside "
+          "a yellow school building on a sunny day, blue sky, green trees, "
+          "clear colorful detailed shapes, portrait composition, no people, no text")
 
 
 def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-openvino/keyframe.png")):
@@ -25,13 +26,24 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
     model = APPROVED_MODELS[profile]
     report = {"engine": "OpenVINO CPU", "model": model, "steps": steps,
               "success": False, "published": False, "approved": False,
-              "production_ready": False, "still_image_only": True}
+              "production_ready": False, "still_image_only": True,
+              "pixel_quality_passed": False,
+              "render_completed": False,
+              "semantic_quality": "not_verified",
+              "manual_visual_review_required": True}
     started = time.monotonic()
     try:
         from optimum.intel import OVStableDiffusionPipeline
         from PIL import Image
-        pipe = OVStableDiffusionPipeline.from_pretrained(
-            model, export=profile == "export", compile=False, device="CPU")
+        load_options = {"export": profile == "export", "compile": False,
+                        "device": "CPU",
+                        "ov_config": {"INFERENCE_PRECISION_HINT": "f32"}}
+        if profile == "export":
+            # Avoid implicit large-model 8-bit weight compression in this diagnostic.
+            load_options["load_in_8bit"] = False
+        report["precision_hint"] = "f32"
+        report["disable_auto_8bit"] = profile == "export"
+        pipe = OVStableDiffusionPipeline.from_pretrained(model, **load_options)
         pipe.reshape(batch_size=1, height=768, width=512, num_images_per_prompt=1)
         pipe.compile()
         image = pipe(PROMPT, height=768, width=512,
@@ -44,11 +56,29 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
         report["quality"] = quality
         report["dimensions"] = {"width": image.width, "height": image.height}
         report["bytes"] = output.stat().st_size
+        report["pixel_quality_passed"] = bool(quality["passed"])
+        report["render_completed"] = True
+        report["semantic_quality"] = "not_verified"
+        report["manual_visual_review_required"] = True
         report["success"] = bool(quality["passed"])
         report["output"] = str(output)
     except Exception as exc:
         # No prompt, credentials, provider bodies or exception text in diagnostics.
         report["error_type"] = type(exc).__name__
+        frames = traceback.extract_tb(exc.__traceback__)
+        report["error_frames"] = [{"module_file": Path(frame.filename).name,
+                                  "function": frame.name, "line": frame.lineno}
+                                 for frame in frames[-5:]]
+        if isinstance(exc, AttributeError):
+            report["missing_attribute"] = getattr(exc, "name", None)
+        if isinstance(exc, ValueError):
+            # This isolated job passes no credentials to model loading; preserve a
+            # bounded diagnostic without URLs, home paths or multiline content.
+            import re
+            message = str(exc).splitlines()[0][:350]
+            message = re.sub(r"https?://\\S+", "[url]", message)
+            message = re.sub(r"/(?:home|tmp|opt)/\\S+", "[path]", message)
+            report["value_error_detail"] = message
     finally:
         report["elapsed_seconds"] = round(time.monotonic() - started, 2)
         report["peak_rss_kib"] = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
