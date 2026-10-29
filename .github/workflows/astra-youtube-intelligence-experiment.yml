@@ -1,0 +1,87 @@
+name: ASTRA YouTube Intelligence Experiment
+on:
+  pull_request:
+    paths:
+      - 'experiments/youtube_agent/**'
+      - '.github/workflows/astra-youtube-intelligence-experiment.yml'
+  workflow_dispatch:
+    inputs:
+      artifact_id:
+        description: 'Existing same-repository Story Factory diagnostics artifact ID (read-only)'
+        required: false
+        type: string
+permissions:
+  contents: read
+  actions: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile imported utilities
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          root=Path('experiments/youtube_agent/skills')
+          files=sorted(root.glob('*/*.py'))
+          assert len(files)==6, f'Expected six utilities, found {len(files)}'
+          for p in files:
+              ast.parse(p.read_text(encoding='utf-8'), filename=str(p))
+              print('PASS', p)
+          skill_docs=sorted(root.glob('*/SKILL.md'))
+          assert len(skill_docs)==11, f'Expected eleven skills, found {len(skill_docs)}'
+          print('PASS: 11 skill docs')
+          PY
+      - name: Run offline CLI smoke probes
+        run: python experiments/youtube_agent/test_import_smoke.py
+      - name: Test read-only advisory adapter
+        run: python -m unittest discover -s experiments/youtube_agent -p 'test_*.py' -v
+      - name: Validate hook formula data and MIT license
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('experiments/youtube_agent')
+          hooks=json.loads((root/'skills/yt-script/hooks.json').read_text())
+          assert isinstance(hooks.get('hooks'),list) and len(hooks['hooks'])>0
+          assert 'MIT License' in (root/'LICENSE').read_text()
+          print('PASS: hook formulas and license')
+          PY
+      - name: Validate durable Story Factory fixture without external artifacts
+        run: |
+          python -m unittest discover -s experiments/youtube_agent -p 'test_production_shape.py' -v
+      - name: Analyze original Story Factory artifact (PR regression and manual dispatch)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.artifact_id != '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_ID: ${{ inputs.artifact_id || '12614902384' }}
+        run: |
+          set -euo pipefail
+          [[ "$ARTIFACT_ID" =~ ^[0-9]+$ ]] || { echo "Artifact ID must be numeric"; exit 1; }
+          gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${ARTIFACT_ID}/zip" > /tmp/astra-story-artifact.zip
+          python - <<'PY'
+          import io, json, os, subprocess, sys, zipfile
+          from pathlib import Path
+          z = zipfile.ZipFile('/tmp/astra-story-artifact.zip')
+          name = 'story_factory_rewrite_queue.json'
+          if name not in z.namelist():
+              raise SystemExit('Expected Story Factory rewrite queue missing from artifact')
+          source = z.read(name)
+          queue = json.loads(source)
+          assert isinstance(queue.get('rewrites'), list)
+          target = Path('/tmp/astra-original-rewrite-queue.json')
+          target.write_bytes(source)
+          cmd = [sys.executable, 'experiments/youtube_agent/rewrite_queue_diagnostics.py', str(target)]
+          result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+          report = json.loads(result.stdout)
+          assert report['entries_checked'] == len(queue['rewrites'])
+          assert report['advisory_only'] is True and report['publication_triggered'] is False
+          assert all(row.get('diagnostics', {}).get('production_ready') is False for row in report['results'])
+          print('PASS: original artifact analyzed read-only; entries:', report['entries_checked'])
+          print('Limited-applicability labels:', sum(row.get('hook_score_applicability') == 'limited_short_fiction_label' for row in report['results']))
+          PY
