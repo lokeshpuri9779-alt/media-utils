@@ -26,7 +26,9 @@ def analyze(payload):
     if isinstance(hook, str) and hook.strip():
         module = load("yt-script", "hookscore.py")
         properties, verdict, formula, matches = module.score(hook)
-        result["hook"] = {"score": verdict, "properties": properties, "formula": formula, "band": module.band(verdict)}
+        result["hook"] = {"score": verdict, "properties": properties, "formula": formula, "band": module.band(verdict),
+                          "quality_decision_allowed": False,
+                          "interpretation": "unvalidated_heuristic_not_quality_gate"}
     title = payload.get("title")
     if isinstance(title, str) and title.strip():
         module = load("yt-package", "title.py")
