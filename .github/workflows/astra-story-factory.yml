@@ -283,8 +283,13 @@ jobs:
               git fetch origin astra-state
               remote="$(git rev-parse FETCH_HEAD)"
               if [ "$remote" != "$baseline" ]; then
-                echo "::error::ASTRA_STATE_CONFLICT: astra-state advanced during this run. Refusing to overwrite another worker's cursor or asset manifest; retry the workflow against fresh state."
-                exit 1
+                # Only rebase if every remote change is on a disjoint path.
+                # Never force-push or overwrite another worker's state.
+                if ! python ../code/astra_v2/state_push_reconcile.py --baseline "$baseline" --remote "$remote"; then
+                  echo "::error::ASTRA_STATE_CONFLICT: overlapping or unsafe remote state; preserving run artifacts."
+                  exit 1
+                fi
+                baseline="$remote"
               fi
               if git push origin HEAD:refs/heads/astra-state; then
                 echo "ASTRA_STATE_PUSH=success"
