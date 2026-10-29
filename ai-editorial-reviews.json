@@ -3607,6 +3607,16 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-c284d38306263759bfcb",
+      "story_sha256": "a6182be54097c87f66faef354de333ebdee2d60a75819bc37581458b70d1f4c2",
+      "approved": false,
+      "issues": [
+        "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons"
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
