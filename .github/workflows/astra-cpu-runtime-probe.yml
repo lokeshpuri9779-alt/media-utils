@@ -1,0 +1,29 @@
+name: ASTRA CPU Runtime Probe (Manual)
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_cpu_probe:
+        description: 'Enter PROBE; read-only CPU diagnostics using available Actions minutes'
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  cpu-runtime-probe:
+    if: inputs.confirm_cpu_probe == 'PROBE'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify offline CPU probe guardrails
+        run: python3 -m unittest discover -s tests -p 'test_experimental_cpu_runtime_probe.py' -v
+      - name: Capture read-only CPU environment
+        run: python3 -m tools.experimental_cpu_runtime_probe
+      - name: Retain CPU environment report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-cpu-runtime-${{ github.run_id }}
+          path: artifacts/experimental-openvino/cpu-runtime-probe.json
+          if-no-files-found: error
+          retention-days: 7
