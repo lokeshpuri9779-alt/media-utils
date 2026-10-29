@@ -26,8 +26,8 @@ _MECHANICAL_CHARACTER = re.compile(r"\b(?:robot|android|automaton|drone|machine)
 # Two independent visual cues identify a visibly embodied figure even when
 # an AI story omitted its visual_bible. Generic forest/door/signal icons cannot
 # portray a clothed character performing an action.
-_FIGURE_APPEARANCE = re.compile(
-    r"\b(?:hair|tunic|vest|shirt|trousers|cloak|coat|boots|goggles|cheek|eyes?|wrist|parka|jackets?)\b", re.I)
+_FIGURE_VISUAL_CUE = re.compile(
+    r"\b(?:hair|tunic|vest|shirt|trousers|cloak|coat|boots|goggles|cheek|eyes?|wrist|parka|jackets?|canteen|flask|hammer|trowel|ice\s+axe)\b", re.I)
 _FIGURE_ACTION = re.compile(
     r"\b(?:pointing|kneeling|standing|stands?|holding|holds?|smiling|"
     r"walking|wearing|wears?|tipping|pouring|running|gripping|striking|climbing|sitting|swinging)\b", re.I)
@@ -69,7 +69,7 @@ def directed_scene_issue(shot):
     if _HUMAN.search(text + " " + str(shot.get("story_title") or "")):
         return "human_actor_not_supported_by_directed_icons"
     visual_prompt = str(shot.get("visual_prompt") or "")
-    if (_FIGURE_APPEARANCE.search(visual_prompt)
+    if (_FIGURE_VISUAL_CUE.search(visual_prompt)
             and _FIGURE_ACTION.search(visual_prompt)):
         return "embodied_character_not_supported_by_directed_icons"
     if str(shot.get("visual") or "").lower() == "signal" and not _SIGNAL.search(text):
