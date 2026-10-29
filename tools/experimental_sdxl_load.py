@@ -16,7 +16,7 @@ OUT = Path('artifacts/experimental-openvino/sdxl-load')
 ROOT = Path('/tmp/astra-sdxl-int8')
 GIB = 1024 ** 3
 ONE_IMAGE_SEED = 42
-ONE_IMAGE_STEPS = 8
+ONE_IMAGE_STEPS = 20
 ONE_IMAGE_PROMPT = ('family-friendly illustration of a single bright red toy fire truck, '
     'side view, fully visible, on a plain white background, clear colorful detailed '
     'shapes, no people, no text')

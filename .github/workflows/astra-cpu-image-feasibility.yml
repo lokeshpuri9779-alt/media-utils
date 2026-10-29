@@ -7,7 +7,7 @@ on:
         required: true
         type: string
       sdxl_one_image:
-        description: 'One 512x512 fixed-seed 8-step SDXL INT8 CPU diagnostic; review only, not production quality'
+        description: 'One 512x512 fixed-seed 20-step SDXL INT8 CPU diagnostic; review only, not production quality'
         type: boolean
         default: false
       sdxl_load:
