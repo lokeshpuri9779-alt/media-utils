@@ -214,8 +214,20 @@ jobs:
             state/story_factory_asset_readiness.json
           if-no-files-found: warn
           retention-days: 14
-      - name: Recover generated scene assets if state push conflicts
+      # Cached scene assets already live on astra-state; only archive local
+      # changes that a conflicting state push could otherwise strand.
+      - name: Detect scene asset changes requiring conflict recovery
+        id: scene_asset_delta
         if: always()
+        working-directory: state
+        run: |
+          if [ -n "$(git status --porcelain --untracked-files=all -- omni_assets/)" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Recover generated scene assets if state push conflicts
+        if: always() && steps.scene_asset_delta.outputs.changed == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: astra-story-factory-scene-assets-${{ github.run_id }}-${{ github.run_attempt }}
