@@ -6763,6 +6763,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-d94b09e507f5f5419b3c",
+      "video_id": "3jEUlINrwHg",
+      "confirmed_at": "2026-10-29T02:41:24.400430+00:00",
+      "title": "The Ranger and the Hidden Shelf",
+      "plot_fingerprint": "eaa53713642bf58c2f772e823884444612722dfcb52e4893c4cdf65fdb4ab574",
+      "story_beats": [
+        {
+          "headline": "The Emergency Signal",
+          "speech": "Look at that faint red blink up near the freezing summit ridge. Someone is definitely stranded.",
+          "visual": "signal",
+          "label": "Beacon Spotted",
+          "story_beat": "reveal",
+          "visual_prompt": "Rescuer Marcus holding a blinking orange emergency beacon while standing on a snowy mountain overlook, looking up at a distant red light on a steep cliff face during late afternoon.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Impassable Route",
+          "speech": "The main rope bridge is completely snapped in half. We cannot cross this deep glacial chasm safely.",
+          "visual": "door",
+          "label": "Broken Bridge",
+          "story_beat": "build",
+          "visual_prompt": "Rescuer Marcus standing at the edge of a deep crevasse, staring at broken wooden planks of a suspension bridge, wearing a heavy blue parka and holding a steel ice axe in his right hand.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Risky Ascent",
+          "speech": "Hold on tight to your anchors because I am climbing straight up this icy wall to reach you.",
+          "visual": "forest",
+          "label": "Vertical Climb",
+          "story_beat": "mechanism",
+          "visual_prompt": "Rescuer Marcus actively swinging his metal ice axe into a vertical wall of blue ice, climbing upward past frozen pine branches hanging off the cliffside under a cold gray sky.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Return",
+          "speech": "You are securely hooked into my harness now. We made it off that dangerous ledge just in time.",
+          "visual": "ship",
+          "label": "Successful Rescue",
+          "story_beat": "payoff",
+          "visual_prompt": "Rescuer Marcus and a rescued climber in red jackets sitting safely inside a warm rescue helicopter cabin, smiling and holding steaming metal flasks of hot tea as dusk settles outside.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
