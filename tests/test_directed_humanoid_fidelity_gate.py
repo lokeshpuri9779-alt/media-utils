@@ -25,8 +25,8 @@ class HumanoidSceneFidelityTests(unittest.TestCase):
         # These clips decoded successfully but visually substituted icons for actions.
         cases = (
             ("planet", "Taran, a lean explorer with canvas trousers and a straw hat, holds an empty canteen."),
-            ("signal", "Taran kneeling beside a quartz geode, holding a copper geological hammer."),
-            ("robot", "Taran striking the geode with a hammer, wearing a canvas vest."),
+            ("signal", "Taran kneeling beside a quartz geode, eyes wide, holding a copper geological hammer."),
+            ("robot", "Taran striking the geode with a hammer, sensors on his wrist."),
             ("forest", "Taran kneeling beside a spring and filling his canteen, smiling in relief."),
             ("signal", "Rescuer Marcus holding a blinking beacon while standing on a snowy overlook."),
             ("door", "Rescuer Marcus standing at a broken bridge, wearing a heavy parka and holding an ice axe."),
