@@ -13,8 +13,8 @@ class SDXLOneImageGuardrailTests(unittest.TestCase):
     def test_single_fixed_image_configuration(self):
         self.assertEqual(sdxl.ONE_IMAGE_SEED, 42)
         self.assertEqual(sdxl.ONE_IMAGE_STEPS, 20)
-        self.assertIn("toy fire truck", sdxl.ONE_IMAGE_PROMPT)
-        self.assertIn("no text", sdxl.ONE_IMAGE_PROMPT)
+        self.assertIn("toy fire engine", sdxl.ONE_IMAGE_PROMPT)
+        self.assertIn("one vehicle only", sdxl.ONE_IMAGE_PROMPT)
         self.assertEqual(sdxl.MODEL, "OpenVINO/stable-diffusion-xl-base-1.0-int8-ov")
 
     def test_cpu_probe_is_small_and_review_only(self):

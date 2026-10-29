@@ -17,9 +17,9 @@ ROOT = Path('/tmp/astra-sdxl-int8')
 GIB = 1024 ** 3
 ONE_IMAGE_SEED = 42
 ONE_IMAGE_STEPS = 20
-ONE_IMAGE_PROMPT = ('family-friendly illustration of a single bright red toy fire truck, '
-    'side view, fully visible, on a plain white background, clear colorful detailed '
-    'shapes, no people, no text')
+ONE_IMAGE_PROMPT = ('One red toy fire engine, one vehicle only, centered in a single '
+    'side-view composition on a white studio background, fully visible, '
+    'with attached wheels and one roof ladder.')
 ONE_IMAGE_NEGATIVE_PROMPT = 'people, text, words, watermark, logo, blurry, deformed wheels, missing ladder'
 
 def save(name, data):
