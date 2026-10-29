@@ -3331,6 +3331,22 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-46cde95aa7a4c9e79da1",
+      "story_sha256": "54a7eaeeb7e614bbd07980dca99649a8164259be854c8e9812a7cd44ab8fff66",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-46cde95aa7a4c9e79da1",
+        "story_sha256": "54a7eaeeb7e614bbd07980dca99649a8164259be854c8e9812a7cd44ab8fff66",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the premises, characters, or specific causal mechanisms of the provided comparison history.; The narrative follows a clear causal arc: invention, malfunction, intervention, and resolution.; The content is suitable for a general audience and contains no unsafe, misleading, or policy-violating material.; The story avoids common tropes found in the provided list, such as tidal turbines, root-based forest issues, or robot-human moral dilemmas.",
+        "reviewed_at": "2026-10-29T10:23:38.361215+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }
