@@ -9,7 +9,7 @@ from astra_errors import CreativeReject
 
 _HUMAN = re.compile(
     r"\b(?:stationmaster|courier|thief|thieves|man|woman|boy|girl|"
-    r"child|children|person|people|guard|passenger|driver|captain)\b", re.I)
+    r"child|children|person|people|guard|passenger|driver|captain|rescuer|explorer|climber)\b", re.I)
 _INTERACTION = re.compile(
     r"\b(?:slides?|sliding|maneuvers?|manoeuvres?|navigates?|"
     r"enters?|entering|retrieves?|retrieving|returns?|returning|"
@@ -27,10 +27,10 @@ _MECHANICAL_CHARACTER = re.compile(r"\b(?:robot|android|automaton|drone|machine)
 # an AI story omitted its visual_bible. Generic forest/door/signal icons cannot
 # portray a clothed character performing an action.
 _FIGURE_APPEARANCE = re.compile(
-    r"\b(?:hair|tunic|vest|shirt|trousers|cloak|coat|boots|goggles|cheek)\b", re.I)
+    r"\b(?:hair|tunic|vest|shirt|trousers|cloak|coat|boots|goggles|cheek|eyes?|wrist|parka|jackets?)\b", re.I)
 _FIGURE_ACTION = re.compile(
     r"\b(?:pointing|kneeling|standing|stands?|holding|holds?|smiling|"
-    r"walking|wearing|wears?|tipping|pouring|running|gripping)\b", re.I)
+    r"walking|wearing|wears?|tipping|pouring|running|gripping|striking|climbing|sitting|swinging)\b", re.I)
 
 
 def named_human_characters(visual_bible):
