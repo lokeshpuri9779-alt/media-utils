@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 from astra_v2.story_factory_rewrite_queue import (rewrite_packet, select_premises,
     reusable_pending_queue, rewrite_or_reuse)
+from astra_v2.story_factory_cohort_guard import hold_review_cohort
 
 
 def packet():
@@ -228,6 +229,78 @@ class RewriteQueueTests(unittest.TestCase):
         self.assertEqual(result["rewrites"][0]["status"], "rewrite_failed")
         self.assertEqual(result["approved_count"], 0)
 
+
+
+class CohortGuardTests(unittest.TestCase):
+    def make_state(self, root):
+        queue = Path(root) / "queue.json"
+        manifest = Path(root) / "images.json"
+        queue.write_text(json.dumps(rewrite_packet(packet(), generator=lambda *a, **k: {
+            "content_id": "story-1", "title": "Unapproved story"})), encoding="utf-8")
+        manifest.write_text(json.dumps({"production_ready": False, "assets": [
+            {"story_content_id": "story-1", "scene_id": "001",
+             "status": "review_only", "approved": False, "production_ready": False},
+            {"story_content_id": "story-1", "scene_id": "002",
+             "status": "pending_budget", "approved": False, "production_ready": False}
+        ]}), encoding="utf-8")
+        return queue, manifest
+
+    def test_existing_partial_review_artwork_blocks_rotation(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            queue, manifest = self.make_state(tmp)
+            self.assertEqual(hold_review_cohort(queue, manifest),
+                             (True, "existing_unreviewed_images"))
+            self.assertEqual(json.loads(queue.read_text())["approved_count"], 0)
+
+    def test_no_generated_artwork_allows_normal_rotation(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            queue, manifest = self.make_state(tmp)
+            data = json.loads(manifest.read_text())
+            data["assets"][0]["status"] = "pending_budget"
+            manifest.write_text(json.dumps(data))
+            self.assertEqual(hold_review_cohort(queue, manifest),
+                             (False, "no_generated_review_images"))
+
+    def test_missing_or_unsafe_manifest_fails_closed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            queue, manifest = self.make_state(tmp)
+            manifest.unlink()
+            self.assertEqual(hold_review_cohort(queue, manifest),
+                             (True, "missing_image_manifest"))
+            manifest.write_text(json.dumps({"production_ready": True, "assets": []}))
+            self.assertEqual(hold_review_cohort(queue, manifest),
+                             (True, "unsafe_image_manifest"))
+
+    def test_no_queue_does_not_block_initial_replenishment(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self.assertEqual(hold_review_cohort(Path(tmp) / "missing.json",
+                                                Path(tmp) / "missing-manifest.json"),
+                             (False, "no_pending_queue"))
+
+    def test_existing_artwork_from_other_cohort_does_not_hold_current_queue(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            queue, manifest = self.make_state(tmp)
+            data = json.loads(manifest.read_text())
+            data["assets"][0]["story_content_id"] = "older-story"
+            manifest.write_text(json.dumps(data))
+            self.assertEqual(hold_review_cohort(queue, manifest),
+                             (False, "no_generated_review_images"))
+
+    def test_unsafe_approved_asset_is_not_silently_reused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            queue, manifest = self.make_state(tmp)
+            data = json.loads(manifest.read_text())
+            data["assets"][0]["approved"] = True
+            manifest.write_text(json.dumps(data))
+            self.assertEqual(hold_review_cohort(queue, manifest),
+                             (True, "unsafe_image_record"))
+
+    def test_workflow_holds_generation_and_preserves_manifest(self):
+        workflow = (Path(__file__).resolve().parents[1] /
+                    ".github/workflows/astra-story-factory.yml").read_text()
+        self.assertIn("id: cohort_guard", workflow)
+        self.assertIn("steps.cohort_guard.outputs.hold != 'true'", workflow)
+        self.assertIn("ASTRA_COHORT_HELD:", workflow)
 
 if __name__ == "__main__":
     unittest.main()
