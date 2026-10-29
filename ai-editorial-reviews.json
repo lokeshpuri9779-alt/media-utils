@@ -3275,6 +3275,22 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-b3dd8b481c87f930969e",
+      "story_sha256": "524f986db8eddc8546f7cba8f0142659b398c273f4a283deb37a924a7ff5db4a",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-b3dd8b481c87f930969e",
+        "story_sha256": "524f986db8eddc8546f7cba8f0142659b398c273f4a283deb37a924a7ff5db4a",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the specific premises, characters, or causal mechanisms found in the provided list of recent publications.; The narrative follows a clear, logical causal chain: the reef is dimming due to a hum, the hum is caused by a trapped shell, and the protagonist's intervention restores the reef.; The content is suitable for a general audience and contains no unsafe, misleading, or policy-violating material.; The story structure is well-defined and adheres to the requested format.",
+        "reviewed_at": "2026-10-29T07:58:34.477197+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }

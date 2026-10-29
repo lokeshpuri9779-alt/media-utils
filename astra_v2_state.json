@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-29",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 5,
-  "confirmed_today": 4,
-  "last_attempt_at": "2026-10-29T07:47:01.091143+00:00",
+  "attempts": 6,
+  "confirmed_today": 5,
+  "last_attempt_at": "2026-10-29T08:08:07.522418+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -7671,29 +7671,85 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "BGzkicy73Iw": {
-      "content_id": "trend-brief-2026-10-29-am",
+    },
+    "trend-brief-2026-10-29-am": {
+      "video_id": "BGzkicy73Iw",
+      "confirmed_at": "2026-10-29T07:57:38.067107+00:00",
       "title": "Why golden state warriors Is Getting Attention Now | RAYVAN",
-      "day": "2026-10-29",
-      "uploaded_at": "2026-10-29T07:47:03.099571+00:00",
-      "genre": "current",
       "format": "long",
+      "uploaded_at": "2026-10-29T07:47:03.099571+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "",
       "story_beats": [],
+      "genre": "current"
+    }
+  },
+  "pending": {
+    "xg-EYxSgIVc": {
+      "content_id": "rayvan-gemini-b3dd8b481c87f930969e",
+      "title": "Finley and the Abyssal Melody",
+      "day": "2026-10-29",
+      "uploaded_at": "2026-10-29T08:08:09.872805+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "19eec43441ef708d23a1d79a4c2a5fa9c5b6358c0918bf4c36f1fa0219cebe80",
+      "story_beats": [
+        {
+          "headline": "The Fading Glow",
+          "speech": "The reef is dimming rapidly, my friend, and this strange, rhythmic hum is pulling all the warmth from our sacred coral homes.",
+          "visual": "signal",
+          "label": "Finley observes the fading reef",
+          "story_beat": "reveal",
+          "visual_prompt": "Finley, a small vibrant blue sea turtle with patterned shell markings, stares at a dimming coral patch, his eyes wide with concern, floating near a glowing signal node.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Tracking the Hum",
+          "speech": "I must follow these vibrations deep into the trench, where the currents twist and the echoes hide the truth of our suffering.",
+          "visual": "forest",
+          "label": "Finley swims into the kelp forest",
+          "story_beat": "build",
+          "visual_prompt": "Finley swims determinedly through a dense underwater forest of giant kelp, his front flippers moving rhythmically, searching for the source of the persistent, low-frequency hum.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Trapped Harmonic",
+          "speech": "A heavy stone has pinned the ancient song-shell down, silencing its vibrant melody and starving the reef of its essential light source.",
+          "visual": "robot",
+          "label": "Finley finds the encrusted shell",
+          "story_beat": "mechanism",
+          "visual_prompt": "Finley uses his sturdy beak to leverage a jagged rock off an ornate, glowing shell that resembles a complex mechanical object, struggling against the weight while bubbles rise.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Resonant Return",
+          "speech": "Listen to that glorious sound as the shell awakens, pouring light back into our world and washing away the shadows of the deep.",
+          "visual": "planet",
+          "label": "The reef is restored",
+          "story_beat": "payoff",
+          "visual_prompt": "A radiant, golden light erupts from the freed shell, illuminating the entire underwater planet-like landscape, with Finley smiling as the surrounding coral glows brilliantly once again.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A rhythmic humming noise is draining the bioluminescent energy of the coral reef.",
+      "decisive_choice": "Finley chooses to risk his own light reserves to pry open the encrusted debris trapping the shell.",
+      "resolution": "The freed shell sings a harmonic frequency that recharges the reef and banishes the encroaching darkness.",
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-29T07:46:17.216122+00:00",
+  "last_preflight_at": "2026-10-29T07:57:37.643144+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-29T07:47:05.789269+00:00",
+    "at": "2026-10-29T08:08:10.337485+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -16117,10 +16173,64 @@
       "story_beats": [],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-b3dd8b481c87f930969e": {
+      "at": "2026-10-29T08:08:07.522402+00:00",
+      "title": "Finley and the Abyssal Melody",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "19eec43441ef708d23a1d79a4c2a5fa9c5b6358c0918bf4c36f1fa0219cebe80",
+      "story_beats": [
+        {
+          "headline": "The Fading Glow",
+          "speech": "The reef is dimming rapidly, my friend, and this strange, rhythmic hum is pulling all the warmth from our sacred coral homes.",
+          "visual": "signal",
+          "label": "Finley observes the fading reef",
+          "story_beat": "reveal",
+          "visual_prompt": "Finley, a small vibrant blue sea turtle with patterned shell markings, stares at a dimming coral patch, his eyes wide with concern, floating near a glowing signal node.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Tracking the Hum",
+          "speech": "I must follow these vibrations deep into the trench, where the currents twist and the echoes hide the truth of our suffering.",
+          "visual": "forest",
+          "label": "Finley swims into the kelp forest",
+          "story_beat": "build",
+          "visual_prompt": "Finley swims determinedly through a dense underwater forest of giant kelp, his front flippers moving rhythmically, searching for the source of the persistent, low-frequency hum.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Trapped Harmonic",
+          "speech": "A heavy stone has pinned the ancient song-shell down, silencing its vibrant melody and starving the reef of its essential light source.",
+          "visual": "robot",
+          "label": "Finley finds the encrusted shell",
+          "story_beat": "mechanism",
+          "visual_prompt": "Finley uses his sturdy beak to leverage a jagged rock off an ornate, glowing shell that resembles a complex mechanical object, struggling against the weight while bubbles rise.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Resonant Return",
+          "speech": "Listen to that glorious sound as the shell awakens, pouring light back into our world and washing away the shadows of the deep.",
+          "visual": "planet",
+          "label": "The reef is restored",
+          "story_beat": "payoff",
+          "visual_prompt": "A radiant, golden light erupts from the freed shell, illuminating the entire underwater planet-like landscape, with Finley smiling as the surrounding coral glows brilliantly once again.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A rhythmic humming noise is draining the bioluminescent energy of the coral reef.",
+      "decisive_choice": "Finley chooses to risk his own light reserves to pry open the encrusted debris trapping the shell.",
+      "resolution": "The freed shell sings a harmonic frequency that recharges the reef and banishes the encroaching darkness.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-29T07:47:05.789222+00:00",
+    "at": "2026-10-29T08:08:10.337430+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -16131,21 +16241,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-29T07:47:05.789262+00:00",
+    "at": "2026-10-29T08:08:10.337476+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-29T07:46:38.235006+00:00",
+    "at": "2026-10-29T07:58:01.968796+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "trend-brief-2026-10-29-am",
-    "video_url": "https://www.youtube.com/watch?v=BGzkicy73Iw",
+    "content_id": "rayvan-gemini-b3dd8b481c87f930969e",
+    "video_url": "https://www.youtube.com/watch?v=xg-EYxSgIVc",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-29T07:47:05.789138+00:00",
+    "at": "2026-10-29T08:08:10.337212+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -16157,10 +16267,35 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-29T07:47:05.789218+00:00",
-    "collection_status": "missing_diagnostics",
+    "at": "2026-10-29T08:08:10.337425+00:00",
+    "collection_status": "collected",
     "publish_step": "success",
-    "counters": {},
+    "counters": {
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 157,
+        "fingerprint": 0,
+        "id": 34,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 123,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 123,
+        "remaining": 1
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 1,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
