@@ -34,6 +34,38 @@ class FakePipeline:
 
 
 class CpuBenchmarkTimingTests(unittest.TestCase):
+    def setUp(self):
+        hub = types.ModuleType("huggingface_hub")
+        hub.list_repo_files = lambda model: [
+            "model_index.json", "unet/config.json", "unet/openvino_model.xml"
+        ]
+        self.hub_patch = patch.dict(sys.modules, {"huggingface_hub": hub})
+        self.hub_patch.start()
+        self.addCleanup(self.hub_patch.stop)
+
+    def test_preflight_rejects_missing_unet_config(self):
+        hub = types.ModuleType("huggingface_hub")
+        hub.list_repo_files = lambda model: ["model_index.json", "unet/openvino_model.xml"]
+        optimum = types.ModuleType("optimum")
+        optimum.__path__ = []
+        intel = types.ModuleType("optimum.intel")
+        intel.OVStableDiffusionPipeline = FakePipeline
+        pillow = types.ModuleType("PIL")
+        pillow.Image = types.SimpleNamespace(Image=FakeImage)
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(
+            sys.modules, {"huggingface_hub": hub, "optimum": optimum,
+                          "optimum.intel": intel, "PIL": pillow}
+        ):
+            output = Path(tmp) / "keyframe.png"
+            report = benchmark.run(output=output)
+            self.assertEqual(report["error_stage"], "model_manifest")
+            self.assertEqual(report["missing_model_files"], ["unet/config.json"])
+            self.assertFalse(report["render_completed"])
+            self.assertFalse(report["production_ready"])
+            self.assertFalse(report["published"])
+            self.assertFalse(output.exists())
+
+
     def test_successful_timing_report_stays_unapproved(self):
         optimum = types.ModuleType("optimum")
         optimum.__path__ = []
