@@ -18,9 +18,13 @@ def inspect_queue(payload):
         fields = from_story(story)
         hook_words = len(fields["hook"].split()) if fields["hook"] else 0
         diagnostics = analyze(fields)
-        if 0 < hook_words < 9 and "hook" in diagnostics:
-            diagnostics["hook"]["interpretation"] = "short_label_not_spoken_hook"
+        if "hook" in diagnostics:
+            # No heuristic hook score may be used for an editorial decision.
             diagnostics["hook"]["quality_decision_allowed"] = False
+            diagnostics["hook"]["interpretation"] = (
+                "short_label_not_spoken_hook" if 0 < hook_words < 9
+                else "unvalidated_heuristic_not_quality_gate"
+            )
         results.append({
             "index": idx,
             "hook_score_applicability": "limited_short_fiction_label" if 0 < hook_words < 9 else ("not_available" if hook_words == 0 else "heuristic_only"),
